@@ -1,0 +1,525 @@
+(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../ApiClient', '../model/SiteMemberEntry', '../model/Error', '../model/SiteMemberBody', '../model/SiteEntry', '../model/SiteContainerEntry', '../model/SiteContainerPaging', '../model/SiteMemberPaging', '../model/SitePaging', '../model/SiteMemberRoleBody'], factory);
+  } else if (typeof module === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../ApiClient'), require('../model/SiteMemberEntry'), require('../model/Error'), require('../model/SiteMemberBody'), require('../model/SiteEntry'), require('../model/SiteContainerEntry'), require('../model/SiteContainerPaging'), require('../model/SiteMemberPaging'), require('../model/SitePaging'), require('../model/SiteMemberRoleBody'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoCoreRestApi) {
+      root.AlfrescoCoreRestApi = {};
+    }
+    root.AlfrescoCoreRestApi.SitesApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.SiteMemberEntry, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.SiteMemberBody, root.AlfrescoCoreRestApi.SiteEntry, root.AlfrescoCoreRestApi.SiteContainerEntry, root.AlfrescoCoreRestApi.SiteContainerPaging, root.AlfrescoCoreRestApi.SiteMemberPaging, root.AlfrescoCoreRestApi.SitePaging, root.AlfrescoCoreRestApi.SiteMemberRoleBody);
+  }
+}(this, function(ApiClient, SiteMemberEntry, Error, SiteMemberBody, SiteEntry, SiteContainerEntry, SiteContainerPaging, SiteMemberPaging, SitePaging, SiteMemberRoleBody) {
+  'use strict';
+
+  /**
+   * Sites service.
+   * @module api/SitesApi
+   * @version 1
+   */
+
+  /**
+   * Constructs a new SitesApi. 
+   * @alias module:api/SitesApi
+   * @class
+   * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
+   * if unspecified.
+   */
+  var exports = function(apiClient) {
+    this.apiClient = apiClient || ApiClient.instance;
+
+
+    /**
+     * Callback function to receive the result of the addSiteMember operation.
+     * @callback module:api/SitesApi~addSiteMemberCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/SiteMemberEntry} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Add a person
+     * Adds person **personId** as a member of site **siteId**.\n\nYou can set the **role** to one of four types:\n\n* SiteConsumer\n* SiteCollaborator\n* SiteContributor\n* SiteManager\n
+     * @param {String} siteId The identifier of a site.
+     * @param {module:model/SiteMemberBody} siteMemberBody The person to add and their role
+     * @param {module:api/SitesApi~addSiteMemberCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {module:model/SiteMemberEntry}
+     */
+    this.addSiteMember = function(siteId, siteMemberBody, callback) {
+      var postBody = siteMemberBody;
+
+      // verify the required parameter 'siteId' is set
+      if (siteId == undefined || siteId == null) {
+        throw "Missing the required parameter 'siteId' when calling addSiteMember";
+      }
+
+      // verify the required parameter 'siteMemberBody' is set
+      if (siteMemberBody == undefined || siteMemberBody == null) {
+        throw "Missing the required parameter 'siteMemberBody' when calling addSiteMember";
+      }
+
+
+      var pathParams = {
+        'siteId': siteId
+      };
+      var queryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = SiteMemberEntry;
+
+      return this.apiClient.callApi(
+        '/sites/{siteId}/members', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getSite operation.
+     * @callback module:api/SitesApi~getSiteCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/SiteEntry} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get a site
+     * Returns information for site **siteId**.\n\nYou can use the **relations** parameter to include one or more related\nentities in a single response and so reduce network traffic.\n\nThe entity types in Alfresco are organized in a tree structure.\nThe **sites** entity has two children, **containers** and **members**. \nThe following relations parameter returns all the container and member \nobjects related to the site **siteId**:\n\n&#x60;&#x60;&#x60;\ncontainers,members\n&#x60;&#x60;&#x60;\n
+     * @param {String} siteId The identifier of a site.
+     * @param {Object} opts Optional parameters
+     * @param {Array.<String>} opts.relations Use the relations parameter to include one or more related entities in a single response.
+     * @param {Array.<String>} opts.fields A list of field names. \n\nYou can use this parameter to restrict the fields \nreturned within a response if, for example, you want to save on overall bandwidth. \n\nThe list applies to a returned individual \nentity or entries within a collection. \n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * @param {module:api/SitesApi~getSiteCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {module:model/SiteEntry}
+     */
+    this.getSite = function(siteId, opts, callback) {
+      opts = opts || {};
+      var postBody = null;
+
+      // verify the required parameter 'siteId' is set
+      if (siteId == undefined || siteId == null) {
+        throw "Missing the required parameter 'siteId' when calling getSite";
+      }
+
+
+      var pathParams = {
+        'siteId': siteId
+      };
+      var queryParams = {
+        'relations': this.apiClient.buildCollectionParam(opts['relations'], 'csv'),
+        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = SiteEntry;
+
+      return this.apiClient.callApi(
+        '/sites/{siteId}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getSiteContainer operation.
+     * @callback module:api/SitesApi~getSiteContainerCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/SiteContainerEntry} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get a container
+     * Returns information on the container **containerId** in site **siteId**.
+     * @param {String} siteId The identifier of a site.
+     * @param {String} containerId The unique identifier of a site container.
+     * @param {Object} opts Optional parameters
+     * @param {Array.<String>} opts.fields A list of field names. \n\nYou can use this parameter to restrict the fields \nreturned within a response if, for example, you want to save on overall bandwidth. \n\nThe list applies to a returned individual \nentity or entries within a collection. \n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * @param {module:api/SitesApi~getSiteContainerCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {module:model/SiteContainerEntry}
+     */
+    this.getSiteContainer = function(siteId, containerId, opts, callback) {
+      opts = opts || {};
+      var postBody = null;
+
+      // verify the required parameter 'siteId' is set
+      if (siteId == undefined || siteId == null) {
+        throw "Missing the required parameter 'siteId' when calling getSiteContainer";
+      }
+
+      // verify the required parameter 'containerId' is set
+      if (containerId == undefined || containerId == null) {
+        throw "Missing the required parameter 'containerId' when calling getSiteContainer";
+      }
+
+
+      var pathParams = {
+        'siteId': siteId,
+        'containerId': containerId
+      };
+      var queryParams = {
+        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = SiteContainerEntry;
+
+      return this.apiClient.callApi(
+        '/sites/{siteId}/containers/{containerId}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getSiteContainers operation.
+     * @callback module:api/SitesApi~getSiteContainersCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/SiteContainerPaging} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get containers
+     * Returns a list of containers information for site identified by **siteId**.
+     * @param {String} siteId The identifier of a site.
+     * @param {Object} opts Optional parameters
+     * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
+     * @param {Integer} opts.maxItems The maximum number of items to return in the list.
+     * @param {Array.<String>} opts.fields A list of field names. \n\nYou can use this parameter to restrict the fields \nreturned within a response if, for example, you want to save on overall bandwidth. \n\nThe list applies to a returned individual \nentity or entries within a collection. \n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * @param {module:api/SitesApi~getSiteContainersCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {module:model/SiteContainerPaging}
+     */
+    this.getSiteContainers = function(siteId, opts, callback) {
+      opts = opts || {};
+      var postBody = null;
+
+      // verify the required parameter 'siteId' is set
+      if (siteId == undefined || siteId == null) {
+        throw "Missing the required parameter 'siteId' when calling getSiteContainers";
+      }
+
+
+      var pathParams = {
+        'siteId': siteId
+      };
+      var queryParams = {
+        'skipCount': opts['skipCount'],
+        'maxItems': opts['maxItems'],
+        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = SiteContainerPaging;
+
+      return this.apiClient.callApi(
+        '/sites/{siteId}/containers', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getSiteMember operation.
+     * @callback module:api/SitesApi~getSiteMemberCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/SiteMemberEntry} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get a site member
+     * Returns site membership information for person **personId** on site **siteId**.
+     * @param {String} siteId The identifier of a site.
+     * @param {String} personId The identifier of a person.
+     * @param {Object} opts Optional parameters
+     * @param {Array.<String>} opts.fields A list of field names. \n\nYou can use this parameter to restrict the fields \nreturned within a response if, for example, you want to save on overall bandwidth. \n\nThe list applies to a returned individual \nentity or entries within a collection. \n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * @param {module:api/SitesApi~getSiteMemberCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {module:model/SiteMemberEntry}
+     */
+    this.getSiteMember = function(siteId, personId, opts, callback) {
+      opts = opts || {};
+      var postBody = null;
+
+      // verify the required parameter 'siteId' is set
+      if (siteId == undefined || siteId == null) {
+        throw "Missing the required parameter 'siteId' when calling getSiteMember";
+      }
+
+      // verify the required parameter 'personId' is set
+      if (personId == undefined || personId == null) {
+        throw "Missing the required parameter 'personId' when calling getSiteMember";
+      }
+
+
+      var pathParams = {
+        'siteId': siteId,
+        'personId': personId
+      };
+      var queryParams = {
+        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = SiteMemberEntry;
+
+      return this.apiClient.callApi(
+        '/sites/{siteId}/members/{personId}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getSiteMembers operation.
+     * @callback module:api/SitesApi~getSiteMembersCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/SiteMemberPaging} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get members
+     * Returns a list of site memberships for site **siteId**.
+     * @param {String} siteId The identifier of a site.
+     * @param {Object} opts Optional parameters
+     * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
+     * @param {Integer} opts.maxItems The maximum number of items to return in the list.
+     * @param {Array.<String>} opts.fields A list of field names. \n\nYou can use this parameter to restrict the fields \nreturned within a response if, for example, you want to save on overall bandwidth. \n\nThe list applies to a returned individual \nentity or entries within a collection. \n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * @param {module:api/SitesApi~getSiteMembersCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {module:model/SiteMemberPaging}
+     */
+    this.getSiteMembers = function(siteId, opts, callback) {
+      opts = opts || {};
+      var postBody = null;
+
+      // verify the required parameter 'siteId' is set
+      if (siteId == undefined || siteId == null) {
+        throw "Missing the required parameter 'siteId' when calling getSiteMembers";
+      }
+
+
+      var pathParams = {
+        'siteId': siteId
+      };
+      var queryParams = {
+        'skipCount': opts['skipCount'],
+        'maxItems': opts['maxItems'],
+        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = SiteMemberPaging;
+
+      return this.apiClient.callApi(
+        '/sites/{siteId}/members', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getSites operation.
+     * @callback module:api/SitesApi~getSitesCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/SitePaging} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get sites
+     * Returns a list of sites in this repository. You can sort the list if sites using the **orderBy** parameter.\n**orderBy** specifies the name of one or more \ncomma separated properties. \nFor each property you can optionally specify the order direction. \nBoth of the these **orderBy** examples retrieve sites ordered by ascending name:\n\n&#x60;&#x60;&#x60;\nname\nname ASC\n&#x60;&#x60;&#x60;\n\nYou can use the **relations** parameter to include one or more related\nentities in a single response and so reduce network traffic.\n\nThe entity types in Alfresco are organized in a tree structure.\nThe **sites** entity has two children, **containers** and **members**. \nThe following relations parameter returns all the container and member \nobjects related to each site:\n\n&#x60;&#x60;&#x60;\ncontainers,members\n&#x60;&#x60;&#x60;\n
+     * @param {Object} opts Optional parameters
+     * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
+     * @param {Integer} opts.maxItems The maximum number of items to return in the list.
+     * @param {String} opts.orderBy A string to control the order of the entities returned.
+     * @param {Array.<String>} opts.relations Use the relations parameter to include one or more related entities in a single response.
+     * @param {Array.<String>} opts.fields A list of field names. \n\nYou can use this parameter to restrict the fields \nreturned within a response if, for example, you want to save on overall bandwidth. \n\nThe list applies to a returned individual \nentity or entries within a collection. \n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * @param {module:api/SitesApi~getSitesCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {module:model/SitePaging}
+     */
+    this.getSites = function(opts, callback) {
+      opts = opts || {};
+      var postBody = null;
+
+
+      var pathParams = {
+      };
+      var queryParams = {
+        'skipCount': opts['skipCount'],
+        'maxItems': opts['maxItems'],
+        'orderBy': opts['orderBy'],
+        'relations': this.apiClient.buildCollectionParam(opts['relations'], 'csv'),
+        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = SitePaging;
+
+      return this.apiClient.callApi(
+        '/sites', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the removeSiteMember operation.
+     * @callback module:api/SitesApi~removeSiteMemberCallback
+     * @param {String} error Error message, if any.
+     * @param data This operation does not return a value.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Delete a site member
+     * Removes person **personId** as a member of site **siteId**.
+     * @param {String} siteId The identifier of a site.
+     * @param {String} personId The identifier of a person.
+     * @param {module:api/SitesApi~removeSiteMemberCallback} callback The callback function, accepting three arguments: error, data, response
+     */
+    this.removeSiteMember = function(siteId, personId, callback) {
+      var postBody = null;
+
+      // verify the required parameter 'siteId' is set
+      if (siteId == undefined || siteId == null) {
+        throw "Missing the required parameter 'siteId' when calling removeSiteMember";
+      }
+
+      // verify the required parameter 'personId' is set
+      if (personId == undefined || personId == null) {
+        throw "Missing the required parameter 'personId' when calling removeSiteMember";
+      }
+
+
+      var pathParams = {
+        'siteId': siteId,
+        'personId': personId
+      };
+      var queryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = null;
+
+      return this.apiClient.callApi(
+        '/sites/{siteId}/members/{personId}', 'DELETE',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the updateSiteMember operation.
+     * @callback module:api/SitesApi~updateSiteMemberCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/SiteMemberEntry} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Update a site member
+     * Update the membership of person **personId** in site **siteId**.\n\nYou can set the **role** to one of four types:\n\n* SiteConsumer\n* SiteCollaborator\n* SiteContributor\n* SiteManager\n
+     * @param {String} siteId The identifier of a site.
+     * @param {String} personId The identifier of a person.
+     * @param {module:model/SiteMemberRoleBody} siteMemberRoleBody The persons new role
+     * @param {module:api/SitesApi~updateSiteMemberCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {module:model/SiteMemberEntry}
+     */
+    this.updateSiteMember = function(siteId, personId, siteMemberRoleBody, callback) {
+      var postBody = siteMemberRoleBody;
+
+      // verify the required parameter 'siteId' is set
+      if (siteId == undefined || siteId == null) {
+        throw "Missing the required parameter 'siteId' when calling updateSiteMember";
+      }
+
+      // verify the required parameter 'personId' is set
+      if (personId == undefined || personId == null) {
+        throw "Missing the required parameter 'personId' when calling updateSiteMember";
+      }
+
+      // verify the required parameter 'siteMemberRoleBody' is set
+      if (siteMemberRoleBody == undefined || siteMemberRoleBody == null) {
+        throw "Missing the required parameter 'siteMemberRoleBody' when calling updateSiteMember";
+      }
+
+
+      var pathParams = {
+        'siteId': siteId,
+        'personId': personId
+      };
+      var queryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = SiteMemberEntry;
+
+      return this.apiClient.callApi(
+        '/sites/{siteId}/members/{personId}', 'PUT',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+  };
+
+  return exports;
+}));
