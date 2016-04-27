@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **String** |  | 
-**limit** | **Integer** |  | [optional] 
-**usage** | **Integer** |  | [optional] 
+**limit** | **Integer** |  | 
+**usage** | **Integer** |  | 
 
 

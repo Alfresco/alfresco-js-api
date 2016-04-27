@@ -42,7 +42,7 @@
 
     /**
      * Add a tag
-     * Adds one or more tags to the node **nodeId**. You can create more than one tag by \nspecifying a list of tags in the JSON body like this:      \n\n&#x60;&#x60;&#x60;JSON\n[\n  {\n    \&quot;tag\&quot;:\&quot;test-tag-1\&quot;\n  },\n  {\n    \&quot;tag\&quot;:\&quot;test-tag-2\&quot;\n  }\n]\n&#x60;&#x60;&#x60;\n
+     * Adds one or more tags to the node **nodeId**. You can create more than one tag by\nspecifying a list of tags in the JSON body like this:\n\n&#x60;&#x60;&#x60;JSON\n[\n  {\n    \&quot;tag\&quot;:\&quot;test-tag-1\&quot;\n  },\n  {\n    \&quot;tag\&quot;:\&quot;test-tag-2\&quot;\n  }\n]\n&#x60;&#x60;&#x60;\n
      * @param {String} nodeId The identifier of a node.
      * @param {module:model/TagBody} tagBody The new tag
      * @param {module:api/TagsApi~addTagCallback} callback The callback function, accepting three arguments: error, data, response
@@ -99,7 +99,7 @@
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
      * @param {Integer} opts.maxItems The maximum number of items to return in the list.
-     * @param {Array.<String>} opts.fields A list of field names. \n\nYou can use this parameter to restrict the fields \nreturned within a response if, for example, you want to save on overall bandwidth. \n\nThe list applies to a returned individual \nentity or entries within a collection. \n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * @param {module:api/TagsApi~getNodeTagsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TagPaging}
      */
@@ -151,7 +151,7 @@
      * Return a specific tag with **tagId**.
      * @param {String} tagId The identifier of a tag.
      * @param {Object} opts Optional parameters
-     * @param {Array.<String>} opts.fields A list of field names. \n\nYou can use this parameter to restrict the fields \nreturned within a response if, for example, you want to save on overall bandwidth. \n\nThe list applies to a returned individual \nentity or entries within a collection. \n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * @param {module:api/TagsApi~getTagCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TagEntry}
      */
@@ -202,7 +202,7 @@
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
      * @param {Integer} opts.maxItems The maximum number of items to return in the list.
-     * @param {Array.<String>} opts.fields A list of field names. \n\nYou can use this parameter to restrict the fields \nreturned within a response if, for example, you want to save on overall bandwidth. \n\nThe list applies to a returned individual \nentity or entries within a collection. \n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * @param {module:api/TagsApi~getTagsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TagPaging}
      */

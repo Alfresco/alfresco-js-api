@@ -27,12 +27,13 @@
    * @alias module:model/PersonNetwork
    * @class
    * @param id
+   * @param isEnabled
    */
-  var exports = function(id) {
+  var exports = function(id, isEnabled) {
 
     this['id'] = id;
 
-
+    this['isEnabled'] = isEnabled;
 
 
 

@@ -25,11 +25,12 @@
    * Constructs a new <code>RatingAggregate</code>.
    * @alias module:model/RatingAggregate
    * @class
+   * @param numberOfRatings
    */
-  var exports = function() {
+  var exports = function(numberOfRatings) {
 
 
-
+    this['numberOfRatings'] = numberOfRatings;
   };
 
   /**

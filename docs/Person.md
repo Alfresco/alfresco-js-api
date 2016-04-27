@@ -4,11 +4,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **String** |  | 
-**firstName** | **String** |  | [optional] 
-**lastName** | **String** |  | [optional] 
+**firstName** | **String** |  | 
+**lastName** | **String** |  | 
 **description** | **String** |  | [optional] 
 **avatarId** | **String** |  | [optional] 
-**email** | **String** |  | [optional] 
+**email** | **String** |  | 
 **skypeId** | **String** |  | [optional] 
 **googleId** | **String** |  | [optional] 
 **instantMessageId** | **String** |  | [optional] 
@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **telephone** | **String** |  | [optional] 
 **statusUpdatedAt** | **Date** |  | [optional] 
 **userStatus** | **String** |  | [optional] 
-**enabled** | **Boolean** |  | [optional] [default to true]
+**enabled** | **Boolean** |  | [default to true]
 **emailNotificationsEnabled** | **Boolean** |  | [optional] 
 
 

@@ -46,7 +46,7 @@
      * @param {String} nodeId The identifier of a node.
      * @param {String} ratingId The identifier of a rating.
      * @param {Object} opts Optional parameters
-     * @param {Array.<String>} opts.fields A list of field names. \n\nYou can use this parameter to restrict the fields \nreturned within a response if, for example, you want to save on overall bandwidth. \n\nThe list applies to a returned individual \nentity or entries within a collection. \n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * @param {module:api/RatingsApi~getRatingCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RatingEntry}
      */
@@ -104,7 +104,7 @@
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
      * @param {Integer} opts.maxItems The maximum number of items to return in the list.
-     * @param {Array.<String>} opts.fields A list of field names. \n\nYou can use this parameter to restrict the fields \nreturned within a response if, for example, you want to save on overall bandwidth. \n\nThe list applies to a returned individual \nentity or entries within a collection. \n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * @param {module:api/RatingsApi~getRatingsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RatingPaging}
      */
@@ -153,9 +153,9 @@
 
     /**
      * Rate
-     * Rate the node **nodeId**.
+     * Rate the node with identifier **nodeId**
      * @param {String} nodeId The identifier of a node.
-     * @param {module:model/RatingBody} ratingBody Rating details
+     * @param {module:model/RatingBody} ratingBody For \&quot;myRating\&quot; the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.\n\nFor example, to \&quot;like\&quot; a file the following body would be used:\n\n  &#x60;&#x60;&#x60;JSON\n    {\n      \&quot;id\&quot;: \&quot;likes\&quot;,\n      \&quot;myRating\&quot;: true\n    }\n  &#x60;&#x60;&#x60;\n
      * @param {module:api/RatingsApi~rateCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RatingEntry}
      */

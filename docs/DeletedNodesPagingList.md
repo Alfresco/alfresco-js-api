@@ -1,9 +1,8 @@
-# AlfrescoCoreRestApi.SiteContainer
+# AlfrescoCoreRestApi.DeletedNodesPagingList
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** |  | 
-**folderId** | **String** |  | 
+**pagination** | [**Pagination**](Pagination.md) |  | [optional] 
 
 

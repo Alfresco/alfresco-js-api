@@ -25,14 +25,18 @@
    * Constructs a new <code>Pagination</code>.
    * @alias module:model/Pagination
    * @class
+   * @param count
+   * @param hasMoreItems
+   * @param skipCount
+   * @param maxItems
    */
-  var exports = function() {
+  var exports = function(count, hasMoreItems, skipCount, maxItems) {
 
+    this['count'] = count;
+    this['hasMoreItems'] = hasMoreItems;
 
-
-
-
-
+    this['skipCount'] = skipCount;
+    this['maxItems'] = maxItems;
   };
 
   /**
@@ -73,19 +77,19 @@
   exports.prototype['count'] = undefined;
 
   /**
-   * A boolean value which is **true** if there are more entities in the collection \nbeyond those in this response. A true value means a request with a larger value \nfor the **skipCount** or the **maxItems** parameter will return more entities.\n
+   * A boolean value which is **true** if there are more entities in the collection\nbeyond those in this response. A true value means a request with a larger value\nfor the **skipCount** or the **maxItems** parameter will return more entities.\n
    * @member {Boolean} hasMoreItems
    */
   exports.prototype['hasMoreItems'] = undefined;
 
   /**
-   * An integer describing the total number of entities in the collection. \nThe API might not be able to determine this value, \nin which case this property will not be present.\n
+   * An integer describing the total number of entities in the collection.\nThe API might not be able to determine this value,\nin which case this property will not be present.\n
    * @member {Integer} totalItems
    */
   exports.prototype['totalItems'] = undefined;
 
   /**
-   * An integer describing how many entities exist in the collection before \nthose included in this list.\n
+   * An integer describing how many entities exist in the collection before\nthose included in this list.\n
    * @member {Integer} skipCount
    */
   exports.prototype['skipCount'] = undefined;

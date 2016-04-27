@@ -26,17 +26,20 @@
    * Activities describe any past activity in a site,\nfor example creating an item of content, commenting on a node,\nliking an item of content.\n
    * @alias module:model/Activity
    * @class
+   * @param postPersonId
    * @param id
+   * @param feedPersonId
+   * @param activityType
    */
-  var exports = function(id) {
+  var exports = function(postPersonId, id, feedPersonId, activityType) {
 
-
+    this['postPersonId'] = postPersonId;
     this['id'] = id;
 
 
+    this['feedPersonId'] = feedPersonId;
 
-
-
+    this['activityType'] = activityType;
   };
 
   /**

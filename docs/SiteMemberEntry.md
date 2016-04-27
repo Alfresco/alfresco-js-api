@@ -3,6 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entry** | [**SiteMember**](SiteMember.md) |  | [optional] 
+**entry** | [**SiteMember**](SiteMember.md) |  | 
 
 

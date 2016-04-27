@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **String** | This network&#39;s unique id | 
 **homeNetwork** | **Boolean** | Is this the home network? | [optional] 
-**isEnabled** | **Boolean** |  | [optional] 
+**isEnabled** | **Boolean** |  | 
 **createdAt** | **Date** |  | [optional] 
 **paidNetwork** | **Boolean** |  | [optional] 
 **subscriptionLevel** | **String** |  | [optional] 

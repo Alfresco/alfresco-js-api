@@ -25,14 +25,18 @@
    * Constructs a new <code>Site</code>.
    * @alias module:model/Site
    * @class
+   * @param id
+   * @param guid
+   * @param title
+   * @param visibility
    */
-  var exports = function() {
+  var exports = function(id, guid, title, visibility) {
 
+    this['id'] = id;
+    this['guid'] = guid;
+    this['title'] = title;
 
-
-
-
-
+    this['visibility'] = visibility;
 
   };
 

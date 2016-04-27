@@ -57,7 +57,7 @@
         obj['ratedAt'] = ApiClient.convertToType(data['ratedAt'], 'Date');
       }
       if (data.hasOwnProperty('myRating')) {
-        obj['myRating'] = ApiClient.convertToType(data['myRating'], 'Boolean');
+        obj['myRating'] = ApiClient.convertToType(data['myRating'], 'String');
       }
     }
     return obj;
@@ -80,7 +80,8 @@
   exports.prototype['ratedAt'] = undefined;
 
   /**
-   * @member {Boolean} myRating
+   * The rating. The type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.
+   * @member {String} myRating
    */
   exports.prototype['myRating'] = undefined;
 

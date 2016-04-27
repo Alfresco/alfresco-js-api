@@ -25,11 +25,13 @@
    * Constructs a new <code>PersonNetworkPagingList</code>.
    * @alias module:model/PersonNetworkPagingList
    * @class
+   * @param entries
+   * @param pagination
    */
-  var exports = function() {
+  var exports = function(entries, pagination) {
 
-
-
+    this['entries'] = entries;
+    this['pagination'] = pagination;
   };
 
   /**

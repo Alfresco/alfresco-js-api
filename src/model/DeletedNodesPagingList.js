@@ -10,34 +10,33 @@
     if (!root.AlfrescoCoreRestApi) {
       root.AlfrescoCoreRestApi = {};
     }
-    root.AlfrescoCoreRestApi.SitePagingList = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Pagination);
+    root.AlfrescoCoreRestApi.DeletedNodesPagingList = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Pagination);
   }
 }(this, function(ApiClient, Pagination) {
   'use strict';
 
   /**
-   * The SitePagingList model module.
-   * @module model/SitePagingList
+   * The DeletedNodesPagingList model module.
+   * @module model/DeletedNodesPagingList
    * @version 1
    */
 
   /**
-   * Constructs a new <code>SitePagingList</code>.
-   * @alias module:model/SitePagingList
+   * Constructs a new <code>DeletedNodesPagingList</code>.
+   * @alias module:model/DeletedNodesPagingList
    * @class
-   * @param pagination
    */
-  var exports = function(pagination) {
+  var exports = function() {
 
-    this['pagination'] = pagination;
+
   };
 
   /**
-   * Constructs a <code>SitePagingList</code> from a plain JavaScript object, optionally creating a new instance.
+   * Constructs a <code>DeletedNodesPagingList</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/SitePagingList} obj Optional instance to populate.
-   * @return {module:model/SitePagingList} The populated <code>SitePagingList</code> instance.
+   * @param {module:model/DeletedNodesPagingList} obj Optional instance to populate.
+   * @return {module:model/DeletedNodesPagingList} The populated <code>DeletedNodesPagingList</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) { 

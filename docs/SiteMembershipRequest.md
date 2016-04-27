@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** |  | [optional] 
-**createdAt** | **Date** |  | [optional] 
-**entry** | [**Site**](Site.md) |  | [optional] 
+**id** | **String** |  | 
+**createdAt** | **Date** |  | 
+**entry** | [**Site**](Site.md) |  | 
 
 

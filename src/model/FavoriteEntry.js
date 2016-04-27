@@ -25,10 +25,11 @@
    * Constructs a new <code>FavoriteEntry</code>.
    * @alias module:model/FavoriteEntry
    * @class
+   * @param entry
    */
-  var exports = function() {
+  var exports = function(entry) {
 
-
+    this['entry'] = entry;
   };
 
   /**

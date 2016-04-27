@@ -1,18 +1,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient', './FavoriteTarget'], factory);
+    define(['../ApiClient'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./FavoriteTarget'));
+    module.exports = factory(require('../ApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoCoreRestApi) {
       root.AlfrescoCoreRestApi = {};
     }
-    root.AlfrescoCoreRestApi.FavoriteBody = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.FavoriteTarget);
+    root.AlfrescoCoreRestApi.FavoriteBody = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient, FavoriteTarget) {
+}(this, function(ApiClient) {
   'use strict';
 
   /**
@@ -43,7 +43,7 @@
       obj = obj || new exports();
 
       if (data.hasOwnProperty('target')) {
-        obj['target'] = FavoriteTarget.constructFromObject(data['target']);
+        obj['target'] = ApiClient.convertToType(data['target'], Object);
       }
     }
     return obj;
@@ -51,7 +51,7 @@
 
 
   /**
-   * @member {module:model/FavoriteTarget} target
+   * @member {Object} target
    */
   exports.prototype['target'] = undefined;
 

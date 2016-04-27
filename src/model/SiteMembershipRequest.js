@@ -25,12 +25,15 @@
    * Constructs a new <code>SiteMembershipRequest</code>.
    * @alias module:model/SiteMembershipRequest
    * @class
+   * @param id
+   * @param createdAt
+   * @param entry
    */
-  var exports = function() {
+  var exports = function(id, createdAt, entry) {
 
-
-
-
+    this['id'] = id;
+    this['createdAt'] = createdAt;
+    this['entry'] = entry;
   };
 
   /**

@@ -1,18 +1,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient', '../model/SiteMemberEntry', '../model/Error', '../model/SiteMemberBody', '../model/SiteEntry', '../model/SiteContainerEntry', '../model/SiteContainerPaging', '../model/SiteMemberPaging', '../model/SitePaging', '../model/SiteMemberRoleBody'], factory);
+    define(['../ApiClient', '../model/SiteMemberEntry', '../model/Error', '../model/SiteMemberBody', '../model/SiteBody', '../model/SiteEntry', '../model/SiteContainerEntry', '../model/SiteContainerPaging', '../model/SiteMemberPaging', '../model/SitePaging', '../model/SiteMemberRoleBody'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/SiteMemberEntry'), require('../model/Error'), require('../model/SiteMemberBody'), require('../model/SiteEntry'), require('../model/SiteContainerEntry'), require('../model/SiteContainerPaging'), require('../model/SiteMemberPaging'), require('../model/SitePaging'), require('../model/SiteMemberRoleBody'));
+    module.exports = factory(require('../ApiClient'), require('../model/SiteMemberEntry'), require('../model/Error'), require('../model/SiteMemberBody'), require('../model/SiteBody'), require('../model/SiteEntry'), require('../model/SiteContainerEntry'), require('../model/SiteContainerPaging'), require('../model/SiteMemberPaging'), require('../model/SitePaging'), require('../model/SiteMemberRoleBody'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoCoreRestApi) {
       root.AlfrescoCoreRestApi = {};
     }
-    root.AlfrescoCoreRestApi.SitesApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.SiteMemberEntry, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.SiteMemberBody, root.AlfrescoCoreRestApi.SiteEntry, root.AlfrescoCoreRestApi.SiteContainerEntry, root.AlfrescoCoreRestApi.SiteContainerPaging, root.AlfrescoCoreRestApi.SiteMemberPaging, root.AlfrescoCoreRestApi.SitePaging, root.AlfrescoCoreRestApi.SiteMemberRoleBody);
+    root.AlfrescoCoreRestApi.SitesApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.SiteMemberEntry, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.SiteMemberBody, root.AlfrescoCoreRestApi.SiteBody, root.AlfrescoCoreRestApi.SiteEntry, root.AlfrescoCoreRestApi.SiteContainerEntry, root.AlfrescoCoreRestApi.SiteContainerPaging, root.AlfrescoCoreRestApi.SiteMemberPaging, root.AlfrescoCoreRestApi.SitePaging, root.AlfrescoCoreRestApi.SiteMemberRoleBody);
   }
-}(this, function(ApiClient, SiteMemberEntry, Error, SiteMemberBody, SiteEntry, SiteContainerEntry, SiteContainerPaging, SiteMemberPaging, SitePaging, SiteMemberRoleBody) {
+}(this, function(ApiClient, SiteMemberEntry, Error, SiteMemberBody, SiteBody, SiteEntry, SiteContainerEntry, SiteContainerPaging, SiteMemberPaging, SitePaging, SiteMemberRoleBody) {
   'use strict';
 
   /**
@@ -85,6 +85,106 @@
     }
 
     /**
+     * Callback function to receive the result of the createSite operation.
+     * @callback module:api/SitesApi~createSiteCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/SiteEntry} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Create a site
+     * Creates a default site with the given details.  Unless explicitly specified, the site id will be generated from the site title. The site id must be unique and only contain alphanumeric and/or dash\ncharacters.\n\nFor example, to create a public site called \&quot;Marketing\&quot; the following body could be used:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;title\&quot;: \&quot;Marketing\&quot;,\n  \&quot;visibility\&quot;: \&quot;PUBLIC\&quot;\n}\n&#x60;&#x60;&#x60;\n\nThe creation of the (surf) configuration files required by Share can be skipped via the **skipConfiguration** query parameter.\n\n**Please note: if skipped then such a site will *not* work within Share.**\n\nThe addition of the site to the user&#39;s site favorites can be skipped via the **skipAddToFavorites** query parameter.\n\nThe creator will be added as a member with Site Manager role.\n
+     * @param {module:model/SiteBody} siteBody The site details
+     * @param {Object} opts Optional parameters
+     * @param {Boolean} opts.skipConfiguration Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created. (default to false)
+     * @param {Boolean} opts.skipAddToFavorites Flag to indicate whether the site should not be added to the user&#39;s site favorites. (default to false)
+     * @param {module:api/SitesApi~createSiteCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {module:model/SiteEntry}
+     */
+    this.createSite = function(siteBody, opts, callback) {
+      opts = opts || {};
+      var postBody = siteBody;
+
+      // verify the required parameter 'siteBody' is set
+      if (siteBody == undefined || siteBody == null) {
+        throw "Missing the required parameter 'siteBody' when calling createSite";
+      }
+
+
+      var pathParams = {
+      };
+      var queryParams = {
+        'skipConfiguration': opts['skipConfiguration'],
+        'skipAddToFavorites': opts['skipAddToFavorites']
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = SiteEntry;
+
+      return this.apiClient.callApi(
+        '/sites', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the deleteSite operation.
+     * @callback module:api/SitesApi~deleteSiteCallback
+     * @param {String} error Error message, if any.
+     * @param data This operation does not return a value.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Delete a site
+     * Deletes the site with **siteId**.
+     * @param {String} siteId The identifier of a site.
+     * @param {Object} opts Optional parameters
+     * @param {Boolean} opts.permanent Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan. (default to false)
+     * @param {module:api/SitesApi~deleteSiteCallback} callback The callback function, accepting three arguments: error, data, response
+     */
+    this.deleteSite = function(siteId, opts, callback) {
+      opts = opts || {};
+      var postBody = null;
+
+      // verify the required parameter 'siteId' is set
+      if (siteId == undefined || siteId == null) {
+        throw "Missing the required parameter 'siteId' when calling deleteSite";
+      }
+
+
+      var pathParams = {
+        'siteId': siteId
+      };
+      var queryParams = {
+        'permanent': opts['permanent']
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = null;
+
+      return this.apiClient.callApi(
+        '/sites/{siteId}', 'DELETE',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+
+    /**
      * Callback function to receive the result of the getSite operation.
      * @callback module:api/SitesApi~getSiteCallback
      * @param {String} error Error message, if any.
@@ -94,11 +194,11 @@
 
     /**
      * Get a site
-     * Returns information for site **siteId**.\n\nYou can use the **relations** parameter to include one or more related\nentities in a single response and so reduce network traffic.\n\nThe entity types in Alfresco are organized in a tree structure.\nThe **sites** entity has two children, **containers** and **members**. \nThe following relations parameter returns all the container and member \nobjects related to the site **siteId**:\n\n&#x60;&#x60;&#x60;\ncontainers,members\n&#x60;&#x60;&#x60;\n
+     * Returns information for site **siteId**.\n\nYou can use the **relations** parameter to include one or more related\nentities in a single response and so reduce network traffic.\n\nThe entity types in Alfresco are organized in a tree structure.\nThe **sites** entity has two children, **containers** and **members**.\nThe following relations parameter returns all the container and member\nobjects related to the site **siteId**:\n\n&#x60;&#x60;&#x60;\ncontainers,members\n&#x60;&#x60;&#x60;\n
      * @param {String} siteId The identifier of a site.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.relations Use the relations parameter to include one or more related entities in a single response.
-     * @param {Array.<String>} opts.fields A list of field names. \n\nYou can use this parameter to restrict the fields \nreturned within a response if, for example, you want to save on overall bandwidth. \n\nThe list applies to a returned individual \nentity or entries within a collection. \n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * @param {module:api/SitesApi~getSiteCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/SiteEntry}
      */
@@ -150,7 +250,7 @@
      * @param {String} siteId The identifier of a site.
      * @param {String} containerId The unique identifier of a site container.
      * @param {Object} opts Optional parameters
-     * @param {Array.<String>} opts.fields A list of field names. \n\nYou can use this parameter to restrict the fields \nreturned within a response if, for example, you want to save on overall bandwidth. \n\nThe list applies to a returned individual \nentity or entries within a collection. \n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * @param {module:api/SitesApi~getSiteContainerCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/SiteContainerEntry}
      */
@@ -208,7 +308,7 @@
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
      * @param {Integer} opts.maxItems The maximum number of items to return in the list.
-     * @param {Array.<String>} opts.fields A list of field names. \n\nYou can use this parameter to restrict the fields \nreturned within a response if, for example, you want to save on overall bandwidth. \n\nThe list applies to a returned individual \nentity or entries within a collection. \n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * @param {module:api/SitesApi~getSiteContainersCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/SiteContainerPaging}
      */
@@ -261,7 +361,7 @@
      * @param {String} siteId The identifier of a site.
      * @param {String} personId The identifier of a person.
      * @param {Object} opts Optional parameters
-     * @param {Array.<String>} opts.fields A list of field names. \n\nYou can use this parameter to restrict the fields \nreturned within a response if, for example, you want to save on overall bandwidth. \n\nThe list applies to a returned individual \nentity or entries within a collection. \n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * @param {module:api/SitesApi~getSiteMemberCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/SiteMemberEntry}
      */
@@ -319,7 +419,7 @@
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
      * @param {Integer} opts.maxItems The maximum number of items to return in the list.
-     * @param {Array.<String>} opts.fields A list of field names. \n\nYou can use this parameter to restrict the fields \nreturned within a response if, for example, you want to save on overall bandwidth. \n\nThe list applies to a returned individual \nentity or entries within a collection. \n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * @param {module:api/SitesApi~getSiteMembersCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/SiteMemberPaging}
      */
@@ -368,13 +468,13 @@
 
     /**
      * Get sites
-     * Returns a list of sites in this repository. You can sort the list if sites using the **orderBy** parameter.\n**orderBy** specifies the name of one or more \ncomma separated properties. \nFor each property you can optionally specify the order direction. \nBoth of the these **orderBy** examples retrieve sites ordered by ascending name:\n\n&#x60;&#x60;&#x60;\nname\nname ASC\n&#x60;&#x60;&#x60;\n\nYou can use the **relations** parameter to include one or more related\nentities in a single response and so reduce network traffic.\n\nThe entity types in Alfresco are organized in a tree structure.\nThe **sites** entity has two children, **containers** and **members**. \nThe following relations parameter returns all the container and member \nobjects related to each site:\n\n&#x60;&#x60;&#x60;\ncontainers,members\n&#x60;&#x60;&#x60;\n
+     * Returns a list of sites in this repository. You can sort the list if sites using the **orderBy** parameter.\n**orderBy** specifies the name of one or more\ncomma separated properties.\nFor each property you can optionally specify the order direction.\nBoth of the these **orderBy** examples retrieve sites ordered by ascending name:\n\n&#x60;&#x60;&#x60;\nname\nname ASC\n&#x60;&#x60;&#x60;\n\nYou can use the **relations** parameter to include one or more related\nentities in a single response and so reduce network traffic.\n\nThe entity types in Alfresco are organized in a tree structure.\nThe **sites** entity has two children, **containers** and **members**.\nThe following relations parameter returns all the container and member\nobjects related to each site:\n\n&#x60;&#x60;&#x60;\ncontainers,members\n&#x60;&#x60;&#x60;\n
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
      * @param {Integer} opts.maxItems The maximum number of items to return in the list.
      * @param {String} opts.orderBy A string to control the order of the entities returned.
      * @param {Array.<String>} opts.relations Use the relations parameter to include one or more related entities in a single response.
-     * @param {Array.<String>} opts.fields A list of field names. \n\nYou can use this parameter to restrict the fields \nreturned within a response if, for example, you want to save on overall bandwidth. \n\nThe list applies to a returned individual \nentity or entries within a collection. \n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * @param {module:api/SitesApi~getSitesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/SitePaging}
      */

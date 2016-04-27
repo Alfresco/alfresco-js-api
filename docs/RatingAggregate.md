@@ -4,6 +4,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **average** | **Integer** |  | [optional] 
-**numberOfRatings** | **Integer** |  | [optional] 
+**numberOfRatings** | **Integer** |  | 
 
 

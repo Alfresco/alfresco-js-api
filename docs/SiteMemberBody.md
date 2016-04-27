@@ -4,6 +4,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **role** | **String** |  | [optional] 
-**personId** | **String** |  | [optional] 
+**id** | **String** |  | [optional] 
 
 

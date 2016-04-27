@@ -26,12 +26,13 @@
    * @alias module:model/SiteMember
    * @class
    * @param id
+   * @param person
    * @param role
    */
-  var exports = function(id, role) {
+  var exports = function(id, person, role) {
 
     this['id'] = id;
-
+    this['person'] = person;
     this['role'] = role;
   };
 

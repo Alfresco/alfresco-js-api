@@ -25,10 +25,11 @@
    * Constructs a new <code>RatingEntry</code>.
    * @alias module:model/RatingEntry
    * @class
+   * @param entry
    */
-  var exports = function() {
+  var exports = function(entry) {
 
-
+    this['entry'] = entry;
   };
 
   /**

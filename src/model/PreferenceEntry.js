@@ -25,10 +25,11 @@
    * Constructs a new <code>PreferenceEntry</code>.
    * @alias module:model/PreferenceEntry
    * @class
+   * @param entry
    */
-  var exports = function() {
+  var exports = function(entry) {
 
-
+    this['entry'] = entry;
   };
 
   /**

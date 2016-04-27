@@ -25,10 +25,11 @@
    * Constructs a new <code>TagEntry</code>.
    * @alias module:model/TagEntry
    * @class
+   * @param entry
    */
-  var exports = function() {
+  var exports = function(entry) {
 
-
+    this['entry'] = entry;
   };
 
   /**

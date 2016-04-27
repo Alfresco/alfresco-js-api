@@ -3,6 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entry** | [**FavoriteSite**](FavoriteSite.md) |  | [optional] 
+**entry** | [**FavoriteSite**](FavoriteSite.md) |  | 
 
 

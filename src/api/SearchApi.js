@@ -51,7 +51,7 @@
      * @param {String} opts.nodeType Restrict the returned results to only those of the given node type and it&#39;s sub-types
      * @param {String} opts.include Return additional info, eg. aspectNames, properties, path, isLink
      * @param {String} opts.orderBy The list of results can be ordered by the following:\n* name\n* modifiedAt\n* createdAt\n
-     * @param {Array.<String>} opts.fields A list of field names. \n\nYou can use this parameter to restrict the fields \nreturned within a response if, for example, you want to save on overall bandwidth. \n\nThe list applies to a returned individual \nentity or entries within a collection. \n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * @param {module:api/SearchApi~liveSearchNodesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/NodePaging}
      */

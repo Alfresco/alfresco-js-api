@@ -25,10 +25,11 @@
    * Constructs a new <code>PersonNetworkEntry</code>.
    * @alias module:model/PersonNetworkEntry
    * @class
+   * @param entry
    */
-  var exports = function() {
+  var exports = function(entry) {
 
-
+    this['entry'] = entry;
   };
 
   /**

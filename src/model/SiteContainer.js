@@ -25,11 +25,13 @@
    * Constructs a new <code>SiteContainer</code>.
    * @alias module:model/SiteContainer
    * @class
+   * @param id
+   * @param folderId
    */
-  var exports = function() {
+  var exports = function(id, folderId) {
 
-
-
+    this['id'] = id;
+    this['folderId'] = folderId;
   };
 
   /**

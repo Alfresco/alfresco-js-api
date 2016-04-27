@@ -3,14 +3,14 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** |  | [optional] 
-**content** | **String** |  | [optional] 
-**createdBy** | [**Person**](Person.md) |  | [optional] 
-**createdAt** | **Date** |  | [optional] 
-**edited** | **Boolean** |  | [optional] 
-**modifiedBy** | [**Person**](Person.md) |  | [optional] 
-**modifiedAt** | **Date** |  | [optional] 
-**canEdit** | **Boolean** |  | [optional] 
-**canDelete** | **Boolean** |  | [optional] 
+**id** | **String** |  | 
+**content** | **String** |  | 
+**createdBy** | [**Person**](Person.md) |  | 
+**createdAt** | **Date** |  | 
+**edited** | **Boolean** |  | 
+**modifiedBy** | [**Person**](Person.md) |  | 
+**modifiedAt** | **Date** |  | 
+**canEdit** | **Boolean** |  | 
+**canDelete** | **Boolean** |  | 
 
 

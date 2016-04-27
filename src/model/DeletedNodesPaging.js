@@ -1,18 +1,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient', './SitePagingList'], factory);
+    define(['../ApiClient', './DeletedNodesPagingList'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./SitePagingList'));
+    module.exports = factory(require('../ApiClient'), require('./DeletedNodesPagingList'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoCoreRestApi) {
       root.AlfrescoCoreRestApi = {};
     }
-    root.AlfrescoCoreRestApi.DeletedNodesPaging = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.SitePagingList);
+    root.AlfrescoCoreRestApi.DeletedNodesPaging = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.DeletedNodesPagingList);
   }
-}(this, function(ApiClient, SitePagingList) {
+}(this, function(ApiClient, DeletedNodesPagingList) {
   'use strict';
 
   /**
@@ -43,7 +43,7 @@
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
-        obj['list'] = SitePagingList.constructFromObject(data['list']);
+        obj['list'] = DeletedNodesPagingList.constructFromObject(data['list']);
       }
     }
     return obj;
@@ -51,7 +51,7 @@
 
 
   /**
-   * @member {module:model/SitePagingList} list
+   * @member {module:model/DeletedNodesPagingList} list
    */
   exports.prototype['list'] = undefined;
 

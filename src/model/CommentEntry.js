@@ -25,10 +25,11 @@
    * Constructs a new <code>CommentEntry</code>.
    * @alias module:model/CommentEntry
    * @class
+   * @param entry
    */
-  var exports = function() {
+  var exports = function(entry) {
 
-
+    this['entry'] = entry;
   };
 
   /**

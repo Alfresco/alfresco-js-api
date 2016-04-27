@@ -25,10 +25,11 @@
    * Constructs a new <code>SiteContainerEntry</code>.
    * @alias module:model/SiteContainerEntry
    * @class
+   * @param entry
    */
-  var exports = function() {
+  var exports = function(entry) {
 
-
+    this['entry'] = entry;
   };
 
   /**

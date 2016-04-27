@@ -3,6 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entry** | [**PersonNetwork**](PersonNetwork.md) |  | [optional] 
+**entry** | [**PersonNetwork**](PersonNetwork.md) |  | 
 
 

@@ -43,7 +43,7 @@
     /**
      * Create rendition
      * Async request to create a rendition for file with identifier\n**nodeId**. The rendition is specified by name \&quot;id\&quot; in the request body:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;id\&quot;:\&quot;doclib\&quot;\n}\n&#x60;&#x60;&#x60;\n
-     * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases: \n* -my-\n* -shared-\n* -root-\n
+     * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases:\n* -my-\n* -shared-\n* -root-\n
      * @param {module:model/RenditionBody} renditionBody The rendition \&quot;id\&quot;.
      * @param {module:api/RenditionsApi~createRenditionCallback} callback The callback function, accepting three arguments: error, data, response
      */
@@ -150,7 +150,7 @@
      * @param {String} nodeId The identifier of a node.
      * @param {String} renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
      * @param {Object} opts Optional parameters
-     * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment. \n**false** means a web browser may preview the file in a new tab or window, but not \ndownload the file. \n\nYou can only set this parameter to **false** if the content type of the file is in the supported list; \nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and \nthe attachment will be returned in the response.\n (default to true)
+     * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n (default to true)
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.\n
      * @param {module:api/RenditionsApi~getRenditionContentCallback} callback The callback function, accepting three arguments: error, data, response
      */
@@ -254,7 +254,7 @@
      * @param {String} sharedId The identifier of a shared link to a file.
      * @param {String} renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
      * @param {Object} opts Optional parameters
-     * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment. \n**false** means a web browser may preview the file in a new tab or window, but not \ndownload the file. \n\nYou can only set this parameter to **false** if the content type of the file is in the supported list; \nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and \nthe attachment will be returned in the response.\n (default to true)
+     * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n (default to true)
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.\n
      * @param {module:api/RenditionsApi~getSharedLinkRenditionContentCallback} callback The callback function, accepting three arguments: error, data, response
      */

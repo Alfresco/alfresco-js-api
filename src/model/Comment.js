@@ -25,18 +25,27 @@
    * Constructs a new <code>Comment</code>.
    * @alias module:model/Comment
    * @class
+   * @param id
+   * @param content
+   * @param createdBy
+   * @param createdAt
+   * @param edited
+   * @param modifiedBy
+   * @param modifiedAt
+   * @param canEdit
+   * @param canDelete
    */
-  var exports = function() {
+  var exports = function(id, content, createdBy, createdAt, edited, modifiedBy, modifiedAt, canEdit, canDelete) {
 
-
-
-
-
-
-
-
-
-
+    this['id'] = id;
+    this['content'] = content;
+    this['createdBy'] = createdBy;
+    this['createdAt'] = createdAt;
+    this['edited'] = edited;
+    this['modifiedBy'] = modifiedBy;
+    this['modifiedAt'] = modifiedAt;
+    this['canEdit'] = canEdit;
+    this['canDelete'] = canDelete;
   };
 
   /**

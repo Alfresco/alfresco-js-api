@@ -26,10 +26,19 @@
    * @alias module:model/Person
    * @class
    * @param id
+   * @param firstName
+   * @param lastName
+   * @param email
+   * @param enabled
    */
-  var exports = function(id) {
+  var exports = function(id, firstName, lastName, email, enabled) {
 
     this['id'] = id;
+    this['firstName'] = firstName;
+    this['lastName'] = lastName;
+
+
+    this['email'] = email;
 
 
 
@@ -40,12 +49,7 @@
 
 
 
-
-
-
-
-
-
+    this['enabled'] = enabled;
 
   };
 

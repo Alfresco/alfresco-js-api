@@ -27,11 +27,12 @@
    * @alias module:model/Preference
    * @class
    * @param id
+   * @param value
    */
-  var exports = function(id) {
+  var exports = function(id, value) {
 
     this['id'] = id;
-
+    this['value'] = value;
   };
 
   /**

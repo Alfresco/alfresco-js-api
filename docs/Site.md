@@ -3,11 +3,11 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** |  | [optional] 
-**guid** | **String** |  | [optional] 
-**title** | **String** |  | [optional] 
+**id** | **String** |  | 
+**guid** | **String** |  | 
+**title** | **String** |  | 
 **description** | **String** |  | [optional] 
-**visibility** | **String** |  | [optional] 
+**visibility** | **String** |  | 
 **role** | **String** |  | [optional] 
 
 

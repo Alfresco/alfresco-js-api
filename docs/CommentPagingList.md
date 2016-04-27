@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entries** | [**[CommentEntry]**](CommentEntry.md) |  | [optional] 
-**pagination** | [**Pagination**](Pagination.md) |  | [optional] 
+**entries** | [**[CommentEntry]**](CommentEntry.md) |  | 
+**pagination** | [**Pagination**](Pagination.md) |  | 
 
 

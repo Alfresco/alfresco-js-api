@@ -25,14 +25,18 @@
    * Constructs a new <code>ErrorError</code>.
    * @alias module:model/ErrorError
    * @class
+   * @param briefSummary
+   * @param descriptionURL
+   * @param stackTrace
+   * @param statusCode
    */
-  var exports = function() {
+  var exports = function(briefSummary, descriptionURL, stackTrace, statusCode) {
 
 
-
-
-
-
+    this['briefSummary'] = briefSummary;
+    this['descriptionURL'] = descriptionURL;
+    this['stackTrace'] = stackTrace;
+    this['statusCode'] = statusCode;
   };
 
   /**

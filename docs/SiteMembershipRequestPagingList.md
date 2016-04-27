@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entries** | [**[SiteMembershipRequestEntry]**](SiteMembershipRequestEntry.md) |  | [optional] 
-**pagination** | [**Pagination**](Pagination.md) |  | [optional] 
+**entries** | [**[SiteMembershipRequestEntry]**](SiteMembershipRequestEntry.md) |  | 
+**pagination** | [**Pagination**](Pagination.md) |  | 
 
 

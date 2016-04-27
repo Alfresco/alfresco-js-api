@@ -1,18 +1,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient', './Site'], factory);
+    define(['../ApiClient'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./Site'));
+    module.exports = factory(require('../ApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoCoreRestApi) {
       root.AlfrescoCoreRestApi = {};
     }
-    root.AlfrescoCoreRestApi.Favorite = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Site);
+    root.AlfrescoCoreRestApi.Favorite = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient, Site) {
+}(this, function(ApiClient) {
   'use strict';
 
   /**
@@ -54,7 +54,7 @@
         obj['createdAt'] = ApiClient.convertToType(data['createdAt'], 'Date');
       }
       if (data.hasOwnProperty('target')) {
-        obj['target'] = Site.constructFromObject(data['target']);
+        obj['target'] = ApiClient.convertToType(data['target'], Object);
       }
     }
     return obj;
@@ -74,7 +74,7 @@
   exports.prototype['createdAt'] = undefined;
 
   /**
-   * @member {module:model/Site} target
+   * @member {Object} target
    */
   exports.prototype['target'] = undefined;
 

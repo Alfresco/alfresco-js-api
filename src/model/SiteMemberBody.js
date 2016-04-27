@@ -43,11 +43,11 @@
     if (data) { 
       obj = obj || new exports();
 
-      if (data.hasOwnProperty('Role')) {
-        obj['Role'] = ApiClient.convertToType(data['Role'], 'String');
+      if (data.hasOwnProperty('role')) {
+        obj['role'] = ApiClient.convertToType(data['role'], 'String');
       }
-      if (data.hasOwnProperty('PersonId')) {
-        obj['PersonId'] = ApiClient.convertToType(data['PersonId'], 'String');
+      if (data.hasOwnProperty('id')) {
+        obj['id'] = ApiClient.convertToType(data['id'], 'String');
       }
     }
     return obj;
@@ -55,18 +55,18 @@
 
 
   /**
-   * @member {module:model/SiteMemberBody.RoleEnum} Role
+   * @member {module:model/SiteMemberBody.RoleEnum} role
    */
-  exports.prototype['Role'] = undefined;
+  exports.prototype['role'] = undefined;
 
   /**
-   * @member {String} PersonId
+   * @member {String} id
    */
-  exports.prototype['PersonId'] = undefined;
+  exports.prototype['id'] = undefined;
 
 
   /**
-   * Allowed values for the <code>Role</code> property.
+   * Allowed values for the <code>role</code> property.
    * @enum {String}
    * @readonly
    */

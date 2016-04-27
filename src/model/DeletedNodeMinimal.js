@@ -1,18 +1,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient', './ContentInfo', './NodeMinimalEntry', './UserInfo'], factory);
+    define(['../ApiClient', './MinimalNode', './NodeMinimalEntry', './UserInfo'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./ContentInfo'), require('./NodeMinimalEntry'), require('./UserInfo'));
+    module.exports = factory(require('../ApiClient'), require('./MinimalNode'), require('./NodeMinimalEntry'), require('./UserInfo'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoCoreRestApi) {
       root.AlfrescoCoreRestApi = {};
     }
-    root.AlfrescoCoreRestApi.DeletedNodeMinimal = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.ContentInfo, root.AlfrescoCoreRestApi.NodeMinimalEntry, root.AlfrescoCoreRestApi.UserInfo);
+    root.AlfrescoCoreRestApi.DeletedNodeMinimal = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.MinimalNode, root.AlfrescoCoreRestApi.NodeMinimalEntry, root.AlfrescoCoreRestApi.UserInfo);
   }
-}(this, function(ApiClient, ContentInfo, NodeMinimalEntry, UserInfo) {
+}(this, function(ApiClient, MinimalNode, NodeMinimalEntry, UserInfo) {
   'use strict';
 
   /**
@@ -26,11 +26,12 @@
    * @alias module:model/DeletedNodeMinimal
    * @class
    * @extends module:model/NodeMinimalEntry
+   * @param entry
    * @param archivedByUser
    * @param archivedAt
    */
-  var exports = function(archivedByUser, archivedAt) {
-    NodeMinimalEntry.call(this);
+  var exports = function(entry, archivedByUser, archivedAt) {
+    NodeMinimalEntry.call(this, entry);
     this['archivedByUser'] = archivedByUser;
     this['archivedAt'] = archivedAt;
   };

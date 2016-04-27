@@ -3,6 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entry** | [**Tag**](Tag.md) |  | [optional] 
+**entry** | [**Tag**](Tag.md) |  | 
 
 

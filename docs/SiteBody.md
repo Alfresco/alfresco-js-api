@@ -1,11 +1,11 @@
-# AlfrescoCoreRestApi.FavoriteSite
+# AlfrescoCoreRestApi.SiteBody
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** |  | 
+**id** | **String** |  | [optional] 
 **title** | **String** |  | 
 **description** | **String** |  | [optional] 
-**visibility** | **String** |  | 
+**visibility** | **String** |  | [default to &#39;PUBLIC&#39;]
 
 

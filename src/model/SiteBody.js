@@ -10,39 +10,38 @@
     if (!root.AlfrescoCoreRestApi) {
       root.AlfrescoCoreRestApi = {};
     }
-    root.AlfrescoCoreRestApi.FavoriteSite = factory(root.AlfrescoCoreRestApi.ApiClient);
+    root.AlfrescoCoreRestApi.SiteBody = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
 }(this, function(ApiClient) {
   'use strict';
 
   /**
-   * The FavoriteSite model module.
-   * @module model/FavoriteSite
+   * The SiteBody model module.
+   * @module model/SiteBody
    * @version 1
    */
 
   /**
-   * Constructs a new <code>FavoriteSite</code>.
-   * @alias module:model/FavoriteSite
+   * Constructs a new <code>SiteBody</code>.
+   * @alias module:model/SiteBody
    * @class
-   * @param id
    * @param title
    * @param visibility
    */
-  var exports = function(id, title, visibility) {
+  var exports = function(title, visibility) {
 
-    this['id'] = id;
+
     this['title'] = title;
 
     this['visibility'] = visibility;
   };
 
   /**
-   * Constructs a <code>FavoriteSite</code> from a plain JavaScript object, optionally creating a new instance.
+   * Constructs a <code>SiteBody</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/FavoriteSite} obj Optional instance to populate.
-   * @return {module:model/FavoriteSite} The populated <code>FavoriteSite</code> instance.
+   * @param {module:model/SiteBody} obj Optional instance to populate.
+   * @return {module:model/SiteBody} The populated <code>SiteBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) { 
@@ -81,9 +80,10 @@
   exports.prototype['description'] = undefined;
 
   /**
-   * @member {module:model/FavoriteSite.VisibilityEnum} visibility
+   * @member {module:model/SiteBody.VisibilityEnum} visibility
+   * @default 'PUBLIC'
    */
-  exports.prototype['visibility'] = undefined;
+  exports.prototype['visibility'] = 'PUBLIC';
 
 
   /**
@@ -92,6 +92,12 @@
    * @readonly
    */
   exports.VisibilityEnum = { 
+    /**
+     * value: PUBLIC
+     * @const
+     */
+    PUBLIC: "PUBLIC",
+    
     /**
      * value: PRIVATE
      * @const
@@ -102,13 +108,7 @@
      * value: MODERATED
      * @const
      */
-    MODERATED: "MODERATED",
-    
-    /**
-     * value: PUBLIC
-     * @const
-     */
-    PUBLIC: "PUBLIC"
+    MODERATED: "MODERATED"
   };
 
   return exports;

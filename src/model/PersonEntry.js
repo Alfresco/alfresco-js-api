@@ -25,10 +25,11 @@
    * Constructs a new <code>PersonEntry</code>.
    * @alias module:model/PersonEntry
    * @class
+   * @param entry
    */
-  var exports = function() {
+  var exports = function(entry) {
 
-
+    this['entry'] = entry;
   };
 
   /**

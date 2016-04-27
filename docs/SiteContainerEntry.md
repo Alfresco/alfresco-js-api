@@ -3,6 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entry** | [**SiteContainer**](SiteContainer.md) |  | [optional] 
+**entry** | [**SiteContainer**](SiteContainer.md) |  | 
 
 

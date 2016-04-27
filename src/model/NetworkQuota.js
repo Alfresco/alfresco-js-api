@@ -27,12 +27,14 @@
    * @alias module:model/NetworkQuota
    * @class
    * @param id
+   * @param limit
+   * @param usage
    */
-  var exports = function(id) {
+  var exports = function(id, limit, usage) {
 
     this['id'] = id;
-
-
+    this['limit'] = limit;
+    this['usage'] = usage;
   };
 
   /**

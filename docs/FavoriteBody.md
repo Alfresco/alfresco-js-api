@@ -3,6 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**target** | [**FavoriteTarget**](FavoriteTarget.md) |  | [optional] 
+**target** | **Object** |  | [optional] 
 
 

@@ -42,7 +42,7 @@
 
     /**
      * Add a comment
-     * Creates one or more comments on node **nodeId**. You can create more than one comment by \nspecifying a list of comments in the JSON body like this:      \n\n&#x60;&#x60;&#x60;JSON\n[\n  {\n    \&quot;content\&quot;: \&quot;This is a comment\&quot;\n  },\n  {\n    \&quot;content\&quot;: \&quot;This is another comment\&quot;\n  }\n]\n&#x60;&#x60;&#x60;\n
+     * Creates one or more comments on node **nodeId**. You can create more than one comment by\nspecifying a list of comments in the JSON body like this:\n\n&#x60;&#x60;&#x60;JSON\n[\n  {\n    \&quot;content\&quot;: \&quot;This is a comment\&quot;\n  },\n  {\n    \&quot;content\&quot;: \&quot;This is another comment\&quot;\n  }\n]\n&#x60;&#x60;&#x60;\n
      * @param {String} nodeId The identifier of a node.
      * @param {module:model/CommentBody} commentBody The comment text. Note that you can provide an array of comments.
      * @param {module:api/CommentsApi~addCommentCallback} callback The callback function, accepting three arguments: error, data, response
@@ -99,7 +99,7 @@
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
      * @param {Integer} opts.maxItems The maximum number of items to return in the list.
-     * @param {Array.<String>} opts.fields A list of field names. \n\nYou can use this parameter to restrict the fields \nreturned within a response if, for example, you want to save on overall bandwidth. \n\nThe list applies to a returned individual \nentity or entries within a collection. \n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * @param {module:api/CommentsApi~getCommentsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/CommentPaging}
      */
@@ -205,7 +205,7 @@
      * @param {String} commentId The identifier of a comment.
      * @param {module:model/CommentBody1} commentBody The JSON representing the comment to be updated.
      * @param {Object} opts Optional parameters
-     * @param {Array.<String>} opts.fields A list of field names. \n\nYou can use this parameter to restrict the fields \nreturned within a response if, for example, you want to save on overall bandwidth. \n\nThe list applies to a returned individual \nentity or entries within a collection. \n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * @param {module:api/CommentsApi~updateCommentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/CommentEntry}
      */

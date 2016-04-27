@@ -25,10 +25,11 @@
    * Constructs a new <code>ActivityEntry</code>.
    * @alias module:model/ActivityEntry
    * @class
+   * @param entry
    */
-  var exports = function() {
+  var exports = function(entry) {
 
-
+    this['entry'] = entry;
   };
 
   /**

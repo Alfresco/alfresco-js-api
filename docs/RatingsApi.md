@@ -35,7 +35,7 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node.
 var ratingId = "ratingId_example"; // {String} The identifier of a rating.
 
 var opts = { 
-  'fields': ["fields_example"] // {[String]} A list of field names. \n\nYou can use this parameter to restrict the fields \nreturned within a response if, for example, you want to save on overall bandwidth. \n\nThe list applies to a returned individual \nentity or entries within a collection. \n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+  'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
 
 var callback = function(error, data, response) {
@@ -54,7 +54,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **String**| The identifier of a node. | 
  **ratingId** | **String**| The identifier of a rating. | 
- **fields** | [**[String]**](String.md)| A list of field names. \n\nYou can use this parameter to restrict the fields \nreturned within a response if, for example, you want to save on overall bandwidth. \n\nThe list applies to a returned individual \nentity or entries within a collection. \n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
+ **fields** | [**[String]**](String.md)| A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
 
 ### Return type
 
@@ -94,7 +94,7 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node.
 var opts = { 
   'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
-  'fields': ["fields_example"] // {[String]} A list of field names. \n\nYou can use this parameter to restrict the fields \nreturned within a response if, for example, you want to save on overall bandwidth. \n\nThe list applies to a returned individual \nentity or entries within a collection. \n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+  'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
 
 var callback = function(error, data, response) {
@@ -114,7 +114,7 @@ Name | Type | Description  | Notes
  **nodeId** | **String**| The identifier of a node. | 
  **skipCount** | **Integer**| The number of entities that exist in the collection before those included in this list. | [optional] 
  **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional] 
- **fields** | [**[String]**](String.md)| A list of field names. \n\nYou can use this parameter to restrict the fields \nreturned within a response if, for example, you want to save on overall bandwidth. \n\nThe list applies to a returned individual \nentity or entries within a collection. \n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
+ **fields** | [**[String]**](String.md)| A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
 
 ### Return type
 
@@ -135,7 +135,7 @@ Name | Type | Description  | Notes
 
 Rate
 
-Rate the node **nodeId**.
+Rate the node with identifier **nodeId**
 
 ### Example
 ```javascript
@@ -151,7 +151,7 @@ var apiInstance = new AlfrescoCoreRestApi.RatingsApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
-var ratingBody = new AlfrescoCoreRestApi.RatingBody(); // {RatingBody} Rating details
+var ratingBody = new AlfrescoCoreRestApi.RatingBody(); // {RatingBody} For \"myRating\" the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.\n\nFor example, to \"like\" a file the following body would be used:\n\n  ```JSON\n    {\n      \"id\": \"likes\",\n      \"myRating\": true\n    }\n  ```\n
 
 
 var callback = function(error, data, response) {
@@ -169,7 +169,7 @@ api.rate(nodeId, ratingBody, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **String**| The identifier of a node. | 
- **ratingBody** | [**RatingBody**](RatingBody.md)| Rating details | 
+ **ratingBody** | [**RatingBody**](RatingBody.md)| For \&quot;myRating\&quot; the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.\n\nFor example, to \&quot;like\&quot; a file the following body would be used:\n\n  &#x60;&#x60;&#x60;JSON\n    {\n      \&quot;id\&quot;: \&quot;likes\&quot;,\n      \&quot;myRating\&quot;: true\n    }\n  &#x60;&#x60;&#x60;\n | 
 
 ### Return type
 

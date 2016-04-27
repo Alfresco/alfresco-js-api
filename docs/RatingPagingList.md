@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entries** | [**[RatingEntry]**](RatingEntry.md) |  | [optional] 
-**pagination** | [**Pagination**](Pagination.md) |  | [optional] 
+**entries** | [**[RatingEntry]**](RatingEntry.md) |  | 
+**pagination** | [**Pagination**](Pagination.md) |  | 
 
 

@@ -36,7 +36,7 @@ var opts = {
   'nodeType': "nodeType_example", // {String} Restrict the returned results to only those of the given node type and it's sub-types
   'include': "include_example", // {String} Return additional info, eg. aspectNames, properties, path, isLink
   'orderBy': "orderBy_example", // {String} The list of results can be ordered by the following:\n* name\n* modifiedAt\n* createdAt\n
-  'fields': ["fields_example"] // {[String]} A list of field names. \n\nYou can use this parameter to restrict the fields \nreturned within a response if, for example, you want to save on overall bandwidth. \n\nThe list applies to a returned individual \nentity or entries within a collection. \n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+  'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
 
 var callback = function(error, data, response) {
@@ -60,7 +60,7 @@ Name | Type | Description  | Notes
  **nodeType** | **String**| Restrict the returned results to only those of the given node type and it&#39;s sub-types | [optional] 
  **include** | **String**| Return additional info, eg. aspectNames, properties, path, isLink | [optional] 
  **orderBy** | **String**| The list of results can be ordered by the following:\n* name\n* modifiedAt\n* createdAt\n | [optional] 
- **fields** | [**[String]**](String.md)| A list of field names. \n\nYou can use this parameter to restrict the fields \nreturned within a response if, for example, you want to save on overall bandwidth. \n\nThe list applies to a returned individual \nentity or entries within a collection. \n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
+ **fields** | [**[String]**](String.md)| A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
 
 ### Return type
 

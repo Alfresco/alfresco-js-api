@@ -3,6 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entry** | [**Activity**](Activity.md) |  | [optional] 
+**entry** | [**Activity**](Activity.md) |  | 
 
 

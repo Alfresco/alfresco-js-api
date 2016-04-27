@@ -3,6 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entry** | [**Rating**](Rating.md) |  | [optional] 
+**entry** | [**Rating**](Rating.md) |  | 
 
 

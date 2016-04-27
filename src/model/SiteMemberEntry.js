@@ -25,10 +25,11 @@
    * Constructs a new <code>SiteMemberEntry</code>.
    * @alias module:model/SiteMemberEntry
    * @class
+   * @param entry
    */
-  var exports = function() {
+  var exports = function(entry) {
 
-
+    this['entry'] = entry;
   };
 
   /**
