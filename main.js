@@ -1,6 +1,11 @@
 var AlfrescoCoreRestApi = require('./src/ApiClient.js');
 var NodesApi = require('./src/api/NodesApi.js');
 
+global.AlfrescoApi = {
+    ApiClient: AlfrescoCoreRestApi,
+    NodesApi: NodesApi
+};
+
 var defaultClient = new AlfrescoCoreRestApi();
 defaultClient.basePath = 'http://192.168.99.100:8080/alfresco/api/-default-/public/alfresco/versions/1';
 
