@@ -82,7 +82,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodePaging;

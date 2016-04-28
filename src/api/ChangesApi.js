@@ -80,7 +80,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json', 'multipart/form-data'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
@@ -131,7 +131,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeSharedLinkEntry;
@@ -189,7 +189,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
@@ -240,7 +240,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -291,7 +291,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = SiteEntry;
@@ -340,7 +340,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -385,7 +385,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -434,7 +434,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -485,7 +485,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -532,7 +532,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeSharedLinkEntry;
@@ -582,7 +582,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = DeletedNodeEntry;
@@ -629,7 +629,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = DeletedNodesPaging;
@@ -680,7 +680,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -734,7 +734,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
@@ -798,7 +798,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodePaging;
@@ -851,7 +851,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = RenditionEntry;
@@ -909,7 +909,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -955,7 +955,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = RenditionPaging;
@@ -1007,7 +1007,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeSharedLinkEntry;
@@ -1058,7 +1058,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -1116,7 +1116,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -1178,7 +1178,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodePaging;
@@ -1236,7 +1236,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
@@ -1281,7 +1281,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -1327,7 +1327,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
@@ -1389,7 +1389,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/octet-stream'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
@@ -1447,7 +1447,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;

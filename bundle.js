@@ -1454,7 +1454,8 @@ module.exports = function(arr, fn, initial){
      * @type {Array.<String>}
      */
     this.authentications = {
-      'basicAuth': {type: 'basic'}
+      'basicAuth': {type: 'basic'},
+      'ticketAuth': {type: 'apiKey', 'in': 'query', name: 'alf_ticket'}
     };
     /**
      * The default HTTP headers to be included for all API calls.
@@ -1969,7 +1970,7 @@ module.exports = function(arr, fn, initial){
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json', 'multipart/form-data'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
@@ -2027,7 +2028,7 @@ module.exports = function(arr, fn, initial){
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
@@ -2076,7 +2077,7 @@ module.exports = function(arr, fn, initial){
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -2126,7 +2127,7 @@ module.exports = function(arr, fn, initial){
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = DeletedNodeEntry;
@@ -2173,7 +2174,7 @@ module.exports = function(arr, fn, initial){
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = DeletedNodesPaging;
@@ -2224,7 +2225,7 @@ module.exports = function(arr, fn, initial){
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -2278,7 +2279,7 @@ module.exports = function(arr, fn, initial){
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
@@ -2342,7 +2343,7 @@ module.exports = function(arr, fn, initial){
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodePaging;
@@ -2400,7 +2401,7 @@ module.exports = function(arr, fn, initial){
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
@@ -2445,7 +2446,7 @@ module.exports = function(arr, fn, initial){
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -2491,7 +2492,7 @@ module.exports = function(arr, fn, initial){
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
@@ -2553,7 +2554,7 @@ module.exports = function(arr, fn, initial){
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/octet-stream'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
@@ -2611,7 +2612,7 @@ module.exports = function(arr, fn, initial){
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;

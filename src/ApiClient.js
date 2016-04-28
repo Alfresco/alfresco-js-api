@@ -40,7 +40,8 @@
      * @type {Array.<String>}
      */
     this.authentications = {
-      'basicAuth': {type: 'basic'}
+      'basicAuth': {type: 'basic'},
+      'ticketAuth': {type: 'apiKey', 'in': 'query', name: 'alf_ticket'}
     };
     /**
      * The default HTTP headers to be included for all API calls.

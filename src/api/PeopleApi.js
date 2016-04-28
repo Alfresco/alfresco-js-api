@@ -72,7 +72,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = FavoriteEntry;
@@ -124,7 +124,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = SiteMembershipRequestEntry;
@@ -176,7 +176,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -228,7 +228,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = FavoriteSite;
@@ -286,7 +286,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = ActivityPaging;
@@ -343,7 +343,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = FavoriteEntry;
@@ -400,7 +400,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = FavoriteSite;
@@ -454,7 +454,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = FavoriteSitePaging;
@@ -510,7 +510,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = FavoritePaging;
@@ -560,7 +560,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = PersonEntry;
@@ -617,7 +617,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = PersonNetworkEntry;
@@ -671,7 +671,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = PersonNetworkPaging;
@@ -728,7 +728,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = PreferenceEntry;
@@ -782,7 +782,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = PreferencePaging;
@@ -840,7 +840,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = SitePaging;
@@ -897,7 +897,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = SiteMembershipRequestEntry;
@@ -951,7 +951,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = SiteMembershipRequestPaging;
@@ -1003,7 +1003,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -1055,7 +1055,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -1113,7 +1113,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth'];
+      var authNames = ['basicAuth', 'ticketAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
