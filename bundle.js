@@ -2871,7 +2871,7 @@ module.exports = function(arr, fn, initial){
   return exports;
 }));
 
-},{"../ApiClient":5,"./ContentInfo":7,"./NodeEntry":19,"./UserInfo":25}],10:[function(require,module,exports){
+},{"../ApiClient":5,"./ContentInfo":7,"./NodeEntry":19,"./UserInfo":26}],10:[function(require,module,exports){
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -3235,18 +3235,18 @@ module.exports = function(arr, fn, initial){
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient', './ContentInfo', './UserInfo'], factory);
+    define(['../ApiClient', './ContentInfo', './PathElement', './UserInfo'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./ContentInfo'), require('./UserInfo'));
+    module.exports = factory(require('../ApiClient'), require('./ContentInfo'), require('./PathElement'), require('./UserInfo'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoCoreRestApi) {
       root.AlfrescoCoreRestApi = {};
     }
-    root.AlfrescoCoreRestApi.MinimalNode = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.ContentInfo, root.AlfrescoCoreRestApi.UserInfo);
+    root.AlfrescoCoreRestApi.MinimalNode = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.ContentInfo, root.AlfrescoCoreRestApi.PathElement, root.AlfrescoCoreRestApi.UserInfo);
   }
-}(this, function(ApiClient, ContentInfo, UserInfo) {
+}(this, function(ApiClient, ContentInfo, PathElement, UserInfo) {
   'use strict';
 
   /**
@@ -3261,6 +3261,7 @@ module.exports = function(arr, fn, initial){
    * @class
    */
   var exports = function() {
+
 
 
 
@@ -3318,6 +3319,9 @@ module.exports = function(arr, fn, initial){
       }
       if (data.hasOwnProperty('content')) {
         obj['content'] = ContentInfo.constructFromObject(data['content']);
+      }
+      if (data.hasOwnProperty('path')) {
+        obj['path'] = PathElement.constructFromObject(data['path']);
       }
     }
     return obj;
@@ -3379,13 +3383,18 @@ module.exports = function(arr, fn, initial){
    */
   exports.prototype['content'] = undefined;
 
+  /**
+   * @member {module:model/PathElement} path
+   */
+  exports.prototype['path'] = undefined;
+
 
 
 
   return exports;
 }));
 
-},{"../ApiClient":5,"./ContentInfo":7,"./UserInfo":25}],16:[function(require,module,exports){
+},{"../ApiClient":5,"./ContentInfo":7,"./PathElement":25,"./UserInfo":26}],16:[function(require,module,exports){
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -3839,7 +3848,7 @@ module.exports = function(arr, fn, initial){
   return exports;
 }));
 
-},{"../ApiClient":5,"./ContentInfo":7,"./UserInfo":25}],20:[function(require,module,exports){
+},{"../ApiClient":5,"./ContentInfo":7,"./UserInfo":26}],20:[function(require,module,exports){
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -4236,6 +4245,79 @@ module.exports = function(arr, fn, initial){
     if (!root.AlfrescoCoreRestApi) {
       root.AlfrescoCoreRestApi = {};
     }
+    root.AlfrescoCoreRestApi.PathElement = factory(root.AlfrescoCoreRestApi.ApiClient);
+  }
+}(this, function(ApiClient) {
+  'use strict';
+
+  /**
+   * The PathElement model module.
+   * @module model/PathElement
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>PathElement</code>.
+   * @alias module:model/PathElement
+   * @class
+   */
+  var exports = function() {
+
+
+
+  };
+
+  /**
+   * Constructs a <code>PathElement</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/PathElement} obj Optional instance to populate.
+   * @return {module:model/PathElement} The populated <code>PathElement</code> instance.
+   */
+  exports.constructFromObject = function(data, obj) {
+    if (data) { 
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('id')) {
+        obj['id'] = ApiClient.convertToType(data['id'], 'String');
+      }
+      if (data.hasOwnProperty('name')) {
+        obj['name'] = ApiClient.convertToType(data['name'], 'String');
+      }
+    }
+    return obj;
+  }
+
+
+  /**
+   * @member {String} id
+   */
+  exports.prototype['id'] = undefined;
+
+  /**
+   * @member {String} name
+   */
+  exports.prototype['name'] = undefined;
+
+
+
+
+  return exports;
+}));
+
+},{"../ApiClient":5}],26:[function(require,module,exports){
+(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../ApiClient'], factory);
+  } else if (typeof module === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../ApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoCoreRestApi) {
+      root.AlfrescoCoreRestApi = {};
+    }
     root.AlfrescoCoreRestApi.UserInfo = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
 }(this, function(ApiClient) {
@@ -4296,9 +4378,9 @@ module.exports = function(arr, fn, initial){
   return exports;
 }));
 
-},{"../ApiClient":5}],26:[function(require,module,exports){
+},{"../ApiClient":5}],27:[function(require,module,exports){
 
-},{}],27:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 (function (global){
 /*!
  * The buffer module from node.js, for the browser.
@@ -5758,7 +5840,7 @@ function blitBuffer (src, dst, offset, length) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"base64-js":28,"ieee754":29,"isarray":30}],28:[function(require,module,exports){
+},{"base64-js":29,"ieee754":30,"isarray":31}],29:[function(require,module,exports){
 'use strict'
 
 exports.toByteArray = toByteArray
@@ -5869,7 +5951,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],29:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -5955,7 +6037,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],30:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {

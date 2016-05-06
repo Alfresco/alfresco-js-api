@@ -1,18 +1,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient', './ContentInfo', './UserInfo'], factory);
+    define(['../ApiClient', './ContentInfo', './PathElement', './UserInfo'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./ContentInfo'), require('./UserInfo'));
+    module.exports = factory(require('../ApiClient'), require('./ContentInfo'), require('./PathElement'), require('./UserInfo'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoCoreRestApi) {
       root.AlfrescoCoreRestApi = {};
     }
-    root.AlfrescoCoreRestApi.MinimalNode = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.ContentInfo, root.AlfrescoCoreRestApi.UserInfo);
+    root.AlfrescoCoreRestApi.MinimalNode = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.ContentInfo, root.AlfrescoCoreRestApi.PathElement, root.AlfrescoCoreRestApi.UserInfo);
   }
-}(this, function(ApiClient, ContentInfo, UserInfo) {
+}(this, function(ApiClient, ContentInfo, PathElement, UserInfo) {
   'use strict';
 
   /**
@@ -27,6 +27,7 @@
    * @class
    */
   var exports = function() {
+
 
 
 
@@ -84,6 +85,9 @@
       }
       if (data.hasOwnProperty('content')) {
         obj['content'] = ContentInfo.constructFromObject(data['content']);
+      }
+      if (data.hasOwnProperty('path')) {
+        obj['path'] = PathElement.constructFromObject(data['path']);
       }
     }
     return obj;
@@ -144,6 +148,11 @@
    * @member {module:model/ContentInfo} content
    */
   exports.prototype['content'] = undefined;
+
+  /**
+   * @member {module:model/PathElement} path
+   */
+  exports.prototype['path'] = undefined;
 
 
 

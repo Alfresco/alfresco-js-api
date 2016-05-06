@@ -14,5 +14,6 @@ Name | Type | Description | Notes
 **createdAt** | **Date** |  | [optional] 
 **createdByUser** | [**UserInfo**](UserInfo.md) |  | [optional] 
 **content** | [**ContentInfo**](ContentInfo.md) |  | [optional] 
+**path** | [**PathElement**](PathElement.md) |  | [optional] 
 
 
