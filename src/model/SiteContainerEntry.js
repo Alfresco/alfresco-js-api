@@ -18,7 +18,7 @@
   /**
    * The SiteContainerEntry model module.
    * @module model/SiteContainerEntry
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

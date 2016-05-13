@@ -18,7 +18,7 @@
   /**
    * The SiteMember model module.
    * @module model/SiteMember
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

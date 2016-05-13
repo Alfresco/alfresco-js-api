@@ -18,7 +18,7 @@
   /**
    * The Preference model module.
    * @module model/Preference
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -64,7 +64,7 @@
   exports.prototype['id'] = undefined;
 
   /**
-   * The value of the preference. The value can be of any JSON type.
+   * The value of the preference. Note that this can be of any JSON type.
    * @member {String} value
    */
   exports.prototype['value'] = undefined;

@@ -1,24 +1,24 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient', '../model/Error', '../model/NodeSharedLinkEntry', '../model/SharedLinkBody', '../model/EmailSharedLinkBody'], factory);
+    define(['../ApiClient', '../model/Error', '../model/NodeSharedLinkEntry', '../model/SharedLinkBody', '../model/EmailSharedLinkBody', '../model/NodeSharedLinkPaging'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/Error'), require('../model/NodeSharedLinkEntry'), require('../model/SharedLinkBody'), require('../model/EmailSharedLinkBody'));
+    module.exports = factory(require('../ApiClient'), require('../model/Error'), require('../model/NodeSharedLinkEntry'), require('../model/SharedLinkBody'), require('../model/EmailSharedLinkBody'), require('../model/NodeSharedLinkPaging'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoCoreRestApi) {
       root.AlfrescoCoreRestApi = {};
     }
-    root.AlfrescoCoreRestApi.SharedlinksApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.NodeSharedLinkEntry, root.AlfrescoCoreRestApi.SharedLinkBody, root.AlfrescoCoreRestApi.EmailSharedLinkBody);
+    root.AlfrescoCoreRestApi.SharedlinksApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.NodeSharedLinkEntry, root.AlfrescoCoreRestApi.SharedLinkBody, root.AlfrescoCoreRestApi.EmailSharedLinkBody, root.AlfrescoCoreRestApi.NodeSharedLinkPaging);
   }
-}(this, function(ApiClient, Error, NodeSharedLinkEntry, SharedLinkBody, EmailSharedLinkBody) {
+}(this, function(ApiClient, Error, NodeSharedLinkEntry, SharedLinkBody, EmailSharedLinkBody, NodeSharedLinkPaging) {
   'use strict';
 
   /**
    * Sharedlinks service.
    * @module api/SharedlinksApi
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -71,7 +71,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeSharedLinkEntry;
@@ -116,7 +116,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -167,7 +167,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -183,7 +183,7 @@
      * Callback function to receive the result of the findSharedLinks operation.
      * @callback module:api/SharedlinksApi~findSharedLinksCallback
      * @param {String} error Error message, if any.
-     * @param {module:model/NodeSharedLinkEntry} data The data returned by the service call.
+     * @param {module:model/NodeSharedLinkPaging} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -195,7 +195,7 @@
      * @param {Array.<String>} opts.include Returns additional information about the shared link, the following optional fields can be requested:\n* allowableOperations\n
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * @param {module:api/SharedlinksApi~findSharedLinksCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/NodeSharedLinkEntry}
+     * data is of type: {module:model/NodeSharedLinkPaging}
      */
     this.findSharedLinks = function(opts, callback) {
       opts = opts || {};
@@ -214,10 +214,10 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
-      var returnType = NodeSharedLinkEntry;
+      var returnType = NodeSharedLinkPaging;
 
       return this.apiClient.callApi(
         '/shared-links', 'GET',
@@ -266,7 +266,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeSharedLinkEntry;
@@ -317,7 +317,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;

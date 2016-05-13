@@ -18,7 +18,7 @@
   /**
    * The NodePagingList model module.
    * @module model/NodePagingList
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

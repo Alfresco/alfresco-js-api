@@ -1,24 +1,24 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient', '../model/FavoriteEntry', '../model/FavoriteBody', '../model/Error', '../model/SiteMembershipBody', '../model/SiteMembershipRequestEntry', '../model/FavoriteSiteBody', '../model/FavoriteSite', '../model/ActivityPaging', '../model/FavoriteSitePaging', '../model/FavoritePaging', '../model/PersonEntry', '../model/PersonNetworkEntry', '../model/PersonNetworkPaging', '../model/PreferenceEntry', '../model/PreferencePaging', '../model/SitePaging', '../model/SiteMembershipRequestPaging', '../model/SiteMembershipBody1'], factory);
+    define(['../ApiClient', '../model/FavoriteEntry', '../model/FavoriteBody', '../model/Error', '../model/SiteMembershipBody', '../model/SiteMembershipRequestEntry', '../model/FavoriteSiteBody', '../model/InlineResponse201', '../model/ActivityPaging', '../model/SiteEntry', '../model/SitePaging', '../model/FavoritePaging', '../model/PersonEntry', '../model/PersonNetworkEntry', '../model/PersonNetworkPaging', '../model/PreferenceEntry', '../model/PreferencePaging', '../model/SiteMembershipRequestPaging', '../model/SiteMembershipBody1'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/FavoriteEntry'), require('../model/FavoriteBody'), require('../model/Error'), require('../model/SiteMembershipBody'), require('../model/SiteMembershipRequestEntry'), require('../model/FavoriteSiteBody'), require('../model/FavoriteSite'), require('../model/ActivityPaging'), require('../model/FavoriteSitePaging'), require('../model/FavoritePaging'), require('../model/PersonEntry'), require('../model/PersonNetworkEntry'), require('../model/PersonNetworkPaging'), require('../model/PreferenceEntry'), require('../model/PreferencePaging'), require('../model/SitePaging'), require('../model/SiteMembershipRequestPaging'), require('../model/SiteMembershipBody1'));
+    module.exports = factory(require('../ApiClient'), require('../model/FavoriteEntry'), require('../model/FavoriteBody'), require('../model/Error'), require('../model/SiteMembershipBody'), require('../model/SiteMembershipRequestEntry'), require('../model/FavoriteSiteBody'), require('../model/InlineResponse201'), require('../model/ActivityPaging'), require('../model/SiteEntry'), require('../model/SitePaging'), require('../model/FavoritePaging'), require('../model/PersonEntry'), require('../model/PersonNetworkEntry'), require('../model/PersonNetworkPaging'), require('../model/PreferenceEntry'), require('../model/PreferencePaging'), require('../model/SiteMembershipRequestPaging'), require('../model/SiteMembershipBody1'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoCoreRestApi) {
       root.AlfrescoCoreRestApi = {};
     }
-    root.AlfrescoCoreRestApi.PeopleApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.FavoriteEntry, root.AlfrescoCoreRestApi.FavoriteBody, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.SiteMembershipBody, root.AlfrescoCoreRestApi.SiteMembershipRequestEntry, root.AlfrescoCoreRestApi.FavoriteSiteBody, root.AlfrescoCoreRestApi.FavoriteSite, root.AlfrescoCoreRestApi.ActivityPaging, root.AlfrescoCoreRestApi.FavoriteSitePaging, root.AlfrescoCoreRestApi.FavoritePaging, root.AlfrescoCoreRestApi.PersonEntry, root.AlfrescoCoreRestApi.PersonNetworkEntry, root.AlfrescoCoreRestApi.PersonNetworkPaging, root.AlfrescoCoreRestApi.PreferenceEntry, root.AlfrescoCoreRestApi.PreferencePaging, root.AlfrescoCoreRestApi.SitePaging, root.AlfrescoCoreRestApi.SiteMembershipRequestPaging, root.AlfrescoCoreRestApi.SiteMembershipBody1);
+    root.AlfrescoCoreRestApi.PeopleApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.FavoriteEntry, root.AlfrescoCoreRestApi.FavoriteBody, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.SiteMembershipBody, root.AlfrescoCoreRestApi.SiteMembershipRequestEntry, root.AlfrescoCoreRestApi.FavoriteSiteBody, root.AlfrescoCoreRestApi.InlineResponse201, root.AlfrescoCoreRestApi.ActivityPaging, root.AlfrescoCoreRestApi.SiteEntry, root.AlfrescoCoreRestApi.SitePaging, root.AlfrescoCoreRestApi.FavoritePaging, root.AlfrescoCoreRestApi.PersonEntry, root.AlfrescoCoreRestApi.PersonNetworkEntry, root.AlfrescoCoreRestApi.PersonNetworkPaging, root.AlfrescoCoreRestApi.PreferenceEntry, root.AlfrescoCoreRestApi.PreferencePaging, root.AlfrescoCoreRestApi.SiteMembershipRequestPaging, root.AlfrescoCoreRestApi.SiteMembershipBody1);
   }
-}(this, function(ApiClient, FavoriteEntry, FavoriteBody, Error, SiteMembershipBody, SiteMembershipRequestEntry, FavoriteSiteBody, FavoriteSite, ActivityPaging, FavoriteSitePaging, FavoritePaging, PersonEntry, PersonNetworkEntry, PersonNetworkPaging, PreferenceEntry, PreferencePaging, SitePaging, SiteMembershipRequestPaging, SiteMembershipBody1) {
+}(this, function(ApiClient, FavoriteEntry, FavoriteBody, Error, SiteMembershipBody, SiteMembershipRequestEntry, FavoriteSiteBody, InlineResponse201, ActivityPaging, SiteEntry, SitePaging, FavoritePaging, PersonEntry, PersonNetworkEntry, PersonNetworkPaging, PreferenceEntry, PreferencePaging, SiteMembershipRequestPaging, SiteMembershipBody1) {
   'use strict';
 
   /**
    * People service.
    * @module api/PeopleApi
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -72,7 +72,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = FavoriteEntry;
@@ -124,7 +124,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = SiteMembershipRequestEntry;
@@ -176,7 +176,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -192,7 +192,7 @@
      * Callback function to receive the result of the favoriteSite operation.
      * @callback module:api/PeopleApi~favoriteSiteCallback
      * @param {String} error Error message, if any.
-     * @param {module:model/FavoriteSite} data The data returned by the service call.
+     * @param {module:model/InlineResponse201} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -202,7 +202,7 @@
      * @param {String} personId The identifier of a person.
      * @param {module:model/FavoriteSiteBody} favoriteSiteBody The id of the site to favorite.
      * @param {module:api/PeopleApi~favoriteSiteCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/FavoriteSite}
+     * data is of type: {module:model/InlineResponse201}
      */
     this.favoriteSite = function(personId, favoriteSiteBody, callback) {
       var postBody = favoriteSiteBody;
@@ -228,10 +228,10 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
-      var returnType = FavoriteSite;
+      var returnType = InlineResponse201;
 
       return this.apiClient.callApi(
         '/people/{personId}/favorite-sites', 'POST',
@@ -286,7 +286,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = ActivityPaging;
@@ -343,7 +343,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = FavoriteEntry;
@@ -359,7 +359,7 @@
      * Callback function to receive the result of the getFavoriteSite operation.
      * @callback module:api/PeopleApi~getFavoriteSiteCallback
      * @param {String} error Error message, if any.
-     * @param {module:model/FavoriteSite} data The data returned by the service call.
+     * @param {module:model/SiteEntry} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -371,7 +371,7 @@
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * @param {module:api/PeopleApi~getFavoriteSiteCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/FavoriteSite}
+     * data is of type: {module:model/SiteEntry}
      */
     this.getFavoriteSite = function(personId, siteId, opts, callback) {
       opts = opts || {};
@@ -400,10 +400,10 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
-      var returnType = FavoriteSite;
+      var returnType = SiteEntry;
 
       return this.apiClient.callApi(
         '/people/{personId}/favorite-sites/{siteId}', 'GET',
@@ -416,7 +416,7 @@
      * Callback function to receive the result of the getFavoriteSites operation.
      * @callback module:api/PeopleApi~getFavoriteSitesCallback
      * @param {String} error Error message, if any.
-     * @param {module:model/FavoriteSitePaging} data The data returned by the service call.
+     * @param {module:model/SitePaging} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -429,7 +429,7 @@
      * @param {Integer} opts.maxItems The maximum number of items to return in the list.
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * @param {module:api/PeopleApi~getFavoriteSitesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/FavoriteSitePaging}
+     * data is of type: {module:model/SitePaging}
      */
     this.getFavoriteSites = function(personId, opts, callback) {
       opts = opts || {};
@@ -454,10 +454,10 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
-      var returnType = FavoriteSitePaging;
+      var returnType = SitePaging;
 
       return this.apiClient.callApi(
         '/people/{personId}/favorite-sites', 'GET',
@@ -510,7 +510,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = FavoritePaging;
@@ -560,7 +560,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = PersonEntry;
@@ -617,7 +617,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = PersonNetworkEntry;
@@ -671,7 +671,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = PersonNetworkPaging;
@@ -728,7 +728,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = PreferenceEntry;
@@ -782,7 +782,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = PreferencePaging;
@@ -840,7 +840,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = SitePaging;
@@ -897,7 +897,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = SiteMembershipRequestEntry;
@@ -951,7 +951,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = SiteMembershipRequestPaging;
@@ -1003,7 +1003,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -1055,7 +1055,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -1113,7 +1113,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;

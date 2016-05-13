@@ -18,7 +18,7 @@
   /**
    * The FavoritePaging model module.
    * @module model/FavoritePaging
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

@@ -18,7 +18,7 @@
   /**
    * The CommentPagingList model module.
    * @module model/CommentPagingList
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

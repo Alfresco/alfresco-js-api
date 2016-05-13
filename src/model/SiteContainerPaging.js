@@ -18,7 +18,7 @@
   /**
    * The SiteContainerPaging model module.
    * @module model/SiteContainerPaging
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

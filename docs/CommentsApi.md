@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 Add a comment
 
-Creates one or more comments on node **nodeId**. You can create more than one comment by\nspecifying a list of comments in the JSON body like this:\n\n&#x60;&#x60;&#x60;JSON\n[\n  {\n    \&quot;content\&quot;: \&quot;This is a comment\&quot;\n  },\n  {\n    \&quot;content\&quot;: \&quot;This is another comment\&quot;\n  }\n]\n&#x60;&#x60;&#x60;\n
+Creates one or more comments on node **nodeId**. You can create more than one comment by \nspecifying a list of comments in the JSON body like this:      \n\n&#x60;&#x60;&#x60;JSON\n[\n  {\n    \&quot;content\&quot;: \&quot;This is a comment\&quot;\n  },\n  {\n    \&quot;content\&quot;: \&quot;This is another comment\&quot;\n  }\n]\n&#x60;&#x60;&#x60;\n
 
 ### Example
 ```javascript
@@ -27,12 +27,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.CommentsApi()
 
@@ -64,7 +58,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -88,12 +82,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.CommentsApi()
 
@@ -130,7 +118,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -154,12 +142,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.CommentsApi()
 
@@ -191,7 +173,7 @@ null (empty response body)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -215,12 +197,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.CommentsApi()
 
@@ -259,7 +235,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 

@@ -18,17 +18,18 @@
   /**
    * The FavoriteBody model module.
    * @module model/FavoriteBody
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>FavoriteBody</code>.
    * @alias module:model/FavoriteBody
    * @class
+   * @param target
    */
-  var exports = function() {
+  var exports = function(target) {
 
-
+    this['target'] = target;
   };
 
   /**

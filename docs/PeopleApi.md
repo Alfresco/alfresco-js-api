@@ -44,12 +44,6 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
-
 var apiInstance = new AlfrescoCoreRestApi.PeopleApi()
 
 var personId = "personId_example"; // {String} The identifier of a person.
@@ -80,7 +74,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -104,12 +98,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.PeopleApi()
 
@@ -141,7 +129,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -165,12 +153,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.PeopleApi()
 
@@ -202,7 +184,7 @@ null (empty response body)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -211,7 +193,7 @@ null (empty response body)
 
 <a name="favoriteSite"></a>
 # **favoriteSite**
-> FavoriteSite favoriteSite(personIdfavoriteSiteBody)
+> InlineResponse201 favoriteSite(personIdfavoriteSiteBody)
 
 Favorite a site
 
@@ -226,12 +208,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.PeopleApi()
 
@@ -259,11 +235,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FavoriteSite**](FavoriteSite.md)
+[**InlineResponse201**](InlineResponse201.md)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -287,12 +263,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.PeopleApi()
 
@@ -333,7 +303,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -357,12 +327,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.PeopleApi()
 
@@ -398,7 +362,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -407,7 +371,7 @@ Name | Type | Description  | Notes
 
 <a name="getFavoriteSite"></a>
 # **getFavoriteSite**
-> FavoriteSite getFavoriteSite(personIdsiteId, , opts)
+> SiteEntry getFavoriteSite(personIdsiteId, , opts)
 
 Get a favorite site
 
@@ -422,12 +386,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.PeopleApi()
 
@@ -459,11 +417,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FavoriteSite**](FavoriteSite.md)
+[**SiteEntry**](SiteEntry.md)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -472,7 +430,7 @@ Name | Type | Description  | Notes
 
 <a name="getFavoriteSites"></a>
 # **getFavoriteSites**
-> FavoriteSitePaging getFavoriteSites(personId, opts)
+> SitePaging getFavoriteSites(personId, opts)
 
 Get favorite sites
 
@@ -487,12 +445,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.PeopleApi()
 
@@ -525,11 +477,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FavoriteSitePaging**](FavoriteSitePaging.md)
+[**SitePaging**](SitePaging.md)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -553,12 +505,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.PeopleApi()
 
@@ -597,7 +543,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -621,12 +567,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.PeopleApi()
 
@@ -659,7 +599,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -683,12 +623,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.PeopleApi()
 
@@ -724,7 +658,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -748,12 +682,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.PeopleApi()
 
@@ -790,7 +718,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -814,12 +742,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.PeopleApi()
 
@@ -855,7 +777,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -879,12 +801,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.PeopleApi()
 
@@ -921,7 +837,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -945,12 +861,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.PeopleApi()
 
@@ -991,7 +901,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -1015,12 +925,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.PeopleApi()
 
@@ -1056,7 +960,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -1080,12 +984,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.PeopleApi()
 
@@ -1122,7 +1020,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -1146,12 +1044,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.PeopleApi()
 
@@ -1183,7 +1075,7 @@ null (empty response body)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -1207,12 +1099,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.PeopleApi()
 
@@ -1244,7 +1130,7 @@ null (empty response body)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -1268,12 +1154,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.PeopleApi()
 
@@ -1308,7 +1188,7 @@ null (empty response body)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 

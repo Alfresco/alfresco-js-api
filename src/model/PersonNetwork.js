@@ -18,7 +18,7 @@
   /**
    * The PersonNetwork model module.
    * @module model/PersonNetwork
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

@@ -18,7 +18,7 @@
   /**
    * The ActivityPagingList model module.
    * @module model/ActivityPagingList
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

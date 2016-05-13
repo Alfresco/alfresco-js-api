@@ -18,17 +18,18 @@
   /**
    * The CommentBody1 model module.
    * @module model/CommentBody1
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>CommentBody1</code>.
    * @alias module:model/CommentBody1
    * @class
+   * @param content
    */
-  var exports = function() {
+  var exports = function(content) {
 
-
+    this['content'] = content;
   };
 
   /**

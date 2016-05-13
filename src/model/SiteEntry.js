@@ -18,7 +18,7 @@
   /**
    * The SiteEntry model module.
    * @module model/SiteEntry
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

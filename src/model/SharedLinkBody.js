@@ -18,7 +18,7 @@
   /**
    * The SharedLinkBody model module.
    * @module model/SharedLinkBody
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

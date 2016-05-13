@@ -1412,7 +1412,7 @@ module.exports = function(arr, fn, initial){
 
   /**
    * @module ApiClient
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -1435,8 +1435,7 @@ module.exports = function(arr, fn, initial){
      * @type {Array.<String>}
      */
     this.authentications = {
-      'basicAuth': {type: 'basic'},
-      'ticketAuth': {type: 'apiKey', 'in': 'query', name: 'alf_ticket'}
+      'basicAuth': {type: 'basic'}
     };
     /**
      * The default HTTP headers to be included for all API calls.
@@ -1868,7 +1867,7 @@ module.exports = function(arr, fn, initial){
 }));
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":28,"fs":27,"superagent":2}],6:[function(require,module,exports){
+},{"buffer":31,"fs":30,"superagent":2}],6:[function(require,module,exports){
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -1889,7 +1888,7 @@ module.exports = function(arr, fn, initial){
   /**
    * Nodes service.
    * @module api/NodesApi
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -1913,7 +1912,7 @@ module.exports = function(arr, fn, initial){
 
     /**
      * Create a node
-     * Creates a node as a child of the node with identifier **nodeId**.\n\nYou must specify at least a **name** and **nodeType**. For example, to create a folder:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;name\&quot;:\&quot;My Folder\&quot;,\n  \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;\n}\n&#x60;&#x60;&#x60;\n\nYou can create an empty file like this:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;name\&quot;:\&quot;My text file.txt\&quot;,\n  \&quot;nodeType\&quot;:\&quot;cm:content\&quot;,\n  \&quot;content\&quot;:\n   {\n     \&quot;mimeType\&quot;:\&quot;text/plain\&quot;\n   }\n}\n&#x60;&#x60;&#x60;\nYou can update binary content using the &#x60;&#x60;&#x60;PUT /nodes/{nodeId}&#x60;&#x60;&#x60; API method.\n\nYou can create a folder, or other node, inside a folder hierarchy:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;name\&quot;:\&quot;My Special Folder\&quot;,\n  \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;,\n  \&quot;relativePath\&quot;:\&quot;X/Y/Z\&quot;\n}\n&#x60;&#x60;&#x60;\nThe **relativePath** specifies the folder structure to create relative to the node identified by  **nodeId**. Folders in the\n**relativePath** that do not exist are created before the node is created.\n\nYou can set properties when you create a new node:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;name\&quot;:\&quot;My Other Folder\&quot;,\n  \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;,\n  \&quot;properties\&quot;:\n    {\n      \&quot;cm:title\&quot;:\&quot;Folder title\&quot;,\n      \&quot;cm:description\&quot;:\&quot;This is an important folder\&quot;\n    }\n}\n&#x60;&#x60;&#x60;\nAny missing aspects are auto-applied. For example, **cm:titled** in the JSON shown above. You can set aspects\nexplicitly set, if needed, using an **aspectNames** field.\n\nThis API method also supports file upload using multipart/form-data.\n\nUse the **filedata** field to represent the content to upload.\nYou can use a **filename** field to give an alternative name for the new file.\n\nUse **overwrite** to overwrite an existing file, matched by name. If the file is versionable,\nthe existing content is replaced.\n\nWhen you overwrite overwrite existing content, you can set the **majorVersion** boolean field to **true** to indicate a major version\nshould be created. The default for **majorVersion** is **false**.\nSetting  **majorVersion** enables versioning of the node, if it is not already versioned.\n\nWhen you overwrite overwrite existing content, you can use the **comment** field to add a version comment that appears in the\nversion history. This also enables versioning of this node, if it is not already versioned.\n\nYou can set the **autoRename** boolean field to automatically resolve name clashes. If there is a name clash, then\nthe API method tries to create\na unique name using an integer suffix.\n\nAny field in the JSON body defined below can also be passed as a form-data field.\n
+     * Creates a node as a (primary) child of the node with identifier **nodeId**.\n\nYou must specify at least a **name** and **nodeType**. For example, to create a folder:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;name\&quot;:\&quot;My Folder\&quot;,\n  \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;\n}\n&#x60;&#x60;&#x60;\n\nYou can create an empty file like this:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;name\&quot;:\&quot;My text file.txt\&quot;,\n  \&quot;nodeType\&quot;:\&quot;cm:content\&quot;,\n  \&quot;content\&quot;:\n   {\n     \&quot;mimeType\&quot;:\&quot;text/plain\&quot;\n   }\n}\n&#x60;&#x60;&#x60;\nYou can update binary content using the &#x60;&#x60;&#x60;PUT /nodes/{nodeId}&#x60;&#x60;&#x60; API method.\n\nYou can create a folder, or other node, inside a folder hierarchy:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;name\&quot;:\&quot;My Special Folder\&quot;,\n  \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;,\n  \&quot;relativePath\&quot;:\&quot;X/Y/Z\&quot;\n}\n&#x60;&#x60;&#x60;\nThe **relativePath** specifies the folder structure to create relative to the node identified by  **nodeId**. Folders in the\n**relativePath** that do not exist are created before the node is created.\n\nYou can set properties when you create a new node:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;name\&quot;:\&quot;My Other Folder\&quot;,\n  \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;,\n  \&quot;properties\&quot;:\n    {\n      \&quot;cm:title\&quot;:\&quot;Folder title\&quot;,\n      \&quot;cm:description\&quot;:\&quot;This is an important folder\&quot;\n    }\n}\n&#x60;&#x60;&#x60;\nAny missing aspects are auto-applied. For example, **cm:titled** in the JSON shown above. You can set aspects\nexplicitly set, if needed, using an **aspectNames** field.\n\nThis API method also supports file upload using multipart/form-data.\n\nUse the **filedata** field to represent the content to upload.\nYou can use a **filename** field to give an alternative name for the new file.\n\nUse **overwrite** to overwrite an existing file, matched by name. If the file is versionable,\nthe existing content is replaced.\n\nWhen you overwrite overwrite existing content, you can set the **majorVersion** boolean field to **true** to indicate a major version\nshould be created. The default for **majorVersion** is **false**.\nSetting  **majorVersion** enables versioning of the node, if it is not already versioned.\n\nWhen you overwrite overwrite existing content, you can use the **comment** field to add a version comment that appears in the\nversion history. This also enables versioning of this node, if it is not already versioned.\n\nYou can set the **autoRename** boolean field to automatically resolve name clashes. If there is a name clash, then\nthe API method tries to create\na unique name using an integer suffix.\n\nAny field in the JSON body defined below can also be passed as a form-data field.\n
      * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases:\n* -my-\n* -shared-\n* -root-\n
      * @param {module:model/NodeBody1} nodeBody The node information to create.
      * @param {Object} opts Optional parameters
@@ -1951,7 +1950,7 @@ module.exports = function(arr, fn, initial){
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json', 'multipart/form-data'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
@@ -2009,7 +2008,7 @@ module.exports = function(arr, fn, initial){
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
@@ -2031,7 +2030,7 @@ module.exports = function(arr, fn, initial){
 
     /**
      * Delete a node
-     * Deletes the node with identifier **nodeId**.\nIf the **nodeId** is a folder, then its children are also deleted.\nDeleted nodes move to the trashcan unless the **permanent** query parameter is true, and the current user is the owner or an admin.\n
+     * Deletes the node with identifier **nodeId**.\nIf the **nodeId** is a folder, then its children are also deleted.\nDeleted nodes move to the trashcan unless the **permanent** query parameter is true, and the current user is the owner or an admin.\n\nDeleting a node removes the child associations, ie. both primary and also secondary, if any.\n
      * @param {String} nodeId The identifier of a node.
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.permanent If **true** then the node is deleted permanently, without it moving to the trashcan.\nYou must be the owner or an admin to permanently delete the node.\n (default to false)
@@ -2058,7 +2057,7 @@ module.exports = function(arr, fn, initial){
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -2108,7 +2107,7 @@ module.exports = function(arr, fn, initial){
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = DeletedNodeEntry;
@@ -2134,7 +2133,7 @@ module.exports = function(arr, fn, initial){
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
      * @param {Integer} opts.maxItems The maximum number of items to return in the list.
-     * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested:\n* properties\n* aspectNames\n* path\n* isLink\n* allowableOperations\n
+     * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested:\n* properties\n* aspectNames\n* path\n* isLink\n* allowableOperations\n* association\n
      * @param {module:api/NodesApi~getDeletedNodesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/DeletedNodesPaging}
      */
@@ -2155,7 +2154,7 @@ module.exports = function(arr, fn, initial){
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = DeletedNodesPaging;
@@ -2206,7 +2205,7 @@ module.exports = function(arr, fn, initial){
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -2260,7 +2259,7 @@ module.exports = function(arr, fn, initial){
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
@@ -2282,14 +2281,14 @@ module.exports = function(arr, fn, initial){
 
     /**
      * Get node children
-     * Returns the children of the node with identifier **nodeId**.\nMinimal information for each child is returned by default.\nYou can use the **include** parameter to return addtional information.\n
+     * Returns the children of the node with identifier **nodeId**.\nMinimal information for each child is returned by default.\nYou can use the **include** parameter to return addtional information.\n\nThe list of child nodes includes primary children and also secondary children, if any.\n
      * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases:\n* -my-\n* -shared-\n* -root-\n
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
      * @param {Integer} opts.maxItems The maximum number of items to return in the list.
      * @param {String} opts.orderBy If not specified then default sort is for folders to be sorted before files, and by ascending name\ni.e. \&quot;orderBy&#x3D;isFolder DESC,name ASC\&quot;.\n\nThis default can be completely overridden by specifying a specific orderBy consisting of one, two or\nthree comma-separated list of properties (with optional ASCending or DESCending), for example,\nspecifying \u201CorderBy&#x3D;name DESC\u201D would return a mixed folder/file list.\n\nThe following properties can be used to order the results:\n* isFolder\n* name\n* mimeType\n* nodeType\n* sizeInBytes\n* modifiedAt\n* createdAt\n* modifiedByUser\n* createdByUser\n
      * @param {String} opts.where Optionally filter the list. Here are some examples:\n\n*   where&#x3D;(isFolder&#x3D;true)\n\n*   where&#x3D;(isFile&#x3D;true)\n\n*   where&#x3D;(nodeType&#x3D;&#39;my:specialtype&#39;)\n\n*   where&#x3D;(nodeType&#x3D;&#39;my:specialtype&#39; INCLUDESUBTYPES)\n
-     * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested:\n* properties\n* aspectNames\n* path\n* isLink\n* allowableOperations\n
+     * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested:\n* properties\n* aspectNames\n* path\n* isLink\n* allowableOperations\n* association\n
      * @param {String} opts.relativePath Return information on children within the folder resolved by this path (relative to specified nodeId as the starting parent folder)
      * @param {Boolean} opts.includeSource Also include \&quot;source\&quot; (in addition to \&quot;entries\&quot;) with folder information on parent node (either the specified parent \&quot;nodeId\&quot; or as resolved by \&quot;relativePath\&quot;)
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
@@ -2324,7 +2323,7 @@ module.exports = function(arr, fn, initial){
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodePaging;
@@ -2346,7 +2345,7 @@ module.exports = function(arr, fn, initial){
 
     /**
      * Move a node
-     * Move the node **nodeId** to the parent folder node **targetParentId**.  in request body.\nThe **targetParentId** is specified in the in request body.\n\nThe moved node retains its name unless you specify a new **name** in the request body.\n\nIf the source **nodeId** is a folder, then all of its children are also moved.\n
+     * Move the node **nodeId** to the parent folder node **targetParentId**.  in request body.\nThe **targetParentId** is specified in the in request body.\n\nThe moved node retains its name unless you specify a new **name** in the request body.\n\nIf the source **nodeId** is a folder, then all of its children are also moved.\n\nThe move will effectively change the primary parent\n
      * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases:\n* -my-\n* -shared-\n* -root-\n
      * @param {module:model/MoveBody} moveBody The targetParentId and, optionally, a new name.
      * @param {Object} opts Optional parameters
@@ -2382,7 +2381,7 @@ module.exports = function(arr, fn, initial){
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
@@ -2427,7 +2426,7 @@ module.exports = function(arr, fn, initial){
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -2473,7 +2472,7 @@ module.exports = function(arr, fn, initial){
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
@@ -2535,7 +2534,7 @@ module.exports = function(arr, fn, initial){
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/octet-stream'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
@@ -2593,7 +2592,7 @@ module.exports = function(arr, fn, initial){
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
@@ -2609,7 +2608,7 @@ module.exports = function(arr, fn, initial){
   return exports;
 }));
 
-},{"../ApiClient":5,"../model/CopyBody":8,"../model/DeletedNodeEntry":10,"../model/DeletedNodesPaging":11,"../model/Error":13,"../model/MoveBody":16,"../model/NodeBody":17,"../model/NodeBody1":18,"../model/NodeEntry":19,"../model/NodePaging":21}],7:[function(require,module,exports){
+},{"../ApiClient":5,"../model/CopyBody":8,"../model/DeletedNodeEntry":10,"../model/DeletedNodesPaging":13,"../model/Error":15,"../model/MoveBody":17,"../model/NodeBody":18,"../model/NodeBody1":19,"../model/NodeEntry":20,"../model/NodePaging":24}],7:[function(require,module,exports){
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -2630,7 +2629,7 @@ module.exports = function(arr, fn, initial){
   /**
    * The ContentInfo model module.
    * @module model/ContentInfo
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -2721,7 +2720,7 @@ module.exports = function(arr, fn, initial){
   /**
    * The CopyBody model module.
    * @module model/CopyBody
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -2777,36 +2776,36 @@ module.exports = function(arr, fn, initial){
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient', './ContentInfo', './NodeEntry', './UserInfo'], factory);
+    define(['../ApiClient', './ContentInfo', './NodeFull', './UserInfo'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./ContentInfo'), require('./NodeEntry'), require('./UserInfo'));
+    module.exports = factory(require('../ApiClient'), require('./ContentInfo'), require('./NodeFull'), require('./UserInfo'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoCoreRestApi) {
       root.AlfrescoCoreRestApi = {};
     }
-    root.AlfrescoCoreRestApi.DeletedNode = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.ContentInfo, root.AlfrescoCoreRestApi.NodeEntry, root.AlfrescoCoreRestApi.UserInfo);
+    root.AlfrescoCoreRestApi.DeletedNode = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.ContentInfo, root.AlfrescoCoreRestApi.NodeFull, root.AlfrescoCoreRestApi.UserInfo);
   }
-}(this, function(ApiClient, ContentInfo, NodeEntry, UserInfo) {
+}(this, function(ApiClient, ContentInfo, NodeFull, UserInfo) {
   'use strict';
 
   /**
    * The DeletedNode model module.
    * @module model/DeletedNode
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>DeletedNode</code>.
    * @alias module:model/DeletedNode
    * @class
-   * @extends module:model/NodeEntry
+   * @extends module:model/NodeFull
    * @param archivedByUser
    * @param archivedAt
    */
   var exports = function(archivedByUser, archivedAt) {
-    NodeEntry.call(this);
+    NodeFull.call(this);
     this['archivedByUser'] = archivedByUser;
     this['archivedAt'] = archivedAt;
   };
@@ -2821,7 +2820,7 @@ module.exports = function(arr, fn, initial){
   exports.constructFromObject = function(data, obj) {
     if (data) { 
       obj = obj || new exports();
-      NodeEntry.constructFromObject(data, obj);
+      NodeFull.constructFromObject(data, obj);
       if (data.hasOwnProperty('archivedByUser')) {
         obj['archivedByUser'] = UserInfo.constructFromObject(data['archivedByUser']);
       }
@@ -2832,7 +2831,7 @@ module.exports = function(arr, fn, initial){
     return obj;
   }
 
-  exports.prototype = Object.create(NodeEntry.prototype);
+  exports.prototype = Object.create(NodeFull.prototype);
   exports.prototype.constructor = exports;
 
 
@@ -2852,7 +2851,7 @@ module.exports = function(arr, fn, initial){
   return exports;
 }));
 
-},{"../ApiClient":5,"./ContentInfo":7,"./NodeEntry":19,"./UserInfo":26}],10:[function(require,module,exports){
+},{"../ApiClient":5,"./ContentInfo":7,"./NodeFull":21,"./UserInfo":29}],10:[function(require,module,exports){
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -2873,7 +2872,7 @@ module.exports = function(arr, fn, initial){
   /**
    * The DeletedNodeEntry model module.
    * @module model/DeletedNodeEntry
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -2920,6 +2919,149 @@ module.exports = function(arr, fn, initial){
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
+    define(['../ApiClient', './ContentInfo', './NodeMinimal', './PathElement', './UserInfo'], factory);
+  } else if (typeof module === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../ApiClient'), require('./ContentInfo'), require('./NodeMinimal'), require('./PathElement'), require('./UserInfo'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoCoreRestApi) {
+      root.AlfrescoCoreRestApi = {};
+    }
+    root.AlfrescoCoreRestApi.DeletedNodeMinimal = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.ContentInfo, root.AlfrescoCoreRestApi.NodeMinimal, root.AlfrescoCoreRestApi.PathElement, root.AlfrescoCoreRestApi.UserInfo);
+  }
+}(this, function(ApiClient, ContentInfo, NodeMinimal, PathElement, UserInfo) {
+  'use strict';
+
+  /**
+   * The DeletedNodeMinimal model module.
+   * @module model/DeletedNodeMinimal
+   * @version 0.1.0
+   */
+
+  /**
+   * Constructs a new <code>DeletedNodeMinimal</code>.
+   * @alias module:model/DeletedNodeMinimal
+   * @class
+   * @extends module:model/NodeMinimal
+   * @param archivedByUser
+   * @param archivedAt
+   */
+  var exports = function(archivedByUser, archivedAt) {
+    NodeMinimal.call(this);
+    this['archivedByUser'] = archivedByUser;
+    this['archivedAt'] = archivedAt;
+  };
+
+  /**
+   * Constructs a <code>DeletedNodeMinimal</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/DeletedNodeMinimal} obj Optional instance to populate.
+   * @return {module:model/DeletedNodeMinimal} The populated <code>DeletedNodeMinimal</code> instance.
+   */
+  exports.constructFromObject = function(data, obj) {
+    if (data) { 
+      obj = obj || new exports();
+      NodeMinimal.constructFromObject(data, obj);
+      if (data.hasOwnProperty('archivedByUser')) {
+        obj['archivedByUser'] = UserInfo.constructFromObject(data['archivedByUser']);
+      }
+      if (data.hasOwnProperty('archivedAt')) {
+        obj['archivedAt'] = ApiClient.convertToType(data['archivedAt'], 'Date');
+      }
+    }
+    return obj;
+  }
+
+  exports.prototype = Object.create(NodeMinimal.prototype);
+  exports.prototype.constructor = exports;
+
+
+  /**
+   * @member {module:model/UserInfo} archivedByUser
+   */
+  exports.prototype['archivedByUser'] = undefined;
+
+  /**
+   * @member {Date} archivedAt
+   */
+  exports.prototype['archivedAt'] = undefined;
+
+
+
+
+  return exports;
+}));
+
+},{"../ApiClient":5,"./ContentInfo":7,"./NodeMinimal":22,"./PathElement":28,"./UserInfo":29}],12:[function(require,module,exports){
+(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../ApiClient', './DeletedNodeMinimal'], factory);
+  } else if (typeof module === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../ApiClient'), require('./DeletedNodeMinimal'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoCoreRestApi) {
+      root.AlfrescoCoreRestApi = {};
+    }
+    root.AlfrescoCoreRestApi.DeletedNodeMinimalEntry = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.DeletedNodeMinimal);
+  }
+}(this, function(ApiClient, DeletedNodeMinimal) {
+  'use strict';
+
+  /**
+   * The DeletedNodeMinimalEntry model module.
+   * @module model/DeletedNodeMinimalEntry
+   * @version 0.1.0
+   */
+
+  /**
+   * Constructs a new <code>DeletedNodeMinimalEntry</code>.
+   * @alias module:model/DeletedNodeMinimalEntry
+   * @class
+   */
+  var exports = function() {
+
+
+  };
+
+  /**
+   * Constructs a <code>DeletedNodeMinimalEntry</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/DeletedNodeMinimalEntry} obj Optional instance to populate.
+   * @return {module:model/DeletedNodeMinimalEntry} The populated <code>DeletedNodeMinimalEntry</code> instance.
+   */
+  exports.constructFromObject = function(data, obj) {
+    if (data) { 
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('entry')) {
+        obj['entry'] = DeletedNodeMinimal.constructFromObject(data['entry']);
+      }
+    }
+    return obj;
+  }
+
+
+  /**
+   * @member {module:model/DeletedNodeMinimal} entry
+   */
+  exports.prototype['entry'] = undefined;
+
+
+
+
+  return exports;
+}));
+
+},{"../ApiClient":5,"./DeletedNodeMinimal":11}],13:[function(require,module,exports){
+(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
     define(['../ApiClient', './DeletedNodesPagingList'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
@@ -2937,7 +3079,7 @@ module.exports = function(arr, fn, initial){
   /**
    * The DeletedNodesPaging model module.
    * @module model/DeletedNodesPaging
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -2980,28 +3122,28 @@ module.exports = function(arr, fn, initial){
   return exports;
 }));
 
-},{"../ApiClient":5,"./DeletedNodesPagingList":12}],12:[function(require,module,exports){
+},{"../ApiClient":5,"./DeletedNodesPagingList":14}],14:[function(require,module,exports){
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient', './Pagination'], factory);
+    define(['../ApiClient', './DeletedNodeMinimalEntry', './Pagination'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./Pagination'));
+    module.exports = factory(require('../ApiClient'), require('./DeletedNodeMinimalEntry'), require('./Pagination'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoCoreRestApi) {
       root.AlfrescoCoreRestApi = {};
     }
-    root.AlfrescoCoreRestApi.DeletedNodesPagingList = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Pagination);
+    root.AlfrescoCoreRestApi.DeletedNodesPagingList = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.DeletedNodeMinimalEntry, root.AlfrescoCoreRestApi.Pagination);
   }
-}(this, function(ApiClient, Pagination) {
+}(this, function(ApiClient, DeletedNodeMinimalEntry, Pagination) {
   'use strict';
 
   /**
    * The DeletedNodesPagingList model module.
    * @module model/DeletedNodesPagingList
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -3010,6 +3152,7 @@ module.exports = function(arr, fn, initial){
    * @class
    */
   var exports = function() {
+
 
 
   };
@@ -3025,6 +3168,9 @@ module.exports = function(arr, fn, initial){
     if (data) { 
       obj = obj || new exports();
 
+      if (data.hasOwnProperty('entries')) {
+        obj['entries'] = ApiClient.convertToType(data['entries'], [DeletedNodeMinimalEntry]);
+      }
       if (data.hasOwnProperty('pagination')) {
         obj['pagination'] = Pagination.constructFromObject(data['pagination']);
       }
@@ -3032,6 +3178,11 @@ module.exports = function(arr, fn, initial){
     return obj;
   }
 
+
+  /**
+   * @member {Array.<module:model/DeletedNodeMinimalEntry>} entries
+   */
+  exports.prototype['entries'] = undefined;
 
   /**
    * @member {module:model/Pagination} pagination
@@ -3044,7 +3195,7 @@ module.exports = function(arr, fn, initial){
   return exports;
 }));
 
-},{"../ApiClient":5,"./Pagination":24}],13:[function(require,module,exports){
+},{"../ApiClient":5,"./DeletedNodeMinimalEntry":12,"./Pagination":27}],15:[function(require,module,exports){
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -3065,7 +3216,7 @@ module.exports = function(arr, fn, initial){
   /**
    * The Error model module.
    * @module model/Error
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -3108,7 +3259,7 @@ module.exports = function(arr, fn, initial){
   return exports;
 }));
 
-},{"../ApiClient":5,"./ErrorError":14}],14:[function(require,module,exports){
+},{"../ApiClient":5,"./ErrorError":16}],16:[function(require,module,exports){
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -3129,7 +3280,7 @@ module.exports = function(arr, fn, initial){
   /**
    * The ErrorError model module.
    * @module model/ErrorError
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -3146,6 +3297,7 @@ module.exports = function(arr, fn, initial){
 
     this['briefSummary'] = briefSummary;
     this['descriptionURL'] = descriptionURL;
+
     this['stackTrace'] = stackTrace;
     this['statusCode'] = statusCode;
   };
@@ -3169,6 +3321,9 @@ module.exports = function(arr, fn, initial){
       }
       if (data.hasOwnProperty('descriptionURL')) {
         obj['descriptionURL'] = ApiClient.convertToType(data['descriptionURL'], 'String');
+      }
+      if (data.hasOwnProperty('logId')) {
+        obj['logId'] = ApiClient.convertToType(data['logId'], 'String');
       }
       if (data.hasOwnProperty('stackTrace')) {
         obj['stackTrace'] = ApiClient.convertToType(data['stackTrace'], 'String');
@@ -3197,6 +3352,11 @@ module.exports = function(arr, fn, initial){
   exports.prototype['descriptionURL'] = undefined;
 
   /**
+   * @member {String} logId
+   */
+  exports.prototype['logId'] = undefined;
+
+  /**
    * @member {String} stackTrace
    */
   exports.prototype['stackTrace'] = undefined;
@@ -3212,170 +3372,7 @@ module.exports = function(arr, fn, initial){
   return exports;
 }));
 
-},{"../ApiClient":5}],15:[function(require,module,exports){
-(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['../ApiClient', './ContentInfo', './PathElement', './UserInfo'], factory);
-  } else if (typeof module === 'object' && module.exports) {
-    // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./ContentInfo'), require('./PathElement'), require('./UserInfo'));
-  } else {
-    // Browser globals (root is window)
-    if (!root.AlfrescoCoreRestApi) {
-      root.AlfrescoCoreRestApi = {};
-    }
-    root.AlfrescoCoreRestApi.MinimalNode = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.ContentInfo, root.AlfrescoCoreRestApi.PathElement, root.AlfrescoCoreRestApi.UserInfo);
-  }
-}(this, function(ApiClient, ContentInfo, PathElement, UserInfo) {
-  'use strict';
-
-  /**
-   * The MinimalNode model module.
-   * @module model/MinimalNode
-   * @version 1
-   */
-
-  /**
-   * Constructs a new <code>MinimalNode</code>.
-   * @alias module:model/MinimalNode
-   * @class
-   */
-  var exports = function() {
-
-
-
-
-
-
-
-
-
-
-
-
-
-  };
-
-  /**
-   * Constructs a <code>MinimalNode</code> from a plain JavaScript object, optionally creating a new instance.
-   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
-   * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/MinimalNode} obj Optional instance to populate.
-   * @return {module:model/MinimalNode} The populated <code>MinimalNode</code> instance.
-   */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
-
-      if (data.hasOwnProperty('id')) {
-        obj['id'] = ApiClient.convertToType(data['id'], 'String');
-      }
-      if (data.hasOwnProperty('parentId')) {
-        obj['parentId'] = ApiClient.convertToType(data['parentId'], 'String');
-      }
-      if (data.hasOwnProperty('name')) {
-        obj['name'] = ApiClient.convertToType(data['name'], 'String');
-      }
-      if (data.hasOwnProperty('nodeType')) {
-        obj['nodeType'] = ApiClient.convertToType(data['nodeType'], 'String');
-      }
-      if (data.hasOwnProperty('isFolder')) {
-        obj['isFolder'] = ApiClient.convertToType(data['isFolder'], 'Boolean');
-      }
-      if (data.hasOwnProperty('isFile')) {
-        obj['isFile'] = ApiClient.convertToType(data['isFile'], 'Boolean');
-      }
-      if (data.hasOwnProperty('modifiedAt')) {
-        obj['modifiedAt'] = ApiClient.convertToType(data['modifiedAt'], 'Date');
-      }
-      if (data.hasOwnProperty('modifiedByUser')) {
-        obj['modifiedByUser'] = UserInfo.constructFromObject(data['modifiedByUser']);
-      }
-      if (data.hasOwnProperty('createdAt')) {
-        obj['createdAt'] = ApiClient.convertToType(data['createdAt'], 'Date');
-      }
-      if (data.hasOwnProperty('createdByUser')) {
-        obj['createdByUser'] = UserInfo.constructFromObject(data['createdByUser']);
-      }
-      if (data.hasOwnProperty('content')) {
-        obj['content'] = ContentInfo.constructFromObject(data['content']);
-      }
-      if (data.hasOwnProperty('path')) {
-        obj['path'] = PathElement.constructFromObject(data['path']);
-      }
-    }
-    return obj;
-  }
-
-
-  /**
-   * @member {String} id
-   */
-  exports.prototype['id'] = undefined;
-
-  /**
-   * @member {String} parentId
-   */
-  exports.prototype['parentId'] = undefined;
-
-  /**
-   * @member {String} name
-   */
-  exports.prototype['name'] = undefined;
-
-  /**
-   * @member {String} nodeType
-   */
-  exports.prototype['nodeType'] = undefined;
-
-  /**
-   * @member {Boolean} isFolder
-   */
-  exports.prototype['isFolder'] = undefined;
-
-  /**
-   * @member {Boolean} isFile
-   */
-  exports.prototype['isFile'] = undefined;
-
-  /**
-   * @member {Date} modifiedAt
-   */
-  exports.prototype['modifiedAt'] = undefined;
-
-  /**
-   * @member {module:model/UserInfo} modifiedByUser
-   */
-  exports.prototype['modifiedByUser'] = undefined;
-
-  /**
-   * @member {Date} createdAt
-   */
-  exports.prototype['createdAt'] = undefined;
-
-  /**
-   * @member {module:model/UserInfo} createdByUser
-   */
-  exports.prototype['createdByUser'] = undefined;
-
-  /**
-   * @member {module:model/ContentInfo} content
-   */
-  exports.prototype['content'] = undefined;
-
-  /**
-   * @member {module:model/PathElement} path
-   */
-  exports.prototype['path'] = undefined;
-
-
-
-
-  return exports;
-}));
-
-},{"../ApiClient":5,"./ContentInfo":7,"./PathElement":25,"./UserInfo":26}],16:[function(require,module,exports){
+},{"../ApiClient":5}],17:[function(require,module,exports){
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -3396,7 +3393,7 @@ module.exports = function(arr, fn, initial){
   /**
    * The MoveBody model module.
    * @module model/MoveBody
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -3448,7 +3445,7 @@ module.exports = function(arr, fn, initial){
   return exports;
 }));
 
-},{"../ApiClient":5}],17:[function(require,module,exports){
+},{"../ApiClient":5}],18:[function(require,module,exports){
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -3469,7 +3466,7 @@ module.exports = function(arr, fn, initial){
   /**
    * The NodeBody model module.
    * @module model/NodeBody
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -3539,7 +3536,7 @@ module.exports = function(arr, fn, initial){
   return exports;
 }));
 
-},{"../ApiClient":5}],18:[function(require,module,exports){
+},{"../ApiClient":5}],19:[function(require,module,exports){
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -3560,7 +3557,7 @@ module.exports = function(arr, fn, initial){
   /**
    * The NodeBody1 model module.
    * @module model/NodeBody1
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -3648,7 +3645,72 @@ module.exports = function(arr, fn, initial){
   return exports;
 }));
 
-},{"../ApiClient":5,"./NodesnodeIdchildrenContent":23}],19:[function(require,module,exports){
+},{"../ApiClient":5,"./NodesnodeIdchildrenContent":26}],20:[function(require,module,exports){
+(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../ApiClient', './NodeFull'], factory);
+  } else if (typeof module === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../ApiClient'), require('./NodeFull'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoCoreRestApi) {
+      root.AlfrescoCoreRestApi = {};
+    }
+    root.AlfrescoCoreRestApi.NodeEntry = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.NodeFull);
+  }
+}(this, function(ApiClient, NodeFull) {
+  'use strict';
+
+  /**
+   * The NodeEntry model module.
+   * @module model/NodeEntry
+   * @version 0.1.0
+   */
+
+  /**
+   * Constructs a new <code>NodeEntry</code>.
+   * @alias module:model/NodeEntry
+   * @class
+   * @param entry
+   */
+  var exports = function(entry) {
+
+    this['entry'] = entry;
+  };
+
+  /**
+   * Constructs a <code>NodeEntry</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/NodeEntry} obj Optional instance to populate.
+   * @return {module:model/NodeEntry} The populated <code>NodeEntry</code> instance.
+   */
+  exports.constructFromObject = function(data, obj) {
+    if (data) { 
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('entry')) {
+        obj['entry'] = NodeFull.constructFromObject(data['entry']);
+      }
+    }
+    return obj;
+  }
+
+
+  /**
+   * @member {module:model/NodeFull} entry
+   */
+  exports.prototype['entry'] = undefined;
+
+
+
+
+  return exports;
+}));
+
+},{"../ApiClient":5,"./NodeFull":21}],21:[function(require,module,exports){
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -3661,20 +3723,20 @@ module.exports = function(arr, fn, initial){
     if (!root.AlfrescoCoreRestApi) {
       root.AlfrescoCoreRestApi = {};
     }
-    root.AlfrescoCoreRestApi.NodeEntry = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.ContentInfo, root.AlfrescoCoreRestApi.UserInfo);
+    root.AlfrescoCoreRestApi.NodeFull = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.ContentInfo, root.AlfrescoCoreRestApi.UserInfo);
   }
 }(this, function(ApiClient, ContentInfo, UserInfo) {
   'use strict';
 
   /**
-   * The NodeEntry model module.
-   * @module model/NodeEntry
-   * @version 1
+   * The NodeFull model module.
+   * @module model/NodeFull
+   * @version 0.1.0
    */
 
   /**
-   * Constructs a new <code>NodeEntry</code>.
-   * @alias module:model/NodeEntry
+   * Constructs a new <code>NodeFull</code>.
+   * @alias module:model/NodeFull
    * @class
    */
   var exports = function() {
@@ -3696,11 +3758,11 @@ module.exports = function(arr, fn, initial){
   };
 
   /**
-   * Constructs a <code>NodeEntry</code> from a plain JavaScript object, optionally creating a new instance.
+   * Constructs a <code>NodeFull</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/NodeEntry} obj Optional instance to populate.
-   * @return {module:model/NodeEntry} The populated <code>NodeEntry</code> instance.
+   * @param {module:model/NodeFull} obj Optional instance to populate.
+   * @return {module:model/NodeFull} The populated <code>NodeFull</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) { 
@@ -3829,28 +3891,191 @@ module.exports = function(arr, fn, initial){
   return exports;
 }));
 
-},{"../ApiClient":5,"./ContentInfo":7,"./UserInfo":26}],20:[function(require,module,exports){
+},{"../ApiClient":5,"./ContentInfo":7,"./UserInfo":29}],22:[function(require,module,exports){
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient', './MinimalNode'], factory);
+    define(['../ApiClient', './ContentInfo', './PathElement', './UserInfo'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./MinimalNode'));
+    module.exports = factory(require('../ApiClient'), require('./ContentInfo'), require('./PathElement'), require('./UserInfo'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoCoreRestApi) {
       root.AlfrescoCoreRestApi = {};
     }
-    root.AlfrescoCoreRestApi.NodeMinimalEntry = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.MinimalNode);
+    root.AlfrescoCoreRestApi.NodeMinimal = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.ContentInfo, root.AlfrescoCoreRestApi.PathElement, root.AlfrescoCoreRestApi.UserInfo);
   }
-}(this, function(ApiClient, MinimalNode) {
+}(this, function(ApiClient, ContentInfo, PathElement, UserInfo) {
+  'use strict';
+
+  /**
+   * The NodeMinimal model module.
+   * @module model/NodeMinimal
+   * @version 0.1.0
+   */
+
+  /**
+   * Constructs a new <code>NodeMinimal</code>.
+   * @alias module:model/NodeMinimal
+   * @class
+   */
+  var exports = function() {
+
+
+
+
+
+
+
+
+
+
+
+
+
+  };
+
+  /**
+   * Constructs a <code>NodeMinimal</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/NodeMinimal} obj Optional instance to populate.
+   * @return {module:model/NodeMinimal} The populated <code>NodeMinimal</code> instance.
+   */
+  exports.constructFromObject = function(data, obj) {
+    if (data) { 
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('id')) {
+        obj['id'] = ApiClient.convertToType(data['id'], 'String');
+      }
+      if (data.hasOwnProperty('parentId')) {
+        obj['parentId'] = ApiClient.convertToType(data['parentId'], 'String');
+      }
+      if (data.hasOwnProperty('name')) {
+        obj['name'] = ApiClient.convertToType(data['name'], 'String');
+      }
+      if (data.hasOwnProperty('nodeType')) {
+        obj['nodeType'] = ApiClient.convertToType(data['nodeType'], 'String');
+      }
+      if (data.hasOwnProperty('isFolder')) {
+        obj['isFolder'] = ApiClient.convertToType(data['isFolder'], 'Boolean');
+      }
+      if (data.hasOwnProperty('isFile')) {
+        obj['isFile'] = ApiClient.convertToType(data['isFile'], 'Boolean');
+      }
+      if (data.hasOwnProperty('modifiedAt')) {
+        obj['modifiedAt'] = ApiClient.convertToType(data['modifiedAt'], 'Date');
+      }
+      if (data.hasOwnProperty('modifiedByUser')) {
+        obj['modifiedByUser'] = UserInfo.constructFromObject(data['modifiedByUser']);
+      }
+      if (data.hasOwnProperty('createdAt')) {
+        obj['createdAt'] = ApiClient.convertToType(data['createdAt'], 'Date');
+      }
+      if (data.hasOwnProperty('createdByUser')) {
+        obj['createdByUser'] = UserInfo.constructFromObject(data['createdByUser']);
+      }
+      if (data.hasOwnProperty('content')) {
+        obj['content'] = ContentInfo.constructFromObject(data['content']);
+      }
+      if (data.hasOwnProperty('path')) {
+        obj['path'] = PathElement.constructFromObject(data['path']);
+      }
+    }
+    return obj;
+  }
+
+
+  /**
+   * @member {String} id
+   */
+  exports.prototype['id'] = undefined;
+
+  /**
+   * @member {String} parentId
+   */
+  exports.prototype['parentId'] = undefined;
+
+  /**
+   * @member {String} name
+   */
+  exports.prototype['name'] = undefined;
+
+  /**
+   * @member {String} nodeType
+   */
+  exports.prototype['nodeType'] = undefined;
+
+  /**
+   * @member {Boolean} isFolder
+   */
+  exports.prototype['isFolder'] = undefined;
+
+  /**
+   * @member {Boolean} isFile
+   */
+  exports.prototype['isFile'] = undefined;
+
+  /**
+   * @member {Date} modifiedAt
+   */
+  exports.prototype['modifiedAt'] = undefined;
+
+  /**
+   * @member {module:model/UserInfo} modifiedByUser
+   */
+  exports.prototype['modifiedByUser'] = undefined;
+
+  /**
+   * @member {Date} createdAt
+   */
+  exports.prototype['createdAt'] = undefined;
+
+  /**
+   * @member {module:model/UserInfo} createdByUser
+   */
+  exports.prototype['createdByUser'] = undefined;
+
+  /**
+   * @member {module:model/ContentInfo} content
+   */
+  exports.prototype['content'] = undefined;
+
+  /**
+   * @member {module:model/PathElement} path
+   */
+  exports.prototype['path'] = undefined;
+
+
+
+
+  return exports;
+}));
+
+},{"../ApiClient":5,"./ContentInfo":7,"./PathElement":28,"./UserInfo":29}],23:[function(require,module,exports){
+(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../ApiClient', './NodeMinimal'], factory);
+  } else if (typeof module === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../ApiClient'), require('./NodeMinimal'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoCoreRestApi) {
+      root.AlfrescoCoreRestApi = {};
+    }
+    root.AlfrescoCoreRestApi.NodeMinimalEntry = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.NodeMinimal);
+  }
+}(this, function(ApiClient, NodeMinimal) {
   'use strict';
 
   /**
    * The NodeMinimalEntry model module.
    * @module model/NodeMinimalEntry
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -3876,7 +4101,7 @@ module.exports = function(arr, fn, initial){
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
-        obj['entry'] = MinimalNode.constructFromObject(data['entry']);
+        obj['entry'] = NodeMinimal.constructFromObject(data['entry']);
       }
     }
     return obj;
@@ -3884,7 +4109,7 @@ module.exports = function(arr, fn, initial){
 
 
   /**
-   * @member {module:model/MinimalNode} entry
+   * @member {module:model/NodeMinimal} entry
    */
   exports.prototype['entry'] = undefined;
 
@@ -3894,7 +4119,7 @@ module.exports = function(arr, fn, initial){
   return exports;
 }));
 
-},{"../ApiClient":5,"./MinimalNode":15}],21:[function(require,module,exports){
+},{"../ApiClient":5,"./NodeMinimal":22}],24:[function(require,module,exports){
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -3915,7 +4140,7 @@ module.exports = function(arr, fn, initial){
   /**
    * The NodePaging model module.
    * @module model/NodePaging
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -3958,7 +4183,7 @@ module.exports = function(arr, fn, initial){
   return exports;
 }));
 
-},{"../ApiClient":5,"./NodePagingList":22}],22:[function(require,module,exports){
+},{"../ApiClient":5,"./NodePagingList":25}],25:[function(require,module,exports){
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -3979,7 +4204,7 @@ module.exports = function(arr, fn, initial){
   /**
    * The NodePagingList model module.
    * @module model/NodePagingList
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -4031,7 +4256,7 @@ module.exports = function(arr, fn, initial){
   return exports;
 }));
 
-},{"../ApiClient":5,"./NodeMinimalEntry":20,"./Pagination":24}],23:[function(require,module,exports){
+},{"../ApiClient":5,"./NodeMinimalEntry":23,"./Pagination":27}],26:[function(require,module,exports){
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -4052,7 +4277,7 @@ module.exports = function(arr, fn, initial){
   /**
    * The NodesnodeIdchildrenContent model module.
    * @module model/NodesnodeIdchildrenContent
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -4104,7 +4329,7 @@ module.exports = function(arr, fn, initial){
   return exports;
 }));
 
-},{"../ApiClient":5}],24:[function(require,module,exports){
+},{"../ApiClient":5}],27:[function(require,module,exports){
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -4125,7 +4350,7 @@ module.exports = function(arr, fn, initial){
   /**
    * The Pagination model module.
    * @module model/Pagination
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -4213,7 +4438,7 @@ module.exports = function(arr, fn, initial){
   return exports;
 }));
 
-},{"../ApiClient":5}],25:[function(require,module,exports){
+},{"../ApiClient":5}],28:[function(require,module,exports){
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -4234,7 +4459,7 @@ module.exports = function(arr, fn, initial){
   /**
    * The PathElement model module.
    * @module model/PathElement
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -4286,7 +4511,7 @@ module.exports = function(arr, fn, initial){
   return exports;
 }));
 
-},{"../ApiClient":5}],26:[function(require,module,exports){
+},{"../ApiClient":5}],29:[function(require,module,exports){
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -4307,7 +4532,7 @@ module.exports = function(arr, fn, initial){
   /**
    * The UserInfo model module.
    * @module model/UserInfo
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -4359,9 +4584,9 @@ module.exports = function(arr, fn, initial){
   return exports;
 }));
 
-},{"../ApiClient":5}],27:[function(require,module,exports){
+},{"../ApiClient":5}],30:[function(require,module,exports){
 
-},{}],28:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 (function (global){
 /*!
  * The buffer module from node.js, for the browser.
@@ -5821,7 +6046,7 @@ function blitBuffer (src, dst, offset, length) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"base64-js":29,"ieee754":30,"isarray":31}],29:[function(require,module,exports){
+},{"base64-js":32,"ieee754":33,"isarray":34}],32:[function(require,module,exports){
 'use strict'
 
 exports.toByteArray = toByteArray
@@ -5932,7 +6157,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],30:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -6018,7 +6243,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],31:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {

@@ -18,7 +18,7 @@
   /**
    * The PreferenceEntry model module.
    * @module model/PreferenceEntry
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

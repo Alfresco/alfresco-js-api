@@ -18,7 +18,7 @@
   /**
    * The TagBody1 model module.
    * @module model/TagBody1
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

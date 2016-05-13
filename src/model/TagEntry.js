@@ -18,7 +18,7 @@
   /**
    * The TagEntry model module.
    * @module model/TagEntry
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

@@ -18,7 +18,7 @@
   /**
    * Renditions service.
    * @module api/RenditionsApi
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -71,7 +71,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -124,7 +124,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = RenditionEntry;
@@ -182,7 +182,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -204,7 +204,7 @@
 
     /**
      * List information for renditions
-     * Returns the rendition information for the file node with identifier **nodeId**.
+     * Returns the rendition information for the file node with identifier **nodeId**.\nThis will return rendition information, including the rendition id, for each rendition. The\u00A0rendition status is CREATED (ie. available\u00A0to view/download) or NOT_CREATED (ie. rendition can be requested).
      * @param {String} nodeId The identifier of a node.
      * @param {module:api/RenditionsApi~getRenditionsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RenditionPaging}
@@ -228,7 +228,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = RenditionPaging;
@@ -286,13 +286,59 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
       return this.apiClient.callApi(
         '/shared-links/{sharedId}/renditions/{renditionId}/content', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getSharedLinkRenditions operation.
+     * @callback module:api/RenditionsApi~getSharedLinkRenditionsCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/RenditionPaging} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * List information for created renditions
+     * Returns the rendition information for the file with shared link identifier **sharedId**.\n\nThis will only return rendition information, including the rendition id, for each rendition\nwhere the rendition status is CREATED (ie. available\u00A0to view/download).\n\n**Note:** No authentication is required to call this endpoint.      \n
+     * @param {String} sharedId The identifier of a shared link to a file.
+     * @param {module:api/RenditionsApi~getSharedLinkRenditionsCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {module:model/RenditionPaging}
+     */
+    this.getSharedLinkRenditions = function(sharedId, callback) {
+      var postBody = null;
+
+      // verify the required parameter 'sharedId' is set
+      if (sharedId == undefined || sharedId == null) {
+        throw "Missing the required parameter 'sharedId' when calling getSharedLinkRenditions";
+      }
+
+
+      var pathParams = {
+        'sharedId': sharedId
+      };
+      var queryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = RenditionPaging;
+
+      return this.apiClient.callApi(
+        '/shared-links/{sharedId}/renditions', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );

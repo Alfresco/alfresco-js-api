@@ -18,7 +18,7 @@
   /**
    * The Company model module.
    * @module model/Company
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

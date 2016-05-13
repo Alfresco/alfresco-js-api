@@ -18,18 +18,20 @@
   /**
    * The RatingBody model module.
    * @module model/RatingBody
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>RatingBody</code>.
    * @alias module:model/RatingBody
    * @class
+   * @param id
+   * @param myRating
    */
-  var exports = function() {
+  var exports = function(id, myRating) {
 
-
-
+    this['id'] = id;
+    this['myRating'] = myRating;
   };
 
   /**

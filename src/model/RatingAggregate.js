@@ -18,7 +18,7 @@
   /**
    * The RatingAggregate model module.
    * @module model/RatingAggregate
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

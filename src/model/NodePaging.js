@@ -18,7 +18,7 @@
   /**
    * The NodePaging model module.
    * @module model/NodePaging
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

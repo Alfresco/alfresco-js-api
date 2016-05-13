@@ -18,7 +18,7 @@
   /**
    * The RatingEntry model module.
    * @module model/RatingEntry
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

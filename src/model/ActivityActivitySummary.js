@@ -18,7 +18,7 @@
   /**
    * The ActivityActivitySummary model module.
    * @module model/ActivityActivitySummary
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -28,6 +28,7 @@
    * @class
    */
   var exports = function() {
+
 
 
 
@@ -49,6 +50,9 @@
       if (data.hasOwnProperty('firstName')) {
         obj['firstName'] = ApiClient.convertToType(data['firstName'], 'String');
       }
+      if (data.hasOwnProperty('lastName')) {
+        obj['lastName'] = ApiClient.convertToType(data['lastName'], 'String');
+      }
       if (data.hasOwnProperty('parentObjectId')) {
         obj['parentObjectId'] = ApiClient.convertToType(data['parentObjectId'], 'String');
       }
@@ -67,6 +71,11 @@
    * @member {String} firstName
    */
   exports.prototype['firstName'] = undefined;
+
+  /**
+   * @member {String} lastName
+   */
+  exports.prototype['lastName'] = undefined;
 
   /**
    * @member {String} parentObjectId

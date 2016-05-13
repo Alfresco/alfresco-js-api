@@ -18,7 +18,7 @@
   /**
    * The RenditionBody model module.
    * @module model/RenditionBody
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

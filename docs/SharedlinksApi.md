@@ -30,12 +30,6 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
-
 var apiInstance = new AlfrescoCoreRestApi.SharedlinksApi()
 
 var sharedLinkBody = new AlfrescoCoreRestApi.SharedLinkBody(); // {SharedLinkBody} The nodeId to create a shared link for.
@@ -69,7 +63,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -93,12 +87,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.SharedlinksApi()
 
@@ -127,7 +115,7 @@ null (empty response body)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -151,12 +139,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.SharedlinksApi()
 
@@ -188,7 +170,7 @@ null (empty response body)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -197,7 +179,7 @@ null (empty response body)
 
 <a name="findSharedLinks"></a>
 # **findSharedLinks**
-> NodeSharedLinkEntry findSharedLinks(opts)
+> NodeSharedLinkPaging findSharedLinks(opts)
 
 Find shared links
 
@@ -212,12 +194,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.SharedlinksApi()
 
@@ -247,11 +223,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NodeSharedLinkEntry**](NodeSharedLinkEntry.md)
+[**NodeSharedLinkPaging**](NodeSharedLinkPaging.md)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -275,12 +251,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.SharedlinksApi()
 
@@ -315,7 +285,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -339,12 +309,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.SharedlinksApi()
 
@@ -379,7 +343,7 @@ null (empty response body)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 

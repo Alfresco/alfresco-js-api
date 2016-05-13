@@ -18,7 +18,7 @@
   /**
    * The RenditionPaging model module.
    * @module model/RenditionPaging
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

@@ -18,7 +18,7 @@
   /**
    * The SitePaging model module.
    * @module model/SitePaging
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

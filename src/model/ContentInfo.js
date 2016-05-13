@@ -18,7 +18,7 @@
   /**
    * The ContentInfo model module.
    * @module model/ContentInfo
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

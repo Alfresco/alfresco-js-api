@@ -18,7 +18,7 @@
   /**
    * The SitePagingList model module.
    * @module model/SitePagingList
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

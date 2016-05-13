@@ -4,7 +4,9 @@ All URIs are relative to *https://localhost/alfresco/api/-default-/public/alfres
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**addAssoc**](ChangesApi.md#addAssoc) | **POST** /nodes/{sourceId}/targets | Add node association
 [**addNode**](ChangesApi.md#addNode) | **POST** /nodes/{nodeId}/children | Create a node
+[**addSecondaryChildAssoc**](ChangesApi.md#addSecondaryChildAssoc) | **POST** /nodes/{parentId}/secondary-children | Add secondary child
 [**addSharedLink**](ChangesApi.md#addSharedLink) | **POST** /shared-links | Create a shared link to a file
 [**copyNode**](ChangesApi.md#copyNode) | **POST** /nodes/{nodeId}/copy | Copy a node
 [**createRendition**](ChangesApi.md#createRendition) | **POST** /nodes/{nodeId}/renditions | Create rendition
@@ -25,21 +27,28 @@ Method | HTTP request | Description
 [**getSharedLink**](ChangesApi.md#getSharedLink) | **GET** /shared-links/{sharedId} | Get a shared link
 [**getSharedLinkContent**](ChangesApi.md#getSharedLinkContent) | **GET** /shared-links/{sharedId}/content | Get file content
 [**getSharedLinkRenditionContent**](ChangesApi.md#getSharedLinkRenditionContent) | **GET** /shared-links/{sharedId}/renditions/{renditionId}/content | Get shared link rendition content
+[**getSharedLinkRenditions**](ChangesApi.md#getSharedLinkRenditions) | **GET** /shared-links/{sharedId}/renditions | List information for created renditions
+[**listParents**](ChangesApi.md#listParents) | **GET** /nodes/{childId}/parents | List parents
+[**listSecondaryChildAssociations**](ChangesApi.md#listSecondaryChildAssociations) | **GET** /nodes/{parentId}/secondary-children | List secondary children
+[**listSourceNodeAssociations**](ChangesApi.md#listSourceNodeAssociations) | **GET** /nodes/{targetId}/sources | List node associations
+[**listTargetAssociations**](ChangesApi.md#listTargetAssociations) | **GET** /nodes/{sourceId}/targets | List node associations
 [**liveSearchNodes**](ChangesApi.md#liveSearchNodes) | **GET** /queries/live-search-nodes | Live search for nodes
 [**moveNode**](ChangesApi.md#moveNode) | **POST** /nodes/{nodeId}/move | Move a node
 [**purgeDeletedNode**](ChangesApi.md#purgeDeletedNode) | **DELETE** /deleted-nodes/{nodeId} | Purge a deleted node
+[**removeAssoc**](ChangesApi.md#removeAssoc) | **DELETE** /nodes/{sourceId}/targets/{targetId} | Remove node association(s)
+[**removeSecondaryChildAssoc**](ChangesApi.md#removeSecondaryChildAssoc) | **DELETE** /nodes/{parentId}/secondary-children/{childId} | Remove secondary child (or children)
 [**restoreNode**](ChangesApi.md#restoreNode) | **POST** /deleted-nodes/{nodeId}/restore | Restore a deleted node
 [**updateFileContent**](ChangesApi.md#updateFileContent) | **PUT** /nodes/{nodeId}/content | Update file content
 [**updateNode**](ChangesApi.md#updateNode) | **PUT** /nodes/{nodeId} | Update a node
 
 
-<a name="addNode"></a>
-# **addNode**
-> NodeEntry addNode(nodeId, nodeBody, opts)
+<a name="addAssoc"></a>
+# **addAssoc**
+> addAssoc(sourceId, assocTargetBody)
 
-Create a node
+Add node association
 
-Creates a node as a child of the node with identifier **nodeId**.\n\nYou must specify at least a **name** and **nodeType**. For example, to create a folder:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;name\&quot;:\&quot;My Folder\&quot;,\n  \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;\n}\n&#x60;&#x60;&#x60;\n\nYou can create an empty file like this:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;name\&quot;:\&quot;My text file.txt\&quot;,\n  \&quot;nodeType\&quot;:\&quot;cm:content\&quot;,\n  \&quot;content\&quot;:\n   {\n     \&quot;mimeType\&quot;:\&quot;text/plain\&quot;\n   }\n}\n&#x60;&#x60;&#x60;\nYou can update binary content using the &#x60;&#x60;&#x60;PUT /nodes/{nodeId}&#x60;&#x60;&#x60; API method.\n\nYou can create a folder, or other node, inside a folder hierarchy:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;name\&quot;:\&quot;My Special Folder\&quot;,\n  \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;,\n  \&quot;relativePath\&quot;:\&quot;X/Y/Z\&quot;\n}\n&#x60;&#x60;&#x60;\nThe **relativePath** specifies the folder structure to create relative to the node identified by  **nodeId**. Folders in the\n**relativePath** that do not exist are created before the node is created.\n\nYou can set properties when you create a new node:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;name\&quot;:\&quot;My Other Folder\&quot;,\n  \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;,\n  \&quot;properties\&quot;:\n    {\n      \&quot;cm:title\&quot;:\&quot;Folder title\&quot;,\n      \&quot;cm:description\&quot;:\&quot;This is an important folder\&quot;\n    }\n}\n&#x60;&#x60;&#x60;\nAny missing aspects are auto-applied. For example, **cm:titled** in the JSON shown above. You can set aspects\nexplicitly set, if needed, using an **aspectNames** field.\n\nThis API method also supports file upload using multipart/form-data.\n\nUse the **filedata** field to represent the content to upload.\nYou can use a **filename** field to give an alternative name for the new file.\n\nUse **overwrite** to overwrite an existing file, matched by name. If the file is versionable,\nthe existing content is replaced.\n\nWhen you overwrite overwrite existing content, you can set the **majorVersion** boolean field to **true** to indicate a major version\nshould be created. The default for **majorVersion** is **false**.\nSetting  **majorVersion** enables versioning of the node, if it is not already versioned.\n\nWhen you overwrite overwrite existing content, you can use the **comment** field to add a version comment that appears in the\nversion history. This also enables versioning of this node, if it is not already versioned.\n\nYou can set the **autoRename** boolean field to automatically resolve name clashes. If there is a name clash, then\nthe API method tries to create\na unique name using an integer suffix.\n\nAny field in the JSON body defined below can also be passed as a form-data field.\n
+Add association, with given association type, between source and target node.\n
 
 ### Example
 ```javascript
@@ -51,11 +60,60 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
+var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+
+var sourceId = "sourceId_example"; // {String} The identifier of a node.
+
+var assocTargetBody = new AlfrescoCoreRestApi.AssocTargetBody(); // {AssocTargetBody} The target node id and assoc type.
+
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully.');
+  }
+};
+api.addAssoc(sourceId, assocTargetBody, callback);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sourceId** | **String**| The identifier of a node. | 
+ **assocTargetBody** | [**AssocTargetBody**](AssocTargetBody.md)| The target node id and assoc type. | 
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="addNode"></a>
+# **addNode**
+> NodeEntry addNode(nodeId, nodeBody, opts)
+
+Create a node
+
+Creates a node as a (primary) child of the node with identifier **nodeId**.\n\nYou must specify at least a **name** and **nodeType**. For example, to create a folder:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;name\&quot;:\&quot;My Folder\&quot;,\n  \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;\n}\n&#x60;&#x60;&#x60;\n\nYou can create an empty file like this:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;name\&quot;:\&quot;My text file.txt\&quot;,\n  \&quot;nodeType\&quot;:\&quot;cm:content\&quot;,\n  \&quot;content\&quot;:\n   {\n     \&quot;mimeType\&quot;:\&quot;text/plain\&quot;\n   }\n}\n&#x60;&#x60;&#x60;\nYou can update binary content using the &#x60;&#x60;&#x60;PUT /nodes/{nodeId}&#x60;&#x60;&#x60; API method.\n\nYou can create a folder, or other node, inside a folder hierarchy:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;name\&quot;:\&quot;My Special Folder\&quot;,\n  \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;,\n  \&quot;relativePath\&quot;:\&quot;X/Y/Z\&quot;\n}\n&#x60;&#x60;&#x60;\nThe **relativePath** specifies the folder structure to create relative to the node identified by  **nodeId**. Folders in the\n**relativePath** that do not exist are created before the node is created.\n\nYou can set properties when you create a new node:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;name\&quot;:\&quot;My Other Folder\&quot;,\n  \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;,\n  \&quot;properties\&quot;:\n    {\n      \&quot;cm:title\&quot;:\&quot;Folder title\&quot;,\n      \&quot;cm:description\&quot;:\&quot;This is an important folder\&quot;\n    }\n}\n&#x60;&#x60;&#x60;\nAny missing aspects are auto-applied. For example, **cm:titled** in the JSON shown above. You can set aspects\nexplicitly set, if needed, using an **aspectNames** field.\n\nThis API method also supports file upload using multipart/form-data.\n\nUse the **filedata** field to represent the content to upload.\nYou can use a **filename** field to give an alternative name for the new file.\n\nUse **overwrite** to overwrite an existing file, matched by name. If the file is versionable,\nthe existing content is replaced.\n\nWhen you overwrite overwrite existing content, you can set the **majorVersion** boolean field to **true** to indicate a major version\nshould be created. The default for **majorVersion** is **false**.\nSetting  **majorVersion** enables versioning of the node, if it is not already versioned.\n\nWhen you overwrite overwrite existing content, you can use the **comment** field to add a version comment that appears in the\nversion history. This also enables versioning of this node, if it is not already versioned.\n\nYou can set the **autoRename** boolean field to automatically resolve name clashes. If there is a name clash, then\nthe API method tries to create\na unique name using an integer suffix.\n\nAny field in the JSON body defined below can also be passed as a form-data field.\n
+
+### Example
+```javascript
+var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
+var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
+
+// Configure HTTP basic authorization: basicAuth
+var basicAuth = defaultClient.authentications['basicAuth'];
+basicAuth.username = 'YOUR USERNAME'
+basicAuth.password = 'YOUR PASSWORD'
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
@@ -95,11 +153,66 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json, multipart/form-data
+ - **Accept**: application/json
+
+<a name="addSecondaryChildAssoc"></a>
+# **addSecondaryChildAssoc**
+> addSecondaryChildAssoc(parentId, assocChildBody)
+
+Add secondary child
+
+Add secondary child association, with given association type, between parent and child node.\n
+
+### Example
+```javascript
+var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
+var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
+
+// Configure HTTP basic authorization: basicAuth
+var basicAuth = defaultClient.authentications['basicAuth'];
+basicAuth.username = 'YOUR USERNAME'
+basicAuth.password = 'YOUR PASSWORD'
+
+var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+
+var parentId = "parentId_example"; // {String} The identifier of a node.
+
+var assocChildBody = new AlfrescoCoreRestApi.AssocChildBody(); // {AssocChildBody} The child node id and assoc type.
+
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully.');
+  }
+};
+api.addSecondaryChildAssoc(parentId, assocChildBody, callback);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **parentId** | **String**| The identifier of a node. | 
+ **assocChildBody** | [**AssocChildBody**](AssocChildBody.md)| The child node id and assoc type. | 
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 <a name="addSharedLink"></a>
@@ -119,12 +232,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
@@ -159,7 +266,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -183,12 +290,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
@@ -226,7 +327,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -250,12 +351,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
@@ -287,7 +382,7 @@ null (empty response body)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -311,12 +406,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
@@ -351,7 +440,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -364,7 +453,7 @@ Name | Type | Description  | Notes
 
 Delete a node
 
-Deletes the node with identifier **nodeId**.\nIf the **nodeId** is a folder, then its children are also deleted.\nDeleted nodes move to the trashcan unless the **permanent** query parameter is true, and the current user is the owner or an admin.\n
+Deletes the node with identifier **nodeId**.\nIf the **nodeId** is a folder, then its children are also deleted.\nDeleted nodes move to the trashcan unless the **permanent** query parameter is true, and the current user is the owner or an admin.\n\nDeleting a node removes the child associations, ie. both primary and also secondary, if any.\n
 
 ### Example
 ```javascript
@@ -375,12 +464,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
@@ -413,7 +496,7 @@ null (empty response body)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -437,12 +520,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
@@ -471,7 +548,7 @@ null (empty response body)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -495,12 +572,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
@@ -533,7 +604,7 @@ null (empty response body)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -557,12 +628,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
@@ -594,7 +659,7 @@ null (empty response body)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -603,7 +668,7 @@ null (empty response body)
 
 <a name="findSharedLinks"></a>
 # **findSharedLinks**
-> NodeSharedLinkEntry findSharedLinks(opts)
+> NodeSharedLinkPaging findSharedLinks(opts)
 
 Find shared links
 
@@ -618,12 +683,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
@@ -653,11 +712,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NodeSharedLinkEntry**](NodeSharedLinkEntry.md)
+[**NodeSharedLinkPaging**](NodeSharedLinkPaging.md)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -681,12 +740,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
@@ -719,7 +772,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -744,18 +797,12 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
-
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
 var opts = { 
   'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
-  'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:\n* properties\n* aspectNames\n* path\n* isLink\n* allowableOperations\n
+  'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:\n* properties\n* aspectNames\n* path\n* isLink\n* allowableOperations\n* association\n
 };
 
 var callback = function(error, data, response) {
@@ -774,7 +821,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **skipCount** | **Integer**| The number of entities that exist in the collection before those included in this list. | [optional] 
  **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional] 
- **include** | [**[String]**](String.md)| Returns additional information about the node. The following optional fields can be requested:\n* properties\n* aspectNames\n* path\n* isLink\n* allowableOperations\n | [optional] 
+ **include** | [**[String]**](String.md)| Returns additional information about the node. The following optional fields can be requested:\n* properties\n* aspectNames\n* path\n* isLink\n* allowableOperations\n* association\n | [optional] 
 
 ### Return type
 
@@ -782,7 +829,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -806,12 +853,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
@@ -846,7 +887,7 @@ null (empty response body)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -870,12 +911,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
@@ -912,7 +947,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -925,7 +960,7 @@ Name | Type | Description  | Notes
 
 Get node children
 
-Returns the children of the node with identifier **nodeId**.\nMinimal information for each child is returned by default.\nYou can use the **include** parameter to return addtional information.\n
+Returns the children of the node with identifier **nodeId**.\nMinimal information for each child is returned by default.\nYou can use the **include** parameter to return addtional information.\n\nThe list of child nodes includes primary children and also secondary children, if any.\n
 
 ### Example
 ```javascript
@@ -937,12 +972,6 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
-
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:\n* -my-\n* -shared-\n* -root-\n
@@ -952,7 +981,7 @@ var opts = {
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
   'orderBy': "orderBy_example", // {String} If not specified then default sort is for folders to be sorted before files, and by ascending name\ni.e. \"orderBy=isFolder DESC,name ASC\".\n\nThis default can be completely overridden by specifying a specific orderBy consisting of one, two or\nthree comma-separated list of properties (with optional ASCending or DESCending), for example,\nspecifying \u201CorderBy=name DESC\u201D would return a mixed folder/file list.\n\nThe following properties can be used to order the results:\n* isFolder\n* name\n* mimeType\n* nodeType\n* sizeInBytes\n* modifiedAt\n* createdAt\n* modifiedByUser\n* createdByUser\n
   'where': "where_example", // {String} Optionally filter the list. Here are some examples:\n\n*   where=(isFolder=true)\n\n*   where=(isFile=true)\n\n*   where=(nodeType='my:specialtype')\n\n*   where=(nodeType='my:specialtype' INCLUDESUBTYPES)\n
-  'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:\n* properties\n* aspectNames\n* path\n* isLink\n* allowableOperations\n
+  'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:\n* properties\n* aspectNames\n* path\n* isLink\n* allowableOperations\n* association\n
   'relativePath': "relativePath_example", // {String} Return information on children within the folder resolved by this path (relative to specified nodeId as the starting parent folder)
   'includeSource': true, // {Boolean} Also include \"source\" (in addition to \"entries\") with folder information on parent node (either the specified parent \"nodeId\" or as resolved by \"relativePath\")
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
@@ -977,7 +1006,7 @@ Name | Type | Description  | Notes
  **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional] 
  **orderBy** | **String**| If not specified then default sort is for folders to be sorted before files, and by ascending name\ni.e. \&quot;orderBy&#x3D;isFolder DESC,name ASC\&quot;.\n\nThis default can be completely overridden by specifying a specific orderBy consisting of one, two or\nthree comma-separated list of properties (with optional ASCending or DESCending), for example,\nspecifying \u201CorderBy&#x3D;name DESC\u201D would return a mixed folder/file list.\n\nThe following properties can be used to order the results:\n* isFolder\n* name\n* mimeType\n* nodeType\n* sizeInBytes\n* modifiedAt\n* createdAt\n* modifiedByUser\n* createdByUser\n | [optional] 
  **where** | **String**| Optionally filter the list. Here are some examples:\n\n*   where&#x3D;(isFolder&#x3D;true)\n\n*   where&#x3D;(isFile&#x3D;true)\n\n*   where&#x3D;(nodeType&#x3D;&#39;my:specialtype&#39;)\n\n*   where&#x3D;(nodeType&#x3D;&#39;my:specialtype&#39; INCLUDESUBTYPES)\n | [optional] 
- **include** | [**[String]**](String.md)| Returns additional information about the node. The following optional fields can be requested:\n* properties\n* aspectNames\n* path\n* isLink\n* allowableOperations\n | [optional] 
+ **include** | [**[String]**](String.md)| Returns additional information about the node. The following optional fields can be requested:\n* properties\n* aspectNames\n* path\n* isLink\n* allowableOperations\n* association\n | [optional] 
  **relativePath** | **String**| Return information on children within the folder resolved by this path (relative to specified nodeId as the starting parent folder) | [optional] 
  **includeSource** | **Boolean**| Also include \&quot;source\&quot; (in addition to \&quot;entries\&quot;) with folder information on parent node (either the specified parent \&quot;nodeId\&quot; or as resolved by \&quot;relativePath\&quot;) | [optional] 
  **fields** | [**[String]**](String.md)| A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
@@ -988,7 +1017,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -1012,12 +1041,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
@@ -1049,7 +1072,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -1073,12 +1096,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
@@ -1116,7 +1133,7 @@ null (empty response body)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -1129,7 +1146,7 @@ null (empty response body)
 
 List information for renditions
 
-Returns the rendition information for the file node with identifier **nodeId**.
+Returns the rendition information for the file node with identifier **nodeId**.\nThis will return rendition information, including the rendition id, for each rendition. The\u00A0rendition status is CREATED (ie. available\u00A0to view/download) or NOT_CREATED (ie. rendition can be requested).
 
 ### Example
 ```javascript
@@ -1140,12 +1157,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
@@ -1174,7 +1185,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -1198,12 +1209,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
@@ -1238,7 +1243,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -1262,12 +1267,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
@@ -1302,7 +1301,7 @@ null (empty response body)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -1326,12 +1325,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
@@ -1369,7 +1362,301 @@ null (empty response body)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="getSharedLinkRenditions"></a>
+# **getSharedLinkRenditions**
+> RenditionPaging getSharedLinkRenditions(sharedId, )
+
+List information for created renditions
+
+Returns the rendition information for the file with shared link identifier **sharedId**.\n\nThis will only return rendition information, including the rendition id, for each rendition\nwhere the rendition status is CREATED (ie. available\u00A0to view/download).\n\n**Note:** No authentication is required to call this endpoint.      \n
+
+### Example
+```javascript
+var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
+var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
+
+// Configure HTTP basic authorization: basicAuth
+var basicAuth = defaultClient.authentications['basicAuth'];
+basicAuth.username = 'YOUR USERNAME'
+basicAuth.password = 'YOUR PASSWORD'
+
+var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+
+var sharedId = "sharedId_example"; // {String} The identifier of a shared link to a file.
+
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.getSharedLinkRenditions(sharedId, , callback);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sharedId** | **String**| The identifier of a shared link to a file. | 
+
+### Return type
+
+[**RenditionPaging**](RenditionPaging.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="listParents"></a>
+# **listParents**
+> NodeAssocPaging listParents(childId, opts)
+
+List parents
+
+Returns a list of parent nodes that point to (ie. are associated with) the current child node. \n\nThis inclues both the primary parent and also secondary parents, if any.\n
+
+### Example
+```javascript
+var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
+var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
+
+// Configure HTTP basic authorization: basicAuth
+var basicAuth = defaultClient.authentications['basicAuth'];
+basicAuth.username = 'YOUR USERNAME'
+basicAuth.password = 'YOUR PASSWORD'
+
+var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+
+var childId = "childId_example"; // {String} The identifier of a node.
+
+var opts = { 
+  'where': "where_example", // {String} Optionally filter the list by assocType. Here's an example:\n\n*   where=(assocType='my:assoctype')\n
+  'include': "include_example", // {String} Return additional info, eg. aspect, properties, path, isLink
+  'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+};
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.listParents(childId, opts, callback);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **childId** | **String**| The identifier of a node. | 
+ **where** | **String**| Optionally filter the list by assocType. Here&#39;s an example:\n\n*   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;)\n | [optional] 
+ **include** | **String**| Return additional info, eg. aspect, properties, path, isLink | [optional] 
+ **fields** | [**[String]**](String.md)| A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
+
+### Return type
+
+[**NodeAssocPaging**](NodeAssocPaging.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="listSecondaryChildAssociations"></a>
+# **listSecondaryChildAssociations**
+> NodeChildAssocPaging listSecondaryChildAssociations(parentId, opts)
+
+List secondary children
+
+Returns a list of secondary child nodes that are associated with the current parent node, via a secondary child association.\n
+
+### Example
+```javascript
+var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
+var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
+
+// Configure HTTP basic authorization: basicAuth
+var basicAuth = defaultClient.authentications['basicAuth'];
+basicAuth.username = 'YOUR USERNAME'
+basicAuth.password = 'YOUR PASSWORD'
+
+var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+
+var parentId = "parentId_example"; // {String} The identifier of a node.
+
+var opts = { 
+  'assocType': "assocType_example", // {String} Restrict the returned results to only those of the given association type
+  'where': "where_example", // {String} Optionally filter the list by assocType. Here's an example:\n\n*   where=(assocType='my:assoctype')\n
+  'include': "include_example", // {String} Return additional info, eg. aspect, properties, path, isLink
+  'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+};
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.listSecondaryChildAssociations(parentId, opts, callback);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **parentId** | **String**| The identifier of a node. | 
+ **assocType** | **String**| Restrict the returned results to only those of the given association type | [optional] 
+ **where** | **String**| Optionally filter the list by assocType. Here&#39;s an example:\n\n*   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;)\n | [optional] 
+ **include** | **String**| Return additional info, eg. aspect, properties, path, isLink | [optional] 
+ **fields** | [**[String]**](String.md)| A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
+
+### Return type
+
+[**NodeChildAssocPaging**](NodeChildAssocPaging.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="listSourceNodeAssociations"></a>
+# **listSourceNodeAssociations**
+> NodeAssocPaging listSourceNodeAssociations(targetId, opts)
+
+List node associations
+
+Returns a list of source nodes that point to (ie. are associated with) the current target node.\n
+
+### Example
+```javascript
+var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
+var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
+
+// Configure HTTP basic authorization: basicAuth
+var basicAuth = defaultClient.authentications['basicAuth'];
+basicAuth.username = 'YOUR USERNAME'
+basicAuth.password = 'YOUR PASSWORD'
+
+var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+
+var targetId = "targetId_example"; // {String} The identifier of a node.
+
+var opts = { 
+  'where': "where_example", // {String} Optionally filter the list by assocType. Here's an example:\n\n*   where=(assocType='my:assoctype')\n
+  'include': "include_example", // {String} Return additional info, eg. aspect, properties, path, isLink
+  'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+};
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.listSourceNodeAssociations(targetId, opts, callback);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **targetId** | **String**| The identifier of a node. | 
+ **where** | **String**| Optionally filter the list by assocType. Here&#39;s an example:\n\n*   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;)\n | [optional] 
+ **include** | **String**| Return additional info, eg. aspect, properties, path, isLink | [optional] 
+ **fields** | [**[String]**](String.md)| A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
+
+### Return type
+
+[**NodeAssocPaging**](NodeAssocPaging.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="listTargetAssociations"></a>
+# **listTargetAssociations**
+> NodeAssocPaging listTargetAssociations(sourceId, opts)
+
+List node associations
+
+Returns a list of target nodes that are pointed to (ie. are associated with) the current source node.\n
+
+### Example
+```javascript
+var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
+var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
+
+// Configure HTTP basic authorization: basicAuth
+var basicAuth = defaultClient.authentications['basicAuth'];
+basicAuth.username = 'YOUR USERNAME'
+basicAuth.password = 'YOUR PASSWORD'
+
+var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+
+var sourceId = "sourceId_example"; // {String} The identifier of a node.
+
+var opts = { 
+  'where': "where_example", // {String} Optionally filter the list by assocType. Here's an example:\n\n*   where=(assocType='my:assoctype')\n
+  'include': "include_example", // {String} Return additional info, eg. aspect, properties, path, isLink
+  'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+};
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.listTargetAssociations(sourceId, opts, callback);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sourceId** | **String**| The identifier of a node. | 
+ **where** | **String**| Optionally filter the list by assocType. Here&#39;s an example:\n\n*   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;)\n | [optional] 
+ **include** | **String**| Return additional info, eg. aspect, properties, path, isLink | [optional] 
+ **fields** | [**[String]**](String.md)| A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
+
+### Return type
+
+[**NodeAssocPaging**](NodeAssocPaging.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -1393,12 +1680,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
@@ -1443,7 +1724,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -1456,7 +1737,7 @@ Name | Type | Description  | Notes
 
 Move a node
 
-Move the node **nodeId** to the parent folder node **targetParentId**.  in request body.\nThe **targetParentId** is specified in the in request body.\n\nThe moved node retains its name unless you specify a new **name** in the request body.\n\nIf the source **nodeId** is a folder, then all of its children are also moved.\n
+Move the node **nodeId** to the parent folder node **targetParentId**.  in request body.\nThe **targetParentId** is specified in the in request body.\n\nThe moved node retains its name unless you specify a new **name** in the request body.\n\nIf the source **nodeId** is a folder, then all of its children are also moved.\n\nThe move will effectively change the primary parent\n
 
 ### Example
 ```javascript
@@ -1467,12 +1748,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
@@ -1510,7 +1785,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -1534,12 +1809,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
@@ -1568,7 +1837,125 @@ null (empty response body)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="removeAssoc"></a>
+# **removeAssoc**
+> removeAssoc(sourceId, targetId, opts)
+
+Remove node association(s)
+
+Remove association(s) between source and target node for given association type. \n\nIf association type is not specified then all associations between source and target are removed.\n
+
+### Example
+```javascript
+var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
+var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
+
+// Configure HTTP basic authorization: basicAuth
+var basicAuth = defaultClient.authentications['basicAuth'];
+basicAuth.username = 'YOUR USERNAME'
+basicAuth.password = 'YOUR PASSWORD'
+
+var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+
+var sourceId = "sourceId_example"; // {String} The identifier of a node.
+
+var targetId = "targetId_example"; // {String} The identifier of a node.
+
+var opts = { 
+  'assocType': "assocType_example" // {String} Restrict the delete to only those of the given association type
+};
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully.');
+  }
+};
+api.removeAssoc(sourceId, targetId, opts, callback);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sourceId** | **String**| The identifier of a node. | 
+ **targetId** | **String**| The identifier of a node. | 
+ **assocType** | **String**| Restrict the delete to only those of the given association type | [optional] 
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="removeSecondaryChildAssoc"></a>
+# **removeSecondaryChildAssoc**
+> removeSecondaryChildAssoc(parentId, childId, opts)
+
+Remove secondary child (or children)
+
+Remove secondary child association(s) between parent and child node for given association type. \n\nIf association type is not specified then all secondary child associations between parent and child are removed.\n
+
+### Example
+```javascript
+var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
+var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
+
+// Configure HTTP basic authorization: basicAuth
+var basicAuth = defaultClient.authentications['basicAuth'];
+basicAuth.username = 'YOUR USERNAME'
+basicAuth.password = 'YOUR PASSWORD'
+
+var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+
+var parentId = "parentId_example"; // {String} The identifier of a node.
+
+var childId = "childId_example"; // {String} The identifier of a node.
+
+var opts = { 
+  'assocType': "assocType_example" // {String} Restrict the delete to only those of the given association type
+};
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully.');
+  }
+};
+api.removeSecondaryChildAssoc(parentId, childId, opts, callback);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **parentId** | **String**| The identifier of a node. | 
+ **childId** | **String**| The identifier of a node. | 
+ **assocType** | **String**| Restrict the delete to only those of the given association type | [optional] 
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -1592,12 +1979,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
@@ -1626,7 +2007,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -1650,12 +2031,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
@@ -1697,7 +2072,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -1721,12 +2096,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
@@ -1764,7 +2133,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 

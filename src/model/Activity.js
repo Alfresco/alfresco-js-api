@@ -18,7 +18,7 @@
   /**
    * The Activity model module.
    * @module model/Activity
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -57,13 +57,13 @@
         obj['postPersonId'] = ApiClient.convertToType(data['postPersonId'], 'String');
       }
       if (data.hasOwnProperty('id')) {
-        obj['id'] = ApiClient.convertToType(data['id'], 'String');
+        obj['id'] = ApiClient.convertToType(data['id'], 'Integer');
       }
       if (data.hasOwnProperty('siteId')) {
         obj['siteId'] = ApiClient.convertToType(data['siteId'], 'String');
       }
-      if (data.hasOwnProperty('ratedAt')) {
-        obj['ratedAt'] = ApiClient.convertToType(data['ratedAt'], 'Date');
+      if (data.hasOwnProperty('postedAt')) {
+        obj['postedAt'] = ApiClient.convertToType(data['postedAt'], 'Date');
       }
       if (data.hasOwnProperty('feedPersonId')) {
         obj['feedPersonId'] = ApiClient.convertToType(data['feedPersonId'], 'String');
@@ -87,7 +87,7 @@
 
   /**
    * The unique id of the activity
-   * @member {String} id
+   * @member {Integer} id
    */
   exports.prototype['id'] = undefined;
 
@@ -99,9 +99,9 @@
 
   /**
    * The date time at which the activity was performed
-   * @member {Date} ratedAt
+   * @member {Date} postedAt
    */
-  exports.prototype['ratedAt'] = undefined;
+  exports.prototype['postedAt'] = undefined;
 
   /**
    * The feed on which this activity was posted

@@ -3,6 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entry** | [**MinimalNode**](MinimalNode.md) |  | 
+**entry** | [**NodeMinimal**](NodeMinimal.md) |  | 
 
 

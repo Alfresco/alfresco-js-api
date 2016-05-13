@@ -18,7 +18,7 @@
   /**
    * The SiteMembershipBody model module.
    * @module model/SiteMembershipBody
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

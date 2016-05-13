@@ -18,7 +18,7 @@
   /**
    * The Site model module.
    * @module model/Site
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

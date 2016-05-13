@@ -1,24 +1,24 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient', './Pagination'], factory);
+    define(['../ApiClient', './DeletedNodeMinimalEntry', './Pagination'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./Pagination'));
+    module.exports = factory(require('../ApiClient'), require('./DeletedNodeMinimalEntry'), require('./Pagination'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoCoreRestApi) {
       root.AlfrescoCoreRestApi = {};
     }
-    root.AlfrescoCoreRestApi.DeletedNodesPagingList = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Pagination);
+    root.AlfrescoCoreRestApi.DeletedNodesPagingList = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.DeletedNodeMinimalEntry, root.AlfrescoCoreRestApi.Pagination);
   }
-}(this, function(ApiClient, Pagination) {
+}(this, function(ApiClient, DeletedNodeMinimalEntry, Pagination) {
   'use strict';
 
   /**
    * The DeletedNodesPagingList model module.
    * @module model/DeletedNodesPagingList
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -27,6 +27,7 @@
    * @class
    */
   var exports = function() {
+
 
 
   };
@@ -42,6 +43,9 @@
     if (data) { 
       obj = obj || new exports();
 
+      if (data.hasOwnProperty('entries')) {
+        obj['entries'] = ApiClient.convertToType(data['entries'], [DeletedNodeMinimalEntry]);
+      }
       if (data.hasOwnProperty('pagination')) {
         obj['pagination'] = Pagination.constructFromObject(data['pagination']);
       }
@@ -49,6 +53,11 @@
     return obj;
   }
 
+
+  /**
+   * @member {Array.<module:model/DeletedNodeMinimalEntry>} entries
+   */
+  exports.prototype['entries'] = undefined;
 
   /**
    * @member {module:model/Pagination} pagination

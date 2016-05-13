@@ -18,7 +18,7 @@
   /**
    * The UserInfo model module.
    * @module model/UserInfo
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

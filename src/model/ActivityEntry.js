@@ -18,7 +18,7 @@
   /**
    * The ActivityEntry model module.
    * @module model/ActivityEntry
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

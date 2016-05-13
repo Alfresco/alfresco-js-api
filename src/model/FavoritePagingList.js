@@ -18,7 +18,7 @@
   /**
    * The FavoritePagingList model module.
    * @module model/FavoritePagingList
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

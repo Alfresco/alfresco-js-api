@@ -18,7 +18,7 @@
   /**
    * The SiteMembershipRequestPagingList model module.
    * @module model/SiteMembershipRequestPagingList
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

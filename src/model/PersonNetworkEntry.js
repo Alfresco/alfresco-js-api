@@ -18,7 +18,7 @@
   /**
    * The PersonNetworkEntry model module.
    * @module model/PersonNetworkEntry
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

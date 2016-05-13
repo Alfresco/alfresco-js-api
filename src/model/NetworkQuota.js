@@ -18,7 +18,7 @@
   /**
    * The NetworkQuota model module.
    * @module model/NetworkQuota
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

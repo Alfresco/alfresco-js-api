@@ -18,7 +18,7 @@
   /**
    * Ratings service.
    * @module api/RatingsApi
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -77,7 +77,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = RatingEntry;
@@ -131,7 +131,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = RatingPaging;
@@ -183,7 +183,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = RatingEntry;
@@ -235,7 +235,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;

@@ -18,7 +18,7 @@
   /**
    * The MoveBody model module.
    * @module model/MoveBody
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

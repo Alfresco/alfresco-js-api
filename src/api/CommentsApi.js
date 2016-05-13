@@ -18,7 +18,7 @@
   /**
    * Comments service.
    * @module api/CommentsApi
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -42,7 +42,7 @@
 
     /**
      * Add a comment
-     * Creates one or more comments on node **nodeId**. You can create more than one comment by\nspecifying a list of comments in the JSON body like this:\n\n&#x60;&#x60;&#x60;JSON\n[\n  {\n    \&quot;content\&quot;: \&quot;This is a comment\&quot;\n  },\n  {\n    \&quot;content\&quot;: \&quot;This is another comment\&quot;\n  }\n]\n&#x60;&#x60;&#x60;\n
+     * Creates one or more comments on node **nodeId**. You can create more than one comment by \nspecifying a list of comments in the JSON body like this:      \n\n&#x60;&#x60;&#x60;JSON\n[\n  {\n    \&quot;content\&quot;: \&quot;This is a comment\&quot;\n  },\n  {\n    \&quot;content\&quot;: \&quot;This is another comment\&quot;\n  }\n]\n&#x60;&#x60;&#x60;\n
      * @param {String} nodeId The identifier of a node.
      * @param {module:model/CommentBody} commentBody The comment text. Note that you can provide an array of comments.
      * @param {module:api/CommentsApi~addCommentCallback} callback The callback function, accepting three arguments: error, data, response
@@ -72,7 +72,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = CommentEntry;
@@ -126,7 +126,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = CommentPaging;
@@ -178,7 +178,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -241,7 +241,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = CommentEntry;

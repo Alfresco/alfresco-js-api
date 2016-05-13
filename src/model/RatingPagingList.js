@@ -18,7 +18,7 @@
   /**
    * The RatingPagingList model module.
    * @module model/RatingPagingList
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

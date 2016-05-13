@@ -18,7 +18,7 @@
   /**
    * The NodeBody model module.
    * @module model/NodeBody
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

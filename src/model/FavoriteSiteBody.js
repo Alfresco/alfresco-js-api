@@ -18,7 +18,7 @@
   /**
    * The FavoriteSiteBody model module.
    * @module model/FavoriteSiteBody
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

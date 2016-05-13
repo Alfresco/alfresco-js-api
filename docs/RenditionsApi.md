@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**getRenditionContent**](RenditionsApi.md#getRenditionContent) | **GET** /nodes/{nodeId}/renditions/{renditionId}/content | Get rendition content
 [**getRenditions**](RenditionsApi.md#getRenditions) | **GET** /nodes/{nodeId}/renditions | List information for renditions
 [**getSharedLinkRenditionContent**](RenditionsApi.md#getSharedLinkRenditionContent) | **GET** /shared-links/{sharedId}/renditions/{renditionId}/content | Get shared link rendition content
+[**getSharedLinkRenditions**](RenditionsApi.md#getSharedLinkRenditions) | **GET** /shared-links/{sharedId}/renditions | List information for created renditions
 
 
 <a name="createRendition"></a>
@@ -28,12 +29,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.RenditionsApi()
 
@@ -65,7 +60,7 @@ null (empty response body)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -89,12 +84,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.RenditionsApi()
 
@@ -126,7 +115,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -150,12 +139,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.RenditionsApi()
 
@@ -193,7 +176,7 @@ null (empty response body)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -206,7 +189,7 @@ null (empty response body)
 
 List information for renditions
 
-Returns the rendition information for the file node with identifier **nodeId**.
+Returns the rendition information for the file node with identifier **nodeId**.\nThis will return rendition information, including the rendition id, for each rendition. The\u00A0rendition status is CREATED (ie. available\u00A0to view/download) or NOT_CREATED (ie. rendition can be requested).
 
 ### Example
 ```javascript
@@ -217,12 +200,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.RenditionsApi()
 
@@ -251,7 +228,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -275,12 +252,6 @@ var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
-
-// Configure API key authorization: ticketAuth
-var ticketAuth = defaultClient.authentications['ticketAuth'];
-ticketAuth.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ticketAuth.apiKeyPrefix['alf_ticket'] = "Token"
 
 var apiInstance = new AlfrescoCoreRestApi.RenditionsApi()
 
@@ -318,7 +289,59 @@ null (empty response body)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth), [ticketAuth](../README.md#ticketAuth)
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="getSharedLinkRenditions"></a>
+# **getSharedLinkRenditions**
+> RenditionPaging getSharedLinkRenditions(sharedId, )
+
+List information for created renditions
+
+Returns the rendition information for the file with shared link identifier **sharedId**.\n\nThis will only return rendition information, including the rendition id, for each rendition\nwhere the rendition status is CREATED (ie. available\u00A0to view/download).\n\n**Note:** No authentication is required to call this endpoint.      \n
+
+### Example
+```javascript
+var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
+var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
+
+// Configure HTTP basic authorization: basicAuth
+var basicAuth = defaultClient.authentications['basicAuth'];
+basicAuth.username = 'YOUR USERNAME'
+basicAuth.password = 'YOUR PASSWORD'
+
+var apiInstance = new AlfrescoCoreRestApi.RenditionsApi()
+
+var sharedId = "sharedId_example"; // {String} The identifier of a shared link to a file.
+
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.getSharedLinkRenditions(sharedId, , callback);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sharedId** | **String**| The identifier of a shared link to a file. | 
+
+### Return type
+
+[**RenditionPaging**](RenditionPaging.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 

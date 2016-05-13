@@ -18,7 +18,7 @@
   /**
    * The PersonNetworkPaging model module.
    * @module model/PersonNetworkPaging
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

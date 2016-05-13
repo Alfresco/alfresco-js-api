@@ -18,7 +18,7 @@
   /**
    * The ErrorError model module.
    * @module model/ErrorError
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -35,6 +35,7 @@
 
     this['briefSummary'] = briefSummary;
     this['descriptionURL'] = descriptionURL;
+
     this['stackTrace'] = stackTrace;
     this['statusCode'] = statusCode;
   };
@@ -58,6 +59,9 @@
       }
       if (data.hasOwnProperty('descriptionURL')) {
         obj['descriptionURL'] = ApiClient.convertToType(data['descriptionURL'], 'String');
+      }
+      if (data.hasOwnProperty('logId')) {
+        obj['logId'] = ApiClient.convertToType(data['logId'], 'String');
       }
       if (data.hasOwnProperty('stackTrace')) {
         obj['stackTrace'] = ApiClient.convertToType(data['stackTrace'], 'String');
@@ -84,6 +88,11 @@
    * @member {String} descriptionURL
    */
   exports.prototype['descriptionURL'] = undefined;
+
+  /**
+   * @member {String} logId
+   */
+  exports.prototype['logId'] = undefined;
 
   /**
    * @member {String} stackTrace

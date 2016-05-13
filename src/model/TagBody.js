@@ -18,17 +18,18 @@
   /**
    * The TagBody model module.
    * @module model/TagBody
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>TagBody</code>.
    * @alias module:model/TagBody
    * @class
+   * @param tag
    */
-  var exports = function() {
+  var exports = function(tag) {
 
-
+    this['tag'] = tag;
   };
 
   /**

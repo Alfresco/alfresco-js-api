@@ -18,7 +18,7 @@
   /**
    * The PreferencePagingList model module.
    * @module model/PreferencePagingList
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

@@ -18,7 +18,7 @@
   /**
    * The FavoriteEntry model module.
    * @module model/FavoriteEntry
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

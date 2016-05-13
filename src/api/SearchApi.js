@@ -18,7 +18,7 @@
   /**
    * Search service.
    * @module api/SearchApi
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -82,7 +82,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodePaging;

@@ -1,37 +1,36 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient', './MinimalNode', './NodeMinimalEntry', './UserInfo'], factory);
+    define(['../ApiClient', './ContentInfo', './NodeMinimal', './PathElement', './UserInfo'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./MinimalNode'), require('./NodeMinimalEntry'), require('./UserInfo'));
+    module.exports = factory(require('../ApiClient'), require('./ContentInfo'), require('./NodeMinimal'), require('./PathElement'), require('./UserInfo'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoCoreRestApi) {
       root.AlfrescoCoreRestApi = {};
     }
-    root.AlfrescoCoreRestApi.DeletedNodeMinimal = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.MinimalNode, root.AlfrescoCoreRestApi.NodeMinimalEntry, root.AlfrescoCoreRestApi.UserInfo);
+    root.AlfrescoCoreRestApi.DeletedNodeMinimal = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.ContentInfo, root.AlfrescoCoreRestApi.NodeMinimal, root.AlfrescoCoreRestApi.PathElement, root.AlfrescoCoreRestApi.UserInfo);
   }
-}(this, function(ApiClient, MinimalNode, NodeMinimalEntry, UserInfo) {
+}(this, function(ApiClient, ContentInfo, NodeMinimal, PathElement, UserInfo) {
   'use strict';
 
   /**
    * The DeletedNodeMinimal model module.
    * @module model/DeletedNodeMinimal
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>DeletedNodeMinimal</code>.
    * @alias module:model/DeletedNodeMinimal
    * @class
-   * @extends module:model/NodeMinimalEntry
-   * @param entry
+   * @extends module:model/NodeMinimal
    * @param archivedByUser
    * @param archivedAt
    */
-  var exports = function(entry, archivedByUser, archivedAt) {
-    NodeMinimalEntry.call(this, entry);
+  var exports = function(archivedByUser, archivedAt) {
+    NodeMinimal.call(this);
     this['archivedByUser'] = archivedByUser;
     this['archivedAt'] = archivedAt;
   };
@@ -46,7 +45,7 @@
   exports.constructFromObject = function(data, obj) {
     if (data) { 
       obj = obj || new exports();
-      NodeMinimalEntry.constructFromObject(data, obj);
+      NodeMinimal.constructFromObject(data, obj);
       if (data.hasOwnProperty('archivedByUser')) {
         obj['archivedByUser'] = UserInfo.constructFromObject(data['archivedByUser']);
       }
@@ -57,7 +56,7 @@
     return obj;
   }
 
-  exports.prototype = Object.create(NodeMinimalEntry.prototype);
+  exports.prototype = Object.create(NodeMinimal.prototype);
   exports.prototype.constructor = exports;
 
 

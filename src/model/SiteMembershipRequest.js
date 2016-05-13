@@ -18,7 +18,7 @@
   /**
    * The SiteMembershipRequest model module.
    * @module model/SiteMembershipRequest
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

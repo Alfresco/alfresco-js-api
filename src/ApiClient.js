@@ -17,7 +17,7 @@
 
   /**
    * @module ApiClient
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -40,8 +40,7 @@
      * @type {Array.<String>}
      */
     this.authentications = {
-      'basicAuth': {type: 'basic'},
-      'ticketAuth': {type: 'apiKey', 'in': 'query', name: 'alf_ticket'}
+      'basicAuth': {type: 'basic'}
     };
     /**
      * The default HTTP headers to be included for all API calls.

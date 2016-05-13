@@ -1,24 +1,24 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient', '../model/NodeEntry', '../model/NodeBody1', '../model/Error', '../model/NodeSharedLinkEntry', '../model/SharedLinkBody', '../model/CopyBody', '../model/RenditionBody', '../model/SiteBody', '../model/SiteEntry', '../model/EmailSharedLinkBody', '../model/DeletedNodeEntry', '../model/DeletedNodesPaging', '../model/NodePaging', '../model/RenditionEntry', '../model/RenditionPaging', '../model/MoveBody', '../model/NodeBody'], factory);
+    define(['../ApiClient', '../model/Error', '../model/AssocTargetBody', '../model/NodeEntry', '../model/NodeBody1', '../model/AssocChildBody', '../model/NodeSharedLinkEntry', '../model/SharedLinkBody', '../model/CopyBody', '../model/RenditionBody', '../model/SiteBody', '../model/SiteEntry', '../model/EmailSharedLinkBody', '../model/NodeSharedLinkPaging', '../model/DeletedNodeEntry', '../model/DeletedNodesPaging', '../model/NodePaging', '../model/RenditionEntry', '../model/RenditionPaging', '../model/NodeAssocPaging', '../model/NodeChildAssocPaging', '../model/MoveBody', '../model/NodeBody'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/NodeEntry'), require('../model/NodeBody1'), require('../model/Error'), require('../model/NodeSharedLinkEntry'), require('../model/SharedLinkBody'), require('../model/CopyBody'), require('../model/RenditionBody'), require('../model/SiteBody'), require('../model/SiteEntry'), require('../model/EmailSharedLinkBody'), require('../model/DeletedNodeEntry'), require('../model/DeletedNodesPaging'), require('../model/NodePaging'), require('../model/RenditionEntry'), require('../model/RenditionPaging'), require('../model/MoveBody'), require('../model/NodeBody'));
+    module.exports = factory(require('../ApiClient'), require('../model/Error'), require('../model/AssocTargetBody'), require('../model/NodeEntry'), require('../model/NodeBody1'), require('../model/AssocChildBody'), require('../model/NodeSharedLinkEntry'), require('../model/SharedLinkBody'), require('../model/CopyBody'), require('../model/RenditionBody'), require('../model/SiteBody'), require('../model/SiteEntry'), require('../model/EmailSharedLinkBody'), require('../model/NodeSharedLinkPaging'), require('../model/DeletedNodeEntry'), require('../model/DeletedNodesPaging'), require('../model/NodePaging'), require('../model/RenditionEntry'), require('../model/RenditionPaging'), require('../model/NodeAssocPaging'), require('../model/NodeChildAssocPaging'), require('../model/MoveBody'), require('../model/NodeBody'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoCoreRestApi) {
       root.AlfrescoCoreRestApi = {};
     }
-    root.AlfrescoCoreRestApi.ChangesApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.NodeEntry, root.AlfrescoCoreRestApi.NodeBody1, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.NodeSharedLinkEntry, root.AlfrescoCoreRestApi.SharedLinkBody, root.AlfrescoCoreRestApi.CopyBody, root.AlfrescoCoreRestApi.RenditionBody, root.AlfrescoCoreRestApi.SiteBody, root.AlfrescoCoreRestApi.SiteEntry, root.AlfrescoCoreRestApi.EmailSharedLinkBody, root.AlfrescoCoreRestApi.DeletedNodeEntry, root.AlfrescoCoreRestApi.DeletedNodesPaging, root.AlfrescoCoreRestApi.NodePaging, root.AlfrescoCoreRestApi.RenditionEntry, root.AlfrescoCoreRestApi.RenditionPaging, root.AlfrescoCoreRestApi.MoveBody, root.AlfrescoCoreRestApi.NodeBody);
+    root.AlfrescoCoreRestApi.ChangesApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.AssocTargetBody, root.AlfrescoCoreRestApi.NodeEntry, root.AlfrescoCoreRestApi.NodeBody1, root.AlfrescoCoreRestApi.AssocChildBody, root.AlfrescoCoreRestApi.NodeSharedLinkEntry, root.AlfrescoCoreRestApi.SharedLinkBody, root.AlfrescoCoreRestApi.CopyBody, root.AlfrescoCoreRestApi.RenditionBody, root.AlfrescoCoreRestApi.SiteBody, root.AlfrescoCoreRestApi.SiteEntry, root.AlfrescoCoreRestApi.EmailSharedLinkBody, root.AlfrescoCoreRestApi.NodeSharedLinkPaging, root.AlfrescoCoreRestApi.DeletedNodeEntry, root.AlfrescoCoreRestApi.DeletedNodesPaging, root.AlfrescoCoreRestApi.NodePaging, root.AlfrescoCoreRestApi.RenditionEntry, root.AlfrescoCoreRestApi.RenditionPaging, root.AlfrescoCoreRestApi.NodeAssocPaging, root.AlfrescoCoreRestApi.NodeChildAssocPaging, root.AlfrescoCoreRestApi.MoveBody, root.AlfrescoCoreRestApi.NodeBody);
   }
-}(this, function(ApiClient, NodeEntry, NodeBody1, Error, NodeSharedLinkEntry, SharedLinkBody, CopyBody, RenditionBody, SiteBody, SiteEntry, EmailSharedLinkBody, DeletedNodeEntry, DeletedNodesPaging, NodePaging, RenditionEntry, RenditionPaging, MoveBody, NodeBody) {
+}(this, function(ApiClient, Error, AssocTargetBody, NodeEntry, NodeBody1, AssocChildBody, NodeSharedLinkEntry, SharedLinkBody, CopyBody, RenditionBody, SiteBody, SiteEntry, EmailSharedLinkBody, NodeSharedLinkPaging, DeletedNodeEntry, DeletedNodesPaging, NodePaging, RenditionEntry, RenditionPaging, NodeAssocPaging, NodeChildAssocPaging, MoveBody, NodeBody) {
   'use strict';
 
   /**
    * Changes service.
    * @module api/ChangesApi
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
@@ -33,6 +33,57 @@
 
 
     /**
+     * Callback function to receive the result of the addAssoc operation.
+     * @callback module:api/ChangesApi~addAssocCallback
+     * @param {String} error Error message, if any.
+     * @param data This operation does not return a value.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Add node association
+     * Add association, with given association type, between source and target node.\n
+     * @param {String} sourceId The identifier of a node.
+     * @param {module:model/AssocTargetBody} assocTargetBody The target node id and assoc type.
+     * @param {module:api/ChangesApi~addAssocCallback} callback The callback function, accepting three arguments: error, data, response
+     */
+    this.addAssoc = function(sourceId, assocTargetBody, callback) {
+      var postBody = assocTargetBody;
+
+      // verify the required parameter 'sourceId' is set
+      if (sourceId == undefined || sourceId == null) {
+        throw "Missing the required parameter 'sourceId' when calling addAssoc";
+      }
+
+      // verify the required parameter 'assocTargetBody' is set
+      if (assocTargetBody == undefined || assocTargetBody == null) {
+        throw "Missing the required parameter 'assocTargetBody' when calling addAssoc";
+      }
+
+
+      var pathParams = {
+        'sourceId': sourceId
+      };
+      var queryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = null;
+
+      return this.apiClient.callApi(
+        '/nodes/{sourceId}/targets', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+
+    /**
      * Callback function to receive the result of the addNode operation.
      * @callback module:api/ChangesApi~addNodeCallback
      * @param {String} error Error message, if any.
@@ -42,7 +93,7 @@
 
     /**
      * Create a node
-     * Creates a node as a child of the node with identifier **nodeId**.\n\nYou must specify at least a **name** and **nodeType**. For example, to create a folder:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;name\&quot;:\&quot;My Folder\&quot;,\n  \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;\n}\n&#x60;&#x60;&#x60;\n\nYou can create an empty file like this:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;name\&quot;:\&quot;My text file.txt\&quot;,\n  \&quot;nodeType\&quot;:\&quot;cm:content\&quot;,\n  \&quot;content\&quot;:\n   {\n     \&quot;mimeType\&quot;:\&quot;text/plain\&quot;\n   }\n}\n&#x60;&#x60;&#x60;\nYou can update binary content using the &#x60;&#x60;&#x60;PUT /nodes/{nodeId}&#x60;&#x60;&#x60; API method.\n\nYou can create a folder, or other node, inside a folder hierarchy:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;name\&quot;:\&quot;My Special Folder\&quot;,\n  \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;,\n  \&quot;relativePath\&quot;:\&quot;X/Y/Z\&quot;\n}\n&#x60;&#x60;&#x60;\nThe **relativePath** specifies the folder structure to create relative to the node identified by  **nodeId**. Folders in the\n**relativePath** that do not exist are created before the node is created.\n\nYou can set properties when you create a new node:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;name\&quot;:\&quot;My Other Folder\&quot;,\n  \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;,\n  \&quot;properties\&quot;:\n    {\n      \&quot;cm:title\&quot;:\&quot;Folder title\&quot;,\n      \&quot;cm:description\&quot;:\&quot;This is an important folder\&quot;\n    }\n}\n&#x60;&#x60;&#x60;\nAny missing aspects are auto-applied. For example, **cm:titled** in the JSON shown above. You can set aspects\nexplicitly set, if needed, using an **aspectNames** field.\n\nThis API method also supports file upload using multipart/form-data.\n\nUse the **filedata** field to represent the content to upload.\nYou can use a **filename** field to give an alternative name for the new file.\n\nUse **overwrite** to overwrite an existing file, matched by name. If the file is versionable,\nthe existing content is replaced.\n\nWhen you overwrite overwrite existing content, you can set the **majorVersion** boolean field to **true** to indicate a major version\nshould be created. The default for **majorVersion** is **false**.\nSetting  **majorVersion** enables versioning of the node, if it is not already versioned.\n\nWhen you overwrite overwrite existing content, you can use the **comment** field to add a version comment that appears in the\nversion history. This also enables versioning of this node, if it is not already versioned.\n\nYou can set the **autoRename** boolean field to automatically resolve name clashes. If there is a name clash, then\nthe API method tries to create\na unique name using an integer suffix.\n\nAny field in the JSON body defined below can also be passed as a form-data field.\n
+     * Creates a node as a (primary) child of the node with identifier **nodeId**.\n\nYou must specify at least a **name** and **nodeType**. For example, to create a folder:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;name\&quot;:\&quot;My Folder\&quot;,\n  \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;\n}\n&#x60;&#x60;&#x60;\n\nYou can create an empty file like this:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;name\&quot;:\&quot;My text file.txt\&quot;,\n  \&quot;nodeType\&quot;:\&quot;cm:content\&quot;,\n  \&quot;content\&quot;:\n   {\n     \&quot;mimeType\&quot;:\&quot;text/plain\&quot;\n   }\n}\n&#x60;&#x60;&#x60;\nYou can update binary content using the &#x60;&#x60;&#x60;PUT /nodes/{nodeId}&#x60;&#x60;&#x60; API method.\n\nYou can create a folder, or other node, inside a folder hierarchy:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;name\&quot;:\&quot;My Special Folder\&quot;,\n  \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;,\n  \&quot;relativePath\&quot;:\&quot;X/Y/Z\&quot;\n}\n&#x60;&#x60;&#x60;\nThe **relativePath** specifies the folder structure to create relative to the node identified by  **nodeId**. Folders in the\n**relativePath** that do not exist are created before the node is created.\n\nYou can set properties when you create a new node:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;name\&quot;:\&quot;My Other Folder\&quot;,\n  \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;,\n  \&quot;properties\&quot;:\n    {\n      \&quot;cm:title\&quot;:\&quot;Folder title\&quot;,\n      \&quot;cm:description\&quot;:\&quot;This is an important folder\&quot;\n    }\n}\n&#x60;&#x60;&#x60;\nAny missing aspects are auto-applied. For example, **cm:titled** in the JSON shown above. You can set aspects\nexplicitly set, if needed, using an **aspectNames** field.\n\nThis API method also supports file upload using multipart/form-data.\n\nUse the **filedata** field to represent the content to upload.\nYou can use a **filename** field to give an alternative name for the new file.\n\nUse **overwrite** to overwrite an existing file, matched by name. If the file is versionable,\nthe existing content is replaced.\n\nWhen you overwrite overwrite existing content, you can set the **majorVersion** boolean field to **true** to indicate a major version\nshould be created. The default for **majorVersion** is **false**.\nSetting  **majorVersion** enables versioning of the node, if it is not already versioned.\n\nWhen you overwrite overwrite existing content, you can use the **comment** field to add a version comment that appears in the\nversion history. This also enables versioning of this node, if it is not already versioned.\n\nYou can set the **autoRename** boolean field to automatically resolve name clashes. If there is a name clash, then\nthe API method tries to create\na unique name using an integer suffix.\n\nAny field in the JSON body defined below can also be passed as a form-data field.\n
      * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases:\n* -my-\n* -shared-\n* -root-\n
      * @param {module:model/NodeBody1} nodeBody The node information to create.
      * @param {Object} opts Optional parameters
@@ -80,13 +131,64 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json', 'multipart/form-data'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
 
       return this.apiClient.callApi(
         '/nodes/{nodeId}/children', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the addSecondaryChildAssoc operation.
+     * @callback module:api/ChangesApi~addSecondaryChildAssocCallback
+     * @param {String} error Error message, if any.
+     * @param data This operation does not return a value.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Add secondary child
+     * Add secondary child association, with given association type, between parent and child node.\n
+     * @param {String} parentId The identifier of a node.
+     * @param {module:model/AssocChildBody} assocChildBody The child node id and assoc type.
+     * @param {module:api/ChangesApi~addSecondaryChildAssocCallback} callback The callback function, accepting three arguments: error, data, response
+     */
+    this.addSecondaryChildAssoc = function(parentId, assocChildBody, callback) {
+      var postBody = assocChildBody;
+
+      // verify the required parameter 'parentId' is set
+      if (parentId == undefined || parentId == null) {
+        throw "Missing the required parameter 'parentId' when calling addSecondaryChildAssoc";
+      }
+
+      // verify the required parameter 'assocChildBody' is set
+      if (assocChildBody == undefined || assocChildBody == null) {
+        throw "Missing the required parameter 'assocChildBody' when calling addSecondaryChildAssoc";
+      }
+
+
+      var pathParams = {
+        'parentId': parentId
+      };
+      var queryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = null;
+
+      return this.apiClient.callApi(
+        '/nodes/{parentId}/secondary-children', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -131,7 +233,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeSharedLinkEntry;
@@ -189,7 +291,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
@@ -240,7 +342,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -291,7 +393,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = SiteEntry;
@@ -313,7 +415,7 @@
 
     /**
      * Delete a node
-     * Deletes the node with identifier **nodeId**.\nIf the **nodeId** is a folder, then its children are also deleted.\nDeleted nodes move to the trashcan unless the **permanent** query parameter is true, and the current user is the owner or an admin.\n
+     * Deletes the node with identifier **nodeId**.\nIf the **nodeId** is a folder, then its children are also deleted.\nDeleted nodes move to the trashcan unless the **permanent** query parameter is true, and the current user is the owner or an admin.\n\nDeleting a node removes the child associations, ie. both primary and also secondary, if any.\n
      * @param {String} nodeId The identifier of a node.
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.permanent If **true** then the node is deleted permanently, without it moving to the trashcan.\nYou must be the owner or an admin to permanently delete the node.\n (default to false)
@@ -340,7 +442,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -385,7 +487,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -434,7 +536,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -485,7 +587,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -501,7 +603,7 @@
      * Callback function to receive the result of the findSharedLinks operation.
      * @callback module:api/ChangesApi~findSharedLinksCallback
      * @param {String} error Error message, if any.
-     * @param {module:model/NodeSharedLinkEntry} data The data returned by the service call.
+     * @param {module:model/NodeSharedLinkPaging} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -513,7 +615,7 @@
      * @param {Array.<String>} opts.include Returns additional information about the shared link, the following optional fields can be requested:\n* allowableOperations\n
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * @param {module:api/ChangesApi~findSharedLinksCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/NodeSharedLinkEntry}
+     * data is of type: {module:model/NodeSharedLinkPaging}
      */
     this.findSharedLinks = function(opts, callback) {
       opts = opts || {};
@@ -532,10 +634,10 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
-      var returnType = NodeSharedLinkEntry;
+      var returnType = NodeSharedLinkPaging;
 
       return this.apiClient.callApi(
         '/shared-links', 'GET',
@@ -582,7 +684,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = DeletedNodeEntry;
@@ -608,7 +710,7 @@
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
      * @param {Integer} opts.maxItems The maximum number of items to return in the list.
-     * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested:\n* properties\n* aspectNames\n* path\n* isLink\n* allowableOperations\n
+     * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested:\n* properties\n* aspectNames\n* path\n* isLink\n* allowableOperations\n* association\n
      * @param {module:api/ChangesApi~getDeletedNodesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/DeletedNodesPaging}
      */
@@ -629,7 +731,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = DeletedNodesPaging;
@@ -680,7 +782,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -734,7 +836,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
@@ -756,14 +858,14 @@
 
     /**
      * Get node children
-     * Returns the children of the node with identifier **nodeId**.\nMinimal information for each child is returned by default.\nYou can use the **include** parameter to return addtional information.\n
+     * Returns the children of the node with identifier **nodeId**.\nMinimal information for each child is returned by default.\nYou can use the **include** parameter to return addtional information.\n\nThe list of child nodes includes primary children and also secondary children, if any.\n
      * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases:\n* -my-\n* -shared-\n* -root-\n
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
      * @param {Integer} opts.maxItems The maximum number of items to return in the list.
      * @param {String} opts.orderBy If not specified then default sort is for folders to be sorted before files, and by ascending name\ni.e. \&quot;orderBy&#x3D;isFolder DESC,name ASC\&quot;.\n\nThis default can be completely overridden by specifying a specific orderBy consisting of one, two or\nthree comma-separated list of properties (with optional ASCending or DESCending), for example,\nspecifying \u201CorderBy&#x3D;name DESC\u201D would return a mixed folder/file list.\n\nThe following properties can be used to order the results:\n* isFolder\n* name\n* mimeType\n* nodeType\n* sizeInBytes\n* modifiedAt\n* createdAt\n* modifiedByUser\n* createdByUser\n
      * @param {String} opts.where Optionally filter the list. Here are some examples:\n\n*   where&#x3D;(isFolder&#x3D;true)\n\n*   where&#x3D;(isFile&#x3D;true)\n\n*   where&#x3D;(nodeType&#x3D;&#39;my:specialtype&#39;)\n\n*   where&#x3D;(nodeType&#x3D;&#39;my:specialtype&#39; INCLUDESUBTYPES)\n
-     * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested:\n* properties\n* aspectNames\n* path\n* isLink\n* allowableOperations\n
+     * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested:\n* properties\n* aspectNames\n* path\n* isLink\n* allowableOperations\n* association\n
      * @param {String} opts.relativePath Return information on children within the folder resolved by this path (relative to specified nodeId as the starting parent folder)
      * @param {Boolean} opts.includeSource Also include \&quot;source\&quot; (in addition to \&quot;entries\&quot;) with folder information on parent node (either the specified parent \&quot;nodeId\&quot; or as resolved by \&quot;relativePath\&quot;)
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
@@ -798,7 +900,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodePaging;
@@ -851,7 +953,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = RenditionEntry;
@@ -909,7 +1011,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -931,7 +1033,7 @@
 
     /**
      * List information for renditions
-     * Returns the rendition information for the file node with identifier **nodeId**.
+     * Returns the rendition information for the file node with identifier **nodeId**.\nThis will return rendition information, including the rendition id, for each rendition. The\u00A0rendition status is CREATED (ie. available\u00A0to view/download) or NOT_CREATED (ie. rendition can be requested).
      * @param {String} nodeId The identifier of a node.
      * @param {module:api/ChangesApi~getRenditionsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RenditionPaging}
@@ -955,7 +1057,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = RenditionPaging;
@@ -1007,7 +1109,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeSharedLinkEntry;
@@ -1058,7 +1160,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
@@ -1116,13 +1218,277 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
       return this.apiClient.callApi(
         '/shared-links/{sharedId}/renditions/{renditionId}/content', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getSharedLinkRenditions operation.
+     * @callback module:api/ChangesApi~getSharedLinkRenditionsCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/RenditionPaging} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * List information for created renditions
+     * Returns the rendition information for the file with shared link identifier **sharedId**.\n\nThis will only return rendition information, including the rendition id, for each rendition\nwhere the rendition status is CREATED (ie. available\u00A0to view/download).\n\n**Note:** No authentication is required to call this endpoint.      \n
+     * @param {String} sharedId The identifier of a shared link to a file.
+     * @param {module:api/ChangesApi~getSharedLinkRenditionsCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {module:model/RenditionPaging}
+     */
+    this.getSharedLinkRenditions = function(sharedId, callback) {
+      var postBody = null;
+
+      // verify the required parameter 'sharedId' is set
+      if (sharedId == undefined || sharedId == null) {
+        throw "Missing the required parameter 'sharedId' when calling getSharedLinkRenditions";
+      }
+
+
+      var pathParams = {
+        'sharedId': sharedId
+      };
+      var queryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = RenditionPaging;
+
+      return this.apiClient.callApi(
+        '/shared-links/{sharedId}/renditions', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the listParents operation.
+     * @callback module:api/ChangesApi~listParentsCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/NodeAssocPaging} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * List parents
+     * Returns a list of parent nodes that point to (ie. are associated with) the current child node. \n\nThis inclues both the primary parent and also secondary parents, if any.\n
+     * @param {String} childId The identifier of a node.
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.where Optionally filter the list by assocType. Here&#39;s an example:\n\n*   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;)\n
+     * @param {String} opts.include Return additional info, eg. aspect, properties, path, isLink
+     * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * @param {module:api/ChangesApi~listParentsCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {module:model/NodeAssocPaging}
+     */
+    this.listParents = function(childId, opts, callback) {
+      opts = opts || {};
+      var postBody = null;
+
+      // verify the required parameter 'childId' is set
+      if (childId == undefined || childId == null) {
+        throw "Missing the required parameter 'childId' when calling listParents";
+      }
+
+
+      var pathParams = {
+        'childId': childId
+      };
+      var queryParams = {
+        'where': opts['where'],
+        'include': opts['include'],
+        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = NodeAssocPaging;
+
+      return this.apiClient.callApi(
+        '/nodes/{childId}/parents', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the listSecondaryChildAssociations operation.
+     * @callback module:api/ChangesApi~listSecondaryChildAssociationsCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/NodeChildAssocPaging} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * List secondary children
+     * Returns a list of secondary child nodes that are associated with the current parent node, via a secondary child association.\n
+     * @param {String} parentId The identifier of a node.
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.assocType Restrict the returned results to only those of the given association type
+     * @param {String} opts.where Optionally filter the list by assocType. Here&#39;s an example:\n\n*   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;)\n
+     * @param {String} opts.include Return additional info, eg. aspect, properties, path, isLink
+     * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * @param {module:api/ChangesApi~listSecondaryChildAssociationsCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {module:model/NodeChildAssocPaging}
+     */
+    this.listSecondaryChildAssociations = function(parentId, opts, callback) {
+      opts = opts || {};
+      var postBody = null;
+
+      // verify the required parameter 'parentId' is set
+      if (parentId == undefined || parentId == null) {
+        throw "Missing the required parameter 'parentId' when calling listSecondaryChildAssociations";
+      }
+
+
+      var pathParams = {
+        'parentId': parentId
+      };
+      var queryParams = {
+        'assocType': opts['assocType'],
+        'where': opts['where'],
+        'include': opts['include'],
+        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = NodeChildAssocPaging;
+
+      return this.apiClient.callApi(
+        '/nodes/{parentId}/secondary-children', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the listSourceNodeAssociations operation.
+     * @callback module:api/ChangesApi~listSourceNodeAssociationsCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/NodeAssocPaging} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * List node associations
+     * Returns a list of source nodes that point to (ie. are associated with) the current target node.\n
+     * @param {String} targetId The identifier of a node.
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.where Optionally filter the list by assocType. Here&#39;s an example:\n\n*   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;)\n
+     * @param {String} opts.include Return additional info, eg. aspect, properties, path, isLink
+     * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * @param {module:api/ChangesApi~listSourceNodeAssociationsCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {module:model/NodeAssocPaging}
+     */
+    this.listSourceNodeAssociations = function(targetId, opts, callback) {
+      opts = opts || {};
+      var postBody = null;
+
+      // verify the required parameter 'targetId' is set
+      if (targetId == undefined || targetId == null) {
+        throw "Missing the required parameter 'targetId' when calling listSourceNodeAssociations";
+      }
+
+
+      var pathParams = {
+        'targetId': targetId
+      };
+      var queryParams = {
+        'where': opts['where'],
+        'include': opts['include'],
+        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = NodeAssocPaging;
+
+      return this.apiClient.callApi(
+        '/nodes/{targetId}/sources', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the listTargetAssociations operation.
+     * @callback module:api/ChangesApi~listTargetAssociationsCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/NodeAssocPaging} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * List node associations
+     * Returns a list of target nodes that are pointed to (ie. are associated with) the current source node.\n
+     * @param {String} sourceId The identifier of a node.
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.where Optionally filter the list by assocType. Here&#39;s an example:\n\n*   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;)\n
+     * @param {String} opts.include Return additional info, eg. aspect, properties, path, isLink
+     * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * @param {module:api/ChangesApi~listTargetAssociationsCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {module:model/NodeAssocPaging}
+     */
+    this.listTargetAssociations = function(sourceId, opts, callback) {
+      opts = opts || {};
+      var postBody = null;
+
+      // verify the required parameter 'sourceId' is set
+      if (sourceId == undefined || sourceId == null) {
+        throw "Missing the required parameter 'sourceId' when calling listTargetAssociations";
+      }
+
+
+      var pathParams = {
+        'sourceId': sourceId
+      };
+      var queryParams = {
+        'where': opts['where'],
+        'include': opts['include'],
+        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = NodeAssocPaging;
+
+      return this.apiClient.callApi(
+        '/nodes/{sourceId}/targets', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -1178,7 +1544,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodePaging;
@@ -1200,7 +1566,7 @@
 
     /**
      * Move a node
-     * Move the node **nodeId** to the parent folder node **targetParentId**.  in request body.\nThe **targetParentId** is specified in the in request body.\n\nThe moved node retains its name unless you specify a new **name** in the request body.\n\nIf the source **nodeId** is a folder, then all of its children are also moved.\n
+     * Move the node **nodeId** to the parent folder node **targetParentId**.  in request body.\nThe **targetParentId** is specified in the in request body.\n\nThe moved node retains its name unless you specify a new **name** in the request body.\n\nIf the source **nodeId** is a folder, then all of its children are also moved.\n\nThe move will effectively change the primary parent\n
      * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases:\n* -my-\n* -shared-\n* -root-\n
      * @param {module:model/MoveBody} moveBody The targetParentId and, optionally, a new name.
      * @param {Object} opts Optional parameters
@@ -1236,7 +1602,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
@@ -1281,13 +1647,125 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
       return this.apiClient.callApi(
         '/deleted-nodes/{nodeId}', 'DELETE',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the removeAssoc operation.
+     * @callback module:api/ChangesApi~removeAssocCallback
+     * @param {String} error Error message, if any.
+     * @param data This operation does not return a value.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Remove node association(s)
+     * Remove association(s) between source and target node for given association type. \n\nIf association type is not specified then all associations between source and target are removed.\n
+     * @param {String} sourceId The identifier of a node.
+     * @param {String} targetId The identifier of a node.
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.assocType Restrict the delete to only those of the given association type
+     * @param {module:api/ChangesApi~removeAssocCallback} callback The callback function, accepting three arguments: error, data, response
+     */
+    this.removeAssoc = function(sourceId, targetId, opts, callback) {
+      opts = opts || {};
+      var postBody = null;
+
+      // verify the required parameter 'sourceId' is set
+      if (sourceId == undefined || sourceId == null) {
+        throw "Missing the required parameter 'sourceId' when calling removeAssoc";
+      }
+
+      // verify the required parameter 'targetId' is set
+      if (targetId == undefined || targetId == null) {
+        throw "Missing the required parameter 'targetId' when calling removeAssoc";
+      }
+
+
+      var pathParams = {
+        'sourceId': sourceId,
+        'targetId': targetId
+      };
+      var queryParams = {
+        'assocType': opts['assocType']
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = null;
+
+      return this.apiClient.callApi(
+        '/nodes/{sourceId}/targets/{targetId}', 'DELETE',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the removeSecondaryChildAssoc operation.
+     * @callback module:api/ChangesApi~removeSecondaryChildAssocCallback
+     * @param {String} error Error message, if any.
+     * @param data This operation does not return a value.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Remove secondary child (or children)
+     * Remove secondary child association(s) between parent and child node for given association type. \n\nIf association type is not specified then all secondary child associations between parent and child are removed.\n
+     * @param {String} parentId The identifier of a node.
+     * @param {String} childId The identifier of a node.
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.assocType Restrict the delete to only those of the given association type
+     * @param {module:api/ChangesApi~removeSecondaryChildAssocCallback} callback The callback function, accepting three arguments: error, data, response
+     */
+    this.removeSecondaryChildAssoc = function(parentId, childId, opts, callback) {
+      opts = opts || {};
+      var postBody = null;
+
+      // verify the required parameter 'parentId' is set
+      if (parentId == undefined || parentId == null) {
+        throw "Missing the required parameter 'parentId' when calling removeSecondaryChildAssoc";
+      }
+
+      // verify the required parameter 'childId' is set
+      if (childId == undefined || childId == null) {
+        throw "Missing the required parameter 'childId' when calling removeSecondaryChildAssoc";
+      }
+
+
+      var pathParams = {
+        'parentId': parentId,
+        'childId': childId
+      };
+      var queryParams = {
+        'assocType': opts['assocType']
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = null;
+
+      return this.apiClient.callApi(
+        '/nodes/{parentId}/secondary-children/{childId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -1327,7 +1805,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
@@ -1389,7 +1867,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/octet-stream'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
@@ -1447,7 +1925,7 @@
       var formParams = {
       };
 
-      var authNames = ['basicAuth', 'ticketAuth'];
+      var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;

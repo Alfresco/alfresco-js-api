@@ -18,7 +18,7 @@
   /**
    * The Pagination model module.
    * @module model/Pagination
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

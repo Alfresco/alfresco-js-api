@@ -18,7 +18,7 @@
   /**
    * The TagPagingList model module.
    * @module model/TagPagingList
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

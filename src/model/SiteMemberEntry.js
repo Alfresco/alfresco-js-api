@@ -18,7 +18,7 @@
   /**
    * The SiteMemberEntry model module.
    * @module model/SiteMemberEntry
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

@@ -18,7 +18,7 @@
   /**
    * The DeletedNodesPaging model module.
    * @module model/DeletedNodesPaging
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

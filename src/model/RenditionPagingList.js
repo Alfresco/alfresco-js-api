@@ -18,7 +18,7 @@
   /**
    * The RenditionPagingList model module.
    * @module model/RenditionPagingList
-   * @version 1
+   * @version 0.1.0
    */
 
   /**

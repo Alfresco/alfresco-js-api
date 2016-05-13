@@ -18,7 +18,7 @@
   /**
    * The CommentEntry model module.
    * @module model/CommentEntry
-   * @version 1
+   * @version 0.1.0
    */
 
   /**
