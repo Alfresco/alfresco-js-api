@@ -50,15 +50,12 @@ var personId = "personId_example"; // {String} The identifier of a person.
 
 var favoriteBody = new AlfrescoCoreRestApi.FavoriteBody(); // {FavoriteBody} An object identifying the entity to be favorited. \n\nThe object consists of a single property which is an object with the name `site`, `file`, or `folder`. \nThe content of that object is the `guid` of the target entity.\n\nFor example, to favorite a file the following body would be used:\n\n```JSON\n{\n   \"target\": {\n      \"file\": {\n         \"guid\": \"abcde-01234\"\n      }\n   }\n}\n```\n
 
+apiInstance.addFavorite(personIdfavoriteBody).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.addFavorite(personIdfavoriteBody, callback);
 ```
 
 ### Parameters
@@ -105,15 +102,12 @@ var personId = "personId_example"; // {String} The identifier of a person.
 
 var siteMembershipBody = new AlfrescoCoreRestApi.SiteMembershipBody(); // {SiteMembershipBody} Site membership request details
 
+apiInstance.addSiteMembershipRequest(personIdsiteMembershipBody).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.addSiteMembershipRequest(personIdsiteMembershipBody, callback);
 ```
 
 ### Parameters
@@ -160,15 +154,12 @@ var personId = "personId_example"; // {String} The identifier of a person.
 
 var siteId = "siteId_example"; // {String} The identifier of a site.
 
+apiInstance.deleteFavoriteSite(personIdsiteId, ).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.deleteFavoriteSite(personIdsiteId, , callback);
 ```
 
 ### Parameters
@@ -215,15 +206,12 @@ var personId = "personId_example"; // {String} The identifier of a person.
 
 var favoriteSiteBody = new AlfrescoCoreRestApi.FavoriteSiteBody(); // {FavoriteSiteBody} The id of the site to favorite.
 
+apiInstance.favoriteSite(personIdfavoriteSiteBody).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.favoriteSite(personIdfavoriteSiteBody, callback);
 ```
 
 ### Parameters
@@ -275,15 +263,12 @@ var opts = {
   'siteId': "siteId_example", // {String} Include only activity feed entries relating to this site.
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.getActivities(personId, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getActivities(personId, opts, callback);
 ```
 
 ### Parameters
@@ -337,15 +322,12 @@ var favoriteId = "favoriteId_example"; // {String} The identifier of a favorite.
 var opts = { 
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.getFavorite(personIdfavoriteId, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getFavorite(personIdfavoriteId, opts, callback);
 ```
 
 ### Parameters
@@ -396,15 +378,12 @@ var siteId = "siteId_example"; // {String} The identifier of a site.
 var opts = { 
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.getFavoriteSite(personIdsiteId, , opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getFavoriteSite(personIdsiteId, , opts, callback);
 ```
 
 ### Parameters
@@ -455,15 +434,12 @@ var opts = {
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.getFavoriteSites(personId, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getFavoriteSites(personId, opts, callback);
 ```
 
 ### Parameters
@@ -516,15 +492,12 @@ var opts = {
   'where': "where_example", // {String} A string to restrict the returned objects by using a predicate.
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.getFavorites(personId, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getFavorites(personId, opts, callback);
 ```
 
 ### Parameters
@@ -575,15 +548,12 @@ var personId = "personId_example"; // {String} The identifier of a person.
 var opts = { 
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.getPerson(personId, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getPerson(personId, opts, callback);
 ```
 
 ### Parameters
@@ -633,15 +603,12 @@ var networkId = "networkId_example"; // {String} The identifier of a network.
 var opts = { 
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.getPersonNetwork(personIdnetworkId, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getPersonNetwork(personIdnetworkId, opts, callback);
 ```
 
 ### Parameters
@@ -692,15 +659,12 @@ var opts = {
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.getPersonNetworks(personId, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getPersonNetworks(personId, opts, callback);
 ```
 
 ### Parameters
@@ -752,15 +716,12 @@ var preferenceName = "preferenceName_example"; // {String} The name of the prefe
 var opts = { 
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.getPreference(personIdpreferenceName, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getPreference(personIdpreferenceName, opts, callback);
 ```
 
 ### Parameters
@@ -811,15 +772,12 @@ var opts = {
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.getPreferences(personId, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getPreferences(personId, opts, callback);
 ```
 
 ### Parameters
@@ -873,15 +831,12 @@ var opts = {
   'relations': ["relations_example"], // {[String]} Use the relations parameter to include one or more related entities in a single response.
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.getSiteMembership(personId, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getSiteMembership(personId, opts, callback);
 ```
 
 ### Parameters
@@ -935,15 +890,12 @@ var siteId = "siteId_example"; // {String} The identifier of a site.
 var opts = { 
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.getSiteMembershipRequest(personIdsiteId, , opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getSiteMembershipRequest(personIdsiteId, , opts, callback);
 ```
 
 ### Parameters
@@ -994,15 +946,12 @@ var opts = {
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.getSiteMembershipRequests(personId, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getSiteMembershipRequests(personId, opts, callback);
 ```
 
 ### Parameters
@@ -1051,15 +1000,12 @@ var personId = "personId_example"; // {String} The identifier of a person.
 
 var favoriteId = "favoriteId_example"; // {String} The identifier of a favorite.
 
+apiInstance.removeFavoriteSite(personIdfavoriteId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.removeFavoriteSite(personIdfavoriteId, callback);
 ```
 
 ### Parameters
@@ -1106,15 +1052,12 @@ var personId = "personId_example"; // {String} The identifier of a person.
 
 var siteId = "siteId_example"; // {String} The identifier of a site.
 
+apiInstance.removeSiteMembershipRequest(personIdsiteId, ).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.removeSiteMembershipRequest(personIdsiteId, , callback);
 ```
 
 ### Parameters
@@ -1163,15 +1106,12 @@ var siteId = "siteId_example"; // {String} The identifier of a site.
 
 var siteMembershipBody = new AlfrescoCoreRestApi.SiteMembershipBody1(); // {SiteMembershipBody1} The new message to display
 
+apiInstance.updateSiteMembershipRequest(personIdsiteId, siteMembershipBody).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.updateSiteMembershipRequest(personIdsiteId, siteMembershipBody, callback);
 ```
 
 ### Parameters

@@ -66,15 +66,12 @@ var sourceId = "sourceId_example"; // {String} The identifier of a node.
 
 var assocTargetBody = new AlfrescoCoreRestApi.AssocTargetBody(); // {AssocTargetBody} The target node id and assoc type.
 
+apiInstance.addAssoc(sourceId, assocTargetBody).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.addAssoc(sourceId, assocTargetBody, callback);
 ```
 
 ### Parameters
@@ -126,15 +123,12 @@ var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:\n* path\n* isLink\n* allowableOperations\n
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.addNode(nodeId, nodeBody, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.addNode(nodeId, nodeBody, opts, callback);
 ```
 
 ### Parameters
@@ -184,15 +178,12 @@ var parentId = "parentId_example"; // {String} The identifier of a node.
 
 var assocChildBody = new AlfrescoCoreRestApi.AssocChildBody(); // {AssocChildBody} The child node id and assoc type.
 
+apiInstance.addSecondaryChildAssoc(parentId, assocChildBody).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.addSecondaryChildAssoc(parentId, assocChildBody, callback);
 ```
 
 ### Parameters
@@ -241,15 +232,12 @@ var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the shared link, the following optional fields can be requested:\n* allowableOperations\n
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.addSharedLink(sharedLinkBody, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.addSharedLink(sharedLinkBody, opts, callback);
 ```
 
 ### Parameters
@@ -301,15 +289,12 @@ var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:\n* path\n* isLink\n* allowableOperations\n
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.copyNode(nodeId, copyBody, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.copyNode(nodeId, copyBody, opts, callback);
 ```
 
 ### Parameters
@@ -358,15 +343,12 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node. You can als
 
 var renditionBody = new AlfrescoCoreRestApi.RenditionBody(); // {RenditionBody} The rendition \"id\".
 
+apiInstance.createRendition(nodeId, renditionBody).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.createRendition(nodeId, renditionBody, callback);
 ```
 
 ### Parameters
@@ -415,15 +397,12 @@ var opts = {
   'skipConfiguration': false, // {Boolean} Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created.
   'skipAddToFavorites': false // {Boolean} Flag to indicate whether the site should not be added to the user's site favorites.
 };
+apiInstance.createSite(siteBody, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.createSite(siteBody, opts, callback);
 ```
 
 ### Parameters
@@ -472,15 +451,12 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node.
 var opts = { 
   'permanent': false // {Boolean} If **true** then the node is deleted permanently, without it moving to the trashcan.\nYou must be the owner or an admin to permanently delete the node.\n
 };
+apiInstance.deleteNode(nodeId, , opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.deleteNode(nodeId, , opts, callback);
 ```
 
 ### Parameters
@@ -525,15 +501,12 @@ var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
 var sharedId = "sharedId_example"; // {String} The identifier of a shared link to a file.
 
+apiInstance.deleteSharedLink(sharedId, ).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.deleteSharedLink(sharedId, , callback);
 ```
 
 ### Parameters
@@ -580,15 +553,12 @@ var siteId = "siteId_example"; // {String} The identifier of a site.
 var opts = { 
   'permanent': false // {Boolean} Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan.
 };
+apiInstance.deleteSite(siteId, , opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.deleteSite(siteId, , opts, callback);
 ```
 
 ### Parameters
@@ -635,15 +605,12 @@ var sharedId = "sharedId_example"; // {String} The identifier of a shared link t
 
 var emailSharedLinkBody = new AlfrescoCoreRestApi.EmailSharedLinkBody(); // {EmailSharedLinkBody} The shared link email to send.
 
+apiInstance.emailSharedLink(sharedId, emailSharedLinkBody).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.emailSharedLink(sharedId, emailSharedLinkBody, callback);
 ```
 
 ### Parameters
@@ -691,15 +658,12 @@ var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the shared link, the following optional fields can be requested:\n* allowableOperations\n
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.findSharedLinks(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.findSharedLinks(opts, callback);
 ```
 
 ### Parameters
@@ -748,15 +712,12 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node.
 var opts = { 
   'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:\n* path\n* isLink\n* allowableOperations\n
 };
+apiInstance.getDeletedNode(nodeId, , opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getDeletedNode(nodeId, , opts, callback);
 ```
 
 ### Parameters
@@ -804,15 +765,12 @@ var opts = {
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
   'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:\n* properties\n* aspectNames\n* path\n* isLink\n* allowableOperations\n* association\n
 };
+apiInstance.getDeletedNodes(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getDeletedNodes(opts, callback);
 ```
 
 ### Parameters
@@ -862,15 +820,12 @@ var opts = {
   'attachment': true, // {Boolean} **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n
   'ifModifiedSince': new Date("2013-10-20T19:20:30+01:00") // {Date} Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.\n
 };
+apiInstance.getFileContent(nodeId, , opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.getFileContent(nodeId, , opts, callback);
 ```
 
 ### Parameters
@@ -921,15 +876,12 @@ var opts = {
   'relativePath': "relativePath_example", // {String} If specified, returns information on the node resolved by this path.\nThe path is relative to the specified **nodeId**\n
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.getNode(nodeId, , opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getNode(nodeId, , opts, callback);
 ```
 
 ### Parameters
@@ -986,15 +938,12 @@ var opts = {
   'includeSource': true, // {Boolean} Also include \"source\" (in addition to \"entries\") with folder information on parent node (either the specified parent \"nodeId\" or as resolved by \"relativePath\")
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.getNodeChildren(nodeId, , opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getNodeChildren(nodeId, , opts, callback);
 ```
 
 ### Parameters
@@ -1048,15 +997,12 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var renditionId = "renditionId_example"; // {String} The name of a thumbnail rendition, for example *doclib*, or *pdf*.
 
+apiInstance.getRendition(nodeId, renditionId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getRendition(nodeId, renditionId, callback);
 ```
 
 ### Parameters
@@ -1107,15 +1053,12 @@ var opts = {
   'attachment': true, // {Boolean} **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n
   'ifModifiedSince': new Date("2013-10-20T19:20:30+01:00") // {Date} Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.\n
 };
+apiInstance.getRenditionContent(nodeId, renditionId, opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.getRenditionContent(nodeId, renditionId, opts, callback);
 ```
 
 ### Parameters
@@ -1162,15 +1105,12 @@ var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
+apiInstance.getRenditions(nodeId, ).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getRenditions(nodeId, , callback);
 ```
 
 ### Parameters
@@ -1218,15 +1158,12 @@ var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the shared link, the following optional fields can be requested:\n* allowableOperations\n
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.getSharedLink(sharedId, , opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getSharedLink(sharedId, , opts, callback);
 ```
 
 ### Parameters
@@ -1276,15 +1213,12 @@ var opts = {
   'attachment': true, // {Boolean} **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n
   'ifModifiedSince': new Date("2013-10-20T19:20:30+01:00") // {Date} Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.\n
 };
+apiInstance.getSharedLinkContent(sharedId, , opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.getSharedLinkContent(sharedId, , opts, callback);
 ```
 
 ### Parameters
@@ -1336,15 +1270,12 @@ var opts = {
   'attachment': true, // {Boolean} **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n
   'ifModifiedSince': new Date("2013-10-20T19:20:30+01:00") // {Date} Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.\n
 };
+apiInstance.getSharedLinkRenditionContent(sharedId, renditionId, opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.getSharedLinkRenditionContent(sharedId, renditionId, opts, callback);
 ```
 
 ### Parameters
@@ -1391,15 +1322,12 @@ var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
 var sharedId = "sharedId_example"; // {String} The identifier of a shared link to a file.
 
+apiInstance.getSharedLinkRenditions(sharedId, ).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getSharedLinkRenditions(sharedId, , callback);
 ```
 
 ### Parameters
@@ -1448,15 +1376,12 @@ var opts = {
   'include': "include_example", // {String} Return additional info, eg. aspect, properties, path, isLink
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.listParents(childId, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.listParents(childId, opts, callback);
 ```
 
 ### Parameters
@@ -1509,15 +1434,12 @@ var opts = {
   'include': "include_example", // {String} Return additional info, eg. aspect, properties, path, isLink
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.listSecondaryChildAssociations(parentId, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.listSecondaryChildAssociations(parentId, opts, callback);
 ```
 
 ### Parameters
@@ -1570,15 +1492,12 @@ var opts = {
   'include': "include_example", // {String} Return additional info, eg. aspect, properties, path, isLink
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.listSourceNodeAssociations(targetId, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.listSourceNodeAssociations(targetId, opts, callback);
 ```
 
 ### Parameters
@@ -1630,15 +1549,12 @@ var opts = {
   'include': "include_example", // {String} Return additional info, eg. aspect, properties, path, isLink
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.listTargetAssociations(sourceId, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.listTargetAssociations(sourceId, opts, callback);
 ```
 
 ### Parameters
@@ -1694,15 +1610,12 @@ var opts = {
   'orderBy': "orderBy_example", // {String} The list of results can be ordered by the following:\n* name\n* modifiedAt\n* createdAt\n
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.liveSearchNodes(term, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.liveSearchNodes(term, opts, callback);
 ```
 
 ### Parameters
@@ -1759,15 +1672,12 @@ var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:\n* path\n* isLink\n* allowableOperations\n
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.moveNode(nodeId, moveBody, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.moveNode(nodeId, moveBody, opts, callback);
 ```
 
 ### Parameters
@@ -1814,15 +1724,12 @@ var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
+apiInstance.purgeDeletedNode(nodeId, ).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.purgeDeletedNode(nodeId, , callback);
 ```
 
 ### Parameters
@@ -1871,15 +1778,12 @@ var targetId = "targetId_example"; // {String} The identifier of a node.
 var opts = { 
   'assocType': "assocType_example" // {String} Restrict the delete to only those of the given association type
 };
+apiInstance.removeAssoc(sourceId, targetId, opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.removeAssoc(sourceId, targetId, opts, callback);
 ```
 
 ### Parameters
@@ -1930,15 +1834,12 @@ var childId = "childId_example"; // {String} The identifier of a node.
 var opts = { 
   'assocType': "assocType_example" // {String} Restrict the delete to only those of the given association type
 };
+apiInstance.removeSecondaryChildAssoc(parentId, childId, opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.removeSecondaryChildAssoc(parentId, childId, opts, callback);
 ```
 
 ### Parameters
@@ -1984,15 +1885,12 @@ var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
+apiInstance.restoreNode(nodeId, ).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.restoreNode(nodeId, , callback);
 ```
 
 ### Parameters
@@ -2044,15 +1942,12 @@ var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:\n* path\n* isLink\n* allowableOperations\n
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.updateFileContent(nodeId, contentBody, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.updateFileContent(nodeId, contentBody, opts, callback);
 ```
 
 ### Parameters
@@ -2107,15 +2002,12 @@ var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:\n* path\n* isLink\n* allowableOperations\n
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.updateNode(nodeId, nodeBody, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.updateNode(nodeId, nodeBody, opts, callback);
 ```
 
 ### Parameters

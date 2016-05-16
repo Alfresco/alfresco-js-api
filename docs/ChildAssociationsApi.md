@@ -43,15 +43,12 @@ var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:\n* path\n* isLink\n* allowableOperations\n
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.addNode(nodeId, nodeBody, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.addNode(nodeId, nodeBody, opts, callback);
 ```
 
 ### Parameters
@@ -101,15 +98,12 @@ var parentId = "parentId_example"; // {String} The identifier of a node.
 
 var assocChildBody = new AlfrescoCoreRestApi.AssocChildBody(); // {AssocChildBody} The child node id and assoc type.
 
+apiInstance.addSecondaryChildAssoc(parentId, assocChildBody).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.addSecondaryChildAssoc(parentId, assocChildBody, callback);
 ```
 
 ### Parameters
@@ -157,15 +151,12 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node.
 var opts = { 
   'permanent': false // {Boolean} If **true** then the node is deleted permanently, without it moving to the trashcan.\nYou must be the owner or an admin to permanently delete the node.\n
 };
+apiInstance.deleteNode(nodeId, , opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.deleteNode(nodeId, , opts, callback);
 ```
 
 ### Parameters
@@ -220,15 +211,12 @@ var opts = {
   'includeSource': true, // {Boolean} Also include \"source\" (in addition to \"entries\") with folder information on parent node (either the specified parent \"nodeId\" or as resolved by \"relativePath\")
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.getNodeChildren(nodeId, , opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getNodeChildren(nodeId, , opts, callback);
 ```
 
 ### Parameters
@@ -285,15 +273,12 @@ var opts = {
   'include': "include_example", // {String} Return additional info, eg. aspect, properties, path, isLink
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.listParents(childId, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.listParents(childId, opts, callback);
 ```
 
 ### Parameters
@@ -346,15 +331,12 @@ var opts = {
   'include': "include_example", // {String} Return additional info, eg. aspect, properties, path, isLink
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.listSecondaryChildAssociations(parentId, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.listSecondaryChildAssociations(parentId, opts, callback);
 ```
 
 ### Parameters
@@ -408,15 +390,12 @@ var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:\n* path\n* isLink\n* allowableOperations\n
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.moveNode(nodeId, moveBody, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.moveNode(nodeId, moveBody, opts, callback);
 ```
 
 ### Parameters
@@ -468,15 +447,12 @@ var childId = "childId_example"; // {String} The identifier of a node.
 var opts = { 
   'assocType': "assocType_example" // {String} Restrict the delete to only those of the given association type
 };
+apiInstance.removeSecondaryChildAssoc(parentId, childId, opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.removeSecondaryChildAssoc(parentId, childId, opts, callback);
 ```
 
 ### Parameters

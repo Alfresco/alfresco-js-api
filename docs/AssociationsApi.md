@@ -34,15 +34,12 @@ var sourceId = "sourceId_example"; // {String} The identifier of a node.
 
 var assocTargetBody = new AlfrescoCoreRestApi.AssocTargetBody(); // {AssocTargetBody} The target node id and assoc type.
 
+apiInstance.addAssoc(sourceId, assocTargetBody).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.addAssoc(sourceId, assocTargetBody, callback);
 ```
 
 ### Parameters
@@ -92,15 +89,12 @@ var opts = {
   'include': "include_example", // {String} Return additional info, eg. aspect, properties, path, isLink
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.listSourceNodeAssociations(targetId, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.listSourceNodeAssociations(targetId, opts, callback);
 ```
 
 ### Parameters
@@ -152,15 +146,12 @@ var opts = {
   'include': "include_example", // {String} Return additional info, eg. aspect, properties, path, isLink
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.listTargetAssociations(sourceId, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.listTargetAssociations(sourceId, opts, callback);
 ```
 
 ### Parameters
@@ -212,15 +203,12 @@ var targetId = "targetId_example"; // {String} The identifier of a node.
 var opts = { 
   'assocType': "assocType_example" // {String} Restrict the delete to only those of the given association type
 };
+apiInstance.removeAssoc(sourceId, targetId, opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.removeAssoc(sourceId, targetId, opts, callback);
 ```
 
 ### Parameters

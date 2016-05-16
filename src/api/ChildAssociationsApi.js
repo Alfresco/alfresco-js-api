@@ -32,13 +32,6 @@
     this.apiClient = apiClient || ApiClient.instance;
 
 
-    /**
-     * Callback function to receive the result of the addNode operation.
-     * @callback module:api/ChildAssociationsApi~addNodeCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/NodeEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Create a node
@@ -49,10 +42,9 @@
      * @param {Boolean} opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
      * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested:\n* path\n* isLink\n* allowableOperations\n
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/ChildAssociationsApi~addNodeCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/NodeEntry}
      */
-    this.addNode = function(nodeId, nodeBody, opts, callback) {
+    this.addNode = function(nodeId, nodeBody, opts) {
       opts = opts || {};
       var postBody = nodeBody;
 
@@ -88,26 +80,18 @@
       return this.apiClient.callApi(
         '/nodes/{nodeId}/children', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the addSecondaryChildAssoc operation.
-     * @callback module:api/ChildAssociationsApi~addSecondaryChildAssocCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Add secondary child
      * Add secondary child association, with given association type, between parent and child node.\n
      * @param {String} parentId The identifier of a node.
      * @param {module:model/AssocChildBody} assocChildBody The child node id and assoc type.
-     * @param {module:api/ChildAssociationsApi~addSecondaryChildAssocCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.addSecondaryChildAssoc = function(parentId, assocChildBody, callback) {
+    this.addSecondaryChildAssoc = function(parentId, assocChildBody) {
       var postBody = assocChildBody;
 
       // verify the required parameter 'parentId' is set
@@ -139,17 +123,10 @@
       return this.apiClient.callApi(
         '/nodes/{parentId}/secondary-children', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the deleteNode operation.
-     * @callback module:api/ChildAssociationsApi~deleteNodeCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Delete a node
@@ -157,9 +134,8 @@
      * @param {String} nodeId The identifier of a node.
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.permanent If **true** then the node is deleted permanently, without it moving to the trashcan.\nYou must be the owner or an admin to permanently delete the node.\n (default to false)
-     * @param {module:api/ChildAssociationsApi~deleteNodeCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteNode = function(nodeId, opts, callback) {
+    this.deleteNode = function(nodeId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -188,17 +164,10 @@
       return this.apiClient.callApi(
         '/nodes/{nodeId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getNodeChildren operation.
-     * @callback module:api/ChildAssociationsApi~getNodeChildrenCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/NodePaging} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get node children
@@ -213,10 +182,9 @@
      * @param {String} opts.relativePath Return information on children within the folder resolved by this path (relative to specified nodeId as the starting parent folder)
      * @param {Boolean} opts.includeSource Also include \&quot;source\&quot; (in addition to \&quot;entries\&quot;) with folder information on parent node (either the specified parent \&quot;nodeId\&quot; or as resolved by \&quot;relativePath\&quot;)
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/ChildAssociationsApi~getNodeChildrenCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/NodePaging}
      */
-    this.getNodeChildren = function(nodeId, opts, callback) {
+    this.getNodeChildren = function(nodeId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -252,17 +220,10 @@
       return this.apiClient.callApi(
         '/nodes/{nodeId}/children', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the listParents operation.
-     * @callback module:api/ChildAssociationsApi~listParentsCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/NodeAssocPaging} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * List parents
@@ -272,10 +233,9 @@
      * @param {String} opts.where Optionally filter the list by assocType. Here&#39;s an example:\n\n*   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;)\n
      * @param {String} opts.include Return additional info, eg. aspect, properties, path, isLink
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/ChildAssociationsApi~listParentsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/NodeAssocPaging}
      */
-    this.listParents = function(childId, opts, callback) {
+    this.listParents = function(childId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -306,17 +266,10 @@
       return this.apiClient.callApi(
         '/nodes/{childId}/parents', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the listSecondaryChildAssociations operation.
-     * @callback module:api/ChildAssociationsApi~listSecondaryChildAssociationsCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/NodeChildAssocPaging} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * List secondary children
@@ -327,10 +280,9 @@
      * @param {String} opts.where Optionally filter the list by assocType. Here&#39;s an example:\n\n*   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;)\n
      * @param {String} opts.include Return additional info, eg. aspect, properties, path, isLink
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/ChildAssociationsApi~listSecondaryChildAssociationsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/NodeChildAssocPaging}
      */
-    this.listSecondaryChildAssociations = function(parentId, opts, callback) {
+    this.listSecondaryChildAssociations = function(parentId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -362,17 +314,10 @@
       return this.apiClient.callApi(
         '/nodes/{parentId}/secondary-children', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the moveNode operation.
-     * @callback module:api/ChildAssociationsApi~moveNodeCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/NodeEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Move a node
@@ -382,10 +327,9 @@
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested:\n* path\n* isLink\n* allowableOperations\n
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/ChildAssociationsApi~moveNodeCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/NodeEntry}
      */
-    this.moveNode = function(nodeId, moveBody, opts, callback) {
+    this.moveNode = function(nodeId, moveBody, opts) {
       opts = opts || {};
       var postBody = moveBody;
 
@@ -420,17 +364,10 @@
       return this.apiClient.callApi(
         '/nodes/{nodeId}/move', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the removeSecondaryChildAssoc operation.
-     * @callback module:api/ChildAssociationsApi~removeSecondaryChildAssocCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Remove secondary child (or children)
@@ -439,9 +376,8 @@
      * @param {String} childId The identifier of a node.
      * @param {Object} opts Optional parameters
      * @param {String} opts.assocType Restrict the delete to only those of the given association type
-     * @param {module:api/ChildAssociationsApi~removeSecondaryChildAssocCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.removeSecondaryChildAssoc = function(parentId, childId, opts, callback) {
+    this.removeSecondaryChildAssoc = function(parentId, childId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -476,7 +412,7 @@
       return this.apiClient.callApi(
         '/nodes/{parentId}/secondary-children/{childId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

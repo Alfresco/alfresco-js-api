@@ -32,23 +32,15 @@
     this.apiClient = apiClient || ApiClient.instance;
 
 
-    /**
-     * Callback function to receive the result of the addFavorite operation.
-     * @callback module:api/FavoritesApi~addFavoriteCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/FavoriteEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Add a favorite
      * Favorite a **site**, **file**, or **folder** in the repository.
      * @param {String} personId The identifier of a person.
      * @param {module:model/FavoriteBody} favoriteBody An object identifying the entity to be favorited. \n\nThe object consists of a single property which is an object with the name &#x60;site&#x60;, &#x60;file&#x60;, or &#x60;folder&#x60;. \nThe content of that object is the &#x60;guid&#x60; of the target entity.\n\nFor example, to favorite a file the following body would be used:\n\n&#x60;&#x60;&#x60;JSON\n{\n   \&quot;target\&quot;: {\n      \&quot;file\&quot;: {\n         \&quot;guid\&quot;: \&quot;abcde-01234\&quot;\n      }\n   }\n}\n&#x60;&#x60;&#x60;\n
-     * @param {module:api/FavoritesApi~addFavoriteCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/FavoriteEntry}
      */
-    this.addFavorite = function(personId, favoriteBody, callback) {
+    this.addFavorite = function(personId, favoriteBody) {
       var postBody = favoriteBody;
 
       // verify the required parameter 'personId' is set
@@ -80,17 +72,10 @@
       return this.apiClient.callApi(
         '/people/{personId}/favorites', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getFavorite operation.
-     * @callback module:api/FavoritesApi~getFavoriteCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/FavoriteEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get a favorite
@@ -99,10 +84,9 @@
      * @param {String} favoriteId The identifier of a favorite.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/FavoritesApi~getFavoriteCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/FavoriteEntry}
      */
-    this.getFavorite = function(personId, favoriteId, opts, callback) {
+    this.getFavorite = function(personId, favoriteId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -137,17 +121,10 @@
       return this.apiClient.callApi(
         '/people/{personId}/favorites/{favoriteId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getFavorites operation.
-     * @callback module:api/FavoritesApi~getFavoritesCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/FavoritePaging} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get favorites
@@ -158,10 +135,9 @@
      * @param {Integer} opts.maxItems The maximum number of items to return in the list.
      * @param {String} opts.where A string to restrict the returned objects by using a predicate.
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/FavoritesApi~getFavoritesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/FavoritePaging}
      */
-    this.getFavorites = function(personId, opts, callback) {
+    this.getFavorites = function(personId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -193,26 +169,18 @@
       return this.apiClient.callApi(
         '/people/{personId}/favorites', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the removeFavoriteSite operation.
-     * @callback module:api/FavoritesApi~removeFavoriteSiteCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Delete a favorite
      * Removes **favoriteId** as a favorite of person **personId**.
      * @param {String} personId The identifier of a person.
      * @param {String} favoriteId The identifier of a favorite.
-     * @param {module:api/FavoritesApi~removeFavoriteSiteCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.removeFavoriteSite = function(personId, favoriteId, callback) {
+    this.removeFavoriteSite = function(personId, favoriteId) {
       var postBody = null;
 
       // verify the required parameter 'personId' is set
@@ -245,7 +213,7 @@
       return this.apiClient.callApi(
         '/people/{personId}/favorites/{favoriteId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

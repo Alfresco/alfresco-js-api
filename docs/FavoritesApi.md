@@ -34,15 +34,12 @@ var personId = "personId_example"; // {String} The identifier of a person.
 
 var favoriteBody = new AlfrescoCoreRestApi.FavoriteBody(); // {FavoriteBody} An object identifying the entity to be favorited. \n\nThe object consists of a single property which is an object with the name `site`, `file`, or `folder`. \nThe content of that object is the `guid` of the target entity.\n\nFor example, to favorite a file the following body would be used:\n\n```JSON\n{\n   \"target\": {\n      \"file\": {\n         \"guid\": \"abcde-01234\"\n      }\n   }\n}\n```\n
 
+apiInstance.addFavorite(personIdfavoriteBody).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.addFavorite(personIdfavoriteBody, callback);
 ```
 
 ### Parameters
@@ -92,15 +89,12 @@ var favoriteId = "favoriteId_example"; // {String} The identifier of a favorite.
 var opts = { 
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.getFavorite(personIdfavoriteId, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getFavorite(personIdfavoriteId, opts, callback);
 ```
 
 ### Parameters
@@ -152,15 +146,12 @@ var opts = {
   'where': "where_example", // {String} A string to restrict the returned objects by using a predicate.
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.getFavorites(personId, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getFavorites(personId, opts, callback);
 ```
 
 ### Parameters
@@ -210,15 +201,12 @@ var personId = "personId_example"; // {String} The identifier of a person.
 
 var favoriteId = "favoriteId_example"; // {String} The identifier of a favorite.
 
+apiInstance.removeFavoriteSite(personIdfavoriteId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.removeFavoriteSite(personIdfavoriteId, callback);
 ```
 
 ### Parameters

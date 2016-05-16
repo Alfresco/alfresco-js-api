@@ -37,15 +37,12 @@ var ratingId = "ratingId_example"; // {String} The identifier of a rating.
 var opts = { 
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.getRating(nodeId, ratingId, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getRating(nodeId, ratingId, opts, callback);
 ```
 
 ### Parameters
@@ -96,15 +93,12 @@ var opts = {
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.getRatings(nodeId, , opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getRatings(nodeId, , opts, callback);
 ```
 
 ### Parameters
@@ -153,15 +147,12 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var ratingBody = new AlfrescoCoreRestApi.RatingBody(); // {RatingBody} For \"myRating\" the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.\n\nFor example, to \"like\" a file the following body would be used:\n\n  ```JSON\n    {\n      \"id\": \"likes\",\n      \"myRating\": true\n    }\n  ```\n
 
+apiInstance.rate(nodeId, ratingBody).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.rate(nodeId, ratingBody, callback);
 ```
 
 ### Parameters
@@ -208,15 +199,12 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var ratingId = "ratingId_example"; // {String} The identifier of a rating.
 
+apiInstance.removeRating(nodeId, ratingId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.removeRating(nodeId, ratingId, callback);
 ```
 
 ### Parameters

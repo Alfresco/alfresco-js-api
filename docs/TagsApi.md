@@ -36,15 +36,12 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var tagBody = new AlfrescoCoreRestApi.TagBody(); // {TagBody} The new tag
 
+apiInstance.addTag(nodeId, tagBody).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.addTag(nodeId, tagBody, callback);
 ```
 
 ### Parameters
@@ -94,15 +91,12 @@ var opts = {
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.getNodeTags(nodeId, , opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getNodeTags(nodeId, , opts, callback);
 ```
 
 ### Parameters
@@ -152,15 +146,12 @@ var tagId = "tagId_example"; // {String} The identifier of a tag.
 var opts = { 
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.getTag(tagId, , opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getTag(tagId, , opts, callback);
 ```
 
 ### Parameters
@@ -208,15 +199,12 @@ var opts = {
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.getTags(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getTags(opts, callback);
 ```
 
 ### Parameters
@@ -264,15 +252,12 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var tagId = "tagId_example"; // {String} The identifier of a tag.
 
+apiInstance.removeTag(nodeId, tagId, ).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.removeTag(nodeId, tagId, , callback);
 ```
 
 ### Parameters
@@ -319,15 +304,12 @@ var tagId = "tagId_example"; // {String} The identifier of a tag.
 
 var tagBody = new AlfrescoCoreRestApi.TagBody1(); // {TagBody1} The updated tag
 
+apiInstance.updateTag(tagId, tagBody).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.updateTag(tagId, tagBody, callback);
 ```
 
 ### Parameters

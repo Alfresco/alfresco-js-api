@@ -32,23 +32,15 @@
     this.apiClient = apiClient || ApiClient.instance;
 
 
-    /**
-     * Callback function to receive the result of the addFavorite operation.
-     * @callback module:api/PeopleApi~addFavoriteCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/FavoriteEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Add a favorite
      * Favorite a **site**, **file**, or **folder** in the repository.
      * @param {String} personId The identifier of a person.
      * @param {module:model/FavoriteBody} favoriteBody An object identifying the entity to be favorited. \n\nThe object consists of a single property which is an object with the name &#x60;site&#x60;, &#x60;file&#x60;, or &#x60;folder&#x60;. \nThe content of that object is the &#x60;guid&#x60; of the target entity.\n\nFor example, to favorite a file the following body would be used:\n\n&#x60;&#x60;&#x60;JSON\n{\n   \&quot;target\&quot;: {\n      \&quot;file\&quot;: {\n         \&quot;guid\&quot;: \&quot;abcde-01234\&quot;\n      }\n   }\n}\n&#x60;&#x60;&#x60;\n
-     * @param {module:api/PeopleApi~addFavoriteCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/FavoriteEntry}
      */
-    this.addFavorite = function(personId, favoriteBody, callback) {
+    this.addFavorite = function(personId, favoriteBody) {
       var postBody = favoriteBody;
 
       // verify the required parameter 'personId' is set
@@ -80,27 +72,19 @@
       return this.apiClient.callApi(
         '/people/{personId}/favorites', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the addSiteMembershipRequest operation.
-     * @callback module:api/PeopleApi~addSiteMembershipRequestCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/SiteMembershipRequestEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Create a site membership request
      * Create a site membership request for **personId** and **siteId**. The **personId** will be invited to the site as a SiteConsumer.
      * @param {String} personId The identifier of a person.
      * @param {module:model/SiteMembershipBody} siteMembershipBody Site membership request details
-     * @param {module:api/PeopleApi~addSiteMembershipRequestCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/SiteMembershipRequestEntry}
      */
-    this.addSiteMembershipRequest = function(personId, siteMembershipBody, callback) {
+    this.addSiteMembershipRequest = function(personId, siteMembershipBody) {
       var postBody = siteMembershipBody;
 
       // verify the required parameter 'personId' is set
@@ -132,26 +116,18 @@
       return this.apiClient.callApi(
         '/people/{personId}/site-membership-requests', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the deleteFavoriteSite operation.
-     * @callback module:api/PeopleApi~deleteFavoriteSiteCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Delete favorite site
      * Removes site **siteId** from the favorite site list of person **personId**.\n\n**Note This method is deprecated and will be removed in the future.**\nUse &#x60;/people/{personId}/favorites/{favoriteId}&#x60; instead.\n
      * @param {String} personId The identifier of a person.
      * @param {String} siteId The identifier of a site.
-     * @param {module:api/PeopleApi~deleteFavoriteSiteCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteFavoriteSite = function(personId, siteId, callback) {
+    this.deleteFavoriteSite = function(personId, siteId) {
       var postBody = null;
 
       // verify the required parameter 'personId' is set
@@ -184,27 +160,19 @@
       return this.apiClient.callApi(
         '/people/{personId}/favorite-sites/{siteId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the favoriteSite operation.
-     * @callback module:api/PeopleApi~favoriteSiteCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/InlineResponse201} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Favorite a site
      * Add a favorite site for person **personId**.\n\n**Note: that this method is deprecated and will be removed in the future**.\nUse &#x60;/people/{personId}/favorites&#x60; instead.\n
      * @param {String} personId The identifier of a person.
      * @param {module:model/FavoriteSiteBody} favoriteSiteBody The id of the site to favorite.
-     * @param {module:api/PeopleApi~favoriteSiteCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/InlineResponse201}
      */
-    this.favoriteSite = function(personId, favoriteSiteBody, callback) {
+    this.favoriteSite = function(personId, favoriteSiteBody) {
       var postBody = favoriteSiteBody;
 
       // verify the required parameter 'personId' is set
@@ -236,17 +204,10 @@
       return this.apiClient.callApi(
         '/people/{personId}/favorite-sites', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getActivities operation.
-     * @callback module:api/PeopleApi~getActivitiesCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/ActivityPaging} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get activities
@@ -258,10 +219,9 @@
      * @param {String} opts.who A filter to include the user&#39;s activities only &#x60;-me-&#x60;, other user&#39;s activities only &#x60;-others-&#x60;&#39;\n
      * @param {String} opts.siteId Include only activity feed entries relating to this site.
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/PeopleApi~getActivitiesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ActivityPaging}
      */
-    this.getActivities = function(personId, opts, callback) {
+    this.getActivities = function(personId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -294,17 +254,10 @@
       return this.apiClient.callApi(
         '/people/{personId}/activities', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getFavorite operation.
-     * @callback module:api/PeopleApi~getFavoriteCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/FavoriteEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get a favorite
@@ -313,10 +266,9 @@
      * @param {String} favoriteId The identifier of a favorite.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/PeopleApi~getFavoriteCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/FavoriteEntry}
      */
-    this.getFavorite = function(personId, favoriteId, opts, callback) {
+    this.getFavorite = function(personId, favoriteId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -351,17 +303,10 @@
       return this.apiClient.callApi(
         '/people/{personId}/favorites/{favoriteId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getFavoriteSite operation.
-     * @callback module:api/PeopleApi~getFavoriteSiteCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/SiteEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get a favorite site
@@ -370,10 +315,9 @@
      * @param {String} siteId The identifier of a site.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/PeopleApi~getFavoriteSiteCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/SiteEntry}
      */
-    this.getFavoriteSite = function(personId, siteId, opts, callback) {
+    this.getFavoriteSite = function(personId, siteId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -408,17 +352,10 @@
       return this.apiClient.callApi(
         '/people/{personId}/favorite-sites/{siteId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getFavoriteSites operation.
-     * @callback module:api/PeopleApi~getFavoriteSitesCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/SitePaging} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get favorite sites
@@ -428,10 +365,9 @@
      * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
      * @param {Integer} opts.maxItems The maximum number of items to return in the list.
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/PeopleApi~getFavoriteSitesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/SitePaging}
      */
-    this.getFavoriteSites = function(personId, opts, callback) {
+    this.getFavoriteSites = function(personId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -462,17 +398,10 @@
       return this.apiClient.callApi(
         '/people/{personId}/favorite-sites', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getFavorites operation.
-     * @callback module:api/PeopleApi~getFavoritesCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/FavoritePaging} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get favorites
@@ -483,10 +412,9 @@
      * @param {Integer} opts.maxItems The maximum number of items to return in the list.
      * @param {String} opts.where A string to restrict the returned objects by using a predicate.
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/PeopleApi~getFavoritesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/FavoritePaging}
      */
-    this.getFavorites = function(personId, opts, callback) {
+    this.getFavorites = function(personId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -518,17 +446,10 @@
       return this.apiClient.callApi(
         '/people/{personId}/favorites', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getPerson operation.
-     * @callback module:api/PeopleApi~getPersonCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/PersonEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get a person
@@ -536,10 +457,9 @@
      * @param {String} personId The identifier of a person.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/PeopleApi~getPersonCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/PersonEntry}
      */
-    this.getPerson = function(personId, opts, callback) {
+    this.getPerson = function(personId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -568,17 +488,10 @@
       return this.apiClient.callApi(
         '/people/{personId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getPersonNetwork operation.
-     * @callback module:api/PeopleApi~getPersonNetworkCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/PersonNetworkEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get network information
@@ -587,10 +500,9 @@
      * @param {String} networkId The identifier of a network.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/PeopleApi~getPersonNetworkCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/PersonNetworkEntry}
      */
-    this.getPersonNetwork = function(personId, networkId, opts, callback) {
+    this.getPersonNetwork = function(personId, networkId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -625,17 +537,10 @@
       return this.apiClient.callApi(
         '/people/{personId}/networks/{networkId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getPersonNetworks operation.
-     * @callback module:api/PeopleApi~getPersonNetworksCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/PersonNetworkPaging} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get network membership for a person
@@ -645,10 +550,9 @@
      * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
      * @param {Integer} opts.maxItems The maximum number of items to return in the list.
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/PeopleApi~getPersonNetworksCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/PersonNetworkPaging}
      */
-    this.getPersonNetworks = function(personId, opts, callback) {
+    this.getPersonNetworks = function(personId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -679,17 +583,10 @@
       return this.apiClient.callApi(
         '/people/{personId}/networks', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getPreference operation.
-     * @callback module:api/PeopleApi~getPreferenceCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/PreferenceEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get a preference
@@ -698,10 +595,9 @@
      * @param {String} preferenceName The name of the preference.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/PeopleApi~getPreferenceCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/PreferenceEntry}
      */
-    this.getPreference = function(personId, preferenceName, opts, callback) {
+    this.getPreference = function(personId, preferenceName, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -736,17 +632,10 @@
       return this.apiClient.callApi(
         '/people/{personId}/preferences/{preferenceName}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getPreferences operation.
-     * @callback module:api/PeopleApi~getPreferencesCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/PreferencePaging} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get preferences
@@ -756,10 +645,9 @@
      * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
      * @param {Integer} opts.maxItems The maximum number of items to return in the list.
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/PeopleApi~getPreferencesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/PreferencePaging}
      */
-    this.getPreferences = function(personId, opts, callback) {
+    this.getPreferences = function(personId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -790,17 +678,10 @@
       return this.apiClient.callApi(
         '/people/{personId}/preferences', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getSiteMembership operation.
-     * @callback module:api/PeopleApi~getSiteMembershipCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/SitePaging} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get site membership information
@@ -812,10 +693,9 @@
      * @param {String} opts.orderBy A string to control the order of the entities returned.
      * @param {Array.<String>} opts.relations Use the relations parameter to include one or more related entities in a single response.
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/PeopleApi~getSiteMembershipCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/SitePaging}
      */
-    this.getSiteMembership = function(personId, opts, callback) {
+    this.getSiteMembership = function(personId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -848,17 +728,10 @@
       return this.apiClient.callApi(
         '/people/{personId}/sites', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getSiteMembershipRequest operation.
-     * @callback module:api/PeopleApi~getSiteMembershipRequestCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/SiteMembershipRequestEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get a site membership request
@@ -867,10 +740,9 @@
      * @param {String} siteId The identifier of a site.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/PeopleApi~getSiteMembershipRequestCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/SiteMembershipRequestEntry}
      */
-    this.getSiteMembershipRequest = function(personId, siteId, opts, callback) {
+    this.getSiteMembershipRequest = function(personId, siteId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -905,17 +777,10 @@
       return this.apiClient.callApi(
         '/people/{personId}/site-membership-requests/{siteId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getSiteMembershipRequests operation.
-     * @callback module:api/PeopleApi~getSiteMembershipRequestsCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/SiteMembershipRequestPaging} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get site membership requests
@@ -925,10 +790,9 @@
      * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
      * @param {Integer} opts.maxItems The maximum number of items to return in the list.
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/PeopleApi~getSiteMembershipRequestsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/SiteMembershipRequestPaging}
      */
-    this.getSiteMembershipRequests = function(personId, opts, callback) {
+    this.getSiteMembershipRequests = function(personId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -959,26 +823,18 @@
       return this.apiClient.callApi(
         '/people/{personId}/site-membership-requests', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the removeFavoriteSite operation.
-     * @callback module:api/PeopleApi~removeFavoriteSiteCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Delete a favorite
      * Removes **favoriteId** as a favorite of person **personId**.
      * @param {String} personId The identifier of a person.
      * @param {String} favoriteId The identifier of a favorite.
-     * @param {module:api/PeopleApi~removeFavoriteSiteCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.removeFavoriteSite = function(personId, favoriteId, callback) {
+    this.removeFavoriteSite = function(personId, favoriteId) {
       var postBody = null;
 
       // verify the required parameter 'personId' is set
@@ -1011,26 +867,18 @@
       return this.apiClient.callApi(
         '/people/{personId}/favorites/{favoriteId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the removeSiteMembershipRequest operation.
-     * @callback module:api/PeopleApi~removeSiteMembershipRequestCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Cancel a site membership
      * Cancels the site membership request to site **siteId** for person **personId**.
      * @param {String} personId The identifier of a person.
      * @param {String} siteId The identifier of a site.
-     * @param {module:api/PeopleApi~removeSiteMembershipRequestCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.removeSiteMembershipRequest = function(personId, siteId, callback) {
+    this.removeSiteMembershipRequest = function(personId, siteId) {
       var postBody = null;
 
       // verify the required parameter 'personId' is set
@@ -1063,17 +911,10 @@
       return this.apiClient.callApi(
         '/people/{personId}/site-membership-requests/{siteId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the updateSiteMembershipRequest operation.
-     * @callback module:api/PeopleApi~updateSiteMembershipRequestCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Update a site membership request
@@ -1081,9 +922,8 @@
      * @param {String} personId The identifier of a person.
      * @param {String} siteId The identifier of a site.
      * @param {module:model/SiteMembershipBody1} siteMembershipBody The new message to display
-     * @param {module:api/PeopleApi~updateSiteMembershipRequestCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.updateSiteMembershipRequest = function(personId, siteId, siteMembershipBody, callback) {
+    this.updateSiteMembershipRequest = function(personId, siteId, siteMembershipBody) {
       var postBody = siteMembershipBody;
 
       // verify the required parameter 'personId' is set
@@ -1121,7 +961,7 @@
       return this.apiClient.callApi(
         '/people/{personId}/site-membership-requests/{siteId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

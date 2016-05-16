@@ -1700,14 +1700,6 @@ module.exports = function(arr, fn, initial){
   };
 
   /**
-   * Callback function to receive the result of the operation.
-   * @callback module:ApiClient~callApiCallback
-   * @param {String} error Error message, if any.
-   * @param data The data returned by the service call.
-   * @param {String} response The complete HTTP response.
-   */
-
-  /**
    * Invokes the REST service using the supplied settings and parameters.
    * @param {String} path The base URL to invoke.
    * @param {String} httpMethod The HTTP method to use.
@@ -1720,13 +1712,11 @@ module.exports = function(arr, fn, initial){
    * @param {Array.<String>} contentTypes An array of request MIME types.
    * @param {Array.<String>} accepts An array of acceptable response MIME types.
    * @param {(String|Array|ObjectFunction)} returnType The required type to return; can be a string for simple types or the
-   * constructor for a complex type.
-   * @param {module:ApiClient~callApiCallback} callback The callback function.
-   * @returns {Object} The SuperAgent request object.
+   * constructor for a complex type.   * @returns {Promise} A Promise object.
    */
   exports.prototype.callApi = function callApi(path, httpMethod, pathParams,
       queryParams, headerParams, formParams, bodyParam, authNames, contentTypes, accepts,
-      returnType, callback) {
+      returnType) {
 
     var _this = this;
     var url = this.buildUrl(path, pathParams);
@@ -1774,18 +1764,16 @@ module.exports = function(arr, fn, initial){
       request.accept(accept);
     }
 
-
-    request.end(function(error, response) {
-      if (callback) {
-        var data = null;
-        if (!error) {
-          data = _this.deserialize(response, returnType);
+    return new Promise(function(resolve, reject) {
+      request.end(function(error, response) {
+        if (error) {
+          reject(error);
+        } else {
+          var data = _this.deserialize(response, returnType);
+          resolve(data);
         }
-        callback(error, data, response);
-      }
+      });
     });
-
-    return request;
   };
 
   /**
@@ -1902,13 +1890,6 @@ module.exports = function(arr, fn, initial){
     this.apiClient = apiClient || ApiClient.instance;
 
 
-    /**
-     * Callback function to receive the result of the addNode operation.
-     * @callback module:api/NodesApi~addNodeCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/NodeEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Create a node
@@ -1919,10 +1900,9 @@ module.exports = function(arr, fn, initial){
      * @param {Boolean} opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
      * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested:\n* path\n* isLink\n* allowableOperations\n
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/NodesApi~addNodeCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/NodeEntry}
      */
-    this.addNode = function(nodeId, nodeBody, opts, callback) {
+    this.addNode = function(nodeId, nodeBody, opts) {
       opts = opts || {};
       var postBody = nodeBody;
 
@@ -1958,17 +1938,10 @@ module.exports = function(arr, fn, initial){
       return this.apiClient.callApi(
         '/nodes/{nodeId}/children', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the copyNode operation.
-     * @callback module:api/NodesApi~copyNodeCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/NodeEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Copy a node
@@ -1978,10 +1951,9 @@ module.exports = function(arr, fn, initial){
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested:\n* path\n* isLink\n* allowableOperations\n
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/NodesApi~copyNodeCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/NodeEntry}
      */
-    this.copyNode = function(nodeId, copyBody, opts, callback) {
+    this.copyNode = function(nodeId, copyBody, opts) {
       opts = opts || {};
       var postBody = copyBody;
 
@@ -2016,17 +1988,10 @@ module.exports = function(arr, fn, initial){
       return this.apiClient.callApi(
         '/nodes/{nodeId}/copy', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the deleteNode operation.
-     * @callback module:api/NodesApi~deleteNodeCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Delete a node
@@ -2034,9 +1999,8 @@ module.exports = function(arr, fn, initial){
      * @param {String} nodeId The identifier of a node.
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.permanent If **true** then the node is deleted permanently, without it moving to the trashcan.\nYou must be the owner or an admin to permanently delete the node.\n (default to false)
-     * @param {module:api/NodesApi~deleteNodeCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteNode = function(nodeId, opts, callback) {
+    this.deleteNode = function(nodeId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -2065,17 +2029,10 @@ module.exports = function(arr, fn, initial){
       return this.apiClient.callApi(
         '/nodes/{nodeId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getDeletedNode operation.
-     * @callback module:api/NodesApi~getDeletedNodeCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/DeletedNodeEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get a deleted node
@@ -2083,10 +2040,9 @@ module.exports = function(arr, fn, initial){
      * @param {String} nodeId The identifier of a node.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested:\n* path\n* isLink\n* allowableOperations\n
-     * @param {module:api/NodesApi~getDeletedNodeCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/DeletedNodeEntry}
      */
-    this.getDeletedNode = function(nodeId, opts, callback) {
+    this.getDeletedNode = function(nodeId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -2115,17 +2071,10 @@ module.exports = function(arr, fn, initial){
       return this.apiClient.callApi(
         '/deleted-nodes/{nodeId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getDeletedNodes operation.
-     * @callback module:api/NodesApi~getDeletedNodesCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/DeletedNodesPaging} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get deleted nodes
@@ -2134,10 +2083,9 @@ module.exports = function(arr, fn, initial){
      * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
      * @param {Integer} opts.maxItems The maximum number of items to return in the list.
      * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested:\n* properties\n* aspectNames\n* path\n* isLink\n* allowableOperations\n* association\n
-     * @param {module:api/NodesApi~getDeletedNodesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/DeletedNodesPaging}
      */
-    this.getDeletedNodes = function(opts, callback) {
+    this.getDeletedNodes = function(opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -2162,17 +2110,10 @@ module.exports = function(arr, fn, initial){
       return this.apiClient.callApi(
         '/deleted-nodes', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getFileContent operation.
-     * @callback module:api/NodesApi~getFileContentCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get file content
@@ -2181,9 +2122,8 @@ module.exports = function(arr, fn, initial){
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n (default to true)
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.\n
-     * @param {module:api/NodesApi~getFileContentCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.getFileContent = function(nodeId, opts, callback) {
+    this.getFileContent = function(nodeId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -2213,17 +2153,10 @@ module.exports = function(arr, fn, initial){
       return this.apiClient.callApi(
         '/nodes/{nodeId}/content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getNode operation.
-     * @callback module:api/NodesApi~getNodeCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/NodeEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get a node
@@ -2233,10 +2166,9 @@ module.exports = function(arr, fn, initial){
      * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested:\n* path\n* isLink\n* allowableOperations\n
      * @param {String} opts.relativePath If specified, returns information on the node resolved by this path.\nThe path is relative to the specified **nodeId**\n
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/NodesApi~getNodeCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/NodeEntry}
      */
-    this.getNode = function(nodeId, opts, callback) {
+    this.getNode = function(nodeId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -2267,17 +2199,10 @@ module.exports = function(arr, fn, initial){
       return this.apiClient.callApi(
         '/nodes/{nodeId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getNodeChildren operation.
-     * @callback module:api/NodesApi~getNodeChildrenCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/NodePaging} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get node children
@@ -2292,10 +2217,9 @@ module.exports = function(arr, fn, initial){
      * @param {String} opts.relativePath Return information on children within the folder resolved by this path (relative to specified nodeId as the starting parent folder)
      * @param {Boolean} opts.includeSource Also include \&quot;source\&quot; (in addition to \&quot;entries\&quot;) with folder information on parent node (either the specified parent \&quot;nodeId\&quot; or as resolved by \&quot;relativePath\&quot;)
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/NodesApi~getNodeChildrenCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/NodePaging}
      */
-    this.getNodeChildren = function(nodeId, opts, callback) {
+    this.getNodeChildren = function(nodeId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -2331,17 +2255,10 @@ module.exports = function(arr, fn, initial){
       return this.apiClient.callApi(
         '/nodes/{nodeId}/children', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the moveNode operation.
-     * @callback module:api/NodesApi~moveNodeCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/NodeEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Move a node
@@ -2351,10 +2268,9 @@ module.exports = function(arr, fn, initial){
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested:\n* path\n* isLink\n* allowableOperations\n
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/NodesApi~moveNodeCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/NodeEntry}
      */
-    this.moveNode = function(nodeId, moveBody, opts, callback) {
+    this.moveNode = function(nodeId, moveBody, opts) {
       opts = opts || {};
       var postBody = moveBody;
 
@@ -2389,25 +2305,17 @@ module.exports = function(arr, fn, initial){
       return this.apiClient.callApi(
         '/nodes/{nodeId}/move', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the purgeDeletedNode operation.
-     * @callback module:api/NodesApi~purgeDeletedNodeCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Purge a deleted node
      * Permanently removes the deleted node identified by **nodeId**.\n
      * @param {String} nodeId The identifier of a node.
-     * @param {module:api/NodesApi~purgeDeletedNodeCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.purgeDeletedNode = function(nodeId, callback) {
+    this.purgeDeletedNode = function(nodeId) {
       var postBody = null;
 
       // verify the required parameter 'nodeId' is set
@@ -2434,26 +2342,18 @@ module.exports = function(arr, fn, initial){
       return this.apiClient.callApi(
         '/deleted-nodes/{nodeId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the restoreNode operation.
-     * @callback module:api/NodesApi~restoreNodeCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/NodeEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Restore a deleted node
      * Attempts to restore the deleted node identified by **nodeId** to its original location.\n
      * @param {String} nodeId The identifier of a node.
-     * @param {module:api/NodesApi~restoreNodeCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/NodeEntry}
      */
-    this.restoreNode = function(nodeId, callback) {
+    this.restoreNode = function(nodeId) {
       var postBody = null;
 
       // verify the required parameter 'nodeId' is set
@@ -2480,17 +2380,10 @@ module.exports = function(arr, fn, initial){
       return this.apiClient.callApi(
         '/deleted-nodes/{nodeId}/restore', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the updateFileContent operation.
-     * @callback module:api/NodesApi~updateFileContentCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/NodeEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Update file content
@@ -2502,10 +2395,9 @@ module.exports = function(arr, fn, initial){
      * @param {String} opts.comment Add a version comment which will appear in version history.\nSetting this parameter also enables versioning of this node, if it is not already versioned.\n
      * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested:\n* path\n* isLink\n* allowableOperations\n
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/NodesApi~updateFileContentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/NodeEntry}
      */
-    this.updateFileContent = function(nodeId, contentBody, opts, callback) {
+    this.updateFileContent = function(nodeId, contentBody, opts) {
       opts = opts || {};
       var postBody = contentBody;
 
@@ -2542,17 +2434,10 @@ module.exports = function(arr, fn, initial){
       return this.apiClient.callApi(
         '/nodes/{nodeId}/content', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the updateNode operation.
-     * @callback module:api/NodesApi~updateNodeCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/NodeEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Update a node
@@ -2562,10 +2447,9 @@ module.exports = function(arr, fn, initial){
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested:\n* path\n* isLink\n* allowableOperations\n
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/NodesApi~updateNodeCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/NodeEntry}
      */
-    this.updateNode = function(nodeId, nodeBody, opts, callback) {
+    this.updateNode = function(nodeId, nodeBody, opts) {
       opts = opts || {};
       var postBody = nodeBody;
 
@@ -2600,7 +2484,7 @@ module.exports = function(arr, fn, initial){
       return this.apiClient.callApi(
         '/nodes/{nodeId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

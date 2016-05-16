@@ -32,22 +32,14 @@
     this.apiClient = apiClient || ApiClient.instance;
 
 
-    /**
-     * Callback function to receive the result of the addAssoc operation.
-     * @callback module:api/AssociationsApi~addAssocCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Add node association
      * Add association, with given association type, between source and target node.\n
      * @param {String} sourceId The identifier of a node.
      * @param {module:model/AssocTargetBody} assocTargetBody The target node id and assoc type.
-     * @param {module:api/AssociationsApi~addAssocCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.addAssoc = function(sourceId, assocTargetBody, callback) {
+    this.addAssoc = function(sourceId, assocTargetBody) {
       var postBody = assocTargetBody;
 
       // verify the required parameter 'sourceId' is set
@@ -79,17 +71,10 @@
       return this.apiClient.callApi(
         '/nodes/{sourceId}/targets', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the listSourceNodeAssociations operation.
-     * @callback module:api/AssociationsApi~listSourceNodeAssociationsCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/NodeAssocPaging} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * List node associations
@@ -99,10 +84,9 @@
      * @param {String} opts.where Optionally filter the list by assocType. Here&#39;s an example:\n\n*   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;)\n
      * @param {String} opts.include Return additional info, eg. aspect, properties, path, isLink
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/AssociationsApi~listSourceNodeAssociationsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/NodeAssocPaging}
      */
-    this.listSourceNodeAssociations = function(targetId, opts, callback) {
+    this.listSourceNodeAssociations = function(targetId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -133,17 +117,10 @@
       return this.apiClient.callApi(
         '/nodes/{targetId}/sources', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the listTargetAssociations operation.
-     * @callback module:api/AssociationsApi~listTargetAssociationsCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/NodeAssocPaging} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * List node associations
@@ -153,10 +130,9 @@
      * @param {String} opts.where Optionally filter the list by assocType. Here&#39;s an example:\n\n*   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;)\n
      * @param {String} opts.include Return additional info, eg. aspect, properties, path, isLink
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/AssociationsApi~listTargetAssociationsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/NodeAssocPaging}
      */
-    this.listTargetAssociations = function(sourceId, opts, callback) {
+    this.listTargetAssociations = function(sourceId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -187,17 +163,10 @@
       return this.apiClient.callApi(
         '/nodes/{sourceId}/targets', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the removeAssoc operation.
-     * @callback module:api/AssociationsApi~removeAssocCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Remove node association(s)
@@ -206,9 +175,8 @@
      * @param {String} targetId The identifier of a node.
      * @param {Object} opts Optional parameters
      * @param {String} opts.assocType Restrict the delete to only those of the given association type
-     * @param {module:api/AssociationsApi~removeAssocCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.removeAssoc = function(sourceId, targetId, opts, callback) {
+    this.removeAssoc = function(sourceId, targetId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -243,7 +211,7 @@
       return this.apiClient.callApi(
         '/nodes/{sourceId}/targets/{targetId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

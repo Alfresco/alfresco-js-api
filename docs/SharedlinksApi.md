@@ -38,15 +38,12 @@ var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the shared link, the following optional fields can be requested:\n* allowableOperations\n
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.addSharedLink(sharedLinkBody, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.addSharedLink(sharedLinkBody, opts, callback);
 ```
 
 ### Parameters
@@ -92,15 +89,12 @@ var apiInstance = new AlfrescoCoreRestApi.SharedlinksApi()
 
 var sharedId = "sharedId_example"; // {String} The identifier of a shared link to a file.
 
+apiInstance.deleteSharedLink(sharedId, ).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.deleteSharedLink(sharedId, , callback);
 ```
 
 ### Parameters
@@ -146,15 +140,12 @@ var sharedId = "sharedId_example"; // {String} The identifier of a shared link t
 
 var emailSharedLinkBody = new AlfrescoCoreRestApi.EmailSharedLinkBody(); // {EmailSharedLinkBody} The shared link email to send.
 
+apiInstance.emailSharedLink(sharedId, emailSharedLinkBody).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.emailSharedLink(sharedId, emailSharedLinkBody, callback);
 ```
 
 ### Parameters
@@ -202,15 +193,12 @@ var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the shared link, the following optional fields can be requested:\n* allowableOperations\n
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.findSharedLinks(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.findSharedLinks(opts, callback);
 ```
 
 ### Parameters
@@ -260,15 +248,12 @@ var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the shared link, the following optional fields can be requested:\n* allowableOperations\n
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.getSharedLink(sharedId, , opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getSharedLink(sharedId, , opts, callback);
 ```
 
 ### Parameters
@@ -318,15 +303,12 @@ var opts = {
   'attachment': true, // {Boolean} **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n
   'ifModifiedSince': new Date("2013-10-20T19:20:30+01:00") // {Date} Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.\n
 };
+apiInstance.getSharedLinkContent(sharedId, , opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.getSharedLinkContent(sharedId, , opts, callback);
 ```
 
 ### Parameters

@@ -32,13 +32,6 @@
     this.apiClient = apiClient || ApiClient.instance;
 
 
-    /**
-     * Callback function to receive the result of the liveSearchNodes operation.
-     * @callback module:api/SearchApi~liveSearchNodesCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/NodePaging} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Live search for nodes
@@ -52,10 +45,9 @@
      * @param {String} opts.include Return additional info, eg. aspectNames, properties, path, isLink
      * @param {String} opts.orderBy The list of results can be ordered by the following:\n* name\n* modifiedAt\n* createdAt\n
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/SearchApi~liveSearchNodesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/NodePaging}
      */
-    this.liveSearchNodes = function(term, opts, callback) {
+    this.liveSearchNodes = function(term, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -90,7 +82,7 @@
       return this.apiClient.callApi(
         '/queries/live-search-nodes', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

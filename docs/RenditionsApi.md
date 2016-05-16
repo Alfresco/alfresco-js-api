@@ -36,15 +36,12 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node. You can als
 
 var renditionBody = new AlfrescoCoreRestApi.RenditionBody(); // {RenditionBody} The rendition \"id\".
 
+apiInstance.createRendition(nodeId, renditionBody).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.createRendition(nodeId, renditionBody, callback);
 ```
 
 ### Parameters
@@ -91,15 +88,12 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var renditionId = "renditionId_example"; // {String} The name of a thumbnail rendition, for example *doclib*, or *pdf*.
 
+apiInstance.getRendition(nodeId, renditionId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getRendition(nodeId, renditionId, callback);
 ```
 
 ### Parameters
@@ -150,15 +144,12 @@ var opts = {
   'attachment': true, // {Boolean} **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n
   'ifModifiedSince': new Date("2013-10-20T19:20:30+01:00") // {Date} Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.\n
 };
+apiInstance.getRenditionContent(nodeId, renditionId, opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.getRenditionContent(nodeId, renditionId, opts, callback);
 ```
 
 ### Parameters
@@ -205,15 +196,12 @@ var apiInstance = new AlfrescoCoreRestApi.RenditionsApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
+apiInstance.getRenditions(nodeId, ).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getRenditions(nodeId, , callback);
 ```
 
 ### Parameters
@@ -263,15 +251,12 @@ var opts = {
   'attachment': true, // {Boolean} **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n
   'ifModifiedSince': new Date("2013-10-20T19:20:30+01:00") // {Date} Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.\n
 };
+apiInstance.getSharedLinkRenditionContent(sharedId, renditionId, opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.getSharedLinkRenditionContent(sharedId, renditionId, opts, callback);
 ```
 
 ### Parameters
@@ -318,15 +303,12 @@ var apiInstance = new AlfrescoCoreRestApi.RenditionsApi()
 
 var sharedId = "sharedId_example"; // {String} The identifier of a shared link to a file.
 
+apiInstance.getSharedLinkRenditions(sharedId, ).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getSharedLinkRenditions(sharedId, , callback);
 ```
 
 ### Parameters

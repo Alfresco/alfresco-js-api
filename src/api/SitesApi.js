@@ -32,23 +32,15 @@
     this.apiClient = apiClient || ApiClient.instance;
 
 
-    /**
-     * Callback function to receive the result of the addSiteMember operation.
-     * @callback module:api/SitesApi~addSiteMemberCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/SiteMemberEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Add a person
      * Adds person **personId** as a member of site **siteId**.\n\nYou can set the **role** to one of four types:\n\n* SiteConsumer\n* SiteCollaborator\n* SiteContributor\n* SiteManager\n
      * @param {String} siteId The identifier of a site.
      * @param {module:model/SiteMemberBody} siteMemberBody The person to add and their role
-     * @param {module:api/SitesApi~addSiteMemberCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/SiteMemberEntry}
      */
-    this.addSiteMember = function(siteId, siteMemberBody, callback) {
+    this.addSiteMember = function(siteId, siteMemberBody) {
       var postBody = siteMemberBody;
 
       // verify the required parameter 'siteId' is set
@@ -80,17 +72,10 @@
       return this.apiClient.callApi(
         '/sites/{siteId}/members', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the createSite operation.
-     * @callback module:api/SitesApi~createSiteCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/SiteEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Create a site
@@ -99,10 +84,9 @@
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.skipConfiguration Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created. (default to false)
      * @param {Boolean} opts.skipAddToFavorites Flag to indicate whether the site should not be added to the user&#39;s site favorites. (default to false)
-     * @param {module:api/SitesApi~createSiteCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/SiteEntry}
      */
-    this.createSite = function(siteBody, opts, callback) {
+    this.createSite = function(siteBody, opts) {
       opts = opts || {};
       var postBody = siteBody;
 
@@ -131,17 +115,10 @@
       return this.apiClient.callApi(
         '/sites', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the deleteSite operation.
-     * @callback module:api/SitesApi~deleteSiteCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Delete a site
@@ -149,9 +126,8 @@
      * @param {String} siteId The identifier of a site.
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.permanent Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan. (default to false)
-     * @param {module:api/SitesApi~deleteSiteCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteSite = function(siteId, opts, callback) {
+    this.deleteSite = function(siteId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -180,17 +156,10 @@
       return this.apiClient.callApi(
         '/sites/{siteId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getSite operation.
-     * @callback module:api/SitesApi~getSiteCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/SiteEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get a site
@@ -199,10 +168,9 @@
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.relations Use the relations parameter to include one or more related entities in a single response.
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/SitesApi~getSiteCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/SiteEntry}
      */
-    this.getSite = function(siteId, opts, callback) {
+    this.getSite = function(siteId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -232,17 +200,10 @@
       return this.apiClient.callApi(
         '/sites/{siteId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getSiteContainer operation.
-     * @callback module:api/SitesApi~getSiteContainerCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/SiteContainerEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get a container
@@ -251,10 +212,9 @@
      * @param {String} containerId The unique identifier of a site container.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/SitesApi~getSiteContainerCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/SiteContainerEntry}
      */
-    this.getSiteContainer = function(siteId, containerId, opts, callback) {
+    this.getSiteContainer = function(siteId, containerId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -289,17 +249,10 @@
       return this.apiClient.callApi(
         '/sites/{siteId}/containers/{containerId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getSiteContainers operation.
-     * @callback module:api/SitesApi~getSiteContainersCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/SiteContainerPaging} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get containers
@@ -309,10 +262,9 @@
      * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
      * @param {Integer} opts.maxItems The maximum number of items to return in the list.
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/SitesApi~getSiteContainersCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/SiteContainerPaging}
      */
-    this.getSiteContainers = function(siteId, opts, callback) {
+    this.getSiteContainers = function(siteId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -343,17 +295,10 @@
       return this.apiClient.callApi(
         '/sites/{siteId}/containers', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getSiteMember operation.
-     * @callback module:api/SitesApi~getSiteMemberCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/SiteMemberEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get a site member
@@ -362,10 +307,9 @@
      * @param {String} personId The identifier of a person.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/SitesApi~getSiteMemberCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/SiteMemberEntry}
      */
-    this.getSiteMember = function(siteId, personId, opts, callback) {
+    this.getSiteMember = function(siteId, personId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -400,17 +344,10 @@
       return this.apiClient.callApi(
         '/sites/{siteId}/members/{personId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getSiteMembers operation.
-     * @callback module:api/SitesApi~getSiteMembersCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/SiteMemberPaging} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get members
@@ -420,10 +357,9 @@
      * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
      * @param {Integer} opts.maxItems The maximum number of items to return in the list.
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/SitesApi~getSiteMembersCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/SiteMemberPaging}
      */
-    this.getSiteMembers = function(siteId, opts, callback) {
+    this.getSiteMembers = function(siteId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -454,17 +390,10 @@
       return this.apiClient.callApi(
         '/sites/{siteId}/members', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getSites operation.
-     * @callback module:api/SitesApi~getSitesCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/SitePaging} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get sites
@@ -475,10 +404,9 @@
      * @param {String} opts.orderBy A string to control the order of the entities returned.
      * @param {Array.<String>} opts.relations Use the relations parameter to include one or more related entities in a single response.
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/SitesApi~getSitesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/SitePaging}
      */
-    this.getSites = function(opts, callback) {
+    this.getSites = function(opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -505,26 +433,18 @@
       return this.apiClient.callApi(
         '/sites', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the removeSiteMember operation.
-     * @callback module:api/SitesApi~removeSiteMemberCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Delete a site member
      * Removes person **personId** as a member of site **siteId**.
      * @param {String} siteId The identifier of a site.
      * @param {String} personId The identifier of a person.
-     * @param {module:api/SitesApi~removeSiteMemberCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.removeSiteMember = function(siteId, personId, callback) {
+    this.removeSiteMember = function(siteId, personId) {
       var postBody = null;
 
       // verify the required parameter 'siteId' is set
@@ -557,17 +477,10 @@
       return this.apiClient.callApi(
         '/sites/{siteId}/members/{personId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the updateSiteMember operation.
-     * @callback module:api/SitesApi~updateSiteMemberCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/SiteMemberEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Update a site member
@@ -575,10 +488,9 @@
      * @param {String} siteId The identifier of a site.
      * @param {String} personId The identifier of a person.
      * @param {module:model/SiteMemberRoleBody} siteMemberRoleBody The persons new role
-     * @param {module:api/SitesApi~updateSiteMemberCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/SiteMemberEntry}
      */
-    this.updateSiteMember = function(siteId, personId, siteMemberRoleBody, callback) {
+    this.updateSiteMember = function(siteId, personId, siteMemberRoleBody) {
       var postBody = siteMemberRoleBody;
 
       // verify the required parameter 'siteId' is set
@@ -616,7 +528,7 @@
       return this.apiClient.callApi(
         '/sites/{siteId}/members/{personId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

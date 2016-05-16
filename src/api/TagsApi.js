@@ -32,23 +32,15 @@
     this.apiClient = apiClient || ApiClient.instance;
 
 
-    /**
-     * Callback function to receive the result of the addTag operation.
-     * @callback module:api/TagsApi~addTagCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/TagEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Add a tag
      * Adds one or more tags to the node **nodeId**. You can create more than one tag by\nspecifying a list of tags in the JSON body like this:\n\n&#x60;&#x60;&#x60;JSON\n[\n  {\n    \&quot;tag\&quot;:\&quot;test-tag-1\&quot;\n  },\n  {\n    \&quot;tag\&quot;:\&quot;test-tag-2\&quot;\n  }\n]\n&#x60;&#x60;&#x60;\n
      * @param {String} nodeId The identifier of a node.
      * @param {module:model/TagBody} tagBody The new tag
-     * @param {module:api/TagsApi~addTagCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TagEntry}
      */
-    this.addTag = function(nodeId, tagBody, callback) {
+    this.addTag = function(nodeId, tagBody) {
       var postBody = tagBody;
 
       // verify the required parameter 'nodeId' is set
@@ -80,17 +72,10 @@
       return this.apiClient.callApi(
         '/nodes/{nodeId}/tags', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getNodeTags operation.
-     * @callback module:api/TagsApi~getNodeTagsCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/TagPaging} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get tags
@@ -100,10 +85,9 @@
      * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
      * @param {Integer} opts.maxItems The maximum number of items to return in the list.
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/TagsApi~getNodeTagsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TagPaging}
      */
-    this.getNodeTags = function(nodeId, opts, callback) {
+    this.getNodeTags = function(nodeId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -134,17 +118,10 @@
       return this.apiClient.callApi(
         '/nodes/{nodeId}/tags', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getTag operation.
-     * @callback module:api/TagsApi~getTagCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/TagEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get a tag
@@ -152,10 +129,9 @@
      * @param {String} tagId The identifier of a tag.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/TagsApi~getTagCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TagEntry}
      */
-    this.getTag = function(tagId, opts, callback) {
+    this.getTag = function(tagId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -184,17 +160,10 @@
       return this.apiClient.callApi(
         '/tags/{tagId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getTags operation.
-     * @callback module:api/TagsApi~getTagsCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/TagPaging} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get tags
@@ -203,10 +172,9 @@
      * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
      * @param {Integer} opts.maxItems The maximum number of items to return in the list.
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/TagsApi~getTagsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TagPaging}
      */
-    this.getTags = function(opts, callback) {
+    this.getTags = function(opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -231,26 +199,18 @@
       return this.apiClient.callApi(
         '/tags', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the removeTag operation.
-     * @callback module:api/TagsApi~removeTagCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Delete a tag
      * Removes tag **tagId** from node **nodeId**.
      * @param {String} nodeId The identifier of a node.
      * @param {String} tagId The identifier of a tag.
-     * @param {module:api/TagsApi~removeTagCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.removeTag = function(nodeId, tagId, callback) {
+    this.removeTag = function(nodeId, tagId) {
       var postBody = null;
 
       // verify the required parameter 'nodeId' is set
@@ -283,27 +243,19 @@
       return this.apiClient.callApi(
         '/nodes/{nodeId}/tags/{tagId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the updateTag operation.
-     * @callback module:api/TagsApi~updateTagCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/TagEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Update a tag
      * Updates the tag **tagId**.
      * @param {String} tagId The identifier of a tag.
      * @param {module:model/TagBody1} tagBody The updated tag
-     * @param {module:api/TagsApi~updateTagCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TagEntry}
      */
-    this.updateTag = function(tagId, tagBody, callback) {
+    this.updateTag = function(tagId, tagBody) {
       var postBody = tagBody;
 
       // verify the required parameter 'tagId' is set
@@ -335,7 +287,7 @@
       return this.apiClient.callApi(
         '/tags/{tagId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

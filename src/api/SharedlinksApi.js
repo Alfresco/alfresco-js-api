@@ -32,13 +32,6 @@
     this.apiClient = apiClient || ApiClient.instance;
 
 
-    /**
-     * Callback function to receive the result of the addSharedLink operation.
-     * @callback module:api/SharedlinksApi~addSharedLinkCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/NodeSharedLinkEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Create a shared link to a file
@@ -47,10 +40,9 @@
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the shared link, the following optional fields can be requested:\n* allowableOperations\n
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/SharedlinksApi~addSharedLinkCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/NodeSharedLinkEntry}
      */
-    this.addSharedLink = function(sharedLinkBody, opts, callback) {
+    this.addSharedLink = function(sharedLinkBody, opts) {
       opts = opts || {};
       var postBody = sharedLinkBody;
 
@@ -79,25 +71,17 @@
       return this.apiClient.callApi(
         '/shared-links', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the deleteSharedLink operation.
-     * @callback module:api/SharedlinksApi~deleteSharedLinkCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Deletes a shared link
      * Deletes the shared link with identifier **sharedId**.
      * @param {String} sharedId The identifier of a shared link to a file.
-     * @param {module:api/SharedlinksApi~deleteSharedLinkCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteSharedLink = function(sharedId, callback) {
+    this.deleteSharedLink = function(sharedId) {
       var postBody = null;
 
       // verify the required parameter 'sharedId' is set
@@ -124,26 +108,18 @@
       return this.apiClient.callApi(
         '/shared-links/{sharedId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the emailSharedLink operation.
-     * @callback module:api/SharedlinksApi~emailSharedLinkCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Email shared link
      * Sends email with app-specific url including identifier **sharedId**.\n\nThe client and recipientEmails properties are mandatory in the request body. For example, to email a shared link with minimum info:\n&#x60;&#x60;&#x60;JSON\n{\n    \&quot;client\&quot;: \&quot;myClient\&quot;,\n    \&quot;recipientEmails\&quot;: [\&quot;john.doe@acme.com\&quot;, joe.bloggs@acme.com]\n}\n&#x60;&#x60;&#x60;\nA plain text message property can be optionally provided in the request body to customise the sent email.\nAlso, a locale property can be optionally provided in the request body to send the emails in a particular language.\nFor example, to email a shared link with a messages and a locale:\n&#x60;&#x60;&#x60;JSON\n{\n    \&quot;client\&quot;: \&quot;myClient\&quot;,\n    \&quot;recipientEmails\&quot;: [\&quot;john.doe@acme.com\&quot;, joe.bloggs@acme.com],\n    \&quot;message\&quot;: \&quot;myMessage\&quot;,\n    \&quot;locale\&quot;:\&quot;en-GB\&quot;\n}\n&#x60;&#x60;&#x60;\n**Note:** The client must be registered before you can send a shared link email. See [server documentation]\n
      * @param {String} sharedId The identifier of a shared link to a file.
      * @param {module:model/EmailSharedLinkBody} emailSharedLinkBody The shared link email to send.
-     * @param {module:api/SharedlinksApi~emailSharedLinkCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.emailSharedLink = function(sharedId, emailSharedLinkBody, callback) {
+    this.emailSharedLink = function(sharedId, emailSharedLinkBody) {
       var postBody = emailSharedLinkBody;
 
       // verify the required parameter 'sharedId' is set
@@ -175,17 +151,10 @@
       return this.apiClient.callApi(
         '/shared-links/{sharedId}/email', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the findSharedLinks operation.
-     * @callback module:api/SharedlinksApi~findSharedLinksCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/NodeSharedLinkPaging} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Find shared links
@@ -194,10 +163,9 @@
      * @param {String} opts.where Optionally filter the list by \&quot;sharedByUser\&quot; userid of person who shared the link (can also use -me-)\n*   where&#x3D;(sharedByUser&#x3D;&#39;jbloggs&#39;)\n*   where&#x3D;(sharedByUser&#x3D;&#39;-me-&#39;)
      * @param {Array.<String>} opts.include Returns additional information about the shared link, the following optional fields can be requested:\n* allowableOperations\n
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/SharedlinksApi~findSharedLinksCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/NodeSharedLinkPaging}
      */
-    this.findSharedLinks = function(opts, callback) {
+    this.findSharedLinks = function(opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -222,17 +190,10 @@
       return this.apiClient.callApi(
         '/shared-links', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getSharedLink operation.
-     * @callback module:api/SharedlinksApi~getSharedLinkCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/NodeSharedLinkEntry} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get a shared link
@@ -241,10 +202,9 @@
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the shared link, the following optional fields can be requested:\n* allowableOperations\n
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * @param {module:api/SharedlinksApi~getSharedLinkCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/NodeSharedLinkEntry}
      */
-    this.getSharedLink = function(sharedId, opts, callback) {
+    this.getSharedLink = function(sharedId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -274,17 +234,10 @@
       return this.apiClient.callApi(
         '/shared-links/{sharedId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
-    /**
-     * Callback function to receive the result of the getSharedLinkContent operation.
-     * @callback module:api/SharedlinksApi~getSharedLinkContentCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get file content
@@ -293,9 +246,8 @@
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n (default to true)
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.\n
-     * @param {module:api/SharedlinksApi~getSharedLinkContentCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.getSharedLinkContent = function(sharedId, opts, callback) {
+    this.getSharedLinkContent = function(sharedId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -325,7 +277,7 @@
       return this.apiClient.callApi(
         '/shared-links/{sharedId}/content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

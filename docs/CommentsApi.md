@@ -34,15 +34,12 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var commentBody = new AlfrescoCoreRestApi.CommentBody(); // {CommentBody} The comment text. Note that you can provide an array of comments.
 
+apiInstance.addComment(nodeId, commentBody).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.addComment(nodeId, commentBody, callback);
 ```
 
 ### Parameters
@@ -92,15 +89,12 @@ var opts = {
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.getComments(nodeId, , opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getComments(nodeId, , opts, callback);
 ```
 
 ### Parameters
@@ -149,15 +143,12 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var commentId = "commentId_example"; // {String} The identifier of a comment.
 
+apiInstance.removeComment(nodeId, commentId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.removeComment(nodeId, commentId, callback);
 ```
 
 ### Parameters
@@ -209,15 +200,12 @@ var commentBody = new AlfrescoCoreRestApi.CommentBody1(); // {CommentBody1} The 
 var opts = { 
   'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
 };
+apiInstance.updateComment(nodeId, commentIdcommentBody, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.updateComment(nodeId, commentIdcommentBody, opts, callback);
 ```
 
 ### Parameters
