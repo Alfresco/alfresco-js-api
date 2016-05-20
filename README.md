@@ -29,6 +29,7 @@ please follow the procedure in ["Publishing npm packages"](https://docs.npmjs.co
 Then install it via:
 
 ```shell
+npm set registry http://devproducts.alfresco.me:4873
 npm install alfresco-core-rest-api --save
 ```
 
