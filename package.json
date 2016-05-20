@@ -6,7 +6,6 @@
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha --recursive"
   },
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Alfresco/dev-platform-rest-api.git"
