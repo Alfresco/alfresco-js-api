@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <name>Alfresco Core REST API</name>
+    <groupId>org.alfresco</groupId>
+    <artifactId>alfresco-core-rest-api</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <properties>
+        <api-defs-dir>../rest-api-explorer/src/main/webapp/definitions</api-defs-dir>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-codegen-maven-plugin</artifactId>
+                <version>2.1.5-SNAPSHOT</version>
+                <executions>
+                    <execution>
+                        <id>generate-core-api</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${api-defs-dir}/core.yaml</inputSpec>
+                            <language>javascript</language>
+                            <configOptions>
+                                <projectVersion>0.1.0</projectVersion>
+                                <usePromises>true</usePromises>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
