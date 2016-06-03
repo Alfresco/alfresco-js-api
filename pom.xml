@@ -72,12 +72,9 @@
                             <resources>
                                 <resource>
                                     <directory>${project.build.directory}/generated-sources/swagger</directory>
-                                    <excludes>
-                                        <exclude>package.json</exclude>
-                                    </excludes>
                                 </resource>
                             </resources>
-                            <outputDirectory>${project.basedir}</outputDirectory>
+                            <outputDirectory>${project.basedir}/alfresco-core-rest-api</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>

@@ -1,3 +1,3 @@
-var AlfrescoCoreRestApi = require('./src/index.js');
+var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
 global.AlfrescoApi = AlfrescoCoreRestApi;
 
