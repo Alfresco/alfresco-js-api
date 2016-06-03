@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "JavaScript client library for the Alfresco REST API",
   "main": "main.js",
+  "typings": "bundle.d.ts",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha --recursive",
     "generate": "mvn clean generate-sources",
