@@ -48,22 +48,22 @@ var apiInstance = new AlfrescoCoreRestApi.PeopleApi()
 
 var personId = "personId_example"; // {String} The identifier of a person.
 
-var favoriteBody = new AlfrescoCoreRestApi.FavoriteBody(); // {FavoriteBody} An object identifying the entity to be favorited.
+var favoriteBody = new AlfrescoCoreRestApi.FavoriteBody(); /* {FavoriteBody} An object identifying the entity to be favorited.
 
-The object consists of a single property which is an object with the name `site`, `file`, or `folder`.
-The content of that object is the `guid` of the target entity.
+                                    The object consists of a single property which is an object with the name `site`, `file`, or `folder`.
+                                    The content of that object is the `guid` of the target entity.
 
-For example, to favorite a file the following body would be used:
+                                    For example, to favorite a file the following body would be used: */
 
-```JSON
-{
-   "target": {
-      "file": {
-         "guid": "abcde-01234"
-      }
-   }
-}
-```
+                                    ```JSON
+                                    {
+                                       "target": {
+                                          "file": {
+                                             "guid": "abcde-01234"
+                                          }
+                                       }
+                                    }
+                                    ```
 
 
 apiInstance.addFavorite(personIdfavoriteBody).then(function(data) {
@@ -81,8 +81,8 @@ Name | Type | Description  | Notes
  **personId** | **String**| The identifier of a person. |
  **favoriteBody** | [**FavoriteBody**](FavoriteBody.md)| An object identifying the entity to be favorited.
 
-The object consists of a single property which is an object with the name &#x60;site&#x60;, &#x60;file&#x60;, or &#x60;folder&#x60;.
-The content of that object is the &#x60;guid&#x60; of the target entity.
+The object consists of a single property which is an object with the name `site`, `file`, or `folder`.
+The content of that object is the `guid` of the target entity.
 
 For example, to favorite a file the following body would be used:
 
@@ -171,7 +171,7 @@ Delete favorite site
 Removes site **siteId** from the favorite site list of person **personId**.
 
 **Note This method is deprecated and will be removed in the future.**
-Use &#x60;/people/{personId}/favorites/{favoriteId}&#x60; instead.
+Use `/people/{personId}/favorites/{favoriteId}` instead.
 
 
 ### Example
@@ -227,7 +227,7 @@ Favorite a site
 Add a favorite site for person **personId**.
 
 **Note: that this method is deprecated and will be removed in the future**.
-Use &#x60;/people/{personId}/favorites&#x60; instead.
+Use `/people/{personId}/favorites` instead.
 
 
 ### Example
@@ -330,21 +330,9 @@ Name | Type | Description  | Notes
  **personId** | **String**| The identifier of a person. |
  **skipCount** | **Integer**| The number of entities that exist in the collection before those included in this list. | [optional]
  **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional]
- **who** | **String**| A filter to include the user's activities only &#x60;-me-&#x60;, other user's activities only &#x60;-others-&#x60;'
- | [optional]
+ **who** | **String**| A filter to include the user's activities only `-me-`, other user's activities only `-others-`' | [optional]
  **siteId** | **String**| Include only activity feed entries relating to this site. | [optional]
- **fields** | [**[String]**](String.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individua entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional]
 
 ### Return type
 
@@ -384,17 +372,16 @@ var personId = "personId_example"; // {String} The identifier of a person.
 var favoriteId = "favoriteId_example"; // {String} The identifier of a favorite.
 
 var opts = {
-  'fields': ["fields_example"] // {[String]} A list of field names.
+  'fields': ["fields_example"] /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
 
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter.*/
 
 };
 apiInstance.getFavorite(personIdfavoriteId, opts).then(function(data) {
@@ -446,7 +433,7 @@ Get a favorite site
 Returns information on favorite site **siteId** of person **personId**.
 
 **Note: This method is deprecated and will be removed in the future.**
-Use &#x60;/people/{personId}/favorites/{favoriteId}&#x60; instead.
+Use `/people/{personId}/favorites/{favoriteId}` instead.
 
 
 ### Example
@@ -466,17 +453,16 @@ var personId = "personId_example"; // {String} The identifier of a person.
 var siteId = "siteId_example"; // {String} The identifier of a site.
 
 var opts = {
-  'fields': ["fields_example"] // {[String]} A list of field names.
+  'fields': ["fields_example"] /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
 
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
 apiInstance.getFavoriteSite(personIdsiteId, , opts).then(function(data) {
@@ -528,7 +514,7 @@ Get favorite sites
 Get a person's favorite sites.
 
 **Note: This method is deprecated and will be removed in the future**.
-Use &#x60;/people/{personId}/favorites&#x60; instead.
+Use `/people/{personId}/favorites` instead.
 
 
 ### Example
@@ -576,18 +562,7 @@ Name | Type | Description  | Notes
  **personId** | **String**| The identifier of a person. |
  **skipCount** | **Integer**| The number of entities that exist in the collection before those included in this list. | [optional]
  **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional]
- **fields** | [**[String]**](String.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. | [optional]
 
 ### Return type
 
@@ -610,7 +585,7 @@ Get favorites
 
 Returns a list of favorites for person **personId**.
 
-You can us the &#x60;-me-&#x60; string in place of &#x60;&lt;personId&gt;&#x60; to get the favorites of the currently authenticated user.
+You can us the `-me-` string in place of `&lt;personId&gt;` to get the favorites of the currently authenticated user.
 
 You can use the **where** parameter to restrict the list in the response
 to entries of a specific kind. The **where** parameter takes a value.
@@ -618,9 +593,9 @@ The value is a single predicate that can include one or more **EXISTS**
 conditions. The **EXISTS** condition uses a single operand to limit the
 list to include entries that include that one property. The property values are:
 
-*   &#x60;target/file&#x60;
-*   &#x60;target/folder&#x60;
-*   &#x60;target/site&#x60;
+*   `target/file`
+*   `target/folder`
+*   `target/site`
 
 For example, the following **where** parameter restricts the returned list to the file favorites for a person:
 
@@ -655,17 +630,16 @@ var opts = {
   'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
   'where': "where_example", // {String} A string to restrict the returned objects by using a predicate.
-  'fields': ["fields_example"] // {[String]} A list of field names.
+  'fields': ["fields_example"] /* {[String]} A list of field names.
+                                   You can use this parameter to restrict the fields
+                                   returned within a response if, for example, you want to save on overall bandwidth.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
+                                   The list applies to a returned individual
+                                   entity or entries within a collection.
 
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+                                   If the API method also supports the **include**
+                                   parameter, then the fields specified in the **include**
+                                   parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
 apiInstance.getFavorites(personId, opts).then(function(data) {
@@ -684,18 +658,7 @@ Name | Type | Description  | Notes
  **skipCount** | **Integer**| The number of entities that exist in the collection before those included in this list. | [optional]
  **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional]
  **where** | **String**| A string to restrict the returned objects by using a predicate. | [optional]
- **fields** | [**[String]**](String.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include* parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional]
 
 ### Return type
 
@@ -733,17 +696,16 @@ var apiInstance = new AlfrescoCoreRestApi.PeopleApi()
 var personId = "personId_example"; // {String} The identifier of a person.
 
 var opts = {
-  'fields': ["fields_example"] // {[String]} A list of field names.
+  'fields': ["fields_example"]  /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
 
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
 apiInstance.getPerson(personId, opts).then(function(data) {
@@ -810,17 +772,16 @@ var personId = "personId_example"; // {String} The identifier of a person.
 var networkId = "networkId_example"; // {String} The identifier of a network.
 
 var opts = {
-  'fields': ["fields_example"] // {[String]} A list of field names.
+  'fields': ["fields_example"]  /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
 
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
 apiInstance.getPersonNetwork(personIdnetworkId, opts).then(function(data) {
@@ -837,18 +798,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **personId** | **String**| The identifier of a person. |
  **networkId** | **String**| The identifier of a network. |
- **fields** | [**[String]**](String.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional]
 
 ### Return type
 
@@ -888,17 +838,16 @@ var personId = "personId_example"; // {String} The identifier of a person.
 var opts = {
   'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
-  'fields': ["fields_example"] // {[String]} A list of field names.
+  'fields': ["fields_example"]  /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
 
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
 apiInstance.getPersonNetworks(personId, opts).then(function(data) {
@@ -916,18 +865,7 @@ Name | Type | Description  | Notes
  **personId** | **String**| The identifier of a person. |
  **skipCount** | **Integer**| The number of entities that exist in the collection before those included in this list. | [optional]
  **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional]
- **fields** | [**[String]**](String.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional]
 
 ### Return type
 
@@ -967,17 +905,16 @@ var personId = "personId_example"; // {String} The identifier of a person.
 var preferenceName = "preferenceName_example"; // {String} The name of the preference.
 
 var opts = {
-  'fields': ["fields_example"] // {[String]} A list of field names.
+  'fields': ["fields_example"]  /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
 
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
 apiInstance.getPreference(personIdpreferenceName, opts).then(function(data) {
@@ -994,18 +931,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **personId** | **String**| The identifier of a person. |
  **preferenceName** | **String**| The name of the preference. |
- **fields** | [**[String]**](String.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional]
 
 ### Return type
 
@@ -1049,17 +975,16 @@ var personId = "personId_example"; // {String} The identifier of a person.
 var opts = {
   'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
-  'fields': ["fields_example"] // {[String]} A list of field names.
+  'fields': ["fields_example"]  /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
 
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
 apiInstance.getPreferences(personId, opts).then(function(data) {
@@ -1077,18 +1002,7 @@ Name | Type | Description  | Notes
  **personId** | **String**| The identifier of a person. |
  **skipCount** | **Integer**| The number of entities that exist in the collection before those included in this list. | [optional]
  **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional]
- **fields** | [**[String]**](String.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional]
 
 ### Return type
 
@@ -1142,17 +1056,16 @@ var opts = {
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
   'orderBy': "orderBy_example", // {String} A string to control the order of the entities returned.
   'relations': ["relations_example"], // {[String]} Use the relations parameter to include one or more related entities in a single response.
-  'fields': ["fields_example"] // {[String]} A list of field names.
+  'fields': ["fields_example"]  /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
 
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
 apiInstance.getSiteMembership(personId, opts).then(function(data) {
@@ -1172,18 +1085,7 @@ Name | Type | Description  | Notes
  **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional]
  **orderBy** | **String**| A string to control the order of the entities returned. | [optional]
  **relations** | [**[String]**](String.md)| Use the relations parameter to include one or more related entities in a single response. | [optional]
- **fields** | [**[String]**](String.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. | [optional]
 
 ### Return type
 
@@ -1223,17 +1125,16 @@ var personId = "personId_example"; // {String} The identifier of a person.
 var siteId = "siteId_example"; // {String} The identifier of a site.
 
 var opts = {
-  'fields': ["fields_example"] // {[String]} A list of field names.
+  'fields': ["fields_example"]  /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
 
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
 apiInstance.getSiteMembershipRequest(personIdsiteId, , opts).then(function(data) {
@@ -1250,18 +1151,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **personId** | **String**| The identifier of a person. |
  **siteId** | **String**| The identifier of a site. |
- **fields** | [**[String]**](String.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional]
 
 ### Return type
 
@@ -1301,17 +1191,16 @@ var personId = "personId_example"; // {String} The identifier of a person.
 var opts = {
   'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
-  'fields': ["fields_example"] // {[String]} A list of field names.
+  'fields': ["fields_example"]  /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
 
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
 apiInstance.getSiteMembershipRequests(personId, opts).then(function(data) {
@@ -1329,18 +1218,7 @@ Name | Type | Description  | Notes
  **personId** | **String**| The identifier of a person. |
  **skipCount** | **Integer**| The number of entities that exist in the collection before those included in this list. | [optional]
  **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional]
- **fields** | [**[String]**](String.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional]
 
 ### Return type
 

@@ -35,17 +35,16 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node.
 var ratingId = "ratingId_example"; // {String} The identifier of a rating.
 
 var opts = {
-  'fields': ["fields_example"] // {[String]} A list of field names.
+  'fields': ["fields_example"]  /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
 
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
 apiInstance.getRating(nodeId, ratingId, opts).then(function(data) {
@@ -62,18 +61,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **String**| The identifier of a node. |
  **ratingId** | **String**| The identifier of a rating. |
- **fields** | [**[String]**](String.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include* parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional]
 
 ### Return type
 
@@ -113,17 +101,16 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node.
 var opts = {
   'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
-  'fields': ["fields_example"] // {[String]} A list of field names.
+  'fields': ["fields_example"]  /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
 
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
 apiInstance.getRatings(nodeId, , opts).then(function(data) {
@@ -141,18 +128,7 @@ Name | Type | Description  | Notes
  **nodeId** | **String**| The identifier of a node. |
  **skipCount** | **Integer**| The number of entities that exist in the collection before those included in this list. | [optional]
  **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional]
- **fields** | [**[String]**](String.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. | [optional]
 
 ### Return type
 
@@ -189,9 +165,7 @@ var apiInstance = new AlfrescoCoreRestApi.RatingsApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
-var ratingBody = new AlfrescoCoreRestApi.RatingBody(); // {RatingBody} For "myRating" the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.
-
-For example, to "like" a file the following body would be used:
+var ratingBody = new AlfrescoCoreRestApi.RatingBody(); // {RatingBody} For "myRating" the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar. For example, to "like" a file the following body would be used:
 
   ```JSON
     {

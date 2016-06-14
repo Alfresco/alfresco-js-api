@@ -35,20 +35,17 @@ var apiInstance = new AlfrescoCoreRestApi.SharedlinksApi()
 var sharedLinkBody = new AlfrescoCoreRestApi.SharedLinkBody(); // {SharedLinkBody} The nodeId to create a shared link for.
 
 var opts = {
-  'include': ["include_example"], // {[String]} Returns additional information about the shared link, the following optional fields can be requested:
-* allowableOperations
+  'include': ["include_example"], // {[String]} Returns additional information about the shared link, the following optional fields can be requested:  allowableOperations
+  'fields': ["fields_example"]  /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
 
-  'fields': ["fields_example"] // {[String]} A list of field names.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
 apiInstance.addSharedLink(sharedLinkBody, opts).then(function(data) {
@@ -234,23 +231,18 @@ basicAuth.password = 'YOUR PASSWORD'
 var apiInstance = new AlfrescoCoreRestApi.SharedlinksApi()
 
 var opts = {
-  'where': "where_example", // {String} Optionally filter the list by "sharedByUser" userid of person who shared the link (can also use -me-)
-*   where=(sharedByUser='jbloggs')
-*   where=(sharedByUser='-me-')
-  'include': ["include_example"], // {[String]} Returns additional information about the shared link, the following optional fields can be requested:
-* allowableOperations
+  'where': "where_example", // {String} Optionally filter the list by "sharedByUser" userid of person who shared the link (can also use -me-) where=(sharedByUser='jbloggs')    where=(sharedByUser='-me-')
+  'include': ["include_example"], // {[String]} Returns additional information about the shared link, the following optional fields can be requested: * allowableOperations
+  'fields': ["fields_example"]  /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
 
-  'fields': ["fields_example"] // {[String]} A list of field names.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
 apiInstance.findSharedLinks(opts).then(function(data) {
@@ -308,20 +300,17 @@ var apiInstance = new AlfrescoCoreRestApi.SharedlinksApi()
 var sharedId = "sharedId_example"; // {String} The identifier of a shared link to a file.
 
 var opts = {
-  'include': ["include_example"], // {[String]} Returns additional information about the shared link, the following optional fields can be requested:
-* allowableOperations
+  'include': ["include_example"], // {[String]} Returns additional information about the shared link, the following optional fields can be requested: * allowableOperations
+  'fields': ["fields_example"]  /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
 
-  'fields': ["fields_example"] // {[String]} A list of field names.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
 apiInstance.getSharedLink(sharedId, , opts).then(function(data) {
@@ -338,18 +327,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **sharedId** | **String**| The identifier of a shared link to a file. |
  **include** | [**[String]**](String.md)| Returns additional information about the shared link, the following optional fields can be requested: * allowableOperations | [optional]
- **fields** | [**[String]**](String.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names. ou can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional]
 
 ### Return type
 
@@ -390,19 +368,17 @@ var apiInstance = new AlfrescoCoreRestApi.SharedlinksApi()
 var sharedId = "sharedId_example"; // {String} The identifier of a shared link to a file.
 
 var opts = {
-  'attachment': true, // {Boolean} **true** enables a web browser to download the file as an attachment.
-**false** means a web browser may preview the file in a new tab or window, but not
-download the file.
+  'attachment': true, /* {Boolean} **true** enables a web browser to download the file as an attachment.
+                        **false** means a web browser may preview the file in a new tab or window, but not
+                        download the file.
 
-You can only set this parameter to **false** if the content type of the file is in the supported list;
-for example, certain image files and PDF files.
+                        You can only set this parameter to **false** if the content type of the file is in the supported list;
+                        for example, certain image files and PDF files.
 
-If the content type is not supported for preview, then a value of **false**  is ignored, and
-the attachment will be returned in the response.
+                        If the content type is not supported for preview, then a value of **false**  is ignored, and
+                        the attachment will be returned in the response.*/
 
-  'ifModifiedSince': new Date("2013-10-20T19:20:30+01:00") // {Date} Only returns the content if it has been modified since the date provided.
-Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.
-
+  'ifModifiedSince': new Date("2013-10-20T19:20:30+01:00") // {Date} Only returns the content if it has been modified since the date provided. Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.
 };
 apiInstance.getSharedLinkContent(sharedId, , opts).then(function() {
   console.log('API called successfully.');
@@ -418,17 +394,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **sharedId** | **String**| The identifier of a shared link to a file. |
  **attachment** | **Boolean**| **true** enables a web browser to download the file as an attachment.
-**false** means a web browser may preview the file in a new tab or window, but not download the file.
-
-You can only set this parameter to **false** if the content type of the file is in the supported list;
-for example, certain image files and PDF files.
-
-If the content type is not supported for preview, then a value of **false**  is ignored, and
-the attachment will be returned in the response.
- | [optional] [default to true]
- **ifModifiedSince** | **Date**| Only returns the content if it has been modified since the date provided.
-Use the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.
- | [optional]
+ **false** means a web browser may preview the file in a new tab or window, but not download the file.  You can only set this parameter to **false** if the content type of the file is in the supported list; for example, certain image files and PDF files. If the content type is not supported for preview, then a value of **false**  is ignored, and the attachment will be returned in the response. | [optional] [default to true]
+ **ifModifiedSince** | **Date**| Only returns the content if it has been modified since the date provided. Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.  | [optional]
 
 ### Return type
 

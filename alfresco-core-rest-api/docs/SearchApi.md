@@ -44,29 +44,20 @@ var term = "term_example"; // {String} The term to search for.
 var opts = {
   'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
-  'rootNodeId': "rootNodeId_example", // {String} The id of the node to start the search from.
-
-Supports the aliases -my-, -root- and -shared-.
-
+  'rootNodeId': "rootNodeId_example", // {String} The id of the node to start the search from. Supports the aliases -my-, -root- and -shared-.
   'nodeType': "nodeType_example", // {String} Restrict the returned results to only those of the given node type and it's sub-types
   'include': "include_example", // {String} Return additional info, eg. aspectNames, properties, path, isLink
-  'orderBy': "orderBy_example", // {String} The list of results can be ordered by the following:
-* name
-* modifiedAt
-* createdAt
+  'orderBy': "orderBy_example", // {String} The list of results can be ordered by the following:  name , modifiedAt , createdAt
+  'fields': ["fields_example"]  /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
 
-  'fields': ["fields_example"] // {[String]} A list of field names.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter. */
 };
 apiInstance.liveSearchNodes(term, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);

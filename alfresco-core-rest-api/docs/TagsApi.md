@@ -102,17 +102,16 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node.
 var opts = {
   'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
-  'fields': ["fields_example"] // {[String]} A list of field names.
+  'fields': ["fields_example"]  /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
 
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
 apiInstance.getNodeTags(nodeId, , opts).then(function(data) {
@@ -168,17 +167,16 @@ var apiInstance = new AlfrescoCoreRestApi.TagsApi()
 var tagId = "tagId_example"; // {String} The identifier of a tag.
 
 var opts = {
-  'fields': ["fields_example"] // {[String]} A list of field names.
+  'fields': ["fields_example"]  /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
 
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
 apiInstance.getTag(tagId, , opts).then(function(data) {
@@ -194,18 +192,7 @@ apiInstance.getTag(tagId, , opts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **tagId** | **String**| The identifier of a tag. |
- **fields** | [**[String]**](String.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include**  parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional]
 
 ### Return type
 
@@ -243,17 +230,16 @@ var apiInstance = new AlfrescoCoreRestApi.TagsApi()
 var opts = {
   'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
-  'fields': ["fields_example"] // {[String]} A list of field names.
+  'fields': ["fields_example"]  /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
 
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
 apiInstance.getTags(opts).then(function(data) {
@@ -270,18 +256,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **skipCount** | **Integer**| The number of entities that exist in the collection before those included in this list. | [optional]
  **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional]
- **fields** | [**[String]**](String.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional]
 
 ### Return type
 

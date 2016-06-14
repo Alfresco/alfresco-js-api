@@ -32,12 +32,7 @@ var apiInstance = new AlfrescoCoreRestApi.FavoritesApi()
 
 var personId = "personId_example"; // {String} The identifier of a person.
 
-var favoriteBody = new AlfrescoCoreRestApi.FavoriteBody(); // {FavoriteBody} An object identifying the entity to be favorited.
-
-The object consists of a single property which is an object with the name `site`, `file`, or `folder`.
-The content of that object is the `guid` of the target entity.
-
-For example, to favorite a file the following body would be used:
+var favoriteBody = new AlfrescoCoreRestApi.FavoriteBody(); // {FavoriteBody} An object identifying the entity to be favorited. The object consists of a single property which is an object with the name `site`, `file`, or `folder`. The content of that object is the `guid` of the target entity. For example, to favorite a file the following body would be used:
 
 ```JSON
 {
@@ -48,7 +43,6 @@ For example, to favorite a file the following body would be used:
    }
 }
 ```
-
 
 apiInstance.addFavorite(personIdfavoriteBody).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -65,8 +59,8 @@ Name | Type | Description  | Notes
  **personId** | **String**| The identifier of a person. |
  **favoriteBody** | [**FavoriteBody**](FavoriteBody.md)| An object identifying the entity to be favorited.
 
-The object consists of a single property which is an object with the name &#x60;site&#x60;, &#x60;file&#x60;, or &#x60;folder&#x60;.
-The content of that object is the &#x60;guid&#x60; of the target entity.
+The object consists of a single property which is an object with the name `site`, `file`, or `folder`.
+The content of that object is the `guid` of the target entity.
 
 For example, to favorite a file the following body would be used:
 
@@ -119,17 +113,16 @@ var personId = "personId_example"; // {String} The identifier of a person.
 var favoriteId = "favoriteId_example"; // {String} The identifier of a favorite.
 
 var opts = {
-  'fields': ["fields_example"] // {[String]} A list of field names.
+  'fields': ["fields_example"] /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
 
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
 apiInstance.getFavorite(personIdfavoriteId, opts).then(function(data) {
@@ -180,7 +173,7 @@ Get favorites
 
 Returns a list of favorites for person **personId**.
 
-You can us the &#x60;-me-&#x60; string in place of &#x60;&lt;personId&gt;&#x60; to get the favorites of the currently authenticated user.
+You can us the `-me-` string in place of `&lt;personId&gt;` to get the favorites of the currently authenticated user.
 
 You can use the **where** parameter to restrict the list in the response
 to entries of a specific kind. The **where** parameter takes a value.
@@ -188,9 +181,9 @@ The value is a single predicate that can include one or more **EXISTS**
 conditions. The **EXISTS** condition uses a single operand to limit the
 list to include entries that include that one property. The property values are:
 
-*   &#x60;target/file&#x60;
-*   &#x60;target/folder&#x60;
-*   &#x60;target/site&#x60;
+*   `target/file`
+*   `target/folder`
+*   `target/site`
 
 For example, the following **where** parameter restricts the returned list to the file favorites for a person:
 
@@ -225,17 +218,17 @@ var opts = {
   'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
   'where': "where_example", // {String} A string to restrict the returned objects by using a predicate.
-  'fields': ["fields_example"] // {[String]} A list of field names.
+  'fields': ["fields_example"] /* {[String]} A list of field names.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
 
-The list applies to a returned individual
-entity or entries within a collection.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
 
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
 apiInstance.getFavorites(personId, opts).then(function(data) {

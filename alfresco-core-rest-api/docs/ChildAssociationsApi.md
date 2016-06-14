@@ -243,9 +243,7 @@ var apiInstance = new AlfrescoCoreRestApi.ChildAssociationsApi()
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var opts = {
-  'permanent': false // {Boolean} If **true** then the node is deleted permanently, without it moving to the trashcan.
-You must be the owner or an admin to permanently delete the node.
-
+  'permanent': false // {Boolean} If **true** then the node is deleted permanently, without it moving to the trashcan.You must be the owner or an admin to permanently delete the node.
 };
 apiInstance.deleteNode(nodeId, , opts).then(function() {
   console.log('API called successfully.');
@@ -300,64 +298,53 @@ basicAuth.password = 'YOUR PASSWORD'
 
 var apiInstance = new AlfrescoCoreRestApi.ChildAssociationsApi()
 
-var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:
-* -my-
-* -shared-
-* -root-
-
-
+var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:  -my- , -shared- , -root-
 var opts = {
   'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
-  'orderBy': "orderBy_example", // {String} If not specified then default sort is for folders to be sorted before files, and by ascending name
-i.e. "orderBy=isFolder DESC,name ASC".
+  'orderBy': "orderBy_example", /* {String} If not specified then default sort is for folders to be sorted before files, and by ascending name i.e. "orderBy=isFolder DESC,name ASC".
+                                    This default can be completely overridden by specifying a specific orderBy consisting of one, two or
+                                    three comma-separated list of properties (with optional ASCending or DESCending), for example,
+                                    specifying “CorderBy=name DESC“D would return a mixed folder/file list.
 
-This default can be completely overridden by specifying a specific orderBy consisting of one, two or
-three comma-separated list of properties (with optional ASCending or DESCending), for example,
-specifying “CorderBy=name DESC“D would return a mixed folder/file list.
+                                    The following properties can be used to order the results:
+                                    * isFolder
+                                    * name
+                                    * mimeType
+                                    * nodeType
+                                    * sizeInBytes
+                                    * modifiedAt
+                                    * createdAt
+                                    * modifiedByUser
+                                    * createdByUser*/
 
-The following properties can be used to order the results:
-* isFolder
-* name
-* mimeType
-* nodeType
-* sizeInBytes
-* modifiedAt
-* createdAt
-* modifiedByUser
-* createdByUser
+  'where': "where_example", /* {String} Optionally filter the list. Here are some examples:
+                            *   where=(isFolder=true)
+                            *   where=(isFile=true)
+                            *   where=(nodeType='my:specialtype')
+                            *   where=(nodeType='my:specialtype' INCLUDESUBTYPES)*/
 
-  'where': "where_example", // {String} Optionally filter the list. Here are some examples:
-
-*   where=(isFolder=true)
-
-*   where=(isFile=true)
-
-*   where=(nodeType='my:specialtype')
-
-*   where=(nodeType='my:specialtype' INCLUDESUBTYPES)
-
-  'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:
-* properties
-* aspectNames
-* path
-* isLink
-* allowableOperations
-* association
+  'include': ["include_example"], /* {[String]} Returns additional information about the node. The following optional fields can be requested:
+                                    * properties
+                                    * aspectNames
+                                    * path
+                                    * isLink
+                                    * allowableOperations
+                                    * association */
 
   'relativePath': "relativePath_example", // {String} Return information on children within the folder resolved by this path (relative to specified nodeId as the starting parent folder)
   'includeSource': true, // {Boolean} Also include "source" (in addition to "entries") with folder information on parent node (either the specified parent "nodeId" or as resolved by "relativePath")
-  'fields': ["fields_example"] // {[String]} A list of field names.
+  'fields': ["fields_example"] /* {[String]} A list of field names.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
 
-The list applies to a returned individual
-entity or entries within a collection.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
 
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter.*/
 
 };
 apiInstance.getNodeChildren(nodeId, , opts).then(function(data) {
@@ -432,22 +419,18 @@ var apiInstance = new AlfrescoCoreRestApi.ChildAssociationsApi()
 var childId = "childId_example"; // {String} The identifier of a node.
 
 var opts = {
-  'where': "where_example", // {String} Optionally filter the list by assocType. Here's an example:
-
-*   where=(assocType='my:assoctype')
-
+  'where': "where_example", // {String} Optionally filter the list by assocType. Here's an example: *   where=(assocType='my:assoctype')
   'include': "include_example", // {String} Return additional info, eg. aspect, properties, path, isLink
-  'fields': ["fields_example"] // {[String]} A list of field names.
+  'fields': ["fields_example"] /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
 
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter.*/
 
 };
 apiInstance.listParents(childId, opts).then(function(data) {
@@ -505,22 +488,18 @@ var parentId = "parentId_example"; // {String} The identifier of a node.
 
 var opts = {
   'assocType': "assocType_example", // {String} Restrict the returned results to only those of the given association type
-  'where': "where_example", // {String} Optionally filter the list by assocType. Here's an example:
-
-*   where=(assocType='my:assoctype')
-
+  'where': "where_example", // {String} Optionally filter the list by assocType. Here's an example:*   where=(assocType='my:assoctype')
   'include': "include_example", // {String} Return additional info, eg. aspect, properties, path, isLink
-  'fields': ["fields_example"] // {[String]} A list of field names.
+  'fields': ["fields_example"] /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
 
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter.*/
 
 };
 apiInstance.listSecondaryChildAssociations(parentId, opts).then(function(data) {
@@ -582,31 +561,23 @@ basicAuth.password = 'YOUR PASSWORD'
 
 var apiInstance = new AlfrescoCoreRestApi.ChildAssociationsApi()
 
-var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:
-* -my-
-* -shared-
-* -root-
-
+var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:  -my- , -shared- , -root-
 
 var moveBody = new AlfrescoCoreRestApi.MoveBody(); // {MoveBody} The targetParentId and, optionally, a new name.
 
 var opts = {
-  'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:
-* path
-* isLink
-* allowableOperations
+  'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested: * path * isLink * allowableOperations
+  'fields': ["fields_example"] /* {[String]} A list of field names.
 
-  'fields': ["fields_example"] // {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
 
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter.*/
 
 };
 apiInstance.moveNode(nodeId, moveBody, opts).then(function(data) {

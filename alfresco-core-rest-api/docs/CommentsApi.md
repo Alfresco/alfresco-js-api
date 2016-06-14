@@ -100,17 +100,16 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node.
 var opts = {
   'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
-  'fields': ["fields_example"] // {[String]} A list of field names.
+  'fields': ["fields_example"] /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
 
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
 apiInstance.getComments(nodeId, , opts).then(function(data) {
@@ -233,17 +232,16 @@ var commentId = "commentId_example"; // {String} The identifier of a comment.
 var commentBody = new AlfrescoCoreRestApi.CommentBody1(); // {CommentBody1} The JSON representing the comment to be updated.
 
 var opts = {
-  'fields': ["fields_example"] // {[String]} A list of field names.
+  'fields': ["fields_example"] /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
 
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
 apiInstance.updateComment(nodeId, commentIdcommentBody, opts).then(function(data) {
@@ -261,18 +259,7 @@ Name | Type | Description  | Notes
  **nodeId** | **String**| The identifier of a node. |
  **commentId** | **String**| The identifier of a comment. |
  **commentBody** | [**CommentBody1**](CommentBody1.md)| The JSON representing the comment to be updated. |
- **fields** | [**[String]**](String.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional]
 
 ### Return type
 

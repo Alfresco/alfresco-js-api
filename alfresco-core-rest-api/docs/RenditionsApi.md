@@ -39,11 +39,7 @@ basicAuth.password = 'YOUR PASSWORD'
 
 var apiInstance = new AlfrescoCoreRestApi.RenditionsApi()
 
-var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:
-* -my-
-* -shared-
-* -root-
-
+var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:  -my-,  -shared- , -root-
 
 var renditionBody = new AlfrescoCoreRestApi.RenditionBody(); // {RenditionBody} The rendition "id".
 
@@ -152,18 +148,17 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node.
 var renditionId = "renditionId_example"; // {String} The name of a thumbnail rendition, for example *doclib*, or *pdf*.
 
 var opts = {
-  'attachment': true, // {Boolean} **true** enables a web browser to download the file as an attachment.
-**false** means a web browser may preview the file in a new tab or window, but not
-download the file.
+  'attachment': true, /* {Boolean} **true** enables a web browser to download the file as an attachment.
+                        **false** means a web browser may preview the file in a new tab or window, but not
+                        download the file.
 
-You can only set this parameter to **false** if the content type of the file is in the supported list;
-for example, certain image files and PDF files.
+                        You can only set this parameter to **false** if the content type of the file is in the supported list;
+                        for example, certain image files and PDF files.
 
-If the content type is not supported for preview, then a value of **false**  is ignored, and
-the attachment will be returned in the response.
+                        If the content type is not supported for preview, then a value of **false**  is ignored, and
+                        the attachment will be returned in the response. */
 
-  'ifModifiedSince': new Date("2013-10-20T19:20:30+01:00") // {Date} Only returns the content if it has been modified since the date provided.
-Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.
+'ifModifiedSince': new Date("2013-10-20T19:20:30+01:00") // {Date} Only returns the content if it has been modified since the date provided. Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.
 
 };
 apiInstance.getRenditionContent(nodeId, renditionId, opts).then(function() {
@@ -180,17 +175,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **String**| The identifier of a node. |
  **renditionId** | **String**| The name of a thumbnail rendition, for example *doclib*, or *pdf*. |
- **attachment** | **Boolean**| **true** enables a web browser to download the file as an attachment. **false** means a web browser may preview the file in a new tab or window, but not download the file.
-
-You can only set this parameter to **false** if the content type of the file is in the supported list;
-for example, certain image files and PDF files.
-
-If the content type is not supported for preview, then a value of **false**  is ignored, and
-the attachment will be returned in the response.
- | [optional] [default to true]
- **ifModifiedSince** | **Date**| Only returns the content if it has been modified since the date provided.
-Use the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.
- | [optional]
+ **attachment** | **Boolean**| **true** enables a web browser to download the file as an attachment. **false** means a web browser may preview the file in a new tab or window, but not download the file. You can only set this parameter to **false** if the content type of the file is in the supported list; for example, certain image files and PDF files.  If the content type is not supported for preview, then a value of **false**  is ignored, and the attachment will be returned in the response. | [optional] [default to true]
+ **ifModifiedSince** | **Date**| Only returns the content if it has been modified since the date provided. Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.  | [optional]
 
 ### Return type
 
@@ -283,19 +269,17 @@ var sharedId = "sharedId_example"; // {String} The identifier of a shared link t
 var renditionId = "renditionId_example"; // {String} The name of a thumbnail rendition, for example *doclib*, or *pdf*.
 
 var opts = {
-  'attachment': true, // {Boolean} **true** enables a web browser to download the file as an attachment.
-**false** means a web browser may preview the file in a new tab or window, but not
-download the file.
+  'attachment': true, /* {Boolean} **true** enables a web browser to download the file as an attachment.
+                        **false** means a web browser may preview the file in a new tab or window, but not
+                        download the file.
 
-You can only set this parameter to **false** if the content type of the file is in the supported list;
-for example, certain image files and PDF files.
+                        You can only set this parameter to **false** if the content type of the file is in the supported list;
+                        for example, certain image files and PDF files.
 
-If the content type is not supported for preview, then a value of **false**  is ignored, and
-the attachment will be returned in the response.
+                        If the content type is not supported for preview, then a value of **false**  is ignored, and
+                        the attachment will be returned in the response.*/
 
-  'ifModifiedSince': new Date("2013-10-20T19:20:30+01:00") // {Date} Only returns the content if it has been modified since the date provided.
-Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.
-
+  'ifModifiedSince': new Date("2013-10-20T19:20:30+01:00") // {Date} Only returns the content if it has been modified since the date provided. Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.
 };
 apiInstance.getSharedLinkRenditionContent(sharedId, renditionId, opts).then(function() {
   console.log('API called successfully.');
@@ -311,17 +295,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **sharedId** | **String**| The identifier of a shared link to a file. |
  **renditionId** | **String**| The name of a thumbnail rendition, for example *doclib*, or *pdf*. |
- **attachment** | **Boolean**| **true** enables a web browser to download the file as an attachment. **false** means a web browser may preview the file in a new tab or window, but not download the file.
-
-You can only set this parameter to **false** if the content type of the file is in the supported list;
-for example, certain image files and PDF files.
-
-If the content type is not supported for preview, then a value of **false**  is ignored, and
-the attachment will be returned in the response.
- | [optional] [default to true]
- **ifModifiedSince** | **Date**| Only returns the content if it has been modified since the date provided.
-Use the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.
- | [optional]
+ **attachment** | **Boolean**| **true** enables a web browser to download the file as an attachment. **false** means a web browser may preview the file in a new tab or window, but not download the file. You can only set this parameter to **false** if the content type of the file is in the supported list; for example, certain image files and PDF files.  If the content type is not supported for preview, then a value of **false**  is ignored, and the attachment will be returned in the response. | [optional] [default to true]
+ **ifModifiedSince** | **Date**| Only returns the content if it has been modified since the date provided. Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.  | [optional]
 
 ### Return type
 
