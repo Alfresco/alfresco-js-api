@@ -34,8 +34,19 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var ratingId = "ratingId_example"; // {String} The identifier of a rating.
 
-var opts = { 
-  'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+var opts = {
+  'fields': ["fields_example"] // {[String]} A list of field names.
+
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
+
+The list applies to a returned individual
+entity or entries within a collection.
+
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
+
 };
 apiInstance.getRating(nodeId, ratingId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -49,9 +60,20 @@ apiInstance.getRating(nodeId, ratingId, opts).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **nodeId** | **String**| The identifier of a node. | 
- **ratingId** | **String**| The identifier of a rating. | 
- **fields** | [**[String]**](String.md)| A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
+ **nodeId** | **String**| The identifier of a node. |
+ **ratingId** | **String**| The identifier of a rating. |
+ **fields** | [**[String]**](String.md)| A list of field names.
+
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
+
+The list applies to a returned individual
+entity or entries within a collection.
+
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
+ | [optional]
 
 ### Return type
 
@@ -88,10 +110,21 @@ var apiInstance = new AlfrescoCoreRestApi.RatingsApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
-var opts = { 
+var opts = {
   'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
-  'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+  'fields': ["fields_example"] // {[String]} A list of field names.
+
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
+
+The list applies to a returned individual
+entity or entries within a collection.
+
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
+
 };
 apiInstance.getRatings(nodeId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -105,10 +138,21 @@ apiInstance.getRatings(nodeId, , opts).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **nodeId** | **String**| The identifier of a node. | 
- **skipCount** | **Integer**| The number of entities that exist in the collection before those included in this list. | [optional] 
- **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional] 
- **fields** | [**[String]**](String.md)| A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
+ **nodeId** | **String**| The identifier of a node. |
+ **skipCount** | **Integer**| The number of entities that exist in the collection before those included in this list. | [optional]
+ **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names.
+
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
+
+The list applies to a returned individual
+entity or entries within a collection.
+
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
+ | [optional]
 
 ### Return type
 
@@ -145,7 +189,17 @@ var apiInstance = new AlfrescoCoreRestApi.RatingsApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
-var ratingBody = new AlfrescoCoreRestApi.RatingBody(); // {RatingBody} For \"myRating\" the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.\n\nFor example, to \"like\" a file the following body would be used:\n\n  ```JSON\n    {\n      \"id\": \"likes\",\n      \"myRating\": true\n    }\n  ```\n
+var ratingBody = new AlfrescoCoreRestApi.RatingBody(); // {RatingBody} For \"myRating\" the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.
+
+For example, to \"like\" a file the following body would be used:
+
+  ```JSON
+    {
+      \"id\": \"likes\",
+      \"myRating\": true
+    }
+  ```
+
 
 apiInstance.rate(nodeId, ratingBody).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -159,8 +213,18 @@ apiInstance.rate(nodeId, ratingBody).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **nodeId** | **String**| The identifier of a node. | 
- **ratingBody** | [**RatingBody**](RatingBody.md)| For \&quot;myRating\&quot; the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.\n\nFor example, to \&quot;like\&quot; a file the following body would be used:\n\n  &#x60;&#x60;&#x60;JSON\n    {\n      \&quot;id\&quot;: \&quot;likes\&quot;,\n      \&quot;myRating\&quot;: true\n    }\n  &#x60;&#x60;&#x60;\n | 
+ **nodeId** | **String**| The identifier of a node. |
+ **ratingBody** | [**RatingBody**](RatingBody.md)| For \&quot;myRating\&quot; the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.
+
+For example, to \&quot;like\&quot; a file the following body would be used:
+
+  &#x60;&#x60;&#x60;JSON
+    {
+      \&quot;id\&quot;: \&quot;likes\&quot;,
+      \&quot;myRating\&quot;: true
+    }
+  &#x60;&#x60;&#x60;
+ |
 
 ### Return type
 
@@ -211,8 +275,8 @@ apiInstance.removeRating(nodeId, ratingId).then(function() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **nodeId** | **String**| The identifier of a node. | 
- **ratingId** | **String**| The identifier of a rating. | 
+ **nodeId** | **String**| The identifier of a node. |
+ **ratingId** | **String**| The identifier of a rating. |
 
 ### Return type
 

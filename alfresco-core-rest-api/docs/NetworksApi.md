@@ -29,8 +29,19 @@ var apiInstance = new AlfrescoCoreRestApi.NetworksApi()
 
 var networkId = "networkId_example"; // {String} The identifier of a network.
 
-var opts = { 
-  'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+var opts = {
+  'fields': ["fields_example"] // {[String]} A list of field names.
+
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
+
+The list applies to a returned individual
+entity or entries within a collection.
+
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
+
 };
 apiInstance.getNetwork(networkId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -44,8 +55,19 @@ apiInstance.getNetwork(networkId, opts).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **networkId** | **String**| The identifier of a network. | 
- **fields** | [**[String]**](String.md)| A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
+ **networkId** | **String**| The identifier of a network. |
+ **fields** | [**[String]**](String.md)| A list of field names.
+
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
+
+The list applies to a returned individual
+entity or entries within a collection.
+
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
+ | [optional]
 
 ### Return type
 

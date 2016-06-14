@@ -23,7 +23,15 @@ Method | HTTP request | Description
 
 Add a person
 
-Adds person **personId** as a member of site **siteId**.\n\nYou can set the **role** to one of four types:\n\n* SiteConsumer\n* SiteCollaborator\n* SiteContributor\n* SiteManager\n
+Adds person **personId** as a member of site **siteId**.
+
+You can set the **role** to one of four types:
+
+* SiteConsumer
+* SiteCollaborator
+* SiteContributor
+* SiteManager
+
 
 ### Example
 ```javascript
@@ -53,8 +61,8 @@ apiInstance.addSiteMember(siteId, siteMemberBody).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **siteId** | **String**| The identifier of a site. | 
- **siteMemberBody** | [**SiteMemberBody**](SiteMemberBody.md)| The person to add and their role | 
+ **siteId** | **String**| The identifier of a site. |
+ **siteMemberBody** | [**SiteMemberBody**](SiteMemberBody.md)| The person to add and their role |
 
 ### Return type
 
@@ -75,7 +83,25 @@ Name | Type | Description  | Notes
 
 Create a site
 
-Creates a default site with the given details.  Unless explicitly specified, the site id will be generated from the site title. The site id must be unique and only contain alphanumeric and/or dash\ncharacters.\n\nFor example, to create a public site called \&quot;Marketing\&quot; the following body could be used:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;title\&quot;: \&quot;Marketing\&quot;,\n  \&quot;visibility\&quot;: \&quot;PUBLIC\&quot;\n}\n&#x60;&#x60;&#x60;\n\nThe creation of the (surf) configuration files required by Share can be skipped via the **skipConfiguration** query parameter.\n\n**Please note: if skipped then such a site will *not* work within Share.**\n\nThe addition of the site to the user&#39;s site favorites can be skipped via the **skipAddToFavorites** query parameter.\n\nThe creator will be added as a member with Site Manager role.\n
+Creates a default site with the given details.  Unless explicitly specified, the site id will be generated from the site title. The site id must be unique and only contain alphanumeric and/or dash
+characters.
+
+For example, to create a public site called \&quot;Marketing\&quot; the following body could be used:
+&#x60;&#x60;&#x60;JSON
+{
+  \&quot;title\&quot;: \&quot;Marketing\&quot;,
+  \&quot;visibility\&quot;: \&quot;PUBLIC\&quot;
+}
+&#x60;&#x60;&#x60;
+
+The creation of the (surf) configuration files required by Share can be skipped via the **skipConfiguration** query parameter.
+
+**Please note: if skipped then such a site will *not* work within Share.**
+
+The addition of the site to the user&#39;s site favorites can be skipped via the **skipAddToFavorites** query parameter.
+
+The creator will be added as a member with Site Manager role.
+
 
 ### Example
 ```javascript
@@ -91,7 +117,7 @@ var apiInstance = new AlfrescoCoreRestApi.SitesApi()
 
 var siteBody = new AlfrescoCoreRestApi.SiteBody(); // {SiteBody} The site details
 
-var opts = { 
+var opts = {
   'skipConfiguration': false, // {Boolean} Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created.
   'skipAddToFavorites': false // {Boolean} Flag to indicate whether the site should not be added to the user's site favorites.
 };
@@ -107,7 +133,7 @@ apiInstance.createSite(siteBody, opts).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **siteBody** | [**SiteBody**](SiteBody.md)| The site details | 
+ **siteBody** | [**SiteBody**](SiteBody.md)| The site details |
  **skipConfiguration** | **Boolean**| Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created. | [optional] [default to false]
  **skipAddToFavorites** | **Boolean**| Flag to indicate whether the site should not be added to the user&#39;s site favorites. | [optional] [default to false]
 
@@ -146,7 +172,7 @@ var apiInstance = new AlfrescoCoreRestApi.SitesApi()
 
 var siteId = "siteId_example"; // {String} The identifier of a site.
 
-var opts = { 
+var opts = {
   'permanent': false // {Boolean} Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan.
 };
 apiInstance.deleteSite(siteId, , opts).then(function() {
@@ -161,7 +187,7 @@ apiInstance.deleteSite(siteId, , opts).then(function() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **siteId** | **String**| The identifier of a site. | 
+ **siteId** | **String**| The identifier of a site. |
  **permanent** | **Boolean**| Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan. | [optional] [default to false]
 
 ### Return type
@@ -183,7 +209,20 @@ null (empty response body)
 
 Get a site
 
-Returns information for site **siteId**.\n\nYou can use the **relations** parameter to include one or more related\nentities in a single response and so reduce network traffic.\n\nThe entity types in Alfresco are organized in a tree structure.\nThe **sites** entity has two children, **containers** and **members**.\nThe following relations parameter returns all the container and member\nobjects related to the site **siteId**:\n\n&#x60;&#x60;&#x60;\ncontainers,members\n&#x60;&#x60;&#x60;\n
+Returns information for site **siteId**.
+
+You can use the **relations** parameter to include one or more related
+entities in a single response and so reduce network traffic.
+
+The entity types in Alfresco are organized in a tree structure.
+The **sites** entity has two children, **containers** and **members**.
+The following relations parameter returns all the container and member
+objects related to the site **siteId**:
+
+&#x60;&#x60;&#x60;
+containers,members
+&#x60;&#x60;&#x60;
+
 
 ### Example
 ```javascript
@@ -199,9 +238,20 @@ var apiInstance = new AlfrescoCoreRestApi.SitesApi()
 
 var siteId = "siteId_example"; // {String} The identifier of a site.
 
-var opts = { 
+var opts = {
   'relations': ["relations_example"], // {[String]} Use the relations parameter to include one or more related entities in a single response.
-  'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+  'fields': ["fields_example"] // {[String]} A list of field names.
+
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
+
+The list applies to a returned individual
+entity or entries within a collection.
+
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
+
 };
 apiInstance.getSite(siteId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -215,9 +265,20 @@ apiInstance.getSite(siteId, , opts).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **siteId** | **String**| The identifier of a site. | 
- **relations** | [**[String]**](String.md)| Use the relations parameter to include one or more related entities in a single response. | [optional] 
- **fields** | [**[String]**](String.md)| A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
+ **siteId** | **String**| The identifier of a site. |
+ **relations** | [**[String]**](String.md)| Use the relations parameter to include one or more related entities in a single response. | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names.
+
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
+
+The list applies to a returned individual
+entity or entries within a collection.
+
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
+ | [optional]
 
 ### Return type
 
@@ -256,8 +317,19 @@ var siteId = "siteId_example"; // {String} The identifier of a site.
 
 var containerId = "containerId_example"; // {String} The unique identifier of a site container.
 
-var opts = { 
-  'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+var opts = {
+  'fields': ["fields_example"] // {[String]} A list of field names.
+
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
+
+The list applies to a returned individual
+entity or entries within a collection.
+
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
+
 };
 apiInstance.getSiteContainer(siteId, containerId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -271,9 +343,20 @@ apiInstance.getSiteContainer(siteId, containerId, opts).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **siteId** | **String**| The identifier of a site. | 
- **containerId** | **String**| The unique identifier of a site container. | 
- **fields** | [**[String]**](String.md)| A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
+ **siteId** | **String**| The identifier of a site. |
+ **containerId** | **String**| The unique identifier of a site container. |
+ **fields** | [**[String]**](String.md)| A list of field names.
+
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
+
+The list applies to a returned individual
+entity or entries within a collection.
+
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
+ | [optional]
 
 ### Return type
 
@@ -310,10 +393,21 @@ var apiInstance = new AlfrescoCoreRestApi.SitesApi()
 
 var siteId = "siteId_example"; // {String} The identifier of a site.
 
-var opts = { 
+var opts = {
   'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
-  'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+  'fields': ["fields_example"] // {[String]} A list of field names.
+
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
+
+The list applies to a returned individual
+entity or entries within a collection.
+
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
+
 };
 apiInstance.getSiteContainers(siteId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -327,10 +421,21 @@ apiInstance.getSiteContainers(siteId, , opts).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **siteId** | **String**| The identifier of a site. | 
- **skipCount** | **Integer**| The number of entities that exist in the collection before those included in this list. | [optional] 
- **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional] 
- **fields** | [**[String]**](String.md)| A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
+ **siteId** | **String**| The identifier of a site. |
+ **skipCount** | **Integer**| The number of entities that exist in the collection before those included in this list. | [optional]
+ **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names.
+
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
+
+The list applies to a returned individual
+entity or entries within a collection.
+
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
+ | [optional]
 
 ### Return type
 
@@ -369,8 +474,19 @@ var siteId = "siteId_example"; // {String} The identifier of a site.
 
 var personId = "personId_example"; // {String} The identifier of a person.
 
-var opts = { 
-  'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+var opts = {
+  'fields': ["fields_example"] // {[String]} A list of field names.
+
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
+
+The list applies to a returned individual
+entity or entries within a collection.
+
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
+
 };
 apiInstance.getSiteMember(siteId, personId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -384,9 +500,20 @@ apiInstance.getSiteMember(siteId, personId, opts).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **siteId** | **String**| The identifier of a site. | 
- **personId** | **String**| The identifier of a person. | 
- **fields** | [**[String]**](String.md)| A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
+ **siteId** | **String**| The identifier of a site. |
+ **personId** | **String**| The identifier of a person. |
+ **fields** | [**[String]**](String.md)| A list of field names.
+
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
+
+The list applies to a returned individual
+entity or entries within a collection.
+
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
+ | [optional]
 
 ### Return type
 
@@ -423,10 +550,21 @@ var apiInstance = new AlfrescoCoreRestApi.SitesApi()
 
 var siteId = "siteId_example"; // {String} The identifier of a site.
 
-var opts = { 
+var opts = {
   'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
-  'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+  'fields': ["fields_example"] // {[String]} A list of field names.
+
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
+
+The list applies to a returned individual
+entity or entries within a collection.
+
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
+
 };
 apiInstance.getSiteMembers(siteId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -440,10 +578,21 @@ apiInstance.getSiteMembers(siteId, , opts).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **siteId** | **String**| The identifier of a site. | 
- **skipCount** | **Integer**| The number of entities that exist in the collection before those included in this list. | [optional] 
- **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional] 
- **fields** | [**[String]**](String.md)| A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
+ **siteId** | **String**| The identifier of a site. |
+ **skipCount** | **Integer**| The number of entities that exist in the collection before those included in this list. | [optional]
+ **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names.
+
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
+
+The list applies to a returned individual
+entity or entries within a collection.
+
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
+ | [optional]
 
 ### Return type
 
@@ -464,7 +613,29 @@ Name | Type | Description  | Notes
 
 Get sites
 
-Returns a list of sites in this repository. You can sort the list if sites using the **orderBy** parameter.\n**orderBy** specifies the name of one or more\ncomma separated properties.\nFor each property you can optionally specify the order direction.\nBoth of the these **orderBy** examples retrieve sites ordered by ascending name:\n\n&#x60;&#x60;&#x60;\nname\nname ASC\n&#x60;&#x60;&#x60;\n\nYou can use the **relations** parameter to include one or more related\nentities in a single response and so reduce network traffic.\n\nThe entity types in Alfresco are organized in a tree structure.\nThe **sites** entity has two children, **containers** and **members**.\nThe following relations parameter returns all the container and member\nobjects related to each site:\n\n&#x60;&#x60;&#x60;\ncontainers,members\n&#x60;&#x60;&#x60;\n
+Returns a list of sites in this repository. You can sort the list if sites using the **orderBy** parameter.
+**orderBy** specifies the name of one or more
+comma separated properties.
+For each property you can optionally specify the order direction.
+Both of the these **orderBy** examples retrieve sites ordered by ascending name:
+
+&#x60;&#x60;&#x60;
+name
+name ASC
+&#x60;&#x60;&#x60;
+
+You can use the **relations** parameter to include one or more related
+entities in a single response and so reduce network traffic.
+
+The entity types in Alfresco are organized in a tree structure.
+The **sites** entity has two children, **containers** and **members**.
+The following relations parameter returns all the container and member
+objects related to each site:
+
+&#x60;&#x60;&#x60;
+containers,members
+&#x60;&#x60;&#x60;
+
 
 ### Example
 ```javascript
@@ -478,12 +649,23 @@ basicAuth.password = 'YOUR PASSWORD'
 
 var apiInstance = new AlfrescoCoreRestApi.SitesApi()
 
-var opts = { 
+var opts = {
   'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
   'orderBy': "orderBy_example", // {String} A string to control the order of the entities returned.
   'relations': ["relations_example"], // {[String]} Use the relations parameter to include one or more related entities in a single response.
-  'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+  'fields': ["fields_example"] // {[String]} A list of field names.
+
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
+
+The list applies to a returned individual
+entity or entries within a collection.
+
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
+
 };
 apiInstance.getSites(opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -497,11 +679,22 @@ apiInstance.getSites(opts).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **skipCount** | **Integer**| The number of entities that exist in the collection before those included in this list. | [optional] 
- **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional] 
- **orderBy** | **String**| A string to control the order of the entities returned. | [optional] 
- **relations** | [**[String]**](String.md)| Use the relations parameter to include one or more related entities in a single response. | [optional] 
- **fields** | [**[String]**](String.md)| A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
+ **skipCount** | **Integer**| The number of entities that exist in the collection before those included in this list. | [optional]
+ **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional]
+ **orderBy** | **String**| A string to control the order of the entities returned. | [optional]
+ **relations** | [**[String]**](String.md)| Use the relations parameter to include one or more related entities in a single response. | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names.
+
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
+
+The list applies to a returned individual
+entity or entries within a collection.
+
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
+ | [optional]
 
 ### Return type
 
@@ -552,8 +745,8 @@ apiInstance.removeSiteMember(siteId, personId).then(function() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **siteId** | **String**| The identifier of a site. | 
- **personId** | **String**| The identifier of a person. | 
+ **siteId** | **String**| The identifier of a site. |
+ **personId** | **String**| The identifier of a person. |
 
 ### Return type
 
@@ -574,7 +767,15 @@ null (empty response body)
 
 Update a site member
 
-Update the membership of person **personId** in site **siteId**.\n\nYou can set the **role** to one of four types:\n\n* SiteConsumer\n* SiteCollaborator\n* SiteContributor\n* SiteManager\n
+Update the membership of person **personId** in site **siteId**.
+
+You can set the **role** to one of four types:
+
+* SiteConsumer
+* SiteCollaborator
+* SiteContributor
+* SiteManager
+
 
 ### Example
 ```javascript
@@ -606,9 +807,9 @@ apiInstance.updateSiteMember(siteId, personIdsiteMemberRoleBody).then(function(d
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **siteId** | **String**| The identifier of a site. | 
- **personId** | **String**| The identifier of a person. | 
- **siteMemberRoleBody** | [**SiteMemberRoleBody**](SiteMemberRoleBody.md)| The persons new role | 
+ **siteId** | **String**| The identifier of a site. |
+ **personId** | **String**| The identifier of a person. |
+ **siteMemberRoleBody** | [**SiteMemberRoleBody**](SiteMemberRoleBody.md)| The persons new role |
 
 ### Return type
 

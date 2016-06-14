@@ -18,7 +18,14 @@ Method | HTTP request | Description
 
 Create rendition
 
-Async request to create a rendition for file with identifier\n**nodeId**. The rendition is specified by name \&quot;id\&quot; in the request body:\n&#x60;&#x60;&#x60;JSON\n{\n  \&quot;id\&quot;:\&quot;doclib\&quot;\n}\n&#x60;&#x60;&#x60;\n
+Async request to create a rendition for file with identifier
+**nodeId**. The rendition is specified by name \&quot;id\&quot; in the request body:
+&#x60;&#x60;&#x60;JSON
+{
+  \&quot;id\&quot;:\&quot;doclib\&quot;
+}
+&#x60;&#x60;&#x60;
+
 
 ### Example
 ```javascript
@@ -32,7 +39,11 @@ basicAuth.password = 'YOUR PASSWORD'
 
 var apiInstance = new AlfrescoCoreRestApi.RenditionsApi()
 
-var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:\n* -my-\n* -shared-\n* -root-\n
+var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:
+* -my-
+* -shared-
+* -root-
+
 
 var renditionBody = new AlfrescoCoreRestApi.RenditionBody(); // {RenditionBody} The rendition \"id\".
 
@@ -48,8 +59,8 @@ apiInstance.createRendition(nodeId, renditionBody).then(function() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **nodeId** | **String**| The identifier of a node. You can also use one of these well-known aliases:\n* -my-\n* -shared-\n* -root-\n | 
- **renditionBody** | [**RenditionBody**](RenditionBody.md)| The rendition \&quot;id\&quot;. | 
+ **nodeId** | **String**| The identifier of a node. You can also use one of these well-known aliases: *-my-*-shared-*-root- |
+ **renditionBody** | [**RenditionBody**](RenditionBody.md)| The rendition \&quot;id\&quot;. |
 
 ### Return type
 
@@ -100,8 +111,8 @@ apiInstance.getRendition(nodeId, renditionId).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **nodeId** | **String**| The identifier of a node. | 
- **renditionId** | **String**| The name of a thumbnail rendition, for example *doclib*, or *pdf*. | 
+ **nodeId** | **String**| The identifier of a node. |
+ **renditionId** | **String**| The name of a thumbnail rendition, for example *doclib*, or *pdf*. |
 
 ### Return type
 
@@ -140,9 +151,20 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var renditionId = "renditionId_example"; // {String} The name of a thumbnail rendition, for example *doclib*, or *pdf*.
 
-var opts = { 
-  'attachment': true, // {Boolean} **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n
-  'ifModifiedSince': new Date("2013-10-20T19:20:30+01:00") // {Date} Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.\n
+var opts = {
+  'attachment': true, // {Boolean} **true** enables a web browser to download the file as an attachment.
+**false** means a web browser may preview the file in a new tab or window, but not
+download the file.
+
+You can only set this parameter to **false** if the content type of the file is in the supported list;
+for example, certain image files and PDF files.
+
+If the content type is not supported for preview, then a value of **false**  is ignored, and
+the attachment will be returned in the response.
+
+  'ifModifiedSince': new Date("2013-10-20T19:20:30+01:00") // {Date} Only returns the content if it has been modified since the date provided.
+Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.
+
 };
 apiInstance.getRenditionContent(nodeId, renditionId, opts).then(function() {
   console.log('API called successfully.');
@@ -156,10 +178,19 @@ apiInstance.getRenditionContent(nodeId, renditionId, opts).then(function() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **nodeId** | **String**| The identifier of a node. | 
- **renditionId** | **String**| The name of a thumbnail rendition, for example *doclib*, or *pdf*. | 
- **attachment** | **Boolean**| **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n | [optional] [default to true]
- **ifModifiedSince** | **Date**| Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.\n | [optional] 
+ **nodeId** | **String**| The identifier of a node. |
+ **renditionId** | **String**| The name of a thumbnail rendition, for example *doclib*, or *pdf*. |
+ **attachment** | **Boolean**| **true** enables a web browser to download the file as an attachment. **false** means a web browser may preview the file in a new tab or window, but not download the file.
+
+You can only set this parameter to **false** if the content type of the file is in the supported list;
+for example, certain image files and PDF files.
+
+If the content type is not supported for preview, then a value of **false**  is ignored, and
+the attachment will be returned in the response.
+ | [optional] [default to true]
+ **ifModifiedSince** | **Date**| Only returns the content if it has been modified since the date provided.
+Use the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.
+ | [optional]
 
 ### Return type
 
@@ -180,7 +211,8 @@ null (empty response body)
 
 List information for renditions
 
-Returns the rendition information for the file node with identifier **nodeId**.\nThis will return rendition information, including the rendition id, for each rendition. The\u00A0rendition status is CREATED (ie. available\u00A0to view/download) or NOT_CREATED (ie. rendition can be requested).
+Returns the rendition information for the file node with identifier **nodeId**.
+This will return rendition information, including the rendition id, for each rendition. The\u00A0rendition status is CREATED (ie. available\u00A0to view/download) or NOT_CREATED (ie. rendition can be requested).
 
 ### Example
 ```javascript
@@ -208,7 +240,7 @@ apiInstance.getRenditions(nodeId, ).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **nodeId** | **String**| The identifier of a node. | 
+ **nodeId** | **String**| The identifier of a node. |
 
 ### Return type
 
@@ -229,7 +261,10 @@ Name | Type | Description  | Notes
 
 Get shared link rendition content
 
-Returns the rendition content for file with shared link identifier **sharedId**.\n\n**Note:** No authentication is required to call this endpoint.\n
+Returns the rendition content for file with shared link identifier **sharedId**.
+
+**Note:** No authentication is required to call this endpoint.
+
 
 ### Example
 ```javascript
@@ -247,9 +282,20 @@ var sharedId = "sharedId_example"; // {String} The identifier of a shared link t
 
 var renditionId = "renditionId_example"; // {String} The name of a thumbnail rendition, for example *doclib*, or *pdf*.
 
-var opts = { 
-  'attachment': true, // {Boolean} **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n
-  'ifModifiedSince': new Date("2013-10-20T19:20:30+01:00") // {Date} Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.\n
+var opts = {
+  'attachment': true, // {Boolean} **true** enables a web browser to download the file as an attachment.
+**false** means a web browser may preview the file in a new tab or window, but not
+download the file.
+
+You can only set this parameter to **false** if the content type of the file is in the supported list;
+for example, certain image files and PDF files.
+
+If the content type is not supported for preview, then a value of **false**  is ignored, and
+the attachment will be returned in the response.
+
+  'ifModifiedSince': new Date("2013-10-20T19:20:30+01:00") // {Date} Only returns the content if it has been modified since the date provided.
+Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.
+
 };
 apiInstance.getSharedLinkRenditionContent(sharedId, renditionId, opts).then(function() {
   console.log('API called successfully.');
@@ -263,10 +309,19 @@ apiInstance.getSharedLinkRenditionContent(sharedId, renditionId, opts).then(func
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sharedId** | **String**| The identifier of a shared link to a file. | 
- **renditionId** | **String**| The name of a thumbnail rendition, for example *doclib*, or *pdf*. | 
- **attachment** | **Boolean**| **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n | [optional] [default to true]
- **ifModifiedSince** | **Date**| Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.\n | [optional] 
+ **sharedId** | **String**| The identifier of a shared link to a file. |
+ **renditionId** | **String**| The name of a thumbnail rendition, for example *doclib*, or *pdf*. |
+ **attachment** | **Boolean**| **true** enables a web browser to download the file as an attachment. **false** means a web browser may preview the file in a new tab or window, but not download the file.
+
+You can only set this parameter to **false** if the content type of the file is in the supported list;
+for example, certain image files and PDF files.
+
+If the content type is not supported for preview, then a value of **false**  is ignored, and
+the attachment will be returned in the response.
+ | [optional] [default to true]
+ **ifModifiedSince** | **Date**| Only returns the content if it has been modified since the date provided.
+Use the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.
+ | [optional]
 
 ### Return type
 
@@ -287,7 +342,13 @@ null (empty response body)
 
 List information for created renditions
 
-Returns the rendition information for the file with shared link identifier **sharedId**.\n\nThis will only return rendition information, including the rendition id, for each rendition\nwhere the rendition status is CREATED (ie. available\u00A0to view/download).\n\n**Note:** No authentication is required to call this endpoint.      \n
+Returns the rendition information for the file with shared link identifier **sharedId**.
+
+This will only return rendition information, including the rendition id, for each rendition
+where the rendition status is CREATED (ie. available\u00A0to view/download).
+
+**Note:** No authentication is required to call this endpoint.
+
 
 ### Example
 ```javascript
@@ -315,7 +376,7 @@ apiInstance.getSharedLinkRenditions(sharedId, ).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sharedId** | **String**| The identifier of a shared link to a file. | 
+ **sharedId** | **String**| The identifier of a shared link to a file. |
 
 ### Return type
 

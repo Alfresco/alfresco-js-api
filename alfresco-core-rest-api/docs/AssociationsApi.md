@@ -16,7 +16,8 @@ Method | HTTP request | Description
 
 Add node association
 
-Add association, with given association type, between source and target node.\n
+Add association, with given association type, between source and target node.
+
 
 ### Example
 ```javascript
@@ -46,8 +47,8 @@ apiInstance.addAssoc(sourceId, assocTargetBody).then(function() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sourceId** | **String**| The identifier of a node. | 
- **assocTargetBody** | [**AssocTargetBody**](AssocTargetBody.md)| The target node id and assoc type. | 
+ **sourceId** | **String**| The identifier of a node. |
+ **assocTargetBody** | [**AssocTargetBody**](AssocTargetBody.md)| The target node id and assoc type. |
 
 ### Return type
 
@@ -68,7 +69,8 @@ null (empty response body)
 
 List node associations
 
-Returns a list of source nodes that point to (ie. are associated with) the current target node.\n
+Returns a list of source nodes that point to (ie. are associated with) the current target node.
+
 
 ### Example
 ```javascript
@@ -84,10 +86,24 @@ var apiInstance = new AlfrescoCoreRestApi.AssociationsApi()
 
 var targetId = "targetId_example"; // {String} The identifier of a node.
 
-var opts = { 
-  'where': "where_example", // {String} Optionally filter the list by assocType. Here's an example:\n\n*   where=(assocType='my:assoctype')\n
+var opts = {
+  'where': "where_example", // {String} Optionally filter the list by assocType. Here's an example:
+
+*   where=(assocType='my:assoctype')
+
   'include': "include_example", // {String} Return additional info, eg. aspect, properties, path, isLink
-  'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+  'fields': ["fields_example"] // {[String]} A list of field names.
+
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
+
+The list applies to a returned individual
+entity or entries within a collection.
+
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
+
 };
 apiInstance.listSourceNodeAssociations(targetId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -101,10 +117,10 @@ apiInstance.listSourceNodeAssociations(targetId, opts).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **targetId** | **String**| The identifier of a node. | 
- **where** | **String**| Optionally filter the list by assocType. Here&#39;s an example:\n\n*   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;)\n | [optional] 
- **include** | **String**| Return additional info, eg. aspect, properties, path, isLink | [optional] 
- **fields** | [**[String]**](String.md)| A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
+ **targetId** | **String**| The identifier of a node. |
+ **where** | **String**| Optionally filter the list by assocType. Here&#39;s an example: *   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;) | [optional]
+ **include** | **String**| Return additional info, eg. aspect, properties, path, isLink | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional]
 
 ### Return type
 
@@ -125,7 +141,8 @@ Name | Type | Description  | Notes
 
 List node associations
 
-Returns a list of target nodes that are pointed to (ie. are associated with) the current source node.\n
+Returns a list of target nodes that are pointed to (ie. are associated with) the current source node.
+
 
 ### Example
 ```javascript
@@ -141,10 +158,24 @@ var apiInstance = new AlfrescoCoreRestApi.AssociationsApi()
 
 var sourceId = "sourceId_example"; // {String} The identifier of a node.
 
-var opts = { 
-  'where': "where_example", // {String} Optionally filter the list by assocType. Here's an example:\n\n*   where=(assocType='my:assoctype')\n
+var opts = {
+  'where': "where_example", // {String} Optionally filter the list by assocType. Here's an example:
+
+*   where=(assocType='my:assoctype')
+
   'include': "include_example", // {String} Return additional info, eg. aspect, properties, path, isLink
-  'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+  'fields': ["fields_example"] // {[String]} A list of field names.
+
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
+
+The list applies to a returned individual
+entity or entries within a collection.
+
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
+
 };
 apiInstance.listTargetAssociations(sourceId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -158,10 +189,21 @@ apiInstance.listTargetAssociations(sourceId, opts).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sourceId** | **String**| The identifier of a node. | 
- **where** | **String**| Optionally filter the list by assocType. Here&#39;s an example:\n\n*   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;)\n | [optional] 
- **include** | **String**| Return additional info, eg. aspect, properties, path, isLink | [optional] 
- **fields** | [**[String]**](String.md)| A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
+ **sourceId** | **String**| The identifier of a node. |
+ **where** | **String**| Optionally filter the list by assocType. Here&#39;s an example: *   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;)  | [optional]
+ **include** | **String**| Return additional info, eg. aspect, properties, path, isLink | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names.
+
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
+
+The list applies to a returned individual
+entity or entries within a collection.
+
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
+ | [optional]
 
 ### Return type
 
@@ -182,7 +224,10 @@ Name | Type | Description  | Notes
 
 Remove node association(s)
 
-Remove association(s) between source and target node for given association type. \n\nIf association type is not specified then all associations between source and target are removed.\n
+Remove association(s) between source and target node for given association type.
+
+If association type is not specified then all associations between source and target are removed.
+
 
 ### Example
 ```javascript
@@ -200,7 +245,7 @@ var sourceId = "sourceId_example"; // {String} The identifier of a node.
 
 var targetId = "targetId_example"; // {String} The identifier of a node.
 
-var opts = { 
+var opts = {
   'assocType': "assocType_example" // {String} Restrict the delete to only those of the given association type
 };
 apiInstance.removeAssoc(sourceId, targetId, opts).then(function() {
@@ -215,9 +260,9 @@ apiInstance.removeAssoc(sourceId, targetId, opts).then(function() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sourceId** | **String**| The identifier of a node. | 
- **targetId** | **String**| The identifier of a node. | 
- **assocType** | **String**| Restrict the delete to only those of the given association type | [optional] 
+ **sourceId** | **String**| The identifier of a node. |
+ **targetId** | **String**| The identifier of a node. |
+ **assocType** | **String**| Restrict the delete to only those of the given association type | [optional]
 
 ### Return type
 

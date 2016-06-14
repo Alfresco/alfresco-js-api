@@ -16,7 +16,20 @@ Method | HTTP request | Description
 
 Add a comment
 
-Creates one or more comments on node **nodeId**. You can create more than one comment by \nspecifying a list of comments in the JSON body like this:      \n\n&#x60;&#x60;&#x60;JSON\n[\n  {\n    \&quot;content\&quot;: \&quot;This is a comment\&quot;\n  },\n  {\n    \&quot;content\&quot;: \&quot;This is another comment\&quot;\n  }\n]\n&#x60;&#x60;&#x60;\n
+Creates one or more comments on node **nodeId**. You can create more than one comment by
+specifying a list of comments in the JSON body like this:
+
+&#x60;&#x60;&#x60;JSON
+[
+  {
+    \&quot;content\&quot;: \&quot;This is a comment\&quot;
+  },
+  {
+    \&quot;content\&quot;: \&quot;This is another comment\&quot;
+  }
+]
+&#x60;&#x60;&#x60;
+
 
 ### Example
 ```javascript
@@ -46,8 +59,8 @@ apiInstance.addComment(nodeId, commentBody).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **nodeId** | **String**| The identifier of a node. | 
- **commentBody** | [**CommentBody**](CommentBody.md)| The comment text. Note that you can provide an array of comments. | 
+ **nodeId** | **String**| The identifier of a node. |
+ **commentBody** | [**CommentBody**](CommentBody.md)| The comment text. Note that you can provide an array of comments. |
 
 ### Return type
 
@@ -84,10 +97,21 @@ var apiInstance = new AlfrescoCoreRestApi.CommentsApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
-var opts = { 
+var opts = {
   'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
-  'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+  'fields': ["fields_example"] // {[String]} A list of field names.
+
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
+
+The list applies to a returned individual
+entity or entries within a collection.
+
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
+
 };
 apiInstance.getComments(nodeId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -101,10 +125,21 @@ apiInstance.getComments(nodeId, , opts).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **nodeId** | **String**| The identifier of a node. | 
- **skipCount** | **Integer**| The number of entities that exist in the collection before those included in this list. | [optional] 
- **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional] 
- **fields** | [**[String]**](String.md)| A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
+ **nodeId** | **String**| The identifier of a node. |
+ **skipCount** | **Integer**| The number of entities that exist in the collection before those included in this list. | [optional]
+ **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names.
+
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
+
+The list applies to a returned individual
+entity or entries within a collection.
+
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
+ | [optional]
 
 ### Return type
 
@@ -155,8 +190,8 @@ apiInstance.removeComment(nodeId, commentId).then(function() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **nodeId** | **String**| The identifier of a node. | 
- **commentId** | **String**| The identifier of a comment. | 
+ **nodeId** | **String**| The identifier of a node. |
+ **commentId** | **String**| The identifier of a comment. |
 
 ### Return type
 
@@ -197,8 +232,19 @@ var commentId = "commentId_example"; // {String} The identifier of a comment.
 
 var commentBody = new AlfrescoCoreRestApi.CommentBody1(); // {CommentBody1} The JSON representing the comment to be updated.
 
-var opts = { 
-  'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+var opts = {
+  'fields': ["fields_example"] // {[String]} A list of field names.
+
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
+
+The list applies to a returned individual
+entity or entries within a collection.
+
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
+
 };
 apiInstance.updateComment(nodeId, commentIdcommentBody, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -212,10 +258,21 @@ apiInstance.updateComment(nodeId, commentIdcommentBody, opts).then(function(data
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **nodeId** | **String**| The identifier of a node. | 
- **commentId** | **String**| The identifier of a comment. | 
- **commentBody** | [**CommentBody1**](CommentBody1.md)| The JSON representing the comment to be updated. | 
- **fields** | [**[String]**](String.md)| A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
+ **nodeId** | **String**| The identifier of a node. |
+ **commentId** | **String**| The identifier of a comment. |
+ **commentBody** | [**CommentBody1**](CommentBody1.md)| The JSON representing the comment to be updated. |
+ **fields** | [**[String]**](String.md)| A list of field names.
+
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
+
+The list applies to a returned individual
+entity or entries within a collection.
+
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
+ | [optional]
 
 ### Return type
 
