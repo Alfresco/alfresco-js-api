@@ -192,18 +192,7 @@ Name | Type | Description  | Notes
  **sourceId** | **String**| The identifier of a node. |
  **where** | **String**| Optionally filter the list by assocType. Here&#39;s an example: *   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;)  | [optional]
  **include** | **String**| Return additional info, eg. aspect, properties, path, isLink | [optional]
- **fields** | [**[String]**](String.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional]
 
 ### Return type
 

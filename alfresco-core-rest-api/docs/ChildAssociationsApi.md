@@ -147,18 +147,7 @@ Name | Type | Description  | Notes
  **nodeBody** | [**NodeBody1**](NodeBody1.md)| The node information to create. |
  **autoRename** | **Boolean**| If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix. | [optional]
  **include** | [**[String]**](String.md)| Returns additional information about the node. The following optional fields can be requested: * path * isLink * allowableOperations  | [optional]
- **fields** | [**[String]**](String.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional]
 
 ### Return type
 
@@ -325,7 +314,7 @@ i.e. "orderBy=isFolder DESC,name ASC".
 
 This default can be completely overridden by specifying a specific orderBy consisting of one, two or
 three comma-separated list of properties (with optional ASCending or DESCending), for example,
-specifying \u201CorderBy=name DESC\u201D would return a mixed folder/file list.
+specifying “CorderBy=name DESC“D would return a mixed folder/file list.
 
 The following properties can be used to order the results:
 * isFolder
@@ -386,7 +375,7 @@ Name | Type | Description  | Notes
  **nodeId** | **String**| The identifier of a node. You can also use one of these well-known aliases: *-my-*-shared-*-root-  |
  **skipCount** | **Integer**| The number of entities that exist in the collection before those included in this list. | [optional]
  **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional]
- **orderBy** | **String**| If not specified then default sort is for folders to be sorted before files, and by ascending name i.e. "orderBy&#x3D;isFolder DESC,name ASC". This default can be completely overridden by specifying a specific orderBy consisting of one, two or three comma-separated list of properties (with optional ASCending or DESCending), for example, specifying \u201CorderBy&#x3D;name DESC\u201D would return a mixed folder/file list. The following properties can be used to order the results:* isFolder * name * mimeType * nodeType * sizeInBytes * modifiedAt * createdAt * modifiedByUser * createdByUser | [optional]
+ **orderBy** | **String**| If not specified then default sort is for folders to be sorted before files, and by ascending name i.e. "orderBy&#x3D;isFolder DESC,name ASC". This default can be completely overridden by specifying a specific orderBy consisting of one, two or three comma-separated list of properties (with optional ASCending or DESCending), for example, specifying “CorderBy&#x3D;name DESC“D would return a mixed folder/file list. The following properties can be used to order the results:* isFolder * name * mimeType * nodeType * sizeInBytes * modifiedAt * createdAt * modifiedByUser * createdByUser | [optional]
  **where** | **String**| Optionally filter the list. Here are some examples: *   where&#x3D;(isFolder&#x3D;true) *   where&#x3D;(isFile&#x3D;true) *   where&#x3D;(nodeType&#x3D;&#39;my:specialtype&#39;) *   where&#x3D;(nodeType&#x3D;&#39;my:specialtype&#39; INCLUDESUBTYPES)  | [optional]
  **include** | [**[String]**](String.md)| Returns additional information about the node. The following optional fields can be requested: * properties * aspectNames * path * isLink * allowableOperations * association | [optional]
  **relativePath** | **String**| Return information on children within the folder resolved by this path (relative to specified nodeId as the starting parent folder) | [optional]
@@ -476,18 +465,7 @@ Name | Type | Description  | Notes
  **childId** | **String**| The identifier of a node. |
  **where** | **String**| Optionally filter the list by assocType. Here&#39;s an example: *   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;)  | [optional]
  **include** | **String**| Return additional info, eg. aspect, properties, path, isLink | [optional]
- **fields** | [**[String]**](String.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include* parameter are returned in addition to those specified in the **fields** parameter.  | [optional]
 
 ### Return type
 
