@@ -393,8 +393,7 @@ apiInstance.getSharedLinkContent(sharedId, , opts).then(function() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **sharedId** | **String**| The identifier of a shared link to a file. |
- **attachment** | **Boolean**| **true** enables a web browser to download the file as an attachment.
- **false** means a web browser may preview the file in a new tab or window, but not download the file.  You can only set this parameter to **false** if the content type of the file is in the supported list; for example, certain image files and PDF files. If the content type is not supported for preview, then a value of **false**  is ignored, and the attachment will be returned in the response. | [optional] [default to true]
+ **attachment** | **Boolean**| **true** enables a web browser to download the file as an attachment. **false** means a web browser may preview the file in a new tab or window, but not download the file.  You can only set this parameter to **false** if the content type of the file is in the supported list; for example, certain image files and PDF files. If the content type is not supported for preview, then a value of **false**  is ignored, and the attachment will be returned in the response. | [optional] [default to true]
  **ifModifiedSince** | **Date**| Only returns the content if it has been modified since the date provided. Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.  | [optional]
 
 ### Return type
