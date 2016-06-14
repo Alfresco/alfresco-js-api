@@ -17,17 +17,17 @@ Create ticket (login)
 
 Logs in and returns the new authentication ticket.
 The userId and password properties are mandatory in the request body. For example:
-&#x60;&#x60;&#x60;JSON
+```JSON
 {
-    \&quot;userId\&quot;: \&quot;jbloggs\&quot;,
-    \&quot;password\&quot;: \&quot;password\&quot;
+    "userId": "jbloggs",
+    "password": "password"
 }
-&#x60;&#x60;&#x60;
+```
 To use the ticket in future requests you should pass it in the request header.
 For example using Javascript:
-  &#x60;&#x60;&#x60;Javascript
-    request.setRequestHeader (\&quot;Authorization\&quot;, \&quot;Basic \&quot; + btoa(ticket));
-  &#x60;&#x60;&#x60;
+  ```Javascript
+    request.setRequestHeader ("Authorization", "Basic " + btoa(ticket));
+  ```
 
 
 ### Example
@@ -124,9 +124,9 @@ Validate ticket
 Validates the specified ticket (derived from Authorization header) is still valid.
 
 For example, you can pass the Authorization request header using Javascript:
-  &#x60;&#x60;&#x60;Javascript
-    request.setRequestHeader (\&quot;Authorization\&quot;, \&quot;Basic \&quot; + btoa(ticket));
-  &#x60;&#x60;&#x60;
+  ```Javascript
+    request.setRequestHeader ("Authorization", "Basic " + btoa(ticket));
+  ```
 
 
 ### Example

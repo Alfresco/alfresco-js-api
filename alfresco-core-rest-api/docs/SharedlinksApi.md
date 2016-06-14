@@ -149,23 +149,23 @@ Email shared link
 Sends email with app-specific url including identifier **sharedId**.
 
 The client and recipientEmails properties are mandatory in the request body. For example, to email a shared link with minimum info:
-&#x60;&#x60;&#x60;JSON
+```JSON
 {
-    \&quot;client\&quot;: \&quot;myClient\&quot;,
-    \&quot;recipientEmails\&quot;: [\&quot;john.doe@acme.com\&quot;, joe.bloggs@acme.com]
+    "client": "myClient",
+    "recipientEmails": ["john.doe@acme.com", joe.bloggs@acme.com]
 }
-&#x60;&#x60;&#x60;
+```
 A plain text message property can be optionally provided in the request body to customise the sent email.
 Also, a locale property can be optionally provided in the request body to send the emails in a particular language.
 For example, to email a shared link with a messages and a locale:
-&#x60;&#x60;&#x60;JSON
+```JSON
 {
-    \&quot;client\&quot;: \&quot;myClient\&quot;,
-    \&quot;recipientEmails\&quot;: [\&quot;john.doe@acme.com\&quot;, joe.bloggs@acme.com],
-    \&quot;message\&quot;: \&quot;myMessage\&quot;,
-    \&quot;locale\&quot;:\&quot;en-GB\&quot;
+    "client": "myClient",
+    "recipientEmails": ["john.doe@acme.com", joe.bloggs@acme.com],
+    "message": "myMessage",
+    "locale":"en-GB"
 }
-&#x60;&#x60;&#x60;
+```
 **Note:** The client must be registered before you can send a shared link email. See [server documentation]
 
 
@@ -234,7 +234,7 @@ basicAuth.password = 'YOUR PASSWORD'
 var apiInstance = new AlfrescoCoreRestApi.SharedlinksApi()
 
 var opts = {
-  'where': "where_example", // {String} Optionally filter the list by \"sharedByUser\" userid of person who shared the link (can also use -me-)
+  'where': "where_example", // {String} Optionally filter the list by "sharedByUser" userid of person who shared the link (can also use -me-)
 *   where=(sharedByUser='jbloggs')
 *   where=(sharedByUser='-me-')
   'include': ["include_example"], // {[String]} Returns additional information about the shared link, the following optional fields can be requested:
@@ -265,7 +265,7 @@ apiInstance.findSharedLinks(opts).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **where** | **String**| Optionally filter the list by \&quot;sharedByUser\&quot; userid of person who shared the link (can also use -me-) *   where&#x3D;(sharedByUser&#x3D;&#39;jbloggs&#39;) *   where&#x3D;(sharedByUser&#x3D;&#39;-me-&#39;) | [optional]
+ **where** | **String**| Optionally filter the list by "sharedByUser" userid of person who shared the link (can also use -me-) *   where&#x3D;(sharedByUser&#x3D;&#39;jbloggs&#39;) *   where&#x3D;(sharedByUser&#x3D;&#39;-me-&#39;) | [optional]
  **include** | [**[String]**](String.md)| Returns additional information about the shared link, the following optional fields can be requested: * allowableOperations | [optional]
  **fields** | [**[String]**](String.md)| A list of field names.
 

@@ -86,13 +86,13 @@ Create a site
 Creates a default site with the given details.  Unless explicitly specified, the site id will be generated from the site title. The site id must be unique and only contain alphanumeric and/or dash
 characters.
 
-For example, to create a public site called \&quot;Marketing\&quot; the following body could be used:
-&#x60;&#x60;&#x60;JSON
+For example, to create a public site called "Marketing" the following body could be used:
+```JSON
 {
-  \&quot;title\&quot;: \&quot;Marketing\&quot;,
-  \&quot;visibility\&quot;: \&quot;PUBLIC\&quot;
+  "title": "Marketing",
+  "visibility": "PUBLIC"
 }
-&#x60;&#x60;&#x60;
+```
 
 The creation of the (surf) configuration files required by Share can be skipped via the **skipConfiguration** query parameter.
 
@@ -219,9 +219,9 @@ The **sites** entity has two children, **containers** and **members**.
 The following relations parameter returns all the container and member
 objects related to the site **siteId**:
 
-&#x60;&#x60;&#x60;
+```
 containers,members
-&#x60;&#x60;&#x60;
+```
 
 
 ### Example
@@ -619,10 +619,10 @@ comma separated properties.
 For each property you can optionally specify the order direction.
 Both of the these **orderBy** examples retrieve sites ordered by ascending name:
 
-&#x60;&#x60;&#x60;
+```
 name
 name ASC
-&#x60;&#x60;&#x60;
+```
 
 You can use the **relations** parameter to include one or more related
 entities in a single response and so reduce network traffic.
@@ -632,9 +632,9 @@ The **sites** entity has two children, **containers** and **members**.
 The following relations parameter returns all the container and member
 objects related to each site:
 
-&#x60;&#x60;&#x60;
+```
 containers,members
-&#x60;&#x60;&#x60;
+```
 
 
 ### Example

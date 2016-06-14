@@ -41,9 +41,9 @@ For example, to favorite a file the following body would be used:
 
 ```JSON
 {
-   \"target\": {
-      \"file\": {
-         \"guid\": \"abcde-01234\"
+   "target": {
+      "file": {
+         "guid": "abcde-01234"
       }
    }
 }
@@ -70,15 +70,15 @@ The content of that object is the &#x60;guid&#x60; of the target entity.
 
 For example, to favorite a file the following body would be used:
 
-&#x60;&#x60;&#x60;JSON
+```JSON
 {
-   \&quot;target\&quot;: {
-      \&quot;file\&quot;: {
-         \&quot;guid\&quot;: \&quot;abcde-01234\&quot;
+   "target": {
+      "file": {
+         "guid": "abcde-01234"
       }
    }
 }
-&#x60;&#x60;&#x60;
+```
  |
 
 ### Return type
@@ -194,17 +194,17 @@ list to include entries that include that one property. The property values are:
 
 For example, the following **where** parameter restricts the returned list to the file favorites for a person:
 
-&#x60;&#x60;&#x60;SQL
+```SQL
 (EXISTS(target/file))
-&#x60;&#x60;&#x60;
+```
 You can specify more than one condition using **OR**. The predicate must be enclosed in parentheses.
 
 
 For example, the following **where** parameter restricts the returned list to the file and folder favorites for a person:
 
-&#x60;&#x60;&#x60;SQL
+```SQL
 (EXISTS(target/file) OR EXISTS(target/folder))
-&#x60;&#x60;&#x60;
+```
 
 
 ### Example

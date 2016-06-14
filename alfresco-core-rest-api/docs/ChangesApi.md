@@ -104,49 +104,49 @@ Create a node
 Creates a node as a (primary) child of the node with identifier **nodeId**.
 
 You must specify at least a **name** and **nodeType**. For example, to create a folder:
-&#x60;&#x60;&#x60;JSON
+```JSON
 {
-  \&quot;name\&quot;:\&quot;My Folder\&quot;,
-  \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;
+  "name":"My Folder",
+  "nodeType":"cm:folder"
 }
-&#x60;&#x60;&#x60;
+```
 
 You can create an empty file like this:
-&#x60;&#x60;&#x60;JSON
+```JSON
 {
-  \&quot;name\&quot;:\&quot;My text file.txt\&quot;,
-  \&quot;nodeType\&quot;:\&quot;cm:content\&quot;,
-  \&quot;content\&quot;:
+  "name":"My text file.txt",
+  "nodeType":"cm:content",
+  "content":
    {
-     \&quot;mimeType\&quot;:\&quot;text/plain\&quot;
+     "mimeType":"text/plain"
    }
 }
-&#x60;&#x60;&#x60;
-You can update binary content using the &#x60;&#x60;&#x60;PUT /nodes/{nodeId}&#x60;&#x60;&#x60; API method.
+```
+You can update binary content using the ```PUT /nodes/{nodeId}``` API method.
 
 You can create a folder, or other node, inside a folder hierarchy:
-&#x60;&#x60;&#x60;JSON
+```JSON
 {
-  \&quot;name\&quot;:\&quot;My Special Folder\&quot;,
-  \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;,
-  \&quot;relativePath\&quot;:\&quot;X/Y/Z\&quot;
+  "name":"My Special Folder",
+  "nodeType":"cm:folder",
+  "relativePath":"X/Y/Z"
 }
-&#x60;&#x60;&#x60;
+```
 The **relativePath** specifies the folder structure to create relative to the node identified by  **nodeId**. Folders in the
 **relativePath** that do not exist are created before the node is created.
 
 You can set properties when you create a new node:
-&#x60;&#x60;&#x60;JSON
+```JSON
 {
-  \&quot;name\&quot;:\&quot;My Other Folder\&quot;,
-  \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;,
-  \&quot;properties\&quot;:
+  "name":"My Other Folder",
+  "nodeType":"cm:folder",
+  "properties":
     {
-      \&quot;cm:title\&quot;:\&quot;Folder title\&quot;,
-      \&quot;cm:description\&quot;:\&quot;This is an important folder\&quot;
+      "cm:title":"Folder title",
+      "cm:description":"This is an important folder"
     }
 }
-&#x60;&#x60;&#x60;
+```
 Any missing aspects are auto-applied. For example, **cm:titled** in the JSON shown above. You can set aspects
 explicitly set, if needed, using an **aspectNames** field.
 
@@ -194,11 +194,7 @@ var nodeBody = new AlfrescoCoreRestApi.NodeBody1(); // {NodeBody1} The node info
 
 var opts = {
   'autoRename': true, // {Boolean} If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
-  'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:
-* path
-* isLink
-* allowableOperations
-
+  'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested: * path * isLink * allowableOperations
   'fields': ["fields_example"] // {[String]} A list of field names.
 
 You can use this parameter to restrict the fields
@@ -486,12 +482,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 Create rendition
 
 Async request to create a rendition for file with identifier
-**nodeId**. The rendition is specified by name \&quot;id\&quot; in the request body:
-&#x60;&#x60;&#x60;JSON
+**nodeId**. The rendition is specified by name "id" in the request body:
+```JSON
 {
-  \&quot;id\&quot;:\&quot;doclib\&quot;
+  "id":"doclib"
 }
-&#x60;&#x60;&#x60;
+```
 
 
 ### Example
@@ -512,7 +508,7 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node. You can als
 * -root-
 
 
-var renditionBody = new AlfrescoCoreRestApi.RenditionBody(); // {RenditionBody} The rendition \"id\".
+var renditionBody = new AlfrescoCoreRestApi.RenditionBody(); // {RenditionBody} The rendition "id".
 
 apiInstance.createRendition(nodeId, renditionBody).then(function() {
   console.log('API called successfully.');
@@ -527,7 +523,7 @@ apiInstance.createRendition(nodeId, renditionBody).then(function() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **String**| The identifier of a node. You can also use one of these well-known aliases: *-my-*-shared-*-root-  |
- **renditionBody** | [**RenditionBody**](RenditionBody.md)| The rendition \&quot;id\&quot;. |
+ **renditionBody** | [**RenditionBody**](RenditionBody.md)| The rendition "id". |
 
 ### Return type
 
@@ -551,13 +547,13 @@ Create a site
 Creates a default site with the given details.  Unless explicitly specified, the site id will be generated from the site title. The site id must be unique and only contain alphanumeric and/or dash
 characters.
 
-For example, to create a public site called \&quot;Marketing\&quot; the following body could be used:
-&#x60;&#x60;&#x60;JSON
+For example, to create a public site called "Marketing" the following body could be used:
+```JSON
 {
-  \&quot;title\&quot;: \&quot;Marketing\&quot;,
-  \&quot;visibility\&quot;: \&quot;PUBLIC\&quot;
+  "title": "Marketing",
+  "visibility": "PUBLIC"
 }
-&#x60;&#x60;&#x60;
+```
 
 The creation of the (surf) configuration files required by Share can be skipped via the **skipConfiguration** query parameter.
 
@@ -786,23 +782,23 @@ Email shared link
 Sends email with app-specific url including identifier **sharedId**.
 
 The client and recipientEmails properties are mandatory in the request body. For example, to email a shared link with minimum info:
-&#x60;&#x60;&#x60;JSON
+```JSON
 {
-    \&quot;client\&quot;: \&quot;myClient\&quot;,
-    \&quot;recipientEmails\&quot;: [\&quot;john.doe@acme.com\&quot;, joe.bloggs@acme.com]
+    "client": "myClient",
+    "recipientEmails": ["john.doe@acme.com", joe.bloggs@acme.com]
 }
-&#x60;&#x60;&#x60;
+```
 A plain text message property can be optionally provided in the request body to customise the sent email.
 Also, a locale property can be optionally provided in the request body to send the emails in a particular language.
 For example, to email a shared link with a messages and a locale:
-&#x60;&#x60;&#x60;JSON
+```JSON
 {
-    \&quot;client\&quot;: \&quot;myClient\&quot;,
-    \&quot;recipientEmails\&quot;: [\&quot;john.doe@acme.com\&quot;, joe.bloggs@acme.com],
-    \&quot;message\&quot;: \&quot;myMessage\&quot;,
-    \&quot;locale\&quot;:\&quot;en-GB\&quot;
+    "client": "myClient",
+    "recipientEmails": ["john.doe@acme.com", joe.bloggs@acme.com],
+    "message": "myMessage",
+    "locale":"en-GB"
 }
-&#x60;&#x60;&#x60;
+```
 **Note:** The client must be registered before you can send a shared link email. See [server documentation]
 
 
@@ -871,7 +867,7 @@ basicAuth.password = 'YOUR PASSWORD'
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
 var opts = {
-  'where': "where_example", // {String} Optionally filter the list by \"sharedByUser\" userid of person who shared the link (can also use -me-)
+  'where': "where_example", // {String} Optionally filter the list by "sharedByUser" userid of person who shared the link (can also use -me-)
 *   where=(sharedByUser='jbloggs')
 *   where=(sharedByUser='-me-')
   'include': ["include_example"], // {[String]} Returns additional information about the shared link, the following optional fields can be requested:
@@ -902,7 +898,7 @@ apiInstance.findSharedLinks(opts).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **where** | **String**| Optionally filter the list by \&quot;sharedByUser\&quot; userid of person who shared the link (can also use -me-) *   where&#x3D;(sharedByUser&#x3D;&#39;jbloggs&#39;) *   where&#x3D;(sharedByUser&#x3D;&#39;-me-&#39;) | [optional]
+ **where** | **String**| Optionally filter the list by "sharedByUser" userid of person who shared the link (can also use -me-) *   where&#x3D;(sharedByUser&#x3D;&#39;jbloggs&#39;) *   where&#x3D;(sharedByUser&#x3D;&#39;-me-&#39;) | [optional]
  **include** | [**[String]**](String.md)| Returns additional information about the shared link, the following optional fields can be requested: * allowableOperations | [optional]
  **fields** | [**[String]**](String.md)| A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. | [optional]
 
@@ -943,11 +939,7 @@ var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var opts = {
-  'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:
-* path
-* isLink
-* allowableOperations
-
+  'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested: * path * isLink * allowableOperations
 };
 apiInstance.getDeletedNode(nodeId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -1004,14 +996,7 @@ var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 var opts = {
   'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
-  'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:
-* properties
-* aspectNames
-* path
-* isLink
-* allowableOperations
-* association
-
+  'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested: * properties * aspectNames * path * isLink * allowableOperations * association
 };
 apiInstance.getDeletedNodes(opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -1128,21 +1113,12 @@ basicAuth.password = 'YOUR PASSWORD'
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
-var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:
-* -my-
-* -shared-
-* -root-
+var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases: *-my-*-shared-*-root-
 
 
 var opts = {
-  'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:
-* path
-* isLink
-* allowableOperations
-
-  'relativePath': "relativePath_example", // {String} If specified, returns information on the node resolved by this path.
-The path is relative to the specified **nodeId**
-
+  'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested: * path * isLink * allowableOperations
+  'relativePath': "relativePath_example", // {String} If specified, returns information on the node resolved by this path. The path is relative to the specified **nodeId**
   'fields': ["fields_example"] // {[String]} A list of field names.
 
 You can use this parameter to restrict the fields
@@ -1232,7 +1208,7 @@ var opts = {
   'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
   'orderBy': "orderBy_example", // {String} If not specified then default sort is for folders to be sorted before files, and by ascending name
-i.e. \"orderBy=isFolder DESC,name ASC\".
+i.e. "orderBy=isFolder DESC,name ASC".
 
 This default can be completely overridden by specifying a specific orderBy consisting of one, two or
 three comma-separated list of properties (with optional ASCending or DESCending), for example,
@@ -1268,7 +1244,7 @@ The following properties can be used to order the results:
 * association
 
   'relativePath': "relativePath_example", // {String} Return information on children within the folder resolved by this path (relative to specified nodeId as the starting parent folder)
-  'includeSource': true, // {Boolean} Also include \"source\" (in addition to \"entries\") with folder information on parent node (either the specified parent \"nodeId\" or as resolved by \"relativePath\")
+  'includeSource': true, // {Boolean} Also include "source" (in addition to "entries") with folder information on parent node (either the specified parent "nodeId" or as resolved by "relativePath")
   'fields': ["fields_example"] // {[String]} A list of field names.
 
 You can use this parameter to restrict the fields
@@ -1297,11 +1273,11 @@ Name | Type | Description  | Notes
  **nodeId** | **String**| The identifier of a node. You can also use one of these well-known aliases: *-my-*-shared-*-root-  |
  **skipCount** | **Integer**| The number of entities that exist in the collection before those included in this list. | [optional]
  **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional]
- **orderBy** | **String**| If not specified then default sort is for folders to be sorted before files, and by ascending name i.e. \&quot;orderBy&#x3D;isFolder DESC,name ASC\&quot;. This default can be completely overridden by specifying a specific orderBy consisting of one, two or three comma-separated list of properties (with optional ASCending or DESCending), for example, specifying \u201CorderBy&#x3D;name DESC\u201D would return a mixed folder/file list. The following properties can be used to order the results: * isFolder * name * mimeType * nodeType * sizeInBytes * modifiedAt * createdAt * modifiedByUser * createdByUser  | [optional]
+ **orderBy** | **String**| If not specified then default sort is for folders to be sorted before files, and by ascending name i.e. "orderBy&#x3D;isFolder DESC,name ASC". This default can be completely overridden by specifying a specific orderBy consisting of one, two or three comma-separated list of properties (with optional ASCending or DESCending), for example, specifying \u201CorderBy&#x3D;name DESC\u201D would return a mixed folder/file list. The following properties can be used to order the results: * isFolder * name * mimeType * nodeType * sizeInBytes * modifiedAt * createdAt * modifiedByUser * createdByUser  | [optional]
  **where** | **String**| Optionally filter the list. Here are some examples: *   where&#x3D;(isFolder&#x3D;true) *   where&#x3D;(isFile&#x3D;true) *   where&#x3D;(nodeType&#x3D;&#39;my:specialtype&#39;) *   where&#x3D;(nodeType&#x3D;&#39;my:specialtype&#39; INCLUDESUBTYPES)  | [optional]
  **include** | [**[String]**](String.md)| Returns additional information about the node. The following optional fields can be requested: * properties * aspectNames * path * isLink * allowableOperations * association | [optional]
  **relativePath** | **String**| Return information on children within the folder resolved by this path (relative to specified nodeId as the starting parent folder) | [optional]
- **includeSource** | **Boolean**| Also include \&quot;source\&quot; (in addition to \&quot;entries\&quot;) with folder information on parent node (either the specified parent \&quot;nodeId\&quot; or as resolved by \&quot;relativePath\&quot;) | [optional]
+ **includeSource** | **Boolean**| Also include "source" (in addition to "entries") with folder information on parent node (either the specified parent "nodeId" or as resolved by "relativePath") | [optional]
  **fields** | [**[String]**](String.md)| A list of field names.
 
 You can use this parameter to restrict the fields
@@ -2128,7 +2104,7 @@ The search term is used to look for nodes that match against name, title, descri
 
 The search term
 - must contain a minimum of 3 alphanumeric characters
-- allows \&quot;quoted term\&quot;
+- allows "quoted term"
 - can optionally use &#39;*&#39; for wildcard matching
 
 By default, file and folder types will be searched unless a specific type is provided as a query parameter.
@@ -2250,11 +2226,7 @@ basicAuth.password = 'YOUR PASSWORD'
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
-var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:
-* -my-
-* -shared-
-* -root-
-
+var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases: * -my-*-shared-*-root-
 
 var moveBody = new AlfrescoCoreRestApi.MoveBody(); // {MoveBody} The targetParentId and, optionally, a new name.
 
@@ -2646,23 +2618,23 @@ parameter are returned in addition to those specified in the **fields** paramete
 Update a node
 
 Updates the node with identifier **nodeId**. For example, you can rename a file or folder:
-&#x60;&#x60;&#x60;JSON
+```JSON
 {
-  \&quot;name\&quot;:\&quot;My new name\&quot;,
+  "name":"My new name",
 }
-&#x60;&#x60;&#x60;
+```
 You can also set or update one or more properties:
-&#x60;&#x60;&#x60;JSON
+```JSON
 {
-  \&quot;properties\&quot;:
+  "properties":
     {
-      \&quot;cm:title\&quot;:\&quot;Folder title\&quot;
+      "cm:title":"Folder title"
     }
 }
-&#x60;&#x60;&#x60;
+```
 **Note:** if you want to add or remove aspects, then you must use **GET /nodes/{nodeId}** first to get the complete set of *aspectNames*.
 
-**Note:** Currently there is no optimistic locking for updates, so they are applied in \&quot;last one wins\&quot; order.
+**Note:** Currently there is no optimistic locking for updates, so they are applied in "last one wins" order.
 
 
 ### Example
@@ -2686,11 +2658,7 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node. You can als
 var nodeBody = new AlfrescoCoreRestApi.NodeBody(); // {NodeBody} The node information to update.
 
 var opts = {
-  'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:
-* path
-* isLink
-* allowableOperations
-
+  'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested: * path * isLink * allowableOperations
   'fields': ["fields_example"] // {[String]} A list of field names.
 
 You can use this parameter to restrict the fields

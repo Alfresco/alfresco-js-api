@@ -19,7 +19,7 @@ The search term is used to look for nodes that match against name, title, descri
 
 The search term
 - must contain a minimum of 3 alphanumeric characters
-- allows \&quot;quoted term\&quot;
+- allows "quoted term"
 - can optionally use &#39;*&#39; for wildcard matching
 
 By default, file and folder types will be searched unless a specific type is provided as a query parameter.

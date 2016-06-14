@@ -21,16 +21,16 @@ Add a tag
 Adds one or more tags to the node **nodeId**. You can create more than one tag by
 specifying a list of tags in the JSON body like this:
 
-&#x60;&#x60;&#x60;JSON
+```JSON
 [
   {
-    \&quot;tag\&quot;:\&quot;test-tag-1\&quot;
+    "tag":"test-tag-1"
   },
   {
-    \&quot;tag\&quot;:\&quot;test-tag-2\&quot;
+    "tag":"test-tag-2"
   }
 ]
-&#x60;&#x60;&#x60;
+```
 
 
 ### Example

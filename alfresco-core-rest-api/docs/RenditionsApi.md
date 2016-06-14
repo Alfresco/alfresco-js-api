@@ -19,12 +19,12 @@ Method | HTTP request | Description
 Create rendition
 
 Async request to create a rendition for file with identifier
-**nodeId**. The rendition is specified by name \&quot;id\&quot; in the request body:
-&#x60;&#x60;&#x60;JSON
+**nodeId**. The rendition is specified by name "id" in the request body:
+```JSON
 {
-  \&quot;id\&quot;:\&quot;doclib\&quot;
+  "id":"doclib"
 }
-&#x60;&#x60;&#x60;
+```
 
 
 ### Example
@@ -45,7 +45,7 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node. You can als
 * -root-
 
 
-var renditionBody = new AlfrescoCoreRestApi.RenditionBody(); // {RenditionBody} The rendition \"id\".
+var renditionBody = new AlfrescoCoreRestApi.RenditionBody(); // {RenditionBody} The rendition "id".
 
 apiInstance.createRendition(nodeId, renditionBody).then(function() {
   console.log('API called successfully.');
@@ -60,7 +60,7 @@ apiInstance.createRendition(nodeId, renditionBody).then(function() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **String**| The identifier of a node. You can also use one of these well-known aliases: *-my-*-shared-*-root- |
- **renditionBody** | [**RenditionBody**](RenditionBody.md)| The rendition \&quot;id\&quot;. |
+ **renditionBody** | [**RenditionBody**](RenditionBody.md)| The rendition "id". |
 
 ### Return type
 

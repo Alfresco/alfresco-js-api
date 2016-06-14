@@ -189,14 +189,14 @@ var apiInstance = new AlfrescoCoreRestApi.RatingsApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
-var ratingBody = new AlfrescoCoreRestApi.RatingBody(); // {RatingBody} For \"myRating\" the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.
+var ratingBody = new AlfrescoCoreRestApi.RatingBody(); // {RatingBody} For "myRating" the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.
 
-For example, to \"like\" a file the following body would be used:
+For example, to "like" a file the following body would be used:
 
   ```JSON
     {
-      \"id\": \"likes\",
-      \"myRating\": true
+      "id": "likes",
+      "myRating": true
     }
   ```
 
@@ -214,16 +214,16 @@ apiInstance.rate(nodeId, ratingBody).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **String**| The identifier of a node. |
- **ratingBody** | [**RatingBody**](RatingBody.md)| For \&quot;myRating\&quot; the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.
+ **ratingBody** | [**RatingBody**](RatingBody.md)| For "myRating" the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.
 
-For example, to \&quot;like\&quot; a file the following body would be used:
+For example, to "like" a file the following body would be used:
 
-  &#x60;&#x60;&#x60;JSON
+  ```JSON
     {
-      \&quot;id\&quot;: \&quot;likes\&quot;,
-      \&quot;myRating\&quot;: true
+      "id": "likes",
+      "myRating": true
     }
-  &#x60;&#x60;&#x60;
+  ```
  |
 
 ### Return type

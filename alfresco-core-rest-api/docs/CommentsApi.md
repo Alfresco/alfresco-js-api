@@ -19,16 +19,16 @@ Add a comment
 Creates one or more comments on node **nodeId**. You can create more than one comment by
 specifying a list of comments in the JSON body like this:
 
-&#x60;&#x60;&#x60;JSON
+```JSON
 [
   {
-    \&quot;content\&quot;: \&quot;This is a comment\&quot;
+    "content": "This is a comment"
   },
   {
-    \&quot;content\&quot;: \&quot;This is another comment\&quot;
+    "content": "This is another comment"
   }
 ]
-&#x60;&#x60;&#x60;
+```
 
 
 ### Example
