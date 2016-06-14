@@ -32,16 +32,6 @@ Then install it via:
 npm install alfresco-core-rest-api --save
 ```
 
-#### git
-#
-If the library is hosted at a git repository, e.g.
-https://github.com/YOUR_USERNAME/YOUR_GIT_REPO_ID
-then install it via:
-
-```shell
-npm install YOUR_USERNAME/YOUR_GIT_REPO_ID --save
-```
-
 ### For browser
 
 The library also works in the browser environment via npm and [browserify](http://browserify.org/). After following
