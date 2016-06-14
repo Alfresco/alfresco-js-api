@@ -87,23 +87,9 @@ var apiInstance = new AlfrescoCoreRestApi.AssociationsApi()
 var targetId = "targetId_example"; // {String} The identifier of a node.
 
 var opts = {
-  'where': "where_example", // {String} Optionally filter the list by assocType. Here's an example:
-
-*   where=(assocType='my:assoctype')
-
+  'where': "where_example", // {String} Optionally filter the list by assocType. Here's an example: *   where=(assocType='my:assoctype')
   'include': "include_example", // {String} Return additional info, eg. aspect, properties, path, isLink
-  'fields': ["fields_example"] // {[String]} A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
+  'fields': ["fields_example"] // {[String]} A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
 };
 apiInstance.listSourceNodeAssociations(targetId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -118,7 +104,7 @@ apiInstance.listSourceNodeAssociations(targetId, opts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **targetId** | **String**| The identifier of a node. |
- **where** | **String**| Optionally filter the list by assocType. Here&#39;s an example: *   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;) | [optional]
+ **where** | **String**| Optionally filter the list by assocType. Here's an example: *   where=(assocType='my:assoctype') | [optional]
  **include** | **String**| Return additional info, eg. aspect, properties, path, isLink | [optional]
  **fields** | [**[String]**](String.md)| A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional]
 
@@ -159,23 +145,12 @@ var apiInstance = new AlfrescoCoreRestApi.AssociationsApi()
 var sourceId = "sourceId_example"; // {String} The identifier of a node.
 
 var opts = {
-  'where': "where_example", // {String} Optionally filter the list by assocType. Here's an example:
-
-*   where=(assocType='my:assoctype')
-
+  'where': "where_example", // {String} Optionally filter the list by assocType. Here's an example: *   where=(assocType='my:assoctype')
   'include': "include_example", // {String} Return additional info, eg. aspect, properties, path, isLink
-  'fields': ["fields_example"] // {[String]} A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
+  'fields': ["fields_example"] /* {[String]} A list of field names. You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
+                                The list applies to a returned individual entity or entries within a collection.
+                                If the API method also supports the **include**  parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.*/
 };
 apiInstance.listTargetAssociations(sourceId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -190,7 +165,7 @@ apiInstance.listTargetAssociations(sourceId, opts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **sourceId** | **String**| The identifier of a node. |
- **where** | **String**| Optionally filter the list by assocType. Here&#39;s an example: *   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;)  | [optional]
+ **where** | **String**| Optionally filter the list by assocType. Here's an example: *   where=(assocType='my:assoctype')  | [optional]
  **include** | **String**| Return additional info, eg. aspect, properties, path, isLink | [optional]
  **fields** | [**[String]**](String.md)| A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional]
 

@@ -184,29 +184,21 @@ basicAuth.password = 'YOUR PASSWORD'
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
-var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:
-* -my-
-* -shared-
-* -root-
-
+var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases: -my- , -shared- , -root-
 
 var nodeBody = new AlfrescoCoreRestApi.NodeBody1(); // {NodeBody1} The node information to create.
 
 var opts = {
   'autoRename': true, // {Boolean} If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
   'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested: * path * isLink * allowableOperations
-  'fields': ["fields_example"] // {[String]} A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
+  'fields': ["fields_example"]  /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter. */
 };
 apiInstance.addNode(nodeId, nodeBody, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -315,21 +307,15 @@ var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 var sharedLinkBody = new AlfrescoCoreRestApi.SharedLinkBody(); // {SharedLinkBody} The nodeId to create a shared link for.
 
 var opts = {
-  'include': ["include_example"], // {[String]} Returns additional information about the shared link, the following optional fields can be requested:
-* allowableOperations
-
-  'fields': ["fields_example"] // {[String]} A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
+  'include': ["include_example"], // {[String]} Returns additional information about the shared link, the following optional fields can be requested: * allowableOperations
+  'fields': ["fields_example"] /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter. */
 };
 apiInstance.addSharedLink(sharedLinkBody, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -385,31 +371,20 @@ basicAuth.password = 'YOUR PASSWORD'
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
-var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:
-* -my-
-* -shared-
-* -root-
-
+var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:  -my- , -shared- , -root-
 
 var copyBody = new AlfrescoCoreRestApi.CopyBody(); // {CopyBody} The targetParentId and, optionally, a new name.
 
 var opts = {
-  'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:
-* path
-* isLink
-* allowableOperations
-
-  'fields': ["fields_example"] // {[String]} A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+  'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:  path , isLink , allowableOperations
+  'fields': ["fields_example"] /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter.*/
 
 };
 apiInstance.copyNode(nodeId, copyBody, opts).then(function(data) {
@@ -469,11 +444,7 @@ basicAuth.password = 'YOUR PASSWORD'
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
-var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:
-* -my-
-* -shared-
-* -root-
-
+var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:  -my- , -shared- , -root-
 
 var renditionBody = new AlfrescoCoreRestApi.RenditionBody(); // {RenditionBody} The rendition "id".
 
@@ -526,7 +497,7 @@ The creation of the (surf) configuration files required by Share can be skipped 
 
 **Please note: if skipped then such a site will *not* work within Share.**
 
-The addition of the site to the user&#39;s site favorites can be skipped via the **skipAddToFavorites** query parameter.
+The addition of the site to the user's site favorites can be skipped via the **skipAddToFavorites** query parameter.
 
 The creator will be added as a member with Site Manager role.
 
@@ -563,7 +534,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **siteBody** | [**SiteBody**](SiteBody.md)| The site details |
  **skipConfiguration** | **Boolean**| Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created. | [optional] [default to false]
- **skipAddToFavorites** | **Boolean**| Flag to indicate whether the site should not be added to the user&#39;s site favorites. | [optional] [default to false]
+ **skipAddToFavorites** | **Boolean**| Flag to indicate whether the site should not be added to the user's site favorites. | [optional] [default to false]
 
 ### Return type
 
@@ -865,7 +836,7 @@ apiInstance.findSharedLinks(opts).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **where** | **String**| Optionally filter the list by "sharedByUser" userid of person who shared the link (can also use -me-) *   where&#x3D;(sharedByUser&#x3D;&#39;jbloggs&#39;) *   where&#x3D;(sharedByUser&#x3D;&#39;-me-&#39;) | [optional]
+ **where** | **String**| Optionally filter the list by "sharedByUser" userid of person who shared the link (can also use -me-) *   where=(sharedByUser='jbloggs') *   where=(sharedByUser='-me-') | [optional]
  **include** | [**[String]**](String.md)| Returns additional information about the shared link, the following optional fields can be requested: * allowableOperations | [optional]
  **fields** | [**[String]**](String.md)| A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. | [optional]
 
@@ -906,7 +877,7 @@ var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var opts = {
-  'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested: * path * isLink * allowableOperations
+  'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:  path , isLink , allowableOperations
 };
 apiInstance.getDeletedNode(nodeId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -1017,18 +988,13 @@ var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var opts = {
-  'attachment': true, // {Boolean} **true** enables a web browser to download the file as an attachment.
-**false** means a web browser may preview the file in a new tab or window, but not
-download the file.
-
-You can only set this parameter to **false** if the content type of the file is in the supported list;
-for example, certain image files and PDF files.
-
-If the content type is not supported for preview, then a value of **false**  is ignored, and
-the attachment will be returned in the response.
-
-  'ifModifiedSince': new Date("2013-10-20T19:20:30+01:00") // {Date} Only returns the content if it has been modified since the date provided.
-Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.
+  'attachment': true, /* {Boolean} **true** enables a web browser to download the file as an attachment. **false** means a web browser may preview the file in a new tab or window, but not download the file.
+                        You can only set this parameter to **false** if the content type of the file is in the supported list;
+                        for example, certain image files and PDF files.
+                        If the content type is not supported for preview, then a value of **false**  is ignored, and
+                        the attachment will be returned in the response.
+                          'ifModifiedSince': new Date("2013-10-20T19:20:30+01:00") // {Date} Only returns the content if it has been modified since the date provided.
+                        Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.*/
 
 };
 apiInstance.getFileContent(nodeId, , opts).then(function() {
@@ -1082,22 +1048,17 @@ var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases: *-my-*-shared-*-root-
 
-
 var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested: * path * isLink * allowableOperations
   'relativePath': "relativePath_example", // {String} If specified, returns information on the node resolved by this path. The path is relative to the specified **nodeId**
-  'fields': ["fields_example"] // {[String]} A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
+  'fields': ["fields_example"] /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
+                                The list applies to a returned individual
+                                entity or entries within a collection.
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter.*/
 };
 apiInstance.getNode(nodeId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -1141,7 +1102,6 @@ You can use the **include** parameter to return addtional information.
 
 The list of child nodes includes primary children and also secondary children, if any.
 
-
 ### Example
 ```javascript
 var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
@@ -1154,16 +1114,12 @@ basicAuth.password = 'YOUR PASSWORD'
 
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
-var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:
-* -my-
-* -shared-
-* -root-
-
+var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases: -my- , -shared- , -root-
 
 var opts = {
   'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
-  'orderBy': "orderBy_example", // {String} If not specified then default sort is for folders to be sorted before files, and by ascending name
+  'orderBy': "orderBy_example", /* {String} If not specified then default sort is for folders to be sorted before files, and by ascending name
 i.e. "orderBy=isFolder DESC,name ASC".
 
 This default can be completely overridden by specifying a specific orderBy consisting of one, two or
@@ -1229,8 +1185,8 @@ Name | Type | Description  | Notes
  **nodeId** | **String**| The identifier of a node. You can also use one of these well-known aliases: *-my-*-shared-*-root-  |
  **skipCount** | **Integer**| The number of entities that exist in the collection before those included in this list. | [optional]
  **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional]
- **orderBy** | **String**| If not specified then default sort is for folders to be sorted before files, and by ascending name i.e. "orderBy&#x3D;isFolder DESC,name ASC". This default can be completely overridden by specifying a specific orderBy consisting of one, two or three comma-separated list of properties (with optional ASCending or DESCending), for example, specifying “CorderBy&#x3D;name DESC“D would return a mixed folder/file list. The following properties can be used to order the results: * isFolder * name * mimeType * nodeType * sizeInBytes * modifiedAt * createdAt * modifiedByUser * createdByUser  | [optional]
- **where** | **String**| Optionally filter the list. Here are some examples: *   where&#x3D;(isFolder&#x3D;true) *   where&#x3D;(isFile&#x3D;true) *   where&#x3D;(nodeType&#x3D;&#39;my:specialtype&#39;) *   where&#x3D;(nodeType&#x3D;&#39;my:specialtype&#39; INCLUDESUBTYPES)  | [optional]
+ **orderBy** | **String**| If not specified then default sort is for folders to be sorted before files, and by ascending name i.e. "orderBy=isFolder DESC,name ASC". This default can be completely overridden by specifying a specific orderBy consisting of one, two or three comma-separated list of properties (with optional ASCending or DESCending), for example, specifying “CorderBy=name DESC“D would return a mixed folder/file list. The following properties can be used to order the results: * isFolder * name * mimeType * nodeType * sizeInBytes * modifiedAt * createdAt * modifiedByUser * createdByUser  | [optional]
+ **where** | **String**| Optionally filter the list. Here are some examples: *   where=(isFolder=true) *   where=(isFile=true) *   where=(nodeType='my:specialtype') *   where=(nodeType='my:specialtype' INCLUDESUBTYPES)  | [optional]
  **include** | [**[String]**](String.md)| Returns additional information about the node. The following optional fields can be requested: * properties * aspectNames * path * isLink * allowableOperations * association | [optional]
  **relativePath** | **String**| Return information on children within the folder resolved by this path (relative to specified nodeId as the starting parent folder) | [optional]
  **includeSource** | **Boolean**| Also include "source" (in addition to "entries") with folder information on parent node (either the specified parent "nodeId" or as resolved by "relativePath") | [optional]
@@ -1747,7 +1703,7 @@ apiInstance.listParents(childId, opts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **childId** | **String**| The identifier of a node. |
- **where** | **String**| Optionally filter the list by assocType. Here&#39;s an example: *   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;)  | [optional]
+ **where** | **String**| Optionally filter the list by assocType. Here's an example: *   where=(assocType='my:assoctype')  | [optional]
  **include** | **String**| Return additional info, eg. aspect, properties, path, isLink | [optional]
  **fields** | [**[String]**](String.md)| A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. | [optional]
 
@@ -1821,7 +1777,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **parentId** | **String**| The identifier of a node. |
  **assocType** | **String**| Restrict the returned results to only those of the given association type | [optional]
- **where** | **String**| Optionally filter the list by assocType. Here&#39;s an example: *   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;)  | [optional]
+ **where** | **String**| Optionally filter the list by assocType. Here's an example: *   where=(assocType='my:assoctype')  | [optional]
  **include** | **String**| Return additional info, eg. aspect, properties, path, isLink | [optional]
  **fields** | [**[String]**](String.md)| A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. | [optional]
 
@@ -1893,7 +1849,7 @@ apiInstance.listSourceNodeAssociations(targetId, opts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **targetId** | **String**| The identifier of a node. |
- **where** | **String**| Optionally filter the list by assocType. Here&#39;s an example: *   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;)  | [optional]
+ **where** | **String**| Optionally filter the list by assocType. Here's an example: *   where=(assocType='my:assoctype')  | [optional]
  **include** | **String**| Return additional info, eg. aspect, properties, path, isLink | [optional]
  **fields** | [**[String]**](String.md)| A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional]
 
@@ -1965,7 +1921,7 @@ apiInstance.listTargetAssociations(sourceId, opts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **sourceId** | **String**| The identifier of a node. |
- **where** | **String**| Optionally filter the list by assocType. Here&#39;s an example: *   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;)  | [optional]
+ **where** | **String**| Optionally filter the list by assocType. Here's an example: *   where=(assocType='my:assoctype')  | [optional]
  **include** | **String**| Return additional info, eg. aspect, properties, path, isLink | [optional]
  **fields** | [**[String]**](String.md)| A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional]
 
@@ -1995,7 +1951,7 @@ The search term is used to look for nodes that match against name, title, descri
 The search term
 - must contain a minimum of 3 alphanumeric characters
 - allows "quoted term"
-- can optionally use &#39;*&#39; for wildcard matching
+- can optionally use '*' for wildcard matching
 
 By default, file and folder types will be searched unless a specific type is provided as a query parameter.
 
@@ -2059,7 +2015,7 @@ Name | Type | Description  | Notes
  **skipCount** | **Integer**| The number of entities that exist in the collection before those included in this list. | [optional]
  **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional]
  **rootNodeId** | **String**| The id of the node to start the search from. Supports the aliases -my-, -root- and -shared-. | [optional]
- **nodeType** | **String**| Restrict the returned results to only those of the given node type and it&#39;s sub-types | [optional]
+ **nodeType** | **String**| Restrict the returned results to only those of the given node type and it's sub-types | [optional]
  **include** | **String**| Return additional info, eg. aspectNames, properties, path, isLink | [optional]
  **orderBy** | **String**| The list of results can be ordered by the following: * name * modifiedAt * createdAt | [optional]
  **fields** | [**[String]**](String.md)| A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional]
@@ -2507,10 +2463,7 @@ basicAuth.password = 'YOUR PASSWORD'
 var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:
-* -my-
-* -shared-
-* -root-
-
+ -my- , -shared- , -root-
 
 var nodeBody = new AlfrescoCoreRestApi.NodeBody(); // {NodeBody} The node information to update.
 

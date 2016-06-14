@@ -20,7 +20,7 @@ The search term is used to look for nodes that match against name, title, descri
 The search term
 - must contain a minimum of 3 alphanumeric characters
 - allows "quoted term"
-- can optionally use &#39;*&#39; for wildcard matching
+- can optionally use '*' for wildcard matching
 
 By default, file and folder types will be searched unless a specific type is provided as a query parameter.
 
@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
  **skipCount** | **Integer**| The number of entities that exist in the collection before those included in this list. | [optional]
  **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional]
  **rootNodeId** | **String**| The id of the node to start the search from. Supports the aliases -my-, -root- and -shared-. | [optional]
- **nodeType** | **String**| Restrict the returned results to only those of the given node type and it&#39;s sub-types | [optional]
+ **nodeType** | **String**| Restrict the returned results to only those of the given node type and it's sub-types | [optional]
  **include** | **String**| Return additional info, eg. aspectNames, properties, path, isLink | [optional]
  **orderBy** | **String**| The list of results can be ordered by the following: * name * modifiedAt * createdAt  | [optional]
  **fields** | [**[String]**](String.md)| A list of field names.

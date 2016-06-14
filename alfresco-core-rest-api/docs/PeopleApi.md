@@ -330,7 +330,7 @@ Name | Type | Description  | Notes
  **personId** | **String**| The identifier of a person. |
  **skipCount** | **Integer**| The number of entities that exist in the collection before those included in this list. | [optional]
  **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional]
- **who** | **String**| A filter to include the user&#39;s activities only &#x60;-me-&#x60;, other user&#39;s activities only &#x60;-others-&#x60;&#39;
+ **who** | **String**| A filter to include the user's activities only &#x60;-me-&#x60;, other user's activities only &#x60;-others-&#x60;'
  | [optional]
  **siteId** | **String**| Include only activity feed entries relating to this site. | [optional]
  **fields** | [**[String]**](String.md)| A list of field names.
@@ -525,7 +525,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 Get favorite sites
 
-Get a person&#39;s favorite sites.
+Get a person's favorite sites.
 
 **Note: This method is deprecated and will be removed in the future**.
 Use &#x60;/people/{personId}/favorites&#x60; instead.

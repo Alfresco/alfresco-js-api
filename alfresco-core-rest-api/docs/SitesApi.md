@@ -98,7 +98,7 @@ The creation of the (surf) configuration files required by Share can be skipped 
 
 **Please note: if skipped then such a site will *not* work within Share.**
 
-The addition of the site to the user&#39;s site favorites can be skipped via the **skipAddToFavorites** query parameter.
+The addition of the site to the user's site favorites can be skipped via the **skipAddToFavorites** query parameter.
 
 The creator will be added as a member with Site Manager role.
 
@@ -135,7 +135,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **siteBody** | [**SiteBody**](SiteBody.md)| The site details |
  **skipConfiguration** | **Boolean**| Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created. | [optional] [default to false]
- **skipAddToFavorites** | **Boolean**| Flag to indicate whether the site should not be added to the user&#39;s site favorites. | [optional] [default to false]
+ **skipAddToFavorites** | **Boolean**| Flag to indicate whether the site should not be added to the user's site favorites. | [optional] [default to false]
 
 ### Return type
 
