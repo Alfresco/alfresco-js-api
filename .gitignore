@@ -1,6 +1,5 @@
-/npm-debug.log
+*.log
 .idea
 node_modules
 target
 /alfresco-core-rest-api.iml
-
