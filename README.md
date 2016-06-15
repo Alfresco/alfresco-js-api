@@ -17,3 +17,11 @@ This project provides a JavaScript client API into the v1 Alfresco REST API.
 npm set registry http://devproducts.alfresco.me:4873
 npm install --save alfresco-js-api
 ```
+
+## Api Modules
+
+- [Authentication API](https://github.com/Alfresco/dev-platform-js-api/tree/master/alfresco-auth-rest-api)
+- [Core API](https://github.com/Alfresco/dev-platform-js-api/tree/master/alfresco-core-rest-api)
+
+
+

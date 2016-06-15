@@ -98,26 +98,26 @@ interface PathElementEntity {
 }
 
 interface Core {
-    NodesApi: NodesApi
+    NodesApi: NodesApi;
 }
 
 interface Auth {
 }
 
 interface NodesApi {
-    new(client: ApiClient): NodesApi
+    new(client: ApiClient): NodesApi;
     getNodeChildren(nodeId: string, opts: any): NodePaging;
 }
 
 interface ApiClient {
-    new(): ApiClient
+    new(): ApiClient;
 }
 
 interface AlfrescoApi {
-    getClientWithTicket(basePath: string, ticket: string): any;
-    getClientWithAuthentication(basePath: string, username: string, password: string): any;
     Auth: Auth;
     Core: Core;
+    getClientWithTicket(basePath: string, ticket: string): any;
+    getClientWithAuthentication(basePath: string, username: string, password: string): any;
 }
 
 declare var AlfrescoApi: AlfrescoApi;

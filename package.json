@@ -7,7 +7,8 @@
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha --recursive",
     "generate": "mvn clean generate-sources",
-    "bundle": "./node_modules/browserify/bin/cmd.js main.js -o bundle.js"
+    "bundle": "./node_modules/browserify/bin/cmd.js main.js -o bundle.js",
+    "tslint": "tslint -c tslint.json bundle.d.ts"
   },
   "repository": {
     "type": "git",
@@ -23,7 +24,9 @@
     "browserify": "^13.0.1",
     "expect.js": "~0.3.1",
     "mocha": "~2.3.4",
-    "sinon": "1.17.3"
+    "sinon": "1.17.3",
+    "tslint": "^3.8.1",
+    "typescript": "^1.8.10"
   },
   "license": "Apache-2.0",
   "contributors": [
