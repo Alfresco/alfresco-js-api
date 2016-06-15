@@ -131,7 +131,7 @@
   /**
    * Checks whether the given parameter value represents file-like content.
    * @param param The parameter to check.
-   * @returns {Boolean} <code>true</code> if <code>param</code> represents a file. 
+   * @returns {Boolean} <code>true</code> if <code>param</code> represents a file.
    */
   exports.prototype.isFileParam = function(param) {
     // fs.ReadStream in Node.js (but not in runtime like browserify)
@@ -183,7 +183,7 @@
 
   /**
    * Enumeration of collection format separator strategies.
-   * @enum {String} 
+   * @enum {String}
    * @readonly
    */
   exports.CollectionFormatEnum = {
@@ -373,7 +373,7 @@
 
     return new Promise(function(resolve, reject) {
       request.end(function(error, response) {
-        if (error) {
+          if (error) {
           reject(error);
         } else {
           var data = _this.deserialize(response, returnType);
@@ -487,7 +487,7 @@
    */
 
   /**
-   * Constructs a new AuthenticationApi. 
+   * Constructs a new AuthenticationApi.
    * @alias module:api/AuthenticationApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -735,7 +735,7 @@
    * @return {module:model/Error} The populated <code>Error</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('error')) {
@@ -808,7 +808,7 @@
    * @return {module:model/ErrorError} The populated <code>ErrorError</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('errorKey')) {
@@ -913,7 +913,7 @@
    * @return {module:model/LoginRequest} The populated <code>LoginRequest</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('userId')) {
@@ -985,7 +985,7 @@
    * @return {module:model/LoginTicketEntry} The populated <code>LoginTicketEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -1050,7 +1050,7 @@
    * @return {module:model/LoginTicketEntryEntry} The populated <code>LoginTicketEntryEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -1122,7 +1122,7 @@
    * @return {module:model/ValidateTicketEntry} The populated <code>ValidateTicketEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -1186,7 +1186,7 @@
    * @return {module:model/ValidateTicketEntryEntry} The populated <code>ValidateTicketEntryEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -1341,7 +1341,7 @@
   /**
    * Checks whether the given parameter value represents file-like content.
    * @param param The parameter to check.
-   * @returns {Boolean} <code>true</code> if <code>param</code> represents a file. 
+   * @returns {Boolean} <code>true</code> if <code>param</code> represents a file.
    */
   exports.prototype.isFileParam = function(param) {
     // fs.ReadStream in Node.js (but not in runtime like browserify)
@@ -1393,7 +1393,7 @@
 
   /**
    * Enumeration of collection format separator strategies.
-   * @enum {String} 
+   * @enum {String}
    * @readonly
    */
   exports.CollectionFormatEnum = {
@@ -1697,7 +1697,7 @@
    */
 
   /**
-   * Constructs a new AssociationsApi. 
+   * Constructs a new AssociationsApi.
    * @alias module:api/AssociationsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -1919,7 +1919,7 @@
    */
 
   /**
-   * Constructs a new ChangesApi. 
+   * Constructs a new ChangesApi.
    * @alias module:api/ChangesApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -3575,7 +3575,7 @@
    */
 
   /**
-   * Constructs a new ChildAssociationsApi. 
+   * Constructs a new ChildAssociationsApi.
    * @alias module:api/ChildAssociationsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -3998,7 +3998,7 @@
    */
 
   /**
-   * Constructs a new CommentsApi. 
+   * Constructs a new CommentsApi.
    * @alias module:api/CommentsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -4226,7 +4226,7 @@
    */
 
   /**
-   * Constructs a new FavoritesApi. 
+   * Constructs a new FavoritesApi.
    * @alias module:api/FavoritesApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -4450,7 +4450,7 @@
    */
 
   /**
-   * Constructs a new NetworksApi. 
+   * Constructs a new NetworksApi.
    * @alias module:api/NetworksApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -4531,7 +4531,7 @@
    */
 
   /**
-   * Constructs a new NodesApi. 
+   * Constructs a new NodesApi.
    * @alias module:api/NodesApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -5168,7 +5168,7 @@
    */
 
   /**
-   * Constructs a new PeopleApi. 
+   * Constructs a new PeopleApi.
    * @alias module:api/PeopleApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -6140,7 +6140,7 @@
    */
 
   /**
-   * Constructs a new RatingsApi. 
+   * Constructs a new RatingsApi.
    * @alias module:api/RatingsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -6362,7 +6362,7 @@
    */
 
   /**
-   * Constructs a new RenditionsApi. 
+   * Constructs a new RenditionsApi.
    * @alias module:api/RenditionsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -6665,7 +6665,7 @@
    */
 
   /**
-   * Constructs a new SearchApi. 
+   * Constructs a new SearchApi.
    * @alias module:api/SearchApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -6758,7 +6758,7 @@
    */
 
   /**
-   * Constructs a new SharedlinksApi. 
+   * Constructs a new SharedlinksApi.
    * @alias module:api/SharedlinksApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -7046,7 +7046,7 @@
    */
 
   /**
-   * Constructs a new SitesApi. 
+   * Constructs a new SitesApi.
    * @alias module:api/SitesApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -7585,7 +7585,7 @@
    */
 
   /**
-   * Constructs a new TagsApi. 
+   * Constructs a new TagsApi.
    * @alias module:api/TagsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -8580,7 +8580,7 @@
    * @return {module:model/Activity} The populated <code>Activity</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('postPersonId')) {
@@ -8656,139 +8656,139 @@
    * @enum {String}
    * @readonly
    */
-  exports.ActivityTypeEnum = { 
+  exports.ActivityTypeEnum = {
     /**
      * value: org.alfresco.comments.comment-created
      * @const
      */
     COMMENTS_COMMENT_CREATED: "org.alfresco.comments.comment-created",
-    
+
     /**
      * value: org.alfresco.comments.comment-updated
      * @const
      */
     COMMENTS_COMMENT_UPDATED: "org.alfresco.comments.comment-updated",
-    
+
     /**
      * value: org.alfresco.comments.comment-deleted
      * @const
      */
     COMMENTS_COMMENT_DELETED: "org.alfresco.comments.comment-deleted",
-    
+
     /**
      * value: org.alfresco.documentlibrary.files-added
      * @const
      */
     DOCUMENTLIBRARY_FILES_ADDED: "org.alfresco.documentlibrary.files-added",
-    
+
     /**
      * value: org.alfresco.documentlibrary.files-updated
      * @const
      */
     DOCUMENTLIBRARY_FILES_UPDATED: "org.alfresco.documentlibrary.files-updated",
-    
+
     /**
      * value: org.alfresco.documentlibrary.files-deleted
      * @const
      */
     DOCUMENTLIBRARY_FILES_DELETED: "org.alfresco.documentlibrary.files-deleted",
-    
+
     /**
      * value: org.alfresco.documentlibrary.file-added
      * @const
      */
     DOCUMENTLIBRARY_FILE_ADDED: "org.alfresco.documentlibrary.file-added",
-    
+
     /**
      * value: org.alfresco.documentlibrary.file-created
      * @const
      */
     DOCUMENTLIBRARY_FILE_CREATED: "org.alfresco.documentlibrary.file-created",
-    
+
     /**
      * value: org.alfresco.documentlibrary.file-deleted
      * @const
      */
     DOCUMENTLIBRARY_FILE_DELETED: "org.alfresco.documentlibrary.file-deleted",
-    
+
     /**
      * value: org.alfresco.documentlibrary.file-downloaded
      * @const
      */
     DOCUMENTLIBRARY_FILE_DOWNLOADED: "org.alfresco.documentlibrary.file-downloaded",
-    
+
     /**
      * value: org.alfresco.documentlibrary.file-liked
      * @const
      */
     DOCUMENTLIBRARY_FILE_LIKED: "org.alfresco.documentlibrary.file-liked",
-    
+
     /**
      * value: org.alfresco.documentlibrary.file-previewed
      * @const
      */
     DOCUMENTLIBRARY_FILE_PREVIEWED: "org.alfresco.documentlibrary.file-previewed",
-    
+
     /**
      * value: org.alfresco.documentlibrary.inline-edit
      * @const
      */
     DOCUMENTLIBRARY_INLINE_EDIT: "org.alfresco.documentlibrary.inline-edit",
-    
+
     /**
      * value: org.alfresco.documentlibrary.folder-liked
      * @const
      */
     DOCUMENTLIBRARY_FOLDER_LIKED: "org.alfresco.documentlibrary.folder-liked",
-    
+
     /**
      * value: org.alfresco.site.user-joined
      * @const
      */
     SITE_USER_JOINED: "org.alfresco.site.user-joined",
-    
+
     /**
      * value: org.alfresco.site.user-left
      * @const
      */
     SITE_USER_LEFT: "org.alfresco.site.user-left",
-    
+
     /**
      * value: org.alfresco.site.user-role-changed
      * @const
      */
     SITE_USER_ROLE_CHANGED: "org.alfresco.site.user-role-changed",
-    
+
     /**
      * value: org.alfresco.site.group-added
      * @const
      */
     SITE_GROUP_ADDED: "org.alfresco.site.group-added",
-    
+
     /**
      * value: org.alfresco.site.group-removed
      * @const
      */
     SITE_GROUP_REMOVED: "org.alfresco.site.group-removed",
-    
+
     /**
      * value: org.alfresco.site.group-role-changed
      * @const
      */
     SITE_GROUP_ROLE_CHANGED: "org.alfresco.site.group-role-changed",
-    
+
     /**
      * value: org.alfresco.discussions.reply-created
      * @const
      */
     DISCUSSIONS_REPLY_CREATED: "org.alfresco.discussions.reply-created",
-    
+
     /**
      * value: org.alfresco.subscriptions.followed
      * @const
      */
     SUBSCRIPTIONS_FOLLOWED: "org.alfresco.subscriptions.followed",
-    
+
     /**
      * value: org.alfresco.subscriptions.subscribed
      * @const
@@ -8846,7 +8846,7 @@
    * @return {module:model/ActivityActivitySummary} The populated <code>ActivityActivitySummary</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('firstName')) {
@@ -8943,7 +8943,7 @@
    * @return {module:model/ActivityEntry} The populated <code>ActivityEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -9007,7 +9007,7 @@
    * @return {module:model/ActivityPaging} The populated <code>ActivityPaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -9074,7 +9074,7 @@
    * @return {module:model/ActivityPagingList} The populated <code>ActivityPagingList</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -9147,7 +9147,7 @@
    * @return {module:model/AssocChildBody} The populated <code>AssocChildBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('childId')) {
@@ -9219,7 +9219,7 @@
    * @return {module:model/AssocInfo} The populated <code>AssocInfo</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('assocType')) {
@@ -9284,7 +9284,7 @@
    * @return {module:model/AssocTargetBody} The populated <code>AssocTargetBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('targetId')) {
@@ -9357,7 +9357,7 @@
    * @return {module:model/ChildAssocInfo} The populated <code>ChildAssocInfo</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('assocType')) {
@@ -9446,7 +9446,7 @@
    * @return {module:model/Comment} The populated <code>Comment</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -9575,7 +9575,7 @@
    * @return {module:model/CommentBody} The populated <code>CommentBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('content')) {
@@ -9640,7 +9640,7 @@
    * @return {module:model/CommentBody1} The populated <code>CommentBody1</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('content')) {
@@ -9705,7 +9705,7 @@
    * @return {module:model/CommentEntry} The populated <code>CommentEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -9769,7 +9769,7 @@
    * @return {module:model/CommentPaging} The populated <code>CommentPaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -9836,7 +9836,7 @@
    * @return {module:model/CommentPagingList} The populated <code>CommentPagingList</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -9915,7 +9915,7 @@
    * @return {module:model/Company} The populated <code>Company</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('organization')) {
@@ -10038,7 +10038,7 @@
    * @return {module:model/ContentInfo} The populated <code>ContentInfo</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('mimeType')) {
@@ -10127,7 +10127,7 @@
    * @return {module:model/CopyBody} The populated <code>CopyBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('targetParentId')) {
@@ -10203,7 +10203,7 @@
    * @return {module:model/DeletedNode} The populated <code>DeletedNode</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
       NodeFull.constructFromObject(data, obj);
       if (data.hasOwnProperty('archivedByUser')) {
@@ -10278,7 +10278,7 @@
    * @return {module:model/DeletedNodeEntry} The populated <code>DeletedNodeEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -10346,7 +10346,7 @@
    * @return {module:model/DeletedNodeMinimal} The populated <code>DeletedNodeMinimal</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
       NodeMinimal.constructFromObject(data, obj);
       if (data.hasOwnProperty('archivedByUser')) {
@@ -10421,7 +10421,7 @@
    * @return {module:model/DeletedNodeMinimalEntry} The populated <code>DeletedNodeMinimalEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -10485,7 +10485,7 @@
    * @return {module:model/DeletedNodesPaging} The populated <code>DeletedNodesPaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -10550,7 +10550,7 @@
    * @return {module:model/DeletedNodesPagingList} The populated <code>DeletedNodesPagingList</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -10625,7 +10625,7 @@
    * @return {module:model/EmailSharedLinkBody} The populated <code>EmailSharedLinkBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('client')) {
@@ -10713,7 +10713,7 @@
    * @return {module:model/Error} The populated <code>Error</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('error')) {
@@ -10786,7 +10786,7 @@
    * @return {module:model/ErrorError} The populated <code>ErrorError</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('errorKey')) {
@@ -10895,7 +10895,7 @@
    * @return {module:model/Favorite} The populated <code>Favorite</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('targetGuid')) {
@@ -10978,7 +10978,7 @@
    * @return {module:model/FavoriteBody} The populated <code>FavoriteBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('target')) {
@@ -11043,7 +11043,7 @@
    * @return {module:model/FavoriteEntry} The populated <code>FavoriteEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -11107,7 +11107,7 @@
    * @return {module:model/FavoritePaging} The populated <code>FavoritePaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -11174,7 +11174,7 @@
    * @return {module:model/FavoritePagingList} The populated <code>FavoritePagingList</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -11246,7 +11246,7 @@
    * @return {module:model/FavoriteSiteBody} The populated <code>FavoriteSiteBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -11310,7 +11310,7 @@
    * @return {module:model/InlineResponse201} The populated <code>InlineResponse201</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -11375,7 +11375,7 @@
    * @return {module:model/InlineResponse201Entry} The populated <code>InlineResponse201Entry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -11440,7 +11440,7 @@
    * @return {module:model/MoveBody} The populated <code>MoveBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('targetParentId')) {
@@ -11518,7 +11518,7 @@
    * @return {module:model/NetworkQuota} The populated <code>NetworkQuota</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -11609,7 +11609,7 @@
    * @return {module:model/NodeAssocMinimal} The populated <code>NodeAssocMinimal</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -11762,7 +11762,7 @@
    * @return {module:model/NodeAssocMinimalEntry} The populated <code>NodeAssocMinimalEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -11826,7 +11826,7 @@
    * @return {module:model/NodeAssocPaging} The populated <code>NodeAssocPaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -11891,7 +11891,7 @@
    * @return {module:model/NodeAssocPagingList} The populated <code>NodeAssocPagingList</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -11966,7 +11966,7 @@
    * @return {module:model/NodeBody} The populated <code>NodeBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('name')) {
@@ -12059,7 +12059,7 @@
    * @return {module:model/NodeBody1} The populated <code>NodeBody1</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('name')) {
@@ -12174,7 +12174,7 @@
    * @return {module:model/NodeChildAssocMinimal} The populated <code>NodeChildAssocMinimal</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -12327,7 +12327,7 @@
    * @return {module:model/NodeChildAssocMinimalEntry} The populated <code>NodeChildAssocMinimalEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -12391,7 +12391,7 @@
    * @return {module:model/NodeChildAssocPaging} The populated <code>NodeChildAssocPaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -12456,7 +12456,7 @@
    * @return {module:model/NodeChildAssocPagingList} The populated <code>NodeChildAssocPagingList</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -12529,7 +12529,7 @@
    * @return {module:model/NodeEntry} The populated <code>NodeEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -12606,7 +12606,7 @@
    * @return {module:model/NodeFull} The populated <code>NodeFull</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -12785,7 +12785,7 @@
    * @return {module:model/NodeMinimal} The populated <code>NodeMinimal</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -12938,7 +12938,7 @@
    * @return {module:model/NodeMinimalEntry} The populated <code>NodeMinimalEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -13002,7 +13002,7 @@
    * @return {module:model/NodePaging} The populated <code>NodePaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -13067,7 +13067,7 @@
    * @return {module:model/NodePagingList} The populated <code>NodePagingList</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -13146,7 +13146,7 @@
    * @return {module:model/NodeSharedLink} The populated <code>NodeSharedLink</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -13267,7 +13267,7 @@
    * @return {module:model/NodeSharedLinkEntry} The populated <code>NodeSharedLinkEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -13331,7 +13331,7 @@
    * @return {module:model/NodeSharedLinkPaging} The populated <code>NodeSharedLinkPaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -13398,7 +13398,7 @@
    * @return {module:model/NodeSharedLinkPagingList} The populated <code>NodeSharedLinkPagingList</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -13471,7 +13471,7 @@
    * @return {module:model/NodesnodeIdchildrenContent} The populated <code>NodesnodeIdchildrenContent</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('mimeType')) {
@@ -13551,7 +13551,7 @@
    * @return {module:model/Pagination} The populated <code>Pagination</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('count')) {
@@ -13653,7 +13653,7 @@
    * @return {module:model/PathElement} The populated <code>PathElement</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -13727,7 +13727,7 @@
    * @return {module:model/PathInfo} The populated <code>PathInfo</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('elements')) {
@@ -13829,7 +13829,7 @@
    * @return {module:model/Person} The populated <code>Person</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -14031,7 +14031,7 @@
    * @return {module:model/PersonEntry} The populated <code>PersonEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -14104,7 +14104,7 @@
    * @return {module:model/PersonNetwork} The populated <code>PersonNetwork</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -14176,19 +14176,19 @@
    * @enum {String}
    * @readonly
    */
-  exports.SubscriptionLevelEnum = { 
+  exports.SubscriptionLevelEnum = {
     /**
      * value: Free
      * @const
      */
     FREE: "Free",
-    
+
     /**
      * value: Standard
      * @const
      */
     STANDARD: "Standard",
-    
+
     /**
      * value: Enterprise
      * @const
@@ -14242,7 +14242,7 @@
    * @return {module:model/PersonNetworkEntry} The populated <code>PersonNetworkEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -14306,7 +14306,7 @@
    * @return {module:model/PersonNetworkPaging} The populated <code>PersonNetworkPaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -14373,7 +14373,7 @@
    * @return {module:model/PersonNetworkPagingList} The populated <code>PersonNetworkPagingList</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -14449,7 +14449,7 @@
    * @return {module:model/Preference} The populated <code>Preference</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -14524,7 +14524,7 @@
    * @return {module:model/PreferenceEntry} The populated <code>PreferenceEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -14588,7 +14588,7 @@
    * @return {module:model/PreferencePaging} The populated <code>PreferencePaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -14655,7 +14655,7 @@
    * @return {module:model/PreferencePagingList} The populated <code>PreferencePagingList</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -14732,7 +14732,7 @@
    * @return {module:model/Rating} The populated <code>Rating</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -14823,7 +14823,7 @@
    * @return {module:model/RatingAggregate} The populated <code>RatingAggregate</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('average')) {
@@ -14898,7 +14898,7 @@
    * @return {module:model/RatingBody} The populated <code>RatingBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -14931,13 +14931,13 @@
    * @enum {String}
    * @readonly
    */
-  exports.IdEnum = { 
+  exports.IdEnum = {
     /**
      * value: likes
      * @const
      */
     LIKES: "likes",
-    
+
     /**
      * value: fiveStar
      * @const
@@ -14991,7 +14991,7 @@
    * @return {module:model/RatingEntry} The populated <code>RatingEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -15055,7 +15055,7 @@
    * @return {module:model/RatingPaging} The populated <code>RatingPaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -15122,7 +15122,7 @@
    * @return {module:model/RatingPagingList} The populated <code>RatingPagingList</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -15196,7 +15196,7 @@
    * @return {module:model/Rendition} The populated <code>Rendition</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -15276,7 +15276,7 @@
    * @return {module:model/RenditionBody} The populated <code>RenditionBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -15341,7 +15341,7 @@
    * @return {module:model/RenditionEntry} The populated <code>RenditionEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -15405,7 +15405,7 @@
    * @return {module:model/RenditionPaging} The populated <code>RenditionPaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -15470,7 +15470,7 @@
    * @return {module:model/RenditionPagingList} The populated <code>RenditionPagingList</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -15542,7 +15542,7 @@
    * @return {module:model/SharedLinkBody} The populated <code>SharedLinkBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('nodeId')) {
@@ -15615,7 +15615,7 @@
    * @return {module:model/Site} The populated <code>Site</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -15677,19 +15677,19 @@
    * @enum {String}
    * @readonly
    */
-  exports.VisibilityEnum = { 
+  exports.VisibilityEnum = {
     /**
      * value: PRIVATE
      * @const
      */
     PRIVATE: "PRIVATE",
-    
+
     /**
      * value: MODERATED
      * @const
      */
     MODERATED: "MODERATED",
-    
+
     /**
      * value: PUBLIC
      * @const
@@ -15747,7 +15747,7 @@
    * @return {module:model/SiteBody} The populated <code>SiteBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -15794,19 +15794,19 @@
    * @enum {String}
    * @readonly
    */
-  exports.VisibilityEnum = { 
+  exports.VisibilityEnum = {
     /**
      * value: PUBLIC
      * @const
      */
     PUBLIC: "PUBLIC",
-    
+
     /**
      * value: PRIVATE
      * @const
      */
     PRIVATE: "PRIVATE",
-    
+
     /**
      * value: MODERATED
      * @const
@@ -15862,7 +15862,7 @@
    * @return {module:model/SiteContainer} The populated <code>SiteContainer</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -15935,7 +15935,7 @@
    * @return {module:model/SiteContainerEntry} The populated <code>SiteContainerEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -15999,7 +15999,7 @@
    * @return {module:model/SiteContainerPaging} The populated <code>SiteContainerPaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -16064,7 +16064,7 @@
    * @return {module:model/SiteEntry} The populated <code>SiteEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -16133,7 +16133,7 @@
    * @return {module:model/SiteMember} The populated <code>SiteMember</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -16171,25 +16171,25 @@
    * @enum {String}
    * @readonly
    */
-  exports.RoleEnum = { 
+  exports.RoleEnum = {
     /**
      * value: SiteConsumer
      * @const
      */
     SITECONSUMER: "SiteConsumer",
-    
+
     /**
      * value: SiteCollaborator
      * @const
      */
     SITECOLLABORATOR: "SiteCollaborator",
-    
+
     /**
      * value: SiteContributor
      * @const
      */
     SITECONTRIBUTOR: "SiteContributor",
-    
+
     /**
      * value: SiteManager
      * @const
@@ -16243,7 +16243,7 @@
    * @return {module:model/SiteMemberBody} The populated <code>SiteMemberBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('role')) {
@@ -16273,25 +16273,25 @@
    * @enum {String}
    * @readonly
    */
-  exports.RoleEnum = { 
+  exports.RoleEnum = {
     /**
      * value: SiteConsumer
      * @const
      */
     SITECONSUMER: "SiteConsumer",
-    
+
     /**
      * value: SiteCollaborator
      * @const
      */
     SITECOLLABORATOR: "SiteCollaborator",
-    
+
     /**
      * value: SiteContributor
      * @const
      */
     SITECONTRIBUTOR: "SiteContributor",
-    
+
     /**
      * value: SiteManager
      * @const
@@ -16345,7 +16345,7 @@
    * @return {module:model/SiteMemberEntry} The populated <code>SiteMemberEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -16409,7 +16409,7 @@
    * @return {module:model/SiteMemberPaging} The populated <code>SiteMemberPaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -16473,7 +16473,7 @@
    * @return {module:model/SiteMemberRoleBody} The populated <code>SiteMemberRoleBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('role')) {
@@ -16495,25 +16495,25 @@
    * @enum {String}
    * @readonly
    */
-  exports.RoleEnum = { 
+  exports.RoleEnum = {
     /**
      * value: SiteConsumer
      * @const
      */
     SITECONSUMER: "SiteConsumer",
-    
+
     /**
      * value: SiteCollaborator
      * @const
      */
     SITECOLLABORATOR: "SiteCollaborator",
-    
+
     /**
      * value: SiteContributor
      * @const
      */
     SITECONTRIBUTOR: "SiteContributor",
-    
+
     /**
      * value: SiteManager
      * @const
@@ -16568,7 +16568,7 @@
    * @return {module:model/SiteMembershipBody} The populated <code>SiteMembershipBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('message')) {
@@ -16648,7 +16648,7 @@
    * @return {module:model/SiteMembershipBody1} The populated <code>SiteMembershipBody1</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('message')) {
@@ -16717,7 +16717,7 @@
    * @return {module:model/SiteMembershipRequest} The populated <code>SiteMembershipRequest</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -16798,7 +16798,7 @@
    * @return {module:model/SiteMembershipRequestEntry} The populated <code>SiteMembershipRequestEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -16862,7 +16862,7 @@
    * @return {module:model/SiteMembershipRequestPaging} The populated <code>SiteMembershipRequestPaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -16929,7 +16929,7 @@
    * @return {module:model/SiteMembershipRequestPagingList} The populated <code>SiteMembershipRequestPagingList</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -17001,7 +17001,7 @@
    * @return {module:model/SitePaging} The populated <code>SitePaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -17066,7 +17066,7 @@
    * @return {module:model/SitePagingList} The populated <code>SitePagingList</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('pagination')) {
@@ -17133,7 +17133,7 @@
    * @return {module:model/Tag} The populated <code>Tag</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -17206,7 +17206,7 @@
    * @return {module:model/TagBody} The populated <code>TagBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('tag')) {
@@ -17270,7 +17270,7 @@
    * @return {module:model/TagBody1} The populated <code>TagBody1</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('tag')) {
@@ -17335,7 +17335,7 @@
    * @return {module:model/TagEntry} The populated <code>TagEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -17399,7 +17399,7 @@
    * @return {module:model/TagPaging} The populated <code>TagPaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -17466,7 +17466,7 @@
    * @return {module:model/TagPagingList} The populated <code>TagPagingList</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -17539,7 +17539,7 @@
    * @return {module:model/UserInfo} The populated <code>UserInfo</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('displayName')) {
@@ -18966,7 +18966,7 @@ Emitter.prototype.hasListeners = function(event){
  * TODO: combatible error handling?
  */
 
-module.exports = function(arr, fn, initial){  
+module.exports = function(arr, fn, initial){
   var idx = 0;
   var len = arr.length;
   var curr = arguments.length == 3
@@ -18976,7 +18976,7 @@ module.exports = function(arr, fn, initial){
   while (idx < len) {
     curr = fn.call(null, curr, arr[idx], ++idx, arr);
   }
-  
+
   return curr;
 };
 },{}],140:[function(require,module,exports){
