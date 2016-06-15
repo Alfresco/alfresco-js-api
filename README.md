@@ -23,5 +23,17 @@ npm install --save alfresco-js-api
 - [Authentication API](https://github.com/Alfresco/dev-platform-js-api/tree/master/alfresco-auth-rest-api)
 - [Core API](https://github.com/Alfresco/dev-platform-js-api/tree/master/alfresco-core-rest-api)
 
+## Development
 
+* To run the build 
+
+    ```$ npm run build```
+
+* To run the test 
+
+    ```$ npm run test```
+
+* To run the test coverage
+
+    ```$ npm run coverage```
 

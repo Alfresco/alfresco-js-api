@@ -1,26 +1,28 @@
-var AlfrescoAuthRestApi = require('./alfresco-auth-rest-api/src/index.js');
 var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
 
-global.AlfrescoApi = AlfrescoCoreRestApi; //legacy
-global.AlfrescoApi.Auth = AlfrescoAuthRestApi;
-global.AlfrescoApi.Core = AlfrescoCoreRestApi;
-
-global.AlfrescoApi.getClientWithTicket = function (basePath, ticket) {
-    var defaultClient = new AlfrescoApi.ApiClient();
-    defaultClient.basePath = basePath;
-    // Configure HTTP basic authorization: basicAuth
-    var basicAuth = defaultClient.authentications['basicAuth'];
-    basicAuth.username = 'ROLE_TICKET';
-    basicAuth.password = ticket;
-    return defaultClient;
+var getClientWithTicket = function (basePath, ticket) {
+  var alfrescoClient = new AlfrescoCoreRestApi.ApiClient();
+  alfrescoClient.basePath = basePath;
+  // Configure HTTP basic authorization: basicAuth
+  var basicAuth = alfrescoClient.authentications.basicAuth;
+  basicAuth.username = 'ROLE_TICKET';
+  basicAuth.password = ticket;
+  return alfrescoClient;
 };
 
-global.AlfrescoApi.getClientWithAuthentication = function (basePath, username, password) {
-    var defaultClient = new AlfrescoApi.ApiClient();
-    defaultClient.basePath = basePath;
-    // Configure HTTP basic authorization: basicAuth
-    var basicAuth = defaultClient.authentications['basicAuth'];
-    basicAuth.username = username;
-    basicAuth.password = password;
-    return defaultClient;
+var getClientWithAuthentication = function (basePath, username, password) {
+  var alfrescoClient = new AlfrescoCoreRestApi.ApiClient();
+  alfrescoClient.basePath = basePath;
+  // Configure HTTP basic authorization: basicAuth
+  var basicAuth = alfrescoClient.authentications.basicAuth;
+  basicAuth.username = username;
+  basicAuth.password = password;
+  return alfrescoClient;
+};
+
+module.exports = {
+  Auth: require('./alfresco-auth-rest-api/src/index.js'),
+  Core: require('./alfresco-core-rest-api/src/index.js'),
+  getClientWithTicket: getClientWithTicket,
+  getClientWithAuthentication: getClientWithAuthentication
 };

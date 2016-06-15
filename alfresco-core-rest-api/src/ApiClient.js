@@ -129,7 +129,7 @@
   /**
    * Checks whether the given parameter value represents file-like content.
    * @param param The parameter to check.
-   * @returns {Boolean} <code>true</code> if <code>param</code> represents a file. 
+   * @returns {Boolean} <code>true</code> if <code>param</code> represents a file.
    */
   exports.prototype.isFileParam = function(param) {
     // fs.ReadStream in Node.js (but not in runtime like browserify)
@@ -181,7 +181,7 @@
 
   /**
    * Enumeration of collection format separator strategies.
-   * @enum {String} 
+   * @enum {String}
    * @readonly
    */
   exports.CollectionFormatEnum = {
@@ -371,7 +371,10 @@
 
     return new Promise(function(resolve, reject) {
       request.end(function(error, response) {
-        if (error) {
+          if (error) {
+              if(response.text){
+                  reject('error[' + error + '] message[' + response.text + ']');
+              }
           reject(error);
         } else {
           var data = _this.deserialize(response, returnType);

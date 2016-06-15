@@ -47,10 +47,10 @@ var defaultClient = AlfrescoAuthRestApi.ApiClient.default;
 
 // Configure HTTP basic authorization: basicAuth
 var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+basicAuth.username = 'YOUR USERNAME';
+basicAuth.password = 'YOUR PASSWORD';
 
-var api = new AlfrescoAuthRestApi.AuthenticationApi()
+var api = new AlfrescoAuthRestApi.AuthenticationApi();
 
 var loginRequest = new AlfrescoAuthRestApi.LoginRequest(); // {LoginRequest} The user credential.
 
