@@ -2,4 +2,6 @@
 .idea
 node_modules
 target
+/coverage
+/node_modules
 /alfresco-core-rest-api.iml
