@@ -1,7 +1,7 @@
 # Alfresco JavaScript API Client
 <p>
     <a title='Build Status' href="https://travis-ci.com/Alfresco/dev-platform-js-api">
-      <img src='https://travis-ci.com/Alfresco/dev-platform-js-api.svg?token=FPzV2wyyCU8imY6wHR2B&branch=master'  alt='travis Status' />
+      <img src='https://travis-ci.com/Alfresco/alfresco-js-api.svg?token=FPzV2wyyCU8imY6wHR2B&branch=master'  alt='travis Status' />
     </a>
   <a href='https://raw.githubusercontent.com/Alfresco/dev-platform-js-api/master/LICENSE'>
      <img src='https://img.shields.io/hexpm/l/plug.svg' alt='license' />
