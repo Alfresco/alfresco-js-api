@@ -1,1 +1,13 @@
+/test
+/Gruntfile.js
+/grunt
+/coverage
 pom.xml
+/node_modules
+/.travis.yml
+/.jscsrc
+/.jshintrc
+/.editorconfig
+/build.sh
+/tslint.json
+/pom.xml

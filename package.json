@@ -5,7 +5,7 @@
   "main": "main.js",
   "typings": "bundle.d.ts",
   "scripts": {
-    "build": "grunt && npm run tslint",
+    "build": "grunt && npm run tslint && npm run bundle",
     "test": "grunt test",
     "coverage": "grunt coverage",
     "generate": "mvn clean generate-sources",
@@ -14,10 +14,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Alfresco/dev-platform-rest-api.git"
+    "url": "https://github.com/Alfresco/alfresco-js-api.git"
   },
   "bugs": {
-    "url": "https://github.com/Alfresco/dev-platform-rest-api/issues"
+    "url": "https://github.com/Alfresco/alfresco-js-api/issues"
   },
   "dependencies": {
     "superagent": "1.7.1"

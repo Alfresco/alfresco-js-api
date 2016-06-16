@@ -7,7 +7,10 @@ describe('Alfresco Client', function () {
     it('createTicket should return the Ticket if all is ok', function (done) {
 
         nock('http://192.168.99.100:8080', {'encodedQueryParams': true})
-            .post('/alfresco/api/-default-/public/authentication/versions/1/tickets')
+            .post('/alfresco/api/-default-/public/authentication/versions/1/tickets', {
+                'userId': 'admin',
+                'password': 'admin'
+            })
             .reply(201, {'entry': {'id': 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1', 'userId': 'admin'}});
 
         var alfrescoClient = AlfrescoJsApi.getClientWithAuthentication('http://192.168.99.100:8080/alfresco/api/-default-/public/authentication/versions/1', 'admin', 'admin');
@@ -28,17 +31,20 @@ describe('Alfresco Client', function () {
     });
 
     it('createTicket should return an error if wrong credential are used', function (done) {
+        //nock.recorder.rec();
 
-        //      nock.recorder.rec();
-        nock('http://192.168.99.100:8080', {"encodedQueryParams": true})
-            .post('/alfresco/api/-default-/public/authentication/versions/1/tickets')
+        nock('http://192.168.99.100:8080', {'encodedQueryParams': true})
+            .post('/alfresco/api/-default-/public/authentication/versions/1/tickets', {
+                'userId': 'wrong',
+                'password': 'name'
+            })
             .reply(403, {
-                "error": {
-                    "errorKey": "Login failed",
-                    "statusCode": 403,
-                    "briefSummary": "05150009 Login failed",
-                    "stackTrace": "For security reasons the stack trace is no longer displayed, but the property is kept for previous versions.",
-                    "descriptionURL": "https://api-explorer.alfresco.com"
+                'error': {
+                    'errorKey': 'Login failed',
+                    'statusCode': 403,
+                    'briefSummary': '05150009 Login failed',
+                    'stackTrace': 'For security reasons the stack trace is no longer displayed, but the property is kept for previous versions.',
+                    'descriptionURL': 'https://api-explorer.alfresco.com'
                 }
             });
 
@@ -50,13 +56,15 @@ describe('Alfresco Client', function () {
         loginRequest.userId = 'wrong';
         loginRequest.password = 'name';
 
-        apiInstance.createTicket(loginRequest).then(function (data) {
+        apiInstance.createTicket(loginRequest).then(function () {
 
         }, function (error) {
-            console.log('error' + error);
-            expect(error).to.be.equal('error[Error: Forbidden] message[{"error":{"errorKey":"Login failed","statusCode":403,"briefSummary":"05150009 Login failed","stackTrace":"For security reasons the stack trace is no longer displayed, but the property is kept for previous versions.","descriptionURL":"https://api-explorer.alfresco.com"}}]');
+            expect(error).to.be.equal('error[Error: Forbidden] message[{"error":{"errorKey":"Login failed",' +
+                '"statusCode":403,"briefSummary":"05150009 Login failed","stackTrace":"For security reasons the ' +
+                'stack trace is no longer displayed, but the property is kept for previous versions.","descriptionURL"' +
+                ':"https://api-explorer.alfresco.com"}}]');
             done();
         });
-        //     nock.recorder.play();
+        //nock.recorder.play();
     });
 });
