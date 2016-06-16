@@ -4,7 +4,7 @@ var nock = require('nock');
 
 class AuthResponseMock {
 
-    get200Response() {
+    get201Response() {
         nock('http://192.168.99.100:8080', {'encodedQueryParams': true})
             .post('/alfresco/api/-default-/public/authentication/versions/1/tickets', {
                 'userId': 'admin',
@@ -50,11 +50,11 @@ class AuthResponseMock {
     }
 
     rec(){
-        nock.record();
+        nock.recorder.rec();
     }
 
     play(){
-        nock.play();
+        nock.recorder.play();
     }
 }
 

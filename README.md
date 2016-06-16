@@ -39,30 +39,39 @@ var AlfrescoJsApi = require('alfresco-js-api');
 
 Please follow the [installation](#installation) instruction and execute the following JS code:
 
+#  Constructor
+
+>  AlfrescoApi(username, password, alfrescoHost);
+
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
+var alfresco = require('alfresco-js-api');
 
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
+this.alfrescoJsApi = new alfresco.AlfrescoApi('admin', 'admin', 'http://192.168.99.100:8080');
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+```
 
-var api = new AlfrescoCoreRestApi.AssociationsApi()
+# Login
 
-var sourceId = "sourceId_example"; // {String} The identifier of a node.
+> login()
 
-var assocTargetBody = new AlfrescoCoreRestApi.AssocTargetBody(); // {AssocTargetBody} The target node id and assoc type.
+```javascript
 
-api.addAssoc(sourceId, assocTargetBody).then(function() {
-  console.log('API called successfully.');
-}, function(error) {
+var alfresco = require('alfresco-js-api');
+
+this.alfrescoJsApi = new alfresco.AlfrescoApi('admin', 'admin', 'http://192.168.99.100:8080');
+
+this.alfrescoJsApi.login().then(function (data) {
+    console.log('API called successfully Login ticket:' + data)
+}, function (error) {
   console.error(error);
 });
 
-
 ```
+
+
+The output will be:
+
+API called successfully Login ticket: TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1
 
 ## Development
 

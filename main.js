@@ -1,57 +1,55 @@
+'use strict';
 var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
 var AlfrescoAuthRestApi = require('./alfresco-auth-rest-api/src/index.js');
 
-var getClientWithTicket = function (basePath, ticket) {
-    var alfrescoClient = new AlfrescoCoreRestApi.ApiClient();
-    alfrescoClient.basePath = basePath;
-    // Configure HTTP basic authorization: basicAuth
-    var basicAuth = alfrescoClient.authentications.basicAuth;
-    basicAuth.username = 'ROLE_TICKET';
-    basicAuth.password = ticket;
-    return alfrescoClient;
-};
+class AlfrescoApi {
 
-var getClientWithAuthentication = function (basePath, username, password) {
-    var alfrescoClient = new AlfrescoCoreRestApi.ApiClient();
-    alfrescoClient.basePath = basePath;
-    // Configure HTTP basic authorization: basicAuth
-    var basicAuth = alfrescoClient.authentications.basicAuth;
-    basicAuth.username = username;
-    basicAuth.password = password;
-    return alfrescoClient;
-};
+    /**
+     * @param {String} username
+     * @param {String} password
+     * @param {String} alfrescoHost Your share server IP or DNS name
+     */
+    constructor(username, password, alfrescoHost) {
+      this.basePath = '/alfresco/api/-default-/public/authentication/versions/1';
 
+      this.config = {
+        host: alfrescoHost,
+        username: username,
+        password: password
+      };
+    }
 
-/**
- * Method to delegate to POST login
- * @param basePath
- * @param username
- * @param password
- * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
- * */
-var login = function (basePath, username, password) {
+    getClient() {
+      var alfrescoClient = new AlfrescoCoreRestApi.ApiClient();
+      alfrescoClient.basePath = this.config.host + this.basePath;
+      return alfrescoClient;
+    }
 
-    var alfrescoClient = this.getClientWithAuthentication(basePath, username, password);
+    /**
+     * login Alfresco API
+     * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
+     * */
+    login() {
+      var alfrescoClient = this.getClient();
 
-    var apiInstance = new AlfrescoAuthRestApi.AuthenticationApi(alfrescoClient);
-    var loginRequest = new AlfrescoAuthRestApi.LoginRequest();
+      var apiInstance = new AlfrescoAuthRestApi.AuthenticationApi(alfrescoClient);
+      var loginRequest = new AlfrescoAuthRestApi.LoginRequest();
 
-    loginRequest.userId = username;
-    loginRequest.password = password;
+      loginRequest.userId = this.config.username;
+      loginRequest.password = this.config.password;
 
-    return new Promise(function(resolve, reject) {
+      return new Promise(function (resolve, reject) {
         apiInstance.createTicket(loginRequest).then(function (data) {
-            resolve(data.entry.id);
+          resolve(data.entry.id);
         }, function (error) {
-            reject(error);
+          reject(error);
         });
-    });
-};
+      });
+    }
+}
 
 module.exports = {
-    Auth: require('./alfresco-auth-rest-api/src/index.js'),
-    Core: require('./alfresco-core-rest-api/src/index.js'),
-    getClientWithTicket: getClientWithTicket,
-    getClientWithAuthentication: getClientWithAuthentication,
-    login: login
+  Auth: require('./alfresco-auth-rest-api/src/index.js'),
+  Core: require('./alfresco-core-rest-api/src/index.js'),
+  AlfrescoApi: AlfrescoApi
 };

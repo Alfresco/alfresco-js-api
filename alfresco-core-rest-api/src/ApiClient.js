@@ -372,10 +372,11 @@
     return new Promise(function(resolve, reject) {
       request.end(function(error, response) {
           if (error) {
-              if(response.text){
+              if(response && response.text){
                   reject('error[' + error + '] message[' + response.text + ']');
+              } else {
+                  reject('error[' + error + ']');
               }
-          reject(error);
         } else {
           var data = _this.deserialize(response, returnType);
           resolve(data);
