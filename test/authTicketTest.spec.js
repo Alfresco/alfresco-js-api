@@ -12,7 +12,7 @@ describe('Auth', function () {
 
   describe('With Authentication', function () {
 
-    it('createTicket should return the Ticket if all is ok', function (done) {
+    it('login should return the Ticket if all is ok', function (done) {
 
       this.authResponseMock.get201Response();
 
@@ -25,7 +25,7 @@ describe('Auth', function () {
       });
     });
 
-    it('createTicket should return an error if wrong credential are used 403 the login fails', function (done) {
+    it('login should return an error if wrong credential are used 403 the login fails', function (done) {
       this.authResponseMock.get403Response();
 
       this.alfrescoJsApi = new alfresco.AlfrescoApi('wrong', 'name', 'http://192.168.99.100:8080');
@@ -41,7 +41,7 @@ describe('Auth', function () {
       });
     });
 
-    it('createTicket should return an error if wrong credential are used 400 userId and/or password are/is not provided', function (done) {
+    it('login should return an error if wrong credential are used 400 userId and/or password are/is not provided', function (done) {
       this.authResponseMock.get400Response();
 
       this.alfrescoJsApi = new alfresco.AlfrescoApi(null, null, 'http://192.168.99.100:8080');
