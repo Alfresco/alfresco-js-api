@@ -11,17 +11,58 @@
 
 This project provides a JavaScript client API into the v1 Alfresco REST API.
 
-## Install
+## Api Modules
+
+- [Authentication API](https://github.com/Alfresco/dev-platform-js-api/tree/master/alfresco-auth-rest-api)
+- [Core API](https://github.com/Alfresco/dev-platform-js-api/tree/master/alfresco-core-rest-api)
+
+## installation
 
 ```sh
 npm set registry http://devproducts.alfresco.me:4873
 npm install --save alfresco-js-api
 ```
 
-## Api Modules
+### Basic usage For node projects
 
-- [Authentication API](https://github.com/Alfresco/dev-platform-js-api/tree/master/alfresco-auth-rest-api)
-- [Core API](https://github.com/Alfresco/dev-platform-js-api/tree/master/alfresco-core-rest-api)
+```javascript
+var AlfrescoJsApi = require('alfresco-js-api');
+```
+
+### Basic usage For browser
+
+```html
+ <script src="node_modules/alfresco-js-api/bundle.js"></script>
+```
+
+## Getting Started
+
+Please follow the [installation](#installation) instruction and execute the following JS code:
+
+```javascript
+var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
+
+var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
+
+// Configure HTTP basic authorization: basicAuth
+var basicAuth = defaultClient.authentications['basicAuth'];
+basicAuth.username = 'YOUR USERNAME'
+basicAuth.password = 'YOUR PASSWORD'
+
+var api = new AlfrescoCoreRestApi.AssociationsApi()
+
+var sourceId = "sourceId_example"; // {String} The identifier of a node.
+
+var assocTargetBody = new AlfrescoCoreRestApi.AssocTargetBody(); // {AssocTargetBody} The target node id and assoc type.
+
+api.addAssoc(sourceId, assocTargetBody).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
+
+```
 
 ## Development
 
@@ -36,4 +77,10 @@ npm install --save alfresco-js-api
 * To run the test coverage
 
     ```$ npm run coverage```
+
+
+## Release History
+
+ * 2016-06-16  v1.0.1  Test and task runner Added 
+ * 2016-06-03  v1.0.0  
 
