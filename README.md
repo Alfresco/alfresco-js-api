@@ -56,7 +56,7 @@ this.alfrescoJsApi.login().then(function (data) {
   console.error(error);
 });
 
-The output will be: API called successfully Login ticket: TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1
+//The output will be: API called successfully Login ticket: TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1
 
 ```
 
@@ -67,6 +67,20 @@ If you already have a ticket
 var alfresco = require('alfresco-js-api');
 
 this.alfrescoJsApi = new alfresco.AlfrescoApi({ ticket:'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1', host:'http://192.168.99.100:8080'});
+
+```
+
+#  Logout
+
+>  logout();
+
+```javascript
+
+this.alfrescoJsApi.logout().then(function (data) {
+    console.log('Successfully Logout');
+}, function (error) {
+    console.error('Possible ticket already expired');
+});
 
 ```
 
@@ -88,20 +102,6 @@ var thumbnailUrl = this.alfrescoJsApi.getDocumentThumbnailUrl('1a0b110f-1e09-4ca
 ```javascript
 
 var thumbnailUrl = this.alfrescoJsApi.getContentUrl('1a0b110f-1e09-4ca2-b367-fe25e4964a4');
-
-```
-
-#  Logout
-
->  logout();
-
-```javascript
-
-this.alfrescoJsApi.logout().then(function (data) {
-    console.log('Successfully Logout');
-}, function (error) {
-    console.error('Possible ticket already expired');
-});
 
 ```
 
