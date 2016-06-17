@@ -74,15 +74,22 @@ this.alfrescoJsApi = new alfresco.AlfrescoApi({ ticket:'TICKET_4479f4d3bb1551958
   
 >  getDocumentThumbnailUrl(documentId);
 
+```javascript
+
 var thumbnailUrl = this.alfrescoJsApi.getDocumentThumbnailUrl('1a0b110f-1e09-4ca2-b367-fe25e4964a4');
+
+```
 
 
 #  Get content Url
   
 >  getContentUrl(documentId);
 
+```javascript
+
 var thumbnailUrl = this.alfrescoJsApi.getContentUrl('1a0b110f-1e09-4ca2-b367-fe25e4964a4');
 
+```
 
 
 ## Development
