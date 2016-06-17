@@ -8,6 +8,7 @@ module.exports = function() {
         'Gruntfile.js',
         'grunt/**/*.js',
         'test/*.js',
+        'src/*.js',
         'main.js'
     ],
     options: {

@@ -16,19 +16,19 @@ describe('Auth', function () {
 
       this.authResponseMock.get201Response();
 
-      this.alfrescoJsApi = new alfresco.AlfrescoApi({ username:'admin', password:'admin', host:'http://192.168.99.100:8080'});
+      this.alfrescoJsApi = new alfresco.AlfrescoApi({ username: 'admin', password: 'admin', host: 'http://192.168.99.100:8080'});
 
       this.alfrescoJsApi.login().then(function (data) {
         expect(data).to.be.equal('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
         done();
-      }, function (error) {
+      }, function () {
       });
     });
 
     it('login should return an error if wrong credential are used 403 the login fails', function (done) {
       this.authResponseMock.get403Response();
 
-      this.alfrescoJsApi = new alfresco.AlfrescoApi({ username:'wrong', password:'name', host:'http://192.168.99.100:8080'});
+      this.alfrescoJsApi = new alfresco.AlfrescoApi({ username: 'wrong', password: 'name', host: 'http://192.168.99.100:8080'});
 
       this.alfrescoJsApi.login().then(function () {
 
@@ -44,7 +44,7 @@ describe('Auth', function () {
     it('login should return an error if wrong credential are used 400 userId and/or password are/is not provided', function (done) {
       this.authResponseMock.get400Response();
 
-      this.alfrescoJsApi = new alfresco.AlfrescoApi({ username: null , password: null, host:'http://192.168.99.100:8080'});
+      this.alfrescoJsApi = new alfresco.AlfrescoApi({ username: null , password: null, host: 'http://192.168.99.100:8080'});
 
       this.alfrescoJsApi.login().then(function () {
 
@@ -61,12 +61,12 @@ describe('Auth', function () {
 
   describe('With Ticket Authentication', function () {
 
-      it('Ticket should be present in the client', function () {
-          this.authResponseMock.get400Response();
+    it('Ticket should be present in the client', function () {
+      this.authResponseMock.get400Response();
 
-          this.alfrescoJsApi = new alfresco.AlfrescoApi({ticket: 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1', host:'http://192.168.99.100:8080'});
+      this.alfrescoJsApi = new alfresco.AlfrescoApi({ticket: 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1', host: 'http://192.168.99.100:8080'});
 
-          expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(this.alfrescoJsApi.getClient().authentications.basicAuth.password);
-      });
+      expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(this.alfrescoJsApi.getClient().authentications.basicAuth.password);
+    });
   });
 });
