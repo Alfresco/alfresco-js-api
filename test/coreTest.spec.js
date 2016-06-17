@@ -34,10 +34,10 @@ describe('Alfresco Core Node Api', function () {
 
         apiInstance.getNodeChildren(nodeId, opts).then(function (data) {
             expect(data.list.pagination.count).to.be.equal(5);
+            expect(data.list.entries[0].entry.path.name).to.be.equal('/Company Home/Sites/swsdp/documentLibrary');
             done();
         }, function (error) {
             console.log(error);
-            done();
         });
     });
 });

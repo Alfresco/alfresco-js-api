@@ -4,13 +4,16 @@ var nock = require('nock');
 
 class AuthResponseMock {
 
-    get201Response() {
+    get201Response(forceTicket) {
+
+        var returnMockTicket = forceTicket || 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
+
         nock('http://192.168.99.100:8080', {'encodedQueryParams': true})
             .post('/alfresco/api/-default-/public/authentication/versions/1/tickets', {
                 'userId': 'admin',
                 'password': 'admin'
             })
-            .reply(201, {'entry': {'id': 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1', 'userId': 'admin'}});
+            .reply(201, {'entry': {'id': returnMockTicket, 'userId': 'admin'}});
     }
 
     get403Response() {
@@ -49,11 +52,11 @@ class AuthResponseMock {
 
     }
 
-    rec(){
+    rec() {
         nock.recorder.rec();
     }
 
-    play(){
+    play() {
         nock.recorder.play();
     }
 }
