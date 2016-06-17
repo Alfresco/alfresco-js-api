@@ -51,7 +51,7 @@ var alfresco = require('alfresco-js-api');
 this.alfrescoJsApi = new alfresco.AlfrescoApi({ username:'admin', password:'admin', host:'http://192.168.99.100:8080'});
 
 this.alfrescoJsApi.login().then(function (data) {
-    console.log('API called successfully Login ticket:' + data)
+    console.log('API called successfully Login ticket:' + data);
 }, function (error) {
   console.error(error);
 });
@@ -91,6 +91,19 @@ var thumbnailUrl = this.alfrescoJsApi.getContentUrl('1a0b110f-1e09-4ca2-b367-fe2
 
 ```
 
+#  Logout
+
+>  logout();
+
+```javascript
+
+this.alfrescoJsApi.logout().then(function (data) {
+    console.log('Successfully Logout');
+}, function (error) {
+    console.error('Possible ticket already expired');
+});
+
+```
 
 ## Development
 

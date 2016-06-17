@@ -52,6 +52,19 @@ class AuthResponseMock {
 
     }
 
+    get204ResponseLogout (){
+        nock('http://192.168.99.100:8080', {'encodedQueryParams':true})
+            .delete('/alfresco/api/-default-/public/authentication/versions/1/tickets/-me-')
+            .reply(204, '');
+    }
+
+    get404ResponseLogout (){
+        nock('http://192.168.99.100:8080', {'encodedQueryParams':true})
+            .delete('/alfresco/api/-default-/public/authentication/versions/1/tickets/-me-')
+            .reply(404, '');
+    }
+
+
     rec() {
         nock.recorder.rec();
     }

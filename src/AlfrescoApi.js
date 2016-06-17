@@ -26,9 +26,7 @@ class AlfrescoApi {
       this.apiAuthUrl = this.config.host + '/alfresco/api/-default-/public/authentication/versions/1'; //Auth Call
       this.apiCoreUrl = this.config.host + '/alfresco/api/-default-/public/alfresco/versions/1';   //Core Call
 
-      if (this.config.ticket) {
-        this.createClient();
-      }
+      this.createClient();
     }
 
     /**
@@ -37,7 +35,6 @@ class AlfrescoApi {
      * */
     createClient() {
       this.alfrescoClient = new AlfrescoCoreRestApi.ApiClient();
-      this.alfrescoClient.basePath = this.apiAuthUrl;
       return this.alfrescoClient;
     }
 
@@ -55,12 +52,24 @@ class AlfrescoApi {
     }
 
     /**
+     * return an Alfresco API Client
+     * @returns {ApiClient} Alfresco API Client
+     * */
+    getClientAuth() {
+      if (this.alfrescoClient) {
+        this.alfrescoClient.basePath = this.apiAuthUrl;
+        this.alfrescoClient.authentications.basicAuth.username = 'ROLE_TICKET';
+        this.alfrescoClient.authentications.basicAuth.password = this.config.ticket;
+        return this.alfrescoClient;
+      }
+    }
+
+    /**
      * login Alfresco API
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
     login() {
-      var alfrescoClient = this.createClient();
-      var apiInstance = new AlfrescoAuthRestApi.AuthenticationApi(alfrescoClient);
+      var apiInstance = new AlfrescoAuthRestApi.AuthenticationApi(this.getClientAuth());
       var loginRequest = new AlfrescoAuthRestApi.LoginRequest();
 
       loginRequest.userId = this.config.username;
@@ -70,6 +79,23 @@ class AlfrescoApi {
         apiInstance.createTicket(loginRequest).then((data) => {
           this.config.ticket = data.entry.id;
           resolve(data.entry.id);
+        }, function (error) {
+          reject(error);
+        });
+      });
+    }
+
+    /**
+     * logout Alfresco API
+     * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
+     * */
+    logout() {
+      var apiInstance = new AlfrescoAuthRestApi.AuthenticationApi(this.getClientAuth());
+
+      return new Promise((resolve, reject) => {
+        apiInstance.deleteTicket().then((data) => {
+          this.config.ticket = undefined;
+          resolve('logout');
         }, function (error) {
           reject(error);
         });

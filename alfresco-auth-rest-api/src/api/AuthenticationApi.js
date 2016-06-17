@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new AuthenticationApi. 
+   * Constructs a new AuthenticationApi.
    * @alias module:api/AuthenticationApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
