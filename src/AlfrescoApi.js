@@ -2,9 +2,9 @@
 
 var AlfrescoCoreRestApi = require('../alfresco-core-rest-api/src/index.js');
 var AlfrescoAuthRestApi = require('../alfresco-auth-rest-api/src/index.js');
+var alfrescoContent = require('./alfrescoContent.js');
 
 class AlfrescoApi {
-
     /**
      * @param {Object} config
      *
@@ -16,15 +16,15 @@ class AlfrescoApi {
      *    };
      */
     constructor(config) {
-      this.basePathAuth = '/alfresco/api/-default-/public/authentication/versions/1'; //Auth Call
-      this.basePath = '/alfresco/api/-default-/public/alfresco/versions/1';   //Core Call
-
       this.config = {
         host: config.host,
         username: config.username,
         password: config.password,
         ticket: config.ticket
       };
+
+      this.apiAuthUrl = this.config.host + '/alfresco/api/-default-/public/authentication/versions/1'; //Auth Call
+      this.apiCoreUrl = this.config.host + '/alfresco/api/-default-/public/alfresco/versions/1';   //Core Call
 
       if (this.config.ticket) {
         this.createClient();
@@ -37,7 +37,7 @@ class AlfrescoApi {
      * */
     createClient() {
       this.alfrescoClient = new AlfrescoCoreRestApi.ApiClient();
-      this.alfrescoClient.basePath = this.config.host + this.basePathAuth;
+      this.alfrescoClient.basePath = this.apiAuthUrl;
       return this.alfrescoClient;
     }
 
@@ -47,7 +47,7 @@ class AlfrescoApi {
      * */
     getClient() {
       if (this.alfrescoClient) {
-        this.alfrescoClient.basePath = this.config.host + this.basePath;
+        this.alfrescoClient.basePath = this.apiCoreUrl;
         this.alfrescoClient.authentications.basicAuth.username = 'ROLE_TICKET';
         this.alfrescoClient.authentications.basicAuth.password = this.config.ticket;
         return this.alfrescoClient;
@@ -75,6 +75,26 @@ class AlfrescoApi {
         });
       });
     }
+
+    ///////
+    /**
+     * Get thumbnail URL for the given documentId
+     *
+     * @param {String} documentId of the document
+     */
+    getDocumentThumbnailUrl(documentId) {
+      return alfrescoContent.getDocumentThumbnailUrl(documentId, this.apiCoreUrl, this.config.ticket);
+    }
+
+    /**
+     * Get content URL for the given documentId
+     *
+     * @param {String} documentId of the document
+     */
+    getContentUrl(documentId) {
+      return alfrescoContent.getContentUrl(documentId, this.apiCoreUrl, this.config.ticket);
+    }
+
 }
 
 module.exports = AlfrescoApi;
