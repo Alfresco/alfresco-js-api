@@ -39,26 +39,16 @@ var AlfrescoJsApi = require('alfresco-js-api');
 
 Please follow the [installation](#installation) instruction and execute the following JS code:
 
-#  Constructor
+#  Login
 
->  AlfrescoApi(username, password, alfrescoHost);
+>  AlfrescoApi({username, password, alfrescoHost, ticket});
+
+If you want login with Username and Password
 
 ```javascript
 var alfresco = require('alfresco-js-api');
 
-this.alfrescoJsApi = new alfresco.AlfrescoApi('admin', 'admin', 'http://192.168.99.100:8080');
-
-```
-
-# Login
-
-> login()
-
-```javascript
-
-var alfresco = require('alfresco-js-api');
-
-this.alfrescoJsApi = new alfresco.AlfrescoApi('admin', 'admin', 'http://192.168.99.100:8080');
+this.alfrescoJsApi = new alfresco.AlfrescoApi({ username:'admin', password:'admin', host:'http://192.168.99.100:8080'});
 
 this.alfrescoJsApi.login().then(function (data) {
     console.log('API called successfully Login ticket:' + data)
@@ -66,12 +56,21 @@ this.alfrescoJsApi.login().then(function (data) {
   console.error(error);
 });
 
+The output will be: API called successfully Login ticket: TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1
+
+```
+
+If you already have a ticket
+
+```javascript
+
+var alfresco = require('alfresco-js-api');
+
+this.alfrescoJsApi = new alfresco.AlfrescoApi({ ticket:'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1', host:'http://192.168.99.100:8080'});
+
 ```
 
 
-The output will be:
-
-API called successfully Login ticket: TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1
 
 ## Development
 

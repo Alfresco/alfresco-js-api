@@ -5,20 +5,32 @@ var AlfrescoAuthRestApi = require('./alfresco-auth-rest-api/src/index.js');
 class AlfrescoApi {
 
     /**
-     * @param {String} username
+     * @param {Object} config
+     *
+     *      config = {
+     *        host:       // alfrescoHost Your share server IP or DNS name
+     *        username:   // Username to login in share
+     *        password:   // Password to login in share
+     *        ticket:     // Ticket if you already have a ticket you can pass only the ticket and skip the login, in this case you don't need username and password
+     *    };
+     *
      * @param {String} password
      * @param {String} alfrescoHost Your share server IP or DNS name
      */
-    constructor(username, password, alfrescoHost) {
+    constructor(config) {
         this.basePathAuth = '/alfresco/api/-default-/public/authentication/versions/1'; //Auth Call
         this.basePath = '/alfresco/api/-default-/public/alfresco/versions/1';   //Core Call
 
         this.config = {
-            host: alfrescoHost,
-            username: username,
-            password: password,
-            ticket: undefined
+            host: config.host,
+            username: config.username,
+            password: config.password,
+            ticket: config.ticket
         };
+
+        if (this.config.ticket) {
+            this.createClient();
+        }
     }
 
     /**
