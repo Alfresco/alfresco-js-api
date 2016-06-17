@@ -43,7 +43,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('coverage', 'Save coverage in coveralls', [
-    'mocha_istanbul:coveralls',
-    'coveralls'
+    'mocha_istanbul:coveralls'
+   // 'coveralls'
   ]);
 };

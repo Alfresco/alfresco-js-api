@@ -15,7 +15,6 @@ describe('Alfresco Core Node Api', function () {
     this.alfrescoJsApi = new alfresco.AlfrescoApi({ username: 'admin', password: 'admin', host: 'http://192.168.99.100:8080'});
 
     this.alfrescoJsApi.login().then((data) => {
-      console.log('Login Ok ' + data);
       done();
     });
   });
