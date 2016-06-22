@@ -1,6 +1,6 @@
 /*global describe, it, beforeEach */
 
-var alfresco = require('../main');
+var AlfrescoApi = require('../main');
 var expect = require('chai').expect;
 var AuthResponseMock = require('../test/mockObjects/authResponseMock');
 var NodeChildrenMock = require('../test/mockObjects/nodeChildrenMock');
@@ -12,7 +12,7 @@ describe('Alfresco Content', function () {
     this.nodeChildrenMock = new  NodeChildrenMock();
 
     this.authResponseMock.get201Response();
-    this.alfrescoJsApi = new alfresco.AlfrescoApi({ username: 'admin', password: 'admin', host: 'http://192.168.99.100:8080'});
+    this.alfrescoJsApi = new AlfrescoApi({ username: 'admin', password: 'admin', host: 'http://192.168.99.100:8080'});
 
     this.alfrescoJsApi.login().then((data) => {
       done();

@@ -114,10 +114,13 @@ interface ApiClient {
 }
 
 interface AlfrescoApi {
+
+}
+
+interface AlfrescoApi {
     Auth: Auth;
     Core: Core;
-    getClientWithTicket(basePath: string, ticket: string): any;
-    getClientWithAuthentication(basePath: string, username: string, password: string): any;
+    AlfrescoApi: AlfrescoApi;
 }
 
 declare var AlfrescoApi: AlfrescoApi;

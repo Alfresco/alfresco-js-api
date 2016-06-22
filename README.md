@@ -46,9 +46,9 @@ Please follow the [installation](#installation) instruction and execute the foll
 If you want login with Username and Password
 
 ```javascript
-var alfresco = require('alfresco-js-api');
+var AlfrescoApi = require('alfresco-js-api');
 
-this.alfrescoJsApi = new alfresco.AlfrescoApi({ username:'admin', password:'admin', host:'http://192.168.99.100:8080'});
+this.alfrescoJsApi = new AlfrescoApi({ username:'admin', password:'admin', host:'http://192.168.99.100:8080'});
 
 this.alfrescoJsApi.login().then(function (data) {
     console.log('API called successfully Login ticket:' + data);
@@ -64,9 +64,9 @@ If you already have a ticket
 
 ```javascript
 
-var alfresco = require('alfresco-js-api');
+var AlfrescoApi = require('alfresco-js-api');
 
-this.alfrescoJsApi = new alfresco.AlfrescoApi({ ticket:'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1', host:'http://192.168.99.100:8080'});
+this.alfrescoJsApi = new AlfrescoApi({ ticket:'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1', host:'http://192.168.99.100:8080'});
 
 ```
 

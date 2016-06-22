@@ -1,6 +1,6 @@
 /*global describe, it, beforeEach */
 
-var alfresco = require('../main');
+var AlfrescoApi = require('../main');
 var expect = require('chai').expect;
 var AuthResponseMock = require('../test/mockObjects/authResponseMock');
 
@@ -16,7 +16,7 @@ describe('Auth', function () {
 
       this.authResponseMock.get201Response();
 
-      this.alfrescoJsApi = new alfresco.AlfrescoApi({
+      this.alfrescoJsApi = new AlfrescoApi({
         username: 'admin',
         password: 'admin',
         host: 'http://192.168.99.100:8080'
@@ -32,7 +32,7 @@ describe('Auth', function () {
     it('login should return an error if wrong credential are used 403 the login fails', function (done) {
       this.authResponseMock.get403Response();
 
-      this.alfrescoJsApi = new alfresco.AlfrescoApi({
+      this.alfrescoJsApi = new AlfrescoApi({
         username: 'wrong',
         password: 'name',
         host: 'http://192.168.99.100:8080'
@@ -53,7 +53,7 @@ describe('Auth', function () {
     it('login should return an error if wrong credential are used 400 userId and/or password are/is not provided', function (done) {
       this.authResponseMock.get400Response();
 
-      this.alfrescoJsApi = new alfresco.AlfrescoApi({
+      this.alfrescoJsApi = new AlfrescoApi({
         username: null,
         password: null,
         host: 'http://192.168.99.100:8080'
@@ -87,7 +87,7 @@ describe('Auth', function () {
       it('The Api Should fire success event if is unauthorized an 401', function (done) {
         this.authResponseMock.get201Response();
 
-        this.alfrescoJsApi = new alfresco.AlfrescoApi({
+        this.alfrescoJsApi = new AlfrescoApi({
           username: 'admin',
           password: 'admin',
           host: 'http://192.168.99.100:8080'
@@ -104,7 +104,7 @@ describe('Auth', function () {
       it('The Api Should fire logout event if the logout is successfull', function (done) {
         this.authResponseMock.get201Response();
 
-        this.alfrescoJsApi = new alfresco.AlfrescoApi({
+        this.alfrescoJsApi = new AlfrescoApi({
           username: 'admin',
           password: 'admin',
           host: 'http://192.168.99.100:8080'
@@ -129,7 +129,7 @@ describe('Auth', function () {
       it('Ticket should be present in the client', function () {
         this.authResponseMock.get400Response();
 
-        this.alfrescoJsApi = new alfresco.AlfrescoApi({
+        this.alfrescoJsApi = new AlfrescoApi({
           ticket: 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1',
           host: 'http://192.168.99.100:8080'
         });
@@ -142,7 +142,7 @@ describe('Auth', function () {
 
       beforeEach(function (done) {
         this.authResponseMock.get201Response('TICKET_22d7a5a83d78b9cc9666ec4e412475e5455b33bd');
-        this.alfrescoJsApi = new alfresco.AlfrescoApi({
+        this.alfrescoJsApi = new AlfrescoApi({
           username: 'admin',
           password: 'admin',
           host: 'http://192.168.99.100:8080'
