@@ -101,6 +101,7 @@ class AlfrescoApi {
 
       return new Promise((resolve, reject) => {
         apiInstance.deleteTicket().then((data) => {
+          this.emit('logout');
           this.config.ticket = undefined;
           resolve('logout');
         }, function (error) {

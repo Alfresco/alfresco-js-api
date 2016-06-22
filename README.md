@@ -89,6 +89,7 @@ this.alfrescoJsApi.logout().then(function (data) {
 >  The AlfrescoApi is also an EventEmitter that you can register to listen to any of the following event types:
 * unauthorized (If this event is triggered a call to the Api was unauthorized)
 * success (If this event is triggered the login was success you can use this event instead the login promise)
+* logout (If this event is triggered the client is successfully logout)
 
 ```javascript
 
@@ -100,6 +101,9 @@ this.alfrescoJsApi.on('success', function(){
     console.log('Success Login');
 });
 
+this.alfrescoJsApi.on('logout', function(){
+    console.log('Successfully Logout');
+});
 ```
 
 

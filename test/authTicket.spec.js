@@ -93,13 +93,35 @@ describe('Auth', function () {
           host: 'http://192.168.99.100:8080'
         });
 
-        this.alfrescoJsApi.login();
-
         this.alfrescoJsApi.on('success', ()=> {
           done();
         });
 
+        this.alfrescoJsApi.login();
+
       });
+
+      it('The Api Should fire logout event if the logout is successfull', function (done) {
+        this.authResponseMock.get201Response();
+
+        this.alfrescoJsApi = new alfresco.AlfrescoApi({
+          username: 'admin',
+          password: 'admin',
+          host: 'http://192.168.99.100:8080'
+        });
+
+        this.alfrescoJsApi.on('logout', ()=> {
+          done();
+        });
+
+        this.alfrescoJsApi.login();
+
+        this.authResponseMock.get204ResponseLogout();
+
+        this.alfrescoJsApi.logout();
+
+      });
+
     });
 
     describe('With Ticket Authentication', function () {
