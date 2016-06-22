@@ -6,26 +6,26 @@ var ApiClient = require('../alfresco-core-rest-api/src/ApiClient');
 class AlfrescoApiClient extends ApiClient {
 
     constructor() {
-      super();
+        super();
     }
 
     callApi(path, httpMethod, pathParams,
             queryParams, headerParams, formParams, bodyParam, authNames, contentTypes, accepts,
             returnType) {
 
-      return new Promise((resolve, reject) => {
-        super.callApi(path, httpMethod, pathParams,
-            queryParams, headerParams, formParams, bodyParam, authNames, contentTypes, accepts,
-            returnType).
+        return new Promise((resolve, reject) => {
+            super.callApi(path, httpMethod, pathParams,
+                queryParams, headerParams, formParams, bodyParam, authNames, contentTypes, accepts,
+                returnType).
             then((data) => {
-              resolve(data);
+                resolve(data);
             }, (error)  => {
-              if (error.error.status === 401) {
-                this.emit('unauthorized');
-              }
-              reject(error);
+                if (error.error.status === 401) {
+                    this.emit('unauthorized');
+                }
+                reject(error);
             });
-      });
+        });
     }
 }
 

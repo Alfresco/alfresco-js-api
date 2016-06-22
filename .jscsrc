@@ -9,7 +9,7 @@
   "requireCamelCaseOrUpperCaseIdentifiers": false,
   "maximumLineLength": 240,
   "validateLineBreaks": "LF",
-  "validateIndentation": 2,
+  "validateIndentation": 4,
   "disallowTrailingComma": true,
   "disallowUnusedParams": true,
   "disallowMultipleVarDecl": false,

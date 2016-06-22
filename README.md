@@ -84,6 +84,23 @@ this.alfrescoJsApi.logout().then(function (data) {
 
 ```
 
+#  isLoggedIn
+
+>  isLoggedIn(); return true if you are logged in false if you are not.
+
+```javascript
+
+var isLoggedIn = this.alfrescoJsApi.isLoggedIn();
+
+if (isLoggedIn) {
+    console.log('You are logged in');
+} else {
+    console.log('You are not logged in');
+}
+
+```
+
+
 #  Events
 
 >  The AlfrescoApi is also an EventEmitter that you can register to listen to any of the following event types:

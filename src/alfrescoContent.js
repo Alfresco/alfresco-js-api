@@ -11,8 +11,8 @@ class AlfrescoContent {
      * @returns {String} URL address.
      */
     static getDocumentThumbnailUrl(documentId, apiBaseUrl, ticket) {
-      return apiBaseUrl + '/nodes/' + documentId +
-          '/renditions/doclib/content' + '?attachment=false&alf_ticket=' + ticket;
+        return apiBaseUrl + '/nodes/' + documentId +
+            '/renditions/doclib/content' + '?attachment=false&alf_ticket=' + ticket;
     }
 
     /**
@@ -24,8 +24,8 @@ class AlfrescoContent {
      * @returns {String} URL address.
      */
     static getContentUrl(documentId, apiBaseUrl, ticket) {
-      return apiBaseUrl + '/nodes/' + documentId +
-          '/content' + '?attachment=false&alf_ticket=' + ticket;
+        return apiBaseUrl + '/nodes/' + documentId +
+            '/content' + '?attachment=false&alf_ticket=' + ticket;
     }
 }
 
