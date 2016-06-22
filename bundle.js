@@ -17579,11 +17579,7 @@ var AlfrescoApi = require('./src/alfrescoApi.js');
 
 module.exports = AlfrescoApi;
 
-module.exports.prototype.Core = require('./alfresco-core-rest-api/src/index.js');
-module.exports.prototype.Auth = require('./alfresco-auth-rest-api/src/index.js');
-
-
-},{"./alfresco-auth-rest-api/src/index.js":3,"./alfresco-core-rest-api/src/index.js":26,"./src/alfrescoApi.js":150}],137:[function(require,module,exports){
+},{"./src/alfrescoApi.js":150}],137:[function(require,module,exports){
 'use strict'
 
 exports.toByteArray = toByteArray
@@ -22044,6 +22040,15 @@ class AlfrescoApi {
     }
 
     /**
+     * If the client is logged in retun true
+     *
+     * @returns {Boolean} is logged in
+     */
+    isLoggedIn() {
+      return !!this.config.ticket;
+    }
+
+    /**
      * Get thumbnail URL for the given documentId
      *
      * @param {String} documentId of the document
@@ -22062,10 +22067,13 @@ class AlfrescoApi {
     }
 }
 
+AlfrescoApi.Core = require('../alfresco-core-rest-api/src/index.js');
+AlfrescoApi.Auth = require('../alfresco-auth-rest-api/src/index.js');
+
 util.inherits(AlfrescoApi, EventEmitter);
 module.exports = AlfrescoApi;
 
-},{"../alfresco-auth-rest-api/src/index.js":3,"./alfrescoApiClient.js":151,"./alfrescoContent.js":152,"events":142,"util":149}],151:[function(require,module,exports){
+},{"../alfresco-auth-rest-api/src/index.js":3,"../alfresco-core-rest-api/src/index.js":26,"./alfrescoApiClient.js":151,"./alfrescoContent.js":152,"events":142,"util":149}],151:[function(require,module,exports){
 'use strict';
 var util = require('util');
 var EventEmitter = require('events').EventEmitter;

@@ -22,8 +22,47 @@ describe('Auth', function () {
         host: 'http://192.168.99.100:8080'
       });
 
-      this.alfrescoJsApi.login().then(function (data) {
+      this.alfrescoJsApi.login().then((data) => {
         expect(data).to.be.equal('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
+        done();
+      }, function () {
+            });
+    });
+
+    it('isLoggedIn should return true if the api is logged in', function (done) {
+
+      this.authResponseMock.get201Response();
+
+      this.alfrescoJsApi = new AlfrescoApi({
+        username: 'admin',
+        password: 'admin',
+        host: 'http://192.168.99.100:8080'
+      });
+
+      this.alfrescoJsApi.login().then(() => {
+        console.log('this.alfrescoJsApi.isLoggedIn()' + this.alfrescoJsApi.isLoggedIn());
+        expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(true);
+        done();
+      }, function () {
+            });
+    });
+
+    it('isLoggedIn should return false if the api is logged out', function (done) {
+
+      this.authResponseMock.get201Response();
+
+      this.alfrescoJsApi = new AlfrescoApi({
+        username: 'admin',
+        password: 'admin',
+        host: 'http://192.168.99.100:8080'
+      });
+
+      this.alfrescoJsApi.login();
+
+      this.authResponseMock.get204ResponseLogout();
+
+      this.alfrescoJsApi.logout().then(() => {
+        expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(false);
         done();
       }, function () {
             });

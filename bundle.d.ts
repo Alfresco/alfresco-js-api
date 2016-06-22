@@ -110,17 +110,24 @@ interface NodesApi {
 }
 
 interface ApiClient {
-    new(): ApiClient;
+    new(client: any): ApiClient;
 }
 
 interface AlfrescoApi {
+    new(config: any): ApiClient;
 
-}
-
-interface AlfrescoApi {
     Auth: Auth;
     Core: Core;
-    AlfrescoApi: AlfrescoApi;
+
+    createClient(): any;
+    getClient(): any;
+    getClientAuth(): any;
+
+    isLoggedIn(): boolean;
+    login(): any;
+    logout(): any;
+    getDocumentThumbnailUrl(documentId: string): any;
+    getContentUrl(documentId: string): any;
 }
 
 declare var AlfrescoApi: AlfrescoApi;

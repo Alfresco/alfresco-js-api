@@ -111,6 +111,15 @@ class AlfrescoApi {
     }
 
     /**
+     * If the client is logged in retun true
+     *
+     * @returns {Boolean} is logged in
+     */
+    isLoggedIn() {
+      return !!this.config.ticket;
+    }
+
+    /**
      * Get thumbnail URL for the given documentId
      *
      * @param {String} documentId of the document
