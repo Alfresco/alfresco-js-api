@@ -113,8 +113,8 @@ interface ApiClient {
     new(client: any): ApiClient;
 }
 
-interface AlfrescoApi {
-    new(config: any): ApiClient;
+export interface AlfrescoApi {
+    new(config: any): AlfrescoApi;
 
     Auth: Auth;
     Core: Core;
