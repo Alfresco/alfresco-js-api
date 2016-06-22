@@ -52,6 +52,24 @@ class AuthResponseMock {
 
     }
 
+    get401Response() {
+        nock('http://192.168.99.100:8080', {'encodedQueryParams': true})
+            .post('/alfresco/api/-default-/public/authentication/versions/1/tickets', {
+                'userId': null,
+                'password': null
+            })
+            .reply(401, {
+                'error': {
+                    'errorKey': 'framework.exception.ApiDefault',
+                    'statusCode': 401,
+                    'briefSummary': '05210059 Authentication failed for Web Script org/alfresco/api/ResourceWebScript.get',
+                    'stackTrace': 'For security reasons the stack trace is no longer displayed, but the property is kept for previous versions.',
+                    'descriptionURL': 'https://api-explorer.alfresco.com'
+                }
+            });
+
+    }
+
     get204ResponseLogout (){
         nock('http://192.168.99.100:8080', {'encodedQueryParams':true})
             .delete('/alfresco/api/-default-/public/authentication/versions/1/tickets/-me-')

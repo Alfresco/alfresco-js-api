@@ -41,10 +41,11 @@ describe('Auth', function () {
       this.alfrescoJsApi.login().then(function () {
 
       }, function (error) {
-        expect(error).to.be.equal('error[Error: Forbidden] message[{"error":{"errorKey":"Login failed",' +
-            '"statusCode":403,"briefSummary":"05150009 Login failed","stackTrace":"For security reasons the ' +
-            'stack trace is no longer displayed, but the property is kept for previous versions.","descriptionURL"' +
-            ':"https://api-explorer.alfresco.com"}}]');
+        expect(error.error.toString()).to.be.equal('Error: Forbidden');
+        expect(error.message).to.be.equal('{"error":{"errorKey":"Login failed","statusCode":403,' +
+            '"briefSummary":"05150009 Login failed","stackTrace":"For security reasons the stack ' +
+            'trace is no longer displayed, but the property is kept for previous versions.","descriptionURL":' +
+            '"https://api-explorer.alfresco.com"}}');
         done();
       });
     });
@@ -61,62 +62,93 @@ describe('Auth', function () {
       this.alfrescoJsApi.login().then(function () {
 
       }, function (error) {
-        expect(error).to.be.equal('error[Error: Bad Request] message[{"error":{"errorKey":"Invalid login details."' +
-            ',"statusCode":400,"briefSummary":"05160045 Invalid login details.","stackTrace":"For security reasons' +
-            ' the stack trace is no longer displayed, but the property is kept for previous versions.",' +
-            '"descriptionURL":"https://api-explorer.alfresco.com"}}]');
+        expect(error.error.toString()).to.be.equal('Error: Bad Request');
+        expect(error.message).to.be.equal('{"error":{"errorKey":"Invalid login details."' +
+            ',"statusCode":400,"briefSummary":"05160045 Invalid login details.","stackTrace":' +
+            '"For security reasons the stack trace is no longer displayed, but the property is ' +
+            'kept for previous versions.","descriptionURL":"https://api-explorer.alfresco.com"}}');
         done();
       });
     });
 
-  });
+    describe('Events ', function () {
 
-  describe('With Ticket Authentication', function () {
+      it('login should fire an event if is unauthorized an 401', function (done) {
+        this.authResponseMock.get401Response();
 
-    it('Ticket should be present in the client', function () {
-      this.authResponseMock.get400Response();
+        this.alfrescoJsApi.login();
 
-      this.alfrescoJsApi = new alfresco.AlfrescoApi({
-        ticket: 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1',
-        host: 'http://192.168.99.100:8080'
+        this.alfrescoJsApi.on('unauthorized', ()=> {
+          done();
+        });
+
       });
 
-      expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(this.alfrescoJsApi.getClient().authentications.basicAuth.password);
+      it('The Api Should fire success event if is unauthorized an 401', function (done) {
+        this.authResponseMock.get201Response();
+
+        this.alfrescoJsApi = new alfresco.AlfrescoApi({
+          username: 'admin',
+          password: 'admin',
+          host: 'http://192.168.99.100:8080'
+        });
+
+        this.alfrescoJsApi.login();
+
+        this.alfrescoJsApi.on('success', ()=> {
+          done();
+        });
+
+      });
     });
-  });
 
-  describe('Logout Api', function () {
+    describe('With Ticket Authentication', function () {
 
-    beforeEach(function (done) {
-      this.authResponseMock.get201Response('TICKET_22d7a5a83d78b9cc9666ec4e412475e5455b33bd');
-      this.alfrescoJsApi = new alfresco.AlfrescoApi({
-        username: 'admin',
-        password: 'admin',
-        host: 'http://192.168.99.100:8080'
+      it('Ticket should be present in the client', function () {
+        this.authResponseMock.get400Response();
+
+        this.alfrescoJsApi = new alfresco.AlfrescoApi({
+          ticket: 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1',
+          host: 'http://192.168.99.100:8080'
+        });
+
+        expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(this.alfrescoJsApi.getClient().authentications.basicAuth.password);
+      });
+    });
+
+    describe('Logout Api', function () {
+
+      beforeEach(function (done) {
+        this.authResponseMock.get201Response('TICKET_22d7a5a83d78b9cc9666ec4e412475e5455b33bd');
+        this.alfrescoJsApi = new alfresco.AlfrescoApi({
+          username: 'admin',
+          password: 'admin',
+          host: 'http://192.168.99.100:8080'
+        });
+
+        this.alfrescoJsApi.login().then((data) => {
+          done();
+        });
       });
 
-      this.alfrescoJsApi.login().then((data) => {
-        done();
+      it('Ticket should be absent in the client and the resolve promise should be called', function (done) {
+        this.authResponseMock.get204ResponseLogout();
+
+        this.alfrescoJsApi.logout().then((data)=> {
+          expect(this.alfrescoJsApi.config.ticket).to.be.equal(undefined);
+          expect(data).to.be.equal('logout');
+          done();
+        }, function () {
+                });
       });
-    });
 
-    it('Ticket should be absent in the client and the resolve promise should be called', function (done) {
-      this.authResponseMock.get204ResponseLogout();
-
-      this.alfrescoJsApi.logout().then((data)=> {
-        expect(this.alfrescoJsApi.config.ticket).to.be.equal(undefined);
-        expect(data).to.be.equal('logout');
-        done();
-      }, function () {
-            });
-    });
-
-    it('Logout should be rejected if the Ticket is already expired', function (done) {
-      this.authResponseMock.get404ResponseLogout();
-      this.alfrescoJsApi.logout().then(() => {
-      }, (error) => {
-        expect(error).to.be.equal('error[Error: Not Found]');
-        done();
+      it('Logout should be rejected if the Ticket is already expired', function (done) {
+        this.authResponseMock.get404ResponseLogout();
+        this.alfrescoJsApi.logout().then(() => {
+        }, (error) => {
+          expect(error.error.toString()).to.be.equal('Error: Not Found');
+          done();
+        });
       });
     });
   });

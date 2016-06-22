@@ -1,8 +1,10 @@
 'use strict';
 
-var AlfrescoCoreRestApi = require('../alfresco-core-rest-api/src/index.js');
 var AlfrescoAuthRestApi = require('../alfresco-auth-rest-api/src/index.js');
+var AlfrescoApiClient = require('./alfrescoApiClient.js');
 var alfrescoContent = require('./alfrescoContent.js');
+var EventEmitter = require('events').EventEmitter;
+var util = require('util');
 
 class AlfrescoApi {
     /**
@@ -34,7 +36,11 @@ class AlfrescoApi {
      * @returns {ApiClient} Alfresco API Client
      * */
     createClient() {
-      this.alfrescoClient = new AlfrescoCoreRestApi.ApiClient();
+      this.alfrescoClient = new AlfrescoApiClient();
+
+      this.alfrescoClient.on('unauthorized', (event)  => {
+        this.emit('unauthorized');
+      });
       return this.alfrescoClient;
     }
 
@@ -77,6 +83,7 @@ class AlfrescoApi {
 
       return new Promise((resolve, reject) => {
         apiInstance.createTicket(loginRequest).then((data) => {
+          this.emit('success');
           this.config.ticket = data.entry.id;
           resolve(data.entry.id);
         }, function (error) {
@@ -102,7 +109,6 @@ class AlfrescoApi {
       });
     }
 
-    ///////
     /**
      * Get thumbnail URL for the given documentId
      *
@@ -123,4 +129,5 @@ class AlfrescoApi {
 
 }
 
+util.inherits(AlfrescoApi, EventEmitter);
 module.exports = AlfrescoApi;

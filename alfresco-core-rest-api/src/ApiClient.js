@@ -373,9 +373,9 @@
       request.end(function(error, response) {
           if (error) {
               if(response && response.text){
-                  reject('error[' + error + '] message[' + response.text + ']');
+                  reject({error: error, message :response.text });
               } else {
-                  reject('error[' + error + ']');
+                  reject({error: error });
               }
         } else {
           var data = _this.deserialize(response, returnType);

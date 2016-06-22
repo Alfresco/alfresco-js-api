@@ -84,6 +84,25 @@ this.alfrescoJsApi.logout().then(function (data) {
 
 ```
 
+#  Events
+
+>  The AlfrescoApi is also an EventEmitter that you can register to listen to any of the following event types:
+* unauthorized (If this event is triggered a call to the Api was unauthorized)
+* success (If this event is triggered the login was success you can use this event instead the login promise)
+
+```javascript
+
+this.alfrescoJsApi.on('unauthorized', function(){
+    console.log('You are unauthorized you can use this event to redirect to login');
+});
+
+this.alfrescoJsApi.on('success', function(){
+    console.log('Success Login');
+});
+
+```
+
+
 #  Get thumbnail Url
   
 >  getDocumentThumbnailUrl(documentId);
@@ -121,6 +140,7 @@ var thumbnailUrl = this.alfrescoJsApi.getContentUrl('1a0b110f-1e09-4ca2-b367-fe2
 
 
 ## Release History
+
 
  * 2016-06-16  v1.0.1  Test and task runner Added 
  * 2016-06-03  v1.0.0  
