@@ -40,7 +40,6 @@ describe('Auth', function () {
             });
 
             this.alfrescoJsApi.login().then(() => {
-                console.log('this.alfrescoJsApi.isLoggedIn()' + this.alfrescoJsApi.isLoggedIn());
                 expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(true);
                 done();
             }, function () {
@@ -187,7 +186,7 @@ describe('Auth', function () {
                     host: 'http://192.168.99.100:8080'
                 });
 
-                this.alfrescoJsApi.login().then((data) => {
+                this.alfrescoJsApi.login().then(() => {
                     done();
                 });
             });

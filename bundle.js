@@ -21929,9 +21929,10 @@ function hasOwnProperty(obj, prop) {
 },{"./support/isBuffer":148,"_process":145,"inherits":144}],150:[function(require,module,exports){
 'use strict';
 
-var AlfrescoAuthRestApi = require('../alfresco-auth-rest-api/src/index.js');
-var AlfrescoApiClient = require('./alfrescoApiClient.js');
-var alfrescoContent = require('./alfrescoContent.js');
+var AlfrescoAuthRestApi = require('../alfresco-auth-rest-api/src/index');
+var AlfrescoApiClient = require('./alfrescoApiClient');
+var alfrescoContent = require('./alfrescoContent');
+var AlfrescoNodeApi = require('./alfrescoNodeApi');
 var EventEmitter = require('events').EventEmitter;
 var util = require('util');
 
@@ -21947,17 +21948,17 @@ class AlfrescoApi {
      *    };
      */
     constructor(config) {
-      this.config = {
-        host: config.host,
-        username: config.username,
-        password: config.password,
-        ticket: config.ticket
-      };
+        this.config = {
+            host: config.host,
+            username: config.username,
+            password: config.password,
+            ticket: config.ticket
+        };
 
-      this.apiAuthUrl = this.config.host + '/alfresco/api/-default-/public/authentication/versions/1'; //Auth Call
-      this.apiCoreUrl = this.config.host + '/alfresco/api/-default-/public/alfresco/versions/1';   //Core Call
+        this.apiAuthUrl = this.config.host + '/alfresco/api/-default-/public/authentication/versions/1'; //Auth Call
+        this.apiCoreUrl = this.config.host + '/alfresco/api/-default-/public/alfresco/versions/1';   //Core Call
 
-      this.createClient();
+        this.createClient();
     }
 
     /**
@@ -21965,12 +21966,12 @@ class AlfrescoApi {
      * @returns {ApiClient} Alfresco API Client
      * */
     createClient() {
-      this.alfrescoClient = new AlfrescoApiClient();
+        this.alfrescoClient = new AlfrescoApiClient();
 
-      this.alfrescoClient.on('unauthorized', (event)  => {
-        this.emit('unauthorized');
-      });
-      return this.alfrescoClient;
+        this.alfrescoClient.on('unauthorized', (event)  => {
+            this.emit('unauthorized');
+        });
+        return this.alfrescoClient;
     }
 
     /**
@@ -21978,12 +21979,12 @@ class AlfrescoApi {
      * @returns {ApiClient} Alfresco API Client
      * */
     getClient() {
-      if (this.alfrescoClient) {
-        this.alfrescoClient.basePath = this.apiCoreUrl;
-        this.alfrescoClient.authentications.basicAuth.username = 'ROLE_TICKET';
-        this.alfrescoClient.authentications.basicAuth.password = this.config.ticket;
-        return this.alfrescoClient;
-      }
+        if (this.alfrescoClient) {
+            this.alfrescoClient.basePath = this.apiCoreUrl;
+            this.alfrescoClient.authentications.basicAuth.username = 'ROLE_TICKET';
+            this.alfrescoClient.authentications.basicAuth.password = this.config.ticket;
+            return this.alfrescoClient;
+        }
     }
 
     /**
@@ -21991,12 +21992,12 @@ class AlfrescoApi {
      * @returns {ApiClient} Alfresco API Client
      * */
     getClientAuth() {
-      if (this.alfrescoClient) {
-        this.alfrescoClient.basePath = this.apiAuthUrl;
-        this.alfrescoClient.authentications.basicAuth.username = 'ROLE_TICKET';
-        this.alfrescoClient.authentications.basicAuth.password = this.config.ticket;
-        return this.alfrescoClient;
-      }
+        if (this.alfrescoClient) {
+            this.alfrescoClient.basePath = this.apiAuthUrl;
+            this.alfrescoClient.authentications.basicAuth.username = 'ROLE_TICKET';
+            this.alfrescoClient.authentications.basicAuth.password = this.config.ticket;
+            return this.alfrescoClient;
+        }
     }
 
     /**
@@ -22004,21 +22005,21 @@ class AlfrescoApi {
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
     login() {
-      var apiInstance = new AlfrescoAuthRestApi.AuthenticationApi(this.getClientAuth());
-      var loginRequest = new AlfrescoAuthRestApi.LoginRequest();
+        var apiInstance = new AlfrescoAuthRestApi.AuthenticationApi(this.getClientAuth());
+        var loginRequest = new AlfrescoAuthRestApi.LoginRequest();
 
-      loginRequest.userId = this.config.username;
-      loginRequest.password = this.config.password;
+        loginRequest.userId = this.config.username;
+        loginRequest.password = this.config.password;
 
-      return new Promise((resolve, reject) => {
-        apiInstance.createTicket(loginRequest).then((data) => {
-          this.emit('success');
-          this.config.ticket = data.entry.id;
-          resolve(data.entry.id);
-        }, function (error) {
-          reject(error);
+        return new Promise((resolve, reject) => {
+            apiInstance.createTicket(loginRequest).then((data) => {
+                this.emit('success');
+                this.config.ticket = data.entry.id;
+                resolve(data.entry.id);
+            }, function (error) {
+                reject(error);
+            });
         });
-      });
     }
 
     /**
@@ -22026,17 +22027,17 @@ class AlfrescoApi {
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
     logout() {
-      var apiInstance = new AlfrescoAuthRestApi.AuthenticationApi(this.getClientAuth());
+        var apiInstance = new AlfrescoAuthRestApi.AuthenticationApi(this.getClientAuth());
 
-      return new Promise((resolve, reject) => {
-        apiInstance.deleteTicket().then((data) => {
-          this.emit('logout');
-          this.config.ticket = undefined;
-          resolve('logout');
-        }, function (error) {
-          reject(error);
+        return new Promise((resolve, reject) => {
+            apiInstance.deleteTicket().then((data) => {
+                this.emit('logout');
+                this.config.ticket = undefined;
+                resolve('logout');
+            }, function (error) {
+                reject(error);
+            });
         });
-      });
     }
 
     /**
@@ -22045,7 +22046,7 @@ class AlfrescoApi {
      * @returns {Boolean} is logged in
      */
     isLoggedIn() {
-      return !!this.config.ticket;
+        return !!this.config.ticket;
     }
 
     /**
@@ -22054,7 +22055,7 @@ class AlfrescoApi {
      * @param {String} documentId of the document
      */
     getDocumentThumbnailUrl(documentId) {
-      return alfrescoContent.getDocumentThumbnailUrl(documentId, this.apiCoreUrl, this.config.ticket);
+        return alfrescoContent.getDocumentThumbnailUrl(documentId, this.apiCoreUrl, this.config.ticket);
     }
 
     /**
@@ -22063,8 +22064,19 @@ class AlfrescoApi {
      * @param {String} documentId of the document
      */
     getContentUrl(documentId) {
-      return alfrescoContent.getContentUrl(documentId, this.apiCoreUrl, this.config.ticket);
+        return alfrescoContent.getContentUrl(documentId, this.apiCoreUrl, this.config.ticket);
     }
+
+    /**
+     * Get Info about file or folder by given nodeId
+     *
+     * @param {String} nodeId
+     */
+    getNodeInfo(nodeId) {
+        this.alfrescoNodeApi = new AlfrescoNodeApi(this.getClient());
+        return this.alfrescoNodeApi.getNodeInfo(nodeId);
+    }
+
 }
 
 AlfrescoApi.Core = require('../alfresco-core-rest-api/src/index.js');
@@ -22073,7 +22085,7 @@ AlfrescoApi.Auth = require('../alfresco-auth-rest-api/src/index.js');
 util.inherits(AlfrescoApi, EventEmitter);
 module.exports = AlfrescoApi;
 
-},{"../alfresco-auth-rest-api/src/index.js":3,"../alfresco-core-rest-api/src/index.js":26,"./alfrescoApiClient.js":151,"./alfrescoContent.js":152,"events":142,"util":149}],151:[function(require,module,exports){
+},{"../alfresco-auth-rest-api/src/index":3,"../alfresco-auth-rest-api/src/index.js":3,"../alfresco-core-rest-api/src/index.js":26,"./alfrescoApiClient":151,"./alfrescoContent":152,"./alfrescoNodeApi":153,"events":142,"util":149}],151:[function(require,module,exports){
 'use strict';
 var util = require('util');
 var EventEmitter = require('events').EventEmitter;
@@ -22082,26 +22094,26 @@ var ApiClient = require('../alfresco-core-rest-api/src/ApiClient');
 class AlfrescoApiClient extends ApiClient {
 
     constructor() {
-      super();
+        super();
     }
 
     callApi(path, httpMethod, pathParams,
             queryParams, headerParams, formParams, bodyParam, authNames, contentTypes, accepts,
             returnType) {
 
-      return new Promise((resolve, reject) => {
-        super.callApi(path, httpMethod, pathParams,
-            queryParams, headerParams, formParams, bodyParam, authNames, contentTypes, accepts,
-            returnType).
+        return new Promise((resolve, reject) => {
+            super.callApi(path, httpMethod, pathParams,
+                queryParams, headerParams, formParams, bodyParam, authNames, contentTypes, accepts,
+                returnType).
             then((data) => {
-              resolve(data);
+                resolve(data);
             }, (error)  => {
-              if (error.error.status === 401) {
-                this.emit('unauthorized');
-              }
-              reject(error);
+                if (error.error.status === 401) {
+                    this.emit('unauthorized');
+                }
+                reject(error);
             });
-      });
+        });
     }
 }
 
@@ -22122,8 +22134,8 @@ class AlfrescoContent {
      * @returns {String} URL address.
      */
     static getDocumentThumbnailUrl(documentId, apiBaseUrl, ticket) {
-      return apiBaseUrl + '/nodes/' + documentId +
-          '/renditions/doclib/content' + '?attachment=false&alf_ticket=' + ticket;
+        return apiBaseUrl + '/nodes/' + documentId +
+            '/renditions/doclib/content' + '?attachment=false&alf_ticket=' + ticket;
     }
 
     /**
@@ -22135,11 +22147,41 @@ class AlfrescoContent {
      * @returns {String} URL address.
      */
     static getContentUrl(documentId, apiBaseUrl, ticket) {
-      return apiBaseUrl + '/nodes/' + documentId +
-          '/content' + '?attachment=false&alf_ticket=' + ticket;
+        return apiBaseUrl + '/nodes/' + documentId +
+            '/content' + '?attachment=false&alf_ticket=' + ticket;
     }
 }
 
 module.exports = AlfrescoContent;
 
-},{}]},{},[136]);
+},{}],153:[function(require,module,exports){
+'use strict';
+
+var AlfrescoCoreRestApi = require('../alfresco-core-rest-api/src/index.js');
+
+class AlfrescoNodeApi {
+
+    constructor(alfrescoClient) {
+        this.nodeApiInstance = new AlfrescoCoreRestApi.NodesApi(alfrescoClient);
+    }
+
+    /**
+     * Get Info about file or folder by given nodeId
+     *
+     * @param {String} nodeId
+     */
+    getNodeInfo(nodeId) {
+
+        return new Promise((resolve, reject) => {
+            this.nodeApiInstance.getNode(nodeId, null).then(function (data) {
+                resolve(data.entry);
+            }, function (error) {
+                reject(error);
+            });
+        });
+    }
+}
+
+module.exports = AlfrescoNodeApi;
+
+},{"../alfresco-core-rest-api/src/index.js":26}]},{},[136]);

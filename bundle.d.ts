@@ -123,6 +123,8 @@ export interface AlfrescoApi {
     getClient(): any;
     getClientAuth(): any;
 
+    getNodeInfo(nodeId: string): any;
+
     isLoggedIn(): boolean;
     login(): any;
     logout(): any;

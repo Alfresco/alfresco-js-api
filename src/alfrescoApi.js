@@ -1,8 +1,9 @@
 'use strict';
 
-var AlfrescoAuthRestApi = require('../alfresco-auth-rest-api/src/index.js');
-var AlfrescoApiClient = require('./alfrescoApiClient.js');
-var alfrescoContent = require('./alfrescoContent.js');
+var AlfrescoAuthRestApi = require('../alfresco-auth-rest-api/src/index');
+var AlfrescoApiClient = require('./alfrescoApiClient');
+var alfrescoContent = require('./alfrescoContent');
+var AlfrescoNodeApi = require('./alfrescoNodeApi');
 var EventEmitter = require('events').EventEmitter;
 var util = require('util');
 
@@ -136,6 +137,17 @@ class AlfrescoApi {
     getContentUrl(documentId) {
         return alfrescoContent.getContentUrl(documentId, this.apiCoreUrl, this.config.ticket);
     }
+
+    /**
+     * Get Info about file or folder by given nodeId
+     *
+     * @param {String} nodeId
+     */
+    getNodeInfo(nodeId) {
+        this.alfrescoNodeApi = new AlfrescoNodeApi(this.getClient());
+        return this.alfrescoNodeApi.getNodeInfo(nodeId);
+    }
+
 }
 
 AlfrescoApi.Core = require('../alfresco-core-rest-api/src/index.js');

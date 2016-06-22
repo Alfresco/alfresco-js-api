@@ -100,7 +100,6 @@ if (isLoggedIn) {
 
 ```
 
-
 #  Events
 
 >  The AlfrescoApi is also an EventEmitter that you can register to listen to any of the following event types:
@@ -123,6 +122,20 @@ this.alfrescoJsApi.on('logout', function(){
 });
 ```
 
+#  Get File or Folder Info
+Get information for the File/Folder with the identifier nodeId.
+
+```javascript
+
+var fileOrFolderId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
+
+this.alfrescoJsApi.getNodeInfo(fileOrFolderId).then(function (data) {
+    console.log('This is the name' + data.name );    
+}, function (error) {
+    console.log('This node does not exist');
+});
+
+```
 
 #  Get thumbnail Url
   
