@@ -13,8 +13,8 @@ This project provides a JavaScript client API into the v1 Alfresco REST API.
 
 ## Api Modules
 
-- [Authentication API](https://github.com/Alfresco/dev-platform-js-api/tree/master/alfresco-auth-rest-api)
-- [Core API](https://github.com/Alfresco/dev-platform-js-api/tree/master/alfresco-core-rest-api)
+- [Authentication API](https://github.com/Alfresco/alfresco-js-api/tree/master/src/alfresco-auth-rest-api)
+- [Core API](https://github.com/Alfresco/alfresco-js-api/tree/master/src/alfresco-core-rest-api)
 
 ## installation
 
