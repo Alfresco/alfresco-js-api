@@ -1,7 +1,7 @@
 'use strict';
 var util = require('util');
 var EventEmitter = require('events').EventEmitter;
-var ApiClient = require('../alfresco-core-rest-api/src/ApiClient');
+var ApiClient = require('./alfresco-core-rest-api/src/ApiClient');
 
 class AlfrescoApiClient extends ApiClient {
 

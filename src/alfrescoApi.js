@@ -1,6 +1,6 @@
 'use strict';
 
-var AlfrescoAuthRestApi = require('../alfresco-auth-rest-api/src/index');
+var AlfrescoAuthRestApi = require('./alfresco-auth-rest-api/src/index');
 var AlfrescoApiClient = require('./alfrescoApiClient');
 var alfrescoContent = require('./alfrescoContent');
 var AlfrescoNodeApi = require('./alfrescoNodeApi');
@@ -174,8 +174,8 @@ class AlfrescoApi {
 
 }
 
-AlfrescoApi.Core = require('../alfresco-core-rest-api/src/index.js');
-AlfrescoApi.Auth = require('../alfresco-auth-rest-api/src/index.js');
+AlfrescoApi.Core = require('./alfresco-core-rest-api/src/index.js');
+AlfrescoApi.Auth = require('./alfresco-auth-rest-api/src/index.js');
 
 util.inherits(AlfrescoApi, EventEmitter);
 module.exports = AlfrescoApi;
