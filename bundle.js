@@ -21963,6 +21963,7 @@ class AlfrescoApi {
 
     /**
      * return an Alfresco API Client
+     *
      * @returns {ApiClient} Alfresco API Client
      * */
     createClient() {
@@ -21976,6 +21977,7 @@ class AlfrescoApi {
 
     /**
      * return an Alfresco API Client
+     *
      * @returns {ApiClient} Alfresco API Client
      * */
     getClient() {
@@ -21989,6 +21991,7 @@ class AlfrescoApi {
 
     /**
      * return an Alfresco API Client
+     *
      * @returns {ApiClient} Alfresco API Client
      * */
     getClientAuth() {
@@ -22002,6 +22005,7 @@ class AlfrescoApi {
 
     /**
      * login Alfresco API
+     *
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
     login() {
@@ -22024,6 +22028,7 @@ class AlfrescoApi {
 
     /**
      * logout Alfresco API
+     *
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
     logout() {
@@ -22053,6 +22058,8 @@ class AlfrescoApi {
      * Get thumbnail URL for the given documentId
      *
      * @param {String} documentId of the document
+     *
+     * @returns {String} thumbnail URL address.
      */
     getDocumentThumbnailUrl(documentId) {
         return alfrescoContent.getDocumentThumbnailUrl(documentId, this.apiCoreUrl, this.config.ticket);
@@ -22062,6 +22069,8 @@ class AlfrescoApi {
      * Get content URL for the given documentId
      *
      * @param {String} documentId of the document
+     *
+     * @returns {String}  content URL  address.
      */
     getContentUrl(documentId) {
         return alfrescoContent.getContentUrl(documentId, this.apiCoreUrl, this.config.ticket);
@@ -22071,10 +22080,25 @@ class AlfrescoApi {
      * Get Info about file or folder by given nodeId
      *
      * @param {String} nodeId
+     *
+     * @returns {Promise} A promise that return the file/folder data if resolved and {error} if rejected.
      */
     getNodeInfo(nodeId) {
         this.alfrescoNodeApi = new AlfrescoNodeApi(this.getClient());
         return this.alfrescoNodeApi.getNodeInfo(nodeId);
+    }
+
+    /**
+     * Delete node by ID, If the nodeId is a folder, then its children are also
+     * Deleted nodes move to the trashcan
+     *
+     * @param {String} nodeId
+     *
+     * @returns {Promise} A promise that is resolved if the file si deleted and {error} if rejected.
+     */
+    deleteNode(nodeId) {
+        this.alfrescoNodeApi = new AlfrescoNodeApi(this.getClient());
+        return this.alfrescoNodeApi.deleteNode(nodeId);
     }
 
 }
@@ -22131,7 +22155,8 @@ class AlfrescoContent {
      * @param {String} documentId of the document
      * @param {String} apiBaseUrl
      * @param {String} ticket auth
-     * @returns {String} URL address.
+     *
+     * @returns {String} thumbnail URL address.
      */
     static getDocumentThumbnailUrl(documentId, apiBaseUrl, ticket) {
         return apiBaseUrl + '/nodes/' + documentId +
@@ -22144,7 +22169,8 @@ class AlfrescoContent {
      * @param {String} documentId of the document
      * @param {String} apiBaseUrl
      * @param {String} ticket auth
-     * @returns {String} URL address.
+     *
+     * @returns {String}  content URL  address.
      */
     static getContentUrl(documentId, apiBaseUrl, ticket) {
         return apiBaseUrl + '/nodes/' + documentId +
@@ -22169,12 +22195,31 @@ class AlfrescoNodeApi {
      * Get Info about file or folder by given nodeId
      *
      * @param {String} nodeId
+     *
+     * @returns {Promise} A promise that return the file/folder data if resolved and {error} if rejected.
      */
     getNodeInfo(nodeId) {
-
         return new Promise((resolve, reject) => {
             this.nodeApiInstance.getNode(nodeId, null).then(function (data) {
                 resolve(data.entry);
+            }, function (error) {
+                reject(error);
+            });
+        });
+    }
+
+    /**
+     * Delete node by ID, If the nodeId is a folder, then its children are also
+     * Deleted nodes move to the trashcan
+     *
+     * @param {String} nodeId
+     *
+     * @returns {Promise} A promise that is resolved if the file si deleted and {error} if rejected.
+     */
+    deleteNode(nodeId) {
+        return new Promise((resolve, reject) => {
+            this.nodeApiInstance.deleteNode(nodeId, null).then(function (data) {
+                resolve(data);
             }, function (error) {
                 reject(error);
             });
