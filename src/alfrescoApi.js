@@ -165,11 +165,24 @@ class AlfrescoApi {
      *
      * @param {String} nodeId
      *
-     * @returns {Promise} A promise that is resolved if the file si deleted and {error} if rejected.
+     * @returns {Promise} A promise that is resolved if the file is deleted and {error} if rejected.
      */
     deleteNode(nodeId) {
         this.alfrescoNodeApi = new AlfrescoNodeApi(this.getClient());
         return this.alfrescoNodeApi.deleteNode(nodeId);
+    }
+
+    /**
+     * Delete node by ID, If the nodeId is a folder, then its children are also
+     * Deleted permanent will not be possible recover it
+     *
+     * @param {String} nodeId
+     *
+     * @returns {Promise} A promise that is resolved if the file is deleted and {error} if rejected.
+     */
+    deleteNodePermanent(nodeId) {
+        this.alfrescoNodeApi = new AlfrescoNodeApi(this.getClient());
+        return this.alfrescoNodeApi.deleteNode(nodeId, {permanent: true});
     }
 
 }

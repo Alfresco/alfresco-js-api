@@ -31,11 +31,11 @@ class AlfrescoNodeApi {
      *
      * @param {String} nodeId
      *
-     * @returns {Promise} A promise that is resolved if the file si deleted and {error} if rejected.
+     * @returns {Promise} A promise that is resolved if the file is deleted and {error} if rejected.
      */
-    deleteNode(nodeId) {
+    deleteNode(nodeId, opts) {
         return new Promise((resolve, reject) => {
-            this.nodeApiInstance.deleteNode(nodeId, null).then(function (data) {
+            this.nodeApiInstance.deleteNode(nodeId, opts).then(function (data) {
                 resolve(data);
             }, function (error) {
                 reject(error);

@@ -123,7 +123,7 @@ this.alfrescoJsApi.on('logout', function(){
 ```
 
 #  Get File or Folder Info
-> Get information for the File/Folder with the identifier nodeId.
+> getNodeInfo(fileOrFolderId); Get information for the File/Folder with the identifier nodeId.
 
 ```javascript
 
@@ -138,7 +138,7 @@ this.alfrescoJsApi.getNodeInfo(fileOrFolderId).then(function (data) {
 ```
 
 #  Delete File or Folder
-> Delete File/Folder with the identifier nodeId, if the nodeId is a folder, then its children are also deleted
+> deleteNode(fileOrFolderId); Delete File/Folder with the identifier nodeId, if the nodeId is a folder, then its children are also deleted
 Deleted nodes move to the trash bin is still possible to recover it
      
 ```javascript
@@ -146,6 +146,22 @@ Deleted nodes move to the trash bin is still possible to recover it
 var fileOrFolderId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
 
 this.alfrescoJsApi.deleteNode(fileOrFolderId).then(function (data) {
+    console.log('The file/folder is deleted');    
+}, function (error) {
+    console.log('This node does not exist');
+});
+
+```
+
+#  Delete File or Folder Permanent
+> deleteNodePermanent(fileOrFolderId); Delete File/Folder with the identifier nodeId, if the nodeId is a folder, then its children are also deleted
+If Deleted Permanent is used will not be possible recover the files
+     
+```javascript
+
+var fileOrFolderId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
+
+this.alfrescoJsApi.deleteNodePermanent(fileOrFolderId).then(function (data) {
     console.log('The file/folder is deleted');    
 }, function (error) {
     console.log('This node does not exist');
@@ -162,7 +178,6 @@ this.alfrescoJsApi.deleteNode(fileOrFolderId).then(function (data) {
 var thumbnailUrl = this.alfrescoJsApi.getDocumentThumbnailUrl('1a0b110f-1e09-4ca2-b367-fe25e4964a4');
 
 ```
-
 
 #  Get content Url
   

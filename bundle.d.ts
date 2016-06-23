@@ -125,6 +125,7 @@ export interface AlfrescoApi {
 
     getNodeInfo(nodeId: string): any;
     deleteNode(nodeId: string): any;
+    deleteNodePermanent(nodeId: string): any;
 
     isLoggedIn(): boolean;
     login(): any;

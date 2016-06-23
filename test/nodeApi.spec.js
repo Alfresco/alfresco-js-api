@@ -60,7 +60,6 @@ describe('Alfresco Core Node Api', function () {
             this.alfrescoJsApi.deleteNode('80a94ac8-3ece-47ad-864e-5d939424c47c').then(function () {
                 done();
             }, function () {
-                done();
             });
         });
 
@@ -84,4 +83,33 @@ describe('Alfresco Core Node Api', function () {
         });
     });
 
+    describe('Delete Permanent', function () {
+        it('permanent delete the node with identifier nodeId', function (done) {
+            this.nodeChildrenMock.get204SuccessfullyDeleted();
+
+            this.alfrescoJsApi.deleteNodePermanent('80a94ac8-3ece-47ad-864e-5d939424c47c').then(function () {
+            }, function () {
+                done();
+            });
+        });
+
+        it('permanent delete the node with identifier nodeId should return 404 if the id is does not exist', function (done) {
+            this.nodeChildrenMock.get404DeletePermanentlyNotFound();
+
+            this.alfrescoJsApi.deleteNodePermanent('80a94ac8-3ece-47ad-864e-5d939424c47c').then(function () {
+            }, function (error) {
+                expect(error.error.toString()).to.be.equal('Error: Not Found');
+                done();
+            });
+        });
+
+        it('permanent delete the node with identifier nodeId should return 403 if current user does not have permission to delete', function (done) {
+            this.nodeChildrenMock.get403DeletePermissionDenied();
+
+            this.alfrescoJsApi.deleteNodePermanent('80a94ac8-3ece-47ad-864e-5d939424c47c').then(function () {
+            }, function () {
+                done();
+            });
+        });
+    });
 });
