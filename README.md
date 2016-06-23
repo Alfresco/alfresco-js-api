@@ -123,7 +123,7 @@ this.alfrescoJsApi.on('logout', function(){
 ```
 
 #  Get File or Folder Info
-Get information for the File/Folder with the identifier nodeId.
+> Get information for the File/Folder with the identifier nodeId.
 
 ```javascript
 
@@ -131,6 +131,22 @@ var fileOrFolderId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
 
 this.alfrescoJsApi.getNodeInfo(fileOrFolderId).then(function (data) {
     console.log('This is the name' + data.name );    
+}, function (error) {
+    console.log('This node does not exist');
+});
+
+```
+
+#  Delete File or Folder
+> Delete File/Folder with the identifier nodeId, if the nodeId is a folder, then its children are also deleted
+Deleted nodes move to the trash bin is still possible to recover it
+     
+```javascript
+
+var fileOrFolderId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
+
+this.alfrescoJsApi.deleteNode(fileOrFolderId).then(function (data) {
+    console.log('The file/folder is deleted');    
 }, function (error) {
     console.log('This node does not exist');
 });

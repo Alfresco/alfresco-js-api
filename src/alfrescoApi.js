@@ -148,6 +148,17 @@ class AlfrescoApi {
         return this.alfrescoNodeApi.getNodeInfo(nodeId);
     }
 
+    /**
+     * Delete node by ID, If the nodeId is a folder, then its children are also
+     * Deleted nodes move to the trashcan
+     *
+     * @param {String} nodeId
+     */
+    deleteNode(nodeId) {
+        this.alfrescoNodeApi = new AlfrescoNodeApi(this.getClient());
+        return this.alfrescoNodeApi.deleteNode(nodeId);
+    }
+
 }
 
 AlfrescoApi.Core = require('../alfresco-core-rest-api/src/index.js');

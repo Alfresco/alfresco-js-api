@@ -14,10 +14,25 @@ class AlfrescoNodeApi {
      * @param {String} nodeId
      */
     getNodeInfo(nodeId) {
-
         return new Promise((resolve, reject) => {
             this.nodeApiInstance.getNode(nodeId, null).then(function (data) {
                 resolve(data.entry);
+            }, function (error) {
+                reject(error);
+            });
+        });
+    }
+
+    /**
+     * Delete node by ID, If the nodeId is a folder, then its children are also
+     * Deleted nodes move to the trashcan
+     *
+     * @param {String} nodeId
+     */
+    deleteNode(nodeId) {
+        return new Promise((resolve, reject) => {
+            this.nodeApiInstance.deleteNode(nodeId, null).then(function (data) {
+                resolve(data);
             }, function (error) {
                 reject(error);
             });
