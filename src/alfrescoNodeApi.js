@@ -12,6 +12,8 @@ class AlfrescoNodeApi {
      * Get Info about file or folder by given nodeId
      *
      * @param {String} nodeId
+     *
+     * @returns {Promise} A promise that return the file/folder data if resolved and {error} if rejected.
      */
     getNodeInfo(nodeId) {
         return new Promise((resolve, reject) => {
@@ -28,6 +30,8 @@ class AlfrescoNodeApi {
      * Deleted nodes move to the trashcan
      *
      * @param {String} nodeId
+     *
+     * @returns {Promise} A promise that is resolved if the file si deleted and {error} if rejected.
      */
     deleteNode(nodeId) {
         return new Promise((resolve, reject) => {

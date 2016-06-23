@@ -8,7 +8,8 @@ class AlfrescoContent {
      * @param {String} documentId of the document
      * @param {String} apiBaseUrl
      * @param {String} ticket auth
-     * @returns {String} URL address.
+     *
+     * @returns {String} thumbnail URL address.
      */
     static getDocumentThumbnailUrl(documentId, apiBaseUrl, ticket) {
         return apiBaseUrl + '/nodes/' + documentId +
@@ -21,7 +22,8 @@ class AlfrescoContent {
      * @param {String} documentId of the document
      * @param {String} apiBaseUrl
      * @param {String} ticket auth
-     * @returns {String} URL address.
+     *
+     * @returns {String}  content URL  address.
      */
     static getContentUrl(documentId, apiBaseUrl, ticket) {
         return apiBaseUrl + '/nodes/' + documentId +

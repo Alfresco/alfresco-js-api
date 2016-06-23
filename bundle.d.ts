@@ -124,6 +124,7 @@ export interface AlfrescoApi {
     getClientAuth(): any;
 
     getNodeInfo(nodeId: string): any;
+    deleteNode(nodeId: string): any;
 
     isLoggedIn(): boolean;
     login(): any;
