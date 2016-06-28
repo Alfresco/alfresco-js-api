@@ -10,7 +10,8 @@
     "test": "grunt test",
     "coverage": "grunt coverage",
     "generate": "mvn clean generate-sources",
-    "bundle": "./node_modules/browserify/bin/cmd.js main.js -o dist/alfresco-js-api.js",
+    "bundle": "browserify -s AlfrescoApi main.js -o dist/alfresco-js-api.js",
+    "watchify": "watchify -s AlfrescoApi main.js -o dist/alfresco-js-api.js",
     "tslint": "tslint -c tslint.json bundle.d.ts"
   },
   "repository": {
@@ -25,8 +26,8 @@
   },
   "devDependencies": {
     "browserify": "^13.0.1",
-    "expect.js": "~0.3.1",
     "chai": "^3.5.0",
+    "expect.js": "~0.3.1",
     "grunt": "~0.4.0",
     "grunt-cli": "^1.1.0",
     "grunt-contrib-jshint": "^1.0.0",
@@ -44,7 +45,8 @@
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
     "tslint": "^3.8.1",
-    "typescript": "^1.8.10"
+    "typescript": "^1.8.10",
+    "watchify": "^3.7.0"
   },
   "license": "Apache-2.0",
   "contributors": [

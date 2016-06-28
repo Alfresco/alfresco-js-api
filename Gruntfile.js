@@ -7,7 +7,7 @@ var LIVERELOAD_PORT = 35742;
 module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
 
-    var alarm = {
+    var alfrescoApi = {
         app: 'app',
         src: 'src',
         livereloadPort: LIVERELOAD_PORT,
@@ -17,10 +17,10 @@ module.exports = function (grunt) {
     var options = ['jshint', 'jscs', 'mochaTest', 'coveralls', 'mocha_istanbul'];
 
     grunt.config.init(options.reduce(function (accumulator, val) {
-        accumulator[val] = (require('./grunt/' + val + '.js'))(accumulator.alarm, grunt);
+        accumulator[val] = (require('./grunt/' + val + '.js'))(accumulator.alfrescoApi, grunt);
         return accumulator;
     }, {
-        alarm: alarm
+        alfrescoApi: alfrescoApi
     }));
 
     grunt.event.on('coverage', function (lcov, done) {
