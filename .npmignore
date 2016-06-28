@@ -2,7 +2,6 @@
 /Gruntfile.js
 /grunt
 /coverage
-pom.xml
 /node_modules
 /.travis.yml
 /.jscsrc
@@ -11,3 +10,5 @@ pom.xml
 /build.sh
 /tslint.json
 /pom.xml
+/alfresco-core-rest-api.iml
+/.idea

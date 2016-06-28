@@ -56,7 +56,7 @@ this.alfrescoJsApi = new AlfrescoApi({ username:'admin', password:'admin', host:
 this.alfrescoJsApi.login().then(function (data) {
     console.log('API called successfully Login ticket:' + data);
 }, function (error) {
-  console.error(error);
+    console.error(error);
 });
 
 //The output will be: API called successfully Login ticket: TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1
