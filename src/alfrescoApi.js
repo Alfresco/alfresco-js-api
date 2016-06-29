@@ -3,9 +3,9 @@
 var AlfrescoAuthRestApi = require('./alfresco-auth-rest-api/src/index');
 var AlfrescoApiClient = require('./alfrescoApiClient');
 var alfrescoContent = require('./alfrescoContent');
-var AlfrescoNodeApi = require('./alfrescoNodeApi');
-var EventEmitter = require('events').EventEmitter;
-var util = require('util');
+var AlfrescoNode = require('./AlfrescoNode');
+//var EventEmitter = require('events').EventEmitter;
+//var util = require('util');
 
 class AlfrescoApi {
     /**
@@ -40,10 +40,29 @@ class AlfrescoApi {
     createClient() {
         this.alfrescoClient = new AlfrescoApiClient();
 
-        this.alfrescoClient.on('unauthorized', (event)  => {
-            this.emit('unauthorized');
-        });
+        //this.alfrescoClient.on('unauthorized', (event)  => {
+        //    this.emit('unauthorized');
+        //});
         return this.alfrescoClient;
+    }
+
+    /**
+     * @param {Object} config
+     *
+     *      config = {
+     *        host:       // alfrescoHost Your share server IP or DNS name
+     *        username:   // Username to login in share
+     *        password:   // Password to login in share
+     *        ticket:     // Ticket if you already have a ticket you can pass only the ticket and skip the login, in this case you don't need username and password
+     *    };
+     * */
+    changeConfig(config) {
+        this.config = {
+            host: config.host,
+            username: config.username,
+            password: config.password,
+            ticket: config.ticket
+        };
     }
 
     /**
@@ -88,7 +107,7 @@ class AlfrescoApi {
 
         return new Promise((resolve, reject) => {
             apiInstance.createTicket(loginRequest).then((data) => {
-                this.emit('success');
+                //this.emit('success');
                 this.config.ticket = data.entry.id;
                 resolve(data.entry.id);
             }, function (error) {
@@ -107,7 +126,7 @@ class AlfrescoApi {
 
         return new Promise((resolve, reject) => {
             apiInstance.deleteTicket().then((data) => {
-                this.emit('logout');
+                //this.emit('logout');
                 this.config.ticket = undefined;
                 resolve('logout');
             }, function (error) {
@@ -149,14 +168,31 @@ class AlfrescoApi {
 
     /**
      * Get Info about file or folder by given nodeId
+     * Minimal information for each child is returned by default.
+     * You can use the include parameter to return addtional information.
      *
      * @param {String} nodeId
      *
      * @returns {Promise} A promise that return the file/folder data if resolved and {error} if rejected.
      */
     getNodeInfo(nodeId) {
-        this.alfrescoNodeApi = new AlfrescoNodeApi(this.getClient());
+        this.alfrescoNodeApi = new AlfrescoNode(this.getClient());
         return this.alfrescoNodeApi.getNodeInfo(nodeId);
+    }
+
+    /**
+     * Get Info about the children of the node with identifier nodeId.
+     * Minimal information for each child is returned by default.
+     * You can use the include parameter to return addtional information.
+     *
+     * @param {String} nodeId
+     * @param {Object} opts
+     *
+     * @returns {Promise} A promise that return the Info about the children of the node if resolved and {error} if rejected.
+     */
+    getNodeChildrenInfo(nodeId, opts) {
+        this.alfrescoNodeApi = new AlfrescoNode(this.getClient());
+        return this.alfrescoNodeApi.getNodeChildrenInfo(nodeId, opts);
     }
 
     /**
@@ -168,7 +204,7 @@ class AlfrescoApi {
      * @returns {Promise} A promise that is resolved if the file is deleted and {error} if rejected.
      */
     deleteNode(nodeId) {
-        this.alfrescoNodeApi = new AlfrescoNodeApi(this.getClient());
+        this.alfrescoNodeApi = new AlfrescoNode(this.getClient());
         return this.alfrescoNodeApi.deleteNode(nodeId);
     }
 
@@ -181,7 +217,7 @@ class AlfrescoApi {
      * @returns {Promise} A promise that is resolved if the file is deleted and {error} if rejected.
      */
     deleteNodePermanent(nodeId) {
-        this.alfrescoNodeApi = new AlfrescoNodeApi(this.getClient());
+        this.alfrescoNodeApi = new AlfrescoNode(this.getClient());
         return this.alfrescoNodeApi.deleteNode(nodeId, {permanent: true});
     }
 
@@ -189,6 +225,7 @@ class AlfrescoApi {
 
 AlfrescoApi.Core = require('./alfresco-core-rest-api/src/index.js');
 AlfrescoApi.Auth = require('./alfresco-auth-rest-api/src/index.js');
+AlfrescoApi.Mock = require('../test/mockObjects/mockAlfrescoApi.js');
 
-util.inherits(AlfrescoApi, EventEmitter);
+//util.inherits(AlfrescoApi, EventEmitter);
 module.exports = AlfrescoApi;

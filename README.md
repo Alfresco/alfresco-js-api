@@ -140,6 +140,24 @@ this.alfrescoJsApi.getNodeInfo(fileOrFolderId).then(function (data) {
 
 ```
 
+#  Get Folder Children Info
+> getNodeChildrenInfo(fileOrFolderId, opts)
+Minimal information for each child is returned by default.
+You can use the include parameter to return addtional information.
+returns a promise with the Info about the children of the node if resolved and {error} if rejected.
+  
+```javascript
+
+var folderNodeId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
+
+this.alfrescoJsApi.getNodeChildrenInfo(folderNodeId).then(function (data) {
+    console.log('The number of children in this folder are ' + data.pagination.count );    
+}, function (error) {
+    console.log('This node does not exist');
+});
+
+```
+
 #  Delete File or Folder
 > deleteNode(fileOrFolderId); Delete File/Folder with the identifier nodeId, if the nodeId is a folder, then its children are also deleted
 Deleted nodes move to the trash bin is still possible to recover it

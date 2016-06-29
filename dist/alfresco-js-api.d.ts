@@ -104,6 +104,11 @@ interface Core {
 interface Auth {
 }
 
+interface Mock {
+    Auth : any;
+    node: any;
+}
+
 interface NodesApi {
     new(client: ApiClient): NodesApi;
     getNodeChildren(nodeId: string, opts: any): NodePaging;
@@ -118,12 +123,15 @@ export interface AlfrescoApi {
 
     Auth: Auth;
     Core: Core;
+    Mock: Mock;
 
     createClient(): any;
     getClient(): any;
     getClientAuth(): any;
+    changeConfig(config: any);
 
     getNodeInfo(nodeId: string): any;
+    getNodeChildrenInfo(nodeId: string, opts:any): any;
     deleteNode(nodeId: string): any;
     deleteNodePermanent(nodeId: string): any;
 

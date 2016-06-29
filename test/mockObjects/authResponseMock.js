@@ -4,11 +4,15 @@ var nock = require('nock');
 
 class AuthResponseMock {
 
+    constructor(config) {
+        this.host = (config && config.host) ? config.host : 'http://192.168.99.100:8080';
+    }
+
     get201Response(forceTicket) {
 
         var returnMockTicket = forceTicket || 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
 
-        nock('http://192.168.99.100:8080', {'encodedQueryParams': true})
+        nock(this.host, {'encodedQueryParams': true})
             .post('/alfresco/api/-default-/public/authentication/versions/1/tickets', {
                 'userId': 'admin',
                 'password': 'admin'
@@ -17,7 +21,7 @@ class AuthResponseMock {
     }
 
     get403Response() {
-        nock('http://192.168.99.100:8080', {'encodedQueryParams': true})
+        nock(this.host, {'encodedQueryParams': true})
             .post('/alfresco/api/-default-/public/authentication/versions/1/tickets', {
                 'userId': 'wrong',
                 'password': 'name'
@@ -35,7 +39,7 @@ class AuthResponseMock {
 
     get400Response() {
 
-        nock('http://192.168.99.100:8080', {'encodedQueryParams': true})
+        nock(this.host, {'encodedQueryParams': true})
             .post('/alfresco/api/-default-/public/authentication/versions/1/tickets', {
                 'userId': null,
                 'password': null
@@ -53,7 +57,7 @@ class AuthResponseMock {
     }
 
     get401Response() {
-        nock('http://192.168.99.100:8080', {'encodedQueryParams': true})
+        nock(this.host, {'encodedQueryParams': true})
             .post('/alfresco/api/-default-/public/authentication/versions/1/tickets', {
                 'userId': null,
                 'password': null
@@ -71,13 +75,13 @@ class AuthResponseMock {
     }
 
     get204ResponseLogout() {
-        nock('http://192.168.99.100:8080', {'encodedQueryParams': true})
+        nock(this.host, {'encodedQueryParams': true})
             .delete('/alfresco/api/-default-/public/authentication/versions/1/tickets/-me-')
             .reply(204, '');
     }
 
     get404ResponseLogout() {
-        nock('http://192.168.99.100:8080', {'encodedQueryParams': true})
+        nock(this.host, {'encodedQueryParams': true})
             .delete('/alfresco/api/-default-/public/authentication/versions/1/tickets/-me-')
             .reply(404, '');
     }

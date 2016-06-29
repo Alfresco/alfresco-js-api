@@ -3,13 +3,11 @@
 var AlfrescoApi = require('../main');
 var expect = require('chai').expect;
 var AuthResponseMock = require('../test/mockObjects/authResponseMock');
-var NodeChildrenMock = require('../test/mockObjects/nodeChildrenMock');
 
 describe('Alfresco Content', function () {
 
     beforeEach(function (done) {
         this.authResponseMock = new AuthResponseMock();
-        this.nodeChildrenMock = new NodeChildrenMock();
 
         this.authResponseMock.get201Response();
         this.alfrescoJsApi = new AlfrescoApi({

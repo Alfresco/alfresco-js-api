@@ -1,6 +1,6 @@
 'use strict';
-var util = require('util');
-var EventEmitter = require('events').EventEmitter;
+//var util = require('util');
+//var EventEmitter = require('events').EventEmitter;
 var ApiClient = require('./alfresco-core-rest-api/src/ApiClient');
 
 class AlfrescoApiClient extends ApiClient {
@@ -21,7 +21,7 @@ class AlfrescoApiClient extends ApiClient {
                 resolve(data);
             }, (error)  => {
                 if (error.error.status === 401) {
-                    this.emit('unauthorized');
+                    //this.emit('unauthorized');
                 }
                 reject(error);
             });
@@ -29,5 +29,5 @@ class AlfrescoApiClient extends ApiClient {
     }
 }
 
-util.inherits(ApiClient, EventEmitter);
+//util.inherits(ApiClient, EventEmitter);
 module.exports = AlfrescoApiClient;
