@@ -33,17 +33,17 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('default', 'Default build tasks', [
-      'jshint',
-      'jscs'
+        'jshint',
+        'jscs'
     ]);
 
     grunt.registerTask('test', 'Default build tasks', [
-      'default',
-      'mochaTest:test'
+        'default',
+        'mochaTest:test'
     ]);
 
     grunt.registerTask('coverage', 'Save coverage in coveralls', [
-      'mocha_istanbul:coveralls'
-     // 'coveralls'
+        'mocha_istanbul:coveralls',
+        'coveralls'
     ]);
 };
