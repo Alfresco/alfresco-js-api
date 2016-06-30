@@ -4,7 +4,11 @@ var AlfrescoApi = require('./src/alfrescoApi.js');
 
 module.exports = AlfrescoApi;
 
+<<<<<<< Updated upstream
 },{"./src/alfrescoApi.js":257}],2:[function(require,module,exports){
+=======
+},{"./src/alfrescoApi.js":258}],2:[function(require,module,exports){
+>>>>>>> Stashed changes
 // http://wiki.commonjs.org/wiki/Unit_Testing/1.0
 //
 // THIS IS NOT TESTED NOR LIKELY TO WORK OUTSIDE V8!
@@ -3071,6 +3075,7 @@ module.exports = function (chai, _) {
     );
   });
 
+<<<<<<< Updated upstream
 <<<<<<< 75dbe481590ed6d4ea272492ae63b60cf1dd200f
 var process = module.exports = {};
 var queue = [];
@@ -3078,6 +3083,8 @@ var draining = false;
 var currentQueue;
 var queueIndex = -1;
 =======
+=======
+>>>>>>> Stashed changes
   /**
    * ### .false
    *
@@ -3370,7 +3377,10 @@ var queueIndex = -1;
       );
     }
   }
+<<<<<<< Updated upstream
 >>>>>>> fa5c2a906fe6083618e098883931538100900ebb
+=======
+>>>>>>> Stashed changes
 
   Assertion.addMethod('above', assertAbove);
   Assertion.addMethod('gt', assertAbove);
@@ -3564,12 +3574,16 @@ var queueIndex = -1;
         , 'expected #{this} to not be within ' + range
       );
     }
+<<<<<<< Updated upstream
 <<<<<<< 75dbe481590ed6d4ea272492ae63b60cf1dd200f
     var timeout = setTimeout(cleanUpNextTick);
     draining = true;
 =======
   });
 >>>>>>> fa5c2a906fe6083618e098883931538100900ebb
+=======
+  });
+>>>>>>> Stashed changes
 
   /**
    * ### .instanceof(constructor)
@@ -3701,6 +3715,7 @@ var queueIndex = -1;
         , 'expected #{this} to have a ' + descriptor + _.inspect(name)
         , 'expected #{this} to not have ' + descriptor + _.inspect(name));
     }
+<<<<<<< Updated upstream
 <<<<<<< 75dbe481590ed6d4ea272492ae63b60cf1dd200f
     currentQueue = null;
     draining = false;
@@ -3708,6 +3723,8 @@ var queueIndex = -1;
 }
 =======
 >>>>>>> fa5c2a906fe6083618e098883931538100900ebb
+=======
+>>>>>>> Stashed changes
 
     if (arguments.length > 1) {
       this.assert(
@@ -4169,11 +4186,14 @@ var queueIndex = -1;
         thrownError = err;
       }
     }
+<<<<<<< Updated upstream
 <<<<<<< 75dbe481590ed6d4ea272492ae63b60cf1dd200f
     queue.push(new Item(fun, args));
     if (queue.length === 1 && !draining) {
         setTimeout(drainQueue, 0);
 =======
+=======
+>>>>>>> Stashed changes
 
     var actuallyGot = ''
       , expectedThrown = name !== null
@@ -4184,7 +4204,10 @@ var queueIndex = -1;
 
     if (thrown) {
       actuallyGot = ' but #{act} was thrown'
+<<<<<<< Updated upstream
 >>>>>>> fa5c2a906fe6083618e098883931538100900ebb
+=======
+>>>>>>> Stashed changes
     }
 
     this.assert(
@@ -32701,7 +32724,46 @@ class AlfrescoNode {
 
 module.exports = AlfrescoNode;
 
+<<<<<<< Updated upstream
 },{"./alfresco-core-rest-api/src/index.js":147}],122:[function(require,module,exports){
+=======
+},{"./alfresco-core-rest-api/src/index.js":148}],122:[function(require,module,exports){
+'use strict';
+
+var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
+
+class alfrescoSearch {
+
+    constructor(alfrescoClient) {
+        this.searchApiInstance = new AlfrescoCoreRestApi.SearchApi(alfrescoClient);
+    }
+
+    /**
+     * Get Info about file or folder by given nodeId
+     * Minimal information for each child is returned by default.
+     * You can use the include parameter to return addtional information.
+     *
+     * @param {String} nodeId
+     *
+     * @returns {Promise} A promise with the file/folder data if resolved and {error} if rejected.
+     */
+    getNodeInfo(nodeId) {
+        return new Promise((resolve, reject) => {
+            this.nodeApiInstance.getNode(nodeId, null).then(function (data) {
+                resolve(data.entry);
+            }, function (error) {
+                reject(error);
+            });
+        });
+    }
+
+
+}
+
+module.exports = alfrescoSearch;
+
+},{"./alfresco-core-rest-api/src/index.js":148}],123:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function (Buffer){
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -33165,7 +33227,11 @@ module.exports = AlfrescoNode;
 }));
 
 }).call(this,require("buffer").Buffer)
+<<<<<<< Updated upstream
 },{"buffer":8,"fs":6,"superagent":110}],123:[function(require,module,exports){
+=======
+},{"buffer":8,"fs":6,"superagent":110}],124:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -33302,7 +33368,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":122,"../model/Error":125,"../model/LoginRequest":127,"../model/LoginTicketEntry":128,"../model/ValidateTicketEntry":130}],124:[function(require,module,exports){
+=======
+},{"../ApiClient":123,"../model/Error":126,"../model/LoginRequest":128,"../model/LoginTicketEntry":129,"../model/ValidateTicketEntry":131}],125:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -33396,7 +33466,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"./ApiClient":122,"./api/AuthenticationApi":123,"./model/Error":125,"./model/ErrorError":126,"./model/LoginRequest":127,"./model/LoginTicketEntry":128,"./model/LoginTicketEntryEntry":129,"./model/ValidateTicketEntry":130,"./model/ValidateTicketEntryEntry":131}],125:[function(require,module,exports){
+=======
+},{"./ApiClient":123,"./api/AuthenticationApi":124,"./model/Error":126,"./model/ErrorError":127,"./model/LoginRequest":128,"./model/LoginTicketEntry":129,"./model/LoginTicketEntryEntry":130,"./model/ValidateTicketEntry":131,"./model/ValidateTicketEntryEntry":132}],126:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -33460,7 +33534,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":122,"./ErrorError":126}],126:[function(require,module,exports){
+=======
+},{"../ApiClient":123,"./ErrorError":127}],127:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -33573,7 +33651,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":122}],127:[function(require,module,exports){
+=======
+},{"../ApiClient":123}],128:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -33646,7 +33728,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":122}],128:[function(require,module,exports){
+=======
+},{"../ApiClient":123}],129:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -33710,7 +33796,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":122,"./LoginTicketEntryEntry":129}],129:[function(require,module,exports){
+=======
+},{"../ApiClient":123,"./LoginTicketEntryEntry":130}],130:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -33783,7 +33873,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":122}],130:[function(require,module,exports){
+=======
+},{"../ApiClient":123}],131:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -33847,7 +33941,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":122,"./ValidateTicketEntryEntry":131}],131:[function(require,module,exports){
+=======
+},{"../ApiClient":123,"./ValidateTicketEntryEntry":132}],132:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -33911,7 +34009,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":122}],132:[function(require,module,exports){
+=======
+},{"../ApiClient":123}],133:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function (Buffer){
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -34379,7 +34481,11 @@ module.exports = AlfrescoNode;
 }));
 
 }).call(this,require("buffer").Buffer)
+<<<<<<< Updated upstream
 },{"buffer":8,"fs":6,"superagent":110}],133:[function(require,module,exports){
+=======
+},{"buffer":8,"fs":6,"superagent":110}],134:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -34601,7 +34707,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"../model/AssocTargetBody":155,"../model/Error":173,"../model/NodeAssocPaging":187}],134:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"../model/AssocTargetBody":156,"../model/Error":174,"../model/NodeAssocPaging":188}],135:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -36257,7 +36367,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"../model/AssocChildBody":153,"../model/AssocTargetBody":155,"../model/CopyBody":165,"../model/DeletedNodeEntry":167,"../model/DeletedNodesPaging":170,"../model/EmailSharedLinkBody":172,"../model/Error":173,"../model/MoveBody":183,"../model/NodeAssocPaging":187,"../model/NodeBody":189,"../model/NodeBody1":190,"../model/NodeChildAssocPaging":193,"../model/NodeEntry":195,"../model/NodePaging":199,"../model/NodeSharedLinkEntry":202,"../model/NodeSharedLinkPaging":203,"../model/RenditionBody":226,"../model/RenditionEntry":227,"../model/RenditionPaging":228,"../model/SharedLinkBody":230,"../model/SiteBody":232,"../model/SiteEntry":236}],135:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"../model/AssocChildBody":154,"../model/AssocTargetBody":156,"../model/CopyBody":166,"../model/DeletedNodeEntry":168,"../model/DeletedNodesPaging":171,"../model/EmailSharedLinkBody":173,"../model/Error":174,"../model/MoveBody":184,"../model/NodeAssocPaging":188,"../model/NodeBody":190,"../model/NodeBody1":191,"../model/NodeChildAssocPaging":194,"../model/NodeEntry":196,"../model/NodePaging":200,"../model/NodeSharedLinkEntry":203,"../model/NodeSharedLinkPaging":204,"../model/RenditionBody":227,"../model/RenditionEntry":228,"../model/RenditionPaging":229,"../model/SharedLinkBody":231,"../model/SiteBody":233,"../model/SiteEntry":237}],136:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -36680,7 +36794,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"../model/AssocChildBody":153,"../model/Error":173,"../model/MoveBody":183,"../model/NodeAssocPaging":187,"../model/NodeBody1":190,"../model/NodeChildAssocPaging":193,"../model/NodeEntry":195,"../model/NodePaging":199}],136:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"../model/AssocChildBody":154,"../model/Error":174,"../model/MoveBody":184,"../model/NodeAssocPaging":188,"../model/NodeBody1":191,"../model/NodeChildAssocPaging":194,"../model/NodeEntry":196,"../model/NodePaging":200}],137:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -36908,7 +37026,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"../model/CommentBody":158,"../model/CommentBody1":159,"../model/CommentEntry":160,"../model/CommentPaging":161,"../model/Error":173}],137:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"../model/CommentBody":159,"../model/CommentBody1":160,"../model/CommentEntry":161,"../model/CommentPaging":162,"../model/Error":174}],138:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -37132,7 +37254,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"../model/Error":173,"../model/FavoriteBody":176,"../model/FavoriteEntry":177,"../model/FavoritePaging":178}],138:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"../model/Error":174,"../model/FavoriteBody":177,"../model/FavoriteEntry":178,"../model/FavoritePaging":179}],139:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -37213,7 +37339,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"../model/Error":173,"../model/PersonNetworkEntry":212}],139:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"../model/Error":174,"../model/PersonNetworkEntry":213}],140:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -37850,7 +37980,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"../model/CopyBody":165,"../model/DeletedNodeEntry":167,"../model/DeletedNodesPaging":170,"../model/Error":173,"../model/MoveBody":183,"../model/NodeBody":189,"../model/NodeBody1":190,"../model/NodeEntry":195,"../model/NodePaging":199}],140:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"../model/CopyBody":166,"../model/DeletedNodeEntry":168,"../model/DeletedNodesPaging":171,"../model/Error":174,"../model/MoveBody":184,"../model/NodeBody":190,"../model/NodeBody1":191,"../model/NodeEntry":196,"../model/NodePaging":200}],141:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -38822,7 +38956,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"../model/ActivityPaging":151,"../model/Error":173,"../model/FavoriteBody":176,"../model/FavoriteEntry":177,"../model/FavoritePaging":178,"../model/FavoriteSiteBody":180,"../model/InlineResponse201":181,"../model/PersonEntry":210,"../model/PersonNetworkEntry":212,"../model/PersonNetworkPaging":213,"../model/PreferenceEntry":216,"../model/PreferencePaging":217,"../model/SiteEntry":236,"../model/SiteMembershipBody":242,"../model/SiteMembershipBody1":243,"../model/SiteMembershipRequestEntry":245,"../model/SiteMembershipRequestPaging":246,"../model/SitePaging":248}],141:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"../model/ActivityPaging":152,"../model/Error":174,"../model/FavoriteBody":177,"../model/FavoriteEntry":178,"../model/FavoritePaging":179,"../model/FavoriteSiteBody":181,"../model/InlineResponse201":182,"../model/PersonEntry":211,"../model/PersonNetworkEntry":213,"../model/PersonNetworkPaging":214,"../model/PreferenceEntry":217,"../model/PreferencePaging":218,"../model/SiteEntry":237,"../model/SiteMembershipBody":243,"../model/SiteMembershipBody1":244,"../model/SiteMembershipRequestEntry":246,"../model/SiteMembershipRequestPaging":247,"../model/SitePaging":249}],142:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -39044,7 +39182,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"../model/Error":173,"../model/RatingBody":221,"../model/RatingEntry":222,"../model/RatingPaging":223}],142:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"../model/Error":174,"../model/RatingBody":222,"../model/RatingEntry":223,"../model/RatingPaging":224}],143:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -39347,7 +39489,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"../model/Error":173,"../model/RenditionBody":226,"../model/RenditionEntry":227,"../model/RenditionPaging":228}],143:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"../model/Error":174,"../model/RenditionBody":227,"../model/RenditionEntry":228,"../model/RenditionPaging":229}],144:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -39440,7 +39586,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"../model/Error":173,"../model/NodePaging":199}],144:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"../model/Error":174,"../model/NodePaging":200}],145:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -39728,7 +39878,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"../model/EmailSharedLinkBody":172,"../model/Error":173,"../model/NodeSharedLinkEntry":202,"../model/NodeSharedLinkPaging":203,"../model/SharedLinkBody":230}],145:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"../model/EmailSharedLinkBody":173,"../model/Error":174,"../model/NodeSharedLinkEntry":203,"../model/NodeSharedLinkPaging":204,"../model/SharedLinkBody":231}],146:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -40267,7 +40421,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"../model/Error":173,"../model/SiteBody":232,"../model/SiteContainerEntry":234,"../model/SiteContainerPaging":235,"../model/SiteEntry":236,"../model/SiteMemberBody":238,"../model/SiteMemberEntry":239,"../model/SiteMemberPaging":240,"../model/SiteMemberRoleBody":241,"../model/SitePaging":248}],146:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"../model/Error":174,"../model/SiteBody":233,"../model/SiteContainerEntry":235,"../model/SiteContainerPaging":236,"../model/SiteEntry":237,"../model/SiteMemberBody":239,"../model/SiteMemberEntry":240,"../model/SiteMemberPaging":241,"../model/SiteMemberRoleBody":242,"../model/SitePaging":249}],147:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -40565,7 +40723,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"../model/Error":173,"../model/TagBody":251,"../model/TagBody1":252,"../model/TagEntry":253,"../model/TagPaging":254}],147:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"../model/Error":174,"../model/TagBody":252,"../model/TagBody1":253,"../model/TagEntry":254,"../model/TagPaging":255}],148:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -41234,7 +41396,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"./ApiClient":132,"./api/AssociationsApi":133,"./api/ChangesApi":134,"./api/ChildAssociationsApi":135,"./api/CommentsApi":136,"./api/FavoritesApi":137,"./api/NetworksApi":138,"./api/NodesApi":139,"./api/PeopleApi":140,"./api/RatingsApi":141,"./api/RenditionsApi":142,"./api/SearchApi":143,"./api/SharedlinksApi":144,"./api/SitesApi":145,"./api/TagsApi":146,"./model/Activity":148,"./model/ActivityActivitySummary":149,"./model/ActivityEntry":150,"./model/ActivityPaging":151,"./model/ActivityPagingList":152,"./model/AssocChildBody":153,"./model/AssocInfo":154,"./model/AssocTargetBody":155,"./model/ChildAssocInfo":156,"./model/Comment":157,"./model/CommentBody":158,"./model/CommentBody1":159,"./model/CommentEntry":160,"./model/CommentPaging":161,"./model/CommentPagingList":162,"./model/Company":163,"./model/ContentInfo":164,"./model/CopyBody":165,"./model/DeletedNode":166,"./model/DeletedNodeEntry":167,"./model/DeletedNodeMinimal":168,"./model/DeletedNodeMinimalEntry":169,"./model/DeletedNodesPaging":170,"./model/DeletedNodesPagingList":171,"./model/EmailSharedLinkBody":172,"./model/Error":173,"./model/ErrorError":174,"./model/Favorite":175,"./model/FavoriteBody":176,"./model/FavoriteEntry":177,"./model/FavoritePaging":178,"./model/FavoritePagingList":179,"./model/FavoriteSiteBody":180,"./model/InlineResponse201":181,"./model/InlineResponse201Entry":182,"./model/MoveBody":183,"./model/NetworkQuota":184,"./model/NodeAssocMinimal":185,"./model/NodeAssocMinimalEntry":186,"./model/NodeAssocPaging":187,"./model/NodeAssocPagingList":188,"./model/NodeBody":189,"./model/NodeBody1":190,"./model/NodeChildAssocMinimal":191,"./model/NodeChildAssocMinimalEntry":192,"./model/NodeChildAssocPaging":193,"./model/NodeChildAssocPagingList":194,"./model/NodeEntry":195,"./model/NodeFull":196,"./model/NodeMinimal":197,"./model/NodeMinimalEntry":198,"./model/NodePaging":199,"./model/NodePagingList":200,"./model/NodeSharedLink":201,"./model/NodeSharedLinkEntry":202,"./model/NodeSharedLinkPaging":203,"./model/NodeSharedLinkPagingList":204,"./model/NodesnodeIdchildrenContent":205,"./model/Pagination":206,"./model/PathElement":207,"./model/PathInfo":208,"./model/Person":209,"./model/PersonEntry":210,"./model/PersonNetwork":211,"./model/PersonNetworkEntry":212,"./model/PersonNetworkPaging":213,"./model/PersonNetworkPagingList":214,"./model/Preference":215,"./model/PreferenceEntry":216,"./model/PreferencePaging":217,"./model/PreferencePagingList":218,"./model/Rating":219,"./model/RatingAggregate":220,"./model/RatingBody":221,"./model/RatingEntry":222,"./model/RatingPaging":223,"./model/RatingPagingList":224,"./model/Rendition":225,"./model/RenditionBody":226,"./model/RenditionEntry":227,"./model/RenditionPaging":228,"./model/RenditionPagingList":229,"./model/SharedLinkBody":230,"./model/Site":231,"./model/SiteBody":232,"./model/SiteContainer":233,"./model/SiteContainerEntry":234,"./model/SiteContainerPaging":235,"./model/SiteEntry":236,"./model/SiteMember":237,"./model/SiteMemberBody":238,"./model/SiteMemberEntry":239,"./model/SiteMemberPaging":240,"./model/SiteMemberRoleBody":241,"./model/SiteMembershipBody":242,"./model/SiteMembershipBody1":243,"./model/SiteMembershipRequest":244,"./model/SiteMembershipRequestEntry":245,"./model/SiteMembershipRequestPaging":246,"./model/SiteMembershipRequestPagingList":247,"./model/SitePaging":248,"./model/SitePagingList":249,"./model/Tag":250,"./model/TagBody":251,"./model/TagBody1":252,"./model/TagEntry":253,"./model/TagPaging":254,"./model/TagPagingList":255,"./model/UserInfo":256}],148:[function(require,module,exports){
+=======
+},{"./ApiClient":133,"./api/AssociationsApi":134,"./api/ChangesApi":135,"./api/ChildAssociationsApi":136,"./api/CommentsApi":137,"./api/FavoritesApi":138,"./api/NetworksApi":139,"./api/NodesApi":140,"./api/PeopleApi":141,"./api/RatingsApi":142,"./api/RenditionsApi":143,"./api/SearchApi":144,"./api/SharedlinksApi":145,"./api/SitesApi":146,"./api/TagsApi":147,"./model/Activity":149,"./model/ActivityActivitySummary":150,"./model/ActivityEntry":151,"./model/ActivityPaging":152,"./model/ActivityPagingList":153,"./model/AssocChildBody":154,"./model/AssocInfo":155,"./model/AssocTargetBody":156,"./model/ChildAssocInfo":157,"./model/Comment":158,"./model/CommentBody":159,"./model/CommentBody1":160,"./model/CommentEntry":161,"./model/CommentPaging":162,"./model/CommentPagingList":163,"./model/Company":164,"./model/ContentInfo":165,"./model/CopyBody":166,"./model/DeletedNode":167,"./model/DeletedNodeEntry":168,"./model/DeletedNodeMinimal":169,"./model/DeletedNodeMinimalEntry":170,"./model/DeletedNodesPaging":171,"./model/DeletedNodesPagingList":172,"./model/EmailSharedLinkBody":173,"./model/Error":174,"./model/ErrorError":175,"./model/Favorite":176,"./model/FavoriteBody":177,"./model/FavoriteEntry":178,"./model/FavoritePaging":179,"./model/FavoritePagingList":180,"./model/FavoriteSiteBody":181,"./model/InlineResponse201":182,"./model/InlineResponse201Entry":183,"./model/MoveBody":184,"./model/NetworkQuota":185,"./model/NodeAssocMinimal":186,"./model/NodeAssocMinimalEntry":187,"./model/NodeAssocPaging":188,"./model/NodeAssocPagingList":189,"./model/NodeBody":190,"./model/NodeBody1":191,"./model/NodeChildAssocMinimal":192,"./model/NodeChildAssocMinimalEntry":193,"./model/NodeChildAssocPaging":194,"./model/NodeChildAssocPagingList":195,"./model/NodeEntry":196,"./model/NodeFull":197,"./model/NodeMinimal":198,"./model/NodeMinimalEntry":199,"./model/NodePaging":200,"./model/NodePagingList":201,"./model/NodeSharedLink":202,"./model/NodeSharedLinkEntry":203,"./model/NodeSharedLinkPaging":204,"./model/NodeSharedLinkPagingList":205,"./model/NodesnodeIdchildrenContent":206,"./model/Pagination":207,"./model/PathElement":208,"./model/PathInfo":209,"./model/Person":210,"./model/PersonEntry":211,"./model/PersonNetwork":212,"./model/PersonNetworkEntry":213,"./model/PersonNetworkPaging":214,"./model/PersonNetworkPagingList":215,"./model/Preference":216,"./model/PreferenceEntry":217,"./model/PreferencePaging":218,"./model/PreferencePagingList":219,"./model/Rating":220,"./model/RatingAggregate":221,"./model/RatingBody":222,"./model/RatingEntry":223,"./model/RatingPaging":224,"./model/RatingPagingList":225,"./model/Rendition":226,"./model/RenditionBody":227,"./model/RenditionEntry":228,"./model/RenditionPaging":229,"./model/RenditionPagingList":230,"./model/SharedLinkBody":231,"./model/Site":232,"./model/SiteBody":233,"./model/SiteContainer":234,"./model/SiteContainerEntry":235,"./model/SiteContainerPaging":236,"./model/SiteEntry":237,"./model/SiteMember":238,"./model/SiteMemberBody":239,"./model/SiteMemberEntry":240,"./model/SiteMemberPaging":241,"./model/SiteMemberRoleBody":242,"./model/SiteMembershipBody":243,"./model/SiteMembershipBody1":244,"./model/SiteMembershipRequest":245,"./model/SiteMembershipRequestEntry":246,"./model/SiteMembershipRequestPaging":247,"./model/SiteMembershipRequestPagingList":248,"./model/SitePaging":249,"./model/SitePagingList":250,"./model/Tag":251,"./model/TagBody":252,"./model/TagBody1":253,"./model/TagEntry":254,"./model/TagPaging":255,"./model/TagPagingList":256,"./model/UserInfo":257}],149:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -41506,7 +41672,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./ActivityActivitySummary":149}],149:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./ActivityActivitySummary":150}],150:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -41607,7 +41777,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],150:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],151:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -41672,7 +41846,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./Activity":148}],151:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./Activity":149}],152:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -41736,7 +41914,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./ActivityPagingList":152}],152:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./ActivityPagingList":153}],153:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -41811,7 +41993,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./ActivityEntry":150,"./Pagination":206}],153:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./ActivityEntry":151,"./Pagination":207}],154:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -41884,7 +42070,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],154:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],155:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -41948,7 +42138,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],155:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],156:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -42021,7 +42215,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],156:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],157:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -42094,7 +42292,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],157:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],158:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -42239,7 +42441,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./Person":209}],158:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./Person":210}],159:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -42304,7 +42510,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],159:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],160:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -42369,7 +42579,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],160:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],161:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -42434,7 +42648,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./Comment":157}],161:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./Comment":158}],162:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -42498,7 +42716,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./CommentPagingList":162}],162:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./CommentPagingList":163}],163:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -42573,7 +42795,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./CommentEntry":160,"./Pagination":206}],163:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./CommentEntry":161,"./Pagination":207}],164:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -42700,7 +42926,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],164:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],165:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -42791,7 +43021,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],165:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],166:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -42864,7 +43098,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],166:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],167:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -42943,7 +43181,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./ContentInfo":164,"./NodeFull":196,"./UserInfo":256}],167:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./ContentInfo":165,"./NodeFull":197,"./UserInfo":257}],168:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -43007,7 +43249,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./DeletedNode":166}],168:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./DeletedNode":167}],169:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -43086,7 +43332,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./ContentInfo":164,"./NodeMinimal":197,"./PathElement":207,"./UserInfo":256}],169:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./ContentInfo":165,"./NodeMinimal":198,"./PathElement":208,"./UserInfo":257}],170:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -43150,7 +43400,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./DeletedNodeMinimal":168}],170:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./DeletedNodeMinimal":169}],171:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -43214,7 +43468,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./DeletedNodesPagingList":171}],171:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./DeletedNodesPagingList":172}],172:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -43287,7 +43545,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./DeletedNodeMinimalEntry":169,"./Pagination":206}],172:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./DeletedNodeMinimalEntry":170,"./Pagination":207}],173:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -43378,7 +43640,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],173:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],174:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -43442,7 +43708,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./ErrorError":174}],174:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./ErrorError":175}],175:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -43555,7 +43825,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],175:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],176:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -43642,7 +43916,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],176:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],177:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -43707,7 +43985,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],177:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],178:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -43772,7 +44054,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./Favorite":175}],178:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./Favorite":176}],179:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -43836,7 +44122,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./FavoritePagingList":179}],179:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./FavoritePagingList":180}],180:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -43911,7 +44201,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./FavoriteEntry":177,"./Pagination":206}],180:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./FavoriteEntry":178,"./Pagination":207}],181:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -43975,7 +44269,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],181:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],182:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -44039,7 +44337,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./InlineResponse201Entry":182}],182:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./InlineResponse201Entry":183}],183:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -44104,7 +44406,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],183:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],184:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -44177,7 +44483,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],184:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],185:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -44263,7 +44573,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],185:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],186:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -44426,7 +44740,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./AssocInfo":154,"./ContentInfo":164,"./UserInfo":256}],186:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./AssocInfo":155,"./ContentInfo":165,"./UserInfo":257}],187:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -44491,7 +44809,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./NodeAssocMinimal":185}],187:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./NodeAssocMinimal":186}],188:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -44555,7 +44877,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./NodeAssocPagingList":188}],188:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./NodeAssocPagingList":189}],189:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -44628,7 +44954,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./NodeAssocMinimalEntry":186,"./Pagination":206}],189:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./NodeAssocMinimalEntry":187,"./Pagination":207}],190:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -44719,7 +45049,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],190:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],191:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -44828,7 +45162,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./NodesnodeIdchildrenContent":205}],191:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./NodesnodeIdchildrenContent":206}],192:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -44991,7 +45329,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./ChildAssocInfo":156,"./ContentInfo":164,"./UserInfo":256}],192:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./ChildAssocInfo":157,"./ContentInfo":165,"./UserInfo":257}],193:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -45056,7 +45398,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./NodeChildAssocMinimal":191}],193:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./NodeChildAssocMinimal":192}],194:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -45120,7 +45466,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./NodeChildAssocPagingList":194}],194:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./NodeChildAssocPagingList":195}],195:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -45193,7 +45543,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./NodeChildAssocMinimalEntry":192,"./Pagination":206}],195:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./NodeChildAssocMinimalEntry":193,"./Pagination":207}],196:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -45258,7 +45612,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./NodeFull":196}],196:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./NodeFull":197}],197:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -45439,7 +45797,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./ContentInfo":164,"./UserInfo":256}],197:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./ContentInfo":165,"./UserInfo":257}],198:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -45602,7 +45964,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./ContentInfo":164,"./PathElement":207,"./UserInfo":256}],198:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./ContentInfo":165,"./PathElement":208,"./UserInfo":257}],199:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -45667,7 +46033,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./NodeMinimal":197}],199:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./NodeMinimal":198}],200:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -45731,7 +46101,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./NodePagingList":200}],200:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./NodePagingList":201}],201:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -45804,7 +46178,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./NodeMinimalEntry":198,"./Pagination":206}],201:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./NodeMinimalEntry":199,"./Pagination":207}],202:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -45931,7 +46309,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./ContentInfo":164,"./UserInfo":256}],202:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./ContentInfo":165,"./UserInfo":257}],203:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -45996,7 +46378,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./NodeSharedLink":201}],203:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./NodeSharedLink":202}],204:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -46060,7 +46446,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./NodeSharedLinkPagingList":204}],204:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./NodeSharedLinkPagingList":205}],205:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -46135,7 +46525,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./NodeSharedLinkEntry":202,"./Pagination":206}],205:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./NodeSharedLinkEntry":203,"./Pagination":207}],206:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -46208,7 +46602,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],206:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],207:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -46317,7 +46715,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],207:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],208:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -46390,7 +46792,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],208:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],209:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -46472,7 +46878,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./PathElement":207}],209:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./PathElement":208}],210:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -46695,7 +47105,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./Company":163}],210:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./Company":164}],211:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -46760,7 +47174,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./Person":209}],211:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./Person":210}],212:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -46906,7 +47324,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./NetworkQuota":184}],212:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./NetworkQuota":185}],213:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -46971,7 +47393,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./PersonNetwork":211}],213:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./PersonNetwork":212}],214:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -47035,7 +47461,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./PersonNetworkPagingList":214}],214:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./PersonNetworkPagingList":215}],215:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -47110,7 +47540,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./Pagination":206,"./PersonNetworkEntry":212}],215:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./Pagination":207,"./PersonNetworkEntry":213}],216:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -47188,7 +47622,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],216:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],217:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -47253,7 +47691,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./Preference":215}],217:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./Preference":216}],218:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -47317,7 +47759,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./PreferencePagingList":218}],218:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./PreferencePagingList":219}],219:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -47392,7 +47838,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./Pagination":206,"./PreferenceEntry":216}],219:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./Pagination":207,"./PreferenceEntry":217}],220:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -47486,7 +47936,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./RatingAggregate":220}],220:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./RatingAggregate":221}],221:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -47560,7 +48014,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],221:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],222:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -47655,7 +48113,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],222:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],223:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -47720,7 +48182,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./Rating":219}],223:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./Rating":220}],224:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -47784,7 +48250,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./RatingPagingList":224}],224:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./RatingPagingList":225}],225:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -47859,7 +48329,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./Pagination":206,"./RatingEntry":222}],225:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./Pagination":207,"./RatingEntry":223}],226:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -47941,7 +48415,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./ContentInfo":164}],226:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./ContentInfo":165}],227:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -48005,7 +48483,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],227:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],228:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -48070,7 +48552,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./Rendition":225}],228:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./Rendition":226}],229:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -48134,7 +48620,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./RenditionPagingList":229}],229:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./RenditionPagingList":230}],230:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -48207,7 +48697,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./Pagination":206,"./RenditionEntry":227}],230:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./Pagination":207,"./RenditionEntry":228}],231:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -48271,7 +48765,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],231:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],232:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -48407,7 +48905,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],232:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],233:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -48524,7 +49026,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],233:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],234:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -48599,7 +49105,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],234:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],235:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -48664,7 +49174,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./SiteContainer":233}],235:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./SiteContainer":234}],236:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -48728,7 +49242,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./SitePagingList":249}],236:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./SitePagingList":250}],237:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -48793,7 +49311,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./Site":231}],237:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./Site":232}],238:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -48907,7 +49429,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./Person":209}],238:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./Person":210}],239:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -49009,7 +49535,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],239:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],240:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -49074,7 +49604,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./SiteMember":237}],240:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./SiteMember":238}],241:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -49138,7 +49672,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./SitePagingList":249}],241:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./SitePagingList":250}],242:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -49231,7 +49769,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],242:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],243:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -49313,7 +49855,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],243:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],244:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -49377,7 +49923,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],244:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],245:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -49462,7 +50012,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./Site":231}],245:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./Site":232}],246:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -49527,7 +50081,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./SiteMembershipRequest":244}],246:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./SiteMembershipRequest":245}],247:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -49591,7 +50149,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./SiteMembershipRequestPagingList":247}],247:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./SiteMembershipRequestPagingList":248}],248:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -49666,7 +50228,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./Pagination":206,"./SiteMembershipRequestEntry":245}],248:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./Pagination":207,"./SiteMembershipRequestEntry":246}],249:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -49730,7 +50296,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./SitePagingList":249}],249:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./SitePagingList":250}],250:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -49795,7 +50365,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./Pagination":206}],250:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./Pagination":207}],251:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -49870,7 +50444,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],251:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],252:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -49935,7 +50513,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],252:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],253:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -49999,7 +50581,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],253:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],254:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -50064,7 +50650,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./Tag":250}],254:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./Tag":251}],255:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -50128,7 +50718,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./TagPagingList":255}],255:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./TagPagingList":256}],256:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -50203,7 +50797,11 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132,"./Pagination":206,"./TagEntry":253}],256:[function(require,module,exports){
+=======
+},{"../ApiClient":133,"./Pagination":207,"./TagEntry":254}],257:[function(require,module,exports){
+>>>>>>> Stashed changes
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -50276,13 +50874,22 @@ module.exports = AlfrescoNode;
   return exports;
 }));
 
+<<<<<<< Updated upstream
 },{"../ApiClient":132}],257:[function(require,module,exports){
+=======
+},{"../ApiClient":133}],258:[function(require,module,exports){
+>>>>>>> Stashed changes
 'use strict';
 
 var AlfrescoAuthRestApi = require('./alfresco-auth-rest-api/src/index');
 var AlfrescoApiClient = require('./alfrescoApiClient');
 var alfrescoContent = require('./alfrescoContent');
 var AlfrescoNode = require('./AlfrescoNode');
+<<<<<<< Updated upstream
+=======
+var AlfrescoSearch = require('./AlfrescoSearch');
+
+>>>>>>> Stashed changes
 //var EventEmitter = require('events').EventEmitter;
 //var util = require('util');
 
@@ -50342,6 +50949,12 @@ class AlfrescoApi {
             password: config.password,
             ticket: config.ticket
         };
+<<<<<<< Updated upstream
+=======
+
+        this.apiAuthUrl = this.config.host + '/alfresco/api/-default-/public/authentication/versions/1'; //Auth Call
+        this.apiCoreUrl = this.config.host + '/alfresco/api/-default-/public/alfresco/versions/1';   //Core Call
+>>>>>>> Stashed changes
     }
 
     /**
@@ -50450,7 +51063,11 @@ class AlfrescoApi {
      * Minimal information for each child is returned by default.
      * You can use the include parameter to return addtional information.
      *
+<<<<<<< Updated upstream
      * @param {String} nodeId
+=======
+     * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases: -my- | -shared- | -root-
+>>>>>>> Stashed changes
      *
      * @returns {Promise} A promise that return the file/folder data if resolved and {error} if rejected.
      */
@@ -50464,7 +51081,11 @@ class AlfrescoApi {
      * Minimal information for each child is returned by default.
      * You can use the include parameter to return addtional information.
      *
+<<<<<<< Updated upstream
      * @param {String} nodeId
+=======
+     * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases: -my- | -shared- | -root-
+>>>>>>> Stashed changes
      * @param {Object} opts
      *
      * @returns {Promise} A promise that return the Info about the children of the node if resolved and {error} if rejected.
@@ -50478,7 +51099,11 @@ class AlfrescoApi {
      * Delete node by ID, If the nodeId is a folder, then its children are also
      * Deleted nodes move to the trashcan
      *
+<<<<<<< Updated upstream
      * @param {String} nodeId
+=======
+     * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases: -my- | -shared- | -root-
+>>>>>>> Stashed changes
      *
      * @returns {Promise} A promise that is resolved if the file is deleted and {error} if rejected.
      */
@@ -50491,7 +51116,11 @@ class AlfrescoApi {
      * Delete node by ID, If the nodeId is a folder, then its children are also
      * Deleted permanent will not be possible recover it
      *
+<<<<<<< Updated upstream
      * @param {String} nodeId
+=======
+     * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases: -my- | -shared- | -root-
+>>>>>>> Stashed changes
      *
      * @returns {Promise} A promise that is resolved if the file is deleted and {error} if rejected.
      */
@@ -50509,7 +51138,11 @@ AlfrescoApi.Mock = require('../test/mockObjects/mockAlfrescoApi.js');
 //util.inherits(AlfrescoApi, EventEmitter);
 module.exports = AlfrescoApi;
 
+<<<<<<< Updated upstream
 },{"../test/mockObjects/mockAlfrescoApi.js":261,"./AlfrescoNode":121,"./alfresco-auth-rest-api/src/index":124,"./alfresco-auth-rest-api/src/index.js":124,"./alfresco-core-rest-api/src/index.js":147,"./alfrescoApiClient":258,"./alfrescoContent":259}],258:[function(require,module,exports){
+=======
+},{"../test/mockObjects/mockAlfrescoApi.js":262,"./AlfrescoNode":121,"./AlfrescoSearch":122,"./alfresco-auth-rest-api/src/index":125,"./alfresco-auth-rest-api/src/index.js":125,"./alfresco-core-rest-api/src/index.js":148,"./alfrescoApiClient":259,"./alfrescoContent":260}],259:[function(require,module,exports){
+>>>>>>> Stashed changes
 'use strict';
 //var util = require('util');
 //var EventEmitter = require('events').EventEmitter;
@@ -50544,7 +51177,11 @@ class AlfrescoApiClient extends ApiClient {
 //util.inherits(ApiClient, EventEmitter);
 module.exports = AlfrescoApiClient;
 
+<<<<<<< Updated upstream
 },{"./alfresco-core-rest-api/src/ApiClient":132}],259:[function(require,module,exports){
+=======
+},{"./alfresco-core-rest-api/src/ApiClient":133}],260:[function(require,module,exports){
+>>>>>>> Stashed changes
 'use strict';
 
 class AlfrescoContent {
@@ -50580,7 +51217,11 @@ class AlfrescoContent {
 
 module.exports = AlfrescoContent;
 
+<<<<<<< Updated upstream
 },{}],260:[function(require,module,exports){
+=======
+},{}],261:[function(require,module,exports){
+>>>>>>> Stashed changes
 'use strict';
 
 var nock = require('nock');
@@ -50680,7 +51321,11 @@ class AuthResponseMock {
 
 module.exports = AuthResponseMock;
 
+<<<<<<< Updated upstream
 },{"nock":59}],261:[function(require,module,exports){
+=======
+},{"nock":59}],262:[function(require,module,exports){
+>>>>>>> Stashed changes
 var mockAlfrescoApi = {};
 
 mockAlfrescoApi.Auth = require('./authResponseMock.js');
@@ -50688,7 +51333,11 @@ mockAlfrescoApi.node = require('./nodeMock.js');
 
 module.exports = mockAlfrescoApi;
 
+<<<<<<< Updated upstream
 },{"./authResponseMock.js":260,"./nodeMock.js":262}],262:[function(require,module,exports){
+=======
+},{"./authResponseMock.js":261,"./nodeMock.js":263}],263:[function(require,module,exports){
+>>>>>>> Stashed changes
 'use strict';
 
 var nock = require('nock');

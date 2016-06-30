@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new NodesApi. 
+   * Constructs a new NodesApi.
    * @alias module:api/NodesApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}

@@ -35,7 +35,7 @@ var AlfrescoJsApi = require('alfresco-js-api');
 ### Basic usage For browser
 
 ```html
- <script src="node_modules/alfresco-js-api/bundle.js"></script>
+    <script src="node_modules/alfresco-js-api/dist/alfresco-js-api.js"></script>
 ```
 
 ## Getting Started
@@ -44,9 +44,9 @@ Please follow the [installation](#installation) instruction and execute the foll
 
 #  Login
 
->  AlfrescoApi({username, password, alfrescoHost, ticket});
+AlfrescoApi({username, password, alfrescoHost, ticket});
 
-If you want login with Username and Password
+>If you want login with Username and Password
 
 ```javascript
 var AlfrescoApi = require('alfresco-js-api');
@@ -63,7 +63,7 @@ this.alfrescoJsApi.login().then(function (data) {
 
 ```
 
-If you already have a ticket
+>If you already have a ticket
 
 ```javascript
 
@@ -75,7 +75,7 @@ this.alfrescoJsApi = new AlfrescoApi({ ticket:'TICKET_4479f4d3bb155195879bfbb8d5
 
 #  Logout
 
->  logout();
+logout()
 
 ```javascript
 
@@ -89,7 +89,9 @@ this.alfrescoJsApi.logout().then(function (data) {
 
 #  isLoggedIn
 
->  isLoggedIn(); return true if you are logged in false if you are not.
+isLoggedIn()
+
+> return true if you are logged in false if you are not.
 
 ```javascript
 
@@ -126,23 +128,27 @@ this.alfrescoJsApi.on('logout', function(){
 ```
 
 #  Get File or Folder Info
-> getNodeInfo(fileOrFolderId); Get information for the File/Folder with the identifier nodeId.
+
+getNodeInfo(fileOrFolderId, opts)
+
+>Get information for the File/Folder with the identifier nodeId.
 
 ```javascript
 
 var fileOrFolderId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
 
-this.alfrescoJsApi.getNodeInfo(fileOrFolderId).then(function (data) {
+this.alfrescoJsApi.node.getNodeInfo(fileOrFolderId).then(function (data) {
     console.log('This is the name' + data.name );    
 }, function (error) {
     console.log('This node does not exist');
 });
 
 ```
-
 #  Get Folder Children Info
-> getNodeChildrenInfo(fileOrFolderId, opts)
-Minimal information for each child is returned by default.
+
+getNodeChildren(fileOrFolderId, opts)
+
+>Minimal information for each child is returned by default.
 You can use the include parameter to return addtional information.
 returns a promise with the Info about the children of the node if resolved and {error} if rejected.
   
@@ -150,8 +156,8 @@ returns a promise with the Info about the children of the node if resolved and {
 
 var folderNodeId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
 
-this.alfrescoJsApi.getNodeChildrenInfo(folderNodeId).then(function (data) {
-    console.log('The number of children in this folder are ' + data.pagination.count );    
+this.alfrescoJsApi.node.getNodeChildrenInfo(folderNodeId).then(function (data) {
+    console.log('The number of children in this folder are ' + data.list.pagination.count );    
 }, function (error) {
     console.log('This node does not exist');
 });
@@ -159,14 +165,17 @@ this.alfrescoJsApi.getNodeChildrenInfo(folderNodeId).then(function (data) {
 ```
 
 #  Delete File or Folder
-> deleteNode(fileOrFolderId); Delete File/Folder with the identifier nodeId, if the nodeId is a folder, then its children are also deleted
+
+deleteNode(fileOrFolderId)
+
+>Delete File/Folder with the identifier nodeId, if the nodeId is a folder, then its children are also deleted
 Deleted nodes move to the trash bin is still possible to recover it
      
 ```javascript
 
 var fileOrFolderId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
 
-this.alfrescoJsApi.deleteNode(fileOrFolderId).then(function (data) {
+this.alfrescoJsApi.node.deleteNode(fileOrFolderId).then(function (data) {
     console.log('The file/folder is deleted');    
 }, function (error) {
     console.log('This node does not exist');
@@ -175,14 +184,17 @@ this.alfrescoJsApi.deleteNode(fileOrFolderId).then(function (data) {
 ```
 
 #  Delete File or Folder Permanent
-> deleteNodePermanent(fileOrFolderId); Delete File/Folder with the identifier nodeId, if the nodeId is a folder, then its children are also deleted
+
+deleteNodePermanent(fileOrFolderId)
+
+>Delete File/Folder with the identifier nodeId, if the nodeId is a folder, then its children are also deleted
 If Deleted Permanent is used will not be possible recover the files
      
 ```javascript
 
 var fileOrFolderId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
 
-this.alfrescoJsApi.deleteNodePermanent(fileOrFolderId).then(function (data) {
+this.alfrescoJsApi.node.deleteNodePermanent(fileOrFolderId).then(function (data) {
     console.log('The file/folder is deleted');    
 }, function (error) {
     console.log('This node does not exist');
@@ -192,21 +204,21 @@ this.alfrescoJsApi.deleteNodePermanent(fileOrFolderId).then(function (data) {
 
 #  Get thumbnail Url
   
->  getDocumentThumbnailUrl(documentId);
+getDocumentThumbnailUrl(documentId)
 
 ```javascript
 
-var thumbnailUrl = this.alfrescoJsApi.getDocumentThumbnailUrl('1a0b110f-1e09-4ca2-b367-fe25e4964a4');
+var thumbnailUrl = this.alfrescoJsApi.content.getDocumentThumbnailUrl('1a0b110f-1e09-4ca2-b367-fe25e4964a4');
 
 ```
 
 #  Get content Url
   
->  getContentUrl(documentId);
+getContentUrl(documentId)
 
 ```javascript
 
-var thumbnailUrl = this.alfrescoJsApi.getContentUrl('1a0b110f-1e09-4ca2-b367-fe25e4964a4');
+var thumbnailUrl = this.alfrescoJsApi.content.getContentUrl('1a0b110f-1e09-4ca2-b367-fe25e4964a4');
 
 ```
 
@@ -216,6 +228,10 @@ var thumbnailUrl = this.alfrescoJsApi.getContentUrl('1a0b110f-1e09-4ca2-b367-fe2
 
     ```$ npm run build```
 
+* To run the build in watch mode
+
+    ```$ npm run watchify```
+    
 * To run the test 
 
     ```$ npm run test```

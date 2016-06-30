@@ -10,7 +10,7 @@ class AuthResponseMock {
 
     get200ResponseChildren() {
         nock(this.host, {'encodedQueryParams': true})
-            .get('//alfresco/api/-default-/public/alfresco/versions/1/nodes/b4cff62a-664d-4d45-9302-98723eac1319/children')
+            .get('/alfresco/api/-default-/public/alfresco/versions/1/nodes/b4cff62a-664d-4d45-9302-98723eac1319/children')
             .reply(200, {
                 'list': {
                     'pagination': {
@@ -132,6 +132,20 @@ class AuthResponseMock {
                         'exif:dateTimeOriginal': '2003-12-30T15:17:54.000+0000',
                         'exif:software': 'Adobe Photoshop CS5 Macintosh'
                     }
+                }
+            });
+    }
+
+    get404ChildrenNotExist() {
+        nock(this.host, {'encodedQueryParams': true})
+            .get('/alfresco/api/-default-/public/alfresco/versions/1/nodes/b4cff62a-664d-4d45-9302-98723eac1319/children')
+            .reply(404, {
+                'error': {
+                    'errorKey': 'framework.exception.EntityNotFound',
+                    'statusCode': 404,
+                    'briefSummary': '05220073 The entity with id: 80a94ac4-3ec4-47ad-864e-5d939424c47c was not found',
+                    'stackTrace': 'For security reasons the stack trace is no longer displayed, but the property is kept for previous versions.',
+                    'descriptionURL': 'https://api-explorer.alfresco.com'
                 }
             });
     }

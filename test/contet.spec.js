@@ -22,7 +22,7 @@ describe('Alfresco Content', function () {
     });
 
     it('get Document Thumbnail Url', function () {
-        var thumbnailUrl = this.alfrescoJsApi.getDocumentThumbnailUrl('1a0b110f-1e09-4ca2-b367-fe25e4964a4');
+        var thumbnailUrl = this.alfrescoJsApi.content.getDocumentThumbnailUrl('1a0b110f-1e09-4ca2-b367-fe25e4964a4');
 
         expect(thumbnailUrl).to.be.equal('http://192.168.99.100:8080/alfresco/api/-default-/public/alfresco/versions/1/nodes/' +
             '1a0b110f-1e09-4ca2-b367-fe25e4964a4/renditions/doclib/content?attachment=false&' +
@@ -30,7 +30,7 @@ describe('Alfresco Content', function () {
     });
 
     it('get Content Url', function () {
-        var contentUrl = this.alfrescoJsApi.getContentUrl('1a0b110f-1e09-4ca2-b367-fe25e4964a4');
+        var contentUrl = this.alfrescoJsApi.content.getContentUrl('1a0b110f-1e09-4ca2-b367-fe25e4964a4');
 
         expect(contentUrl).to.be.equal('http://192.168.99.100:8080/alfresco/api/-default-/public/alfresco/versions/1/nodes/' +
             '1a0b110f-1e09-4ca2-b367-fe25e4964a4/content?attachment=false' +
