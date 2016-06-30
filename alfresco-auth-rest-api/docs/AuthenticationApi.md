@@ -15,7 +15,19 @@ Method | HTTP request | Description
 
 Create ticket (login)
 
-Logs in and returns the new authentication ticket.\nThe userId and password properties are mandatory in the request body. For example:\n&#x60;&#x60;&#x60;JSON\n{\n    \&quot;userId\&quot;: \&quot;jbloggs\&quot;,\n    \&quot;password\&quot;: \&quot;password\&quot;\n}\n&#x60;&#x60;&#x60;\nTo use the ticket in future requests you should pass it in the request header.\nFor example using Javascript:\n  &#x60;&#x60;&#x60;Javascript\n    request.setRequestHeader (\&quot;Authorization\&quot;, \&quot;Basic \&quot; + btoa(ticket));\n  &#x60;&#x60;&#x60;\n
+Logs in and returns the new authentication ticket.
+The userId and password properties are mandatory in the request body. For example:
+```JSON
+{
+    "userId": "jbloggs",
+    "password": "password"
+}
+```
+To use the ticket in future requests you should pass it in the request header.
+For example using Javascript:
+```Javascript
+    request.setRequestHeader ('Authorization', 'Basic ' + btoa(ticket));
+```
 
 ### Example
 ```javascript
@@ -107,7 +119,13 @@ null (empty response body)
 
 Validate ticket
 
-Validates the specified ticket (derived from Authorization header) is still valid.\n\nFor example, you can pass the Authorization request header using Javascript:\n  &#x60;&#x60;&#x60;Javascript\n    request.setRequestHeader (\&quot;Authorization\&quot;, \&quot;Basic \&quot; + btoa(ticket));\n  &#x60;&#x60;&#x60;\n
+Validates the specified ticket (derived from Authorization header) is still valid.
+
+For example, you can pass the Authorization request header using Javascript:
+```Javascript
+request.setRequestHeader ('Authorization', 'Basic ' + btoa(ticket));
+```
+
 
 ### Example
 ```javascript
