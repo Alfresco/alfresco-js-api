@@ -128,6 +128,7 @@ export interface AlfrescoApi {
     createClient(): any;
     getClient(): any;
     getClientAuth(): any;
+    getToken(): any;
     changeConfig(config: any);
 
     getNodeInfo(nodeId: string): any;

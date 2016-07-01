@@ -31,13 +31,17 @@ class AlfrescoApi {
         this.alfrescoClient = new AlfrescoApiClient();
         this.alfrescoClientAuth = new AlfrescoApiClient();
 
-        this.alfrescoClientAuth.on('unauthorized', (event)  => {
-            this.emit('unauthorized');
-        });
+        if (typeof this.alfrescoClientAuth.on === 'function') {
+            this.alfrescoClientAuth.on('unauthorized', (event)  => {
+                this.emit('unauthorized');
+            });
+        }
 
-        this.alfrescoClient.on('unauthorized', (event)  => {
-            this.emit('unauthorized');
-        });
+        if (typeof this.alfrescoClientAuth.on === 'function') {
+            this.alfrescoClient.on('unauthorized', (event)  => {
+                this.emit('unauthorized');
+            });
+        }
     }
 
     /**
@@ -127,6 +131,15 @@ class AlfrescoApi {
     setToken(token) {
         this.config.ticket = token;
         this.alfrescoClient.authentications.basicAuth.password = token;
+    }
+
+    /**
+     * Get the current Token
+     *
+     * @returns {String} token
+     * */
+    getToken() {
+        return this.config.ticket;
     }
 
     /**
