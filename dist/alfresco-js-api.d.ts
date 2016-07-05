@@ -134,6 +134,7 @@ export interface AlfrescoApi {
     getToken(): any;
     changeConfig(config: any);
 
+    createFolder(name: string, relativePath: string, nodeId: string): any;
     getNodeInfo(nodeId: string): any;
     getNodeChildrenInfo(nodeId: string, opts:any): any;
     deleteNode(nodeId: string): any;

@@ -7,14 +7,16 @@ var NodeMock = require('../test/mockObjects/nodeMock');
 
 describe('Alfresco Core Node Api', function () {
     beforeEach(function (done) {
-        this.authResponseMock = new AuthResponseMock();
-        this.nodeMock = new NodeMock();
+        this.host = 'http://devproducts-platform.alfresco.me';
+
+        this.authResponseMock = new AuthResponseMock(this.host);
+        this.nodeMock = new NodeMock(this.host);
 
         this.authResponseMock.get201Response();
         this.alfrescoJsApi = new AlfrescoApi({
             username: 'admin',
             password: 'admin',
-            host: 'http://192.168.99.100:8080'
+            host: this.host
         });
 
         this.alfrescoJsApi.login().then(() => {
@@ -22,6 +24,43 @@ describe('Alfresco Core Node Api', function () {
         },(error) => {
             console.log('error ' + JSON.stringify(error));
         });
+    });
+
+    describe('Create Folder', function () {
+
+        it('creation of the folder should get 409 if new name clashes with an existing node in the current parent folder', function (done) {
+            this.nodeMock.get409CreationFolderNewNameClashes();
+
+            this.alfrescoJsApi.node.createFolder('newFolder').then(function () {
+            }, function () {
+                done();
+            });
+        });
+
+        it('creation of the folder for the node with identifier nodeId should return 200 if is all ok', function (done) {
+            this.nodeMock.get200CreationFolder();
+
+            this.alfrescoJsApi.node.createFolder('newFolder').then(function (data) {
+                expect(data.entry.name).to.be.equal('newFolder');
+                expect(data.entry.isFolder).to.be.equal(true);
+                done();
+            }, function (error) {
+                console.log(error);
+            });
+        });
+
+        it('if autoRename is true creation of the folder should get 200 if new name clashes with an existing node in the current parent folder should be renamed', function (done) {
+            this.nodeMock.get201CreationFolderNewNameNotClashes();
+
+            this.alfrescoJsApi.node.createFolderAutoRename('newFolder').then(function (data) {
+                expect(data.entry.name).to.be.equal('newFolder-1');
+                expect(data.entry.isFolder).to.be.equal(true);
+                done();
+            }, function (error) {
+                console.log(error);
+            });
+        });
+
     });
 
     //describe('Add Node', function () {

@@ -7,13 +7,15 @@ var AuthResponseMock = require('../test/mockObjects/authResponseMock');
 describe('Alfresco Content', function () {
 
     beforeEach(function (done) {
-        this.authResponseMock = new AuthResponseMock();
+        this.host = 'http://192.168.99.100:8080';
+
+        this.authResponseMock = new AuthResponseMock(this.host);
 
         this.authResponseMock.get201Response();
         this.alfrescoJsApi = new AlfrescoApi({
             username: 'admin',
             password: 'admin',
-            host: 'http://192.168.99.100:8080'
+            host: this.host
         });
 
         this.alfrescoJsApi.login().then((data) => {

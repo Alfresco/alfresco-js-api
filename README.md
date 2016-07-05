@@ -142,7 +142,7 @@ this.alfrescoJsApi.node.getNodeInfo(fileOrFolderId).then(function (data) {
 getNodeChildren(fileOrFolderId, opts)
 
 >Minimal information for each child is returned by default.
-You can use the include parameter to return addtional information.
+You can use the include parameter to return additional information.
 returns a promise with the Info about the children of the node if resolved and {error} if rejected.
   
 ```javascript
@@ -156,6 +156,54 @@ this.alfrescoJsApi.node.getNodeChildrenInfo(folderNodeId).then(function (data) {
 });
 
 ```
+#  Create Folder
+
+createFolder(name, relativePath, nodeId, opts) 
+
+>createFolder
+returns a promise that is resolved if the folder is created and {error} if rejected.
+     
+```javascript
+
+this.alfrescoJsApi.node.createFolder('newFolderName').then(function (data) {
+    console.log('The folder is created in root');    
+}, function (error) {
+    console.log('Error in creation of this folder or folder already exist' + error);
+});
+
+
+this.alfrescoJsApi.node.createFolder('newFolderName', 'folderA/folderB').then(function (data) {
+    console.log('The folder is created in  folderA/folderB from root');    
+}, function (error) {
+    console.log('Error in creation of this folder or folder already exist' + error);
+});
+
+
+var parentFolder = '80a94ac8-3ece-47ad-864e-5d939424c47c'
+
+this.alfrescoJsApi.node.createFolder('newFolderName', 'folderA/folderB', parentFolder).then(function (data) {
+    console.log('The folder is created in  folderA/folderB from parentFolder:' + parentFolder);    
+}, function (error) {
+    console.log('Error in creation of this folder or folder already exist' + error);
+});
+
+```
+
+**CreateFolder With Auto Rename**
+
+createFolderAutoRename(name, relativePath, nodeId, opts)
+is the same of createFolder(name, relativePath, nodeId, {autoRename: true}) is just syntactic sugar
+
+
+```javascript
+
+this.alfrescoJsApi.node.createFolderAutoRename('newFolderName').then(function (data) {
+    console.log('The folder is created in root');    
+}, function (error) {
+    console.log('Error in creation of this folder' + error);
+});
+```
+
 
 #  Delete File or Folder
 

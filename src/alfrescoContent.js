@@ -33,6 +33,7 @@ class AlfrescoContent {
         return this.apiBaseUrl + '/nodes/' + documentId +
             '/content' + '?attachment=false&alf_ticket=' + this.config.ticket;
     }
+
 }
 
 module.exports = AlfrescoContent;

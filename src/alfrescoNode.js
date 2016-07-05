@@ -1,6 +1,7 @@
 'use strict';
 
 var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
+var _ = require('lodash');
 
 class AlfrescoNode extends AlfrescoCoreRestApi.NodesApi {
 
@@ -28,18 +29,61 @@ class AlfrescoNode extends AlfrescoCoreRestApi.NodesApi {
      * Delete node by ID, If the nodeId is a folder, then its children are also
      * Deleted permanent will not be possible recover it
      *
-     * @param {String} nodeId
+     * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases: -my- | -shared- | -root-
      *
      * @returns {Promise} A promise that is resolved if the file is deleted and {error} if rejected.
      */
     deleteNodePermanent(nodeId) {
         return new Promise((resolve, reject) => {
-            this.deleteNode(nodeId,  {permanent: true}).then(function (data) {
+            this.deleteNode(nodeId, {permanent: true}).then(function (data) {
                 resolve(data);
             }, function (error) {
                 reject(error);
             });
         });
+    }
+
+    /**
+     * Create a folder
+     *
+     * @param {String} name - folder name
+     * @param {String} relativePath - The relativePath specifies the folder structure to create relative to the node identified by nodeId.
+     * @param {String} nodeId default value root.The identifier of a node where add the folder. You can also use one of these well-known aliases: -my- | -shared- | -root-
+     * @param {Object} opts Optional parameters
+     *
+     * @returns {Promise} A promise that is resolved if the folder is created and {error} if rejected.
+     */
+    createFolder(name, relativePath, nodeId, opts) {
+        nodeId = nodeId || '-root-';
+        var nodeBody = {
+            'name': name,
+            'nodeType': 'cm:folder',
+            'relativePath': relativePath
+        };
+
+        return new Promise((resolve, reject) => {
+            this.addNode(nodeId, nodeBody, opts).then(function (data) {
+                resolve(data);
+            }, function (error) {
+                reject(error);
+            });
+        });
+    }
+
+    /**
+     * Create a folder and autorename it if already exist
+     *
+     * @param {String} name - folder name
+     * @param {String} relativePath - The relativePath specifies the folder structure to create relative to the node identified by nodeId.
+     * @param {String} nodeId default value root.The identifier of a node where add the folder. You can also use one of these well-known aliases: -my- | -shared- | -root-
+     * @param {Object} opts Optional parameters
+     *
+     * @returns {Promise} A promise that is resolved if the folder is created and {error} if rejected.
+     */
+    createFolderAutoRename(name, relativePath, nodeId, opts) {
+        var optAutoRename = {autoRename: true};
+        opts = _.merge(opts, optAutoRename);
+        return this.createFolder(name, relativePath, nodeId, opts);
     }
 }
 

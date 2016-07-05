@@ -4,8 +4,8 @@ var nock = require('nock');
 
 class AuthResponseMock {
 
-    constructor(config) {
-        this.host = (config && config.host) ? config.host : 'http://192.168.99.100:8080';
+    constructor(host) {
+        this.host = host ? host : 'http://192.168.99.100:8080';
     }
 
     get201Response(forceTicket) {

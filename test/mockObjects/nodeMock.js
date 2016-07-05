@@ -4,8 +4,8 @@ var nock = require('nock');
 
 class AuthResponseMock {
 
-    constructor(config) {
-        this.host = (config && config.host) ? config.host : 'http://192.168.99.100:8080';
+    constructor(host) {
+        this.host = host ? host : 'http://192.168.99.100:8080';
     }
 
     get200ResponseChildren() {
@@ -200,6 +200,70 @@ class AuthResponseMock {
                     'briefSummary': '05230078 The entity with id: 80a94ac8-3ece-47ad-864e-5d939424c47c was not found',
                     'stackTrace': 'For security reasons the stack trace is no longer displayed, but the property is kept for previous versions.',
                     'descriptionURL': 'https://api-explorer.alfresco.com'
+                }
+            });
+    }
+
+    get200CreationFolder() {
+        nock(this.host, {'encodedQueryParams': true})
+            .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children', {
+                'name': 'newFolder',
+                'nodeType': 'cm:folder'
+            })
+            .reply(201, {
+                'entry': {
+                    'aspectNames': ['cm:auditable'],
+                    'createdAt': '2016-07-05T15:07:54.027+0000',
+                    'isFolder': true,
+                    'isFile': false,
+                    'createdByUser': {'id': 'admin', 'displayName': 'Administrator'},
+                    'modifiedAt': '2016-07-05T15:07:54.027+0000',
+                    'modifiedByUser': {'id': 'admin', 'displayName': 'Administrator'},
+                    'name': 'newFolder',
+                    'id': '2ffd7fe8-74d2-435c-ad73-f8ab3bc05c57',
+                    'nodeType': 'cm:folder',
+                    'parentId': 'd4f87809-10d9-49a3-ae7d-7a2640f87f3d'
+                }
+            });
+    }
+
+    get409CreationFolderNewNameClashes() {
+        nock(this.host, {'encodedQueryParams': true})
+            .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children', {
+                'name': 'newFolder',
+                'nodeType': 'cm:folder'
+            })
+            .reply(409, {
+                'error': {
+                    'errorKey': 'Duplicate child name not allowed: newFolder',
+                    'statusCode': 409,
+                    'briefSummary': '06050055 Duplicate child name not allowed: newFolder',
+                    'stackTrace': 'For security reasons the stack trace is no longer displayed, but the property is kept for previous versions.',
+                    'descriptionURL': 'https://api-explorer.alfresco.com'
+                }
+            });
+    }
+
+    get201CreationFolderNewNameNotClashes() {
+        nock('http://devproducts-platform.alfresco.me:80', {'encodedQueryParams': true})
+            .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children', {
+                'name': 'newFolder',
+                'nodeType': 'cm:folder'
+            })
+            .query({'autoRename': 'true'})
+            .reply(201, {
+                'entry': {
+                    'aspectNames': ['cm:auditable'],
+                    'createdAt': '2016-07-05T16:02:47.873+0000',
+                    'isFolder': true,
+                    'isFile': false,
+                    'createdByUser': {'id': 'admin', 'displayName': 'Administrator'},
+                    'modifiedAt': '2016-07-05T16:02:47.873+0000',
+                    'modifiedByUser': {'id': 'admin', 'displayName': 'Administrator'},
+                    'name': 'newFolder-1',
+                    'id': '14934b56-db67-40a7-81bd-fca4777716ac',
+                    'nodeType': 'cm:folder',
+                    'parentId': 'd4f87809-10d9-49a3-ae7d-7a2640f87f3d'
                 }
             });
     }
