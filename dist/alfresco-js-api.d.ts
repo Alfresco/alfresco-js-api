@@ -125,6 +125,9 @@ export interface AlfrescoApi {
     Core: Core;
     Mock: Mock;
 
+    search: any;
+    node: any;
+
     createClient(): any;
     getClient(): any;
     getClientAuth(): any;

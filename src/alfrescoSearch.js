@@ -2,11 +2,7 @@
 
 var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
 
-class alfrescoSearch {
-
-    constructor(alfrescoClient) {
-        this.searchApiInstance = new AlfrescoCoreRestApi.SearchApi(alfrescoClient);
-    }
+class alfrescoSearch extends AlfrescoCoreRestApi.SearchApi {
 
 }
 

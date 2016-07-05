@@ -21,7 +21,9 @@ class AlfrescoApiClient extends ApiClient {
                 resolve(data);
             }, (error)  => {
                 if (error.error.status === 401) {
-                    this.emit('unauthorized');
+                    if (typeof this.emit === 'function') {
+                        this.emit('unauthorized');
+                    }
                 }
                 reject(error);
             });

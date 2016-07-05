@@ -98,7 +98,7 @@ if (isLoggedIn) {
 
 ```
 
-#  Events at moment available only in node environment
+#  Events (available only in node environment)
 
 >  The AlfrescoApi is also an EventEmitter that you can register to listen to any of the following event types:
 * unauthorized (If this event is triggered a call to the Api was unauthorized)

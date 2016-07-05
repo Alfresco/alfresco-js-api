@@ -50187,6 +50187,7 @@ var AlfrescoAuthRestApi = require('./alfresco-auth-rest-api/src/index');
 var AlfrescoApiClient = require('./alfrescoApiClient');
 var AlfrescoContent = require('./alfrescoContent');
 var AlfrescoNode = require('./alfrescoNode');
+var AlfrescoSearch = require('./alfrescoSearch');
 var EventEmitter = require('events').EventEmitter;
 var util = require('util');
 
@@ -50251,6 +50252,7 @@ class AlfrescoApi {
 
         AlfrescoCoreRestApi.ApiClient.instance = this.getClient();
         this.node = new AlfrescoNode();
+        this.search = new AlfrescoSearch();
         this.content = new AlfrescoContent(this.apiCoreUrl, this.config);
     }
 
@@ -50296,7 +50298,9 @@ class AlfrescoApi {
 
         return new Promise((resolve, reject) => {
             apiInstance.createTicket(loginRequest).then((data) => {
-                this.emit('success');
+                if (typeof this.emit === 'function') {
+                    this.emit('success');
+                }
                 this.setToken(data.entry.id);
                 resolve(data.entry.id);
             }, function (error) {
@@ -50334,7 +50338,9 @@ class AlfrescoApi {
 
         return new Promise((resolve, reject) => {
             apiInstance.deleteTicket().then((data) => {
-                this.emit('logout');
+                if (typeof this.emit === 'function') {
+                    this.emit('logout');
+                }
                 this.setToken(undefined);
                 resolve('logout');
             }, function (error) {
@@ -50353,14 +50359,14 @@ class AlfrescoApi {
     }
 }
 
-AlfrescoApi.Core = require('./alfresco-core-rest-api/src/index.js');
-AlfrescoApi.Auth = require('./alfresco-auth-rest-api/src/index.js');
-AlfrescoApi.Mock = require('../test/mockObjects/mockAlfrescoApi.js');
+AlfrescoApi.prototype.Core = require('./alfresco-core-rest-api/src/index.js');
+AlfrescoApi.prototype.Auth = require('./alfresco-auth-rest-api/src/index.js');
+AlfrescoApi.prototype.Mock = require('../test/mockObjects/mockAlfrescoApi.js');
 
 util.inherits(AlfrescoApi, EventEmitter);
 module.exports = AlfrescoApi;
 
-},{"../test/mockObjects/mockAlfrescoApi.js":261,"./alfresco-auth-rest-api/src/index":123,"./alfresco-auth-rest-api/src/index.js":123,"./alfresco-core-rest-api/src/index.js":146,"./alfrescoApiClient":257,"./alfrescoContent":258,"./alfrescoNode":259,"events":51,"util":119}],257:[function(require,module,exports){
+},{"../test/mockObjects/mockAlfrescoApi.js":262,"./alfresco-auth-rest-api/src/index":123,"./alfresco-auth-rest-api/src/index.js":123,"./alfresco-core-rest-api/src/index.js":146,"./alfrescoApiClient":257,"./alfrescoContent":258,"./alfrescoNode":259,"./alfrescoSearch":260,"events":51,"util":119}],257:[function(require,module,exports){
 'use strict';
 var util = require('util');
 var EventEmitter = require('events').EventEmitter;
@@ -50384,7 +50390,9 @@ class AlfrescoApiClient extends ApiClient {
                 resolve(data);
             }, (error)  => {
                 if (error.error.status === 401) {
-                    this.emit('unauthorized');
+                    if (typeof this.emit === 'function') {
+                        this.emit('unauthorized');
+                    }
                 }
                 reject(error);
             });
@@ -50486,6 +50494,17 @@ module.exports = AlfrescoNode;
 },{"./alfresco-core-rest-api/src/index.js":146}],260:[function(require,module,exports){
 'use strict';
 
+var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
+
+class alfrescoSearch extends AlfrescoCoreRestApi.SearchApi {
+
+}
+
+module.exports = alfrescoSearch;
+
+},{"./alfresco-core-rest-api/src/index.js":146}],261:[function(require,module,exports){
+'use strict';
+
 var nock = require('nock');
 
 class AuthResponseMock {
@@ -50583,7 +50602,7 @@ class AuthResponseMock {
 
 module.exports = AuthResponseMock;
 
-},{"nock":59}],261:[function(require,module,exports){
+},{"nock":59}],262:[function(require,module,exports){
 var mockAlfrescoApi = {};
 
 mockAlfrescoApi.Auth = require('./authResponseMock.js');
@@ -50591,7 +50610,7 @@ mockAlfrescoApi.node = require('./nodeMock.js');
 
 module.exports = mockAlfrescoApi;
 
-},{"./authResponseMock.js":260,"./nodeMock.js":262}],262:[function(require,module,exports){
+},{"./authResponseMock.js":261,"./nodeMock.js":263}],263:[function(require,module,exports){
 'use strict';
 
 var nock = require('nock');
