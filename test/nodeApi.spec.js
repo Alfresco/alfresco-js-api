@@ -104,12 +104,7 @@ describe('Alfresco Core Node Api', function () {
 
             this.alfrescoJsApi.node.getNodeInfo('80a94ac4-3ec4-47ad-864e-5d939424c47c').then(function () {
             }, function (error) {
-                expect(error.message).to.be.equal('{"error":{"errorKey":"framework.exception.' +
-                    'EntityNotFound","statusCode":404,"briefSummary":"05220073 The entity with ' +
-                    'id: 80a94ac4-3ec4-47ad-864e-5d939424c47c was not found","stackTrace":"For ' +
-                    'security reasons the stack trace is no longer displayed, but the property is' +
-                    ' kept for previous versions.","descriptionURL":"https://api-explorer.alfresco.com"}}');
-                expect(error.error.toString()).to.be.equal('Error: Not Found');
+                expect(error.status).to.be.equal(404);
                 done();
             });
         });
@@ -134,12 +129,7 @@ describe('Alfresco Core Node Api', function () {
 
             this.alfrescoJsApi.node.getNodeChildren('b4cff62a-664d-4d45-9302-98723eac1319').then(function () {
             }, function (error) {
-                expect(error.message).to.be.equal('{"error":{"errorKey":"framework.exception.' +
-                    'EntityNotFound","statusCode":404,"briefSummary":"05220073 The entity with ' +
-                    'id: 80a94ac4-3ec4-47ad-864e-5d939424c47c was not found","stackTrace":"For ' +
-                    'security reasons the stack trace is no longer displayed, but the property is' +
-                    ' kept for previous versions.","descriptionURL":"https://api-explorer.alfresco.com"}}');
-                expect(error.error.toString()).to.be.equal('Error: Not Found');
+                expect(error.status).to.be.equal(404);
                 done();
             });
         });
@@ -161,7 +151,7 @@ describe('Alfresco Core Node Api', function () {
 
             this.alfrescoJsApi.node.deleteNode('80a94ac8-3ece-47ad-864e-5d939424c47c').then(function () {
             }, function (error) {
-                expect(error.error.toString()).to.be.equal('Error: Not Found');
+                expect(error.status).to.be.equal(404);
                 done();
             });
         });
@@ -191,7 +181,7 @@ describe('Alfresco Core Node Api', function () {
 
             this.alfrescoJsApi.node.deleteNodePermanent('80a94ac8-3ece-47ad-864e-5d939424c47c').then(function () {
             }, function (error) {
-                expect(error.error.toString()).to.be.equal('Error: Not Found');
+                expect(error.status).to.be.equal(404);
                 done();
             });
         });

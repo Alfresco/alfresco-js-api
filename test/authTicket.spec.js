@@ -80,11 +80,7 @@ describe('Auth', function () {
             this.alfrescoJsApi.login().then(function () {
 
             }, function (error) {
-                expect(error.error.toString()).to.be.equal('Error: Forbidden');
-                expect(error.message).to.be.equal('{"error":{"errorKey":"Login failed","statusCode":403,' +
-                    '"briefSummary":"05150009 Login failed","stackTrace":"For security reasons the stack ' +
-                    'trace is no longer displayed, but the property is kept for previous versions.","descriptionURL":' +
-                    '"https://api-explorer.alfresco.com"}}');
+                expect(error.status).to.be.equal(403);
                 done();
             });
         });
@@ -101,11 +97,7 @@ describe('Auth', function () {
             this.alfrescoJsApi.login().then(function () {
 
             }, function (error) {
-                expect(error.error.toString()).to.be.equal('Error: Bad Request');
-                expect(error.message).to.be.equal('{"error":{"errorKey":"Invalid login details."' +
-                    ',"statusCode":400,"briefSummary":"05160045 Invalid login details.","stackTrace":' +
-                    '"For security reasons the stack trace is no longer displayed, but the property is ' +
-                    'kept for previous versions.","descriptionURL":"https://api-explorer.alfresco.com"}}');
+                expect(error.status).to.be.equal(400);
                 done();
             });
         });

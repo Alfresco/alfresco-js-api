@@ -160,8 +160,7 @@ this.alfrescoJsApi.node.getNodeChildrenInfo(folderNodeId).then(function (data) {
 
 createFolder(name, relativePath, nodeId, opts) 
 
->createFolder
-returns a promise that is resolved if the folder is created and {error} if rejected.
+>createFolder return a promise that is resolved if the folder is created and {error} if rejected.
      
 ```javascript
 
@@ -192,7 +191,7 @@ this.alfrescoJsApi.node.createFolder('newFolderName', 'folderA/folderB', parentF
 **CreateFolder With Auto Rename**
 
 createFolderAutoRename(name, relativePath, nodeId, opts)
-is the same of createFolder(name, relativePath, nodeId, {autoRename: true}) is just syntactic sugar
+>is the same of createFolder(name, relativePath, nodeId, {autoRename: true}) is just syntactic sugar
 
 
 ```javascript

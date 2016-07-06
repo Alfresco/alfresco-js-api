@@ -6,6 +6,7 @@ var AlfrescoApiClient = require('./alfrescoApiClient');
 var AlfrescoContent = require('./alfrescoContent');
 var AlfrescoNode = require('./alfrescoNode');
 var AlfrescoSearch = require('./alfrescoSearch');
+var AlfrescoUpload = require('./alfrescoUpload');
 var EventEmitter = require('events').EventEmitter;
 var util = require('util');
 
@@ -72,6 +73,7 @@ class AlfrescoApi {
         this.node = new AlfrescoNode();
         this.search = new AlfrescoSearch();
         this.content = new AlfrescoContent(this.apiCoreUrl, this.config);
+        this.upload =  new AlfrescoUpload();
     }
 
     /**
