@@ -74,13 +74,13 @@ class AlfrescoApiClient extends ApiClient {
             request.accept(accept);
         }
 
-        return new Promise((resolve, reject) => {
+        this.promise = new Promise((resolve, reject) => {
             request.end((error, response) => {
                 if (error) {
-                    this.emit('reject', error);
+                    this.promise.emit('error', error);
 
                     if (error.status === 401) {
-                        this.emit('unauthorized');
+                        this.promise.emit('unauthorized');
                     }
 
                     if (response && response.text) {
@@ -91,30 +91,23 @@ class AlfrescoApiClient extends ApiClient {
 
                 } else {
                     var data = this.deserialize(response, returnType);
+                    this.promise.emit('success', data);
                     resolve(data);
                 }
-            }).on('abort', this.abort);
+            }).on('abort', () => {
+                this.promise.emit('abort');
+            });
         });
-    }
 
-    abort(event) {
-        console.log(event);
-        this.emit('abort');
+        Emitter(this.promise); // jshint ignore:line
+
+        return this.promise;
     }
 
     progress(event) {
-        console.log(event);
         if (event.lengthComputable) {
             var percent = Math.round(event.loaded / event.total * 100);
-            //uploadingFileModel.setProgres({
-            //    total: event.total,
-            //    loaded: event.loaded,
-            //    percent: percent
-            //});
-            //if (this._filesUploadObserver) {
-            //    this._filesUploadObserver.next(this._queue);
-            //}
-            this.emit('percent', {
+            this.promise.emit('progress', {
                 total: event.total,
                 loaded: event.loaded,
                 percent: percent

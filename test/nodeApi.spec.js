@@ -7,7 +7,7 @@ var NodeMock = require('../test/mockObjects/nodeMock');
 
 describe('Alfresco Core Node Api', function () {
     beforeEach(function (done) {
-        this.host = 'http://devproducts-platform.alfresco.me';
+        this.host = 'http://192.168.99.100:8080';
 
         this.authResponseMock = new AuthResponseMock(this.host);
         this.nodeMock = new NodeMock(this.host);
@@ -44,8 +44,6 @@ describe('Alfresco Core Node Api', function () {
                 expect(data.entry.name).to.be.equal('newFolder');
                 expect(data.entry.isFolder).to.be.equal(true);
                 done();
-            }, function (error) {
-                console.log(error);
             });
         });
 
@@ -56,34 +54,10 @@ describe('Alfresco Core Node Api', function () {
                 expect(data.entry.name).to.be.equal('newFolder-1');
                 expect(data.entry.isFolder).to.be.equal(true);
                 done();
-            }, function (error) {
-                console.log(error);
             });
         });
 
     });
-
-    //describe('Add Node', function () {
-    //    it('information for the node with identifier nodeId should return 200 if is all ok', function (done) {
-    //        this.nodeMock.rec();
-    //
-    //        var nodeBody = {
-    //            'name': 'fake-folder',
-    //            'nodeType': 'cm:folder',
-    //            'relativePath': 'x/y/z'
-    //        };
-    //
-    //        this.alfrescoJsApi.addNode('80a94ac8-3ece-47ad-864e-5d939424c47c', nodeBody).then(function (data) {
-    //            console.log(data);
-    //            done();
-    //        }, function (error) {
-    //            console.log(error);
-    //        });
-    //
-    //        this.nodeMock.play();
-    //    });
-    //
-    //});
 
     describe('Get Node', function () {
         it('information for the node with identifier nodeId should return 200 if is all ok', function (done) {
@@ -93,8 +67,6 @@ describe('Alfresco Core Node Api', function () {
                 expect(data.name).to.be.equal('grass.jpg');
                 expect(data.isFile).to.be.equal(true);
                 done();
-            }, function (error) {
-                console.log(error);
             });
 
         });
@@ -118,8 +90,6 @@ describe('Alfresco Core Node Api', function () {
                 expect(data.list.pagination.count).to.be.equal(5);
                 expect(data.list.entries[0].entry.name).to.be.equal('dataLists');
                 done();
-            }, function (error) {
-                console.log(error);
             });
 
         });

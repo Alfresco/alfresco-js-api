@@ -136,9 +136,11 @@ export interface AlfrescoApi {
 
     createFolder(name: string, relativePath: string, nodeId: string): any;
     getNodeInfo(nodeId: string): any;
-    getNodeChildrenInfo(nodeId: string, opts:any): any;
+    getNodeChildrenInfo(nodeId: string, opts: any): any;
     deleteNode(nodeId: string): any;
     deleteNodePermanent(nodeId: string): any;
+
+    uploadFile(name: string, fileData: any, formData:any, relativePath: string, nodeId: string, opts: any): any;
 
     isLoggedIn(): boolean;
     login(): any;

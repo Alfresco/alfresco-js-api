@@ -32,14 +32,6 @@ class AlfrescoApi {
     createClients() {
         this.alfrescoClient = new AlfrescoApiClient();
         this.alfrescoClientAuth = new AlfrescoApiClient();
-
-        this.alfrescoClientAuth.on('unauthorized', (event)  => {
-            this.emit('unauthorized');
-        });
-
-        this.alfrescoClient.on('unauthorized', (event)  => {
-            this.emit('unauthorized');
-        });
     }
 
     /**
@@ -59,8 +51,6 @@ class AlfrescoApi {
             password: config.password,
             ticket: config.ticket
         };
-
-        console.log('3' + this.config.host);
 
         this.apiAuthUrl = this.config.host + '/alfresco/api/-default-/public/authentication/versions/1'; //Auth Call
         this.apiCoreUrl = this.config.host + '/alfresco/api/-default-/public/alfresco/versions/1';   //Core Call
@@ -114,16 +104,63 @@ class AlfrescoApi {
         loginRequest.userId = this.config.username;
         loginRequest.password = this.config.password;
 
-        return new Promise((resolve, reject) => {
-            apiInstance.createTicket(loginRequest).then((data) => {
-                this.emit('success');
-
-                this.setToken(data.entry.id);
-                resolve(data.entry.id);
-            }, function (error) {
-                reject(error);
-            });
+        this.promise = new Promise((resolve, reject) => {
+            apiInstance.createTicket(loginRequest).then(
+                (data) => {
+                    this.setToken(data.entry.id);
+                    this.promise.emit('success');
+                    resolve(data.entry.id);
+                },
+                (error) => {
+                    if (error.status === 401) {
+                        this.promise.emit('unauthorized');
+                    }
+                    this.promise.emit('error');
+                    reject(error);
+                });
         });
+
+        Emitter(this.promise); // jshint ignore:line
+
+        return this.promise;
+    }
+
+    /**
+     * logout Alfresco API
+     *
+     * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
+     * */
+    logout() {
+        var apiInstance = new AlfrescoAuthRestApi.AuthenticationApi(this.getClientAuth());
+
+        this.promise = new Promise((resolve, reject) => {
+            apiInstance.deleteTicket().then(
+                (data) => {
+                    this.promise.emit('logout');
+                    this.setToken(undefined);
+                    resolve('logout');
+                },
+                (error) => {
+                    if (error.status === 401) {
+                        this.promise.emit('unauthorized');
+                    }
+                    this.promise.emit('error');
+                    reject(error);
+                });
+        });
+
+        Emitter(this.promise); // jshint ignore:line
+
+        return this.promise;
+    }
+
+    /**
+     * If the client is logged in retun true
+     *
+     * @returns {Boolean} is logged in
+     */
+    isLoggedIn() {
+        return !!this.config.ticket;
     }
 
     /**
@@ -143,35 +180,6 @@ class AlfrescoApi {
      * */
     getToken() {
         return this.config.ticket;
-    }
-
-    /**
-     * logout Alfresco API
-     *
-     * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
-     * */
-    logout() {
-        var apiInstance = new AlfrescoAuthRestApi.AuthenticationApi(this.getClientAuth());
-
-        return new Promise((resolve, reject) => {
-            apiInstance.deleteTicket().then((data) => {
-                this.emit('logout');
-
-                this.setToken(undefined);
-                resolve('logout');
-            }, function (error) {
-                reject(error);
-            });
-        });
-    }
-
-    /**
-     * If the client is logged in retun true
-     *
-     * @returns {Boolean} is logged in
-     */
-    isLoggedIn() {
-        return !!this.config.ticket;
     }
 }
 

@@ -59,8 +59,8 @@ class AuthResponseMock {
     get401Response() {
         nock(this.host, {'encodedQueryParams': true})
             .post('/alfresco/api/-default-/public/authentication/versions/1/tickets', {
-                'userId': null,
-                'password': null
+                'userId': 'wrong',
+                'password': 'credentials'
             })
             .reply(401, {
                 'error': {

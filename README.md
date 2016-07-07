@@ -97,25 +97,24 @@ if (isLoggedIn) {
 }
 
 ```
+#  Events login/logout
 
-#  Events
-
->  The AlfrescoApi is also an EventEmitter that you can register to listen to any of the following event types:
+>  The login/logout are also an EventEmitter which you can register to listen to any of the following event types:
 * unauthorized (If this event is triggered a call to the Api was unauthorized)
 * success (If this event is triggered the login was success you can use this event instead the login promise)
 * logout (If this event is triggered the client is successfully logout)
 
 ```javascript
 
-this.alfrescoJsApi.on('unauthorized', function(){
+this.alfrescoJsApi.login().on('unauthorized', function(){
     console.log('You are unauthorized you can use this event to redirect to login');
 });
 
-this.alfrescoJsApi.on('success', function(){
+this.alfrescoJsApi.login().on('success', function(){
     console.log('Success Login');
 });
 
-this.alfrescoJsApi.on('logout', function(){
+this.alfrescoJsApi.logout().on('logout', function(){
     console.log('Successfully Logout');
 });
 ```
@@ -203,6 +202,50 @@ this.alfrescoJsApi.node.createFolderAutoRename('newFolderName').then(function (d
 });
 ```
 
+#  Upload File
+
+uploadFile(name, fileData, formData, relativePath, nodeId, opts)
+ 
+```javascript
+ 
+this.alfrescoJsApi.upload.uploadFile('newFile.txt', uploadingFileModel.file)
+    .then(function () {
+        console.log('File Uploaded');
+    }, function (error) {
+        console.log('Error during the upload' + error);
+    });
+
+```
+
+#  Events Upload File
+
+>  The uploadFile is also an EventEmitter which you can register to listen to any of the following event types:
+* progress 
+* success 
+* abort 
+* error 
+* unauthorized 
+
+```javascript
+
+    .on('progress', (progress) => {
+        console.log( 'Total :' + progress.total );
+        console.log( 'Loaded :' + progress.loaded );
+        console.log( 'Percent :' + progress.percent );
+    })  
+    .on('success', () => {
+       console.log( 'Your File is uploaded');
+    });
+    .on('abort', () => {
+      console.log( 'Upload Aborted');
+    })
+    .on('error', () => {
+      console.log( 'Error during the upload');
+    })
+    .on('unauthorized', () => {
+    console.log('You are unauthorized');
+    })
+```
 
 #  Delete File or Folder
 

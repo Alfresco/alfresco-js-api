@@ -37,7 +37,7 @@ describe('Auth', function () {
             this.alfrescoJsApi = new AlfrescoApi({
                 username: 'admin',
                 password: 'admin',
-                host: 'http://192.168.99.100:8080'
+                host: this.host
             });
 
             this.alfrescoJsApi.login().then(() => {
@@ -54,7 +54,7 @@ describe('Auth', function () {
             this.alfrescoJsApi = new AlfrescoApi({
                 username: 'admin',
                 password: 'admin',
-                host: 'http://192.168.99.100:8080'
+                host: this.host
             });
 
             this.alfrescoJsApi.login();
@@ -74,7 +74,7 @@ describe('Auth', function () {
             this.alfrescoJsApi = new AlfrescoApi({
                 username: 'wrong',
                 password: 'name',
-                host: 'http://192.168.99.100:8080'
+                host: this.host
             });
 
             this.alfrescoJsApi.login().then(function () {
@@ -91,7 +91,7 @@ describe('Auth', function () {
             this.alfrescoJsApi = new AlfrescoApi({
                 username: null,
                 password: null,
-                host: 'http://192.168.99.100:8080'
+                host: this.host
             });
 
             this.alfrescoJsApi.login().then(function () {
@@ -103,33 +103,32 @@ describe('Auth', function () {
         });
 
         describe('Events ', function () {
-
-            it('login should fire an event if is unauthorized an 401', function (done) {
+            it('login should fire an event if is unauthorized  401', function (done) {
                 this.authResponseMock.get401Response();
 
-                this.alfrescoJsApi.login();
-
-                this.alfrescoJsApi.on('unauthorized', ()=> {
-                    done();
+                this.alfrescoJsApi = new AlfrescoApi({
+                    username: 'wrong',
+                    password: 'credentials',
+                    host: this.host
                 });
 
+                this.alfrescoJsApi.login().on('unauthorized', ()=> {
+                    done();
+                });
             });
 
-            it('The Api Should fire success event if is unauthorized an 401', function (done) {
+            it('The Api Should fire success event if is all ok 201', function (done) {
                 this.authResponseMock.get201Response();
 
                 this.alfrescoJsApi = new AlfrescoApi({
                     username: 'admin',
                     password: 'admin',
-                    host: 'http://192.168.99.100:8080'
+                    host: this.host
                 });
 
-                this.alfrescoJsApi.on('success', ()=> {
+                this.alfrescoJsApi.login().on('success', ()=> {
                     done();
                 });
-
-                this.alfrescoJsApi.login();
-
             });
 
             it('The Api Should fire logout event if the logout is successfull', function (done) {
@@ -138,21 +137,17 @@ describe('Auth', function () {
                 this.alfrescoJsApi = new AlfrescoApi({
                     username: 'admin',
                     password: 'admin',
-                    host: 'http://192.168.99.100:8080'
-                });
-
-                this.alfrescoJsApi.on('logout', ()=> {
-                    done();
+                    host: this.host
                 });
 
                 this.alfrescoJsApi.login();
 
                 this.authResponseMock.get204ResponseLogout();
 
-                this.alfrescoJsApi.logout();
-
+                this.alfrescoJsApi.logout().on('logout', ()=> {
+                    done();
+                });
             });
-
         });
 
         describe('With Ticket Authentication', function () {
@@ -162,7 +157,7 @@ describe('Auth', function () {
 
                 this.alfrescoJsApi = new AlfrescoApi({
                     ticket: 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1',
-                    host: 'http://192.168.99.100:8080'
+                    host: this.host
                 });
 
                 expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(this.alfrescoJsApi.getClient().authentications.basicAuth.password);
@@ -176,7 +171,7 @@ describe('Auth', function () {
                 this.alfrescoJsApi = new AlfrescoApi({
                     username: 'admin',
                     password: 'admin',
-                    host: 'http://192.168.99.100:8080'
+                    host: this.host
                 });
 
                 this.alfrescoJsApi.login().then(() => {

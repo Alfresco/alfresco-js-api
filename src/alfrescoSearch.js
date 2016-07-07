@@ -2,8 +2,8 @@
 
 var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
 
-class alfrescoSearch extends AlfrescoCoreRestApi.SearchApi {
+class AlfrescoSearch extends AlfrescoCoreRestApi.SearchApi {
 
 }
 
-module.exports = alfrescoSearch;
+module.exports = AlfrescoSearch;

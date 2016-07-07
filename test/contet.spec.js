@@ -5,7 +5,6 @@ var expect = require('chai').expect;
 var AuthResponseMock = require('../test/mockObjects/authResponseMock');
 
 describe('Alfresco Content', function () {
-
     beforeEach(function (done) {
         this.host = 'http://192.168.99.100:8080';
 
