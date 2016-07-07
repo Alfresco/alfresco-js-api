@@ -1,6 +1,5 @@
 'use strict';
-var util = require('util');
-var EventEmitter = require('events').EventEmitter;
+var Emitter = require('event-emitter');
 var ApiClient = require('./alfresco-core-rest-api/src/ApiClient');
 var superagent = require('superagent');
 var _ = require('lodash');
@@ -9,6 +8,7 @@ class AlfrescoApiClient extends ApiClient {
 
     constructor() {
         super();
+        Emitter.call(this);
     }
 
     /**
@@ -29,7 +29,6 @@ class AlfrescoApiClient extends ApiClient {
      */
     callApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, authNames,
             contentTypes, accepts, returnType) {
-
         var url = this.buildUrl(path, pathParams);
         var request = superagent(httpMethod, url);
 
@@ -53,21 +52,21 @@ class AlfrescoApiClient extends ApiClient {
         }
 
         if (contentType === 'application/x-www-form-urlencoded') {
-            request.send(this.normalizeParams(formParams));
+            request.send(this.normalizeParams(formParams)).on('progress', this.progress);
         } else if (contentType === 'multipart/form-data') {
             var _formParams = this.normalizeParams(formParams);
             for (var key in _formParams) {
                 if (_formParams.hasOwnProperty(key)) {
                     if (this.isFileParam(_formParams[key])) {
                         // file field
-                        request.attach(key, _formParams[key]);
+                        request.attach(key, _formParams[key]).on('progress', this.progress);
                     } else {
-                        request.field(key, _formParams[key]);
+                        request.field(key, _formParams[key]).on('progress', this.progress);
                     }
                 }
             }
         } else if (bodyParam) {
-            request.send(bodyParam);
+            request.send(bodyParam).on('progress', this.progress);
         }
 
         var accept = this.jsonPreferredMime(accepts);
@@ -78,25 +77,51 @@ class AlfrescoApiClient extends ApiClient {
         return new Promise((resolve, reject) => {
             request.end((error, response) => {
                 if (error) {
-                    if (error.status === 401) {
+                    this.emit('reject', error);
 
-                        if (typeof this.emit === 'function') {
-                            this.emit('unauthorized');
-                        }
+                    if (error.status === 401) {
+                        this.emit('unauthorized');
                     }
+
                     if (response && response.text) {
-                        reject(_.merge(error, {message: response.text }));
+                        reject(_.merge(error, {message: response.text}));
                     } else {
-                        reject({error: error });
+                        reject({error: error});
                     }
+
                 } else {
                     var data = this.deserialize(response, returnType);
                     resolve(data);
                 }
-            });
+            }).on('abort', this.abort);
         });
+    }
+
+    abort(event) {
+        console.log(event);
+        this.emit('abort');
+    }
+
+    progress(event) {
+        console.log(event);
+        if (event.lengthComputable) {
+            var percent = Math.round(event.loaded / event.total * 100);
+            //uploadingFileModel.setProgres({
+            //    total: event.total,
+            //    loaded: event.loaded,
+            //    percent: percent
+            //});
+            //if (this._filesUploadObserver) {
+            //    this._filesUploadObserver.next(this._queue);
+            //}
+            this.emit('percent', {
+                total: event.total,
+                loaded: event.loaded,
+                percent: percent
+            });
+        }
     }
 }
 
-util.inherits(ApiClient, EventEmitter);
+Emitter(AlfrescoApiClient.prototype); // jshint ignore:line
 module.exports = AlfrescoApiClient;

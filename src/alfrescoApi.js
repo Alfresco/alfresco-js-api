@@ -7,8 +7,7 @@ var AlfrescoContent = require('./alfrescoContent');
 var AlfrescoNode = require('./alfrescoNode');
 var AlfrescoSearch = require('./alfrescoSearch');
 var AlfrescoUpload = require('./alfrescoUpload');
-var EventEmitter = require('events').EventEmitter;
-var util = require('util');
+var Emitter = require('event-emitter');
 
 class AlfrescoApi {
     /**
@@ -23,6 +22,7 @@ class AlfrescoApi {
      */
     constructor(config) {
         this.changeConfig(config);
+        Emitter.call(this);
     }
 
     /**
@@ -33,17 +33,13 @@ class AlfrescoApi {
         this.alfrescoClient = new AlfrescoApiClient();
         this.alfrescoClientAuth = new AlfrescoApiClient();
 
-        if (typeof this.alfrescoClientAuth.on === 'function') {
-            this.alfrescoClientAuth.on('unauthorized', (event)  => {
-                this.emit('unauthorized');
-            });
-        }
+        this.alfrescoClientAuth.on('unauthorized', (event)  => {
+            this.emit('unauthorized');
+        });
 
-        if (typeof this.alfrescoClientAuth.on === 'function') {
-            this.alfrescoClient.on('unauthorized', (event)  => {
-                this.emit('unauthorized');
-            });
-        }
+        this.alfrescoClient.on('unauthorized', (event)  => {
+            this.emit('unauthorized');
+        });
     }
 
     /**
@@ -64,6 +60,8 @@ class AlfrescoApi {
             ticket: config.ticket
         };
 
+        console.log('3' + this.config.host);
+
         this.apiAuthUrl = this.config.host + '/alfresco/api/-default-/public/authentication/versions/1'; //Auth Call
         this.apiCoreUrl = this.config.host + '/alfresco/api/-default-/public/alfresco/versions/1';   //Core Call
 
@@ -73,7 +71,7 @@ class AlfrescoApi {
         this.node = new AlfrescoNode();
         this.search = new AlfrescoSearch();
         this.content = new AlfrescoContent(this.apiCoreUrl, this.config);
-        this.upload =  new AlfrescoUpload();
+        this.upload = new AlfrescoUpload();
     }
 
     /**
@@ -118,9 +116,8 @@ class AlfrescoApi {
 
         return new Promise((resolve, reject) => {
             apiInstance.createTicket(loginRequest).then((data) => {
-                if (typeof this.emit === 'function') {
-                    this.emit('success');
-                }
+                this.emit('success');
+
                 this.setToken(data.entry.id);
                 resolve(data.entry.id);
             }, function (error) {
@@ -158,9 +155,8 @@ class AlfrescoApi {
 
         return new Promise((resolve, reject) => {
             apiInstance.deleteTicket().then((data) => {
-                if (typeof this.emit === 'function') {
-                    this.emit('logout');
-                }
+                this.emit('logout');
+
                 this.setToken(undefined);
                 resolve('logout');
             }, function (error) {
@@ -183,5 +179,5 @@ AlfrescoApi.prototype.Core = require('./alfresco-core-rest-api/src/index.js');
 AlfrescoApi.prototype.Auth = require('./alfresco-auth-rest-api/src/index.js');
 AlfrescoApi.prototype.Mock = require('../test/mockObjects/mockAlfrescoApi.js');
 
-util.inherits(AlfrescoApi, EventEmitter);
+Emitter(AlfrescoApi.prototype); // jshint ignore:line
 module.exports = AlfrescoApi;

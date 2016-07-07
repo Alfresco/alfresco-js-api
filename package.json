@@ -27,6 +27,7 @@
   "devDependencies": {
     "browserify": "^13.0.1",
     "chai": "^3.5.0",
+    "event-emitter": "^0.3.4",
     "expect.js": "~0.3.1",
     "grunt": "~0.4.0",
     "grunt-cli": "^1.1.0",

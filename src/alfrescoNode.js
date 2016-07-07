@@ -34,13 +34,7 @@ class AlfrescoNode extends AlfrescoCoreRestApi.NodesApi {
      * @returns {Promise} A promise that is resolved if the file is deleted and {error} if rejected.
      */
     deleteNodePermanent(nodeId) {
-        return new Promise((resolve, reject) => {
-            this.deleteNode(nodeId, {permanent: true}).then(function (data) {
-                resolve(data);
-            }, function (error) {
-                reject(error);
-            });
-        });
+        return this.deleteNode(nodeId, {permanent: true});
     }
 
     /**
@@ -61,13 +55,7 @@ class AlfrescoNode extends AlfrescoCoreRestApi.NodesApi {
             'relativePath': relativePath
         };
 
-        return new Promise((resolve, reject) => {
-            this.addNode(nodeId, nodeBody, opts).then(function (data) {
-                resolve(data);
-            }, function (error) {
-                reject(error);
-            });
-        });
+        return this.addNode(nodeId, nodeBody, opts);
     }
 
     /**

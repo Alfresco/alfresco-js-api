@@ -245,7 +245,7 @@ class AuthResponseMock {
     }
 
     get201CreationFolderNewNameNotClashes() {
-        nock('http://devproducts-platform.alfresco.me:80', {'encodedQueryParams': true})
+        nock(this.host, {'encodedQueryParams': true})
             .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children', {
                 'name': 'newFolder',
                 'nodeType': 'cm:folder'
