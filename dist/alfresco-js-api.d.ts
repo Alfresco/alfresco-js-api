@@ -131,7 +131,6 @@ export interface AlfrescoApi {
     createClient(): any;
     getClient(): any;
     getClientAuth(): any;
-    getToken(): any;
     changeConfig(config: any);
 
     createFolder(name: string, relativePath: string, nodeId: string): any;
@@ -147,6 +146,10 @@ export interface AlfrescoApi {
     logout(): any;
     getDocumentThumbnailUrl(documentId: string): any;
     getContentUrl(documentId: string): any;
+
+    getTicket(): any;
+    setTicket(ticket: any): any;
+
 }
 
 declare var AlfrescoApi: AlfrescoApi;
