@@ -17,21 +17,16 @@ var AuthResponseMock = require('alfresco-js-api').Mock.authResponseMock
 
 authResponseMock = new AuthResponseMock(host);
 
-authResponseMock.authResponseMock.get201Response(forceTicket);
-
-authResponseMock.get403Response();
-
-authResponseMock.get400Response();}
-
-authResponseMock.get401Response() ;
-
-authResponseMock.get204ResponseLogout();
-
-authResponseMock.get404ResponseLogout();
-
-authResponseMock.rec();
-
-authResponseMock.play();
+Method | Description  |
+------------- | ------------- |
+authResponseMock.authResponseMock.get201Response(forceTicket);| | 
+authResponseMock.get403Response()| | 
+authResponseMock.get400Response()| | 
+authResponseMock.get401Response()| | 
+authResponseMock.get204ResponseLogout()| | 
+authResponseMock.get404ResponseLogout()| | 
+authResponseMock.rec()| | 
+authResponseMock.play()| | 
 
 ##Example 
 
@@ -63,31 +58,21 @@ var NodeMock = require('alfresco-js-api').Mock.NodeMock
 
 nodeMock = new NodeMock(host);
 
-nodeMock.get200ResponseChildren() 
-
-nodeMock.get200ResponseSingleFileFolder() 
-
-nodeMock.get404ChildrenNotExist() 
-
-nodeMock.get404FileFolderNotExist() 
-
-nodeMock.get204SuccessfullyDeleted()
-
-nodeMock.get403DeletePermissionDenied() 
-
-nodeMock.get404DeleteNotFound() 
-
-nodeMock.get404DeletePermanentlyNotFound()
-
-nodeMock.get200CreationFolder()
-
-nodeMock.get409CreationFolderNewNameClashes()
-
-nodeMock.get201CreationFolderNewNameNotClashes()
-
-nodeMock.rec();
-
-nodeMock.play();
+Method | Description  |
+------------- | ------------- |
+nodeMock.get200ResponseChildren()| | 
+nodeMock.get200ResponseSingleFileFolder()| | 
+nodeMock.get404ChildrenNotExist()| | 
+nodeMock.get404FileFolderNotExist()| | 
+nodeMock.get204SuccessfullyDeleted()| | 
+nodeMock.get403DeletePermissionDenied()| | 
+nodeMock.get404DeleteNotFound()| | 
+nodeMock.get404DeletePermanentlyNotFound() | | 
+nodeMock.get200CreationFolder()| | 
+nodeMock.get409CreationFolderNewNameClashes()| | 
+nodeMock.get201CreationFolderNewNameNotClashes()| | 
+nodeMock.rec();| | 
+nodeMock.play();| | 
 
 ##Example 
 
@@ -127,17 +112,14 @@ var UploadMock = require('alfresco-js-api').Mock.UploadMock
 
 uploadMock = new UploadMock(host);
 
-uploadMock.get201CreationFile();
-
-uploadMock.get201CreationFileAutoRename();
-
-uploadMock.get409CreationFileNewNameClashes();
-
-uploadMock.get401Response();
-
-uploadMock.rec();
-
-uploadMock.play();
+Method | Description  |
+------------- | ------------- |
+uploadMock.get201CreationFile()| | 
+uploadMock.get201CreationFileAutoRename()| | 
+uploadMock.get409CreationFileNewNameClashes()| | 
+uploadMock.get401Response()| | 
+uploadMock.rec()| | 
+uploadMock.play()| | 
 
 
 ```javascript
