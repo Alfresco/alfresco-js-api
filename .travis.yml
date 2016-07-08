@@ -10,4 +10,5 @@ cache:
 script: npm run test
 after_success:
   npm run coverage --force
-after_script: "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
