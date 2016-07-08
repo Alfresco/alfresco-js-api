@@ -204,8 +204,18 @@ this.alfrescoJsApi.node.createFolderAutoRename('newFolderName').then(function (d
 ```
 
 #  Upload File
+
 uploadFile(fileDefinition, relativePath, nodeId, nodeBody, opts)
 >uploadFile return a promise that is resolved if the file is successful uploaded and {error} if rejected.
+
+The fileDefinition provides information about files and allows JavaScript to access their content.
+
+*Web File Definition 
+File Definition are generally retrieved from a FileList object returned as a result of a user selecting files using the <input> element
+
+*Node File Definition
+File Definition are generally retrieved from a read Stram
+
 
 ```javascript
  
@@ -362,6 +372,7 @@ var thumbnailUrl = this.alfrescoJsApi.content.getContentUrl('1a0b110f-1e09-4ca2-
 ## Release History
 
 
- * 2016-06-16  v1.0.1  Test and task runner Added 
- * 2016-06-03  v1.0.0  
+ * 2016-07-08  v0.1.2  Api Simplify
+ * 2016-06-16  v0.1.1  Test and task runner Added 
+ * 2016-06-03  v0.1.0  
 
