@@ -9,6 +9,5 @@ cache:
     - node_modules
 script: npm run test
 after_success:
-  npm run coverage --force
-after_success:
+  - npm run coverage --force
   - bash <(curl -s https://codecov.io/bash)
