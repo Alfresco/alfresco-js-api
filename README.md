@@ -16,8 +16,9 @@ This project provides a JavaScript client API into the v1 Alfresco REST API.
 
 ## Api Modules
 
-- [Authentication API](https://github.com/Alfresco/alfresco-js-api/tree/master/src/alfresco-auth-rest-api)
-- [Core API](https://github.com/Alfresco/alfresco-js-api/tree/master/src/alfresco-core-rest-api)
+- [Authentication API](/src/alfresco-auth-rest-api)
+- [Core API](/src/alfresco-core-rest-api)
+- [Mock API](/test/mockObjects)
 
 ### Basic usage For node projects
 
@@ -208,7 +209,7 @@ uploadFile(name, fileData, formData, relativePath, nodeId, opts)
  
 ```javascript
  
-this.alfrescoJsApi.upload.uploadFile('newFile.txt', uploadingFileModel.file)
+this.alfrescoJsApi.upload.uploadFile('newFile.txt', uploadingFileModel)
     .then(function () {
         console.log('File Uploaded');
     }, function (error) {
@@ -228,6 +229,7 @@ this.alfrescoJsApi.upload.uploadFile('newFile.txt', uploadingFileModel.file)
 
 ```javascript
 
+this.alfrescoJsApi.upload.uploadFile('newFile.txt', uploadingFileModel)
     .on('progress', (progress) => {
         console.log( 'Total :' + progress.total );
         console.log( 'Loaded :' + progress.loaded );
