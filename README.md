@@ -377,7 +377,7 @@ var thumbnailUrl = this.alfrescoJsApi.content.getContentUrl('1a0b110f-1e09-4ca2-
 ## Release History
 
 
- * 2016-07-08  v0.1.2  Api Simplify
+ * 2016-07-08  v0.2.0  Api Simplify
  * 2016-06-16  v0.1.1  Test and task runner Added 
  * 2016-06-03  v0.1.0  
 
