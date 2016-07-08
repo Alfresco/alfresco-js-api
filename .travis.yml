@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - "5.0.0"
+before_install: npm install -g grunt-cli
+install: npm install
+sudo: false
+cache:
+  directories:
+    - node_modules
+script: npm run test
+after_success:
+  npm run coverage --force
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

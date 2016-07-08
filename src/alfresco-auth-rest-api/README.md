@@ -1,0 +1,87 @@
+# alfresco Auth Rest Api
+
+AlfrescoAuthRestApi - JavaScript client for alfresco-auth-rest-api
+Provides access to the Authentication features of Alfresco
+
+## Installation
+
+### For [Node.js](https://nodejs.org/)
+
+#### npm
+
+To publish the library as a [npm](https://www.npmjs.com/),
+please follow the procedure in ["Publishing npm packages"](https://docs.npmjs.com/getting-started/publishing-npm-packages).
+
+Then install it via:
+
+```shell
+npm install alfresco-auth-rest-api --save
+```
+
+### For browser
+
+The library also works in the browser environment via npm and [browserify](http://browserify.org/). After following
+the above steps with Node.js and installing browserify with `npm install -g browserify`,
+perform the following (assuming *main.js* is your entry file):
+
+```shell
+browserify main.js > bundle.js
+```
+
+Then include *bundle.js* in the HTML pages.
+
+## Getting Started
+
+Please follow the [installation](#installation) instruction and execute the following JS code:
+
+```javascript
+var AlfrescoAuthRestApi = require('alfresco-auth-rest-api');
+
+var defaultClient = AlfrescoAuthRestApi.ApiClient.default;
+
+// Configure HTTP basic authorization: basicAuth
+var basicAuth = defaultClient.authentications.basicAuth;
+basicAuth.username = 'YOUR USERNAME';
+basicAuth.password = 'YOUR PASSWORD';
+
+var api = new AlfrescoAuthRestApi.AuthenticationApi();
+
+var loginRequest = new AlfrescoAuthRestApi.LoginRequest(); // {LoginRequest} The user credential.
+
+api.createTicket(loginRequest).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
+
+```
+
+## Documentation for API Endpoints
+
+All URIs are relative to *https://localhost/alfresco/api/-default-/public/authentication/versions/1*
+
+Class | Method | HTTP request | Description
+------------ | ------------- | ------------- | -------------
+*AlfrescoAuthRestApi.AuthenticationApi* | [**createTicket**](docs/AuthenticationApi.md#createTicket) | **POST** /tickets | Create ticket (login)
+*AlfrescoAuthRestApi.AuthenticationApi* | [**deleteTicket**](docs/AuthenticationApi.md#deleteTicket) | **DELETE** /tickets/-me- | Delete ticket (logout)
+*AlfrescoAuthRestApi.AuthenticationApi* | [**validateTicket**](docs/AuthenticationApi.md#validateTicket) | **GET** /tickets/-me- | Validate ticket
+
+
+## Documentation for Models
+
+ - [AlfrescoAuthRestApi.Error](docs/Error.md)
+ - [AlfrescoAuthRestApi.ErrorError](docs/ErrorError.md)
+ - [AlfrescoAuthRestApi.LoginRequest](docs/LoginRequest.md)
+ - [AlfrescoAuthRestApi.LoginTicketEntry](docs/LoginTicketEntry.md)
+ - [AlfrescoAuthRestApi.LoginTicketEntryEntry](docs/LoginTicketEntryEntry.md)
+ - [AlfrescoAuthRestApi.ValidateTicketEntry](docs/ValidateTicketEntry.md)
+ - [AlfrescoAuthRestApi.ValidateTicketEntryEntry](docs/ValidateTicketEntryEntry.md)
+
+
+## Documentation for Authorization
+
+
+### basicAuth
+
+- **Type**: HTTP basic authentication

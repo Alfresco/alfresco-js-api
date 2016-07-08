@@ -1,35 +1,64 @@
 {
   "name": "alfresco-js-api",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "JavaScript client library for the Alfresco REST API",
   "main": "main.js",
-  "typings": "bundle.d.ts",
+  "typings": "dist/alfresco-js-api.d.ts",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha --recursive",
+    "clean": "rimraf dist/bundle.js node_modules",
+    "build": "grunt && npm run tslint && npm run bundle",
+    "test": "grunt test",
+    "coverage": "grunt coverage",
     "generate": "mvn clean generate-sources",
-    "bundle": "./node_modules/browserify/bin/cmd.js main.js -o bundle.js"
+    "bundle": "browserify -s AlfrescoApi main.js -o dist/alfresco-js-api.js",
+    "watchify": "watchify -s AlfrescoApi main.js -o dist/alfresco-js-api.js",
+    "tslint": "tslint -c tslint.json bundle.d.ts"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Alfresco/dev-platform-rest-api.git"
+    "url": "https://github.com/Alfresco/alfresco-js-api.git"
   },
   "bugs": {
-    "url": "https://github.com/Alfresco/dev-platform-rest-api/issues"
+    "url": "https://github.com/Alfresco/alfresco-js-api/issues"
   },
   "dependencies": {
     "superagent": "1.7.1"
   },
   "devDependencies": {
     "browserify": "^13.0.1",
+    "chai": "^3.5.0",
+    "event-emitter": "^0.3.4",
     "expect.js": "~0.3.1",
-    "mocha": "~2.3.4",
-    "sinon": "1.17.3"
+    "grunt": "~0.4.0",
+    "grunt-cli": "^1.1.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-coveralls": "^1.0.0",
+    "grunt-istanbul": "^0.7.0",
+    "grunt-jscs": "^2.8.0",
+    "grunt-mocha-istanbul": "^3.0.1",
+    "grunt-mocha-test": "^0.12.7",
+    "grunt-open": "^0.2.3",
+    "load-grunt-tasks": "^3.4.1",
+    "lodash": "^4.13.1",
+    "mocha": "^2.4.5",
+    "mocha-lcov-reporter": "^1.2.0",
+    "nock": "^7.7.3",
+    "rimraf": "^2.5.2",
+    "sinon": "^1.17.3",
+    "sinon-chai": "^2.8.0",
+    "tslint": "^3.8.1",
+    "typescript": "^1.8.10",
+    "watchify": "^3.7.0"
   },
   "license": "Apache-2.0",
   "contributors": [
     {
       "name": "Will Abson",
       "email": "will.abson@alfresco.com"
+    },
+    {
+      "name": "Eugenio Romano",
+      "email": "eugenio.romano@alfresco.com"
     }
   ],
   "keywords": [

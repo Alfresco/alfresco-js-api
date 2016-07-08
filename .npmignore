@@ -1,1 +1,14 @@
-pom.xml
+/test
+/Gruntfile.js
+/grunt
+/coverage
+/node_modules
+/.travis.yml
+/.jscsrc
+/.jshintrc
+/.editorconfig
+/build.sh
+/tslint.json
+/pom.xml
+/alfresco-core-rest-api.iml
+/.idea
