@@ -2,7 +2,7 @@
 
 var nock = require('nock');
 
-class AuthResponseMock {
+class NodeMock {
 
     constructor(host) {
         this.host = host ? host : 'http://127.0.0.1:8080';
@@ -277,4 +277,4 @@ class AuthResponseMock {
     }
 }
 
-module.exports = AuthResponseMock;
+module.exports = NodeMock;

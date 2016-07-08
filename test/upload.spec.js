@@ -36,8 +36,6 @@ describe('Alfresco Core Node Api', function () {
                 expect(data.entry.name).to.be.equal('testFile.txt');
                 done();
             });
-
-            this.uploadMock.play();
         });
 
         it('upload file should get 409 if new name clashes with an existing file in the current parent folder', function (done) {
@@ -105,8 +103,6 @@ describe('Alfresco Core Node Api', function () {
             this.alfrescoJsApi.upload.uploadFile(file).once('progress', ()=> {
                 done();
             });
-
-            this.uploadMock.play();
         });
     });
 });
