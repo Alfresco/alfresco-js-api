@@ -47,6 +47,7 @@ class AlfrescoApi {
     changeConfig(config) {
         this.config = {
             host: config.host,
+            contextRoot: config.contextRoot || 'alfresco',
             username: config.username,
             password: config.password,
             ticket: config.ticket
