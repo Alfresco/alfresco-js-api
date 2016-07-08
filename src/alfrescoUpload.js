@@ -18,16 +18,10 @@ class AlfrescoUpload extends AlfrescoCoreRestApi.NodesApi {
             'relativePath': relativePath
         };
 
-        var formParams = [];
+        formData = formData || {};
 
-        if (formData) {
-            Object.keys(formParams).forEach((key) => {
-                formParams.push(key, formData[key]);
-            });
-        }
-
-        formParams.push('fileData', fileData);
-        return this.addNodeUpload(nodeId, nodeBody, opts, formParams);
+        formData.fileData = fileData;
+        return this.addNodeUpload(nodeId, nodeBody, opts, formData);
     }
 
     /**
@@ -64,7 +58,7 @@ class AlfrescoUpload extends AlfrescoCoreRestApi.NodesApi {
         formParams = formParams || {};
 
         var authNames = ['basicAuth'];
-        var contentTypes = ['application/json', 'multipart/form-data'];
+        var contentTypes = ['multipart/form-data'];
         var accepts = ['application/json'];
         var returnType = AlfrescoCoreRestApi.NodeEntry;
 

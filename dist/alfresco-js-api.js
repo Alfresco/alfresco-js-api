@@ -67170,28 +67170,35 @@ class AlfrescoApiClient extends ApiClient {
         }
 
         if (contentType === 'application/x-www-form-urlencoded') {
-            request.send(this.normalizeParams(formParams)).on('progress', this.progress);
+            request.send(this.normalizeParams(formParams)).on('progress', (event)=> {
+                this.progress(event);
+            });
         } else if (contentType === 'multipart/form-data') {
             var _formParams = this.normalizeParams(formParams);
             for (var key in _formParams) {
                 if (_formParams.hasOwnProperty(key)) {
                     if (this.isFileParam(_formParams[key])) {
                         // file field
-                        request.attach(key, _formParams[key]).on('progress', this.progress);
+                        request.attach(key, _formParams[key]).on('progress', (event)=> {
+                            this.progress(event);
+                        });
                     } else {
-                        request.field(key, _formParams[key]).on('progress', this.progress);
+                        request.field(key, _formParams[key]).on('progress', (event)=> {
+                            this.progress(event);
+                        });
                     }
                 }
             }
         } else if (bodyParam) {
-            request.send(bodyParam).on('progress', this.progress);
+            request.send(bodyParam).on('progress', (event)=> {
+                this.progress(event);
+            });
         }
 
         var accept = this.jsonPreferredMime(accepts);
         if (accept) {
             request.accept(accept);
         }
-
         this.promise = new Promise((resolve, reject) => {
             request.end((error, response) => {
                 if (error) {
@@ -67223,8 +67230,9 @@ class AlfrescoApiClient extends ApiClient {
     }
 
     progress(event) {
-        if (event.lengthComputable) {
+        if (event.lengthComputable && this.promise) {
             var percent = Math.round(event.loaded / event.total * 100);
+            console.log('percent' + percent);
             this.promise.emit('progress', {
                 total: event.total,
                 loaded: event.loaded,
@@ -67390,16 +67398,10 @@ class AlfrescoUpload extends AlfrescoCoreRestApi.NodesApi {
             'relativePath': relativePath
         };
 
-        var formParams = [];
+        formData = formData || {};
 
-        if (formData) {
-            Object.keys(formParams).forEach((key) => {
-                formParams.push(key, formData[key]);
-            });
-        }
-
-        formParams.push('fileData', fileData);
-        return this.addNodeUpload(nodeId, nodeBody, opts, formParams);
+        formData.fileData = fileData;
+        return this.addNodeUpload(nodeId, nodeBody, opts, formData);
     }
 
     /**
@@ -67436,7 +67438,7 @@ class AlfrescoUpload extends AlfrescoCoreRestApi.NodesApi {
         formParams = formParams || {};
 
         var authNames = ['basicAuth'];
-        var contentTypes = ['application/json', 'multipart/form-data'];
+        var contentTypes = ['multipart/form-data'];
         var accepts = ['application/json'];
         var returnType = AlfrescoCoreRestApi.NodeEntry;
 
