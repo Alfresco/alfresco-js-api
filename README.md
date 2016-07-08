@@ -14,6 +14,12 @@
 
 This project provides a JavaScript client API into the v1 Alfresco REST API.
 
+## Node
+To correctly use this component check that on your machine is running Node version 5.0.0 or higher.
+
+## Install
+npm install --save alfresco-js-api
+
 ## Api Modules
 
 - [Authentication API](/src/alfresco-auth-rest-api)
