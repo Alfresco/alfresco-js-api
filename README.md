@@ -204,18 +204,48 @@ this.alfrescoJsApi.node.createFolderAutoRename('newFolderName').then(function (d
 ```
 
 #  Upload File
+uploadFile(fileDefinition, relativePath, nodeId, nodeBody, opts)
+>uploadFile return a promise that is resolved if the file is successful uploaded and {error} if rejected.
 
-uploadFile(name, fileData, formData, relativePath, nodeId, opts)
- 
 ```javascript
  
-this.alfrescoJsApi.upload.uploadFile('newFile.txt', uploadingFileModel)
+var fs = require('fs');
+
+var fileToUpload = fs.createReadStream('./folderA/folderB/newFile.txt');
+
+this.alfrescoJsApi.upload.uploadFile(fileToUpload)
     .then(function () {
-        console.log('File Uploaded');
+        console.log('File Uploaded in the root');
+    }, function (error) {
+        console.log('Error during the upload' + error);
+    });        
+
+
+this.alfrescoJsApi.upload.uploadFile(fileToUpload, null, null, null, {autoRename: true})
+    .then(function () {
+        console.log('File Uploaded in the root');
     }, function (error) {
         console.log('Error during the upload' + error);
     });
+    
 
+this.alfrescoJsApi.upload.uploadFile(fileToUpload, 'folderX/folderY/folderZ')
+    .then(function () {
+        console.log('File Uploaded in the from root folderX/folderY/folderZ');
+    }, function (error) {
+        console.log('Error during the upload' + error);
+    });    
+
+
+var parentFolder = '80a94ac8-3ece-47ad-864e-5d939424c47c';
+
+this.alfrescoJsApi.upload.uploadFile(fileToUpload, 'folderX/folderY/folderZ', parentFolder )
+    .then(function () {
+        console.log('File Uploaded in the from parentFolder ' + parentFolder + ' n folderX/folderY/folderZ');
+    }, function (error) {
+        console.log('Error during the upload' + error);
+    }); 
+    
 ```
 
 #  Events Upload File
@@ -228,8 +258,11 @@ this.alfrescoJsApi.upload.uploadFile('newFile.txt', uploadingFileModel)
 * unauthorized 
 
 ```javascript
+var fs = require('fs');
 
-this.alfrescoJsApi.upload.uploadFile('newFile.txt', uploadingFileModel)
+var fileToUpload = fs.createReadStream('./folderA/folderB/newFile.txt');
+
+this.alfrescoJsApi.upload.uploadFile(fileToUpload)
     .on('progress', (progress) => {
         console.log( 'Total :' + progress.total );
         console.log( 'Loaded :' + progress.loaded );

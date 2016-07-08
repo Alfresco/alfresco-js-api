@@ -45,11 +45,6 @@ class AlfrescoApiClient extends ApiClient {
         request.timeout(this.timeout);
 
         var contentType = this.jsonPreferredMime(contentTypes);
-        if (contentType) {
-            request.type(contentType);
-        } else if (!request.header['Content-Type']) {
-            request.type('application/json');
-        }
 
         if (contentType === 'application/x-www-form-urlencoded') {
             request.send(this.normalizeParams(formParams)).on('progress', (event)=> {
@@ -114,7 +109,7 @@ class AlfrescoApiClient extends ApiClient {
     progress(event) {
         if (event.lengthComputable && this.promise) {
             var percent = Math.round(event.loaded / event.total * 100);
-            console.log('percent' + percent);
+
             this.promise.emit('progress', {
                 total: event.total,
                 loaded: event.loaded,

@@ -7,7 +7,7 @@ var NodeMock = require('../test/mockObjects/nodeMock');
 
 describe('Alfresco Core Node Api', function () {
     beforeEach(function (done) {
-        this.host = 'http://192.168.99.100:8080';
+        this.host = 'http://127.0.0.1:8080';
 
         this.authResponseMock = new AuthResponseMock(this.host);
         this.nodeMock = new NodeMock(this.host);

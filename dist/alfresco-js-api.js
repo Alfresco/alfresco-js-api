@@ -67163,11 +67163,6 @@ class AlfrescoApiClient extends ApiClient {
         request.timeout(this.timeout);
 
         var contentType = this.jsonPreferredMime(contentTypes);
-        if (contentType) {
-            request.type(contentType);
-        } else if (!request.header['Content-Type']) {
-            request.type('application/json');
-        }
 
         if (contentType === 'application/x-www-form-urlencoded') {
             request.send(this.normalizeParams(formParams)).on('progress', (event)=> {
@@ -67232,7 +67227,7 @@ class AlfrescoApiClient extends ApiClient {
     progress(event) {
         if (event.lengthComputable && this.promise) {
             var percent = Math.round(event.loaded / event.total * 100);
-            console.log('percent' + percent);
+
             this.promise.emit('progress', {
                 total: event.total,
                 loaded: event.loaded,
@@ -67382,6 +67377,7 @@ module.exports = AlfrescoSearch;
 
 var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
 var Emitter = require('event-emitter');
+var _ = require('lodash');
 
 class AlfrescoUpload extends AlfrescoCoreRestApi.NodesApi {
 
@@ -67390,18 +67386,22 @@ class AlfrescoUpload extends AlfrescoCoreRestApi.NodesApi {
         Emitter.call(this);
     }
 
-    uploadFile(name, fileData, formData, relativePath, nodeId, opts) {
+    uploadFile(fileDefinition, relativePath, nodeId, nodeBody, opts) {
         nodeId = nodeId || '-root-';
-        var nodeBody = {
-            'name': name,
+
+        var nodeBodyRequired = {
+            'name': fileDefinition.name,
             'nodeType': 'cm:content',
             'relativePath': relativePath
         };
 
-        formData = formData || {};
+        nodeBody = _.merge(nodeBodyRequired, nodeBody);
 
-        formData.fileData = fileData;
-        return this.addNodeUpload(nodeId, nodeBody, opts, formData);
+        var formParam = {};
+        formParam.filedata = fileDefinition;
+        formParam.relativePath = relativePath;
+
+        return this.addNodeUpload(nodeId, nodeBody, opts, formParam);
     }
 
     /**
@@ -67453,7 +67453,7 @@ class AlfrescoUpload extends AlfrescoCoreRestApi.NodesApi {
 Emitter(AlfrescoUpload.prototype); // jshint ignore:line
 module.exports = AlfrescoUpload;
 
-},{"./alfresco-core-rest-api/src/index.js":162,"event-emitter":65}],278:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/index.js":162,"event-emitter":65,"lodash":72}],278:[function(require,module,exports){
 'use strict';
 
 var nock = require('nock');
@@ -67461,7 +67461,7 @@ var nock = require('nock');
 class AuthResponseMock {
 
     constructor(host) {
-        this.host = host ? host : 'http://192.168.99.100:8080';
+        this.host = host ? host : 'http://127.0.0.1:8080';
     }
 
     get201Response(forceTicket) {
@@ -67569,7 +67569,7 @@ var nock = require('nock');
 class AuthResponseMock {
 
     constructor(host) {
-        this.host = host ? host : 'http://192.168.99.100:8080';
+        this.host = host ? host : 'http://127.0.0.1:8080';
     }
 
     get200ResponseChildren() {

@@ -140,7 +140,7 @@ export interface AlfrescoApi {
     deleteNode(nodeId: string): any;
     deleteNodePermanent(nodeId: string): any;
 
-    uploadFile(name: string, fileData: any, formData:any, relativePath: string, nodeId: string, opts: any): any;
+    uploadFile(fileDefinition: File, relativePath: string, nodeId: string, nodeBody: any, opts: any):any;
 
     isLoggedIn(): boolean;
     login(): any;

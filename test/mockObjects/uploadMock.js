@@ -5,44 +5,68 @@ var nock = require('nock');
 class UploadMock {
 
     constructor(host) {
-        this.host = host ? host : 'http://192.168.99.100:8080';
+        this.host = host ? host : 'http://127.0.0.1:8080';
     }
 
-    get201CreationFileEmpty() {
+    get201CreationFile() {
         nock(this.host, {'encodedQueryParams': true})
-            .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children', {
-                'name': 'newFile',
-                'nodeType': 'cm:content'
-            })
+            .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children')
             .reply(201, {
                 'entry': {
-                    'aspectNames': ['cm:auditable'],
-                    'createdAt': '2016-07-07T00:04:24.538+0000',
-                    'isFolder': false,
                     'isFile': true,
                     'createdByUser': {'id': 'admin', 'displayName': 'Administrator'},
-                    'modifiedAt': '2016-07-07T00:04:24.538+0000',
-                    'modifiedByUser': {'id': 'admin', 'displayName': 'Administrator'},
-                    'name': 'newFile',
-                    'id': 'bb492255-3543-426e-ab2f-148f7046f740',
+                    'modifiedAt': '2016-07-08T16:08:10.218+0000',
                     'nodeType': 'cm:content',
                     'content': {
                         'mimeType': 'text/plain',
                         'mimeTypeName': 'Plain Text',
-                        'sizeInBytes': 0,
-                        'encoding': 'UTF-8'
+                        'sizeInBytes': 28,
+                        'encoding': 'ISO-8859-2'
                     },
-                    'parentId': 'd4f87809-10d9-49a3-ae7d-7a2640f87f3d'
+                    'parentId': '55290409-3c61-41e5-80f6-8354ed133ce0',
+                    'aspectNames': ['cm:versionable', 'cm:titled', 'cm:auditable', 'cm:author'],
+                    'createdAt': '2016-07-08T16:08:10.218+0000',
+                    'isFolder': false,
+                    'modifiedByUser': {'id': 'admin', 'displayName': 'Administrator'},
+                    'name': 'testFile.txt',
+                    'id': '2857abfd-0ac6-459d-a22d-ec78770570f3',
+                    'properties': {'cm:versionLabel': '1.0', 'cm:versionType': 'MAJOR'}
                 }
             });
     }
 
+    get201CreationFileAutoRename() {
+        nock(this.host, {'encodedQueryParams': true})
+            .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children')
+            .query({'autoRename': 'true'})
+            .reply(201, {
+                'entry': {
+                    'isFile': true,
+                    'createdByUser': {'id': 'admin', 'displayName': 'Administrator'},
+                    'modifiedAt': '2016-07-08T17:04:34.684+0000',
+                    'nodeType': 'cm:content',
+                    'content': {
+                        'mimeType': 'text/plain',
+                        'mimeTypeName': 'Plain Text',
+                        'sizeInBytes': 28,
+                        'encoding': 'ISO-8859-2'
+                    },
+                    'parentId': '55290409-3c61-41e5-80f6-8354ed133ce0',
+                    'aspectNames': ['cm:versionable', 'cm:titled', 'cm:auditable', 'cm:author'],
+                    'createdAt': '2016-07-08T17:04:34.684+0000',
+                    'isFolder': false,
+                    'modifiedByUser': {'id': 'admin', 'displayName': 'Administrator'},
+                    'name': 'testFile-2.txt',
+                    'id': 'ae314293-27e8-4221-9a09-699f103db5f3',
+                    'properties': {'cm:versionLabel': '1.0', 'cm:versionType': 'MAJOR'}
+                }
+            });
+    }
+
+
     get409CreationFileNewNameClashes() {
         nock(this.host, {'encodedQueryParams': true})
-            .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children', {
-                'name': 'newFile',
-                'nodeType': 'cm:content'
-            })
+            .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children')
             .reply(409, {
                 'error': {
                     'errorKey': 'Duplicate child name not allowed: newFile',
@@ -56,10 +80,7 @@ class UploadMock {
 
     get401Response() {
         nock(this.host, {'encodedQueryParams': true})
-            .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children', {
-                'name': 'newFile',
-                'nodeType': 'cm:content'
-            })
+            .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children')
             .reply(401, {
                 'error': {
                     'errorKey': 'framework.exception.ApiDefault',
@@ -70,7 +91,6 @@ class UploadMock {
                 }
             });
     }
-
 
     rec() {
         nock.recorder.rec();
