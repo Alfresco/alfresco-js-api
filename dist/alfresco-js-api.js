@@ -66972,6 +66972,7 @@ class AlfrescoApi {
     changeConfig(config) {
         this.config = {
             host: config.host,
+            contextRoot: config.contextRoot || 'alfresco',
             username: config.username,
             password: config.password,
             ticket: config.ticket
@@ -67032,7 +67033,7 @@ class AlfrescoApi {
         this.promise = new Promise((resolve, reject) => {
             apiInstance.createTicket(loginRequest).then(
                 (data) => {
-                    this.setToken(data.entry.id);
+                    this.setTicket(data.entry.id);
                     this.promise.emit('success');
                     resolve(data.entry.id);
                 },
@@ -67062,7 +67063,7 @@ class AlfrescoApi {
             apiInstance.deleteTicket().then(
                 (data) => {
                     this.promise.emit('logout');
-                    this.setToken(undefined);
+                    this.setTicket(undefined);
                     resolve('logout');
                 },
                 (error) => {
@@ -67089,21 +67090,21 @@ class AlfrescoApi {
     }
 
     /**
-     * Set the current Token
+     * Set the current Ticket
      *
-     * @param {String} token
+     * @param {String} Ticket
      * */
-    setToken(token) {
-        this.config.ticket = token;
-        this.alfrescoClient.authentications.basicAuth.password = token;
+    setTicket(ticket) {
+        this.config.ticket = ticket;
+        this.alfrescoClient.authentications.basicAuth.password = ticket;
     }
 
     /**
-     * Get the current Token
+     * Get the current Ticket
      *
-     * @returns {String} token
+     * @returns {String} Ticket
      * */
-    getToken() {
+    getTicket() {
         return this.config.ticket;
     }
 }
@@ -67400,6 +67401,8 @@ class AlfrescoUpload extends AlfrescoCoreRestApi.NodesApi {
         var formParam = {};
         formParam.filedata = fileDefinition;
         formParam.relativePath = relativePath;
+
+        formParam = _.merge(formParam, opts);
 
         return this.addNodeUpload(nodeId, nodeBody, opts, formParam);
     }
