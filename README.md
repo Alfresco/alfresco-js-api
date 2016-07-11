@@ -1,4 +1,7 @@
 # Alfresco JavaScript API Client
+
+[![Join the chat at https://gitter.im/Alfresco/alfresco-ng2-components](https://badges.gitter.im/Alfresco/alfresco-ng2-components.svg)](https://gitter.im/Alfresco/alfresco-ng2-components?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 <p>
   <a title='Build Status' href="https://travis-ci.com/Alfresco/dev-platform-js-api">
      <img src='https://travis-ci.com/Alfresco/alfresco-js-api.svg?token=FPzV2wyyCU8imY6wHR2B&branch=master'  alt='travis Status' />
@@ -10,6 +13,10 @@
      <img src='https://img.shields.io/hexpm/l/plug.svg' alt='license' />
   </a>
 
+</p>
+
+<p align="center">
+  <img title="alfresco" alt='alfresco' src='assets/alfresco.png'  width="280px" height="150px"></img>
 </p>
 
 This project provides a JavaScript client API into the v1 Alfresco REST API.
