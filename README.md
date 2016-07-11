@@ -4,7 +4,7 @@
 
 <p>
   <a title='Build Status' href="https://travis-ci.com/Alfresco/dev-platform-js-api">
-     <img src='https://travis-ci.com/Alfresco/alfresco-js-api.svg?token=FPzV2wyyCU8imY6wHR2B&branch=master'  alt='travis Status' />
+     <img src='https://travis-ci.org/Alfresco/alfresco-js-api.svg?branch=master'  alt='travis Status' />
   </a>
   <a href='https://codecov.io/gh/Alfresco/alfresco-js-api'>
     <img src='https://img.shields.io/codecov/c/github/codecov/alfresco-js-api/master.svg?maxAge=2592000' alt='Coverage Status' />
