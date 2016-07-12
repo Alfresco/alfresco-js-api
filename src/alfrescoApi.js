@@ -59,7 +59,7 @@ class AlfrescoApi {
         this.createClients();
 
         AlfrescoCoreRestApi.ApiClient.instance = this.getClient();
-        this.node = new AlfrescoNode();
+        this.nodes = this.node = new AlfrescoNode();
         this.search = new AlfrescoSearch();
         this.content = new AlfrescoContent(this.apiCoreUrl, this.config);
         this.upload = new AlfrescoUpload();

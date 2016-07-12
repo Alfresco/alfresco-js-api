@@ -13,7 +13,21 @@ _This project provides a JavaScript client API into the v1 Alfresco REST API_
 
 - If upload more then one file at the same time all the events are fired on the last promise
 
+## Deprecation
 
+- Naming this.alfrescoJsApi.node is now this.alfrescoJsApi.nodes the node name convection will be still supported in the next release
+
+Before:
+
+```javascript
+  this.alfrescoJsApi.node
+```
+    
+After:
+
+ ```javascript
+  this.alfrescoJsApi.nodes.
+```
 
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.2.0) (2016-07-08)
