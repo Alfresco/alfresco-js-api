@@ -31,7 +31,7 @@ describe('Alfresco Core Node Api', function () {
         it('creation of the folder should get 409 if new name clashes with an existing node in the current parent folder', function (done) {
             this.nodeMock.get409CreationFolderNewNameClashes();
 
-            this.alfrescoJsApi.node.createFolder('newFolder').then(function () {
+            this.alfrescoJsApi.nodes.createFolder('newFolder').then(function () {
             }, function () {
                 done();
             });
@@ -40,7 +40,7 @@ describe('Alfresco Core Node Api', function () {
         it('creation of the folder for the node with identifier nodeId should return 200 if is all ok', function (done) {
             this.nodeMock.get200CreationFolder();
 
-            this.alfrescoJsApi.node.createFolder('newFolder').then(function (data) {
+            this.alfrescoJsApi.nodes.createFolder('newFolder').then(function (data) {
                 expect(data.entry.name).to.be.equal('newFolder');
                 expect(data.entry.isFolder).to.be.equal(true);
                 done();
@@ -50,7 +50,7 @@ describe('Alfresco Core Node Api', function () {
         it('if autoRename is true creation of the folder should get 200 if new name clashes with an existing node in the current parent folder should be renamed', function (done) {
             this.nodeMock.get201CreationFolderNewNameNotClashes();
 
-            this.alfrescoJsApi.node.createFolderAutoRename('newFolder').then(function (data) {
+            this.alfrescoJsApi.nodes.createFolderAutoRename('newFolder').then(function (data) {
                 expect(data.entry.name).to.be.equal('newFolder-1');
                 expect(data.entry.isFolder).to.be.equal(true);
                 done();
@@ -63,7 +63,7 @@ describe('Alfresco Core Node Api', function () {
         it('information for the node with identifier nodeId should return 200 if is all ok', function (done) {
             this.nodeMock.get200ResponseSingleFileFolder();
 
-            this.alfrescoJsApi.node.getNodeInfo('80a94ac8-3ece-47ad-864e-5d939424c47c').then(function (data) {
+            this.alfrescoJsApi.nodes.getNodeInfo('80a94ac8-3ece-47ad-864e-5d939424c47c').then(function (data) {
                 expect(data.name).to.be.equal('grass.jpg');
                 expect(data.isFile).to.be.equal(true);
                 done();
@@ -74,7 +74,7 @@ describe('Alfresco Core Node Api', function () {
         it('information for the node with identifier nodeId should return 404 if the id is does not exist', function (done) {
             this.nodeMock.get404FileFolderNotExist();
 
-            this.alfrescoJsApi.node.getNodeInfo('80a94ac4-3ec4-47ad-864e-5d939424c47c').then(function () {
+            this.alfrescoJsApi.nodes.getNodeInfo('80a94ac4-3ec4-47ad-864e-5d939424c47c').then(function () {
             }, function (error) {
                 expect(error.status).to.be.equal(404);
                 done();
@@ -86,7 +86,7 @@ describe('Alfresco Core Node Api', function () {
         it('information for the node with identifier nodeId should return 200 if is all ok', function (done) {
             this.nodeMock.get200ResponseChildren();
 
-            this.alfrescoJsApi.node.getNodeChildren('b4cff62a-664d-4d45-9302-98723eac1319').then(function (data) {
+            this.alfrescoJsApi.nodes.getNodeChildren('b4cff62a-664d-4d45-9302-98723eac1319').then(function (data) {
                 expect(data.list.pagination.count).to.be.equal(5);
                 expect(data.list.entries[0].entry.name).to.be.equal('dataLists');
                 done();
@@ -97,7 +97,7 @@ describe('Alfresco Core Node Api', function () {
         it('information for the node with identifier nodeId should return 404 if the id is does not exist', function (done) {
             this.nodeMock.get404ChildrenNotExist();
 
-            this.alfrescoJsApi.node.getNodeChildren('b4cff62a-664d-4d45-9302-98723eac1319').then(function () {
+            this.alfrescoJsApi.nodes.getNodeChildren('b4cff62a-664d-4d45-9302-98723eac1319').then(function () {
             }, function (error) {
                 expect(error.status).to.be.equal(404);
                 done();
@@ -110,7 +110,7 @@ describe('Alfresco Core Node Api', function () {
         it('delete the node with identifier nodeId', function (done) {
             this.nodeMock.get204SuccessfullyDeleted();
 
-            this.alfrescoJsApi.node.deleteNode('80a94ac8-3ece-47ad-864e-5d939424c47c').then(function () {
+            this.alfrescoJsApi.nodes.deleteNode('80a94ac8-3ece-47ad-864e-5d939424c47c').then(function () {
                 done();
             }, function () {
             });
@@ -119,7 +119,7 @@ describe('Alfresco Core Node Api', function () {
         it('delete the node with identifier nodeId should return 404 if the id is does not exist', function (done) {
             this.nodeMock.get404DeleteNotFound();
 
-            this.alfrescoJsApi.node.deleteNode('80a94ac8-3ece-47ad-864e-5d939424c47c').then(function () {
+            this.alfrescoJsApi.nodes.deleteNode('80a94ac8-3ece-47ad-864e-5d939424c47c').then(function () {
             }, function (error) {
                 expect(error.status).to.be.equal(404);
                 done();
@@ -129,7 +129,7 @@ describe('Alfresco Core Node Api', function () {
         it('delete the node with identifier nodeId should return 403 if current user does not have permission to delete', function (done) {
             this.nodeMock.get403DeletePermissionDenied();
 
-            this.alfrescoJsApi.node.deleteNode('80a94ac8-3ece-47ad-864e-5d939424c47c').then(function () {
+            this.alfrescoJsApi.nodes.deleteNode('80a94ac8-3ece-47ad-864e-5d939424c47c').then(function () {
             }, function () {
                 done();
             });
@@ -140,7 +140,7 @@ describe('Alfresco Core Node Api', function () {
         it('permanent delete the node with identifier nodeId', function (done) {
             this.nodeMock.get204SuccessfullyDeleted();
 
-            this.alfrescoJsApi.node.deleteNodePermanent('80a94ac8-3ece-47ad-864e-5d939424c47c').then(function () {
+            this.alfrescoJsApi.nodes.deleteNodePermanent('80a94ac8-3ece-47ad-864e-5d939424c47c').then(function () {
             }, function () {
                 done();
             });
@@ -149,7 +149,7 @@ describe('Alfresco Core Node Api', function () {
         it('permanent delete the node with identifier nodeId should return 404 if the id is does not exist', function (done) {
             this.nodeMock.get404DeletePermanentlyNotFound();
 
-            this.alfrescoJsApi.node.deleteNodePermanent('80a94ac8-3ece-47ad-864e-5d939424c47c').then(function () {
+            this.alfrescoJsApi.nodes.deleteNodePermanent('80a94ac8-3ece-47ad-864e-5d939424c47c').then(function () {
             }, function (error) {
                 expect(error.status).to.be.equal(404);
                 done();
@@ -159,7 +159,7 @@ describe('Alfresco Core Node Api', function () {
         it('permanent delete the node with identifier nodeId should return 403 if current user does not have permission to delete', function (done) {
             this.nodeMock.get403DeletePermissionDenied();
 
-            this.alfrescoJsApi.node.deleteNodePermanent('80a94ac8-3ece-47ad-864e-5d939424c47c').then(function () {
+            this.alfrescoJsApi.nodes.deleteNodePermanent('80a94ac8-3ece-47ad-864e-5d939424c47c').then(function () {
             }, function () {
                 done();
             });
