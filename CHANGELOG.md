@@ -12,6 +12,9 @@ _This project provides a JavaScript client API into the v1 Alfresco REST API_
 ## Fix
 
 - If upload more then one file at the same time all the events are fired on the last promise
+- Mock library was not possible access without instantiate the  AlfrescoApi Object
+- UploadMock was not exported
+
 
 ## Deprecation
 

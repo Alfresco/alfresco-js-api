@@ -2,6 +2,7 @@
 
 var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
 var AlfrescoAuthRestApi = require('./alfresco-auth-rest-api/src/index');
+var AlfrescoMock = require('../test/mockObjects/mockAlfrescoApi.js');
 var AlfrescoApiClient = require('./alfrescoApiClient');
 var AlfrescoContent = require('./alfrescoContent');
 var AlfrescoNode = require('./alfrescoNode');
@@ -184,9 +185,9 @@ class AlfrescoApi {
     }
 }
 
-AlfrescoApi.prototype.Core = require('./alfresco-core-rest-api/src/index.js');
-AlfrescoApi.prototype.Auth = require('./alfresco-auth-rest-api/src/index.js');
-AlfrescoApi.prototype.Mock = require('../test/mockObjects/mockAlfrescoApi.js');
-
 Emitter(AlfrescoApi.prototype); // jshint ignore:line
 module.exports = AlfrescoApi;
+
+module.exports.Core = AlfrescoCoreRestApi;
+module.exports.Auth = AlfrescoAuthRestApi;
+module.exports.Mock = AlfrescoMock;

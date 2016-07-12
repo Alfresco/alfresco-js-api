@@ -66927,6 +66927,7 @@ function extend() {
 
 var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
 var AlfrescoAuthRestApi = require('./alfresco-auth-rest-api/src/index');
+var AlfrescoMock = require('../test/mockObjects/mockAlfrescoApi.js');
 var AlfrescoApiClient = require('./alfrescoApiClient');
 var AlfrescoContent = require('./alfrescoContent');
 var AlfrescoNode = require('./alfrescoNode');
@@ -66984,7 +66985,7 @@ class AlfrescoApi {
         this.createClients();
 
         AlfrescoCoreRestApi.ApiClient.instance = this.getClient();
-        this.node = new AlfrescoNode();
+        this.nodes = this.node = new AlfrescoNode();
         this.search = new AlfrescoSearch();
         this.content = new AlfrescoContent(this.apiCoreUrl, this.config);
         this.upload = new AlfrescoUpload();
@@ -67109,14 +67110,14 @@ class AlfrescoApi {
     }
 }
 
-AlfrescoApi.prototype.Core = require('./alfresco-core-rest-api/src/index.js');
-AlfrescoApi.prototype.Auth = require('./alfresco-auth-rest-api/src/index.js');
-AlfrescoApi.prototype.Mock = require('../test/mockObjects/mockAlfrescoApi.js');
-
 Emitter(AlfrescoApi.prototype); // jshint ignore:line
 module.exports = AlfrescoApi;
 
-},{"../test/mockObjects/mockAlfrescoApi.js":279,"./alfresco-auth-rest-api/src/index":139,"./alfresco-auth-rest-api/src/index.js":139,"./alfresco-core-rest-api/src/index.js":162,"./alfrescoApiClient":273,"./alfrescoContent":274,"./alfrescoNode":275,"./alfrescoSearch":276,"./alfrescoUpload":277,"event-emitter":65}],273:[function(require,module,exports){
+module.exports.Core = AlfrescoCoreRestApi;
+module.exports.Auth = AlfrescoAuthRestApi;
+module.exports.Mock = AlfrescoMock;
+
+},{"../test/mockObjects/mockAlfrescoApi.js":279,"./alfresco-auth-rest-api/src/index":139,"./alfresco-core-rest-api/src/index.js":162,"./alfrescoApiClient":273,"./alfrescoContent":274,"./alfrescoNode":275,"./alfrescoSearch":276,"./alfrescoUpload":277,"event-emitter":65}],273:[function(require,module,exports){
 'use strict';
 var Emitter = require('event-emitter');
 var ApiClient = require('./alfresco-core-rest-api/src/ApiClient');
@@ -67586,11 +67587,12 @@ module.exports = AuthResponseMock;
 var mockAlfrescoApi = {};
 
 mockAlfrescoApi.Auth = require('./authResponseMock.js');
-mockAlfrescoApi.node = require('./nodeMock.js');
+mockAlfrescoApi.Node = require('./nodeMock.js');
+mockAlfrescoApi.UploadMock = require('./uploadMock.js');
 
 module.exports = mockAlfrescoApi;
 
-},{"./authResponseMock.js":278,"./nodeMock.js":280}],280:[function(require,module,exports){
+},{"./authResponseMock.js":278,"./nodeMock.js":280,"./uploadMock.js":281}],280:[function(require,module,exports){
 'use strict';
 
 var nock = require('nock');
@@ -67871,6 +67873,112 @@ class NodeMock {
 }
 
 module.exports = NodeMock;
+
+},{"nock":75}],281:[function(require,module,exports){
+'use strict';
+
+var nock = require('nock');
+
+class UploadMock {
+
+    constructor(host) {
+        this.host = host ? host : 'http://127.0.0.1:8080';
+    }
+
+    get201CreationFile() {
+        nock(this.host, {'encodedQueryParams': true})
+            .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children')
+            .reply(201, {
+                'entry': {
+                    'isFile': true,
+                    'createdByUser': {'id': 'admin', 'displayName': 'Administrator'},
+                    'modifiedAt': '2016-07-08T16:08:10.218+0000',
+                    'nodeType': 'cm:content',
+                    'content': {
+                        'mimeType': 'text/plain',
+                        'mimeTypeName': 'Plain Text',
+                        'sizeInBytes': 28,
+                        'encoding': 'ISO-8859-2'
+                    },
+                    'parentId': '55290409-3c61-41e5-80f6-8354ed133ce0',
+                    'aspectNames': ['cm:versionable', 'cm:titled', 'cm:auditable', 'cm:author'],
+                    'createdAt': '2016-07-08T16:08:10.218+0000',
+                    'isFolder': false,
+                    'modifiedByUser': {'id': 'admin', 'displayName': 'Administrator'},
+                    'name': 'testFile.txt',
+                    'id': '2857abfd-0ac6-459d-a22d-ec78770570f3',
+                    'properties': {'cm:versionLabel': '1.0', 'cm:versionType': 'MAJOR'}
+                }
+            });
+    }
+
+    get201CreationFileAutoRename() {
+        nock(this.host, {'encodedQueryParams': true})
+            .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children')
+            .query({'autoRename': 'true'})
+            .reply(201, {
+                'entry': {
+                    'isFile': true,
+                    'createdByUser': {'id': 'admin', 'displayName': 'Administrator'},
+                    'modifiedAt': '2016-07-08T17:04:34.684+0000',
+                    'nodeType': 'cm:content',
+                    'content': {
+                        'mimeType': 'text/plain',
+                        'mimeTypeName': 'Plain Text',
+                        'sizeInBytes': 28,
+                        'encoding': 'ISO-8859-2'
+                    },
+                    'parentId': '55290409-3c61-41e5-80f6-8354ed133ce0',
+                    'aspectNames': ['cm:versionable', 'cm:titled', 'cm:auditable', 'cm:author'],
+                    'createdAt': '2016-07-08T17:04:34.684+0000',
+                    'isFolder': false,
+                    'modifiedByUser': {'id': 'admin', 'displayName': 'Administrator'},
+                    'name': 'testFile-2.txt',
+                    'id': 'ae314293-27e8-4221-9a09-699f103db5f3',
+                    'properties': {'cm:versionLabel': '1.0', 'cm:versionType': 'MAJOR'}
+                }
+            });
+    }
+
+
+    get409CreationFileNewNameClashes() {
+        nock(this.host, {'encodedQueryParams': true})
+            .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children')
+            .reply(409, {
+                'error': {
+                    'errorKey': 'Duplicate child name not allowed: newFile',
+                    'statusCode': 409,
+                    'briefSummary': '06070090 Duplicate child name not allowed: newFile',
+                    'stackTrace': 'For security reasons the stack trace is no longer displayed, but the property is kept for previous versions.',
+                    'descriptionURL': 'https://api-explorer.alfresco.com'
+                }
+            });
+    }
+
+    get401Response() {
+        nock(this.host, {'encodedQueryParams': true})
+            .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children')
+            .reply(401, {
+                'error': {
+                    'errorKey': 'framework.exception.ApiDefault',
+                    'statusCode': 401,
+                    'briefSummary': '05210059 Authentication failed for Web Script org/alfresco/api/ResourceWebScript.get',
+                    'stackTrace': 'For security reasons the stack trace is no longer displayed, but the property is kept for previous versions.',
+                    'descriptionURL': 'https://api-explorer.alfresco.com'
+                }
+            });
+    }
+
+    rec() {
+        nock.recorder.rec();
+    }
+
+    play() {
+        nock.recorder.play();
+    }
+}
+
+module.exports = UploadMock;
 
 },{"nock":75}]},{},[1])(1)
 });
