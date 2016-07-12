@@ -149,7 +149,6 @@ export interface AlfrescoApi {
 
     getTicket(): any;
     setTicket(ticket: any): any;
-
 }
 
 declare var AlfrescoApi: AlfrescoApi;

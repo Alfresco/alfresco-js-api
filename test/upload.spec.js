@@ -104,5 +104,183 @@ describe('Alfresco Core Node Api', function () {
                 done();
             });
         });
+
+        it('Multiple Upload should fire progress events on the right promise during the upload', function (done) {
+
+            var file = fs.createReadStream('./test/mockObjects/testFile.txt');
+            var fileTwo = fs.createReadStream('./test/mockObjects/testFile2.txt');
+
+            var progressOneOk = false;
+            var progressTwoOk = false;
+
+            var promiseProgressOne = new Promise((resolve) => {
+                this.uploadMock.get201CreationFile();
+
+                this.alfrescoJsApi.upload.uploadFile(file).once('success', ()=> {
+                    progressOneOk = true;
+                    resolve();
+                });
+            });
+
+            var promiseProgressTwo = new Promise((resolve) => {
+                this.uploadMock.get201CreationFile();
+
+                this.alfrescoJsApi.upload.uploadFile(fileTwo).once('success', ()=> {
+                    progressTwoOk = true;
+                    resolve();
+                });
+            });
+
+            Promise.all([promiseProgressOne, promiseProgressTwo]).then(() => {
+                expect(progressOneOk).equal(true);
+                expect(progressTwoOk).equal(true);
+                done();
+            });
+        });
+
+        it('Multiple Upload should fire error events on the right promise during the upload', function (done) {
+
+            var file = fs.createReadStream('./test/mockObjects/testFile.txt');
+            var fileTwo = fs.createReadStream('./test/mockObjects/testFile2.txt');
+
+            var errorOneOk = false;
+            var errorTwoOk = false;
+
+            var promiseErrorOne = new Promise((resolve) => {
+                this.uploadMock.get201CreationFile();
+
+                this.alfrescoJsApi.upload.uploadFile(file).once('success', ()=> {
+                    errorOneOk = true;
+                    resolve();
+                });
+            });
+
+            var promiseErrorTwo = new Promise((resolve) => {
+                this.uploadMock.get201CreationFile();
+
+                this.alfrescoJsApi.upload.uploadFile(fileTwo).once('success', ()=> {
+                    errorTwoOk = true;
+                    resolve();
+                });
+            });
+
+            Promise.all([promiseErrorOne, promiseErrorTwo]).then(() => {
+                expect(errorOneOk).equal(true);
+                expect(errorTwoOk).equal(true);
+                done();
+            });
+        });
+
+        it('Multiple Upload should fire success events on the right promise during the upload', function (done) {
+
+            var file = fs.createReadStream('./test/mockObjects/testFile.txt');
+            var fileTwo = fs.createReadStream('./test/mockObjects/testFile2.txt');
+
+            var successOneOk = false;
+            var successTwoOk = false;
+
+            var promiseSuccessOne = new Promise((resolve) => {
+                this.uploadMock.get201CreationFile();
+
+                this.alfrescoJsApi.upload.uploadFile(file).once('success', ()=> {
+                    successOneOk = true;
+                    resolve();
+                });
+            });
+
+            var promiseSuccessTwo = new Promise((resolve) => {
+                this.uploadMock.get201CreationFile();
+
+                this.alfrescoJsApi.upload.uploadFile(fileTwo).once('success', ()=> {
+                    successTwoOk = true;
+                    resolve();
+                });
+            });
+
+            Promise.all([promiseSuccessOne, promiseSuccessTwo]).then(() => {
+                expect(successOneOk).equal(true);
+                expect(successTwoOk).equal(true);
+                done();
+            });
+        });
+
+        it('Multiple Upload should resolve the correct promise', function (done) {
+
+            var file = fs.createReadStream('./test/mockObjects/testFile.txt');
+            var fileTwo = fs.createReadStream('./test/mockObjects/testFile2.txt');
+
+            var resolveOneOk = false;
+            var resolveTwoOk = false;
+
+            this.uploadMock.get201CreationFile();
+
+            var p1 = this.alfrescoJsApi.upload.uploadFile(file).then(()=> {
+                resolveOneOk = true;
+            });
+
+            this.uploadMock.get201CreationFile();
+
+            var p2 = this.alfrescoJsApi.upload.uploadFile(fileTwo).then(()=> {
+                resolveTwoOk = true;
+            });
+
+            Promise.all([p1, p2]).then(() => {
+                expect(resolveOneOk).equal(true);
+                expect(resolveTwoOk).equal(true);
+                done();
+            });
+        });
+
+        it('Multiple Upload should reject the correct promise', function (done) {
+
+            var file = fs.createReadStream('./test/mockObjects/testFile.txt');
+            var fileTwo = fs.createReadStream('./test/mockObjects/testFile2.txt');
+
+            var rejectOneOk = false;
+            var rejectTwoOk = false;
+
+            this.uploadMock.get409CreationFileNewNameClashes();
+
+            var p1 = this.alfrescoJsApi.upload.uploadFile(file).then(null, ()=> {
+                rejectOneOk = true;
+            });
+
+            this.uploadMock.get409CreationFileNewNameClashes();
+
+            var p2 = this.alfrescoJsApi.upload.uploadFile(fileTwo).then(null, ()=> {
+                rejectTwoOk = true;
+            });
+
+            Promise.all([p1, p2]).then(() => {
+                expect(rejectOneOk).equal(true);
+                expect(rejectTwoOk).equal(true);
+                done();
+            });
+        });
+
+        it('Is possible use chain events', function (done) {
+
+            var file = fs.createReadStream('./test/mockObjects/testFile.txt');
+
+            this.uploadMock.get401Response();
+
+            var promiseProgressOne = {};
+            var promiseProgressTwo = {};
+
+            this.alfrescoJsApi.upload.uploadFile(file).once('error', ()=> {
+                promiseProgressOne = new Promise((resolve) => {
+                    resolve();
+                });
+            }).once('unauthorized', ()=> {
+                promiseProgressTwo = new Promise((resolve) => {
+                    resolve();
+                });
+            });
+
+            Promise.all([promiseProgressOne, promiseProgressTwo]).then(() => {
+                done();
+            });
+        });
+
     });
 });
