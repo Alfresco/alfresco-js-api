@@ -66985,7 +66985,7 @@ class AlfrescoApi {
         this.createClients();
 
         AlfrescoCoreRestApi.ApiClient.instance = this.getClient();
-        this.nodes = this.node = new AlfrescoNode();
+        this.node = new AlfrescoNode();
         this.search = new AlfrescoSearch();
         this.content = new AlfrescoContent(this.apiCoreUrl, this.config);
         this.upload = new AlfrescoUpload();
@@ -67588,7 +67588,7 @@ var mockAlfrescoApi = {};
 
 mockAlfrescoApi.Auth = require('./authResponseMock.js');
 mockAlfrescoApi.Node = require('./nodeMock.js');
-mockAlfrescoApi.UploadMock = require('./uploadMock.js');
+mockAlfrescoApi.Upload = require('./uploadMock.js');
 
 module.exports = mockAlfrescoApi;
 
