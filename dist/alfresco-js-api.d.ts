@@ -104,9 +104,49 @@ interface Core {
 interface Auth {
 }
 
+interface AuthMock {
+    new(host: string): UploadMock;
+    get201Response(forceTicket: string);
+    get403Response();
+    get400Response();
+    get401Response();
+    get204ResponseLogout();
+    get404ResponseLogout();
+    rec();
+    play();
+}
+
+interface NodeMock {
+    new(host: string): UploadMock;
+    get200ResponseChildren();
+    get200ResponseSingleFileFolder();
+    get404ChildrenNotExist();
+    get404FileFolderNotExist();
+    get204SuccessfullyDeleted();
+    get403DeletePermissionDenied();
+    get404DeleteNotFound();
+    get404DeletePermanentlyNotFound() ;
+    get200CreationFolder();
+    get409CreationFolderNewNameClashes();
+    get201CreationFolderNewNameNotClashes();
+    rec();
+    play();
+}
+
+interface UploadMock {
+    new(host: string): UploadMock;
+    get201CreationFile();
+    get201CreationFileAutoRename();
+    get409CreationFileNewNameClashes();
+    get401Response();
+    rec();
+    play();
+}
+
 interface Mock {
-    Auth : any;
-    node: any;
+    Auth: AuthMock;
+    Node: NodeMock;
+    Upload: UploadMock;
 }
 
 interface NodesApi {
