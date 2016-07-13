@@ -3,7 +3,7 @@
 var AlfrescoApi = require('../main');
 var expect = require('chai').expect;
 var AuthResponseMock = require('../test/mockObjects/authResponseMock');
-var WebScriptMock = require('../test/mockObjects/WebScriptMock');
+var WebScriptMock = require('../test/mockObjects/webScriptMock');
 
 describe('WebScript', function () {
 
