@@ -9,16 +9,20 @@ _This project provides a JavaScript client API into the v1 Alfresco REST API_
 <a name="0.2.1"></a>
 # [0.2.1](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.2.1) (2016-xx-xx)
 
+## Features
+
+- [Allow REST calls to custom web scripts through the SDK #13 ](https://github.com/Alfresco/alfresco-js-api/issues/13)
+
 ## Fix
 
-- If upload more then one file at the same time all the events are fired on the last promise
-- Mock library was not possible access without instantiate the  AlfrescoApi Object
-- UploadMock was not exported
-
+- [If upload more then one file at the same time all the events are fired on the last promise #8](https://github.com/Alfresco/alfresco-js-api/issues/8)
+- [Mock library was not possible access without instantiate the  AlfrescoApi Object #11 ](https://github.com/Alfresco/alfresco-js-api/issues/11)
+- [UploadMock was not exported #11 ](https://github.com/Alfresco/alfresco-js-api/issues/11)
+- [ContextRoot seems not change the configuration #14](https://github.com/Alfresco/alfresco-js-api/issues/14)
 
 ## Deprecation
 
-- Naming this.alfrescoJsApi.node is now this.alfrescoJsApi.nodes the node name convection will be still supported in the next release
+- [Naming this.alfrescoJsApi.node is now this.alfrescoJsApi.nodes the node name convection will be still supported in the next release #7 ](https://github.com/Alfresco/alfresco-js-api/issues/7)
 
 Before:
 

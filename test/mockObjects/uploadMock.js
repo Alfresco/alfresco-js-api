@@ -1,11 +1,12 @@
 'use strict';
 
 var nock = require('nock');
+var BaseMock = require('./baseMock');
 
-class UploadMock {
+class UploadMock  extends BaseMock{
 
     constructor(host) {
-        this.host = host ? host : 'http://127.0.0.1:8080';
+        super(host);
     }
 
     get201CreationFile() {
@@ -90,14 +91,6 @@ class UploadMock {
                     'descriptionURL': 'https://api-explorer.alfresco.com'
                 }
             });
-    }
-
-    rec() {
-        nock.recorder.rec();
-    }
-
-    play() {
-        nock.recorder.play();
     }
 }
 

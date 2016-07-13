@@ -5,7 +5,7 @@ var expect = require('chai').expect;
 var AuthResponseMock = require('../test/mockObjects/authResponseMock');
 var NodeMock = require('../test/mockObjects/nodeMock');
 
-describe('Alfresco Core Node Api', function () {
+describe('Node', function () {
     beforeEach(function (done) {
         this.host = 'http://127.0.0.1:8080';
 

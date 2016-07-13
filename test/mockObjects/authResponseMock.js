@@ -1,11 +1,12 @@
 'use strict';
 
 var nock = require('nock');
+var BaseMock = require('./baseMock');
 
-class AuthResponseMock {
+class AuthResponseMock extends BaseMock{
 
     constructor(host) {
-        this.host = host ? host : 'http://127.0.0.1:8080';
+        super(host);
     }
 
     get201Response(forceTicket) {
@@ -84,14 +85,6 @@ class AuthResponseMock {
         nock(this.host, {'encodedQueryParams': true})
             .delete('/alfresco/api/-default-/public/authentication/versions/1/tickets/-me-')
             .reply(404, '');
-    }
-
-    rec() {
-        nock.recorder.rec();
-    }
-
-    play() {
-        nock.recorder.play();
     }
 }
 

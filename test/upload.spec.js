@@ -6,7 +6,7 @@ var AuthResponseMock = require('../test/mockObjects/authResponseMock');
 var UploadMock = require('../test/mockObjects/uploadMock');
 var fs = require('fs');
 
-describe('Alfresco Core Node Api', function () {
+describe('Upload', function () {
     beforeEach(function (done) {
         this.host = 'http://127.0.0.1:8080';
 
