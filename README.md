@@ -56,8 +56,8 @@ AlfrescoApi({username, password, alfrescoHost, contextRoot, ticket});
 >If you want login with Username and Password
 *username
 *password
-*alfrescoHost (The Ip or Name of the host where your Alfresco istance is running)
-*contextRoot (Optional value default value is alfresco)
+*alfrescoHost (The Ip or Name of the host where your Alfresco istance is running default value 'http://127.0.0.1:8080')
+*contextRoot (Optional value default value is alfresco default value  'alfresco')
 *ticket (Optional only if you want login with the ticket see example below)
 
 ```javascript
@@ -367,6 +367,50 @@ getContentUrl(documentId)
 var thumbnailUrl = this.alfrescoJsApi.content.getContentUrl('1a0b110f-1e09-4ca2-b367-fe25e4964a4');
 
 ```
+
+# Custom web scripts call
+
+For mor information about web scripts read the [Wiki](https://wiki.alfresco.com/wiki/Web_Scripts) and the [Wiki with Web Scripts Examples](https://wiki.alfresco.com/wiki/Web_Scripts_Examples)
+
+executeWebScript(httpMethod, scriptPath, scriptArgs, contextRoot, servicePath)
+
+>  Anatomy of a Web Script URI  http[s]://<host>:<port>/[<contextPath>/]/<servicePath>[/<scriptPath>][?<scriptArgs>]
+A Web Script is simply a service bound to a URI which responds to HTTP methods such as GET, POST, PUT and DELETE. While using the same underlying code, there are broadly two kinds of Web Scripts.
+
+*  **httpMethod**  possible value GET, POST, PUT and DELETE
+*  **scriptPath**  arguments to pass to Web Script
+*  **scriptArgs**  path to Web Script (as defined by Web Script)
+*  **contextRoot** path where application is deployed default value 'alfresco'
+*  **servicePath** path where Web Script service is mapped default value 'service'
+
+```javascript
+
+//Call a GET on a Web Scripts available at the following URIs: http://127.0.01:8080/alfresco/service/mytasks
+
+this.alfrescoJsApi.webScript.executeWebScript('GET', 'mytasks').then(function (data) {
+   console.log('Data received form http://127.0.01:8080/alfresco/service/mytasks' + data);    
+}, function (error) {
+   console.log('Error' + error);
+});
+        
+//Call a GET on a Web Scripts available at the following URIs: http://127.0.01:8080/share/service/mytasks
+
+this.alfrescoJsApi.webScript.executeWebScript('GET', 'mytasks', null, 'share').then(function (data) {
+   console.log('Data received form http://127.0.01:8080/share/service/mytasks' + data);    
+}, function (error) {
+   console.log('Error' + error);
+});
+
+//Call a GET on a Web Scripts available at the following URIs: http://127.0.01:8080/share/differentServiceSlug/mytasks
+
+this.alfrescoJsApi.webScript.executeWebScript('GET', 'mytasks', null, 'share', 'differentServiceSlug').then(function (data) {
+   console.log('Data received form http://127.0.01:8080/share/differentServiceSlug/mytasks' + data);    
+}, function (error) {
+   console.log('Error' + error);
+});
+        
+```
+      
 
 ## Development
 

@@ -8,6 +8,7 @@ var AlfrescoContent = require('./alfrescoContent');
 var AlfrescoNode = require('./alfrescoNode');
 var AlfrescoSearch = require('./alfrescoSearch');
 var AlfrescoUpload = require('./alfrescoUpload');
+var AlfrescoWebScriptApi = require('./alfrescoWebScript');
 var Emitter = require('event-emitter');
 
 class AlfrescoApi {
@@ -16,6 +17,7 @@ class AlfrescoApi {
      *
      *      config = {
      *        host:       // alfrescoHost Your share server IP or DNS name
+     *        contextRoot: // contextRoot default value alfresco
      *        username:   // Username to login in share
      *        password:   // Password to login in share
      *        ticket:     // Ticket if you already have a ticket you can pass only the ticket and skip the login, in this case you don't need username and password
@@ -27,19 +29,11 @@ class AlfrescoApi {
     }
 
     /**
-     * return an Alfresco API Client
-     *
-     * */
-    createClients() {
-        this.alfrescoClient = new AlfrescoApiClient();
-        this.alfrescoClientAuth = new AlfrescoApiClient();
-    }
-
-    /**
      * @param {Object} config
      *
      *      config = {
      *        host:       // alfrescoHost Your share server IP or DNS name
+     *        contextRoot: // contextRoot default value alfresco
      *        username:   // Username to login in share
      *        password:   // Password to login in share
      *        ticket:     // Ticket if you already have a ticket you can pass only the ticket and skip the login, in this case you don't need username and password
@@ -47,23 +41,34 @@ class AlfrescoApi {
      * */
     changeConfig(config) {
         this.config = {
-            host: config.host,
+            host: config.host || 'http://127.0.0.1:8080',
             contextRoot: config.contextRoot || 'alfresco',
             username: config.username,
             password: config.password,
             ticket: config.ticket
         };
 
-        this.apiAuthUrl = this.config.host + '/alfresco/api/-default-/public/authentication/versions/1'; //Auth Call
-        this.apiCoreUrl = this.config.host + '/alfresco/api/-default-/public/alfresco/versions/1';   //Core Call
+        this.apiAuthUrl = this.config.host + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
+        this.apiCoreUrl = this.config.host + '/' + this.config.contextRoot + '/api/-default-/public/alfresco/versions/1';   //Core Call
 
-        this.createClients();
+        this.createClients(this.config.host);
 
         AlfrescoCoreRestApi.ApiClient.instance = this.getClient();
         this.nodes = this.node = new AlfrescoNode();
         this.search = new AlfrescoSearch();
         this.content = new AlfrescoContent(this.apiCoreUrl, this.config);
         this.upload = new AlfrescoUpload();
+        this.webScript = new AlfrescoWebScriptApi();
+    }
+
+    /**
+     * build  Alfresco API Clients
+     *
+     * @param {String} host
+     * */
+    createClients(host) {
+        this.alfrescoClient = new AlfrescoApiClient(host);
+        this.alfrescoClientAuth = new AlfrescoApiClient(host);
     }
 
     /**

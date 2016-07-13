@@ -143,10 +143,19 @@ interface UploadMock {
     play();
 }
 
+interface WebScript {
+    new(host: string): WebScript;
+    get200Response();
+    get400Response();
+    rec();
+    play();
+}
+
 interface Mock {
     Auth: AuthMock;
     Node: NodeMock;
     Upload: UploadMock;
+    WebScript: WebScript;
 }
 
 interface NodesApi {
@@ -166,24 +175,29 @@ export interface AlfrescoApi {
     Mock: Mock;
 
     search: any;
-    node: any;
+    nodes: any;
+    webScript: any;
+    content: any;
+    upload: any;
+    webScript: any;
 
     createClient(): any;
     getClient(): any;
     getClientAuth(): any;
     changeConfig(config: any);
 
-    createFolder(name: string, relativePath: string, nodeId: string): any;
     getNodeInfo(nodeId: string): any;
     getNodeChildrenInfo(nodeId: string, opts: any): any;
     deleteNode(nodeId: string): any;
     deleteNodePermanent(nodeId: string): any;
 
     uploadFile(fileDefinition: File, relativePath: string, nodeId: string, nodeBody: any, opts: any):any;
+    createFolder(name: string, relativePath: string, nodeId: string): any;
 
     isLoggedIn(): boolean;
     login(): any;
     logout(): any;
+
     getDocumentThumbnailUrl(documentId: string): any;
     getContentUrl(documentId: string): any;
 

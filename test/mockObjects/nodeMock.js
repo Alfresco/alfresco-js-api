@@ -1,11 +1,12 @@
 'use strict';
 
 var nock = require('nock');
+var BaseMock = require('./baseMock');
 
-class NodeMock {
+class NodeMock extends BaseMock {
 
     constructor(host) {
-        this.host = host ? host : 'http://127.0.0.1:8080';
+       super(host);
     }
 
     get200ResponseChildren() {
@@ -266,14 +267,6 @@ class NodeMock {
                     'parentId': 'd4f87809-10d9-49a3-ae7d-7a2640f87f3d'
                 }
             });
-    }
-
-    rec() {
-        nock.recorder.rec();
-    }
-
-    play() {
-        nock.recorder.play();
     }
 }
 

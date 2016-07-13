@@ -43,14 +43,12 @@ class AlfrescoUpload extends AlfrescoCoreRestApi.NodesApi {
         opts = opts || {};
         var postBody = nodeBody;
 
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw 'Missing the required parameter nodeId when calling addNode';
+        if (!nodeId) {
+            throw 'Missing the required parameter nodeId when calling uploadFile';
         }
 
-        // verify the required parameter 'nodeBody' is set
-        if (nodeBody === undefined || nodeBody === null) {
-            throw 'Missing the required parameter nodeBody when calling addNode';
+        if (!nodeBody) {
+            throw 'Missing the required parameter nodeBody when calling uploadFile';
         }
 
         var pathParams = {

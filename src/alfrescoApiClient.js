@@ -6,8 +6,12 @@ var _ = require('lodash');
 
 class AlfrescoApiClient extends ApiClient {
 
-    constructor() {
+    /**
+     * @param {String} host
+     * */
+    constructor(host) {
         super();
+        this.host = host;
         Emitter.call(this);
     }
 
@@ -25,15 +29,24 @@ class AlfrescoApiClient extends ApiClient {
      * @param {Array.<String>} contentTypes An array of request MIME types.
      * @param {Array.<String>} accepts An array of acceptable response MIME types.
      * @param {(String|Array|ObjectFunction)} returnType The required type to return; can be a string for simple types or the
+     * @param {(String)} contextRoot alternative contextRoot
      * constructor for a complex type.   * @returns {Promise} A Promise object.
      */
     callApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, authNames,
-            contentTypes, accepts, returnType) {
+            contentTypes, accepts, returnType, contextRoot) {
 
         var eventEmitter = {};
         Emitter(eventEmitter); // jshint ignore:line
 
-        var url = this.buildUrl(path, pathParams);
+        var url;
+
+        if (contextRoot) {
+            var basePath = this.host + '/' + contextRoot;
+            url = this.buildUrlCustomBasePath(basePath, path, pathParams);
+        } else {
+            url = this.buildUrl(path, pathParams);
+        }
+
         var request = superagent(httpMethod, url);
 
         // apply authentications
@@ -142,6 +155,33 @@ class AlfrescoApiClient extends ApiClient {
                 percent: percent
             });
         }
+    }
+
+    /**
+     * Builds full URL by appending the given path to the base URL and replacing path parameter place-holders
+     * with parameter values.
+     *
+     * @param {String} basePath the base path
+     * @param {String} path The path to append to the base URL.
+     * @param {Object} pathParams The parameter values to append.
+     * @returns {String} The encoded path with parameter values substituted.
+     */
+    buildUrlCustomBasePath(basePath, path, pathParams) {
+        if (!path.match(/^\//)) {
+            path = '/' + path;
+        }
+        var url = basePath + path;
+        var _this = this;
+        url = url.replace(/\{([\w-]+)\}/g, function (fullMatch, key) {
+            var value;
+            if (pathParams.hasOwnProperty(key)) {
+                value = _this.paramToString(pathParams[key]);
+            } else {
+                value = fullMatch;
+            }
+            return encodeURIComponent(value);
+        });
+        return url;
     }
 }
 
