@@ -7,7 +7,7 @@
      <img src='https://travis-ci.org/Alfresco/alfresco-js-api.svg?branch=master'  alt='travis Status' />
   </a>
   <a href='https://codecov.io/gh/Alfresco/alfresco-js-api'>
-    <img src='https://img.shields.io/codecov/c/github/Alfresco/alfresco-js-api/master.svg?maxAge=2592000' alt='Coverage Status' />
+    <img src='https://img.shields.io/codecov/c/github/Alfresco/alfresco-js-api/master.svg?maxAge=0' alt='Coverage Status' />
   </a>
   <a href='https://raw.githubusercontent.com/Alfresco/dev-platform-js-api/master/LICENSE'>
      <img src='https://img.shields.io/hexpm/l/plug.svg' alt='license' />
