@@ -16,7 +16,7 @@ describe('WebScript', function () {
         this.authResponseMock = new AuthResponseMock(this.host);
         this.webScriptMock = new WebScriptMock(this.host, this.contextRoot, this.servicePath, this.scriptPath);
 
-        //this.authResponseMock.get201Response();
+        this.authResponseMock.get201Response();
         this.alfrescoJsApi = new AlfrescoApi({
             username: 'admin',
             password: 'admin',
