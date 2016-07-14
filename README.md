@@ -280,6 +280,24 @@ this.alfrescoJsApi.upload.uploadFile(fileToUpload, 'folderX/folderY/folderZ', pa
     
 ```
 
+* To abort a file uploading
+
+
+```javascript
+ 
+var fs = require('fs');
+
+var fileToUpload = fs.createReadStream('./folderA/folderB/newFile.txt');
+
+var promiseUpload = this.alfrescoJsApi.upload.uploadFile(fileToUpload)
+    .once('abort', function () {
+        console.log('File Uploaded aborted');
+    });        
+
+promiseUpload.abort();
+```
+
+
 #  Events Upload File
 
 >  The uploadFile is also an EventEmitter which you can register to listen to any of the following event types:

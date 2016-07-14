@@ -13,6 +13,7 @@ _This project provides a JavaScript client API into the v1 Alfresco REST API_
 
 - [Allow REST calls to custom web scripts through the SDK #13 ](https://github.com/Alfresco/alfresco-js-api/issues/13)
 - [Build for ES5 target an Minify #16](https://github.com/Alfresco/alfresco-js-api/issues/16)
+- [Provide the abort method for the Upload API #20](https://github.com/Alfresco/alfresco-js-api/issues/20)
 
 ## Fix
 

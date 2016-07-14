@@ -62,6 +62,16 @@ describe('Upload', function () {
                     done();
                 });
         });
+
+        it('Abort should stop the  file file upload', function (done) {
+            var file = fs.createReadStream('./test/mockObjects/testFile.txt');
+
+            var promise = this.alfrescoJsApi.upload.uploadFile(file, null, null, null, {autoRename: true}).once('abort', ()=> {
+                done();
+            });
+
+            promise.abort();
+        });
     });
 
     describe('Events', function () {

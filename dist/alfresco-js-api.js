@@ -53765,10 +53765,7 @@ var AlfrescoApiClient = function (_ApiClient) {
             }
 
             this.promise = new Promise(function (resolve, reject) {
-                request.promise = _this3;
-
                 request.end(function (error, response) {
-
                     if (error) {
                         eventEmitter.emit('error', error);
 
@@ -53808,6 +53805,11 @@ var AlfrescoApiClient = function (_ApiClient) {
 
             this.promise.off = function () {
                 eventEmitter.off.apply(eventEmitter, arguments);
+                return this;
+            };
+
+            this.promise.abort = function () {
+                request.emit('abort');
                 return this;
             };
 
