@@ -1,0 +1,58 @@
+# ActivitiPublicRestApi.ProcessDefinitionsApi
+
+All URIs are relative to *https://localhost:8080/activiti-app*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**getProcessDefinitionsUsingGET**](ProcessDefinitionsApi.md#getProcessDefinitionsUsingGET) | **GET** /api/enterprise/process-definitions | Retrieve a list of process definitions
+
+
+<a name="getProcessDefinitionsUsingGET"></a>
+# **getProcessDefinitionsUsingGET**
+> ResultListDataRepresentation getProcessDefinitionsUsingGET(opts)
+
+Retrieve a list of process definitions
+
+Get a list of process definitions (visible within the tenant of the user)
+
+### Example
+```javascript
+var ActivitiPublicRestApi = require('activiti-public-rest-api');
+
+var apiInstance = new ActivitiPublicRestApi.ProcessDefinitionsApi();
+
+var opts = { 
+  'latest': true, // Boolean | latest
+  'appDefinitionId': 789 // Integer | appDefinitionId
+};
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+apiInstance.getProcessDefinitionsUsingGET(opts, callback);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **latest** | **Boolean**| latest | [optional] 
+ **appDefinitionId** | **Integer**| appDefinitionId | [optional] 
+
+### Return type
+
+[**ResultListDataRepresentation**](ResultListDataRepresentation.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
