@@ -171,7 +171,7 @@ returns a promise with the Info about the children of the node if resolved and {
 
 var folderNodeId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
 
-this.alfrescoJsApi.nodes.getNodeChildrenInfo(folderNodeId).then(function (data) {
+this.alfrescoJsApi.nodes.getNodeChildren(folderNodeId).then(function (data) {
     console.log('The number of children in this folder are ' + data.list.pagination.count );    
 }, function (error) {
     console.log('This node does not exist');
