@@ -13,7 +13,7 @@ var AlfrescoMockJsApi = require('alfresco-js-api').Mock;
 
 # Mock Auth Api
 
-var AuthResponseMock = require('alfresco-js-api').Mock.authResponseMock
+var AuthResponseMock = require('alfresco-js-api').Mock.Auth
 
 authResponseMock = new AuthResponseMock(host);
 
@@ -33,7 +33,7 @@ authResponseMock.play()| |
 ```javascript
 var AlfrescoApi = require('alfresco-js-api');
 var expect = require('chai').expect;
-var AuthResponseMock = require('alfresco-js-api').Mock.AuthResponseMock;
+var AuthResponseMock = require('alfresco-js-api').Mock.Auth;
 
 var host = 'http://127.0.0.1:8080';
 var authResponseMock = new AuthResponseMock(host);
@@ -54,7 +54,7 @@ alfrescoJsApi.login().then((data) => {
 
 # Mock Node Api
 
-var NodeMock = require('alfresco-js-api').Mock.NodeMock
+var NodeMock = require('alfresco-js-api').Mock.Node
 
 nodeMock = new NodeMock(host);
 
@@ -79,8 +79,8 @@ nodeMock.play();| |
 ```javascript
 var AlfrescoApi = require('alfresco-js-api');
 var expect = require('chai').expect;
-var AuthResponseMock = require('alfresco-js-api').Mock.AuthResponseMock;
-var NodeMock = require('alfresco-js-api').Mock.NodeMock;
+var AuthResponseMock = require('alfresco-js-api').Mock.Auth;
+var NodeMock = require('alfresco-js-api').Mock.Node;
 
 
 var host = 'http://127.0.0.1:8080';
@@ -108,7 +108,7 @@ alfrescoJsApi.node.createFolder('newFolder').then(function (data) {
 
 # Mock Upload Api
 
-var UploadMock = require('alfresco-js-api').Mock.UploadMock
+var UploadMock = require('alfresco-js-api').Mock.Upload
 
 uploadMock = new UploadMock(host);
 
@@ -125,8 +125,8 @@ uploadMock.play()| |
 ```javascript
 var AlfrescoApi = require('alfresco-js-api');
 var expect = require('chai').expect;
-var AuthResponseMock = require('alfresco-js-api').Mock.AuthResponseMock;
-var UploadMock = require('alfresco-js-api').Mock.UploadMock;
+var AuthResponseMock = require('alfresco-js-api').Mock.Auth;
+var UploadMock = require('alfresco-js-api').Mock.Upload;
 
 
 var host = 'http://127.0.0.1:8080';
@@ -151,6 +151,55 @@ alfrescoJsApi.upload.uploadFile(file).then(function (data) {
     expect(data.entry.isFile).to.be.equal(true);
     expect(data.entry.name).to.be.equal('testFile.txt');
     done();
+});
+
+```
+
+
+# WebScript Upload Api
+
+var UploadMock = require('alfresco-js-api').Mock.WebScript
+
+webScript = new WebScript(host);
+
+Method | Description  |
+------------- | ------------- |
+WebScript.get404Response()| | 
+WebScript.get401Response()| | 
+WebScript.get200Response()| | 
+uploadMock.rec()| | 
+uploadMock.play()| | 
+
+
+```javascript
+var AlfrescoApi = require('alfresco-js-api');
+var expect = require('chai').expect;
+var AuthResponseMock = require('alfresco-js-api').Mock.Auth;
+var WebScriptMock = require('alfresco-js-api').Mock.WebScript;
+
+var host = 'http://127.0.0.1:8080';
+var contextRoot = 'script';
+var servicePath = 'alfresco';
+var scriptPath = 'testWebScript';
+
+var authResponseMock = new AuthResponseMock(host);
+var uploadMock = new UploadMock(host);
+
+authResponseMock.get201Response();
+
+var alfrescoJsApi = new AlfrescoApi({
+    username: 'admin',
+    password: 'admin',
+    host: this.host
+});
+
+var webScriptMock = new WebScriptMock(host, contextRoot, servicePath, scriptPath);
+
+webScriptMock.get200Response();
+
+alfrescoJsApi.webScript.executeWebScript('GET', scriptPath, null, contextRoot, servicePath)
+.then((data)=> {
+   expect(data).to.not.be.undefined;
 });
 
 ```
