@@ -42,6 +42,10 @@ var AlfrescoJsApi = require('alfresco-js-api');
 ### Basic usage For browser
 
 ```html
+    <script src="node_modules/alfresco-js-api/dist/alfresco-js-api.min.js"></script>
+    
+    or for not minify version
+    
     <script src="node_modules/alfresco-js-api/dist/alfresco-js-api.js"></script>
 ```
 
