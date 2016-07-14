@@ -378,7 +378,7 @@ For mor information about web scripts read the [Wiki](https://wiki.alfresco.com/
 
 executeWebScript(httpMethod, scriptPath, scriptArgs, contextRoot, servicePath)
 
->  Anatomy of a Web Script URI  http[s]://<host>:<port>/[<contextPath>/]/<servicePath>[/<scriptPath>][?<scriptArgs>]
+>  Anatomy of a Web Script URI  **http(s)://(host):(port)/(contextPath)/(servicePath)/(scriptPath)?(scriptArgs)**
 A Web Script is simply a service bound to a URI which responds to HTTP methods such as GET, POST, PUT and DELETE. While using the same underlying code, there are broadly two kinds of Web Scripts.
 
 *  **httpMethod**  possible value GET, POST, PUT and DELETE
