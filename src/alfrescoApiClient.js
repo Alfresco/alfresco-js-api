@@ -95,10 +95,7 @@ class AlfrescoApiClient extends ApiClient {
         }
 
         this.promise = new Promise((resolve, reject) => {
-            request.promise = this;
-
             request.end((error, response) => {
-
                 if (error) {
                     eventEmitter.emit('error', error);
 
@@ -139,6 +136,11 @@ class AlfrescoApiClient extends ApiClient {
 
         this.promise.off = function () {
             eventEmitter.off.apply(eventEmitter, arguments);
+            return this;
+        };
+
+        this.promise.abort = function () {
+            request.emit('abort');
             return this;
         };
 
