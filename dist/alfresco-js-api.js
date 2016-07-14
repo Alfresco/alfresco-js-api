@@ -1,5 +1,6 @@
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.AlfrescoApi = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
+
 var AlfrescoApi = require('./src/alfrescoApi.js');
 
 module.exports = AlfrescoApi;
@@ -37007,11 +37008,15 @@ function extend() {
 
 },{}],136:[function(require,module,exports){
 (function (Buffer){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['superagent'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('superagent'));
   } else {
@@ -37021,7 +37026,7 @@ function extend() {
     }
     root.AlfrescoAuthRestApi.ApiClient = factory(root.superagent);
   }
-}(this, function(superagent) {
+})(undefined, function (superagent) {
   'use strict';
 
   /**
@@ -37036,7 +37041,8 @@ function extend() {
    * @alias module:ApiClient
    * @class
    */
-  var exports = function() {
+
+  var exports = function exports() {
     /**
      * The base URL against which to resolve every API call's (relative) path.
      * @type {String}
@@ -37049,7 +37055,7 @@ function extend() {
      * @type {Array.<String>}
      */
     this.authentications = {
-      'basicAuth': {type: 'basic'}
+      'basicAuth': { type: 'basic' }
     };
     /**
      * The default HTTP headers to be included for all API calls.
@@ -37071,7 +37077,7 @@ function extend() {
    * @param param The actual parameter.
    * @returns {String} The string representation of <code>param</code>.
    */
-  exports.prototype.paramToString = function(param) {
+  exports.prototype.paramToString = function (param) {
     if (param == undefined || param == null) {
       return '';
     }
@@ -37088,13 +37094,13 @@ function extend() {
    * @param {Object} pathParams The parameter values to append.
    * @returns {String} The encoded path with parameter values substituted.
    */
-  exports.prototype.buildUrl = function(path, pathParams) {
+  exports.prototype.buildUrl = function (path, pathParams) {
     if (!path.match(/^\//)) {
       path = '/' + path;
     }
     var url = this.basePath + path;
     var _this = this;
-    url = url.replace(/\{([\w-]+)\}/g, function(fullMatch, key) {
+    url = url.replace(/\{([\w-]+)\}/g, function (fullMatch, key) {
       var value;
       if (pathParams.hasOwnProperty(key)) {
         value = _this.paramToString(pathParams[key]);
@@ -37117,7 +37123,7 @@ function extend() {
    * @param {String} contentType The MIME content type to check.
    * @returns {Boolean} <code>true</code> if <code>contentType</code> represents JSON, otherwise <code>false</code>.
    */
-  exports.prototype.isJsonMime = function(contentType) {
+  exports.prototype.isJsonMime = function (contentType) {
     return Boolean(contentType != null && contentType.match(/^application\/json(;.*)?$/i));
   };
 
@@ -37126,7 +37132,7 @@ function extend() {
    * @param {Array.<String>} contentTypes
    * @returns {String} The chosen content type, preferring JSON.
    */
-  exports.prototype.jsonPreferredMime = function(contentTypes) {
+  exports.prototype.jsonPreferredMime = function (contentTypes) {
     for (var i = 0; i < contentTypes.length; i++) {
       if (this.isJsonMime(contentTypes[i])) {
         return contentTypes[i];
@@ -37140,12 +37146,9 @@ function extend() {
    * @param param The parameter to check.
    * @returns {Boolean} <code>true</code> if <code>param</code> represents a file. 
    */
-  exports.prototype.isFileParam = function(param) {
+  exports.prototype.isFileParam = function (param) {
     // fs.ReadStream in Node.js (but not in runtime like browserify)
-    if (typeof window === 'undefined' &&
-        typeof require === 'function' &&
-        require('fs') &&
-        param instanceof require('fs').ReadStream) {
+    if (typeof window === 'undefined' && typeof require === 'function' && require('fs') && param instanceof require('fs').ReadStream) {
       return true;
     }
     // Buffer in Node.js
@@ -37173,7 +37176,7 @@ function extend() {
    * @param {Object.<String, Object>} params The parameters as object properties.
    * @returns {Object.<String, Object>} normalized parameters.
    */
-  exports.prototype.normalizeParams = function(params) {
+  exports.prototype.normalizeParams = function (params) {
     var newParams = {};
     for (var key in params) {
       if (params.hasOwnProperty(key) && params[key] != undefined && params[key] != null) {
@@ -37254,9 +37257,9 @@ function extend() {
    * @param {Object} request The request object created by a <code>superagent()</code> call.
    * @param {Array.<String>} authNames An array of authentication method names.
    */
-  exports.prototype.applyAuthToRequest = function(request, authNames) {
+  exports.prototype.applyAuthToRequest = function (request, authNames) {
     var _this = this;
-    authNames.forEach(function(authName) {
+    authNames.forEach(function (authName) {
       var auth = _this.authentications[authName];
       switch (auth.type) {
         case 'basic':
@@ -37281,7 +37284,7 @@ function extend() {
           break;
         case 'oauth2':
           if (auth.accessToken) {
-            request.set({'Authorization': 'Bearer ' + auth.accessToken});
+            request.set({ 'Authorization': 'Bearer ' + auth.accessToken });
           }
           break;
         default:
@@ -37328,9 +37331,7 @@ function extend() {
    * @param {(String|Array|ObjectFunction)} returnType The required type to return; can be a string for simple types or the
    * constructor for a complex type.   * @returns {Promise} A Promise object.
    */
-  exports.prototype.callApi = function callApi(path, httpMethod, pathParams,
-      queryParams, headerParams, formParams, bodyParam, authNames, contentTypes, accepts,
-      returnType) {
+  exports.prototype.callApi = function callApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, authNames, contentTypes, accepts, returnType) {
 
     var _this = this;
     var url = this.buildUrl(path, pathParams);
@@ -37378,8 +37379,8 @@ function extend() {
       request.accept(accept);
     }
 
-    return new Promise(function(resolve, reject) {
-      request.end(function(error, response) {
+    return new Promise(function (resolve, reject) {
+      request.end(function (error, response) {
         if (error) {
           reject(error);
         } else {
@@ -37395,7 +37396,7 @@ function extend() {
    * @param {String} str The date value as a string.
    * @returns {Date} The parsed date object.
    */
-  exports.parseDate = function(str) {
+  exports.parseDate = function (str) {
     return new Date(str.replace(/T/i, ' '));
   };
 
@@ -37408,7 +37409,7 @@ function extend() {
    * all properties on <code>data<code> will be converted to this type.
    * @returns An instance of the specified type.
    */
-  exports.convertToType = function(data, type) {
+  exports.convertToType = function (data, type) {
     switch (type) {
       case 'Boolean':
         return Boolean(data);
@@ -37430,10 +37431,10 @@ function extend() {
         } else if (Array.isArray(type)) {
           // for array type like: ['String']
           var itemType = type[0];
-          return data.map(function(item) {
+          return data.map(function (item) {
             return exports.convertToType(item, itemType);
           });
-        } else if (typeof type === 'object') {
+        } else if ((typeof type === 'undefined' ? 'undefined' : _typeof(type)) === 'object') {
           // for plain object type like: {'String': 'Integer'}
           var keyType, valueType;
           for (var k in type) {
@@ -37466,15 +37467,19 @@ function extend() {
   exports.instance = new exports();
 
   return exports;
-}));
+});
 
 }).call(this,require("buffer").Buffer)
 },{"buffer":8,"fs":6,"superagent":125}],137:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', '../model/Error', '../model/LoginTicketEntry', '../model/LoginRequest', '../model/ValidateTicketEntry'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('../model/Error'), require('../model/LoginTicketEntry'), require('../model/LoginRequest'), require('../model/ValidateTicketEntry'));
   } else {
@@ -37484,7 +37489,7 @@ function extend() {
     }
     root.AlfrescoAuthRestApi.AuthenticationApi = factory(root.AlfrescoAuthRestApi.ApiClient, root.AlfrescoAuthRestApi.Error, root.AlfrescoAuthRestApi.LoginTicketEntry, root.AlfrescoAuthRestApi.LoginRequest, root.AlfrescoAuthRestApi.ValidateTicketEntry);
   }
-}(this, function(ApiClient, Error, LoginTicketEntry, LoginRequest, ValidateTicketEntry) {
+})(undefined, function (ApiClient, Error, LoginTicketEntry, LoginRequest, ValidateTicketEntry) {
   'use strict';
 
   /**
@@ -37500,10 +37505,9 @@ function extend() {
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
    * if unspecified.
    */
-  var exports = function(apiClient) {
+
+  var exports = function exports(apiClient) {
     this.apiClient = apiClient || ApiClient.instance;
-
-
 
     /**
      * Create ticket (login)
@@ -37511,7 +37515,7 @@ function extend() {
      * @param {module:model/LoginRequest} loginRequest The user credential.
      * data is of type: {module:model/LoginTicketEntry}
      */
-    this.createTicket = function(loginRequest) {
+    this.createTicket = function (loginRequest) {
       var postBody = loginRequest;
 
       // verify the required parameter 'loginRequest' is set
@@ -37519,103 +37523,78 @@ function extend() {
         throw "Missing the required parameter 'loginRequest' when calling createTicket";
       }
 
-
-      var pathParams = {
-      };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var pathParams = {};
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = LoginTicketEntry;
 
-      return this.apiClient.callApi(
-        '/tickets', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/tickets', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Delete ticket (logout)
      * Deletes logged in ticket (logout).\n
      */
-    this.deleteTicket = function() {
+    this.deleteTicket = function () {
       var postBody = null;
 
-
-      var pathParams = {
-      };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var pathParams = {};
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/tickets/-me-', 'DELETE',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/tickets/-me-', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Validate ticket
      * Validates the specified ticket (derived from Authorization header) is still valid.\n\nFor example, you can pass the Authorization request header using Javascript:\n  &#x60;&#x60;&#x60;Javascript\n    request.setRequestHeader (\&quot;Authorization\&quot;, \&quot;Basic \&quot; + btoa(ticket));\n  &#x60;&#x60;&#x60;\n
      * data is of type: {module:model/ValidateTicketEntry}
      */
-    this.validateTicket = function() {
+    this.validateTicket = function () {
       var postBody = null;
 
-
-      var pathParams = {
-      };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var pathParams = {};
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = ValidateTicketEntry;
 
-      return this.apiClient.callApi(
-        '/tickets/-me-', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
+      return this.apiClient.callApi('/tickets/-me-', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
   };
 
   return exports;
-}));
+});
 
 },{"../ApiClient":136,"../model/Error":139,"../model/LoginRequest":141,"../model/LoginTicketEntry":142,"../model/ValidateTicketEntry":144}],138:[function(require,module,exports){
-(function(factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['./ApiClient', './model/Error', './model/ErrorError', './model/LoginRequest', './model/LoginTicketEntry', './model/LoginTicketEntryEntry', './model/ValidateTicketEntry', './model/ValidateTicketEntryEntry', './api/AuthenticationApi'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('./ApiClient'), require('./model/Error'), require('./model/ErrorError'), require('./model/LoginRequest'), require('./model/LoginTicketEntry'), require('./model/LoginTicketEntryEntry'), require('./model/ValidateTicketEntry'), require('./model/ValidateTicketEntryEntry'), require('./api/AuthenticationApi'));
   }
-}(function(ApiClient, Error, ErrorError, LoginRequest, LoginTicketEntry, LoginTicketEntryEntry, ValidateTicketEntry, ValidateTicketEntryEntry, AuthenticationApi) {
+})(function (ApiClient, Error, ErrorError, LoginRequest, LoginTicketEntry, LoginTicketEntryEntry, ValidateTicketEntry, ValidateTicketEntryEntry, AuthenticationApi) {
   'use strict';
 
   /**
@@ -37649,6 +37628,7 @@ function extend() {
    * @module index
    * @version 0.1.0
    */
+
   var exports = {
     /**
      * The ApiClient constructor.
@@ -37698,14 +37678,18 @@ function extend() {
   };
 
   return exports;
-}));
+});
 
 },{"./ApiClient":136,"./api/AuthenticationApi":137,"./model/Error":139,"./model/ErrorError":140,"./model/LoginRequest":141,"./model/LoginTicketEntry":142,"./model/LoginTicketEntryEntry":143,"./model/ValidateTicketEntry":144,"./model/ValidateTicketEntryEntry":145}],139:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './ErrorError'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./ErrorError'));
   } else {
@@ -37715,7 +37699,7 @@ function extend() {
     }
     root.AlfrescoAuthRestApi.Error = factory(root.AlfrescoAuthRestApi.ApiClient, root.AlfrescoAuthRestApi.ErrorError);
   }
-}(this, function(ApiClient, ErrorError) {
+})(undefined, function (ApiClient, ErrorError) {
   'use strict';
 
   /**
@@ -37729,10 +37713,8 @@ function extend() {
    * @alias module:model/Error
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>Error</code> from a plain JavaScript object, optionally creating a new instance.
@@ -37741,8 +37723,8 @@ function extend() {
    * @param {module:model/Error} obj Optional instance to populate.
    * @return {module:model/Error} The populated <code>Error</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('error')) {
@@ -37750,26 +37732,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/ErrorError} error
    */
   exports.prototype['error'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":136,"./ErrorError":140}],140:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -37779,7 +37761,7 @@ function extend() {
     }
     root.AlfrescoAuthRestApi.ErrorError = factory(root.AlfrescoAuthRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -37797,8 +37779,8 @@ function extend() {
    * @param stackTrace
    * @param statusCode
    */
-  var exports = function(briefSummary, descriptionURL, stackTrace, statusCode) {
 
+  var exports = function exports(briefSummary, descriptionURL, stackTrace, statusCode) {
 
     this['briefSummary'] = briefSummary;
     this['descriptionURL'] = descriptionURL;
@@ -37814,8 +37796,8 @@ function extend() {
    * @param {module:model/ErrorError} obj Optional instance to populate.
    * @return {module:model/ErrorError} The populated <code>ErrorError</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('errorKey')) {
@@ -37838,8 +37820,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} errorKey
@@ -37871,18 +37852,19 @@ function extend() {
    */
   exports.prototype['statusCode'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":136}],141:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -37892,7 +37874,7 @@ function extend() {
     }
     root.AlfrescoAuthRestApi.LoginRequest = factory(root.AlfrescoAuthRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -37906,11 +37888,8 @@ function extend() {
    * @alias module:model/LoginRequest
    * @class
    */
-  var exports = function() {
 
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>LoginRequest</code> from a plain JavaScript object, optionally creating a new instance.
@@ -37919,8 +37898,8 @@ function extend() {
    * @param {module:model/LoginRequest} obj Optional instance to populate.
    * @return {module:model/LoginRequest} The populated <code>LoginRequest</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('userId')) {
@@ -37931,8 +37910,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} userId
@@ -37944,18 +37922,19 @@ function extend() {
    */
   exports.prototype['password'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":136}],142:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './LoginTicketEntryEntry'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./LoginTicketEntryEntry'));
   } else {
@@ -37965,7 +37944,7 @@ function extend() {
     }
     root.AlfrescoAuthRestApi.LoginTicketEntry = factory(root.AlfrescoAuthRestApi.ApiClient, root.AlfrescoAuthRestApi.LoginTicketEntryEntry);
   }
-}(this, function(ApiClient, LoginTicketEntryEntry) {
+})(undefined, function (ApiClient, LoginTicketEntryEntry) {
   'use strict';
 
   /**
@@ -37979,10 +37958,8 @@ function extend() {
    * @alias module:model/LoginTicketEntry
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>LoginTicketEntry</code> from a plain JavaScript object, optionally creating a new instance.
@@ -37991,8 +37968,8 @@ function extend() {
    * @param {module:model/LoginTicketEntry} obj Optional instance to populate.
    * @return {module:model/LoginTicketEntry} The populated <code>LoginTicketEntry</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -38000,26 +37977,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/LoginTicketEntryEntry} entry
    */
   exports.prototype['entry'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":136,"./LoginTicketEntryEntry":143}],143:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -38029,7 +38006,7 @@ function extend() {
     }
     root.AlfrescoAuthRestApi.LoginTicketEntryEntry = factory(root.AlfrescoAuthRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -38043,11 +38020,8 @@ function extend() {
    * @alias module:model/LoginTicketEntryEntry
    * @class
    */
-  var exports = function() {
 
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>LoginTicketEntryEntry</code> from a plain JavaScript object, optionally creating a new instance.
@@ -38056,8 +38030,8 @@ function extend() {
    * @param {module:model/LoginTicketEntryEntry} obj Optional instance to populate.
    * @return {module:model/LoginTicketEntryEntry} The populated <code>LoginTicketEntryEntry</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -38068,8 +38042,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} id
@@ -38081,18 +38054,19 @@ function extend() {
    */
   exports.prototype['userId'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":136}],144:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './ValidateTicketEntryEntry'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./ValidateTicketEntryEntry'));
   } else {
@@ -38102,7 +38076,7 @@ function extend() {
     }
     root.AlfrescoAuthRestApi.ValidateTicketEntry = factory(root.AlfrescoAuthRestApi.ApiClient, root.AlfrescoAuthRestApi.ValidateTicketEntryEntry);
   }
-}(this, function(ApiClient, ValidateTicketEntryEntry) {
+})(undefined, function (ApiClient, ValidateTicketEntryEntry) {
   'use strict';
 
   /**
@@ -38116,10 +38090,8 @@ function extend() {
    * @alias module:model/ValidateTicketEntry
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>ValidateTicketEntry</code> from a plain JavaScript object, optionally creating a new instance.
@@ -38128,8 +38100,8 @@ function extend() {
    * @param {module:model/ValidateTicketEntry} obj Optional instance to populate.
    * @return {module:model/ValidateTicketEntry} The populated <code>ValidateTicketEntry</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -38137,26 +38109,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/ValidateTicketEntryEntry} entry
    */
   exports.prototype['entry'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":136,"./ValidateTicketEntryEntry":145}],145:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -38166,7 +38138,7 @@ function extend() {
     }
     root.AlfrescoAuthRestApi.ValidateTicketEntryEntry = factory(root.AlfrescoAuthRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -38180,10 +38152,8 @@ function extend() {
    * @alias module:model/ValidateTicketEntryEntry
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>ValidateTicketEntryEntry</code> from a plain JavaScript object, optionally creating a new instance.
@@ -38192,8 +38162,8 @@ function extend() {
    * @param {module:model/ValidateTicketEntryEntry} obj Optional instance to populate.
    * @return {module:model/ValidateTicketEntryEntry} The populated <code>ValidateTicketEntryEntry</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -38201,27 +38171,27 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} id
    */
   exports.prototype['id'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":136}],146:[function(require,module,exports){
 (function (Buffer){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['superagent'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('superagent'));
   } else {
@@ -38231,7 +38201,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.ApiClient = factory(root.superagent);
   }
-}(this, function(superagent) {
+})(undefined, function (superagent) {
   'use strict';
 
   /**
@@ -38246,7 +38216,8 @@ function extend() {
    * @alias module:ApiClient
    * @class
    */
-  var exports = function() {
+
+  var exports = function exports() {
     /**
      * The base URL against which to resolve every API call's (relative) path.
      * @type {String}
@@ -38259,7 +38230,7 @@ function extend() {
      * @type {Array.<String>}
      */
     this.authentications = {
-      'basicAuth': {type: 'basic'}
+      'basicAuth': { type: 'basic' }
     };
     /**
      * The default HTTP headers to be included for all API calls.
@@ -38281,7 +38252,7 @@ function extend() {
    * @param param The actual parameter.
    * @returns {String} The string representation of <code>param</code>.
    */
-  exports.prototype.paramToString = function(param) {
+  exports.prototype.paramToString = function (param) {
     if (param == undefined || param == null) {
       return '';
     }
@@ -38298,13 +38269,13 @@ function extend() {
    * @param {Object} pathParams The parameter values to append.
    * @returns {String} The encoded path with parameter values substituted.
    */
-  exports.prototype.buildUrl = function(path, pathParams) {
+  exports.prototype.buildUrl = function (path, pathParams) {
     if (!path.match(/^\//)) {
       path = '/' + path;
     }
     var url = this.basePath + path;
     var _this = this;
-    url = url.replace(/\{([\w-]+)\}/g, function(fullMatch, key) {
+    url = url.replace(/\{([\w-]+)\}/g, function (fullMatch, key) {
       var value;
       if (pathParams.hasOwnProperty(key)) {
         value = _this.paramToString(pathParams[key]);
@@ -38327,7 +38298,7 @@ function extend() {
    * @param {String} contentType The MIME content type to check.
    * @returns {Boolean} <code>true</code> if <code>contentType</code> represents JSON, otherwise <code>false</code>.
    */
-  exports.prototype.isJsonMime = function(contentType) {
+  exports.prototype.isJsonMime = function (contentType) {
     return Boolean(contentType != null && contentType.match(/^application\/json(;.*)?$/i));
   };
 
@@ -38336,7 +38307,7 @@ function extend() {
    * @param {Array.<String>} contentTypes
    * @returns {String} The chosen content type, preferring JSON.
    */
-  exports.prototype.jsonPreferredMime = function(contentTypes) {
+  exports.prototype.jsonPreferredMime = function (contentTypes) {
     for (var i = 0; i < contentTypes.length; i++) {
       if (this.isJsonMime(contentTypes[i])) {
         return contentTypes[i];
@@ -38350,12 +38321,9 @@ function extend() {
    * @param param The parameter to check.
    * @returns {Boolean} <code>true</code> if <code>param</code> represents a file.
    */
-  exports.prototype.isFileParam = function(param) {
+  exports.prototype.isFileParam = function (param) {
     // fs.ReadStream in Node.js (but not in runtime like browserify)
-    if (typeof window === 'undefined' &&
-        typeof require === 'function' &&
-        require('fs') &&
-        param instanceof require('fs').ReadStream) {
+    if (typeof window === 'undefined' && typeof require === 'function' && require('fs') && param instanceof require('fs').ReadStream) {
       return true;
     }
     // Buffer in Node.js
@@ -38383,7 +38351,7 @@ function extend() {
    * @param {Object.<String, Object>} params The parameters as object properties.
    * @returns {Object.<String, Object>} normalized parameters.
    */
-  exports.prototype.normalizeParams = function(params) {
+  exports.prototype.normalizeParams = function (params) {
     var newParams = {};
     for (var key in params) {
       if (params.hasOwnProperty(key) && params[key] != undefined && params[key] != null) {
@@ -38464,9 +38432,9 @@ function extend() {
    * @param {Object} request The request object created by a <code>superagent()</code> call.
    * @param {Array.<String>} authNames An array of authentication method names.
    */
-  exports.prototype.applyAuthToRequest = function(request, authNames) {
+  exports.prototype.applyAuthToRequest = function (request, authNames) {
     var _this = this;
-    authNames.forEach(function(authName) {
+    authNames.forEach(function (authName) {
       var auth = _this.authentications[authName];
       switch (auth.type) {
         case 'basic':
@@ -38491,7 +38459,7 @@ function extend() {
           break;
         case 'oauth2':
           if (auth.accessToken) {
-            request.set({'Authorization': 'Bearer ' + auth.accessToken});
+            request.set({ 'Authorization': 'Bearer ' + auth.accessToken });
           }
           break;
         default:
@@ -38538,9 +38506,7 @@ function extend() {
    * @param {(String|Array|ObjectFunction)} returnType The required type to return; can be a string for simple types or the
    * constructor for a complex type.   * @returns {Promise} A Promise object.
    */
-  exports.prototype.callApi = function callApi(path, httpMethod, pathParams,
-      queryParams, headerParams, formParams, bodyParam, authNames, contentTypes, accepts,
-      returnType) {
+  exports.prototype.callApi = function callApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, authNames, contentTypes, accepts, returnType) {
 
     var _this = this;
     var url = this.buildUrl(path, pathParams);
@@ -38588,14 +38554,14 @@ function extend() {
       request.accept(accept);
     }
 
-    return new Promise(function(resolve, reject) {
-      request.end(function(error, response) {
-          if (error) {
-              if(response && response.text){
-                  reject({error: error, message :response.text });
-              } else {
-                  reject({error: error });
-              }
+    return new Promise(function (resolve, reject) {
+      request.end(function (error, response) {
+        if (error) {
+          if (response && response.text) {
+            reject({ error: error, message: response.text });
+          } else {
+            reject({ error: error });
+          }
         } else {
           var data = _this.deserialize(response, returnType);
           resolve(data);
@@ -38609,7 +38575,7 @@ function extend() {
    * @param {String} str The date value as a string.
    * @returns {Date} The parsed date object.
    */
-  exports.parseDate = function(str) {
+  exports.parseDate = function (str) {
     return new Date(str.replace(/T/i, ' '));
   };
 
@@ -38622,7 +38588,7 @@ function extend() {
    * all properties on <code>data<code> will be converted to this type.
    * @returns An instance of the specified type.
    */
-  exports.convertToType = function(data, type) {
+  exports.convertToType = function (data, type) {
     switch (type) {
       case 'Boolean':
         return Boolean(data);
@@ -38644,10 +38610,10 @@ function extend() {
         } else if (Array.isArray(type)) {
           // for array type like: ['String']
           var itemType = type[0];
-          return data.map(function(item) {
+          return data.map(function (item) {
             return exports.convertToType(item, itemType);
           });
-        } else if (typeof type === 'object') {
+        } else if ((typeof type === 'undefined' ? 'undefined' : _typeof(type)) === 'object') {
           // for plain object type like: {'String': 'Integer'}
           var keyType, valueType;
           for (var k in type) {
@@ -38680,15 +38646,19 @@ function extend() {
   exports.instance = new exports();
 
   return exports;
-}));
+});
 
 }).call(this,require("buffer").Buffer)
 },{"buffer":8,"fs":6,"superagent":125}],147:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', '../model/Error', '../model/AssocTargetBody', '../model/NodeAssocPaging'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('../model/Error'), require('../model/AssocTargetBody'), require('../model/NodeAssocPaging'));
   } else {
@@ -38698,7 +38668,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.AssociationsApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.AssocTargetBody, root.AlfrescoCoreRestApi.NodeAssocPaging);
   }
-}(this, function(ApiClient, Error, AssocTargetBody, NodeAssocPaging) {
+})(undefined, function (ApiClient, Error, AssocTargetBody, NodeAssocPaging) {
   'use strict';
 
   /**
@@ -38714,10 +38684,9 @@ function extend() {
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
    * if unspecified.
    */
-  var exports = function(apiClient) {
+
+  var exports = function exports(apiClient) {
     this.apiClient = apiClient || ApiClient.instance;
-
-
 
     /**
      * Add node association
@@ -38725,7 +38694,7 @@ function extend() {
      * @param {String} sourceId The identifier of a node.
      * @param {module:model/AssocTargetBody} assocTargetBody The target node id and assoc type.
      */
-    this.addAssoc = function(sourceId, assocTargetBody) {
+    this.addAssoc = function (sourceId, assocTargetBody) {
       var postBody = assocTargetBody;
 
       // verify the required parameter 'sourceId' is set
@@ -38738,29 +38707,20 @@ function extend() {
         throw "Missing the required parameter 'assocTargetBody' when calling addAssoc";
       }
 
-
       var pathParams = {
         'sourceId': sourceId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/nodes/{sourceId}/targets', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{sourceId}/targets', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * List node associations
@@ -38772,7 +38732,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeAssocPaging}
      */
-    this.listSourceNodeAssociations = function(targetId, opts) {
+    this.listSourceNodeAssociations = function (targetId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -38780,7 +38740,6 @@ function extend() {
       if (targetId == undefined || targetId == null) {
         throw "Missing the required parameter 'targetId' when calling listSourceNodeAssociations";
       }
-
 
       var pathParams = {
         'targetId': targetId
@@ -38790,23 +38749,16 @@ function extend() {
         'include': opts['include'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeAssocPaging;
 
-      return this.apiClient.callApi(
-        '/nodes/{targetId}/sources', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{targetId}/sources', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * List node associations
@@ -38818,7 +38770,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeAssocPaging}
      */
-    this.listTargetAssociations = function(sourceId, opts) {
+    this.listTargetAssociations = function (sourceId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -38826,7 +38778,6 @@ function extend() {
       if (sourceId == undefined || sourceId == null) {
         throw "Missing the required parameter 'sourceId' when calling listTargetAssociations";
       }
-
 
       var pathParams = {
         'sourceId': sourceId
@@ -38836,23 +38787,16 @@ function extend() {
         'include': opts['include'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeAssocPaging;
 
-      return this.apiClient.callApi(
-        '/nodes/{sourceId}/targets', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{sourceId}/targets', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Remove node association(s)
@@ -38862,7 +38806,7 @@ function extend() {
      * @param {Object} opts Optional parameters
      * @param {String} opts.assocType Restrict the delete to only those of the given association type
      */
-    this.removeAssoc = function(sourceId, targetId, opts) {
+    this.removeAssoc = function (sourceId, targetId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -38876,7 +38820,6 @@ function extend() {
         throw "Missing the required parameter 'targetId' when calling removeAssoc";
       }
 
-
       var pathParams = {
         'sourceId': sourceId,
         'targetId': targetId
@@ -38884,33 +38827,31 @@ function extend() {
       var queryParams = {
         'assocType': opts['assocType']
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/nodes/{sourceId}/targets/{targetId}', 'DELETE',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
+      return this.apiClient.callApi('/nodes/{sourceId}/targets/{targetId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
   };
 
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"../model/AssocTargetBody":169,"../model/Error":187,"../model/NodeAssocPaging":201}],148:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', '../model/Error', '../model/AssocTargetBody', '../model/NodeEntry', '../model/NodeBody1', '../model/AssocChildBody', '../model/NodeSharedLinkEntry', '../model/SharedLinkBody', '../model/CopyBody', '../model/RenditionBody', '../model/SiteBody', '../model/SiteEntry', '../model/EmailSharedLinkBody', '../model/NodeSharedLinkPaging', '../model/DeletedNodeEntry', '../model/DeletedNodesPaging', '../model/NodePaging', '../model/RenditionEntry', '../model/RenditionPaging', '../model/NodeAssocPaging', '../model/NodeChildAssocPaging', '../model/MoveBody', '../model/NodeBody'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('../model/Error'), require('../model/AssocTargetBody'), require('../model/NodeEntry'), require('../model/NodeBody1'), require('../model/AssocChildBody'), require('../model/NodeSharedLinkEntry'), require('../model/SharedLinkBody'), require('../model/CopyBody'), require('../model/RenditionBody'), require('../model/SiteBody'), require('../model/SiteEntry'), require('../model/EmailSharedLinkBody'), require('../model/NodeSharedLinkPaging'), require('../model/DeletedNodeEntry'), require('../model/DeletedNodesPaging'), require('../model/NodePaging'), require('../model/RenditionEntry'), require('../model/RenditionPaging'), require('../model/NodeAssocPaging'), require('../model/NodeChildAssocPaging'), require('../model/MoveBody'), require('../model/NodeBody'));
   } else {
@@ -38920,7 +38861,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.ChangesApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.AssocTargetBody, root.AlfrescoCoreRestApi.NodeEntry, root.AlfrescoCoreRestApi.NodeBody1, root.AlfrescoCoreRestApi.AssocChildBody, root.AlfrescoCoreRestApi.NodeSharedLinkEntry, root.AlfrescoCoreRestApi.SharedLinkBody, root.AlfrescoCoreRestApi.CopyBody, root.AlfrescoCoreRestApi.RenditionBody, root.AlfrescoCoreRestApi.SiteBody, root.AlfrescoCoreRestApi.SiteEntry, root.AlfrescoCoreRestApi.EmailSharedLinkBody, root.AlfrescoCoreRestApi.NodeSharedLinkPaging, root.AlfrescoCoreRestApi.DeletedNodeEntry, root.AlfrescoCoreRestApi.DeletedNodesPaging, root.AlfrescoCoreRestApi.NodePaging, root.AlfrescoCoreRestApi.RenditionEntry, root.AlfrescoCoreRestApi.RenditionPaging, root.AlfrescoCoreRestApi.NodeAssocPaging, root.AlfrescoCoreRestApi.NodeChildAssocPaging, root.AlfrescoCoreRestApi.MoveBody, root.AlfrescoCoreRestApi.NodeBody);
   }
-}(this, function(ApiClient, Error, AssocTargetBody, NodeEntry, NodeBody1, AssocChildBody, NodeSharedLinkEntry, SharedLinkBody, CopyBody, RenditionBody, SiteBody, SiteEntry, EmailSharedLinkBody, NodeSharedLinkPaging, DeletedNodeEntry, DeletedNodesPaging, NodePaging, RenditionEntry, RenditionPaging, NodeAssocPaging, NodeChildAssocPaging, MoveBody, NodeBody) {
+})(undefined, function (ApiClient, Error, AssocTargetBody, NodeEntry, NodeBody1, AssocChildBody, NodeSharedLinkEntry, SharedLinkBody, CopyBody, RenditionBody, SiteBody, SiteEntry, EmailSharedLinkBody, NodeSharedLinkPaging, DeletedNodeEntry, DeletedNodesPaging, NodePaging, RenditionEntry, RenditionPaging, NodeAssocPaging, NodeChildAssocPaging, MoveBody, NodeBody) {
   'use strict';
 
   /**
@@ -38936,10 +38877,9 @@ function extend() {
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
    * if unspecified.
    */
-  var exports = function(apiClient) {
+
+  var exports = function exports(apiClient) {
     this.apiClient = apiClient || ApiClient.instance;
-
-
 
     /**
      * Add node association
@@ -38947,7 +38887,7 @@ function extend() {
      * @param {String} sourceId The identifier of a node.
      * @param {module:model/AssocTargetBody} assocTargetBody The target node id and assoc type.
      */
-    this.addAssoc = function(sourceId, assocTargetBody) {
+    this.addAssoc = function (sourceId, assocTargetBody) {
       var postBody = assocTargetBody;
 
       // verify the required parameter 'sourceId' is set
@@ -38960,29 +38900,20 @@ function extend() {
         throw "Missing the required parameter 'assocTargetBody' when calling addAssoc";
       }
 
-
       var pathParams = {
         'sourceId': sourceId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/nodes/{sourceId}/targets', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{sourceId}/targets', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Create a node
@@ -38995,7 +38926,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    this.addNode = function(nodeId, nodeBody, opts) {
+    this.addNode = function (nodeId, nodeBody, opts) {
       opts = opts || {};
       var postBody = nodeBody;
 
@@ -39009,7 +38940,6 @@ function extend() {
         throw "Missing the required parameter 'nodeBody' when calling addNode";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
@@ -39018,23 +38948,16 @@ function extend() {
         'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json', 'multipart/form-data'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/children', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/children', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Add secondary child
@@ -39042,7 +38965,7 @@ function extend() {
      * @param {String} parentId The identifier of a node.
      * @param {module:model/AssocChildBody} assocChildBody The child node id and assoc type.
      */
-    this.addSecondaryChildAssoc = function(parentId, assocChildBody) {
+    this.addSecondaryChildAssoc = function (parentId, assocChildBody) {
       var postBody = assocChildBody;
 
       // verify the required parameter 'parentId' is set
@@ -39055,29 +38978,20 @@ function extend() {
         throw "Missing the required parameter 'assocChildBody' when calling addSecondaryChildAssoc";
       }
 
-
       var pathParams = {
         'parentId': parentId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/nodes/{parentId}/secondary-children', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{parentId}/secondary-children', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Create a shared link to a file
@@ -39088,7 +39002,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeSharedLinkEntry}
      */
-    this.addSharedLink = function(sharedLinkBody, opts) {
+    this.addSharedLink = function (sharedLinkBody, opts) {
       opts = opts || {};
       var postBody = sharedLinkBody;
 
@@ -39097,30 +39011,21 @@ function extend() {
         throw "Missing the required parameter 'sharedLinkBody' when calling addSharedLink";
       }
 
-
-      var pathParams = {
-      };
+      var pathParams = {};
       var queryParams = {
         'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeSharedLinkEntry;
 
-      return this.apiClient.callApi(
-        '/shared-links', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/shared-links', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Copy a node
@@ -39132,7 +39037,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    this.copyNode = function(nodeId, copyBody, opts) {
+    this.copyNode = function (nodeId, copyBody, opts) {
       opts = opts || {};
       var postBody = copyBody;
 
@@ -39146,7 +39051,6 @@ function extend() {
         throw "Missing the required parameter 'copyBody' when calling copyNode";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
@@ -39154,23 +39058,16 @@ function extend() {
         'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/copy', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/copy', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Create rendition
@@ -39178,7 +39075,7 @@ function extend() {
      * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases:\n* -my-\n* -shared-\n* -root-\n
      * @param {module:model/RenditionBody} renditionBody The rendition \&quot;id\&quot;.
      */
-    this.createRendition = function(nodeId, renditionBody) {
+    this.createRendition = function (nodeId, renditionBody) {
       var postBody = renditionBody;
 
       // verify the required parameter 'nodeId' is set
@@ -39191,29 +39088,20 @@ function extend() {
         throw "Missing the required parameter 'renditionBody' when calling createRendition";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/renditions', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/renditions', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Create a site
@@ -39224,7 +39112,7 @@ function extend() {
      * @param {Boolean} opts.skipAddToFavorites Flag to indicate whether the site should not be added to the user&#39;s site favorites. (default to false)
      * data is of type: {module:model/SiteEntry}
      */
-    this.createSite = function(siteBody, opts) {
+    this.createSite = function (siteBody, opts) {
       opts = opts || {};
       var postBody = siteBody;
 
@@ -39233,30 +39121,21 @@ function extend() {
         throw "Missing the required parameter 'siteBody' when calling createSite";
       }
 
-
-      var pathParams = {
-      };
+      var pathParams = {};
       var queryParams = {
         'skipConfiguration': opts['skipConfiguration'],
         'skipAddToFavorites': opts['skipAddToFavorites']
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = SiteEntry;
 
-      return this.apiClient.callApi(
-        '/sites', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/sites', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Delete a node
@@ -39265,7 +39144,7 @@ function extend() {
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.permanent If **true** then the node is deleted permanently, without it moving to the trashcan.\nYou must be the owner or an admin to permanently delete the node.\n (default to false)
      */
-    this.deleteNode = function(nodeId, opts) {
+    this.deleteNode = function (nodeId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -39274,37 +39153,29 @@ function extend() {
         throw "Missing the required parameter 'nodeId' when calling deleteNode";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
       var queryParams = {
         'permanent': opts['permanent']
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}', 'DELETE',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Deletes a shared link
      * Deletes the shared link with identifier **sharedId**.
      * @param {String} sharedId The identifier of a shared link to a file.
      */
-    this.deleteSharedLink = function(sharedId) {
+    this.deleteSharedLink = function (sharedId) {
       var postBody = null;
 
       // verify the required parameter 'sharedId' is set
@@ -39312,29 +39183,20 @@ function extend() {
         throw "Missing the required parameter 'sharedId' when calling deleteSharedLink";
       }
 
-
       var pathParams = {
         'sharedId': sharedId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/shared-links/{sharedId}', 'DELETE',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/shared-links/{sharedId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Delete a site
@@ -39343,7 +39205,7 @@ function extend() {
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.permanent Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan. (default to false)
      */
-    this.deleteSite = function(siteId, opts) {
+    this.deleteSite = function (siteId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -39352,30 +39214,22 @@ function extend() {
         throw "Missing the required parameter 'siteId' when calling deleteSite";
       }
 
-
       var pathParams = {
         'siteId': siteId
       };
       var queryParams = {
         'permanent': opts['permanent']
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/sites/{siteId}', 'DELETE',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/sites/{siteId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Email shared link
@@ -39383,7 +39237,7 @@ function extend() {
      * @param {String} sharedId The identifier of a shared link to a file.
      * @param {module:model/EmailSharedLinkBody} emailSharedLinkBody The shared link email to send.
      */
-    this.emailSharedLink = function(sharedId, emailSharedLinkBody) {
+    this.emailSharedLink = function (sharedId, emailSharedLinkBody) {
       var postBody = emailSharedLinkBody;
 
       // verify the required parameter 'sharedId' is set
@@ -39396,29 +39250,20 @@ function extend() {
         throw "Missing the required parameter 'emailSharedLinkBody' when calling emailSharedLink";
       }
 
-
       var pathParams = {
         'sharedId': sharedId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/shared-links/{sharedId}/email', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/shared-links/{sharedId}/email', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Find shared links
@@ -39429,35 +39274,26 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeSharedLinkPaging}
      */
-    this.findSharedLinks = function(opts) {
+    this.findSharedLinks = function (opts) {
       opts = opts || {};
       var postBody = null;
 
-
-      var pathParams = {
-      };
+      var pathParams = {};
       var queryParams = {
         'where': opts['where'],
         'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeSharedLinkPaging;
 
-      return this.apiClient.callApi(
-        '/shared-links', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/shared-links', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get a deleted node
@@ -39467,7 +39303,7 @@ function extend() {
      * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested:\n* path\n* isLink\n* allowableOperations\n
      * data is of type: {module:model/DeletedNodeEntry}
      */
-    this.getDeletedNode = function(nodeId, opts) {
+    this.getDeletedNode = function (nodeId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -39476,30 +39312,22 @@ function extend() {
         throw "Missing the required parameter 'nodeId' when calling getDeletedNode";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
       var queryParams = {
         'include': this.apiClient.buildCollectionParam(opts['include'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = DeletedNodeEntry;
 
-      return this.apiClient.callApi(
-        '/deleted-nodes/{nodeId}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/deleted-nodes/{nodeId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get deleted nodes
@@ -39510,35 +39338,26 @@ function extend() {
      * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested:\n* properties\n* aspectNames\n* path\n* isLink\n* allowableOperations\n* association\n
      * data is of type: {module:model/DeletedNodesPaging}
      */
-    this.getDeletedNodes = function(opts) {
+    this.getDeletedNodes = function (opts) {
       opts = opts || {};
       var postBody = null;
 
-
-      var pathParams = {
-      };
+      var pathParams = {};
       var queryParams = {
         'skipCount': opts['skipCount'],
         'maxItems': opts['maxItems'],
         'include': this.apiClient.buildCollectionParam(opts['include'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = DeletedNodesPaging;
 
-      return this.apiClient.callApi(
-        '/deleted-nodes', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/deleted-nodes', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get file content
@@ -39548,7 +39367,7 @@ function extend() {
      * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n (default to true)
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.\n
      */
-    this.getFileContent = function(nodeId, opts) {
+    this.getFileContent = function (nodeId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -39556,7 +39375,6 @@ function extend() {
       if (nodeId == undefined || nodeId == null) {
         throw "Missing the required parameter 'nodeId' when calling getFileContent";
       }
-
 
       var pathParams = {
         'nodeId': nodeId
@@ -39567,21 +39385,15 @@ function extend() {
       var headerParams = {
         'If-Modified-Since': opts['ifModifiedSince']
       };
-      var formParams = {
-      };
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/content', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get a node
@@ -39593,7 +39405,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    this.getNode = function(nodeId, opts) {
+    this.getNode = function (nodeId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -39601,7 +39413,6 @@ function extend() {
       if (nodeId == undefined || nodeId == null) {
         throw "Missing the required parameter 'nodeId' when calling getNode";
       }
-
 
       var pathParams = {
         'nodeId': nodeId
@@ -39611,23 +39422,16 @@ function extend() {
         'relativePath': opts['relativePath'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get node children
@@ -39644,7 +39448,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodePaging}
      */
-    this.getNodeChildren = function(nodeId, opts) {
+    this.getNodeChildren = function (nodeId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -39652,7 +39456,6 @@ function extend() {
       if (nodeId == undefined || nodeId == null) {
         throw "Missing the required parameter 'nodeId' when calling getNodeChildren";
       }
-
 
       var pathParams = {
         'nodeId': nodeId
@@ -39667,23 +39470,16 @@ function extend() {
         'includeSource': opts['includeSource'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodePaging;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/children', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/children', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get rendition information
@@ -39692,7 +39488,7 @@ function extend() {
      * @param {String} renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
      * data is of type: {module:model/RenditionEntry}
      */
-    this.getRendition = function(nodeId, renditionId) {
+    this.getRendition = function (nodeId, renditionId) {
       var postBody = null;
 
       // verify the required parameter 'nodeId' is set
@@ -39705,30 +39501,21 @@ function extend() {
         throw "Missing the required parameter 'renditionId' when calling getRendition";
       }
 
-
       var pathParams = {
         'nodeId': nodeId,
         'renditionId': renditionId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = RenditionEntry;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/renditions/{renditionId}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/renditions/{renditionId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get rendition content
@@ -39739,7 +39526,7 @@ function extend() {
      * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n (default to true)
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.\n
      */
-    this.getRenditionContent = function(nodeId, renditionId, opts) {
+    this.getRenditionContent = function (nodeId, renditionId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -39753,7 +39540,6 @@ function extend() {
         throw "Missing the required parameter 'renditionId' when calling getRenditionContent";
       }
 
-
       var pathParams = {
         'nodeId': nodeId,
         'renditionId': renditionId
@@ -39764,21 +39550,15 @@ function extend() {
       var headerParams = {
         'If-Modified-Since': opts['ifModifiedSince']
       };
-      var formParams = {
-      };
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/renditions/{renditionId}/content', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/renditions/{renditionId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * List information for renditions
@@ -39786,7 +39566,7 @@ function extend() {
      * @param {String} nodeId The identifier of a node.
      * data is of type: {module:model/RenditionPaging}
      */
-    this.getRenditions = function(nodeId) {
+    this.getRenditions = function (nodeId) {
       var postBody = null;
 
       // verify the required parameter 'nodeId' is set
@@ -39794,29 +39574,20 @@ function extend() {
         throw "Missing the required parameter 'nodeId' when calling getRenditions";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = RenditionPaging;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/renditions', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/renditions', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get a shared link
@@ -39827,7 +39598,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeSharedLinkEntry}
      */
-    this.getSharedLink = function(sharedId, opts) {
+    this.getSharedLink = function (sharedId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -39836,7 +39607,6 @@ function extend() {
         throw "Missing the required parameter 'sharedId' when calling getSharedLink";
       }
 
-
       var pathParams = {
         'sharedId': sharedId
       };
@@ -39844,23 +39614,16 @@ function extend() {
         'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeSharedLinkEntry;
 
-      return this.apiClient.callApi(
-        '/shared-links/{sharedId}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/shared-links/{sharedId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get file content
@@ -39870,7 +39633,7 @@ function extend() {
      * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n (default to true)
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.\n
      */
-    this.getSharedLinkContent = function(sharedId, opts) {
+    this.getSharedLinkContent = function (sharedId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -39878,7 +39641,6 @@ function extend() {
       if (sharedId == undefined || sharedId == null) {
         throw "Missing the required parameter 'sharedId' when calling getSharedLinkContent";
       }
-
 
       var pathParams = {
         'sharedId': sharedId
@@ -39889,21 +39651,15 @@ function extend() {
       var headerParams = {
         'If-Modified-Since': opts['ifModifiedSince']
       };
-      var formParams = {
-      };
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/shared-links/{sharedId}/content', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/shared-links/{sharedId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get shared link rendition content
@@ -39914,7 +39670,7 @@ function extend() {
      * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n (default to true)
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.\n
      */
-    this.getSharedLinkRenditionContent = function(sharedId, renditionId, opts) {
+    this.getSharedLinkRenditionContent = function (sharedId, renditionId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -39928,7 +39684,6 @@ function extend() {
         throw "Missing the required parameter 'renditionId' when calling getSharedLinkRenditionContent";
       }
 
-
       var pathParams = {
         'sharedId': sharedId,
         'renditionId': renditionId
@@ -39939,21 +39694,15 @@ function extend() {
       var headerParams = {
         'If-Modified-Since': opts['ifModifiedSince']
       };
-      var formParams = {
-      };
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/shared-links/{sharedId}/renditions/{renditionId}/content', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/shared-links/{sharedId}/renditions/{renditionId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * List information for created renditions
@@ -39961,7 +39710,7 @@ function extend() {
      * @param {String} sharedId The identifier of a shared link to a file.
      * data is of type: {module:model/RenditionPaging}
      */
-    this.getSharedLinkRenditions = function(sharedId) {
+    this.getSharedLinkRenditions = function (sharedId) {
       var postBody = null;
 
       // verify the required parameter 'sharedId' is set
@@ -39969,29 +39718,20 @@ function extend() {
         throw "Missing the required parameter 'sharedId' when calling getSharedLinkRenditions";
       }
 
-
       var pathParams = {
         'sharedId': sharedId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = RenditionPaging;
 
-      return this.apiClient.callApi(
-        '/shared-links/{sharedId}/renditions', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/shared-links/{sharedId}/renditions', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * List parents
@@ -40003,7 +39743,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeAssocPaging}
      */
-    this.listParents = function(childId, opts) {
+    this.listParents = function (childId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -40011,7 +39751,6 @@ function extend() {
       if (childId == undefined || childId == null) {
         throw "Missing the required parameter 'childId' when calling listParents";
       }
-
 
       var pathParams = {
         'childId': childId
@@ -40021,23 +39760,16 @@ function extend() {
         'include': opts['include'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeAssocPaging;
 
-      return this.apiClient.callApi(
-        '/nodes/{childId}/parents', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{childId}/parents', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * List secondary children
@@ -40050,7 +39782,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeChildAssocPaging}
      */
-    this.listSecondaryChildAssociations = function(parentId, opts) {
+    this.listSecondaryChildAssociations = function (parentId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -40058,7 +39790,6 @@ function extend() {
       if (parentId == undefined || parentId == null) {
         throw "Missing the required parameter 'parentId' when calling listSecondaryChildAssociations";
       }
-
 
       var pathParams = {
         'parentId': parentId
@@ -40069,23 +39800,16 @@ function extend() {
         'include': opts['include'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeChildAssocPaging;
 
-      return this.apiClient.callApi(
-        '/nodes/{parentId}/secondary-children', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{parentId}/secondary-children', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * List node associations
@@ -40097,7 +39821,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeAssocPaging}
      */
-    this.listSourceNodeAssociations = function(targetId, opts) {
+    this.listSourceNodeAssociations = function (targetId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -40105,7 +39829,6 @@ function extend() {
       if (targetId == undefined || targetId == null) {
         throw "Missing the required parameter 'targetId' when calling listSourceNodeAssociations";
       }
-
 
       var pathParams = {
         'targetId': targetId
@@ -40115,23 +39838,16 @@ function extend() {
         'include': opts['include'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeAssocPaging;
 
-      return this.apiClient.callApi(
-        '/nodes/{targetId}/sources', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{targetId}/sources', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * List node associations
@@ -40143,7 +39859,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeAssocPaging}
      */
-    this.listTargetAssociations = function(sourceId, opts) {
+    this.listTargetAssociations = function (sourceId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -40151,7 +39867,6 @@ function extend() {
       if (sourceId == undefined || sourceId == null) {
         throw "Missing the required parameter 'sourceId' when calling listTargetAssociations";
       }
-
 
       var pathParams = {
         'sourceId': sourceId
@@ -40161,23 +39876,16 @@ function extend() {
         'include': opts['include'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeAssocPaging;
 
-      return this.apiClient.callApi(
-        '/nodes/{sourceId}/targets', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{sourceId}/targets', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Live search for nodes
@@ -40193,7 +39901,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodePaging}
      */
-    this.liveSearchNodes = function(term, opts) {
+    this.liveSearchNodes = function (term, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -40202,9 +39910,7 @@ function extend() {
         throw "Missing the required parameter 'term' when calling liveSearchNodes";
       }
 
-
-      var pathParams = {
-      };
+      var pathParams = {};
       var queryParams = {
         'skipCount': opts['skipCount'],
         'maxItems': opts['maxItems'],
@@ -40215,23 +39921,16 @@ function extend() {
         'orderBy': opts['orderBy'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodePaging;
 
-      return this.apiClient.callApi(
-        '/queries/live-search-nodes', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/queries/live-search-nodes', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Move a node
@@ -40243,7 +39942,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    this.moveNode = function(nodeId, moveBody, opts) {
+    this.moveNode = function (nodeId, moveBody, opts) {
       opts = opts || {};
       var postBody = moveBody;
 
@@ -40257,7 +39956,6 @@ function extend() {
         throw "Missing the required parameter 'moveBody' when calling moveNode";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
@@ -40265,30 +39963,23 @@ function extend() {
         'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/move', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/move', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Purge a deleted node
      * Permanently removes the deleted node identified by **nodeId**.\n
      * @param {String} nodeId The identifier of a node.
      */
-    this.purgeDeletedNode = function(nodeId) {
+    this.purgeDeletedNode = function (nodeId) {
       var postBody = null;
 
       // verify the required parameter 'nodeId' is set
@@ -40296,29 +39987,20 @@ function extend() {
         throw "Missing the required parameter 'nodeId' when calling purgeDeletedNode";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/deleted-nodes/{nodeId}', 'DELETE',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/deleted-nodes/{nodeId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Remove node association(s)
@@ -40328,7 +40010,7 @@ function extend() {
      * @param {Object} opts Optional parameters
      * @param {String} opts.assocType Restrict the delete to only those of the given association type
      */
-    this.removeAssoc = function(sourceId, targetId, opts) {
+    this.removeAssoc = function (sourceId, targetId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -40342,7 +40024,6 @@ function extend() {
         throw "Missing the required parameter 'targetId' when calling removeAssoc";
       }
 
-
       var pathParams = {
         'sourceId': sourceId,
         'targetId': targetId
@@ -40350,23 +40031,16 @@ function extend() {
       var queryParams = {
         'assocType': opts['assocType']
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/nodes/{sourceId}/targets/{targetId}', 'DELETE',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{sourceId}/targets/{targetId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Remove secondary child (or children)
@@ -40376,7 +40050,7 @@ function extend() {
      * @param {Object} opts Optional parameters
      * @param {String} opts.assocType Restrict the delete to only those of the given association type
      */
-    this.removeSecondaryChildAssoc = function(parentId, childId, opts) {
+    this.removeSecondaryChildAssoc = function (parentId, childId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -40390,7 +40064,6 @@ function extend() {
         throw "Missing the required parameter 'childId' when calling removeSecondaryChildAssoc";
       }
 
-
       var pathParams = {
         'parentId': parentId,
         'childId': childId
@@ -40398,23 +40071,16 @@ function extend() {
       var queryParams = {
         'assocType': opts['assocType']
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/nodes/{parentId}/secondary-children/{childId}', 'DELETE',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{parentId}/secondary-children/{childId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Restore a deleted node
@@ -40422,7 +40088,7 @@ function extend() {
      * @param {String} nodeId The identifier of a node.
      * data is of type: {module:model/NodeEntry}
      */
-    this.restoreNode = function(nodeId) {
+    this.restoreNode = function (nodeId) {
       var postBody = null;
 
       // verify the required parameter 'nodeId' is set
@@ -40430,29 +40096,20 @@ function extend() {
         throw "Missing the required parameter 'nodeId' when calling restoreNode";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
 
-      return this.apiClient.callApi(
-        '/deleted-nodes/{nodeId}/restore', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/deleted-nodes/{nodeId}/restore', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Update file content
@@ -40466,7 +40123,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    this.updateFileContent = function(nodeId, contentBody, opts) {
+    this.updateFileContent = function (nodeId, contentBody, opts) {
       opts = opts || {};
       var postBody = contentBody;
 
@@ -40480,7 +40137,6 @@ function extend() {
         throw "Missing the required parameter 'contentBody' when calling updateFileContent";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
@@ -40490,23 +40146,16 @@ function extend() {
         'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/octet-stream'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/content', 'PUT',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/content', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Update a node
@@ -40518,7 +40167,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    this.updateNode = function(nodeId, nodeBody, opts) {
+    this.updateNode = function (nodeId, nodeBody, opts) {
       opts = opts || {};
       var postBody = nodeBody;
 
@@ -40532,7 +40181,6 @@ function extend() {
         throw "Missing the required parameter 'nodeBody' when calling updateNode";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
@@ -40540,33 +40188,31 @@ function extend() {
         'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}', 'PUT',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
+      return this.apiClient.callApi('/nodes/{nodeId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
   };
 
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"../model/AssocChildBody":167,"../model/AssocTargetBody":169,"../model/CopyBody":179,"../model/DeletedNodeEntry":181,"../model/DeletedNodesPaging":184,"../model/EmailSharedLinkBody":186,"../model/Error":187,"../model/MoveBody":197,"../model/NodeAssocPaging":201,"../model/NodeBody":203,"../model/NodeBody1":204,"../model/NodeChildAssocPaging":207,"../model/NodeEntry":209,"../model/NodePaging":213,"../model/NodeSharedLinkEntry":216,"../model/NodeSharedLinkPaging":217,"../model/RenditionBody":240,"../model/RenditionEntry":241,"../model/RenditionPaging":242,"../model/SharedLinkBody":244,"../model/SiteBody":246,"../model/SiteEntry":250}],149:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', '../model/NodeEntry', '../model/NodeBody1', '../model/Error', '../model/AssocChildBody', '../model/NodePaging', '../model/NodeAssocPaging', '../model/NodeChildAssocPaging', '../model/MoveBody'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('../model/NodeEntry'), require('../model/NodeBody1'), require('../model/Error'), require('../model/AssocChildBody'), require('../model/NodePaging'), require('../model/NodeAssocPaging'), require('../model/NodeChildAssocPaging'), require('../model/MoveBody'));
   } else {
@@ -40576,7 +40222,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.ChildAssociationsApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.NodeEntry, root.AlfrescoCoreRestApi.NodeBody1, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.AssocChildBody, root.AlfrescoCoreRestApi.NodePaging, root.AlfrescoCoreRestApi.NodeAssocPaging, root.AlfrescoCoreRestApi.NodeChildAssocPaging, root.AlfrescoCoreRestApi.MoveBody);
   }
-}(this, function(ApiClient, NodeEntry, NodeBody1, Error, AssocChildBody, NodePaging, NodeAssocPaging, NodeChildAssocPaging, MoveBody) {
+})(undefined, function (ApiClient, NodeEntry, NodeBody1, Error, AssocChildBody, NodePaging, NodeAssocPaging, NodeChildAssocPaging, MoveBody) {
   'use strict';
 
   /**
@@ -40592,10 +40238,9 @@ function extend() {
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
    * if unspecified.
    */
-  var exports = function(apiClient) {
+
+  var exports = function exports(apiClient) {
     this.apiClient = apiClient || ApiClient.instance;
-
-
 
     /**
      * Create a node
@@ -40608,7 +40253,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    this.addNode = function(nodeId, nodeBody, opts) {
+    this.addNode = function (nodeId, nodeBody, opts) {
       opts = opts || {};
       var postBody = nodeBody;
 
@@ -40622,7 +40267,6 @@ function extend() {
         throw "Missing the required parameter 'nodeBody' when calling addNode";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
@@ -40631,23 +40275,16 @@ function extend() {
         'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json', 'multipart/form-data'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/children', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/children', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Add secondary child
@@ -40655,7 +40292,7 @@ function extend() {
      * @param {String} parentId The identifier of a node.
      * @param {module:model/AssocChildBody} assocChildBody The child node id and assoc type.
      */
-    this.addSecondaryChildAssoc = function(parentId, assocChildBody) {
+    this.addSecondaryChildAssoc = function (parentId, assocChildBody) {
       var postBody = assocChildBody;
 
       // verify the required parameter 'parentId' is set
@@ -40668,29 +40305,20 @@ function extend() {
         throw "Missing the required parameter 'assocChildBody' when calling addSecondaryChildAssoc";
       }
 
-
       var pathParams = {
         'parentId': parentId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/nodes/{parentId}/secondary-children', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{parentId}/secondary-children', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Delete a node
@@ -40699,7 +40327,7 @@ function extend() {
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.permanent If **true** then the node is deleted permanently, without it moving to the trashcan.\nYou must be the owner or an admin to permanently delete the node.\n (default to false)
      */
-    this.deleteNode = function(nodeId, opts) {
+    this.deleteNode = function (nodeId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -40708,30 +40336,22 @@ function extend() {
         throw "Missing the required parameter 'nodeId' when calling deleteNode";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
       var queryParams = {
         'permanent': opts['permanent']
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}', 'DELETE',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get node children
@@ -40748,7 +40368,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodePaging}
      */
-    this.getNodeChildren = function(nodeId, opts) {
+    this.getNodeChildren = function (nodeId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -40756,7 +40376,6 @@ function extend() {
       if (nodeId == undefined || nodeId == null) {
         throw "Missing the required parameter 'nodeId' when calling getNodeChildren";
       }
-
 
       var pathParams = {
         'nodeId': nodeId
@@ -40771,23 +40390,16 @@ function extend() {
         'includeSource': opts['includeSource'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodePaging;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/children', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/children', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * List parents
@@ -40799,7 +40411,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeAssocPaging}
      */
-    this.listParents = function(childId, opts) {
+    this.listParents = function (childId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -40807,7 +40419,6 @@ function extend() {
       if (childId == undefined || childId == null) {
         throw "Missing the required parameter 'childId' when calling listParents";
       }
-
 
       var pathParams = {
         'childId': childId
@@ -40817,23 +40428,16 @@ function extend() {
         'include': opts['include'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeAssocPaging;
 
-      return this.apiClient.callApi(
-        '/nodes/{childId}/parents', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{childId}/parents', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * List secondary children
@@ -40846,7 +40450,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeChildAssocPaging}
      */
-    this.listSecondaryChildAssociations = function(parentId, opts) {
+    this.listSecondaryChildAssociations = function (parentId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -40854,7 +40458,6 @@ function extend() {
       if (parentId == undefined || parentId == null) {
         throw "Missing the required parameter 'parentId' when calling listSecondaryChildAssociations";
       }
-
 
       var pathParams = {
         'parentId': parentId
@@ -40865,23 +40468,16 @@ function extend() {
         'include': opts['include'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeChildAssocPaging;
 
-      return this.apiClient.callApi(
-        '/nodes/{parentId}/secondary-children', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{parentId}/secondary-children', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Move a node
@@ -40893,7 +40489,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    this.moveNode = function(nodeId, moveBody, opts) {
+    this.moveNode = function (nodeId, moveBody, opts) {
       opts = opts || {};
       var postBody = moveBody;
 
@@ -40907,7 +40503,6 @@ function extend() {
         throw "Missing the required parameter 'moveBody' when calling moveNode";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
@@ -40915,23 +40510,16 @@ function extend() {
         'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/move', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/move', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Remove secondary child (or children)
@@ -40941,7 +40529,7 @@ function extend() {
      * @param {Object} opts Optional parameters
      * @param {String} opts.assocType Restrict the delete to only those of the given association type
      */
-    this.removeSecondaryChildAssoc = function(parentId, childId, opts) {
+    this.removeSecondaryChildAssoc = function (parentId, childId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -40955,7 +40543,6 @@ function extend() {
         throw "Missing the required parameter 'childId' when calling removeSecondaryChildAssoc";
       }
 
-
       var pathParams = {
         'parentId': parentId,
         'childId': childId
@@ -40963,33 +40550,31 @@ function extend() {
       var queryParams = {
         'assocType': opts['assocType']
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/nodes/{parentId}/secondary-children/{childId}', 'DELETE',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
+      return this.apiClient.callApi('/nodes/{parentId}/secondary-children/{childId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
   };
 
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"../model/AssocChildBody":167,"../model/Error":187,"../model/MoveBody":197,"../model/NodeAssocPaging":201,"../model/NodeBody1":204,"../model/NodeChildAssocPaging":207,"../model/NodeEntry":209,"../model/NodePaging":213}],150:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', '../model/CommentBody', '../model/CommentEntry', '../model/Error', '../model/CommentPaging', '../model/CommentBody1'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('../model/CommentBody'), require('../model/CommentEntry'), require('../model/Error'), require('../model/CommentPaging'), require('../model/CommentBody1'));
   } else {
@@ -40999,7 +40584,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.CommentsApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.CommentBody, root.AlfrescoCoreRestApi.CommentEntry, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.CommentPaging, root.AlfrescoCoreRestApi.CommentBody1);
   }
-}(this, function(ApiClient, CommentBody, CommentEntry, Error, CommentPaging, CommentBody1) {
+})(undefined, function (ApiClient, CommentBody, CommentEntry, Error, CommentPaging, CommentBody1) {
   'use strict';
 
   /**
@@ -41015,10 +40600,9 @@ function extend() {
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
    * if unspecified.
    */
-  var exports = function(apiClient) {
+
+  var exports = function exports(apiClient) {
     this.apiClient = apiClient || ApiClient.instance;
-
-
 
     /**
      * Add a comment
@@ -41027,7 +40611,7 @@ function extend() {
      * @param {module:model/CommentBody} commentBody The comment text. Note that you can provide an array of comments.
      * data is of type: {module:model/CommentEntry}
      */
-    this.addComment = function(nodeId, commentBody) {
+    this.addComment = function (nodeId, commentBody) {
       var postBody = commentBody;
 
       // verify the required parameter 'nodeId' is set
@@ -41040,29 +40624,20 @@ function extend() {
         throw "Missing the required parameter 'commentBody' when calling addComment";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = CommentEntry;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/comments', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/comments', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get comments
@@ -41074,7 +40649,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/CommentPaging}
      */
-    this.getComments = function(nodeId, opts) {
+    this.getComments = function (nodeId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -41082,7 +40657,6 @@ function extend() {
       if (nodeId == undefined || nodeId == null) {
         throw "Missing the required parameter 'nodeId' when calling getComments";
       }
-
 
       var pathParams = {
         'nodeId': nodeId
@@ -41092,23 +40666,16 @@ function extend() {
         'maxItems': opts['maxItems'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = CommentPaging;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/comments', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/comments', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Delete a comment
@@ -41116,7 +40683,7 @@ function extend() {
      * @param {String} nodeId The identifier of a node.
      * @param {String} commentId The identifier of a comment.
      */
-    this.removeComment = function(nodeId, commentId) {
+    this.removeComment = function (nodeId, commentId) {
       var postBody = null;
 
       // verify the required parameter 'nodeId' is set
@@ -41129,30 +40696,21 @@ function extend() {
         throw "Missing the required parameter 'commentId' when calling removeComment";
       }
 
-
       var pathParams = {
         'nodeId': nodeId,
         'commentId': commentId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/comments/{commentId}', 'DELETE',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/comments/{commentId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Update a comment
@@ -41164,7 +40722,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/CommentEntry}
      */
-    this.updateComment = function(nodeId, commentId, commentBody, opts) {
+    this.updateComment = function (nodeId, commentId, commentBody, opts) {
       opts = opts || {};
       var postBody = commentBody;
 
@@ -41183,7 +40741,6 @@ function extend() {
         throw "Missing the required parameter 'commentBody' when calling updateComment";
       }
 
-
       var pathParams = {
         'nodeId': nodeId,
         'commentId': commentId
@@ -41191,33 +40748,31 @@ function extend() {
       var queryParams = {
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = CommentEntry;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/comments/{commentId}', 'PUT',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
+      return this.apiClient.callApi('/nodes/{nodeId}/comments/{commentId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
   };
 
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"../model/CommentBody":172,"../model/CommentBody1":173,"../model/CommentEntry":174,"../model/CommentPaging":175,"../model/Error":187}],151:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', '../model/FavoriteEntry', '../model/FavoriteBody', '../model/Error', '../model/FavoritePaging'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('../model/FavoriteEntry'), require('../model/FavoriteBody'), require('../model/Error'), require('../model/FavoritePaging'));
   } else {
@@ -41227,7 +40782,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.FavoritesApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.FavoriteEntry, root.AlfrescoCoreRestApi.FavoriteBody, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.FavoritePaging);
   }
-}(this, function(ApiClient, FavoriteEntry, FavoriteBody, Error, FavoritePaging) {
+})(undefined, function (ApiClient, FavoriteEntry, FavoriteBody, Error, FavoritePaging) {
   'use strict';
 
   /**
@@ -41243,10 +40798,9 @@ function extend() {
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
    * if unspecified.
    */
-  var exports = function(apiClient) {
+
+  var exports = function exports(apiClient) {
     this.apiClient = apiClient || ApiClient.instance;
-
-
 
     /**
      * Add a favorite
@@ -41255,7 +40809,7 @@ function extend() {
      * @param {module:model/FavoriteBody} favoriteBody An object identifying the entity to be favorited. \n\nThe object consists of a single property which is an object with the name &#x60;site&#x60;, &#x60;file&#x60;, or &#x60;folder&#x60;. \nThe content of that object is the &#x60;guid&#x60; of the target entity.\n\nFor example, to favorite a file the following body would be used:\n\n&#x60;&#x60;&#x60;JSON\n{\n   \&quot;target\&quot;: {\n      \&quot;file\&quot;: {\n         \&quot;guid\&quot;: \&quot;abcde-01234\&quot;\n      }\n   }\n}\n&#x60;&#x60;&#x60;\n
      * data is of type: {module:model/FavoriteEntry}
      */
-    this.addFavorite = function(personId, favoriteBody) {
+    this.addFavorite = function (personId, favoriteBody) {
       var postBody = favoriteBody;
 
       // verify the required parameter 'personId' is set
@@ -41268,29 +40822,20 @@ function extend() {
         throw "Missing the required parameter 'favoriteBody' when calling addFavorite";
       }
 
-
       var pathParams = {
         'personId': personId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = FavoriteEntry;
 
-      return this.apiClient.callApi(
-        '/people/{personId}/favorites', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/people/{personId}/favorites', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get a favorite
@@ -41301,7 +40846,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/FavoriteEntry}
      */
-    this.getFavorite = function(personId, favoriteId, opts) {
+    this.getFavorite = function (personId, favoriteId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -41315,7 +40860,6 @@ function extend() {
         throw "Missing the required parameter 'favoriteId' when calling getFavorite";
       }
 
-
       var pathParams = {
         'personId': personId,
         'favoriteId': favoriteId
@@ -41323,23 +40867,16 @@ function extend() {
       var queryParams = {
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = FavoriteEntry;
 
-      return this.apiClient.callApi(
-        '/people/{personId}/favorites/{favoriteId}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/people/{personId}/favorites/{favoriteId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get favorites
@@ -41352,7 +40889,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/FavoritePaging}
      */
-    this.getFavorites = function(personId, opts) {
+    this.getFavorites = function (personId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -41360,7 +40897,6 @@ function extend() {
       if (personId == undefined || personId == null) {
         throw "Missing the required parameter 'personId' when calling getFavorites";
       }
-
 
       var pathParams = {
         'personId': personId
@@ -41371,23 +40907,16 @@ function extend() {
         'where': opts['where'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = FavoritePaging;
 
-      return this.apiClient.callApi(
-        '/people/{personId}/favorites', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/people/{personId}/favorites', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Delete a favorite
@@ -41395,7 +40924,7 @@ function extend() {
      * @param {String} personId The identifier of a person.
      * @param {String} favoriteId The identifier of a favorite.
      */
-    this.removeFavoriteSite = function(personId, favoriteId) {
+    this.removeFavoriteSite = function (personId, favoriteId) {
       var postBody = null;
 
       // verify the required parameter 'personId' is set
@@ -41408,40 +40937,36 @@ function extend() {
         throw "Missing the required parameter 'favoriteId' when calling removeFavoriteSite";
       }
 
-
       var pathParams = {
         'personId': personId,
         'favoriteId': favoriteId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/people/{personId}/favorites/{favoriteId}', 'DELETE',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
+      return this.apiClient.callApi('/people/{personId}/favorites/{favoriteId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
   };
 
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"../model/Error":187,"../model/FavoriteBody":190,"../model/FavoriteEntry":191,"../model/FavoritePaging":192}],152:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', '../model/PersonNetworkEntry', '../model/Error'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('../model/PersonNetworkEntry'), require('../model/Error'));
   } else {
@@ -41451,7 +40976,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.NetworksApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.PersonNetworkEntry, root.AlfrescoCoreRestApi.Error);
   }
-}(this, function(ApiClient, PersonNetworkEntry, Error) {
+})(undefined, function (ApiClient, PersonNetworkEntry, Error) {
   'use strict';
 
   /**
@@ -41467,10 +40992,9 @@ function extend() {
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
    * if unspecified.
    */
-  var exports = function(apiClient) {
+
+  var exports = function exports(apiClient) {
     this.apiClient = apiClient || ApiClient.instance;
-
-
 
     /**
      * Get a network
@@ -41480,7 +41004,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/PersonNetworkEntry}
      */
-    this.getNetwork = function(networkId, opts) {
+    this.getNetwork = function (networkId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -41489,40 +41013,37 @@ function extend() {
         throw "Missing the required parameter 'networkId' when calling getNetwork";
       }
 
-
       var pathParams = {
         'networkId': networkId
       };
       var queryParams = {
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = PersonNetworkEntry;
 
-      return this.apiClient.callApi(
-        '/networks/{networkId}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
+      return this.apiClient.callApi('/networks/{networkId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
   };
 
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"../model/Error":187,"../model/PersonNetworkEntry":226}],153:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', '../model/NodeEntry', '../model/NodeBody1', '../model/Error', '../model/CopyBody', '../model/DeletedNodeEntry', '../model/DeletedNodesPaging', '../model/NodePaging', '../model/MoveBody', '../model/NodeBody'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('../model/NodeEntry'), require('../model/NodeBody1'), require('../model/Error'), require('../model/CopyBody'), require('../model/DeletedNodeEntry'), require('../model/DeletedNodesPaging'), require('../model/NodePaging'), require('../model/MoveBody'), require('../model/NodeBody'));
   } else {
@@ -41532,7 +41053,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.NodesApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.NodeEntry, root.AlfrescoCoreRestApi.NodeBody1, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.CopyBody, root.AlfrescoCoreRestApi.DeletedNodeEntry, root.AlfrescoCoreRestApi.DeletedNodesPaging, root.AlfrescoCoreRestApi.NodePaging, root.AlfrescoCoreRestApi.MoveBody, root.AlfrescoCoreRestApi.NodeBody);
   }
-}(this, function(ApiClient, NodeEntry, NodeBody1, Error, CopyBody, DeletedNodeEntry, DeletedNodesPaging, NodePaging, MoveBody, NodeBody) {
+})(undefined, function (ApiClient, NodeEntry, NodeBody1, Error, CopyBody, DeletedNodeEntry, DeletedNodesPaging, NodePaging, MoveBody, NodeBody) {
   'use strict';
 
   /**
@@ -41548,10 +41069,9 @@ function extend() {
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
    * if unspecified.
    */
-  var exports = function(apiClient) {
+
+  var exports = function exports(apiClient) {
     this.apiClient = apiClient || ApiClient.instance;
-
-
 
     /**
      * Create a node
@@ -41564,7 +41084,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    this.addNode = function(nodeId, nodeBody, opts) {
+    this.addNode = function (nodeId, nodeBody, opts) {
       opts = opts || {};
       var postBody = nodeBody;
 
@@ -41578,7 +41098,6 @@ function extend() {
         throw "Missing the required parameter 'nodeBody' when calling addNode";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
@@ -41587,23 +41106,16 @@ function extend() {
         'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json', 'multipart/form-data'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/children', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/children', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Copy a node
@@ -41615,7 +41127,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    this.copyNode = function(nodeId, copyBody, opts) {
+    this.copyNode = function (nodeId, copyBody, opts) {
       opts = opts || {};
       var postBody = copyBody;
 
@@ -41629,7 +41141,6 @@ function extend() {
         throw "Missing the required parameter 'copyBody' when calling copyNode";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
@@ -41637,23 +41148,16 @@ function extend() {
         'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/copy', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/copy', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Delete a node
@@ -41662,7 +41166,7 @@ function extend() {
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.permanent If **true** then the node is deleted permanently, without it moving to the trashcan.\nYou must be the owner or an admin to permanently delete the node.\n (default to false)
      */
-    this.deleteNode = function(nodeId, opts) {
+    this.deleteNode = function (nodeId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -41671,30 +41175,22 @@ function extend() {
         throw "Missing the required parameter 'nodeId' when calling deleteNode";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
       var queryParams = {
         'permanent': opts['permanent']
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}', 'DELETE',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get a deleted node
@@ -41704,7 +41200,7 @@ function extend() {
      * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested:\n* path\n* isLink\n* allowableOperations\n
      * data is of type: {module:model/DeletedNodeEntry}
      */
-    this.getDeletedNode = function(nodeId, opts) {
+    this.getDeletedNode = function (nodeId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -41713,30 +41209,22 @@ function extend() {
         throw "Missing the required parameter 'nodeId' when calling getDeletedNode";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
       var queryParams = {
         'include': this.apiClient.buildCollectionParam(opts['include'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = DeletedNodeEntry;
 
-      return this.apiClient.callApi(
-        '/deleted-nodes/{nodeId}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/deleted-nodes/{nodeId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get deleted nodes
@@ -41747,35 +41235,26 @@ function extend() {
      * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested:\n* properties\n* aspectNames\n* path\n* isLink\n* allowableOperations\n* association\n
      * data is of type: {module:model/DeletedNodesPaging}
      */
-    this.getDeletedNodes = function(opts) {
+    this.getDeletedNodes = function (opts) {
       opts = opts || {};
       var postBody = null;
 
-
-      var pathParams = {
-      };
+      var pathParams = {};
       var queryParams = {
         'skipCount': opts['skipCount'],
         'maxItems': opts['maxItems'],
         'include': this.apiClient.buildCollectionParam(opts['include'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = DeletedNodesPaging;
 
-      return this.apiClient.callApi(
-        '/deleted-nodes', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/deleted-nodes', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get file content
@@ -41785,7 +41264,7 @@ function extend() {
      * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n (default to true)
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.\n
      */
-    this.getFileContent = function(nodeId, opts) {
+    this.getFileContent = function (nodeId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -41793,7 +41272,6 @@ function extend() {
       if (nodeId == undefined || nodeId == null) {
         throw "Missing the required parameter 'nodeId' when calling getFileContent";
       }
-
 
       var pathParams = {
         'nodeId': nodeId
@@ -41804,21 +41282,15 @@ function extend() {
       var headerParams = {
         'If-Modified-Since': opts['ifModifiedSince']
       };
-      var formParams = {
-      };
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/content', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get a node
@@ -41830,7 +41302,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    this.getNode = function(nodeId, opts) {
+    this.getNode = function (nodeId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -41838,7 +41310,6 @@ function extend() {
       if (nodeId == undefined || nodeId == null) {
         throw "Missing the required parameter 'nodeId' when calling getNode";
       }
-
 
       var pathParams = {
         'nodeId': nodeId
@@ -41848,23 +41319,16 @@ function extend() {
         'relativePath': opts['relativePath'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get node children
@@ -41881,7 +41345,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodePaging}
      */
-    this.getNodeChildren = function(nodeId, opts) {
+    this.getNodeChildren = function (nodeId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -41889,7 +41353,6 @@ function extend() {
       if (nodeId == undefined || nodeId == null) {
         throw "Missing the required parameter 'nodeId' when calling getNodeChildren";
       }
-
 
       var pathParams = {
         'nodeId': nodeId
@@ -41904,23 +41367,16 @@ function extend() {
         'includeSource': opts['includeSource'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodePaging;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/children', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/children', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Move a node
@@ -41932,7 +41388,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    this.moveNode = function(nodeId, moveBody, opts) {
+    this.moveNode = function (nodeId, moveBody, opts) {
       opts = opts || {};
       var postBody = moveBody;
 
@@ -41946,7 +41402,6 @@ function extend() {
         throw "Missing the required parameter 'moveBody' when calling moveNode";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
@@ -41954,30 +41409,23 @@ function extend() {
         'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/move', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/move', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Purge a deleted node
      * Permanently removes the deleted node identified by **nodeId**.\n
      * @param {String} nodeId The identifier of a node.
      */
-    this.purgeDeletedNode = function(nodeId) {
+    this.purgeDeletedNode = function (nodeId) {
       var postBody = null;
 
       // verify the required parameter 'nodeId' is set
@@ -41985,29 +41433,20 @@ function extend() {
         throw "Missing the required parameter 'nodeId' when calling purgeDeletedNode";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/deleted-nodes/{nodeId}', 'DELETE',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/deleted-nodes/{nodeId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Restore a deleted node
@@ -42015,7 +41454,7 @@ function extend() {
      * @param {String} nodeId The identifier of a node.
      * data is of type: {module:model/NodeEntry}
      */
-    this.restoreNode = function(nodeId) {
+    this.restoreNode = function (nodeId) {
       var postBody = null;
 
       // verify the required parameter 'nodeId' is set
@@ -42023,29 +41462,20 @@ function extend() {
         throw "Missing the required parameter 'nodeId' when calling restoreNode";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
 
-      return this.apiClient.callApi(
-        '/deleted-nodes/{nodeId}/restore', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/deleted-nodes/{nodeId}/restore', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Update file content
@@ -42059,7 +41489,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    this.updateFileContent = function(nodeId, contentBody, opts) {
+    this.updateFileContent = function (nodeId, contentBody, opts) {
       opts = opts || {};
       var postBody = contentBody;
 
@@ -42073,7 +41503,6 @@ function extend() {
         throw "Missing the required parameter 'contentBody' when calling updateFileContent";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
@@ -42083,23 +41512,16 @@ function extend() {
         'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/octet-stream'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/content', 'PUT',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/content', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Update a node
@@ -42111,7 +41533,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    this.updateNode = function(nodeId, nodeBody, opts) {
+    this.updateNode = function (nodeId, nodeBody, opts) {
       opts = opts || {};
       var postBody = nodeBody;
 
@@ -42125,7 +41547,6 @@ function extend() {
         throw "Missing the required parameter 'nodeBody' when calling updateNode";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
@@ -42133,33 +41554,31 @@ function extend() {
         'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeEntry;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}', 'PUT',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
+      return this.apiClient.callApi('/nodes/{nodeId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
   };
 
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"../model/CopyBody":179,"../model/DeletedNodeEntry":181,"../model/DeletedNodesPaging":184,"../model/Error":187,"../model/MoveBody":197,"../model/NodeBody":203,"../model/NodeBody1":204,"../model/NodeEntry":209,"../model/NodePaging":213}],154:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', '../model/FavoriteEntry', '../model/FavoriteBody', '../model/Error', '../model/SiteMembershipBody', '../model/SiteMembershipRequestEntry', '../model/FavoriteSiteBody', '../model/InlineResponse201', '../model/ActivityPaging', '../model/SiteEntry', '../model/SitePaging', '../model/FavoritePaging', '../model/PersonEntry', '../model/PersonNetworkEntry', '../model/PersonNetworkPaging', '../model/PreferenceEntry', '../model/PreferencePaging', '../model/SiteMembershipRequestPaging', '../model/SiteMembershipBody1'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('../model/FavoriteEntry'), require('../model/FavoriteBody'), require('../model/Error'), require('../model/SiteMembershipBody'), require('../model/SiteMembershipRequestEntry'), require('../model/FavoriteSiteBody'), require('../model/InlineResponse201'), require('../model/ActivityPaging'), require('../model/SiteEntry'), require('../model/SitePaging'), require('../model/FavoritePaging'), require('../model/PersonEntry'), require('../model/PersonNetworkEntry'), require('../model/PersonNetworkPaging'), require('../model/PreferenceEntry'), require('../model/PreferencePaging'), require('../model/SiteMembershipRequestPaging'), require('../model/SiteMembershipBody1'));
   } else {
@@ -42169,7 +41588,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.PeopleApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.FavoriteEntry, root.AlfrescoCoreRestApi.FavoriteBody, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.SiteMembershipBody, root.AlfrescoCoreRestApi.SiteMembershipRequestEntry, root.AlfrescoCoreRestApi.FavoriteSiteBody, root.AlfrescoCoreRestApi.InlineResponse201, root.AlfrescoCoreRestApi.ActivityPaging, root.AlfrescoCoreRestApi.SiteEntry, root.AlfrescoCoreRestApi.SitePaging, root.AlfrescoCoreRestApi.FavoritePaging, root.AlfrescoCoreRestApi.PersonEntry, root.AlfrescoCoreRestApi.PersonNetworkEntry, root.AlfrescoCoreRestApi.PersonNetworkPaging, root.AlfrescoCoreRestApi.PreferenceEntry, root.AlfrescoCoreRestApi.PreferencePaging, root.AlfrescoCoreRestApi.SiteMembershipRequestPaging, root.AlfrescoCoreRestApi.SiteMembershipBody1);
   }
-}(this, function(ApiClient, FavoriteEntry, FavoriteBody, Error, SiteMembershipBody, SiteMembershipRequestEntry, FavoriteSiteBody, InlineResponse201, ActivityPaging, SiteEntry, SitePaging, FavoritePaging, PersonEntry, PersonNetworkEntry, PersonNetworkPaging, PreferenceEntry, PreferencePaging, SiteMembershipRequestPaging, SiteMembershipBody1) {
+})(undefined, function (ApiClient, FavoriteEntry, FavoriteBody, Error, SiteMembershipBody, SiteMembershipRequestEntry, FavoriteSiteBody, InlineResponse201, ActivityPaging, SiteEntry, SitePaging, FavoritePaging, PersonEntry, PersonNetworkEntry, PersonNetworkPaging, PreferenceEntry, PreferencePaging, SiteMembershipRequestPaging, SiteMembershipBody1) {
   'use strict';
 
   /**
@@ -42185,10 +41604,9 @@ function extend() {
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
    * if unspecified.
    */
-  var exports = function(apiClient) {
+
+  var exports = function exports(apiClient) {
     this.apiClient = apiClient || ApiClient.instance;
-
-
 
     /**
      * Add a favorite
@@ -42197,7 +41615,7 @@ function extend() {
      * @param {module:model/FavoriteBody} favoriteBody An object identifying the entity to be favorited. \n\nThe object consists of a single property which is an object with the name &#x60;site&#x60;, &#x60;file&#x60;, or &#x60;folder&#x60;. \nThe content of that object is the &#x60;guid&#x60; of the target entity.\n\nFor example, to favorite a file the following body would be used:\n\n&#x60;&#x60;&#x60;JSON\n{\n   \&quot;target\&quot;: {\n      \&quot;file\&quot;: {\n         \&quot;guid\&quot;: \&quot;abcde-01234\&quot;\n      }\n   }\n}\n&#x60;&#x60;&#x60;\n
      * data is of type: {module:model/FavoriteEntry}
      */
-    this.addFavorite = function(personId, favoriteBody) {
+    this.addFavorite = function (personId, favoriteBody) {
       var postBody = favoriteBody;
 
       // verify the required parameter 'personId' is set
@@ -42210,29 +41628,20 @@ function extend() {
         throw "Missing the required parameter 'favoriteBody' when calling addFavorite";
       }
 
-
       var pathParams = {
         'personId': personId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = FavoriteEntry;
 
-      return this.apiClient.callApi(
-        '/people/{personId}/favorites', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/people/{personId}/favorites', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Create a site membership request
@@ -42241,7 +41650,7 @@ function extend() {
      * @param {module:model/SiteMembershipBody} siteMembershipBody Site membership request details
      * data is of type: {module:model/SiteMembershipRequestEntry}
      */
-    this.addSiteMembershipRequest = function(personId, siteMembershipBody) {
+    this.addSiteMembershipRequest = function (personId, siteMembershipBody) {
       var postBody = siteMembershipBody;
 
       // verify the required parameter 'personId' is set
@@ -42254,29 +41663,20 @@ function extend() {
         throw "Missing the required parameter 'siteMembershipBody' when calling addSiteMembershipRequest";
       }
 
-
       var pathParams = {
         'personId': personId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = SiteMembershipRequestEntry;
 
-      return this.apiClient.callApi(
-        '/people/{personId}/site-membership-requests', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/people/{personId}/site-membership-requests', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Delete favorite site
@@ -42284,7 +41684,7 @@ function extend() {
      * @param {String} personId The identifier of a person.
      * @param {String} siteId The identifier of a site.
      */
-    this.deleteFavoriteSite = function(personId, siteId) {
+    this.deleteFavoriteSite = function (personId, siteId) {
       var postBody = null;
 
       // verify the required parameter 'personId' is set
@@ -42297,30 +41697,21 @@ function extend() {
         throw "Missing the required parameter 'siteId' when calling deleteFavoriteSite";
       }
 
-
       var pathParams = {
         'personId': personId,
         'siteId': siteId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/people/{personId}/favorite-sites/{siteId}', 'DELETE',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/people/{personId}/favorite-sites/{siteId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Favorite a site
@@ -42329,7 +41720,7 @@ function extend() {
      * @param {module:model/FavoriteSiteBody} favoriteSiteBody The id of the site to favorite.
      * data is of type: {module:model/InlineResponse201}
      */
-    this.favoriteSite = function(personId, favoriteSiteBody) {
+    this.favoriteSite = function (personId, favoriteSiteBody) {
       var postBody = favoriteSiteBody;
 
       // verify the required parameter 'personId' is set
@@ -42342,29 +41733,20 @@ function extend() {
         throw "Missing the required parameter 'favoriteSiteBody' when calling favoriteSite";
       }
 
-
       var pathParams = {
         'personId': personId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = InlineResponse201;
 
-      return this.apiClient.callApi(
-        '/people/{personId}/favorite-sites', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/people/{personId}/favorite-sites', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get activities
@@ -42378,7 +41760,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/ActivityPaging}
      */
-    this.getActivities = function(personId, opts) {
+    this.getActivities = function (personId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -42386,7 +41768,6 @@ function extend() {
       if (personId == undefined || personId == null) {
         throw "Missing the required parameter 'personId' when calling getActivities";
       }
-
 
       var pathParams = {
         'personId': personId
@@ -42398,23 +41779,16 @@ function extend() {
         'siteId': opts['siteId'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = ActivityPaging;
 
-      return this.apiClient.callApi(
-        '/people/{personId}/activities', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/people/{personId}/activities', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get a favorite
@@ -42425,7 +41799,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/FavoriteEntry}
      */
-    this.getFavorite = function(personId, favoriteId, opts) {
+    this.getFavorite = function (personId, favoriteId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -42439,7 +41813,6 @@ function extend() {
         throw "Missing the required parameter 'favoriteId' when calling getFavorite";
       }
 
-
       var pathParams = {
         'personId': personId,
         'favoriteId': favoriteId
@@ -42447,23 +41820,16 @@ function extend() {
       var queryParams = {
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = FavoriteEntry;
 
-      return this.apiClient.callApi(
-        '/people/{personId}/favorites/{favoriteId}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/people/{personId}/favorites/{favoriteId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get a favorite site
@@ -42474,7 +41840,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteEntry}
      */
-    this.getFavoriteSite = function(personId, siteId, opts) {
+    this.getFavoriteSite = function (personId, siteId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -42488,7 +41854,6 @@ function extend() {
         throw "Missing the required parameter 'siteId' when calling getFavoriteSite";
       }
 
-
       var pathParams = {
         'personId': personId,
         'siteId': siteId
@@ -42496,23 +41861,16 @@ function extend() {
       var queryParams = {
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = SiteEntry;
 
-      return this.apiClient.callApi(
-        '/people/{personId}/favorite-sites/{siteId}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/people/{personId}/favorite-sites/{siteId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get favorite sites
@@ -42524,7 +41882,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SitePaging}
      */
-    this.getFavoriteSites = function(personId, opts) {
+    this.getFavoriteSites = function (personId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -42532,7 +41890,6 @@ function extend() {
       if (personId == undefined || personId == null) {
         throw "Missing the required parameter 'personId' when calling getFavoriteSites";
       }
-
 
       var pathParams = {
         'personId': personId
@@ -42542,23 +41899,16 @@ function extend() {
         'maxItems': opts['maxItems'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = SitePaging;
 
-      return this.apiClient.callApi(
-        '/people/{personId}/favorite-sites', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/people/{personId}/favorite-sites', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get favorites
@@ -42571,7 +41921,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/FavoritePaging}
      */
-    this.getFavorites = function(personId, opts) {
+    this.getFavorites = function (personId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -42579,7 +41929,6 @@ function extend() {
       if (personId == undefined || personId == null) {
         throw "Missing the required parameter 'personId' when calling getFavorites";
       }
-
 
       var pathParams = {
         'personId': personId
@@ -42590,23 +41939,16 @@ function extend() {
         'where': opts['where'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = FavoritePaging;
 
-      return this.apiClient.callApi(
-        '/people/{personId}/favorites', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/people/{personId}/favorites', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get a person
@@ -42616,7 +41958,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/PersonEntry}
      */
-    this.getPerson = function(personId, opts) {
+    this.getPerson = function (personId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -42625,30 +41967,22 @@ function extend() {
         throw "Missing the required parameter 'personId' when calling getPerson";
       }
 
-
       var pathParams = {
         'personId': personId
       };
       var queryParams = {
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = PersonEntry;
 
-      return this.apiClient.callApi(
-        '/people/{personId}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/people/{personId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get network information
@@ -42659,7 +41993,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/PersonNetworkEntry}
      */
-    this.getPersonNetwork = function(personId, networkId, opts) {
+    this.getPersonNetwork = function (personId, networkId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -42673,7 +42007,6 @@ function extend() {
         throw "Missing the required parameter 'networkId' when calling getPersonNetwork";
       }
 
-
       var pathParams = {
         'personId': personId,
         'networkId': networkId
@@ -42681,23 +42014,16 @@ function extend() {
       var queryParams = {
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = PersonNetworkEntry;
 
-      return this.apiClient.callApi(
-        '/people/{personId}/networks/{networkId}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/people/{personId}/networks/{networkId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get network membership for a person
@@ -42709,7 +42035,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/PersonNetworkPaging}
      */
-    this.getPersonNetworks = function(personId, opts) {
+    this.getPersonNetworks = function (personId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -42717,7 +42043,6 @@ function extend() {
       if (personId == undefined || personId == null) {
         throw "Missing the required parameter 'personId' when calling getPersonNetworks";
       }
-
 
       var pathParams = {
         'personId': personId
@@ -42727,23 +42052,16 @@ function extend() {
         'maxItems': opts['maxItems'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = PersonNetworkPaging;
 
-      return this.apiClient.callApi(
-        '/people/{personId}/networks', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/people/{personId}/networks', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get a preference
@@ -42754,7 +42072,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/PreferenceEntry}
      */
-    this.getPreference = function(personId, preferenceName, opts) {
+    this.getPreference = function (personId, preferenceName, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -42768,7 +42086,6 @@ function extend() {
         throw "Missing the required parameter 'preferenceName' when calling getPreference";
       }
 
-
       var pathParams = {
         'personId': personId,
         'preferenceName': preferenceName
@@ -42776,23 +42093,16 @@ function extend() {
       var queryParams = {
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = PreferenceEntry;
 
-      return this.apiClient.callApi(
-        '/people/{personId}/preferences/{preferenceName}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/people/{personId}/preferences/{preferenceName}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get preferences
@@ -42804,7 +42114,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/PreferencePaging}
      */
-    this.getPreferences = function(personId, opts) {
+    this.getPreferences = function (personId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -42812,7 +42122,6 @@ function extend() {
       if (personId == undefined || personId == null) {
         throw "Missing the required parameter 'personId' when calling getPreferences";
       }
-
 
       var pathParams = {
         'personId': personId
@@ -42822,23 +42131,16 @@ function extend() {
         'maxItems': opts['maxItems'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = PreferencePaging;
 
-      return this.apiClient.callApi(
-        '/people/{personId}/preferences', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/people/{personId}/preferences', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get site membership information
@@ -42852,7 +42154,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SitePaging}
      */
-    this.getSiteMembership = function(personId, opts) {
+    this.getSiteMembership = function (personId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -42860,7 +42162,6 @@ function extend() {
       if (personId == undefined || personId == null) {
         throw "Missing the required parameter 'personId' when calling getSiteMembership";
       }
-
 
       var pathParams = {
         'personId': personId
@@ -42872,23 +42173,16 @@ function extend() {
         'relations': this.apiClient.buildCollectionParam(opts['relations'], 'csv'),
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = SitePaging;
 
-      return this.apiClient.callApi(
-        '/people/{personId}/sites', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/people/{personId}/sites', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get a site membership request
@@ -42899,7 +42193,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteMembershipRequestEntry}
      */
-    this.getSiteMembershipRequest = function(personId, siteId, opts) {
+    this.getSiteMembershipRequest = function (personId, siteId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -42913,7 +42207,6 @@ function extend() {
         throw "Missing the required parameter 'siteId' when calling getSiteMembershipRequest";
       }
 
-
       var pathParams = {
         'personId': personId,
         'siteId': siteId
@@ -42921,23 +42214,16 @@ function extend() {
       var queryParams = {
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = SiteMembershipRequestEntry;
 
-      return this.apiClient.callApi(
-        '/people/{personId}/site-membership-requests/{siteId}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/people/{personId}/site-membership-requests/{siteId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get site membership requests
@@ -42949,7 +42235,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteMembershipRequestPaging}
      */
-    this.getSiteMembershipRequests = function(personId, opts) {
+    this.getSiteMembershipRequests = function (personId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -42957,7 +42243,6 @@ function extend() {
       if (personId == undefined || personId == null) {
         throw "Missing the required parameter 'personId' when calling getSiteMembershipRequests";
       }
-
 
       var pathParams = {
         'personId': personId
@@ -42967,23 +42252,16 @@ function extend() {
         'maxItems': opts['maxItems'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = SiteMembershipRequestPaging;
 
-      return this.apiClient.callApi(
-        '/people/{personId}/site-membership-requests', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/people/{personId}/site-membership-requests', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Delete a favorite
@@ -42991,7 +42269,7 @@ function extend() {
      * @param {String} personId The identifier of a person.
      * @param {String} favoriteId The identifier of a favorite.
      */
-    this.removeFavoriteSite = function(personId, favoriteId) {
+    this.removeFavoriteSite = function (personId, favoriteId) {
       var postBody = null;
 
       // verify the required parameter 'personId' is set
@@ -43004,30 +42282,21 @@ function extend() {
         throw "Missing the required parameter 'favoriteId' when calling removeFavoriteSite";
       }
 
-
       var pathParams = {
         'personId': personId,
         'favoriteId': favoriteId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/people/{personId}/favorites/{favoriteId}', 'DELETE',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/people/{personId}/favorites/{favoriteId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Cancel a site membership
@@ -43035,7 +42304,7 @@ function extend() {
      * @param {String} personId The identifier of a person.
      * @param {String} siteId The identifier of a site.
      */
-    this.removeSiteMembershipRequest = function(personId, siteId) {
+    this.removeSiteMembershipRequest = function (personId, siteId) {
       var postBody = null;
 
       // verify the required parameter 'personId' is set
@@ -43048,30 +42317,21 @@ function extend() {
         throw "Missing the required parameter 'siteId' when calling removeSiteMembershipRequest";
       }
 
-
       var pathParams = {
         'personId': personId,
         'siteId': siteId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/people/{personId}/site-membership-requests/{siteId}', 'DELETE',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/people/{personId}/site-membership-requests/{siteId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Update a site membership request
@@ -43080,7 +42340,7 @@ function extend() {
      * @param {String} siteId The identifier of a site.
      * @param {module:model/SiteMembershipBody1} siteMembershipBody The new message to display
      */
-    this.updateSiteMembershipRequest = function(personId, siteId, siteMembershipBody) {
+    this.updateSiteMembershipRequest = function (personId, siteId, siteMembershipBody) {
       var postBody = siteMembershipBody;
 
       // verify the required parameter 'personId' is set
@@ -43098,40 +42358,36 @@ function extend() {
         throw "Missing the required parameter 'siteMembershipBody' when calling updateSiteMembershipRequest";
       }
 
-
       var pathParams = {
         'personId': personId,
         'siteId': siteId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/people/{personId}/site-membership-requests/{siteId}', 'PUT',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
+      return this.apiClient.callApi('/people/{personId}/site-membership-requests/{siteId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
   };
 
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"../model/ActivityPaging":165,"../model/Error":187,"../model/FavoriteBody":190,"../model/FavoriteEntry":191,"../model/FavoritePaging":192,"../model/FavoriteSiteBody":194,"../model/InlineResponse201":195,"../model/PersonEntry":224,"../model/PersonNetworkEntry":226,"../model/PersonNetworkPaging":227,"../model/PreferenceEntry":230,"../model/PreferencePaging":231,"../model/SiteEntry":250,"../model/SiteMembershipBody":256,"../model/SiteMembershipBody1":257,"../model/SiteMembershipRequestEntry":259,"../model/SiteMembershipRequestPaging":260,"../model/SitePaging":262}],155:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', '../model/RatingEntry', '../model/Error', '../model/RatingPaging', '../model/RatingBody'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('../model/RatingEntry'), require('../model/Error'), require('../model/RatingPaging'), require('../model/RatingBody'));
   } else {
@@ -43141,7 +42397,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.RatingsApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.RatingEntry, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.RatingPaging, root.AlfrescoCoreRestApi.RatingBody);
   }
-}(this, function(ApiClient, RatingEntry, Error, RatingPaging, RatingBody) {
+})(undefined, function (ApiClient, RatingEntry, Error, RatingPaging, RatingBody) {
   'use strict';
 
   /**
@@ -43157,10 +42413,9 @@ function extend() {
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
    * if unspecified.
    */
-  var exports = function(apiClient) {
+
+  var exports = function exports(apiClient) {
     this.apiClient = apiClient || ApiClient.instance;
-
-
 
     /**
      * Get a rating
@@ -43171,7 +42426,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/RatingEntry}
      */
-    this.getRating = function(nodeId, ratingId, opts) {
+    this.getRating = function (nodeId, ratingId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -43185,7 +42440,6 @@ function extend() {
         throw "Missing the required parameter 'ratingId' when calling getRating";
       }
 
-
       var pathParams = {
         'nodeId': nodeId,
         'ratingId': ratingId
@@ -43193,23 +42447,16 @@ function extend() {
       var queryParams = {
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = RatingEntry;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/ratings/{ratingId}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/ratings/{ratingId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get ratings
@@ -43221,7 +42468,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/RatingPaging}
      */
-    this.getRatings = function(nodeId, opts) {
+    this.getRatings = function (nodeId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -43229,7 +42476,6 @@ function extend() {
       if (nodeId == undefined || nodeId == null) {
         throw "Missing the required parameter 'nodeId' when calling getRatings";
       }
-
 
       var pathParams = {
         'nodeId': nodeId
@@ -43239,23 +42485,16 @@ function extend() {
         'maxItems': opts['maxItems'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = RatingPaging;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/ratings', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/ratings', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Rate
@@ -43264,7 +42503,7 @@ function extend() {
      * @param {module:model/RatingBody} ratingBody For \&quot;myRating\&quot; the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.\n\nFor example, to \&quot;like\&quot; a file the following body would be used:\n\n  &#x60;&#x60;&#x60;JSON\n    {\n      \&quot;id\&quot;: \&quot;likes\&quot;,\n      \&quot;myRating\&quot;: true\n    }\n  &#x60;&#x60;&#x60;\n
      * data is of type: {module:model/RatingEntry}
      */
-    this.rate = function(nodeId, ratingBody) {
+    this.rate = function (nodeId, ratingBody) {
       var postBody = ratingBody;
 
       // verify the required parameter 'nodeId' is set
@@ -43277,29 +42516,20 @@ function extend() {
         throw "Missing the required parameter 'ratingBody' when calling rate";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = RatingEntry;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/ratings', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/ratings', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Delete a rating
@@ -43307,7 +42537,7 @@ function extend() {
      * @param {String} nodeId The identifier of a node.
      * @param {String} ratingId The identifier of a rating.
      */
-    this.removeRating = function(nodeId, ratingId) {
+    this.removeRating = function (nodeId, ratingId) {
       var postBody = null;
 
       // verify the required parameter 'nodeId' is set
@@ -43320,40 +42550,36 @@ function extend() {
         throw "Missing the required parameter 'ratingId' when calling removeRating";
       }
 
-
       var pathParams = {
         'nodeId': nodeId,
         'ratingId': ratingId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/ratings/{ratingId}', 'DELETE',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
+      return this.apiClient.callApi('/nodes/{nodeId}/ratings/{ratingId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
   };
 
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"../model/Error":187,"../model/RatingBody":235,"../model/RatingEntry":236,"../model/RatingPaging":237}],156:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', '../model/RenditionBody', '../model/Error', '../model/RenditionEntry', '../model/RenditionPaging'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('../model/RenditionBody'), require('../model/Error'), require('../model/RenditionEntry'), require('../model/RenditionPaging'));
   } else {
@@ -43363,7 +42589,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.RenditionsApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.RenditionBody, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.RenditionEntry, root.AlfrescoCoreRestApi.RenditionPaging);
   }
-}(this, function(ApiClient, RenditionBody, Error, RenditionEntry, RenditionPaging) {
+})(undefined, function (ApiClient, RenditionBody, Error, RenditionEntry, RenditionPaging) {
   'use strict';
 
   /**
@@ -43379,10 +42605,9 @@ function extend() {
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
    * if unspecified.
    */
-  var exports = function(apiClient) {
+
+  var exports = function exports(apiClient) {
     this.apiClient = apiClient || ApiClient.instance;
-
-
 
     /**
      * Create rendition
@@ -43390,7 +42615,7 @@ function extend() {
      * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases:\n* -my-\n* -shared-\n* -root-\n
      * @param {module:model/RenditionBody} renditionBody The rendition \&quot;id\&quot;.
      */
-    this.createRendition = function(nodeId, renditionBody) {
+    this.createRendition = function (nodeId, renditionBody) {
       var postBody = renditionBody;
 
       // verify the required parameter 'nodeId' is set
@@ -43403,29 +42628,20 @@ function extend() {
         throw "Missing the required parameter 'renditionBody' when calling createRendition";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/renditions', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/renditions', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get rendition information
@@ -43434,7 +42650,7 @@ function extend() {
      * @param {String} renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
      * data is of type: {module:model/RenditionEntry}
      */
-    this.getRendition = function(nodeId, renditionId) {
+    this.getRendition = function (nodeId, renditionId) {
       var postBody = null;
 
       // verify the required parameter 'nodeId' is set
@@ -43447,30 +42663,21 @@ function extend() {
         throw "Missing the required parameter 'renditionId' when calling getRendition";
       }
 
-
       var pathParams = {
         'nodeId': nodeId,
         'renditionId': renditionId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = RenditionEntry;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/renditions/{renditionId}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/renditions/{renditionId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get rendition content
@@ -43481,7 +42688,7 @@ function extend() {
      * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n (default to true)
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.\n
      */
-    this.getRenditionContent = function(nodeId, renditionId, opts) {
+    this.getRenditionContent = function (nodeId, renditionId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -43495,7 +42702,6 @@ function extend() {
         throw "Missing the required parameter 'renditionId' when calling getRenditionContent";
       }
 
-
       var pathParams = {
         'nodeId': nodeId,
         'renditionId': renditionId
@@ -43506,21 +42712,15 @@ function extend() {
       var headerParams = {
         'If-Modified-Since': opts['ifModifiedSince']
       };
-      var formParams = {
-      };
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/renditions/{renditionId}/content', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/renditions/{renditionId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * List information for renditions
@@ -43528,7 +42728,7 @@ function extend() {
      * @param {String} nodeId The identifier of a node.
      * data is of type: {module:model/RenditionPaging}
      */
-    this.getRenditions = function(nodeId) {
+    this.getRenditions = function (nodeId) {
       var postBody = null;
 
       // verify the required parameter 'nodeId' is set
@@ -43536,29 +42736,20 @@ function extend() {
         throw "Missing the required parameter 'nodeId' when calling getRenditions";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = RenditionPaging;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/renditions', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/renditions', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get shared link rendition content
@@ -43569,7 +42760,7 @@ function extend() {
      * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n (default to true)
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.\n
      */
-    this.getSharedLinkRenditionContent = function(sharedId, renditionId, opts) {
+    this.getSharedLinkRenditionContent = function (sharedId, renditionId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -43583,7 +42774,6 @@ function extend() {
         throw "Missing the required parameter 'renditionId' when calling getSharedLinkRenditionContent";
       }
 
-
       var pathParams = {
         'sharedId': sharedId,
         'renditionId': renditionId
@@ -43594,21 +42784,15 @@ function extend() {
       var headerParams = {
         'If-Modified-Since': opts['ifModifiedSince']
       };
-      var formParams = {
-      };
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/shared-links/{sharedId}/renditions/{renditionId}/content', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/shared-links/{sharedId}/renditions/{renditionId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * List information for created renditions
@@ -43616,7 +42800,7 @@ function extend() {
      * @param {String} sharedId The identifier of a shared link to a file.
      * data is of type: {module:model/RenditionPaging}
      */
-    this.getSharedLinkRenditions = function(sharedId) {
+    this.getSharedLinkRenditions = function (sharedId) {
       var postBody = null;
 
       // verify the required parameter 'sharedId' is set
@@ -43624,39 +42808,35 @@ function extend() {
         throw "Missing the required parameter 'sharedId' when calling getSharedLinkRenditions";
       }
 
-
       var pathParams = {
         'sharedId': sharedId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = RenditionPaging;
 
-      return this.apiClient.callApi(
-        '/shared-links/{sharedId}/renditions', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
+      return this.apiClient.callApi('/shared-links/{sharedId}/renditions', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
   };
 
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"../model/Error":187,"../model/RenditionBody":240,"../model/RenditionEntry":241,"../model/RenditionPaging":242}],157:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', '../model/Error', '../model/NodePaging'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('../model/Error'), require('../model/NodePaging'));
   } else {
@@ -43666,7 +42846,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.SearchApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.NodePaging);
   }
-}(this, function(ApiClient, Error, NodePaging) {
+})(undefined, function (ApiClient, Error, NodePaging) {
   'use strict';
 
   /**
@@ -43682,10 +42862,9 @@ function extend() {
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
    * if unspecified.
    */
-  var exports = function(apiClient) {
+
+  var exports = function exports(apiClient) {
     this.apiClient = apiClient || ApiClient.instance;
-
-
 
     /**
      * Live search for nodes
@@ -43701,7 +42880,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodePaging}
      */
-    this.liveSearchNodes = function(term, opts) {
+    this.liveSearchNodes = function (term, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -43710,9 +42889,7 @@ function extend() {
         throw "Missing the required parameter 'term' when calling liveSearchNodes";
       }
 
-
-      var pathParams = {
-      };
+      var pathParams = {};
       var queryParams = {
         'skipCount': opts['skipCount'],
         'maxItems': opts['maxItems'],
@@ -43723,33 +42900,31 @@ function extend() {
         'orderBy': opts['orderBy'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodePaging;
 
-      return this.apiClient.callApi(
-        '/queries/live-search-nodes', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
+      return this.apiClient.callApi('/queries/live-search-nodes', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
   };
 
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"../model/Error":187,"../model/NodePaging":213}],158:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', '../model/Error', '../model/NodeSharedLinkEntry', '../model/SharedLinkBody', '../model/EmailSharedLinkBody', '../model/NodeSharedLinkPaging'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('../model/Error'), require('../model/NodeSharedLinkEntry'), require('../model/SharedLinkBody'), require('../model/EmailSharedLinkBody'), require('../model/NodeSharedLinkPaging'));
   } else {
@@ -43759,7 +42934,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.SharedlinksApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.NodeSharedLinkEntry, root.AlfrescoCoreRestApi.SharedLinkBody, root.AlfrescoCoreRestApi.EmailSharedLinkBody, root.AlfrescoCoreRestApi.NodeSharedLinkPaging);
   }
-}(this, function(ApiClient, Error, NodeSharedLinkEntry, SharedLinkBody, EmailSharedLinkBody, NodeSharedLinkPaging) {
+})(undefined, function (ApiClient, Error, NodeSharedLinkEntry, SharedLinkBody, EmailSharedLinkBody, NodeSharedLinkPaging) {
   'use strict';
 
   /**
@@ -43775,10 +42950,9 @@ function extend() {
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
    * if unspecified.
    */
-  var exports = function(apiClient) {
+
+  var exports = function exports(apiClient) {
     this.apiClient = apiClient || ApiClient.instance;
-
-
 
     /**
      * Create a shared link to a file
@@ -43789,7 +42963,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeSharedLinkEntry}
      */
-    this.addSharedLink = function(sharedLinkBody, opts) {
+    this.addSharedLink = function (sharedLinkBody, opts) {
       opts = opts || {};
       var postBody = sharedLinkBody;
 
@@ -43798,37 +42972,28 @@ function extend() {
         throw "Missing the required parameter 'sharedLinkBody' when calling addSharedLink";
       }
 
-
-      var pathParams = {
-      };
+      var pathParams = {};
       var queryParams = {
         'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeSharedLinkEntry;
 
-      return this.apiClient.callApi(
-        '/shared-links', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/shared-links', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Deletes a shared link
      * Deletes the shared link with identifier **sharedId**.
      * @param {String} sharedId The identifier of a shared link to a file.
      */
-    this.deleteSharedLink = function(sharedId) {
+    this.deleteSharedLink = function (sharedId) {
       var postBody = null;
 
       // verify the required parameter 'sharedId' is set
@@ -43836,29 +43001,20 @@ function extend() {
         throw "Missing the required parameter 'sharedId' when calling deleteSharedLink";
       }
 
-
       var pathParams = {
         'sharedId': sharedId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/shared-links/{sharedId}', 'DELETE',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/shared-links/{sharedId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Email shared link
@@ -43866,7 +43022,7 @@ function extend() {
      * @param {String} sharedId The identifier of a shared link to a file.
      * @param {module:model/EmailSharedLinkBody} emailSharedLinkBody The shared link email to send.
      */
-    this.emailSharedLink = function(sharedId, emailSharedLinkBody) {
+    this.emailSharedLink = function (sharedId, emailSharedLinkBody) {
       var postBody = emailSharedLinkBody;
 
       // verify the required parameter 'sharedId' is set
@@ -43879,29 +43035,20 @@ function extend() {
         throw "Missing the required parameter 'emailSharedLinkBody' when calling emailSharedLink";
       }
 
-
       var pathParams = {
         'sharedId': sharedId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/shared-links/{sharedId}/email', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/shared-links/{sharedId}/email', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Find shared links
@@ -43912,35 +43059,26 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeSharedLinkPaging}
      */
-    this.findSharedLinks = function(opts) {
+    this.findSharedLinks = function (opts) {
       opts = opts || {};
       var postBody = null;
 
-
-      var pathParams = {
-      };
+      var pathParams = {};
       var queryParams = {
         'where': opts['where'],
         'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeSharedLinkPaging;
 
-      return this.apiClient.callApi(
-        '/shared-links', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/shared-links', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get a shared link
@@ -43951,7 +43089,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeSharedLinkEntry}
      */
-    this.getSharedLink = function(sharedId, opts) {
+    this.getSharedLink = function (sharedId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -43960,7 +43098,6 @@ function extend() {
         throw "Missing the required parameter 'sharedId' when calling getSharedLink";
       }
 
-
       var pathParams = {
         'sharedId': sharedId
       };
@@ -43968,23 +43105,16 @@ function extend() {
         'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = NodeSharedLinkEntry;
 
-      return this.apiClient.callApi(
-        '/shared-links/{sharedId}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/shared-links/{sharedId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get file content
@@ -43994,7 +43124,7 @@ function extend() {
      * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n (default to true)
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.\n
      */
-    this.getSharedLinkContent = function(sharedId, opts) {
+    this.getSharedLinkContent = function (sharedId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -44002,7 +43132,6 @@ function extend() {
       if (sharedId == undefined || sharedId == null) {
         throw "Missing the required parameter 'sharedId' when calling getSharedLinkContent";
       }
-
 
       var pathParams = {
         'sharedId': sharedId
@@ -44013,31 +43142,30 @@ function extend() {
       var headerParams = {
         'If-Modified-Since': opts['ifModifiedSince']
       };
-      var formParams = {
-      };
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/shared-links/{sharedId}/content', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
+      return this.apiClient.callApi('/shared-links/{sharedId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
   };
 
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"../model/EmailSharedLinkBody":186,"../model/Error":187,"../model/NodeSharedLinkEntry":216,"../model/NodeSharedLinkPaging":217,"../model/SharedLinkBody":244}],159:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', '../model/SiteMemberEntry', '../model/Error', '../model/SiteMemberBody', '../model/SiteBody', '../model/SiteEntry', '../model/SiteContainerEntry', '../model/SiteContainerPaging', '../model/SiteMemberPaging', '../model/SitePaging', '../model/SiteMemberRoleBody'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('../model/SiteMemberEntry'), require('../model/Error'), require('../model/SiteMemberBody'), require('../model/SiteBody'), require('../model/SiteEntry'), require('../model/SiteContainerEntry'), require('../model/SiteContainerPaging'), require('../model/SiteMemberPaging'), require('../model/SitePaging'), require('../model/SiteMemberRoleBody'));
   } else {
@@ -44047,7 +43175,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.SitesApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.SiteMemberEntry, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.SiteMemberBody, root.AlfrescoCoreRestApi.SiteBody, root.AlfrescoCoreRestApi.SiteEntry, root.AlfrescoCoreRestApi.SiteContainerEntry, root.AlfrescoCoreRestApi.SiteContainerPaging, root.AlfrescoCoreRestApi.SiteMemberPaging, root.AlfrescoCoreRestApi.SitePaging, root.AlfrescoCoreRestApi.SiteMemberRoleBody);
   }
-}(this, function(ApiClient, SiteMemberEntry, Error, SiteMemberBody, SiteBody, SiteEntry, SiteContainerEntry, SiteContainerPaging, SiteMemberPaging, SitePaging, SiteMemberRoleBody) {
+})(undefined, function (ApiClient, SiteMemberEntry, Error, SiteMemberBody, SiteBody, SiteEntry, SiteContainerEntry, SiteContainerPaging, SiteMemberPaging, SitePaging, SiteMemberRoleBody) {
   'use strict';
 
   /**
@@ -44063,10 +43191,9 @@ function extend() {
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
    * if unspecified.
    */
-  var exports = function(apiClient) {
+
+  var exports = function exports(apiClient) {
     this.apiClient = apiClient || ApiClient.instance;
-
-
 
     /**
      * Add a person
@@ -44075,7 +43202,7 @@ function extend() {
      * @param {module:model/SiteMemberBody} siteMemberBody The person to add and their role
      * data is of type: {module:model/SiteMemberEntry}
      */
-    this.addSiteMember = function(siteId, siteMemberBody) {
+    this.addSiteMember = function (siteId, siteMemberBody) {
       var postBody = siteMemberBody;
 
       // verify the required parameter 'siteId' is set
@@ -44088,29 +43215,20 @@ function extend() {
         throw "Missing the required parameter 'siteMemberBody' when calling addSiteMember";
       }
 
-
       var pathParams = {
         'siteId': siteId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = SiteMemberEntry;
 
-      return this.apiClient.callApi(
-        '/sites/{siteId}/members', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/sites/{siteId}/members', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Create a site
@@ -44121,7 +43239,7 @@ function extend() {
      * @param {Boolean} opts.skipAddToFavorites Flag to indicate whether the site should not be added to the user&#39;s site favorites. (default to false)
      * data is of type: {module:model/SiteEntry}
      */
-    this.createSite = function(siteBody, opts) {
+    this.createSite = function (siteBody, opts) {
       opts = opts || {};
       var postBody = siteBody;
 
@@ -44130,30 +43248,21 @@ function extend() {
         throw "Missing the required parameter 'siteBody' when calling createSite";
       }
 
-
-      var pathParams = {
-      };
+      var pathParams = {};
       var queryParams = {
         'skipConfiguration': opts['skipConfiguration'],
         'skipAddToFavorites': opts['skipAddToFavorites']
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = SiteEntry;
 
-      return this.apiClient.callApi(
-        '/sites', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/sites', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Delete a site
@@ -44162,7 +43271,7 @@ function extend() {
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.permanent Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan. (default to false)
      */
-    this.deleteSite = function(siteId, opts) {
+    this.deleteSite = function (siteId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -44171,30 +43280,22 @@ function extend() {
         throw "Missing the required parameter 'siteId' when calling deleteSite";
       }
 
-
       var pathParams = {
         'siteId': siteId
       };
       var queryParams = {
         'permanent': opts['permanent']
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/sites/{siteId}', 'DELETE',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/sites/{siteId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get a site
@@ -44205,7 +43306,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteEntry}
      */
-    this.getSite = function(siteId, opts) {
+    this.getSite = function (siteId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -44214,7 +43315,6 @@ function extend() {
         throw "Missing the required parameter 'siteId' when calling getSite";
       }
 
-
       var pathParams = {
         'siteId': siteId
       };
@@ -44222,23 +43322,16 @@ function extend() {
         'relations': this.apiClient.buildCollectionParam(opts['relations'], 'csv'),
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = SiteEntry;
 
-      return this.apiClient.callApi(
-        '/sites/{siteId}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/sites/{siteId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get a container
@@ -44249,7 +43342,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteContainerEntry}
      */
-    this.getSiteContainer = function(siteId, containerId, opts) {
+    this.getSiteContainer = function (siteId, containerId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -44263,7 +43356,6 @@ function extend() {
         throw "Missing the required parameter 'containerId' when calling getSiteContainer";
       }
 
-
       var pathParams = {
         'siteId': siteId,
         'containerId': containerId
@@ -44271,23 +43363,16 @@ function extend() {
       var queryParams = {
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = SiteContainerEntry;
 
-      return this.apiClient.callApi(
-        '/sites/{siteId}/containers/{containerId}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/sites/{siteId}/containers/{containerId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get containers
@@ -44299,7 +43384,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteContainerPaging}
      */
-    this.getSiteContainers = function(siteId, opts) {
+    this.getSiteContainers = function (siteId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -44307,7 +43392,6 @@ function extend() {
       if (siteId == undefined || siteId == null) {
         throw "Missing the required parameter 'siteId' when calling getSiteContainers";
       }
-
 
       var pathParams = {
         'siteId': siteId
@@ -44317,23 +43401,16 @@ function extend() {
         'maxItems': opts['maxItems'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = SiteContainerPaging;
 
-      return this.apiClient.callApi(
-        '/sites/{siteId}/containers', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/sites/{siteId}/containers', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get a site member
@@ -44344,7 +43421,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteMemberEntry}
      */
-    this.getSiteMember = function(siteId, personId, opts) {
+    this.getSiteMember = function (siteId, personId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -44358,7 +43435,6 @@ function extend() {
         throw "Missing the required parameter 'personId' when calling getSiteMember";
       }
 
-
       var pathParams = {
         'siteId': siteId,
         'personId': personId
@@ -44366,23 +43442,16 @@ function extend() {
       var queryParams = {
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = SiteMemberEntry;
 
-      return this.apiClient.callApi(
-        '/sites/{siteId}/members/{personId}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/sites/{siteId}/members/{personId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get members
@@ -44394,7 +43463,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteMemberPaging}
      */
-    this.getSiteMembers = function(siteId, opts) {
+    this.getSiteMembers = function (siteId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -44402,7 +43471,6 @@ function extend() {
       if (siteId == undefined || siteId == null) {
         throw "Missing the required parameter 'siteId' when calling getSiteMembers";
       }
-
 
       var pathParams = {
         'siteId': siteId
@@ -44412,23 +43480,16 @@ function extend() {
         'maxItems': opts['maxItems'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = SiteMemberPaging;
 
-      return this.apiClient.callApi(
-        '/sites/{siteId}/members', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/sites/{siteId}/members', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get sites
@@ -44441,13 +43502,11 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SitePaging}
      */
-    this.getSites = function(opts) {
+    this.getSites = function (opts) {
       opts = opts || {};
       var postBody = null;
 
-
-      var pathParams = {
-      };
+      var pathParams = {};
       var queryParams = {
         'skipCount': opts['skipCount'],
         'maxItems': opts['maxItems'],
@@ -44455,23 +43514,16 @@ function extend() {
         'relations': this.apiClient.buildCollectionParam(opts['relations'], 'csv'),
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = SitePaging;
 
-      return this.apiClient.callApi(
-        '/sites', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/sites', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Delete a site member
@@ -44479,7 +43531,7 @@ function extend() {
      * @param {String} siteId The identifier of a site.
      * @param {String} personId The identifier of a person.
      */
-    this.removeSiteMember = function(siteId, personId) {
+    this.removeSiteMember = function (siteId, personId) {
       var postBody = null;
 
       // verify the required parameter 'siteId' is set
@@ -44492,30 +43544,21 @@ function extend() {
         throw "Missing the required parameter 'personId' when calling removeSiteMember";
       }
 
-
       var pathParams = {
         'siteId': siteId,
         'personId': personId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/sites/{siteId}/members/{personId}', 'DELETE',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/sites/{siteId}/members/{personId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Update a site member
@@ -44525,7 +43568,7 @@ function extend() {
      * @param {module:model/SiteMemberRoleBody} siteMemberRoleBody The persons new role
      * data is of type: {module:model/SiteMemberEntry}
      */
-    this.updateSiteMember = function(siteId, personId, siteMemberRoleBody) {
+    this.updateSiteMember = function (siteId, personId, siteMemberRoleBody) {
       var postBody = siteMemberRoleBody;
 
       // verify the required parameter 'siteId' is set
@@ -44543,40 +43586,36 @@ function extend() {
         throw "Missing the required parameter 'siteMemberRoleBody' when calling updateSiteMember";
       }
 
-
       var pathParams = {
         'siteId': siteId,
         'personId': personId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = SiteMemberEntry;
 
-      return this.apiClient.callApi(
-        '/sites/{siteId}/members/{personId}', 'PUT',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
+      return this.apiClient.callApi('/sites/{siteId}/members/{personId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
   };
 
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"../model/Error":187,"../model/SiteBody":246,"../model/SiteContainerEntry":248,"../model/SiteContainerPaging":249,"../model/SiteEntry":250,"../model/SiteMemberBody":252,"../model/SiteMemberEntry":253,"../model/SiteMemberPaging":254,"../model/SiteMemberRoleBody":255,"../model/SitePaging":262}],160:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', '../model/TagBody', '../model/Error', '../model/TagEntry', '../model/TagPaging', '../model/TagBody1'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('../model/TagBody'), require('../model/Error'), require('../model/TagEntry'), require('../model/TagPaging'), require('../model/TagBody1'));
   } else {
@@ -44586,7 +43625,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.TagsApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.TagBody, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.TagEntry, root.AlfrescoCoreRestApi.TagPaging, root.AlfrescoCoreRestApi.TagBody1);
   }
-}(this, function(ApiClient, TagBody, Error, TagEntry, TagPaging, TagBody1) {
+})(undefined, function (ApiClient, TagBody, Error, TagEntry, TagPaging, TagBody1) {
   'use strict';
 
   /**
@@ -44602,10 +43641,9 @@ function extend() {
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
    * if unspecified.
    */
-  var exports = function(apiClient) {
+
+  var exports = function exports(apiClient) {
     this.apiClient = apiClient || ApiClient.instance;
-
-
 
     /**
      * Add a tag
@@ -44614,7 +43652,7 @@ function extend() {
      * @param {module:model/TagBody} tagBody The new tag
      * data is of type: {module:model/TagEntry}
      */
-    this.addTag = function(nodeId, tagBody) {
+    this.addTag = function (nodeId, tagBody) {
       var postBody = tagBody;
 
       // verify the required parameter 'nodeId' is set
@@ -44627,29 +43665,20 @@ function extend() {
         throw "Missing the required parameter 'tagBody' when calling addTag";
       }
 
-
       var pathParams = {
         'nodeId': nodeId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = TagEntry;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/tags', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/tags', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get tags
@@ -44661,7 +43690,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/TagPaging}
      */
-    this.getNodeTags = function(nodeId, opts) {
+    this.getNodeTags = function (nodeId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -44669,7 +43698,6 @@ function extend() {
       if (nodeId == undefined || nodeId == null) {
         throw "Missing the required parameter 'nodeId' when calling getNodeTags";
       }
-
 
       var pathParams = {
         'nodeId': nodeId
@@ -44679,23 +43707,16 @@ function extend() {
         'maxItems': opts['maxItems'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = TagPaging;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/tags', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/tags', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get a tag
@@ -44705,7 +43726,7 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/TagEntry}
      */
-    this.getTag = function(tagId, opts) {
+    this.getTag = function (tagId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -44714,30 +43735,22 @@ function extend() {
         throw "Missing the required parameter 'tagId' when calling getTag";
       }
 
-
       var pathParams = {
         'tagId': tagId
       };
       var queryParams = {
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = TagEntry;
 
-      return this.apiClient.callApi(
-        '/tags/{tagId}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/tags/{tagId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Get tags
@@ -44748,35 +43761,26 @@ function extend() {
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/TagPaging}
      */
-    this.getTags = function(opts) {
+    this.getTags = function (opts) {
       opts = opts || {};
       var postBody = null;
 
-
-      var pathParams = {
-      };
+      var pathParams = {};
       var queryParams = {
         'skipCount': opts['skipCount'],
         'maxItems': opts['maxItems'],
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = TagPaging;
 
-      return this.apiClient.callApi(
-        '/tags', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/tags', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Delete a tag
@@ -44784,7 +43788,7 @@ function extend() {
      * @param {String} nodeId The identifier of a node.
      * @param {String} tagId The identifier of a tag.
      */
-    this.removeTag = function(nodeId, tagId) {
+    this.removeTag = function (nodeId, tagId) {
       var postBody = null;
 
       // verify the required parameter 'nodeId' is set
@@ -44797,30 +43801,21 @@ function extend() {
         throw "Missing the required parameter 'tagId' when calling removeTag";
       }
 
-
       var pathParams = {
         'nodeId': nodeId,
         'tagId': tagId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi(
-        '/nodes/{nodeId}/tags/{tagId}', 'DELETE',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
+      return this.apiClient.callApi('/nodes/{nodeId}/tags/{tagId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
 
     /**
      * Update a tag
@@ -44829,7 +43824,7 @@ function extend() {
      * @param {module:model/TagBody1} tagBody The updated tag
      * data is of type: {module:model/TagEntry}
      */
-    this.updateTag = function(tagId, tagBody) {
+    this.updateTag = function (tagId, tagBody) {
       var postBody = tagBody;
 
       // verify the required parameter 'tagId' is set
@@ -44842,43 +43837,39 @@ function extend() {
         throw "Missing the required parameter 'tagBody' when calling updateTag";
       }
 
-
       var pathParams = {
         'tagId': tagId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = TagEntry;
 
-      return this.apiClient.callApi(
-        '/tags/{tagId}', 'PUT',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
+      return this.apiClient.callApi('/tags/{tagId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
   };
 
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"../model/Error":187,"../model/TagBody":265,"../model/TagBody1":266,"../model/TagEntry":267,"../model/TagPaging":268}],161:[function(require,module,exports){
-(function(factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['./ApiClient', './model/Activity', './model/ActivityActivitySummary', './model/ActivityEntry', './model/ActivityPaging', './model/ActivityPagingList', './model/AssocChildBody', './model/AssocInfo', './model/AssocTargetBody', './model/ChildAssocInfo', './model/Comment', './model/CommentBody', './model/CommentBody1', './model/CommentEntry', './model/CommentPaging', './model/CommentPagingList', './model/Company', './model/ContentInfo', './model/CopyBody', './model/DeletedNode', './model/DeletedNodeEntry', './model/DeletedNodeMinimal', './model/DeletedNodeMinimalEntry', './model/DeletedNodesPaging', './model/DeletedNodesPagingList', './model/EmailSharedLinkBody', './model/Error', './model/ErrorError', './model/Favorite', './model/FavoriteBody', './model/FavoriteEntry', './model/FavoritePaging', './model/FavoritePagingList', './model/FavoriteSiteBody', './model/InlineResponse201', './model/InlineResponse201Entry', './model/MoveBody', './model/NetworkQuota', './model/NodeAssocMinimal', './model/NodeAssocMinimalEntry', './model/NodeAssocPaging', './model/NodeAssocPagingList', './model/NodeBody', './model/NodeBody1', './model/NodeChildAssocMinimal', './model/NodeChildAssocMinimalEntry', './model/NodeChildAssocPaging', './model/NodeChildAssocPagingList', './model/NodeEntry', './model/NodeFull', './model/NodeMinimal', './model/NodeMinimalEntry', './model/NodePaging', './model/NodePagingList', './model/NodeSharedLink', './model/NodeSharedLinkEntry', './model/NodeSharedLinkPaging', './model/NodeSharedLinkPagingList', './model/NodesnodeIdchildrenContent', './model/Pagination', './model/PathElement', './model/PathInfo', './model/Person', './model/PersonEntry', './model/PersonNetwork', './model/PersonNetworkEntry', './model/PersonNetworkPaging', './model/PersonNetworkPagingList', './model/Preference', './model/PreferenceEntry', './model/PreferencePaging', './model/PreferencePagingList', './model/Rating', './model/RatingAggregate', './model/RatingBody', './model/RatingEntry', './model/RatingPaging', './model/RatingPagingList', './model/Rendition', './model/RenditionBody', './model/RenditionEntry', './model/RenditionPaging', './model/RenditionPagingList', './model/SharedLinkBody', './model/Site', './model/SiteBody', './model/SiteContainer', './model/SiteContainerEntry', './model/SiteContainerPaging', './model/SiteEntry', './model/SiteMember', './model/SiteMemberBody', './model/SiteMemberEntry', './model/SiteMemberPaging', './model/SiteMemberRoleBody', './model/SiteMembershipBody', './model/SiteMembershipBody1', './model/SiteMembershipRequest', './model/SiteMembershipRequestEntry', './model/SiteMembershipRequestPaging', './model/SiteMembershipRequestPagingList', './model/SitePaging', './model/SitePagingList', './model/Tag', './model/TagBody', './model/TagBody1', './model/TagEntry', './model/TagPaging', './model/TagPagingList', './model/UserInfo', './api/AssociationsApi', './api/ChangesApi', './api/ChildAssociationsApi', './api/CommentsApi', './api/FavoritesApi', './api/NetworksApi', './api/NodesApi', './api/PeopleApi', './api/RatingsApi', './api/RenditionsApi', './api/SearchApi', './api/SharedlinksApi', './api/SitesApi', './api/TagsApi'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('./ApiClient'), require('./model/Activity'), require('./model/ActivityActivitySummary'), require('./model/ActivityEntry'), require('./model/ActivityPaging'), require('./model/ActivityPagingList'), require('./model/AssocChildBody'), require('./model/AssocInfo'), require('./model/AssocTargetBody'), require('./model/ChildAssocInfo'), require('./model/Comment'), require('./model/CommentBody'), require('./model/CommentBody1'), require('./model/CommentEntry'), require('./model/CommentPaging'), require('./model/CommentPagingList'), require('./model/Company'), require('./model/ContentInfo'), require('./model/CopyBody'), require('./model/DeletedNode'), require('./model/DeletedNodeEntry'), require('./model/DeletedNodeMinimal'), require('./model/DeletedNodeMinimalEntry'), require('./model/DeletedNodesPaging'), require('./model/DeletedNodesPagingList'), require('./model/EmailSharedLinkBody'), require('./model/Error'), require('./model/ErrorError'), require('./model/Favorite'), require('./model/FavoriteBody'), require('./model/FavoriteEntry'), require('./model/FavoritePaging'), require('./model/FavoritePagingList'), require('./model/FavoriteSiteBody'), require('./model/InlineResponse201'), require('./model/InlineResponse201Entry'), require('./model/MoveBody'), require('./model/NetworkQuota'), require('./model/NodeAssocMinimal'), require('./model/NodeAssocMinimalEntry'), require('./model/NodeAssocPaging'), require('./model/NodeAssocPagingList'), require('./model/NodeBody'), require('./model/NodeBody1'), require('./model/NodeChildAssocMinimal'), require('./model/NodeChildAssocMinimalEntry'), require('./model/NodeChildAssocPaging'), require('./model/NodeChildAssocPagingList'), require('./model/NodeEntry'), require('./model/NodeFull'), require('./model/NodeMinimal'), require('./model/NodeMinimalEntry'), require('./model/NodePaging'), require('./model/NodePagingList'), require('./model/NodeSharedLink'), require('./model/NodeSharedLinkEntry'), require('./model/NodeSharedLinkPaging'), require('./model/NodeSharedLinkPagingList'), require('./model/NodesnodeIdchildrenContent'), require('./model/Pagination'), require('./model/PathElement'), require('./model/PathInfo'), require('./model/Person'), require('./model/PersonEntry'), require('./model/PersonNetwork'), require('./model/PersonNetworkEntry'), require('./model/PersonNetworkPaging'), require('./model/PersonNetworkPagingList'), require('./model/Preference'), require('./model/PreferenceEntry'), require('./model/PreferencePaging'), require('./model/PreferencePagingList'), require('./model/Rating'), require('./model/RatingAggregate'), require('./model/RatingBody'), require('./model/RatingEntry'), require('./model/RatingPaging'), require('./model/RatingPagingList'), require('./model/Rendition'), require('./model/RenditionBody'), require('./model/RenditionEntry'), require('./model/RenditionPaging'), require('./model/RenditionPagingList'), require('./model/SharedLinkBody'), require('./model/Site'), require('./model/SiteBody'), require('./model/SiteContainer'), require('./model/SiteContainerEntry'), require('./model/SiteContainerPaging'), require('./model/SiteEntry'), require('./model/SiteMember'), require('./model/SiteMemberBody'), require('./model/SiteMemberEntry'), require('./model/SiteMemberPaging'), require('./model/SiteMemberRoleBody'), require('./model/SiteMembershipBody'), require('./model/SiteMembershipBody1'), require('./model/SiteMembershipRequest'), require('./model/SiteMembershipRequestEntry'), require('./model/SiteMembershipRequestPaging'), require('./model/SiteMembershipRequestPagingList'), require('./model/SitePaging'), require('./model/SitePagingList'), require('./model/Tag'), require('./model/TagBody'), require('./model/TagBody1'), require('./model/TagEntry'), require('./model/TagPaging'), require('./model/TagPagingList'), require('./model/UserInfo'), require('./api/AssociationsApi'), require('./api/ChangesApi'), require('./api/ChildAssociationsApi'), require('./api/CommentsApi'), require('./api/FavoritesApi'), require('./api/NetworksApi'), require('./api/NodesApi'), require('./api/PeopleApi'), require('./api/RatingsApi'), require('./api/RenditionsApi'), require('./api/SearchApi'), require('./api/SharedlinksApi'), require('./api/SitesApi'), require('./api/TagsApi'));
   }
-}(function(ApiClient, Activity, ActivityActivitySummary, ActivityEntry, ActivityPaging, ActivityPagingList, AssocChildBody, AssocInfo, AssocTargetBody, ChildAssocInfo, Comment, CommentBody, CommentBody1, CommentEntry, CommentPaging, CommentPagingList, Company, ContentInfo, CopyBody, DeletedNode, DeletedNodeEntry, DeletedNodeMinimal, DeletedNodeMinimalEntry, DeletedNodesPaging, DeletedNodesPagingList, EmailSharedLinkBody, Error, ErrorError, Favorite, FavoriteBody, FavoriteEntry, FavoritePaging, FavoritePagingList, FavoriteSiteBody, InlineResponse201, InlineResponse201Entry, MoveBody, NetworkQuota, NodeAssocMinimal, NodeAssocMinimalEntry, NodeAssocPaging, NodeAssocPagingList, NodeBody, NodeBody1, NodeChildAssocMinimal, NodeChildAssocMinimalEntry, NodeChildAssocPaging, NodeChildAssocPagingList, NodeEntry, NodeFull, NodeMinimal, NodeMinimalEntry, NodePaging, NodePagingList, NodeSharedLink, NodeSharedLinkEntry, NodeSharedLinkPaging, NodeSharedLinkPagingList, NodesnodeIdchildrenContent, Pagination, PathElement, PathInfo, Person, PersonEntry, PersonNetwork, PersonNetworkEntry, PersonNetworkPaging, PersonNetworkPagingList, Preference, PreferenceEntry, PreferencePaging, PreferencePagingList, Rating, RatingAggregate, RatingBody, RatingEntry, RatingPaging, RatingPagingList, Rendition, RenditionBody, RenditionEntry, RenditionPaging, RenditionPagingList, SharedLinkBody, Site, SiteBody, SiteContainer, SiteContainerEntry, SiteContainerPaging, SiteEntry, SiteMember, SiteMemberBody, SiteMemberEntry, SiteMemberPaging, SiteMemberRoleBody, SiteMembershipBody, SiteMembershipBody1, SiteMembershipRequest, SiteMembershipRequestEntry, SiteMembershipRequestPaging, SiteMembershipRequestPagingList, SitePaging, SitePagingList, Tag, TagBody, TagBody1, TagEntry, TagPaging, TagPagingList, UserInfo, AssociationsApi, ChangesApi, ChildAssociationsApi, CommentsApi, FavoritesApi, NetworksApi, NodesApi, PeopleApi, RatingsApi, RenditionsApi, SearchApi, SharedlinksApi, SitesApi, TagsApi) {
+})(function (ApiClient, Activity, ActivityActivitySummary, ActivityEntry, ActivityPaging, ActivityPagingList, AssocChildBody, AssocInfo, AssocTargetBody, ChildAssocInfo, Comment, CommentBody, CommentBody1, CommentEntry, CommentPaging, CommentPagingList, Company, ContentInfo, CopyBody, DeletedNode, DeletedNodeEntry, DeletedNodeMinimal, DeletedNodeMinimalEntry, DeletedNodesPaging, DeletedNodesPagingList, EmailSharedLinkBody, Error, ErrorError, Favorite, FavoriteBody, FavoriteEntry, FavoritePaging, FavoritePagingList, FavoriteSiteBody, InlineResponse201, InlineResponse201Entry, MoveBody, NetworkQuota, NodeAssocMinimal, NodeAssocMinimalEntry, NodeAssocPaging, NodeAssocPagingList, NodeBody, NodeBody1, NodeChildAssocMinimal, NodeChildAssocMinimalEntry, NodeChildAssocPaging, NodeChildAssocPagingList, NodeEntry, NodeFull, NodeMinimal, NodeMinimalEntry, NodePaging, NodePagingList, NodeSharedLink, NodeSharedLinkEntry, NodeSharedLinkPaging, NodeSharedLinkPagingList, NodesnodeIdchildrenContent, Pagination, PathElement, PathInfo, Person, PersonEntry, PersonNetwork, PersonNetworkEntry, PersonNetworkPaging, PersonNetworkPagingList, Preference, PreferenceEntry, PreferencePaging, PreferencePagingList, Rating, RatingAggregate, RatingBody, RatingEntry, RatingPaging, RatingPagingList, Rendition, RenditionBody, RenditionEntry, RenditionPaging, RenditionPagingList, SharedLinkBody, Site, SiteBody, SiteContainer, SiteContainerEntry, SiteContainerPaging, SiteEntry, SiteMember, SiteMemberBody, SiteMemberEntry, SiteMemberPaging, SiteMemberRoleBody, SiteMembershipBody, SiteMembershipBody1, SiteMembershipRequest, SiteMembershipRequestEntry, SiteMembershipRequestPaging, SiteMembershipRequestPagingList, SitePaging, SitePagingList, Tag, TagBody, TagBody1, TagEntry, TagPaging, TagPagingList, UserInfo, AssociationsApi, ChangesApi, ChildAssociationsApi, CommentsApi, FavoritesApi, NetworksApi, NodesApi, PeopleApi, RatingsApi, RenditionsApi, SearchApi, SharedlinksApi, SitesApi, TagsApi) {
   'use strict';
 
   /**
@@ -44912,6 +43903,7 @@ function extend() {
    * @module index
    * @version 0.1.0
    */
+
   var exports = {
     /**
      * The ApiClient constructor.
@@ -45536,14 +44528,18 @@ function extend() {
   };
 
   return exports;
-}));
+});
 
 },{"./ApiClient":146,"./api/AssociationsApi":147,"./api/ChangesApi":148,"./api/ChildAssociationsApi":149,"./api/CommentsApi":150,"./api/FavoritesApi":151,"./api/NetworksApi":152,"./api/NodesApi":153,"./api/PeopleApi":154,"./api/RatingsApi":155,"./api/RenditionsApi":156,"./api/SearchApi":157,"./api/SharedlinksApi":158,"./api/SitesApi":159,"./api/TagsApi":160,"./model/Activity":162,"./model/ActivityActivitySummary":163,"./model/ActivityEntry":164,"./model/ActivityPaging":165,"./model/ActivityPagingList":166,"./model/AssocChildBody":167,"./model/AssocInfo":168,"./model/AssocTargetBody":169,"./model/ChildAssocInfo":170,"./model/Comment":171,"./model/CommentBody":172,"./model/CommentBody1":173,"./model/CommentEntry":174,"./model/CommentPaging":175,"./model/CommentPagingList":176,"./model/Company":177,"./model/ContentInfo":178,"./model/CopyBody":179,"./model/DeletedNode":180,"./model/DeletedNodeEntry":181,"./model/DeletedNodeMinimal":182,"./model/DeletedNodeMinimalEntry":183,"./model/DeletedNodesPaging":184,"./model/DeletedNodesPagingList":185,"./model/EmailSharedLinkBody":186,"./model/Error":187,"./model/ErrorError":188,"./model/Favorite":189,"./model/FavoriteBody":190,"./model/FavoriteEntry":191,"./model/FavoritePaging":192,"./model/FavoritePagingList":193,"./model/FavoriteSiteBody":194,"./model/InlineResponse201":195,"./model/InlineResponse201Entry":196,"./model/MoveBody":197,"./model/NetworkQuota":198,"./model/NodeAssocMinimal":199,"./model/NodeAssocMinimalEntry":200,"./model/NodeAssocPaging":201,"./model/NodeAssocPagingList":202,"./model/NodeBody":203,"./model/NodeBody1":204,"./model/NodeChildAssocMinimal":205,"./model/NodeChildAssocMinimalEntry":206,"./model/NodeChildAssocPaging":207,"./model/NodeChildAssocPagingList":208,"./model/NodeEntry":209,"./model/NodeFull":210,"./model/NodeMinimal":211,"./model/NodeMinimalEntry":212,"./model/NodePaging":213,"./model/NodePagingList":214,"./model/NodeSharedLink":215,"./model/NodeSharedLinkEntry":216,"./model/NodeSharedLinkPaging":217,"./model/NodeSharedLinkPagingList":218,"./model/NodesnodeIdchildrenContent":219,"./model/Pagination":220,"./model/PathElement":221,"./model/PathInfo":222,"./model/Person":223,"./model/PersonEntry":224,"./model/PersonNetwork":225,"./model/PersonNetworkEntry":226,"./model/PersonNetworkPaging":227,"./model/PersonNetworkPagingList":228,"./model/Preference":229,"./model/PreferenceEntry":230,"./model/PreferencePaging":231,"./model/PreferencePagingList":232,"./model/Rating":233,"./model/RatingAggregate":234,"./model/RatingBody":235,"./model/RatingEntry":236,"./model/RatingPaging":237,"./model/RatingPagingList":238,"./model/Rendition":239,"./model/RenditionBody":240,"./model/RenditionEntry":241,"./model/RenditionPaging":242,"./model/RenditionPagingList":243,"./model/SharedLinkBody":244,"./model/Site":245,"./model/SiteBody":246,"./model/SiteContainer":247,"./model/SiteContainerEntry":248,"./model/SiteContainerPaging":249,"./model/SiteEntry":250,"./model/SiteMember":251,"./model/SiteMemberBody":252,"./model/SiteMemberEntry":253,"./model/SiteMemberPaging":254,"./model/SiteMemberRoleBody":255,"./model/SiteMembershipBody":256,"./model/SiteMembershipBody1":257,"./model/SiteMembershipRequest":258,"./model/SiteMembershipRequestEntry":259,"./model/SiteMembershipRequestPaging":260,"./model/SiteMembershipRequestPagingList":261,"./model/SitePaging":262,"./model/SitePagingList":263,"./model/Tag":264,"./model/TagBody":265,"./model/TagBody1":266,"./model/TagEntry":267,"./model/TagPaging":268,"./model/TagPagingList":269,"./model/UserInfo":270}],162:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './ActivityActivitySummary'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./ActivityActivitySummary'));
   } else {
@@ -45553,7 +44549,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.Activity = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.ActivityActivitySummary);
   }
-}(this, function(ApiClient, ActivityActivitySummary) {
+})(undefined, function (ApiClient, ActivityActivitySummary) {
   'use strict';
 
   /**
@@ -45572,11 +44568,11 @@ function extend() {
    * @param feedPersonId
    * @param activityType
    */
-  var exports = function(postPersonId, id, feedPersonId, activityType) {
+
+  var exports = function exports(postPersonId, id, feedPersonId, activityType) {
 
     this['postPersonId'] = postPersonId;
     this['id'] = id;
-
 
     this['feedPersonId'] = feedPersonId;
 
@@ -45590,8 +44586,8 @@ function extend() {
    * @param {module:model/Activity} obj Optional instance to populate.
    * @return {module:model/Activity} The populated <code>Activity</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('postPersonId')) {
@@ -45617,8 +44613,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * The id of the person who performed the activity
@@ -45661,145 +44656,144 @@ function extend() {
    */
   exports.prototype['activityType'] = undefined;
 
-
   /**
    * Allowed values for the <code>activityType</code> property.
    * @enum {String}
    * @readonly
    */
-  exports.ActivityTypeEnum = { 
+  exports.ActivityTypeEnum = {
     /**
      * value: org.alfresco.comments.comment-created
      * @const
      */
     COMMENTS_COMMENT_CREATED: "org.alfresco.comments.comment-created",
-    
+
     /**
      * value: org.alfresco.comments.comment-updated
      * @const
      */
     COMMENTS_COMMENT_UPDATED: "org.alfresco.comments.comment-updated",
-    
+
     /**
      * value: org.alfresco.comments.comment-deleted
      * @const
      */
     COMMENTS_COMMENT_DELETED: "org.alfresco.comments.comment-deleted",
-    
+
     /**
      * value: org.alfresco.documentlibrary.files-added
      * @const
      */
     DOCUMENTLIBRARY_FILES_ADDED: "org.alfresco.documentlibrary.files-added",
-    
+
     /**
      * value: org.alfresco.documentlibrary.files-updated
      * @const
      */
     DOCUMENTLIBRARY_FILES_UPDATED: "org.alfresco.documentlibrary.files-updated",
-    
+
     /**
      * value: org.alfresco.documentlibrary.files-deleted
      * @const
      */
     DOCUMENTLIBRARY_FILES_DELETED: "org.alfresco.documentlibrary.files-deleted",
-    
+
     /**
      * value: org.alfresco.documentlibrary.file-added
      * @const
      */
     DOCUMENTLIBRARY_FILE_ADDED: "org.alfresco.documentlibrary.file-added",
-    
+
     /**
      * value: org.alfresco.documentlibrary.file-created
      * @const
      */
     DOCUMENTLIBRARY_FILE_CREATED: "org.alfresco.documentlibrary.file-created",
-    
+
     /**
      * value: org.alfresco.documentlibrary.file-deleted
      * @const
      */
     DOCUMENTLIBRARY_FILE_DELETED: "org.alfresco.documentlibrary.file-deleted",
-    
+
     /**
      * value: org.alfresco.documentlibrary.file-downloaded
      * @const
      */
     DOCUMENTLIBRARY_FILE_DOWNLOADED: "org.alfresco.documentlibrary.file-downloaded",
-    
+
     /**
      * value: org.alfresco.documentlibrary.file-liked
      * @const
      */
     DOCUMENTLIBRARY_FILE_LIKED: "org.alfresco.documentlibrary.file-liked",
-    
+
     /**
      * value: org.alfresco.documentlibrary.file-previewed
      * @const
      */
     DOCUMENTLIBRARY_FILE_PREVIEWED: "org.alfresco.documentlibrary.file-previewed",
-    
+
     /**
      * value: org.alfresco.documentlibrary.inline-edit
      * @const
      */
     DOCUMENTLIBRARY_INLINE_EDIT: "org.alfresco.documentlibrary.inline-edit",
-    
+
     /**
      * value: org.alfresco.documentlibrary.folder-liked
      * @const
      */
     DOCUMENTLIBRARY_FOLDER_LIKED: "org.alfresco.documentlibrary.folder-liked",
-    
+
     /**
      * value: org.alfresco.site.user-joined
      * @const
      */
     SITE_USER_JOINED: "org.alfresco.site.user-joined",
-    
+
     /**
      * value: org.alfresco.site.user-left
      * @const
      */
     SITE_USER_LEFT: "org.alfresco.site.user-left",
-    
+
     /**
      * value: org.alfresco.site.user-role-changed
      * @const
      */
     SITE_USER_ROLE_CHANGED: "org.alfresco.site.user-role-changed",
-    
+
     /**
      * value: org.alfresco.site.group-added
      * @const
      */
     SITE_GROUP_ADDED: "org.alfresco.site.group-added",
-    
+
     /**
      * value: org.alfresco.site.group-removed
      * @const
      */
     SITE_GROUP_REMOVED: "org.alfresco.site.group-removed",
-    
+
     /**
      * value: org.alfresco.site.group-role-changed
      * @const
      */
     SITE_GROUP_ROLE_CHANGED: "org.alfresco.site.group-role-changed",
-    
+
     /**
      * value: org.alfresco.discussions.reply-created
      * @const
      */
     DISCUSSIONS_REPLY_CREATED: "org.alfresco.discussions.reply-created",
-    
+
     /**
      * value: org.alfresco.subscriptions.followed
      * @const
      */
     SUBSCRIPTIONS_FOLLOWED: "org.alfresco.subscriptions.followed",
-    
+
     /**
      * value: org.alfresco.subscriptions.subscribed
      * @const
@@ -45808,14 +44802,18 @@ function extend() {
   };
 
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./ActivityActivitySummary":163}],163:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -45825,7 +44823,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.ActivityActivitySummary = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -45840,14 +44838,8 @@ function extend() {
    * @alias module:model/ActivityActivitySummary
    * @class
    */
-  var exports = function() {
 
-
-
-
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>ActivityActivitySummary</code> from a plain JavaScript object, optionally creating a new instance.
@@ -45856,8 +44848,8 @@ function extend() {
    * @param {module:model/ActivityActivitySummary} obj Optional instance to populate.
    * @return {module:model/ActivityActivitySummary} The populated <code>ActivityActivitySummary</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('firstName')) {
@@ -45877,8 +44869,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} firstName
@@ -45905,18 +44896,19 @@ function extend() {
    */
   exports.prototype['objectId'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],164:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './Activity'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./Activity'));
   } else {
@@ -45926,7 +44918,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.ActivityEntry = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Activity);
   }
-}(this, function(ApiClient, Activity) {
+})(undefined, function (ApiClient, Activity) {
   'use strict';
 
   /**
@@ -45941,7 +44933,8 @@ function extend() {
    * @class
    * @param entry
    */
-  var exports = function(entry) {
+
+  var exports = function exports(entry) {
 
     this['entry'] = entry;
   };
@@ -45953,8 +44946,8 @@ function extend() {
    * @param {module:model/ActivityEntry} obj Optional instance to populate.
    * @return {module:model/ActivityEntry} The populated <code>ActivityEntry</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -45962,26 +44955,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/Activity} entry
    */
   exports.prototype['entry'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./Activity":162}],165:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './ActivityPagingList'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./ActivityPagingList'));
   } else {
@@ -45991,7 +44984,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.ActivityPaging = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.ActivityPagingList);
   }
-}(this, function(ApiClient, ActivityPagingList) {
+})(undefined, function (ApiClient, ActivityPagingList) {
   'use strict';
 
   /**
@@ -46005,10 +44998,8 @@ function extend() {
    * @alias module:model/ActivityPaging
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>ActivityPaging</code> from a plain JavaScript object, optionally creating a new instance.
@@ -46017,8 +45008,8 @@ function extend() {
    * @param {module:model/ActivityPaging} obj Optional instance to populate.
    * @return {module:model/ActivityPaging} The populated <code>ActivityPaging</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -46026,26 +45017,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/ActivityPagingList} list
    */
   exports.prototype['list'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./ActivityPagingList":166}],166:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './ActivityEntry', './Pagination'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./ActivityEntry'), require('./Pagination'));
   } else {
@@ -46055,7 +45046,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.ActivityPagingList = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.ActivityEntry, root.AlfrescoCoreRestApi.Pagination);
   }
-}(this, function(ApiClient, ActivityEntry, Pagination) {
+})(undefined, function (ApiClient, ActivityEntry, Pagination) {
   'use strict';
 
   /**
@@ -46071,7 +45062,8 @@ function extend() {
    * @param entries
    * @param pagination
    */
-  var exports = function(entries, pagination) {
+
+  var exports = function exports(entries, pagination) {
 
     this['entries'] = entries;
     this['pagination'] = pagination;
@@ -46084,8 +45076,8 @@ function extend() {
    * @param {module:model/ActivityPagingList} obj Optional instance to populate.
    * @return {module:model/ActivityPagingList} The populated <code>ActivityPagingList</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -46096,8 +45088,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {Array.<module:model/ActivityEntry>} entries
@@ -46109,18 +45100,19 @@ function extend() {
    */
   exports.prototype['pagination'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./ActivityEntry":164,"./Pagination":220}],167:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -46130,7 +45122,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.AssocChildBody = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -46144,11 +45136,8 @@ function extend() {
    * @alias module:model/AssocChildBody
    * @class
    */
-  var exports = function() {
 
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>AssocChildBody</code> from a plain JavaScript object, optionally creating a new instance.
@@ -46157,8 +45146,8 @@ function extend() {
    * @param {module:model/AssocChildBody} obj Optional instance to populate.
    * @return {module:model/AssocChildBody} The populated <code>AssocChildBody</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('childId')) {
@@ -46169,8 +45158,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} childId
@@ -46182,18 +45170,19 @@ function extend() {
    */
   exports.prototype['assocType'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],168:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -46203,7 +45192,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.AssocInfo = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -46217,10 +45206,8 @@ function extend() {
    * @alias module:model/AssocInfo
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>AssocInfo</code> from a plain JavaScript object, optionally creating a new instance.
@@ -46229,8 +45216,8 @@ function extend() {
    * @param {module:model/AssocInfo} obj Optional instance to populate.
    * @return {module:model/AssocInfo} The populated <code>AssocInfo</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('assocType')) {
@@ -46238,26 +45225,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} assocType
    */
   exports.prototype['assocType'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],169:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -46267,7 +45254,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.AssocTargetBody = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -46281,11 +45268,8 @@ function extend() {
    * @alias module:model/AssocTargetBody
    * @class
    */
-  var exports = function() {
 
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>AssocTargetBody</code> from a plain JavaScript object, optionally creating a new instance.
@@ -46294,8 +45278,8 @@ function extend() {
    * @param {module:model/AssocTargetBody} obj Optional instance to populate.
    * @return {module:model/AssocTargetBody} The populated <code>AssocTargetBody</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('targetId')) {
@@ -46306,8 +45290,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} targetId
@@ -46319,18 +45302,19 @@ function extend() {
    */
   exports.prototype['assocType'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],170:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -46340,7 +45324,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.ChildAssocInfo = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -46354,11 +45338,8 @@ function extend() {
    * @alias module:model/ChildAssocInfo
    * @class
    */
-  var exports = function() {
 
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>ChildAssocInfo</code> from a plain JavaScript object, optionally creating a new instance.
@@ -46367,8 +45348,8 @@ function extend() {
    * @param {module:model/ChildAssocInfo} obj Optional instance to populate.
    * @return {module:model/ChildAssocInfo} The populated <code>ChildAssocInfo</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('assocType')) {
@@ -46379,8 +45360,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} assocType
@@ -46392,18 +45372,19 @@ function extend() {
    */
   exports.prototype['isPrimary'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],171:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './Person'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./Person'));
   } else {
@@ -46413,7 +45394,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.Comment = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Person);
   }
-}(this, function(ApiClient, Person) {
+})(undefined, function (ApiClient, Person) {
   'use strict';
 
   /**
@@ -46436,7 +45417,8 @@ function extend() {
    * @param canEdit
    * @param canDelete
    */
-  var exports = function(id, content, createdBy, createdAt, edited, modifiedBy, modifiedAt, canEdit, canDelete) {
+
+  var exports = function exports(id, content, createdBy, createdAt, edited, modifiedBy, modifiedAt, canEdit, canDelete) {
 
     this['id'] = id;
     this['content'] = content;
@@ -46456,8 +45438,8 @@ function extend() {
    * @param {module:model/Comment} obj Optional instance to populate.
    * @return {module:model/Comment} The populated <code>Comment</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -46489,8 +45471,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} id
@@ -46537,18 +45518,19 @@ function extend() {
    */
   exports.prototype['canDelete'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./Person":223}],172:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -46558,7 +45540,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.CommentBody = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -46573,7 +45555,8 @@ function extend() {
    * @class
    * @param content
    */
-  var exports = function(content) {
+
+  var exports = function exports(content) {
 
     this['content'] = content;
   };
@@ -46585,8 +45568,8 @@ function extend() {
    * @param {module:model/CommentBody} obj Optional instance to populate.
    * @return {module:model/CommentBody} The populated <code>CommentBody</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('content')) {
@@ -46594,26 +45577,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} content
    */
   exports.prototype['content'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],173:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -46623,7 +45606,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.CommentBody1 = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -46638,7 +45621,8 @@ function extend() {
    * @class
    * @param content
    */
-  var exports = function(content) {
+
+  var exports = function exports(content) {
 
     this['content'] = content;
   };
@@ -46650,8 +45634,8 @@ function extend() {
    * @param {module:model/CommentBody1} obj Optional instance to populate.
    * @return {module:model/CommentBody1} The populated <code>CommentBody1</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('content')) {
@@ -46659,26 +45643,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} content
    */
   exports.prototype['content'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],174:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './Comment'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./Comment'));
   } else {
@@ -46688,7 +45672,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.CommentEntry = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Comment);
   }
-}(this, function(ApiClient, Comment) {
+})(undefined, function (ApiClient, Comment) {
   'use strict';
 
   /**
@@ -46703,7 +45687,8 @@ function extend() {
    * @class
    * @param entry
    */
-  var exports = function(entry) {
+
+  var exports = function exports(entry) {
 
     this['entry'] = entry;
   };
@@ -46715,8 +45700,8 @@ function extend() {
    * @param {module:model/CommentEntry} obj Optional instance to populate.
    * @return {module:model/CommentEntry} The populated <code>CommentEntry</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -46724,26 +45709,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/Comment} entry
    */
   exports.prototype['entry'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./Comment":171}],175:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './CommentPagingList'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./CommentPagingList'));
   } else {
@@ -46753,7 +45738,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.CommentPaging = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.CommentPagingList);
   }
-}(this, function(ApiClient, CommentPagingList) {
+})(undefined, function (ApiClient, CommentPagingList) {
   'use strict';
 
   /**
@@ -46767,10 +45752,8 @@ function extend() {
    * @alias module:model/CommentPaging
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>CommentPaging</code> from a plain JavaScript object, optionally creating a new instance.
@@ -46779,8 +45762,8 @@ function extend() {
    * @param {module:model/CommentPaging} obj Optional instance to populate.
    * @return {module:model/CommentPaging} The populated <code>CommentPaging</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -46788,26 +45771,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/CommentPagingList} list
    */
   exports.prototype['list'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./CommentPagingList":176}],176:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './CommentEntry', './Pagination'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./CommentEntry'), require('./Pagination'));
   } else {
@@ -46817,7 +45800,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.CommentPagingList = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.CommentEntry, root.AlfrescoCoreRestApi.Pagination);
   }
-}(this, function(ApiClient, CommentEntry, Pagination) {
+})(undefined, function (ApiClient, CommentEntry, Pagination) {
   'use strict';
 
   /**
@@ -46833,7 +45816,8 @@ function extend() {
    * @param entries
    * @param pagination
    */
-  var exports = function(entries, pagination) {
+
+  var exports = function exports(entries, pagination) {
 
     this['entries'] = entries;
     this['pagination'] = pagination;
@@ -46846,8 +45830,8 @@ function extend() {
    * @param {module:model/CommentPagingList} obj Optional instance to populate.
    * @return {module:model/CommentPagingList} The populated <code>CommentPagingList</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -46858,8 +45842,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {Array.<module:model/CommentEntry>} entries
@@ -46871,18 +45854,19 @@ function extend() {
    */
   exports.prototype['pagination'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./CommentEntry":174,"./Pagination":220}],177:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -46892,7 +45876,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.Company = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -46906,17 +45890,8 @@ function extend() {
    * @alias module:model/Company
    * @class
    */
-  var exports = function() {
 
-
-
-
-
-
-
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>Company</code> from a plain JavaScript object, optionally creating a new instance.
@@ -46925,8 +45900,8 @@ function extend() {
    * @param {module:model/Company} obj Optional instance to populate.
    * @return {module:model/Company} The populated <code>Company</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('organization')) {
@@ -46955,8 +45930,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} organization
@@ -46998,18 +45972,19 @@ function extend() {
    */
   exports.prototype['email'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],178:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -47019,7 +45994,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.ContentInfo = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -47033,13 +46008,8 @@ function extend() {
    * @alias module:model/ContentInfo
    * @class
    */
-  var exports = function() {
 
-
-
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>ContentInfo</code> from a plain JavaScript object, optionally creating a new instance.
@@ -47048,8 +46018,8 @@ function extend() {
    * @param {module:model/ContentInfo} obj Optional instance to populate.
    * @return {module:model/ContentInfo} The populated <code>ContentInfo</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('mimeType')) {
@@ -47066,8 +46036,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} mimeType
@@ -47089,18 +46058,19 @@ function extend() {
    */
   exports.prototype['encoding'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],179:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -47110,7 +46080,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.CopyBody = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -47124,11 +46094,8 @@ function extend() {
    * @alias module:model/CopyBody
    * @class
    */
-  var exports = function() {
 
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>CopyBody</code> from a plain JavaScript object, optionally creating a new instance.
@@ -47137,8 +46104,8 @@ function extend() {
    * @param {module:model/CopyBody} obj Optional instance to populate.
    * @return {module:model/CopyBody} The populated <code>CopyBody</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('targetParentId')) {
@@ -47149,8 +46116,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} targetParentId
@@ -47162,18 +46128,19 @@ function extend() {
    */
   exports.prototype['name'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],180:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './ContentInfo', './NodeFull', './UserInfo'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./ContentInfo'), require('./NodeFull'), require('./UserInfo'));
   } else {
@@ -47183,7 +46150,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.DeletedNode = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.ContentInfo, root.AlfrescoCoreRestApi.NodeFull, root.AlfrescoCoreRestApi.UserInfo);
   }
-}(this, function(ApiClient, ContentInfo, NodeFull, UserInfo) {
+})(undefined, function (ApiClient, ContentInfo, NodeFull, UserInfo) {
   'use strict';
 
   /**
@@ -47200,7 +46167,8 @@ function extend() {
    * @param archivedByUser
    * @param archivedAt
    */
-  var exports = function(archivedByUser, archivedAt) {
+
+  var exports = function exports(archivedByUser, archivedAt) {
     NodeFull.call(this);
     this['archivedByUser'] = archivedByUser;
     this['archivedAt'] = archivedAt;
@@ -47213,8 +46181,8 @@ function extend() {
    * @param {module:model/DeletedNode} obj Optional instance to populate.
    * @return {module:model/DeletedNode} The populated <code>DeletedNode</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
       NodeFull.constructFromObject(data, obj);
       if (data.hasOwnProperty('archivedByUser')) {
@@ -47225,11 +46193,10 @@ function extend() {
       }
     }
     return obj;
-  }
+  };
 
   exports.prototype = Object.create(NodeFull.prototype);
   exports.prototype.constructor = exports;
-
 
   /**
    * @member {module:model/UserInfo} archivedByUser
@@ -47241,18 +46208,19 @@ function extend() {
    */
   exports.prototype['archivedAt'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./ContentInfo":178,"./NodeFull":210,"./UserInfo":270}],181:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './DeletedNode'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./DeletedNode'));
   } else {
@@ -47262,7 +46230,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.DeletedNodeEntry = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.DeletedNode);
   }
-}(this, function(ApiClient, DeletedNode) {
+})(undefined, function (ApiClient, DeletedNode) {
   'use strict';
 
   /**
@@ -47276,10 +46244,8 @@ function extend() {
    * @alias module:model/DeletedNodeEntry
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>DeletedNodeEntry</code> from a plain JavaScript object, optionally creating a new instance.
@@ -47288,8 +46254,8 @@ function extend() {
    * @param {module:model/DeletedNodeEntry} obj Optional instance to populate.
    * @return {module:model/DeletedNodeEntry} The populated <code>DeletedNodeEntry</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -47297,26 +46263,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/DeletedNode} entry
    */
   exports.prototype['entry'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./DeletedNode":180}],182:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './ContentInfo', './NodeMinimal', './PathElement', './UserInfo'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./ContentInfo'), require('./NodeMinimal'), require('./PathElement'), require('./UserInfo'));
   } else {
@@ -47326,7 +46292,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.DeletedNodeMinimal = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.ContentInfo, root.AlfrescoCoreRestApi.NodeMinimal, root.AlfrescoCoreRestApi.PathElement, root.AlfrescoCoreRestApi.UserInfo);
   }
-}(this, function(ApiClient, ContentInfo, NodeMinimal, PathElement, UserInfo) {
+})(undefined, function (ApiClient, ContentInfo, NodeMinimal, PathElement, UserInfo) {
   'use strict';
 
   /**
@@ -47343,7 +46309,8 @@ function extend() {
    * @param archivedByUser
    * @param archivedAt
    */
-  var exports = function(archivedByUser, archivedAt) {
+
+  var exports = function exports(archivedByUser, archivedAt) {
     NodeMinimal.call(this);
     this['archivedByUser'] = archivedByUser;
     this['archivedAt'] = archivedAt;
@@ -47356,8 +46323,8 @@ function extend() {
    * @param {module:model/DeletedNodeMinimal} obj Optional instance to populate.
    * @return {module:model/DeletedNodeMinimal} The populated <code>DeletedNodeMinimal</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
       NodeMinimal.constructFromObject(data, obj);
       if (data.hasOwnProperty('archivedByUser')) {
@@ -47368,11 +46335,10 @@ function extend() {
       }
     }
     return obj;
-  }
+  };
 
   exports.prototype = Object.create(NodeMinimal.prototype);
   exports.prototype.constructor = exports;
-
 
   /**
    * @member {module:model/UserInfo} archivedByUser
@@ -47384,18 +46350,19 @@ function extend() {
    */
   exports.prototype['archivedAt'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./ContentInfo":178,"./NodeMinimal":211,"./PathElement":221,"./UserInfo":270}],183:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './DeletedNodeMinimal'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./DeletedNodeMinimal'));
   } else {
@@ -47405,7 +46372,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.DeletedNodeMinimalEntry = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.DeletedNodeMinimal);
   }
-}(this, function(ApiClient, DeletedNodeMinimal) {
+})(undefined, function (ApiClient, DeletedNodeMinimal) {
   'use strict';
 
   /**
@@ -47419,10 +46386,8 @@ function extend() {
    * @alias module:model/DeletedNodeMinimalEntry
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>DeletedNodeMinimalEntry</code> from a plain JavaScript object, optionally creating a new instance.
@@ -47431,8 +46396,8 @@ function extend() {
    * @param {module:model/DeletedNodeMinimalEntry} obj Optional instance to populate.
    * @return {module:model/DeletedNodeMinimalEntry} The populated <code>DeletedNodeMinimalEntry</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -47440,26 +46405,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/DeletedNodeMinimal} entry
    */
   exports.prototype['entry'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./DeletedNodeMinimal":182}],184:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './DeletedNodesPagingList'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./DeletedNodesPagingList'));
   } else {
@@ -47469,7 +46434,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.DeletedNodesPaging = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.DeletedNodesPagingList);
   }
-}(this, function(ApiClient, DeletedNodesPagingList) {
+})(undefined, function (ApiClient, DeletedNodesPagingList) {
   'use strict';
 
   /**
@@ -47483,10 +46448,8 @@ function extend() {
    * @alias module:model/DeletedNodesPaging
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>DeletedNodesPaging</code> from a plain JavaScript object, optionally creating a new instance.
@@ -47495,8 +46458,8 @@ function extend() {
    * @param {module:model/DeletedNodesPaging} obj Optional instance to populate.
    * @return {module:model/DeletedNodesPaging} The populated <code>DeletedNodesPaging</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -47504,26 +46467,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/DeletedNodesPagingList} list
    */
   exports.prototype['list'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./DeletedNodesPagingList":185}],185:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './DeletedNodeMinimalEntry', './Pagination'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./DeletedNodeMinimalEntry'), require('./Pagination'));
   } else {
@@ -47533,7 +46496,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.DeletedNodesPagingList = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.DeletedNodeMinimalEntry, root.AlfrescoCoreRestApi.Pagination);
   }
-}(this, function(ApiClient, DeletedNodeMinimalEntry, Pagination) {
+})(undefined, function (ApiClient, DeletedNodeMinimalEntry, Pagination) {
   'use strict';
 
   /**
@@ -47547,11 +46510,8 @@ function extend() {
    * @alias module:model/DeletedNodesPagingList
    * @class
    */
-  var exports = function() {
 
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>DeletedNodesPagingList</code> from a plain JavaScript object, optionally creating a new instance.
@@ -47560,8 +46520,8 @@ function extend() {
    * @param {module:model/DeletedNodesPagingList} obj Optional instance to populate.
    * @return {module:model/DeletedNodesPagingList} The populated <code>DeletedNodesPagingList</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -47572,8 +46532,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {Array.<module:model/DeletedNodeMinimalEntry>} entries
@@ -47585,18 +46544,19 @@ function extend() {
    */
   exports.prototype['pagination'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./DeletedNodeMinimalEntry":183,"./Pagination":220}],186:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -47606,7 +46566,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.EmailSharedLinkBody = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -47620,13 +46580,8 @@ function extend() {
    * @alias module:model/EmailSharedLinkBody
    * @class
    */
-  var exports = function() {
 
-
-
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>EmailSharedLinkBody</code> from a plain JavaScript object, optionally creating a new instance.
@@ -47635,8 +46590,8 @@ function extend() {
    * @param {module:model/EmailSharedLinkBody} obj Optional instance to populate.
    * @return {module:model/EmailSharedLinkBody} The populated <code>EmailSharedLinkBody</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('client')) {
@@ -47653,8 +46608,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} client
@@ -47676,18 +46630,19 @@ function extend() {
    */
   exports.prototype['recipientEmails'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],187:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './ErrorError'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./ErrorError'));
   } else {
@@ -47697,7 +46652,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.Error = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.ErrorError);
   }
-}(this, function(ApiClient, ErrorError) {
+})(undefined, function (ApiClient, ErrorError) {
   'use strict';
 
   /**
@@ -47711,10 +46666,8 @@ function extend() {
    * @alias module:model/Error
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>Error</code> from a plain JavaScript object, optionally creating a new instance.
@@ -47723,8 +46676,8 @@ function extend() {
    * @param {module:model/Error} obj Optional instance to populate.
    * @return {module:model/Error} The populated <code>Error</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('error')) {
@@ -47732,26 +46685,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/ErrorError} error
    */
   exports.prototype['error'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./ErrorError":188}],188:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -47761,7 +46714,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.ErrorError = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -47779,8 +46732,8 @@ function extend() {
    * @param stackTrace
    * @param statusCode
    */
-  var exports = function(briefSummary, descriptionURL, stackTrace, statusCode) {
 
+  var exports = function exports(briefSummary, descriptionURL, stackTrace, statusCode) {
 
     this['briefSummary'] = briefSummary;
     this['descriptionURL'] = descriptionURL;
@@ -47796,8 +46749,8 @@ function extend() {
    * @param {module:model/ErrorError} obj Optional instance to populate.
    * @return {module:model/ErrorError} The populated <code>ErrorError</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('errorKey')) {
@@ -47820,8 +46773,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} errorKey
@@ -47853,18 +46805,19 @@ function extend() {
    */
   exports.prototype['statusCode'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],189:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -47874,7 +46827,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.Favorite = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -47891,7 +46844,8 @@ function extend() {
    * @param targetGuid
    * @param target
    */
-  var exports = function(targetGuid, target) {
+
+  var exports = function exports(targetGuid, target) {
 
     this['targetGuid'] = targetGuid;
 
@@ -47905,8 +46859,8 @@ function extend() {
    * @param {module:model/Favorite} obj Optional instance to populate.
    * @return {module:model/Favorite} The populated <code>Favorite</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('targetGuid')) {
@@ -47920,8 +46874,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * The guid of the object that is a favorite.
@@ -47940,18 +46893,19 @@ function extend() {
    */
   exports.prototype['target'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],190:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -47961,7 +46915,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.FavoriteBody = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -47976,7 +46930,8 @@ function extend() {
    * @class
    * @param target
    */
-  var exports = function(target) {
+
+  var exports = function exports(target) {
 
     this['target'] = target;
   };
@@ -47988,8 +46943,8 @@ function extend() {
    * @param {module:model/FavoriteBody} obj Optional instance to populate.
    * @return {module:model/FavoriteBody} The populated <code>FavoriteBody</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('target')) {
@@ -47997,26 +46952,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {Object} target
    */
   exports.prototype['target'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],191:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './Favorite'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./Favorite'));
   } else {
@@ -48026,7 +46981,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.FavoriteEntry = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Favorite);
   }
-}(this, function(ApiClient, Favorite) {
+})(undefined, function (ApiClient, Favorite) {
   'use strict';
 
   /**
@@ -48041,7 +46996,8 @@ function extend() {
    * @class
    * @param entry
    */
-  var exports = function(entry) {
+
+  var exports = function exports(entry) {
 
     this['entry'] = entry;
   };
@@ -48053,8 +47009,8 @@ function extend() {
    * @param {module:model/FavoriteEntry} obj Optional instance to populate.
    * @return {module:model/FavoriteEntry} The populated <code>FavoriteEntry</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -48062,26 +47018,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/Favorite} entry
    */
   exports.prototype['entry'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./Favorite":189}],192:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './FavoritePagingList'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./FavoritePagingList'));
   } else {
@@ -48091,7 +47047,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.FavoritePaging = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.FavoritePagingList);
   }
-}(this, function(ApiClient, FavoritePagingList) {
+})(undefined, function (ApiClient, FavoritePagingList) {
   'use strict';
 
   /**
@@ -48105,10 +47061,8 @@ function extend() {
    * @alias module:model/FavoritePaging
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>FavoritePaging</code> from a plain JavaScript object, optionally creating a new instance.
@@ -48117,8 +47071,8 @@ function extend() {
    * @param {module:model/FavoritePaging} obj Optional instance to populate.
    * @return {module:model/FavoritePaging} The populated <code>FavoritePaging</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -48126,26 +47080,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/FavoritePagingList} list
    */
   exports.prototype['list'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./FavoritePagingList":193}],193:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './FavoriteEntry', './Pagination'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./FavoriteEntry'), require('./Pagination'));
   } else {
@@ -48155,7 +47109,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.FavoritePagingList = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.FavoriteEntry, root.AlfrescoCoreRestApi.Pagination);
   }
-}(this, function(ApiClient, FavoriteEntry, Pagination) {
+})(undefined, function (ApiClient, FavoriteEntry, Pagination) {
   'use strict';
 
   /**
@@ -48171,7 +47125,8 @@ function extend() {
    * @param entries
    * @param pagination
    */
-  var exports = function(entries, pagination) {
+
+  var exports = function exports(entries, pagination) {
 
     this['entries'] = entries;
     this['pagination'] = pagination;
@@ -48184,8 +47139,8 @@ function extend() {
    * @param {module:model/FavoritePagingList} obj Optional instance to populate.
    * @return {module:model/FavoritePagingList} The populated <code>FavoritePagingList</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -48196,8 +47151,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {Array.<module:model/FavoriteEntry>} entries
@@ -48209,18 +47163,19 @@ function extend() {
    */
   exports.prototype['pagination'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./FavoriteEntry":191,"./Pagination":220}],194:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -48230,7 +47185,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.FavoriteSiteBody = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -48244,10 +47199,8 @@ function extend() {
    * @alias module:model/FavoriteSiteBody
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>FavoriteSiteBody</code> from a plain JavaScript object, optionally creating a new instance.
@@ -48256,8 +47209,8 @@ function extend() {
    * @param {module:model/FavoriteSiteBody} obj Optional instance to populate.
    * @return {module:model/FavoriteSiteBody} The populated <code>FavoriteSiteBody</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -48265,26 +47218,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} id
    */
   exports.prototype['id'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],195:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './InlineResponse201Entry'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./InlineResponse201Entry'));
   } else {
@@ -48294,7 +47247,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.InlineResponse201 = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.InlineResponse201Entry);
   }
-}(this, function(ApiClient, InlineResponse201Entry) {
+})(undefined, function (ApiClient, InlineResponse201Entry) {
   'use strict';
 
   /**
@@ -48308,10 +47261,8 @@ function extend() {
    * @alias module:model/InlineResponse201
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>InlineResponse201</code> from a plain JavaScript object, optionally creating a new instance.
@@ -48320,8 +47271,8 @@ function extend() {
    * @param {module:model/InlineResponse201} obj Optional instance to populate.
    * @return {module:model/InlineResponse201} The populated <code>InlineResponse201</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -48329,26 +47280,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/InlineResponse201Entry} entry
    */
   exports.prototype['entry'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./InlineResponse201Entry":196}],196:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -48358,7 +47309,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.InlineResponse201Entry = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -48373,7 +47324,8 @@ function extend() {
    * @class
    * @param id
    */
-  var exports = function(id) {
+
+  var exports = function exports(id) {
 
     this['id'] = id;
   };
@@ -48385,8 +47337,8 @@ function extend() {
    * @param {module:model/InlineResponse201Entry} obj Optional instance to populate.
    * @return {module:model/InlineResponse201Entry} The populated <code>InlineResponse201Entry</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -48394,26 +47346,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} id
    */
   exports.prototype['id'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],197:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -48423,7 +47375,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.MoveBody = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -48437,11 +47389,8 @@ function extend() {
    * @alias module:model/MoveBody
    * @class
    */
-  var exports = function() {
 
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>MoveBody</code> from a plain JavaScript object, optionally creating a new instance.
@@ -48450,8 +47399,8 @@ function extend() {
    * @param {module:model/MoveBody} obj Optional instance to populate.
    * @return {module:model/MoveBody} The populated <code>MoveBody</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('targetParentId')) {
@@ -48462,8 +47411,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} targetParentId
@@ -48475,18 +47423,19 @@ function extend() {
    */
   exports.prototype['name'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],198:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -48496,7 +47445,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.NetworkQuota = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -48514,7 +47463,8 @@ function extend() {
    * @param limit
    * @param usage
    */
-  var exports = function(id, limit, usage) {
+
+  var exports = function exports(id, limit, usage) {
 
     this['id'] = id;
     this['limit'] = limit;
@@ -48528,8 +47478,8 @@ function extend() {
    * @param {module:model/NetworkQuota} obj Optional instance to populate.
    * @return {module:model/NetworkQuota} The populated <code>NetworkQuota</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -48543,8 +47493,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} id
@@ -48561,18 +47510,19 @@ function extend() {
    */
   exports.prototype['usage'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],199:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './AssocInfo', './ContentInfo', './UserInfo'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./AssocInfo'), require('./ContentInfo'), require('./UserInfo'));
   } else {
@@ -48582,7 +47532,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.NodeAssocMinimal = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.AssocInfo, root.AlfrescoCoreRestApi.ContentInfo, root.AlfrescoCoreRestApi.UserInfo);
   }
-}(this, function(ApiClient, AssocInfo, ContentInfo, UserInfo) {
+})(undefined, function (ApiClient, AssocInfo, ContentInfo, UserInfo) {
   'use strict';
 
   /**
@@ -48596,21 +47546,8 @@ function extend() {
    * @alias module:model/NodeAssocMinimal
    * @class
    */
-  var exports = function() {
 
-
-
-
-
-
-
-
-
-
-
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>NodeAssocMinimal</code> from a plain JavaScript object, optionally creating a new instance.
@@ -48619,8 +47556,8 @@ function extend() {
    * @param {module:model/NodeAssocMinimal} obj Optional instance to populate.
    * @return {module:model/NodeAssocMinimal} The populated <code>NodeAssocMinimal</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -48661,8 +47598,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} id
@@ -48724,18 +47660,19 @@ function extend() {
    */
   exports.prototype['association'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./AssocInfo":168,"./ContentInfo":178,"./UserInfo":270}],200:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './NodeAssocMinimal'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./NodeAssocMinimal'));
   } else {
@@ -48745,7 +47682,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.NodeAssocMinimalEntry = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.NodeAssocMinimal);
   }
-}(this, function(ApiClient, NodeAssocMinimal) {
+})(undefined, function (ApiClient, NodeAssocMinimal) {
   'use strict';
 
   /**
@@ -48760,7 +47697,8 @@ function extend() {
    * @class
    * @param entry
    */
-  var exports = function(entry) {
+
+  var exports = function exports(entry) {
 
     this['entry'] = entry;
   };
@@ -48772,8 +47710,8 @@ function extend() {
    * @param {module:model/NodeAssocMinimalEntry} obj Optional instance to populate.
    * @return {module:model/NodeAssocMinimalEntry} The populated <code>NodeAssocMinimalEntry</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -48781,26 +47719,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/NodeAssocMinimal} entry
    */
   exports.prototype['entry'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./NodeAssocMinimal":199}],201:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './NodeAssocPagingList'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./NodeAssocPagingList'));
   } else {
@@ -48810,7 +47748,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.NodeAssocPaging = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.NodeAssocPagingList);
   }
-}(this, function(ApiClient, NodeAssocPagingList) {
+})(undefined, function (ApiClient, NodeAssocPagingList) {
   'use strict';
 
   /**
@@ -48824,10 +47762,8 @@ function extend() {
    * @alias module:model/NodeAssocPaging
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>NodeAssocPaging</code> from a plain JavaScript object, optionally creating a new instance.
@@ -48836,8 +47772,8 @@ function extend() {
    * @param {module:model/NodeAssocPaging} obj Optional instance to populate.
    * @return {module:model/NodeAssocPaging} The populated <code>NodeAssocPaging</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -48845,26 +47781,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/NodeAssocPagingList} list
    */
   exports.prototype['list'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./NodeAssocPagingList":202}],202:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './NodeAssocMinimalEntry', './Pagination'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./NodeAssocMinimalEntry'), require('./Pagination'));
   } else {
@@ -48874,7 +47810,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.NodeAssocPagingList = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.NodeAssocMinimalEntry, root.AlfrescoCoreRestApi.Pagination);
   }
-}(this, function(ApiClient, NodeAssocMinimalEntry, Pagination) {
+})(undefined, function (ApiClient, NodeAssocMinimalEntry, Pagination) {
   'use strict';
 
   /**
@@ -48888,11 +47824,8 @@ function extend() {
    * @alias module:model/NodeAssocPagingList
    * @class
    */
-  var exports = function() {
 
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>NodeAssocPagingList</code> from a plain JavaScript object, optionally creating a new instance.
@@ -48901,8 +47834,8 @@ function extend() {
    * @param {module:model/NodeAssocPagingList} obj Optional instance to populate.
    * @return {module:model/NodeAssocPagingList} The populated <code>NodeAssocPagingList</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -48913,8 +47846,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {Array.<module:model/NodeAssocMinimalEntry>} entries
@@ -48926,18 +47858,19 @@ function extend() {
    */
   exports.prototype['pagination'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./NodeAssocMinimalEntry":200,"./Pagination":220}],203:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -48947,7 +47880,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.NodeBody = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -48961,13 +47894,8 @@ function extend() {
    * @alias module:model/NodeBody
    * @class
    */
-  var exports = function() {
 
-
-
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>NodeBody</code> from a plain JavaScript object, optionally creating a new instance.
@@ -48976,8 +47904,8 @@ function extend() {
    * @param {module:model/NodeBody} obj Optional instance to populate.
    * @return {module:model/NodeBody} The populated <code>NodeBody</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('name')) {
@@ -48990,12 +47918,11 @@ function extend() {
         obj['aspectNames'] = ApiClient.convertToType(data['aspectNames'], ['String']);
       }
       if (data.hasOwnProperty('properties')) {
-        obj['properties'] = ApiClient.convertToType(data['properties'], {'String': 'String'});
+        obj['properties'] = ApiClient.convertToType(data['properties'], { 'String': 'String' });
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} name
@@ -49017,18 +47944,19 @@ function extend() {
    */
   exports.prototype['properties'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],204:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './NodesnodeIdchildrenContent'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./NodesnodeIdchildrenContent'));
   } else {
@@ -49038,7 +47966,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.NodeBody1 = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.NodesnodeIdchildrenContent);
   }
-}(this, function(ApiClient, NodesnodeIdchildrenContent) {
+})(undefined, function (ApiClient, NodesnodeIdchildrenContent) {
   'use strict';
 
   /**
@@ -49052,15 +47980,8 @@ function extend() {
    * @alias module:model/NodeBody1
    * @class
    */
-  var exports = function() {
 
-
-
-
-
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>NodeBody1</code> from a plain JavaScript object, optionally creating a new instance.
@@ -49069,8 +47990,8 @@ function extend() {
    * @param {module:model/NodeBody1} obj Optional instance to populate.
    * @return {module:model/NodeBody1} The populated <code>NodeBody1</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('name')) {
@@ -49089,12 +48010,11 @@ function extend() {
         obj['aspectNames'] = ApiClient.convertToType(data['aspectNames'], ['String']);
       }
       if (data.hasOwnProperty('properties')) {
-        obj['properties'] = ApiClient.convertToType(data['properties'], {'String': 'String'});
+        obj['properties'] = ApiClient.convertToType(data['properties'], { 'String': 'String' });
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} name
@@ -49126,18 +48046,19 @@ function extend() {
    */
   exports.prototype['properties'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./NodesnodeIdchildrenContent":219}],205:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './ChildAssocInfo', './ContentInfo', './UserInfo'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./ChildAssocInfo'), require('./ContentInfo'), require('./UserInfo'));
   } else {
@@ -49147,7 +48068,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.NodeChildAssocMinimal = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.ChildAssocInfo, root.AlfrescoCoreRestApi.ContentInfo, root.AlfrescoCoreRestApi.UserInfo);
   }
-}(this, function(ApiClient, ChildAssocInfo, ContentInfo, UserInfo) {
+})(undefined, function (ApiClient, ChildAssocInfo, ContentInfo, UserInfo) {
   'use strict';
 
   /**
@@ -49161,21 +48082,8 @@ function extend() {
    * @alias module:model/NodeChildAssocMinimal
    * @class
    */
-  var exports = function() {
 
-
-
-
-
-
-
-
-
-
-
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>NodeChildAssocMinimal</code> from a plain JavaScript object, optionally creating a new instance.
@@ -49184,8 +48092,8 @@ function extend() {
    * @param {module:model/NodeChildAssocMinimal} obj Optional instance to populate.
    * @return {module:model/NodeChildAssocMinimal} The populated <code>NodeChildAssocMinimal</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -49226,8 +48134,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} id
@@ -49289,18 +48196,19 @@ function extend() {
    */
   exports.prototype['association'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./ChildAssocInfo":170,"./ContentInfo":178,"./UserInfo":270}],206:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './NodeChildAssocMinimal'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./NodeChildAssocMinimal'));
   } else {
@@ -49310,7 +48218,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.NodeChildAssocMinimalEntry = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.NodeChildAssocMinimal);
   }
-}(this, function(ApiClient, NodeChildAssocMinimal) {
+})(undefined, function (ApiClient, NodeChildAssocMinimal) {
   'use strict';
 
   /**
@@ -49325,7 +48233,8 @@ function extend() {
    * @class
    * @param entry
    */
-  var exports = function(entry) {
+
+  var exports = function exports(entry) {
 
     this['entry'] = entry;
   };
@@ -49337,8 +48246,8 @@ function extend() {
    * @param {module:model/NodeChildAssocMinimalEntry} obj Optional instance to populate.
    * @return {module:model/NodeChildAssocMinimalEntry} The populated <code>NodeChildAssocMinimalEntry</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -49346,26 +48255,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/NodeChildAssocMinimal} entry
    */
   exports.prototype['entry'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./NodeChildAssocMinimal":205}],207:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './NodeChildAssocPagingList'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./NodeChildAssocPagingList'));
   } else {
@@ -49375,7 +48284,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.NodeChildAssocPaging = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.NodeChildAssocPagingList);
   }
-}(this, function(ApiClient, NodeChildAssocPagingList) {
+})(undefined, function (ApiClient, NodeChildAssocPagingList) {
   'use strict';
 
   /**
@@ -49389,10 +48298,8 @@ function extend() {
    * @alias module:model/NodeChildAssocPaging
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>NodeChildAssocPaging</code> from a plain JavaScript object, optionally creating a new instance.
@@ -49401,8 +48308,8 @@ function extend() {
    * @param {module:model/NodeChildAssocPaging} obj Optional instance to populate.
    * @return {module:model/NodeChildAssocPaging} The populated <code>NodeChildAssocPaging</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -49410,26 +48317,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/NodeChildAssocPagingList} list
    */
   exports.prototype['list'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./NodeChildAssocPagingList":208}],208:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './NodeChildAssocMinimalEntry', './Pagination'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./NodeChildAssocMinimalEntry'), require('./Pagination'));
   } else {
@@ -49439,7 +48346,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.NodeChildAssocPagingList = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.NodeChildAssocMinimalEntry, root.AlfrescoCoreRestApi.Pagination);
   }
-}(this, function(ApiClient, NodeChildAssocMinimalEntry, Pagination) {
+})(undefined, function (ApiClient, NodeChildAssocMinimalEntry, Pagination) {
   'use strict';
 
   /**
@@ -49453,11 +48360,8 @@ function extend() {
    * @alias module:model/NodeChildAssocPagingList
    * @class
    */
-  var exports = function() {
 
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>NodeChildAssocPagingList</code> from a plain JavaScript object, optionally creating a new instance.
@@ -49466,8 +48370,8 @@ function extend() {
    * @param {module:model/NodeChildAssocPagingList} obj Optional instance to populate.
    * @return {module:model/NodeChildAssocPagingList} The populated <code>NodeChildAssocPagingList</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -49478,8 +48382,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {Array.<module:model/NodeChildAssocMinimalEntry>} entries
@@ -49491,18 +48394,19 @@ function extend() {
    */
   exports.prototype['pagination'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./NodeChildAssocMinimalEntry":206,"./Pagination":220}],209:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './NodeFull'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./NodeFull'));
   } else {
@@ -49512,7 +48416,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.NodeEntry = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.NodeFull);
   }
-}(this, function(ApiClient, NodeFull) {
+})(undefined, function (ApiClient, NodeFull) {
   'use strict';
 
   /**
@@ -49527,7 +48431,8 @@ function extend() {
    * @class
    * @param entry
    */
-  var exports = function(entry) {
+
+  var exports = function exports(entry) {
 
     this['entry'] = entry;
   };
@@ -49539,8 +48444,8 @@ function extend() {
    * @param {module:model/NodeEntry} obj Optional instance to populate.
    * @return {module:model/NodeEntry} The populated <code>NodeEntry</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -49548,26 +48453,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/NodeFull} entry
    */
   exports.prototype['entry'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./NodeFull":210}],210:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './ContentInfo', './UserInfo'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./ContentInfo'), require('./UserInfo'));
   } else {
@@ -49577,7 +48482,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.NodeFull = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.ContentInfo, root.AlfrescoCoreRestApi.UserInfo);
   }
-}(this, function(ApiClient, ContentInfo, UserInfo) {
+})(undefined, function (ApiClient, ContentInfo, UserInfo) {
   'use strict';
 
   /**
@@ -49591,23 +48496,8 @@ function extend() {
    * @alias module:model/NodeFull
    * @class
    */
-  var exports = function() {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>NodeFull</code> from a plain JavaScript object, optionally creating a new instance.
@@ -49616,8 +48506,8 @@ function extend() {
    * @param {module:model/NodeFull} obj Optional instance to populate.
    * @return {module:model/NodeFull} The populated <code>NodeFull</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -49657,15 +48547,14 @@ function extend() {
         obj['aspectNames'] = ApiClient.convertToType(data['aspectNames'], ['String']);
       }
       if (data.hasOwnProperty('properties')) {
-        obj['properties'] = ApiClient.convertToType(data['properties'], {'String': 'String'});
+        obj['properties'] = ApiClient.convertToType(data['properties'], { 'String': 'String' });
       }
       if (data.hasOwnProperty('allowableOperations')) {
         obj['allowableOperations'] = ApiClient.convertToType(data['allowableOperations'], ['String']);
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} id
@@ -49737,18 +48626,19 @@ function extend() {
    */
   exports.prototype['allowableOperations'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./ContentInfo":178,"./UserInfo":270}],211:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './ContentInfo', './PathElement', './UserInfo'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./ContentInfo'), require('./PathElement'), require('./UserInfo'));
   } else {
@@ -49758,7 +48648,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.NodeMinimal = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.ContentInfo, root.AlfrescoCoreRestApi.PathElement, root.AlfrescoCoreRestApi.UserInfo);
   }
-}(this, function(ApiClient, ContentInfo, PathElement, UserInfo) {
+})(undefined, function (ApiClient, ContentInfo, PathElement, UserInfo) {
   'use strict';
 
   /**
@@ -49772,21 +48662,8 @@ function extend() {
    * @alias module:model/NodeMinimal
    * @class
    */
-  var exports = function() {
 
-
-
-
-
-
-
-
-
-
-
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>NodeMinimal</code> from a plain JavaScript object, optionally creating a new instance.
@@ -49795,8 +48672,8 @@ function extend() {
    * @param {module:model/NodeMinimal} obj Optional instance to populate.
    * @return {module:model/NodeMinimal} The populated <code>NodeMinimal</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -49837,8 +48714,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} id
@@ -49900,18 +48776,19 @@ function extend() {
    */
   exports.prototype['path'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./ContentInfo":178,"./PathElement":221,"./UserInfo":270}],212:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './NodeMinimal'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./NodeMinimal'));
   } else {
@@ -49921,7 +48798,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.NodeMinimalEntry = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.NodeMinimal);
   }
-}(this, function(ApiClient, NodeMinimal) {
+})(undefined, function (ApiClient, NodeMinimal) {
   'use strict';
 
   /**
@@ -49936,7 +48813,8 @@ function extend() {
    * @class
    * @param entry
    */
-  var exports = function(entry) {
+
+  var exports = function exports(entry) {
 
     this['entry'] = entry;
   };
@@ -49948,8 +48826,8 @@ function extend() {
    * @param {module:model/NodeMinimalEntry} obj Optional instance to populate.
    * @return {module:model/NodeMinimalEntry} The populated <code>NodeMinimalEntry</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -49957,26 +48835,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/NodeMinimal} entry
    */
   exports.prototype['entry'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./NodeMinimal":211}],213:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './NodePagingList'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./NodePagingList'));
   } else {
@@ -49986,7 +48864,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.NodePaging = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.NodePagingList);
   }
-}(this, function(ApiClient, NodePagingList) {
+})(undefined, function (ApiClient, NodePagingList) {
   'use strict';
 
   /**
@@ -50000,10 +48878,8 @@ function extend() {
    * @alias module:model/NodePaging
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>NodePaging</code> from a plain JavaScript object, optionally creating a new instance.
@@ -50012,8 +48888,8 @@ function extend() {
    * @param {module:model/NodePaging} obj Optional instance to populate.
    * @return {module:model/NodePaging} The populated <code>NodePaging</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -50021,26 +48897,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/NodePagingList} list
    */
   exports.prototype['list'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./NodePagingList":214}],214:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './NodeMinimalEntry', './Pagination'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./NodeMinimalEntry'), require('./Pagination'));
   } else {
@@ -50050,7 +48926,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.NodePagingList = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.NodeMinimalEntry, root.AlfrescoCoreRestApi.Pagination);
   }
-}(this, function(ApiClient, NodeMinimalEntry, Pagination) {
+})(undefined, function (ApiClient, NodeMinimalEntry, Pagination) {
   'use strict';
 
   /**
@@ -50064,11 +48940,8 @@ function extend() {
    * @alias module:model/NodePagingList
    * @class
    */
-  var exports = function() {
 
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>NodePagingList</code> from a plain JavaScript object, optionally creating a new instance.
@@ -50077,8 +48950,8 @@ function extend() {
    * @param {module:model/NodePagingList} obj Optional instance to populate.
    * @return {module:model/NodePagingList} The populated <code>NodePagingList</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -50089,8 +48962,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {Array.<module:model/NodeMinimalEntry>} entries
@@ -50102,18 +48974,19 @@ function extend() {
    */
   exports.prototype['pagination'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./NodeMinimalEntry":212,"./Pagination":220}],215:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './ContentInfo', './UserInfo'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./ContentInfo'), require('./UserInfo'));
   } else {
@@ -50123,7 +48996,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.NodeSharedLink = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.ContentInfo, root.AlfrescoCoreRestApi.UserInfo);
   }
-}(this, function(ApiClient, ContentInfo, UserInfo) {
+})(undefined, function (ApiClient, ContentInfo, UserInfo) {
   'use strict';
 
   /**
@@ -50137,17 +49010,8 @@ function extend() {
    * @alias module:model/NodeSharedLink
    * @class
    */
-  var exports = function() {
 
-
-
-
-
-
-
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>NodeSharedLink</code> from a plain JavaScript object, optionally creating a new instance.
@@ -50156,8 +49020,8 @@ function extend() {
    * @param {module:model/NodeSharedLink} obj Optional instance to populate.
    * @return {module:model/NodeSharedLink} The populated <code>NodeSharedLink</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -50186,8 +49050,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} id
@@ -50229,18 +49092,19 @@ function extend() {
    */
   exports.prototype['allowableOperations'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./ContentInfo":178,"./UserInfo":270}],216:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './NodeSharedLink'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./NodeSharedLink'));
   } else {
@@ -50250,7 +49114,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.NodeSharedLinkEntry = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.NodeSharedLink);
   }
-}(this, function(ApiClient, NodeSharedLink) {
+})(undefined, function (ApiClient, NodeSharedLink) {
   'use strict';
 
   /**
@@ -50265,7 +49129,8 @@ function extend() {
    * @class
    * @param entry
    */
-  var exports = function(entry) {
+
+  var exports = function exports(entry) {
 
     this['entry'] = entry;
   };
@@ -50277,8 +49142,8 @@ function extend() {
    * @param {module:model/NodeSharedLinkEntry} obj Optional instance to populate.
    * @return {module:model/NodeSharedLinkEntry} The populated <code>NodeSharedLinkEntry</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -50286,26 +49151,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/NodeSharedLink} entry
    */
   exports.prototype['entry'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./NodeSharedLink":215}],217:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './NodeSharedLinkPagingList'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./NodeSharedLinkPagingList'));
   } else {
@@ -50315,7 +49180,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.NodeSharedLinkPaging = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.NodeSharedLinkPagingList);
   }
-}(this, function(ApiClient, NodeSharedLinkPagingList) {
+})(undefined, function (ApiClient, NodeSharedLinkPagingList) {
   'use strict';
 
   /**
@@ -50329,10 +49194,8 @@ function extend() {
    * @alias module:model/NodeSharedLinkPaging
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>NodeSharedLinkPaging</code> from a plain JavaScript object, optionally creating a new instance.
@@ -50341,8 +49204,8 @@ function extend() {
    * @param {module:model/NodeSharedLinkPaging} obj Optional instance to populate.
    * @return {module:model/NodeSharedLinkPaging} The populated <code>NodeSharedLinkPaging</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -50350,26 +49213,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/NodeSharedLinkPagingList} list
    */
   exports.prototype['list'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./NodeSharedLinkPagingList":218}],218:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './NodeSharedLinkEntry', './Pagination'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./NodeSharedLinkEntry'), require('./Pagination'));
   } else {
@@ -50379,7 +49242,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.NodeSharedLinkPagingList = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.NodeSharedLinkEntry, root.AlfrescoCoreRestApi.Pagination);
   }
-}(this, function(ApiClient, NodeSharedLinkEntry, Pagination) {
+})(undefined, function (ApiClient, NodeSharedLinkEntry, Pagination) {
   'use strict';
 
   /**
@@ -50395,7 +49258,8 @@ function extend() {
    * @param entries
    * @param pagination
    */
-  var exports = function(entries, pagination) {
+
+  var exports = function exports(entries, pagination) {
 
     this['entries'] = entries;
     this['pagination'] = pagination;
@@ -50408,8 +49272,8 @@ function extend() {
    * @param {module:model/NodeSharedLinkPagingList} obj Optional instance to populate.
    * @return {module:model/NodeSharedLinkPagingList} The populated <code>NodeSharedLinkPagingList</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -50420,8 +49284,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {Array.<module:model/NodeSharedLinkEntry>} entries
@@ -50433,18 +49296,19 @@ function extend() {
    */
   exports.prototype['pagination'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./NodeSharedLinkEntry":216,"./Pagination":220}],219:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -50454,7 +49318,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.NodesnodeIdchildrenContent = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -50468,11 +49332,8 @@ function extend() {
    * @alias module:model/NodesnodeIdchildrenContent
    * @class
    */
-  var exports = function() {
 
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>NodesnodeIdchildrenContent</code> from a plain JavaScript object, optionally creating a new instance.
@@ -50481,8 +49342,8 @@ function extend() {
    * @param {module:model/NodesnodeIdchildrenContent} obj Optional instance to populate.
    * @return {module:model/NodesnodeIdchildrenContent} The populated <code>NodesnodeIdchildrenContent</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('mimeType')) {
@@ -50493,8 +49354,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} mimeType
@@ -50506,18 +49366,19 @@ function extend() {
    */
   exports.prototype['encoding'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],220:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -50527,7 +49388,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.Pagination = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -50545,7 +49406,8 @@ function extend() {
    * @param skipCount
    * @param maxItems
    */
-  var exports = function(count, hasMoreItems, skipCount, maxItems) {
+
+  var exports = function exports(count, hasMoreItems, skipCount, maxItems) {
 
     this['count'] = count;
     this['hasMoreItems'] = hasMoreItems;
@@ -50561,8 +49423,8 @@ function extend() {
    * @param {module:model/Pagination} obj Optional instance to populate.
    * @return {module:model/Pagination} The populated <code>Pagination</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('count')) {
@@ -50582,8 +49444,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * The number of objects in the entries array.\n
@@ -50615,18 +49476,19 @@ function extend() {
    */
   exports.prototype['maxItems'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],221:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -50636,7 +49498,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.PathElement = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -50650,11 +49512,8 @@ function extend() {
    * @alias module:model/PathElement
    * @class
    */
-  var exports = function() {
 
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>PathElement</code> from a plain JavaScript object, optionally creating a new instance.
@@ -50663,8 +49522,8 @@ function extend() {
    * @param {module:model/PathElement} obj Optional instance to populate.
    * @return {module:model/PathElement} The populated <code>PathElement</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -50675,8 +49534,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} id
@@ -50688,18 +49546,19 @@ function extend() {
    */
   exports.prototype['name'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],222:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './PathElement'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./PathElement'));
   } else {
@@ -50709,7 +49568,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.PathInfo = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.PathElement);
   }
-}(this, function(ApiClient, PathElement) {
+})(undefined, function (ApiClient, PathElement) {
   'use strict';
 
   /**
@@ -50723,12 +49582,8 @@ function extend() {
    * @alias module:model/PathInfo
    * @class
    */
-  var exports = function() {
 
-
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>PathInfo</code> from a plain JavaScript object, optionally creating a new instance.
@@ -50737,8 +49592,8 @@ function extend() {
    * @param {module:model/PathInfo} obj Optional instance to populate.
    * @return {module:model/PathInfo} The populated <code>PathInfo</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('elements')) {
@@ -50752,8 +49607,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {Array.<module:model/PathElement>} elements
@@ -50770,18 +49624,19 @@ function extend() {
    */
   exports.prototype['isComplete'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./PathElement":221}],223:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './Company'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./Company'));
   } else {
@@ -50791,7 +49646,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.Person = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Company);
   }
-}(this, function(ApiClient, Company) {
+})(undefined, function (ApiClient, Company) {
   'use strict';
 
   /**
@@ -50810,26 +49665,16 @@ function extend() {
    * @param email
    * @param enabled
    */
-  var exports = function(id, firstName, lastName, email, enabled) {
+
+  var exports = function exports(id, firstName, lastName, email, enabled) {
 
     this['id'] = id;
     this['firstName'] = firstName;
     this['lastName'] = lastName;
 
-
     this['email'] = email;
 
-
-
-
-
-
-
-
-
-
     this['enabled'] = enabled;
-
   };
 
   /**
@@ -50839,8 +49684,8 @@ function extend() {
    * @param {module:model/Person} obj Optional instance to populate.
    * @return {module:model/Person} The populated <code>Person</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -50899,8 +49744,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} id
@@ -50993,18 +49837,19 @@ function extend() {
    */
   exports.prototype['emailNotificationsEnabled'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./Company":177}],224:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './Person'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./Person'));
   } else {
@@ -51014,7 +49859,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.PersonEntry = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Person);
   }
-}(this, function(ApiClient, Person) {
+})(undefined, function (ApiClient, Person) {
   'use strict';
 
   /**
@@ -51029,7 +49874,8 @@ function extend() {
    * @class
    * @param entry
    */
-  var exports = function(entry) {
+
+  var exports = function exports(entry) {
 
     this['entry'] = entry;
   };
@@ -51041,8 +49887,8 @@ function extend() {
    * @param {module:model/PersonEntry} obj Optional instance to populate.
    * @return {module:model/PersonEntry} The populated <code>PersonEntry</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -51050,26 +49896,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/Person} entry
    */
   exports.prototype['entry'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./Person":223}],225:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './NetworkQuota'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./NetworkQuota'));
   } else {
@@ -51079,7 +49925,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.PersonNetwork = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.NetworkQuota);
   }
-}(this, function(ApiClient, NetworkQuota) {
+})(undefined, function (ApiClient, NetworkQuota) {
   'use strict';
 
   /**
@@ -51096,15 +49942,12 @@ function extend() {
    * @param id
    * @param isEnabled
    */
-  var exports = function(id, isEnabled) {
+
+  var exports = function exports(id, isEnabled) {
 
     this['id'] = id;
 
     this['isEnabled'] = isEnabled;
-
-
-
-
   };
 
   /**
@@ -51114,8 +49957,8 @@ function extend() {
    * @param {module:model/PersonNetwork} obj Optional instance to populate.
    * @return {module:model/PersonNetwork} The populated <code>PersonNetwork</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -51141,8 +49984,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * This network's unique id
@@ -51181,25 +50023,24 @@ function extend() {
    */
   exports.prototype['quotas'] = undefined;
 
-
   /**
    * Allowed values for the <code>subscriptionLevel</code> property.
    * @enum {String}
    * @readonly
    */
-  exports.SubscriptionLevelEnum = { 
+  exports.SubscriptionLevelEnum = {
     /**
      * value: Free
      * @const
      */
     FREE: "Free",
-    
+
     /**
      * value: Standard
      * @const
      */
     STANDARD: "Standard",
-    
+
     /**
      * value: Enterprise
      * @const
@@ -51208,14 +50049,18 @@ function extend() {
   };
 
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./NetworkQuota":198}],226:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './PersonNetwork'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./PersonNetwork'));
   } else {
@@ -51225,7 +50070,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.PersonNetworkEntry = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.PersonNetwork);
   }
-}(this, function(ApiClient, PersonNetwork) {
+})(undefined, function (ApiClient, PersonNetwork) {
   'use strict';
 
   /**
@@ -51240,7 +50085,8 @@ function extend() {
    * @class
    * @param entry
    */
-  var exports = function(entry) {
+
+  var exports = function exports(entry) {
 
     this['entry'] = entry;
   };
@@ -51252,8 +50098,8 @@ function extend() {
    * @param {module:model/PersonNetworkEntry} obj Optional instance to populate.
    * @return {module:model/PersonNetworkEntry} The populated <code>PersonNetworkEntry</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -51261,26 +50107,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/PersonNetwork} entry
    */
   exports.prototype['entry'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./PersonNetwork":225}],227:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './PersonNetworkPagingList'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./PersonNetworkPagingList'));
   } else {
@@ -51290,7 +50136,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.PersonNetworkPaging = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.PersonNetworkPagingList);
   }
-}(this, function(ApiClient, PersonNetworkPagingList) {
+})(undefined, function (ApiClient, PersonNetworkPagingList) {
   'use strict';
 
   /**
@@ -51304,10 +50150,8 @@ function extend() {
    * @alias module:model/PersonNetworkPaging
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>PersonNetworkPaging</code> from a plain JavaScript object, optionally creating a new instance.
@@ -51316,8 +50160,8 @@ function extend() {
    * @param {module:model/PersonNetworkPaging} obj Optional instance to populate.
    * @return {module:model/PersonNetworkPaging} The populated <code>PersonNetworkPaging</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -51325,26 +50169,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/PersonNetworkPagingList} list
    */
   exports.prototype['list'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./PersonNetworkPagingList":228}],228:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './Pagination', './PersonNetworkEntry'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./Pagination'), require('./PersonNetworkEntry'));
   } else {
@@ -51354,7 +50198,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.PersonNetworkPagingList = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Pagination, root.AlfrescoCoreRestApi.PersonNetworkEntry);
   }
-}(this, function(ApiClient, Pagination, PersonNetworkEntry) {
+})(undefined, function (ApiClient, Pagination, PersonNetworkEntry) {
   'use strict';
 
   /**
@@ -51370,7 +50214,8 @@ function extend() {
    * @param entries
    * @param pagination
    */
-  var exports = function(entries, pagination) {
+
+  var exports = function exports(entries, pagination) {
 
     this['entries'] = entries;
     this['pagination'] = pagination;
@@ -51383,8 +50228,8 @@ function extend() {
    * @param {module:model/PersonNetworkPagingList} obj Optional instance to populate.
    * @return {module:model/PersonNetworkPagingList} The populated <code>PersonNetworkPagingList</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -51395,8 +50240,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {Array.<module:model/PersonNetworkEntry>} entries
@@ -51408,18 +50252,19 @@ function extend() {
    */
   exports.prototype['pagination'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./Pagination":220,"./PersonNetworkEntry":226}],229:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -51429,7 +50274,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.Preference = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -51446,7 +50291,8 @@ function extend() {
    * @param id
    * @param value
    */
-  var exports = function(id, value) {
+
+  var exports = function exports(id, value) {
 
     this['id'] = id;
     this['value'] = value;
@@ -51459,8 +50305,8 @@ function extend() {
    * @param {module:model/Preference} obj Optional instance to populate.
    * @return {module:model/Preference} The populated <code>Preference</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -51471,8 +50317,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * The unique id of the preference
@@ -51486,18 +50331,19 @@ function extend() {
    */
   exports.prototype['value'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],230:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './Preference'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./Preference'));
   } else {
@@ -51507,7 +50353,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.PreferenceEntry = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Preference);
   }
-}(this, function(ApiClient, Preference) {
+})(undefined, function (ApiClient, Preference) {
   'use strict';
 
   /**
@@ -51522,7 +50368,8 @@ function extend() {
    * @class
    * @param entry
    */
-  var exports = function(entry) {
+
+  var exports = function exports(entry) {
 
     this['entry'] = entry;
   };
@@ -51534,8 +50381,8 @@ function extend() {
    * @param {module:model/PreferenceEntry} obj Optional instance to populate.
    * @return {module:model/PreferenceEntry} The populated <code>PreferenceEntry</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -51543,26 +50390,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/Preference} entry
    */
   exports.prototype['entry'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./Preference":229}],231:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './PreferencePagingList'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./PreferencePagingList'));
   } else {
@@ -51572,7 +50419,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.PreferencePaging = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.PreferencePagingList);
   }
-}(this, function(ApiClient, PreferencePagingList) {
+})(undefined, function (ApiClient, PreferencePagingList) {
   'use strict';
 
   /**
@@ -51586,10 +50433,8 @@ function extend() {
    * @alias module:model/PreferencePaging
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>PreferencePaging</code> from a plain JavaScript object, optionally creating a new instance.
@@ -51598,8 +50443,8 @@ function extend() {
    * @param {module:model/PreferencePaging} obj Optional instance to populate.
    * @return {module:model/PreferencePaging} The populated <code>PreferencePaging</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -51607,26 +50452,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/PreferencePagingList} list
    */
   exports.prototype['list'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./PreferencePagingList":232}],232:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './Pagination', './PreferenceEntry'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./Pagination'), require('./PreferenceEntry'));
   } else {
@@ -51636,7 +50481,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.PreferencePagingList = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Pagination, root.AlfrescoCoreRestApi.PreferenceEntry);
   }
-}(this, function(ApiClient, Pagination, PreferenceEntry) {
+})(undefined, function (ApiClient, Pagination, PreferenceEntry) {
   'use strict';
 
   /**
@@ -51652,7 +50497,8 @@ function extend() {
    * @param entries
    * @param pagination
    */
-  var exports = function(entries, pagination) {
+
+  var exports = function exports(entries, pagination) {
 
     this['entries'] = entries;
     this['pagination'] = pagination;
@@ -51665,8 +50511,8 @@ function extend() {
    * @param {module:model/PreferencePagingList} obj Optional instance to populate.
    * @return {module:model/PreferencePagingList} The populated <code>PreferencePagingList</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -51677,8 +50523,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {Array.<module:model/PreferenceEntry>} entries
@@ -51690,18 +50535,19 @@ function extend() {
    */
   exports.prototype['pagination'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./Pagination":220,"./PreferenceEntry":230}],233:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './RatingAggregate'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./RatingAggregate'));
   } else {
@@ -51711,7 +50557,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.Rating = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.RatingAggregate);
   }
-}(this, function(ApiClient, RatingAggregate) {
+})(undefined, function (ApiClient, RatingAggregate) {
   'use strict';
 
   /**
@@ -51727,12 +50573,10 @@ function extend() {
    * @class
    * @param id
    */
-  var exports = function(id) {
+
+  var exports = function exports(id) {
 
     this['id'] = id;
-
-
-
   };
 
   /**
@@ -51742,8 +50586,8 @@ function extend() {
    * @param {module:model/Rating} obj Optional instance to populate.
    * @return {module:model/Rating} The populated <code>Rating</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -51760,8 +50604,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} id
@@ -51784,18 +50627,19 @@ function extend() {
    */
   exports.prototype['myRating'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./RatingAggregate":234}],234:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -51805,7 +50649,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.RatingAggregate = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -51820,8 +50664,8 @@ function extend() {
    * @class
    * @param numberOfRatings
    */
-  var exports = function(numberOfRatings) {
 
+  var exports = function exports(numberOfRatings) {
 
     this['numberOfRatings'] = numberOfRatings;
   };
@@ -51833,8 +50677,8 @@ function extend() {
    * @param {module:model/RatingAggregate} obj Optional instance to populate.
    * @return {module:model/RatingAggregate} The populated <code>RatingAggregate</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('average')) {
@@ -51845,8 +50689,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {Integer} average
@@ -51858,18 +50701,19 @@ function extend() {
    */
   exports.prototype['numberOfRatings'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],235:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -51879,7 +50723,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.RatingBody = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -51895,7 +50739,8 @@ function extend() {
    * @param id
    * @param myRating
    */
-  var exports = function(id, myRating) {
+
+  var exports = function exports(id, myRating) {
 
     this['id'] = id;
     this['myRating'] = myRating;
@@ -51908,8 +50753,8 @@ function extend() {
    * @param {module:model/RatingBody} obj Optional instance to populate.
    * @return {module:model/RatingBody} The populated <code>RatingBody</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -51920,8 +50765,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * The rating scheme type. Possible values are likes and fiveStar.
@@ -51936,19 +50780,18 @@ function extend() {
    */
   exports.prototype['myRating'] = undefined;
 
-
   /**
    * Allowed values for the <code>id</code> property.
    * @enum {String}
    * @readonly
    */
-  exports.IdEnum = { 
+  exports.IdEnum = {
     /**
      * value: likes
      * @const
      */
     LIKES: "likes",
-    
+
     /**
      * value: fiveStar
      * @const
@@ -51957,14 +50800,18 @@ function extend() {
   };
 
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],236:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './Rating'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./Rating'));
   } else {
@@ -51974,7 +50821,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.RatingEntry = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Rating);
   }
-}(this, function(ApiClient, Rating) {
+})(undefined, function (ApiClient, Rating) {
   'use strict';
 
   /**
@@ -51989,7 +50836,8 @@ function extend() {
    * @class
    * @param entry
    */
-  var exports = function(entry) {
+
+  var exports = function exports(entry) {
 
     this['entry'] = entry;
   };
@@ -52001,8 +50849,8 @@ function extend() {
    * @param {module:model/RatingEntry} obj Optional instance to populate.
    * @return {module:model/RatingEntry} The populated <code>RatingEntry</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -52010,26 +50858,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/Rating} entry
    */
   exports.prototype['entry'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./Rating":233}],237:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './RatingPagingList'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./RatingPagingList'));
   } else {
@@ -52039,7 +50887,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.RatingPaging = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.RatingPagingList);
   }
-}(this, function(ApiClient, RatingPagingList) {
+})(undefined, function (ApiClient, RatingPagingList) {
   'use strict';
 
   /**
@@ -52053,10 +50901,8 @@ function extend() {
    * @alias module:model/RatingPaging
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>RatingPaging</code> from a plain JavaScript object, optionally creating a new instance.
@@ -52065,8 +50911,8 @@ function extend() {
    * @param {module:model/RatingPaging} obj Optional instance to populate.
    * @return {module:model/RatingPaging} The populated <code>RatingPaging</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -52074,26 +50920,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/RatingPagingList} list
    */
   exports.prototype['list'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./RatingPagingList":238}],238:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './Pagination', './RatingEntry'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./Pagination'), require('./RatingEntry'));
   } else {
@@ -52103,7 +50949,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.RatingPagingList = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Pagination, root.AlfrescoCoreRestApi.RatingEntry);
   }
-}(this, function(ApiClient, Pagination, RatingEntry) {
+})(undefined, function (ApiClient, Pagination, RatingEntry) {
   'use strict';
 
   /**
@@ -52119,7 +50965,8 @@ function extend() {
    * @param entries
    * @param pagination
    */
-  var exports = function(entries, pagination) {
+
+  var exports = function exports(entries, pagination) {
 
     this['entries'] = entries;
     this['pagination'] = pagination;
@@ -52132,8 +50979,8 @@ function extend() {
    * @param {module:model/RatingPagingList} obj Optional instance to populate.
    * @return {module:model/RatingPagingList} The populated <code>RatingPagingList</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -52144,8 +50991,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {Array.<module:model/RatingEntry>} entries
@@ -52157,18 +51003,19 @@ function extend() {
    */
   exports.prototype['pagination'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./Pagination":220,"./RatingEntry":236}],239:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './ContentInfo'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./ContentInfo'));
   } else {
@@ -52178,7 +51025,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.Rendition = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.ContentInfo);
   }
-}(this, function(ApiClient, ContentInfo) {
+})(undefined, function (ApiClient, ContentInfo) {
   'use strict';
 
   /**
@@ -52192,12 +51039,8 @@ function extend() {
    * @alias module:model/Rendition
    * @class
    */
-  var exports = function() {
 
-
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>Rendition</code> from a plain JavaScript object, optionally creating a new instance.
@@ -52206,8 +51049,8 @@ function extend() {
    * @param {module:model/Rendition} obj Optional instance to populate.
    * @return {module:model/Rendition} The populated <code>Rendition</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -52221,8 +51064,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} id
@@ -52239,18 +51081,19 @@ function extend() {
    */
   exports.prototype['status'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./ContentInfo":178}],240:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -52260,7 +51103,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.RenditionBody = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -52274,10 +51117,8 @@ function extend() {
    * @alias module:model/RenditionBody
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>RenditionBody</code> from a plain JavaScript object, optionally creating a new instance.
@@ -52286,8 +51127,8 @@ function extend() {
    * @param {module:model/RenditionBody} obj Optional instance to populate.
    * @return {module:model/RenditionBody} The populated <code>RenditionBody</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -52295,26 +51136,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} id
    */
   exports.prototype['id'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],241:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './Rendition'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./Rendition'));
   } else {
@@ -52324,7 +51165,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.RenditionEntry = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Rendition);
   }
-}(this, function(ApiClient, Rendition) {
+})(undefined, function (ApiClient, Rendition) {
   'use strict';
 
   /**
@@ -52339,7 +51180,8 @@ function extend() {
    * @class
    * @param entry
    */
-  var exports = function(entry) {
+
+  var exports = function exports(entry) {
 
     this['entry'] = entry;
   };
@@ -52351,8 +51193,8 @@ function extend() {
    * @param {module:model/RenditionEntry} obj Optional instance to populate.
    * @return {module:model/RenditionEntry} The populated <code>RenditionEntry</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -52360,26 +51202,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/Rendition} entry
    */
   exports.prototype['entry'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./Rendition":239}],242:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './RenditionPagingList'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./RenditionPagingList'));
   } else {
@@ -52389,7 +51231,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.RenditionPaging = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.RenditionPagingList);
   }
-}(this, function(ApiClient, RenditionPagingList) {
+})(undefined, function (ApiClient, RenditionPagingList) {
   'use strict';
 
   /**
@@ -52403,10 +51245,8 @@ function extend() {
    * @alias module:model/RenditionPaging
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>RenditionPaging</code> from a plain JavaScript object, optionally creating a new instance.
@@ -52415,8 +51255,8 @@ function extend() {
    * @param {module:model/RenditionPaging} obj Optional instance to populate.
    * @return {module:model/RenditionPaging} The populated <code>RenditionPaging</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -52424,26 +51264,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/RenditionPagingList} list
    */
   exports.prototype['list'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./RenditionPagingList":243}],243:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './Pagination', './RenditionEntry'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./Pagination'), require('./RenditionEntry'));
   } else {
@@ -52453,7 +51293,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.RenditionPagingList = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Pagination, root.AlfrescoCoreRestApi.RenditionEntry);
   }
-}(this, function(ApiClient, Pagination, RenditionEntry) {
+})(undefined, function (ApiClient, Pagination, RenditionEntry) {
   'use strict';
 
   /**
@@ -52467,11 +51307,8 @@ function extend() {
    * @alias module:model/RenditionPagingList
    * @class
    */
-  var exports = function() {
 
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>RenditionPagingList</code> from a plain JavaScript object, optionally creating a new instance.
@@ -52480,8 +51317,8 @@ function extend() {
    * @param {module:model/RenditionPagingList} obj Optional instance to populate.
    * @return {module:model/RenditionPagingList} The populated <code>RenditionPagingList</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -52492,8 +51329,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {Array.<module:model/RenditionEntry>} entries
@@ -52505,18 +51341,19 @@ function extend() {
    */
   exports.prototype['pagination'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./Pagination":220,"./RenditionEntry":241}],244:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -52526,7 +51363,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.SharedLinkBody = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -52540,10 +51377,8 @@ function extend() {
    * @alias module:model/SharedLinkBody
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>SharedLinkBody</code> from a plain JavaScript object, optionally creating a new instance.
@@ -52552,8 +51387,8 @@ function extend() {
    * @param {module:model/SharedLinkBody} obj Optional instance to populate.
    * @return {module:model/SharedLinkBody} The populated <code>SharedLinkBody</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('nodeId')) {
@@ -52561,26 +51396,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} nodeId
    */
   exports.prototype['nodeId'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],245:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -52590,7 +51425,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.Site = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -52608,14 +51443,14 @@ function extend() {
    * @param title
    * @param visibility
    */
-  var exports = function(id, guid, title, visibility) {
+
+  var exports = function exports(id, guid, title, visibility) {
 
     this['id'] = id;
     this['guid'] = guid;
     this['title'] = title;
 
     this['visibility'] = visibility;
-
   };
 
   /**
@@ -52625,8 +51460,8 @@ function extend() {
    * @param {module:model/Site} obj Optional instance to populate.
    * @return {module:model/Site} The populated <code>Site</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -52649,8 +51484,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} id
@@ -52682,25 +51516,24 @@ function extend() {
    */
   exports.prototype['role'] = undefined;
 
-
   /**
    * Allowed values for the <code>visibility</code> property.
    * @enum {String}
    * @readonly
    */
-  exports.VisibilityEnum = { 
+  exports.VisibilityEnum = {
     /**
      * value: PRIVATE
      * @const
      */
     PRIVATE: "PRIVATE",
-    
+
     /**
      * value: MODERATED
      * @const
      */
     MODERATED: "MODERATED",
-    
+
     /**
      * value: PUBLIC
      * @const
@@ -52709,14 +51542,18 @@ function extend() {
   };
 
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],246:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -52726,7 +51563,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.SiteBody = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -52742,8 +51579,8 @@ function extend() {
    * @param title
    * @param visibility
    */
-  var exports = function(title, visibility) {
 
+  var exports = function exports(title, visibility) {
 
     this['title'] = title;
 
@@ -52757,8 +51594,8 @@ function extend() {
    * @param {module:model/SiteBody} obj Optional instance to populate.
    * @return {module:model/SiteBody} The populated <code>SiteBody</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -52775,8 +51612,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} id
@@ -52799,25 +51635,24 @@ function extend() {
    */
   exports.prototype['visibility'] = 'PUBLIC';
 
-
   /**
    * Allowed values for the <code>visibility</code> property.
    * @enum {String}
    * @readonly
    */
-  exports.VisibilityEnum = { 
+  exports.VisibilityEnum = {
     /**
      * value: PUBLIC
      * @const
      */
     PUBLIC: "PUBLIC",
-    
+
     /**
      * value: PRIVATE
      * @const
      */
     PRIVATE: "PRIVATE",
-    
+
     /**
      * value: MODERATED
      * @const
@@ -52826,14 +51661,18 @@ function extend() {
   };
 
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],247:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -52843,7 +51682,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.SiteContainer = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -52859,7 +51698,8 @@ function extend() {
    * @param id
    * @param folderId
    */
-  var exports = function(id, folderId) {
+
+  var exports = function exports(id, folderId) {
 
     this['id'] = id;
     this['folderId'] = folderId;
@@ -52872,8 +51712,8 @@ function extend() {
    * @param {module:model/SiteContainer} obj Optional instance to populate.
    * @return {module:model/SiteContainer} The populated <code>SiteContainer</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -52884,8 +51724,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} id
@@ -52897,18 +51736,19 @@ function extend() {
    */
   exports.prototype['folderId'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],248:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './SiteContainer'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./SiteContainer'));
   } else {
@@ -52918,7 +51758,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.SiteContainerEntry = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.SiteContainer);
   }
-}(this, function(ApiClient, SiteContainer) {
+})(undefined, function (ApiClient, SiteContainer) {
   'use strict';
 
   /**
@@ -52933,7 +51773,8 @@ function extend() {
    * @class
    * @param entry
    */
-  var exports = function(entry) {
+
+  var exports = function exports(entry) {
 
     this['entry'] = entry;
   };
@@ -52945,8 +51786,8 @@ function extend() {
    * @param {module:model/SiteContainerEntry} obj Optional instance to populate.
    * @return {module:model/SiteContainerEntry} The populated <code>SiteContainerEntry</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -52954,26 +51795,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/SiteContainer} entry
    */
   exports.prototype['entry'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./SiteContainer":247}],249:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './SitePagingList'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./SitePagingList'));
   } else {
@@ -52983,7 +51824,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.SiteContainerPaging = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.SitePagingList);
   }
-}(this, function(ApiClient, SitePagingList) {
+})(undefined, function (ApiClient, SitePagingList) {
   'use strict';
 
   /**
@@ -52997,10 +51838,8 @@ function extend() {
    * @alias module:model/SiteContainerPaging
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>SiteContainerPaging</code> from a plain JavaScript object, optionally creating a new instance.
@@ -53009,8 +51848,8 @@ function extend() {
    * @param {module:model/SiteContainerPaging} obj Optional instance to populate.
    * @return {module:model/SiteContainerPaging} The populated <code>SiteContainerPaging</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -53018,26 +51857,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/SitePagingList} list
    */
   exports.prototype['list'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./SitePagingList":263}],250:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './Site'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./Site'));
   } else {
@@ -53047,7 +51886,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.SiteEntry = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Site);
   }
-}(this, function(ApiClient, Site) {
+})(undefined, function (ApiClient, Site) {
   'use strict';
 
   /**
@@ -53062,7 +51901,8 @@ function extend() {
    * @class
    * @param entry
    */
-  var exports = function(entry) {
+
+  var exports = function exports(entry) {
 
     this['entry'] = entry;
   };
@@ -53074,8 +51914,8 @@ function extend() {
    * @param {module:model/SiteEntry} obj Optional instance to populate.
    * @return {module:model/SiteEntry} The populated <code>SiteEntry</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -53083,26 +51923,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/Site} entry
    */
   exports.prototype['entry'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./Site":245}],251:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './Person'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./Person'));
   } else {
@@ -53112,7 +51952,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.SiteMember = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Person);
   }
-}(this, function(ApiClient, Person) {
+})(undefined, function (ApiClient, Person) {
   'use strict';
 
   /**
@@ -53129,7 +51969,8 @@ function extend() {
    * @param person
    * @param role
    */
-  var exports = function(id, person, role) {
+
+  var exports = function exports(id, person, role) {
 
     this['id'] = id;
     this['person'] = person;
@@ -53143,8 +51984,8 @@ function extend() {
    * @param {module:model/SiteMember} obj Optional instance to populate.
    * @return {module:model/SiteMember} The populated <code>SiteMember</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -53158,8 +51999,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} id
@@ -53176,31 +52016,30 @@ function extend() {
    */
   exports.prototype['role'] = undefined;
 
-
   /**
    * Allowed values for the <code>role</code> property.
    * @enum {String}
    * @readonly
    */
-  exports.RoleEnum = { 
+  exports.RoleEnum = {
     /**
      * value: SiteConsumer
      * @const
      */
     SITECONSUMER: "SiteConsumer",
-    
+
     /**
      * value: SiteCollaborator
      * @const
      */
     SITECOLLABORATOR: "SiteCollaborator",
-    
+
     /**
      * value: SiteContributor
      * @const
      */
     SITECONTRIBUTOR: "SiteContributor",
-    
+
     /**
      * value: SiteManager
      * @const
@@ -53209,14 +52048,18 @@ function extend() {
   };
 
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./Person":223}],252:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -53226,7 +52069,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.SiteMemberBody = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -53240,11 +52083,8 @@ function extend() {
    * @alias module:model/SiteMemberBody
    * @class
    */
-  var exports = function() {
 
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>SiteMemberBody</code> from a plain JavaScript object, optionally creating a new instance.
@@ -53253,8 +52093,8 @@ function extend() {
    * @param {module:model/SiteMemberBody} obj Optional instance to populate.
    * @return {module:model/SiteMemberBody} The populated <code>SiteMemberBody</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('role')) {
@@ -53265,8 +52105,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/SiteMemberBody.RoleEnum} role
@@ -53278,31 +52117,30 @@ function extend() {
    */
   exports.prototype['id'] = undefined;
 
-
   /**
    * Allowed values for the <code>role</code> property.
    * @enum {String}
    * @readonly
    */
-  exports.RoleEnum = { 
+  exports.RoleEnum = {
     /**
      * value: SiteConsumer
      * @const
      */
     SITECONSUMER: "SiteConsumer",
-    
+
     /**
      * value: SiteCollaborator
      * @const
      */
     SITECOLLABORATOR: "SiteCollaborator",
-    
+
     /**
      * value: SiteContributor
      * @const
      */
     SITECONTRIBUTOR: "SiteContributor",
-    
+
     /**
      * value: SiteManager
      * @const
@@ -53311,14 +52149,18 @@ function extend() {
   };
 
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],253:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './SiteMember'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./SiteMember'));
   } else {
@@ -53328,7 +52170,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.SiteMemberEntry = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.SiteMember);
   }
-}(this, function(ApiClient, SiteMember) {
+})(undefined, function (ApiClient, SiteMember) {
   'use strict';
 
   /**
@@ -53343,7 +52185,8 @@ function extend() {
    * @class
    * @param entry
    */
-  var exports = function(entry) {
+
+  var exports = function exports(entry) {
 
     this['entry'] = entry;
   };
@@ -53355,8 +52198,8 @@ function extend() {
    * @param {module:model/SiteMemberEntry} obj Optional instance to populate.
    * @return {module:model/SiteMemberEntry} The populated <code>SiteMemberEntry</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -53364,26 +52207,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/SiteMember} entry
    */
   exports.prototype['entry'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./SiteMember":251}],254:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './SitePagingList'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./SitePagingList'));
   } else {
@@ -53393,7 +52236,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.SiteMemberPaging = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.SitePagingList);
   }
-}(this, function(ApiClient, SitePagingList) {
+})(undefined, function (ApiClient, SitePagingList) {
   'use strict';
 
   /**
@@ -53407,10 +52250,8 @@ function extend() {
    * @alias module:model/SiteMemberPaging
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>SiteMemberPaging</code> from a plain JavaScript object, optionally creating a new instance.
@@ -53419,8 +52260,8 @@ function extend() {
    * @param {module:model/SiteMemberPaging} obj Optional instance to populate.
    * @return {module:model/SiteMemberPaging} The populated <code>SiteMemberPaging</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -53428,26 +52269,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/SitePagingList} list
    */
   exports.prototype['list'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./SitePagingList":263}],255:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -53457,7 +52298,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.SiteMemberRoleBody = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -53471,10 +52312,8 @@ function extend() {
    * @alias module:model/SiteMemberRoleBody
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>SiteMemberRoleBody</code> from a plain JavaScript object, optionally creating a new instance.
@@ -53483,8 +52322,8 @@ function extend() {
    * @param {module:model/SiteMemberRoleBody} obj Optional instance to populate.
    * @return {module:model/SiteMemberRoleBody} The populated <code>SiteMemberRoleBody</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('role')) {
@@ -53492,39 +52331,37 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/SiteMemberRoleBody.RoleEnum} role
    */
   exports.prototype['role'] = undefined;
 
-
   /**
    * Allowed values for the <code>role</code> property.
    * @enum {String}
    * @readonly
    */
-  exports.RoleEnum = { 
+  exports.RoleEnum = {
     /**
      * value: SiteConsumer
      * @const
      */
     SITECONSUMER: "SiteConsumer",
-    
+
     /**
      * value: SiteCollaborator
      * @const
      */
     SITECOLLABORATOR: "SiteCollaborator",
-    
+
     /**
      * value: SiteContributor
      * @const
      */
     SITECONTRIBUTOR: "SiteContributor",
-    
+
     /**
      * value: SiteManager
      * @const
@@ -53533,14 +52370,18 @@ function extend() {
   };
 
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],256:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -53550,7 +52391,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.SiteMembershipBody = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -53564,12 +52405,8 @@ function extend() {
    * @alias module:model/SiteMembershipBody
    * @class
    */
-  var exports = function() {
 
-
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>SiteMembershipBody</code> from a plain JavaScript object, optionally creating a new instance.
@@ -53578,8 +52415,8 @@ function extend() {
    * @param {module:model/SiteMembershipBody} obj Optional instance to populate.
    * @return {module:model/SiteMembershipBody} The populated <code>SiteMembershipBody</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('message')) {
@@ -53593,8 +52430,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} message
@@ -53611,18 +52447,19 @@ function extend() {
    */
   exports.prototype['title'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],257:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -53632,7 +52469,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.SiteMembershipBody1 = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -53646,10 +52483,8 @@ function extend() {
    * @alias module:model/SiteMembershipBody1
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>SiteMembershipBody1</code> from a plain JavaScript object, optionally creating a new instance.
@@ -53658,8 +52493,8 @@ function extend() {
    * @param {module:model/SiteMembershipBody1} obj Optional instance to populate.
    * @return {module:model/SiteMembershipBody1} The populated <code>SiteMembershipBody1</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('message')) {
@@ -53667,26 +52502,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} message
    */
   exports.prototype['message'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],258:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './Site'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./Site'));
   } else {
@@ -53696,7 +52531,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.SiteMembershipRequest = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Site);
   }
-}(this, function(ApiClient, Site) {
+})(undefined, function (ApiClient, Site) {
   'use strict';
 
   /**
@@ -53713,7 +52548,8 @@ function extend() {
    * @param createdAt
    * @param entry
    */
-  var exports = function(id, createdAt, entry) {
+
+  var exports = function exports(id, createdAt, entry) {
 
     this['id'] = id;
     this['createdAt'] = createdAt;
@@ -53727,8 +52563,8 @@ function extend() {
    * @param {module:model/SiteMembershipRequest} obj Optional instance to populate.
    * @return {module:model/SiteMembershipRequest} The populated <code>SiteMembershipRequest</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -53742,8 +52578,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} id
@@ -53760,18 +52595,19 @@ function extend() {
    */
   exports.prototype['entry'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./Site":245}],259:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './SiteMembershipRequest'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./SiteMembershipRequest'));
   } else {
@@ -53781,7 +52617,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.SiteMembershipRequestEntry = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.SiteMembershipRequest);
   }
-}(this, function(ApiClient, SiteMembershipRequest) {
+})(undefined, function (ApiClient, SiteMembershipRequest) {
   'use strict';
 
   /**
@@ -53796,7 +52632,8 @@ function extend() {
    * @class
    * @param entry
    */
-  var exports = function(entry) {
+
+  var exports = function exports(entry) {
 
     this['entry'] = entry;
   };
@@ -53808,8 +52645,8 @@ function extend() {
    * @param {module:model/SiteMembershipRequestEntry} obj Optional instance to populate.
    * @return {module:model/SiteMembershipRequestEntry} The populated <code>SiteMembershipRequestEntry</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -53817,26 +52654,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/SiteMembershipRequest} entry
    */
   exports.prototype['entry'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./SiteMembershipRequest":258}],260:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './SiteMembershipRequestPagingList'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./SiteMembershipRequestPagingList'));
   } else {
@@ -53846,7 +52683,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.SiteMembershipRequestPaging = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.SiteMembershipRequestPagingList);
   }
-}(this, function(ApiClient, SiteMembershipRequestPagingList) {
+})(undefined, function (ApiClient, SiteMembershipRequestPagingList) {
   'use strict';
 
   /**
@@ -53860,10 +52697,8 @@ function extend() {
    * @alias module:model/SiteMembershipRequestPaging
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>SiteMembershipRequestPaging</code> from a plain JavaScript object, optionally creating a new instance.
@@ -53872,8 +52707,8 @@ function extend() {
    * @param {module:model/SiteMembershipRequestPaging} obj Optional instance to populate.
    * @return {module:model/SiteMembershipRequestPaging} The populated <code>SiteMembershipRequestPaging</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -53881,26 +52716,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/SiteMembershipRequestPagingList} list
    */
   exports.prototype['list'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./SiteMembershipRequestPagingList":261}],261:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './Pagination', './SiteMembershipRequestEntry'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./Pagination'), require('./SiteMembershipRequestEntry'));
   } else {
@@ -53910,7 +52745,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.SiteMembershipRequestPagingList = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Pagination, root.AlfrescoCoreRestApi.SiteMembershipRequestEntry);
   }
-}(this, function(ApiClient, Pagination, SiteMembershipRequestEntry) {
+})(undefined, function (ApiClient, Pagination, SiteMembershipRequestEntry) {
   'use strict';
 
   /**
@@ -53926,7 +52761,8 @@ function extend() {
    * @param entries
    * @param pagination
    */
-  var exports = function(entries, pagination) {
+
+  var exports = function exports(entries, pagination) {
 
     this['entries'] = entries;
     this['pagination'] = pagination;
@@ -53939,8 +52775,8 @@ function extend() {
    * @param {module:model/SiteMembershipRequestPagingList} obj Optional instance to populate.
    * @return {module:model/SiteMembershipRequestPagingList} The populated <code>SiteMembershipRequestPagingList</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -53951,8 +52787,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {Array.<module:model/SiteMembershipRequestEntry>} entries
@@ -53964,18 +52799,19 @@ function extend() {
    */
   exports.prototype['pagination'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./Pagination":220,"./SiteMembershipRequestEntry":259}],262:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './SitePagingList'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./SitePagingList'));
   } else {
@@ -53985,7 +52821,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.SitePaging = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.SitePagingList);
   }
-}(this, function(ApiClient, SitePagingList) {
+})(undefined, function (ApiClient, SitePagingList) {
   'use strict';
 
   /**
@@ -53999,10 +52835,8 @@ function extend() {
    * @alias module:model/SitePaging
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>SitePaging</code> from a plain JavaScript object, optionally creating a new instance.
@@ -54011,8 +52845,8 @@ function extend() {
    * @param {module:model/SitePaging} obj Optional instance to populate.
    * @return {module:model/SitePaging} The populated <code>SitePaging</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -54020,26 +52854,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/SitePagingList} list
    */
   exports.prototype['list'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./SitePagingList":263}],263:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './Pagination'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./Pagination'));
   } else {
@@ -54049,7 +52883,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.SitePagingList = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Pagination);
   }
-}(this, function(ApiClient, Pagination) {
+})(undefined, function (ApiClient, Pagination) {
   'use strict';
 
   /**
@@ -54064,7 +52898,8 @@ function extend() {
    * @class
    * @param pagination
    */
-  var exports = function(pagination) {
+
+  var exports = function exports(pagination) {
 
     this['pagination'] = pagination;
   };
@@ -54076,8 +52911,8 @@ function extend() {
    * @param {module:model/SitePagingList} obj Optional instance to populate.
    * @return {module:model/SitePagingList} The populated <code>SitePagingList</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('pagination')) {
@@ -54085,26 +52920,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/Pagination} pagination
    */
   exports.prototype['pagination'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./Pagination":220}],264:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -54114,7 +52949,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.Tag = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -54130,7 +52965,8 @@ function extend() {
    * @param id
    * @param tag
    */
-  var exports = function(id, tag) {
+
+  var exports = function exports(id, tag) {
 
     this['id'] = id;
     this['tag'] = tag;
@@ -54143,8 +52979,8 @@ function extend() {
    * @param {module:model/Tag} obj Optional instance to populate.
    * @return {module:model/Tag} The populated <code>Tag</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -54155,8 +52991,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} id
@@ -54168,18 +53003,19 @@ function extend() {
    */
   exports.prototype['tag'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],265:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -54189,7 +53025,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.TagBody = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -54204,7 +53040,8 @@ function extend() {
    * @class
    * @param tag
    */
-  var exports = function(tag) {
+
+  var exports = function exports(tag) {
 
     this['tag'] = tag;
   };
@@ -54216,8 +53053,8 @@ function extend() {
    * @param {module:model/TagBody} obj Optional instance to populate.
    * @return {module:model/TagBody} The populated <code>TagBody</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('tag')) {
@@ -54225,26 +53062,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} tag
    */
   exports.prototype['tag'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],266:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -54254,7 +53091,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.TagBody1 = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -54268,10 +53105,8 @@ function extend() {
    * @alias module:model/TagBody1
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>TagBody1</code> from a plain JavaScript object, optionally creating a new instance.
@@ -54280,8 +53115,8 @@ function extend() {
    * @param {module:model/TagBody1} obj Optional instance to populate.
    * @return {module:model/TagBody1} The populated <code>TagBody1</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('tag')) {
@@ -54289,26 +53124,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} tag
    */
   exports.prototype['tag'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],267:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './Tag'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./Tag'));
   } else {
@@ -54318,7 +53153,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.TagEntry = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Tag);
   }
-}(this, function(ApiClient, Tag) {
+})(undefined, function (ApiClient, Tag) {
   'use strict';
 
   /**
@@ -54333,7 +53168,8 @@ function extend() {
    * @class
    * @param entry
    */
-  var exports = function(entry) {
+
+  var exports = function exports(entry) {
 
     this['entry'] = entry;
   };
@@ -54345,8 +53181,8 @@ function extend() {
    * @param {module:model/TagEntry} obj Optional instance to populate.
    * @return {module:model/TagEntry} The populated <code>TagEntry</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {
@@ -54354,26 +53190,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/Tag} entry
    */
   exports.prototype['entry'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./Tag":264}],268:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './TagPagingList'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./TagPagingList'));
   } else {
@@ -54383,7 +53219,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.TagPaging = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.TagPagingList);
   }
-}(this, function(ApiClient, TagPagingList) {
+})(undefined, function (ApiClient, TagPagingList) {
   'use strict';
 
   /**
@@ -54397,10 +53233,8 @@ function extend() {
    * @alias module:model/TagPaging
    * @class
    */
-  var exports = function() {
 
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>TagPaging</code> from a plain JavaScript object, optionally creating a new instance.
@@ -54409,8 +53243,8 @@ function extend() {
    * @param {module:model/TagPaging} obj Optional instance to populate.
    * @return {module:model/TagPaging} The populated <code>TagPaging</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('list')) {
@@ -54418,26 +53252,26 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {module:model/TagPagingList} list
    */
   exports.prototype['list'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./TagPagingList":269}],269:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', './Pagination', './TagEntry'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('./Pagination'), require('./TagEntry'));
   } else {
@@ -54447,7 +53281,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.TagPagingList = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Pagination, root.AlfrescoCoreRestApi.TagEntry);
   }
-}(this, function(ApiClient, Pagination, TagEntry) {
+})(undefined, function (ApiClient, Pagination, TagEntry) {
   'use strict';
 
   /**
@@ -54463,7 +53297,8 @@ function extend() {
    * @param entries
    * @param pagination
    */
-  var exports = function(entries, pagination) {
+
+  var exports = function exports(entries, pagination) {
 
     this['entries'] = entries;
     this['pagination'] = pagination;
@@ -54476,8 +53311,8 @@ function extend() {
    * @param {module:model/TagPagingList} obj Optional instance to populate.
    * @return {module:model/TagPagingList} The populated <code>TagPagingList</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entries')) {
@@ -54488,8 +53323,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {Array.<module:model/TagEntry>} entries
@@ -54501,18 +53335,19 @@ function extend() {
    */
   exports.prototype['pagination'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146,"./Pagination":220,"./TagEntry":267}],270:[function(require,module,exports){
-(function(root, factory) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'));
   } else {
@@ -54522,7 +53357,7 @@ function extend() {
     }
     root.AlfrescoCoreRestApi.UserInfo = factory(root.AlfrescoCoreRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+})(undefined, function (ApiClient) {
   'use strict';
 
   /**
@@ -54536,11 +53371,8 @@ function extend() {
    * @alias module:model/UserInfo
    * @class
    */
-  var exports = function() {
 
-
-
-  };
+  var exports = function exports() {};
 
   /**
    * Constructs a <code>UserInfo</code> from a plain JavaScript object, optionally creating a new instance.
@@ -54549,8 +53381,8 @@ function extend() {
    * @param {module:model/UserInfo} obj Optional instance to populate.
    * @return {module:model/UserInfo} The populated <code>UserInfo</code> instance.
    */
-  exports.constructFromObject = function(data, obj) {
-    if (data) { 
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('displayName')) {
@@ -54561,8 +53393,7 @@ function extend() {
       }
     }
     return obj;
-  }
-
+  };
 
   /**
    * @member {String} displayName
@@ -54574,14 +53405,15 @@ function extend() {
    */
   exports.prototype['id'] = undefined;
 
-
-
-
   return exports;
-}));
+});
 
 },{"../ApiClient":146}],271:[function(require,module,exports){
 'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
 var AlfrescoAuthRestApi = require('./alfresco-auth-rest-api/src/index');
@@ -54594,181 +53426,218 @@ var AlfrescoUpload = require('./alfrescoUpload');
 var AlfrescoWebScriptApi = require('./alfrescoWebScript');
 var Emitter = require('event-emitter');
 
-class AlfrescoApi {
+var AlfrescoApi = function () {
     /**
      * @param {Object} config
      *
      *      config = {
      *        host:       // alfrescoHost Your share server IP or DNS name
+     *        contextRoot: // contextRoot default value alfresco
      *        username:   // Username to login in share
      *        password:   // Password to login in share
      *        ticket:     // Ticket if you already have a ticket you can pass only the ticket and skip the login, in this case you don't need username and password
      *    };
      */
-    constructor(config) {
+
+    function AlfrescoApi(config) {
+        _classCallCheck(this, AlfrescoApi);
+
         this.changeConfig(config);
         Emitter.call(this);
     }
 
     /**
-     * return an Alfresco API Client
-     *
-     * */
-    createClients() {
-        this.alfrescoClient = new AlfrescoApiClient();
-        this.alfrescoClientAuth = new AlfrescoApiClient();
-    }
-
-    /**
      * @param {Object} config
      *
      *      config = {
      *        host:       // alfrescoHost Your share server IP or DNS name
+     *        contextRoot: // contextRoot default value alfresco
      *        username:   // Username to login in share
      *        password:   // Password to login in share
      *        ticket:     // Ticket if you already have a ticket you can pass only the ticket and skip the login, in this case you don't need username and password
      *    };
      * */
-    changeConfig(config) {
-        this.config = {
-            host: config.host,
-            contextRoot: config.contextRoot || 'alfresco',
-            username: config.username,
-            password: config.password,
-            ticket: config.ticket
-        };
 
-        this.apiAuthUrl = this.config.host + '/alfresco/api/-default-/public/authentication/versions/1'; //Auth Call
-        this.apiCoreUrl = this.config.host + '/alfresco/api/-default-/public/alfresco/versions/1';   //Core Call
 
-        this.createClients();
+    _createClass(AlfrescoApi, [{
+        key: 'changeConfig',
+        value: function changeConfig(config) {
+            this.config = {
+                host: config.host || 'http://127.0.0.1:8080',
+                contextRoot: config.contextRoot || 'alfresco',
+                username: config.username,
+                password: config.password,
+                ticket: config.ticket
+            };
 
-        AlfrescoCoreRestApi.ApiClient.instance = this.getClient();
-        this.nodes = this.node = new AlfrescoNode();
-        this.search = new AlfrescoSearch();
-        this.content = new AlfrescoContent(this.apiCoreUrl, this.config);
-        this.upload = new AlfrescoUpload();
-        this.webScript = new AlfrescoWebScriptApi();
-    }
+            this.apiAuthUrl = this.config.host + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
+            this.apiCoreUrl = this.config.host + '/' + this.config.contextRoot + '/api/-default-/public/alfresco/versions/1'; //Core Call
 
-    /**
-     * return an Alfresco API Client
-     *
-     * @returns {ApiClient} Alfresco API Client
-     * */
-    getClient() {
-        if (this.alfrescoClient) {
-            this.alfrescoClient.basePath = this.apiCoreUrl;
-            this.alfrescoClient.authentications.basicAuth.username = 'ROLE_TICKET';
-            this.alfrescoClient.authentications.basicAuth.password = this.config.ticket;
-            return this.alfrescoClient;
+            this.createClients(this.config.host);
+
+            AlfrescoCoreRestApi.ApiClient.instance = this.getClient();
+            this.nodes = this.node = new AlfrescoNode();
+            this.search = new AlfrescoSearch();
+            this.content = new AlfrescoContent(this.apiCoreUrl, this.config);
+            this.upload = new AlfrescoUpload();
+            this.webScript = new AlfrescoWebScriptApi();
         }
-    }
 
-    /**
-     * return an Alfresco API Client
-     *
-     * @returns {ApiClient} Alfresco API Client
-     * */
-    getClientAuth() {
-        if (this.alfrescoClientAuth) {
-            this.alfrescoClientAuth.basePath = this.apiAuthUrl;
-            this.alfrescoClientAuth.authentications.basicAuth.username = 'ROLE_TICKET';
-            this.alfrescoClientAuth.authentications.basicAuth.password = this.config.ticket;
-            return this.alfrescoClientAuth;
+        /**
+         * build  Alfresco API Clients
+         *
+         * @param {String} host
+         * */
+
+    }, {
+        key: 'createClients',
+        value: function createClients(host) {
+            this.alfrescoClient = new AlfrescoApiClient(host);
+            this.alfrescoClientAuth = new AlfrescoApiClient(host);
         }
-    }
 
-    /**
-     * login Alfresco API
-     *
-     * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
-     * */
-    login() {
-        var apiInstance = new AlfrescoAuthRestApi.AuthenticationApi(this.getClientAuth());
-        var loginRequest = new AlfrescoAuthRestApi.LoginRequest();
+        /**
+         * return an Alfresco API Client
+         *
+         * @returns {ApiClient} Alfresco API Client
+         * */
 
-        loginRequest.userId = this.config.username;
-        loginRequest.password = this.config.password;
+    }, {
+        key: 'getClient',
+        value: function getClient() {
+            if (this.alfrescoClient) {
+                this.alfrescoClient.basePath = this.apiCoreUrl;
+                this.alfrescoClient.authentications.basicAuth.username = 'ROLE_TICKET';
+                this.alfrescoClient.authentications.basicAuth.password = this.config.ticket;
+                return this.alfrescoClient;
+            }
+        }
 
-        this.promise = new Promise((resolve, reject) => {
-            apiInstance.createTicket(loginRequest).then(
-                (data) => {
-                    this.setTicket(data.entry.id);
-                    this.promise.emit('success');
+        /**
+         * return an Alfresco API Client
+         *
+         * @returns {ApiClient} Alfresco API Client
+         * */
+
+    }, {
+        key: 'getClientAuth',
+        value: function getClientAuth() {
+            if (this.alfrescoClientAuth) {
+                this.alfrescoClientAuth.basePath = this.apiAuthUrl;
+                this.alfrescoClientAuth.authentications.basicAuth.username = 'ROLE_TICKET';
+                this.alfrescoClientAuth.authentications.basicAuth.password = this.config.ticket;
+                return this.alfrescoClientAuth;
+            }
+        }
+
+        /**
+         * login Alfresco API
+         *
+         * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
+         * */
+
+    }, {
+        key: 'login',
+        value: function login() {
+            var _this = this;
+
+            var apiInstance = new AlfrescoAuthRestApi.AuthenticationApi(this.getClientAuth());
+            var loginRequest = new AlfrescoAuthRestApi.LoginRequest();
+
+            loginRequest.userId = this.config.username;
+            loginRequest.password = this.config.password;
+
+            this.promise = new Promise(function (resolve, reject) {
+                apiInstance.createTicket(loginRequest).then(function (data) {
+                    _this.setTicket(data.entry.id);
+                    _this.promise.emit('success');
                     resolve(data.entry.id);
-                },
-                (error) => {
+                }, function (error) {
                     if (error.status === 401) {
-                        this.promise.emit('unauthorized');
+                        _this.promise.emit('unauthorized');
                     }
-                    this.promise.emit('error');
+                    _this.promise.emit('error');
                     reject(error);
                 });
-        });
+            });
 
-        Emitter(this.promise); // jshint ignore:line
+            Emitter(this.promise); // jshint ignore:line
 
-        return this.promise;
-    }
+            return this.promise;
+        }
 
-    /**
-     * logout Alfresco API
-     *
-     * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
-     * */
-    logout() {
-        var apiInstance = new AlfrescoAuthRestApi.AuthenticationApi(this.getClientAuth());
+        /**
+         * logout Alfresco API
+         *
+         * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
+         * */
 
-        this.promise = new Promise((resolve, reject) => {
-            apiInstance.deleteTicket().then(
-                (data) => {
-                    this.promise.emit('logout');
-                    this.setTicket(undefined);
+    }, {
+        key: 'logout',
+        value: function logout() {
+            var _this2 = this;
+
+            var apiInstance = new AlfrescoAuthRestApi.AuthenticationApi(this.getClientAuth());
+
+            this.promise = new Promise(function (resolve, reject) {
+                apiInstance.deleteTicket().then(function (data) {
+                    _this2.promise.emit('logout');
+                    _this2.setTicket(undefined);
                     resolve('logout');
-                },
-                (error) => {
+                }, function (error) {
                     if (error.status === 401) {
-                        this.promise.emit('unauthorized');
+                        _this2.promise.emit('unauthorized');
                     }
-                    this.promise.emit('error');
+                    _this2.promise.emit('error');
                     reject(error);
                 });
-        });
+            });
 
-        Emitter(this.promise); // jshint ignore:line
+            Emitter(this.promise); // jshint ignore:line
 
-        return this.promise;
-    }
+            return this.promise;
+        }
 
-    /**
-     * If the client is logged in retun true
-     *
-     * @returns {Boolean} is logged in
-     */
-    isLoggedIn() {
-        return !!this.config.ticket;
-    }
+        /**
+         * If the client is logged in retun true
+         *
+         * @returns {Boolean} is logged in
+         */
 
-    /**
-     * Set the current Ticket
-     *
-     * @param {String} Ticket
-     * */
-    setTicket(ticket) {
-        this.config.ticket = ticket;
-        this.alfrescoClient.authentications.basicAuth.password = ticket;
-    }
+    }, {
+        key: 'isLoggedIn',
+        value: function isLoggedIn() {
+            return !!this.config.ticket;
+        }
 
-    /**
-     * Get the current Ticket
-     *
-     * @returns {String} Ticket
-     * */
-    getTicket() {
-        return this.config.ticket;
-    }
-}
+        /**
+         * Set the current Ticket
+         *
+         * @param {String} Ticket
+         * */
+
+    }, {
+        key: 'setTicket',
+        value: function setTicket(ticket) {
+            this.config.ticket = ticket;
+            this.alfrescoClient.authentications.basicAuth.password = ticket;
+        }
+
+        /**
+         * Get the current Ticket
+         *
+         * @returns {String} Ticket
+         * */
+
+    }, {
+        key: 'getTicket',
+        value: function getTicket() {
+            return this.config.ticket;
+        }
+    }]);
+
+    return AlfrescoApi;
+}();
 
 Emitter(AlfrescoApi.prototype); // jshint ignore:line
 module.exports = AlfrescoApi;
@@ -54777,18 +53646,37 @@ module.exports.Core = AlfrescoCoreRestApi;
 module.exports.Auth = AlfrescoAuthRestApi;
 module.exports.Mock = AlfrescoMock;
 
-},{"../test/mockObjects/mockAlfrescoApi.js":279,"./alfresco-auth-rest-api/src/index":138,"./alfresco-core-rest-api/src/index.js":161,"./alfrescoApiClient":272,"./alfrescoContent":273,"./alfrescoNode":274,"./alfrescoSearch":275,"./alfrescoUpload":276,"./alfrescoWebScript":277,"event-emitter":65}],272:[function(require,module,exports){
+},{"../test/mockObjects/mockAlfrescoApi.js":280,"./alfresco-auth-rest-api/src/index":138,"./alfresco-core-rest-api/src/index.js":161,"./alfrescoApiClient":272,"./alfrescoContent":273,"./alfrescoNode":274,"./alfrescoSearch":275,"./alfrescoUpload":276,"./alfrescoWebScript":277,"event-emitter":65}],272:[function(require,module,exports){
 'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var Emitter = require('event-emitter');
 var ApiClient = require('./alfresco-core-rest-api/src/ApiClient');
 var superagent = require('superagent');
 var _ = require('lodash');
 
-class AlfrescoApiClient extends ApiClient {
+var AlfrescoApiClient = function (_ApiClient) {
+    _inherits(AlfrescoApiClient, _ApiClient);
 
-    constructor() {
-        super();
-        Emitter.call(this);
+    /**
+     * @param {String} host
+     * */
+
+    function AlfrescoApiClient(host) {
+        _classCallCheck(this, AlfrescoApiClient);
+
+        var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(AlfrescoApiClient).call(this));
+
+        _this2.host = host;
+        Emitter.call(_this2);
+        return _this2;
     }
 
     /**
@@ -54805,125 +53693,173 @@ class AlfrescoApiClient extends ApiClient {
      * @param {Array.<String>} contentTypes An array of request MIME types.
      * @param {Array.<String>} accepts An array of acceptable response MIME types.
      * @param {(String|Array|ObjectFunction)} returnType The required type to return; can be a string for simple types or the
+     * @param {(String)} contextRoot alternative contextRoot
      * constructor for a complex type.   * @returns {Promise} A Promise object.
      */
-    callApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, authNames,
-            contentTypes, accepts, returnType) {
 
-        var eventEmitter = {};
-        Emitter(eventEmitter); // jshint ignore:line
 
-        var url = this.buildUrl(path, pathParams);
-        var request = superagent(httpMethod, url);
+    _createClass(AlfrescoApiClient, [{
+        key: 'callApi',
+        value: function callApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, authNames, contentTypes, accepts, returnType, contextRoot) {
+            var _this3 = this;
 
-        // apply authentications
-        this.applyAuthToRequest(request, authNames);
+            var eventEmitter = {};
+            Emitter(eventEmitter); // jshint ignore:line
 
-        // set query parameters
-        request.query(this.normalizeParams(queryParams));
+            var url;
 
-        // set header parameters
-        request.set(this.defaultHeaders).set(this.normalizeParams(headerParams));
-
-        // set request timeout
-        request.timeout(this.timeout);
-
-        var contentType = this.jsonPreferredMime(contentTypes);
-
-        if (contentType === 'application/x-www-form-urlencoded') {
-            request.send(this.normalizeParams(formParams)).on('progress', (event)=> {
-                this.progress(event, eventEmitter);
-            });
-        } else if (contentType === 'multipart/form-data') {
-            var _formParams = this.normalizeParams(formParams);
-            for (var key in _formParams) {
-                if (_formParams.hasOwnProperty(key)) {
-                    if (this.isFileParam(_formParams[key])) {
-                        // file field
-                        request.attach(key, _formParams[key]).on('progress', (event)=> {// jshint ignore:line
-                            this.progress(event, eventEmitter);
-                        });
-                    } else {
-                        request.field(key, _formParams[key]).on('progress', (event)=> {// jshint ignore:line
-                            this.progress(event, eventEmitter);
-                        });
-                    }
-                }
+            if (contextRoot) {
+                var basePath = this.host + '/' + contextRoot;
+                url = this.buildUrlCustomBasePath(basePath, path, pathParams);
+            } else {
+                url = this.buildUrl(path, pathParams);
             }
-        } else if (bodyParam) {
-            request.send(bodyParam).on('progress', (event)=> {
-                this.progress(event, eventEmitter);
-            });
-        }
 
-        var accept = this.jsonPreferredMime(accepts);
-        if (accept) {
-            request.accept(accept);
-        }
+            var request = superagent(httpMethod, url);
 
-        this.promise = new Promise((resolve, reject) => {
-            request.promise = this;
+            // apply authentications
+            this.applyAuthToRequest(request, authNames);
 
-            request.end((error, response) => {
+            // set query parameters
+            request.query(this.normalizeParams(queryParams));
 
-                if (error) {
-                    eventEmitter.emit('error', error);
+            // set header parameters
+            request.set(this.defaultHeaders).set(this.normalizeParams(headerParams));
 
-                    if (error.status === 401) {
-                        eventEmitter.emit('unauthorized');
+            // set request timeout
+            request.timeout(this.timeout);
+
+            var contentType = this.jsonPreferredMime(contentTypes);
+
+            if (contentType === 'application/x-www-form-urlencoded') {
+                request.send(this.normalizeParams(formParams)).on('progress', function (event) {
+                    _this3.progress(event, eventEmitter);
+                });
+            } else if (contentType === 'multipart/form-data') {
+                var _formParams = this.normalizeParams(formParams);
+                for (var key in _formParams) {
+                    if (_formParams.hasOwnProperty(key)) {
+                        if (this.isFileParam(_formParams[key])) {
+                            // file field
+                            request.attach(key, _formParams[key]).on('progress', function (event) {
+                                // jshint ignore:line
+                                _this3.progress(event, eventEmitter);
+                            });
+                        } else {
+                            request.field(key, _formParams[key]).on('progress', function (event) {
+                                // jshint ignore:line
+                                _this3.progress(event, eventEmitter);
+                            });
+                        }
                     }
-
-                    if (response && response.text) {
-                        reject(_.merge(error, {message: response.text}));
-                    } else {
-                        reject({error: error});
-                    }
-
-                } else {
-                    var data = this.deserialize(response, returnType);
-                    eventEmitter.emit('success', data);
-                    resolve(data);
                 }
-            }).on('abort', () => {
-                eventEmitter.emit('abort');
+            } else if (bodyParam) {
+                request.send(bodyParam).on('progress', function (event) {
+                    _this3.progress(event, eventEmitter);
+                });
+            }
+
+            var accept = this.jsonPreferredMime(accepts);
+            if (accept) {
+                request.accept(accept);
+            }
+
+            this.promise = new Promise(function (resolve, reject) {
+                request.promise = _this3;
+
+                request.end(function (error, response) {
+
+                    if (error) {
+                        eventEmitter.emit('error', error);
+
+                        if (error.status === 401) {
+                            eventEmitter.emit('unauthorized');
+                        }
+
+                        if (response && response.text) {
+                            reject(_.merge(error, { message: response.text }));
+                        } else {
+                            reject({ error: error });
+                        }
+                    } else {
+                        var data = _this3.deserialize(response, returnType);
+                        eventEmitter.emit('success', data);
+                        resolve(data);
+                    }
+                }).on('abort', function () {
+                    eventEmitter.emit('abort');
+                });
             });
-        });
 
-        this.promise.on = function () {
-            eventEmitter.on.apply(eventEmitter, arguments);
-            return this;
-        };
+            this.promise.on = function () {
+                eventEmitter.on.apply(eventEmitter, arguments);
+                return this;
+            };
 
-        this.promise.once = function () {
-            eventEmitter.once.apply(eventEmitter, arguments);
-            return this;
-        };
+            this.promise.once = function () {
+                eventEmitter.once.apply(eventEmitter, arguments);
+                return this;
+            };
 
-        this.promise.emit = function () {
-            eventEmitter.emit.apply(eventEmitter, arguments);
-            return this;
-        };
+            this.promise.emit = function () {
+                eventEmitter.emit.apply(eventEmitter, arguments);
+                return this;
+            };
 
-        this.promise.off = function () {
-            eventEmitter.off.apply(eventEmitter, arguments);
-            return this;
-        };
+            this.promise.off = function () {
+                eventEmitter.off.apply(eventEmitter, arguments);
+                return this;
+            };
 
-        return this.promise;
-    }
-
-    progress(event, eventEmitter) {
-        if (event.lengthComputable && this.promise) {
-            var percent = Math.round(event.loaded / event.total * 100);
-
-            eventEmitter.emit('progress', {
-                total: event.total,
-                loaded: event.loaded,
-                percent: percent
-            });
+            return this.promise;
         }
-    }
-}
+    }, {
+        key: 'progress',
+        value: function progress(event, eventEmitter) {
+            if (event.lengthComputable && this.promise) {
+                var percent = Math.round(event.loaded / event.total * 100);
+
+                eventEmitter.emit('progress', {
+                    total: event.total,
+                    loaded: event.loaded,
+                    percent: percent
+                });
+            }
+        }
+
+        /**
+         * Builds full URL by appending the given path to the base URL and replacing path parameter place-holders
+         * with parameter values.
+         *
+         * @param {String} basePath the base path
+         * @param {String} path The path to append to the base URL.
+         * @param {Object} pathParams The parameter values to append.
+         * @returns {String} The encoded path with parameter values substituted.
+         */
+
+    }, {
+        key: 'buildUrlCustomBasePath',
+        value: function buildUrlCustomBasePath(basePath, path, pathParams) {
+            if (!path.match(/^\//)) {
+                path = '/' + path;
+            }
+            var url = basePath + path;
+            var _this = this;
+            url = url.replace(/\{([\w-]+)\}/g, function (fullMatch, key) {
+                var value;
+                if (pathParams.hasOwnProperty(key)) {
+                    value = _this.paramToString(pathParams[key]);
+                } else {
+                    value = fullMatch;
+                }
+                return encodeURIComponent(value);
+            });
+            return url;
+        }
+    }]);
+
+    return AlfrescoApiClient;
+}(ApiClient);
 
 Emitter(AlfrescoApiClient.prototype); // jshint ignore:line
 module.exports = AlfrescoApiClient;
@@ -54931,12 +53867,19 @@ module.exports = AlfrescoApiClient;
 },{"./alfresco-core-rest-api/src/ApiClient":146,"event-emitter":65,"lodash":72,"superagent":125}],273:[function(require,module,exports){
 'use strict';
 
-class AlfrescoContent {
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var AlfrescoContent = function () {
     /**
      * @param {String} apiBaseUrl
      * @param {Object} config
      */
-    constructor(apiBaseUrl, config) {
+
+    function AlfrescoContent(apiBaseUrl, config) {
+        _classCallCheck(this, AlfrescoContent);
+
         this.apiBaseUrl = apiBaseUrl;
         this.config = config;
     }
@@ -54948,285 +53891,375 @@ class AlfrescoContent {
      *
      * @returns {String} thumbnail URL address.
      */
-    getDocumentThumbnailUrl(documentId) {
-        return this.apiBaseUrl + '/nodes/' + documentId +
-            '/renditions/doclib/content' + '?attachment=false&alf_ticket=' + this.config.ticket;
-    }
 
-    /**
-     * Get content URL for the given documentId
-     *
-     * @param {String} documentId of the document
-     *
-     * @returns {String}  content URL  address.
-     */
-    getContentUrl(documentId) {
-        return this.apiBaseUrl + '/nodes/' + documentId +
-            '/content' + '?attachment=false&alf_ticket=' + this.config.ticket;
-    }
 
-}
+    _createClass(AlfrescoContent, [{
+        key: 'getDocumentThumbnailUrl',
+        value: function getDocumentThumbnailUrl(documentId) {
+            return this.apiBaseUrl + '/nodes/' + documentId + '/renditions/doclib/content' + '?attachment=false&alf_ticket=' + this.config.ticket;
+        }
+
+        /**
+         * Get content URL for the given documentId
+         *
+         * @param {String} documentId of the document
+         *
+         * @returns {String}  content URL  address.
+         */
+
+    }, {
+        key: 'getContentUrl',
+        value: function getContentUrl(documentId) {
+            return this.apiBaseUrl + '/nodes/' + documentId + '/content' + '?attachment=false&alf_ticket=' + this.config.ticket;
+        }
+    }]);
+
+    return AlfrescoContent;
+}();
 
 module.exports = AlfrescoContent;
 
 },{}],274:[function(require,module,exports){
 'use strict';
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
 var _ = require('lodash');
 
-class AlfrescoNode extends AlfrescoCoreRestApi.NodesApi {
+var AlfrescoNode = function (_AlfrescoCoreRestApi$) {
+    _inherits(AlfrescoNode, _AlfrescoCoreRestApi$);
 
-    /**
-     * Get Info about file or folder by given nodeId
-     * Minimal information for each child is returned by default.
-     * You can use the include parameter to return addtional information.
-     *
-     * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases: -my- | -shared- | -root-
-     * @param {Object} opts
-     *
-     * @returns {Promise} A promise with the file/folder data if resolved and {error} if rejected.
-     */
-    getNodeInfo(nodeId, opts) {
-        return new Promise((resolve, reject) => {
-            this.getNode(nodeId, opts).then(function (data) {
-                resolve(data.entry);
-            }, function (error) {
-                reject(error);
+    function AlfrescoNode() {
+        _classCallCheck(this, AlfrescoNode);
+
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(AlfrescoNode).apply(this, arguments));
+    }
+
+    _createClass(AlfrescoNode, [{
+        key: 'getNodeInfo',
+
+
+        /**
+         * Get Info about file or folder by given nodeId
+         * Minimal information for each child is returned by default.
+         * You can use the include parameter to return addtional information.
+         *
+         * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases: -my- | -shared- | -root-
+         * @param {Object} opts
+         *
+         * @returns {Promise} A promise with the file/folder data if resolved and {error} if rejected.
+         */
+        value: function getNodeInfo(nodeId, opts) {
+            var _this2 = this;
+
+            return new Promise(function (resolve, reject) {
+                _this2.getNode(nodeId, opts).then(function (data) {
+                    resolve(data.entry);
+                }, function (error) {
+                    reject(error);
+                });
             });
-        });
-    }
+        }
 
-    /**
-     * Delete node by ID, If the nodeId is a folder, then its children are also
-     * Deleted permanent will not be possible recover it
-     *
-     * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases: -my- | -shared- | -root-
-     *
-     * @returns {Promise} A promise that is resolved if the file is deleted and {error} if rejected.
-     */
-    deleteNodePermanent(nodeId) {
-        return this.deleteNode(nodeId, {permanent: true});
-    }
+        /**
+         * Delete node by ID, If the nodeId is a folder, then its children are also
+         * Deleted permanent will not be possible recover it
+         *
+         * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases: -my- | -shared- | -root-
+         *
+         * @returns {Promise} A promise that is resolved if the file is deleted and {error} if rejected.
+         */
 
-    /**
-     * Create a folder
-     *
-     * @param {String} name - folder name
-     * @param {String} relativePath - The relativePath specifies the folder structure to create relative to the node identified by nodeId.
-     * @param {String} nodeId default value root.The identifier of a node where add the folder. You can also use one of these well-known aliases: -my- | -shared- | -root-
-     * @param {Object} opts Optional parameters
-     *
-     * @returns {Promise} A promise that is resolved if the folder is created and {error} if rejected.
-     */
-    createFolder(name, relativePath, nodeId, opts) {
-        nodeId = nodeId || '-root-';
-        var nodeBody = {
-            'name': name,
-            'nodeType': 'cm:folder',
-            'relativePath': relativePath
-        };
+    }, {
+        key: 'deleteNodePermanent',
+        value: function deleteNodePermanent(nodeId) {
+            return this.deleteNode(nodeId, { permanent: true });
+        }
 
-        return this.addNode(nodeId, nodeBody, opts);
-    }
+        /**
+         * Create a folder
+         *
+         * @param {String} name - folder name
+         * @param {String} relativePath - The relativePath specifies the folder structure to create relative to the node identified by nodeId.
+         * @param {String} nodeId default value root.The identifier of a node where add the folder. You can also use one of these well-known aliases: -my- | -shared- | -root-
+         * @param {Object} opts Optional parameters
+         *
+         * @returns {Promise} A promise that is resolved if the folder is created and {error} if rejected.
+         */
 
-    /**
-     * Create a folder and autorename it if already exist
-     *
-     * @param {String} name - folder name
-     * @param {String} relativePath - The relativePath specifies the folder structure to create relative to the node identified by nodeId.
-     * @param {String} nodeId default value root.The identifier of a node where add the folder. You can also use one of these well-known aliases: -my- | -shared- | -root-
-     * @param {Object} opts Optional parameters
-     *
-     * @returns {Promise} A promise that is resolved if the folder is created and {error} if rejected.
-     */
-    createFolderAutoRename(name, relativePath, nodeId, opts) {
-        var optAutoRename = {autoRename: true};
-        opts = _.merge(opts, optAutoRename);
-        return this.createFolder(name, relativePath, nodeId, opts);
-    }
-}
+    }, {
+        key: 'createFolder',
+        value: function createFolder(name, relativePath, nodeId, opts) {
+            nodeId = nodeId || '-root-';
+            var nodeBody = {
+                'name': name,
+                'nodeType': 'cm:folder',
+                'relativePath': relativePath
+            };
+
+            return this.addNode(nodeId, nodeBody, opts);
+        }
+
+        /**
+         * Create a folder and autorename it if already exist
+         *
+         * @param {String} name - folder name
+         * @param {String} relativePath - The relativePath specifies the folder structure to create relative to the node identified by nodeId.
+         * @param {String} nodeId default value root.The identifier of a node where add the folder. You can also use one of these well-known aliases: -my- | -shared- | -root-
+         * @param {Object} opts Optional parameters
+         *
+         * @returns {Promise} A promise that is resolved if the folder is created and {error} if rejected.
+         */
+
+    }, {
+        key: 'createFolderAutoRename',
+        value: function createFolderAutoRename(name, relativePath, nodeId, opts) {
+            var optAutoRename = { autoRename: true };
+            opts = _.merge(opts, optAutoRename);
+            return this.createFolder(name, relativePath, nodeId, opts);
+        }
+    }]);
+
+    return AlfrescoNode;
+}(AlfrescoCoreRestApi.NodesApi);
 
 module.exports = AlfrescoNode;
 
 },{"./alfresco-core-rest-api/src/index.js":161,"lodash":72}],275:[function(require,module,exports){
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
 
-class AlfrescoSearch extends AlfrescoCoreRestApi.SearchApi {
+var AlfrescoSearch = function (_AlfrescoCoreRestApi$) {
+  _inherits(AlfrescoSearch, _AlfrescoCoreRestApi$);
 
-}
+  function AlfrescoSearch() {
+    _classCallCheck(this, AlfrescoSearch);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(AlfrescoSearch).apply(this, arguments));
+  }
+
+  return AlfrescoSearch;
+}(AlfrescoCoreRestApi.SearchApi);
 
 module.exports = AlfrescoSearch;
 
 },{"./alfresco-core-rest-api/src/index.js":161}],276:[function(require,module,exports){
 'use strict';
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
 var Emitter = require('event-emitter');
 var _ = require('lodash');
 
-class AlfrescoUpload extends AlfrescoCoreRestApi.NodesApi {
+var AlfrescoUpload = function (_AlfrescoCoreRestApi$) {
+    _inherits(AlfrescoUpload, _AlfrescoCoreRestApi$);
 
-    constructor() {
-        super();
-        Emitter.call(this);
+    function AlfrescoUpload() {
+        _classCallCheck(this, AlfrescoUpload);
+
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AlfrescoUpload).call(this));
+
+        Emitter.call(_this);
+        return _this;
     }
 
-    uploadFile(fileDefinition, relativePath, nodeId, nodeBody, opts) {
-        nodeId = nodeId || '-root-';
+    _createClass(AlfrescoUpload, [{
+        key: 'uploadFile',
+        value: function uploadFile(fileDefinition, relativePath, nodeId, nodeBody, opts) {
+            nodeId = nodeId || '-root-';
 
-        var nodeBodyRequired = {
-            'name': fileDefinition.name,
-            'nodeType': 'cm:content',
-            'relativePath': relativePath
-        };
+            var nodeBodyRequired = {
+                'name': fileDefinition.name,
+                'nodeType': 'cm:content',
+                'relativePath': relativePath
+            };
 
-        nodeBody = _.merge(nodeBodyRequired, nodeBody);
+            nodeBody = _.merge(nodeBodyRequired, nodeBody);
 
-        var formParam = {};
-        formParam.filedata = fileDefinition;
-        formParam.relativePath = relativePath;
+            var formParam = {};
+            formParam.filedata = fileDefinition;
+            formParam.relativePath = relativePath;
 
-        formParam = _.merge(formParam, opts);
+            formParam = _.merge(formParam, opts);
 
-        return this.addNodeUpload(nodeId, nodeBody, opts, formParam);
-    }
-
-    /**
-     * Create a node
-     *
-     * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases: -my-\ -shared- -root-\n
-     * @param {module:model/NodeBody1} nodeBody The node information to create.
-     * @param {Object} opts Optional parameters
-     * @param {Object.<String, Object>} formParams A map of form parameters and their values.
-     */
-    addNodeUpload(nodeId, nodeBody, opts, formParams) {
-        opts = opts || {};
-        var postBody = nodeBody;
-
-        if (!nodeId) {
-            throw 'Missing the required parameter nodeId when calling uploadFile';
+            return this.addNodeUpload(nodeId, nodeBody, opts, formParam);
         }
 
-        if (!nodeBody) {
-            throw 'Missing the required parameter nodeBody when calling uploadFile';
+        /**
+         * Create a node
+         *
+         * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases: -my-\ -shared- -root-\n
+         * @param {module:model/NodeBody1} nodeBody The node information to create.
+         * @param {Object} opts Optional parameters
+         * @param {Object.<String, Object>} formParams A map of form parameters and their values.
+         */
+
+    }, {
+        key: 'addNodeUpload',
+        value: function addNodeUpload(nodeId, nodeBody, opts, formParams) {
+            opts = opts || {};
+            var postBody = nodeBody;
+
+            if (!nodeId) {
+                throw 'Missing the required parameter nodeId when calling uploadFile';
+            }
+
+            if (!nodeBody) {
+                throw 'Missing the required parameter nodeBody when calling uploadFile';
+            }
+
+            var pathParams = {
+                'nodeId': nodeId
+            };
+            var queryParams = {
+                'autoRename': opts.autoRename,
+                'include': this.apiClient.buildCollectionParam(opts.include, 'csv'),
+                'fields': this.apiClient.buildCollectionParam(opts.fields, 'csv')
+            };
+            var headerParams = {};
+            formParams = formParams || {};
+
+            var authNames = ['basicAuth'];
+            var contentTypes = ['multipart/form-data'];
+            var accepts = ['application/json'];
+            var returnType = AlfrescoCoreRestApi.NodeEntry;
+
+            return this.apiClient.callApi('/nodes/{nodeId}/children', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
         }
+    }]);
 
-        var pathParams = {
-            'nodeId': nodeId
-        };
-        var queryParams = {
-            'autoRename': opts.autoRename,
-            'include': this.apiClient.buildCollectionParam(opts.include, 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts.fields, 'csv')
-        };
-        var headerParams = {};
-        formParams = formParams || {};
-
-        var authNames = ['basicAuth'];
-        var contentTypes = ['multipart/form-data'];
-        var accepts = ['application/json'];
-        var returnType = AlfrescoCoreRestApi.NodeEntry;
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/children', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
-        );
-    }
-}
+    return AlfrescoUpload;
+}(AlfrescoCoreRestApi.NodesApi);
 
 Emitter(AlfrescoUpload.prototype); // jshint ignore:line
 module.exports = AlfrescoUpload;
 
 },{"./alfresco-core-rest-api/src/index.js":161,"event-emitter":65,"lodash":72}],277:[function(require,module,exports){
 'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 var ApiClient = require('./alfresco-core-rest-api/src/ApiClient');
 
-class AlfrescoWebScriptApi  {
+var AlfrescoWebScriptApi = function () {
+    function AlfrescoWebScriptApi(apiClient) {
+        _classCallCheck(this, AlfrescoWebScriptApi);
 
-    constructor(apiClient) {
         this.apiClient = apiClient || ApiClient.instance;
         this.allowedMethod = ['GET', 'POST', 'PUT', 'DELETE'];
     }
     /**
      * Call a get on a  Web Scripts see https://wiki.alfresco.com/wiki/Web_Scripts for more details about Web Scripts
+     * Url syntax definition : http[s]://<host>:<port>/[<contextPath>/]/<servicePath>[/<scriptPath>][?<scriptArgs>]
+     * example: http://localhost:8081/share/service/mytasks?priority=1
      *
      * @param {String} httpMethod  GET, POST, PUT and DELETE
-     * @param {String} servicePath
      * @param {String} scriptPath
      * @param {Object} scriptArgs
+     * @param {String} contextRoot default value alfresco
+     * @param {String} servicePath default value service
      *
      * @returns {Promise} A promise that is resolved return the webScript data and {error} if rejected.
      */
 
-    executeWebScript(httpMethod, servicePath, scriptPath, scriptArgs) {
+    _createClass(AlfrescoWebScriptApi, [{
+        key: 'executeWebScript',
+        value: function executeWebScript(httpMethod, scriptPath, scriptArgs, contextRoot, servicePath) {
+            contextRoot = contextRoot || 'alfresco';
+            servicePath = servicePath || 'service';
 
-        if (!httpMethod  || this.allowedMethod.indexOf(httpMethod) === -1) {
-            throw 'method allowed value  GET, POST, PUT and DELETE';
+            if (!httpMethod || this.allowedMethod.indexOf(httpMethod) === -1) {
+                throw 'method allowed value  GET, POST, PUT and DELETE';
+            }
+
+            if (!scriptPath) {
+                throw 'Missing the required parameter scriptPath when calling executeWebScript';
+            }
+
+            var postBody = null;
+
+            var pathParams = {};
+            var headerParams = {};
+            var formParams = {};
+
+            var authNames = ['basicAuth'];
+            var contentTypes = ['application/json'];
+            var accepts = ['application/json'];
+            var returnType = {};
+
+            return this.apiClient.callApi('/' + servicePath + '/' + scriptPath, httpMethod, pathParams, scriptArgs, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, contextRoot);
         }
+    }]);
 
-        if (!servicePath) {
-            throw 'Missing the required parameter servicePath when calling executeWebScript';
-        }
-
-        if (!scriptPath) {
-            throw 'Missing the required parameter scriptPath when calling executeWebScript';
-        }
-
-        var postBody = null;
-
-        var pathParams = {};
-        var headerParams = {};
-        var formParams = {};
-
-        var authNames = ['basicAuth'];
-        var contentTypes = ['application/json'];
-        var accepts = ['application/json'];
-        var returnType = {};
-
-        return this.apiClient.callApi(
-            '/' + servicePath + '/' + scriptPath, httpMethod,
-            pathParams, scriptArgs, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
-        );
-    }
-}
+    return AlfrescoWebScriptApi;
+}();
 
 module.exports = AlfrescoWebScriptApi;
 
 },{"./alfresco-core-rest-api/src/ApiClient":146}],278:[function(require,module,exports){
 'use strict';
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var nock = require('nock');
+var BaseMock = require('./baseMock');
 
-class AuthResponseMock {
+var AuthResponseMock = function (_BaseMock) {
+    _inherits(AuthResponseMock, _BaseMock);
 
-    constructor(host) {
-        this.host = host ? host : 'http://127.0.0.1:8080';
+    function AuthResponseMock(host) {
+        _classCallCheck(this, AuthResponseMock);
+
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(AuthResponseMock).call(this, host));
     }
 
-    get201Response(forceTicket) {
+    _createClass(AuthResponseMock, [{
+        key: 'get201Response',
+        value: function get201Response(forceTicket) {
 
-        var returnMockTicket = forceTicket || 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
+            var returnMockTicket = forceTicket || 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
 
-        nock(this.host, {'encodedQueryParams': true})
-            .post('/alfresco/api/-default-/public/authentication/versions/1/tickets', {
+            nock(this.host, { 'encodedQueryParams': true }).post('/alfresco/api/-default-/public/authentication/versions/1/tickets', {
                 'userId': 'admin',
                 'password': 'admin'
-            })
-            .reply(201, {'entry': {'id': returnMockTicket, 'userId': 'admin'}});
-    }
-
-    get403Response() {
-        nock(this.host, {'encodedQueryParams': true})
-            .post('/alfresco/api/-default-/public/authentication/versions/1/tickets', {
+            }).reply(201, { 'entry': { 'id': returnMockTicket, 'userId': 'admin' } });
+        }
+    }, {
+        key: 'get403Response',
+        value: function get403Response() {
+            nock(this.host, { 'encodedQueryParams': true }).post('/alfresco/api/-default-/public/authentication/versions/1/tickets', {
                 'userId': 'wrong',
                 'password': 'name'
-            })
-            .reply(403, {
+            }).reply(403, {
                 'error': {
                     'errorKey': 'Login failed',
                     'statusCode': 403,
@@ -55235,16 +54268,15 @@ class AuthResponseMock {
                     'descriptionURL': 'https://api-explorer.alfresco.com'
                 }
             });
-    }
+        }
+    }, {
+        key: 'get400Response',
+        value: function get400Response() {
 
-    get400Response() {
-
-        nock(this.host, {'encodedQueryParams': true})
-            .post('/alfresco/api/-default-/public/authentication/versions/1/tickets', {
+            nock(this.host, { 'encodedQueryParams': true }).post('/alfresco/api/-default-/public/authentication/versions/1/tickets', {
                 'userId': null,
                 'password': null
-            })
-            .reply(400, {
+            }).reply(400, {
                 'error': {
                     'errorKey': 'Invalid login details.',
                     'statusCode': 400,
@@ -55253,16 +54285,14 @@ class AuthResponseMock {
                     'descriptionURL': 'https://api-explorer.alfresco.com'
                 }
             });
-
-    }
-
-    get401Response() {
-        nock(this.host, {'encodedQueryParams': true})
-            .post('/alfresco/api/-default-/public/authentication/versions/1/tickets', {
+        }
+    }, {
+        key: 'get401Response',
+        value: function get401Response() {
+            nock(this.host, { 'encodedQueryParams': true }).post('/alfresco/api/-default-/public/authentication/versions/1/tickets', {
                 'userId': 'wrong',
                 'password': 'credentials'
-            })
-            .reply(401, {
+            }).reply(401, {
                 'error': {
                     'errorKey': 'framework.exception.ApiDefault',
                     'statusCode': 401,
@@ -55271,56 +54301,106 @@ class AuthResponseMock {
                     'descriptionURL': 'https://api-explorer.alfresco.com'
                 }
             });
+        }
+    }, {
+        key: 'get204ResponseLogout',
+        value: function get204ResponseLogout() {
+            nock(this.host, { 'encodedQueryParams': true }).delete('/alfresco/api/-default-/public/authentication/versions/1/tickets/-me-').reply(204, '');
+        }
+    }, {
+        key: 'get404ResponseLogout',
+        value: function get404ResponseLogout() {
+            nock(this.host, { 'encodedQueryParams': true }).delete('/alfresco/api/-default-/public/authentication/versions/1/tickets/-me-').reply(404, '');
+        }
+    }]);
 
-    }
-
-    get204ResponseLogout() {
-        nock(this.host, {'encodedQueryParams': true})
-            .delete('/alfresco/api/-default-/public/authentication/versions/1/tickets/-me-')
-            .reply(204, '');
-    }
-
-    get404ResponseLogout() {
-        nock(this.host, {'encodedQueryParams': true})
-            .delete('/alfresco/api/-default-/public/authentication/versions/1/tickets/-me-')
-            .reply(404, '');
-    }
-
-    rec() {
-        nock.recorder.rec();
-    }
-
-    play() {
-        nock.recorder.play();
-    }
-}
+    return AuthResponseMock;
+}(BaseMock);
 
 module.exports = AuthResponseMock;
 
-},{"nock":75}],279:[function(require,module,exports){
+},{"./baseMock":279,"nock":75}],279:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var nock = require('nock');
+
+var BaseMock = function () {
+    function BaseMock(host) {
+        _classCallCheck(this, BaseMock);
+
+        this.host = host ? host : 'http://127.0.0.1:8080';
+    }
+
+    _createClass(BaseMock, [{
+        key: 'get200Response',
+        value: function get200Response() {
+            nock(this.host, { 'encodedQueryParams': true }).get(this.scriptSlug).reply(200, {
+                'randomStructure': {
+                    'exampleInt': 1,
+                    'exampleString': 'string test'
+                }
+            });
+        }
+    }, {
+        key: 'rec',
+        value: function rec() {
+            nock.recorder.rec();
+        }
+    }, {
+        key: 'play',
+        value: function play() {
+            nock.recorder.play();
+        }
+    }]);
+
+    return BaseMock;
+}();
+
+module.exports = BaseMock;
+
+},{"nock":75}],280:[function(require,module,exports){
+'use strict';
+
 var mockAlfrescoApi = {};
 
 mockAlfrescoApi.Auth = require('./authResponseMock.js');
 mockAlfrescoApi.Node = require('./nodeMock.js');
 mockAlfrescoApi.Upload = require('./uploadMock.js');
+mockAlfrescoApi.WebScript = require('./webScriptMock.js');
 
 module.exports = mockAlfrescoApi;
 
-},{"./authResponseMock.js":278,"./nodeMock.js":280,"./uploadMock.js":281}],280:[function(require,module,exports){
+},{"./authResponseMock.js":278,"./nodeMock.js":281,"./uploadMock.js":282,"./webScriptMock.js":283}],281:[function(require,module,exports){
 'use strict';
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var nock = require('nock');
+var BaseMock = require('./baseMock');
 
-class NodeMock {
+var NodeMock = function (_BaseMock) {
+    _inherits(NodeMock, _BaseMock);
 
-    constructor(host) {
-        this.host = host ? host : 'http://127.0.0.1:8080';
+    function NodeMock(host) {
+        _classCallCheck(this, NodeMock);
+
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(NodeMock).call(this, host));
     }
 
-    get200ResponseChildren() {
-        nock(this.host, {'encodedQueryParams': true})
-            .get('/alfresco/api/-default-/public/alfresco/versions/1/nodes/b4cff62a-664d-4d45-9302-98723eac1319/children')
-            .reply(200, {
+    _createClass(NodeMock, [{
+        key: 'get200ResponseChildren',
+        value: function get200ResponseChildren() {
+            nock(this.host, { 'encodedQueryParams': true }).get('/alfresco/api/-default-/public/alfresco/versions/1/nodes/b4cff62a-664d-4d45-9302-98723eac1319/children').reply(200, {
                 'list': {
                     'pagination': {
                         'count': 5,
@@ -55334,9 +54414,9 @@ class NodeMock {
                             'createdAt': '2011-02-15T20:19:00.007+0000',
                             'isFolder': true,
                             'isFile': false,
-                            'createdByUser': {'id': 'mjackson', 'displayName': 'Mike Jackson'},
+                            'createdByUser': { 'id': 'mjackson', 'displayName': 'Mike Jackson' },
                             'modifiedAt': '2011-02-15T20:19:00.007+0000',
-                            'modifiedByUser': {'id': 'mjackson', 'displayName': 'Mike Jackson'},
+                            'modifiedByUser': { 'id': 'mjackson', 'displayName': 'Mike Jackson' },
                             'name': 'dataLists',
                             'id': '64f69e69-f61e-42a3-8697-95eea1f2bda2',
                             'nodeType': 'cm:folder',
@@ -55347,9 +54427,9 @@ class NodeMock {
                             'createdAt': '2011-02-15T22:04:54.290+0000',
                             'isFolder': true,
                             'isFile': false,
-                            'createdByUser': {'id': 'mjackson', 'displayName': 'Mike Jackson'},
+                            'createdByUser': { 'id': 'mjackson', 'displayName': 'Mike Jackson' },
                             'modifiedAt': '2011-02-15T22:04:54.290+0000',
-                            'modifiedByUser': {'id': 'mjackson', 'displayName': 'Mike Jackson'},
+                            'modifiedByUser': { 'id': 'mjackson', 'displayName': 'Mike Jackson' },
                             'name': 'discussions',
                             'id': '059c5bc7-2d38-4dc5-96b8-d09cd3c69b4c',
                             'nodeType': 'cm:folder',
@@ -55360,9 +54440,9 @@ class NodeMock {
                             'createdAt': '2011-02-15T20:16:28.292+0000',
                             'isFolder': true,
                             'isFile': false,
-                            'createdByUser': {'id': 'mjackson', 'displayName': 'Mike Jackson'},
+                            'createdByUser': { 'id': 'mjackson', 'displayName': 'Mike Jackson' },
                             'modifiedAt': '2016-06-27T14:31:10.007+0000',
-                            'modifiedByUser': {'id': 'admin', 'displayName': 'Administrator'},
+                            'modifiedByUser': { 'id': 'admin', 'displayName': 'Administrator' },
                             'name': 'documentLibrary',
                             'id': '8f2105b4-daaf-4874-9e8a-2152569d109b',
                             'nodeType': 'cm:folder',
@@ -55373,9 +54453,9 @@ class NodeMock {
                             'createdAt': '2011-02-15T20:18:59.808+0000',
                             'isFolder': true,
                             'isFile': false,
-                            'createdByUser': {'id': 'mjackson', 'displayName': 'Mike Jackson'},
+                            'createdByUser': { 'id': 'mjackson', 'displayName': 'Mike Jackson' },
                             'modifiedAt': '2011-02-15T20:18:59.808+0000',
-                            'modifiedByUser': {'id': 'mjackson', 'displayName': 'Mike Jackson'},
+                            'modifiedByUser': { 'id': 'mjackson', 'displayName': 'Mike Jackson' },
                             'name': 'links',
                             'id': '0e24b99c-41f0-43e1-a55e-fb9f50d73820',
                             'nodeType': 'cm:folder',
@@ -55386,9 +54466,9 @@ class NodeMock {
                             'createdAt': '2011-02-15T21:46:01.603+0000',
                             'isFolder': true,
                             'isFile': false,
-                            'createdByUser': {'id': 'mjackson', 'displayName': 'Mike Jackson'},
+                            'createdByUser': { 'id': 'mjackson', 'displayName': 'Mike Jackson' },
                             'modifiedAt': '2011-02-15T21:46:01.603+0000',
-                            'modifiedByUser': {'id': 'mjackson', 'displayName': 'Mike Jackson'},
+                            'modifiedByUser': { 'id': 'mjackson', 'displayName': 'Mike Jackson' },
                             'name': 'wiki',
                             'id': 'cdefb3a9-8f55-4771-a9e3-06fa370250f6',
                             'nodeType': 'cm:folder',
@@ -55397,16 +54477,14 @@ class NodeMock {
                     }]
                 }
             });
-
-    }
-
-    get200ResponseSingleFileFolder() {
-        nock(this.host, {'encodedQueryParams': true})
-            .get('/alfresco/api/-default-/public/alfresco/versions/1/nodes/80a94ac8-3ece-47ad-864e-5d939424c47c')
-            .reply(200, {
+        }
+    }, {
+        key: 'get200ResponseSingleFileFolder',
+        value: function get200ResponseSingleFileFolder() {
+            nock(this.host, { 'encodedQueryParams': true }).get('/alfresco/api/-default-/public/alfresco/versions/1/nodes/80a94ac8-3ece-47ad-864e-5d939424c47c').reply(200, {
                 'entry': {
                     'isFile': true,
-                    'createdByUser': {'id': 'abeecher', 'displayName': 'Alice Beecher'},
+                    'createdByUser': { 'id': 'abeecher', 'displayName': 'Alice Beecher' },
                     'modifiedAt': '2011-03-03T10:34:52.139+0000',
                     'nodeType': 'cm:content',
                     'content': {
@@ -55419,7 +54497,7 @@ class NodeMock {
                     'aspectNames': ['rn:renditioned', 'cm:ownable', 'cm:titled', 'cm:auditable', 'cm:author', 'exif:exif'],
                     'createdAt': '2011-03-03T10:34:52.139+0000',
                     'isFolder': false,
-                    'modifiedByUser': {'id': 'abeecher', 'displayName': 'Alice Beecher'},
+                    'modifiedByUser': { 'id': 'abeecher', 'displayName': 'Alice Beecher' },
                     'name': 'grass.jpg',
                     'id': '80a94ac8-3ece-47ad-864e-5d939424c47c',
                     'properties': {
@@ -55428,7 +54506,7 @@ class NodeMock {
                         'exif:xResolution': 72,
                         'exif:yResolution': 72,
                         'exif:focalLength': 23.42,
-                        'cm:owner': {'id': 'admin', 'displayName': 'Administrator'},
+                        'cm:owner': { 'id': 'admin', 'displayName': 'Administrator' },
                         'exif:flash': true,
                         'exif:isoSpeedRatings': '100',
                         'exif:pixelXDimension': 1000,
@@ -55443,12 +54521,11 @@ class NodeMock {
                     }
                 }
             });
-    }
-
-    get404ChildrenNotExist() {
-        nock(this.host, {'encodedQueryParams': true})
-            .get('/alfresco/api/-default-/public/alfresco/versions/1/nodes/b4cff62a-664d-4d45-9302-98723eac1319/children')
-            .reply(404, {
+        }
+    }, {
+        key: 'get404ChildrenNotExist',
+        value: function get404ChildrenNotExist() {
+            nock(this.host, { 'encodedQueryParams': true }).get('/alfresco/api/-default-/public/alfresco/versions/1/nodes/b4cff62a-664d-4d45-9302-98723eac1319/children').reply(404, {
                 'error': {
                     'errorKey': 'framework.exception.EntityNotFound',
                     'statusCode': 404,
@@ -55457,12 +54534,11 @@ class NodeMock {
                     'descriptionURL': 'https://api-explorer.alfresco.com'
                 }
             });
-    }
-
-    get404FileFolderNotExist() {
-        nock(this.host, {'encodedQueryParams': true})
-            .get('/alfresco/api/-default-/public/alfresco/versions/1/nodes/80a94ac4-3ec4-47ad-864e-5d939424c47c')
-            .reply(404, {
+        }
+    }, {
+        key: 'get404FileFolderNotExist',
+        value: function get404FileFolderNotExist() {
+            nock(this.host, { 'encodedQueryParams': true }).get('/alfresco/api/-default-/public/alfresco/versions/1/nodes/80a94ac4-3ec4-47ad-864e-5d939424c47c').reply(404, {
                 'error': {
                     'errorKey': 'framework.exception.EntityNotFound',
                     'statusCode': 404,
@@ -55471,24 +54547,21 @@ class NodeMock {
                     'descriptionURL': 'https://api-explorer.alfresco.com'
                 }
             });
-    }
-
-    get204SuccessfullyDeleted() {
-        nock(this.host, {'encodedQueryParams': true})
-            .delete('/alfresco/api/-default-/public/alfresco/versions/1/nodes/80a94ac8-3ece-47ad-864e-5d939424c47c')
-            .reply(204);
-    }
-
-    get403DeletePermissionDenied() {
-        nock(this.host, {'encodedQueryParams': true})
-            .delete('/alfresco/api/-default-/public/alfresco/versions/1/nodes/80a94ac8-3ece-47ad-864e-5d939424c47c')
-            .reply(403);
-    }
-
-    get404DeleteNotFound() {
-        nock(this.host, {'encodedQueryParams': true})
-            .delete('/alfresco/api/-default-/public/alfresco/versions/1/nodes/80a94ac8-3ece-47ad-864e-5d939424c47c')
-            .reply(404, {
+        }
+    }, {
+        key: 'get204SuccessfullyDeleted',
+        value: function get204SuccessfullyDeleted() {
+            nock(this.host, { 'encodedQueryParams': true }).delete('/alfresco/api/-default-/public/alfresco/versions/1/nodes/80a94ac8-3ece-47ad-864e-5d939424c47c').reply(204);
+        }
+    }, {
+        key: 'get403DeletePermissionDenied',
+        value: function get403DeletePermissionDenied() {
+            nock(this.host, { 'encodedQueryParams': true }).delete('/alfresco/api/-default-/public/alfresco/versions/1/nodes/80a94ac8-3ece-47ad-864e-5d939424c47c').reply(403);
+        }
+    }, {
+        key: 'get404DeleteNotFound',
+        value: function get404DeleteNotFound() {
+            nock(this.host, { 'encodedQueryParams': true }).delete('/alfresco/api/-default-/public/alfresco/versions/1/nodes/80a94ac8-3ece-47ad-864e-5d939424c47c').reply(404, {
                 'error': {
                     'errorKey': 'framework.exception.EntityNotFound',
                     'statusCode': 404,
@@ -55497,12 +54570,11 @@ class NodeMock {
                     'descriptionURL': 'https://api-explorer.alfresco.com'
                 }
             });
-    }
-
-    get404DeletePermanentlyNotFound() {
-        nock(this.host, {'encodedQueryParams': true})
-            .delete('/alfresco/api/-default-/public/alfresco/versions/1/nodes/80a94ac8-3ece-47ad-864e-5d939424c47c?permanent=true')
-            .reply(404, {
+        }
+    }, {
+        key: 'get404DeletePermanentlyNotFound',
+        value: function get404DeletePermanentlyNotFound() {
+            nock(this.host, { 'encodedQueryParams': true }).delete('/alfresco/api/-default-/public/alfresco/versions/1/nodes/80a94ac8-3ece-47ad-864e-5d939424c47c?permanent=true').reply(404, {
                 'error': {
                     'errorKey': 'framework.exception.EntityNotFound',
                     'statusCode': 404,
@@ -55511,38 +54583,36 @@ class NodeMock {
                     'descriptionURL': 'https://api-explorer.alfresco.com'
                 }
             });
-    }
-
-    get200CreationFolder() {
-        nock(this.host, {'encodedQueryParams': true})
-            .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children', {
+        }
+    }, {
+        key: 'get200CreationFolder',
+        value: function get200CreationFolder() {
+            nock(this.host, { 'encodedQueryParams': true }).post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children', {
                 'name': 'newFolder',
                 'nodeType': 'cm:folder'
-            })
-            .reply(201, {
+            }).reply(201, {
                 'entry': {
                     'aspectNames': ['cm:auditable'],
                     'createdAt': '2016-07-05T15:07:54.027+0000',
                     'isFolder': true,
                     'isFile': false,
-                    'createdByUser': {'id': 'admin', 'displayName': 'Administrator'},
+                    'createdByUser': { 'id': 'admin', 'displayName': 'Administrator' },
                     'modifiedAt': '2016-07-05T15:07:54.027+0000',
-                    'modifiedByUser': {'id': 'admin', 'displayName': 'Administrator'},
+                    'modifiedByUser': { 'id': 'admin', 'displayName': 'Administrator' },
                     'name': 'newFolder',
                     'id': '2ffd7fe8-74d2-435c-ad73-f8ab3bc05c57',
                     'nodeType': 'cm:folder',
                     'parentId': 'd4f87809-10d9-49a3-ae7d-7a2640f87f3d'
                 }
             });
-    }
-
-    get409CreationFolderNewNameClashes() {
-        nock(this.host, {'encodedQueryParams': true})
-            .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children', {
+        }
+    }, {
+        key: 'get409CreationFolderNewNameClashes',
+        value: function get409CreationFolderNewNameClashes() {
+            nock(this.host, { 'encodedQueryParams': true }).post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children', {
                 'name': 'newFolder',
                 'nodeType': 'cm:folder'
-            })
-            .reply(409, {
+            }).reply(409, {
                 'error': {
                     'errorKey': 'Duplicate child name not allowed: newFolder',
                     'statusCode': 409,
@@ -55551,61 +54621,66 @@ class NodeMock {
                     'descriptionURL': 'https://api-explorer.alfresco.com'
                 }
             });
-    }
-
-    get201CreationFolderNewNameNotClashes() {
-        nock(this.host, {'encodedQueryParams': true})
-            .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children', {
+        }
+    }, {
+        key: 'get201CreationFolderNewNameNotClashes',
+        value: function get201CreationFolderNewNameNotClashes() {
+            nock(this.host, { 'encodedQueryParams': true }).post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children', {
                 'name': 'newFolder',
                 'nodeType': 'cm:folder'
-            })
-            .query({'autoRename': 'true'})
-            .reply(201, {
+            }).query({ 'autoRename': 'true' }).reply(201, {
                 'entry': {
                     'aspectNames': ['cm:auditable'],
                     'createdAt': '2016-07-05T16:02:47.873+0000',
                     'isFolder': true,
                     'isFile': false,
-                    'createdByUser': {'id': 'admin', 'displayName': 'Administrator'},
+                    'createdByUser': { 'id': 'admin', 'displayName': 'Administrator' },
                     'modifiedAt': '2016-07-05T16:02:47.873+0000',
-                    'modifiedByUser': {'id': 'admin', 'displayName': 'Administrator'},
+                    'modifiedByUser': { 'id': 'admin', 'displayName': 'Administrator' },
                     'name': 'newFolder-1',
                     'id': '14934b56-db67-40a7-81bd-fca4777716ac',
                     'nodeType': 'cm:folder',
                     'parentId': 'd4f87809-10d9-49a3-ae7d-7a2640f87f3d'
                 }
             });
-    }
+        }
+    }]);
 
-    rec() {
-        nock.recorder.rec();
-    }
-
-    play() {
-        nock.recorder.play();
-    }
-}
+    return NodeMock;
+}(BaseMock);
 
 module.exports = NodeMock;
 
-},{"nock":75}],281:[function(require,module,exports){
+},{"./baseMock":279,"nock":75}],282:[function(require,module,exports){
 'use strict';
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var nock = require('nock');
+var BaseMock = require('./baseMock');
 
-class UploadMock {
+var UploadMock = function (_BaseMock) {
+    _inherits(UploadMock, _BaseMock);
 
-    constructor(host) {
-        this.host = host ? host : 'http://127.0.0.1:8080';
+    function UploadMock(host) {
+        _classCallCheck(this, UploadMock);
+
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(UploadMock).call(this, host));
     }
 
-    get201CreationFile() {
-        nock(this.host, {'encodedQueryParams': true})
-            .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children')
-            .reply(201, {
+    _createClass(UploadMock, [{
+        key: 'get201CreationFile',
+        value: function get201CreationFile() {
+            nock(this.host, { 'encodedQueryParams': true }).post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children').reply(201, {
                 'entry': {
                     'isFile': true,
-                    'createdByUser': {'id': 'admin', 'displayName': 'Administrator'},
+                    'createdByUser': { 'id': 'admin', 'displayName': 'Administrator' },
                     'modifiedAt': '2016-07-08T16:08:10.218+0000',
                     'nodeType': 'cm:content',
                     'content': {
@@ -55618,22 +54693,20 @@ class UploadMock {
                     'aspectNames': ['cm:versionable', 'cm:titled', 'cm:auditable', 'cm:author'],
                     'createdAt': '2016-07-08T16:08:10.218+0000',
                     'isFolder': false,
-                    'modifiedByUser': {'id': 'admin', 'displayName': 'Administrator'},
+                    'modifiedByUser': { 'id': 'admin', 'displayName': 'Administrator' },
                     'name': 'testFile.txt',
                     'id': '2857abfd-0ac6-459d-a22d-ec78770570f3',
-                    'properties': {'cm:versionLabel': '1.0', 'cm:versionType': 'MAJOR'}
+                    'properties': { 'cm:versionLabel': '1.0', 'cm:versionType': 'MAJOR' }
                 }
             });
-    }
-
-    get201CreationFileAutoRename() {
-        nock(this.host, {'encodedQueryParams': true})
-            .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children')
-            .query({'autoRename': 'true'})
-            .reply(201, {
+        }
+    }, {
+        key: 'get201CreationFileAutoRename',
+        value: function get201CreationFileAutoRename() {
+            nock(this.host, { 'encodedQueryParams': true }).post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children').query({ 'autoRename': 'true' }).reply(201, {
                 'entry': {
                     'isFile': true,
-                    'createdByUser': {'id': 'admin', 'displayName': 'Administrator'},
+                    'createdByUser': { 'id': 'admin', 'displayName': 'Administrator' },
                     'modifiedAt': '2016-07-08T17:04:34.684+0000',
                     'nodeType': 'cm:content',
                     'content': {
@@ -55646,19 +54719,17 @@ class UploadMock {
                     'aspectNames': ['cm:versionable', 'cm:titled', 'cm:auditable', 'cm:author'],
                     'createdAt': '2016-07-08T17:04:34.684+0000',
                     'isFolder': false,
-                    'modifiedByUser': {'id': 'admin', 'displayName': 'Administrator'},
+                    'modifiedByUser': { 'id': 'admin', 'displayName': 'Administrator' },
                     'name': 'testFile-2.txt',
                     'id': 'ae314293-27e8-4221-9a09-699f103db5f3',
-                    'properties': {'cm:versionLabel': '1.0', 'cm:versionType': 'MAJOR'}
+                    'properties': { 'cm:versionLabel': '1.0', 'cm:versionType': 'MAJOR' }
                 }
             });
-    }
-
-
-    get409CreationFileNewNameClashes() {
-        nock(this.host, {'encodedQueryParams': true})
-            .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children')
-            .reply(409, {
+        }
+    }, {
+        key: 'get409CreationFileNewNameClashes',
+        value: function get409CreationFileNewNameClashes() {
+            nock(this.host, { 'encodedQueryParams': true }).post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children').reply(409, {
                 'error': {
                     'errorKey': 'Duplicate child name not allowed: newFile',
                     'statusCode': 409,
@@ -55667,12 +54738,11 @@ class UploadMock {
                     'descriptionURL': 'https://api-explorer.alfresco.com'
                 }
             });
-    }
-
-    get401Response() {
-        nock(this.host, {'encodedQueryParams': true})
-            .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children')
-            .reply(401, {
+        }
+    }, {
+        key: 'get401Response',
+        value: function get401Response() {
+            nock(this.host, { 'encodedQueryParams': true }).post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children').reply(401, {
                 'error': {
                     'errorKey': 'framework.exception.ApiDefault',
                     'statusCode': 401,
@@ -55681,18 +54751,87 @@ class UploadMock {
                     'descriptionURL': 'https://api-explorer.alfresco.com'
                 }
             });
-    }
+        }
+    }]);
 
-    rec() {
-        nock.recorder.rec();
-    }
-
-    play() {
-        nock.recorder.play();
-    }
-}
+    return UploadMock;
+}(BaseMock);
 
 module.exports = UploadMock;
 
-},{"nock":75}]},{},[1])(1)
+},{"./baseMock":279,"nock":75}],283:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var nock = require('nock');
+var BaseMock = require('./baseMock');
+
+var WebScriptMock = function (_BaseMock) {
+    _inherits(WebScriptMock, _BaseMock);
+
+    function WebScriptMock(host, contextRoot, servicePath, scriptPath) {
+        _classCallCheck(this, WebScriptMock);
+
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(WebScriptMock).call(this, host));
+
+        _this.contextRoot = contextRoot || 'alfresco';
+        _this.servicePath = servicePath || 'service';
+        _this.scriptPath = scriptPath;
+
+        _this.scriptSlug = '/' + _this.contextRoot + '/' + _this.servicePath + '/' + _this.scriptPath;
+
+        return _this;
+    }
+
+    _createClass(WebScriptMock, [{
+        key: 'get404Response',
+        value: function get404Response() {
+            nock(this.host, { 'encodedQueryParams': true }).get(this.scriptSlug).reply(404, {
+                'error': {
+                    'errorKey': 'Unable to locate resource resource for :alfresco ',
+                    'statusCode': 404,
+                    'briefSummary': '06130000 Unable to locate resource resource for :alfresco ',
+                    'stackTrace': 'For security reasons the stack trace is no longer displayed, but the property is kept for previous versions.',
+                    'descriptionURL': 'https://api-explorer.alfresco.com'
+                }
+            });
+        }
+    }, {
+        key: 'get200Response',
+        value: function get200Response() {
+            nock(this.host, { 'encodedQueryParams': true }).get(this.scriptSlug).reply(200, {
+                'randomStructure': {
+                    'exampleInt': 1,
+                    'exampleString': 'string test'
+                }
+            });
+        }
+    }, {
+        key: 'get401Response',
+        value: function get401Response() {
+            nock(this.host, { 'encodedQueryParams': true }).get(this.scriptSlug).reply(401, {
+                'error': {
+                    'errorKey': 'framework.exception.ApiDefault',
+                    'statusCode': 401,
+                    'briefSummary': '05210059 Authentication failed for Web Script org/alfresco/api/ResourceWebScript.get',
+                    'stackTrace': 'For security reasons the stack trace is no longer displayed, but the property is kept for previous versions.',
+                    'descriptionURL': 'https://api-explorer.alfresco.com'
+                }
+            });
+        }
+    }]);
+
+    return WebScriptMock;
+}(BaseMock);
+
+module.exports = WebScriptMock;
+
+},{"./baseMock":279,"nock":75}]},{},[1])(1)
 });
