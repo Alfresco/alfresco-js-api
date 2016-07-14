@@ -152,7 +152,7 @@ getNodeInfo(fileOrFolderId, opts)
 
 var fileOrFolderId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
 
-this.alfrescoJsApi.node.getNodeInfo(fileOrFolderId).then(function (data) {
+this.alfrescoJsApi.nodes.getNodeInfo(fileOrFolderId).then(function (data) {
     console.log('This is the name' + data.name );    
 }, function (error) {
     console.log('This node does not exist');
@@ -171,7 +171,7 @@ returns a promise with the Info about the children of the node if resolved and {
 
 var folderNodeId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
 
-this.alfrescoJsApi.node.getNodeChildrenInfo(folderNodeId).then(function (data) {
+this.alfrescoJsApi.nodes.getNodeChildrenInfo(folderNodeId).then(function (data) {
     console.log('The number of children in this folder are ' + data.list.pagination.count );    
 }, function (error) {
     console.log('This node does not exist');
@@ -186,14 +186,14 @@ createFolder(name, relativePath, nodeId, opts)
      
 ```javascript
 
-this.alfrescoJsApi.node.createFolder('newFolderName').then(function (data) {
+this.alfrescoJsApi.nodes.createFolder('newFolderName').then(function (data) {
     console.log('The folder is created in root');    
 }, function (error) {
     console.log('Error in creation of this folder or folder already exist' + error);
 });
 
 
-this.alfrescoJsApi.node.createFolder('newFolderName', 'folderA/folderB').then(function (data) {
+this.alfrescoJsApi.nodes.createFolder('newFolderName', 'folderA/folderB').then(function (data) {
     console.log('The folder is created in  folderA/folderB from root');    
 }, function (error) {
     console.log('Error in creation of this folder or folder already exist' + error);
@@ -202,7 +202,7 @@ this.alfrescoJsApi.node.createFolder('newFolderName', 'folderA/folderB').then(fu
 
 var parentFolder = '80a94ac8-3ece-47ad-864e-5d939424c47c'
 
-this.alfrescoJsApi.node.createFolder('newFolderName', 'folderA/folderB', parentFolder).then(function (data) {
+this.alfrescoJsApi.nodes.createFolder('newFolderName', 'folderA/folderB', parentFolder).then(function (data) {
     console.log('The folder is created in  folderA/folderB from parentFolder:' + parentFolder);    
 }, function (error) {
     console.log('Error in creation of this folder or folder already exist' + error);
@@ -218,7 +218,7 @@ createFolderAutoRename(name, relativePath, nodeId, opts)
 
 ```javascript
 
-this.alfrescoJsApi.node.createFolderAutoRename('newFolderName').then(function (data) {
+this.alfrescoJsApi.nodes.createFolderAutoRename('newFolderName').then(function (data) {
     console.log('The folder is created in root');    
 }, function (error) {
     console.log('Error in creation of this folder' + error);
@@ -325,7 +325,7 @@ Deleted nodes move to the trash bin is still possible to recover it
 
 var fileOrFolderId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
 
-this.alfrescoJsApi.node.deleteNode(fileOrFolderId).then(function (data) {
+this.alfrescoJsApi.nodes.deleteNode(fileOrFolderId).then(function (data) {
     console.log('The file/folder is deleted');    
 }, function (error) {
     console.log('This node does not exist');
@@ -344,7 +344,7 @@ If Deleted Permanent is used will not be possible recover the files
 
 var fileOrFolderId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
 
-this.alfrescoJsApi.node.deleteNodePermanent(fileOrFolderId).then(function (data) {
+this.alfrescoJsApi.nodes.deleteNodePermanent(fileOrFolderId).then(function (data) {
     console.log('The file/folder is deleted');    
 }, function (error) {
     console.log('This node does not exist');
