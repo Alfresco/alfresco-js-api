@@ -140,7 +140,7 @@ class AlfrescoApiClient extends ApiClient {
         };
 
         this.promise.abort = function () {
-            request.emit('abort');
+            request.abort();
             return this;
         };
 

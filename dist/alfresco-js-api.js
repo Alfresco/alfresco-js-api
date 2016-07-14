@@ -53809,7 +53809,7 @@ var AlfrescoApiClient = function (_ApiClient) {
             };
 
             this.promise.abort = function () {
-                request.emit('abort');
+                request.abort();
                 return this;
             };
 
