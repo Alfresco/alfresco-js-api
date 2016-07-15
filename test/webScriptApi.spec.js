@@ -23,7 +23,7 @@ describe('WebScript', function () {
             host: this.host
         });
 
-        this.alfrescoJsApi.login().then(() => {
+        this.alfrescoJsApi.login().then((data) => {
             done();
         });
     });
@@ -48,6 +48,19 @@ describe('WebScript', function () {
                 done();
             }
         );
+    });
+
+    it('execute webScript that return HTML should not return it as Object', function (done) {
+        this.webScriptMock.get200ResponseHTMLFormat();
+
+        this.alfrescoJsApi.webScript.executeWebScript('GET', 'sample/folder/Company%20Home').then((data) => {
+            try {
+                JSON.parse(data);
+            } catch (e) {
+                done();
+            }
+
+        });
     });
 
     describe('Events', function () {

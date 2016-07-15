@@ -53779,7 +53779,13 @@ var AlfrescoApiClient = function (_ApiClient) {
                             reject({ error: error });
                         }
                     } else {
-                        var data = _this3.deserialize(response, returnType);
+                        var data = {};
+                        if (response.type === 'text/html') {
+                            data = _this3.deserialize(response, 'String');
+                        } else {
+                            data = _this3.deserialize(response, returnType);
+                        }
+
                         eventEmitter.emit('success', data);
                         resolve(data);
                     }
@@ -54209,7 +54215,7 @@ var AlfrescoWebScriptApi = function () {
 
             var authNames = ['basicAuth'];
             var contentTypes = ['application/json'];
-            var accepts = ['application/json'];
+            var accepts = ['application/json', 'text/html'];
             var returnType = {};
 
             return this.apiClient.callApi('/' + servicePath + '/' + scriptPath, httpMethod, pathParams, scriptArgs, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, contextRoot);
