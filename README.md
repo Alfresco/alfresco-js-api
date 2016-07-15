@@ -400,8 +400,8 @@ executeWebScript(httpMethod, scriptPath, scriptArgs, contextRoot, servicePath)
 A Web Script is simply a service bound to a URI which responds to HTTP methods such as GET, POST, PUT and DELETE. While using the same underlying code, there are broadly two kinds of Web Scripts.
 
 *  **httpMethod**  possible value GET, POST, PUT and DELETE
-*  **scriptPath**  arguments to pass to Web Script
-*  **scriptArgs**  path to Web Script (as defined by Web Script)
+*  **scriptPath**  path to Web Script (as defined by Web Script)
+*  **scriptArgs**  arguments to pass to Web Script
 *  **contextRoot** path where application is deployed default value 'alfresco'
 *  **servicePath** path where Web Script service is mapped default value 'service'
 
