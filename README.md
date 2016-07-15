@@ -455,8 +455,5 @@ this.alfrescoJsApi.webScript.executeWebScript('GET', 'mytasks', null, 'share', '
 
 ## Release History
 
-
- * 2016-07-08  v0.2.0  Api Simplify
- * 2016-06-16  v0.1.1  Test and task runner Added 
- * 2016-06-03  v0.1.0  
+Read the [Changelog] (./CHANGELOG.md)
 
