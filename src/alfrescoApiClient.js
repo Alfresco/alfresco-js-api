@@ -110,7 +110,13 @@ class AlfrescoApiClient extends ApiClient {
                     }
 
                 } else {
-                    var data = this.deserialize(response, returnType);
+                    var data = {};
+                    if (response.type === 'text/html') {
+                        data = this.deserialize(response, 'String');
+                    } else {
+                        data = this.deserialize(response, returnType);
+                    }
+
                     eventEmitter.emit('success', data);
                     resolve(data);
                 }

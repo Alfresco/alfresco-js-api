@@ -41,7 +41,7 @@ class AlfrescoWebScriptApi  {
 
         var authNames = ['basicAuth'];
         var contentTypes = ['application/json'];
-        var accepts = ['application/json'];
+        var accepts = ['application/json', 'text/html'];
         var returnType = {};
 
         return this.apiClient.callApi(
