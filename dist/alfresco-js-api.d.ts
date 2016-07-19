@@ -158,6 +158,10 @@ interface Mock {
     WebScript: WebScript;
 }
 
+interface Activiti {
+
+}
+
 interface NodesApi {
     new(client: ApiClient): NodesApi;
     getNodeChildren(nodeId: string, opts: any): NodePaging;
@@ -167,9 +171,14 @@ interface ApiClient {
     new(client: any): ApiClient;
 }
 
+interface BpmAuth {
+    new(config: any): BpmAuth;
+}
+
 export interface AlfrescoApi {
     new(config: any): AlfrescoApi;
 
+    Activiti: Activiti;
     Auth: Auth;
     Core: Core;
     Mock: Mock;

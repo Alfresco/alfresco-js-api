@@ -1,10 +1,10 @@
 /*global describe, it, beforeEach */
 
-var AlfrescoApi = require('../main');
 var expect = require('chai').expect;
 var AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
+var EcmAuth = require('../src/ecmAuth');
 
-describe('Auth', function () {
+describe('Ecm Auth test', function () {
 
     beforeEach(function () {
         this.host = 'http://127.0.0.1:8080';
@@ -17,31 +17,34 @@ describe('Auth', function () {
 
             this.authResponseMock.get201Response();
 
-            this.alfrescoJsApi = new AlfrescoApi({
+            this.ecmAuth = new EcmAuth({
                 username: 'admin',
                 password: 'admin',
+                contextRoot: 'alfresco',
                 host: this.host
             });
 
-            this.alfrescoJsApi.login().then((data) => {
+            this.ecmAuth.login().then((data) => {
                 expect(data).to.be.equal('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
                 done();
             }, function () {
             });
+
         });
 
         it('isLoggedIn should return true if the api is logged in', function (done) {
 
             this.authResponseMock.get201Response();
 
-            this.alfrescoJsApi = new AlfrescoApi({
+            this.ecmAuth = new EcmAuth({
                 username: 'admin',
                 password: 'admin',
+                contextRoot: 'alfresco',
                 host: this.host
             });
 
-            this.alfrescoJsApi.login().then(() => {
-                expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(true);
+            this.ecmAuth.login().then(() => {
+                expect(this.ecmAuth.isLoggedIn()).to.be.equal(true);
                 done();
             }, function () {
             });
@@ -51,18 +54,19 @@ describe('Auth', function () {
 
             this.authResponseMock.get201Response();
 
-            this.alfrescoJsApi = new AlfrescoApi({
+            this.ecmAuth = new EcmAuth({
                 username: 'admin',
                 password: 'admin',
+                contextRoot: 'alfresco',
                 host: this.host
             });
 
-            this.alfrescoJsApi.login();
+            this.ecmAuth.login();
 
             this.authResponseMock.get204ResponseLogout();
 
-            this.alfrescoJsApi.logout().then(() => {
-                expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(false);
+            this.ecmAuth.logout().then(() => {
+                expect(this.ecmAuth.isLoggedIn()).to.be.equal(false);
                 done();
             }, function () {
             });
@@ -71,13 +75,14 @@ describe('Auth', function () {
         it('login should return an error if wrong credential are used 403 the login fails', function (done) {
             this.authResponseMock.get403Response();
 
-            this.alfrescoJsApi = new AlfrescoApi({
+            this.ecmAuth = new EcmAuth({
                 username: 'wrong',
                 password: 'name',
+                contextRoot: 'alfresco',
                 host: this.host
             });
 
-            this.alfrescoJsApi.login().then(function () {
+            this.ecmAuth.login().then(function () {
 
             }, function (error) {
                 expect(error.status).to.be.equal(403);
@@ -88,13 +93,14 @@ describe('Auth', function () {
         it('login should return an error if wrong credential are used 400 userId and/or password are/is not provided', function (done) {
             this.authResponseMock.get400Response();
 
-            this.alfrescoJsApi = new AlfrescoApi({
+            this.ecmAuth = new EcmAuth({
                 username: null,
                 password: null,
+                contextRoot: 'alfresco',
                 host: this.host
             });
 
-            this.alfrescoJsApi.login().then(function () {
+            this.ecmAuth.login().then(function () {
 
             }, function (error) {
                 expect(error.status).to.be.equal(400);
@@ -106,13 +112,14 @@ describe('Auth', function () {
             it('login should fire an event if is unauthorized  401', function (done) {
                 this.authResponseMock.get401Response();
 
-                this.alfrescoJsApi = new AlfrescoApi({
+                this.ecmAuth = new EcmAuth({
                     username: 'wrong',
                     password: 'credentials',
+                    contextRoot: 'alfresco',
                     host: this.host
                 });
 
-                this.alfrescoJsApi.login().on('unauthorized', ()=> {
+                this.ecmAuth.login().on('unauthorized', ()=> {
                     done();
                 });
             });
@@ -120,13 +127,14 @@ describe('Auth', function () {
             it('The Api Should fire success event if is all ok 201', function (done) {
                 this.authResponseMock.get201Response();
 
-                this.alfrescoJsApi = new AlfrescoApi({
+                this.ecmAuth = new EcmAuth({
                     username: 'admin',
                     password: 'admin',
+                    contextRoot: 'alfresco',
                     host: this.host
                 });
 
-                this.alfrescoJsApi.login().on('success', ()=> {
+                this.ecmAuth.login().on('success', ()=> {
                     done();
                 });
             });
@@ -134,17 +142,18 @@ describe('Auth', function () {
             it('The Api Should fire logout event if the logout is successfull', function (done) {
                 this.authResponseMock.get201Response();
 
-                this.alfrescoJsApi = new AlfrescoApi({
+                this.ecmAuth = new EcmAuth({
                     username: 'admin',
                     password: 'admin',
+                    contextRoot: 'alfresco',
                     host: this.host
                 });
 
-                this.alfrescoJsApi.login();
+                this.ecmAuth.login();
 
                 this.authResponseMock.get204ResponseLogout();
 
-                this.alfrescoJsApi.logout().on('logout', ()=> {
+                this.ecmAuth.logout().on('logout', ()=> {
                     done();
                 });
             });
@@ -155,12 +164,12 @@ describe('Auth', function () {
             it('Ticket should be present in the client', function () {
                 this.authResponseMock.get400Response();
 
-                this.alfrescoJsApi = new AlfrescoApi({
+                this.ecmAuth = new EcmAuth({
                     ticket: 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1',
                     host: this.host
                 });
 
-                expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(this.alfrescoJsApi.getClient().authentications.basicAuth.password);
+                expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(this.ecmAuth.authentications.basicAuth.password);
             });
         });
 
@@ -168,13 +177,14 @@ describe('Auth', function () {
 
             beforeEach(function (done) {
                 this.authResponseMock.get201Response('TICKET_22d7a5a83d78b9cc9666ec4e412475e5455b33bd');
-                this.alfrescoJsApi = new AlfrescoApi({
+                this.ecmAuth = new EcmAuth({
                     username: 'admin',
                     password: 'admin',
+                    contextRoot: 'alfresco',
                     host: this.host
                 });
 
-                this.alfrescoJsApi.login().then(() => {
+                this.ecmAuth.login().then(() => {
                     done();
                 });
             });
@@ -182,8 +192,8 @@ describe('Auth', function () {
             it('Ticket should be absent in the client and the resolve promise should be called', function (done) {
                 this.authResponseMock.get204ResponseLogout();
 
-                this.alfrescoJsApi.logout().then((data)=> {
-                    expect(this.alfrescoJsApi.config.ticket).to.be.equal(undefined);
+                this.ecmAuth.logout().then((data)=> {
+                    expect(this.ecmAuth.config.ticket).to.be.equal(undefined);
                     expect(data).to.be.equal('logout');
                     done();
                 }, function () {
@@ -192,7 +202,7 @@ describe('Auth', function () {
 
             it('Logout should be rejected if the Ticket is already expired', function (done) {
                 this.authResponseMock.get404ResponseLogout();
-                this.alfrescoJsApi.logout().then(() => {
+                this.ecmAuth.logout().then(() => {
                 }, (error) => {
                     expect(error.error.toString()).to.be.equal('Error: Not Found');
                     done();

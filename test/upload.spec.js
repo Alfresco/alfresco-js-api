@@ -2,8 +2,8 @@
 
 var AlfrescoApi = require('../main');
 var expect = require('chai').expect;
-var AuthResponseMock = require('../test/mockObjects/authResponseMock');
-var UploadMock = require('../test/mockObjects/uploadMock');
+var AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
+var UploadMock = require('../test/mockObjects/mockAlfrescoApi').Upload;
 var fs = require('fs');
 
 describe('Upload', function () {
@@ -29,7 +29,7 @@ describe('Upload', function () {
         it('upload file should return 200 if is all ok', function (done) {
             this.uploadMock.get201CreationFile();
 
-            var file = fs.createReadStream('./test/mockObjects/testFile.txt');
+            var file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
             this.alfrescoJsApi.upload.uploadFile(file).then(function (data) {
                 expect(data.entry.isFile).to.be.equal(true);
@@ -41,7 +41,7 @@ describe('Upload', function () {
         it('upload file should get 409 if new name clashes with an existing file in the current parent folder', function (done) {
             this.uploadMock.get409CreationFileNewNameClashes();
 
-            var file = fs.createReadStream('./test/mockObjects/testFile.txt');
+            var file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
             this.alfrescoJsApi.upload.uploadFile(file).then(function () {
             }, function (error) {
@@ -53,7 +53,7 @@ describe('Upload', function () {
         it('upload file should get 200 and rename if the new name clashes with an existing file in the current parent folder and autorename is true', function (done) {
             this.uploadMock.get201CreationFileAutoRename();
 
-            var file = fs.createReadStream('./test/mockObjects/testFile.txt');
+            var file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
             this.alfrescoJsApi.upload.uploadFile(file, null, null, null, {autoRename: true})
                 .then(function (data) {
@@ -64,7 +64,7 @@ describe('Upload', function () {
         });
 
         it('Abort should stop the  file file upload', function (done) {
-            var file = fs.createReadStream('./test/mockObjects/testFile.txt');
+            var file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
             var promise = this.alfrescoJsApi.upload.uploadFile(file, null, null, null, {autoRename: true}).once('abort', ()=> {
                 done();
@@ -78,7 +78,7 @@ describe('Upload', function () {
         it('Upload should fire done event at the end of an upload', function (done) {
             this.uploadMock.get201CreationFile();
 
-            var file = fs.createReadStream('./test/mockObjects/testFile.txt');
+            var file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
             this.alfrescoJsApi.upload.uploadFile(file).on('success', ()=> {
                 done();
@@ -88,7 +88,7 @@ describe('Upload', function () {
         it('Upload should fire error event if something go wrong', function (done) {
             this.uploadMock.get409CreationFileNewNameClashes();
 
-            var file = fs.createReadStream('./test/mockObjects/testFile.txt');
+            var file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
             this.alfrescoJsApi.upload.uploadFile(file).on('error', ()=> {
                 done();
@@ -98,7 +98,7 @@ describe('Upload', function () {
         it('Upload should fire unauthorized event if get 401', function (done) {
             this.uploadMock.get401Response();
 
-            var file = fs.createReadStream('./test/mockObjects/testFile.txt');
+            var file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
             this.alfrescoJsApi.upload.uploadFile(file).on('unauthorized', ()=> {
                 done();
@@ -108,7 +108,7 @@ describe('Upload', function () {
         it('Upload should fire progress event during the upload', function (done) {
             this.uploadMock.get201CreationFile();
 
-            var file = fs.createReadStream('./test/mockObjects/testFile.txt');
+            var file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
             this.alfrescoJsApi.upload.uploadFile(file).once('progress', ()=> {
                 done();
@@ -117,8 +117,8 @@ describe('Upload', function () {
 
         it('Multiple Upload should fire progress events on the right promise during the upload', function (done) {
 
-            var file = fs.createReadStream('./test/mockObjects/testFile.txt');
-            var fileTwo = fs.createReadStream('./test/mockObjects/testFile2.txt');
+            var file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
+            var fileTwo = fs.createReadStream('./test/mockObjects/assets/testFile2.txt');
 
             var progressOneOk = false;
             var progressTwoOk = false;
@@ -150,8 +150,8 @@ describe('Upload', function () {
 
         it('Multiple Upload should fire error events on the right promise during the upload', function (done) {
 
-            var file = fs.createReadStream('./test/mockObjects/testFile.txt');
-            var fileTwo = fs.createReadStream('./test/mockObjects/testFile2.txt');
+            var file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
+            var fileTwo = fs.createReadStream('./test/mockObjects/assets/testFile2.txt');
 
             var errorOneOk = false;
             var errorTwoOk = false;
@@ -183,8 +183,8 @@ describe('Upload', function () {
 
         it('Multiple Upload should fire success events on the right promise during the upload', function (done) {
 
-            var file = fs.createReadStream('./test/mockObjects/testFile.txt');
-            var fileTwo = fs.createReadStream('./test/mockObjects/testFile2.txt');
+            var file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
+            var fileTwo = fs.createReadStream('./test/mockObjects/assets/testFile2.txt');
 
             var successOneOk = false;
             var successTwoOk = false;
@@ -216,8 +216,8 @@ describe('Upload', function () {
 
         it('Multiple Upload should resolve the correct promise', function (done) {
 
-            var file = fs.createReadStream('./test/mockObjects/testFile.txt');
-            var fileTwo = fs.createReadStream('./test/mockObjects/testFile2.txt');
+            var file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
+            var fileTwo = fs.createReadStream('./test/mockObjects/assets/testFile2.txt');
 
             var resolveOneOk = false;
             var resolveTwoOk = false;
@@ -243,8 +243,8 @@ describe('Upload', function () {
 
         it('Multiple Upload should reject the correct promise', function (done) {
 
-            var file = fs.createReadStream('./test/mockObjects/testFile.txt');
-            var fileTwo = fs.createReadStream('./test/mockObjects/testFile2.txt');
+            var file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
+            var fileTwo = fs.createReadStream('./test/mockObjects/assets/testFile2.txt');
 
             var rejectOneOk = false;
             var rejectTwoOk = false;
@@ -270,7 +270,7 @@ describe('Upload', function () {
 
         it('Is possible use chain events', function (done) {
 
-            var file = fs.createReadStream('./test/mockObjects/testFile.txt');
+            var file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
             this.uploadMock.get401Response();
 

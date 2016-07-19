@@ -1,7 +1,7 @@
 'use strict';
 
 var nock = require('nock');
-var BaseMock = require('./baseMock');
+var BaseMock = require('../baseMock');
 
 class WebScriptMock extends BaseMock {
 

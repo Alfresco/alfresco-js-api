@@ -64,6 +64,7 @@ npm install --save alfresco-js-api
 
 - [Authentication API](/src/alfresco-auth-rest-api)
 - [Core API](/src/alfresco-core-rest-api)
+- [Activiti API](/src/alfresco-activiti-rest-api)
 - [Mock API](/test/mockObjects)
 
 ### Basic usage For node projects

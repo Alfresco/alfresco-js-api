@@ -3,11 +3,11 @@
 class AlfrescoContent {
     /**
      * @param {String} apiBaseUrl
-     * @param {Object} config
+     * @param {EcmAuth} ecmAuth
      */
-    constructor(apiBaseUrl, config) {
+    constructor(apiBaseUrl, ecmAuth) {
         this.apiBaseUrl = apiBaseUrl;
-        this.config = config;
+        this.ecmAuth = ecmAuth;
     }
 
     /**
@@ -19,7 +19,7 @@ class AlfrescoContent {
      */
     getDocumentThumbnailUrl(documentId) {
         return this.apiBaseUrl + '/nodes/' + documentId +
-            '/renditions/doclib/content' + '?attachment=false&alf_ticket=' + this.config.ticket;
+            '/renditions/doclib/content' + '?attachment=false&alf_ticket=' + this.ecmAuth.getTicket();
     }
 
     /**
@@ -31,7 +31,7 @@ class AlfrescoContent {
      */
     getContentUrl(documentId) {
         return this.apiBaseUrl + '/nodes/' + documentId +
-            '/content' + '?attachment=false&alf_ticket=' + this.config.ticket;
+            '/content' + '?attachment=false&alf_ticket=' + this.ecmAuth.getTicket();
     }
 
 }

@@ -2,6 +2,7 @@
 
 var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
 var AlfrescoAuthRestApi = require('./alfresco-auth-rest-api/src/index');
+var AlfrescoActivitiApi = require('./alfresco-activiti-rest-api/src/index');
 var AlfrescoMock = require('../test/mockObjects/mockAlfrescoApi.js');
 var AlfrescoApiClient = require('./alfrescoApiClient');
 var AlfrescoContent = require('./alfrescoContent');
@@ -10,6 +11,7 @@ var AlfrescoSearch = require('./alfrescoSearch');
 var AlfrescoUpload = require('./alfrescoUpload');
 var AlfrescoWebScriptApi = require('./alfrescoWebScript');
 var Emitter = require('event-emitter');
+var EcmAuth = require('./ecmAuth');
 
 class AlfrescoApi {
     /**
@@ -17,9 +19,10 @@ class AlfrescoApi {
      *
      *      config = {
      *        host:       // alfrescoHost Your share server IP or DNS name
+     *        hostActiviti: // hostActiviti Your activiti server IP or DNS name
      *        contextRoot: // contextRoot default value alfresco
-     *        username:   // Username to login in share
-     *        password:   // Password to login in share
+     *        username:   // Username to login
+     *        password:   // Password to login
      *        ticket:     // Ticket if you already have a ticket you can pass only the ticket and skip the login, in this case you don't need username and password
      *    };
      */
@@ -32,31 +35,33 @@ class AlfrescoApi {
      * @param {Object} config
      *
      *      config = {
-     *        host:       // alfrescoHost Your share server IP or DNS name
-     *        contextRoot: // contextRoot default value alfresco
-     *        username:   // Username to login in share
-     *        password:   // Password to login in share
+     *        host:       // alfrescoHost Your share server IP or DNS name @default http://127.0.0.1:8080
+     *        hostActiviti: // hostActiviti Your activiti server IP or DNS name   @default http://127.0.0.1:9090
+     *        contextRoot: // contextRoot  @default value alfresco
+     *        username:   // Username to login
+     *        password:   // Password to login
      *        ticket:     // Ticket if you already have a ticket you can pass only the ticket and skip the login, in this case you don't need username and password
      *    };
      * */
     changeConfig(config) {
         this.config = {
             host: config.host || 'http://127.0.0.1:8080',
+            hostActiviti: config.host || 'http://127.0.0.1:9090',
             contextRoot: config.contextRoot || 'alfresco',
             username: config.username,
             password: config.password,
             ticket: config.ticket
         };
 
-        this.apiAuthUrl = this.config.host + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
         this.apiCoreUrl = this.config.host + '/' + this.config.contextRoot + '/api/-default-/public/alfresco/versions/1';   //Core Call
 
-        this.createClients(this.config.host);
+        this.createClients(this.config);
 
         AlfrescoCoreRestApi.ApiClient.instance = this.getClient();
+
         this.nodes = this.node = new AlfrescoNode();
         this.search = new AlfrescoSearch();
-        this.content = new AlfrescoContent(this.apiCoreUrl, this.config);
+        this.content = new AlfrescoContent(this.apiCoreUrl, this.ecmAuth);
         this.upload = new AlfrescoUpload();
         this.webScript = new AlfrescoWebScriptApi();
     }
@@ -64,11 +69,11 @@ class AlfrescoApi {
     /**
      * build  Alfresco API Clients
      *
-     * @param {String} host
+     * @param {Object} config
      * */
-    createClients(host) {
-        this.alfrescoClient = new AlfrescoApiClient(host);
-        this.alfrescoClientAuth = new AlfrescoApiClient(host);
+    createClients(config) {
+        this.alfrescoClient = new AlfrescoApiClient(config.host);
+        this.ecmAuth = new EcmAuth(config);
     }
 
     /**
@@ -86,50 +91,12 @@ class AlfrescoApi {
     }
 
     /**
-     * return an Alfresco API Client
-     *
-     * @returns {ApiClient} Alfresco API Client
-     * */
-    getClientAuth() {
-        if (this.alfrescoClientAuth) {
-            this.alfrescoClientAuth.basePath = this.apiAuthUrl;
-            this.alfrescoClientAuth.authentications.basicAuth.username = 'ROLE_TICKET';
-            this.alfrescoClientAuth.authentications.basicAuth.password = this.config.ticket;
-            return this.alfrescoClientAuth;
-        }
-    }
-
-    /**
      * login Alfresco API
      *
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
     login() {
-        var apiInstance = new AlfrescoAuthRestApi.AuthenticationApi(this.getClientAuth());
-        var loginRequest = new AlfrescoAuthRestApi.LoginRequest();
-
-        loginRequest.userId = this.config.username;
-        loginRequest.password = this.config.password;
-
-        this.promise = new Promise((resolve, reject) => {
-            apiInstance.createTicket(loginRequest).then(
-                (data) => {
-                    this.setTicket(data.entry.id);
-                    this.promise.emit('success');
-                    resolve(data.entry.id);
-                },
-                (error) => {
-                    if (error.status === 401) {
-                        this.promise.emit('unauthorized');
-                    }
-                    this.promise.emit('error');
-                    reject(error);
-                });
-        });
-
-        Emitter(this.promise); // jshint ignore:line
-
-        return this.promise;
+        return this.ecmAuth.login();
     }
 
     /**
@@ -138,27 +105,7 @@ class AlfrescoApi {
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
     logout() {
-        var apiInstance = new AlfrescoAuthRestApi.AuthenticationApi(this.getClientAuth());
-
-        this.promise = new Promise((resolve, reject) => {
-            apiInstance.deleteTicket().then(
-                (data) => {
-                    this.promise.emit('logout');
-                    this.setTicket(undefined);
-                    resolve('logout');
-                },
-                (error) => {
-                    if (error.status === 401) {
-                        this.promise.emit('unauthorized');
-                    }
-                    this.promise.emit('error');
-                    reject(error);
-                });
-        });
-
-        Emitter(this.promise); // jshint ignore:line
-
-        return this.promise;
+        return this.ecmAuth.logout();
     }
 
     /**
@@ -167,7 +114,7 @@ class AlfrescoApi {
      * @returns {Boolean} is logged in
      */
     isLoggedIn() {
-        return !!this.config.ticket;
+        return this.ecmAuth.isLoggedIn();
     }
 
     /**
@@ -176,8 +123,7 @@ class AlfrescoApi {
      * @param {String} Ticket
      * */
     setTicket(ticket) {
-        this.config.ticket = ticket;
-        this.alfrescoClient.authentications.basicAuth.password = ticket;
+        return this.ecmAuth.setTicket(ticket);
     }
 
     /**
@@ -186,13 +132,14 @@ class AlfrescoApi {
      * @returns {String} Ticket
      * */
     getTicket() {
-        return this.config.ticket;
+        return this.ecmAuth.getTicket();
     }
 }
 
 Emitter(AlfrescoApi.prototype); // jshint ignore:line
 module.exports = AlfrescoApi;
 
+module.exports.Activiti = AlfrescoActivitiApi;
 module.exports.Core = AlfrescoCoreRestApi;
 module.exports.Auth = AlfrescoAuthRestApi;
 module.exports.Mock = AlfrescoMock;
