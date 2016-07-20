@@ -27,45 +27,49 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
 
 <!-- toc -->
 
-  * [Node](#node)
-  * [Install](#install)
-  * [Api Modules](#api-modules)
+- [Node](#node)
+- [Api Modules](#api-modules)
+- [Install](#install)
+- [Use](#use)
     + [Basic usage For node projects](#basic-usage-for-node-projects)
     + [Basic usage For browser](#basic-usage-for-browser)
-  * [Getting Started](#getting-started)
-- [Login](#login)
-- [Logout](#logout)
-- [isLoggedIn](#isloggedin)
-- [Events login/logout](#events-loginlogout)
-- [Get File or Folder Info](#get-file-or-folder-info)
-- [Get Folder Children Info](#get-folder-children-info)
-- [Create Folder](#create-folder)
-- [Upload File](#upload-file)
-- [Events Upload File](#events-upload-file)
-- [Delete File or Folder](#delete-file-or-folder)
-- [Delete File or Folder Permanent](#delete-file-or-folder-permanent)
-- [Get thumbnail Url](#get-thumbnail-url)
-- [Get content Url](#get-content-url)
-- [Custom web scripts call](#custom-web-scripts-call)
-  * [Development](#development)
-  * [Release History](#release-history)
+- [Getting Started](#getting-started)
+  * [ECM](#ecm)
+    + [Login](#login)
+    + [Logout](#logout)
+    + [isLoggedIn](#isloggedin)
+    + [Events login/logout](#events-loginlogout)
+    + [Get File or Folder Info](#get-file-or-folder-info)
+    + [Get Folder Children Info](#get-folder-children-info)
+    + [Create Folder](#create-folder)
+    + [Upload File](#upload-file)
+    + [Events Upload File](#events-upload-file)
+    + [Delete File or Folder](#delete-file-or-folder)
+    + [Delete File or Folder Permanent](#delete-file-or-folder-permanent)
+    + [Get thumbnail Url](#get-thumbnail-url)
+    + [Get content Url](#get-content-url)
+    + [Custom web scripts call](#custom-web-scripts-call)
+- [Development](#development)
+- [Release History](#release-history)
 
 <!-- tocstop -->
 
 <!-- markdown-toc end -->
 
-## Node
+# Node
 To correctly use this component check that on your machine is running Node version 5.0.0 or higher.
 
-## Install
-npm install --save alfresco-js-api
-
-## Api Modules
+# Api Modules
 
 - [Authentication API](/src/alfresco-auth-rest-api)
 - [Core API](/src/alfresco-core-rest-api)
 - [Activiti API](/src/alfresco-activiti-rest-api)
 - [Mock API](/test/mockObjects)
+
+# Install
+npm install --save alfresco-js-api
+
+# Use
 
 ### Basic usage For node projects
 
@@ -83,18 +87,20 @@ var AlfrescoJsApi = require('alfresco-js-api');
     <script src="node_modules/alfresco-js-api/dist/alfresco-js-api.js"></script>
 ```
 
-## Getting Started
+# Getting Started
 
 Please follow the [installation](#installation) instruction and execute the following JS code:
 
-#  Login
+## ECM
+
+### Login
 
 AlfrescoApi({username, password, alfrescoHost, contextRoot, ticket});
 
 >If you want login with Username and Password
 *username
 *password
-*alfrescoHost (The Ip or Name of the host where your Alfresco istance is running default value 'http://127.0.0.1:8080')
+*alfrescoHost (The Ip or Name of the host where your Alfresco instance is running default value 'http://127.0.0.1:8080')
 *contextRoot (Optional value default value is alfresco default value  'alfresco')
 *ticket (Optional only if you want login with the ticket see example below)
 
@@ -123,7 +129,7 @@ this.alfrescoJsApi = new AlfrescoApi({ ticket:'TICKET_4479f4d3bb155195879bfbb8d5
 
 ```
 
-#  Logout
+### Logout
 
 logout()
 
@@ -137,7 +143,7 @@ this.alfrescoJsApi.logout().then(function (data) {
 
 ```
 
-#  isLoggedIn
+### isLoggedIn
 
 isLoggedIn()
 
@@ -154,7 +160,7 @@ if (isLoggedIn) {
 }
 
 ```
-#  Events login/logout
+### Events login/logout
 
 >  The login/logout are also an EventEmitter which you can register to listen to any of the following event types:
 * unauthorized (If this event is triggered a call to the Api was unauthorized)
@@ -176,7 +182,7 @@ this.alfrescoJsApi.logout().on('logout', function(){
 });
 ```
 
-#  Get File or Folder Info
+### Get File or Folder Info
 
 getNodeInfo(fileOrFolderId, opts)
 
@@ -193,7 +199,7 @@ this.alfrescoJsApi.nodes.getNodeInfo(fileOrFolderId).then(function (data) {
 });
 
 ```
-#  Get Folder Children Info
+### Get Folder Children Info
 
 getNodeChildren(fileOrFolderId, opts)
 
@@ -212,7 +218,7 @@ this.alfrescoJsApi.nodes.getNodeChildren(folderNodeId).then(function (data) {
 });
 
 ```
-#  Create Folder
+### Create Folder
 
 createFolder(name, relativePath, nodeId, opts) 
 
@@ -259,7 +265,7 @@ this.alfrescoJsApi.nodes.createFolderAutoRename('newFolderName').then(function (
 });
 ```
 
-#  Upload File
+### Upload File
 
 uploadFile(fileDefinition, relativePath, nodeId, nodeBody, opts)
 >uploadFile return a promise that is resolved if the file is successful uploaded and {error} if rejected.
@@ -332,7 +338,7 @@ promiseUpload.abort();
 ```
 
 
-#  Events Upload File
+### Events Upload File
 
 >  The uploadFile is also an EventEmitter which you can register to listen to any of the following event types:
 * progress 
@@ -366,7 +372,7 @@ this.alfrescoJsApi.upload.uploadFile(fileToUpload)
     })
 ```
 
-#  Delete File or Folder
+### Delete File or Folder
 
 deleteNode(fileOrFolderId)
 
@@ -385,7 +391,7 @@ this.alfrescoJsApi.nodes.deleteNode(fileOrFolderId).then(function (data) {
 
 ```
 
-#  Delete File or Folder Permanent
+### Delete File or Folder Permanent
 
 deleteNodePermanent(fileOrFolderId)
 
@@ -404,7 +410,7 @@ this.alfrescoJsApi.nodes.deleteNodePermanent(fileOrFolderId).then(function (data
 
 ```
 
-#  Get thumbnail Url
+### Get thumbnail Url
   
 getDocumentThumbnailUrl(documentId)
 
@@ -414,7 +420,7 @@ var thumbnailUrl = this.alfrescoJsApi.content.getDocumentThumbnailUrl('1a0b110f-
 
 ```
 
-#  Get content Url
+### Get content Url
   
 getContentUrl(documentId)
 
@@ -424,7 +430,7 @@ var thumbnailUrl = this.alfrescoJsApi.content.getContentUrl('1a0b110f-1e09-4ca2-
 
 ```
 
-# Custom web scripts call
+### Custom web scripts call
 
 For mor information about web scripts read the [Wiki](https://wiki.alfresco.com/wiki/Web_Scripts) and the [Wiki with Web Scripts Examples](https://wiki.alfresco.com/wiki/Web_Scripts_Examples)
 
@@ -466,9 +472,28 @@ this.alfrescoJsApi.webScript.executeWebScript('GET', 'mytasks', null, 'share', '
 });
         
 ```
-      
 
-## Development
+## BPM
+      
+### Login
+
+
+AlfrescoApi({username, password, activitiHost});
+
+>If you want login with Username and Password
+*username
+*password
+*activitiHost (The Ip or Name of the host where your Activiti instance is running default value 'http://127.0.0.1:9999')
+
+```javascript
+var AlfrescoApi = require('alfresco-js-api');
+
+this.alfrescoJsApi = new AlfrescoApi({ username:'admin', password:'admin', activitiHost:'http://127.0.0.1:9999'});
+
+```
+
+
+# Development
 
 * To run the build 
 
@@ -487,7 +512,7 @@ this.alfrescoJsApi.webScript.executeWebScript('GET', 'mytasks', null, 'share', '
     ```$ npm run coverage```
 
 
-## Release History
+# Release History
 
 Read the [Changelog] (./CHANGELOG.md)
 

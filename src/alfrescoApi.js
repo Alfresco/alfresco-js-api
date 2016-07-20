@@ -12,6 +12,7 @@ var AlfrescoUpload = require('./alfrescoUpload');
 var AlfrescoWebScriptApi = require('./alfrescoWebScript');
 var Emitter = require('event-emitter');
 var EcmAuth = require('./ecmAuth');
+var BpmAuth = require('./BpmAuth');
 
 class AlfrescoApi {
     /**
@@ -33,20 +34,11 @@ class AlfrescoApi {
 
     /**
      * @param {Object} config
-     *
-     *      config = {
-     *        host:       // alfrescoHost Your share server IP or DNS name @default http://127.0.0.1:8080
-     *        hostActiviti: // hostActiviti Your activiti server IP or DNS name   @default http://127.0.0.1:9090
-     *        contextRoot: // contextRoot  @default value alfresco
-     *        username:   // Username to login
-     *        password:   // Password to login
-     *        ticket:     // Ticket if you already have a ticket you can pass only the ticket and skip the login, in this case you don't need username and password
-     *    };
-     * */
+     */
     changeConfig(config) {
         this.config = {
             host: config.host || 'http://127.0.0.1:8080',
-            hostActiviti: config.host || 'http://127.0.0.1:9090',
+            hostActiviti: config.host || 'http://127.0.0.1:9999',
             contextRoot: config.contextRoot || 'alfresco',
             username: config.username,
             password: config.password,
@@ -55,9 +47,10 @@ class AlfrescoApi {
 
         this.apiCoreUrl = this.config.host + '/' + this.config.contextRoot + '/api/-default-/public/alfresco/versions/1';   //Core Call
 
-        this.createClients(this.config);
-
         AlfrescoCoreRestApi.ApiClient.instance = this.getClient();
+
+        this.ecmAuth = new EcmAuth(this.config);
+        this.bpmAuth = new BpmAuth(this.config);
 
         this.nodes = this.node = new AlfrescoNode();
         this.search = new AlfrescoSearch();
@@ -67,27 +60,19 @@ class AlfrescoApi {
     }
 
     /**
-     * build  Alfresco API Clients
-     *
-     * @param {Object} config
-     * */
-    createClients(config) {
-        this.alfrescoClient = new AlfrescoApiClient(config.host);
-        this.ecmAuth = new EcmAuth(config);
-    }
-
-    /**
      * return an Alfresco API Client
      *
      * @returns {ApiClient} Alfresco API Client
      * */
     getClient() {
-        if (this.alfrescoClient) {
-            this.alfrescoClient.basePath = this.apiCoreUrl;
-            this.alfrescoClient.authentications.basicAuth.username = 'ROLE_TICKET';
-            this.alfrescoClient.authentications.basicAuth.password = this.config.ticket;
-            return this.alfrescoClient;
+        if (!this.alfrescoClient) {
+            this.alfrescoClient = new AlfrescoApiClient(this.config.host);
         }
+
+        this.alfrescoClient.basePath = this.apiCoreUrl;
+        this.alfrescoClient.authentications.basicAuth.username = 'ROLE_TICKET';
+        this.alfrescoClient.authentications.basicAuth.password = this.config.ticket;
+        return this.alfrescoClient;
     }
 
     /**
