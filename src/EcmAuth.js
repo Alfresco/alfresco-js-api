@@ -8,20 +8,11 @@ class EcmAuth extends AlfrescoApiClient {
 
     /**
      * @param {Object} config
-     *
-     *      config = {
-     *        host:       // alfrescoHost Your share server IP or DNS name
-     *        hostActiviti: // hostActiviti Your activiti server IP or DNS name
-     *        contextRoot: // contextRoot default value alfresco
-     *        username:   // Username to login
-     *        password:   // Password to login
-     *        ticket:     // Ticket if you already have a ticket you can pass only the ticket and skip the login, in this case you don't need username and password
-     *    };
      */
     constructor(config) {
         super();
-        this.config = config;
         this.ticket = undefined;
+        this.config = config;
         this.host = this.config.host;
         this.basePath = this.config.host + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
         this.authentications.basicAuth.username = 'ROLE_TICKET';
