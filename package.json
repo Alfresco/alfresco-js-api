@@ -13,7 +13,8 @@
     "bundle": "browserify -s AlfrescoApi main.js -o dist/alfresco-js-api.js -t [ babelify --sourceMapsAbsolute --presets es2015 ] ",
     "minify": "browserify -s AlfrescoApi dist/alfresco-js-api.js -d -p [minifyify --no-map] > dist/alfresco-js-api.min.js",
     "watchify": "watchify -s AlfrescoApi main.js -o dist/alfresco-js-api.js",
-    "tslint": "tslint -c tslint.json bundle.d.ts"
+    "tslint": "tslint -c tslint.json bundle.d.ts",
+    "toc" : "markdown-toc -i README.md"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
     "url": "https://github.com/Alfresco/alfresco-js-api/issues"
   },
   "dependencies": {
+    "markdown-toc": "^0.12.14",
     "superagent": "1.7.1"
   },
   "devDependencies": {

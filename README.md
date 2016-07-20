@@ -1,8 +1,10 @@
 # Alfresco JavaScript API Client
 
-[![Join the chat at https://gitter.im/Alfresco/alfresco-ng2-components](https://badges.gitter.im/Alfresco/alfresco-ng2-components.svg)](https://gitter.im/Alfresco/alfresco-ng2-components?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 <p>
+  <a title='Gitter chat' href="https://gitter.im/Alfresco/alfresco-ng2-components?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge">
+     <img src='https://badges.gitter.im/Alfresco/alfresco-ng2-components.svg'  alt='Gitter chat' />
+  </a>
   <a title='Build Status' href="https://travis-ci.org/Alfresco/alfresco-js-api">
      <img src='https://travis-ci.org/Alfresco/alfresco-js-api.svg?branch=master'  alt='travis Status' />
   </a>
@@ -19,7 +21,38 @@
   <img title="alfresco" alt='alfresco' src='assets/alfresco.png'  width="280px" height="150px"></img>
 </p>
 
-This project provides a JavaScript client API into the v1 Alfresco REST API.
+This project provides a JavaScript client API into the Alfresco REST API and Activiti REST API.
+
+<!-- markdown-toc start - Don't edit this section.  npm run toc to generate it-->
+
+<!-- toc -->
+
+  * [Node](#node)
+  * [Install](#install)
+  * [Api Modules](#api-modules)
+    + [Basic usage For node projects](#basic-usage-for-node-projects)
+    + [Basic usage For browser](#basic-usage-for-browser)
+  * [Getting Started](#getting-started)
+- [Login](#login)
+- [Logout](#logout)
+- [isLoggedIn](#isloggedin)
+- [Events login/logout](#events-loginlogout)
+- [Get File or Folder Info](#get-file-or-folder-info)
+- [Get Folder Children Info](#get-folder-children-info)
+- [Create Folder](#create-folder)
+- [Upload File](#upload-file)
+- [Events Upload File](#events-upload-file)
+- [Delete File or Folder](#delete-file-or-folder)
+- [Delete File or Folder Permanent](#delete-file-or-folder-permanent)
+- [Get thumbnail Url](#get-thumbnail-url)
+- [Get content Url](#get-content-url)
+- [Custom web scripts call](#custom-web-scripts-call)
+  * [Development](#development)
+  * [Release History](#release-history)
+
+<!-- tocstop -->
+
+<!-- markdown-toc end -->
 
 ## Node
 To correctly use this component check that on your machine is running Node version 5.0.0 or higher.
