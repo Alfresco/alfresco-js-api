@@ -21,42 +21,6 @@ Class | Method | HTTP request | Description
 *AlfrescoCoreRestApi.AssociationsApi* | [**listSourceNodeAssociations**](docs/AssociationsApi.md#listSourceNodeAssociations) | **GET** /nodes/{targetId}/sources | List node associations
 *AlfrescoCoreRestApi.AssociationsApi* | [**listTargetAssociations**](docs/AssociationsApi.md#listTargetAssociations) | **GET** /nodes/{sourceId}/targets | List node associations
 *AlfrescoCoreRestApi.AssociationsApi* | [**removeAssoc**](docs/AssociationsApi.md#removeAssoc) | **DELETE** /nodes/{sourceId}/targets/{targetId} | Remove node association(s)
-*AlfrescoCoreRestApi.ChangesApi* | [**addAssoc**](docs/ChangesApi.md#addAssoc) | **POST** /nodes/{sourceId}/targets | Add node association
-*AlfrescoCoreRestApi.ChangesApi* | [**addNode**](docs/ChangesApi.md#addNode) | **POST** /nodes/{nodeId}/children | Create a node
-*AlfrescoCoreRestApi.ChangesApi* | [**addSecondaryChildAssoc**](docs/ChangesApi.md#addSecondaryChildAssoc) | **POST** /nodes/{parentId}/secondary-children | Add secondary child
-*AlfrescoCoreRestApi.ChangesApi* | [**addSharedLink**](docs/ChangesApi.md#addSharedLink) | **POST** /shared-links | Create a shared link to a file
-*AlfrescoCoreRestApi.ChangesApi* | [**copyNode**](docs/ChangesApi.md#copyNode) | **POST** /nodes/{nodeId}/copy | Copy a node
-*AlfrescoCoreRestApi.ChangesApi* | [**createRendition**](docs/ChangesApi.md#createRendition) | **POST** /nodes/{nodeId}/renditions | Create rendition
-*AlfrescoCoreRestApi.ChangesApi* | [**createSite**](docs/ChangesApi.md#createSite) | **POST** /sites | Create a site
-*AlfrescoCoreRestApi.ChangesApi* | [**deleteNode**](docs/ChangesApi.md#deleteNode) | **DELETE** /nodes/{nodeId} | Delete a node
-*AlfrescoCoreRestApi.ChangesApi* | [**deleteSharedLink**](docs/ChangesApi.md#deleteSharedLink) | **DELETE** /shared-links/{sharedId} | Deletes a shared link
-*AlfrescoCoreRestApi.ChangesApi* | [**deleteSite**](docs/ChangesApi.md#deleteSite) | **DELETE** /sites/{siteId} | Delete a site
-*AlfrescoCoreRestApi.ChangesApi* | [**emailSharedLink**](docs/ChangesApi.md#emailSharedLink) | **POST** /shared-links/{sharedId}/email | Email shared link
-*AlfrescoCoreRestApi.ChangesApi* | [**findSharedLinks**](docs/ChangesApi.md#findSharedLinks) | **GET** /shared-links | Find shared links
-*AlfrescoCoreRestApi.ChangesApi* | [**getDeletedNode**](docs/ChangesApi.md#getDeletedNode) | **GET** /deleted-nodes/{nodeId} | Get a deleted node
-*AlfrescoCoreRestApi.ChangesApi* | [**getDeletedNodes**](docs/ChangesApi.md#getDeletedNodes) | **GET** /deleted-nodes | Get deleted nodes
-*AlfrescoCoreRestApi.ChangesApi* | [**getFileContent**](docs/ChangesApi.md#getFileContent) | **GET** /nodes/{nodeId}/content | Get file content
-*AlfrescoCoreRestApi.ChangesApi* | [**getNode**](docs/ChangesApi.md#getNode) | **GET** /nodes/{nodeId} | Get a node
-*AlfrescoCoreRestApi.ChangesApi* | [**getNodeChildren**](docs/ChangesApi.md#getNodeChildren) | **GET** /nodes/{nodeId}/children | Get node children
-*AlfrescoCoreRestApi.ChangesApi* | [**getRendition**](docs/ChangesApi.md#getRendition) | **GET** /nodes/{nodeId}/renditions/{renditionId} | Get rendition information
-*AlfrescoCoreRestApi.ChangesApi* | [**getRenditionContent**](docs/ChangesApi.md#getRenditionContent) | **GET** /nodes/{nodeId}/renditions/{renditionId}/content | Get rendition content
-*AlfrescoCoreRestApi.ChangesApi* | [**getRenditions**](docs/ChangesApi.md#getRenditions) | **GET** /nodes/{nodeId}/renditions | List information for renditions
-*AlfrescoCoreRestApi.ChangesApi* | [**getSharedLink**](docs/ChangesApi.md#getSharedLink) | **GET** /shared-links/{sharedId} | Get a shared link
-*AlfrescoCoreRestApi.ChangesApi* | [**getSharedLinkContent**](docs/ChangesApi.md#getSharedLinkContent) | **GET** /shared-links/{sharedId}/content | Get file content
-*AlfrescoCoreRestApi.ChangesApi* | [**getSharedLinkRenditionContent**](docs/ChangesApi.md#getSharedLinkRenditionContent) | **GET** /shared-links/{sharedId}/renditions/{renditionId}/content | Get shared link rendition content
-*AlfrescoCoreRestApi.ChangesApi* | [**getSharedLinkRenditions**](docs/ChangesApi.md#getSharedLinkRenditions) | **GET** /shared-links/{sharedId}/renditions | List information for created renditions
-*AlfrescoCoreRestApi.ChangesApi* | [**listParents**](docs/ChangesApi.md#listParents) | **GET** /nodes/{childId}/parents | List parents
-*AlfrescoCoreRestApi.ChangesApi* | [**listSecondaryChildAssociations**](docs/ChangesApi.md#listSecondaryChildAssociations) | **GET** /nodes/{parentId}/secondary-children | List secondary children
-*AlfrescoCoreRestApi.ChangesApi* | [**listSourceNodeAssociations**](docs/ChangesApi.md#listSourceNodeAssociations) | **GET** /nodes/{targetId}/sources | List node associations
-*AlfrescoCoreRestApi.ChangesApi* | [**listTargetAssociations**](docs/ChangesApi.md#listTargetAssociations) | **GET** /nodes/{sourceId}/targets | List node associations
-*AlfrescoCoreRestApi.ChangesApi* | [**liveSearchNodes**](docs/ChangesApi.md#liveSearchNodes) | **GET** /queries/live-search-nodes | Live search for nodes
-*AlfrescoCoreRestApi.ChangesApi* | [**moveNode**](docs/ChangesApi.md#moveNode) | **POST** /nodes/{nodeId}/move | Move a node
-*AlfrescoCoreRestApi.ChangesApi* | [**purgeDeletedNode**](docs/ChangesApi.md#purgeDeletedNode) | **DELETE** /deleted-nodes/{nodeId} | Purge a deleted node
-*AlfrescoCoreRestApi.ChangesApi* | [**removeAssoc**](docs/ChangesApi.md#removeAssoc) | **DELETE** /nodes/{sourceId}/targets/{targetId} | Remove node association(s)
-*AlfrescoCoreRestApi.ChangesApi* | [**removeSecondaryChildAssoc**](docs/ChangesApi.md#removeSecondaryChildAssoc) | **DELETE** /nodes/{parentId}/secondary-children/{childId} | Remove secondary child (or children)
-*AlfrescoCoreRestApi.ChangesApi* | [**restoreNode**](docs/ChangesApi.md#restoreNode) | **POST** /deleted-nodes/{nodeId}/restore | Restore a deleted node
-*AlfrescoCoreRestApi.ChangesApi* | [**updateFileContent**](docs/ChangesApi.md#updateFileContent) | **PUT** /nodes/{nodeId}/content | Update file content
-*AlfrescoCoreRestApi.ChangesApi* | [**updateNode**](docs/ChangesApi.md#updateNode) | **PUT** /nodes/{nodeId} | Update a node
 *AlfrescoCoreRestApi.ChildAssociationsApi* | [**addNode**](docs/ChildAssociationsApi.md#addNode) | **POST** /nodes/{nodeId}/children | Create a node
 *AlfrescoCoreRestApi.ChildAssociationsApi* | [**addSecondaryChildAssoc**](docs/ChildAssociationsApi.md#addSecondaryChildAssoc) | **POST** /nodes/{parentId}/secondary-children | Add secondary child
 *AlfrescoCoreRestApi.ChildAssociationsApi* | [**deleteNode**](docs/ChildAssociationsApi.md#deleteNode) | **DELETE** /nodes/{nodeId} | Delete a node

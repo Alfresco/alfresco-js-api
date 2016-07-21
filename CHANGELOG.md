@@ -9,7 +9,7 @@ _This project provides a JavaScript client API into the v1 Alfresco REST API_
 <a name="0.2.2"></a>
 # [0.2.2](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.2.2) (2016-07-21)
 - [Cannot find module mockAlfrescoApi #29](https://github.com/Alfresco/alfresco-js-api/issues/29)
-
+- [ChangesAPI doesn't refer to any real API and duplicates other APIs #26](https://github.com/Alfresco/alfresco-js-api/issues/26)
 
 <a name="0.2.1"></a>
 # [0.2.1](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.2.1) (2016-07-15)
