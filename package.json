@@ -24,7 +24,6 @@
     "url": "https://github.com/Alfresco/alfresco-js-api/issues"
   },
   "dependencies": {
-    "markdown-toc": "^0.12.14",
     "superagent": "1.7.1"
   },
   "devDependencies": {
@@ -46,6 +45,7 @@
     "load-grunt-tasks": "^3.4.1",
     "lodash": "^4.13.1",
     "minifyify": "^7.3.3",
+    "markdown-toc": "^0.12.14",
     "mocha": "^2.4.5",
     "mocha-lcov-reporter": "^1.2.0",
     "nock": "^8.0.0",
