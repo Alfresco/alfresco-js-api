@@ -61,7 +61,7 @@ class AuthResponseMock extends BaseMock{
         nock(this.host, {'encodedQueryParams': true})
             .post('/alfresco/api/-default-/public/authentication/versions/1/tickets', {
                 'userId': 'wrong',
-                'password': 'credentials'
+                'password': 'name'
             })
             .reply(401, {
                 'error': {

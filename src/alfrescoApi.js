@@ -4,7 +4,6 @@ var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
 var AlfrescoAuthRestApi = require('./alfresco-auth-rest-api/src/index');
 var AlfrescoActivitiApi = require('./alfresco-activiti-rest-api/src/index');
 var AlfrescoMock = require('../test/mockObjects/mockAlfrescoApi.js');
-var AlfrescoApiClient = require('./alfrescoApiClient');
 var AlfrescoContent = require('./alfrescoContent');
 var AlfrescoNode = require('./alfrescoNode');
 var AlfrescoSearch = require('./alfrescoSearch');
@@ -24,6 +23,7 @@ class AlfrescoApi {
      *        contextRoot: // contextRoot default value alfresco
      *        username:   // Username to login
      *        password:   // Password to login
+     *        provider:   // ECM BPM ALL
      *        ticket:     // Ticket if you already have a ticket you can pass only the ticket and skip the login, in this case you don't need username and password
      *    };
      */
@@ -42,19 +42,22 @@ class AlfrescoApi {
             contextRoot: config.contextRoot || 'alfresco',
             username: config.username,
             password: config.password,
+            provider: config.provider || 'ECM',
             ticket: config.ticket
         };
 
-        this.apiCoreUrl = this.config.host + '/' + this.config.contextRoot + '/api/-default-/public/alfresco/versions/1';   //Core Call
-
-        AlfrescoCoreRestApi.ApiClient.instance = this.getClient();
-
         this.ecmAuth = new EcmAuth(this.config);
+        AlfrescoCoreRestApi.ApiClient.instance = this.ecmAuth.getClient();
+
         this.bpmAuth = new BpmAuth(this.config);
+        AlfrescoActivitiApi.ApiClient.instance = this.bpmAuth.getClient();
+
+        this.activiti =  AlfrescoActivitiApi;
+        this.core = AlfrescoCoreRestApi;
 
         this.nodes = this.node = new AlfrescoNode();
         this.search = new AlfrescoSearch();
-        this.content = new AlfrescoContent(this.apiCoreUrl, this.ecmAuth);
+        this.content = new AlfrescoContent(this.ecmAuth);
         this.upload = new AlfrescoUpload();
         this.webScript = new AlfrescoWebScriptApi();
     }
@@ -65,14 +68,7 @@ class AlfrescoApi {
      * @returns {ApiClient} Alfresco API Client
      * */
     getClient() {
-        if (!this.alfrescoClient) {
-            this.alfrescoClient = new AlfrescoApiClient(this.config.host);
-        }
-
-        this.alfrescoClient.basePath = this.apiCoreUrl;
-        this.alfrescoClient.authentications.basicAuth.username = 'ROLE_TICKET';
-        this.alfrescoClient.authentications.basicAuth.password = this.config.ticket;
-        return this.alfrescoClient;
+        return this.ecmAuth.getClient();
     }
 
     /**
@@ -81,7 +77,37 @@ class AlfrescoApi {
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
     login() {
-        return this.ecmAuth.login();
+        if (this.config.provider && this.config.provider.toUpperCase() === 'BPM') {
+            return this.bpmAuth.login();
+        } else if (this.config.provider && this.config.provider.toUpperCase() === 'ECM') {
+            return this.ecmAuth.login();
+        } else if (this.config.provider && this.config.provider.toUpperCase() === 'ALL') {
+            return this._loginBPMECM();
+        }
+    }
+
+    _loginBPMECM() {
+        var ecmPromise = this.ecmAuth.login();
+        var bpmPromise = this.bpmAuth.login();
+
+        this.promise = new Promise((resolve, reject) => {
+            Promise.all([ecmPromise, bpmPromise]).then(
+                (data) => {
+                    this.promise.emit('success');
+                    resolve(data);
+                },
+                (error) => {
+                    if (error.status === 401) {
+                        this.promise.emit('unauthorized');
+                    }
+                    this.promise.emit('error');
+                    reject(error);
+                });
+        });
+
+        Emitter(this.promise); // jshint ignore:line
+
+        return this.promise;
     }
 
     /**
@@ -90,7 +116,37 @@ class AlfrescoApi {
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
     logout() {
-        return this.ecmAuth.logout();
+        if (this.config.provider && this.config.provider.toUpperCase() === 'BPM') {
+            return this.bpmAuth.logout();
+        } else if (this.config.provider && this.config.provider.toUpperCase() === 'ECM') {
+            return this.ecmAuth.logout();
+        } else if (this.config.provider && this.config.provider.toUpperCase() === 'ALL') {
+            return this._logoutBPMECM();
+        }
+    }
+
+    _logoutBPMECM() {
+        var ecmPromise = this.ecmAuth.logout();
+        var bpmPromise = this.bpmAuth.logout();
+
+        this.promise = new Promise((resolve, reject) => {
+            Promise.all([ecmPromise, bpmPromise]).then(
+                (data) => {
+                    this.promise.emit('logout');
+                    resolve('logout');
+                },
+                (error) => {
+                    if (error.status === 401) {
+                        this.promise.emit('unauthorized');
+                    }
+                    this.promise.emit('error');
+                    reject(error);
+                });
+        });
+
+        Emitter(this.promise); // jshint ignore:line
+
+        return this.promise;
     }
 
     /**
@@ -99,7 +155,13 @@ class AlfrescoApi {
      * @returns {Boolean} is logged in
      */
     isLoggedIn() {
-        return this.ecmAuth.isLoggedIn();
+        if (this.config.provider && this.config.provider.toUpperCase() === 'BPM') {
+            return this.bpmAuth.isLoggedIn();
+        } else if (this.config.provider && this.config.provider.toUpperCase() === 'ECM') {
+            return this.ecmAuth.isLoggedIn();
+        } else if (this.config.provider && this.config.provider.toUpperCase() === 'ALL') {
+            return this.ecmAuth.isLoggedIn() && this.bpmAuth.isLoggedIn();
+        }
     }
 
     /**

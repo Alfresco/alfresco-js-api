@@ -24,7 +24,7 @@ class AuthResponseMock extends BaseMock {
 
     get401Response() {
         nock(this.host, {'encodedQueryParams': true})
-            .post('/activiti-app/app/authentication', 'j_username=wrong&j_password=credentials&_spring_security_remember_me=true&submit=Login')
+            .post('/activiti-app/app/authentication', 'j_username=wrong&j_password=name&_spring_security_remember_me=true&submit=Login')
             .reply(401);
     }
 }

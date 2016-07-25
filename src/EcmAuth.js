@@ -11,12 +11,16 @@ class EcmAuth extends AlfrescoApiClient {
      */
     constructor(config) {
         super();
-        this.ticket = undefined;
         this.config = config;
-        this.host = this.config.host;
         this.basePath = this.config.host + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
-        this.authentications.basicAuth.username = 'ROLE_TICKET';
-        this.authentications.basicAuth.password = this.config.ticket;
+
+        if (this.config.ticket) {
+            this.setTicket(this.config.ticket);
+        } else {
+            this.authentications.basicAuth.username = this.config.username;
+            this.authentications.basicAuth.password = this.config.password;
+        }
+
         Emitter.call(this);
     }
 
@@ -88,6 +92,7 @@ class EcmAuth extends AlfrescoApiClient {
      * @param {String} Ticket
      * */
     setTicket(ticket) {
+        this.authentications.basicAuth.username = 'ROLE_TICKET';
         this.authentications.basicAuth.password = ticket;
         this.ticket = ticket;
     }
@@ -109,6 +114,23 @@ class EcmAuth extends AlfrescoApiClient {
     isLoggedIn() {
         return !!this.ticket;
     }
+
+    /**
+     * return an Alfresco API Client
+     *
+     * @returns {ApiClient} Alfresco API Client
+     * */
+    getClient() {
+        if (!this.alfrescoClient) {
+            this.alfrescoClient = new AlfrescoApiClient(this.config.host);
+        }
+
+        this.alfrescoClient.basePath = this.config.host + '/' + this.config.contextRoot + '/api/-default-/public/alfresco/versions/1'; //Auth Call
+        this.alfrescoClient.authentications.basicAuth.username = 'ROLE_TICKET';
+        this.alfrescoClient.authentications.basicAuth.password = this.config.ticket;
+        return this.alfrescoClient;
+    }
+
 }
 
 Emitter(EcmAuth.prototype); // jshint ignore:line

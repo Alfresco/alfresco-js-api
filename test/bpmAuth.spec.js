@@ -74,7 +74,7 @@ describe('Bpm Auth test', function () {
             this.bpmAuth = new BpmAuth({
                 hostActiviti: this.host,
                 username: 'wrong',
-                password: 'credentials'
+                password: 'name'
             });
 
             this.authBpmMock.get401Response();
@@ -94,7 +94,7 @@ describe('Bpm Auth test', function () {
                 this.bpmAuth = new BpmAuth({
                     hostActiviti: this.host,
                     username: 'wrong',
-                    password: 'credentials'
+                    password: 'name'
                 });
 
                 this.bpmAuth.login().on('unauthorized', ()=> {

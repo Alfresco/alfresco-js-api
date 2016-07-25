@@ -14,7 +14,7 @@
     "minify": "browserify -s AlfrescoApi dist/alfresco-js-api.js -d -p [minifyify --no-map] > dist/alfresco-js-api.min.js",
     "watchify": "watchify -s AlfrescoApi main.js -o dist/alfresco-js-api.js",
     "tslint": "tslint -c tslint.json bundle.d.ts",
-    "toc" : "markdown-toc -i README.md"
+    "toc" : "markdown-toc -i README.md && markdown-toc -i test/mockObjects/README.md"
   },
   "repository": {
     "type": "git",
