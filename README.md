@@ -104,21 +104,32 @@ Please follow the [installation](#installation) instruction and execute the foll
 
 AlfrescoApi({username, password, alfrescoHost, contextRoot, ticket});
 
-Property | Description  | default value
-------------- | ------------- |
-username| |
-password| |
-alfrescoHost| (Optional value The Ip or Name of the host where your Alfresco instance is running default value 'http://127.0.0.1:8080')|http://127.0.0.1:8080
-activitiHost| (Optional value The Ip or Name of the host where your Activiti instance is running default value 'http://127.0.0.1:9999')|http://127.0.0.1:9999
-contextRoot| (Optional value default value is alfresco default value  'alfresco')|alfresco
-provider| (Optional value default value is alfresco default value  'alfresco')|alfresco
-ticket| (Optional only if you want login with the ticket see example below)|
+Property | Description  | default value| 
+------------- | ------------- | -------------|
+username| | |
+password| | |
+alfrescoHost| (Optional value The Ip or Name of the host where your Alfresco instance is running )|http://127.0.0.1:8080 |
+activitiHost| (Optional value The Ip or Name of the host where your Activiti instance is running )|http://127.0.0.1:9999 |
+contextRoot| (Optional value that define the context Root of the API default value is alfresco )|alfresco |
+provider| (Optional value default value is ECM. This parameter can accept as value ECM BPM or ALL to use the API and Login in the ECM, Activiti BPM or Both )|alfresco |
+ticket| (Optional only if you want login with the ticket see example below)| |
 
 ### Login with Username and Password BPM and ECM
 
+```javascript
+var AlfrescoApi = require('alfresco-js-api');
+
+this.alfrescoJsApi = new AlfrescoApi({ username:'admin', password:'admin', provider:'ALL' });
+
+this.alfrescoJsApi.login().then(function (data) {
+    console.log('API called successfully Login in  BPM and ECM performed ');
+}, function (error) {
+    console.error(error);
+});
+```
+
 
 ### Login with Username and Password ECM
-
 
 ```javascript
 var AlfrescoApi = require('alfresco-js-api');
@@ -145,7 +156,23 @@ this.alfrescoJsApi = new AlfrescoApi({ ticket:'TICKET_4479f4d3bb155195879bfbb8d5
 
 ```
 
+
 ### Login with Username and Password BPM
+
+
+```javascript
+var AlfrescoApi = require('alfresco-js-api');
+
+this.alfrescoJsApi = new AlfrescoApi({ username:'admin', password:'admin', provider:'BPM' });
+
+this.alfrescoJsApi.login().then(function (data) {
+    console.log('API called successfully Login in Activiti BPM performed ');
+}, function (error) {
+    console.error(error);
+});
+
+```
+
 
 
 ## Logout
