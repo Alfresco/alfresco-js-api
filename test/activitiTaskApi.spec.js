@@ -2,7 +2,7 @@
 
 var AlfrescoApi = require('../main');
 //var expect = require('chai').expect;
-var AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').Activiti.Auth;
+var AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
 
 describe('Activiti Task Api', function () {
     beforeEach(function (done) {

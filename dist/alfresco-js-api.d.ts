@@ -156,6 +156,18 @@ interface Mock {
     Node: NodeMock;
     Upload: UploadMock;
     WebScript: WebScript;
+    ActivitiMock : ActivitiMock;
+}
+
+interface ActivitiMock {
+    Auth: ActivitiAuthMock;
+}
+
+interface ActivitiAuthMock {
+    new(host: string): ActivitiAuthMock;
+    get200Response();
+    get200ResponseLogout()
+    get401Response();
 }
 
 interface Activiti {
@@ -183,6 +195,7 @@ export interface AlfrescoApi {
     Core: Core;
     Mock: Mock;
 
+    activiti: any;
     search: any;
     nodes: any;
     webScript: any;

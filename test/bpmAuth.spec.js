@@ -1,7 +1,7 @@
 /*global describe, it, beforeEach */
 
 var BpmAuth = require('../src/bpmAuth');
-var AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').Activiti.Auth;
+var AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
 var expect = require('chai').expect;
 
 describe('Bpm Auth test', function () {
