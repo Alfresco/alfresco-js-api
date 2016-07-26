@@ -11,7 +11,7 @@ var AlfrescoUpload = require('./alfrescoUpload');
 var AlfrescoWebScriptApi = require('./alfrescoWebScript');
 var Emitter = require('event-emitter');
 var EcmAuth = require('./ecmAuth');
-var BpmAuth = require('./BpmAuth');
+var BpmAuth = require('./bpmAuth');
 
 class AlfrescoApi {
     /**
