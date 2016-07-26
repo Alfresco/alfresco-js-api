@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new ContentRenditionApi. 
+   * Constructs a new ContentRenditionApi.
    * @alias module:api/ContentRenditionApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the getRawContentUsingGET2 operation.
-     * @callback module:api/ContentRenditionApi~getRawContentUsingGET2Callback
+     * Callback function to receive the result of the getRawContent operation.
+     * @callback module:api/ContentRenditionApi~getRawContentCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -44,19 +44,19 @@
      * Retrieve Raw Content
      * @param {Integer} contentId contentId
      * @param {String} renditionType renditionType
-     * @param {module:api/ContentRenditionApi~getRawContentUsingGET2Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ContentRenditionApi~getRawContentCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.getRawContentUsingGET2 = function(contentId, renditionType, callback) {
+    this.getRawContent = function(contentId, renditionType, callback) {
       var postBody = null;
 
       // verify the required parameter 'contentId' is set
       if (contentId == undefined || contentId == null) {
-        throw "Missing the required parameter 'contentId' when calling getRawContentUsingGET2";
+        throw "Missing the required parameter 'contentId' when calling getRawContent";
       }
 
       // verify the required parameter 'renditionType' is set
       if (renditionType == undefined || renditionType == null) {
-        throw "Missing the required parameter 'renditionType' when calling getRawContentUsingGET2";
+        throw "Missing the required parameter 'renditionType' when calling getRawContent";
       }
 
 

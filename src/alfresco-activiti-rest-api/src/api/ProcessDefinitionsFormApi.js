@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new ProcessDefinitionsFormApi. 
+   * Constructs a new ProcessDefinitionsFormApi.
    * @alias module:api/ProcessDefinitionsFormApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the getProcessDefinitionStartFormUsingGET operation.
-     * @callback module:api/ProcessDefinitionsFormApi~getProcessDefinitionStartFormUsingGETCallback
+     * Callback function to receive the result of the getProcessDefinitionStartForm operation.
+     * @callback module:api/ProcessDefinitionsFormApi~getProcessDefinitionStartFormCallback
      * @param {String} error Error message, if any.
      * @param {module:model/FormDefinitionRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42,10 +42,10 @@
 
     /**
      * Retrieve the start form for a process definition
-     * @param {module:api/ProcessDefinitionsFormApi~getProcessDefinitionStartFormUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessDefinitionsFormApi~getProcessDefinitionStartFormCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/FormDefinitionRepresentation}
      */
-    this.getProcessDefinitionStartFormUsingGET = function(callback) {
+    this.getProcessDefinitionStartForm = function(callback) {
       var postBody = null;
 
 
@@ -71,8 +71,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getRestFieldValuesUsingGET operation.
-     * @callback module:api/ProcessDefinitionsFormApi~getRestFieldValuesUsingGETCallback
+     * Callback function to receive the result of the getRestFieldValues operation.
+     * @callback module:api/ProcessDefinitionsFormApi~getRestFieldValuesCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/FormValueRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -80,10 +80,10 @@
 
     /**
      * Retrieve field values (eg. the typeahead field)
-     * @param {module:api/ProcessDefinitionsFormApi~getRestFieldValuesUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessDefinitionsFormApi~getRestFieldValuesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/FormValueRepresentation>}
      */
-    this.getRestFieldValuesUsingGET = function(callback) {
+    this.getRestFieldValues = function(callback) {
       var postBody = null;
 
 
@@ -109,8 +109,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getRestTableFieldValuesUsingGET operation.
-     * @callback module:api/ProcessDefinitionsFormApi~getRestTableFieldValuesUsingGETCallback
+     * Callback function to receive the result of the getRestTableFieldValues operation.
+     * @callback module:api/ProcessDefinitionsFormApi~getRestTableFieldValuesCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/FormValueRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -118,10 +118,10 @@
 
     /**
      * Retrieve field values (eg. the table field)
-     * @param {module:api/ProcessDefinitionsFormApi~getRestTableFieldValuesUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessDefinitionsFormApi~getRestTableFieldValuesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/FormValueRepresentation>}
      */
-    this.getRestTableFieldValuesUsingGET = function(callback) {
+    this.getRestTableFieldValues = function(callback) {
       var postBody = null;
 
 

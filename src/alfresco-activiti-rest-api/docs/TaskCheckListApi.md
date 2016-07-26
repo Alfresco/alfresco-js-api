@@ -4,14 +4,14 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**addSubtaskUsingPOST**](TaskCheckListApi.md#addSubtaskUsingPOST) | **POST** /api/enterprise/tasks/{taskId}/checklist | Create a task checklist
-[**getChecklistUsingGET**](TaskCheckListApi.md#getChecklistUsingGET) | **GET** /api/enterprise/tasks/{taskId}/checklist | Retrieve Checklist added to a task
-[**orderChecklistUsingPUT**](TaskCheckListApi.md#orderChecklistUsingPUT) | **PUT** /api/enterprise/tasks/{taskId}/checklist | Change the order of items on a checklist
+[**addSubtask**](TaskCheckListApi.md#addSubtask) | **POST** /api/enterprise/tasks/{taskId}/checklist | Create a task checklist
+[**getChecklist**](TaskCheckListApi.md#getChecklist) | **GET** /api/enterprise/tasks/{taskId}/checklist | Retrieve Checklist added to a task
+[**orderChecklist**](TaskCheckListApi.md#orderChecklist) | **PUT** /api/enterprise/tasks/{taskId}/checklist | Change the order of items on a checklist
 
 
-<a name="addSubtaskUsingPOST"></a>
-# **addSubtaskUsingPOST**
-> TaskRepresentation addSubtaskUsingPOST(taskId, taskRepresentation)
+<a name="addSubtask"></a>
+# **addSubtask**
+> TaskRepresentation addSubtask(taskId, taskRepresentation)
 
 Create a task checklist
 
@@ -33,7 +33,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.addSubtaskUsingPOST(taskId, taskRepresentation, callback);
+apiInstance.addSubtask(taskId, taskRepresentation, callback);
 ```
 
 ### Parameters
@@ -56,9 +56,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getChecklistUsingGET"></a>
-# **getChecklistUsingGET**
-> ResultListDataRepresentation getChecklistUsingGET(taskId)
+<a name="getChecklist"></a>
+# **getChecklist**
+> ResultListDataRepresentation getChecklist(taskId)
 
 Retrieve Checklist added to a task
 
@@ -78,7 +78,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getChecklistUsingGET(taskId, callback);
+apiInstance.getChecklist(taskId, callback);
 ```
 
 ### Parameters
@@ -100,9 +100,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="orderChecklistUsingPUT"></a>
-# **orderChecklistUsingPUT**
-> orderChecklistUsingPUT(taskId, orderRepresentation)
+<a name="orderChecklist"></a>
+# **orderChecklist**
+> orderChecklist(taskId, orderRepresentation)
 
 Change the order of items on a checklist
 
@@ -124,7 +124,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.orderChecklistUsingPUT(taskId, orderRepresentation, callback);
+apiInstance.orderChecklist(taskId, orderRepresentation, callback);
 ```
 
 ### Parameters

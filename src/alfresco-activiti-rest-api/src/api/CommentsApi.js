@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new CommentsApi. 
+   * Constructs a new CommentsApi.
    * @alias module:api/CommentsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the addProcessInstanceCommentUsingPOST operation.
-     * @callback module:api/CommentsApi~addProcessInstanceCommentUsingPOSTCallback
+     * Callback function to receive the result of the addProcessInstanceComment operation.
+     * @callback module:api/CommentsApi~addProcessInstanceCommentCallback
      * @param {String} error Error message, if any.
      * @param {module:model/CommentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44,20 +44,20 @@
      * Add a comment to a Process
      * @param {module:model/CommentRepresentation} commentRequest commentRequest
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/CommentsApi~addProcessInstanceCommentUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/CommentsApi~addProcessInstanceCommentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/CommentRepresentation}
      */
-    this.addProcessInstanceCommentUsingPOST = function(commentRequest, processInstanceId, callback) {
+    this.addProcessInstanceComment = function(commentRequest, processInstanceId, callback) {
       var postBody = commentRequest;
 
       // verify the required parameter 'commentRequest' is set
       if (commentRequest == undefined || commentRequest == null) {
-        throw "Missing the required parameter 'commentRequest' when calling addProcessInstanceCommentUsingPOST";
+        throw "Missing the required parameter 'commentRequest' when calling addProcessInstanceComment";
       }
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling addProcessInstanceCommentUsingPOST";
+        throw "Missing the required parameter 'processInstanceId' when calling addProcessInstanceComment";
       }
 
 
@@ -84,8 +84,8 @@
     }
 
     /**
-     * Callback function to receive the result of the addTaskCommentUsingPOST operation.
-     * @callback module:api/CommentsApi~addTaskCommentUsingPOSTCallback
+     * Callback function to receive the result of the addTaskComment operation.
+     * @callback module:api/CommentsApi~addTaskCommentCallback
      * @param {String} error Error message, if any.
      * @param {module:model/CommentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -95,20 +95,20 @@
      * Add a comment to a Task
      * @param {module:model/CommentRepresentation} commentRequest commentRequest
      * @param {String} taskId taskId
-     * @param {module:api/CommentsApi~addTaskCommentUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/CommentsApi~addTaskCommentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/CommentRepresentation}
      */
-    this.addTaskCommentUsingPOST = function(commentRequest, taskId, callback) {
+    this.addTaskComment = function(commentRequest, taskId, callback) {
       var postBody = commentRequest;
 
       // verify the required parameter 'commentRequest' is set
       if (commentRequest == undefined || commentRequest == null) {
-        throw "Missing the required parameter 'commentRequest' when calling addTaskCommentUsingPOST";
+        throw "Missing the required parameter 'commentRequest' when calling addTaskComment";
       }
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling addTaskCommentUsingPOST";
+        throw "Missing the required parameter 'taskId' when calling addTaskComment";
       }
 
 
@@ -135,8 +135,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getProcessInstanceCommentsUsingGET operation.
-     * @callback module:api/CommentsApi~getProcessInstanceCommentsUsingGETCallback
+     * Callback function to receive the result of the getProcessInstanceComments operation.
+     * @callback module:api/CommentsApi~getProcessInstanceCommentsCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -147,16 +147,16 @@
      * @param {String} processInstanceId processInstanceId
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.latestFirst latestFirst
-     * @param {module:api/CommentsApi~getProcessInstanceCommentsUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/CommentsApi~getProcessInstanceCommentsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getProcessInstanceCommentsUsingGET = function(processInstanceId, opts, callback) {
+    this.getProcessInstanceComments = function(processInstanceId, opts, callback) {
       opts = opts || {};
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceCommentsUsingGET";
+        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceComments";
       }
 
 
@@ -184,8 +184,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getTaskCommentsUsingGET operation.
-     * @callback module:api/CommentsApi~getTaskCommentsUsingGETCallback
+     * Callback function to receive the result of the getTaskComments operation.
+     * @callback module:api/CommentsApi~getTaskCommentsCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -196,16 +196,16 @@
      * @param {String} taskId taskId
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.latestFirst latestFirst
-     * @param {module:api/CommentsApi~getTaskCommentsUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/CommentsApi~getTaskCommentsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getTaskCommentsUsingGET = function(taskId, opts, callback) {
+    this.getTaskComments = function(taskId, opts, callback) {
       opts = opts || {};
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling getTaskCommentsUsingGET";
+        throw "Missing the required parameter 'taskId' when calling getTaskComments";
       }
 
 

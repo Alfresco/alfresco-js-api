@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new TaskActionsApi. 
+   * Constructs a new TaskActionsApi.
    * @alias module:api/TaskActionsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the assignTaskUsingPUT operation.
-     * @callback module:api/TaskActionsApi~assignTaskUsingPUTCallback
+     * Callback function to receive the result of the assignTask operation.
+     * @callback module:api/TaskActionsApi~assignTaskCallback
      * @param {String} error Error message, if any.
      * @param {module:model/TaskRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44,20 +44,20 @@
      * Assign a task to a user
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskActionsApi~assignTaskUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskActionsApi~assignTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TaskRepresentation}
      */
-    this.assignTaskUsingPUT = function(taskId, requestNode, callback) {
+    this.assignTask = function(taskId, requestNode, callback) {
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling assignTaskUsingPUT";
+        throw "Missing the required parameter 'taskId' when calling assignTask";
       }
 
       // verify the required parameter 'requestNode' is set
       if (requestNode == undefined || requestNode == null) {
-        throw "Missing the required parameter 'requestNode' when calling assignTaskUsingPUT";
+        throw "Missing the required parameter 'requestNode' when calling assignTask";
       }
 
 
@@ -84,8 +84,8 @@
     }
 
     /**
-     * Callback function to receive the result of the attachFormUsingPUT operation.
-     * @callback module:api/TaskActionsApi~attachFormUsingPUTCallback
+     * Callback function to receive the result of the attachForm operation.
+     * @callback module:api/TaskActionsApi~attachFormCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -95,19 +95,19 @@
      * Attach a form to a task
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskActionsApi~attachFormUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskActionsApi~attachFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.attachFormUsingPUT = function(taskId, requestNode, callback) {
+    this.attachForm = function(taskId, requestNode, callback) {
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling attachFormUsingPUT";
+        throw "Missing the required parameter 'taskId' when calling attachForm";
       }
 
       // verify the required parameter 'requestNode' is set
       if (requestNode == undefined || requestNode == null) {
-        throw "Missing the required parameter 'requestNode' when calling attachFormUsingPUT";
+        throw "Missing the required parameter 'requestNode' when calling attachForm";
       }
 
 
@@ -134,8 +134,8 @@
     }
 
     /**
-     * Callback function to receive the result of the claimTaskUsingPUT operation.
-     * @callback module:api/TaskActionsApi~claimTaskUsingPUTCallback
+     * Callback function to receive the result of the claimTask operation.
+     * @callback module:api/TaskActionsApi~claimTaskCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -145,14 +145,14 @@
      * Claim a task
      * To claim a task (in case the task is assigned to a group)
      * @param {String} taskId taskId
-     * @param {module:api/TaskActionsApi~claimTaskUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskActionsApi~claimTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.claimTaskUsingPUT = function(taskId, callback) {
+    this.claimTask = function(taskId, callback) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling claimTaskUsingPUT";
+        throw "Missing the required parameter 'taskId' when calling claimTask";
       }
 
 
@@ -179,8 +179,8 @@
     }
 
     /**
-     * Callback function to receive the result of the completeTaskUsingPUT operation.
-     * @callback module:api/TaskActionsApi~completeTaskUsingPUTCallback
+     * Callback function to receive the result of the completeTask operation.
+     * @callback module:api/TaskActionsApi~completeTaskCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -190,14 +190,14 @@
      * Complete Task
      * To complete a task (standalone or without a task form)
      * @param {String} taskId taskId
-     * @param {module:api/TaskActionsApi~completeTaskUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskActionsApi~completeTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.completeTaskUsingPUT = function(taskId, callback) {
+    this.completeTask = function(taskId, callback) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling completeTaskUsingPUT";
+        throw "Missing the required parameter 'taskId' when calling completeTask";
       }
 
 
@@ -224,8 +224,8 @@
     }
 
     /**
-     * Callback function to receive the result of the involveUserUsingPUT operation.
-     * @callback module:api/TaskActionsApi~involveUserUsingPUTCallback
+     * Callback function to receive the result of the involveUser operation.
+     * @callback module:api/TaskActionsApi~involveUserCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -235,19 +235,19 @@
      * To involve a user with a task
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskActionsApi~involveUserUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskActionsApi~involveUserCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.involveUserUsingPUT = function(taskId, requestNode, callback) {
+    this.involveUser = function(taskId, requestNode, callback) {
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling involveUserUsingPUT";
+        throw "Missing the required parameter 'taskId' when calling involveUser";
       }
 
       // verify the required parameter 'requestNode' is set
       if (requestNode == undefined || requestNode == null) {
-        throw "Missing the required parameter 'requestNode' when calling involveUserUsingPUT";
+        throw "Missing the required parameter 'requestNode' when calling involveUser";
       }
 
 
@@ -274,8 +274,8 @@
     }
 
     /**
-     * Callback function to receive the result of the removeFormUsingDELETE operation.
-     * @callback module:api/TaskActionsApi~removeFormUsingDELETECallback
+     * Callback function to receive the result of the removeForm operation.
+     * @callback module:api/TaskActionsApi~removeFormCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -284,14 +284,14 @@
     /**
      * Remove a form to a task
      * @param {String} taskId taskId
-     * @param {module:api/TaskActionsApi~removeFormUsingDELETECallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskActionsApi~removeFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.removeFormUsingDELETE = function(taskId, callback) {
+    this.removeForm = function(taskId, callback) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling removeFormUsingDELETE";
+        throw "Missing the required parameter 'taskId' when calling removeForm";
       }
 
 
@@ -318,8 +318,8 @@
     }
 
     /**
-     * Callback function to receive the result of the removeInvolvedUserUsingPUT operation.
-     * @callback module:api/TaskActionsApi~removeInvolvedUserUsingPUTCallback
+     * Callback function to receive the result of the removeInvolvedUser operation.
+     * @callback module:api/TaskActionsApi~removeInvolvedUserCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -329,19 +329,19 @@
      * Remove an involved user from a task
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskActionsApi~removeInvolvedUserUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskActionsApi~removeInvolvedUserCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.removeInvolvedUserUsingPUT = function(taskId, requestNode, callback) {
+    this.removeInvolvedUser = function(taskId, requestNode, callback) {
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling removeInvolvedUserUsingPUT";
+        throw "Missing the required parameter 'taskId' when calling removeInvolvedUser";
       }
 
       // verify the required parameter 'requestNode' is set
       if (requestNode == undefined || requestNode == null) {
-        throw "Missing the required parameter 'requestNode' when calling removeInvolvedUserUsingPUT";
+        throw "Missing the required parameter 'requestNode' when calling removeInvolvedUser";
       }
 
 
@@ -368,8 +368,8 @@
     }
 
     /**
-     * Callback function to receive the result of the unclaimTaskUsingPUT operation.
-     * @callback module:api/TaskActionsApi~unclaimTaskUsingPUTCallback
+     * Callback function to receive the result of the unclaimTask operation.
+     * @callback module:api/TaskActionsApi~unclaimTaskCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -379,14 +379,14 @@
      * Unclaim a task
      * To unclaim a task (in case the task was assigned to a group)
      * @param {String} taskId taskId
-     * @param {module:api/TaskActionsApi~unclaimTaskUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskActionsApi~unclaimTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.unclaimTaskUsingPUT = function(taskId, callback) {
+    this.unclaimTask = function(taskId, callback) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling unclaimTaskUsingPUT";
+        throw "Missing the required parameter 'taskId' when calling unclaimTask";
       }
 
 

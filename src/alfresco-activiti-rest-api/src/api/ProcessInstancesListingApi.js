@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new ProcessInstancesListingApi. 
+   * Constructs a new ProcessInstancesListingApi.
    * @alias module:api/ProcessInstancesListingApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the filterProcessInstancesUsingPOST operation.
-     * @callback module:api/ProcessInstancesListingApi~filterProcessInstancesUsingPOSTCallback
+     * Callback function to receive the result of the filterProcessInstances operation.
+     * @callback module:api/ProcessInstancesListingApi~filterProcessInstancesCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43,15 +43,15 @@
     /**
      * Filter a list of process instances
      * @param {module:model/ProcessInstanceFilterRequestRepresentation} filterRequest filterRequest
-     * @param {module:api/ProcessInstancesListingApi~filterProcessInstancesUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessInstancesListingApi~filterProcessInstancesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.filterProcessInstancesUsingPOST = function(filterRequest, callback) {
+    this.filterProcessInstances = function(filterRequest, callback) {
       var postBody = filterRequest;
 
       // verify the required parameter 'filterRequest' is set
       if (filterRequest == undefined || filterRequest == null) {
-        throw "Missing the required parameter 'filterRequest' when calling filterProcessInstancesUsingPOST";
+        throw "Missing the required parameter 'filterRequest' when calling filterProcessInstances";
       }
 
 
@@ -77,8 +77,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getProcessInstancesUsingPOST operation.
-     * @callback module:api/ProcessInstancesListingApi~getProcessInstancesUsingPOSTCallback
+     * Callback function to receive the result of the getProcessInstances operation.
+     * @callback module:api/ProcessInstancesListingApi~getProcessInstancesCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -87,15 +87,15 @@
     /**
      * Retrieve a list of process instances
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/ProcessInstancesListingApi~getProcessInstancesUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessInstancesListingApi~getProcessInstancesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getProcessInstancesUsingPOST = function(requestNode, callback) {
+    this.getProcessInstances = function(requestNode, callback) {
       var postBody = requestNode;
 
       // verify the required parameter 'requestNode' is set
       if (requestNode == undefined || requestNode == null) {
-        throw "Missing the required parameter 'requestNode' when calling getProcessInstancesUsingPOST";
+        throw "Missing the required parameter 'requestNode' when calling getProcessInstances";
       }
 
 

@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new AdminUsersApi. 
+   * Constructs a new AdminUsersApi.
    * @alias module:api/AdminUsersApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the bulkUpdateUsersUsingPUT1 operation.
-     * @callback module:api/AdminUsersApi~bulkUpdateUsersUsingPUT1Callback
+     * Callback function to receive the result of the bulkUpdateUsers operation.
+     * @callback module:api/AdminUsersApi~bulkUpdateUsersCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -43,14 +43,14 @@
     /**
      * Bulk Update a list of users
      * @param {module:model/BulkUserUpdateRepresentation} update update
-     * @param {module:api/AdminUsersApi~bulkUpdateUsersUsingPUT1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminUsersApi~bulkUpdateUsersCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.bulkUpdateUsersUsingPUT1 = function(update, callback) {
+    this.bulkUpdateUsers = function(update, callback) {
       var postBody = update;
 
       // verify the required parameter 'update' is set
       if (update == undefined || update == null) {
-        throw "Missing the required parameter 'update' when calling bulkUpdateUsersUsingPUT1";
+        throw "Missing the required parameter 'update' when calling bulkUpdateUsers";
       }
 
 
@@ -76,8 +76,8 @@
     }
 
     /**
-     * Callback function to receive the result of the createNewUserUsingPOST1 operation.
-     * @callback module:api/AdminUsersApi~createNewUserUsingPOST1Callback
+     * Callback function to receive the result of the createNewUser operation.
+     * @callback module:api/AdminUsersApi~createNewUserCallback
      * @param {String} error Error message, if any.
      * @param {module:model/UserRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -86,15 +86,15 @@
     /**
      * Create a new user
      * @param {module:model/UserRepresentation} userRepresentation userRepresentation
-     * @param {module:api/AdminUsersApi~createNewUserUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminUsersApi~createNewUserCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserRepresentation}
      */
-    this.createNewUserUsingPOST1 = function(userRepresentation, callback) {
+    this.createNewUser = function(userRepresentation, callback) {
       var postBody = userRepresentation;
 
       // verify the required parameter 'userRepresentation' is set
       if (userRepresentation == undefined || userRepresentation == null) {
-        throw "Missing the required parameter 'userRepresentation' when calling createNewUserUsingPOST1";
+        throw "Missing the required parameter 'userRepresentation' when calling createNewUser";
       }
 
 
@@ -120,8 +120,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getUserUsingGET1 operation.
-     * @callback module:api/AdminUsersApi~getUserUsingGET1Callback
+     * Callback function to receive the result of the getUser operation.
+     * @callback module:api/AdminUsersApi~getUserCallback
      * @param {String} error Error message, if any.
      * @param {module:model/AbstractUserRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -132,16 +132,16 @@
      * @param {Integer} userId userId
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.summary summary
-     * @param {module:api/AdminUsersApi~getUserUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminUsersApi~getUserCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/AbstractUserRepresentation}
      */
-    this.getUserUsingGET1 = function(userId, opts, callback) {
+    this.getUser = function(userId, opts, callback) {
       opts = opts || {};
       var postBody = null;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling getUserUsingGET1";
+        throw "Missing the required parameter 'userId' when calling getUser";
       }
 
 
@@ -169,8 +169,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getUsersUsingGET1 operation.
-     * @callback module:api/AdminUsersApi~getUsersUsingGET1Callback
+     * Callback function to receive the result of the getUsers operation.
+     * @callback module:api/AdminUsersApi~getUsersCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -190,10 +190,10 @@
      * @param {Integer} opts.groupId groupId
      * @param {Integer} opts.tenantId tenantId
      * @param {Boolean} opts.summary summary
-     * @param {module:api/AdminUsersApi~getUsersUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminUsersApi~getUsersCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getUsersUsingGET1 = function(opts, callback) {
+    this.getUsers = function(opts, callback) {
       opts = opts || {};
       var postBody = null;
 
@@ -231,8 +231,8 @@
     }
 
     /**
-     * Callback function to receive the result of the updateUserDetailsUsingPUT1 operation.
-     * @callback module:api/AdminUsersApi~updateUserDetailsUsingPUT1Callback
+     * Callback function to receive the result of the updateUserDetails operation.
+     * @callback module:api/AdminUsersApi~updateUserDetailsCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -242,19 +242,19 @@
      * Update user details
      * @param {Integer} userId userId
      * @param {module:model/UserRepresentation} userRepresentation userRepresentation
-     * @param {module:api/AdminUsersApi~updateUserDetailsUsingPUT1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminUsersApi~updateUserDetailsCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.updateUserDetailsUsingPUT1 = function(userId, userRepresentation, callback) {
+    this.updateUserDetails = function(userId, userRepresentation, callback) {
       var postBody = userRepresentation;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling updateUserDetailsUsingPUT1";
+        throw "Missing the required parameter 'userId' when calling updateUserDetails";
       }
 
       // verify the required parameter 'userRepresentation' is set
       if (userRepresentation == undefined || userRepresentation == null) {
-        throw "Missing the required parameter 'userRepresentation' when calling updateUserDetailsUsingPUT1";
+        throw "Missing the required parameter 'userRepresentation' when calling updateUserDetails";
       }
 
 

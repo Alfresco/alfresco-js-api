@@ -4,13 +4,13 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**deployAppDefinitionsUsingPOST**](AppsRuntimeApi.md#deployAppDefinitionsUsingPOST) | **POST** /api/enterprise/runtime-app-definitions | Deploy published app
-[**getAppDefinitionsUsingGET**](AppsRuntimeApi.md#getAppDefinitionsUsingGET) | **GET** /api/enterprise/runtime-app-definitions | List runtime apps
+[**deployAppDefinitions**](AppsRuntimeApi.md#deployAppDefinitions) | **POST** /api/enterprise/runtime-app-definitions | Deploy published app
+[**getAppDefinitions**](AppsRuntimeApi.md#getAppDefinitions) | **GET** /api/enterprise/runtime-app-definitions | List runtime apps
 
 
-<a name="deployAppDefinitionsUsingPOST"></a>
-# **deployAppDefinitionsUsingPOST**
-> deployAppDefinitionsUsingPOST(saveObject)
+<a name="deployAppDefinitions"></a>
+# **deployAppDefinitions**
+> deployAppDefinitions(saveObject)
 
 Deploy published app
 
@@ -32,7 +32,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.deployAppDefinitionsUsingPOST(saveObject, callback);
+apiInstance.deployAppDefinitions(saveObject, callback);
 ```
 
 ### Parameters
@@ -54,9 +54,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getAppDefinitionsUsingGET"></a>
-# **getAppDefinitionsUsingGET**
-> ResultListDataRepresentation getAppDefinitionsUsingGET()
+<a name="getAppDefinitions"></a>
+# **getAppDefinitions**
+> ResultListDataRepresentation getAppDefinitions()
 
 List runtime apps
 
@@ -75,7 +75,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getAppDefinitionsUsingGET(callback);
+apiInstance.getAppDefinitions(callback);
 ```
 
 ### Parameters

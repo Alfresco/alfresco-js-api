@@ -4,12 +4,12 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getAccountsUsingGET**](IntegrationAccountApi.md#getAccountsUsingGET) | **GET** /api/enterprise/account/integration | Retrieve Alfresco account information
+[**getAccounts**](IntegrationAccountApi.md#getAccounts) | **GET** /api/enterprise/account/integration | Retrieve Alfresco account information
 
 
-<a name="getAccountsUsingGET"></a>
-# **getAccountsUsingGET**
-> ResultListDataRepresentation getAccountsUsingGET()
+<a name="getAccounts"></a>
+# **getAccounts**
+> ResultListDataRepresentation getAccounts()
 
 Retrieve Alfresco account information
 
@@ -28,7 +28,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getAccountsUsingGET(callback);
+apiInstance.getAccounts(callback);
 ```
 
 ### Parameters

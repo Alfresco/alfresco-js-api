@@ -4,19 +4,19 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createTenantUsingPOST1**](AdminTenantsApi.md#createTenantUsingPOST1) | **POST** /api/enterprise/admin/tenants | Create a new tenant
-[**deleteTenantUsingDELETE1**](AdminTenantsApi.md#deleteTenantUsingDELETE1) | **DELETE** /api/enterprise/admin/tenants/{tenantId} | Delete a tenant
-[**getTenantEventsUsingGET1**](AdminTenantsApi.md#getTenantEventsUsingGET1) | **GET** /api/enterprise/admin/tenants/{tenantId}/events | Get tenant events
-[**getTenantLogoUsingGET1**](AdminTenantsApi.md#getTenantLogoUsingGET1) | **GET** /api/enterprise/admin/tenants/{tenantId}/logo | Get tenant logo
-[**getTenantUsingGET1**](AdminTenantsApi.md#getTenantUsingGET1) | **GET** /api/enterprise/admin/tenants/{tenantId} | Get tenant details
-[**getTenantsUsingGET1**](AdminTenantsApi.md#getTenantsUsingGET1) | **GET** /api/enterprise/admin/tenants | Get all tenants
-[**updateUsingPUT1**](AdminTenantsApi.md#updateUsingPUT1) | **PUT** /api/enterprise/admin/tenants/{tenantId} | Update a tenant
-[**uploadTenantLogoUsingPOST1**](AdminTenantsApi.md#uploadTenantLogoUsingPOST1) | **POST** /api/enterprise/admin/tenants/{tenantId}/logo | Update tenant logo
+[**createTenant**](AdminTenantsApi.md#createTenant) | **POST** /api/enterprise/admin/tenants | Create a new tenant
+[**deleteTenant**](AdminTenantsApi.md#deleteTenant) | **DELETE** /api/enterprise/admin/tenants/{tenantId} | Delete a tenant
+[**getTenantEvents**](AdminTenantsApi.md#getTenantEvents) | **GET** /api/enterprise/admin/tenants/{tenantId}/events | Get tenant events
+[**getTenantLogo**](AdminTenantsApi.md#getTenantLogo) | **GET** /api/enterprise/admin/tenants/{tenantId}/logo | Get tenant logo
+[**getTenant**](AdminTenantsApi.md#getTenant) | **GET** /api/enterprise/admin/tenants/{tenantId} | Get tenant details
+[**getTenants**](AdminTenantsApi.md#getTenants) | **GET** /api/enterprise/admin/tenants | Get all tenants
+[**update**](AdminTenantsApi.md#update) | **PUT** /api/enterprise/admin/tenants/{tenantId} | Update a tenant
+[**uploadTenantLogo**](AdminTenantsApi.md#uploadTenantLogo) | **POST** /api/enterprise/admin/tenants/{tenantId}/logo | Update tenant logo
 
 
-<a name="createTenantUsingPOST1"></a>
-# **createTenantUsingPOST1**
-> LightTenantRepresentation createTenantUsingPOST1(createTenantRepresentation)
+<a name="createTenant"></a>
+# **createTenant**
+> LightTenantRepresentation createTenant(createTenantRepresentation)
 
 Create a new tenant
 
@@ -38,7 +38,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.createTenantUsingPOST1(createTenantRepresentation, callback);
+apiInstance.createTenant(createTenantRepresentation, callback);
 ```
 
 ### Parameters
@@ -60,9 +60,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="deleteTenantUsingDELETE1"></a>
-# **deleteTenantUsingDELETE1**
-> deleteTenantUsingDELETE1(tenantId)
+<a name="deleteTenant"></a>
+# **deleteTenant**
+> deleteTenant(tenantId)
 
 Delete a tenant
 
@@ -82,7 +82,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.deleteTenantUsingDELETE1(tenantId, callback);
+apiInstance.deleteTenant(tenantId, callback);
 ```
 
 ### Parameters
@@ -104,9 +104,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getTenantEventsUsingGET1"></a>
-# **getTenantEventsUsingGET1**
-> [TenantEvent] getTenantEventsUsingGET1(tenantId)
+<a name="getTenantEvents"></a>
+# **getTenantEvents**
+> [TenantEvent] getTenantEvents(tenantId)
 
 Get tenant events
 
@@ -126,7 +126,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getTenantEventsUsingGET1(tenantId, callback);
+apiInstance.getTenantEvents(tenantId, callback);
 ```
 
 ### Parameters
@@ -148,9 +148,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getTenantLogoUsingGET1"></a>
-# **getTenantLogoUsingGET1**
-> getTenantLogoUsingGET1(tenantId)
+<a name="getTenantLogo"></a>
+# **getTenantLogo**
+> getTenantLogo(tenantId)
 
 Get tenant logo
 
@@ -170,7 +170,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.getTenantLogoUsingGET1(tenantId, callback);
+apiInstance.getTenantLogo(tenantId, callback);
 ```
 
 ### Parameters
@@ -192,9 +192,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getTenantUsingGET1"></a>
-# **getTenantUsingGET1**
-> TenantRepresentation getTenantUsingGET1(tenantId)
+<a name="getTenant"></a>
+# **getTenant**
+> TenantRepresentation getTenant(tenantId)
 
 Get tenant details
 
@@ -214,7 +214,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getTenantUsingGET1(tenantId, callback);
+apiInstance.getTenant(tenantId, callback);
 ```
 
 ### Parameters
@@ -236,9 +236,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getTenantsUsingGET1"></a>
-# **getTenantsUsingGET1**
-> [LightTenantRepresentation] getTenantsUsingGET1()
+<a name="getTenants"></a>
+# **getTenants**
+> [LightTenantRepresentation] getTenants()
 
 Get all tenants
 
@@ -257,7 +257,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getTenantsUsingGET1(callback);
+apiInstance.getTenants(callback);
 ```
 
 ### Parameters
@@ -276,9 +276,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="updateUsingPUT1"></a>
-# **updateUsingPUT1**
-> TenantRepresentation updateUsingPUT1(tenantId, createTenantRepresentation)
+<a name="update"></a>
+# **update**
+> TenantRepresentation update(tenantId, createTenantRepresentation)
 
 Update a tenant
 
@@ -300,7 +300,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.updateUsingPUT1(tenantId, createTenantRepresentation, callback);
+apiInstance.update(tenantId, createTenantRepresentation, callback);
 ```
 
 ### Parameters
@@ -323,9 +323,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="uploadTenantLogoUsingPOST1"></a>
-# **uploadTenantLogoUsingPOST1**
-> ImageUploadRepresentation uploadTenantLogoUsingPOST1(tenantId, file)
+<a name="uploadTenantLogo"></a>
+# **uploadTenantLogo**
+> ImageUploadRepresentation uploadTenantLogo(tenantId, file)
 
 Update tenant logo
 
@@ -347,7 +347,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.uploadTenantLogoUsingPOST1(tenantId, file, callback);
+apiInstance.uploadTenantLogo(tenantId, file, callback);
 ```
 
 ### Parameters

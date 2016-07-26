@@ -4,16 +4,16 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**changePasswordUsingPOST**](ProfileApi.md#changePasswordUsingPOST) | **POST** /api/enterprise/profile-password | Change user password
-[**getProfilePictureUsingGET**](ProfileApi.md#getProfilePictureUsingGET) | **GET** /api/enterprise/profile-picture | Retrieve user profile picture
-[**getProfileUsingGET**](ProfileApi.md#getProfileUsingGET) | **GET** /api/enterprise/profile | Retrieve user information
+[**changePassword**](ProfileApi.md#changePassword) | **POST** /api/enterprise/profile-password | Change user password
+[**getProfilePicture**](ProfileApi.md#getProfilePicture) | **GET** /api/enterprise/profile-picture | Retrieve user profile picture
+[**getProfile**](ProfileApi.md#getProfile) | **GET** /api/enterprise/profile | Retrieve user information
 [**updateProfile**](ProfileApi.md#updateProfile) | **POST** /api/enterprise/profile | Update user information
-[**uploadProfilePictureUsingPOST**](ProfileApi.md#uploadProfilePictureUsingPOST) | **POST** /api/enterprise/profile-picture | Change user profile picture
+[**uploadProfilePicture**](ProfileApi.md#uploadProfilePicture) | **POST** /api/enterprise/profile-picture | Change user profile picture
 
 
-<a name="changePasswordUsingPOST"></a>
-# **changePasswordUsingPOST**
-> changePasswordUsingPOST(changePasswordRepresentation)
+<a name="changePassword"></a>
+# **changePassword**
+> changePassword(changePasswordRepresentation)
 
 Change user password
 
@@ -33,7 +33,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.changePasswordUsingPOST(changePasswordRepresentation, callback);
+apiInstance.changePassword(changePasswordRepresentation, callback);
 ```
 
 ### Parameters
@@ -55,9 +55,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getProfilePictureUsingGET"></a>
-# **getProfilePictureUsingGET**
-> File getProfilePictureUsingGET()
+<a name="getProfilePicture"></a>
+# **getProfilePicture**
+> File getProfilePicture()
 
 Retrieve user profile picture
 
@@ -76,7 +76,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getProfilePictureUsingGET(callback);
+apiInstance.getProfilePicture(callback);
 ```
 
 ### Parameters
@@ -95,9 +95,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getProfileUsingGET"></a>
-# **getProfileUsingGET**
-> UserRepresentation getProfileUsingGET()
+<a name="getProfile"></a>
+# **getProfile**
+> UserRepresentation getProfile()
 
 Retrieve user information
 
@@ -116,7 +116,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getProfileUsingGET(callback);
+apiInstance.getProfile(callback);
 ```
 
 ### Parameters
@@ -181,9 +181,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="uploadProfilePictureUsingPOST"></a>
-# **uploadProfilePictureUsingPOST**
-> ImageUploadRepresentation uploadProfilePictureUsingPOST(file)
+<a name="uploadProfilePicture"></a>
+# **uploadProfilePicture**
+> ImageUploadRepresentation uploadProfilePicture(file)
 
 Change user profile picture
 
@@ -203,7 +203,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.uploadProfilePictureUsingPOST(file, callback);
+apiInstance.uploadProfilePicture(file, callback);
 ```
 
 ### Parameters

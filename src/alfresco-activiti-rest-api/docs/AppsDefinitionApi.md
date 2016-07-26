@@ -4,15 +4,15 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**exportAppDefinitionUsingGET**](AppsDefinitionApi.md#exportAppDefinitionUsingGET) | **GET** /api/enterprise/app-definitions/{modelId}/export | Export App Definition
-[**importAppDefinitionUsingPOST**](AppsDefinitionApi.md#importAppDefinitionUsingPOST) | **POST** /api/enterprise/app-definitions/import | Import App Definition
-[**importAppDefinitionUsingPOST1**](AppsDefinitionApi.md#importAppDefinitionUsingPOST1) | **POST** /api/enterprise/app-definitions/{modelId}/import | Import App
-[**publishAppDefinitionUsingPOST**](AppsDefinitionApi.md#publishAppDefinitionUsingPOST) | **POST** /api/enterprise/app-definitions/{modelId}/publish | Publish App
+[**exportAppDefinition**](AppsDefinitionApi.md#exportAppDefinition) | **GET** /api/enterprise/app-definitions/{modelId}/export | Export App Definition
+[**importAppDefinition**](AppsDefinitionApi.md#importAppDefinition) | **POST** /api/enterprise/app-definitions/import | Import App Definition
+[**importAppDefinition**](AppsDefinitionApi.md#importAppDefinition) | **POST** /api/enterprise/app-definitions/{modelId}/import | Import App
+[**publishAppDefinition**](AppsDefinitionApi.md#publishAppDefinition) | **POST** /api/enterprise/app-definitions/{modelId}/publish | Publish App
 
 
-<a name="exportAppDefinitionUsingGET"></a>
-# **exportAppDefinitionUsingGET**
-> exportAppDefinitionUsingGET(modelId)
+<a name="exportAppDefinition"></a>
+# **exportAppDefinition**
+> exportAppDefinition(modelId)
 
 Export App Definition
 
@@ -34,7 +34,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.exportAppDefinitionUsingGET(modelId, callback);
+apiInstance.exportAppDefinition(modelId, callback);
 ```
 
 ### Parameters
@@ -56,9 +56,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="importAppDefinitionUsingPOST"></a>
-# **importAppDefinitionUsingPOST**
-> AppDefinitionRepresentation importAppDefinitionUsingPOST(file)
+<a name="importAppDefinition"></a>
+# **importAppDefinition**
+> AppDefinitionRepresentation importAppDefinition(file)
 
 Import App Definition
 
@@ -80,7 +80,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.importAppDefinitionUsingPOST(file, callback);
+apiInstance.importAppDefinition(file, callback);
 ```
 
 ### Parameters
@@ -102,9 +102,9 @@ No authorization required
  - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
-<a name="importAppDefinitionUsingPOST1"></a>
-# **importAppDefinitionUsingPOST1**
-> AppDefinitionRepresentation importAppDefinitionUsingPOST1(modelId, file)
+<a name="importAppDefinition"></a>
+# **importAppDefinition**
+> AppDefinitionRepresentation importAppDefinition(modelId, file)
 
 Import App
 
@@ -128,7 +128,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.importAppDefinitionUsingPOST1(modelId, file, callback);
+apiInstance.importAppDefinition(modelId, file, callback);
 ```
 
 ### Parameters
@@ -151,9 +151,9 @@ No authorization required
  - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
-<a name="publishAppDefinitionUsingPOST"></a>
-# **publishAppDefinitionUsingPOST**
-> AppDefinitionUpdateResultRepresentation publishAppDefinitionUsingPOST(modelId, publishModel)
+<a name="publishAppDefinition"></a>
+# **publishAppDefinition**
+> AppDefinitionUpdateResultRepresentation publishAppDefinition(modelId, publishModel)
 
 Publish App
 
@@ -177,7 +177,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.publishAppDefinitionUsingPOST(modelId, publishModel, callback);
+apiInstance.publishAppDefinition(modelId, publishModel, callback);
 ```
 
 ### Parameters

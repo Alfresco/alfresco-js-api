@@ -4,16 +4,16 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**bulkUpdateUsersUsingPUT1**](AdminUsersApi.md#bulkUpdateUsersUsingPUT1) | **PUT** /api/enterprise/admin/users | Bulk Update a list of users
-[**createNewUserUsingPOST1**](AdminUsersApi.md#createNewUserUsingPOST1) | **POST** /api/enterprise/admin/users | Create a new user
-[**getUserUsingGET1**](AdminUsersApi.md#getUserUsingGET1) | **GET** /api/enterprise/admin/users/{userId} | Retrieve user information
-[**getUsersUsingGET1**](AdminUsersApi.md#getUsersUsingGET1) | **GET** /api/enterprise/admin/users | Get a list of users
-[**updateUserDetailsUsingPUT1**](AdminUsersApi.md#updateUserDetailsUsingPUT1) | **PUT** /api/enterprise/admin/users/{userId} | Update user details
+[**bulkUpdateUsers**](AdminUsersApi.md#bulkUpdateUsers) | **PUT** /api/enterprise/admin/users | Bulk Update a list of users
+[**createNewUser**](AdminUsersApi.md#createNewUser) | **POST** /api/enterprise/admin/users | Create a new user
+[**getUser**](AdminUsersApi.md#getUser) | **GET** /api/enterprise/admin/users/{userId} | Retrieve user information
+[**getUsers**](AdminUsersApi.md#getUsers) | **GET** /api/enterprise/admin/users | Get a list of users
+[**updateUserDetails**](AdminUsersApi.md#updateUserDetails) | **PUT** /api/enterprise/admin/users/{userId} | Update user details
 
 
-<a name="bulkUpdateUsersUsingPUT1"></a>
-# **bulkUpdateUsersUsingPUT1**
-> bulkUpdateUsersUsingPUT1(update)
+<a name="bulkUpdateUsers"></a>
+# **bulkUpdateUsers**
+> bulkUpdateUsers(update)
 
 Bulk Update a list of users
 
@@ -33,7 +33,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.bulkUpdateUsersUsingPUT1(update, callback);
+apiInstance.bulkUpdateUsers(update, callback);
 ```
 
 ### Parameters
@@ -55,9 +55,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="createNewUserUsingPOST1"></a>
-# **createNewUserUsingPOST1**
-> UserRepresentation createNewUserUsingPOST1(userRepresentation)
+<a name="createNewUser"></a>
+# **createNewUser**
+> UserRepresentation createNewUser(userRepresentation)
 
 Create a new user
 
@@ -77,7 +77,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.createNewUserUsingPOST1(userRepresentation, callback);
+apiInstance.createNewUser(userRepresentation, callback);
 ```
 
 ### Parameters
@@ -99,9 +99,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getUserUsingGET1"></a>
-# **getUserUsingGET1**
-> AbstractUserRepresentation getUserUsingGET1(userId, opts)
+<a name="getUser"></a>
+# **getUser**
+> AbstractUserRepresentation getUser(userId, opts)
 
 Retrieve user information
 
@@ -124,7 +124,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getUserUsingGET1(userId, opts, callback);
+apiInstance.getUser(userId, opts, callback);
 ```
 
 ### Parameters
@@ -147,9 +147,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getUsersUsingGET1"></a>
-# **getUsersUsingGET1**
-> ResultListDataRepresentation getUsersUsingGET1(opts)
+<a name="getUsers"></a>
+# **getUsers**
+> ResultListDataRepresentation getUsers(opts)
 
 Get a list of users
 
@@ -180,7 +180,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getUsersUsingGET1(opts, callback);
+apiInstance.getUsers(opts, callback);
 ```
 
 ### Parameters
@@ -212,9 +212,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="updateUserDetailsUsingPUT1"></a>
-# **updateUserDetailsUsingPUT1**
-> updateUserDetailsUsingPUT1(userId, userRepresentation)
+<a name="updateUserDetails"></a>
+# **updateUserDetails**
+> updateUserDetails(userId, userRepresentation)
 
 Update user details
 
@@ -236,7 +236,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.updateUserDetailsUsingPUT1(userId, userRepresentation, callback);
+apiInstance.updateUserDetails(userId, userRepresentation, callback);
 ```
 
 ### Parameters

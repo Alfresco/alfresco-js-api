@@ -4,13 +4,13 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**filterProcessInstancesUsingPOST**](ProcessInstancesListingApi.md#filterProcessInstancesUsingPOST) | **POST** /api/enterprise/process-instances/filter | Filter a list of process instances
-[**getProcessInstancesUsingPOST**](ProcessInstancesListingApi.md#getProcessInstancesUsingPOST) | **POST** /api/enterprise/process-instances/query | Retrieve a list of process instances
+[**filterProcessInstances**](ProcessInstancesListingApi.md#filterProcessInstances) | **POST** /api/enterprise/process-instances/filter | Filter a list of process instances
+[**getProcessInstances**](ProcessInstancesListingApi.md#getProcessInstances) | **POST** /api/enterprise/process-instances/query | Retrieve a list of process instances
 
 
-<a name="filterProcessInstancesUsingPOST"></a>
-# **filterProcessInstancesUsingPOST**
-> ResultListDataRepresentation filterProcessInstancesUsingPOST(filterRequest)
+<a name="filterProcessInstances"></a>
+# **filterProcessInstances**
+> ResultListDataRepresentation filterProcessInstances(filterRequest)
 
 Filter a list of process instances
 
@@ -30,7 +30,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.filterProcessInstancesUsingPOST(filterRequest, callback);
+apiInstance.filterProcessInstances(filterRequest, callback);
 ```
 
 ### Parameters
@@ -52,9 +52,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getProcessInstancesUsingPOST"></a>
-# **getProcessInstancesUsingPOST**
-> ResultListDataRepresentation getProcessInstancesUsingPOST(requestNode)
+<a name="getProcessInstances"></a>
+# **getProcessInstances**
+> ResultListDataRepresentation getProcessInstances(requestNode)
 
 Retrieve a list of process instances
 
@@ -74,7 +74,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getProcessInstancesUsingPOST(requestNode, callback);
+apiInstance.getProcessInstances(requestNode, callback);
 ```
 
 ### Parameters

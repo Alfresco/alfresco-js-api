@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new ProcessInstancesApi. 
+   * Constructs a new ProcessInstancesApi.
    * @alias module:api/ProcessInstancesApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the addProcessInstanceCommentUsingPOST operation.
-     * @callback module:api/ProcessInstancesApi~addProcessInstanceCommentUsingPOSTCallback
+     * Callback function to receive the result of the addProcessInstanceComment operation.
+     * @callback module:api/ProcessInstancesApi~addProcessInstanceCommentCallback
      * @param {String} error Error message, if any.
      * @param {module:model/CommentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44,20 +44,20 @@
      * Add a comment to a Process
      * @param {module:model/CommentRepresentation} commentRequest commentRequest
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ProcessInstancesApi~addProcessInstanceCommentUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessInstancesApi~addProcessInstanceCommentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/CommentRepresentation}
      */
-    this.addProcessInstanceCommentUsingPOST = function(commentRequest, processInstanceId, callback) {
+    this.addProcessInstanceComment = function(commentRequest, processInstanceId, callback) {
       var postBody = commentRequest;
 
       // verify the required parameter 'commentRequest' is set
       if (commentRequest == undefined || commentRequest == null) {
-        throw "Missing the required parameter 'commentRequest' when calling addProcessInstanceCommentUsingPOST";
+        throw "Missing the required parameter 'commentRequest' when calling addProcessInstanceComment";
       }
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling addProcessInstanceCommentUsingPOST";
+        throw "Missing the required parameter 'processInstanceId' when calling addProcessInstanceComment";
       }
 
 
@@ -84,8 +84,8 @@
     }
 
     /**
-     * Callback function to receive the result of the deleteProcessInstanceUsingDELETE operation.
-     * @callback module:api/ProcessInstancesApi~deleteProcessInstanceUsingDELETECallback
+     * Callback function to receive the result of the deleteProcessInstance operation.
+     * @callback module:api/ProcessInstancesApi~deleteProcessInstanceCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -94,14 +94,14 @@
     /**
      * Delete a process instance
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ProcessInstancesApi~deleteProcessInstanceUsingDELETECallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessInstancesApi~deleteProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteProcessInstanceUsingDELETE = function(processInstanceId, callback) {
+    this.deleteProcessInstance = function(processInstanceId, callback) {
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling deleteProcessInstanceUsingDELETE";
+        throw "Missing the required parameter 'processInstanceId' when calling deleteProcessInstance";
       }
 
 
@@ -128,8 +128,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getProcessInstanceCommentsUsingGET operation.
-     * @callback module:api/ProcessInstancesApi~getProcessInstanceCommentsUsingGETCallback
+     * Callback function to receive the result of the getProcessInstanceComments operation.
+     * @callback module:api/ProcessInstancesApi~getProcessInstanceCommentsCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -140,16 +140,16 @@
      * @param {String} processInstanceId processInstanceId
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.latestFirst latestFirst
-     * @param {module:api/ProcessInstancesApi~getProcessInstanceCommentsUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessInstancesApi~getProcessInstanceCommentsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getProcessInstanceCommentsUsingGET = function(processInstanceId, opts, callback) {
+    this.getProcessInstanceComments = function(processInstanceId, opts, callback) {
       opts = opts || {};
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceCommentsUsingGET";
+        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceComments";
       }
 
 
@@ -177,8 +177,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getProcessInstanceStartFormUsingGET operation.
-     * @callback module:api/ProcessInstancesApi~getProcessInstanceStartFormUsingGETCallback
+     * Callback function to receive the result of the getProcessInstanceStartForm operation.
+     * @callback module:api/ProcessInstancesApi~getProcessInstanceStartFormCallback
      * @param {String} error Error message, if any.
      * @param {module:model/FormDefinitionRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -188,15 +188,15 @@
      * Get process start form
      * When a process definitions has a start form (hasStartForm is true in the call above), the start form can be retrieved
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ProcessInstancesApi~getProcessInstanceStartFormUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessInstancesApi~getProcessInstanceStartFormCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/FormDefinitionRepresentation}
      */
-    this.getProcessInstanceStartFormUsingGET = function(processInstanceId, callback) {
+    this.getProcessInstanceStartForm = function(processInstanceId, callback) {
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceStartFormUsingGET";
+        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceStartForm";
       }
 
 
@@ -223,8 +223,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getProcessInstanceUsingGET operation.
-     * @callback module:api/ProcessInstancesApi~getProcessInstanceUsingGETCallback
+     * Callback function to receive the result of the getProcessInstance operation.
+     * @callback module:api/ProcessInstancesApi~getProcessInstanceCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ProcessInstanceRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -233,15 +233,15 @@
     /**
      * Retrieve a process instance information
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ProcessInstancesApi~getProcessInstanceUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessInstancesApi~getProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ProcessInstanceRepresentation}
      */
-    this.getProcessInstanceUsingGET = function(processInstanceId, callback) {
+    this.getProcessInstance = function(processInstanceId, callback) {
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceUsingGET";
+        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstance";
       }
 
 

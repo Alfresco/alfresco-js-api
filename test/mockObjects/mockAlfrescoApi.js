@@ -8,6 +8,6 @@ mockAlfrescoApi.WebScript = require('./alfresco/webScriptMock.js');
 //Bpm Mock
 mockAlfrescoApi.ActivitiMock = {};
 mockAlfrescoApi.ActivitiMock.Auth = require('./activiti/authResponseMock.js');
-mockAlfrescoApi.ActivitiMock.ProcessMock = require('./activiti/processMock.js');
+mockAlfrescoApi.ActivitiMock.Process = require('./activiti/processMock.js');
 
 module.exports = mockAlfrescoApi;

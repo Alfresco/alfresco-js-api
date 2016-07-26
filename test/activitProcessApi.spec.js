@@ -3,7 +3,7 @@
 var AlfrescoApi = require('../main');
 var expect = require('chai').expect;
 var AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
-var ProcessMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.ProcessMock;
+var ProcessMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Process;
 
 describe('Activiti Process Api', function () {
     beforeEach(function (done) {
@@ -31,7 +31,7 @@ describe('Activiti Process Api', function () {
 
         var processApiInstance = new this.alfrescoJsApi.activiti.ProcessApi();
 
-        processApiInstance.getProcessInstancesUsingPOST('{"page":0,"sort":"created-desc","state":"all"}').then((data)=> {
+        processApiInstance.getProcessInstances('{"page":0,"sort":"created-desc","state":"all"}').then((data)=> {
             expect(data.data[0].name).equal('Process Test Api - July 26th 2016');
             expect(data.data[1].name).equal('Process Test Api - July 26th 2016');
             expect(data.size).equal(2);

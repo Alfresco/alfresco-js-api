@@ -4,16 +4,16 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getFormHistoryUsingGET**](EditorApi.md#getFormHistoryUsingGET) | **GET** /api/enterprise/editor/form-models/{formId}/history/{formHistoryId} | getFormHistory
-[**getFormUsingGET**](EditorApi.md#getFormUsingGET) | **GET** /api/enterprise/editor/form-models/{formId} | getForm
-[**getFormsUsingGET**](EditorApi.md#getFormsUsingGET) | **GET** /api/enterprise/editor/form-models/values | getForms
-[**saveFormUsingPUT**](EditorApi.md#saveFormUsingPUT) | **PUT** /api/enterprise/editor/form-models/{formId} | saveForm
-[**validateModelUsingPUT**](EditorApi.md#validateModelUsingPUT) | **PUT** /api/enterprise/editor/form-models/{formId}/validate | validateModel
+[**getFormHistory**](EditorApi.md#getFormHistory) | **GET** /api/enterprise/editor/form-models/{formId}/history/{formHistoryId} | getFormHistory
+[**getForm**](EditorApi.md#getForm) | **GET** /api/enterprise/editor/form-models/{formId} | getForm
+[**getForms**](EditorApi.md#getForms) | **GET** /api/enterprise/editor/form-models/values | getForms
+[**saveForm**](EditorApi.md#saveForm) | **PUT** /api/enterprise/editor/form-models/{formId} | saveForm
+[**validateModel**](EditorApi.md#validateModel) | **PUT** /api/enterprise/editor/form-models/{formId}/validate | validateModel
 
 
-<a name="getFormHistoryUsingGET"></a>
-# **getFormHistoryUsingGET**
-> FormRepresentation getFormHistoryUsingGET(formId, formHistoryId)
+<a name="getFormHistory"></a>
+# **getFormHistory**
+> FormRepresentation getFormHistory(formId, formHistoryId)
 
 getFormHistory
 
@@ -35,7 +35,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getFormHistoryUsingGET(formId, formHistoryId, callback);
+apiInstance.getFormHistory(formId, formHistoryId, callback);
 ```
 
 ### Parameters
@@ -58,9 +58,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getFormUsingGET"></a>
-# **getFormUsingGET**
-> FormRepresentation getFormUsingGET(formId)
+<a name="getForm"></a>
+# **getForm**
+> FormRepresentation getForm(formId)
 
 getForm
 
@@ -80,7 +80,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getFormUsingGET(formId, callback);
+apiInstance.getForm(formId, callback);
 ```
 
 ### Parameters
@@ -102,9 +102,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getFormsUsingGET"></a>
-# **getFormsUsingGET**
-> [FormRepresentation] getFormsUsingGET()
+<a name="getForms"></a>
+# **getForms**
+> [FormRepresentation] getForms()
 
 getForms
 
@@ -121,7 +121,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getFormsUsingGET(callback);
+apiInstance.getForms(callback);
 ```
 
 ### Parameters
@@ -140,9 +140,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="saveFormUsingPUT"></a>
-# **saveFormUsingPUT**
-> FormRepresentation saveFormUsingPUT(formId, saveRepresentation)
+<a name="saveForm"></a>
+# **saveForm**
+> FormRepresentation saveForm(formId, saveRepresentation)
 
 saveForm
 
@@ -164,7 +164,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.saveFormUsingPUT(formId, saveRepresentation, callback);
+apiInstance.saveForm(formId, saveRepresentation, callback);
 ```
 
 ### Parameters
@@ -187,9 +187,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="validateModelUsingPUT"></a>
-# **validateModelUsingPUT**
-> [ValidationErrorRepresentation] validateModelUsingPUT(formId, saveRepresentation)
+<a name="validateModel"></a>
+# **validateModel**
+> [ValidationErrorRepresentation] validateModel(formId, saveRepresentation)
 
 validateModel
 
@@ -211,7 +211,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.validateModelUsingPUT(formId, saveRepresentation, callback);
+apiInstance.validateModel(formId, saveRepresentation, callback);
 ```
 
 ### Parameters

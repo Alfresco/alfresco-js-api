@@ -4,16 +4,16 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**completeTaskFormUsingPOST**](TaskFormsApi.md#completeTaskFormUsingPOST) | **POST** /api/enterprise/task-forms/{taskId} | Complete a Task Form
-[**getRestFieldValuesUsingGET1**](TaskFormsApi.md#getRestFieldValuesUsingGET1) | **GET** /api/enterprise/task-forms/{taskId}/form-values/{field}/{column} | Retrieve Column Field Values
-[**getRestFieldValuesUsingGET2**](TaskFormsApi.md#getRestFieldValuesUsingGET2) | **GET** /api/enterprise/task-forms/{taskId}/form-values/{field} | Retrieve Populated Field Values
-[**getTaskFormUsingGET**](TaskFormsApi.md#getTaskFormUsingGET) | **GET** /api/enterprise/task-forms/{taskId} | Retrieve Task Form
-[**saveTaskFormUsingPOST**](TaskFormsApi.md#saveTaskFormUsingPOST) | **POST** /api/enterprise/task-forms/{taskId}/save-form | Save Task Form
+[**completeTaskForm**](TaskFormsApi.md#completeTaskForm) | **POST** /api/enterprise/task-forms/{taskId} | Complete a Task Form
+[**getRestFieldValues**](TaskFormsApi.md#getRestFieldValues) | **GET** /api/enterprise/task-forms/{taskId}/form-values/{field}/{column} | Retrieve Column Field Values
+[**getRestFieldValues**](TaskFormsApi.md#getRestFieldValues) | **GET** /api/enterprise/task-forms/{taskId}/form-values/{field} | Retrieve Populated Field Values
+[**getTaskForm**](TaskFormsApi.md#getTaskForm) | **GET** /api/enterprise/task-forms/{taskId} | Retrieve Task Form
+[**saveTaskForm**](TaskFormsApi.md#saveTaskForm) | **POST** /api/enterprise/task-forms/{taskId}/save-form | Save Task Form
 
 
-<a name="completeTaskFormUsingPOST"></a>
-# **completeTaskFormUsingPOST**
-> completeTaskFormUsingPOST(taskId, completeTaskFormRepresentation)
+<a name="completeTaskForm"></a>
+# **completeTaskForm**
+> completeTaskForm(taskId, completeTaskFormRepresentation)
 
 Complete a Task Form
 
@@ -35,7 +35,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.completeTaskFormUsingPOST(taskId, completeTaskFormRepresentation, callback);
+apiInstance.completeTaskForm(taskId, completeTaskFormRepresentation, callback);
 ```
 
 ### Parameters
@@ -58,9 +58,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getRestFieldValuesUsingGET1"></a>
-# **getRestFieldValuesUsingGET1**
-> [FormValueRepresentation] getRestFieldValuesUsingGET1(taskId, field, column)
+<a name="getRestFieldValues"></a>
+# **getRestFieldValues**
+> [FormValueRepresentation] getRestFieldValues(taskId, field, column)
 
 Retrieve Column Field Values
 
@@ -86,7 +86,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getRestFieldValuesUsingGET1(taskId, field, column, callback);
+apiInstance.getRestFieldValues(taskId, field, column, callback);
 ```
 
 ### Parameters
@@ -110,9 +110,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getRestFieldValuesUsingGET2"></a>
-# **getRestFieldValuesUsingGET2**
-> [FormValueRepresentation] getRestFieldValuesUsingGET2(taskId, field)
+<a name="getRestFieldValues"></a>
+# **getRestFieldValues**
+> [FormValueRepresentation] getRestFieldValues(taskId, field)
 
 Retrieve Populated Field Values
 
@@ -136,7 +136,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getRestFieldValuesUsingGET2(taskId, field, callback);
+apiInstance.getRestFieldValues(taskId, field, callback);
 ```
 
 ### Parameters
@@ -159,9 +159,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getTaskFormUsingGET"></a>
-# **getTaskFormUsingGET**
-> FormDefinitionRepresentation getTaskFormUsingGET(taskId)
+<a name="getTaskForm"></a>
+# **getTaskForm**
+> FormDefinitionRepresentation getTaskForm(taskId)
 
 Retrieve Task Form
 
@@ -181,7 +181,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getTaskFormUsingGET(taskId, callback);
+apiInstance.getTaskForm(taskId, callback);
 ```
 
 ### Parameters
@@ -203,9 +203,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="saveTaskFormUsingPOST"></a>
-# **saveTaskFormUsingPOST**
-> saveTaskFormUsingPOST(taskId, saveTaskFormRepresentation)
+<a name="saveTaskForm"></a>
+# **saveTaskForm**
+> saveTaskForm(taskId, saveTaskFormRepresentation)
 
 Save Task Form
 
@@ -227,7 +227,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.saveTaskFormUsingPOST(taskId, saveTaskFormRepresentation, callback);
+apiInstance.saveTaskForm(taskId, saveTaskFormRepresentation, callback);
 ```
 
 ### Parameters

@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new ProfileApi. 
+   * Constructs a new ProfileApi.
    * @alias module:api/ProfileApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the changePasswordUsingPOST operation.
-     * @callback module:api/ProfileApi~changePasswordUsingPOSTCallback
+     * Callback function to receive the result of the changePassword operation.
+     * @callback module:api/ProfileApi~changePasswordCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -43,14 +43,14 @@
     /**
      * Change user password
      * @param {module:model/ChangePasswordRepresentation} changePasswordRepresentation changePasswordRepresentation
-     * @param {module:api/ProfileApi~changePasswordUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProfileApi~changePasswordCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.changePasswordUsingPOST = function(changePasswordRepresentation, callback) {
+    this.changePassword = function(changePasswordRepresentation, callback) {
       var postBody = changePasswordRepresentation;
 
       // verify the required parameter 'changePasswordRepresentation' is set
       if (changePasswordRepresentation == undefined || changePasswordRepresentation == null) {
-        throw "Missing the required parameter 'changePasswordRepresentation' when calling changePasswordUsingPOST";
+        throw "Missing the required parameter 'changePasswordRepresentation' when calling changePassword";
       }
 
 
@@ -76,8 +76,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getProfilePictureUsingGET operation.
-     * @callback module:api/ProfileApi~getProfilePictureUsingGETCallback
+     * Callback function to receive the result of the getProfilePicture operation.
+     * @callback module:api/ProfileApi~getProfilePictureCallback
      * @param {String} error Error message, if any.
      * @param {File} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -86,10 +86,10 @@
     /**
      * Retrieve user profile picture
      * Generally returns an image file
-     * @param {module:api/ProfileApi~getProfilePictureUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProfileApi~getProfilePictureCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {File}
      */
-    this.getProfilePictureUsingGET = function(callback) {
+    this.getProfilePicture = function(callback) {
       var postBody = null;
 
 
@@ -115,8 +115,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getProfileUsingGET operation.
-     * @callback module:api/ProfileApi~getProfileUsingGETCallback
+     * Callback function to receive the result of the getProfile operation.
+     * @callback module:api/ProfileApi~getProfileCallback
      * @param {String} error Error message, if any.
      * @param {module:model/UserRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -125,10 +125,10 @@
     /**
      * Retrieve user information
      *  This is useful to get the name, email, the groups that the user is part of, the user picture, etc.
-     * @param {module:api/ProfileApi~getProfileUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProfileApi~getProfileCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserRepresentation}
      */
-    this.getProfileUsingGET = function(callback) {
+    this.getProfile = function(callback) {
       var postBody = null;
 
 
@@ -199,8 +199,8 @@
     }
 
     /**
-     * Callback function to receive the result of the uploadProfilePictureUsingPOST operation.
-     * @callback module:api/ProfileApi~uploadProfilePictureUsingPOSTCallback
+     * Callback function to receive the result of the uploadProfilePicture operation.
+     * @callback module:api/ProfileApi~uploadProfilePictureCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ImageUploadRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -209,15 +209,15 @@
     /**
      * Change user profile picture
      * @param {File} file file
-     * @param {module:api/ProfileApi~uploadProfilePictureUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProfileApi~uploadProfilePictureCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ImageUploadRepresentation}
      */
-    this.uploadProfilePictureUsingPOST = function(file, callback) {
+    this.uploadProfilePicture = function(file, callback) {
       var postBody = null;
 
       // verify the required parameter 'file' is set
       if (file == undefined || file == null) {
-        throw "Missing the required parameter 'file' when calling uploadProfilePictureUsingPOST";
+        throw "Missing the required parameter 'file' when calling uploadProfilePicture";
       }
 
 

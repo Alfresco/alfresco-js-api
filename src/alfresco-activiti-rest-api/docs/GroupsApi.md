@@ -4,13 +4,13 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getGroupsUsingGET1**](GroupsApi.md#getGroupsUsingGET1) | **GET** /api/enterprise/groups | List groups
-[**getUsersForGroupUsingGET**](GroupsApi.md#getUsersForGroupUsingGET) | **GET** /api/enterprise/groups/{groupId}/users | List users member of a specific group
+[**getGroups**](GroupsApi.md#getGroups) | **GET** /api/enterprise/groups | List groups
+[**getUsersForGroup**](GroupsApi.md#getUsersForGroup) | **GET** /api/enterprise/groups/{groupId}/users | List users member of a specific group
 
 
-<a name="getGroupsUsingGET1"></a>
-# **getGroupsUsingGET1**
-> ResultListDataRepresentation getGroupsUsingGET1(opts)
+<a name="getGroups"></a>
+# **getGroups**
+> ResultListDataRepresentation getGroups(opts)
 
 List groups
 
@@ -35,7 +35,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getGroupsUsingGET1(opts, callback);
+apiInstance.getGroups(opts, callback);
 ```
 
 ### Parameters
@@ -61,9 +61,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getUsersForGroupUsingGET"></a>
-# **getUsersForGroupUsingGET**
-> ResultListDataRepresentation getUsersForGroupUsingGET(groupId)
+<a name="getUsersForGroup"></a>
+# **getUsersForGroup**
+> ResultListDataRepresentation getUsersForGroup(groupId)
 
 List users member of a specific group
 
@@ -83,7 +83,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getUsersForGroupUsingGET(groupId, callback);
+apiInstance.getUsersForGroup(groupId, callback);
 ```
 
 ### Parameters

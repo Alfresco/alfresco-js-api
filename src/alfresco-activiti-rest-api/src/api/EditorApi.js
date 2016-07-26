@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new EditorApi. 
+   * Constructs a new EditorApi.
    * @alias module:api/EditorApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the getFormHistoryUsingGET operation.
-     * @callback module:api/EditorApi~getFormHistoryUsingGETCallback
+     * Callback function to receive the result of the getFormHistory operation.
+     * @callback module:api/EditorApi~getFormHistoryCallback
      * @param {String} error Error message, if any.
      * @param {module:model/FormRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44,20 +44,20 @@
      * getFormHistory
      * @param {Integer} formId formId
      * @param {Integer} formHistoryId formHistoryId
-     * @param {module:api/EditorApi~getFormHistoryUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/EditorApi~getFormHistoryCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/FormRepresentation}
      */
-    this.getFormHistoryUsingGET = function(formId, formHistoryId, callback) {
+    this.getFormHistory = function(formId, formHistoryId, callback) {
       var postBody = null;
 
       // verify the required parameter 'formId' is set
       if (formId == undefined || formId == null) {
-        throw "Missing the required parameter 'formId' when calling getFormHistoryUsingGET";
+        throw "Missing the required parameter 'formId' when calling getFormHistory";
       }
 
       // verify the required parameter 'formHistoryId' is set
       if (formHistoryId == undefined || formHistoryId == null) {
-        throw "Missing the required parameter 'formHistoryId' when calling getFormHistoryUsingGET";
+        throw "Missing the required parameter 'formHistoryId' when calling getFormHistory";
       }
 
 
@@ -85,8 +85,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getFormUsingGET operation.
-     * @callback module:api/EditorApi~getFormUsingGETCallback
+     * Callback function to receive the result of the getForm operation.
+     * @callback module:api/EditorApi~getFormCallback
      * @param {String} error Error message, if any.
      * @param {module:model/FormRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -95,15 +95,15 @@
     /**
      * getForm
      * @param {Integer} formId formId
-     * @param {module:api/EditorApi~getFormUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/EditorApi~getFormCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/FormRepresentation}
      */
-    this.getFormUsingGET = function(formId, callback) {
+    this.getForm = function(formId, callback) {
       var postBody = null;
 
       // verify the required parameter 'formId' is set
       if (formId == undefined || formId == null) {
-        throw "Missing the required parameter 'formId' when calling getFormUsingGET";
+        throw "Missing the required parameter 'formId' when calling getForm";
       }
 
 
@@ -130,8 +130,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getFormsUsingGET operation.
-     * @callback module:api/EditorApi~getFormsUsingGETCallback
+     * Callback function to receive the result of the getForms operation.
+     * @callback module:api/EditorApi~getFormsCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/FormRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -139,10 +139,10 @@
 
     /**
      * getForms
-     * @param {module:api/EditorApi~getFormsUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/EditorApi~getFormsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/FormRepresentation>}
      */
-    this.getFormsUsingGET = function(callback) {
+    this.getForms = function(callback) {
       var postBody = null;
 
 
@@ -168,8 +168,8 @@
     }
 
     /**
-     * Callback function to receive the result of the saveFormUsingPUT operation.
-     * @callback module:api/EditorApi~saveFormUsingPUTCallback
+     * Callback function to receive the result of the saveForm operation.
+     * @callback module:api/EditorApi~saveFormCallback
      * @param {String} error Error message, if any.
      * @param {module:model/FormRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -179,20 +179,20 @@
      * saveForm
      * @param {Integer} formId formId
      * @param {module:model/FormSaveRepresentation} saveRepresentation saveRepresentation
-     * @param {module:api/EditorApi~saveFormUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/EditorApi~saveFormCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/FormRepresentation}
      */
-    this.saveFormUsingPUT = function(formId, saveRepresentation, callback) {
+    this.saveForm = function(formId, saveRepresentation, callback) {
       var postBody = saveRepresentation;
 
       // verify the required parameter 'formId' is set
       if (formId == undefined || formId == null) {
-        throw "Missing the required parameter 'formId' when calling saveFormUsingPUT";
+        throw "Missing the required parameter 'formId' when calling saveForm";
       }
 
       // verify the required parameter 'saveRepresentation' is set
       if (saveRepresentation == undefined || saveRepresentation == null) {
-        throw "Missing the required parameter 'saveRepresentation' when calling saveFormUsingPUT";
+        throw "Missing the required parameter 'saveRepresentation' when calling saveForm";
       }
 
 
@@ -219,8 +219,8 @@
     }
 
     /**
-     * Callback function to receive the result of the validateModelUsingPUT operation.
-     * @callback module:api/EditorApi~validateModelUsingPUTCallback
+     * Callback function to receive the result of the validateModel operation.
+     * @callback module:api/EditorApi~validateModelCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/ValidationErrorRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -230,20 +230,20 @@
      * validateModel
      * @param {Integer} formId formId
      * @param {module:model/FormSaveRepresentation} saveRepresentation saveRepresentation
-     * @param {module:api/EditorApi~validateModelUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/EditorApi~validateModelCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/ValidationErrorRepresentation>}
      */
-    this.validateModelUsingPUT = function(formId, saveRepresentation, callback) {
+    this.validateModel = function(formId, saveRepresentation, callback) {
       var postBody = saveRepresentation;
 
       // verify the required parameter 'formId' is set
       if (formId == undefined || formId == null) {
-        throw "Missing the required parameter 'formId' when calling validateModelUsingPUT";
+        throw "Missing the required parameter 'formId' when calling validateModel";
       }
 
       // verify the required parameter 'saveRepresentation' is set
       if (saveRepresentation == undefined || saveRepresentation == null) {
-        throw "Missing the required parameter 'saveRepresentation' when calling validateModelUsingPUT";
+        throw "Missing the required parameter 'saveRepresentation' when calling validateModel";
       }
 
 

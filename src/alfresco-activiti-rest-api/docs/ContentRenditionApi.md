@@ -4,12 +4,12 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getRawContentUsingGET2**](ContentRenditionApi.md#getRawContentUsingGET2) | **GET** /api/enterprise/content/{contentId}/rendition/{renditionType} | Retrieve Raw Content
+[**getRawContent**](ContentRenditionApi.md#getRawContent) | **GET** /api/enterprise/content/{contentId}/rendition/{renditionType} | Retrieve Raw Content
 
 
-<a name="getRawContentUsingGET2"></a>
-# **getRawContentUsingGET2**
-> getRawContentUsingGET2(contentId, renditionType)
+<a name="getRawContent"></a>
+# **getRawContent**
+> getRawContent(contentId, renditionType)
 
 Retrieve Raw Content
 
@@ -31,7 +31,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.getRawContentUsingGET2(contentId, renditionType, callback);
+apiInstance.getRawContent(contentId, renditionType, callback);
 ```
 
 ### Parameters

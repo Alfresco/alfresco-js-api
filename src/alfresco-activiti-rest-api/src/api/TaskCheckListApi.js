@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new TaskCheckListApi. 
+   * Constructs a new TaskCheckListApi.
    * @alias module:api/TaskCheckListApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the addSubtaskUsingPOST operation.
-     * @callback module:api/TaskCheckListApi~addSubtaskUsingPOSTCallback
+     * Callback function to receive the result of the addSubtask operation.
+     * @callback module:api/TaskCheckListApi~addSubtaskCallback
      * @param {String} error Error message, if any.
      * @param {module:model/TaskRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44,20 +44,20 @@
      * Create a task checklist
      * @param {String} taskId taskId
      * @param {module:model/TaskRepresentation} taskRepresentation taskRepresentation
-     * @param {module:api/TaskCheckListApi~addSubtaskUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskCheckListApi~addSubtaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TaskRepresentation}
      */
-    this.addSubtaskUsingPOST = function(taskId, taskRepresentation, callback) {
+    this.addSubtask = function(taskId, taskRepresentation, callback) {
       var postBody = taskRepresentation;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling addSubtaskUsingPOST";
+        throw "Missing the required parameter 'taskId' when calling addSubtask";
       }
 
       // verify the required parameter 'taskRepresentation' is set
       if (taskRepresentation == undefined || taskRepresentation == null) {
-        throw "Missing the required parameter 'taskRepresentation' when calling addSubtaskUsingPOST";
+        throw "Missing the required parameter 'taskRepresentation' when calling addSubtask";
       }
 
 
@@ -84,8 +84,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getChecklistUsingGET operation.
-     * @callback module:api/TaskCheckListApi~getChecklistUsingGETCallback
+     * Callback function to receive the result of the getChecklist operation.
+     * @callback module:api/TaskCheckListApi~getChecklistCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -94,15 +94,15 @@
     /**
      * Retrieve Checklist added to a task
      * @param {String} taskId taskId
-     * @param {module:api/TaskCheckListApi~getChecklistUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskCheckListApi~getChecklistCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getChecklistUsingGET = function(taskId, callback) {
+    this.getChecklist = function(taskId, callback) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling getChecklistUsingGET";
+        throw "Missing the required parameter 'taskId' when calling getChecklist";
       }
 
 
@@ -129,8 +129,8 @@
     }
 
     /**
-     * Callback function to receive the result of the orderChecklistUsingPUT operation.
-     * @callback module:api/TaskCheckListApi~orderChecklistUsingPUTCallback
+     * Callback function to receive the result of the orderChecklist operation.
+     * @callback module:api/TaskCheckListApi~orderChecklistCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -140,19 +140,19 @@
      * Change the order of items on a checklist
      * @param {String} taskId taskId
      * @param {module:model/ChecklistOrderRepresentation} orderRepresentation orderRepresentation
-     * @param {module:api/TaskCheckListApi~orderChecklistUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskCheckListApi~orderChecklistCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.orderChecklistUsingPUT = function(taskId, orderRepresentation, callback) {
+    this.orderChecklist = function(taskId, orderRepresentation, callback) {
       var postBody = orderRepresentation;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling orderChecklistUsingPUT";
+        throw "Missing the required parameter 'taskId' when calling orderChecklist";
       }
 
       // verify the required parameter 'orderRepresentation' is set
       if (orderRepresentation == undefined || orderRepresentation == null) {
-        throw "Missing the required parameter 'orderRepresentation' when calling orderChecklistUsingPUT";
+        throw "Missing the required parameter 'orderRepresentation' when calling orderChecklist";
       }
 
 

@@ -4,15 +4,15 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**completeTasksUsingGET**](TemporaryApi.md#completeTasksUsingGET) | **GET** /api/enterprise/temporary/generate-report-data/complete-tasks | completeTasks
-[**generateDataUsingGET**](TemporaryApi.md#generateDataUsingGET) | **GET** /api/enterprise/temporary/generate-report-data/start-process | generateData
-[**getHeadersUsingGET**](TemporaryApi.md#getHeadersUsingGET) | **GET** /api/enterprise/temporary/example-headers | getHeaders
-[**getOptionsUsingGET**](TemporaryApi.md#getOptionsUsingGET) | **GET** /api/enterprise/temporary/example-options | getOptions
+[**completeTasks**](TemporaryApi.md#completeTasks) | **GET** /api/enterprise/temporary/generate-report-data/complete-tasks | completeTasks
+[**generateData**](TemporaryApi.md#generateData) | **GET** /api/enterprise/temporary/generate-report-data/start-process | generateData
+[**getHeaders**](TemporaryApi.md#getHeaders) | **GET** /api/enterprise/temporary/example-headers | getHeaders
+[**getOptions**](TemporaryApi.md#getOptions) | **GET** /api/enterprise/temporary/example-options | getOptions
 
 
-<a name="completeTasksUsingGET"></a>
-# **completeTasksUsingGET**
-> completeTasksUsingGET(userId, processDefinitionKey)
+<a name="completeTasks"></a>
+# **completeTasks**
+> completeTasks(userId, processDefinitionKey)
 
 completeTasks
 
@@ -34,7 +34,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.completeTasksUsingGET(userId, processDefinitionKey, callback);
+apiInstance.completeTasks(userId, processDefinitionKey, callback);
 ```
 
 ### Parameters
@@ -57,9 +57,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="generateDataUsingGET"></a>
-# **generateDataUsingGET**
-> generateDataUsingGET(userId, processDefinitionKey)
+<a name="generateData"></a>
+# **generateData**
+> generateData(userId, processDefinitionKey)
 
 generateData
 
@@ -81,7 +81,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.generateDataUsingGET(userId, processDefinitionKey, callback);
+apiInstance.generateData(userId, processDefinitionKey, callback);
 ```
 
 ### Parameters
@@ -104,9 +104,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getHeadersUsingGET"></a>
-# **getHeadersUsingGET**
-> ArrayNode getHeadersUsingGET()
+<a name="getHeaders"></a>
+# **getHeaders**
+> ArrayNode getHeaders()
 
 getHeaders
 
@@ -123,7 +123,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getHeadersUsingGET(callback);
+apiInstance.getHeaders(callback);
 ```
 
 ### Parameters
@@ -142,9 +142,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getOptionsUsingGET"></a>
-# **getOptionsUsingGET**
-> ArrayNode getOptionsUsingGET()
+<a name="getOptions"></a>
+# **getOptions**
+> ArrayNode getOptions()
 
 getOptions
 
@@ -161,7 +161,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getOptionsUsingGET(callback);
+apiInstance.getOptions(callback);
 ```
 
 ### Parameters

@@ -4,15 +4,15 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**addProcessInstanceCommentUsingPOST**](CommentsApi.md#addProcessInstanceCommentUsingPOST) | **POST** /api/enterprise/process-instances/{processInstanceId}/comments | Add a comment to a Process
-[**addTaskCommentUsingPOST**](CommentsApi.md#addTaskCommentUsingPOST) | **POST** /api/enterprise/tasks/{taskId}/comments | Add a comment to a Task
-[**getProcessInstanceCommentsUsingGET**](CommentsApi.md#getProcessInstanceCommentsUsingGET) | **GET** /api/enterprise/process-instances/{processInstanceId}/comments | Comment list added to Process
-[**getTaskCommentsUsingGET**](CommentsApi.md#getTaskCommentsUsingGET) | **GET** /api/enterprise/tasks/{taskId}/comments | Comment list added to Task
+[**addProcessInstanceComment**](CommentsApi.md#addProcessInstanceComment) | **POST** /api/enterprise/process-instances/{processInstanceId}/comments | Add a comment to a Process
+[**addTaskComment**](CommentsApi.md#addTaskComment) | **POST** /api/enterprise/tasks/{taskId}/comments | Add a comment to a Task
+[**getProcessInstanceComments**](CommentsApi.md#getProcessInstanceComments) | **GET** /api/enterprise/process-instances/{processInstanceId}/comments | Comment list added to Process
+[**getTaskComments**](CommentsApi.md#getTaskComments) | **GET** /api/enterprise/tasks/{taskId}/comments | Comment list added to Task
 
 
-<a name="addProcessInstanceCommentUsingPOST"></a>
-# **addProcessInstanceCommentUsingPOST**
-> CommentRepresentation addProcessInstanceCommentUsingPOST(commentRequest, processInstanceId)
+<a name="addProcessInstanceComment"></a>
+# **addProcessInstanceComment**
+> CommentRepresentation addProcessInstanceComment(commentRequest, processInstanceId)
 
 Add a comment to a Process
 
@@ -34,7 +34,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.addProcessInstanceCommentUsingPOST(commentRequest, processInstanceId, callback);
+apiInstance.addProcessInstanceComment(commentRequest, processInstanceId, callback);
 ```
 
 ### Parameters
@@ -57,9 +57,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="addTaskCommentUsingPOST"></a>
-# **addTaskCommentUsingPOST**
-> CommentRepresentation addTaskCommentUsingPOST(commentRequest, taskId)
+<a name="addTaskComment"></a>
+# **addTaskComment**
+> CommentRepresentation addTaskComment(commentRequest, taskId)
 
 Add a comment to a Task
 
@@ -81,7 +81,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.addTaskCommentUsingPOST(commentRequest, taskId, callback);
+apiInstance.addTaskComment(commentRequest, taskId, callback);
 ```
 
 ### Parameters
@@ -104,9 +104,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getProcessInstanceCommentsUsingGET"></a>
-# **getProcessInstanceCommentsUsingGET**
-> ResultListDataRepresentation getProcessInstanceCommentsUsingGET(processInstanceId, opts)
+<a name="getProcessInstanceComments"></a>
+# **getProcessInstanceComments**
+> ResultListDataRepresentation getProcessInstanceComments(processInstanceId, opts)
 
 Comment list added to Process
 
@@ -129,7 +129,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getProcessInstanceCommentsUsingGET(processInstanceId, opts, callback);
+apiInstance.getProcessInstanceComments(processInstanceId, opts, callback);
 ```
 
 ### Parameters
@@ -152,9 +152,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getTaskCommentsUsingGET"></a>
-# **getTaskCommentsUsingGET**
-> ResultListDataRepresentation getTaskCommentsUsingGET(taskId, opts)
+<a name="getTaskComments"></a>
+# **getTaskComments**
+> ResultListDataRepresentation getTaskComments(taskId, opts)
 
 Comment list added to Task
 
@@ -177,7 +177,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getTaskCommentsUsingGET(taskId, opts, callback);
+apiInstance.getTaskComments(taskId, opts, callback);
 ```
 
 ### Parameters

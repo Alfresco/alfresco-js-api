@@ -4,29 +4,29 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**confirmAuthorisationUsingGET**](IntegrationApi.md#confirmAuthorisationUsingGET) | **GET** /api/enterprise/integration/alfresco-cloud/confirm-auth-request | Alfresco Cloud Authorization
-[**confirmAuthorisationUsingGET1**](IntegrationApi.md#confirmAuthorisationUsingGET1) | **GET** /api/enterprise/integration/box/confirm-auth-request | Box Authorization
-[**confirmAuthorisationUsingGET2**](IntegrationApi.md#confirmAuthorisationUsingGET2) | **GET** /api/enterprise/integration/google-drive/confirm-auth-request | Drive Authorization
-[**createRepositoryAccountUsingPOST**](IntegrationApi.md#createRepositoryAccountUsingPOST) | **POST** /api/enterprise/integration/box/{userId}/account | Create Box account
-[**deleteRepositoryAccountUsingDELETE**](IntegrationApi.md#deleteRepositoryAccountUsingDELETE) | **DELETE** /api/enterprise/integration/box/{userId}/account | Delete Box account
-[**getAllNetworksUsingGET**](IntegrationApi.md#getAllNetworksUsingGET) | **GET** /api/enterprise/integration/alfresco-cloud/networks | List Alfresco networks
-[**getAllSitesUsingGET**](IntegrationApi.md#getAllSitesUsingGET) | **GET** /api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites | List Alfresco sites
-[**getAllSitesUsingGET1**](IntegrationApi.md#getAllSitesUsingGET1) | **GET** /api/enterprise/integration/alfresco/{repositoryId}/sites | List Alfresco sites
-[**getBoxPluginStatusUsingGET**](IntegrationApi.md#getBoxPluginStatusUsingGET) | **GET** /api/enterprise/integration/box/status | Retrieve if Box Integration is enabled
-[**getContentInFolderUsingGET**](IntegrationApi.md#getContentInFolderUsingGET) | **GET** /api/enterprise/integration/alfresco-cloud/networks/{networkId}/folders/{folderId}/content | List file &amp; folders inside a specific folder
-[**getContentInFolderUsingGET1**](IntegrationApi.md#getContentInFolderUsingGET1) | **GET** /api/enterprise/integration/alfresco/{repositoryId}/folders/{folderId}/content | List file &amp; folders inside a specific folder
-[**getContentInSiteUsingGET**](IntegrationApi.md#getContentInSiteUsingGET) | **GET** /api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/content | List file &amp; folders inside a specific site
-[**getContentInSiteUsingGET1**](IntegrationApi.md#getContentInSiteUsingGET1) | **GET** /api/enterprise/integration/alfresco/{repositoryId}/sites/{siteId}/content | List file &amp; folders inside a specific site
-[**getFilesUsingGET**](IntegrationApi.md#getFilesUsingGET) | **GET** /api/enterprise/integration/box/files | List file &amp; folders
-[**getFilesUsingGET1**](IntegrationApi.md#getFilesUsingGET1) | **GET** /api/enterprise/integration/google-drive/files | List file &amp; folders
-[**getRepositoriesUsingGET**](IntegrationApi.md#getRepositoriesUsingGET) | **GET** /api/enterprise/profile/accounts/alfresco | List Alfresco repositories
-[**getRepositoryAccountUsingGET**](IntegrationApi.md#getRepositoryAccountUsingGET) | **GET** /api/enterprise/integration/box/{userId}/account | List Box Account
-[**updateRepositoryAccountUsingPUT**](IntegrationApi.md#updateRepositoryAccountUsingPUT) | **PUT** /api/enterprise/integration/box/{userId}/account | Update Box account
+[**confirmAuthorisation**](IntegrationApi.md#confirmAuthorisation) | **GET** /api/enterprise/integration/alfresco-cloud/confirm-auth-request | Alfresco Cloud Authorization
+[**confirmAuthorisation**](IntegrationApi.md#confirmAuthorisation) | **GET** /api/enterprise/integration/box/confirm-auth-request | Box Authorization
+[**confirmAuthorisation**](IntegrationApi.md#confirmAuthorisation) | **GET** /api/enterprise/integration/google-drive/confirm-auth-request | Drive Authorization
+[**createRepositoryAccount**](IntegrationApi.md#createRepositoryAccount) | **POST** /api/enterprise/integration/box/{userId}/account | Create Box account
+[**deleteRepositoryAccount**](IntegrationApi.md#deleteRepositoryAccount) | **DELETE** /api/enterprise/integration/box/{userId}/account | Delete Box account
+[**getAllNetworks**](IntegrationApi.md#getAllNetworks) | **GET** /api/enterprise/integration/alfresco-cloud/networks | List Alfresco networks
+[**getAllSites**](IntegrationApi.md#getAllSites) | **GET** /api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites | List Alfresco sites
+[**getAllSites**](IntegrationApi.md#getAllSites) | **GET** /api/enterprise/integration/alfresco/{repositoryId}/sites | List Alfresco sites
+[**getBoxPluginStatus**](IntegrationApi.md#getBoxPluginStatus) | **GET** /api/enterprise/integration/box/status | Retrieve if Box Integration is enabled
+[**getContentInFolder**](IntegrationApi.md#getContentInFolder) | **GET** /api/enterprise/integration/alfresco-cloud/networks/{networkId}/folders/{folderId}/content | List file &amp; folders inside a specific folder
+[**getContentInFolder**](IntegrationApi.md#getContentInFolder) | **GET** /api/enterprise/integration/alfresco/{repositoryId}/folders/{folderId}/content | List file &amp; folders inside a specific folder
+[**getContentInSite**](IntegrationApi.md#getContentInSite) | **GET** /api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/content | List file &amp; folders inside a specific site
+[**getContentInSite**](IntegrationApi.md#getContentInSite) | **GET** /api/enterprise/integration/alfresco/{repositoryId}/sites/{siteId}/content | List file &amp; folders inside a specific site
+[**getFiles**](IntegrationApi.md#getFiles) | **GET** /api/enterprise/integration/box/files | List file &amp; folders
+[**getFiles**](IntegrationApi.md#getFiles) | **GET** /api/enterprise/integration/google-drive/files | List file &amp; folders
+[**getRepositories**](IntegrationApi.md#getRepositories) | **GET** /api/enterprise/profile/accounts/alfresco | List Alfresco repositories
+[**getRepositoryAccount**](IntegrationApi.md#getRepositoryAccount) | **GET** /api/enterprise/integration/box/{userId}/account | List Box Account
+[**updateRepositoryAccount**](IntegrationApi.md#updateRepositoryAccount) | **PUT** /api/enterprise/integration/box/{userId}/account | Update Box account
 
 
-<a name="confirmAuthorisationUsingGET"></a>
-# **confirmAuthorisationUsingGET**
-> confirmAuthorisationUsingGET(code)
+<a name="confirmAuthorisation"></a>
+# **confirmAuthorisation**
+> confirmAuthorisation(code)
 
 Alfresco Cloud Authorization
 
@@ -48,7 +48,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.confirmAuthorisationUsingGET(code, callback);
+apiInstance.confirmAuthorisation(code, callback);
 ```
 
 ### Parameters
@@ -70,9 +70,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: text/html, application/json
 
-<a name="confirmAuthorisationUsingGET1"></a>
-# **confirmAuthorisationUsingGET1**
-> confirmAuthorisationUsingGET1(code)
+<a name="confirmAuthorisation"></a>
+# **confirmAuthorisation**
+> confirmAuthorisation(code)
 
 Box Authorization
 
@@ -94,7 +94,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.confirmAuthorisationUsingGET1(code, callback);
+apiInstance.confirmAuthorisation(code, callback);
 ```
 
 ### Parameters
@@ -116,9 +116,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: text/html, application/json
 
-<a name="confirmAuthorisationUsingGET2"></a>
-# **confirmAuthorisationUsingGET2**
-> confirmAuthorisationUsingGET2(code)
+<a name="confirmAuthorisation"></a>
+# **confirmAuthorisation**
+> confirmAuthorisation(code)
 
 Drive Authorization
 
@@ -140,7 +140,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.confirmAuthorisationUsingGET2(code, callback);
+apiInstance.confirmAuthorisation(code, callback);
 ```
 
 ### Parameters
@@ -162,9 +162,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: text/html, application/json
 
-<a name="createRepositoryAccountUsingPOST"></a>
-# **createRepositoryAccountUsingPOST**
-> createRepositoryAccountUsingPOST(userId, credentials)
+<a name="createRepositoryAccount"></a>
+# **createRepositoryAccount**
+> createRepositoryAccount(userId, credentials)
 
 Create Box account
 
@@ -186,7 +186,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.createRepositoryAccountUsingPOST(userId, credentials, callback);
+apiInstance.createRepositoryAccount(userId, credentials, callback);
 ```
 
 ### Parameters
@@ -209,9 +209,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="deleteRepositoryAccountUsingDELETE"></a>
-# **deleteRepositoryAccountUsingDELETE**
-> deleteRepositoryAccountUsingDELETE(userId)
+<a name="deleteRepositoryAccount"></a>
+# **deleteRepositoryAccount**
+> deleteRepositoryAccount(userId)
 
 Delete Box account
 
@@ -231,7 +231,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.deleteRepositoryAccountUsingDELETE(userId, callback);
+apiInstance.deleteRepositoryAccount(userId, callback);
 ```
 
 ### Parameters
@@ -253,9 +253,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getAllNetworksUsingGET"></a>
-# **getAllNetworksUsingGET**
-> ResultListDataRepresentation getAllNetworksUsingGET()
+<a name="getAllNetworks"></a>
+# **getAllNetworks**
+> ResultListDataRepresentation getAllNetworks()
 
 List Alfresco networks
 
@@ -272,7 +272,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getAllNetworksUsingGET(callback);
+apiInstance.getAllNetworks(callback);
 ```
 
 ### Parameters
@@ -291,9 +291,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getAllSitesUsingGET"></a>
-# **getAllSitesUsingGET**
-> ResultListDataRepresentation getAllSitesUsingGET(networkId)
+<a name="getAllSites"></a>
+# **getAllSites**
+> ResultListDataRepresentation getAllSites(networkId)
 
 List Alfresco sites
 
@@ -315,7 +315,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getAllSitesUsingGET(networkId, callback);
+apiInstance.getAllSites(networkId, callback);
 ```
 
 ### Parameters
@@ -337,9 +337,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getAllSitesUsingGET1"></a>
-# **getAllSitesUsingGET1**
-> ResultListDataRepresentation getAllSitesUsingGET1(repositoryId)
+<a name="getAllSites"></a>
+# **getAllSites**
+> ResultListDataRepresentation getAllSites(repositoryId)
 
 List Alfresco sites
 
@@ -361,7 +361,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getAllSitesUsingGET1(repositoryId, callback);
+apiInstance.getAllSites(repositoryId, callback);
 ```
 
 ### Parameters
@@ -383,9 +383,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getBoxPluginStatusUsingGET"></a>
-# **getBoxPluginStatusUsingGET**
-> &#39;Boolean&#39; getBoxPluginStatusUsingGET()
+<a name="getBoxPluginStatus"></a>
+# **getBoxPluginStatus**
+> &#39;Boolean&#39; getBoxPluginStatus()
 
 Retrieve if Box Integration is enabled
 
@@ -402,7 +402,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getBoxPluginStatusUsingGET(callback);
+apiInstance.getBoxPluginStatus(callback);
 ```
 
 ### Parameters
@@ -421,9 +421,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getContentInFolderUsingGET"></a>
-# **getContentInFolderUsingGET**
-> ResultListDataRepresentation getContentInFolderUsingGET(networkId, folderId)
+<a name="getContentInFolder"></a>
+# **getContentInFolder**
+> ResultListDataRepresentation getContentInFolder(networkId, folderId)
 
 List file &amp; folders inside a specific folder
 
@@ -445,7 +445,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getContentInFolderUsingGET(networkId, folderId, callback);
+apiInstance.getContentInFolder(networkId, folderId, callback);
 ```
 
 ### Parameters
@@ -468,9 +468,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getContentInFolderUsingGET1"></a>
-# **getContentInFolderUsingGET1**
-> ResultListDataRepresentation getContentInFolderUsingGET1(repositoryId, folderId)
+<a name="getContentInFolder"></a>
+# **getContentInFolder**
+> ResultListDataRepresentation getContentInFolder(repositoryId, folderId)
 
 List file &amp; folders inside a specific folder
 
@@ -492,7 +492,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getContentInFolderUsingGET1(repositoryId, folderId, callback);
+apiInstance.getContentInFolder(repositoryId, folderId, callback);
 ```
 
 ### Parameters
@@ -515,9 +515,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getContentInSiteUsingGET"></a>
-# **getContentInSiteUsingGET**
-> ResultListDataRepresentation getContentInSiteUsingGET(networkId, siteId)
+<a name="getContentInSite"></a>
+# **getContentInSite**
+> ResultListDataRepresentation getContentInSite(networkId, siteId)
 
 List file &amp; folders inside a specific site
 
@@ -539,7 +539,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getContentInSiteUsingGET(networkId, siteId, callback);
+apiInstance.getContentInSite(networkId, siteId, callback);
 ```
 
 ### Parameters
@@ -562,9 +562,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getContentInSiteUsingGET1"></a>
-# **getContentInSiteUsingGET1**
-> ResultListDataRepresentation getContentInSiteUsingGET1(repositoryId, siteId)
+<a name="getContentInSite"></a>
+# **getContentInSite**
+> ResultListDataRepresentation getContentInSite(repositoryId, siteId)
 
 List file &amp; folders inside a specific site
 
@@ -586,7 +586,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getContentInSiteUsingGET1(repositoryId, siteId, callback);
+apiInstance.getContentInSite(repositoryId, siteId, callback);
 ```
 
 ### Parameters
@@ -609,9 +609,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getFilesUsingGET"></a>
-# **getFilesUsingGET**
-> ResultListDataRepresentation getFilesUsingGET(opts)
+<a name="getFiles"></a>
+# **getFiles**
+> ResultListDataRepresentation getFiles(opts)
 
 List file &amp; folders
 
@@ -633,7 +633,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getFilesUsingGET(opts, callback);
+apiInstance.getFiles(opts, callback);
 ```
 
 ### Parameters
@@ -656,9 +656,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getFilesUsingGET1"></a>
-# **getFilesUsingGET1**
-> ResultListDataRepresentation getFilesUsingGET1(opts)
+<a name="getFiles"></a>
+# **getFiles**
+> ResultListDataRepresentation getFiles(opts)
 
 List file &amp; folders
 
@@ -681,7 +681,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getFilesUsingGET1(opts, callback);
+apiInstance.getFiles(opts, callback);
 ```
 
 ### Parameters
@@ -705,9 +705,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getRepositoriesUsingGET"></a>
-# **getRepositoriesUsingGET**
-> ResultListDataRepresentation getRepositoriesUsingGET(opts)
+<a name="getRepositories"></a>
+# **getRepositories**
+> ResultListDataRepresentation getRepositories(opts)
 
 List Alfresco repositories
 
@@ -731,7 +731,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getRepositoriesUsingGET(opts, callback);
+apiInstance.getRepositories(opts, callback);
 ```
 
 ### Parameters
@@ -754,9 +754,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getRepositoryAccountUsingGET"></a>
-# **getRepositoryAccountUsingGET**
-> BoxUserAccountCredentialsRepresentation getRepositoryAccountUsingGET(userId)
+<a name="getRepositoryAccount"></a>
+# **getRepositoryAccount**
+> BoxUserAccountCredentialsRepresentation getRepositoryAccount(userId)
 
 List Box Account
 
@@ -776,7 +776,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getRepositoryAccountUsingGET(userId, callback);
+apiInstance.getRepositoryAccount(userId, callback);
 ```
 
 ### Parameters
@@ -798,9 +798,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="updateRepositoryAccountUsingPUT"></a>
-# **updateRepositoryAccountUsingPUT**
-> updateRepositoryAccountUsingPUT(userId, credentials)
+<a name="updateRepositoryAccount"></a>
+# **updateRepositoryAccount**
+> updateRepositoryAccount(userId, credentials)
 
 Update Box account
 
@@ -822,7 +822,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.updateRepositoryAccountUsingPUT(userId, credentials, callback);
+apiInstance.updateRepositoryAccount(userId, credentials, callback);
 ```
 
 ### Parameters

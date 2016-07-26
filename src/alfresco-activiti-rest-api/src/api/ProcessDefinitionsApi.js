@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new ProcessDefinitionsApi. 
+   * Constructs a new ProcessDefinitionsApi.
    * @alias module:api/ProcessDefinitionsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the getProcessDefinitionsUsingGET operation.
-     * @callback module:api/ProcessDefinitionsApi~getProcessDefinitionsUsingGETCallback
+     * Callback function to receive the result of the getProcessDefinitions operation.
+     * @callback module:api/ProcessDefinitionsApi~getProcessDefinitionsCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46,10 +46,10 @@
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.latest latest
      * @param {Integer} opts.appDefinitionId appDefinitionId
-     * @param {module:api/ProcessDefinitionsApi~getProcessDefinitionsUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessDefinitionsApi~getProcessDefinitionsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getProcessDefinitionsUsingGET = function(opts, callback) {
+    this.getProcessDefinitions = function(opts, callback) {
       opts = opts || {};
       var postBody = null;
 

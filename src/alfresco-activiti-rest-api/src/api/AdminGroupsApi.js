@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new AdminGroupsApi. 
+   * Constructs a new AdminGroupsApi.
    * @alias module:api/AdminGroupsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the activateUsingPOST1 operation.
-     * @callback module:api/AdminGroupsApi~activateUsingPOST1Callback
+     * Callback function to receive the result of the activate operation.
+     * @callback module:api/AdminGroupsApi~activateCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -43,14 +43,14 @@
     /**
      * activate
      * @param {Integer} groupId groupId
-     * @param {module:api/AdminGroupsApi~activateUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~activateCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.activateUsingPOST1 = function(groupId, callback) {
+    this.activate = function(groupId, callback) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling activateUsingPOST1";
+        throw "Missing the required parameter 'groupId' when calling activate";
       }
 
 
@@ -77,8 +77,8 @@
     }
 
     /**
-     * Callback function to receive the result of the addAllUsersToGroupUsingPOST1 operation.
-     * @callback module:api/AdminGroupsApi~addAllUsersToGroupUsingPOST1Callback
+     * Callback function to receive the result of the addAllUsersToGroup operation.
+     * @callback module:api/AdminGroupsApi~addAllUsersToGroupCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -87,14 +87,14 @@
     /**
      * addAllUsersToGroup
      * @param {Integer} groupId groupId
-     * @param {module:api/AdminGroupsApi~addAllUsersToGroupUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~addAllUsersToGroupCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.addAllUsersToGroupUsingPOST1 = function(groupId, callback) {
+    this.addAllUsersToGroup = function(groupId, callback) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling addAllUsersToGroupUsingPOST1";
+        throw "Missing the required parameter 'groupId' when calling addAllUsersToGroup";
       }
 
 
@@ -121,8 +121,8 @@
     }
 
     /**
-     * Callback function to receive the result of the addGroupCapabilitiesUsingPOST1 operation.
-     * @callback module:api/AdminGroupsApi~addGroupCapabilitiesUsingPOST1Callback
+     * Callback function to receive the result of the addGroupCapabilities operation.
+     * @callback module:api/AdminGroupsApi~addGroupCapabilitiesCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -132,19 +132,19 @@
      * addGroupCapabilities
      * @param {Integer} groupId groupId
      * @param {module:model/AddGroupCapabilitiesRepresentation} addGroupCapabilitiesRepresentation addGroupCapabilitiesRepresentation
-     * @param {module:api/AdminGroupsApi~addGroupCapabilitiesUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~addGroupCapabilitiesCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.addGroupCapabilitiesUsingPOST1 = function(groupId, addGroupCapabilitiesRepresentation, callback) {
+    this.addGroupCapabilities = function(groupId, addGroupCapabilitiesRepresentation, callback) {
       var postBody = addGroupCapabilitiesRepresentation;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling addGroupCapabilitiesUsingPOST1";
+        throw "Missing the required parameter 'groupId' when calling addGroupCapabilities";
       }
 
       // verify the required parameter 'addGroupCapabilitiesRepresentation' is set
       if (addGroupCapabilitiesRepresentation == undefined || addGroupCapabilitiesRepresentation == null) {
-        throw "Missing the required parameter 'addGroupCapabilitiesRepresentation' when calling addGroupCapabilitiesUsingPOST1";
+        throw "Missing the required parameter 'addGroupCapabilitiesRepresentation' when calling addGroupCapabilities";
       }
 
 
@@ -171,8 +171,8 @@
     }
 
     /**
-     * Callback function to receive the result of the addGroupMemberUsingPOST1 operation.
-     * @callback module:api/AdminGroupsApi~addGroupMemberUsingPOST1Callback
+     * Callback function to receive the result of the addGroupMember operation.
+     * @callback module:api/AdminGroupsApi~addGroupMemberCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -182,19 +182,19 @@
      * addGroupMember
      * @param {Integer} groupId groupId
      * @param {Integer} userId userId
-     * @param {module:api/AdminGroupsApi~addGroupMemberUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~addGroupMemberCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.addGroupMemberUsingPOST1 = function(groupId, userId, callback) {
+    this.addGroupMember = function(groupId, userId, callback) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling addGroupMemberUsingPOST1";
+        throw "Missing the required parameter 'groupId' when calling addGroupMember";
       }
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling addGroupMemberUsingPOST1";
+        throw "Missing the required parameter 'userId' when calling addGroupMember";
       }
 
 
@@ -222,8 +222,8 @@
     }
 
     /**
-     * Callback function to receive the result of the addRelatedGroupUsingPOST1 operation.
-     * @callback module:api/AdminGroupsApi~addRelatedGroupUsingPOST1Callback
+     * Callback function to receive the result of the addRelatedGroup operation.
+     * @callback module:api/AdminGroupsApi~addRelatedGroupCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -234,24 +234,24 @@
      * @param {Integer} groupId groupId
      * @param {Integer} relatedGroupId relatedGroupId
      * @param {String} type type
-     * @param {module:api/AdminGroupsApi~addRelatedGroupUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~addRelatedGroupCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.addRelatedGroupUsingPOST1 = function(groupId, relatedGroupId, type, callback) {
+    this.addRelatedGroup = function(groupId, relatedGroupId, type, callback) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling addRelatedGroupUsingPOST1";
+        throw "Missing the required parameter 'groupId' when calling addRelatedGroup";
       }
 
       // verify the required parameter 'relatedGroupId' is set
       if (relatedGroupId == undefined || relatedGroupId == null) {
-        throw "Missing the required parameter 'relatedGroupId' when calling addRelatedGroupUsingPOST1";
+        throw "Missing the required parameter 'relatedGroupId' when calling addRelatedGroup";
       }
 
       // verify the required parameter 'type' is set
       if (type == undefined || type == null) {
-        throw "Missing the required parameter 'type' when calling addRelatedGroupUsingPOST1";
+        throw "Missing the required parameter 'type' when calling addRelatedGroup";
       }
 
 
@@ -280,8 +280,8 @@
     }
 
     /**
-     * Callback function to receive the result of the createNewGroupUsingPOST1 operation.
-     * @callback module:api/AdminGroupsApi~createNewGroupUsingPOST1Callback
+     * Callback function to receive the result of the createNewGroup operation.
+     * @callback module:api/AdminGroupsApi~createNewGroupCallback
      * @param {String} error Error message, if any.
      * @param {module:model/GroupRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -290,15 +290,15 @@
     /**
      * createNewGroup
      * @param {module:model/GroupRepresentation} groupRepresentation groupRepresentation
-     * @param {module:api/AdminGroupsApi~createNewGroupUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~createNewGroupCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/GroupRepresentation}
      */
-    this.createNewGroupUsingPOST1 = function(groupRepresentation, callback) {
+    this.createNewGroup = function(groupRepresentation, callback) {
       var postBody = groupRepresentation;
 
       // verify the required parameter 'groupRepresentation' is set
       if (groupRepresentation == undefined || groupRepresentation == null) {
-        throw "Missing the required parameter 'groupRepresentation' when calling createNewGroupUsingPOST1";
+        throw "Missing the required parameter 'groupRepresentation' when calling createNewGroup";
       }
 
 
@@ -324,8 +324,8 @@
     }
 
     /**
-     * Callback function to receive the result of the deleteGroupCapabilityUsingDELETE1 operation.
-     * @callback module:api/AdminGroupsApi~deleteGroupCapabilityUsingDELETE1Callback
+     * Callback function to receive the result of the deleteGroupCapability operation.
+     * @callback module:api/AdminGroupsApi~deleteGroupCapabilityCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -335,19 +335,19 @@
      * deleteGroupCapability
      * @param {Integer} groupId groupId
      * @param {Integer} groupCapabilityId groupCapabilityId
-     * @param {module:api/AdminGroupsApi~deleteGroupCapabilityUsingDELETE1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~deleteGroupCapabilityCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteGroupCapabilityUsingDELETE1 = function(groupId, groupCapabilityId, callback) {
+    this.deleteGroupCapability = function(groupId, groupCapabilityId, callback) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling deleteGroupCapabilityUsingDELETE1";
+        throw "Missing the required parameter 'groupId' when calling deleteGroupCapability";
       }
 
       // verify the required parameter 'groupCapabilityId' is set
       if (groupCapabilityId == undefined || groupCapabilityId == null) {
-        throw "Missing the required parameter 'groupCapabilityId' when calling deleteGroupCapabilityUsingDELETE1";
+        throw "Missing the required parameter 'groupCapabilityId' when calling deleteGroupCapability";
       }
 
 
@@ -375,8 +375,8 @@
     }
 
     /**
-     * Callback function to receive the result of the deleteGroupMemberUsingDELETE1 operation.
-     * @callback module:api/AdminGroupsApi~deleteGroupMemberUsingDELETE1Callback
+     * Callback function to receive the result of the deleteGroupMember operation.
+     * @callback module:api/AdminGroupsApi~deleteGroupMemberCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -386,19 +386,19 @@
      * deleteGroupMember
      * @param {Integer} groupId groupId
      * @param {Integer} userId userId
-     * @param {module:api/AdminGroupsApi~deleteGroupMemberUsingDELETE1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~deleteGroupMemberCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteGroupMemberUsingDELETE1 = function(groupId, userId, callback) {
+    this.deleteGroupMember = function(groupId, userId, callback) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling deleteGroupMemberUsingDELETE1";
+        throw "Missing the required parameter 'groupId' when calling deleteGroupMember";
       }
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling deleteGroupMemberUsingDELETE1";
+        throw "Missing the required parameter 'userId' when calling deleteGroupMember";
       }
 
 
@@ -426,8 +426,8 @@
     }
 
     /**
-     * Callback function to receive the result of the deleteGroupUsingDELETE1 operation.
-     * @callback module:api/AdminGroupsApi~deleteGroupUsingDELETE1Callback
+     * Callback function to receive the result of the deleteGroup operation.
+     * @callback module:api/AdminGroupsApi~deleteGroupCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -436,14 +436,14 @@
     /**
      * deleteGroup
      * @param {Integer} groupId groupId
-     * @param {module:api/AdminGroupsApi~deleteGroupUsingDELETE1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~deleteGroupCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteGroupUsingDELETE1 = function(groupId, callback) {
+    this.deleteGroup = function(groupId, callback) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling deleteGroupUsingDELETE1";
+        throw "Missing the required parameter 'groupId' when calling deleteGroup";
       }
 
 
@@ -470,8 +470,8 @@
     }
 
     /**
-     * Callback function to receive the result of the deleteRelatedGroupUsingDELETE1 operation.
-     * @callback module:api/AdminGroupsApi~deleteRelatedGroupUsingDELETE1Callback
+     * Callback function to receive the result of the deleteRelatedGroup operation.
+     * @callback module:api/AdminGroupsApi~deleteRelatedGroupCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -481,19 +481,19 @@
      * deleteRelatedGroup
      * @param {Integer} groupId groupId
      * @param {Integer} relatedGroupId relatedGroupId
-     * @param {module:api/AdminGroupsApi~deleteRelatedGroupUsingDELETE1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~deleteRelatedGroupCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteRelatedGroupUsingDELETE1 = function(groupId, relatedGroupId, callback) {
+    this.deleteRelatedGroup = function(groupId, relatedGroupId, callback) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling deleteRelatedGroupUsingDELETE1";
+        throw "Missing the required parameter 'groupId' when calling deleteRelatedGroup";
       }
 
       // verify the required parameter 'relatedGroupId' is set
       if (relatedGroupId == undefined || relatedGroupId == null) {
-        throw "Missing the required parameter 'relatedGroupId' when calling deleteRelatedGroupUsingDELETE1";
+        throw "Missing the required parameter 'relatedGroupId' when calling deleteRelatedGroup";
       }
 
 
@@ -521,8 +521,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getCapabilitiesUsingGET1 operation.
-     * @callback module:api/AdminGroupsApi~getCapabilitiesUsingGET1Callback
+     * Callback function to receive the result of the getCapabilities operation.
+     * @callback module:api/AdminGroupsApi~getCapabilitiesCallback
      * @param {String} error Error message, if any.
      * @param {Array.<'String'>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -531,15 +531,15 @@
     /**
      * getCapabilities
      * @param {Integer} groupId groupId
-     * @param {module:api/AdminGroupsApi~getCapabilitiesUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~getCapabilitiesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<'String'>}
      */
-    this.getCapabilitiesUsingGET1 = function(groupId, callback) {
+    this.getCapabilities = function(groupId, callback) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling getCapabilitiesUsingGET1";
+        throw "Missing the required parameter 'groupId' when calling getCapabilities";
       }
 
 
@@ -566,8 +566,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getGroupUsersUsingGET1 operation.
-     * @callback module:api/AdminGroupsApi~getGroupUsersUsingGET1Callback
+     * Callback function to receive the result of the getGroupUsers operation.
+     * @callback module:api/AdminGroupsApi~getGroupUsersCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -580,16 +580,16 @@
      * @param {String} opts.filter filter
      * @param {Integer} opts.page page
      * @param {Integer} opts.pageSize pageSize
-     * @param {module:api/AdminGroupsApi~getGroupUsersUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~getGroupUsersCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getGroupUsersUsingGET1 = function(groupId, opts, callback) {
+    this.getGroupUsers = function(groupId, opts, callback) {
       opts = opts || {};
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling getGroupUsersUsingGET1";
+        throw "Missing the required parameter 'groupId' when calling getGroupUsers";
       }
 
 
@@ -619,8 +619,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getGroupUsingGET1 operation.
-     * @callback module:api/AdminGroupsApi~getGroupUsingGET1Callback
+     * Callback function to receive the result of the getGroup operation.
+     * @callback module:api/AdminGroupsApi~getGroupCallback
      * @param {String} error Error message, if any.
      * @param {module:model/AbstractGroupRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -632,16 +632,16 @@
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.includeAllUsers includeAllUsers
      * @param {Boolean} opts.summary summary
-     * @param {module:api/AdminGroupsApi~getGroupUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~getGroupCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/AbstractGroupRepresentation}
      */
-    this.getGroupUsingGET1 = function(groupId, opts, callback) {
+    this.getGroup = function(groupId, opts, callback) {
       opts = opts || {};
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling getGroupUsingGET1";
+        throw "Missing the required parameter 'groupId' when calling getGroup";
       }
 
 
@@ -670,8 +670,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getGroupsUsingGET2 operation.
-     * @callback module:api/AdminGroupsApi~getGroupsUsingGET2Callback
+     * Callback function to receive the result of the getGroups operation.
+     * @callback module:api/AdminGroupsApi~getGroupsCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/LightGroupRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -683,10 +683,10 @@
      * @param {Integer} opts.tenantId tenantId
      * @param {Boolean} opts.functional functional
      * @param {Boolean} opts.summary summary
-     * @param {module:api/AdminGroupsApi~getGroupsUsingGET2Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~getGroupsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/LightGroupRepresentation>}
      */
-    this.getGroupsUsingGET2 = function(opts, callback) {
+    this.getGroups = function(opts, callback) {
       opts = opts || {};
       var postBody = null;
 
@@ -716,8 +716,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getRelatedGroupsUsingGET1 operation.
-     * @callback module:api/AdminGroupsApi~getRelatedGroupsUsingGET1Callback
+     * Callback function to receive the result of the getRelatedGroups operation.
+     * @callback module:api/AdminGroupsApi~getRelatedGroupsCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/LightGroupRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -726,15 +726,15 @@
     /**
      * getRelatedGroups
      * @param {Integer} groupId groupId
-     * @param {module:api/AdminGroupsApi~getRelatedGroupsUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~getRelatedGroupsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/LightGroupRepresentation>}
      */
-    this.getRelatedGroupsUsingGET1 = function(groupId, callback) {
+    this.getRelatedGroups = function(groupId, callback) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling getRelatedGroupsUsingGET1";
+        throw "Missing the required parameter 'groupId' when calling getRelatedGroups";
       }
 
 
@@ -761,8 +761,8 @@
     }
 
     /**
-     * Callback function to receive the result of the updateGroupUsingPUT1 operation.
-     * @callback module:api/AdminGroupsApi~updateGroupUsingPUT1Callback
+     * Callback function to receive the result of the updateGroup operation.
+     * @callback module:api/AdminGroupsApi~updateGroupCallback
      * @param {String} error Error message, if any.
      * @param {module:model/GroupRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -772,20 +772,20 @@
      * updateGroup
      * @param {Integer} groupId groupId
      * @param {module:model/GroupRepresentation} groupRepresentation groupRepresentation
-     * @param {module:api/AdminGroupsApi~updateGroupUsingPUT1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~updateGroupCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/GroupRepresentation}
      */
-    this.updateGroupUsingPUT1 = function(groupId, groupRepresentation, callback) {
+    this.updateGroup = function(groupId, groupRepresentation, callback) {
       var postBody = groupRepresentation;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling updateGroupUsingPUT1";
+        throw "Missing the required parameter 'groupId' when calling updateGroup";
       }
 
       // verify the required parameter 'groupRepresentation' is set
       if (groupRepresentation == undefined || groupRepresentation == null) {
-        throw "Missing the required parameter 'groupRepresentation' when calling updateGroupUsingPUT1";
+        throw "Missing the required parameter 'groupRepresentation' when calling updateGroup";
       }
 
 

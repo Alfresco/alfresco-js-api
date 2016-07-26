@@ -4,13 +4,13 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getHistoricProcessModelBpmn20XmlUsingGET**](ModelBpmnApi.md#getHistoricProcessModelBpmn20XmlUsingGET) | **GET** /api/enterprise/models/{processModelId}/history/{processModelHistoryId}/bpmn20 | Export a previous process definition model to a BPMN 2.0 xml file
-[**getProcessModelBpmn20XmlUsingGET**](ModelBpmnApi.md#getProcessModelBpmn20XmlUsingGET) | **GET** /api/enterprise/models/{processModelId}/bpmn20 | Export a process definition model to a BPMN 2.0 xml file
+[**getHistoricProcessModelBpmn20Xml**](ModelBpmnApi.md#getHistoricProcessModelBpmn20Xml) | **GET** /api/enterprise/models/{processModelId}/history/{processModelHistoryId}/bpmn20 | Export a previous process definition model to a BPMN 2.0 xml file
+[**getProcessModelBpmn20Xml**](ModelBpmnApi.md#getProcessModelBpmn20Xml) | **GET** /api/enterprise/models/{processModelId}/bpmn20 | Export a process definition model to a BPMN 2.0 xml file
 
 
-<a name="getHistoricProcessModelBpmn20XmlUsingGET"></a>
-# **getHistoricProcessModelBpmn20XmlUsingGET**
-> getHistoricProcessModelBpmn20XmlUsingGET(processModelId, processModelHistoryId)
+<a name="getHistoricProcessModelBpmn20Xml"></a>
+# **getHistoricProcessModelBpmn20Xml**
+> getHistoricProcessModelBpmn20Xml(processModelId, processModelHistoryId)
 
 Export a previous process definition model to a BPMN 2.0 xml file
 
@@ -32,7 +32,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.getHistoricProcessModelBpmn20XmlUsingGET(processModelId, processModelHistoryId, callback);
+apiInstance.getHistoricProcessModelBpmn20Xml(processModelId, processModelHistoryId, callback);
 ```
 
 ### Parameters
@@ -55,9 +55,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getProcessModelBpmn20XmlUsingGET"></a>
-# **getProcessModelBpmn20XmlUsingGET**
-> getProcessModelBpmn20XmlUsingGET(processModelId)
+<a name="getProcessModelBpmn20Xml"></a>
+# **getProcessModelBpmn20Xml**
+> getProcessModelBpmn20Xml(processModelId)
 
 Export a process definition model to a BPMN 2.0 xml file
 
@@ -77,7 +77,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.getProcessModelBpmn20XmlUsingGET(processModelId, callback);
+apiInstance.getProcessModelBpmn20Xml(processModelId, callback);
 ```
 
 ### Parameters

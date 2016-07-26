@@ -4,13 +4,13 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getModelHistoryCollectionUsingGET**](ModelsHistoryApi.md#getModelHistoryCollectionUsingGET) | **GET** /api/enterprise/models/{modelId}/history | To get the version information for a model
-[**getProcessModelHistoryUsingGET**](ModelsHistoryApi.md#getProcessModelHistoryUsingGET) | **GET** /api/enterprise/models/{modelId}/history/{modelHistoryId} | To get a particular older version of a model
+[**getModelHistoryCollection**](ModelsHistoryApi.md#getModelHistoryCollection) | **GET** /api/enterprise/models/{modelId}/history | To get the version information for a model
+[**getProcessModelHistory**](ModelsHistoryApi.md#getProcessModelHistory) | **GET** /api/enterprise/models/{modelId}/history/{modelHistoryId} | To get a particular older version of a model
 
 
-<a name="getModelHistoryCollectionUsingGET"></a>
-# **getModelHistoryCollectionUsingGET**
-> ResultListDataRepresentation getModelHistoryCollectionUsingGET(modelId, opts)
+<a name="getModelHistoryCollection"></a>
+# **getModelHistoryCollection**
+> ResultListDataRepresentation getModelHistoryCollection(modelId, opts)
 
 To get the version information for a model
 
@@ -33,7 +33,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getModelHistoryCollectionUsingGET(modelId, opts, callback);
+apiInstance.getModelHistoryCollection(modelId, opts, callback);
 ```
 
 ### Parameters
@@ -56,9 +56,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getProcessModelHistoryUsingGET"></a>
-# **getProcessModelHistoryUsingGET**
-> ModelRepresentation getProcessModelHistoryUsingGET(modelId, modelHistoryId)
+<a name="getProcessModelHistory"></a>
+# **getProcessModelHistory**
+> ModelRepresentation getProcessModelHistory(modelId, modelHistoryId)
 
 To get a particular older version of a model
 
@@ -80,7 +80,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getProcessModelHistoryUsingGET(modelId, modelHistoryId, callback);
+apiInstance.getProcessModelHistory(modelId, modelHistoryId, callback);
 ```
 
 ### Parameters

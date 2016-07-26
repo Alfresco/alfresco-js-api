@@ -4,19 +4,19 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**assignTaskUsingPUT**](TaskActionsApi.md#assignTaskUsingPUT) | **PUT** /api/enterprise/tasks/{taskId}/action/assign | Assign a task to a user
-[**attachFormUsingPUT**](TaskActionsApi.md#attachFormUsingPUT) | **PUT** /api/enterprise/tasks/{taskId}/action/attach-form | Attach a form to a task
-[**claimTaskUsingPUT**](TaskActionsApi.md#claimTaskUsingPUT) | **PUT** /api/enterprise/tasks/{taskId}/action/claim | Claim a task
-[**completeTaskUsingPUT**](TaskActionsApi.md#completeTaskUsingPUT) | **PUT** /api/enterprise/tasks/{taskId}/action/complete | Complete Task
-[**involveUserUsingPUT**](TaskActionsApi.md#involveUserUsingPUT) | **PUT** /api/enterprise/tasks/{taskId}/action/involve | To involve a user with a task
-[**removeFormUsingDELETE**](TaskActionsApi.md#removeFormUsingDELETE) | **DELETE** /api/enterprise/tasks/{taskId}/action/remove-form | Remove a form to a task
-[**removeInvolvedUserUsingPUT**](TaskActionsApi.md#removeInvolvedUserUsingPUT) | **PUT** /api/enterprise/tasks/{taskId}/action/remove-involved | Remove an involved user from a task
-[**unclaimTaskUsingPUT**](TaskActionsApi.md#unclaimTaskUsingPUT) | **PUT** /api/enterprise/tasks/{taskId}/action/unclaim | Unclaim a task
+[**assignTask**](TaskActionsApi.md#assignTask) | **PUT** /api/enterprise/tasks/{taskId}/action/assign | Assign a task to a user
+[**attachForm**](TaskActionsApi.md#attachForm) | **PUT** /api/enterprise/tasks/{taskId}/action/attach-form | Attach a form to a task
+[**claimTask**](TaskActionsApi.md#claimTask) | **PUT** /api/enterprise/tasks/{taskId}/action/claim | Claim a task
+[**completeTask**](TaskActionsApi.md#completeTask) | **PUT** /api/enterprise/tasks/{taskId}/action/complete | Complete Task
+[**involveUser**](TaskActionsApi.md#involveUser) | **PUT** /api/enterprise/tasks/{taskId}/action/involve | To involve a user with a task
+[**removeForm**](TaskActionsApi.md#removeForm) | **DELETE** /api/enterprise/tasks/{taskId}/action/remove-form | Remove a form to a task
+[**removeInvolvedUser**](TaskActionsApi.md#removeInvolvedUser) | **PUT** /api/enterprise/tasks/{taskId}/action/remove-involved | Remove an involved user from a task
+[**unclaimTask**](TaskActionsApi.md#unclaimTask) | **PUT** /api/enterprise/tasks/{taskId}/action/unclaim | Unclaim a task
 
 
-<a name="assignTaskUsingPUT"></a>
-# **assignTaskUsingPUT**
-> TaskRepresentation assignTaskUsingPUT(taskId, requestNode)
+<a name="assignTask"></a>
+# **assignTask**
+> TaskRepresentation assignTask(taskId, requestNode)
 
 Assign a task to a user
 
@@ -38,7 +38,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.assignTaskUsingPUT(taskId, requestNode, callback);
+apiInstance.assignTask(taskId, requestNode, callback);
 ```
 
 ### Parameters
@@ -61,9 +61,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="attachFormUsingPUT"></a>
-# **attachFormUsingPUT**
-> attachFormUsingPUT(taskId, requestNode)
+<a name="attachForm"></a>
+# **attachForm**
+> attachForm(taskId, requestNode)
 
 Attach a form to a task
 
@@ -85,7 +85,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.attachFormUsingPUT(taskId, requestNode, callback);
+apiInstance.attachForm(taskId, requestNode, callback);
 ```
 
 ### Parameters
@@ -108,9 +108,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="claimTaskUsingPUT"></a>
-# **claimTaskUsingPUT**
-> claimTaskUsingPUT(taskId)
+<a name="claimTask"></a>
+# **claimTask**
+> claimTask(taskId)
 
 Claim a task
 
@@ -132,7 +132,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.claimTaskUsingPUT(taskId, callback);
+apiInstance.claimTask(taskId, callback);
 ```
 
 ### Parameters
@@ -154,9 +154,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="completeTaskUsingPUT"></a>
-# **completeTaskUsingPUT**
-> completeTaskUsingPUT(taskId)
+<a name="completeTask"></a>
+# **completeTask**
+> completeTask(taskId)
 
 Complete Task
 
@@ -178,7 +178,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.completeTaskUsingPUT(taskId, callback);
+apiInstance.completeTask(taskId, callback);
 ```
 
 ### Parameters
@@ -200,9 +200,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="involveUserUsingPUT"></a>
-# **involveUserUsingPUT**
-> involveUserUsingPUT(taskId, requestNode)
+<a name="involveUser"></a>
+# **involveUser**
+> involveUser(taskId, requestNode)
 
 To involve a user with a task
 
@@ -224,7 +224,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.involveUserUsingPUT(taskId, requestNode, callback);
+apiInstance.involveUser(taskId, requestNode, callback);
 ```
 
 ### Parameters
@@ -247,9 +247,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="removeFormUsingDELETE"></a>
-# **removeFormUsingDELETE**
-> removeFormUsingDELETE(taskId)
+<a name="removeForm"></a>
+# **removeForm**
+> removeForm(taskId)
 
 Remove a form to a task
 
@@ -269,7 +269,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.removeFormUsingDELETE(taskId, callback);
+apiInstance.removeForm(taskId, callback);
 ```
 
 ### Parameters
@@ -291,9 +291,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="removeInvolvedUserUsingPUT"></a>
-# **removeInvolvedUserUsingPUT**
-> removeInvolvedUserUsingPUT(taskId, requestNode)
+<a name="removeInvolvedUser"></a>
+# **removeInvolvedUser**
+> removeInvolvedUser(taskId, requestNode)
 
 Remove an involved user from a task
 
@@ -315,7 +315,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.removeInvolvedUserUsingPUT(taskId, requestNode, callback);
+apiInstance.removeInvolvedUser(taskId, requestNode, callback);
 ```
 
 ### Parameters
@@ -338,9 +338,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="unclaimTaskUsingPUT"></a>
-# **unclaimTaskUsingPUT**
-> unclaimTaskUsingPUT(taskId)
+<a name="unclaimTask"></a>
+# **unclaimTask**
+> unclaimTask(taskId)
 
 Unclaim a task
 
@@ -362,7 +362,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.unclaimTaskUsingPUT(taskId, callback);
+apiInstance.unclaimTask(taskId, callback);
 ```
 
 ### Parameters

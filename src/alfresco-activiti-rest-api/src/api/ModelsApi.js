@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new ModelsApi. 
+   * Constructs a new ModelsApi.
    * @alias module:api/ModelsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the createModelUsingPOST operation.
-     * @callback module:api/ModelsApi~createModelUsingPOSTCallback
+     * Callback function to receive the result of the createModel operation.
+     * @callback module:api/ModelsApi~createModelCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43,15 +43,15 @@
     /**
      * To create a new model
      * @param {module:model/ModelRepresentation} modelRepresentation modelRepresentation
-     * @param {module:api/ModelsApi~createModelUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsApi~createModelCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ModelRepresentation}
      */
-    this.createModelUsingPOST = function(modelRepresentation, callback) {
+    this.createModel = function(modelRepresentation, callback) {
       var postBody = modelRepresentation;
 
       // verify the required parameter 'modelRepresentation' is set
       if (modelRepresentation == undefined || modelRepresentation == null) {
-        throw "Missing the required parameter 'modelRepresentation' when calling createModelUsingPOST";
+        throw "Missing the required parameter 'modelRepresentation' when calling createModel";
       }
 
 
@@ -77,8 +77,8 @@
     }
 
     /**
-     * Callback function to receive the result of the deleteModelUsingDELETE operation.
-     * @callback module:api/ModelsApi~deleteModelUsingDELETECallback
+     * Callback function to receive the result of the deleteModel operation.
+     * @callback module:api/ModelsApi~deleteModelCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -90,15 +90,15 @@
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.cascade cascade
      * @param {Boolean} opts.deleteRuntimeApp deleteRuntimeApp
-     * @param {module:api/ModelsApi~deleteModelUsingDELETECallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsApi~deleteModelCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteModelUsingDELETE = function(modelId, opts, callback) {
+    this.deleteModel = function(modelId, opts, callback) {
       opts = opts || {};
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling deleteModelUsingDELETE";
+        throw "Missing the required parameter 'modelId' when calling deleteModel";
       }
 
 
@@ -127,8 +127,8 @@
     }
 
     /**
-     * Callback function to receive the result of the duplicateModelUsingPOST operation.
-     * @callback module:api/ModelsApi~duplicateModelUsingPOSTCallback
+     * Callback function to receive the result of the duplicateModel operation.
+     * @callback module:api/ModelsApi~duplicateModelCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -138,20 +138,20 @@
      * To duplicate an existing model
      * @param {Integer} modelId modelId
      * @param {module:model/ModelRepresentation} modelRepresentation modelRepresentation
-     * @param {module:api/ModelsApi~duplicateModelUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsApi~duplicateModelCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ModelRepresentation}
      */
-    this.duplicateModelUsingPOST = function(modelId, modelRepresentation, callback) {
+    this.duplicateModel = function(modelId, modelRepresentation, callback) {
       var postBody = modelRepresentation;
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling duplicateModelUsingPOST";
+        throw "Missing the required parameter 'modelId' when calling duplicateModel";
       }
 
       // verify the required parameter 'modelRepresentation' is set
       if (modelRepresentation == undefined || modelRepresentation == null) {
-        throw "Missing the required parameter 'modelRepresentation' when calling duplicateModelUsingPOST";
+        throw "Missing the required parameter 'modelRepresentation' when calling duplicateModel";
       }
 
 
@@ -178,8 +178,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getModelJSONUsingGET operation.
-     * @callback module:api/ModelsApi~getModelJSONUsingGETCallback
+     * Callback function to receive the result of the getModelJSON operation.
+     * @callback module:api/ModelsApi~getModelJSONCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ObjectNode} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -188,15 +188,15 @@
     /**
      * Get the JSON model
      * @param {Integer} modelId modelId
-     * @param {module:api/ModelsApi~getModelJSONUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsApi~getModelJSONCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ObjectNode}
      */
-    this.getModelJSONUsingGET = function(modelId, callback) {
+    this.getModelJSON = function(modelId, callback) {
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling getModelJSONUsingGET";
+        throw "Missing the required parameter 'modelId' when calling getModelJSON";
       }
 
 
@@ -223,8 +223,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getModelThumbnailUsingGET operation.
-     * @callback module:api/ModelsApi~getModelThumbnailUsingGETCallback
+     * Callback function to receive the result of the getModelThumbnail operation.
+     * @callback module:api/ModelsApi~getModelThumbnailCallback
      * @param {String} error Error message, if any.
      * @param {Array.<'String'>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -233,15 +233,15 @@
     /**
      * Get Model thumbnail
      * @param {Integer} modelId modelId
-     * @param {module:api/ModelsApi~getModelThumbnailUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsApi~getModelThumbnailCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<'String'>}
      */
-    this.getModelThumbnailUsingGET = function(modelId, callback) {
+    this.getModelThumbnail = function(modelId, callback) {
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling getModelThumbnailUsingGET";
+        throw "Missing the required parameter 'modelId' when calling getModelThumbnail";
       }
 
 
@@ -268,8 +268,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getModelUsingGET operation.
-     * @callback module:api/ModelsApi~getModelUsingGETCallback
+     * Callback function to receive the result of the getModel operation.
+     * @callback module:api/ModelsApi~getModelCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -280,16 +280,16 @@
      * @param {Integer} modelId modelId
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.includePermissions includePermissions
-     * @param {module:api/ModelsApi~getModelUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsApi~getModelCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ModelRepresentation}
      */
-    this.getModelUsingGET = function(modelId, opts, callback) {
+    this.getModel = function(modelId, opts, callback) {
       opts = opts || {};
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling getModelUsingGET";
+        throw "Missing the required parameter 'modelId' when calling getModel";
       }
 
 
@@ -317,8 +317,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getModelsToIncludeInAppDefinitionUsingGET operation.
-     * @callback module:api/ModelsApi~getModelsToIncludeInAppDefinitionUsingGETCallback
+     * Callback function to receive the result of the getModelsToIncludeInAppDefinition operation.
+     * @callback module:api/ModelsApi~getModelsToIncludeInAppDefinitionCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -326,10 +326,10 @@
 
     /**
      * TODO
-     * @param {module:api/ModelsApi~getModelsToIncludeInAppDefinitionUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsApi~getModelsToIncludeInAppDefinitionCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getModelsToIncludeInAppDefinitionUsingGET = function(callback) {
+    this.getModelsToIncludeInAppDefinition = function(callback) {
       var postBody = null;
 
 
@@ -355,8 +355,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getModelsUsingGET operation.
-     * @callback module:api/ModelsApi~getModelsUsingGETCallback
+     * Callback function to receive the result of the getModels operation.
+     * @callback module:api/ModelsApi~getModelsCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -369,10 +369,10 @@
      * @param {String} opts.sort sort
      * @param {Integer} opts.modelType modelType
      * @param {Integer} opts.referenceId referenceId
-     * @param {module:api/ModelsApi~getModelsUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsApi~getModelsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getModelsUsingGET = function(opts, callback) {
+    this.getModels = function(opts, callback) {
       opts = opts || {};
       var postBody = null;
 
@@ -403,8 +403,8 @@
     }
 
     /**
-     * Callback function to receive the result of the importNewVersionUsingPOST operation.
-     * @callback module:api/ModelsApi~importNewVersionUsingPOSTCallback
+     * Callback function to receive the result of the importNewVersion operation.
+     * @callback module:api/ModelsApi~importNewVersionCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -414,20 +414,20 @@
      * Create a new model version
      * @param {Integer} modelId modelId
      * @param {File} file file
-     * @param {module:api/ModelsApi~importNewVersionUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsApi~importNewVersionCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ModelRepresentation}
      */
-    this.importNewVersionUsingPOST = function(modelId, file, callback) {
+    this.importNewVersion = function(modelId, file, callback) {
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling importNewVersionUsingPOST";
+        throw "Missing the required parameter 'modelId' when calling importNewVersion";
       }
 
       // verify the required parameter 'file' is set
       if (file == undefined || file == null) {
-        throw "Missing the required parameter 'file' when calling importNewVersionUsingPOST";
+        throw "Missing the required parameter 'file' when calling importNewVersion";
       }
 
 
@@ -455,8 +455,8 @@
     }
 
     /**
-     * Callback function to receive the result of the importProcessModelUsingPOST operation.
-     * @callback module:api/ModelsApi~importProcessModelUsingPOSTCallback
+     * Callback function to receive the result of the importProcessModel operation.
+     * @callback module:api/ModelsApi~importProcessModelCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -465,15 +465,15 @@
     /**
      * To import a BPMN 2.0 xml file
      * @param {File} file file
-     * @param {module:api/ModelsApi~importProcessModelUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsApi~importProcessModelCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ModelRepresentation}
      */
-    this.importProcessModelUsingPOST = function(file, callback) {
+    this.importProcessModel = function(file, callback) {
       var postBody = null;
 
       // verify the required parameter 'file' is set
       if (file == undefined || file == null) {
-        throw "Missing the required parameter 'file' when calling importProcessModelUsingPOST";
+        throw "Missing the required parameter 'file' when calling importProcessModel";
       }
 
 
@@ -500,8 +500,8 @@
     }
 
     /**
-     * Callback function to receive the result of the saveModelUsingPOST operation.
-     * @callback module:api/ModelsApi~saveModelUsingPOSTCallback
+     * Callback function to receive the result of the saveModel operation.
+     * @callback module:api/ModelsApi~saveModelCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -511,20 +511,20 @@
      * Save the JSON model
      * @param {Integer} modelId modelId
      * @param {Object} values values
-     * @param {module:api/ModelsApi~saveModelUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsApi~saveModelCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ModelRepresentation}
      */
-    this.saveModelUsingPOST = function(modelId, values, callback) {
+    this.saveModel = function(modelId, values, callback) {
       var postBody = values;
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling saveModelUsingPOST";
+        throw "Missing the required parameter 'modelId' when calling saveModel";
       }
 
       // verify the required parameter 'values' is set
       if (values == undefined || values == null) {
-        throw "Missing the required parameter 'values' when calling saveModelUsingPOST";
+        throw "Missing the required parameter 'values' when calling saveModel";
       }
 
 
@@ -551,8 +551,8 @@
     }
 
     /**
-     * Callback function to receive the result of the updateModelUsingPUT operation.
-     * @callback module:api/ModelsApi~updateModelUsingPUTCallback
+     * Callback function to receive the result of the updateModel operation.
+     * @callback module:api/ModelsApi~updateModelCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -562,20 +562,20 @@
      * Edit a specific model
      * @param {Integer} modelId modelId
      * @param {module:model/ModelRepresentation} updatedModel updatedModel
-     * @param {module:api/ModelsApi~updateModelUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsApi~updateModelCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ModelRepresentation}
      */
-    this.updateModelUsingPUT = function(modelId, updatedModel, callback) {
+    this.updateModel = function(modelId, updatedModel, callback) {
       var postBody = updatedModel;
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling updateModelUsingPUT";
+        throw "Missing the required parameter 'modelId' when calling updateModel";
       }
 
       // verify the required parameter 'updatedModel' is set
       if (updatedModel == undefined || updatedModel == null) {
-        throw "Missing the required parameter 'updatedModel' when calling updateModelUsingPUT";
+        throw "Missing the required parameter 'updatedModel' when calling updateModel";
       }
 
 
@@ -602,8 +602,8 @@
     }
 
     /**
-     * Callback function to receive the result of the validateModelUsingPOST operation.
-     * @callback module:api/ModelsApi~validateModelUsingPOSTCallback
+     * Callback function to receive the result of the validateModel operation.
+     * @callback module:api/ModelsApi~validateModelCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/ValidationErrorRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -614,16 +614,16 @@
      * @param {Integer} modelId modelId
      * @param {Object} opts Optional parameters
      * @param {Object} opts.values values
-     * @param {module:api/ModelsApi~validateModelUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsApi~validateModelCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/ValidationErrorRepresentation>}
      */
-    this.validateModelUsingPOST = function(modelId, opts, callback) {
+    this.validateModel = function(modelId, opts, callback) {
       opts = opts || {};
       var postBody = opts['values'];
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling validateModelUsingPOST";
+        throw "Missing the required parameter 'modelId' when calling validateModel";
       }
 
 

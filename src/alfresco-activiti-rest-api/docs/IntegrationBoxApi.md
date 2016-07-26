@@ -4,18 +4,18 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**confirmAuthorisationUsingGET1**](IntegrationBoxApi.md#confirmAuthorisationUsingGET1) | **GET** /api/enterprise/integration/box/confirm-auth-request | Box Authorization
-[**createRepositoryAccountUsingPOST**](IntegrationBoxApi.md#createRepositoryAccountUsingPOST) | **POST** /api/enterprise/integration/box/{userId}/account | Create Box account
-[**deleteRepositoryAccountUsingDELETE**](IntegrationBoxApi.md#deleteRepositoryAccountUsingDELETE) | **DELETE** /api/enterprise/integration/box/{userId}/account | Delete Box account
-[**getBoxPluginStatusUsingGET**](IntegrationBoxApi.md#getBoxPluginStatusUsingGET) | **GET** /api/enterprise/integration/box/status | Retrieve if Box Integration is enabled
-[**getFilesUsingGET**](IntegrationBoxApi.md#getFilesUsingGET) | **GET** /api/enterprise/integration/box/files | List file &amp; folders
-[**getRepositoryAccountUsingGET**](IntegrationBoxApi.md#getRepositoryAccountUsingGET) | **GET** /api/enterprise/integration/box/{userId}/account | List Box Account
-[**updateRepositoryAccountUsingPUT**](IntegrationBoxApi.md#updateRepositoryAccountUsingPUT) | **PUT** /api/enterprise/integration/box/{userId}/account | Update Box account
+[**confirmAuthorisation**](IntegrationBoxApi.md#confirmAuthorisation) | **GET** /api/enterprise/integration/box/confirm-auth-request | Box Authorization
+[**createRepositoryAccount**](IntegrationBoxApi.md#createRepositoryAccount) | **POST** /api/enterprise/integration/box/{userId}/account | Create Box account
+[**deleteRepositoryAccount**](IntegrationBoxApi.md#deleteRepositoryAccount) | **DELETE** /api/enterprise/integration/box/{userId}/account | Delete Box account
+[**getBoxPluginStatus**](IntegrationBoxApi.md#getBoxPluginStatus) | **GET** /api/enterprise/integration/box/status | Retrieve if Box Integration is enabled
+[**getFiles**](IntegrationBoxApi.md#getFiles) | **GET** /api/enterprise/integration/box/files | List file &amp; folders
+[**getRepositoryAccount**](IntegrationBoxApi.md#getRepositoryAccount) | **GET** /api/enterprise/integration/box/{userId}/account | List Box Account
+[**updateRepositoryAccount**](IntegrationBoxApi.md#updateRepositoryAccount) | **PUT** /api/enterprise/integration/box/{userId}/account | Update Box account
 
 
-<a name="confirmAuthorisationUsingGET1"></a>
-# **confirmAuthorisationUsingGET1**
-> confirmAuthorisationUsingGET1(code)
+<a name="confirmAuthorisation"></a>
+# **confirmAuthorisation**
+> confirmAuthorisation(code)
 
 Box Authorization
 
@@ -37,7 +37,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.confirmAuthorisationUsingGET1(code, callback);
+apiInstance.confirmAuthorisation(code, callback);
 ```
 
 ### Parameters
@@ -59,9 +59,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: text/html, application/json
 
-<a name="createRepositoryAccountUsingPOST"></a>
-# **createRepositoryAccountUsingPOST**
-> createRepositoryAccountUsingPOST(userId, credentials)
+<a name="createRepositoryAccount"></a>
+# **createRepositoryAccount**
+> createRepositoryAccount(userId, credentials)
 
 Create Box account
 
@@ -83,7 +83,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.createRepositoryAccountUsingPOST(userId, credentials, callback);
+apiInstance.createRepositoryAccount(userId, credentials, callback);
 ```
 
 ### Parameters
@@ -106,9 +106,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="deleteRepositoryAccountUsingDELETE"></a>
-# **deleteRepositoryAccountUsingDELETE**
-> deleteRepositoryAccountUsingDELETE(userId)
+<a name="deleteRepositoryAccount"></a>
+# **deleteRepositoryAccount**
+> deleteRepositoryAccount(userId)
 
 Delete Box account
 
@@ -128,7 +128,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.deleteRepositoryAccountUsingDELETE(userId, callback);
+apiInstance.deleteRepositoryAccount(userId, callback);
 ```
 
 ### Parameters
@@ -150,9 +150,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getBoxPluginStatusUsingGET"></a>
-# **getBoxPluginStatusUsingGET**
-> &#39;Boolean&#39; getBoxPluginStatusUsingGET()
+<a name="getBoxPluginStatus"></a>
+# **getBoxPluginStatus**
+> &#39;Boolean&#39; getBoxPluginStatus()
 
 Retrieve if Box Integration is enabled
 
@@ -169,7 +169,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getBoxPluginStatusUsingGET(callback);
+apiInstance.getBoxPluginStatus(callback);
 ```
 
 ### Parameters
@@ -188,9 +188,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getFilesUsingGET"></a>
-# **getFilesUsingGET**
-> ResultListDataRepresentation getFilesUsingGET(opts)
+<a name="getFiles"></a>
+# **getFiles**
+> ResultListDataRepresentation getFiles(opts)
 
 List file &amp; folders
 
@@ -212,7 +212,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getFilesUsingGET(opts, callback);
+apiInstance.getFiles(opts, callback);
 ```
 
 ### Parameters
@@ -235,9 +235,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getRepositoryAccountUsingGET"></a>
-# **getRepositoryAccountUsingGET**
-> BoxUserAccountCredentialsRepresentation getRepositoryAccountUsingGET(userId)
+<a name="getRepositoryAccount"></a>
+# **getRepositoryAccount**
+> BoxUserAccountCredentialsRepresentation getRepositoryAccount(userId)
 
 List Box Account
 
@@ -257,7 +257,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getRepositoryAccountUsingGET(userId, callback);
+apiInstance.getRepositoryAccount(userId, callback);
 ```
 
 ### Parameters
@@ -279,9 +279,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="updateRepositoryAccountUsingPUT"></a>
-# **updateRepositoryAccountUsingPUT**
-> updateRepositoryAccountUsingPUT(userId, credentials)
+<a name="updateRepositoryAccount"></a>
+# **updateRepositoryAccount**
+> updateRepositoryAccount(userId, credentials)
 
 Update Box account
 
@@ -303,7 +303,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.updateRepositoryAccountUsingPUT(userId, credentials, callback);
+apiInstance.updateRepositoryAccount(userId, credentials, callback);
 ```
 
 ### Parameters

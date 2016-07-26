@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new IntegrationApi. 
+   * Constructs a new IntegrationApi.
    * @alias module:api/IntegrationApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the confirmAuthorisationUsingGET operation.
-     * @callback module:api/IntegrationApi~confirmAuthorisationUsingGETCallback
+     * Callback function to receive the result of the confirmAuthorisation operation.
+     * @callback module:api/IntegrationApi~confirmAuthorisationCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -44,14 +44,14 @@
      * Alfresco Cloud Authorization
      * Returns Alfresco Oauth HTML Page
      * @param {String} code code
-     * @param {module:api/IntegrationApi~confirmAuthorisationUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.confirmAuthorisationUsingGET = function(code, callback) {
+    this.confirmAuthorisation = function(code, callback) {
       var postBody = null;
 
       // verify the required parameter 'code' is set
       if (code == undefined || code == null) {
-        throw "Missing the required parameter 'code' when calling confirmAuthorisationUsingGET";
+        throw "Missing the required parameter 'code' when calling confirmAuthorisation";
       }
 
 
@@ -78,8 +78,8 @@
     }
 
     /**
-     * Callback function to receive the result of the confirmAuthorisationUsingGET1 operation.
-     * @callback module:api/IntegrationApi~confirmAuthorisationUsingGET1Callback
+     * Callback function to receive the result of the confirmAuthorisation operation.
+     * @callback module:api/IntegrationApi~confirmAuthorisationCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -89,14 +89,14 @@
      * Box Authorization
      * Returns Box Oauth HTML Page
      * @param {String} code code
-     * @param {module:api/IntegrationApi~confirmAuthorisationUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.confirmAuthorisationUsingGET1 = function(code, callback) {
+    this.confirmAuthorisation = function(code, callback) {
       var postBody = null;
 
       // verify the required parameter 'code' is set
       if (code == undefined || code == null) {
-        throw "Missing the required parameter 'code' when calling confirmAuthorisationUsingGET1";
+        throw "Missing the required parameter 'code' when calling confirmAuthorisation";
       }
 
 
@@ -123,8 +123,8 @@
     }
 
     /**
-     * Callback function to receive the result of the confirmAuthorisationUsingGET2 operation.
-     * @callback module:api/IntegrationApi~confirmAuthorisationUsingGET2Callback
+     * Callback function to receive the result of the confirmAuthorisation operation.
+     * @callback module:api/IntegrationApi~confirmAuthorisationCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -134,14 +134,14 @@
      * Drive Authorization
      * Returns Drive Oauth HTML Page
      * @param {String} code code
-     * @param {module:api/IntegrationApi~confirmAuthorisationUsingGET2Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.confirmAuthorisationUsingGET2 = function(code, callback) {
+    this.confirmAuthorisation = function(code, callback) {
       var postBody = null;
 
       // verify the required parameter 'code' is set
       if (code == undefined || code == null) {
-        throw "Missing the required parameter 'code' when calling confirmAuthorisationUsingGET2";
+        throw "Missing the required parameter 'code' when calling confirmAuthorisation";
       }
 
 
@@ -168,8 +168,8 @@
     }
 
     /**
-     * Callback function to receive the result of the createRepositoryAccountUsingPOST operation.
-     * @callback module:api/IntegrationApi~createRepositoryAccountUsingPOSTCallback
+     * Callback function to receive the result of the createRepositoryAccount operation.
+     * @callback module:api/IntegrationApi~createRepositoryAccountCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -179,19 +179,19 @@
      * Create Box account
      * @param {Integer} userId userId
      * @param {module:model/UserAccountCredentialsRepresentation} credentials credentials
-     * @param {module:api/IntegrationApi~createRepositoryAccountUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~createRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.createRepositoryAccountUsingPOST = function(userId, credentials, callback) {
+    this.createRepositoryAccount = function(userId, credentials, callback) {
       var postBody = credentials;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling createRepositoryAccountUsingPOST";
+        throw "Missing the required parameter 'userId' when calling createRepositoryAccount";
       }
 
       // verify the required parameter 'credentials' is set
       if (credentials == undefined || credentials == null) {
-        throw "Missing the required parameter 'credentials' when calling createRepositoryAccountUsingPOST";
+        throw "Missing the required parameter 'credentials' when calling createRepositoryAccount";
       }
 
 
@@ -218,8 +218,8 @@
     }
 
     /**
-     * Callback function to receive the result of the deleteRepositoryAccountUsingDELETE operation.
-     * @callback module:api/IntegrationApi~deleteRepositoryAccountUsingDELETECallback
+     * Callback function to receive the result of the deleteRepositoryAccount operation.
+     * @callback module:api/IntegrationApi~deleteRepositoryAccountCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -228,14 +228,14 @@
     /**
      * Delete Box account
      * @param {Integer} userId userId
-     * @param {module:api/IntegrationApi~deleteRepositoryAccountUsingDELETECallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~deleteRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteRepositoryAccountUsingDELETE = function(userId, callback) {
+    this.deleteRepositoryAccount = function(userId, callback) {
       var postBody = null;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling deleteRepositoryAccountUsingDELETE";
+        throw "Missing the required parameter 'userId' when calling deleteRepositoryAccount";
       }
 
 
@@ -262,8 +262,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getAllNetworksUsingGET operation.
-     * @callback module:api/IntegrationApi~getAllNetworksUsingGETCallback
+     * Callback function to receive the result of the getAllNetworks operation.
+     * @callback module:api/IntegrationApi~getAllNetworksCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -271,10 +271,10 @@
 
     /**
      * List Alfresco networks
-     * @param {module:api/IntegrationApi~getAllNetworksUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~getAllNetworksCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAllNetworksUsingGET = function(callback) {
+    this.getAllNetworks = function(callback) {
       var postBody = null;
 
 
@@ -300,8 +300,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getAllSitesUsingGET operation.
-     * @callback module:api/IntegrationApi~getAllSitesUsingGETCallback
+     * Callback function to receive the result of the getAllSites operation.
+     * @callback module:api/IntegrationApi~getAllSitesCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -311,15 +311,15 @@
      * List Alfresco sites
      * Returns ALL Sites
      * @param {String} networkId networkId
-     * @param {module:api/IntegrationApi~getAllSitesUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~getAllSitesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAllSitesUsingGET = function(networkId, callback) {
+    this.getAllSites = function(networkId, callback) {
       var postBody = null;
 
       // verify the required parameter 'networkId' is set
       if (networkId == undefined || networkId == null) {
-        throw "Missing the required parameter 'networkId' when calling getAllSitesUsingGET";
+        throw "Missing the required parameter 'networkId' when calling getAllSites";
       }
 
 
@@ -346,8 +346,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getAllSitesUsingGET1 operation.
-     * @callback module:api/IntegrationApi~getAllSitesUsingGET1Callback
+     * Callback function to receive the result of the getAllSites operation.
+     * @callback module:api/IntegrationApi~getAllSitesCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -357,15 +357,15 @@
      * List Alfresco sites
      * Returns ALL Sites
      * @param {String} repositoryId repositoryId
-     * @param {module:api/IntegrationApi~getAllSitesUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~getAllSitesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAllSitesUsingGET1 = function(repositoryId, callback) {
+    this.getAllSites = function(repositoryId, callback) {
       var postBody = null;
 
       // verify the required parameter 'repositoryId' is set
       if (repositoryId == undefined || repositoryId == null) {
-        throw "Missing the required parameter 'repositoryId' when calling getAllSitesUsingGET1";
+        throw "Missing the required parameter 'repositoryId' when calling getAllSites";
       }
 
 
@@ -392,8 +392,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getBoxPluginStatusUsingGET operation.
-     * @callback module:api/IntegrationApi~getBoxPluginStatusUsingGETCallback
+     * Callback function to receive the result of the getBoxPluginStatus operation.
+     * @callback module:api/IntegrationApi~getBoxPluginStatusCallback
      * @param {String} error Error message, if any.
      * @param {'Boolean'} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -401,10 +401,10 @@
 
     /**
      * Retrieve if Box Integration is enabled
-     * @param {module:api/IntegrationApi~getBoxPluginStatusUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~getBoxPluginStatusCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {'Boolean'}
      */
-    this.getBoxPluginStatusUsingGET = function(callback) {
+    this.getBoxPluginStatus = function(callback) {
       var postBody = null;
 
 
@@ -430,8 +430,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getContentInFolderUsingGET operation.
-     * @callback module:api/IntegrationApi~getContentInFolderUsingGETCallback
+     * Callback function to receive the result of the getContentInFolder operation.
+     * @callback module:api/IntegrationApi~getContentInFolderCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -441,20 +441,20 @@
      * List file &amp; folders inside a specific folder
      * @param {String} networkId networkId
      * @param {String} folderId folderId
-     * @param {module:api/IntegrationApi~getContentInFolderUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~getContentInFolderCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getContentInFolderUsingGET = function(networkId, folderId, callback) {
+    this.getContentInFolder = function(networkId, folderId, callback) {
       var postBody = null;
 
       // verify the required parameter 'networkId' is set
       if (networkId == undefined || networkId == null) {
-        throw "Missing the required parameter 'networkId' when calling getContentInFolderUsingGET";
+        throw "Missing the required parameter 'networkId' when calling getContentInFolder";
       }
 
       // verify the required parameter 'folderId' is set
       if (folderId == undefined || folderId == null) {
-        throw "Missing the required parameter 'folderId' when calling getContentInFolderUsingGET";
+        throw "Missing the required parameter 'folderId' when calling getContentInFolder";
       }
 
 
@@ -482,8 +482,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getContentInFolderUsingGET1 operation.
-     * @callback module:api/IntegrationApi~getContentInFolderUsingGET1Callback
+     * Callback function to receive the result of the getContentInFolder operation.
+     * @callback module:api/IntegrationApi~getContentInFolderCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -493,20 +493,20 @@
      * List file &amp; folders inside a specific folder
      * @param {String} repositoryId repositoryId
      * @param {String} folderId folderId
-     * @param {module:api/IntegrationApi~getContentInFolderUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~getContentInFolderCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getContentInFolderUsingGET1 = function(repositoryId, folderId, callback) {
+    this.getContentInFolder = function(repositoryId, folderId, callback) {
       var postBody = null;
 
       // verify the required parameter 'repositoryId' is set
       if (repositoryId == undefined || repositoryId == null) {
-        throw "Missing the required parameter 'repositoryId' when calling getContentInFolderUsingGET1";
+        throw "Missing the required parameter 'repositoryId' when calling getContentInFolder";
       }
 
       // verify the required parameter 'folderId' is set
       if (folderId == undefined || folderId == null) {
-        throw "Missing the required parameter 'folderId' when calling getContentInFolderUsingGET1";
+        throw "Missing the required parameter 'folderId' when calling getContentInFolder";
       }
 
 
@@ -534,8 +534,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getContentInSiteUsingGET operation.
-     * @callback module:api/IntegrationApi~getContentInSiteUsingGETCallback
+     * Callback function to receive the result of the getContentInSite operation.
+     * @callback module:api/IntegrationApi~getContentInSiteCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -545,20 +545,20 @@
      * List file &amp; folders inside a specific site
      * @param {String} networkId networkId
      * @param {String} siteId siteId
-     * @param {module:api/IntegrationApi~getContentInSiteUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~getContentInSiteCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getContentInSiteUsingGET = function(networkId, siteId, callback) {
+    this.getContentInSite = function(networkId, siteId, callback) {
       var postBody = null;
 
       // verify the required parameter 'networkId' is set
       if (networkId == undefined || networkId == null) {
-        throw "Missing the required parameter 'networkId' when calling getContentInSiteUsingGET";
+        throw "Missing the required parameter 'networkId' when calling getContentInSite";
       }
 
       // verify the required parameter 'siteId' is set
       if (siteId == undefined || siteId == null) {
-        throw "Missing the required parameter 'siteId' when calling getContentInSiteUsingGET";
+        throw "Missing the required parameter 'siteId' when calling getContentInSite";
       }
 
 
@@ -586,8 +586,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getContentInSiteUsingGET1 operation.
-     * @callback module:api/IntegrationApi~getContentInSiteUsingGET1Callback
+     * Callback function to receive the result of the getContentInSite operation.
+     * @callback module:api/IntegrationApi~getContentInSiteCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -597,20 +597,20 @@
      * List file &amp; folders inside a specific site
      * @param {String} repositoryId repositoryId
      * @param {String} siteId siteId
-     * @param {module:api/IntegrationApi~getContentInSiteUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~getContentInSiteCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getContentInSiteUsingGET1 = function(repositoryId, siteId, callback) {
+    this.getContentInSite = function(repositoryId, siteId, callback) {
       var postBody = null;
 
       // verify the required parameter 'repositoryId' is set
       if (repositoryId == undefined || repositoryId == null) {
-        throw "Missing the required parameter 'repositoryId' when calling getContentInSiteUsingGET1";
+        throw "Missing the required parameter 'repositoryId' when calling getContentInSite";
       }
 
       // verify the required parameter 'siteId' is set
       if (siteId == undefined || siteId == null) {
-        throw "Missing the required parameter 'siteId' when calling getContentInSiteUsingGET1";
+        throw "Missing the required parameter 'siteId' when calling getContentInSite";
       }
 
 
@@ -638,8 +638,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getFilesUsingGET operation.
-     * @callback module:api/IntegrationApi~getFilesUsingGETCallback
+     * Callback function to receive the result of the getFiles operation.
+     * @callback module:api/IntegrationApi~getFilesCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -650,10 +650,10 @@
      * @param {Object} opts Optional parameters
      * @param {String} opts.filter filter
      * @param {String} opts.parent parent
-     * @param {module:api/IntegrationApi~getFilesUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~getFilesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getFilesUsingGET = function(opts, callback) {
+    this.getFiles = function(opts, callback) {
       opts = opts || {};
       var postBody = null;
 
@@ -682,8 +682,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getFilesUsingGET1 operation.
-     * @callback module:api/IntegrationApi~getFilesUsingGET1Callback
+     * Callback function to receive the result of the getFiles operation.
+     * @callback module:api/IntegrationApi~getFilesCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -695,10 +695,10 @@
      * @param {String} opts.filter filter
      * @param {String} opts.parent parent
      * @param {Boolean} opts.currentFolderOnly currentFolderOnly
-     * @param {module:api/IntegrationApi~getFilesUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~getFilesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getFilesUsingGET1 = function(opts, callback) {
+    this.getFiles = function(opts, callback) {
       opts = opts || {};
       var postBody = null;
 
@@ -728,8 +728,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getRepositoriesUsingGET operation.
-     * @callback module:api/IntegrationApi~getRepositoriesUsingGETCallback
+     * Callback function to receive the result of the getRepositories operation.
+     * @callback module:api/IntegrationApi~getRepositoriesCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -741,10 +741,10 @@
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.tenantId tenantId
      * @param {Boolean} opts.includeAccounts includeAccounts
-     * @param {module:api/IntegrationApi~getRepositoriesUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~getRepositoriesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getRepositoriesUsingGET = function(opts, callback) {
+    this.getRepositories = function(opts, callback) {
       opts = opts || {};
       var postBody = null;
 
@@ -773,8 +773,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getRepositoryAccountUsingGET operation.
-     * @callback module:api/IntegrationApi~getRepositoryAccountUsingGETCallback
+     * Callback function to receive the result of the getRepositoryAccount operation.
+     * @callback module:api/IntegrationApi~getRepositoryAccountCallback
      * @param {String} error Error message, if any.
      * @param {module:model/BoxUserAccountCredentialsRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -783,15 +783,15 @@
     /**
      * List Box Account
      * @param {Integer} userId userId
-     * @param {module:api/IntegrationApi~getRepositoryAccountUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~getRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/BoxUserAccountCredentialsRepresentation}
      */
-    this.getRepositoryAccountUsingGET = function(userId, callback) {
+    this.getRepositoryAccount = function(userId, callback) {
       var postBody = null;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling getRepositoryAccountUsingGET";
+        throw "Missing the required parameter 'userId' when calling getRepositoryAccount";
       }
 
 
@@ -818,8 +818,8 @@
     }
 
     /**
-     * Callback function to receive the result of the updateRepositoryAccountUsingPUT operation.
-     * @callback module:api/IntegrationApi~updateRepositoryAccountUsingPUTCallback
+     * Callback function to receive the result of the updateRepositoryAccount operation.
+     * @callback module:api/IntegrationApi~updateRepositoryAccountCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -829,19 +829,19 @@
      * Update Box account
      * @param {Integer} userId userId
      * @param {module:model/UserAccountCredentialsRepresentation} credentials credentials
-     * @param {module:api/IntegrationApi~updateRepositoryAccountUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~updateRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.updateRepositoryAccountUsingPUT = function(userId, credentials, callback) {
+    this.updateRepositoryAccount = function(userId, credentials, callback) {
       var postBody = credentials;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling updateRepositoryAccountUsingPUT";
+        throw "Missing the required parameter 'userId' when calling updateRepositoryAccount";
       }
 
       // verify the required parameter 'credentials' is set
       if (credentials == undefined || credentials == null) {
-        throw "Missing the required parameter 'credentials' when calling updateRepositoryAccountUsingPUT";
+        throw "Missing the required parameter 'credentials' when calling updateRepositoryAccount";
       }
 
 

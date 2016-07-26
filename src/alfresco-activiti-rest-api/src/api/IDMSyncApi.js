@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new IDMSyncApi. 
+   * Constructs a new IDMSyncApi.
    * @alias module:api/IDMSyncApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the getLogFileUsingGET operation.
-     * @callback module:api/IDMSyncApi~getLogFileUsingGETCallback
+     * Callback function to receive the result of the getLogFile operation.
+     * @callback module:api/IDMSyncApi~getLogFileCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -43,14 +43,14 @@
     /**
      * getLogFile
      * @param {Integer} syncLogEntryId syncLogEntryId
-     * @param {module:api/IDMSyncApi~getLogFileUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IDMSyncApi~getLogFileCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.getLogFileUsingGET = function(syncLogEntryId, callback) {
+    this.getLogFile = function(syncLogEntryId, callback) {
       var postBody = null;
 
       // verify the required parameter 'syncLogEntryId' is set
       if (syncLogEntryId == undefined || syncLogEntryId == null) {
-        throw "Missing the required parameter 'syncLogEntryId' when calling getLogFileUsingGET";
+        throw "Missing the required parameter 'syncLogEntryId' when calling getLogFile";
       }
 
 
@@ -77,8 +77,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getSyncLogEntriesUsingGET operation.
-     * @callback module:api/IDMSyncApi~getSyncLogEntriesUsingGETCallback
+     * Callback function to receive the result of the getSyncLogEntries operation.
+     * @callback module:api/IDMSyncApi~getSyncLogEntriesCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/SyncLogEntryRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -90,10 +90,10 @@
      * @param {Integer} opts.tenantId tenantId
      * @param {Integer} opts.page page
      * @param {Integer} opts.size size
-     * @param {module:api/IDMSyncApi~getSyncLogEntriesUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IDMSyncApi~getSyncLogEntriesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/SyncLogEntryRepresentation>}
      */
-    this.getSyncLogEntriesUsingGET = function(opts, callback) {
+    this.getSyncLogEntries = function(opts, callback) {
       opts = opts || {};
       var postBody = null;
 

@@ -4,17 +4,17 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**executeActionUsingPOST**](UserApi.md#executeActionUsingPOST) | **POST** /api/enterprise/users/{userId} | Execute an action for a specific user
-[**getProfilePictureUsingGET1**](UserApi.md#getProfilePictureUsingGET1) | **GET** /api/enterprise/users/{userId}/picture | Retrieve user profile picture
-[**getUserUsingGET2**](UserApi.md#getUserUsingGET2) | **GET** /api/enterprise/users/{userId} | Retrieve user information
-[**getUsersUsingGET2**](UserApi.md#getUsersUsingGET2) | **GET** /api/enterprise/users | List users
-[**requestPasswordResetUsingPOST**](UserApi.md#requestPasswordResetUsingPOST) | **POST** /api/enterprise/idm/passwords | Request password reset 
-[**updateUserUsingPUT**](UserApi.md#updateUserUsingPUT) | **PUT** /api/enterprise/users/{userId} | Update user information
+[**executeAction**](UserApi.md#executeAction) | **POST** /api/enterprise/users/{userId} | Execute an action for a specific user
+[**getProfilePicture**](UserApi.md#getProfilePicture) | **GET** /api/enterprise/users/{userId}/picture | Retrieve user profile picture
+[**getUser**](UserApi.md#getUser) | **GET** /api/enterprise/users/{userId} | Retrieve user information
+[**getUsers**](UserApi.md#getUsers) | **GET** /api/enterprise/users | List users
+[**requestPasswordReset**](UserApi.md#requestPasswordReset) | **POST** /api/enterprise/idm/passwords | Request password reset 
+[**updateUser**](UserApi.md#updateUser) | **PUT** /api/enterprise/users/{userId} | Update user information
 
 
-<a name="executeActionUsingPOST"></a>
-# **executeActionUsingPOST**
-> executeActionUsingPOST(userId, actionRequest)
+<a name="executeAction"></a>
+# **executeAction**
+> executeAction(userId, actionRequest)
 
 Execute an action for a specific user
 
@@ -38,7 +38,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.executeActionUsingPOST(userId, actionRequest, callback);
+apiInstance.executeAction(userId, actionRequest, callback);
 ```
 
 ### Parameters
@@ -61,9 +61,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getProfilePictureUsingGET1"></a>
-# **getProfilePictureUsingGET1**
-> getProfilePictureUsingGET1(userId)
+<a name="getProfilePicture"></a>
+# **getProfilePicture**
+> getProfilePicture(userId)
 
 Retrieve user profile picture
 
@@ -83,7 +83,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.getProfilePictureUsingGET1(userId, callback);
+apiInstance.getProfilePicture(userId, callback);
 ```
 
 ### Parameters
@@ -105,9 +105,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getUserUsingGET2"></a>
-# **getUserUsingGET2**
-> UserRepresentation getUserUsingGET2(userId)
+<a name="getUser"></a>
+# **getUser**
+> UserRepresentation getUser(userId)
 
 Retrieve user information
 
@@ -127,7 +127,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getUserUsingGET2(userId, callback);
+apiInstance.getUser(userId, callback);
 ```
 
 ### Parameters
@@ -149,9 +149,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getUsersUsingGET2"></a>
-# **getUsersUsingGET2**
-> ResultListDataRepresentation getUsersUsingGET2(opts)
+<a name="getUsers"></a>
+# **getUsers**
+> ResultListDataRepresentation getUsers(opts)
 
 List users
 
@@ -181,7 +181,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getUsersUsingGET2(opts, callback);
+apiInstance.getUsers(opts, callback);
 ```
 
 ### Parameters
@@ -210,9 +210,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="requestPasswordResetUsingPOST"></a>
-# **requestPasswordResetUsingPOST**
-> requestPasswordResetUsingPOST(resetPassword)
+<a name="requestPasswordReset"></a>
+# **requestPasswordReset**
+> requestPasswordReset(resetPassword)
 
 Request password reset 
 
@@ -232,7 +232,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.requestPasswordResetUsingPOST(resetPassword, callback);
+apiInstance.requestPasswordReset(resetPassword, callback);
 ```
 
 ### Parameters
@@ -254,9 +254,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="updateUserUsingPUT"></a>
-# **updateUserUsingPUT**
-> UserRepresentation updateUserUsingPUT(userId, userRequest)
+<a name="updateUser"></a>
+# **updateUser**
+> UserRepresentation updateUser(userId, userRequest)
 
 Update user information
 
@@ -278,7 +278,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.updateUserUsingPUT(userId, userRequest, callback);
+apiInstance.updateUser(userId, userRequest, callback);
 ```
 
 ### Parameters

@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new IntegrationDriveApi. 
+   * Constructs a new IntegrationDriveApi.
    * @alias module:api/IntegrationDriveApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the confirmAuthorisationUsingGET2 operation.
-     * @callback module:api/IntegrationDriveApi~confirmAuthorisationUsingGET2Callback
+     * Callback function to receive the result of the confirmAuthorisation operation.
+     * @callback module:api/IntegrationDriveApi~confirmAuthorisationCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -44,14 +44,14 @@
      * Drive Authorization
      * Returns Drive Oauth HTML Page
      * @param {String} code code
-     * @param {module:api/IntegrationDriveApi~confirmAuthorisationUsingGET2Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationDriveApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.confirmAuthorisationUsingGET2 = function(code, callback) {
+    this.confirmAuthorisation = function(code, callback) {
       var postBody = null;
 
       // verify the required parameter 'code' is set
       if (code == undefined || code == null) {
-        throw "Missing the required parameter 'code' when calling confirmAuthorisationUsingGET2";
+        throw "Missing the required parameter 'code' when calling confirmAuthorisation";
       }
 
 
@@ -78,8 +78,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getFilesUsingGET1 operation.
-     * @callback module:api/IntegrationDriveApi~getFilesUsingGET1Callback
+     * Callback function to receive the result of the getFiles operation.
+     * @callback module:api/IntegrationDriveApi~getFilesCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -91,10 +91,10 @@
      * @param {String} opts.filter filter
      * @param {String} opts.parent parent
      * @param {Boolean} opts.currentFolderOnly currentFolderOnly
-     * @param {module:api/IntegrationDriveApi~getFilesUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationDriveApi~getFilesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getFilesUsingGET1 = function(opts, callback) {
+    this.getFiles = function(opts, callback) {
       opts = opts || {};
       var postBody = null;
 

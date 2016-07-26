@@ -4,13 +4,13 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getLogFileUsingGET**](IDMSyncApi.md#getLogFileUsingGET) | **GET** /api/enterprise/idm-sync-log-entries/{syncLogEntryId}/logfile | getLogFile
-[**getSyncLogEntriesUsingGET**](IDMSyncApi.md#getSyncLogEntriesUsingGET) | **GET** /api/enterprise/idm-sync-log-entries | getSyncLogEntries
+[**getLogFile**](IDMSyncApi.md#getLogFile) | **GET** /api/enterprise/idm-sync-log-entries/{syncLogEntryId}/logfile | getLogFile
+[**getSyncLogEntries**](IDMSyncApi.md#getSyncLogEntries) | **GET** /api/enterprise/idm-sync-log-entries | getSyncLogEntries
 
 
-<a name="getLogFileUsingGET"></a>
-# **getLogFileUsingGET**
-> getLogFileUsingGET(syncLogEntryId)
+<a name="getLogFile"></a>
+# **getLogFile**
+> getLogFile(syncLogEntryId)
 
 getLogFile
 
@@ -30,7 +30,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.getLogFileUsingGET(syncLogEntryId, callback);
+apiInstance.getLogFile(syncLogEntryId, callback);
 ```
 
 ### Parameters
@@ -52,9 +52,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getSyncLogEntriesUsingGET"></a>
-# **getSyncLogEntriesUsingGET**
-> [SyncLogEntryRepresentation] getSyncLogEntriesUsingGET(opts)
+<a name="getSyncLogEntries"></a>
+# **getSyncLogEntries**
+> [SyncLogEntryRepresentation] getSyncLogEntries(opts)
 
 getSyncLogEntries
 
@@ -77,7 +77,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getSyncLogEntriesUsingGET(opts, callback);
+apiInstance.getSyncLogEntries(opts, callback);
 ```
 
 ### Parameters

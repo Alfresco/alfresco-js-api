@@ -4,12 +4,12 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getPropertiesUsingGET**](SystemPropertiesApi.md#getPropertiesUsingGET) | **GET** /api/enterprise/system/properties | Retrieve System Properties
+[**getProperties**](SystemPropertiesApi.md#getProperties) | **GET** /api/enterprise/system/properties | Retrieve System Properties
 
 
-<a name="getPropertiesUsingGET"></a>
-# **getPropertiesUsingGET**
-> SystemPropertiesRepresentation getPropertiesUsingGET()
+<a name="getProperties"></a>
+# **getProperties**
+> SystemPropertiesRepresentation getProperties()
 
 Retrieve System Properties
 
@@ -28,7 +28,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getPropertiesUsingGET(callback);
+apiInstance.getProperties(callback);
 ```
 
 ### Parameters

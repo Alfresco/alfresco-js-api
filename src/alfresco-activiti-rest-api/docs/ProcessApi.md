@@ -4,22 +4,22 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**deleteProcessInstanceUsingDELETE**](ProcessApi.md#deleteProcessInstanceUsingDELETE) | **DELETE** /api/enterprise/process-instances/{processInstanceId} | Delete a process instance
-[**filterProcessInstancesUsingPOST**](ProcessApi.md#filterProcessInstancesUsingPOST) | **POST** /api/enterprise/process-instances/filter | Filter a list of process instances
-[**getProcessDefinitionStartFormUsingGET**](ProcessApi.md#getProcessDefinitionStartFormUsingGET) | **GET** /api/enterprise/process-definitions/{processDefinitionId}/start-form | Retrieve the start form for a process definition
-[**getProcessDefinitionsUsingGET**](ProcessApi.md#getProcessDefinitionsUsingGET) | **GET** /api/enterprise/process-definitions | Retrieve a list of process definitions
-[**getProcessInstanceContentUsingGET**](ProcessApi.md#getProcessInstanceContentUsingGET) | **GET** /api/enterprise/process-instances/{processInstanceId}/field-content | Retrieve content attached to process instance fields
-[**getProcessInstanceStartFormUsingGET**](ProcessApi.md#getProcessInstanceStartFormUsingGET) | **GET** /api/enterprise/process-instances/{processInstanceId}/start-form | Get process start form
-[**getProcessInstanceUsingGET**](ProcessApi.md#getProcessInstanceUsingGET) | **GET** /api/enterprise/process-instances/{processInstanceId} | Retrieve a process instance information
-[**getProcessInstancesUsingPOST**](ProcessApi.md#getProcessInstancesUsingPOST) | **POST** /api/enterprise/process-instances/query | Retrieve a list of process instances
-[**getRestFieldValuesUsingGET**](ProcessApi.md#getRestFieldValuesUsingGET) | **GET** /api/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field} | Retrieve field values (eg. the typeahead field)
-[**getRestTableFieldValuesUsingGET**](ProcessApi.md#getRestTableFieldValuesUsingGET) | **GET** /api/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field}/{column} | Retrieve field values (eg. the table field)
-[**startNewProcessInstanceUsingPOST**](ProcessApi.md#startNewProcessInstanceUsingPOST) | **POST** /api/enterprise/process-instances | Start a process instance
+[**deleteProcessInstance**](ProcessApi.md#deleteProcessInstance) | **DELETE** /api/enterprise/process-instances/{processInstanceId} | Delete a process instance
+[**filterProcessInstances**](ProcessApi.md#filterProcessInstances) | **POST** /api/enterprise/process-instances/filter | Filter a list of process instances
+[**getProcessDefinitionStartForm**](ProcessApi.md#getProcessDefinitionStartForm) | **GET** /api/enterprise/process-definitions/{processDefinitionId}/start-form | Retrieve the start form for a process definition
+[**getProcessDefinitions**](ProcessApi.md#getProcessDefinitions) | **GET** /api/enterprise/process-definitions | Retrieve a list of process definitions
+[**getProcessInstanceContent**](ProcessApi.md#getProcessInstanceContent) | **GET** /api/enterprise/process-instances/{processInstanceId}/field-content | Retrieve content attached to process instance fields
+[**getProcessInstanceStartForm**](ProcessApi.md#getProcessInstanceStartForm) | **GET** /api/enterprise/process-instances/{processInstanceId}/start-form | Get process start form
+[**getProcessInstance**](ProcessApi.md#getProcessInstance) | **GET** /api/enterprise/process-instances/{processInstanceId} | Retrieve a process instance information
+[**getProcessInstances**](ProcessApi.md#getProcessInstances) | **POST** /api/enterprise/process-instances/query | Retrieve a list of process instances
+[**getRestFieldValues**](ProcessApi.md#getRestFieldValues) | **GET** /api/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field} | Retrieve field values (eg. the typeahead field)
+[**getRestTableFieldValues**](ProcessApi.md#getRestTableFieldValues) | **GET** /api/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field}/{column} | Retrieve field values (eg. the table field)
+[**startNewProcessInstance**](ProcessApi.md#startNewProcessInstance) | **POST** /api/enterprise/process-instances | Start a process instance
 
 
-<a name="deleteProcessInstanceUsingDELETE"></a>
-# **deleteProcessInstanceUsingDELETE**
-> deleteProcessInstanceUsingDELETE(processInstanceId)
+<a name="deleteProcessInstance"></a>
+# **deleteProcessInstance**
+> deleteProcessInstance(processInstanceId)
 
 Delete a process instance
 
@@ -39,7 +39,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.deleteProcessInstanceUsingDELETE(processInstanceId, callback);
+apiInstance.deleteProcessInstance(processInstanceId, callback);
 ```
 
 ### Parameters
@@ -61,9 +61,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="filterProcessInstancesUsingPOST"></a>
-# **filterProcessInstancesUsingPOST**
-> ResultListDataRepresentation filterProcessInstancesUsingPOST(filterRequest)
+<a name="filterProcessInstances"></a>
+# **filterProcessInstances**
+> ResultListDataRepresentation filterProcessInstances(filterRequest)
 
 Filter a list of process instances
 
@@ -83,7 +83,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.filterProcessInstancesUsingPOST(filterRequest, callback);
+apiInstance.filterProcessInstances(filterRequest, callback);
 ```
 
 ### Parameters
@@ -105,9 +105,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getProcessDefinitionStartFormUsingGET"></a>
-# **getProcessDefinitionStartFormUsingGET**
-> FormDefinitionRepresentation getProcessDefinitionStartFormUsingGET()
+<a name="getProcessDefinitionStartForm"></a>
+# **getProcessDefinitionStartForm**
+> FormDefinitionRepresentation getProcessDefinitionStartForm()
 
 Retrieve the start form for a process definition
 
@@ -124,7 +124,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getProcessDefinitionStartFormUsingGET(callback);
+apiInstance.getProcessDefinitionStartForm(callback);
 ```
 
 ### Parameters
@@ -143,9 +143,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getProcessDefinitionsUsingGET"></a>
-# **getProcessDefinitionsUsingGET**
-> ResultListDataRepresentation getProcessDefinitionsUsingGET(opts)
+<a name="getProcessDefinitions"></a>
+# **getProcessDefinitions**
+> ResultListDataRepresentation getProcessDefinitions(opts)
 
 Retrieve a list of process definitions
 
@@ -169,7 +169,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getProcessDefinitionsUsingGET(opts, callback);
+apiInstance.getProcessDefinitions(opts, callback);
 ```
 
 ### Parameters
@@ -192,9 +192,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getProcessInstanceContentUsingGET"></a>
-# **getProcessInstanceContentUsingGET**
-> ResultListDataRepresentation getProcessInstanceContentUsingGET(processInstanceId)
+<a name="getProcessInstanceContent"></a>
+# **getProcessInstanceContent**
+> ResultListDataRepresentation getProcessInstanceContent(processInstanceId)
 
 Retrieve content attached to process instance fields
 
@@ -214,7 +214,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getProcessInstanceContentUsingGET(processInstanceId, callback);
+apiInstance.getProcessInstanceContent(processInstanceId, callback);
 ```
 
 ### Parameters
@@ -236,9 +236,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getProcessInstanceStartFormUsingGET"></a>
-# **getProcessInstanceStartFormUsingGET**
-> FormDefinitionRepresentation getProcessInstanceStartFormUsingGET(processInstanceId)
+<a name="getProcessInstanceStartForm"></a>
+# **getProcessInstanceStartForm**
+> FormDefinitionRepresentation getProcessInstanceStartForm(processInstanceId)
 
 Get process start form
 
@@ -260,7 +260,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getProcessInstanceStartFormUsingGET(processInstanceId, callback);
+apiInstance.getProcessInstanceStartForm(processInstanceId, callback);
 ```
 
 ### Parameters
@@ -282,9 +282,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getProcessInstanceUsingGET"></a>
-# **getProcessInstanceUsingGET**
-> ProcessInstanceRepresentation getProcessInstanceUsingGET(processInstanceId)
+<a name="getProcessInstance"></a>
+# **getProcessInstance**
+> ProcessInstanceRepresentation getProcessInstance(processInstanceId)
 
 Retrieve a process instance information
 
@@ -304,7 +304,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getProcessInstanceUsingGET(processInstanceId, callback);
+apiInstance.getProcessInstance(processInstanceId, callback);
 ```
 
 ### Parameters
@@ -326,9 +326,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getProcessInstancesUsingPOST"></a>
-# **getProcessInstancesUsingPOST**
-> ResultListDataRepresentation getProcessInstancesUsingPOST(requestNode)
+<a name="getProcessInstances"></a>
+# **getProcessInstances**
+> ResultListDataRepresentation getProcessInstances(requestNode)
 
 Retrieve a list of process instances
 
@@ -348,7 +348,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getProcessInstancesUsingPOST(requestNode, callback);
+apiInstance.getProcessInstances(requestNode, callback);
 ```
 
 ### Parameters
@@ -370,9 +370,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getRestFieldValuesUsingGET"></a>
-# **getRestFieldValuesUsingGET**
-> [FormValueRepresentation] getRestFieldValuesUsingGET()
+<a name="getRestFieldValues"></a>
+# **getRestFieldValues**
+> [FormValueRepresentation] getRestFieldValues()
 
 Retrieve field values (eg. the typeahead field)
 
@@ -389,7 +389,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getRestFieldValuesUsingGET(callback);
+apiInstance.getRestFieldValues(callback);
 ```
 
 ### Parameters
@@ -408,9 +408,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getRestTableFieldValuesUsingGET"></a>
-# **getRestTableFieldValuesUsingGET**
-> [FormValueRepresentation] getRestTableFieldValuesUsingGET()
+<a name="getRestTableFieldValues"></a>
+# **getRestTableFieldValues**
+> [FormValueRepresentation] getRestTableFieldValues()
 
 Retrieve field values (eg. the table field)
 
@@ -427,7 +427,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getRestTableFieldValuesUsingGET(callback);
+apiInstance.getRestTableFieldValues(callback);
 ```
 
 ### Parameters
@@ -446,9 +446,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="startNewProcessInstanceUsingPOST"></a>
-# **startNewProcessInstanceUsingPOST**
-> ProcessInstanceRepresentation startNewProcessInstanceUsingPOST(startRequest)
+<a name="startNewProcessInstance"></a>
+# **startNewProcessInstance**
+> ProcessInstanceRepresentation startNewProcessInstance(startRequest)
 
 Start a process instance
 
@@ -468,7 +468,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.startNewProcessInstanceUsingPOST(startRequest, callback);
+apiInstance.startNewProcessInstance(startRequest, callback);
 ```
 
 ### Parameters

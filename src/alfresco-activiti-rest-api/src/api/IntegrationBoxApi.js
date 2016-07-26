@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new IntegrationBoxApi. 
+   * Constructs a new IntegrationBoxApi.
    * @alias module:api/IntegrationBoxApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the confirmAuthorisationUsingGET1 operation.
-     * @callback module:api/IntegrationBoxApi~confirmAuthorisationUsingGET1Callback
+     * Callback function to receive the result of the confirmAuthorisation operation.
+     * @callback module:api/IntegrationBoxApi~confirmAuthorisationCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -44,14 +44,14 @@
      * Box Authorization
      * Returns Box Oauth HTML Page
      * @param {String} code code
-     * @param {module:api/IntegrationBoxApi~confirmAuthorisationUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationBoxApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.confirmAuthorisationUsingGET1 = function(code, callback) {
+    this.confirmAuthorisation = function(code, callback) {
       var postBody = null;
 
       // verify the required parameter 'code' is set
       if (code == undefined || code == null) {
-        throw "Missing the required parameter 'code' when calling confirmAuthorisationUsingGET1";
+        throw "Missing the required parameter 'code' when calling confirmAuthorisation";
       }
 
 
@@ -78,8 +78,8 @@
     }
 
     /**
-     * Callback function to receive the result of the createRepositoryAccountUsingPOST operation.
-     * @callback module:api/IntegrationBoxApi~createRepositoryAccountUsingPOSTCallback
+     * Callback function to receive the result of the createRepositoryAccount operation.
+     * @callback module:api/IntegrationBoxApi~createRepositoryAccountCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -89,19 +89,19 @@
      * Create Box account
      * @param {Integer} userId userId
      * @param {module:model/UserAccountCredentialsRepresentation} credentials credentials
-     * @param {module:api/IntegrationBoxApi~createRepositoryAccountUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationBoxApi~createRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.createRepositoryAccountUsingPOST = function(userId, credentials, callback) {
+    this.createRepositoryAccount = function(userId, credentials, callback) {
       var postBody = credentials;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling createRepositoryAccountUsingPOST";
+        throw "Missing the required parameter 'userId' when calling createRepositoryAccount";
       }
 
       // verify the required parameter 'credentials' is set
       if (credentials == undefined || credentials == null) {
-        throw "Missing the required parameter 'credentials' when calling createRepositoryAccountUsingPOST";
+        throw "Missing the required parameter 'credentials' when calling createRepositoryAccount";
       }
 
 
@@ -128,8 +128,8 @@
     }
 
     /**
-     * Callback function to receive the result of the deleteRepositoryAccountUsingDELETE operation.
-     * @callback module:api/IntegrationBoxApi~deleteRepositoryAccountUsingDELETECallback
+     * Callback function to receive the result of the deleteRepositoryAccount operation.
+     * @callback module:api/IntegrationBoxApi~deleteRepositoryAccountCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -138,14 +138,14 @@
     /**
      * Delete Box account
      * @param {Integer} userId userId
-     * @param {module:api/IntegrationBoxApi~deleteRepositoryAccountUsingDELETECallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationBoxApi~deleteRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteRepositoryAccountUsingDELETE = function(userId, callback) {
+    this.deleteRepositoryAccount = function(userId, callback) {
       var postBody = null;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling deleteRepositoryAccountUsingDELETE";
+        throw "Missing the required parameter 'userId' when calling deleteRepositoryAccount";
       }
 
 
@@ -172,8 +172,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getBoxPluginStatusUsingGET operation.
-     * @callback module:api/IntegrationBoxApi~getBoxPluginStatusUsingGETCallback
+     * Callback function to receive the result of the getBoxPluginStatus operation.
+     * @callback module:api/IntegrationBoxApi~getBoxPluginStatusCallback
      * @param {String} error Error message, if any.
      * @param {'Boolean'} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -181,10 +181,10 @@
 
     /**
      * Retrieve if Box Integration is enabled
-     * @param {module:api/IntegrationBoxApi~getBoxPluginStatusUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationBoxApi~getBoxPluginStatusCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {'Boolean'}
      */
-    this.getBoxPluginStatusUsingGET = function(callback) {
+    this.getBoxPluginStatus = function(callback) {
       var postBody = null;
 
 
@@ -210,8 +210,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getFilesUsingGET operation.
-     * @callback module:api/IntegrationBoxApi~getFilesUsingGETCallback
+     * Callback function to receive the result of the getFiles operation.
+     * @callback module:api/IntegrationBoxApi~getFilesCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -222,10 +222,10 @@
      * @param {Object} opts Optional parameters
      * @param {String} opts.filter filter
      * @param {String} opts.parent parent
-     * @param {module:api/IntegrationBoxApi~getFilesUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationBoxApi~getFilesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getFilesUsingGET = function(opts, callback) {
+    this.getFiles = function(opts, callback) {
       opts = opts || {};
       var postBody = null;
 
@@ -254,8 +254,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getRepositoryAccountUsingGET operation.
-     * @callback module:api/IntegrationBoxApi~getRepositoryAccountUsingGETCallback
+     * Callback function to receive the result of the getRepositoryAccount operation.
+     * @callback module:api/IntegrationBoxApi~getRepositoryAccountCallback
      * @param {String} error Error message, if any.
      * @param {module:model/BoxUserAccountCredentialsRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -264,15 +264,15 @@
     /**
      * List Box Account
      * @param {Integer} userId userId
-     * @param {module:api/IntegrationBoxApi~getRepositoryAccountUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationBoxApi~getRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/BoxUserAccountCredentialsRepresentation}
      */
-    this.getRepositoryAccountUsingGET = function(userId, callback) {
+    this.getRepositoryAccount = function(userId, callback) {
       var postBody = null;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling getRepositoryAccountUsingGET";
+        throw "Missing the required parameter 'userId' when calling getRepositoryAccount";
       }
 
 
@@ -299,8 +299,8 @@
     }
 
     /**
-     * Callback function to receive the result of the updateRepositoryAccountUsingPUT operation.
-     * @callback module:api/IntegrationBoxApi~updateRepositoryAccountUsingPUTCallback
+     * Callback function to receive the result of the updateRepositoryAccount operation.
+     * @callback module:api/IntegrationBoxApi~updateRepositoryAccountCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -310,19 +310,19 @@
      * Update Box account
      * @param {Integer} userId userId
      * @param {module:model/UserAccountCredentialsRepresentation} credentials credentials
-     * @param {module:api/IntegrationBoxApi~updateRepositoryAccountUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationBoxApi~updateRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.updateRepositoryAccountUsingPUT = function(userId, credentials, callback) {
+    this.updateRepositoryAccount = function(userId, credentials, callback) {
       var postBody = credentials;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling updateRepositoryAccountUsingPUT";
+        throw "Missing the required parameter 'userId' when calling updateRepositoryAccount";
       }
 
       // verify the required parameter 'credentials' is set
       if (credentials == undefined || credentials == null) {
-        throw "Missing the required parameter 'credentials' when calling updateRepositoryAccountUsingPUT";
+        throw "Missing the required parameter 'credentials' when calling updateRepositoryAccount";
       }
 
 

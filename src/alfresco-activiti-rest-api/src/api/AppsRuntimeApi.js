@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new AppsRuntimeApi. 
+   * Constructs a new AppsRuntimeApi.
    * @alias module:api/AppsRuntimeApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the deployAppDefinitionsUsingPOST operation.
-     * @callback module:api/AppsRuntimeApi~deployAppDefinitionsUsingPOSTCallback
+     * Callback function to receive the result of the deployAppDefinitions operation.
+     * @callback module:api/AppsRuntimeApi~deployAppDefinitionsCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -44,14 +44,14 @@
      * Deploy published app
      * After creating and puclished an app the user can add it to his/her landing page.
      * @param {module:model/RuntimeAppDefinitionSaveRepresentation} saveObject saveObject
-     * @param {module:api/AppsRuntimeApi~deployAppDefinitionsUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AppsRuntimeApi~deployAppDefinitionsCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deployAppDefinitionsUsingPOST = function(saveObject, callback) {
+    this.deployAppDefinitions = function(saveObject, callback) {
       var postBody = saveObject;
 
       // verify the required parameter 'saveObject' is set
       if (saveObject == undefined || saveObject == null) {
-        throw "Missing the required parameter 'saveObject' when calling deployAppDefinitionsUsingPOST";
+        throw "Missing the required parameter 'saveObject' when calling deployAppDefinitions";
       }
 
 
@@ -77,8 +77,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getAppDefinitionsUsingGET operation.
-     * @callback module:api/AppsRuntimeApi~getAppDefinitionsUsingGETCallback
+     * Callback function to receive the result of the getAppDefinitions operation.
+     * @callback module:api/AppsRuntimeApi~getAppDefinitionsCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -87,10 +87,10 @@
     /**
      * List runtime apps
      * When a user logs in into the Alfresco Activiti BPM Suite, the landing page is displayed containing all the apps that the user is allowed to see and use.
-     * @param {module:api/AppsRuntimeApi~getAppDefinitionsUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AppsRuntimeApi~getAppDefinitionsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAppDefinitionsUsingGET = function(callback) {
+    this.getAppDefinitions = function(callback) {
       var postBody = null;
 
 

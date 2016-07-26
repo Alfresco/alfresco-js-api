@@ -4,12 +4,12 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getUsersUsingGET2**](UsersWorkflowApi.md#getUsersUsingGET2) | **GET** /api/enterprise/users | List users
+[**getUsers**](UsersWorkflowApi.md#getUsers) | **GET** /api/enterprise/users | List users
 
 
-<a name="getUsersUsingGET2"></a>
-# **getUsersUsingGET2**
-> ResultListDataRepresentation getUsersUsingGET2(opts)
+<a name="getUsers"></a>
+# **getUsers**
+> ResultListDataRepresentation getUsers(opts)
 
 List users
 
@@ -39,7 +39,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getUsersUsingGET2(opts, callback);
+apiInstance.getUsers(opts, callback);
 ```
 
 ### Parameters

@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new ScriptFileApi. 
+   * Constructs a new ScriptFileApi.
    * @alias module:api/ScriptFileApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the getControllersUsingGET operation.
-     * @callback module:api/ScriptFileApi~getControllersUsingGETCallback
+     * Callback function to receive the result of the getControllers operation.
+     * @callback module:api/ScriptFileApi~getControllersCallback
      * @param {String} error Error message, if any.
      * @param {'String'} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42,10 +42,10 @@
 
     /**
      * getControllers
-     * @param {module:api/ScriptFileApi~getControllersUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ScriptFileApi~getControllersCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {'String'}
      */
-    this.getControllersUsingGET = function(callback) {
+    this.getControllers = function(callback) {
       var postBody = null;
 
 
@@ -71,8 +71,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getLibrariesUsingGET operation.
-     * @callback module:api/ScriptFileApi~getLibrariesUsingGETCallback
+     * Callback function to receive the result of the getLibraries operation.
+     * @callback module:api/ScriptFileApi~getLibrariesCallback
      * @param {String} error Error message, if any.
      * @param {'String'} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -80,10 +80,10 @@
 
     /**
      * getLibraries
-     * @param {module:api/ScriptFileApi~getLibrariesUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ScriptFileApi~getLibrariesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {'String'}
      */
-    this.getLibrariesUsingGET = function(callback) {
+    this.getLibraries = function(callback) {
       var postBody = null;
 
 

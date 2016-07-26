@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new UserApi. 
+   * Constructs a new UserApi.
    * @alias module:api/UserApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the executeActionUsingPOST operation.
-     * @callback module:api/UserApi~executeActionUsingPOSTCallback
+     * Callback function to receive the result of the executeAction operation.
+     * @callback module:api/UserApi~executeActionCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -45,19 +45,19 @@
      * Typical action is updating/reset password
      * @param {Integer} userId userId
      * @param {module:model/UserActionRepresentation} actionRequest actionRequest
-     * @param {module:api/UserApi~executeActionUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/UserApi~executeActionCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.executeActionUsingPOST = function(userId, actionRequest, callback) {
+    this.executeAction = function(userId, actionRequest, callback) {
       var postBody = actionRequest;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling executeActionUsingPOST";
+        throw "Missing the required parameter 'userId' when calling executeAction";
       }
 
       // verify the required parameter 'actionRequest' is set
       if (actionRequest == undefined || actionRequest == null) {
-        throw "Missing the required parameter 'actionRequest' when calling executeActionUsingPOST";
+        throw "Missing the required parameter 'actionRequest' when calling executeAction";
       }
 
 
@@ -84,8 +84,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getProfilePictureUsingGET1 operation.
-     * @callback module:api/UserApi~getProfilePictureUsingGET1Callback
+     * Callback function to receive the result of the getProfilePicture operation.
+     * @callback module:api/UserApi~getProfilePictureCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -94,14 +94,14 @@
     /**
      * Retrieve user profile picture
      * @param {Integer} userId userId
-     * @param {module:api/UserApi~getProfilePictureUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/UserApi~getProfilePictureCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.getProfilePictureUsingGET1 = function(userId, callback) {
+    this.getProfilePicture = function(userId, callback) {
       var postBody = null;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling getProfilePictureUsingGET1";
+        throw "Missing the required parameter 'userId' when calling getProfilePicture";
       }
 
 
@@ -128,8 +128,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getUserUsingGET2 operation.
-     * @callback module:api/UserApi~getUserUsingGET2Callback
+     * Callback function to receive the result of the getUser operation.
+     * @callback module:api/UserApi~getUserCallback
      * @param {String} error Error message, if any.
      * @param {module:model/UserRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -138,15 +138,15 @@
     /**
      * Retrieve user information
      * @param {Integer} userId userId
-     * @param {module:api/UserApi~getUserUsingGET2Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/UserApi~getUserCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserRepresentation}
      */
-    this.getUserUsingGET2 = function(userId, callback) {
+    this.getUser = function(userId, callback) {
       var postBody = null;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling getUserUsingGET2";
+        throw "Missing the required parameter 'userId' when calling getUser";
       }
 
 
@@ -173,8 +173,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getUsersUsingGET2 operation.
-     * @callback module:api/UserApi~getUsersUsingGET2Callback
+     * Callback function to receive the result of the getUsers operation.
+     * @callback module:api/UserApi~getUsersCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -192,10 +192,10 @@
      * @param {String} opts.excludeProcessId excludeProcessId
      * @param {Integer} opts.groupId groupId
      * @param {Integer} opts.tenantId tenantId
-     * @param {module:api/UserApi~getUsersUsingGET2Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/UserApi~getUsersCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getUsersUsingGET2 = function(opts, callback) {
+    this.getUsers = function(opts, callback) {
       opts = opts || {};
       var postBody = null;
 
@@ -230,24 +230,24 @@
     }
 
     /**
-     * Callback function to receive the result of the requestPasswordResetUsingPOST operation.
-     * @callback module:api/UserApi~requestPasswordResetUsingPOSTCallback
+     * Callback function to receive the result of the requestPasswordReset operation.
+     * @callback module:api/UserApi~requestPasswordResetCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
      */
 
     /**
-     * Request password reset 
+     * Request password reset
      * @param {module:model/ResetPasswordRepresentation} resetPassword resetPassword
-     * @param {module:api/UserApi~requestPasswordResetUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/UserApi~requestPasswordResetCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.requestPasswordResetUsingPOST = function(resetPassword, callback) {
+    this.requestPasswordReset = function(resetPassword, callback) {
       var postBody = resetPassword;
 
       // verify the required parameter 'resetPassword' is set
       if (resetPassword == undefined || resetPassword == null) {
-        throw "Missing the required parameter 'resetPassword' when calling requestPasswordResetUsingPOST";
+        throw "Missing the required parameter 'resetPassword' when calling requestPasswordReset";
       }
 
 
@@ -273,8 +273,8 @@
     }
 
     /**
-     * Callback function to receive the result of the updateUserUsingPUT operation.
-     * @callback module:api/UserApi~updateUserUsingPUTCallback
+     * Callback function to receive the result of the updateUser operation.
+     * @callback module:api/UserApi~updateUserCallback
      * @param {String} error Error message, if any.
      * @param {module:model/UserRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -284,20 +284,20 @@
      * Update user information
      * @param {Integer} userId userId
      * @param {module:model/UserRepresentation} userRequest userRequest
-     * @param {module:api/UserApi~updateUserUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/UserApi~updateUserCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserRepresentation}
      */
-    this.updateUserUsingPUT = function(userId, userRequest, callback) {
+    this.updateUser = function(userId, userRequest, callback) {
       var postBody = userRequest;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling updateUserUsingPUT";
+        throw "Missing the required parameter 'userId' when calling updateUser";
       }
 
       // verify the required parameter 'userRequest' is set
       if (userRequest == undefined || userRequest == null) {
-        throw "Missing the required parameter 'userRequest' when calling updateUserUsingPUT";
+        throw "Missing the required parameter 'userRequest' when calling updateUser";
       }
 
 

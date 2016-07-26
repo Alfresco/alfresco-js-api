@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new ProcessScopeApi. 
+   * Constructs a new ProcessScopeApi.
    * @alias module:api/ProcessScopeApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the getRuntimeProcessScopesUsingPOST operation.
-     * @callback module:api/ProcessScopeApi~getRuntimeProcessScopesUsingPOSTCallback
+     * Callback function to receive the result of the getRuntimeProcessScopes operation.
+     * @callback module:api/ProcessScopeApi~getRuntimeProcessScopesCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/ProcessScopeRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43,15 +43,15 @@
     /**
      * getRuntimeProcessScopes
      * @param {module:model/ProcessScopesRequestRepresentation} processScopesRequest processScopesRequest
-     * @param {module:api/ProcessScopeApi~getRuntimeProcessScopesUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessScopeApi~getRuntimeProcessScopesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/ProcessScopeRepresentation>}
      */
-    this.getRuntimeProcessScopesUsingPOST = function(processScopesRequest, callback) {
+    this.getRuntimeProcessScopes = function(processScopesRequest, callback) {
       var postBody = processScopesRequest;
 
       // verify the required parameter 'processScopesRequest' is set
       if (processScopesRequest == undefined || processScopesRequest == null) {
-        throw "Missing the required parameter 'processScopesRequest' when calling getRuntimeProcessScopesUsingPOST";
+        throw "Missing the required parameter 'processScopesRequest' when calling getRuntimeProcessScopes";
       }
 
 

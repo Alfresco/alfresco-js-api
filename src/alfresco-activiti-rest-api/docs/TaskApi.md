@@ -4,38 +4,38 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**addSubtaskUsingPOST**](TaskApi.md#addSubtaskUsingPOST) | **POST** /api/enterprise/tasks/{taskId}/checklist | Create a task checklist
-[**addTaskCommentUsingPOST**](TaskApi.md#addTaskCommentUsingPOST) | **POST** /api/enterprise/tasks/{taskId}/comments | Add a comment to a Task
-[**assignTaskUsingPUT**](TaskApi.md#assignTaskUsingPUT) | **PUT** /api/enterprise/tasks/{taskId}/action/assign | Assign a task to a user
-[**attachFormUsingPUT**](TaskApi.md#attachFormUsingPUT) | **PUT** /api/enterprise/tasks/{taskId}/action/attach-form | Attach a form to a task
-[**claimTaskUsingPUT**](TaskApi.md#claimTaskUsingPUT) | **PUT** /api/enterprise/tasks/{taskId}/action/claim | Claim a task
-[**completeTaskFormUsingPOST**](TaskApi.md#completeTaskFormUsingPOST) | **POST** /api/enterprise/task-forms/{taskId} | Complete a Task Form
-[**completeTaskUsingPUT**](TaskApi.md#completeTaskUsingPUT) | **PUT** /api/enterprise/tasks/{taskId}/action/complete | Complete Task
-[**createNewTaskUsingPOST**](TaskApi.md#createNewTaskUsingPOST) | **POST** /api/enterprise/tasks | Create a Standalone Task
-[**createRelatedContentOnTaskUsingPOST**](TaskApi.md#createRelatedContentOnTaskUsingPOST) | **POST** /api/enterprise/tasks/{taskId}/content | To relate content (eg from Alfresco) to a task
-[**createRelatedContentOnTaskUsingPOST1**](TaskApi.md#createRelatedContentOnTaskUsingPOST1) | **POST** /api/enterprise/tasks/{taskId}/raw-content | Upload content to a task
-[**deleteTaskUsingDELETE**](TaskApi.md#deleteTaskUsingDELETE) | **DELETE** /api/enterprise/tasks/{taskId} | Delete a Task
-[**filterTasksUsingPOST**](TaskApi.md#filterTasksUsingPOST) | **POST** /api/enterprise/tasks/filter | Filter list of Task
-[**getChecklistUsingGET**](TaskApi.md#getChecklistUsingGET) | **GET** /api/enterprise/tasks/{taskId}/checklist | Retrieve Checklist added to a task
-[**getRelatedContentForTaskUsingGET**](TaskApi.md#getRelatedContentForTaskUsingGET) | **GET** /api/enterprise/tasks/{taskId}/content | Retrieve which content is attached to a task
-[**getRestFieldValuesUsingGET1**](TaskApi.md#getRestFieldValuesUsingGET1) | **GET** /api/enterprise/task-forms/{taskId}/form-values/{field}/{column} | Retrieve Column Field Values
-[**getRestFieldValuesUsingGET2**](TaskApi.md#getRestFieldValuesUsingGET2) | **GET** /api/enterprise/task-forms/{taskId}/form-values/{field} | Retrieve Populated Field Values
-[**getTaskCommentsUsingGET**](TaskApi.md#getTaskCommentsUsingGET) | **GET** /api/enterprise/tasks/{taskId}/comments | Comment list added to Task
-[**getTaskFormUsingGET**](TaskApi.md#getTaskFormUsingGET) | **GET** /api/enterprise/task-forms/{taskId} | Retrieve Task Form
-[**getTaskUsingGET**](TaskApi.md#getTaskUsingGET) | **GET** /api/enterprise/tasks/{taskId} | Task Details
-[**involveUserUsingPUT**](TaskApi.md#involveUserUsingPUT) | **PUT** /api/enterprise/tasks/{taskId}/action/involve | To involve a user with a task
-[**listTasksUsingPOST**](TaskApi.md#listTasksUsingPOST) | **POST** /api/enterprise/tasks/query | List Task
-[**orderChecklistUsingPUT**](TaskApi.md#orderChecklistUsingPUT) | **PUT** /api/enterprise/tasks/{taskId}/checklist | Change the order of items on a checklist
-[**removeFormUsingDELETE**](TaskApi.md#removeFormUsingDELETE) | **DELETE** /api/enterprise/tasks/{taskId}/action/remove-form | Remove a form to a task
-[**removeInvolvedUserUsingPUT**](TaskApi.md#removeInvolvedUserUsingPUT) | **PUT** /api/enterprise/tasks/{taskId}/action/remove-involved | Remove an involved user from a task
-[**saveTaskFormUsingPOST**](TaskApi.md#saveTaskFormUsingPOST) | **POST** /api/enterprise/task-forms/{taskId}/save-form | Save Task Form
-[**unclaimTaskUsingPUT**](TaskApi.md#unclaimTaskUsingPUT) | **PUT** /api/enterprise/tasks/{taskId}/action/unclaim | Unclaim a task
-[**updateTaskUsingPUT**](TaskApi.md#updateTaskUsingPUT) | **PUT** /api/enterprise/tasks/{taskId} | Update Task Details
+[**addSubtask**](TaskApi.md#addSubtask) | **POST** /api/enterprise/tasks/{taskId}/checklist | Create a task checklist
+[**addTaskComment**](TaskApi.md#addTaskComment) | **POST** /api/enterprise/tasks/{taskId}/comments | Add a comment to a Task
+[**assignTask**](TaskApi.md#assignTask) | **PUT** /api/enterprise/tasks/{taskId}/action/assign | Assign a task to a user
+[**attachForm**](TaskApi.md#attachForm) | **PUT** /api/enterprise/tasks/{taskId}/action/attach-form | Attach a form to a task
+[**claimTask**](TaskApi.md#claimTask) | **PUT** /api/enterprise/tasks/{taskId}/action/claim | Claim a task
+[**completeTaskForm**](TaskApi.md#completeTaskForm) | **POST** /api/enterprise/task-forms/{taskId} | Complete a Task Form
+[**completeTask**](TaskApi.md#completeTask) | **PUT** /api/enterprise/tasks/{taskId}/action/complete | Complete Task
+[**createNewTask**](TaskApi.md#createNewTask) | **POST** /api/enterprise/tasks | Create a Standalone Task
+[**createRelatedContentOnTask**](TaskApi.md#createRelatedContentOnTask) | **POST** /api/enterprise/tasks/{taskId}/content | To relate content (eg from Alfresco) to a task
+[**createRelatedContentOnTask**](TaskApi.md#createRelatedContentOnTask) | **POST** /api/enterprise/tasks/{taskId}/raw-content | Upload content to a task
+[**deleteTask**](TaskApi.md#deleteTask) | **DELETE** /api/enterprise/tasks/{taskId} | Delete a Task
+[**filterTasks**](TaskApi.md#filterTasks) | **POST** /api/enterprise/tasks/filter | Filter list of Task
+[**getChecklist**](TaskApi.md#getChecklist) | **GET** /api/enterprise/tasks/{taskId}/checklist | Retrieve Checklist added to a task
+[**getRelatedContentForTask**](TaskApi.md#getRelatedContentForTask) | **GET** /api/enterprise/tasks/{taskId}/content | Retrieve which content is attached to a task
+[**getRestFieldValues**](TaskApi.md#getRestFieldValues) | **GET** /api/enterprise/task-forms/{taskId}/form-values/{field}/{column} | Retrieve Column Field Values
+[**getRestFieldValues**](TaskApi.md#getRestFieldValues) | **GET** /api/enterprise/task-forms/{taskId}/form-values/{field} | Retrieve Populated Field Values
+[**getTaskComments**](TaskApi.md#getTaskComments) | **GET** /api/enterprise/tasks/{taskId}/comments | Comment list added to Task
+[**getTaskForm**](TaskApi.md#getTaskForm) | **GET** /api/enterprise/task-forms/{taskId} | Retrieve Task Form
+[**getTask**](TaskApi.md#getTask) | **GET** /api/enterprise/tasks/{taskId} | Task Details
+[**involveUser**](TaskApi.md#involveUser) | **PUT** /api/enterprise/tasks/{taskId}/action/involve | To involve a user with a task
+[**listTasks**](TaskApi.md#listTasks) | **POST** /api/enterprise/tasks/query | List Task
+[**orderChecklist**](TaskApi.md#orderChecklist) | **PUT** /api/enterprise/tasks/{taskId}/checklist | Change the order of items on a checklist
+[**removeForm**](TaskApi.md#removeForm) | **DELETE** /api/enterprise/tasks/{taskId}/action/remove-form | Remove a form to a task
+[**removeInvolvedUser**](TaskApi.md#removeInvolvedUser) | **PUT** /api/enterprise/tasks/{taskId}/action/remove-involved | Remove an involved user from a task
+[**saveTaskForm**](TaskApi.md#saveTaskForm) | **POST** /api/enterprise/task-forms/{taskId}/save-form | Save Task Form
+[**unclaimTask**](TaskApi.md#unclaimTask) | **PUT** /api/enterprise/tasks/{taskId}/action/unclaim | Unclaim a task
+[**updateTask**](TaskApi.md#updateTask) | **PUT** /api/enterprise/tasks/{taskId} | Update Task Details
 
 
-<a name="addSubtaskUsingPOST"></a>
-# **addSubtaskUsingPOST**
-> TaskRepresentation addSubtaskUsingPOST(taskId, taskRepresentation)
+<a name="addSubtask"></a>
+# **addSubtask**
+> TaskRepresentation addSubtask(taskId, taskRepresentation)
 
 Create a task checklist
 
@@ -57,7 +57,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.addSubtaskUsingPOST(taskId, taskRepresentation, callback);
+apiInstance.addSubtask(taskId, taskRepresentation, callback);
 ```
 
 ### Parameters
@@ -80,9 +80,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="addTaskCommentUsingPOST"></a>
-# **addTaskCommentUsingPOST**
-> CommentRepresentation addTaskCommentUsingPOST(commentRequest, taskId)
+<a name="addTaskComment"></a>
+# **addTaskComment**
+> CommentRepresentation addTaskComment(commentRequest, taskId)
 
 Add a comment to a Task
 
@@ -104,7 +104,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.addTaskCommentUsingPOST(commentRequest, taskId, callback);
+apiInstance.addTaskComment(commentRequest, taskId, callback);
 ```
 
 ### Parameters
@@ -127,9 +127,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="assignTaskUsingPUT"></a>
-# **assignTaskUsingPUT**
-> TaskRepresentation assignTaskUsingPUT(taskId, requestNode)
+<a name="assignTask"></a>
+# **assignTask**
+> TaskRepresentation assignTask(taskId, requestNode)
 
 Assign a task to a user
 
@@ -151,7 +151,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.assignTaskUsingPUT(taskId, requestNode, callback);
+apiInstance.assignTask(taskId, requestNode, callback);
 ```
 
 ### Parameters
@@ -174,9 +174,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="attachFormUsingPUT"></a>
-# **attachFormUsingPUT**
-> attachFormUsingPUT(taskId, requestNode)
+<a name="attachForm"></a>
+# **attachForm**
+> attachForm(taskId, requestNode)
 
 Attach a form to a task
 
@@ -198,7 +198,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.attachFormUsingPUT(taskId, requestNode, callback);
+apiInstance.attachForm(taskId, requestNode, callback);
 ```
 
 ### Parameters
@@ -221,9 +221,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="claimTaskUsingPUT"></a>
-# **claimTaskUsingPUT**
-> claimTaskUsingPUT(taskId)
+<a name="claimTask"></a>
+# **claimTask**
+> claimTask(taskId)
 
 Claim a task
 
@@ -245,7 +245,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.claimTaskUsingPUT(taskId, callback);
+apiInstance.claimTask(taskId, callback);
 ```
 
 ### Parameters
@@ -267,9 +267,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="completeTaskFormUsingPOST"></a>
-# **completeTaskFormUsingPOST**
-> completeTaskFormUsingPOST(taskId, completeTaskFormRepresentation)
+<a name="completeTaskForm"></a>
+# **completeTaskForm**
+> completeTaskForm(taskId, completeTaskFormRepresentation)
 
 Complete a Task Form
 
@@ -291,7 +291,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.completeTaskFormUsingPOST(taskId, completeTaskFormRepresentation, callback);
+apiInstance.completeTaskForm(taskId, completeTaskFormRepresentation, callback);
 ```
 
 ### Parameters
@@ -314,9 +314,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="completeTaskUsingPUT"></a>
-# **completeTaskUsingPUT**
-> completeTaskUsingPUT(taskId)
+<a name="completeTask"></a>
+# **completeTask**
+> completeTask(taskId)
 
 Complete Task
 
@@ -338,7 +338,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.completeTaskUsingPUT(taskId, callback);
+apiInstance.completeTask(taskId, callback);
 ```
 
 ### Parameters
@@ -360,9 +360,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="createNewTaskUsingPOST"></a>
-# **createNewTaskUsingPOST**
-> TaskRepresentation createNewTaskUsingPOST(taskRepresentation)
+<a name="createNewTask"></a>
+# **createNewTask**
+> TaskRepresentation createNewTask(taskRepresentation)
 
 Create a Standalone Task
 
@@ -384,7 +384,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.createNewTaskUsingPOST(taskRepresentation, callback);
+apiInstance.createNewTask(taskRepresentation, callback);
 ```
 
 ### Parameters
@@ -406,9 +406,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="createRelatedContentOnTaskUsingPOST"></a>
-# **createRelatedContentOnTaskUsingPOST**
-> RelatedContentRepresentation createRelatedContentOnTaskUsingPOST(taskId, relatedContent, opts)
+<a name="createRelatedContentOnTask"></a>
+# **createRelatedContentOnTask**
+> RelatedContentRepresentation createRelatedContentOnTask(taskId, relatedContent, opts)
 
 To relate content (eg from Alfresco) to a task
 
@@ -433,7 +433,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.createRelatedContentOnTaskUsingPOST(taskId, relatedContent, opts, callback);
+apiInstance.createRelatedContentOnTask(taskId, relatedContent, opts, callback);
 ```
 
 ### Parameters
@@ -457,9 +457,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="createRelatedContentOnTaskUsingPOST1"></a>
-# **createRelatedContentOnTaskUsingPOST1**
-> RelatedContentRepresentation createRelatedContentOnTaskUsingPOST1(taskId, file, opts)
+<a name="createRelatedContentOnTask"></a>
+# **createRelatedContentOnTask**
+> RelatedContentRepresentation createRelatedContentOnTask(taskId, file, opts)
 
 Upload content to a task
 
@@ -484,7 +484,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.createRelatedContentOnTaskUsingPOST1(taskId, file, opts, callback);
+apiInstance.createRelatedContentOnTask(taskId, file, opts, callback);
 ```
 
 ### Parameters
@@ -508,9 +508,9 @@ No authorization required
  - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
-<a name="deleteTaskUsingDELETE"></a>
-# **deleteTaskUsingDELETE**
-> deleteTaskUsingDELETE(taskId)
+<a name="deleteTask"></a>
+# **deleteTask**
+> deleteTask(taskId)
 
 Delete a Task
 
@@ -530,7 +530,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.deleteTaskUsingDELETE(taskId, callback);
+apiInstance.deleteTask(taskId, callback);
 ```
 
 ### Parameters
@@ -552,9 +552,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="filterTasksUsingPOST"></a>
-# **filterTasksUsingPOST**
-> ResultListDataRepresentation filterTasksUsingPOST(requestNode)
+<a name="filterTasks"></a>
+# **filterTasks**
+> ResultListDataRepresentation filterTasks(requestNode)
 
 Filter list of Task
 
@@ -574,7 +574,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.filterTasksUsingPOST(requestNode, callback);
+apiInstance.filterTasks(requestNode, callback);
 ```
 
 ### Parameters
@@ -596,9 +596,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getChecklistUsingGET"></a>
-# **getChecklistUsingGET**
-> ResultListDataRepresentation getChecklistUsingGET(taskId)
+<a name="getChecklist"></a>
+# **getChecklist**
+> ResultListDataRepresentation getChecklist(taskId)
 
 Retrieve Checklist added to a task
 
@@ -618,7 +618,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getChecklistUsingGET(taskId, callback);
+apiInstance.getChecklist(taskId, callback);
 ```
 
 ### Parameters
@@ -640,9 +640,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getRelatedContentForTaskUsingGET"></a>
-# **getRelatedContentForTaskUsingGET**
-> ResultListDataRepresentation getRelatedContentForTaskUsingGET(taskId)
+<a name="getRelatedContentForTask"></a>
+# **getRelatedContentForTask**
+> ResultListDataRepresentation getRelatedContentForTask(taskId)
 
 Retrieve which content is attached to a task
 
@@ -662,7 +662,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getRelatedContentForTaskUsingGET(taskId, callback);
+apiInstance.getRelatedContentForTask(taskId, callback);
 ```
 
 ### Parameters
@@ -684,9 +684,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getRestFieldValuesUsingGET1"></a>
-# **getRestFieldValuesUsingGET1**
-> [FormValueRepresentation] getRestFieldValuesUsingGET1(taskId, field, column)
+<a name="getRestFieldValues"></a>
+# **getRestFieldValues**
+> [FormValueRepresentation] getRestFieldValues(taskId, field, column)
 
 Retrieve Column Field Values
 
@@ -712,7 +712,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getRestFieldValuesUsingGET1(taskId, field, column, callback);
+apiInstance.getRestFieldValues(taskId, field, column, callback);
 ```
 
 ### Parameters
@@ -736,9 +736,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getRestFieldValuesUsingGET2"></a>
-# **getRestFieldValuesUsingGET2**
-> [FormValueRepresentation] getRestFieldValuesUsingGET2(taskId, field)
+<a name="getRestFieldValues"></a>
+# **getRestFieldValues**
+> [FormValueRepresentation] getRestFieldValues(taskId, field)
 
 Retrieve Populated Field Values
 
@@ -762,7 +762,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getRestFieldValuesUsingGET2(taskId, field, callback);
+apiInstance.getRestFieldValues(taskId, field, callback);
 ```
 
 ### Parameters
@@ -785,9 +785,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getTaskCommentsUsingGET"></a>
-# **getTaskCommentsUsingGET**
-> ResultListDataRepresentation getTaskCommentsUsingGET(taskId, opts)
+<a name="getTaskComments"></a>
+# **getTaskComments**
+> ResultListDataRepresentation getTaskComments(taskId, opts)
 
 Comment list added to Task
 
@@ -810,7 +810,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getTaskCommentsUsingGET(taskId, opts, callback);
+apiInstance.getTaskComments(taskId, opts, callback);
 ```
 
 ### Parameters
@@ -833,9 +833,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getTaskFormUsingGET"></a>
-# **getTaskFormUsingGET**
-> FormDefinitionRepresentation getTaskFormUsingGET(taskId)
+<a name="getTaskForm"></a>
+# **getTaskForm**
+> FormDefinitionRepresentation getTaskForm(taskId)
 
 Retrieve Task Form
 
@@ -855,7 +855,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getTaskFormUsingGET(taskId, callback);
+apiInstance.getTaskForm(taskId, callback);
 ```
 
 ### Parameters
@@ -877,9 +877,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getTaskUsingGET"></a>
-# **getTaskUsingGET**
-> TaskRepresentation getTaskUsingGET(taskId)
+<a name="getTask"></a>
+# **getTask**
+> TaskRepresentation getTask(taskId)
 
 Task Details
 
@@ -899,7 +899,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getTaskUsingGET(taskId, callback);
+apiInstance.getTask(taskId, callback);
 ```
 
 ### Parameters
@@ -921,9 +921,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="involveUserUsingPUT"></a>
-# **involveUserUsingPUT**
-> involveUserUsingPUT(taskId, requestNode)
+<a name="involveUser"></a>
+# **involveUser**
+> involveUser(taskId, requestNode)
 
 To involve a user with a task
 
@@ -945,7 +945,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.involveUserUsingPUT(taskId, requestNode, callback);
+apiInstance.involveUser(taskId, requestNode, callback);
 ```
 
 ### Parameters
@@ -968,9 +968,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="listTasksUsingPOST"></a>
-# **listTasksUsingPOST**
-> ResultListDataRepresentation listTasksUsingPOST(requestNode)
+<a name="listTasks"></a>
+# **listTasks**
+> ResultListDataRepresentation listTasks(requestNode)
 
 List Task
 
@@ -990,7 +990,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.listTasksUsingPOST(requestNode, callback);
+apiInstance.listTasks(requestNode, callback);
 ```
 
 ### Parameters
@@ -1012,9 +1012,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="orderChecklistUsingPUT"></a>
-# **orderChecklistUsingPUT**
-> orderChecklistUsingPUT(taskId, orderRepresentation)
+<a name="orderChecklist"></a>
+# **orderChecklist**
+> orderChecklist(taskId, orderRepresentation)
 
 Change the order of items on a checklist
 
@@ -1036,7 +1036,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.orderChecklistUsingPUT(taskId, orderRepresentation, callback);
+apiInstance.orderChecklist(taskId, orderRepresentation, callback);
 ```
 
 ### Parameters
@@ -1059,9 +1059,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="removeFormUsingDELETE"></a>
-# **removeFormUsingDELETE**
-> removeFormUsingDELETE(taskId)
+<a name="removeForm"></a>
+# **removeForm**
+> removeForm(taskId)
 
 Remove a form to a task
 
@@ -1081,7 +1081,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.removeFormUsingDELETE(taskId, callback);
+apiInstance.removeForm(taskId, callback);
 ```
 
 ### Parameters
@@ -1103,9 +1103,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="removeInvolvedUserUsingPUT"></a>
-# **removeInvolvedUserUsingPUT**
-> removeInvolvedUserUsingPUT(taskId, requestNode)
+<a name="removeInvolvedUser"></a>
+# **removeInvolvedUser**
+> removeInvolvedUser(taskId, requestNode)
 
 Remove an involved user from a task
 
@@ -1127,7 +1127,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.removeInvolvedUserUsingPUT(taskId, requestNode, callback);
+apiInstance.removeInvolvedUser(taskId, requestNode, callback);
 ```
 
 ### Parameters
@@ -1150,9 +1150,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="saveTaskFormUsingPOST"></a>
-# **saveTaskFormUsingPOST**
-> saveTaskFormUsingPOST(taskId, saveTaskFormRepresentation)
+<a name="saveTaskForm"></a>
+# **saveTaskForm**
+> saveTaskForm(taskId, saveTaskFormRepresentation)
 
 Save Task Form
 
@@ -1174,7 +1174,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.saveTaskFormUsingPOST(taskId, saveTaskFormRepresentation, callback);
+apiInstance.saveTaskForm(taskId, saveTaskFormRepresentation, callback);
 ```
 
 ### Parameters
@@ -1197,9 +1197,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="unclaimTaskUsingPUT"></a>
-# **unclaimTaskUsingPUT**
-> unclaimTaskUsingPUT(taskId)
+<a name="unclaimTask"></a>
+# **unclaimTask**
+> unclaimTask(taskId)
 
 Unclaim a task
 
@@ -1221,7 +1221,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.unclaimTaskUsingPUT(taskId, callback);
+apiInstance.unclaimTask(taskId, callback);
 ```
 
 ### Parameters
@@ -1243,9 +1243,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="updateTaskUsingPUT"></a>
-# **updateTaskUsingPUT**
-> TaskRepresentation updateTaskUsingPUT(taskId, updated)
+<a name="updateTask"></a>
+# **updateTask**
+> TaskRepresentation updateTask(taskId, updated)
 
 Update Task Details
 
@@ -1269,7 +1269,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.updateTaskUsingPUT(taskId, updated, callback);
+apiInstance.updateTask(taskId, updated, callback);
 ```
 
 ### Parameters

@@ -4,27 +4,27 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**activateUsingPOST1**](AdminGroupsApi.md#activateUsingPOST1) | **POST** /api/enterprise/admin/groups/{groupId}/action/activate | activate
-[**addAllUsersToGroupUsingPOST1**](AdminGroupsApi.md#addAllUsersToGroupUsingPOST1) | **POST** /api/enterprise/admin/groups/{groupId}/add-all-users | addAllUsersToGroup
-[**addGroupCapabilitiesUsingPOST1**](AdminGroupsApi.md#addGroupCapabilitiesUsingPOST1) | **POST** /api/enterprise/admin/groups/{groupId}/capabilities | addGroupCapabilities
-[**addGroupMemberUsingPOST1**](AdminGroupsApi.md#addGroupMemberUsingPOST1) | **POST** /api/enterprise/admin/groups/{groupId}/members/{userId} | addGroupMember
-[**addRelatedGroupUsingPOST1**](AdminGroupsApi.md#addRelatedGroupUsingPOST1) | **POST** /api/enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId} | addRelatedGroup
-[**createNewGroupUsingPOST1**](AdminGroupsApi.md#createNewGroupUsingPOST1) | **POST** /api/enterprise/admin/groups | createNewGroup
-[**deleteGroupCapabilityUsingDELETE1**](AdminGroupsApi.md#deleteGroupCapabilityUsingDELETE1) | **DELETE** /api/enterprise/admin/groups/{groupId}/capabilities/{groupCapabilityId} | deleteGroupCapability
-[**deleteGroupMemberUsingDELETE1**](AdminGroupsApi.md#deleteGroupMemberUsingDELETE1) | **DELETE** /api/enterprise/admin/groups/{groupId}/members/{userId} | deleteGroupMember
-[**deleteGroupUsingDELETE1**](AdminGroupsApi.md#deleteGroupUsingDELETE1) | **DELETE** /api/enterprise/admin/groups/{groupId} | deleteGroup
-[**deleteRelatedGroupUsingDELETE1**](AdminGroupsApi.md#deleteRelatedGroupUsingDELETE1) | **DELETE** /api/enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId} | deleteRelatedGroup
-[**getCapabilitiesUsingGET1**](AdminGroupsApi.md#getCapabilitiesUsingGET1) | **GET** /api/enterprise/admin/groups/{groupId}/potential-capabilities | getCapabilities
-[**getGroupUsersUsingGET1**](AdminGroupsApi.md#getGroupUsersUsingGET1) | **GET** /api/enterprise/admin/groups/{groupId}/users | getGroupUsers
-[**getGroupUsingGET1**](AdminGroupsApi.md#getGroupUsingGET1) | **GET** /api/enterprise/admin/groups/{groupId} | getGroup
-[**getGroupsUsingGET2**](AdminGroupsApi.md#getGroupsUsingGET2) | **GET** /api/enterprise/admin/groups | getGroups
-[**getRelatedGroupsUsingGET1**](AdminGroupsApi.md#getRelatedGroupsUsingGET1) | **GET** /api/enterprise/admin/groups/{groupId}/related-groups | getRelatedGroups
-[**updateGroupUsingPUT1**](AdminGroupsApi.md#updateGroupUsingPUT1) | **PUT** /api/enterprise/admin/groups/{groupId} | updateGroup
+[**activate**](AdminGroupsApi.md#activate) | **POST** /api/enterprise/admin/groups/{groupId}/action/activate | activate
+[**addAllUsersToGroup**](AdminGroupsApi.md#addAllUsersToGroup) | **POST** /api/enterprise/admin/groups/{groupId}/add-all-users | addAllUsersToGroup
+[**addGroupCapabilities**](AdminGroupsApi.md#addGroupCapabilities) | **POST** /api/enterprise/admin/groups/{groupId}/capabilities | addGroupCapabilities
+[**addGroupMember**](AdminGroupsApi.md#addGroupMember) | **POST** /api/enterprise/admin/groups/{groupId}/members/{userId} | addGroupMember
+[**addRelatedGroup**](AdminGroupsApi.md#addRelatedGroup) | **POST** /api/enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId} | addRelatedGroup
+[**createNewGroup**](AdminGroupsApi.md#createNewGroup) | **POST** /api/enterprise/admin/groups | createNewGroup
+[**deleteGroupCapability**](AdminGroupsApi.md#deleteGroupCapability) | **DELETE** /api/enterprise/admin/groups/{groupId}/capabilities/{groupCapabilityId} | deleteGroupCapability
+[**deleteGroupMember**](AdminGroupsApi.md#deleteGroupMember) | **DELETE** /api/enterprise/admin/groups/{groupId}/members/{userId} | deleteGroupMember
+[**deleteGroup**](AdminGroupsApi.md#deleteGroup) | **DELETE** /api/enterprise/admin/groups/{groupId} | deleteGroup
+[**deleteRelatedGroup**](AdminGroupsApi.md#deleteRelatedGroup) | **DELETE** /api/enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId} | deleteRelatedGroup
+[**getCapabilities**](AdminGroupsApi.md#getCapabilities) | **GET** /api/enterprise/admin/groups/{groupId}/potential-capabilities | getCapabilities
+[**getGroupUsers**](AdminGroupsApi.md#getGroupUsers) | **GET** /api/enterprise/admin/groups/{groupId}/users | getGroupUsers
+[**getGroup**](AdminGroupsApi.md#getGroup) | **GET** /api/enterprise/admin/groups/{groupId} | getGroup
+[**getGroups**](AdminGroupsApi.md#getGroups) | **GET** /api/enterprise/admin/groups | getGroups
+[**getRelatedGroups**](AdminGroupsApi.md#getRelatedGroups) | **GET** /api/enterprise/admin/groups/{groupId}/related-groups | getRelatedGroups
+[**updateGroup**](AdminGroupsApi.md#updateGroup) | **PUT** /api/enterprise/admin/groups/{groupId} | updateGroup
 
 
-<a name="activateUsingPOST1"></a>
-# **activateUsingPOST1**
-> activateUsingPOST1(groupId)
+<a name="activate"></a>
+# **activate**
+> activate(groupId)
 
 activate
 
@@ -44,7 +44,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.activateUsingPOST1(groupId, callback);
+apiInstance.activate(groupId, callback);
 ```
 
 ### Parameters
@@ -66,9 +66,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="addAllUsersToGroupUsingPOST1"></a>
-# **addAllUsersToGroupUsingPOST1**
-> addAllUsersToGroupUsingPOST1(groupId)
+<a name="addAllUsersToGroup"></a>
+# **addAllUsersToGroup**
+> addAllUsersToGroup(groupId)
 
 addAllUsersToGroup
 
@@ -88,7 +88,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.addAllUsersToGroupUsingPOST1(groupId, callback);
+apiInstance.addAllUsersToGroup(groupId, callback);
 ```
 
 ### Parameters
@@ -110,9 +110,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="addGroupCapabilitiesUsingPOST1"></a>
-# **addGroupCapabilitiesUsingPOST1**
-> addGroupCapabilitiesUsingPOST1(groupId, addGroupCapabilitiesRepresentation)
+<a name="addGroupCapabilities"></a>
+# **addGroupCapabilities**
+> addGroupCapabilities(groupId, addGroupCapabilitiesRepresentation)
 
 addGroupCapabilities
 
@@ -134,7 +134,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.addGroupCapabilitiesUsingPOST1(groupId, addGroupCapabilitiesRepresentation, callback);
+apiInstance.addGroupCapabilities(groupId, addGroupCapabilitiesRepresentation, callback);
 ```
 
 ### Parameters
@@ -157,9 +157,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="addGroupMemberUsingPOST1"></a>
-# **addGroupMemberUsingPOST1**
-> addGroupMemberUsingPOST1(groupId, userId)
+<a name="addGroupMember"></a>
+# **addGroupMember**
+> addGroupMember(groupId, userId)
 
 addGroupMember
 
@@ -181,7 +181,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.addGroupMemberUsingPOST1(groupId, userId, callback);
+apiInstance.addGroupMember(groupId, userId, callback);
 ```
 
 ### Parameters
@@ -204,9 +204,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="addRelatedGroupUsingPOST1"></a>
-# **addRelatedGroupUsingPOST1**
-> addRelatedGroupUsingPOST1(groupId, relatedGroupId, type)
+<a name="addRelatedGroup"></a>
+# **addRelatedGroup**
+> addRelatedGroup(groupId, relatedGroupId, type)
 
 addRelatedGroup
 
@@ -230,7 +230,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.addRelatedGroupUsingPOST1(groupId, relatedGroupId, type, callback);
+apiInstance.addRelatedGroup(groupId, relatedGroupId, type, callback);
 ```
 
 ### Parameters
@@ -254,9 +254,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="createNewGroupUsingPOST1"></a>
-# **createNewGroupUsingPOST1**
-> GroupRepresentation createNewGroupUsingPOST1(groupRepresentation)
+<a name="createNewGroup"></a>
+# **createNewGroup**
+> GroupRepresentation createNewGroup(groupRepresentation)
 
 createNewGroup
 
@@ -276,7 +276,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.createNewGroupUsingPOST1(groupRepresentation, callback);
+apiInstance.createNewGroup(groupRepresentation, callback);
 ```
 
 ### Parameters
@@ -298,9 +298,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="deleteGroupCapabilityUsingDELETE1"></a>
-# **deleteGroupCapabilityUsingDELETE1**
-> deleteGroupCapabilityUsingDELETE1(groupId, groupCapabilityId)
+<a name="deleteGroupCapability"></a>
+# **deleteGroupCapability**
+> deleteGroupCapability(groupId, groupCapabilityId)
 
 deleteGroupCapability
 
@@ -322,7 +322,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.deleteGroupCapabilityUsingDELETE1(groupId, groupCapabilityId, callback);
+apiInstance.deleteGroupCapability(groupId, groupCapabilityId, callback);
 ```
 
 ### Parameters
@@ -345,9 +345,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="deleteGroupMemberUsingDELETE1"></a>
-# **deleteGroupMemberUsingDELETE1**
-> deleteGroupMemberUsingDELETE1(groupId, userId)
+<a name="deleteGroupMember"></a>
+# **deleteGroupMember**
+> deleteGroupMember(groupId, userId)
 
 deleteGroupMember
 
@@ -369,7 +369,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.deleteGroupMemberUsingDELETE1(groupId, userId, callback);
+apiInstance.deleteGroupMember(groupId, userId, callback);
 ```
 
 ### Parameters
@@ -392,9 +392,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="deleteGroupUsingDELETE1"></a>
-# **deleteGroupUsingDELETE1**
-> deleteGroupUsingDELETE1(groupId)
+<a name="deleteGroup"></a>
+# **deleteGroup**
+> deleteGroup(groupId)
 
 deleteGroup
 
@@ -414,7 +414,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.deleteGroupUsingDELETE1(groupId, callback);
+apiInstance.deleteGroup(groupId, callback);
 ```
 
 ### Parameters
@@ -436,9 +436,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="deleteRelatedGroupUsingDELETE1"></a>
-# **deleteRelatedGroupUsingDELETE1**
-> deleteRelatedGroupUsingDELETE1(groupId, relatedGroupId)
+<a name="deleteRelatedGroup"></a>
+# **deleteRelatedGroup**
+> deleteRelatedGroup(groupId, relatedGroupId)
 
 deleteRelatedGroup
 
@@ -460,7 +460,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.deleteRelatedGroupUsingDELETE1(groupId, relatedGroupId, callback);
+apiInstance.deleteRelatedGroup(groupId, relatedGroupId, callback);
 ```
 
 ### Parameters
@@ -483,9 +483,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getCapabilitiesUsingGET1"></a>
-# **getCapabilitiesUsingGET1**
-> [&#39;String&#39;] getCapabilitiesUsingGET1(groupId)
+<a name="getCapabilities"></a>
+# **getCapabilities**
+> [&#39;String&#39;] getCapabilities(groupId)
 
 getCapabilities
 
@@ -505,7 +505,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getCapabilitiesUsingGET1(groupId, callback);
+apiInstance.getCapabilities(groupId, callback);
 ```
 
 ### Parameters
@@ -527,9 +527,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getGroupUsersUsingGET1"></a>
-# **getGroupUsersUsingGET1**
-> ResultListDataRepresentation getGroupUsersUsingGET1(groupId, opts)
+<a name="getGroupUsers"></a>
+# **getGroupUsers**
+> ResultListDataRepresentation getGroupUsers(groupId, opts)
 
 getGroupUsers
 
@@ -554,7 +554,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getGroupUsersUsingGET1(groupId, opts, callback);
+apiInstance.getGroupUsers(groupId, opts, callback);
 ```
 
 ### Parameters
@@ -579,9 +579,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getGroupUsingGET1"></a>
-# **getGroupUsingGET1**
-> AbstractGroupRepresentation getGroupUsingGET1(groupId, opts)
+<a name="getGroup"></a>
+# **getGroup**
+> AbstractGroupRepresentation getGroup(groupId, opts)
 
 getGroup
 
@@ -605,7 +605,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getGroupUsingGET1(groupId, opts, callback);
+apiInstance.getGroup(groupId, opts, callback);
 ```
 
 ### Parameters
@@ -629,9 +629,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getGroupsUsingGET2"></a>
-# **getGroupsUsingGET2**
-> [LightGroupRepresentation] getGroupsUsingGET2(opts)
+<a name="getGroups"></a>
+# **getGroups**
+> [LightGroupRepresentation] getGroups(opts)
 
 getGroups
 
@@ -654,7 +654,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getGroupsUsingGET2(opts, callback);
+apiInstance.getGroups(opts, callback);
 ```
 
 ### Parameters
@@ -678,9 +678,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getRelatedGroupsUsingGET1"></a>
-# **getRelatedGroupsUsingGET1**
-> [LightGroupRepresentation] getRelatedGroupsUsingGET1(groupId)
+<a name="getRelatedGroups"></a>
+# **getRelatedGroups**
+> [LightGroupRepresentation] getRelatedGroups(groupId)
 
 getRelatedGroups
 
@@ -700,7 +700,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getRelatedGroupsUsingGET1(groupId, callback);
+apiInstance.getRelatedGroups(groupId, callback);
 ```
 
 ### Parameters
@@ -722,9 +722,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="updateGroupUsingPUT1"></a>
-# **updateGroupUsingPUT1**
-> GroupRepresentation updateGroupUsingPUT1(groupId, groupRepresentation)
+<a name="updateGroup"></a>
+# **updateGroup**
+> GroupRepresentation updateGroup(groupId, groupRepresentation)
 
 updateGroup
 
@@ -746,7 +746,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.updateGroupUsingPUT1(groupId, groupRepresentation, callback);
+apiInstance.updateGroup(groupId, groupRepresentation, callback);
 ```
 
 ### Parameters

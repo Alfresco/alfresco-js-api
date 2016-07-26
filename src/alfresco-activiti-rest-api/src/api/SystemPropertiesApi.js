@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new SystemPropertiesApi. 
+   * Constructs a new SystemPropertiesApi.
    * @alias module:api/SystemPropertiesApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the getPropertiesUsingGET operation.
-     * @callback module:api/SystemPropertiesApi~getPropertiesUsingGETCallback
+     * Callback function to receive the result of the getProperties operation.
+     * @callback module:api/SystemPropertiesApi~getPropertiesCallback
      * @param {String} error Error message, if any.
      * @param {module:model/SystemPropertiesRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43,10 +43,10 @@
     /**
      * Retrieve System Properties
      * Typical value is AllowInvolveByEmail
-     * @param {module:api/SystemPropertiesApi~getPropertiesUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/SystemPropertiesApi~getPropertiesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/SystemPropertiesRepresentation}
      */
-    this.getPropertiesUsingGET = function(callback) {
+    this.getProperties = function(callback) {
       var postBody = null;
 
 

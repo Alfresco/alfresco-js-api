@@ -4,12 +4,12 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getProcessDefinitionsUsingGET**](ProcessDefinitionsApi.md#getProcessDefinitionsUsingGET) | **GET** /api/enterprise/process-definitions | Retrieve a list of process definitions
+[**getProcessDefinitions**](ProcessDefinitionsApi.md#getProcessDefinitions) | **GET** /api/enterprise/process-definitions | Retrieve a list of process definitions
 
 
-<a name="getProcessDefinitionsUsingGET"></a>
-# **getProcessDefinitionsUsingGET**
-> ResultListDataRepresentation getProcessDefinitionsUsingGET(opts)
+<a name="getProcessDefinitions"></a>
+# **getProcessDefinitions**
+> ResultListDataRepresentation getProcessDefinitions(opts)
 
 Retrieve a list of process definitions
 
@@ -33,7 +33,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getProcessDefinitionsUsingGET(opts, callback);
+apiInstance.getProcessDefinitions(opts, callback);
 ```
 
 ### Parameters

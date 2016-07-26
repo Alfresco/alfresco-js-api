@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new UsersWorkflowApi. 
+   * Constructs a new UsersWorkflowApi.
    * @alias module:api/UsersWorkflowApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the getUsersUsingGET2 operation.
-     * @callback module:api/UsersWorkflowApi~getUsersUsingGET2Callback
+     * Callback function to receive the result of the getUsers operation.
+     * @callback module:api/UsersWorkflowApi~getUsersCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -52,10 +52,10 @@
      * @param {String} opts.excludeProcessId excludeProcessId
      * @param {Integer} opts.groupId groupId
      * @param {Integer} opts.tenantId tenantId
-     * @param {module:api/UsersWorkflowApi~getUsersUsingGET2Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/UsersWorkflowApi~getUsersCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getUsersUsingGET2 = function(opts, callback) {
+    this.getUsers = function(opts, callback) {
       opts = opts || {};
       var postBody = null;
 

@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new IntegrationAlfrescoOnPremiseApi. 
+   * Constructs a new IntegrationAlfrescoOnPremiseApi.
    * @alias module:api/IntegrationAlfrescoOnPremiseApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the getAllSitesUsingGET1 operation.
-     * @callback module:api/IntegrationAlfrescoOnPremiseApi~getAllSitesUsingGET1Callback
+     * Callback function to receive the result of the getAllSites operation.
+     * @callback module:api/IntegrationAlfrescoOnPremiseApi~getAllSitesCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44,15 +44,15 @@
      * List Alfresco sites
      * Returns ALL Sites
      * @param {String} repositoryId repositoryId
-     * @param {module:api/IntegrationAlfrescoOnPremiseApi~getAllSitesUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationAlfrescoOnPremiseApi~getAllSitesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAllSitesUsingGET1 = function(repositoryId, callback) {
+    this.getAllSites = function(repositoryId, callback) {
       var postBody = null;
 
       // verify the required parameter 'repositoryId' is set
       if (repositoryId == undefined || repositoryId == null) {
-        throw "Missing the required parameter 'repositoryId' when calling getAllSitesUsingGET1";
+        throw "Missing the required parameter 'repositoryId' when calling getAllSites";
       }
 
 
@@ -79,8 +79,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getContentInFolderUsingGET1 operation.
-     * @callback module:api/IntegrationAlfrescoOnPremiseApi~getContentInFolderUsingGET1Callback
+     * Callback function to receive the result of the getContentInFolder operation.
+     * @callback module:api/IntegrationAlfrescoOnPremiseApi~getContentInFolderCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -90,20 +90,20 @@
      * List file &amp; folders inside a specific folder
      * @param {String} repositoryId repositoryId
      * @param {String} folderId folderId
-     * @param {module:api/IntegrationAlfrescoOnPremiseApi~getContentInFolderUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationAlfrescoOnPremiseApi~getContentInFolderCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getContentInFolderUsingGET1 = function(repositoryId, folderId, callback) {
+    this.getContentInFolder = function(repositoryId, folderId, callback) {
       var postBody = null;
 
       // verify the required parameter 'repositoryId' is set
       if (repositoryId == undefined || repositoryId == null) {
-        throw "Missing the required parameter 'repositoryId' when calling getContentInFolderUsingGET1";
+        throw "Missing the required parameter 'repositoryId' when calling getContentInFolder";
       }
 
       // verify the required parameter 'folderId' is set
       if (folderId == undefined || folderId == null) {
-        throw "Missing the required parameter 'folderId' when calling getContentInFolderUsingGET1";
+        throw "Missing the required parameter 'folderId' when calling getContentInFolder";
       }
 
 
@@ -131,8 +131,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getContentInSiteUsingGET1 operation.
-     * @callback module:api/IntegrationAlfrescoOnPremiseApi~getContentInSiteUsingGET1Callback
+     * Callback function to receive the result of the getContentInSite operation.
+     * @callback module:api/IntegrationAlfrescoOnPremiseApi~getContentInSiteCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -142,20 +142,20 @@
      * List file &amp; folders inside a specific site
      * @param {String} repositoryId repositoryId
      * @param {String} siteId siteId
-     * @param {module:api/IntegrationAlfrescoOnPremiseApi~getContentInSiteUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationAlfrescoOnPremiseApi~getContentInSiteCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getContentInSiteUsingGET1 = function(repositoryId, siteId, callback) {
+    this.getContentInSite = function(repositoryId, siteId, callback) {
       var postBody = null;
 
       // verify the required parameter 'repositoryId' is set
       if (repositoryId == undefined || repositoryId == null) {
-        throw "Missing the required parameter 'repositoryId' when calling getContentInSiteUsingGET1";
+        throw "Missing the required parameter 'repositoryId' when calling getContentInSite";
       }
 
       // verify the required parameter 'siteId' is set
       if (siteId == undefined || siteId == null) {
-        throw "Missing the required parameter 'siteId' when calling getContentInSiteUsingGET1";
+        throw "Missing the required parameter 'siteId' when calling getContentInSite";
       }
 
 
@@ -183,8 +183,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getRepositoriesUsingGET operation.
-     * @callback module:api/IntegrationAlfrescoOnPremiseApi~getRepositoriesUsingGETCallback
+     * Callback function to receive the result of the getRepositories operation.
+     * @callback module:api/IntegrationAlfrescoOnPremiseApi~getRepositoriesCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -196,10 +196,10 @@
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.tenantId tenantId
      * @param {Boolean} opts.includeAccounts includeAccounts
-     * @param {module:api/IntegrationAlfrescoOnPremiseApi~getRepositoriesUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationAlfrescoOnPremiseApi~getRepositoriesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getRepositoriesUsingGET = function(opts, callback) {
+    this.getRepositories = function(opts, callback) {
       opts = opts || {};
       var postBody = null;
 

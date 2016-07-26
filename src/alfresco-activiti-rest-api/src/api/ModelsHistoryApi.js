@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new ModelsHistoryApi. 
+   * Constructs a new ModelsHistoryApi.
    * @alias module:api/ModelsHistoryApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the getModelHistoryCollectionUsingGET operation.
-     * @callback module:api/ModelsHistoryApi~getModelHistoryCollectionUsingGETCallback
+     * Callback function to receive the result of the getModelHistoryCollection operation.
+     * @callback module:api/ModelsHistoryApi~getModelHistoryCollectionCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45,16 +45,16 @@
      * @param {Integer} modelId modelId
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.includeLatestVersion includeLatestVersion
-     * @param {module:api/ModelsHistoryApi~getModelHistoryCollectionUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsHistoryApi~getModelHistoryCollectionCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getModelHistoryCollectionUsingGET = function(modelId, opts, callback) {
+    this.getModelHistoryCollection = function(modelId, opts, callback) {
       opts = opts || {};
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling getModelHistoryCollectionUsingGET";
+        throw "Missing the required parameter 'modelId' when calling getModelHistoryCollection";
       }
 
 
@@ -82,8 +82,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getProcessModelHistoryUsingGET operation.
-     * @callback module:api/ModelsHistoryApi~getProcessModelHistoryUsingGETCallback
+     * Callback function to receive the result of the getProcessModelHistory operation.
+     * @callback module:api/ModelsHistoryApi~getProcessModelHistoryCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -93,20 +93,20 @@
      * To get a particular older version of a model
      * @param {Integer} modelId modelId
      * @param {Integer} modelHistoryId modelHistoryId
-     * @param {module:api/ModelsHistoryApi~getProcessModelHistoryUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsHistoryApi~getProcessModelHistoryCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ModelRepresentation}
      */
-    this.getProcessModelHistoryUsingGET = function(modelId, modelHistoryId, callback) {
+    this.getProcessModelHistory = function(modelId, modelHistoryId, callback) {
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling getProcessModelHistoryUsingGET";
+        throw "Missing the required parameter 'modelId' when calling getProcessModelHistory";
       }
 
       // verify the required parameter 'modelHistoryId' is set
       if (modelHistoryId == undefined || modelHistoryId == null) {
-        throw "Missing the required parameter 'modelHistoryId' when calling getProcessModelHistoryUsingGET";
+        throw "Missing the required parameter 'modelHistoryId' when calling getProcessModelHistory";
       }
 
 

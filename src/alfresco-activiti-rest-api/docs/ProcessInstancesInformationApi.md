@@ -4,13 +4,13 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getProcessInstanceContentUsingGET**](ProcessInstancesInformationApi.md#getProcessInstanceContentUsingGET) | **GET** /api/enterprise/process-instances/{processInstanceId}/field-content | Retrieve content attached to process instance fields
-[**startNewProcessInstanceUsingPOST**](ProcessInstancesInformationApi.md#startNewProcessInstanceUsingPOST) | **POST** /api/enterprise/process-instances | Start a process instance
+[**getProcessInstanceContent**](ProcessInstancesInformationApi.md#getProcessInstanceContent) | **GET** /api/enterprise/process-instances/{processInstanceId}/field-content | Retrieve content attached to process instance fields
+[**startNewProcessInstance**](ProcessInstancesInformationApi.md#startNewProcessInstance) | **POST** /api/enterprise/process-instances | Start a process instance
 
 
-<a name="getProcessInstanceContentUsingGET"></a>
-# **getProcessInstanceContentUsingGET**
-> ResultListDataRepresentation getProcessInstanceContentUsingGET(processInstanceId)
+<a name="getProcessInstanceContent"></a>
+# **getProcessInstanceContent**
+> ResultListDataRepresentation getProcessInstanceContent(processInstanceId)
 
 Retrieve content attached to process instance fields
 
@@ -30,7 +30,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getProcessInstanceContentUsingGET(processInstanceId, callback);
+apiInstance.getProcessInstanceContent(processInstanceId, callback);
 ```
 
 ### Parameters
@@ -52,9 +52,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="startNewProcessInstanceUsingPOST"></a>
-# **startNewProcessInstanceUsingPOST**
-> ProcessInstanceRepresentation startNewProcessInstanceUsingPOST(startRequest)
+<a name="startNewProcessInstance"></a>
+# **startNewProcessInstance**
+> ProcessInstanceRepresentation startNewProcessInstance(startRequest)
 
 Start a process instance
 
@@ -74,7 +74,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.startNewProcessInstanceUsingPOST(startRequest, callback);
+apiInstance.startNewProcessInstance(startRequest, callback);
 ```
 
 ### Parameters

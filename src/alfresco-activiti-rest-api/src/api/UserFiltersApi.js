@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new UserFiltersApi. 
+   * Constructs a new UserFiltersApi.
    * @alias module:api/UserFiltersApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the createUserProcessInstanceFilterUsingPOST operation.
-     * @callback module:api/UserFiltersApi~createUserProcessInstanceFilterUsingPOSTCallback
+     * Callback function to receive the result of the createUserProcessInstanceFilter operation.
+     * @callback module:api/UserFiltersApi~createUserProcessInstanceFilterCallback
      * @param {String} error Error message, if any.
      * @param {module:model/UserProcessInstanceFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43,15 +43,15 @@
     /**
      * Create a user process instance task filter
      * @param {module:model/UserProcessInstanceFilterRepresentation} userProcessInstanceFilterRepresentation userProcessInstanceFilterRepresentation
-     * @param {module:api/UserFiltersApi~createUserProcessInstanceFilterUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/UserFiltersApi~createUserProcessInstanceFilterCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserProcessInstanceFilterRepresentation}
      */
-    this.createUserProcessInstanceFilterUsingPOST = function(userProcessInstanceFilterRepresentation, callback) {
+    this.createUserProcessInstanceFilter = function(userProcessInstanceFilterRepresentation, callback) {
       var postBody = userProcessInstanceFilterRepresentation;
 
       // verify the required parameter 'userProcessInstanceFilterRepresentation' is set
       if (userProcessInstanceFilterRepresentation == undefined || userProcessInstanceFilterRepresentation == null) {
-        throw "Missing the required parameter 'userProcessInstanceFilterRepresentation' when calling createUserProcessInstanceFilterUsingPOST";
+        throw "Missing the required parameter 'userProcessInstanceFilterRepresentation' when calling createUserProcessInstanceFilter";
       }
 
 
@@ -77,8 +77,8 @@
     }
 
     /**
-     * Callback function to receive the result of the createUserTaskFilterUsingPOST operation.
-     * @callback module:api/UserFiltersApi~createUserTaskFilterUsingPOSTCallback
+     * Callback function to receive the result of the createUserTaskFilter operation.
+     * @callback module:api/UserFiltersApi~createUserTaskFilterCallback
      * @param {String} error Error message, if any.
      * @param {module:model/UserTaskFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -87,15 +87,15 @@
     /**
      * Create a new task filter
      * @param {module:model/UserTaskFilterRepresentation} userTaskFilterRepresentation userTaskFilterRepresentation
-     * @param {module:api/UserFiltersApi~createUserTaskFilterUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/UserFiltersApi~createUserTaskFilterCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserTaskFilterRepresentation}
      */
-    this.createUserTaskFilterUsingPOST = function(userTaskFilterRepresentation, callback) {
+    this.createUserTaskFilter = function(userTaskFilterRepresentation, callback) {
       var postBody = userTaskFilterRepresentation;
 
       // verify the required parameter 'userTaskFilterRepresentation' is set
       if (userTaskFilterRepresentation == undefined || userTaskFilterRepresentation == null) {
-        throw "Missing the required parameter 'userTaskFilterRepresentation' when calling createUserTaskFilterUsingPOST";
+        throw "Missing the required parameter 'userTaskFilterRepresentation' when calling createUserTaskFilter";
       }
 
 
@@ -121,8 +121,8 @@
     }
 
     /**
-     * Callback function to receive the result of the deleteUserProcessInstanceFilterUsingDELETE operation.
-     * @callback module:api/UserFiltersApi~deleteUserProcessInstanceFilterUsingDELETECallback
+     * Callback function to receive the result of the deleteUserProcessInstanceFilter operation.
+     * @callback module:api/UserFiltersApi~deleteUserProcessInstanceFilterCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -131,14 +131,14 @@
     /**
      * Delete a user process instance task filter
      * @param {Integer} userFilterId userFilterId
-     * @param {module:api/UserFiltersApi~deleteUserProcessInstanceFilterUsingDELETECallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/UserFiltersApi~deleteUserProcessInstanceFilterCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteUserProcessInstanceFilterUsingDELETE = function(userFilterId, callback) {
+    this.deleteUserProcessInstanceFilter = function(userFilterId, callback) {
       var postBody = null;
 
       // verify the required parameter 'userFilterId' is set
       if (userFilterId == undefined || userFilterId == null) {
-        throw "Missing the required parameter 'userFilterId' when calling deleteUserProcessInstanceFilterUsingDELETE";
+        throw "Missing the required parameter 'userFilterId' when calling deleteUserProcessInstanceFilter";
       }
 
 
@@ -165,8 +165,8 @@
     }
 
     /**
-     * Callback function to receive the result of the deleteUserTaskFilterUsingDELETE operation.
-     * @callback module:api/UserFiltersApi~deleteUserTaskFilterUsingDELETECallback
+     * Callback function to receive the result of the deleteUserTaskFilter operation.
+     * @callback module:api/UserFiltersApi~deleteUserTaskFilterCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -175,14 +175,14 @@
     /**
      * Delete a task filter
      * @param {Integer} userFilterId userFilterId
-     * @param {module:api/UserFiltersApi~deleteUserTaskFilterUsingDELETECallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/UserFiltersApi~deleteUserTaskFilterCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteUserTaskFilterUsingDELETE = function(userFilterId, callback) {
+    this.deleteUserTaskFilter = function(userFilterId, callback) {
       var postBody = null;
 
       // verify the required parameter 'userFilterId' is set
       if (userFilterId == undefined || userFilterId == null) {
-        throw "Missing the required parameter 'userFilterId' when calling deleteUserTaskFilterUsingDELETE";
+        throw "Missing the required parameter 'userFilterId' when calling deleteUserTaskFilter";
       }
 
 
@@ -209,8 +209,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getUserProcessInstanceFilterUsingGET operation.
-     * @callback module:api/UserFiltersApi~getUserProcessInstanceFilterUsingGETCallback
+     * Callback function to receive the result of the getUserProcessInstanceFilter operation.
+     * @callback module:api/UserFiltersApi~getUserProcessInstanceFilterCallback
      * @param {String} error Error message, if any.
      * @param {module:model/UserProcessInstanceFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -219,15 +219,15 @@
     /**
      * Get a specific user process instance task filter
      * @param {Integer} userFilterId userFilterId
-     * @param {module:api/UserFiltersApi~getUserProcessInstanceFilterUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/UserFiltersApi~getUserProcessInstanceFilterCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserProcessInstanceFilterRepresentation}
      */
-    this.getUserProcessInstanceFilterUsingGET = function(userFilterId, callback) {
+    this.getUserProcessInstanceFilter = function(userFilterId, callback) {
       var postBody = null;
 
       // verify the required parameter 'userFilterId' is set
       if (userFilterId == undefined || userFilterId == null) {
-        throw "Missing the required parameter 'userFilterId' when calling getUserProcessInstanceFilterUsingGET";
+        throw "Missing the required parameter 'userFilterId' when calling getUserProcessInstanceFilter";
       }
 
 
@@ -254,8 +254,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getUserProcessInstanceFiltersUsingGET operation.
-     * @callback module:api/UserFiltersApi~getUserProcessInstanceFiltersUsingGETCallback
+     * Callback function to receive the result of the getUserProcessInstanceFilters operation.
+     * @callback module:api/UserFiltersApi~getUserProcessInstanceFiltersCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -265,10 +265,10 @@
      * Retrieve list of taks filters
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.appId appId
-     * @param {module:api/UserFiltersApi~getUserProcessInstanceFiltersUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/UserFiltersApi~getUserProcessInstanceFiltersCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getUserProcessInstanceFiltersUsingGET = function(opts, callback) {
+    this.getUserProcessInstanceFilters = function(opts, callback) {
       opts = opts || {};
       var postBody = null;
 
@@ -296,8 +296,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getUserTaskFilterUsingGET operation.
-     * @callback module:api/UserFiltersApi~getUserTaskFilterUsingGETCallback
+     * Callback function to receive the result of the getUserTaskFilter operation.
+     * @callback module:api/UserFiltersApi~getUserTaskFilterCallback
      * @param {String} error Error message, if any.
      * @param {module:model/UserTaskFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -306,15 +306,15 @@
     /**
      * Get a specific task filter
      * @param {Integer} userFilterId userFilterId
-     * @param {module:api/UserFiltersApi~getUserTaskFilterUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/UserFiltersApi~getUserTaskFilterCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserTaskFilterRepresentation}
      */
-    this.getUserTaskFilterUsingGET = function(userFilterId, callback) {
+    this.getUserTaskFilter = function(userFilterId, callback) {
       var postBody = null;
 
       // verify the required parameter 'userFilterId' is set
       if (userFilterId == undefined || userFilterId == null) {
-        throw "Missing the required parameter 'userFilterId' when calling getUserTaskFilterUsingGET";
+        throw "Missing the required parameter 'userFilterId' when calling getUserTaskFilter";
       }
 
 
@@ -341,8 +341,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getUserTaskFiltersUsingGET operation.
-     * @callback module:api/UserFiltersApi~getUserTaskFiltersUsingGETCallback
+     * Callback function to receive the result of the getUserTaskFilters operation.
+     * @callback module:api/UserFiltersApi~getUserTaskFiltersCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -352,10 +352,10 @@
      * Retrieve list of task filters
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.appId appId
-     * @param {module:api/UserFiltersApi~getUserTaskFiltersUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/UserFiltersApi~getUserTaskFiltersCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getUserTaskFiltersUsingGET = function(opts, callback) {
+    this.getUserTaskFilters = function(opts, callback) {
       opts = opts || {};
       var postBody = null;
 
@@ -383,8 +383,8 @@
     }
 
     /**
-     * Callback function to receive the result of the orderUserProcessInstanceFiltersUsingPUT operation.
-     * @callback module:api/UserFiltersApi~orderUserProcessInstanceFiltersUsingPUTCallback
+     * Callback function to receive the result of the orderUserProcessInstanceFilters operation.
+     * @callback module:api/UserFiltersApi~orderUserProcessInstanceFiltersCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -393,14 +393,14 @@
     /**
      * To order the list of user process instance filters
      * @param {module:model/UserFilterOrderRepresentation} filterOrderRepresentation filterOrderRepresentation
-     * @param {module:api/UserFiltersApi~orderUserProcessInstanceFiltersUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/UserFiltersApi~orderUserProcessInstanceFiltersCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.orderUserProcessInstanceFiltersUsingPUT = function(filterOrderRepresentation, callback) {
+    this.orderUserProcessInstanceFilters = function(filterOrderRepresentation, callback) {
       var postBody = filterOrderRepresentation;
 
       // verify the required parameter 'filterOrderRepresentation' is set
       if (filterOrderRepresentation == undefined || filterOrderRepresentation == null) {
-        throw "Missing the required parameter 'filterOrderRepresentation' when calling orderUserProcessInstanceFiltersUsingPUT";
+        throw "Missing the required parameter 'filterOrderRepresentation' when calling orderUserProcessInstanceFilters";
       }
 
 
@@ -426,8 +426,8 @@
     }
 
     /**
-     * Callback function to receive the result of the orderUserTaskFiltersUsingPUT operation.
-     * @callback module:api/UserFiltersApi~orderUserTaskFiltersUsingPUTCallback
+     * Callback function to receive the result of the orderUserTaskFilters operation.
+     * @callback module:api/UserFiltersApi~orderUserTaskFiltersCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -436,14 +436,14 @@
     /**
      * To order the list of user task filters
      * @param {module:model/UserFilterOrderRepresentation} filterOrderRepresentation filterOrderRepresentation
-     * @param {module:api/UserFiltersApi~orderUserTaskFiltersUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/UserFiltersApi~orderUserTaskFiltersCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.orderUserTaskFiltersUsingPUT = function(filterOrderRepresentation, callback) {
+    this.orderUserTaskFilters = function(filterOrderRepresentation, callback) {
       var postBody = filterOrderRepresentation;
 
       // verify the required parameter 'filterOrderRepresentation' is set
       if (filterOrderRepresentation == undefined || filterOrderRepresentation == null) {
-        throw "Missing the required parameter 'filterOrderRepresentation' when calling orderUserTaskFiltersUsingPUT";
+        throw "Missing the required parameter 'filterOrderRepresentation' when calling orderUserTaskFilters";
       }
 
 
@@ -469,8 +469,8 @@
     }
 
     /**
-     * Callback function to receive the result of the updateUserProcessInstanceFilterUsingPUT operation.
-     * @callback module:api/UserFiltersApi~updateUserProcessInstanceFilterUsingPUTCallback
+     * Callback function to receive the result of the updateUserProcessInstanceFilter operation.
+     * @callback module:api/UserFiltersApi~updateUserProcessInstanceFilterCallback
      * @param {String} error Error message, if any.
      * @param {module:model/UserProcessInstanceFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -480,20 +480,20 @@
      * Update a user process instance task filter
      * @param {Integer} userFilterId userFilterId
      * @param {module:model/UserProcessInstanceFilterRepresentation} userProcessInstanceFilterRepresentation userProcessInstanceFilterRepresentation
-     * @param {module:api/UserFiltersApi~updateUserProcessInstanceFilterUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/UserFiltersApi~updateUserProcessInstanceFilterCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserProcessInstanceFilterRepresentation}
      */
-    this.updateUserProcessInstanceFilterUsingPUT = function(userFilterId, userProcessInstanceFilterRepresentation, callback) {
+    this.updateUserProcessInstanceFilter = function(userFilterId, userProcessInstanceFilterRepresentation, callback) {
       var postBody = userProcessInstanceFilterRepresentation;
 
       // verify the required parameter 'userFilterId' is set
       if (userFilterId == undefined || userFilterId == null) {
-        throw "Missing the required parameter 'userFilterId' when calling updateUserProcessInstanceFilterUsingPUT";
+        throw "Missing the required parameter 'userFilterId' when calling updateUserProcessInstanceFilter";
       }
 
       // verify the required parameter 'userProcessInstanceFilterRepresentation' is set
       if (userProcessInstanceFilterRepresentation == undefined || userProcessInstanceFilterRepresentation == null) {
-        throw "Missing the required parameter 'userProcessInstanceFilterRepresentation' when calling updateUserProcessInstanceFilterUsingPUT";
+        throw "Missing the required parameter 'userProcessInstanceFilterRepresentation' when calling updateUserProcessInstanceFilter";
       }
 
 
@@ -520,8 +520,8 @@
     }
 
     /**
-     * Callback function to receive the result of the updateUserTaskFilterUsingPUT operation.
-     * @callback module:api/UserFiltersApi~updateUserTaskFilterUsingPUTCallback
+     * Callback function to receive the result of the updateUserTaskFilter operation.
+     * @callback module:api/UserFiltersApi~updateUserTaskFilterCallback
      * @param {String} error Error message, if any.
      * @param {module:model/UserTaskFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -531,20 +531,20 @@
      * Update a specific task filter
      * @param {Integer} userFilterId userFilterId
      * @param {module:model/UserTaskFilterRepresentation} userTaskFilterRepresentation userTaskFilterRepresentation
-     * @param {module:api/UserFiltersApi~updateUserTaskFilterUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/UserFiltersApi~updateUserTaskFilterCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserTaskFilterRepresentation}
      */
-    this.updateUserTaskFilterUsingPUT = function(userFilterId, userTaskFilterRepresentation, callback) {
+    this.updateUserTaskFilter = function(userFilterId, userTaskFilterRepresentation, callback) {
       var postBody = userTaskFilterRepresentation;
 
       // verify the required parameter 'userFilterId' is set
       if (userFilterId == undefined || userFilterId == null) {
-        throw "Missing the required parameter 'userFilterId' when calling updateUserTaskFilterUsingPUT";
+        throw "Missing the required parameter 'userFilterId' when calling updateUserTaskFilter";
       }
 
       // verify the required parameter 'userTaskFilterRepresentation' is set
       if (userTaskFilterRepresentation == undefined || userTaskFilterRepresentation == null) {
-        throw "Missing the required parameter 'userTaskFilterRepresentation' when calling updateUserTaskFilterUsingPUT";
+        throw "Missing the required parameter 'userTaskFilterRepresentation' when calling updateUserTaskFilter";
       }
 
 

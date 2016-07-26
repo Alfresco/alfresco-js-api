@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new GroupsApi. 
+   * Constructs a new GroupsApi.
    * @alias module:api/GroupsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the getGroupsUsingGET1 operation.
-     * @callback module:api/GroupsApi~getGroupsUsingGET1Callback
+     * Callback function to receive the result of the getGroups operation.
+     * @callback module:api/GroupsApi~getGroupsCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -48,10 +48,10 @@
      * @param {String} opts.externalId externalId
      * @param {String} opts.externalIdCaseInsensitive externalIdCaseInsensitive
      * @param {Integer} opts.tenantId tenantId
-     * @param {module:api/GroupsApi~getGroupsUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/GroupsApi~getGroupsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getGroupsUsingGET1 = function(opts, callback) {
+    this.getGroups = function(opts, callback) {
       opts = opts || {};
       var postBody = null;
 
@@ -83,8 +83,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getUsersForGroupUsingGET operation.
-     * @callback module:api/GroupsApi~getUsersForGroupUsingGETCallback
+     * Callback function to receive the result of the getUsersForGroup operation.
+     * @callback module:api/GroupsApi~getUsersForGroupCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -93,15 +93,15 @@
     /**
      * List users member of a specific group
      * @param {Integer} groupId groupId
-     * @param {module:api/GroupsApi~getUsersForGroupUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/GroupsApi~getUsersForGroupCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getUsersForGroupUsingGET = function(groupId, callback) {
+    this.getUsersForGroup = function(groupId, callback) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling getUsersForGroupUsingGET";
+        throw "Missing the required parameter 'groupId' when calling getUsersForGroup";
       }
 
 

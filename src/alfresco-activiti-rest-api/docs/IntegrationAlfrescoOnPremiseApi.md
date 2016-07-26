@@ -4,15 +4,15 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getAllSitesUsingGET1**](IntegrationAlfrescoOnPremiseApi.md#getAllSitesUsingGET1) | **GET** /api/enterprise/integration/alfresco/{repositoryId}/sites | List Alfresco sites
-[**getContentInFolderUsingGET1**](IntegrationAlfrescoOnPremiseApi.md#getContentInFolderUsingGET1) | **GET** /api/enterprise/integration/alfresco/{repositoryId}/folders/{folderId}/content | List file &amp; folders inside a specific folder
-[**getContentInSiteUsingGET1**](IntegrationAlfrescoOnPremiseApi.md#getContentInSiteUsingGET1) | **GET** /api/enterprise/integration/alfresco/{repositoryId}/sites/{siteId}/content | List file &amp; folders inside a specific site
-[**getRepositoriesUsingGET**](IntegrationAlfrescoOnPremiseApi.md#getRepositoriesUsingGET) | **GET** /api/enterprise/profile/accounts/alfresco | List Alfresco repositories
+[**getAllSites**](IntegrationAlfrescoOnPremiseApi.md#getAllSites) | **GET** /api/enterprise/integration/alfresco/{repositoryId}/sites | List Alfresco sites
+[**getContentInFolder**](IntegrationAlfrescoOnPremiseApi.md#getContentInFolder) | **GET** /api/enterprise/integration/alfresco/{repositoryId}/folders/{folderId}/content | List file &amp; folders inside a specific folder
+[**getContentInSite**](IntegrationAlfrescoOnPremiseApi.md#getContentInSite) | **GET** /api/enterprise/integration/alfresco/{repositoryId}/sites/{siteId}/content | List file &amp; folders inside a specific site
+[**getRepositories**](IntegrationAlfrescoOnPremiseApi.md#getRepositories) | **GET** /api/enterprise/profile/accounts/alfresco | List Alfresco repositories
 
 
-<a name="getAllSitesUsingGET1"></a>
-# **getAllSitesUsingGET1**
-> ResultListDataRepresentation getAllSitesUsingGET1(repositoryId)
+<a name="getAllSites"></a>
+# **getAllSites**
+> ResultListDataRepresentation getAllSites(repositoryId)
 
 List Alfresco sites
 
@@ -34,7 +34,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getAllSitesUsingGET1(repositoryId, callback);
+apiInstance.getAllSites(repositoryId, callback);
 ```
 
 ### Parameters
@@ -56,9 +56,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getContentInFolderUsingGET1"></a>
-# **getContentInFolderUsingGET1**
-> ResultListDataRepresentation getContentInFolderUsingGET1(repositoryId, folderId)
+<a name="getContentInFolder"></a>
+# **getContentInFolder**
+> ResultListDataRepresentation getContentInFolder(repositoryId, folderId)
 
 List file &amp; folders inside a specific folder
 
@@ -80,7 +80,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getContentInFolderUsingGET1(repositoryId, folderId, callback);
+apiInstance.getContentInFolder(repositoryId, folderId, callback);
 ```
 
 ### Parameters
@@ -103,9 +103,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getContentInSiteUsingGET1"></a>
-# **getContentInSiteUsingGET1**
-> ResultListDataRepresentation getContentInSiteUsingGET1(repositoryId, siteId)
+<a name="getContentInSite"></a>
+# **getContentInSite**
+> ResultListDataRepresentation getContentInSite(repositoryId, siteId)
 
 List file &amp; folders inside a specific site
 
@@ -127,7 +127,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getContentInSiteUsingGET1(repositoryId, siteId, callback);
+apiInstance.getContentInSite(repositoryId, siteId, callback);
 ```
 
 ### Parameters
@@ -150,9 +150,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getRepositoriesUsingGET"></a>
-# **getRepositoriesUsingGET**
-> ResultListDataRepresentation getRepositoriesUsingGET(opts)
+<a name="getRepositories"></a>
+# **getRepositories**
+> ResultListDataRepresentation getRepositories(opts)
 
 List Alfresco repositories
 
@@ -176,7 +176,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getRepositoriesUsingGET(opts, callback);
+apiInstance.getRepositories(opts, callback);
 ```
 
 ### Parameters

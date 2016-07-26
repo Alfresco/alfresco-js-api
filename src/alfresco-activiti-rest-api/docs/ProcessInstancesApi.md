@@ -4,16 +4,16 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**addProcessInstanceCommentUsingPOST**](ProcessInstancesApi.md#addProcessInstanceCommentUsingPOST) | **POST** /api/enterprise/process-instances/{processInstanceId}/comments | Add a comment to a Process
-[**deleteProcessInstanceUsingDELETE**](ProcessInstancesApi.md#deleteProcessInstanceUsingDELETE) | **DELETE** /api/enterprise/process-instances/{processInstanceId} | Delete a process instance
-[**getProcessInstanceCommentsUsingGET**](ProcessInstancesApi.md#getProcessInstanceCommentsUsingGET) | **GET** /api/enterprise/process-instances/{processInstanceId}/comments | Comment list added to Process
-[**getProcessInstanceStartFormUsingGET**](ProcessInstancesApi.md#getProcessInstanceStartFormUsingGET) | **GET** /api/enterprise/process-instances/{processInstanceId}/start-form | Get process start form
-[**getProcessInstanceUsingGET**](ProcessInstancesApi.md#getProcessInstanceUsingGET) | **GET** /api/enterprise/process-instances/{processInstanceId} | Retrieve a process instance information
+[**addProcessInstanceComment**](ProcessInstancesApi.md#addProcessInstanceComment) | **POST** /api/enterprise/process-instances/{processInstanceId}/comments | Add a comment to a Process
+[**deleteProcessInstance**](ProcessInstancesApi.md#deleteProcessInstance) | **DELETE** /api/enterprise/process-instances/{processInstanceId} | Delete a process instance
+[**getProcessInstanceComments**](ProcessInstancesApi.md#getProcessInstanceComments) | **GET** /api/enterprise/process-instances/{processInstanceId}/comments | Comment list added to Process
+[**getProcessInstanceStartForm**](ProcessInstancesApi.md#getProcessInstanceStartForm) | **GET** /api/enterprise/process-instances/{processInstanceId}/start-form | Get process start form
+[**getProcessInstance**](ProcessInstancesApi.md#getProcessInstance) | **GET** /api/enterprise/process-instances/{processInstanceId} | Retrieve a process instance information
 
 
-<a name="addProcessInstanceCommentUsingPOST"></a>
-# **addProcessInstanceCommentUsingPOST**
-> CommentRepresentation addProcessInstanceCommentUsingPOST(commentRequest, processInstanceId)
+<a name="addProcessInstanceComment"></a>
+# **addProcessInstanceComment**
+> CommentRepresentation addProcessInstanceComment(commentRequest, processInstanceId)
 
 Add a comment to a Process
 
@@ -35,7 +35,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.addProcessInstanceCommentUsingPOST(commentRequest, processInstanceId, callback);
+apiInstance.addProcessInstanceComment(commentRequest, processInstanceId, callback);
 ```
 
 ### Parameters
@@ -58,9 +58,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="deleteProcessInstanceUsingDELETE"></a>
-# **deleteProcessInstanceUsingDELETE**
-> deleteProcessInstanceUsingDELETE(processInstanceId)
+<a name="deleteProcessInstance"></a>
+# **deleteProcessInstance**
+> deleteProcessInstance(processInstanceId)
 
 Delete a process instance
 
@@ -80,7 +80,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.deleteProcessInstanceUsingDELETE(processInstanceId, callback);
+apiInstance.deleteProcessInstance(processInstanceId, callback);
 ```
 
 ### Parameters
@@ -102,9 +102,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getProcessInstanceCommentsUsingGET"></a>
-# **getProcessInstanceCommentsUsingGET**
-> ResultListDataRepresentation getProcessInstanceCommentsUsingGET(processInstanceId, opts)
+<a name="getProcessInstanceComments"></a>
+# **getProcessInstanceComments**
+> ResultListDataRepresentation getProcessInstanceComments(processInstanceId, opts)
 
 Comment list added to Process
 
@@ -127,7 +127,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getProcessInstanceCommentsUsingGET(processInstanceId, opts, callback);
+apiInstance.getProcessInstanceComments(processInstanceId, opts, callback);
 ```
 
 ### Parameters
@@ -150,9 +150,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getProcessInstanceStartFormUsingGET"></a>
-# **getProcessInstanceStartFormUsingGET**
-> FormDefinitionRepresentation getProcessInstanceStartFormUsingGET(processInstanceId)
+<a name="getProcessInstanceStartForm"></a>
+# **getProcessInstanceStartForm**
+> FormDefinitionRepresentation getProcessInstanceStartForm(processInstanceId)
 
 Get process start form
 
@@ -174,7 +174,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getProcessInstanceStartFormUsingGET(processInstanceId, callback);
+apiInstance.getProcessInstanceStartForm(processInstanceId, callback);
 ```
 
 ### Parameters
@@ -196,9 +196,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getProcessInstanceUsingGET"></a>
-# **getProcessInstanceUsingGET**
-> ProcessInstanceRepresentation getProcessInstanceUsingGET(processInstanceId)
+<a name="getProcessInstance"></a>
+# **getProcessInstance**
+> ProcessInstanceRepresentation getProcessInstance(processInstanceId)
 
 Retrieve a process instance information
 
@@ -218,7 +218,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getProcessInstanceUsingGET(processInstanceId, callback);
+apiInstance.getProcessInstance(processInstanceId, callback);
 ```
 
 ### Parameters

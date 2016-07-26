@@ -4,17 +4,17 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**deployAppDefinitionsUsingPOST**](AppsApi.md#deployAppDefinitionsUsingPOST) | **POST** /api/enterprise/runtime-app-definitions | Deploy published app
-[**exportAppDefinitionUsingGET**](AppsApi.md#exportAppDefinitionUsingGET) | **GET** /api/enterprise/app-definitions/{modelId}/export | Export App Definition
-[**getAppDefinitionsUsingGET**](AppsApi.md#getAppDefinitionsUsingGET) | **GET** /api/enterprise/runtime-app-definitions | List runtime apps
-[**importAppDefinitionUsingPOST**](AppsApi.md#importAppDefinitionUsingPOST) | **POST** /api/enterprise/app-definitions/import | Import App Definition
-[**importAppDefinitionUsingPOST1**](AppsApi.md#importAppDefinitionUsingPOST1) | **POST** /api/enterprise/app-definitions/{modelId}/import | Import App
-[**publishAppDefinitionUsingPOST**](AppsApi.md#publishAppDefinitionUsingPOST) | **POST** /api/enterprise/app-definitions/{modelId}/publish | Publish App
+[**deployAppDefinitions**](AppsApi.md#deployAppDefinitions) | **POST** /api/enterprise/runtime-app-definitions | Deploy published app
+[**exportAppDefinition**](AppsApi.md#exportAppDefinition) | **GET** /api/enterprise/app-definitions/{modelId}/export | Export App Definition
+[**getAppDefinitions**](AppsApi.md#getAppDefinitions) | **GET** /api/enterprise/runtime-app-definitions | List runtime apps
+[**importAppDefinition**](AppsApi.md#importAppDefinition) | **POST** /api/enterprise/app-definitions/import | Import App Definition
+[**importAppDefinition**](AppsApi.md#importAppDefinition) | **POST** /api/enterprise/app-definitions/{modelId}/import | Import App
+[**publishAppDefinition**](AppsApi.md#publishAppDefinition) | **POST** /api/enterprise/app-definitions/{modelId}/publish | Publish App
 
 
-<a name="deployAppDefinitionsUsingPOST"></a>
-# **deployAppDefinitionsUsingPOST**
-> deployAppDefinitionsUsingPOST(saveObject)
+<a name="deployAppDefinitions"></a>
+# **deployAppDefinitions**
+> deployAppDefinitions(saveObject)
 
 Deploy published app
 
@@ -36,7 +36,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.deployAppDefinitionsUsingPOST(saveObject, callback);
+apiInstance.deployAppDefinitions(saveObject, callback);
 ```
 
 ### Parameters
@@ -58,9 +58,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="exportAppDefinitionUsingGET"></a>
-# **exportAppDefinitionUsingGET**
-> exportAppDefinitionUsingGET(modelId)
+<a name="exportAppDefinition"></a>
+# **exportAppDefinition**
+> exportAppDefinition(modelId)
 
 Export App Definition
 
@@ -82,7 +82,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.exportAppDefinitionUsingGET(modelId, callback);
+apiInstance.exportAppDefinition(modelId, callback);
 ```
 
 ### Parameters
@@ -104,9 +104,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getAppDefinitionsUsingGET"></a>
-# **getAppDefinitionsUsingGET**
-> ResultListDataRepresentation getAppDefinitionsUsingGET()
+<a name="getAppDefinitions"></a>
+# **getAppDefinitions**
+> ResultListDataRepresentation getAppDefinitions()
 
 List runtime apps
 
@@ -125,7 +125,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getAppDefinitionsUsingGET(callback);
+apiInstance.getAppDefinitions(callback);
 ```
 
 ### Parameters
@@ -144,9 +144,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="importAppDefinitionUsingPOST"></a>
-# **importAppDefinitionUsingPOST**
-> AppDefinitionRepresentation importAppDefinitionUsingPOST(file)
+<a name="importAppDefinition"></a>
+# **importAppDefinition**
+> AppDefinitionRepresentation importAppDefinition(file)
 
 Import App Definition
 
@@ -168,7 +168,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.importAppDefinitionUsingPOST(file, callback);
+apiInstance.importAppDefinition(file, callback);
 ```
 
 ### Parameters
@@ -190,9 +190,9 @@ No authorization required
  - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
-<a name="importAppDefinitionUsingPOST1"></a>
-# **importAppDefinitionUsingPOST1**
-> AppDefinitionRepresentation importAppDefinitionUsingPOST1(modelId, file)
+<a name="importAppDefinition"></a>
+# **importAppDefinition**
+> AppDefinitionRepresentation importAppDefinition(modelId, file)
 
 Import App
 
@@ -216,7 +216,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.importAppDefinitionUsingPOST1(modelId, file, callback);
+apiInstance.importAppDefinition(modelId, file, callback);
 ```
 
 ### Parameters
@@ -239,9 +239,9 @@ No authorization required
  - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
-<a name="publishAppDefinitionUsingPOST"></a>
-# **publishAppDefinitionUsingPOST**
-> AppDefinitionUpdateResultRepresentation publishAppDefinitionUsingPOST(modelId, publishModel)
+<a name="publishAppDefinition"></a>
+# **publishAppDefinition**
+> AppDefinitionUpdateResultRepresentation publishAppDefinition(modelId, publishModel)
 
 Publish App
 
@@ -265,7 +265,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.publishAppDefinitionUsingPOST(modelId, publishModel, callback);
+apiInstance.publishAppDefinition(modelId, publishModel, callback);
 ```
 
 ### Parameters

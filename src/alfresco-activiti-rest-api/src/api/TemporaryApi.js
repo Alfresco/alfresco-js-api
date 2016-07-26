@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new TemporaryApi. 
+   * Constructs a new TemporaryApi.
    * @alias module:api/TemporaryApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the completeTasksUsingGET operation.
-     * @callback module:api/TemporaryApi~completeTasksUsingGETCallback
+     * Callback function to receive the result of the completeTasks operation.
+     * @callback module:api/TemporaryApi~completeTasksCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -44,19 +44,19 @@
      * completeTasks
      * @param {Integer} userId userId
      * @param {String} processDefinitionKey processDefinitionKey
-     * @param {module:api/TemporaryApi~completeTasksUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TemporaryApi~completeTasksCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.completeTasksUsingGET = function(userId, processDefinitionKey, callback) {
+    this.completeTasks = function(userId, processDefinitionKey, callback) {
       var postBody = null;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling completeTasksUsingGET";
+        throw "Missing the required parameter 'userId' when calling completeTasks";
       }
 
       // verify the required parameter 'processDefinitionKey' is set
       if (processDefinitionKey == undefined || processDefinitionKey == null) {
-        throw "Missing the required parameter 'processDefinitionKey' when calling completeTasksUsingGET";
+        throw "Missing the required parameter 'processDefinitionKey' when calling completeTasks";
       }
 
 
@@ -84,8 +84,8 @@
     }
 
     /**
-     * Callback function to receive the result of the generateDataUsingGET operation.
-     * @callback module:api/TemporaryApi~generateDataUsingGETCallback
+     * Callback function to receive the result of the generateData operation.
+     * @callback module:api/TemporaryApi~generateDataCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -95,19 +95,19 @@
      * generateData
      * @param {Integer} userId userId
      * @param {String} processDefinitionKey processDefinitionKey
-     * @param {module:api/TemporaryApi~generateDataUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TemporaryApi~generateDataCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.generateDataUsingGET = function(userId, processDefinitionKey, callback) {
+    this.generateData = function(userId, processDefinitionKey, callback) {
       var postBody = null;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling generateDataUsingGET";
+        throw "Missing the required parameter 'userId' when calling generateData";
       }
 
       // verify the required parameter 'processDefinitionKey' is set
       if (processDefinitionKey == undefined || processDefinitionKey == null) {
-        throw "Missing the required parameter 'processDefinitionKey' when calling generateDataUsingGET";
+        throw "Missing the required parameter 'processDefinitionKey' when calling generateData";
       }
 
 
@@ -135,8 +135,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getHeadersUsingGET operation.
-     * @callback module:api/TemporaryApi~getHeadersUsingGETCallback
+     * Callback function to receive the result of the getHeaders operation.
+     * @callback module:api/TemporaryApi~getHeadersCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ArrayNode} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -144,10 +144,10 @@
 
     /**
      * getHeaders
-     * @param {module:api/TemporaryApi~getHeadersUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TemporaryApi~getHeadersCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ArrayNode}
      */
-    this.getHeadersUsingGET = function(callback) {
+    this.getHeaders = function(callback) {
       var postBody = null;
 
 
@@ -173,8 +173,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getOptionsUsingGET operation.
-     * @callback module:api/TemporaryApi~getOptionsUsingGETCallback
+     * Callback function to receive the result of the getOptions operation.
+     * @callback module:api/TemporaryApi~getOptionsCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ArrayNode} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -182,10 +182,10 @@
 
     /**
      * getOptions
-     * @param {module:api/TemporaryApi~getOptionsUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TemporaryApi~getOptionsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ArrayNode}
      */
-    this.getOptionsUsingGET = function(callback) {
+    this.getOptions = function(callback) {
       var postBody = null;
 
 

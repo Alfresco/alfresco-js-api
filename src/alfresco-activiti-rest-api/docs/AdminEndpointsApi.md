@@ -4,21 +4,21 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createBasicAuthConfigurationUsingPOST1**](AdminEndpointsApi.md#createBasicAuthConfigurationUsingPOST1) | **POST** /api/enterprise/admin/basic-auths | createBasicAuthConfiguration
-[**createEndpointConfigurationUsingPOST1**](AdminEndpointsApi.md#createEndpointConfigurationUsingPOST1) | **POST** /api/enterprise/admin/endpoints | createEndpointConfiguration
-[**getBasicAuthConfigurationUsingGET1**](AdminEndpointsApi.md#getBasicAuthConfigurationUsingGET1) | **GET** /api/enterprise/admin/basic-auths/{basicAuthId} | getBasicAuthConfiguration
-[**getBasicAuthConfigurationsUsingGET1**](AdminEndpointsApi.md#getBasicAuthConfigurationsUsingGET1) | **GET** /api/enterprise/admin/basic-auths | getBasicAuthConfigurations
-[**getEndpointConfigurationUsingGET1**](AdminEndpointsApi.md#getEndpointConfigurationUsingGET1) | **GET** /api/enterprise/admin/endpoints/{endpointConfigurationId} | getEndpointConfiguration
-[**getEndpointConfigurationsUsingGET1**](AdminEndpointsApi.md#getEndpointConfigurationsUsingGET1) | **GET** /api/enterprise/admin/endpoints | getEndpointConfigurations
-[**removeBasicAuthonfigurationUsingDELETE1**](AdminEndpointsApi.md#removeBasicAuthonfigurationUsingDELETE1) | **DELETE** /api/enterprise/admin/basic-auths/{basicAuthId} | removeBasicAuthonfiguration
-[**removeEndpointConfigurationUsingDELETE1**](AdminEndpointsApi.md#removeEndpointConfigurationUsingDELETE1) | **DELETE** /api/enterprise/admin/endpoints/{endpointConfigurationId} | removeEndpointConfiguration
-[**updateBasicAuthConfigurationUsingPUT1**](AdminEndpointsApi.md#updateBasicAuthConfigurationUsingPUT1) | **PUT** /api/enterprise/admin/basic-auths/{basicAuthId} | updateBasicAuthConfiguration
-[**updateEndpointConfigurationUsingPUT1**](AdminEndpointsApi.md#updateEndpointConfigurationUsingPUT1) | **PUT** /api/enterprise/admin/endpoints/{endpointConfigurationId} | updateEndpointConfiguration
+[**createBasicAuthConfiguration**](AdminEndpointsApi.md#createBasicAuthConfiguration) | **POST** /api/enterprise/admin/basic-auths | createBasicAuthConfiguration
+[**createEndpointConfiguration**](AdminEndpointsApi.md#createEndpointConfiguration) | **POST** /api/enterprise/admin/endpoints | createEndpointConfiguration
+[**getBasicAuthConfiguration**](AdminEndpointsApi.md#getBasicAuthConfiguration) | **GET** /api/enterprise/admin/basic-auths/{basicAuthId} | getBasicAuthConfiguration
+[**getBasicAuthConfigurations**](AdminEndpointsApi.md#getBasicAuthConfigurations) | **GET** /api/enterprise/admin/basic-auths | getBasicAuthConfigurations
+[**getEndpointConfiguration**](AdminEndpointsApi.md#getEndpointConfiguration) | **GET** /api/enterprise/admin/endpoints/{endpointConfigurationId} | getEndpointConfiguration
+[**getEndpointConfigurations**](AdminEndpointsApi.md#getEndpointConfigurations) | **GET** /api/enterprise/admin/endpoints | getEndpointConfigurations
+[**removeBasicAuthonfiguration**](AdminEndpointsApi.md#removeBasicAuthonfiguration) | **DELETE** /api/enterprise/admin/basic-auths/{basicAuthId} | removeBasicAuthonfiguration
+[**removeEndpointConfiguration**](AdminEndpointsApi.md#removeEndpointConfiguration) | **DELETE** /api/enterprise/admin/endpoints/{endpointConfigurationId} | removeEndpointConfiguration
+[**updateBasicAuthConfiguration**](AdminEndpointsApi.md#updateBasicAuthConfiguration) | **PUT** /api/enterprise/admin/basic-auths/{basicAuthId} | updateBasicAuthConfiguration
+[**updateEndpointConfiguration**](AdminEndpointsApi.md#updateEndpointConfiguration) | **PUT** /api/enterprise/admin/endpoints/{endpointConfigurationId} | updateEndpointConfiguration
 
 
-<a name="createBasicAuthConfigurationUsingPOST1"></a>
-# **createBasicAuthConfigurationUsingPOST1**
-> EndpointBasicAuthRepresentation createBasicAuthConfigurationUsingPOST1(createRepresentation)
+<a name="createBasicAuthConfiguration"></a>
+# **createBasicAuthConfiguration**
+> EndpointBasicAuthRepresentation createBasicAuthConfiguration(createRepresentation)
 
 createBasicAuthConfiguration
 
@@ -38,7 +38,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.createBasicAuthConfigurationUsingPOST1(createRepresentation, callback);
+apiInstance.createBasicAuthConfiguration(createRepresentation, callback);
 ```
 
 ### Parameters
@@ -60,9 +60,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="createEndpointConfigurationUsingPOST1"></a>
-# **createEndpointConfigurationUsingPOST1**
-> EndpointConfigurationRepresentation createEndpointConfigurationUsingPOST1(representation)
+<a name="createEndpointConfiguration"></a>
+# **createEndpointConfiguration**
+> EndpointConfigurationRepresentation createEndpointConfiguration(representation)
 
 createEndpointConfiguration
 
@@ -82,7 +82,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.createEndpointConfigurationUsingPOST1(representation, callback);
+apiInstance.createEndpointConfiguration(representation, callback);
 ```
 
 ### Parameters
@@ -104,9 +104,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getBasicAuthConfigurationUsingGET1"></a>
-# **getBasicAuthConfigurationUsingGET1**
-> EndpointBasicAuthRepresentation getBasicAuthConfigurationUsingGET1(basicAuthId, tenantId)
+<a name="getBasicAuthConfiguration"></a>
+# **getBasicAuthConfiguration**
+> EndpointBasicAuthRepresentation getBasicAuthConfiguration(basicAuthId, tenantId)
 
 getBasicAuthConfiguration
 
@@ -128,7 +128,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getBasicAuthConfigurationUsingGET1(basicAuthId, tenantId, callback);
+apiInstance.getBasicAuthConfiguration(basicAuthId, tenantId, callback);
 ```
 
 ### Parameters
@@ -151,9 +151,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getBasicAuthConfigurationsUsingGET1"></a>
-# **getBasicAuthConfigurationsUsingGET1**
-> [EndpointBasicAuthRepresentation] getBasicAuthConfigurationsUsingGET1(tenantId)
+<a name="getBasicAuthConfigurations"></a>
+# **getBasicAuthConfigurations**
+> [EndpointBasicAuthRepresentation] getBasicAuthConfigurations(tenantId)
 
 getBasicAuthConfigurations
 
@@ -173,7 +173,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getBasicAuthConfigurationsUsingGET1(tenantId, callback);
+apiInstance.getBasicAuthConfigurations(tenantId, callback);
 ```
 
 ### Parameters
@@ -195,9 +195,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getEndpointConfigurationUsingGET1"></a>
-# **getEndpointConfigurationUsingGET1**
-> EndpointConfigurationRepresentation getEndpointConfigurationUsingGET1(endpointConfigurationId, tenantId)
+<a name="getEndpointConfiguration"></a>
+# **getEndpointConfiguration**
+> EndpointConfigurationRepresentation getEndpointConfiguration(endpointConfigurationId, tenantId)
 
 getEndpointConfiguration
 
@@ -219,7 +219,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getEndpointConfigurationUsingGET1(endpointConfigurationId, tenantId, callback);
+apiInstance.getEndpointConfiguration(endpointConfigurationId, tenantId, callback);
 ```
 
 ### Parameters
@@ -242,9 +242,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getEndpointConfigurationsUsingGET1"></a>
-# **getEndpointConfigurationsUsingGET1**
-> [EndpointConfigurationRepresentation] getEndpointConfigurationsUsingGET1(tenantId)
+<a name="getEndpointConfigurations"></a>
+# **getEndpointConfigurations**
+> [EndpointConfigurationRepresentation] getEndpointConfigurations(tenantId)
 
 getEndpointConfigurations
 
@@ -264,7 +264,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getEndpointConfigurationsUsingGET1(tenantId, callback);
+apiInstance.getEndpointConfigurations(tenantId, callback);
 ```
 
 ### Parameters
@@ -286,9 +286,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="removeBasicAuthonfigurationUsingDELETE1"></a>
-# **removeBasicAuthonfigurationUsingDELETE1**
-> removeBasicAuthonfigurationUsingDELETE1(basicAuthId, tenantId)
+<a name="removeBasicAuthonfiguration"></a>
+# **removeBasicAuthonfiguration**
+> removeBasicAuthonfiguration(basicAuthId, tenantId)
 
 removeBasicAuthonfiguration
 
@@ -310,7 +310,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.removeBasicAuthonfigurationUsingDELETE1(basicAuthId, tenantId, callback);
+apiInstance.removeBasicAuthonfiguration(basicAuthId, tenantId, callback);
 ```
 
 ### Parameters
@@ -333,9 +333,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="removeEndpointConfigurationUsingDELETE1"></a>
-# **removeEndpointConfigurationUsingDELETE1**
-> removeEndpointConfigurationUsingDELETE1(endpointConfigurationId, tenantId)
+<a name="removeEndpointConfiguration"></a>
+# **removeEndpointConfiguration**
+> removeEndpointConfiguration(endpointConfigurationId, tenantId)
 
 removeEndpointConfiguration
 
@@ -357,7 +357,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.removeEndpointConfigurationUsingDELETE1(endpointConfigurationId, tenantId, callback);
+apiInstance.removeEndpointConfiguration(endpointConfigurationId, tenantId, callback);
 ```
 
 ### Parameters
@@ -380,9 +380,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="updateBasicAuthConfigurationUsingPUT1"></a>
-# **updateBasicAuthConfigurationUsingPUT1**
-> EndpointBasicAuthRepresentation updateBasicAuthConfigurationUsingPUT1(basicAuthId, createRepresentation)
+<a name="updateBasicAuthConfiguration"></a>
+# **updateBasicAuthConfiguration**
+> EndpointBasicAuthRepresentation updateBasicAuthConfiguration(basicAuthId, createRepresentation)
 
 updateBasicAuthConfiguration
 
@@ -404,7 +404,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.updateBasicAuthConfigurationUsingPUT1(basicAuthId, createRepresentation, callback);
+apiInstance.updateBasicAuthConfiguration(basicAuthId, createRepresentation, callback);
 ```
 
 ### Parameters
@@ -427,9 +427,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="updateEndpointConfigurationUsingPUT1"></a>
-# **updateEndpointConfigurationUsingPUT1**
-> EndpointConfigurationRepresentation updateEndpointConfigurationUsingPUT1(endpointConfigurationId, representation)
+<a name="updateEndpointConfiguration"></a>
+# **updateEndpointConfiguration**
+> EndpointConfigurationRepresentation updateEndpointConfiguration(endpointConfigurationId, representation)
 
 updateEndpointConfiguration
 
@@ -451,7 +451,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.updateEndpointConfigurationUsingPUT1(endpointConfigurationId, representation, callback);
+apiInstance.updateEndpointConfiguration(endpointConfigurationId, representation, callback);
 ```
 
 ### Parameters

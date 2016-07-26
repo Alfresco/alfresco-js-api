@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new ContentApi. 
+   * Constructs a new ContentApi.
    * @alias module:api/ContentApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the createRelatedContentOnProcessInstanceUsingPOST operation.
-     * @callback module:api/ContentApi~createRelatedContentOnProcessInstanceUsingPOSTCallback
+     * Callback function to receive the result of the createRelatedContentOnProcessInstance operation.
+     * @callback module:api/ContentApi~createRelatedContentOnProcessInstanceCallback
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44,20 +44,20 @@
      * createRelatedContentOnProcessInstance
      * @param {String} processInstanceId processInstanceId
      * @param {module:model/RelatedContentRepresentation} relatedContent relatedContent
-     * @param {module:api/ContentApi~createRelatedContentOnProcessInstanceUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ContentApi~createRelatedContentOnProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RelatedContentRepresentation}
      */
-    this.createRelatedContentOnProcessInstanceUsingPOST = function(processInstanceId, relatedContent, callback) {
+    this.createRelatedContentOnProcessInstance = function(processInstanceId, relatedContent, callback) {
       var postBody = relatedContent;
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling createRelatedContentOnProcessInstanceUsingPOST";
+        throw "Missing the required parameter 'processInstanceId' when calling createRelatedContentOnProcessInstance";
       }
 
       // verify the required parameter 'relatedContent' is set
       if (relatedContent == undefined || relatedContent == null) {
-        throw "Missing the required parameter 'relatedContent' when calling createRelatedContentOnProcessInstanceUsingPOST";
+        throw "Missing the required parameter 'relatedContent' when calling createRelatedContentOnProcessInstance";
       }
 
 
@@ -84,8 +84,8 @@
     }
 
     /**
-     * Callback function to receive the result of the createRelatedContentOnProcessInstanceUsingPOST1 operation.
-     * @callback module:api/ContentApi~createRelatedContentOnProcessInstanceUsingPOST1Callback
+     * Callback function to receive the result of the createRelatedContentOnProcessInstance operation.
+     * @callback module:api/ContentApi~createRelatedContentOnProcessInstanceCallback
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -95,20 +95,20 @@
      * createRelatedContentOnProcessInstance
      * @param {String} processInstanceId processInstanceId
      * @param {File} file file
-     * @param {module:api/ContentApi~createRelatedContentOnProcessInstanceUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ContentApi~createRelatedContentOnProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RelatedContentRepresentation}
      */
-    this.createRelatedContentOnProcessInstanceUsingPOST1 = function(processInstanceId, file, callback) {
+    this.createRelatedContentOnProcessInstance = function(processInstanceId, file, callback) {
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling createRelatedContentOnProcessInstanceUsingPOST1";
+        throw "Missing the required parameter 'processInstanceId' when calling createRelatedContentOnProcessInstance";
       }
 
       // verify the required parameter 'file' is set
       if (file == undefined || file == null) {
-        throw "Missing the required parameter 'file' when calling createRelatedContentOnProcessInstanceUsingPOST1";
+        throw "Missing the required parameter 'file' when calling createRelatedContentOnProcessInstance";
       }
 
 
@@ -136,8 +136,8 @@
     }
 
     /**
-     * Callback function to receive the result of the createRelatedContentOnTaskUsingPOST operation.
-     * @callback module:api/ContentApi~createRelatedContentOnTaskUsingPOSTCallback
+     * Callback function to receive the result of the createRelatedContentOnTask operation.
+     * @callback module:api/ContentApi~createRelatedContentOnTaskCallback
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -149,21 +149,21 @@
      * @param {module:model/RelatedContentRepresentation} relatedContent relatedContent
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.isRelatedContent isRelatedContent
-     * @param {module:api/ContentApi~createRelatedContentOnTaskUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ContentApi~createRelatedContentOnTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RelatedContentRepresentation}
      */
-    this.createRelatedContentOnTaskUsingPOST = function(taskId, relatedContent, opts, callback) {
+    this.createRelatedContentOnTask = function(taskId, relatedContent, opts, callback) {
       opts = opts || {};
       var postBody = relatedContent;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling createRelatedContentOnTaskUsingPOST";
+        throw "Missing the required parameter 'taskId' when calling createRelatedContentOnTask";
       }
 
       // verify the required parameter 'relatedContent' is set
       if (relatedContent == undefined || relatedContent == null) {
-        throw "Missing the required parameter 'relatedContent' when calling createRelatedContentOnTaskUsingPOST";
+        throw "Missing the required parameter 'relatedContent' when calling createRelatedContentOnTask";
       }
 
 
@@ -191,8 +191,8 @@
     }
 
     /**
-     * Callback function to receive the result of the createRelatedContentOnTaskUsingPOST1 operation.
-     * @callback module:api/ContentApi~createRelatedContentOnTaskUsingPOST1Callback
+     * Callback function to receive the result of the createRelatedContentOnTask operation.
+     * @callback module:api/ContentApi~createRelatedContentOnTaskCallback
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -204,21 +204,21 @@
      * @param {File} file file
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.isRelatedContent isRelatedContent
-     * @param {module:api/ContentApi~createRelatedContentOnTaskUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ContentApi~createRelatedContentOnTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RelatedContentRepresentation}
      */
-    this.createRelatedContentOnTaskUsingPOST1 = function(taskId, file, opts, callback) {
+    this.createRelatedContentOnTask = function(taskId, file, opts, callback) {
       opts = opts || {};
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling createRelatedContentOnTaskUsingPOST1";
+        throw "Missing the required parameter 'taskId' when calling createRelatedContentOnTask";
       }
 
       // verify the required parameter 'file' is set
       if (file == undefined || file == null) {
-        throw "Missing the required parameter 'file' when calling createRelatedContentOnTaskUsingPOST1";
+        throw "Missing the required parameter 'file' when calling createRelatedContentOnTask";
       }
 
 
@@ -247,8 +247,8 @@
     }
 
     /**
-     * Callback function to receive the result of the createTemporaryRawRelatedContentUsingPOST1 operation.
-     * @callback module:api/ContentApi~createTemporaryRawRelatedContentUsingPOST1Callback
+     * Callback function to receive the result of the createTemporaryRawRelatedContent operation.
+     * @callback module:api/ContentApi~createTemporaryRawRelatedContentCallback
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -257,15 +257,15 @@
     /**
      * createTemporaryRawRelatedContent
      * @param {File} file file
-     * @param {module:api/ContentApi~createTemporaryRawRelatedContentUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ContentApi~createTemporaryRawRelatedContentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RelatedContentRepresentation}
      */
-    this.createTemporaryRawRelatedContentUsingPOST1 = function(file, callback) {
+    this.createTemporaryRawRelatedContent = function(file, callback) {
       var postBody = null;
 
       // verify the required parameter 'file' is set
       if (file == undefined || file == null) {
-        throw "Missing the required parameter 'file' when calling createTemporaryRawRelatedContentUsingPOST1";
+        throw "Missing the required parameter 'file' when calling createTemporaryRawRelatedContent";
       }
 
 
@@ -292,8 +292,8 @@
     }
 
     /**
-     * Callback function to receive the result of the createTemporaryRelatedContentUsingPOST operation.
-     * @callback module:api/ContentApi~createTemporaryRelatedContentUsingPOSTCallback
+     * Callback function to receive the result of the createTemporaryRelatedContent operation.
+     * @callback module:api/ContentApi~createTemporaryRelatedContentCallback
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -302,15 +302,15 @@
     /**
      * createTemporaryRelatedContent
      * @param {module:model/RelatedContentRepresentation} relatedContent relatedContent
-     * @param {module:api/ContentApi~createTemporaryRelatedContentUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ContentApi~createTemporaryRelatedContentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RelatedContentRepresentation}
      */
-    this.createTemporaryRelatedContentUsingPOST = function(relatedContent, callback) {
+    this.createTemporaryRelatedContent = function(relatedContent, callback) {
       var postBody = relatedContent;
 
       // verify the required parameter 'relatedContent' is set
       if (relatedContent == undefined || relatedContent == null) {
-        throw "Missing the required parameter 'relatedContent' when calling createTemporaryRelatedContentUsingPOST";
+        throw "Missing the required parameter 'relatedContent' when calling createTemporaryRelatedContent";
       }
 
 
@@ -336,8 +336,8 @@
     }
 
     /**
-     * Callback function to receive the result of the deleteContentUsingDELETE1 operation.
-     * @callback module:api/ContentApi~deleteContentUsingDELETE1Callback
+     * Callback function to receive the result of the deleteContent operation.
+     * @callback module:api/ContentApi~deleteContentCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -346,14 +346,14 @@
     /**
      * deleteContent
      * @param {Integer} contentId contentId
-     * @param {module:api/ContentApi~deleteContentUsingDELETE1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ContentApi~deleteContentCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteContentUsingDELETE1 = function(contentId, callback) {
+    this.deleteContent = function(contentId, callback) {
       var postBody = null;
 
       // verify the required parameter 'contentId' is set
       if (contentId == undefined || contentId == null) {
-        throw "Missing the required parameter 'contentId' when calling deleteContentUsingDELETE1";
+        throw "Missing the required parameter 'contentId' when calling deleteContent";
       }
 
 
@@ -380,8 +380,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getContentUsingGET1 operation.
-     * @callback module:api/ContentApi~getContentUsingGET1Callback
+     * Callback function to receive the result of the getContent operation.
+     * @callback module:api/ContentApi~getContentCallback
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -390,15 +390,15 @@
     /**
      * getContent
      * @param {Integer} contentId contentId
-     * @param {module:api/ContentApi~getContentUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ContentApi~getContentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RelatedContentRepresentation}
      */
-    this.getContentUsingGET1 = function(contentId, callback) {
+    this.getContent = function(contentId, callback) {
       var postBody = null;
 
       // verify the required parameter 'contentId' is set
       if (contentId == undefined || contentId == null) {
-        throw "Missing the required parameter 'contentId' when calling getContentUsingGET1";
+        throw "Missing the required parameter 'contentId' when calling getContent";
       }
 
 
@@ -425,8 +425,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getProcessInstanceContentUsingGET operation.
-     * @callback module:api/ContentApi~getProcessInstanceContentUsingGETCallback
+     * Callback function to receive the result of the getProcessInstanceContent operation.
+     * @callback module:api/ContentApi~getProcessInstanceContentCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -435,15 +435,15 @@
     /**
      * Retrieve content attached to process instance fields
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ContentApi~getProcessInstanceContentUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ContentApi~getProcessInstanceContentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getProcessInstanceContentUsingGET = function(processInstanceId, callback) {
+    this.getProcessInstanceContent = function(processInstanceId, callback) {
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceContentUsingGET";
+        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceContent";
       }
 
 
@@ -470,8 +470,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getRawContentUsingGET3 operation.
-     * @callback module:api/ContentApi~getRawContentUsingGET3Callback
+     * Callback function to receive the result of the getRawContent3 operation.
+     * @callback module:api/ContentApi~getRawContent3Callback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -480,14 +480,14 @@
     /**
      * getRawContent
      * @param {Integer} contentId contentId
-     * @param {module:api/ContentApi~getRawContentUsingGET3Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ContentApi~getRawContent3Callback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.getRawContentUsingGET3 = function(contentId, callback) {
+    this.getRawContent3 = function(contentId, callback) {
       var postBody = null;
 
       // verify the required parameter 'contentId' is set
       if (contentId == undefined || contentId == null) {
-        throw "Missing the required parameter 'contentId' when calling getRawContentUsingGET3";
+        throw "Missing the required parameter 'contentId' when calling getRawContent3";
       }
 
 
@@ -514,8 +514,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getRelatedContentForProcessInstanceUsingGET operation.
-     * @callback module:api/ContentApi~getRelatedContentForProcessInstanceUsingGETCallback
+     * Callback function to receive the result of the getRelatedContentForProcessInstance operation.
+     * @callback module:api/ContentApi~getRelatedContentForProcessInstanceCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -524,15 +524,15 @@
     /**
      * getRelatedContentForProcessInstance
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ContentApi~getRelatedContentForProcessInstanceUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ContentApi~getRelatedContentForProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getRelatedContentForProcessInstanceUsingGET = function(processInstanceId, callback) {
+    this.getRelatedContentForProcessInstance = function(processInstanceId, callback) {
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling getRelatedContentForProcessInstanceUsingGET";
+        throw "Missing the required parameter 'processInstanceId' when calling getRelatedContentForProcessInstance";
       }
 
 
@@ -559,8 +559,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getRelatedContentForTaskUsingGET operation.
-     * @callback module:api/ContentApi~getRelatedContentForTaskUsingGETCallback
+     * Callback function to receive the result of the getRelatedContentForTask operation.
+     * @callback module:api/ContentApi~getRelatedContentForTaskCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -569,15 +569,15 @@
     /**
      * Retrieve which content is attached to a task
      * @param {String} taskId taskId
-     * @param {module:api/ContentApi~getRelatedContentForTaskUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ContentApi~getRelatedContentForTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getRelatedContentForTaskUsingGET = function(taskId, callback) {
+    this.getRelatedContentForTask = function(taskId, callback) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling getRelatedContentForTaskUsingGET";
+        throw "Missing the required parameter 'taskId' when calling getRelatedContentForTask";
       }
 
 

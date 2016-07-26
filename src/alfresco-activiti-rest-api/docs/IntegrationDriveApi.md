@@ -4,13 +4,13 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**confirmAuthorisationUsingGET2**](IntegrationDriveApi.md#confirmAuthorisationUsingGET2) | **GET** /api/enterprise/integration/google-drive/confirm-auth-request | Drive Authorization
-[**getFilesUsingGET1**](IntegrationDriveApi.md#getFilesUsingGET1) | **GET** /api/enterprise/integration/google-drive/files | List file &amp; folders
+[**confirmAuthorisation**](IntegrationDriveApi.md#confirmAuthorisation) | **GET** /api/enterprise/integration/google-drive/confirm-auth-request | Drive Authorization
+[**getFiles**](IntegrationDriveApi.md#getFiles) | **GET** /api/enterprise/integration/google-drive/files | List file &amp; folders
 
 
-<a name="confirmAuthorisationUsingGET2"></a>
-# **confirmAuthorisationUsingGET2**
-> confirmAuthorisationUsingGET2(code)
+<a name="confirmAuthorisation"></a>
+# **confirmAuthorisation**
+> confirmAuthorisation(code)
 
 Drive Authorization
 
@@ -32,7 +32,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.confirmAuthorisationUsingGET2(code, callback);
+apiInstance.confirmAuthorisation(code, callback);
 ```
 
 ### Parameters
@@ -54,9 +54,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: text/html, application/json
 
-<a name="getFilesUsingGET1"></a>
-# **getFilesUsingGET1**
-> ResultListDataRepresentation getFilesUsingGET1(opts)
+<a name="getFiles"></a>
+# **getFiles**
+> ResultListDataRepresentation getFiles(opts)
 
 List file &amp; folders
 
@@ -79,7 +79,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getFilesUsingGET1(opts, callback);
+apiInstance.getFiles(opts, callback);
 ```
 
 ### Parameters

@@ -4,12 +4,12 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getRuntimeProcessScopesUsingPOST**](ProcessScopeApi.md#getRuntimeProcessScopesUsingPOST) | **POST** /api/enterprise/process-scopes | getRuntimeProcessScopes
+[**getRuntimeProcessScopes**](ProcessScopeApi.md#getRuntimeProcessScopes) | **POST** /api/enterprise/process-scopes | getRuntimeProcessScopes
 
 
-<a name="getRuntimeProcessScopesUsingPOST"></a>
-# **getRuntimeProcessScopesUsingPOST**
-> [ProcessScopeRepresentation] getRuntimeProcessScopesUsingPOST(processScopesRequest)
+<a name="getRuntimeProcessScopes"></a>
+# **getRuntimeProcessScopes**
+> [ProcessScopeRepresentation] getRuntimeProcessScopes(processScopesRequest)
 
 getRuntimeProcessScopes
 
@@ -29,7 +29,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getRuntimeProcessScopesUsingPOST(processScopesRequest, callback);
+apiInstance.getRuntimeProcessScopes(processScopesRequest, callback);
 ```
 
 ### Parameters

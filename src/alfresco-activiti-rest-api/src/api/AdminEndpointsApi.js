@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new AdminEndpointsApi. 
+   * Constructs a new AdminEndpointsApi.
    * @alias module:api/AdminEndpointsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the createBasicAuthConfigurationUsingPOST1 operation.
-     * @callback module:api/AdminEndpointsApi~createBasicAuthConfigurationUsingPOST1Callback
+     * Callback function to receive the result of the createBasicAuthConfiguration operation.
+     * @callback module:api/AdminEndpointsApi~createBasicAuthConfigurationCallback
      * @param {String} error Error message, if any.
      * @param {module:model/EndpointBasicAuthRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43,15 +43,15 @@
     /**
      * createBasicAuthConfiguration
      * @param {module:model/CreateEndpointBasicAuthRepresentation} createRepresentation createRepresentation
-     * @param {module:api/AdminEndpointsApi~createBasicAuthConfigurationUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminEndpointsApi~createBasicAuthConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/EndpointBasicAuthRepresentation}
      */
-    this.createBasicAuthConfigurationUsingPOST1 = function(createRepresentation, callback) {
+    this.createBasicAuthConfiguration = function(createRepresentation, callback) {
       var postBody = createRepresentation;
 
       // verify the required parameter 'createRepresentation' is set
       if (createRepresentation == undefined || createRepresentation == null) {
-        throw "Missing the required parameter 'createRepresentation' when calling createBasicAuthConfigurationUsingPOST1";
+        throw "Missing the required parameter 'createRepresentation' when calling createBasicAuthConfiguration";
       }
 
 
@@ -77,8 +77,8 @@
     }
 
     /**
-     * Callback function to receive the result of the createEndpointConfigurationUsingPOST1 operation.
-     * @callback module:api/AdminEndpointsApi~createEndpointConfigurationUsingPOST1Callback
+     * Callback function to receive the result of the createEndpointConfiguration operation.
+     * @callback module:api/AdminEndpointsApi~createEndpointConfigurationCallback
      * @param {String} error Error message, if any.
      * @param {module:model/EndpointConfigurationRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -87,15 +87,15 @@
     /**
      * createEndpointConfiguration
      * @param {module:model/EndpointConfigurationRepresentation} representation representation
-     * @param {module:api/AdminEndpointsApi~createEndpointConfigurationUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminEndpointsApi~createEndpointConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/EndpointConfigurationRepresentation}
      */
-    this.createEndpointConfigurationUsingPOST1 = function(representation, callback) {
+    this.createEndpointConfiguration = function(representation, callback) {
       var postBody = representation;
 
       // verify the required parameter 'representation' is set
       if (representation == undefined || representation == null) {
-        throw "Missing the required parameter 'representation' when calling createEndpointConfigurationUsingPOST1";
+        throw "Missing the required parameter 'representation' when calling createEndpointConfiguration";
       }
 
 
@@ -121,8 +121,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getBasicAuthConfigurationUsingGET1 operation.
-     * @callback module:api/AdminEndpointsApi~getBasicAuthConfigurationUsingGET1Callback
+     * Callback function to receive the result of the getBasicAuthConfiguration operation.
+     * @callback module:api/AdminEndpointsApi~getBasicAuthConfigurationCallback
      * @param {String} error Error message, if any.
      * @param {module:model/EndpointBasicAuthRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -132,20 +132,20 @@
      * getBasicAuthConfiguration
      * @param {Integer} basicAuthId basicAuthId
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminEndpointsApi~getBasicAuthConfigurationUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminEndpointsApi~getBasicAuthConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/EndpointBasicAuthRepresentation}
      */
-    this.getBasicAuthConfigurationUsingGET1 = function(basicAuthId, tenantId, callback) {
+    this.getBasicAuthConfiguration = function(basicAuthId, tenantId, callback) {
       var postBody = null;
 
       // verify the required parameter 'basicAuthId' is set
       if (basicAuthId == undefined || basicAuthId == null) {
-        throw "Missing the required parameter 'basicAuthId' when calling getBasicAuthConfigurationUsingGET1";
+        throw "Missing the required parameter 'basicAuthId' when calling getBasicAuthConfiguration";
       }
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling getBasicAuthConfigurationUsingGET1";
+        throw "Missing the required parameter 'tenantId' when calling getBasicAuthConfiguration";
       }
 
 
@@ -173,8 +173,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getBasicAuthConfigurationsUsingGET1 operation.
-     * @callback module:api/AdminEndpointsApi~getBasicAuthConfigurationsUsingGET1Callback
+     * Callback function to receive the result of the getBasicAuthConfigurations operation.
+     * @callback module:api/AdminEndpointsApi~getBasicAuthConfigurationsCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/EndpointBasicAuthRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -183,15 +183,15 @@
     /**
      * getBasicAuthConfigurations
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminEndpointsApi~getBasicAuthConfigurationsUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminEndpointsApi~getBasicAuthConfigurationsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/EndpointBasicAuthRepresentation>}
      */
-    this.getBasicAuthConfigurationsUsingGET1 = function(tenantId, callback) {
+    this.getBasicAuthConfigurations = function(tenantId, callback) {
       var postBody = null;
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling getBasicAuthConfigurationsUsingGET1";
+        throw "Missing the required parameter 'tenantId' when calling getBasicAuthConfigurations";
       }
 
 
@@ -218,8 +218,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getEndpointConfigurationUsingGET1 operation.
-     * @callback module:api/AdminEndpointsApi~getEndpointConfigurationUsingGET1Callback
+     * Callback function to receive the result of the getEndpointConfiguration operation.
+     * @callback module:api/AdminEndpointsApi~getEndpointConfigurationCallback
      * @param {String} error Error message, if any.
      * @param {module:model/EndpointConfigurationRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -229,20 +229,20 @@
      * getEndpointConfiguration
      * @param {Integer} endpointConfigurationId endpointConfigurationId
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminEndpointsApi~getEndpointConfigurationUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminEndpointsApi~getEndpointConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/EndpointConfigurationRepresentation}
      */
-    this.getEndpointConfigurationUsingGET1 = function(endpointConfigurationId, tenantId, callback) {
+    this.getEndpointConfiguration = function(endpointConfigurationId, tenantId, callback) {
       var postBody = null;
 
       // verify the required parameter 'endpointConfigurationId' is set
       if (endpointConfigurationId == undefined || endpointConfigurationId == null) {
-        throw "Missing the required parameter 'endpointConfigurationId' when calling getEndpointConfigurationUsingGET1";
+        throw "Missing the required parameter 'endpointConfigurationId' when calling getEndpointConfiguration";
       }
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling getEndpointConfigurationUsingGET1";
+        throw "Missing the required parameter 'tenantId' when calling getEndpointConfiguration";
       }
 
 
@@ -270,8 +270,8 @@
     }
 
     /**
-     * Callback function to receive the result of the getEndpointConfigurationsUsingGET1 operation.
-     * @callback module:api/AdminEndpointsApi~getEndpointConfigurationsUsingGET1Callback
+     * Callback function to receive the result of the getEndpointConfigurations operation.
+     * @callback module:api/AdminEndpointsApi~getEndpointConfigurationsCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/EndpointConfigurationRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -280,15 +280,15 @@
     /**
      * getEndpointConfigurations
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminEndpointsApi~getEndpointConfigurationsUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminEndpointsApi~getEndpointConfigurationsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/EndpointConfigurationRepresentation>}
      */
-    this.getEndpointConfigurationsUsingGET1 = function(tenantId, callback) {
+    this.getEndpointConfigurations = function(tenantId, callback) {
       var postBody = null;
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling getEndpointConfigurationsUsingGET1";
+        throw "Missing the required parameter 'tenantId' when calling getEndpointConfigurations";
       }
 
 
@@ -315,8 +315,8 @@
     }
 
     /**
-     * Callback function to receive the result of the removeBasicAuthonfigurationUsingDELETE1 operation.
-     * @callback module:api/AdminEndpointsApi~removeBasicAuthonfigurationUsingDELETE1Callback
+     * Callback function to receive the result of the removeBasicAuthonfiguration operation.
+     * @callback module:api/AdminEndpointsApi~removeBasicAuthonfigurationCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -326,19 +326,19 @@
      * removeBasicAuthonfiguration
      * @param {Integer} basicAuthId basicAuthId
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminEndpointsApi~removeBasicAuthonfigurationUsingDELETE1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminEndpointsApi~removeBasicAuthonfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.removeBasicAuthonfigurationUsingDELETE1 = function(basicAuthId, tenantId, callback) {
+    this.removeBasicAuthonfiguration = function(basicAuthId, tenantId, callback) {
       var postBody = null;
 
       // verify the required parameter 'basicAuthId' is set
       if (basicAuthId == undefined || basicAuthId == null) {
-        throw "Missing the required parameter 'basicAuthId' when calling removeBasicAuthonfigurationUsingDELETE1";
+        throw "Missing the required parameter 'basicAuthId' when calling removeBasicAuthonfiguration";
       }
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling removeBasicAuthonfigurationUsingDELETE1";
+        throw "Missing the required parameter 'tenantId' when calling removeBasicAuthonfiguration";
       }
 
 
@@ -366,8 +366,8 @@
     }
 
     /**
-     * Callback function to receive the result of the removeEndpointConfigurationUsingDELETE1 operation.
-     * @callback module:api/AdminEndpointsApi~removeEndpointConfigurationUsingDELETE1Callback
+     * Callback function to receive the result of the removeEndpointConfiguration operation.
+     * @callback module:api/AdminEndpointsApi~removeEndpointConfigurationCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -377,19 +377,19 @@
      * removeEndpointConfiguration
      * @param {Integer} endpointConfigurationId endpointConfigurationId
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminEndpointsApi~removeEndpointConfigurationUsingDELETE1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminEndpointsApi~removeEndpointConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.removeEndpointConfigurationUsingDELETE1 = function(endpointConfigurationId, tenantId, callback) {
+    this.removeEndpointConfiguration = function(endpointConfigurationId, tenantId, callback) {
       var postBody = null;
 
       // verify the required parameter 'endpointConfigurationId' is set
       if (endpointConfigurationId == undefined || endpointConfigurationId == null) {
-        throw "Missing the required parameter 'endpointConfigurationId' when calling removeEndpointConfigurationUsingDELETE1";
+        throw "Missing the required parameter 'endpointConfigurationId' when calling removeEndpointConfiguration";
       }
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling removeEndpointConfigurationUsingDELETE1";
+        throw "Missing the required parameter 'tenantId' when calling removeEndpointConfiguration";
       }
 
 
@@ -417,8 +417,8 @@
     }
 
     /**
-     * Callback function to receive the result of the updateBasicAuthConfigurationUsingPUT1 operation.
-     * @callback module:api/AdminEndpointsApi~updateBasicAuthConfigurationUsingPUT1Callback
+     * Callback function to receive the result of the updateBasicAuthConfiguration operation.
+     * @callback module:api/AdminEndpointsApi~updateBasicAuthConfigurationCallback
      * @param {String} error Error message, if any.
      * @param {module:model/EndpointBasicAuthRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -428,20 +428,20 @@
      * updateBasicAuthConfiguration
      * @param {Integer} basicAuthId basicAuthId
      * @param {module:model/CreateEndpointBasicAuthRepresentation} createRepresentation createRepresentation
-     * @param {module:api/AdminEndpointsApi~updateBasicAuthConfigurationUsingPUT1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminEndpointsApi~updateBasicAuthConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/EndpointBasicAuthRepresentation}
      */
-    this.updateBasicAuthConfigurationUsingPUT1 = function(basicAuthId, createRepresentation, callback) {
+    this.updateBasicAuthConfiguration = function(basicAuthId, createRepresentation, callback) {
       var postBody = createRepresentation;
 
       // verify the required parameter 'basicAuthId' is set
       if (basicAuthId == undefined || basicAuthId == null) {
-        throw "Missing the required parameter 'basicAuthId' when calling updateBasicAuthConfigurationUsingPUT1";
+        throw "Missing the required parameter 'basicAuthId' when calling updateBasicAuthConfiguration";
       }
 
       // verify the required parameter 'createRepresentation' is set
       if (createRepresentation == undefined || createRepresentation == null) {
-        throw "Missing the required parameter 'createRepresentation' when calling updateBasicAuthConfigurationUsingPUT1";
+        throw "Missing the required parameter 'createRepresentation' when calling updateBasicAuthConfiguration";
       }
 
 
@@ -468,8 +468,8 @@
     }
 
     /**
-     * Callback function to receive the result of the updateEndpointConfigurationUsingPUT1 operation.
-     * @callback module:api/AdminEndpointsApi~updateEndpointConfigurationUsingPUT1Callback
+     * Callback function to receive the result of the updateEndpointConfiguration operation.
+     * @callback module:api/AdminEndpointsApi~updateEndpointConfigurationCallback
      * @param {String} error Error message, if any.
      * @param {module:model/EndpointConfigurationRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -479,20 +479,20 @@
      * updateEndpointConfiguration
      * @param {Integer} endpointConfigurationId endpointConfigurationId
      * @param {module:model/EndpointConfigurationRepresentation} representation representation
-     * @param {module:api/AdminEndpointsApi~updateEndpointConfigurationUsingPUT1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminEndpointsApi~updateEndpointConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/EndpointConfigurationRepresentation}
      */
-    this.updateEndpointConfigurationUsingPUT1 = function(endpointConfigurationId, representation, callback) {
+    this.updateEndpointConfiguration = function(endpointConfigurationId, representation, callback) {
       var postBody = representation;
 
       // verify the required parameter 'endpointConfigurationId' is set
       if (endpointConfigurationId == undefined || endpointConfigurationId == null) {
-        throw "Missing the required parameter 'endpointConfigurationId' when calling updateEndpointConfigurationUsingPUT1";
+        throw "Missing the required parameter 'endpointConfigurationId' when calling updateEndpointConfiguration";
       }
 
       // verify the required parameter 'representation' is set
       if (representation == undefined || representation == null) {
-        throw "Missing the required parameter 'representation' when calling updateEndpointConfigurationUsingPUT1";
+        throw "Missing the required parameter 'representation' when calling updateEndpointConfiguration";
       }
 
 

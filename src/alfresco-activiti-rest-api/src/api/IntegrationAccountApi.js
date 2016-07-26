@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new IntegrationAccountApi. 
+   * Constructs a new IntegrationAccountApi.
    * @alias module:api/IntegrationAccountApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -33,8 +33,8 @@
 
 
     /**
-     * Callback function to receive the result of the getAccountsUsingGET operation.
-     * @callback module:api/IntegrationAccountApi~getAccountsUsingGETCallback
+     * Callback function to receive the result of the getAccounts operation.
+     * @callback module:api/IntegrationAccountApi~getAccountsCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43,10 +43,10 @@
     /**
      * Retrieve Alfresco account information
      * Ideal to map accounts &amp; integrate with 3rd party app/client
-     * @param {module:api/IntegrationAccountApi~getAccountsUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationAccountApi~getAccountsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAccountsUsingGET = function(callback) {
+    this.getAccounts = function(callback) {
       var postBody = null;
 
 

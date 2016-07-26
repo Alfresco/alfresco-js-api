@@ -4,13 +4,13 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getControllersUsingGET**](ScriptFileApi.md#getControllersUsingGET) | **GET** /api/enterprise/script-files/controllers | getControllers
-[**getLibrariesUsingGET**](ScriptFileApi.md#getLibrariesUsingGET) | **GET** /api/enterprise/script-files/libraries | getLibraries
+[**getControllers**](ScriptFileApi.md#getControllers) | **GET** /api/enterprise/script-files/controllers | getControllers
+[**getLibraries**](ScriptFileApi.md#getLibraries) | **GET** /api/enterprise/script-files/libraries | getLibraries
 
 
-<a name="getControllersUsingGET"></a>
-# **getControllersUsingGET**
-> &#39;String&#39; getControllersUsingGET()
+<a name="getControllers"></a>
+# **getControllers**
+> &#39;String&#39; getControllers()
 
 getControllers
 
@@ -27,7 +27,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getControllersUsingGET(callback);
+apiInstance.getControllers(callback);
 ```
 
 ### Parameters
@@ -46,9 +46,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json, application/javascript
 
-<a name="getLibrariesUsingGET"></a>
-# **getLibrariesUsingGET**
-> &#39;String&#39; getLibrariesUsingGET()
+<a name="getLibraries"></a>
+# **getLibraries**
+> &#39;String&#39; getLibraries()
 
 getLibraries
 
@@ -65,7 +65,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getLibrariesUsingGET(callback);
+apiInstance.getLibraries(callback);
 ```
 
 ### Parameters

@@ -4,24 +4,24 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createModelUsingPOST**](ModelsApi.md#createModelUsingPOST) | **POST** /api/enterprise/models | To create a new model
-[**deleteModelUsingDELETE**](ModelsApi.md#deleteModelUsingDELETE) | **DELETE** /api/enterprise/models/{modelId} | Delete a model
-[**duplicateModelUsingPOST**](ModelsApi.md#duplicateModelUsingPOST) | **POST** /api/enterprise/models/{modelId}/clone | To duplicate an existing model
-[**getModelJSONUsingGET**](ModelsApi.md#getModelJSONUsingGET) | **GET** /api/enterprise/models/{modelId}/editor/json | Get the JSON model
-[**getModelThumbnailUsingGET**](ModelsApi.md#getModelThumbnailUsingGET) | **GET** /api/enterprise/models/{modelId}/thumbnail | Get Model thumbnail
-[**getModelUsingGET**](ModelsApi.md#getModelUsingGET) | **GET** /api/enterprise/models/{modelId} | To retrieve details about a particular model (process, form, decision rule or app)
-[**getModelsToIncludeInAppDefinitionUsingGET**](ModelsApi.md#getModelsToIncludeInAppDefinitionUsingGET) | **GET** /api/enterprise/models-for-app-definition | TODO
-[**getModelsUsingGET**](ModelsApi.md#getModelsUsingGET) | **GET** /api/enterprise/models | List models (process, form, decision rule or app)
-[**importNewVersionUsingPOST**](ModelsApi.md#importNewVersionUsingPOST) | **POST** /api/enterprise/models/{modelId}/newversion | Create a new model version
-[**importProcessModelUsingPOST**](ModelsApi.md#importProcessModelUsingPOST) | **POST** /api/enterprise/process-models/import | To import a BPMN 2.0 xml file
-[**saveModelUsingPOST**](ModelsApi.md#saveModelUsingPOST) | **POST** /api/enterprise/models/{modelId}/editor/json | Save the JSON model
-[**updateModelUsingPUT**](ModelsApi.md#updateModelUsingPUT) | **PUT** /api/enterprise/models/{modelId} | Edit a specific model
-[**validateModelUsingPOST**](ModelsApi.md#validateModelUsingPOST) | **POST** /api/enterprise/models/{modelId}/editor/validate | Validate the JSON model
+[**createModel**](ModelsApi.md#createModel) | **POST** /api/enterprise/models | To create a new model
+[**deleteModel**](ModelsApi.md#deleteModel) | **DELETE** /api/enterprise/models/{modelId} | Delete a model
+[**duplicateModel**](ModelsApi.md#duplicateModel) | **POST** /api/enterprise/models/{modelId}/clone | To duplicate an existing model
+[**getModelJSON**](ModelsApi.md#getModelJSON) | **GET** /api/enterprise/models/{modelId}/editor/json | Get the JSON model
+[**getModelThumbnail**](ModelsApi.md#getModelThumbnail) | **GET** /api/enterprise/models/{modelId}/thumbnail | Get Model thumbnail
+[**getModel**](ModelsApi.md#getModel) | **GET** /api/enterprise/models/{modelId} | To retrieve details about a particular model (process, form, decision rule or app)
+[**getModelsToIncludeInAppDefinition**](ModelsApi.md#getModelsToIncludeInAppDefinition) | **GET** /api/enterprise/models-for-app-definition | TODO
+[**getModels**](ModelsApi.md#getModels) | **GET** /api/enterprise/models | List models (process, form, decision rule or app)
+[**importNewVersion**](ModelsApi.md#importNewVersion) | **POST** /api/enterprise/models/{modelId}/newversion | Create a new model version
+[**importProcessModel**](ModelsApi.md#importProcessModel) | **POST** /api/enterprise/process-models/import | To import a BPMN 2.0 xml file
+[**saveModel**](ModelsApi.md#saveModel) | **POST** /api/enterprise/models/{modelId}/editor/json | Save the JSON model
+[**updateModel**](ModelsApi.md#updateModel) | **PUT** /api/enterprise/models/{modelId} | Edit a specific model
+[**validateModel**](ModelsApi.md#validateModel) | **POST** /api/enterprise/models/{modelId}/editor/validate | Validate the JSON model
 
 
-<a name="createModelUsingPOST"></a>
-# **createModelUsingPOST**
-> ModelRepresentation createModelUsingPOST(modelRepresentation)
+<a name="createModel"></a>
+# **createModel**
+> ModelRepresentation createModel(modelRepresentation)
 
 To create a new model
 
@@ -41,7 +41,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.createModelUsingPOST(modelRepresentation, callback);
+apiInstance.createModel(modelRepresentation, callback);
 ```
 
 ### Parameters
@@ -63,9 +63,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="deleteModelUsingDELETE"></a>
-# **deleteModelUsingDELETE**
-> deleteModelUsingDELETE(modelId, opts)
+<a name="deleteModel"></a>
+# **deleteModel**
+> deleteModel(modelId, opts)
 
 Delete a model
 
@@ -89,7 +89,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.deleteModelUsingDELETE(modelId, opts, callback);
+apiInstance.deleteModel(modelId, opts, callback);
 ```
 
 ### Parameters
@@ -113,9 +113,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="duplicateModelUsingPOST"></a>
-# **duplicateModelUsingPOST**
-> ModelRepresentation duplicateModelUsingPOST(modelId, modelRepresentation)
+<a name="duplicateModel"></a>
+# **duplicateModel**
+> ModelRepresentation duplicateModel(modelId, modelRepresentation)
 
 To duplicate an existing model
 
@@ -137,7 +137,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.duplicateModelUsingPOST(modelId, modelRepresentation, callback);
+apiInstance.duplicateModel(modelId, modelRepresentation, callback);
 ```
 
 ### Parameters
@@ -160,9 +160,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getModelJSONUsingGET"></a>
-# **getModelJSONUsingGET**
-> ObjectNode getModelJSONUsingGET(modelId)
+<a name="getModelJSON"></a>
+# **getModelJSON**
+> ObjectNode getModelJSON(modelId)
 
 Get the JSON model
 
@@ -182,7 +182,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getModelJSONUsingGET(modelId, callback);
+apiInstance.getModelJSON(modelId, callback);
 ```
 
 ### Parameters
@@ -204,9 +204,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getModelThumbnailUsingGET"></a>
-# **getModelThumbnailUsingGET**
-> [&#39;String&#39;] getModelThumbnailUsingGET(modelId)
+<a name="getModelThumbnail"></a>
+# **getModelThumbnail**
+> [&#39;String&#39;] getModelThumbnail(modelId)
 
 Get Model thumbnail
 
@@ -226,7 +226,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getModelThumbnailUsingGET(modelId, callback);
+apiInstance.getModelThumbnail(modelId, callback);
 ```
 
 ### Parameters
@@ -248,9 +248,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: image/png, application/json
 
-<a name="getModelUsingGET"></a>
-# **getModelUsingGET**
-> ModelRepresentation getModelUsingGET(modelId, opts)
+<a name="getModel"></a>
+# **getModel**
+> ModelRepresentation getModel(modelId, opts)
 
 To retrieve details about a particular model (process, form, decision rule or app)
 
@@ -273,7 +273,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getModelUsingGET(modelId, opts, callback);
+apiInstance.getModel(modelId, opts, callback);
 ```
 
 ### Parameters
@@ -296,9 +296,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getModelsToIncludeInAppDefinitionUsingGET"></a>
-# **getModelsToIncludeInAppDefinitionUsingGET**
-> ResultListDataRepresentation getModelsToIncludeInAppDefinitionUsingGET()
+<a name="getModelsToIncludeInAppDefinition"></a>
+# **getModelsToIncludeInAppDefinition**
+> ResultListDataRepresentation getModelsToIncludeInAppDefinition()
 
 TODO
 
@@ -315,7 +315,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getModelsToIncludeInAppDefinitionUsingGET(callback);
+apiInstance.getModelsToIncludeInAppDefinition(callback);
 ```
 
 ### Parameters
@@ -334,9 +334,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getModelsUsingGET"></a>
-# **getModelsUsingGET**
-> ResultListDataRepresentation getModelsUsingGET(opts)
+<a name="getModels"></a>
+# **getModels**
+> ResultListDataRepresentation getModels(opts)
 
 List models (process, form, decision rule or app)
 
@@ -360,7 +360,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getModelsUsingGET(opts, callback);
+apiInstance.getModels(opts, callback);
 ```
 
 ### Parameters
@@ -385,9 +385,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="importNewVersionUsingPOST"></a>
-# **importNewVersionUsingPOST**
-> ModelRepresentation importNewVersionUsingPOST(modelId, file)
+<a name="importNewVersion"></a>
+# **importNewVersion**
+> ModelRepresentation importNewVersion(modelId, file)
 
 Create a new model version
 
@@ -409,7 +409,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.importNewVersionUsingPOST(modelId, file, callback);
+apiInstance.importNewVersion(modelId, file, callback);
 ```
 
 ### Parameters
@@ -432,9 +432,9 @@ No authorization required
  - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
-<a name="importProcessModelUsingPOST"></a>
-# **importProcessModelUsingPOST**
-> ModelRepresentation importProcessModelUsingPOST(file)
+<a name="importProcessModel"></a>
+# **importProcessModel**
+> ModelRepresentation importProcessModel(file)
 
 To import a BPMN 2.0 xml file
 
@@ -454,7 +454,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.importProcessModelUsingPOST(file, callback);
+apiInstance.importProcessModel(file, callback);
 ```
 
 ### Parameters
@@ -476,9 +476,9 @@ No authorization required
  - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
-<a name="saveModelUsingPOST"></a>
-# **saveModelUsingPOST**
-> ModelRepresentation saveModelUsingPOST(modelId, values)
+<a name="saveModel"></a>
+# **saveModel**
+> ModelRepresentation saveModel(modelId, values)
 
 Save the JSON model
 
@@ -500,7 +500,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.saveModelUsingPOST(modelId, values, callback);
+apiInstance.saveModel(modelId, values, callback);
 ```
 
 ### Parameters
@@ -523,9 +523,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="updateModelUsingPUT"></a>
-# **updateModelUsingPUT**
-> ModelRepresentation updateModelUsingPUT(modelId, updatedModel)
+<a name="updateModel"></a>
+# **updateModel**
+> ModelRepresentation updateModel(modelId, updatedModel)
 
 Edit a specific model
 
@@ -547,7 +547,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.updateModelUsingPUT(modelId, updatedModel, callback);
+apiInstance.updateModel(modelId, updatedModel, callback);
 ```
 
 ### Parameters
@@ -570,9 +570,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="validateModelUsingPOST"></a>
-# **validateModelUsingPOST**
-> [ValidationErrorRepresentation] validateModelUsingPOST(modelId, opts)
+<a name="validateModel"></a>
+# **validateModel**
+> [ValidationErrorRepresentation] validateModel(modelId, opts)
 
 Validate the JSON model
 
@@ -595,7 +595,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.validateModelUsingPOST(modelId, opts, callback);
+apiInstance.validateModel(modelId, opts, callback);
 ```
 
 ### Parameters

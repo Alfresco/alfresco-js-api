@@ -4,23 +4,23 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createRelatedContentOnProcessInstanceUsingPOST**](ContentApi.md#createRelatedContentOnProcessInstanceUsingPOST) | **POST** /api/enterprise/process-instances/{processInstanceId}/content | createRelatedContentOnProcessInstance
-[**createRelatedContentOnProcessInstanceUsingPOST1**](ContentApi.md#createRelatedContentOnProcessInstanceUsingPOST1) | **POST** /api/enterprise/process-instances/{processInstanceId}/raw-content | createRelatedContentOnProcessInstance
-[**createRelatedContentOnTaskUsingPOST**](ContentApi.md#createRelatedContentOnTaskUsingPOST) | **POST** /api/enterprise/tasks/{taskId}/content | To relate content (eg from Alfresco) to a task
-[**createRelatedContentOnTaskUsingPOST1**](ContentApi.md#createRelatedContentOnTaskUsingPOST1) | **POST** /api/enterprise/tasks/{taskId}/raw-content | Upload content to a task
-[**createTemporaryRawRelatedContentUsingPOST1**](ContentApi.md#createTemporaryRawRelatedContentUsingPOST1) | **POST** /api/enterprise/content/raw | createTemporaryRawRelatedContent
-[**createTemporaryRelatedContentUsingPOST**](ContentApi.md#createTemporaryRelatedContentUsingPOST) | **POST** /api/enterprise/content | createTemporaryRelatedContent
-[**deleteContentUsingDELETE1**](ContentApi.md#deleteContentUsingDELETE1) | **DELETE** /api/enterprise/content/{contentId} | deleteContent
-[**getContentUsingGET1**](ContentApi.md#getContentUsingGET1) | **GET** /api/enterprise/content/{contentId} | getContent
-[**getProcessInstanceContentUsingGET**](ContentApi.md#getProcessInstanceContentUsingGET) | **GET** /api/enterprise/process-instances/{processInstanceId}/field-content | Retrieve content attached to process instance fields
-[**getRawContentUsingGET3**](ContentApi.md#getRawContentUsingGET3) | **GET** /api/enterprise/content/{contentId}/raw | getRawContent
-[**getRelatedContentForProcessInstanceUsingGET**](ContentApi.md#getRelatedContentForProcessInstanceUsingGET) | **GET** /api/enterprise/process-instances/{processInstanceId}/content | getRelatedContentForProcessInstance
-[**getRelatedContentForTaskUsingGET**](ContentApi.md#getRelatedContentForTaskUsingGET) | **GET** /api/enterprise/tasks/{taskId}/content | Retrieve which content is attached to a task
+[**createRelatedContentOnProcessInstance**](ContentApi.md#createRelatedContentOnProcessInstance) | **POST** /api/enterprise/process-instances/{processInstanceId}/content | createRelatedContentOnProcessInstance
+[**createRelatedContentOnProcessInstance**](ContentApi.md#createRelatedContentOnProcessInstance) | **POST** /api/enterprise/process-instances/{processInstanceId}/raw-content | createRelatedContentOnProcessInstance
+[**createRelatedContentOnTask**](ContentApi.md#createRelatedContentOnTask) | **POST** /api/enterprise/tasks/{taskId}/content | To relate content (eg from Alfresco) to a task
+[**createRelatedContentOnTask**](ContentApi.md#createRelatedContentOnTask) | **POST** /api/enterprise/tasks/{taskId}/raw-content | Upload content to a task
+[**createTemporaryRawRelatedContent**](ContentApi.md#createTemporaryRawRelatedContent) | **POST** /api/enterprise/content/raw | createTemporaryRawRelatedContent
+[**createTemporaryRelatedContent**](ContentApi.md#createTemporaryRelatedContent) | **POST** /api/enterprise/content | createTemporaryRelatedContent
+[**deleteContent**](ContentApi.md#deleteContent) | **DELETE** /api/enterprise/content/{contentId} | deleteContent
+[**getContent**](ContentApi.md#getContent) | **GET** /api/enterprise/content/{contentId} | getContent
+[**getProcessInstanceContent**](ContentApi.md#getProcessInstanceContent) | **GET** /api/enterprise/process-instances/{processInstanceId}/field-content | Retrieve content attached to process instance fields
+[**getRawContent3**](ContentApi.md#getRawContent3) | **GET** /api/enterprise/content/{contentId}/raw | getRawContent
+[**getRelatedContentForProcessInstance**](ContentApi.md#getRelatedContentForProcessInstance) | **GET** /api/enterprise/process-instances/{processInstanceId}/content | getRelatedContentForProcessInstance
+[**getRelatedContentForTask**](ContentApi.md#getRelatedContentForTask) | **GET** /api/enterprise/tasks/{taskId}/content | Retrieve which content is attached to a task
 
 
-<a name="createRelatedContentOnProcessInstanceUsingPOST"></a>
-# **createRelatedContentOnProcessInstanceUsingPOST**
-> RelatedContentRepresentation createRelatedContentOnProcessInstanceUsingPOST(processInstanceId, relatedContent)
+<a name="createRelatedContentOnProcessInstance"></a>
+# **createRelatedContentOnProcessInstance**
+> RelatedContentRepresentation createRelatedContentOnProcessInstance(processInstanceId, relatedContent)
 
 createRelatedContentOnProcessInstance
 
@@ -42,7 +42,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.createRelatedContentOnProcessInstanceUsingPOST(processInstanceId, relatedContent, callback);
+apiInstance.createRelatedContentOnProcessInstance(processInstanceId, relatedContent, callback);
 ```
 
 ### Parameters
@@ -65,9 +65,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="createRelatedContentOnProcessInstanceUsingPOST1"></a>
-# **createRelatedContentOnProcessInstanceUsingPOST1**
-> RelatedContentRepresentation createRelatedContentOnProcessInstanceUsingPOST1(processInstanceId, file)
+<a name="createRelatedContentOnProcessInstance"></a>
+# **createRelatedContentOnProcessInstance**
+> RelatedContentRepresentation createRelatedContentOnProcessInstance(processInstanceId, file)
 
 createRelatedContentOnProcessInstance
 
@@ -89,7 +89,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.createRelatedContentOnProcessInstanceUsingPOST1(processInstanceId, file, callback);
+apiInstance.createRelatedContentOnProcessInstance(processInstanceId, file, callback);
 ```
 
 ### Parameters
@@ -112,9 +112,9 @@ No authorization required
  - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
-<a name="createRelatedContentOnTaskUsingPOST"></a>
-# **createRelatedContentOnTaskUsingPOST**
-> RelatedContentRepresentation createRelatedContentOnTaskUsingPOST(taskId, relatedContent, opts)
+<a name="createRelatedContentOnTask"></a>
+# **createRelatedContentOnTask**
+> RelatedContentRepresentation createRelatedContentOnTask(taskId, relatedContent, opts)
 
 To relate content (eg from Alfresco) to a task
 
@@ -139,7 +139,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.createRelatedContentOnTaskUsingPOST(taskId, relatedContent, opts, callback);
+apiInstance.createRelatedContentOnTask(taskId, relatedContent, opts, callback);
 ```
 
 ### Parameters
@@ -163,9 +163,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="createRelatedContentOnTaskUsingPOST1"></a>
-# **createRelatedContentOnTaskUsingPOST1**
-> RelatedContentRepresentation createRelatedContentOnTaskUsingPOST1(taskId, file, opts)
+<a name="createRelatedContentOnTask"></a>
+# **createRelatedContentOnTask**
+> RelatedContentRepresentation createRelatedContentOnTask(taskId, file, opts)
 
 Upload content to a task
 
@@ -190,7 +190,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.createRelatedContentOnTaskUsingPOST1(taskId, file, opts, callback);
+apiInstance.createRelatedContentOnTask(taskId, file, opts, callback);
 ```
 
 ### Parameters
@@ -214,9 +214,9 @@ No authorization required
  - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
-<a name="createTemporaryRawRelatedContentUsingPOST1"></a>
-# **createTemporaryRawRelatedContentUsingPOST1**
-> RelatedContentRepresentation createTemporaryRawRelatedContentUsingPOST1(file)
+<a name="createTemporaryRawRelatedContent"></a>
+# **createTemporaryRawRelatedContent**
+> RelatedContentRepresentation createTemporaryRawRelatedContent(file)
 
 createTemporaryRawRelatedContent
 
@@ -236,7 +236,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.createTemporaryRawRelatedContentUsingPOST1(file, callback);
+apiInstance.createTemporaryRawRelatedContent(file, callback);
 ```
 
 ### Parameters
@@ -258,9 +258,9 @@ No authorization required
  - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
-<a name="createTemporaryRelatedContentUsingPOST"></a>
-# **createTemporaryRelatedContentUsingPOST**
-> RelatedContentRepresentation createTemporaryRelatedContentUsingPOST(relatedContent)
+<a name="createTemporaryRelatedContent"></a>
+# **createTemporaryRelatedContent**
+> RelatedContentRepresentation createTemporaryRelatedContent(relatedContent)
 
 createTemporaryRelatedContent
 
@@ -280,7 +280,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.createTemporaryRelatedContentUsingPOST(relatedContent, callback);
+apiInstance.createTemporaryRelatedContent(relatedContent, callback);
 ```
 
 ### Parameters
@@ -302,9 +302,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="deleteContentUsingDELETE1"></a>
-# **deleteContentUsingDELETE1**
-> deleteContentUsingDELETE1(contentId)
+<a name="deleteContent"></a>
+# **deleteContent**
+> deleteContent(contentId)
 
 deleteContent
 
@@ -324,7 +324,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.deleteContentUsingDELETE1(contentId, callback);
+apiInstance.deleteContent(contentId, callback);
 ```
 
 ### Parameters
@@ -346,9 +346,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getContentUsingGET1"></a>
-# **getContentUsingGET1**
-> RelatedContentRepresentation getContentUsingGET1(contentId)
+<a name="getContent"></a>
+# **getContent**
+> RelatedContentRepresentation getContent(contentId)
 
 getContent
 
@@ -368,7 +368,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getContentUsingGET1(contentId, callback);
+apiInstance.getContent(contentId, callback);
 ```
 
 ### Parameters
@@ -390,9 +390,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getProcessInstanceContentUsingGET"></a>
-# **getProcessInstanceContentUsingGET**
-> ResultListDataRepresentation getProcessInstanceContentUsingGET(processInstanceId)
+<a name="getProcessInstanceContent"></a>
+# **getProcessInstanceContent**
+> ResultListDataRepresentation getProcessInstanceContent(processInstanceId)
 
 Retrieve content attached to process instance fields
 
@@ -412,7 +412,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getProcessInstanceContentUsingGET(processInstanceId, callback);
+apiInstance.getProcessInstanceContent(processInstanceId, callback);
 ```
 
 ### Parameters
@@ -434,9 +434,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getRawContentUsingGET3"></a>
-# **getRawContentUsingGET3**
-> getRawContentUsingGET3(contentId)
+<a name="getRawContent3"></a>
+# **getRawContent3**
+> getRawContent3(contentId)
 
 getRawContent
 
@@ -456,7 +456,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.getRawContentUsingGET3(contentId, callback);
+apiInstance.getRawContent3(contentId, callback);
 ```
 
 ### Parameters
@@ -478,9 +478,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getRelatedContentForProcessInstanceUsingGET"></a>
-# **getRelatedContentForProcessInstanceUsingGET**
-> ResultListDataRepresentation getRelatedContentForProcessInstanceUsingGET(processInstanceId)
+<a name="getRelatedContentForProcessInstance"></a>
+# **getRelatedContentForProcessInstance**
+> ResultListDataRepresentation getRelatedContentForProcessInstance(processInstanceId)
 
 getRelatedContentForProcessInstance
 
@@ -500,7 +500,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getRelatedContentForProcessInstanceUsingGET(processInstanceId, callback);
+apiInstance.getRelatedContentForProcessInstance(processInstanceId, callback);
 ```
 
 ### Parameters
@@ -522,9 +522,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getRelatedContentForTaskUsingGET"></a>
-# **getRelatedContentForTaskUsingGET**
-> ResultListDataRepresentation getRelatedContentForTaskUsingGET(taskId)
+<a name="getRelatedContentForTask"></a>
+# **getRelatedContentForTask**
+> ResultListDataRepresentation getRelatedContentForTask(taskId)
 
 Retrieve which content is attached to a task
 
@@ -544,7 +544,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getRelatedContentForTaskUsingGET(taskId, callback);
+apiInstance.getRelatedContentForTask(taskId, callback);
 ```
 
 ### Parameters

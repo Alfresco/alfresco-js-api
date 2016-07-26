@@ -4,12 +4,12 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getAppVersionUsingGET**](AboutApi.md#getAppVersionUsingGET) | **GET** /api/enterprise/app-version | Server Information
+[**getAppVersion**](AboutApi.md#getAppVersion) | **GET** /api/enterprise/app-version | Server Information
 
 
-<a name="getAppVersionUsingGET"></a>
-# **getAppVersionUsingGET**
-> {&#39;String&#39;: &#39;String&#39;} getAppVersionUsingGET()
+<a name="getAppVersion"></a>
+# **getAppVersion**
+> {&#39;String&#39;: &#39;String&#39;} getAppVersion()
 
 Server Information
 
@@ -28,7 +28,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getAppVersionUsingGET(callback);
+apiInstance.getAppVersion(callback);
 ```
 
 ### Parameters

@@ -4,23 +4,23 @@ All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createUserProcessInstanceFilterUsingPOST**](UserFiltersApi.md#createUserProcessInstanceFilterUsingPOST) | **POST** /api/enterprise/filters/processes | Create a user process instance task filter
-[**createUserTaskFilterUsingPOST**](UserFiltersApi.md#createUserTaskFilterUsingPOST) | **POST** /api/enterprise/filters/tasks | Create a new task filter
-[**deleteUserProcessInstanceFilterUsingDELETE**](UserFiltersApi.md#deleteUserProcessInstanceFilterUsingDELETE) | **DELETE** /api/enterprise/filters/processes/{userFilterId} | Delete a user process instance task filter
-[**deleteUserTaskFilterUsingDELETE**](UserFiltersApi.md#deleteUserTaskFilterUsingDELETE) | **DELETE** /api/enterprise/filters/tasks/{userFilterId} | Delete a task filter
-[**getUserProcessInstanceFilterUsingGET**](UserFiltersApi.md#getUserProcessInstanceFilterUsingGET) | **GET** /api/enterprise/filters/processes/{userFilterId} | Get a specific user process instance task filter
-[**getUserProcessInstanceFiltersUsingGET**](UserFiltersApi.md#getUserProcessInstanceFiltersUsingGET) | **GET** /api/enterprise/filters/processes | Retrieve list of taks filters
-[**getUserTaskFilterUsingGET**](UserFiltersApi.md#getUserTaskFilterUsingGET) | **GET** /api/enterprise/filters/tasks/{userFilterId} | Get a specific task filter
-[**getUserTaskFiltersUsingGET**](UserFiltersApi.md#getUserTaskFiltersUsingGET) | **GET** /api/enterprise/filters/tasks | Retrieve list of task filters
-[**orderUserProcessInstanceFiltersUsingPUT**](UserFiltersApi.md#orderUserProcessInstanceFiltersUsingPUT) | **PUT** /api/enterprise/filters/processes | To order the list of user process instance filters
-[**orderUserTaskFiltersUsingPUT**](UserFiltersApi.md#orderUserTaskFiltersUsingPUT) | **PUT** /api/enterprise/filters/tasks | To order the list of user task filters
-[**updateUserProcessInstanceFilterUsingPUT**](UserFiltersApi.md#updateUserProcessInstanceFilterUsingPUT) | **PUT** /api/enterprise/filters/processes/{userFilterId} | Update a user process instance task filter
-[**updateUserTaskFilterUsingPUT**](UserFiltersApi.md#updateUserTaskFilterUsingPUT) | **PUT** /api/enterprise/filters/tasks/{userFilterId} | Update a specific task filter
+[**createUserProcessInstanceFilter**](UserFiltersApi.md#createUserProcessInstanceFilter) | **POST** /api/enterprise/filters/processes | Create a user process instance task filter
+[**createUserTaskFilter**](UserFiltersApi.md#createUserTaskFilter) | **POST** /api/enterprise/filters/tasks | Create a new task filter
+[**deleteUserProcessInstanceFilter**](UserFiltersApi.md#deleteUserProcessInstanceFilter) | **DELETE** /api/enterprise/filters/processes/{userFilterId} | Delete a user process instance task filter
+[**deleteUserTaskFilter**](UserFiltersApi.md#deleteUserTaskFilter) | **DELETE** /api/enterprise/filters/tasks/{userFilterId} | Delete a task filter
+[**getUserProcessInstanceFilter**](UserFiltersApi.md#getUserProcessInstanceFilter) | **GET** /api/enterprise/filters/processes/{userFilterId} | Get a specific user process instance task filter
+[**getUserProcessInstanceFilters**](UserFiltersApi.md#getUserProcessInstanceFilters) | **GET** /api/enterprise/filters/processes | Retrieve list of taks filters
+[**getUserTaskFilter**](UserFiltersApi.md#getUserTaskFilter) | **GET** /api/enterprise/filters/tasks/{userFilterId} | Get a specific task filter
+[**getUserTaskFilters**](UserFiltersApi.md#getUserTaskFilters) | **GET** /api/enterprise/filters/tasks | Retrieve list of task filters
+[**orderUserProcessInstanceFilters**](UserFiltersApi.md#orderUserProcessInstanceFilters) | **PUT** /api/enterprise/filters/processes | To order the list of user process instance filters
+[**orderUserTaskFilters**](UserFiltersApi.md#orderUserTaskFilters) | **PUT** /api/enterprise/filters/tasks | To order the list of user task filters
+[**updateUserProcessInstanceFilter**](UserFiltersApi.md#updateUserProcessInstanceFilter) | **PUT** /api/enterprise/filters/processes/{userFilterId} | Update a user process instance task filter
+[**updateUserTaskFilter**](UserFiltersApi.md#updateUserTaskFilter) | **PUT** /api/enterprise/filters/tasks/{userFilterId} | Update a specific task filter
 
 
-<a name="createUserProcessInstanceFilterUsingPOST"></a>
-# **createUserProcessInstanceFilterUsingPOST**
-> UserProcessInstanceFilterRepresentation createUserProcessInstanceFilterUsingPOST(userProcessInstanceFilterRepresentation)
+<a name="createUserProcessInstanceFilter"></a>
+# **createUserProcessInstanceFilter**
+> UserProcessInstanceFilterRepresentation createUserProcessInstanceFilter(userProcessInstanceFilterRepresentation)
 
 Create a user process instance task filter
 
@@ -40,7 +40,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.createUserProcessInstanceFilterUsingPOST(userProcessInstanceFilterRepresentation, callback);
+apiInstance.createUserProcessInstanceFilter(userProcessInstanceFilterRepresentation, callback);
 ```
 
 ### Parameters
@@ -62,9 +62,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="createUserTaskFilterUsingPOST"></a>
-# **createUserTaskFilterUsingPOST**
-> UserTaskFilterRepresentation createUserTaskFilterUsingPOST(userTaskFilterRepresentation)
+<a name="createUserTaskFilter"></a>
+# **createUserTaskFilter**
+> UserTaskFilterRepresentation createUserTaskFilter(userTaskFilterRepresentation)
 
 Create a new task filter
 
@@ -84,7 +84,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.createUserTaskFilterUsingPOST(userTaskFilterRepresentation, callback);
+apiInstance.createUserTaskFilter(userTaskFilterRepresentation, callback);
 ```
 
 ### Parameters
@@ -106,9 +106,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="deleteUserProcessInstanceFilterUsingDELETE"></a>
-# **deleteUserProcessInstanceFilterUsingDELETE**
-> deleteUserProcessInstanceFilterUsingDELETE(userFilterId)
+<a name="deleteUserProcessInstanceFilter"></a>
+# **deleteUserProcessInstanceFilter**
+> deleteUserProcessInstanceFilter(userFilterId)
 
 Delete a user process instance task filter
 
@@ -128,7 +128,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.deleteUserProcessInstanceFilterUsingDELETE(userFilterId, callback);
+apiInstance.deleteUserProcessInstanceFilter(userFilterId, callback);
 ```
 
 ### Parameters
@@ -150,9 +150,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="deleteUserTaskFilterUsingDELETE"></a>
-# **deleteUserTaskFilterUsingDELETE**
-> deleteUserTaskFilterUsingDELETE(userFilterId)
+<a name="deleteUserTaskFilter"></a>
+# **deleteUserTaskFilter**
+> deleteUserTaskFilter(userFilterId)
 
 Delete a task filter
 
@@ -172,7 +172,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.deleteUserTaskFilterUsingDELETE(userFilterId, callback);
+apiInstance.deleteUserTaskFilter(userFilterId, callback);
 ```
 
 ### Parameters
@@ -194,9 +194,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getUserProcessInstanceFilterUsingGET"></a>
-# **getUserProcessInstanceFilterUsingGET**
-> UserProcessInstanceFilterRepresentation getUserProcessInstanceFilterUsingGET(userFilterId)
+<a name="getUserProcessInstanceFilter"></a>
+# **getUserProcessInstanceFilter**
+> UserProcessInstanceFilterRepresentation getUserProcessInstanceFilter(userFilterId)
 
 Get a specific user process instance task filter
 
@@ -216,7 +216,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getUserProcessInstanceFilterUsingGET(userFilterId, callback);
+apiInstance.getUserProcessInstanceFilter(userFilterId, callback);
 ```
 
 ### Parameters
@@ -238,9 +238,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getUserProcessInstanceFiltersUsingGET"></a>
-# **getUserProcessInstanceFiltersUsingGET**
-> ResultListDataRepresentation getUserProcessInstanceFiltersUsingGET(opts)
+<a name="getUserProcessInstanceFilters"></a>
+# **getUserProcessInstanceFilters**
+> ResultListDataRepresentation getUserProcessInstanceFilters(opts)
 
 Retrieve list of taks filters
 
@@ -261,7 +261,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getUserProcessInstanceFiltersUsingGET(opts, callback);
+apiInstance.getUserProcessInstanceFilters(opts, callback);
 ```
 
 ### Parameters
@@ -283,9 +283,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getUserTaskFilterUsingGET"></a>
-# **getUserTaskFilterUsingGET**
-> UserTaskFilterRepresentation getUserTaskFilterUsingGET(userFilterId)
+<a name="getUserTaskFilter"></a>
+# **getUserTaskFilter**
+> UserTaskFilterRepresentation getUserTaskFilter(userFilterId)
 
 Get a specific task filter
 
@@ -305,7 +305,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getUserTaskFilterUsingGET(userFilterId, callback);
+apiInstance.getUserTaskFilter(userFilterId, callback);
 ```
 
 ### Parameters
@@ -327,9 +327,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getUserTaskFiltersUsingGET"></a>
-# **getUserTaskFiltersUsingGET**
-> ResultListDataRepresentation getUserTaskFiltersUsingGET(opts)
+<a name="getUserTaskFilters"></a>
+# **getUserTaskFilters**
+> ResultListDataRepresentation getUserTaskFilters(opts)
 
 Retrieve list of task filters
 
@@ -350,7 +350,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getUserTaskFiltersUsingGET(opts, callback);
+apiInstance.getUserTaskFilters(opts, callback);
 ```
 
 ### Parameters
@@ -372,9 +372,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="orderUserProcessInstanceFiltersUsingPUT"></a>
-# **orderUserProcessInstanceFiltersUsingPUT**
-> orderUserProcessInstanceFiltersUsingPUT(filterOrderRepresentation)
+<a name="orderUserProcessInstanceFilters"></a>
+# **orderUserProcessInstanceFilters**
+> orderUserProcessInstanceFilters(filterOrderRepresentation)
 
 To order the list of user process instance filters
 
@@ -394,7 +394,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.orderUserProcessInstanceFiltersUsingPUT(filterOrderRepresentation, callback);
+apiInstance.orderUserProcessInstanceFilters(filterOrderRepresentation, callback);
 ```
 
 ### Parameters
@@ -416,9 +416,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="orderUserTaskFiltersUsingPUT"></a>
-# **orderUserTaskFiltersUsingPUT**
-> orderUserTaskFiltersUsingPUT(filterOrderRepresentation)
+<a name="orderUserTaskFilters"></a>
+# **orderUserTaskFilters**
+> orderUserTaskFilters(filterOrderRepresentation)
 
 To order the list of user task filters
 
@@ -438,7 +438,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.orderUserTaskFiltersUsingPUT(filterOrderRepresentation, callback);
+apiInstance.orderUserTaskFilters(filterOrderRepresentation, callback);
 ```
 
 ### Parameters
@@ -460,9 +460,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="updateUserProcessInstanceFilterUsingPUT"></a>
-# **updateUserProcessInstanceFilterUsingPUT**
-> UserProcessInstanceFilterRepresentation updateUserProcessInstanceFilterUsingPUT(userFilterId, userProcessInstanceFilterRepresentation)
+<a name="updateUserProcessInstanceFilter"></a>
+# **updateUserProcessInstanceFilter**
+> UserProcessInstanceFilterRepresentation updateUserProcessInstanceFilter(userFilterId, userProcessInstanceFilterRepresentation)
 
 Update a user process instance task filter
 
@@ -484,7 +484,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.updateUserProcessInstanceFilterUsingPUT(userFilterId, userProcessInstanceFilterRepresentation, callback);
+apiInstance.updateUserProcessInstanceFilter(userFilterId, userProcessInstanceFilterRepresentation, callback);
 ```
 
 ### Parameters
@@ -507,9 +507,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="updateUserTaskFilterUsingPUT"></a>
-# **updateUserTaskFilterUsingPUT**
-> UserTaskFilterRepresentation updateUserTaskFilterUsingPUT(userFilterId, userTaskFilterRepresentation)
+<a name="updateUserTaskFilter"></a>
+# **updateUserTaskFilter**
+> UserTaskFilterRepresentation updateUserTaskFilter(userFilterId, userTaskFilterRepresentation)
 
 Update a specific task filter
 
@@ -531,7 +531,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.updateUserTaskFilterUsingPUT(userFilterId, userTaskFilterRepresentation, callback);
+apiInstance.updateUserTaskFilter(userFilterId, userTaskFilterRepresentation, callback);
 ```
 
 ### Parameters
