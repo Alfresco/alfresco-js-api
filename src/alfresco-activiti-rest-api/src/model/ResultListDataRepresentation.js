@@ -50,7 +50,7 @@
       obj = obj || new exports();
 
       if (data.hasOwnProperty('data')) {
-        obj['data'] = ApiClient.convertToType(data['data'], [AbstractRepresentation]);
+        obj['data'] = ApiClient.convertToType(data['data'], 'object');
       }
       if (data.hasOwnProperty('size')) {
         obj['size'] = ApiClient.convertToType(data['size'], 'Integer');

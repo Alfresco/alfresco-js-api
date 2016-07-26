@@ -10,10 +10,10 @@ describe('Activiti Task Api', function () {
 
         this.authResponseBpmMock = new AuthBpmMock(this.hostActiviti);
 
-        this.authResponseBpmMock.get200Response();
+        this.authResponseBpmMock.rec();
 
         this.alfrescoJsApi = new AlfrescoApi({
-            username: 'admin',
+            username: 'admin@app.activiti.com',
             password: 'admin',
             host: this.hostActiviti,
             provider: 'BPM'
@@ -24,14 +24,7 @@ describe('Activiti Task Api', function () {
         });
     });
 
-    it.skip('get activiti Tak list', function () {
-        this.authResponseBpmMock.rec();
-
-        var processApiInstance = new this.alfrescoJsApi.activiti.ProcessApi();
-
-        processApiInstance.getProcessInstancesUsingPOST('{"page":0,"sort":"created-desc","state":"all"}');
-
-        this.authResponseBpmMock.play();
+    it.skip('get activiti Task list', function () {
 
     });
 });
