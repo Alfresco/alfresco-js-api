@@ -26,14 +26,7 @@ var opts = {
   'includeLatestVersion': true // Boolean | includeLatestVersion
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getModelHistoryCollection(modelId, opts, callback);
+apiInstance.getModelHistoryCollection(modelId, opts);
 ```
 
 ### Parameters
@@ -72,15 +65,7 @@ var modelId = 789; // Integer | modelId
 
 var modelHistoryId = 789; // Integer | modelHistoryId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProcessModelHistory(modelId, modelHistoryId, callback);
+apiInstance.getProcessModelHistory(modelId, modelHistoryId);
 ```
 
 ### Parameters

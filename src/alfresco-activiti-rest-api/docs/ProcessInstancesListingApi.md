@@ -22,15 +22,7 @@ var apiInstance = new ActivitiPublicRestApi.ProcessInstancesListingApi();
 
 var filterRequest = new ActivitiPublicRestApi.ProcessInstanceFilterRequestRepresentation(); // ProcessInstanceFilterRequestRepresentation | filterRequest
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.filterProcessInstances(filterRequest, callback);
+apiInstance.filterProcessInstances(filterRequest);
 ```
 
 ### Parameters
@@ -66,15 +58,7 @@ var apiInstance = new ActivitiPublicRestApi.ProcessInstancesListingApi();
 
 var requestNode = new ActivitiPublicRestApi.ObjectNode(); // ObjectNode | requestNode
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProcessInstances(requestNode, callback);
+apiInstance.getProcessInstances(requestNode);
 ```
 
 ### Parameters

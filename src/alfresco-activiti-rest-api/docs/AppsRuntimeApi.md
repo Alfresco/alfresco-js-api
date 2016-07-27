@@ -24,15 +24,7 @@ var apiInstance = new ActivitiPublicRestApi.AppsRuntimeApi();
 
 var saveObject = new ActivitiPublicRestApi.RuntimeAppDefinitionSaveRepresentation(); // RuntimeAppDefinitionSaveRepresentation | saveObject
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deployAppDefinitions(saveObject, callback);
+apiInstance.deployAppDefinitions(saveObject);
 ```
 
 ### Parameters
@@ -68,14 +60,7 @@ var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
 var apiInstance = new ActivitiPublicRestApi.AppsRuntimeApi();
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getAppDefinitions(callback);
+apiInstance.getAppDefinitions();
 ```
 
 ### Parameters

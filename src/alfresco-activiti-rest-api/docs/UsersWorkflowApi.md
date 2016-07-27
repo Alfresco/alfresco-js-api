@@ -32,14 +32,7 @@ var opts = {
   'tenantId': 789 // Integer | tenantId
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getUsers(opts, callback);
+apiInstance.getUsers(opts);
 ```
 
 ### Parameters

@@ -27,15 +27,7 @@ var apiInstance = new ActivitiPublicRestApi.IntegrationAlfrescoCloudApi();
 
 var code = "code_example"; // String | code
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.confirmAuthorisation(code, callback);
+apiInstance.confirmAuthorisation(code);
 ```
 
 ### Parameters
@@ -69,14 +61,7 @@ var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
 var apiInstance = new ActivitiPublicRestApi.IntegrationAlfrescoCloudApi();
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getAllNetworks(callback);
+apiInstance.getAllNetworks();
 ```
 
 ### Parameters
@@ -111,15 +96,7 @@ var apiInstance = new ActivitiPublicRestApi.IntegrationAlfrescoCloudApi();
 
 var networkId = "networkId_example"; // String | networkId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getAllSites(networkId, callback);
+apiInstance.getAllSites(networkId);
 ```
 
 ### Parameters
@@ -157,15 +134,7 @@ var networkId = "networkId_example"; // String | networkId
 
 var folderId = "folderId_example"; // String | folderId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getContentInFolder(networkId, folderId, callback);
+apiInstance.getContentInFolder(networkId, folderId);
 ```
 
 ### Parameters
@@ -204,15 +173,7 @@ var networkId = "networkId_example"; // String | networkId
 
 var siteId = "siteId_example"; // String | siteId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getContentInSite(networkId, siteId, callback);
+apiInstance.getContentInSite(networkId, siteId);
 ```
 
 ### Parameters

@@ -46,7 +46,7 @@
      * @param {Integer} processModelHistoryId processModelHistoryId
      * @param {module:api/ModelBpmnApi~getHistoricProcessModelBpmn20XmlCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.getHistoricProcessModelBpmn20Xml = function(processModelId, processModelHistoryId, callback) {
+    this.getHistoricProcessModelBpmn20Xml = function(processModelId, processModelHistoryId) {
       var postBody = null;
 
       // verify the required parameter 'processModelId' is set
@@ -79,7 +79,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models/{processModelId}/history/{processModelHistoryId}/bpmn20', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -96,7 +96,7 @@
      * @param {Integer} processModelId processModelId
      * @param {module:api/ModelBpmnApi~getProcessModelBpmn20XmlCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.getProcessModelBpmn20Xml = function(processModelId, callback) {
+    this.getProcessModelBpmn20Xml = function(processModelId) {
       var postBody = null;
 
       // verify the required parameter 'processModelId' is set
@@ -123,7 +123,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models/{processModelId}/bpmn20', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

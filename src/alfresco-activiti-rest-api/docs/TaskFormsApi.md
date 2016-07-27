@@ -27,15 +27,7 @@ var taskId = "taskId_example"; // String | taskId
 
 var completeTaskFormRepresentation = new ActivitiPublicRestApi.CompleteFormRepresentation(); // CompleteFormRepresentation | completeTaskFormRepresentation
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.completeTaskForm(taskId, completeTaskFormRepresentation, callback);
+apiInstance.completeTaskForm(taskId, completeTaskFormRepresentation);
 ```
 
 ### Parameters
@@ -78,15 +70,7 @@ var field = "field_example"; // String | field
 
 var column = "column_example"; // String | column
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRestFieldValues(taskId, field, column, callback);
+apiInstance.getRestFieldValues(taskId, field, column);
 ```
 
 ### Parameters
@@ -128,15 +112,7 @@ var taskId = "taskId_example"; // String | taskId
 
 var field = "field_example"; // String | field
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRestFieldValues(taskId, field, callback);
+apiInstance.getRestFieldValues(taskId, field);
 ```
 
 ### Parameters
@@ -173,15 +149,7 @@ var apiInstance = new ActivitiPublicRestApi.TaskFormsApi();
 
 var taskId = "taskId_example"; // String | taskId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getTaskForm(taskId, callback);
+apiInstance.getTaskForm(taskId);
 ```
 
 ### Parameters
@@ -219,15 +187,7 @@ var taskId = "taskId_example"; // String | taskId
 
 var saveTaskFormRepresentation = new ActivitiPublicRestApi.SaveFormRepresentation(); // SaveFormRepresentation | saveTaskFormRepresentation
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.saveTaskForm(taskId, saveTaskFormRepresentation, callback);
+apiInstance.saveTaskForm(taskId, saveTaskFormRepresentation);
 ```
 
 ### Parameters

@@ -22,15 +22,7 @@ var apiInstance = new ActivitiPublicRestApi.ProcessInstancesInformationApi();
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProcessInstanceContent(processInstanceId, callback);
+apiInstance.getProcessInstanceContent(processInstanceId);
 ```
 
 ### Parameters
@@ -66,15 +58,7 @@ var apiInstance = new ActivitiPublicRestApi.ProcessInstancesInformationApi();
 
 var startRequest = new ActivitiPublicRestApi.CreateProcessInstanceRepresentation(); // CreateProcessInstanceRepresentation | startRequest
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.startNewProcessInstance(startRequest, callback);
+apiInstance.startNewProcessInstance(startRequest);
 ```
 
 ### Parameters

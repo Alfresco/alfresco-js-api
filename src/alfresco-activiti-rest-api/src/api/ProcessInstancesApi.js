@@ -47,7 +47,7 @@
      * @param {module:api/ProcessInstancesApi~addProcessInstanceCommentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/CommentRepresentation}
      */
-    this.addProcessInstanceComment = function(commentRequest, processInstanceId, callback) {
+    this.addProcessInstanceComment = function(commentRequest, processInstanceId) {
       var postBody = commentRequest;
 
       // verify the required parameter 'commentRequest' is set
@@ -79,7 +79,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}/comments', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -96,7 +96,7 @@
      * @param {String} processInstanceId processInstanceId
      * @param {module:api/ProcessInstancesApi~deleteProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteProcessInstance = function(processInstanceId, callback) {
+    this.deleteProcessInstance = function(processInstanceId) {
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
@@ -123,7 +123,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -143,7 +143,7 @@
      * @param {module:api/ProcessInstancesApi~getProcessInstanceCommentsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getProcessInstanceComments = function(processInstanceId, opts, callback) {
+    this.getProcessInstanceComments = function(processInstanceId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -172,7 +172,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}/comments', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -191,7 +191,7 @@
      * @param {module:api/ProcessInstancesApi~getProcessInstanceStartFormCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/FormDefinitionRepresentation}
      */
-    this.getProcessInstanceStartForm = function(processInstanceId, callback) {
+    this.getProcessInstanceStartForm = function(processInstanceId) {
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
@@ -218,7 +218,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}/start-form', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -236,7 +236,7 @@
      * @param {module:api/ProcessInstancesApi~getProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ProcessInstanceRepresentation}
      */
-    this.getProcessInstance = function(processInstanceId, callback) {
+    this.getProcessInstance = function(processInstanceId) {
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
@@ -263,7 +263,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

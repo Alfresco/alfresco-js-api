@@ -51,7 +51,7 @@
      * @param {module:api/GroupsApi~getGroupsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getGroups = function(opts, callback) {
+    this.getGroups = function(opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -78,7 +78,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/groups', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -96,7 +96,7 @@
      * @param {module:api/GroupsApi~getUsersForGroupCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getUsersForGroup = function(groupId, callback) {
+    this.getUsersForGroup = function(groupId) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
@@ -123,7 +123,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/groups/{groupId}/users', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

@@ -30,15 +30,7 @@ var userId = 789; // Integer | userId
 
 var actionRequest = new ActivitiPublicRestApi.UserActionRepresentation(); // UserActionRepresentation | actionRequest
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.executeAction(userId, actionRequest, callback);
+apiInstance.executeAction(userId, actionRequest);
 ```
 
 ### Parameters
@@ -75,15 +67,7 @@ var apiInstance = new ActivitiPublicRestApi.UserApi();
 
 var userId = 789; // Integer | userId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.getProfilePicture(userId, callback);
+apiInstance.getProfilePicture(userId);
 ```
 
 ### Parameters
@@ -120,14 +104,7 @@ var apiInstance = new ActivitiPublicRestApi.UserApi();
 var userId = 789; // Integer | userId
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getUser(userId, callback);
+apiInstance.getUser(userId);
 ```
 
 ### Parameters
@@ -174,14 +151,7 @@ var opts = {
   'tenantId': 789 // Integer | tenantId
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getUsers(opts, callback);
+apiInstance.getUsers(opts);
 ```
 
 ### Parameters
@@ -224,15 +194,7 @@ var apiInstance = new ActivitiPublicRestApi.UserApi();
 
 var resetPassword = new ActivitiPublicRestApi.ResetPasswordRepresentation(); // ResetPasswordRepresentation | resetPassword
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.requestPasswordReset(resetPassword, callback);
+apiInstance.requestPasswordReset(resetPassword);
 ```
 
 ### Parameters
@@ -270,15 +232,7 @@ var userId = 789; // Integer | userId
 
 var userRequest = new ActivitiPublicRestApi.UserRepresentation(); // UserRepresentation | userRequest
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateUser(userId, userRequest, callback);
+apiInstance.updateUser(userId, userRequest);
 ```
 
 ### Parameters

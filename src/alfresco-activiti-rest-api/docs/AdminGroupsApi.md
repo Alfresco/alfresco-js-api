@@ -37,14 +37,7 @@ var apiInstance = new ActivitiPublicRestApi.AdminGroupsApi();
 var groupId = 789; // Integer | groupId
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.activate(groupId, callback);
+apiInstance.activate(groupId);
 ```
 
 ### Parameters
@@ -81,14 +74,7 @@ var apiInstance = new ActivitiPublicRestApi.AdminGroupsApi();
 var groupId = 789; // Integer | groupId
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.addAllUsersToGroup(groupId, callback);
+apiInstance.addAllUsersToGroup(groupId);
 ```
 
 ### Parameters
@@ -127,14 +113,7 @@ var groupId = 789; // Integer | groupId
 var addGroupCapabilitiesRepresentation = new ActivitiPublicRestApi.AddGroupCapabilitiesRepresentation(); // AddGroupCapabilitiesRepresentation | addGroupCapabilitiesRepresentation
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.addGroupCapabilities(groupId, addGroupCapabilitiesRepresentation, callback);
+apiInstance.addGroupCapabilities(groupId, addGroupCapabilitiesRepresentation);
 ```
 
 ### Parameters
@@ -173,15 +152,7 @@ var groupId = 789; // Integer | groupId
 
 var userId = 789; // Integer | userId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.addGroupMember(groupId, userId, callback);
+apiInstance.addGroupMember(groupId, userId);
 ```
 
 ### Parameters
@@ -223,14 +194,7 @@ var relatedGroupId = 789; // Integer | relatedGroupId
 var type = "type_example"; // String | type
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.addRelatedGroup(groupId, relatedGroupId, type, callback);
+apiInstance.addRelatedGroup(groupId, relatedGroupId, type);
 ```
 
 ### Parameters
@@ -268,15 +232,7 @@ var apiInstance = new ActivitiPublicRestApi.AdminGroupsApi();
 
 var groupRepresentation = new ActivitiPublicRestApi.GroupRepresentation(); // GroupRepresentation | groupRepresentation
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createNewGroup(groupRepresentation, callback);
+apiInstance.createNewGroup(groupRepresentation);
 ```
 
 ### Parameters
@@ -314,15 +270,7 @@ var groupId = 789; // Integer | groupId
 
 var groupCapabilityId = 789; // Integer | groupCapabilityId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteGroupCapability(groupId, groupCapabilityId, callback);
+apiInstance.deleteGroupCapability(groupId, groupCapabilityId);
 ```
 
 ### Parameters
@@ -361,15 +309,7 @@ var groupId = 789; // Integer | groupId
 
 var userId = 789; // Integer | userId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteGroupMember(groupId, userId, callback);
+apiInstance.deleteGroupMember(groupId, userId);
 ```
 
 ### Parameters
@@ -406,15 +346,7 @@ var apiInstance = new ActivitiPublicRestApi.AdminGroupsApi();
 
 var groupId = 789; // Integer | groupId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteGroup(groupId, callback);
+apiInstance.deleteGroup(groupId);
 ```
 
 ### Parameters
@@ -452,15 +384,7 @@ var groupId = 789; // Integer | groupId
 
 var relatedGroupId = 789; // Integer | relatedGroupId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteRelatedGroup(groupId, relatedGroupId, callback);
+apiInstance.deleteRelatedGroup(groupId, relatedGroupId);
 ```
 
 ### Parameters
@@ -498,14 +422,7 @@ var apiInstance = new ActivitiPublicRestApi.AdminGroupsApi();
 var groupId = 789; // Integer | groupId
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getCapabilities(groupId, callback);
+apiInstance.getCapabilities(groupId);
 ```
 
 ### Parameters
@@ -547,14 +464,7 @@ var opts = {
   'pageSize': 56 // Integer | pageSize
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getGroupUsers(groupId, opts, callback);
+apiInstance.getGroupUsers(groupId, opts);
 ```
 
 ### Parameters
@@ -598,14 +508,7 @@ var opts = {
   'summary': true // Boolean | summary
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getGroup(groupId, opts, callback);
+apiInstance.getGroup(groupId, opts);
 ```
 
 ### Parameters
@@ -647,14 +550,7 @@ var opts = {
   'summary': true // Boolean | summary
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getGroups(opts, callback);
+apiInstance.getGroups(opts);
 ```
 
 ### Parameters
@@ -692,15 +588,7 @@ var apiInstance = new ActivitiPublicRestApi.AdminGroupsApi();
 
 var groupId = 789; // Integer | groupId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRelatedGroups(groupId, callback);
+apiInstance.getRelatedGroups(groupId);
 ```
 
 ### Parameters
@@ -738,15 +626,7 @@ var groupId = 789; // Integer | groupId
 
 var groupRepresentation = new ActivitiPublicRestApi.GroupRepresentation(); // GroupRepresentation | groupRepresentation
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateGroup(groupId, groupRepresentation, callback);
+apiInstance.updateGroup(groupId, groupRepresentation);
 ```
 
 ### Parameters

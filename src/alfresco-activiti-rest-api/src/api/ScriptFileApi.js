@@ -42,10 +42,8 @@
 
     /**
      * getControllers
-     * @param {module:api/ScriptFileApi~getControllersCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {'String'}
      */
-    this.getControllers = function(callback) {
+    this.getControllers = function() {
       var postBody = null;
 
 
@@ -66,7 +64,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/script-files/controllers', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -80,10 +78,8 @@
 
     /**
      * getLibraries
-     * @param {module:api/ScriptFileApi~getLibrariesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {'String'}
      */
-    this.getLibraries = function(callback) {
+    this.getLibraries = function() {
       var postBody = null;
 
 
@@ -104,7 +100,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/script-files/libraries', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

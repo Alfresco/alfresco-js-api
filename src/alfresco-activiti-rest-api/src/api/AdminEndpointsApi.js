@@ -46,7 +46,7 @@
      * @param {module:api/AdminEndpointsApi~createBasicAuthConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/EndpointBasicAuthRepresentation}
      */
-    this.createBasicAuthConfiguration = function(createRepresentation, callback) {
+    this.createBasicAuthConfiguration = function(createRepresentation) {
       var postBody = createRepresentation;
 
       // verify the required parameter 'createRepresentation' is set
@@ -72,7 +72,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/basic-auths', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -90,7 +90,7 @@
      * @param {module:api/AdminEndpointsApi~createEndpointConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/EndpointConfigurationRepresentation}
      */
-    this.createEndpointConfiguration = function(representation, callback) {
+    this.createEndpointConfiguration = function(representation) {
       var postBody = representation;
 
       // verify the required parameter 'representation' is set
@@ -116,7 +116,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/endpoints', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -135,7 +135,7 @@
      * @param {module:api/AdminEndpointsApi~getBasicAuthConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/EndpointBasicAuthRepresentation}
      */
-    this.getBasicAuthConfiguration = function(basicAuthId, tenantId, callback) {
+    this.getBasicAuthConfiguration = function(basicAuthId, tenantId) {
       var postBody = null;
 
       // verify the required parameter 'basicAuthId' is set
@@ -168,7 +168,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/basic-auths/{basicAuthId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -186,7 +186,7 @@
      * @param {module:api/AdminEndpointsApi~getBasicAuthConfigurationsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/EndpointBasicAuthRepresentation>}
      */
-    this.getBasicAuthConfigurations = function(tenantId, callback) {
+    this.getBasicAuthConfigurations = function(tenantId) {
       var postBody = null;
 
       // verify the required parameter 'tenantId' is set
@@ -213,7 +213,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/basic-auths', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -232,7 +232,7 @@
      * @param {module:api/AdminEndpointsApi~getEndpointConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/EndpointConfigurationRepresentation}
      */
-    this.getEndpointConfiguration = function(endpointConfigurationId, tenantId, callback) {
+    this.getEndpointConfiguration = function(endpointConfigurationId, tenantId) {
       var postBody = null;
 
       // verify the required parameter 'endpointConfigurationId' is set
@@ -265,7 +265,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/endpoints/{endpointConfigurationId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -283,7 +283,7 @@
      * @param {module:api/AdminEndpointsApi~getEndpointConfigurationsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/EndpointConfigurationRepresentation>}
      */
-    this.getEndpointConfigurations = function(tenantId, callback) {
+    this.getEndpointConfigurations = function(tenantId) {
       var postBody = null;
 
       // verify the required parameter 'tenantId' is set
@@ -310,7 +310,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/endpoints', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -328,7 +328,7 @@
      * @param {Integer} tenantId tenantId
      * @param {module:api/AdminEndpointsApi~removeBasicAuthonfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.removeBasicAuthonfiguration = function(basicAuthId, tenantId, callback) {
+    this.removeBasicAuthonfiguration = function(basicAuthId, tenantId) {
       var postBody = null;
 
       // verify the required parameter 'basicAuthId' is set
@@ -361,7 +361,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/basic-auths/{basicAuthId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -379,7 +379,7 @@
      * @param {Integer} tenantId tenantId
      * @param {module:api/AdminEndpointsApi~removeEndpointConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.removeEndpointConfiguration = function(endpointConfigurationId, tenantId, callback) {
+    this.removeEndpointConfiguration = function(endpointConfigurationId, tenantId) {
       var postBody = null;
 
       // verify the required parameter 'endpointConfigurationId' is set
@@ -412,7 +412,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/endpoints/{endpointConfigurationId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -431,7 +431,7 @@
      * @param {module:api/AdminEndpointsApi~updateBasicAuthConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/EndpointBasicAuthRepresentation}
      */
-    this.updateBasicAuthConfiguration = function(basicAuthId, createRepresentation, callback) {
+    this.updateBasicAuthConfiguration = function(basicAuthId, createRepresentation) {
       var postBody = createRepresentation;
 
       // verify the required parameter 'basicAuthId' is set
@@ -463,7 +463,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/basic-auths/{basicAuthId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -482,7 +482,7 @@
      * @param {module:api/AdminEndpointsApi~updateEndpointConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/EndpointConfigurationRepresentation}
      */
-    this.updateEndpointConfiguration = function(endpointConfigurationId, representation, callback) {
+    this.updateEndpointConfiguration = function(endpointConfigurationId, representation) {
       var postBody = representation;
 
       // verify the required parameter 'endpointConfigurationId' is set
@@ -514,7 +514,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/endpoints/{endpointConfigurationId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

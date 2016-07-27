@@ -45,7 +45,7 @@
      * @param {Integer} syncLogEntryId syncLogEntryId
      * @param {module:api/IDMSyncApi~getLogFileCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.getLogFile = function(syncLogEntryId, callback) {
+    this.getLogFile = function(syncLogEntryId) {
       var postBody = null;
 
       // verify the required parameter 'syncLogEntryId' is set
@@ -72,7 +72,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/idm-sync-log-entries/{syncLogEntryId}/logfile', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -93,7 +93,7 @@
      * @param {module:api/IDMSyncApi~getSyncLogEntriesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/SyncLogEntryRepresentation>}
      */
-    this.getSyncLogEntries = function(opts, callback) {
+    this.getSyncLogEntries = function(opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -118,7 +118,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/idm-sync-log-entries', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

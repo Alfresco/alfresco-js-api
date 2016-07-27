@@ -46,7 +46,7 @@
      * @param {String} code code
      * @param {module:api/IntegrationApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.confirmAuthorisation = function(code, callback) {
+    this.confirmAuthorisation = function(code) {
       var postBody = null;
 
       // verify the required parameter 'code' is set
@@ -73,7 +73,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco-cloud/confirm-auth-request', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -91,7 +91,7 @@
      * @param {String} code code
      * @param {module:api/IntegrationApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.confirmAuthorisation = function(code, callback) {
+    this.confirmAuthorisation = function(code) {
       var postBody = null;
 
       // verify the required parameter 'code' is set
@@ -118,7 +118,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/confirm-auth-request', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -136,7 +136,7 @@
      * @param {String} code code
      * @param {module:api/IntegrationApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.confirmAuthorisation = function(code, callback) {
+    this.confirmAuthorisation = function(code) {
       var postBody = null;
 
       // verify the required parameter 'code' is set
@@ -163,7 +163,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/google-drive/confirm-auth-request', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -181,7 +181,7 @@
      * @param {module:model/UserAccountCredentialsRepresentation} credentials credentials
      * @param {module:api/IntegrationApi~createRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.createRepositoryAccount = function(userId, credentials, callback) {
+    this.createRepositoryAccount = function(userId, credentials) {
       var postBody = credentials;
 
       // verify the required parameter 'userId' is set
@@ -213,7 +213,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/{userId}/account', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -230,7 +230,7 @@
      * @param {Integer} userId userId
      * @param {module:api/IntegrationApi~deleteRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteRepositoryAccount = function(userId, callback) {
+    this.deleteRepositoryAccount = function(userId) {
       var postBody = null;
 
       // verify the required parameter 'userId' is set
@@ -257,7 +257,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/{userId}/account', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -271,10 +271,8 @@
 
     /**
      * List Alfresco networks
-     * @param {module:api/IntegrationApi~getAllNetworksCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAllNetworks = function(callback) {
+    this.getAllNetworks = function() {
       var postBody = null;
 
 
@@ -295,7 +293,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco-cloud/networks', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -314,7 +312,7 @@
      * @param {module:api/IntegrationApi~getAllSitesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAllSites = function(networkId, callback) {
+    this.getAllSites = function(networkId) {
       var postBody = null;
 
       // verify the required parameter 'networkId' is set
@@ -341,7 +339,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -360,7 +358,7 @@
      * @param {module:api/IntegrationApi~getAllSitesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAllSites = function(repositoryId, callback) {
+    this.getAllSites = function(repositoryId) {
       var postBody = null;
 
       // verify the required parameter 'repositoryId' is set
@@ -387,7 +385,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco/{repositoryId}/sites', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -401,10 +399,8 @@
 
     /**
      * Retrieve if Box Integration is enabled
-     * @param {module:api/IntegrationApi~getBoxPluginStatusCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {'Boolean'}
      */
-    this.getBoxPluginStatus = function(callback) {
+    this.getBoxPluginStatus = function() {
       var postBody = null;
 
 
@@ -425,7 +421,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/status', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -444,7 +440,7 @@
      * @param {module:api/IntegrationApi~getContentInFolderCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getContentInFolder = function(networkId, folderId, callback) {
+    this.getContentInFolder = function(networkId, folderId) {
       var postBody = null;
 
       // verify the required parameter 'networkId' is set
@@ -477,7 +473,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco-cloud/networks/{networkId}/folders/{folderId}/content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -496,7 +492,7 @@
      * @param {module:api/IntegrationApi~getContentInFolderCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getContentInFolder = function(repositoryId, folderId, callback) {
+    this.getContentInFolder = function(repositoryId, folderId) {
       var postBody = null;
 
       // verify the required parameter 'repositoryId' is set
@@ -529,7 +525,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco/{repositoryId}/folders/{folderId}/content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -548,7 +544,7 @@
      * @param {module:api/IntegrationApi~getContentInSiteCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getContentInSite = function(networkId, siteId, callback) {
+    this.getContentInSite = function(networkId, siteId) {
       var postBody = null;
 
       // verify the required parameter 'networkId' is set
@@ -581,7 +577,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -600,7 +596,7 @@
      * @param {module:api/IntegrationApi~getContentInSiteCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getContentInSite = function(repositoryId, siteId, callback) {
+    this.getContentInSite = function(repositoryId, siteId) {
       var postBody = null;
 
       // verify the required parameter 'repositoryId' is set
@@ -633,7 +629,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco/{repositoryId}/sites/{siteId}/content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -653,7 +649,7 @@
      * @param {module:api/IntegrationApi~getFilesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getFiles = function(opts, callback) {
+    this.getFiles = function(opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -677,7 +673,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/files', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -698,7 +694,7 @@
      * @param {module:api/IntegrationApi~getFilesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getFiles = function(opts, callback) {
+    this.getFiles = function(opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -723,7 +719,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/google-drive/files', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -744,7 +740,7 @@
      * @param {module:api/IntegrationApi~getRepositoriesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getRepositories = function(opts, callback) {
+    this.getRepositories = function(opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -768,7 +764,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/profile/accounts/alfresco', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -786,7 +782,7 @@
      * @param {module:api/IntegrationApi~getRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/BoxUserAccountCredentialsRepresentation}
      */
-    this.getRepositoryAccount = function(userId, callback) {
+    this.getRepositoryAccount = function(userId) {
       var postBody = null;
 
       // verify the required parameter 'userId' is set
@@ -813,7 +809,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/{userId}/account', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -831,7 +827,7 @@
      * @param {module:model/UserAccountCredentialsRepresentation} credentials credentials
      * @param {module:api/IntegrationApi~updateRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.updateRepositoryAccount = function(userId, credentials, callback) {
+    this.updateRepositoryAccount = function(userId, credentials) {
       var postBody = credentials;
 
       // verify the required parameter 'userId' is set
@@ -863,7 +859,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/{userId}/account', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

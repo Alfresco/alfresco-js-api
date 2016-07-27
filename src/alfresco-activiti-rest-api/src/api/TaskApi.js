@@ -47,7 +47,7 @@
      * @param {module:api/TaskApi~addSubtaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TaskRepresentation}
      */
-    this.addSubtask = function(taskId, taskRepresentation, callback) {
+    this.addSubtask = function(taskId, taskRepresentation) {
       var postBody = taskRepresentation;
 
       // verify the required parameter 'taskId' is set
@@ -79,7 +79,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/checklist', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -98,7 +98,7 @@
      * @param {module:api/TaskApi~addTaskCommentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/CommentRepresentation}
      */
-    this.addTaskComment = function(commentRequest, taskId, callback) {
+    this.addTaskComment = function(commentRequest, taskId) {
       var postBody = commentRequest;
 
       // verify the required parameter 'commentRequest' is set
@@ -130,7 +130,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/comments', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -149,7 +149,7 @@
      * @param {module:api/TaskApi~assignTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TaskRepresentation}
      */
-    this.assignTask = function(taskId, requestNode, callback) {
+    this.assignTask = function(taskId, requestNode) {
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
@@ -181,7 +181,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/assign', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -199,7 +199,7 @@
      * @param {module:model/ObjectNode} requestNode requestNode
      * @param {module:api/TaskApi~attachFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.attachForm = function(taskId, requestNode, callback) {
+    this.attachForm = function(taskId, requestNode) {
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
@@ -231,7 +231,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/attach-form', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -249,7 +249,7 @@
      * @param {String} taskId taskId
      * @param {module:api/TaskApi~claimTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.claimTask = function(taskId, callback) {
+    this.claimTask = function(taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
@@ -276,7 +276,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/claim', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -294,7 +294,7 @@
      * @param {module:model/CompleteFormRepresentation} completeTaskFormRepresentation completeTaskFormRepresentation
      * @param {module:api/TaskApi~completeTaskFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.completeTaskForm = function(taskId, completeTaskFormRepresentation, callback) {
+    this.completeTaskForm = function(taskId, completeTaskFormRepresentation) {
       var postBody = completeTaskFormRepresentation;
 
       // verify the required parameter 'taskId' is set
@@ -326,7 +326,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/task-forms/{taskId}', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -344,7 +344,7 @@
      * @param {String} taskId taskId
      * @param {module:api/TaskApi~completeTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.completeTask = function(taskId, callback) {
+    this.completeTask = function(taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
@@ -371,7 +371,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/complete', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -390,7 +390,7 @@
      * @param {module:api/TaskApi~createNewTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TaskRepresentation}
      */
-    this.createNewTask = function(taskRepresentation, callback) {
+    this.createNewTask = function(taskRepresentation) {
       var postBody = taskRepresentation;
 
       // verify the required parameter 'taskRepresentation' is set
@@ -416,7 +416,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -437,7 +437,7 @@
      * @param {module:api/TaskApi~createRelatedContentOnTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RelatedContentRepresentation}
      */
-    this.createRelatedContentOnTask = function(taskId, relatedContent, opts, callback) {
+    this.createRelatedContentOnTask = function(taskId, relatedContent, opts) {
       opts = opts || {};
       var postBody = relatedContent;
 
@@ -471,7 +471,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/content', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -492,7 +492,7 @@
      * @param {module:api/TaskApi~createRelatedContentOnTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RelatedContentRepresentation}
      */
-    this.createRelatedContentOnTask = function(taskId, file, opts, callback) {
+    this.createRelatedContentOnTask = function(taskId, file, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -527,7 +527,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/raw-content', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -544,7 +544,7 @@
      * @param {String} taskId taskId
      * @param {module:api/TaskApi~deleteTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteTask = function(taskId, callback) {
+    this.deleteTask = function(taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
@@ -571,7 +571,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -589,7 +589,7 @@
      * @param {module:api/TaskApi~filterTasksCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.filterTasks = function(requestNode, callback) {
+    this.filterTasks = function(requestNode) {
       var postBody = requestNode;
 
       // verify the required parameter 'requestNode' is set
@@ -615,7 +615,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/filter', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -633,7 +633,7 @@
      * @param {module:api/TaskApi~getChecklistCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getChecklist = function(taskId, callback) {
+    this.getChecklist = function(taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
@@ -660,7 +660,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/checklist', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -678,7 +678,7 @@
      * @param {module:api/TaskApi~getRelatedContentForTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getRelatedContentForTask = function(taskId, callback) {
+    this.getRelatedContentForTask = function(taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
@@ -705,7 +705,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -726,7 +726,7 @@
      * @param {module:api/TaskApi~getRestFieldValuesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/FormValueRepresentation>}
      */
-    this.getRestFieldValues = function(taskId, field, column, callback) {
+    this.getRestFieldValues = function(taskId, field, column) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
@@ -765,7 +765,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/task-forms/{taskId}/form-values/{field}/{column}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -785,7 +785,7 @@
      * @param {module:api/TaskApi~getRestFieldValuesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/FormValueRepresentation>}
      */
-    this.getRestFieldValues = function(taskId, field, callback) {
+    this.getRestFieldValues = function(taskId, field) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
@@ -818,7 +818,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/task-forms/{taskId}/form-values/{field}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -838,7 +838,7 @@
      * @param {module:api/TaskApi~getTaskCommentsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getTaskComments = function(taskId, opts, callback) {
+    this.getTaskComments = function(taskId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -867,7 +867,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/comments', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -885,7 +885,7 @@
      * @param {module:api/TaskApi~getTaskFormCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/FormDefinitionRepresentation}
      */
-    this.getTaskForm = function(taskId, callback) {
+    this.getTaskForm = function(taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
@@ -912,7 +912,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/task-forms/{taskId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -930,7 +930,7 @@
      * @param {module:api/TaskApi~getTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TaskRepresentation}
      */
-    this.getTask = function(taskId, callback) {
+    this.getTask = function(taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
@@ -957,7 +957,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -975,7 +975,7 @@
      * @param {module:model/ObjectNode} requestNode requestNode
      * @param {module:api/TaskApi~involveUserCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.involveUser = function(taskId, requestNode, callback) {
+    this.involveUser = function(taskId, requestNode) {
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
@@ -1007,7 +1007,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/involve', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -1025,7 +1025,7 @@
      * @param {module:api/TaskApi~listTasksCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.listTasks = function(requestNode, callback) {
+    this.listTasks = function(requestNode) {
       var postBody = requestNode;
 
       // verify the required parameter 'requestNode' is set
@@ -1051,7 +1051,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/query', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -1069,7 +1069,7 @@
      * @param {module:model/ChecklistOrderRepresentation} orderRepresentation orderRepresentation
      * @param {module:api/TaskApi~orderChecklistCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.orderChecklist = function(taskId, orderRepresentation, callback) {
+    this.orderChecklist = function(taskId, orderRepresentation) {
       var postBody = orderRepresentation;
 
       // verify the required parameter 'taskId' is set
@@ -1101,7 +1101,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/checklist', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -1118,7 +1118,7 @@
      * @param {String} taskId taskId
      * @param {module:api/TaskApi~removeFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.removeForm = function(taskId, callback) {
+    this.removeForm = function(taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
@@ -1145,7 +1145,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/remove-form', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -1163,7 +1163,7 @@
      * @param {module:model/ObjectNode} requestNode requestNode
      * @param {module:api/TaskApi~removeInvolvedUserCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.removeInvolvedUser = function(taskId, requestNode, callback) {
+    this.removeInvolvedUser = function(taskId, requestNode) {
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
@@ -1195,7 +1195,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/remove-involved', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -1213,7 +1213,7 @@
      * @param {module:model/SaveFormRepresentation} saveTaskFormRepresentation saveTaskFormRepresentation
      * @param {module:api/TaskApi~saveTaskFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.saveTaskForm = function(taskId, saveTaskFormRepresentation, callback) {
+    this.saveTaskForm = function(taskId, saveTaskFormRepresentation) {
       var postBody = saveTaskFormRepresentation;
 
       // verify the required parameter 'taskId' is set
@@ -1245,7 +1245,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/task-forms/{taskId}/save-form', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -1263,7 +1263,7 @@
      * @param {String} taskId taskId
      * @param {module:api/TaskApi~unclaimTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.unclaimTask = function(taskId, callback) {
+    this.unclaimTask = function(taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
@@ -1290,7 +1290,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/unclaim', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -1310,7 +1310,7 @@
      * @param {module:api/TaskApi~updateTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TaskRepresentation}
      */
-    this.updateTask = function(taskId, updated, callback) {
+    this.updateTask = function(taskId, updated) {
       var postBody = updated;
 
       // verify the required parameter 'taskId' is set
@@ -1342,7 +1342,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

@@ -46,7 +46,7 @@
      * @param {String} code code
      * @param {module:api/IntegrationDriveApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.confirmAuthorisation = function(code, callback) {
+    this.confirmAuthorisation = function(code) {
       var postBody = null;
 
       // verify the required parameter 'code' is set
@@ -73,7 +73,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/google-drive/confirm-auth-request', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -94,7 +94,7 @@
      * @param {module:api/IntegrationDriveApi~getFilesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getFiles = function(opts, callback) {
+    this.getFiles = function(opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -119,7 +119,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/google-drive/files', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

@@ -32,15 +32,7 @@ var apiInstance = new ActivitiPublicRestApi.UserFiltersApi();
 
 var userProcessInstanceFilterRepresentation = new ActivitiPublicRestApi.UserProcessInstanceFilterRepresentation(); // UserProcessInstanceFilterRepresentation | userProcessInstanceFilterRepresentation
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createUserProcessInstanceFilter(userProcessInstanceFilterRepresentation, callback);
+apiInstance.createUserProcessInstanceFilter(userProcessInstanceFilterRepresentation);
 ```
 
 ### Parameters
@@ -76,15 +68,7 @@ var apiInstance = new ActivitiPublicRestApi.UserFiltersApi();
 
 var userTaskFilterRepresentation = new ActivitiPublicRestApi.UserTaskFilterRepresentation(); // UserTaskFilterRepresentation | userTaskFilterRepresentation
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createUserTaskFilter(userTaskFilterRepresentation, callback);
+apiInstance.createUserTaskFilter(userTaskFilterRepresentation);
 ```
 
 ### Parameters
@@ -120,15 +104,7 @@ var apiInstance = new ActivitiPublicRestApi.UserFiltersApi();
 
 var userFilterId = 789; // Integer | userFilterId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteUserProcessInstanceFilter(userFilterId, callback);
+apiInstance.deleteUserProcessInstanceFilter(userFilterId);
 ```
 
 ### Parameters
@@ -164,15 +140,7 @@ var apiInstance = new ActivitiPublicRestApi.UserFiltersApi();
 
 var userFilterId = 789; // Integer | userFilterId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteUserTaskFilter(userFilterId, callback);
+apiInstance.deleteUserTaskFilter(userFilterId);
 ```
 
 ### Parameters
@@ -208,15 +176,7 @@ var apiInstance = new ActivitiPublicRestApi.UserFiltersApi();
 
 var userFilterId = 789; // Integer | userFilterId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getUserProcessInstanceFilter(userFilterId, callback);
+apiInstance.getUserProcessInstanceFilter(userFilterId);
 ```
 
 ### Parameters
@@ -254,14 +214,7 @@ var opts = {
   'appId': 789 // Integer | appId
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getUserProcessInstanceFilters(opts, callback);
+apiInstance.getUserProcessInstanceFilters(opts);
 ```
 
 ### Parameters
@@ -297,15 +250,7 @@ var apiInstance = new ActivitiPublicRestApi.UserFiltersApi();
 
 var userFilterId = 789; // Integer | userFilterId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getUserTaskFilter(userFilterId, callback);
+apiInstance.getUserTaskFilter(userFilterId);
 ```
 
 ### Parameters
@@ -343,14 +288,7 @@ var opts = {
   'appId': 789 // Integer | appId
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getUserTaskFilters(opts, callback);
+apiInstance.getUserTaskFilters(opts);
 ```
 
 ### Parameters
@@ -386,15 +324,7 @@ var apiInstance = new ActivitiPublicRestApi.UserFiltersApi();
 
 var filterOrderRepresentation = new ActivitiPublicRestApi.UserFilterOrderRepresentation(); // UserFilterOrderRepresentation | filterOrderRepresentation
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.orderUserProcessInstanceFilters(filterOrderRepresentation, callback);
+apiInstance.orderUserProcessInstanceFilters(filterOrderRepresentation);
 ```
 
 ### Parameters
@@ -430,15 +360,7 @@ var apiInstance = new ActivitiPublicRestApi.UserFiltersApi();
 
 var filterOrderRepresentation = new ActivitiPublicRestApi.UserFilterOrderRepresentation(); // UserFilterOrderRepresentation | filterOrderRepresentation
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.orderUserTaskFilters(filterOrderRepresentation, callback);
+apiInstance.orderUserTaskFilters(filterOrderRepresentation);
 ```
 
 ### Parameters
@@ -476,15 +398,7 @@ var userFilterId = 789; // Integer | userFilterId
 
 var userProcessInstanceFilterRepresentation = new ActivitiPublicRestApi.UserProcessInstanceFilterRepresentation(); // UserProcessInstanceFilterRepresentation | userProcessInstanceFilterRepresentation
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateUserProcessInstanceFilter(userFilterId, userProcessInstanceFilterRepresentation, callback);
+apiInstance.updateUserProcessInstanceFilter(userFilterId, userProcessInstanceFilterRepresentation);
 ```
 
 ### Parameters
@@ -523,15 +437,7 @@ var userFilterId = 789; // Integer | userFilterId
 
 var userTaskFilterRepresentation = new ActivitiPublicRestApi.UserTaskFilterRepresentation(); // UserTaskFilterRepresentation | userTaskFilterRepresentation
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateUserTaskFilter(userFilterId, userTaskFilterRepresentation, callback);
+apiInstance.updateUserTaskFilter(userFilterId, userTaskFilterRepresentation);
 ```
 
 ### Parameters

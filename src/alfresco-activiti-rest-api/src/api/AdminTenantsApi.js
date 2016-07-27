@@ -34,7 +34,6 @@
 
     /**
      * Callback function to receive the result of the createTenant operation.
-     * @callback module:api/AdminTenantsApi~createTenantCallback
      * @param {String} error Error message, if any.
      * @param {module:model/LightTenantRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44,10 +43,9 @@
      * Create a new tenant
      * Tenant manager only
      * @param {module:model/CreateTenantRepresentation} createTenantRepresentation createTenantRepresentation
-     * @param {module:api/AdminTenantsApi~createTenantCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/LightTenantRepresentation}
      */
-    this.createTenant = function(createTenantRepresentation, callback) {
+    this.createTenant = function(createTenantRepresentation) {
       var postBody = createTenantRepresentation;
 
       // verify the required parameter 'createTenantRepresentation' is set
@@ -73,13 +71,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/tenants', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the deleteTenant operation.
-     * @callback module:api/AdminTenantsApi~deleteTenantCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -88,9 +85,8 @@
     /**
      * Delete a tenant
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminTenantsApi~deleteTenantCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteTenant = function(tenantId, callback) {
+    this.deleteTenant = function(tenantId) {
       var postBody = null;
 
       // verify the required parameter 'tenantId' is set
@@ -117,13 +113,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/tenants/{tenantId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the getTenantEvents operation.
-     * @callback module:api/AdminTenantsApi~getTenantEventsCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/TenantEvent>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -132,10 +127,9 @@
     /**
      * Get tenant events
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminTenantsApi~getTenantEventsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/TenantEvent>}
      */
-    this.getTenantEvents = function(tenantId, callback) {
+    this.getTenantEvents = function(tenantId) {
       var postBody = null;
 
       // verify the required parameter 'tenantId' is set
@@ -162,13 +156,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/tenants/{tenantId}/events', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the getTenantLogo operation.
-     * @callback module:api/AdminTenantsApi~getTenantLogoCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -177,9 +170,8 @@
     /**
      * Get tenant logo
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminTenantsApi~getTenantLogoCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.getTenantLogo = function(tenantId, callback) {
+    this.getTenantLogo = function(tenantId) {
       var postBody = null;
 
       // verify the required parameter 'tenantId' is set
@@ -206,13 +198,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/tenants/{tenantId}/logo', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the getTenant operation.
-     * @callback module:api/AdminTenantsApi~getTenantCallback
      * @param {String} error Error message, if any.
      * @param {module:model/TenantRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -221,10 +212,9 @@
     /**
      * Get tenant details
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminTenantsApi~getTenantCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TenantRepresentation}
      */
-    this.getTenant = function(tenantId, callback) {
+    this.getTenant = function(tenantId) {
       var postBody = null;
 
       // verify the required parameter 'tenantId' is set
@@ -251,13 +241,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/tenants/{tenantId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the getTenants operation.
-     * @callback module:api/AdminTenantsApi~getTenantsCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/LightTenantRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -266,10 +255,9 @@
     /**
      * Get all tenants
      * Tenant manager only
-     * @param {module:api/AdminTenantsApi~getTenantsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/LightTenantRepresentation>}
      */
-    this.getTenants = function(callback) {
+    this.getTenants = function() {
       var postBody = null;
 
 
@@ -290,13 +278,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/tenants', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the update operation.
-     * @callback module:api/AdminTenantsApi~updateCallback
      * @param {String} error Error message, if any.
      * @param {module:model/TenantRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -306,10 +293,9 @@
      * Update a tenant
      * @param {Integer} tenantId tenantId
      * @param {module:model/CreateTenantRepresentation} createTenantRepresentation createTenantRepresentation
-     * @param {module:api/AdminTenantsApi~updateCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TenantRepresentation}
      */
-    this.update = function(tenantId, createTenantRepresentation, callback) {
+    this.update = function(tenantId, createTenantRepresentation) {
       var postBody = createTenantRepresentation;
 
       // verify the required parameter 'tenantId' is set
@@ -341,13 +327,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/tenants/{tenantId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the uploadTenantLogo operation.
-     * @callback module:api/AdminTenantsApi~uploadTenantLogoCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ImageUploadRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -357,10 +342,9 @@
      * Update tenant logo
      * @param {Integer} tenantId tenantId
      * @param {File} file file
-     * @param {module:api/AdminTenantsApi~uploadTenantLogoCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ImageUploadRepresentation}
      */
-    this.uploadTenantLogo = function(tenantId, file, callback) {
+    this.uploadTenantLogo = function(tenantId, file) {
       var postBody = null;
 
       // verify the required parameter 'tenantId' is set
@@ -393,7 +377,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/tenants/{tenantId}/logo', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

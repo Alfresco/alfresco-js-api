@@ -46,7 +46,7 @@
      * @param {module:model/CompleteFormRepresentation} completeTaskFormRepresentation completeTaskFormRepresentation
      * @param {module:api/TaskFormsApi~completeTaskFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.completeTaskForm = function(taskId, completeTaskFormRepresentation, callback) {
+    this.completeTaskForm = function(taskId, completeTaskFormRepresentation) {
       var postBody = completeTaskFormRepresentation;
 
       // verify the required parameter 'taskId' is set
@@ -78,7 +78,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/task-forms/{taskId}', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -99,7 +99,7 @@
      * @param {module:api/TaskFormsApi~getRestFieldValuesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/FormValueRepresentation>}
      */
-    this.getRestFieldValues = function(taskId, field, column, callback) {
+    this.getRestFieldValues = function(taskId, field, column) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
@@ -138,7 +138,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/task-forms/{taskId}/form-values/{field}/{column}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -158,7 +158,7 @@
      * @param {module:api/TaskFormsApi~getRestFieldValuesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/FormValueRepresentation>}
      */
-    this.getRestFieldValues = function(taskId, field, callback) {
+    this.getRestFieldValues = function(taskId, field) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
@@ -191,7 +191,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/task-forms/{taskId}/form-values/{field}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -209,7 +209,7 @@
      * @param {module:api/TaskFormsApi~getTaskFormCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/FormDefinitionRepresentation}
      */
-    this.getTaskForm = function(taskId, callback) {
+    this.getTaskForm = function(taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
@@ -236,7 +236,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/task-forms/{taskId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -254,7 +254,7 @@
      * @param {module:model/SaveFormRepresentation} saveTaskFormRepresentation saveTaskFormRepresentation
      * @param {module:api/TaskFormsApi~saveTaskFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.saveTaskForm = function(taskId, saveTaskFormRepresentation, callback) {
+    this.saveTaskForm = function(taskId, saveTaskFormRepresentation) {
       var postBody = saveTaskFormRepresentation;
 
       // verify the required parameter 'taskId' is set
@@ -286,7 +286,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/task-forms/{taskId}/save-form', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

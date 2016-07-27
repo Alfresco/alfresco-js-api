@@ -40,15 +40,7 @@ var apiInstance = new ActivitiPublicRestApi.IntegrationApi();
 
 var code = "code_example"; // String | code
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.confirmAuthorisation(code, callback);
+apiInstance.confirmAuthorisation(code);
 ```
 
 ### Parameters
@@ -86,15 +78,7 @@ var apiInstance = new ActivitiPublicRestApi.IntegrationApi();
 
 var code = "code_example"; // String | code
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.confirmAuthorisation(code, callback);
+apiInstance.confirmAuthorisation(code);
 ```
 
 ### Parameters
@@ -132,15 +116,7 @@ var apiInstance = new ActivitiPublicRestApi.IntegrationApi();
 
 var code = "code_example"; // String | code
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.confirmAuthorisation(code, callback);
+apiInstance.confirmAuthorisation(code);
 ```
 
 ### Parameters
@@ -178,15 +154,7 @@ var userId = 789; // Integer | userId
 
 var credentials = new ActivitiPublicRestApi.UserAccountCredentialsRepresentation(); // UserAccountCredentialsRepresentation | credentials
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.createRepositoryAccount(userId, credentials, callback);
+apiInstance.createRepositoryAccount(userId, credentials);
 ```
 
 ### Parameters
@@ -223,15 +191,7 @@ var apiInstance = new ActivitiPublicRestApi.IntegrationApi();
 
 var userId = 789; // Integer | userId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteRepositoryAccount(userId, callback);
+apiInstance.deleteRepositoryAccount(userId);
 ```
 
 ### Parameters
@@ -265,14 +225,7 @@ var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
 var apiInstance = new ActivitiPublicRestApi.IntegrationApi();
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getAllNetworks(callback);
+apiInstance.getAllNetworks();
 ```
 
 ### Parameters
@@ -307,15 +260,7 @@ var apiInstance = new ActivitiPublicRestApi.IntegrationApi();
 
 var networkId = "networkId_example"; // String | networkId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getAllSites(networkId, callback);
+apiInstance.getAllSites(networkId);
 ```
 
 ### Parameters
@@ -353,15 +298,7 @@ var apiInstance = new ActivitiPublicRestApi.IntegrationApi();
 
 var repositoryId = "repositoryId_example"; // String | repositoryId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getAllSites(repositoryId, callback);
+apiInstance.getAllSites(repositoryId);
 ```
 
 ### Parameters
@@ -395,14 +332,7 @@ var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
 var apiInstance = new ActivitiPublicRestApi.IntegrationApi();
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getBoxPluginStatus(callback);
+apiInstance.getBoxPluginStatus();
 ```
 
 ### Parameters
@@ -437,15 +367,7 @@ var networkId = "networkId_example"; // String | networkId
 
 var folderId = "folderId_example"; // String | folderId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getContentInFolder(networkId, folderId, callback);
+apiInstance.getContentInFolder(networkId, folderId);
 ```
 
 ### Parameters
@@ -484,15 +406,7 @@ var repositoryId = "repositoryId_example"; // String | repositoryId
 
 var folderId = "folderId_example"; // String | folderId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getContentInFolder(repositoryId, folderId, callback);
+apiInstance.getContentInFolder(repositoryId, folderId);
 ```
 
 ### Parameters
@@ -531,15 +445,7 @@ var networkId = "networkId_example"; // String | networkId
 
 var siteId = "siteId_example"; // String | siteId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getContentInSite(networkId, siteId, callback);
+apiInstance.getContentInSite(networkId, siteId);
 ```
 
 ### Parameters
@@ -578,15 +484,7 @@ var repositoryId = "repositoryId_example"; // String | repositoryId
 
 var siteId = "siteId_example"; // String | siteId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getContentInSite(repositoryId, siteId, callback);
+apiInstance.getContentInSite(repositoryId, siteId);
 ```
 
 ### Parameters
@@ -626,14 +524,7 @@ var opts = {
   'parent': "parent_example" // String | parent
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getFiles(opts, callback);
+apiInstance.getFiles(opts);
 ```
 
 ### Parameters
@@ -674,14 +565,7 @@ var opts = {
   'currentFolderOnly': true // Boolean | currentFolderOnly
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getFiles(opts, callback);
+apiInstance.getFiles(opts);
 ```
 
 ### Parameters
@@ -724,14 +608,7 @@ var opts = {
   'includeAccounts': true // Boolean | includeAccounts
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRepositories(opts, callback);
+apiInstance.getRepositories(opts);
 ```
 
 ### Parameters
@@ -768,15 +645,7 @@ var apiInstance = new ActivitiPublicRestApi.IntegrationApi();
 
 var userId = 789; // Integer | userId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRepositoryAccount(userId, callback);
+apiInstance.getRepositoryAccount(userId);
 ```
 
 ### Parameters
@@ -814,15 +683,7 @@ var userId = 789; // Integer | userId
 
 var credentials = new ActivitiPublicRestApi.UserAccountCredentialsRepresentation(); // UserAccountCredentialsRepresentation | credentials
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.updateRepositoryAccount(userId, credentials, callback);
+apiInstance.updateRepositoryAccount(userId, credentials);
 ```
 
 ### Parameters

@@ -34,15 +34,7 @@ var processInstanceId = "processInstanceId_example"; // String | processInstance
 
 var relatedContent = new ActivitiPublicRestApi.RelatedContentRepresentation(); // RelatedContentRepresentation | relatedContent
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createRelatedContentOnProcessInstance(processInstanceId, relatedContent, callback);
+apiInstance.createRelatedContentOnProcessInstance(processInstanceId, relatedContent);
 ```
 
 ### Parameters
@@ -81,15 +73,7 @@ var processInstanceId = "processInstanceId_example"; // String | processInstance
 
 var file = "/path/to/file.txt"; // File | file
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createRelatedContentOnProcessInstance(processInstanceId, file, callback);
+apiInstance.createRelatedContentOnProcessInstance(processInstanceId, file);
 ```
 
 ### Parameters
@@ -132,14 +116,7 @@ var opts = {
   'isRelatedContent': true // Boolean | isRelatedContent
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createRelatedContentOnTask(taskId, relatedContent, opts, callback);
+apiInstance.createRelatedContentOnTask(taskId, relatedContent, opts);
 ```
 
 ### Parameters
@@ -183,14 +160,7 @@ var opts = {
   'isRelatedContent': true // Boolean | isRelatedContent
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createRelatedContentOnTask(taskId, file, opts, callback);
+apiInstance.createRelatedContentOnTask(taskId, file, opts);
 ```
 
 ### Parameters
@@ -228,15 +198,7 @@ var apiInstance = new ActivitiPublicRestApi.ContentApi();
 
 var file = "/path/to/file.txt"; // File | file
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createTemporaryRawRelatedContent(file, callback);
+apiInstance.createTemporaryRawRelatedContent(file);
 ```
 
 ### Parameters
@@ -272,15 +234,7 @@ var apiInstance = new ActivitiPublicRestApi.ContentApi();
 
 var relatedContent = new ActivitiPublicRestApi.RelatedContentRepresentation(); // RelatedContentRepresentation | relatedContent
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createTemporaryRelatedContent(relatedContent, callback);
+apiInstance.createTemporaryRelatedContent(relatedContent);
 ```
 
 ### Parameters
@@ -316,15 +270,7 @@ var apiInstance = new ActivitiPublicRestApi.ContentApi();
 
 var contentId = 789; // Integer | contentId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteContent(contentId, callback);
+apiInstance.deleteContent(contentId);
 ```
 
 ### Parameters
@@ -360,15 +306,7 @@ var apiInstance = new ActivitiPublicRestApi.ContentApi();
 
 var contentId = 789; // Integer | contentId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getContent(contentId, callback);
+apiInstance.getContent(contentId);
 ```
 
 ### Parameters
@@ -404,15 +342,7 @@ var apiInstance = new ActivitiPublicRestApi.ContentApi();
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProcessInstanceContent(processInstanceId, callback);
+apiInstance.getProcessInstanceContent(processInstanceId);
 ```
 
 ### Parameters
@@ -448,15 +378,7 @@ var apiInstance = new ActivitiPublicRestApi.ContentApi();
 
 var contentId = 789; // Integer | contentId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.getRawContent3(contentId, callback);
+apiInstance.getRawContent3(contentId);
 ```
 
 ### Parameters
@@ -492,15 +414,7 @@ var apiInstance = new ActivitiPublicRestApi.ContentApi();
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRelatedContentForProcessInstance(processInstanceId, callback);
+apiInstance.getRelatedContentForProcessInstance(processInstanceId);
 ```
 
 ### Parameters
@@ -536,15 +450,7 @@ var apiInstance = new ActivitiPublicRestApi.ContentApi();
 
 var taskId = "taskId_example"; // String | taskId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRelatedContentForTask(taskId, callback);
+apiInstance.getRelatedContentForTask(taskId);
 ```
 
 ### Parameters

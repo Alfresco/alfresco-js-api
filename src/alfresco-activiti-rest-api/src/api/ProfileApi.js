@@ -45,7 +45,7 @@
      * @param {module:model/ChangePasswordRepresentation} changePasswordRepresentation changePasswordRepresentation
      * @param {module:api/ProfileApi~changePasswordCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.changePassword = function(changePasswordRepresentation, callback) {
+    this.changePassword = function(changePasswordRepresentation) {
       var postBody = changePasswordRepresentation;
 
       // verify the required parameter 'changePasswordRepresentation' is set
@@ -71,7 +71,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/profile-password', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -86,10 +86,8 @@
     /**
      * Retrieve user profile picture
      * Generally returns an image file
-     * @param {module:api/ProfileApi~getProfilePictureCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {File}
      */
-    this.getProfilePicture = function(callback) {
+    this.getProfilePicture = function() {
       var postBody = null;
 
 
@@ -110,7 +108,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/profile-picture', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -125,10 +123,8 @@
     /**
      * Retrieve user information
      *  This is useful to get the name, email, the groups that the user is part of, the user picture, etc.
-     * @param {module:api/ProfileApi~getProfileCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/UserRepresentation}
      */
-    this.getProfile = function(callback) {
+    this.getProfile = function() {
       var postBody = null;
 
 
@@ -149,7 +145,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/profile', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -168,7 +164,7 @@
      * @param {module:api/ProfileApi~updateProfileCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserRepresentation}
      */
-    this.updateProfile = function(userRepresentation, callback) {
+    this.updateProfile = function(userRepresentation) {
       var postBody = userRepresentation;
 
       // verify the required parameter 'userRepresentation' is set
@@ -194,7 +190,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/profile', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -212,7 +208,7 @@
      * @param {module:api/ProfileApi~uploadProfilePictureCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ImageUploadRepresentation}
      */
-    this.uploadProfilePicture = function(file, callback) {
+    this.uploadProfilePicture = function(file) {
       var postBody = null;
 
       // verify the required parameter 'file' is set
@@ -239,7 +235,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/profile-picture', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

@@ -50,14 +50,7 @@ var taskId = "taskId_example"; // String | taskId
 var taskRepresentation = new ActivitiPublicRestApi.TaskRepresentation(); // TaskRepresentation | taskRepresentation
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.addSubtask(taskId, taskRepresentation, callback);
+apiInstance.addSubtask(taskId, taskRepresentation);
 ```
 
 ### Parameters
@@ -96,15 +89,7 @@ var commentRequest = new ActivitiPublicRestApi.CommentRepresentation(); // Comme
 
 var taskId = "taskId_example"; // String | taskId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.addTaskComment(commentRequest, taskId, callback);
+apiInstance.addTaskComment(commentRequest, taskId);
 ```
 
 ### Parameters
@@ -144,14 +129,7 @@ var taskId = "taskId_example"; // String | taskId
 var requestNode = new ActivitiPublicRestApi.ObjectNode(); // ObjectNode | requestNode
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.assignTask(taskId, requestNode, callback);
+apiInstance.assignTask(taskId, requestNode);
 ```
 
 ### Parameters
@@ -190,15 +168,7 @@ var taskId = "taskId_example"; // String | taskId
 
 var requestNode = new ActivitiPublicRestApi.ObjectNode(); // ObjectNode | requestNode
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.attachForm(taskId, requestNode, callback);
+apiInstance.attachForm(taskId, requestNode);
 ```
 
 ### Parameters
@@ -237,15 +207,7 @@ var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.claimTask(taskId, callback);
+apiInstance.claimTask(taskId);
 ```
 
 ### Parameters
@@ -283,15 +245,7 @@ var taskId = "taskId_example"; // String | taskId
 
 var completeTaskFormRepresentation = new ActivitiPublicRestApi.CompleteFormRepresentation(); // CompleteFormRepresentation | completeTaskFormRepresentation
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.completeTaskForm(taskId, completeTaskFormRepresentation, callback);
+apiInstance.completeTaskForm(taskId, completeTaskFormRepresentation);
 ```
 
 ### Parameters
@@ -330,15 +284,7 @@ var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.completeTask(taskId, callback);
+apiInstance.completeTask(taskId);
 ```
 
 ### Parameters
@@ -376,15 +322,7 @@ var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskRepresentation = new ActivitiPublicRestApi.TaskRepresentation(); // TaskRepresentation | taskRepresentation
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createNewTask(taskRepresentation, callback);
+apiInstance.createNewTask(taskRepresentation);
 ```
 
 ### Parameters
@@ -426,14 +364,7 @@ var opts = {
   'isRelatedContent': true // Boolean | isRelatedContent
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createRelatedContentOnTask(taskId, relatedContent, opts, callback);
+apiInstance.createRelatedContentOnTask(taskId, relatedContent, opts);
 ```
 
 ### Parameters
@@ -477,14 +408,7 @@ var opts = {
   'isRelatedContent': true // Boolean | isRelatedContent
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createRelatedContentOnTask(taskId, file, opts, callback);
+apiInstance.createRelatedContentOnTask(taskId, file, opts);
 ```
 
 ### Parameters
@@ -522,15 +446,7 @@ var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteTask(taskId, callback);
+apiInstance.deleteTask(taskId);
 ```
 
 ### Parameters
@@ -567,14 +483,7 @@ var apiInstance = new ActivitiPublicRestApi.TaskApi();
 var requestNode = new ActivitiPublicRestApi.TaskFilterRequestRepresentation(); // TaskFilterRequestRepresentation | requestNode
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.filterTasks(requestNode, callback);
+apiInstance.filterTasks(requestNode);
 ```
 
 ### Parameters
@@ -611,14 +520,7 @@ var apiInstance = new ActivitiPublicRestApi.TaskApi();
 var taskId = "taskId_example"; // String | taskId
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getChecklist(taskId, callback);
+apiInstance.getChecklist(taskId);
 ```
 
 ### Parameters
@@ -655,14 +557,7 @@ var apiInstance = new ActivitiPublicRestApi.TaskApi();
 var taskId = "taskId_example"; // String | taskId
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRelatedContentForTask(taskId, callback);
+apiInstance.getRelatedContentForTask(taskId);
 ```
 
 ### Parameters
@@ -705,14 +600,7 @@ var field = "field_example"; // String | field
 var column = "column_example"; // String | column
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRestFieldValues(taskId, field, column, callback);
+apiInstance.getRestFieldValues(taskId, field, column);
 ```
 
 ### Parameters
@@ -755,14 +643,7 @@ var taskId = "taskId_example"; // String | taskId
 var field = "field_example"; // String | field
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRestFieldValues(taskId, field, callback);
+apiInstance.getRestFieldValues(taskId, field);
 ```
 
 ### Parameters
@@ -803,14 +684,7 @@ var opts = {
   'latestFirst': true // Boolean | latestFirst
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getTaskComments(taskId, opts, callback);
+apiInstance.getTaskComments(taskId, opts);
 ```
 
 ### Parameters
@@ -848,14 +722,7 @@ var apiInstance = new ActivitiPublicRestApi.TaskApi();
 var taskId = "taskId_example"; // String | taskId
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getTaskForm(taskId, callback);
+apiInstance.getTaskForm(taskId);
 ```
 
 ### Parameters
@@ -891,15 +758,7 @@ var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getTask(taskId, callback);
+apiInstance.getTask(taskId);
 ```
 
 ### Parameters
@@ -937,15 +796,7 @@ var taskId = "taskId_example"; // String | taskId
 
 var requestNode = new ActivitiPublicRestApi.ObjectNode(); // ObjectNode | requestNode
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.involveUser(taskId, requestNode, callback);
+apiInstance.involveUser(taskId, requestNode);
 ```
 
 ### Parameters
@@ -983,14 +834,7 @@ var apiInstance = new ActivitiPublicRestApi.TaskApi();
 var requestNode = new ActivitiPublicRestApi.ObjectNode(); // ObjectNode | requestNode
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listTasks(requestNode, callback);
+apiInstance.listTasks(requestNode);
 ```
 
 ### Parameters
@@ -1028,15 +872,7 @@ var taskId = "taskId_example"; // String | taskId
 
 var orderRepresentation = new ActivitiPublicRestApi.ChecklistOrderRepresentation(); // ChecklistOrderRepresentation | orderRepresentation
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.orderChecklist(taskId, orderRepresentation, callback);
+apiInstance.orderChecklist(taskId, orderRepresentation);
 ```
 
 ### Parameters
@@ -1073,15 +909,7 @@ var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.removeForm(taskId, callback);
+apiInstance.removeForm(taskId);
 ```
 
 ### Parameters
@@ -1120,14 +948,7 @@ var taskId = "taskId_example"; // String | taskId
 var requestNode = new ActivitiPublicRestApi.ObjectNode(); // ObjectNode | requestNode
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.removeInvolvedUser(taskId, requestNode, callback);
+apiInstance.removeInvolvedUser(taskId, requestNode);
 ```
 
 ### Parameters
@@ -1166,15 +987,7 @@ var taskId = "taskId_example"; // String | taskId
 
 var saveTaskFormRepresentation = new ActivitiPublicRestApi.SaveFormRepresentation(); // SaveFormRepresentation | saveTaskFormRepresentation
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.saveTaskForm(taskId, saveTaskFormRepresentation, callback);
+apiInstance.saveTaskForm(taskId, saveTaskFormRepresentation);
 ```
 
 ### Parameters
@@ -1213,15 +1026,7 @@ var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.unclaimTask(taskId, callback);
+apiInstance.unclaimTask(taskId);
 ```
 
 ### Parameters
@@ -1261,15 +1066,7 @@ var taskId = "taskId_example"; // String | taskId
 
 var updated = new ActivitiPublicRestApi.TaskUpdateRepresentation(); // TaskUpdateRepresentation | updated
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateTask(taskId, updated, callback);
+apiInstance.updateTask(taskId, updated);
 ```
 
 ### Parameters

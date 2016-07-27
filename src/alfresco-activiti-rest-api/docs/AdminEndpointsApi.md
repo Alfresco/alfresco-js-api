@@ -31,14 +31,7 @@ var apiInstance = new ActivitiPublicRestApi.AdminEndpointsApi();
 var createRepresentation = new ActivitiPublicRestApi.CreateEndpointBasicAuthRepresentation(); // CreateEndpointBasicAuthRepresentation | createRepresentation
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createBasicAuthConfiguration(createRepresentation, callback);
+apiInstance.createBasicAuthConfiguration(createRepresentation);
 ```
 
 ### Parameters
@@ -75,14 +68,7 @@ var apiInstance = new ActivitiPublicRestApi.AdminEndpointsApi();
 var representation = new ActivitiPublicRestApi.EndpointConfigurationRepresentation(); // EndpointConfigurationRepresentation | representation
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createEndpointConfiguration(representation, callback);
+apiInstance.createEndpointConfiguration(representation);
 ```
 
 ### Parameters
@@ -120,15 +106,7 @@ var basicAuthId = 789; // Integer | basicAuthId
 
 var tenantId = 789; // Integer | tenantId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getBasicAuthConfiguration(basicAuthId, tenantId, callback);
+apiInstance.getBasicAuthConfiguration(basicAuthId, tenantId,);
 ```
 
 ### Parameters
@@ -165,15 +143,7 @@ var apiInstance = new ActivitiPublicRestApi.AdminEndpointsApi();
 
 var tenantId = 789; // Integer | tenantId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getBasicAuthConfigurations(tenantId, callback);
+apiInstance.getBasicAuthConfigurations(tenantId);
 ```
 
 ### Parameters
@@ -212,14 +182,7 @@ var endpointConfigurationId = 789; // Integer | endpointConfigurationId
 var tenantId = 789; // Integer | tenantId
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getEndpointConfiguration(endpointConfigurationId, tenantId, callback);
+apiInstance.getEndpointConfiguration(endpointConfigurationId, tenantId);
 ```
 
 ### Parameters
@@ -257,14 +220,7 @@ var apiInstance = new ActivitiPublicRestApi.AdminEndpointsApi();
 var tenantId = 789; // Integer | tenantId
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getEndpointConfigurations(tenantId, callback);
+apiInstance.getEndpointConfigurations(tenantId);
 ```
 
 ### Parameters
@@ -302,15 +258,7 @@ var basicAuthId = 789; // Integer | basicAuthId
 
 var tenantId = 789; // Integer | tenantId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.removeBasicAuthonfiguration(basicAuthId, tenantId, callback);
+apiInstance.removeBasicAuthonfiguration(basicAuthId, tenantId);
 ```
 
 ### Parameters
@@ -349,15 +297,7 @@ var endpointConfigurationId = 789; // Integer | endpointConfigurationId
 
 var tenantId = 789; // Integer | tenantId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.removeEndpointConfiguration(endpointConfigurationId, tenantId, callback);
+apiInstance.removeEndpointConfiguration(endpointConfigurationId, tenantId);
 ```
 
 ### Parameters
@@ -397,14 +337,7 @@ var basicAuthId = 789; // Integer | basicAuthId
 var createRepresentation = new ActivitiPublicRestApi.CreateEndpointBasicAuthRepresentation(); // CreateEndpointBasicAuthRepresentation | createRepresentation
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateBasicAuthConfiguration(basicAuthId, createRepresentation, callback);
+apiInstance.updateBasicAuthConfiguration(basicAuthId, createRepresentation);
 ```
 
 ### Parameters
@@ -444,14 +377,7 @@ var endpointConfigurationId = 789; // Integer | endpointConfigurationId
 var representation = new ActivitiPublicRestApi.EndpointConfigurationRepresentation(); // EndpointConfigurationRepresentation | representation
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateEndpointConfiguration(endpointConfigurationId, representation, callback);
+apiInstance.updateEndpointConfiguration(endpointConfigurationId, representation);
 ```
 
 ### Parameters

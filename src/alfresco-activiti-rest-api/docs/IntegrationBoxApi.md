@@ -29,15 +29,7 @@ var apiInstance = new ActivitiPublicRestApi.IntegrationBoxApi();
 
 var code = "code_example"; // String | code
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.confirmAuthorisation(code, callback);
+apiInstance.confirmAuthorisation(code);
 ```
 
 ### Parameters
@@ -75,15 +67,7 @@ var userId = 789; // Integer | userId
 
 var credentials = new ActivitiPublicRestApi.UserAccountCredentialsRepresentation(); // UserAccountCredentialsRepresentation | credentials
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.createRepositoryAccount(userId, credentials, callback);
+apiInstance.createRepositoryAccount(userId, credentials);
 ```
 
 ### Parameters
@@ -120,15 +104,7 @@ var apiInstance = new ActivitiPublicRestApi.IntegrationBoxApi();
 
 var userId = 789; // Integer | userId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteRepositoryAccount(userId, callback);
+apiInstance.deleteRepositoryAccount(userId);
 ```
 
 ### Parameters
@@ -162,14 +138,7 @@ var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
 var apiInstance = new ActivitiPublicRestApi.IntegrationBoxApi();
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getBoxPluginStatus(callback);
+apiInstance.getBoxPluginStatus();
 ```
 
 ### Parameters
@@ -205,14 +174,7 @@ var opts = {
   'parent': "parent_example" // String | parent
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getFiles(opts, callback);
+apiInstance.getFiles(opts);
 ```
 
 ### Parameters
@@ -249,15 +211,7 @@ var apiInstance = new ActivitiPublicRestApi.IntegrationBoxApi();
 
 var userId = 789; // Integer | userId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRepositoryAccount(userId, callback);
+apiInstance.getRepositoryAccount(userId);
 ```
 
 ### Parameters
@@ -295,15 +249,7 @@ var userId = 789; // Integer | userId
 
 var credentials = new ActivitiPublicRestApi.UserAccountCredentialsRepresentation(); // UserAccountCredentialsRepresentation | credentials
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.updateRepositoryAccount(userId, credentials, callback);
+apiInstance.updateRepositoryAccount(userId, credentials);
 ```
 
 ### Parameters

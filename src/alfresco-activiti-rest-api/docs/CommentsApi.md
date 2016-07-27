@@ -26,15 +26,7 @@ var commentRequest = new ActivitiPublicRestApi.CommentRepresentation(); // Comme
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.addProcessInstanceComment(commentRequest, processInstanceId, callback);
+apiInstance.addProcessInstanceComment(commentRequest, processInstanceId);
 ```
 
 ### Parameters
@@ -73,15 +65,7 @@ var commentRequest = new ActivitiPublicRestApi.CommentRepresentation(); // Comme
 
 var taskId = "taskId_example"; // String | taskId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.addTaskComment(commentRequest, taskId, callback);
+apiInstance.addTaskComment(commentRequest, taskId);
 ```
 
 ### Parameters
@@ -122,14 +106,7 @@ var opts = {
   'latestFirst': true // Boolean | latestFirst
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProcessInstanceComments(processInstanceId, opts, callback);
+apiInstance.getProcessInstanceComments(processInstanceId, opts);
 ```
 
 ### Parameters
@@ -170,14 +147,7 @@ var opts = {
   'latestFirst': true // Boolean | latestFirst
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getTaskComments(taskId, opts, callback);
+apiInstance.getTaskComments(taskId, opts);
 ```
 
 ### Parameters

@@ -46,7 +46,7 @@
      * @param {String} code code
      * @param {module:api/IntegrationAlfrescoCloudApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.confirmAuthorisation = function(code, callback) {
+    this.confirmAuthorisation = function(code) {
       var postBody = null;
 
       // verify the required parameter 'code' is set
@@ -73,7 +73,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco-cloud/confirm-auth-request', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -87,10 +87,8 @@
 
     /**
      * List Alfresco networks
-     * @param {module:api/IntegrationAlfrescoCloudApi~getAllNetworksCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAllNetworks = function(callback) {
+    this.getAllNetworks = function() {
       var postBody = null;
 
 
@@ -111,7 +109,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco-cloud/networks', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -130,7 +128,7 @@
      * @param {module:api/IntegrationAlfrescoCloudApi~getAllSitesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAllSites = function(networkId, callback) {
+    this.getAllSites = function(networkId) {
       var postBody = null;
 
       // verify the required parameter 'networkId' is set
@@ -157,7 +155,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -176,7 +174,7 @@
      * @param {module:api/IntegrationAlfrescoCloudApi~getContentInFolderCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getContentInFolder = function(networkId, folderId, callback) {
+    this.getContentInFolder = function(networkId, folderId) {
       var postBody = null;
 
       // verify the required parameter 'networkId' is set
@@ -209,7 +207,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco-cloud/networks/{networkId}/folders/{folderId}/content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -228,7 +226,7 @@
      * @param {module:api/IntegrationAlfrescoCloudApi~getContentInSiteCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getContentInSite = function(networkId, siteId, callback) {
+    this.getContentInSite = function(networkId, siteId) {
       var postBody = null;
 
       // verify the required parameter 'networkId' is set
@@ -261,7 +259,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

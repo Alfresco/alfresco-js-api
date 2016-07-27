@@ -47,7 +47,7 @@
      * @param {module:api/TaskCheckListApi~addSubtaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TaskRepresentation}
      */
-    this.addSubtask = function(taskId, taskRepresentation, callback) {
+    this.addSubtask = function(taskId, taskRepresentation) {
       var postBody = taskRepresentation;
 
       // verify the required parameter 'taskId' is set
@@ -79,7 +79,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/checklist', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -97,7 +97,7 @@
      * @param {module:api/TaskCheckListApi~getChecklistCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getChecklist = function(taskId, callback) {
+    this.getChecklist = function(taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
@@ -124,7 +124,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/checklist', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -142,7 +142,7 @@
      * @param {module:model/ChecklistOrderRepresentation} orderRepresentation orderRepresentation
      * @param {module:api/TaskCheckListApi~orderChecklistCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.orderChecklist = function(taskId, orderRepresentation, callback) {
+    this.orderChecklist = function(taskId, orderRepresentation) {
       var postBody = orderRepresentation;
 
       // verify the required parameter 'taskId' is set
@@ -174,7 +174,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/checklist', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

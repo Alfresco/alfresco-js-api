@@ -30,15 +30,7 @@ var apiInstance = new ActivitiPublicRestApi.AdminTenantsApi();
 
 var createTenantRepresentation = new ActivitiPublicRestApi.CreateTenantRepresentation(); // CreateTenantRepresentation | createTenantRepresentation
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createTenant(createTenantRepresentation, callback);
+apiInstance.createTenant(createTenantRepresentation);
 ```
 
 ### Parameters
@@ -74,15 +66,7 @@ var apiInstance = new ActivitiPublicRestApi.AdminTenantsApi();
 
 var tenantId = 789; // Integer | tenantId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteTenant(tenantId, callback);
+apiInstance.deleteTenant(tenantId);
 ```
 
 ### Parameters
@@ -118,15 +102,7 @@ var apiInstance = new ActivitiPublicRestApi.AdminTenantsApi();
 
 var tenantId = 789; // Integer | tenantId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getTenantEvents(tenantId, callback);
+apiInstance.getTenantEvents(tenantId);
 ```
 
 ### Parameters
@@ -162,15 +138,7 @@ var apiInstance = new ActivitiPublicRestApi.AdminTenantsApi();
 
 var tenantId = 789; // Integer | tenantId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.getTenantLogo(tenantId, callback);
+apiInstance.getTenantLogo(tenantId);
 ```
 
 ### Parameters
@@ -206,15 +174,7 @@ var apiInstance = new ActivitiPublicRestApi.AdminTenantsApi();
 
 var tenantId = 789; // Integer | tenantId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getTenant(tenantId, callback);
+apiInstance.getTenant(tenantId);
 ```
 
 ### Parameters
@@ -250,14 +210,7 @@ var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
 var apiInstance = new ActivitiPublicRestApi.AdminTenantsApi();
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getTenants(callback);
+apiInstance.getTenants();
 ```
 
 ### Parameters
@@ -292,15 +245,7 @@ var tenantId = 789; // Integer | tenantId
 
 var createTenantRepresentation = new ActivitiPublicRestApi.CreateTenantRepresentation(); // CreateTenantRepresentation | createTenantRepresentation
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.update(tenantId, createTenantRepresentation, callback);
+apiInstance.update(tenantId, createTenantRepresentation);
 ```
 
 ### Parameters
@@ -339,15 +284,7 @@ var tenantId = 789; // Integer | tenantId
 
 var file = "/path/to/file.txt"; // File | file
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.uploadTenantLogo(tenantId, file, callback);
+apiInstance.uploadTenantLogo(tenantId, file);
 ```
 
 ### Parameters

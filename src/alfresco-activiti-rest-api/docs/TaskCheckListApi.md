@@ -25,15 +25,7 @@ var taskId = "taskId_example"; // String | taskId
 
 var taskRepresentation = new ActivitiPublicRestApi.TaskRepresentation(); // TaskRepresentation | taskRepresentation
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.addSubtask(taskId, taskRepresentation, callback);
+apiInstance.addSubtask(taskId, taskRepresentation);
 ```
 
 ### Parameters
@@ -70,15 +62,7 @@ var apiInstance = new ActivitiPublicRestApi.TaskCheckListApi();
 
 var taskId = "taskId_example"; // String | taskId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getChecklist(taskId, callback);
+apiInstance.getChecklist(taskId);
 ```
 
 ### Parameters
@@ -116,15 +100,7 @@ var taskId = "taskId_example"; // String | taskId
 
 var orderRepresentation = new ActivitiPublicRestApi.ChecklistOrderRepresentation(); // ChecklistOrderRepresentation | orderRepresentation
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.orderChecklist(taskId, orderRepresentation, callback);
+apiInstance.orderChecklist(taskId, orderRepresentation);
 ```
 
 ### Parameters

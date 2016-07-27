@@ -46,7 +46,7 @@
      * @param {String} code code
      * @param {module:api/IntegrationBoxApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.confirmAuthorisation = function(code, callback) {
+    this.confirmAuthorisation = function(code) {
       var postBody = null;
 
       // verify the required parameter 'code' is set
@@ -73,7 +73,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/confirm-auth-request', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -91,7 +91,7 @@
      * @param {module:model/UserAccountCredentialsRepresentation} credentials credentials
      * @param {module:api/IntegrationBoxApi~createRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.createRepositoryAccount = function(userId, credentials, callback) {
+    this.createRepositoryAccount = function(userId, credentials) {
       var postBody = credentials;
 
       // verify the required parameter 'userId' is set
@@ -123,7 +123,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/{userId}/account', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -140,7 +140,7 @@
      * @param {Integer} userId userId
      * @param {module:api/IntegrationBoxApi~deleteRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteRepositoryAccount = function(userId, callback) {
+    this.deleteRepositoryAccount = function(userId) {
       var postBody = null;
 
       // verify the required parameter 'userId' is set
@@ -167,7 +167,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/{userId}/account', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -181,10 +181,8 @@
 
     /**
      * Retrieve if Box Integration is enabled
-     * @param {module:api/IntegrationBoxApi~getBoxPluginStatusCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {'Boolean'}
      */
-    this.getBoxPluginStatus = function(callback) {
+    this.getBoxPluginStatus = function() {
       var postBody = null;
 
 
@@ -205,7 +203,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/status', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -225,7 +223,7 @@
      * @param {module:api/IntegrationBoxApi~getFilesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getFiles = function(opts, callback) {
+    this.getFiles = function(opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -249,7 +247,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/files', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -267,7 +265,7 @@
      * @param {module:api/IntegrationBoxApi~getRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/BoxUserAccountCredentialsRepresentation}
      */
-    this.getRepositoryAccount = function(userId, callback) {
+    this.getRepositoryAccount = function(userId) {
       var postBody = null;
 
       // verify the required parameter 'userId' is set
@@ -294,7 +292,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/{userId}/account', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -312,7 +310,7 @@
      * @param {module:model/UserAccountCredentialsRepresentation} credentials credentials
      * @param {module:api/IntegrationBoxApi~updateRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.updateRepositoryAccount = function(userId, credentials, callback) {
+    this.updateRepositoryAccount = function(userId, credentials) {
       var postBody = credentials;
 
       // verify the required parameter 'userId' is set
@@ -344,7 +342,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/{userId}/account', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

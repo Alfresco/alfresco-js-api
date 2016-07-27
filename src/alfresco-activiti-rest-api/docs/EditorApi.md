@@ -27,15 +27,7 @@ var formId = 789; // Integer | formId
 
 var formHistoryId = 789; // Integer | formHistoryId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getFormHistory(formId, formHistoryId, callback);
+apiInstance.getFormHistory(formId, formHistoryId);
 ```
 
 ### Parameters
@@ -72,15 +64,7 @@ var apiInstance = new ActivitiPublicRestApi.EditorApi();
 
 var formId = 789; // Integer | formId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getForm(formId, callback);
+apiInstance.getForm(formId);
 ```
 
 ### Parameters
@@ -114,14 +98,7 @@ var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
 var apiInstance = new ActivitiPublicRestApi.EditorApi();
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getForms(callback);
+apiInstance.getForms();
 ```
 
 ### Parameters
@@ -156,15 +133,7 @@ var formId = 789; // Integer | formId
 
 var saveRepresentation = new ActivitiPublicRestApi.FormSaveRepresentation(); // FormSaveRepresentation | saveRepresentation
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.saveForm(formId, saveRepresentation, callback);
+apiInstance.saveForm(formId, saveRepresentation);
 ```
 
 ### Parameters
@@ -203,15 +172,7 @@ var formId = 789; // Integer | formId
 
 var saveRepresentation = new ActivitiPublicRestApi.FormSaveRepresentation(); // FormSaveRepresentation | saveRepresentation
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.validateModel(formId, saveRepresentation, callback);
+apiInstance.validateModel(formId, saveRepresentation);
 ```
 
 ### Parameters

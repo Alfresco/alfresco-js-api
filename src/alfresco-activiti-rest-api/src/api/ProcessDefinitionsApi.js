@@ -49,7 +49,7 @@
      * @param {module:api/ProcessDefinitionsApi~getProcessDefinitionsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getProcessDefinitions = function(opts, callback) {
+    this.getProcessDefinitions = function(opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -73,7 +73,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-definitions', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

@@ -26,15 +26,7 @@ var apiInstance = new ActivitiPublicRestApi.AppsDefinitionApi();
 
 var modelId = 789; // Integer | modelId from a runtime app or the id of an app definition model
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.exportAppDefinition(modelId, callback);
+apiInstance.exportAppDefinition(modelId);
 ```
 
 ### Parameters
@@ -72,15 +64,7 @@ var apiInstance = new ActivitiPublicRestApi.AppsDefinitionApi();
 
 var file = "/path/to/file.txt"; // File | file
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.importAppDefinition(file, callback);
+apiInstance.importAppDefinition(file);
 ```
 
 ### Parameters
@@ -120,15 +104,7 @@ var modelId = 789; // Integer | modelId
 
 var file = "/path/to/file.txt"; // File | file
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.importAppDefinition(modelId, file, callback);
+apiInstance.importAppDefinition(modelId, file);
 ```
 
 ### Parameters
@@ -169,15 +145,7 @@ var modelId = 789; // Integer | modelId
 
 var publishModel = new ActivitiPublicRestApi.AppDefinitionPublishRepresentation(); // AppDefinitionPublishRepresentation | publishModel
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.publishAppDefinition(modelId, publishModel, callback);
+apiInstance.publishAppDefinition(modelId, publishModel);
 ```
 
 ### Parameters

@@ -24,15 +24,7 @@ var apiInstance = new ActivitiPublicRestApi.IntegrationDriveApi();
 
 var code = "code_example"; // String | code
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.confirmAuthorisation(code, callback);
+apiInstance.confirmAuthorisation(code);
 ```
 
 ### Parameters
@@ -72,14 +64,7 @@ var opts = {
   'currentFolderOnly': true // Boolean | currentFolderOnly
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getFiles(opts, callback);
+apiInstance.getFiles(opts);
 ```
 
 ### Parameters

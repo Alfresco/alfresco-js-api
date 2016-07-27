@@ -34,7 +34,6 @@
 
     /**
      * Callback function to receive the result of the createUserProcessInstanceFilter operation.
-     * @callback module:api/UserFiltersApi~createUserProcessInstanceFilterCallback
      * @param {String} error Error message, if any.
      * @param {module:model/UserProcessInstanceFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43,10 +42,9 @@
     /**
      * Create a user process instance task filter
      * @param {module:model/UserProcessInstanceFilterRepresentation} userProcessInstanceFilterRepresentation userProcessInstanceFilterRepresentation
-     * @param {module:api/UserFiltersApi~createUserProcessInstanceFilterCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserProcessInstanceFilterRepresentation}
      */
-    this.createUserProcessInstanceFilter = function(userProcessInstanceFilterRepresentation, callback) {
+    this.createUserProcessInstanceFilter = function(userProcessInstanceFilterRepresentation) {
       var postBody = userProcessInstanceFilterRepresentation;
 
       // verify the required parameter 'userProcessInstanceFilterRepresentation' is set
@@ -72,13 +70,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/filters/processes', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the createUserTaskFilter operation.
-     * @callback module:api/UserFiltersApi~createUserTaskFilterCallback
      * @param {String} error Error message, if any.
      * @param {module:model/UserTaskFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -87,10 +84,9 @@
     /**
      * Create a new task filter
      * @param {module:model/UserTaskFilterRepresentation} userTaskFilterRepresentation userTaskFilterRepresentation
-     * @param {module:api/UserFiltersApi~createUserTaskFilterCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserTaskFilterRepresentation}
      */
-    this.createUserTaskFilter = function(userTaskFilterRepresentation, callback) {
+    this.createUserTaskFilter = function(userTaskFilterRepresentation) {
       var postBody = userTaskFilterRepresentation;
 
       // verify the required parameter 'userTaskFilterRepresentation' is set
@@ -116,13 +112,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/filters/tasks', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the deleteUserProcessInstanceFilter operation.
-     * @callback module:api/UserFiltersApi~deleteUserProcessInstanceFilterCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -131,9 +126,8 @@
     /**
      * Delete a user process instance task filter
      * @param {Integer} userFilterId userFilterId
-     * @param {module:api/UserFiltersApi~deleteUserProcessInstanceFilterCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteUserProcessInstanceFilter = function(userFilterId, callback) {
+    this.deleteUserProcessInstanceFilter = function(userFilterId) {
       var postBody = null;
 
       // verify the required parameter 'userFilterId' is set
@@ -160,13 +154,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/filters/processes/{userFilterId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the deleteUserTaskFilter operation.
-     * @callback module:api/UserFiltersApi~deleteUserTaskFilterCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -175,9 +168,8 @@
     /**
      * Delete a task filter
      * @param {Integer} userFilterId userFilterId
-     * @param {module:api/UserFiltersApi~deleteUserTaskFilterCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteUserTaskFilter = function(userFilterId, callback) {
+    this.deleteUserTaskFilter = function(userFilterId) {
       var postBody = null;
 
       // verify the required parameter 'userFilterId' is set
@@ -204,13 +196,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/filters/tasks/{userFilterId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the getUserProcessInstanceFilter operation.
-     * @callback module:api/UserFiltersApi~getUserProcessInstanceFilterCallback
      * @param {String} error Error message, if any.
      * @param {module:model/UserProcessInstanceFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -219,10 +210,9 @@
     /**
      * Get a specific user process instance task filter
      * @param {Integer} userFilterId userFilterId
-     * @param {module:api/UserFiltersApi~getUserProcessInstanceFilterCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserProcessInstanceFilterRepresentation}
      */
-    this.getUserProcessInstanceFilter = function(userFilterId, callback) {
+    this.getUserProcessInstanceFilter = function(userFilterId) {
       var postBody = null;
 
       // verify the required parameter 'userFilterId' is set
@@ -249,13 +239,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/filters/processes/{userFilterId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the getUserProcessInstanceFilters operation.
-     * @callback module:api/UserFiltersApi~getUserProcessInstanceFiltersCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -265,10 +254,9 @@
      * Retrieve list of taks filters
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.appId appId
-     * @param {module:api/UserFiltersApi~getUserProcessInstanceFiltersCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getUserProcessInstanceFilters = function(opts, callback) {
+    this.getUserProcessInstanceFilters = function(opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -291,13 +279,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/filters/processes', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the getUserTaskFilter operation.
-     * @callback module:api/UserFiltersApi~getUserTaskFilterCallback
      * @param {String} error Error message, if any.
      * @param {module:model/UserTaskFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -306,10 +293,9 @@
     /**
      * Get a specific task filter
      * @param {Integer} userFilterId userFilterId
-     * @param {module:api/UserFiltersApi~getUserTaskFilterCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserTaskFilterRepresentation}
      */
-    this.getUserTaskFilter = function(userFilterId, callback) {
+    this.getUserTaskFilter = function(userFilterId) {
       var postBody = null;
 
       // verify the required parameter 'userFilterId' is set
@@ -336,13 +322,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/filters/tasks/{userFilterId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the getUserTaskFilters operation.
-     * @callback module:api/UserFiltersApi~getUserTaskFiltersCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -352,10 +337,9 @@
      * Retrieve list of task filters
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.appId appId
-     * @param {module:api/UserFiltersApi~getUserTaskFiltersCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getUserTaskFilters = function(opts, callback) {
+    this.getUserTaskFilters = function(opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -378,13 +362,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/filters/tasks', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the orderUserProcessInstanceFilters operation.
-     * @callback module:api/UserFiltersApi~orderUserProcessInstanceFiltersCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -393,9 +376,8 @@
     /**
      * To order the list of user process instance filters
      * @param {module:model/UserFilterOrderRepresentation} filterOrderRepresentation filterOrderRepresentation
-     * @param {module:api/UserFiltersApi~orderUserProcessInstanceFiltersCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.orderUserProcessInstanceFilters = function(filterOrderRepresentation, callback) {
+    this.orderUserProcessInstanceFilters = function(filterOrderRepresentation) {
       var postBody = filterOrderRepresentation;
 
       // verify the required parameter 'filterOrderRepresentation' is set
@@ -421,13 +403,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/filters/processes', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the orderUserTaskFilters operation.
-     * @callback module:api/UserFiltersApi~orderUserTaskFiltersCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -436,9 +417,8 @@
     /**
      * To order the list of user task filters
      * @param {module:model/UserFilterOrderRepresentation} filterOrderRepresentation filterOrderRepresentation
-     * @param {module:api/UserFiltersApi~orderUserTaskFiltersCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.orderUserTaskFilters = function(filterOrderRepresentation, callback) {
+    this.orderUserTaskFilters = function(filterOrderRepresentation) {
       var postBody = filterOrderRepresentation;
 
       // verify the required parameter 'filterOrderRepresentation' is set
@@ -464,13 +444,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/filters/tasks', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the updateUserProcessInstanceFilter operation.
-     * @callback module:api/UserFiltersApi~updateUserProcessInstanceFilterCallback
      * @param {String} error Error message, if any.
      * @param {module:model/UserProcessInstanceFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -480,10 +459,9 @@
      * Update a user process instance task filter
      * @param {Integer} userFilterId userFilterId
      * @param {module:model/UserProcessInstanceFilterRepresentation} userProcessInstanceFilterRepresentation userProcessInstanceFilterRepresentation
-     * @param {module:api/UserFiltersApi~updateUserProcessInstanceFilterCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserProcessInstanceFilterRepresentation}
      */
-    this.updateUserProcessInstanceFilter = function(userFilterId, userProcessInstanceFilterRepresentation, callback) {
+    this.updateUserProcessInstanceFilter = function(userFilterId, userProcessInstanceFilterRepresentation) {
       var postBody = userProcessInstanceFilterRepresentation;
 
       // verify the required parameter 'userFilterId' is set
@@ -515,13 +493,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/filters/processes/{userFilterId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the updateUserTaskFilter operation.
-     * @callback module:api/UserFiltersApi~updateUserTaskFilterCallback
      * @param {String} error Error message, if any.
      * @param {module:model/UserTaskFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -531,10 +508,9 @@
      * Update a specific task filter
      * @param {Integer} userFilterId userFilterId
      * @param {module:model/UserTaskFilterRepresentation} userTaskFilterRepresentation userTaskFilterRepresentation
-     * @param {module:api/UserFiltersApi~updateUserTaskFilterCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserTaskFilterRepresentation}
      */
-    this.updateUserTaskFilter = function(userFilterId, userTaskFilterRepresentation, callback) {
+    this.updateUserTaskFilter = function(userFilterId, userTaskFilterRepresentation) {
       var postBody = userTaskFilterRepresentation;
 
       // verify the required parameter 'userFilterId' is set
@@ -566,7 +542,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/filters/tasks/{userFilterId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

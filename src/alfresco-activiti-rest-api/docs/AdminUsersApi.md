@@ -25,15 +25,7 @@ var apiInstance = new ActivitiPublicRestApi.AdminUsersApi();
 
 var update = new ActivitiPublicRestApi.BulkUserUpdateRepresentation(); // BulkUserUpdateRepresentation | update
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.bulkUpdateUsers(update, callback);
+apiInstance.bulkUpdateUsers(update);
 ```
 
 ### Parameters
@@ -69,15 +61,7 @@ var apiInstance = new ActivitiPublicRestApi.AdminUsersApi();
 
 var userRepresentation = new ActivitiPublicRestApi.UserRepresentation(); // UserRepresentation | userRepresentation
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createNewUser(userRepresentation, callback);
+apiInstance.createNewUser(userRepresentation);
 ```
 
 ### Parameters
@@ -117,14 +101,7 @@ var opts = {
   'summary': true // Boolean | summary
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getUser(userId, opts, callback);
+apiInstance.getUser(userId, opts);
 ```
 
 ### Parameters
@@ -173,14 +150,7 @@ var opts = {
   'summary': true // Boolean | summary
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getUsers(opts, callback);
+apiInstance.getUsers(opts);
 ```
 
 ### Parameters
@@ -228,15 +198,7 @@ var userId = 789; // Integer | userId
 
 var userRepresentation = new ActivitiPublicRestApi.UserRepresentation(); // UserRepresentation | userRepresentation
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.updateUserDetails(userId, userRepresentation, callback);
+apiInstance.updateUserDetails(userId, userRepresentation);
 ```
 
 ### Parameters

@@ -45,7 +45,7 @@
      * @param {Integer} groupId groupId
      * @param {module:api/AdminGroupsApi~activateCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.activate = function(groupId, callback) {
+    this.activate = function(groupId) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
@@ -72,7 +72,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}/action/activate', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -89,7 +89,7 @@
      * @param {Integer} groupId groupId
      * @param {module:api/AdminGroupsApi~addAllUsersToGroupCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.addAllUsersToGroup = function(groupId, callback) {
+    this.addAllUsersToGroup = function(groupId) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
@@ -116,7 +116,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}/add-all-users', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -134,7 +134,7 @@
      * @param {module:model/AddGroupCapabilitiesRepresentation} addGroupCapabilitiesRepresentation addGroupCapabilitiesRepresentation
      * @param {module:api/AdminGroupsApi~addGroupCapabilitiesCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.addGroupCapabilities = function(groupId, addGroupCapabilitiesRepresentation, callback) {
+    this.addGroupCapabilities = function(groupId, addGroupCapabilitiesRepresentation) {
       var postBody = addGroupCapabilitiesRepresentation;
 
       // verify the required parameter 'groupId' is set
@@ -166,7 +166,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}/capabilities', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -184,7 +184,7 @@
      * @param {Integer} userId userId
      * @param {module:api/AdminGroupsApi~addGroupMemberCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.addGroupMember = function(groupId, userId, callback) {
+    this.addGroupMember = function(groupId, userId) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
@@ -217,7 +217,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}/members/{userId}', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -236,7 +236,7 @@
      * @param {String} type type
      * @param {module:api/AdminGroupsApi~addRelatedGroupCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.addRelatedGroup = function(groupId, relatedGroupId, type, callback) {
+    this.addRelatedGroup = function(groupId, relatedGroupId, type) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
@@ -275,7 +275,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId}', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -293,7 +293,7 @@
      * @param {module:api/AdminGroupsApi~createNewGroupCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/GroupRepresentation}
      */
-    this.createNewGroup = function(groupRepresentation, callback) {
+    this.createNewGroup = function(groupRepresentation) {
       var postBody = groupRepresentation;
 
       // verify the required parameter 'groupRepresentation' is set
@@ -319,7 +319,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -337,7 +337,7 @@
      * @param {Integer} groupCapabilityId groupCapabilityId
      * @param {module:api/AdminGroupsApi~deleteGroupCapabilityCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteGroupCapability = function(groupId, groupCapabilityId, callback) {
+    this.deleteGroupCapability = function(groupId, groupCapabilityId) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
@@ -370,7 +370,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}/capabilities/{groupCapabilityId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -388,7 +388,7 @@
      * @param {Integer} userId userId
      * @param {module:api/AdminGroupsApi~deleteGroupMemberCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteGroupMember = function(groupId, userId, callback) {
+    this.deleteGroupMember = function(groupId, userId) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
@@ -421,7 +421,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}/members/{userId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -438,7 +438,7 @@
      * @param {Integer} groupId groupId
      * @param {module:api/AdminGroupsApi~deleteGroupCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteGroup = function(groupId, callback) {
+    this.deleteGroup = function(groupId) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
@@ -465,7 +465,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -483,7 +483,7 @@
      * @param {Integer} relatedGroupId relatedGroupId
      * @param {module:api/AdminGroupsApi~deleteRelatedGroupCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteRelatedGroup = function(groupId, relatedGroupId, callback) {
+    this.deleteRelatedGroup = function(groupId, relatedGroupId) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
@@ -516,7 +516,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -534,7 +534,7 @@
      * @param {module:api/AdminGroupsApi~getCapabilitiesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<'String'>}
      */
-    this.getCapabilities = function(groupId, callback) {
+    this.getCapabilities = function(groupId) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
@@ -561,7 +561,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}/potential-capabilities', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -583,7 +583,7 @@
      * @param {module:api/AdminGroupsApi~getGroupUsersCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getGroupUsers = function(groupId, opts, callback) {
+    this.getGroupUsers = function(groupId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -614,7 +614,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}/users', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -635,7 +635,7 @@
      * @param {module:api/AdminGroupsApi~getGroupCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/AbstractGroupRepresentation}
      */
-    this.getGroup = function(groupId, opts, callback) {
+    this.getGroup = function(groupId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -665,7 +665,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -686,7 +686,7 @@
      * @param {module:api/AdminGroupsApi~getGroupsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/LightGroupRepresentation>}
      */
-    this.getGroups = function(opts, callback) {
+    this.getGroups = function(opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -711,7 +711,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -729,7 +729,7 @@
      * @param {module:api/AdminGroupsApi~getRelatedGroupsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/LightGroupRepresentation>}
      */
-    this.getRelatedGroups = function(groupId, callback) {
+    this.getRelatedGroups = function(groupId) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
@@ -756,7 +756,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}/related-groups', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -775,7 +775,7 @@
      * @param {module:api/AdminGroupsApi~updateGroupCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/GroupRepresentation}
      */
-    this.updateGroup = function(groupId, groupRepresentation, callback) {
+    this.updateGroup = function(groupId, groupRepresentation) {
       var postBody = groupRepresentation;
 
       // verify the required parameter 'groupId' is set
@@ -807,7 +807,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

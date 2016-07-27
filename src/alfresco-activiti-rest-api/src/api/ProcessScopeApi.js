@@ -46,7 +46,7 @@
      * @param {module:api/ProcessScopeApi~getRuntimeProcessScopesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/ProcessScopeRepresentation>}
      */
-    this.getRuntimeProcessScopes = function(processScopesRequest, callback) {
+    this.getRuntimeProcessScopes = function(processScopesRequest) {
       var postBody = processScopesRequest;
 
       // verify the required parameter 'processScopesRequest' is set
@@ -72,7 +72,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-scopes', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

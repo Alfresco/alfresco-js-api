@@ -27,15 +27,7 @@ var commentRequest = new ActivitiPublicRestApi.CommentRepresentation(); // Comme
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.addProcessInstanceComment(commentRequest, processInstanceId, callback);
+apiInstance.addProcessInstanceComment(commentRequest, processInstanceId);
 ```
 
 ### Parameters
@@ -72,15 +64,7 @@ var apiInstance = new ActivitiPublicRestApi.ProcessInstancesApi();
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteProcessInstance(processInstanceId, callback);
+apiInstance.deleteProcessInstance(processInstanceId);
 ```
 
 ### Parameters
@@ -120,14 +104,7 @@ var opts = {
   'latestFirst': true // Boolean | latestFirst
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProcessInstanceComments(processInstanceId, opts, callback);
+apiInstance.getProcessInstanceComments(processInstanceId, opts);
 ```
 
 ### Parameters
@@ -166,15 +143,7 @@ var apiInstance = new ActivitiPublicRestApi.ProcessInstancesApi();
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProcessInstanceStartForm(processInstanceId, callback);
+apiInstance.getProcessInstanceStartForm(processInstanceId);
 ```
 
 ### Parameters
@@ -210,15 +179,7 @@ var apiInstance = new ActivitiPublicRestApi.ProcessInstancesApi();
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProcessInstance(processInstanceId, callback);
+apiInstance.getProcessInstance(processInstanceId);
 ```
 
 ### Parameters

@@ -10,7 +10,7 @@ describe('Activiti Task Api', function () {
 
         this.authResponseBpmMock = new AuthBpmMock(this.hostActiviti);
 
-        this.authResponseBpmMock.rec();
+        //this.authResponseBpmMock.rec();
 
         this.alfrescoJsApi = new AlfrescoApi({
             username: 'admin@app.activiti.com',
@@ -24,7 +24,13 @@ describe('Activiti Task Api', function () {
         });
     });
 
-    it.skip('get activiti Task list', function () {
+    it.skip('get activiti Task list', function (done) {
 
+        this.alfrescoJsApi.activiti.taskApi.filterTasks('{"appId": "2"}').then((data)=> {
+            this.authResponseBpmMock.play();
+
+            console.log('a' + data);
+            done();
+        });
     });
 });

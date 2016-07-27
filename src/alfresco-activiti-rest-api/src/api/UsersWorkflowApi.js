@@ -34,7 +34,6 @@
 
     /**
      * Callback function to receive the result of the getUsers operation.
-     * @callback module:api/UsersWorkflowApi~getUsersCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -52,10 +51,9 @@
      * @param {String} opts.excludeProcessId excludeProcessId
      * @param {Integer} opts.groupId groupId
      * @param {Integer} opts.tenantId tenantId
-     * @param {module:api/UsersWorkflowApi~getUsersCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getUsers = function(opts, callback) {
+    this.getUsers = function(opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -85,7 +83,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/users', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

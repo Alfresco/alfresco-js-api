@@ -46,7 +46,7 @@
      * @param {String} renditionType renditionType
      * @param {module:api/ContentRenditionApi~getRawContentCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.getRawContent = function(contentId, renditionType, callback) {
+    this.getRawContent = function(contentId, renditionType) {
       var postBody = null;
 
       // verify the required parameter 'contentId' is set
@@ -79,7 +79,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/content/{contentId}/rendition/{renditionType}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

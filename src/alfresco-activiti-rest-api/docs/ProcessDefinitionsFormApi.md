@@ -21,14 +21,7 @@ var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
 var apiInstance = new ActivitiPublicRestApi.ProcessDefinitionsFormApi();
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProcessDefinitionStartForm(callback);
+apiInstance.getProcessDefinitionStartForm();
 ```
 
 ### Parameters
@@ -59,14 +52,7 @@ var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
 var apiInstance = new ActivitiPublicRestApi.ProcessDefinitionsFormApi();
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRestFieldValues(callback);
+apiInstance.getRestFieldValues();
 ```
 
 ### Parameters
@@ -97,14 +83,7 @@ var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
 var apiInstance = new ActivitiPublicRestApi.ProcessDefinitionsFormApi();
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRestTableFieldValues(callback);
+apiInstance.getRestTableFieldValues();
 ```
 
 ### Parameters

@@ -31,15 +31,7 @@ var apiInstance = new ActivitiPublicRestApi.AlfrescoApi();
 
 var code = "code_example"; // String | code
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.confirmAuthorisation(code, callback);
+apiInstance.confirmAuthorisation(code);
 ```
 
 ### Parameters
@@ -73,14 +65,7 @@ var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
 var apiInstance = new ActivitiPublicRestApi.AlfrescoApi();
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getAllNetworks(callback);
+apiInstance.getAllNetworks();
 ```
 
 ### Parameters
@@ -115,15 +100,7 @@ var apiInstance = new ActivitiPublicRestApi.AlfrescoApi();
 
 var networkId = "networkId_example"; // String | networkId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getAllSites(networkId, callback);
+apiInstance.getAllSites(networkId);
 ```
 
 ### Parameters
@@ -161,15 +138,7 @@ var apiInstance = new ActivitiPublicRestApi.AlfrescoApi();
 
 var repositoryId = "repositoryId_example"; // String | repositoryId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getAllSites(repositoryId, callback);
+apiInstance.getAllSites(repositoryId);
 ```
 
 ### Parameters
@@ -207,15 +176,7 @@ var networkId = "networkId_example"; // String | networkId
 
 var folderId = "folderId_example"; // String | folderId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getContentInFolder(networkId, folderId, callback);
+apiInstance.getContentInFolder(networkId, folderId);
 ```
 
 ### Parameters
@@ -254,15 +215,7 @@ var repositoryId = "repositoryId_example"; // String | repositoryId
 
 var folderId = "folderId_example"; // String | folderId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getContentInFolder(repositoryId, folderId, callback);
+apiInstance.getContentInFolder(repositoryId, folderId);
 ```
 
 ### Parameters
@@ -301,15 +254,7 @@ var networkId = "networkId_example"; // String | networkId
 
 var siteId = "siteId_example"; // String | siteId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getContentInSite(networkId, siteId, callback);
+apiInstance.getContentInSite(networkId, siteId);
 ```
 
 ### Parameters
@@ -348,15 +293,7 @@ var repositoryId = "repositoryId_example"; // String | repositoryId
 
 var siteId = "siteId_example"; // String | siteId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getContentInSite(repositoryId, siteId, callback);
+apiInstance.getContentInSite(repositoryId, siteId);
 ```
 
 ### Parameters
@@ -398,14 +335,7 @@ var opts = {
   'includeAccounts': true // Boolean | includeAccounts
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRepositories(opts, callback);
+apiInstance.getRepositories(opts);
 ```
 
 ### Parameters

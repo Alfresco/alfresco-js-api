@@ -12,10 +12,10 @@ describe('Activiti Process Api', function () {
         this.authResponseBpmMock = new AuthBpmMock(this.hostActiviti);
         this.processMock = new ProcessMock(this.hostActiviti);
 
-        //this.authResponseBpmMock.get200Response();
+        this.authResponseBpmMock.get200Response();
 
         this.alfrescoJsApi = new AlfrescoApi({
-            username: 'admin@app.activiti.com',
+            username: 'admin',
             password: 'admin',
             host: this.hostActiviti,
             provider: 'BPM'
@@ -29,9 +29,7 @@ describe('Activiti Process Api', function () {
     it('get activiti Process list', function (done) {
         this.processMock.get200Response();
 
-        var processApiInstance = new this.alfrescoJsApi.activiti.ProcessApi();
-
-        processApiInstance.getProcessInstances('{"page":0,"sort":"created-desc","state":"all"}').then((data)=> {
+        this.alfrescoJsApi.activiti.processApi.getProcessInstances('{"page":0,"sort":"created-desc","state":"all"}').then((data)=> {
             expect(data.data[0].name).equal('Process Test Api - July 26th 2016');
             expect(data.data[1].name).equal('Process Test Api - July 26th 2016');
             expect(data.size).equal(2);

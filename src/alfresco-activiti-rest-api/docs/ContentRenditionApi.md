@@ -23,15 +23,7 @@ var contentId = 789; // Integer | contentId
 
 var renditionType = "renditionType_example"; // String | renditionType
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.getRawContent(contentId, renditionType, callback);
+apiInstance.getRawContent(contentId, renditionType);
 ```
 
 ### Parameters

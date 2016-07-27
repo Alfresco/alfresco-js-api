@@ -22,15 +22,7 @@ var apiInstance = new ActivitiPublicRestApi.IDMSyncApi();
 
 var syncLogEntryId = 789; // Integer | syncLogEntryId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.getLogFile(syncLogEntryId, callback);
+apiInstance.getLogFile(syncLogEntryId);
 ```
 
 ### Parameters
@@ -70,14 +62,7 @@ var opts = {
   'size': 56 // Integer | size
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getSyncLogEntries(opts, callback);
+apiInstance.getSyncLogEntries(opts);
 ```
 
 ### Parameters

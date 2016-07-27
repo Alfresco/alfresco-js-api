@@ -47,7 +47,7 @@
      * @param {module:api/IntegrationAlfrescoOnPremiseApi~getAllSitesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAllSites = function(repositoryId, callback) {
+    this.getAllSites = function(repositoryId) {
       var postBody = null;
 
       // verify the required parameter 'repositoryId' is set
@@ -74,7 +74,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco/{repositoryId}/sites', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -93,7 +93,7 @@
      * @param {module:api/IntegrationAlfrescoOnPremiseApi~getContentInFolderCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getContentInFolder = function(repositoryId, folderId, callback) {
+    this.getContentInFolder = function(repositoryId, folderId) {
       var postBody = null;
 
       // verify the required parameter 'repositoryId' is set
@@ -126,7 +126,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco/{repositoryId}/folders/{folderId}/content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -145,7 +145,7 @@
      * @param {module:api/IntegrationAlfrescoOnPremiseApi~getContentInSiteCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getContentInSite = function(repositoryId, siteId, callback) {
+    this.getContentInSite = function(repositoryId, siteId) {
       var postBody = null;
 
       // verify the required parameter 'repositoryId' is set
@@ -178,7 +178,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco/{repositoryId}/sites/{siteId}/content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -199,7 +199,7 @@
      * @param {module:api/IntegrationAlfrescoOnPremiseApi~getRepositoriesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getRepositories = function(opts, callback) {
+    this.getRepositories = function(opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -223,7 +223,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/profile/accounts/alfresco', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

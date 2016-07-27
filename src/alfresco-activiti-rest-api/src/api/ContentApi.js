@@ -47,7 +47,7 @@
      * @param {module:api/ContentApi~createRelatedContentOnProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RelatedContentRepresentation}
      */
-    this.createRelatedContentOnProcessInstance = function(processInstanceId, relatedContent, callback) {
+    this.createRelatedContentOnProcessInstance = function(processInstanceId, relatedContent) {
       var postBody = relatedContent;
 
       // verify the required parameter 'processInstanceId' is set
@@ -79,7 +79,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}/content', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -98,7 +98,7 @@
      * @param {module:api/ContentApi~createRelatedContentOnProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RelatedContentRepresentation}
      */
-    this.createRelatedContentOnProcessInstance = function(processInstanceId, file, callback) {
+    this.createRelatedContentOnProcessInstance = function(processInstanceId, file) {
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
@@ -131,7 +131,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}/raw-content', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -152,7 +152,7 @@
      * @param {module:api/ContentApi~createRelatedContentOnTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RelatedContentRepresentation}
      */
-    this.createRelatedContentOnTask = function(taskId, relatedContent, opts, callback) {
+    this.createRelatedContentOnTask = function(taskId, relatedContent, opts) {
       opts = opts || {};
       var postBody = relatedContent;
 
@@ -186,7 +186,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/content', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -207,7 +207,7 @@
      * @param {module:api/ContentApi~createRelatedContentOnTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RelatedContentRepresentation}
      */
-    this.createRelatedContentOnTask = function(taskId, file, opts, callback) {
+    this.createRelatedContentOnTask = function(taskId, file, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -242,7 +242,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/raw-content', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -260,7 +260,7 @@
      * @param {module:api/ContentApi~createTemporaryRawRelatedContentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RelatedContentRepresentation}
      */
-    this.createTemporaryRawRelatedContent = function(file, callback) {
+    this.createTemporaryRawRelatedContent = function(file) {
       var postBody = null;
 
       // verify the required parameter 'file' is set
@@ -287,7 +287,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/content/raw', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -305,7 +305,7 @@
      * @param {module:api/ContentApi~createTemporaryRelatedContentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RelatedContentRepresentation}
      */
-    this.createTemporaryRelatedContent = function(relatedContent, callback) {
+    this.createTemporaryRelatedContent = function(relatedContent) {
       var postBody = relatedContent;
 
       // verify the required parameter 'relatedContent' is set
@@ -331,7 +331,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/content', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -348,7 +348,7 @@
      * @param {Integer} contentId contentId
      * @param {module:api/ContentApi~deleteContentCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteContent = function(contentId, callback) {
+    this.deleteContent = function(contentId) {
       var postBody = null;
 
       // verify the required parameter 'contentId' is set
@@ -375,7 +375,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/content/{contentId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -393,7 +393,7 @@
      * @param {module:api/ContentApi~getContentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RelatedContentRepresentation}
      */
-    this.getContent = function(contentId, callback) {
+    this.getContent = function(contentId) {
       var postBody = null;
 
       // verify the required parameter 'contentId' is set
@@ -420,7 +420,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/content/{contentId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -438,7 +438,7 @@
      * @param {module:api/ContentApi~getProcessInstanceContentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getProcessInstanceContent = function(processInstanceId, callback) {
+    this.getProcessInstanceContent = function(processInstanceId) {
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
@@ -465,7 +465,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}/field-content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -482,7 +482,7 @@
      * @param {Integer} contentId contentId
      * @param {module:api/ContentApi~getRawContent3Callback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.getRawContent3 = function(contentId, callback) {
+    this.getRawContent3 = function(contentId) {
       var postBody = null;
 
       // verify the required parameter 'contentId' is set
@@ -509,7 +509,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/content/{contentId}/raw', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -527,7 +527,7 @@
      * @param {module:api/ContentApi~getRelatedContentForProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getRelatedContentForProcessInstance = function(processInstanceId, callback) {
+    this.getRelatedContentForProcessInstance = function(processInstanceId) {
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
@@ -554,7 +554,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}/content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -572,7 +572,7 @@
      * @param {module:api/ContentApi~getRelatedContentForTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getRelatedContentForTask = function(taskId, callback) {
+    this.getRelatedContentForTask = function(taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
@@ -599,7 +599,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

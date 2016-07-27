@@ -47,7 +47,7 @@
      * @param {module:api/TaskActionsApi~assignTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TaskRepresentation}
      */
-    this.assignTask = function(taskId, requestNode, callback) {
+    this.assignTask = function(taskId, requestNode) {
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
@@ -79,7 +79,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/assign', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -97,7 +97,7 @@
      * @param {module:model/ObjectNode} requestNode requestNode
      * @param {module:api/TaskActionsApi~attachFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.attachForm = function(taskId, requestNode, callback) {
+    this.attachForm = function(taskId, requestNode) {
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
@@ -129,7 +129,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/attach-form', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -147,7 +147,7 @@
      * @param {String} taskId taskId
      * @param {module:api/TaskActionsApi~claimTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.claimTask = function(taskId, callback) {
+    this.claimTask = function(taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
@@ -174,7 +174,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/claim', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -192,7 +192,7 @@
      * @param {String} taskId taskId
      * @param {module:api/TaskActionsApi~completeTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.completeTask = function(taskId, callback) {
+    this.completeTask = function(taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
@@ -219,7 +219,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/complete', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -237,7 +237,7 @@
      * @param {module:model/ObjectNode} requestNode requestNode
      * @param {module:api/TaskActionsApi~involveUserCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.involveUser = function(taskId, requestNode, callback) {
+    this.involveUser = function(taskId, requestNode) {
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
@@ -269,7 +269,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/involve', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -286,7 +286,7 @@
      * @param {String} taskId taskId
      * @param {module:api/TaskActionsApi~removeFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.removeForm = function(taskId, callback) {
+    this.removeForm = function(taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
@@ -313,7 +313,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/remove-form', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -331,7 +331,7 @@
      * @param {module:model/ObjectNode} requestNode requestNode
      * @param {module:api/TaskActionsApi~removeInvolvedUserCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.removeInvolvedUser = function(taskId, requestNode, callback) {
+    this.removeInvolvedUser = function(taskId, requestNode) {
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
@@ -363,7 +363,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/remove-involved', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -381,7 +381,7 @@
      * @param {String} taskId taskId
      * @param {module:api/TaskActionsApi~unclaimTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.unclaimTask = function(taskId, callback) {
+    this.unclaimTask = function(taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
@@ -408,7 +408,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/unclaim', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

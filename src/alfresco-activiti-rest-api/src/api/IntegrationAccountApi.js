@@ -43,10 +43,9 @@
     /**
      * Retrieve Alfresco account information
      * Ideal to map accounts &amp; integrate with 3rd party app/client
-     * @param {module:api/IntegrationAccountApi~getAccountsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAccounts = function(callback) {
+    this.getAccounts = function() {
       var postBody = null;
 
 
@@ -67,7 +66,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/account/integration', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

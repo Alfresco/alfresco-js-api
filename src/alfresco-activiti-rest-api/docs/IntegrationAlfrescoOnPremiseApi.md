@@ -26,15 +26,7 @@ var apiInstance = new ActivitiPublicRestApi.IntegrationAlfrescoOnPremiseApi();
 
 var repositoryId = "repositoryId_example"; // String | repositoryId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getAllSites(repositoryId, callback);
+apiInstance.getAllSites(repositoryId);
 ```
 
 ### Parameters
@@ -72,15 +64,7 @@ var repositoryId = "repositoryId_example"; // String | repositoryId
 
 var folderId = "folderId_example"; // String | folderId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getContentInFolder(repositoryId, folderId, callback);
+apiInstance.getContentInFolder(repositoryId, folderId);
 ```
 
 ### Parameters
@@ -119,15 +103,7 @@ var repositoryId = "repositoryId_example"; // String | repositoryId
 
 var siteId = "siteId_example"; // String | siteId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getContentInSite(repositoryId, siteId, callback);
+apiInstance.getContentInSite(repositoryId, siteId);
 ```
 
 ### Parameters
@@ -169,14 +145,7 @@ var opts = {
   'includeAccounts': true // Boolean | includeAccounts
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRepositories(opts, callback);
+apiInstance.getRepositories(opts);
 ```
 
 ### Parameters

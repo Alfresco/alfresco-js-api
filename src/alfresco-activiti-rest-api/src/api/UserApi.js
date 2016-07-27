@@ -47,7 +47,7 @@
      * @param {module:model/UserActionRepresentation} actionRequest actionRequest
      * @param {module:api/UserApi~executeActionCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.executeAction = function(userId, actionRequest, callback) {
+    this.executeAction = function(userId, actionRequest) {
       var postBody = actionRequest;
 
       // verify the required parameter 'userId' is set
@@ -79,7 +79,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/users/{userId}', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -96,7 +96,7 @@
      * @param {Integer} userId userId
      * @param {module:api/UserApi~getProfilePictureCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.getProfilePicture = function(userId, callback) {
+    this.getProfilePicture = function(userId) {
       var postBody = null;
 
       // verify the required parameter 'userId' is set
@@ -123,7 +123,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/users/{userId}/picture', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -141,7 +141,7 @@
      * @param {module:api/UserApi~getUserCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserRepresentation}
      */
-    this.getUser = function(userId, callback) {
+    this.getUser = function(userId) {
       var postBody = null;
 
       // verify the required parameter 'userId' is set
@@ -168,7 +168,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/users/{userId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -195,7 +195,7 @@
      * @param {module:api/UserApi~getUsersCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getUsers = function(opts, callback) {
+    this.getUsers = function(opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -225,7 +225,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/users', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -242,7 +242,7 @@
      * @param {module:model/ResetPasswordRepresentation} resetPassword resetPassword
      * @param {module:api/UserApi~requestPasswordResetCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.requestPasswordReset = function(resetPassword, callback) {
+    this.requestPasswordReset = function(resetPassword) {
       var postBody = resetPassword;
 
       // verify the required parameter 'resetPassword' is set
@@ -268,7 +268,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/idm/passwords', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -287,7 +287,7 @@
      * @param {module:api/UserApi~updateUserCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserRepresentation}
      */
-    this.updateUser = function(userId, userRequest, callback) {
+    this.updateUser = function(userId, userRequest) {
       var postBody = userRequest;
 
       // verify the required parameter 'userId' is set
@@ -319,7 +319,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/users/{userId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

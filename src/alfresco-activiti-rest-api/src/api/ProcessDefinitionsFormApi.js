@@ -42,10 +42,8 @@
 
     /**
      * Retrieve the start form for a process definition
-     * @param {module:api/ProcessDefinitionsFormApi~getProcessDefinitionStartFormCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/FormDefinitionRepresentation}
      */
-    this.getProcessDefinitionStartForm = function(callback) {
+    this.getProcessDefinitionStartForm = function() {
       var postBody = null;
 
 
@@ -66,7 +64,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-definitions/{processDefinitionId}/start-form', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -80,10 +78,8 @@
 
     /**
      * Retrieve field values (eg. the typeahead field)
-     * @param {module:api/ProcessDefinitionsFormApi~getRestFieldValuesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {Array.<module:model/FormValueRepresentation>}
      */
-    this.getRestFieldValues = function(callback) {
+    this.getRestFieldValues = function() {
       var postBody = null;
 
 
@@ -104,7 +100,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -118,10 +114,8 @@
 
     /**
      * Retrieve field values (eg. the table field)
-     * @param {module:api/ProcessDefinitionsFormApi~getRestTableFieldValuesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {Array.<module:model/FormValueRepresentation>}
      */
-    this.getRestTableFieldValues = function(callback) {
+    this.getRestTableFieldValues = function() {
       var postBody = null;
 
 
@@ -142,7 +136,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field}/{column}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

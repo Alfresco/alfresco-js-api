@@ -26,14 +26,7 @@ var opts = {
   'appDefinitionId': 789 // Integer | appDefinitionId
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProcessDefinitions(opts, callback);
+apiInstance.getProcessDefinitions(opts);
 ```
 
 ### Parameters

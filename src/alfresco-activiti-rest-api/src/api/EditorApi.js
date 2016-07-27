@@ -47,7 +47,7 @@
      * @param {module:api/EditorApi~getFormHistoryCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/FormRepresentation}
      */
-    this.getFormHistory = function(formId, formHistoryId, callback) {
+    this.getFormHistory = function(formId, formHistoryId) {
       var postBody = null;
 
       // verify the required parameter 'formId' is set
@@ -80,7 +80,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/editor/form-models/{formId}/history/{formHistoryId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -98,7 +98,7 @@
      * @param {module:api/EditorApi~getFormCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/FormRepresentation}
      */
-    this.getForm = function(formId, callback) {
+    this.getForm = function(formId) {
       var postBody = null;
 
       // verify the required parameter 'formId' is set
@@ -125,7 +125,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/editor/form-models/{formId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -139,10 +139,9 @@
 
     /**
      * getForms
-     * @param {module:api/EditorApi~getFormsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/FormRepresentation>}
      */
-    this.getForms = function(callback) {
+    this.getForms = function() {
       var postBody = null;
 
 
@@ -163,7 +162,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/editor/form-models/values', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -182,7 +181,7 @@
      * @param {module:api/EditorApi~saveFormCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/FormRepresentation}
      */
-    this.saveForm = function(formId, saveRepresentation, callback) {
+    this.saveForm = function(formId, saveRepresentation) {
       var postBody = saveRepresentation;
 
       // verify the required parameter 'formId' is set
@@ -214,7 +213,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/editor/form-models/{formId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -233,7 +232,7 @@
      * @param {module:api/EditorApi~validateModelCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/ValidationErrorRepresentation>}
      */
-    this.validateModel = function(formId, saveRepresentation, callback) {
+    this.validateModel = function(formId, saveRepresentation) {
       var postBody = saveRepresentation;
 
       // verify the required parameter 'formId' is set
@@ -265,7 +264,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/editor/form-models/{formId}/validate', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

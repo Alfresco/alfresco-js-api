@@ -46,7 +46,7 @@
      * @param {String} processDefinitionKey processDefinitionKey
      * @param {module:api/TemporaryApi~completeTasksCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.completeTasks = function(userId, processDefinitionKey, callback) {
+    this.completeTasks = function(userId, processDefinitionKey) {
       var postBody = null;
 
       // verify the required parameter 'userId' is set
@@ -79,7 +79,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/temporary/generate-report-data/complete-tasks', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -97,7 +97,7 @@
      * @param {String} processDefinitionKey processDefinitionKey
      * @param {module:api/TemporaryApi~generateDataCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.generateData = function(userId, processDefinitionKey, callback) {
+    this.generateData = function(userId, processDefinitionKey) {
       var postBody = null;
 
       // verify the required parameter 'userId' is set
@@ -130,7 +130,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/temporary/generate-report-data/start-process', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -144,10 +144,8 @@
 
     /**
      * getHeaders
-     * @param {module:api/TemporaryApi~getHeadersCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ArrayNode}
      */
-    this.getHeaders = function(callback) {
+    this.getHeaders = function() {
       var postBody = null;
 
 
@@ -168,7 +166,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/temporary/example-headers', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -182,10 +180,8 @@
 
     /**
      * getOptions
-     * @param {module:api/TemporaryApi~getOptionsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ArrayNode}
      */
-    this.getOptions = function(callback) {
+    this.getOptions = function() {
       var postBody = null;
 
 
@@ -206,7 +202,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/temporary/example-options', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

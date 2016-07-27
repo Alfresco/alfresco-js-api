@@ -46,7 +46,7 @@
      * @param {module:api/ProcessInstancesInformationApi~getProcessInstanceContentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getProcessInstanceContent = function(processInstanceId, callback) {
+    this.getProcessInstanceContent = function(processInstanceId) {
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
@@ -73,7 +73,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}/field-content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -91,7 +91,7 @@
      * @param {module:api/ProcessInstancesInformationApi~startNewProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ProcessInstanceRepresentation}
      */
-    this.startNewProcessInstance = function(startRequest, callback) {
+    this.startNewProcessInstance = function(startRequest) {
       var postBody = startRequest;
 
       // verify the required parameter 'startRequest' is set
@@ -117,7 +117,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

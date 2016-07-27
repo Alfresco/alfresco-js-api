@@ -25,15 +25,7 @@ var apiInstance = new ActivitiPublicRestApi.ProfileApi();
 
 var changePasswordRepresentation = new ActivitiPublicRestApi.ChangePasswordRepresentation(); // ChangePasswordRepresentation | changePasswordRepresentation
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.changePassword(changePasswordRepresentation, callback);
+apiInstance.changePassword(changePasswordRepresentation);
 ```
 
 ### Parameters
@@ -69,14 +61,7 @@ var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
 var apiInstance = new ActivitiPublicRestApi.ProfileApi();
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProfilePicture(callback);
+apiInstance.getProfilePicture();
 ```
 
 ### Parameters
@@ -109,14 +94,7 @@ var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
 var apiInstance = new ActivitiPublicRestApi.ProfileApi();
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProfile(callback);
+apiInstance.getProfile();
 ```
 
 ### Parameters
@@ -151,15 +129,7 @@ var apiInstance = new ActivitiPublicRestApi.ProfileApi();
 
 var userRepresentation = new ActivitiPublicRestApi.UserRepresentation(); // UserRepresentation | userRepresentation
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateProfile(userRepresentation, callback);
+apiInstance.updateProfile(userRepresentation);
 ```
 
 ### Parameters
@@ -195,15 +165,7 @@ var apiInstance = new ActivitiPublicRestApi.ProfileApi();
 
 var file = "/path/to/file.txt"; // File | file
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.uploadProfilePicture(file, callback);
+apiInstance.uploadProfilePicture(file);
 ```
 
 ### Parameters

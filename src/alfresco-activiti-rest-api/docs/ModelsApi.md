@@ -33,15 +33,7 @@ var apiInstance = new ActivitiPublicRestApi.ModelsApi();
 
 var modelRepresentation = new ActivitiPublicRestApi.ModelRepresentation(); // ModelRepresentation | modelRepresentation
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createModel(modelRepresentation, callback);
+apiInstance.createModel(modelRepresentation);
 ```
 
 ### Parameters
@@ -82,14 +74,7 @@ var opts = {
   'deleteRuntimeApp': true // Boolean | deleteRuntimeApp
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteModel(modelId, opts, callback);
+apiInstance.deleteModel(modelId, opts);
 ```
 
 ### Parameters
@@ -130,14 +115,7 @@ var modelId = 789; // Integer | modelId
 var modelRepresentation = new ActivitiPublicRestApi.ModelRepresentation(); // ModelRepresentation | modelRepresentation
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.duplicateModel(modelId, modelRepresentation, callback);
+apiInstance.duplicateModel(modelId, modelRepresentation);
 ```
 
 ### Parameters
@@ -175,14 +153,7 @@ var apiInstance = new ActivitiPublicRestApi.ModelsApi();
 var modelId = 789; // Integer | modelId
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getModelJSON(modelId, callback);
+apiInstance.getModelJSON(modelId);
 ```
 
 ### Parameters
@@ -218,15 +189,7 @@ var apiInstance = new ActivitiPublicRestApi.ModelsApi();
 
 var modelId = 789; // Integer | modelId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getModelThumbnail(modelId, callback);
+apiInstance.getModelThumbnail(modelId);
 ```
 
 ### Parameters
@@ -266,14 +229,7 @@ var opts = {
   'includePermissions': true // Boolean | includePermissions
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getModel(modelId, opts, callback);
+apiInstance.getModel(modelId, opts);
 ```
 
 ### Parameters
@@ -308,14 +264,7 @@ var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
 var apiInstance = new ActivitiPublicRestApi.ModelsApi();
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getModelsToIncludeInAppDefinition(callback);
+apiInstance.getModelsToIncludeInAppDefinition();
 ```
 
 ### Parameters
@@ -353,14 +302,7 @@ var opts = {
   'referenceId': 789 // Integer | referenceId
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getModels(opts, callback);
+apiInstance.getModels(opts);
 ```
 
 ### Parameters
@@ -401,15 +343,7 @@ var modelId = 789; // Integer | modelId
 
 var file = "/path/to/file.txt"; // File | file
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.importNewVersion(modelId, file, callback);
+apiInstance.importNewVersion(modelId, file);
 ```
 
 ### Parameters
@@ -446,15 +380,7 @@ var apiInstance = new ActivitiPublicRestApi.ModelsApi();
 
 var file = "/path/to/file.txt"; // File | file
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.importProcessModel(file, callback);
+apiInstance.importProcessModel(file);
 ```
 
 ### Parameters
@@ -492,15 +418,7 @@ var modelId = 789; // Integer | modelId
 
 var values = null; // Object | values
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.saveModel(modelId, values, callback);
+apiInstance.saveModel(modelId, values);
 ```
 
 ### Parameters
@@ -539,15 +457,7 @@ var modelId = 789; // Integer | modelId
 
 var updatedModel = new ActivitiPublicRestApi.ModelRepresentation(); // ModelRepresentation | updatedModel
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateModel(modelId, updatedModel, callback);
+apiInstance.updateModel(modelId, updatedModel);
 ```
 
 ### Parameters
@@ -588,14 +498,7 @@ var opts = {
   'values': null // Object | values
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.validateModel(modelId, opts, callback);
+apiInstance.validateModel(modelId, opts);
 ```
 
 ### Parameters

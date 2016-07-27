@@ -21,15 +21,7 @@ var apiInstance = new ActivitiPublicRestApi.ProcessScopeApi();
 
 var processScopesRequest = new ActivitiPublicRestApi.ProcessScopesRequestRepresentation(); // ProcessScopesRequestRepresentation | processScopesRequest
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRuntimeProcessScopes(processScopesRequest, callback);
+apiInstance.getRuntimeProcessScopes(processScopesRequest);
 ```
 
 ### Parameters

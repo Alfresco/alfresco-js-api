@@ -12,6 +12,7 @@ var AlfrescoWebScriptApi = require('./alfrescoWebScript');
 var Emitter = require('event-emitter');
 var EcmAuth = require('./ecmAuth');
 var BpmAuth = require('./bpmAuth');
+var _ = require('lodash');
 
 class AlfrescoApi {
     /**
@@ -46,20 +47,45 @@ class AlfrescoApi {
             ticket: config.ticket
         };
 
-        this.ecmAuth = new EcmAuth(this.config);
-        AlfrescoCoreRestApi.ApiClient.instance = this.ecmAuth.getClient();
+        if (this.config.provider ===  'BPM' ||  this.config.provider === 'ALL') {
+            this.bpmAuth = new BpmAuth(this.config);
+            AlfrescoActivitiApi.ApiClient.instance = this.bpmAuth.getClient();
+            this.activiti = AlfrescoActivitiApi;
+            this.instantiateObjects(this.activiti);
+        }
 
-        this.bpmAuth = new BpmAuth(this.config);
-        AlfrescoActivitiApi.ApiClient.instance = this.bpmAuth.getClient();
-
-        this.activiti =  AlfrescoActivitiApi;
-        this.core = AlfrescoCoreRestApi;
+        if (this.config.provider ===  'ECM' ||  this.config.provider === 'ALL') {
+            this.ecmAuth = new EcmAuth(this.config);
+            AlfrescoCoreRestApi.ApiClient.instance = this.ecmAuth.getClient();
+            this.core = AlfrescoCoreRestApi;
+            this.instantiateObjects(this.core);
+        }
 
         this.nodes = this.node = new AlfrescoNode();
         this.search = new AlfrescoSearch();
         this.content = new AlfrescoContent(this.ecmAuth);
         this.upload = new AlfrescoUpload();
         this.webScript = new AlfrescoWebScriptApi();
+    }
+
+    instantiateObjects(module) {
+        var classArray = Object.keys(module);
+
+        classArray.forEach((currentClass)=> {
+            var obj = this.stringToObject(currentClass, module);
+            var nameObj = _.lowerFirst(currentClass);
+            module[nameObj] = obj;
+        });
+    }
+
+    stringToObject(nameClass, module) {
+        try {
+            if (typeof module[nameClass] === 'function') {
+                return new module[nameClass]();
+            }
+        } catch (error) {
+            console.log(nameClass + '  ' + error);
+        }
     }
 
     /**

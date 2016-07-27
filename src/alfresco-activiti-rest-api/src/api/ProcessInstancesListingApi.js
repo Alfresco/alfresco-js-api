@@ -46,7 +46,7 @@
      * @param {module:api/ProcessInstancesListingApi~filterProcessInstancesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.filterProcessInstances = function(filterRequest, callback) {
+    this.filterProcessInstances = function(filterRequest) {
       var postBody = filterRequest;
 
       // verify the required parameter 'filterRequest' is set
@@ -72,7 +72,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/filter', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -90,7 +90,7 @@
      * @param {module:api/ProcessInstancesListingApi~getProcessInstancesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getProcessInstances = function(requestNode, callback) {
+    this.getProcessInstances = function(requestNode) {
       var postBody = requestNode;
 
       // verify the required parameter 'requestNode' is set
@@ -116,7 +116,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/query', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

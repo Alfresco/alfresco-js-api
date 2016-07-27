@@ -5,7 +5,7 @@ var AlfrescoApi = require('./src/alfrescoApi.js');
 
 module.exports = AlfrescoApi;
 
-},{"./src/alfrescoApi.js":395}],2:[function(require,module,exports){
+},{"./src/alfrescoApi.js":394}],2:[function(require,module,exports){
 // http://wiki.commonjs.org/wiki/Unit_Testing/1.0
 //
 // THIS IS NOT TESTED NOR LIKELY TO WORK OUTSIDE V8!
@@ -37007,176 +37007,6 @@ function extend() {
 }
 
 },{}],136:[function(require,module,exports){
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var AlfrescoApiClient = require('./alfrescoApiClient');
-var Emitter = require('event-emitter');
-
-var BpmAuth = function (_AlfrescoApiClient) {
-    _inherits(BpmAuth, _AlfrescoApiClient);
-
-    /**
-     * @param {Object} config
-     */
-
-    function BpmAuth(config) {
-        _classCallCheck(this, BpmAuth);
-
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BpmAuth).call(this));
-
-        _this.ticket = undefined;
-        _this.config = config;
-        _this.host = _this.config.hostActiviti;
-        _this.basePath = config.hostActiviti + '/activiti-app'; //Activiti Call
-        _this.authentications.basicAuth.username = config.username;
-        _this.authentications.basicAuth.password = config.password;
-        Emitter.call(_this);
-        return _this;
-    }
-
-    /**
-     * login Activiti API
-     *
-     * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
-     * */
-
-
-    _createClass(BpmAuth, [{
-        key: 'login',
-        value: function login() {
-            var _this2 = this;
-
-            var postBody = {},
-                pathParams = {},
-                queryParams = {};
-
-            var headerParams = {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Cache-Control': 'no-cache'
-            };
-            var formParams = {
-                j_username: this.authentications.basicAuth.username,
-                j_password: this.authentications.basicAuth.password,
-                _spring_security_remember_me: true,
-                submit: 'Login'
-            };
-
-            var authNames = [];
-            var contentTypes = ['application/x-www-form-urlencoded'];
-            var accepts = ['application/json'];
-
-            this.promise = new Promise(function (resolve, reject) {
-                _this2.callApi('/app/authentication', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts).then(function (data) {
-                    _this2.setTicket('isLogedin');
-                    _this2.promise.emit('success');
-                    resolve(200);
-                }, function (error) {
-                    if (error.error.status === 401) {
-                        _this2.promise.emit('unauthorized');
-                    }
-                    _this2.promise.emit('error');
-                    reject(error.error);
-                });
-            });
-
-            Emitter(this.promise); // jshint ignore:line
-
-            return this.promise;
-        }
-
-        /**
-         * logout Alfresco API
-         *
-         * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
-         * */
-
-    }, {
-        key: 'logout',
-        value: function logout() {
-            var _this3 = this;
-
-            var postBody = {},
-                pathParams = {},
-                queryParams = {},
-                headerParams = {},
-                formParams = {};
-
-            var authNames = [];
-            var contentTypes = ['application/json'];
-            var accepts = ['application/json'];
-
-            this.promise = new Promise(function (resolve, reject) {
-                _this3.callApi('/app/logout', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts).then(function () {
-                    _this3.promise.emit('logout');
-                    _this3.setTicket(undefined);
-                    resolve('logout');
-                }, function (error) {
-                    if (error.status === 401) {
-                        _this3.promise.emit('unauthorized');
-                    }
-                    _this3.promise.emit('error');
-                    reject(error);
-                });
-            });
-
-            Emitter(this.promise); // jshint ignore:line
-
-            return this.promise;
-        }
-
-        /**
-         * Set the current Ticket
-         *
-         * @param {String} Ticket
-         * */
-
-    }, {
-        key: 'setTicket',
-        value: function setTicket(ticket) {
-            this.authentications.basicAuth.password = ticket;
-            this.ticket = ticket;
-        }
-
-        /**
-         * Get the current Ticket
-         *
-         * @returns {String} Ticket
-         * */
-
-    }, {
-        key: 'getTicket',
-        value: function getTicket() {
-            return this.ticket;
-        }
-
-        /**
-         * If the client is logged in retun true
-         *
-         * @returns {Boolean} is logged in
-         */
-
-    }, {
-        key: 'isLoggedIn',
-        value: function isLoggedIn() {
-            return !!this.ticket;
-        }
-    }]);
-
-    return BpmAuth;
-}(AlfrescoApiClient);
-
-Emitter(BpmAuth.prototype); // jshint ignore:line
-module.exports = BpmAuth;
-
-},{"./alfrescoApiClient":396,"event-emitter":65}],137:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -37312,7 +37142,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   /**
    * Checks whether the given parameter value represents file-like content.
    * @param param The parameter to check.
-   * @returns {Boolean} <code>true</code> if <code>param</code> represents a file. 
+   * @returns {Boolean} <code>true</code> if <code>param</code> represents a file.
    */
   exports.prototype.isFileParam = function (param) {
     // fs.ReadStream in Node.js (but not in runtime like browserify)
@@ -37361,7 +37191,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
   /**
    * Enumeration of collection format separator strategies.
-   * @enum {String} 
+   * @enum {String}
    * @readonly
    */
   exports.CollectionFormatEnum = {
@@ -37486,7 +37316,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
   /**
    * Callback function to receive the result of the operation.
-   * @callback module:ApiClient~callApiCallback
    * @param {String} error Error message, if any.
    * @param data The data returned by the service call.
    * @param {String} response The complete HTTP response.
@@ -37506,10 +37335,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    * @param {Array.<String>} accepts An array of acceptable response MIME types.
    * @param {(String|Array|ObjectFunction)} returnType The required type to return; can be a string for simple types or the
    * constructor for a complex type.
-   * @param {module:ApiClient~callApiCallback} callback The callback function.
    * @returns {Object} The SuperAgent request object.
    */
-  exports.prototype.callApi = function callApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, authNames, contentTypes, accepts, returnType, callback) {
+  exports.prototype.callApi = function callApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, authNames, contentTypes, accepts, returnType) {
 
     var _this = this;
     var url = this.buildUrl(path, pathParams);
@@ -37666,7 +37494,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":8,"fs":6,"superagent":125}],138:[function(require,module,exports){
+},{"buffer":8,"fs":6,"superagent":125}],137:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -37695,7 +37523,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new AboutApi. 
+   * Constructs a new AboutApi.
    * @alias module:api/AboutApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -37706,8 +37534,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getAppVersionUsingGET operation.
-     * @callback module:api/AboutApi~getAppVersionUsingGETCallback
+     * Callback function to receive the result of the getAppVersion operation.
      * @param {String} error Error message, if any.
      * @param {Object.<String, {'String': 'String'}>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -37716,10 +37543,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Server Information
      * Retrieve information about the Activiti BPM Suite version
-     * @param {module:api/AboutApi~getAppVersionUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Object.<String, {'String': 'String'}>}
      */
-    this.getAppVersionUsingGET = function (callback) {
+    this.getAppVersion = function () {
       var postBody = null;
 
       var pathParams = {};
@@ -37732,14 +37558,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = { 'String': 'String' };
 
-      return this.apiClient.callApi('/api/enterprise/app-version', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/app-version', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137}],139:[function(require,module,exports){
+},{"../ApiClient":136}],138:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -37768,7 +37594,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new AdminEndpointsApi. 
+   * Constructs a new AdminEndpointsApi.
    * @alias module:api/AdminEndpointsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -37779,8 +37605,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the createBasicAuthConfigurationUsingPOST1 operation.
-     * @callback module:api/AdminEndpointsApi~createBasicAuthConfigurationUsingPOST1Callback
+     * Callback function to receive the result of the createBasicAuthConfiguration operation.
+     * @callback module:api/AdminEndpointsApi~createBasicAuthConfigurationCallback
      * @param {String} error Error message, if any.
      * @param {module:model/EndpointBasicAuthRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -37789,15 +37615,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * createBasicAuthConfiguration
      * @param {module:model/CreateEndpointBasicAuthRepresentation} createRepresentation createRepresentation
-     * @param {module:api/AdminEndpointsApi~createBasicAuthConfigurationUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminEndpointsApi~createBasicAuthConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/EndpointBasicAuthRepresentation}
      */
-    this.createBasicAuthConfigurationUsingPOST1 = function (createRepresentation, callback) {
+    this.createBasicAuthConfiguration = function (createRepresentation) {
       var postBody = createRepresentation;
 
       // verify the required parameter 'createRepresentation' is set
       if (createRepresentation == undefined || createRepresentation == null) {
-        throw "Missing the required parameter 'createRepresentation' when calling createBasicAuthConfigurationUsingPOST1";
+        throw "Missing the required parameter 'createRepresentation' when calling createBasicAuthConfiguration";
       }
 
       var pathParams = {};
@@ -37810,12 +37636,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = EndpointBasicAuthRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/admin/basic-auths', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/basic-auths', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the createEndpointConfigurationUsingPOST1 operation.
-     * @callback module:api/AdminEndpointsApi~createEndpointConfigurationUsingPOST1Callback
+     * Callback function to receive the result of the createEndpointConfiguration operation.
+     * @callback module:api/AdminEndpointsApi~createEndpointConfigurationCallback
      * @param {String} error Error message, if any.
      * @param {module:model/EndpointConfigurationRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -37824,15 +37650,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * createEndpointConfiguration
      * @param {module:model/EndpointConfigurationRepresentation} representation representation
-     * @param {module:api/AdminEndpointsApi~createEndpointConfigurationUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminEndpointsApi~createEndpointConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/EndpointConfigurationRepresentation}
      */
-    this.createEndpointConfigurationUsingPOST1 = function (representation, callback) {
+    this.createEndpointConfiguration = function (representation) {
       var postBody = representation;
 
       // verify the required parameter 'representation' is set
       if (representation == undefined || representation == null) {
-        throw "Missing the required parameter 'representation' when calling createEndpointConfigurationUsingPOST1";
+        throw "Missing the required parameter 'representation' when calling createEndpointConfiguration";
       }
 
       var pathParams = {};
@@ -37845,12 +37671,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = EndpointConfigurationRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/admin/endpoints', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/endpoints', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getBasicAuthConfigurationUsingGET1 operation.
-     * @callback module:api/AdminEndpointsApi~getBasicAuthConfigurationUsingGET1Callback
+     * Callback function to receive the result of the getBasicAuthConfiguration operation.
+     * @callback module:api/AdminEndpointsApi~getBasicAuthConfigurationCallback
      * @param {String} error Error message, if any.
      * @param {module:model/EndpointBasicAuthRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -37860,20 +37686,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * getBasicAuthConfiguration
      * @param {Integer} basicAuthId basicAuthId
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminEndpointsApi~getBasicAuthConfigurationUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminEndpointsApi~getBasicAuthConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/EndpointBasicAuthRepresentation}
      */
-    this.getBasicAuthConfigurationUsingGET1 = function (basicAuthId, tenantId, callback) {
+    this.getBasicAuthConfiguration = function (basicAuthId, tenantId) {
       var postBody = null;
 
       // verify the required parameter 'basicAuthId' is set
       if (basicAuthId == undefined || basicAuthId == null) {
-        throw "Missing the required parameter 'basicAuthId' when calling getBasicAuthConfigurationUsingGET1";
+        throw "Missing the required parameter 'basicAuthId' when calling getBasicAuthConfiguration";
       }
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling getBasicAuthConfigurationUsingGET1";
+        throw "Missing the required parameter 'tenantId' when calling getBasicAuthConfiguration";
       }
 
       var pathParams = {
@@ -37890,12 +37716,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = EndpointBasicAuthRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/admin/basic-auths/{basicAuthId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/basic-auths/{basicAuthId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getBasicAuthConfigurationsUsingGET1 operation.
-     * @callback module:api/AdminEndpointsApi~getBasicAuthConfigurationsUsingGET1Callback
+     * Callback function to receive the result of the getBasicAuthConfigurations operation.
+     * @callback module:api/AdminEndpointsApi~getBasicAuthConfigurationsCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/EndpointBasicAuthRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -37904,15 +37730,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * getBasicAuthConfigurations
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminEndpointsApi~getBasicAuthConfigurationsUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminEndpointsApi~getBasicAuthConfigurationsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/EndpointBasicAuthRepresentation>}
      */
-    this.getBasicAuthConfigurationsUsingGET1 = function (tenantId, callback) {
+    this.getBasicAuthConfigurations = function (tenantId) {
       var postBody = null;
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling getBasicAuthConfigurationsUsingGET1";
+        throw "Missing the required parameter 'tenantId' when calling getBasicAuthConfigurations";
       }
 
       var pathParams = {};
@@ -37927,12 +37753,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = [EndpointBasicAuthRepresentation];
 
-      return this.apiClient.callApi('/api/enterprise/admin/basic-auths', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/basic-auths', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getEndpointConfigurationUsingGET1 operation.
-     * @callback module:api/AdminEndpointsApi~getEndpointConfigurationUsingGET1Callback
+     * Callback function to receive the result of the getEndpointConfiguration operation.
+     * @callback module:api/AdminEndpointsApi~getEndpointConfigurationCallback
      * @param {String} error Error message, if any.
      * @param {module:model/EndpointConfigurationRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -37942,20 +37768,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * getEndpointConfiguration
      * @param {Integer} endpointConfigurationId endpointConfigurationId
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminEndpointsApi~getEndpointConfigurationUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminEndpointsApi~getEndpointConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/EndpointConfigurationRepresentation}
      */
-    this.getEndpointConfigurationUsingGET1 = function (endpointConfigurationId, tenantId, callback) {
+    this.getEndpointConfiguration = function (endpointConfigurationId, tenantId) {
       var postBody = null;
 
       // verify the required parameter 'endpointConfigurationId' is set
       if (endpointConfigurationId == undefined || endpointConfigurationId == null) {
-        throw "Missing the required parameter 'endpointConfigurationId' when calling getEndpointConfigurationUsingGET1";
+        throw "Missing the required parameter 'endpointConfigurationId' when calling getEndpointConfiguration";
       }
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling getEndpointConfigurationUsingGET1";
+        throw "Missing the required parameter 'tenantId' when calling getEndpointConfiguration";
       }
 
       var pathParams = {
@@ -37972,12 +37798,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = EndpointConfigurationRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/admin/endpoints/{endpointConfigurationId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/endpoints/{endpointConfigurationId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getEndpointConfigurationsUsingGET1 operation.
-     * @callback module:api/AdminEndpointsApi~getEndpointConfigurationsUsingGET1Callback
+     * Callback function to receive the result of the getEndpointConfigurations operation.
+     * @callback module:api/AdminEndpointsApi~getEndpointConfigurationsCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/EndpointConfigurationRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -37986,15 +37812,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * getEndpointConfigurations
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminEndpointsApi~getEndpointConfigurationsUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminEndpointsApi~getEndpointConfigurationsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/EndpointConfigurationRepresentation>}
      */
-    this.getEndpointConfigurationsUsingGET1 = function (tenantId, callback) {
+    this.getEndpointConfigurations = function (tenantId) {
       var postBody = null;
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling getEndpointConfigurationsUsingGET1";
+        throw "Missing the required parameter 'tenantId' when calling getEndpointConfigurations";
       }
 
       var pathParams = {};
@@ -38009,12 +37835,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = [EndpointConfigurationRepresentation];
 
-      return this.apiClient.callApi('/api/enterprise/admin/endpoints', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/endpoints', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the removeBasicAuthonfigurationUsingDELETE1 operation.
-     * @callback module:api/AdminEndpointsApi~removeBasicAuthonfigurationUsingDELETE1Callback
+     * Callback function to receive the result of the removeBasicAuthonfiguration operation.
+     * @callback module:api/AdminEndpointsApi~removeBasicAuthonfigurationCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -38024,19 +37850,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * removeBasicAuthonfiguration
      * @param {Integer} basicAuthId basicAuthId
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminEndpointsApi~removeBasicAuthonfigurationUsingDELETE1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminEndpointsApi~removeBasicAuthonfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.removeBasicAuthonfigurationUsingDELETE1 = function (basicAuthId, tenantId, callback) {
+    this.removeBasicAuthonfiguration = function (basicAuthId, tenantId) {
       var postBody = null;
 
       // verify the required parameter 'basicAuthId' is set
       if (basicAuthId == undefined || basicAuthId == null) {
-        throw "Missing the required parameter 'basicAuthId' when calling removeBasicAuthonfigurationUsingDELETE1";
+        throw "Missing the required parameter 'basicAuthId' when calling removeBasicAuthonfiguration";
       }
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling removeBasicAuthonfigurationUsingDELETE1";
+        throw "Missing the required parameter 'tenantId' when calling removeBasicAuthonfiguration";
       }
 
       var pathParams = {
@@ -38053,12 +37879,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/admin/basic-auths/{basicAuthId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/basic-auths/{basicAuthId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the removeEndpointConfigurationUsingDELETE1 operation.
-     * @callback module:api/AdminEndpointsApi~removeEndpointConfigurationUsingDELETE1Callback
+     * Callback function to receive the result of the removeEndpointConfiguration operation.
+     * @callback module:api/AdminEndpointsApi~removeEndpointConfigurationCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -38068,19 +37894,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * removeEndpointConfiguration
      * @param {Integer} endpointConfigurationId endpointConfigurationId
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminEndpointsApi~removeEndpointConfigurationUsingDELETE1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminEndpointsApi~removeEndpointConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.removeEndpointConfigurationUsingDELETE1 = function (endpointConfigurationId, tenantId, callback) {
+    this.removeEndpointConfiguration = function (endpointConfigurationId, tenantId) {
       var postBody = null;
 
       // verify the required parameter 'endpointConfigurationId' is set
       if (endpointConfigurationId == undefined || endpointConfigurationId == null) {
-        throw "Missing the required parameter 'endpointConfigurationId' when calling removeEndpointConfigurationUsingDELETE1";
+        throw "Missing the required parameter 'endpointConfigurationId' when calling removeEndpointConfiguration";
       }
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling removeEndpointConfigurationUsingDELETE1";
+        throw "Missing the required parameter 'tenantId' when calling removeEndpointConfiguration";
       }
 
       var pathParams = {
@@ -38097,12 +37923,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/admin/endpoints/{endpointConfigurationId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/endpoints/{endpointConfigurationId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the updateBasicAuthConfigurationUsingPUT1 operation.
-     * @callback module:api/AdminEndpointsApi~updateBasicAuthConfigurationUsingPUT1Callback
+     * Callback function to receive the result of the updateBasicAuthConfiguration operation.
+     * @callback module:api/AdminEndpointsApi~updateBasicAuthConfigurationCallback
      * @param {String} error Error message, if any.
      * @param {module:model/EndpointBasicAuthRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -38112,20 +37938,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * updateBasicAuthConfiguration
      * @param {Integer} basicAuthId basicAuthId
      * @param {module:model/CreateEndpointBasicAuthRepresentation} createRepresentation createRepresentation
-     * @param {module:api/AdminEndpointsApi~updateBasicAuthConfigurationUsingPUT1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminEndpointsApi~updateBasicAuthConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/EndpointBasicAuthRepresentation}
      */
-    this.updateBasicAuthConfigurationUsingPUT1 = function (basicAuthId, createRepresentation, callback) {
+    this.updateBasicAuthConfiguration = function (basicAuthId, createRepresentation) {
       var postBody = createRepresentation;
 
       // verify the required parameter 'basicAuthId' is set
       if (basicAuthId == undefined || basicAuthId == null) {
-        throw "Missing the required parameter 'basicAuthId' when calling updateBasicAuthConfigurationUsingPUT1";
+        throw "Missing the required parameter 'basicAuthId' when calling updateBasicAuthConfiguration";
       }
 
       // verify the required parameter 'createRepresentation' is set
       if (createRepresentation == undefined || createRepresentation == null) {
-        throw "Missing the required parameter 'createRepresentation' when calling updateBasicAuthConfigurationUsingPUT1";
+        throw "Missing the required parameter 'createRepresentation' when calling updateBasicAuthConfiguration";
       }
 
       var pathParams = {
@@ -38140,12 +37966,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = EndpointBasicAuthRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/admin/basic-auths/{basicAuthId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/basic-auths/{basicAuthId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the updateEndpointConfigurationUsingPUT1 operation.
-     * @callback module:api/AdminEndpointsApi~updateEndpointConfigurationUsingPUT1Callback
+     * Callback function to receive the result of the updateEndpointConfiguration operation.
+     * @callback module:api/AdminEndpointsApi~updateEndpointConfigurationCallback
      * @param {String} error Error message, if any.
      * @param {module:model/EndpointConfigurationRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -38155,20 +37981,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * updateEndpointConfiguration
      * @param {Integer} endpointConfigurationId endpointConfigurationId
      * @param {module:model/EndpointConfigurationRepresentation} representation representation
-     * @param {module:api/AdminEndpointsApi~updateEndpointConfigurationUsingPUT1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminEndpointsApi~updateEndpointConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/EndpointConfigurationRepresentation}
      */
-    this.updateEndpointConfigurationUsingPUT1 = function (endpointConfigurationId, representation, callback) {
+    this.updateEndpointConfiguration = function (endpointConfigurationId, representation) {
       var postBody = representation;
 
       // verify the required parameter 'endpointConfigurationId' is set
       if (endpointConfigurationId == undefined || endpointConfigurationId == null) {
-        throw "Missing the required parameter 'endpointConfigurationId' when calling updateEndpointConfigurationUsingPUT1";
+        throw "Missing the required parameter 'endpointConfigurationId' when calling updateEndpointConfiguration";
       }
 
       // verify the required parameter 'representation' is set
       if (representation == undefined || representation == null) {
-        throw "Missing the required parameter 'representation' when calling updateEndpointConfigurationUsingPUT1";
+        throw "Missing the required parameter 'representation' when calling updateEndpointConfiguration";
       }
 
       var pathParams = {
@@ -38183,14 +38009,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = EndpointConfigurationRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/admin/endpoints/{endpointConfigurationId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/endpoints/{endpointConfigurationId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/CreateEndpointBasicAuthRepresentation":198,"../model/EndpointBasicAuthRepresentation":201,"../model/EndpointConfigurationRepresentation":202}],140:[function(require,module,exports){
+},{"../ApiClient":136,"../model/CreateEndpointBasicAuthRepresentation":197,"../model/EndpointBasicAuthRepresentation":200,"../model/EndpointConfigurationRepresentation":201}],139:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -38219,7 +38045,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new AdminGroupsApi. 
+   * Constructs a new AdminGroupsApi.
    * @alias module:api/AdminGroupsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -38230,8 +38056,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the activateUsingPOST1 operation.
-     * @callback module:api/AdminGroupsApi~activateUsingPOST1Callback
+     * Callback function to receive the result of the activate operation.
+     * @callback module:api/AdminGroupsApi~activateCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -38240,14 +38066,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * activate
      * @param {Integer} groupId groupId
-     * @param {module:api/AdminGroupsApi~activateUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~activateCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.activateUsingPOST1 = function (groupId, callback) {
+    this.activate = function (groupId) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling activateUsingPOST1";
+        throw "Missing the required parameter 'groupId' when calling activate";
       }
 
       var pathParams = {
@@ -38262,12 +38088,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}/action/activate', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}/action/activate', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the addAllUsersToGroupUsingPOST1 operation.
-     * @callback module:api/AdminGroupsApi~addAllUsersToGroupUsingPOST1Callback
+     * Callback function to receive the result of the addAllUsersToGroup operation.
+     * @callback module:api/AdminGroupsApi~addAllUsersToGroupCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -38276,14 +38102,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * addAllUsersToGroup
      * @param {Integer} groupId groupId
-     * @param {module:api/AdminGroupsApi~addAllUsersToGroupUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~addAllUsersToGroupCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.addAllUsersToGroupUsingPOST1 = function (groupId, callback) {
+    this.addAllUsersToGroup = function (groupId) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling addAllUsersToGroupUsingPOST1";
+        throw "Missing the required parameter 'groupId' when calling addAllUsersToGroup";
       }
 
       var pathParams = {
@@ -38298,12 +38124,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}/add-all-users', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}/add-all-users', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the addGroupCapabilitiesUsingPOST1 operation.
-     * @callback module:api/AdminGroupsApi~addGroupCapabilitiesUsingPOST1Callback
+     * Callback function to receive the result of the addGroupCapabilities operation.
+     * @callback module:api/AdminGroupsApi~addGroupCapabilitiesCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -38313,19 +38139,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * addGroupCapabilities
      * @param {Integer} groupId groupId
      * @param {module:model/AddGroupCapabilitiesRepresentation} addGroupCapabilitiesRepresentation addGroupCapabilitiesRepresentation
-     * @param {module:api/AdminGroupsApi~addGroupCapabilitiesUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~addGroupCapabilitiesCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.addGroupCapabilitiesUsingPOST1 = function (groupId, addGroupCapabilitiesRepresentation, callback) {
+    this.addGroupCapabilities = function (groupId, addGroupCapabilitiesRepresentation) {
       var postBody = addGroupCapabilitiesRepresentation;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling addGroupCapabilitiesUsingPOST1";
+        throw "Missing the required parameter 'groupId' when calling addGroupCapabilities";
       }
 
       // verify the required parameter 'addGroupCapabilitiesRepresentation' is set
       if (addGroupCapabilitiesRepresentation == undefined || addGroupCapabilitiesRepresentation == null) {
-        throw "Missing the required parameter 'addGroupCapabilitiesRepresentation' when calling addGroupCapabilitiesUsingPOST1";
+        throw "Missing the required parameter 'addGroupCapabilitiesRepresentation' when calling addGroupCapabilities";
       }
 
       var pathParams = {
@@ -38340,12 +38166,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}/capabilities', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}/capabilities', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the addGroupMemberUsingPOST1 operation.
-     * @callback module:api/AdminGroupsApi~addGroupMemberUsingPOST1Callback
+     * Callback function to receive the result of the addGroupMember operation.
+     * @callback module:api/AdminGroupsApi~addGroupMemberCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -38355,19 +38181,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * addGroupMember
      * @param {Integer} groupId groupId
      * @param {Integer} userId userId
-     * @param {module:api/AdminGroupsApi~addGroupMemberUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~addGroupMemberCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.addGroupMemberUsingPOST1 = function (groupId, userId, callback) {
+    this.addGroupMember = function (groupId, userId) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling addGroupMemberUsingPOST1";
+        throw "Missing the required parameter 'groupId' when calling addGroupMember";
       }
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling addGroupMemberUsingPOST1";
+        throw "Missing the required parameter 'userId' when calling addGroupMember";
       }
 
       var pathParams = {
@@ -38383,12 +38209,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}/members/{userId}', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}/members/{userId}', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the addRelatedGroupUsingPOST1 operation.
-     * @callback module:api/AdminGroupsApi~addRelatedGroupUsingPOST1Callback
+     * Callback function to receive the result of the addRelatedGroup operation.
+     * @callback module:api/AdminGroupsApi~addRelatedGroupCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -38399,24 +38225,24 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Integer} groupId groupId
      * @param {Integer} relatedGroupId relatedGroupId
      * @param {String} type type
-     * @param {module:api/AdminGroupsApi~addRelatedGroupUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~addRelatedGroupCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.addRelatedGroupUsingPOST1 = function (groupId, relatedGroupId, type, callback) {
+    this.addRelatedGroup = function (groupId, relatedGroupId, type) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling addRelatedGroupUsingPOST1";
+        throw "Missing the required parameter 'groupId' when calling addRelatedGroup";
       }
 
       // verify the required parameter 'relatedGroupId' is set
       if (relatedGroupId == undefined || relatedGroupId == null) {
-        throw "Missing the required parameter 'relatedGroupId' when calling addRelatedGroupUsingPOST1";
+        throw "Missing the required parameter 'relatedGroupId' when calling addRelatedGroup";
       }
 
       // verify the required parameter 'type' is set
       if (type == undefined || type == null) {
-        throw "Missing the required parameter 'type' when calling addRelatedGroupUsingPOST1";
+        throw "Missing the required parameter 'type' when calling addRelatedGroup";
       }
 
       var pathParams = {
@@ -38434,12 +38260,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId}', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId}', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the createNewGroupUsingPOST1 operation.
-     * @callback module:api/AdminGroupsApi~createNewGroupUsingPOST1Callback
+     * Callback function to receive the result of the createNewGroup operation.
+     * @callback module:api/AdminGroupsApi~createNewGroupCallback
      * @param {String} error Error message, if any.
      * @param {module:model/GroupRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -38448,15 +38274,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * createNewGroup
      * @param {module:model/GroupRepresentation} groupRepresentation groupRepresentation
-     * @param {module:api/AdminGroupsApi~createNewGroupUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~createNewGroupCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/GroupRepresentation}
      */
-    this.createNewGroupUsingPOST1 = function (groupRepresentation, callback) {
+    this.createNewGroup = function (groupRepresentation) {
       var postBody = groupRepresentation;
 
       // verify the required parameter 'groupRepresentation' is set
       if (groupRepresentation == undefined || groupRepresentation == null) {
-        throw "Missing the required parameter 'groupRepresentation' when calling createNewGroupUsingPOST1";
+        throw "Missing the required parameter 'groupRepresentation' when calling createNewGroup";
       }
 
       var pathParams = {};
@@ -38469,12 +38295,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = GroupRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/admin/groups', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/groups', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the deleteGroupCapabilityUsingDELETE1 operation.
-     * @callback module:api/AdminGroupsApi~deleteGroupCapabilityUsingDELETE1Callback
+     * Callback function to receive the result of the deleteGroupCapability operation.
+     * @callback module:api/AdminGroupsApi~deleteGroupCapabilityCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -38484,19 +38310,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * deleteGroupCapability
      * @param {Integer} groupId groupId
      * @param {Integer} groupCapabilityId groupCapabilityId
-     * @param {module:api/AdminGroupsApi~deleteGroupCapabilityUsingDELETE1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~deleteGroupCapabilityCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteGroupCapabilityUsingDELETE1 = function (groupId, groupCapabilityId, callback) {
+    this.deleteGroupCapability = function (groupId, groupCapabilityId) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling deleteGroupCapabilityUsingDELETE1";
+        throw "Missing the required parameter 'groupId' when calling deleteGroupCapability";
       }
 
       // verify the required parameter 'groupCapabilityId' is set
       if (groupCapabilityId == undefined || groupCapabilityId == null) {
-        throw "Missing the required parameter 'groupCapabilityId' when calling deleteGroupCapabilityUsingDELETE1";
+        throw "Missing the required parameter 'groupCapabilityId' when calling deleteGroupCapability";
       }
 
       var pathParams = {
@@ -38512,12 +38338,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}/capabilities/{groupCapabilityId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}/capabilities/{groupCapabilityId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the deleteGroupMemberUsingDELETE1 operation.
-     * @callback module:api/AdminGroupsApi~deleteGroupMemberUsingDELETE1Callback
+     * Callback function to receive the result of the deleteGroupMember operation.
+     * @callback module:api/AdminGroupsApi~deleteGroupMemberCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -38527,19 +38353,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * deleteGroupMember
      * @param {Integer} groupId groupId
      * @param {Integer} userId userId
-     * @param {module:api/AdminGroupsApi~deleteGroupMemberUsingDELETE1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~deleteGroupMemberCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteGroupMemberUsingDELETE1 = function (groupId, userId, callback) {
+    this.deleteGroupMember = function (groupId, userId) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling deleteGroupMemberUsingDELETE1";
+        throw "Missing the required parameter 'groupId' when calling deleteGroupMember";
       }
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling deleteGroupMemberUsingDELETE1";
+        throw "Missing the required parameter 'userId' when calling deleteGroupMember";
       }
 
       var pathParams = {
@@ -38555,12 +38381,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}/members/{userId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}/members/{userId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the deleteGroupUsingDELETE1 operation.
-     * @callback module:api/AdminGroupsApi~deleteGroupUsingDELETE1Callback
+     * Callback function to receive the result of the deleteGroup operation.
+     * @callback module:api/AdminGroupsApi~deleteGroupCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -38569,14 +38395,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * deleteGroup
      * @param {Integer} groupId groupId
-     * @param {module:api/AdminGroupsApi~deleteGroupUsingDELETE1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~deleteGroupCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteGroupUsingDELETE1 = function (groupId, callback) {
+    this.deleteGroup = function (groupId) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling deleteGroupUsingDELETE1";
+        throw "Missing the required parameter 'groupId' when calling deleteGroup";
       }
 
       var pathParams = {
@@ -38591,12 +38417,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the deleteRelatedGroupUsingDELETE1 operation.
-     * @callback module:api/AdminGroupsApi~deleteRelatedGroupUsingDELETE1Callback
+     * Callback function to receive the result of the deleteRelatedGroup operation.
+     * @callback module:api/AdminGroupsApi~deleteRelatedGroupCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -38606,19 +38432,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * deleteRelatedGroup
      * @param {Integer} groupId groupId
      * @param {Integer} relatedGroupId relatedGroupId
-     * @param {module:api/AdminGroupsApi~deleteRelatedGroupUsingDELETE1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~deleteRelatedGroupCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteRelatedGroupUsingDELETE1 = function (groupId, relatedGroupId, callback) {
+    this.deleteRelatedGroup = function (groupId, relatedGroupId) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling deleteRelatedGroupUsingDELETE1";
+        throw "Missing the required parameter 'groupId' when calling deleteRelatedGroup";
       }
 
       // verify the required parameter 'relatedGroupId' is set
       if (relatedGroupId == undefined || relatedGroupId == null) {
-        throw "Missing the required parameter 'relatedGroupId' when calling deleteRelatedGroupUsingDELETE1";
+        throw "Missing the required parameter 'relatedGroupId' when calling deleteRelatedGroup";
       }
 
       var pathParams = {
@@ -38634,12 +38460,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getCapabilitiesUsingGET1 operation.
-     * @callback module:api/AdminGroupsApi~getCapabilitiesUsingGET1Callback
+     * Callback function to receive the result of the getCapabilities operation.
+     * @callback module:api/AdminGroupsApi~getCapabilitiesCallback
      * @param {String} error Error message, if any.
      * @param {Array.<'String'>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -38648,15 +38474,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * getCapabilities
      * @param {Integer} groupId groupId
-     * @param {module:api/AdminGroupsApi~getCapabilitiesUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~getCapabilitiesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<'String'>}
      */
-    this.getCapabilitiesUsingGET1 = function (groupId, callback) {
+    this.getCapabilities = function (groupId) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling getCapabilitiesUsingGET1";
+        throw "Missing the required parameter 'groupId' when calling getCapabilities";
       }
 
       var pathParams = {
@@ -38671,12 +38497,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ['String'];
 
-      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}/potential-capabilities', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}/potential-capabilities', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getGroupUsersUsingGET1 operation.
-     * @callback module:api/AdminGroupsApi~getGroupUsersUsingGET1Callback
+     * Callback function to receive the result of the getGroupUsers operation.
+     * @callback module:api/AdminGroupsApi~getGroupUsersCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -38689,16 +38515,16 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {String} opts.filter filter
      * @param {Integer} opts.page page
      * @param {Integer} opts.pageSize pageSize
-     * @param {module:api/AdminGroupsApi~getGroupUsersUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~getGroupUsersCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getGroupUsersUsingGET1 = function (groupId, opts, callback) {
+    this.getGroupUsers = function (groupId, opts) {
       opts = opts || {};
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling getGroupUsersUsingGET1";
+        throw "Missing the required parameter 'groupId' when calling getGroupUsers";
       }
 
       var pathParams = {
@@ -38717,12 +38543,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}/users', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}/users', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getGroupUsingGET1 operation.
-     * @callback module:api/AdminGroupsApi~getGroupUsingGET1Callback
+     * Callback function to receive the result of the getGroup operation.
+     * @callback module:api/AdminGroupsApi~getGroupCallback
      * @param {String} error Error message, if any.
      * @param {module:model/AbstractGroupRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -38734,16 +38560,16 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.includeAllUsers includeAllUsers
      * @param {Boolean} opts.summary summary
-     * @param {module:api/AdminGroupsApi~getGroupUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~getGroupCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/AbstractGroupRepresentation}
      */
-    this.getGroupUsingGET1 = function (groupId, opts, callback) {
+    this.getGroup = function (groupId, opts) {
       opts = opts || {};
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling getGroupUsingGET1";
+        throw "Missing the required parameter 'groupId' when calling getGroup";
       }
 
       var pathParams = {
@@ -38761,12 +38587,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = AbstractGroupRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getGroupsUsingGET2 operation.
-     * @callback module:api/AdminGroupsApi~getGroupsUsingGET2Callback
+     * Callback function to receive the result of the getGroups operation.
+     * @callback module:api/AdminGroupsApi~getGroupsCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/LightGroupRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -38778,10 +38604,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Integer} opts.tenantId tenantId
      * @param {Boolean} opts.functional functional
      * @param {Boolean} opts.summary summary
-     * @param {module:api/AdminGroupsApi~getGroupsUsingGET2Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~getGroupsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/LightGroupRepresentation>}
      */
-    this.getGroupsUsingGET2 = function (opts, callback) {
+    this.getGroups = function (opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -38799,12 +38625,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = [LightGroupRepresentation];
 
-      return this.apiClient.callApi('/api/enterprise/admin/groups', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/groups', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getRelatedGroupsUsingGET1 operation.
-     * @callback module:api/AdminGroupsApi~getRelatedGroupsUsingGET1Callback
+     * Callback function to receive the result of the getRelatedGroups operation.
+     * @callback module:api/AdminGroupsApi~getRelatedGroupsCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/LightGroupRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -38813,15 +38639,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * getRelatedGroups
      * @param {Integer} groupId groupId
-     * @param {module:api/AdminGroupsApi~getRelatedGroupsUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~getRelatedGroupsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/LightGroupRepresentation>}
      */
-    this.getRelatedGroupsUsingGET1 = function (groupId, callback) {
+    this.getRelatedGroups = function (groupId) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling getRelatedGroupsUsingGET1";
+        throw "Missing the required parameter 'groupId' when calling getRelatedGroups";
       }
 
       var pathParams = {
@@ -38836,12 +38662,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = [LightGroupRepresentation];
 
-      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}/related-groups', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}/related-groups', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the updateGroupUsingPUT1 operation.
-     * @callback module:api/AdminGroupsApi~updateGroupUsingPUT1Callback
+     * Callback function to receive the result of the updateGroup operation.
+     * @callback module:api/AdminGroupsApi~updateGroupCallback
      * @param {String} error Error message, if any.
      * @param {module:model/GroupRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -38851,20 +38677,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * updateGroup
      * @param {Integer} groupId groupId
      * @param {module:model/GroupRepresentation} groupRepresentation groupRepresentation
-     * @param {module:api/AdminGroupsApi~updateGroupUsingPUT1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AdminGroupsApi~updateGroupCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/GroupRepresentation}
      */
-    this.updateGroupUsingPUT1 = function (groupId, groupRepresentation, callback) {
+    this.updateGroup = function (groupId, groupRepresentation) {
       var postBody = groupRepresentation;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling updateGroupUsingPUT1";
+        throw "Missing the required parameter 'groupId' when calling updateGroup";
       }
 
       // verify the required parameter 'groupRepresentation' is set
       if (groupRepresentation == undefined || groupRepresentation == null) {
-        throw "Missing the required parameter 'groupRepresentation' when calling updateGroupUsingPUT1";
+        throw "Missing the required parameter 'groupRepresentation' when calling updateGroup";
       }
 
       var pathParams = {
@@ -38879,14 +38705,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = GroupRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/groups/{groupId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/AbstractGroupRepresentation":181,"../model/AddGroupCapabilitiesRepresentation":184,"../model/GroupRepresentation":217,"../model/LightGroupRepresentation":221,"../model/ResultListDataRepresentation":241}],141:[function(require,module,exports){
+},{"../ApiClient":136,"../model/AbstractGroupRepresentation":180,"../model/AddGroupCapabilitiesRepresentation":183,"../model/GroupRepresentation":216,"../model/LightGroupRepresentation":220,"../model/ResultListDataRepresentation":240}],140:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -38915,7 +38741,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new AdminTenantsApi. 
+   * Constructs a new AdminTenantsApi.
    * @alias module:api/AdminTenantsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -38926,8 +38752,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the createTenantUsingPOST1 operation.
-     * @callback module:api/AdminTenantsApi~createTenantUsingPOST1Callback
+     * Callback function to receive the result of the createTenant operation.
      * @param {String} error Error message, if any.
      * @param {module:model/LightTenantRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -38937,15 +38762,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Create a new tenant
      * Tenant manager only
      * @param {module:model/CreateTenantRepresentation} createTenantRepresentation createTenantRepresentation
-     * @param {module:api/AdminTenantsApi~createTenantUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/LightTenantRepresentation}
      */
-    this.createTenantUsingPOST1 = function (createTenantRepresentation, callback) {
+    this.createTenant = function (createTenantRepresentation) {
       var postBody = createTenantRepresentation;
 
       // verify the required parameter 'createTenantRepresentation' is set
       if (createTenantRepresentation == undefined || createTenantRepresentation == null) {
-        throw "Missing the required parameter 'createTenantRepresentation' when calling createTenantUsingPOST1";
+        throw "Missing the required parameter 'createTenantRepresentation' when calling createTenant";
       }
 
       var pathParams = {};
@@ -38958,12 +38782,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = LightTenantRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/admin/tenants', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/tenants', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the deleteTenantUsingDELETE1 operation.
-     * @callback module:api/AdminTenantsApi~deleteTenantUsingDELETE1Callback
+     * Callback function to receive the result of the deleteTenant operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -38972,14 +38795,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Delete a tenant
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminTenantsApi~deleteTenantUsingDELETE1Callback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteTenantUsingDELETE1 = function (tenantId, callback) {
+    this.deleteTenant = function (tenantId) {
       var postBody = null;
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling deleteTenantUsingDELETE1";
+        throw "Missing the required parameter 'tenantId' when calling deleteTenant";
       }
 
       var pathParams = {
@@ -38994,12 +38816,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/admin/tenants/{tenantId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/tenants/{tenantId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getTenantEventsUsingGET1 operation.
-     * @callback module:api/AdminTenantsApi~getTenantEventsUsingGET1Callback
+     * Callback function to receive the result of the getTenantEvents operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/TenantEvent>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39008,15 +38829,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Get tenant events
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminTenantsApi~getTenantEventsUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/TenantEvent>}
      */
-    this.getTenantEventsUsingGET1 = function (tenantId, callback) {
+    this.getTenantEvents = function (tenantId) {
       var postBody = null;
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling getTenantEventsUsingGET1";
+        throw "Missing the required parameter 'tenantId' when calling getTenantEvents";
       }
 
       var pathParams = {
@@ -39031,12 +38851,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = [TenantEvent];
 
-      return this.apiClient.callApi('/api/enterprise/admin/tenants/{tenantId}/events', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/tenants/{tenantId}/events', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getTenantLogoUsingGET1 operation.
-     * @callback module:api/AdminTenantsApi~getTenantLogoUsingGET1Callback
+     * Callback function to receive the result of the getTenantLogo operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -39045,14 +38864,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Get tenant logo
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminTenantsApi~getTenantLogoUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.getTenantLogoUsingGET1 = function (tenantId, callback) {
+    this.getTenantLogo = function (tenantId) {
       var postBody = null;
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling getTenantLogoUsingGET1";
+        throw "Missing the required parameter 'tenantId' when calling getTenantLogo";
       }
 
       var pathParams = {
@@ -39067,12 +38885,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/admin/tenants/{tenantId}/logo', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/tenants/{tenantId}/logo', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getTenantUsingGET1 operation.
-     * @callback module:api/AdminTenantsApi~getTenantUsingGET1Callback
+     * Callback function to receive the result of the getTenant operation.
      * @param {String} error Error message, if any.
      * @param {module:model/TenantRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39081,15 +38898,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Get tenant details
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminTenantsApi~getTenantUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TenantRepresentation}
      */
-    this.getTenantUsingGET1 = function (tenantId, callback) {
+    this.getTenant = function (tenantId) {
       var postBody = null;
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling getTenantUsingGET1";
+        throw "Missing the required parameter 'tenantId' when calling getTenant";
       }
 
       var pathParams = {
@@ -39104,12 +38920,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = TenantRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/admin/tenants/{tenantId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/tenants/{tenantId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getTenantsUsingGET1 operation.
-     * @callback module:api/AdminTenantsApi~getTenantsUsingGET1Callback
+     * Callback function to receive the result of the getTenants operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/LightTenantRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39118,10 +38933,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Get all tenants
      * Tenant manager only
-     * @param {module:api/AdminTenantsApi~getTenantsUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/LightTenantRepresentation>}
      */
-    this.getTenantsUsingGET1 = function (callback) {
+    this.getTenants = function () {
       var postBody = null;
 
       var pathParams = {};
@@ -39134,12 +38948,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = [LightTenantRepresentation];
 
-      return this.apiClient.callApi('/api/enterprise/admin/tenants', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/tenants', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the updateUsingPUT1 operation.
-     * @callback module:api/AdminTenantsApi~updateUsingPUT1Callback
+     * Callback function to receive the result of the update operation.
      * @param {String} error Error message, if any.
      * @param {module:model/TenantRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39149,20 +38962,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Update a tenant
      * @param {Integer} tenantId tenantId
      * @param {module:model/CreateTenantRepresentation} createTenantRepresentation createTenantRepresentation
-     * @param {module:api/AdminTenantsApi~updateUsingPUT1Callback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TenantRepresentation}
      */
-    this.updateUsingPUT1 = function (tenantId, createTenantRepresentation, callback) {
+    this.update = function (tenantId, createTenantRepresentation) {
       var postBody = createTenantRepresentation;
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling updateUsingPUT1";
+        throw "Missing the required parameter 'tenantId' when calling update";
       }
 
       // verify the required parameter 'createTenantRepresentation' is set
       if (createTenantRepresentation == undefined || createTenantRepresentation == null) {
-        throw "Missing the required parameter 'createTenantRepresentation' when calling updateUsingPUT1";
+        throw "Missing the required parameter 'createTenantRepresentation' when calling update";
       }
 
       var pathParams = {
@@ -39177,12 +38989,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = TenantRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/admin/tenants/{tenantId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/tenants/{tenantId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the uploadTenantLogoUsingPOST1 operation.
-     * @callback module:api/AdminTenantsApi~uploadTenantLogoUsingPOST1Callback
+     * Callback function to receive the result of the uploadTenantLogo operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ImageUploadRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39192,20 +39003,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Update tenant logo
      * @param {Integer} tenantId tenantId
      * @param {File} file file
-     * @param {module:api/AdminTenantsApi~uploadTenantLogoUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ImageUploadRepresentation}
      */
-    this.uploadTenantLogoUsingPOST1 = function (tenantId, file, callback) {
+    this.uploadTenantLogo = function (tenantId, file) {
       var postBody = null;
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling uploadTenantLogoUsingPOST1";
+        throw "Missing the required parameter 'tenantId' when calling uploadTenantLogo";
       }
 
       // verify the required parameter 'file' is set
       if (file == undefined || file == null) {
-        throw "Missing the required parameter 'file' when calling uploadTenantLogoUsingPOST1";
+        throw "Missing the required parameter 'file' when calling uploadTenantLogo";
       }
 
       var pathParams = {
@@ -39222,14 +39032,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ImageUploadRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/admin/tenants/{tenantId}/logo', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/tenants/{tenantId}/logo', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/CreateTenantRepresentation":200,"../model/ImageUploadRepresentation":218,"../model/LightTenantRepresentation":222,"../model/TenantEvent":250,"../model/TenantRepresentation":251}],142:[function(require,module,exports){
+},{"../ApiClient":136,"../model/CreateTenantRepresentation":199,"../model/ImageUploadRepresentation":217,"../model/LightTenantRepresentation":221,"../model/TenantEvent":249,"../model/TenantRepresentation":250}],141:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -39258,7 +39068,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new AdminUsersApi. 
+   * Constructs a new AdminUsersApi.
    * @alias module:api/AdminUsersApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -39269,8 +39079,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the bulkUpdateUsersUsingPUT1 operation.
-     * @callback module:api/AdminUsersApi~bulkUpdateUsersUsingPUT1Callback
+     * Callback function to receive the result of the bulkUpdateUsers operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -39279,14 +39088,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Bulk Update a list of users
      * @param {module:model/BulkUserUpdateRepresentation} update update
-     * @param {module:api/AdminUsersApi~bulkUpdateUsersUsingPUT1Callback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.bulkUpdateUsersUsingPUT1 = function (update, callback) {
+    this.bulkUpdateUsers = function (update) {
       var postBody = update;
 
       // verify the required parameter 'update' is set
       if (update == undefined || update == null) {
-        throw "Missing the required parameter 'update' when calling bulkUpdateUsersUsingPUT1";
+        throw "Missing the required parameter 'update' when calling bulkUpdateUsers";
       }
 
       var pathParams = {};
@@ -39299,12 +39107,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/admin/users', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/users', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the createNewUserUsingPOST1 operation.
-     * @callback module:api/AdminUsersApi~createNewUserUsingPOST1Callback
+     * Callback function to receive the result of the createNewUser operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39313,15 +39120,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Create a new user
      * @param {module:model/UserRepresentation} userRepresentation userRepresentation
-     * @param {module:api/AdminUsersApi~createNewUserUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserRepresentation}
      */
-    this.createNewUserUsingPOST1 = function (userRepresentation, callback) {
+    this.createNewUser = function (userRepresentation) {
       var postBody = userRepresentation;
 
       // verify the required parameter 'userRepresentation' is set
       if (userRepresentation == undefined || userRepresentation == null) {
-        throw "Missing the required parameter 'userRepresentation' when calling createNewUserUsingPOST1";
+        throw "Missing the required parameter 'userRepresentation' when calling createNewUser";
       }
 
       var pathParams = {};
@@ -39334,12 +39140,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = UserRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/admin/users', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/users', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getUserUsingGET1 operation.
-     * @callback module:api/AdminUsersApi~getUserUsingGET1Callback
+     * Callback function to receive the result of the getUser operation.
      * @param {String} error Error message, if any.
      * @param {module:model/AbstractUserRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39350,16 +39155,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Integer} userId userId
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.summary summary
-     * @param {module:api/AdminUsersApi~getUserUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/AbstractUserRepresentation}
      */
-    this.getUserUsingGET1 = function (userId, opts, callback) {
+    this.getUser = function (userId, opts) {
       opts = opts || {};
       var postBody = null;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling getUserUsingGET1";
+        throw "Missing the required parameter 'userId' when calling getUser";
       }
 
       var pathParams = {
@@ -39376,12 +39180,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = AbstractUserRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/admin/users/{userId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/users/{userId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getUsersUsingGET1 operation.
-     * @callback module:api/AdminUsersApi~getUsersUsingGET1Callback
+     * Callback function to receive the result of the getUsers operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39401,10 +39204,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Integer} opts.groupId groupId
      * @param {Integer} opts.tenantId tenantId
      * @param {Boolean} opts.summary summary
-     * @param {module:api/AdminUsersApi~getUsersUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getUsersUsingGET1 = function (opts, callback) {
+    this.getUsers = function (opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -39430,12 +39232,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/admin/users', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/users', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the updateUserDetailsUsingPUT1 operation.
-     * @callback module:api/AdminUsersApi~updateUserDetailsUsingPUT1Callback
+     * Callback function to receive the result of the updateUserDetails operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -39445,19 +39246,18 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Update user details
      * @param {Integer} userId userId
      * @param {module:model/UserRepresentation} userRepresentation userRepresentation
-     * @param {module:api/AdminUsersApi~updateUserDetailsUsingPUT1Callback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.updateUserDetailsUsingPUT1 = function (userId, userRepresentation, callback) {
+    this.updateUserDetails = function (userId, userRepresentation) {
       var postBody = userRepresentation;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling updateUserDetailsUsingPUT1";
+        throw "Missing the required parameter 'userId' when calling updateUserDetails";
       }
 
       // verify the required parameter 'userRepresentation' is set
       if (userRepresentation == undefined || userRepresentation == null) {
-        throw "Missing the required parameter 'userRepresentation' when calling updateUserDetailsUsingPUT1";
+        throw "Missing the required parameter 'userRepresentation' when calling updateUserDetails";
       }
 
       var pathParams = {
@@ -39472,14 +39272,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/admin/users/{userId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/admin/users/{userId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/AbstractUserRepresentation":183,"../model/BulkUserUpdateRepresentation":192,"../model/ResultListDataRepresentation":241,"../model/UserRepresentation":256}],143:[function(require,module,exports){
+},{"../ApiClient":136,"../model/AbstractUserRepresentation":182,"../model/BulkUserUpdateRepresentation":191,"../model/ResultListDataRepresentation":240,"../model/UserRepresentation":255}],142:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -39508,7 +39308,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new AlfrescoApi. 
+   * Constructs a new AlfrescoApi.
    * @alias module:api/AlfrescoApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -39519,8 +39319,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the confirmAuthorisationUsingGET operation.
-     * @callback module:api/AlfrescoApi~confirmAuthorisationUsingGETCallback
+     * Callback function to receive the result of the confirmAuthorisation operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -39530,14 +39329,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Alfresco Cloud Authorization
      * Returns Alfresco Oauth HTML Page
      * @param {String} code code
-     * @param {module:api/AlfrescoApi~confirmAuthorisationUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.confirmAuthorisationUsingGET = function (code, callback) {
+    this.confirmAuthorisation = function (code) {
       var postBody = null;
 
       // verify the required parameter 'code' is set
       if (code == undefined || code == null) {
-        throw "Missing the required parameter 'code' when calling confirmAuthorisationUsingGET";
+        throw "Missing the required parameter 'code' when calling confirmAuthorisation";
       }
 
       var pathParams = {};
@@ -39552,12 +39350,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['text/html', 'application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/confirm-auth-request', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/confirm-auth-request', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getAllNetworksUsingGET operation.
-     * @callback module:api/AlfrescoApi~getAllNetworksUsingGETCallback
+     * Callback function to receive the result of the getAllNetworks operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39565,10 +39362,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * List Alfresco networks
-     * @param {module:api/AlfrescoApi~getAllNetworksUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAllNetworksUsingGET = function (callback) {
+    this.getAllNetworks = function () {
       var postBody = null;
 
       var pathParams = {};
@@ -39581,12 +39377,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/networks', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/networks', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getAllSitesUsingGET operation.
-     * @callback module:api/AlfrescoApi~getAllSitesUsingGETCallback
+     * Callback function to receive the result of the getAllSites operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39596,15 +39391,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List Alfresco sites
      * Returns ALL Sites
      * @param {String} networkId networkId
-     * @param {module:api/AlfrescoApi~getAllSitesUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAllSitesUsingGET = function (networkId, callback) {
+    this.getAllSites = function (networkId) {
       var postBody = null;
 
       // verify the required parameter 'networkId' is set
       if (networkId == undefined || networkId == null) {
-        throw "Missing the required parameter 'networkId' when calling getAllSitesUsingGET";
+        throw "Missing the required parameter 'networkId' when calling getAllSites";
       }
 
       var pathParams = {
@@ -39619,12 +39413,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getAllSitesUsingGET1 operation.
-     * @callback module:api/AlfrescoApi~getAllSitesUsingGET1Callback
+     * Callback function to receive the result of the getAllSites operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39634,15 +39427,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List Alfresco sites
      * Returns ALL Sites
      * @param {String} repositoryId repositoryId
-     * @param {module:api/AlfrescoApi~getAllSitesUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAllSitesUsingGET1 = function (repositoryId, callback) {
+    this.getAllSites = function (repositoryId) {
       var postBody = null;
 
       // verify the required parameter 'repositoryId' is set
       if (repositoryId == undefined || repositoryId == null) {
-        throw "Missing the required parameter 'repositoryId' when calling getAllSitesUsingGET1";
+        throw "Missing the required parameter 'repositoryId' when calling getAllSites";
       }
 
       var pathParams = {
@@ -39657,12 +39449,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/integration/alfresco/{repositoryId}/sites', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/alfresco/{repositoryId}/sites', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getContentInFolderUsingGET operation.
-     * @callback module:api/AlfrescoApi~getContentInFolderUsingGETCallback
+     * Callback function to receive the result of the getContentInFolder operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39672,20 +39463,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List file &amp; folders inside a specific folder
      * @param {String} networkId networkId
      * @param {String} folderId folderId
-     * @param {module:api/AlfrescoApi~getContentInFolderUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getContentInFolderUsingGET = function (networkId, folderId, callback) {
+    this.getContentInFolder = function (networkId, folderId) {
       var postBody = null;
 
       // verify the required parameter 'networkId' is set
       if (networkId == undefined || networkId == null) {
-        throw "Missing the required parameter 'networkId' when calling getContentInFolderUsingGET";
+        throw "Missing the required parameter 'networkId' when calling getContentInFolder";
       }
 
       // verify the required parameter 'folderId' is set
       if (folderId == undefined || folderId == null) {
-        throw "Missing the required parameter 'folderId' when calling getContentInFolderUsingGET";
+        throw "Missing the required parameter 'folderId' when calling getContentInFolder";
       }
 
       var pathParams = {
@@ -39701,12 +39491,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/networks/{networkId}/folders/{folderId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/networks/{networkId}/folders/{folderId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getContentInFolderUsingGET1 operation.
-     * @callback module:api/AlfrescoApi~getContentInFolderUsingGET1Callback
+     * Callback function to receive the result of the getContentInFolder operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39716,20 +39505,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List file &amp; folders inside a specific folder
      * @param {String} repositoryId repositoryId
      * @param {String} folderId folderId
-     * @param {module:api/AlfrescoApi~getContentInFolderUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getContentInFolderUsingGET1 = function (repositoryId, folderId, callback) {
+    this.getContentInFolder = function (repositoryId, folderId) {
       var postBody = null;
 
       // verify the required parameter 'repositoryId' is set
       if (repositoryId == undefined || repositoryId == null) {
-        throw "Missing the required parameter 'repositoryId' when calling getContentInFolderUsingGET1";
+        throw "Missing the required parameter 'repositoryId' when calling getContentInFolder";
       }
 
       // verify the required parameter 'folderId' is set
       if (folderId == undefined || folderId == null) {
-        throw "Missing the required parameter 'folderId' when calling getContentInFolderUsingGET1";
+        throw "Missing the required parameter 'folderId' when calling getContentInFolder";
       }
 
       var pathParams = {
@@ -39745,12 +39533,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/integration/alfresco/{repositoryId}/folders/{folderId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/alfresco/{repositoryId}/folders/{folderId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getContentInSiteUsingGET operation.
-     * @callback module:api/AlfrescoApi~getContentInSiteUsingGETCallback
+     * Callback function to receive the result of the getContentInSite operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39760,20 +39547,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List file &amp; folders inside a specific site
      * @param {String} networkId networkId
      * @param {String} siteId siteId
-     * @param {module:api/AlfrescoApi~getContentInSiteUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getContentInSiteUsingGET = function (networkId, siteId, callback) {
+    this.getContentInSite = function (networkId, siteId) {
       var postBody = null;
 
       // verify the required parameter 'networkId' is set
       if (networkId == undefined || networkId == null) {
-        throw "Missing the required parameter 'networkId' when calling getContentInSiteUsingGET";
+        throw "Missing the required parameter 'networkId' when calling getContentInSite";
       }
 
       // verify the required parameter 'siteId' is set
       if (siteId == undefined || siteId == null) {
-        throw "Missing the required parameter 'siteId' when calling getContentInSiteUsingGET";
+        throw "Missing the required parameter 'siteId' when calling getContentInSite";
       }
 
       var pathParams = {
@@ -39789,12 +39575,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getContentInSiteUsingGET1 operation.
-     * @callback module:api/AlfrescoApi~getContentInSiteUsingGET1Callback
+     * Callback function to receive the result of the getContentInSite operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39804,20 +39589,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List file &amp; folders inside a specific site
      * @param {String} repositoryId repositoryId
      * @param {String} siteId siteId
-     * @param {module:api/AlfrescoApi~getContentInSiteUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getContentInSiteUsingGET1 = function (repositoryId, siteId, callback) {
+    this.getContentInSite = function (repositoryId, siteId) {
       var postBody = null;
 
       // verify the required parameter 'repositoryId' is set
       if (repositoryId == undefined || repositoryId == null) {
-        throw "Missing the required parameter 'repositoryId' when calling getContentInSiteUsingGET1";
+        throw "Missing the required parameter 'repositoryId' when calling getContentInSite";
       }
 
       // verify the required parameter 'siteId' is set
       if (siteId == undefined || siteId == null) {
-        throw "Missing the required parameter 'siteId' when calling getContentInSiteUsingGET1";
+        throw "Missing the required parameter 'siteId' when calling getContentInSite";
       }
 
       var pathParams = {
@@ -39833,12 +39617,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/integration/alfresco/{repositoryId}/sites/{siteId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/alfresco/{repositoryId}/sites/{siteId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getRepositoriesUsingGET operation.
-     * @callback module:api/AlfrescoApi~getRepositoriesUsingGETCallback
+     * Callback function to receive the result of the getRepositories operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39850,10 +39633,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.tenantId tenantId
      * @param {Boolean} opts.includeAccounts includeAccounts
-     * @param {module:api/AlfrescoApi~getRepositoriesUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getRepositoriesUsingGET = function (opts, callback) {
+    this.getRepositories = function (opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -39870,14 +39652,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/profile/accounts/alfresco', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/profile/accounts/alfresco', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/ResultListDataRepresentation":241}],144:[function(require,module,exports){
+},{"../ApiClient":136,"../model/ResultListDataRepresentation":240}],143:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -39906,7 +39688,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new AppsApi. 
+   * Constructs a new AppsApi.
    * @alias module:api/AppsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -39917,8 +39699,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the deployAppDefinitionsUsingPOST operation.
-     * @callback module:api/AppsApi~deployAppDefinitionsUsingPOSTCallback
+     * Callback function to receive the result of the deployAppDefinitions operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -39928,14 +39709,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Deploy published app
      * After creating and puclished an app the user can add it to his/her landing page.
      * @param {module:model/RuntimeAppDefinitionSaveRepresentation} saveObject saveObject
-     * @param {module:api/AppsApi~deployAppDefinitionsUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deployAppDefinitionsUsingPOST = function (saveObject, callback) {
+    this.deployAppDefinitions = function (saveObject) {
       var postBody = saveObject;
 
       // verify the required parameter 'saveObject' is set
       if (saveObject == undefined || saveObject == null) {
-        throw "Missing the required parameter 'saveObject' when calling deployAppDefinitionsUsingPOST";
+        throw "Missing the required parameter 'saveObject' when calling deployAppDefinitions";
       }
 
       var pathParams = {};
@@ -39948,12 +39728,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/runtime-app-definitions', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/runtime-app-definitions', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the exportAppDefinitionUsingGET operation.
-     * @callback module:api/AppsApi~exportAppDefinitionUsingGETCallback
+     * Callback function to receive the result of the exportAppDefinition operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -39963,14 +39742,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Export App Definition
      * This will return a zip file containing the app definition model and all related models (process definitions and forms).
      * @param {Integer} modelId modelId from a runtime app or the id of an app definition model
-     * @param {module:api/AppsApi~exportAppDefinitionUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.exportAppDefinitionUsingGET = function (modelId, callback) {
+    this.exportAppDefinition = function (modelId) {
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling exportAppDefinitionUsingGET";
+        throw "Missing the required parameter 'modelId' when calling exportAppDefinition";
       }
 
       var pathParams = {
@@ -39985,12 +39763,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/app-definitions/{modelId}/export', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/app-definitions/{modelId}/export', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getAppDefinitionsUsingGET operation.
-     * @callback module:api/AppsApi~getAppDefinitionsUsingGETCallback
+     * Callback function to receive the result of the getAppDefinitions operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39999,10 +39776,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * List runtime apps
      * When a user logs in into the Alfresco Activiti BPM Suite, the landing page is displayed containing all the apps that the user is allowed to see and use.
-     * @param {module:api/AppsApi~getAppDefinitionsUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAppDefinitionsUsingGET = function (callback) {
+    this.getAppDefinitions = function () {
       var postBody = null;
 
       var pathParams = {};
@@ -40015,12 +39791,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/runtime-app-definitions', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/runtime-app-definitions', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the importAppDefinitionUsingPOST operation.
-     * @callback module:api/AppsApi~importAppDefinitionUsingPOSTCallback
+     * Callback function to receive the result of the importAppDefinition operation.
      * @param {String} error Error message, if any.
      * @param {module:model/AppDefinitionRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40030,15 +39805,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Import App Definition
      * This is useful to bootstrap an environment (for users or continous integration).
      * @param {File} file file
-     * @param {module:api/AppsApi~importAppDefinitionUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/AppDefinitionRepresentation}
      */
-    this.importAppDefinitionUsingPOST = function (file, callback) {
+    this.importAppDefinition = function (file) {
       var postBody = null;
 
       // verify the required parameter 'file' is set
       if (file == undefined || file == null) {
-        throw "Missing the required parameter 'file' when calling importAppDefinitionUsingPOST";
+        throw "Missing the required parameter 'file' when calling importAppDefinition";
       }
 
       var pathParams = {};
@@ -40053,12 +39827,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = AppDefinitionRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/app-definitions/import', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/app-definitions/import', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the importAppDefinitionUsingPOST1 operation.
-     * @callback module:api/AppsApi~importAppDefinitionUsingPOST1Callback
+     * Callback function to receive the result of the importAppDefinition operation.
      * @param {String} error Error message, if any.
      * @param {module:model/AppDefinitionRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40069,20 +39842,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * To import an app to an existing app definition to create a new version instead of importing a new app definition.
      * @param {Integer} modelId modelId
      * @param {File} file file
-     * @param {module:api/AppsApi~importAppDefinitionUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/AppDefinitionRepresentation}
      */
-    this.importAppDefinitionUsingPOST1 = function (modelId, file, callback) {
+    this.importAppDefinition = function (modelId, file) {
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling importAppDefinitionUsingPOST1";
+        throw "Missing the required parameter 'modelId' when calling importAppDefinition";
       }
 
       // verify the required parameter 'file' is set
       if (file == undefined || file == null) {
-        throw "Missing the required parameter 'file' when calling importAppDefinitionUsingPOST1";
+        throw "Missing the required parameter 'file' when calling importAppDefinition";
       }
 
       var pathParams = {
@@ -40099,12 +39871,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = AppDefinitionRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/app-definitions/{modelId}/import', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/app-definitions/{modelId}/import', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the publishAppDefinitionUsingPOST operation.
-     * @callback module:api/AppsApi~publishAppDefinitionUsingPOSTCallback
+     * Callback function to receive the result of the publishAppDefinition operation.
      * @param {String} error Error message, if any.
      * @param {module:model/AppDefinitionUpdateResultRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40115,20 +39886,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Before an app model can be used, it need to be published
      * @param {Integer} modelId modelId
      * @param {module:model/AppDefinitionPublishRepresentation} publishModel publishModel
-     * @param {module:api/AppsApi~publishAppDefinitionUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/AppDefinitionUpdateResultRepresentation}
      */
-    this.publishAppDefinitionUsingPOST = function (modelId, publishModel, callback) {
+    this.publishAppDefinition = function (modelId, publishModel) {
       var postBody = publishModel;
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling publishAppDefinitionUsingPOST";
+        throw "Missing the required parameter 'modelId' when calling publishAppDefinition";
       }
 
       // verify the required parameter 'publishModel' is set
       if (publishModel == undefined || publishModel == null) {
-        throw "Missing the required parameter 'publishModel' when calling publishAppDefinitionUsingPOST";
+        throw "Missing the required parameter 'publishModel' when calling publishAppDefinition";
       }
 
       var pathParams = {
@@ -40143,14 +39913,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = AppDefinitionUpdateResultRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/app-definitions/{modelId}/publish', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/app-definitions/{modelId}/publish', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/AppDefinitionPublishRepresentation":186,"../model/AppDefinitionRepresentation":187,"../model/AppDefinitionUpdateResultRepresentation":188,"../model/ResultListDataRepresentation":241,"../model/RuntimeAppDefinitionSaveRepresentation":242}],145:[function(require,module,exports){
+},{"../ApiClient":136,"../model/AppDefinitionPublishRepresentation":185,"../model/AppDefinitionRepresentation":186,"../model/AppDefinitionUpdateResultRepresentation":187,"../model/ResultListDataRepresentation":240,"../model/RuntimeAppDefinitionSaveRepresentation":241}],144:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -40179,7 +39949,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new AppsDefinitionApi. 
+   * Constructs a new AppsDefinitionApi.
    * @alias module:api/AppsDefinitionApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -40190,8 +39960,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the exportAppDefinitionUsingGET operation.
-     * @callback module:api/AppsDefinitionApi~exportAppDefinitionUsingGETCallback
+     * Callback function to receive the result of the exportAppDefinition operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -40201,14 +39970,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Export App Definition
      * This will return a zip file containing the app definition model and all related models (process definitions and forms).
      * @param {Integer} modelId modelId from a runtime app or the id of an app definition model
-     * @param {module:api/AppsDefinitionApi~exportAppDefinitionUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.exportAppDefinitionUsingGET = function (modelId, callback) {
+    this.exportAppDefinition = function (modelId) {
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling exportAppDefinitionUsingGET";
+        throw "Missing the required parameter 'modelId' when calling exportAppDefinition";
       }
 
       var pathParams = {
@@ -40223,12 +39991,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/app-definitions/{modelId}/export', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/app-definitions/{modelId}/export', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the importAppDefinitionUsingPOST operation.
-     * @callback module:api/AppsDefinitionApi~importAppDefinitionUsingPOSTCallback
+     * Callback function to receive the result of the importAppDefinition operation.
      * @param {String} error Error message, if any.
      * @param {module:model/AppDefinitionRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40238,15 +40005,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Import App Definition
      * This is useful to bootstrap an environment (for users or continous integration).
      * @param {File} file file
-     * @param {module:api/AppsDefinitionApi~importAppDefinitionUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/AppDefinitionRepresentation}
      */
-    this.importAppDefinitionUsingPOST = function (file, callback) {
+    this.importAppDefinition = function (file) {
       var postBody = null;
 
       // verify the required parameter 'file' is set
       if (file == undefined || file == null) {
-        throw "Missing the required parameter 'file' when calling importAppDefinitionUsingPOST";
+        throw "Missing the required parameter 'file' when calling importAppDefinition";
       }
 
       var pathParams = {};
@@ -40261,12 +40027,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = AppDefinitionRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/app-definitions/import', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/app-definitions/import', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the importAppDefinitionUsingPOST1 operation.
-     * @callback module:api/AppsDefinitionApi~importAppDefinitionUsingPOST1Callback
      * @param {String} error Error message, if any.
      * @param {module:model/AppDefinitionRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40277,20 +40041,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * To import an app to an existing app definition to create a new version instead of importing a new app definition.
      * @param {Integer} modelId modelId
      * @param {File} file file
-     * @param {module:api/AppsDefinitionApi~importAppDefinitionUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/AppDefinitionRepresentation}
      */
-    this.importAppDefinitionUsingPOST1 = function (modelId, file, callback) {
+    this.importAppDefinition = function (modelId, file) {
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling importAppDefinitionUsingPOST1";
+        throw "Missing the required parameter 'modelId' when calling importAppDefinition";
       }
 
       // verify the required parameter 'file' is set
       if (file == undefined || file == null) {
-        throw "Missing the required parameter 'file' when calling importAppDefinitionUsingPOST1";
+        throw "Missing the required parameter 'file' when calling importAppDefinition";
       }
 
       var pathParams = {
@@ -40307,12 +40070,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = AppDefinitionRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/app-definitions/{modelId}/import', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/app-definitions/{modelId}/import', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the publishAppDefinitionUsingPOST operation.
-     * @callback module:api/AppsDefinitionApi~publishAppDefinitionUsingPOSTCallback
      * @param {String} error Error message, if any.
      * @param {module:model/AppDefinitionUpdateResultRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40323,20 +40084,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Before an app model can be used, it need to be published
      * @param {Integer} modelId modelId
      * @param {module:model/AppDefinitionPublishRepresentation} publishModel publishModel
-     * @param {module:api/AppsDefinitionApi~publishAppDefinitionUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/AppDefinitionUpdateResultRepresentation}
      */
-    this.publishAppDefinitionUsingPOST = function (modelId, publishModel, callback) {
+    this.publishAppDefinition = function (modelId, publishModel) {
       var postBody = publishModel;
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling publishAppDefinitionUsingPOST";
+        throw "Missing the required parameter 'modelId' when calling publishAppDefinition";
       }
 
       // verify the required parameter 'publishModel' is set
       if (publishModel == undefined || publishModel == null) {
-        throw "Missing the required parameter 'publishModel' when calling publishAppDefinitionUsingPOST";
+        throw "Missing the required parameter 'publishModel' when calling publishAppDefinition";
       }
 
       var pathParams = {
@@ -40351,14 +40111,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = AppDefinitionUpdateResultRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/app-definitions/{modelId}/publish', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/app-definitions/{modelId}/publish', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/AppDefinitionPublishRepresentation":186,"../model/AppDefinitionRepresentation":187,"../model/AppDefinitionUpdateResultRepresentation":188}],146:[function(require,module,exports){
+},{"../ApiClient":136,"../model/AppDefinitionPublishRepresentation":185,"../model/AppDefinitionRepresentation":186,"../model/AppDefinitionUpdateResultRepresentation":187}],145:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -40387,7 +40147,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new AppsRuntimeApi. 
+   * Constructs a new AppsRuntimeApi.
    * @alias module:api/AppsRuntimeApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -40398,8 +40158,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the deployAppDefinitionsUsingPOST operation.
-     * @callback module:api/AppsRuntimeApi~deployAppDefinitionsUsingPOSTCallback
+     * Callback function to receive the result of the deployAppDefinitions operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -40409,14 +40168,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Deploy published app
      * After creating and puclished an app the user can add it to his/her landing page.
      * @param {module:model/RuntimeAppDefinitionSaveRepresentation} saveObject saveObject
-     * @param {module:api/AppsRuntimeApi~deployAppDefinitionsUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deployAppDefinitionsUsingPOST = function (saveObject, callback) {
+    this.deployAppDefinitions = function (saveObject) {
       var postBody = saveObject;
 
       // verify the required parameter 'saveObject' is set
       if (saveObject == undefined || saveObject == null) {
-        throw "Missing the required parameter 'saveObject' when calling deployAppDefinitionsUsingPOST";
+        throw "Missing the required parameter 'saveObject' when calling deployAppDefinitions";
       }
 
       var pathParams = {};
@@ -40429,12 +40187,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/runtime-app-definitions', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/runtime-app-definitions', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getAppDefinitionsUsingGET operation.
-     * @callback module:api/AppsRuntimeApi~getAppDefinitionsUsingGETCallback
+     * Callback function to receive the result of the getAppDefinitions operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40443,10 +40200,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * List runtime apps
      * When a user logs in into the Alfresco Activiti BPM Suite, the landing page is displayed containing all the apps that the user is allowed to see and use.
-     * @param {module:api/AppsRuntimeApi~getAppDefinitionsUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAppDefinitionsUsingGET = function (callback) {
+    this.getAppDefinitions = function () {
       var postBody = null;
 
       var pathParams = {};
@@ -40459,14 +40215,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/runtime-app-definitions', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/runtime-app-definitions', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/ResultListDataRepresentation":241,"../model/RuntimeAppDefinitionSaveRepresentation":242}],147:[function(require,module,exports){
+},{"../ApiClient":136,"../model/ResultListDataRepresentation":240,"../model/RuntimeAppDefinitionSaveRepresentation":241}],146:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -40495,7 +40251,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new CommentsApi. 
+   * Constructs a new CommentsApi.
    * @alias module:api/CommentsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -40506,8 +40262,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the addProcessInstanceCommentUsingPOST operation.
-     * @callback module:api/CommentsApi~addProcessInstanceCommentUsingPOSTCallback
+     * Callback function to receive the result of the addProcessInstanceComment operation.
      * @param {String} error Error message, if any.
      * @param {module:model/CommentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40517,20 +40272,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Add a comment to a Process
      * @param {module:model/CommentRepresentation} commentRequest commentRequest
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/CommentsApi~addProcessInstanceCommentUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/CommentRepresentation}
      */
-    this.addProcessInstanceCommentUsingPOST = function (commentRequest, processInstanceId, callback) {
+    this.addProcessInstanceComment = function (commentRequest, processInstanceId) {
       var postBody = commentRequest;
 
       // verify the required parameter 'commentRequest' is set
       if (commentRequest == undefined || commentRequest == null) {
-        throw "Missing the required parameter 'commentRequest' when calling addProcessInstanceCommentUsingPOST";
+        throw "Missing the required parameter 'commentRequest' when calling addProcessInstanceComment";
       }
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling addProcessInstanceCommentUsingPOST";
+        throw "Missing the required parameter 'processInstanceId' when calling addProcessInstanceComment";
       }
 
       var pathParams = {
@@ -40545,12 +40299,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = CommentRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}/comments', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}/comments', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the addTaskCommentUsingPOST operation.
-     * @callback module:api/CommentsApi~addTaskCommentUsingPOSTCallback
+     * Callback function to receive the result of the addTaskComment operation.
      * @param {String} error Error message, if any.
      * @param {module:model/CommentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40560,20 +40313,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Add a comment to a Task
      * @param {module:model/CommentRepresentation} commentRequest commentRequest
      * @param {String} taskId taskId
-     * @param {module:api/CommentsApi~addTaskCommentUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/CommentRepresentation}
      */
-    this.addTaskCommentUsingPOST = function (commentRequest, taskId, callback) {
+    this.addTaskComment = function (commentRequest, taskId) {
       var postBody = commentRequest;
 
       // verify the required parameter 'commentRequest' is set
       if (commentRequest == undefined || commentRequest == null) {
-        throw "Missing the required parameter 'commentRequest' when calling addTaskCommentUsingPOST";
+        throw "Missing the required parameter 'commentRequest' when calling addTaskComment";
       }
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling addTaskCommentUsingPOST";
+        throw "Missing the required parameter 'taskId' when calling addTaskComment";
       }
 
       var pathParams = {
@@ -40588,12 +40340,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = CommentRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/comments', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/comments', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getProcessInstanceCommentsUsingGET operation.
-     * @callback module:api/CommentsApi~getProcessInstanceCommentsUsingGETCallback
+     * Callback function to receive the result of the getProcessInstanceComments operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40604,16 +40355,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {String} processInstanceId processInstanceId
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.latestFirst latestFirst
-     * @param {module:api/CommentsApi~getProcessInstanceCommentsUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getProcessInstanceCommentsUsingGET = function (processInstanceId, opts, callback) {
+    this.getProcessInstanceComments = function (processInstanceId, opts) {
       opts = opts || {};
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceCommentsUsingGET";
+        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceComments";
       }
 
       var pathParams = {
@@ -40630,12 +40380,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}/comments', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}/comments', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getTaskCommentsUsingGET operation.
-     * @callback module:api/CommentsApi~getTaskCommentsUsingGETCallback
+     * Callback function to receive the result of the getTaskComments operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40646,16 +40395,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {String} taskId taskId
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.latestFirst latestFirst
-     * @param {module:api/CommentsApi~getTaskCommentsUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getTaskCommentsUsingGET = function (taskId, opts, callback) {
+    this.getTaskComments = function (taskId, opts) {
       opts = opts || {};
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling getTaskCommentsUsingGET";
+        throw "Missing the required parameter 'taskId' when calling getTaskComments";
       }
 
       var pathParams = {
@@ -40672,14 +40420,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/comments', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/comments', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/CommentRepresentation":195,"../model/ResultListDataRepresentation":241}],148:[function(require,module,exports){
+},{"../ApiClient":136,"../model/CommentRepresentation":194,"../model/ResultListDataRepresentation":240}],147:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -40708,7 +40456,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new ContentApi. 
+   * Constructs a new ContentApi.
    * @alias module:api/ContentApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -40719,8 +40467,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the createRelatedContentOnProcessInstanceUsingPOST operation.
-     * @callback module:api/ContentApi~createRelatedContentOnProcessInstanceUsingPOSTCallback
+     * Callback function to receive the result of the createRelatedContentOnProcessInstance operation.
+     * @callback module:api/ContentApi~createRelatedContentOnProcessInstanceCallback
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40730,20 +40478,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * createRelatedContentOnProcessInstance
      * @param {String} processInstanceId processInstanceId
      * @param {module:model/RelatedContentRepresentation} relatedContent relatedContent
-     * @param {module:api/ContentApi~createRelatedContentOnProcessInstanceUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ContentApi~createRelatedContentOnProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RelatedContentRepresentation}
      */
-    this.createRelatedContentOnProcessInstanceUsingPOST = function (processInstanceId, relatedContent, callback) {
+    this.createRelatedContentOnProcessInstance = function (processInstanceId, relatedContent) {
       var postBody = relatedContent;
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling createRelatedContentOnProcessInstanceUsingPOST";
+        throw "Missing the required parameter 'processInstanceId' when calling createRelatedContentOnProcessInstance";
       }
 
       // verify the required parameter 'relatedContent' is set
       if (relatedContent == undefined || relatedContent == null) {
-        throw "Missing the required parameter 'relatedContent' when calling createRelatedContentOnProcessInstanceUsingPOST";
+        throw "Missing the required parameter 'relatedContent' when calling createRelatedContentOnProcessInstance";
       }
 
       var pathParams = {
@@ -40758,12 +40506,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = RelatedContentRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}/content', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}/content', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the createRelatedContentOnProcessInstanceUsingPOST1 operation.
-     * @callback module:api/ContentApi~createRelatedContentOnProcessInstanceUsingPOST1Callback
+     * Callback function to receive the result of the createRelatedContentOnProcessInstance operation.
+     * @callback module:api/ContentApi~createRelatedContentOnProcessInstanceCallback
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40773,20 +40521,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * createRelatedContentOnProcessInstance
      * @param {String} processInstanceId processInstanceId
      * @param {File} file file
-     * @param {module:api/ContentApi~createRelatedContentOnProcessInstanceUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ContentApi~createRelatedContentOnProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RelatedContentRepresentation}
      */
-    this.createRelatedContentOnProcessInstanceUsingPOST1 = function (processInstanceId, file, callback) {
+    this.createRelatedContentOnProcessInstance = function (processInstanceId, file) {
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling createRelatedContentOnProcessInstanceUsingPOST1";
+        throw "Missing the required parameter 'processInstanceId' when calling createRelatedContentOnProcessInstance";
       }
 
       // verify the required parameter 'file' is set
       if (file == undefined || file == null) {
-        throw "Missing the required parameter 'file' when calling createRelatedContentOnProcessInstanceUsingPOST1";
+        throw "Missing the required parameter 'file' when calling createRelatedContentOnProcessInstance";
       }
 
       var pathParams = {
@@ -40803,12 +40551,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = RelatedContentRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}/raw-content', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}/raw-content', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the createRelatedContentOnTaskUsingPOST operation.
-     * @callback module:api/ContentApi~createRelatedContentOnTaskUsingPOSTCallback
+     * Callback function to receive the result of the createRelatedContentOnTask operation.
+     * @callback module:api/ContentApi~createRelatedContentOnTaskCallback
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40820,21 +40568,21 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {module:model/RelatedContentRepresentation} relatedContent relatedContent
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.isRelatedContent isRelatedContent
-     * @param {module:api/ContentApi~createRelatedContentOnTaskUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ContentApi~createRelatedContentOnTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RelatedContentRepresentation}
      */
-    this.createRelatedContentOnTaskUsingPOST = function (taskId, relatedContent, opts, callback) {
+    this.createRelatedContentOnTask = function (taskId, relatedContent, opts) {
       opts = opts || {};
       var postBody = relatedContent;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling createRelatedContentOnTaskUsingPOST";
+        throw "Missing the required parameter 'taskId' when calling createRelatedContentOnTask";
       }
 
       // verify the required parameter 'relatedContent' is set
       if (relatedContent == undefined || relatedContent == null) {
-        throw "Missing the required parameter 'relatedContent' when calling createRelatedContentOnTaskUsingPOST";
+        throw "Missing the required parameter 'relatedContent' when calling createRelatedContentOnTask";
       }
 
       var pathParams = {
@@ -40851,12 +40599,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = RelatedContentRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/content', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/content', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the createRelatedContentOnTaskUsingPOST1 operation.
-     * @callback module:api/ContentApi~createRelatedContentOnTaskUsingPOST1Callback
+     * Callback function to receive the result of the createRelatedContentOnTask operation.
+     * @callback module:api/ContentApi~createRelatedContentOnTaskCallback
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40868,21 +40616,21 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {File} file file
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.isRelatedContent isRelatedContent
-     * @param {module:api/ContentApi~createRelatedContentOnTaskUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ContentApi~createRelatedContentOnTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RelatedContentRepresentation}
      */
-    this.createRelatedContentOnTaskUsingPOST1 = function (taskId, file, opts, callback) {
+    this.createRelatedContentOnTask = function (taskId, file, opts) {
       opts = opts || {};
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling createRelatedContentOnTaskUsingPOST1";
+        throw "Missing the required parameter 'taskId' when calling createRelatedContentOnTask";
       }
 
       // verify the required parameter 'file' is set
       if (file == undefined || file == null) {
-        throw "Missing the required parameter 'file' when calling createRelatedContentOnTaskUsingPOST1";
+        throw "Missing the required parameter 'file' when calling createRelatedContentOnTask";
       }
 
       var pathParams = {
@@ -40901,12 +40649,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = RelatedContentRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/raw-content', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/raw-content', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the createTemporaryRawRelatedContentUsingPOST1 operation.
-     * @callback module:api/ContentApi~createTemporaryRawRelatedContentUsingPOST1Callback
+     * Callback function to receive the result of the createTemporaryRawRelatedContent operation.
+     * @callback module:api/ContentApi~createTemporaryRawRelatedContentCallback
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40915,15 +40663,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * createTemporaryRawRelatedContent
      * @param {File} file file
-     * @param {module:api/ContentApi~createTemporaryRawRelatedContentUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ContentApi~createTemporaryRawRelatedContentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RelatedContentRepresentation}
      */
-    this.createTemporaryRawRelatedContentUsingPOST1 = function (file, callback) {
+    this.createTemporaryRawRelatedContent = function (file) {
       var postBody = null;
 
       // verify the required parameter 'file' is set
       if (file == undefined || file == null) {
-        throw "Missing the required parameter 'file' when calling createTemporaryRawRelatedContentUsingPOST1";
+        throw "Missing the required parameter 'file' when calling createTemporaryRawRelatedContent";
       }
 
       var pathParams = {};
@@ -40938,12 +40686,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = RelatedContentRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/content/raw', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/content/raw', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the createTemporaryRelatedContentUsingPOST operation.
-     * @callback module:api/ContentApi~createTemporaryRelatedContentUsingPOSTCallback
+     * Callback function to receive the result of the createTemporaryRelatedContent operation.
+     * @callback module:api/ContentApi~createTemporaryRelatedContentCallback
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40952,15 +40700,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * createTemporaryRelatedContent
      * @param {module:model/RelatedContentRepresentation} relatedContent relatedContent
-     * @param {module:api/ContentApi~createTemporaryRelatedContentUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ContentApi~createTemporaryRelatedContentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RelatedContentRepresentation}
      */
-    this.createTemporaryRelatedContentUsingPOST = function (relatedContent, callback) {
+    this.createTemporaryRelatedContent = function (relatedContent) {
       var postBody = relatedContent;
 
       // verify the required parameter 'relatedContent' is set
       if (relatedContent == undefined || relatedContent == null) {
-        throw "Missing the required parameter 'relatedContent' when calling createTemporaryRelatedContentUsingPOST";
+        throw "Missing the required parameter 'relatedContent' when calling createTemporaryRelatedContent";
       }
 
       var pathParams = {};
@@ -40973,12 +40721,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = RelatedContentRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/content', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/content', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the deleteContentUsingDELETE1 operation.
-     * @callback module:api/ContentApi~deleteContentUsingDELETE1Callback
+     * Callback function to receive the result of the deleteContent operation.
+     * @callback module:api/ContentApi~deleteContentCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -40987,14 +40735,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * deleteContent
      * @param {Integer} contentId contentId
-     * @param {module:api/ContentApi~deleteContentUsingDELETE1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ContentApi~deleteContentCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteContentUsingDELETE1 = function (contentId, callback) {
+    this.deleteContent = function (contentId) {
       var postBody = null;
 
       // verify the required parameter 'contentId' is set
       if (contentId == undefined || contentId == null) {
-        throw "Missing the required parameter 'contentId' when calling deleteContentUsingDELETE1";
+        throw "Missing the required parameter 'contentId' when calling deleteContent";
       }
 
       var pathParams = {
@@ -41009,12 +40757,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/content/{contentId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/content/{contentId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getContentUsingGET1 operation.
-     * @callback module:api/ContentApi~getContentUsingGET1Callback
+     * Callback function to receive the result of the getContent operation.
+     * @callback module:api/ContentApi~getContentCallback
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41023,15 +40771,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * getContent
      * @param {Integer} contentId contentId
-     * @param {module:api/ContentApi~getContentUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ContentApi~getContentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RelatedContentRepresentation}
      */
-    this.getContentUsingGET1 = function (contentId, callback) {
+    this.getContent = function (contentId) {
       var postBody = null;
 
       // verify the required parameter 'contentId' is set
       if (contentId == undefined || contentId == null) {
-        throw "Missing the required parameter 'contentId' when calling getContentUsingGET1";
+        throw "Missing the required parameter 'contentId' when calling getContent";
       }
 
       var pathParams = {
@@ -41046,12 +40794,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = RelatedContentRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/content/{contentId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/content/{contentId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getProcessInstanceContentUsingGET operation.
-     * @callback module:api/ContentApi~getProcessInstanceContentUsingGETCallback
+     * Callback function to receive the result of the getProcessInstanceContent operation.
+     * @callback module:api/ContentApi~getProcessInstanceContentCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41060,15 +40808,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve content attached to process instance fields
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ContentApi~getProcessInstanceContentUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ContentApi~getProcessInstanceContentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getProcessInstanceContentUsingGET = function (processInstanceId, callback) {
+    this.getProcessInstanceContent = function (processInstanceId) {
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceContentUsingGET";
+        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceContent";
       }
 
       var pathParams = {
@@ -41083,12 +40831,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}/field-content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}/field-content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getRawContentUsingGET3 operation.
-     * @callback module:api/ContentApi~getRawContentUsingGET3Callback
+     * Callback function to receive the result of the getRawContent3 operation.
+     * @callback module:api/ContentApi~getRawContent3Callback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -41097,14 +40845,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * getRawContent
      * @param {Integer} contentId contentId
-     * @param {module:api/ContentApi~getRawContentUsingGET3Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ContentApi~getRawContent3Callback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.getRawContentUsingGET3 = function (contentId, callback) {
+    this.getRawContent3 = function (contentId) {
       var postBody = null;
 
       // verify the required parameter 'contentId' is set
       if (contentId == undefined || contentId == null) {
-        throw "Missing the required parameter 'contentId' when calling getRawContentUsingGET3";
+        throw "Missing the required parameter 'contentId' when calling getRawContent3";
       }
 
       var pathParams = {
@@ -41119,12 +40867,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/content/{contentId}/raw', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/content/{contentId}/raw', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getRelatedContentForProcessInstanceUsingGET operation.
-     * @callback module:api/ContentApi~getRelatedContentForProcessInstanceUsingGETCallback
+     * Callback function to receive the result of the getRelatedContentForProcessInstance operation.
+     * @callback module:api/ContentApi~getRelatedContentForProcessInstanceCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41133,15 +40881,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * getRelatedContentForProcessInstance
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ContentApi~getRelatedContentForProcessInstanceUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ContentApi~getRelatedContentForProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getRelatedContentForProcessInstanceUsingGET = function (processInstanceId, callback) {
+    this.getRelatedContentForProcessInstance = function (processInstanceId) {
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling getRelatedContentForProcessInstanceUsingGET";
+        throw "Missing the required parameter 'processInstanceId' when calling getRelatedContentForProcessInstance";
       }
 
       var pathParams = {
@@ -41156,12 +40904,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getRelatedContentForTaskUsingGET operation.
-     * @callback module:api/ContentApi~getRelatedContentForTaskUsingGETCallback
+     * Callback function to receive the result of the getRelatedContentForTask operation.
+     * @callback module:api/ContentApi~getRelatedContentForTaskCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41170,15 +40918,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve which content is attached to a task
      * @param {String} taskId taskId
-     * @param {module:api/ContentApi~getRelatedContentForTaskUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ContentApi~getRelatedContentForTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getRelatedContentForTaskUsingGET = function (taskId, callback) {
+    this.getRelatedContentForTask = function (taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling getRelatedContentForTaskUsingGET";
+        throw "Missing the required parameter 'taskId' when calling getRelatedContentForTask";
       }
 
       var pathParams = {
@@ -41193,14 +40941,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/RelatedContentRepresentation":238,"../model/ResultListDataRepresentation":241}],149:[function(require,module,exports){
+},{"../ApiClient":136,"../model/RelatedContentRepresentation":237,"../model/ResultListDataRepresentation":240}],148:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -41229,7 +40977,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new ContentRenditionApi. 
+   * Constructs a new ContentRenditionApi.
    * @alias module:api/ContentRenditionApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -41240,8 +40988,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getRawContentUsingGET2 operation.
-     * @callback module:api/ContentRenditionApi~getRawContentUsingGET2Callback
+     * Callback function to receive the result of the getRawContent operation.
+     * @callback module:api/ContentRenditionApi~getRawContentCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -41251,19 +40999,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Retrieve Raw Content
      * @param {Integer} contentId contentId
      * @param {String} renditionType renditionType
-     * @param {module:api/ContentRenditionApi~getRawContentUsingGET2Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ContentRenditionApi~getRawContentCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.getRawContentUsingGET2 = function (contentId, renditionType, callback) {
+    this.getRawContent = function (contentId, renditionType) {
       var postBody = null;
 
       // verify the required parameter 'contentId' is set
       if (contentId == undefined || contentId == null) {
-        throw "Missing the required parameter 'contentId' when calling getRawContentUsingGET2";
+        throw "Missing the required parameter 'contentId' when calling getRawContent";
       }
 
       // verify the required parameter 'renditionType' is set
       if (renditionType == undefined || renditionType == null) {
-        throw "Missing the required parameter 'renditionType' when calling getRawContentUsingGET2";
+        throw "Missing the required parameter 'renditionType' when calling getRawContent";
       }
 
       var pathParams = {
@@ -41279,14 +41027,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/content/{contentId}/rendition/{renditionType}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/content/{contentId}/rendition/{renditionType}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137}],150:[function(require,module,exports){
+},{"../ApiClient":136}],149:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -41315,7 +41063,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new EditorApi. 
+   * Constructs a new EditorApi.
    * @alias module:api/EditorApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -41326,8 +41074,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getFormHistoryUsingGET operation.
-     * @callback module:api/EditorApi~getFormHistoryUsingGETCallback
+     * Callback function to receive the result of the getFormHistory operation.
+     * @callback module:api/EditorApi~getFormHistoryCallback
      * @param {String} error Error message, if any.
      * @param {module:model/FormRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41337,20 +41085,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * getFormHistory
      * @param {Integer} formId formId
      * @param {Integer} formHistoryId formHistoryId
-     * @param {module:api/EditorApi~getFormHistoryUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/EditorApi~getFormHistoryCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/FormRepresentation}
      */
-    this.getFormHistoryUsingGET = function (formId, formHistoryId, callback) {
+    this.getFormHistory = function (formId, formHistoryId) {
       var postBody = null;
 
       // verify the required parameter 'formId' is set
       if (formId == undefined || formId == null) {
-        throw "Missing the required parameter 'formId' when calling getFormHistoryUsingGET";
+        throw "Missing the required parameter 'formId' when calling getFormHistory";
       }
 
       // verify the required parameter 'formHistoryId' is set
       if (formHistoryId == undefined || formHistoryId == null) {
-        throw "Missing the required parameter 'formHistoryId' when calling getFormHistoryUsingGET";
+        throw "Missing the required parameter 'formHistoryId' when calling getFormHistory";
       }
 
       var pathParams = {
@@ -41366,12 +41114,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = FormRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/editor/form-models/{formId}/history/{formHistoryId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/editor/form-models/{formId}/history/{formHistoryId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getFormUsingGET operation.
-     * @callback module:api/EditorApi~getFormUsingGETCallback
+     * Callback function to receive the result of the getForm operation.
+     * @callback module:api/EditorApi~getFormCallback
      * @param {String} error Error message, if any.
      * @param {module:model/FormRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41380,15 +41128,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * getForm
      * @param {Integer} formId formId
-     * @param {module:api/EditorApi~getFormUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/EditorApi~getFormCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/FormRepresentation}
      */
-    this.getFormUsingGET = function (formId, callback) {
+    this.getForm = function (formId) {
       var postBody = null;
 
       // verify the required parameter 'formId' is set
       if (formId == undefined || formId == null) {
-        throw "Missing the required parameter 'formId' when calling getFormUsingGET";
+        throw "Missing the required parameter 'formId' when calling getForm";
       }
 
       var pathParams = {
@@ -41403,12 +41151,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = FormRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/editor/form-models/{formId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/editor/form-models/{formId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getFormsUsingGET operation.
-     * @callback module:api/EditorApi~getFormsUsingGETCallback
+     * Callback function to receive the result of the getForms operation.
+     * @callback module:api/EditorApi~getFormsCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/FormRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41416,10 +41164,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * getForms
-     * @param {module:api/EditorApi~getFormsUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/EditorApi~getFormsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/FormRepresentation>}
      */
-    this.getFormsUsingGET = function (callback) {
+    this.getForms = function (callback) {
       var postBody = null;
 
       var pathParams = {};
@@ -41432,12 +41180,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = [FormRepresentation];
 
-      return this.apiClient.callApi('/api/enterprise/editor/form-models/values', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/editor/form-models/values', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the saveFormUsingPUT operation.
-     * @callback module:api/EditorApi~saveFormUsingPUTCallback
+     * Callback function to receive the result of the saveForm operation.
+     * @callback module:api/EditorApi~saveFormCallback
      * @param {String} error Error message, if any.
      * @param {module:model/FormRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41447,20 +41195,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * saveForm
      * @param {Integer} formId formId
      * @param {module:model/FormSaveRepresentation} saveRepresentation saveRepresentation
-     * @param {module:api/EditorApi~saveFormUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/EditorApi~saveFormCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/FormRepresentation}
      */
-    this.saveFormUsingPUT = function (formId, saveRepresentation, callback) {
+    this.saveForm = function (formId, saveRepresentation) {
       var postBody = saveRepresentation;
 
       // verify the required parameter 'formId' is set
       if (formId == undefined || formId == null) {
-        throw "Missing the required parameter 'formId' when calling saveFormUsingPUT";
+        throw "Missing the required parameter 'formId' when calling saveForm";
       }
 
       // verify the required parameter 'saveRepresentation' is set
       if (saveRepresentation == undefined || saveRepresentation == null) {
-        throw "Missing the required parameter 'saveRepresentation' when calling saveFormUsingPUT";
+        throw "Missing the required parameter 'saveRepresentation' when calling saveForm";
       }
 
       var pathParams = {
@@ -41475,12 +41223,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = FormRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/editor/form-models/{formId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/editor/form-models/{formId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the validateModelUsingPUT operation.
-     * @callback module:api/EditorApi~validateModelUsingPUTCallback
+     * Callback function to receive the result of the validateModel operation.
+     * @callback module:api/EditorApi~validateModelCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/ValidationErrorRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41490,20 +41238,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * validateModel
      * @param {Integer} formId formId
      * @param {module:model/FormSaveRepresentation} saveRepresentation saveRepresentation
-     * @param {module:api/EditorApi~validateModelUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/EditorApi~validateModelCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/ValidationErrorRepresentation>}
      */
-    this.validateModelUsingPUT = function (formId, saveRepresentation, callback) {
+    this.validateModel = function (formId, saveRepresentation) {
       var postBody = saveRepresentation;
 
       // verify the required parameter 'formId' is set
       if (formId == undefined || formId == null) {
-        throw "Missing the required parameter 'formId' when calling validateModelUsingPUT";
+        throw "Missing the required parameter 'formId' when calling validateModel";
       }
 
       // verify the required parameter 'saveRepresentation' is set
       if (saveRepresentation == undefined || saveRepresentation == null) {
-        throw "Missing the required parameter 'saveRepresentation' when calling validateModelUsingPUT";
+        throw "Missing the required parameter 'saveRepresentation' when calling validateModel";
       }
 
       var pathParams = {
@@ -41518,14 +41266,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = [ValidationErrorRepresentation];
 
-      return this.apiClient.callApi('/api/enterprise/editor/form-models/{formId}/validate', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/editor/form-models/{formId}/validate', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/FormRepresentation":211,"../model/FormSaveRepresentation":212,"../model/ValidationErrorRepresentation":258}],151:[function(require,module,exports){
+},{"../ApiClient":136,"../model/FormRepresentation":210,"../model/FormSaveRepresentation":211,"../model/ValidationErrorRepresentation":257}],150:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -41554,7 +41302,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new GroupsApi. 
+   * Constructs a new GroupsApi.
    * @alias module:api/GroupsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -41565,8 +41313,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getGroupsUsingGET1 operation.
-     * @callback module:api/GroupsApi~getGroupsUsingGET1Callback
+     * Callback function to receive the result of the getGroups operation.
+     * @callback module:api/GroupsApi~getGroupsCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41580,10 +41328,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {String} opts.externalId externalId
      * @param {String} opts.externalIdCaseInsensitive externalIdCaseInsensitive
      * @param {Integer} opts.tenantId tenantId
-     * @param {module:api/GroupsApi~getGroupsUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/GroupsApi~getGroupsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getGroupsUsingGET1 = function (opts, callback) {
+    this.getGroups = function (opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -41603,12 +41351,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/groups', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/groups', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getUsersForGroupUsingGET operation.
-     * @callback module:api/GroupsApi~getUsersForGroupUsingGETCallback
+     * Callback function to receive the result of the getUsersForGroup operation.
+     * @callback module:api/GroupsApi~getUsersForGroupCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41617,15 +41365,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * List users member of a specific group
      * @param {Integer} groupId groupId
-     * @param {module:api/GroupsApi~getUsersForGroupUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/GroupsApi~getUsersForGroupCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getUsersForGroupUsingGET = function (groupId, callback) {
+    this.getUsersForGroup = function (groupId) {
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling getUsersForGroupUsingGET";
+        throw "Missing the required parameter 'groupId' when calling getUsersForGroup";
       }
 
       var pathParams = {
@@ -41640,14 +41388,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/groups/{groupId}/users', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/groups/{groupId}/users', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/ResultListDataRepresentation":241}],152:[function(require,module,exports){
+},{"../ApiClient":136,"../model/ResultListDataRepresentation":240}],151:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -41676,7 +41424,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new IDMSyncApi. 
+   * Constructs a new IDMSyncApi.
    * @alias module:api/IDMSyncApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -41687,8 +41435,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getLogFileUsingGET operation.
-     * @callback module:api/IDMSyncApi~getLogFileUsingGETCallback
+     * Callback function to receive the result of the getLogFile operation.
+     * @callback module:api/IDMSyncApi~getLogFileCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -41697,14 +41445,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * getLogFile
      * @param {Integer} syncLogEntryId syncLogEntryId
-     * @param {module:api/IDMSyncApi~getLogFileUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IDMSyncApi~getLogFileCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.getLogFileUsingGET = function (syncLogEntryId, callback) {
+    this.getLogFile = function (syncLogEntryId) {
       var postBody = null;
 
       // verify the required parameter 'syncLogEntryId' is set
       if (syncLogEntryId == undefined || syncLogEntryId == null) {
-        throw "Missing the required parameter 'syncLogEntryId' when calling getLogFileUsingGET";
+        throw "Missing the required parameter 'syncLogEntryId' when calling getLogFile";
       }
 
       var pathParams = {
@@ -41719,12 +41467,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/idm-sync-log-entries/{syncLogEntryId}/logfile', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/idm-sync-log-entries/{syncLogEntryId}/logfile', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getSyncLogEntriesUsingGET operation.
-     * @callback module:api/IDMSyncApi~getSyncLogEntriesUsingGETCallback
+     * Callback function to receive the result of the getSyncLogEntries operation.
+     * @callback module:api/IDMSyncApi~getSyncLogEntriesCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/SyncLogEntryRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41736,10 +41484,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Integer} opts.tenantId tenantId
      * @param {Integer} opts.page page
      * @param {Integer} opts.size size
-     * @param {module:api/IDMSyncApi~getSyncLogEntriesUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IDMSyncApi~getSyncLogEntriesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/SyncLogEntryRepresentation>}
      */
-    this.getSyncLogEntriesUsingGET = function (opts, callback) {
+    this.getSyncLogEntries = function (opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -41757,14 +41505,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = [SyncLogEntryRepresentation];
 
-      return this.apiClient.callApi('/api/enterprise/idm-sync-log-entries', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/idm-sync-log-entries', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/SyncLogEntryRepresentation":244}],153:[function(require,module,exports){
+},{"../ApiClient":136,"../model/SyncLogEntryRepresentation":243}],152:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -41793,7 +41541,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new IntegrationAccountApi. 
+   * Constructs a new IntegrationAccountApi.
    * @alias module:api/IntegrationAccountApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -41804,8 +41552,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getAccountsUsingGET operation.
-     * @callback module:api/IntegrationAccountApi~getAccountsUsingGETCallback
+     * Callback function to receive the result of the getAccounts operation.
+     * @callback module:api/IntegrationAccountApi~getAccountsCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41814,10 +41562,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve Alfresco account information
      * Ideal to map accounts &amp; integrate with 3rd party app/client
-     * @param {module:api/IntegrationAccountApi~getAccountsUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationAccountApi~getAccountsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAccountsUsingGET = function (callback) {
+    this.getAccounts = function (callback) {
       var postBody = null;
 
       var pathParams = {};
@@ -41830,14 +41578,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/account/integration', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/account/integration', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/ResultListDataRepresentation":241}],154:[function(require,module,exports){
+},{"../ApiClient":136,"../model/ResultListDataRepresentation":240}],153:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -41866,7 +41614,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new IntegrationAlfrescoCloudApi. 
+   * Constructs a new IntegrationAlfrescoCloudApi.
    * @alias module:api/IntegrationAlfrescoCloudApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -41877,8 +41625,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the confirmAuthorisationUsingGET operation.
-     * @callback module:api/IntegrationAlfrescoCloudApi~confirmAuthorisationUsingGETCallback
+     * Callback function to receive the result of the confirmAuthorisation operation.
+     * @callback module:api/IntegrationAlfrescoCloudApi~confirmAuthorisationCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -41888,14 +41636,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Alfresco Cloud Authorization
      * Returns Alfresco Oauth HTML Page
      * @param {String} code code
-     * @param {module:api/IntegrationAlfrescoCloudApi~confirmAuthorisationUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationAlfrescoCloudApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.confirmAuthorisationUsingGET = function (code, callback) {
+    this.confirmAuthorisation = function (code) {
       var postBody = null;
 
       // verify the required parameter 'code' is set
       if (code == undefined || code == null) {
-        throw "Missing the required parameter 'code' when calling confirmAuthorisationUsingGET";
+        throw "Missing the required parameter 'code' when calling confirmAuthorisation";
       }
 
       var pathParams = {};
@@ -41910,12 +41658,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['text/html', 'application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/confirm-auth-request', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/confirm-auth-request', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getAllNetworksUsingGET operation.
-     * @callback module:api/IntegrationAlfrescoCloudApi~getAllNetworksUsingGETCallback
+     * Callback function to receive the result of the getAllNetworks operation.
+     * @callback module:api/IntegrationAlfrescoCloudApi~getAllNetworksCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41923,10 +41671,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * List Alfresco networks
-     * @param {module:api/IntegrationAlfrescoCloudApi~getAllNetworksUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationAlfrescoCloudApi~getAllNetworksCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAllNetworksUsingGET = function (callback) {
+    this.getAllNetworks = function (callback) {
       var postBody = null;
 
       var pathParams = {};
@@ -41939,12 +41687,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/networks', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/networks', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getAllSitesUsingGET operation.
-     * @callback module:api/IntegrationAlfrescoCloudApi~getAllSitesUsingGETCallback
+     * Callback function to receive the result of the getAllSites operation.
+     * @callback module:api/IntegrationAlfrescoCloudApi~getAllSitesCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41954,15 +41702,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List Alfresco sites
      * Returns ALL Sites
      * @param {String} networkId networkId
-     * @param {module:api/IntegrationAlfrescoCloudApi~getAllSitesUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationAlfrescoCloudApi~getAllSitesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAllSitesUsingGET = function (networkId, callback) {
+    this.getAllSites = function (networkId) {
       var postBody = null;
 
       // verify the required parameter 'networkId' is set
       if (networkId == undefined || networkId == null) {
-        throw "Missing the required parameter 'networkId' when calling getAllSitesUsingGET";
+        throw "Missing the required parameter 'networkId' when calling getAllSites";
       }
 
       var pathParams = {
@@ -41977,12 +41725,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getContentInFolderUsingGET operation.
-     * @callback module:api/IntegrationAlfrescoCloudApi~getContentInFolderUsingGETCallback
+     * Callback function to receive the result of the getContentInFolder operation.
+     * @callback module:api/IntegrationAlfrescoCloudApi~getContentInFolderCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41992,20 +41740,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List file &amp; folders inside a specific folder
      * @param {String} networkId networkId
      * @param {String} folderId folderId
-     * @param {module:api/IntegrationAlfrescoCloudApi~getContentInFolderUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationAlfrescoCloudApi~getContentInFolderCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getContentInFolderUsingGET = function (networkId, folderId, callback) {
+    this.getContentInFolder = function (networkId, folderId) {
       var postBody = null;
 
       // verify the required parameter 'networkId' is set
       if (networkId == undefined || networkId == null) {
-        throw "Missing the required parameter 'networkId' when calling getContentInFolderUsingGET";
+        throw "Missing the required parameter 'networkId' when calling getContentInFolder";
       }
 
       // verify the required parameter 'folderId' is set
       if (folderId == undefined || folderId == null) {
-        throw "Missing the required parameter 'folderId' when calling getContentInFolderUsingGET";
+        throw "Missing the required parameter 'folderId' when calling getContentInFolder";
       }
 
       var pathParams = {
@@ -42021,12 +41769,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/networks/{networkId}/folders/{folderId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/networks/{networkId}/folders/{folderId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getContentInSiteUsingGET operation.
-     * @callback module:api/IntegrationAlfrescoCloudApi~getContentInSiteUsingGETCallback
+     * Callback function to receive the result of the getContentInSite operation.
+     * @callback module:api/IntegrationAlfrescoCloudApi~getContentInSiteCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42036,20 +41784,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List file &amp; folders inside a specific site
      * @param {String} networkId networkId
      * @param {String} siteId siteId
-     * @param {module:api/IntegrationAlfrescoCloudApi~getContentInSiteUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationAlfrescoCloudApi~getContentInSiteCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getContentInSiteUsingGET = function (networkId, siteId, callback) {
+    this.getContentInSite = function (networkId, siteId) {
       var postBody = null;
 
       // verify the required parameter 'networkId' is set
       if (networkId == undefined || networkId == null) {
-        throw "Missing the required parameter 'networkId' when calling getContentInSiteUsingGET";
+        throw "Missing the required parameter 'networkId' when calling getContentInSite";
       }
 
       // verify the required parameter 'siteId' is set
       if (siteId == undefined || siteId == null) {
-        throw "Missing the required parameter 'siteId' when calling getContentInSiteUsingGET";
+        throw "Missing the required parameter 'siteId' when calling getContentInSite";
       }
 
       var pathParams = {
@@ -42065,14 +41813,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/ResultListDataRepresentation":241}],155:[function(require,module,exports){
+},{"../ApiClient":136,"../model/ResultListDataRepresentation":240}],154:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -42101,7 +41849,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new IntegrationAlfrescoOnPremiseApi. 
+   * Constructs a new IntegrationAlfrescoOnPremiseApi.
    * @alias module:api/IntegrationAlfrescoOnPremiseApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -42112,8 +41860,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getAllSitesUsingGET1 operation.
-     * @callback module:api/IntegrationAlfrescoOnPremiseApi~getAllSitesUsingGET1Callback
+     * Callback function to receive the result of the getAllSites operation.
+     * @callback module:api/IntegrationAlfrescoOnPremiseApi~getAllSitesCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42123,15 +41871,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List Alfresco sites
      * Returns ALL Sites
      * @param {String} repositoryId repositoryId
-     * @param {module:api/IntegrationAlfrescoOnPremiseApi~getAllSitesUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationAlfrescoOnPremiseApi~getAllSitesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAllSitesUsingGET1 = function (repositoryId, callback) {
+    this.getAllSites = function (repositoryId) {
       var postBody = null;
 
       // verify the required parameter 'repositoryId' is set
       if (repositoryId == undefined || repositoryId == null) {
-        throw "Missing the required parameter 'repositoryId' when calling getAllSitesUsingGET1";
+        throw "Missing the required parameter 'repositoryId' when calling getAllSites";
       }
 
       var pathParams = {
@@ -42146,12 +41894,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/integration/alfresco/{repositoryId}/sites', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/alfresco/{repositoryId}/sites', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getContentInFolderUsingGET1 operation.
-     * @callback module:api/IntegrationAlfrescoOnPremiseApi~getContentInFolderUsingGET1Callback
+     * Callback function to receive the result of the getContentInFolder operation.
+     * @callback module:api/IntegrationAlfrescoOnPremiseApi~getContentInFolderCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42161,20 +41909,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List file &amp; folders inside a specific folder
      * @param {String} repositoryId repositoryId
      * @param {String} folderId folderId
-     * @param {module:api/IntegrationAlfrescoOnPremiseApi~getContentInFolderUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationAlfrescoOnPremiseApi~getContentInFolderCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getContentInFolderUsingGET1 = function (repositoryId, folderId, callback) {
+    this.getContentInFolder = function (repositoryId, folderId) {
       var postBody = null;
 
       // verify the required parameter 'repositoryId' is set
       if (repositoryId == undefined || repositoryId == null) {
-        throw "Missing the required parameter 'repositoryId' when calling getContentInFolderUsingGET1";
+        throw "Missing the required parameter 'repositoryId' when calling getContentInFolder";
       }
 
       // verify the required parameter 'folderId' is set
       if (folderId == undefined || folderId == null) {
-        throw "Missing the required parameter 'folderId' when calling getContentInFolderUsingGET1";
+        throw "Missing the required parameter 'folderId' when calling getContentInFolder";
       }
 
       var pathParams = {
@@ -42190,12 +41938,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/integration/alfresco/{repositoryId}/folders/{folderId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/alfresco/{repositoryId}/folders/{folderId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getContentInSiteUsingGET1 operation.
-     * @callback module:api/IntegrationAlfrescoOnPremiseApi~getContentInSiteUsingGET1Callback
+     * Callback function to receive the result of the getContentInSite operation.
+     * @callback module:api/IntegrationAlfrescoOnPremiseApi~getContentInSiteCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42205,20 +41953,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List file &amp; folders inside a specific site
      * @param {String} repositoryId repositoryId
      * @param {String} siteId siteId
-     * @param {module:api/IntegrationAlfrescoOnPremiseApi~getContentInSiteUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationAlfrescoOnPremiseApi~getContentInSiteCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getContentInSiteUsingGET1 = function (repositoryId, siteId, callback) {
+    this.getContentInSite = function (repositoryId, siteId) {
       var postBody = null;
 
       // verify the required parameter 'repositoryId' is set
       if (repositoryId == undefined || repositoryId == null) {
-        throw "Missing the required parameter 'repositoryId' when calling getContentInSiteUsingGET1";
+        throw "Missing the required parameter 'repositoryId' when calling getContentInSite";
       }
 
       // verify the required parameter 'siteId' is set
       if (siteId == undefined || siteId == null) {
-        throw "Missing the required parameter 'siteId' when calling getContentInSiteUsingGET1";
+        throw "Missing the required parameter 'siteId' when calling getContentInSite";
       }
 
       var pathParams = {
@@ -42234,12 +41982,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/integration/alfresco/{repositoryId}/sites/{siteId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/alfresco/{repositoryId}/sites/{siteId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getRepositoriesUsingGET operation.
-     * @callback module:api/IntegrationAlfrescoOnPremiseApi~getRepositoriesUsingGETCallback
+     * Callback function to receive the result of the getRepositories operation.
+     * @callback module:api/IntegrationAlfrescoOnPremiseApi~getRepositoriesCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42251,10 +41999,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.tenantId tenantId
      * @param {Boolean} opts.includeAccounts includeAccounts
-     * @param {module:api/IntegrationAlfrescoOnPremiseApi~getRepositoriesUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationAlfrescoOnPremiseApi~getRepositoriesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getRepositoriesUsingGET = function (opts, callback) {
+    this.getRepositories = function (opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -42271,14 +42019,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/profile/accounts/alfresco', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/profile/accounts/alfresco', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/ResultListDataRepresentation":241}],156:[function(require,module,exports){
+},{"../ApiClient":136,"../model/ResultListDataRepresentation":240}],155:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -42307,7 +42055,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new IntegrationApi. 
+   * Constructs a new IntegrationApi.
    * @alias module:api/IntegrationApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -42318,8 +42066,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the confirmAuthorisationUsingGET operation.
-     * @callback module:api/IntegrationApi~confirmAuthorisationUsingGETCallback
+     * Callback function to receive the result of the confirmAuthorisation operation.
+     * @callback module:api/IntegrationApi~confirmAuthorisationCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -42329,14 +42077,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Alfresco Cloud Authorization
      * Returns Alfresco Oauth HTML Page
      * @param {String} code code
-     * @param {module:api/IntegrationApi~confirmAuthorisationUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.confirmAuthorisationUsingGET = function (code, callback) {
+    this.confirmAuthorisation = function (code) {
       var postBody = null;
 
       // verify the required parameter 'code' is set
       if (code == undefined || code == null) {
-        throw "Missing the required parameter 'code' when calling confirmAuthorisationUsingGET";
+        throw "Missing the required parameter 'code' when calling confirmAuthorisation";
       }
 
       var pathParams = {};
@@ -42351,12 +42099,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['text/html', 'application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/confirm-auth-request', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/confirm-auth-request', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the confirmAuthorisationUsingGET1 operation.
-     * @callback module:api/IntegrationApi~confirmAuthorisationUsingGET1Callback
+     * Callback function to receive the result of the confirmAuthorisation operation.
+     * @callback module:api/IntegrationApi~confirmAuthorisationCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -42366,14 +42114,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Box Authorization
      * Returns Box Oauth HTML Page
      * @param {String} code code
-     * @param {module:api/IntegrationApi~confirmAuthorisationUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.confirmAuthorisationUsingGET1 = function (code, callback) {
+    this.confirmAuthorisation = function (code) {
       var postBody = null;
 
       // verify the required parameter 'code' is set
       if (code == undefined || code == null) {
-        throw "Missing the required parameter 'code' when calling confirmAuthorisationUsingGET1";
+        throw "Missing the required parameter 'code' when calling confirmAuthorisation";
       }
 
       var pathParams = {};
@@ -42388,12 +42136,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['text/html', 'application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/integration/box/confirm-auth-request', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/box/confirm-auth-request', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the confirmAuthorisationUsingGET2 operation.
-     * @callback module:api/IntegrationApi~confirmAuthorisationUsingGET2Callback
+     * Callback function to receive the result of the confirmAuthorisation operation.
+     * @callback module:api/IntegrationApi~confirmAuthorisationCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -42403,14 +42151,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Drive Authorization
      * Returns Drive Oauth HTML Page
      * @param {String} code code
-     * @param {module:api/IntegrationApi~confirmAuthorisationUsingGET2Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.confirmAuthorisationUsingGET2 = function (code, callback) {
+    this.confirmAuthorisation = function (code) {
       var postBody = null;
 
       // verify the required parameter 'code' is set
       if (code == undefined || code == null) {
-        throw "Missing the required parameter 'code' when calling confirmAuthorisationUsingGET2";
+        throw "Missing the required parameter 'code' when calling confirmAuthorisation";
       }
 
       var pathParams = {};
@@ -42425,12 +42173,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['text/html', 'application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/integration/google-drive/confirm-auth-request', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/google-drive/confirm-auth-request', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the createRepositoryAccountUsingPOST operation.
-     * @callback module:api/IntegrationApi~createRepositoryAccountUsingPOSTCallback
+     * Callback function to receive the result of the createRepositoryAccount operation.
+     * @callback module:api/IntegrationApi~createRepositoryAccountCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -42440,19 +42188,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Create Box account
      * @param {Integer} userId userId
      * @param {module:model/UserAccountCredentialsRepresentation} credentials credentials
-     * @param {module:api/IntegrationApi~createRepositoryAccountUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~createRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.createRepositoryAccountUsingPOST = function (userId, credentials, callback) {
+    this.createRepositoryAccount = function (userId, credentials) {
       var postBody = credentials;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling createRepositoryAccountUsingPOST";
+        throw "Missing the required parameter 'userId' when calling createRepositoryAccount";
       }
 
       // verify the required parameter 'credentials' is set
       if (credentials == undefined || credentials == null) {
-        throw "Missing the required parameter 'credentials' when calling createRepositoryAccountUsingPOST";
+        throw "Missing the required parameter 'credentials' when calling createRepositoryAccount";
       }
 
       var pathParams = {
@@ -42467,12 +42215,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/integration/box/{userId}/account', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/box/{userId}/account', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the deleteRepositoryAccountUsingDELETE operation.
-     * @callback module:api/IntegrationApi~deleteRepositoryAccountUsingDELETECallback
+     * Callback function to receive the result of the deleteRepositoryAccount operation.
+     * @callback module:api/IntegrationApi~deleteRepositoryAccountCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -42481,14 +42229,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Delete Box account
      * @param {Integer} userId userId
-     * @param {module:api/IntegrationApi~deleteRepositoryAccountUsingDELETECallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~deleteRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteRepositoryAccountUsingDELETE = function (userId, callback) {
+    this.deleteRepositoryAccount = function (userId) {
       var postBody = null;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling deleteRepositoryAccountUsingDELETE";
+        throw "Missing the required parameter 'userId' when calling deleteRepositoryAccount";
       }
 
       var pathParams = {
@@ -42503,12 +42251,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/integration/box/{userId}/account', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/box/{userId}/account', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getAllNetworksUsingGET operation.
-     * @callback module:api/IntegrationApi~getAllNetworksUsingGETCallback
+     * Callback function to receive the result of the getAllNetworks operation.
+     * @callback module:api/IntegrationApi~getAllNetworksCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42516,10 +42264,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * List Alfresco networks
-     * @param {module:api/IntegrationApi~getAllNetworksUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~getAllNetworksCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAllNetworksUsingGET = function (callback) {
+    this.getAllNetworks = function (callback) {
       var postBody = null;
 
       var pathParams = {};
@@ -42532,12 +42280,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/networks', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/networks', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getAllSitesUsingGET operation.
-     * @callback module:api/IntegrationApi~getAllSitesUsingGETCallback
+     * Callback function to receive the result of the getAllSites operation.
+     * @callback module:api/IntegrationApi~getAllSitesCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42547,15 +42295,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List Alfresco sites
      * Returns ALL Sites
      * @param {String} networkId networkId
-     * @param {module:api/IntegrationApi~getAllSitesUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~getAllSitesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAllSitesUsingGET = function (networkId, callback) {
+    this.getAllSites = function (networkId) {
       var postBody = null;
 
       // verify the required parameter 'networkId' is set
       if (networkId == undefined || networkId == null) {
-        throw "Missing the required parameter 'networkId' when calling getAllSitesUsingGET";
+        throw "Missing the required parameter 'networkId' when calling getAllSites";
       }
 
       var pathParams = {
@@ -42570,12 +42318,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getAllSitesUsingGET1 operation.
-     * @callback module:api/IntegrationApi~getAllSitesUsingGET1Callback
+     * Callback function to receive the result of the getAllSites operation.
+     * @callback module:api/IntegrationApi~getAllSitesCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42585,15 +42333,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List Alfresco sites
      * Returns ALL Sites
      * @param {String} repositoryId repositoryId
-     * @param {module:api/IntegrationApi~getAllSitesUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~getAllSitesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAllSitesUsingGET1 = function (repositoryId, callback) {
+    this.getAllSites = function (repositoryId) {
       var postBody = null;
 
       // verify the required parameter 'repositoryId' is set
       if (repositoryId == undefined || repositoryId == null) {
-        throw "Missing the required parameter 'repositoryId' when calling getAllSitesUsingGET1";
+        throw "Missing the required parameter 'repositoryId' when calling getAllSites";
       }
 
       var pathParams = {
@@ -42608,12 +42356,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/integration/alfresco/{repositoryId}/sites', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/alfresco/{repositoryId}/sites', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getBoxPluginStatusUsingGET operation.
-     * @callback module:api/IntegrationApi~getBoxPluginStatusUsingGETCallback
+     * Callback function to receive the result of the getBoxPluginStatus operation.
+     * @callback module:api/IntegrationApi~getBoxPluginStatusCallback
      * @param {String} error Error message, if any.
      * @param {'Boolean'} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42621,10 +42369,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * Retrieve if Box Integration is enabled
-     * @param {module:api/IntegrationApi~getBoxPluginStatusUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~getBoxPluginStatusCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {'Boolean'}
      */
-    this.getBoxPluginStatusUsingGET = function (callback) {
+    this.getBoxPluginStatus = function (callback) {
       var postBody = null;
 
       var pathParams = {};
@@ -42637,12 +42385,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = 'Boolean';
 
-      return this.apiClient.callApi('/api/enterprise/integration/box/status', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/box/status', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getContentInFolderUsingGET operation.
-     * @callback module:api/IntegrationApi~getContentInFolderUsingGETCallback
+     * Callback function to receive the result of the getContentInFolder operation.
+     * @callback module:api/IntegrationApi~getContentInFolderCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42652,20 +42400,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List file &amp; folders inside a specific folder
      * @param {String} networkId networkId
      * @param {String} folderId folderId
-     * @param {module:api/IntegrationApi~getContentInFolderUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~getContentInFolderCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getContentInFolderUsingGET = function (networkId, folderId, callback) {
+    this.getContentInFolder = function (networkId, folderId) {
       var postBody = null;
 
       // verify the required parameter 'networkId' is set
       if (networkId == undefined || networkId == null) {
-        throw "Missing the required parameter 'networkId' when calling getContentInFolderUsingGET";
+        throw "Missing the required parameter 'networkId' when calling getContentInFolder";
       }
 
       // verify the required parameter 'folderId' is set
       if (folderId == undefined || folderId == null) {
-        throw "Missing the required parameter 'folderId' when calling getContentInFolderUsingGET";
+        throw "Missing the required parameter 'folderId' when calling getContentInFolder";
       }
 
       var pathParams = {
@@ -42681,12 +42429,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/networks/{networkId}/folders/{folderId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/networks/{networkId}/folders/{folderId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getContentInFolderUsingGET1 operation.
-     * @callback module:api/IntegrationApi~getContentInFolderUsingGET1Callback
+     * Callback function to receive the result of the getContentInFolder operation.
+     * @callback module:api/IntegrationApi~getContentInFolderCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42696,20 +42444,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List file &amp; folders inside a specific folder
      * @param {String} repositoryId repositoryId
      * @param {String} folderId folderId
-     * @param {module:api/IntegrationApi~getContentInFolderUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~getContentInFolderCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getContentInFolderUsingGET1 = function (repositoryId, folderId, callback) {
+    this.getContentInFolder = function (repositoryId, folderId) {
       var postBody = null;
 
       // verify the required parameter 'repositoryId' is set
       if (repositoryId == undefined || repositoryId == null) {
-        throw "Missing the required parameter 'repositoryId' when calling getContentInFolderUsingGET1";
+        throw "Missing the required parameter 'repositoryId' when calling getContentInFolder";
       }
 
       // verify the required parameter 'folderId' is set
       if (folderId == undefined || folderId == null) {
-        throw "Missing the required parameter 'folderId' when calling getContentInFolderUsingGET1";
+        throw "Missing the required parameter 'folderId' when calling getContentInFolder";
       }
 
       var pathParams = {
@@ -42725,12 +42473,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/integration/alfresco/{repositoryId}/folders/{folderId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/alfresco/{repositoryId}/folders/{folderId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getContentInSiteUsingGET operation.
-     * @callback module:api/IntegrationApi~getContentInSiteUsingGETCallback
+     * Callback function to receive the result of the getContentInSite operation.
+     * @callback module:api/IntegrationApi~getContentInSiteCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42740,20 +42488,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List file &amp; folders inside a specific site
      * @param {String} networkId networkId
      * @param {String} siteId siteId
-     * @param {module:api/IntegrationApi~getContentInSiteUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~getContentInSiteCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getContentInSiteUsingGET = function (networkId, siteId, callback) {
+    this.getContentInSite = function (networkId, siteId) {
       var postBody = null;
 
       // verify the required parameter 'networkId' is set
       if (networkId == undefined || networkId == null) {
-        throw "Missing the required parameter 'networkId' when calling getContentInSiteUsingGET";
+        throw "Missing the required parameter 'networkId' when calling getContentInSite";
       }
 
       // verify the required parameter 'siteId' is set
       if (siteId == undefined || siteId == null) {
-        throw "Missing the required parameter 'siteId' when calling getContentInSiteUsingGET";
+        throw "Missing the required parameter 'siteId' when calling getContentInSite";
       }
 
       var pathParams = {
@@ -42769,12 +42517,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getContentInSiteUsingGET1 operation.
-     * @callback module:api/IntegrationApi~getContentInSiteUsingGET1Callback
+     * Callback function to receive the result of the getContentInSite operation.
+     * @callback module:api/IntegrationApi~getContentInSiteCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42784,20 +42532,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List file &amp; folders inside a specific site
      * @param {String} repositoryId repositoryId
      * @param {String} siteId siteId
-     * @param {module:api/IntegrationApi~getContentInSiteUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~getContentInSiteCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getContentInSiteUsingGET1 = function (repositoryId, siteId, callback) {
+    this.getContentInSite = function (repositoryId, siteId) {
       var postBody = null;
 
       // verify the required parameter 'repositoryId' is set
       if (repositoryId == undefined || repositoryId == null) {
-        throw "Missing the required parameter 'repositoryId' when calling getContentInSiteUsingGET1";
+        throw "Missing the required parameter 'repositoryId' when calling getContentInSite";
       }
 
       // verify the required parameter 'siteId' is set
       if (siteId == undefined || siteId == null) {
-        throw "Missing the required parameter 'siteId' when calling getContentInSiteUsingGET1";
+        throw "Missing the required parameter 'siteId' when calling getContentInSite";
       }
 
       var pathParams = {
@@ -42813,12 +42561,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/integration/alfresco/{repositoryId}/sites/{siteId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/alfresco/{repositoryId}/sites/{siteId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getFilesUsingGET operation.
-     * @callback module:api/IntegrationApi~getFilesUsingGETCallback
+     * Callback function to receive the result of the getFiles operation.
+     * @callback module:api/IntegrationApi~getFilesCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42829,10 +42577,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Object} opts Optional parameters
      * @param {String} opts.filter filter
      * @param {String} opts.parent parent
-     * @param {module:api/IntegrationApi~getFilesUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~getFilesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getFilesUsingGET = function (opts, callback) {
+    this.getFiles = function (opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -42849,12 +42597,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/integration/box/files', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/box/files', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getFilesUsingGET1 operation.
-     * @callback module:api/IntegrationApi~getFilesUsingGET1Callback
+     * Callback function to receive the result of the getFiles operation.
+     * @callback module:api/IntegrationApi~getFilesCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42866,10 +42614,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {String} opts.filter filter
      * @param {String} opts.parent parent
      * @param {Boolean} opts.currentFolderOnly currentFolderOnly
-     * @param {module:api/IntegrationApi~getFilesUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~getFilesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getFilesUsingGET1 = function (opts, callback) {
+    this.getFiles = function (opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -42887,12 +42635,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/integration/google-drive/files', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/google-drive/files', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getRepositoriesUsingGET operation.
-     * @callback module:api/IntegrationApi~getRepositoriesUsingGETCallback
+     * Callback function to receive the result of the getRepositories operation.
+     * @callback module:api/IntegrationApi~getRepositoriesCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42904,10 +42652,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.tenantId tenantId
      * @param {Boolean} opts.includeAccounts includeAccounts
-     * @param {module:api/IntegrationApi~getRepositoriesUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~getRepositoriesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getRepositoriesUsingGET = function (opts, callback) {
+    this.getRepositories = function (opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -42924,12 +42672,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/profile/accounts/alfresco', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/profile/accounts/alfresco', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getRepositoryAccountUsingGET operation.
-     * @callback module:api/IntegrationApi~getRepositoryAccountUsingGETCallback
+     * Callback function to receive the result of the getRepositoryAccount operation.
+     * @callback module:api/IntegrationApi~getRepositoryAccountCallback
      * @param {String} error Error message, if any.
      * @param {module:model/BoxUserAccountCredentialsRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42938,15 +42686,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * List Box Account
      * @param {Integer} userId userId
-     * @param {module:api/IntegrationApi~getRepositoryAccountUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~getRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/BoxUserAccountCredentialsRepresentation}
      */
-    this.getRepositoryAccountUsingGET = function (userId, callback) {
+    this.getRepositoryAccount = function (userId) {
       var postBody = null;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling getRepositoryAccountUsingGET";
+        throw "Missing the required parameter 'userId' when calling getRepositoryAccount";
       }
 
       var pathParams = {
@@ -42961,12 +42709,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = BoxUserAccountCredentialsRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/integration/box/{userId}/account', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/box/{userId}/account', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the updateRepositoryAccountUsingPUT operation.
-     * @callback module:api/IntegrationApi~updateRepositoryAccountUsingPUTCallback
+     * Callback function to receive the result of the updateRepositoryAccount operation.
+     * @callback module:api/IntegrationApi~updateRepositoryAccountCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -42976,19 +42724,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Update Box account
      * @param {Integer} userId userId
      * @param {module:model/UserAccountCredentialsRepresentation} credentials credentials
-     * @param {module:api/IntegrationApi~updateRepositoryAccountUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationApi~updateRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.updateRepositoryAccountUsingPUT = function (userId, credentials, callback) {
+    this.updateRepositoryAccount = function (userId, credentials) {
       var postBody = credentials;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling updateRepositoryAccountUsingPUT";
+        throw "Missing the required parameter 'userId' when calling updateRepositoryAccount";
       }
 
       // verify the required parameter 'credentials' is set
       if (credentials == undefined || credentials == null) {
-        throw "Missing the required parameter 'credentials' when calling updateRepositoryAccountUsingPUT";
+        throw "Missing the required parameter 'credentials' when calling updateRepositoryAccount";
       }
 
       var pathParams = {
@@ -43003,14 +42751,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/integration/box/{userId}/account', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/box/{userId}/account', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/BoxUserAccountCredentialsRepresentation":191,"../model/ResultListDataRepresentation":241,"../model/UserAccountCredentialsRepresentation":252}],157:[function(require,module,exports){
+},{"../ApiClient":136,"../model/BoxUserAccountCredentialsRepresentation":190,"../model/ResultListDataRepresentation":240,"../model/UserAccountCredentialsRepresentation":251}],156:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -43039,7 +42787,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new IntegrationBoxApi. 
+   * Constructs a new IntegrationBoxApi.
    * @alias module:api/IntegrationBoxApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -43050,8 +42798,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the confirmAuthorisationUsingGET1 operation.
-     * @callback module:api/IntegrationBoxApi~confirmAuthorisationUsingGET1Callback
+     * Callback function to receive the result of the confirmAuthorisation operation.
+     * @callback module:api/IntegrationBoxApi~confirmAuthorisationCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -43061,14 +42809,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Box Authorization
      * Returns Box Oauth HTML Page
      * @param {String} code code
-     * @param {module:api/IntegrationBoxApi~confirmAuthorisationUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationBoxApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.confirmAuthorisationUsingGET1 = function (code, callback) {
+    this.confirmAuthorisation = function (code) {
       var postBody = null;
 
       // verify the required parameter 'code' is set
       if (code == undefined || code == null) {
-        throw "Missing the required parameter 'code' when calling confirmAuthorisationUsingGET1";
+        throw "Missing the required parameter 'code' when calling confirmAuthorisation";
       }
 
       var pathParams = {};
@@ -43083,12 +42831,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['text/html', 'application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/integration/box/confirm-auth-request', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/box/confirm-auth-request', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the createRepositoryAccountUsingPOST operation.
-     * @callback module:api/IntegrationBoxApi~createRepositoryAccountUsingPOSTCallback
+     * Callback function to receive the result of the createRepositoryAccount operation.
+     * @callback module:api/IntegrationBoxApi~createRepositoryAccountCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -43098,19 +42846,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Create Box account
      * @param {Integer} userId userId
      * @param {module:model/UserAccountCredentialsRepresentation} credentials credentials
-     * @param {module:api/IntegrationBoxApi~createRepositoryAccountUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationBoxApi~createRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.createRepositoryAccountUsingPOST = function (userId, credentials, callback) {
+    this.createRepositoryAccount = function (userId, credentials) {
       var postBody = credentials;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling createRepositoryAccountUsingPOST";
+        throw "Missing the required parameter 'userId' when calling createRepositoryAccount";
       }
 
       // verify the required parameter 'credentials' is set
       if (credentials == undefined || credentials == null) {
-        throw "Missing the required parameter 'credentials' when calling createRepositoryAccountUsingPOST";
+        throw "Missing the required parameter 'credentials' when calling createRepositoryAccount";
       }
 
       var pathParams = {
@@ -43125,12 +42873,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/integration/box/{userId}/account', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/box/{userId}/account', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the deleteRepositoryAccountUsingDELETE operation.
-     * @callback module:api/IntegrationBoxApi~deleteRepositoryAccountUsingDELETECallback
+     * Callback function to receive the result of the deleteRepositoryAccount operation.
+     * @callback module:api/IntegrationBoxApi~deleteRepositoryAccountCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -43139,14 +42887,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Delete Box account
      * @param {Integer} userId userId
-     * @param {module:api/IntegrationBoxApi~deleteRepositoryAccountUsingDELETECallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationBoxApi~deleteRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteRepositoryAccountUsingDELETE = function (userId, callback) {
+    this.deleteRepositoryAccount = function (userId) {
       var postBody = null;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling deleteRepositoryAccountUsingDELETE";
+        throw "Missing the required parameter 'userId' when calling deleteRepositoryAccount";
       }
 
       var pathParams = {
@@ -43161,12 +42909,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/integration/box/{userId}/account', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/box/{userId}/account', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getBoxPluginStatusUsingGET operation.
-     * @callback module:api/IntegrationBoxApi~getBoxPluginStatusUsingGETCallback
+     * Callback function to receive the result of the getBoxPluginStatus operation.
+     * @callback module:api/IntegrationBoxApi~getBoxPluginStatusCallback
      * @param {String} error Error message, if any.
      * @param {'Boolean'} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43174,10 +42922,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * Retrieve if Box Integration is enabled
-     * @param {module:api/IntegrationBoxApi~getBoxPluginStatusUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationBoxApi~getBoxPluginStatusCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {'Boolean'}
      */
-    this.getBoxPluginStatusUsingGET = function (callback) {
+    this.getBoxPluginStatus = function (callback) {
       var postBody = null;
 
       var pathParams = {};
@@ -43190,12 +42938,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = 'Boolean';
 
-      return this.apiClient.callApi('/api/enterprise/integration/box/status', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/box/status', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getFilesUsingGET operation.
-     * @callback module:api/IntegrationBoxApi~getFilesUsingGETCallback
+     * Callback function to receive the result of the getFiles operation.
+     * @callback module:api/IntegrationBoxApi~getFilesCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43206,10 +42954,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Object} opts Optional parameters
      * @param {String} opts.filter filter
      * @param {String} opts.parent parent
-     * @param {module:api/IntegrationBoxApi~getFilesUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationBoxApi~getFilesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getFilesUsingGET = function (opts, callback) {
+    this.getFiles = function (opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -43226,12 +42974,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/integration/box/files', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/box/files', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getRepositoryAccountUsingGET operation.
-     * @callback module:api/IntegrationBoxApi~getRepositoryAccountUsingGETCallback
+     * Callback function to receive the result of the getRepositoryAccount operation.
+     * @callback module:api/IntegrationBoxApi~getRepositoryAccountCallback
      * @param {String} error Error message, if any.
      * @param {module:model/BoxUserAccountCredentialsRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43240,15 +42988,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * List Box Account
      * @param {Integer} userId userId
-     * @param {module:api/IntegrationBoxApi~getRepositoryAccountUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationBoxApi~getRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/BoxUserAccountCredentialsRepresentation}
      */
-    this.getRepositoryAccountUsingGET = function (userId, callback) {
+    this.getRepositoryAccount = function (userId) {
       var postBody = null;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling getRepositoryAccountUsingGET";
+        throw "Missing the required parameter 'userId' when calling getRepositoryAccount";
       }
 
       var pathParams = {
@@ -43263,12 +43011,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = BoxUserAccountCredentialsRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/integration/box/{userId}/account', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/box/{userId}/account', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the updateRepositoryAccountUsingPUT operation.
-     * @callback module:api/IntegrationBoxApi~updateRepositoryAccountUsingPUTCallback
+     * Callback function to receive the result of the updateRepositoryAccount operation.
+     * @callback module:api/IntegrationBoxApi~updateRepositoryAccountCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -43278,19 +43026,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Update Box account
      * @param {Integer} userId userId
      * @param {module:model/UserAccountCredentialsRepresentation} credentials credentials
-     * @param {module:api/IntegrationBoxApi~updateRepositoryAccountUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationBoxApi~updateRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.updateRepositoryAccountUsingPUT = function (userId, credentials, callback) {
+    this.updateRepositoryAccount = function (userId, credentials) {
       var postBody = credentials;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling updateRepositoryAccountUsingPUT";
+        throw "Missing the required parameter 'userId' when calling updateRepositoryAccount";
       }
 
       // verify the required parameter 'credentials' is set
       if (credentials == undefined || credentials == null) {
-        throw "Missing the required parameter 'credentials' when calling updateRepositoryAccountUsingPUT";
+        throw "Missing the required parameter 'credentials' when calling updateRepositoryAccount";
       }
 
       var pathParams = {
@@ -43305,14 +43053,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/integration/box/{userId}/account', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/box/{userId}/account', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/BoxUserAccountCredentialsRepresentation":191,"../model/ResultListDataRepresentation":241,"../model/UserAccountCredentialsRepresentation":252}],158:[function(require,module,exports){
+},{"../ApiClient":136,"../model/BoxUserAccountCredentialsRepresentation":190,"../model/ResultListDataRepresentation":240,"../model/UserAccountCredentialsRepresentation":251}],157:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -43341,7 +43089,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new IntegrationDriveApi. 
+   * Constructs a new IntegrationDriveApi.
    * @alias module:api/IntegrationDriveApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -43352,8 +43100,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the confirmAuthorisationUsingGET2 operation.
-     * @callback module:api/IntegrationDriveApi~confirmAuthorisationUsingGET2Callback
+     * Callback function to receive the result of the confirmAuthorisation operation.
+     * @callback module:api/IntegrationDriveApi~confirmAuthorisationCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -43363,14 +43111,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Drive Authorization
      * Returns Drive Oauth HTML Page
      * @param {String} code code
-     * @param {module:api/IntegrationDriveApi~confirmAuthorisationUsingGET2Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationDriveApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.confirmAuthorisationUsingGET2 = function (code, callback) {
+    this.confirmAuthorisation = function (code) {
       var postBody = null;
 
       // verify the required parameter 'code' is set
       if (code == undefined || code == null) {
-        throw "Missing the required parameter 'code' when calling confirmAuthorisationUsingGET2";
+        throw "Missing the required parameter 'code' when calling confirmAuthorisation";
       }
 
       var pathParams = {};
@@ -43385,12 +43133,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['text/html', 'application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/integration/google-drive/confirm-auth-request', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/google-drive/confirm-auth-request', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getFilesUsingGET1 operation.
-     * @callback module:api/IntegrationDriveApi~getFilesUsingGET1Callback
+     * Callback function to receive the result of the getFiles operation.
+     * @callback module:api/IntegrationDriveApi~getFilesCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43402,10 +43150,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {String} opts.filter filter
      * @param {String} opts.parent parent
      * @param {Boolean} opts.currentFolderOnly currentFolderOnly
-     * @param {module:api/IntegrationDriveApi~getFilesUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/IntegrationDriveApi~getFilesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getFilesUsingGET1 = function (opts, callback) {
+    this.getFiles = function (opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -43423,14 +43171,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/integration/google-drive/files', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/integration/google-drive/files', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/ResultListDataRepresentation":241}],159:[function(require,module,exports){
+},{"../ApiClient":136,"../model/ResultListDataRepresentation":240}],158:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -43459,7 +43207,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new ModelBpmnApi. 
+   * Constructs a new ModelBpmnApi.
    * @alias module:api/ModelBpmnApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -43470,8 +43218,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getHistoricProcessModelBpmn20XmlUsingGET operation.
-     * @callback module:api/ModelBpmnApi~getHistoricProcessModelBpmn20XmlUsingGETCallback
+     * Callback function to receive the result of the getHistoricProcessModelBpmn20Xml operation.
+     * @callback module:api/ModelBpmnApi~getHistoricProcessModelBpmn20XmlCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -43481,19 +43229,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Export a previous process definition model to a BPMN 2.0 xml file
      * @param {Integer} processModelId processModelId
      * @param {Integer} processModelHistoryId processModelHistoryId
-     * @param {module:api/ModelBpmnApi~getHistoricProcessModelBpmn20XmlUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelBpmnApi~getHistoricProcessModelBpmn20XmlCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.getHistoricProcessModelBpmn20XmlUsingGET = function (processModelId, processModelHistoryId, callback) {
+    this.getHistoricProcessModelBpmn20Xml = function (processModelId, processModelHistoryId) {
       var postBody = null;
 
       // verify the required parameter 'processModelId' is set
       if (processModelId == undefined || processModelId == null) {
-        throw "Missing the required parameter 'processModelId' when calling getHistoricProcessModelBpmn20XmlUsingGET";
+        throw "Missing the required parameter 'processModelId' when calling getHistoricProcessModelBpmn20Xml";
       }
 
       // verify the required parameter 'processModelHistoryId' is set
       if (processModelHistoryId == undefined || processModelHistoryId == null) {
-        throw "Missing the required parameter 'processModelHistoryId' when calling getHistoricProcessModelBpmn20XmlUsingGET";
+        throw "Missing the required parameter 'processModelHistoryId' when calling getHistoricProcessModelBpmn20Xml";
       }
 
       var pathParams = {
@@ -43509,12 +43257,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/models/{processModelId}/history/{processModelHistoryId}/bpmn20', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/models/{processModelId}/history/{processModelHistoryId}/bpmn20', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getProcessModelBpmn20XmlUsingGET operation.
-     * @callback module:api/ModelBpmnApi~getProcessModelBpmn20XmlUsingGETCallback
+     * Callback function to receive the result of the getProcessModelBpmn20Xml operation.
+     * @callback module:api/ModelBpmnApi~getProcessModelBpmn20XmlCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -43523,14 +43271,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Export a process definition model to a BPMN 2.0 xml file
      * @param {Integer} processModelId processModelId
-     * @param {module:api/ModelBpmnApi~getProcessModelBpmn20XmlUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelBpmnApi~getProcessModelBpmn20XmlCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.getProcessModelBpmn20XmlUsingGET = function (processModelId, callback) {
+    this.getProcessModelBpmn20Xml = function (processModelId) {
       var postBody = null;
 
       // verify the required parameter 'processModelId' is set
       if (processModelId == undefined || processModelId == null) {
-        throw "Missing the required parameter 'processModelId' when calling getProcessModelBpmn20XmlUsingGET";
+        throw "Missing the required parameter 'processModelId' when calling getProcessModelBpmn20Xml";
       }
 
       var pathParams = {
@@ -43545,14 +43293,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/models/{processModelId}/bpmn20', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/models/{processModelId}/bpmn20', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137}],160:[function(require,module,exports){
+},{"../ApiClient":136}],159:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -43581,7 +43329,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new ModelsApi. 
+   * Constructs a new ModelsApi.
    * @alias module:api/ModelsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -43592,8 +43340,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the createModelUsingPOST operation.
-     * @callback module:api/ModelsApi~createModelUsingPOSTCallback
+     * Callback function to receive the result of the createModel operation.
+     * @callback module:api/ModelsApi~createModelCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43602,15 +43350,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * To create a new model
      * @param {module:model/ModelRepresentation} modelRepresentation modelRepresentation
-     * @param {module:api/ModelsApi~createModelUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsApi~createModelCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ModelRepresentation}
      */
-    this.createModelUsingPOST = function (modelRepresentation, callback) {
+    this.createModel = function (modelRepresentation) {
       var postBody = modelRepresentation;
 
       // verify the required parameter 'modelRepresentation' is set
       if (modelRepresentation == undefined || modelRepresentation == null) {
-        throw "Missing the required parameter 'modelRepresentation' when calling createModelUsingPOST";
+        throw "Missing the required parameter 'modelRepresentation' when calling createModel";
       }
 
       var pathParams = {};
@@ -43623,12 +43371,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ModelRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/models', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/models', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the deleteModelUsingDELETE operation.
-     * @callback module:api/ModelsApi~deleteModelUsingDELETECallback
+     * Callback function to receive the result of the deleteModel operation.
+     * @callback module:api/ModelsApi~deleteModelCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -43640,15 +43388,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.cascade cascade
      * @param {Boolean} opts.deleteRuntimeApp deleteRuntimeApp
-     * @param {module:api/ModelsApi~deleteModelUsingDELETECallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsApi~deleteModelCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteModelUsingDELETE = function (modelId, opts, callback) {
+    this.deleteModel = function (modelId, opts) {
       opts = opts || {};
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling deleteModelUsingDELETE";
+        throw "Missing the required parameter 'modelId' when calling deleteModel";
       }
 
       var pathParams = {
@@ -43666,12 +43414,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/models/{modelId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/models/{modelId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the duplicateModelUsingPOST operation.
-     * @callback module:api/ModelsApi~duplicateModelUsingPOSTCallback
+     * Callback function to receive the result of the duplicateModel operation.
+     * @callback module:api/ModelsApi~duplicateModelCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43681,20 +43429,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * To duplicate an existing model
      * @param {Integer} modelId modelId
      * @param {module:model/ModelRepresentation} modelRepresentation modelRepresentation
-     * @param {module:api/ModelsApi~duplicateModelUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsApi~duplicateModelCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ModelRepresentation}
      */
-    this.duplicateModelUsingPOST = function (modelId, modelRepresentation, callback) {
+    this.duplicateModel = function (modelId, modelRepresentation) {
       var postBody = modelRepresentation;
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling duplicateModelUsingPOST";
+        throw "Missing the required parameter 'modelId' when calling duplicateModel";
       }
 
       // verify the required parameter 'modelRepresentation' is set
       if (modelRepresentation == undefined || modelRepresentation == null) {
-        throw "Missing the required parameter 'modelRepresentation' when calling duplicateModelUsingPOST";
+        throw "Missing the required parameter 'modelRepresentation' when calling duplicateModel";
       }
 
       var pathParams = {
@@ -43709,12 +43457,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ModelRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/models/{modelId}/clone', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/models/{modelId}/clone', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getModelJSONUsingGET operation.
-     * @callback module:api/ModelsApi~getModelJSONUsingGETCallback
+     * Callback function to receive the result of the getModelJSON operation.
+     * @callback module:api/ModelsApi~getModelJSONCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ObjectNode} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43723,15 +43471,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Get the JSON model
      * @param {Integer} modelId modelId
-     * @param {module:api/ModelsApi~getModelJSONUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsApi~getModelJSONCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ObjectNode}
      */
-    this.getModelJSONUsingGET = function (modelId, callback) {
+    this.getModelJSON = function (modelId) {
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling getModelJSONUsingGET";
+        throw "Missing the required parameter 'modelId' when calling getModelJSON";
       }
 
       var pathParams = {
@@ -43746,12 +43494,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ObjectNode;
 
-      return this.apiClient.callApi('/api/enterprise/models/{modelId}/editor/json', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/models/{modelId}/editor/json', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getModelThumbnailUsingGET operation.
-     * @callback module:api/ModelsApi~getModelThumbnailUsingGETCallback
+     * Callback function to receive the result of the getModelThumbnail operation.
+     * @callback module:api/ModelsApi~getModelThumbnailCallback
      * @param {String} error Error message, if any.
      * @param {Array.<'String'>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43760,15 +43508,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Get Model thumbnail
      * @param {Integer} modelId modelId
-     * @param {module:api/ModelsApi~getModelThumbnailUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsApi~getModelThumbnailCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<'String'>}
      */
-    this.getModelThumbnailUsingGET = function (modelId, callback) {
+    this.getModelThumbnail = function (modelId) {
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling getModelThumbnailUsingGET";
+        throw "Missing the required parameter 'modelId' when calling getModelThumbnail";
       }
 
       var pathParams = {
@@ -43783,12 +43531,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['image/png', 'application/json'];
       var returnType = ['String'];
 
-      return this.apiClient.callApi('/api/enterprise/models/{modelId}/thumbnail', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/models/{modelId}/thumbnail', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getModelUsingGET operation.
-     * @callback module:api/ModelsApi~getModelUsingGETCallback
+     * Callback function to receive the result of the getModel operation.
+     * @callback module:api/ModelsApi~getModelCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43799,16 +43547,16 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Integer} modelId modelId
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.includePermissions includePermissions
-     * @param {module:api/ModelsApi~getModelUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsApi~getModelCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ModelRepresentation}
      */
-    this.getModelUsingGET = function (modelId, opts, callback) {
+    this.getModel = function (modelId, opts) {
       opts = opts || {};
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling getModelUsingGET";
+        throw "Missing the required parameter 'modelId' when calling getModel";
       }
 
       var pathParams = {
@@ -43825,12 +43573,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ModelRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/models/{modelId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/models/{modelId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getModelsToIncludeInAppDefinitionUsingGET operation.
-     * @callback module:api/ModelsApi~getModelsToIncludeInAppDefinitionUsingGETCallback
+     * Callback function to receive the result of the getModelsToIncludeInAppDefinition operation.
+     * @callback module:api/ModelsApi~getModelsToIncludeInAppDefinitionCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43838,10 +43586,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * TODO
-     * @param {module:api/ModelsApi~getModelsToIncludeInAppDefinitionUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsApi~getModelsToIncludeInAppDefinitionCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getModelsToIncludeInAppDefinitionUsingGET = function (callback) {
+    this.getModelsToIncludeInAppDefinition = function (callback) {
       var postBody = null;
 
       var pathParams = {};
@@ -43854,12 +43602,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/models-for-app-definition', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/models-for-app-definition', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getModelsUsingGET operation.
-     * @callback module:api/ModelsApi~getModelsUsingGETCallback
+     * Callback function to receive the result of the getModels operation.
+     * @callback module:api/ModelsApi~getModelsCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43872,10 +43620,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {String} opts.sort sort
      * @param {Integer} opts.modelType modelType
      * @param {Integer} opts.referenceId referenceId
-     * @param {module:api/ModelsApi~getModelsUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsApi~getModelsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getModelsUsingGET = function (opts, callback) {
+    this.getModels = function (opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -43894,12 +43642,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/models', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/models', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the importNewVersionUsingPOST operation.
-     * @callback module:api/ModelsApi~importNewVersionUsingPOSTCallback
+     * Callback function to receive the result of the importNewVersion operation.
+     * @callback module:api/ModelsApi~importNewVersionCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43909,20 +43657,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Create a new model version
      * @param {Integer} modelId modelId
      * @param {File} file file
-     * @param {module:api/ModelsApi~importNewVersionUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsApi~importNewVersionCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ModelRepresentation}
      */
-    this.importNewVersionUsingPOST = function (modelId, file, callback) {
+    this.importNewVersion = function (modelId, file) {
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling importNewVersionUsingPOST";
+        throw "Missing the required parameter 'modelId' when calling importNewVersion";
       }
 
       // verify the required parameter 'file' is set
       if (file == undefined || file == null) {
-        throw "Missing the required parameter 'file' when calling importNewVersionUsingPOST";
+        throw "Missing the required parameter 'file' when calling importNewVersion";
       }
 
       var pathParams = {
@@ -43939,12 +43687,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ModelRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/models/{modelId}/newversion', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/models/{modelId}/newversion', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the importProcessModelUsingPOST operation.
-     * @callback module:api/ModelsApi~importProcessModelUsingPOSTCallback
+     * Callback function to receive the result of the importProcessModel operation.
+     * @callback module:api/ModelsApi~importProcessModelCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43953,15 +43701,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * To import a BPMN 2.0 xml file
      * @param {File} file file
-     * @param {module:api/ModelsApi~importProcessModelUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsApi~importProcessModelCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ModelRepresentation}
      */
-    this.importProcessModelUsingPOST = function (file, callback) {
+    this.importProcessModel = function (file) {
       var postBody = null;
 
       // verify the required parameter 'file' is set
       if (file == undefined || file == null) {
-        throw "Missing the required parameter 'file' when calling importProcessModelUsingPOST";
+        throw "Missing the required parameter 'file' when calling importProcessModel";
       }
 
       var pathParams = {};
@@ -43976,12 +43724,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ModelRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/process-models/import', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-models/import', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the saveModelUsingPOST operation.
-     * @callback module:api/ModelsApi~saveModelUsingPOSTCallback
+     * Callback function to receive the result of the saveModel operation.
+     * @callback module:api/ModelsApi~saveModelCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43991,20 +43739,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Save the JSON model
      * @param {Integer} modelId modelId
      * @param {Object} values values
-     * @param {module:api/ModelsApi~saveModelUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsApi~saveModelCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ModelRepresentation}
      */
-    this.saveModelUsingPOST = function (modelId, values, callback) {
+    this.saveModel = function (modelId, values) {
       var postBody = values;
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling saveModelUsingPOST";
+        throw "Missing the required parameter 'modelId' when calling saveModel";
       }
 
       // verify the required parameter 'values' is set
       if (values == undefined || values == null) {
-        throw "Missing the required parameter 'values' when calling saveModelUsingPOST";
+        throw "Missing the required parameter 'values' when calling saveModel";
       }
 
       var pathParams = {
@@ -44019,12 +43767,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ModelRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/models/{modelId}/editor/json', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/models/{modelId}/editor/json', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the updateModelUsingPUT operation.
-     * @callback module:api/ModelsApi~updateModelUsingPUTCallback
+     * Callback function to receive the result of the updateModel operation.
+     * @callback module:api/ModelsApi~updateModelCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44034,20 +43782,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Edit a specific model
      * @param {Integer} modelId modelId
      * @param {module:model/ModelRepresentation} updatedModel updatedModel
-     * @param {module:api/ModelsApi~updateModelUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsApi~updateModelCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ModelRepresentation}
      */
-    this.updateModelUsingPUT = function (modelId, updatedModel, callback) {
+    this.updateModel = function (modelId, updatedModel) {
       var postBody = updatedModel;
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling updateModelUsingPUT";
+        throw "Missing the required parameter 'modelId' when calling updateModel";
       }
 
       // verify the required parameter 'updatedModel' is set
       if (updatedModel == undefined || updatedModel == null) {
-        throw "Missing the required parameter 'updatedModel' when calling updateModelUsingPUT";
+        throw "Missing the required parameter 'updatedModel' when calling updateModel";
       }
 
       var pathParams = {
@@ -44062,12 +43810,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ModelRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/models/{modelId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/models/{modelId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the validateModelUsingPOST operation.
-     * @callback module:api/ModelsApi~validateModelUsingPOSTCallback
+     * Callback function to receive the result of the validateModel operation.
+     * @callback module:api/ModelsApi~validateModelCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/ValidationErrorRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44078,16 +43826,16 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Integer} modelId modelId
      * @param {Object} opts Optional parameters
      * @param {Object} opts.values values
-     * @param {module:api/ModelsApi~validateModelUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsApi~validateModelCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/ValidationErrorRepresentation>}
      */
-    this.validateModelUsingPOST = function (modelId, opts, callback) {
+    this.validateModel = function (modelId, opts) {
       opts = opts || {};
       var postBody = opts['values'];
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling validateModelUsingPOST";
+        throw "Missing the required parameter 'modelId' when calling validateModel";
       }
 
       var pathParams = {
@@ -44102,14 +43850,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = [ValidationErrorRepresentation];
 
-      return this.apiClient.callApi('/api/enterprise/models/{modelId}/editor/validate', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/models/{modelId}/editor/validate', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/ModelRepresentation":228,"../model/ObjectNode":229,"../model/ResultListDataRepresentation":241,"../model/ValidationErrorRepresentation":258}],161:[function(require,module,exports){
+},{"../ApiClient":136,"../model/ModelRepresentation":227,"../model/ObjectNode":228,"../model/ResultListDataRepresentation":240,"../model/ValidationErrorRepresentation":257}],160:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -44138,7 +43886,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new ModelsHistoryApi. 
+   * Constructs a new ModelsHistoryApi.
    * @alias module:api/ModelsHistoryApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -44149,8 +43897,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getModelHistoryCollectionUsingGET operation.
-     * @callback module:api/ModelsHistoryApi~getModelHistoryCollectionUsingGETCallback
+     * Callback function to receive the result of the getModelHistoryCollection operation.
+     * @callback module:api/ModelsHistoryApi~getModelHistoryCollectionCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44161,16 +43909,16 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Integer} modelId modelId
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.includeLatestVersion includeLatestVersion
-     * @param {module:api/ModelsHistoryApi~getModelHistoryCollectionUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsHistoryApi~getModelHistoryCollectionCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getModelHistoryCollectionUsingGET = function (modelId, opts, callback) {
+    this.getModelHistoryCollection = function (modelId, opts) {
       opts = opts || {};
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling getModelHistoryCollectionUsingGET";
+        throw "Missing the required parameter 'modelId' when calling getModelHistoryCollection";
       }
 
       var pathParams = {
@@ -44187,12 +43935,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/models/{modelId}/history', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/models/{modelId}/history', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getProcessModelHistoryUsingGET operation.
-     * @callback module:api/ModelsHistoryApi~getProcessModelHistoryUsingGETCallback
+     * Callback function to receive the result of the getProcessModelHistory operation.
+     * @callback module:api/ModelsHistoryApi~getProcessModelHistoryCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44202,20 +43950,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * To get a particular older version of a model
      * @param {Integer} modelId modelId
      * @param {Integer} modelHistoryId modelHistoryId
-     * @param {module:api/ModelsHistoryApi~getProcessModelHistoryUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ModelsHistoryApi~getProcessModelHistoryCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ModelRepresentation}
      */
-    this.getProcessModelHistoryUsingGET = function (modelId, modelHistoryId, callback) {
+    this.getProcessModelHistory = function (modelId, modelHistoryId) {
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling getProcessModelHistoryUsingGET";
+        throw "Missing the required parameter 'modelId' when calling getProcessModelHistory";
       }
 
       // verify the required parameter 'modelHistoryId' is set
       if (modelHistoryId == undefined || modelHistoryId == null) {
-        throw "Missing the required parameter 'modelHistoryId' when calling getProcessModelHistoryUsingGET";
+        throw "Missing the required parameter 'modelHistoryId' when calling getProcessModelHistory";
       }
 
       var pathParams = {
@@ -44231,14 +43979,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ModelRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/models/{modelId}/history/{modelHistoryId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/models/{modelId}/history/{modelHistoryId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/ModelRepresentation":228,"../model/ResultListDataRepresentation":241}],162:[function(require,module,exports){
+},{"../ApiClient":136,"../model/ModelRepresentation":227,"../model/ResultListDataRepresentation":240}],161:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -44267,7 +44015,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new ProcessApi. 
+   * Constructs a new ProcessApi.
    * @alias module:api/ProcessApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -44278,8 +44026,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the deleteProcessInstanceUsingDELETE operation.
-     * @callback module:api/ProcessApi~deleteProcessInstanceUsingDELETECallback
+     * Callback function to receive the result of the deleteProcessInstance operation.
+     * @callback module:api/ProcessApi~deleteProcessInstanceCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -44288,14 +44036,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Delete a process instance
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ProcessApi~deleteProcessInstanceUsingDELETECallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessApi~deleteProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteProcessInstanceUsingDELETE = function (processInstanceId, callback) {
+    this.deleteProcessInstance = function (processInstanceId) {
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling deleteProcessInstanceUsingDELETE";
+        throw "Missing the required parameter 'processInstanceId' when calling deleteProcessInstance";
       }
 
       var pathParams = {
@@ -44310,12 +44058,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the filterProcessInstancesUsingPOST operation.
-     * @callback module:api/ProcessApi~filterProcessInstancesUsingPOSTCallback
+     * Callback function to receive the result of the filterProcessInstances operation.
+     * @callback module:api/ProcessApi~filterProcessInstancesCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44324,15 +44072,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Filter a list of process instances
      * @param {module:model/ProcessInstanceFilterRequestRepresentation} filterRequest filterRequest
-     * @param {module:api/ProcessApi~filterProcessInstancesUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessApi~filterProcessInstancesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.filterProcessInstancesUsingPOST = function (filterRequest, callback) {
+    this.filterProcessInstances = function (filterRequest) {
       var postBody = filterRequest;
 
       // verify the required parameter 'filterRequest' is set
       if (filterRequest == undefined || filterRequest == null) {
-        throw "Missing the required parameter 'filterRequest' when calling filterProcessInstancesUsingPOST";
+        throw "Missing the required parameter 'filterRequest' when calling filterProcessInstances";
       }
 
       var pathParams = {};
@@ -44345,12 +44093,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/process-instances/filter', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-instances/filter', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getProcessDefinitionStartFormUsingGET operation.
-     * @callback module:api/ProcessApi~getProcessDefinitionStartFormUsingGETCallback
+     * Callback function to receive the result of the getProcessDefinitionStartForm operation.
+     * @callback module:api/ProcessApi~getProcessDefinitionStartFormCallback
      * @param {String} error Error message, if any.
      * @param {module:model/FormDefinitionRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44358,10 +44106,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * Retrieve the start form for a process definition
-     * @param {module:api/ProcessApi~getProcessDefinitionStartFormUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessApi~getProcessDefinitionStartFormCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/FormDefinitionRepresentation}
      */
-    this.getProcessDefinitionStartFormUsingGET = function (callback) {
+    this.getProcessDefinitionStartForm = function (callback) {
       var postBody = null;
 
       var pathParams = {};
@@ -44374,12 +44122,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = FormDefinitionRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/process-definitions/{processDefinitionId}/start-form', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-definitions/{processDefinitionId}/start-form', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getProcessDefinitionsUsingGET operation.
-     * @callback module:api/ProcessApi~getProcessDefinitionsUsingGETCallback
+     * Callback function to receive the result of the getProcessDefinitions operation.
+     * @callback module:api/ProcessApi~getProcessDefinitionsCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44391,10 +44139,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.latest latest
      * @param {Integer} opts.appDefinitionId appDefinitionId
-     * @param {module:api/ProcessApi~getProcessDefinitionsUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessApi~getProcessDefinitionsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getProcessDefinitionsUsingGET = function (opts, callback) {
+    this.getProcessDefinitions = function (opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -44411,12 +44159,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/process-definitions', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-definitions', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getProcessInstanceContentUsingGET operation.
-     * @callback module:api/ProcessApi~getProcessInstanceContentUsingGETCallback
+     * Callback function to receive the result of the getProcessInstanceContent operation.
+     * @callback module:api/ProcessApi~getProcessInstanceContentCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44425,15 +44173,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve content attached to process instance fields
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ProcessApi~getProcessInstanceContentUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessApi~getProcessInstanceContentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getProcessInstanceContentUsingGET = function (processInstanceId, callback) {
+    this.getProcessInstanceContent = function (processInstanceId) {
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceContentUsingGET";
+        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceContent";
       }
 
       var pathParams = {
@@ -44448,12 +44196,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}/field-content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}/field-content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getProcessInstanceStartFormUsingGET operation.
-     * @callback module:api/ProcessApi~getProcessInstanceStartFormUsingGETCallback
+     * Callback function to receive the result of the getProcessInstanceStartForm operation.
+     * @callback module:api/ProcessApi~getProcessInstanceStartFormCallback
      * @param {String} error Error message, if any.
      * @param {module:model/FormDefinitionRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44463,15 +44211,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Get process start form
      * When a process definitions has a start form (hasStartForm is true in the call above), the start form can be retrieved
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ProcessApi~getProcessInstanceStartFormUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessApi~getProcessInstanceStartFormCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/FormDefinitionRepresentation}
      */
-    this.getProcessInstanceStartFormUsingGET = function (processInstanceId, callback) {
+    this.getProcessInstanceStartForm = function (processInstanceId) {
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceStartFormUsingGET";
+        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceStartForm";
       }
 
       var pathParams = {
@@ -44486,12 +44234,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = FormDefinitionRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}/start-form', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}/start-form', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getProcessInstanceUsingGET operation.
-     * @callback module:api/ProcessApi~getProcessInstanceUsingGETCallback
+     * Callback function to receive the result of the getProcessInstance operation.
+     * @callback module:api/ProcessApi~getProcessInstanceCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ProcessInstanceRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44500,15 +44248,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve a process instance information
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ProcessApi~getProcessInstanceUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessApi~getProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ProcessInstanceRepresentation}
      */
-    this.getProcessInstanceUsingGET = function (processInstanceId, callback) {
+    this.getProcessInstance = function (processInstanceId) {
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceUsingGET";
+        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstance";
       }
 
       var pathParams = {
@@ -44523,12 +44271,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ProcessInstanceRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getProcessInstancesUsingPOST operation.
-     * @callback module:api/ProcessApi~getProcessInstancesUsingPOSTCallback
+     * Callback function to receive the result of the getProcessInstances operation.
+     * @callback module:api/ProcessApi~getProcessInstancesCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44537,15 +44285,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve a list of process instances
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/ProcessApi~getProcessInstancesUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessApi~getProcessInstancesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getProcessInstancesUsingPOST = function (requestNode, callback) {
+    this.getProcessInstances = function (requestNode) {
       var postBody = requestNode;
 
       // verify the required parameter 'requestNode' is set
       if (requestNode == undefined || requestNode == null) {
-        throw "Missing the required parameter 'requestNode' when calling getProcessInstancesUsingPOST";
+        throw "Missing the required parameter 'requestNode' when calling getProcessInstances";
       }
 
       var pathParams = {};
@@ -44558,12 +44306,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/process-instances/query', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-instances/query', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getRestFieldValuesUsingGET operation.
-     * @callback module:api/ProcessApi~getRestFieldValuesUsingGETCallback
+     * Callback function to receive the result of the getRestFieldValues operation.
+     * @callback module:api/ProcessApi~getRestFieldValuesCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/FormValueRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44571,10 +44319,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * Retrieve field values (eg. the typeahead field)
-     * @param {module:api/ProcessApi~getRestFieldValuesUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessApi~getRestFieldValuesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/FormValueRepresentation>}
      */
-    this.getRestFieldValuesUsingGET = function (callback) {
+    this.getRestFieldValues = function (callback) {
       var postBody = null;
 
       var pathParams = {};
@@ -44587,12 +44335,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = [FormValueRepresentation];
 
-      return this.apiClient.callApi('/api/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getRestTableFieldValuesUsingGET operation.
-     * @callback module:api/ProcessApi~getRestTableFieldValuesUsingGETCallback
+     * Callback function to receive the result of the getRestTableFieldValues operation.
+     * @callback module:api/ProcessApi~getRestTableFieldValuesCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/FormValueRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44600,10 +44348,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * Retrieve field values (eg. the table field)
-     * @param {module:api/ProcessApi~getRestTableFieldValuesUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessApi~getRestTableFieldValuesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/FormValueRepresentation>}
      */
-    this.getRestTableFieldValuesUsingGET = function (callback) {
+    this.getRestTableFieldValues = function (callback) {
       var postBody = null;
 
       var pathParams = {};
@@ -44616,12 +44364,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = [FormValueRepresentation];
 
-      return this.apiClient.callApi('/api/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field}/{column}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field}/{column}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the startNewProcessInstanceUsingPOST operation.
-     * @callback module:api/ProcessApi~startNewProcessInstanceUsingPOSTCallback
+     * Callback function to receive the result of the startNewProcessInstance operation.
+     * @callback module:api/ProcessApi~startNewProcessInstanceCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ProcessInstanceRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44630,15 +44378,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Start a process instance
      * @param {module:model/CreateProcessInstanceRepresentation} startRequest startRequest
-     * @param {module:api/ProcessApi~startNewProcessInstanceUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessApi~startNewProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ProcessInstanceRepresentation}
      */
-    this.startNewProcessInstanceUsingPOST = function (startRequest, callback) {
+    this.startNewProcessInstance = function (startRequest) {
       var postBody = startRequest;
 
       // verify the required parameter 'startRequest' is set
       if (startRequest == undefined || startRequest == null) {
-        throw "Missing the required parameter 'startRequest' when calling startNewProcessInstanceUsingPOST";
+        throw "Missing the required parameter 'startRequest' when calling startNewProcessInstance";
       }
 
       var pathParams = {};
@@ -44651,14 +44399,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ProcessInstanceRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/process-instances', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-instances', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/CreateProcessInstanceRepresentation":199,"../model/FormDefinitionRepresentation":207,"../model/FormValueRepresentation":215,"../model/ObjectNode":229,"../model/ProcessInstanceFilterRequestRepresentation":232,"../model/ProcessInstanceRepresentation":233,"../model/ResultListDataRepresentation":241}],163:[function(require,module,exports){
+},{"../ApiClient":136,"../model/CreateProcessInstanceRepresentation":198,"../model/FormDefinitionRepresentation":206,"../model/FormValueRepresentation":214,"../model/ObjectNode":228,"../model/ProcessInstanceFilterRequestRepresentation":231,"../model/ProcessInstanceRepresentation":232,"../model/ResultListDataRepresentation":240}],162:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -44687,7 +44435,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new ProcessDefinitionsApi. 
+   * Constructs a new ProcessDefinitionsApi.
    * @alias module:api/ProcessDefinitionsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -44698,8 +44446,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getProcessDefinitionsUsingGET operation.
-     * @callback module:api/ProcessDefinitionsApi~getProcessDefinitionsUsingGETCallback
+     * Callback function to receive the result of the getProcessDefinitions operation.
+     * @callback module:api/ProcessDefinitionsApi~getProcessDefinitionsCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44711,10 +44459,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.latest latest
      * @param {Integer} opts.appDefinitionId appDefinitionId
-     * @param {module:api/ProcessDefinitionsApi~getProcessDefinitionsUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessDefinitionsApi~getProcessDefinitionsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getProcessDefinitionsUsingGET = function (opts, callback) {
+    this.getProcessDefinitions = function (opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -44731,14 +44479,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/process-definitions', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-definitions', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/ResultListDataRepresentation":241}],164:[function(require,module,exports){
+},{"../ApiClient":136,"../model/ResultListDataRepresentation":240}],163:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -44767,7 +44515,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new ProcessDefinitionsFormApi. 
+   * Constructs a new ProcessDefinitionsFormApi.
    * @alias module:api/ProcessDefinitionsFormApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -44778,8 +44526,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getProcessDefinitionStartFormUsingGET operation.
-     * @callback module:api/ProcessDefinitionsFormApi~getProcessDefinitionStartFormUsingGETCallback
+     * Callback function to receive the result of the getProcessDefinitionStartForm operation.
+     * @callback module:api/ProcessDefinitionsFormApi~getProcessDefinitionStartFormCallback
      * @param {String} error Error message, if any.
      * @param {module:model/FormDefinitionRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44787,10 +44535,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * Retrieve the start form for a process definition
-     * @param {module:api/ProcessDefinitionsFormApi~getProcessDefinitionStartFormUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessDefinitionsFormApi~getProcessDefinitionStartFormCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/FormDefinitionRepresentation}
      */
-    this.getProcessDefinitionStartFormUsingGET = function (callback) {
+    this.getProcessDefinitionStartForm = function (callback) {
       var postBody = null;
 
       var pathParams = {};
@@ -44803,12 +44551,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = FormDefinitionRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/process-definitions/{processDefinitionId}/start-form', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-definitions/{processDefinitionId}/start-form', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getRestFieldValuesUsingGET operation.
-     * @callback module:api/ProcessDefinitionsFormApi~getRestFieldValuesUsingGETCallback
+     * Callback function to receive the result of the getRestFieldValues operation.
+     * @callback module:api/ProcessDefinitionsFormApi~getRestFieldValuesCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/FormValueRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44816,10 +44564,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * Retrieve field values (eg. the typeahead field)
-     * @param {module:api/ProcessDefinitionsFormApi~getRestFieldValuesUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessDefinitionsFormApi~getRestFieldValuesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/FormValueRepresentation>}
      */
-    this.getRestFieldValuesUsingGET = function (callback) {
+    this.getRestFieldValues = function (callback) {
       var postBody = null;
 
       var pathParams = {};
@@ -44832,12 +44580,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = [FormValueRepresentation];
 
-      return this.apiClient.callApi('/api/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getRestTableFieldValuesUsingGET operation.
-     * @callback module:api/ProcessDefinitionsFormApi~getRestTableFieldValuesUsingGETCallback
+     * Callback function to receive the result of the getRestTableFieldValues operation.
+     * @callback module:api/ProcessDefinitionsFormApi~getRestTableFieldValuesCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/FormValueRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44845,10 +44593,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * Retrieve field values (eg. the table field)
-     * @param {module:api/ProcessDefinitionsFormApi~getRestTableFieldValuesUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessDefinitionsFormApi~getRestTableFieldValuesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/FormValueRepresentation>}
      */
-    this.getRestTableFieldValuesUsingGET = function (callback) {
+    this.getRestTableFieldValues = function (callback) {
       var postBody = null;
 
       var pathParams = {};
@@ -44861,14 +44609,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = [FormValueRepresentation];
 
-      return this.apiClient.callApi('/api/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field}/{column}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field}/{column}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/FormDefinitionRepresentation":207,"../model/FormValueRepresentation":215}],165:[function(require,module,exports){
+},{"../ApiClient":136,"../model/FormDefinitionRepresentation":206,"../model/FormValueRepresentation":214}],164:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -44897,7 +44645,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new ProcessInstancesApi. 
+   * Constructs a new ProcessInstancesApi.
    * @alias module:api/ProcessInstancesApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -44908,8 +44656,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the addProcessInstanceCommentUsingPOST operation.
-     * @callback module:api/ProcessInstancesApi~addProcessInstanceCommentUsingPOSTCallback
+     * Callback function to receive the result of the addProcessInstanceComment operation.
+     * @callback module:api/ProcessInstancesApi~addProcessInstanceCommentCallback
      * @param {String} error Error message, if any.
      * @param {module:model/CommentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44919,20 +44667,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Add a comment to a Process
      * @param {module:model/CommentRepresentation} commentRequest commentRequest
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ProcessInstancesApi~addProcessInstanceCommentUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessInstancesApi~addProcessInstanceCommentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/CommentRepresentation}
      */
-    this.addProcessInstanceCommentUsingPOST = function (commentRequest, processInstanceId, callback) {
+    this.addProcessInstanceComment = function (commentRequest, processInstanceId) {
       var postBody = commentRequest;
 
       // verify the required parameter 'commentRequest' is set
       if (commentRequest == undefined || commentRequest == null) {
-        throw "Missing the required parameter 'commentRequest' when calling addProcessInstanceCommentUsingPOST";
+        throw "Missing the required parameter 'commentRequest' when calling addProcessInstanceComment";
       }
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling addProcessInstanceCommentUsingPOST";
+        throw "Missing the required parameter 'processInstanceId' when calling addProcessInstanceComment";
       }
 
       var pathParams = {
@@ -44947,12 +44695,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = CommentRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}/comments', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}/comments', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the deleteProcessInstanceUsingDELETE operation.
-     * @callback module:api/ProcessInstancesApi~deleteProcessInstanceUsingDELETECallback
+     * Callback function to receive the result of the deleteProcessInstance operation.
+     * @callback module:api/ProcessInstancesApi~deleteProcessInstanceCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -44961,14 +44709,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Delete a process instance
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ProcessInstancesApi~deleteProcessInstanceUsingDELETECallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessInstancesApi~deleteProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteProcessInstanceUsingDELETE = function (processInstanceId, callback) {
+    this.deleteProcessInstance = function (processInstanceId) {
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling deleteProcessInstanceUsingDELETE";
+        throw "Missing the required parameter 'processInstanceId' when calling deleteProcessInstance";
       }
 
       var pathParams = {
@@ -44983,12 +44731,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getProcessInstanceCommentsUsingGET operation.
-     * @callback module:api/ProcessInstancesApi~getProcessInstanceCommentsUsingGETCallback
+     * Callback function to receive the result of the getProcessInstanceComments operation.
+     * @callback module:api/ProcessInstancesApi~getProcessInstanceCommentsCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44999,16 +44747,16 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {String} processInstanceId processInstanceId
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.latestFirst latestFirst
-     * @param {module:api/ProcessInstancesApi~getProcessInstanceCommentsUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessInstancesApi~getProcessInstanceCommentsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getProcessInstanceCommentsUsingGET = function (processInstanceId, opts, callback) {
+    this.getProcessInstanceComments = function (processInstanceId, opts) {
       opts = opts || {};
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceCommentsUsingGET";
+        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceComments";
       }
 
       var pathParams = {
@@ -45025,12 +44773,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}/comments', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}/comments', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getProcessInstanceStartFormUsingGET operation.
-     * @callback module:api/ProcessInstancesApi~getProcessInstanceStartFormUsingGETCallback
+     * Callback function to receive the result of the getProcessInstanceStartForm operation.
+     * @callback module:api/ProcessInstancesApi~getProcessInstanceStartFormCallback
      * @param {String} error Error message, if any.
      * @param {module:model/FormDefinitionRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45040,15 +44788,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Get process start form
      * When a process definitions has a start form (hasStartForm is true in the call above), the start form can be retrieved
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ProcessInstancesApi~getProcessInstanceStartFormUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessInstancesApi~getProcessInstanceStartFormCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/FormDefinitionRepresentation}
      */
-    this.getProcessInstanceStartFormUsingGET = function (processInstanceId, callback) {
+    this.getProcessInstanceStartForm = function (processInstanceId) {
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceStartFormUsingGET";
+        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceStartForm";
       }
 
       var pathParams = {
@@ -45063,12 +44811,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = FormDefinitionRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}/start-form', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}/start-form', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getProcessInstanceUsingGET operation.
-     * @callback module:api/ProcessInstancesApi~getProcessInstanceUsingGETCallback
+     * Callback function to receive the result of the getProcessInstance operation.
+     * @callback module:api/ProcessInstancesApi~getProcessInstanceCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ProcessInstanceRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45077,15 +44825,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve a process instance information
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ProcessInstancesApi~getProcessInstanceUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessInstancesApi~getProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ProcessInstanceRepresentation}
      */
-    this.getProcessInstanceUsingGET = function (processInstanceId, callback) {
+    this.getProcessInstance = function (processInstanceId) {
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceUsingGET";
+        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstance";
       }
 
       var pathParams = {
@@ -45100,14 +44848,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ProcessInstanceRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/CommentRepresentation":195,"../model/FormDefinitionRepresentation":207,"../model/ProcessInstanceRepresentation":233,"../model/ResultListDataRepresentation":241}],166:[function(require,module,exports){
+},{"../ApiClient":136,"../model/CommentRepresentation":194,"../model/FormDefinitionRepresentation":206,"../model/ProcessInstanceRepresentation":232,"../model/ResultListDataRepresentation":240}],165:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -45136,7 +44884,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new ProcessInstancesInformationApi. 
+   * Constructs a new ProcessInstancesInformationApi.
    * @alias module:api/ProcessInstancesInformationApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -45147,8 +44895,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getProcessInstanceContentUsingGET operation.
-     * @callback module:api/ProcessInstancesInformationApi~getProcessInstanceContentUsingGETCallback
+     * Callback function to receive the result of the getProcessInstanceContent operation.
+     * @callback module:api/ProcessInstancesInformationApi~getProcessInstanceContentCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45157,15 +44905,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve content attached to process instance fields
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ProcessInstancesInformationApi~getProcessInstanceContentUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessInstancesInformationApi~getProcessInstanceContentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getProcessInstanceContentUsingGET = function (processInstanceId, callback) {
+    this.getProcessInstanceContent = function (processInstanceId) {
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceContentUsingGET";
+        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceContent";
       }
 
       var pathParams = {
@@ -45180,12 +44928,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}/field-content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}/field-content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the startNewProcessInstanceUsingPOST operation.
-     * @callback module:api/ProcessInstancesInformationApi~startNewProcessInstanceUsingPOSTCallback
+     * Callback function to receive the result of the startNewProcessInstance operation.
+     * @callback module:api/ProcessInstancesInformationApi~startNewProcessInstanceCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ProcessInstanceRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45194,15 +44942,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Start a process instance
      * @param {module:model/CreateProcessInstanceRepresentation} startRequest startRequest
-     * @param {module:api/ProcessInstancesInformationApi~startNewProcessInstanceUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessInstancesInformationApi~startNewProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ProcessInstanceRepresentation}
      */
-    this.startNewProcessInstanceUsingPOST = function (startRequest, callback) {
+    this.startNewProcessInstance = function (startRequest) {
       var postBody = startRequest;
 
       // verify the required parameter 'startRequest' is set
       if (startRequest == undefined || startRequest == null) {
-        throw "Missing the required parameter 'startRequest' when calling startNewProcessInstanceUsingPOST";
+        throw "Missing the required parameter 'startRequest' when calling startNewProcessInstance";
       }
 
       var pathParams = {};
@@ -45215,14 +44963,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ProcessInstanceRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/process-instances', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-instances', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/CreateProcessInstanceRepresentation":199,"../model/ProcessInstanceRepresentation":233,"../model/ResultListDataRepresentation":241}],167:[function(require,module,exports){
+},{"../ApiClient":136,"../model/CreateProcessInstanceRepresentation":198,"../model/ProcessInstanceRepresentation":232,"../model/ResultListDataRepresentation":240}],166:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -45251,7 +44999,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new ProcessInstancesListingApi. 
+   * Constructs a new ProcessInstancesListingApi.
    * @alias module:api/ProcessInstancesListingApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -45262,8 +45010,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the filterProcessInstancesUsingPOST operation.
-     * @callback module:api/ProcessInstancesListingApi~filterProcessInstancesUsingPOSTCallback
+     * Callback function to receive the result of the filterProcessInstances operation.
+     * @callback module:api/ProcessInstancesListingApi~filterProcessInstancesCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45272,15 +45020,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Filter a list of process instances
      * @param {module:model/ProcessInstanceFilterRequestRepresentation} filterRequest filterRequest
-     * @param {module:api/ProcessInstancesListingApi~filterProcessInstancesUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessInstancesListingApi~filterProcessInstancesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.filterProcessInstancesUsingPOST = function (filterRequest, callback) {
+    this.filterProcessInstances = function (filterRequest) {
       var postBody = filterRequest;
 
       // verify the required parameter 'filterRequest' is set
       if (filterRequest == undefined || filterRequest == null) {
-        throw "Missing the required parameter 'filterRequest' when calling filterProcessInstancesUsingPOST";
+        throw "Missing the required parameter 'filterRequest' when calling filterProcessInstances";
       }
 
       var pathParams = {};
@@ -45293,12 +45041,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/process-instances/filter', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-instances/filter', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getProcessInstancesUsingPOST operation.
-     * @callback module:api/ProcessInstancesListingApi~getProcessInstancesUsingPOSTCallback
+     * Callback function to receive the result of the getProcessInstances operation.
+     * @callback module:api/ProcessInstancesListingApi~getProcessInstancesCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45307,15 +45055,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve a list of process instances
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/ProcessInstancesListingApi~getProcessInstancesUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessInstancesListingApi~getProcessInstancesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getProcessInstancesUsingPOST = function (requestNode, callback) {
+    this.getProcessInstances = function (requestNode) {
       var postBody = requestNode;
 
       // verify the required parameter 'requestNode' is set
       if (requestNode == undefined || requestNode == null) {
-        throw "Missing the required parameter 'requestNode' when calling getProcessInstancesUsingPOST";
+        throw "Missing the required parameter 'requestNode' when calling getProcessInstances";
       }
 
       var pathParams = {};
@@ -45328,14 +45076,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/process-instances/query', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-instances/query', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/ObjectNode":229,"../model/ProcessInstanceFilterRequestRepresentation":232,"../model/ResultListDataRepresentation":241}],168:[function(require,module,exports){
+},{"../ApiClient":136,"../model/ObjectNode":228,"../model/ProcessInstanceFilterRequestRepresentation":231,"../model/ResultListDataRepresentation":240}],167:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -45364,7 +45112,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new ProcessScopeApi. 
+   * Constructs a new ProcessScopeApi.
    * @alias module:api/ProcessScopeApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -45375,8 +45123,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getRuntimeProcessScopesUsingPOST operation.
-     * @callback module:api/ProcessScopeApi~getRuntimeProcessScopesUsingPOSTCallback
+     * Callback function to receive the result of the getRuntimeProcessScopes operation.
+     * @callback module:api/ProcessScopeApi~getRuntimeProcessScopesCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/ProcessScopeRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45385,15 +45133,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * getRuntimeProcessScopes
      * @param {module:model/ProcessScopesRequestRepresentation} processScopesRequest processScopesRequest
-     * @param {module:api/ProcessScopeApi~getRuntimeProcessScopesUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProcessScopeApi~getRuntimeProcessScopesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/ProcessScopeRepresentation>}
      */
-    this.getRuntimeProcessScopesUsingPOST = function (processScopesRequest, callback) {
+    this.getRuntimeProcessScopes = function (processScopesRequest) {
       var postBody = processScopesRequest;
 
       // verify the required parameter 'processScopesRequest' is set
       if (processScopesRequest == undefined || processScopesRequest == null) {
-        throw "Missing the required parameter 'processScopesRequest' when calling getRuntimeProcessScopesUsingPOST";
+        throw "Missing the required parameter 'processScopesRequest' when calling getRuntimeProcessScopes";
       }
 
       var pathParams = {};
@@ -45406,14 +45154,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = [ProcessScopeRepresentation];
 
-      return this.apiClient.callApi('/api/enterprise/process-scopes', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/process-scopes', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/ProcessScopeRepresentation":235,"../model/ProcessScopesRequestRepresentation":236}],169:[function(require,module,exports){
+},{"../ApiClient":136,"../model/ProcessScopeRepresentation":234,"../model/ProcessScopesRequestRepresentation":235}],168:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -45442,7 +45190,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new ProfileApi. 
+   * Constructs a new ProfileApi.
    * @alias module:api/ProfileApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -45453,8 +45201,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the changePasswordUsingPOST operation.
-     * @callback module:api/ProfileApi~changePasswordUsingPOSTCallback
+     * Callback function to receive the result of the changePassword operation.
+     * @callback module:api/ProfileApi~changePasswordCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -45463,14 +45211,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Change user password
      * @param {module:model/ChangePasswordRepresentation} changePasswordRepresentation changePasswordRepresentation
-     * @param {module:api/ProfileApi~changePasswordUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProfileApi~changePasswordCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.changePasswordUsingPOST = function (changePasswordRepresentation, callback) {
+    this.changePassword = function (changePasswordRepresentation) {
       var postBody = changePasswordRepresentation;
 
       // verify the required parameter 'changePasswordRepresentation' is set
       if (changePasswordRepresentation == undefined || changePasswordRepresentation == null) {
-        throw "Missing the required parameter 'changePasswordRepresentation' when calling changePasswordUsingPOST";
+        throw "Missing the required parameter 'changePasswordRepresentation' when calling changePassword";
       }
 
       var pathParams = {};
@@ -45483,12 +45231,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/profile-password', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/profile-password', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getProfilePictureUsingGET operation.
-     * @callback module:api/ProfileApi~getProfilePictureUsingGETCallback
+     * Callback function to receive the result of the getProfilePicture operation.
+     * @callback module:api/ProfileApi~getProfilePictureCallback
      * @param {String} error Error message, if any.
      * @param {File} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45497,10 +45245,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve user profile picture
      * Generally returns an image file
-     * @param {module:api/ProfileApi~getProfilePictureUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProfileApi~getProfilePictureCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {File}
      */
-    this.getProfilePictureUsingGET = function (callback) {
+    this.getProfilePicture = function (callback) {
       var postBody = null;
 
       var pathParams = {};
@@ -45513,12 +45261,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = File;
 
-      return this.apiClient.callApi('/api/enterprise/profile-picture', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/profile-picture', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getProfileUsingGET operation.
-     * @callback module:api/ProfileApi~getProfileUsingGETCallback
+     * Callback function to receive the result of the getProfile operation.
+     * @callback module:api/ProfileApi~getProfileCallback
      * @param {String} error Error message, if any.
      * @param {module:model/UserRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45527,10 +45275,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve user information
      *  This is useful to get the name, email, the groups that the user is part of, the user picture, etc.
-     * @param {module:api/ProfileApi~getProfileUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProfileApi~getProfileCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserRepresentation}
      */
-    this.getProfileUsingGET = function (callback) {
+    this.getProfile = function (callback) {
       var postBody = null;
 
       var pathParams = {};
@@ -45543,7 +45291,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = UserRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/profile', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/profile', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
@@ -45561,7 +45309,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {module:api/ProfileApi~updateProfileCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserRepresentation}
      */
-    this.updateProfile = function (userRepresentation, callback) {
+    this.updateProfile = function (userRepresentation) {
       var postBody = userRepresentation;
 
       // verify the required parameter 'userRepresentation' is set
@@ -45579,12 +45327,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = UserRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/profile', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/profile', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the uploadProfilePictureUsingPOST operation.
-     * @callback module:api/ProfileApi~uploadProfilePictureUsingPOSTCallback
+     * Callback function to receive the result of the uploadProfilePicture operation.
+     * @callback module:api/ProfileApi~uploadProfilePictureCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ImageUploadRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45593,15 +45341,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Change user profile picture
      * @param {File} file file
-     * @param {module:api/ProfileApi~uploadProfilePictureUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ProfileApi~uploadProfilePictureCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ImageUploadRepresentation}
      */
-    this.uploadProfilePictureUsingPOST = function (file, callback) {
+    this.uploadProfilePicture = function (file) {
       var postBody = null;
 
       // verify the required parameter 'file' is set
       if (file == undefined || file == null) {
-        throw "Missing the required parameter 'file' when calling uploadProfilePictureUsingPOST";
+        throw "Missing the required parameter 'file' when calling uploadProfilePicture";
       }
 
       var pathParams = {};
@@ -45616,14 +45364,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ImageUploadRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/profile-picture', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/profile-picture', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/ChangePasswordRepresentation":193,"../model/ImageUploadRepresentation":218,"../model/UserRepresentation":256}],170:[function(require,module,exports){
+},{"../ApiClient":136,"../model/ChangePasswordRepresentation":192,"../model/ImageUploadRepresentation":217,"../model/UserRepresentation":255}],169:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -45652,7 +45400,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new ScriptFileApi. 
+   * Constructs a new ScriptFileApi.
    * @alias module:api/ScriptFileApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -45663,8 +45411,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getControllersUsingGET operation.
-     * @callback module:api/ScriptFileApi~getControllersUsingGETCallback
+     * Callback function to receive the result of the getControllers operation.
+     * @callback module:api/ScriptFileApi~getControllersCallback
      * @param {String} error Error message, if any.
      * @param {'String'} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45672,10 +45420,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * getControllers
-     * @param {module:api/ScriptFileApi~getControllersUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ScriptFileApi~getControllersCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {'String'}
      */
-    this.getControllersUsingGET = function (callback) {
+    this.getControllers = function (callback) {
       var postBody = null;
 
       var pathParams = {};
@@ -45688,12 +45436,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json', 'application/javascript'];
       var returnType = 'String';
 
-      return this.apiClient.callApi('/api/enterprise/script-files/controllers', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/script-files/controllers', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getLibrariesUsingGET operation.
-     * @callback module:api/ScriptFileApi~getLibrariesUsingGETCallback
+     * Callback function to receive the result of the getLibraries operation.
+     * @callback module:api/ScriptFileApi~getLibrariesCallback
      * @param {String} error Error message, if any.
      * @param {'String'} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45701,10 +45449,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * getLibraries
-     * @param {module:api/ScriptFileApi~getLibrariesUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ScriptFileApi~getLibrariesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {'String'}
      */
-    this.getLibrariesUsingGET = function (callback) {
+    this.getLibraries = function (callback) {
       var postBody = null;
 
       var pathParams = {};
@@ -45717,14 +45465,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json', 'application/javascript'];
       var returnType = 'String';
 
-      return this.apiClient.callApi('/api/enterprise/script-files/libraries', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/script-files/libraries', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137}],171:[function(require,module,exports){
+},{"../ApiClient":136}],170:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -45753,7 +45501,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new SystemPropertiesApi. 
+   * Constructs a new SystemPropertiesApi.
    * @alias module:api/SystemPropertiesApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -45764,8 +45512,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getPropertiesUsingGET operation.
-     * @callback module:api/SystemPropertiesApi~getPropertiesUsingGETCallback
+     * Callback function to receive the result of the getProperties operation.
+     * @callback module:api/SystemPropertiesApi~getPropertiesCallback
      * @param {String} error Error message, if any.
      * @param {module:model/SystemPropertiesRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45774,10 +45522,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve System Properties
      * Typical value is AllowInvolveByEmail
-     * @param {module:api/SystemPropertiesApi~getPropertiesUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/SystemPropertiesApi~getPropertiesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/SystemPropertiesRepresentation}
      */
-    this.getPropertiesUsingGET = function (callback) {
+    this.getProperties = function (callback) {
       var postBody = null;
 
       var pathParams = {};
@@ -45790,14 +45538,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = SystemPropertiesRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/system/properties', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/system/properties', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/SystemPropertiesRepresentation":245}],172:[function(require,module,exports){
+},{"../ApiClient":136,"../model/SystemPropertiesRepresentation":244}],171:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -45826,7 +45574,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new TaskActionsApi. 
+   * Constructs a new TaskActionsApi.
    * @alias module:api/TaskActionsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -45837,8 +45585,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the assignTaskUsingPUT operation.
-     * @callback module:api/TaskActionsApi~assignTaskUsingPUTCallback
+     * Callback function to receive the result of the assignTask operation.
+     * @callback module:api/TaskActionsApi~assignTaskCallback
      * @param {String} error Error message, if any.
      * @param {module:model/TaskRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45848,20 +45596,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Assign a task to a user
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskActionsApi~assignTaskUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskActionsApi~assignTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TaskRepresentation}
      */
-    this.assignTaskUsingPUT = function (taskId, requestNode, callback) {
+    this.assignTask = function (taskId, requestNode) {
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling assignTaskUsingPUT";
+        throw "Missing the required parameter 'taskId' when calling assignTask";
       }
 
       // verify the required parameter 'requestNode' is set
       if (requestNode == undefined || requestNode == null) {
-        throw "Missing the required parameter 'requestNode' when calling assignTaskUsingPUT";
+        throw "Missing the required parameter 'requestNode' when calling assignTask";
       }
 
       var pathParams = {
@@ -45876,12 +45624,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = TaskRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/assign', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/assign', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the attachFormUsingPUT operation.
-     * @callback module:api/TaskActionsApi~attachFormUsingPUTCallback
+     * Callback function to receive the result of the attachForm operation.
+     * @callback module:api/TaskActionsApi~attachFormCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -45891,19 +45639,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Attach a form to a task
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskActionsApi~attachFormUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskActionsApi~attachFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.attachFormUsingPUT = function (taskId, requestNode, callback) {
+    this.attachForm = function (taskId, requestNode) {
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling attachFormUsingPUT";
+        throw "Missing the required parameter 'taskId' when calling attachForm";
       }
 
       // verify the required parameter 'requestNode' is set
       if (requestNode == undefined || requestNode == null) {
-        throw "Missing the required parameter 'requestNode' when calling attachFormUsingPUT";
+        throw "Missing the required parameter 'requestNode' when calling attachForm";
       }
 
       var pathParams = {
@@ -45918,12 +45666,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/attach-form', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/attach-form', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the claimTaskUsingPUT operation.
-     * @callback module:api/TaskActionsApi~claimTaskUsingPUTCallback
+     * Callback function to receive the result of the claimTask operation.
+     * @callback module:api/TaskActionsApi~claimTaskCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -45933,14 +45681,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Claim a task
      * To claim a task (in case the task is assigned to a group)
      * @param {String} taskId taskId
-     * @param {module:api/TaskActionsApi~claimTaskUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskActionsApi~claimTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.claimTaskUsingPUT = function (taskId, callback) {
+    this.claimTask = function (taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling claimTaskUsingPUT";
+        throw "Missing the required parameter 'taskId' when calling claimTask";
       }
 
       var pathParams = {
@@ -45955,12 +45703,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/claim', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/claim', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the completeTaskUsingPUT operation.
-     * @callback module:api/TaskActionsApi~completeTaskUsingPUTCallback
+     * Callback function to receive the result of the completeTask operation.
+     * @callback module:api/TaskActionsApi~completeTaskCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -45970,14 +45718,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Complete Task
      * To complete a task (standalone or without a task form)
      * @param {String} taskId taskId
-     * @param {module:api/TaskActionsApi~completeTaskUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskActionsApi~completeTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.completeTaskUsingPUT = function (taskId, callback) {
+    this.completeTask = function (taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling completeTaskUsingPUT";
+        throw "Missing the required parameter 'taskId' when calling completeTask";
       }
 
       var pathParams = {
@@ -45992,12 +45740,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/complete', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/complete', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the involveUserUsingPUT operation.
-     * @callback module:api/TaskActionsApi~involveUserUsingPUTCallback
+     * Callback function to receive the result of the involveUser operation.
+     * @callback module:api/TaskActionsApi~involveUserCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -46007,19 +45755,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * To involve a user with a task
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskActionsApi~involveUserUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskActionsApi~involveUserCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.involveUserUsingPUT = function (taskId, requestNode, callback) {
+    this.involveUser = function (taskId, requestNode) {
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling involveUserUsingPUT";
+        throw "Missing the required parameter 'taskId' when calling involveUser";
       }
 
       // verify the required parameter 'requestNode' is set
       if (requestNode == undefined || requestNode == null) {
-        throw "Missing the required parameter 'requestNode' when calling involveUserUsingPUT";
+        throw "Missing the required parameter 'requestNode' when calling involveUser";
       }
 
       var pathParams = {
@@ -46034,12 +45782,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/involve', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/involve', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the removeFormUsingDELETE operation.
-     * @callback module:api/TaskActionsApi~removeFormUsingDELETECallback
+     * Callback function to receive the result of the removeForm operation.
+     * @callback module:api/TaskActionsApi~removeFormCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -46048,14 +45796,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Remove a form to a task
      * @param {String} taskId taskId
-     * @param {module:api/TaskActionsApi~removeFormUsingDELETECallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskActionsApi~removeFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.removeFormUsingDELETE = function (taskId, callback) {
+    this.removeForm = function (taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling removeFormUsingDELETE";
+        throw "Missing the required parameter 'taskId' when calling removeForm";
       }
 
       var pathParams = {
@@ -46070,12 +45818,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/remove-form', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/remove-form', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the removeInvolvedUserUsingPUT operation.
-     * @callback module:api/TaskActionsApi~removeInvolvedUserUsingPUTCallback
+     * Callback function to receive the result of the removeInvolvedUser operation.
+     * @callback module:api/TaskActionsApi~removeInvolvedUserCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -46085,19 +45833,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Remove an involved user from a task
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskActionsApi~removeInvolvedUserUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskActionsApi~removeInvolvedUserCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.removeInvolvedUserUsingPUT = function (taskId, requestNode, callback) {
+    this.removeInvolvedUser = function (taskId, requestNode) {
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling removeInvolvedUserUsingPUT";
+        throw "Missing the required parameter 'taskId' when calling removeInvolvedUser";
       }
 
       // verify the required parameter 'requestNode' is set
       if (requestNode == undefined || requestNode == null) {
-        throw "Missing the required parameter 'requestNode' when calling removeInvolvedUserUsingPUT";
+        throw "Missing the required parameter 'requestNode' when calling removeInvolvedUser";
       }
 
       var pathParams = {
@@ -46112,12 +45860,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/remove-involved', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/remove-involved', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the unclaimTaskUsingPUT operation.
-     * @callback module:api/TaskActionsApi~unclaimTaskUsingPUTCallback
+     * Callback function to receive the result of the unclaimTask operation.
+     * @callback module:api/TaskActionsApi~unclaimTaskCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -46127,14 +45875,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Unclaim a task
      * To unclaim a task (in case the task was assigned to a group)
      * @param {String} taskId taskId
-     * @param {module:api/TaskActionsApi~unclaimTaskUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskActionsApi~unclaimTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.unclaimTaskUsingPUT = function (taskId, callback) {
+    this.unclaimTask = function (taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling unclaimTaskUsingPUT";
+        throw "Missing the required parameter 'taskId' when calling unclaimTask";
       }
 
       var pathParams = {
@@ -46149,14 +45897,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/unclaim', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/unclaim', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/ObjectNode":229,"../model/TaskRepresentation":248}],173:[function(require,module,exports){
+},{"../ApiClient":136,"../model/ObjectNode":228,"../model/TaskRepresentation":247}],172:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -46185,7 +45933,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new TaskApi. 
+   * Constructs a new TaskApi.
    * @alias module:api/TaskApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -46196,8 +45944,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the addSubtaskUsingPOST operation.
-     * @callback module:api/TaskApi~addSubtaskUsingPOSTCallback
+     * Callback function to receive the result of the addSubtask operation.
+     * @callback module:api/TaskApi~addSubtaskCallback
      * @param {String} error Error message, if any.
      * @param {module:model/TaskRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46207,20 +45955,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Create a task checklist
      * @param {String} taskId taskId
      * @param {module:model/TaskRepresentation} taskRepresentation taskRepresentation
-     * @param {module:api/TaskApi~addSubtaskUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskApi~addSubtaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TaskRepresentation}
      */
-    this.addSubtaskUsingPOST = function (taskId, taskRepresentation, callback) {
+    this.addSubtask = function (taskId, taskRepresentation) {
       var postBody = taskRepresentation;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling addSubtaskUsingPOST";
+        throw "Missing the required parameter 'taskId' when calling addSubtask";
       }
 
       // verify the required parameter 'taskRepresentation' is set
       if (taskRepresentation == undefined || taskRepresentation == null) {
-        throw "Missing the required parameter 'taskRepresentation' when calling addSubtaskUsingPOST";
+        throw "Missing the required parameter 'taskRepresentation' when calling addSubtask";
       }
 
       var pathParams = {
@@ -46235,12 +45983,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = TaskRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/checklist', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/checklist', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the addTaskCommentUsingPOST operation.
-     * @callback module:api/TaskApi~addTaskCommentUsingPOSTCallback
+     * Callback function to receive the result of the addTaskComment operation.
+     * @callback module:api/TaskApi~addTaskCommentCallback
      * @param {String} error Error message, if any.
      * @param {module:model/CommentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46250,20 +45998,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Add a comment to a Task
      * @param {module:model/CommentRepresentation} commentRequest commentRequest
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~addTaskCommentUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskApi~addTaskCommentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/CommentRepresentation}
      */
-    this.addTaskCommentUsingPOST = function (commentRequest, taskId, callback) {
+    this.addTaskComment = function (commentRequest, taskId) {
       var postBody = commentRequest;
 
       // verify the required parameter 'commentRequest' is set
       if (commentRequest == undefined || commentRequest == null) {
-        throw "Missing the required parameter 'commentRequest' when calling addTaskCommentUsingPOST";
+        throw "Missing the required parameter 'commentRequest' when calling addTaskComment";
       }
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling addTaskCommentUsingPOST";
+        throw "Missing the required parameter 'taskId' when calling addTaskComment";
       }
 
       var pathParams = {
@@ -46278,12 +46026,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = CommentRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/comments', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/comments', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the assignTaskUsingPUT operation.
-     * @callback module:api/TaskApi~assignTaskUsingPUTCallback
+     * Callback function to receive the result of the assignTask operation.
+     * @callback module:api/TaskApi~assignTaskCallback
      * @param {String} error Error message, if any.
      * @param {module:model/TaskRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46293,20 +46041,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Assign a task to a user
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskApi~assignTaskUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskApi~assignTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TaskRepresentation}
      */
-    this.assignTaskUsingPUT = function (taskId, requestNode, callback) {
+    this.assignTask = function (taskId, requestNode) {
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling assignTaskUsingPUT";
+        throw "Missing the required parameter 'taskId' when calling assignTask";
       }
 
       // verify the required parameter 'requestNode' is set
       if (requestNode == undefined || requestNode == null) {
-        throw "Missing the required parameter 'requestNode' when calling assignTaskUsingPUT";
+        throw "Missing the required parameter 'requestNode' when calling assignTask";
       }
 
       var pathParams = {
@@ -46321,12 +46069,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = TaskRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/assign', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/assign', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the attachFormUsingPUT operation.
-     * @callback module:api/TaskApi~attachFormUsingPUTCallback
+     * Callback function to receive the result of the attachForm operation.
+     * @callback module:api/TaskApi~attachFormCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -46336,19 +46084,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Attach a form to a task
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskApi~attachFormUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskApi~attachFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.attachFormUsingPUT = function (taskId, requestNode, callback) {
+    this.attachForm = function (taskId, requestNode) {
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling attachFormUsingPUT";
+        throw "Missing the required parameter 'taskId' when calling attachForm";
       }
 
       // verify the required parameter 'requestNode' is set
       if (requestNode == undefined || requestNode == null) {
-        throw "Missing the required parameter 'requestNode' when calling attachFormUsingPUT";
+        throw "Missing the required parameter 'requestNode' when calling attachForm";
       }
 
       var pathParams = {
@@ -46363,12 +46111,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/attach-form', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/attach-form', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the claimTaskUsingPUT operation.
-     * @callback module:api/TaskApi~claimTaskUsingPUTCallback
+     * Callback function to receive the result of the claimTask operation.
+     * @callback module:api/TaskApi~claimTaskCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -46378,14 +46126,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Claim a task
      * To claim a task (in case the task is assigned to a group)
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~claimTaskUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskApi~claimTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.claimTaskUsingPUT = function (taskId, callback) {
+    this.claimTask = function (taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling claimTaskUsingPUT";
+        throw "Missing the required parameter 'taskId' when calling claimTask";
       }
 
       var pathParams = {
@@ -46400,12 +46148,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/claim', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/claim', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the completeTaskFormUsingPOST operation.
-     * @callback module:api/TaskApi~completeTaskFormUsingPOSTCallback
+     * Callback function to receive the result of the completeTaskForm operation.
+     * @callback module:api/TaskApi~completeTaskFormCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -46415,19 +46163,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Complete a Task Form
      * @param {String} taskId taskId
      * @param {module:model/CompleteFormRepresentation} completeTaskFormRepresentation completeTaskFormRepresentation
-     * @param {module:api/TaskApi~completeTaskFormUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskApi~completeTaskFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.completeTaskFormUsingPOST = function (taskId, completeTaskFormRepresentation, callback) {
+    this.completeTaskForm = function (taskId, completeTaskFormRepresentation) {
       var postBody = completeTaskFormRepresentation;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling completeTaskFormUsingPOST";
+        throw "Missing the required parameter 'taskId' when calling completeTaskForm";
       }
 
       // verify the required parameter 'completeTaskFormRepresentation' is set
       if (completeTaskFormRepresentation == undefined || completeTaskFormRepresentation == null) {
-        throw "Missing the required parameter 'completeTaskFormRepresentation' when calling completeTaskFormUsingPOST";
+        throw "Missing the required parameter 'completeTaskFormRepresentation' when calling completeTaskForm";
       }
 
       var pathParams = {
@@ -46442,12 +46190,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/task-forms/{taskId}', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/task-forms/{taskId}', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the completeTaskUsingPUT operation.
-     * @callback module:api/TaskApi~completeTaskUsingPUTCallback
+     * Callback function to receive the result of the completeTask operation.
+     * @callback module:api/TaskApi~completeTaskCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -46457,14 +46205,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Complete Task
      * To complete a task (standalone or without a task form)
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~completeTaskUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskApi~completeTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.completeTaskUsingPUT = function (taskId, callback) {
+    this.completeTask = function (taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling completeTaskUsingPUT";
+        throw "Missing the required parameter 'taskId' when calling completeTask";
       }
 
       var pathParams = {
@@ -46479,12 +46227,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/complete', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/complete', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the createNewTaskUsingPOST operation.
-     * @callback module:api/TaskApi~createNewTaskUsingPOSTCallback
+     * Callback function to receive the result of the createNewTask operation.
+     * @callback module:api/TaskApi~createNewTaskCallback
      * @param {String} error Error message, if any.
      * @param {module:model/TaskRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46494,15 +46242,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Create a Standalone Task
      * Standalone Task is not associated with a process instance. You can define only task name &amp; description
      * @param {module:model/TaskRepresentation} taskRepresentation taskRepresentation
-     * @param {module:api/TaskApi~createNewTaskUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskApi~createNewTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TaskRepresentation}
      */
-    this.createNewTaskUsingPOST = function (taskRepresentation, callback) {
+    this.createNewTask = function (taskRepresentation) {
       var postBody = taskRepresentation;
 
       // verify the required parameter 'taskRepresentation' is set
       if (taskRepresentation == undefined || taskRepresentation == null) {
-        throw "Missing the required parameter 'taskRepresentation' when calling createNewTaskUsingPOST";
+        throw "Missing the required parameter 'taskRepresentation' when calling createNewTask";
       }
 
       var pathParams = {};
@@ -46515,12 +46263,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = TaskRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/tasks', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the createRelatedContentOnTaskUsingPOST operation.
-     * @callback module:api/TaskApi~createRelatedContentOnTaskUsingPOSTCallback
+     * Callback function to receive the result of the createRelatedContentOnTask operation.
+     * @callback module:api/TaskApi~createRelatedContentOnTaskCallback
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46532,21 +46280,21 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {module:model/RelatedContentRepresentation} relatedContent relatedContent
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.isRelatedContent isRelatedContent
-     * @param {module:api/TaskApi~createRelatedContentOnTaskUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskApi~createRelatedContentOnTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RelatedContentRepresentation}
      */
-    this.createRelatedContentOnTaskUsingPOST = function (taskId, relatedContent, opts, callback) {
+    this.createRelatedContentOnTask = function (taskId, relatedContent, opts) {
       opts = opts || {};
       var postBody = relatedContent;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling createRelatedContentOnTaskUsingPOST";
+        throw "Missing the required parameter 'taskId' when calling createRelatedContentOnTask";
       }
 
       // verify the required parameter 'relatedContent' is set
       if (relatedContent == undefined || relatedContent == null) {
-        throw "Missing the required parameter 'relatedContent' when calling createRelatedContentOnTaskUsingPOST";
+        throw "Missing the required parameter 'relatedContent' when calling createRelatedContentOnTask";
       }
 
       var pathParams = {
@@ -46563,12 +46311,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = RelatedContentRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/content', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/content', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the createRelatedContentOnTaskUsingPOST1 operation.
-     * @callback module:api/TaskApi~createRelatedContentOnTaskUsingPOST1Callback
+     * Callback function to receive the result of the createRelatedContentOnTask operation.
+     * @callback module:api/TaskApi~createRelatedContentOnTaskCallback
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46580,21 +46328,21 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {File} file file
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.isRelatedContent isRelatedContent
-     * @param {module:api/TaskApi~createRelatedContentOnTaskUsingPOST1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskApi~createRelatedContentOnTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/RelatedContentRepresentation}
      */
-    this.createRelatedContentOnTaskUsingPOST1 = function (taskId, file, opts, callback) {
+    this.createRelatedContentOnTask = function (taskId, file, opts) {
       opts = opts || {};
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling createRelatedContentOnTaskUsingPOST1";
+        throw "Missing the required parameter 'taskId' when calling createRelatedContentOnTask";
       }
 
       // verify the required parameter 'file' is set
       if (file == undefined || file == null) {
-        throw "Missing the required parameter 'file' when calling createRelatedContentOnTaskUsingPOST1";
+        throw "Missing the required parameter 'file' when calling createRelatedContentOnTask";
       }
 
       var pathParams = {
@@ -46613,12 +46361,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = RelatedContentRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/raw-content', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/raw-content', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the deleteTaskUsingDELETE operation.
-     * @callback module:api/TaskApi~deleteTaskUsingDELETECallback
+     * Callback function to receive the result of the deleteTask operation.
+     * @callback module:api/TaskApi~deleteTaskCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -46627,14 +46375,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Delete a Task
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~deleteTaskUsingDELETECallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskApi~deleteTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteTaskUsingDELETE = function (taskId, callback) {
+    this.deleteTask = function (taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling deleteTaskUsingDELETE";
+        throw "Missing the required parameter 'taskId' when calling deleteTask";
       }
 
       var pathParams = {
@@ -46649,12 +46397,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the filterTasksUsingPOST operation.
-     * @callback module:api/TaskApi~filterTasksUsingPOSTCallback
+     * Callback function to receive the result of the filterTasks operation.
+     * @callback module:api/TaskApi~filterTasksCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46663,15 +46411,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Filter list of Task
      * @param {module:model/TaskFilterRequestRepresentation} requestNode requestNode
-     * @param {module:api/TaskApi~filterTasksUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskApi~filterTasksCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.filterTasksUsingPOST = function (requestNode, callback) {
+    this.filterTasks = function (requestNode) {
       var postBody = requestNode;
 
       // verify the required parameter 'requestNode' is set
       if (requestNode == undefined || requestNode == null) {
-        throw "Missing the required parameter 'requestNode' when calling filterTasksUsingPOST";
+        throw "Missing the required parameter 'requestNode' when calling filterTasks";
       }
 
       var pathParams = {};
@@ -46684,12 +46432,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/filter', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/filter', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getChecklistUsingGET operation.
-     * @callback module:api/TaskApi~getChecklistUsingGETCallback
+     * Callback function to receive the result of the getChecklist operation.
+     * @callback module:api/TaskApi~getChecklistCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46698,15 +46446,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve Checklist added to a task
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~getChecklistUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskApi~getChecklistCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getChecklistUsingGET = function (taskId, callback) {
+    this.getChecklist = function (taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling getChecklistUsingGET";
+        throw "Missing the required parameter 'taskId' when calling getChecklist";
       }
 
       var pathParams = {
@@ -46721,12 +46469,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/checklist', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/checklist', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getRelatedContentForTaskUsingGET operation.
-     * @callback module:api/TaskApi~getRelatedContentForTaskUsingGETCallback
+     * Callback function to receive the result of the getRelatedContentForTask operation.
+     * @callback module:api/TaskApi~getRelatedContentForTaskCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46735,15 +46483,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve which content is attached to a task
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~getRelatedContentForTaskUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskApi~getRelatedContentForTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getRelatedContentForTaskUsingGET = function (taskId, callback) {
+    this.getRelatedContentForTask = function (taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling getRelatedContentForTaskUsingGET";
+        throw "Missing the required parameter 'taskId' when calling getRelatedContentForTask";
       }
 
       var pathParams = {
@@ -46758,12 +46506,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/content', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getRestFieldValuesUsingGET1 operation.
-     * @callback module:api/TaskApi~getRestFieldValuesUsingGET1Callback
+     * Callback function to receive the result of the getRestFieldValues operation.
+     * @callback module:api/TaskApi~getRestFieldValuesCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/FormValueRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46775,25 +46523,25 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {String} taskId taskId
      * @param {String} field field
      * @param {String} column column
-     * @param {module:api/TaskApi~getRestFieldValuesUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskApi~getRestFieldValuesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/FormValueRepresentation>}
      */
-    this.getRestFieldValuesUsingGET1 = function (taskId, field, column, callback) {
+    this.getRestFieldValues = function (taskId, field, column) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling getRestFieldValuesUsingGET1";
+        throw "Missing the required parameter 'taskId' when calling getRestFieldValues";
       }
 
       // verify the required parameter 'field' is set
       if (field == undefined || field == null) {
-        throw "Missing the required parameter 'field' when calling getRestFieldValuesUsingGET1";
+        throw "Missing the required parameter 'field' when calling getRestFieldValues";
       }
 
       // verify the required parameter 'column' is set
       if (column == undefined || column == null) {
-        throw "Missing the required parameter 'column' when calling getRestFieldValuesUsingGET1";
+        throw "Missing the required parameter 'column' when calling getRestFieldValues";
       }
 
       var pathParams = {
@@ -46810,12 +46558,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = [FormValueRepresentation];
 
-      return this.apiClient.callApi('/api/enterprise/task-forms/{taskId}/form-values/{field}/{column}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/task-forms/{taskId}/form-values/{field}/{column}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getRestFieldValuesUsingGET2 operation.
-     * @callback module:api/TaskApi~getRestFieldValuesUsingGET2Callback
+     * Callback function to receive the result of the getRestFieldValues operation.
+     * @callback module:api/TaskApi~getRestFieldValuesCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/FormValueRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46826,20 +46574,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Form field values that are populated through a REST backend, can be retrieved via this service
      * @param {String} taskId taskId
      * @param {String} field field
-     * @param {module:api/TaskApi~getRestFieldValuesUsingGET2Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskApi~getRestFieldValuesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/FormValueRepresentation>}
      */
-    this.getRestFieldValuesUsingGET2 = function (taskId, field, callback) {
+    this.getRestFieldValues = function (taskId, field) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling getRestFieldValuesUsingGET2";
+        throw "Missing the required parameter 'taskId' when calling getRestFieldValues";
       }
 
       // verify the required parameter 'field' is set
       if (field == undefined || field == null) {
-        throw "Missing the required parameter 'field' when calling getRestFieldValuesUsingGET2";
+        throw "Missing the required parameter 'field' when calling getRestFieldValues";
       }
 
       var pathParams = {
@@ -46855,12 +46603,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = [FormValueRepresentation];
 
-      return this.apiClient.callApi('/api/enterprise/task-forms/{taskId}/form-values/{field}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/task-forms/{taskId}/form-values/{field}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getTaskCommentsUsingGET operation.
-     * @callback module:api/TaskApi~getTaskCommentsUsingGETCallback
+     * Callback function to receive the result of the getTaskComments operation.
+     * @callback module:api/TaskApi~getTaskCommentsCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46871,16 +46619,16 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {String} taskId taskId
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.latestFirst latestFirst
-     * @param {module:api/TaskApi~getTaskCommentsUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskApi~getTaskCommentsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getTaskCommentsUsingGET = function (taskId, opts, callback) {
+    this.getTaskComments = function (taskId, opts) {
       opts = opts || {};
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling getTaskCommentsUsingGET";
+        throw "Missing the required parameter 'taskId' when calling getTaskComments";
       }
 
       var pathParams = {
@@ -46897,12 +46645,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/comments', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/comments', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getTaskFormUsingGET operation.
-     * @callback module:api/TaskApi~getTaskFormUsingGETCallback
+     * Callback function to receive the result of the getTaskForm operation.
+     * @callback module:api/TaskApi~getTaskFormCallback
      * @param {String} error Error message, if any.
      * @param {module:model/FormDefinitionRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46911,15 +46659,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve Task Form
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~getTaskFormUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskApi~getTaskFormCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/FormDefinitionRepresentation}
      */
-    this.getTaskFormUsingGET = function (taskId, callback) {
+    this.getTaskForm = function (taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling getTaskFormUsingGET";
+        throw "Missing the required parameter 'taskId' when calling getTaskForm";
       }
 
       var pathParams = {
@@ -46934,12 +46682,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = FormDefinitionRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/task-forms/{taskId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/task-forms/{taskId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getTaskUsingGET operation.
-     * @callback module:api/TaskApi~getTaskUsingGETCallback
+     * Callback function to receive the result of the getTask operation.
+     * @callback module:api/TaskApi~getTaskCallback
      * @param {String} error Error message, if any.
      * @param {module:model/TaskRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46948,15 +46696,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Task Details
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~getTaskUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskApi~getTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TaskRepresentation}
      */
-    this.getTaskUsingGET = function (taskId, callback) {
+    this.getTask = function (taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling getTaskUsingGET";
+        throw "Missing the required parameter 'taskId' when calling getTask";
       }
 
       var pathParams = {
@@ -46971,12 +46719,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = TaskRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the involveUserUsingPUT operation.
-     * @callback module:api/TaskApi~involveUserUsingPUTCallback
+     * Callback function to receive the result of the involveUser operation.
+     * @callback module:api/TaskApi~involveUserCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -46986,19 +46734,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * To involve a user with a task
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskApi~involveUserUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskApi~involveUserCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.involveUserUsingPUT = function (taskId, requestNode, callback) {
+    this.involveUser = function (taskId, requestNode) {
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling involveUserUsingPUT";
+        throw "Missing the required parameter 'taskId' when calling involveUser";
       }
 
       // verify the required parameter 'requestNode' is set
       if (requestNode == undefined || requestNode == null) {
-        throw "Missing the required parameter 'requestNode' when calling involveUserUsingPUT";
+        throw "Missing the required parameter 'requestNode' when calling involveUser";
       }
 
       var pathParams = {
@@ -47013,12 +46761,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/involve', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/involve', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the listTasksUsingPOST operation.
-     * @callback module:api/TaskApi~listTasksUsingPOSTCallback
+     * Callback function to receive the result of the listTasks operation.
+     * @callback module:api/TaskApi~listTasksCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -47027,15 +46775,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * List Task
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskApi~listTasksUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskApi~listTasksCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.listTasksUsingPOST = function (requestNode, callback) {
+    this.listTasks = function (requestNode) {
       var postBody = requestNode;
 
       // verify the required parameter 'requestNode' is set
       if (requestNode == undefined || requestNode == null) {
-        throw "Missing the required parameter 'requestNode' when calling listTasksUsingPOST";
+        throw "Missing the required parameter 'requestNode' when calling listTasks";
       }
 
       var pathParams = {};
@@ -47048,12 +46796,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/query', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/query', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the orderChecklistUsingPUT operation.
-     * @callback module:api/TaskApi~orderChecklistUsingPUTCallback
+     * Callback function to receive the result of the orderChecklist operation.
+     * @callback module:api/TaskApi~orderChecklistCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -47063,19 +46811,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Change the order of items on a checklist
      * @param {String} taskId taskId
      * @param {module:model/ChecklistOrderRepresentation} orderRepresentation orderRepresentation
-     * @param {module:api/TaskApi~orderChecklistUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskApi~orderChecklistCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.orderChecklistUsingPUT = function (taskId, orderRepresentation, callback) {
+    this.orderChecklist = function (taskId, orderRepresentation) {
       var postBody = orderRepresentation;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling orderChecklistUsingPUT";
+        throw "Missing the required parameter 'taskId' when calling orderChecklist";
       }
 
       // verify the required parameter 'orderRepresentation' is set
       if (orderRepresentation == undefined || orderRepresentation == null) {
-        throw "Missing the required parameter 'orderRepresentation' when calling orderChecklistUsingPUT";
+        throw "Missing the required parameter 'orderRepresentation' when calling orderChecklist";
       }
 
       var pathParams = {
@@ -47090,12 +46838,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/checklist', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/checklist', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the removeFormUsingDELETE operation.
-     * @callback module:api/TaskApi~removeFormUsingDELETECallback
+     * Callback function to receive the result of the removeForm operation.
+     * @callback module:api/TaskApi~removeFormCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -47104,14 +46852,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Remove a form to a task
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~removeFormUsingDELETECallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskApi~removeFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.removeFormUsingDELETE = function (taskId, callback) {
+    this.removeForm = function (taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling removeFormUsingDELETE";
+        throw "Missing the required parameter 'taskId' when calling removeForm";
       }
 
       var pathParams = {
@@ -47126,12 +46874,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/remove-form', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/remove-form', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the removeInvolvedUserUsingPUT operation.
-     * @callback module:api/TaskApi~removeInvolvedUserUsingPUTCallback
+     * Callback function to receive the result of the removeInvolvedUser operation.
+     * @callback module:api/TaskApi~removeInvolvedUserCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -47141,19 +46889,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Remove an involved user from a task
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskApi~removeInvolvedUserUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskApi~removeInvolvedUserCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.removeInvolvedUserUsingPUT = function (taskId, requestNode, callback) {
+    this.removeInvolvedUser = function (taskId, requestNode) {
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling removeInvolvedUserUsingPUT";
+        throw "Missing the required parameter 'taskId' when calling removeInvolvedUser";
       }
 
       // verify the required parameter 'requestNode' is set
       if (requestNode == undefined || requestNode == null) {
-        throw "Missing the required parameter 'requestNode' when calling removeInvolvedUserUsingPUT";
+        throw "Missing the required parameter 'requestNode' when calling removeInvolvedUser";
       }
 
       var pathParams = {
@@ -47168,12 +46916,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/remove-involved', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/remove-involved', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the saveTaskFormUsingPOST operation.
-     * @callback module:api/TaskApi~saveTaskFormUsingPOSTCallback
+     * Callback function to receive the result of the saveTaskForm operation.
+     * @callback module:api/TaskApi~saveTaskFormCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -47183,19 +46931,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Save Task Form
      * @param {String} taskId taskId
      * @param {module:model/SaveFormRepresentation} saveTaskFormRepresentation saveTaskFormRepresentation
-     * @param {module:api/TaskApi~saveTaskFormUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskApi~saveTaskFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.saveTaskFormUsingPOST = function (taskId, saveTaskFormRepresentation, callback) {
+    this.saveTaskForm = function (taskId, saveTaskFormRepresentation) {
       var postBody = saveTaskFormRepresentation;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling saveTaskFormUsingPOST";
+        throw "Missing the required parameter 'taskId' when calling saveTaskForm";
       }
 
       // verify the required parameter 'saveTaskFormRepresentation' is set
       if (saveTaskFormRepresentation == undefined || saveTaskFormRepresentation == null) {
-        throw "Missing the required parameter 'saveTaskFormRepresentation' when calling saveTaskFormUsingPOST";
+        throw "Missing the required parameter 'saveTaskFormRepresentation' when calling saveTaskForm";
       }
 
       var pathParams = {
@@ -47210,12 +46958,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/task-forms/{taskId}/save-form', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/task-forms/{taskId}/save-form', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the unclaimTaskUsingPUT operation.
-     * @callback module:api/TaskApi~unclaimTaskUsingPUTCallback
+     * Callback function to receive the result of the unclaimTask operation.
+     * @callback module:api/TaskApi~unclaimTaskCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -47225,14 +46973,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Unclaim a task
      * To unclaim a task (in case the task was assigned to a group)
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~unclaimTaskUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskApi~unclaimTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.unclaimTaskUsingPUT = function (taskId, callback) {
+    this.unclaimTask = function (taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling unclaimTaskUsingPUT";
+        throw "Missing the required parameter 'taskId' when calling unclaimTask";
       }
 
       var pathParams = {
@@ -47247,12 +46995,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/unclaim', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/action/unclaim', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the updateTaskUsingPUT operation.
-     * @callback module:api/TaskApi~updateTaskUsingPUTCallback
+     * Callback function to receive the result of the updateTask operation.
+     * @callback module:api/TaskApi~updateTaskCallback
      * @param {String} error Error message, if any.
      * @param {module:model/TaskRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -47263,20 +47011,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * You can edit only name, description and dueDate (ISO 8601 string).
      * @param {String} taskId taskId
      * @param {module:model/TaskUpdateRepresentation} updated updated
-     * @param {module:api/TaskApi~updateTaskUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskApi~updateTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TaskRepresentation}
      */
-    this.updateTaskUsingPUT = function (taskId, updated, callback) {
+    this.updateTask = function (taskId, updated) {
       var postBody = updated;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling updateTaskUsingPUT";
+        throw "Missing the required parameter 'taskId' when calling updateTask";
       }
 
       // verify the required parameter 'updated' is set
       if (updated == undefined || updated == null) {
-        throw "Missing the required parameter 'updated' when calling updateTaskUsingPUT";
+        throw "Missing the required parameter 'updated' when calling updateTask";
       }
 
       var pathParams = {
@@ -47291,14 +47039,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = TaskRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/ChecklistOrderRepresentation":194,"../model/CommentRepresentation":195,"../model/CompleteFormRepresentation":196,"../model/FormDefinitionRepresentation":207,"../model/FormValueRepresentation":215,"../model/ObjectNode":229,"../model/RelatedContentRepresentation":238,"../model/ResultListDataRepresentation":241,"../model/SaveFormRepresentation":243,"../model/TaskFilterRequestRepresentation":247,"../model/TaskRepresentation":248,"../model/TaskUpdateRepresentation":249}],174:[function(require,module,exports){
+},{"../ApiClient":136,"../model/ChecklistOrderRepresentation":193,"../model/CommentRepresentation":194,"../model/CompleteFormRepresentation":195,"../model/FormDefinitionRepresentation":206,"../model/FormValueRepresentation":214,"../model/ObjectNode":228,"../model/RelatedContentRepresentation":237,"../model/ResultListDataRepresentation":240,"../model/SaveFormRepresentation":242,"../model/TaskFilterRequestRepresentation":246,"../model/TaskRepresentation":247,"../model/TaskUpdateRepresentation":248}],173:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -47327,7 +47075,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new TaskCheckListApi. 
+   * Constructs a new TaskCheckListApi.
    * @alias module:api/TaskCheckListApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -47338,8 +47086,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the addSubtaskUsingPOST operation.
-     * @callback module:api/TaskCheckListApi~addSubtaskUsingPOSTCallback
+     * Callback function to receive the result of the addSubtask operation.
+     * @callback module:api/TaskCheckListApi~addSubtaskCallback
      * @param {String} error Error message, if any.
      * @param {module:model/TaskRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -47349,20 +47097,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Create a task checklist
      * @param {String} taskId taskId
      * @param {module:model/TaskRepresentation} taskRepresentation taskRepresentation
-     * @param {module:api/TaskCheckListApi~addSubtaskUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskCheckListApi~addSubtaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TaskRepresentation}
      */
-    this.addSubtaskUsingPOST = function (taskId, taskRepresentation, callback) {
+    this.addSubtask = function (taskId, taskRepresentation) {
       var postBody = taskRepresentation;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling addSubtaskUsingPOST";
+        throw "Missing the required parameter 'taskId' when calling addSubtask";
       }
 
       // verify the required parameter 'taskRepresentation' is set
       if (taskRepresentation == undefined || taskRepresentation == null) {
-        throw "Missing the required parameter 'taskRepresentation' when calling addSubtaskUsingPOST";
+        throw "Missing the required parameter 'taskRepresentation' when calling addSubtask";
       }
 
       var pathParams = {
@@ -47377,12 +47125,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = TaskRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/checklist', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/checklist', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getChecklistUsingGET operation.
-     * @callback module:api/TaskCheckListApi~getChecklistUsingGETCallback
+     * Callback function to receive the result of the getChecklist operation.
+     * @callback module:api/TaskCheckListApi~getChecklistCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -47391,15 +47139,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve Checklist added to a task
      * @param {String} taskId taskId
-     * @param {module:api/TaskCheckListApi~getChecklistUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskCheckListApi~getChecklistCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getChecklistUsingGET = function (taskId, callback) {
+    this.getChecklist = function (taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling getChecklistUsingGET";
+        throw "Missing the required parameter 'taskId' when calling getChecklist";
       }
 
       var pathParams = {
@@ -47414,12 +47162,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/checklist', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/checklist', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the orderChecklistUsingPUT operation.
-     * @callback module:api/TaskCheckListApi~orderChecklistUsingPUTCallback
+     * Callback function to receive the result of the orderChecklist operation.
+     * @callback module:api/TaskCheckListApi~orderChecklistCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -47429,19 +47177,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Change the order of items on a checklist
      * @param {String} taskId taskId
      * @param {module:model/ChecklistOrderRepresentation} orderRepresentation orderRepresentation
-     * @param {module:api/TaskCheckListApi~orderChecklistUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskCheckListApi~orderChecklistCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.orderChecklistUsingPUT = function (taskId, orderRepresentation, callback) {
+    this.orderChecklist = function (taskId, orderRepresentation) {
       var postBody = orderRepresentation;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling orderChecklistUsingPUT";
+        throw "Missing the required parameter 'taskId' when calling orderChecklist";
       }
 
       // verify the required parameter 'orderRepresentation' is set
       if (orderRepresentation == undefined || orderRepresentation == null) {
-        throw "Missing the required parameter 'orderRepresentation' when calling orderChecklistUsingPUT";
+        throw "Missing the required parameter 'orderRepresentation' when calling orderChecklist";
       }
 
       var pathParams = {
@@ -47456,14 +47204,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/checklist', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/tasks/{taskId}/checklist', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/ChecklistOrderRepresentation":194,"../model/ResultListDataRepresentation":241,"../model/TaskRepresentation":248}],175:[function(require,module,exports){
+},{"../ApiClient":136,"../model/ChecklistOrderRepresentation":193,"../model/ResultListDataRepresentation":240,"../model/TaskRepresentation":247}],174:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -47492,7 +47240,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new TaskFormsApi. 
+   * Constructs a new TaskFormsApi.
    * @alias module:api/TaskFormsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -47503,8 +47251,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the completeTaskFormUsingPOST operation.
-     * @callback module:api/TaskFormsApi~completeTaskFormUsingPOSTCallback
+     * Callback function to receive the result of the completeTaskForm operation.
+     * @callback module:api/TaskFormsApi~completeTaskFormCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -47514,19 +47262,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Complete a Task Form
      * @param {String} taskId taskId
      * @param {module:model/CompleteFormRepresentation} completeTaskFormRepresentation completeTaskFormRepresentation
-     * @param {module:api/TaskFormsApi~completeTaskFormUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskFormsApi~completeTaskFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.completeTaskFormUsingPOST = function (taskId, completeTaskFormRepresentation, callback) {
+    this.completeTaskForm = function (taskId, completeTaskFormRepresentation) {
       var postBody = completeTaskFormRepresentation;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling completeTaskFormUsingPOST";
+        throw "Missing the required parameter 'taskId' when calling completeTaskForm";
       }
 
       // verify the required parameter 'completeTaskFormRepresentation' is set
       if (completeTaskFormRepresentation == undefined || completeTaskFormRepresentation == null) {
-        throw "Missing the required parameter 'completeTaskFormRepresentation' when calling completeTaskFormUsingPOST";
+        throw "Missing the required parameter 'completeTaskFormRepresentation' when calling completeTaskForm";
       }
 
       var pathParams = {
@@ -47541,12 +47289,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/task-forms/{taskId}', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/task-forms/{taskId}', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getRestFieldValuesUsingGET1 operation.
-     * @callback module:api/TaskFormsApi~getRestFieldValuesUsingGET1Callback
+     * Callback function to receive the result of the getRestFieldValues operation.
+     * @callback module:api/TaskFormsApi~getRestFieldValuesCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/FormValueRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -47558,25 +47306,25 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {String} taskId taskId
      * @param {String} field field
      * @param {String} column column
-     * @param {module:api/TaskFormsApi~getRestFieldValuesUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskFormsApi~getRestFieldValuesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/FormValueRepresentation>}
      */
-    this.getRestFieldValuesUsingGET1 = function (taskId, field, column, callback) {
+    this.getRestFieldValues = function (taskId, field, column) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling getRestFieldValuesUsingGET1";
+        throw "Missing the required parameter 'taskId' when calling getRestFieldValues";
       }
 
       // verify the required parameter 'field' is set
       if (field == undefined || field == null) {
-        throw "Missing the required parameter 'field' when calling getRestFieldValuesUsingGET1";
+        throw "Missing the required parameter 'field' when calling getRestFieldValues";
       }
 
       // verify the required parameter 'column' is set
       if (column == undefined || column == null) {
-        throw "Missing the required parameter 'column' when calling getRestFieldValuesUsingGET1";
+        throw "Missing the required parameter 'column' when calling getRestFieldValues";
       }
 
       var pathParams = {
@@ -47593,12 +47341,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = [FormValueRepresentation];
 
-      return this.apiClient.callApi('/api/enterprise/task-forms/{taskId}/form-values/{field}/{column}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/task-forms/{taskId}/form-values/{field}/{column}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getRestFieldValuesUsingGET2 operation.
-     * @callback module:api/TaskFormsApi~getRestFieldValuesUsingGET2Callback
+     * Callback function to receive the result of the getRestFieldValues operation.
+     * @callback module:api/TaskFormsApi~getRestFieldValuesCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/FormValueRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -47609,20 +47357,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Form field values that are populated through a REST backend, can be retrieved via this service
      * @param {String} taskId taskId
      * @param {String} field field
-     * @param {module:api/TaskFormsApi~getRestFieldValuesUsingGET2Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskFormsApi~getRestFieldValuesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/FormValueRepresentation>}
      */
-    this.getRestFieldValuesUsingGET2 = function (taskId, field, callback) {
+    this.getRestFieldValues = function (taskId, field) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling getRestFieldValuesUsingGET2";
+        throw "Missing the required parameter 'taskId' when calling getRestFieldValues";
       }
 
       // verify the required parameter 'field' is set
       if (field == undefined || field == null) {
-        throw "Missing the required parameter 'field' when calling getRestFieldValuesUsingGET2";
+        throw "Missing the required parameter 'field' when calling getRestFieldValues";
       }
 
       var pathParams = {
@@ -47638,12 +47386,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = [FormValueRepresentation];
 
-      return this.apiClient.callApi('/api/enterprise/task-forms/{taskId}/form-values/{field}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/task-forms/{taskId}/form-values/{field}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getTaskFormUsingGET operation.
-     * @callback module:api/TaskFormsApi~getTaskFormUsingGETCallback
+     * Callback function to receive the result of the getTaskForm operation.
+     * @callback module:api/TaskFormsApi~getTaskFormCallback
      * @param {String} error Error message, if any.
      * @param {module:model/FormDefinitionRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -47652,15 +47400,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve Task Form
      * @param {String} taskId taskId
-     * @param {module:api/TaskFormsApi~getTaskFormUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskFormsApi~getTaskFormCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/FormDefinitionRepresentation}
      */
-    this.getTaskFormUsingGET = function (taskId, callback) {
+    this.getTaskForm = function (taskId) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling getTaskFormUsingGET";
+        throw "Missing the required parameter 'taskId' when calling getTaskForm";
       }
 
       var pathParams = {
@@ -47675,12 +47423,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = FormDefinitionRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/task-forms/{taskId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/task-forms/{taskId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the saveTaskFormUsingPOST operation.
-     * @callback module:api/TaskFormsApi~saveTaskFormUsingPOSTCallback
+     * Callback function to receive the result of the saveTaskForm operation.
+     * @callback module:api/TaskFormsApi~saveTaskFormCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -47690,19 +47438,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Save Task Form
      * @param {String} taskId taskId
      * @param {module:model/SaveFormRepresentation} saveTaskFormRepresentation saveTaskFormRepresentation
-     * @param {module:api/TaskFormsApi~saveTaskFormUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TaskFormsApi~saveTaskFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.saveTaskFormUsingPOST = function (taskId, saveTaskFormRepresentation, callback) {
+    this.saveTaskForm = function (taskId, saveTaskFormRepresentation) {
       var postBody = saveTaskFormRepresentation;
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling saveTaskFormUsingPOST";
+        throw "Missing the required parameter 'taskId' when calling saveTaskForm";
       }
 
       // verify the required parameter 'saveTaskFormRepresentation' is set
       if (saveTaskFormRepresentation == undefined || saveTaskFormRepresentation == null) {
-        throw "Missing the required parameter 'saveTaskFormRepresentation' when calling saveTaskFormUsingPOST";
+        throw "Missing the required parameter 'saveTaskFormRepresentation' when calling saveTaskForm";
       }
 
       var pathParams = {
@@ -47717,14 +47465,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/task-forms/{taskId}/save-form', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/task-forms/{taskId}/save-form', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/CompleteFormRepresentation":196,"../model/FormDefinitionRepresentation":207,"../model/FormValueRepresentation":215,"../model/SaveFormRepresentation":243}],176:[function(require,module,exports){
+},{"../ApiClient":136,"../model/CompleteFormRepresentation":195,"../model/FormDefinitionRepresentation":206,"../model/FormValueRepresentation":214,"../model/SaveFormRepresentation":242}],175:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -47753,7 +47501,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new TemporaryApi. 
+   * Constructs a new TemporaryApi.
    * @alias module:api/TemporaryApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -47764,8 +47512,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the completeTasksUsingGET operation.
-     * @callback module:api/TemporaryApi~completeTasksUsingGETCallback
+     * Callback function to receive the result of the completeTasks operation.
+     * @callback module:api/TemporaryApi~completeTasksCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -47775,19 +47523,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * completeTasks
      * @param {Integer} userId userId
      * @param {String} processDefinitionKey processDefinitionKey
-     * @param {module:api/TemporaryApi~completeTasksUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TemporaryApi~completeTasksCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.completeTasksUsingGET = function (userId, processDefinitionKey, callback) {
+    this.completeTasks = function (userId, processDefinitionKey) {
       var postBody = null;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling completeTasksUsingGET";
+        throw "Missing the required parameter 'userId' when calling completeTasks";
       }
 
       // verify the required parameter 'processDefinitionKey' is set
       if (processDefinitionKey == undefined || processDefinitionKey == null) {
-        throw "Missing the required parameter 'processDefinitionKey' when calling completeTasksUsingGET";
+        throw "Missing the required parameter 'processDefinitionKey' when calling completeTasks";
       }
 
       var pathParams = {};
@@ -47803,12 +47551,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/temporary/generate-report-data/complete-tasks', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/temporary/generate-report-data/complete-tasks', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the generateDataUsingGET operation.
-     * @callback module:api/TemporaryApi~generateDataUsingGETCallback
+     * Callback function to receive the result of the generateData operation.
+     * @callback module:api/TemporaryApi~generateDataCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -47818,19 +47566,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * generateData
      * @param {Integer} userId userId
      * @param {String} processDefinitionKey processDefinitionKey
-     * @param {module:api/TemporaryApi~generateDataUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TemporaryApi~generateDataCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.generateDataUsingGET = function (userId, processDefinitionKey, callback) {
+    this.generateData = function (userId, processDefinitionKey) {
       var postBody = null;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling generateDataUsingGET";
+        throw "Missing the required parameter 'userId' when calling generateData";
       }
 
       // verify the required parameter 'processDefinitionKey' is set
       if (processDefinitionKey == undefined || processDefinitionKey == null) {
-        throw "Missing the required parameter 'processDefinitionKey' when calling generateDataUsingGET";
+        throw "Missing the required parameter 'processDefinitionKey' when calling generateData";
       }
 
       var pathParams = {};
@@ -47846,12 +47594,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/temporary/generate-report-data/start-process', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/temporary/generate-report-data/start-process', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getHeadersUsingGET operation.
-     * @callback module:api/TemporaryApi~getHeadersUsingGETCallback
+     * Callback function to receive the result of the getHeaders operation.
+     * @callback module:api/TemporaryApi~getHeadersCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ArrayNode} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -47859,10 +47607,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * getHeaders
-     * @param {module:api/TemporaryApi~getHeadersUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TemporaryApi~getHeadersCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ArrayNode}
      */
-    this.getHeadersUsingGET = function (callback) {
+    this.getHeaders = function (callback) {
       var postBody = null;
 
       var pathParams = {};
@@ -47875,12 +47623,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ArrayNode;
 
-      return this.apiClient.callApi('/api/enterprise/temporary/example-headers', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/temporary/example-headers', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getOptionsUsingGET operation.
-     * @callback module:api/TemporaryApi~getOptionsUsingGETCallback
+     * Callback function to receive the result of the getOptions operation.
+     * @callback module:api/TemporaryApi~getOptionsCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ArrayNode} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -47888,10 +47636,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * getOptions
-     * @param {module:api/TemporaryApi~getOptionsUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/TemporaryApi~getOptionsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ArrayNode}
      */
-    this.getOptionsUsingGET = function (callback) {
+    this.getOptions = function (callback) {
       var postBody = null;
 
       var pathParams = {};
@@ -47904,14 +47652,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ArrayNode;
 
-      return this.apiClient.callApi('/api/enterprise/temporary/example-options', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/temporary/example-options', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/ArrayNode":190}],177:[function(require,module,exports){
+},{"../ApiClient":136,"../model/ArrayNode":189}],176:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -47940,7 +47688,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new UserApi. 
+   * Constructs a new UserApi.
    * @alias module:api/UserApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -47951,8 +47699,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the executeActionUsingPOST operation.
-     * @callback module:api/UserApi~executeActionUsingPOSTCallback
+     * Callback function to receive the result of the executeAction operation.
+     * @callback module:api/UserApi~executeActionCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -47963,19 +47711,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Typical action is updating/reset password
      * @param {Integer} userId userId
      * @param {module:model/UserActionRepresentation} actionRequest actionRequest
-     * @param {module:api/UserApi~executeActionUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/UserApi~executeActionCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.executeActionUsingPOST = function (userId, actionRequest, callback) {
+    this.executeAction = function (userId, actionRequest) {
       var postBody = actionRequest;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling executeActionUsingPOST";
+        throw "Missing the required parameter 'userId' when calling executeAction";
       }
 
       // verify the required parameter 'actionRequest' is set
       if (actionRequest == undefined || actionRequest == null) {
-        throw "Missing the required parameter 'actionRequest' when calling executeActionUsingPOST";
+        throw "Missing the required parameter 'actionRequest' when calling executeAction";
       }
 
       var pathParams = {
@@ -47990,12 +47738,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/users/{userId}', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/users/{userId}', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getProfilePictureUsingGET1 operation.
-     * @callback module:api/UserApi~getProfilePictureUsingGET1Callback
+     * Callback function to receive the result of the getProfilePicture operation.
+     * @callback module:api/UserApi~getProfilePictureCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -48004,14 +47752,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve user profile picture
      * @param {Integer} userId userId
-     * @param {module:api/UserApi~getProfilePictureUsingGET1Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/UserApi~getProfilePictureCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.getProfilePictureUsingGET1 = function (userId, callback) {
+    this.getProfilePicture = function (userId) {
       var postBody = null;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling getProfilePictureUsingGET1";
+        throw "Missing the required parameter 'userId' when calling getProfilePicture";
       }
 
       var pathParams = {
@@ -48026,12 +47774,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/users/{userId}/picture', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/users/{userId}/picture', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getUserUsingGET2 operation.
-     * @callback module:api/UserApi~getUserUsingGET2Callback
+     * Callback function to receive the result of the getUser operation.
+     * @callback module:api/UserApi~getUserCallback
      * @param {String} error Error message, if any.
      * @param {module:model/UserRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -48040,15 +47788,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve user information
      * @param {Integer} userId userId
-     * @param {module:api/UserApi~getUserUsingGET2Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/UserApi~getUserCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserRepresentation}
      */
-    this.getUserUsingGET2 = function (userId, callback) {
+    this.getUser = function (userId) {
       var postBody = null;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling getUserUsingGET2";
+        throw "Missing the required parameter 'userId' when calling getUser";
       }
 
       var pathParams = {
@@ -48063,12 +47811,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = UserRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/users/{userId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/users/{userId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getUsersUsingGET2 operation.
-     * @callback module:api/UserApi~getUsersUsingGET2Callback
+     * Callback function to receive the result of the getUsers operation.
+     * @callback module:api/UserApi~getUsersCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -48086,10 +47834,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {String} opts.excludeProcessId excludeProcessId
      * @param {Integer} opts.groupId groupId
      * @param {Integer} opts.tenantId tenantId
-     * @param {module:api/UserApi~getUsersUsingGET2Callback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/UserApi~getUsersCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getUsersUsingGET2 = function (opts, callback) {
+    this.getUsers = function (opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -48112,28 +47860,28 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/users', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/users', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the requestPasswordResetUsingPOST operation.
-     * @callback module:api/UserApi~requestPasswordResetUsingPOSTCallback
+     * Callback function to receive the result of the requestPasswordReset operation.
+     * @callback module:api/UserApi~requestPasswordResetCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
      */
 
     /**
-     * Request password reset 
+     * Request password reset
      * @param {module:model/ResetPasswordRepresentation} resetPassword resetPassword
-     * @param {module:api/UserApi~requestPasswordResetUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/UserApi~requestPasswordResetCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.requestPasswordResetUsingPOST = function (resetPassword, callback) {
+    this.requestPasswordReset = function (resetPassword) {
       var postBody = resetPassword;
 
       // verify the required parameter 'resetPassword' is set
       if (resetPassword == undefined || resetPassword == null) {
-        throw "Missing the required parameter 'resetPassword' when calling requestPasswordResetUsingPOST";
+        throw "Missing the required parameter 'resetPassword' when calling requestPasswordReset";
       }
 
       var pathParams = {};
@@ -48146,12 +47894,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/idm/passwords', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/idm/passwords', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the updateUserUsingPUT operation.
-     * @callback module:api/UserApi~updateUserUsingPUTCallback
+     * Callback function to receive the result of the updateUser operation.
+     * @callback module:api/UserApi~updateUserCallback
      * @param {String} error Error message, if any.
      * @param {module:model/UserRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -48161,20 +47909,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Update user information
      * @param {Integer} userId userId
      * @param {module:model/UserRepresentation} userRequest userRequest
-     * @param {module:api/UserApi~updateUserUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/UserApi~updateUserCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserRepresentation}
      */
-    this.updateUserUsingPUT = function (userId, userRequest, callback) {
+    this.updateUser = function (userId, userRequest) {
       var postBody = userRequest;
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling updateUserUsingPUT";
+        throw "Missing the required parameter 'userId' when calling updateUser";
       }
 
       // verify the required parameter 'userRequest' is set
       if (userRequest == undefined || userRequest == null) {
-        throw "Missing the required parameter 'userRequest' when calling updateUserUsingPUT";
+        throw "Missing the required parameter 'userRequest' when calling updateUser";
       }
 
       var pathParams = {
@@ -48189,14 +47937,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = UserRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/users/{userId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/users/{userId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/ResetPasswordRepresentation":239,"../model/ResultListDataRepresentation":241,"../model/UserActionRepresentation":253,"../model/UserRepresentation":256}],178:[function(require,module,exports){
+},{"../ApiClient":136,"../model/ResetPasswordRepresentation":238,"../model/ResultListDataRepresentation":240,"../model/UserActionRepresentation":252,"../model/UserRepresentation":255}],177:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -48225,7 +47973,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new UserFiltersApi. 
+   * Constructs a new UserFiltersApi.
    * @alias module:api/UserFiltersApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -48236,8 +47984,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the createUserProcessInstanceFilterUsingPOST operation.
-     * @callback module:api/UserFiltersApi~createUserProcessInstanceFilterUsingPOSTCallback
+     * Callback function to receive the result of the createUserProcessInstanceFilter operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserProcessInstanceFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -48246,15 +47993,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Create a user process instance task filter
      * @param {module:model/UserProcessInstanceFilterRepresentation} userProcessInstanceFilterRepresentation userProcessInstanceFilterRepresentation
-     * @param {module:api/UserFiltersApi~createUserProcessInstanceFilterUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserProcessInstanceFilterRepresentation}
      */
-    this.createUserProcessInstanceFilterUsingPOST = function (userProcessInstanceFilterRepresentation, callback) {
+    this.createUserProcessInstanceFilter = function (userProcessInstanceFilterRepresentation) {
       var postBody = userProcessInstanceFilterRepresentation;
 
       // verify the required parameter 'userProcessInstanceFilterRepresentation' is set
       if (userProcessInstanceFilterRepresentation == undefined || userProcessInstanceFilterRepresentation == null) {
-        throw "Missing the required parameter 'userProcessInstanceFilterRepresentation' when calling createUserProcessInstanceFilterUsingPOST";
+        throw "Missing the required parameter 'userProcessInstanceFilterRepresentation' when calling createUserProcessInstanceFilter";
       }
 
       var pathParams = {};
@@ -48267,12 +48013,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = UserProcessInstanceFilterRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/filters/processes', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/filters/processes', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the createUserTaskFilterUsingPOST operation.
-     * @callback module:api/UserFiltersApi~createUserTaskFilterUsingPOSTCallback
+     * Callback function to receive the result of the createUserTaskFilter operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserTaskFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -48281,15 +48026,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Create a new task filter
      * @param {module:model/UserTaskFilterRepresentation} userTaskFilterRepresentation userTaskFilterRepresentation
-     * @param {module:api/UserFiltersApi~createUserTaskFilterUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserTaskFilterRepresentation}
      */
-    this.createUserTaskFilterUsingPOST = function (userTaskFilterRepresentation, callback) {
+    this.createUserTaskFilter = function (userTaskFilterRepresentation) {
       var postBody = userTaskFilterRepresentation;
 
       // verify the required parameter 'userTaskFilterRepresentation' is set
       if (userTaskFilterRepresentation == undefined || userTaskFilterRepresentation == null) {
-        throw "Missing the required parameter 'userTaskFilterRepresentation' when calling createUserTaskFilterUsingPOST";
+        throw "Missing the required parameter 'userTaskFilterRepresentation' when calling createUserTaskFilter";
       }
 
       var pathParams = {};
@@ -48302,12 +48046,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = UserTaskFilterRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/filters/tasks', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/filters/tasks', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the deleteUserProcessInstanceFilterUsingDELETE operation.
-     * @callback module:api/UserFiltersApi~deleteUserProcessInstanceFilterUsingDELETECallback
+     * Callback function to receive the result of the deleteUserProcessInstanceFilter operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -48316,14 +48059,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Delete a user process instance task filter
      * @param {Integer} userFilterId userFilterId
-     * @param {module:api/UserFiltersApi~deleteUserProcessInstanceFilterUsingDELETECallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteUserProcessInstanceFilterUsingDELETE = function (userFilterId, callback) {
+    this.deleteUserProcessInstanceFilter = function (userFilterId) {
       var postBody = null;
 
       // verify the required parameter 'userFilterId' is set
       if (userFilterId == undefined || userFilterId == null) {
-        throw "Missing the required parameter 'userFilterId' when calling deleteUserProcessInstanceFilterUsingDELETE";
+        throw "Missing the required parameter 'userFilterId' when calling deleteUserProcessInstanceFilter";
       }
 
       var pathParams = {
@@ -48338,12 +48080,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/filters/processes/{userFilterId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/filters/processes/{userFilterId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the deleteUserTaskFilterUsingDELETE operation.
-     * @callback module:api/UserFiltersApi~deleteUserTaskFilterUsingDELETECallback
+     * Callback function to receive the result of the deleteUserTaskFilter operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -48352,14 +48093,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Delete a task filter
      * @param {Integer} userFilterId userFilterId
-     * @param {module:api/UserFiltersApi~deleteUserTaskFilterUsingDELETECallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteUserTaskFilterUsingDELETE = function (userFilterId, callback) {
+    this.deleteUserTaskFilter = function (userFilterId) {
       var postBody = null;
 
       // verify the required parameter 'userFilterId' is set
       if (userFilterId == undefined || userFilterId == null) {
-        throw "Missing the required parameter 'userFilterId' when calling deleteUserTaskFilterUsingDELETE";
+        throw "Missing the required parameter 'userFilterId' when calling deleteUserTaskFilter";
       }
 
       var pathParams = {
@@ -48374,12 +48114,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/filters/tasks/{userFilterId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/filters/tasks/{userFilterId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getUserProcessInstanceFilterUsingGET operation.
-     * @callback module:api/UserFiltersApi~getUserProcessInstanceFilterUsingGETCallback
+     * Callback function to receive the result of the getUserProcessInstanceFilter operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserProcessInstanceFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -48388,15 +48127,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Get a specific user process instance task filter
      * @param {Integer} userFilterId userFilterId
-     * @param {module:api/UserFiltersApi~getUserProcessInstanceFilterUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserProcessInstanceFilterRepresentation}
      */
-    this.getUserProcessInstanceFilterUsingGET = function (userFilterId, callback) {
+    this.getUserProcessInstanceFilter = function (userFilterId) {
       var postBody = null;
 
       // verify the required parameter 'userFilterId' is set
       if (userFilterId == undefined || userFilterId == null) {
-        throw "Missing the required parameter 'userFilterId' when calling getUserProcessInstanceFilterUsingGET";
+        throw "Missing the required parameter 'userFilterId' when calling getUserProcessInstanceFilter";
       }
 
       var pathParams = {
@@ -48411,12 +48149,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = UserProcessInstanceFilterRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/filters/processes/{userFilterId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/filters/processes/{userFilterId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getUserProcessInstanceFiltersUsingGET operation.
-     * @callback module:api/UserFiltersApi~getUserProcessInstanceFiltersUsingGETCallback
+     * Callback function to receive the result of the getUserProcessInstanceFilters operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -48426,10 +48163,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Retrieve list of taks filters
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.appId appId
-     * @param {module:api/UserFiltersApi~getUserProcessInstanceFiltersUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getUserProcessInstanceFiltersUsingGET = function (opts, callback) {
+    this.getUserProcessInstanceFilters = function (opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -48445,12 +48181,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/filters/processes', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/filters/processes', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getUserTaskFilterUsingGET operation.
-     * @callback module:api/UserFiltersApi~getUserTaskFilterUsingGETCallback
+     * Callback function to receive the result of the getUserTaskFilter operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserTaskFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -48459,15 +48194,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Get a specific task filter
      * @param {Integer} userFilterId userFilterId
-     * @param {module:api/UserFiltersApi~getUserTaskFilterUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserTaskFilterRepresentation}
      */
-    this.getUserTaskFilterUsingGET = function (userFilterId, callback) {
+    this.getUserTaskFilter = function (userFilterId) {
       var postBody = null;
 
       // verify the required parameter 'userFilterId' is set
       if (userFilterId == undefined || userFilterId == null) {
-        throw "Missing the required parameter 'userFilterId' when calling getUserTaskFilterUsingGET";
+        throw "Missing the required parameter 'userFilterId' when calling getUserTaskFilter";
       }
 
       var pathParams = {
@@ -48482,12 +48216,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = UserTaskFilterRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/filters/tasks/{userFilterId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/filters/tasks/{userFilterId}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the getUserTaskFiltersUsingGET operation.
-     * @callback module:api/UserFiltersApi~getUserTaskFiltersUsingGETCallback
+     * Callback function to receive the result of the getUserTaskFilters operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -48497,10 +48230,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Retrieve list of task filters
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.appId appId
-     * @param {module:api/UserFiltersApi~getUserTaskFiltersUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getUserTaskFiltersUsingGET = function (opts, callback) {
+    this.getUserTaskFilters = function (opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -48516,12 +48248,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/filters/tasks', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/filters/tasks', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the orderUserProcessInstanceFiltersUsingPUT operation.
-     * @callback module:api/UserFiltersApi~orderUserProcessInstanceFiltersUsingPUTCallback
+     * Callback function to receive the result of the orderUserProcessInstanceFilters operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -48530,14 +48261,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * To order the list of user process instance filters
      * @param {module:model/UserFilterOrderRepresentation} filterOrderRepresentation filterOrderRepresentation
-     * @param {module:api/UserFiltersApi~orderUserProcessInstanceFiltersUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.orderUserProcessInstanceFiltersUsingPUT = function (filterOrderRepresentation, callback) {
+    this.orderUserProcessInstanceFilters = function (filterOrderRepresentation) {
       var postBody = filterOrderRepresentation;
 
       // verify the required parameter 'filterOrderRepresentation' is set
       if (filterOrderRepresentation == undefined || filterOrderRepresentation == null) {
-        throw "Missing the required parameter 'filterOrderRepresentation' when calling orderUserProcessInstanceFiltersUsingPUT";
+        throw "Missing the required parameter 'filterOrderRepresentation' when calling orderUserProcessInstanceFilters";
       }
 
       var pathParams = {};
@@ -48550,12 +48280,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/filters/processes', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/filters/processes', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the orderUserTaskFiltersUsingPUT operation.
-     * @callback module:api/UserFiltersApi~orderUserTaskFiltersUsingPUTCallback
+     * Callback function to receive the result of the orderUserTaskFilters operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -48564,14 +48293,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * To order the list of user task filters
      * @param {module:model/UserFilterOrderRepresentation} filterOrderRepresentation filterOrderRepresentation
-     * @param {module:api/UserFiltersApi~orderUserTaskFiltersUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.orderUserTaskFiltersUsingPUT = function (filterOrderRepresentation, callback) {
+    this.orderUserTaskFilters = function (filterOrderRepresentation) {
       var postBody = filterOrderRepresentation;
 
       // verify the required parameter 'filterOrderRepresentation' is set
       if (filterOrderRepresentation == undefined || filterOrderRepresentation == null) {
-        throw "Missing the required parameter 'filterOrderRepresentation' when calling orderUserTaskFiltersUsingPUT";
+        throw "Missing the required parameter 'filterOrderRepresentation' when calling orderUserTaskFilters";
       }
 
       var pathParams = {};
@@ -48584,12 +48312,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/api/enterprise/filters/tasks', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/filters/tasks', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the updateUserProcessInstanceFilterUsingPUT operation.
-     * @callback module:api/UserFiltersApi~updateUserProcessInstanceFilterUsingPUTCallback
+     * Callback function to receive the result of the updateUserProcessInstanceFilter operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserProcessInstanceFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -48599,20 +48326,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Update a user process instance task filter
      * @param {Integer} userFilterId userFilterId
      * @param {module:model/UserProcessInstanceFilterRepresentation} userProcessInstanceFilterRepresentation userProcessInstanceFilterRepresentation
-     * @param {module:api/UserFiltersApi~updateUserProcessInstanceFilterUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserProcessInstanceFilterRepresentation}
      */
-    this.updateUserProcessInstanceFilterUsingPUT = function (userFilterId, userProcessInstanceFilterRepresentation, callback) {
+    this.updateUserProcessInstanceFilter = function (userFilterId, userProcessInstanceFilterRepresentation) {
       var postBody = userProcessInstanceFilterRepresentation;
 
       // verify the required parameter 'userFilterId' is set
       if (userFilterId == undefined || userFilterId == null) {
-        throw "Missing the required parameter 'userFilterId' when calling updateUserProcessInstanceFilterUsingPUT";
+        throw "Missing the required parameter 'userFilterId' when calling updateUserProcessInstanceFilter";
       }
 
       // verify the required parameter 'userProcessInstanceFilterRepresentation' is set
       if (userProcessInstanceFilterRepresentation == undefined || userProcessInstanceFilterRepresentation == null) {
-        throw "Missing the required parameter 'userProcessInstanceFilterRepresentation' when calling updateUserProcessInstanceFilterUsingPUT";
+        throw "Missing the required parameter 'userProcessInstanceFilterRepresentation' when calling updateUserProcessInstanceFilter";
       }
 
       var pathParams = {
@@ -48627,12 +48353,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = UserProcessInstanceFilterRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/filters/processes/{userFilterId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/filters/processes/{userFilterId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
-     * Callback function to receive the result of the updateUserTaskFilterUsingPUT operation.
-     * @callback module:api/UserFiltersApi~updateUserTaskFilterUsingPUTCallback
+     * Callback function to receive the result of the updateUserTaskFilter operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserTaskFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -48642,20 +48367,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Update a specific task filter
      * @param {Integer} userFilterId userFilterId
      * @param {module:model/UserTaskFilterRepresentation} userTaskFilterRepresentation userTaskFilterRepresentation
-     * @param {module:api/UserFiltersApi~updateUserTaskFilterUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserTaskFilterRepresentation}
      */
-    this.updateUserTaskFilterUsingPUT = function (userFilterId, userTaskFilterRepresentation, callback) {
+    this.updateUserTaskFilter = function (userFilterId, userTaskFilterRepresentation) {
       var postBody = userTaskFilterRepresentation;
 
       // verify the required parameter 'userFilterId' is set
       if (userFilterId == undefined || userFilterId == null) {
-        throw "Missing the required parameter 'userFilterId' when calling updateUserTaskFilterUsingPUT";
+        throw "Missing the required parameter 'userFilterId' when calling updateUserTaskFilter";
       }
 
       // verify the required parameter 'userTaskFilterRepresentation' is set
       if (userTaskFilterRepresentation == undefined || userTaskFilterRepresentation == null) {
-        throw "Missing the required parameter 'userTaskFilterRepresentation' when calling updateUserTaskFilterUsingPUT";
+        throw "Missing the required parameter 'userTaskFilterRepresentation' when calling updateUserTaskFilter";
       }
 
       var pathParams = {
@@ -48670,14 +48394,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = UserTaskFilterRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/filters/tasks/{userFilterId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/filters/tasks/{userFilterId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/ResultListDataRepresentation":241,"../model/UserFilterOrderRepresentation":254,"../model/UserProcessInstanceFilterRepresentation":255,"../model/UserTaskFilterRepresentation":257}],179:[function(require,module,exports){
+},{"../ApiClient":136,"../model/ResultListDataRepresentation":240,"../model/UserFilterOrderRepresentation":253,"../model/UserProcessInstanceFilterRepresentation":254,"../model/UserTaskFilterRepresentation":256}],178:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -48706,7 +48430,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new UsersWorkflowApi. 
+   * Constructs a new UsersWorkflowApi.
    * @alias module:api/UsersWorkflowApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
@@ -48717,8 +48441,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getUsersUsingGET2 operation.
-     * @callback module:api/UsersWorkflowApi~getUsersUsingGET2Callback
+     * Callback function to receive the result of the getUsers operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -48736,10 +48459,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {String} opts.excludeProcessId excludeProcessId
      * @param {Integer} opts.groupId groupId
      * @param {Integer} opts.tenantId tenantId
-     * @param {module:api/UsersWorkflowApi~getUsersUsingGET2Callback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getUsersUsingGET2 = function (opts, callback) {
+    this.getUsers = function (opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -48762,14 +48484,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = ResultListDataRepresentation;
 
-      return this.apiClient.callApi('/api/enterprise/users', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, callback);
+      return this.apiClient.callApi('/api/enterprise/users', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
   return exports;
 });
 
-},{"../ApiClient":137,"../model/ResultListDataRepresentation":241}],180:[function(require,module,exports){
+},{"../ApiClient":136,"../model/ResultListDataRepresentation":240}],179:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -49433,7 +49155,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"./ApiClient":137,"./api/AboutApi":138,"./api/AdminEndpointsApi":139,"./api/AdminGroupsApi":140,"./api/AdminTenantsApi":141,"./api/AdminUsersApi":142,"./api/AlfrescoApi":143,"./api/AppsApi":144,"./api/AppsDefinitionApi":145,"./api/AppsRuntimeApi":146,"./api/CommentsApi":147,"./api/ContentApi":148,"./api/ContentRenditionApi":149,"./api/EditorApi":150,"./api/GroupsApi":151,"./api/IDMSyncApi":152,"./api/IntegrationAccountApi":153,"./api/IntegrationAlfrescoCloudApi":154,"./api/IntegrationAlfrescoOnPremiseApi":155,"./api/IntegrationApi":156,"./api/IntegrationBoxApi":157,"./api/IntegrationDriveApi":158,"./api/ModelBpmnApi":159,"./api/ModelsApi":160,"./api/ModelsHistoryApi":161,"./api/ProcessApi":162,"./api/ProcessDefinitionsApi":163,"./api/ProcessDefinitionsFormApi":164,"./api/ProcessInstancesApi":165,"./api/ProcessInstancesInformationApi":166,"./api/ProcessInstancesListingApi":167,"./api/ProcessScopeApi":168,"./api/ProfileApi":169,"./api/ScriptFileApi":170,"./api/SystemPropertiesApi":171,"./api/TaskActionsApi":172,"./api/TaskApi":173,"./api/TaskCheckListApi":174,"./api/TaskFormsApi":175,"./api/TemporaryApi":176,"./api/UserApi":177,"./api/UserFiltersApi":178,"./api/UsersWorkflowApi":179,"./model/AbstractGroupRepresentation":181,"./model/AbstractRepresentation":182,"./model/AbstractUserRepresentation":183,"./model/AddGroupCapabilitiesRepresentation":184,"./model/AppDefinition":185,"./model/AppDefinitionPublishRepresentation":186,"./model/AppDefinitionRepresentation":187,"./model/AppDefinitionUpdateResultRepresentation":188,"./model/AppModelDefinition":189,"./model/ArrayNode":190,"./model/BoxUserAccountCredentialsRepresentation":191,"./model/BulkUserUpdateRepresentation":192,"./model/ChangePasswordRepresentation":193,"./model/ChecklistOrderRepresentation":194,"./model/CommentRepresentation":195,"./model/CompleteFormRepresentation":196,"./model/ConditionRepresentation":197,"./model/CreateEndpointBasicAuthRepresentation":198,"./model/CreateProcessInstanceRepresentation":199,"./model/CreateTenantRepresentation":200,"./model/EndpointBasicAuthRepresentation":201,"./model/EndpointConfigurationRepresentation":202,"./model/EndpointRequestHeaderRepresentation":203,"./model/EntityAttributeScopeRepresentation":204,"./model/EntityVariableScopeRepresentation":205,"./model/File":206,"./model/FormDefinitionRepresentation":207,"./model/FormFieldRepresentation":208,"./model/FormJavascriptEventRepresentation":209,"./model/FormOutcomeRepresentation":210,"./model/FormRepresentation":211,"./model/FormSaveRepresentation":212,"./model/FormScopeRepresentation":213,"./model/FormTabRepresentation":214,"./model/FormValueRepresentation":215,"./model/GroupCapabilityRepresentation":216,"./model/GroupRepresentation":217,"./model/ImageUploadRepresentation":218,"./model/LayoutRepresentation":219,"./model/LightAppRepresentation":220,"./model/LightGroupRepresentation":221,"./model/LightTenantRepresentation":222,"./model/LightUserRepresentation":223,"./model/MaplongListstring":224,"./model/MapstringListEntityVariableScopeRepresentation":225,"./model/MapstringListVariableScopeRepresentation":226,"./model/Mapstringstring":227,"./model/ModelRepresentation":228,"./model/ObjectNode":229,"./model/OptionRepresentation":230,"./model/ProcessInstanceFilterRepresentation":231,"./model/ProcessInstanceFilterRequestRepresentation":232,"./model/ProcessInstanceRepresentation":233,"./model/ProcessScopeIdentifierRepresentation":234,"./model/ProcessScopeRepresentation":235,"./model/ProcessScopesRequestRepresentation":236,"./model/PublishIdentityInfoRepresentation":237,"./model/RelatedContentRepresentation":238,"./model/ResetPasswordRepresentation":239,"./model/RestVariable":240,"./model/ResultListDataRepresentation":241,"./model/RuntimeAppDefinitionSaveRepresentation":242,"./model/SaveFormRepresentation":243,"./model/SyncLogEntryRepresentation":244,"./model/SystemPropertiesRepresentation":245,"./model/TaskFilterRepresentation":246,"./model/TaskFilterRequestRepresentation":247,"./model/TaskRepresentation":248,"./model/TaskUpdateRepresentation":249,"./model/TenantEvent":250,"./model/TenantRepresentation":251,"./model/UserAccountCredentialsRepresentation":252,"./model/UserActionRepresentation":253,"./model/UserFilterOrderRepresentation":254,"./model/UserProcessInstanceFilterRepresentation":255,"./model/UserRepresentation":256,"./model/UserTaskFilterRepresentation":257,"./model/ValidationErrorRepresentation":258,"./model/VariableScopeRepresentation":259}],181:[function(require,module,exports){
+},{"./ApiClient":136,"./api/AboutApi":137,"./api/AdminEndpointsApi":138,"./api/AdminGroupsApi":139,"./api/AdminTenantsApi":140,"./api/AdminUsersApi":141,"./api/AlfrescoApi":142,"./api/AppsApi":143,"./api/AppsDefinitionApi":144,"./api/AppsRuntimeApi":145,"./api/CommentsApi":146,"./api/ContentApi":147,"./api/ContentRenditionApi":148,"./api/EditorApi":149,"./api/GroupsApi":150,"./api/IDMSyncApi":151,"./api/IntegrationAccountApi":152,"./api/IntegrationAlfrescoCloudApi":153,"./api/IntegrationAlfrescoOnPremiseApi":154,"./api/IntegrationApi":155,"./api/IntegrationBoxApi":156,"./api/IntegrationDriveApi":157,"./api/ModelBpmnApi":158,"./api/ModelsApi":159,"./api/ModelsHistoryApi":160,"./api/ProcessApi":161,"./api/ProcessDefinitionsApi":162,"./api/ProcessDefinitionsFormApi":163,"./api/ProcessInstancesApi":164,"./api/ProcessInstancesInformationApi":165,"./api/ProcessInstancesListingApi":166,"./api/ProcessScopeApi":167,"./api/ProfileApi":168,"./api/ScriptFileApi":169,"./api/SystemPropertiesApi":170,"./api/TaskActionsApi":171,"./api/TaskApi":172,"./api/TaskCheckListApi":173,"./api/TaskFormsApi":174,"./api/TemporaryApi":175,"./api/UserApi":176,"./api/UserFiltersApi":177,"./api/UsersWorkflowApi":178,"./model/AbstractGroupRepresentation":180,"./model/AbstractRepresentation":181,"./model/AbstractUserRepresentation":182,"./model/AddGroupCapabilitiesRepresentation":183,"./model/AppDefinition":184,"./model/AppDefinitionPublishRepresentation":185,"./model/AppDefinitionRepresentation":186,"./model/AppDefinitionUpdateResultRepresentation":187,"./model/AppModelDefinition":188,"./model/ArrayNode":189,"./model/BoxUserAccountCredentialsRepresentation":190,"./model/BulkUserUpdateRepresentation":191,"./model/ChangePasswordRepresentation":192,"./model/ChecklistOrderRepresentation":193,"./model/CommentRepresentation":194,"./model/CompleteFormRepresentation":195,"./model/ConditionRepresentation":196,"./model/CreateEndpointBasicAuthRepresentation":197,"./model/CreateProcessInstanceRepresentation":198,"./model/CreateTenantRepresentation":199,"./model/EndpointBasicAuthRepresentation":200,"./model/EndpointConfigurationRepresentation":201,"./model/EndpointRequestHeaderRepresentation":202,"./model/EntityAttributeScopeRepresentation":203,"./model/EntityVariableScopeRepresentation":204,"./model/File":205,"./model/FormDefinitionRepresentation":206,"./model/FormFieldRepresentation":207,"./model/FormJavascriptEventRepresentation":208,"./model/FormOutcomeRepresentation":209,"./model/FormRepresentation":210,"./model/FormSaveRepresentation":211,"./model/FormScopeRepresentation":212,"./model/FormTabRepresentation":213,"./model/FormValueRepresentation":214,"./model/GroupCapabilityRepresentation":215,"./model/GroupRepresentation":216,"./model/ImageUploadRepresentation":217,"./model/LayoutRepresentation":218,"./model/LightAppRepresentation":219,"./model/LightGroupRepresentation":220,"./model/LightTenantRepresentation":221,"./model/LightUserRepresentation":222,"./model/MaplongListstring":223,"./model/MapstringListEntityVariableScopeRepresentation":224,"./model/MapstringListVariableScopeRepresentation":225,"./model/Mapstringstring":226,"./model/ModelRepresentation":227,"./model/ObjectNode":228,"./model/OptionRepresentation":229,"./model/ProcessInstanceFilterRepresentation":230,"./model/ProcessInstanceFilterRequestRepresentation":231,"./model/ProcessInstanceRepresentation":232,"./model/ProcessScopeIdentifierRepresentation":233,"./model/ProcessScopeRepresentation":234,"./model/ProcessScopesRequestRepresentation":235,"./model/PublishIdentityInfoRepresentation":236,"./model/RelatedContentRepresentation":237,"./model/ResetPasswordRepresentation":238,"./model/RestVariable":239,"./model/ResultListDataRepresentation":240,"./model/RuntimeAppDefinitionSaveRepresentation":241,"./model/SaveFormRepresentation":242,"./model/SyncLogEntryRepresentation":243,"./model/SystemPropertiesRepresentation":244,"./model/TaskFilterRepresentation":245,"./model/TaskFilterRequestRepresentation":246,"./model/TaskRepresentation":247,"./model/TaskUpdateRepresentation":248,"./model/TenantEvent":249,"./model/TenantRepresentation":250,"./model/UserAccountCredentialsRepresentation":251,"./model/UserActionRepresentation":252,"./model/UserFilterOrderRepresentation":253,"./model/UserProcessInstanceFilterRepresentation":254,"./model/UserRepresentation":255,"./model/UserTaskFilterRepresentation":256,"./model/ValidationErrorRepresentation":257,"./model/VariableScopeRepresentation":258}],180:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -49518,7 +49240,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],182:[function(require,module,exports){
+},{"../ApiClient":136}],181:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -49573,7 +49295,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],183:[function(require,module,exports){
+},{"../ApiClient":136}],182:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -49672,7 +49394,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],184:[function(require,module,exports){
+},{"../ApiClient":136}],183:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -49736,7 +49458,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],185:[function(require,module,exports){
+},{"../ApiClient":136}],184:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -49821,7 +49543,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137,"./AppModelDefinition":189,"./PublishIdentityInfoRepresentation":237}],186:[function(require,module,exports){
+},{"../ApiClient":136,"./AppModelDefinition":188,"./PublishIdentityInfoRepresentation":236}],185:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -49892,7 +49614,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],187:[function(require,module,exports){
+},{"../ApiClient":136}],186:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -50012,7 +49734,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],188:[function(require,module,exports){
+},{"../ApiClient":136}],187:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -50118,7 +49840,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137,"./AppDefinitionRepresentation":187}],189:[function(require,module,exports){
+},{"../ApiClient":136,"./AppDefinitionRepresentation":186}],188:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -50252,7 +49974,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],190:[function(require,module,exports){
+},{"../ApiClient":136}],189:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -50508,7 +50230,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],191:[function(require,module,exports){
+},{"../ApiClient":136}],190:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -50586,7 +50308,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],192:[function(require,module,exports){
+},{"../ApiClient":136}],191:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -50685,7 +50407,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],193:[function(require,module,exports){
+},{"../ApiClient":136}],192:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -50756,7 +50478,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],194:[function(require,module,exports){
+},{"../ApiClient":136}],193:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -50820,7 +50542,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],195:[function(require,module,exports){
+},{"../ApiClient":136}],194:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -50905,7 +50627,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137,"./LightUserRepresentation":223}],196:[function(require,module,exports){
+},{"../ApiClient":136,"./LightUserRepresentation":222}],195:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -50976,7 +50698,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],197:[function(require,module,exports){
+},{"../ApiClient":136}],196:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -51089,7 +50811,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],198:[function(require,module,exports){
+},{"../ApiClient":136}],197:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -51174,7 +50896,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],199:[function(require,module,exports){
+},{"../ApiClient":136}],198:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -51259,7 +50981,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],200:[function(require,module,exports){
+},{"../ApiClient":136}],199:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -51344,7 +51066,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],201:[function(require,module,exports){
+},{"../ApiClient":136}],200:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -51443,7 +51165,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],202:[function(require,module,exports){
+},{"../ApiClient":136}],201:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -51570,7 +51292,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137,"./EndpointRequestHeaderRepresentation":203}],203:[function(require,module,exports){
+},{"../ApiClient":136,"./EndpointRequestHeaderRepresentation":202}],202:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -51641,7 +51363,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],204:[function(require,module,exports){
+},{"../ApiClient":136}],203:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -51712,7 +51434,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],205:[function(require,module,exports){
+},{"../ApiClient":136}],204:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -51797,7 +51519,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137,"./EntityAttributeScopeRepresentation":204}],206:[function(require,module,exports){
+},{"../ApiClient":136,"./EntityAttributeScopeRepresentation":203}],205:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -51959,7 +51681,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],207:[function(require,module,exports){
+},{"../ApiClient":136}],206:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -52149,7 +51871,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137,"./FormFieldRepresentation":208,"./FormJavascriptEventRepresentation":209,"./FormOutcomeRepresentation":210,"./FormTabRepresentation":214}],208:[function(require,module,exports){
+},{"../ApiClient":136,"./FormFieldRepresentation":207,"./FormJavascriptEventRepresentation":208,"./FormOutcomeRepresentation":209,"./FormTabRepresentation":213}],207:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -52416,7 +52138,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137,"./ConditionRepresentation":197,"./LayoutRepresentation":219,"./OptionRepresentation":230}],209:[function(require,module,exports){
+},{"../ApiClient":136,"./ConditionRepresentation":196,"./LayoutRepresentation":218,"./OptionRepresentation":229}],208:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -52487,7 +52209,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],210:[function(require,module,exports){
+},{"../ApiClient":136}],209:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -52558,7 +52280,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],211:[function(require,module,exports){
+},{"../ApiClient":136}],210:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -52685,7 +52407,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137,"./FormDefinitionRepresentation":207}],212:[function(require,module,exports){
+},{"../ApiClient":136,"./FormDefinitionRepresentation":206}],211:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -52784,7 +52506,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137,"./FormRepresentation":211,"./ProcessScopeIdentifierRepresentation":234}],213:[function(require,module,exports){
+},{"../ApiClient":136,"./FormRepresentation":210,"./ProcessScopeIdentifierRepresentation":233}],212:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -52883,7 +52605,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137,"./FormFieldRepresentation":208,"./FormOutcomeRepresentation":210}],214:[function(require,module,exports){
+},{"../ApiClient":136,"./FormFieldRepresentation":207,"./FormOutcomeRepresentation":209}],213:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -52961,7 +52683,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137,"./ConditionRepresentation":197}],215:[function(require,module,exports){
+},{"../ApiClient":136,"./ConditionRepresentation":196}],214:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -53032,7 +52754,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],216:[function(require,module,exports){
+},{"../ApiClient":136}],215:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -53103,7 +52825,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],217:[function(require,module,exports){
+},{"../ApiClient":136}],216:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -53244,7 +52966,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137,"./GroupCapabilityRepresentation":216,"./GroupRepresentation":217,"./UserRepresentation":256}],218:[function(require,module,exports){
+},{"../ApiClient":136,"./GroupCapabilityRepresentation":215,"./GroupRepresentation":216,"./UserRepresentation":255}],217:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -53329,7 +53051,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],219:[function(require,module,exports){
+},{"../ApiClient":136}],218:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -53407,7 +53129,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],220:[function(require,module,exports){
+},{"../ApiClient":136}],219:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -53499,7 +53221,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],221:[function(require,module,exports){
+},{"../ApiClient":136}],220:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -53591,7 +53313,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137,"./LightGroupRepresentation":221}],222:[function(require,module,exports){
+},{"../ApiClient":136,"./LightGroupRepresentation":220}],221:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -53662,7 +53384,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],223:[function(require,module,exports){
+},{"../ApiClient":136}],222:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -53761,7 +53483,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],224:[function(require,module,exports){
+},{"../ApiClient":136}],223:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -53820,7 +53542,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],225:[function(require,module,exports){
+},{"../ApiClient":136}],224:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -53879,7 +53601,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],226:[function(require,module,exports){
+},{"../ApiClient":136}],225:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -53938,7 +53660,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],227:[function(require,module,exports){
+},{"../ApiClient":136}],226:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -53997,7 +53719,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],228:[function(require,module,exports){
+},{"../ApiClient":136}],227:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -54166,7 +53888,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],229:[function(require,module,exports){
+},{"../ApiClient":136}],228:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -54221,7 +53943,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],230:[function(require,module,exports){
+},{"../ApiClient":136}],229:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -54292,7 +54014,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],231:[function(require,module,exports){
+},{"../ApiClient":136}],230:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -54391,7 +54113,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],232:[function(require,module,exports){
+},{"../ApiClient":136}],231:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -54483,7 +54205,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137,"./ProcessInstanceFilterRepresentation":231}],233:[function(require,module,exports){
+},{"../ApiClient":136,"./ProcessInstanceFilterRepresentation":230}],232:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -54659,7 +54381,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137,"./LightUserRepresentation":223,"./RestVariable":240}],234:[function(require,module,exports){
+},{"../ApiClient":136,"./LightUserRepresentation":222,"./RestVariable":239}],233:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -54730,7 +54452,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],235:[function(require,module,exports){
+},{"../ApiClient":136}],234:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -54885,7 +54607,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137,"./FormScopeRepresentation":213}],236:[function(require,module,exports){
+},{"../ApiClient":136,"./FormScopeRepresentation":212}],235:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -54956,7 +54678,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137,"./ProcessScopeIdentifierRepresentation":234}],237:[function(require,module,exports){
+},{"../ApiClient":136,"./ProcessScopeIdentifierRepresentation":233}],236:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -55034,7 +54756,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137,"./LightGroupRepresentation":221,"./LightUserRepresentation":223}],238:[function(require,module,exports){
+},{"../ApiClient":136,"./LightGroupRepresentation":220,"./LightUserRepresentation":222}],237:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -55182,7 +54904,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137,"./LightUserRepresentation":223}],239:[function(require,module,exports){
+},{"../ApiClient":136,"./LightUserRepresentation":222}],238:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -55246,7 +54968,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],240:[function(require,module,exports){
+},{"../ApiClient":136}],239:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -55338,7 +55060,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],241:[function(require,module,exports){
+},{"../ApiClient":136}],240:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -55388,7 +55110,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       obj = obj || new exports();
 
       if (data.hasOwnProperty('data')) {
-        obj['data'] = ApiClient.convertToType(data['data'], [AbstractRepresentation]);
+        obj['data'] = ApiClient.convertToType(data['data'], 'object');
       }
       if (data.hasOwnProperty('size')) {
         obj['size'] = ApiClient.convertToType(data['size'], 'Integer');
@@ -55423,7 +55145,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137,"./AbstractRepresentation":182}],242:[function(require,module,exports){
+},{"../ApiClient":136,"./AbstractRepresentation":181}],241:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -55487,7 +55209,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137,"./AppDefinitionRepresentation":187}],243:[function(require,module,exports){
+},{"../ApiClient":136,"./AppDefinitionRepresentation":186}],242:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -55551,7 +55273,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],244:[function(require,module,exports){
+},{"../ApiClient":136}],243:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -55629,7 +55351,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],245:[function(require,module,exports){
+},{"../ApiClient":136}],244:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -55693,7 +55415,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],246:[function(require,module,exports){
+},{"../ApiClient":136}],245:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -55813,7 +55535,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],247:[function(require,module,exports){
+},{"../ApiClient":136}],246:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -55905,7 +55627,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137,"./TaskFilterRepresentation":246}],248:[function(require,module,exports){
+},{"../ApiClient":136,"./TaskFilterRepresentation":245}],247:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -56158,7 +55880,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137,"./LightUserRepresentation":223}],249:[function(require,module,exports){
+},{"../ApiClient":136,"./LightUserRepresentation":222}],248:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -56257,7 +55979,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],250:[function(require,module,exports){
+},{"../ApiClient":136}],249:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -56363,7 +56085,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],251:[function(require,module,exports){
+},{"../ApiClient":136}],250:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -56476,7 +56198,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],252:[function(require,module,exports){
+},{"../ApiClient":136}],251:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -56547,7 +56269,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],253:[function(require,module,exports){
+},{"../ApiClient":136}],252:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -56625,7 +56347,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],254:[function(require,module,exports){
+},{"../ApiClient":136}],253:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -56696,7 +56418,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],255:[function(require,module,exports){
+},{"../ApiClient":136}],254:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -56802,7 +56524,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137,"./ProcessInstanceFilterRepresentation":231}],256:[function(require,module,exports){
+},{"../ApiClient":136,"./ProcessInstanceFilterRepresentation":230}],255:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -56999,7 +56721,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137,"./GroupRepresentation":217,"./LightAppRepresentation":220}],257:[function(require,module,exports){
+},{"../ApiClient":136,"./GroupRepresentation":216,"./LightAppRepresentation":219}],256:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -57105,7 +56827,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137,"./TaskFilterRepresentation":246}],258:[function(require,module,exports){
+},{"../ApiClient":136,"./TaskFilterRepresentation":245}],257:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -57211,7 +56933,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],259:[function(require,module,exports){
+},{"../ApiClient":136}],258:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -57317,7 +57039,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":137}],260:[function(require,module,exports){
+},{"../ApiClient":136}],259:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -57781,7 +57503,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":8,"fs":6,"superagent":125}],261:[function(require,module,exports){
+},{"buffer":8,"fs":6,"superagent":125}],260:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -57892,7 +57614,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":260,"../model/Error":263,"../model/LoginRequest":265,"../model/LoginTicketEntry":266,"../model/ValidateTicketEntry":268}],262:[function(require,module,exports){
+},{"../ApiClient":259,"../model/Error":262,"../model/LoginRequest":264,"../model/LoginTicketEntry":265,"../model/ValidateTicketEntry":267}],261:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -57991,7 +57713,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"./ApiClient":260,"./api/AuthenticationApi":261,"./model/Error":263,"./model/ErrorError":264,"./model/LoginRequest":265,"./model/LoginTicketEntry":266,"./model/LoginTicketEntryEntry":267,"./model/ValidateTicketEntry":268,"./model/ValidateTicketEntryEntry":269}],263:[function(require,module,exports){
+},{"./ApiClient":259,"./api/AuthenticationApi":260,"./model/Error":262,"./model/ErrorError":263,"./model/LoginRequest":264,"./model/LoginTicketEntry":265,"./model/LoginTicketEntryEntry":266,"./model/ValidateTicketEntry":267,"./model/ValidateTicketEntryEntry":268}],262:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -58053,7 +57775,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":260,"./ErrorError":264}],264:[function(require,module,exports){
+},{"../ApiClient":259,"./ErrorError":263}],263:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -58166,7 +57888,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":260}],265:[function(require,module,exports){
+},{"../ApiClient":259}],264:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -58236,7 +57958,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":260}],266:[function(require,module,exports){
+},{"../ApiClient":259}],265:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -58298,7 +58020,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":260,"./LoginTicketEntryEntry":267}],267:[function(require,module,exports){
+},{"../ApiClient":259,"./LoginTicketEntryEntry":266}],266:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -58368,7 +58090,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":260}],268:[function(require,module,exports){
+},{"../ApiClient":259}],267:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -58430,7 +58152,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":260,"./ValidateTicketEntryEntry":269}],269:[function(require,module,exports){
+},{"../ApiClient":259,"./ValidateTicketEntryEntry":268}],268:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -58492,7 +58214,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":260}],270:[function(require,module,exports){
+},{"../ApiClient":259}],269:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -58960,7 +58682,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":8,"fs":6,"superagent":125}],271:[function(require,module,exports){
+},{"buffer":8,"fs":6,"superagent":125}],270:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -59153,7 +58875,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"../model/AssocTargetBody":293,"../model/Error":311,"../model/NodeAssocPaging":325}],272:[function(require,module,exports){
+},{"../ApiClient":269,"../model/AssocTargetBody":292,"../model/Error":310,"../model/NodeAssocPaging":324}],271:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -60514,7 +60236,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"../model/AssocChildBody":291,"../model/AssocTargetBody":293,"../model/CopyBody":303,"../model/DeletedNodeEntry":305,"../model/DeletedNodesPaging":308,"../model/EmailSharedLinkBody":310,"../model/Error":311,"../model/MoveBody":321,"../model/NodeAssocPaging":325,"../model/NodeBody":327,"../model/NodeBody1":328,"../model/NodeChildAssocPaging":331,"../model/NodeEntry":333,"../model/NodePaging":337,"../model/NodeSharedLinkEntry":340,"../model/NodeSharedLinkPaging":341,"../model/RenditionBody":364,"../model/RenditionEntry":365,"../model/RenditionPaging":366,"../model/SharedLinkBody":368,"../model/SiteBody":370,"../model/SiteEntry":374}],273:[function(require,module,exports){
+},{"../ApiClient":269,"../model/AssocChildBody":290,"../model/AssocTargetBody":292,"../model/CopyBody":302,"../model/DeletedNodeEntry":304,"../model/DeletedNodesPaging":307,"../model/EmailSharedLinkBody":309,"../model/Error":310,"../model/MoveBody":320,"../model/NodeAssocPaging":324,"../model/NodeBody":326,"../model/NodeBody1":327,"../model/NodeChildAssocPaging":330,"../model/NodeEntry":332,"../model/NodePaging":336,"../model/NodeSharedLinkEntry":339,"../model/NodeSharedLinkPaging":340,"../model/RenditionBody":363,"../model/RenditionEntry":364,"../model/RenditionPaging":365,"../model/SharedLinkBody":367,"../model/SiteBody":369,"../model/SiteEntry":373}],272:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -60876,7 +60598,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"../model/AssocChildBody":291,"../model/Error":311,"../model/MoveBody":321,"../model/NodeAssocPaging":325,"../model/NodeBody1":328,"../model/NodeChildAssocPaging":331,"../model/NodeEntry":333,"../model/NodePaging":337}],274:[function(require,module,exports){
+},{"../ApiClient":269,"../model/AssocChildBody":290,"../model/Error":310,"../model/MoveBody":320,"../model/NodeAssocPaging":324,"../model/NodeBody1":327,"../model/NodeChildAssocPaging":330,"../model/NodeEntry":332,"../model/NodePaging":336}],273:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -61074,7 +60796,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"../model/CommentBody":296,"../model/CommentBody1":297,"../model/CommentEntry":298,"../model/CommentPaging":299,"../model/Error":311}],275:[function(require,module,exports){
+},{"../ApiClient":269,"../model/CommentBody":295,"../model/CommentBody1":296,"../model/CommentEntry":297,"../model/CommentPaging":298,"../model/Error":310}],274:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -61268,7 +60990,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"../model/Error":311,"../model/FavoriteBody":314,"../model/FavoriteEntry":315,"../model/FavoritePaging":316}],276:[function(require,module,exports){
+},{"../ApiClient":269,"../model/Error":310,"../model/FavoriteBody":313,"../model/FavoriteEntry":314,"../model/FavoritePaging":315}],275:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -61345,7 +61067,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"../model/Error":311,"../model/PersonNetworkEntry":350}],277:[function(require,module,exports){
+},{"../ApiClient":269,"../model/Error":310,"../model/PersonNetworkEntry":349}],276:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -61880,7 +61602,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"../model/CopyBody":303,"../model/DeletedNodeEntry":305,"../model/DeletedNodesPaging":308,"../model/Error":311,"../model/MoveBody":321,"../model/NodeBody":327,"../model/NodeBody1":328,"../model/NodeEntry":333,"../model/NodePaging":337}],278:[function(require,module,exports){
+},{"../ApiClient":269,"../model/CopyBody":302,"../model/DeletedNodeEntry":304,"../model/DeletedNodesPaging":307,"../model/Error":310,"../model/MoveBody":320,"../model/NodeBody":326,"../model/NodeBody1":327,"../model/NodeEntry":332,"../model/NodePaging":336}],277:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -62689,7 +62411,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"../model/ActivityPaging":289,"../model/Error":311,"../model/FavoriteBody":314,"../model/FavoriteEntry":315,"../model/FavoritePaging":316,"../model/FavoriteSiteBody":318,"../model/InlineResponse201":319,"../model/PersonEntry":348,"../model/PersonNetworkEntry":350,"../model/PersonNetworkPaging":351,"../model/PreferenceEntry":354,"../model/PreferencePaging":355,"../model/SiteEntry":374,"../model/SiteMembershipBody":380,"../model/SiteMembershipBody1":381,"../model/SiteMembershipRequestEntry":383,"../model/SiteMembershipRequestPaging":384,"../model/SitePaging":386}],279:[function(require,module,exports){
+},{"../ApiClient":269,"../model/ActivityPaging":288,"../model/Error":310,"../model/FavoriteBody":313,"../model/FavoriteEntry":314,"../model/FavoritePaging":315,"../model/FavoriteSiteBody":317,"../model/InlineResponse201":318,"../model/PersonEntry":347,"../model/PersonNetworkEntry":349,"../model/PersonNetworkPaging":350,"../model/PreferenceEntry":353,"../model/PreferencePaging":354,"../model/SiteEntry":373,"../model/SiteMembershipBody":379,"../model/SiteMembershipBody1":380,"../model/SiteMembershipRequestEntry":382,"../model/SiteMembershipRequestPaging":383,"../model/SitePaging":385}],278:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -62881,7 +62603,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"../model/Error":311,"../model/RatingBody":359,"../model/RatingEntry":360,"../model/RatingPaging":361}],280:[function(require,module,exports){
+},{"../ApiClient":269,"../model/Error":310,"../model/RatingBody":358,"../model/RatingEntry":359,"../model/RatingPaging":360}],279:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -63138,7 +62860,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"../model/Error":311,"../model/RenditionBody":364,"../model/RenditionEntry":365,"../model/RenditionPaging":366}],281:[function(require,module,exports){
+},{"../ApiClient":269,"../model/Error":310,"../model/RenditionBody":363,"../model/RenditionEntry":364,"../model/RenditionPaging":365}],280:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -63226,7 +62948,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"../model/Error":311,"../model/NodePaging":337}],282:[function(require,module,exports){
+},{"../ApiClient":269,"../model/Error":310,"../model/NodePaging":336}],281:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -63467,7 +63189,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"../model/EmailSharedLinkBody":310,"../model/Error":311,"../model/NodeSharedLinkEntry":340,"../model/NodeSharedLinkPaging":341,"../model/SharedLinkBody":368}],283:[function(require,module,exports){
+},{"../ApiClient":269,"../model/EmailSharedLinkBody":309,"../model/Error":310,"../model/NodeSharedLinkEntry":339,"../model/NodeSharedLinkPaging":340,"../model/SharedLinkBody":367}],282:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -63917,7 +63639,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"../model/Error":311,"../model/SiteBody":370,"../model/SiteContainerEntry":372,"../model/SiteContainerPaging":373,"../model/SiteEntry":374,"../model/SiteMemberBody":376,"../model/SiteMemberEntry":377,"../model/SiteMemberPaging":378,"../model/SiteMemberRoleBody":379,"../model/SitePaging":386}],284:[function(require,module,exports){
+},{"../ApiClient":269,"../model/Error":310,"../model/SiteBody":369,"../model/SiteContainerEntry":371,"../model/SiteContainerPaging":372,"../model/SiteEntry":373,"../model/SiteMemberBody":375,"../model/SiteMemberEntry":376,"../model/SiteMemberPaging":377,"../model/SiteMemberRoleBody":378,"../model/SitePaging":385}],283:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -64167,7 +63889,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"../model/Error":311,"../model/TagBody":389,"../model/TagBody1":390,"../model/TagEntry":391,"../model/TagPaging":392}],285:[function(require,module,exports){
+},{"../ApiClient":269,"../model/Error":310,"../model/TagBody":388,"../model/TagBody1":389,"../model/TagEntry":390,"../model/TagPaging":391}],284:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -64841,7 +64563,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"./ApiClient":270,"./api/AssociationsApi":271,"./api/ChangesApi":272,"./api/ChildAssociationsApi":273,"./api/CommentsApi":274,"./api/FavoritesApi":275,"./api/NetworksApi":276,"./api/NodesApi":277,"./api/PeopleApi":278,"./api/RatingsApi":279,"./api/RenditionsApi":280,"./api/SearchApi":281,"./api/SharedlinksApi":282,"./api/SitesApi":283,"./api/TagsApi":284,"./model/Activity":286,"./model/ActivityActivitySummary":287,"./model/ActivityEntry":288,"./model/ActivityPaging":289,"./model/ActivityPagingList":290,"./model/AssocChildBody":291,"./model/AssocInfo":292,"./model/AssocTargetBody":293,"./model/ChildAssocInfo":294,"./model/Comment":295,"./model/CommentBody":296,"./model/CommentBody1":297,"./model/CommentEntry":298,"./model/CommentPaging":299,"./model/CommentPagingList":300,"./model/Company":301,"./model/ContentInfo":302,"./model/CopyBody":303,"./model/DeletedNode":304,"./model/DeletedNodeEntry":305,"./model/DeletedNodeMinimal":306,"./model/DeletedNodeMinimalEntry":307,"./model/DeletedNodesPaging":308,"./model/DeletedNodesPagingList":309,"./model/EmailSharedLinkBody":310,"./model/Error":311,"./model/ErrorError":312,"./model/Favorite":313,"./model/FavoriteBody":314,"./model/FavoriteEntry":315,"./model/FavoritePaging":316,"./model/FavoritePagingList":317,"./model/FavoriteSiteBody":318,"./model/InlineResponse201":319,"./model/InlineResponse201Entry":320,"./model/MoveBody":321,"./model/NetworkQuota":322,"./model/NodeAssocMinimal":323,"./model/NodeAssocMinimalEntry":324,"./model/NodeAssocPaging":325,"./model/NodeAssocPagingList":326,"./model/NodeBody":327,"./model/NodeBody1":328,"./model/NodeChildAssocMinimal":329,"./model/NodeChildAssocMinimalEntry":330,"./model/NodeChildAssocPaging":331,"./model/NodeChildAssocPagingList":332,"./model/NodeEntry":333,"./model/NodeFull":334,"./model/NodeMinimal":335,"./model/NodeMinimalEntry":336,"./model/NodePaging":337,"./model/NodePagingList":338,"./model/NodeSharedLink":339,"./model/NodeSharedLinkEntry":340,"./model/NodeSharedLinkPaging":341,"./model/NodeSharedLinkPagingList":342,"./model/NodesnodeIdchildrenContent":343,"./model/Pagination":344,"./model/PathElement":345,"./model/PathInfo":346,"./model/Person":347,"./model/PersonEntry":348,"./model/PersonNetwork":349,"./model/PersonNetworkEntry":350,"./model/PersonNetworkPaging":351,"./model/PersonNetworkPagingList":352,"./model/Preference":353,"./model/PreferenceEntry":354,"./model/PreferencePaging":355,"./model/PreferencePagingList":356,"./model/Rating":357,"./model/RatingAggregate":358,"./model/RatingBody":359,"./model/RatingEntry":360,"./model/RatingPaging":361,"./model/RatingPagingList":362,"./model/Rendition":363,"./model/RenditionBody":364,"./model/RenditionEntry":365,"./model/RenditionPaging":366,"./model/RenditionPagingList":367,"./model/SharedLinkBody":368,"./model/Site":369,"./model/SiteBody":370,"./model/SiteContainer":371,"./model/SiteContainerEntry":372,"./model/SiteContainerPaging":373,"./model/SiteEntry":374,"./model/SiteMember":375,"./model/SiteMemberBody":376,"./model/SiteMemberEntry":377,"./model/SiteMemberPaging":378,"./model/SiteMemberRoleBody":379,"./model/SiteMembershipBody":380,"./model/SiteMembershipBody1":381,"./model/SiteMembershipRequest":382,"./model/SiteMembershipRequestEntry":383,"./model/SiteMembershipRequestPaging":384,"./model/SiteMembershipRequestPagingList":385,"./model/SitePaging":386,"./model/SitePagingList":387,"./model/Tag":388,"./model/TagBody":389,"./model/TagBody1":390,"./model/TagEntry":391,"./model/TagPaging":392,"./model/TagPagingList":393,"./model/UserInfo":394}],286:[function(require,module,exports){
+},{"./ApiClient":269,"./api/AssociationsApi":270,"./api/ChangesApi":271,"./api/ChildAssociationsApi":272,"./api/CommentsApi":273,"./api/FavoritesApi":274,"./api/NetworksApi":275,"./api/NodesApi":276,"./api/PeopleApi":277,"./api/RatingsApi":278,"./api/RenditionsApi":279,"./api/SearchApi":280,"./api/SharedlinksApi":281,"./api/SitesApi":282,"./api/TagsApi":283,"./model/Activity":285,"./model/ActivityActivitySummary":286,"./model/ActivityEntry":287,"./model/ActivityPaging":288,"./model/ActivityPagingList":289,"./model/AssocChildBody":290,"./model/AssocInfo":291,"./model/AssocTargetBody":292,"./model/ChildAssocInfo":293,"./model/Comment":294,"./model/CommentBody":295,"./model/CommentBody1":296,"./model/CommentEntry":297,"./model/CommentPaging":298,"./model/CommentPagingList":299,"./model/Company":300,"./model/ContentInfo":301,"./model/CopyBody":302,"./model/DeletedNode":303,"./model/DeletedNodeEntry":304,"./model/DeletedNodeMinimal":305,"./model/DeletedNodeMinimalEntry":306,"./model/DeletedNodesPaging":307,"./model/DeletedNodesPagingList":308,"./model/EmailSharedLinkBody":309,"./model/Error":310,"./model/ErrorError":311,"./model/Favorite":312,"./model/FavoriteBody":313,"./model/FavoriteEntry":314,"./model/FavoritePaging":315,"./model/FavoritePagingList":316,"./model/FavoriteSiteBody":317,"./model/InlineResponse201":318,"./model/InlineResponse201Entry":319,"./model/MoveBody":320,"./model/NetworkQuota":321,"./model/NodeAssocMinimal":322,"./model/NodeAssocMinimalEntry":323,"./model/NodeAssocPaging":324,"./model/NodeAssocPagingList":325,"./model/NodeBody":326,"./model/NodeBody1":327,"./model/NodeChildAssocMinimal":328,"./model/NodeChildAssocMinimalEntry":329,"./model/NodeChildAssocPaging":330,"./model/NodeChildAssocPagingList":331,"./model/NodeEntry":332,"./model/NodeFull":333,"./model/NodeMinimal":334,"./model/NodeMinimalEntry":335,"./model/NodePaging":336,"./model/NodePagingList":337,"./model/NodeSharedLink":338,"./model/NodeSharedLinkEntry":339,"./model/NodeSharedLinkPaging":340,"./model/NodeSharedLinkPagingList":341,"./model/NodesnodeIdchildrenContent":342,"./model/Pagination":343,"./model/PathElement":344,"./model/PathInfo":345,"./model/Person":346,"./model/PersonEntry":347,"./model/PersonNetwork":348,"./model/PersonNetworkEntry":349,"./model/PersonNetworkPaging":350,"./model/PersonNetworkPagingList":351,"./model/Preference":352,"./model/PreferenceEntry":353,"./model/PreferencePaging":354,"./model/PreferencePagingList":355,"./model/Rating":356,"./model/RatingAggregate":357,"./model/RatingBody":358,"./model/RatingEntry":359,"./model/RatingPaging":360,"./model/RatingPagingList":361,"./model/Rendition":362,"./model/RenditionBody":363,"./model/RenditionEntry":364,"./model/RenditionPaging":365,"./model/RenditionPagingList":366,"./model/SharedLinkBody":367,"./model/Site":368,"./model/SiteBody":369,"./model/SiteContainer":370,"./model/SiteContainerEntry":371,"./model/SiteContainerPaging":372,"./model/SiteEntry":373,"./model/SiteMember":374,"./model/SiteMemberBody":375,"./model/SiteMemberEntry":376,"./model/SiteMemberPaging":377,"./model/SiteMemberRoleBody":378,"./model/SiteMembershipBody":379,"./model/SiteMembershipBody1":380,"./model/SiteMembershipRequest":381,"./model/SiteMembershipRequestEntry":382,"./model/SiteMembershipRequestPaging":383,"./model/SiteMembershipRequestPagingList":384,"./model/SitePaging":385,"./model/SitePagingList":386,"./model/Tag":387,"./model/TagBody":388,"./model/TagBody1":389,"./model/TagEntry":390,"./model/TagPaging":391,"./model/TagPagingList":392,"./model/UserInfo":393}],285:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -65115,7 +64837,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./ActivityActivitySummary":287}],287:[function(require,module,exports){
+},{"../ApiClient":269,"./ActivityActivitySummary":286}],286:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -65210,7 +64932,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],288:[function(require,module,exports){
+},{"../ApiClient":269}],287:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -65276,7 +64998,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./Activity":286}],289:[function(require,module,exports){
+},{"../ApiClient":269,"./Activity":285}],288:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -65338,7 +65060,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./ActivityPagingList":290}],290:[function(require,module,exports){
+},{"../ApiClient":269,"./ActivityPagingList":289}],289:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -65414,7 +65136,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./ActivityEntry":288,"./Pagination":344}],291:[function(require,module,exports){
+},{"../ApiClient":269,"./ActivityEntry":287,"./Pagination":343}],290:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -65484,7 +65206,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],292:[function(require,module,exports){
+},{"../ApiClient":269}],291:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -65546,7 +65268,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],293:[function(require,module,exports){
+},{"../ApiClient":269}],292:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -65616,7 +65338,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],294:[function(require,module,exports){
+},{"../ApiClient":269}],293:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -65686,7 +65408,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],295:[function(require,module,exports){
+},{"../ApiClient":269}],294:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -65832,7 +65554,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./Person":347}],296:[function(require,module,exports){
+},{"../ApiClient":269,"./Person":346}],295:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -65898,7 +65620,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],297:[function(require,module,exports){
+},{"../ApiClient":269}],296:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -65964,7 +65686,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],298:[function(require,module,exports){
+},{"../ApiClient":269}],297:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -66030,7 +65752,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./Comment":295}],299:[function(require,module,exports){
+},{"../ApiClient":269,"./Comment":294}],298:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -66092,7 +65814,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./CommentPagingList":300}],300:[function(require,module,exports){
+},{"../ApiClient":269,"./CommentPagingList":299}],299:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -66168,7 +65890,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./CommentEntry":298,"./Pagination":344}],301:[function(require,module,exports){
+},{"../ApiClient":269,"./CommentEntry":297,"./Pagination":343}],300:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -66286,7 +66008,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],302:[function(require,module,exports){
+},{"../ApiClient":269}],301:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -66372,7 +66094,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],303:[function(require,module,exports){
+},{"../ApiClient":269}],302:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -66442,7 +66164,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],304:[function(require,module,exports){
+},{"../ApiClient":269}],303:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -66522,7 +66244,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./ContentInfo":302,"./NodeFull":334,"./UserInfo":394}],305:[function(require,module,exports){
+},{"../ApiClient":269,"./ContentInfo":301,"./NodeFull":333,"./UserInfo":393}],304:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -66584,7 +66306,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./DeletedNode":304}],306:[function(require,module,exports){
+},{"../ApiClient":269,"./DeletedNode":303}],305:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -66664,7 +66386,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./ContentInfo":302,"./NodeMinimal":335,"./PathElement":345,"./UserInfo":394}],307:[function(require,module,exports){
+},{"../ApiClient":269,"./ContentInfo":301,"./NodeMinimal":334,"./PathElement":344,"./UserInfo":393}],306:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -66726,7 +66448,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./DeletedNodeMinimal":306}],308:[function(require,module,exports){
+},{"../ApiClient":269,"./DeletedNodeMinimal":305}],307:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -66788,7 +66510,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./DeletedNodesPagingList":309}],309:[function(require,module,exports){
+},{"../ApiClient":269,"./DeletedNodesPagingList":308}],308:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -66858,7 +66580,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./DeletedNodeMinimalEntry":307,"./Pagination":344}],310:[function(require,module,exports){
+},{"../ApiClient":269,"./DeletedNodeMinimalEntry":306,"./Pagination":343}],309:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -66944,7 +66666,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],311:[function(require,module,exports){
+},{"../ApiClient":269}],310:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -67006,7 +66728,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./ErrorError":312}],312:[function(require,module,exports){
+},{"../ApiClient":269,"./ErrorError":311}],311:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -67119,7 +66841,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],313:[function(require,module,exports){
+},{"../ApiClient":269}],312:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -67207,7 +66929,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],314:[function(require,module,exports){
+},{"../ApiClient":269}],313:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -67273,7 +66995,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],315:[function(require,module,exports){
+},{"../ApiClient":269}],314:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -67339,7 +67061,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./Favorite":313}],316:[function(require,module,exports){
+},{"../ApiClient":269,"./Favorite":312}],315:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -67401,7 +67123,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./FavoritePagingList":317}],317:[function(require,module,exports){
+},{"../ApiClient":269,"./FavoritePagingList":316}],316:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -67477,7 +67199,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./FavoriteEntry":315,"./Pagination":344}],318:[function(require,module,exports){
+},{"../ApiClient":269,"./FavoriteEntry":314,"./Pagination":343}],317:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -67539,7 +67261,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],319:[function(require,module,exports){
+},{"../ApiClient":269}],318:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -67601,7 +67323,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./InlineResponse201Entry":320}],320:[function(require,module,exports){
+},{"../ApiClient":269,"./InlineResponse201Entry":319}],319:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -67667,7 +67389,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],321:[function(require,module,exports){
+},{"../ApiClient":269}],320:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -67737,7 +67459,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],322:[function(require,module,exports){
+},{"../ApiClient":269}],321:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -67824,7 +67546,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],323:[function(require,module,exports){
+},{"../ApiClient":269}],322:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -67974,7 +67696,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./AssocInfo":292,"./ContentInfo":302,"./UserInfo":394}],324:[function(require,module,exports){
+},{"../ApiClient":269,"./AssocInfo":291,"./ContentInfo":301,"./UserInfo":393}],323:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -68040,7 +67762,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./NodeAssocMinimal":323}],325:[function(require,module,exports){
+},{"../ApiClient":269,"./NodeAssocMinimal":322}],324:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -68102,7 +67824,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./NodeAssocPagingList":326}],326:[function(require,module,exports){
+},{"../ApiClient":269,"./NodeAssocPagingList":325}],325:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -68172,7 +67894,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./NodeAssocMinimalEntry":324,"./Pagination":344}],327:[function(require,module,exports){
+},{"../ApiClient":269,"./NodeAssocMinimalEntry":323,"./Pagination":343}],326:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -68258,7 +67980,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],328:[function(require,module,exports){
+},{"../ApiClient":269}],327:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -68360,7 +68082,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./NodesnodeIdchildrenContent":343}],329:[function(require,module,exports){
+},{"../ApiClient":269,"./NodesnodeIdchildrenContent":342}],328:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -68510,7 +68232,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./ChildAssocInfo":294,"./ContentInfo":302,"./UserInfo":394}],330:[function(require,module,exports){
+},{"../ApiClient":269,"./ChildAssocInfo":293,"./ContentInfo":301,"./UserInfo":393}],329:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -68576,7 +68298,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./NodeChildAssocMinimal":329}],331:[function(require,module,exports){
+},{"../ApiClient":269,"./NodeChildAssocMinimal":328}],330:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -68638,7 +68360,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./NodeChildAssocPagingList":332}],332:[function(require,module,exports){
+},{"../ApiClient":269,"./NodeChildAssocPagingList":331}],331:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -68708,7 +68430,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./NodeChildAssocMinimalEntry":330,"./Pagination":344}],333:[function(require,module,exports){
+},{"../ApiClient":269,"./NodeChildAssocMinimalEntry":329,"./Pagination":343}],332:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -68774,7 +68496,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./NodeFull":334}],334:[function(require,module,exports){
+},{"../ApiClient":269,"./NodeFull":333}],333:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -68940,7 +68662,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./ContentInfo":302,"./UserInfo":394}],335:[function(require,module,exports){
+},{"../ApiClient":269,"./ContentInfo":301,"./UserInfo":393}],334:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -69090,7 +68812,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./ContentInfo":302,"./PathElement":345,"./UserInfo":394}],336:[function(require,module,exports){
+},{"../ApiClient":269,"./ContentInfo":301,"./PathElement":344,"./UserInfo":393}],335:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -69156,7 +68878,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./NodeMinimal":335}],337:[function(require,module,exports){
+},{"../ApiClient":269,"./NodeMinimal":334}],336:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -69218,7 +68940,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./NodePagingList":338}],338:[function(require,module,exports){
+},{"../ApiClient":269,"./NodePagingList":337}],337:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -69288,7 +69010,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./NodeMinimalEntry":336,"./Pagination":344}],339:[function(require,module,exports){
+},{"../ApiClient":269,"./NodeMinimalEntry":335,"./Pagination":343}],338:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -69406,7 +69128,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./ContentInfo":302,"./UserInfo":394}],340:[function(require,module,exports){
+},{"../ApiClient":269,"./ContentInfo":301,"./UserInfo":393}],339:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -69472,7 +69194,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./NodeSharedLink":339}],341:[function(require,module,exports){
+},{"../ApiClient":269,"./NodeSharedLink":338}],340:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -69534,7 +69256,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./NodeSharedLinkPagingList":342}],342:[function(require,module,exports){
+},{"../ApiClient":269,"./NodeSharedLinkPagingList":341}],341:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -69610,7 +69332,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./NodeSharedLinkEntry":340,"./Pagination":344}],343:[function(require,module,exports){
+},{"../ApiClient":269,"./NodeSharedLinkEntry":339,"./Pagination":343}],342:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -69680,7 +69402,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],344:[function(require,module,exports){
+},{"../ApiClient":269}],343:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -69790,7 +69512,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],345:[function(require,module,exports){
+},{"../ApiClient":269}],344:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -69860,7 +69582,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],346:[function(require,module,exports){
+},{"../ApiClient":269}],345:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -69938,7 +69660,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./PathElement":345}],347:[function(require,module,exports){
+},{"../ApiClient":269,"./PathElement":344}],346:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -70151,7 +69873,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./Company":301}],348:[function(require,module,exports){
+},{"../ApiClient":269,"./Company":300}],347:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -70217,7 +69939,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./Person":347}],349:[function(require,module,exports){
+},{"../ApiClient":269,"./Person":346}],348:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -70362,7 +70084,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./NetworkQuota":322}],350:[function(require,module,exports){
+},{"../ApiClient":269,"./NetworkQuota":321}],349:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -70428,7 +70150,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./PersonNetwork":349}],351:[function(require,module,exports){
+},{"../ApiClient":269,"./PersonNetwork":348}],350:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -70490,7 +70212,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./PersonNetworkPagingList":352}],352:[function(require,module,exports){
+},{"../ApiClient":269,"./PersonNetworkPagingList":351}],351:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -70566,7 +70288,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./Pagination":344,"./PersonNetworkEntry":350}],353:[function(require,module,exports){
+},{"../ApiClient":269,"./Pagination":343,"./PersonNetworkEntry":349}],352:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -70645,7 +70367,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],354:[function(require,module,exports){
+},{"../ApiClient":269}],353:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -70711,7 +70433,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./Preference":353}],355:[function(require,module,exports){
+},{"../ApiClient":269,"./Preference":352}],354:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -70773,7 +70495,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./PreferencePagingList":356}],356:[function(require,module,exports){
+},{"../ApiClient":269,"./PreferencePagingList":355}],355:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -70849,7 +70571,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./Pagination":344,"./PreferenceEntry":354}],357:[function(require,module,exports){
+},{"../ApiClient":269,"./Pagination":343,"./PreferenceEntry":353}],356:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -70941,7 +70663,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./RatingAggregate":358}],358:[function(require,module,exports){
+},{"../ApiClient":269,"./RatingAggregate":357}],357:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -71015,7 +70737,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],359:[function(require,module,exports){
+},{"../ApiClient":269}],358:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -71113,7 +70835,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],360:[function(require,module,exports){
+},{"../ApiClient":269}],359:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -71179,7 +70901,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./Rating":357}],361:[function(require,module,exports){
+},{"../ApiClient":269,"./Rating":356}],360:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -71241,7 +70963,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./RatingPagingList":362}],362:[function(require,module,exports){
+},{"../ApiClient":269,"./RatingPagingList":361}],361:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -71317,7 +71039,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./Pagination":344,"./RatingEntry":360}],363:[function(require,module,exports){
+},{"../ApiClient":269,"./Pagination":343,"./RatingEntry":359}],362:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -71395,7 +71117,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./ContentInfo":302}],364:[function(require,module,exports){
+},{"../ApiClient":269,"./ContentInfo":301}],363:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -71457,7 +71179,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],365:[function(require,module,exports){
+},{"../ApiClient":269}],364:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -71523,7 +71245,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./Rendition":363}],366:[function(require,module,exports){
+},{"../ApiClient":269,"./Rendition":362}],365:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -71585,7 +71307,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./RenditionPagingList":367}],367:[function(require,module,exports){
+},{"../ApiClient":269,"./RenditionPagingList":366}],366:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -71655,7 +71377,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./Pagination":344,"./RenditionEntry":365}],368:[function(require,module,exports){
+},{"../ApiClient":269,"./Pagination":343,"./RenditionEntry":364}],367:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -71717,7 +71439,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],369:[function(require,module,exports){
+},{"../ApiClient":269}],368:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -71855,7 +71577,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],370:[function(require,module,exports){
+},{"../ApiClient":269}],369:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -71974,7 +71696,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],371:[function(require,module,exports){
+},{"../ApiClient":269}],370:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -72050,7 +71772,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],372:[function(require,module,exports){
+},{"../ApiClient":269}],371:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -72116,7 +71838,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./SiteContainer":371}],373:[function(require,module,exports){
+},{"../ApiClient":269,"./SiteContainer":370}],372:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -72178,7 +71900,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./SitePagingList":387}],374:[function(require,module,exports){
+},{"../ApiClient":269,"./SitePagingList":386}],373:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -72244,7 +71966,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./Site":369}],375:[function(require,module,exports){
+},{"../ApiClient":269,"./Site":368}],374:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -72361,7 +72083,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./Person":347}],376:[function(require,module,exports){
+},{"../ApiClient":269,"./Person":346}],375:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -72462,7 +72184,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],377:[function(require,module,exports){
+},{"../ApiClient":269}],376:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -72528,7 +72250,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./SiteMember":375}],378:[function(require,module,exports){
+},{"../ApiClient":269,"./SiteMember":374}],377:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -72590,7 +72312,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./SitePagingList":387}],379:[function(require,module,exports){
+},{"../ApiClient":269,"./SitePagingList":386}],378:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -72683,7 +72405,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],380:[function(require,module,exports){
+},{"../ApiClient":269}],379:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -72761,7 +72483,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],381:[function(require,module,exports){
+},{"../ApiClient":269}],380:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -72823,7 +72545,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],382:[function(require,module,exports){
+},{"../ApiClient":269}],381:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -72909,7 +72631,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./Site":369}],383:[function(require,module,exports){
+},{"../ApiClient":269,"./Site":368}],382:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -72975,7 +72697,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./SiteMembershipRequest":382}],384:[function(require,module,exports){
+},{"../ApiClient":269,"./SiteMembershipRequest":381}],383:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -73037,7 +72759,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./SiteMembershipRequestPagingList":385}],385:[function(require,module,exports){
+},{"../ApiClient":269,"./SiteMembershipRequestPagingList":384}],384:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -73113,7 +72835,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./Pagination":344,"./SiteMembershipRequestEntry":383}],386:[function(require,module,exports){
+},{"../ApiClient":269,"./Pagination":343,"./SiteMembershipRequestEntry":382}],385:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -73175,7 +72897,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./SitePagingList":387}],387:[function(require,module,exports){
+},{"../ApiClient":269,"./SitePagingList":386}],386:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -73241,7 +72963,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./Pagination":344}],388:[function(require,module,exports){
+},{"../ApiClient":269,"./Pagination":343}],387:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -73317,7 +73039,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],389:[function(require,module,exports){
+},{"../ApiClient":269}],388:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -73383,7 +73105,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],390:[function(require,module,exports){
+},{"../ApiClient":269}],389:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -73445,7 +73167,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],391:[function(require,module,exports){
+},{"../ApiClient":269}],390:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -73511,7 +73233,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./Tag":388}],392:[function(require,module,exports){
+},{"../ApiClient":269,"./Tag":387}],391:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -73573,7 +73295,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./TagPagingList":393}],393:[function(require,module,exports){
+},{"../ApiClient":269,"./TagPagingList":392}],392:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -73649,7 +73371,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270,"./Pagination":344,"./TagEntry":391}],394:[function(require,module,exports){
+},{"../ApiClient":269,"./Pagination":343,"./TagEntry":390}],393:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -73719,7 +73441,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":270}],395:[function(require,module,exports){
+},{"../ApiClient":269}],394:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -73730,7 +73452,6 @@ var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
 var AlfrescoAuthRestApi = require('./alfresco-auth-rest-api/src/index');
 var AlfrescoActivitiApi = require('./alfresco-activiti-rest-api/src/index');
 var AlfrescoMock = require('../test/mockObjects/mockAlfrescoApi.js');
-var AlfrescoApiClient = require('./alfrescoApiClient');
 var AlfrescoContent = require('./alfrescoContent');
 var AlfrescoNode = require('./alfrescoNode');
 var AlfrescoSearch = require('./alfrescoSearch');
@@ -73738,7 +73459,8 @@ var AlfrescoUpload = require('./alfrescoUpload');
 var AlfrescoWebScriptApi = require('./alfrescoWebScript');
 var Emitter = require('event-emitter');
 var EcmAuth = require('./ecmAuth');
-var BpmAuth = require('./BpmAuth');
+var BpmAuth = require('./bpmAuth');
+var _ = require('lodash');
 
 var AlfrescoApi = function () {
     /**
@@ -73776,22 +73498,53 @@ var AlfrescoApi = function () {
                 contextRoot: config.contextRoot || 'alfresco',
                 username: config.username,
                 password: config.password,
-                provider: config.provider,
+                provider: config.provider || 'ECM',
                 ticket: config.ticket
             };
 
-            this.apiCoreUrl = this.config.host + '/' + this.config.contextRoot + '/api/-default-/public/alfresco/versions/1'; //Core Call
+            if (this.config.provider === 'BPM' || this.config.provider === 'ALL') {
+                this.bpmAuth = new BpmAuth(this.config);
+                AlfrescoActivitiApi.ApiClient.instance = this.bpmAuth.getClient();
+                this.activiti = AlfrescoActivitiApi;
+                this.instantiateObjects(this.activiti);
+            }
 
-            AlfrescoCoreRestApi.ApiClient.instance = this.getClient();
-
-            this.ecmAuth = new EcmAuth(this.config);
-            this.bpmAuth = new BpmAuth(this.config);
+            if (this.config.provider === 'ECM' || this.config.provider === 'ALL') {
+                this.ecmAuth = new EcmAuth(this.config);
+                AlfrescoCoreRestApi.ApiClient.instance = this.ecmAuth.getClient();
+                this.core = AlfrescoCoreRestApi;
+                this.instantiateObjects(this.core);
+            }
 
             this.nodes = this.node = new AlfrescoNode();
             this.search = new AlfrescoSearch();
-            this.content = new AlfrescoContent(this.apiCoreUrl, this.ecmAuth);
+            this.content = new AlfrescoContent(this.ecmAuth);
             this.upload = new AlfrescoUpload();
             this.webScript = new AlfrescoWebScriptApi();
+        }
+    }, {
+        key: 'instantiateObjects',
+        value: function instantiateObjects(module) {
+            var _this = this;
+
+            var classArray = Object.keys(module);
+
+            classArray.forEach(function (currentClass) {
+                var obj = _this.stringToObject(currentClass, module);
+                var nameObj = _.lowerFirst(currentClass);
+                module[nameObj] = obj;
+            });
+        }
+    }, {
+        key: 'stringToObject',
+        value: function stringToObject(nameClass, module) {
+            try {
+                if (typeof module[nameClass] === 'function') {
+                    return new module[nameClass]();
+                }
+            } catch (error) {
+                console.log(nameClass + '  ' + error);
+            }
         }
 
         /**
@@ -73803,14 +73556,7 @@ var AlfrescoApi = function () {
     }, {
         key: 'getClient',
         value: function getClient() {
-            if (!this.alfrescoClient) {
-                this.alfrescoClient = new AlfrescoApiClient(this.config.host);
-            }
-
-            this.alfrescoClient.basePath = this.apiCoreUrl;
-            this.alfrescoClient.authentications.basicAuth.username = 'ROLE_TICKET';
-            this.alfrescoClient.authentications.basicAuth.password = this.config.ticket;
-            return this.alfrescoClient;
+            return this.ecmAuth.getClient();
         }
 
         /**
@@ -73822,7 +73568,38 @@ var AlfrescoApi = function () {
     }, {
         key: 'login',
         value: function login() {
-            return this.ecmAuth.login();
+            if (this.config.provider && this.config.provider.toUpperCase() === 'BPM') {
+                return this.bpmAuth.login();
+            } else if (this.config.provider && this.config.provider.toUpperCase() === 'ECM') {
+                return this.ecmAuth.login();
+            } else if (this.config.provider && this.config.provider.toUpperCase() === 'ALL') {
+                return this._loginBPMECM();
+            }
+        }
+    }, {
+        key: '_loginBPMECM',
+        value: function _loginBPMECM() {
+            var _this2 = this;
+
+            var ecmPromise = this.ecmAuth.login();
+            var bpmPromise = this.bpmAuth.login();
+
+            this.promise = new Promise(function (resolve, reject) {
+                Promise.all([ecmPromise, bpmPromise]).then(function (data) {
+                    _this2.promise.emit('success');
+                    resolve(data);
+                }, function (error) {
+                    if (error.status === 401) {
+                        _this2.promise.emit('unauthorized');
+                    }
+                    _this2.promise.emit('error');
+                    reject(error);
+                });
+            });
+
+            Emitter(this.promise); // jshint ignore:line
+
+            return this.promise;
         }
 
         /**
@@ -73834,7 +73611,38 @@ var AlfrescoApi = function () {
     }, {
         key: 'logout',
         value: function logout() {
-            return this.ecmAuth.logout();
+            if (this.config.provider && this.config.provider.toUpperCase() === 'BPM') {
+                return this.bpmAuth.logout();
+            } else if (this.config.provider && this.config.provider.toUpperCase() === 'ECM') {
+                return this.ecmAuth.logout();
+            } else if (this.config.provider && this.config.provider.toUpperCase() === 'ALL') {
+                return this._logoutBPMECM();
+            }
+        }
+    }, {
+        key: '_logoutBPMECM',
+        value: function _logoutBPMECM() {
+            var _this3 = this;
+
+            var ecmPromise = this.ecmAuth.logout();
+            var bpmPromise = this.bpmAuth.logout();
+
+            this.promise = new Promise(function (resolve, reject) {
+                Promise.all([ecmPromise, bpmPromise]).then(function (data) {
+                    _this3.promise.emit('logout');
+                    resolve('logout');
+                }, function (error) {
+                    if (error.status === 401) {
+                        _this3.promise.emit('unauthorized');
+                    }
+                    _this3.promise.emit('error');
+                    reject(error);
+                });
+            });
+
+            Emitter(this.promise); // jshint ignore:line
+
+            return this.promise;
         }
 
         /**
@@ -73846,7 +73654,13 @@ var AlfrescoApi = function () {
     }, {
         key: 'isLoggedIn',
         value: function isLoggedIn() {
-            return this.ecmAuth.isLoggedIn();
+            if (this.config.provider && this.config.provider.toUpperCase() === 'BPM') {
+                return this.bpmAuth.isLoggedIn();
+            } else if (this.config.provider && this.config.provider.toUpperCase() === 'ECM') {
+                return this.ecmAuth.isLoggedIn();
+            } else if (this.config.provider && this.config.provider.toUpperCase() === 'ALL') {
+                return this.ecmAuth.isLoggedIn() && this.bpmAuth.isLoggedIn();
+            }
         }
 
         /**
@@ -73885,7 +73699,7 @@ module.exports.Core = AlfrescoCoreRestApi;
 module.exports.Auth = AlfrescoAuthRestApi;
 module.exports.Mock = AlfrescoMock;
 
-},{"../test/mockObjects/mockAlfrescoApi.js":409,"./BpmAuth":136,"./alfresco-activiti-rest-api/src/index":180,"./alfresco-auth-rest-api/src/index":262,"./alfresco-core-rest-api/src/index.js":285,"./alfrescoApiClient":396,"./alfrescoContent":397,"./alfrescoNode":398,"./alfrescoSearch":399,"./alfrescoUpload":400,"./alfrescoWebScript":401,"./ecmAuth":402,"event-emitter":65}],396:[function(require,module,exports){
+},{"../test/mockObjects/mockAlfrescoApi.js":410,"./alfresco-activiti-rest-api/src/index":179,"./alfresco-auth-rest-api/src/index":261,"./alfresco-core-rest-api/src/index.js":284,"./alfrescoContent":396,"./alfrescoNode":397,"./alfrescoSearch":398,"./alfrescoUpload":399,"./alfrescoWebScript":400,"./bpmAuth":401,"./ecmAuth":402,"event-emitter":65,"lodash":72}],395:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -73957,7 +73771,7 @@ var AlfrescoApiClient = function (_ApiClient) {
             var request = superagent(httpMethod, url);
 
             // apply authentications
-            this.applyAuthToRequest(request, authNames);
+            this.applyAuthToRequest(request, ['basicAuth']);
 
             // set query parameters
             request.query(this.normalizeParams(queryParams));
@@ -73969,6 +73783,10 @@ var AlfrescoApiClient = function (_ApiClient) {
             request.timeout(this.timeout);
 
             var contentType = this.jsonPreferredMime(contentTypes);
+
+            if (contentType) {
+                request.type(contentType);
+            }
 
             if (contentType === 'application/x-www-form-urlencoded') {
                 request.send(this.normalizeParams(formParams)).on('progress', function (event) {
@@ -74111,7 +73929,7 @@ var AlfrescoApiClient = function (_ApiClient) {
 Emitter(AlfrescoApiClient.prototype); // jshint ignore:line
 module.exports = AlfrescoApiClient;
 
-},{"./alfresco-core-rest-api/src/ApiClient":270,"event-emitter":65,"lodash":72,"superagent":125}],397:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/ApiClient":269,"event-emitter":65,"lodash":72,"superagent":125}],396:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74120,14 +73938,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var AlfrescoContent = function () {
     /**
-     * @param {String} apiBaseUrl
      * @param {EcmAuth} ecmAuth
      */
 
-    function AlfrescoContent(apiBaseUrl, ecmAuth) {
+    function AlfrescoContent(ecmAuth) {
         _classCallCheck(this, AlfrescoContent);
 
-        this.apiBaseUrl = apiBaseUrl;
         this.ecmAuth = ecmAuth;
     }
 
@@ -74143,7 +73959,7 @@ var AlfrescoContent = function () {
     _createClass(AlfrescoContent, [{
         key: 'getDocumentThumbnailUrl',
         value: function getDocumentThumbnailUrl(documentId) {
-            return this.apiBaseUrl + '/nodes/' + documentId + '/renditions/doclib/content' + '?attachment=false&alf_ticket=' + this.ecmAuth.getTicket();
+            return this.ecmAuth.getClient().basePath + '/nodes/' + documentId + '/renditions/doclib/content' + '?attachment=false&alf_ticket=' + this.ecmAuth.getTicket();
         }
 
         /**
@@ -74157,7 +73973,7 @@ var AlfrescoContent = function () {
     }, {
         key: 'getContentUrl',
         value: function getContentUrl(documentId) {
-            return this.apiBaseUrl + '/nodes/' + documentId + '/content' + '?attachment=false&alf_ticket=' + this.ecmAuth.getTicket();
+            return this.ecmAuth.getClient().basePath + '/nodes/' + documentId + '/content' + '?attachment=false&alf_ticket=' + this.ecmAuth.getTicket();
         }
     }]);
 
@@ -74166,7 +73982,7 @@ var AlfrescoContent = function () {
 
 module.exports = AlfrescoContent;
 
-},{}],398:[function(require,module,exports){
+},{}],397:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74279,7 +74095,7 @@ var AlfrescoNode = function (_AlfrescoCoreRestApi$) {
 
 module.exports = AlfrescoNode;
 
-},{"./alfresco-core-rest-api/src/index.js":285,"lodash":72}],399:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/index.js":284,"lodash":72}],398:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -74304,7 +74120,7 @@ var AlfrescoSearch = function (_AlfrescoCoreRestApi$) {
 
 module.exports = AlfrescoSearch;
 
-},{"./alfresco-core-rest-api/src/index.js":285}],400:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/index.js":284}],399:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74402,7 +74218,7 @@ var AlfrescoUpload = function (_AlfrescoCoreRestApi$) {
 Emitter(AlfrescoUpload.prototype); // jshint ignore:line
 module.exports = AlfrescoUpload;
 
-},{"./alfresco-core-rest-api/src/index.js":285,"event-emitter":65,"lodash":72}],401:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/index.js":284,"event-emitter":65,"lodash":72}],400:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74466,7 +74282,187 @@ var AlfrescoWebScriptApi = function () {
 
 module.exports = AlfrescoWebScriptApi;
 
-},{"./alfresco-core-rest-api/src/ApiClient":270}],402:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/ApiClient":269}],401:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AlfrescoApiClient = require('./alfrescoApiClient');
+var Emitter = require('event-emitter');
+
+var BpmAuth = function (_AlfrescoApiClient) {
+    _inherits(BpmAuth, _AlfrescoApiClient);
+
+    /**
+     * @param {Object} config
+     */
+
+    function BpmAuth(config) {
+        _classCallCheck(this, BpmAuth);
+
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BpmAuth).call(this));
+
+        _this.ticket = undefined;
+        _this.config = config;
+        _this.basePath = config.hostActiviti + '/activiti-app'; //Activiti Call
+        _this.authentications.basicAuth.username = config.username;
+        _this.authentications.basicAuth.password = config.password;
+        Emitter.call(_this);
+        return _this;
+    }
+
+    /**
+     * login Activiti API
+     *
+     * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
+     * */
+
+
+    _createClass(BpmAuth, [{
+        key: 'login',
+        value: function login() {
+            var _this2 = this;
+
+            var postBody = {},
+                pathParams = {},
+                queryParams = {};
+
+            var headerParams = {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache'
+            };
+            var formParams = {
+                j_username: this.authentications.basicAuth.username,
+                j_password: this.authentications.basicAuth.password,
+                _spring_security_remember_me: true,
+                submit: 'Login'
+            };
+
+            var authNames = [];
+            var contentTypes = ['application/x-www-form-urlencoded'];
+            var accepts = ['application/json'];
+
+            this.promise = new Promise(function (resolve, reject) {
+                _this2.callApi('/app/authentication', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts).then(function (data) {
+                    _this2.setTicket('isLogedin');
+                    _this2.promise.emit('success');
+                    resolve(200);
+                }, function (error) {
+                    if (error.error.status === 401) {
+                        _this2.promise.emit('unauthorized');
+                    }
+                    _this2.promise.emit('error');
+                    reject(error.error);
+                });
+            });
+
+            Emitter(this.promise); // jshint ignore:line
+
+            return this.promise;
+        }
+
+        /**
+         * logout Alfresco API
+         *
+         * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
+         * */
+
+    }, {
+        key: 'logout',
+        value: function logout() {
+            var _this3 = this;
+
+            var postBody = {},
+                pathParams = {},
+                queryParams = {},
+                headerParams = {},
+                formParams = {};
+
+            var authNames = [];
+            var contentTypes = ['application/json'];
+            var accepts = ['application/json'];
+
+            this.promise = new Promise(function (resolve, reject) {
+                _this3.callApi('/app/logout', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts).then(function () {
+                    _this3.promise.emit('logout');
+                    _this3.setTicket(undefined);
+                    resolve('logout');
+                }, function (error) {
+                    if (error.status === 401) {
+                        _this3.promise.emit('unauthorized');
+                    }
+                    _this3.promise.emit('error');
+                    reject(error);
+                });
+            });
+
+            Emitter(this.promise); // jshint ignore:line
+
+            return this.promise;
+        }
+
+        /**
+         * Set the current Ticket
+         *
+         * @param {String} Ticket
+         * */
+
+    }, {
+        key: 'setTicket',
+        value: function setTicket(ticket) {
+            this.ticket = ticket;
+        }
+
+        /**
+         * Get the current Ticket
+         *
+         * @returns {String} Ticket
+         * */
+
+    }, {
+        key: 'getTicket',
+        value: function getTicket() {
+            return this.ticket;
+        }
+
+        /**
+         * If the client is logged in retun true
+         *
+         * @returns {Boolean} is logged in
+         */
+
+    }, {
+        key: 'isLoggedIn',
+        value: function isLoggedIn() {
+            return !!this.ticket;
+        }
+
+        /**
+         * return an Alfresco BPM API Client
+         *
+         * @returns {AlfrescoApiClient} Alfresco BPM API Client
+         * */
+
+    }, {
+        key: 'getClient',
+        value: function getClient() {
+            return this;
+        }
+    }]);
+
+    return BpmAuth;
+}(AlfrescoApiClient);
+
+Emitter(BpmAuth.prototype); // jshint ignore:line
+module.exports = BpmAuth;
+
+},{"./alfrescoApiClient":395,"event-emitter":65}],402:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74493,12 +74489,16 @@ var EcmAuth = function (_AlfrescoApiClient) {
 
         var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(EcmAuth).call(this));
 
-        _this.ticket = undefined;
         _this.config = config;
-        _this.host = _this.config.host;
         _this.basePath = _this.config.host + '/' + _this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
-        _this.authentications.basicAuth.username = 'ROLE_TICKET';
-        _this.authentications.basicAuth.password = _this.config.ticket;
+
+        if (_this.config.ticket) {
+            _this.setTicket(_this.config.ticket);
+        } else {
+            _this.authentications.basicAuth.username = _this.config.username;
+            _this.authentications.basicAuth.password = _this.config.password;
+        }
+
         Emitter.call(_this);
         return _this;
     }
@@ -74581,6 +74581,7 @@ var EcmAuth = function (_AlfrescoApiClient) {
     }, {
         key: 'setTicket',
         value: function setTicket(ticket) {
+            this.authentications.basicAuth.username = 'ROLE_TICKET';
             this.authentications.basicAuth.password = ticket;
             this.ticket = ticket;
         }
@@ -74608,6 +74609,25 @@ var EcmAuth = function (_AlfrescoApiClient) {
         value: function isLoggedIn() {
             return !!this.ticket;
         }
+
+        /**
+         * return an Alfresco API Client
+         *
+         * @returns {ApiClient} Alfresco API Client
+         * */
+
+    }, {
+        key: 'getClient',
+        value: function getClient() {
+            if (!this.alfrescoClient) {
+                this.alfrescoClient = new AlfrescoApiClient(this.config.host);
+            }
+
+            this.alfrescoClient.basePath = this.config.host + '/' + this.config.contextRoot + '/api/-default-/public/alfresco/versions/1'; //Auth Call
+            this.alfrescoClient.authentications.basicAuth.username = 'ROLE_TICKET';
+            this.alfrescoClient.authentications.basicAuth.password = this.config.ticket;
+            return this.alfrescoClient;
+        }
     }]);
 
     return EcmAuth;
@@ -74616,7 +74636,7 @@ var EcmAuth = function (_AlfrescoApiClient) {
 Emitter(EcmAuth.prototype); // jshint ignore:line
 module.exports = EcmAuth;
 
-},{"./alfresco-auth-rest-api/src/index":262,"./alfrescoApiClient":396,"event-emitter":65}],403:[function(require,module,exports){
+},{"./alfresco-auth-rest-api/src/index":261,"./alfrescoApiClient":395,"event-emitter":65}],403:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74652,7 +74672,7 @@ var AuthResponseMock = function (_BaseMock) {
     }, {
         key: 'get401Response',
         value: function get401Response() {
-            nock(this.host, { 'encodedQueryParams': true }).post('/activiti-app/app/authentication', 'j_username=wrong&j_password=credentials&_spring_security_remember_me=true&submit=Login').reply(401);
+            nock(this.host, { 'encodedQueryParams': true }).post('/activiti-app/app/authentication', 'j_username=wrong&j_password=name&_spring_security_remember_me=true&submit=Login').reply(401);
         }
     }]);
 
@@ -74661,7 +74681,99 @@ var AuthResponseMock = function (_BaseMock) {
 
 module.exports = AuthResponseMock;
 
-},{"../baseMock":408,"nock":75}],404:[function(require,module,exports){
+},{"../baseMock":409,"nock":75}],404:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var nock = require('nock');
+var BaseMock = require('../baseMock');
+
+var ProcessMock = function (_BaseMock) {
+    _inherits(ProcessMock, _BaseMock);
+
+    function ProcessMock(host) {
+        _classCallCheck(this, ProcessMock);
+
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(ProcessMock).call(this, host));
+    }
+
+    _createClass(ProcessMock, [{
+        key: 'get200Response',
+        value: function get200Response() {
+            nock('http://127.0.0.1:9999', { 'encodedQueryParams': true }).post('/activiti-app/api/enterprise/process-instances/query', {
+                'page': 0,
+                'sort': 'created-desc',
+                'state': 'all'
+            }).reply(200, {
+                'size': 2,
+                'total': 2,
+                'start': 0,
+                'data': [{
+                    'id': '39',
+                    'name': 'Process Test Api - July 26th 2016',
+                    'businessKey': null,
+                    'processDefinitionId': 'ProcessTestApi:1:32',
+                    'tenantId': 'tenant_1',
+                    'started': '2016-07-26T15:31:00.414+0000',
+                    'ended': null,
+                    'startedBy': {
+                        'id': 1,
+                        'firstName': null,
+                        'lastName': 'Administrator',
+                        'email': 'admin@app.activiti.com'
+                    },
+                    'processDefinitionName': 'Process Test Api',
+                    'processDefinitionDescription': null,
+                    'processDefinitionKey': 'ProcessTestApi',
+                    'processDefinitionCategory': 'http://www.activiti.org/processdef',
+                    'processDefinitionVersion': 1,
+                    'processDefinitionDeploymentId': '29',
+                    'graphicalNotationDefined': true,
+                    'startFormDefined': false,
+                    'suspended': false,
+                    'variables': []
+                }, {
+                    'id': '33',
+                    'name': 'Process Test Api - July 26th 2016',
+                    'businessKey': null,
+                    'processDefinitionId': 'ProcessTestApi:1:32',
+                    'tenantId': 'tenant_1',
+                    'started': '2016-07-26T15:30:58.367+0000',
+                    'ended': null,
+                    'startedBy': {
+                        'id': 1,
+                        'firstName': null,
+                        'lastName': 'Administrator',
+                        'email': 'admin@app.activiti.com'
+                    },
+                    'processDefinitionName': 'Process Test Api',
+                    'processDefinitionDescription': null,
+                    'processDefinitionKey': 'ProcessTestApi',
+                    'processDefinitionCategory': 'http://www.activiti.org/processdef',
+                    'processDefinitionVersion': 1,
+                    'processDefinitionDeploymentId': '29',
+                    'graphicalNotationDefined': true,
+                    'startFormDefined': false,
+                    'suspended': false,
+                    'variables': []
+                }]
+            });
+        }
+    }]);
+
+    return ProcessMock;
+}(BaseMock);
+
+module.exports = ProcessMock;
+
+},{"../baseMock":409,"nock":75}],405:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74733,7 +74845,7 @@ var AuthResponseMock = function (_BaseMock) {
         value: function get401Response() {
             nock(this.host, { 'encodedQueryParams': true }).post('/alfresco/api/-default-/public/authentication/versions/1/tickets', {
                 'userId': 'wrong',
-                'password': 'credentials'
+                'password': 'name'
             }).reply(401, {
                 'error': {
                     'errorKey': 'framework.exception.ApiDefault',
@@ -74761,7 +74873,7 @@ var AuthResponseMock = function (_BaseMock) {
 
 module.exports = AuthResponseMock;
 
-},{"../baseMock":408,"nock":75}],405:[function(require,module,exports){
+},{"../baseMock":409,"nock":75}],406:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -75038,7 +75150,7 @@ var NodeMock = function (_BaseMock) {
 
 module.exports = NodeMock;
 
-},{"../baseMock":408,"nock":75}],406:[function(require,module,exports){
+},{"../baseMock":409,"nock":75}],407:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -75146,7 +75258,7 @@ var UploadMock = function (_BaseMock) {
 
 module.exports = UploadMock;
 
-},{"../baseMock":408,"nock":75}],407:[function(require,module,exports){
+},{"../baseMock":409,"nock":75}],408:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -75225,7 +75337,7 @@ var WebScriptMock = function (_BaseMock) {
 
 module.exports = WebScriptMock;
 
-},{"../baseMock":408,"nock":75}],408:[function(require,module,exports){
+},{"../baseMock":409,"nock":75}],409:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -75268,7 +75380,7 @@ var BaseMock = function () {
 
 module.exports = BaseMock;
 
-},{"nock":75}],409:[function(require,module,exports){
+},{"nock":75}],410:[function(require,module,exports){
 'use strict';
 
 var mockAlfrescoApi = {};
@@ -75279,10 +75391,11 @@ mockAlfrescoApi.Upload = require('./alfresco/uploadMock.js');
 mockAlfrescoApi.WebScript = require('./alfresco/webScriptMock.js');
 
 //Bpm Mock
-mockAlfrescoApi.Activiti = {};
-mockAlfrescoApi.Activiti.Auth = require('./activiti/authResponseMock.js');
+mockAlfrescoApi.ActivitiMock = {};
+mockAlfrescoApi.ActivitiMock.Auth = require('./activiti/authResponseMock.js');
+mockAlfrescoApi.ActivitiMock.Process = require('./activiti/processMock.js');
 
 module.exports = mockAlfrescoApi;
 
-},{"./activiti/authResponseMock.js":403,"./alfresco/authResponseMock.js":404,"./alfresco/nodeMock.js":405,"./alfresco/uploadMock.js":406,"./alfresco/webScriptMock.js":407}]},{},[1])(1)
+},{"./activiti/authResponseMock.js":403,"./activiti/processMock.js":404,"./alfresco/authResponseMock.js":405,"./alfresco/nodeMock.js":406,"./alfresco/uploadMock.js":407,"./alfresco/webScriptMock.js":408}]},{},[1])(1)
 });

@@ -28,14 +28,7 @@ var opts = {
   'tenantId': 789 // Integer | tenantId
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getGroups(opts, callback);
+apiInstance.getGroups(opts);
 ```
 
 ### Parameters
@@ -75,15 +68,7 @@ var apiInstance = new ActivitiPublicRestApi.GroupsApi();
 
 var groupId = 789; // Integer | groupId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getUsersForGroup(groupId, callback);
+apiInstance.getUsersForGroup(groupId);
 ```
 
 ### Parameters

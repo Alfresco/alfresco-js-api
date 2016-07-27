@@ -34,7 +34,6 @@
 
     /**
      * Callback function to receive the result of the deployAppDefinitions operation.
-     * @callback module:api/AppsApi~deployAppDefinitionsCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -44,9 +43,8 @@
      * Deploy published app
      * After creating and puclished an app the user can add it to his/her landing page.
      * @param {module:model/RuntimeAppDefinitionSaveRepresentation} saveObject saveObject
-     * @param {module:api/AppsApi~deployAppDefinitionsCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deployAppDefinitions = function(saveObject, callback) {
+    this.deployAppDefinitions = function(saveObject) {
       var postBody = saveObject;
 
       // verify the required parameter 'saveObject' is set
@@ -72,13 +70,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/runtime-app-definitions', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the exportAppDefinition operation.
-     * @callback module:api/AppsApi~exportAppDefinitionCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -88,9 +85,8 @@
      * Export App Definition
      * This will return a zip file containing the app definition model and all related models (process definitions and forms).
      * @param {Integer} modelId modelId from a runtime app or the id of an app definition model
-     * @param {module:api/AppsApi~exportAppDefinitionCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.exportAppDefinition = function(modelId, callback) {
+    this.exportAppDefinition = function(modelId) {
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
@@ -117,13 +113,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/app-definitions/{modelId}/export', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the getAppDefinitions operation.
-     * @callback module:api/AppsApi~getAppDefinitionsCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -132,10 +127,9 @@
     /**
      * List runtime apps
      * When a user logs in into the Alfresco Activiti BPM Suite, the landing page is displayed containing all the apps that the user is allowed to see and use.
-     * @param {module:api/AppsApi~getAppDefinitionsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAppDefinitions = function(callback) {
+    this.getAppDefinitions = function() {
       var postBody = null;
 
 
@@ -156,13 +150,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/runtime-app-definitions', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the importAppDefinition operation.
-     * @callback module:api/AppsApi~importAppDefinitionCallback
      * @param {String} error Error message, if any.
      * @param {module:model/AppDefinitionRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -172,10 +165,9 @@
      * Import App Definition
      * This is useful to bootstrap an environment (for users or continous integration).
      * @param {File} file file
-     * @param {module:api/AppsApi~importAppDefinitionCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/AppDefinitionRepresentation}
      */
-    this.importAppDefinition = function(file, callback) {
+    this.importAppDefinition = function(file) {
       var postBody = null;
 
       // verify the required parameter 'file' is set
@@ -202,13 +194,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/app-definitions/import', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the importAppDefinition operation.
-     * @callback module:api/AppsApi~importAppDefinitionCallback
      * @param {String} error Error message, if any.
      * @param {module:model/AppDefinitionRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -219,10 +210,9 @@
      * To import an app to an existing app definition to create a new version instead of importing a new app definition.
      * @param {Integer} modelId modelId
      * @param {File} file file
-     * @param {module:api/AppsApi~importAppDefinitionCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/AppDefinitionRepresentation}
      */
-    this.importAppDefinition = function(modelId, file, callback) {
+    this.importAppDefinition = function(modelId, file) {
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
@@ -255,13 +245,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/app-definitions/{modelId}/import', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the publishAppDefinition operation.
-     * @callback module:api/AppsApi~publishAppDefinitionCallback
      * @param {String} error Error message, if any.
      * @param {module:model/AppDefinitionUpdateResultRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -272,10 +261,9 @@
      * Before an app model can be used, it need to be published
      * @param {Integer} modelId modelId
      * @param {module:model/AppDefinitionPublishRepresentation} publishModel publishModel
-     * @param {module:api/AppsApi~publishAppDefinitionCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/AppDefinitionUpdateResultRepresentation}
      */
-    this.publishAppDefinition = function(modelId, publishModel, callback) {
+    this.publishAppDefinition = function(modelId, publishModel) {
       var postBody = publishModel;
 
       // verify the required parameter 'modelId' is set
@@ -307,7 +295,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/app-definitions/{modelId}/publish', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

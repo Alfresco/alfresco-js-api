@@ -34,7 +34,6 @@
 
     /**
      * Callback function to receive the result of the addProcessInstanceComment operation.
-     * @callback module:api/CommentsApi~addProcessInstanceCommentCallback
      * @param {String} error Error message, if any.
      * @param {module:model/CommentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44,10 +43,9 @@
      * Add a comment to a Process
      * @param {module:model/CommentRepresentation} commentRequest commentRequest
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/CommentsApi~addProcessInstanceCommentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/CommentRepresentation}
      */
-    this.addProcessInstanceComment = function(commentRequest, processInstanceId, callback) {
+    this.addProcessInstanceComment = function(commentRequest, processInstanceId) {
       var postBody = commentRequest;
 
       // verify the required parameter 'commentRequest' is set
@@ -79,13 +77,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}/comments', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the addTaskComment operation.
-     * @callback module:api/CommentsApi~addTaskCommentCallback
      * @param {String} error Error message, if any.
      * @param {module:model/CommentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -95,10 +92,9 @@
      * Add a comment to a Task
      * @param {module:model/CommentRepresentation} commentRequest commentRequest
      * @param {String} taskId taskId
-     * @param {module:api/CommentsApi~addTaskCommentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/CommentRepresentation}
      */
-    this.addTaskComment = function(commentRequest, taskId, callback) {
+    this.addTaskComment = function(commentRequest, taskId) {
       var postBody = commentRequest;
 
       // verify the required parameter 'commentRequest' is set
@@ -130,13 +126,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/comments', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the getProcessInstanceComments operation.
-     * @callback module:api/CommentsApi~getProcessInstanceCommentsCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -147,10 +142,9 @@
      * @param {String} processInstanceId processInstanceId
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.latestFirst latestFirst
-     * @param {module:api/CommentsApi~getProcessInstanceCommentsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getProcessInstanceComments = function(processInstanceId, opts, callback) {
+    this.getProcessInstanceComments = function(processInstanceId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -179,13 +173,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}/comments', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the getTaskComments operation.
-     * @callback module:api/CommentsApi~getTaskCommentsCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -196,10 +189,9 @@
      * @param {String} taskId taskId
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.latestFirst latestFirst
-     * @param {module:api/CommentsApi~getTaskCommentsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getTaskComments = function(taskId, opts, callback) {
+    this.getTaskComments = function(taskId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -228,7 +220,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/comments', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

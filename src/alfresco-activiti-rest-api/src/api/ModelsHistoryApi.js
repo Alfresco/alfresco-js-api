@@ -48,7 +48,7 @@
      * @param {module:api/ModelsHistoryApi~getModelHistoryCollectionCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getModelHistoryCollection = function(modelId, opts, callback) {
+    this.getModelHistoryCollection = function(modelId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -77,7 +77,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models/{modelId}/history', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -96,7 +96,7 @@
      * @param {module:api/ModelsHistoryApi~getProcessModelHistoryCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ModelRepresentation}
      */
-    this.getProcessModelHistory = function(modelId, modelHistoryId, callback) {
+    this.getProcessModelHistory = function(modelId, modelHistoryId) {
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
@@ -129,7 +129,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models/{modelId}/history/{modelHistoryId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

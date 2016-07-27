@@ -34,7 +34,6 @@
 
     /**
      * Callback function to receive the result of the getAppVersion operation.
-     * @callback module:api/AboutApi~getAppVersionCallback
      * @param {String} error Error message, if any.
      * @param {Object.<String, {'String': 'String'}>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43,10 +42,9 @@
     /**
      * Server Information
      * Retrieve information about the Activiti BPM Suite version
-     * @param {module:api/AboutApi~getAppVersionCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Object.<String, {'String': 'String'}>}
      */
-    this.getAppVersion = function(callback) {
+    this.getAppVersion = function() {
       var postBody = null;
 
 
@@ -67,7 +65,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/app-version', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

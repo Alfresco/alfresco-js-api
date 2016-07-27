@@ -46,7 +46,7 @@
      * @param {module:api/ModelsApi~createModelCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ModelRepresentation}
      */
-    this.createModel = function(modelRepresentation, callback) {
+    this.createModel = function(modelRepresentation) {
       var postBody = modelRepresentation;
 
       // verify the required parameter 'modelRepresentation' is set
@@ -72,7 +72,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -92,7 +92,7 @@
      * @param {Boolean} opts.deleteRuntimeApp deleteRuntimeApp
      * @param {module:api/ModelsApi~deleteModelCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deleteModel = function(modelId, opts, callback) {
+    this.deleteModel = function(modelId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -122,7 +122,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models/{modelId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -141,7 +141,7 @@
      * @param {module:api/ModelsApi~duplicateModelCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ModelRepresentation}
      */
-    this.duplicateModel = function(modelId, modelRepresentation, callback) {
+    this.duplicateModel = function(modelId, modelRepresentation) {
       var postBody = modelRepresentation;
 
       // verify the required parameter 'modelId' is set
@@ -173,7 +173,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models/{modelId}/clone', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -191,7 +191,7 @@
      * @param {module:api/ModelsApi~getModelJSONCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ObjectNode}
      */
-    this.getModelJSON = function(modelId, callback) {
+    this.getModelJSON = function(modelId) {
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
@@ -218,7 +218,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models/{modelId}/editor/json', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -236,7 +236,7 @@
      * @param {module:api/ModelsApi~getModelThumbnailCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<'String'>}
      */
-    this.getModelThumbnail = function(modelId, callback) {
+    this.getModelThumbnail = function(modelId) {
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
@@ -263,7 +263,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models/{modelId}/thumbnail', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -283,7 +283,7 @@
      * @param {module:api/ModelsApi~getModelCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ModelRepresentation}
      */
-    this.getModel = function(modelId, opts, callback) {
+    this.getModel = function(modelId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -312,7 +312,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models/{modelId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -326,10 +326,8 @@
 
     /**
      * TODO
-     * @param {module:api/ModelsApi~getModelsToIncludeInAppDefinitionCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getModelsToIncludeInAppDefinition = function(callback) {
+    this.getModelsToIncludeInAppDefinition = function() {
       var postBody = null;
 
 
@@ -350,7 +348,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models-for-app-definition', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -372,7 +370,7 @@
      * @param {module:api/ModelsApi~getModelsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getModels = function(opts, callback) {
+    this.getModels = function(opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -398,7 +396,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -417,7 +415,7 @@
      * @param {module:api/ModelsApi~importNewVersionCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ModelRepresentation}
      */
-    this.importNewVersion = function(modelId, file, callback) {
+    this.importNewVersion = function(modelId, file) {
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
@@ -450,7 +448,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models/{modelId}/newversion', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -468,7 +466,7 @@
      * @param {module:api/ModelsApi~importProcessModelCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ModelRepresentation}
      */
-    this.importProcessModel = function(file, callback) {
+    this.importProcessModel = function(file) {
       var postBody = null;
 
       // verify the required parameter 'file' is set
@@ -495,7 +493,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-models/import', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -514,7 +512,7 @@
      * @param {module:api/ModelsApi~saveModelCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ModelRepresentation}
      */
-    this.saveModel = function(modelId, values, callback) {
+    this.saveModel = function(modelId, values) {
       var postBody = values;
 
       // verify the required parameter 'modelId' is set
@@ -546,7 +544,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models/{modelId}/editor/json', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -565,7 +563,7 @@
      * @param {module:api/ModelsApi~updateModelCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ModelRepresentation}
      */
-    this.updateModel = function(modelId, updatedModel, callback) {
+    this.updateModel = function(modelId, updatedModel) {
       var postBody = updatedModel;
 
       // verify the required parameter 'modelId' is set
@@ -597,7 +595,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models/{modelId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
@@ -617,7 +615,7 @@
      * @param {module:api/ModelsApi~validateModelCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/ValidationErrorRepresentation>}
      */
-    this.validateModel = function(modelId, opts, callback) {
+    this.validateModel = function(modelId, opts) {
       opts = opts || {};
       var postBody = opts['values'];
 
@@ -645,7 +643,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models/{modelId}/editor/validate', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

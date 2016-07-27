@@ -34,7 +34,6 @@
 
     /**
      * Callback function to receive the result of the bulkUpdateUsers operation.
-     * @callback module:api/AdminUsersApi~bulkUpdateUsersCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -43,9 +42,8 @@
     /**
      * Bulk Update a list of users
      * @param {module:model/BulkUserUpdateRepresentation} update update
-     * @param {module:api/AdminUsersApi~bulkUpdateUsersCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.bulkUpdateUsers = function(update, callback) {
+    this.bulkUpdateUsers = function(update) {
       var postBody = update;
 
       // verify the required parameter 'update' is set
@@ -71,13 +69,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/users', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the createNewUser operation.
-     * @callback module:api/AdminUsersApi~createNewUserCallback
      * @param {String} error Error message, if any.
      * @param {module:model/UserRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -86,10 +83,9 @@
     /**
      * Create a new user
      * @param {module:model/UserRepresentation} userRepresentation userRepresentation
-     * @param {module:api/AdminUsersApi~createNewUserCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/UserRepresentation}
      */
-    this.createNewUser = function(userRepresentation, callback) {
+    this.createNewUser = function(userRepresentation) {
       var postBody = userRepresentation;
 
       // verify the required parameter 'userRepresentation' is set
@@ -115,13 +111,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/users', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the getUser operation.
-     * @callback module:api/AdminUsersApi~getUserCallback
      * @param {String} error Error message, if any.
      * @param {module:model/AbstractUserRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -132,10 +127,9 @@
      * @param {Integer} userId userId
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.summary summary
-     * @param {module:api/AdminUsersApi~getUserCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/AbstractUserRepresentation}
      */
-    this.getUser = function(userId, opts, callback) {
+    this.getUser = function(userId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -164,13 +158,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/users/{userId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the getUsers operation.
-     * @callback module:api/AdminUsersApi~getUsersCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -190,10 +183,9 @@
      * @param {Integer} opts.groupId groupId
      * @param {Integer} opts.tenantId tenantId
      * @param {Boolean} opts.summary summary
-     * @param {module:api/AdminUsersApi~getUsersCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getUsers = function(opts, callback) {
+    this.getUsers = function(opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -226,13 +218,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/users', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the updateUserDetails operation.
-     * @callback module:api/AdminUsersApi~updateUserDetailsCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -242,9 +233,8 @@
      * Update user details
      * @param {Integer} userId userId
      * @param {module:model/UserRepresentation} userRepresentation userRepresentation
-     * @param {module:api/AdminUsersApi~updateUserDetailsCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.updateUserDetails = function(userId, userRepresentation, callback) {
+    this.updateUserDetails = function(userId, userRepresentation) {
       var postBody = userRepresentation;
 
       // verify the required parameter 'userId' is set
@@ -276,7 +266,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/users/{userId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

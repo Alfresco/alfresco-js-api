@@ -24,15 +24,7 @@ var processModelId = 789; // Integer | processModelId
 
 var processModelHistoryId = 789; // Integer | processModelHistoryId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.getHistoricProcessModelBpmn20Xml(processModelId, processModelHistoryId, callback);
+apiInstance.getHistoricProcessModelBpmn20Xml(processModelId, processModelHistoryId);
 ```
 
 ### Parameters
@@ -69,15 +61,7 @@ var apiInstance = new ActivitiPublicRestApi.ModelBpmnApi();
 
 var processModelId = 789; // Integer | processModelId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.getProcessModelBpmn20Xml(processModelId, callback);
+apiInstance.getProcessModelBpmn20Xml(processModelId);
 ```
 
 ### Parameters

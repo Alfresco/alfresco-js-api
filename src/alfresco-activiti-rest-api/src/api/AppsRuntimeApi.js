@@ -34,7 +34,6 @@
 
     /**
      * Callback function to receive the result of the deployAppDefinitions operation.
-     * @callback module:api/AppsRuntimeApi~deployAppDefinitionsCallback
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -44,9 +43,8 @@
      * Deploy published app
      * After creating and puclished an app the user can add it to his/her landing page.
      * @param {module:model/RuntimeAppDefinitionSaveRepresentation} saveObject saveObject
-     * @param {module:api/AppsRuntimeApi~deployAppDefinitionsCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.deployAppDefinitions = function(saveObject, callback) {
+    this.deployAppDefinitions = function(saveObject) {
       var postBody = saveObject;
 
       // verify the required parameter 'saveObject' is set
@@ -72,13 +70,12 @@
       return this.apiClient.callApi(
         '/api/enterprise/runtime-app-definitions', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
      * Callback function to receive the result of the getAppDefinitions operation.
-     * @callback module:api/AppsRuntimeApi~getAppDefinitionsCallback
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -87,10 +84,9 @@
     /**
      * List runtime apps
      * When a user logs in into the Alfresco Activiti BPM Suite, the landing page is displayed containing all the apps that the user is allowed to see and use.
-     * @param {module:api/AppsRuntimeApi~getAppDefinitionsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAppDefinitions = function(callback) {
+    this.getAppDefinitions = function() {
       var postBody = null;
 
 
@@ -111,7 +107,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/runtime-app-definitions', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };

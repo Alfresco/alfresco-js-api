@@ -31,15 +31,7 @@ var apiInstance = new ActivitiPublicRestApi.ProcessApi();
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteProcessInstance(processInstanceId, callback);
+apiInstance.deleteProcessInstance(processInstanceId);
 ```
 
 ### Parameters
@@ -75,15 +67,7 @@ var apiInstance = new ActivitiPublicRestApi.ProcessApi();
 
 var filterRequest = new ActivitiPublicRestApi.ProcessInstanceFilterRequestRepresentation(); // ProcessInstanceFilterRequestRepresentation | filterRequest
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.filterProcessInstances(filterRequest, callback);
+apiInstance.filterProcessInstances(filterRequest);
 ```
 
 ### Parameters
@@ -117,14 +101,7 @@ var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
 var apiInstance = new ActivitiPublicRestApi.ProcessApi();
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProcessDefinitionStartForm(callback);
+apiInstance.getProcessDefinitionStartForm();
 ```
 
 ### Parameters
@@ -162,14 +139,7 @@ var opts = {
   'appDefinitionId': 789 // Integer | appDefinitionId
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProcessDefinitions(opts, callback);
+apiInstance.getProcessDefinitions(opts);
 ```
 
 ### Parameters
@@ -206,15 +176,7 @@ var apiInstance = new ActivitiPublicRestApi.ProcessApi();
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProcessInstanceContent(processInstanceId, callback);
+apiInstance.getProcessInstanceContent(processInstanceId);
 ```
 
 ### Parameters
@@ -252,15 +214,7 @@ var apiInstance = new ActivitiPublicRestApi.ProcessApi();
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProcessInstanceStartForm(processInstanceId, callback);
+apiInstance.getProcessInstanceStartForm(processInstanceId);
 ```
 
 ### Parameters
@@ -296,15 +250,7 @@ var apiInstance = new ActivitiPublicRestApi.ProcessApi();
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProcessInstance(processInstanceId, callback);
+apiInstance.getProcessInstance(processInstanceId);
 ```
 
 ### Parameters
@@ -340,15 +286,7 @@ var apiInstance = new ActivitiPublicRestApi.ProcessApi();
 
 var requestNode = new ActivitiPublicRestApi.ObjectNode(); // ObjectNode | requestNode
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProcessInstances(requestNode, callback);
+apiInstance.getProcessInstances(requestNode);
 ```
 
 ### Parameters
@@ -382,14 +320,7 @@ var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
 var apiInstance = new ActivitiPublicRestApi.ProcessApi();
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRestFieldValues(callback);
+apiInstance.getRestFieldValues();
 ```
 
 ### Parameters
@@ -420,14 +351,7 @@ var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
 var apiInstance = new ActivitiPublicRestApi.ProcessApi();
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRestTableFieldValues(callback);
+apiInstance.getRestTableFieldValues();
 ```
 
 ### Parameters
@@ -461,14 +385,7 @@ var apiInstance = new ActivitiPublicRestApi.ProcessApi();
 var startRequest = new ActivitiPublicRestApi.CreateProcessInstanceRepresentation(); // CreateProcessInstanceRepresentation | startRequest
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.startNewProcessInstance(startRequest, callback);
+apiInstance.startNewProcessInstance(startRequest);
 ```
 
 ### Parameters

@@ -26,15 +26,7 @@ var userId = 789; // Integer | userId
 
 var processDefinitionKey = "processDefinitionKey_example"; // String | processDefinitionKey
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.completeTasks(userId, processDefinitionKey, callback);
+apiInstance.completeTasks(userId, processDefinitionKey);
 ```
 
 ### Parameters
@@ -73,15 +65,7 @@ var userId = 789; // Integer | userId
 
 var processDefinitionKey = "processDefinitionKey_example"; // String | processDefinitionKey
 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.generateData(userId, processDefinitionKey, callback);
+apiInstance.generateData(userId, processDefinitionKey);
 ```
 
 ### Parameters
@@ -116,14 +100,7 @@ var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
 var apiInstance = new ActivitiPublicRestApi.TemporaryApi();
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getHeaders(callback);
+apiInstance.getHeaders();
 ```
 
 ### Parameters
@@ -154,14 +131,7 @@ var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
 var apiInstance = new ActivitiPublicRestApi.TemporaryApi();
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getOptions(callback);
+apiInstance.getOptions();
 ```
 
 ### Parameters

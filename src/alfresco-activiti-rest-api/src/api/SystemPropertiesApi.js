@@ -43,10 +43,8 @@
     /**
      * Retrieve System Properties
      * Typical value is AllowInvolveByEmail
-     * @param {module:api/SystemPropertiesApi~getPropertiesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/SystemPropertiesRepresentation}
      */
-    this.getProperties = function(callback) {
+    this.getProperties = function() {
       var postBody = null;
 
 
@@ -67,7 +65,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/system/properties', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
   };
