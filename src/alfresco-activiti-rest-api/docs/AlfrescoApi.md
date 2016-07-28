@@ -25,13 +25,10 @@ Returns Alfresco Oauth HTML Page
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AlfrescoApi();
 
 var code = "code_example"; // String | code
 
-apiInstance.confirmAuthorisation(code);
+this.alfrescoJsApi.activiti.alfrescoApi.confirmAuthorisation(code);
 ```
 
 ### Parameters
@@ -61,11 +58,8 @@ List Alfresco networks
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
-var apiInstance = new ActivitiPublicRestApi.AlfrescoApi();
-
-apiInstance.getAllNetworks();
+this.alfrescoJsApi.activiti.alfrescoApi.getAllNetworks();
 ```
 
 ### Parameters
@@ -94,13 +88,10 @@ Returns ALL Sites
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AlfrescoApi();
 
 var networkId = "networkId_example"; // String | networkId
 
-apiInstance.getAllSites(networkId);
+this.alfrescoJsApi.activiti.alfrescoApi.getAllSites(networkId);
 ```
 
 ### Parameters
@@ -132,13 +123,10 @@ Returns ALL Sites
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AlfrescoApi();
 
 var repositoryId = "repositoryId_example"; // String | repositoryId
 
-apiInstance.getAllSites(repositoryId);
+this.alfrescoJsApi.activiti.alfrescoApi.getAllSites(repositoryId);
 ```
 
 ### Parameters
@@ -168,15 +156,12 @@ List file &amp; folders inside a specific folder
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AlfrescoApi();
 
 var networkId = "networkId_example"; // String | networkId
 
 var folderId = "folderId_example"; // String | folderId
 
-apiInstance.getContentInFolder(networkId, folderId);
+this.alfrescoJsApi.activiti.alfrescoApi.getContentInFolder(networkId, folderId);
 ```
 
 ### Parameters
@@ -207,15 +192,12 @@ List file &amp; folders inside a specific folder
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AlfrescoApi();
 
 var repositoryId = "repositoryId_example"; // String | repositoryId
 
 var folderId = "folderId_example"; // String | folderId
 
-apiInstance.getContentInFolder(repositoryId, folderId);
+this.alfrescoJsApi.activiti.alfrescoApi.getContentInFolder(repositoryId, folderId);
 ```
 
 ### Parameters
@@ -246,15 +228,12 @@ List file &amp; folders inside a specific site
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AlfrescoApi();
 
 var networkId = "networkId_example"; // String | networkId
 
 var siteId = "siteId_example"; // String | siteId
 
-apiInstance.getContentInSite(networkId, siteId);
+this.alfrescoJsApi.activiti.alfrescoApi.getContentInSite(networkId, siteId);
 ```
 
 ### Parameters
@@ -285,15 +264,12 @@ List file &amp; folders inside a specific site
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AlfrescoApi();
 
 var repositoryId = "repositoryId_example"; // String | repositoryId
 
 var siteId = "siteId_example"; // String | siteId
 
-apiInstance.getContentInSite(repositoryId, siteId);
+this.alfrescoJsApi.activiti.alfrescoApi.getContentInSite(repositoryId, siteId);
 ```
 
 ### Parameters
@@ -326,16 +302,13 @@ A tenant administrator can configure one or more Alfresco repositories to use wh
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AlfrescoApi();
 
 var opts = { 
   'tenantId': 789, // Integer | tenantId
   'includeAccounts': true // Boolean | includeAccounts
 };
 
-apiInstance.getRepositories(opts);
+this.alfrescoJsApi.activiti.alfrescoApi.getRepositories(opts);
 ```
 
 ### Parameters

@@ -16,9 +16,6 @@ List groups
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.GroupsApi();
 
 var opts = { 
   'filter': "filter_example", // String | filter
@@ -28,7 +25,7 @@ var opts = {
   'tenantId': 789 // Integer | tenantId
 };
 
-apiInstance.getGroups(opts);
+this.alfrescoJsApi.activiti.groupsApi.getGroups(opts);
 ```
 
 ### Parameters
@@ -62,13 +59,10 @@ List users member of a specific group
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.GroupsApi();
 
 var groupId = 789; // Integer | groupId
 
-apiInstance.getUsersForGroup(groupId);
+this.alfrescoJsApi.activiti.groupsApi.getUsersForGroup(groupId);
 ```
 
 ### Parameters

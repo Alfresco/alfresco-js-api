@@ -22,15 +22,11 @@ Assign a task to a user
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskActionsApi();
-
 var taskId = "taskId_example"; // String | taskId
 
 var requestNode = new ActivitiPublicRestApi.ObjectNode(); // ObjectNode | requestNode
 
-apiInstance.assignTask(taskId, requestNode);
+this.alfrescoJsApi.activiti.taskActionsApi.assignTask(taskId, requestNode);
 ```
 
 ### Parameters
@@ -61,15 +57,11 @@ Attach a form to a task
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskActionsApi();
-
 var taskId = "taskId_example"; // String | taskId
 
 var requestNode = new ActivitiPublicRestApi.ObjectNode(); // ObjectNode | requestNode
 
-apiInstance.attachForm(taskId, requestNode);
+this.alfrescoJsApi.activiti.taskActionsApi.attachForm(taskId, requestNode);
 ```
 
 ### Parameters
@@ -102,13 +94,9 @@ To claim a task (in case the task is assigned to a group)
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskActionsApi();
-
 var taskId = "taskId_example"; // String | taskId
 
-apiInstance.claimTask(taskId);
+this.alfrescoJsApi.activiti.taskActionsApi.claimTask(taskId);
 ```
 
 ### Parameters
@@ -140,13 +128,9 @@ To complete a task (standalone or without a task form)
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskActionsApi();
-
 var taskId = "taskId_example"; // String | taskId
 
-apiInstance.completeTask(taskId);
+this.alfrescoJsApi.activiti.taskActionsApi.completeTask(taskId);
 ```
 
 ### Parameters
@@ -176,15 +160,11 @@ To involve a user with a task
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskActionsApi();
-
 var taskId = "taskId_example"; // String | taskId
 
 var requestNode = new ActivitiPublicRestApi.ObjectNode(); // ObjectNode | requestNode
 
-apiInstance.involveUser(taskId, requestNode);
+this.alfrescoJsApi.activiti.taskActionsApi.involveUser(taskId, requestNode);
 ```
 
 ### Parameters
@@ -215,13 +195,9 @@ Remove a form to a task
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskActionsApi();
-
 var taskId = "taskId_example"; // String | taskId
 
-apiInstance.removeForm(taskId);
+this.alfrescoJsApi.activiti.taskActionsApi.removeForm(taskId);
 ```
 
 ### Parameters
@@ -251,15 +227,11 @@ Remove an involved user from a task
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskActionsApi();
-
 var taskId = "taskId_example"; // String | taskId
 
 var requestNode = new ActivitiPublicRestApi.ObjectNode(); // ObjectNode | requestNode
 
-apiInstance.removeInvolvedUser(taskId, requestNode);
+this.alfrescoJsApi.activiti.taskActionsApi.removeInvolvedUser(taskId, requestNode);
 ```
 
 ### Parameters
@@ -292,13 +264,9 @@ To unclaim a task (in case the task was assigned to a group)
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskActionsApi();
-
 var taskId = "taskId_example"; // String | taskId
 
-apiInstance.unclaimTask(taskId);
+this.alfrescoJsApi.activiti.taskActionsApi.unclaimTask(taskId);
 ```
 
 ### Parameters

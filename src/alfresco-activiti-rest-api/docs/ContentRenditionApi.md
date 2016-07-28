@@ -15,15 +15,12 @@ Retrieve Raw Content
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ContentRenditionApi();
 
 var contentId = 789; // Integer | contentId
 
 var renditionType = "renditionType_example"; // String | renditionType
 
-apiInstance.getRawContent(contentId, renditionType);
+this.alfrescoJsApi.activiti.contentRenditionApi.getRawContent(contentId, renditionType);
 ```
 
 ### Parameters

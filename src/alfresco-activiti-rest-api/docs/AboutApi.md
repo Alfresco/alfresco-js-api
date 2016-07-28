@@ -17,11 +17,8 @@ Retrieve information about the Activiti BPM Suite version
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
-var apiInstance = new ActivitiPublicRestApi.AboutApi();
-
-apiInstance.getAppVersion();
+this.alfrescoJsApi.activiti.aboutApi.getAppVersion();
 ```
 
 ### Parameters

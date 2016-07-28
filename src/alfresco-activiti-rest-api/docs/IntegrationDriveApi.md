@@ -18,13 +18,10 @@ Returns Drive Oauth HTML Page
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.IntegrationDriveApi();
 
 var code = "code_example"; // String | code
 
-apiInstance.confirmAuthorisation(code);
+this.alfrescoJsApi.activiti.integrationDriveApi.confirmAuthorisation(code);
 ```
 
 ### Parameters
@@ -54,9 +51,6 @@ List file &amp; folders
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.IntegrationDriveApi();
 
 var opts = { 
   'filter': "filter_example", // String | filter
@@ -64,7 +58,7 @@ var opts = {
   'currentFolderOnly': true // Boolean | currentFolderOnly
 };
 
-apiInstance.getFiles(opts);
+this.alfrescoJsApi.activiti.integrationDriveApi.getFiles(opts);
 ```
 
 ### Parameters

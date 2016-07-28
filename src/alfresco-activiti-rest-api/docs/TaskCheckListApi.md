@@ -17,15 +17,12 @@ Create a task checklist
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskCheckListApi();
 
 var taskId = "taskId_example"; // String | taskId
 
 var taskRepresentation = new ActivitiPublicRestApi.TaskRepresentation(); // TaskRepresentation | taskRepresentation
 
-apiInstance.addSubtask(taskId, taskRepresentation);
+this.alfrescoJsApi.activiti.taskCheckListApi.addSubtask(taskId, taskRepresentation);
 ```
 
 ### Parameters
@@ -56,13 +53,10 @@ Retrieve Checklist added to a task
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskCheckListApi();
 
 var taskId = "taskId_example"; // String | taskId
 
-apiInstance.getChecklist(taskId);
+this.alfrescoJsApi.activiti.taskCheckListApi.getChecklist(taskId);
 ```
 
 ### Parameters
@@ -92,15 +86,12 @@ Change the order of items on a checklist
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskCheckListApi();
 
 var taskId = "taskId_example"; // String | taskId
 
 var orderRepresentation = new ActivitiPublicRestApi.ChecklistOrderRepresentation(); // ChecklistOrderRepresentation | orderRepresentation
 
-apiInstance.orderChecklist(taskId, orderRepresentation);
+this.alfrescoJsApi.activiti.taskCheckListApi.orderChecklist(taskId, orderRepresentation);
 ```
 
 ### Parameters

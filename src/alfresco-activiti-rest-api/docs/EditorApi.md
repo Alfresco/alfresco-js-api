@@ -19,15 +19,12 @@ getFormHistory
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.EditorApi();
 
 var formId = 789; // Integer | formId
 
 var formHistoryId = 789; // Integer | formHistoryId
 
-apiInstance.getFormHistory(formId, formHistoryId);
+this.alfrescoJsApi.activiti.editorApi.getFormHistory(formId, formHistoryId);
 ```
 
 ### Parameters
@@ -58,13 +55,10 @@ getForm
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.EditorApi();
 
 var formId = 789; // Integer | formId
 
-apiInstance.getForm(formId);
+this.alfrescoJsApi.activiti.editorApi.getForm(formId);
 ```
 
 ### Parameters
@@ -94,11 +88,8 @@ getForms
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
-var apiInstance = new ActivitiPublicRestApi.EditorApi();
-
-apiInstance.getForms();
+this.alfrescoJsApi.activiti.editorApi.getForms();
 ```
 
 ### Parameters
@@ -125,15 +116,12 @@ saveForm
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.EditorApi();
 
 var formId = 789; // Integer | formId
 
 var saveRepresentation = new ActivitiPublicRestApi.FormSaveRepresentation(); // FormSaveRepresentation | saveRepresentation
 
-apiInstance.saveForm(formId, saveRepresentation);
+this.alfrescoJsApi.activiti.editorApi.saveForm(formId, saveRepresentation);
 ```
 
 ### Parameters
@@ -164,15 +152,12 @@ validateModel
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.EditorApi();
 
 var formId = 789; // Integer | formId
 
 var saveRepresentation = new ActivitiPublicRestApi.FormSaveRepresentation(); // FormSaveRepresentation | saveRepresentation
 
-apiInstance.validateModel(formId, saveRepresentation);
+this.alfrescoJsApi.activiti.editorApi.validateModel(formId, saveRepresentation);
 ```
 
 ### Parameters

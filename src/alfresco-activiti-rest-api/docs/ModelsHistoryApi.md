@@ -16,9 +16,6 @@ To get the version information for a model
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ModelsHistoryApi();
 
 var modelId = 789; // Integer | modelId
 
@@ -26,7 +23,7 @@ var opts = {
   'includeLatestVersion': true // Boolean | includeLatestVersion
 };
 
-apiInstance.getModelHistoryCollection(modelId, opts);
+this.alfrescoJsApi.activiti.modelsHistoryApi.getModelHistoryCollection(modelId, opts);
 ```
 
 ### Parameters
@@ -57,15 +54,12 @@ To get a particular older version of a model
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ModelsHistoryApi();
 
 var modelId = 789; // Integer | modelId
 
 var modelHistoryId = 789; // Integer | modelHistoryId
 
-apiInstance.getProcessModelHistory(modelId, modelHistoryId);
+this.alfrescoJsApi.activiti.modelsHistoryApi.getProcessModelHistory(modelId, modelHistoryId);
 ```
 
 ### Parameters

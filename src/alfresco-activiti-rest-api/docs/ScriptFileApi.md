@@ -16,11 +16,8 @@ getControllers
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
-var apiInstance = new ActivitiPublicRestApi.ScriptFileApi();
-
-apiInstance.getControllers();
+this.alfrescoJsApi.activiti.scriptFileApi.getControllers();
 ```
 
 ### Parameters
@@ -47,11 +44,8 @@ getLibraries
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
-var apiInstance = new ActivitiPublicRestApi.ScriptFileApi();
-
-apiInstance.getLibraries();
+this.alfrescoJsApi.activiti.scriptFileApi.getLibraries();
 ```
 
 ### Parameters

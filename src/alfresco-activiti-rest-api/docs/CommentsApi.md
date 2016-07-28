@@ -18,15 +18,12 @@ Add a comment to a Process
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.CommentsApi();
 
 var commentRequest = new ActivitiPublicRestApi.CommentRepresentation(); // CommentRepresentation | commentRequest
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
-apiInstance.addProcessInstanceComment(commentRequest, processInstanceId);
+this.alfrescoJsApi.activiti.commentsApi.addProcessInstanceComment(commentRequest, processInstanceId);
 ```
 
 ### Parameters
@@ -57,15 +54,12 @@ Add a comment to a Task
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.CommentsApi();
 
 var commentRequest = new ActivitiPublicRestApi.CommentRepresentation(); // CommentRepresentation | commentRequest
 
 var taskId = "taskId_example"; // String | taskId
 
-apiInstance.addTaskComment(commentRequest, taskId);
+this.alfrescoJsApi.activiti.commentsApi.addTaskComment(commentRequest, taskId);
 ```
 
 ### Parameters
@@ -96,9 +90,6 @@ Comment list added to Process
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.CommentsApi();
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
@@ -106,7 +97,7 @@ var opts = {
   'latestFirst': true // Boolean | latestFirst
 };
 
-apiInstance.getProcessInstanceComments(processInstanceId, opts);
+this.alfrescoJsApi.activiti.commentsApi.getProcessInstanceComments(processInstanceId, opts);
 ```
 
 ### Parameters
@@ -137,9 +128,6 @@ Comment list added to Task
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.CommentsApi();
 
 var taskId = "taskId_example"; // String | taskId
 
@@ -147,7 +135,7 @@ var opts = {
   'latestFirst': true // Boolean | latestFirst
 };
 
-apiInstance.getTaskComments(taskId, opts);
+this.alfrescoJsApi.activiti.commentsApi.getTaskComments(taskId, opts);
 ```
 
 ### Parameters

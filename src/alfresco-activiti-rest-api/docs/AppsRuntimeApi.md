@@ -18,13 +18,10 @@ After creating and puclished an app the user can add it to his/her landing page.
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AppsRuntimeApi();
 
 var saveObject = new ActivitiPublicRestApi.RuntimeAppDefinitionSaveRepresentation(); // RuntimeAppDefinitionSaveRepresentation | saveObject
 
-apiInstance.deployAppDefinitions(saveObject);
+this.alfrescoJsApi.activiti.appsRuntimeApi.deployAppDefinitions(saveObject);
 ```
 
 ### Parameters
@@ -56,11 +53,8 @@ When a user logs in into the Alfresco Activiti BPM Suite, the landing page is di
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
-var apiInstance = new ActivitiPublicRestApi.AppsRuntimeApi();
-
-apiInstance.getAppDefinitions();
+this.alfrescoJsApi.activiti.appsRuntimeApi.getAppDefinitions();
 ```
 
 ### Parameters

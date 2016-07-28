@@ -20,13 +20,10 @@ This will return a zip file containing the app definition model and all related 
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AppsDefinitionApi();
 
 var modelId = 789; // Integer | modelId from a runtime app or the id of an app definition model
 
-apiInstance.exportAppDefinition(modelId);
+this.alfrescoJsApi.activiti.appsDefinitionApi.exportAppDefinition(modelId);
 ```
 
 ### Parameters
@@ -58,13 +55,10 @@ This is useful to bootstrap an environment (for users or continous integration).
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AppsDefinitionApi();
 
 var file = "/path/to/file.txt"; // File | file
 
-apiInstance.importAppDefinition(file);
+this.alfrescoJsApi.activiti.appsDefinitionApi.importAppDefinition(file);
 ```
 
 ### Parameters
@@ -96,15 +90,12 @@ To import an app to an existing app definition to create a new version instead o
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AppsDefinitionApi();
 
 var modelId = 789; // Integer | modelId
 
 var file = "/path/to/file.txt"; // File | file
 
-apiInstance.importAppDefinition(modelId, file);
+this.alfrescoJsApi.activiti.appsDefinitionApi.importAppDefinition(modelId, file);
 ```
 
 ### Parameters
@@ -137,15 +128,12 @@ Before an app model can be used, it need to be published
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AppsDefinitionApi();
 
 var modelId = 789; // Integer | modelId
 
 var publishModel = new ActivitiPublicRestApi.AppDefinitionPublishRepresentation(); // AppDefinitionPublishRepresentation | publishModel
 
-apiInstance.publishAppDefinition(modelId, publishModel);
+this.alfrescoJsApi.activiti.appsDefinitionApi.publishAppDefinition(modelId, publishModel);
 ```
 
 ### Parameters

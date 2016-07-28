@@ -17,11 +17,8 @@ Typical value is AllowInvolveByEmail
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
-var apiInstance = new ActivitiPublicRestApi.SystemPropertiesApi();
-
-apiInstance.getProperties();
+this.alfrescoJsApi.activiti.systemPropertiesApi.getProperties();
 ```
 
 ### Parameters

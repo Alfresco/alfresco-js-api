@@ -17,11 +17,7 @@ Ideal to map accounts &amp; integrate with 3rd party app/client
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.IntegrationAccountApi();
-
-apiInstance.getAccounts();
+this.alfrescoJsApi.activiti.integrationAccountApi.getAccounts();
 ```
 
 ### Parameters

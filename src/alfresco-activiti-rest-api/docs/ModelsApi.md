@@ -27,13 +27,10 @@ To create a new model
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ModelsApi();
 
 var modelRepresentation = new ActivitiPublicRestApi.ModelRepresentation(); // ModelRepresentation | modelRepresentation
 
-apiInstance.createModel(modelRepresentation);
+this.alfrescoJsApi.activiti.modelsApi.createModel(modelRepresentation);
 ```
 
 ### Parameters
@@ -63,9 +60,6 @@ Delete a model
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ModelsApi();
 
 var modelId = 789; // Integer | modelId
 
@@ -74,7 +68,7 @@ var opts = {
   'deleteRuntimeApp': true // Boolean | deleteRuntimeApp
 };
 
-apiInstance.deleteModel(modelId, opts);
+this.alfrescoJsApi.activiti.modelsApi.deleteModel(modelId, opts);
 ```
 
 ### Parameters
@@ -106,16 +100,13 @@ To duplicate an existing model
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ModelsApi();
 
 var modelId = 789; // Integer | modelId
 
 var modelRepresentation = new ActivitiPublicRestApi.ModelRepresentation(); // ModelRepresentation | modelRepresentation
 
 
-apiInstance.duplicateModel(modelId, modelRepresentation);
+this.alfrescoJsApi.activiti.modelsApi.duplicateModel(modelId, modelRepresentation);
 ```
 
 ### Parameters
@@ -146,14 +137,11 @@ Get the JSON model
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ModelsApi();
 
 var modelId = 789; // Integer | modelId
 
 
-apiInstance.getModelJSON(modelId);
+this.alfrescoJsApi.activiti.modelsApi.getModelJSON(modelId);
 ```
 
 ### Parameters
@@ -183,13 +171,10 @@ Get Model thumbnail
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ModelsApi();
 
 var modelId = 789; // Integer | modelId
 
-apiInstance.getModelThumbnail(modelId);
+this.alfrescoJsApi.activiti.modelsApi.getModelThumbnail(modelId);
 ```
 
 ### Parameters
@@ -219,9 +204,6 @@ To retrieve details about a particular model (process, form, decision rule or ap
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ModelsApi();
 
 var modelId = 789; // Integer | modelId
 
@@ -229,7 +211,7 @@ var opts = {
   'includePermissions': true // Boolean | includePermissions
 };
 
-apiInstance.getModel(modelId, opts);
+this.alfrescoJsApi.activiti.modelsApi.getModel(modelId, opts);
 ```
 
 ### Parameters
@@ -260,11 +242,8 @@ TODO
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
-var apiInstance = new ActivitiPublicRestApi.ModelsApi();
-
-apiInstance.getModelsToIncludeInAppDefinition();
+this.alfrescoJsApi.activiti.modelsApi.getModelsToIncludeInAppDefinition();
 ```
 
 ### Parameters
@@ -291,9 +270,6 @@ List models (process, form, decision rule or app)
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ModelsApi();
 
 var opts = { 
   'filter': "filter_example", // String | filter
@@ -302,7 +278,7 @@ var opts = {
   'referenceId': 789 // Integer | referenceId
 };
 
-apiInstance.getModels(opts);
+this.alfrescoJsApi.activiti.modelsApi.getModels(opts);
 ```
 
 ### Parameters
@@ -335,15 +311,12 @@ Create a new model version
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ModelsApi();
 
 var modelId = 789; // Integer | modelId
 
 var file = "/path/to/file.txt"; // File | file
 
-apiInstance.importNewVersion(modelId, file);
+this.alfrescoJsApi.activiti.modelsApi.importNewVersion(modelId, file);
 ```
 
 ### Parameters
@@ -374,13 +347,10 @@ To import a BPMN 2.0 xml file
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ModelsApi();
 
 var file = "/path/to/file.txt"; // File | file
 
-apiInstance.importProcessModel(file);
+this.alfrescoJsApi.activiti.modelsApi.importProcessModel(file);
 ```
 
 ### Parameters
@@ -410,15 +380,12 @@ Save the JSON model
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ModelsApi();
 
 var modelId = 789; // Integer | modelId
 
 var values = null; // Object | values
 
-apiInstance.saveModel(modelId, values);
+this.alfrescoJsApi.activiti.modelsApi.saveModel(modelId, values);
 ```
 
 ### Parameters
@@ -449,15 +416,12 @@ Edit a specific model
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ModelsApi();
 
 var modelId = 789; // Integer | modelId
 
 var updatedModel = new ActivitiPublicRestApi.ModelRepresentation(); // ModelRepresentation | updatedModel
 
-apiInstance.updateModel(modelId, updatedModel);
+this.alfrescoJsApi.activiti.modelsApi.updateModel(modelId, updatedModel);
 ```
 
 ### Parameters
@@ -488,9 +452,6 @@ Validate the JSON model
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ModelsApi();
 
 var modelId = 789; // Integer | modelId
 
@@ -498,7 +459,7 @@ var opts = {
   'values': null // Object | values
 };
 
-apiInstance.validateModel(modelId, opts);
+this.alfrescoJsApi.activiti.modelsApi.validateModel(modelId, opts);
 ```
 
 ### Parameters

@@ -19,15 +19,12 @@ Complete a Task Form
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskFormsApi();
 
 var taskId = "taskId_example"; // String | taskId
 
 var completeTaskFormRepresentation = new ActivitiPublicRestApi.CompleteFormRepresentation(); // CompleteFormRepresentation | completeTaskFormRepresentation
 
-apiInstance.completeTaskForm(taskId, completeTaskFormRepresentation);
+this.alfrescoJsApi.activiti.taskFormsApi.completeTaskForm(taskId, completeTaskFormRepresentation);
 ```
 
 ### Parameters
@@ -60,9 +57,6 @@ Specific case to retrieve information on a specific column
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskFormsApi();
 
 var taskId = "taskId_example"; // String | taskId
 
@@ -70,7 +64,7 @@ var field = "field_example"; // String | field
 
 var column = "column_example"; // String | column
 
-apiInstance.getRestFieldValues(taskId, field, column);
+this.alfrescoJsApi.activiti.taskFormsApi.getRestFieldValues(taskId, field, column);
 ```
 
 ### Parameters
@@ -104,15 +98,12 @@ Form field values that are populated through a REST backend, can be retrieved vi
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskFormsApi();
 
 var taskId = "taskId_example"; // String | taskId
 
 var field = "field_example"; // String | field
 
-apiInstance.getRestFieldValues(taskId, field);
+this.alfrescoJsApi.activiti.taskFormsApi.getRestFieldValues(taskId, field);
 ```
 
 ### Parameters
@@ -143,13 +134,10 @@ Retrieve Task Form
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskFormsApi();
 
 var taskId = "taskId_example"; // String | taskId
 
-apiInstance.getTaskForm(taskId);
+this.alfrescoJsApi.activiti.taskFormsApi.getTaskForm(taskId);
 ```
 
 ### Parameters
@@ -179,15 +167,12 @@ Save Task Form
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskFormsApi();
 
 var taskId = "taskId_example"; // String | taskId
 
 var saveTaskFormRepresentation = new ActivitiPublicRestApi.SaveFormRepresentation(); // SaveFormRepresentation | saveTaskFormRepresentation
 
-apiInstance.saveTaskForm(taskId, saveTaskFormRepresentation);
+this.alfrescoJsApi.activiti.taskFormsApi.saveTaskForm(taskId, saveTaskFormRepresentation);
 ```
 
 ### Parameters

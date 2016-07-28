@@ -17,11 +17,8 @@ Retrieve the start form for a process definition
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
-var apiInstance = new ActivitiPublicRestApi.ProcessDefinitionsFormApi();
-
-apiInstance.getProcessDefinitionStartForm();
+this.alfrescoJsApi.activiti.processDefinitionsFormApi.getProcessDefinitionStartForm();
 ```
 
 ### Parameters
@@ -48,11 +45,8 @@ Retrieve field values (eg. the typeahead field)
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
-var apiInstance = new ActivitiPublicRestApi.ProcessDefinitionsFormApi();
-
-apiInstance.getRestFieldValues();
+this.alfrescoJsApi.activiti.processDefinitionsFormApi.getRestFieldValues();
 ```
 
 ### Parameters
@@ -79,11 +73,8 @@ Retrieve field values (eg. the table field)
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
-var apiInstance = new ActivitiPublicRestApi.ProcessDefinitionsFormApi();
-
-apiInstance.getRestTableFieldValues();
+this.alfrescoJsApi.activiti.processDefinitionsFormApi.getRestTableFieldValues();
 ```
 
 ### Parameters

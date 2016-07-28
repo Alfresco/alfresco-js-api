@@ -20,13 +20,10 @@ Returns ALL Sites
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.IntegrationAlfrescoOnPremiseApi();
 
 var repositoryId = "repositoryId_example"; // String | repositoryId
 
-apiInstance.getAllSites(repositoryId);
+this.alfrescoJsApi.activiti.integrationAlfrescoOnPremiseApi.getAllSites(repositoryId);
 ```
 
 ### Parameters
@@ -56,15 +53,12 @@ List file &amp; folders inside a specific folder
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.IntegrationAlfrescoOnPremiseApi();
 
 var repositoryId = "repositoryId_example"; // String | repositoryId
 
 var folderId = "folderId_example"; // String | folderId
 
-apiInstance.getContentInFolder(repositoryId, folderId);
+this.alfrescoJsApi.activiti.integrationAlfrescoOnPremiseApi.getContentInFolder(repositoryId, folderId);
 ```
 
 ### Parameters
@@ -95,15 +89,12 @@ List file &amp; folders inside a specific site
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.IntegrationAlfrescoOnPremiseApi();
 
 var repositoryId = "repositoryId_example"; // String | repositoryId
 
 var siteId = "siteId_example"; // String | siteId
 
-apiInstance.getContentInSite(repositoryId, siteId);
+this.alfrescoJsApi.activiti.integrationAlfrescoOnPremiseApi.getContentInSite(repositoryId, siteId);
 ```
 
 ### Parameters
@@ -136,16 +127,13 @@ A tenant administrator can configure one or more Alfresco repositories to use wh
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.IntegrationAlfrescoOnPremiseApi();
 
 var opts = { 
   'tenantId': 789, // Integer | tenantId
   'includeAccounts': true // Boolean | includeAccounts
 };
 
-apiInstance.getRepositories(opts);
+this.alfrescoJsApi.activiti.integrationAlfrescoOnPremiseApi.getRepositories(opts);
 ```
 
 ### Parameters

@@ -41,16 +41,13 @@ Create a task checklist
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
 var taskRepresentation = new ActivitiPublicRestApi.TaskRepresentation(); // TaskRepresentation | taskRepresentation
 
 
-apiInstance.addSubtask(taskId, taskRepresentation);
+this.alfrescoJsApi.activiti.taskApi.addSubtask(taskId, taskRepresentation);
 ```
 
 ### Parameters
@@ -81,15 +78,12 @@ Add a comment to a Task
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var commentRequest = new ActivitiPublicRestApi.CommentRepresentation(); // CommentRepresentation | commentRequest
 
 var taskId = "taskId_example"; // String | taskId
 
-apiInstance.addTaskComment(commentRequest, taskId);
+this.alfrescoJsApi.activiti.taskApi.addTaskComment(commentRequest, taskId);
 ```
 
 ### Parameters
@@ -120,16 +114,13 @@ Assign a task to a user
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
 var requestNode = new ActivitiPublicRestApi.ObjectNode(); // ObjectNode | requestNode
 
 
-apiInstance.assignTask(taskId, requestNode);
+this.alfrescoJsApi.activiti.taskApi.assignTask(taskId, requestNode);
 ```
 
 ### Parameters
@@ -160,15 +151,12 @@ Attach a form to a task
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
 var requestNode = new ActivitiPublicRestApi.ObjectNode(); // ObjectNode | requestNode
 
-apiInstance.attachForm(taskId, requestNode);
+this.alfrescoJsApi.activiti.taskApi.attachForm(taskId, requestNode);
 ```
 
 ### Parameters
@@ -201,13 +189,10 @@ To claim a task (in case the task is assigned to a group)
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
-apiInstance.claimTask(taskId);
+this.alfrescoJsApi.activiti.taskApi.claimTask(taskId);
 ```
 
 ### Parameters
@@ -237,15 +222,12 @@ Complete a Task Form
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
 var completeTaskFormRepresentation = new ActivitiPublicRestApi.CompleteFormRepresentation(); // CompleteFormRepresentation | completeTaskFormRepresentation
 
-apiInstance.completeTaskForm(taskId, completeTaskFormRepresentation);
+this.alfrescoJsApi.activiti.taskApi.completeTaskForm(taskId, completeTaskFormRepresentation);
 ```
 
 ### Parameters
@@ -278,13 +260,10 @@ To complete a task (standalone or without a task form)
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
-apiInstance.completeTask(taskId);
+this.alfrescoJsApi.activiti.taskApi.completeTask(taskId);
 ```
 
 ### Parameters
@@ -316,13 +295,10 @@ Standalone Task is not associated with a process instance. You can define only t
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskRepresentation = new ActivitiPublicRestApi.TaskRepresentation(); // TaskRepresentation | taskRepresentation
 
-apiInstance.createNewTask(taskRepresentation);
+this.alfrescoJsApi.activiti.taskApi.createNewTask(taskRepresentation);
 ```
 
 ### Parameters
@@ -352,9 +328,6 @@ To relate content (eg from Alfresco) to a task
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
@@ -364,7 +337,7 @@ var opts = {
   'isRelatedContent': true // Boolean | isRelatedContent
 };
 
-apiInstance.createRelatedContentOnTask(taskId, relatedContent, opts);
+this.alfrescoJsApi.activiti.taskApi.createRelatedContentOnTask(taskId, relatedContent, opts);
 ```
 
 ### Parameters
@@ -396,9 +369,6 @@ Upload content to a task
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
@@ -408,7 +378,7 @@ var opts = {
   'isRelatedContent': true // Boolean | isRelatedContent
 };
 
-apiInstance.createRelatedContentOnTask(taskId, file, opts);
+this.alfrescoJsApi.activiti.taskApi.createRelatedContentOnTask(taskId, file, opts);
 ```
 
 ### Parameters
@@ -440,13 +410,10 @@ Delete a Task
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
-apiInstance.deleteTask(taskId);
+this.alfrescoJsApi.activiti.taskApi.deleteTask(taskId);
 ```
 
 ### Parameters
@@ -476,14 +443,11 @@ Filter list of Task
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var requestNode = new ActivitiPublicRestApi.TaskFilterRequestRepresentation(); // TaskFilterRequestRepresentation | requestNode
 
 
-apiInstance.filterTasks(requestNode);
+this.alfrescoJsApi.activiti.taskApi.filterTasks(requestNode);
 ```
 
 ### Parameters
@@ -513,14 +477,11 @@ Retrieve Checklist added to a task
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
 
-apiInstance.getChecklist(taskId);
+this.alfrescoJsApi.activiti.taskApi.getChecklist(taskId);
 ```
 
 ### Parameters
@@ -550,14 +511,11 @@ Retrieve which content is attached to a task
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
 
-apiInstance.getRelatedContentForTask(taskId);
+this.alfrescoJsApi.activiti.taskApi.getRelatedContentForTask(taskId);
 ```
 
 ### Parameters
@@ -589,9 +547,6 @@ Specific case to retrieve information on a specific column
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
@@ -600,7 +555,7 @@ var field = "field_example"; // String | field
 var column = "column_example"; // String | column
 
 
-apiInstance.getRestFieldValues(taskId, field, column);
+this.alfrescoJsApi.activiti.taskApi.getRestFieldValues(taskId, field, column);
 ```
 
 ### Parameters
@@ -634,16 +589,13 @@ Form field values that are populated through a REST backend, can be retrieved vi
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
 var field = "field_example"; // String | field
 
 
-apiInstance.getRestFieldValues(taskId, field);
+this.alfrescoJsApi.activiti.taskApi.getRestFieldValues(taskId, field);
 ```
 
 ### Parameters
@@ -674,9 +626,6 @@ Comment list added to Task
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
@@ -684,7 +633,7 @@ var opts = {
   'latestFirst': true // Boolean | latestFirst
 };
 
-apiInstance.getTaskComments(taskId, opts);
+this.alfrescoJsApi.activiti.taskApi.getTaskComments(taskId, opts);
 ```
 
 ### Parameters
@@ -715,14 +664,11 @@ Retrieve Task Form
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
 
-apiInstance.getTaskForm(taskId);
+this.alfrescoJsApi.activiti.taskApi.getTaskForm(taskId);
 ```
 
 ### Parameters
@@ -752,13 +698,10 @@ Task Details
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
-apiInstance.getTask(taskId);
+this.alfrescoJsApi.activiti.taskApi.getTask(taskId);
 ```
 
 ### Parameters
@@ -788,15 +731,12 @@ To involve a user with a task
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
 var requestNode = new ActivitiPublicRestApi.ObjectNode(); // ObjectNode | requestNode
 
-apiInstance.involveUser(taskId, requestNode);
+this.alfrescoJsApi.activiti.taskApi.involveUser(taskId, requestNode);
 ```
 
 ### Parameters
@@ -827,14 +767,11 @@ List Task
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var requestNode = new ActivitiPublicRestApi.ObjectNode(); // ObjectNode | requestNode
 
 
-apiInstance.listTasks(requestNode);
+this.alfrescoJsApi.activiti.taskApi.listTasks(requestNode);
 ```
 
 ### Parameters
@@ -864,15 +801,12 @@ Change the order of items on a checklist
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
 var orderRepresentation = new ActivitiPublicRestApi.ChecklistOrderRepresentation(); // ChecklistOrderRepresentation | orderRepresentation
 
-apiInstance.orderChecklist(taskId, orderRepresentation);
+this.alfrescoJsApi.activiti.taskApi.orderChecklist(taskId, orderRepresentation);
 ```
 
 ### Parameters
@@ -903,13 +837,10 @@ Remove a form to a task
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
-apiInstance.removeForm(taskId);
+this.alfrescoJsApi.activiti.taskApi.removeForm(taskId);
 ```
 
 ### Parameters
@@ -939,16 +870,13 @@ Remove an involved user from a task
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
 var requestNode = new ActivitiPublicRestApi.ObjectNode(); // ObjectNode | requestNode
 
 
-apiInstance.removeInvolvedUser(taskId, requestNode);
+this.alfrescoJsApi.activiti.taskApi.removeInvolvedUser(taskId, requestNode);
 ```
 
 ### Parameters
@@ -979,15 +907,12 @@ Save Task Form
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
 var saveTaskFormRepresentation = new ActivitiPublicRestApi.SaveFormRepresentation(); // SaveFormRepresentation | saveTaskFormRepresentation
 
-apiInstance.saveTaskForm(taskId, saveTaskFormRepresentation);
+this.alfrescoJsApi.activiti.taskApi.saveTaskForm(taskId, saveTaskFormRepresentation);
 ```
 
 ### Parameters
@@ -1020,13 +945,10 @@ To unclaim a task (in case the task was assigned to a group)
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
-apiInstance.unclaimTask(taskId);
+this.alfrescoJsApi.activiti.taskApi.unclaimTask(taskId);
 ```
 
 ### Parameters
@@ -1058,15 +980,12 @@ You can edit only name, description and dueDate (ISO 8601 string).
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TaskApi();
 
 var taskId = "taskId_example"; // String | taskId
 
 var updated = new ActivitiPublicRestApi.TaskUpdateRepresentation(); // TaskUpdateRepresentation | updated
 
-apiInstance.updateTask(taskId, updated);
+this.alfrescoJsApi.activiti.taskApi.updateTask(taskId, updated);
 ```
 
 ### Parameters

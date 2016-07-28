@@ -16,13 +16,9 @@ Retrieve content attached to process instance fields
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ProcessInstancesInformationApi();
-
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
-apiInstance.getProcessInstanceContent(processInstanceId);
+this.alfrescoJsApi.activiti.processInstancesInformationApi.getProcessInstanceContent(processInstanceId);
 ```
 
 ### Parameters
@@ -52,13 +48,10 @@ Start a process instance
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ProcessInstancesInformationApi();
 
 var startRequest = new ActivitiPublicRestApi.CreateProcessInstanceRepresentation(); // CreateProcessInstanceRepresentation | startRequest
 
-apiInstance.startNewProcessInstance(startRequest);
+this.alfrescoJsApi.activiti.processInstancesInformationApi.startNewProcessInstance(startRequest);
 ```
 
 ### Parameters

@@ -16,15 +16,12 @@ Export a previous process definition model to a BPMN 2.0 xml file
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ModelBpmnApi();
 
 var processModelId = 789; // Integer | processModelId
 
 var processModelHistoryId = 789; // Integer | processModelHistoryId
 
-apiInstance.getHistoricProcessModelBpmn20Xml(processModelId, processModelHistoryId);
+this.alfrescoJsApi.activiti.modelBpmnApi.getHistoricProcessModelBpmn20Xml(processModelId, processModelHistoryId);
 ```
 
 ### Parameters
@@ -55,13 +52,10 @@ Export a process definition model to a BPMN 2.0 xml file
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ModelBpmnApi();
 
 var processModelId = 789; // Integer | processModelId
 
-apiInstance.getProcessModelBpmn20Xml(processModelId);
+this.alfrescoJsApi.activiti.modelBpmnApi.getProcessModelBpmn20Xml(processModelId);
 ```
 
 ### Parameters

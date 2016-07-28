@@ -19,13 +19,10 @@ Change user password
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ProfileApi();
 
 var changePasswordRepresentation = new ActivitiPublicRestApi.ChangePasswordRepresentation(); // ChangePasswordRepresentation | changePasswordRepresentation
 
-apiInstance.changePassword(changePasswordRepresentation);
+this.alfrescoJsApi.activiti.profileApi.changePassword(changePasswordRepresentation);
 ```
 
 ### Parameters
@@ -57,11 +54,8 @@ Generally returns an image file
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
-var apiInstance = new ActivitiPublicRestApi.ProfileApi();
-
-apiInstance.getProfilePicture();
+this.alfrescoJsApi.activiti.profileApi.getProfilePicture();
 ```
 
 ### Parameters
@@ -90,11 +84,8 @@ Retrieve user information
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
-var apiInstance = new ActivitiPublicRestApi.ProfileApi();
-
-apiInstance.getProfile();
+this.alfrescoJsApi.activiti.profileApi.getProfile();
 ```
 
 ### Parameters
@@ -123,13 +114,10 @@ Only a first name, last name, email and company can be updated
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ProfileApi();
 
 var userRepresentation = new ActivitiPublicRestApi.UserRepresentation(); // UserRepresentation | userRepresentation
 
-apiInstance.updateProfile(userRepresentation);
+this.alfrescoJsApi.activiti.profileApi.updateProfile(userRepresentation);
 ```
 
 ### Parameters
@@ -159,13 +147,10 @@ Change user profile picture
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ProfileApi();
 
 var file = "/path/to/file.txt"; // File | file
 
-apiInstance.uploadProfilePicture(file);
+this.alfrescoJsApi.activiti.profileApi.uploadProfilePicture(file);
 ```
 
 ### Parameters

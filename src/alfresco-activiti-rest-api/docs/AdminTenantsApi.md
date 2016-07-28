@@ -24,13 +24,10 @@ Tenant manager only
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminTenantsApi();
 
 var createTenantRepresentation = new ActivitiPublicRestApi.CreateTenantRepresentation(); // CreateTenantRepresentation | createTenantRepresentation
 
-apiInstance.createTenant(createTenantRepresentation);
+this.alfrescoJsApi.activiti.adminTenantsApi.createTenant(createTenantRepresentation);
 ```
 
 ### Parameters
@@ -60,13 +57,10 @@ Delete a tenant
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminTenantsApi();
 
 var tenantId = 789; // Integer | tenantId
 
-apiInstance.deleteTenant(tenantId);
+this.alfrescoJsApi.activiti.adminTenantsApi.deleteTenant(tenantId);
 ```
 
 ### Parameters
@@ -96,13 +90,10 @@ Get tenant events
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminTenantsApi();
 
 var tenantId = 789; // Integer | tenantId
 
-apiInstance.getTenantEvents(tenantId);
+this.alfrescoJsApi.activiti.adminTenantsApi.getTenantEvents(tenantId);
 ```
 
 ### Parameters
@@ -132,13 +123,10 @@ Get tenant logo
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminTenantsApi();
 
 var tenantId = 789; // Integer | tenantId
 
-apiInstance.getTenantLogo(tenantId);
+this.alfrescoJsApi.activiti.adminTenantsApi.getTenantLogo(tenantId);
 ```
 
 ### Parameters
@@ -168,13 +156,10 @@ Get tenant details
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminTenantsApi();
 
 var tenantId = 789; // Integer | tenantId
 
-apiInstance.getTenant(tenantId);
+this.alfrescoJsApi.activiti.adminTenantsApi.getTenant(tenantId);
 ```
 
 ### Parameters
@@ -206,11 +191,8 @@ Tenant manager only
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
-var apiInstance = new ActivitiPublicRestApi.AdminTenantsApi();
-
-apiInstance.getTenants();
+this.alfrescoJsApi.activiti.adminTenantsApi.getTenants();
 ```
 
 ### Parameters
@@ -237,15 +219,12 @@ Update a tenant
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminTenantsApi();
 
 var tenantId = 789; // Integer | tenantId
 
 var createTenantRepresentation = new ActivitiPublicRestApi.CreateTenantRepresentation(); // CreateTenantRepresentation | createTenantRepresentation
 
-apiInstance.update(tenantId, createTenantRepresentation);
+this.alfrescoJsApi.activiti.adminTenantsApi.update(tenantId, createTenantRepresentation);
 ```
 
 ### Parameters
@@ -276,15 +255,12 @@ Update tenant logo
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminTenantsApi();
 
 var tenantId = 789; // Integer | tenantId
 
 var file = "/path/to/file.txt"; // File | file
 
-apiInstance.uploadTenantLogo(tenantId, file);
+this.alfrescoJsApi.activiti.adminTenantsApi.uploadTenantLogo(tenantId, file);
 ```
 
 ### Parameters

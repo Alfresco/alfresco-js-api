@@ -17,16 +17,12 @@ Get a list of process definitions (visible within the tenant of the user)
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ProcessDefinitionsApi();
-
 var opts = { 
   'latest': true, // Boolean | latest
   'appDefinitionId': 789 // Integer | appDefinitionId
 };
 
-apiInstance.getProcessDefinitions(opts);
+this.alfrescoJsApi.activiti.processDefinitionsApi.getProcessDefinitions(opts);
 ```
 
 ### Parameters

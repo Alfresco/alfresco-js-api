@@ -16,13 +16,10 @@ getLogFile
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.IDMSyncApi();
 
 var syncLogEntryId = 789; // Integer | syncLogEntryId
 
-apiInstance.getLogFile(syncLogEntryId);
+this.alfrescoJsApi.activiti.iDMSyncApi.getLogFile(syncLogEntryId);
 ```
 
 ### Parameters
@@ -52,9 +49,6 @@ getSyncLogEntries
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.IDMSyncApi();
 
 var opts = { 
   'tenantId': 789, // Integer | tenantId
@@ -62,7 +56,7 @@ var opts = {
   'size': 56 // Integer | size
 };
 
-apiInstance.getSyncLogEntries(opts);
+this.alfrescoJsApi.activiti.iDMSyncApi.getSyncLogEntries(opts);
 ```
 
 ### Parameters

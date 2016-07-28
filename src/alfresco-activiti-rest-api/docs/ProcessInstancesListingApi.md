@@ -16,13 +16,10 @@ Filter a list of process instances
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ProcessInstancesListingApi();
 
 var filterRequest = new ActivitiPublicRestApi.ProcessInstanceFilterRequestRepresentation(); // ProcessInstanceFilterRequestRepresentation | filterRequest
 
-apiInstance.filterProcessInstances(filterRequest);
+this.alfrescoJsApi.activiti.processInstancesListingApi.filterProcessInstances(filterRequest);
 ```
 
 ### Parameters
@@ -52,13 +49,9 @@ Retrieve a list of process instances
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ProcessInstancesListingApi();
-
 var requestNode = new ActivitiPublicRestApi.ObjectNode(); // ObjectNode | requestNode
 
-apiInstance.getProcessInstances(requestNode);
+this.alfrescoJsApi.activiti.processInstancesListingApi.getProcessInstances(requestNode);
 ```
 
 ### Parameters

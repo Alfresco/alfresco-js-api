@@ -15,13 +15,10 @@ getRuntimeProcessScopes
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ProcessScopeApi();
 
 var processScopesRequest = new ActivitiPublicRestApi.ProcessScopesRequestRepresentation(); // ProcessScopesRequestRepresentation | processScopesRequest
 
-apiInstance.getRuntimeProcessScopes(processScopesRequest);
+this.alfrescoJsApi.activiti.processScopeApi.getRuntimeProcessScopes(processScopesRequest);
 ```
 
 ### Parameters

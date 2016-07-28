@@ -25,13 +25,10 @@ Delete a process instance
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ProcessApi();
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
-apiInstance.deleteProcessInstance(processInstanceId);
+this.alfrescoJsApi.activiti.ProcessApi.deleteProcessInstance(processInstanceId);
 ```
 
 ### Parameters
@@ -61,13 +58,10 @@ Filter a list of process instances
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ProcessApi();
 
 var filterRequest = new ActivitiPublicRestApi.ProcessInstanceFilterRequestRepresentation(); // ProcessInstanceFilterRequestRepresentation | filterRequest
 
-apiInstance.filterProcessInstances(filterRequest);
+this.alfrescoJsApi.activiti.ProcessApi.filterProcessInstances(filterRequest);
 ```
 
 ### Parameters
@@ -97,11 +91,8 @@ Retrieve the start form for a process definition
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
-var apiInstance = new ActivitiPublicRestApi.ProcessApi();
-
-apiInstance.getProcessDefinitionStartForm();
+this.alfrescoJsApi.activiti.ProcessApi.getProcessDefinitionStartForm();
 ```
 
 ### Parameters
@@ -130,16 +121,13 @@ Get a list of process definitions (visible within the tenant of the user)
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ProcessApi();
 
 var opts = { 
   'latest': true, // Boolean | latest
   'appDefinitionId': 789 // Integer | appDefinitionId
 };
 
-apiInstance.getProcessDefinitions(opts);
+this.alfrescoJsApi.activiti.ProcessApi.getProcessDefinitions(opts);
 ```
 
 ### Parameters
@@ -170,13 +158,10 @@ Retrieve content attached to process instance fields
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ProcessApi();
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
-apiInstance.getProcessInstanceContent(processInstanceId);
+this.alfrescoJsApi.activiti.ProcessApi.getProcessInstanceContent(processInstanceId);
 ```
 
 ### Parameters
@@ -208,13 +193,10 @@ When a process definitions has a start form (hasStartForm is true in the call ab
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ProcessApi();
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
-apiInstance.getProcessInstanceStartForm(processInstanceId);
+this.alfrescoJsApi.activiti.ProcessApi.getProcessInstanceStartForm(processInstanceId);
 ```
 
 ### Parameters
@@ -244,13 +226,10 @@ Retrieve a process instance information
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ProcessApi();
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
-apiInstance.getProcessInstance(processInstanceId);
+this.alfrescoJsApi.activiti.ProcessApi.getProcessInstance(processInstanceId);
 ```
 
 ### Parameters
@@ -280,13 +259,10 @@ Retrieve a list of process instances
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ProcessApi();
 
 var requestNode = new ActivitiPublicRestApi.ObjectNode(); // ObjectNode | requestNode
 
-apiInstance.getProcessInstances(requestNode);
+this.alfrescoJsApi.activiti.ProcessApi.getProcessInstances(requestNode);
 ```
 
 ### Parameters
@@ -316,11 +292,8 @@ Retrieve field values (eg. the typeahead field)
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
-var apiInstance = new ActivitiPublicRestApi.ProcessApi();
-
-apiInstance.getRestFieldValues();
+this.alfrescoJsApi.activiti.ProcessApi.getRestFieldValues();
 ```
 
 ### Parameters
@@ -347,11 +320,8 @@ Retrieve field values (eg. the table field)
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
-var apiInstance = new ActivitiPublicRestApi.ProcessApi();
-
-apiInstance.getRestTableFieldValues();
+this.alfrescoJsApi.activiti.ProcessApi.getRestTableFieldValues();
 ```
 
 ### Parameters
@@ -378,14 +348,11 @@ Start a process instance
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ProcessApi();
 
 var startRequest = new ActivitiPublicRestApi.CreateProcessInstanceRepresentation(); // CreateProcessInstanceRepresentation | startRequest
 
 
-apiInstance.startNewProcessInstance(startRequest);
+this.alfrescoJsApi.activiti.ProcessApi.startNewProcessInstance(startRequest);
 ```
 
 ### Parameters

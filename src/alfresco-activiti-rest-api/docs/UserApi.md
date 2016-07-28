@@ -22,15 +22,12 @@ Typical action is updating/reset password
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.UserApi();
 
 var userId = 789; // Integer | userId
 
 var actionRequest = new ActivitiPublicRestApi.UserActionRepresentation(); // UserActionRepresentation | actionRequest
 
-apiInstance.executeAction(userId, actionRequest);
+this.alfrescoJsApi.activiti.userApi.executeAction(userId, actionRequest);
 ```
 
 ### Parameters
@@ -61,13 +58,10 @@ Retrieve user profile picture
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.UserApi();
 
 var userId = 789; // Integer | userId
 
-apiInstance.getProfilePicture(userId);
+this.alfrescoJsApi.activiti.userApi.getProfilePicture(userId);
 ```
 
 ### Parameters
@@ -97,14 +91,11 @@ Retrieve user information
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.UserApi();
 
 var userId = 789; // Integer | userId
 
 
-apiInstance.getUser(userId);
+this.alfrescoJsApi.activiti.userApi.getUser(userId);
 ```
 
 ### Parameters
@@ -136,9 +127,6 @@ A common use case is that a user wants to select another user (eg. when assignin
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.UserApi();
 
 var opts = { 
   'filter': "filter_example", // String | filter
@@ -151,7 +139,7 @@ var opts = {
   'tenantId': 789 // Integer | tenantId
 };
 
-apiInstance.getUsers(opts);
+this.alfrescoJsApi.activiti.userApi.getUsers(opts);
 ```
 
 ### Parameters
@@ -188,13 +176,10 @@ Request password reset
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.UserApi();
 
 var resetPassword = new ActivitiPublicRestApi.ResetPasswordRepresentation(); // ResetPasswordRepresentation | resetPassword
 
-apiInstance.requestPasswordReset(resetPassword);
+this.alfrescoJsApi.activiti.userApi.requestPasswordReset(resetPassword);
 ```
 
 ### Parameters
@@ -224,15 +209,12 @@ Update user information
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.UserApi();
 
 var userId = 789; // Integer | userId
 
 var userRequest = new ActivitiPublicRestApi.UserRepresentation(); // UserRepresentation | userRequest
 
-apiInstance.updateUser(userId, userRequest);
+this.alfrescoJsApi.activiti.userApi.updateUser(userId, userRequest);
 ```
 
 ### Parameters

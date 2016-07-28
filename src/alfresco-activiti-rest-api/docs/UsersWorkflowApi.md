@@ -17,9 +17,6 @@ A common use case is that a user wants to select another user (eg. when assignin
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.UsersWorkflowApi();
 
 var opts = { 
   'filter': "filter_example", // String | filter
@@ -32,7 +29,7 @@ var opts = {
   'tenantId': 789 // Integer | tenantId
 };
 
-apiInstance.getUsers(opts);
+this.alfrescoJsApi.activiti.usersWorkflowApi.getUsers(opts);
 ```
 
 ### Parameters

@@ -26,13 +26,10 @@ Create a user process instance task filter
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.UserFiltersApi();
 
 var userProcessInstanceFilterRepresentation = new ActivitiPublicRestApi.UserProcessInstanceFilterRepresentation(); // UserProcessInstanceFilterRepresentation | userProcessInstanceFilterRepresentation
 
-apiInstance.createUserProcessInstanceFilter(userProcessInstanceFilterRepresentation);
+this.alfrescoJsApi.activiti.userFiltersApi.createUserProcessInstanceFilter(userProcessInstanceFilterRepresentation);
 ```
 
 ### Parameters
@@ -62,13 +59,10 @@ Create a new task filter
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.UserFiltersApi();
 
 var userTaskFilterRepresentation = new ActivitiPublicRestApi.UserTaskFilterRepresentation(); // UserTaskFilterRepresentation | userTaskFilterRepresentation
 
-apiInstance.createUserTaskFilter(userTaskFilterRepresentation);
+this.alfrescoJsApi.activiti.userFiltersApi.createUserTaskFilter(userTaskFilterRepresentation);
 ```
 
 ### Parameters
@@ -98,13 +92,10 @@ Delete a user process instance task filter
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.UserFiltersApi();
 
 var userFilterId = 789; // Integer | userFilterId
 
-apiInstance.deleteUserProcessInstanceFilter(userFilterId);
+this.alfrescoJsApi.activiti.userFiltersApi.deleteUserProcessInstanceFilter(userFilterId);
 ```
 
 ### Parameters
@@ -134,13 +125,10 @@ Delete a task filter
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.UserFiltersApi();
 
 var userFilterId = 789; // Integer | userFilterId
 
-apiInstance.deleteUserTaskFilter(userFilterId);
+this.alfrescoJsApi.activiti.userFiltersApi.deleteUserTaskFilter(userFilterId);
 ```
 
 ### Parameters
@@ -170,13 +158,10 @@ Get a specific user process instance task filter
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.UserFiltersApi();
 
 var userFilterId = 789; // Integer | userFilterId
 
-apiInstance.getUserProcessInstanceFilter(userFilterId);
+this.alfrescoJsApi.activiti.userFiltersApi.getUserProcessInstanceFilter(userFilterId);
 ```
 
 ### Parameters
@@ -206,15 +191,12 @@ Retrieve list of taks filters
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.UserFiltersApi();
 
 var opts = { 
   'appId': 789 // Integer | appId
 };
 
-apiInstance.getUserProcessInstanceFilters(opts);
+this.alfrescoJsApi.activiti.userFiltersApi.getUserProcessInstanceFilters(opts);
 ```
 
 ### Parameters
@@ -244,13 +226,10 @@ Get a specific task filter
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.UserFiltersApi();
 
 var userFilterId = 789; // Integer | userFilterId
 
-apiInstance.getUserTaskFilter(userFilterId);
+this.alfrescoJsApi.activiti.userFiltersApi.getUserTaskFilter(userFilterId);
 ```
 
 ### Parameters
@@ -280,15 +259,12 @@ Retrieve list of task filters
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.UserFiltersApi();
 
 var opts = { 
   'appId': 789 // Integer | appId
 };
 
-apiInstance.getUserTaskFilters(opts);
+this.alfrescoJsApi.activiti.userFiltersApi.getUserTaskFilters(opts);
 ```
 
 ### Parameters
@@ -318,13 +294,10 @@ To order the list of user process instance filters
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.UserFiltersApi();
 
 var filterOrderRepresentation = new ActivitiPublicRestApi.UserFilterOrderRepresentation(); // UserFilterOrderRepresentation | filterOrderRepresentation
 
-apiInstance.orderUserProcessInstanceFilters(filterOrderRepresentation);
+this.alfrescoJsApi.activiti.userFiltersApi.orderUserProcessInstanceFilters(filterOrderRepresentation);
 ```
 
 ### Parameters
@@ -354,13 +327,10 @@ To order the list of user task filters
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.UserFiltersApi();
 
 var filterOrderRepresentation = new ActivitiPublicRestApi.UserFilterOrderRepresentation(); // UserFilterOrderRepresentation | filterOrderRepresentation
 
-apiInstance.orderUserTaskFilters(filterOrderRepresentation);
+this.alfrescoJsApi.activiti.userFiltersApi.orderUserTaskFilters(filterOrderRepresentation);
 ```
 
 ### Parameters
@@ -390,15 +360,12 @@ Update a user process instance task filter
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.UserFiltersApi();
 
 var userFilterId = 789; // Integer | userFilterId
 
 var userProcessInstanceFilterRepresentation = new ActivitiPublicRestApi.UserProcessInstanceFilterRepresentation(); // UserProcessInstanceFilterRepresentation | userProcessInstanceFilterRepresentation
 
-apiInstance.updateUserProcessInstanceFilter(userFilterId, userProcessInstanceFilterRepresentation);
+this.alfrescoJsApi.activiti.userFiltersApi.updateUserProcessInstanceFilter(userFilterId, userProcessInstanceFilterRepresentation);
 ```
 
 ### Parameters
@@ -429,15 +396,12 @@ Update a specific task filter
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.UserFiltersApi();
 
 var userFilterId = 789; // Integer | userFilterId
 
 var userTaskFilterRepresentation = new ActivitiPublicRestApi.UserTaskFilterRepresentation(); // UserTaskFilterRepresentation | userTaskFilterRepresentation
 
-apiInstance.updateUserTaskFilter(userFilterId, userTaskFilterRepresentation);
+this.alfrescoJsApi.activiti.userFiltersApi.updateUserTaskFilter(userFilterId, userTaskFilterRepresentation);
 ```
 
 ### Parameters

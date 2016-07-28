@@ -19,13 +19,10 @@ Bulk Update a list of users
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminUsersApi();
 
 var update = new ActivitiPublicRestApi.BulkUserUpdateRepresentation(); // BulkUserUpdateRepresentation | update
 
-apiInstance.bulkUpdateUsers(update);
+this.alfrescoJsApi.activiti.adminUsersApibulkUpdateUsers(update);
 ```
 
 ### Parameters
@@ -55,13 +52,10 @@ Create a new user
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminUsersApi();
 
 var userRepresentation = new ActivitiPublicRestApi.UserRepresentation(); // UserRepresentation | userRepresentation
 
-apiInstance.createNewUser(userRepresentation);
+this.alfrescoJsApi.activiti.adminUsersApicreateNewUser(userRepresentation);
 ```
 
 ### Parameters
@@ -91,9 +85,6 @@ Retrieve user information
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminUsersApi();
 
 var userId = 789; // Integer | userId
 
@@ -101,7 +92,7 @@ var opts = {
   'summary': true // Boolean | summary
 };
 
-apiInstance.getUser(userId, opts);
+this.alfrescoJsApi.activiti.adminUsersApigetUser(userId, opts);
 ```
 
 ### Parameters
@@ -132,9 +123,6 @@ Get a list of users
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminUsersApi();
 
 var opts = { 
   'filter': "filter_example", // String | filter
@@ -150,7 +138,7 @@ var opts = {
   'summary': true // Boolean | summary
 };
 
-apiInstance.getUsers(opts);
+this.alfrescoJsApi.activiti.adminUsersApigetUsers(opts);
 ```
 
 ### Parameters
@@ -190,15 +178,12 @@ Update user details
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminUsersApi();
 
 var userId = 789; // Integer | userId
 
 var userRepresentation = new ActivitiPublicRestApi.UserRepresentation(); // UserRepresentation | userRepresentation
 
-apiInstance.updateUserDetails(userId, userRepresentation);
+this.alfrescoJsApi.activiti.adminUsersApiupdateUserDetails(userId, userRepresentation);
 ```
 
 ### Parameters

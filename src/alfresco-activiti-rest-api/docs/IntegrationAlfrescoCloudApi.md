@@ -21,13 +21,10 @@ Returns Alfresco Oauth HTML Page
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.IntegrationAlfrescoCloudApi();
 
 var code = "code_example"; // String | code
 
-apiInstance.confirmAuthorisation(code);
+this.alfrescoJsApi.activiti.integrationAlfrescoCloudApi.confirmAuthorisation(code);
 ```
 
 ### Parameters
@@ -57,11 +54,8 @@ List Alfresco networks
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
-var apiInstance = new ActivitiPublicRestApi.IntegrationAlfrescoCloudApi();
-
-apiInstance.getAllNetworks();
+this.alfrescoJsApi.activiti.integrationAlfrescoCloudApi.getAllNetworks();
 ```
 
 ### Parameters
@@ -90,13 +84,10 @@ Returns ALL Sites
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.IntegrationAlfrescoCloudApi();
 
 var networkId = "networkId_example"; // String | networkId
 
-apiInstance.getAllSites(networkId);
+this.alfrescoJsApi.activiti.integrationAlfrescoCloudApi.getAllSites(networkId);
 ```
 
 ### Parameters
@@ -126,15 +117,12 @@ List file &amp; folders inside a specific folder
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.IntegrationAlfrescoCloudApi();
 
 var networkId = "networkId_example"; // String | networkId
 
 var folderId = "folderId_example"; // String | folderId
 
-apiInstance.getContentInFolder(networkId, folderId);
+this.alfrescoJsApi.activiti.integrationAlfrescoCloudApi.getContentInFolder(networkId, folderId);
 ```
 
 ### Parameters
@@ -165,15 +153,12 @@ List file &amp; folders inside a specific site
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.IntegrationAlfrescoCloudApi();
 
 var networkId = "networkId_example"; // String | networkId
 
 var siteId = "siteId_example"; // String | siteId
 
-apiInstance.getContentInSite(networkId, siteId);
+this.alfrescoJsApi.activiti.integrationAlfrescoCloudApi.getContentInSite(networkId, siteId);
 ```
 
 ### Parameters

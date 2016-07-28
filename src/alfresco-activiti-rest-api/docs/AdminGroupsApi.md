@@ -30,14 +30,8 @@ activate
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminGroupsApi();
-
 var groupId = 789; // Integer | groupId
-
-
-apiInstance.activate(groupId);
+this.alfrescoJsApi.activiti.adminGroupsApi.activate(groupId);
 ```
 
 ### Parameters
@@ -67,14 +61,9 @@ addAllUsersToGroup
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminGroupsApi();
-
 var groupId = 789; // Integer | groupId
 
-
-apiInstance.addAllUsersToGroup(groupId);
+this.alfrescoJsApi.activiti.adminGroupsApi.addAllUsersToGroup(groupId);
 ```
 
 ### Parameters
@@ -104,16 +93,11 @@ addGroupCapabilities
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminGroupsApi();
-
 var groupId = 789; // Integer | groupId
 
 var addGroupCapabilitiesRepresentation = new ActivitiPublicRestApi.AddGroupCapabilitiesRepresentation(); // AddGroupCapabilitiesRepresentation | addGroupCapabilitiesRepresentation
 
-
-apiInstance.addGroupCapabilities(groupId, addGroupCapabilitiesRepresentation);
+this.alfrescoJsApi.activiti.adminGroupsApi.addGroupCapabilities(groupId, addGroupCapabilitiesRepresentation);
 ```
 
 ### Parameters
@@ -144,15 +128,11 @@ addGroupMember
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminGroupsApi();
-
 var groupId = 789; // Integer | groupId
 
 var userId = 789; // Integer | userId
 
-apiInstance.addGroupMember(groupId, userId);
+this.alfrescoJsApi.activiti.adminGroupsApi.addGroupMember(groupId, userId);
 ```
 
 ### Parameters
@@ -183,18 +163,13 @@ addRelatedGroup
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminGroupsApi();
-
 var groupId = 789; // Integer | groupId
 
 var relatedGroupId = 789; // Integer | relatedGroupId
 
 var type = "type_example"; // String | type
 
-
-apiInstance.addRelatedGroup(groupId, relatedGroupId, type);
+this.alfrescoJsApi.activiti.adminGroupsApi.addRelatedGroup(groupId, relatedGroupId, type);
 ```
 
 ### Parameters
@@ -226,13 +201,8 @@ createNewGroup
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminGroupsApi();
-
 var groupRepresentation = new ActivitiPublicRestApi.GroupRepresentation(); // GroupRepresentation | groupRepresentation
-
-apiInstance.createNewGroup(groupRepresentation);
+this.alfrescoJsApi.activiti.adminGroupsApi.createNewGroup(groupRepresentation);
 ```
 
 ### Parameters
@@ -262,15 +232,10 @@ deleteGroupCapability
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminGroupsApi();
-
 var groupId = 789; // Integer | groupId
 
 var groupCapabilityId = 789; // Integer | groupCapabilityId
-
-apiInstance.deleteGroupCapability(groupId, groupCapabilityId);
+this.alfrescoJsApi.activiti.adminGroupsApi.deleteGroupCapability(groupId, groupCapabilityId);
 ```
 
 ### Parameters
@@ -301,15 +266,11 @@ deleteGroupMember
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminGroupsApi();
-
 var groupId = 789; // Integer | groupId
 
 var userId = 789; // Integer | userId
 
-apiInstance.deleteGroupMember(groupId, userId);
+this.alfrescoJsApi.activiti.adminGroupsApi.deleteGroupMember(groupId, userId);
 ```
 
 ### Parameters
@@ -340,13 +301,9 @@ deleteGroup
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminGroupsApi();
-
 var groupId = 789; // Integer | groupId
 
-apiInstance.deleteGroup(groupId);
+this.alfrescoJsApi.activiti.adminGroupsApi.deleteGroup(groupId);
 ```
 
 ### Parameters
@@ -376,15 +333,11 @@ deleteRelatedGroup
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminGroupsApi();
-
 var groupId = 789; // Integer | groupId
 
 var relatedGroupId = 789; // Integer | relatedGroupId
 
-apiInstance.deleteRelatedGroup(groupId, relatedGroupId);
+this.alfrescoJsApi.activiti.adminGroupsApi.deleteRelatedGroup(groupId, relatedGroupId);
 ```
 
 ### Parameters
@@ -415,14 +368,9 @@ getCapabilities
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminGroupsApi();
-
 var groupId = 789; // Integer | groupId
 
-
-apiInstance.getCapabilities(groupId);
+this.alfrescoJsApi.activiti.adminGroupsApi.getCapabilities(groupId);
 ```
 
 ### Parameters
@@ -452,10 +400,6 @@ getGroupUsers
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminGroupsApi();
-
 var groupId = 789; // Integer | groupId
 
 var opts = { 
@@ -463,8 +407,7 @@ var opts = {
   'page': 56, // Integer | page
   'pageSize': 56 // Integer | pageSize
 };
-
-apiInstance.getGroupUsers(groupId, opts);
+this.alfrescoJsApi.activiti.adminGroupsApi.getGroupUsers(groupId, opts);
 ```
 
 ### Parameters
@@ -497,18 +440,13 @@ getGroup
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminGroupsApi();
-
 var groupId = 789; // Integer | groupId
 
 var opts = { 
   'includeAllUsers': true, // Boolean | includeAllUsers
   'summary': true // Boolean | summary
 };
-
-apiInstance.getGroup(groupId, opts);
+this.alfrescoJsApi.activiti.adminGroupsApi.getGroup(groupId, opts);
 ```
 
 ### Parameters
@@ -540,17 +478,13 @@ getGroups
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminGroupsApi();
-
 var opts = { 
   'tenantId': 789, // Integer | tenantId
   'functional': true, // Boolean | functional
   'summary': true // Boolean | summary
 };
 
-apiInstance.getGroups(opts);
+this.alfrescoJsApi.activiti.adminGroupsApi.getGroups(opts);
 ```
 
 ### Parameters
@@ -582,13 +516,8 @@ getRelatedGroups
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminGroupsApi();
-
 var groupId = 789; // Integer | groupId
-
-apiInstance.getRelatedGroups(groupId);
+this.alfrescoJsApi.activiti.adminGroupsApi.getRelatedGroups(groupId);
 ```
 
 ### Parameters
@@ -618,15 +547,10 @@ updateGroup
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminGroupsApi();
-
 var groupId = 789; // Integer | groupId
 
 var groupRepresentation = new ActivitiPublicRestApi.GroupRepresentation(); // GroupRepresentation | groupRepresentation
-
-apiInstance.updateGroup(groupId, groupRepresentation);
+this.alfrescoJsApi.activiti.adminGroupsApi.updateGroup(groupId, groupRepresentation);
 ```
 
 ### Parameters

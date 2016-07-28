@@ -23,13 +23,10 @@ Returns Box Oauth HTML Page
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.IntegrationBoxApi();
 
 var code = "code_example"; // String | code
 
-apiInstance.confirmAuthorisation(code);
+this.alfrescoJsApi.activiti.integrationBoxApi.confirmAuthorisation(code);
 ```
 
 ### Parameters
@@ -59,15 +56,12 @@ Create Box account
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.IntegrationBoxApi();
 
 var userId = 789; // Integer | userId
 
 var credentials = new ActivitiPublicRestApi.UserAccountCredentialsRepresentation(); // UserAccountCredentialsRepresentation | credentials
 
-apiInstance.createRepositoryAccount(userId, credentials);
+this.alfrescoJsApi.activiti.integrationBoxApi.createRepositoryAccount(userId, credentials);
 ```
 
 ### Parameters
@@ -98,13 +92,10 @@ Delete Box account
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.IntegrationBoxApi();
 
 var userId = 789; // Integer | userId
 
-apiInstance.deleteRepositoryAccount(userId);
+this.alfrescoJsApi.activiti.integrationBoxApi.deleteRepositoryAccount(userId);
 ```
 
 ### Parameters
@@ -134,11 +125,8 @@ Retrieve if Box Integration is enabled
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
-var apiInstance = new ActivitiPublicRestApi.IntegrationBoxApi();
-
-apiInstance.getBoxPluginStatus();
+this.alfrescoJsApi.activiti.integrationBoxApi.getBoxPluginStatus();
 ```
 
 ### Parameters
@@ -165,16 +153,13 @@ List file &amp; folders
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.IntegrationBoxApi();
 
 var opts = { 
   'filter': "filter_example", // String | filter
   'parent': "parent_example" // String | parent
 };
 
-apiInstance.getFiles(opts);
+this.alfrescoJsApi.activiti.integrationBoxApi.getFiles(opts);
 ```
 
 ### Parameters
@@ -205,13 +190,10 @@ List Box Account
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.IntegrationBoxApi();
 
 var userId = 789; // Integer | userId
 
-apiInstance.getRepositoryAccount(userId);
+this.alfrescoJsApi.activiti.integrationBoxApi.getRepositoryAccount(userId);
 ```
 
 ### Parameters
@@ -241,15 +223,12 @@ Update Box account
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.IntegrationBoxApi();
 
 var userId = 789; // Integer | userId
 
 var credentials = new ActivitiPublicRestApi.UserAccountCredentialsRepresentation(); // UserAccountCredentialsRepresentation | credentials
 
-apiInstance.updateRepositoryAccount(userId, credentials);
+this.alfrescoJsApi.activiti.integrationBoxApi.updateRepositoryAccount(userId, credentials);
 ```
 
 ### Parameters

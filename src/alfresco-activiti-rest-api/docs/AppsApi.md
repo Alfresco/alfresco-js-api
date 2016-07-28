@@ -22,13 +22,10 @@ After creating and puclished an app the user can add it to his/her landing page.
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AppsApi();
 
 var saveObject = new ActivitiPublicRestApi.RuntimeAppDefinitionSaveRepresentation(); // RuntimeAppDefinitionSaveRepresentation | saveObject
 
-apiInstance.deployAppDefinitions(saveObject);
+this.alfrescoJsApi.activiti.appsApi.deployAppDefinitions(saveObject);
 ```
 
 ### Parameters
@@ -60,13 +57,10 @@ This will return a zip file containing the app definition model and all related 
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AppsApi();
 
 var modelId = 789; // Integer | modelId from a runtime app or the id of an app definition model
 
-apiInstance.exportAppDefinition(modelId);
+this.alfrescoJsApi.activiti.appsApi.exportAppDefinition(modelId);
 ```
 
 ### Parameters
@@ -98,11 +92,8 @@ When a user logs in into the Alfresco Activiti BPM Suite, the landing page is di
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
-var apiInstance = new ActivitiPublicRestApi.AppsApi();
-
-apiInstance.getAppDefinitions();
+this.alfrescoJsApi.activiti.appsApi.getAppDefinitions();
 ```
 
 ### Parameters
@@ -131,13 +122,10 @@ This is useful to bootstrap an environment (for users or continous integration).
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AppsApi();
 
 var file = "/path/to/file.txt"; // File | file
 
-apiInstance.importAppDefinition(file);
+this.alfrescoJsApi.activiti.appsApi.importAppDefinition(file);
 ```
 
 ### Parameters
@@ -169,15 +157,12 @@ To import an app to an existing app definition to create a new version instead o
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AppsApi();
 
 var modelId = 789; // Integer | modelId
 
 var file = "/path/to/file.txt"; // File | file
 
-apiInstance.importAppDefinition(modelId, file);
+this.alfrescoJsApi.activiti.appsApi.importAppDefinition(modelId, file);
 ```
 
 ### Parameters
@@ -210,15 +195,12 @@ Before an app model can be used, it need to be published
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AppsApi();
 
 var modelId = 789; // Integer | modelId
 
 var publishModel = new ActivitiPublicRestApi.AppDefinitionPublishRepresentation(); // AppDefinitionPublishRepresentation | publishModel
 
-apiInstance.publishAppDefinition(modelId, publishModel);
+this.alfrescoJsApi.activiti.appsApi.publishAppDefinition(modelId, publishModel);
 ```
 
 ### Parameters

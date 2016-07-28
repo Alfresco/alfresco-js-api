@@ -24,14 +24,10 @@ createBasicAuthConfiguration
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminEndpointsApi();
 
 var createRepresentation = new ActivitiPublicRestApi.CreateEndpointBasicAuthRepresentation(); // CreateEndpointBasicAuthRepresentation | createRepresentation
 
-
-apiInstance.createBasicAuthConfiguration(createRepresentation);
+this.alfrescoJsApi.activiti.adminEndpointsApi.createBasicAuthConfiguration(createRepresentation);
 ```
 
 ### Parameters
@@ -61,14 +57,11 @@ createEndpointConfiguration
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminEndpointsApi();
 
 var representation = new ActivitiPublicRestApi.EndpointConfigurationRepresentation(); // EndpointConfigurationRepresentation | representation
 
 
-apiInstance.createEndpointConfiguration(representation);
+this.alfrescoJsApi.activiti.adminEndpointsApi.createEndpointConfiguration(representation);
 ```
 
 ### Parameters
@@ -98,15 +91,12 @@ getBasicAuthConfiguration
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminEndpointsApi();
 
 var basicAuthId = 789; // Integer | basicAuthId
 
 var tenantId = 789; // Integer | tenantId
 
-apiInstance.getBasicAuthConfiguration(basicAuthId, tenantId,);
+this.alfrescoJsApi.activiti.adminEndpointsApi.getBasicAuthConfiguration(basicAuthId, tenantId,);
 ```
 
 ### Parameters
@@ -137,13 +127,10 @@ getBasicAuthConfigurations
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminEndpointsApi();
 
 var tenantId = 789; // Integer | tenantId
 
-apiInstance.getBasicAuthConfigurations(tenantId);
+this.alfrescoJsApi.activiti.adminEndpointsApi.getBasicAuthConfigurations(tenantId);
 ```
 
 ### Parameters
@@ -173,16 +160,11 @@ getEndpointConfiguration
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminEndpointsApi();
-
 var endpointConfigurationId = 789; // Integer | endpointConfigurationId
 
 var tenantId = 789; // Integer | tenantId
 
-
-apiInstance.getEndpointConfiguration(endpointConfigurationId, tenantId);
+this.alfrescoJsApi.activiti.adminEndpointsApi.getEndpointConfiguration(endpointConfigurationId, tenantId);
 ```
 
 ### Parameters
@@ -213,14 +195,10 @@ getEndpointConfigurations
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminEndpointsApi();
 
 var tenantId = 789; // Integer | tenantId
 
-
-apiInstance.getEndpointConfigurations(tenantId);
+this.alfrescoJsApi.activiti.adminEndpointsApi.getEndpointConfigurations(tenantId);
 ```
 
 ### Parameters
@@ -250,15 +228,12 @@ removeBasicAuthonfiguration
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminEndpointsApi();
 
 var basicAuthId = 789; // Integer | basicAuthId
 
 var tenantId = 789; // Integer | tenantId
 
-apiInstance.removeBasicAuthonfiguration(basicAuthId, tenantId);
+this.alfrescoJsApi.activiti.adminEndpointsApi.removeBasicAuthonfiguration(basicAuthId, tenantId);
 ```
 
 ### Parameters
@@ -289,15 +264,12 @@ removeEndpointConfiguration
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminEndpointsApi();
 
 var endpointConfigurationId = 789; // Integer | endpointConfigurationId
 
 var tenantId = 789; // Integer | tenantId
 
-apiInstance.removeEndpointConfiguration(endpointConfigurationId, tenantId);
+this.alfrescoJsApi.activiti.adminEndpointsApi.removeEndpointConfiguration(endpointConfigurationId, tenantId);
 ```
 
 ### Parameters
@@ -328,16 +300,12 @@ updateBasicAuthConfiguration
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminEndpointsApi();
 
 var basicAuthId = 789; // Integer | basicAuthId
 
 var createRepresentation = new ActivitiPublicRestApi.CreateEndpointBasicAuthRepresentation(); // CreateEndpointBasicAuthRepresentation | createRepresentation
 
-
-apiInstance.updateBasicAuthConfiguration(basicAuthId, createRepresentation);
+this.alfrescoJsApi.activiti.adminEndpointsApi.updateBasicAuthConfiguration(basicAuthId, createRepresentation);
 ```
 
 ### Parameters
@@ -368,16 +336,12 @@ updateEndpointConfiguration
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.AdminEndpointsApi();
 
 var endpointConfigurationId = 789; // Integer | endpointConfigurationId
 
 var representation = new ActivitiPublicRestApi.EndpointConfigurationRepresentation(); // EndpointConfigurationRepresentation | representation
 
-
-apiInstance.updateEndpointConfiguration(endpointConfigurationId, representation);
+this.alfrescoJsApi.activiti.adminEndpointsApi.updateEndpointConfiguration(endpointConfigurationId, representation);
 ```
 
 ### Parameters

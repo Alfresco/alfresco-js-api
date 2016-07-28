@@ -18,15 +18,12 @@ completeTasks
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TemporaryApi();
 
 var userId = 789; // Integer | userId
 
 var processDefinitionKey = "processDefinitionKey_example"; // String | processDefinitionKey
 
-apiInstance.completeTasks(userId, processDefinitionKey);
+this.alfrescoJsApi.activiti.temporaryApi.completeTasks(userId, processDefinitionKey);
 ```
 
 ### Parameters
@@ -57,15 +54,12 @@ generateData
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.TemporaryApi();
 
 var userId = 789; // Integer | userId
 
 var processDefinitionKey = "processDefinitionKey_example"; // String | processDefinitionKey
 
-apiInstance.generateData(userId, processDefinitionKey);
+this.alfrescoJsApi.activiti.temporaryApi.generateData(userId, processDefinitionKey);
 ```
 
 ### Parameters
@@ -96,11 +90,8 @@ getHeaders
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
-var apiInstance = new ActivitiPublicRestApi.TemporaryApi();
-
-apiInstance.getHeaders();
+this.alfrescoJsApi.activiti.temporaryApi.getHeaders();
 ```
 
 ### Parameters
@@ -127,11 +118,8 @@ getOptions
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
 
-var apiInstance = new ActivitiPublicRestApi.TemporaryApi();
-
-apiInstance.getOptions();
+this.alfrescoJsApi.activiti.temporaryApi.getOptions();
 ```
 
 ### Parameters

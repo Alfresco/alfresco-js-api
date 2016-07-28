@@ -26,15 +26,12 @@ createRelatedContentOnProcessInstance
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ContentApi();
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
 var relatedContent = new ActivitiPublicRestApi.RelatedContentRepresentation(); // RelatedContentRepresentation | relatedContent
 
-apiInstance.createRelatedContentOnProcessInstance(processInstanceId, relatedContent);
+this.alfrescoJsApi.activiti.contentApi.createRelatedContentOnProcessInstance(processInstanceId, relatedContent);
 ```
 
 ### Parameters
@@ -65,15 +62,12 @@ createRelatedContentOnProcessInstance
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ContentApi();
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
 var file = "/path/to/file.txt"; // File | file
 
-apiInstance.createRelatedContentOnProcessInstance(processInstanceId, file);
+this.alfrescoJsApi.activiti.contentApi.createRelatedContentOnProcessInstance(processInstanceId, file);
 ```
 
 ### Parameters
@@ -104,9 +98,6 @@ To relate content (eg from Alfresco) to a task
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ContentApi();
 
 var taskId = "taskId_example"; // String | taskId
 
@@ -116,7 +107,7 @@ var opts = {
   'isRelatedContent': true // Boolean | isRelatedContent
 };
 
-apiInstance.createRelatedContentOnTask(taskId, relatedContent, opts);
+this.alfrescoJsApi.activiti.contentApi.createRelatedContentOnTask(taskId, relatedContent, opts);
 ```
 
 ### Parameters
@@ -148,9 +139,6 @@ Upload content to a task
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ContentApi();
 
 var taskId = "taskId_example"; // String | taskId
 
@@ -160,7 +148,7 @@ var opts = {
   'isRelatedContent': true // Boolean | isRelatedContent
 };
 
-apiInstance.createRelatedContentOnTask(taskId, file, opts);
+this.alfrescoJsApi.activiti.contentApi.createRelatedContentOnTask(taskId, file, opts);
 ```
 
 ### Parameters
@@ -192,13 +180,10 @@ createTemporaryRawRelatedContent
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ContentApi();
 
 var file = "/path/to/file.txt"; // File | file
 
-apiInstance.createTemporaryRawRelatedContent(file);
+this.alfrescoJsApi.activiti.contentApi.createTemporaryRawRelatedContent(file);
 ```
 
 ### Parameters
@@ -228,13 +213,10 @@ createTemporaryRelatedContent
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ContentApi();
 
 var relatedContent = new ActivitiPublicRestApi.RelatedContentRepresentation(); // RelatedContentRepresentation | relatedContent
 
-apiInstance.createTemporaryRelatedContent(relatedContent);
+this.alfrescoJsApi.activiti.contentApi.createTemporaryRelatedContent(relatedContent);
 ```
 
 ### Parameters
@@ -264,13 +246,10 @@ deleteContent
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ContentApi();
 
 var contentId = 789; // Integer | contentId
 
-apiInstance.deleteContent(contentId);
+this.alfrescoJsApi.activiti.contentApi.deleteContent(contentId);
 ```
 
 ### Parameters
@@ -300,13 +279,10 @@ getContent
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ContentApi();
 
 var contentId = 789; // Integer | contentId
 
-apiInstance.getContent(contentId);
+this.alfrescoJsApi.activiti.contentApi.getContent(contentId);
 ```
 
 ### Parameters
@@ -336,13 +312,10 @@ Retrieve content attached to process instance fields
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ContentApi();
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
-apiInstance.getProcessInstanceContent(processInstanceId);
+this.alfrescoJsApi.activiti.contentApi.getProcessInstanceContent(processInstanceId);
 ```
 
 ### Parameters
@@ -372,13 +345,10 @@ getRawContent
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ContentApi();
 
 var contentId = 789; // Integer | contentId
 
-apiInstance.getRawContent3(contentId);
+this.alfrescoJsApi.activiti.contentApi.getRawContent3(contentId);
 ```
 
 ### Parameters
@@ -408,13 +378,10 @@ getRelatedContentForProcessInstance
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ContentApi();
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
-apiInstance.getRelatedContentForProcessInstance(processInstanceId);
+this.alfrescoJsApi.activiti.contentApi.getRelatedContentForProcessInstance(processInstanceId);
 ```
 
 ### Parameters
@@ -444,13 +411,10 @@ Retrieve which content is attached to a task
 
 ### Example
 ```javascript
-var ActivitiPublicRestApi = require('activiti-public-rest-api');
-
-var apiInstance = new ActivitiPublicRestApi.ContentApi();
 
 var taskId = "taskId_example"; // String | taskId
 
-apiInstance.getRelatedContentForTask(taskId);
+this.alfrescoJsApi.activiti.contentApi.getRelatedContentForTask(taskId);
 ```
 
 ### Parameters
