@@ -24,7 +24,7 @@ describe('Bpm Auth test', function () {
             });
 
             this.bpmAuth.login().then((data) => {
-                expect(data).to.be.equal(200);
+                expect(data).to.be.equal('Basic YWRtaW46YWRtaW4=');
                 done();
             }, function () {
             });

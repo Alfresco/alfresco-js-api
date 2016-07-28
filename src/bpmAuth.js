@@ -48,9 +48,10 @@ class BpmAuth extends AlfrescoApiClient {
                 authNames, contentTypes, accepts
             ).then(
                 (data) => {
-                    this.setTicket('isLogedin');
+                    var tcket = 'Basic ' + new Buffer(this.authentications.basicAuth.username + ':' + this.authentications.basicAuth.password).toString('base64');
+                    this.setTicket(tcket);
                     this.promise.emit('success');
-                    resolve(200);
+                    resolve(tcket);
                 },
                 (error) => {
                     if (error.error.status === 401) {

@@ -226,7 +226,7 @@ describe('Auth', function () {
                 });
 
                 this.alfrescoJsApi.login().then((data) => {
-                    expect(data).to.be.equal(200);
+                    expect(data).to.be.equal('Basic YWRtaW46YWRtaW4=');
                     done();
                 }, function () {
                 });
@@ -410,7 +410,7 @@ describe('Auth', function () {
 
                     this.alfrescoJsApi.login().then((data) => {
                         expect(data[0]).to.be.equal('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
-                        expect(data[1]).to.be.equal(200);
+                        expect(data[1]).to.be.equal('Basic YWRtaW46YWRtaW4=');
                         done();
                     }, function () {
                     });
