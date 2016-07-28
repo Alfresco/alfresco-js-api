@@ -25,7 +25,7 @@ createBasicAuthConfiguration
 ### Example
 ```javascript
 
-var createRepresentation = new ActivitiPublicRestApi.CreateEndpointBasicAuthRepresentation(); // CreateEndpointBasicAuthRepresentation | createRepresentation
+var createRepresentation = new this.alfrescoJsApi.activiti.CreateEndpointBasicAuthRepresentation(); // CreateEndpointBasicAuthRepresentation | createRepresentation
 
 this.alfrescoJsApi.activiti.adminEndpointsApi.createBasicAuthConfiguration(createRepresentation);
 ```
@@ -58,7 +58,7 @@ createEndpointConfiguration
 ### Example
 ```javascript
 
-var representation = new ActivitiPublicRestApi.EndpointConfigurationRepresentation(); // EndpointConfigurationRepresentation | representation
+var representation = new this.alfrescoJsApi.activiti.EndpointConfigurationRepresentation(); // EndpointConfigurationRepresentation | representation
 
 
 this.alfrescoJsApi.activiti.adminEndpointsApi.createEndpointConfiguration(representation);
@@ -303,7 +303,7 @@ updateBasicAuthConfiguration
 
 var basicAuthId = 789; // Integer | basicAuthId
 
-var createRepresentation = new ActivitiPublicRestApi.CreateEndpointBasicAuthRepresentation(); // CreateEndpointBasicAuthRepresentation | createRepresentation
+var createRepresentation = new this.alfrescoJsApi.activiti.CreateEndpointBasicAuthRepresentation(); // CreateEndpointBasicAuthRepresentation | createRepresentation
 
 this.alfrescoJsApi.activiti.adminEndpointsApi.updateBasicAuthConfiguration(basicAuthId, createRepresentation);
 ```
@@ -339,7 +339,7 @@ updateEndpointConfiguration
 
 var endpointConfigurationId = 789; // Integer | endpointConfigurationId
 
-var representation = new ActivitiPublicRestApi.EndpointConfigurationRepresentation(); // EndpointConfigurationRepresentation | representation
+var representation = new this.alfrescoJsApi.activiti.EndpointConfigurationRepresentation(); // EndpointConfigurationRepresentation | representation
 
 this.alfrescoJsApi.activiti.adminEndpointsApi.updateEndpointConfiguration(endpointConfigurationId, representation);
 ```

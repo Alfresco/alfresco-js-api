@@ -131,7 +131,7 @@ Before an app model can be used, it need to be published
 
 var modelId = 789; // Integer | modelId
 
-var publishModel = new ActivitiPublicRestApi.AppDefinitionPublishRepresentation(); // AppDefinitionPublishRepresentation | publishModel
+var publishModel = new this.alfrescoJsApi.activiti.AppDefinitionPublishRepresentation(); // AppDefinitionPublishRepresentation | publishModel
 
 this.alfrescoJsApi.activiti.appsDefinitionApi.publishAppDefinition(modelId, publishModel);
 ```

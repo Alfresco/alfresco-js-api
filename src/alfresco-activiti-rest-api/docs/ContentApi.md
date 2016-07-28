@@ -29,7 +29,7 @@ createRelatedContentOnProcessInstance
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
-var relatedContent = new ActivitiPublicRestApi.RelatedContentRepresentation(); // RelatedContentRepresentation | relatedContent
+var relatedContent = new this.alfrescoJsApi.activiti.RelatedContentRepresentation(); // RelatedContentRepresentation | relatedContent
 
 this.alfrescoJsApi.activiti.contentApi.createRelatedContentOnProcessInstance(processInstanceId, relatedContent);
 ```
@@ -101,7 +101,7 @@ To relate content (eg from Alfresco) to a task
 
 var taskId = "taskId_example"; // String | taskId
 
-var relatedContent = new ActivitiPublicRestApi.RelatedContentRepresentation(); // RelatedContentRepresentation | relatedContent
+var relatedContent = new this.alfrescoJsApi.activiti.RelatedContentRepresentation(); // RelatedContentRepresentation | relatedContent
 
 var opts = { 
   'isRelatedContent': true // Boolean | isRelatedContent
@@ -214,7 +214,7 @@ createTemporaryRelatedContent
 ### Example
 ```javascript
 
-var relatedContent = new ActivitiPublicRestApi.RelatedContentRepresentation(); // RelatedContentRepresentation | relatedContent
+var relatedContent = new this.alfrescoJsApi.activiti.RelatedContentRepresentation(); // RelatedContentRepresentation | relatedContent
 
 this.alfrescoJsApi.activiti.contentApi.createTemporaryRelatedContent(relatedContent);
 ```

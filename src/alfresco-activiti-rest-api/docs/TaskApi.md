@@ -44,7 +44,7 @@ Create a task checklist
 
 var taskId = "taskId_example"; // String | taskId
 
-var taskRepresentation = new ActivitiPublicRestApi.TaskRepresentation(); // TaskRepresentation | taskRepresentation
+var taskRepresentation = new this.alfrescoJsApi.activiti.TaskRepresentation(); // TaskRepresentation | taskRepresentation
 
 
 this.alfrescoJsApi.activiti.taskApi.addSubtask(taskId, taskRepresentation);
@@ -79,7 +79,7 @@ Add a comment to a Task
 ### Example
 ```javascript
 
-var commentRequest = new ActivitiPublicRestApi.CommentRepresentation(); // CommentRepresentation | commentRequest
+var commentRequest = new this.alfrescoJsApi.activiti.CommentRepresentation(); // CommentRepresentation | commentRequest
 
 var taskId = "taskId_example"; // String | taskId
 
@@ -117,7 +117,7 @@ Assign a task to a user
 
 var taskId = "taskId_example"; // String | taskId
 
-var requestNode = new ActivitiPublicRestApi.ObjectNode(); // ObjectNode | requestNode
+var requestNode = this.alfrescoJsApi.activiti.objectNode; // ObjectNode | requestNode
 
 
 this.alfrescoJsApi.activiti.taskApi.assignTask(taskId, requestNode);
@@ -154,7 +154,7 @@ Attach a form to a task
 
 var taskId = "taskId_example"; // String | taskId
 
-var requestNode = new ActivitiPublicRestApi.ObjectNode(); // ObjectNode | requestNode
+var requestNode = this.alfrescoJsApi.activiti.objectNode; // ObjectNode | requestNode
 
 this.alfrescoJsApi.activiti.taskApi.attachForm(taskId, requestNode);
 ```
@@ -225,7 +225,7 @@ Complete a Task Form
 
 var taskId = "taskId_example"; // String | taskId
 
-var completeTaskFormRepresentation = new ActivitiPublicRestApi.CompleteFormRepresentation(); // CompleteFormRepresentation | completeTaskFormRepresentation
+var completeTaskFormRepresentation = new this.alfrescoJsApi.activiti.CompleteFormRepresentation(); // CompleteFormRepresentation | completeTaskFormRepresentation
 
 this.alfrescoJsApi.activiti.taskApi.completeTaskForm(taskId, completeTaskFormRepresentation);
 ```
@@ -296,7 +296,7 @@ Standalone Task is not associated with a process instance. You can define only t
 ### Example
 ```javascript
 
-var taskRepresentation = new ActivitiPublicRestApi.TaskRepresentation(); // TaskRepresentation | taskRepresentation
+var taskRepresentation = new this.alfrescoJsApi.activiti.TaskRepresentation(); // TaskRepresentation | taskRepresentation
 
 this.alfrescoJsApi.activiti.taskApi.createNewTask(taskRepresentation);
 ```
@@ -331,7 +331,7 @@ To relate content (eg from Alfresco) to a task
 
 var taskId = "taskId_example"; // String | taskId
 
-var relatedContent = new ActivitiPublicRestApi.RelatedContentRepresentation(); // RelatedContentRepresentation | relatedContent
+var relatedContent = new this.alfrescoJsApi.activiti.RelatedContentRepresentation(); // RelatedContentRepresentation | relatedContent
 
 var opts = { 
   'isRelatedContent': true // Boolean | isRelatedContent
@@ -444,7 +444,7 @@ Filter list of Task
 ### Example
 ```javascript
 
-var requestNode = new ActivitiPublicRestApi.TaskFilterRequestRepresentation(); // TaskFilterRequestRepresentation | requestNode
+var requestNode = new this.alfrescoJsApi.activiti.TaskFilterRequestRepresentation(); // TaskFilterRequestRepresentation | requestNode
 
 
 this.alfrescoJsApi.activiti.taskApi.filterTasks(requestNode);
@@ -734,7 +734,7 @@ To involve a user with a task
 
 var taskId = "taskId_example"; // String | taskId
 
-var requestNode = new ActivitiPublicRestApi.ObjectNode(); // ObjectNode | requestNode
+var requestNode = this.alfrescoJsApi.activiti.objectNode; // ObjectNode | requestNode
 
 this.alfrescoJsApi.activiti.taskApi.involveUser(taskId, requestNode);
 ```
@@ -768,7 +768,7 @@ List Task
 ### Example
 ```javascript
 
-var requestNode = new ActivitiPublicRestApi.ObjectNode(); // ObjectNode | requestNode
+var requestNode = this.alfrescoJsApi.activiti.objectNode; // ObjectNode | requestNode
 
 
 this.alfrescoJsApi.activiti.taskApi.listTasks(requestNode);
@@ -804,7 +804,7 @@ Change the order of items on a checklist
 
 var taskId = "taskId_example"; // String | taskId
 
-var orderRepresentation = new ActivitiPublicRestApi.ChecklistOrderRepresentation(); // ChecklistOrderRepresentation | orderRepresentation
+var orderRepresentation = new this.alfrescoJsApi.activiti.ChecklistOrderRepresentation(); // ChecklistOrderRepresentation | orderRepresentation
 
 this.alfrescoJsApi.activiti.taskApi.orderChecklist(taskId, orderRepresentation);
 ```
@@ -873,7 +873,7 @@ Remove an involved user from a task
 
 var taskId = "taskId_example"; // String | taskId
 
-var requestNode = new ActivitiPublicRestApi.ObjectNode(); // ObjectNode | requestNode
+var requestNode = this.alfrescoJsApi.activiti.objectNode; // ObjectNode | requestNode
 
 
 this.alfrescoJsApi.activiti.taskApi.removeInvolvedUser(taskId, requestNode);
@@ -910,7 +910,7 @@ Save Task Form
 
 var taskId = "taskId_example"; // String | taskId
 
-var saveTaskFormRepresentation = new ActivitiPublicRestApi.SaveFormRepresentation(); // SaveFormRepresentation | saveTaskFormRepresentation
+var saveTaskFormRepresentation = new this.alfrescoJsApi.activiti.SaveFormRepresentation(); // SaveFormRepresentation | saveTaskFormRepresentation
 
 this.alfrescoJsApi.activiti.taskApi.saveTaskForm(taskId, saveTaskFormRepresentation);
 ```
@@ -983,7 +983,7 @@ You can edit only name, description and dueDate (ISO 8601 string).
 
 var taskId = "taskId_example"; // String | taskId
 
-var updated = new ActivitiPublicRestApi.TaskUpdateRepresentation(); // TaskUpdateRepresentation | updated
+var updated = new this.alfrescoJsApi.activiti.TaskUpdateRepresentation(); // TaskUpdateRepresentation | updated
 
 this.alfrescoJsApi.activiti.taskApi.updateTask(taskId, updated);
 ```

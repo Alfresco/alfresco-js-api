@@ -25,7 +25,7 @@ Typical action is updating/reset password
 
 var userId = 789; // Integer | userId
 
-var actionRequest = new ActivitiPublicRestApi.UserActionRepresentation(); // UserActionRepresentation | actionRequest
+var actionRequest = new this.alfrescoJsApi.activiti.UserActionRepresentation(); // UserActionRepresentation | actionRequest
 
 this.alfrescoJsApi.activiti.userApi.executeAction(userId, actionRequest);
 ```
@@ -177,7 +177,7 @@ Request password reset
 ### Example
 ```javascript
 
-var resetPassword = new ActivitiPublicRestApi.ResetPasswordRepresentation(); // ResetPasswordRepresentation | resetPassword
+var resetPassword = new this.alfrescoJsApi.activiti.ResetPasswordRepresentation(); // ResetPasswordRepresentation | resetPassword
 
 this.alfrescoJsApi.activiti.userApi.requestPasswordReset(resetPassword);
 ```
@@ -212,7 +212,7 @@ Update user information
 
 var userId = 789; // Integer | userId
 
-var userRequest = new ActivitiPublicRestApi.UserRepresentation(); // UserRepresentation | userRequest
+var userRequest = new this.alfrescoJsApi.activiti.UserRepresentation(); // UserRepresentation | userRequest
 
 this.alfrescoJsApi.activiti.userApi.updateUser(userId, userRequest);
 ```

@@ -17,7 +17,7 @@ Filter a list of process instances
 ### Example
 ```javascript
 
-var filterRequest = new ActivitiPublicRestApi.ProcessInstanceFilterRequestRepresentation(); // ProcessInstanceFilterRequestRepresentation | filterRequest
+var filterRequest = new this.alfrescoJsApi.activiti.ProcessInstanceFilterRequestRepresentation(); // ProcessInstanceFilterRequestRepresentation | filterRequest
 
 this.alfrescoJsApi.activiti.processInstancesListingApi.filterProcessInstances(filterRequest);
 ```
@@ -49,7 +49,7 @@ Retrieve a list of process instances
 
 ### Example
 ```javascript
-var requestNode = new ActivitiPublicRestApi.ObjectNode(); // ObjectNode | requestNode
+var requestNode = this.alfrescoJsApi.activiti.objectNode; // ObjectNode | requestNode
 
 this.alfrescoJsApi.activiti.processInstancesListingApi.getProcessInstances(requestNode);
 ```

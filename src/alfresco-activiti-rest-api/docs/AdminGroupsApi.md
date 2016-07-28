@@ -95,7 +95,7 @@ addGroupCapabilities
 ```javascript
 var groupId = 789; // Integer | groupId
 
-var addGroupCapabilitiesRepresentation = new ActivitiPublicRestApi.AddGroupCapabilitiesRepresentation(); // AddGroupCapabilitiesRepresentation | addGroupCapabilitiesRepresentation
+var addGroupCapabilitiesRepresentation = new this.alfrescoJsApi.activiti.AddGroupCapabilitiesRepresentation(); // AddGroupCapabilitiesRepresentation | addGroupCapabilitiesRepresentation
 
 this.alfrescoJsApi.activiti.adminGroupsApi.addGroupCapabilities(groupId, addGroupCapabilitiesRepresentation);
 ```
@@ -201,7 +201,7 @@ createNewGroup
 
 ### Example
 ```javascript
-var groupRepresentation = new ActivitiPublicRestApi.GroupRepresentation(); // GroupRepresentation | groupRepresentation
+var groupRepresentation = new this.alfrescoJsApi.activiti.GroupRepresentation(); // GroupRepresentation | groupRepresentation
 this.alfrescoJsApi.activiti.adminGroupsApi.createNewGroup(groupRepresentation);
 ```
 
@@ -549,7 +549,7 @@ updateGroup
 ```javascript
 var groupId = 789; // Integer | groupId
 
-var groupRepresentation = new ActivitiPublicRestApi.GroupRepresentation(); // GroupRepresentation | groupRepresentation
+var groupRepresentation = new this.alfrescoJsApi.activiti.GroupRepresentation(); // GroupRepresentation | groupRepresentation
 this.alfrescoJsApi.activiti.adminGroupsApi.updateGroup(groupId, groupRepresentation);
 ```
 

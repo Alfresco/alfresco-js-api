@@ -22,7 +22,7 @@ Complete a Task Form
 
 var taskId = "taskId_example"; // String | taskId
 
-var completeTaskFormRepresentation = new ActivitiPublicRestApi.CompleteFormRepresentation(); // CompleteFormRepresentation | completeTaskFormRepresentation
+var completeTaskFormRepresentation = new this.alfrescoJsApi.activiti.CompleteFormRepresentation(); // CompleteFormRepresentation | completeTaskFormRepresentation
 
 this.alfrescoJsApi.activiti.taskFormsApi.completeTaskForm(taskId, completeTaskFormRepresentation);
 ```
@@ -170,7 +170,7 @@ Save Task Form
 
 var taskId = "taskId_example"; // String | taskId
 
-var saveTaskFormRepresentation = new ActivitiPublicRestApi.SaveFormRepresentation(); // SaveFormRepresentation | saveTaskFormRepresentation
+var saveTaskFormRepresentation = new this.alfrescoJsApi.activiti.SaveFormRepresentation(); // SaveFormRepresentation | saveTaskFormRepresentation
 
 this.alfrescoJsApi.activiti.taskFormsApi.saveTaskForm(taskId, saveTaskFormRepresentation);
 ```

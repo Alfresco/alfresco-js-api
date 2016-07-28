@@ -20,7 +20,7 @@ Change user password
 ### Example
 ```javascript
 
-var changePasswordRepresentation = new ActivitiPublicRestApi.ChangePasswordRepresentation(); // ChangePasswordRepresentation | changePasswordRepresentation
+var changePasswordRepresentation = new this.alfrescoJsApi.activiti.ChangePasswordRepresentation(); // ChangePasswordRepresentation | changePasswordRepresentation
 
 this.alfrescoJsApi.activiti.profileApi.changePassword(changePasswordRepresentation);
 ```
@@ -115,7 +115,7 @@ Only a first name, last name, email and company can be updated
 ### Example
 ```javascript
 
-var userRepresentation = new ActivitiPublicRestApi.UserRepresentation(); // UserRepresentation | userRepresentation
+var userRepresentation = new this.alfrescoJsApi.activiti.UserRepresentation(); // UserRepresentation | userRepresentation
 
 this.alfrescoJsApi.activiti.profileApi.updateProfile(userRepresentation);
 ```

@@ -19,7 +19,7 @@ After creating and puclished an app the user can add it to his/her landing page.
 ### Example
 ```javascript
 
-var saveObject = new ActivitiPublicRestApi.RuntimeAppDefinitionSaveRepresentation(); // RuntimeAppDefinitionSaveRepresentation | saveObject
+var saveObject = new this.alfrescoJsApi.activiti.RuntimeAppDefinitionSaveRepresentation(); // RuntimeAppDefinitionSaveRepresentation | saveObject
 
 this.alfrescoJsApi.activiti.appsRuntimeApi.deployAppDefinitions(saveObject);
 ```

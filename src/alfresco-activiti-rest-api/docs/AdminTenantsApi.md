@@ -25,7 +25,7 @@ Tenant manager only
 ### Example
 ```javascript
 
-var createTenantRepresentation = new ActivitiPublicRestApi.CreateTenantRepresentation(); // CreateTenantRepresentation | createTenantRepresentation
+var createTenantRepresentation = new this.alfrescoJsApi.activiti.CreateTenantRepresentation(); // CreateTenantRepresentation | createTenantRepresentation
 
 this.alfrescoJsApi.activiti.adminTenantsApi.createTenant(createTenantRepresentation);
 ```
@@ -222,7 +222,7 @@ Update a tenant
 
 var tenantId = 789; // Integer | tenantId
 
-var createTenantRepresentation = new ActivitiPublicRestApi.CreateTenantRepresentation(); // CreateTenantRepresentation | createTenantRepresentation
+var createTenantRepresentation = new this.alfrescoJsApi.activiti.CreateTenantRepresentation(); // CreateTenantRepresentation | createTenantRepresentation
 
 this.alfrescoJsApi.activiti.adminTenantsApi.update(tenantId, createTenantRepresentation);
 ```

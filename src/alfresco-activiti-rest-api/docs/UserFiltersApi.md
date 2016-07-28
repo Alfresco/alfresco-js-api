@@ -27,7 +27,7 @@ Create a user process instance task filter
 ### Example
 ```javascript
 
-var userProcessInstanceFilterRepresentation = new ActivitiPublicRestApi.UserProcessInstanceFilterRepresentation(); // UserProcessInstanceFilterRepresentation | userProcessInstanceFilterRepresentation
+var userProcessInstanceFilterRepresentation = new this.alfrescoJsApi.activiti.UserProcessInstanceFilterRepresentation(); // UserProcessInstanceFilterRepresentation | userProcessInstanceFilterRepresentation
 
 this.alfrescoJsApi.activiti.userFiltersApi.createUserProcessInstanceFilter(userProcessInstanceFilterRepresentation);
 ```
@@ -60,7 +60,7 @@ Create a new task filter
 ### Example
 ```javascript
 
-var userTaskFilterRepresentation = new ActivitiPublicRestApi.UserTaskFilterRepresentation(); // UserTaskFilterRepresentation | userTaskFilterRepresentation
+var userTaskFilterRepresentation = new this.alfrescoJsApi.activiti.UserTaskFilterRepresentation(); // UserTaskFilterRepresentation | userTaskFilterRepresentation
 
 this.alfrescoJsApi.activiti.userFiltersApi.createUserTaskFilter(userTaskFilterRepresentation);
 ```
@@ -295,7 +295,7 @@ To order the list of user process instance filters
 ### Example
 ```javascript
 
-var filterOrderRepresentation = new ActivitiPublicRestApi.UserFilterOrderRepresentation(); // UserFilterOrderRepresentation | filterOrderRepresentation
+var filterOrderRepresentation = new this.alfrescoJsApi.activiti.UserFilterOrderRepresentation(); // UserFilterOrderRepresentation | filterOrderRepresentation
 
 this.alfrescoJsApi.activiti.userFiltersApi.orderUserProcessInstanceFilters(filterOrderRepresentation);
 ```
@@ -328,7 +328,7 @@ To order the list of user task filters
 ### Example
 ```javascript
 
-var filterOrderRepresentation = new ActivitiPublicRestApi.UserFilterOrderRepresentation(); // UserFilterOrderRepresentation | filterOrderRepresentation
+var filterOrderRepresentation = new this.alfrescoJsApi.activiti.UserFilterOrderRepresentation(); // UserFilterOrderRepresentation | filterOrderRepresentation
 
 this.alfrescoJsApi.activiti.userFiltersApi.orderUserTaskFilters(filterOrderRepresentation);
 ```
@@ -363,7 +363,7 @@ Update a user process instance task filter
 
 var userFilterId = 789; // Integer | userFilterId
 
-var userProcessInstanceFilterRepresentation = new ActivitiPublicRestApi.UserProcessInstanceFilterRepresentation(); // UserProcessInstanceFilterRepresentation | userProcessInstanceFilterRepresentation
+var userProcessInstanceFilterRepresentation = new this.alfrescoJsApi.activiti.UserProcessInstanceFilterRepresentation(); // UserProcessInstanceFilterRepresentation | userProcessInstanceFilterRepresentation
 
 this.alfrescoJsApi.activiti.userFiltersApi.updateUserProcessInstanceFilter(userFilterId, userProcessInstanceFilterRepresentation);
 ```
@@ -399,7 +399,7 @@ Update a specific task filter
 
 var userFilterId = 789; // Integer | userFilterId
 
-var userTaskFilterRepresentation = new ActivitiPublicRestApi.UserTaskFilterRepresentation(); // UserTaskFilterRepresentation | userTaskFilterRepresentation
+var userTaskFilterRepresentation = new this.alfrescoJsApi.activiti.UserTaskFilterRepresentation(); // UserTaskFilterRepresentation | userTaskFilterRepresentation
 
 this.alfrescoJsApi.activiti.userFiltersApi.updateUserTaskFilter(userFilterId, userTaskFilterRepresentation);
 ```

@@ -49,7 +49,7 @@ Start a process instance
 ### Example
 ```javascript
 
-var startRequest = new ActivitiPublicRestApi.CreateProcessInstanceRepresentation(); // CreateProcessInstanceRepresentation | startRequest
+var startRequest = new this.alfrescoJsApi.activiti.CreateProcessInstanceRepresentation(); // CreateProcessInstanceRepresentation | startRequest
 
 this.alfrescoJsApi.activiti.processInstancesInformationApi.startNewProcessInstance(startRequest);
 ```

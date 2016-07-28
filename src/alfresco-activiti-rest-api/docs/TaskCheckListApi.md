@@ -20,7 +20,7 @@ Create a task checklist
 
 var taskId = "taskId_example"; // String | taskId
 
-var taskRepresentation = new ActivitiPublicRestApi.TaskRepresentation(); // TaskRepresentation | taskRepresentation
+var taskRepresentation = new this.alfrescoJsApi.activiti.TaskRepresentation(); // TaskRepresentation | taskRepresentation
 
 this.alfrescoJsApi.activiti.taskCheckListApi.addSubtask(taskId, taskRepresentation);
 ```
@@ -89,7 +89,7 @@ Change the order of items on a checklist
 
 var taskId = "taskId_example"; // String | taskId
 
-var orderRepresentation = new ActivitiPublicRestApi.ChecklistOrderRepresentation(); // ChecklistOrderRepresentation | orderRepresentation
+var orderRepresentation = new this.alfrescoJsApi.activiti.ChecklistOrderRepresentation(); // ChecklistOrderRepresentation | orderRepresentation
 
 this.alfrescoJsApi.activiti.taskCheckListApi.orderChecklist(taskId, orderRepresentation);
 ```

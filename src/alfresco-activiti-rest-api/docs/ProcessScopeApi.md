@@ -16,7 +16,7 @@ getRuntimeProcessScopes
 ### Example
 ```javascript
 
-var processScopesRequest = new ActivitiPublicRestApi.ProcessScopesRequestRepresentation(); // ProcessScopesRequestRepresentation | processScopesRequest
+var processScopesRequest = new this.alfrescoJsApi.activiti.ProcessScopesRequestRepresentation(); // ProcessScopesRequestRepresentation | processScopesRequest
 
 this.alfrescoJsApi.activiti.processScopeApi.getRuntimeProcessScopes(processScopesRequest);
 ```

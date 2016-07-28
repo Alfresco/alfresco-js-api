@@ -119,7 +119,7 @@ saveForm
 
 var formId = 789; // Integer | formId
 
-var saveRepresentation = new ActivitiPublicRestApi.FormSaveRepresentation(); // FormSaveRepresentation | saveRepresentation
+var saveRepresentation = new this.alfrescoJsApi.activiti.FormSaveRepresentation(); // FormSaveRepresentation | saveRepresentation
 
 this.alfrescoJsApi.activiti.editorApi.saveForm(formId, saveRepresentation);
 ```
@@ -155,7 +155,7 @@ validateModel
 
 var formId = 789; // Integer | formId
 
-var saveRepresentation = new ActivitiPublicRestApi.FormSaveRepresentation(); // FormSaveRepresentation | saveRepresentation
+var saveRepresentation = new this.alfrescoJsApi.activiti.FormSaveRepresentation(); // FormSaveRepresentation | saveRepresentation
 
 this.alfrescoJsApi.activiti.editorApi.validateModel(formId, saveRepresentation);
 ```

@@ -23,7 +23,7 @@ After creating and puclished an app the user can add it to his/her landing page.
 ### Example
 ```javascript
 
-var saveObject = new ActivitiPublicRestApi.RuntimeAppDefinitionSaveRepresentation(); // RuntimeAppDefinitionSaveRepresentation | saveObject
+var saveObject = new this.alfrescoJsApi.activiti.RuntimeAppDefinitionSaveRepresentation(); // RuntimeAppDefinitionSaveRepresentation | saveObject
 
 this.alfrescoJsApi.activiti.appsApi.deployAppDefinitions(saveObject);
 ```
@@ -198,7 +198,7 @@ Before an app model can be used, it need to be published
 
 var modelId = 789; // Integer | modelId
 
-var publishModel = new ActivitiPublicRestApi.AppDefinitionPublishRepresentation(); // AppDefinitionPublishRepresentation | publishModel
+var publishModel = new this.alfrescoJsApi.activiti.AppDefinitionPublishRepresentation(); // AppDefinitionPublishRepresentation | publishModel
 
 this.alfrescoJsApi.activiti.appsApi.publishAppDefinition(modelId, publishModel);
 ```

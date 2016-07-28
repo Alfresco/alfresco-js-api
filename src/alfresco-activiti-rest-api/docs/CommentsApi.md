@@ -19,7 +19,7 @@ Add a comment to a Process
 ### Example
 ```javascript
 
-var commentRequest = new ActivitiPublicRestApi.CommentRepresentation(); // CommentRepresentation | commentRequest
+var commentRequest = new this.alfrescoJsApi.activiti.CommentRepresentation(); // CommentRepresentation | commentRequest
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
@@ -55,7 +55,7 @@ Add a comment to a Task
 ### Example
 ```javascript
 
-var commentRequest = new ActivitiPublicRestApi.CommentRepresentation(); // CommentRepresentation | commentRequest
+var commentRequest = new this.alfrescoJsApi.activiti.CommentRepresentation(); // CommentRepresentation | commentRequest
 
 var taskId = "taskId_example"; // String | taskId
 

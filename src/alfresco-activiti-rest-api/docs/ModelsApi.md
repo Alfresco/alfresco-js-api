@@ -28,7 +28,7 @@ To create a new model
 ### Example
 ```javascript
 
-var modelRepresentation = new ActivitiPublicRestApi.ModelRepresentation(); // ModelRepresentation | modelRepresentation
+var modelRepresentation = new this.alfrescoJsApi.activiti.ModelRepresentation(); // ModelRepresentation | modelRepresentation
 
 this.alfrescoJsApi.activiti.modelsApi.createModel(modelRepresentation);
 ```
@@ -103,7 +103,7 @@ To duplicate an existing model
 
 var modelId = 789; // Integer | modelId
 
-var modelRepresentation = new ActivitiPublicRestApi.ModelRepresentation(); // ModelRepresentation | modelRepresentation
+var modelRepresentation = new this.alfrescoJsApi.activiti.ModelRepresentation(); // ModelRepresentation | modelRepresentation
 
 
 this.alfrescoJsApi.activiti.modelsApi.duplicateModel(modelId, modelRepresentation);
@@ -419,7 +419,7 @@ Edit a specific model
 
 var modelId = 789; // Integer | modelId
 
-var updatedModel = new ActivitiPublicRestApi.ModelRepresentation(); // ModelRepresentation | updatedModel
+var updatedModel = new this.alfrescoJsApi.activiti.ModelRepresentation(); // ModelRepresentation | updatedModel
 
 this.alfrescoJsApi.activiti.modelsApi.updateModel(modelId, updatedModel);
 ```

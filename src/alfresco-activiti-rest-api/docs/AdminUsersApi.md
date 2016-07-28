@@ -20,7 +20,7 @@ Bulk Update a list of users
 ### Example
 ```javascript
 
-var update = new ActivitiPublicRestApi.BulkUserUpdateRepresentation(); // BulkUserUpdateRepresentation | update
+var update = new this.alfrescoJsApi.activiti.BulkUserUpdateRepresentation(); // BulkUserUpdateRepresentation | update
 
 this.alfrescoJsApi.activiti.adminUsersApibulkUpdateUsers(update);
 ```
@@ -53,7 +53,7 @@ Create a new user
 ### Example
 ```javascript
 
-var userRepresentation = new ActivitiPublicRestApi.UserRepresentation(); // UserRepresentation | userRepresentation
+var userRepresentation = new this.alfrescoJsApi.activiti.UserRepresentation(); // UserRepresentation | userRepresentation
 
 this.alfrescoJsApi.activiti.adminUsersApicreateNewUser(userRepresentation);
 ```
@@ -181,7 +181,7 @@ Update user details
 
 var userId = 789; // Integer | userId
 
-var userRepresentation = new ActivitiPublicRestApi.UserRepresentation(); // UserRepresentation | userRepresentation
+var userRepresentation = new this.alfrescoJsApi.activiti.UserRepresentation(); // UserRepresentation | userRepresentation
 
 this.alfrescoJsApi.activiti.adminUsersApiupdateUserDetails(userId, userRepresentation);
 ```

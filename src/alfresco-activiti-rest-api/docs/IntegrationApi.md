@@ -140,7 +140,7 @@ Create Box account
 
 var userId = 789; // Integer | userId
 
-var credentials = new ActivitiPublicRestApi.UserAccountCredentialsRepresentation(); // UserAccountCredentialsRepresentation | credentials
+var credentials = new this.alfrescoJsApi.activiti.UserAccountCredentialsRepresentation(); // UserAccountCredentialsRepresentation | credentials
 
 this.alfrescoJsApi.activiti.integrationApi.createRepositoryAccount(userId, credentials);
 ```
@@ -627,7 +627,7 @@ Update Box account
 
 var userId = 789; // Integer | userId
 
-var credentials = new ActivitiPublicRestApi.UserAccountCredentialsRepresentation(); // UserAccountCredentialsRepresentation | credentials
+var credentials = new this.alfrescoJsApi.activiti.UserAccountCredentialsRepresentation(); // UserAccountCredentialsRepresentation | credentials
 
 this.alfrescoJsApi.activiti.integrationApi.updateRepositoryAccount(userId, credentials);
 ```
