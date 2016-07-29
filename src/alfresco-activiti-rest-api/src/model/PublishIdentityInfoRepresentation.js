@@ -4,7 +4,7 @@
     define(['ApiClient', 'model/LightGroupRepresentation', 'model/LightUserRepresentation'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./LightGroupRepresentation'), require('./LightUserRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./LightGroupRepresentation'), require('./LightUserRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {

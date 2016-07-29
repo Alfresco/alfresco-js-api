@@ -4,7 +4,7 @@
     define(['ApiClient', 'model/GroupCapabilityRepresentation', 'model/GroupRepresentation', 'model/UserRepresentation'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./GroupCapabilityRepresentation'), require('./GroupRepresentation'), require('./UserRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./GroupCapabilityRepresentation'), require('./GroupRepresentation'), require('./UserRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {

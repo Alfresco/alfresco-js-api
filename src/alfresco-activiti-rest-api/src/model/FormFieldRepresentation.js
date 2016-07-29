@@ -4,7 +4,7 @@
     define(['ApiClient', 'model/ConditionRepresentation', 'model/LayoutRepresentation', 'model/OptionRepresentation'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./ConditionRepresentation'), require('./LayoutRepresentation'), require('./OptionRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./ConditionRepresentation'), require('./LayoutRepresentation'), require('./OptionRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {

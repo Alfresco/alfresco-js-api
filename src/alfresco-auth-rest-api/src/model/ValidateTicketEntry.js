@@ -1,10 +1,10 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient', './ValidateTicketEntryEntry'], factory);
+    define(['../../../alfrescoApiClient', './ValidateTicketEntryEntry'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./ValidateTicketEntryEntry'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./ValidateTicketEntryEntry'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoAuthRestApi) {
@@ -39,7 +39,7 @@
    * @return {module:model/ValidateTicketEntry} The populated <code>ValidateTicketEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('entry')) {

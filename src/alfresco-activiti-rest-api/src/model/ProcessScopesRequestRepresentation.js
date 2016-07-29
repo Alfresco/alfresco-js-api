@@ -4,7 +4,7 @@
     define(['ApiClient', 'model/ProcessScopeIdentifierRepresentation'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./ProcessScopeIdentifierRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./ProcessScopeIdentifierRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {

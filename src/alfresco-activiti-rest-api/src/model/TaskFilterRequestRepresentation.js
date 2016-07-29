@@ -4,7 +4,7 @@
     define(['ApiClient', 'model/TaskFilterRepresentation'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./TaskFilterRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./TaskFilterRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {

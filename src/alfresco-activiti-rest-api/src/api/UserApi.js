@@ -4,7 +4,7 @@
     define(['ApiClient', 'model/UserActionRepresentation', 'model/UserRepresentation', 'model/ResultListDataRepresentation', 'model/ResetPasswordRepresentation'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/UserActionRepresentation'), require('../model/UserRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/ResetPasswordRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/UserActionRepresentation'), require('../model/UserRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/ResetPasswordRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {

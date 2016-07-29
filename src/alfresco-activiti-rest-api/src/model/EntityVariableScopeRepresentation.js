@@ -4,7 +4,7 @@
     define(['ApiClient', 'model/EntityAttributeScopeRepresentation'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./EntityAttributeScopeRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./EntityAttributeScopeRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {

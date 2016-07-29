@@ -1,10 +1,10 @@
 (function(factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['./ApiClient', './model/Error', './model/ErrorError', './model/LoginRequest', './model/LoginTicketEntry', './model/LoginTicketEntryEntry', './model/ValidateTicketEntry', './model/ValidateTicketEntryEntry', './api/AuthenticationApi'], factory);
+    define(['../../alfrescoApiClient', './model/Error', './model/ErrorError', './model/LoginRequest', './model/LoginTicketEntry', './model/LoginTicketEntryEntry', './model/ValidateTicketEntry', './model/ValidateTicketEntryEntry', './api/AuthenticationApi'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('./ApiClient'), require('./model/Error'), require('./model/ErrorError'), require('./model/LoginRequest'), require('./model/LoginTicketEntry'), require('./model/LoginTicketEntryEntry'), require('./model/ValidateTicketEntry'), require('./model/ValidateTicketEntryEntry'), require('./api/AuthenticationApi'));
+    module.exports = factory(require('../../alfrescoApiClient'), require('./model/Error'), require('./model/ErrorError'), require('./model/LoginRequest'), require('./model/LoginTicketEntry'), require('./model/LoginTicketEntryEntry'), require('./model/ValidateTicketEntry'), require('./model/ValidateTicketEntryEntry'), require('./api/AuthenticationApi'));
   }
 }(function(ApiClient, Error, ErrorError, LoginRequest, LoginTicketEntry, LoginTicketEntryEntry, ValidateTicketEntry, ValidateTicketEntryEntry, AuthenticationApi) {
   'use strict';

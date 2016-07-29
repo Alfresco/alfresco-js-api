@@ -4,7 +4,7 @@
     define(['ApiClient', 'model/FormScopeRepresentation'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./FormScopeRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./FormScopeRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {

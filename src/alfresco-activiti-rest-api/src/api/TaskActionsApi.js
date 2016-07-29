@@ -4,7 +4,7 @@
     define(['ApiClient', 'model/ObjectNode', 'model/TaskRepresentation'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/ObjectNode'), require('../model/TaskRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ObjectNode'), require('../model/TaskRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {

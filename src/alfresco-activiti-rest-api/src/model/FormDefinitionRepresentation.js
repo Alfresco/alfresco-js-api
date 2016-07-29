@@ -4,7 +4,7 @@
     define(['ApiClient', 'model/FormFieldRepresentation', 'model/FormJavascriptEventRepresentation', 'model/FormOutcomeRepresentation', 'model/FormTabRepresentation'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./FormFieldRepresentation'), require('./FormJavascriptEventRepresentation'), require('./FormOutcomeRepresentation'), require('./FormTabRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./FormFieldRepresentation'), require('./FormJavascriptEventRepresentation'), require('./FormOutcomeRepresentation'), require('./FormTabRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {

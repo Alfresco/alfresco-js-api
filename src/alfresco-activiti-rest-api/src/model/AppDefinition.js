@@ -4,7 +4,7 @@
     define(['ApiClient', 'model/AppModelDefinition', 'model/PublishIdentityInfoRepresentation'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./AppModelDefinition'), require('./PublishIdentityInfoRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./AppModelDefinition'), require('./PublishIdentityInfoRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
