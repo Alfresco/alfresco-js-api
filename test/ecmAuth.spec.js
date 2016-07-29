@@ -85,8 +85,6 @@ describe('Ecm Auth test', function () {
             this.ecmAuth.login().then(function () {
 
             }, function (error) {
-                console.log(error);
-
                 expect(error.status).to.be.equal(403);
                 done();
             });

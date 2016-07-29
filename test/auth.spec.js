@@ -208,7 +208,7 @@ describe('Auth', function () {
     describe('BPM Provider config', function () {
 
         beforeEach(function () {
-            this.hostActiviti = 'http://127.0.0.1:9090';
+            this.hostActiviti = 'http://127.0.0.1:9999';
             this.authResponseBpmMock = new AuthBpmMock(this.hostActiviti);
         });
 
@@ -221,7 +221,7 @@ describe('Auth', function () {
                 this.alfrescoJsApi = new AlfrescoApi({
                     username: 'admin',
                     password: 'admin',
-                    host: this.hostActiviti,
+                    hostActiviti: this.hostActiviti,
                     provider: 'BPM'
                 });
 
@@ -239,7 +239,7 @@ describe('Auth', function () {
                 this.alfrescoJsApi = new AlfrescoApi({
                     username: 'admin',
                     password: 'admin',
-                    host: this.hostActiviti,
+                    hostActiviti: this.hostActiviti,
                     provider: 'BPM'
 
                 });
@@ -258,7 +258,7 @@ describe('Auth', function () {
                 this.alfrescoJsApi = new AlfrescoApi({
                     username: 'admin',
                     password: 'admin',
-                    host: this.hostActiviti,
+                    hostActiviti: this.hostActiviti,
                     provider: 'BPM'
 
                 });
@@ -280,7 +280,7 @@ describe('Auth', function () {
                 this.alfrescoJsApi = new AlfrescoApi({
                     username: 'wrong',
                     password: 'name',
-                    host: this.hostActiviti,
+                    hostActiviti: this.hostActiviti,
                     provider: 'BPM'
 
                 });
@@ -299,7 +299,7 @@ describe('Auth', function () {
                 this.alfrescoJsApi = new AlfrescoApi({
                     username: null,
                     password: null,
-                    host: this.hostActiviti,
+                    hostActiviti: this.hostActiviti,
                     provider: 'BPM'
 
                 });
@@ -319,7 +319,7 @@ describe('Auth', function () {
                     this.alfrescoJsApi = new AlfrescoApi({
                         username: 'wrong',
                         password: 'name',
-                        host: this.hostActiviti,
+                        hostActiviti: this.hostActiviti,
                         provider: 'BPM'
 
                     });
@@ -335,7 +335,7 @@ describe('Auth', function () {
                     this.alfrescoJsApi = new AlfrescoApi({
                         username: 'admin',
                         password: 'admin',
-                        host: this.hostActiviti,
+                        hostActiviti: this.hostActiviti,
                         provider: 'BPM'
 
                     });
@@ -351,7 +351,7 @@ describe('Auth', function () {
                     this.alfrescoJsApi = new AlfrescoApi({
                         username: 'admin',
                         password: 'admin',
-                        host: this.hostActiviti,
+                        hostActiviti: this.hostActiviti,
                         provider: 'BPM'
 
                     });
@@ -373,7 +373,7 @@ describe('Auth', function () {
                     this.alfrescoJsApi = new AlfrescoApi({
                         username: 'admin',
                         password: 'admin',
-                        host: this.hostActiviti,
+                        hostActiviti: this.hostActiviti,
                         provider: 'BPM'
                     });
 
@@ -388,9 +388,9 @@ describe('Auth', function () {
 
             beforeEach(function () {
                 this.host = 'http://127.0.0.1:8080';
-                this.hostActiviti = 'http://127.0.0.1:9090';
+                this.hostActiviti = 'http://127.0.0.1:9999';
                 this.authResponseEcmMock = new AuthEcmMock(this.host);
-                this.authResponseBpmMock = new AuthBpmMock(this.host);
+                this.authResponseBpmMock = new AuthBpmMock(this.hostActiviti);
             });
 
             describe('With Authentication', function () {

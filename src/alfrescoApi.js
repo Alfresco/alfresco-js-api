@@ -39,7 +39,7 @@ class AlfrescoApi {
     changeConfig(config) {
         this.config = {
             host: config.host || 'http://127.0.0.1:8080',
-            hostActiviti: config.host || 'http://127.0.0.1:9999',
+            hostActiviti: config.hostActiviti || 'http://127.0.0.1:9999',
             contextRoot: config.contextRoot || 'alfresco',
             username: config.username,
             password: config.password,
