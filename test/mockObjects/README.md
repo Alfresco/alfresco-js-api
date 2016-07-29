@@ -54,6 +54,7 @@ authResponseMock.get204ResponseLogout()| |
 authResponseMock.get404ResponseLogout()| | 
 authResponseMock.rec()| | 
 authResponseMock.play()| | 
+authResponseMock.cleanAll()| | 
 
 ### Example 
 
@@ -100,6 +101,7 @@ nodeMock.get409CreationFolderNewNameClashes()| |
 nodeMock.get201CreationFolderNewNameNotClashes()| | 
 nodeMock.rec();| | 
 nodeMock.play();| | 
+authResponseMock.cleanAll()| | 
 
 ### Example 
 
@@ -147,6 +149,7 @@ uploadMock.get409CreationFileNewNameClashes()| |
 uploadMock.get401Response()| | 
 uploadMock.rec()| | 
 uploadMock.play()| | 
+authResponseMock.cleanAll()| | 
 
 ### Example 
 
@@ -197,6 +200,7 @@ WebScript.get401Response()| |
 WebScript.get200Response()| | 
 uploadMock.rec()| | 
 uploadMock.play()| | 
+authResponseMock.cleanAll()| | 
 
 ### Example 
 
@@ -248,3 +252,31 @@ authResponseMock.get200Response()| |
 authResponseMock.get200ResponseLogout()| | 
 authResponseMock.rec()| | 
 authResponseMock.play()| |
+authResponseMock.cleanAll()| | 
+
+
+## Mock Process Api
+
+var ProcessMock = require('alfresco-js-api').Mock.Activiti.Process
+
+processMock = new ProcessMock(host);
+
+Method | Description  |
+------------- | ------------- |
+processMock.get200Response()| | 
+processMock.rec()| | 
+processMock.play()| |
+processMock.cleanAll()| | 
+
+## Mock Tasks Api
+
+var TasksMock = require('alfresco-js-api').Mock.Activiti.Tasks
+
+tasksMock = new TasksMock(host);
+
+Method | Description  |
+------------- | ------------- |
+tasksMock.get200Response()| | 
+tasksMock.rec()| | 
+tasksMock.play()| |
+tasksMock.cleanAll()| | 

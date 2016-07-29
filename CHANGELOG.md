@@ -8,7 +8,7 @@ _This project provides a JavaScript client API into the v1 Alfresco REST API_
 
 <a name="0.2.3"></a>
 # [0.2.3](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.2.3) (2016-xx-xx)
-- [Add login/logout activiti #23](https://github.com/Alfresco/alfresco-js-api/issues/23)
+- [Integration Activiti Api #19](https://github.com/Alfresco/alfresco-js-api/issues/19)
 
 <a name="0.2.2"></a>
 # [0.2.2](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.2.2) (2016-07-21)

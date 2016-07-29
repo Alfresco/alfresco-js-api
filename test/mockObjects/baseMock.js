@@ -26,6 +26,10 @@ class BaseMock {
     play() {
         nock.recorder.play();
     }
+
+    cleanAll() {
+        nock.cleanAll();
+    }
 }
 
 module.exports = BaseMock;

@@ -416,6 +416,48 @@ describe('Auth', function () {
                     });
                 });
 
+                it('login should fail if only ECM fail', function (done) {
+
+                    this.authResponseBpmMock.get200Response();
+                    this.authResponseEcmMock.get401Response();
+
+                    this.alfrescoJsApi = new AlfrescoApi({
+                        username: 'admin',
+                        password: 'admin',
+                        host: this.host,
+                        hostActiviti: this.hostActiviti,
+                        provider: 'ALL'
+                    });
+
+                    this.alfrescoJsApi.login().then(function () {
+                    }, function () {
+                        done();
+                    });
+
+                    this.authResponseEcmMock.cleanAll();
+                });
+
+                it('login should fail if only BPM fail', function (done) {
+
+                    this.authResponseBpmMock.get401Response();
+                    this.authResponseEcmMock.get201Response();
+
+                    this.alfrescoJsApi = new AlfrescoApi({
+                        username: 'admin',
+                        password: 'admin',
+                        host: this.host,
+                        hostActiviti: this.hostActiviti,
+                        provider: 'ALL'
+                    });
+
+                    this.alfrescoJsApi.login().then(function () {
+                    }, function () {
+                        done();
+                    });
+
+                    this.authResponseBpmMock.cleanAll();
+                });
+
                 it('isLoggedIn should return true if the api is logged in', function (done) {
 
                     this.authResponseBpmMock.get200Response();
