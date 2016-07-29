@@ -10,7 +10,7 @@ class ProcessMock extends BaseMock {
     }
 
     get200Response() {
-        nock('http://127.0.0.1:9999', {'encodedQueryParams': true})
+        nock(this.host, {'encodedQueryParams': true})
             .post('/activiti-app/api/enterprise/process-instances/query', {
                 'page': 0,
                 'sort': 'created-desc',

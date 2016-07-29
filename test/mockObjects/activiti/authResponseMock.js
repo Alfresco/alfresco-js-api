@@ -5,13 +5,15 @@ var BaseMock = require('../baseMock');
 
 class AuthResponseMock extends BaseMock {
 
-    constructor(host) {
+    constructor(host, username, password) {
         super(host);
+        this.username = username || 'admin';
+        this.password = password || 'admin';
     }
 
     get200Response() {
         nock(this.host, {'encodedQueryParams': true})
-            .post('/activiti-app/app/authentication', 'j_username=admin&j_password=admin&_spring_security_remember_me=true&submit=Login')
+            .post('/activiti-app/app/authentication', 'j_username=' + this.username + '&j_password=' + this.password + '&_spring_security_remember_me=true&submit=Login')
             .reply(200);
     }
 

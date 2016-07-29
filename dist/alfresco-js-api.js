@@ -41164,10 +41164,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * getForms
-     * @param {module:api/EditorApi~getFormsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/FormRepresentation>}
      */
-    this.getForms = function (callback) {
+    this.getForms = function () {
       var postBody = null;
 
       var pathParams = {};
@@ -41562,10 +41561,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve Alfresco account information
      * Ideal to map accounts &amp; integrate with 3rd party app/client
-     * @param {module:api/IntegrationAccountApi~getAccountsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAccounts = function (callback) {
+    this.getAccounts = function () {
       var postBody = null;
 
       var pathParams = {};
@@ -41671,10 +41669,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * List Alfresco networks
-     * @param {module:api/IntegrationAlfrescoCloudApi~getAllNetworksCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAllNetworks = function (callback) {
+    this.getAllNetworks = function () {
       var postBody = null;
 
       var pathParams = {};
@@ -42264,10 +42260,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * List Alfresco networks
-     * @param {module:api/IntegrationApi~getAllNetworksCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAllNetworks = function (callback) {
+    this.getAllNetworks = function () {
       var postBody = null;
 
       var pathParams = {};
@@ -42369,10 +42363,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * Retrieve if Box Integration is enabled
-     * @param {module:api/IntegrationApi~getBoxPluginStatusCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {'Boolean'}
      */
-    this.getBoxPluginStatus = function (callback) {
+    this.getBoxPluginStatus = function () {
       var postBody = null;
 
       var pathParams = {};
@@ -42922,10 +42914,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * Retrieve if Box Integration is enabled
-     * @param {module:api/IntegrationBoxApi~getBoxPluginStatusCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {'Boolean'}
      */
-    this.getBoxPluginStatus = function (callback) {
+    this.getBoxPluginStatus = function () {
       var postBody = null;
 
       var pathParams = {};
@@ -43586,10 +43576,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * TODO
-     * @param {module:api/ModelsApi~getModelsToIncludeInAppDefinitionCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getModelsToIncludeInAppDefinition = function (callback) {
+    this.getModelsToIncludeInAppDefinition = function () {
       var postBody = null;
 
       var pathParams = {};
@@ -44106,10 +44094,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * Retrieve the start form for a process definition
-     * @param {module:api/ProcessApi~getProcessDefinitionStartFormCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/FormDefinitionRepresentation}
      */
-    this.getProcessDefinitionStartForm = function (callback) {
+    this.getProcessDefinitionStartForm = function () {
       var postBody = null;
 
       var pathParams = {};
@@ -44319,10 +44305,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * Retrieve field values (eg. the typeahead field)
-     * @param {module:api/ProcessApi~getRestFieldValuesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {Array.<module:model/FormValueRepresentation>}
      */
-    this.getRestFieldValues = function (callback) {
+    this.getRestFieldValues = function () {
       var postBody = null;
 
       var pathParams = {};
@@ -44348,10 +44332,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * Retrieve field values (eg. the table field)
-     * @param {module:api/ProcessApi~getRestTableFieldValuesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {Array.<module:model/FormValueRepresentation>}
      */
-    this.getRestTableFieldValues = function (callback) {
+    this.getRestTableFieldValues = function () {
       var postBody = null;
 
       var pathParams = {};
@@ -44535,10 +44517,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * Retrieve the start form for a process definition
-     * @param {module:api/ProcessDefinitionsFormApi~getProcessDefinitionStartFormCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/FormDefinitionRepresentation}
      */
-    this.getProcessDefinitionStartForm = function (callback) {
+    this.getProcessDefinitionStartForm = function () {
       var postBody = null;
 
       var pathParams = {};
@@ -44564,10 +44544,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * Retrieve field values (eg. the typeahead field)
-     * @param {module:api/ProcessDefinitionsFormApi~getRestFieldValuesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {Array.<module:model/FormValueRepresentation>}
      */
-    this.getRestFieldValues = function (callback) {
+    this.getRestFieldValues = function () {
       var postBody = null;
 
       var pathParams = {};
@@ -44593,10 +44571,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * Retrieve field values (eg. the table field)
-     * @param {module:api/ProcessDefinitionsFormApi~getRestTableFieldValuesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {Array.<module:model/FormValueRepresentation>}
      */
-    this.getRestTableFieldValues = function (callback) {
+    this.getRestTableFieldValues = function () {
       var postBody = null;
 
       var pathParams = {};
@@ -45245,10 +45221,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve user profile picture
      * Generally returns an image file
-     * @param {module:api/ProfileApi~getProfilePictureCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {File}
      */
-    this.getProfilePicture = function (callback) {
+    this.getProfilePicture = function () {
       var postBody = null;
 
       var pathParams = {};
@@ -45275,10 +45249,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve user information
      *  This is useful to get the name, email, the groups that the user is part of, the user picture, etc.
-     * @param {module:api/ProfileApi~getProfileCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/UserRepresentation}
      */
-    this.getProfile = function (callback) {
+    this.getProfile = function () {
       var postBody = null;
 
       var pathParams = {};
@@ -45420,10 +45392,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * getControllers
-     * @param {module:api/ScriptFileApi~getControllersCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {'String'}
      */
-    this.getControllers = function (callback) {
+    this.getControllers = function () {
       var postBody = null;
 
       var pathParams = {};
@@ -45449,10 +45419,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * getLibraries
-     * @param {module:api/ScriptFileApi~getLibrariesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {'String'}
      */
-    this.getLibraries = function (callback) {
+    this.getLibraries = function () {
       var postBody = null;
 
       var pathParams = {};
@@ -45522,10 +45490,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve System Properties
      * Typical value is AllowInvolveByEmail
-     * @param {module:api/SystemPropertiesApi~getPropertiesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/SystemPropertiesRepresentation}
      */
-    this.getProperties = function (callback) {
+    this.getProperties = function () {
       var postBody = null;
 
       var pathParams = {};
@@ -47607,10 +47573,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * getHeaders
-     * @param {module:api/TemporaryApi~getHeadersCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ArrayNode}
      */
-    this.getHeaders = function (callback) {
+    this.getHeaders = function () {
       var postBody = null;
 
       var pathParams = {};
@@ -47636,10 +47600,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * getOptions
-     * @param {module:api/TemporaryApi~getOptionsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ArrayNode}
      */
-    this.getOptions = function (callback) {
+    this.getOptions = function () {
       var postBody = null;
 
       var pathParams = {};
@@ -73506,14 +73468,14 @@ var AlfrescoApi = function () {
                 this.bpmAuth = new BpmAuth(this.config);
                 AlfrescoActivitiApi.ApiClient.instance = this.bpmAuth.getClient();
                 this.activiti = AlfrescoActivitiApi;
-                this.instantiateObjects(this.activiti);
+                this._instantiateObjects(this.activiti);
             }
 
             if (this.config.provider === 'ECM' || this.config.provider === 'ALL') {
                 this.ecmAuth = new EcmAuth(this.config);
                 AlfrescoCoreRestApi.ApiClient.instance = this.ecmAuth.getClient();
                 this.core = AlfrescoCoreRestApi;
-                this.instantiateObjects(this.core);
+                this._instantiateObjects(this.core);
             }
 
             this.nodes = this.node = new AlfrescoNode();
@@ -73523,21 +73485,23 @@ var AlfrescoApi = function () {
             this.webScript = new AlfrescoWebScriptApi();
         }
     }, {
-        key: 'instantiateObjects',
-        value: function instantiateObjects(module) {
+        key: '_instantiateObjects',
+        value: function _instantiateObjects(module) {
             var _this = this;
 
             var classArray = Object.keys(module);
 
             classArray.forEach(function (currentClass) {
-                var obj = _this.stringToObject(currentClass, module);
+                var obj = _this._stringToObject(currentClass, module);
                 var nameObj = _.lowerFirst(currentClass);
-                module[nameObj] = obj;
+                if (!module[nameObj]) {
+                    module[nameObj] = obj;
+                }
             });
         }
     }, {
-        key: 'stringToObject',
-        value: function stringToObject(nameClass, module) {
+        key: '_stringToObject',
+        value: function _stringToObject(nameClass, module) {
             try {
                 if (typeof module[nameClass] === 'function') {
                     return new module[nameClass]();
@@ -73699,7 +73663,7 @@ module.exports.Core = AlfrescoCoreRestApi;
 module.exports.Auth = AlfrescoAuthRestApi;
 module.exports.Mock = AlfrescoMock;
 
-},{"../test/mockObjects/mockAlfrescoApi.js":410,"./alfresco-activiti-rest-api/src/index":179,"./alfresco-auth-rest-api/src/index":261,"./alfresco-core-rest-api/src/index.js":284,"./alfrescoContent":396,"./alfrescoNode":397,"./alfrescoSearch":398,"./alfrescoUpload":399,"./alfrescoWebScript":400,"./bpmAuth":401,"./ecmAuth":402,"event-emitter":65,"lodash":72}],395:[function(require,module,exports){
+},{"../test/mockObjects/mockAlfrescoApi.js":411,"./alfresco-activiti-rest-api/src/index":179,"./alfresco-auth-rest-api/src/index":261,"./alfresco-core-rest-api/src/index.js":284,"./alfrescoContent":396,"./alfrescoNode":397,"./alfrescoSearch":398,"./alfrescoUpload":399,"./alfrescoWebScript":400,"./bpmAuth":401,"./ecmAuth":402,"event-emitter":65,"lodash":72}],395:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74283,6 +74247,7 @@ var AlfrescoWebScriptApi = function () {
 module.exports = AlfrescoWebScriptApi;
 
 },{"./alfresco-core-rest-api/src/ApiClient":269}],401:[function(require,module,exports){
+(function (Buffer){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74350,9 +74315,10 @@ var BpmAuth = function (_AlfrescoApiClient) {
 
             this.promise = new Promise(function (resolve, reject) {
                 _this2.callApi('/app/authentication', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts).then(function (data) {
-                    _this2.setTicket('isLogedin');
+                    var tcket = 'Basic ' + new Buffer(_this2.authentications.basicAuth.username + ':' + _this2.authentications.basicAuth.password).toString('base64');
+                    _this2.setTicket(tcket);
                     _this2.promise.emit('success');
-                    resolve(200);
+                    resolve(tcket);
                 }, function (error) {
                     if (error.error.status === 401) {
                         _this2.promise.emit('unauthorized');
@@ -74462,7 +74428,8 @@ var BpmAuth = function (_AlfrescoApiClient) {
 Emitter(BpmAuth.prototype); // jshint ignore:line
 module.exports = BpmAuth;
 
-},{"./alfrescoApiClient":395,"event-emitter":65}],402:[function(require,module,exports){
+}).call(this,require("buffer").Buffer)
+},{"./alfrescoApiClient":395,"buffer":8,"event-emitter":65}],402:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74653,16 +74620,20 @@ var BaseMock = require('../baseMock');
 var AuthResponseMock = function (_BaseMock) {
     _inherits(AuthResponseMock, _BaseMock);
 
-    function AuthResponseMock(host) {
+    function AuthResponseMock(host, username, password) {
         _classCallCheck(this, AuthResponseMock);
 
-        return _possibleConstructorReturn(this, Object.getPrototypeOf(AuthResponseMock).call(this, host));
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AuthResponseMock).call(this, host));
+
+        _this.username = username || 'admin';
+        _this.password = password || 'admin';
+        return _this;
     }
 
     _createClass(AuthResponseMock, [{
         key: 'get200Response',
         value: function get200Response() {
-            nock(this.host, { 'encodedQueryParams': true }).post('/activiti-app/app/authentication', 'j_username=admin&j_password=admin&_spring_security_remember_me=true&submit=Login').reply(200);
+            nock(this.host, { 'encodedQueryParams': true }).post('/activiti-app/app/authentication', 'j_username=' + this.username + '&j_password=' + this.password + '&_spring_security_remember_me=true&submit=Login').reply(200);
         }
     }, {
         key: 'get200ResponseLogout',
@@ -74681,7 +74652,7 @@ var AuthResponseMock = function (_BaseMock) {
 
 module.exports = AuthResponseMock;
 
-},{"../baseMock":409,"nock":75}],404:[function(require,module,exports){
+},{"../baseMock":410,"nock":75}],404:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74707,7 +74678,7 @@ var ProcessMock = function (_BaseMock) {
     _createClass(ProcessMock, [{
         key: 'get200Response',
         value: function get200Response() {
-            nock('http://127.0.0.1:9999', { 'encodedQueryParams': true }).post('/activiti-app/api/enterprise/process-instances/query', {
+            nock(this.host, { 'encodedQueryParams': true }).post('/activiti-app/api/enterprise/process-instances/query', {
                 'page': 0,
                 'sort': 'created-desc',
                 'state': 'all'
@@ -74773,7 +74744,119 @@ var ProcessMock = function (_BaseMock) {
 
 module.exports = ProcessMock;
 
-},{"../baseMock":409,"nock":75}],405:[function(require,module,exports){
+},{"../baseMock":410,"nock":75}],405:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var nock = require('nock');
+var BaseMock = require('../baseMock');
+
+var TasksMock = function (_BaseMock) {
+    _inherits(TasksMock, _BaseMock);
+
+    function TasksMock(host) {
+        _classCallCheck(this, TasksMock);
+
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(TasksMock).call(this, host));
+    }
+
+    _createClass(TasksMock, [{
+        key: 'get200Response',
+        value: function get200Response() {
+            nock(this.host, { 'encodedQueryParams': true }).post('/activiti-app/api/enterprise/tasks/query', {}).reply(200, {
+                'size': 2,
+                'total': 2,
+                'start': 0,
+                'data': [{
+                    'id': '38',
+                    'name': null,
+                    'description': null,
+                    'category': null,
+                    'assignee': {
+                        'id': 1,
+                        'firstName': null,
+                        'lastName': 'Administrator',
+                        'email': 'admin@app.activiti.com'
+                    },
+                    'created': '2016-07-26T15:30:58.368+0000',
+                    'dueDate': null,
+                    'endDate': null,
+                    'duration': null,
+                    'priority': 50,
+                    'parentTaskId': null,
+                    'parentTaskName': null,
+                    'processInstanceId': '33',
+                    'processInstanceName': null,
+                    'processDefinitionId': 'ProcessTestApi:1:32',
+                    'processDefinitionName': 'Process Test Api',
+                    'processDefinitionDescription': null,
+                    'processDefinitionKey': 'ProcessTestApi',
+                    'processDefinitionCategory': 'http://www.activiti.org/processdef',
+                    'processDefinitionVersion': 1,
+                    'processDefinitionDeploymentId': '29',
+                    'formKey': null,
+                    'processInstanceStartUserId': null,
+                    'initiatorCanCompleteTask': false,
+                    'adhocTaskCanBeReassigned': false,
+                    'taskDefinitionKey': 'sid-E6C102D3-F101-47AE-8D39-B7FD17F38FE9',
+                    'executionId': '33',
+                    'memberOfCandidateGroup': false,
+                    'memberOfCandidateUsers': false,
+                    'managerOfCandidateGroup': false
+                }, {
+                    'id': '44',
+                    'name': null,
+                    'description': null,
+                    'category': null,
+                    'assignee': {
+                        'id': 1,
+                        'firstName': null,
+                        'lastName': 'Administrator',
+                        'email': 'admin@app.activiti.com'
+                    },
+                    'created': '2016-07-26T15:31:00.415+0000',
+                    'dueDate': null,
+                    'endDate': null,
+                    'duration': null,
+                    'priority': 50,
+                    'parentTaskId': null,
+                    'parentTaskName': null,
+                    'processInstanceId': '39',
+                    'processInstanceName': null,
+                    'processDefinitionId': 'ProcessTestApi:1:32',
+                    'processDefinitionName': 'Process Test Api',
+                    'processDefinitionDescription': null,
+                    'processDefinitionKey': 'ProcessTestApi',
+                    'processDefinitionCategory': 'http://www.activiti.org/processdef',
+                    'processDefinitionVersion': 1,
+                    'processDefinitionDeploymentId': '29',
+                    'formKey': null,
+                    'processInstanceStartUserId': null,
+                    'initiatorCanCompleteTask': false,
+                    'adhocTaskCanBeReassigned': false,
+                    'taskDefinitionKey': 'sid-E6C102D3-F101-47AE-8D39-B7FD17F38FE9',
+                    'executionId': '39',
+                    'memberOfCandidateGroup': false,
+                    'memberOfCandidateUsers': false,
+                    'managerOfCandidateGroup': false
+                }]
+            });
+        }
+    }]);
+
+    return TasksMock;
+}(BaseMock);
+
+module.exports = TasksMock;
+
+},{"../baseMock":410,"nock":75}],406:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74790,10 +74873,14 @@ var BaseMock = require('../baseMock');
 var AuthResponseMock = function (_BaseMock) {
     _inherits(AuthResponseMock, _BaseMock);
 
-    function AuthResponseMock(host) {
+    function AuthResponseMock(host, username, password) {
         _classCallCheck(this, AuthResponseMock);
 
-        return _possibleConstructorReturn(this, Object.getPrototypeOf(AuthResponseMock).call(this, host));
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AuthResponseMock).call(this, host));
+
+        _this.username = username || 'admin';
+        _this.password = password || 'admin';
+        return _this;
     }
 
     _createClass(AuthResponseMock, [{
@@ -74803,8 +74890,8 @@ var AuthResponseMock = function (_BaseMock) {
             var returnMockTicket = forceTicket || 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
 
             nock(this.host, { 'encodedQueryParams': true }).post('/alfresco/api/-default-/public/authentication/versions/1/tickets', {
-                'userId': 'admin',
-                'password': 'admin'
+                'userId': this.username,
+                'password': this.password
             }).reply(201, { 'entry': { 'id': returnMockTicket, 'userId': 'admin' } });
         }
     }, {
@@ -74873,7 +74960,7 @@ var AuthResponseMock = function (_BaseMock) {
 
 module.exports = AuthResponseMock;
 
-},{"../baseMock":409,"nock":75}],406:[function(require,module,exports){
+},{"../baseMock":410,"nock":75}],407:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -75150,7 +75237,7 @@ var NodeMock = function (_BaseMock) {
 
 module.exports = NodeMock;
 
-},{"../baseMock":409,"nock":75}],407:[function(require,module,exports){
+},{"../baseMock":410,"nock":75}],408:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -75258,7 +75345,7 @@ var UploadMock = function (_BaseMock) {
 
 module.exports = UploadMock;
 
-},{"../baseMock":409,"nock":75}],408:[function(require,module,exports){
+},{"../baseMock":410,"nock":75}],409:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -75337,7 +75424,7 @@ var WebScriptMock = function (_BaseMock) {
 
 module.exports = WebScriptMock;
 
-},{"../baseMock":409,"nock":75}],409:[function(require,module,exports){
+},{"../baseMock":410,"nock":75}],410:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -75380,7 +75467,7 @@ var BaseMock = function () {
 
 module.exports = BaseMock;
 
-},{"nock":75}],410:[function(require,module,exports){
+},{"nock":75}],411:[function(require,module,exports){
 'use strict';
 
 var mockAlfrescoApi = {};
@@ -75394,8 +75481,9 @@ mockAlfrescoApi.WebScript = require('./alfresco/webScriptMock.js');
 mockAlfrescoApi.ActivitiMock = {};
 mockAlfrescoApi.ActivitiMock.Auth = require('./activiti/authResponseMock.js');
 mockAlfrescoApi.ActivitiMock.Process = require('./activiti/processMock.js');
+mockAlfrescoApi.ActivitiMock.Tasks = require('./activiti/tasksMock.js');
 
 module.exports = mockAlfrescoApi;
 
-},{"./activiti/authResponseMock.js":403,"./activiti/processMock.js":404,"./alfresco/authResponseMock.js":405,"./alfresco/nodeMock.js":406,"./alfresco/uploadMock.js":407,"./alfresco/webScriptMock.js":408}]},{},[1])(1)
+},{"./activiti/authResponseMock.js":403,"./activiti/processMock.js":404,"./activiti/tasksMock.js":405,"./alfresco/authResponseMock.js":406,"./alfresco/nodeMock.js":407,"./alfresco/uploadMock.js":408,"./alfresco/webScriptMock.js":409}]},{},[1])(1)
 });

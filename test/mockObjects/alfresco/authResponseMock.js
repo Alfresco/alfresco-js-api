@@ -5,8 +5,10 @@ var BaseMock = require('../baseMock');
 
 class AuthResponseMock extends BaseMock{
 
-    constructor(host) {
+    constructor(host, username, password) {
         super(host);
+        this.username = username || 'admin';
+        this.password = password || 'admin';
     }
 
     get201Response(forceTicket) {
@@ -15,8 +17,8 @@ class AuthResponseMock extends BaseMock{
 
         nock(this.host, {'encodedQueryParams': true})
             .post('/alfresco/api/-default-/public/authentication/versions/1/tickets', {
-                'userId': 'admin',
-                'password': 'admin'
+                'userId': this.username,
+                'password': this.password
             })
             .reply(201, {'entry': {'id': returnMockTicket, 'userId': 'admin'}});
     }

@@ -47,18 +47,18 @@ class AlfrescoApi {
             ticket: config.ticket
         };
 
-        if (this.config.provider ===  'BPM' ||  this.config.provider === 'ALL') {
+        if (this.config.provider === 'BPM' || this.config.provider === 'ALL') {
             this.bpmAuth = new BpmAuth(this.config);
             AlfrescoActivitiApi.ApiClient.instance = this.bpmAuth.getClient();
             this.activiti = AlfrescoActivitiApi;
-            this.instantiateObjects(this.activiti);
+            this._instantiateObjects(this.activiti);
         }
 
-        if (this.config.provider ===  'ECM' ||  this.config.provider === 'ALL') {
+        if (this.config.provider === 'ECM' || this.config.provider === 'ALL') {
             this.ecmAuth = new EcmAuth(this.config);
             AlfrescoCoreRestApi.ApiClient.instance = this.ecmAuth.getClient();
             this.core = AlfrescoCoreRestApi;
-            this.instantiateObjects(this.core);
+            this._instantiateObjects(this.core);
         }
 
         this.nodes = this.node = new AlfrescoNode();
@@ -68,17 +68,19 @@ class AlfrescoApi {
         this.webScript = new AlfrescoWebScriptApi();
     }
 
-    instantiateObjects(module) {
+    _instantiateObjects(module) {
         var classArray = Object.keys(module);
 
         classArray.forEach((currentClass)=> {
-            var obj = this.stringToObject(currentClass, module);
+            var obj = this._stringToObject(currentClass, module);
             var nameObj = _.lowerFirst(currentClass);
-            module[nameObj] = obj;
+            if (!module[nameObj]) {
+                module[nameObj] = obj;
+            }
         });
     }
 
-    stringToObject(nameClass, module) {
+    _stringToObject(nameClass, module) {
         try {
             if (typeof module[nameClass] === 'function') {
                 return new module[nameClass]();

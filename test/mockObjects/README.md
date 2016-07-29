@@ -38,7 +38,11 @@ var AlfrescoMockJsApi = require('alfresco-js-api').Mock;
 
 var AuthResponseMock = require('alfresco-js-api').Mock.Auth
 
-authResponseMock = new AuthResponseMock(host);
+authResponseMock = new AuthResponseMock(host, username, password);
+Property | default value| 
+------------- | -------------|
+username| admin |
+password| admin |
 
 Method | Description  |
 ------------- | ------------- |
