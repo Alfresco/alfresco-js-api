@@ -966,7 +966,7 @@
 
     /**
      * List Task
-     * @param {module:model/ObjectNode} requestNode requestNode
+     * @param {module:model/TaskQueryRequestRepresentation} requestNode requestNode
      * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.listTasks = function(requestNode) {

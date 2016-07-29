@@ -768,7 +768,7 @@ List Task
 ### Example
 ```javascript
 
-var requestNode = new this.alfrescoJsApi.activiti.ObjectNode(); // ObjectNode | requestNode
+var requestNode = new this.alfrescoJsApi.activiti.TaskQueryRepresentation(); // ObjectNode | requestNode
 
 
 this.alfrescoJsApi.activiti.taskApi.listTasks(requestNode);
@@ -778,7 +778,7 @@ this.alfrescoJsApi.activiti.taskApi.listTasks(requestNode);
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **requestNode** | [**ObjectNode**](ObjectNode.md)| requestNode | 
+ **requestNode** | [**Representation**](TaskQueryRequestRepresentation.md)| requestNode | 
 
 ### Return type
 

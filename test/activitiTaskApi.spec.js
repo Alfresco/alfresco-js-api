@@ -30,9 +30,9 @@ describe('Activiti Task Api', function () {
 
         this.tasksMock.get200Response();
 
-        //   var requestNode = new this.alfrescoJsApi.activiti.ObjectNode();
+        var requestNode = new this.alfrescoJsApi.activiti.TaskQueryRequestRepresentation();
 
-        this.alfrescoJsApi.activiti.taskApi.listTasks().then((data)=> {
+        this.alfrescoJsApi.activiti.taskApi.listTasks(requestNode).then((data)=> {
             expect(data.data[0].processDefinitionName).equal('Process Test Api');
             expect(data.data[1].processDefinitionName).equal('Process Test Api');
             expect(data.size).equal(2);
