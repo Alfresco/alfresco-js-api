@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the addSubtask operation.
-     * @callback module:api/TaskApi~addSubtaskCallback
+     * Function to receive the result of the addSubtask operation.
      * @param {String} error Error message, if any.
      * @param {module:model/TaskRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44,8 +43,6 @@
      * Create a task checklist
      * @param {String} taskId taskId
      * @param {module:model/TaskRepresentation} taskRepresentation taskRepresentation
-     * @param {module:api/TaskApi~addSubtaskCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/TaskRepresentation}
      */
     this.addSubtask = function(taskId, taskRepresentation) {
       var postBody = taskRepresentation;
@@ -84,8 +81,7 @@
     }
 
     /**
-     * Callback function to receive the result of the addTaskComment operation.
-     * @callback module:api/TaskApi~addTaskCommentCallback
+     * Function to receive the result of the addTaskComment operation.
      * @param {String} error Error message, if any.
      * @param {module:model/CommentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -95,8 +91,6 @@
      * Add a comment to a Task
      * @param {module:model/CommentRepresentation} commentRequest commentRequest
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~addTaskCommentCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/CommentRepresentation}
      */
     this.addTaskComment = function(commentRequest, taskId) {
       var postBody = commentRequest;
@@ -135,8 +129,7 @@
     }
 
     /**
-     * Callback function to receive the result of the assignTask operation.
-     * @callback module:api/TaskApi~assignTaskCallback
+     * Function to receive the result of the assignTask operation.
      * @param {String} error Error message, if any.
      * @param {module:model/TaskRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -146,8 +139,6 @@
      * Assign a task to a user
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskApi~assignTaskCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/TaskRepresentation}
      */
     this.assignTask = function(taskId, requestNode) {
       var postBody = requestNode;
@@ -186,8 +177,7 @@
     }
 
     /**
-     * Callback function to receive the result of the attachForm operation.
-     * @callback module:api/TaskApi~attachFormCallback
+     * Function to receive the result of the attachForm operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -197,7 +187,6 @@
      * Attach a form to a task
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskApi~attachFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.attachForm = function(taskId, requestNode) {
       var postBody = requestNode;
@@ -236,8 +225,7 @@
     }
 
     /**
-     * Callback function to receive the result of the claimTask operation.
-     * @callback module:api/TaskApi~claimTaskCallback
+     * Function to receive the result of the claimTask operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -247,7 +235,6 @@
      * Claim a task
      * To claim a task (in case the task is assigned to a group)
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~claimTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.claimTask = function(taskId) {
       var postBody = null;
@@ -281,8 +268,7 @@
     }
 
     /**
-     * Callback function to receive the result of the completeTaskForm operation.
-     * @callback module:api/TaskApi~completeTaskFormCallback
+     * Function to receive the result of the completeTaskForm operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -292,7 +278,6 @@
      * Complete a Task Form
      * @param {String} taskId taskId
      * @param {module:model/CompleteFormRepresentation} completeTaskFormRepresentation completeTaskFormRepresentation
-     * @param {module:api/TaskApi~completeTaskFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.completeTaskForm = function(taskId, completeTaskFormRepresentation) {
       var postBody = completeTaskFormRepresentation;
@@ -331,8 +316,7 @@
     }
 
     /**
-     * Callback function to receive the result of the completeTask operation.
-     * @callback module:api/TaskApi~completeTaskCallback
+     * Function to receive the result of the completeTask operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -342,7 +326,6 @@
      * Complete Task
      * To complete a task (standalone or without a task form)
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~completeTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.completeTask = function(taskId) {
       var postBody = null;
@@ -376,8 +359,7 @@
     }
 
     /**
-     * Callback function to receive the result of the createNewTask operation.
-     * @callback module:api/TaskApi~createNewTaskCallback
+     * Function to receive the result of the createNewTask operation.
      * @param {String} error Error message, if any.
      * @param {module:model/TaskRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -387,8 +369,6 @@
      * Create a Standalone Task
      * Standalone Task is not associated with a process instance. You can define only task name &amp; description
      * @param {module:model/TaskRepresentation} taskRepresentation taskRepresentation
-     * @param {module:api/TaskApi~createNewTaskCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/TaskRepresentation}
      */
     this.createNewTask = function(taskRepresentation) {
       var postBody = taskRepresentation;
@@ -421,8 +401,7 @@
     }
 
     /**
-     * Callback function to receive the result of the createRelatedContentOnTask operation.
-     * @callback module:api/TaskApi~createRelatedContentOnTaskCallback
+     * Function to receive the result of the createRelatedContentOnTask operation.
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -434,8 +413,6 @@
      * @param {module:model/RelatedContentRepresentation} relatedContent relatedContent
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.isRelatedContent isRelatedContent
-     * @param {module:api/TaskApi~createRelatedContentOnTaskCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/RelatedContentRepresentation}
      */
     this.createRelatedContentOnTask = function(taskId, relatedContent, opts) {
       opts = opts || {};
@@ -476,8 +453,7 @@
     }
 
     /**
-     * Callback function to receive the result of the createRelatedContentOnTask operation.
-     * @callback module:api/TaskApi~createRelatedContentOnTaskCallback
+     * Function to receive the result of the createRelatedContentOnTask operation.
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -489,8 +465,6 @@
      * @param {File} file file
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.isRelatedContent isRelatedContent
-     * @param {module:api/TaskApi~createRelatedContentOnTaskCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/RelatedContentRepresentation}
      */
     this.createRelatedContentOnTask = function(taskId, file, opts) {
       opts = opts || {};
@@ -532,8 +506,7 @@
     }
 
     /**
-     * Callback function to receive the result of the deleteTask operation.
-     * @callback module:api/TaskApi~deleteTaskCallback
+     * Function to receive the result of the deleteTask operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -542,7 +515,6 @@
     /**
      * Delete a Task
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~deleteTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.deleteTask = function(taskId) {
       var postBody = null;
@@ -576,8 +548,7 @@
     }
 
     /**
-     * Callback function to receive the result of the filterTasks operation.
-     * @callback module:api/TaskApi~filterTasksCallback
+     * Function to receive the result of the filterTasks operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -586,8 +557,6 @@
     /**
      * Filter list of Task
      * @param {module:model/TaskFilterRequestRepresentation} requestNode requestNode
-     * @param {module:api/TaskApi~filterTasksCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.filterTasks = function(requestNode) {
       var postBody = requestNode;
@@ -620,8 +589,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getChecklist operation.
-     * @callback module:api/TaskApi~getChecklistCallback
+     * Function to receive the result of the getChecklist operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -630,8 +598,6 @@
     /**
      * Retrieve Checklist added to a task
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~getChecklistCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getChecklist = function(taskId) {
       var postBody = null;
@@ -665,8 +631,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getRelatedContentForTask operation.
-     * @callback module:api/TaskApi~getRelatedContentForTaskCallback
+     * Function to receive the result of the getRelatedContentForTask operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -675,8 +640,6 @@
     /**
      * Retrieve which content is attached to a task
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~getRelatedContentForTaskCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getRelatedContentForTask = function(taskId) {
       var postBody = null;
@@ -710,8 +673,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getRestFieldValues operation.
-     * @callback module:api/TaskApi~getRestFieldValuesCallback
+     * Function to receive the result of the getRestFieldValues operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/FormValueRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -723,8 +685,6 @@
      * @param {String} taskId taskId
      * @param {String} field field
      * @param {String} column column
-     * @param {module:api/TaskApi~getRestFieldValuesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {Array.<module:model/FormValueRepresentation>}
      */
     this.getRestFieldValues = function(taskId, field, column) {
       var postBody = null;
@@ -770,8 +730,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getRestFieldValues operation.
-     * @callback module:api/TaskApi~getRestFieldValuesCallback
+     * Function to receive the result of the getRestFieldValues operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/FormValueRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -782,8 +741,6 @@
      * Form field values that are populated through a REST backend, can be retrieved via this service
      * @param {String} taskId taskId
      * @param {String} field field
-     * @param {module:api/TaskApi~getRestFieldValuesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {Array.<module:model/FormValueRepresentation>}
      */
     this.getRestFieldValues = function(taskId, field) {
       var postBody = null;
@@ -823,8 +780,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getTaskComments operation.
-     * @callback module:api/TaskApi~getTaskCommentsCallback
+     * Function to receive the result of the getTaskComments operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -835,8 +791,6 @@
      * @param {String} taskId taskId
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.latestFirst latestFirst
-     * @param {module:api/TaskApi~getTaskCommentsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getTaskComments = function(taskId, opts) {
       opts = opts || {};
@@ -872,8 +826,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getTaskForm operation.
-     * @callback module:api/TaskApi~getTaskFormCallback
+     * Function to receive the result of the getTaskForm operation.
      * @param {String} error Error message, if any.
      * @param {module:model/FormDefinitionRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -882,8 +835,6 @@
     /**
      * Retrieve Task Form
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~getTaskFormCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/FormDefinitionRepresentation}
      */
     this.getTaskForm = function(taskId) {
       var postBody = null;
@@ -917,8 +868,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getTask operation.
-     * @callback module:api/TaskApi~getTaskCallback
+     * Function to receive the result of the getTask operation.
      * @param {String} error Error message, if any.
      * @param {module:model/TaskRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -927,8 +877,6 @@
     /**
      * Task Details
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~getTaskCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/TaskRepresentation}
      */
     this.getTask = function(taskId) {
       var postBody = null;
@@ -962,8 +910,7 @@
     }
 
     /**
-     * Callback function to receive the result of the involveUser operation.
-     * @callback module:api/TaskApi~involveUserCallback
+     * Function to receive the result of the involveUser operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -973,7 +920,6 @@
      * To involve a user with a task
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskApi~involveUserCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.involveUser = function(taskId, requestNode) {
       var postBody = requestNode;
@@ -1012,8 +958,7 @@
     }
 
     /**
-     * Callback function to receive the result of the listTasks operation.
-     * @callback module:api/TaskApi~listTasksCallback
+     * Function to receive the result of the listTasks operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -1022,17 +967,10 @@
     /**
      * List Task
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskApi~listTasksCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.listTasks = function(requestNode) {
-      var postBody = requestNode;
-
-      // verify the required parameter 'requestNode' is set
-      if (requestNode == undefined || requestNode == null) {
-        throw "Missing the required parameter 'requestNode' when calling listTasks";
-      }
-
+      var postBody = requestNode || {};
 
       var pathParams = {
       };
@@ -1056,8 +994,7 @@
     }
 
     /**
-     * Callback function to receive the result of the orderChecklist operation.
-     * @callback module:api/TaskApi~orderChecklistCallback
+     * Function to receive the result of the orderChecklist operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -1067,7 +1004,6 @@
      * Change the order of items on a checklist
      * @param {String} taskId taskId
      * @param {module:model/ChecklistOrderRepresentation} orderRepresentation orderRepresentation
-     * @param {module:api/TaskApi~orderChecklistCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.orderChecklist = function(taskId, orderRepresentation) {
       var postBody = orderRepresentation;
@@ -1106,8 +1042,7 @@
     }
 
     /**
-     * Callback function to receive the result of the removeForm operation.
-     * @callback module:api/TaskApi~removeFormCallback
+     * Function to receive the result of the removeForm operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -1116,7 +1051,6 @@
     /**
      * Remove a form to a task
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~removeFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.removeForm = function(taskId) {
       var postBody = null;
@@ -1150,8 +1084,7 @@
     }
 
     /**
-     * Callback function to receive the result of the removeInvolvedUser operation.
-     * @callback module:api/TaskApi~removeInvolvedUserCallback
+     * Function to receive the result of the removeInvolvedUser operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -1161,7 +1094,6 @@
      * Remove an involved user from a task
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskApi~removeInvolvedUserCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.removeInvolvedUser = function(taskId, requestNode) {
       var postBody = requestNode;
@@ -1200,8 +1132,7 @@
     }
 
     /**
-     * Callback function to receive the result of the saveTaskForm operation.
-     * @callback module:api/TaskApi~saveTaskFormCallback
+     * Function to receive the result of the saveTaskForm operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -1211,7 +1142,6 @@
      * Save Task Form
      * @param {String} taskId taskId
      * @param {module:model/SaveFormRepresentation} saveTaskFormRepresentation saveTaskFormRepresentation
-     * @param {module:api/TaskApi~saveTaskFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.saveTaskForm = function(taskId, saveTaskFormRepresentation) {
       var postBody = saveTaskFormRepresentation;
@@ -1250,8 +1180,7 @@
     }
 
     /**
-     * Callback function to receive the result of the unclaimTask operation.
-     * @callback module:api/TaskApi~unclaimTaskCallback
+     * Function to receive the result of the unclaimTask operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -1261,7 +1190,6 @@
      * Unclaim a task
      * To unclaim a task (in case the task was assigned to a group)
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~unclaimTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.unclaimTask = function(taskId) {
       var postBody = null;
@@ -1295,8 +1223,7 @@
     }
 
     /**
-     * Callback function to receive the result of the updateTask operation.
-     * @callback module:api/TaskApi~updateTaskCallback
+     * Function to receive the result of the updateTask operation.
      * @param {String} error Error message, if any.
      * @param {module:model/TaskRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -1307,7 +1234,6 @@
      * You can edit only name, description and dueDate (ISO 8601 string).
      * @param {String} taskId taskId
      * @param {module:model/TaskUpdateRepresentation} updated updated
-     * @param {module:api/TaskApi~updateTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TaskRepresentation}
      */
     this.updateTask = function(taskId, updated) {

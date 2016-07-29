@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the getProcessInstanceContent operation.
-     * @callback module:api/ProcessInstancesInformationApi~getProcessInstanceContentCallback
+     * Function to receive the result of the getProcessInstanceContent operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43,8 +42,6 @@
     /**
      * Retrieve content attached to process instance fields
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ProcessInstancesInformationApi~getProcessInstanceContentCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getProcessInstanceContent = function(processInstanceId) {
       var postBody = null;
@@ -78,8 +75,7 @@
     }
 
     /**
-     * Callback function to receive the result of the startNewProcessInstance operation.
-     * @callback module:api/ProcessInstancesInformationApi~startNewProcessInstanceCallback
+     * Function to receive the result of the startNewProcessInstance operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ProcessInstanceRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -88,8 +84,6 @@
     /**
      * Start a process instance
      * @param {module:model/CreateProcessInstanceRepresentation} startRequest startRequest
-     * @param {module:api/ProcessInstancesInformationApi~startNewProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ProcessInstanceRepresentation}
      */
     this.startNewProcessInstance = function(startRequest) {
       var postBody = startRequest;

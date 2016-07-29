@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the executeAction operation.
-     * @callback module:api/UserApi~executeActionCallback
+     * Function to receive the result of the executeAction operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -45,7 +44,6 @@
      * Typical action is updating/reset password
      * @param {Integer} userId userId
      * @param {module:model/UserActionRepresentation} actionRequest actionRequest
-     * @param {module:api/UserApi~executeActionCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.executeAction = function(userId, actionRequest) {
       var postBody = actionRequest;
@@ -84,8 +82,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getProfilePicture operation.
-     * @callback module:api/UserApi~getProfilePictureCallback
+     * Function to receive the result of the getProfilePicture operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -94,7 +91,6 @@
     /**
      * Retrieve user profile picture
      * @param {Integer} userId userId
-     * @param {module:api/UserApi~getProfilePictureCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.getProfilePicture = function(userId) {
       var postBody = null;
@@ -128,8 +124,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getUser operation.
-     * @callback module:api/UserApi~getUserCallback
+     * Function to receive the result of the getUser operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -138,8 +133,6 @@
     /**
      * Retrieve user information
      * @param {Integer} userId userId
-     * @param {module:api/UserApi~getUserCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/UserRepresentation}
      */
     this.getUser = function(userId) {
       var postBody = null;
@@ -173,8 +166,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getUsers operation.
-     * @callback module:api/UserApi~getUsersCallback
+     * Function to receive the result of the getUsers operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -192,8 +184,6 @@
      * @param {String} opts.excludeProcessId excludeProcessId
      * @param {Integer} opts.groupId groupId
      * @param {Integer} opts.tenantId tenantId
-     * @param {module:api/UserApi~getUsersCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getUsers = function(opts) {
       opts = opts || {};
@@ -230,8 +220,7 @@
     }
 
     /**
-     * Callback function to receive the result of the requestPasswordReset operation.
-     * @callback module:api/UserApi~requestPasswordResetCallback
+     * Function to receive the result of the requestPasswordReset operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -240,7 +229,6 @@
     /**
      * Request password reset
      * @param {module:model/ResetPasswordRepresentation} resetPassword resetPassword
-     * @param {module:api/UserApi~requestPasswordResetCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.requestPasswordReset = function(resetPassword) {
       var postBody = resetPassword;
@@ -273,8 +261,7 @@
     }
 
     /**
-     * Callback function to receive the result of the updateUser operation.
-     * @callback module:api/UserApi~updateUserCallback
+     * Function to receive the result of the updateUser operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -284,8 +271,6 @@
      * Update user information
      * @param {Integer} userId userId
      * @param {module:model/UserRepresentation} userRequest userRequest
-     * @param {module:api/UserApi~updateUserCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/UserRepresentation}
      */
     this.updateUser = function(userId, userRequest) {
       var postBody = userRequest;

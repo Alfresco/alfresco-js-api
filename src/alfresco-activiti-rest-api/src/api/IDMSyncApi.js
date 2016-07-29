@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the getLogFile operation.
-     * @callback module:api/IDMSyncApi~getLogFileCallback
+     * Function to receive the result of the getLogFile operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -43,7 +42,6 @@
     /**
      * getLogFile
      * @param {Integer} syncLogEntryId syncLogEntryId
-     * @param {module:api/IDMSyncApi~getLogFileCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.getLogFile = function(syncLogEntryId) {
       var postBody = null;
@@ -77,8 +75,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getSyncLogEntries operation.
-     * @callback module:api/IDMSyncApi~getSyncLogEntriesCallback
+     * Function to receive the result of the getSyncLogEntries operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/SyncLogEntryRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -90,8 +87,6 @@
      * @param {Integer} opts.tenantId tenantId
      * @param {Integer} opts.page page
      * @param {Integer} opts.size size
-     * @param {module:api/IDMSyncApi~getSyncLogEntriesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {Array.<module:model/SyncLogEntryRepresentation>}
      */
     this.getSyncLogEntries = function(opts) {
       opts = opts || {};

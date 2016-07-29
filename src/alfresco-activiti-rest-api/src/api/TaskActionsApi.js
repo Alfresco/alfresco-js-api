@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the assignTask operation.
-     * @callback module:api/TaskActionsApi~assignTaskCallback
+     * Function to receive the result of the assignTask operation.
      * @param {String} error Error message, if any.
      * @param {module:model/TaskRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44,8 +43,6 @@
      * Assign a task to a user
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskActionsApi~assignTaskCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/TaskRepresentation}
      */
     this.assignTask = function(taskId, requestNode) {
       var postBody = requestNode;
@@ -84,8 +81,7 @@
     }
 
     /**
-     * Callback function to receive the result of the attachForm operation.
-     * @callback module:api/TaskActionsApi~attachFormCallback
+     * Function to receive the result of the attachForm operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -95,7 +91,6 @@
      * Attach a form to a task
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskActionsApi~attachFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.attachForm = function(taskId, requestNode) {
       var postBody = requestNode;
@@ -134,8 +129,7 @@
     }
 
     /**
-     * Callback function to receive the result of the claimTask operation.
-     * @callback module:api/TaskActionsApi~claimTaskCallback
+     * Function to receive the result of the claimTask operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -145,7 +139,6 @@
      * Claim a task
      * To claim a task (in case the task is assigned to a group)
      * @param {String} taskId taskId
-     * @param {module:api/TaskActionsApi~claimTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.claimTask = function(taskId) {
       var postBody = null;
@@ -179,8 +172,7 @@
     }
 
     /**
-     * Callback function to receive the result of the completeTask operation.
-     * @callback module:api/TaskActionsApi~completeTaskCallback
+     * Function to receive the result of the completeTask operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -190,7 +182,6 @@
      * Complete Task
      * To complete a task (standalone or without a task form)
      * @param {String} taskId taskId
-     * @param {module:api/TaskActionsApi~completeTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.completeTask = function(taskId) {
       var postBody = null;
@@ -224,8 +215,7 @@
     }
 
     /**
-     * Callback function to receive the result of the involveUser operation.
-     * @callback module:api/TaskActionsApi~involveUserCallback
+     * Function to receive the result of the involveUser operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -235,7 +225,6 @@
      * To involve a user with a task
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskActionsApi~involveUserCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.involveUser = function(taskId, requestNode) {
       var postBody = requestNode;
@@ -274,8 +263,7 @@
     }
 
     /**
-     * Callback function to receive the result of the removeForm operation.
-     * @callback module:api/TaskActionsApi~removeFormCallback
+     * Function to receive the result of the removeForm operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -284,7 +272,6 @@
     /**
      * Remove a form to a task
      * @param {String} taskId taskId
-     * @param {module:api/TaskActionsApi~removeFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.removeForm = function(taskId) {
       var postBody = null;
@@ -318,8 +305,7 @@
     }
 
     /**
-     * Callback function to receive the result of the removeInvolvedUser operation.
-     * @callback module:api/TaskActionsApi~removeInvolvedUserCallback
+     * Function to receive the result of the removeInvolvedUser operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -329,7 +315,6 @@
      * Remove an involved user from a task
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskActionsApi~removeInvolvedUserCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.removeInvolvedUser = function(taskId, requestNode) {
       var postBody = requestNode;
@@ -368,8 +353,7 @@
     }
 
     /**
-     * Callback function to receive the result of the unclaimTask operation.
-     * @callback module:api/TaskActionsApi~unclaimTaskCallback
+     * Function to receive the result of the unclaimTask operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -379,7 +363,6 @@
      * Unclaim a task
      * To unclaim a task (in case the task was assigned to a group)
      * @param {String} taskId taskId
-     * @param {module:api/TaskActionsApi~unclaimTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.unclaimTask = function(taskId) {
       var postBody = null;

@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the getModelHistoryCollection operation.
-     * @callback module:api/ModelsHistoryApi~getModelHistoryCollectionCallback
+     * Function to receive the result of the getModelHistoryCollection operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45,8 +44,6 @@
      * @param {Integer} modelId modelId
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.includeLatestVersion includeLatestVersion
-     * @param {module:api/ModelsHistoryApi~getModelHistoryCollectionCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getModelHistoryCollection = function(modelId, opts) {
       opts = opts || {};
@@ -82,8 +79,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getProcessModelHistory operation.
-     * @callback module:api/ModelsHistoryApi~getProcessModelHistoryCallback
+     * Function to receive the result of the getProcessModelHistory operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -93,8 +89,6 @@
      * To get a particular older version of a model
      * @param {Integer} modelId modelId
      * @param {Integer} modelHistoryId modelHistoryId
-     * @param {module:api/ModelsHistoryApi~getProcessModelHistoryCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ModelRepresentation}
      */
     this.getProcessModelHistory = function(modelId, modelHistoryId) {
       var postBody = null;

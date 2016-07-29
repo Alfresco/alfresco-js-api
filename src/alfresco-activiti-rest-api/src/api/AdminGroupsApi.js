@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the activate operation.
-     * @callback module:api/AdminGroupsApi~activateCallback
+     * Function to receive the result of the activate operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -43,7 +42,6 @@
     /**
      * activate
      * @param {Integer} groupId groupId
-     * @param {module:api/AdminGroupsApi~activateCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.activate = function(groupId) {
       var postBody = null;
@@ -77,8 +75,7 @@
     }
 
     /**
-     * Callback function to receive the result of the addAllUsersToGroup operation.
-     * @callback module:api/AdminGroupsApi~addAllUsersToGroupCallback
+     * Function to receive the result of the addAllUsersToGroup operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -87,7 +84,6 @@
     /**
      * addAllUsersToGroup
      * @param {Integer} groupId groupId
-     * @param {module:api/AdminGroupsApi~addAllUsersToGroupCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.addAllUsersToGroup = function(groupId) {
       var postBody = null;
@@ -121,8 +117,7 @@
     }
 
     /**
-     * Callback function to receive the result of the addGroupCapabilities operation.
-     * @callback module:api/AdminGroupsApi~addGroupCapabilitiesCallback
+     * Function to receive the result of the addGroupCapabilities operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -132,7 +127,6 @@
      * addGroupCapabilities
      * @param {Integer} groupId groupId
      * @param {module:model/AddGroupCapabilitiesRepresentation} addGroupCapabilitiesRepresentation addGroupCapabilitiesRepresentation
-     * @param {module:api/AdminGroupsApi~addGroupCapabilitiesCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.addGroupCapabilities = function(groupId, addGroupCapabilitiesRepresentation) {
       var postBody = addGroupCapabilitiesRepresentation;
@@ -171,8 +165,7 @@
     }
 
     /**
-     * Callback function to receive the result of the addGroupMember operation.
-     * @callback module:api/AdminGroupsApi~addGroupMemberCallback
+     * Function to receive the result of the addGroupMember operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -182,7 +175,6 @@
      * addGroupMember
      * @param {Integer} groupId groupId
      * @param {Integer} userId userId
-     * @param {module:api/AdminGroupsApi~addGroupMemberCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.addGroupMember = function(groupId, userId) {
       var postBody = null;
@@ -222,8 +214,7 @@
     }
 
     /**
-     * Callback function to receive the result of the addRelatedGroup operation.
-     * @callback module:api/AdminGroupsApi~addRelatedGroupCallback
+     * Function to receive the result of the addRelatedGroup operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -234,7 +225,6 @@
      * @param {Integer} groupId groupId
      * @param {Integer} relatedGroupId relatedGroupId
      * @param {String} type type
-     * @param {module:api/AdminGroupsApi~addRelatedGroupCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.addRelatedGroup = function(groupId, relatedGroupId, type) {
       var postBody = null;
@@ -280,8 +270,7 @@
     }
 
     /**
-     * Callback function to receive the result of the createNewGroup operation.
-     * @callback module:api/AdminGroupsApi~createNewGroupCallback
+     * Function to receive the result of the createNewGroup operation.
      * @param {String} error Error message, if any.
      * @param {module:model/GroupRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -290,7 +279,6 @@
     /**
      * createNewGroup
      * @param {module:model/GroupRepresentation} groupRepresentation groupRepresentation
-     * @param {module:api/AdminGroupsApi~createNewGroupCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/GroupRepresentation}
      */
     this.createNewGroup = function(groupRepresentation) {
@@ -324,8 +312,7 @@
     }
 
     /**
-     * Callback function to receive the result of the deleteGroupCapability operation.
-     * @callback module:api/AdminGroupsApi~deleteGroupCapabilityCallback
+     * Function to receive the result of the deleteGroupCapability operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -335,7 +322,6 @@
      * deleteGroupCapability
      * @param {Integer} groupId groupId
      * @param {Integer} groupCapabilityId groupCapabilityId
-     * @param {module:api/AdminGroupsApi~deleteGroupCapabilityCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.deleteGroupCapability = function(groupId, groupCapabilityId) {
       var postBody = null;
@@ -375,8 +361,7 @@
     }
 
     /**
-     * Callback function to receive the result of the deleteGroupMember operation.
-     * @callback module:api/AdminGroupsApi~deleteGroupMemberCallback
+     * Function to receive the result of the deleteGroupMember operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -386,7 +371,6 @@
      * deleteGroupMember
      * @param {Integer} groupId groupId
      * @param {Integer} userId userId
-     * @param {module:api/AdminGroupsApi~deleteGroupMemberCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.deleteGroupMember = function(groupId, userId) {
       var postBody = null;
@@ -426,8 +410,7 @@
     }
 
     /**
-     * Callback function to receive the result of the deleteGroup operation.
-     * @callback module:api/AdminGroupsApi~deleteGroupCallback
+     * Function to receive the result of the deleteGroup operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -436,7 +419,6 @@
     /**
      * deleteGroup
      * @param {Integer} groupId groupId
-     * @param {module:api/AdminGroupsApi~deleteGroupCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.deleteGroup = function(groupId) {
       var postBody = null;
@@ -470,8 +452,7 @@
     }
 
     /**
-     * Callback function to receive the result of the deleteRelatedGroup operation.
-     * @callback module:api/AdminGroupsApi~deleteRelatedGroupCallback
+     * Function to receive the result of the deleteRelatedGroup operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -481,7 +462,6 @@
      * deleteRelatedGroup
      * @param {Integer} groupId groupId
      * @param {Integer} relatedGroupId relatedGroupId
-     * @param {module:api/AdminGroupsApi~deleteRelatedGroupCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.deleteRelatedGroup = function(groupId, relatedGroupId) {
       var postBody = null;
@@ -521,8 +501,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getCapabilities operation.
-     * @callback module:api/AdminGroupsApi~getCapabilitiesCallback
+     * Function to receive the result of the getCapabilities operation.
      * @param {String} error Error message, if any.
      * @param {Array.<'String'>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -531,7 +510,6 @@
     /**
      * getCapabilities
      * @param {Integer} groupId groupId
-     * @param {module:api/AdminGroupsApi~getCapabilitiesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<'String'>}
      */
     this.getCapabilities = function(groupId) {
@@ -566,8 +544,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getGroupUsers operation.
-     * @callback module:api/AdminGroupsApi~getGroupUsersCallback
+     * Function to receive the result of the getGroupUsers operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -580,7 +557,6 @@
      * @param {String} opts.filter filter
      * @param {Integer} opts.page page
      * @param {Integer} opts.pageSize pageSize
-     * @param {module:api/AdminGroupsApi~getGroupUsersCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getGroupUsers = function(groupId, opts) {
@@ -619,8 +595,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getGroup operation.
-     * @callback module:api/AdminGroupsApi~getGroupCallback
+     * Function to receive the result of the getGroup operation.
      * @param {String} error Error message, if any.
      * @param {module:model/AbstractGroupRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -632,7 +607,6 @@
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.includeAllUsers includeAllUsers
      * @param {Boolean} opts.summary summary
-     * @param {module:api/AdminGroupsApi~getGroupCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/AbstractGroupRepresentation}
      */
     this.getGroup = function(groupId, opts) {
@@ -670,8 +644,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getGroups operation.
-     * @callback module:api/AdminGroupsApi~getGroupsCallback
+     * Function to receive the result of the getGroups operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/LightGroupRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -683,7 +656,6 @@
      * @param {Integer} opts.tenantId tenantId
      * @param {Boolean} opts.functional functional
      * @param {Boolean} opts.summary summary
-     * @param {module:api/AdminGroupsApi~getGroupsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/LightGroupRepresentation>}
      */
     this.getGroups = function(opts) {
@@ -716,8 +688,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getRelatedGroups operation.
-     * @callback module:api/AdminGroupsApi~getRelatedGroupsCallback
+     * Function to receive the result of the getRelatedGroups operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/LightGroupRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -726,7 +697,6 @@
     /**
      * getRelatedGroups
      * @param {Integer} groupId groupId
-     * @param {module:api/AdminGroupsApi~getRelatedGroupsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/LightGroupRepresentation>}
      */
     this.getRelatedGroups = function(groupId) {
@@ -761,8 +731,7 @@
     }
 
     /**
-     * Callback function to receive the result of the updateGroup operation.
-     * @callback module:api/AdminGroupsApi~updateGroupCallback
+     * Function to receive the result of the updateGroup operation.
      * @param {String} error Error message, if any.
      * @param {module:model/GroupRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -772,7 +741,6 @@
      * updateGroup
      * @param {Integer} groupId groupId
      * @param {module:model/GroupRepresentation} groupRepresentation groupRepresentation
-     * @param {module:api/AdminGroupsApi~updateGroupCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/GroupRepresentation}
      */
     this.updateGroup = function(groupId, groupRepresentation) {

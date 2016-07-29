@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the getAllSites operation.
-     * @callback module:api/IntegrationAlfrescoOnPremiseApi~getAllSitesCallback
+     * Function to receive the result of the getAllSites operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44,8 +43,6 @@
      * List Alfresco sites
      * Returns ALL Sites
      * @param {String} repositoryId repositoryId
-     * @param {module:api/IntegrationAlfrescoOnPremiseApi~getAllSitesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getAllSites = function(repositoryId) {
       var postBody = null;
@@ -79,8 +76,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getContentInFolder operation.
-     * @callback module:api/IntegrationAlfrescoOnPremiseApi~getContentInFolderCallback
+     * Function to receive the result of the getContentInFolder operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -90,8 +86,6 @@
      * List file &amp; folders inside a specific folder
      * @param {String} repositoryId repositoryId
      * @param {String} folderId folderId
-     * @param {module:api/IntegrationAlfrescoOnPremiseApi~getContentInFolderCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getContentInFolder = function(repositoryId, folderId) {
       var postBody = null;
@@ -131,8 +125,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getContentInSite operation.
-     * @callback module:api/IntegrationAlfrescoOnPremiseApi~getContentInSiteCallback
+     * Function to receive the result of the getContentInSite operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -142,8 +135,6 @@
      * List file &amp; folders inside a specific site
      * @param {String} repositoryId repositoryId
      * @param {String} siteId siteId
-     * @param {module:api/IntegrationAlfrescoOnPremiseApi~getContentInSiteCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getContentInSite = function(repositoryId, siteId) {
       var postBody = null;
@@ -183,8 +174,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getRepositories operation.
-     * @callback module:api/IntegrationAlfrescoOnPremiseApi~getRepositoriesCallback
+     * Function to receive the result of the getRepositories operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -196,8 +186,6 @@
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.tenantId tenantId
      * @param {Boolean} opts.includeAccounts includeAccounts
-     * @param {module:api/IntegrationAlfrescoOnPremiseApi~getRepositoriesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getRepositories = function(opts) {
       opts = opts || {};

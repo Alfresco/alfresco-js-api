@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the getFormHistory operation.
-     * @callback module:api/EditorApi~getFormHistoryCallback
+     * Function to receive the result of the getFormHistory operation.
      * @param {String} error Error message, if any.
      * @param {module:model/FormRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44,8 +43,6 @@
      * getFormHistory
      * @param {Integer} formId formId
      * @param {Integer} formHistoryId formHistoryId
-     * @param {module:api/EditorApi~getFormHistoryCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/FormRepresentation}
      */
     this.getFormHistory = function(formId, formHistoryId) {
       var postBody = null;
@@ -85,8 +82,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getForm operation.
-     * @callback module:api/EditorApi~getFormCallback
+     * Function to receive the result of the getForm operation.
      * @param {String} error Error message, if any.
      * @param {module:model/FormRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -95,8 +91,6 @@
     /**
      * getForm
      * @param {Integer} formId formId
-     * @param {module:api/EditorApi~getFormCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/FormRepresentation}
      */
     this.getForm = function(formId) {
       var postBody = null;
@@ -130,8 +124,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getForms operation.
-     * @callback module:api/EditorApi~getFormsCallback
+     * Function to receive the result of the getForms operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/FormRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -167,8 +160,7 @@
     }
 
     /**
-     * Callback function to receive the result of the saveForm operation.
-     * @callback module:api/EditorApi~saveFormCallback
+     * Function to receive the result of the saveForm operation.
      * @param {String} error Error message, if any.
      * @param {module:model/FormRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -178,8 +170,6 @@
      * saveForm
      * @param {Integer} formId formId
      * @param {module:model/FormSaveRepresentation} saveRepresentation saveRepresentation
-     * @param {module:api/EditorApi~saveFormCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/FormRepresentation}
      */
     this.saveForm = function(formId, saveRepresentation) {
       var postBody = saveRepresentation;
@@ -218,8 +208,7 @@
     }
 
     /**
-     * Callback function to receive the result of the validateModel operation.
-     * @callback module:api/EditorApi~validateModelCallback
+     * Function to receive the result of the validateModel operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/ValidationErrorRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -229,8 +218,6 @@
      * validateModel
      * @param {Integer} formId formId
      * @param {module:model/FormSaveRepresentation} saveRepresentation saveRepresentation
-     * @param {module:api/EditorApi~validateModelCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {Array.<module:model/ValidationErrorRepresentation>}
      */
     this.validateModel = function(formId, saveRepresentation) {
       var postBody = saveRepresentation;

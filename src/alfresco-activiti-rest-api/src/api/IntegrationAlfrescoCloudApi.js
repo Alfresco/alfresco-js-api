@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the confirmAuthorisation operation.
-     * @callback module:api/IntegrationAlfrescoCloudApi~confirmAuthorisationCallback
+     * Function to receive the result of the confirmAuthorisation operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -44,7 +43,6 @@
      * Alfresco Cloud Authorization
      * Returns Alfresco Oauth HTML Page
      * @param {String} code code
-     * @param {module:api/IntegrationAlfrescoCloudApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.confirmAuthorisation = function(code) {
       var postBody = null;
@@ -78,8 +76,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getAllNetworks operation.
-     * @callback module:api/IntegrationAlfrescoCloudApi~getAllNetworksCallback
+     * Function to receive the result of the getAllNetworks operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -114,8 +111,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getAllSites operation.
-     * @callback module:api/IntegrationAlfrescoCloudApi~getAllSitesCallback
+     * Function to receive the result of the getAllSites operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -125,8 +121,6 @@
      * List Alfresco sites
      * Returns ALL Sites
      * @param {String} networkId networkId
-     * @param {module:api/IntegrationAlfrescoCloudApi~getAllSitesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getAllSites = function(networkId) {
       var postBody = null;
@@ -160,8 +154,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getContentInFolder operation.
-     * @callback module:api/IntegrationAlfrescoCloudApi~getContentInFolderCallback
+     * Function to receive the result of the getContentInFolder operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -171,8 +164,6 @@
      * List file &amp; folders inside a specific folder
      * @param {String} networkId networkId
      * @param {String} folderId folderId
-     * @param {module:api/IntegrationAlfrescoCloudApi~getContentInFolderCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getContentInFolder = function(networkId, folderId) {
       var postBody = null;
@@ -212,8 +203,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getContentInSite operation.
-     * @callback module:api/IntegrationAlfrescoCloudApi~getContentInSiteCallback
+     * Function to receive the result of the getContentInSite operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -223,8 +213,6 @@
      * List file &amp; folders inside a specific site
      * @param {String} networkId networkId
      * @param {String} siteId siteId
-     * @param {module:api/IntegrationAlfrescoCloudApi~getContentInSiteCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getContentInSite = function(networkId, siteId) {
       var postBody = null;

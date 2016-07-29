@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the getProcessDefinitions operation.
-     * @callback module:api/ProcessDefinitionsApi~getProcessDefinitionsCallback
+     * Function to receive the result of the getProcessDefinitions operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46,8 +45,6 @@
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.latest latest
      * @param {Integer} opts.appDefinitionId appDefinitionId
-     * @param {module:api/ProcessDefinitionsApi~getProcessDefinitionsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getProcessDefinitions = function(opts) {
       opts = opts || {};

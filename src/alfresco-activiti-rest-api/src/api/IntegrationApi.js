@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the confirmAuthorisation operation.
-     * @callback module:api/IntegrationApi~confirmAuthorisationCallback
+     * Function to receive the result of the confirmAuthorisation operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -44,7 +43,6 @@
      * Alfresco Cloud Authorization
      * Returns Alfresco Oauth HTML Page
      * @param {String} code code
-     * @param {module:api/IntegrationApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.confirmAuthorisation = function(code) {
       var postBody = null;
@@ -78,8 +76,7 @@
     }
 
     /**
-     * Callback function to receive the result of the confirmAuthorisation operation.
-     * @callback module:api/IntegrationApi~confirmAuthorisationCallback
+     * Function to receive the result of the confirmAuthorisation operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -89,7 +86,6 @@
      * Box Authorization
      * Returns Box Oauth HTML Page
      * @param {String} code code
-     * @param {module:api/IntegrationApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.confirmAuthorisation = function(code) {
       var postBody = null;
@@ -123,8 +119,7 @@
     }
 
     /**
-     * Callback function to receive the result of the confirmAuthorisation operation.
-     * @callback module:api/IntegrationApi~confirmAuthorisationCallback
+     * Function to receive the result of the confirmAuthorisation operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -134,7 +129,6 @@
      * Drive Authorization
      * Returns Drive Oauth HTML Page
      * @param {String} code code
-     * @param {module:api/IntegrationApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.confirmAuthorisation = function(code) {
       var postBody = null;
@@ -168,9 +162,7 @@
     }
 
     /**
-     * Callback function to receive the result of the createRepositoryAccount operation.
-     * @callback module:api/IntegrationApi~createRepositoryAccountCallback
-     * @param {String} error Error message, if any.
+     * Function to receive the result of the createRepositoryAccount operation.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
      */
@@ -179,7 +171,6 @@
      * Create Box account
      * @param {Integer} userId userId
      * @param {module:model/UserAccountCredentialsRepresentation} credentials credentials
-     * @param {module:api/IntegrationApi~createRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.createRepositoryAccount = function(userId, credentials) {
       var postBody = credentials;
@@ -218,8 +209,7 @@
     }
 
     /**
-     * Callback function to receive the result of the deleteRepositoryAccount operation.
-     * @callback module:api/IntegrationApi~deleteRepositoryAccountCallback
+     * Function to receive the result of the deleteRepositoryAccount operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -228,7 +218,6 @@
     /**
      * Delete Box account
      * @param {Integer} userId userId
-     * @param {module:api/IntegrationApi~deleteRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.deleteRepositoryAccount = function(userId) {
       var postBody = null;
@@ -262,8 +251,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getAllNetworks operation.
-     * @callback module:api/IntegrationApi~getAllNetworksCallback
+     * Function to receive the result of the getAllNetworks operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -298,8 +286,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getAllSites operation.
-     * @callback module:api/IntegrationApi~getAllSitesCallback
+     * Function to receive the result of the getAllSites operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -309,8 +296,6 @@
      * List Alfresco sites
      * Returns ALL Sites
      * @param {String} networkId networkId
-     * @param {module:api/IntegrationApi~getAllSitesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getAllSites = function(networkId) {
       var postBody = null;
@@ -344,8 +329,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getAllSites operation.
-     * @callback module:api/IntegrationApi~getAllSitesCallback
+     * Function to receive the result of the getAllSites operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -355,8 +339,6 @@
      * List Alfresco sites
      * Returns ALL Sites
      * @param {String} repositoryId repositoryId
-     * @param {module:api/IntegrationApi~getAllSitesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getAllSites = function(repositoryId) {
       var postBody = null;
@@ -390,8 +372,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getBoxPluginStatus operation.
-     * @callback module:api/IntegrationApi~getBoxPluginStatusCallback
+     * Function to receive the result of the getBoxPluginStatus operation.
      * @param {String} error Error message, if any.
      * @param {'Boolean'} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -426,8 +407,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getContentInFolder operation.
-     * @callback module:api/IntegrationApi~getContentInFolderCallback
+     * Function to receive the result of the getContentInFolder operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -437,8 +417,6 @@
      * List file &amp; folders inside a specific folder
      * @param {String} networkId networkId
      * @param {String} folderId folderId
-     * @param {module:api/IntegrationApi~getContentInFolderCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getContentInFolder = function(networkId, folderId) {
       var postBody = null;
@@ -478,8 +456,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getContentInFolder operation.
-     * @callback module:api/IntegrationApi~getContentInFolderCallback
+     * Function to receive the result of the getContentInFolder operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -489,8 +466,6 @@
      * List file &amp; folders inside a specific folder
      * @param {String} repositoryId repositoryId
      * @param {String} folderId folderId
-     * @param {module:api/IntegrationApi~getContentInFolderCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getContentInFolder = function(repositoryId, folderId) {
       var postBody = null;
@@ -530,8 +505,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getContentInSite operation.
-     * @callback module:api/IntegrationApi~getContentInSiteCallback
+     * Function to receive the result of the getContentInSite operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -541,8 +515,6 @@
      * List file &amp; folders inside a specific site
      * @param {String} networkId networkId
      * @param {String} siteId siteId
-     * @param {module:api/IntegrationApi~getContentInSiteCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getContentInSite = function(networkId, siteId) {
       var postBody = null;
@@ -582,8 +554,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getContentInSite operation.
-     * @callback module:api/IntegrationApi~getContentInSiteCallback
+     * Function to receive the result of the getContentInSite operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -593,8 +564,6 @@
      * List file &amp; folders inside a specific site
      * @param {String} repositoryId repositoryId
      * @param {String} siteId siteId
-     * @param {module:api/IntegrationApi~getContentInSiteCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getContentInSite = function(repositoryId, siteId) {
       var postBody = null;
@@ -634,8 +603,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getFiles operation.
-     * @callback module:api/IntegrationApi~getFilesCallback
+     * Function to receive the result of the getFiles operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -646,8 +614,6 @@
      * @param {Object} opts Optional parameters
      * @param {String} opts.filter filter
      * @param {String} opts.parent parent
-     * @param {module:api/IntegrationApi~getFilesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getFiles = function(opts) {
       opts = opts || {};
@@ -678,8 +644,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getFiles operation.
-     * @callback module:api/IntegrationApi~getFilesCallback
+     * Function to receive the result of the getFiles operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -691,8 +656,6 @@
      * @param {String} opts.filter filter
      * @param {String} opts.parent parent
      * @param {Boolean} opts.currentFolderOnly currentFolderOnly
-     * @param {module:api/IntegrationApi~getFilesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getFiles = function(opts) {
       opts = opts || {};
@@ -724,8 +687,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getRepositories operation.
-     * @callback module:api/IntegrationApi~getRepositoriesCallback
+     * Function to receive the result of the getRepositories operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -737,8 +699,6 @@
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.tenantId tenantId
      * @param {Boolean} opts.includeAccounts includeAccounts
-     * @param {module:api/IntegrationApi~getRepositoriesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getRepositories = function(opts) {
       opts = opts || {};
@@ -769,8 +729,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getRepositoryAccount operation.
-     * @callback module:api/IntegrationApi~getRepositoryAccountCallback
+     * Function to receive the result of the getRepositoryAccount operation.
      * @param {String} error Error message, if any.
      * @param {module:model/BoxUserAccountCredentialsRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -779,8 +738,6 @@
     /**
      * List Box Account
      * @param {Integer} userId userId
-     * @param {module:api/IntegrationApi~getRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/BoxUserAccountCredentialsRepresentation}
      */
     this.getRepositoryAccount = function(userId) {
       var postBody = null;
@@ -814,8 +771,7 @@
     }
 
     /**
-     * Callback function to receive the result of the updateRepositoryAccount operation.
-     * @callback module:api/IntegrationApi~updateRepositoryAccountCallback
+     * Function to receive the result of the updateRepositoryAccount operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -825,7 +781,6 @@
      * Update Box account
      * @param {Integer} userId userId
      * @param {module:model/UserAccountCredentialsRepresentation} credentials credentials
-     * @param {module:api/IntegrationApi~updateRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.updateRepositoryAccount = function(userId, credentials) {
       var postBody = credentials;

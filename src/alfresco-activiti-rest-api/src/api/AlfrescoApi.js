@@ -33,7 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the confirmAuthorisation operation.
+     * Function to receive the result of the confirmAuthorisation operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -76,7 +76,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getAllNetworks operation.
+     * Function to receive the result of the getAllNetworks operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -112,7 +112,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getAllSites operation.
+     * Function to receive the result of the getAllSites operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -156,7 +156,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getAllSites operation.
+     * Function to receive the result of the getAllSites operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -200,7 +200,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getContentInFolder operation.
+     * Function to receive the result of the getContentInFolder operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -250,7 +250,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getContentInFolder operation.
+     * Function to receive the result of the getContentInFolder operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -300,7 +300,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getContentInSite operation.
+     * Function to receive the result of the getContentInSite operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -350,7 +350,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getContentInSite operation.
+     * Function to receive the result of the getContentInSite operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -400,7 +400,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getRepositories operation.
+     * Function to receive the result of the getRepositories operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.

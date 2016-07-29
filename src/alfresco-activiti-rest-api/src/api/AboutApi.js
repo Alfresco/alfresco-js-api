@@ -33,7 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the getAppVersion operation.
+     * Function to receive the result of the getAppVersion operation.
      * @param {String} error Error message, if any.
      * @param {Object.<String, {'String': 'String'}>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.

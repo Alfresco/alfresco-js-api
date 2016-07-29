@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the confirmAuthorisation operation.
-     * @callback module:api/IntegrationBoxApi~confirmAuthorisationCallback
+     * Function to receive the result of the confirmAuthorisation operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -44,7 +43,6 @@
      * Box Authorization
      * Returns Box Oauth HTML Page
      * @param {String} code code
-     * @param {module:api/IntegrationBoxApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.confirmAuthorisation = function(code) {
       var postBody = null;
@@ -78,8 +76,7 @@
     }
 
     /**
-     * Callback function to receive the result of the createRepositoryAccount operation.
-     * @callback module:api/IntegrationBoxApi~createRepositoryAccountCallback
+     * Function to receive the result of the createRepositoryAccount operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -89,7 +86,6 @@
      * Create Box account
      * @param {Integer} userId userId
      * @param {module:model/UserAccountCredentialsRepresentation} credentials credentials
-     * @param {module:api/IntegrationBoxApi~createRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.createRepositoryAccount = function(userId, credentials) {
       var postBody = credentials;
@@ -128,8 +124,7 @@
     }
 
     /**
-     * Callback function to receive the result of the deleteRepositoryAccount operation.
-     * @callback module:api/IntegrationBoxApi~deleteRepositoryAccountCallback
+     * Function to receive the result of the deleteRepositoryAccount operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -138,7 +133,6 @@
     /**
      * Delete Box account
      * @param {Integer} userId userId
-     * @param {module:api/IntegrationBoxApi~deleteRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.deleteRepositoryAccount = function(userId) {
       var postBody = null;
@@ -172,8 +166,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getBoxPluginStatus operation.
-     * @callback module:api/IntegrationBoxApi~getBoxPluginStatusCallback
+     * Function to receive the result of the getBoxPluginStatus operation.
      * @param {String} error Error message, if any.
      * @param {'Boolean'} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -208,8 +201,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getFiles operation.
-     * @callback module:api/IntegrationBoxApi~getFilesCallback
+     * Function to receive the result of the getFiles operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -220,8 +212,6 @@
      * @param {Object} opts Optional parameters
      * @param {String} opts.filter filter
      * @param {String} opts.parent parent
-     * @param {module:api/IntegrationBoxApi~getFilesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getFiles = function(opts) {
       opts = opts || {};
@@ -252,8 +242,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getRepositoryAccount operation.
-     * @callback module:api/IntegrationBoxApi~getRepositoryAccountCallback
+     * Function to receive the result of the getRepositoryAccount operation.
      * @param {String} error Error message, if any.
      * @param {module:model/BoxUserAccountCredentialsRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -262,8 +251,6 @@
     /**
      * List Box Account
      * @param {Integer} userId userId
-     * @param {module:api/IntegrationBoxApi~getRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/BoxUserAccountCredentialsRepresentation}
      */
     this.getRepositoryAccount = function(userId) {
       var postBody = null;
@@ -297,8 +284,7 @@
     }
 
     /**
-     * Callback function to receive the result of the updateRepositoryAccount operation.
-     * @callback module:api/IntegrationBoxApi~updateRepositoryAccountCallback
+     * Function to receive the result of the updateRepositoryAccount operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -308,7 +294,6 @@
      * Update Box account
      * @param {Integer} userId userId
      * @param {module:model/UserAccountCredentialsRepresentation} credentials credentials
-     * @param {module:api/IntegrationBoxApi~updateRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.updateRepositoryAccount = function(userId, credentials) {
       var postBody = credentials;

@@ -33,7 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the bulkUpdateUsers operation.
+     * Function to receive the result of the bulkUpdateUsers operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -74,7 +74,7 @@
     }
 
     /**
-     * Callback function to receive the result of the createNewUser operation.
+     * Function to receive the result of the createNewUser operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -116,7 +116,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getUser operation.
+     * Function to receive the result of the getUser operation.
      * @param {String} error Error message, if any.
      * @param {module:model/AbstractUserRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -163,7 +163,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getUsers operation.
+     * Function to receive the result of the getUsers operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -223,7 +223,7 @@
     }
 
     /**
-     * Callback function to receive the result of the updateUserDetails operation.
+     * Function to receive the result of the updateUserDetails operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.

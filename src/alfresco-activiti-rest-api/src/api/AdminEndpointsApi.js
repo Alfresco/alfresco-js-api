@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the createBasicAuthConfiguration operation.
-     * @callback module:api/AdminEndpointsApi~createBasicAuthConfigurationCallback
+     * Function to receive the result of the createBasicAuthConfiguration operation.
      * @param {String} error Error message, if any.
      * @param {module:model/EndpointBasicAuthRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43,8 +42,6 @@
     /**
      * createBasicAuthConfiguration
      * @param {module:model/CreateEndpointBasicAuthRepresentation} createRepresentation createRepresentation
-     * @param {module:api/AdminEndpointsApi~createBasicAuthConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/EndpointBasicAuthRepresentation}
      */
     this.createBasicAuthConfiguration = function(createRepresentation) {
       var postBody = createRepresentation;
@@ -77,8 +74,7 @@
     }
 
     /**
-     * Callback function to receive the result of the createEndpointConfiguration operation.
-     * @callback module:api/AdminEndpointsApi~createEndpointConfigurationCallback
+     * Function to receive the result of the createEndpointConfiguration operation.
      * @param {String} error Error message, if any.
      * @param {module:model/EndpointConfigurationRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -87,8 +83,6 @@
     /**
      * createEndpointConfiguration
      * @param {module:model/EndpointConfigurationRepresentation} representation representation
-     * @param {module:api/AdminEndpointsApi~createEndpointConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/EndpointConfigurationRepresentation}
      */
     this.createEndpointConfiguration = function(representation) {
       var postBody = representation;
@@ -121,8 +115,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getBasicAuthConfiguration operation.
-     * @callback module:api/AdminEndpointsApi~getBasicAuthConfigurationCallback
+     * Function to receive the result of the getBasicAuthConfiguration operation.
      * @param {String} error Error message, if any.
      * @param {module:model/EndpointBasicAuthRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -132,8 +125,6 @@
      * getBasicAuthConfiguration
      * @param {Integer} basicAuthId basicAuthId
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminEndpointsApi~getBasicAuthConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/EndpointBasicAuthRepresentation}
      */
     this.getBasicAuthConfiguration = function(basicAuthId, tenantId) {
       var postBody = null;
@@ -173,8 +164,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getBasicAuthConfigurations operation.
-     * @callback module:api/AdminEndpointsApi~getBasicAuthConfigurationsCallback
+     * Function to receive the result of the getBasicAuthConfigurations operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/EndpointBasicAuthRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -183,8 +173,6 @@
     /**
      * getBasicAuthConfigurations
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminEndpointsApi~getBasicAuthConfigurationsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {Array.<module:model/EndpointBasicAuthRepresentation>}
      */
     this.getBasicAuthConfigurations = function(tenantId) {
       var postBody = null;
@@ -218,8 +206,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getEndpointConfiguration operation.
-     * @callback module:api/AdminEndpointsApi~getEndpointConfigurationCallback
+     * Function to receive the result of the getEndpointConfiguration operation.
      * @param {String} error Error message, if any.
      * @param {module:model/EndpointConfigurationRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -229,8 +216,6 @@
      * getEndpointConfiguration
      * @param {Integer} endpointConfigurationId endpointConfigurationId
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminEndpointsApi~getEndpointConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/EndpointConfigurationRepresentation}
      */
     this.getEndpointConfiguration = function(endpointConfigurationId, tenantId) {
       var postBody = null;
@@ -270,8 +255,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getEndpointConfigurations operation.
-     * @callback module:api/AdminEndpointsApi~getEndpointConfigurationsCallback
+     * Function to receive the result of the getEndpointConfigurations operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/EndpointConfigurationRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -280,8 +264,6 @@
     /**
      * getEndpointConfigurations
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminEndpointsApi~getEndpointConfigurationsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {Array.<module:model/EndpointConfigurationRepresentation>}
      */
     this.getEndpointConfigurations = function(tenantId) {
       var postBody = null;
@@ -315,8 +297,7 @@
     }
 
     /**
-     * Callback function to receive the result of the removeBasicAuthonfiguration operation.
-     * @callback module:api/AdminEndpointsApi~removeBasicAuthonfigurationCallback
+     * Function to receive the result of the removeBasicAuthonfiguration operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -326,7 +307,6 @@
      * removeBasicAuthonfiguration
      * @param {Integer} basicAuthId basicAuthId
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminEndpointsApi~removeBasicAuthonfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.removeBasicAuthonfiguration = function(basicAuthId, tenantId) {
       var postBody = null;
@@ -366,8 +346,7 @@
     }
 
     /**
-     * Callback function to receive the result of the removeEndpointConfiguration operation.
-     * @callback module:api/AdminEndpointsApi~removeEndpointConfigurationCallback
+     * Function to receive the result of the removeEndpointConfiguration operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -377,7 +356,6 @@
      * removeEndpointConfiguration
      * @param {Integer} endpointConfigurationId endpointConfigurationId
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminEndpointsApi~removeEndpointConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.removeEndpointConfiguration = function(endpointConfigurationId, tenantId) {
       var postBody = null;
@@ -417,8 +395,7 @@
     }
 
     /**
-     * Callback function to receive the result of the updateBasicAuthConfiguration operation.
-     * @callback module:api/AdminEndpointsApi~updateBasicAuthConfigurationCallback
+     * Function to receive the result of the updateBasicAuthConfiguration operation.
      * @param {String} error Error message, if any.
      * @param {module:model/EndpointBasicAuthRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -428,8 +405,6 @@
      * updateBasicAuthConfiguration
      * @param {Integer} basicAuthId basicAuthId
      * @param {module:model/CreateEndpointBasicAuthRepresentation} createRepresentation createRepresentation
-     * @param {module:api/AdminEndpointsApi~updateBasicAuthConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/EndpointBasicAuthRepresentation}
      */
     this.updateBasicAuthConfiguration = function(basicAuthId, createRepresentation) {
       var postBody = createRepresentation;
@@ -468,8 +443,7 @@
     }
 
     /**
-     * Callback function to receive the result of the updateEndpointConfiguration operation.
-     * @callback module:api/AdminEndpointsApi~updateEndpointConfigurationCallback
+     * Function to receive the result of the updateEndpointConfiguration operation.
      * @param {String} error Error message, if any.
      * @param {module:model/EndpointConfigurationRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -479,8 +453,6 @@
      * updateEndpointConfiguration
      * @param {Integer} endpointConfigurationId endpointConfigurationId
      * @param {module:model/EndpointConfigurationRepresentation} representation representation
-     * @param {module:api/AdminEndpointsApi~updateEndpointConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/EndpointConfigurationRepresentation}
      */
     this.updateEndpointConfiguration = function(endpointConfigurationId, representation) {
       var postBody = representation;

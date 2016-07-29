@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the changePassword operation.
-     * @callback module:api/ProfileApi~changePasswordCallback
+     * Function to receive the result of the changePassword operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -43,7 +42,6 @@
     /**
      * Change user password
      * @param {module:model/ChangePasswordRepresentation} changePasswordRepresentation changePasswordRepresentation
-     * @param {module:api/ProfileApi~changePasswordCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.changePassword = function(changePasswordRepresentation) {
       var postBody = changePasswordRepresentation;
@@ -76,8 +74,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getProfilePicture operation.
-     * @callback module:api/ProfileApi~getProfilePictureCallback
+     * Function to receive the result of the getProfilePicture operation.
      * @param {String} error Error message, if any.
      * @param {File} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -113,8 +110,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getProfile operation.
-     * @callback module:api/ProfileApi~getProfileCallback
+     * Function to receive the result of the getProfile operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -150,8 +146,7 @@
     }
 
     /**
-     * Callback function to receive the result of the updateProfile operation.
-     * @callback module:api/ProfileApi~updateProfileCallback
+     * Function to receive the result of the updateProfile operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -161,8 +156,6 @@
      * Update user information
      * Only a first name, last name, email and company can be updated
      * @param {module:model/UserRepresentation} userRepresentation userRepresentation
-     * @param {module:api/ProfileApi~updateProfileCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/UserRepresentation}
      */
     this.updateProfile = function(userRepresentation) {
       var postBody = userRepresentation;
@@ -195,8 +188,7 @@
     }
 
     /**
-     * Callback function to receive the result of the uploadProfilePicture operation.
-     * @callback module:api/ProfileApi~uploadProfilePictureCallback
+     * Function to receive the result of the uploadProfilePicture operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ImageUploadRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -205,8 +197,6 @@
     /**
      * Change user profile picture
      * @param {File} file file
-     * @param {module:api/ProfileApi~uploadProfilePictureCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ImageUploadRepresentation}
      */
     this.uploadProfilePicture = function(file) {
       var postBody = null;

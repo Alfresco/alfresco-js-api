@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the addSubtask operation.
-     * @callback module:api/TaskCheckListApi~addSubtaskCallback
+     * Function to receive the result of the addSubtask operation.
      * @param {String} error Error message, if any.
      * @param {module:model/TaskRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44,8 +43,6 @@
      * Create a task checklist
      * @param {String} taskId taskId
      * @param {module:model/TaskRepresentation} taskRepresentation taskRepresentation
-     * @param {module:api/TaskCheckListApi~addSubtaskCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/TaskRepresentation}
      */
     this.addSubtask = function(taskId, taskRepresentation) {
       var postBody = taskRepresentation;
@@ -84,8 +81,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getChecklist operation.
-     * @callback module:api/TaskCheckListApi~getChecklistCallback
+     * Function to receive the result of the getChecklist operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -94,8 +90,6 @@
     /**
      * Retrieve Checklist added to a task
      * @param {String} taskId taskId
-     * @param {module:api/TaskCheckListApi~getChecklistCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getChecklist = function(taskId) {
       var postBody = null;
@@ -129,8 +123,7 @@
     }
 
     /**
-     * Callback function to receive the result of the orderChecklist operation.
-     * @callback module:api/TaskCheckListApi~orderChecklistCallback
+     * Function to receive the result of the orderChecklist operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -140,7 +133,6 @@
      * Change the order of items on a checklist
      * @param {String} taskId taskId
      * @param {module:model/ChecklistOrderRepresentation} orderRepresentation orderRepresentation
-     * @param {module:api/TaskCheckListApi~orderChecklistCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.orderChecklist = function(taskId, orderRepresentation) {
       var postBody = orderRepresentation;

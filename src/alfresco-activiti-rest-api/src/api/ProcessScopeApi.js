@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the getRuntimeProcessScopes operation.
-     * @callback module:api/ProcessScopeApi~getRuntimeProcessScopesCallback
+     * Function to receive the result of the getRuntimeProcessScopes operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/ProcessScopeRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43,8 +42,6 @@
     /**
      * getRuntimeProcessScopes
      * @param {module:model/ProcessScopesRequestRepresentation} processScopesRequest processScopesRequest
-     * @param {module:api/ProcessScopeApi~getRuntimeProcessScopesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {Array.<module:model/ProcessScopeRepresentation>}
      */
     this.getRuntimeProcessScopes = function(processScopesRequest) {
       var postBody = processScopesRequest;

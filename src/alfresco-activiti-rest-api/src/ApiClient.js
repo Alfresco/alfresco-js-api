@@ -304,7 +304,7 @@
   };
 
   /**
-   * Callback function to receive the result of the operation.
+   * Function to receive the result of the operation.
    * @param {String} error Error message, if any.
    * @param data The data returned by the service call.
    * @param {String} response The complete HTTP response.

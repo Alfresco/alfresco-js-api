@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the getHistoricProcessModelBpmn20Xml operation.
-     * @callback module:api/ModelBpmnApi~getHistoricProcessModelBpmn20XmlCallback
+     * Function to receive the result of the getHistoricProcessModelBpmn20Xml operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -44,7 +43,6 @@
      * Export a previous process definition model to a BPMN 2.0 xml file
      * @param {Integer} processModelId processModelId
      * @param {Integer} processModelHistoryId processModelHistoryId
-     * @param {module:api/ModelBpmnApi~getHistoricProcessModelBpmn20XmlCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.getHistoricProcessModelBpmn20Xml = function(processModelId, processModelHistoryId) {
       var postBody = null;
@@ -84,8 +82,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getProcessModelBpmn20Xml operation.
-     * @callback module:api/ModelBpmnApi~getProcessModelBpmn20XmlCallback
+     * Function to receive the result of the getProcessModelBpmn20Xml operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -94,7 +91,6 @@
     /**
      * Export a process definition model to a BPMN 2.0 xml file
      * @param {Integer} processModelId processModelId
-     * @param {module:api/ModelBpmnApi~getProcessModelBpmn20XmlCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.getProcessModelBpmn20Xml = function(processModelId) {
       var postBody = null;

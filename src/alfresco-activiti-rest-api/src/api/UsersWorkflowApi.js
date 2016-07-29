@@ -33,7 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the getUsers operation.
+     * Function to receive the result of the getUsers operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.

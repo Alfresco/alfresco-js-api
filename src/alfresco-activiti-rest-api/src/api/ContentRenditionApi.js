@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the getRawContent operation.
-     * @callback module:api/ContentRenditionApi~getRawContentCallback
+     * Function to receive the result of the getRawContent operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -44,7 +43,6 @@
      * Retrieve Raw Content
      * @param {Integer} contentId contentId
      * @param {String} renditionType renditionType
-     * @param {module:api/ContentRenditionApi~getRawContentCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.getRawContent = function(contentId, renditionType) {
       var postBody = null;

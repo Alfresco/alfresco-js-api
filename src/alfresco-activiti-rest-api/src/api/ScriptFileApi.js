@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the getControllers operation.
-     * @callback module:api/ScriptFileApi~getControllersCallback
+     * Function to receive the result of the getControllers operation.
      * @param {String} error Error message, if any.
      * @param {'String'} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -69,8 +68,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getLibraries operation.
-     * @callback module:api/ScriptFileApi~getLibrariesCallback
+     * Function to receive the result of the getLibraries operation.
      * @param {String} error Error message, if any.
      * @param {'String'} data The data returned by the service call.
      * @param {String} response The complete HTTP response.

@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the getGroups operation.
-     * @callback module:api/GroupsApi~getGroupsCallback
+     * Function to receive the result of the getGroups operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -48,8 +47,6 @@
      * @param {String} opts.externalId externalId
      * @param {String} opts.externalIdCaseInsensitive externalIdCaseInsensitive
      * @param {Integer} opts.tenantId tenantId
-     * @param {module:api/GroupsApi~getGroupsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getGroups = function(opts) {
       opts = opts || {};
@@ -83,8 +80,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getUsersForGroup operation.
-     * @callback module:api/GroupsApi~getUsersForGroupCallback
+     * Function to receive the result of the getUsersForGroup operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -93,8 +89,6 @@
     /**
      * List users member of a specific group
      * @param {Integer} groupId groupId
-     * @param {module:api/GroupsApi~getUsersForGroupCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getUsersForGroup = function(groupId) {
       var postBody = null;

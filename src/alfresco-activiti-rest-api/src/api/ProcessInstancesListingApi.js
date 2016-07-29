@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the filterProcessInstances operation.
-     * @callback module:api/ProcessInstancesListingApi~filterProcessInstancesCallback
+     * Function to receive the result of the filterProcessInstances operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43,8 +42,6 @@
     /**
      * Filter a list of process instances
      * @param {module:model/ProcessInstanceFilterRequestRepresentation} filterRequest filterRequest
-     * @param {module:api/ProcessInstancesListingApi~filterProcessInstancesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.filterProcessInstances = function(filterRequest) {
       var postBody = filterRequest;
@@ -77,8 +74,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getProcessInstances operation.
-     * @callback module:api/ProcessInstancesListingApi~getProcessInstancesCallback
+     * Function to receive the result of the getProcessInstances operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -87,8 +83,6 @@
     /**
      * Retrieve a list of process instances
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/ProcessInstancesListingApi~getProcessInstancesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getProcessInstances = function(requestNode) {
       var postBody = requestNode;

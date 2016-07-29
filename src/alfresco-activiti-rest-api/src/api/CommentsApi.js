@@ -33,7 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the addProcessInstanceComment operation.
+     * Function to receive the result of the addProcessInstanceComment operation.
      * @param {String} error Error message, if any.
      * @param {module:model/CommentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -82,7 +82,7 @@
     }
 
     /**
-     * Callback function to receive the result of the addTaskComment operation.
+     * Function to receive the result of the addTaskComment operation.
      * @param {String} error Error message, if any.
      * @param {module:model/CommentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -131,7 +131,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getProcessInstanceComments operation.
+     * Function to receive the result of the getProcessInstanceComments operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -178,7 +178,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getTaskComments operation.
+     * Function to receive the result of the getTaskComments operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.

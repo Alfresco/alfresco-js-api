@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the getProperties operation.
-     * @callback module:api/SystemPropertiesApi~getPropertiesCallback
+     * Function to receive the result of the getProperties operation.
      * @param {String} error Error message, if any.
      * @param {module:model/SystemPropertiesRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.

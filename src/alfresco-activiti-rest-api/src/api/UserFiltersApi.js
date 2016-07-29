@@ -33,7 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the createUserProcessInstanceFilter operation.
+     * Function to receive the result of the createUserProcessInstanceFilter operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserProcessInstanceFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -75,7 +75,7 @@
     }
 
     /**
-     * Callback function to receive the result of the createUserTaskFilter operation.
+     * Function to receive the result of the createUserTaskFilter operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserTaskFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -117,7 +117,7 @@
     }
 
     /**
-     * Callback function to receive the result of the deleteUserProcessInstanceFilter operation.
+     * Function to receive the result of the deleteUserProcessInstanceFilter operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -159,7 +159,7 @@
     }
 
     /**
-     * Callback function to receive the result of the deleteUserTaskFilter operation.
+     * Function to receive the result of the deleteUserTaskFilter operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -201,7 +201,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getUserProcessInstanceFilter operation.
+     * Function to receive the result of the getUserProcessInstanceFilter operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserProcessInstanceFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -244,7 +244,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getUserProcessInstanceFilters operation.
+     * Function to receive the result of the getUserProcessInstanceFilters operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -284,7 +284,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getUserTaskFilter operation.
+     * Function to receive the result of the getUserTaskFilter operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserTaskFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -327,7 +327,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getUserTaskFilters operation.
+     * Function to receive the result of the getUserTaskFilters operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -367,7 +367,7 @@
     }
 
     /**
-     * Callback function to receive the result of the orderUserProcessInstanceFilters operation.
+     * Function to receive the result of the orderUserProcessInstanceFilters operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -408,7 +408,7 @@
     }
 
     /**
-     * Callback function to receive the result of the orderUserTaskFilters operation.
+     * Function to receive the result of the orderUserTaskFilters operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -449,7 +449,7 @@
     }
 
     /**
-     * Callback function to receive the result of the updateUserProcessInstanceFilter operation.
+     * Function to receive the result of the updateUserProcessInstanceFilter operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserProcessInstanceFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -498,7 +498,7 @@
     }
 
     /**
-     * Callback function to receive the result of the updateUserTaskFilter operation.
+     * Function to receive the result of the updateUserTaskFilter operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserTaskFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.

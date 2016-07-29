@@ -33,7 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the exportAppDefinition operation.
+     * Function to receive the result of the exportAppDefinition operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -76,7 +76,7 @@
     }
 
     /**
-     * Callback function to receive the result of the importAppDefinition operation.
+     * Function to receive the result of the importAppDefinition operation.
      * @param {String} error Error message, if any.
      * @param {module:model/AppDefinitionRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.

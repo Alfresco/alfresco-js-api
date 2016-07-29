@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the addProcessInstanceComment operation.
-     * @callback module:api/ProcessInstancesApi~addProcessInstanceCommentCallback
+     * Function to receive the result of the addProcessInstanceComment operation.
      * @param {String} error Error message, if any.
      * @param {module:model/CommentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44,8 +43,6 @@
      * Add a comment to a Process
      * @param {module:model/CommentRepresentation} commentRequest commentRequest
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ProcessInstancesApi~addProcessInstanceCommentCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/CommentRepresentation}
      */
     this.addProcessInstanceComment = function(commentRequest, processInstanceId) {
       var postBody = commentRequest;
@@ -84,8 +81,7 @@
     }
 
     /**
-     * Callback function to receive the result of the deleteProcessInstance operation.
-     * @callback module:api/ProcessInstancesApi~deleteProcessInstanceCallback
+     * Function to receive the result of the deleteProcessInstance operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -94,7 +90,6 @@
     /**
      * Delete a process instance
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ProcessInstancesApi~deleteProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.deleteProcessInstance = function(processInstanceId) {
       var postBody = null;
@@ -128,8 +123,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getProcessInstanceComments operation.
-     * @callback module:api/ProcessInstancesApi~getProcessInstanceCommentsCallback
+     * Function to receive the result of the getProcessInstanceComments operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -140,8 +134,6 @@
      * @param {String} processInstanceId processInstanceId
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.latestFirst latestFirst
-     * @param {module:api/ProcessInstancesApi~getProcessInstanceCommentsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getProcessInstanceComments = function(processInstanceId, opts) {
       opts = opts || {};
@@ -177,8 +169,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getProcessInstanceStartForm operation.
-     * @callback module:api/ProcessInstancesApi~getProcessInstanceStartFormCallback
+     * Function to receive the result of the getProcessInstanceStartForm operation.
      * @param {String} error Error message, if any.
      * @param {module:model/FormDefinitionRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -188,8 +179,6 @@
      * Get process start form
      * When a process definitions has a start form (hasStartForm is true in the call above), the start form can be retrieved
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ProcessInstancesApi~getProcessInstanceStartFormCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/FormDefinitionRepresentation}
      */
     this.getProcessInstanceStartForm = function(processInstanceId) {
       var postBody = null;
@@ -223,8 +212,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getProcessInstance operation.
-     * @callback module:api/ProcessInstancesApi~getProcessInstanceCallback
+     * Function to receive the result of the getProcessInstance operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ProcessInstanceRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -233,8 +221,6 @@
     /**
      * Retrieve a process instance information
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ProcessInstancesApi~getProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ProcessInstanceRepresentation}
      */
     this.getProcessInstance = function(processInstanceId) {
       var postBody = null;

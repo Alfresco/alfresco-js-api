@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the getProcessDefinitionStartForm operation.
-     * @callback module:api/ProcessDefinitionsFormApi~getProcessDefinitionStartFormCallback
+     * Function to receive the result of the getProcessDefinitionStartForm operation.
      * @param {String} error Error message, if any.
      * @param {module:model/FormDefinitionRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -69,8 +68,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getRestFieldValues operation.
-     * @callback module:api/ProcessDefinitionsFormApi~getRestFieldValuesCallback
+     * Function to receive the result of the getRestFieldValues operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/FormValueRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -105,8 +103,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getRestTableFieldValues operation.
-     * @callback module:api/ProcessDefinitionsFormApi~getRestTableFieldValuesCallback
+     * Function to receive the result of the getRestTableFieldValues operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/FormValueRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.

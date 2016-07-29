@@ -33,7 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the createTenant operation.
+     * Function to receive the result of the createTenant operation.
      * @param {String} error Error message, if any.
      * @param {module:model/LightTenantRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -76,7 +76,7 @@
     }
 
     /**
-     * Callback function to receive the result of the deleteTenant operation.
+     * Function to receive the result of the deleteTenant operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -118,7 +118,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getTenantEvents operation.
+     * Function to receive the result of the getTenantEvents operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/TenantEvent>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -161,7 +161,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getTenantLogo operation.
+     * Function to receive the result of the getTenantLogo operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -203,7 +203,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getTenant operation.
+     * Function to receive the result of the getTenant operation.
      * @param {String} error Error message, if any.
      * @param {module:model/TenantRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -246,7 +246,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getTenants operation.
+     * Function to receive the result of the getTenants operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/LightTenantRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -283,7 +283,7 @@
     }
 
     /**
-     * Callback function to receive the result of the update operation.
+     * Function to receive the result of the update operation.
      * @param {String} error Error message, if any.
      * @param {module:model/TenantRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -332,7 +332,7 @@
     }
 
     /**
-     * Callback function to receive the result of the uploadTenantLogo operation.
+     * Function to receive the result of the uploadTenantLogo operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ImageUploadRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.

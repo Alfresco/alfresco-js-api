@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the createModel operation.
-     * @callback module:api/ModelsApi~createModelCallback
+     * Function to receive the result of the createModel operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43,8 +42,6 @@
     /**
      * To create a new model
      * @param {module:model/ModelRepresentation} modelRepresentation modelRepresentation
-     * @param {module:api/ModelsApi~createModelCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ModelRepresentation}
      */
     this.createModel = function(modelRepresentation) {
       var postBody = modelRepresentation;
@@ -77,8 +74,7 @@
     }
 
     /**
-     * Callback function to receive the result of the deleteModel operation.
-     * @callback module:api/ModelsApi~deleteModelCallback
+     * Function to receive the result of the deleteModel operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -90,7 +86,6 @@
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.cascade cascade
      * @param {Boolean} opts.deleteRuntimeApp deleteRuntimeApp
-     * @param {module:api/ModelsApi~deleteModelCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.deleteModel = function(modelId, opts) {
       opts = opts || {};
@@ -127,8 +122,7 @@
     }
 
     /**
-     * Callback function to receive the result of the duplicateModel operation.
-     * @callback module:api/ModelsApi~duplicateModelCallback
+     * Function to receive the result of the duplicateModel operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -138,8 +132,6 @@
      * To duplicate an existing model
      * @param {Integer} modelId modelId
      * @param {module:model/ModelRepresentation} modelRepresentation modelRepresentation
-     * @param {module:api/ModelsApi~duplicateModelCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ModelRepresentation}
      */
     this.duplicateModel = function(modelId, modelRepresentation) {
       var postBody = modelRepresentation;
@@ -178,8 +170,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getModelJSON operation.
-     * @callback module:api/ModelsApi~getModelJSONCallback
+     * Function to receive the result of the getModelJSON operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ObjectNode} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -188,8 +179,6 @@
     /**
      * Get the JSON model
      * @param {Integer} modelId modelId
-     * @param {module:api/ModelsApi~getModelJSONCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ObjectNode}
      */
     this.getModelJSON = function(modelId) {
       var postBody = null;
@@ -223,8 +212,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getModelThumbnail operation.
-     * @callback module:api/ModelsApi~getModelThumbnailCallback
+     * Function to receive the result of the getModelThumbnail operation.
      * @param {String} error Error message, if any.
      * @param {Array.<'String'>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -233,8 +221,6 @@
     /**
      * Get Model thumbnail
      * @param {Integer} modelId modelId
-     * @param {module:api/ModelsApi~getModelThumbnailCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {Array.<'String'>}
      */
     this.getModelThumbnail = function(modelId) {
       var postBody = null;
@@ -268,8 +254,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getModel operation.
-     * @callback module:api/ModelsApi~getModelCallback
+     * Function to receive the result of the getModel operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -280,8 +265,6 @@
      * @param {Integer} modelId modelId
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.includePermissions includePermissions
-     * @param {module:api/ModelsApi~getModelCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ModelRepresentation}
      */
     this.getModel = function(modelId, opts) {
       opts = opts || {};
@@ -317,8 +300,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getModelsToIncludeInAppDefinition operation.
-     * @callback module:api/ModelsApi~getModelsToIncludeInAppDefinitionCallback
+     * Function to receive the result of the getModelsToIncludeInAppDefinition operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -353,8 +335,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getModels operation.
-     * @callback module:api/ModelsApi~getModelsCallback
+     * Function to receive the result of the getModels operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -367,8 +348,6 @@
      * @param {String} opts.sort sort
      * @param {Integer} opts.modelType modelType
      * @param {Integer} opts.referenceId referenceId
-     * @param {module:api/ModelsApi~getModelsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getModels = function(opts) {
       opts = opts || {};
@@ -401,8 +380,7 @@
     }
 
     /**
-     * Callback function to receive the result of the importNewVersion operation.
-     * @callback module:api/ModelsApi~importNewVersionCallback
+     * Function to receive the result of the importNewVersion operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -412,8 +390,6 @@
      * Create a new model version
      * @param {Integer} modelId modelId
      * @param {File} file file
-     * @param {module:api/ModelsApi~importNewVersionCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ModelRepresentation}
      */
     this.importNewVersion = function(modelId, file) {
       var postBody = null;
@@ -453,8 +429,7 @@
     }
 
     /**
-     * Callback function to receive the result of the importProcessModel operation.
-     * @callback module:api/ModelsApi~importProcessModelCallback
+     * Function to receive the result of the importProcessModel operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -463,8 +438,6 @@
     /**
      * To import a BPMN 2.0 xml file
      * @param {File} file file
-     * @param {module:api/ModelsApi~importProcessModelCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ModelRepresentation}
      */
     this.importProcessModel = function(file) {
       var postBody = null;
@@ -498,8 +471,7 @@
     }
 
     /**
-     * Callback function to receive the result of the saveModel operation.
-     * @callback module:api/ModelsApi~saveModelCallback
+     * Function to receive the result of the saveModel operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -509,8 +481,6 @@
      * Save the JSON model
      * @param {Integer} modelId modelId
      * @param {Object} values values
-     * @param {module:api/ModelsApi~saveModelCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ModelRepresentation}
      */
     this.saveModel = function(modelId, values) {
       var postBody = values;
@@ -549,8 +519,7 @@
     }
 
     /**
-     * Callback function to receive the result of the updateModel operation.
-     * @callback module:api/ModelsApi~updateModelCallback
+     * Function to receive the result of the updateModel operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -560,8 +529,6 @@
      * Edit a specific model
      * @param {Integer} modelId modelId
      * @param {module:model/ModelRepresentation} updatedModel updatedModel
-     * @param {module:api/ModelsApi~updateModelCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ModelRepresentation}
      */
     this.updateModel = function(modelId, updatedModel) {
       var postBody = updatedModel;
@@ -600,8 +567,7 @@
     }
 
     /**
-     * Callback function to receive the result of the validateModel operation.
-     * @callback module:api/ModelsApi~validateModelCallback
+     * Function to receive the result of the validateModel operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/ValidationErrorRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -612,8 +578,6 @@
      * @param {Integer} modelId modelId
      * @param {Object} opts Optional parameters
      * @param {Object} opts.values values
-     * @param {module:api/ModelsApi~validateModelCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {Array.<module:model/ValidationErrorRepresentation>}
      */
     this.validateModel = function(modelId, opts) {
       opts = opts || {};

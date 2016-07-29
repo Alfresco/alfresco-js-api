@@ -65,7 +65,7 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
 # Node
 To correctly use this component check that on your machine is running Node version 5.0.0 or higher.
 
-# Api Modules
+# Api Modules complete methods list
 
 - [Authentication API](/src/alfresco-auth-rest-api)
 - [Core API](/src/alfresco-core-rest-api)
@@ -77,13 +77,13 @@ npm install --save alfresco-js-api
 
 # Use
 
-### Basic usage For node projects
+### Import library for node projects
 
 ```javascript
-var AlfrescoJsApi = require('alfresco-js-api');
+var AlfrescoApi = require('alfresco-js-api');
 ```
 
-### Basic usage For browser
+### Import library for browser projects
 
 ```html
     <script src="node_modules/alfresco-js-api/dist/alfresco-js-api.min.js"></script>
@@ -92,10 +92,6 @@ var AlfrescoJsApi = require('alfresco-js-api');
     
     <script src="node_modules/alfresco-js-api/dist/alfresco-js-api.js"></script>
 ```
-
-# Getting Started
-
-Please follow the [installation](#installation) instruction and execute the following JS code:
 
 
 # Authentication JS-API
@@ -117,8 +113,6 @@ ticket| (Optional only if you want login with the ticket see example below)| |
 ### Login with Username and Password BPM and ECM
 
 ```javascript
-var AlfrescoApi = require('alfresco-js-api');
-
 this.alfrescoJsApi = new AlfrescoApi({ username:'admin', password:'admin', provider:'ALL' });
 
 this.alfrescoJsApi.login().then(function (data) {
@@ -132,8 +126,6 @@ this.alfrescoJsApi.login().then(function (data) {
 ### Login with Username and Password ECM
 
 ```javascript
-var AlfrescoApi = require('alfresco-js-api');
-
 this.alfrescoJsApi = new AlfrescoApi({ username:'admin', password:'admin'});
 
 this.alfrescoJsApi.login().then(function (data) {
@@ -149,9 +141,6 @@ this.alfrescoJsApi.login().then(function (data) {
 ### Login with ticket ECM
 
 ```javascript
-
-var AlfrescoApi = require('alfresco-js-api');
-
 this.alfrescoJsApi = new AlfrescoApi({ ticket:'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1', host:'http://127.0.0.1:8080'});
 
 ```
@@ -161,8 +150,6 @@ this.alfrescoJsApi = new AlfrescoApi({ ticket:'TICKET_4479f4d3bb155195879bfbb8d5
 
 
 ```javascript
-var AlfrescoApi = require('alfresco-js-api');
-
 this.alfrescoJsApi = new AlfrescoApi({ username:'admin', password:'admin', provider:'BPM' });
 
 this.alfrescoJsApi.login().then(function (data) {
@@ -229,6 +216,9 @@ this.alfrescoJsApi.logout().on('logout', function(){
 ```
 
 # ECM
+
+A complete list of all the ECM methods is available here : [Core API](/src/alfresco-core-rest-api) below you can find some common examples.
+
 
 ## Get File or Folder Info
 
@@ -522,9 +512,19 @@ this.alfrescoJsApi.webScript.executeWebScript('GET', 'mytasks', null, 'share', '
 ```
 
 # BPM
-      
+
+A complete list of all the BPM methods is available here :[Activiti API](/src/alfresco-activiti-rest-api) below you can find some common examples.    
+
+## Task Api
+
+listTasks(requestNode)
+
+>uploadFile return a promise that is resolved if the file is successful uploaded and {error} if rejected.
 
 
+```javascript
+ 
+```
 
 # Development
 

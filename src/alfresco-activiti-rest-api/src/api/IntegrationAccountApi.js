@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the getAccounts operation.
-     * @callback module:api/IntegrationAccountApi~getAccountsCallback
+     * Function to receive the result of the getAccounts operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.

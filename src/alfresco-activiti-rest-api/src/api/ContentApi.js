@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the createRelatedContentOnProcessInstance operation.
-     * @callback module:api/ContentApi~createRelatedContentOnProcessInstanceCallback
+     * Function to receive the result of the createRelatedContentOnProcessInstance operation.
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44,8 +43,6 @@
      * createRelatedContentOnProcessInstance
      * @param {String} processInstanceId processInstanceId
      * @param {module:model/RelatedContentRepresentation} relatedContent relatedContent
-     * @param {module:api/ContentApi~createRelatedContentOnProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/RelatedContentRepresentation}
      */
     this.createRelatedContentOnProcessInstance = function(processInstanceId, relatedContent) {
       var postBody = relatedContent;
@@ -84,8 +81,7 @@
     }
 
     /**
-     * Callback function to receive the result of the createRelatedContentOnProcessInstance operation.
-     * @callback module:api/ContentApi~createRelatedContentOnProcessInstanceCallback
+     * Function to receive the result of the createRelatedContentOnProcessInstance operation.
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -95,8 +91,6 @@
      * createRelatedContentOnProcessInstance
      * @param {String} processInstanceId processInstanceId
      * @param {File} file file
-     * @param {module:api/ContentApi~createRelatedContentOnProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/RelatedContentRepresentation}
      */
     this.createRelatedContentOnProcessInstance = function(processInstanceId, file) {
       var postBody = null;
@@ -136,8 +130,7 @@
     }
 
     /**
-     * Callback function to receive the result of the createRelatedContentOnTask operation.
-     * @callback module:api/ContentApi~createRelatedContentOnTaskCallback
+     * Function to receive the result of the createRelatedContentOnTask operation.
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -149,8 +142,6 @@
      * @param {module:model/RelatedContentRepresentation} relatedContent relatedContent
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.isRelatedContent isRelatedContent
-     * @param {module:api/ContentApi~createRelatedContentOnTaskCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/RelatedContentRepresentation}
      */
     this.createRelatedContentOnTask = function(taskId, relatedContent, opts) {
       opts = opts || {};
@@ -191,8 +182,7 @@
     }
 
     /**
-     * Callback function to receive the result of the createRelatedContentOnTask operation.
-     * @callback module:api/ContentApi~createRelatedContentOnTaskCallback
+     * Function to receive the result of the createRelatedContentOnTask operation.
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -204,8 +194,6 @@
      * @param {File} file file
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.isRelatedContent isRelatedContent
-     * @param {module:api/ContentApi~createRelatedContentOnTaskCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/RelatedContentRepresentation}
      */
     this.createRelatedContentOnTask = function(taskId, file, opts) {
       opts = opts || {};
@@ -247,8 +235,7 @@
     }
 
     /**
-     * Callback function to receive the result of the createTemporaryRawRelatedContent operation.
-     * @callback module:api/ContentApi~createTemporaryRawRelatedContentCallback
+     * Function to receive the result of the createTemporaryRawRelatedContent operation.
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -257,8 +244,6 @@
     /**
      * createTemporaryRawRelatedContent
      * @param {File} file file
-     * @param {module:api/ContentApi~createTemporaryRawRelatedContentCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/RelatedContentRepresentation}
      */
     this.createTemporaryRawRelatedContent = function(file) {
       var postBody = null;
@@ -292,8 +277,7 @@
     }
 
     /**
-     * Callback function to receive the result of the createTemporaryRelatedContent operation.
-     * @callback module:api/ContentApi~createTemporaryRelatedContentCallback
+     * Function to receive the result of the createTemporaryRelatedContent operation.
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -302,8 +286,6 @@
     /**
      * createTemporaryRelatedContent
      * @param {module:model/RelatedContentRepresentation} relatedContent relatedContent
-     * @param {module:api/ContentApi~createTemporaryRelatedContentCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/RelatedContentRepresentation}
      */
     this.createTemporaryRelatedContent = function(relatedContent) {
       var postBody = relatedContent;
@@ -336,8 +318,7 @@
     }
 
     /**
-     * Callback function to receive the result of the deleteContent operation.
-     * @callback module:api/ContentApi~deleteContentCallback
+     * Function to receive the result of the deleteContent operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -346,7 +327,6 @@
     /**
      * deleteContent
      * @param {Integer} contentId contentId
-     * @param {module:api/ContentApi~deleteContentCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.deleteContent = function(contentId) {
       var postBody = null;
@@ -380,8 +360,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getContent operation.
-     * @callback module:api/ContentApi~getContentCallback
+     * Function to receive the result of the getContent operation.
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -390,8 +369,6 @@
     /**
      * getContent
      * @param {Integer} contentId contentId
-     * @param {module:api/ContentApi~getContentCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/RelatedContentRepresentation}
      */
     this.getContent = function(contentId) {
       var postBody = null;
@@ -425,8 +402,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getProcessInstanceContent operation.
-     * @callback module:api/ContentApi~getProcessInstanceContentCallback
+     * Function to receive the result of the getProcessInstanceContent operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -435,8 +411,6 @@
     /**
      * Retrieve content attached to process instance fields
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ContentApi~getProcessInstanceContentCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getProcessInstanceContent = function(processInstanceId) {
       var postBody = null;
@@ -470,8 +444,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getRawContent3 operation.
-     * @callback module:api/ContentApi~getRawContent3Callback
+     * Function to receive the result of the getRawContent3 operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -480,7 +453,6 @@
     /**
      * getRawContent
      * @param {Integer} contentId contentId
-     * @param {module:api/ContentApi~getRawContent3Callback} callback The callback function, accepting three arguments: error, data, response
      */
     this.getRawContent3 = function(contentId) {
       var postBody = null;
@@ -514,8 +486,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getRelatedContentForProcessInstance operation.
-     * @callback module:api/ContentApi~getRelatedContentForProcessInstanceCallback
+     * Function to receive the result of the getRelatedContentForProcessInstance operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -524,8 +495,6 @@
     /**
      * getRelatedContentForProcessInstance
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ContentApi~getRelatedContentForProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getRelatedContentForProcessInstance = function(processInstanceId) {
       var postBody = null;
@@ -559,8 +528,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getRelatedContentForTask operation.
-     * @callback module:api/ContentApi~getRelatedContentForTaskCallback
+     * Function to receive the result of the getRelatedContentForTask operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -569,8 +537,6 @@
     /**
      * Retrieve which content is attached to a task
      * @param {String} taskId taskId
-     * @param {module:api/ContentApi~getRelatedContentForTaskCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getRelatedContentForTask = function(taskId) {
       var postBody = null;

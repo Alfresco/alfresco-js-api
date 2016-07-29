@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the completeTasks operation.
-     * @callback module:api/TemporaryApi~completeTasksCallback
+     * Function to receive the result of the completeTasks operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -44,7 +43,6 @@
      * completeTasks
      * @param {Integer} userId userId
      * @param {String} processDefinitionKey processDefinitionKey
-     * @param {module:api/TemporaryApi~completeTasksCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.completeTasks = function(userId, processDefinitionKey) {
       var postBody = null;
@@ -84,8 +82,7 @@
     }
 
     /**
-     * Callback function to receive the result of the generateData operation.
-     * @callback module:api/TemporaryApi~generateDataCallback
+     * Function to receive the result of the generateData operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -95,7 +92,6 @@
      * generateData
      * @param {Integer} userId userId
      * @param {String} processDefinitionKey processDefinitionKey
-     * @param {module:api/TemporaryApi~generateDataCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.generateData = function(userId, processDefinitionKey) {
       var postBody = null;
@@ -135,8 +131,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getHeaders operation.
-     * @callback module:api/TemporaryApi~getHeadersCallback
+     * Function to receive the result of the getHeaders operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ArrayNode} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -171,8 +166,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getOptions operation.
-     * @callback module:api/TemporaryApi~getOptionsCallback
+     * Function to receive the result of the getOptions operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ArrayNode} data The data returned by the service call.
      * @param {String} response The complete HTTP response.

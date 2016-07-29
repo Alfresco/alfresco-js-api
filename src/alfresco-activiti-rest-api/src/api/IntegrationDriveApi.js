@@ -33,8 +33,7 @@
 
 
     /**
-     * Callback function to receive the result of the confirmAuthorisation operation.
-     * @callback module:api/IntegrationDriveApi~confirmAuthorisationCallback
+     * Function to receive the result of the confirmAuthorisation operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -44,7 +43,6 @@
      * Drive Authorization
      * Returns Drive Oauth HTML Page
      * @param {String} code code
-     * @param {module:api/IntegrationDriveApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.confirmAuthorisation = function(code) {
       var postBody = null;
@@ -78,8 +76,7 @@
     }
 
     /**
-     * Callback function to receive the result of the getFiles operation.
-     * @callback module:api/IntegrationDriveApi~getFilesCallback
+     * Function to receive the result of the getFiles operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -91,8 +88,6 @@
      * @param {String} opts.filter filter
      * @param {String} opts.parent parent
      * @param {Boolean} opts.currentFolderOnly currentFolderOnly
-     * @param {module:api/IntegrationDriveApi~getFilesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getFiles = function(opts) {
       opts = opts || {};

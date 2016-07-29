@@ -24,7 +24,7 @@ Assign a task to a user
 ```javascript
 var taskId = "taskId_example"; // String | taskId
 
-var requestNode = this.alfrescoJsApi.activiti.objectNode; // ObjectNode | requestNode
+var requestNode = new this.alfrescoJsApi.activiti.ObjectNode(); // ObjectNode | requestNode
 
 this.alfrescoJsApi.activiti.taskActionsApi.assignTask(taskId, requestNode);
 ```
@@ -59,7 +59,7 @@ Attach a form to a task
 ```javascript
 var taskId = "taskId_example"; // String | taskId
 
-var requestNode = this.alfrescoJsApi.activiti.objectNode; // ObjectNode | requestNode
+var requestNode = new this.alfrescoJsApi.activiti.ObjectNode(); // ObjectNode | requestNode
 
 this.alfrescoJsApi.activiti.taskActionsApi.attachForm(taskId, requestNode);
 ```
@@ -162,7 +162,7 @@ To involve a user with a task
 ```javascript
 var taskId = "taskId_example"; // String | taskId
 
-var requestNode = this.alfrescoJsApi.activiti.objectNode; // ObjectNode | requestNode
+var requestNode = new this.alfrescoJsApi.activiti.ObjectNode(); // ObjectNode | requestNode
 
 this.alfrescoJsApi.activiti.taskActionsApi.involveUser(taskId, requestNode);
 ```
@@ -229,7 +229,7 @@ Remove an involved user from a task
 ```javascript
 var taskId = "taskId_example"; // String | taskId
 
-var requestNode = this.alfrescoJsApi.activiti.objectNode; // ObjectNode | requestNode
+var requestNode = new this.alfrescoJsApi.activiti.ObjectNode(); // ObjectNode | requestNode
 
 this.alfrescoJsApi.activiti.taskActionsApi.removeInvolvedUser(taskId, requestNode);
 ```
