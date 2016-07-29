@@ -17,16 +17,6 @@ Returns information for a network **networkId**.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.NetworksApi()
-
 var networkId = "networkId_example"; // {String} The identifier of a network.
 
 var opts = {
@@ -42,7 +32,8 @@ var opts = {
                                     parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-apiInstance.getNetwork(networkId, opts).then(function(data) {
+
+this.alfrescoJsApi.core.networksApi.getNetwork(networkId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

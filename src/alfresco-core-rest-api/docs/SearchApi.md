@@ -29,16 +29,6 @@ By default, the search will be across the repository unless a specific root node
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.SearchApi()
-
 var term = "term_example"; // {String} The term to search for.
 
 var opts = {
@@ -59,7 +49,8 @@ var opts = {
                                 parameter, then the fields specified in the **include**
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 };
-apiInstance.liveSearchNodes(term, opts).then(function(data) {
+
+this.alfrescoJsApi.core.searchApi.liveSearchNodes(term, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
