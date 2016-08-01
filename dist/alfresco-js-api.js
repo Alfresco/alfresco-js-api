@@ -5,7 +5,7 @@ var AlfrescoApi = require('./src/alfrescoApi.js');
 
 module.exports = AlfrescoApi;
 
-},{"./src/alfrescoApi.js":394}],2:[function(require,module,exports){
+},{"./src/alfrescoApi.js":393}],2:[function(require,module,exports){
 // http://wiki.commonjs.org/wiki/Unit_Testing/1.0
 //
 // THIS IS NOT TESTED NOR LIKELY TO WORK OUTSIDE V8!
@@ -37007,494 +37007,6 @@ function extend() {
 }
 
 },{}],136:[function(require,module,exports){
-(function (Buffer){
-'use strict';
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
-(function (root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['superagent'], factory);
-  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
-    // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('superagent'));
-  } else {
-    // Browser globals (root is window)
-    if (!root.ActivitiPublicRestApi) {
-      root.ActivitiPublicRestApi = {};
-    }
-    root.ActivitiPublicRestApi.ApiClient = factory(root.superagent);
-  }
-})(undefined, function (superagent) {
-  'use strict';
-
-  /**
-   * @module ApiClient
-   * @version 1.4.0
-   */
-
-  /**
-   * Manages low level client-server communications, parameter marshalling, etc. There should not be any need for an
-   * application to use this class directly - the *Api and model classes provide the public API for the service. The
-   * contents of this file should be regarded as internal but are documented for completeness.
-   * @alias module:ApiClient
-   * @class
-   */
-
-  var exports = function exports() {
-    /**
-     * The base URL against which to resolve every API call's (relative) path.
-     * @type {String}
-     * @default https://localhost:8080/activiti-app
-     */
-    this.basePath = 'https://localhost:8080/activiti-app'.replace(/\/+$/, '');
-
-    /**
-     * The authentication methods to be included for all API calls.
-     * @type {Array.<String>}
-     */
-    this.authentications = {};
-    /**
-     * The default HTTP headers to be included for all API calls.
-     * @type {Array.<String>}
-     * @default {}
-     */
-    this.defaultHeaders = {};
-
-    /**
-     * The default HTTP timeout for all API calls.
-     * @type {Number}
-     * @default 60000
-     */
-    this.timeout = 60000;
-  };
-
-  /**
-   * Returns a string representation for an actual parameter.
-   * @param param The actual parameter.
-   * @returns {String} The string representation of <code>param</code>.
-   */
-  exports.prototype.paramToString = function (param) {
-    if (param == undefined || param == null) {
-      return '';
-    }
-    if (param instanceof Date) {
-      return param.toJSON();
-    }
-    return param.toString();
-  };
-
-  /**
-   * Builds full URL by appending the given path to the base URL and replacing path parameter place-holders with parameter values.
-   * NOTE: query parameters are not handled here.
-   * @param {String} path The path to append to the base URL.
-   * @param {Object} pathParams The parameter values to append.
-   * @returns {String} The encoded path with parameter values substituted.
-   */
-  exports.prototype.buildUrl = function (path, pathParams) {
-    if (!path.match(/^\//)) {
-      path = '/' + path;
-    }
-    var url = this.basePath + path;
-    var _this = this;
-    url = url.replace(/\{([\w-]+)\}/g, function (fullMatch, key) {
-      var value;
-      if (pathParams.hasOwnProperty(key)) {
-        value = _this.paramToString(pathParams[key]);
-      } else {
-        value = fullMatch;
-      }
-      return encodeURIComponent(value);
-    });
-    return url;
-  };
-
-  /**
-   * Checks whether the given content type represents JSON.<br>
-   * JSON content type examples:<br>
-   * <ul>
-   * <li>application/json</li>
-   * <li>application/json; charset=UTF8</li>
-   * <li>APPLICATION/JSON</li>
-   * </ul>
-   * @param {String} contentType The MIME content type to check.
-   * @returns {Boolean} <code>true</code> if <code>contentType</code> represents JSON, otherwise <code>false</code>.
-   */
-  exports.prototype.isJsonMime = function (contentType) {
-    return Boolean(contentType != null && contentType.match(/^application\/json(;.*)?$/i));
-  };
-
-  /**
-   * Chooses a content type from the given array, with JSON preferred; i.e. return JSON if included, otherwise return the first.
-   * @param {Array.<String>} contentTypes
-   * @returns {String} The chosen content type, preferring JSON.
-   */
-  exports.prototype.jsonPreferredMime = function (contentTypes) {
-    for (var i = 0; i < contentTypes.length; i++) {
-      if (this.isJsonMime(contentTypes[i])) {
-        return contentTypes[i];
-      }
-    }
-    return contentTypes[0];
-  };
-
-  /**
-   * Checks whether the given parameter value represents file-like content.
-   * @param param The parameter to check.
-   * @returns {Boolean} <code>true</code> if <code>param</code> represents a file.
-   */
-  exports.prototype.isFileParam = function (param) {
-    // fs.ReadStream in Node.js (but not in runtime like browserify)
-    if (typeof window === 'undefined' && typeof require === 'function' && require('fs') && param instanceof require('fs').ReadStream) {
-      return true;
-    }
-    // Buffer in Node.js
-    if (typeof Buffer === 'function' && param instanceof Buffer) {
-      return true;
-    }
-    // Blob in browser
-    if (typeof Blob === 'function' && param instanceof Blob) {
-      return true;
-    }
-    // File in browser (it seems File object is also instance of Blob, but keep this for safe)
-    if (typeof File === 'function' && param instanceof File) {
-      return true;
-    }
-    return false;
-  };
-
-  /**
-   * Normalizes parameter values:
-   * <ul>
-   * <li>remove nils</li>
-   * <li>keep files and arrays</li>
-   * <li>format to string with `paramToString` for other cases</li>
-   * </ul>
-   * @param {Object.<String, Object>} params The parameters as object properties.
-   * @returns {Object.<String, Object>} normalized parameters.
-   */
-  exports.prototype.normalizeParams = function (params) {
-    var newParams = {};
-    for (var key in params) {
-      if (params.hasOwnProperty(key) && params[key] != undefined && params[key] != null) {
-        var value = params[key];
-        if (this.isFileParam(value) || Array.isArray(value)) {
-          newParams[key] = value;
-        } else {
-          newParams[key] = this.paramToString(value);
-        }
-      }
-    }
-    return newParams;
-  };
-
-  /**
-   * Enumeration of collection format separator strategies.
-   * @enum {String}
-   * @readonly
-   */
-  exports.CollectionFormatEnum = {
-    /**
-     * Comma-separated values. Value: <code>csv</code>
-     * @const
-     */
-    CSV: ',',
-    /**
-     * Space-separated values. Value: <code>ssv</code>
-     * @const
-     */
-    SSV: ' ',
-    /**
-     * Tab-separated values. Value: <code>tsv</code>
-     * @const
-     */
-    TSV: '\t',
-    /**
-     * Pipe(|)-separated values. Value: <code>pipes</code>
-     * @const
-     */
-    PIPES: '|',
-    /**
-     * Native array. Value: <code>multi</code>
-     * @const
-     */
-    MULTI: 'multi'
-  };
-
-  /**
-   * Builds a string representation of an array-type actual parameter, according to the given collection format.
-   * @param {Array} param An array parameter.
-   * @param {module:ApiClient.CollectionFormatEnum} collectionFormat The array element separator strategy.
-   * @returns {String|Array} A string representation of the supplied collection, using the specified delimiter. Returns
-   * <code>param</code> as is if <code>collectionFormat</code> is <code>multi</code>.
-   */
-  exports.prototype.buildCollectionParam = function buildCollectionParam(param, collectionFormat) {
-    if (param == null) {
-      return null;
-    }
-    switch (collectionFormat) {
-      case 'csv':
-        return param.map(this.paramToString).join(',');
-      case 'ssv':
-        return param.map(this.paramToString).join(' ');
-      case 'tsv':
-        return param.map(this.paramToString).join('\t');
-      case 'pipes':
-        return param.map(this.paramToString).join('|');
-      case 'multi':
-        // return the array directly as SuperAgent will handle it as expected
-        return param.map(this.paramToString);
-      default:
-        throw new Error('Unknown collection format: ' + collectionFormat);
-    }
-  };
-
-  /**
-   * Applies authentication headers to the request.
-   * @param {Object} request The request object created by a <code>superagent()</code> call.
-   * @param {Array.<String>} authNames An array of authentication method names.
-   */
-  exports.prototype.applyAuthToRequest = function (request, authNames) {
-    var _this = this;
-    authNames.forEach(function (authName) {
-      var auth = _this.authentications[authName];
-      switch (auth.type) {
-        case 'basic':
-          if (auth.username || auth.password) {
-            request.auth(auth.username || '', auth.password || '');
-          }
-          break;
-        case 'apiKey':
-          if (auth.apiKey) {
-            var data = {};
-            if (auth.apiKeyPrefix) {
-              data[auth.name] = auth.apiKeyPrefix + ' ' + auth.apiKey;
-            } else {
-              data[auth.name] = auth.apiKey;
-            }
-            if (auth['in'] === 'header') {
-              request.set(data);
-            } else {
-              request.query(data);
-            }
-          }
-          break;
-        case 'oauth2':
-          if (auth.accessToken) {
-            request.set({ 'Authorization': 'Bearer ' + auth.accessToken });
-          }
-          break;
-        default:
-          throw new Error('Unknown authentication type: ' + auth.type);
-      }
-    });
-  };
-
-  /**
-   * Deserializes an HTTP response body into a value of the specified type.
-   * @param {Object} response A SuperAgent response object.
-   * @param {(String|Array.<String>|Object.<String, Object>|Function)} returnType The type to return. Pass a string for simple types
-   * or the constructor function for a complex type. Pass an array containing the type name to return an array of that type. To
-   * return an object, pass an object with one property whose name is the key type and whose value is the corresponding value type:
-   * all properties on <code>data<code> will be converted to this type.
-   * @returns A value of the specified type.
-   */
-  exports.prototype.deserialize = function deserialize(response, returnType) {
-    if (response == null || returnType == null) {
-      return null;
-    }
-    // Rely on SuperAgent for parsing response body.
-    // See http://visionmedia.github.io/superagent/#parsing-response-bodies
-    var data = response.body;
-    if (data == null) {
-      // SuperAgent does not always produce a body; use the unparsed response as a fallback
-      data = response.text;
-    }
-    return exports.convertToType(data, returnType);
-  };
-
-  /**
-   * Callback function to receive the result of the operation.
-   * @param {String} error Error message, if any.
-   * @param data The data returned by the service call.
-   * @param {String} response The complete HTTP response.
-   */
-
-  /**
-   * Invokes the REST service using the supplied settings and parameters.
-   * @param {String} path The base URL to invoke.
-   * @param {String} httpMethod The HTTP method to use.
-   * @param {Object.<String, String>} pathParams A map of path parameters and their values.
-   * @param {Object.<String, Object>} queryParams A map of query parameters and their values.
-   * @param {Object.<String, Object>} headerParams A map of header parameters and their values.
-   * @param {Object.<String, Object>} formParams A map of form parameters and their values.
-   * @param {Object} bodyParam The value to pass as the request body.
-   * @param {Array.<String>} authNames An array of authentication type names.
-   * @param {Array.<String>} contentTypes An array of request MIME types.
-   * @param {Array.<String>} accepts An array of acceptable response MIME types.
-   * @param {(String|Array|ObjectFunction)} returnType The required type to return; can be a string for simple types or the
-   * constructor for a complex type.
-   * @returns {Object} The SuperAgent request object.
-   */
-  exports.prototype.callApi = function callApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, authNames, contentTypes, accepts, returnType) {
-
-    var _this = this;
-    var url = this.buildUrl(path, pathParams);
-    var request = superagent(httpMethod, url);
-
-    // apply authentications
-    this.applyAuthToRequest(request, authNames);
-
-    // set query parameters
-    request.query(this.normalizeParams(queryParams));
-
-    // set header parameters
-    request.set(this.defaultHeaders).set(this.normalizeParams(headerParams));
-
-    // set request timeout
-    request.timeout(this.timeout);
-
-    var contentType = this.jsonPreferredMime(contentTypes);
-    if (contentType) {
-      request.type(contentType);
-    } else if (!request.header['Content-Type']) {
-      request.type('application/json');
-    }
-
-    if (contentType === 'application/x-www-form-urlencoded') {
-      request.send(this.normalizeParams(formParams));
-    } else if (contentType == 'multipart/form-data') {
-      var _formParams = this.normalizeParams(formParams);
-      for (var key in _formParams) {
-        if (_formParams.hasOwnProperty(key)) {
-          if (this.isFileParam(_formParams[key])) {
-            // file field
-            request.attach(key, _formParams[key]);
-          } else {
-            request.field(key, _formParams[key]);
-          }
-        }
-      }
-    } else if (bodyParam) {
-      request.send(bodyParam);
-    }
-
-    var accept = this.jsonPreferredMime(accepts);
-    if (accept) {
-      request.accept(accept);
-    }
-
-    request.end(function (error, response) {
-      if (callback) {
-        var data = null;
-        if (!error) {
-          data = _this.deserialize(response, returnType);
-        }
-        callback(error, data, response);
-      }
-    });
-
-    return request;
-  };
-
-  /**
-   * Parses an ISO-8601 string representation of a date value.
-   * @param {String} str The date value as a string.
-   * @returns {Date} The parsed date object.
-   */
-  exports.parseDate = function (str) {
-    return new Date(str.replace(/T/i, ' '));
-  };
-
-  /**
-   * Converts a value to the specified type.
-   * @param {(String|Object)} data The data to convert, as a string or object.
-   * @param {(String|Array.<String>|Object.<String, Object>|Function)} type The type to return. Pass a string for simple types
-   * or the constructor function for a complex type. Pass an array containing the type name to return an array of that type. To
-   * return an object, pass an object with one property whose name is the key type and whose value is the corresponding value type:
-   * all properties on <code>data<code> will be converted to this type.
-   * @returns An instance of the specified type.
-   */
-  exports.convertToType = function (data, type) {
-    switch (type) {
-      case 'Boolean':
-        return Boolean(data);
-      case 'Integer':
-        return parseInt(data, 10);
-      case 'Number':
-        return parseFloat(data);
-      case 'String':
-        return String(data);
-      case 'Date':
-        return this.parseDate(String(data));
-      default:
-        if (type === Object) {
-          // generic object, return directly
-          return data;
-        } else if (typeof type === 'function') {
-          // for model type like: User
-          return type.constructFromObject(data);
-        } else if (Array.isArray(type)) {
-          // for array type like: ['String']
-          var itemType = type[0];
-          return data.map(function (item) {
-            return exports.convertToType(item, itemType);
-          });
-        } else if ((typeof type === 'undefined' ? 'undefined' : _typeof(type)) === 'object') {
-          // for plain object type like: {'String': 'Integer'}
-          var keyType, valueType;
-          for (var k in type) {
-            if (type.hasOwnProperty(k)) {
-              keyType = k;
-              valueType = type[k];
-              break;
-            }
-          }
-          var result = {};
-          for (var k in data) {
-            if (data.hasOwnProperty(k)) {
-              var key = exports.convertToType(k, keyType);
-              var value = exports.convertToType(data[k], valueType);
-              result[key] = value;
-            }
-          }
-          return result;
-        } else {
-          // for unknown type, return the data directly
-          return data;
-        }
-    }
-  };
-
-  /**
-   * Constructs a new map or array model from REST data.
-   * @param data {Object|Array} The REST data.
-   * @param obj {Object|Array} The target object or array.
-   */
-  exports.constructFromObject = function (data, obj, itemType) {
-    if (Array.isArray(data)) {
-      for (var i = 0; i < data.length; i++) {
-        if (data.hasOwnProperty(i)) obj[i] = exports.convertToType(data[i], itemType);
-      }
-    } else {
-      for (var k in data) {
-        if (data.hasOwnProperty(k)) result[k] = exports.convertToType(data[k], itemType);
-      }
-    }
-  };
-
-  /**
-   * The default API client implementation.
-   * @type {module:ApiClient}
-   */
-  exports.instance = new exports();
-
-  return exports;
-});
-
-}).call(this,require("buffer").Buffer)
-},{"buffer":8,"fs":6,"superagent":125}],137:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -37505,7 +37017,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -37534,7 +37046,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getAppVersion operation.
+     * Function to receive the result of the getAppVersion operation.
      * @param {String} error Error message, if any.
      * @param {Object.<String, {'String': 'String'}>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -37565,7 +37077,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],138:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],137:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -37576,7 +37088,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/CreateEndpointBasicAuthRepresentation', 'model/EndpointBasicAuthRepresentation', 'model/EndpointConfigurationRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/CreateEndpointBasicAuthRepresentation'), require('../model/EndpointBasicAuthRepresentation'), require('../model/EndpointConfigurationRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/CreateEndpointBasicAuthRepresentation'), require('../model/EndpointBasicAuthRepresentation'), require('../model/EndpointConfigurationRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -37605,8 +37117,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the createBasicAuthConfiguration operation.
-     * @callback module:api/AdminEndpointsApi~createBasicAuthConfigurationCallback
+     * Function to receive the result of the createBasicAuthConfiguration operation.
      * @param {String} error Error message, if any.
      * @param {module:model/EndpointBasicAuthRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -37615,8 +37126,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * createBasicAuthConfiguration
      * @param {module:model/CreateEndpointBasicAuthRepresentation} createRepresentation createRepresentation
-     * @param {module:api/AdminEndpointsApi~createBasicAuthConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/EndpointBasicAuthRepresentation}
      */
     this.createBasicAuthConfiguration = function (createRepresentation) {
       var postBody = createRepresentation;
@@ -37640,8 +37149,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the createEndpointConfiguration operation.
-     * @callback module:api/AdminEndpointsApi~createEndpointConfigurationCallback
+     * Function to receive the result of the createEndpointConfiguration operation.
      * @param {String} error Error message, if any.
      * @param {module:model/EndpointConfigurationRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -37650,8 +37158,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * createEndpointConfiguration
      * @param {module:model/EndpointConfigurationRepresentation} representation representation
-     * @param {module:api/AdminEndpointsApi~createEndpointConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/EndpointConfigurationRepresentation}
      */
     this.createEndpointConfiguration = function (representation) {
       var postBody = representation;
@@ -37675,8 +37181,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getBasicAuthConfiguration operation.
-     * @callback module:api/AdminEndpointsApi~getBasicAuthConfigurationCallback
+     * Function to receive the result of the getBasicAuthConfiguration operation.
      * @param {String} error Error message, if any.
      * @param {module:model/EndpointBasicAuthRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -37686,8 +37191,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * getBasicAuthConfiguration
      * @param {Integer} basicAuthId basicAuthId
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminEndpointsApi~getBasicAuthConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/EndpointBasicAuthRepresentation}
      */
     this.getBasicAuthConfiguration = function (basicAuthId, tenantId) {
       var postBody = null;
@@ -37720,8 +37223,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getBasicAuthConfigurations operation.
-     * @callback module:api/AdminEndpointsApi~getBasicAuthConfigurationsCallback
+     * Function to receive the result of the getBasicAuthConfigurations operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/EndpointBasicAuthRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -37730,8 +37232,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * getBasicAuthConfigurations
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminEndpointsApi~getBasicAuthConfigurationsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {Array.<module:model/EndpointBasicAuthRepresentation>}
      */
     this.getBasicAuthConfigurations = function (tenantId) {
       var postBody = null;
@@ -37757,8 +37257,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getEndpointConfiguration operation.
-     * @callback module:api/AdminEndpointsApi~getEndpointConfigurationCallback
+     * Function to receive the result of the getEndpointConfiguration operation.
      * @param {String} error Error message, if any.
      * @param {module:model/EndpointConfigurationRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -37768,8 +37267,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * getEndpointConfiguration
      * @param {Integer} endpointConfigurationId endpointConfigurationId
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminEndpointsApi~getEndpointConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/EndpointConfigurationRepresentation}
      */
     this.getEndpointConfiguration = function (endpointConfigurationId, tenantId) {
       var postBody = null;
@@ -37802,8 +37299,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getEndpointConfigurations operation.
-     * @callback module:api/AdminEndpointsApi~getEndpointConfigurationsCallback
+     * Function to receive the result of the getEndpointConfigurations operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/EndpointConfigurationRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -37812,8 +37308,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * getEndpointConfigurations
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminEndpointsApi~getEndpointConfigurationsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {Array.<module:model/EndpointConfigurationRepresentation>}
      */
     this.getEndpointConfigurations = function (tenantId) {
       var postBody = null;
@@ -37839,8 +37333,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the removeBasicAuthonfiguration operation.
-     * @callback module:api/AdminEndpointsApi~removeBasicAuthonfigurationCallback
+     * Function to receive the result of the removeBasicAuthonfiguration operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -37850,7 +37343,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * removeBasicAuthonfiguration
      * @param {Integer} basicAuthId basicAuthId
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminEndpointsApi~removeBasicAuthonfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.removeBasicAuthonfiguration = function (basicAuthId, tenantId) {
       var postBody = null;
@@ -37883,8 +37375,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the removeEndpointConfiguration operation.
-     * @callback module:api/AdminEndpointsApi~removeEndpointConfigurationCallback
+     * Function to receive the result of the removeEndpointConfiguration operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -37894,7 +37385,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * removeEndpointConfiguration
      * @param {Integer} endpointConfigurationId endpointConfigurationId
      * @param {Integer} tenantId tenantId
-     * @param {module:api/AdminEndpointsApi~removeEndpointConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.removeEndpointConfiguration = function (endpointConfigurationId, tenantId) {
       var postBody = null;
@@ -37927,8 +37417,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the updateBasicAuthConfiguration operation.
-     * @callback module:api/AdminEndpointsApi~updateBasicAuthConfigurationCallback
+     * Function to receive the result of the updateBasicAuthConfiguration operation.
      * @param {String} error Error message, if any.
      * @param {module:model/EndpointBasicAuthRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -37938,8 +37427,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * updateBasicAuthConfiguration
      * @param {Integer} basicAuthId basicAuthId
      * @param {module:model/CreateEndpointBasicAuthRepresentation} createRepresentation createRepresentation
-     * @param {module:api/AdminEndpointsApi~updateBasicAuthConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/EndpointBasicAuthRepresentation}
      */
     this.updateBasicAuthConfiguration = function (basicAuthId, createRepresentation) {
       var postBody = createRepresentation;
@@ -37970,8 +37457,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the updateEndpointConfiguration operation.
-     * @callback module:api/AdminEndpointsApi~updateEndpointConfigurationCallback
+     * Function to receive the result of the updateEndpointConfiguration operation.
      * @param {String} error Error message, if any.
      * @param {module:model/EndpointConfigurationRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -37981,8 +37467,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * updateEndpointConfiguration
      * @param {Integer} endpointConfigurationId endpointConfigurationId
      * @param {module:model/EndpointConfigurationRepresentation} representation representation
-     * @param {module:api/AdminEndpointsApi~updateEndpointConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/EndpointConfigurationRepresentation}
      */
     this.updateEndpointConfiguration = function (endpointConfigurationId, representation) {
       var postBody = representation;
@@ -38016,7 +37500,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/CreateEndpointBasicAuthRepresentation":197,"../model/EndpointBasicAuthRepresentation":200,"../model/EndpointConfigurationRepresentation":201}],139:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/CreateEndpointBasicAuthRepresentation":196,"../model/EndpointBasicAuthRepresentation":199,"../model/EndpointConfigurationRepresentation":200}],138:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -38027,7 +37511,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/AddGroupCapabilitiesRepresentation', 'model/GroupRepresentation', 'model/ResultListDataRepresentation', 'model/AbstractGroupRepresentation', 'model/LightGroupRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/AddGroupCapabilitiesRepresentation'), require('../model/GroupRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/AbstractGroupRepresentation'), require('../model/LightGroupRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/AddGroupCapabilitiesRepresentation'), require('../model/GroupRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/AbstractGroupRepresentation'), require('../model/LightGroupRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -38056,8 +37540,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the activate operation.
-     * @callback module:api/AdminGroupsApi~activateCallback
+     * Function to receive the result of the activate operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -38066,7 +37549,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * activate
      * @param {Integer} groupId groupId
-     * @param {module:api/AdminGroupsApi~activateCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.activate = function (groupId) {
       var postBody = null;
@@ -38092,8 +37574,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the addAllUsersToGroup operation.
-     * @callback module:api/AdminGroupsApi~addAllUsersToGroupCallback
+     * Function to receive the result of the addAllUsersToGroup operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -38102,7 +37583,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * addAllUsersToGroup
      * @param {Integer} groupId groupId
-     * @param {module:api/AdminGroupsApi~addAllUsersToGroupCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.addAllUsersToGroup = function (groupId) {
       var postBody = null;
@@ -38128,8 +37608,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the addGroupCapabilities operation.
-     * @callback module:api/AdminGroupsApi~addGroupCapabilitiesCallback
+     * Function to receive the result of the addGroupCapabilities operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -38139,7 +37618,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * addGroupCapabilities
      * @param {Integer} groupId groupId
      * @param {module:model/AddGroupCapabilitiesRepresentation} addGroupCapabilitiesRepresentation addGroupCapabilitiesRepresentation
-     * @param {module:api/AdminGroupsApi~addGroupCapabilitiesCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.addGroupCapabilities = function (groupId, addGroupCapabilitiesRepresentation) {
       var postBody = addGroupCapabilitiesRepresentation;
@@ -38170,8 +37648,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the addGroupMember operation.
-     * @callback module:api/AdminGroupsApi~addGroupMemberCallback
+     * Function to receive the result of the addGroupMember operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -38181,7 +37658,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * addGroupMember
      * @param {Integer} groupId groupId
      * @param {Integer} userId userId
-     * @param {module:api/AdminGroupsApi~addGroupMemberCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.addGroupMember = function (groupId, userId) {
       var postBody = null;
@@ -38213,8 +37689,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the addRelatedGroup operation.
-     * @callback module:api/AdminGroupsApi~addRelatedGroupCallback
+     * Function to receive the result of the addRelatedGroup operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -38225,7 +37700,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Integer} groupId groupId
      * @param {Integer} relatedGroupId relatedGroupId
      * @param {String} type type
-     * @param {module:api/AdminGroupsApi~addRelatedGroupCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.addRelatedGroup = function (groupId, relatedGroupId, type) {
       var postBody = null;
@@ -38264,8 +37738,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the createNewGroup operation.
-     * @callback module:api/AdminGroupsApi~createNewGroupCallback
+     * Function to receive the result of the createNewGroup operation.
      * @param {String} error Error message, if any.
      * @param {module:model/GroupRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -38274,7 +37747,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * createNewGroup
      * @param {module:model/GroupRepresentation} groupRepresentation groupRepresentation
-     * @param {module:api/AdminGroupsApi~createNewGroupCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/GroupRepresentation}
      */
     this.createNewGroup = function (groupRepresentation) {
@@ -38299,8 +37771,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the deleteGroupCapability operation.
-     * @callback module:api/AdminGroupsApi~deleteGroupCapabilityCallback
+     * Function to receive the result of the deleteGroupCapability operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -38310,7 +37781,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * deleteGroupCapability
      * @param {Integer} groupId groupId
      * @param {Integer} groupCapabilityId groupCapabilityId
-     * @param {module:api/AdminGroupsApi~deleteGroupCapabilityCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.deleteGroupCapability = function (groupId, groupCapabilityId) {
       var postBody = null;
@@ -38342,8 +37812,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the deleteGroupMember operation.
-     * @callback module:api/AdminGroupsApi~deleteGroupMemberCallback
+     * Function to receive the result of the deleteGroupMember operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -38353,7 +37822,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * deleteGroupMember
      * @param {Integer} groupId groupId
      * @param {Integer} userId userId
-     * @param {module:api/AdminGroupsApi~deleteGroupMemberCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.deleteGroupMember = function (groupId, userId) {
       var postBody = null;
@@ -38385,8 +37853,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the deleteGroup operation.
-     * @callback module:api/AdminGroupsApi~deleteGroupCallback
+     * Function to receive the result of the deleteGroup operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -38395,7 +37862,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * deleteGroup
      * @param {Integer} groupId groupId
-     * @param {module:api/AdminGroupsApi~deleteGroupCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.deleteGroup = function (groupId) {
       var postBody = null;
@@ -38421,8 +37887,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the deleteRelatedGroup operation.
-     * @callback module:api/AdminGroupsApi~deleteRelatedGroupCallback
+     * Function to receive the result of the deleteRelatedGroup operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -38432,7 +37897,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * deleteRelatedGroup
      * @param {Integer} groupId groupId
      * @param {Integer} relatedGroupId relatedGroupId
-     * @param {module:api/AdminGroupsApi~deleteRelatedGroupCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.deleteRelatedGroup = function (groupId, relatedGroupId) {
       var postBody = null;
@@ -38464,8 +37928,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getCapabilities operation.
-     * @callback module:api/AdminGroupsApi~getCapabilitiesCallback
+     * Function to receive the result of the getCapabilities operation.
      * @param {String} error Error message, if any.
      * @param {Array.<'String'>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -38474,7 +37937,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * getCapabilities
      * @param {Integer} groupId groupId
-     * @param {module:api/AdminGroupsApi~getCapabilitiesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<'String'>}
      */
     this.getCapabilities = function (groupId) {
@@ -38501,8 +37963,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getGroupUsers operation.
-     * @callback module:api/AdminGroupsApi~getGroupUsersCallback
+     * Function to receive the result of the getGroupUsers operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -38515,7 +37976,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {String} opts.filter filter
      * @param {Integer} opts.page page
      * @param {Integer} opts.pageSize pageSize
-     * @param {module:api/AdminGroupsApi~getGroupUsersCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getGroupUsers = function (groupId, opts) {
@@ -38547,8 +38007,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getGroup operation.
-     * @callback module:api/AdminGroupsApi~getGroupCallback
+     * Function to receive the result of the getGroup operation.
      * @param {String} error Error message, if any.
      * @param {module:model/AbstractGroupRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -38560,7 +38019,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.includeAllUsers includeAllUsers
      * @param {Boolean} opts.summary summary
-     * @param {module:api/AdminGroupsApi~getGroupCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/AbstractGroupRepresentation}
      */
     this.getGroup = function (groupId, opts) {
@@ -38591,8 +38049,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getGroups operation.
-     * @callback module:api/AdminGroupsApi~getGroupsCallback
+     * Function to receive the result of the getGroups operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/LightGroupRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -38604,7 +38061,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Integer} opts.tenantId tenantId
      * @param {Boolean} opts.functional functional
      * @param {Boolean} opts.summary summary
-     * @param {module:api/AdminGroupsApi~getGroupsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/LightGroupRepresentation>}
      */
     this.getGroups = function (opts) {
@@ -38629,8 +38085,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getRelatedGroups operation.
-     * @callback module:api/AdminGroupsApi~getRelatedGroupsCallback
+     * Function to receive the result of the getRelatedGroups operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/LightGroupRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -38639,7 +38094,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * getRelatedGroups
      * @param {Integer} groupId groupId
-     * @param {module:api/AdminGroupsApi~getRelatedGroupsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {Array.<module:model/LightGroupRepresentation>}
      */
     this.getRelatedGroups = function (groupId) {
@@ -38666,8 +38120,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the updateGroup operation.
-     * @callback module:api/AdminGroupsApi~updateGroupCallback
+     * Function to receive the result of the updateGroup operation.
      * @param {String} error Error message, if any.
      * @param {module:model/GroupRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -38677,7 +38130,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * updateGroup
      * @param {Integer} groupId groupId
      * @param {module:model/GroupRepresentation} groupRepresentation groupRepresentation
-     * @param {module:api/AdminGroupsApi~updateGroupCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/GroupRepresentation}
      */
     this.updateGroup = function (groupId, groupRepresentation) {
@@ -38712,7 +38164,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/AbstractGroupRepresentation":180,"../model/AddGroupCapabilitiesRepresentation":183,"../model/GroupRepresentation":216,"../model/LightGroupRepresentation":220,"../model/ResultListDataRepresentation":240}],140:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/AbstractGroupRepresentation":179,"../model/AddGroupCapabilitiesRepresentation":182,"../model/GroupRepresentation":215,"../model/LightGroupRepresentation":219,"../model/ResultListDataRepresentation":239}],139:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -38723,7 +38175,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/LightTenantRepresentation', 'model/CreateTenantRepresentation', 'model/TenantEvent', 'model/TenantRepresentation', 'model/ImageUploadRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/LightTenantRepresentation'), require('../model/CreateTenantRepresentation'), require('../model/TenantEvent'), require('../model/TenantRepresentation'), require('../model/ImageUploadRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/LightTenantRepresentation'), require('../model/CreateTenantRepresentation'), require('../model/TenantEvent'), require('../model/TenantRepresentation'), require('../model/ImageUploadRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -38752,7 +38204,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the createTenant operation.
+     * Function to receive the result of the createTenant operation.
      * @param {String} error Error message, if any.
      * @param {module:model/LightTenantRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -38786,7 +38238,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the deleteTenant operation.
+     * Function to receive the result of the deleteTenant operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -38820,7 +38272,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getTenantEvents operation.
+     * Function to receive the result of the getTenantEvents operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/TenantEvent>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -38855,7 +38307,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getTenantLogo operation.
+     * Function to receive the result of the getTenantLogo operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -38889,7 +38341,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getTenant operation.
+     * Function to receive the result of the getTenant operation.
      * @param {String} error Error message, if any.
      * @param {module:model/TenantRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -38924,7 +38376,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getTenants operation.
+     * Function to receive the result of the getTenants operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/LightTenantRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -38952,7 +38404,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the update operation.
+     * Function to receive the result of the update operation.
      * @param {String} error Error message, if any.
      * @param {module:model/TenantRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -38993,7 +38445,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the uploadTenantLogo operation.
+     * Function to receive the result of the uploadTenantLogo operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ImageUploadRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39039,7 +38491,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/CreateTenantRepresentation":199,"../model/ImageUploadRepresentation":217,"../model/LightTenantRepresentation":221,"../model/TenantEvent":249,"../model/TenantRepresentation":250}],141:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/CreateTenantRepresentation":198,"../model/ImageUploadRepresentation":216,"../model/LightTenantRepresentation":220,"../model/TenantEvent":249,"../model/TenantRepresentation":250}],140:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -39050,7 +38502,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/BulkUserUpdateRepresentation', 'model/UserRepresentation', 'model/AbstractUserRepresentation', 'model/ResultListDataRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/BulkUserUpdateRepresentation'), require('../model/UserRepresentation'), require('../model/AbstractUserRepresentation'), require('../model/ResultListDataRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/BulkUserUpdateRepresentation'), require('../model/UserRepresentation'), require('../model/AbstractUserRepresentation'), require('../model/ResultListDataRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -39079,7 +38531,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the bulkUpdateUsers operation.
+     * Function to receive the result of the bulkUpdateUsers operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -39111,7 +38563,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the createNewUser operation.
+     * Function to receive the result of the createNewUser operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39144,7 +38596,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getUser operation.
+     * Function to receive the result of the getUser operation.
      * @param {String} error Error message, if any.
      * @param {module:model/AbstractUserRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39184,7 +38636,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getUsers operation.
+     * Function to receive the result of the getUsers operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39236,7 +38688,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the updateUserDetails operation.
+     * Function to receive the result of the updateUserDetails operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -39279,7 +38731,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/AbstractUserRepresentation":182,"../model/BulkUserUpdateRepresentation":191,"../model/ResultListDataRepresentation":240,"../model/UserRepresentation":255}],142:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/AbstractUserRepresentation":181,"../model/BulkUserUpdateRepresentation":190,"../model/ResultListDataRepresentation":239,"../model/UserRepresentation":255}],141:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -39290,7 +38742,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/ResultListDataRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/ResultListDataRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ResultListDataRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -39319,7 +38771,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the confirmAuthorisation operation.
+     * Function to receive the result of the confirmAuthorisation operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -39354,7 +38806,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getAllNetworks operation.
+     * Function to receive the result of the getAllNetworks operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39381,7 +38833,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getAllSites operation.
+     * Function to receive the result of the getAllSites operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39417,7 +38869,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getAllSites operation.
+     * Function to receive the result of the getAllSites operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39453,7 +38905,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getContentInFolder operation.
+     * Function to receive the result of the getContentInFolder operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39495,7 +38947,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getContentInFolder operation.
+     * Function to receive the result of the getContentInFolder operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39537,7 +38989,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getContentInSite operation.
+     * Function to receive the result of the getContentInSite operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39579,7 +39031,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getContentInSite operation.
+     * Function to receive the result of the getContentInSite operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39621,7 +39073,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getRepositories operation.
+     * Function to receive the result of the getRepositories operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39659,7 +39111,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/ResultListDataRepresentation":240}],143:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/ResultListDataRepresentation":239}],142:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -39670,7 +39122,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/RuntimeAppDefinitionSaveRepresentation', 'model/ResultListDataRepresentation', 'model/AppDefinitionRepresentation', 'model/AppDefinitionPublishRepresentation', 'model/AppDefinitionUpdateResultRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/RuntimeAppDefinitionSaveRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/AppDefinitionRepresentation'), require('../model/AppDefinitionPublishRepresentation'), require('../model/AppDefinitionUpdateResultRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/RuntimeAppDefinitionSaveRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/AppDefinitionRepresentation'), require('../model/AppDefinitionPublishRepresentation'), require('../model/AppDefinitionUpdateResultRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -39699,7 +39151,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the deployAppDefinitions operation.
+     * Function to receive the result of the deployAppDefinitions operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -39732,7 +39184,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the exportAppDefinition operation.
+     * Function to receive the result of the exportAppDefinition operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -39767,7 +39219,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getAppDefinitions operation.
+     * Function to receive the result of the getAppDefinitions operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39795,7 +39247,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the importAppDefinition operation.
+     * Function to receive the result of the importAppDefinition operation.
      * @param {String} error Error message, if any.
      * @param {module:model/AppDefinitionRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39831,7 +39283,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the importAppDefinition operation.
+     * Function to receive the result of the importAppDefinition operation.
      * @param {String} error Error message, if any.
      * @param {module:model/AppDefinitionRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39875,7 +39327,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the publishAppDefinition operation.
+     * Function to receive the result of the publishAppDefinition operation.
      * @param {String} error Error message, if any.
      * @param {module:model/AppDefinitionUpdateResultRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -39920,7 +39372,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/AppDefinitionPublishRepresentation":185,"../model/AppDefinitionRepresentation":186,"../model/AppDefinitionUpdateResultRepresentation":187,"../model/ResultListDataRepresentation":240,"../model/RuntimeAppDefinitionSaveRepresentation":241}],144:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/AppDefinitionPublishRepresentation":184,"../model/AppDefinitionRepresentation":185,"../model/AppDefinitionUpdateResultRepresentation":186,"../model/ResultListDataRepresentation":239,"../model/RuntimeAppDefinitionSaveRepresentation":240}],143:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -39931,7 +39383,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/AppDefinitionRepresentation', 'model/AppDefinitionPublishRepresentation', 'model/AppDefinitionUpdateResultRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/AppDefinitionRepresentation'), require('../model/AppDefinitionPublishRepresentation'), require('../model/AppDefinitionUpdateResultRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/AppDefinitionRepresentation'), require('../model/AppDefinitionPublishRepresentation'), require('../model/AppDefinitionUpdateResultRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -39960,7 +39412,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the exportAppDefinition operation.
+     * Function to receive the result of the exportAppDefinition operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -39995,7 +39447,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the importAppDefinition operation.
+     * Function to receive the result of the importAppDefinition operation.
      * @param {String} error Error message, if any.
      * @param {module:model/AppDefinitionRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40118,7 +39570,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/AppDefinitionPublishRepresentation":185,"../model/AppDefinitionRepresentation":186,"../model/AppDefinitionUpdateResultRepresentation":187}],145:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/AppDefinitionPublishRepresentation":184,"../model/AppDefinitionRepresentation":185,"../model/AppDefinitionUpdateResultRepresentation":186}],144:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -40129,7 +39581,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/RuntimeAppDefinitionSaveRepresentation', 'model/ResultListDataRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/RuntimeAppDefinitionSaveRepresentation'), require('../model/ResultListDataRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/RuntimeAppDefinitionSaveRepresentation'), require('../model/ResultListDataRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -40158,7 +39610,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the deployAppDefinitions operation.
+     * Function to receive the result of the deployAppDefinitions operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -40191,7 +39643,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getAppDefinitions operation.
+     * Function to receive the result of the getAppDefinitions operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40222,7 +39674,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/ResultListDataRepresentation":240,"../model/RuntimeAppDefinitionSaveRepresentation":241}],146:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/ResultListDataRepresentation":239,"../model/RuntimeAppDefinitionSaveRepresentation":240}],145:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -40233,7 +39685,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/CommentRepresentation', 'model/ResultListDataRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/CommentRepresentation'), require('../model/ResultListDataRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/CommentRepresentation'), require('../model/ResultListDataRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -40262,7 +39714,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the addProcessInstanceComment operation.
+     * Function to receive the result of the addProcessInstanceComment operation.
      * @param {String} error Error message, if any.
      * @param {module:model/CommentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40303,7 +39755,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the addTaskComment operation.
+     * Function to receive the result of the addTaskComment operation.
      * @param {String} error Error message, if any.
      * @param {module:model/CommentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40344,7 +39796,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getProcessInstanceComments operation.
+     * Function to receive the result of the getProcessInstanceComments operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40384,7 +39836,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getTaskComments operation.
+     * Function to receive the result of the getTaskComments operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40427,7 +39879,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/CommentRepresentation":194,"../model/ResultListDataRepresentation":240}],147:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/CommentRepresentation":193,"../model/ResultListDataRepresentation":239}],146:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -40438,7 +39890,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/RelatedContentRepresentation', 'model/ResultListDataRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/RelatedContentRepresentation'), require('../model/ResultListDataRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/RelatedContentRepresentation'), require('../model/ResultListDataRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -40467,8 +39919,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the createRelatedContentOnProcessInstance operation.
-     * @callback module:api/ContentApi~createRelatedContentOnProcessInstanceCallback
+     * Function to receive the result of the createRelatedContentOnProcessInstance operation.
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40478,8 +39929,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * createRelatedContentOnProcessInstance
      * @param {String} processInstanceId processInstanceId
      * @param {module:model/RelatedContentRepresentation} relatedContent relatedContent
-     * @param {module:api/ContentApi~createRelatedContentOnProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/RelatedContentRepresentation}
      */
     this.createRelatedContentOnProcessInstance = function (processInstanceId, relatedContent) {
       var postBody = relatedContent;
@@ -40510,8 +39959,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the createRelatedContentOnProcessInstance operation.
-     * @callback module:api/ContentApi~createRelatedContentOnProcessInstanceCallback
+     * Function to receive the result of the createRelatedContentOnProcessInstance operation.
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40521,8 +39969,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * createRelatedContentOnProcessInstance
      * @param {String} processInstanceId processInstanceId
      * @param {File} file file
-     * @param {module:api/ContentApi~createRelatedContentOnProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/RelatedContentRepresentation}
      */
     this.createRelatedContentOnProcessInstance = function (processInstanceId, file) {
       var postBody = null;
@@ -40555,8 +40001,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the createRelatedContentOnTask operation.
-     * @callback module:api/ContentApi~createRelatedContentOnTaskCallback
+     * Function to receive the result of the createRelatedContentOnTask operation.
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40568,8 +40013,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {module:model/RelatedContentRepresentation} relatedContent relatedContent
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.isRelatedContent isRelatedContent
-     * @param {module:api/ContentApi~createRelatedContentOnTaskCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/RelatedContentRepresentation}
      */
     this.createRelatedContentOnTask = function (taskId, relatedContent, opts) {
       opts = opts || {};
@@ -40603,8 +40046,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the createRelatedContentOnTask operation.
-     * @callback module:api/ContentApi~createRelatedContentOnTaskCallback
+     * Function to receive the result of the createRelatedContentOnTask operation.
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40616,8 +40058,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {File} file file
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.isRelatedContent isRelatedContent
-     * @param {module:api/ContentApi~createRelatedContentOnTaskCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/RelatedContentRepresentation}
      */
     this.createRelatedContentOnTask = function (taskId, file, opts) {
       opts = opts || {};
@@ -40653,8 +40093,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the createTemporaryRawRelatedContent operation.
-     * @callback module:api/ContentApi~createTemporaryRawRelatedContentCallback
+     * Function to receive the result of the createTemporaryRawRelatedContent operation.
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40663,8 +40102,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * createTemporaryRawRelatedContent
      * @param {File} file file
-     * @param {module:api/ContentApi~createTemporaryRawRelatedContentCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/RelatedContentRepresentation}
      */
     this.createTemporaryRawRelatedContent = function (file) {
       var postBody = null;
@@ -40690,8 +40127,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the createTemporaryRelatedContent operation.
-     * @callback module:api/ContentApi~createTemporaryRelatedContentCallback
+     * Function to receive the result of the createTemporaryRelatedContent operation.
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40700,8 +40136,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * createTemporaryRelatedContent
      * @param {module:model/RelatedContentRepresentation} relatedContent relatedContent
-     * @param {module:api/ContentApi~createTemporaryRelatedContentCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/RelatedContentRepresentation}
      */
     this.createTemporaryRelatedContent = function (relatedContent) {
       var postBody = relatedContent;
@@ -40725,8 +40159,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the deleteContent operation.
-     * @callback module:api/ContentApi~deleteContentCallback
+     * Function to receive the result of the deleteContent operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -40735,7 +40168,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * deleteContent
      * @param {Integer} contentId contentId
-     * @param {module:api/ContentApi~deleteContentCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.deleteContent = function (contentId) {
       var postBody = null;
@@ -40761,8 +40193,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getContent operation.
-     * @callback module:api/ContentApi~getContentCallback
+     * Function to receive the result of the getContent operation.
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40771,8 +40202,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * getContent
      * @param {Integer} contentId contentId
-     * @param {module:api/ContentApi~getContentCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/RelatedContentRepresentation}
      */
     this.getContent = function (contentId) {
       var postBody = null;
@@ -40798,8 +40227,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getProcessInstanceContent operation.
-     * @callback module:api/ContentApi~getProcessInstanceContentCallback
+     * Function to receive the result of the getProcessInstanceContent operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40808,8 +40236,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve content attached to process instance fields
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ContentApi~getProcessInstanceContentCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getProcessInstanceContent = function (processInstanceId) {
       var postBody = null;
@@ -40835,8 +40261,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getRawContent3 operation.
-     * @callback module:api/ContentApi~getRawContent3Callback
+     * Function to receive the result of the getRawContent3 operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -40845,7 +40270,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * getRawContent
      * @param {Integer} contentId contentId
-     * @param {module:api/ContentApi~getRawContent3Callback} callback The callback function, accepting three arguments: error, data, response
      */
     this.getRawContent3 = function (contentId) {
       var postBody = null;
@@ -40871,8 +40295,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getRelatedContentForProcessInstance operation.
-     * @callback module:api/ContentApi~getRelatedContentForProcessInstanceCallback
+     * Function to receive the result of the getRelatedContentForProcessInstance operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40881,8 +40304,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * getRelatedContentForProcessInstance
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ContentApi~getRelatedContentForProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getRelatedContentForProcessInstance = function (processInstanceId) {
       var postBody = null;
@@ -40908,8 +40329,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getRelatedContentForTask operation.
-     * @callback module:api/ContentApi~getRelatedContentForTaskCallback
+     * Function to receive the result of the getRelatedContentForTask operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -40918,8 +40338,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve which content is attached to a task
      * @param {String} taskId taskId
-     * @param {module:api/ContentApi~getRelatedContentForTaskCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getRelatedContentForTask = function (taskId) {
       var postBody = null;
@@ -40948,7 +40366,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/RelatedContentRepresentation":237,"../model/ResultListDataRepresentation":240}],148:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/RelatedContentRepresentation":236,"../model/ResultListDataRepresentation":239}],147:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -40959,7 +40377,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -40988,8 +40406,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getRawContent operation.
-     * @callback module:api/ContentRenditionApi~getRawContentCallback
+     * Function to receive the result of the getRawContent operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -40999,7 +40416,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Retrieve Raw Content
      * @param {Integer} contentId contentId
      * @param {String} renditionType renditionType
-     * @param {module:api/ContentRenditionApi~getRawContentCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.getRawContent = function (contentId, renditionType) {
       var postBody = null;
@@ -41034,7 +40450,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],149:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],148:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -41045,7 +40461,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/FormRepresentation', 'model/FormSaveRepresentation', 'model/ValidationErrorRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/FormRepresentation'), require('../model/FormSaveRepresentation'), require('../model/ValidationErrorRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/FormRepresentation'), require('../model/FormSaveRepresentation'), require('../model/ValidationErrorRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -41074,8 +40490,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getFormHistory operation.
-     * @callback module:api/EditorApi~getFormHistoryCallback
+     * Function to receive the result of the getFormHistory operation.
      * @param {String} error Error message, if any.
      * @param {module:model/FormRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41085,8 +40500,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * getFormHistory
      * @param {Integer} formId formId
      * @param {Integer} formHistoryId formHistoryId
-     * @param {module:api/EditorApi~getFormHistoryCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/FormRepresentation}
      */
     this.getFormHistory = function (formId, formHistoryId) {
       var postBody = null;
@@ -41118,8 +40531,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getForm operation.
-     * @callback module:api/EditorApi~getFormCallback
+     * Function to receive the result of the getForm operation.
      * @param {String} error Error message, if any.
      * @param {module:model/FormRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41128,8 +40540,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * getForm
      * @param {Integer} formId formId
-     * @param {module:api/EditorApi~getFormCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/FormRepresentation}
      */
     this.getForm = function (formId) {
       var postBody = null;
@@ -41155,8 +40565,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getForms operation.
-     * @callback module:api/EditorApi~getFormsCallback
+     * Function to receive the result of the getForms operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/FormRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41183,8 +40592,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the saveForm operation.
-     * @callback module:api/EditorApi~saveFormCallback
+     * Function to receive the result of the saveForm operation.
      * @param {String} error Error message, if any.
      * @param {module:model/FormRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41194,8 +40602,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * saveForm
      * @param {Integer} formId formId
      * @param {module:model/FormSaveRepresentation} saveRepresentation saveRepresentation
-     * @param {module:api/EditorApi~saveFormCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/FormRepresentation}
      */
     this.saveForm = function (formId, saveRepresentation) {
       var postBody = saveRepresentation;
@@ -41226,8 +40632,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the validateModel operation.
-     * @callback module:api/EditorApi~validateModelCallback
+     * Function to receive the result of the validateModel operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/ValidationErrorRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41237,8 +40642,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * validateModel
      * @param {Integer} formId formId
      * @param {module:model/FormSaveRepresentation} saveRepresentation saveRepresentation
-     * @param {module:api/EditorApi~validateModelCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {Array.<module:model/ValidationErrorRepresentation>}
      */
     this.validateModel = function (formId, saveRepresentation) {
       var postBody = saveRepresentation;
@@ -41272,7 +40675,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/FormRepresentation":210,"../model/FormSaveRepresentation":211,"../model/ValidationErrorRepresentation":257}],150:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/FormRepresentation":209,"../model/FormSaveRepresentation":210,"../model/ValidationErrorRepresentation":257}],149:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -41283,7 +40686,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/ResultListDataRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/ResultListDataRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ResultListDataRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -41312,8 +40715,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getGroups operation.
-     * @callback module:api/GroupsApi~getGroupsCallback
+     * Function to receive the result of the getGroups operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41327,8 +40729,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {String} opts.externalId externalId
      * @param {String} opts.externalIdCaseInsensitive externalIdCaseInsensitive
      * @param {Integer} opts.tenantId tenantId
-     * @param {module:api/GroupsApi~getGroupsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getGroups = function (opts) {
       opts = opts || {};
@@ -41354,8 +40754,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getUsersForGroup operation.
-     * @callback module:api/GroupsApi~getUsersForGroupCallback
+     * Function to receive the result of the getUsersForGroup operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41364,8 +40763,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * List users member of a specific group
      * @param {Integer} groupId groupId
-     * @param {module:api/GroupsApi~getUsersForGroupCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getUsersForGroup = function (groupId) {
       var postBody = null;
@@ -41394,7 +40791,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/ResultListDataRepresentation":240}],151:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/ResultListDataRepresentation":239}],150:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -41405,7 +40802,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/SyncLogEntryRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/SyncLogEntryRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/SyncLogEntryRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -41434,8 +40831,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getLogFile operation.
-     * @callback module:api/IDMSyncApi~getLogFileCallback
+     * Function to receive the result of the getLogFile operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -41444,7 +40840,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * getLogFile
      * @param {Integer} syncLogEntryId syncLogEntryId
-     * @param {module:api/IDMSyncApi~getLogFileCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.getLogFile = function (syncLogEntryId) {
       var postBody = null;
@@ -41470,8 +40865,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getSyncLogEntries operation.
-     * @callback module:api/IDMSyncApi~getSyncLogEntriesCallback
+     * Function to receive the result of the getSyncLogEntries operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/SyncLogEntryRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41483,8 +40877,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Integer} opts.tenantId tenantId
      * @param {Integer} opts.page page
      * @param {Integer} opts.size size
-     * @param {module:api/IDMSyncApi~getSyncLogEntriesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {Array.<module:model/SyncLogEntryRepresentation>}
      */
     this.getSyncLogEntries = function (opts) {
       opts = opts || {};
@@ -41511,7 +40903,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/SyncLogEntryRepresentation":243}],152:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/SyncLogEntryRepresentation":242}],151:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -41522,7 +40914,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/ResultListDataRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/ResultListDataRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ResultListDataRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -41551,8 +40943,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getAccounts operation.
-     * @callback module:api/IntegrationAccountApi~getAccountsCallback
+     * Function to receive the result of the getAccounts operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41583,7 +40974,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/ResultListDataRepresentation":240}],153:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/ResultListDataRepresentation":239}],152:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -41594,7 +40985,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/ResultListDataRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/ResultListDataRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ResultListDataRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -41623,8 +41014,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the confirmAuthorisation operation.
-     * @callback module:api/IntegrationAlfrescoCloudApi~confirmAuthorisationCallback
+     * Function to receive the result of the confirmAuthorisation operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -41634,7 +41024,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Alfresco Cloud Authorization
      * Returns Alfresco Oauth HTML Page
      * @param {String} code code
-     * @param {module:api/IntegrationAlfrescoCloudApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.confirmAuthorisation = function (code) {
       var postBody = null;
@@ -41660,8 +41049,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getAllNetworks operation.
-     * @callback module:api/IntegrationAlfrescoCloudApi~getAllNetworksCallback
+     * Function to receive the result of the getAllNetworks operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41687,8 +41075,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getAllSites operation.
-     * @callback module:api/IntegrationAlfrescoCloudApi~getAllSitesCallback
+     * Function to receive the result of the getAllSites operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41698,8 +41085,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List Alfresco sites
      * Returns ALL Sites
      * @param {String} networkId networkId
-     * @param {module:api/IntegrationAlfrescoCloudApi~getAllSitesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getAllSites = function (networkId) {
       var postBody = null;
@@ -41725,8 +41110,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getContentInFolder operation.
-     * @callback module:api/IntegrationAlfrescoCloudApi~getContentInFolderCallback
+     * Function to receive the result of the getContentInFolder operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41736,8 +41120,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List file &amp; folders inside a specific folder
      * @param {String} networkId networkId
      * @param {String} folderId folderId
-     * @param {module:api/IntegrationAlfrescoCloudApi~getContentInFolderCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getContentInFolder = function (networkId, folderId) {
       var postBody = null;
@@ -41769,8 +41151,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getContentInSite operation.
-     * @callback module:api/IntegrationAlfrescoCloudApi~getContentInSiteCallback
+     * Function to receive the result of the getContentInSite operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41780,8 +41161,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List file &amp; folders inside a specific site
      * @param {String} networkId networkId
      * @param {String} siteId siteId
-     * @param {module:api/IntegrationAlfrescoCloudApi~getContentInSiteCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getContentInSite = function (networkId, siteId) {
       var postBody = null;
@@ -41816,7 +41195,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/ResultListDataRepresentation":240}],154:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/ResultListDataRepresentation":239}],153:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -41827,7 +41206,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/ResultListDataRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/ResultListDataRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ResultListDataRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -41856,8 +41235,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getAllSites operation.
-     * @callback module:api/IntegrationAlfrescoOnPremiseApi~getAllSitesCallback
+     * Function to receive the result of the getAllSites operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41867,8 +41245,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List Alfresco sites
      * Returns ALL Sites
      * @param {String} repositoryId repositoryId
-     * @param {module:api/IntegrationAlfrescoOnPremiseApi~getAllSitesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getAllSites = function (repositoryId) {
       var postBody = null;
@@ -41894,8 +41270,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getContentInFolder operation.
-     * @callback module:api/IntegrationAlfrescoOnPremiseApi~getContentInFolderCallback
+     * Function to receive the result of the getContentInFolder operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41905,8 +41280,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List file &amp; folders inside a specific folder
      * @param {String} repositoryId repositoryId
      * @param {String} folderId folderId
-     * @param {module:api/IntegrationAlfrescoOnPremiseApi~getContentInFolderCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getContentInFolder = function (repositoryId, folderId) {
       var postBody = null;
@@ -41938,8 +41311,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getContentInSite operation.
-     * @callback module:api/IntegrationAlfrescoOnPremiseApi~getContentInSiteCallback
+     * Function to receive the result of the getContentInSite operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41949,8 +41321,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List file &amp; folders inside a specific site
      * @param {String} repositoryId repositoryId
      * @param {String} siteId siteId
-     * @param {module:api/IntegrationAlfrescoOnPremiseApi~getContentInSiteCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getContentInSite = function (repositoryId, siteId) {
       var postBody = null;
@@ -41982,8 +41352,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getRepositories operation.
-     * @callback module:api/IntegrationAlfrescoOnPremiseApi~getRepositoriesCallback
+     * Function to receive the result of the getRepositories operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -41995,8 +41364,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.tenantId tenantId
      * @param {Boolean} opts.includeAccounts includeAccounts
-     * @param {module:api/IntegrationAlfrescoOnPremiseApi~getRepositoriesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getRepositories = function (opts) {
       opts = opts || {};
@@ -42022,7 +41389,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/ResultListDataRepresentation":240}],155:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/ResultListDataRepresentation":239}],154:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -42033,7 +41400,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/UserAccountCredentialsRepresentation', 'model/ResultListDataRepresentation', 'model/BoxUserAccountCredentialsRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/UserAccountCredentialsRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/BoxUserAccountCredentialsRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/UserAccountCredentialsRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/BoxUserAccountCredentialsRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -42062,8 +41429,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the confirmAuthorisation operation.
-     * @callback module:api/IntegrationApi~confirmAuthorisationCallback
+     * Function to receive the result of the confirmAuthorisation operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -42073,7 +41439,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Alfresco Cloud Authorization
      * Returns Alfresco Oauth HTML Page
      * @param {String} code code
-     * @param {module:api/IntegrationApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.confirmAuthorisation = function (code) {
       var postBody = null;
@@ -42099,8 +41464,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the confirmAuthorisation operation.
-     * @callback module:api/IntegrationApi~confirmAuthorisationCallback
+     * Function to receive the result of the confirmAuthorisation operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -42110,7 +41474,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Box Authorization
      * Returns Box Oauth HTML Page
      * @param {String} code code
-     * @param {module:api/IntegrationApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.confirmAuthorisation = function (code) {
       var postBody = null;
@@ -42136,8 +41499,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the confirmAuthorisation operation.
-     * @callback module:api/IntegrationApi~confirmAuthorisationCallback
+     * Function to receive the result of the confirmAuthorisation operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -42147,7 +41509,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Drive Authorization
      * Returns Drive Oauth HTML Page
      * @param {String} code code
-     * @param {module:api/IntegrationApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.confirmAuthorisation = function (code) {
       var postBody = null;
@@ -42173,9 +41534,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the createRepositoryAccount operation.
-     * @callback module:api/IntegrationApi~createRepositoryAccountCallback
-     * @param {String} error Error message, if any.
+     * Function to receive the result of the createRepositoryAccount operation.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
      */
@@ -42184,7 +41543,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Create Box account
      * @param {Integer} userId userId
      * @param {module:model/UserAccountCredentialsRepresentation} credentials credentials
-     * @param {module:api/IntegrationApi~createRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.createRepositoryAccount = function (userId, credentials) {
       var postBody = credentials;
@@ -42215,8 +41573,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the deleteRepositoryAccount operation.
-     * @callback module:api/IntegrationApi~deleteRepositoryAccountCallback
+     * Function to receive the result of the deleteRepositoryAccount operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -42225,7 +41582,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Delete Box account
      * @param {Integer} userId userId
-     * @param {module:api/IntegrationApi~deleteRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.deleteRepositoryAccount = function (userId) {
       var postBody = null;
@@ -42251,8 +41607,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getAllNetworks operation.
-     * @callback module:api/IntegrationApi~getAllNetworksCallback
+     * Function to receive the result of the getAllNetworks operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42278,8 +41633,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getAllSites operation.
-     * @callback module:api/IntegrationApi~getAllSitesCallback
+     * Function to receive the result of the getAllSites operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42289,8 +41643,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List Alfresco sites
      * Returns ALL Sites
      * @param {String} networkId networkId
-     * @param {module:api/IntegrationApi~getAllSitesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getAllSites = function (networkId) {
       var postBody = null;
@@ -42316,8 +41668,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getAllSites operation.
-     * @callback module:api/IntegrationApi~getAllSitesCallback
+     * Function to receive the result of the getAllSites operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42327,8 +41678,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List Alfresco sites
      * Returns ALL Sites
      * @param {String} repositoryId repositoryId
-     * @param {module:api/IntegrationApi~getAllSitesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getAllSites = function (repositoryId) {
       var postBody = null;
@@ -42354,8 +41703,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getBoxPluginStatus operation.
-     * @callback module:api/IntegrationApi~getBoxPluginStatusCallback
+     * Function to receive the result of the getBoxPluginStatus operation.
      * @param {String} error Error message, if any.
      * @param {'Boolean'} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42381,8 +41729,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getContentInFolder operation.
-     * @callback module:api/IntegrationApi~getContentInFolderCallback
+     * Function to receive the result of the getContentInFolder operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42392,8 +41739,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List file &amp; folders inside a specific folder
      * @param {String} networkId networkId
      * @param {String} folderId folderId
-     * @param {module:api/IntegrationApi~getContentInFolderCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getContentInFolder = function (networkId, folderId) {
       var postBody = null;
@@ -42425,8 +41770,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getContentInFolder operation.
-     * @callback module:api/IntegrationApi~getContentInFolderCallback
+     * Function to receive the result of the getContentInFolder operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42436,8 +41780,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List file &amp; folders inside a specific folder
      * @param {String} repositoryId repositoryId
      * @param {String} folderId folderId
-     * @param {module:api/IntegrationApi~getContentInFolderCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getContentInFolder = function (repositoryId, folderId) {
       var postBody = null;
@@ -42469,8 +41811,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getContentInSite operation.
-     * @callback module:api/IntegrationApi~getContentInSiteCallback
+     * Function to receive the result of the getContentInSite operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42480,8 +41821,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List file &amp; folders inside a specific site
      * @param {String} networkId networkId
      * @param {String} siteId siteId
-     * @param {module:api/IntegrationApi~getContentInSiteCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getContentInSite = function (networkId, siteId) {
       var postBody = null;
@@ -42513,8 +41852,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getContentInSite operation.
-     * @callback module:api/IntegrationApi~getContentInSiteCallback
+     * Function to receive the result of the getContentInSite operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42524,8 +41862,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * List file &amp; folders inside a specific site
      * @param {String} repositoryId repositoryId
      * @param {String} siteId siteId
-     * @param {module:api/IntegrationApi~getContentInSiteCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getContentInSite = function (repositoryId, siteId) {
       var postBody = null;
@@ -42557,8 +41893,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getFiles operation.
-     * @callback module:api/IntegrationApi~getFilesCallback
+     * Function to receive the result of the getFiles operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42569,8 +41904,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Object} opts Optional parameters
      * @param {String} opts.filter filter
      * @param {String} opts.parent parent
-     * @param {module:api/IntegrationApi~getFilesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getFiles = function (opts) {
       opts = opts || {};
@@ -42593,8 +41926,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getFiles operation.
-     * @callback module:api/IntegrationApi~getFilesCallback
+     * Function to receive the result of the getFiles operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42606,8 +41938,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {String} opts.filter filter
      * @param {String} opts.parent parent
      * @param {Boolean} opts.currentFolderOnly currentFolderOnly
-     * @param {module:api/IntegrationApi~getFilesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getFiles = function (opts) {
       opts = opts || {};
@@ -42631,8 +41961,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getRepositories operation.
-     * @callback module:api/IntegrationApi~getRepositoriesCallback
+     * Function to receive the result of the getRepositories operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42644,8 +41973,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.tenantId tenantId
      * @param {Boolean} opts.includeAccounts includeAccounts
-     * @param {module:api/IntegrationApi~getRepositoriesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getRepositories = function (opts) {
       opts = opts || {};
@@ -42668,8 +41995,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getRepositoryAccount operation.
-     * @callback module:api/IntegrationApi~getRepositoryAccountCallback
+     * Function to receive the result of the getRepositoryAccount operation.
      * @param {String} error Error message, if any.
      * @param {module:model/BoxUserAccountCredentialsRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42678,8 +42004,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * List Box Account
      * @param {Integer} userId userId
-     * @param {module:api/IntegrationApi~getRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/BoxUserAccountCredentialsRepresentation}
      */
     this.getRepositoryAccount = function (userId) {
       var postBody = null;
@@ -42705,8 +42029,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the updateRepositoryAccount operation.
-     * @callback module:api/IntegrationApi~updateRepositoryAccountCallback
+     * Function to receive the result of the updateRepositoryAccount operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -42716,7 +42039,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Update Box account
      * @param {Integer} userId userId
      * @param {module:model/UserAccountCredentialsRepresentation} credentials credentials
-     * @param {module:api/IntegrationApi~updateRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.updateRepositoryAccount = function (userId, credentials) {
       var postBody = credentials;
@@ -42750,7 +42072,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/BoxUserAccountCredentialsRepresentation":190,"../model/ResultListDataRepresentation":240,"../model/UserAccountCredentialsRepresentation":251}],156:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/BoxUserAccountCredentialsRepresentation":189,"../model/ResultListDataRepresentation":239,"../model/UserAccountCredentialsRepresentation":251}],155:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -42761,7 +42083,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/UserAccountCredentialsRepresentation', 'model/ResultListDataRepresentation', 'model/BoxUserAccountCredentialsRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/UserAccountCredentialsRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/BoxUserAccountCredentialsRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/UserAccountCredentialsRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/BoxUserAccountCredentialsRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -42790,8 +42112,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the confirmAuthorisation operation.
-     * @callback module:api/IntegrationBoxApi~confirmAuthorisationCallback
+     * Function to receive the result of the confirmAuthorisation operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -42801,7 +42122,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Box Authorization
      * Returns Box Oauth HTML Page
      * @param {String} code code
-     * @param {module:api/IntegrationBoxApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.confirmAuthorisation = function (code) {
       var postBody = null;
@@ -42827,8 +42147,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the createRepositoryAccount operation.
-     * @callback module:api/IntegrationBoxApi~createRepositoryAccountCallback
+     * Function to receive the result of the createRepositoryAccount operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -42838,7 +42157,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Create Box account
      * @param {Integer} userId userId
      * @param {module:model/UserAccountCredentialsRepresentation} credentials credentials
-     * @param {module:api/IntegrationBoxApi~createRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.createRepositoryAccount = function (userId, credentials) {
       var postBody = credentials;
@@ -42869,8 +42187,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the deleteRepositoryAccount operation.
-     * @callback module:api/IntegrationBoxApi~deleteRepositoryAccountCallback
+     * Function to receive the result of the deleteRepositoryAccount operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -42879,7 +42196,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Delete Box account
      * @param {Integer} userId userId
-     * @param {module:api/IntegrationBoxApi~deleteRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.deleteRepositoryAccount = function (userId) {
       var postBody = null;
@@ -42905,8 +42221,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getBoxPluginStatus operation.
-     * @callback module:api/IntegrationBoxApi~getBoxPluginStatusCallback
+     * Function to receive the result of the getBoxPluginStatus operation.
      * @param {String} error Error message, if any.
      * @param {'Boolean'} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42932,8 +42247,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getFiles operation.
-     * @callback module:api/IntegrationBoxApi~getFilesCallback
+     * Function to receive the result of the getFiles operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42944,8 +42258,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Object} opts Optional parameters
      * @param {String} opts.filter filter
      * @param {String} opts.parent parent
-     * @param {module:api/IntegrationBoxApi~getFilesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getFiles = function (opts) {
       opts = opts || {};
@@ -42968,8 +42280,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getRepositoryAccount operation.
-     * @callback module:api/IntegrationBoxApi~getRepositoryAccountCallback
+     * Function to receive the result of the getRepositoryAccount operation.
      * @param {String} error Error message, if any.
      * @param {module:model/BoxUserAccountCredentialsRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -42978,8 +42289,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * List Box Account
      * @param {Integer} userId userId
-     * @param {module:api/IntegrationBoxApi~getRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/BoxUserAccountCredentialsRepresentation}
      */
     this.getRepositoryAccount = function (userId) {
       var postBody = null;
@@ -43005,8 +42314,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the updateRepositoryAccount operation.
-     * @callback module:api/IntegrationBoxApi~updateRepositoryAccountCallback
+     * Function to receive the result of the updateRepositoryAccount operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -43016,7 +42324,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Update Box account
      * @param {Integer} userId userId
      * @param {module:model/UserAccountCredentialsRepresentation} credentials credentials
-     * @param {module:api/IntegrationBoxApi~updateRepositoryAccountCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.updateRepositoryAccount = function (userId, credentials) {
       var postBody = credentials;
@@ -43050,7 +42357,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/BoxUserAccountCredentialsRepresentation":190,"../model/ResultListDataRepresentation":240,"../model/UserAccountCredentialsRepresentation":251}],157:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/BoxUserAccountCredentialsRepresentation":189,"../model/ResultListDataRepresentation":239,"../model/UserAccountCredentialsRepresentation":251}],156:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -43061,7 +42368,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/ResultListDataRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/ResultListDataRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ResultListDataRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -43090,8 +42397,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the confirmAuthorisation operation.
-     * @callback module:api/IntegrationDriveApi~confirmAuthorisationCallback
+     * Function to receive the result of the confirmAuthorisation operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -43101,7 +42407,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Drive Authorization
      * Returns Drive Oauth HTML Page
      * @param {String} code code
-     * @param {module:api/IntegrationDriveApi~confirmAuthorisationCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.confirmAuthorisation = function (code) {
       var postBody = null;
@@ -43127,8 +42432,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getFiles operation.
-     * @callback module:api/IntegrationDriveApi~getFilesCallback
+     * Function to receive the result of the getFiles operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43140,8 +42444,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {String} opts.filter filter
      * @param {String} opts.parent parent
      * @param {Boolean} opts.currentFolderOnly currentFolderOnly
-     * @param {module:api/IntegrationDriveApi~getFilesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getFiles = function (opts) {
       opts = opts || {};
@@ -43168,7 +42470,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/ResultListDataRepresentation":240}],158:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/ResultListDataRepresentation":239}],157:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -43179,7 +42481,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -43208,8 +42510,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getHistoricProcessModelBpmn20Xml operation.
-     * @callback module:api/ModelBpmnApi~getHistoricProcessModelBpmn20XmlCallback
+     * Function to receive the result of the getHistoricProcessModelBpmn20Xml operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -43219,7 +42520,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Export a previous process definition model to a BPMN 2.0 xml file
      * @param {Integer} processModelId processModelId
      * @param {Integer} processModelHistoryId processModelHistoryId
-     * @param {module:api/ModelBpmnApi~getHistoricProcessModelBpmn20XmlCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.getHistoricProcessModelBpmn20Xml = function (processModelId, processModelHistoryId) {
       var postBody = null;
@@ -43251,8 +42551,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getProcessModelBpmn20Xml operation.
-     * @callback module:api/ModelBpmnApi~getProcessModelBpmn20XmlCallback
+     * Function to receive the result of the getProcessModelBpmn20Xml operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -43261,7 +42560,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Export a process definition model to a BPMN 2.0 xml file
      * @param {Integer} processModelId processModelId
-     * @param {module:api/ModelBpmnApi~getProcessModelBpmn20XmlCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.getProcessModelBpmn20Xml = function (processModelId) {
       var postBody = null;
@@ -43290,7 +42588,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],159:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],158:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -43301,7 +42599,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/ModelRepresentation', 'model/ObjectNode', 'model/ResultListDataRepresentation', 'model/ValidationErrorRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/ModelRepresentation'), require('../model/ObjectNode'), require('../model/ResultListDataRepresentation'), require('../model/ValidationErrorRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ModelRepresentation'), require('../model/ObjectNode'), require('../model/ResultListDataRepresentation'), require('../model/ValidationErrorRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -43330,8 +42628,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the createModel operation.
-     * @callback module:api/ModelsApi~createModelCallback
+     * Function to receive the result of the createModel operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43340,8 +42637,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * To create a new model
      * @param {module:model/ModelRepresentation} modelRepresentation modelRepresentation
-     * @param {module:api/ModelsApi~createModelCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ModelRepresentation}
      */
     this.createModel = function (modelRepresentation) {
       var postBody = modelRepresentation;
@@ -43365,8 +42660,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the deleteModel operation.
-     * @callback module:api/ModelsApi~deleteModelCallback
+     * Function to receive the result of the deleteModel operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -43378,7 +42672,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.cascade cascade
      * @param {Boolean} opts.deleteRuntimeApp deleteRuntimeApp
-     * @param {module:api/ModelsApi~deleteModelCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.deleteModel = function (modelId, opts) {
       opts = opts || {};
@@ -43408,8 +42701,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the duplicateModel operation.
-     * @callback module:api/ModelsApi~duplicateModelCallback
+     * Function to receive the result of the duplicateModel operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43419,8 +42711,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * To duplicate an existing model
      * @param {Integer} modelId modelId
      * @param {module:model/ModelRepresentation} modelRepresentation modelRepresentation
-     * @param {module:api/ModelsApi~duplicateModelCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ModelRepresentation}
      */
     this.duplicateModel = function (modelId, modelRepresentation) {
       var postBody = modelRepresentation;
@@ -43451,8 +42741,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getModelJSON operation.
-     * @callback module:api/ModelsApi~getModelJSONCallback
+     * Function to receive the result of the getModelJSON operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ObjectNode} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43461,8 +42750,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Get the JSON model
      * @param {Integer} modelId modelId
-     * @param {module:api/ModelsApi~getModelJSONCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ObjectNode}
      */
     this.getModelJSON = function (modelId) {
       var postBody = null;
@@ -43488,8 +42775,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getModelThumbnail operation.
-     * @callback module:api/ModelsApi~getModelThumbnailCallback
+     * Function to receive the result of the getModelThumbnail operation.
      * @param {String} error Error message, if any.
      * @param {Array.<'String'>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43498,8 +42784,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Get Model thumbnail
      * @param {Integer} modelId modelId
-     * @param {module:api/ModelsApi~getModelThumbnailCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {Array.<'String'>}
      */
     this.getModelThumbnail = function (modelId) {
       var postBody = null;
@@ -43525,8 +42809,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getModel operation.
-     * @callback module:api/ModelsApi~getModelCallback
+     * Function to receive the result of the getModel operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43537,8 +42820,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Integer} modelId modelId
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.includePermissions includePermissions
-     * @param {module:api/ModelsApi~getModelCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ModelRepresentation}
      */
     this.getModel = function (modelId, opts) {
       opts = opts || {};
@@ -43567,8 +42848,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getModelsToIncludeInAppDefinition operation.
-     * @callback module:api/ModelsApi~getModelsToIncludeInAppDefinitionCallback
+     * Function to receive the result of the getModelsToIncludeInAppDefinition operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43594,8 +42874,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getModels operation.
-     * @callback module:api/ModelsApi~getModelsCallback
+     * Function to receive the result of the getModels operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43608,8 +42887,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {String} opts.sort sort
      * @param {Integer} opts.modelType modelType
      * @param {Integer} opts.referenceId referenceId
-     * @param {module:api/ModelsApi~getModelsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getModels = function (opts) {
       opts = opts || {};
@@ -43634,8 +42911,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the importNewVersion operation.
-     * @callback module:api/ModelsApi~importNewVersionCallback
+     * Function to receive the result of the importNewVersion operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43645,8 +42921,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Create a new model version
      * @param {Integer} modelId modelId
      * @param {File} file file
-     * @param {module:api/ModelsApi~importNewVersionCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ModelRepresentation}
      */
     this.importNewVersion = function (modelId, file) {
       var postBody = null;
@@ -43679,8 +42953,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the importProcessModel operation.
-     * @callback module:api/ModelsApi~importProcessModelCallback
+     * Function to receive the result of the importProcessModel operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43689,8 +42962,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * To import a BPMN 2.0 xml file
      * @param {File} file file
-     * @param {module:api/ModelsApi~importProcessModelCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ModelRepresentation}
      */
     this.importProcessModel = function (file) {
       var postBody = null;
@@ -43716,8 +42987,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the saveModel operation.
-     * @callback module:api/ModelsApi~saveModelCallback
+     * Function to receive the result of the saveModel operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43727,8 +42997,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Save the JSON model
      * @param {Integer} modelId modelId
      * @param {Object} values values
-     * @param {module:api/ModelsApi~saveModelCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ModelRepresentation}
      */
     this.saveModel = function (modelId, values) {
       var postBody = values;
@@ -43759,8 +43027,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the updateModel operation.
-     * @callback module:api/ModelsApi~updateModelCallback
+     * Function to receive the result of the updateModel operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43770,8 +43037,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Edit a specific model
      * @param {Integer} modelId modelId
      * @param {module:model/ModelRepresentation} updatedModel updatedModel
-     * @param {module:api/ModelsApi~updateModelCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ModelRepresentation}
      */
     this.updateModel = function (modelId, updatedModel) {
       var postBody = updatedModel;
@@ -43802,8 +43067,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the validateModel operation.
-     * @callback module:api/ModelsApi~validateModelCallback
+     * Function to receive the result of the validateModel operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/ValidationErrorRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43814,8 +43078,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Integer} modelId modelId
      * @param {Object} opts Optional parameters
      * @param {Object} opts.values values
-     * @param {module:api/ModelsApi~validateModelCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {Array.<module:model/ValidationErrorRepresentation>}
      */
     this.validateModel = function (modelId, opts) {
       opts = opts || {};
@@ -43845,7 +43107,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/ModelRepresentation":227,"../model/ObjectNode":228,"../model/ResultListDataRepresentation":240,"../model/ValidationErrorRepresentation":257}],160:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/ModelRepresentation":226,"../model/ObjectNode":227,"../model/ResultListDataRepresentation":239,"../model/ValidationErrorRepresentation":257}],159:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -43856,7 +43118,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/ResultListDataRepresentation', 'model/ModelRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/ResultListDataRepresentation'), require('../model/ModelRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ResultListDataRepresentation'), require('../model/ModelRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -43885,8 +43147,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getModelHistoryCollection operation.
-     * @callback module:api/ModelsHistoryApi~getModelHistoryCollectionCallback
+     * Function to receive the result of the getModelHistoryCollection operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43897,8 +43158,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Integer} modelId modelId
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.includeLatestVersion includeLatestVersion
-     * @param {module:api/ModelsHistoryApi~getModelHistoryCollectionCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getModelHistoryCollection = function (modelId, opts) {
       opts = opts || {};
@@ -43927,8 +43186,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getProcessModelHistory operation.
-     * @callback module:api/ModelsHistoryApi~getProcessModelHistoryCallback
+     * Function to receive the result of the getProcessModelHistory operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ModelRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -43938,8 +43196,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * To get a particular older version of a model
      * @param {Integer} modelId modelId
      * @param {Integer} modelHistoryId modelHistoryId
-     * @param {module:api/ModelsHistoryApi~getProcessModelHistoryCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ModelRepresentation}
      */
     this.getProcessModelHistory = function (modelId, modelHistoryId) {
       var postBody = null;
@@ -43974,7 +43230,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/ModelRepresentation":227,"../model/ResultListDataRepresentation":240}],161:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/ModelRepresentation":226,"../model/ResultListDataRepresentation":239}],160:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -43985,7 +43241,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/ProcessInstanceFilterRequestRepresentation', 'model/ResultListDataRepresentation', 'model/FormDefinitionRepresentation', 'model/ProcessInstanceRepresentation', 'model/ObjectNode', 'model/FormValueRepresentation', 'model/CreateProcessInstanceRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/ProcessInstanceFilterRequestRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/FormDefinitionRepresentation'), require('../model/ProcessInstanceRepresentation'), require('../model/ObjectNode'), require('../model/FormValueRepresentation'), require('../model/CreateProcessInstanceRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ProcessInstanceFilterRequestRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/FormDefinitionRepresentation'), require('../model/ProcessInstanceRepresentation'), require('../model/ObjectNode'), require('../model/FormValueRepresentation'), require('../model/CreateProcessInstanceRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -44014,8 +43270,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the deleteProcessInstance operation.
-     * @callback module:api/ProcessApi~deleteProcessInstanceCallback
+     * Function to receive the result of the deleteProcessInstance operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -44024,7 +43279,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Delete a process instance
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ProcessApi~deleteProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.deleteProcessInstance = function (processInstanceId) {
       var postBody = null;
@@ -44050,8 +43304,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the filterProcessInstances operation.
-     * @callback module:api/ProcessApi~filterProcessInstancesCallback
+     * Function to receive the result of the filterProcessInstances operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44060,8 +43313,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Filter a list of process instances
      * @param {module:model/ProcessInstanceFilterRequestRepresentation} filterRequest filterRequest
-     * @param {module:api/ProcessApi~filterProcessInstancesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.filterProcessInstances = function (filterRequest) {
       var postBody = filterRequest;
@@ -44085,8 +43336,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getProcessDefinitionStartForm operation.
-     * @callback module:api/ProcessApi~getProcessDefinitionStartFormCallback
+     * Function to receive the result of the getProcessDefinitionStartForm operation.
      * @param {String} error Error message, if any.
      * @param {module:model/FormDefinitionRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44112,8 +43362,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getProcessDefinitions operation.
-     * @callback module:api/ProcessApi~getProcessDefinitionsCallback
+     * Function to receive the result of the getProcessDefinitions operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44125,8 +43374,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.latest latest
      * @param {Integer} opts.appDefinitionId appDefinitionId
-     * @param {module:api/ProcessApi~getProcessDefinitionsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getProcessDefinitions = function (opts) {
       opts = opts || {};
@@ -44149,8 +43396,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getProcessInstanceContent operation.
-     * @callback module:api/ProcessApi~getProcessInstanceContentCallback
+     * Function to receive the result of the getProcessInstanceContent operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44159,8 +43405,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve content attached to process instance fields
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ProcessApi~getProcessInstanceContentCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getProcessInstanceContent = function (processInstanceId) {
       var postBody = null;
@@ -44186,8 +43430,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getProcessInstanceStartForm operation.
-     * @callback module:api/ProcessApi~getProcessInstanceStartFormCallback
+     * Function to receive the result of the getProcessInstanceStartForm operation.
      * @param {String} error Error message, if any.
      * @param {module:model/FormDefinitionRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44197,8 +43440,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Get process start form
      * When a process definitions has a start form (hasStartForm is true in the call above), the start form can be retrieved
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ProcessApi~getProcessInstanceStartFormCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/FormDefinitionRepresentation}
      */
     this.getProcessInstanceStartForm = function (processInstanceId) {
       var postBody = null;
@@ -44224,8 +43465,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getProcessInstance operation.
-     * @callback module:api/ProcessApi~getProcessInstanceCallback
+     * Function to receive the result of the getProcessInstance operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ProcessInstanceRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44234,8 +43474,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve a process instance information
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ProcessApi~getProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ProcessInstanceRepresentation}
      */
     this.getProcessInstance = function (processInstanceId) {
       var postBody = null;
@@ -44261,8 +43499,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getProcessInstances operation.
-     * @callback module:api/ProcessApi~getProcessInstancesCallback
+     * Function to receive the result of the getProcessInstances operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44271,8 +43508,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve a list of process instances
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/ProcessApi~getProcessInstancesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getProcessInstances = function (requestNode) {
       var postBody = requestNode;
@@ -44296,8 +43531,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getRestFieldValues operation.
-     * @callback module:api/ProcessApi~getRestFieldValuesCallback
+     * Function to receive the result of the getRestFieldValues operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/FormValueRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44323,8 +43557,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getRestTableFieldValues operation.
-     * @callback module:api/ProcessApi~getRestTableFieldValuesCallback
+     * Function to receive the result of the getRestTableFieldValues operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/FormValueRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44350,8 +43583,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the startNewProcessInstance operation.
-     * @callback module:api/ProcessApi~startNewProcessInstanceCallback
+     * Function to receive the result of the startNewProcessInstance operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ProcessInstanceRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44360,8 +43592,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Start a process instance
      * @param {module:model/CreateProcessInstanceRepresentation} startRequest startRequest
-     * @param {module:api/ProcessApi~startNewProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ProcessInstanceRepresentation}
      */
     this.startNewProcessInstance = function (startRequest) {
       var postBody = startRequest;
@@ -44388,7 +43618,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/CreateProcessInstanceRepresentation":198,"../model/FormDefinitionRepresentation":206,"../model/FormValueRepresentation":214,"../model/ObjectNode":228,"../model/ProcessInstanceFilterRequestRepresentation":231,"../model/ProcessInstanceRepresentation":232,"../model/ResultListDataRepresentation":240}],162:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/CreateProcessInstanceRepresentation":197,"../model/FormDefinitionRepresentation":205,"../model/FormValueRepresentation":213,"../model/ObjectNode":227,"../model/ProcessInstanceFilterRequestRepresentation":230,"../model/ProcessInstanceRepresentation":231,"../model/ResultListDataRepresentation":239}],161:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -44399,7 +43629,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/ResultListDataRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/ResultListDataRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ResultListDataRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -44428,8 +43658,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getProcessDefinitions operation.
-     * @callback module:api/ProcessDefinitionsApi~getProcessDefinitionsCallback
+     * Function to receive the result of the getProcessDefinitions operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44441,8 +43670,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.latest latest
      * @param {Integer} opts.appDefinitionId appDefinitionId
-     * @param {module:api/ProcessDefinitionsApi~getProcessDefinitionsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getProcessDefinitions = function (opts) {
       opts = opts || {};
@@ -44468,7 +43695,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/ResultListDataRepresentation":240}],163:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/ResultListDataRepresentation":239}],162:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -44479,7 +43706,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/FormDefinitionRepresentation', 'model/FormValueRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/FormDefinitionRepresentation'), require('../model/FormValueRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/FormDefinitionRepresentation'), require('../model/FormValueRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -44508,8 +43735,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getProcessDefinitionStartForm operation.
-     * @callback module:api/ProcessDefinitionsFormApi~getProcessDefinitionStartFormCallback
+     * Function to receive the result of the getProcessDefinitionStartForm operation.
      * @param {String} error Error message, if any.
      * @param {module:model/FormDefinitionRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44535,8 +43761,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getRestFieldValues operation.
-     * @callback module:api/ProcessDefinitionsFormApi~getRestFieldValuesCallback
+     * Function to receive the result of the getRestFieldValues operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/FormValueRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44562,8 +43787,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getRestTableFieldValues operation.
-     * @callback module:api/ProcessDefinitionsFormApi~getRestTableFieldValuesCallback
+     * Function to receive the result of the getRestTableFieldValues operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/FormValueRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44592,7 +43816,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/FormDefinitionRepresentation":206,"../model/FormValueRepresentation":214}],164:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/FormDefinitionRepresentation":205,"../model/FormValueRepresentation":213}],163:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -44603,7 +43827,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/CommentRepresentation', 'model/ResultListDataRepresentation', 'model/FormDefinitionRepresentation', 'model/ProcessInstanceRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/CommentRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/FormDefinitionRepresentation'), require('../model/ProcessInstanceRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/CommentRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/FormDefinitionRepresentation'), require('../model/ProcessInstanceRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -44632,8 +43856,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the addProcessInstanceComment operation.
-     * @callback module:api/ProcessInstancesApi~addProcessInstanceCommentCallback
+     * Function to receive the result of the addProcessInstanceComment operation.
      * @param {String} error Error message, if any.
      * @param {module:model/CommentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44643,8 +43866,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Add a comment to a Process
      * @param {module:model/CommentRepresentation} commentRequest commentRequest
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ProcessInstancesApi~addProcessInstanceCommentCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/CommentRepresentation}
      */
     this.addProcessInstanceComment = function (commentRequest, processInstanceId) {
       var postBody = commentRequest;
@@ -44675,8 +43896,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the deleteProcessInstance operation.
-     * @callback module:api/ProcessInstancesApi~deleteProcessInstanceCallback
+     * Function to receive the result of the deleteProcessInstance operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -44685,7 +43905,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Delete a process instance
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ProcessInstancesApi~deleteProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.deleteProcessInstance = function (processInstanceId) {
       var postBody = null;
@@ -44711,8 +43930,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getProcessInstanceComments operation.
-     * @callback module:api/ProcessInstancesApi~getProcessInstanceCommentsCallback
+     * Function to receive the result of the getProcessInstanceComments operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44723,8 +43941,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {String} processInstanceId processInstanceId
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.latestFirst latestFirst
-     * @param {module:api/ProcessInstancesApi~getProcessInstanceCommentsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getProcessInstanceComments = function (processInstanceId, opts) {
       opts = opts || {};
@@ -44753,8 +43969,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getProcessInstanceStartForm operation.
-     * @callback module:api/ProcessInstancesApi~getProcessInstanceStartFormCallback
+     * Function to receive the result of the getProcessInstanceStartForm operation.
      * @param {String} error Error message, if any.
      * @param {module:model/FormDefinitionRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44764,8 +43979,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Get process start form
      * When a process definitions has a start form (hasStartForm is true in the call above), the start form can be retrieved
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ProcessInstancesApi~getProcessInstanceStartFormCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/FormDefinitionRepresentation}
      */
     this.getProcessInstanceStartForm = function (processInstanceId) {
       var postBody = null;
@@ -44791,8 +44004,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getProcessInstance operation.
-     * @callback module:api/ProcessInstancesApi~getProcessInstanceCallback
+     * Function to receive the result of the getProcessInstance operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ProcessInstanceRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44801,8 +44013,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve a process instance information
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ProcessInstancesApi~getProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ProcessInstanceRepresentation}
      */
     this.getProcessInstance = function (processInstanceId) {
       var postBody = null;
@@ -44831,7 +44041,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/CommentRepresentation":194,"../model/FormDefinitionRepresentation":206,"../model/ProcessInstanceRepresentation":232,"../model/ResultListDataRepresentation":240}],165:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/CommentRepresentation":193,"../model/FormDefinitionRepresentation":205,"../model/ProcessInstanceRepresentation":231,"../model/ResultListDataRepresentation":239}],164:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -44842,7 +44052,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/ResultListDataRepresentation', 'model/CreateProcessInstanceRepresentation', 'model/ProcessInstanceRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/ResultListDataRepresentation'), require('../model/CreateProcessInstanceRepresentation'), require('../model/ProcessInstanceRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ResultListDataRepresentation'), require('../model/CreateProcessInstanceRepresentation'), require('../model/ProcessInstanceRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -44871,8 +44081,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getProcessInstanceContent operation.
-     * @callback module:api/ProcessInstancesInformationApi~getProcessInstanceContentCallback
+     * Function to receive the result of the getProcessInstanceContent operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44881,8 +44090,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve content attached to process instance fields
      * @param {String} processInstanceId processInstanceId
-     * @param {module:api/ProcessInstancesInformationApi~getProcessInstanceContentCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getProcessInstanceContent = function (processInstanceId) {
       var postBody = null;
@@ -44908,8 +44115,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the startNewProcessInstance operation.
-     * @callback module:api/ProcessInstancesInformationApi~startNewProcessInstanceCallback
+     * Function to receive the result of the startNewProcessInstance operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ProcessInstanceRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44918,8 +44124,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Start a process instance
      * @param {module:model/CreateProcessInstanceRepresentation} startRequest startRequest
-     * @param {module:api/ProcessInstancesInformationApi~startNewProcessInstanceCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ProcessInstanceRepresentation}
      */
     this.startNewProcessInstance = function (startRequest) {
       var postBody = startRequest;
@@ -44946,7 +44150,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/CreateProcessInstanceRepresentation":198,"../model/ProcessInstanceRepresentation":232,"../model/ResultListDataRepresentation":240}],166:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/CreateProcessInstanceRepresentation":197,"../model/ProcessInstanceRepresentation":231,"../model/ResultListDataRepresentation":239}],165:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -44957,7 +44161,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/ProcessInstanceFilterRequestRepresentation', 'model/ResultListDataRepresentation', 'model/ObjectNode'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/ProcessInstanceFilterRequestRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/ObjectNode'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ProcessInstanceFilterRequestRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/ObjectNode'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -44986,8 +44190,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the filterProcessInstances operation.
-     * @callback module:api/ProcessInstancesListingApi~filterProcessInstancesCallback
+     * Function to receive the result of the filterProcessInstances operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -44996,8 +44199,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Filter a list of process instances
      * @param {module:model/ProcessInstanceFilterRequestRepresentation} filterRequest filterRequest
-     * @param {module:api/ProcessInstancesListingApi~filterProcessInstancesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.filterProcessInstances = function (filterRequest) {
       var postBody = filterRequest;
@@ -45021,8 +44222,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getProcessInstances operation.
-     * @callback module:api/ProcessInstancesListingApi~getProcessInstancesCallback
+     * Function to receive the result of the getProcessInstances operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45031,8 +44231,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve a list of process instances
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/ProcessInstancesListingApi~getProcessInstancesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getProcessInstances = function (requestNode) {
       var postBody = requestNode;
@@ -45059,7 +44257,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/ObjectNode":228,"../model/ProcessInstanceFilterRequestRepresentation":231,"../model/ResultListDataRepresentation":240}],167:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/ObjectNode":227,"../model/ProcessInstanceFilterRequestRepresentation":230,"../model/ResultListDataRepresentation":239}],166:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -45070,7 +44268,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/ProcessScopesRequestRepresentation', 'model/ProcessScopeRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/ProcessScopesRequestRepresentation'), require('../model/ProcessScopeRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ProcessScopesRequestRepresentation'), require('../model/ProcessScopeRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -45099,8 +44297,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getRuntimeProcessScopes operation.
-     * @callback module:api/ProcessScopeApi~getRuntimeProcessScopesCallback
+     * Function to receive the result of the getRuntimeProcessScopes operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/ProcessScopeRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45109,8 +44306,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * getRuntimeProcessScopes
      * @param {module:model/ProcessScopesRequestRepresentation} processScopesRequest processScopesRequest
-     * @param {module:api/ProcessScopeApi~getRuntimeProcessScopesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {Array.<module:model/ProcessScopeRepresentation>}
      */
     this.getRuntimeProcessScopes = function (processScopesRequest) {
       var postBody = processScopesRequest;
@@ -45137,7 +44332,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/ProcessScopeRepresentation":234,"../model/ProcessScopesRequestRepresentation":235}],168:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/ProcessScopeRepresentation":233,"../model/ProcessScopesRequestRepresentation":234}],167:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -45148,7 +44343,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/ChangePasswordRepresentation', 'model/UserRepresentation', 'model/ImageUploadRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/ChangePasswordRepresentation'), require('../model/UserRepresentation'), require('../model/ImageUploadRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ChangePasswordRepresentation'), require('../model/UserRepresentation'), require('../model/ImageUploadRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -45177,8 +44372,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the changePassword operation.
-     * @callback module:api/ProfileApi~changePasswordCallback
+     * Function to receive the result of the changePassword operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -45187,7 +44381,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Change user password
      * @param {module:model/ChangePasswordRepresentation} changePasswordRepresentation changePasswordRepresentation
-     * @param {module:api/ProfileApi~changePasswordCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.changePassword = function (changePasswordRepresentation) {
       var postBody = changePasswordRepresentation;
@@ -45211,8 +44404,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getProfilePicture operation.
-     * @callback module:api/ProfileApi~getProfilePictureCallback
+     * Function to receive the result of the getProfilePicture operation.
      * @param {String} error Error message, if any.
      * @param {File} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45239,8 +44431,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getProfile operation.
-     * @callback module:api/ProfileApi~getProfileCallback
+     * Function to receive the result of the getProfile operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45267,8 +44458,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the updateProfile operation.
-     * @callback module:api/ProfileApi~updateProfileCallback
+     * Function to receive the result of the updateProfile operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45278,8 +44468,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Update user information
      * Only a first name, last name, email and company can be updated
      * @param {module:model/UserRepresentation} userRepresentation userRepresentation
-     * @param {module:api/ProfileApi~updateProfileCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/UserRepresentation}
      */
     this.updateProfile = function (userRepresentation) {
       var postBody = userRepresentation;
@@ -45303,8 +44491,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the uploadProfilePicture operation.
-     * @callback module:api/ProfileApi~uploadProfilePictureCallback
+     * Function to receive the result of the uploadProfilePicture operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ImageUploadRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45313,8 +44500,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Change user profile picture
      * @param {File} file file
-     * @param {module:api/ProfileApi~uploadProfilePictureCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ImageUploadRepresentation}
      */
     this.uploadProfilePicture = function (file) {
       var postBody = null;
@@ -45343,7 +44528,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/ChangePasswordRepresentation":192,"../model/ImageUploadRepresentation":217,"../model/UserRepresentation":255}],169:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/ChangePasswordRepresentation":191,"../model/ImageUploadRepresentation":216,"../model/UserRepresentation":255}],168:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -45354,7 +44539,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -45383,8 +44568,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getControllers operation.
-     * @callback module:api/ScriptFileApi~getControllersCallback
+     * Function to receive the result of the getControllers operation.
      * @param {String} error Error message, if any.
      * @param {'String'} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45410,8 +44594,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getLibraries operation.
-     * @callback module:api/ScriptFileApi~getLibrariesCallback
+     * Function to receive the result of the getLibraries operation.
      * @param {String} error Error message, if any.
      * @param {'String'} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45440,7 +44623,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],170:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],169:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -45451,7 +44634,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/SystemPropertiesRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/SystemPropertiesRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/SystemPropertiesRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -45480,8 +44663,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getProperties operation.
-     * @callback module:api/SystemPropertiesApi~getPropertiesCallback
+     * Function to receive the result of the getProperties operation.
      * @param {String} error Error message, if any.
      * @param {module:model/SystemPropertiesRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45511,7 +44693,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/SystemPropertiesRepresentation":244}],171:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/SystemPropertiesRepresentation":243}],170:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -45522,7 +44704,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/ObjectNode', 'model/TaskRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/ObjectNode'), require('../model/TaskRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ObjectNode'), require('../model/TaskRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -45551,8 +44733,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the assignTask operation.
-     * @callback module:api/TaskActionsApi~assignTaskCallback
+     * Function to receive the result of the assignTask operation.
      * @param {String} error Error message, if any.
      * @param {module:model/TaskRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45562,8 +44743,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Assign a task to a user
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskActionsApi~assignTaskCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/TaskRepresentation}
      */
     this.assignTask = function (taskId, requestNode) {
       var postBody = requestNode;
@@ -45594,8 +44773,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the attachForm operation.
-     * @callback module:api/TaskActionsApi~attachFormCallback
+     * Function to receive the result of the attachForm operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -45605,7 +44783,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Attach a form to a task
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskActionsApi~attachFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.attachForm = function (taskId, requestNode) {
       var postBody = requestNode;
@@ -45636,8 +44813,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the claimTask operation.
-     * @callback module:api/TaskActionsApi~claimTaskCallback
+     * Function to receive the result of the claimTask operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -45647,7 +44823,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Claim a task
      * To claim a task (in case the task is assigned to a group)
      * @param {String} taskId taskId
-     * @param {module:api/TaskActionsApi~claimTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.claimTask = function (taskId) {
       var postBody = null;
@@ -45673,8 +44848,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the completeTask operation.
-     * @callback module:api/TaskActionsApi~completeTaskCallback
+     * Function to receive the result of the completeTask operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -45684,7 +44858,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Complete Task
      * To complete a task (standalone or without a task form)
      * @param {String} taskId taskId
-     * @param {module:api/TaskActionsApi~completeTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.completeTask = function (taskId) {
       var postBody = null;
@@ -45710,8 +44883,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the involveUser operation.
-     * @callback module:api/TaskActionsApi~involveUserCallback
+     * Function to receive the result of the involveUser operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -45721,7 +44893,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * To involve a user with a task
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskActionsApi~involveUserCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.involveUser = function (taskId, requestNode) {
       var postBody = requestNode;
@@ -45752,8 +44923,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the removeForm operation.
-     * @callback module:api/TaskActionsApi~removeFormCallback
+     * Function to receive the result of the removeForm operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -45762,7 +44932,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Remove a form to a task
      * @param {String} taskId taskId
-     * @param {module:api/TaskActionsApi~removeFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.removeForm = function (taskId) {
       var postBody = null;
@@ -45788,8 +44957,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the removeInvolvedUser operation.
-     * @callback module:api/TaskActionsApi~removeInvolvedUserCallback
+     * Function to receive the result of the removeInvolvedUser operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -45799,7 +44967,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Remove an involved user from a task
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskActionsApi~removeInvolvedUserCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.removeInvolvedUser = function (taskId, requestNode) {
       var postBody = requestNode;
@@ -45830,8 +44997,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the unclaimTask operation.
-     * @callback module:api/TaskActionsApi~unclaimTaskCallback
+     * Function to receive the result of the unclaimTask operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -45841,7 +45007,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Unclaim a task
      * To unclaim a task (in case the task was assigned to a group)
      * @param {String} taskId taskId
-     * @param {module:api/TaskActionsApi~unclaimTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.unclaimTask = function (taskId) {
       var postBody = null;
@@ -45870,7 +45035,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/ObjectNode":228,"../model/TaskRepresentation":247}],172:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/ObjectNode":227,"../model/TaskRepresentation":247}],171:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -45881,7 +45046,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/TaskRepresentation', 'model/CommentRepresentation', 'model/ObjectNode', 'model/CompleteFormRepresentation', 'model/RelatedContentRepresentation', 'model/TaskFilterRequestRepresentation', 'model/ResultListDataRepresentation', 'model/FormValueRepresentation', 'model/FormDefinitionRepresentation', 'model/ChecklistOrderRepresentation', 'model/SaveFormRepresentation', 'model/TaskUpdateRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/TaskRepresentation'), require('../model/CommentRepresentation'), require('../model/ObjectNode'), require('../model/CompleteFormRepresentation'), require('../model/RelatedContentRepresentation'), require('../model/TaskFilterRequestRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/FormValueRepresentation'), require('../model/FormDefinitionRepresentation'), require('../model/ChecklistOrderRepresentation'), require('../model/SaveFormRepresentation'), require('../model/TaskUpdateRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/TaskRepresentation'), require('../model/CommentRepresentation'), require('../model/ObjectNode'), require('../model/CompleteFormRepresentation'), require('../model/RelatedContentRepresentation'), require('../model/TaskFilterRequestRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/FormValueRepresentation'), require('../model/FormDefinitionRepresentation'), require('../model/ChecklistOrderRepresentation'), require('../model/SaveFormRepresentation'), require('../model/TaskUpdateRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -45910,8 +45075,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the addSubtask operation.
-     * @callback module:api/TaskApi~addSubtaskCallback
+     * Function to receive the result of the addSubtask operation.
      * @param {String} error Error message, if any.
      * @param {module:model/TaskRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45921,8 +45085,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Create a task checklist
      * @param {String} taskId taskId
      * @param {module:model/TaskRepresentation} taskRepresentation taskRepresentation
-     * @param {module:api/TaskApi~addSubtaskCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/TaskRepresentation}
      */
     this.addSubtask = function (taskId, taskRepresentation) {
       var postBody = taskRepresentation;
@@ -45953,8 +45115,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the addTaskComment operation.
-     * @callback module:api/TaskApi~addTaskCommentCallback
+     * Function to receive the result of the addTaskComment operation.
      * @param {String} error Error message, if any.
      * @param {module:model/CommentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45964,8 +45125,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Add a comment to a Task
      * @param {module:model/CommentRepresentation} commentRequest commentRequest
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~addTaskCommentCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/CommentRepresentation}
      */
     this.addTaskComment = function (commentRequest, taskId) {
       var postBody = commentRequest;
@@ -45996,8 +45155,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the assignTask operation.
-     * @callback module:api/TaskApi~assignTaskCallback
+     * Function to receive the result of the assignTask operation.
      * @param {String} error Error message, if any.
      * @param {module:model/TaskRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46007,8 +45165,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Assign a task to a user
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskApi~assignTaskCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/TaskRepresentation}
      */
     this.assignTask = function (taskId, requestNode) {
       var postBody = requestNode;
@@ -46039,8 +45195,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the attachForm operation.
-     * @callback module:api/TaskApi~attachFormCallback
+     * Function to receive the result of the attachForm operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -46050,7 +45205,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Attach a form to a task
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskApi~attachFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.attachForm = function (taskId, requestNode) {
       var postBody = requestNode;
@@ -46081,8 +45235,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the claimTask operation.
-     * @callback module:api/TaskApi~claimTaskCallback
+     * Function to receive the result of the claimTask operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -46092,7 +45245,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Claim a task
      * To claim a task (in case the task is assigned to a group)
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~claimTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.claimTask = function (taskId) {
       var postBody = null;
@@ -46118,8 +45270,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the completeTaskForm operation.
-     * @callback module:api/TaskApi~completeTaskFormCallback
+     * Function to receive the result of the completeTaskForm operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -46129,7 +45280,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Complete a Task Form
      * @param {String} taskId taskId
      * @param {module:model/CompleteFormRepresentation} completeTaskFormRepresentation completeTaskFormRepresentation
-     * @param {module:api/TaskApi~completeTaskFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.completeTaskForm = function (taskId, completeTaskFormRepresentation) {
       var postBody = completeTaskFormRepresentation;
@@ -46160,8 +45310,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the completeTask operation.
-     * @callback module:api/TaskApi~completeTaskCallback
+     * Function to receive the result of the completeTask operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -46171,7 +45320,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Complete Task
      * To complete a task (standalone or without a task form)
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~completeTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.completeTask = function (taskId) {
       var postBody = null;
@@ -46197,8 +45345,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the createNewTask operation.
-     * @callback module:api/TaskApi~createNewTaskCallback
+     * Function to receive the result of the createNewTask operation.
      * @param {String} error Error message, if any.
      * @param {module:model/TaskRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46208,8 +45355,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Create a Standalone Task
      * Standalone Task is not associated with a process instance. You can define only task name &amp; description
      * @param {module:model/TaskRepresentation} taskRepresentation taskRepresentation
-     * @param {module:api/TaskApi~createNewTaskCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/TaskRepresentation}
      */
     this.createNewTask = function (taskRepresentation) {
       var postBody = taskRepresentation;
@@ -46233,8 +45378,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the createRelatedContentOnTask operation.
-     * @callback module:api/TaskApi~createRelatedContentOnTaskCallback
+     * Function to receive the result of the createRelatedContentOnTask operation.
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46246,8 +45390,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {module:model/RelatedContentRepresentation} relatedContent relatedContent
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.isRelatedContent isRelatedContent
-     * @param {module:api/TaskApi~createRelatedContentOnTaskCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/RelatedContentRepresentation}
      */
     this.createRelatedContentOnTask = function (taskId, relatedContent, opts) {
       opts = opts || {};
@@ -46281,8 +45423,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the createRelatedContentOnTask operation.
-     * @callback module:api/TaskApi~createRelatedContentOnTaskCallback
+     * Function to receive the result of the createRelatedContentOnTask operation.
      * @param {String} error Error message, if any.
      * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46294,8 +45435,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {File} file file
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.isRelatedContent isRelatedContent
-     * @param {module:api/TaskApi~createRelatedContentOnTaskCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/RelatedContentRepresentation}
      */
     this.createRelatedContentOnTask = function (taskId, file, opts) {
       opts = opts || {};
@@ -46331,8 +45470,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the deleteTask operation.
-     * @callback module:api/TaskApi~deleteTaskCallback
+     * Function to receive the result of the deleteTask operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -46341,7 +45479,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Delete a Task
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~deleteTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.deleteTask = function (taskId) {
       var postBody = null;
@@ -46367,8 +45504,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the filterTasks operation.
-     * @callback module:api/TaskApi~filterTasksCallback
+     * Function to receive the result of the filterTasks operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46377,8 +45513,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Filter list of Task
      * @param {module:model/TaskFilterRequestRepresentation} requestNode requestNode
-     * @param {module:api/TaskApi~filterTasksCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.filterTasks = function (requestNode) {
       var postBody = requestNode;
@@ -46402,8 +45536,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getChecklist operation.
-     * @callback module:api/TaskApi~getChecklistCallback
+     * Function to receive the result of the getChecklist operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46412,8 +45545,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve Checklist added to a task
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~getChecklistCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getChecklist = function (taskId) {
       var postBody = null;
@@ -46439,8 +45570,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getRelatedContentForTask operation.
-     * @callback module:api/TaskApi~getRelatedContentForTaskCallback
+     * Function to receive the result of the getRelatedContentForTask operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46449,8 +45579,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve which content is attached to a task
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~getRelatedContentForTaskCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getRelatedContentForTask = function (taskId) {
       var postBody = null;
@@ -46476,8 +45604,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getRestFieldValues operation.
-     * @callback module:api/TaskApi~getRestFieldValuesCallback
+     * Function to receive the result of the getRestFieldValues operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/FormValueRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46489,8 +45616,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {String} taskId taskId
      * @param {String} field field
      * @param {String} column column
-     * @param {module:api/TaskApi~getRestFieldValuesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {Array.<module:model/FormValueRepresentation>}
      */
     this.getRestFieldValues = function (taskId, field, column) {
       var postBody = null;
@@ -46528,8 +45653,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getRestFieldValues operation.
-     * @callback module:api/TaskApi~getRestFieldValuesCallback
+     * Function to receive the result of the getRestFieldValues operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/FormValueRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46540,8 +45664,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Form field values that are populated through a REST backend, can be retrieved via this service
      * @param {String} taskId taskId
      * @param {String} field field
-     * @param {module:api/TaskApi~getRestFieldValuesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {Array.<module:model/FormValueRepresentation>}
      */
     this.getRestFieldValues = function (taskId, field) {
       var postBody = null;
@@ -46573,8 +45695,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getTaskComments operation.
-     * @callback module:api/TaskApi~getTaskCommentsCallback
+     * Function to receive the result of the getTaskComments operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46585,8 +45706,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {String} taskId taskId
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.latestFirst latestFirst
-     * @param {module:api/TaskApi~getTaskCommentsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getTaskComments = function (taskId, opts) {
       opts = opts || {};
@@ -46615,8 +45734,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getTaskForm operation.
-     * @callback module:api/TaskApi~getTaskFormCallback
+     * Function to receive the result of the getTaskForm operation.
      * @param {String} error Error message, if any.
      * @param {module:model/FormDefinitionRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46625,8 +45743,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve Task Form
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~getTaskFormCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/FormDefinitionRepresentation}
      */
     this.getTaskForm = function (taskId) {
       var postBody = null;
@@ -46652,8 +45768,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getTask operation.
-     * @callback module:api/TaskApi~getTaskCallback
+     * Function to receive the result of the getTask operation.
      * @param {String} error Error message, if any.
      * @param {module:model/TaskRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46662,8 +45777,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Task Details
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~getTaskCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/TaskRepresentation}
      */
     this.getTask = function (taskId) {
       var postBody = null;
@@ -46689,8 +45802,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the involveUser operation.
-     * @callback module:api/TaskApi~involveUserCallback
+     * Function to receive the result of the involveUser operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -46700,7 +45812,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * To involve a user with a task
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskApi~involveUserCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.involveUser = function (taskId, requestNode) {
       var postBody = requestNode;
@@ -46731,8 +45842,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the listTasks operation.
-     * @callback module:api/TaskApi~listTasksCallback
+     * Function to receive the result of the listTasks operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46740,17 +45850,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * List Task
-     * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskApi~listTasksCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:model/TaskQueryRequestRepresentation} requestNode requestNode
      * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.listTasks = function (requestNode) {
-      var postBody = requestNode;
-
-      // verify the required parameter 'requestNode' is set
-      if (requestNode == undefined || requestNode == null) {
-        throw "Missing the required parameter 'requestNode' when calling listTasks";
-      }
+      var postBody = requestNode || {};
 
       var pathParams = {};
       var queryParams = {};
@@ -46766,8 +45870,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the orderChecklist operation.
-     * @callback module:api/TaskApi~orderChecklistCallback
+     * Function to receive the result of the orderChecklist operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -46777,7 +45880,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Change the order of items on a checklist
      * @param {String} taskId taskId
      * @param {module:model/ChecklistOrderRepresentation} orderRepresentation orderRepresentation
-     * @param {module:api/TaskApi~orderChecklistCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.orderChecklist = function (taskId, orderRepresentation) {
       var postBody = orderRepresentation;
@@ -46808,8 +45910,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the removeForm operation.
-     * @callback module:api/TaskApi~removeFormCallback
+     * Function to receive the result of the removeForm operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -46818,7 +45919,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Remove a form to a task
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~removeFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.removeForm = function (taskId) {
       var postBody = null;
@@ -46844,8 +45944,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the removeInvolvedUser operation.
-     * @callback module:api/TaskApi~removeInvolvedUserCallback
+     * Function to receive the result of the removeInvolvedUser operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -46855,7 +45954,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Remove an involved user from a task
      * @param {String} taskId taskId
      * @param {module:model/ObjectNode} requestNode requestNode
-     * @param {module:api/TaskApi~removeInvolvedUserCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.removeInvolvedUser = function (taskId, requestNode) {
       var postBody = requestNode;
@@ -46886,8 +45984,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the saveTaskForm operation.
-     * @callback module:api/TaskApi~saveTaskFormCallback
+     * Function to receive the result of the saveTaskForm operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -46897,7 +45994,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Save Task Form
      * @param {String} taskId taskId
      * @param {module:model/SaveFormRepresentation} saveTaskFormRepresentation saveTaskFormRepresentation
-     * @param {module:api/TaskApi~saveTaskFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.saveTaskForm = function (taskId, saveTaskFormRepresentation) {
       var postBody = saveTaskFormRepresentation;
@@ -46928,8 +46024,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the unclaimTask operation.
-     * @callback module:api/TaskApi~unclaimTaskCallback
+     * Function to receive the result of the unclaimTask operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -46939,7 +46034,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Unclaim a task
      * To unclaim a task (in case the task was assigned to a group)
      * @param {String} taskId taskId
-     * @param {module:api/TaskApi~unclaimTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.unclaimTask = function (taskId) {
       var postBody = null;
@@ -46965,8 +46059,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the updateTask operation.
-     * @callback module:api/TaskApi~updateTaskCallback
+     * Function to receive the result of the updateTask operation.
      * @param {String} error Error message, if any.
      * @param {module:model/TaskRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -46977,7 +46070,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * You can edit only name, description and dueDate (ISO 8601 string).
      * @param {String} taskId taskId
      * @param {module:model/TaskUpdateRepresentation} updated updated
-     * @param {module:api/TaskApi~updateTaskCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {module:model/TaskRepresentation}
      */
     this.updateTask = function (taskId, updated) {
@@ -47012,7 +46104,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/ChecklistOrderRepresentation":193,"../model/CommentRepresentation":194,"../model/CompleteFormRepresentation":195,"../model/FormDefinitionRepresentation":206,"../model/FormValueRepresentation":214,"../model/ObjectNode":228,"../model/RelatedContentRepresentation":237,"../model/ResultListDataRepresentation":240,"../model/SaveFormRepresentation":242,"../model/TaskFilterRequestRepresentation":246,"../model/TaskRepresentation":247,"../model/TaskUpdateRepresentation":248}],173:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/ChecklistOrderRepresentation":192,"../model/CommentRepresentation":193,"../model/CompleteFormRepresentation":194,"../model/FormDefinitionRepresentation":205,"../model/FormValueRepresentation":213,"../model/ObjectNode":227,"../model/RelatedContentRepresentation":236,"../model/ResultListDataRepresentation":239,"../model/SaveFormRepresentation":241,"../model/TaskFilterRequestRepresentation":245,"../model/TaskRepresentation":247,"../model/TaskUpdateRepresentation":248}],172:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -47023,7 +46115,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/TaskRepresentation', 'model/ResultListDataRepresentation', 'model/ChecklistOrderRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/TaskRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/ChecklistOrderRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/TaskRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/ChecklistOrderRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -47052,8 +46144,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the addSubtask operation.
-     * @callback module:api/TaskCheckListApi~addSubtaskCallback
+     * Function to receive the result of the addSubtask operation.
      * @param {String} error Error message, if any.
      * @param {module:model/TaskRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -47063,8 +46154,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Create a task checklist
      * @param {String} taskId taskId
      * @param {module:model/TaskRepresentation} taskRepresentation taskRepresentation
-     * @param {module:api/TaskCheckListApi~addSubtaskCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/TaskRepresentation}
      */
     this.addSubtask = function (taskId, taskRepresentation) {
       var postBody = taskRepresentation;
@@ -47095,8 +46184,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getChecklist operation.
-     * @callback module:api/TaskCheckListApi~getChecklistCallback
+     * Function to receive the result of the getChecklist operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -47105,8 +46193,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve Checklist added to a task
      * @param {String} taskId taskId
-     * @param {module:api/TaskCheckListApi~getChecklistCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getChecklist = function (taskId) {
       var postBody = null;
@@ -47132,8 +46218,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the orderChecklist operation.
-     * @callback module:api/TaskCheckListApi~orderChecklistCallback
+     * Function to receive the result of the orderChecklist operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -47143,7 +46228,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Change the order of items on a checklist
      * @param {String} taskId taskId
      * @param {module:model/ChecklistOrderRepresentation} orderRepresentation orderRepresentation
-     * @param {module:api/TaskCheckListApi~orderChecklistCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.orderChecklist = function (taskId, orderRepresentation) {
       var postBody = orderRepresentation;
@@ -47177,7 +46261,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/ChecklistOrderRepresentation":193,"../model/ResultListDataRepresentation":240,"../model/TaskRepresentation":247}],174:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/ChecklistOrderRepresentation":192,"../model/ResultListDataRepresentation":239,"../model/TaskRepresentation":247}],173:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -47188,7 +46272,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/CompleteFormRepresentation', 'model/FormValueRepresentation', 'model/FormDefinitionRepresentation', 'model/SaveFormRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/CompleteFormRepresentation'), require('../model/FormValueRepresentation'), require('../model/FormDefinitionRepresentation'), require('../model/SaveFormRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/CompleteFormRepresentation'), require('../model/FormValueRepresentation'), require('../model/FormDefinitionRepresentation'), require('../model/SaveFormRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -47217,8 +46301,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the completeTaskForm operation.
-     * @callback module:api/TaskFormsApi~completeTaskFormCallback
+     * Function to receive the result of the completeTaskForm operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -47228,7 +46311,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Complete a Task Form
      * @param {String} taskId taskId
      * @param {module:model/CompleteFormRepresentation} completeTaskFormRepresentation completeTaskFormRepresentation
-     * @param {module:api/TaskFormsApi~completeTaskFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.completeTaskForm = function (taskId, completeTaskFormRepresentation) {
       var postBody = completeTaskFormRepresentation;
@@ -47259,8 +46341,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getRestFieldValues operation.
-     * @callback module:api/TaskFormsApi~getRestFieldValuesCallback
+     * Function to receive the result of the getRestFieldValues operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/FormValueRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -47272,8 +46353,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {String} taskId taskId
      * @param {String} field field
      * @param {String} column column
-     * @param {module:api/TaskFormsApi~getRestFieldValuesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {Array.<module:model/FormValueRepresentation>}
      */
     this.getRestFieldValues = function (taskId, field, column) {
       var postBody = null;
@@ -47311,8 +46390,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getRestFieldValues operation.
-     * @callback module:api/TaskFormsApi~getRestFieldValuesCallback
+     * Function to receive the result of the getRestFieldValues operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/FormValueRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -47323,8 +46401,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Form field values that are populated through a REST backend, can be retrieved via this service
      * @param {String} taskId taskId
      * @param {String} field field
-     * @param {module:api/TaskFormsApi~getRestFieldValuesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {Array.<module:model/FormValueRepresentation>}
      */
     this.getRestFieldValues = function (taskId, field) {
       var postBody = null;
@@ -47356,8 +46432,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getTaskForm operation.
-     * @callback module:api/TaskFormsApi~getTaskFormCallback
+     * Function to receive the result of the getTaskForm operation.
      * @param {String} error Error message, if any.
      * @param {module:model/FormDefinitionRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -47366,8 +46441,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve Task Form
      * @param {String} taskId taskId
-     * @param {module:api/TaskFormsApi~getTaskFormCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/FormDefinitionRepresentation}
      */
     this.getTaskForm = function (taskId) {
       var postBody = null;
@@ -47393,8 +46466,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the saveTaskForm operation.
-     * @callback module:api/TaskFormsApi~saveTaskFormCallback
+     * Function to receive the result of the saveTaskForm operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -47404,7 +46476,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Save Task Form
      * @param {String} taskId taskId
      * @param {module:model/SaveFormRepresentation} saveTaskFormRepresentation saveTaskFormRepresentation
-     * @param {module:api/TaskFormsApi~saveTaskFormCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.saveTaskForm = function (taskId, saveTaskFormRepresentation) {
       var postBody = saveTaskFormRepresentation;
@@ -47438,7 +46509,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/CompleteFormRepresentation":195,"../model/FormDefinitionRepresentation":206,"../model/FormValueRepresentation":214,"../model/SaveFormRepresentation":242}],175:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/CompleteFormRepresentation":194,"../model/FormDefinitionRepresentation":205,"../model/FormValueRepresentation":213,"../model/SaveFormRepresentation":241}],174:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -47449,7 +46520,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/ArrayNode'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/ArrayNode'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ArrayNode'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -47478,8 +46549,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the completeTasks operation.
-     * @callback module:api/TemporaryApi~completeTasksCallback
+     * Function to receive the result of the completeTasks operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -47489,7 +46559,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * completeTasks
      * @param {Integer} userId userId
      * @param {String} processDefinitionKey processDefinitionKey
-     * @param {module:api/TemporaryApi~completeTasksCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.completeTasks = function (userId, processDefinitionKey) {
       var postBody = null;
@@ -47521,8 +46590,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the generateData operation.
-     * @callback module:api/TemporaryApi~generateDataCallback
+     * Function to receive the result of the generateData operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -47532,7 +46600,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * generateData
      * @param {Integer} userId userId
      * @param {String} processDefinitionKey processDefinitionKey
-     * @param {module:api/TemporaryApi~generateDataCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.generateData = function (userId, processDefinitionKey) {
       var postBody = null;
@@ -47564,8 +46631,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getHeaders operation.
-     * @callback module:api/TemporaryApi~getHeadersCallback
+     * Function to receive the result of the getHeaders operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ArrayNode} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -47591,8 +46657,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getOptions operation.
-     * @callback module:api/TemporaryApi~getOptionsCallback
+     * Function to receive the result of the getOptions operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ArrayNode} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -47621,7 +46686,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/ArrayNode":189}],176:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/ArrayNode":188}],175:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -47632,7 +46697,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/UserActionRepresentation', 'model/UserRepresentation', 'model/ResultListDataRepresentation', 'model/ResetPasswordRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/UserActionRepresentation'), require('../model/UserRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/ResetPasswordRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/UserActionRepresentation'), require('../model/UserRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/ResetPasswordRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -47661,8 +46726,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the executeAction operation.
-     * @callback module:api/UserApi~executeActionCallback
+     * Function to receive the result of the executeAction operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -47673,7 +46737,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Typical action is updating/reset password
      * @param {Integer} userId userId
      * @param {module:model/UserActionRepresentation} actionRequest actionRequest
-     * @param {module:api/UserApi~executeActionCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.executeAction = function (userId, actionRequest) {
       var postBody = actionRequest;
@@ -47704,8 +46767,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getProfilePicture operation.
-     * @callback module:api/UserApi~getProfilePictureCallback
+     * Function to receive the result of the getProfilePicture operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -47714,7 +46776,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve user profile picture
      * @param {Integer} userId userId
-     * @param {module:api/UserApi~getProfilePictureCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.getProfilePicture = function (userId) {
       var postBody = null;
@@ -47740,8 +46801,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getUser operation.
-     * @callback module:api/UserApi~getUserCallback
+     * Function to receive the result of the getUser operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -47750,8 +46810,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Retrieve user information
      * @param {Integer} userId userId
-     * @param {module:api/UserApi~getUserCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/UserRepresentation}
      */
     this.getUser = function (userId) {
       var postBody = null;
@@ -47777,8 +46835,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getUsers operation.
-     * @callback module:api/UserApi~getUsersCallback
+     * Function to receive the result of the getUsers operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -47796,8 +46853,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param {String} opts.excludeProcessId excludeProcessId
      * @param {Integer} opts.groupId groupId
      * @param {Integer} opts.tenantId tenantId
-     * @param {module:api/UserApi~getUsersCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/ResultListDataRepresentation}
      */
     this.getUsers = function (opts) {
       opts = opts || {};
@@ -47826,8 +46881,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the requestPasswordReset operation.
-     * @callback module:api/UserApi~requestPasswordResetCallback
+     * Function to receive the result of the requestPasswordReset operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -47836,7 +46890,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Request password reset
      * @param {module:model/ResetPasswordRepresentation} resetPassword resetPassword
-     * @param {module:api/UserApi~requestPasswordResetCallback} callback The callback function, accepting three arguments: error, data, response
      */
     this.requestPasswordReset = function (resetPassword) {
       var postBody = resetPassword;
@@ -47860,8 +46913,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the updateUser operation.
-     * @callback module:api/UserApi~updateUserCallback
+     * Function to receive the result of the updateUser operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -47871,8 +46923,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Update user information
      * @param {Integer} userId userId
      * @param {module:model/UserRepresentation} userRequest userRequest
-     * @param {module:api/UserApi~updateUserCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {module:model/UserRepresentation}
      */
     this.updateUser = function (userId, userRequest) {
       var postBody = userRequest;
@@ -47906,7 +46956,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/ResetPasswordRepresentation":238,"../model/ResultListDataRepresentation":240,"../model/UserActionRepresentation":252,"../model/UserRepresentation":255}],177:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/ResetPasswordRepresentation":237,"../model/ResultListDataRepresentation":239,"../model/UserActionRepresentation":252,"../model/UserRepresentation":255}],176:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -47917,7 +46967,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/UserProcessInstanceFilterRepresentation', 'model/UserTaskFilterRepresentation', 'model/ResultListDataRepresentation', 'model/UserFilterOrderRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/UserProcessInstanceFilterRepresentation'), require('../model/UserTaskFilterRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/UserFilterOrderRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/UserProcessInstanceFilterRepresentation'), require('../model/UserTaskFilterRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/UserFilterOrderRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -47946,7 +46996,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the createUserProcessInstanceFilter operation.
+     * Function to receive the result of the createUserProcessInstanceFilter operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserProcessInstanceFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -47979,7 +47029,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the createUserTaskFilter operation.
+     * Function to receive the result of the createUserTaskFilter operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserTaskFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -48012,7 +47062,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the deleteUserProcessInstanceFilter operation.
+     * Function to receive the result of the deleteUserProcessInstanceFilter operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -48046,7 +47096,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the deleteUserTaskFilter operation.
+     * Function to receive the result of the deleteUserTaskFilter operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -48080,7 +47130,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getUserProcessInstanceFilter operation.
+     * Function to receive the result of the getUserProcessInstanceFilter operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserProcessInstanceFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -48115,7 +47165,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getUserProcessInstanceFilters operation.
+     * Function to receive the result of the getUserProcessInstanceFilters operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -48147,7 +47197,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getUserTaskFilter operation.
+     * Function to receive the result of the getUserTaskFilter operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserTaskFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -48182,7 +47232,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the getUserTaskFilters operation.
+     * Function to receive the result of the getUserTaskFilters operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -48214,7 +47264,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the orderUserProcessInstanceFilters operation.
+     * Function to receive the result of the orderUserProcessInstanceFilters operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -48246,7 +47296,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the orderUserTaskFilters operation.
+     * Function to receive the result of the orderUserTaskFilters operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -48278,7 +47328,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the updateUserProcessInstanceFilter operation.
+     * Function to receive the result of the updateUserProcessInstanceFilter operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserProcessInstanceFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -48319,7 +47369,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Callback function to receive the result of the updateUserTaskFilter operation.
+     * Function to receive the result of the updateUserTaskFilter operation.
      * @param {String} error Error message, if any.
      * @param {module:model/UserTaskFilterRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -48363,7 +47413,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/ResultListDataRepresentation":240,"../model/UserFilterOrderRepresentation":253,"../model/UserProcessInstanceFilterRepresentation":254,"../model/UserTaskFilterRepresentation":256}],178:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/ResultListDataRepresentation":239,"../model/UserFilterOrderRepresentation":253,"../model/UserProcessInstanceFilterRepresentation":254,"../model/UserTaskFilterRepresentation":256}],177:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -48374,7 +47424,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/ResultListDataRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/ResultListDataRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ResultListDataRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -48403,7 +47453,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
-     * Callback function to receive the result of the getUsers operation.
+     * Function to receive the result of the getUsers operation.
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -48453,7 +47503,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"../model/ResultListDataRepresentation":240}],179:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/ResultListDataRepresentation":239}],178:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -48461,12 +47511,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 (function (factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/AbstractGroupRepresentation', 'model/AbstractRepresentation', 'model/AbstractUserRepresentation', 'model/AddGroupCapabilitiesRepresentation', 'model/AppDefinition', 'model/AppDefinitionPublishRepresentation', 'model/AppDefinitionRepresentation', 'model/AppDefinitionUpdateResultRepresentation', 'model/AppModelDefinition', 'model/ArrayNode', 'model/BoxUserAccountCredentialsRepresentation', 'model/BulkUserUpdateRepresentation', 'model/ChangePasswordRepresentation', 'model/ChecklistOrderRepresentation', 'model/CommentRepresentation', 'model/CompleteFormRepresentation', 'model/ConditionRepresentation', 'model/CreateEndpointBasicAuthRepresentation', 'model/CreateProcessInstanceRepresentation', 'model/CreateTenantRepresentation', 'model/EndpointBasicAuthRepresentation', 'model/EndpointConfigurationRepresentation', 'model/EndpointRequestHeaderRepresentation', 'model/EntityAttributeScopeRepresentation', 'model/EntityVariableScopeRepresentation', 'model/File', 'model/FormDefinitionRepresentation', 'model/FormFieldRepresentation', 'model/FormJavascriptEventRepresentation', 'model/FormOutcomeRepresentation', 'model/FormRepresentation', 'model/FormSaveRepresentation', 'model/FormScopeRepresentation', 'model/FormTabRepresentation', 'model/FormValueRepresentation', 'model/GroupCapabilityRepresentation', 'model/GroupRepresentation', 'model/ImageUploadRepresentation', 'model/LayoutRepresentation', 'model/LightAppRepresentation', 'model/LightGroupRepresentation', 'model/LightTenantRepresentation', 'model/LightUserRepresentation', 'model/MaplongListstring', 'model/MapstringListEntityVariableScopeRepresentation', 'model/MapstringListVariableScopeRepresentation', 'model/Mapstringstring', 'model/ModelRepresentation', 'model/ObjectNode', 'model/OptionRepresentation', 'model/ProcessInstanceFilterRepresentation', 'model/ProcessInstanceFilterRequestRepresentation', 'model/ProcessInstanceRepresentation', 'model/ProcessScopeIdentifierRepresentation', 'model/ProcessScopeRepresentation', 'model/ProcessScopesRequestRepresentation', 'model/PublishIdentityInfoRepresentation', 'model/RelatedContentRepresentation', 'model/ResetPasswordRepresentation', 'model/RestVariable', 'model/ResultListDataRepresentation', 'model/RuntimeAppDefinitionSaveRepresentation', 'model/SaveFormRepresentation', 'model/SyncLogEntryRepresentation', 'model/SystemPropertiesRepresentation', 'model/TaskFilterRepresentation', 'model/TaskFilterRequestRepresentation', 'model/TaskRepresentation', 'model/TaskUpdateRepresentation', 'model/TenantEvent', 'model/TenantRepresentation', 'model/UserAccountCredentialsRepresentation', 'model/UserActionRepresentation', 'model/UserFilterOrderRepresentation', 'model/UserProcessInstanceFilterRepresentation', 'model/UserRepresentation', 'model/UserTaskFilterRepresentation', 'model/ValidationErrorRepresentation', 'model/VariableScopeRepresentation', 'api/AboutApi', 'api/AdminEndpointsApi', 'api/AdminGroupsApi', 'api/AdminTenantsApi', 'api/AdminUsersApi', 'api/AlfrescoApi', 'api/AppsApi', 'api/AppsDefinitionApi', 'api/AppsRuntimeApi', 'api/CommentsApi', 'api/ContentApi', 'api/ContentRenditionApi', 'api/EditorApi', 'api/GroupsApi', 'api/IDMSyncApi', 'api/IntegrationApi', 'api/IntegrationAccountApi', 'api/IntegrationAlfrescoCloudApi', 'api/IntegrationAlfrescoOnPremiseApi', 'api/IntegrationBoxApi', 'api/IntegrationDriveApi', 'api/ModelBpmnApi', 'api/ModelsApi', 'api/ModelsHistoryApi', 'api/ProcessApi', 'api/ProcessDefinitionsApi', 'api/ProcessDefinitionsFormApi', 'api/ProcessInstancesApi', 'api/ProcessInstancesInformationApi', 'api/ProcessInstancesListingApi', 'api/ProcessScopeApi', 'api/ProfileApi', 'api/ScriptFileApi', 'api/SystemPropertiesApi', 'api/TaskApi', 'api/TaskActionsApi', 'api/TaskCheckListApi', 'api/TaskFormsApi', 'api/TemporaryApi', 'api/UserApi', 'api/UserFiltersApi', 'api/UsersWorkflowApi'], factory);
+    define(['../../alfrescoApiClient', 'model/AbstractGroupRepresentation', 'model/AbstractRepresentation', 'model/AbstractUserRepresentation', 'model/AddGroupCapabilitiesRepresentation', 'model/AppDefinition', 'model/AppDefinitionPublishRepresentation', 'model/AppDefinitionRepresentation', 'model/AppDefinitionUpdateResultRepresentation', 'model/AppModelDefinition', 'model/ArrayNode', 'model/BoxUserAccountCredentialsRepresentation', 'model/BulkUserUpdateRepresentation', 'model/ChangePasswordRepresentation', 'model/ChecklistOrderRepresentation', 'model/CommentRepresentation', 'model/CompleteFormRepresentation', 'model/ConditionRepresentation', 'model/CreateEndpointBasicAuthRepresentation', 'model/CreateProcessInstanceRepresentation', 'model/CreateTenantRepresentation', 'model/EndpointBasicAuthRepresentation', 'model/EndpointConfigurationRepresentation', 'model/EndpointRequestHeaderRepresentation', 'model/EntityAttributeScopeRepresentation', 'model/EntityVariableScopeRepresentation', 'model/File', 'model/FormDefinitionRepresentation', 'model/FormFieldRepresentation', 'model/FormJavascriptEventRepresentation', 'model/FormOutcomeRepresentation', 'model/FormRepresentation', 'model/FormSaveRepresentation', 'model/FormScopeRepresentation', 'model/FormTabRepresentation', 'model/FormValueRepresentation', 'model/GroupCapabilityRepresentation', 'model/GroupRepresentation', 'model/ImageUploadRepresentation', 'model/LayoutRepresentation', 'model/LightAppRepresentation', 'model/LightGroupRepresentation', 'model/LightTenantRepresentation', 'model/LightUserRepresentation', 'model/MaplongListstring', 'model/MapstringListEntityVariableScopeRepresentation', 'model/MapstringListVariableScopeRepresentation', 'model/Mapstringstring', 'model/ModelRepresentation', 'model/ObjectNode', 'model/OptionRepresentation', 'model/ProcessInstanceFilterRepresentation', 'model/ProcessInstanceFilterRequestRepresentation', 'model/ProcessInstanceRepresentation', 'model/ProcessScopeIdentifierRepresentation', 'model/ProcessScopeRepresentation', 'model/ProcessScopesRequestRepresentation', 'model/PublishIdentityInfoRepresentation', 'model/RelatedContentRepresentation', 'model/ResetPasswordRepresentation', 'model/RestVariable', 'model/ResultListDataRepresentation', 'model/RuntimeAppDefinitionSaveRepresentation', 'model/SaveFormRepresentation', 'model/SyncLogEntryRepresentation', 'model/SystemPropertiesRepresentation', 'model/TaskFilterRepresentation', 'model/TaskFilterRequestRepresentation', 'model/TaskQueryRequestRepresentation', 'model/TaskRepresentation', 'model/TaskUpdateRepresentation', 'model/TenantEvent', 'model/TenantRepresentation', 'model/UserAccountCredentialsRepresentation', 'model/UserActionRepresentation', 'model/UserFilterOrderRepresentation', 'model/UserProcessInstanceFilterRepresentation', 'model/UserRepresentation', 'model/UserTaskFilterRepresentation', 'model/ValidationErrorRepresentation', 'model/VariableScopeRepresentation', 'api/AboutApi', 'api/AdminEndpointsApi', 'api/AdminGroupsApi', 'api/AdminTenantsApi', 'api/AdminUsersApi', 'api/AlfrescoApi', 'api/AppsApi', 'api/AppsDefinitionApi', 'api/AppsRuntimeApi', 'api/CommentsApi', 'api/ContentApi', 'api/ContentRenditionApi', 'api/EditorApi', 'api/GroupsApi', 'api/IDMSyncApi', 'api/IntegrationApi', 'api/IntegrationAccountApi', 'api/IntegrationAlfrescoCloudApi', 'api/IntegrationAlfrescoOnPremiseApi', 'api/IntegrationBoxApi', 'api/IntegrationDriveApi', 'api/ModelBpmnApi', 'api/ModelsApi', 'api/ModelsHistoryApi', 'api/ProcessApi', 'api/ProcessDefinitionsApi', 'api/ProcessDefinitionsFormApi', 'api/ProcessInstancesApi', 'api/ProcessInstancesInformationApi', 'api/ProcessInstancesListingApi', 'api/ProcessScopeApi', 'api/ProfileApi', 'api/ScriptFileApi', 'api/SystemPropertiesApi', 'api/TaskApi', 'api/TaskActionsApi', 'api/TaskCheckListApi', 'api/TaskFormsApi', 'api/TemporaryApi', 'api/UserApi', 'api/UserFiltersApi', 'api/UsersWorkflowApi'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('./ApiClient'), require('./model/AbstractGroupRepresentation'), require('./model/AbstractRepresentation'), require('./model/AbstractUserRepresentation'), require('./model/AddGroupCapabilitiesRepresentation'), require('./model/AppDefinition'), require('./model/AppDefinitionPublishRepresentation'), require('./model/AppDefinitionRepresentation'), require('./model/AppDefinitionUpdateResultRepresentation'), require('./model/AppModelDefinition'), require('./model/ArrayNode'), require('./model/BoxUserAccountCredentialsRepresentation'), require('./model/BulkUserUpdateRepresentation'), require('./model/ChangePasswordRepresentation'), require('./model/ChecklistOrderRepresentation'), require('./model/CommentRepresentation'), require('./model/CompleteFormRepresentation'), require('./model/ConditionRepresentation'), require('./model/CreateEndpointBasicAuthRepresentation'), require('./model/CreateProcessInstanceRepresentation'), require('./model/CreateTenantRepresentation'), require('./model/EndpointBasicAuthRepresentation'), require('./model/EndpointConfigurationRepresentation'), require('./model/EndpointRequestHeaderRepresentation'), require('./model/EntityAttributeScopeRepresentation'), require('./model/EntityVariableScopeRepresentation'), require('./model/File'), require('./model/FormDefinitionRepresentation'), require('./model/FormFieldRepresentation'), require('./model/FormJavascriptEventRepresentation'), require('./model/FormOutcomeRepresentation'), require('./model/FormRepresentation'), require('./model/FormSaveRepresentation'), require('./model/FormScopeRepresentation'), require('./model/FormTabRepresentation'), require('./model/FormValueRepresentation'), require('./model/GroupCapabilityRepresentation'), require('./model/GroupRepresentation'), require('./model/ImageUploadRepresentation'), require('./model/LayoutRepresentation'), require('./model/LightAppRepresentation'), require('./model/LightGroupRepresentation'), require('./model/LightTenantRepresentation'), require('./model/LightUserRepresentation'), require('./model/MaplongListstring'), require('./model/MapstringListEntityVariableScopeRepresentation'), require('./model/MapstringListVariableScopeRepresentation'), require('./model/Mapstringstring'), require('./model/ModelRepresentation'), require('./model/ObjectNode'), require('./model/OptionRepresentation'), require('./model/ProcessInstanceFilterRepresentation'), require('./model/ProcessInstanceFilterRequestRepresentation'), require('./model/ProcessInstanceRepresentation'), require('./model/ProcessScopeIdentifierRepresentation'), require('./model/ProcessScopeRepresentation'), require('./model/ProcessScopesRequestRepresentation'), require('./model/PublishIdentityInfoRepresentation'), require('./model/RelatedContentRepresentation'), require('./model/ResetPasswordRepresentation'), require('./model/RestVariable'), require('./model/ResultListDataRepresentation'), require('./model/RuntimeAppDefinitionSaveRepresentation'), require('./model/SaveFormRepresentation'), require('./model/SyncLogEntryRepresentation'), require('./model/SystemPropertiesRepresentation'), require('./model/TaskFilterRepresentation'), require('./model/TaskFilterRequestRepresentation'), require('./model/TaskRepresentation'), require('./model/TaskUpdateRepresentation'), require('./model/TenantEvent'), require('./model/TenantRepresentation'), require('./model/UserAccountCredentialsRepresentation'), require('./model/UserActionRepresentation'), require('./model/UserFilterOrderRepresentation'), require('./model/UserProcessInstanceFilterRepresentation'), require('./model/UserRepresentation'), require('./model/UserTaskFilterRepresentation'), require('./model/ValidationErrorRepresentation'), require('./model/VariableScopeRepresentation'), require('./api/AboutApi'), require('./api/AdminEndpointsApi'), require('./api/AdminGroupsApi'), require('./api/AdminTenantsApi'), require('./api/AdminUsersApi'), require('./api/AlfrescoApi'), require('./api/AppsApi'), require('./api/AppsDefinitionApi'), require('./api/AppsRuntimeApi'), require('./api/CommentsApi'), require('./api/ContentApi'), require('./api/ContentRenditionApi'), require('./api/EditorApi'), require('./api/GroupsApi'), require('./api/IDMSyncApi'), require('./api/IntegrationApi'), require('./api/IntegrationAccountApi'), require('./api/IntegrationAlfrescoCloudApi'), require('./api/IntegrationAlfrescoOnPremiseApi'), require('./api/IntegrationBoxApi'), require('./api/IntegrationDriveApi'), require('./api/ModelBpmnApi'), require('./api/ModelsApi'), require('./api/ModelsHistoryApi'), require('./api/ProcessApi'), require('./api/ProcessDefinitionsApi'), require('./api/ProcessDefinitionsFormApi'), require('./api/ProcessInstancesApi'), require('./api/ProcessInstancesInformationApi'), require('./api/ProcessInstancesListingApi'), require('./api/ProcessScopeApi'), require('./api/ProfileApi'), require('./api/ScriptFileApi'), require('./api/SystemPropertiesApi'), require('./api/TaskApi'), require('./api/TaskActionsApi'), require('./api/TaskCheckListApi'), require('./api/TaskFormsApi'), require('./api/TemporaryApi'), require('./api/UserApi'), require('./api/UserFiltersApi'), require('./api/UsersWorkflowApi'));
+    module.exports = factory(require('../../alfrescoApiClient'), require('./model/AbstractGroupRepresentation'), require('./model/AbstractRepresentation'), require('./model/AbstractUserRepresentation'), require('./model/AddGroupCapabilitiesRepresentation'), require('./model/AppDefinition'), require('./model/AppDefinitionPublishRepresentation'), require('./model/AppDefinitionRepresentation'), require('./model/AppDefinitionUpdateResultRepresentation'), require('./model/AppModelDefinition'), require('./model/ArrayNode'), require('./model/BoxUserAccountCredentialsRepresentation'), require('./model/BulkUserUpdateRepresentation'), require('./model/ChangePasswordRepresentation'), require('./model/ChecklistOrderRepresentation'), require('./model/CommentRepresentation'), require('./model/CompleteFormRepresentation'), require('./model/ConditionRepresentation'), require('./model/CreateEndpointBasicAuthRepresentation'), require('./model/CreateProcessInstanceRepresentation'), require('./model/CreateTenantRepresentation'), require('./model/EndpointBasicAuthRepresentation'), require('./model/EndpointConfigurationRepresentation'), require('./model/EndpointRequestHeaderRepresentation'), require('./model/EntityAttributeScopeRepresentation'), require('./model/EntityVariableScopeRepresentation'), require('./model/File'), require('./model/FormDefinitionRepresentation'), require('./model/FormFieldRepresentation'), require('./model/FormJavascriptEventRepresentation'), require('./model/FormOutcomeRepresentation'), require('./model/FormRepresentation'), require('./model/FormSaveRepresentation'), require('./model/FormScopeRepresentation'), require('./model/FormTabRepresentation'), require('./model/FormValueRepresentation'), require('./model/GroupCapabilityRepresentation'), require('./model/GroupRepresentation'), require('./model/ImageUploadRepresentation'), require('./model/LayoutRepresentation'), require('./model/LightAppRepresentation'), require('./model/LightGroupRepresentation'), require('./model/LightTenantRepresentation'), require('./model/LightUserRepresentation'), require('./model/MaplongListstring'), require('./model/MapstringListEntityVariableScopeRepresentation'), require('./model/MapstringListVariableScopeRepresentation'), require('./model/Mapstringstring'), require('./model/ModelRepresentation'), require('./model/ObjectNode'), require('./model/OptionRepresentation'), require('./model/ProcessInstanceFilterRepresentation'), require('./model/ProcessInstanceFilterRequestRepresentation'), require('./model/ProcessInstanceRepresentation'), require('./model/ProcessScopeIdentifierRepresentation'), require('./model/ProcessScopeRepresentation'), require('./model/ProcessScopesRequestRepresentation'), require('./model/PublishIdentityInfoRepresentation'), require('./model/RelatedContentRepresentation'), require('./model/ResetPasswordRepresentation'), require('./model/RestVariable'), require('./model/ResultListDataRepresentation'), require('./model/RuntimeAppDefinitionSaveRepresentation'), require('./model/SaveFormRepresentation'), require('./model/SyncLogEntryRepresentation'), require('./model/SystemPropertiesRepresentation'), require('./model/TaskFilterRepresentation'), require('./model/TaskFilterRequestRepresentation'), require('./model/TaskQueryRequestRepresentation'), require('./model/TaskRepresentation'), require('./model/TaskUpdateRepresentation'), require('./model/TenantEvent'), require('./model/TenantRepresentation'), require('./model/UserAccountCredentialsRepresentation'), require('./model/UserActionRepresentation'), require('./model/UserFilterOrderRepresentation'), require('./model/UserProcessInstanceFilterRepresentation'), require('./model/UserRepresentation'), require('./model/UserTaskFilterRepresentation'), require('./model/ValidationErrorRepresentation'), require('./model/VariableScopeRepresentation'), require('./api/AboutApi'), require('./api/AdminEndpointsApi'), require('./api/AdminGroupsApi'), require('./api/AdminTenantsApi'), require('./api/AdminUsersApi'), require('./api/AlfrescoApi'), require('./api/AppsApi'), require('./api/AppsDefinitionApi'), require('./api/AppsRuntimeApi'), require('./api/CommentsApi'), require('./api/ContentApi'), require('./api/ContentRenditionApi'), require('./api/EditorApi'), require('./api/GroupsApi'), require('./api/IDMSyncApi'), require('./api/IntegrationApi'), require('./api/IntegrationAccountApi'), require('./api/IntegrationAlfrescoCloudApi'), require('./api/IntegrationAlfrescoOnPremiseApi'), require('./api/IntegrationBoxApi'), require('./api/IntegrationDriveApi'), require('./api/ModelBpmnApi'), require('./api/ModelsApi'), require('./api/ModelsHistoryApi'), require('./api/ProcessApi'), require('./api/ProcessDefinitionsApi'), require('./api/ProcessDefinitionsFormApi'), require('./api/ProcessInstancesApi'), require('./api/ProcessInstancesInformationApi'), require('./api/ProcessInstancesListingApi'), require('./api/ProcessScopeApi'), require('./api/ProfileApi'), require('./api/ScriptFileApi'), require('./api/SystemPropertiesApi'), require('./api/TaskApi'), require('./api/TaskActionsApi'), require('./api/TaskCheckListApi'), require('./api/TaskFormsApi'), require('./api/TemporaryApi'), require('./api/UserApi'), require('./api/UserFiltersApi'), require('./api/UsersWorkflowApi'));
   }
-})(function (ApiClient, AbstractGroupRepresentation, AbstractRepresentation, AbstractUserRepresentation, AddGroupCapabilitiesRepresentation, AppDefinition, AppDefinitionPublishRepresentation, AppDefinitionRepresentation, AppDefinitionUpdateResultRepresentation, AppModelDefinition, ArrayNode, BoxUserAccountCredentialsRepresentation, BulkUserUpdateRepresentation, ChangePasswordRepresentation, ChecklistOrderRepresentation, CommentRepresentation, CompleteFormRepresentation, ConditionRepresentation, CreateEndpointBasicAuthRepresentation, CreateProcessInstanceRepresentation, CreateTenantRepresentation, EndpointBasicAuthRepresentation, EndpointConfigurationRepresentation, EndpointRequestHeaderRepresentation, EntityAttributeScopeRepresentation, EntityVariableScopeRepresentation, File, FormDefinitionRepresentation, FormFieldRepresentation, FormJavascriptEventRepresentation, FormOutcomeRepresentation, FormRepresentation, FormSaveRepresentation, FormScopeRepresentation, FormTabRepresentation, FormValueRepresentation, GroupCapabilityRepresentation, GroupRepresentation, ImageUploadRepresentation, LayoutRepresentation, LightAppRepresentation, LightGroupRepresentation, LightTenantRepresentation, LightUserRepresentation, MaplongListstring, MapstringListEntityVariableScopeRepresentation, MapstringListVariableScopeRepresentation, Mapstringstring, ModelRepresentation, ObjectNode, OptionRepresentation, ProcessInstanceFilterRepresentation, ProcessInstanceFilterRequestRepresentation, ProcessInstanceRepresentation, ProcessScopeIdentifierRepresentation, ProcessScopeRepresentation, ProcessScopesRequestRepresentation, PublishIdentityInfoRepresentation, RelatedContentRepresentation, ResetPasswordRepresentation, RestVariable, ResultListDataRepresentation, RuntimeAppDefinitionSaveRepresentation, SaveFormRepresentation, SyncLogEntryRepresentation, SystemPropertiesRepresentation, TaskFilterRepresentation, TaskFilterRequestRepresentation, TaskRepresentation, TaskUpdateRepresentation, TenantEvent, TenantRepresentation, UserAccountCredentialsRepresentation, UserActionRepresentation, UserFilterOrderRepresentation, UserProcessInstanceFilterRepresentation, UserRepresentation, UserTaskFilterRepresentation, ValidationErrorRepresentation, VariableScopeRepresentation, AboutApi, AdminEndpointsApi, AdminGroupsApi, AdminTenantsApi, AdminUsersApi, AlfrescoApi, AppsApi, AppsDefinitionApi, AppsRuntimeApi, CommentsApi, ContentApi, ContentRenditionApi, EditorApi, GroupsApi, IDMSyncApi, IntegrationApi, IntegrationAccountApi, IntegrationAlfrescoCloudApi, IntegrationAlfrescoOnPremiseApi, IntegrationBoxApi, IntegrationDriveApi, ModelBpmnApi, ModelsApi, ModelsHistoryApi, ProcessApi, ProcessDefinitionsApi, ProcessDefinitionsFormApi, ProcessInstancesApi, ProcessInstancesInformationApi, ProcessInstancesListingApi, ProcessScopeApi, ProfileApi, ScriptFileApi, SystemPropertiesApi, TaskApi, TaskActionsApi, TaskCheckListApi, TaskFormsApi, TemporaryApi, UserApi, UserFiltersApi, UsersWorkflowApi) {
+})(function (ApiClient, AbstractGroupRepresentation, AbstractRepresentation, AbstractUserRepresentation, AddGroupCapabilitiesRepresentation, AppDefinition, AppDefinitionPublishRepresentation, AppDefinitionRepresentation, AppDefinitionUpdateResultRepresentation, AppModelDefinition, ArrayNode, BoxUserAccountCredentialsRepresentation, BulkUserUpdateRepresentation, ChangePasswordRepresentation, ChecklistOrderRepresentation, CommentRepresentation, CompleteFormRepresentation, ConditionRepresentation, CreateEndpointBasicAuthRepresentation, CreateProcessInstanceRepresentation, CreateTenantRepresentation, EndpointBasicAuthRepresentation, EndpointConfigurationRepresentation, EndpointRequestHeaderRepresentation, EntityAttributeScopeRepresentation, EntityVariableScopeRepresentation, File, FormDefinitionRepresentation, FormFieldRepresentation, FormJavascriptEventRepresentation, FormOutcomeRepresentation, FormRepresentation, FormSaveRepresentation, FormScopeRepresentation, FormTabRepresentation, FormValueRepresentation, GroupCapabilityRepresentation, GroupRepresentation, ImageUploadRepresentation, LayoutRepresentation, LightAppRepresentation, LightGroupRepresentation, LightTenantRepresentation, LightUserRepresentation, MaplongListstring, MapstringListEntityVariableScopeRepresentation, MapstringListVariableScopeRepresentation, Mapstringstring, ModelRepresentation, ObjectNode, OptionRepresentation, ProcessInstanceFilterRepresentation, ProcessInstanceFilterRequestRepresentation, ProcessInstanceRepresentation, ProcessScopeIdentifierRepresentation, ProcessScopeRepresentation, ProcessScopesRequestRepresentation, PublishIdentityInfoRepresentation, RelatedContentRepresentation, ResetPasswordRepresentation, RestVariable, ResultListDataRepresentation, RuntimeAppDefinitionSaveRepresentation, SaveFormRepresentation, SyncLogEntryRepresentation, SystemPropertiesRepresentation, TaskFilterRepresentation, TaskFilterRequestRepresentation, TaskQueryRequestRepresentation, TaskRepresentation, TaskUpdateRepresentation, TenantEvent, TenantRepresentation, UserAccountCredentialsRepresentation, UserActionRepresentation, UserFilterOrderRepresentation, UserProcessInstanceFilterRepresentation, UserRepresentation, UserTaskFilterRepresentation, ValidationErrorRepresentation, VariableScopeRepresentation, AboutApi, AdminEndpointsApi, AdminGroupsApi, AdminTenantsApi, AdminUsersApi, AlfrescoApi, AppsApi, AppsDefinitionApi, AppsRuntimeApi, CommentsApi, ContentApi, ContentRenditionApi, EditorApi, GroupsApi, IDMSyncApi, IntegrationApi, IntegrationAccountApi, IntegrationAlfrescoCloudApi, IntegrationAlfrescoOnPremiseApi, IntegrationBoxApi, IntegrationDriveApi, ModelBpmnApi, ModelsApi, ModelsHistoryApi, ProcessApi, ProcessDefinitionsApi, ProcessDefinitionsFormApi, ProcessInstancesApi, ProcessInstancesInformationApi, ProcessInstancesListingApi, ProcessScopeApi, ProfileApi, ScriptFileApi, SystemPropertiesApi, TaskApi, TaskActionsApi, TaskCheckListApi, TaskFormsApi, TemporaryApi, UserApi, UserFiltersApi, UsersWorkflowApi) {
   'use strict';
 
   /**
@@ -48843,9 +47893,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      */
     TaskFilterRequestRepresentation: TaskFilterRequestRepresentation,
     /**
-     * The TaskRepresentation model constructor.
-     * @property {module:model/TaskRepresentation}
+     * The TaskQueryRequestRepresentation model constructor.
+     * @property {module:model/TaskQueryRequestRepresentation}
      */
+    TaskQueryRequestRepresentation: TaskQueryRequestRepresentation,
+
+    /**
+    * The TaskRepresentation model constructor.
+    * @property {module:model/TaskRepresentation}
+    */
     TaskRepresentation: TaskRepresentation,
     /**
      * The TaskUpdateRepresentation model constructor.
@@ -49117,7 +48173,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"./ApiClient":136,"./api/AboutApi":137,"./api/AdminEndpointsApi":138,"./api/AdminGroupsApi":139,"./api/AdminTenantsApi":140,"./api/AdminUsersApi":141,"./api/AlfrescoApi":142,"./api/AppsApi":143,"./api/AppsDefinitionApi":144,"./api/AppsRuntimeApi":145,"./api/CommentsApi":146,"./api/ContentApi":147,"./api/ContentRenditionApi":148,"./api/EditorApi":149,"./api/GroupsApi":150,"./api/IDMSyncApi":151,"./api/IntegrationAccountApi":152,"./api/IntegrationAlfrescoCloudApi":153,"./api/IntegrationAlfrescoOnPremiseApi":154,"./api/IntegrationApi":155,"./api/IntegrationBoxApi":156,"./api/IntegrationDriveApi":157,"./api/ModelBpmnApi":158,"./api/ModelsApi":159,"./api/ModelsHistoryApi":160,"./api/ProcessApi":161,"./api/ProcessDefinitionsApi":162,"./api/ProcessDefinitionsFormApi":163,"./api/ProcessInstancesApi":164,"./api/ProcessInstancesInformationApi":165,"./api/ProcessInstancesListingApi":166,"./api/ProcessScopeApi":167,"./api/ProfileApi":168,"./api/ScriptFileApi":169,"./api/SystemPropertiesApi":170,"./api/TaskActionsApi":171,"./api/TaskApi":172,"./api/TaskCheckListApi":173,"./api/TaskFormsApi":174,"./api/TemporaryApi":175,"./api/UserApi":176,"./api/UserFiltersApi":177,"./api/UsersWorkflowApi":178,"./model/AbstractGroupRepresentation":180,"./model/AbstractRepresentation":181,"./model/AbstractUserRepresentation":182,"./model/AddGroupCapabilitiesRepresentation":183,"./model/AppDefinition":184,"./model/AppDefinitionPublishRepresentation":185,"./model/AppDefinitionRepresentation":186,"./model/AppDefinitionUpdateResultRepresentation":187,"./model/AppModelDefinition":188,"./model/ArrayNode":189,"./model/BoxUserAccountCredentialsRepresentation":190,"./model/BulkUserUpdateRepresentation":191,"./model/ChangePasswordRepresentation":192,"./model/ChecklistOrderRepresentation":193,"./model/CommentRepresentation":194,"./model/CompleteFormRepresentation":195,"./model/ConditionRepresentation":196,"./model/CreateEndpointBasicAuthRepresentation":197,"./model/CreateProcessInstanceRepresentation":198,"./model/CreateTenantRepresentation":199,"./model/EndpointBasicAuthRepresentation":200,"./model/EndpointConfigurationRepresentation":201,"./model/EndpointRequestHeaderRepresentation":202,"./model/EntityAttributeScopeRepresentation":203,"./model/EntityVariableScopeRepresentation":204,"./model/File":205,"./model/FormDefinitionRepresentation":206,"./model/FormFieldRepresentation":207,"./model/FormJavascriptEventRepresentation":208,"./model/FormOutcomeRepresentation":209,"./model/FormRepresentation":210,"./model/FormSaveRepresentation":211,"./model/FormScopeRepresentation":212,"./model/FormTabRepresentation":213,"./model/FormValueRepresentation":214,"./model/GroupCapabilityRepresentation":215,"./model/GroupRepresentation":216,"./model/ImageUploadRepresentation":217,"./model/LayoutRepresentation":218,"./model/LightAppRepresentation":219,"./model/LightGroupRepresentation":220,"./model/LightTenantRepresentation":221,"./model/LightUserRepresentation":222,"./model/MaplongListstring":223,"./model/MapstringListEntityVariableScopeRepresentation":224,"./model/MapstringListVariableScopeRepresentation":225,"./model/Mapstringstring":226,"./model/ModelRepresentation":227,"./model/ObjectNode":228,"./model/OptionRepresentation":229,"./model/ProcessInstanceFilterRepresentation":230,"./model/ProcessInstanceFilterRequestRepresentation":231,"./model/ProcessInstanceRepresentation":232,"./model/ProcessScopeIdentifierRepresentation":233,"./model/ProcessScopeRepresentation":234,"./model/ProcessScopesRequestRepresentation":235,"./model/PublishIdentityInfoRepresentation":236,"./model/RelatedContentRepresentation":237,"./model/ResetPasswordRepresentation":238,"./model/RestVariable":239,"./model/ResultListDataRepresentation":240,"./model/RuntimeAppDefinitionSaveRepresentation":241,"./model/SaveFormRepresentation":242,"./model/SyncLogEntryRepresentation":243,"./model/SystemPropertiesRepresentation":244,"./model/TaskFilterRepresentation":245,"./model/TaskFilterRequestRepresentation":246,"./model/TaskRepresentation":247,"./model/TaskUpdateRepresentation":248,"./model/TenantEvent":249,"./model/TenantRepresentation":250,"./model/UserAccountCredentialsRepresentation":251,"./model/UserActionRepresentation":252,"./model/UserFilterOrderRepresentation":253,"./model/UserProcessInstanceFilterRepresentation":254,"./model/UserRepresentation":255,"./model/UserTaskFilterRepresentation":256,"./model/ValidationErrorRepresentation":257,"./model/VariableScopeRepresentation":258}],180:[function(require,module,exports){
+},{"../../alfrescoApiClient":394,"./api/AboutApi":136,"./api/AdminEndpointsApi":137,"./api/AdminGroupsApi":138,"./api/AdminTenantsApi":139,"./api/AdminUsersApi":140,"./api/AlfrescoApi":141,"./api/AppsApi":142,"./api/AppsDefinitionApi":143,"./api/AppsRuntimeApi":144,"./api/CommentsApi":145,"./api/ContentApi":146,"./api/ContentRenditionApi":147,"./api/EditorApi":148,"./api/GroupsApi":149,"./api/IDMSyncApi":150,"./api/IntegrationAccountApi":151,"./api/IntegrationAlfrescoCloudApi":152,"./api/IntegrationAlfrescoOnPremiseApi":153,"./api/IntegrationApi":154,"./api/IntegrationBoxApi":155,"./api/IntegrationDriveApi":156,"./api/ModelBpmnApi":157,"./api/ModelsApi":158,"./api/ModelsHistoryApi":159,"./api/ProcessApi":160,"./api/ProcessDefinitionsApi":161,"./api/ProcessDefinitionsFormApi":162,"./api/ProcessInstancesApi":163,"./api/ProcessInstancesInformationApi":164,"./api/ProcessInstancesListingApi":165,"./api/ProcessScopeApi":166,"./api/ProfileApi":167,"./api/ScriptFileApi":168,"./api/SystemPropertiesApi":169,"./api/TaskActionsApi":170,"./api/TaskApi":171,"./api/TaskCheckListApi":172,"./api/TaskFormsApi":173,"./api/TemporaryApi":174,"./api/UserApi":175,"./api/UserFiltersApi":176,"./api/UsersWorkflowApi":177,"./model/AbstractGroupRepresentation":179,"./model/AbstractRepresentation":180,"./model/AbstractUserRepresentation":181,"./model/AddGroupCapabilitiesRepresentation":182,"./model/AppDefinition":183,"./model/AppDefinitionPublishRepresentation":184,"./model/AppDefinitionRepresentation":185,"./model/AppDefinitionUpdateResultRepresentation":186,"./model/AppModelDefinition":187,"./model/ArrayNode":188,"./model/BoxUserAccountCredentialsRepresentation":189,"./model/BulkUserUpdateRepresentation":190,"./model/ChangePasswordRepresentation":191,"./model/ChecklistOrderRepresentation":192,"./model/CommentRepresentation":193,"./model/CompleteFormRepresentation":194,"./model/ConditionRepresentation":195,"./model/CreateEndpointBasicAuthRepresentation":196,"./model/CreateProcessInstanceRepresentation":197,"./model/CreateTenantRepresentation":198,"./model/EndpointBasicAuthRepresentation":199,"./model/EndpointConfigurationRepresentation":200,"./model/EndpointRequestHeaderRepresentation":201,"./model/EntityAttributeScopeRepresentation":202,"./model/EntityVariableScopeRepresentation":203,"./model/File":204,"./model/FormDefinitionRepresentation":205,"./model/FormFieldRepresentation":206,"./model/FormJavascriptEventRepresentation":207,"./model/FormOutcomeRepresentation":208,"./model/FormRepresentation":209,"./model/FormSaveRepresentation":210,"./model/FormScopeRepresentation":211,"./model/FormTabRepresentation":212,"./model/FormValueRepresentation":213,"./model/GroupCapabilityRepresentation":214,"./model/GroupRepresentation":215,"./model/ImageUploadRepresentation":216,"./model/LayoutRepresentation":217,"./model/LightAppRepresentation":218,"./model/LightGroupRepresentation":219,"./model/LightTenantRepresentation":220,"./model/LightUserRepresentation":221,"./model/MaplongListstring":222,"./model/MapstringListEntityVariableScopeRepresentation":223,"./model/MapstringListVariableScopeRepresentation":224,"./model/Mapstringstring":225,"./model/ModelRepresentation":226,"./model/ObjectNode":227,"./model/OptionRepresentation":228,"./model/ProcessInstanceFilterRepresentation":229,"./model/ProcessInstanceFilterRequestRepresentation":230,"./model/ProcessInstanceRepresentation":231,"./model/ProcessScopeIdentifierRepresentation":232,"./model/ProcessScopeRepresentation":233,"./model/ProcessScopesRequestRepresentation":234,"./model/PublishIdentityInfoRepresentation":235,"./model/RelatedContentRepresentation":236,"./model/ResetPasswordRepresentation":237,"./model/RestVariable":238,"./model/ResultListDataRepresentation":239,"./model/RuntimeAppDefinitionSaveRepresentation":240,"./model/SaveFormRepresentation":241,"./model/SyncLogEntryRepresentation":242,"./model/SystemPropertiesRepresentation":243,"./model/TaskFilterRepresentation":244,"./model/TaskFilterRequestRepresentation":245,"./model/TaskQueryRequestRepresentation":246,"./model/TaskRepresentation":247,"./model/TaskUpdateRepresentation":248,"./model/TenantEvent":249,"./model/TenantRepresentation":250,"./model/UserAccountCredentialsRepresentation":251,"./model/UserActionRepresentation":252,"./model/UserFilterOrderRepresentation":253,"./model/UserProcessInstanceFilterRepresentation":254,"./model/UserRepresentation":255,"./model/UserTaskFilterRepresentation":256,"./model/ValidationErrorRepresentation":257,"./model/VariableScopeRepresentation":258}],179:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -49128,7 +48184,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -49202,7 +48258,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],181:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],180:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -49213,7 +48269,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -49257,7 +48313,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],182:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],181:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -49268,7 +48324,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -49356,7 +48412,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],183:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],182:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -49367,7 +48423,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -49420,7 +48476,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],184:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],183:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -49431,7 +48487,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/AppModelDefinition', 'model/PublishIdentityInfoRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./AppModelDefinition'), require('./PublishIdentityInfoRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./AppModelDefinition'), require('./PublishIdentityInfoRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -49505,7 +48561,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"./AppModelDefinition":188,"./PublishIdentityInfoRepresentation":236}],185:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./AppModelDefinition":187,"./PublishIdentityInfoRepresentation":235}],184:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -49516,7 +48572,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -49576,7 +48632,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],186:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],185:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -49587,7 +48643,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -49696,7 +48752,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],187:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],186:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -49707,7 +48763,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/AppDefinitionRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./AppDefinitionRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./AppDefinitionRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -49802,7 +48858,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"./AppDefinitionRepresentation":186}],188:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./AppDefinitionRepresentation":185}],187:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -49813,7 +48869,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -49936,7 +48992,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],189:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],188:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -49947,7 +49003,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -50192,7 +49248,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],190:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],189:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -50203,7 +49259,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -50270,7 +49326,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],191:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],190:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -50281,7 +49337,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -50369,7 +49425,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],192:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],191:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -50380,7 +49436,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -50440,7 +49496,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],193:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],192:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -50451,7 +49507,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -50504,7 +49560,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],194:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],193:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -50515,7 +49571,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/LightUserRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./LightUserRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./LightUserRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -50589,7 +49645,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"./LightUserRepresentation":222}],195:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./LightUserRepresentation":221}],194:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -50600,7 +49656,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -50660,7 +49716,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],196:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],195:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -50671,7 +49727,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -50773,7 +49829,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],197:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],196:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -50784,7 +49840,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -50858,7 +49914,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],198:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],197:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -50869,7 +49925,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -50943,7 +49999,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],199:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],198:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -50954,7 +50010,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -51028,7 +50084,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],200:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],199:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -51039,7 +50095,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -51127,7 +50183,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],201:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],200:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -51138,7 +50194,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/EndpointRequestHeaderRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./EndpointRequestHeaderRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./EndpointRequestHeaderRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -51254,7 +50310,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"./EndpointRequestHeaderRepresentation":202}],202:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./EndpointRequestHeaderRepresentation":201}],201:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -51265,7 +50321,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -51325,7 +50381,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],203:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],202:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -51336,7 +50392,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -51396,7 +50452,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],204:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],203:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -51407,7 +50463,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/EntityAttributeScopeRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./EntityAttributeScopeRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./EntityAttributeScopeRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -51481,7 +50537,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"./EntityAttributeScopeRepresentation":203}],205:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./EntityAttributeScopeRepresentation":202}],204:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -51492,7 +50548,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -51643,7 +50699,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],206:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],205:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -51654,7 +50710,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/FormFieldRepresentation', 'model/FormJavascriptEventRepresentation', 'model/FormOutcomeRepresentation', 'model/FormTabRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./FormFieldRepresentation'), require('./FormJavascriptEventRepresentation'), require('./FormOutcomeRepresentation'), require('./FormTabRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./FormFieldRepresentation'), require('./FormJavascriptEventRepresentation'), require('./FormOutcomeRepresentation'), require('./FormTabRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -51833,7 +50889,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"./FormFieldRepresentation":207,"./FormJavascriptEventRepresentation":208,"./FormOutcomeRepresentation":209,"./FormTabRepresentation":213}],207:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./FormFieldRepresentation":206,"./FormJavascriptEventRepresentation":207,"./FormOutcomeRepresentation":208,"./FormTabRepresentation":212}],206:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -51844,7 +50900,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/ConditionRepresentation', 'model/LayoutRepresentation', 'model/OptionRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./ConditionRepresentation'), require('./LayoutRepresentation'), require('./OptionRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./ConditionRepresentation'), require('./LayoutRepresentation'), require('./OptionRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -52100,7 +51156,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"./ConditionRepresentation":196,"./LayoutRepresentation":218,"./OptionRepresentation":229}],208:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./ConditionRepresentation":195,"./LayoutRepresentation":217,"./OptionRepresentation":228}],207:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -52111,7 +51167,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -52171,7 +51227,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],209:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],208:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -52182,7 +51238,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -52242,7 +51298,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],210:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],209:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -52253,7 +51309,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/FormDefinitionRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./FormDefinitionRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./FormDefinitionRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -52369,7 +51425,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"./FormDefinitionRepresentation":206}],211:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./FormDefinitionRepresentation":205}],210:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -52380,7 +51436,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/FormRepresentation', 'model/ProcessScopeIdentifierRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./FormRepresentation'), require('./ProcessScopeIdentifierRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./FormRepresentation'), require('./ProcessScopeIdentifierRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -52468,7 +51524,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"./FormRepresentation":210,"./ProcessScopeIdentifierRepresentation":233}],212:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./FormRepresentation":209,"./ProcessScopeIdentifierRepresentation":232}],211:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -52479,7 +51535,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/FormFieldRepresentation', 'model/FormOutcomeRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./FormFieldRepresentation'), require('./FormOutcomeRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./FormFieldRepresentation'), require('./FormOutcomeRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -52567,7 +51623,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"./FormFieldRepresentation":207,"./FormOutcomeRepresentation":209}],213:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./FormFieldRepresentation":206,"./FormOutcomeRepresentation":208}],212:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -52578,7 +51634,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/ConditionRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./ConditionRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./ConditionRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -52645,7 +51701,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"./ConditionRepresentation":196}],214:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./ConditionRepresentation":195}],213:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -52656,7 +51712,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -52716,7 +51772,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],215:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],214:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -52727,7 +51783,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -52787,7 +51843,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],216:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],215:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -52798,7 +51854,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/GroupCapabilityRepresentation', 'model/GroupRepresentation', 'model/UserRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./GroupCapabilityRepresentation'), require('./GroupRepresentation'), require('./UserRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./GroupCapabilityRepresentation'), require('./GroupRepresentation'), require('./UserRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -52928,7 +51984,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"./GroupCapabilityRepresentation":215,"./GroupRepresentation":216,"./UserRepresentation":255}],217:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./GroupCapabilityRepresentation":214,"./GroupRepresentation":215,"./UserRepresentation":255}],216:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -52939,7 +51995,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -53013,7 +52069,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],218:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],217:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -53024,7 +52080,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -53091,7 +52147,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],219:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],218:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -53102,7 +52158,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -53183,7 +52239,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],220:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],219:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -53194,7 +52250,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/LightGroupRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./LightGroupRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./LightGroupRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -53275,7 +52331,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"./LightGroupRepresentation":220}],221:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./LightGroupRepresentation":219}],220:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -53286,7 +52342,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -53346,7 +52402,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],222:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],221:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -53357,7 +52413,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -53445,7 +52501,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],223:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],222:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -53456,7 +52512,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -53504,7 +52560,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],224:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],223:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -53515,7 +52571,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -53563,7 +52619,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],225:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],224:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -53574,7 +52630,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -53622,7 +52678,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],226:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],225:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -53633,7 +52689,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -53681,7 +52737,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],227:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],226:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -53692,7 +52748,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -53850,7 +52906,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],228:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],227:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -53861,7 +52917,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -53905,7 +52961,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],229:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],228:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -53916,7 +52972,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -53976,7 +53032,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],230:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],229:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -53987,7 +53043,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -54075,7 +53131,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],231:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],230:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -54086,7 +53142,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/ProcessInstanceFilterRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./ProcessInstanceFilterRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./ProcessInstanceFilterRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -54167,7 +53223,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"./ProcessInstanceFilterRepresentation":230}],232:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./ProcessInstanceFilterRepresentation":229}],231:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -54178,7 +53234,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/LightUserRepresentation', 'model/RestVariable'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./LightUserRepresentation'), require('./RestVariable'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./LightUserRepresentation'), require('./RestVariable'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -54343,7 +53399,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"./LightUserRepresentation":222,"./RestVariable":239}],233:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./LightUserRepresentation":221,"./RestVariable":238}],232:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -54354,7 +53410,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -54414,7 +53470,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],234:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],233:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -54425,7 +53481,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/FormScopeRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./FormScopeRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./FormScopeRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -54569,7 +53625,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"./FormScopeRepresentation":212}],235:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./FormScopeRepresentation":211}],234:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -54580,7 +53636,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/ProcessScopeIdentifierRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./ProcessScopeIdentifierRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./ProcessScopeIdentifierRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -54640,7 +53696,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"./ProcessScopeIdentifierRepresentation":233}],236:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./ProcessScopeIdentifierRepresentation":232}],235:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -54651,7 +53707,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/LightGroupRepresentation', 'model/LightUserRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./LightGroupRepresentation'), require('./LightUserRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./LightGroupRepresentation'), require('./LightUserRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -54718,7 +53774,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"./LightGroupRepresentation":220,"./LightUserRepresentation":222}],237:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./LightGroupRepresentation":219,"./LightUserRepresentation":221}],236:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -54729,7 +53785,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/LightUserRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./LightUserRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./LightUserRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -54866,7 +53922,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"./LightUserRepresentation":222}],238:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./LightUserRepresentation":221}],237:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -54877,7 +53933,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -54930,7 +53986,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],239:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],238:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -54941,7 +53997,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -55022,7 +54078,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],240:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],239:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -55033,7 +54089,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/AbstractRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./AbstractRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./AbstractRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -55107,7 +54163,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"./AbstractRepresentation":181}],241:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./AbstractRepresentation":180}],240:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -55118,7 +54174,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/AppDefinitionRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./AppDefinitionRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./AppDefinitionRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -55171,7 +54227,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"./AppDefinitionRepresentation":186}],242:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./AppDefinitionRepresentation":185}],241:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -55182,7 +54238,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -55235,7 +54291,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],243:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],242:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -55246,7 +54302,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -55313,7 +54369,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],244:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],243:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -55324,7 +54380,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -55377,7 +54433,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],245:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],244:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -55388,7 +54444,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -55497,7 +54553,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],246:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],245:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -55508,7 +54564,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/TaskFilterRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./TaskFilterRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./TaskFilterRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -55589,7 +54645,106 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"./TaskFilterRepresentation":245}],247:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./TaskFilterRepresentation":244}],246:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['ApiClient'], factory);
+    } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+        // CommonJS-like environments that support module.exports, like Node.
+        module.exports = factory(require('../../../alfrescoApiClient'));
+    } else {
+        // Browser globals (root is window)
+        if (!root.ActivitiPublicRestApi) {
+            root.ActivitiPublicRestApi = {};
+        }
+        root.ActivitiPublicRestApi.TaskQueryRequestRepresentation = factory(root.ActivitiPublicRestApi.ApiClient);
+    }
+})(undefined, function (ApiClient) {
+    'use strict';
+
+    /**
+     * The TaskQueryRequestRepresentation model module.
+     * @module model/TaskQueryRequestRepresentation
+     * @version 1.4.0
+     */
+
+    /**
+     * Constructs a new <code>TaskQueryRequestRepresentation</code>.
+     * @alias module:model/TaskQueryRequestRepresentation
+     * @class
+     */
+
+    var exports = function exports() {
+        var _this = this;
+    };
+
+    exports.constructFromObject = function (data, obj) {
+        if (data) {
+            obj = obj || new exports();
+
+            if (data.hasOwnProperty('processInstanceId')) {
+                obj['processInstanceId'] = ApiClient.convertToType(data['processInstanceId'], 'Integer');
+            }
+            if (data.hasOwnProperty('text')) {
+                obj['text'] = TaskFilterRepresentation.constructFromObject(data['text'], 'String');
+            }
+            if (data.hasOwnProperty('assignment')) {
+                obj['assignment'] = ApiClient.convertToType(data['assignment']);
+            }
+            if (data.hasOwnProperty('state')) {
+                obj['state'] = ApiClient.convertToType(data['state'], 'String');
+            }
+            if (data.hasOwnProperty('sort')) {
+                obj['sort'] = ApiClient.convertToType(data['sort'], 'String');
+            }
+            if (data.hasOwnProperty('page')) {
+                obj['page'] = ApiClient.convertToType(data['page'], 'Integer');
+            }
+            if (data.hasOwnProperty('size')) {
+                obj['size'] = ApiClient.convertToType(data['size'], 'Integer');
+            }
+        }
+        return obj;
+    };
+
+    /**
+     * @member {Integer} processInstanceId
+     */
+    exports.prototype['processInstanceId'] = undefined;
+    /**
+     * @member {String} text
+     */
+    exports.prototype['text'] = undefined;
+    /**
+     * @member {assignment} assignment
+     */
+    exports.prototype['assignment'] = undefined;
+    /**
+     * @member {String} state
+     */
+    exports.prototype['state'] = undefined;
+    /**
+     * @member {String} sort
+     */
+    exports.prototype['sort'] = undefined;
+    /**
+     * @member {Integer} page
+     */
+    exports.prototype['page'] = undefined;
+    /**
+     * @member {Integer} size
+     */
+    exports.prototype['size'] = undefined;
+
+    return exports;
+});
+
+},{"../../../alfrescoApiClient":394}],247:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -55600,7 +54755,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/LightUserRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./LightUserRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./LightUserRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -55842,7 +54997,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"./LightUserRepresentation":222}],248:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./LightUserRepresentation":221}],248:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -55853,7 +55008,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -55941,7 +55096,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],249:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],249:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -55952,7 +55107,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -56047,7 +55202,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],250:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],250:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -56058,7 +55213,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -56160,7 +55315,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],251:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],251:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -56171,7 +55326,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -56231,7 +55386,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],252:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],252:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -56242,7 +55397,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -56309,7 +55464,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],253:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],253:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -56320,7 +55475,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -56380,7 +55535,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],254:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],254:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -56391,7 +55546,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/ProcessInstanceFilterRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./ProcessInstanceFilterRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./ProcessInstanceFilterRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -56486,7 +55641,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"./ProcessInstanceFilterRepresentation":230}],255:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./ProcessInstanceFilterRepresentation":229}],255:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -56497,7 +55652,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/GroupRepresentation', 'model/LightAppRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./GroupRepresentation'), require('./LightAppRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./GroupRepresentation'), require('./LightAppRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -56683,7 +55838,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"./GroupRepresentation":216,"./LightAppRepresentation":219}],256:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./GroupRepresentation":215,"./LightAppRepresentation":218}],256:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -56694,7 +55849,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/TaskFilterRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./TaskFilterRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./TaskFilterRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -56789,7 +55944,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136,"./TaskFilterRepresentation":245}],257:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./TaskFilterRepresentation":244}],257:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -56800,7 +55955,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -56895,7 +56050,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],258:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],258:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -56906,7 +56061,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -57001,8 +56156,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":136}],259:[function(require,module,exports){
-(function (Buffer){
+},{"../../../alfrescoApiClient":394}],259:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -57010,473 +56164,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['superagent'], factory);
+    define(['../../../alfrescoApiClient', '../model/Error', '../model/LoginTicketEntry', '../model/LoginRequest', '../model/ValidateTicketEntry'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('superagent'));
-  } else {
-    // Browser globals (root is window)
-    if (!root.AlfrescoAuthRestApi) {
-      root.AlfrescoAuthRestApi = {};
-    }
-    root.AlfrescoAuthRestApi.ApiClient = factory(root.superagent);
-  }
-})(undefined, function (superagent) {
-  'use strict';
-
-  /**
-   * @module ApiClient
-   * @version 0.1.0
-   */
-
-  /**
-   * Manages low level client-server communications, parameter marshalling, etc. There should not be any need for an
-   * application to use this class directly - the *Api and model classes provide the public API for the service. The
-   * contents of this file should be regarded as internal but are documented for completeness.
-   * @alias module:ApiClient
-   * @class
-   */
-
-  var exports = function exports() {
-    /**
-     * The base URL against which to resolve every API call's (relative) path.
-     * @type {String}
-     * @default https://localhost/alfresco/api/-default-/public/authentication/versions/1
-     */
-    this.basePath = 'https://localhost/alfresco/api/-default-/public/authentication/versions/1'.replace(/\/+$/, '');
-
-    /**
-     * The authentication methods to be included for all API calls.
-     * @type {Array.<String>}
-     */
-    this.authentications = {
-      'basicAuth': { type: 'basic' }
-    };
-    /**
-     * The default HTTP headers to be included for all API calls.
-     * @type {Array.<String>}
-     * @default {}
-     */
-    this.defaultHeaders = {};
-
-    /**
-     * The default HTTP timeout for all API calls.
-     * @type {Number}
-     * @default 60000
-     */
-    this.timeout = 60000;
-  };
-
-  /**
-   * Returns a string representation for an actual parameter.
-   * @param param The actual parameter.
-   * @returns {String} The string representation of <code>param</code>.
-   */
-  exports.prototype.paramToString = function (param) {
-    if (param == undefined || param == null) {
-      return '';
-    }
-    if (param instanceof Date) {
-      return param.toJSON();
-    }
-    return param.toString();
-  };
-
-  /**
-   * Builds full URL by appending the given path to the base URL and replacing path parameter place-holders with parameter values.
-   * NOTE: query parameters are not handled here.
-   * @param {String} path The path to append to the base URL.
-   * @param {Object} pathParams The parameter values to append.
-   * @returns {String} The encoded path with parameter values substituted.
-   */
-  exports.prototype.buildUrl = function (path, pathParams) {
-    if (!path.match(/^\//)) {
-      path = '/' + path;
-    }
-    var url = this.basePath + path;
-    var _this = this;
-    url = url.replace(/\{([\w-]+)\}/g, function (fullMatch, key) {
-      var value;
-      if (pathParams.hasOwnProperty(key)) {
-        value = _this.paramToString(pathParams[key]);
-      } else {
-        value = fullMatch;
-      }
-      return encodeURIComponent(value);
-    });
-    return url;
-  };
-
-  /**
-   * Checks whether the given content type represents JSON.<br>
-   * JSON content type examples:<br>
-   * <ul>
-   * <li>application/json</li>
-   * <li>application/json; charset=UTF8</li>
-   * <li>APPLICATION/JSON</li>
-   * </ul>
-   * @param {String} contentType The MIME content type to check.
-   * @returns {Boolean} <code>true</code> if <code>contentType</code> represents JSON, otherwise <code>false</code>.
-   */
-  exports.prototype.isJsonMime = function (contentType) {
-    return Boolean(contentType != null && contentType.match(/^application\/json(;.*)?$/i));
-  };
-
-  /**
-   * Chooses a content type from the given array, with JSON preferred; i.e. return JSON if included, otherwise return the first.
-   * @param {Array.<String>} contentTypes
-   * @returns {String} The chosen content type, preferring JSON.
-   */
-  exports.prototype.jsonPreferredMime = function (contentTypes) {
-    for (var i = 0; i < contentTypes.length; i++) {
-      if (this.isJsonMime(contentTypes[i])) {
-        return contentTypes[i];
-      }
-    }
-    return contentTypes[0];
-  };
-
-  /**
-   * Checks whether the given parameter value represents file-like content.
-   * @param param The parameter to check.
-   * @returns {Boolean} <code>true</code> if <code>param</code> represents a file. 
-   */
-  exports.prototype.isFileParam = function (param) {
-    // fs.ReadStream in Node.js (but not in runtime like browserify)
-    if (typeof window === 'undefined' && typeof require === 'function' && require('fs') && param instanceof require('fs').ReadStream) {
-      return true;
-    }
-    // Buffer in Node.js
-    if (typeof Buffer === 'function' && param instanceof Buffer) {
-      return true;
-    }
-    // Blob in browser
-    if (typeof Blob === 'function' && param instanceof Blob) {
-      return true;
-    }
-    // File in browser (it seems File object is also instance of Blob, but keep this for safe)
-    if (typeof File === 'function' && param instanceof File) {
-      return true;
-    }
-    return false;
-  };
-
-  /**
-   * Normalizes parameter values:
-   * <ul>
-   * <li>remove nils</li>
-   * <li>keep files and arrays</li>
-   * <li>format to string with `paramToString` for other cases</li>
-   * </ul>
-   * @param {Object.<String, Object>} params The parameters as object properties.
-   * @returns {Object.<String, Object>} normalized parameters.
-   */
-  exports.prototype.normalizeParams = function (params) {
-    var newParams = {};
-    for (var key in params) {
-      if (params.hasOwnProperty(key) && params[key] != undefined && params[key] != null) {
-        var value = params[key];
-        if (this.isFileParam(value) || Array.isArray(value)) {
-          newParams[key] = value;
-        } else {
-          newParams[key] = this.paramToString(value);
-        }
-      }
-    }
-    return newParams;
-  };
-
-  /**
-   * Enumeration of collection format separator strategies.
-   * @enum {String} 
-   * @readonly
-   */
-  exports.CollectionFormatEnum = {
-    /**
-     * Comma-separated values. Value: <code>csv</code>
-     * @const
-     */
-    CSV: ',',
-    /**
-     * Space-separated values. Value: <code>ssv</code>
-     * @const
-     */
-    SSV: ' ',
-    /**
-     * Tab-separated values. Value: <code>tsv</code>
-     * @const
-     */
-    TSV: '\t',
-    /**
-     * Pipe(|)-separated values. Value: <code>pipes</code>
-     * @const
-     */
-    PIPES: '|',
-    /**
-     * Native array. Value: <code>multi</code>
-     * @const
-     */
-    MULTI: 'multi'
-  };
-
-  /**
-   * Builds a string representation of an array-type actual parameter, according to the given collection format.
-   * @param {Array} param An array parameter.
-   * @param {module:ApiClient.CollectionFormatEnum} collectionFormat The array element separator strategy.
-   * @returns {String|Array} A string representation of the supplied collection, using the specified delimiter. Returns
-   * <code>param</code> as is if <code>collectionFormat</code> is <code>multi</code>.
-   */
-  exports.prototype.buildCollectionParam = function buildCollectionParam(param, collectionFormat) {
-    if (param == null) {
-      return null;
-    }
-    switch (collectionFormat) {
-      case 'csv':
-        return param.map(this.paramToString).join(',');
-      case 'ssv':
-        return param.map(this.paramToString).join(' ');
-      case 'tsv':
-        return param.map(this.paramToString).join('\t');
-      case 'pipes':
-        return param.map(this.paramToString).join('|');
-      case 'multi':
-        // return the array directly as SuperAgent will handle it as expected
-        return param.map(this.paramToString);
-      default:
-        throw new Error('Unknown collection format: ' + collectionFormat);
-    }
-  };
-
-  /**
-   * Applies authentication headers to the request.
-   * @param {Object} request The request object created by a <code>superagent()</code> call.
-   * @param {Array.<String>} authNames An array of authentication method names.
-   */
-  exports.prototype.applyAuthToRequest = function (request, authNames) {
-    var _this = this;
-    authNames.forEach(function (authName) {
-      var auth = _this.authentications[authName];
-      switch (auth.type) {
-        case 'basic':
-          if (auth.username || auth.password) {
-            request.auth(auth.username || '', auth.password || '');
-          }
-          break;
-        case 'apiKey':
-          if (auth.apiKey) {
-            var data = {};
-            if (auth.apiKeyPrefix) {
-              data[auth.name] = auth.apiKeyPrefix + ' ' + auth.apiKey;
-            } else {
-              data[auth.name] = auth.apiKey;
-            }
-            if (auth['in'] === 'header') {
-              request.set(data);
-            } else {
-              request.query(data);
-            }
-          }
-          break;
-        case 'oauth2':
-          if (auth.accessToken) {
-            request.set({ 'Authorization': 'Bearer ' + auth.accessToken });
-          }
-          break;
-        default:
-          throw new Error('Unknown authentication type: ' + auth.type);
-      }
-    });
-  };
-
-  /**
-   * Deserializes an HTTP response body into a value of the specified type.
-   * @param {Object} response A SuperAgent response object.
-   * @param {(String|Array.<String>|Object.<String, Object>|Function)} returnType The type to return. Pass a string for simple types
-   * or the constructor function for a complex type. Pass an array containing the type name to return an array of that type. To
-   * return an object, pass an object with one property whose name is the key type and whose value is the corresponding value type:
-   * all properties on <code>data<code> will be converted to this type.
-   * @returns A value of the specified type.
-   */
-  exports.prototype.deserialize = function deserialize(response, returnType) {
-    if (response == null || returnType == null) {
-      return null;
-    }
-    // Rely on SuperAgent for parsing response body.
-    // See http://visionmedia.github.io/superagent/#parsing-response-bodies
-    var data = response.body;
-    if (data == null) {
-      // SuperAgent does not always produce a body; use the unparsed response as a fallback
-      data = response.text;
-    }
-    return exports.convertToType(data, returnType);
-  };
-
-  /**
-   * Invokes the REST service using the supplied settings and parameters.
-   * @param {String} path The base URL to invoke.
-   * @param {String} httpMethod The HTTP method to use.
-   * @param {Object.<String, String>} pathParams A map of path parameters and their values.
-   * @param {Object.<String, Object>} queryParams A map of query parameters and their values.
-   * @param {Object.<String, Object>} headerParams A map of header parameters and their values.
-   * @param {Object.<String, Object>} formParams A map of form parameters and their values.
-   * @param {Object} bodyParam The value to pass as the request body.
-   * @param {Array.<String>} authNames An array of authentication type names.
-   * @param {Array.<String>} contentTypes An array of request MIME types.
-   * @param {Array.<String>} accepts An array of acceptable response MIME types.
-   * @param {(String|Array|ObjectFunction)} returnType The required type to return; can be a string for simple types or the
-   * constructor for a complex type.   * @returns {Promise} A Promise object.
-   */
-  exports.prototype.callApi = function callApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, authNames, contentTypes, accepts, returnType) {
-
-    var _this = this;
-    var url = this.buildUrl(path, pathParams);
-    var request = superagent(httpMethod, url);
-
-    // apply authentications
-    this.applyAuthToRequest(request, authNames);
-
-    // set query parameters
-    request.query(this.normalizeParams(queryParams));
-
-    // set header parameters
-    request.set(this.defaultHeaders).set(this.normalizeParams(headerParams));
-
-    // set request timeout
-    request.timeout(this.timeout);
-
-    var contentType = this.jsonPreferredMime(contentTypes);
-    if (contentType) {
-      request.type(contentType);
-    } else if (!request.header['Content-Type']) {
-      request.type('application/json');
-    }
-
-    if (contentType === 'application/x-www-form-urlencoded') {
-      request.send(this.normalizeParams(formParams));
-    } else if (contentType == 'multipart/form-data') {
-      var _formParams = this.normalizeParams(formParams);
-      for (var key in _formParams) {
-        if (_formParams.hasOwnProperty(key)) {
-          if (this.isFileParam(_formParams[key])) {
-            // file field
-            request.attach(key, _formParams[key]);
-          } else {
-            request.field(key, _formParams[key]);
-          }
-        }
-      }
-    } else if (bodyParam) {
-      request.send(bodyParam);
-    }
-
-    var accept = this.jsonPreferredMime(accepts);
-    if (accept) {
-      request.accept(accept);
-    }
-
-    return new Promise(function (resolve, reject) {
-      request.end(function (error, response) {
-        if (error) {
-          reject(error);
-        } else {
-          var data = _this.deserialize(response, returnType);
-          resolve(data);
-        }
-      });
-    });
-  };
-
-  /**
-   * Parses an ISO-8601 string representation of a date value.
-   * @param {String} str The date value as a string.
-   * @returns {Date} The parsed date object.
-   */
-  exports.parseDate = function (str) {
-    return new Date(str.replace(/T/i, ' '));
-  };
-
-  /**
-   * Converts a value to the specified type.
-   * @param {(String|Object)} data The data to convert, as a string or object.
-   * @param {(String|Array.<String>|Object.<String, Object>|Function)} type The type to return. Pass a string for simple types
-   * or the constructor function for a complex type. Pass an array containing the type name to return an array of that type. To
-   * return an object, pass an object with one property whose name is the key type and whose value is the corresponding value type:
-   * all properties on <code>data<code> will be converted to this type.
-   * @returns An instance of the specified type.
-   */
-  exports.convertToType = function (data, type) {
-    switch (type) {
-      case 'Boolean':
-        return Boolean(data);
-      case 'Integer':
-        return parseInt(data, 10);
-      case 'Number':
-        return parseFloat(data);
-      case 'String':
-        return String(data);
-      case 'Date':
-        return this.parseDate(String(data));
-      default:
-        if (type === Object) {
-          // generic object, return directly
-          return data;
-        } else if (typeof type === 'function') {
-          // for model type like: User
-          return type.constructFromObject(data);
-        } else if (Array.isArray(type)) {
-          // for array type like: ['String']
-          var itemType = type[0];
-          return data.map(function (item) {
-            return exports.convertToType(item, itemType);
-          });
-        } else if ((typeof type === 'undefined' ? 'undefined' : _typeof(type)) === 'object') {
-          // for plain object type like: {'String': 'Integer'}
-          var keyType, valueType;
-          for (var k in type) {
-            if (type.hasOwnProperty(k)) {
-              keyType = k;
-              valueType = type[k];
-              break;
-            }
-          }
-          var result = {};
-          for (var k in data) {
-            if (data.hasOwnProperty(k)) {
-              var key = exports.convertToType(k, keyType);
-              var value = exports.convertToType(data[k], valueType);
-              result[key] = value;
-            }
-          }
-          return result;
-        } else {
-          // for unknown type, return the data directly
-          return data;
-        }
-    }
-  };
-
-  /**
-   * The default API client implementation.
-   * @type {module:ApiClient}
-   */
-  exports.instance = new exports();
-
-  return exports;
-});
-
-}).call(this,require("buffer").Buffer)
-},{"buffer":8,"fs":6,"superagent":125}],260:[function(require,module,exports){
-'use strict';
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
-(function (root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['../ApiClient', '../model/Error', '../model/LoginTicketEntry', '../model/LoginRequest', '../model/ValidateTicketEntry'], factory);
-  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
-    // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/Error'), require('../model/LoginTicketEntry'), require('../model/LoginRequest'), require('../model/ValidateTicketEntry'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/Error'), require('../model/LoginTicketEntry'), require('../model/LoginRequest'), require('../model/ValidateTicketEntry'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoAuthRestApi) {
@@ -57576,7 +56267,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":259,"../model/Error":262,"../model/LoginRequest":264,"../model/LoginTicketEntry":265,"../model/ValidateTicketEntry":267}],261:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"../model/Error":261,"../model/LoginRequest":263,"../model/LoginTicketEntry":264,"../model/ValidateTicketEntry":266}],260:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -57584,10 +56275,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 (function (factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['./ApiClient', './model/Error', './model/ErrorError', './model/LoginRequest', './model/LoginTicketEntry', './model/LoginTicketEntryEntry', './model/ValidateTicketEntry', './model/ValidateTicketEntryEntry', './api/AuthenticationApi'], factory);
+    define(['../../alfrescoApiClient', './model/Error', './model/ErrorError', './model/LoginRequest', './model/LoginTicketEntry', './model/LoginTicketEntryEntry', './model/ValidateTicketEntry', './model/ValidateTicketEntryEntry', './api/AuthenticationApi'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('./ApiClient'), require('./model/Error'), require('./model/ErrorError'), require('./model/LoginRequest'), require('./model/LoginTicketEntry'), require('./model/LoginTicketEntryEntry'), require('./model/ValidateTicketEntry'), require('./model/ValidateTicketEntryEntry'), require('./api/AuthenticationApi'));
+    module.exports = factory(require('../../alfrescoApiClient'), require('./model/Error'), require('./model/ErrorError'), require('./model/LoginRequest'), require('./model/LoginTicketEntry'), require('./model/LoginTicketEntryEntry'), require('./model/ValidateTicketEntry'), require('./model/ValidateTicketEntryEntry'), require('./api/AuthenticationApi'));
   }
 })(function (ApiClient, Error, ErrorError, LoginRequest, LoginTicketEntry, LoginTicketEntryEntry, ValidateTicketEntry, ValidateTicketEntryEntry, AuthenticationApi) {
   'use strict';
@@ -57675,7 +56366,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"./ApiClient":259,"./api/AuthenticationApi":260,"./model/Error":262,"./model/ErrorError":263,"./model/LoginRequest":264,"./model/LoginTicketEntry":265,"./model/LoginTicketEntryEntry":266,"./model/ValidateTicketEntry":267,"./model/ValidateTicketEntryEntry":268}],262:[function(require,module,exports){
+},{"../../alfrescoApiClient":394,"./api/AuthenticationApi":259,"./model/Error":261,"./model/ErrorError":262,"./model/LoginRequest":263,"./model/LoginTicketEntry":264,"./model/LoginTicketEntryEntry":265,"./model/ValidateTicketEntry":266,"./model/ValidateTicketEntryEntry":267}],261:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -57683,10 +56374,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient', './ErrorError'], factory);
+    define(['../../../alfrescoApiClient', './ErrorError'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./ErrorError'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./ErrorError'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoAuthRestApi) {
@@ -57737,7 +56428,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":259,"./ErrorError":263}],263:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./ErrorError":262}],262:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -57745,10 +56436,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient'], factory);
+    define(['../../../alfrescoApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoAuthRestApi) {
@@ -57850,7 +56541,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":259}],264:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],263:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -57858,10 +56549,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient'], factory);
+    define(['../../../alfrescoApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoAuthRestApi) {
@@ -57920,7 +56611,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":259}],265:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],264:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -57928,10 +56619,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient', './LoginTicketEntryEntry'], factory);
+    define(['../../../alfrescoApiClient', './LoginTicketEntryEntry'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./LoginTicketEntryEntry'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./LoginTicketEntryEntry'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoAuthRestApi) {
@@ -57982,7 +56673,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":259,"./LoginTicketEntryEntry":266}],266:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./LoginTicketEntryEntry":265}],265:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -57990,10 +56681,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient'], factory);
+    define(['../../../alfrescoApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoAuthRestApi) {
@@ -58052,7 +56743,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":259}],267:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],266:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -58060,10 +56751,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient', './ValidateTicketEntryEntry'], factory);
+    define(['../../../alfrescoApiClient', './ValidateTicketEntryEntry'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./ValidateTicketEntryEntry'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./ValidateTicketEntryEntry'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoAuthRestApi) {
@@ -58114,7 +56805,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":259,"./ValidateTicketEntryEntry":268}],268:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394,"./ValidateTicketEntryEntry":267}],267:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -58122,10 +56813,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient'], factory);
+    define(['../../../alfrescoApiClient'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoAuthRestApi) {
@@ -58176,7 +56867,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":259}],269:[function(require,module,exports){
+},{"../../../alfrescoApiClient":394}],268:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -58644,7 +57335,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":8,"fs":6,"superagent":125}],270:[function(require,module,exports){
+},{"buffer":8,"fs":6,"superagent":125}],269:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -58837,7 +57528,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"../model/AssocTargetBody":292,"../model/Error":310,"../model/NodeAssocPaging":324}],271:[function(require,module,exports){
+},{"../ApiClient":268,"../model/AssocTargetBody":291,"../model/Error":309,"../model/NodeAssocPaging":323}],270:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -60198,7 +58889,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"../model/AssocChildBody":290,"../model/AssocTargetBody":292,"../model/CopyBody":302,"../model/DeletedNodeEntry":304,"../model/DeletedNodesPaging":307,"../model/EmailSharedLinkBody":309,"../model/Error":310,"../model/MoveBody":320,"../model/NodeAssocPaging":324,"../model/NodeBody":326,"../model/NodeBody1":327,"../model/NodeChildAssocPaging":330,"../model/NodeEntry":332,"../model/NodePaging":336,"../model/NodeSharedLinkEntry":339,"../model/NodeSharedLinkPaging":340,"../model/RenditionBody":363,"../model/RenditionEntry":364,"../model/RenditionPaging":365,"../model/SharedLinkBody":367,"../model/SiteBody":369,"../model/SiteEntry":373}],272:[function(require,module,exports){
+},{"../ApiClient":268,"../model/AssocChildBody":289,"../model/AssocTargetBody":291,"../model/CopyBody":301,"../model/DeletedNodeEntry":303,"../model/DeletedNodesPaging":306,"../model/EmailSharedLinkBody":308,"../model/Error":309,"../model/MoveBody":319,"../model/NodeAssocPaging":323,"../model/NodeBody":325,"../model/NodeBody1":326,"../model/NodeChildAssocPaging":329,"../model/NodeEntry":331,"../model/NodePaging":335,"../model/NodeSharedLinkEntry":338,"../model/NodeSharedLinkPaging":339,"../model/RenditionBody":362,"../model/RenditionEntry":363,"../model/RenditionPaging":364,"../model/SharedLinkBody":366,"../model/SiteBody":368,"../model/SiteEntry":372}],271:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -60560,7 +59251,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"../model/AssocChildBody":290,"../model/Error":310,"../model/MoveBody":320,"../model/NodeAssocPaging":324,"../model/NodeBody1":327,"../model/NodeChildAssocPaging":330,"../model/NodeEntry":332,"../model/NodePaging":336}],273:[function(require,module,exports){
+},{"../ApiClient":268,"../model/AssocChildBody":289,"../model/Error":309,"../model/MoveBody":319,"../model/NodeAssocPaging":323,"../model/NodeBody1":326,"../model/NodeChildAssocPaging":329,"../model/NodeEntry":331,"../model/NodePaging":335}],272:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -60758,7 +59449,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"../model/CommentBody":295,"../model/CommentBody1":296,"../model/CommentEntry":297,"../model/CommentPaging":298,"../model/Error":310}],274:[function(require,module,exports){
+},{"../ApiClient":268,"../model/CommentBody":294,"../model/CommentBody1":295,"../model/CommentEntry":296,"../model/CommentPaging":297,"../model/Error":309}],273:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -60952,7 +59643,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"../model/Error":310,"../model/FavoriteBody":313,"../model/FavoriteEntry":314,"../model/FavoritePaging":315}],275:[function(require,module,exports){
+},{"../ApiClient":268,"../model/Error":309,"../model/FavoriteBody":312,"../model/FavoriteEntry":313,"../model/FavoritePaging":314}],274:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -61029,7 +59720,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"../model/Error":310,"../model/PersonNetworkEntry":349}],276:[function(require,module,exports){
+},{"../ApiClient":268,"../model/Error":309,"../model/PersonNetworkEntry":348}],275:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -61564,7 +60255,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"../model/CopyBody":302,"../model/DeletedNodeEntry":304,"../model/DeletedNodesPaging":307,"../model/Error":310,"../model/MoveBody":320,"../model/NodeBody":326,"../model/NodeBody1":327,"../model/NodeEntry":332,"../model/NodePaging":336}],277:[function(require,module,exports){
+},{"../ApiClient":268,"../model/CopyBody":301,"../model/DeletedNodeEntry":303,"../model/DeletedNodesPaging":306,"../model/Error":309,"../model/MoveBody":319,"../model/NodeBody":325,"../model/NodeBody1":326,"../model/NodeEntry":331,"../model/NodePaging":335}],276:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -62373,7 +61064,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"../model/ActivityPaging":288,"../model/Error":310,"../model/FavoriteBody":313,"../model/FavoriteEntry":314,"../model/FavoritePaging":315,"../model/FavoriteSiteBody":317,"../model/InlineResponse201":318,"../model/PersonEntry":347,"../model/PersonNetworkEntry":349,"../model/PersonNetworkPaging":350,"../model/PreferenceEntry":353,"../model/PreferencePaging":354,"../model/SiteEntry":373,"../model/SiteMembershipBody":379,"../model/SiteMembershipBody1":380,"../model/SiteMembershipRequestEntry":382,"../model/SiteMembershipRequestPaging":383,"../model/SitePaging":385}],278:[function(require,module,exports){
+},{"../ApiClient":268,"../model/ActivityPaging":287,"../model/Error":309,"../model/FavoriteBody":312,"../model/FavoriteEntry":313,"../model/FavoritePaging":314,"../model/FavoriteSiteBody":316,"../model/InlineResponse201":317,"../model/PersonEntry":346,"../model/PersonNetworkEntry":348,"../model/PersonNetworkPaging":349,"../model/PreferenceEntry":352,"../model/PreferencePaging":353,"../model/SiteEntry":372,"../model/SiteMembershipBody":378,"../model/SiteMembershipBody1":379,"../model/SiteMembershipRequestEntry":381,"../model/SiteMembershipRequestPaging":382,"../model/SitePaging":384}],277:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -62565,7 +61256,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"../model/Error":310,"../model/RatingBody":358,"../model/RatingEntry":359,"../model/RatingPaging":360}],279:[function(require,module,exports){
+},{"../ApiClient":268,"../model/Error":309,"../model/RatingBody":357,"../model/RatingEntry":358,"../model/RatingPaging":359}],278:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -62822,7 +61513,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"../model/Error":310,"../model/RenditionBody":363,"../model/RenditionEntry":364,"../model/RenditionPaging":365}],280:[function(require,module,exports){
+},{"../ApiClient":268,"../model/Error":309,"../model/RenditionBody":362,"../model/RenditionEntry":363,"../model/RenditionPaging":364}],279:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -62910,7 +61601,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"../model/Error":310,"../model/NodePaging":336}],281:[function(require,module,exports){
+},{"../ApiClient":268,"../model/Error":309,"../model/NodePaging":335}],280:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -63151,7 +61842,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"../model/EmailSharedLinkBody":309,"../model/Error":310,"../model/NodeSharedLinkEntry":339,"../model/NodeSharedLinkPaging":340,"../model/SharedLinkBody":367}],282:[function(require,module,exports){
+},{"../ApiClient":268,"../model/EmailSharedLinkBody":308,"../model/Error":309,"../model/NodeSharedLinkEntry":338,"../model/NodeSharedLinkPaging":339,"../model/SharedLinkBody":366}],281:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -63601,7 +62292,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"../model/Error":310,"../model/SiteBody":369,"../model/SiteContainerEntry":371,"../model/SiteContainerPaging":372,"../model/SiteEntry":373,"../model/SiteMemberBody":375,"../model/SiteMemberEntry":376,"../model/SiteMemberPaging":377,"../model/SiteMemberRoleBody":378,"../model/SitePaging":385}],283:[function(require,module,exports){
+},{"../ApiClient":268,"../model/Error":309,"../model/SiteBody":368,"../model/SiteContainerEntry":370,"../model/SiteContainerPaging":371,"../model/SiteEntry":372,"../model/SiteMemberBody":374,"../model/SiteMemberEntry":375,"../model/SiteMemberPaging":376,"../model/SiteMemberRoleBody":377,"../model/SitePaging":384}],282:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -63851,7 +62542,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"../model/Error":310,"../model/TagBody":388,"../model/TagBody1":389,"../model/TagEntry":390,"../model/TagPaging":391}],284:[function(require,module,exports){
+},{"../ApiClient":268,"../model/Error":309,"../model/TagBody":387,"../model/TagBody1":388,"../model/TagEntry":389,"../model/TagPaging":390}],283:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -64525,7 +63216,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"./ApiClient":269,"./api/AssociationsApi":270,"./api/ChangesApi":271,"./api/ChildAssociationsApi":272,"./api/CommentsApi":273,"./api/FavoritesApi":274,"./api/NetworksApi":275,"./api/NodesApi":276,"./api/PeopleApi":277,"./api/RatingsApi":278,"./api/RenditionsApi":279,"./api/SearchApi":280,"./api/SharedlinksApi":281,"./api/SitesApi":282,"./api/TagsApi":283,"./model/Activity":285,"./model/ActivityActivitySummary":286,"./model/ActivityEntry":287,"./model/ActivityPaging":288,"./model/ActivityPagingList":289,"./model/AssocChildBody":290,"./model/AssocInfo":291,"./model/AssocTargetBody":292,"./model/ChildAssocInfo":293,"./model/Comment":294,"./model/CommentBody":295,"./model/CommentBody1":296,"./model/CommentEntry":297,"./model/CommentPaging":298,"./model/CommentPagingList":299,"./model/Company":300,"./model/ContentInfo":301,"./model/CopyBody":302,"./model/DeletedNode":303,"./model/DeletedNodeEntry":304,"./model/DeletedNodeMinimal":305,"./model/DeletedNodeMinimalEntry":306,"./model/DeletedNodesPaging":307,"./model/DeletedNodesPagingList":308,"./model/EmailSharedLinkBody":309,"./model/Error":310,"./model/ErrorError":311,"./model/Favorite":312,"./model/FavoriteBody":313,"./model/FavoriteEntry":314,"./model/FavoritePaging":315,"./model/FavoritePagingList":316,"./model/FavoriteSiteBody":317,"./model/InlineResponse201":318,"./model/InlineResponse201Entry":319,"./model/MoveBody":320,"./model/NetworkQuota":321,"./model/NodeAssocMinimal":322,"./model/NodeAssocMinimalEntry":323,"./model/NodeAssocPaging":324,"./model/NodeAssocPagingList":325,"./model/NodeBody":326,"./model/NodeBody1":327,"./model/NodeChildAssocMinimal":328,"./model/NodeChildAssocMinimalEntry":329,"./model/NodeChildAssocPaging":330,"./model/NodeChildAssocPagingList":331,"./model/NodeEntry":332,"./model/NodeFull":333,"./model/NodeMinimal":334,"./model/NodeMinimalEntry":335,"./model/NodePaging":336,"./model/NodePagingList":337,"./model/NodeSharedLink":338,"./model/NodeSharedLinkEntry":339,"./model/NodeSharedLinkPaging":340,"./model/NodeSharedLinkPagingList":341,"./model/NodesnodeIdchildrenContent":342,"./model/Pagination":343,"./model/PathElement":344,"./model/PathInfo":345,"./model/Person":346,"./model/PersonEntry":347,"./model/PersonNetwork":348,"./model/PersonNetworkEntry":349,"./model/PersonNetworkPaging":350,"./model/PersonNetworkPagingList":351,"./model/Preference":352,"./model/PreferenceEntry":353,"./model/PreferencePaging":354,"./model/PreferencePagingList":355,"./model/Rating":356,"./model/RatingAggregate":357,"./model/RatingBody":358,"./model/RatingEntry":359,"./model/RatingPaging":360,"./model/RatingPagingList":361,"./model/Rendition":362,"./model/RenditionBody":363,"./model/RenditionEntry":364,"./model/RenditionPaging":365,"./model/RenditionPagingList":366,"./model/SharedLinkBody":367,"./model/Site":368,"./model/SiteBody":369,"./model/SiteContainer":370,"./model/SiteContainerEntry":371,"./model/SiteContainerPaging":372,"./model/SiteEntry":373,"./model/SiteMember":374,"./model/SiteMemberBody":375,"./model/SiteMemberEntry":376,"./model/SiteMemberPaging":377,"./model/SiteMemberRoleBody":378,"./model/SiteMembershipBody":379,"./model/SiteMembershipBody1":380,"./model/SiteMembershipRequest":381,"./model/SiteMembershipRequestEntry":382,"./model/SiteMembershipRequestPaging":383,"./model/SiteMembershipRequestPagingList":384,"./model/SitePaging":385,"./model/SitePagingList":386,"./model/Tag":387,"./model/TagBody":388,"./model/TagBody1":389,"./model/TagEntry":390,"./model/TagPaging":391,"./model/TagPagingList":392,"./model/UserInfo":393}],285:[function(require,module,exports){
+},{"./ApiClient":268,"./api/AssociationsApi":269,"./api/ChangesApi":270,"./api/ChildAssociationsApi":271,"./api/CommentsApi":272,"./api/FavoritesApi":273,"./api/NetworksApi":274,"./api/NodesApi":275,"./api/PeopleApi":276,"./api/RatingsApi":277,"./api/RenditionsApi":278,"./api/SearchApi":279,"./api/SharedlinksApi":280,"./api/SitesApi":281,"./api/TagsApi":282,"./model/Activity":284,"./model/ActivityActivitySummary":285,"./model/ActivityEntry":286,"./model/ActivityPaging":287,"./model/ActivityPagingList":288,"./model/AssocChildBody":289,"./model/AssocInfo":290,"./model/AssocTargetBody":291,"./model/ChildAssocInfo":292,"./model/Comment":293,"./model/CommentBody":294,"./model/CommentBody1":295,"./model/CommentEntry":296,"./model/CommentPaging":297,"./model/CommentPagingList":298,"./model/Company":299,"./model/ContentInfo":300,"./model/CopyBody":301,"./model/DeletedNode":302,"./model/DeletedNodeEntry":303,"./model/DeletedNodeMinimal":304,"./model/DeletedNodeMinimalEntry":305,"./model/DeletedNodesPaging":306,"./model/DeletedNodesPagingList":307,"./model/EmailSharedLinkBody":308,"./model/Error":309,"./model/ErrorError":310,"./model/Favorite":311,"./model/FavoriteBody":312,"./model/FavoriteEntry":313,"./model/FavoritePaging":314,"./model/FavoritePagingList":315,"./model/FavoriteSiteBody":316,"./model/InlineResponse201":317,"./model/InlineResponse201Entry":318,"./model/MoveBody":319,"./model/NetworkQuota":320,"./model/NodeAssocMinimal":321,"./model/NodeAssocMinimalEntry":322,"./model/NodeAssocPaging":323,"./model/NodeAssocPagingList":324,"./model/NodeBody":325,"./model/NodeBody1":326,"./model/NodeChildAssocMinimal":327,"./model/NodeChildAssocMinimalEntry":328,"./model/NodeChildAssocPaging":329,"./model/NodeChildAssocPagingList":330,"./model/NodeEntry":331,"./model/NodeFull":332,"./model/NodeMinimal":333,"./model/NodeMinimalEntry":334,"./model/NodePaging":335,"./model/NodePagingList":336,"./model/NodeSharedLink":337,"./model/NodeSharedLinkEntry":338,"./model/NodeSharedLinkPaging":339,"./model/NodeSharedLinkPagingList":340,"./model/NodesnodeIdchildrenContent":341,"./model/Pagination":342,"./model/PathElement":343,"./model/PathInfo":344,"./model/Person":345,"./model/PersonEntry":346,"./model/PersonNetwork":347,"./model/PersonNetworkEntry":348,"./model/PersonNetworkPaging":349,"./model/PersonNetworkPagingList":350,"./model/Preference":351,"./model/PreferenceEntry":352,"./model/PreferencePaging":353,"./model/PreferencePagingList":354,"./model/Rating":355,"./model/RatingAggregate":356,"./model/RatingBody":357,"./model/RatingEntry":358,"./model/RatingPaging":359,"./model/RatingPagingList":360,"./model/Rendition":361,"./model/RenditionBody":362,"./model/RenditionEntry":363,"./model/RenditionPaging":364,"./model/RenditionPagingList":365,"./model/SharedLinkBody":366,"./model/Site":367,"./model/SiteBody":368,"./model/SiteContainer":369,"./model/SiteContainerEntry":370,"./model/SiteContainerPaging":371,"./model/SiteEntry":372,"./model/SiteMember":373,"./model/SiteMemberBody":374,"./model/SiteMemberEntry":375,"./model/SiteMemberPaging":376,"./model/SiteMemberRoleBody":377,"./model/SiteMembershipBody":378,"./model/SiteMembershipBody1":379,"./model/SiteMembershipRequest":380,"./model/SiteMembershipRequestEntry":381,"./model/SiteMembershipRequestPaging":382,"./model/SiteMembershipRequestPagingList":383,"./model/SitePaging":384,"./model/SitePagingList":385,"./model/Tag":386,"./model/TagBody":387,"./model/TagBody1":388,"./model/TagEntry":389,"./model/TagPaging":390,"./model/TagPagingList":391,"./model/UserInfo":392}],284:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -64799,7 +63490,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./ActivityActivitySummary":286}],286:[function(require,module,exports){
+},{"../ApiClient":268,"./ActivityActivitySummary":285}],285:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -64894,7 +63585,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],287:[function(require,module,exports){
+},{"../ApiClient":268}],286:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -64960,7 +63651,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./Activity":285}],288:[function(require,module,exports){
+},{"../ApiClient":268,"./Activity":284}],287:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -65022,7 +63713,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./ActivityPagingList":289}],289:[function(require,module,exports){
+},{"../ApiClient":268,"./ActivityPagingList":288}],288:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -65098,7 +63789,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./ActivityEntry":287,"./Pagination":343}],290:[function(require,module,exports){
+},{"../ApiClient":268,"./ActivityEntry":286,"./Pagination":342}],289:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -65168,7 +63859,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],291:[function(require,module,exports){
+},{"../ApiClient":268}],290:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -65230,7 +63921,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],292:[function(require,module,exports){
+},{"../ApiClient":268}],291:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -65300,7 +63991,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],293:[function(require,module,exports){
+},{"../ApiClient":268}],292:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -65370,7 +64061,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],294:[function(require,module,exports){
+},{"../ApiClient":268}],293:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -65516,7 +64207,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./Person":346}],295:[function(require,module,exports){
+},{"../ApiClient":268,"./Person":345}],294:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -65582,7 +64273,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],296:[function(require,module,exports){
+},{"../ApiClient":268}],295:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -65648,7 +64339,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],297:[function(require,module,exports){
+},{"../ApiClient":268}],296:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -65714,7 +64405,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./Comment":294}],298:[function(require,module,exports){
+},{"../ApiClient":268,"./Comment":293}],297:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -65776,7 +64467,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./CommentPagingList":299}],299:[function(require,module,exports){
+},{"../ApiClient":268,"./CommentPagingList":298}],298:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -65852,7 +64543,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./CommentEntry":297,"./Pagination":343}],300:[function(require,module,exports){
+},{"../ApiClient":268,"./CommentEntry":296,"./Pagination":342}],299:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -65970,7 +64661,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],301:[function(require,module,exports){
+},{"../ApiClient":268}],300:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -66056,7 +64747,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],302:[function(require,module,exports){
+},{"../ApiClient":268}],301:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -66126,7 +64817,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],303:[function(require,module,exports){
+},{"../ApiClient":268}],302:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -66206,7 +64897,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./ContentInfo":301,"./NodeFull":333,"./UserInfo":393}],304:[function(require,module,exports){
+},{"../ApiClient":268,"./ContentInfo":300,"./NodeFull":332,"./UserInfo":392}],303:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -66268,7 +64959,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./DeletedNode":303}],305:[function(require,module,exports){
+},{"../ApiClient":268,"./DeletedNode":302}],304:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -66348,7 +65039,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./ContentInfo":301,"./NodeMinimal":334,"./PathElement":344,"./UserInfo":393}],306:[function(require,module,exports){
+},{"../ApiClient":268,"./ContentInfo":300,"./NodeMinimal":333,"./PathElement":343,"./UserInfo":392}],305:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -66410,7 +65101,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./DeletedNodeMinimal":305}],307:[function(require,module,exports){
+},{"../ApiClient":268,"./DeletedNodeMinimal":304}],306:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -66472,7 +65163,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./DeletedNodesPagingList":308}],308:[function(require,module,exports){
+},{"../ApiClient":268,"./DeletedNodesPagingList":307}],307:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -66542,7 +65233,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./DeletedNodeMinimalEntry":306,"./Pagination":343}],309:[function(require,module,exports){
+},{"../ApiClient":268,"./DeletedNodeMinimalEntry":305,"./Pagination":342}],308:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -66628,7 +65319,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],310:[function(require,module,exports){
+},{"../ApiClient":268}],309:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -66690,7 +65381,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./ErrorError":311}],311:[function(require,module,exports){
+},{"../ApiClient":268,"./ErrorError":310}],310:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -66803,7 +65494,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],312:[function(require,module,exports){
+},{"../ApiClient":268}],311:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -66891,7 +65582,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],313:[function(require,module,exports){
+},{"../ApiClient":268}],312:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -66957,7 +65648,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],314:[function(require,module,exports){
+},{"../ApiClient":268}],313:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -67023,7 +65714,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./Favorite":312}],315:[function(require,module,exports){
+},{"../ApiClient":268,"./Favorite":311}],314:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -67085,7 +65776,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./FavoritePagingList":316}],316:[function(require,module,exports){
+},{"../ApiClient":268,"./FavoritePagingList":315}],315:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -67161,7 +65852,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./FavoriteEntry":314,"./Pagination":343}],317:[function(require,module,exports){
+},{"../ApiClient":268,"./FavoriteEntry":313,"./Pagination":342}],316:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -67223,7 +65914,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],318:[function(require,module,exports){
+},{"../ApiClient":268}],317:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -67285,7 +65976,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./InlineResponse201Entry":319}],319:[function(require,module,exports){
+},{"../ApiClient":268,"./InlineResponse201Entry":318}],318:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -67351,7 +66042,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],320:[function(require,module,exports){
+},{"../ApiClient":268}],319:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -67421,7 +66112,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],321:[function(require,module,exports){
+},{"../ApiClient":268}],320:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -67508,7 +66199,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],322:[function(require,module,exports){
+},{"../ApiClient":268}],321:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -67658,7 +66349,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./AssocInfo":291,"./ContentInfo":301,"./UserInfo":393}],323:[function(require,module,exports){
+},{"../ApiClient":268,"./AssocInfo":290,"./ContentInfo":300,"./UserInfo":392}],322:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -67724,7 +66415,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./NodeAssocMinimal":322}],324:[function(require,module,exports){
+},{"../ApiClient":268,"./NodeAssocMinimal":321}],323:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -67786,7 +66477,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./NodeAssocPagingList":325}],325:[function(require,module,exports){
+},{"../ApiClient":268,"./NodeAssocPagingList":324}],324:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -67856,7 +66547,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./NodeAssocMinimalEntry":323,"./Pagination":343}],326:[function(require,module,exports){
+},{"../ApiClient":268,"./NodeAssocMinimalEntry":322,"./Pagination":342}],325:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -67942,7 +66633,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],327:[function(require,module,exports){
+},{"../ApiClient":268}],326:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -68044,7 +66735,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./NodesnodeIdchildrenContent":342}],328:[function(require,module,exports){
+},{"../ApiClient":268,"./NodesnodeIdchildrenContent":341}],327:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -68194,7 +66885,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./ChildAssocInfo":293,"./ContentInfo":301,"./UserInfo":393}],329:[function(require,module,exports){
+},{"../ApiClient":268,"./ChildAssocInfo":292,"./ContentInfo":300,"./UserInfo":392}],328:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -68260,7 +66951,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./NodeChildAssocMinimal":328}],330:[function(require,module,exports){
+},{"../ApiClient":268,"./NodeChildAssocMinimal":327}],329:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -68322,7 +67013,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./NodeChildAssocPagingList":331}],331:[function(require,module,exports){
+},{"../ApiClient":268,"./NodeChildAssocPagingList":330}],330:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -68392,7 +67083,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./NodeChildAssocMinimalEntry":329,"./Pagination":343}],332:[function(require,module,exports){
+},{"../ApiClient":268,"./NodeChildAssocMinimalEntry":328,"./Pagination":342}],331:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -68458,7 +67149,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./NodeFull":333}],333:[function(require,module,exports){
+},{"../ApiClient":268,"./NodeFull":332}],332:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -68624,7 +67315,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./ContentInfo":301,"./UserInfo":393}],334:[function(require,module,exports){
+},{"../ApiClient":268,"./ContentInfo":300,"./UserInfo":392}],333:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -68774,7 +67465,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./ContentInfo":301,"./PathElement":344,"./UserInfo":393}],335:[function(require,module,exports){
+},{"../ApiClient":268,"./ContentInfo":300,"./PathElement":343,"./UserInfo":392}],334:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -68840,7 +67531,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./NodeMinimal":334}],336:[function(require,module,exports){
+},{"../ApiClient":268,"./NodeMinimal":333}],335:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -68902,7 +67593,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./NodePagingList":337}],337:[function(require,module,exports){
+},{"../ApiClient":268,"./NodePagingList":336}],336:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -68972,7 +67663,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./NodeMinimalEntry":335,"./Pagination":343}],338:[function(require,module,exports){
+},{"../ApiClient":268,"./NodeMinimalEntry":334,"./Pagination":342}],337:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -69090,7 +67781,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./ContentInfo":301,"./UserInfo":393}],339:[function(require,module,exports){
+},{"../ApiClient":268,"./ContentInfo":300,"./UserInfo":392}],338:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -69156,7 +67847,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./NodeSharedLink":338}],340:[function(require,module,exports){
+},{"../ApiClient":268,"./NodeSharedLink":337}],339:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -69218,7 +67909,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./NodeSharedLinkPagingList":341}],341:[function(require,module,exports){
+},{"../ApiClient":268,"./NodeSharedLinkPagingList":340}],340:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -69294,7 +67985,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./NodeSharedLinkEntry":339,"./Pagination":343}],342:[function(require,module,exports){
+},{"../ApiClient":268,"./NodeSharedLinkEntry":338,"./Pagination":342}],341:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -69364,7 +68055,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],343:[function(require,module,exports){
+},{"../ApiClient":268}],342:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -69474,7 +68165,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],344:[function(require,module,exports){
+},{"../ApiClient":268}],343:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -69544,7 +68235,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],345:[function(require,module,exports){
+},{"../ApiClient":268}],344:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -69622,7 +68313,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./PathElement":344}],346:[function(require,module,exports){
+},{"../ApiClient":268,"./PathElement":343}],345:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -69835,7 +68526,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./Company":300}],347:[function(require,module,exports){
+},{"../ApiClient":268,"./Company":299}],346:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -69901,7 +68592,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./Person":346}],348:[function(require,module,exports){
+},{"../ApiClient":268,"./Person":345}],347:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -70046,7 +68737,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./NetworkQuota":321}],349:[function(require,module,exports){
+},{"../ApiClient":268,"./NetworkQuota":320}],348:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -70112,7 +68803,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./PersonNetwork":348}],350:[function(require,module,exports){
+},{"../ApiClient":268,"./PersonNetwork":347}],349:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -70174,7 +68865,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./PersonNetworkPagingList":351}],351:[function(require,module,exports){
+},{"../ApiClient":268,"./PersonNetworkPagingList":350}],350:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -70250,7 +68941,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./Pagination":343,"./PersonNetworkEntry":349}],352:[function(require,module,exports){
+},{"../ApiClient":268,"./Pagination":342,"./PersonNetworkEntry":348}],351:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -70329,7 +69020,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],353:[function(require,module,exports){
+},{"../ApiClient":268}],352:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -70395,7 +69086,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./Preference":352}],354:[function(require,module,exports){
+},{"../ApiClient":268,"./Preference":351}],353:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -70457,7 +69148,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./PreferencePagingList":355}],355:[function(require,module,exports){
+},{"../ApiClient":268,"./PreferencePagingList":354}],354:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -70533,7 +69224,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./Pagination":343,"./PreferenceEntry":353}],356:[function(require,module,exports){
+},{"../ApiClient":268,"./Pagination":342,"./PreferenceEntry":352}],355:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -70625,7 +69316,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./RatingAggregate":357}],357:[function(require,module,exports){
+},{"../ApiClient":268,"./RatingAggregate":356}],356:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -70699,7 +69390,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],358:[function(require,module,exports){
+},{"../ApiClient":268}],357:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -70797,7 +69488,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],359:[function(require,module,exports){
+},{"../ApiClient":268}],358:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -70863,7 +69554,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./Rating":356}],360:[function(require,module,exports){
+},{"../ApiClient":268,"./Rating":355}],359:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -70925,7 +69616,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./RatingPagingList":361}],361:[function(require,module,exports){
+},{"../ApiClient":268,"./RatingPagingList":360}],360:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -71001,7 +69692,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./Pagination":343,"./RatingEntry":359}],362:[function(require,module,exports){
+},{"../ApiClient":268,"./Pagination":342,"./RatingEntry":358}],361:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -71079,7 +69770,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./ContentInfo":301}],363:[function(require,module,exports){
+},{"../ApiClient":268,"./ContentInfo":300}],362:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -71141,7 +69832,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],364:[function(require,module,exports){
+},{"../ApiClient":268}],363:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -71207,7 +69898,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./Rendition":362}],365:[function(require,module,exports){
+},{"../ApiClient":268,"./Rendition":361}],364:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -71269,7 +69960,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./RenditionPagingList":366}],366:[function(require,module,exports){
+},{"../ApiClient":268,"./RenditionPagingList":365}],365:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -71339,7 +70030,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./Pagination":343,"./RenditionEntry":364}],367:[function(require,module,exports){
+},{"../ApiClient":268,"./Pagination":342,"./RenditionEntry":363}],366:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -71401,7 +70092,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],368:[function(require,module,exports){
+},{"../ApiClient":268}],367:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -71539,7 +70230,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],369:[function(require,module,exports){
+},{"../ApiClient":268}],368:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -71658,7 +70349,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],370:[function(require,module,exports){
+},{"../ApiClient":268}],369:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -71734,7 +70425,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],371:[function(require,module,exports){
+},{"../ApiClient":268}],370:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -71800,7 +70491,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./SiteContainer":370}],372:[function(require,module,exports){
+},{"../ApiClient":268,"./SiteContainer":369}],371:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -71862,7 +70553,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./SitePagingList":386}],373:[function(require,module,exports){
+},{"../ApiClient":268,"./SitePagingList":385}],372:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -71928,7 +70619,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./Site":368}],374:[function(require,module,exports){
+},{"../ApiClient":268,"./Site":367}],373:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -72045,7 +70736,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./Person":346}],375:[function(require,module,exports){
+},{"../ApiClient":268,"./Person":345}],374:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -72146,7 +70837,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],376:[function(require,module,exports){
+},{"../ApiClient":268}],375:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -72212,7 +70903,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./SiteMember":374}],377:[function(require,module,exports){
+},{"../ApiClient":268,"./SiteMember":373}],376:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -72274,7 +70965,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./SitePagingList":386}],378:[function(require,module,exports){
+},{"../ApiClient":268,"./SitePagingList":385}],377:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -72367,7 +71058,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],379:[function(require,module,exports){
+},{"../ApiClient":268}],378:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -72445,7 +71136,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],380:[function(require,module,exports){
+},{"../ApiClient":268}],379:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -72507,7 +71198,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],381:[function(require,module,exports){
+},{"../ApiClient":268}],380:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -72593,7 +71284,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./Site":368}],382:[function(require,module,exports){
+},{"../ApiClient":268,"./Site":367}],381:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -72659,7 +71350,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./SiteMembershipRequest":381}],383:[function(require,module,exports){
+},{"../ApiClient":268,"./SiteMembershipRequest":380}],382:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -72721,7 +71412,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./SiteMembershipRequestPagingList":384}],384:[function(require,module,exports){
+},{"../ApiClient":268,"./SiteMembershipRequestPagingList":383}],383:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -72797,7 +71488,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./Pagination":343,"./SiteMembershipRequestEntry":382}],385:[function(require,module,exports){
+},{"../ApiClient":268,"./Pagination":342,"./SiteMembershipRequestEntry":381}],384:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -72859,7 +71550,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./SitePagingList":386}],386:[function(require,module,exports){
+},{"../ApiClient":268,"./SitePagingList":385}],385:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -72925,7 +71616,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./Pagination":343}],387:[function(require,module,exports){
+},{"../ApiClient":268,"./Pagination":342}],386:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -73001,7 +71692,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],388:[function(require,module,exports){
+},{"../ApiClient":268}],387:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -73067,7 +71758,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],389:[function(require,module,exports){
+},{"../ApiClient":268}],388:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -73129,7 +71820,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],390:[function(require,module,exports){
+},{"../ApiClient":268}],389:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -73195,7 +71886,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./Tag":387}],391:[function(require,module,exports){
+},{"../ApiClient":268,"./Tag":386}],390:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -73257,7 +71948,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./TagPagingList":392}],392:[function(require,module,exports){
+},{"../ApiClient":268,"./TagPagingList":391}],391:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -73333,7 +72024,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269,"./Pagination":343,"./TagEntry":390}],393:[function(require,module,exports){
+},{"../ApiClient":268,"./Pagination":342,"./TagEntry":389}],392:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -73403,7 +72094,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":269}],394:[function(require,module,exports){
+},{"../ApiClient":268}],393:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -73456,7 +72147,7 @@ var AlfrescoApi = function () {
         value: function changeConfig(config) {
             this.config = {
                 host: config.host || 'http://127.0.0.1:8080',
-                hostActiviti: config.host || 'http://127.0.0.1:9999',
+                hostActiviti: config.hostActiviti || 'http://127.0.0.1:9999',
                 contextRoot: config.contextRoot || 'alfresco',
                 username: config.username,
                 password: config.password,
@@ -73663,7 +72354,7 @@ module.exports.Core = AlfrescoCoreRestApi;
 module.exports.Auth = AlfrescoAuthRestApi;
 module.exports.Mock = AlfrescoMock;
 
-},{"../test/mockObjects/mockAlfrescoApi.js":411,"./alfresco-activiti-rest-api/src/index":179,"./alfresco-auth-rest-api/src/index":261,"./alfresco-core-rest-api/src/index.js":284,"./alfrescoContent":396,"./alfrescoNode":397,"./alfrescoSearch":398,"./alfrescoUpload":399,"./alfrescoWebScript":400,"./bpmAuth":401,"./ecmAuth":402,"event-emitter":65,"lodash":72}],395:[function(require,module,exports){
+},{"../test/mockObjects/mockAlfrescoApi.js":410,"./alfresco-activiti-rest-api/src/index":178,"./alfresco-auth-rest-api/src/index":260,"./alfresco-core-rest-api/src/index.js":283,"./alfrescoContent":395,"./alfrescoNode":396,"./alfrescoSearch":397,"./alfrescoUpload":398,"./alfrescoWebScript":399,"./bpmAuth":400,"./ecmAuth":401,"event-emitter":65,"lodash":72}],394:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -73893,7 +72584,7 @@ var AlfrescoApiClient = function (_ApiClient) {
 Emitter(AlfrescoApiClient.prototype); // jshint ignore:line
 module.exports = AlfrescoApiClient;
 
-},{"./alfresco-core-rest-api/src/ApiClient":269,"event-emitter":65,"lodash":72,"superagent":125}],396:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/ApiClient":268,"event-emitter":65,"lodash":72,"superagent":125}],395:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -73946,7 +72637,7 @@ var AlfrescoContent = function () {
 
 module.exports = AlfrescoContent;
 
-},{}],397:[function(require,module,exports){
+},{}],396:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74059,7 +72750,7 @@ var AlfrescoNode = function (_AlfrescoCoreRestApi$) {
 
 module.exports = AlfrescoNode;
 
-},{"./alfresco-core-rest-api/src/index.js":284,"lodash":72}],398:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/index.js":283,"lodash":72}],397:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -74084,7 +72775,7 @@ var AlfrescoSearch = function (_AlfrescoCoreRestApi$) {
 
 module.exports = AlfrescoSearch;
 
-},{"./alfresco-core-rest-api/src/index.js":284}],399:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/index.js":283}],398:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74182,7 +72873,7 @@ var AlfrescoUpload = function (_AlfrescoCoreRestApi$) {
 Emitter(AlfrescoUpload.prototype); // jshint ignore:line
 module.exports = AlfrescoUpload;
 
-},{"./alfresco-core-rest-api/src/index.js":284,"event-emitter":65,"lodash":72}],400:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/index.js":283,"event-emitter":65,"lodash":72}],399:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74246,7 +72937,7 @@ var AlfrescoWebScriptApi = function () {
 
 module.exports = AlfrescoWebScriptApi;
 
-},{"./alfresco-core-rest-api/src/ApiClient":269}],401:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/ApiClient":268}],400:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -74429,7 +73120,7 @@ Emitter(BpmAuth.prototype); // jshint ignore:line
 module.exports = BpmAuth;
 
 }).call(this,require("buffer").Buffer)
-},{"./alfrescoApiClient":395,"buffer":8,"event-emitter":65}],402:[function(require,module,exports){
+},{"./alfrescoApiClient":394,"buffer":8,"event-emitter":65}],401:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74603,7 +73294,7 @@ var EcmAuth = function (_AlfrescoApiClient) {
 Emitter(EcmAuth.prototype); // jshint ignore:line
 module.exports = EcmAuth;
 
-},{"./alfresco-auth-rest-api/src/index":261,"./alfrescoApiClient":395,"event-emitter":65}],403:[function(require,module,exports){
+},{"./alfresco-auth-rest-api/src/index":260,"./alfrescoApiClient":394,"event-emitter":65}],402:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74652,7 +73343,7 @@ var AuthResponseMock = function (_BaseMock) {
 
 module.exports = AuthResponseMock;
 
-},{"../baseMock":410,"nock":75}],404:[function(require,module,exports){
+},{"../baseMock":409,"nock":75}],403:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74744,7 +73435,7 @@ var ProcessMock = function (_BaseMock) {
 
 module.exports = ProcessMock;
 
-},{"../baseMock":410,"nock":75}],405:[function(require,module,exports){
+},{"../baseMock":409,"nock":75}],404:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74856,7 +73547,7 @@ var TasksMock = function (_BaseMock) {
 
 module.exports = TasksMock;
 
-},{"../baseMock":410,"nock":75}],406:[function(require,module,exports){
+},{"../baseMock":409,"nock":75}],405:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74960,7 +73651,7 @@ var AuthResponseMock = function (_BaseMock) {
 
 module.exports = AuthResponseMock;
 
-},{"../baseMock":410,"nock":75}],407:[function(require,module,exports){
+},{"../baseMock":409,"nock":75}],406:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -75237,7 +73928,7 @@ var NodeMock = function (_BaseMock) {
 
 module.exports = NodeMock;
 
-},{"../baseMock":410,"nock":75}],408:[function(require,module,exports){
+},{"../baseMock":409,"nock":75}],407:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -75345,7 +74036,7 @@ var UploadMock = function (_BaseMock) {
 
 module.exports = UploadMock;
 
-},{"../baseMock":410,"nock":75}],409:[function(require,module,exports){
+},{"../baseMock":409,"nock":75}],408:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -75424,7 +74115,7 @@ var WebScriptMock = function (_BaseMock) {
 
 module.exports = WebScriptMock;
 
-},{"../baseMock":410,"nock":75}],410:[function(require,module,exports){
+},{"../baseMock":409,"nock":75}],409:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -75460,6 +74151,11 @@ var BaseMock = function () {
         value: function play() {
             nock.recorder.play();
         }
+    }, {
+        key: 'cleanAll',
+        value: function cleanAll() {
+            nock.cleanAll();
+        }
     }]);
 
     return BaseMock;
@@ -75467,7 +74163,7 @@ var BaseMock = function () {
 
 module.exports = BaseMock;
 
-},{"nock":75}],411:[function(require,module,exports){
+},{"nock":75}],410:[function(require,module,exports){
 'use strict';
 
 var mockAlfrescoApi = {};
@@ -75485,5 +74181,5 @@ mockAlfrescoApi.ActivitiMock.Tasks = require('./activiti/tasksMock.js');
 
 module.exports = mockAlfrescoApi;
 
-},{"./activiti/authResponseMock.js":403,"./activiti/processMock.js":404,"./activiti/tasksMock.js":405,"./alfresco/authResponseMock.js":406,"./alfresco/nodeMock.js":407,"./alfresco/uploadMock.js":408,"./alfresco/webScriptMock.js":409}]},{},[1])(1)
+},{"./activiti/authResponseMock.js":402,"./activiti/processMock.js":403,"./activiti/tasksMock.js":404,"./alfresco/authResponseMock.js":405,"./alfresco/nodeMock.js":406,"./alfresco/uploadMock.js":407,"./alfresco/webScriptMock.js":408}]},{},[1])(1)
 });
