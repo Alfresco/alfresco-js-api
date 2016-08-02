@@ -72439,8 +72439,10 @@ var AlfrescoApiClient = function (_ApiClient) {
 
             var contentType = this.jsonPreferredMime(contentTypes);
 
-            if (contentType) {
+            if (contentType && contentType !== 'multipart/form-data') {
                 request.type(contentType);
+            } else if (!request.header['Content-Type'] && contentType !== 'multipart/form-data') {
+                request.type('application/json');
             }
 
             if (contentType === 'application/x-www-form-urlencoded') {
