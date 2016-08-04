@@ -99,7 +99,7 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node. You can als
 * -root-
 
 
-var nodeBody = new AlfrescoCoreRestApi.NodeBody1(); // {NodeBody1} The node information to create.
+var nodeBody = new this.alfrescoJsApi.core.NodeBody1(); // {NodeBody1} The node information to create.
 
 var opts = {
   'autoRename': true, // {Boolean} If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
@@ -165,7 +165,7 @@ Add secondary child association, with given association type, between parent and
 ```javascript
 var parentId = "parentId_example"; // {String} The identifier of a node.
 
-var assocChildBody = new AlfrescoCoreRestApi.AssocChildBody(); // {AssocChildBody} The child node id and assoc type.
+var assocChildBody = new this.alfrescoJsApi.core.AssocChildBody(); // {AssocChildBody} The child node id and assoc type.
 
 this.alfrescoJsApi.core.childAssociationsApi.addSecondaryChildAssoc(parentId, assocChildBody).then(function() {
   console.log('API called successfully.');
@@ -493,7 +493,7 @@ The move will effectively change the primary parent
 ```javascript
 var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:  -my- , -shared- , -root-
 
-var moveBody = new AlfrescoCoreRestApi.MoveBody(); // {MoveBody} The targetParentId and, optionally, a new name.
+var moveBody = new this.alfrescoJsApi.core.MoveBody(); // {MoveBody} The targetParentId and, optionally, a new name.
 
 var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested: * path * isLink * allowableOperations

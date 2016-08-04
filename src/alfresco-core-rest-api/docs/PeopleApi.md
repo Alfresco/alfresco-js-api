@@ -38,7 +38,7 @@ Favorite a **site**, **file**, or **folder** in the repository.
 ```javascript
 var personId = "personId_example"; // {String} The identifier of a person.
 
-var favoriteBody = new AlfrescoCoreRestApi.FavoriteBody(); /* {FavoriteBody} An object identifying the entity to be favorited.
+var favoriteBody = new this.alfrescoJsApi.core.FavoriteBody(); /* {FavoriteBody} An object identifying the entity to be favorited.
 
                                     The object consists of a single property which is an object with the name `site`, `file`, or `folder`.
                                     The content of that object is the `guid` of the target entity.
@@ -112,7 +112,7 @@ Create a site membership request for **personId** and **siteId**. The **personId
 ```javascript
 var personId = "personId_example"; // {String} The identifier of a person.
 
-var siteMembershipBody = new AlfrescoCoreRestApi.SiteMembershipBody(); // {SiteMembershipBody} Site membership request details
+var siteMembershipBody = new this.alfrescoJsApi.core.SiteMembershipBody(); // {SiteMembershipBody} Site membership request details
 
 this.alfrescoJsApi.core.peopleApi.addSiteMembershipRequest(personIdsiteMembershipBody).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -204,7 +204,7 @@ Use `/people/{personId}/favorites` instead.
 ```javascript
 var personId = "personId_example"; // {String} The identifier of a person.
 
-var favoriteSiteBody = new AlfrescoCoreRestApi.FavoriteSiteBody(); // {FavoriteSiteBody} The id of the site to favorite.
+var favoriteSiteBody = new this.alfrescoJsApi.core.FavoriteSiteBody(); // {FavoriteSiteBody} The id of the site to favorite.
 
 this.alfrescoJsApi.core.peopleApi.favoriteSite(personIdfavoriteSiteBody).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -1161,7 +1161,7 @@ var personId = "personId_example"; // {String} The identifier of a person.
 
 var siteId = "siteId_example"; // {String} The identifier of a site.
 
-var siteMembershipBody = new AlfrescoCoreRestApi.SiteMembershipBody1(); // {SiteMembershipBody1} The new message to display
+var siteMembershipBody = new this.alfrescoJsApi.core.SiteMembershipBody1(); // {SiteMembershipBody1} The new message to display
 
 this.alfrescoJsApi.core.peopleApi.updateSiteMembershipRequest(personIdsiteId, siteMembershipBody).then(function() {
   console.log('API called successfully.');

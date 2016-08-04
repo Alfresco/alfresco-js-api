@@ -37,7 +37,7 @@ specifying a list of tags in the JSON body like this:
 ```javascript
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
-var tagBody = new AlfrescoCoreRestApi.TagBody(); // {TagBody} The new tag
+var tagBody = new this.alfrescoJsApi.core.TagBody(); // {TagBody} The new tag
 
 this.alfrescoJsApi.core.tagsApi.addTag(nodeId, tagBody).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -285,7 +285,7 @@ Updates the tag **tagId**.
 ```javascript
 var tagId = "tagId_example"; // {String} The identifier of a tag.
 
-var tagBody = new AlfrescoCoreRestApi.TagBody1(); // {TagBody1} The updated tag
+var tagBody = new this.alfrescoJsApi.core.TagBody1(); // {TagBody1} The updated tag
 
 this.alfrescoJsApi.core.tagsApi.updateTag(tagId, tagBody).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);

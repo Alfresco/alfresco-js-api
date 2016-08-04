@@ -22,7 +22,7 @@ Favorite a **site**, **file**, or **folder** in the repository.
 ```javascript
 var personId = "personId_example"; // {String} The identifier of a person.
 
-var favoriteBody = new AlfrescoCoreRestApi.FavoriteBody(); // {FavoriteBody} An object identifying the entity to be favorited. The object consists of a single property which is an object with the name `site`, `file`, or `folder`. The content of that object is the `guid` of the target entity. For example, to favorite a file the following body would be used:
+var favoriteBody = new this.alfrescoJsApi.core.FavoriteBody(); // {FavoriteBody} An object identifying the entity to be favorited. The object consists of a single property which is an object with the name `site`, `file`, or `folder`. The content of that object is the `guid` of the target entity. For example, to favorite a file the following body would be used:
 
 ```JSON
 {

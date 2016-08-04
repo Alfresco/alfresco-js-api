@@ -22,7 +22,7 @@ Create shared link to specfied file identified by **nodeId** in request body.
 
 ### Example
 ```javascript
-var sharedLinkBody = new AlfrescoCoreRestApi.SharedLinkBody(); // {SharedLinkBody} The nodeId to create a shared link for.
+var sharedLinkBody = new this.alfrescoJsApi.core.SharedLinkBody(); // {SharedLinkBody} The nodeId to create a shared link for.
 
 var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the shared link, the following optional fields can be requested:  allowableOperations
@@ -150,7 +150,7 @@ For example, to email a shared link with a messages and a locale:
 ```javascript
 var sharedId = "sharedId_example"; // {String} The identifier of a shared link to a file.
 
-var emailSharedLinkBody = new AlfrescoCoreRestApi.EmailSharedLinkBody(); // {EmailSharedLinkBody} The shared link email to send.
+var emailSharedLinkBody = new this.alfrescoJsApi.core.EmailSharedLinkBody(); // {EmailSharedLinkBody} The shared link email to send.
 
 this.alfrescoJsApi.core.sharedlinksApi.emailSharedLink(sharedId, emailSharedLinkBody).then(function() {
   console.log('API called successfully.');

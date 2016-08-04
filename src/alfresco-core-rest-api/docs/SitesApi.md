@@ -37,7 +37,7 @@ You can set the **role** to one of four types:
 ```javascript
 var siteId = "siteId_example"; // {String} The identifier of a site.
 
-var siteMemberBody = new AlfrescoCoreRestApi.SiteMemberBody(); // {SiteMemberBody} The person to add and their role
+var siteMemberBody = new this.alfrescoJsApi.core.SiteMemberBody(); // {SiteMemberBody} The person to add and their role
 
 this.alfrescoJsApi.core.sitesApi.addSiteMember(siteId, siteMemberBody).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -98,7 +98,7 @@ The creator will be added as a member with Site Manager role.
 
 this.alfrescoJsApi.core.sitesApi()
 
-var siteBody = new AlfrescoCoreRestApi.SiteBody(); // {SiteBody} The site details
+var siteBody = new this.alfrescoJsApi.core.SiteBody(); // {SiteBody} The site details
 
 var opts = {
   'skipConfiguration': false, // {Boolean} Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created.
@@ -652,7 +652,7 @@ var siteId = "siteId_example"; // {String} The identifier of a site.
 
 var personId = "personId_example"; // {String} The identifier of a person.
 
-var siteMemberRoleBody = new AlfrescoCoreRestApi.SiteMemberRoleBody(); // {SiteMemberRoleBody} The persons new role
+var siteMemberRoleBody = new this.alfrescoJsApi.core.SiteMemberRoleBody(); // {SiteMemberRoleBody} The persons new role
 
 this.alfrescoJsApi.core.sitesApi.updateSiteMember(siteId, personIdsiteMemberRoleBody).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);

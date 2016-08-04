@@ -23,7 +23,7 @@ Add association, with given association type, between source and target node.
 ```javascript
 var sourceId = "sourceId_example"; // {String} The identifier of a node.
 
-var assocTargetBody = new AlfrescoCoreRestApi.AssocTargetBody(); // {AssocTargetBody} The target node id and assoc type.
+var assocTargetBody = new this.alfrescoJsApi.core.AssocTargetBody(); // {AssocTargetBody} The target node id and assoc type.
 
 this.alfrescoJsApi.core.associationsApi.addAssoc(sourceId, assocTargetBody).then(function() {
   console.log('API called successfully.');

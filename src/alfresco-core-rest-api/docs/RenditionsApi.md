@@ -31,7 +31,7 @@ Async request to create a rendition for file with identifier
 ```javascript
 var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:  -my-,  -shared- , -root-
 
-var renditionBody = new AlfrescoCoreRestApi.RenditionBody(); // {RenditionBody} The rendition "id".
+var renditionBody = new this.alfrescoJsApi.core.RenditionBody(); // {RenditionBody} The rendition "id".
 
 this.alfrescoJsApi.core.renditionsApi.createRendition(nodeId, renditionBody).then(function() {
   console.log('API called successfully.');

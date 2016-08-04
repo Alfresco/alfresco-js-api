@@ -100,7 +100,7 @@ Any field in the JSON body defined below can also be passed as a form-data field
 ```javascript
 var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:  -my-,  -shared- , -root-
 
-var nodeBody = new AlfrescoCoreRestApi.NodeBody1(); // {NodeBody1} The node information to create.
+var nodeBody = new this.alfrescoJsApi.core.NodeBody1(); // {NodeBody1} The node information to create.
 
 var opts = {
   'autoRename': true, // {Boolean} If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
@@ -165,7 +165,7 @@ If the source **nodeId** is a folder, then all of its children are also copied.
 ```javascript
 var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases: *-my-*-shared-*-root-
 
-var copyBody = new AlfrescoCoreRestApi.CopyBody(); // {CopyBody} The targetParentId and, optionally, a new name.
+var copyBody = new this.alfrescoJsApi.core.CopyBody(); // {CopyBody} The targetParentId and, optionally, a new name.
 
 var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:  path , isLink , allowableOperations
@@ -588,7 +588,7 @@ The move will effectively change the primary parent
 ```javascript
 var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases: -my- , -share d- , -root-
 
-var moveBody = new AlfrescoCoreRestApi.MoveBody(); // {MoveBody} The targetParentId and, optionally, a new name.
+var moveBody = new this.alfrescoJsApi.core.MoveBody(); // {MoveBody} The targetParentId and, optionally, a new name.
 
 var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:  path , isLink , allowableOperations
@@ -817,7 +817,7 @@ You can also set or update one or more properties:
 ```javascript
 var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases: * -my- * -shared- * -root-
 
-var nodeBody = new AlfrescoCoreRestApi.NodeBody(); // {NodeBody} The node information to update.
+var nodeBody = new this.alfrescoJsApi.core.NodeBody(); // {NodeBody} The node information to update.
 
 var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested: * path * isLink * allowableOperations

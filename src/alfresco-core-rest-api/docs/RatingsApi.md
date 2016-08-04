@@ -135,7 +135,7 @@ Rate the node with identifier **nodeId**
 ```javascript
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
-var ratingBody = new AlfrescoCoreRestApi.RatingBody(); // {RatingBody} For "myRating" the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar. For example, to "like" a file the following body would be used:
+var ratingBody = new this.alfrescoJsApi.core.RatingBody(); // {RatingBody} For "myRating" the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar. For example, to "like" a file the following body would be used:
 
   ```JSON
     {
