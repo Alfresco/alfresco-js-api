@@ -67398,6 +67398,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       if (data.hasOwnProperty('path')) {
         obj['path'] = PathElement.constructFromObject(data['path']);
       }
+      if (data.hasOwnProperty('properties')) {
+        obj['properties'] = data['properties'];
+      }
     }
     return obj;
   };

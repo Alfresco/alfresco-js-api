@@ -50,7 +50,7 @@
    * @return {module:model/NodeMinimal} The populated <code>NodeMinimal</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('id')) {
@@ -88,6 +88,9 @@
       }
       if (data.hasOwnProperty('path')) {
         obj['path'] = PathElement.constructFromObject(data['path']);
+      }
+      if (data.hasOwnProperty('properties')) {
+          obj['properties'] = data['properties'];
       }
     }
     return obj;
