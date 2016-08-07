@@ -126,8 +126,7 @@ class EcmAuth extends AlfrescoApiClient {
         }
 
         this.alfrescoClient.basePath = this.config.host + '/' + this.config.contextRoot + '/api/-default-/public/alfresco/versions/1'; //Auth Call
-        this.alfrescoClient.authentications.basicAuth.username = 'ROLE_TICKET';
-        this.alfrescoClient.authentications.basicAuth.password = this.config.ticket;
+        this.alfrescoClient.authentications = this.authentications;
         return this.alfrescoClient;
     }
 
