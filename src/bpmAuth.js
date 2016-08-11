@@ -11,7 +11,6 @@ class BpmAuth extends AlfrescoApiClient {
     constructor(config) {
         super();
         this.ticket = undefined;
-        this.config = config;
         this.basePath = config.hostActiviti + '/activiti-app';   //Activiti Call
         this.authentications.basicAuth.username = config.username;
         this.authentications.basicAuth.password = config.password;

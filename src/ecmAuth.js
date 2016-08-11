@@ -11,11 +11,12 @@ class EcmAuth extends AlfrescoApiClient {
      */
     constructor(config) {
         super();
+
         this.config = config;
         this.basePath = this.config.host + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
 
         if (this.config.ticket) {
-            this.setTicket(this.config.ticket);
+            this.setTicket(config.ticket);
         } else {
             this.authentications.basicAuth.username = this.config.username;
             this.authentications.basicAuth.password = this.config.password;
@@ -30,14 +31,14 @@ class EcmAuth extends AlfrescoApiClient {
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
     login() {
-        var apiInstance = new AlfrescoAuthRestApi.AuthenticationApi(this);
+        var authApi = new AlfrescoAuthRestApi.AuthenticationApi(this);
         var loginRequest = new AlfrescoAuthRestApi.LoginRequest();
 
-        loginRequest.userId = this.config.username;
-        loginRequest.password = this.config.password;
+        loginRequest.userId = this.authentications.basicAuth.username;
+        loginRequest.password = this.authentications.basicAuth.password;
 
         this.promise = new Promise((resolve, reject) => {
-            apiInstance.createTicket(loginRequest).then(
+            authApi.createTicket(loginRequest).then(
                 (data) => {
                     this.setTicket(data.entry.id);
                     this.promise.emit('success');
@@ -63,10 +64,10 @@ class EcmAuth extends AlfrescoApiClient {
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
     logout() {
-        var apiInstance = new AlfrescoAuthRestApi.AuthenticationApi(this);
+        var authApi = new AlfrescoAuthRestApi.AuthenticationApi(this);
 
         this.promise = new Promise((resolve, reject) => {
-            apiInstance.deleteTicket().then(
+            authApi.deleteTicket().then(
                 () => {
                     this.promise.emit('logout');
                     this.setTicket(undefined);

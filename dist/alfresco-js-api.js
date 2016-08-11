@@ -72110,7 +72110,6 @@ var AlfrescoActivitiApi = require('./alfresco-activiti-rest-api/src/index');
 var AlfrescoMock = require('../test/mockObjects/mockAlfrescoApi.js');
 var AlfrescoContent = require('./alfrescoContent');
 var AlfrescoNode = require('./alfrescoNode');
-var AlfrescoSearch = require('./alfrescoSearch');
 var AlfrescoUpload = require('./alfrescoUpload');
 var AlfrescoWebScriptApi = require('./alfrescoWebScript');
 var Emitter = require('event-emitter');
@@ -72136,61 +72135,63 @@ var AlfrescoApi = function () {
     function AlfrescoApi(config) {
         _classCallCheck(this, AlfrescoApi);
 
-        this.changeConfig(config);
+        this.config = {
+            host: config.host || 'http://127.0.0.1:8080',
+            hostActiviti: config.hostActiviti || 'http://127.0.0.1:9999',
+            contextRoot: config.contextRoot || 'alfresco',
+            username: config.username,
+            password: config.password,
+            provider: config.provider || 'ECM',
+            ticket: config.ticket
+        };
+
+        if (this.config.provider === 'BPM' || this.config.provider === 'ALL') {
+            this.bpmAuth = new BpmAuth(this.config);
+        }
+
+        if (this.config.provider === 'ECM' || this.config.provider === 'ALL') {
+            this.ecmAuth = new EcmAuth(this.config);
+        }
+
+        this.initObjects();
+
         Emitter.call(this);
     }
 
-    /**
-     * @param {Object} config
-     */
-
-
     _createClass(AlfrescoApi, [{
-        key: 'changeConfig',
-        value: function changeConfig(config) {
-            this.config = {
-                host: config.host || 'http://127.0.0.1:8080',
-                hostActiviti: config.hostActiviti || 'http://127.0.0.1:9999',
-                contextRoot: config.contextRoot || 'alfresco',
-                username: config.username,
-                password: config.password,
-                provider: config.provider || 'ECM',
-                ticket: config.ticket
-            };
-
+        key: 'initObjects',
+        value: function initObjects() {
             if (this.config.provider === 'BPM' || this.config.provider === 'ALL') {
-                this.bpmAuth = new BpmAuth(this.config);
                 AlfrescoActivitiApi.ApiClient.instance = this.bpmAuth.getClient();
-                this.activiti = AlfrescoActivitiApi;
-                this._instantiateObjects(this.activiti);
+                this.activiti = {};
+                this.activitiStore = AlfrescoActivitiApi;
+                this._instantiateObjects(this.activitiStore, this.activiti);
             }
 
             if (this.config.provider === 'ECM' || this.config.provider === 'ALL') {
-                this.ecmAuth = new EcmAuth(this.config);
                 AlfrescoCoreRestApi.ApiClient.instance = this.ecmAuth.getClient();
-                this.core = AlfrescoCoreRestApi;
-                this._instantiateObjects(this.core);
-            }
+                this.core = {};
+                this.coreStore = AlfrescoCoreRestApi;
+                this._instantiateObjects(this.coreStore, this.core);
 
-            this.nodes = this.node = new AlfrescoNode();
-            this.search = new AlfrescoSearch();
-            this.content = new AlfrescoContent(this.ecmAuth);
-            this.upload = new AlfrescoUpload();
-            this.webScript = new AlfrescoWebScriptApi();
+                this.nodes = this.node = new AlfrescoNode();
+                this.content = new AlfrescoContent(this.ecmAuth);
+                this.upload = new AlfrescoUpload();
+                this.webScript = new AlfrescoWebScriptApi();
+            }
         }
     }, {
         key: '_instantiateObjects',
-        value: function _instantiateObjects(module) {
+        value: function _instantiateObjects(module, moduleCopy) {
             var _this = this;
 
             var classArray = Object.keys(module);
 
             classArray.forEach(function (currentClass) {
+                moduleCopy[currentClass] = module[currentClass];
                 var obj = _this._stringToObject(currentClass, module);
                 var nameObj = _.lowerFirst(currentClass);
-                if (!module[nameObj]) {
-                    module[nameObj] = obj;
-                }
+                moduleCopy[nameObj] = obj;
             });
         }
     }, {
@@ -72226,10 +72227,18 @@ var AlfrescoApi = function () {
     }, {
         key: 'login',
         value: function login() {
+            var _this2 = this;
+
             if (this.config.provider && this.config.provider.toUpperCase() === 'BPM') {
-                return this.bpmAuth.login();
+                var bpmPromise = this.bpmAuth.login();
+                bpmPromise.then(function () {});
+                return bpmPromise;
             } else if (this.config.provider && this.config.provider.toUpperCase() === 'ECM') {
-                return this.ecmAuth.login();
+                var ecmPromise = this.ecmAuth.login();
+                ecmPromise.then(function (data) {
+                    _this2.config.ticket = data;
+                });
+                return ecmPromise;
             } else if (this.config.provider && this.config.provider.toUpperCase() === 'ALL') {
                 return this._loginBPMECM();
             }
@@ -72237,20 +72246,21 @@ var AlfrescoApi = function () {
     }, {
         key: '_loginBPMECM',
         value: function _loginBPMECM() {
-            var _this2 = this;
+            var _this3 = this;
 
             var ecmPromise = this.ecmAuth.login();
             var bpmPromise = this.bpmAuth.login();
 
             this.promise = new Promise(function (resolve, reject) {
                 Promise.all([ecmPromise, bpmPromise]).then(function (data) {
-                    _this2.promise.emit('success');
+                    _this3.config.ticket = data[0];
+                    _this3.promise.emit('success');
                     resolve(data);
                 }, function (error) {
                     if (error.status === 401) {
-                        _this2.promise.emit('unauthorized');
+                        _this3.promise.emit('unauthorized');
                     }
-                    _this2.promise.emit('error');
+                    _this3.promise.emit('error');
                     reject(error);
                 });
             });
@@ -72269,10 +72279,17 @@ var AlfrescoApi = function () {
     }, {
         key: 'logout',
         value: function logout() {
+            var _this4 = this;
+
             if (this.config.provider && this.config.provider.toUpperCase() === 'BPM') {
                 return this.bpmAuth.logout();
             } else if (this.config.provider && this.config.provider.toUpperCase() === 'ECM') {
-                return this.ecmAuth.logout();
+                var ecmPromise = this.ecmAuth.logout();
+                ecmPromise.then(function (data) {
+                    _this4.config.ticket = undefined;
+                });
+
+                return ecmPromise;
             } else if (this.config.provider && this.config.provider.toUpperCase() === 'ALL') {
                 return this._logoutBPMECM();
             }
@@ -72280,20 +72297,21 @@ var AlfrescoApi = function () {
     }, {
         key: '_logoutBPMECM',
         value: function _logoutBPMECM() {
-            var _this3 = this;
+            var _this5 = this;
 
             var ecmPromise = this.ecmAuth.logout();
             var bpmPromise = this.bpmAuth.logout();
 
             this.promise = new Promise(function (resolve, reject) {
                 Promise.all([ecmPromise, bpmPromise]).then(function (data) {
-                    _this3.promise.emit('logout');
+                    _this5.config.ticket = undefined;
+                    _this5.promise.emit('logout');
                     resolve('logout');
                 }, function (error) {
                     if (error.status === 401) {
-                        _this3.promise.emit('unauthorized');
+                        _this5.promise.emit('unauthorized');
                     }
-                    _this3.promise.emit('error');
+                    _this5.promise.emit('error');
                     reject(error);
                 });
             });
@@ -72357,7 +72375,7 @@ module.exports.Core = AlfrescoCoreRestApi;
 module.exports.Auth = AlfrescoAuthRestApi;
 module.exports.Mock = AlfrescoMock;
 
-},{"../test/mockObjects/mockAlfrescoApi.js":410,"./alfresco-activiti-rest-api/src/index":178,"./alfresco-auth-rest-api/src/index":260,"./alfresco-core-rest-api/src/index.js":283,"./alfrescoContent":395,"./alfrescoNode":396,"./alfrescoSearch":397,"./alfrescoUpload":398,"./alfrescoWebScript":399,"./bpmAuth":400,"./ecmAuth":401,"event-emitter":65,"lodash":72}],394:[function(require,module,exports){
+},{"../test/mockObjects/mockAlfrescoApi.js":409,"./alfresco-activiti-rest-api/src/index":178,"./alfresco-auth-rest-api/src/index":260,"./alfresco-core-rest-api/src/index.js":283,"./alfrescoContent":395,"./alfrescoNode":396,"./alfrescoUpload":397,"./alfrescoWebScript":398,"./bpmAuth":399,"./ecmAuth":400,"event-emitter":65,"lodash":72}],394:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -72758,31 +72776,6 @@ module.exports = AlfrescoNode;
 },{"./alfresco-core-rest-api/src/index.js":283,"lodash":72}],397:[function(require,module,exports){
 'use strict';
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
-
-var AlfrescoSearch = function (_AlfrescoCoreRestApi$) {
-  _inherits(AlfrescoSearch, _AlfrescoCoreRestApi$);
-
-  function AlfrescoSearch() {
-    _classCallCheck(this, AlfrescoSearch);
-
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(AlfrescoSearch).apply(this, arguments));
-  }
-
-  return AlfrescoSearch;
-}(AlfrescoCoreRestApi.SearchApi);
-
-module.exports = AlfrescoSearch;
-
-},{"./alfresco-core-rest-api/src/index.js":283}],398:[function(require,module,exports){
-'use strict';
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -72878,7 +72871,7 @@ var AlfrescoUpload = function (_AlfrescoCoreRestApi$) {
 Emitter(AlfrescoUpload.prototype); // jshint ignore:line
 module.exports = AlfrescoUpload;
 
-},{"./alfresco-core-rest-api/src/index.js":283,"event-emitter":65,"lodash":72}],399:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/index.js":283,"event-emitter":65,"lodash":72}],398:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -72942,7 +72935,7 @@ var AlfrescoWebScriptApi = function () {
 
 module.exports = AlfrescoWebScriptApi;
 
-},{"./alfresco-core-rest-api/src/ApiClient":268}],400:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/ApiClient":268}],399:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -72970,7 +72963,6 @@ var BpmAuth = function (_AlfrescoApiClient) {
         var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BpmAuth).call(this));
 
         _this.ticket = undefined;
-        _this.config = config;
         _this.basePath = config.hostActiviti + '/activiti-app'; //Activiti Call
         _this.authentications.basicAuth.username = config.username;
         _this.authentications.basicAuth.password = config.password;
@@ -73125,7 +73117,7 @@ Emitter(BpmAuth.prototype); // jshint ignore:line
 module.exports = BpmAuth;
 
 }).call(this,require("buffer").Buffer)
-},{"./alfrescoApiClient":394,"buffer":8,"event-emitter":65}],401:[function(require,module,exports){
+},{"./alfrescoApiClient":394,"buffer":8,"event-emitter":65}],400:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -73156,7 +73148,7 @@ var EcmAuth = function (_AlfrescoApiClient) {
         _this.basePath = _this.config.host + '/' + _this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
 
         if (_this.config.ticket) {
-            _this.setTicket(_this.config.ticket);
+            _this.setTicket(config.ticket);
         } else {
             _this.authentications.basicAuth.username = _this.config.username;
             _this.authentications.basicAuth.password = _this.config.password;
@@ -73178,14 +73170,14 @@ var EcmAuth = function (_AlfrescoApiClient) {
         value: function login() {
             var _this2 = this;
 
-            var apiInstance = new AlfrescoAuthRestApi.AuthenticationApi(this);
+            var authApi = new AlfrescoAuthRestApi.AuthenticationApi(this);
             var loginRequest = new AlfrescoAuthRestApi.LoginRequest();
 
-            loginRequest.userId = this.config.username;
-            loginRequest.password = this.config.password;
+            loginRequest.userId = this.authentications.basicAuth.username;
+            loginRequest.password = this.authentications.basicAuth.password;
 
             this.promise = new Promise(function (resolve, reject) {
-                apiInstance.createTicket(loginRequest).then(function (data) {
+                authApi.createTicket(loginRequest).then(function (data) {
                     _this2.setTicket(data.entry.id);
                     _this2.promise.emit('success');
                     resolve(data.entry.id);
@@ -73214,10 +73206,10 @@ var EcmAuth = function (_AlfrescoApiClient) {
         value: function logout() {
             var _this3 = this;
 
-            var apiInstance = new AlfrescoAuthRestApi.AuthenticationApi(this);
+            var authApi = new AlfrescoAuthRestApi.AuthenticationApi(this);
 
             this.promise = new Promise(function (resolve, reject) {
-                apiInstance.deleteTicket().then(function () {
+                authApi.deleteTicket().then(function () {
                     _this3.promise.emit('logout');
                     _this3.setTicket(undefined);
                     resolve('logout');
@@ -73298,7 +73290,7 @@ var EcmAuth = function (_AlfrescoApiClient) {
 Emitter(EcmAuth.prototype); // jshint ignore:line
 module.exports = EcmAuth;
 
-},{"./alfresco-auth-rest-api/src/index":260,"./alfrescoApiClient":394,"event-emitter":65}],402:[function(require,module,exports){
+},{"./alfresco-auth-rest-api/src/index":260,"./alfrescoApiClient":394,"event-emitter":65}],401:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -73347,7 +73339,7 @@ var AuthResponseMock = function (_BaseMock) {
 
 module.exports = AuthResponseMock;
 
-},{"../baseMock":409,"nock":75}],403:[function(require,module,exports){
+},{"../baseMock":408,"nock":75}],402:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -73439,7 +73431,7 @@ var ProcessMock = function (_BaseMock) {
 
 module.exports = ProcessMock;
 
-},{"../baseMock":409,"nock":75}],404:[function(require,module,exports){
+},{"../baseMock":408,"nock":75}],403:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -73551,7 +73543,7 @@ var TasksMock = function (_BaseMock) {
 
 module.exports = TasksMock;
 
-},{"../baseMock":409,"nock":75}],405:[function(require,module,exports){
+},{"../baseMock":408,"nock":75}],404:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -73655,7 +73647,7 @@ var AuthResponseMock = function (_BaseMock) {
 
 module.exports = AuthResponseMock;
 
-},{"../baseMock":409,"nock":75}],406:[function(require,module,exports){
+},{"../baseMock":408,"nock":75}],405:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -73932,7 +73924,7 @@ var NodeMock = function (_BaseMock) {
 
 module.exports = NodeMock;
 
-},{"../baseMock":409,"nock":75}],407:[function(require,module,exports){
+},{"../baseMock":408,"nock":75}],406:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74040,7 +74032,7 @@ var UploadMock = function (_BaseMock) {
 
 module.exports = UploadMock;
 
-},{"../baseMock":409,"nock":75}],408:[function(require,module,exports){
+},{"../baseMock":408,"nock":75}],407:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74119,7 +74111,7 @@ var WebScriptMock = function (_BaseMock) {
 
 module.exports = WebScriptMock;
 
-},{"../baseMock":409,"nock":75}],409:[function(require,module,exports){
+},{"../baseMock":408,"nock":75}],408:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74167,7 +74159,7 @@ var BaseMock = function () {
 
 module.exports = BaseMock;
 
-},{"nock":75}],410:[function(require,module,exports){
+},{"nock":75}],409:[function(require,module,exports){
 'use strict';
 
 var mockAlfrescoApi = {};
@@ -74185,5 +74177,5 @@ mockAlfrescoApi.ActivitiMock.Tasks = require('./activiti/tasksMock.js');
 
 module.exports = mockAlfrescoApi;
 
-},{"./activiti/authResponseMock.js":402,"./activiti/processMock.js":403,"./activiti/tasksMock.js":404,"./alfresco/authResponseMock.js":405,"./alfresco/nodeMock.js":406,"./alfresco/uploadMock.js":407,"./alfresco/webScriptMock.js":408}]},{},[1])(1)
+},{"./activiti/authResponseMock.js":401,"./activiti/processMock.js":402,"./activiti/tasksMock.js":403,"./alfresco/authResponseMock.js":404,"./alfresco/nodeMock.js":405,"./alfresco/uploadMock.js":406,"./alfresco/webScriptMock.js":407}]},{},[1])(1)
 });

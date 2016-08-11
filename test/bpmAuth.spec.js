@@ -154,7 +154,7 @@ describe('Bpm Auth test', function () {
                 this.authBpmMock.get200ResponseLogout();
 
                 this.bpmAuth.logout().then((data)=> {
-                    expect(this.bpmAuth.config.ticket).to.be.equal(undefined);
+                    expect(this.bpmAuth.getTicket()).to.be.equal(undefined);
                     expect(data).to.be.equal('logout');
                     done();
                 }, function () {

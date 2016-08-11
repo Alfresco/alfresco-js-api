@@ -6,7 +6,6 @@ var AlfrescoActivitiApi = require('./alfresco-activiti-rest-api/src/index');
 var AlfrescoMock = require('../test/mockObjects/mockAlfrescoApi.js');
 var AlfrescoContent = require('./alfrescoContent');
 var AlfrescoNode = require('./alfrescoNode');
-var AlfrescoSearch = require('./alfrescoSearch');
 var AlfrescoUpload = require('./alfrescoUpload');
 var AlfrescoWebScriptApi = require('./alfrescoWebScript');
 var Emitter = require('event-emitter');
@@ -29,14 +28,6 @@ class AlfrescoApi {
      *    };
      */
     constructor(config) {
-        this.changeConfig(config);
-        Emitter.call(this);
-    }
-
-    /**
-     * @param {Object} config
-     */
-    changeConfig(config) {
         this.config = {
             host: config.host || 'http://127.0.0.1:8080',
             hostActiviti: config.hostActiviti || 'http://127.0.0.1:9999',
@@ -49,34 +40,46 @@ class AlfrescoApi {
 
         if (this.config.provider === 'BPM' || this.config.provider === 'ALL') {
             this.bpmAuth = new BpmAuth(this.config);
-            AlfrescoActivitiApi.ApiClient.instance = this.bpmAuth.getClient();
-            this.activiti = AlfrescoActivitiApi;
-            this._instantiateObjects(this.activiti);
         }
 
         if (this.config.provider === 'ECM' || this.config.provider === 'ALL') {
             this.ecmAuth = new EcmAuth(this.config);
-            AlfrescoCoreRestApi.ApiClient.instance = this.ecmAuth.getClient();
-            this.core = AlfrescoCoreRestApi;
-            this._instantiateObjects(this.core);
         }
 
-        this.nodes = this.node = new AlfrescoNode();
-        this.search = new AlfrescoSearch();
-        this.content = new AlfrescoContent(this.ecmAuth);
-        this.upload = new AlfrescoUpload();
-        this.webScript = new AlfrescoWebScriptApi();
+        this.initObjects();
+
+        Emitter.call(this);
     }
 
-    _instantiateObjects(module) {
+    initObjects() {
+        if (this.config.provider === 'BPM' || this.config.provider === 'ALL') {
+            AlfrescoActivitiApi.ApiClient.instance = this.bpmAuth.getClient();
+            this.activiti = {};
+            this.activitiStore = AlfrescoActivitiApi;
+            this._instantiateObjects(this.activitiStore, this.activiti);
+        }
+
+        if (this.config.provider === 'ECM' || this.config.provider === 'ALL') {
+            AlfrescoCoreRestApi.ApiClient.instance = this.ecmAuth.getClient();
+            this.core = {};
+            this.coreStore = AlfrescoCoreRestApi;
+            this._instantiateObjects(this.coreStore, this.core);
+
+            this.nodes = this.node = new AlfrescoNode();
+            this.content = new AlfrescoContent(this.ecmAuth);
+            this.upload = new AlfrescoUpload();
+            this.webScript = new AlfrescoWebScriptApi();
+        }
+    }
+
+    _instantiateObjects(module, moduleCopy) {
         var classArray = Object.keys(module);
 
         classArray.forEach((currentClass)=> {
+            moduleCopy[currentClass] = module[currentClass];
             var obj = this._stringToObject(currentClass, module);
             var nameObj = _.lowerFirst(currentClass);
-            if (!module[nameObj]) {
-                module[nameObj] = obj;
-            }
+            moduleCopy[nameObj] = obj;
         });
     }
 
@@ -106,9 +109,16 @@ class AlfrescoApi {
      * */
     login() {
         if (this.config.provider && this.config.provider.toUpperCase() === 'BPM') {
-            return this.bpmAuth.login();
+            var bpmPromise = this.bpmAuth.login();
+            bpmPromise.then(()=> {
+            });
+            return bpmPromise;
         } else if (this.config.provider && this.config.provider.toUpperCase() === 'ECM') {
-            return this.ecmAuth.login();
+            var ecmPromise = this.ecmAuth.login();
+            ecmPromise.then((data)=> {
+                this.config.ticket = data;
+            });
+            return ecmPromise;
         } else if (this.config.provider && this.config.provider.toUpperCase() === 'ALL') {
             return this._loginBPMECM();
         }
@@ -121,6 +131,7 @@ class AlfrescoApi {
         this.promise = new Promise((resolve, reject) => {
             Promise.all([ecmPromise, bpmPromise]).then(
                 (data) => {
+                    this.config.ticket = data[0];
                     this.promise.emit('success');
                     resolve(data);
                 },
@@ -147,7 +158,12 @@ class AlfrescoApi {
         if (this.config.provider && this.config.provider.toUpperCase() === 'BPM') {
             return this.bpmAuth.logout();
         } else if (this.config.provider && this.config.provider.toUpperCase() === 'ECM') {
-            return this.ecmAuth.logout();
+            var ecmPromise = this.ecmAuth.logout();
+            ecmPromise.then((data)=> {
+                this.config.ticket = undefined;
+            });
+
+            return ecmPromise;
         } else if (this.config.provider && this.config.provider.toUpperCase() === 'ALL') {
             return this._logoutBPMECM();
         }
@@ -160,6 +176,7 @@ class AlfrescoApi {
         this.promise = new Promise((resolve, reject) => {
             Promise.all([ecmPromise, bpmPromise]).then(
                 (data) => {
+                    this.config.ticket = undefined;
                     this.promise.emit('logout');
                     resolve('logout');
                 },
