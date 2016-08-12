@@ -30,6 +30,14 @@ describe('Content', function () {
             'alf_ticket=TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
     });
 
+    it('get Preview Thumbnail Url', function () {
+        var thumbnailUrl = this.alfrescoJsApi.content.getDocumentPreviewUrl('1a0b110f-1e09-4ca2-b367-fe25e4964a4');
+
+        expect(thumbnailUrl).to.be.equal(this.host + '/alfresco/api/-default-/public/alfresco/versions/1/nodes/' +
+            '1a0b110f-1e09-4ca2-b367-fe25e4964a4/renditions/imgpreview/content?attachment=false&' +
+            'alf_ticket=TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
+    });
+
     it('get Content Url', function () {
         var contentUrl = this.alfrescoJsApi.content.getContentUrl('1a0b110f-1e09-4ca2-b367-fe25e4964a4');
 

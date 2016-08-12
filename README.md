@@ -28,12 +28,11 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
 <!-- toc -->
 
 - [Node](#node)
-- [Api Modules](#api-modules)
+- [Api Modules complete methods list](#api-modules-complete-methods-list)
 - [Install](#install)
 - [Use](#use)
-    + [Basic usage For node projects](#basic-usage-for-node-projects)
-    + [Basic usage For browser](#basic-usage-for-browser)
-- [Getting Started](#getting-started)
+    + [Import library for node projects](#import-library-for-node-projects)
+    + [Import library for browser projects](#import-library-for-browser-projects)
 - [Authentication JS-API](#authentication-js-api)
   * [Login](#login)
     + [Login with Username and Password BPM and ECM](#login-with-username-and-password-bpm-and-ecm)
@@ -52,9 +51,11 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
   * [Delete File or Folder](#delete-file-or-folder)
   * [Delete File or Folder Permanent](#delete-file-or-folder-permanent)
   * [Get thumbnail Url](#get-thumbnail-url)
+  * [Get preview Url](#get-preview-url)
   * [Get content Url](#get-content-url)
   * [Custom web scripts call](#custom-web-scripts-call)
 - [BPM](#bpm)
+  * [Task Api](#task-api)
 - [Development](#development)
 - [Release History](#release-history)
 
@@ -458,13 +459,23 @@ var thumbnailUrl = this.alfrescoJsApi.content.getDocumentThumbnailUrl('1a0b110f-
 
 ```
 
+## Get preview Url
+  
+getDocumentPreviewUrl(documentId)
+
+```javascript
+
+var previewUrl = this.alfrescoJsApi.content.getDocumentPreviewUrl('1a0b110f-1e09-4ca2-b367-fe25e4964a4');
+
+```
+
 ## Get content Url
   
 getContentUrl(documentId)
 
 ```javascript
 
-var thumbnailUrl = this.alfrescoJsApi.content.getContentUrl('1a0b110f-1e09-4ca2-b367-fe25e4964a4');
+var contentUrl = this.alfrescoJsApi.content.getContentUrl('1a0b110f-1e09-4ca2-b367-fe25e4964a4');
 
 ```
 

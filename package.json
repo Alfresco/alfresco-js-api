@@ -6,7 +6,7 @@
   "typings": "dist/alfresco-js-api.d.ts",
   "scripts": {
     "clean": "rimraf dist/bundle.js node_modules",
-    "build": "grunt && npm run tslint && npm run bundle && npm run minify",
+    "build": "grunt && npm run tslint && npm run test && npm run bundle && npm run minify && npm run toc",
     "test": "grunt test",
     "coverage": "grunt coverage",
     "generate": "mvn clean generate-sources",

@@ -21,6 +21,8 @@ Alfresco Mock API use [Nock](https://github.com/node-nock/nock) which is an HTTP
     + [Example](#example-3)
 - [BPM](#bpm)
   * [Mock Auth Api](#mock-auth-api-1)
+  * [Mock Process Api](#mock-process-api)
+  * [Mock Tasks Api](#mock-tasks-api)
 
 <!-- tocstop -->
 
@@ -279,4 +281,4 @@ Method | Description  |
 tasksMock.get200Response()| | 
 tasksMock.rec()| | 
 tasksMock.play()| |
-tasksMock.cleanAll()| | 
+tasksMock.cleanAll()| |
