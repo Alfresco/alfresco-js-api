@@ -114,6 +114,7 @@ interface AuthMock {
     get404ResponseLogout();
     rec();
     play();
+    clearAll();
 }
 
 interface NodeMock {
@@ -131,6 +132,7 @@ interface NodeMock {
     get201CreationFolderNewNameNotClashes();
     rec();
     play();
+    clearAll();
 }
 
 interface UploadMock {
@@ -141,22 +143,34 @@ interface UploadMock {
     get401Response();
     rec();
     play();
+    clearAll();
 }
 
-interface WebScript {
-    new(host: string): WebScript;
+interface WebScriptMock {
+    new(host: string): WebScriptMock;
     get200Response();
     get400Response();
     rec();
     play();
+    clearAll();
+}
+
+interface TagMock {
+    new(host: string): TagMock;
+    get200Response();
+    get401Response();
+    rec();
+    play();
+    clearAll();
 }
 
 interface Mock {
     Auth: AuthMock;
     Node: NodeMock;
     Upload: UploadMock;
-    WebScript: WebScript;
+    WebScript: WebScriptMock;
     ActivitiMock : ActivitiMock;
+    Tag : TagMock;
 }
 
 interface ActivitiMock {

@@ -17,8 +17,10 @@ Alfresco Mock API use [Nock](https://github.com/node-nock/nock) which is an HTTP
     + [Example](#example-1)
   * [Mock Upload Api](#mock-upload-api)
     + [Example](#example-2)
-  * [WebScript Upload Api](#webscript-upload-api)
+  * [Mock WebScript Api](#mock-webscript-api)
     + [Example](#example-3)
+  * [Mock Tags Api](#mock-tags-api)
+    + [Example](#example-4)
 - [BPM](#bpm)
   * [Mock Auth Api](#mock-auth-api-1)
   * [Mock Process Api](#mock-process-api)
@@ -103,7 +105,7 @@ nodeMock.get409CreationFolderNewNameClashes()| |
 nodeMock.get201CreationFolderNewNameNotClashes()| | 
 nodeMock.rec();| | 
 nodeMock.play();| | 
-authResponseMock.cleanAll()| | 
+nodeMock.cleanAll()| | 
 
 ### Example 
 
@@ -151,7 +153,7 @@ uploadMock.get409CreationFileNewNameClashes()| |
 uploadMock.get401Response()| | 
 uploadMock.rec()| | 
 uploadMock.play()| | 
-authResponseMock.cleanAll()| | 
+uploadMock.cleanAll()| | 
 
 ### Example 
 
@@ -189,20 +191,20 @@ alfrescoJsApi.upload.uploadFile(file).then(function (data) {
 ```
 
 
-## WebScript Upload Api
+## Mock WebScript Api
 
-var UploadMock = require('alfresco-js-api').Mock.WebScript
+var WebScriptMock = require('alfresco-js-api').Mock.WebScript
 
-webScript = new WebScript(host);
+webScriptMock = new WebScriptMock(host);
 
 Method | Description  |
 ------------- | ------------- |
-WebScript.get404Response()| | 
-WebScript.get401Response()| | 
-WebScript.get200Response()| | 
-uploadMock.rec()| | 
-uploadMock.play()| | 
-authResponseMock.cleanAll()| | 
+webScriptMock.get404Response()| | 
+webScriptMock.get401Response()| | 
+webScriptMock.get200Response()| | 
+webScriptMock.rec()| | 
+webScriptMock.play()| | 
+webScriptMock.cleanAll()| | 
 
 ### Example 
 
@@ -218,7 +220,6 @@ var servicePath = 'alfresco';
 var scriptPath = 'testWebScript';
 
 var authResponseMock = new AuthResponseMock(host);
-var uploadMock = new UploadMock(host);
 
 authResponseMock.get201Response();
 
@@ -234,6 +235,52 @@ webScriptMock.get200Response();
 
 alfrescoJsApi.webScript.executeWebScript('GET', scriptPath, null, contextRoot, servicePath)
 .then((data)=> {
+   expect(data).to.not.be.undefined;
+});
+
+```
+
+
+## Mock Tags Api
+
+var TagMock = require('alfresco-js-api').Mock.Tag
+
+tagMock = new TagMock(host);
+
+Method | Description  |
+------------- | ------------- |
+tagMock.get404Response()| | 
+tagMock.get401Response()| | 
+tagMock.get200Response()| | 
+tagMock.rec()| | 
+tagMock.play()| | 
+tagMock.cleanAll()| | 
+
+### Example 
+
+```javascript
+var AlfrescoApi = require('alfresco-js-api');
+var expect = require('chai').expect;
+var AuthResponseMock = require('alfresco-js-api').Mock.Auth;
+var TagMock = require('alfresco-js-api').Mock.Tag;
+
+var host = 'http://127.0.0.1:8080';
+
+var authResponseMock = new AuthResponseMock(host);
+
+authResponseMock.get201Response();
+
+var alfrescoJsApi = new AlfrescoApi({
+    username: 'admin',
+    password: 'admin',
+    host: this.host
+});
+
+var tagMock = new TagMock(host);
+
+tagMock.get200Response();
+
+this.alfrescoJsApi.core.tagsApi.getTags().then((data)=> {
    expect(data).to.not.be.undefined;
 });
 

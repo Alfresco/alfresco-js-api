@@ -2,7 +2,8 @@
 
 var AlfrescoApi = require('../main');
 var AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
-var WebScriptMock = require('../test/mockObjects/mockAlfrescoApi').WebScript;
+var TagMock = require('../test/mockObjects/mockAlfrescoApi').Tag;
+var expect = require('chai').expect;
 
 describe('Tags', function () {
 
@@ -10,7 +11,7 @@ describe('Tags', function () {
         this.host = 'http://127.0.0.1:8080';
 
         this.authResponseMock = new AuthResponseMock(this.host);
-        this.webScriptMock = new WebScriptMock(this.host, this.contextRoot, this.servicePath, this.scriptPath);
+        this.tagMock = new TagMock();
 
         this.authResponseMock.get201Response();
         this.alfrescoJsApi = new AlfrescoApi({
@@ -19,21 +20,31 @@ describe('Tags', function () {
             host: this.host
         });
 
-        this.alfrescoJsApi.login().then((data) => {
+        this.alfrescoJsApi.login().then(() => {
             done();
         });
     });
 
-    it.skip('tags', function (done) {
-        // this.webScriptMock.get404Response();
+    it('tags', function (done) {
+        this.tagMock.get200Response();
 
         this.alfrescoJsApi.core.tagsApi.getTags().then(function (data) {
-            console.log('API called successfully. Returned data: ' + data);
+            expect(data.list.pagination.count).to.be.equal(2);
+            expect(data.list.entries[0].entry.tag).to.be.equal('tag-test-1');
+            expect(data.list.entries[1].entry.tag).to.be.equal('tag-test-2');
             done();
         }, function (error) {
             console.error(error);
             done();
+        });
+    });
 
+    it('Tags 401', function (done) {
+        this.tagMock.get401Response();
+
+        this.alfrescoJsApi.core.tagsApi.getTags().then(function () {
+        }, function () {
+            done();
         });
     });
 

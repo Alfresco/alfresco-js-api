@@ -72375,7 +72375,7 @@ module.exports.Core = AlfrescoCoreRestApi;
 module.exports.Auth = AlfrescoAuthRestApi;
 module.exports.Mock = AlfrescoMock;
 
-},{"../test/mockObjects/mockAlfrescoApi.js":409,"./alfresco-activiti-rest-api/src/index":178,"./alfresco-auth-rest-api/src/index":260,"./alfresco-core-rest-api/src/index.js":283,"./alfrescoContent":395,"./alfrescoNode":396,"./alfrescoUpload":397,"./alfrescoWebScript":398,"./bpmAuth":399,"./ecmAuth":400,"event-emitter":65,"lodash":72}],394:[function(require,module,exports){
+},{"../test/mockObjects/mockAlfrescoApi.js":410,"./alfresco-activiti-rest-api/src/index":178,"./alfresco-auth-rest-api/src/index":260,"./alfresco-core-rest-api/src/index.js":283,"./alfrescoContent":395,"./alfrescoNode":396,"./alfrescoUpload":397,"./alfrescoWebScript":398,"./bpmAuth":399,"./ecmAuth":400,"event-emitter":65,"lodash":72}],394:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -73353,7 +73353,7 @@ var AuthResponseMock = function (_BaseMock) {
 
 module.exports = AuthResponseMock;
 
-},{"../baseMock":408,"nock":75}],402:[function(require,module,exports){
+},{"../baseMock":409,"nock":75}],402:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -73445,7 +73445,7 @@ var ProcessMock = function (_BaseMock) {
 
 module.exports = ProcessMock;
 
-},{"../baseMock":408,"nock":75}],403:[function(require,module,exports){
+},{"../baseMock":409,"nock":75}],403:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -73557,7 +73557,7 @@ var TasksMock = function (_BaseMock) {
 
 module.exports = TasksMock;
 
-},{"../baseMock":408,"nock":75}],404:[function(require,module,exports){
+},{"../baseMock":409,"nock":75}],404:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -73661,7 +73661,7 @@ var AuthResponseMock = function (_BaseMock) {
 
 module.exports = AuthResponseMock;
 
-},{"../baseMock":408,"nock":75}],405:[function(require,module,exports){
+},{"../baseMock":409,"nock":75}],405:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -73938,7 +73938,70 @@ var NodeMock = function (_BaseMock) {
 
 module.exports = NodeMock;
 
-},{"../baseMock":408,"nock":75}],406:[function(require,module,exports){
+},{"../baseMock":409,"nock":75}],406:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var nock = require('nock');
+var BaseMock = require('../baseMock');
+
+var TagMock = function (_BaseMock) {
+    _inherits(TagMock, _BaseMock);
+
+    function TagMock(host) {
+        _classCallCheck(this, TagMock);
+
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(TagMock).call(this, host));
+    }
+
+    _createClass(TagMock, [{
+        key: 'get200Response',
+        value: function get200Response() {
+            nock(this.host, { 'encodedQueryParams': true }).get('/alfresco/api/-default-/public/alfresco/versions/1/tags').reply(200, {
+                'list': {
+                    'pagination': { 'count': 2, 'hasMoreItems': false, 'skipCount': 0, 'maxItems': 100 },
+                    'entries': [{
+                        'entry': {
+                            'tag': 'tag-test-1',
+                            'id': '0d89aa82-f2b8-4a37-9a54-f4c5148174d6'
+                        }
+                    }, {
+                        'entry': {
+                            'tag': 'tag-test-2',
+                            'id': 'd79bdbd0-9f55-45bb-9521-811e15bf48f6'
+                        }
+                    }]
+                }
+            });
+        }
+    }, {
+        key: 'get401Response',
+        value: function get401Response() {
+            nock(this.host, { 'encodedQueryParams': true }).get('/alfresco/api/-default-/public/alfresco/versions/1/tags').reply(401, {
+                'error': {
+                    'errorKey': 'framework.exception.ApiDefault',
+                    'statusCode': 401,
+                    'briefSummary': '05210059 Authentication failed for Web Script org/alfresco/api/ResourceWebScript.get',
+                    'stackTrace': 'For security reasons the stack trace is no longer displayed, but the property is kept for previous versions.',
+                    'descriptionURL': 'https://api-explorer.alfresco.com'
+                }
+            });
+        }
+    }]);
+
+    return TagMock;
+}(BaseMock);
+
+module.exports = TagMock;
+
+},{"../baseMock":409,"nock":75}],407:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74046,7 +74109,7 @@ var UploadMock = function (_BaseMock) {
 
 module.exports = UploadMock;
 
-},{"../baseMock":408,"nock":75}],407:[function(require,module,exports){
+},{"../baseMock":409,"nock":75}],408:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74125,7 +74188,7 @@ var WebScriptMock = function (_BaseMock) {
 
 module.exports = WebScriptMock;
 
-},{"../baseMock":408,"nock":75}],408:[function(require,module,exports){
+},{"../baseMock":409,"nock":75}],409:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74173,15 +74236,17 @@ var BaseMock = function () {
 
 module.exports = BaseMock;
 
-},{"nock":75}],409:[function(require,module,exports){
+},{"nock":75}],410:[function(require,module,exports){
 'use strict';
 
 var mockAlfrescoApi = {};
 
+//Ecm Mock
 mockAlfrescoApi.Auth = require('./alfresco/authResponseMock.js');
 mockAlfrescoApi.Node = require('./alfresco/nodeMock.js');
 mockAlfrescoApi.Upload = require('./alfresco/uploadMock.js');
 mockAlfrescoApi.WebScript = require('./alfresco/webScriptMock.js');
+mockAlfrescoApi.Tag = require('./alfresco/tagMock.js');
 
 //Bpm Mock
 mockAlfrescoApi.ActivitiMock = {};
@@ -74191,5 +74256,5 @@ mockAlfrescoApi.ActivitiMock.Tasks = require('./activiti/tasksMock.js');
 
 module.exports = mockAlfrescoApi;
 
-},{"./activiti/authResponseMock.js":401,"./activiti/processMock.js":402,"./activiti/tasksMock.js":403,"./alfresco/authResponseMock.js":404,"./alfresco/nodeMock.js":405,"./alfresco/uploadMock.js":406,"./alfresco/webScriptMock.js":407}]},{},[1])(1)
+},{"./activiti/authResponseMock.js":401,"./activiti/processMock.js":402,"./activiti/tasksMock.js":403,"./alfresco/authResponseMock.js":404,"./alfresco/nodeMock.js":405,"./alfresco/tagMock.js":406,"./alfresco/uploadMock.js":407,"./alfresco/webScriptMock.js":408}]},{},[1])(1)
 });
