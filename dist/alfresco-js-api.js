@@ -29822,6 +29822,8 @@ module.exports = {
 
 var Utils = require('./utils');
 
+var has = Object.prototype.hasOwnProperty;
+
 var defaults = {
     delimiter: '&',
     depth: 5,
@@ -29842,21 +29844,18 @@ var parseValues = function parseValues(str, options) {
         var part = parts[i];
         var pos = part.indexOf(']=') === -1 ? part.indexOf('=') : part.indexOf(']=') + 1;
 
+        var key, val;
         if (pos === -1) {
-            obj[options.decoder(part)] = '';
-
-            if (options.strictNullHandling) {
-                obj[options.decoder(part)] = null;
-            }
+            key = options.decoder(part);
+            val = options.strictNullHandling ? null : '';
         } else {
-            var key = options.decoder(part.slice(0, pos));
-            var val = options.decoder(part.slice(pos + 1));
-
-            if (Object.prototype.hasOwnProperty.call(obj, key)) {
-                obj[key] = [].concat(obj[key]).concat(val);
-            } else {
-                obj[key] = val;
-            }
+            key = options.decoder(part.slice(0, pos));
+            val = options.decoder(part.slice(pos + 1));
+        }
+        if (has.call(obj, key)) {
+            obj[key] = [].concat(obj[key]).concat(val);
+        } else {
+            obj[key] = val;
         }
     }
 
@@ -29918,7 +29917,7 @@ var parseKeys = function parseKeys(givenKey, val, options) {
     if (segment[1]) {
         // If we aren't using plain objects, optionally prefix keys
         // that would overwrite object prototype properties
-        if (!options.plainObjects && Object.prototype.hasOwnProperty(segment[1])) {
+        if (!options.plainObjects && has.call(Object.prototype, segment[1])) {
             if (!options.allowPrototypes) {
                 return;
             }
@@ -29932,7 +29931,7 @@ var parseKeys = function parseKeys(givenKey, val, options) {
     var i = 0;
     while ((segment = child.exec(key)) !== null && i < options.depth) {
         i += 1;
-        if (!options.plainObjects && Object.prototype.hasOwnProperty(segment[1].replace(/\[|\]/g, ''))) {
+        if (!options.plainObjects && has.call(Object.prototype, segment[1].replace(/\[|\]/g, ''))) {
             if (!options.allowPrototypes) {
                 continue;
             }
@@ -72125,8 +72124,6 @@ var AlfrescoApi = function () {
      *        host:       // alfrescoHost Your share server IP or DNS name
      *        hostActiviti: // hostActiviti Your activiti server IP or DNS name
      *        contextRoot: // contextRoot default value alfresco
-     *        username:   // Username to login
-     *        password:   // Password to login
      *        provider:   // ECM BPM ALL
      *        ticket:     // Ticket if you already have a ticket you can pass only the ticket and skip the login, in this case you don't need username and password
      *    };
@@ -72139,21 +72136,12 @@ var AlfrescoApi = function () {
             host: config.host || 'http://127.0.0.1:8080',
             hostActiviti: config.hostActiviti || 'http://127.0.0.1:9999',
             contextRoot: config.contextRoot || 'alfresco',
-            username: config.username,
-            password: config.password,
             provider: config.provider || 'ECM',
             ticket: config.ticket
         };
 
-        if (this.config.provider === 'BPM' || this.config.provider === 'ALL') {
-            this.bpmAuth = new BpmAuth(this.config);
-        }
-
-        if (this.config.provider === 'ECM' || this.config.provider === 'ALL') {
-            this.ecmAuth = new EcmAuth(this.config);
-        }
-
-        this.initObjects();
+        this.bpmAuth = new BpmAuth(this.config);
+        this.ecmAuth = new EcmAuth(this.config);
 
         Emitter.call(this);
     }
@@ -72220,40 +72208,52 @@ var AlfrescoApi = function () {
 
         /**
          * login Alfresco API
+         * username:   // Username to login
+         * password:   // Password to login
          *
          * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
          * */
 
     }, {
         key: 'login',
-        value: function login() {
+        value: function login(username, password) {
             var _this2 = this;
 
-            if (this.config.provider && this.config.provider.toUpperCase() === 'BPM') {
-                var bpmPromise = this.bpmAuth.login();
-                bpmPromise.then(function () {});
+            if (this._isBpmConfiguration()) {
+                var bpmPromise = this.bpmAuth.login(username, password);
+                bpmPromise.then(function () {
+                    _this2.initObjects();
+                });
+
                 return bpmPromise;
-            } else if (this.config.provider && this.config.provider.toUpperCase() === 'ECM') {
-                var ecmPromise = this.ecmAuth.login();
+            } else if (this._isEcmConfiguration()) {
+                var ecmPromise = this.ecmAuth.login(username, password);
                 ecmPromise.then(function (data) {
+                    _this2.initObjects();
                     _this2.config.ticket = data;
                 });
+
                 return ecmPromise;
-            } else if (this.config.provider && this.config.provider.toUpperCase() === 'ALL') {
-                return this._loginBPMECM();
+            } else if (this._isEcmBpmConfiguration()) {
+                var bpmEcmPromise = this._loginBPMECM(username, password);
+                bpmEcmPromise.then(function (data) {
+                    _this2.initObjects();
+                    _this2.config.ticket = data[0];
+                });
+
+                return bpmEcmPromise;
             }
         }
     }, {
         key: '_loginBPMECM',
-        value: function _loginBPMECM() {
+        value: function _loginBPMECM(username, password) {
             var _this3 = this;
 
-            var ecmPromise = this.ecmAuth.login();
-            var bpmPromise = this.bpmAuth.login();
+            var ecmPromise = this.ecmAuth.login(username, password);
+            var bpmPromise = this.bpmAuth.login(username, password);
 
             this.promise = new Promise(function (resolve, reject) {
                 Promise.all([ecmPromise, bpmPromise]).then(function (data) {
-                    _this3.config.ticket = data[0];
                     _this3.promise.emit('success');
                     resolve(data);
                 }, function (error) {
@@ -72361,6 +72361,21 @@ var AlfrescoApi = function () {
         key: 'getTicket',
         value: function getTicket() {
             return this.ecmAuth.getTicket();
+        }
+    }, {
+        key: '_isBpmConfiguration',
+        value: function _isBpmConfiguration() {
+            return this.config.provider && this.config.provider.toUpperCase() === 'BPM';
+        }
+    }, {
+        key: '_isEcmConfiguration',
+        value: function _isEcmConfiguration() {
+            return this.config.provider && this.config.provider.toUpperCase() === 'ECM';
+        }
+    }, {
+        key: '_isEcmBpmConfiguration',
+        value: function _isEcmBpmConfiguration() {
+            return this.config.provider && this.config.provider.toUpperCase() === 'ALL';
         }
     }]);
 
@@ -72978,14 +72993,15 @@ var BpmAuth = function (_AlfrescoApiClient) {
 
         _this.ticket = undefined;
         _this.basePath = config.hostActiviti + '/activiti-app'; //Activiti Call
-        _this.authentications.basicAuth.username = config.username;
-        _this.authentications.basicAuth.password = config.password;
+
         Emitter.call(_this);
         return _this;
     }
 
     /**
      * login Activiti API
+     * username:   // Username to login
+     * password:   // Password to login
      *
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
@@ -72993,8 +73009,11 @@ var BpmAuth = function (_AlfrescoApiClient) {
 
     _createClass(BpmAuth, [{
         key: 'login',
-        value: function login() {
+        value: function login(username, password) {
             var _this2 = this;
+
+            this.authentications.basicAuth.username = username;
+            this.authentications.basicAuth.password = password;
 
             var postBody = {},
                 pathParams = {},
@@ -73163,9 +73182,6 @@ var EcmAuth = function (_AlfrescoApiClient) {
 
         if (_this.config.ticket) {
             _this.setTicket(config.ticket);
-        } else {
-            _this.authentications.basicAuth.username = _this.config.username;
-            _this.authentications.basicAuth.password = _this.config.password;
         }
 
         Emitter.call(_this);
@@ -73174,6 +73190,8 @@ var EcmAuth = function (_AlfrescoApiClient) {
 
     /**
      * login Alfresco API
+     * username:   // Username to login
+     * password:   // Password to login
      *
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
@@ -73181,8 +73199,11 @@ var EcmAuth = function (_AlfrescoApiClient) {
 
     _createClass(EcmAuth, [{
         key: 'login',
-        value: function login() {
+        value: function login(username, password) {
             var _this2 = this;
+
+            this.authentications.basicAuth.username = username;
+            this.authentications.basicAuth.password = password;
 
             var authApi = new AlfrescoAuthRestApi.AuthenticationApi(this);
             var loginRequest = new AlfrescoAuthRestApi.LoginRequest();
