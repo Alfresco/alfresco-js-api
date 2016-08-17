@@ -34,13 +34,8 @@ class AlfrescoApi {
             ticket: config.ticket
         };
 
-        if (this.config.provider === 'BPM' || this.config.provider === 'ALL') {
-            this.bpmAuth = new BpmAuth(this.config);
-        }
-
-        if (this.config.provider === 'ECM' || this.config.provider === 'ALL') {
-            this.ecmAuth = new EcmAuth(this.config);
-        }
+        this.bpmAuth = new BpmAuth(this.config);
+        this.ecmAuth = new EcmAuth(this.config);
 
         Emitter.call(this);
     }
