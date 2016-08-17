@@ -21,8 +21,6 @@ class AlfrescoApi {
      *        host:       // alfrescoHost Your share server IP or DNS name
      *        hostActiviti: // hostActiviti Your activiti server IP or DNS name
      *        contextRoot: // contextRoot default value alfresco
-     *        username:   // Username to login
-     *        password:   // Password to login
      *        provider:   // ECM BPM ALL
      *        ticket:     // Ticket if you already have a ticket you can pass only the ticket and skip the login, in this case you don't need username and password
      *    };
@@ -32,8 +30,6 @@ class AlfrescoApi {
             host: config.host || 'http://127.0.0.1:8080',
             hostActiviti: config.hostActiviti || 'http://127.0.0.1:9999',
             contextRoot: config.contextRoot || 'alfresco',
-            username: config.username,
-            password: config.password,
             provider: config.provider || 'ECM',
             ticket: config.ticket
         };
@@ -45,8 +41,6 @@ class AlfrescoApi {
         if (this.config.provider === 'ECM' || this.config.provider === 'ALL') {
             this.ecmAuth = new EcmAuth(this.config);
         }
-
-        this.initObjects();
 
         Emitter.call(this);
     }
@@ -104,34 +98,47 @@ class AlfrescoApi {
 
     /**
      * login Alfresco API
+     * username:   // Username to login
+     * password:   // Password to login
      *
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
-    login() {
-        if (this.config.provider && this.config.provider.toUpperCase() === 'BPM') {
-            var bpmPromise = this.bpmAuth.login();
+    login(username, password) {
+        if (this._isBpmConfiguration()) {
+            var bpmPromise = this.bpmAuth.login(username, password);
             bpmPromise.then(()=> {
+                this.initObjects();
             });
+
             return bpmPromise;
-        } else if (this.config.provider && this.config.provider.toUpperCase() === 'ECM') {
-            var ecmPromise = this.ecmAuth.login();
+        } else if (this._isEcmConfiguration()) {
+            var ecmPromise = this.ecmAuth.login(username, password);
             ecmPromise.then((data)=> {
+                this.initObjects();
                 this.config.ticket = data;
             });
+
             return ecmPromise;
-        } else if (this.config.provider && this.config.provider.toUpperCase() === 'ALL') {
-            return this._loginBPMECM();
+
+        } else if (this._isEcmBpmConfiguration()) {
+            var bpmEcmPromise = this._loginBPMECM(username, password);
+            bpmEcmPromise.then((data)=> {
+                this.initObjects();
+                this.config.ticket = data[0];
+            });
+
+            return bpmEcmPromise;
         }
     }
 
-    _loginBPMECM() {
-        var ecmPromise = this.ecmAuth.login();
-        var bpmPromise = this.bpmAuth.login();
+    _loginBPMECM(username, password) {
+
+        var ecmPromise = this.ecmAuth.login(username, password);
+        var bpmPromise = this.bpmAuth.login(username, password);
 
         this.promise = new Promise((resolve, reject) => {
             Promise.all([ecmPromise, bpmPromise]).then(
                 (data) => {
-                    this.config.ticket = data[0];
                     this.promise.emit('success');
                     resolve(data);
                 },
@@ -226,6 +233,19 @@ class AlfrescoApi {
     getTicket() {
         return this.ecmAuth.getTicket();
     }
+
+    _isBpmConfiguration() {
+        return this.config.provider && this.config.provider.toUpperCase() === 'BPM';
+    }
+
+    _isEcmConfiguration() {
+        return this.config.provider && this.config.provider.toUpperCase() === 'ECM';
+    }
+
+    _isEcmBpmConfiguration() {
+        return this.config.provider && this.config.provider.toUpperCase() === 'ALL';
+    }
+
 }
 
 Emitter(AlfrescoApi.prototype); // jshint ignore:line

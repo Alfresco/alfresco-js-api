@@ -99,12 +99,10 @@ var AlfrescoApi = require('alfresco-js-api');
 
 ## Login
 
-AlfrescoApi({username, password, alfrescoHost, contextRoot, ticket});
+AlfrescoApi({alfrescoHost, activitiHost, contextRoot, ticket});
 
 Property | Description  | default value| 
 ------------- | ------------- | -------------|
-username| | |
-password| | |
 alfrescoHost| (Optional value The Ip or Name of the host where your Alfresco instance is running )|http://127.0.0.1:8080 |
 activitiHost| (Optional value The Ip or Name of the host where your Activiti instance is running )|http://127.0.0.1:9999 |
 contextRoot| (Optional value that define the context Root of the API default value is alfresco )|alfresco |
@@ -114,9 +112,9 @@ ticket| (Optional only if you want login with the ticket see example below)| |
 ### Login with Username and Password BPM and ECM
 
 ```javascript
-this.alfrescoJsApi = new AlfrescoApi({ username:'admin', password:'admin', provider:'ALL' });
+this.alfrescoJsApi = new AlfrescoApi({ provider:'ALL' });
 
-this.alfrescoJsApi.login().then(function (data) {
+this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
     console.log('API called successfully Login in  BPM and ECM performed ');
 }, function (error) {
     console.error(error);
@@ -127,9 +125,9 @@ this.alfrescoJsApi.login().then(function (data) {
 ### Login with Username and Password ECM
 
 ```javascript
-this.alfrescoJsApi = new AlfrescoApi({ username:'admin', password:'admin'});
+this.alfrescoJsApi = new AlfrescoApi();
 
-this.alfrescoJsApi.login().then(function (data) {
+this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
     console.log('API called successfully Login ticket:' + data);
 }, function (error) {
     console.error(error);
@@ -151,9 +149,9 @@ this.alfrescoJsApi = new AlfrescoApi({ ticket:'TICKET_4479f4d3bb155195879bfbb8d5
 
 
 ```javascript
-this.alfrescoJsApi = new AlfrescoApi({ username:'admin', password:'admin', provider:'BPM' });
+this.alfrescoJsApi = new AlfrescoApi({ provider:'BPM' });
 
-this.alfrescoJsApi.login().then(function (data) {
+this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
     console.log('API called successfully Login in Activiti BPM performed ');
 }, function (error) {
     console.error(error);
@@ -203,11 +201,11 @@ if (isLoggedIn) {
 
 ```javascript
 
-this.alfrescoJsApi.login().on('unauthorized', function(){
+this.alfrescoJsApi.login('admin', 'admin').on('unauthorized', function(){
     console.log('You are unauthorized you can use this event to redirect to login');
 });
 
-this.alfrescoJsApi.login().on('success', function(){
+this.alfrescoJsApi.login('admin', 'admin').on('success', function(){
     console.log('Success Login');
 });
 
@@ -530,8 +528,7 @@ A complete list of all the BPM methods is available here :[Activiti API](/src/al
 
 listTasks(requestNode)
 
->uploadFile return a promise that is resolved if the file is successful uploaded and {error} if rejected.
-
+>
 
 ```javascript
  

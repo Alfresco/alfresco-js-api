@@ -224,10 +224,8 @@ export interface AlfrescoApi {
     activiti: any;
     core: any;
 
-    activiti: any;
     search: any;
     nodes: any;
-    webScript: any;
     content: any;
     upload: any;
     webScript: any;

@@ -18,13 +18,11 @@ describe('Ecm Auth test', function () {
             this.authEcmMock.get201Response();
 
             this.ecmAuth = new EcmAuth({
-                username: 'admin',
-                password: 'admin',
                 contextRoot: 'alfresco',
                 host: this.host
             });
 
-            this.ecmAuth.login().then((data) => {
+            this.ecmAuth.login('admin', 'admin').then((data) => {
                 expect(data).to.be.equal('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
                 done();
             }, function () {
@@ -37,13 +35,11 @@ describe('Ecm Auth test', function () {
             this.authEcmMock.get201Response();
 
             this.ecmAuth = new EcmAuth({
-                username: 'admin',
-                password: 'admin',
                 contextRoot: 'alfresco',
                 host: this.host
             });
 
-            this.ecmAuth.login().then(() => {
+            this.ecmAuth.login('admin', 'admin').then(() => {
                 expect(this.ecmAuth.isLoggedIn()).to.be.equal(true);
                 done();
             }, function () {
@@ -55,13 +51,11 @@ describe('Ecm Auth test', function () {
             this.authEcmMock.get201Response();
 
             this.ecmAuth = new EcmAuth({
-                username: 'admin',
-                password: 'admin',
                 contextRoot: 'alfresco',
                 host: this.host
             });
 
-            this.ecmAuth.login();
+            this.ecmAuth.login('admin', 'admin');
 
             this.authEcmMock.get204ResponseLogout();
 
@@ -76,13 +70,11 @@ describe('Ecm Auth test', function () {
             this.authEcmMock.get403Response();
 
             this.ecmAuth = new EcmAuth({
-                username: 'wrong',
-                password: 'name',
                 contextRoot: 'alfresco',
                 host: this.host
             });
 
-            this.ecmAuth.login().then(function () {
+            this.ecmAuth.login('wrong', 'name').then(function () {
 
             }, function (error) {
                 expect(error.status).to.be.equal(403);
@@ -94,13 +86,11 @@ describe('Ecm Auth test', function () {
             this.authEcmMock.get400Response();
 
             this.ecmAuth = new EcmAuth({
-                username: null,
-                password: null,
                 contextRoot: 'alfresco',
                 host: this.host
             });
 
-            this.ecmAuth.login().then(function () {
+            this.ecmAuth.login(null, null).then(function () {
 
             }, function (error) {
                 expect(error.status).to.be.equal(400);
@@ -113,13 +103,11 @@ describe('Ecm Auth test', function () {
                 this.authEcmMock.get401Response();
 
                 this.ecmAuth = new EcmAuth({
-                    username: 'wrong',
-                    password: 'name',
                     contextRoot: 'alfresco',
                     host: this.host
                 });
 
-                this.ecmAuth.login().on('unauthorized', ()=> {
+                this.ecmAuth.login('wrong', 'name').on('unauthorized', ()=> {
                     done();
                 });
             });
@@ -128,13 +116,11 @@ describe('Ecm Auth test', function () {
                 this.authEcmMock.get201Response();
 
                 this.ecmAuth = new EcmAuth({
-                    username: 'admin',
-                    password: 'admin',
                     contextRoot: 'alfresco',
                     host: this.host
                 });
 
-                this.ecmAuth.login().on('success', ()=> {
+                this.ecmAuth.login('admin', 'admin').on('success', ()=> {
                     done();
                 });
             });
@@ -143,13 +129,11 @@ describe('Ecm Auth test', function () {
                 this.authEcmMock.get201Response();
 
                 this.ecmAuth = new EcmAuth({
-                    username: 'admin',
-                    password: 'admin',
                     contextRoot: 'alfresco',
                     host: this.host
                 });
 
-                this.ecmAuth.login();
+                this.ecmAuth.login('admin', 'admin');
 
                 this.authEcmMock.get204ResponseLogout();
 
@@ -178,13 +162,11 @@ describe('Ecm Auth test', function () {
             beforeEach(function (done) {
                 this.authEcmMock.get201Response('TICKET_22d7a5a83d78b9cc9666ec4e412475e5455b33bd');
                 this.ecmAuth = new EcmAuth({
-                    username: 'admin',
-                    password: 'admin',
                     contextRoot: 'alfresco',
                     host: this.host
                 });
 
-                this.ecmAuth.login().then(() => {
+                this.ecmAuth.login('admin', 'admin').then(() => {
                     done();
                 });
             });

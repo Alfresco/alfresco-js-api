@@ -13,8 +13,6 @@ describe('Basic configuration test', function () {
 
     it('default value', function () {
         var config = {
-            username: 'companyTiger',
-            password: 'tiger'
         };
 
         this.alfrescoJsApi = new AlfrescoApi(config);
@@ -26,18 +24,13 @@ describe('Basic configuration test', function () {
     it('config parameter should be reflected in the client', function () {
         var config = {
             host: 'http://testServer.com:1616',
-            contextRoot: 'strangeContextRoot',
-            username: 'companyTiger',
-            password: 'tiger'
+            contextRoot: 'strangeContextRoot'
         };
 
         this.alfrescoJsApi = new AlfrescoApi(config);
 
         expect(this.alfrescoJsApi.getClient().basePath)
             .equal('http://testServer.com:1616/strangeContextRoot/api/-default-/public/alfresco/versions/1');
-
-        expect(this.alfrescoJsApi.config.username).equal('companyTiger');
-        expect(this.alfrescoJsApi.config.password).equal('tiger');
     });
 
 });

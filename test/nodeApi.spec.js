@@ -14,14 +14,12 @@ describe('Node', function () {
 
         this.authResponseMock.get201Response();
         this.alfrescoJsApi = new AlfrescoApi({
-            username: 'admin',
-            password: 'admin',
             host: this.host
         });
 
-        this.alfrescoJsApi.login().then(() => {
+        this.alfrescoJsApi.login('admin', 'admin').then(() => {
             done();
-        },(error) => {
+        }, (error) => {
             console.log('error ' + JSON.stringify(error));
         });
     });

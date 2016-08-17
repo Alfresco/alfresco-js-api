@@ -6,11 +6,31 @@ Alfresco JS API
 
 _This project provides a JavaScript client API into the v1 Alfresco REST API_
 
-<a name="0.2.3"></a>
+<a name="0.3.0"></a>
 # [0.2.3](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.2.3) (2016-xx-xx)
 - [Integration Activiti Api #19](https://github.com/Alfresco/alfresco-js-api/issues/19)
 - [Node properties never parsed #35](https://github.com/Alfresco/alfresco-js-api/issues/35)
 - [Thumbnail ask for regenerate and Add image preview #36](https://github.com/Alfresco/alfresco-js-api/issues/36)
+
+## BREAKING CHANGES
+
+- Constructor and login changed
+Separation between constructor and login phase, decoupling login from constructor and host activiti added.
+
+Before:
+
+```javascript
+this.alfrescoJsApi = new AlfrescoApi({username, password, alfrescoHost, contextRoot, ticket});
+this.alfrescoJsApi.login();
+```
+    
+After:
+    
+```javascript
+this.alfrescoJsApi = new AlfrescoApi({alfrescoHost, activitiHost, contextRoot, ticket});
+this.alfrescoJsApi.login(username, password);
+```
+      
 
 
 <a name="0.2.2"></a>

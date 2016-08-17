@@ -15,13 +15,11 @@ describe('Activiti Task Api', function () {
         this.authResponseBpmMock.get200Response();
 
         this.alfrescoJsApi = new AlfrescoApi({
-            username: 'admin',
-            password: 'admin',
             host: this.hostActiviti,
             provider: 'BPM'
         });
 
-        this.alfrescoJsApi.login().then(() => {
+        this.alfrescoJsApi.login('admin', 'admin').then(() => {
             done();
         });
     });

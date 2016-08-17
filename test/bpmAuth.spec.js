@@ -18,12 +18,10 @@ describe('Bpm Auth test', function () {
             this.authBpmMock.get200Response();
 
             this.bpmAuth = new BpmAuth({
-                hostActiviti: this.host,
-                username: 'admin',
-                password: 'admin'
+                hostActiviti: this.host
             });
 
-            this.bpmAuth.login().then((data) => {
+            this.bpmAuth.login('admin', 'admin').then((data) => {
                 expect(data).to.be.equal('Basic YWRtaW46YWRtaW4=');
                 done();
             }, function () {
@@ -36,12 +34,10 @@ describe('Bpm Auth test', function () {
             this.authBpmMock.get200Response();
 
             this.bpmAuth = new BpmAuth({
-                hostActiviti: this.host,
-                username: 'admin',
-                password: 'admin'
+                hostActiviti: this.host
             });
 
-            this.bpmAuth.login().then(() => {
+            this.bpmAuth.login('admin', 'admin').then(() => {
                 expect(this.bpmAuth.isLoggedIn()).to.be.equal(true);
                 done();
             }, function () {
@@ -53,11 +49,9 @@ describe('Bpm Auth test', function () {
             this.authBpmMock.get200Response();
 
             this.bpmAuth = new BpmAuth({
-                hostActiviti: this.host,
-                username: 'admin',
-                password: 'admin'
+                hostActiviti: this.host
             });
-            this.bpmAuth.login();
+            this.bpmAuth.login('admin', 'admin');
 
             this.authBpmMock.get200ResponseLogout();
 
@@ -72,14 +66,12 @@ describe('Bpm Auth test', function () {
         it('login should return an error if wrong credential are used 401 the login fails', function (done) {
 
             this.bpmAuth = new BpmAuth({
-                hostActiviti: this.host,
-                username: 'wrong',
-                password: 'name'
+                hostActiviti: this.host
             });
 
             this.authBpmMock.get401Response();
 
-            this.bpmAuth.login().then(function () {
+            this.bpmAuth.login('wrong', 'name').then(function () {
             }, function (error) {
                 expect(error.status).to.be.equal(401);
                 done();
@@ -92,12 +84,10 @@ describe('Bpm Auth test', function () {
                 this.authBpmMock.get401Response();
 
                 this.bpmAuth = new BpmAuth({
-                    hostActiviti: this.host,
-                    username: 'wrong',
-                    password: 'name'
+                    hostActiviti: this.host
                 });
 
-                this.bpmAuth.login().on('unauthorized', ()=> {
+                this.bpmAuth.login('wrong', 'name').on('unauthorized', ()=> {
                     done();
                 });
             });
@@ -106,12 +96,10 @@ describe('Bpm Auth test', function () {
                 this.authBpmMock.get200Response();
 
                 this.bpmAuth = new BpmAuth({
-                    hostActiviti: this.host,
-                    username: 'admin',
-                    password: 'admin'
+                    hostActiviti: this.host
                 });
 
-                this.bpmAuth.login().on('success', ()=> {
+                this.bpmAuth.login('admin', 'admin').on('success', ()=> {
                     done();
                 });
             });
@@ -120,12 +108,10 @@ describe('Bpm Auth test', function () {
                 this.authBpmMock.get200Response();
 
                 this.bpmAuth = new BpmAuth({
-                    hostActiviti: this.host,
-                    username: 'admin',
-                    password: 'admin'
+                    hostActiviti: this.host
                 });
 
-                this.bpmAuth.login();
+                this.bpmAuth.login('admin', 'admin');
 
                 this.authBpmMock.get200ResponseLogout();
 
@@ -140,12 +126,10 @@ describe('Bpm Auth test', function () {
             beforeEach(function (done) {
                 this.authBpmMock.get200Response();
                 this.bpmAuth = new BpmAuth({
-                    hostActiviti: this.host,
-                    username: 'admin',
-                    password: 'admin'
+                    hostActiviti: this.host
                 });
 
-                this.bpmAuth.login().then(() => {
+                this.bpmAuth.login('admin', 'admin').then(() => {
                     done();
                 });
             });

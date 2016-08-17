@@ -17,9 +17,6 @@ class EcmAuth extends AlfrescoApiClient {
 
         if (this.config.ticket) {
             this.setTicket(config.ticket);
-        } else {
-            this.authentications.basicAuth.username = this.config.username;
-            this.authentications.basicAuth.password = this.config.password;
         }
 
         Emitter.call(this);
@@ -27,10 +24,15 @@ class EcmAuth extends AlfrescoApiClient {
 
     /**
      * login Alfresco API
+     * username:   // Username to login
+     * password:   // Password to login
      *
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
-    login() {
+    login(username, password) {
+        this.authentications.basicAuth.username = username;
+        this.authentications.basicAuth.password = password;
+
         var authApi = new AlfrescoAuthRestApi.AuthenticationApi(this);
         var loginRequest = new AlfrescoAuthRestApi.LoginRequest();
 
