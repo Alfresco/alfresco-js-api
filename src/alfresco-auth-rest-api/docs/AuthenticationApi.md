@@ -82,16 +82,8 @@ Deletes logged in ticket (logout).
 
 ### Example
 ```javascript
-var AlfrescoAuthRestApi = require('alfresco-auth-rest-api');
-var defaultClient = AlfrescoAuthRestApi.ApiClient.default;
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoAuthRestApi.AuthenticationApi()
-apiInstance.deleteTicket().then(function() {
+this.alfrescoJsApi.ecmAuth.deleteTicket().then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -131,16 +123,8 @@ For example, you can pass the Authorization request header using Javascript:
 
 ### Example
 ```javascript
-var AlfrescoAuthRestApi = require('alfresco-auth-rest-api');
-var defaultClient = AlfrescoAuthRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoAuthRestApi.AuthenticationApi()
-apiInstance.validateTicket().then(function(data) {
+      
+this.alfrescoJsApi.ecmAuth.validateTicket().then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
