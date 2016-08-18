@@ -243,8 +243,9 @@ export interface AlfrescoApi {
     createFolder(name: string, relativePath: string, nodeId: string): any;
 
     isLoggedIn(): boolean;
-    login(): any;
+    login(username: string, password: string): any;
     logout(): any;
+    loginTicket(ticket: string): any;
 
     getDocumentThumbnailUrl(documentId: string): any;
     getContentUrl(documentId: string): any;

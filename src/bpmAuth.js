@@ -18,8 +18,8 @@ class BpmAuth extends AlfrescoApiClient {
 
     /**
      * login Activiti API
-     * username:   // Username to login
-     * password:   // Password to login
+     * @param  {String} username:   // Username to login
+     * @param  {String} password:   // Password to login
      *
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */

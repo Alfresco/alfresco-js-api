@@ -149,6 +149,36 @@ describe('Auth', function () {
 
                     expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(this.alfrescoJsApi.getClient().authentications.basicAuth.password);
                 });
+
+                it('Ticket login should be validate agianst the server if is valid', function (done) {
+                    var ticket = 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1' ;
+
+                    this.authResponseEcmMock.get200ValidTicket(ticket);
+
+                    this.alfrescoJsApi = new AlfrescoApi({
+                        host: this.host
+                    });
+
+                    this.alfrescoJsApi.loginTicket(ticket).then((data) => {
+                        expect(data).to.be.equal(ticket);
+                        done();
+                    });
+                });
+
+                it('Ticket login should be validate agianst the server d is NOT valid', function (done) {
+                    var ticket = 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1' ;
+
+                    this.authResponseEcmMock.get400Response();
+
+                    this.alfrescoJsApi = new AlfrescoApi({
+                        host: this.host
+                    });
+
+                    this.alfrescoJsApi.loginTicket(ticket).then((data) => {
+                    },()=> {
+                        done();
+                    });
+                });
             });
 
             describe('Logout Api', function () {
@@ -254,7 +284,6 @@ describe('Auth', function () {
                 this.alfrescoJsApi = new AlfrescoApi({
                     hostActiviti: this.hostActiviti,
                     provider: 'BPM'
-
                 });
 
                 this.alfrescoJsApi.login('wrong', 'name').then(function () {
@@ -271,7 +300,6 @@ describe('Auth', function () {
                 this.alfrescoJsApi = new AlfrescoApi({
                     hostActiviti: this.hostActiviti,
                     provider: 'BPM'
-
                 });
 
                 this.alfrescoJsApi.login(null, null).then(function () {
@@ -487,7 +515,6 @@ describe('Auth', function () {
                             host: this.host,
                             hostActiviti: this.hostActiviti,
                             provider: 'ALL'
-
                         });
 
                         this.alfrescoJsApi.login('wrong', 'name').on('unauthorized', ()=> {
@@ -503,7 +530,6 @@ describe('Auth', function () {
                             host: this.host,
                             hostActiviti: this.hostActiviti,
                             provider: 'ALL'
-
                         });
 
                         this.alfrescoJsApi.login('admin', 'admin').on('success', ()=> {
@@ -519,7 +545,6 @@ describe('Auth', function () {
                             host: this.host,
                             hostActiviti: this.hostActiviti,
                             provider: 'ALL'
-
                         });
 
                         this.alfrescoJsApi.login('admin', 'admin');

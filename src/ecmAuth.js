@@ -24,8 +24,8 @@ class EcmAuth extends AlfrescoApiClient {
 
     /**
      * login Alfresco API
-     * username:   // Username to login
-     * password:   // Password to login
+     * @param  {String} username:   // Username to login
+     * @param  {String} password:   // Password to login
      *
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
@@ -61,9 +61,38 @@ class EcmAuth extends AlfrescoApiClient {
     }
 
     /**
+     * validate the ticket present in this.config.ticket against the server
+     *
+     * @returns {Promise} A promise that returns  if resolved and {error} if rejected.
+     * */
+    validateTicket() {
+        var authApi = new AlfrescoAuthRestApi.AuthenticationApi(this);
+
+        this.promise = new Promise((resolve, reject) => {
+            authApi.validateTicket().then(
+                (data) => {
+                    this.setTicket(data.entry.id);
+                    this.promise.emit('success');
+                    resolve(data.entry.id);
+                },
+                (error) => {
+                    if (error.status === 401) {
+                        this.promise.emit('unauthorized');
+                    }
+                    this.promise.emit('error');
+                    reject(error);
+                });
+        });
+
+        Emitter(this.promise); // jshint ignore:line
+
+        return this.promise;
+    }
+
+    /**
      * logout Alfresco API
      *
-     * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
+     * @returns {Promise} A promise that returns { authentication ticket} if resolved and {error} if rejected.
      * */
     logout() {
         var authApi = new AlfrescoAuthRestApi.AuthenticationApi(this);

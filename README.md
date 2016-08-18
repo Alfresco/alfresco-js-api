@@ -139,14 +139,33 @@ this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
 
 ### Login with ticket ECM
 
+If you already know thw ticket when you ivoke the contructor you can pass it as parameter in the constructor oterwise you can call the login with ticket that will validate the ticket against the server
+
+
+###Login with ticket
+
+With this authentication the ticket is also validate against the server 
+
+```javascript
+var ticket = 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
+
+this.alfrescoJsApi.loginTicket(ticket).then(function (data) {
+             console.log('valid ticket you are logged in');
+         }, function (error) {
+             console.error(error);
+         });
+```
+
+###Ticket as parameter in the constructor
+
+With this authentication the ticket is not validated against the server 
+
 ```javascript
 this.alfrescoJsApi = new AlfrescoApi({ ticket:'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1', host:'http://127.0.0.1:8080'});
 
 ```
 
-
 ### Login with Username and Password BPM
-
 
 ```javascript
 this.alfrescoJsApi = new AlfrescoApi({ provider:'BPM' });
@@ -158,8 +177,6 @@ this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
 });
 
 ```
-
-
 
 ## Logout
 

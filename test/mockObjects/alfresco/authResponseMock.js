@@ -3,7 +3,7 @@
 var nock = require('nock');
 var BaseMock = require('../baseMock');
 
-class AuthResponseMock extends BaseMock{
+class AuthResponseMock extends BaseMock {
 
     constructor(host, username, password) {
         super(host);
@@ -21,6 +21,14 @@ class AuthResponseMock extends BaseMock{
                 'password': this.password
             })
             .reply(201, {'entry': {'id': returnMockTicket, 'userId': 'admin'}});
+    }
+
+    get200ValidTicket(forceTicket) {
+        var returnMockTicket = forceTicket || 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
+
+        nock(this.host, {'encodedQueryParams': true})
+            .get('/alfresco/api/-default-/public/authentication/versions/1/tickets/-me-')
+            .reply(200, {'entry': {'id': returnMockTicket}});
     }
 
     get403Response() {

@@ -37,6 +37,10 @@ class AlfrescoApi {
         this.bpmAuth = new BpmAuth(this.config);
         this.ecmAuth = new EcmAuth(this.config);
 
+        if (config.ticket) {
+            this.initObjects();
+        }
+
         Emitter.call(this);
     }
 
@@ -93,8 +97,8 @@ class AlfrescoApi {
 
     /**
      * login Alfresco API
-     * username:   // Username to login
-     * password:   // Password to login
+     * @param  {String} username:   // Username to login
+     * @param  {String} password:   // Password to login
      *
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
@@ -124,6 +128,24 @@ class AlfrescoApi {
 
             return bpmEcmPromise;
         }
+    }
+
+    /**
+     * login Alfresco API
+     *
+     * @param  {String} ticket // alfresco ticket
+     *
+     * @returns {Promise} A promise that returns { authentication ticket} if resolved and {error} if rejected.
+     * */
+    loginTicket(ticket) {
+        this.config.ticket = ticket;
+        var promiseValidate = this.ecmAuth.validateTicket();
+
+        promiseValidate.then(()=> {
+            this.initObjects();
+        });
+
+        return promiseValidate;
     }
 
     _loginBPMECM(username, password) {
