@@ -273,6 +273,7 @@ List models (process, form, decision rule or app)
 
 var opts = { 
   'filter': "filter_example", // String | filter
+  'filterText': "filterText", // String | filterText
   'sort': "sort_example", // String | sort
   'modelType': 56, // Integer | modelType
   'referenceId': 789 // Integer | referenceId
