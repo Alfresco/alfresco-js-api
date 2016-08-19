@@ -8,17 +8,17 @@ class BaseMock {
         this.host = host ? host : 'http://127.0.0.1:8080';
     }
 
-    get200Response() {
+    get200GenericResponse(scriptSlug) {
         nock(this.host, {'encodedQueryParams': true})
-            .get(this.scriptSlug)
-            .reply(200, {
-                'randomStructure': {
-                    'exampleInt': 1,
-                    'exampleString': 'string test'
-                }
-            });
+            .get(scriptSlug)
+            .reply(200);
     }
 
+    put200GenericResponse(scriptSlug) {
+        nock(this.host, {'encodedQueryParams': true})
+            .put(scriptSlug)
+            .reply(200);
+    }
     rec() {
         nock.recorder.rec();
     }

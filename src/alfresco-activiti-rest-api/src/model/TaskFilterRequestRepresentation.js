@@ -30,12 +30,12 @@
    * @class
    */
   var exports = function() {
-    var _this = this;
 
+      if(!this.hasOwnProperty('filter') && !this.hasOwnProperty('filterId')){
+          this.filter = new TaskFilterRepresentation();
+      }
 
-
-
-
+      var _this = this;
 
   };
 
@@ -53,15 +53,19 @@
       if (data.hasOwnProperty('appDefinitionId')) {
         obj['appDefinitionId'] = ApiClient.convertToType(data['appDefinitionId'], 'Integer');
       }
+
       if (data.hasOwnProperty('filter')) {
         obj['filter'] = TaskFilterRepresentation.constructFromObject(data['filter']);
       }
+
       if (data.hasOwnProperty('filterId')) {
         obj['filterId'] = ApiClient.convertToType(data['filterId'], 'Integer');
       }
+
       if (data.hasOwnProperty('page')) {
         obj['page'] = ApiClient.convertToType(data['page'], 'Integer');
       }
+
       if (data.hasOwnProperty('size')) {
         obj['size'] = ApiClient.convertToType(data['size'], 'Integer');
       }

@@ -139,7 +139,7 @@ this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
 
 ### Login with ticket ECM
 
-If you already know thw ticket when you ivoke the contructor you can pass it as parameter in the constructor oterwise you can call the login with ticket that will validate the ticket against the server
+If you already know thw ticket when you invoke the constructor you can pass it as parameter in the constructor otherwise you can call the login with ticket that will validate the ticket against the server
 
 
 ###Login with ticket
@@ -233,7 +233,8 @@ this.alfrescoJsApi.logout().on('logout', function(){
 
 # ECM
 
-A complete list of all the ECM methods is available here : [Core API](/src/alfresco-core-rest-api) below you can find some common examples.
+A complete list of all the ECM methods is available here : [Core API](/src/alfresco-core-rest-api). 
+Below you can find some common examples.
 
 
 ## Get File or Folder Info
@@ -539,16 +540,136 @@ this.alfrescoJsApi.webScript.executeWebScript('GET', 'mytasks', null, 'share', '
 
 # BPM
 
-A complete list of all the BPM methods is available here :[Activiti API](/src/alfresco-activiti-rest-api) below you can find some common examples.    
+A complete list of all the BPM methods is available her[Activiti API](/src/alfresco-activiti-rest-api). 
+Below you can find some common examples.    
 
 ## Task Api
 
+### List Task
+
 listTasks(requestNode)
 
->
+>return a list of task based on the requestNode query
+
+#### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **requestNode** | [**Representation**](/src/alfresco-activiti-rest-api/docs/TaskQueryRequestRepresentation.md)| requestNode | 
+
+#### Example
 
 ```javascript
+var requestNode = new this.alfrescoJsApi.activiti.TaskQueryRequestRepresentation();
  
+this.alfrescoJsApi.activiti.taskApi.listTasks(requestNode).then(function (data) {
+ console.log('listTasks ' + data);    
+}, function (error) {
+ console.log('Error' + error);
+});
+```
+
+### Get Task
+
+getTask(taskId)
+
+>return the [**TaskRepresentation**](/src/alfresco-activiti-rest-api/docs/TaskRepresentation.md)  of single task by id
+
+#### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **taskId** | **String**| taskId | 
+ 
+#### Example
+
+```javascript
+
+var taskId = '10'; // String | taskId
+
+this.alfrescoJsApi.activiti.taskApi.getTask(taskId).then(function (data) {
+    console.log('Task representation ' + data);    
+}, function (error) {
+    console.log('Error' + error);
+});
+```
+
+### Filter Task
+
+filterTasks(requestNode)
+
+>return the [**ResultListDataRepresentation**](/src/alfresco-activiti-rest-api/docs/ResultListDataRepresentation.md) that is a list of all the task filered
+
+#### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **requestNode** | [**TaskFilterRequestRepresentation**](/src/alfresco-activiti-rest-api/docs/TaskFilterRequestRepresentation.md)| requestNode | 
+
+
+#### Example
+
+```javascript
+
+var requestNode = new this.alfrescoJsApi.activiti.TaskFilterRequestRepresentation();
+requestNode.appDefinitionId = 1;
+
+this.alfrescoJsApi.activiti.taskApi.filterTasks(requestNode).then(function (data) {
+    console.log('Task filter list ' + data);    
+}, function (error) {
+    console.log('Error' + error);
+});
+```
+
+### Complete Task
+
+completeTask(taskId)
+
+>To complete a task (standalone or without a task form) :
+
+#### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **taskId** | **String**| taskId | 
+
+#### Example
+
+```javascript
+
+var taskId = '10'; // String | taskId
+
+this.alfrescoJsApi.activiti.taskApi.completeTask(taskId).then(function () {
+    console.log('Task completed');    
+}, function (error) {
+    console.log('Error' + error);
+});
+```
+
+### Complete Task Form
+
+completeTaskForm(taskId, completeTaskFormRepresentation)
+
+>Complete a Task Form
+
+#### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **taskId** | **String**| taskId | 
+ **completeTaskFormRepresentation** | [**CompleteFormRepresentation**](/src/alfresco-activiti-rest-api/docs/CompleteFormRepresentation.md)| completeTaskFormRepresentation | 
+
+#### Example
+
+```javascript
+
+var taskId = '10'; // String | taskId
+
+this.alfrescoJsApi.activiti.taskApi.completeTaskForm(taskId, completeTaskFormRepresentation).then(function () {
+    console.log('Task completed');    
+}, function (error) {
+    console.log('Error' + error);
+});
 ```
 
 # Development

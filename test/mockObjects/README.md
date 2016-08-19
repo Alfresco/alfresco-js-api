@@ -326,6 +326,7 @@ tasksMock = new TasksMock(host);
 Method | Description  |
 ------------- | ------------- |
 tasksMock.get200Response()| | 
+tasksMock.get200ResponseGetTask| | 
 tasksMock.rec()| | 
 tasksMock.play()| |
 tasksMock.cleanAll()| |
