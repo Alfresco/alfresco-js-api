@@ -55151,6 +55151,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   var exports = function exports() {
+
+    if (!this.hasOwnProperty('filter') && !this.hasOwnProperty('filterId')) {
+      this.filter = new TaskFilterRepresentation();
+    }
+
     var _this = this;
   };
 
@@ -55168,15 +55173,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       if (data.hasOwnProperty('appDefinitionId')) {
         obj['appDefinitionId'] = ApiClient.convertToType(data['appDefinitionId'], 'Integer');
       }
+
       if (data.hasOwnProperty('filter')) {
         obj['filter'] = TaskFilterRepresentation.constructFromObject(data['filter']);
       }
+
       if (data.hasOwnProperty('filterId')) {
         obj['filterId'] = ApiClient.convertToType(data['filterId'], 'Integer');
       }
+
       if (data.hasOwnProperty('page')) {
         obj['page'] = ApiClient.convertToType(data['page'], 'Integer');
       }
+
       if (data.hasOwnProperty('size')) {
         obj['size'] = ApiClient.convertToType(data['size'], 'Integer');
       }
@@ -74172,6 +74181,131 @@ var TasksMock = function (_BaseMock) {
                 }]
             });
         }
+    }, {
+        key: 'get200ResponseGetTask',
+        value: function get200ResponseGetTask(taskId) {
+            nock(this.host, { 'encodedQueryParams': true }).get('/activiti-app/api/enterprise/tasks/' + taskId).reply(200, {
+                'id': '10',
+                'name': 'Upload Document',
+                'description': null,
+                'category': null,
+                'assignee': { 'id': 1, 'firstName': null, 'lastName': 'Administrator', 'email': 'admin' },
+                'created': '2016-08-05T17:39:36.159+0000',
+                'dueDate': null,
+                'endDate': null,
+                'duration': null,
+                'priority': 50,
+                'parentTaskId': null,
+                'parentTaskName': null,
+                'processInstanceId': '5',
+                'processInstanceName': null,
+                'processDefinitionId': 'Sales:1:4',
+                'processDefinitionName': 'Sales',
+                'processDefinitionDescription': null,
+                'processDefinitionKey': 'Sales',
+                'processDefinitionCategory': 'http://www.activiti.org/processdef',
+                'processDefinitionVersion': 1,
+                'processDefinitionDeploymentId': '1',
+                'formKey': '1',
+                'processInstanceStartUserId': '1',
+                'initiatorCanCompleteTask': true,
+                'adhocTaskCanBeReassigned': false,
+                'taskDefinitionKey': 'sid-58C42FE9-EDAC-4F7B-B36B-F13DF0A8CE70',
+                'executionId': '5',
+                'involvedPeople': [],
+                'memberOfCandidateGroup': false,
+                'memberOfCandidateUsers': false,
+                'managerOfCandidateGroup': false
+            });
+        }
+    }, {
+        key: 'get400TaskFilter',
+        value: function get400TaskFilter() {
+            nock(this.host, { 'encodedQueryParams': true }).post('/activiti-app/api/enterprise/tasks/filter', {}).reply(400, {
+                'message': 'A valid filterId or filter params must be provided',
+                'messageKey': 'GENERAL.ERROR.BAD-REQUEST'
+            });
+        }
+    }, {
+        key: 'get200TaskFilter',
+        value: function get200TaskFilter() {
+            nock(this.host, { 'encodedQueryParams': true }).post('/activiti-app/api/enterprise/tasks/filter', { 'filter': {}, 'appDefinitionId': 1 }).reply(200, {
+                'size': 2,
+                'total': 2,
+                'start': 0,
+                'data': [{
+                    'id': '7506',
+                    'name': 'Upload Document',
+                    'description': null,
+                    'category': null,
+                    'assignee': { 'id': 1, 'firstName': null, 'lastName': 'Administrator', 'email': 'admin' },
+                    'created': '2016-08-12T15:37:50.963+0000',
+                    'dueDate': null,
+                    'endDate': null,
+                    'duration': null,
+                    'priority': 50,
+                    'parentTaskId': null,
+                    'parentTaskName': null,
+                    'processInstanceId': '7501',
+                    'processInstanceName': null,
+                    'processDefinitionId': 'Sales:1:4',
+                    'processDefinitionName': 'Sales',
+                    'processDefinitionDescription': null,
+                    'processDefinitionKey': 'Sales',
+                    'processDefinitionCategory': 'http://www.activiti.org/processdef',
+                    'processDefinitionVersion': 1,
+                    'processDefinitionDeploymentId': '1',
+                    'formKey': '1',
+                    'processInstanceStartUserId': null,
+                    'initiatorCanCompleteTask': false,
+                    'adhocTaskCanBeReassigned': false,
+                    'taskDefinitionKey': 'sid-58C42FE9-EDAC-4F7B-B36B-F13DF0A8CE70',
+                    'executionId': '7501',
+                    'memberOfCandidateGroup': false,
+                    'memberOfCandidateUsers': false,
+                    'managerOfCandidateGroup': false
+                }, {
+                    'id': '5006',
+                    'name': 'Upload Document',
+                    'description': null,
+                    'category': null,
+                    'assignee': { 'id': 1, 'firstName': null, 'lastName': 'Administrator', 'email': 'admin' },
+                    'created': '2016-08-10T09:39:36.837+0000',
+                    'dueDate': null,
+                    'endDate': null,
+                    'duration': null,
+                    'priority': 50,
+                    'parentTaskId': null,
+                    'parentTaskName': null,
+                    'processInstanceId': '5001',
+                    'processInstanceName': null,
+                    'processDefinitionId': 'Sales:1:4',
+                    'processDefinitionName': 'Sales',
+                    'processDefinitionDescription': null,
+                    'processDefinitionKey': 'Sales',
+                    'processDefinitionCategory': 'http://www.activiti.org/processdef',
+                    'processDefinitionVersion': 1,
+                    'processDefinitionDeploymentId': '1',
+                    'formKey': '1',
+                    'processInstanceStartUserId': null,
+                    'initiatorCanCompleteTask': false,
+                    'adhocTaskCanBeReassigned': false,
+                    'taskDefinitionKey': 'sid-58C42FE9-EDAC-4F7B-B36B-F13DF0A8CE70',
+                    'executionId': '5001',
+                    'memberOfCandidateGroup': false,
+                    'memberOfCandidateUsers': false,
+                    'managerOfCandidateGroup': false
+                }]
+            });
+        }
+    }, {
+        key: 'get404CompleteTask',
+        value: function get404CompleteTask(taskid) {
+            nock(this.host, { 'encodedQueryParams': true }).put('/activiti-app/api/enterprise/tasks/' + taskid + '/action/complete').reply(404, {
+                'message': 'Task with id: ' + taskid + ' does not exist',
+                'messageKey': 'GENERAL.ERROR.NOT-FOUND'
+            });
+        }
     }]);
 
     return TasksMock;
@@ -74834,14 +74968,14 @@ var BaseMock = function () {
     }
 
     _createClass(BaseMock, [{
-        key: 'get200Response',
-        value: function get200Response() {
-            nock(this.host, { 'encodedQueryParams': true }).get(this.scriptSlug).reply(200, {
-                'randomStructure': {
-                    'exampleInt': 1,
-                    'exampleString': 'string test'
-                }
-            });
+        key: 'get200GenericResponse',
+        value: function get200GenericResponse(scriptSlug) {
+            nock(this.host, { 'encodedQueryParams': true }).get(scriptSlug).reply(200);
+        }
+    }, {
+        key: 'put200GenericResponse',
+        value: function put200GenericResponse(scriptSlug) {
+            nock(this.host, { 'encodedQueryParams': true }).put(scriptSlug).reply(200);
         }
     }, {
         key: 'rec',
