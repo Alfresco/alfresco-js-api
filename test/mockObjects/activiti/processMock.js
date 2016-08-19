@@ -11,11 +11,7 @@ class ProcessMock extends BaseMock {
 
     get200Response() {
         nock(this.host, {'encodedQueryParams': true})
-            .post('/activiti-app/api/enterprise/process-instances/query', {
-                'page': 0,
-                'sort': 'created-desc',
-                'state': 'all'
-            })
+            .post('/activiti-app/api/enterprise/process-instances/query')
             .reply(200, {
                 'size': 2,
                 'total': 2,

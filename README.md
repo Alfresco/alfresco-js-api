@@ -36,41 +36,66 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
 - [Authentication JS-API](#authentication-js-api)
   * [Login](#login)
     + [Login with Username and Password BPM and ECM](#login-with-username-and-password-bpm-and-ecm)
+      - [Example](#example)
     + [Login with Username and Password ECM](#login-with-username-and-password-ecm)
+      - [Example](#example-1)
     + [Login with ticket ECM](#login-with-ticket-ecm)
+    + [Login with ticket](#login-with-ticket)
+      - [Example](#example-2)
+    + [Ticket as parameter in the constructor](#ticket-as-parameter-in-the-constructor)
+      - [Example](#example-3)
     + [Login with Username and Password BPM](#login-with-username-and-password-bpm)
+    + [Example](#example-4)
   * [Logout](#logout)
+    + [Example](#example-5)
   * [isLoggedIn](#isloggedin)
+    + [Example](#example-6)
   * [Events login/logout](#events-loginlogout)
+    + [Example](#example-7)
 - [ECM](#ecm)
   * [Get File or Folder Info](#get-file-or-folder-info)
+    + [Example](#example-8)
   * [Get Folder Children Info](#get-folder-children-info)
+    + [Example](#example-9)
   * [Create Folder](#create-folder)
+    + [Example](#example-10)
+    + [Example](#example-11)
   * [Upload File](#upload-file)
+    + [Example](#example-12)
   * [Events Upload File](#events-upload-file)
+    + [Example](#example-13)
   * [Delete File or Folder](#delete-file-or-folder)
+    + [Example](#example-14)
   * [Delete File or Folder Permanent](#delete-file-or-folder-permanent)
+    + [Example](#example-15)
   * [Get thumbnail Url](#get-thumbnail-url)
+    + [Example](#example-16)
   * [Get preview Url](#get-preview-url)
+    + [Example](#example-17)
   * [Get content Url](#get-content-url)
+    + [Example](#example-18)
   * [Custom web scripts call](#custom-web-scripts-call)
 - [BPM](#bpm)
   * [Task Api](#task-api)
     + [List Task](#list-task)
       - [Parameters](#parameters)
-      - [Example](#example)
+      - [Example](#example-19)
     + [Get Task](#get-task)
       - [Parameters](#parameters-1)
-      - [Example](#example-1)
+      - [Example](#example-20)
     + [Filter Task](#filter-task)
       - [Parameters](#parameters-2)
-      - [Example](#example-2)
+      - [Example](#example-21)
     + [Complete Task](#complete-task)
       - [Parameters](#parameters-3)
-      - [Example](#example-3)
+      - [Example](#example-22)
     + [Complete Task Form](#complete-task-form)
       - [Parameters](#parameters-4)
-      - [Example](#example-4)
+      - [Example](#example-23)
+  * [Process Api](#process-api)
+    + [Get Process Instances](#get-process-instances)
+      - [Parameters](#parameters-5)
+      - [Example](#example-24)
 - [Development](#development)
 - [Release History](#release-history)
 
@@ -126,6 +151,7 @@ ticket| (Optional only if you want login with the ticket see example below)| |
 
 ### Login with Username and Password BPM and ECM
 
+#### Example
 ```javascript
 this.alfrescoJsApi = new AlfrescoApi({ provider:'ALL' });
 
@@ -139,6 +165,7 @@ this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
 
 ### Login with Username and Password ECM
 
+#### Example
 ```javascript
 this.alfrescoJsApi = new AlfrescoApi();
 
@@ -157,10 +184,11 @@ this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
 If you already know thw ticket when you invoke the constructor you can pass it as parameter in the constructor otherwise you can call the login with ticket that will validate the ticket against the server
 
 
-###Login with ticket
+### Login with ticket
 
-With this authentication the ticket is also validate against the server 
-
+This authentication validate also the ticket against the server
+ 
+#### Example
 ```javascript
 var ticket = 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
 
@@ -171,10 +199,11 @@ this.alfrescoJsApi.loginTicket(ticket).then(function (data) {
          });
 ```
 
-###Ticket as parameter in the constructor
+### Ticket as parameter in the constructor
 
 With this authentication the ticket is not validated against the server 
 
+#### Example
 ```javascript
 this.alfrescoJsApi = new AlfrescoApi({ ticket:'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1', host:'http://127.0.0.1:8080'});
 
@@ -182,6 +211,7 @@ this.alfrescoJsApi = new AlfrescoApi({ ticket:'TICKET_4479f4d3bb155195879bfbb8d5
 
 ### Login with Username and Password BPM
 
+### Example
 ```javascript
 this.alfrescoJsApi = new AlfrescoApi({ provider:'BPM' });
 
@@ -196,6 +226,8 @@ this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
 ## Logout
 
 logout()
+
+### Example
 
 ```javascript
 
@@ -212,6 +244,8 @@ this.alfrescoJsApi.logout().then(function (data) {
 isLoggedIn()
 
 > return true if you are logged in false if you are not.
+
+### Example
 
 ```javascript
 
@@ -230,6 +264,8 @@ if (isLoggedIn) {
 * unauthorized (If this event is triggered a call to the Api was unauthorized)
 * success (If this event is triggered the login was success you can use this event instead the login promise)
 * logout (If this event is triggered the client is successfully logout)
+
+### Example
 
 ```javascript
 
@@ -258,6 +294,8 @@ getNodeInfo(fileOrFolderId, opts)
 
 >Get information for the File/Folder with the identifier nodeId.
 
+### Example
+
 ```javascript
 
 var fileOrFolderId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
@@ -276,7 +314,9 @@ getNodeChildren(fileOrFolderId, opts)
 >Minimal information for each child is returned by default.
 You can use the include parameter to return additional information.
 returns a promise with the Info about the children of the node if resolved and {error} if rejected.
-  
+ 
+### Example
+
 ```javascript
 
 var folderNodeId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
@@ -293,7 +333,9 @@ this.alfrescoJsApi.nodes.getNodeChildren(folderNodeId).then(function (data) {
 createFolder(name, relativePath, nodeId, opts) 
 
 >createFolder return a promise that is resolved if the folder is created and {error} if rejected.
-     
+ 
+### Example
+
 ```javascript
 
 this.alfrescoJsApi.nodes.createFolder('newFolderName').then(function (data) {
@@ -325,6 +367,7 @@ this.alfrescoJsApi.nodes.createFolder('newFolderName', 'folderA/folderB', parent
 createFolderAutoRename(name, relativePath, nodeId, opts)
 >is the same of createFolder(name, relativePath, nodeId, {autoRename: true}) is just syntactic sugar
 
+### Example
 
 ```javascript
 
@@ -348,6 +391,7 @@ File Definition are generally retrieved from a FileList object returned as a res
 *Node File Definition
 File Definition are generally retrieved from a read Stram
 
+### Example
 
 ```javascript
  
@@ -417,6 +461,8 @@ promiseUpload.abort();
 * error 
 * unauthorized 
 
+### Example
+
 ```javascript
 var fs = require('fs');
 
@@ -448,7 +494,9 @@ deleteNode(fileOrFolderId)
 
 >Delete File/Folder with the identifier nodeId, if the nodeId is a folder, then its children are also deleted
 Deleted nodes move to the trash bin is still possible to recover it
-     
+
+### Example
+
 ```javascript
 
 var fileOrFolderId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
@@ -467,7 +515,9 @@ deleteNodePermanent(fileOrFolderId)
 
 >Delete File/Folder with the identifier nodeId, if the nodeId is a folder, then its children are also deleted
 If Deleted Permanent is used will not be possible recover the files
-     
+
+### Example
+
 ```javascript
 
 var fileOrFolderId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
@@ -484,6 +534,8 @@ this.alfrescoJsApi.nodes.deleteNodePermanent(fileOrFolderId).then(function (data
   
 getDocumentThumbnailUrl(documentId)
 
+### Example
+
 ```javascript
 
 var thumbnailUrl = this.alfrescoJsApi.content.getDocumentThumbnailUrl('1a0b110f-1e09-4ca2-b367-fe25e4964a4');
@@ -494,6 +546,8 @@ var thumbnailUrl = this.alfrescoJsApi.content.getDocumentThumbnailUrl('1a0b110f-
   
 getDocumentPreviewUrl(documentId)
 
+### Example
+
 ```javascript
 
 var previewUrl = this.alfrescoJsApi.content.getDocumentPreviewUrl('1a0b110f-1e09-4ca2-b367-fe25e4964a4');
@@ -503,6 +557,8 @@ var previewUrl = this.alfrescoJsApi.content.getDocumentPreviewUrl('1a0b110f-1e09
 ## Get content Url
   
 getContentUrl(documentId)
+
+### Example
 
 ```javascript
 
@@ -560,6 +616,8 @@ Below you can find some common examples.
 
 ## Task Api
 
+Below you can find some example relative to the Activiti process api for all the possible method go to [Task Api documentation](/src/alfresco-activiti-rest-api/docs/TaskApi.md)
+
 ### List Task
 
 listTasks(requestNode)
@@ -568,9 +626,9 @@ listTasks(requestNode)
 
 #### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **requestNode** | [**Representation**](/src/alfresco-activiti-rest-api/docs/TaskQueryRequestRepresentation.md)| requestNode | 
+Name | Type | Description  
+------------- | ------------- | ------------- 
+ **requestNode** | [**Representation**](/src/alfresco-activiti-rest-api/docs/TaskQueryRequestRepresentation.md)| requestNode 
 
 #### Example
 
@@ -592,9 +650,9 @@ getTask(taskId)
 
 #### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **taskId** | **String**| taskId | 
+Name | Type | Description  
+------------- | ------------- | ------------- 
+ **taskId** | **String**| taskId 
  
 #### Example
 
@@ -617,9 +675,9 @@ filterTasks(requestNode)
 
 #### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **requestNode** | [**TaskFilterRequestRepresentation**](/src/alfresco-activiti-rest-api/docs/TaskFilterRequestRepresentation.md)| requestNode | 
+Name | Type | Description  
+------------- | ------------- | ------------- 
+ **requestNode** | [**TaskFilterRequestRepresentation**](/src/alfresco-activiti-rest-api/docs/TaskFilterRequestRepresentation.md)| requestNode 
 
 
 #### Example
@@ -644,9 +702,9 @@ completeTask(taskId)
 
 #### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **taskId** | **String**| taskId | 
+Name | Type | Description  
+------------- | ------------- | ------------- 
+ **taskId** | **String**| taskId 
 
 #### Example
 
@@ -669,10 +727,10 @@ completeTaskForm(taskId, completeTaskFormRepresentation)
 
 #### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **taskId** | **String**| taskId | 
- **completeTaskFormRepresentation** | [**CompleteFormRepresentation**](/src/alfresco-activiti-rest-api/docs/CompleteFormRepresentation.md)| completeTaskFormRepresentation | 
+Name | Type | Description  
+------------- | ------------- | -------------
+ **taskId** | **String**| taskId 
+ **completeTaskFormRepresentation** | [**CompleteFormRepresentation**](/src/alfresco-activiti-rest-api/docs/CompleteFormRepresentation.md)| completeTaskFormRepresentation 
 
 #### Example
 
@@ -686,6 +744,54 @@ this.alfrescoJsApi.activiti.taskApi.completeTaskForm(taskId, completeTaskFormRep
     console.log('Error' + error);
 });
 ```
+
+## Process Api
+
+Below you can find some example relative to the Activiti process api for all the possible method go to [Process Api documentation](/src/alfresco-activiti-rest-api/docs/ProcessApi.md)
+
+
+### Get Process Instances
+
+getProcessInstances(requestNode)
+
+>Retrieve a list of process instances [**ResultListDataRepresentation**](/src/alfresco-activiti-rest-api/docs/ResultListDataRepresentation.md)
+
+#### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **requestNode** | [**ProcessFilterRequestRepresentation**](/src/alfresco-activiti-rest-api/docs/ProcessFilterRequestRepresentation.md)| requestNode | 
+
+#### Example
+
+```javascript
+var requestNode = new this.alfrescoJsApi.activiti.ProcessFilterRequestRepresentation();
+
+this.alfrescoJsApi.activiti.processApi.getProcessInstances(requestNode).then(function (data) {
+    console.log('All processes' + data);    
+}, function (error) {
+    console.log('Error' + error);
+});
+```
+
+Filtered process:
+
+```javascript
+ var requestNode = new this.alfrescoJsApi.activiti.ProcessFilterRequestRepresentation();
+
+requestNode.page = 0;
+requestNode.sort = 'created-desc';
+requestNode.state = 'completed';
+
+this.alfrescoJsApi.activiti.processApi.getProcessInstances(requestNode).then(function () {
+   console.log('All processes completed' + data);    
+}, function (error) {
+   console.log('Error' + error);
+});
+```
+
+
+
 
 # Development
 

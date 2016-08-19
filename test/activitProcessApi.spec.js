@@ -24,15 +24,33 @@ describe('Activiti Process Api', function () {
         });
     });
 
-    it('get activiti Process list', function (done) {
+    it('get activiti Process list filtered', function (done) {
         this.processMock.get200Response();
 
-        this.alfrescoJsApi.activiti.processApi.getProcessInstances('{"page":0,"sort":"created-desc","state":"all"}').then((data)=> {
+        var requestNode = new this.alfrescoJsApi.activiti.ProcessFilterRequestRepresentation();
+
+        requestNode.page = 0;
+        requestNode.sort = 'created-desc';
+        requestNode.state = 'completed';
+
+        this.alfrescoJsApi.activiti.processApi.getProcessInstances(requestNode).then((data)=> {
             expect(data.data[0].name).equal('Process Test Api - July 26th 2016');
             expect(data.data[1].name).equal('Process Test Api - July 26th 2016');
             expect(data.size).equal(2);
             done();
         });
-
     });
+
+    it('get activiti Process list', function (done) {
+        this.processMock.get200Response();
+
+        var requestNode = new this.alfrescoJsApi.activiti.ProcessFilterRequestRepresentation();
+
+        this.alfrescoJsApi.activiti.processApi.getProcessInstances(requestNode).then((data)=> {
+            expect(data.data[0].name).equal('Process Test Api - July 26th 2016');
+            expect(data.data[1].name).equal('Process Test Api - July 26th 2016');
+            done();
+        });
+    });
+
 });

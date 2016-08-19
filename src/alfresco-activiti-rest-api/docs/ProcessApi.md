@@ -260,7 +260,7 @@ Retrieve a list of process instances
 ### Example
 ```javascript
 
-var requestNode = new this.alfrescoJsApi.activiti.ObjectNode();
+var requestNode = new this.alfrescoJsApi.activiti.ProcessFilterRequestRepresentation();
 
 this.alfrescoJsApi.activiti.processApi.getProcessInstances(requestNode);
 ```
@@ -269,7 +269,7 @@ this.alfrescoJsApi.activiti.processApi.getProcessInstances(requestNode);
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **requestNode** | [**ObjectNode**](ObjectNode.md)| requestNode | 
+ **requestNode** | [**ProcessFilterRequestRepresentation**](ProcessFilterRequestRepresentation.md)| requestNode | 
 
 ### Return type
 
