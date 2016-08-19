@@ -758,9 +758,9 @@ getProcessInstances(requestNode)
 
 #### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **requestNode** | [**ProcessFilterRequestRepresentation**](/src/alfresco-activiti-rest-api/docs/ProcessFilterRequestRepresentation.md)| requestNode | 
+Name | Type | Description  
+------------- | ------------- | ------------- 
+ **requestNode** | [**ProcessFilterRequestRepresentation**](/src/alfresco-activiti-rest-api/docs/ProcessFilterRequestRepresentation.md)| requestNode 
 
 #### Example
 
