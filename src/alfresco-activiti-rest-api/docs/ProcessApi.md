@@ -28,7 +28,7 @@ Delete a process instance
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
-this.alfrescoJsApi.activiti.ProcessApi.deleteProcessInstance(processInstanceId);
+this.alfrescoJsApi.activiti.processApi.deleteProcessInstance(processInstanceId);
 ```
 
 ### Parameters
@@ -61,7 +61,7 @@ Filter a list of process instances
 
 var filterRequest = new this.alfrescoJsApi.activiti.ProcessInstanceFilterRequestRepresentation(); // ProcessInstanceFilterRequestRepresentation | filterRequest
 
-this.alfrescoJsApi.activiti.ProcessApi.filterProcessInstances(filterRequest);
+this.alfrescoJsApi.activiti.processApi.filterProcessInstances(filterRequest);
 ```
 
 ### Parameters
@@ -92,7 +92,7 @@ Retrieve the start form for a process definition
 ### Example
 ```javascript
 
-this.alfrescoJsApi.activiti.ProcessApi.getProcessDefinitionStartForm();
+this.alfrescoJsApi.activiti.processApi.getProcessDefinitionStartForm();
 ```
 
 ### Parameters
@@ -127,7 +127,7 @@ var opts = {
   'appDefinitionId': 789 // Integer | appDefinitionId
 };
 
-this.alfrescoJsApi.activiti.ProcessApi.getProcessDefinitions(opts);
+this.alfrescoJsApi.activiti.processApi.getProcessDefinitions(opts);
 ```
 
 ### Parameters
@@ -161,7 +161,7 @@ Retrieve content attached to process instance fields
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
-this.alfrescoJsApi.activiti.ProcessApi.getProcessInstanceContent(processInstanceId);
+this.alfrescoJsApi.activiti.processApi.getProcessInstanceContent(processInstanceId);
 ```
 
 ### Parameters
@@ -196,7 +196,7 @@ When a process definitions has a start form (hasStartForm is true in the call ab
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
-this.alfrescoJsApi.activiti.ProcessApi.getProcessInstanceStartForm(processInstanceId);
+this.alfrescoJsApi.activiti.processApi.getProcessInstanceStartForm(processInstanceId);
 ```
 
 ### Parameters
@@ -229,7 +229,7 @@ Retrieve a process instance information
 
 var processInstanceId = "processInstanceId_example"; // String | processInstanceId
 
-this.alfrescoJsApi.activiti.ProcessApi.getProcessInstance(processInstanceId);
+this.alfrescoJsApi.activiti.processApi.getProcessInstance(processInstanceId);
 ```
 
 ### Parameters
@@ -262,7 +262,7 @@ Retrieve a list of process instances
 
 var requestNode = new this.alfrescoJsApi.activiti.ObjectNode();
 
-this.alfrescoJsApi.activiti.ProcessApi.getProcessInstances(requestNode);
+this.alfrescoJsApi.activiti.processApi.getProcessInstances(requestNode);
 ```
 
 ### Parameters
@@ -293,7 +293,7 @@ Retrieve field values (eg. the typeahead field)
 ### Example
 ```javascript
 
-this.alfrescoJsApi.activiti.ProcessApi.getRestFieldValues();
+this.alfrescoJsApi.activiti.processApi.getRestFieldValues();
 ```
 
 ### Parameters
@@ -321,7 +321,7 @@ Retrieve field values (eg. the table field)
 ### Example
 ```javascript
 
-this.alfrescoJsApi.activiti.ProcessApi.getRestTableFieldValues();
+this.alfrescoJsApi.activiti.processApi.getRestTableFieldValues();
 ```
 
 ### Parameters
@@ -352,7 +352,7 @@ Start a process instance
 var startRequest = new this.alfrescoJsApi.activiti.CreateProcessInstanceRepresentation(); // CreateProcessInstanceRepresentation | startRequest
 
 
-this.alfrescoJsApi.activiti.ProcessApi.startNewProcessInstance(startRequest);
+this.alfrescoJsApi.activiti.processApi.startNewProcessInstance(startRequest);
 ```
 
 ### Parameters

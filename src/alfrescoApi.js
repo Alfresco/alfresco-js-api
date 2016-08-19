@@ -37,32 +37,29 @@ class AlfrescoApi {
         this.bpmAuth = new BpmAuth(this.config);
         this.ecmAuth = new EcmAuth(this.config);
 
-        if (config.ticket) {
-            this.initObjects();
-        }
+        this.initObjects();
 
         Emitter.call(this);
     }
 
     initObjects() {
-        if (this.config.provider === 'BPM' || this.config.provider === 'ALL') {
-            AlfrescoActivitiApi.ApiClient.instance = this.bpmAuth.getClient();
-            this.activiti = {};
-            this.activitiStore = AlfrescoActivitiApi;
-            this._instantiateObjects(this.activitiStore, this.activiti);
-        }
+        //BPM
+        AlfrescoActivitiApi.ApiClient.instance = this.bpmAuth.getClient();
+        this.activiti = {};
+        this.activitiStore = AlfrescoActivitiApi;
+        this._instantiateObjects(this.activitiStore, this.activiti);
 
-        if (this.config.provider === 'ECM' || this.config.provider === 'ALL') {
-            AlfrescoCoreRestApi.ApiClient.instance = this.ecmAuth.getClient();
-            this.core = {};
-            this.coreStore = AlfrescoCoreRestApi;
-            this._instantiateObjects(this.coreStore, this.core);
+        //ECM
+        AlfrescoCoreRestApi.ApiClient.instance = this.ecmAuth.getClient();
+        this.core = {};
+        this.coreStore = AlfrescoCoreRestApi;
+        this._instantiateObjects(this.coreStore, this.core);
 
-            this.nodes = this.node = new AlfrescoNode();
-            this.content = new AlfrescoContent(this.ecmAuth);
-            this.upload = new AlfrescoUpload();
-            this.webScript = new AlfrescoWebScriptApi();
-        }
+        this.nodes = this.node = new AlfrescoNode();
+        this.content = new AlfrescoContent(this.ecmAuth);
+        this.upload = new AlfrescoUpload();
+        this.webScript = new AlfrescoWebScriptApi();
+
     }
 
     _instantiateObjects(module, moduleCopy) {
@@ -105,15 +102,11 @@ class AlfrescoApi {
     login(username, password) {
         if (this._isBpmConfiguration()) {
             var bpmPromise = this.bpmAuth.login(username, password);
-            bpmPromise.then(()=> {
-                this.initObjects();
-            });
 
             return bpmPromise;
         } else if (this._isEcmConfiguration()) {
             var ecmPromise = this.ecmAuth.login(username, password);
             ecmPromise.then((data)=> {
-                this.initObjects();
                 this.config.ticket = data;
             });
 
@@ -122,7 +115,6 @@ class AlfrescoApi {
         } else if (this._isEcmBpmConfiguration()) {
             var bpmEcmPromise = this._loginBPMECM(username, password);
             bpmEcmPromise.then((data)=> {
-                this.initObjects();
                 this.config.ticket = data[0];
             });
 
@@ -139,17 +131,10 @@ class AlfrescoApi {
      * */
     loginTicket(ticket) {
         this.config.ticket = ticket;
-        var promiseValidate = this.ecmAuth.validateTicket();
-
-        promiseValidate.then(()=> {
-            this.initObjects();
-        });
-
-        return promiseValidate;
+        return this.ecmAuth.validateTicket();
     }
 
     _loginBPMECM(username, password) {
-
         var ecmPromise = this.ecmAuth.login(username, password);
         var bpmPromise = this.bpmAuth.login(username, password);
 

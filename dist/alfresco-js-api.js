@@ -72705,9 +72705,7 @@ var AlfrescoApi = function () {
         this.bpmAuth = new BpmAuth(this.config);
         this.ecmAuth = new EcmAuth(this.config);
 
-        if (config.ticket) {
-            this.initObjects();
-        }
+        this.initObjects();
 
         Emitter.call(this);
     }
@@ -72715,24 +72713,22 @@ var AlfrescoApi = function () {
     _createClass(AlfrescoApi, [{
         key: 'initObjects',
         value: function initObjects() {
-            if (this.config.provider === 'BPM' || this.config.provider === 'ALL') {
-                AlfrescoActivitiApi.ApiClient.instance = this.bpmAuth.getClient();
-                this.activiti = {};
-                this.activitiStore = AlfrescoActivitiApi;
-                this._instantiateObjects(this.activitiStore, this.activiti);
-            }
+            //BPM
+            AlfrescoActivitiApi.ApiClient.instance = this.bpmAuth.getClient();
+            this.activiti = {};
+            this.activitiStore = AlfrescoActivitiApi;
+            this._instantiateObjects(this.activitiStore, this.activiti);
 
-            if (this.config.provider === 'ECM' || this.config.provider === 'ALL') {
-                AlfrescoCoreRestApi.ApiClient.instance = this.ecmAuth.getClient();
-                this.core = {};
-                this.coreStore = AlfrescoCoreRestApi;
-                this._instantiateObjects(this.coreStore, this.core);
+            //ECM
+            AlfrescoCoreRestApi.ApiClient.instance = this.ecmAuth.getClient();
+            this.core = {};
+            this.coreStore = AlfrescoCoreRestApi;
+            this._instantiateObjects(this.coreStore, this.core);
 
-                this.nodes = this.node = new AlfrescoNode();
-                this.content = new AlfrescoContent(this.ecmAuth);
-                this.upload = new AlfrescoUpload();
-                this.webScript = new AlfrescoWebScriptApi();
-            }
+            this.nodes = this.node = new AlfrescoNode();
+            this.content = new AlfrescoContent(this.ecmAuth);
+            this.upload = new AlfrescoUpload();
+            this.webScript = new AlfrescoWebScriptApi();
         }
     }, {
         key: '_instantiateObjects',
@@ -72787,15 +72783,11 @@ var AlfrescoApi = function () {
 
             if (this._isBpmConfiguration()) {
                 var bpmPromise = this.bpmAuth.login(username, password);
-                bpmPromise.then(function () {
-                    _this2.initObjects();
-                });
 
                 return bpmPromise;
             } else if (this._isEcmConfiguration()) {
                 var ecmPromise = this.ecmAuth.login(username, password);
                 ecmPromise.then(function (data) {
-                    _this2.initObjects();
                     _this2.config.ticket = data;
                 });
 
@@ -72803,7 +72795,6 @@ var AlfrescoApi = function () {
             } else if (this._isEcmBpmConfiguration()) {
                 var bpmEcmPromise = this._loginBPMECM(username, password);
                 bpmEcmPromise.then(function (data) {
-                    _this2.initObjects();
                     _this2.config.ticket = data[0];
                 });
 
@@ -72822,34 +72813,26 @@ var AlfrescoApi = function () {
     }, {
         key: 'loginTicket',
         value: function loginTicket(ticket) {
-            var _this3 = this;
-
             this.config.ticket = ticket;
-            var promiseValidate = this.ecmAuth.validateTicket();
-
-            promiseValidate.then(function () {
-                _this3.initObjects();
-            });
-
-            return promiseValidate;
+            return this.ecmAuth.validateTicket();
         }
     }, {
         key: '_loginBPMECM',
         value: function _loginBPMECM(username, password) {
-            var _this4 = this;
+            var _this3 = this;
 
             var ecmPromise = this.ecmAuth.login(username, password);
             var bpmPromise = this.bpmAuth.login(username, password);
 
             this.promise = new Promise(function (resolve, reject) {
                 Promise.all([ecmPromise, bpmPromise]).then(function (data) {
-                    _this4.promise.emit('success');
+                    _this3.promise.emit('success');
                     resolve(data);
                 }, function (error) {
                     if (error.status === 401) {
-                        _this4.promise.emit('unauthorized');
+                        _this3.promise.emit('unauthorized');
                     }
-                    _this4.promise.emit('error');
+                    _this3.promise.emit('error');
                     reject(error);
                 });
             });
@@ -72868,14 +72851,14 @@ var AlfrescoApi = function () {
     }, {
         key: 'logout',
         value: function logout() {
-            var _this5 = this;
+            var _this4 = this;
 
             if (this.config.provider && this.config.provider.toUpperCase() === 'BPM') {
                 return this.bpmAuth.logout();
             } else if (this.config.provider && this.config.provider.toUpperCase() === 'ECM') {
                 var ecmPromise = this.ecmAuth.logout();
                 ecmPromise.then(function (data) {
-                    _this5.config.ticket = undefined;
+                    _this4.config.ticket = undefined;
                 });
 
                 return ecmPromise;
@@ -72886,21 +72869,21 @@ var AlfrescoApi = function () {
     }, {
         key: '_logoutBPMECM',
         value: function _logoutBPMECM() {
-            var _this6 = this;
+            var _this5 = this;
 
             var ecmPromise = this.ecmAuth.logout();
             var bpmPromise = this.bpmAuth.logout();
 
             this.promise = new Promise(function (resolve, reject) {
                 Promise.all([ecmPromise, bpmPromise]).then(function (data) {
-                    _this6.config.ticket = undefined;
-                    _this6.promise.emit('logout');
+                    _this5.config.ticket = undefined;
+                    _this5.promise.emit('logout');
                     resolve('logout');
                 }, function (error) {
                     if (error.status === 401) {
-                        _this6.promise.emit('unauthorized');
+                        _this5.promise.emit('unauthorized');
                     }
-                    _this6.promise.emit('error');
+                    _this5.promise.emit('error');
                     reject(error);
                 });
             });
