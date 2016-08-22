@@ -8,14 +8,14 @@ var expect = require('chai').expect;
 describe('Tags', function () {
 
     beforeEach(function (done) {
-        this.host = 'http://127.0.0.1:8080';
+        this.hostEcm = 'http://127.0.0.1:8080';
 
-        this.authResponseMock = new AuthResponseMock(this.host);
+        this.authResponseMock = new AuthResponseMock(this.hostEcm);
         this.tagMock = new TagMock();
 
         this.authResponseMock.get201Response();
         this.alfrescoJsApi = new AlfrescoApi({
-            host: this.host
+            hostEcm: this.hostEcm
         });
 
         this.alfrescoJsApi.login('admin', 'admin').then(() => {

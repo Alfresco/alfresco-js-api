@@ -7,8 +7,8 @@ var expect = require('chai').expect;
 describe('Bpm Auth test', function () {
 
     beforeEach(function () {
-        this.host = 'http://127.0.0.1:9999';
-        this.authBpmMock = new AuthBpmMock(this.host);
+        this.hostBpm = 'http://127.0.0.1:9999';
+        this.authBpmMock = new AuthBpmMock(this.hostBpm);
     });
 
     describe('With Authentication', function () {
@@ -18,7 +18,7 @@ describe('Bpm Auth test', function () {
             this.authBpmMock.get200Response();
 
             this.bpmAuth = new BpmAuth({
-                hostActiviti: this.host
+                hostBpm: this.hostBpm
             });
 
             this.bpmAuth.login('admin', 'admin').then((data) => {
@@ -34,7 +34,7 @@ describe('Bpm Auth test', function () {
             this.authBpmMock.get200Response();
 
             this.bpmAuth = new BpmAuth({
-                hostActiviti: this.host
+                hostBpm: this.hostBpm
             });
 
             this.bpmAuth.login('admin', 'admin').then(() => {
@@ -49,7 +49,7 @@ describe('Bpm Auth test', function () {
             this.authBpmMock.get200Response();
 
             this.bpmAuth = new BpmAuth({
-                hostActiviti: this.host
+                hostBpm: this.hostBpm
             });
             this.bpmAuth.login('admin', 'admin');
 
@@ -66,7 +66,7 @@ describe('Bpm Auth test', function () {
         it('login should return an error if wrong credential are used 401 the login fails', function (done) {
 
             this.bpmAuth = new BpmAuth({
-                hostActiviti: this.host
+                hostBpm: this.hostBpm
             });
 
             this.authBpmMock.get401Response();
@@ -84,7 +84,7 @@ describe('Bpm Auth test', function () {
                 this.authBpmMock.get401Response();
 
                 this.bpmAuth = new BpmAuth({
-                    hostActiviti: this.host
+                    hostBpm: this.hostBpm
                 });
 
                 this.bpmAuth.login('wrong', 'name').on('unauthorized', ()=> {
@@ -96,7 +96,7 @@ describe('Bpm Auth test', function () {
                 this.authBpmMock.get200Response();
 
                 this.bpmAuth = new BpmAuth({
-                    hostActiviti: this.host
+                    hostBpm: this.hostBpm
                 });
 
                 this.bpmAuth.login('admin', 'admin').on('success', ()=> {
@@ -108,7 +108,7 @@ describe('Bpm Auth test', function () {
                 this.authBpmMock.get200Response();
 
                 this.bpmAuth = new BpmAuth({
-                    hostActiviti: this.host
+                    hostBpm: this.hostBpm
                 });
 
                 this.bpmAuth.login('admin', 'admin');
@@ -126,7 +126,7 @@ describe('Bpm Auth test', function () {
             beforeEach(function (done) {
                 this.authBpmMock.get200Response();
                 this.bpmAuth = new BpmAuth({
-                    hostActiviti: this.host
+                    hostBpm: this.hostBpm
                 });
 
                 this.bpmAuth.login('admin', 'admin').then(() => {

@@ -8,17 +8,17 @@ var WebScriptMock = require('../test/mockObjects/mockAlfrescoApi').WebScript;
 describe('WebScript', function () {
 
     beforeEach(function (done) {
-        this.host = 'http://127.0.0.1:8080';
+        this.hostEcm = 'http://127.0.0.1:8080';
         this.contextRoot = 'script';
         this.servicePath = 'alfresco';
         this.scriptPath = 'testWebScript';
 
-        this.authResponseMock = new AuthResponseMock(this.host);
-        this.webScriptMock = new WebScriptMock(this.host, this.contextRoot, this.servicePath, this.scriptPath);
+        this.authResponseMock = new AuthResponseMock(this.hostEcm);
+        this.webScriptMock = new WebScriptMock(this.hostEcm, this.contextRoot, this.servicePath, this.scriptPath);
 
         this.authResponseMock.get201Response();
         this.alfrescoJsApi = new AlfrescoApi({
-            host: this.host
+            hostEcm: this.hostEcm
         });
 
         this.alfrescoJsApi.login('admin', 'admin').then(() => {

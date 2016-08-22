@@ -7,8 +7,8 @@ var EcmAuth = require('../src/ecmAuth');
 describe('Ecm Auth test', function () {
 
     beforeEach(function () {
-        this.host = 'http://127.0.0.1:8080';
-        this.authEcmMock = new AuthEcmMock(this.host);
+        this.hostEcm = 'http://127.0.0.1:8080';
+        this.authEcmMock = new AuthEcmMock(this.hostEcm);
     });
 
     describe('With Authentication', function () {
@@ -19,7 +19,7 @@ describe('Ecm Auth test', function () {
 
             this.ecmAuth = new EcmAuth({
                 contextRoot: 'alfresco',
-                host: this.host
+                hostEcm: this.hostEcm
             });
 
             this.ecmAuth.login('admin', 'admin').then((data) => {
@@ -36,7 +36,7 @@ describe('Ecm Auth test', function () {
 
             this.ecmAuth = new EcmAuth({
                 contextRoot: 'alfresco',
-                host: this.host
+                hostEcm: this.hostEcm
             });
 
             this.ecmAuth.login('admin', 'admin').then(() => {
@@ -52,7 +52,7 @@ describe('Ecm Auth test', function () {
 
             this.ecmAuth = new EcmAuth({
                 contextRoot: 'alfresco',
-                host: this.host
+                hostEcm: this.hostEcm
             });
 
             this.ecmAuth.login('admin', 'admin');
@@ -71,7 +71,7 @@ describe('Ecm Auth test', function () {
 
             this.ecmAuth = new EcmAuth({
                 contextRoot: 'alfresco',
-                host: this.host
+                hostEcm: this.hostEcm
             });
 
             this.ecmAuth.login('wrong', 'name').then(function () {
@@ -87,7 +87,7 @@ describe('Ecm Auth test', function () {
 
             this.ecmAuth = new EcmAuth({
                 contextRoot: 'alfresco',
-                host: this.host
+                hostEcm: this.hostEcm
             });
 
             this.ecmAuth.login(null, null).then(function () {
@@ -104,7 +104,7 @@ describe('Ecm Auth test', function () {
 
                 this.ecmAuth = new EcmAuth({
                     contextRoot: 'alfresco',
-                    host: this.host
+                    hostEcm: this.hostEcm
                 });
 
                 this.ecmAuth.login('wrong', 'name').on('unauthorized', ()=> {
@@ -117,7 +117,7 @@ describe('Ecm Auth test', function () {
 
                 this.ecmAuth = new EcmAuth({
                     contextRoot: 'alfresco',
-                    host: this.host
+                    hostEcm: this.hostEcm
                 });
 
                 this.ecmAuth.login('admin', 'admin').on('success', ()=> {
@@ -130,7 +130,7 @@ describe('Ecm Auth test', function () {
 
                 this.ecmAuth = new EcmAuth({
                     contextRoot: 'alfresco',
-                    host: this.host
+                    hostEcm: this.hostEcm
                 });
 
                 this.ecmAuth.login('admin', 'admin');
@@ -150,7 +150,7 @@ describe('Ecm Auth test', function () {
 
                 this.ecmAuth = new EcmAuth({
                     ticket: 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1',
-                    host: this.host
+                    hostEcm: this.hostEcm
                 });
 
                 expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(this.ecmAuth.authentications.basicAuth.password);
@@ -163,7 +163,7 @@ describe('Ecm Auth test', function () {
                 this.authEcmMock.get201Response('TICKET_22d7a5a83d78b9cc9666ec4e412475e5455b33bd');
                 this.ecmAuth = new EcmAuth({
                     contextRoot: 'alfresco',
-                    host: this.host
+                    hostEcm: this.hostEcm
                 });
 
                 this.ecmAuth.login('admin', 'admin').then(() => {

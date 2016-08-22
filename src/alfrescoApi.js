@@ -18,8 +18,8 @@ class AlfrescoApi {
      * @param {Object} config
      *
      *      config = {
-     *        host:       // alfrescoHost Your share server IP or DNS name
-     *        hostActiviti: // hostActiviti Your activiti server IP or DNS name
+     *        hostEcm:       // hostEcm Your share server IP or DNS name
+     *        hostBpm: // hostBpm Your activiti server IP or DNS name
      *        contextRoot: // contextRoot default value alfresco
      *        provider:   // ECM BPM ALL
      *        ticket:     // Ticket if you already have a ticket you can pass only the ticket and skip the login, in this case you don't need username and password
@@ -27,8 +27,8 @@ class AlfrescoApi {
      */
     constructor(config) {
         this.config = {
-            host: config.host || 'http://127.0.0.1:8080',
-            hostActiviti: config.hostActiviti || 'http://127.0.0.1:9999',
+            hostEcm: config.hostEcm || 'http://127.0.0.1:8080',
+            hostBpm: config.hostBpm || 'http://127.0.0.1:9999',
             contextRoot: config.contextRoot || 'alfresco',
             provider: config.provider || 'ECM',
             ticket: config.ticket

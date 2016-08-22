@@ -10,8 +10,8 @@ describe('Auth', function () {
     describe('ECM Provider config', function () {
 
         beforeEach(function () {
-            this.host = 'http://127.0.0.1:8080';
-            this.authResponseEcmMock = new AuthEcmMock(this.host);
+            this.hostEcm = 'http://127.0.0.1:8080';
+            this.authResponseEcmMock = new AuthEcmMock(this.hostEcm);
         });
 
         describe('With Authentication', function () {
@@ -21,7 +21,7 @@ describe('Auth', function () {
                 this.authResponseEcmMock.get201Response();
 
                 this.alfrescoJsApi = new AlfrescoApi({
-                    host: this.host
+                    hostEcm: this.hostEcm
                 });
 
                 this.alfrescoJsApi.login('admin', 'admin').then((data) => {
@@ -36,7 +36,7 @@ describe('Auth', function () {
                 this.authResponseEcmMock.get201Response();
 
                 this.alfrescoJsApi = new AlfrescoApi({
-                    host: this.host
+                    hostEcm: this.host
                 });
 
                 this.alfrescoJsApi.login('admin', 'admin').then(() => {
@@ -51,7 +51,7 @@ describe('Auth', function () {
                 this.authResponseEcmMock.get201Response();
 
                 this.alfrescoJsApi = new AlfrescoApi({
-                    host: this.host
+                    hostEcm: this.host
                 });
 
                 this.alfrescoJsApi.login('admin', 'admin');
@@ -69,7 +69,7 @@ describe('Auth', function () {
                 this.authResponseEcmMock.get403Response();
 
                 this.alfrescoJsApi = new AlfrescoApi({
-                    host: this.host
+                    hostEcm: this.host
                 });
 
                 this.alfrescoJsApi.login('wrong', 'name').then(function () {
@@ -84,7 +84,7 @@ describe('Auth', function () {
                 this.authResponseEcmMock.get400Response();
 
                 this.alfrescoJsApi = new AlfrescoApi({
-                    host: this.host
+                    hostEcm: this.host
                 });
 
                 this.alfrescoJsApi.login(null, null).then(function () {
@@ -100,7 +100,7 @@ describe('Auth', function () {
                     this.authResponseEcmMock.get401Response();
 
                     this.alfrescoJsApi = new AlfrescoApi({
-                        host: this.host
+                        hostEcm: this.host
                     });
 
                     this.alfrescoJsApi.login('wrong', 'name').on('unauthorized', ()=> {
@@ -112,7 +112,7 @@ describe('Auth', function () {
                     this.authResponseEcmMock.get201Response();
 
                     this.alfrescoJsApi = new AlfrescoApi({
-                        host: this.host
+                        hostEcm: this.host
                     });
 
                     this.alfrescoJsApi.login('admin', 'admin').on('success', ()=> {
@@ -124,7 +124,7 @@ describe('Auth', function () {
                     this.authResponseEcmMock.get201Response();
 
                     this.alfrescoJsApi = new AlfrescoApi({
-                        host: this.host
+                        hostEcm: this.host
                     });
 
                     this.alfrescoJsApi.login('admin', 'admin');
@@ -144,7 +144,7 @@ describe('Auth', function () {
 
                     this.alfrescoJsApi = new AlfrescoApi({
                         ticket: 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1',
-                        host: this.host
+                        hostEcm: this.host
                     });
 
                     expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(this.alfrescoJsApi.getClient().authentications.basicAuth.password);
@@ -156,7 +156,7 @@ describe('Auth', function () {
                     this.authResponseEcmMock.get200ValidTicket(ticket);
 
                     this.alfrescoJsApi = new AlfrescoApi({
-                        host: this.host
+                        hostEcm: this.host
                     });
 
                     this.alfrescoJsApi.loginTicket(ticket).then((data) => {
@@ -171,7 +171,7 @@ describe('Auth', function () {
                     this.authResponseEcmMock.get400Response();
 
                     this.alfrescoJsApi = new AlfrescoApi({
-                        host: this.host
+                        hostEcm: this.host
                     });
 
                     this.alfrescoJsApi.loginTicket(ticket).then((data) => {
@@ -186,7 +186,7 @@ describe('Auth', function () {
                 beforeEach(function (done) {
                     this.authResponseEcmMock.get201Response('TICKET_22d7a5a83d78b9cc9666ec4e412475e5455b33bd');
                     this.alfrescoJsApi = new AlfrescoApi({
-                        host: this.host
+                        hostEcm: this.host
                     });
 
                     this.alfrescoJsApi.login('admin', 'admin').then(() => {
@@ -220,8 +220,8 @@ describe('Auth', function () {
     describe('BPM Provider config', function () {
 
         beforeEach(function () {
-            this.hostActiviti = 'http://127.0.0.1:9999';
-            this.authResponseBpmMock = new AuthBpmMock(this.hostActiviti);
+            this.hostBpm = 'http://127.0.0.1:9999';
+            this.authResponseBpmMock = new AuthBpmMock(this.hostBpm);
         });
 
         describe('With Authentication', function () {
@@ -231,7 +231,7 @@ describe('Auth', function () {
                 this.authResponseBpmMock.get200Response();
 
                 this.alfrescoJsApi = new AlfrescoApi({
-                    hostActiviti: this.hostActiviti,
+                    hostBpm: this.hostBpm,
                     provider: 'BPM'
                 });
 
@@ -247,7 +247,7 @@ describe('Auth', function () {
                 this.authResponseBpmMock.get200Response();
 
                 this.alfrescoJsApi = new AlfrescoApi({
-                    hostActiviti: this.hostActiviti,
+                    hostBpm: this.hostBpm,
                     provider: 'BPM'
                 });
 
@@ -263,7 +263,7 @@ describe('Auth', function () {
                 this.authResponseBpmMock.get200Response();
 
                 this.alfrescoJsApi = new AlfrescoApi({
-                    hostActiviti: this.hostActiviti,
+                    hostBpm: this.hostBpm,
                     provider: 'BPM'
                 });
 
@@ -282,7 +282,7 @@ describe('Auth', function () {
                 this.authResponseBpmMock.get401Response();
 
                 this.alfrescoJsApi = new AlfrescoApi({
-                    hostActiviti: this.hostActiviti,
+                    hostBpm: this.hostBpm,
                     provider: 'BPM'
                 });
 
@@ -298,7 +298,7 @@ describe('Auth', function () {
                 this.authResponseBpmMock.get400Response();
 
                 this.alfrescoJsApi = new AlfrescoApi({
-                    hostActiviti: this.hostActiviti,
+                    hostBpm: this.hostBpm,
                     provider: 'BPM'
                 });
 
@@ -315,7 +315,7 @@ describe('Auth', function () {
                     this.authResponseBpmMock.get401Response();
 
                     this.alfrescoJsApi = new AlfrescoApi({
-                        hostActiviti: this.hostActiviti,
+                        hostBpm: this.hostBpm,
                         provider: 'BPM'
 
                     });
@@ -329,7 +329,7 @@ describe('Auth', function () {
                     this.authResponseBpmMock.get200Response();
 
                     this.alfrescoJsApi = new AlfrescoApi({
-                        hostActiviti: this.hostActiviti,
+                        hostBpm: this.hostBpm,
                         provider: 'BPM'
 
                     });
@@ -343,7 +343,7 @@ describe('Auth', function () {
                     this.authResponseBpmMock.get200Response();
 
                     this.alfrescoJsApi = new AlfrescoApi({
-                        hostActiviti: this.hostActiviti,
+                        hostBpm: this.hostBpm,
                         provider: 'BPM'
                     });
 
@@ -362,9 +362,9 @@ describe('Auth', function () {
 
             beforeEach(function () {
                 this.host = 'http://127.0.0.1:8080';
-                this.hostActiviti = 'http://127.0.0.1:9999';
-                this.authResponseEcmMock = new AuthEcmMock(this.host);
-                this.authResponseBpmMock = new AuthBpmMock(this.hostActiviti);
+                this.hostBpm = 'http://127.0.0.1:9999';
+                this.authResponseEcmMock = new AuthEcmMock(this.hostEcm);
+                this.authResponseBpmMock = new AuthBpmMock(this.hostBpm);
             });
 
             describe('With Authentication', function () {
@@ -375,8 +375,8 @@ describe('Auth', function () {
                     this.authResponseEcmMock.get201Response();
 
                     this.alfrescoJsApi = new AlfrescoApi({
-                        host: this.host,
-                        hostActiviti: this.hostActiviti,
+                        hostEcm: this.hostEcm,
+                        hostBpm: this.hostBpm,
                         provider: 'ALL'
                     });
 
@@ -394,8 +394,8 @@ describe('Auth', function () {
                     this.authResponseEcmMock.get401Response();
 
                     this.alfrescoJsApi = new AlfrescoApi({
-                        host: this.host,
-                        hostActiviti: this.hostActiviti,
+                        hostEcm: this.host,
+                        hostBpm: this.hostBpm,
                         provider: 'ALL'
                     });
 
@@ -413,8 +413,8 @@ describe('Auth', function () {
                     this.authResponseEcmMock.get201Response();
 
                     this.alfrescoJsApi = new AlfrescoApi({
-                        host: this.host,
-                        hostActiviti: this.hostActiviti,
+                        hostEcm: this.host,
+                        hostBpm: this.hostBpm,
                         provider: 'ALL'
                     });
 
@@ -432,8 +432,8 @@ describe('Auth', function () {
                     this.authResponseEcmMock.get201Response();
 
                     this.alfrescoJsApi = new AlfrescoApi({
-                        host: this.host,
-                        hostActiviti: this.hostActiviti,
+                        hostEcm: this.host,
+                        hostBpm: this.hostBpm,
                         provider: 'ALL'
 
                     });
@@ -451,8 +451,8 @@ describe('Auth', function () {
                     this.authResponseEcmMock.get201Response();
 
                     this.alfrescoJsApi = new AlfrescoApi({
-                        host: this.host,
-                        hostActiviti: this.hostActiviti,
+                        hostEcm: this.host,
+                        hostBpm: this.hostBpm,
                         provider: 'ALL'
 
                     });
@@ -474,8 +474,8 @@ describe('Auth', function () {
                     this.authResponseEcmMock.get401Response();
 
                     this.alfrescoJsApi = new AlfrescoApi({
-                        host: this.host,
-                        hostActiviti: this.hostActiviti,
+                        hostEcm: this.host,
+                        hostBpm: this.hostBpm,
                         provider: 'ALL'
 
                     });
@@ -492,8 +492,8 @@ describe('Auth', function () {
                     this.authResponseBpmMock.get400Response();
 
                     this.alfrescoJsApi = new AlfrescoApi({
-                        host: this.host,
-                        hostActiviti: this.hostActiviti,
+                        hostEcm: this.host,
+                        hostBpm: this.hostBpm,
                         provider: 'ALL'
 
                     });
@@ -512,8 +512,8 @@ describe('Auth', function () {
                         this.authResponseEcmMock.get401Response();
 
                         this.alfrescoJsApi = new AlfrescoApi({
-                            host: this.host,
-                            hostActiviti: this.hostActiviti,
+                            hostEcm: this.host,
+                            hostBpm: this.hostBpm,
                             provider: 'ALL'
                         });
 
@@ -527,8 +527,8 @@ describe('Auth', function () {
                         this.authResponseEcmMock.get201Response();
 
                         this.alfrescoJsApi = new AlfrescoApi({
-                            host: this.host,
-                            hostActiviti: this.hostActiviti,
+                            hostEcm: this.host,
+                            hostBpm: this.hostBpm,
                             provider: 'ALL'
                         });
 
@@ -542,8 +542,8 @@ describe('Auth', function () {
                         this.authResponseEcmMock.get201Response();
 
                         this.alfrescoJsApi = new AlfrescoApi({
-                            host: this.host,
-                            hostActiviti: this.hostActiviti,
+                            hostEcm: this.host,
+                            hostBpm: this.hostBpm,
                             provider: 'ALL'
                         });
 

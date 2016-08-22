@@ -8,14 +8,14 @@ var fs = require('fs');
 
 describe('Upload', function () {
     beforeEach(function (done) {
-        this.host = 'http://127.0.0.1:8080';
+        this.hostEcm = 'http://127.0.0.1:8080';
 
-        this.authResponseMock = new AuthResponseMock(this.host);
-        this.uploadMock = new UploadMock(this.host);
+        this.authResponseMock = new AuthResponseMock(this.hostEcm);
+        this.uploadMock = new UploadMock(this.hostEcm);
 
         this.authResponseMock.get201Response();
         this.alfrescoJsApi = new AlfrescoApi({
-            host: this.host
+            hostEcm: this.hostEcm
         });
 
         this.alfrescoJsApi.login('admin', 'admin').then(() => {

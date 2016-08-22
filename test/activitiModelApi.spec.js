@@ -7,15 +7,15 @@ var ModelsMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Mod
 
 describe('Activiti Process Api', function () {
     beforeEach(function (done) {
-        this.hostActiviti = 'http://127.0.0.1:9999';
+        this.hostBpm = 'http://127.0.0.1:9999';
 
-        this.authResponseBpmMock = new AuthBpmMock(this.hostActiviti);
-        this.modelsMock = new ModelsMock(this.hostActiviti);
+        this.authResponseBpmMock = new AuthBpmMock(this.hostBpm);
+        this.modelsMock = new ModelsMock(this.hostBpm);
 
         this.authResponseBpmMock.get200Response();
 
         this.alfrescoJsApi = new AlfrescoApi({
-            host: this.hostActiviti,
+            hostBpm: this.hostBpm,
             provider: 'BPM'
         });
 

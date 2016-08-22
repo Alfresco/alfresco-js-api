@@ -13,7 +13,7 @@ class EcmAuth extends AlfrescoApiClient {
         super();
 
         this.config = config;
-        this.basePath = this.config.host + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
+        this.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
 
         if (this.config.ticket) {
             this.setTicket(config.ticket);
@@ -154,10 +154,10 @@ class EcmAuth extends AlfrescoApiClient {
      * */
     getClient() {
         if (!this.alfrescoClient) {
-            this.alfrescoClient = new AlfrescoApiClient(this.config.host);
+            this.alfrescoClient = new AlfrescoApiClient(this.config.hostEcm);
         }
 
-        this.alfrescoClient.basePath = this.config.host + '/' + this.config.contextRoot + '/api/-default-/public/alfresco/versions/1'; //Auth Call
+        this.alfrescoClient.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/alfresco/versions/1'; //Auth Call
         this.alfrescoClient.authentications = this.authentications;
         return this.alfrescoClient;
     }

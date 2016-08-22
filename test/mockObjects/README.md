@@ -76,7 +76,7 @@ authResponseMock.get201Response('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1
 var alfrescoJsApi = new AlfrescoApi({
     username: 'admin',
     password: 'admin',
-    host: host
+    hostEcm: host
 });
 
 alfrescoJsApi.login().then((data) => {
@@ -126,7 +126,7 @@ authResponseMock.get201Response();
 var alfrescoJsApi = new AlfrescoApi({
     username: 'admin',
     password: 'admin',
-    host: this.host
+    hostEcm: this.host
 });
 
 alfrescoJsApi.login();
@@ -174,7 +174,7 @@ authResponseMock.get201Response();
 var alfrescoJsApi = new AlfrescoApi({
     username: 'admin',
     password: 'admin',
-    host: this.host
+    hostEcm: this.host
 });
 
 alfrescoJsApi.login();
@@ -227,7 +227,7 @@ authResponseMock.get201Response();
 var alfrescoJsApi = new AlfrescoApi({
     username: 'admin',
     password: 'admin',
-    host: this.host
+    hostEcm: this.host
 });
 
 var webScriptMock = new WebScriptMock(host, contextRoot, servicePath, scriptPath);
@@ -274,7 +274,7 @@ authResponseMock.get201Response();
 var alfrescoJsApi = new AlfrescoApi({
     username: 'admin',
     password: 'admin',
-    host: this.host
+    hostEcm: this.host
 });
 
 var tagMock = new TagMock(host);

@@ -7,15 +7,15 @@ var TasksMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Task
 
 describe('Activiti Task Api', function () {
     beforeEach(function (done) {
-        this.hostActiviti = 'http://127.0.0.1:9999';
+        this.hostBpm = 'http://127.0.0.1:9999';
 
-        this.authResponseBpmMock = new AuthBpmMock(this.hostActiviti);
-        this.tasksMock = new TasksMock(this.hostActiviti);
+        this.authResponseBpmMock = new AuthBpmMock(this.hostBpm);
+        this.tasksMock = new TasksMock(this.hostBpm);
 
         this.authResponseBpmMock.get200Response();
 
         this.alfrescoJsApi = new AlfrescoApi({
-            host: this.hostActiviti,
+            hostBpm: this.hostBpm,
             provider: 'BPM'
         });
 

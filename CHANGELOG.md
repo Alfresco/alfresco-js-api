@@ -47,12 +47,18 @@ this.alfrescoJsApi.login();
 After:
     
 ```javascript
-this.alfrescoJsApi = new AlfrescoApi({alfrescoHost, activitiHost, contextRoot, ticket});
+this.alfrescoJsApi = new AlfrescoApi({hostECM, hostBPM, contextRoot, ticket});
 this.alfrescoJsApi.login(username, password);
 ```
 
+- Hosts configuration 
 
-   
+alfrescoHost parameter is now split in two different parameter 
+
+Property | Description  | default value| 
+------------- | ------------- | -------------|
+hostEcm| (Optional value The Ip or Name of the host where your Alfresco instance is running )|http://127.0.0.1:8080 |
+hostBpm| (Optional value The Ip or Name of the host where your Activiti instance is running )|http://127.0.0.1:9999 |
 
 
 <a name="0.2.2"></a>
