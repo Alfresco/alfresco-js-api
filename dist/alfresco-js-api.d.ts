@@ -305,7 +305,9 @@ export interface AlfrescoApi {
     createClient(): any;
     getClient(): any;
     getClientAuth(): any;
-    changeConfig(config: any);
+
+    changeEcmHost(ecmHost: any);
+    changeBpmHost(bpmHost: any);
 
     getNodeInfo(nodeId: string): any;
     deleteNode(nodeId: string): any;
