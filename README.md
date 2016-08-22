@@ -406,6 +406,28 @@ this.alfrescoJsApi.upload.uploadFile(fileToUpload, 'folderX/folderY/folderZ', pa
     
 ```
 
+The default behaviour of the Upload API will not create any thumbnail.
+In order to create a thumbnail you have to perform to pass the parameter ```javascript{renditions: 'doclib'}```  as in the  example below.
+This parameter will basically perform also a call to the Rendition API.
+For more information about the Rendition API :
+* [Rendition API](/src/alfresco-core-rest-api/docs/Rendition.md) 
+* [Rendition service Wiki](https://wiki.alfresco.com/wiki/Rendition_Service)
+
+```javascript
+ 
+var fs = require('fs');
+
+var fileToUpload = fs.createReadStream('./folderA/folderB/newFile.txt');
+
+this.alfrescoJsApi.upload.uploadFile(fileToUpload, null, null, null, {renditions: 'doclib'})
+    .then(function () {
+        console.log('File Uploaded in the root');
+    }, function (error) {
+        console.log('Error during the upload' + error);
+    });        
+
+```
+
 * To abort a file uploading
 
 
