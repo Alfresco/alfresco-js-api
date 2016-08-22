@@ -327,6 +327,24 @@ Method | Description  |
 ------------- | ------------- |
 tasksMock.get200Response()| | 
 tasksMock.get200ResponseGetTask| | 
+tasksMock.get404CompleteTask||
+tasksMock.get400TaskFilter||
+tasksMock.get200TaskFilter||
+tasksMock.get200CreateTask()||
+tasksMock.get200getTaskForm()||
 tasksMock.rec()| | 
 tasksMock.play()| |
 tasksMock.cleanAll()| |
+
+## Mock Models Api
+
+var ModelsMock = require('alfresco-js-api').Mock.Activiti.Models
+
+modelsMock = new ModelsMock(host);
+
+Method | Description  |
+------------- | ------------- |
+modelsMock.get200getModels()||
+modelsMock.rec()| | 
+modelsMock.play()| |
+modelsMock.cleanAll()| |

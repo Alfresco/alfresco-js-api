@@ -12,5 +12,6 @@ mockAlfrescoApi.ActivitiMock = {};
 mockAlfrescoApi.ActivitiMock.Auth = require('./activiti/authResponseMock.js');
 mockAlfrescoApi.ActivitiMock.Process = require('./activiti/processMock.js');
 mockAlfrescoApi.ActivitiMock.Tasks = require('./activiti/tasksMock.js');
+mockAlfrescoApi.ActivitiMock.Models = require('./activiti/modelsMock.js');
 
 module.exports = mockAlfrescoApi;

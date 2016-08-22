@@ -164,6 +164,14 @@ interface TagMock {
     clearAll();
 }
 
+interface ModelsMock {
+    new(host: string): ModelsMock;
+    get200Response();
+    rec();
+    play();
+    clearAll();
+}
+
 interface Mock {
     Auth: AuthMock;
     Node: NodeMock;
@@ -171,6 +179,7 @@ interface Mock {
     WebScript: WebScriptMock;
     ActivitiMock : ActivitiMock;
     Tag : TagMock;
+    Models: ModelsMock;
 }
 
 interface ActivitiMock {

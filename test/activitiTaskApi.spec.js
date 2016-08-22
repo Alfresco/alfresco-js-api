@@ -92,7 +92,7 @@ describe('Activiti Task Api', function () {
     });
 
     it.skip('Complete a Task Form', function (done) {
-        var taskId = 5006;
+        var taskId = 2518;
 
         this.tasksMock.rec();
 
@@ -103,4 +103,40 @@ describe('Activiti Task Api', function () {
         this.tasksMock.play();
     });
 
+    it('Create a Task', function (done) {
+
+        var taskName = 'test-name';
+
+        this.tasksMock.get200CreateTask(taskName);
+
+        var taskRepresentation = new this.alfrescoJsApi.activiti.TaskRepresentation(); // TaskRepresentation | taskRepresentation
+
+        taskRepresentation.name = taskName;
+
+        this.alfrescoJsApi.activiti.taskApi.createNewTask(taskRepresentation).then((data)=> {
+            done();
+        });
+    });
+
+    it.skip('Save task form', function (done) {
+
+        var taskId = 5006;
+
+        var saveTaskFormRepresentation = new this.alfrescoJsApi.activiti.SaveFormRepresentation();
+
+        this.alfrescoJsApi.activiti.taskApi.saveTaskForm(taskId, saveTaskFormRepresentation).then((data)=> {
+            done();
+        });
+    });
+
+    it('Get task form', function (done) {
+        this.tasksMock.get200getTaskForm();
+
+        var taskId = 2518;
+
+        this.alfrescoJsApi.activiti.taskApi.getTaskForm(taskId).then((data)=> {
+            expect(data.name).equal('Metadata');
+            done();
+        });
+    });
 });
