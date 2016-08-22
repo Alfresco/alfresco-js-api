@@ -222,6 +222,69 @@ interface BpmAuth {
     new(config: any): BpmAuth;
 }
 
+interface activiti {
+    new(config: any): activiti;
+    aboutApi: any;
+    adminEndpointsApi: any;
+    adminGroupsApi: any;
+    adminTenantsApi: any;
+    adminUsersApi: any;
+    alfrescoApi: any;
+    appsApi: any;
+    appsDefinitionApi: any;
+    appsRuntimeApi: any;
+    commentsApi: any;
+    contentApi: any;
+    contentRenditionApi: any;
+    editorApi: any;
+    groupsApi: any;
+    iDMSyncApi: any;
+    integrationAccountApi: any;
+    integrationAlfrescoCloudApi: any;
+    integrationAlfrescoOnPremiseApi: any;
+    integrationApi: any;
+    integrationBoxApi: any;
+    integrationDriveApi: any;
+    modelBpmnApi: any;
+    modelsApi: any;
+    modelsHistoryApi: any;
+    processApi: any;
+    processDefinitionsApi: any;
+    processDefinitionsFormApi: any;
+    processInstancesApi: any;
+    processInstancesInformationApi: any;
+    processInstancesListingApi: any;
+    processScopeApi: any;
+    profileApi: any;
+    scriptFileApi: any;
+    systemPropertiesApi: any;
+    taskActionsApi: any;
+    taskApi: any;
+    taskCheckListApi: any;
+    taskFormsApi: any;
+    temporaryApi: any;
+    userApi: any;
+    userFiltersApi: any;
+    usersWorkflowApi:any;
+}
+
+interface core {
+    associationsApi: any;
+    changesApi: any;
+    childAssociationsApi: any;
+    commentsApi: any;
+    favoritesApi: any;
+    networksApi: any;
+    nodesApi: any;
+    peopleApi: any;
+    ratingsApi: any;
+    renditionsApi: any;
+    searchApi: any;
+    sharedlinksApi: any;
+    sitesApi: any;
+    tagsApi: any;
+}
+
 export interface AlfrescoApi {
     new(config: any): AlfrescoApi;
 
@@ -230,8 +293,8 @@ export interface AlfrescoApi {
     Core: Core;
     Mock: Mock;
 
-    activiti: any;
-    core: any;
+    activiti: activiti;
+    core: core;
 
     search: any;
     nodes: any;

@@ -62,9 +62,12 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
     + [Get Task](#get-task)
     + [Filter Task](#filter-task)
     + [Complete Task](#complete-task)
+    + [Get Task Form](#get-task-form)
     + [Complete Task Form](#complete-task-form)
   * [Process Api](#process-api)
     + [Get Process Instances](#get-process-instances)
+  * [Models Api](#models-api)
+    + [Get Model](#get-model)
 - [Development](#development)
 - [Release History](#release-history)
 

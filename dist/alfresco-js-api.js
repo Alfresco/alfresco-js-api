@@ -73088,7 +73088,7 @@ module.exports.Core = AlfrescoCoreRestApi;
 module.exports.Auth = AlfrescoAuthRestApi;
 module.exports.Mock = AlfrescoMock;
 
-},{"../test/mockObjects/mockAlfrescoApi.js":413,"./alfresco-activiti-rest-api/src/index":180,"./alfresco-auth-rest-api/src/index":263,"./alfresco-core-rest-api/src/index.js":286,"./alfrescoContent":398,"./alfrescoNode":399,"./alfrescoUpload":400,"./alfrescoWebScript":401,"./bpmAuth":402,"./ecmAuth":403,"event-emitter":65,"lodash":72}],397:[function(require,module,exports){
+},{"../test/mockObjects/mockAlfrescoApi.js":414,"./alfresco-activiti-rest-api/src/index":180,"./alfresco-auth-rest-api/src/index":263,"./alfresco-core-rest-api/src/index.js":286,"./alfrescoContent":398,"./alfrescoNode":399,"./alfrescoUpload":400,"./alfrescoWebScript":401,"./bpmAuth":402,"./ecmAuth":403,"event-emitter":65,"lodash":72}],397:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74100,7 +74100,65 @@ var AuthResponseMock = function (_BaseMock) {
 
 module.exports = AuthResponseMock;
 
-},{"../baseMock":412,"nock":75}],405:[function(require,module,exports){
+},{"../baseMock":413,"nock":75}],405:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var nock = require('nock');
+var BaseMock = require('../baseMock');
+
+var ModelsMock = function (_BaseMock) {
+    _inherits(ModelsMock, _BaseMock);
+
+    function ModelsMock(host) {
+        _classCallCheck(this, ModelsMock);
+
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(ModelsMock).call(this, host));
+    }
+
+    _createClass(ModelsMock, [{
+        key: 'get200getModels',
+        value: function get200getModels() {
+            nock(this.host, { 'encodedQueryParams': true }).get('/activiti-app/api/enterprise/models').query({ 'filter': 'myReusableForms', 'modelType': '2' }).reply(200, {
+                'size': 1,
+                'total': 1,
+                'start': 0,
+                'data': [{
+                    'id': 1,
+                    'name': 'Metadata',
+                    'description': '',
+                    'createdBy': 1,
+                    'createdByFullName': ' Administrator',
+                    'lastUpdatedBy': 1,
+                    'lastUpdatedByFullName': ' Administrator',
+                    'lastUpdated': '2016-08-05T17:39:22.750+0000',
+                    'latestVersion': true,
+                    'version': 2,
+                    'comment': null,
+                    'stencilSet': null,
+                    'referenceId': null,
+                    'modelType': 2,
+                    'favorite': null,
+                    'permission': 'write',
+                    'tenantId': 1
+                }]
+            });
+        }
+    }]);
+
+    return ModelsMock;
+}(BaseMock);
+
+module.exports = ModelsMock;
+
+},{"../baseMock":413,"nock":75}],406:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74188,7 +74246,7 @@ var ProcessMock = function (_BaseMock) {
 
 module.exports = ProcessMock;
 
-},{"../baseMock":412,"nock":75}],406:[function(require,module,exports){
+},{"../baseMock":413,"nock":75}],407:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74454,6 +74512,661 @@ var TasksMock = function (_BaseMock) {
                 'managerOfCandidateGroup': false
             });
         }
+    }, {
+        key: 'get200getTaskForm',
+        value: function get200getTaskForm(name) {
+
+            nock('http://127.0.0.1:9999', { 'encodedQueryParams': true }).get('/activiti-app/api/enterprise/task-forms/2518').reply(200, {
+                'id': 1,
+                'name': 'Metadata',
+                'processDefinitionId': 'Sales:1:4',
+                'processDefinitionName': 'Sales',
+                'processDefinitionKey': 'Sales',
+                'taskId': '2518',
+                'taskName': 'Upload Document',
+                'taskDefinitionKey': 'sid-58C42FE9-EDAC-4F7B-B36B-F13DF0A8CE70',
+                'tabs': [],
+                'fields': [{
+                    'fieldType': 'ContainerRepresentation',
+                    'id': '1470229884327',
+                    'name': 'Label',
+                    'type': 'container',
+                    'value': null,
+                    'required': false,
+                    'readOnly': false,
+                    'overrideId': false,
+                    'colspan': 1,
+                    'placeholder': null,
+                    'minLength': 0,
+                    'maxLength': 0,
+                    'minValue': null,
+                    'maxValue': null,
+                    'regexPattern': null,
+                    'optionType': null,
+                    'hasEmptyValue': null,
+                    'options': null,
+                    'restUrl': null,
+                    'restResponsePath': null,
+                    'restIdProperty': null,
+                    'restLabelProperty': null,
+                    'tab': null,
+                    'className': null,
+                    'layout': null,
+                    'sizeX': 2,
+                    'sizeY': 1,
+                    'row': -1,
+                    'col': -1,
+                    'visibilityCondition': null,
+                    'numberOfColumns': 2,
+                    'fields': {
+                        '1': [{
+                            'fieldType': 'RestFieldRepresentation',
+                            'id': 'contenttype',
+                            'name': 'Content Type',
+                            'type': 'dropdown',
+                            'value': 'Choose one...',
+                            'required': false,
+                            'readOnly': false,
+                            'overrideId': false,
+                            'colspan': 1,
+                            'placeholder': null,
+                            'minLength': 0,
+                            'maxLength': 0,
+                            'minValue': null,
+                            'maxValue': null,
+                            'regexPattern': null,
+                            'optionType': null,
+                            'hasEmptyValue': true,
+                            'options': [{ 'id': 'empty', 'name': 'Choose one...' }, {
+                                'id': '@Other',
+                                'name': '@Other'
+                            }, { 'id': 'Blog Post', 'name': 'Blog Post' }, {
+                                'id': 'Customer case study',
+                                'name': 'Customer case study'
+                            }, { 'id': 'Event materials', 'name': 'Event materials' }],
+                            'restUrl': null,
+                            'restResponsePath': null,
+                            'restIdProperty': null,
+                            'restLabelProperty': null,
+                            'tab': null,
+                            'className': null,
+                            'params': { 'existingColspan': 1, 'maxColspan': 2 },
+                            'layout': { 'row': -1, 'column': -1, 'colspan': 1 },
+                            'sizeX': 1,
+                            'sizeY': 1,
+                            'row': -1,
+                            'col': -1,
+                            'visibilityCondition': null,
+                            'endpoint': null,
+                            'dataSource': null,
+                            'requestHeaders': null
+                        }],
+                        '2': [{
+                            'fieldType': 'RestFieldRepresentation',
+                            'id': 'usageinternalorexternal',
+                            'name': 'Usage ( Internal or External)',
+                            'type': 'dropdown',
+                            'value': 'Internal Use Only',
+                            'required': false,
+                            'readOnly': false,
+                            'overrideId': false,
+                            'colspan': 1,
+                            'placeholder': null,
+                            'minLength': 0,
+                            'maxLength': 0,
+                            'minValue': null,
+                            'maxValue': null,
+                            'regexPattern': null,
+                            'optionType': null,
+                            'hasEmptyValue': true,
+                            'options': [{ 'id': 'empty', 'name': 'Choose one...' }, {
+                                'id': 'Internal Use Only',
+                                'name': 'Internal Use Only'
+                            }, { 'id': 'External use permitted', 'name': 'External use permitted' }],
+                            'restUrl': null,
+                            'restResponsePath': null,
+                            'restIdProperty': null,
+                            'restLabelProperty': null,
+                            'tab': null,
+                            'className': null,
+                            'params': { 'existingColspan': 1, 'maxColspan': 1 },
+                            'layout': { 'row': -1, 'column': -1, 'colspan': 1 },
+                            'sizeX': 1,
+                            'sizeY': 1,
+                            'row': -1,
+                            'col': -1,
+                            'visibilityCondition': null,
+                            'endpoint': null,
+                            'dataSource': null,
+                            'requestHeaders': null
+                        }]
+                    }
+                }, {
+                    'fieldType': 'ContainerRepresentation',
+                    'id': '1470229890873',
+                    'name': 'Label',
+                    'type': 'container',
+                    'value': null,
+                    'required': false,
+                    'readOnly': false,
+                    'overrideId': false,
+                    'colspan': 1,
+                    'placeholder': null,
+                    'minLength': 0,
+                    'maxLength': 0,
+                    'minValue': null,
+                    'maxValue': null,
+                    'regexPattern': null,
+                    'optionType': null,
+                    'hasEmptyValue': null,
+                    'options': null,
+                    'restUrl': null,
+                    'restResponsePath': null,
+                    'restIdProperty': null,
+                    'restLabelProperty': null,
+                    'tab': null,
+                    'className': null,
+                    'layout': null,
+                    'sizeX': 2,
+                    'sizeY': 1,
+                    'row': -1,
+                    'col': -1,
+                    'visibilityCondition': null,
+                    'numberOfColumns': 2,
+                    'fields': {
+                        '1': [{
+                            'fieldType': 'RestFieldRepresentation',
+                            'id': 'productname',
+                            'name': 'Product Name',
+                            'type': 'dropdown',
+                            'value': 'Choose one...',
+                            'required': false,
+                            'readOnly': false,
+                            'overrideId': false,
+                            'colspan': 1,
+                            'placeholder': null,
+                            'minLength': 0,
+                            'maxLength': 0,
+                            'minValue': null,
+                            'maxValue': null,
+                            'regexPattern': null,
+                            'optionType': null,
+                            'hasEmptyValue': true,
+                            'options': [{ 'id': 'empty', 'name': 'Choose one...' }, {
+                                'id': 'ECM- Alfresco One',
+                                'name': 'ECM- Alfresco One'
+                            }, {
+                                'id': 'ECM- Alfresco in the Cloud',
+                                'name': 'ECM- Alfresco in the Cloud'
+                            }, {
+                                'id': 'ECM- Alfresco Community Edition',
+                                'name': 'ECM- Alfresco Community Edition'
+                            }, { 'id': 'ECM- Modules- Alfresco Mobile', 'name': 'ECM- Modules- Alfresco Mobile' }],
+                            'restUrl': null,
+                            'restResponsePath': null,
+                            'restIdProperty': null,
+                            'restLabelProperty': null,
+                            'tab': null,
+                            'className': null,
+                            'params': { 'existingColspan': 1, 'maxColspan': 2 },
+                            'layout': { 'row': -1, 'column': -1, 'colspan': 1 },
+                            'sizeX': 1,
+                            'sizeY': 1,
+                            'row': -1,
+                            'col': -1,
+                            'visibilityCondition': null,
+                            'endpoint': null,
+                            'dataSource': null,
+                            'requestHeaders': null
+                        }], '2': []
+                    }
+                }, {
+                    'fieldType': 'ContainerRepresentation',
+                    'id': '1470229895618',
+                    'name': 'Label',
+                    'type': 'container',
+                    'value': null,
+                    'required': false,
+                    'readOnly': false,
+                    'overrideId': false,
+                    'colspan': 1,
+                    'placeholder': null,
+                    'minLength': 0,
+                    'maxLength': 0,
+                    'minValue': null,
+                    'maxValue': null,
+                    'regexPattern': null,
+                    'optionType': null,
+                    'hasEmptyValue': null,
+                    'options': null,
+                    'restUrl': null,
+                    'restResponsePath': null,
+                    'restIdProperty': null,
+                    'restLabelProperty': null,
+                    'tab': null,
+                    'className': null,
+                    'layout': null,
+                    'sizeX': 2,
+                    'sizeY': 1,
+                    'row': -1,
+                    'col': -1,
+                    'visibilityCondition': null,
+                    'numberOfColumns': 3,
+                    'fields': {
+                        '1': [{
+                            'fieldType': 'RestFieldRepresentation',
+                            'id': 'language',
+                            'name': 'Language',
+                            'type': 'dropdown',
+                            'value': 'English',
+                            'required': false,
+                            'readOnly': false,
+                            'overrideId': false,
+                            'colspan': 1,
+                            'placeholder': null,
+                            'minLength': 0,
+                            'maxLength': 0,
+                            'minValue': null,
+                            'maxValue': null,
+                            'regexPattern': null,
+                            'optionType': null,
+                            'hasEmptyValue': true,
+                            'options': [{ 'id': 'empty', 'name': 'Choose one...' }, {
+                                'id': 'English',
+                                'name': 'English'
+                            }, { 'id': 'French', 'name': 'French' }, {
+                                'id': 'Italian',
+                                'name': 'Italian'
+                            }, { 'id': 'German', 'name': 'German' }, { 'id': 'Spanish', 'name': 'Spanish' }],
+                            'restUrl': null,
+                            'restResponsePath': null,
+                            'restIdProperty': null,
+                            'restLabelProperty': null,
+                            'tab': null,
+                            'className': null,
+                            'params': { 'existingColspan': 1, 'maxColspan': 3 },
+                            'layout': { 'row': -1, 'column': -1, 'colspan': 1 },
+                            'sizeX': 1,
+                            'sizeY': 1,
+                            'row': -1,
+                            'col': -1,
+                            'visibilityCondition': null,
+                            'endpoint': null,
+                            'dataSource': null,
+                            'requestHeaders': null
+                        }],
+                        '2': [{
+                            'fieldType': 'RestFieldRepresentation',
+                            'id': 'region',
+                            'name': 'Region',
+                            'type': 'dropdown',
+                            'value': 'ALL',
+                            'required': false,
+                            'readOnly': false,
+                            'overrideId': false,
+                            'colspan': 1,
+                            'placeholder': null,
+                            'minLength': 0,
+                            'maxLength': 0,
+                            'minValue': null,
+                            'maxValue': null,
+                            'regexPattern': null,
+                            'optionType': null,
+                            'hasEmptyValue': true,
+                            'options': [{ 'id': 'empty', 'name': 'Choose one...' }, {
+                                'id': 'ALL',
+                                'name': 'ALL'
+                            }, { 'id': 'AMER', 'name': 'AMER' }, { 'id': 'EMEA', 'name': 'EMEA' }, {
+                                'id': 'APAC',
+                                'name': 'APAC'
+                            }],
+                            'restUrl': null,
+                            'restResponsePath': null,
+                            'restIdProperty': null,
+                            'restLabelProperty': null,
+                            'tab': null,
+                            'className': null,
+                            'params': { 'existingColspan': 1, 'maxColspan': 2 },
+                            'layout': { 'row': -1, 'column': -1, 'colspan': 1 },
+                            'sizeX': 1,
+                            'sizeY': 1,
+                            'row': -1,
+                            'col': -1,
+                            'visibilityCondition': null,
+                            'endpoint': null,
+                            'dataSource': null,
+                            'requestHeaders': null
+                        }],
+                        '3': [{
+                            'fieldType': 'RestFieldRepresentation',
+                            'id': 'country',
+                            'name': 'Country',
+                            'type': 'dropdown',
+                            'value': 'Choose one...',
+                            'required': false,
+                            'readOnly': false,
+                            'overrideId': false,
+                            'colspan': 1,
+                            'placeholder': null,
+                            'minLength': 0,
+                            'maxLength': 0,
+                            'minValue': null,
+                            'maxValue': null,
+                            'regexPattern': null,
+                            'optionType': null,
+                            'hasEmptyValue': true,
+                            'options': [{ 'id': 'empty', 'name': 'Choose one...' }, {
+                                'id': 'ALL',
+                                'name': 'ALL'
+                            }, { 'id': 'United Kingdom', 'name': 'United Kingdom' }, {
+                                'id': 'France',
+                                'name': 'France'
+                            }, { 'id': 'Spain', 'name': 'Spain' }, { 'id': 'Germany', 'name': 'Germany' }],
+                            'restUrl': null,
+                            'restResponsePath': null,
+                            'restIdProperty': null,
+                            'restLabelProperty': null,
+                            'tab': null,
+                            'className': null,
+                            'params': { 'existingColspan': 1, 'maxColspan': 1 },
+                            'layout': { 'row': -1, 'column': -1, 'colspan': 1 },
+                            'sizeX': 1,
+                            'sizeY': 1,
+                            'row': -1,
+                            'col': -1,
+                            'visibilityCondition': null,
+                            'endpoint': null,
+                            'dataSource': null,
+                            'requestHeaders': null
+                        }]
+                    }
+                }, {
+                    'fieldType': 'ContainerRepresentation',
+                    'id': '1470229910390',
+                    'name': 'Label',
+                    'type': 'container',
+                    'value': null,
+                    'required': false,
+                    'readOnly': false,
+                    'overrideId': false,
+                    'colspan': 1,
+                    'placeholder': null,
+                    'minLength': 0,
+                    'maxLength': 0,
+                    'minValue': null,
+                    'maxValue': null,
+                    'regexPattern': null,
+                    'optionType': null,
+                    'hasEmptyValue': null,
+                    'options': null,
+                    'restUrl': null,
+                    'restResponsePath': null,
+                    'restIdProperty': null,
+                    'restLabelProperty': null,
+                    'tab': null,
+                    'className': null,
+                    'layout': null,
+                    'sizeX': 2,
+                    'sizeY': 1,
+                    'row': -1,
+                    'col': -1,
+                    'visibilityCondition': null,
+                    'numberOfColumns': 2,
+                    'fields': {
+                        '1': [{
+                            'fieldType': 'FormFieldRepresentation',
+                            'id': 'customername',
+                            'name': 'Customer Name',
+                            'type': 'text',
+                            'value': null,
+                            'required': false,
+                            'readOnly': false,
+                            'overrideId': false,
+                            'colspan': 1,
+                            'placeholder': null,
+                            'minLength': 0,
+                            'maxLength': 0,
+                            'minValue': null,
+                            'maxValue': null,
+                            'regexPattern': null,
+                            'optionType': null,
+                            'hasEmptyValue': null,
+                            'options': null,
+                            'restUrl': null,
+                            'restResponsePath': null,
+                            'restIdProperty': null,
+                            'restLabelProperty': null,
+                            'tab': null,
+                            'className': null,
+                            'params': { 'existingColspan': 1, 'maxColspan': 2 },
+                            'layout': { 'row': -1, 'column': -1, 'colspan': 1 },
+                            'sizeX': 1,
+                            'sizeY': 1,
+                            'row': -1,
+                            'col': -1,
+                            'visibilityCondition': null
+                        }, {
+                            'fieldType': 'RestFieldRepresentation',
+                            'id': 'industry',
+                            'name': 'Industry',
+                            'type': 'dropdown',
+                            'value': 'Choose one...',
+                            'required': false,
+                            'readOnly': false,
+                            'overrideId': false,
+                            'colspan': 1,
+                            'placeholder': null,
+                            'minLength': 0,
+                            'maxLength': 0,
+                            'minValue': null,
+                            'maxValue': null,
+                            'regexPattern': null,
+                            'optionType': null,
+                            'hasEmptyValue': true,
+                            'options': [{ 'id': 'empty', 'name': 'Choose one...' }, {
+                                'id': '@Other',
+                                'name': '@Other'
+                            }, { 'id': 'Construction', 'name': 'Construction' }, {
+                                'id': 'Education',
+                                'name': 'Education'
+                            }, {
+                                'id': 'Financial Services',
+                                'name': 'Financial Services'
+                            }, {
+                                'id': 'Public Administration &amp; Government',
+                                'name': 'Public Administration &amp; Government'
+                            }, { 'id': 'Healthcare', 'name': 'Healthcare' }, {
+                                'id': 'Life Sciences',
+                                'name': 'Life Sciences'
+                            }, { 'id': 'Manufacturing', 'name': 'Manufacturing' }],
+                            'restUrl': null,
+                            'restResponsePath': null,
+                            'restIdProperty': null,
+                            'restLabelProperty': null,
+                            'tab': null,
+                            'className': null,
+                            'params': { 'existingColspan': 1, 'maxColspan': 2 },
+                            'layout': { 'row': -1, 'column': -1, 'colspan': 1 },
+                            'sizeX': 1,
+                            'sizeY': 1,
+                            'row': -1,
+                            'col': -1,
+                            'visibilityCondition': null,
+                            'endpoint': null,
+                            'dataSource': null,
+                            'requestHeaders': null
+                        }, {
+                            'fieldType': 'RestFieldRepresentation',
+                            'id': 'solution',
+                            'name': 'Solution',
+                            'type': 'dropdown',
+                            'value': 'Choose one...',
+                            'required': false,
+                            'readOnly': false,
+                            'overrideId': false,
+                            'colspan': 1,
+                            'placeholder': null,
+                            'minLength': 0,
+                            'maxLength': 0,
+                            'minValue': null,
+                            'maxValue': null,
+                            'regexPattern': null,
+                            'optionType': null,
+                            'hasEmptyValue': true,
+                            'options': [{ 'id': 'empty', 'name': 'Choose one...' }, {
+                                'id': 'Content Management',
+                                'name': 'Content Management'
+                            }, {
+                                'id': 'External Collaboration',
+                                'name': 'External Collaboration'
+                            }, {
+                                'id': 'Information Governance',
+                                'name': 'Information Governance'
+                            }, { 'id': 'Case Management', 'name': 'Case Management' }, {
+                                'id': 'Process Management',
+                                'name': 'Process Management'
+                            }],
+                            'restUrl': null,
+                            'restResponsePath': null,
+                            'restIdProperty': null,
+                            'restLabelProperty': null,
+                            'tab': null,
+                            'className': null,
+                            'params': { 'existingColspan': 1, 'maxColspan': 2 },
+                            'layout': { 'row': -1, 'column': -1, 'colspan': 1 },
+                            'sizeX': 1,
+                            'sizeY': 1,
+                            'row': -1,
+                            'col': -1,
+                            'visibilityCondition': null,
+                            'endpoint': null,
+                            'dataSource': null,
+                            'requestHeaders': null
+                        }],
+                        '2': [{
+                            'fieldType': 'FormFieldRepresentation',
+                            'id': 'partnername',
+                            'name': 'Partner Name',
+                            'type': 'text',
+                            'value': null,
+                            'required': false,
+                            'readOnly': false,
+                            'overrideId': false,
+                            'colspan': 1,
+                            'placeholder': null,
+                            'minLength': 0,
+                            'maxLength': 0,
+                            'minValue': null,
+                            'maxValue': null,
+                            'regexPattern': null,
+                            'optionType': null,
+                            'hasEmptyValue': null,
+                            'options': null,
+                            'restUrl': null,
+                            'restResponsePath': null,
+                            'restIdProperty': null,
+                            'restLabelProperty': null,
+                            'tab': null,
+                            'className': null,
+                            'params': { 'existingColspan': 1, 'maxColspan': 1 },
+                            'layout': { 'row': -1, 'column': -1, 'colspan': 1 },
+                            'sizeX': 1,
+                            'sizeY': 1,
+                            'row': -1,
+                            'col': -1,
+                            'visibilityCondition': null
+                        }, {
+                            'fieldType': 'RestFieldRepresentation',
+                            'id': 'usecase',
+                            'name': 'Use case',
+                            'type': 'dropdown',
+                            'value': '@ None selected',
+                            'required': false,
+                            'readOnly': false,
+                            'overrideId': false,
+                            'colspan': 1,
+                            'placeholder': null,
+                            'minLength': 0,
+                            'maxLength': 0,
+                            'minValue': null,
+                            'maxValue': null,
+                            'regexPattern': null,
+                            'optionType': null,
+                            'hasEmptyValue': true,
+                            'options': [{ 'id': 'empty', 'name': 'Choose one...' }, {
+                                'id': '@ None selected',
+                                'name': '@ None selected'
+                            }, {
+                                'id': 'HR- Employee Records',
+                                'name': 'HR- Employee Records'
+                            }, {
+                                'id': 'HR- Employee On-Boarding',
+                                'name': 'HR- Employee On-Boarding'
+                            }, {
+                                'id': 'HR- Disciplinary Process Management',
+                                'name': 'HR- Disciplinary Process Management'
+                            }],
+                            'restUrl': null,
+                            'restResponsePath': null,
+                            'restIdProperty': null,
+                            'restLabelProperty': null,
+                            'tab': null,
+                            'className': null,
+                            'params': { 'existingColspan': 1, 'maxColspan': 1 },
+                            'layout': { 'row': -1, 'column': -1, 'colspan': 1 },
+                            'sizeX': 1,
+                            'sizeY': 1,
+                            'row': -1,
+                            'col': -1,
+                            'visibilityCondition': null,
+                            'endpoint': null,
+                            'dataSource': null,
+                            'requestHeaders': null
+                        }, {
+                            'fieldType': 'FormFieldRepresentation',
+                            'id': 'competitor',
+                            'name': 'Competitor',
+                            'type': 'text',
+                            'value': null,
+                            'required': false,
+                            'readOnly': false,
+                            'overrideId': false,
+                            'colspan': 1,
+                            'placeholder': null,
+                            'minLength': 0,
+                            'maxLength': 0,
+                            'minValue': null,
+                            'maxValue': null,
+                            'regexPattern': null,
+                            'optionType': null,
+                            'hasEmptyValue': null,
+                            'options': null,
+                            'restUrl': null,
+                            'restResponsePath': null,
+                            'restIdProperty': null,
+                            'restLabelProperty': null,
+                            'tab': null,
+                            'className': null,
+                            'params': { 'existingColspan': 1, 'maxColspan': 1 },
+                            'layout': { 'row': -1, 'column': -1, 'colspan': 1 },
+                            'sizeX': 1,
+                            'sizeY': 1,
+                            'row': -1,
+                            'col': -1,
+                            'visibilityCondition': null
+                        }]
+                    }
+                }],
+                'outcomes': [],
+                'javascriptEvents': [],
+                'className': '',
+                'style': '',
+                'customFieldTemplates': {},
+                'metadata': {},
+                'variables': [],
+                'gridsterForm': false
+            });
+        }
     }]);
 
     return TasksMock;
@@ -74461,7 +75174,7 @@ var TasksMock = function (_BaseMock) {
 
 module.exports = TasksMock;
 
-},{"../baseMock":412,"nock":75}],407:[function(require,module,exports){
+},{"../baseMock":413,"nock":75}],408:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74572,7 +75285,7 @@ var AuthResponseMock = function (_BaseMock) {
 
 module.exports = AuthResponseMock;
 
-},{"../baseMock":412,"nock":75}],408:[function(require,module,exports){
+},{"../baseMock":413,"nock":75}],409:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74849,7 +75562,7 @@ var NodeMock = function (_BaseMock) {
 
 module.exports = NodeMock;
 
-},{"../baseMock":412,"nock":75}],409:[function(require,module,exports){
+},{"../baseMock":413,"nock":75}],410:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -74912,7 +75625,7 @@ var TagMock = function (_BaseMock) {
 
 module.exports = TagMock;
 
-},{"../baseMock":412,"nock":75}],410:[function(require,module,exports){
+},{"../baseMock":413,"nock":75}],411:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -75020,7 +75733,7 @@ var UploadMock = function (_BaseMock) {
 
 module.exports = UploadMock;
 
-},{"../baseMock":412,"nock":75}],411:[function(require,module,exports){
+},{"../baseMock":413,"nock":75}],412:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -75099,7 +75812,7 @@ var WebScriptMock = function (_BaseMock) {
 
 module.exports = WebScriptMock;
 
-},{"../baseMock":412,"nock":75}],412:[function(require,module,exports){
+},{"../baseMock":413,"nock":75}],413:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -75147,7 +75860,7 @@ var BaseMock = function () {
 
 module.exports = BaseMock;
 
-},{"nock":75}],413:[function(require,module,exports){
+},{"nock":75}],414:[function(require,module,exports){
 'use strict';
 
 var mockAlfrescoApi = {};
@@ -75164,8 +75877,9 @@ mockAlfrescoApi.ActivitiMock = {};
 mockAlfrescoApi.ActivitiMock.Auth = require('./activiti/authResponseMock.js');
 mockAlfrescoApi.ActivitiMock.Process = require('./activiti/processMock.js');
 mockAlfrescoApi.ActivitiMock.Tasks = require('./activiti/tasksMock.js');
+mockAlfrescoApi.ActivitiMock.Models = require('./activiti/modelsMock.js');
 
 module.exports = mockAlfrescoApi;
 
-},{"./activiti/authResponseMock.js":404,"./activiti/processMock.js":405,"./activiti/tasksMock.js":406,"./alfresco/authResponseMock.js":407,"./alfresco/nodeMock.js":408,"./alfresco/tagMock.js":409,"./alfresco/uploadMock.js":410,"./alfresco/webScriptMock.js":411}]},{},[1])(1)
+},{"./activiti/authResponseMock.js":404,"./activiti/modelsMock.js":405,"./activiti/processMock.js":406,"./activiti/tasksMock.js":407,"./alfresco/authResponseMock.js":408,"./alfresco/nodeMock.js":409,"./alfresco/tagMock.js":410,"./alfresco/uploadMock.js":411,"./alfresco/webScriptMock.js":412}]},{},[1])(1)
 });

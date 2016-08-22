@@ -25,6 +25,7 @@ Alfresco Mock API use [Nock](https://github.com/node-nock/nock) which is an HTTP
   * [Mock Auth Api](#mock-auth-api-1)
   * [Mock Process Api](#mock-process-api)
   * [Mock Tasks Api](#mock-tasks-api)
+  * [Mock Models Api](#mock-models-api)
 
 <!-- tocstop -->
 
