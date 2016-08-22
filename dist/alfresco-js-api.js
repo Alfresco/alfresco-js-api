@@ -72810,8 +72810,8 @@ var AlfrescoApi = function () {
      * @param {Object} config
      *
      *      config = {
-     *        host:       // alfrescoHost Your share server IP or DNS name
-     *        hostActiviti: // hostActiviti Your activiti server IP or DNS name
+     *        hostEcm:       // hostEcm Your share server IP or DNS name
+     *        hostBpm: // hostBpm Your activiti server IP or DNS name
      *        contextRoot: // contextRoot default value alfresco
      *        provider:   // ECM BPM ALL
      *        ticket:     // Ticket if you already have a ticket you can pass only the ticket and skip the login, in this case you don't need username and password
@@ -72821,13 +72821,12 @@ var AlfrescoApi = function () {
         _classCallCheck(this, AlfrescoApi);
 
         this.config = {
-            host: config.host || 'http://127.0.0.1:8080',
-            hostActiviti: config.hostActiviti || 'http://127.0.0.1:9999',
+            hostEcm: config.hostEcm || 'http://127.0.0.1:8080',
+            hostBpm: config.hostBpm || 'http://127.0.0.1:9999',
             contextRoot: config.contextRoot || 'alfresco',
             provider: config.provider || 'ECM',
             ticket: config.ticket
         };
-
         this.bpmAuth = new BpmAuth(this.config);
         this.ecmAuth = new EcmAuth(this.config);
 
@@ -72837,6 +72836,18 @@ var AlfrescoApi = function () {
     }
 
     _createClass(AlfrescoApi, [{
+        key: 'changeEcmHost',
+        value: function changeEcmHost(hostEcm) {
+            this.config.hostEcm = hostEcm;
+            this.ecmAuth.changeHost(hostEcm);
+        }
+    }, {
+        key: 'changeBpmHost',
+        value: function changeBpmHost(hostBpm) {
+            this.config.hostBpm = hostBpm;
+            this.bpmAuth.changeHost(hostBpm);
+        }
+    }, {
         key: 'initObjects',
         value: function initObjects() {
             //BPM
@@ -73686,23 +73697,30 @@ var BpmAuth = function (_AlfrescoApiClient) {
 
         var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BpmAuth).call(this));
 
+        _this.config = config;
         _this.ticket = undefined;
-        _this.basePath = config.hostActiviti + '/activiti-app'; //Activiti Call
+        _this.basePath = config.hostBpm + '/activiti-app'; //Activiti Call
 
         Emitter.call(_this);
         return _this;
     }
 
-    /**
-     * login Activiti API
-     * @param  {String} username:   // Username to login
-     * @param  {String} password:   // Password to login
-     *
-     * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
-     * */
-
-
     _createClass(BpmAuth, [{
+        key: 'changeHost',
+        value: function changeHost(host) {
+            this.config.hostBpm = host;
+            this.basePath = this.config.hostBpm + '/activiti-app'; //Activiti Call
+        }
+
+        /**
+         * login Activiti API
+         * @param  {String} username:   // Username to login
+         * @param  {String} password:   // Password to login
+         *
+         * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
+         * */
+
+    }, {
         key: 'login',
         value: function login(username, password) {
             var _this2 = this;
@@ -73872,7 +73890,8 @@ var EcmAuth = function (_AlfrescoApiClient) {
         var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(EcmAuth).call(this));
 
         _this.config = config;
-        _this.basePath = _this.config.host + '/' + _this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
+
+        _this.basePath = _this.config.hostEcm + '/' + _this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
 
         if (_this.config.ticket) {
             _this.setTicket(config.ticket);
@@ -73882,16 +73901,27 @@ var EcmAuth = function (_AlfrescoApiClient) {
         return _this;
     }
 
-    /**
-     * login Alfresco API
-     * @param  {String} username:   // Username to login
-     * @param  {String} password:   // Password to login
-     *
-     * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
-     * */
-
-
     _createClass(EcmAuth, [{
+        key: 'changeHost',
+        value: function changeHost(host) {
+            this.config.hostEcm = host;
+
+            this.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
+
+            if (this.alfrescoClient) {
+                this.alfrescoClient.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/alfresco/versions/1'; //Auth Call
+            }
+        }
+
+        /**
+         * login Alfresco API
+         * @param  {String} username:   // Username to login
+         * @param  {String} password:   // Password to login
+         *
+         * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
+         * */
+
+    }, {
         key: 'login',
         value: function login(username, password) {
             var _this2 = this;
@@ -74036,10 +74066,10 @@ var EcmAuth = function (_AlfrescoApiClient) {
         key: 'getClient',
         value: function getClient() {
             if (!this.alfrescoClient) {
-                this.alfrescoClient = new AlfrescoApiClient(this.config.host);
+                this.alfrescoClient = new AlfrescoApiClient(this.config.hostEcm);
             }
 
-            this.alfrescoClient.basePath = this.config.host + '/' + this.config.contextRoot + '/api/-default-/public/alfresco/versions/1'; //Auth Call
+            this.alfrescoClient.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/alfresco/versions/1'; //Auth Call
             this.alfrescoClient.authentications = this.authentications;
             return this.alfrescoClient;
         }
@@ -75552,6 +75582,50 @@ var NodeMock = function (_BaseMock) {
                     'id': '14934b56-db67-40a7-81bd-fca4777716ac',
                     'nodeType': 'cm:folder',
                     'parentId': 'd4f87809-10d9-49a3-ae7d-7a2640f87f3d'
+                }
+            });
+        }
+    }, {
+        key: 'get200ResponseChildrenFutureNewPossibleValue',
+        value: function get200ResponseChildrenFutureNewPossibleValue() {
+            nock(this.host, { 'encodedQueryParams': true }).get('/alfresco/api/-default-/public/alfresco/versions/1/nodes/b4cff62a-664d-4d45-9302-98723eac1319/children').reply(200, {
+                'list': {
+                    'pagination': {
+                        'count': 2,
+                        'hasMoreItems': false,
+                        'totalItems': 2,
+                        'skipCount': 0,
+                        'maxItems': 100
+                    },
+                    'entries': [{
+                        'entry': {
+                            'createdAt': '2011-02-15T20:19:00.007+0000',
+                            'isFolder': true,
+                            'isFile': false,
+                            'createdByUser': { 'id': 'mjackson', 'displayName': 'Mike Jackson' },
+                            'modifiedAt': '2011-02-15T20:19:00.007+0000',
+                            'modifiedByUser': { 'id': 'mjackson', 'displayName': 'Mike Jackson' },
+                            'name': 'dataLists',
+                            'id': '64f69e69-f61e-42a3-8697-95eea1f2bda2',
+                            'nodeType': 'cm:folder',
+                            'parentId': 'b4cff62a-664d-4d45-9302-98723eac1319',
+                            'impossibleProperties': 'impossibleRightValue'
+                        }
+                    }, {
+                        'entry': {
+                            'createdAt': '2011-02-15T22:04:54.290+0000',
+                            'isFolder': true,
+                            'isFile': false,
+                            'createdByUser': { 'id': 'mjackson', 'displayName': 'Mike Jackson' },
+                            'modifiedAt': '2011-02-15T22:04:54.290+0000',
+                            'modifiedByUser': { 'id': 'mjackson', 'displayName': 'Mike Jackson' },
+                            'name': 'discussions',
+                            'id': '059c5bc7-2d38-4dc5-96b8-d09cd3c69b4c',
+                            'nodeType': 'cm:folder',
+                            'parentId': 'b4cff62a-664d-4d45-9302-98723eac1319',
+                            'impossibleProperties': 'impossibleRightValue'
+                        }
+                    }]
                 }
             });
         }

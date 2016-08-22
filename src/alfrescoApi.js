@@ -33,13 +33,22 @@ class AlfrescoApi {
             provider: config.provider || 'ECM',
             ticket: config.ticket
         };
-
         this.bpmAuth = new BpmAuth(this.config);
         this.ecmAuth = new EcmAuth(this.config);
 
         this.initObjects();
 
         Emitter.call(this);
+    }
+
+    changeEcmHost(hostEcm) {
+        this.config.hostEcm = hostEcm;
+        this.ecmAuth.changeHost(hostEcm);
+    }
+
+    changeBpmHost(hostBpm) {
+        this.config.hostBpm = hostBpm;
+        this.bpmAuth.changeHost(hostBpm);
     }
 
     initObjects() {
@@ -59,7 +68,6 @@ class AlfrescoApi {
         this.content = new AlfrescoContent(this.ecmAuth);
         this.upload = new AlfrescoUpload();
         this.webScript = new AlfrescoWebScriptApi();
-
     }
 
     _instantiateObjects(module, moduleCopy) {

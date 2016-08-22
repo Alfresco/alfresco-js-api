@@ -10,10 +10,16 @@ class BpmAuth extends AlfrescoApiClient {
      */
     constructor(config) {
         super();
+        this.config = config;
         this.ticket = undefined;
         this.basePath = config.hostBpm + '/activiti-app';   //Activiti Call
 
         Emitter.call(this);
+    }
+
+    changeHost(host) {
+        this.config.hostBpm = host;
+        this.basePath =  this.config.hostBpm + '/activiti-app';   //Activiti Call
     }
 
     /**
