@@ -61,6 +61,24 @@ hostEcm| (Optional value The Ip or Name of the host where your Alfresco instance
 hostBpm| (Optional value The Ip or Name of the host where your Activiti instance is running )|http://127.0.0.1:9999 |
 
 
+- Get Ticket
+
+Now the api are able ot auth in BPM and ECM so
+
+Before:
+
+```javascript
+this.alfrescoJsApi.getTicket();
+```
+    
+After:
+
+```javascript
+ var ecmTicket = this.alfrescoJsApi.getTicketEcm() ;
+ var bpmTicket  = this.alfrescoJsApi.getTicketBpm();
+```
+
+
 <a name="0.2.2"></a>
 # [0.2.2](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.2.2) (2016-07-21)
 - [Cannot find module mockAlfrescoApi #29](https://github.com/Alfresco/alfresco-js-api/issues/29)

@@ -43,6 +43,7 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
     + [Login with Username and Password BPM](#login-with-username-and-password-bpm)
   * [Logout](#logout)
   * [isLoggedIn](#isloggedin)
+  * [Get tickets](#get-tickets)
   * [Events login/logout](#events-loginlogout)
 - [ECM](#ecm)
   * [Get File or Folder Info](#get-file-or-folder-info)
@@ -230,6 +231,28 @@ if (isLoggedIn) {
 }
 
 ```
+## Get tickets
+
+getTicketEcm()
+
+>After the log in you can retrieve you ECM ticket
+
+```javascript
+ var ecmTicket = this.alfrescoJsApi.getTicketEcm() ;
+ console.log('This is your  ECM ticket  ' + ecmTicket);
+ 
+```
+
+getTicketBpm()
+
+>After the log in you can retrieve you BPM ticket
+
+```javascript
+
+ var bpmTicket  = this.alfrescoJsApi.getTicketBpm();
+ console.log('This is your BPM ticket ' + bpmTicket);
+```
+
 ## Events login/logout
 
 >  The login/logout are also an EventEmitter which you can register to listen to any of the following event types:
