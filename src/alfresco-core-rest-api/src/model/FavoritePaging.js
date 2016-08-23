@@ -39,8 +39,8 @@
    * @return {module:model/FavoritePaging} The populated <code>FavoritePaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('list')) {
         obj['list'] = FavoritePagingList.constructFromObject(data['list']);

@@ -48791,7 +48791,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('externalId')) {
         obj['externalId'] = ApiClient.convertToType(data['externalId'], 'String');
@@ -48876,7 +48876,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
     }
     return obj;
   };
@@ -48931,7 +48931,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('email')) {
         obj['email'] = ApiClient.convertToType(data['email'], 'String');
@@ -49030,7 +49030,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('capabilities')) {
         obj['capabilities'] = ApiClient.convertToType(data['capabilities'], ['String']);
@@ -49094,7 +49094,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('icon')) {
         obj['icon'] = ApiClient.convertToType(data['icon'], 'String');
@@ -49179,7 +49179,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('comment')) {
         obj['comment'] = ApiClient.convertToType(data['comment'], 'String');
@@ -49250,7 +49250,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('defaultAppId')) {
         obj['defaultAppId'] = ApiClient.convertToType(data['defaultAppId'], 'String');
@@ -49370,7 +49370,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('appDefinition')) {
         obj['appDefinition'] = AppDefinitionRepresentation.constructFromObject(data['appDefinition']);
@@ -49476,7 +49476,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('createdBy')) {
         obj['createdBy'] = ApiClient.convertToType(data['createdBy'], 'Integer');
@@ -49610,7 +49610,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('array')) {
         obj['array'] = ApiClient.convertToType(data['array'], 'Boolean');
@@ -49866,7 +49866,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('authenticationURL')) {
         obj['authenticationURL'] = ApiClient.convertToType(data['authenticationURL'], 'String');
@@ -49944,7 +49944,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('accountType')) {
         obj['accountType'] = ApiClient.convertToType(data['accountType'], 'String');
@@ -50043,7 +50043,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('newPassword')) {
         obj['newPassword'] = ApiClient.convertToType(data['newPassword'], 'String');
@@ -50114,7 +50114,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('order')) {
         obj['order'] = ApiClient.convertToType(data['order'], ['String']);
@@ -50178,7 +50178,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('created')) {
         obj['created'] = ApiClient.convertToType(data['created'], 'Date');
@@ -50263,7 +50263,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('outcome')) {
         obj['outcome'] = ApiClient.convertToType(data['outcome'], 'String');
@@ -50334,7 +50334,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('leftFormFieldId')) {
         obj['leftFormFieldId'] = ApiClient.convertToType(data['leftFormFieldId'], 'String');
@@ -50447,7 +50447,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('name')) {
         obj['name'] = ApiClient.convertToType(data['name'], 'String');
@@ -50532,7 +50532,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('name')) {
         obj['name'] = ApiClient.convertToType(data['name'], 'String');
@@ -50617,7 +50617,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('active')) {
         obj['active'] = ApiClient.convertToType(data['active'], 'Boolean');
@@ -50702,7 +50702,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('created')) {
         obj['created'] = ApiClient.convertToType(data['created'], 'Date');
@@ -50801,7 +50801,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('basicAuthId')) {
         obj['basicAuthId'] = ApiClient.convertToType(data['basicAuthId'], 'Integer');
@@ -50928,7 +50928,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('name')) {
         obj['name'] = ApiClient.convertToType(data['name'], 'String');
@@ -50999,7 +50999,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('name')) {
         obj['name'] = ApiClient.convertToType(data['name'], 'String');
@@ -51070,7 +51070,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('attributes')) {
         obj['attributes'] = ApiClient.convertToType(data['attributes'], [EntityAttributeScopeRepresentation]);
@@ -51155,7 +51155,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('absolute')) {
         obj['absolute'] = ApiClient.convertToType(data['absolute'], 'Boolean');
@@ -51317,7 +51317,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('className')) {
         obj['className'] = ApiClient.convertToType(data['className'], 'String');
@@ -51507,7 +51507,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('className')) {
         obj['className'] = ApiClient.convertToType(data['className'], 'String');
@@ -51774,7 +51774,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('event')) {
         obj['event'] = ApiClient.convertToType(data['event'], 'String');
@@ -51845,7 +51845,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -51916,7 +51916,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('description')) {
         obj['description'] = ApiClient.convertToType(data['description'], 'String');
@@ -52043,7 +52043,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('comment')) {
         obj['comment'] = ApiClient.convertToType(data['comment'], 'String');
@@ -52142,7 +52142,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('description')) {
         obj['description'] = ApiClient.convertToType(data['description'], 'String');
@@ -52241,7 +52241,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -52319,7 +52319,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -52390,7 +52390,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'Integer');
@@ -52461,7 +52461,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('capabilities')) {
         obj['capabilities'] = ApiClient.convertToType(data['capabilities'], [GroupCapabilityRepresentation]);
@@ -52602,7 +52602,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('created')) {
         obj['created'] = ApiClient.convertToType(data['created'], 'Date');
@@ -52687,7 +52687,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('colspan')) {
         obj['colspan'] = ApiClient.convertToType(data['colspan'], 'Integer');
@@ -52765,7 +52765,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('description')) {
         obj['description'] = ApiClient.convertToType(data['description'], 'String');
@@ -52857,7 +52857,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('externalId')) {
         obj['externalId'] = ApiClient.convertToType(data['externalId'], 'String');
@@ -52949,7 +52949,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'Integer');
@@ -53020,7 +53020,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('email')) {
         obj['email'] = ApiClient.convertToType(data['email'], 'String');
@@ -53122,7 +53122,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
       ApiClient.constructFromObject(data, obj, Array);
     }
     return obj;
@@ -53181,7 +53181,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
       ApiClient.constructFromObject(data, obj, Array);
     }
     return obj;
@@ -53240,7 +53240,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
       ApiClient.constructFromObject(data, obj, Array);
     }
     return obj;
@@ -53299,7 +53299,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
       ApiClient.constructFromObject(data, obj, String);
     }
     return obj;
@@ -53355,7 +53355,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('comment')) {
         obj['comment'] = ApiClient.convertToType(data['comment'], 'String');
@@ -53524,7 +53524,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
     }
     return obj;
   };
@@ -53579,7 +53579,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -53651,7 +53651,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('processDefinitionId')) {
         obj['processDefinitionId'] = ApiClient.convertToType(data['processDefinitionId'], 'Integer');
@@ -53755,7 +53755,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('asc')) {
         obj['asc'] = ApiClient.convertToType(data['asc'], 'Boolean');
@@ -53854,7 +53854,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('appDefinitionId')) {
         obj['appDefinitionId'] = ApiClient.convertToType(data['appDefinitionId'], 'Integer');
@@ -53946,7 +53946,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('businessKey')) {
         obj['businessKey'] = ApiClient.convertToType(data['businessKey'], 'String');
@@ -54122,7 +54122,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('processActivityId')) {
         obj['processActivityId'] = ApiClient.convertToType(data['processActivityId'], 'String');
@@ -54193,7 +54193,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('activityIds')) {
         obj['activityIds'] = ApiClient.convertToType(data['activityIds'], ['String']);
@@ -54348,7 +54348,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('identifiers')) {
         obj['identifiers'] = ApiClient.convertToType(data['identifiers'], [ProcessScopeIdentifierRepresentation]);
@@ -54419,7 +54419,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('group')) {
         obj['group'] = LightGroupRepresentation.constructFromObject(data['group']);
@@ -54497,7 +54497,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('contentAvailable')) {
         obj['contentAvailable'] = ApiClient.convertToType(data['contentAvailable'], 'Boolean');
@@ -54645,7 +54645,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('email')) {
         obj['email'] = ApiClient.convertToType(data['email'], 'String');
@@ -54709,7 +54709,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('name')) {
         obj['name'] = ApiClient.convertToType(data['name'], 'String');
@@ -54801,7 +54801,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('data')) {
         obj['data'] = ApiClient.convertToType(data['data'], 'object');
@@ -54886,7 +54886,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('appDefinitions')) {
         obj['appDefinitions'] = ApiClient.convertToType(data['appDefinitions'], [AppDefinitionRepresentation]);
@@ -54950,7 +54950,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('values')) {
         obj['values'] = ApiClient.convertToType(data['values'], Object);
@@ -55014,7 +55014,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'Integer');
@@ -55092,7 +55092,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('allowInvolveByEmail')) {
         obj['allowInvolveByEmail'] = ApiClient.convertToType(data['allowInvolveByEmail'], 'Boolean');
@@ -55156,7 +55156,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('asc')) {
         obj['asc'] = ApiClient.convertToType(data['asc'], 'Boolean');
@@ -55281,7 +55281,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('appDefinitionId')) {
         obj['appDefinitionId'] = ApiClient.convertToType(data['appDefinitionId'], 'Integer');
@@ -55370,7 +55370,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     exports.constructFromObject = function (data, obj) {
         if (data) {
-            obj = obj || new exports();
+            obj = data || new exports();
 
             if (data.hasOwnProperty('processInstanceId')) {
                 obj['processInstanceId'] = ApiClient.convertToType(data['processInstanceId'], 'Integer');
@@ -55476,7 +55476,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('adhocTaskCanBeReassigned')) {
         obj['adhocTaskCanBeReassigned'] = ApiClient.convertToType(data['adhocTaskCanBeReassigned'], 'Boolean');
@@ -55729,7 +55729,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('description')) {
         obj['description'] = ApiClient.convertToType(data['description'], 'String');
@@ -55828,7 +55828,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('eventTime')) {
         obj['eventTime'] = ApiClient.convertToType(data['eventTime'], 'Date');
@@ -55934,7 +55934,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('active')) {
         obj['active'] = ApiClient.convertToType(data['active'], 'Boolean');
@@ -56047,7 +56047,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('password')) {
         obj['password'] = ApiClient.convertToType(data['password'], 'String');
@@ -56118,7 +56118,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('action')) {
         obj['action'] = ApiClient.convertToType(data['action'], 'String');
@@ -56196,7 +56196,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('appId')) {
         obj['appId'] = ApiClient.convertToType(data['appId'], 'Integer');
@@ -56267,7 +56267,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('appId')) {
         obj['appId'] = ApiClient.convertToType(data['appId'], 'Integer');
@@ -56373,7 +56373,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('apps')) {
         obj['apps'] = ApiClient.convertToType(data['apps'], [LightAppRepresentation]);
@@ -56570,7 +56570,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('appId')) {
         obj['appId'] = ApiClient.convertToType(data['appId'], 'Integer');
@@ -56676,7 +56676,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('defaultDescription')) {
         obj['defaultDescription'] = ApiClient.convertToType(data['defaultDescription'], 'String');
@@ -56782,7 +56782,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('mapVariable')) {
         obj['mapVariable'] = ApiClient.convertToType(data['mapVariable'], 'String');
@@ -63963,7 +63963,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('postPersonId')) {
         obj['postPersonId'] = ApiClient.convertToType(data['postPersonId'], 'String');
@@ -64225,7 +64225,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('firstName')) {
         obj['firstName'] = ApiClient.convertToType(data['firstName'], 'String');
@@ -64323,7 +64323,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = Activity.constructFromObject(data['entry']);
@@ -64385,7 +64385,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('list')) {
         obj['list'] = ActivityPagingList.constructFromObject(data['list']);
@@ -64453,7 +64453,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entries')) {
         obj['entries'] = ApiClient.convertToType(data['entries'], [ActivityEntry]);
@@ -64523,7 +64523,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('childId')) {
         obj['childId'] = ApiClient.convertToType(data['childId'], 'String');
@@ -64593,7 +64593,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('assocType')) {
         obj['assocType'] = ApiClient.convertToType(data['assocType'], 'String');
@@ -64655,7 +64655,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('targetId')) {
         obj['targetId'] = ApiClient.convertToType(data['targetId'], 'String');
@@ -64725,7 +64725,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('assocType')) {
         obj['assocType'] = ApiClient.convertToType(data['assocType'], 'String');
@@ -64815,7 +64815,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -64945,7 +64945,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('content')) {
         obj['content'] = ApiClient.convertToType(data['content'], 'String');
@@ -65011,7 +65011,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('content')) {
         obj['content'] = ApiClient.convertToType(data['content'], 'String');
@@ -65077,7 +65077,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = Comment.constructFromObject(data['entry']);
@@ -65139,7 +65139,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('list')) {
         obj['list'] = CommentPagingList.constructFromObject(data['list']);
@@ -65207,7 +65207,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entries')) {
         obj['entries'] = ApiClient.convertToType(data['entries'], [CommentEntry]);
@@ -65277,7 +65277,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('organization')) {
         obj['organization'] = ApiClient.convertToType(data['organization'], 'String');
@@ -65395,7 +65395,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('mimeType')) {
         obj['mimeType'] = ApiClient.convertToType(data['mimeType'], 'String');
@@ -65481,7 +65481,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('targetParentId')) {
         obj['targetParentId'] = ApiClient.convertToType(data['targetParentId'], 'String');
@@ -65558,7 +65558,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
       NodeFull.constructFromObject(data, obj);
       if (data.hasOwnProperty('archivedByUser')) {
         obj['archivedByUser'] = UserInfo.constructFromObject(data['archivedByUser']);
@@ -65631,7 +65631,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = DeletedNode.constructFromObject(data['entry']);
@@ -65700,7 +65700,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
       NodeMinimal.constructFromObject(data, obj);
       if (data.hasOwnProperty('archivedByUser')) {
         obj['archivedByUser'] = UserInfo.constructFromObject(data['archivedByUser']);
@@ -65773,7 +65773,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = DeletedNodeMinimal.constructFromObject(data['entry']);
@@ -65835,7 +65835,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('list')) {
         obj['list'] = DeletedNodesPagingList.constructFromObject(data['list']);
@@ -65897,7 +65897,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entries')) {
         obj['entries'] = ApiClient.convertToType(data['entries'], [DeletedNodeMinimalEntry]);
@@ -65967,7 +65967,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('client')) {
         obj['client'] = ApiClient.convertToType(data['client'], 'String');
@@ -66053,7 +66053,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('error')) {
         obj['error'] = ErrorError.constructFromObject(data['error']);
@@ -66126,7 +66126,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('errorKey')) {
         obj['errorKey'] = ApiClient.convertToType(data['errorKey'], 'String');
@@ -66236,7 +66236,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('targetGuid')) {
         obj['targetGuid'] = ApiClient.convertToType(data['targetGuid'], 'String');
@@ -66320,7 +66320,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('target')) {
         obj['target'] = ApiClient.convertToType(data['target'], Object);
@@ -66386,7 +66386,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = Favorite.constructFromObject(data['entry']);
@@ -66448,7 +66448,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('list')) {
         obj['list'] = FavoritePagingList.constructFromObject(data['list']);
@@ -66516,7 +66516,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entries')) {
         obj['entries'] = ApiClient.convertToType(data['entries'], [FavoriteEntry]);
@@ -66586,7 +66586,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -66648,7 +66648,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = InlineResponse201Entry.constructFromObject(data['entry']);
@@ -66714,7 +66714,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -66776,7 +66776,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('targetParentId')) {
         obj['targetParentId'] = ApiClient.convertToType(data['targetParentId'], 'String');
@@ -66855,7 +66855,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -66933,7 +66933,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -67087,7 +67087,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = NodeAssocMinimal.constructFromObject(data['entry']);
@@ -67149,7 +67149,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('list')) {
         obj['list'] = NodeAssocPagingList.constructFromObject(data['list']);
@@ -67211,7 +67211,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entries')) {
         obj['entries'] = ApiClient.convertToType(data['entries'], [NodeAssocMinimalEntry]);
@@ -67281,7 +67281,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('name')) {
         obj['name'] = ApiClient.convertToType(data['name'], 'String');
@@ -67367,7 +67367,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('name')) {
         obj['name'] = ApiClient.convertToType(data['name'], 'String');
@@ -67469,7 +67469,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -67623,7 +67623,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = NodeChildAssocMinimal.constructFromObject(data['entry']);
@@ -67685,7 +67685,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('list')) {
         obj['list'] = NodeChildAssocPagingList.constructFromObject(data['list']);
@@ -67747,7 +67747,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entries')) {
         obj['entries'] = ApiClient.convertToType(data['entries'], [NodeChildAssocMinimalEntry]);
@@ -67821,7 +67821,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = NodeFull.constructFromObject(data['entry']);
@@ -67883,7 +67883,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -68049,7 +68049,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -68206,7 +68206,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = NodeMinimal.constructFromObject(data['entry']);
@@ -68268,7 +68268,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('list')) {
         obj['list'] = NodePagingList.constructFromObject(data['list']);
@@ -68330,7 +68330,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entries')) {
         obj['entries'] = ApiClient.convertToType(data['entries'], [NodeMinimalEntry]);
@@ -68400,7 +68400,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -68522,7 +68522,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = NodeSharedLink.constructFromObject(data['entry']);
@@ -68584,7 +68584,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('list')) {
         obj['list'] = NodeSharedLinkPagingList.constructFromObject(data['list']);
@@ -68652,7 +68652,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entries')) {
         obj['entries'] = ApiClient.convertToType(data['entries'], [NodeSharedLinkEntry]);
@@ -68722,7 +68722,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('mimeType')) {
         obj['mimeType'] = ApiClient.convertToType(data['mimeType'], 'String');
@@ -68803,7 +68803,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('count')) {
         obj['count'] = ApiClient.convertToType(data['count'], 'Integer');
@@ -68902,7 +68902,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -68972,7 +68972,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('elements')) {
         obj['elements'] = ApiClient.convertToType(data['elements'], [PathElement]);
@@ -69064,7 +69064,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -69267,7 +69267,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = Person.constructFromObject(data['entry']);
@@ -69337,7 +69337,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -69478,7 +69478,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = PersonNetwork.constructFromObject(data['entry']);
@@ -69540,7 +69540,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('list')) {
         obj['list'] = PersonNetworkPagingList.constructFromObject(data['list']);
@@ -69608,7 +69608,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entries')) {
         obj['entries'] = ApiClient.convertToType(data['entries'], [PersonNetworkEntry]);
@@ -69685,7 +69685,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -69761,7 +69761,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = Preference.constructFromObject(data['entry']);
@@ -69823,7 +69823,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('list')) {
         obj['list'] = PreferencePagingList.constructFromObject(data['list']);
@@ -69891,7 +69891,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entries')) {
         obj['entries'] = ApiClient.convertToType(data['entries'], [PreferenceEntry]);
@@ -69966,7 +69966,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -70057,7 +70057,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('average')) {
         obj['average'] = ApiClient.convertToType(data['average'], 'Integer');
@@ -70133,7 +70133,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -70229,7 +70229,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = Rating.constructFromObject(data['entry']);
@@ -70291,7 +70291,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('list')) {
         obj['list'] = RatingPagingList.constructFromObject(data['list']);
@@ -70359,7 +70359,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entries')) {
         obj['entries'] = ApiClient.convertToType(data['entries'], [RatingEntry]);
@@ -70429,7 +70429,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -70507,7 +70507,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -70573,7 +70573,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = Rendition.constructFromObject(data['entry']);
@@ -70635,7 +70635,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('list')) {
         obj['list'] = RenditionPagingList.constructFromObject(data['list']);
@@ -70697,7 +70697,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entries')) {
         obj['entries'] = ApiClient.convertToType(data['entries'], [RenditionEntry]);
@@ -70767,7 +70767,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('nodeId')) {
         obj['nodeId'] = ApiClient.convertToType(data['nodeId'], 'String');
@@ -70840,7 +70840,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -70974,7 +70974,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -71092,7 +71092,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -71166,7 +71166,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = SiteContainer.constructFromObject(data['entry']);
@@ -71228,7 +71228,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('list')) {
         obj['list'] = SitePagingList.constructFromObject(data['list']);
@@ -71294,7 +71294,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = Site.constructFromObject(data['entry']);
@@ -71364,7 +71364,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -71473,7 +71473,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('role')) {
         obj['role'] = ApiClient.convertToType(data['role'], 'String');
@@ -71578,7 +71578,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = SiteMember.constructFromObject(data['entry']);
@@ -71640,7 +71640,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('list')) {
         obj['list'] = SitePagingList.constructFromObject(data['list']);
@@ -71702,7 +71702,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('role')) {
         obj['role'] = ApiClient.convertToType(data['role'], 'String');
@@ -71795,7 +71795,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('message')) {
         obj['message'] = ApiClient.convertToType(data['message'], 'String');
@@ -71873,7 +71873,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('message')) {
         obj['message'] = ApiClient.convertToType(data['message'], 'String');
@@ -71943,7 +71943,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -72025,7 +72025,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = SiteMembershipRequest.constructFromObject(data['entry']);
@@ -72087,7 +72087,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('list')) {
         obj['list'] = SiteMembershipRequestPagingList.constructFromObject(data['list']);
@@ -72155,7 +72155,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entries')) {
         obj['entries'] = ApiClient.convertToType(data['entries'], [SiteMembershipRequestEntry]);
@@ -72225,7 +72225,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('list')) {
         obj['list'] = SitePagingList.constructFromObject(data['list']);
@@ -72291,7 +72291,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('pagination')) {
         obj['pagination'] = Pagination.constructFromObject(data['pagination']);
@@ -72359,7 +72359,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -72433,7 +72433,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('tag')) {
         obj['tag'] = ApiClient.convertToType(data['tag'], 'String');
@@ -72495,7 +72495,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('tag')) {
         obj['tag'] = ApiClient.convertToType(data['tag'], 'String');
@@ -72561,7 +72561,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = Tag.constructFromObject(data['entry']);
@@ -72623,7 +72623,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('list')) {
         obj['list'] = TagPagingList.constructFromObject(data['list']);
@@ -72691,7 +72691,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entries')) {
         obj['entries'] = ApiClient.convertToType(data['entries'], [TagEntry]);
@@ -72761,7 +72761,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   exports.constructFromObject = function (data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('displayName')) {
         obj['displayName'] = ApiClient.convertToType(data['displayName'], 'String');

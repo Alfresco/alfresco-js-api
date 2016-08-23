@@ -50,7 +50,7 @@
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('mapVariable')) {
         obj['mapVariable'] = ApiClient.convertToType(data['mapVariable'], 'String');

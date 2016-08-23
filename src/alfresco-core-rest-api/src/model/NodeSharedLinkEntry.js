@@ -40,8 +40,8 @@
    * @return {module:model/NodeSharedLinkEntry} The populated <code>NodeSharedLinkEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = NodeSharedLink.constructFromObject(data['entry']);

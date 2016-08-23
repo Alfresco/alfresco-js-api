@@ -39,8 +39,8 @@
    * @return {module:model/DeletedNodeEntry} The populated <code>DeletedNodeEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = DeletedNode.constructFromObject(data['entry']);

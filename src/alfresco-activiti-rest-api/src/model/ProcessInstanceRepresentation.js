@@ -60,7 +60,7 @@
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('businessKey')) {
         obj['businessKey'] = ApiClient.convertToType(data['businessKey'], 'String');

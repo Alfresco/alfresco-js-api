@@ -44,8 +44,8 @@
    * @return {module:model/SiteBody} The populated <code>SiteBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -91,19 +91,19 @@
    * @enum {String}
    * @readonly
    */
-  exports.VisibilityEnum = { 
+  exports.VisibilityEnum = {
     /**
      * value: PUBLIC
      * @const
      */
     PUBLIC: "PUBLIC",
-    
+
     /**
      * value: PRIVATE
      * @const
      */
     PRIVATE: "PRIVATE",
-    
+
     /**
      * value: MODERATED
      * @const

@@ -40,8 +40,8 @@
    * @return {module:model/SiteContainerEntry} The populated <code>SiteContainerEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = SiteContainer.constructFromObject(data['entry']);

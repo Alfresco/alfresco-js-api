@@ -40,8 +40,8 @@
    * @return {module:model/MoveBody} The populated <code>MoveBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('targetParentId')) {
         obj['targetParentId'] = ApiClient.convertToType(data['targetParentId'], 'String');

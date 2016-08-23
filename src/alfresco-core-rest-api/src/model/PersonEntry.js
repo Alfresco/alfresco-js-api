@@ -40,8 +40,8 @@
    * @return {module:model/PersonEntry} The populated <code>PersonEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = Person.constructFromObject(data['entry']);

@@ -44,8 +44,8 @@
    * @return {module:model/Favorite} The populated <code>Favorite</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('targetGuid')) {
         obj['targetGuid'] = ApiClient.convertToType(data['targetGuid'], 'String');

@@ -42,7 +42,7 @@
    */
   exports.constructFromObject = function(data, obj) {
     if (data) { 
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('message')) {
         obj['message'] = ApiClient.convertToType(data['message'], 'String');

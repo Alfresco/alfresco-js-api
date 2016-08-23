@@ -42,8 +42,8 @@
    * @return {module:model/RatingBody} The populated <code>RatingBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -75,13 +75,13 @@
    * @enum {String}
    * @readonly
    */
-  exports.IdEnum = { 
+  exports.IdEnum = {
     /**
      * value: likes
      * @const
      */
     LIKES: "likes",
-    
+
     /**
      * value: fiveStar
      * @const

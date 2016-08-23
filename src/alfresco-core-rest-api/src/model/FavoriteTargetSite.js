@@ -39,8 +39,8 @@
    * @return {module:model/FavoriteTargetSite} The populated <code>FavoriteTargetSite</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('guid')) {
         obj['guid'] = ApiClient.convertToType(data['guid'], 'String');

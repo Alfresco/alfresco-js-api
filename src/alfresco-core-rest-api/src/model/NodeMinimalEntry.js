@@ -40,8 +40,8 @@
    * @return {module:model/NodeMinimalEntry} The populated <code>NodeMinimalEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = NodeMinimal.constructFromObject(data['entry']);

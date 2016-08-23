@@ -39,8 +39,8 @@
    * @return {module:model/InlineResponse201} The populated <code>InlineResponse201</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = InlineResponse201Entry.constructFromObject(data['entry']);

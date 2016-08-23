@@ -102,7 +102,7 @@ describe('Node', function () {
             });
         });
 
-        it.skip('dynamic augmenting object parameters', function(done) {
+        it('dynamic augmenting object parameters', function(done) {
             this.nodeMock.get200ResponseChildrenFutureNewPossibleValue();
 
             this.alfrescoJsApi.nodes.getNodeChildren('b4cff62a-664d-4d45-9302-98723eac1319').then(function (data) {
