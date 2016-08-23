@@ -46082,7 +46082,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       // verify the required parameter 'requestNode' is set
       if (requestNode == undefined || requestNode == null) {
-        throw "Missing the required parameter 'requestNode' when calling filterTasks";
+        console.log('a');
+        postBody = new TaskFilterRequestRepresentation();
       }
 
       var pathParams = {};
