@@ -22,7 +22,8 @@ class AlfrescoApi {
      *        hostBpm: // hostBpm Your activiti server IP or DNS name
      *        contextRoot: // contextRoot default value alfresco
      *        provider:   // ECM BPM ALL
-     *        ticket:     // Ticket if you already have a ticket you can pass only the ticket and skip the login, in this case you don't need username and password
+     *        ticketEcm:     // Ticket if you already have a ECM ticket you can pass only the ticket and skip the login, in this case you don't need username and password
+     *        ticketBpm:     // Ticket if you already have a BPM ticket you can pass only the ticket and skip the login, in this case you don't need username and password
      *    };
      */
     constructor(config) {
@@ -31,8 +32,10 @@ class AlfrescoApi {
             hostBpm: config.hostBpm || 'http://127.0.0.1:9999',
             contextRoot: config.contextRoot || 'alfresco',
             provider: config.provider || 'ECM',
-            ticket: config.ticket
+            ticketEcm: config.ticketEcm,
+            ticketBpm: config.ticketBpm
         };
+
         this.bpmAuth = new BpmAuth(this.config);
         this.ecmAuth = new EcmAuth(this.config);
 
@@ -111,19 +114,26 @@ class AlfrescoApi {
         if (this._isBpmConfiguration()) {
             var bpmPromise = this.bpmAuth.login(username, password);
 
+            bpmPromise.then((ticketBpm)=> {
+                this.config.ticketBpm = ticketBpm;
+            });
+
             return bpmPromise;
         } else if (this._isEcmConfiguration()) {
             var ecmPromise = this.ecmAuth.login(username, password);
-            ecmPromise.then((data)=> {
-                this.config.ticket = data;
+
+            ecmPromise.then((ticketEcm)=> {
+                this.config.ticketEcm = ticketEcm;
             });
 
             return ecmPromise;
 
         } else if (this._isEcmBpmConfiguration()) {
             var bpmEcmPromise = this._loginBPMECM(username, password);
+
             bpmEcmPromise.then((data)=> {
-                this.config.ticket = data[0];
+                this.config.ticketEcm = data[0];
+                this.config.ticketBpm = data[1];
             });
 
             return bpmEcmPromise;
@@ -131,14 +141,17 @@ class AlfrescoApi {
     }
 
     /**
-     * login Alfresco API
+     * login Tickets
      *
-     * @param  {String} ticket // alfresco ticket
+     * @param  {String} ticketEcm // alfresco ticket
+     * @param  {String} ticketBpm // alfresco ticket
      *
      * @returns {Promise} A promise that returns { authentication ticket} if resolved and {error} if rejected.
      * */
-    loginTicket(ticket) {
-        this.config.ticket = ticket;
+    loginTicket(ticketEcm, ticketBpm) {
+        this.config.ticketEcm = ticketEcm;
+        this.config.ticketBpm = ticketBpm;
+
         return this.ecmAuth.validateTicket();
     }
 
@@ -229,19 +242,39 @@ class AlfrescoApi {
     /**
      * Set the current Ticket
      *
-     * @param {String} Ticket
+     * @param {String} ticketEcm
+     * @param {String} TicketBpm
      * */
-    setTicket(ticket) {
-        return this.ecmAuth.setTicket(ticket);
+    setTicket(ticketEcm, TicketBpm) {
+        this.ecmAuth.setTicket(ticketEcm);
+        this.bpmAuth.setTicket(TicketBpm);
     }
 
     /**
-     * Get the current Ticket
+     * Get the current Ticket for the Bpm
      *
      * @returns {String} Ticket
      * */
-    getTicket() {
+    getTicketBpm() {
+        return this.bpmAuth.getTicket();
+    }
+
+    /**
+     * Get the current Ticket for the Ecm
+     *
+     * @returns {String} Ticket
+     * */
+    getTicketEcm() {
         return this.ecmAuth.getTicket();
+    }
+
+    /**
+     * Get the current Ticket for the Ecm and BPM
+     *
+     * @returns {Array} Ticket
+     * */
+    getTicket() {
+        return [this.ecmAuth.getTicket(), this.bpmAuth.getTicket()];
     }
 
     _isBpmConfiguration() {

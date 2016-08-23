@@ -121,6 +121,19 @@ describe('Bpm Auth test', function () {
             });
         });
 
+        describe('With Ticket Authentication', function () {
+
+            it('Ticket should be present in the client', function () {
+
+                this.bpmAuth = new BpmAuth({
+                    ticketBpm: 'Basic YWRtaW46YWRtaW4=',
+                    hostBpm: this.hostBpm
+                });
+
+                expect('Basic YWRtaW46YWRtaW4=').to.be.equal(this.bpmAuth.defaultHeaders.Authorization);
+            });
+        });
+
         describe('Logout Api', function () {
 
             beforeEach(function (done) {

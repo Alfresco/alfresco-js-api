@@ -149,7 +149,7 @@ describe('Ecm Auth test', function () {
                 this.authEcmMock.get400Response();
 
                 this.ecmAuth = new EcmAuth({
-                    ticket: 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1',
+                    ticketEcm: 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1',
                     hostEcm: this.hostEcm
                 });
 

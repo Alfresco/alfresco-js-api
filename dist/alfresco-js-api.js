@@ -72814,7 +72814,8 @@ var AlfrescoApi = function () {
      *        hostBpm: // hostBpm Your activiti server IP or DNS name
      *        contextRoot: // contextRoot default value alfresco
      *        provider:   // ECM BPM ALL
-     *        ticket:     // Ticket if you already have a ticket you can pass only the ticket and skip the login, in this case you don't need username and password
+     *        ticketEcm:     // Ticket if you already have a ECM ticket you can pass only the ticket and skip the login, in this case you don't need username and password
+     *        ticketBpm:     // Ticket if you already have a BPM ticket you can pass only the ticket and skip the login, in this case you don't need username and password
      *    };
      */
     function AlfrescoApi(config) {
@@ -72825,8 +72826,10 @@ var AlfrescoApi = function () {
             hostBpm: config.hostBpm || 'http://127.0.0.1:9999',
             contextRoot: config.contextRoot || 'alfresco',
             provider: config.provider || 'ECM',
-            ticket: config.ticket
+            ticketEcm: config.ticketEcm,
+            ticketBpm: config.ticketBpm
         };
+
         this.bpmAuth = new BpmAuth(this.config);
         this.ecmAuth = new EcmAuth(this.config);
 
@@ -72921,18 +72924,25 @@ var AlfrescoApi = function () {
             if (this._isBpmConfiguration()) {
                 var bpmPromise = this.bpmAuth.login(username, password);
 
+                bpmPromise.then(function (ticketBpm) {
+                    _this2.config.ticketBpm = ticketBpm;
+                });
+
                 return bpmPromise;
             } else if (this._isEcmConfiguration()) {
                 var ecmPromise = this.ecmAuth.login(username, password);
-                ecmPromise.then(function (data) {
-                    _this2.config.ticket = data;
+
+                ecmPromise.then(function (ticketEcm) {
+                    _this2.config.ticketEcm = ticketEcm;
                 });
 
                 return ecmPromise;
             } else if (this._isEcmBpmConfiguration()) {
                 var bpmEcmPromise = this._loginBPMECM(username, password);
+
                 bpmEcmPromise.then(function (data) {
-                    _this2.config.ticket = data[0];
+                    _this2.config.ticketEcm = data[0];
+                    _this2.config.ticketBpm = data[1];
                 });
 
                 return bpmEcmPromise;
@@ -72940,17 +72950,20 @@ var AlfrescoApi = function () {
         }
 
         /**
-         * login Alfresco API
+         * login Tickets
          *
-         * @param  {String} ticket // alfresco ticket
+         * @param  {String} ticketEcm // alfresco ticket
+         * @param  {String} ticketBpm // alfresco ticket
          *
          * @returns {Promise} A promise that returns { authentication ticket} if resolved and {error} if rejected.
          * */
 
     }, {
         key: 'loginTicket',
-        value: function loginTicket(ticket) {
-            this.config.ticket = ticket;
+        value: function loginTicket(ticketEcm, ticketBpm) {
+            this.config.ticketEcm = ticketEcm;
+            this.config.ticketBpm = ticketBpm;
+
             return this.ecmAuth.validateTicket();
         }
     }, {
@@ -73051,25 +73064,51 @@ var AlfrescoApi = function () {
         /**
          * Set the current Ticket
          *
-         * @param {String} Ticket
+         * @param {String} ticketEcm
+         * @param {String} TicketBpm
          * */
 
     }, {
         key: 'setTicket',
-        value: function setTicket(ticket) {
-            return this.ecmAuth.setTicket(ticket);
+        value: function setTicket(ticketEcm, TicketBpm) {
+            this.ecmAuth.setTicket(ticketEcm);
+            this.bpmAuth.setTicket(TicketBpm);
         }
 
         /**
-         * Get the current Ticket
+         * Get the current Ticket for the Bpm
          *
          * @returns {String} Ticket
          * */
 
     }, {
+        key: 'getTicketBpm',
+        value: function getTicketBpm() {
+            return this.bpmAuth.getTicket();
+        }
+
+        /**
+         * Get the current Ticket for the Ecm
+         *
+         * @returns {String} Ticket
+         * */
+
+    }, {
+        key: 'getTicketEcm',
+        value: function getTicketEcm() {
+            return this.ecmAuth.getTicket();
+        }
+
+        /**
+         * Get the current Ticket for the Ecm and BPM
+         *
+         * @returns {Array} Ticket
+         * */
+
+    }, {
         key: 'getTicket',
         value: function getTicket() {
-            return this.ecmAuth.getTicket();
+            return [this.ecmAuth.getTicket(), this.bpmAuth.getTicket()];
         }
     }, {
         key: '_isBpmConfiguration',
@@ -73701,6 +73740,10 @@ var BpmAuth = function (_AlfrescoApiClient) {
         _this.ticket = undefined;
         _this.basePath = config.hostBpm + '/activiti-app'; //Activiti Call
 
+        if (_this.config.ticketBpm) {
+            _this.setTicket(config.ticketBpm);
+        }
+
         Emitter.call(_this);
         return _this;
     }
@@ -73749,10 +73792,10 @@ var BpmAuth = function (_AlfrescoApiClient) {
 
             this.promise = new Promise(function (resolve, reject) {
                 _this2.callApi('/app/authentication', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts).then(function (data) {
-                    var tcket = 'Basic ' + new Buffer(_this2.authentications.basicAuth.username + ':' + _this2.authentications.basicAuth.password).toString('base64');
-                    _this2.setTicket(tcket);
+                    var ticket = 'Basic ' + new Buffer(_this2.authentications.basicAuth.username + ':' + _this2.authentications.basicAuth.password).toString('base64');
+                    _this2.setTicket(ticket);
                     _this2.promise.emit('success');
-                    resolve(tcket);
+                    resolve(ticket);
                 }, function (error) {
                     if (error.error.status === 401) {
                         _this2.promise.emit('unauthorized');
@@ -73816,6 +73859,10 @@ var BpmAuth = function (_AlfrescoApiClient) {
     }, {
         key: 'setTicket',
         value: function setTicket(ticket) {
+            this.defaultHeaders = {
+                'Authorization': ticket
+            };
+
             this.ticket = ticket;
         }
 
@@ -73893,8 +73940,8 @@ var EcmAuth = function (_AlfrescoApiClient) {
 
         _this.basePath = _this.config.hostEcm + '/' + _this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
 
-        if (_this.config.ticket) {
-            _this.setTicket(config.ticket);
+        if (_this.config.ticketEcm) {
+            _this.setTicket(config.ticketEcm);
         }
 
         Emitter.call(_this);

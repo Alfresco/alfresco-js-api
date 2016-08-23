@@ -143,7 +143,7 @@ describe('Auth', function () {
                     this.authResponseEcmMock.get400Response();
 
                     this.alfrescoJsApi = new AlfrescoApi({
-                        ticket: 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1',
+                        ticketEcm: 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1',
                         hostEcm: this.host
                     });
 
@@ -365,9 +365,28 @@ describe('Auth', function () {
                 this.hostBpm = 'http://127.0.0.1:9999';
                 this.authResponseEcmMock = new AuthEcmMock(this.hostEcm);
                 this.authResponseBpmMock = new AuthBpmMock(this.hostBpm);
+
+                this.authResponseEcmMock.cleanAll();
+                this.authResponseBpmMock.cleanAll();
             });
 
             describe('With Authentication', function () {
+
+                it('Ticket should be present in the client', function () {
+                    this.authResponseBpmMock.get200Response();
+                    this.authResponseEcmMock.get201Response();
+
+                    this.alfrescoJsApi = new AlfrescoApi({
+                        ticketEcm: 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1',
+                        ticketBpm: 'Basic YWRtaW46YWRtaW4=',
+                        hostEcm: this.host,
+                        hostBpm: this.hostBpm,
+                        provider: 'ALL'
+                    });
+
+                    expect('Basic YWRtaW46YWRtaW4=').to.be.equal(this.alfrescoJsApi.bpmAuth.defaultHeaders.Authorization);
+                    expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(this.alfrescoJsApi.getClient().authentications.basicAuth.password);
+                });
 
                 it('login should return the Ticket if all is ok', function (done) {
 

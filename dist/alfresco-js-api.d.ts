@@ -324,8 +324,11 @@ export interface AlfrescoApi {
     getDocumentThumbnailUrl(documentId: string): any;
     getContentUrl(documentId: string): any;
 
-    getTicket(): any;
-    setTicket(ticket: any): any;
+    getTicket(): Array;
+    getTicketBpm(): string;
+    getTicketEcm(): string;
+
+    setTicket(ticketEcm: any, ticketBpm: any): void;
 }
 
 declare var AlfrescoApi: AlfrescoApi;
