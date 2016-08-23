@@ -39,8 +39,8 @@
    * @return {module:model/NodeSharedLinkPaging} The populated <code>NodeSharedLinkPaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('list')) {
         obj['list'] = NodeSharedLinkPagingList.constructFromObject(data['list']);

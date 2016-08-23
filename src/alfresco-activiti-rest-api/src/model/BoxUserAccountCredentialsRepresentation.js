@@ -46,7 +46,7 @@
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('authenticationURL')) {
         obj['authenticationURL'] = ApiClient.convertToType(data['authenticationURL'], 'String');

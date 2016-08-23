@@ -40,8 +40,8 @@
    * @return {module:model/CommentBody} The populated <code>CommentBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('content')) {
         obj['content'] = ApiClient.convertToType(data['content'], 'String');

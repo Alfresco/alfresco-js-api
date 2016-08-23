@@ -39,8 +39,8 @@
    * @return {module:model/NodePaging} The populated <code>NodePaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('list')) {
         obj['list'] = NodePagingList.constructFromObject(data['list']);

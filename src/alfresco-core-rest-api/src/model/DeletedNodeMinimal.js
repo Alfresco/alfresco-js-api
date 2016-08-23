@@ -43,8 +43,8 @@
    * @return {module:model/DeletedNodeMinimal} The populated <code>DeletedNodeMinimal</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
       NodeMinimal.constructFromObject(data, obj);
       if (data.hasOwnProperty('archivedByUser')) {
         obj['archivedByUser'] = UserInfo.constructFromObject(data['archivedByUser']);

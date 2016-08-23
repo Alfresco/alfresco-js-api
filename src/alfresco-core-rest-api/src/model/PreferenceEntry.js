@@ -40,8 +40,8 @@
    * @return {module:model/PreferenceEntry} The populated <code>PreferenceEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = Preference.constructFromObject(data['entry']);

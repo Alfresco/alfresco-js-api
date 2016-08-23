@@ -41,8 +41,8 @@
    * @return {module:model/RatingAggregate} The populated <code>RatingAggregate</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('average')) {
         obj['average'] = ApiClient.convertToType(data['average'], 'Integer');

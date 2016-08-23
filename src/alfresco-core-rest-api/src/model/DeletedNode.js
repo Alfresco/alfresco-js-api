@@ -43,8 +43,8 @@
    * @return {module:model/DeletedNode} The populated <code>DeletedNode</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
       NodeFull.constructFromObject(data, obj);
       if (data.hasOwnProperty('archivedByUser')) {
         obj['archivedByUser'] = UserInfo.constructFromObject(data['archivedByUser']);

@@ -39,8 +39,8 @@
    * @return {module:model/SharedLinkBody} The populated <code>SharedLinkBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('nodeId')) {
         obj['nodeId'] = ApiClient.convertToType(data['nodeId'], 'String');

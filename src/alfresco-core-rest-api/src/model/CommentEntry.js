@@ -40,8 +40,8 @@
    * @return {module:model/CommentEntry} The populated <code>CommentEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = Comment.constructFromObject(data['entry']);

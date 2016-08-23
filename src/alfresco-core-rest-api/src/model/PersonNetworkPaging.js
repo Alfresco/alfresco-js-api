@@ -39,8 +39,8 @@
    * @return {module:model/PersonNetworkPaging} The populated <code>PersonNetworkPaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('list')) {
         obj['list'] = PersonNetworkPagingList.constructFromObject(data['list']);

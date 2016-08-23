@@ -50,8 +50,8 @@
    * @return {module:model/Activity} The populated <code>Activity</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('postPersonId')) {
         obj['postPersonId'] = ApiClient.convertToType(data['postPersonId'], 'String');
@@ -126,139 +126,139 @@
    * @enum {String}
    * @readonly
    */
-  exports.ActivityTypeEnum = { 
+  exports.ActivityTypeEnum = {
     /**
      * value: org.alfresco.comments.comment-created
      * @const
      */
     COMMENTS_COMMENT_CREATED: "org.alfresco.comments.comment-created",
-    
+
     /**
      * value: org.alfresco.comments.comment-updated
      * @const
      */
     COMMENTS_COMMENT_UPDATED: "org.alfresco.comments.comment-updated",
-    
+
     /**
      * value: org.alfresco.comments.comment-deleted
      * @const
      */
     COMMENTS_COMMENT_DELETED: "org.alfresco.comments.comment-deleted",
-    
+
     /**
      * value: org.alfresco.documentlibrary.files-added
      * @const
      */
     DOCUMENTLIBRARY_FILES_ADDED: "org.alfresco.documentlibrary.files-added",
-    
+
     /**
      * value: org.alfresco.documentlibrary.files-updated
      * @const
      */
     DOCUMENTLIBRARY_FILES_UPDATED: "org.alfresco.documentlibrary.files-updated",
-    
+
     /**
      * value: org.alfresco.documentlibrary.files-deleted
      * @const
      */
     DOCUMENTLIBRARY_FILES_DELETED: "org.alfresco.documentlibrary.files-deleted",
-    
+
     /**
      * value: org.alfresco.documentlibrary.file-added
      * @const
      */
     DOCUMENTLIBRARY_FILE_ADDED: "org.alfresco.documentlibrary.file-added",
-    
+
     /**
      * value: org.alfresco.documentlibrary.file-created
      * @const
      */
     DOCUMENTLIBRARY_FILE_CREATED: "org.alfresco.documentlibrary.file-created",
-    
+
     /**
      * value: org.alfresco.documentlibrary.file-deleted
      * @const
      */
     DOCUMENTLIBRARY_FILE_DELETED: "org.alfresco.documentlibrary.file-deleted",
-    
+
     /**
      * value: org.alfresco.documentlibrary.file-downloaded
      * @const
      */
     DOCUMENTLIBRARY_FILE_DOWNLOADED: "org.alfresco.documentlibrary.file-downloaded",
-    
+
     /**
      * value: org.alfresco.documentlibrary.file-liked
      * @const
      */
     DOCUMENTLIBRARY_FILE_LIKED: "org.alfresco.documentlibrary.file-liked",
-    
+
     /**
      * value: org.alfresco.documentlibrary.file-previewed
      * @const
      */
     DOCUMENTLIBRARY_FILE_PREVIEWED: "org.alfresco.documentlibrary.file-previewed",
-    
+
     /**
      * value: org.alfresco.documentlibrary.inline-edit
      * @const
      */
     DOCUMENTLIBRARY_INLINE_EDIT: "org.alfresco.documentlibrary.inline-edit",
-    
+
     /**
      * value: org.alfresco.documentlibrary.folder-liked
      * @const
      */
     DOCUMENTLIBRARY_FOLDER_LIKED: "org.alfresco.documentlibrary.folder-liked",
-    
+
     /**
      * value: org.alfresco.site.user-joined
      * @const
      */
     SITE_USER_JOINED: "org.alfresco.site.user-joined",
-    
+
     /**
      * value: org.alfresco.site.user-left
      * @const
      */
     SITE_USER_LEFT: "org.alfresco.site.user-left",
-    
+
     /**
      * value: org.alfresco.site.user-role-changed
      * @const
      */
     SITE_USER_ROLE_CHANGED: "org.alfresco.site.user-role-changed",
-    
+
     /**
      * value: org.alfresco.site.group-added
      * @const
      */
     SITE_GROUP_ADDED: "org.alfresco.site.group-added",
-    
+
     /**
      * value: org.alfresco.site.group-removed
      * @const
      */
     SITE_GROUP_REMOVED: "org.alfresco.site.group-removed",
-    
+
     /**
      * value: org.alfresco.site.group-role-changed
      * @const
      */
     SITE_GROUP_ROLE_CHANGED: "org.alfresco.site.group-role-changed",
-    
+
     /**
      * value: org.alfresco.discussions.reply-created
      * @const
      */
     DISCUSSIONS_REPLY_CREATED: "org.alfresco.discussions.reply-created",
-    
+
     /**
      * value: org.alfresco.subscriptions.followed
      * @const
      */
     SUBSCRIPTIONS_FOLLOWED: "org.alfresco.subscriptions.followed",
-    
+
     /**
      * value: org.alfresco.subscriptions.subscribed
      * @const

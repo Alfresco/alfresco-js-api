@@ -39,8 +39,8 @@
    * @return {module:model/DeletedNodesPaging} The populated <code>DeletedNodesPaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('list')) {
         obj['list'] = DeletedNodesPagingList.constructFromObject(data['list']);

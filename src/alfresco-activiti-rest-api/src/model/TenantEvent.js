@@ -50,7 +50,7 @@
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('eventTime')) {
         obj['eventTime'] = ApiClient.convertToType(data['eventTime'], 'Date');

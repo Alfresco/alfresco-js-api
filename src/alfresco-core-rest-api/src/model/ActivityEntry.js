@@ -40,8 +40,8 @@
    * @return {module:model/ActivityEntry} The populated <code>ActivityEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = Activity.constructFromObject(data['entry']);

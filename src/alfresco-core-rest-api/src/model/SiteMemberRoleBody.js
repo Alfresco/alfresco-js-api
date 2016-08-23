@@ -39,8 +39,8 @@
    * @return {module:model/SiteMemberRoleBody} The populated <code>SiteMemberRoleBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('role')) {
         obj['role'] = ApiClient.convertToType(data['role'], 'String');
@@ -61,25 +61,25 @@
    * @enum {String}
    * @readonly
    */
-  exports.RoleEnum = { 
+  exports.RoleEnum = {
     /**
      * value: SiteConsumer
      * @const
      */
     SITECONSUMER: "SiteConsumer",
-    
+
     /**
      * value: SiteCollaborator
      * @const
      */
     SITECOLLABORATOR: "SiteCollaborator",
-    
+
     /**
      * value: SiteContributor
      * @const
      */
     SITECONTRIBUTOR: "SiteContributor",
-    
+
     /**
      * value: SiteManager
      * @const

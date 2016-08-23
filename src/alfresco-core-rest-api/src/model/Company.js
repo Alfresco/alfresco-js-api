@@ -46,8 +46,8 @@
    * @return {module:model/Company} The populated <code>Company</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('organization')) {
         obj['organization'] = ApiClient.convertToType(data['organization'], 'String');

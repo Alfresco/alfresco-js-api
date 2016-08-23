@@ -40,8 +40,8 @@
    * @return {module:model/ChildAssocInfo} The populated <code>ChildAssocInfo</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('assocType')) {
         obj['assocType'] = ApiClient.convertToType(data['assocType'], 'String');

@@ -47,7 +47,7 @@
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('icon')) {
         obj['icon'] = ApiClient.convertToType(data['icon'], 'String');

@@ -42,8 +42,8 @@
    * @return {module:model/EmailSharedLinkBody} The populated <code>EmailSharedLinkBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('client')) {
         obj['client'] = ApiClient.convertToType(data['client'], 'String');

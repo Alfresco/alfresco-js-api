@@ -40,8 +40,8 @@
    * @return {module:model/AssocTargetBody} The populated <code>AssocTargetBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('targetId')) {
         obj['targetId'] = ApiClient.convertToType(data['targetId'], 'String');

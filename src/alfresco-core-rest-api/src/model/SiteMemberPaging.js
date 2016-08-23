@@ -39,8 +39,8 @@
    * @return {module:model/SiteMemberPaging} The populated <code>SiteMemberPaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('list')) {
         obj['list'] = SitePagingList.constructFromObject(data['list']);

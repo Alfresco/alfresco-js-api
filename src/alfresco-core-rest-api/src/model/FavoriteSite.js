@@ -45,8 +45,8 @@
    * @return {module:model/FavoriteSite} The populated <code>FavoriteSite</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -91,19 +91,19 @@
    * @enum {String}
    * @readonly
    */
-  exports.VisibilityEnum = { 
+  exports.VisibilityEnum = {
     /**
      * value: PRIVATE
      * @const
      */
     PRIVATE: "PRIVATE",
-    
+
     /**
      * value: MODERATED
      * @const
      */
     MODERATED: "MODERATED",
-    
+
     /**
      * value: PUBLIC
      * @const

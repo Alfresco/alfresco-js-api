@@ -136,6 +136,8 @@ describe('Activiti Task Api', function () {
 
         this.alfrescoJsApi.activiti.taskApi.getTaskForm(taskId).then((data)=> {
             expect(data.name).equal('Metadata');
+            expect(data.fields[0].name).equal('Label');
+            expect(data.fields[0].fieldType).equal('ContainerRepresentation');
             done();
         });
     });

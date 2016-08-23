@@ -39,8 +39,8 @@
    * @return {module:model/NodeChildAssocPaging} The populated <code>NodeChildAssocPaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('list')) {
         obj['list'] = NodeChildAssocPagingList.constructFromObject(data['list']);

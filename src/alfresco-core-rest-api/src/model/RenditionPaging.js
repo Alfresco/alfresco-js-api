@@ -39,8 +39,8 @@
    * @return {module:model/RenditionPaging} The populated <code>RenditionPaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('list')) {
         obj['list'] = RenditionPagingList.constructFromObject(data['list']);

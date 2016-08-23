@@ -48,8 +48,8 @@
    * @return {module:model/PersonNetwork} The populated <code>PersonNetwork</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -120,19 +120,19 @@
    * @enum {String}
    * @readonly
    */
-  exports.SubscriptionLevelEnum = { 
+  exports.SubscriptionLevelEnum = {
     /**
      * value: Free
      * @const
      */
     FREE: "Free",
-    
+
     /**
      * value: Standard
      * @const
      */
     STANDARD: "Standard",
-    
+
     /**
      * value: Enterprise
      * @const

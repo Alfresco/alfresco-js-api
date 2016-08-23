@@ -42,8 +42,8 @@
    * @return {module:model/ActivityPagingList} The populated <code>ActivityPagingList</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entries')) {
         obj['entries'] = ApiClient.convertToType(data['entries'], [ActivityEntry]);

@@ -44,7 +44,7 @@
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
-      obj = obj || new exports();
+      obj = data || new exports();
 
       if (data.hasOwnProperty('order')) {
         obj['order'] = ApiClient.convertToType(data['order'], ['String']);

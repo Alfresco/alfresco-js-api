@@ -42,8 +42,8 @@
    * @return {module:model/FavoriteSitePagingList} The populated <code>FavoriteSitePagingList</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entries')) {
         obj['entries'] = ApiClient.convertToType(data['entries'], [FavoriteSiteEntry]);

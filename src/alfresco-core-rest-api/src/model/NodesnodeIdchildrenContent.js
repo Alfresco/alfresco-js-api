@@ -40,8 +40,8 @@
    * @return {module:model/NodesnodeIdchildrenContent} The populated <code>NodesnodeIdchildrenContent</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('mimeType')) {
         obj['mimeType'] = ApiClient.convertToType(data['mimeType'], 'String');

@@ -40,8 +40,8 @@
    * @return {module:model/FavoriteEntry} The populated <code>FavoriteEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
-      obj = obj || new exports();
+    if (data) {
+      obj = data || new exports();
 
       if (data.hasOwnProperty('entry')) {
         obj['entry'] = Favorite.constructFromObject(data['entry']);
