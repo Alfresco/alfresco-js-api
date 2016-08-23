@@ -35,21 +35,11 @@ You can set the **role** to one of four types:
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.SitesApi()
-
 var siteId = "siteId_example"; // {String} The identifier of a site.
 
-var siteMemberBody = new AlfrescoCoreRestApi.SiteMemberBody(); // {SiteMemberBody} The person to add and their role
+var siteMemberBody = new this.alfrescoJsApi.core.SiteMemberBody(); // {SiteMemberBody} The person to add and their role
 
-apiInstance.addSiteMember(siteId, siteMemberBody).then(function(data) {
+this.alfrescoJsApi.core.sitesApi.addSiteMember(siteId, siteMemberBody).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -105,23 +95,16 @@ The creator will be added as a member with Site Manager role.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+this.alfrescoJsApi.core.sitesApi()
 
-var apiInstance = new AlfrescoCoreRestApi.SitesApi()
-
-var siteBody = new AlfrescoCoreRestApi.SiteBody(); // {SiteBody} The site details
+var siteBody = new this.alfrescoJsApi.core.SiteBody(); // {SiteBody} The site details
 
 var opts = {
   'skipConfiguration': false, // {Boolean} Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created.
   'skipAddToFavorites': false // {Boolean} Flag to indicate whether the site should not be added to the user's site favorites.
 };
-apiInstance.createSite(siteBody, opts).then(function(data) {
+this.alfrescoJsApi.core.sitesApi.createSite(siteBody, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -160,22 +143,15 @@ Deletes the site with **siteId**.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.SitesApi()
+this.alfrescoJsApi.core.sitesApi()
 
 var siteId = "siteId_example"; // {String} The identifier of a site.
 
 var opts = {
   'permanent': false // {Boolean} Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan.
 };
-apiInstance.deleteSite(siteId, , opts).then(function() {
+this.alfrescoJsApi.core.sitesApi.deleteSite(siteId, , opts).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -226,15 +202,8 @@ containers,members
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.SitesApi()
+this.alfrescoJsApi.core.sitesApi()
 
 var siteId = "siteId_example"; // {String} The identifier of a site.
 
@@ -252,7 +221,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-apiInstance.getSite(siteId, , opts).then(function(data) {
+this.alfrescoJsApi.core.sitesApi.getSite(siteId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -291,15 +260,8 @@ Returns information on the container **containerId** in site **siteId**.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.SitesApi()
+this.alfrescoJsApi.core.sitesApi()
 
 var siteId = "siteId_example"; // {String} The identifier of a site.
 
@@ -318,7 +280,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-apiInstance.getSiteContainer(siteId, containerId, opts).then(function(data) {
+this.alfrescoJsApi.core.sitesApi.getSiteContainer(siteId, containerId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -368,15 +330,8 @@ Returns a list of containers information for site identified by **siteId**.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.SitesApi()
+this.alfrescoJsApi.core.sitesApi()
 
 var siteId = "siteId_example"; // {String} The identifier of a site.
 
@@ -395,7 +350,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-apiInstance.getSiteContainers(siteId, , opts).then(function(data) {
+this.alfrescoJsApi.core.sitesApi.getSiteContainers(siteId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -435,15 +390,8 @@ Returns site membership information for person **personId** on site **siteId**.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.SitesApi()
+this.alfrescoJsApi.core.sitesApi()
 
 var siteId = "siteId_example"; // {String} The identifier of a site.
 
@@ -462,7 +410,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-apiInstance.getSiteMember(siteId, personId, opts).then(function(data) {
+this.alfrescoJsApi.core.sitesApi.getSiteMember(siteId, personId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -501,15 +449,8 @@ Returns a list of site memberships for site **siteId**.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.SitesApi()
+this.alfrescoJsApi.core.sitesApi()
 
 var siteId = "siteId_example"; // {String} The identifier of a site.
 
@@ -528,7 +469,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-apiInstance.getSiteMembers(siteId, , opts).then(function(data) {
+this.alfrescoJsApi.core.sitesApi.getSiteMembers(siteId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -590,15 +531,8 @@ containers,members
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.SitesApi()
+this.alfrescoJsApi.core.sitesApi()
 
 var opts = {
   'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
@@ -617,7 +551,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-apiInstance.getSites(opts).then(function(data) {
+this.alfrescoJsApi.core.sitesApi.getSites(opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -658,21 +592,14 @@ Removes person **personId** as a member of site **siteId**.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.SitesApi()
+this.alfrescoJsApi.core.sitesApi()
 
 var siteId = "siteId_example"; // {String} The identifier of a site.
 
 var personId = "personId_example"; // {String} The identifier of a person.
 
-apiInstance.removeSiteMember(siteId, personId).then(function() {
+this.alfrescoJsApi.core.sitesApi.removeSiteMember(siteId, personId).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -718,23 +645,16 @@ You can set the **role** to one of four types:
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.SitesApi()
+this.alfrescoJsApi.core.sitesApi()
 
 var siteId = "siteId_example"; // {String} The identifier of a site.
 
 var personId = "personId_example"; // {String} The identifier of a person.
 
-var siteMemberRoleBody = new AlfrescoCoreRestApi.SiteMemberRoleBody(); // {SiteMemberRoleBody} The persons new role
+var siteMemberRoleBody = new this.alfrescoJsApi.core.SiteMemberRoleBody(); // {SiteMemberRoleBody} The persons new role
 
-apiInstance.updateSiteMember(siteId, personIdsiteMemberRoleBody).then(function(data) {
+this.alfrescoJsApi.core.sitesApi.updateSiteMember(siteId, personIdsiteMemberRoleBody).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

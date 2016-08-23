@@ -105,7 +105,7 @@ interface Auth {
 }
 
 interface AuthMock {
-    new(host: string): UploadMock;
+    new(host: string, username: string, password: string): AuthMock;
     get201Response(forceTicket: string);
     get403Response();
     get400Response();
@@ -114,10 +114,11 @@ interface AuthMock {
     get404ResponseLogout();
     rec();
     play();
+    clearAll();
 }
 
 interface NodeMock {
-    new(host: string): UploadMock;
+    new(host: string): NodeMock;
     get200ResponseChildren();
     get200ResponseSingleFileFolder();
     get404ChildrenNotExist();
@@ -131,6 +132,7 @@ interface NodeMock {
     get201CreationFolderNewNameNotClashes();
     rec();
     play();
+    clearAll();
 }
 
 interface UploadMock {
@@ -141,21 +143,76 @@ interface UploadMock {
     get401Response();
     rec();
     play();
+    clearAll();
 }
 
-interface WebScript {
-    new(host: string): WebScript;
+interface WebScriptMock {
+    new(host: string): WebScriptMock;
     get200Response();
     get400Response();
     rec();
     play();
+    clearAll();
+}
+
+interface TagMock {
+    new(host: string): TagMock;
+    get200Response();
+    get401Response();
+    rec();
+    play();
+    clearAll();
+}
+
+interface ModelsMock {
+    new(host: string): ModelsMock;
+    get200Response();
+    rec();
+    play();
+    clearAll();
 }
 
 interface Mock {
     Auth: AuthMock;
     Node: NodeMock;
     Upload: UploadMock;
-    WebScript: WebScript;
+    WebScript: WebScriptMock;
+    ActivitiMock : ActivitiMock;
+    Tag : TagMock;
+    Models: ModelsMock;
+    UserFilters: UserFiltersMock;
+}
+
+interface ActivitiMock {
+    Auth: ActivitiAuthMock;
+    Process : ProcessMock;
+    Tasks :TasksMock;
+}
+
+interface UserFiltersMock {
+    new(host: string, username: string, password: string): UserFiltersMock;
+    get200getUserTaskFilters();
+}
+
+interface ActivitiAuthMock {
+    new(host: string, username: string, password: string): ActivitiAuthMock;
+    get200Response();
+    get200ResponseLogout()
+    get401Response();
+}
+
+interface ProcessMock {
+    new(host: string): ProcessMock;
+    get200Response();
+}
+
+interface TasksMock {
+    new(host: string): TasksMock;
+    get200Response();
+}
+
+interface Activiti {
+
 }
 
 interface NodesApi {
@@ -167,16 +224,86 @@ interface ApiClient {
     new(client: any): ApiClient;
 }
 
+interface BpmAuth {
+    new(config: any): BpmAuth;
+}
+
+interface activiti {
+    new(config: any): activiti;
+    aboutApi: any;
+    adminEndpointsApi: any;
+    adminGroupsApi: any;
+    adminTenantsApi: any;
+    adminUsersApi: any;
+    alfrescoApi: any;
+    appsApi: any;
+    appsDefinitionApi: any;
+    appsRuntimeApi: any;
+    commentsApi: any;
+    contentApi: any;
+    contentRenditionApi: any;
+    editorApi: any;
+    groupsApi: any;
+    iDMSyncApi: any;
+    integrationAccountApi: any;
+    integrationAlfrescoCloudApi: any;
+    integrationAlfrescoOnPremiseApi: any;
+    integrationApi: any;
+    integrationBoxApi: any;
+    integrationDriveApi: any;
+    modelBpmnApi: any;
+    modelsApi: any;
+    modelsHistoryApi: any;
+    processApi: any;
+    processDefinitionsApi: any;
+    processDefinitionsFormApi: any;
+    processInstancesApi: any;
+    processInstancesInformationApi: any;
+    processInstancesListingApi: any;
+    processScopeApi: any;
+    profileApi: any;
+    scriptFileApi: any;
+    systemPropertiesApi: any;
+    taskActionsApi: any;
+    taskApi: any;
+    taskCheckListApi: any;
+    taskFormsApi: any;
+    temporaryApi: any;
+    userApi: any;
+    userFiltersApi: any;
+    usersWorkflowApi:any;
+}
+
+interface core {
+    associationsApi: any;
+    changesApi: any;
+    childAssociationsApi: any;
+    commentsApi: any;
+    favoritesApi: any;
+    networksApi: any;
+    nodesApi: any;
+    peopleApi: any;
+    ratingsApi: any;
+    renditionsApi: any;
+    searchApi: any;
+    sharedlinksApi: any;
+    sitesApi: any;
+    tagsApi: any;
+}
+
 export interface AlfrescoApi {
     new(config: any): AlfrescoApi;
 
+    Activiti: Activiti;
     Auth: Auth;
     Core: Core;
     Mock: Mock;
 
+    activiti: activiti;
+    core: core;
+
     search: any;
     nodes: any;
-    webScript: any;
     content: any;
     upload: any;
     webScript: any;
@@ -184,7 +311,9 @@ export interface AlfrescoApi {
     createClient(): any;
     getClient(): any;
     getClientAuth(): any;
-    changeConfig(config: any);
+
+    changeEcmHost(ecmHost: any);
+    changeBpmHost(bpmHost: any);
 
     getNodeInfo(nodeId: string): any;
     deleteNode(nodeId: string): any;
@@ -194,14 +323,18 @@ export interface AlfrescoApi {
     createFolder(name: string, relativePath: string, nodeId: string): any;
 
     isLoggedIn(): boolean;
-    login(): any;
+    login(username: string, password: string): any;
     logout(): any;
+    loginTicket(ticket: string): any;
 
     getDocumentThumbnailUrl(documentId: string): any;
     getContentUrl(documentId: string): any;
 
-    getTicket(): any;
-    setTicket(ticket: any): any;
+    getTicket(): Array;
+    getTicketBpm(): string;
+    getTicketEcm(): string;
+
+    setTicket(ticketEcm: any, ticketBpm: any): void;
 }
 
 declare var AlfrescoApi: AlfrescoApi;

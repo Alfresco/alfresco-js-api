@@ -61,11 +61,11 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var sourceId = "sourceId_example"; // {String} The identifier of a node.
 
-var assocTargetBody = new AlfrescoCoreRestApi.AssocTargetBody(); // {AssocTargetBody} The target node id and assoc type.
+var assocTargetBody = new this.alfrescoJsApi.core.AssocTargetBody(); // {AssocTargetBody} The target node id and assoc type.
 
 apiInstance.addAssoc(sourceId, assocTargetBody).then(function() {
   console.log('API called successfully.');
@@ -182,11 +182,11 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases: -my- , -shared- , -root-
 
-var nodeBody = new AlfrescoCoreRestApi.NodeBody1(); // {NodeBody1} The node information to create.
+var nodeBody = new this.alfrescoJsApi.core.NodeBody1(); // {NodeBody1} The node information to create.
 
 var opts = {
   'autoRename': true, // {Boolean} If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
@@ -252,11 +252,11 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var parentId = "parentId_example"; // {String} The identifier of a node.
 
-var assocChildBody = new AlfrescoCoreRestApi.AssocChildBody(); // {AssocChildBody} The child node id and assoc type.
+var assocChildBody = new this.alfrescoJsApi.core.AssocChildBody(); // {AssocChildBody} The child node id and assoc type.
 
 apiInstance.addSecondaryChildAssoc(parentId, assocChildBody).then(function() {
   console.log('API called successfully.');
@@ -304,9 +304,9 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
-var sharedLinkBody = new AlfrescoCoreRestApi.SharedLinkBody(); // {SharedLinkBody} The nodeId to create a shared link for.
+var sharedLinkBody = new this.alfrescoJsApi.core.SharedLinkBody(); // {SharedLinkBody} The nodeId to create a shared link for.
 
 var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the shared link, the following optional fields can be requested: * allowableOperations
@@ -373,11 +373,11 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:  -my- , -shared- , -root-
 
-var copyBody = new AlfrescoCoreRestApi.CopyBody(); // {CopyBody} The targetParentId and, optionally, a new name.
+var copyBody = new this.alfrescoJsApi.core.CopyBody(); // {CopyBody} The targetParentId and, optionally, a new name.
 
 var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:  path , isLink , allowableOperations
@@ -448,11 +448,11 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:  -my- , -shared- , -root-
 
-var renditionBody = new AlfrescoCoreRestApi.RenditionBody(); // {RenditionBody} The rendition "id".
+var renditionBody = new this.alfrescoJsApi.core.RenditionBody(); // {RenditionBody} The rendition "id".
 
 apiInstance.createRendition(nodeId, renditionBody).then(function() {
   console.log('API called successfully.');
@@ -518,9 +518,9 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
-var siteBody = new AlfrescoCoreRestApi.SiteBody(); // {SiteBody} The site details
+var siteBody = new this.alfrescoJsApi.core.SiteBody(); // {SiteBody} The site details
 
 var opts = {
   'skipConfiguration': false, // {Boolean} Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created.
@@ -578,7 +578,7 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
@@ -631,7 +631,7 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var sharedId = "sharedId_example"; // {String} The identifier of a shared link to a file.
 
@@ -680,7 +680,7 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var siteId = "siteId_example"; // {String} The identifier of a site.
 
@@ -754,11 +754,11 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var sharedId = "sharedId_example"; // {String} The identifier of a shared link to a file.
 
-var emailSharedLinkBody = new AlfrescoCoreRestApi.EmailSharedLinkBody(); // {EmailSharedLinkBody} The shared link email to send.
+var emailSharedLinkBody = new this.alfrescoJsApi.core.EmailSharedLinkBody(); // {EmailSharedLinkBody} The shared link email to send.
 
 apiInstance.emailSharedLink(sharedId, emailSharedLinkBody).then(function() {
   console.log('API called successfully.');
@@ -806,7 +806,7 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var opts = {
   'where': "where_example", // {String} Optionally filter the list by "sharedByUser" userid of person who shared the link (can also use -me-) *   where=(sharedByUser='jbloggs') *   where=(sharedByUser='-me-')
@@ -871,7 +871,7 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
@@ -928,7 +928,7 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var opts = {
   'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
@@ -982,7 +982,7 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
@@ -1043,7 +1043,7 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases: *-my-*-shared-*-root-
 
@@ -1112,7 +1112,7 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases: -my- , -shared- , -root-
 
@@ -1215,7 +1215,7 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
@@ -1267,7 +1267,7 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
@@ -1335,7 +1335,7 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
@@ -1387,7 +1387,7 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var sharedId = "sharedId_example"; // {String} The identifier of a shared link to a file.
 
@@ -1455,7 +1455,7 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var sharedId = "sharedId_example"; // {String} The identifier of a shared link to a file.
 
@@ -1524,7 +1524,7 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var sharedId = "sharedId_example"; // {String} The identifier of a shared link to a file.
 
@@ -1598,7 +1598,7 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var sharedId = "sharedId_example"; // {String} The identifier of a shared link to a file.
 
@@ -1650,7 +1650,7 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var childId = "childId_example"; // {String} The identifier of a node.
 
@@ -1717,7 +1717,7 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var parentId = "parentId_example"; // {String} The identifier of a node.
 
@@ -1787,7 +1787,7 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var targetId = "targetId_example"; // {String} The identifier of a node.
 
@@ -1855,7 +1855,7 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var sourceId = "sourceId_example"; // {String} The identifier of a node.
 
@@ -1934,7 +1934,7 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var term = "term_example"; // {String} The term to search for.
 
@@ -2017,11 +2017,11 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases: * -my-*-shared-*-root-
 
-var moveBody = new AlfrescoCoreRestApi.MoveBody(); // {MoveBody} The targetParentId and, optionally, a new name.
+var moveBody = new this.alfrescoJsApi.core.MoveBody(); // {MoveBody} The targetParentId and, optionally, a new name.
 
 var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested: * path * isLink * allowableOperations
@@ -2086,7 +2086,7 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
@@ -2138,7 +2138,7 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var sourceId = "sourceId_example"; // {String} The identifier of a node.
 
@@ -2197,7 +2197,7 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var parentId = "parentId_example"; // {String} The identifier of a node.
 
@@ -2254,7 +2254,7 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
@@ -2314,7 +2314,7 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
@@ -2407,12 +2407,12 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var apiInstance = new AlfrescoCoreRestApi.ChangesApi()
+var apiInstance = new this.alfrescoJsApi.core.ChangesApi()
 
 var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:
  -my- , -shared- , -root-
 
-var nodeBody = new AlfrescoCoreRestApi.NodeBody(); // {NodeBody} The node information to update.
+var nodeBody = new this.alfrescoJsApi.core.NodeBody(); // {NodeBody} The node information to update.
 
 var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested: * path * isLink * allowableOperations

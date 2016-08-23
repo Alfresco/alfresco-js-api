@@ -2,26 +2,24 @@
 
 var AlfrescoApi = require('../main');
 var expect = require('chai').expect;
-var AuthResponseMock = require('../test/mockObjects/authResponseMock');
-var NodeMock = require('../test/mockObjects/nodeMock');
+var AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
+var NodeMock = require('../test/mockObjects/mockAlfrescoApi').Node;
 
 describe('Node', function () {
     beforeEach(function (done) {
-        this.host = 'http://127.0.0.1:8080';
+        this.hostEcm = 'http://127.0.0.1:8080';
 
-        this.authResponseMock = new AuthResponseMock(this.host);
-        this.nodeMock = new NodeMock(this.host);
+        this.authResponseMock = new AuthResponseMock(this.hostEcm);
+        this.nodeMock = new NodeMock(this.hostEcm);
 
         this.authResponseMock.get201Response();
         this.alfrescoJsApi = new AlfrescoApi({
-            username: 'admin',
-            password: 'admin',
-            host: this.host
+            hostEcm: this.hostEcm
         });
 
-        this.alfrescoJsApi.login().then(() => {
+        this.alfrescoJsApi.login('admin', 'admin').then(() => {
             done();
-        },(error) => {
+        }, (error) => {
             console.log('error ' + JSON.stringify(error));
         });
     });
@@ -104,6 +102,15 @@ describe('Node', function () {
             });
         });
 
+        it.skip('dynamic augmenting object parameters', function(done) {
+            this.nodeMock.get200ResponseChildrenFutureNewPossibleValue();
+
+            this.alfrescoJsApi.nodes.getNodeChildren('b4cff62a-664d-4d45-9302-98723eac1319').then(function (data) {
+                console.log(JSON.stringify(data));
+                expect(data.list.entries[0].entry.impossibleProperties).to.be.equal('impossibleRightValue');
+                done();
+            });
+        });
     });
 
     describe('Delete', function () {

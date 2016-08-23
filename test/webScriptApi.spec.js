@@ -2,28 +2,26 @@
 
 var AlfrescoApi = require('../main');
 var expect = require('chai').expect;
-var AuthResponseMock = require('../test/mockObjects/authResponseMock');
-var WebScriptMock = require('../test/mockObjects/webScriptMock');
+var AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
+var WebScriptMock = require('../test/mockObjects/mockAlfrescoApi').WebScript;
 
 describe('WebScript', function () {
 
     beforeEach(function (done) {
-        this.host = 'http://127.0.0.1:8080';
+        this.hostEcm = 'http://127.0.0.1:8080';
         this.contextRoot = 'script';
         this.servicePath = 'alfresco';
         this.scriptPath = 'testWebScript';
 
-        this.authResponseMock = new AuthResponseMock(this.host);
-        this.webScriptMock = new WebScriptMock(this.host, this.contextRoot, this.servicePath, this.scriptPath);
+        this.authResponseMock = new AuthResponseMock(this.hostEcm);
+        this.webScriptMock = new WebScriptMock(this.hostEcm, this.contextRoot, this.servicePath, this.scriptPath);
 
         this.authResponseMock.get201Response();
         this.alfrescoJsApi = new AlfrescoApi({
-            username: 'admin',
-            password: 'admin',
-            host: this.host
+            hostEcm: this.hostEcm
         });
 
-        this.alfrescoJsApi.login().then((data) => {
+        this.alfrescoJsApi.login('admin', 'admin').then(() => {
             done();
         });
     });

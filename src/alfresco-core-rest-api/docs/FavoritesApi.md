@@ -20,19 +20,9 @@ Favorite a **site**, **file**, or **folder** in the repository.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.FavoritesApi()
-
 var personId = "personId_example"; // {String} The identifier of a person.
 
-var favoriteBody = new AlfrescoCoreRestApi.FavoriteBody(); // {FavoriteBody} An object identifying the entity to be favorited. The object consists of a single property which is an object with the name `site`, `file`, or `folder`. The content of that object is the `guid` of the target entity. For example, to favorite a file the following body would be used:
+var favoriteBody = new this.alfrescoJsApi.core.FavoriteBody(); // {FavoriteBody} An object identifying the entity to be favorited. The object consists of a single property which is an object with the name `site`, `file`, or `folder`. The content of that object is the `guid` of the target entity. For example, to favorite a file the following body would be used:
 
 ```JSON
 {
@@ -44,7 +34,7 @@ var favoriteBody = new AlfrescoCoreRestApi.FavoriteBody(); // {FavoriteBody} An 
 }
 ```
 
-apiInstance.addFavorite(personIdfavoriteBody).then(function(data) {
+this.alfrescoJsApi.core.favoritesApi.addFavorite(personIdfavoriteBody).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -98,16 +88,6 @@ Returns favorite **favoriteId** for person **personId**.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.FavoritesApi()
-
 var personId = "personId_example"; // {String} The identifier of a person.
 
 var favoriteId = "favoriteId_example"; // {String} The identifier of a favorite.
@@ -125,7 +105,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-apiInstance.getFavorite(personIdfavoriteId, opts).then(function(data) {
+this.alfrescoJsApi.core.favoritesApi.getFavorite(personIdfavoriteId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -202,16 +182,6 @@ For example, the following **where** parameter restricts the returned list to th
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.FavoritesApi()
-
 var personId = "personId_example"; // {String} The identifier of a person.
 
 var opts = {
@@ -231,7 +201,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-apiInstance.getFavorites(personId, opts).then(function(data) {
+this.alfrescoJsApi.core.favoritesApi.getFavorites(personId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -283,21 +253,11 @@ Removes **favoriteId** as a favorite of person **personId**.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.FavoritesApi()
-
 var personId = "personId_example"; // {String} The identifier of a person.
 
 var favoriteId = "favoriteId_example"; // {String} The identifier of a favorite.
 
-apiInstance.removeFavoriteSite(personIdfavoriteId).then(function() {
+this.alfrescoJsApi.core.favoritesApi.removeFavoriteSite(personIdfavoriteId).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);

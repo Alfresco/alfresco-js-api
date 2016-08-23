@@ -29,21 +29,11 @@ Async request to create a rendition for file with identifier
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.RenditionsApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:  -my-,  -shared- , -root-
 
-var renditionBody = new AlfrescoCoreRestApi.RenditionBody(); // {RenditionBody} The rendition "id".
+var renditionBody = new this.alfrescoJsApi.core.RenditionBody(); // {RenditionBody} The rendition "id".
 
-apiInstance.createRendition(nodeId, renditionBody).then(function() {
+this.alfrescoJsApi.core.renditionsApi.createRendition(nodeId, renditionBody).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -81,21 +71,11 @@ Returns the rendition information for file node with identifier **nodeId**.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.RenditionsApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var renditionId = "renditionId_example"; // {String} The name of a thumbnail rendition, for example *doclib*, or *pdf*.
 
-apiInstance.getRendition(nodeId, renditionId).then(function(data) {
+this.alfrescoJsApi.core.renditionsApi.getRendition(nodeId, renditionId).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -133,16 +113,6 @@ Returns the rendition content for file node with identifier **nodeId**.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.RenditionsApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var renditionId = "renditionId_example"; // {String} The name of a thumbnail rendition, for example *doclib*, or *pdf*.
@@ -161,7 +131,7 @@ var opts = {
 'ifModifiedSince': new Date("2013-10-20T19:20:30+01:00") // {Date} Only returns the content if it has been modified since the date provided. Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.
 
 };
-apiInstance.getRenditionContent(nodeId, renditionId, opts).then(function() {
+this.alfrescoJsApi.core.renditionsApi.getRenditionContent(nodeId, renditionId, opts).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -193,7 +163,7 @@ null (empty response body)
 
 <a name="getRenditions"></a>
 # **getRenditions**
-> RenditionPaging getRenditions(nodeId, )
+> RenditionPaging getRenditions(nodeId)
 
 List information for renditions
 
@@ -202,19 +172,9 @@ This will return rendition information, including the rendition id, for each ren
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.RenditionsApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
-apiInstance.getRenditions(nodeId, ).then(function(data) {
+this.alfrescoJsApi.core.renditionsApi.getRenditions(nodeId).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -254,16 +214,6 @@ Returns the rendition content for file with shared link identifier **sharedId**.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.RenditionsApi()
-
 var sharedId = "sharedId_example"; // {String} The identifier of a shared link to a file.
 
 var renditionId = "renditionId_example"; // {String} The name of a thumbnail rendition, for example *doclib*, or *pdf*.
@@ -281,7 +231,7 @@ var opts = {
 
   'ifModifiedSince': new Date("2013-10-20T19:20:30+01:00") // {Date} Only returns the content if it has been modified since the date provided. Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.
 };
-apiInstance.getSharedLinkRenditionContent(sharedId, renditionId, opts).then(function() {
+this.alfrescoJsApi.core.renditionsApi.getSharedLinkRenditionContent(sharedId, renditionId, opts).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -313,7 +263,7 @@ null (empty response body)
 
 <a name="getSharedLinkRenditions"></a>
 # **getSharedLinkRenditions**
-> RenditionPaging getSharedLinkRenditions(sharedId, )
+> RenditionPaging getSharedLinkRenditions(sharedId)
 
 List information for created renditions
 
@@ -327,19 +277,9 @@ where the rendition status is CREATED (ie. available\u00A0to view/download).
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.RenditionsApi()
-
 var sharedId = "sharedId_example"; // {String} The identifier of a shared link to a file.
 
-apiInstance.getSharedLinkRenditions(sharedId, ).then(function(data) {
+this.alfrescoJsApi.core.renditionsApi.getSharedLinkRenditions(sharedId).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

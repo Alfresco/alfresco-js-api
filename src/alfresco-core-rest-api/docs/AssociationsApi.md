@@ -21,21 +21,11 @@ Add association, with given association type, between source and target node.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.AssociationsApi()
-
 var sourceId = "sourceId_example"; // {String} The identifier of a node.
 
-var assocTargetBody = new AlfrescoCoreRestApi.AssocTargetBody(); // {AssocTargetBody} The target node id and assoc type.
+var assocTargetBody = new this.alfrescoJsApi.core.AssocTargetBody(); // {AssocTargetBody} The target node id and assoc type.
 
-apiInstance.addAssoc(sourceId, assocTargetBody).then(function() {
+this.alfrescoJsApi.core.associationsApi.addAssoc(sourceId, assocTargetBody).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -74,15 +64,6 @@ Returns a list of source nodes that point to (ie. are associated with) the curre
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.AssociationsApi()
 
 var targetId = "targetId_example"; // {String} The identifier of a node.
 
@@ -91,7 +72,7 @@ var opts = {
   'include': "include_example", // {String} Return additional info, eg. aspect, properties, path, isLink
   'fields': ["fields_example"] // {[String]} A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
 };
-apiInstance.listSourceNodeAssociations(targetId, opts).then(function(data) {
+this.alfrescoJsApi.core.associationsApi.listSourceNodeAssociations(targetId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -132,15 +113,6 @@ Returns a list of target nodes that are pointed to (ie. are associated with) the
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.AssociationsApi()
 
 var sourceId = "sourceId_example"; // {String} The identifier of a node.
 
@@ -152,7 +124,7 @@ var opts = {
                                 The list applies to a returned individual entity or entries within a collection.
                                 If the API method also supports the **include**  parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.*/
 };
-apiInstance.listTargetAssociations(sourceId, opts).then(function(data) {
+this.alfrescoJsApi.core.associationsApi.listTargetAssociations(sourceId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -195,15 +167,6 @@ If association type is not specified then all associations between source and ta
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.AssociationsApi()
 
 var sourceId = "sourceId_example"; // {String} The identifier of a node.
 
@@ -212,7 +175,7 @@ var targetId = "targetId_example"; // {String} The identifier of a node.
 var opts = {
   'assocType': "assocType_example" // {String} Restrict the delete to only those of the given association type
 };
-apiInstance.removeAssoc(sourceId, targetId, opts).then(function() {
+this.alfrescoJsApi.core.associationsApi.removeAssoc(sourceId, targetId, opts).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);

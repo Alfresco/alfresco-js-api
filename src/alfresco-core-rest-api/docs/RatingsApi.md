@@ -20,16 +20,6 @@ Get the specific rating **ratingId** on node **nodeId**.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.RatingsApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var ratingId = "ratingId_example"; // {String} The identifier of a rating.
@@ -47,7 +37,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-apiInstance.getRating(nodeId, ratingId, opts).then(function(data) {
+this.alfrescoJsApi.core.ratingsApi.getRating(nodeId, ratingId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -86,16 +76,6 @@ Get the ratings for node **nodeId**.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.RatingsApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var opts = {
@@ -113,7 +93,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-apiInstance.getRatings(nodeId, , opts).then(function(data) {
+this.alfrescoJsApi.core.ratingsApi.getRatings(nodeId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -153,19 +133,9 @@ Rate the node with identifier **nodeId**
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.RatingsApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
-var ratingBody = new AlfrescoCoreRestApi.RatingBody(); // {RatingBody} For "myRating" the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar. For example, to "like" a file the following body would be used:
+var ratingBody = new this.alfrescoJsApi.core.RatingBody(); // {RatingBody} For "myRating" the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar. For example, to "like" a file the following body would be used:
 
   ```JSON
     {
@@ -175,7 +145,7 @@ var ratingBody = new AlfrescoCoreRestApi.RatingBody(); // {RatingBody} For "myRa
   ```
 
 
-apiInstance.rate(nodeId, ratingBody).then(function(data) {
+this.alfrescoJsApi.core.ratingsApi.rate(nodeId, ratingBody).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -223,21 +193,11 @@ Removes rating **ratingId** from node **nodeId**.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.RatingsApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var ratingId = "ratingId_example"; // {String} The identifier of a rating.
 
-apiInstance.removeRating(nodeId, ratingId).then(function() {
+this.alfrescoJsApi.core.ratingsApi.removeRating(nodeId, ratingId).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);

@@ -35,21 +35,11 @@ specifying a list of tags in the JSON body like this:
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.TagsApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
-var tagBody = new AlfrescoCoreRestApi.TagBody(); // {TagBody} The new tag
+var tagBody = new this.alfrescoJsApi.core.TagBody(); // {TagBody} The new tag
 
-apiInstance.addTag(nodeId, tagBody).then(function(data) {
+this.alfrescoJsApi.core.tagsApi.addTag(nodeId, tagBody).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -87,16 +77,6 @@ Returns a list of tags for node **nodeId**.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.TagsApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var opts = {
@@ -114,7 +94,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-apiInstance.getNodeTags(nodeId, , opts).then(function(data) {
+this.alfrescoJsApi.core.tagsApi.getNodeTags(nodeId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -154,16 +134,6 @@ Return a specific tag with **tagId**.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.TagsApi()
-
 var tagId = "tagId_example"; // {String} The identifier of a tag.
 
 var opts = {
@@ -179,7 +149,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-apiInstance.getTag(tagId, , opts).then(function(data) {
+this.alfrescoJsApi.core.tagsApi.getTag(tagId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -217,16 +187,6 @@ Returns a list of tags in this repository.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.TagsApi()
-
 var opts = {
   'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
@@ -242,7 +202,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-apiInstance.getTags(opts).then(function(data) {
+this.alfrescoJsApi.core.tagsApi.getTags(opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -273,7 +233,7 @@ Name | Type | Description  | Notes
 
 <a name="removeTag"></a>
 # **removeTag**
-> removeTag(nodeId, tagId, )
+> removeTag(nodeId, tagId)
 
 Delete a tag
 
@@ -281,21 +241,11 @@ Removes tag **tagId** from node **nodeId**.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.TagsApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var tagId = "tagId_example"; // {String} The identifier of a tag.
 
-apiInstance.removeTag(nodeId, tagId, ).then(function() {
+this.alfrescoJsApi.core.tagsApi.removeTag(nodeId, tagId).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -333,21 +283,11 @@ Updates the tag **tagId**.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.TagsApi()
-
 var tagId = "tagId_example"; // {String} The identifier of a tag.
 
-var tagBody = new AlfrescoCoreRestApi.TagBody1(); // {TagBody1} The updated tag
+var tagBody = new this.alfrescoJsApi.core.TagBody1(); // {TagBody1} The updated tag
 
-apiInstance.updateTag(tagId, tagBody).then(function(data) {
+this.alfrescoJsApi.core.tagsApi.updateTag(tagId, tagBody).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

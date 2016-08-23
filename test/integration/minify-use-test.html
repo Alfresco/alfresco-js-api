@@ -6,7 +6,7 @@
 
     <script src="../../dist/alfresco-js-api.min.js"></script>
     <script>
-        this.alfrescoJsApi = new AlfrescoApi({ username:'admin', password:'admin', host:'http://127.0.0.1:8080'});
+        this.alfrescoJsApi = new AlfrescoApi({ username:'admin', password:'admin', hostEcm:'http://127.0.0.1:8080'});
 
         this.alfrescoJsApi.login().then(function (data) {
             document.getElementById('ticket').innerHTML = data;

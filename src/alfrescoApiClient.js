@@ -50,7 +50,7 @@ class AlfrescoApiClient extends ApiClient {
         var request = superagent(httpMethod, url);
 
         // apply authentications
-        this.applyAuthToRequest(request, authNames);
+        this.applyAuthToRequest(request, ['basicAuth']);
 
         // set query parameters
         request.query(this.normalizeParams(queryParams));
@@ -62,6 +62,12 @@ class AlfrescoApiClient extends ApiClient {
         request.timeout(this.timeout);
 
         var contentType = this.jsonPreferredMime(contentTypes);
+
+        if (contentType && contentType !== 'multipart/form-data') {
+            request.type(contentType);
+        } else if (!request.header['Content-Type'] && contentType !== 'multipart/form-data') {
+            request.type('application/json');
+        }
 
         if (contentType === 'application/x-www-form-urlencoded') {
             request.send(this.normalizeParams(formParams)).on('progress', (event)=> {

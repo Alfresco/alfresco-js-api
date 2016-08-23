@@ -93,23 +93,13 @@ Any field in the JSON body defined below can also be passed as a form-data field
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.ChildAssociationsApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:
 * -my-
 * -shared-
 * -root-
 
 
-var nodeBody = new AlfrescoCoreRestApi.NodeBody1(); // {NodeBody1} The node information to create.
+var nodeBody = new this.alfrescoJsApi.core.NodeBody1(); // {NodeBody1} The node information to create.
 
 var opts = {
   'autoRename': true, // {Boolean} If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
@@ -131,7 +121,7 @@ parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
 
 };
-apiInstance.addNode(nodeId, nodeBody, opts).then(function(data) {
+this.alfrescoJsApi.core.childAssociationsApi.addNode(nodeId, nodeBody, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -173,21 +163,11 @@ Add secondary child association, with given association type, between parent and
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.ChildAssociationsApi()
-
 var parentId = "parentId_example"; // {String} The identifier of a node.
 
-var assocChildBody = new AlfrescoCoreRestApi.AssocChildBody(); // {AssocChildBody} The child node id and assoc type.
+var assocChildBody = new this.alfrescoJsApi.core.AssocChildBody(); // {AssocChildBody} The child node id and assoc type.
 
-apiInstance.addSecondaryChildAssoc(parentId, assocChildBody).then(function() {
+this.alfrescoJsApi.core.childAssociationsApi.addSecondaryChildAssoc(parentId, assocChildBody).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -230,22 +210,12 @@ Deleting a node removes the child associations, ie. both primary and also second
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.ChildAssociationsApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var opts = {
   'permanent': false // {Boolean} If **true** then the node is deleted permanently, without it moving to the trashcan.You must be the owner or an admin to permanently delete the node.
 };
-apiInstance.deleteNode(nodeId, , opts).then(function() {
+this.alfrescoJsApi.core.childAssociationsApi.deleteNode(nodeId, , opts).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -288,16 +258,6 @@ The list of child nodes includes primary children and also secondary children, i
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.ChildAssociationsApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:  -my- , -shared- , -root-
 var opts = {
   'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
@@ -347,7 +307,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter.*/
 
 };
-apiInstance.getNodeChildren(nodeId, , opts).then(function(data) {
+this.alfrescoJsApi.core.childAssociationsApi.getNodeChildren(nodeId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -406,16 +366,6 @@ This inclues both the primary parent and also secondary parents, if any.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.ChildAssociationsApi()
-
 var childId = "childId_example"; // {String} The identifier of a node.
 
 var opts = {
@@ -433,7 +383,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter.*/
 
 };
-apiInstance.listParents(childId, opts).then(function(data) {
+this.alfrescoJsApi.core.childAssociationsApi.listParents(childId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -474,16 +424,6 @@ Returns a list of secondary child nodes that are associated with the current par
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.ChildAssociationsApi()
-
 var parentId = "parentId_example"; // {String} The identifier of a node.
 
 var opts = {
@@ -502,7 +442,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter.*/
 
 };
-apiInstance.listSecondaryChildAssociations(parentId, opts).then(function(data) {
+this.alfrescoJsApi.core.childAssociationsApi.listSecondaryChildAssociations(parentId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -551,19 +491,9 @@ The move will effectively change the primary parent
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.ChildAssociationsApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:  -my- , -shared- , -root-
 
-var moveBody = new AlfrescoCoreRestApi.MoveBody(); // {MoveBody} The targetParentId and, optionally, a new name.
+var moveBody = new this.alfrescoJsApi.core.MoveBody(); // {MoveBody} The targetParentId and, optionally, a new name.
 
 var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested: * path * isLink * allowableOperations
@@ -580,7 +510,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter.*/
 
 };
-apiInstance.moveNode(nodeId, moveBody, opts).then(function(data) {
+this.alfrescoJsApi.core.childAssociationsApi.moveNode(nodeId, moveBody, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -623,16 +553,6 @@ If association type is not specified then all secondary child associations betwe
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.ChildAssociationsApi()
-
 var parentId = "parentId_example"; // {String} The identifier of a node.
 
 var childId = "childId_example"; // {String} The identifier of a node.
@@ -640,7 +560,7 @@ var childId = "childId_example"; // {String} The identifier of a node.
 var opts = {
   'assocType': "assocType_example" // {String} Restrict the delete to only those of the given association type
 };
-apiInstance.removeSecondaryChildAssoc(parentId, childId, opts).then(function() {
+this.alfrescoJsApi.core.childAssociationsApi.removeSecondaryChildAssoc(parentId, childId, opts).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);

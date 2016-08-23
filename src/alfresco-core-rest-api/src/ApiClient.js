@@ -425,9 +425,14 @@
         } else if (Array.isArray(type)) {
           // for array type like: ['String']
           var itemType = type[0];
-          return data.map(function(item) {
-            return exports.convertToType(item, itemType);
-          });
+            if(data){
+                return data.map(function(item) {
+                    return exports.convertToType(item, itemType);
+                });
+            }else{
+                return null;
+            }
+
         } else if (typeof type === 'object') {
           // for plain object type like: {'String': 'Integer'}
           var keyType, valueType;

@@ -22,17 +22,7 @@ Create shared link to specfied file identified by **nodeId** in request body.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.SharedlinksApi()
-
-var sharedLinkBody = new AlfrescoCoreRestApi.SharedLinkBody(); // {SharedLinkBody} The nodeId to create a shared link for.
+var sharedLinkBody = new this.alfrescoJsApi.core.SharedLinkBody(); // {SharedLinkBody} The nodeId to create a shared link for.
 
 var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the shared link, the following optional fields can be requested:  allowableOperations
@@ -48,7 +38,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-apiInstance.addSharedLink(sharedLinkBody, opts).then(function(data) {
+this.alfrescoJsApi.core.sharedlinksApi.addSharedLink(sharedLinkBody, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -90,7 +80,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 <a name="deleteSharedLink"></a>
 # **deleteSharedLink**
-> deleteSharedLink(sharedId, )
+> deleteSharedLink(sharedId)
 
 Deletes a shared link
 
@@ -98,19 +88,9 @@ Deletes the shared link with identifier **sharedId**.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.SharedlinksApi()
-
 var sharedId = "sharedId_example"; // {String} The identifier of a shared link to a file.
 
-apiInstance.deleteSharedLink(sharedId, ).then(function() {
+this.alfrescoJsApi.core.sharedlinksApi.deleteSharedLink(sharedId).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -168,21 +148,11 @@ For example, to email a shared link with a messages and a locale:
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.SharedlinksApi()
-
 var sharedId = "sharedId_example"; // {String} The identifier of a shared link to a file.
 
-var emailSharedLinkBody = new AlfrescoCoreRestApi.EmailSharedLinkBody(); // {EmailSharedLinkBody} The shared link email to send.
+var emailSharedLinkBody = new this.alfrescoJsApi.core.EmailSharedLinkBody(); // {EmailSharedLinkBody} The shared link email to send.
 
-apiInstance.emailSharedLink(sharedId, emailSharedLinkBody).then(function() {
+this.alfrescoJsApi.core.sharedlinksApi.emailSharedLink(sharedId, emailSharedLinkBody).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -220,16 +190,6 @@ Find (search for) links that current user has read permission on source node.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.SharedlinksApi()
-
 var opts = {
   'where': "where_example", // {String} Optionally filter the list by "sharedByUser" userid of person who shared the link (can also use -me-) where=(sharedByUser='jbloggs')    where=(sharedByUser='-me-')
   'include': ["include_example"], // {[String]} Returns additional information about the shared link, the following optional fields can be requested: * allowableOperations
@@ -245,7 +205,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-apiInstance.findSharedLinks(opts).then(function(data) {
+this.alfrescoJsApi.core.sharedlinksApi.findSharedLinks(opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -287,16 +247,6 @@ Returns minimal information for the file with shared link identifier **sharedId*
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.SharedlinksApi()
-
 var sharedId = "sharedId_example"; // {String} The identifier of a shared link to a file.
 
 var opts = {
@@ -313,7 +263,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-apiInstance.getSharedLink(sharedId, , opts).then(function(data) {
+this.alfrescoJsApi.core.sharedlinksApi.getSharedLink(sharedId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -355,16 +305,6 @@ Returns the content of the file with shared link identifier **sharedId**.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.SharedlinksApi()
-
 var sharedId = "sharedId_example"; // {String} The identifier of a shared link to a file.
 
 var opts = {
@@ -380,7 +320,7 @@ var opts = {
 
   'ifModifiedSince': new Date("2013-10-20T19:20:30+01:00") // {Date} Only returns the content if it has been modified since the date provided. Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.
 };
-apiInstance.getSharedLinkContent(sharedId, , opts).then(function() {
+this.alfrescoJsApi.core.sharedlinksApi.getSharedLinkContent(sharedId, , opts).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);

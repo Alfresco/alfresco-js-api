@@ -1,12 +1,12 @@
 {
   "name": "alfresco-js-api",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "JavaScript client library for the Alfresco REST API",
   "main": "main.js",
   "typings": "dist/alfresco-js-api.d.ts",
   "scripts": {
     "clean": "rimraf dist/bundle.js node_modules",
-    "build": "grunt && npm run tslint && npm run bundle && npm run minify",
+    "build": "grunt && npm run tslint && npm run test && npm run bundle && npm run minify && npm run toc",
     "test": "grunt test",
     "coverage": "grunt coverage",
     "generate": "mvn clean generate-sources",
@@ -14,7 +14,7 @@
     "minify": "browserify -s AlfrescoApi dist/alfresco-js-api.js -d -p [minifyify --no-map] > dist/alfresco-js-api.min.js",
     "watchify": "watchify -s AlfrescoApi main.js -o dist/alfresco-js-api.js",
     "tslint": "tslint -c tslint.json bundle.d.ts",
-    "toc" : "markdown-toc -i README.md"
+    "toc" : "markdown-toc -i README.md && markdown-toc -i test/mockObjects/README.md"
   },
   "repository": {
     "type": "git",
@@ -24,7 +24,6 @@
     "url": "https://github.com/Alfresco/alfresco-js-api/issues"
   },
   "dependencies": {
-    "markdown-toc": "^0.12.14",
     "superagent": "1.7.1"
   },
   "devDependencies": {
@@ -46,6 +45,7 @@
     "load-grunt-tasks": "^3.4.1",
     "lodash": "^4.13.1",
     "minifyify": "^7.3.3",
+    "markdown-toc": "^0.12.14",
     "mocha": "^2.4.5",
     "mocha-lcov-reporter": "^1.2.0",
     "nock": "^8.0.0",

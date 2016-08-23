@@ -98,19 +98,9 @@ Any field in the JSON body defined below can also be passed as a form-data field
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.NodesApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:  -my-,  -shared- , -root-
 
-var nodeBody = new AlfrescoCoreRestApi.NodeBody1(); // {NodeBody1} The node information to create.
+var nodeBody = new this.alfrescoJsApi.core.NodeBody1(); // {NodeBody1} The node information to create.
 
 var opts = {
   'autoRename': true, // {Boolean} If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
@@ -127,7 +117,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter.*/
 
 };
-apiInstance.addNode(nodeId, nodeBody, opts).then(function(data) {
+this.alfrescoJsApi.core.nodesApi.addNode(nodeId, nodeBody, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -173,19 +163,9 @@ If the source **nodeId** is a folder, then all of its children are also copied.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.NodesApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases: *-my-*-shared-*-root-
 
-var copyBody = new AlfrescoCoreRestApi.CopyBody(); // {CopyBody} The targetParentId and, optionally, a new name.
+var copyBody = new this.alfrescoJsApi.core.CopyBody(); // {CopyBody} The targetParentId and, optionally, a new name.
 
 var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:  path , isLink , allowableOperations
@@ -201,7 +181,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter.*/
 
 };
-apiInstance.copyNode(nodeId, copyBody, opts).then(function(data) {
+this.alfrescoJsApi.core.nodesApi.copyNode(nodeId, copyBody, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -246,16 +226,6 @@ Deleting a node removes the child associations, ie. both primary and also second
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.NodesApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var opts = {
@@ -263,7 +233,7 @@ var opts = {
 You must be the owner or an admin to permanently delete the node.
 
 };
-apiInstance.deleteNode(nodeId, , opts).then(function() {
+this.alfrescoJsApi.core.nodesApi.deleteNode(nodeId, , opts).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -302,22 +272,12 @@ Returns a specific deleted node identified by **nodeId**.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.NodesApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested: path , isLink, allowableOperations
 };
-apiInstance.getDeletedNode(nodeId, , opts).then(function(data) {
+this.alfrescoJsApi.core.nodesApi.getDeletedNode(nodeId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -359,16 +319,6 @@ The list of deleted nodes will be ordered with the most recently deleted node at
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.NodesApi()
-
 var opts = {
   'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
@@ -381,7 +331,7 @@ var opts = {
                                     * association */
 
 };
-apiInstance.getDeletedNodes(opts).then(function(data) {
+this.alfrescoJsApi.core.nodesApi.getDeletedNodes(opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -420,16 +370,6 @@ Returns the file content of the node with identifier **nodeId**.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.NodesApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var opts = {
@@ -444,7 +384,7 @@ var opts = {
                         Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.*/
 
 };
-apiInstance.getFileContent(nodeId, , opts).then(function() {
+this.alfrescoJsApi.core.nodesApi.getFileContent(nodeId, , opts).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -483,16 +423,6 @@ Get information for the node with identifier **nodeId**.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.NodesApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases: -my- , -shared- , -root-
 var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested: path , isLink , allowableOperations
@@ -510,7 +440,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter.*/
 
 };
-apiInstance.getNode(nodeId, , opts).then(function(data) {
+this.alfrescoJsApi.core.nodesApi.getNode(nodeId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -555,16 +485,6 @@ The list of child nodes includes primary children and also secondary children, i
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.NodesApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases: -my- , -share d- , -root-
 
 
@@ -613,7 +533,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-apiInstance.getNodeChildren(nodeId, , opts).then(function(data) {
+this.alfrescoJsApi.core.nodesApi.getNodeChildren(nodeId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -666,19 +586,9 @@ The move will effectively change the primary parent
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.NodesApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases: -my- , -share d- , -root-
 
-var moveBody = new AlfrescoCoreRestApi.MoveBody(); // {MoveBody} The targetParentId and, optionally, a new name.
+var moveBody = new this.alfrescoJsApi.core.MoveBody(); // {MoveBody} The targetParentId and, optionally, a new name.
 
 var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:  path , isLink , allowableOperations
@@ -694,7 +604,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-apiInstance.moveNode(nodeId, moveBody, opts).then(function(data) {
+this.alfrescoJsApi.core.nodesApi.moveNode(nodeId, moveBody, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -726,7 +636,7 @@ Name | Type | Description  | Notes
 
 <a name="purgeDeletedNode"></a>
 # **purgeDeletedNode**
-> purgeDeletedNode(nodeId, )
+> purgeDeletedNode(nodeId)
 
 Purge a deleted node
 
@@ -735,19 +645,9 @@ Permanently removes the deleted node identified by **nodeId**.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.NodesApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
-apiInstance.purgeDeletedNode(nodeId, ).then(function() {
+this.alfrescoJsApi.core.nodesApi.purgeDeletedNode(nodeId).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -776,7 +676,7 @@ null (empty response body)
 
 <a name="restoreNode"></a>
 # **restoreNode**
-> NodeEntry restoreNode(nodeId, )
+> NodeEntry restoreNode(nodeId)
 
 Restore a deleted node
 
@@ -785,19 +685,9 @@ Attempts to restore the deleted node identified by **nodeId** to its original lo
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.NodesApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
-apiInstance.restoreNode(nodeId, ).then(function(data) {
+this.alfrescoJsApi.core.nodesApi.restoreNode(nodeId).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -845,16 +735,6 @@ tooling to accept an arbitary file.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.NodesApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var contentBody = "B"; // {String} The binary content
@@ -875,7 +755,7 @@ var opts = {
                         parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-apiInstance.updateFileContent(nodeId, contentBody, opts).then(function(data) {
+this.alfrescoJsApi.core.nodesApi.updateFileContent(nodeId, contentBody, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -935,25 +815,15 @@ You can also set or update one or more properties:
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.NodesApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases: * -my- * -shared- * -root-
 
-var nodeBody = new AlfrescoCoreRestApi.NodeBody(); // {NodeBody} The node information to update.
+var nodeBody = new this.alfrescoJsApi.core.NodeBody(); // {NodeBody} The node information to update.
 
 var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested: * path * isLink * allowableOperations
   'fields': ["fields_example"] // {[String]} A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
 };
-apiInstance.updateNode(nodeId, nodeBody, opts).then(function(data) {
+this.alfrescoJsApi.core.nodesApi.updateNode(nodeId, nodeBody, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

@@ -6,6 +6,79 @@ Alfresco JS API
 
 _This project provides a JavaScript client API into the v1 Alfresco REST API_
 
+<a name="0.3.0"></a>
+# [0.2.3](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.2.3) (2016-08-22)
+
+## Features
+- [Integration Activiti Api #19](https://github.com/Alfresco/alfresco-js-api/issues/19)
+    + [Activiti API](/src/alfresco-activiti-rest-api)
+
+- [Login with ticket and check the ticket against the server #38](https://github.com/Alfresco/alfresco-js-api/issues/38)
+
+```javascript
+var ticket = 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
+
+this.alfrescoJsApi.loginTicket(ticket).then(function (data) {
+             console.log('valid ticket you are logged in');
+         }, function (error) {
+             console.error(error);
+         });
+```
+    
+## Fix
+
+- [Node properties never parsed #35](https://github.com/Alfresco/alfresco-js-api/issues/35)
+- [Thumbnail ask for regenerate and Add image preview #36](https://github.com/Alfresco/alfresco-js-api/issues/36)
+- [Dist content is outdated #34](https://github.com/Alfresco/alfresco-js-api/issues/34)
+
+
+## BREAKING CHANGES
+
+- Constructor and login changed
+Separation between constructor and login phase, decoupling login from constructor and host activiti added.
+
+Before:
+
+```javascript
+this.alfrescoJsApi = new AlfrescoApi({username, password, alfrescoHost, contextRoot, ticket});
+this.alfrescoJsApi.login();
+```
+    
+After:
+    
+```javascript
+this.alfrescoJsApi = new AlfrescoApi({hostECM, hostBPM, contextRoot, ticket});
+this.alfrescoJsApi.login(username, password);
+```
+
+- Hosts configuration 
+
+alfrescoHost parameter is now split in two different parameter 
+
+Property | Description  | default value| 
+------------- | ------------- | -------------|
+hostEcm| (Optional value The Ip or Name of the host where your Alfresco instance is running )|http://127.0.0.1:8080 |
+hostBpm| (Optional value The Ip or Name of the host where your Activiti instance is running )|http://127.0.0.1:9999 |
+
+
+- Get Ticket
+
+Now the api are able ot auth in BPM and ECM so
+
+Before:
+
+```javascript
+this.alfrescoJsApi.getTicket();
+```
+    
+After:
+
+```javascript
+ var ecmTicket = this.alfrescoJsApi.getTicketEcm() ;
+ var bpmTicket  = this.alfrescoJsApi.getTicketBpm();
+```
+
+
 <a name="0.2.2"></a>
 # [0.2.2](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.2.2) (2016-07-21)
 - [Cannot find module mockAlfrescoApi #29](https://github.com/Alfresco/alfresco-js-api/issues/29)

@@ -33,21 +33,11 @@ specifying a list of comments in the JSON body like this:
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.CommentsApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
-var commentBody = new AlfrescoCoreRestApi.CommentBody(); // {CommentBody} The comment text. Note that you can provide an array of comments.
+var commentBody = new this.alfrescoJsApi.core.CommentBody(); // {CommentBody} The comment text. Note that you can provide an array of comments.
 
-apiInstance.addComment(nodeId, commentBody).then(function(data) {
+this.alfrescoJsApi.core.childAssociationsApi.addComment(nodeId, commentBody).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -85,16 +75,6 @@ Returns a list of comments for the node identified by **nodeId**, sorted chronol
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.CommentsApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var opts = {
@@ -112,7 +92,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-apiInstance.getComments(nodeId, , opts).then(function(data) {
+this.alfrescoJsApi.core.childAssociationsApi.getComments(nodeId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -163,21 +143,11 @@ Removes the comment **commentId** from node **nodeId**.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.CommentsApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var commentId = "commentId_example"; // {String} The identifier of a comment.
 
-apiInstance.removeComment(nodeId, commentId).then(function() {
+this.alfrescoJsApi.core.childAssociationsApi.removeComment(nodeId, commentId).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -215,21 +185,11 @@ Updates an existing comment **commentId** on node **nodeId**.
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco-core-rest-api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
-
-var apiInstance = new AlfrescoCoreRestApi.CommentsApi()
-
 var nodeId = "nodeId_example"; // {String} The identifier of a node.
 
 var commentId = "commentId_example"; // {String} The identifier of a comment.
 
-var commentBody = new AlfrescoCoreRestApi.CommentBody1(); // {CommentBody1} The JSON representing the comment to be updated.
+var commentBody = new this.alfrescoJsApi.core.CommentBody1(); // {CommentBody1} The JSON representing the comment to be updated.
 
 var opts = {
   'fields': ["fields_example"] /* {[String]} A list of field names.
@@ -244,7 +204,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-apiInstance.updateComment(nodeId, commentIdcommentBody, opts).then(function(data) {
+this.alfrescoJsApi.core.childAssociationsApi.updateComment(nodeId, commentIdcommentBody, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
