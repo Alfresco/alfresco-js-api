@@ -180,12 +180,18 @@ interface Mock {
     ActivitiMock : ActivitiMock;
     Tag : TagMock;
     Models: ModelsMock;
+    UserFilters: UserFiltersMock;
 }
 
 interface ActivitiMock {
     Auth: ActivitiAuthMock;
     Process : ProcessMock;
     Tasks :TasksMock;
+}
+
+interface UserFiltersMock {
+    new(host: string, username: string, password: string): UserFiltersMock;
+    get200getUserTaskFilters();
 }
 
 interface ActivitiAuthMock {

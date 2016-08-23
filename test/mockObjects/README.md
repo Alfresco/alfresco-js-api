@@ -26,6 +26,7 @@ Alfresco Mock API use [Nock](https://github.com/node-nock/nock) which is an HTTP
   * [Mock Process Api](#mock-process-api)
   * [Mock Tasks Api](#mock-tasks-api)
   * [Mock Models Api](#mock-models-api)
+  * [Mock User Filter Api](#mock-user-filter-api)
 
 <!-- tocstop -->
 
@@ -349,3 +350,17 @@ modelsMock.get200getModels()||
 modelsMock.rec()| | 
 modelsMock.play()| |
 modelsMock.cleanAll()| |
+
+
+## Mock User Filter Api
+
+var UserFilters = require('alfresco-js-api').Mock.Activiti.UserFilters
+
+userFilters = new UserFilters(host);
+
+Method | Description  |
+------------- | ------------- |
+userFilters.get200getUserTaskFilters()||
+userFilters.rec()| | 
+userFilters.play()| |
+userFilters.cleanAll()| |

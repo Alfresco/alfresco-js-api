@@ -3,14 +3,14 @@
 var AlfrescoApi = require('../main');
 var expect = require('chai').expect;
 var AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
-var ModelsMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Models;
+var FiltersMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.UserFilters;
 
-describe('Activiti Models Api', function () {
+describe('Activiti User Filter Api', function () {
     beforeEach(function (done) {
         this.hostBpm = 'http://127.0.0.1:9999';
 
         this.authResponseBpmMock = new AuthBpmMock(this.hostBpm);
-        this.modelsMock = new ModelsMock(this.hostBpm);
+        this.filtersMock = new FiltersMock(this.hostBpm);
 
         this.authResponseBpmMock.get200Response();
 
@@ -24,18 +24,16 @@ describe('Activiti Models Api', function () {
         });
     });
 
-    it('get activiti model', function (done) {
-        this.modelsMock.get200getModels();
+    it('get filter user', function (done) {
+        this.filtersMock.get200getUserTaskFilters();
 
         var opts = {
-            'filter': 'myReusableForms',
-            'modelType': 2
+            'appId': 1 // Integer | appId
         };
 
-        this.alfrescoJsApi.activiti.modelsApi.getModels(opts).then((data)=> {
-            expect(data.data[0].name).equal('Metadata');
+        this.alfrescoJsApi.activiti.userFiltersApi.getUserTaskFilters(opts).then((data)=> {
+            expect(data.data[0].name).equal('Involved Tasks');
             done();
         });
-
     });
 });

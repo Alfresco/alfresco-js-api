@@ -261,8 +261,7 @@ class TasksMock extends BaseMock {
 
 
     get200getTaskForm(name) {
-
-        nock('http://127.0.0.1:9999', {'encodedQueryParams': true})
+        nock(this.host, {'encodedQueryParams': true})
             .get('/activiti-app/api/enterprise/task-forms/2518')
             .reply(200, {
                 'id': 1,
