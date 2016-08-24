@@ -52,7 +52,16 @@ interface NodePaging {
 }
 
 interface NodePagingList {
+    pagination: Pagination;
     entries: MinimalNodeEntity[];
+}
+
+export class Pagination {
+    count: number;
+    hasMoreItems: boolean;
+    totalItems: number;
+    skipCount: number;
+    maxItems: number;
 }
 
 interface MinimalNodeEntity {
@@ -72,6 +81,11 @@ interface MinimalNodeEntryEntity {
     createdByUser: UserInfo;
     content: ContentInfo;
     path: PathInfoEntity;
+    properties: NodeProperties;
+}
+
+interface NodeProperties {
+    [key: string]: any;
 }
 
 interface UserInfo {
@@ -217,7 +231,8 @@ interface Activiti {
 
 interface NodesApi {
     new(client: ApiClient): NodesApi;
-    getNodeChildren(nodeId: string, opts: any): NodePaging;
+    getNodeChildren(nodeId: string, opts: any): Promise<NodePaging>;
+    deleteNode(nodeId: string): Promise<any>;
 }
 
 interface ApiClient {
@@ -314,7 +329,7 @@ export interface AlfrescoJsApi {
     core: core;
 
     search: any;
-    nodes: any;
+    nodes: NodesApi;
     content: any;
     upload: any;
     webScript: any;
