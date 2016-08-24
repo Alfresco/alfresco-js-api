@@ -300,8 +300,8 @@ export class AlfrescoApiConfig {
     ticketBpm: string;
 }
 
-export interface AlfrescoApi {
-    new(config: AlfrescoApiConfig): AlfrescoApi;
+export interface AlfrescoJsApi {
+    new(config: AlfrescoApiConfig): AlfrescoJsApi;
 
     config: AlfrescoApiConfig;
 
@@ -347,5 +347,3 @@ export interface AlfrescoApi {
 
     setTicket(ticketEcm: any, ticketBpm: any): void;
 }
-
-declare var AlfrescoApi: AlfrescoApi;
