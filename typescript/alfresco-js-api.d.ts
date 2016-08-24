@@ -231,6 +231,7 @@ interface Activiti {
 
 interface NodesApi {
     new(client: ApiClient): NodesApi;
+    getNodeInfo(nodeId: string): Promise<MinimalNodeEntryEntity>;
     getNodeChildren(nodeId: string, opts: any): Promise<NodePaging>;
     deleteNode(nodeId: string): Promise<any>;
 }
@@ -341,7 +342,7 @@ export interface AlfrescoJsApi {
     changeEcmHost(ecmHost: any);
     changeBpmHost(bpmHost: any);
 
-    getNodeInfo(nodeId: string): any;
+    getNodeInfo(nodeId: string): Promise<MinimalNodeEntryEntity>;
     deleteNode(nodeId: string): any;
     deleteNodePermanent(nodeId: string): any;
 
