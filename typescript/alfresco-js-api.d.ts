@@ -291,8 +291,19 @@ interface core {
     tagsApi: any;
 }
 
+export class AlfrescoApiConfig {
+    hostEcm: string;
+    hostBpm: string;
+    contextRoot: string;
+    provider: string;
+    ticketEcm: string;
+    ticketBpm: string;
+}
+
 export interface AlfrescoApi {
-    new(config: any): AlfrescoApi;
+    new(config: AlfrescoApiConfig): AlfrescoApi;
+
+    config: AlfrescoApiConfig;
 
     Activiti: Activiti;
     Auth: Auth;
@@ -330,7 +341,7 @@ export interface AlfrescoApi {
     getDocumentThumbnailUrl(documentId: string): any;
     getContentUrl(documentId: string): any;
 
-    getTicket(): Array;
+    getTicket(): Array<string>;
     getTicketBpm(): string;
     getTicketEcm(): string;
 

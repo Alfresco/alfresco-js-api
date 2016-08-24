@@ -3,7 +3,7 @@
   "version": "0.3.0",
   "description": "JavaScript client library for the Alfresco REST API",
   "main": "main.js",
-  "typings": "dist/alfresco-js-api.d.ts",
+  "typings": "typescript/alfresco-js-api.d.ts",
   "scripts": {
     "clean": "rimraf dist/bundle.js node_modules",
     "build": "grunt && npm run tslint && npm run test && npm run bundle && npm run minify && npm run toc",
@@ -65,6 +65,10 @@
     {
       "name": "Eugenio Romano",
       "email": "eugenio.romano@alfresco.com"
+    },
+    {
+      "name": "Denys Vuika",
+      "email": "denys.vuika@gmail.com"
     }
   ],
   "keywords": [
