@@ -37,9 +37,9 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
   * [Login](#login)
     + [Login with Username and Password BPM and ECM](#login-with-username-and-password-bpm-and-ecm)
     + [Login with Username and Password ECM](#login-with-username-and-password-ecm)
-    + [Login with ticket ECM](#login-with-ticket-ecm)
     + [Login with ticket](#login-with-ticket)
-    + [Ticket as parameter in the constructor](#ticket-as-parameter-in-the-constructor)
+      - [Login with ticket ECM](#login-with-ticket-ecm)
+      - [Login with ticket ECM/BPM as parameter in the constructor](#login-with-ticket-ecmbpm-as-parameter-in-the-constructor)
     + [Login with Username and Password BPM](#login-with-username-and-password-bpm)
   * [Logout](#logout)
   * [isLoggedIn](#isloggedin)
@@ -152,12 +152,12 @@ this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
 
 ```
 
-### Login with ticket ECM
+### Login with ticket
 
 If you already know thw ticket when you invoke the constructor you can pass it as parameter in the constructor otherwise you can call the login with ticket that will validate the ticket against the server
 
 
-### Login with ticket
+#### Login with ticket ECM
 
 This authentication validate also the ticket against the server
  
@@ -172,14 +172,21 @@ this.alfrescoJsApi.loginTicket(ticket).then(function (data) {
          });
 ```
 
-### Ticket as parameter in the constructor
+#### Login with ticket ECM/BPM as parameter in the constructor
 
 With this authentication the ticket is not validated against the server 
 
-####Example
+#####Example
 ```javascript
-this.alfrescoJsApi = new AlfrescoApi({ ticket:'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1', hostEcm:'http://127.0.0.1:8080'});
 
+//Login ticket ECM
+this.alfrescoJsApi = new AlfrescoApi({ ticketEcm:'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1',  hostEcm:'http://127.0.0.1:8080'});
+
+//Login ticket BPM
+this.alfrescoJsApi = new AlfrescoApi({ ticketBpm: 'Basic YWRtaW46YWRtaW4=',  hostBpm:'http://127.0.0.1:9999'});
+
+//Login ticket ECM and BPM 
+this.alfrescoJsApi = new AlfrescoApi({ ticketEcm:'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1', ticketBpm: 'Basic YWRtaW46YWRtaW4=',  hostEcm:'http://127.0.0.1:8080',  hostBpm:'http://127.0.0.1:9999'});
 ```
 
 ### Login with Username and Password BPM

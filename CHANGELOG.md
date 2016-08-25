@@ -40,14 +40,14 @@ Separation between constructor and login phase, decoupling login from constructo
 Before:
 
 ```javascript
-this.alfrescoJsApi = new AlfrescoApi({username, password, alfrescoHost, contextRoot, ticket});
+this.alfrescoJsApi = new AlfrescoApi({username, password, host, contextRoot, ticket});
 this.alfrescoJsApi.login();
 ```
     
 After:
     
 ```javascript
-this.alfrescoJsApi = new AlfrescoApi({hostECM, hostBPM, contextRoot, ticket});
+this.alfrescoJsApi = new AlfrescoApi({hostECM, hostBPM, contextRoot, ticketEcm, ticketBpm});
 this.alfrescoJsApi.login(username, password);
 ```
 
@@ -78,6 +78,27 @@ After:
  var bpmTicket  = this.alfrescoJsApi.getTicketBpm();
 ```
 
+-  Login ticket using constructor
+
+Before:
+
+```javascript
+this.alfrescoJsApi = new AlfrescoApi({ host :''http://127.0.0.1:8080', ticket :'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1'});
+```
+    
+After:
+
+```javascript
+
+//Login ticket ECM
+this.alfrescoJsApi = new AlfrescoApi({ ticketEcm:'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1',  hostEcm:'http://127.0.0.1:8080'});
+
+//Login ticket BPM
+this.alfrescoJsApi = new AlfrescoApi({ ticketBpm: 'Basic YWRtaW46YWRtaW4=',  hostBpm:'http://127.0.0.1:9999'});
+
+//Login ticket ECM and BPM 
+this.alfrescoJsApi = new AlfrescoApi({ ticketEcm:'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1', ticketBpm: 'Basic YWRtaW46YWRtaW4=',  hostEcm:'http://127.0.0.1:8080',  hostBpm:'http://127.0.0.1:9999'});
+```
 
 <a name="0.2.2"></a>
 # [0.2.2](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.2.2) (2016-07-21)
