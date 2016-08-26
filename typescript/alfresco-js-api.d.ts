@@ -350,8 +350,8 @@ export interface AlfrescoJsApi {
     createFolder(name: string, relativePath: string, nodeId: string): any;
 
     isLoggedIn(): boolean;
-    login(username: string, password: string): any;
-    logout(): any;
+    login(username: string, password: string): Promise<string>;
+    logout(): Promise<any>;
     loginTicket(ticket: string): any;
 
     getDocumentThumbnailUrl(documentId: string): any;
