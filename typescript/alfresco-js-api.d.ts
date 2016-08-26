@@ -316,6 +316,14 @@ export class AlfrescoApiConfig {
     ticketBpm: string;
 }
 
+export interface ContentApi {
+    new(ecmAuth: any);
+
+    getDocumentThumbnailUrl(documentId: string): string;
+    getDocumentPreviewUrl(documentId: string): string;
+    getContentUrl(documentId: string): string;
+}
+
 export interface AlfrescoJsApi {
     new(config: AlfrescoApiConfig): AlfrescoJsApi;
 
@@ -331,7 +339,7 @@ export interface AlfrescoJsApi {
 
     search: any;
     nodes: NodesApi;
-    content: any;
+    content: ContentApi;
     upload: any;
     webScript: any;
 
