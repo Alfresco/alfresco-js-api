@@ -45,7 +45,7 @@ this.alfrescoJsApi.core.renditionsApi.createRendition(nodeId, renditionBody).the
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **nodeId** | **String**| The identifier of a node. You can also use one of these well-known aliases: *-my-*-shared-*-root- |
+ **nodeId** | **String**| The identifier of a node. You can also use one of these well-known aliases: -my-   ,  -shared-   or   -root-  |
  **renditionBody** | [**RenditionBody**](RenditionBody.md)| The rendition "id". |
 
 ### Return type

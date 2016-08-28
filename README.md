@@ -294,7 +294,7 @@ Below you can find some common examples.
 
 getNodeInfo(fileOrFolderId, opts)
 
->Get information for the File/Folder with the identifier nodeId.
+>Get information for the File/Folder with the identifier nodeId. The identifier of a node. You can also use one of these well-known aliases: -my-   ,  -shared-   or   -root-  as NodeId
 
 ###Example
 
@@ -316,6 +316,7 @@ getNodeChildren(fileOrFolderId, opts)
 >Minimal information for each child is returned by default.
 You can use the include parameter to return additional information.
 returns a promise with the Info about the children of the node if resolved and {error} if rejected.
+You can also use one of these well-known aliases: -my-   ,  -shared-   or   -root-  as NodeId
  
 ###Example
 
@@ -332,10 +333,11 @@ this.alfrescoJsApi.nodes.getNodeChildren(folderNodeId).then(function (data) {
 ```
 ## Create Folder
 
-createFolder(name, relativePath, nodeId, opts) 
+createFolder(name, relativePath, nodeIdParentFolder, opts) 
 
 >createFolder return a promise that is resolved if the folder is created and {error} if rejected.
- 
+You can also use one of these well-known aliases: -my-   ,  -shared-   or   -root-  as nodeIdParentFolder
+
 ###Example
 
 ```javascript
@@ -366,8 +368,9 @@ this.alfrescoJsApi.nodes.createFolder('newFolderName', 'folderA/folderB', parent
 
 **CreateFolder With Auto Rename**
 
-createFolderAutoRename(name, relativePath, nodeId, opts)
+createFolderAutoRename(name, relativePath, nodeIdParentFolder, opts)
 >is the same of createFolder(name, relativePath, nodeId, {autoRename: true}) is just syntactic sugar
+ You can also use one of these well-known aliases: -my-   ,  -shared-   or   -root-  as nodeIdParentFolder
 
 ###Example
 
@@ -599,11 +602,14 @@ executeWebScript(httpMethod, scriptPath, scriptArgs, contextRoot, servicePath)
 >  Anatomy of a Web Script URI  **http(s)://(host):(port)/(contextPath)/(servicePath)/(scriptPath)?(scriptArgs)**
 A Web Script is simply a service bound to a URI which responds to HTTP methods such as GET, POST, PUT and DELETE. While using the same underlying code, there are broadly two kinds of Web Scripts.
 
-*  **httpMethod**  possible value GET, POST, PUT and DELETE
-*  **scriptPath**  path to Web Script (as defined by Web Script)
-*  **scriptArgs**  arguments to pass to Web Script
-*  **contextRoot** path where application is deployed default value 'alfresco'
-*  **servicePath** path where Web Script service is mapped default value 'service'
+###Parameters
+Name | Description
+------------- | -------------
+**httpMethod**  | possible value GET, POST, PUT and DELETE
+**scriptPath**  |path to Web Script (as defined by Web Script)
+**scriptArgs**  |arguments to pass to Web Script
+**contextRoot** |path where application is deployed default value 'alfresco'
+**servicePath** |path where Web Script service is mapped default value 'service'
 
 ```javascript
 
