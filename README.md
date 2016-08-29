@@ -663,9 +663,9 @@ Name | Type | Description
 ####Example
 
 ```javascript
-var requestNode = new this.alfrescoJsApi.activiti.TaskQueryRequestRepresentation();
+var requestTasks = new this.alfrescoJsApi.activiti.TaskQueryRequestRepresentation();
  
-this.alfrescoJsApi.activiti.taskApi.listTasks(requestNode).then(function (data) {
+this.alfrescoJsApi.activiti.taskApi.listTasks(requestTasks).then(function (data) {
  console.log('listTasks ' + data);    
 }, function (error) {
  console.log('Error' + error);
