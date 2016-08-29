@@ -699,7 +699,7 @@ this.alfrescoJsApi.activiti.taskApi.getTask(taskId).then(function (data) {
 
 ### Filter Task
 
-filterTasks(requestNode)
+filterTasks(requestTasks)
 
 >return the [**ResultListDataRepresentation**](/src/alfresco-activiti-rest-api/docs/ResultListDataRepresentation.md) that is a list of all the task filered
 
@@ -707,17 +707,17 @@ filterTasks(requestNode)
 
 Name | Type | Description  
 ------------- | ------------- | ------------- 
- **requestNode** | [**TaskFilterRequestRepresentation**](/src/alfresco-activiti-rest-api/docs/TaskFilterRequestRepresentation.md)| requestNode 
+ **requestTasks** | [**TaskFilterRequestRepresentation**](/src/alfresco-activiti-rest-api/docs/TaskFilterRequestRepresentation.md)| requestTasks 
 
 
 ####Example
 
 ```javascript
 
-var requestNode = new this.alfrescoJsApi.activiti.TaskFilterRequestRepresentation();
-requestNode.appDefinitionId = 1;
+var requestTasks = new this.alfrescoJsApi.activiti.TaskFilterRequestRepresentation();
+requestTasks.appDefinitionId = 1;
 
-this.alfrescoJsApi.activiti.taskApi.filterTasks(requestNode).then(function (data) {
+this.alfrescoJsApi.activiti.taskApi.filterTasks(requestTasks).then(function (data) {
     console.log('Task filter list ' + data);    
 }, function (error) {
     console.log('Error' + error);
