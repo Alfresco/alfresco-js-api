@@ -10,7 +10,11 @@ _This project provides a JavaScript client API into the v1 Alfresco REST API_
 # [0.3.1](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.1) (2016-xx-xx)
 
 ## Fix
+- [Date parser error with Safari](https://github.com/Alfresco/alfresco-js-api/issues/43)
 
+## Features
+
+- Various improvements for TypeScript declaration files
 
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.0) (2016-08-22)
@@ -30,7 +34,7 @@ this.alfrescoJsApi.loginTicket(ticket).then(function (data) {
              console.error(error);
          });
 ```
-    
+
 ## Fix
 
 - [Node properties never parsed #35](https://github.com/Alfresco/alfresco-js-api/issues/35)
@@ -49,19 +53,19 @@ Before:
 this.alfrescoJsApi = new AlfrescoApi({username, password, alfrescoHost, contextRoot, ticket});
 this.alfrescoJsApi.login();
 ```
-    
+
 After:
-    
+
 ```javascript
 this.alfrescoJsApi = new AlfrescoApi({hostECM, hostBPM, contextRoot, ticket});
 this.alfrescoJsApi.login(username, password);
 ```
 
-- Hosts configuration 
+- Hosts configuration
 
-alfrescoHost parameter is now split in two different parameter 
+alfrescoHost parameter is now split in two different parameter
 
-Property | Description  | default value| 
+Property | Description  | default value|
 ------------- | ------------- | -------------|
 hostEcm| (Optional value The Ip or Name of the host where your Alfresco instance is running )|http://127.0.0.1:8080 |
 hostBpm| (Optional value The Ip or Name of the host where your Activiti instance is running )|http://127.0.0.1:9999 |
@@ -76,7 +80,7 @@ Before:
 ```javascript
 this.alfrescoJsApi.getTicket();
 ```
-    
+
 After:
 
 ```javascript
@@ -115,7 +119,7 @@ Before:
 ```javascript
   this.alfrescoJsApi.node
 ```
-    
+
 After:
 
  ```javascript
@@ -139,14 +143,14 @@ Before:
     loginRequest.password = password;
     return apiInstance.createTicket(loginRequest);
 ```
-    
+
 After:
-    
+
 ```javascript
      this.alfrescoJsApi = new AlfrescoApi({ username:'admin', password:'admin', host:'http://127.0.0.1:8080'});
-    //note you don't need anymore to keep the client 
+    //note you don't need anymore to keep the client
 ```
-        
+
 - Bundle File is now in the dist folder and the name is changed
 
 Before:
@@ -173,7 +177,7 @@ After:
 
 ```javascript
     this.alfrescoJsApi = new AlfrescoApi({ ticket:'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1', host:'http://127.0.0.1:8080'});
-    //note you don't need anymore to keep the client 
+    //note you don't need anymore to keep the client
 ```
 - Login changed
 
@@ -186,16 +190,16 @@ Before:
     loginRequest.userId = username;
     loginRequest.password = password;
     return apiInstance.createTicket(loginRequest);
-        
+
 ```
 
 After:
 
 ```javascript
    this.alfrescoJsApi = new AlfrescoApi({ username:'admin', password:'admin', host:'http://127.0.0.1:8080'});
-   
+
    this.alfrescoJsApi.login();
-```        
+```
 ## Features
 
 - Logout
@@ -214,4 +218,3 @@ After:
 
 - chore add alfresco log anf gitter chat in readme
   ([9547122b](https://github.com/Alfresco/dev-platform-js-api/commit/9547122bc1609c898382016481e6867934e95b73))
-

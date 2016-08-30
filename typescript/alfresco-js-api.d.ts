@@ -234,6 +234,7 @@ interface NodesApi {
     getNodeInfo(nodeId: string): Promise<MinimalNodeEntryEntity>;
     getNodeChildren(nodeId: string, opts: any): Promise<NodePaging>;
     deleteNode(nodeId: string): Promise<any>;
+    createFolder(name: string, relativePath: string, nodeId?: string, opts?: any): Promise<MinimalNodeEntryEntity>
 }
 
 interface ApiClient {
