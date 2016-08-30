@@ -391,7 +391,12 @@
    * @returns {Date} The parsed date object.
    */
   exports.parseDate = function(str) {
-    return new Date(str.replace(/T/i, ' '));
+    // TODO: review when Safari 10 is released
+    // return new Date(str.replace(/T/i, ' '));
+
+    // Compatible with Safari 9.1.2
+    var a = str.split(/[^0-9]/).map(function(s) { return parseInt(s, 10) });
+    return new Date(a[0], a[1]-1 || 0, a[2] || 1, a[3] || 0, a[4] || 0, a[5] || 0, a[6] || 0);
   };
 
   /**
