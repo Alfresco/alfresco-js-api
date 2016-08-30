@@ -316,6 +316,35 @@ export class AlfrescoApiConfig {
     ticketBpm: string;
 }
 
+export interface ContentApi {
+    new(ecmAuth: any);
+
+    getDocumentThumbnailUrl(documentId: string): string;
+    getDocumentPreviewUrl(documentId: string): string;
+    getContentUrl(documentId: string): string;
+}
+
+export interface AuthApi {
+    new(config: AlfrescoApiConfig): AuthApi;
+
+    changeHost(host: string);
+    login(username: string, password: string): Promise<string>;
+    logout(): Promise<string>;
+    setTicket(ticket: string);
+    getTicket(): string;
+    isLoggedIn(): boolean;
+
+    getClient(): any;
+}
+
+export interface BpmAuthApi extends AuthApi {
+
+}
+
+export interface EcmAuthApi extends AuthApi {
+    validateTicket(): Promise<string>;
+}
+
 export interface AlfrescoJsApi {
     new(config: AlfrescoApiConfig): AlfrescoJsApi;
 
@@ -326,12 +355,15 @@ export interface AlfrescoJsApi {
     Core: Core;
     Mock: Mock;
 
+    bpmAuth: BpmAuthApi;
+    ecmAuth: EcmAuthApi;
+
     activiti: activiti;
     core: core;
 
     search: any;
     nodes: NodesApi;
-    content: any;
+    content: ContentApi;
     upload: any;
     webScript: any;
 
@@ -339,8 +371,8 @@ export interface AlfrescoJsApi {
     getClient(): any;
     getClientAuth(): any;
 
-    changeEcmHost(ecmHost: any);
-    changeBpmHost(bpmHost: any);
+    changeEcmHost(ecmHost: string);
+    changeBpmHost(bpmHost: string);
 
     getNodeInfo(nodeId: string): Promise<MinimalNodeEntryEntity>;
     deleteNode(nodeId: string): any;
@@ -350,8 +382,8 @@ export interface AlfrescoJsApi {
     createFolder(name: string, relativePath: string, nodeId: string): any;
 
     isLoggedIn(): boolean;
-    login(username: string, password: string): any;
-    logout(): any;
+    login(username: string, password: string): Promise<string>;
+    logout(): Promise<any>;
     loginTicket(ticket: string): any;
 
     getDocumentThumbnailUrl(documentId: string): any;
