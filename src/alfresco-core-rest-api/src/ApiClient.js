@@ -151,6 +151,10 @@
     if (typeof File === 'function' && param instanceof File) {
       return true;
     }
+    // Safari fix
+    if (typeof File === 'object' && param instanceof File) {
+      return true;
+    }
     return false;
   };
 
