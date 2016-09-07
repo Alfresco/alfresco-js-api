@@ -31,9 +31,7 @@ describe('Tags', function () {
             expect(data.list.entries[0].entry.tag).to.be.equal('tag-test-1');
             expect(data.list.entries[1].entry.tag).to.be.equal('tag-test-2');
             done();
-        }, function (error) {
-            console.error(error);
-            done();
+        }, function () {
         });
     });
 

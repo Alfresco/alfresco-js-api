@@ -178,6 +178,16 @@ interface TagMock {
     clearAll();
 }
 
+interface RenditionMock {
+    new(host: string): RenditionMock;
+    get200RenditionList();
+    createRendition200();
+    get200RenditionResponse();
+    rec();
+    play();
+    clearAll();
+}
+
 interface ModelsMock {
     new(host: string): ModelsMock;
     get200Response();
@@ -195,6 +205,7 @@ interface Mock {
     Tag: TagMock;
     Models: ModelsMock;
     UserFilters: UserFiltersMock;
+    Rendition: RenditionMock;
 }
 
 interface ActivitiMock {
