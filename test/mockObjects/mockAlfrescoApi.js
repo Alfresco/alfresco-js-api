@@ -6,6 +6,7 @@ mockAlfrescoApi.Node = require('./alfresco/nodeMock.js');
 mockAlfrescoApi.Upload = require('./alfresco/uploadMock.js');
 mockAlfrescoApi.WebScript = require('./alfresco/webScriptMock.js');
 mockAlfrescoApi.Tag = require('./alfresco/tagMock.js');
+mockAlfrescoApi.Rendition = require('./alfresco/renditionMock.js');
 
 //Bpm Mock
 mockAlfrescoApi.ActivitiMock = {};
@@ -14,5 +15,6 @@ mockAlfrescoApi.ActivitiMock.Process = require('./activiti/processMock.js');
 mockAlfrescoApi.ActivitiMock.Tasks = require('./activiti/tasksMock.js');
 mockAlfrescoApi.ActivitiMock.Models = require('./activiti/modelsMock.js');
 mockAlfrescoApi.ActivitiMock.UserFilters = require('./activiti/userFiltersMock.js');
+
 
 module.exports = mockAlfrescoApi;
