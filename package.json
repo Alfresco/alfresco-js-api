@@ -1,6 +1,6 @@
 {
   "name": "alfresco-js-api",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "JavaScript client library for the Alfresco REST API",
   "main": "main.js",
   "typings": "dist/alfresco-js-api.d.ts",
@@ -14,7 +14,7 @@
     "minify": "browserify -s AlfrescoApi dist/alfresco-js-api.js -d -p [minifyify --no-map] > dist/alfresco-js-api.min.js",
     "watchify": "watchify -s AlfrescoApi main.js -o dist/alfresco-js-api.js",
     "tslint": "tslint -c tslint.json bundle.d.ts",
-    "toc" : "markdown-toc -i README.md && markdown-toc -i test/mockObjects/README.md"
+    "toc": "markdown-toc -i README.md && markdown-toc -i test/mockObjects/README.md"
   },
   "repository": {
     "type": "git",

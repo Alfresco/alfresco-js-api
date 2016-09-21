@@ -57418,7 +57418,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       case 'String':
         return String(data);
       case 'Date':
-        return this.parseDate(String(data));
+        return data ? this.parseDate(String(data)) : null;
       default:
         if (type === Object) {
           // generic object, return directly
