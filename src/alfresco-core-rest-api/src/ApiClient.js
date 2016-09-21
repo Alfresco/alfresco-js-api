@@ -151,6 +151,10 @@
     if (typeof File === 'function' && param instanceof File) {
       return true;
     }
+    // Safari fix
+    if (typeof File === 'object' && param instanceof File) {
+      return true;
+    }
     return false;
   };
 
@@ -419,7 +423,7 @@
       case 'String':
         return String(data);
       case 'Date':
-        return this.parseDate(String(data));
+        return data ? this.parseDate(String(data)) : null;
       default:
         if (type === Object) {
           // generic object, return directly
