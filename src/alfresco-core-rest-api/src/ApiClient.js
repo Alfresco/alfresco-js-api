@@ -423,7 +423,7 @@
       case 'String':
         return String(data);
       case 'Date':
-        return date ? this.parseDate(String(data)) : null;
+        return data ? this.parseDate(String(data)) : null;
       default:
         if (type === Object) {
           // generic object, return directly
