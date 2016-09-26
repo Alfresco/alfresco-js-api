@@ -58,6 +58,8 @@ class AlfrescoApiClient extends ApiClient {
         // set header parameters
         request.set(this.defaultHeaders).set(this.normalizeParams(headerParams));
 
+        this.setCsrfToken(request);
+
         // set request timeout
         request.timeout(this.timeout);
 
@@ -157,6 +159,19 @@ class AlfrescoApiClient extends ApiClient {
         };
 
         return this.promise;
+    }
+
+    setCsrfToken(request) {
+        var token = this.token();
+        request.set('X-CSRF-TOKEN', token);
+        try {
+            document.cookie = 'CSRF-TOKEN=' + token + ';path=/';
+        } catch (err) {
+        }
+    }
+
+    token(a) {
+        return a ? (a ^ Math.random() * 16 >> a / 4).toString(16) : ([1e16] + 1e16).replace(/[01]/g, this.token);
     }
 
     progress(event, eventEmitter) {

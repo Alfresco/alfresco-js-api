@@ -272,6 +272,7 @@ interface NodesApi {
     purgeDeletedNode(nodeId: string): Promise<any>;
     getDeletedNode(nodeId: string, opts: any): Promise<DeletedNodeEntity>;
     restoreNode(nodeId: string): Promise<MinimalNodeEntity>;
+    addNode(nodeId: string, nodeBody: any, opts: any);
 }
 
 interface ApiClient {
