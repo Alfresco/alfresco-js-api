@@ -6,8 +6,21 @@ Alfresco JS API
 
 _This project provides a JavaScript client API into the v1 Alfresco REST API_
 
-<a name="0.3.2"></a>
-# [0.3.3](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.2) (2016-09-26)
+<a name="0.3.5"></a>
+# [0.3.5](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.5) (2016-xx-xx)
+
+## Fix
+- [Library no longer works with ECM](https://github.com/Alfresco/alfresco-js-api/issues/63)
+- [Flag to enable/disable CSRF behaviour](https://github.com/Alfresco/alfresco-js-api/issues/62)
+
+<a name="0.3.4"></a>
+# [0.3.4](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.4) (2016-xx-xx)
+
+## Fix
+- [csrf token for activiti doesn't work with Node.js](https://github.com/Alfresco/alfresco-js-api/issues/61)
+
+<a name="0.3.3"></a>
+# [0.3.3](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.3) (2016-xx-xx)
 
 ## Fix
 - [Add csrf token for activiti](https://github.com/Alfresco/alfresco-js-api/issues/59)
@@ -17,7 +30,7 @@ _This project provides a JavaScript client API into the v1 Alfresco REST API_
 - Various improvements for TypeScript declaration files
 
 <a name="0.3.2"></a>
-# [0.3.2](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.2) (2016-09-21)
+# [0.3.2](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.2) (2016-xx-xx)
 
 ## Fix
 - [Null date fields parsed as invalid dates](https://github.com/Alfresco/alfresco-js-api/issues/50)
@@ -29,7 +42,7 @@ _This project provides a JavaScript client API into the v1 Alfresco REST API_
 - Various improvements for TypeScript declaration files
 
 <a name="0.3.1"></a>
-# [0.3.1](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.1) (2016-08-29)
+# [0.3.1](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.1) (2016-xx-xx)
 
 ## Fix
 - [Date parser error with Safari](https://github.com/Alfresco/alfresco-js-api/issues/43)
@@ -72,14 +85,14 @@ Separation between constructor and login phase, decoupling login from constructo
 Before:
 
 ```javascript
-this.alfrescoJsApi = new AlfrescoApi({username, password, host, contextRoot, ticket});
+this.alfrescoJsApi = new AlfrescoApi({username, password, alfrescoHost, contextRoot, ticket});
 this.alfrescoJsApi.login();
 ```
 
 After:
 
 ```javascript
-this.alfrescoJsApi = new AlfrescoApi({hostECM, hostBPM, contextRoot, ticketEcm, ticketBpm});
+this.alfrescoJsApi = new AlfrescoApi({hostECM, hostBPM, contextRoot, ticket});
 this.alfrescoJsApi.login(username, password);
 ```
 
@@ -110,27 +123,6 @@ After:
  var bpmTicket  = this.alfrescoJsApi.getTicketBpm();
 ```
 
--  Login ticket using constructor
-
-Before:
-
-```javascript
-this.alfrescoJsApi = new AlfrescoApi({ host :''http://127.0.0.1:8080', ticket :'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1'});
-```
-    
-After:
-
-```javascript
-
-//Login ticket ECM
-this.alfrescoJsApi = new AlfrescoApi({ ticketEcm:'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1',  hostEcm:'http://127.0.0.1:8080'});
-
-//Login ticket BPM
-this.alfrescoJsApi = new AlfrescoApi({ ticketBpm: 'Basic YWRtaW46YWRtaW4=',  hostBpm:'http://127.0.0.1:9999'});
-
-//Login ticket ECM and BPM 
-this.alfrescoJsApi = new AlfrescoApi({ ticketEcm:'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1', ticketBpm: 'Basic YWRtaW46YWRtaW4=',  hostEcm:'http://127.0.0.1:8080',  hostBpm:'http://127.0.0.1:9999'});
-```
 
 <a name="0.2.2"></a>
 # [0.2.2](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.2.2) (2016-07-21)
