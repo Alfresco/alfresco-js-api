@@ -164,6 +164,8 @@ class AlfrescoApiClient extends ApiClient {
     setCsrfToken(request) {
         var token = this.token();
         request.set('X-CSRF-TOKEN', token);
+        request.set('Cookie', 'CSRF-TOKEN=' + token + ';path=/');
+
         try {
             document.cookie = 'CSRF-TOKEN=' + token + ';path=/';
         } catch (err) {
