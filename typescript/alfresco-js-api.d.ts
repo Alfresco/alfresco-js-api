@@ -545,6 +545,7 @@ export class AlfrescoApiConfig {
     provider: string;
     ticketEcm: string;
     ticketBpm: string;
+    disableCsrf: boolean;
 }
 
 export interface ContentApi {
@@ -604,6 +605,7 @@ export interface AlfrescoJsApi {
 
     changeEcmHost(ecmHost: string);
     changeBpmHost(bpmHost: string);
+    changeCsrfConfig(disableCsrf: boolean);
 
     getNodeInfo(nodeId: string): Promise<MinimalNodeEntryEntity>;
     deleteNode(nodeId: string): any;

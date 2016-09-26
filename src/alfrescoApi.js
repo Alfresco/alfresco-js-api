@@ -24,6 +24,7 @@ class AlfrescoApi {
      *        provider:   // ECM BPM ALL, default ECM
      *        ticketEcm:     // Ticket if you already have a ECM ticket you can pass only the ticket and skip the login, in this case you don't need username and password
      *        ticketBpm:     // Ticket if you already have a BPM ticket you can pass only the ticket and skip the login, in this case you don't need username and password
+     *        disableCsrf:   // To disable CSRF Token to be submitted. Only for Activiti call, by default is false.
      *    };
      */
     constructor(config) {
@@ -38,7 +39,8 @@ class AlfrescoApi {
             contextRoot: config.contextRoot || 'alfresco',
             provider: config.provider || 'ECM',
             ticketEcm: config.ticketEcm,
-            ticketBpm: config.ticketBpm
+            ticketBpm: config.ticketBpm,
+            disableCsrf: config.disableCsrf || false
         };
 
         this.bpmAuth = new BpmAuth(this.config);
@@ -47,6 +49,11 @@ class AlfrescoApi {
         this.initObjects();
 
         Emitter.call(this);
+    }
+
+    changeCsrfConfig(disableCsrf) {
+        this.config.disableCsrf = disableCsrf;
+        this.bpmAuth.changeCsrfConfig(disableCsrf);
     }
 
     changeEcmHost(hostEcm) {

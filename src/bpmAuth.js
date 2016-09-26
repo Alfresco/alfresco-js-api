@@ -26,6 +26,10 @@ class BpmAuth extends AlfrescoApiClient {
         this.basePath =  this.config.hostBpm + '/activiti-app';   //Activiti Call
     }
 
+    changeCsrfConfig(disableCsrf) {
+        this.config.disableCsrf = disableCsrf;
+    }
+
     /**
      * login Activiti API
      * @param  {String} username:   // Username to login
