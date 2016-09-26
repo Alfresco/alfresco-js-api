@@ -51,9 +51,18 @@ interface NodePaging {
     list: NodePagingList;
 }
 
+interface DeletedNodesPaging {
+    list: DeletedNodesPagingList;
+}
+
 interface NodePagingList {
     pagination: Pagination;
     entries: MinimalNodeEntity[];
+}
+
+interface DeletedNodesPagingList {
+    pagination: Pagination;
+    entries: DeletedNodeEntity[];
 }
 
 export class Pagination {
@@ -68,24 +77,36 @@ interface MinimalNodeEntity {
     entry: MinimalNodeEntryEntity;
 }
 
-interface MinimalNodeEntryEntity {
+interface DeletedNodeEntity {
+    entry: DeletedNodeMinimalEntry;
+}
+
+interface MinimalNode {
     id: string;
     parentId: string;
     name: string;
     nodeType: string;
     isFolder: boolean;
     isFile: boolean;
-    modifiedAt: string;
+    modifiedAt: Date;
     modifiedByUser: UserInfo;
-    createdAt: string;
+    createdAt: Date;
     createdByUser: UserInfo;
     content: ContentInfo;
     path: PathInfoEntity;
     properties: NodeProperties;
 }
 
+interface MinimalNodeEntryEntity extends MinimalNode {
+}
+
 interface NodeProperties {
     [key: string]: any;
+}
+
+interface DeletedNodeMinimalEntry extends MinimalNode {
+    archivedAt: Date;
+    archivedByUser: UserInfo;
 }
 
 interface UserInfo {
@@ -245,7 +266,13 @@ interface NodesApi {
     getNodeInfo(nodeId: string): Promise<MinimalNodeEntryEntity>;
     getNodeChildren(nodeId: string, opts: any): Promise<NodePaging>;
     deleteNode(nodeId: string): Promise<any>;
-    createFolder(name: string, relativePath: string, nodeId?: string, opts?: any): Promise<MinimalNodeEntryEntity>
+    createFolder(name: string, relativePath: string, nodeId?: string, opts?: any): Promise<MinimalNodeEntryEntity>;
+    getNode(nodeId: string, opts: any): Promise<MinimalNodeEntity>;
+    getDeletedNodes(opts: any): Promise<DeletedNodesPaging>;
+    purgeDeletedNode(nodeId: string): Promise<any>;
+    getDeletedNode(nodeId: string, opts: any): Promise<DeletedNodeEntity>;
+    restoreNode(nodeId: string): Promise<MinimalNodeEntity>;
+    addNode(nodeId: string, nodeBody: any, opts: any);
 }
 
 interface ApiClient {

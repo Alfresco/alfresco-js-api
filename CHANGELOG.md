@@ -6,6 +6,28 @@ Alfresco JS API
 
 _This project provides a JavaScript client API into the v1 Alfresco REST API_
 
+<a name="0.3.2"></a>
+# [0.3.3](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.2) (2016-xx-xx)
+
+## Fix
+- [Add csrf token for activiti](https://github.com/Alfresco/alfresco-js-api/issues/59)
+
+## Features
+
+- Various improvements for TypeScript declaration files
+
+<a name="0.3.2"></a>
+# [0.3.2](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.2) (2016-xx-xx)
+
+## Fix
+- [Null date fields parsed as invalid dates](https://github.com/Alfresco/alfresco-js-api/issues/50)
+- [Requires manual install of several packages](https://github.com/Alfresco/alfresco-js-api/issues/52)
+- [Cannot read property hostEcm of undefined](https://github.com/Alfresco/alfresco-js-api/issues/53)
+
+## Features
+
+- Various improvements for TypeScript declaration files
+
 <a name="0.3.1"></a>
 # [0.3.1](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.1) (2016-xx-xx)
 
