@@ -1,8 +1,9 @@
-/*global describe, it, beforeEach */
+/*global describe, it, beforeEach, afterEach */
 
 var BpmAuth = require('../src/bpmAuth');
 var AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
 var expect = require('chai').expect;
+var sinon = require('sinon');
 
 describe('Bpm Auth test', function () {
 
@@ -158,6 +159,44 @@ describe('Bpm Auth test', function () {
                 });
             });
 
+        });
+
+        describe('CSRF Token', function () {
+
+            beforeEach(function() {
+                this.setCsrfTokenStub = sinon.stub(BpmAuth.prototype, 'setCsrfToken');
+            });
+
+            afterEach(function() {
+                this.setCsrfTokenStub.restore();
+            });
+
+            it('should be enabled by default', function (done) {
+                this.authBpmMock.get200Response();
+
+                this.bpmAuth = new BpmAuth({
+                    hostBpm: this.hostBpm
+                });
+
+                this.bpmAuth.login('admin', 'admin').then(() => {
+                    expect(this.setCsrfTokenStub.called).to.be.equal(true);
+                    done();
+                });
+            });
+
+            it('should be disabled if disableCsrf is true', function (done) {
+                this.authBpmMock.get200Response();
+
+                this.bpmAuth = new BpmAuth({
+                    hostBpm: this.hostBpm,
+                    disableCsrf: true
+                });
+
+                this.bpmAuth.login('admin', 'admin').then(() => {
+                    expect(this.setCsrfTokenStub.called).to.be.equal(false);
+                    done();
+                });
+            });
         });
     });
 });
