@@ -72265,6 +72265,7 @@ var AlfrescoApi = function () {
      *        provider:   // ECM BPM ALL, default ECM
      *        ticketEcm:     // Ticket if you already have a ECM ticket you can pass only the ticket and skip the login, in this case you don't need username and password
      *        ticketBpm:     // Ticket if you already have a BPM ticket you can pass only the ticket and skip the login, in this case you don't need username and password
+     *        disableCsrf:   // To disable CSRF Token to be submitted. Only for Activiti call, by default is false.
      *    };
      */
     function AlfrescoApi(config) {
@@ -72280,7 +72281,8 @@ var AlfrescoApi = function () {
             contextRoot: config.contextRoot || 'alfresco',
             provider: config.provider || 'ECM',
             ticketEcm: config.ticketEcm,
-            ticketBpm: config.ticketBpm
+            ticketBpm: config.ticketBpm,
+            disableCsrf: config.disableCsrf || false
         };
 
         this.bpmAuth = new BpmAuth(this.config);
@@ -72292,6 +72294,12 @@ var AlfrescoApi = function () {
     }
 
     _createClass(AlfrescoApi, [{
+        key: 'changeCsrfConfig',
+        value: function changeCsrfConfig(disableCsrf) {
+            this.config.disableCsrf = disableCsrf;
+            this.bpmAuth.changeCsrfConfig(disableCsrf);
+        }
+    }, {
         key: 'changeEcmHost',
         value: function changeEcmHost(hostEcm) {
             this.config.hostEcm = hostEcm;
@@ -72670,7 +72678,9 @@ var AlfrescoApiClient = function (_ApiClient) {
             // set header parameters
             request.set(this.defaultHeaders).set(this.normalizeParams(headerParams));
 
-            this.setCsrfToken(request);
+            if (this.isBpmRequest() && this.isCsrfEnabled()) {
+                this.setCsrfToken(request);
+            }
 
             // set request timeout
             request.timeout(this.timeout);
@@ -72774,10 +72784,26 @@ var AlfrescoApiClient = function (_ApiClient) {
             return this.promise;
         }
     }, {
+        key: 'isBpmRequest',
+        value: function isBpmRequest() {
+            return this.constructor.name === 'BpmAuth';
+        }
+    }, {
+        key: 'isCsrfEnabled',
+        value: function isCsrfEnabled() {
+            if (this.config) {
+                return !this.config.disableCsrf;
+            } else {
+                return true;
+            }
+        }
+    }, {
         key: 'setCsrfToken',
         value: function setCsrfToken(request) {
             var token = this.token();
             request.set('X-CSRF-TOKEN', token);
+            request.set('Cookie', 'CSRF-TOKEN=' + token + ';path=/');
+
             try {
                 document.cookie = 'CSRF-TOKEN=' + token + ';path=/';
             } catch (err) {}
@@ -73222,6 +73248,11 @@ var BpmAuth = function (_AlfrescoApiClient) {
         value: function changeHost(host) {
             this.config.hostBpm = host;
             this.basePath = this.config.hostBpm + '/activiti-app'; //Activiti Call
+        }
+    }, {
+        key: 'changeCsrfConfig',
+        value: function changeCsrfConfig(disableCsrf) {
+            this.config.disableCsrf = disableCsrf;
         }
 
         /**

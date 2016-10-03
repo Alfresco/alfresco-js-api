@@ -58,7 +58,9 @@ class AlfrescoApiClient extends ApiClient {
         // set header parameters
         request.set(this.defaultHeaders).set(this.normalizeParams(headerParams));
 
-        this.setCsrfToken(request);
+        if (this.isBpmRequest() && this.isCsrfEnabled()) {
+            this.setCsrfToken(request);
+        }
 
         // set request timeout
         request.timeout(this.timeout);
@@ -161,9 +163,23 @@ class AlfrescoApiClient extends ApiClient {
         return this.promise;
     }
 
+    isBpmRequest() {
+        return this.constructor.name === 'BpmAuth';
+    }
+
+    isCsrfEnabled() {
+        if (this.config) {
+            return !this.config.disableCsrf;
+        }else {
+            return true;
+        }
+    }
+
     setCsrfToken(request) {
         var token = this.token();
         request.set('X-CSRF-TOKEN', token);
+        request.set('Cookie', 'CSRF-TOKEN=' + token + ';path=/');
+
         try {
             document.cookie = 'CSRF-TOKEN=' + token + ';path=/';
         } catch (err) {

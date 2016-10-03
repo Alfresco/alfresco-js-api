@@ -6,8 +6,21 @@ Alfresco JS API
 
 _This project provides a JavaScript client API into the v1 Alfresco REST API_
 
-<a name="0.3.2"></a>
-# [0.3.3](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.2) (2016-09-26)
+<a name="0.3.5"></a>
+# [0.3.5](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.5) (2016-09-26)
+
+## Fix
+- [Library no longer works with ECM](https://github.com/Alfresco/alfresco-js-api/issues/63)
+- [Flag to enable/disable CSRF behaviour](https://github.com/Alfresco/alfresco-js-api/issues/62)
+
+<a name="0.3.4"></a>
+# [0.3.4](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.4) (2016-09-26)
+
+## Fix
+- [csrf token for activiti doesn't work with Node.js](https://github.com/Alfresco/alfresco-js-api/issues/61)
+
+<a name="0.3.3"></a>
+# [0.3.3](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.3) (2016-09-26)
 
 ## Fix
 - [Add csrf token for activiti](https://github.com/Alfresco/alfresco-js-api/issues/59)
@@ -72,14 +85,14 @@ Separation between constructor and login phase, decoupling login from constructo
 Before:
 
 ```javascript
-this.alfrescoJsApi = new AlfrescoApi({username, password, host, contextRoot, ticket});
+this.alfrescoJsApi = new AlfrescoApi({username, password, alfrescoHost, contextRoot, ticket});
 this.alfrescoJsApi.login();
 ```
 
 After:
 
 ```javascript
-this.alfrescoJsApi = new AlfrescoApi({hostECM, hostBPM, contextRoot, ticketEcm, ticketBpm});
+this.alfrescoJsApi = new AlfrescoApi({hostECM, hostBPM, contextRoot, ticket});
 this.alfrescoJsApi.login(username, password);
 ```
 
