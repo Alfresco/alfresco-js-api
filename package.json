@@ -27,7 +27,7 @@
     "superagent": "1.7.1",
     "event-emitter": "^0.3.4",
     "lodash": "^4.13.1",
-    "nock": "^8.0.0"
+    "nock": "8.1.0"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.9.0",
