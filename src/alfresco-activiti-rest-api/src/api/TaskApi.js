@@ -674,7 +674,7 @@
     }
 
     /**
-     * Function to receive the result of the getRestFieldValues operation.
+     * Function to receive the result of the getRestFieldValuesColumn operation.
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/FormValueRepresentation>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -687,7 +687,7 @@
      * @param {String} field field
      * @param {String} column column
      */
-    this.getRestFieldValues = function(taskId, field, column) {
+    this.getRestFieldValuesColumn = function(taskId, field, column) {
       var postBody = null;
 
       // verify the required parameter 'taskId' is set

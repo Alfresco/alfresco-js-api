@@ -201,7 +201,7 @@ Class | Method | HTTP request | Description
 *ActivitiPublicRestApi.TaskApi* | [**filterTasks**](docs/TaskApi.md#filterTasks) | **POST** /api/enterprise/tasks/filter | Filter list of Task
 *ActivitiPublicRestApi.TaskApi* | [**getChecklist**](docs/TaskApi.md#getChecklist) | **GET** /api/enterprise/tasks/{taskId}/checklist | Retrieve Checklist added to a task
 *ActivitiPublicRestApi.TaskApi* | [**getRelatedContentForTask**](docs/TaskApi.md#getRelatedContentForTask) | **GET** /api/enterprise/tasks/{taskId}/content | Retrieve which content is attached to a task
-*ActivitiPublicRestApi.TaskApi* | [**getRestFieldValues**](docs/TaskApi.md#getRestFieldValues) | **GET** /api/enterprise/task-forms/{taskId}/form-values/{field}/{column} | Retrieve Column Field Values
+*ActivitiPublicRestApi.TaskApi* | [**getRestFieldValuesColumn**](docs/TaskApi.md#getRestFieldValuesColumn) | **GET** /api/enterprise/task-forms/{taskId}/form-values/{field}/{column} | Retrieve Column Field Values
 *ActivitiPublicRestApi.TaskApi* | [**getRestFieldValues**](docs/TaskApi.md#getRestFieldValues) | **GET** /api/enterprise/task-forms/{taskId}/form-values/{field} | Retrieve Populated Field Values
 *ActivitiPublicRestApi.TaskApi* | [**getTaskComments**](docs/TaskApi.md#getTaskComments) | **GET** /api/enterprise/tasks/{taskId}/comments | Comment list added to Task
 *ActivitiPublicRestApi.TaskApi* | [**getTaskForm**](docs/TaskApi.md#getTaskForm) | **GET** /api/enterprise/task-forms/{taskId} | Retrieve Task Form

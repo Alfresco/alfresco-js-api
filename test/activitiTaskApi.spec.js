@@ -141,4 +141,44 @@ describe('Activiti Task Api', function () {
             done();
         });
     });
+
+    it('Get getRestFieldValuesColumn ', function (done) {
+        this.tasksMock.get200getTaskForm();
+
+        var taskId = 2518;
+
+        this.alfrescoJsApi.activiti.taskApi.getTaskForm(taskId).then((data)=> {
+            expect(data.name).equal('Metadata');
+            expect(data.fields[0].name).equal('Label');
+            expect(data.fields[0].fieldType).equal('ContainerRepresentation');
+            done();
+        });
+    });
+
+    it('get form field values that are populated through a REST backend', function (done) {
+        this.tasksMock.get200getRestFieldValuesColumn();
+
+        var taskId = '1'; // String | taskId
+        var field = 'label'; // String | field
+        var column = 'user'; // String | column
+
+        this.alfrescoJsApi.activiti.taskApi.getRestFieldValuesColumn(taskId, field, column).then((data)=> {
+            done();
+        },(error)=> {
+            console.log(error);
+        });
+    });
+
+    it('get form field values that are populated through a REST backend Specific case to retrieve information on a specific column', function (done) {
+        this.tasksMock.get200getRestFieldValues();
+
+        var taskId = '2'; // String | taskId
+        var field = 'label'; // String | field
+
+        this.alfrescoJsApi.activiti.taskApi.getRestFieldValues(taskId, field).then((data)=> {
+            done();
+        },(error)=> {
+            console.log(error);
+        });
+    });
 });
