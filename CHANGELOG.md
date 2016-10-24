@@ -11,6 +11,7 @@ _This project provides a JavaScript client API into the v1 Alfresco REST API_
 
 ## Fix
 - [separate getRestFieldValues in getRestFieldValues and getRestFieldValuesColumn #71](https://github.com/Alfresco/alfresco-js-api/issues/71)
+- [d.ts file doesn't work properly](https://github.com/Alfresco/alfresco-js-api/issues/68)
 
 
 <a name="0.3.5"></a>
