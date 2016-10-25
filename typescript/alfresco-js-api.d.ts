@@ -353,6 +353,7 @@ declare namespace AlfrescoApi {
         integrationApi: any;
         integrationBoxApi: any;
         integrationDriveApi: any;
+        modelJsonBpmnApi: any;
         modelBpmnApi: any;
         modelsApi: any;
         modelsHistoryApi: any;

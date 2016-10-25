@@ -1,10 +1,10 @@
 (function(root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
-        define(['ApiClient'], factory);
+        define(['ApiClient', 'model/ObjectNode'], factory);
     } else if (typeof module === 'object' && module.exports) {
         // CommonJS-like environments that support module.exports, like Node.
-        module.exports = factory(require('../../../alfrescoApiClient'));
+        module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ObjectNode'));
     } else {
         // Browser globals (root is window)
         if (!root.ActivitiPublicRestApi) {
@@ -12,7 +12,7 @@
         }
         root.ActivitiPublicRestApi.ModelJsonBpmnApi = factory(root.ActivitiPublicRestApi.ApiClient);
     }
-}(this, function(ApiClient) {
+}(this, function(ApiClient, ObjectNode) {
     'use strict';
 
     /**
@@ -72,7 +72,7 @@
             var authNames = [];
             var contentTypes = ['application/json'];
             var accepts = ['application/json'];
-            var returnType = null;
+            var returnType = ObjectNode;
 
             return this.apiClient.callApi(
                 '/app/rest/models/{processModelId}/history/{processModelHistoryId}/model-json', 'GET',
@@ -114,7 +114,7 @@
             var authNames = [];
             var contentTypes = ['application/json'];
             var accepts = ['application/json'];
-            var returnType = null;
+            var returnType = ObjectNode;
 
             return this.apiClient.callApi(
                 '/app/rest/models/{processModelId}/model-json', 'GET',

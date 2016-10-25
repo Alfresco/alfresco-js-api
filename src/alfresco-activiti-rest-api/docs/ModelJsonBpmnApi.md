@@ -33,7 +33,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+JSON definition model 
 
 ### Authorization
 
@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+JSON definition model 
 
 ### Authorization
 

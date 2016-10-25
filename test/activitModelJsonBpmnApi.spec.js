@@ -1,14 +1,16 @@
 /*global describe, it, beforeEach */
 
 var AlfrescoApi = require('../main');
-//var expect = require('chai').expect;
+var expect = require('chai').expect;
 var AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
+var ModelJsonBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.ModelJsonBpmMock;
 
 describe('Activiti Model JsonBpmn Api', function () {
     beforeEach(function (done) {
         this.hostBpm = 'http://127.0.0.1:9999';
 
         this.authResponseBpmMock = new AuthBpmMock(this.hostBpm);
+        this.modelJsonBpmMock = new ModelJsonBpmMock(this.hostBpm);
 
         this.authResponseBpmMock.get200Response();
 
@@ -23,13 +25,22 @@ describe('Activiti Model JsonBpmn Api', function () {
     });
 
     it('get Model JsonBpmn', function (done) {
-        //  this.authResponseBpmMock.rec();
+        this.modelJsonBpmMock.get200EditorDisplayJsonClient();
         this.alfrescoJsApi.activiti.modelJsonBpmnApi.getEditorDisplayJsonClient(1).then((data)=> {
-            console.log(data);
+            expect(data).not.equal(null);
             done();
         }, (error)=> {
             console.log('error' + error);
-            // this.authResponseBpmMock.play();
+        });
+    });
+
+    it('get Model JsonBpmn history', function (done) {
+        this.modelJsonBpmMock.get200HistoricEditorDisplayJsonClient();
+        this.alfrescoJsApi.activiti.modelJsonBpmnApi.getHistoricEditorDisplayJsonClient(1,1).then((data)=> {
+            expect(data).not.equal(null);
+            done();
+        }, (error)=> {
+            console.log('error' + error);
         });
     });
 });
