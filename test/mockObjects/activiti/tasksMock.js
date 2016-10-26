@@ -916,7 +916,7 @@ class TasksMock extends BaseMock {
     }
 
     get200getRestFieldValuesColumn() {
-        nock('http://127.0.0.1:9999', {'encodedQueryParams': true})
+        nock(this.host, {'encodedQueryParams': true})
             .get('/activiti-app/api/enterprise/task-forms/1/form-values/label/user')
             .reply(200, [{'id': '1', 'name': 'Leanne Graham'}, {'id': '2', 'name': 'Ervin Howell'}, {
                 'id': '3',
@@ -932,7 +932,7 @@ class TasksMock extends BaseMock {
     }
 
     get200getRestFieldValues() {
-        nock('http://127.0.0.1:9999', {'encodedQueryParams': true})
+        nock(this.host, {'encodedQueryParams': true})
             .get('/activiti-app/api/enterprise/task-forms/2/form-values/label')
             .reply(200, [{'id': '1', 'name': 'Leanne Graham'}, {'id': '2', 'name': 'Ervin Howell'}, {
                 'id': '3',

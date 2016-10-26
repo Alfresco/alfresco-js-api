@@ -11,7 +11,7 @@ class ModelJsonBpmMock extends BaseMock {
 
 
     get200EditorDisplayJsonClient() {
-        nock('http://127.0.0.1:9999', {'encodedQueryParams': true})
+        nock(this.host, {'encodedQueryParams': true})
             .get('/activiti-app/app/rest/models/1/model-json')
             .reply(200, {
                 'elements': [{

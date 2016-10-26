@@ -12,6 +12,14 @@ _This project provides a JavaScript client API into the v1 Alfresco REST API_
 ## Fix
 - [separate getRestFieldValues in getRestFieldValues and getRestFieldValuesColumn #71](https://github.com/Alfresco/alfresco-js-api/issues/71)
 - [d.ts file doesn't work properly](https://github.com/Alfresco/alfresco-js-api/issues/68)
+- [getProfilePicture from activiti api goes in error](https://github.com/Alfresco/alfresco-js-api/issues/64)
+
+New method to retrieve just the profile picture URL
+
+```javascript
+this.alfrescoJsApi.activiti.profileApi.getProfilePictureUrl();
+```
+
 
 ## Features
 - [Activiti process status call](https://github.com/Alfresco/alfresco-js-api/issues/67)
