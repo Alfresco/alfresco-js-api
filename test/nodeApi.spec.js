@@ -106,7 +106,6 @@ describe('Node', function () {
             this.nodeMock.get200ResponseChildrenFutureNewPossibleValue();
 
             this.alfrescoJsApi.nodes.getNodeChildren('b4cff62a-664d-4d45-9302-98723eac1319').then(function (data) {
-                console.log(JSON.stringify(data));
                 expect(data.list.entries[0].entry.impossibleProperties).to.be.equal('impossibleRightValue');
                 done();
             });

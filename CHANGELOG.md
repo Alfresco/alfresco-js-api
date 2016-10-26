@@ -13,6 +13,19 @@ _This project provides a JavaScript client API into the v1 Alfresco REST API_
 - [separate getRestFieldValues in getRestFieldValues and getRestFieldValuesColumn #71](https://github.com/Alfresco/alfresco-js-api/issues/71)
 - [d.ts file doesn't work properly](https://github.com/Alfresco/alfresco-js-api/issues/68)
 
+## Features
+- [Activiti process status call](https://github.com/Alfresco/alfresco-js-api/issues/67)
+
+### Example
+```javascript
+
+var processModelId = 789; // Integer | processModelId
+var processModelHistoryId = 789; // Integer | processModelHistoryId
+
+this.alfrescoJsApi.activiti.modelJsonBpmnApi.getEditorDisplayJsonClient(processModelId);
+this.alfrescoJsApi.activiti.modelJsonBpmnApi.getHistoricEditorDisplayJsonClient(processModelId, processModelHistoryId);
+```
+
 
 <a name="0.3.5"></a>
 # [0.3.5](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.5) (2016-09-26)
