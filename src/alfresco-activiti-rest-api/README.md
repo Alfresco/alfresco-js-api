@@ -182,7 +182,8 @@ Class | Method | HTTP request | Description
 *ActivitiPublicRestApi.ProcessInstancesListingApi* | [**getProcessInstances**](docs/ProcessInstancesListingApi.md#getProcessInstances) | **POST** /api/enterprise/process-instances/query | Retrieve a list of process instances
 *ActivitiPublicRestApi.ProcessScopeApi* | [**getRuntimeProcessScopes**](docs/ProcessScopeApi.md#getRuntimeProcessScopes) | **POST** /api/enterprise/process-scopes | getRuntimeProcessScopes
 *ActivitiPublicRestApi.ProfileApi* | [**changePassword**](docs/ProfileApi.md#changePassword) | **POST** /api/enterprise/profile-password | Change user password
-*ActivitiPublicRestApi.ProfileApi* | [**getProfilePicture**](docs/ProfileApi.md#getProfilePicture) | **GET** /api/enterprise/profile-picture | Retrieve user profile picture
+*ActivitiPublicRestApi.ProfileApi* | [**getProfilePicture**](docs/ProfileApi.md#getProfilePicture) | **GET** /api/enterprise/profile-picture |Retrieve user profile buffered array picture
+*ActivitiPublicRestApi.ProfileApi* | [**getProfilePictureUrl**](docs/ProfileApi.md#getProfilePictureUrl) | **GET** /app/rest/admin/profile-picture | Retrieve Url user profile picture
 *ActivitiPublicRestApi.ProfileApi* | [**getProfile**](docs/ProfileApi.md#getProfile) | **GET** /api/enterprise/profile | Retrieve user information
 *ActivitiPublicRestApi.ProfileApi* | [**updateProfile**](docs/ProfileApi.md#updateProfile) | **POST** /api/enterprise/profile | Update user information
 *ActivitiPublicRestApi.ProfileApi* | [**uploadProfilePicture**](docs/ProfileApi.md#uploadProfilePicture) | **POST** /api/enterprise/profile-picture | Change user profile picture

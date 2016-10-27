@@ -61357,15 +61357,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define(['ApiClient', 'model/ChangePasswordRepresentation', 'model/UserRepresentation', 'model/ImageUploadRepresentation'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ChangePasswordRepresentation'), require('../model/UserRepresentation'), require('../model/ImageUploadRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ChangePasswordRepresentation'), require('../model/UserRepresentation'), require('../model/ImageUploadRepresentation'), require('../model/File'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
       root.ActivitiPublicRestApi = {};
     }
-    root.ActivitiPublicRestApi.ProfileApi = factory(root.ActivitiPublicRestApi.ApiClient, root.ActivitiPublicRestApi.ChangePasswordRepresentation, root.ActivitiPublicRestApi.UserRepresentation, root.ActivitiPublicRestApi.ImageUploadRepresentation);
+    root.ActivitiPublicRestApi.ProfileApi = factory(root.ActivitiPublicRestApi.ApiClient, root.ActivitiPublicRestApi.ChangePasswordRepresentation, root.ActivitiPublicRestApi.UserRepresentation, root.ActivitiPublicRestApi.ImageUploadRepresentation, root.ActivitiPublicRestApi.File);
   }
-})(undefined, function (ApiClient, ChangePasswordRepresentation, UserRepresentation, ImageUploadRepresentation) {
+})(undefined, function (ApiClient, ChangePasswordRepresentation, UserRepresentation, ImageUploadRepresentation, File) {
   'use strict';
 
   /**
@@ -61442,6 +61442,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var returnType = File;
 
       return this.apiClient.callApi('/api/enterprise/profile-picture', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
+
+    /**
+    * Retrieve user URL profile picture
+    * Generally returns an image file
+    */
+    this.getProfilePictureUrl = function () {
+      return this.apiClient.basePath + '/app/rest/admin/profile-picture';
     };
 
     /**
@@ -61542,7 +61550,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":401,"../model/ChangePasswordRepresentation":197,"../model/ImageUploadRepresentation":222,"../model/UserRepresentation":262}],174:[function(require,module,exports){
+},{"../../../alfrescoApiClient":401,"../model/ChangePasswordRepresentation":197,"../model/File":210,"../model/ImageUploadRepresentation":222,"../model/UserRepresentation":262}],174:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -89618,7 +89626,7 @@ module.exports.Core = AlfrescoCoreRestApi;
 module.exports.Auth = AlfrescoAuthRestApi;
 module.exports.Mock = AlfrescoMock;
 
-},{"../test/mockObjects/mockAlfrescoApi.js":421,"./alfresco-activiti-rest-api/src/index":184,"./alfresco-auth-rest-api/src/index":267,"./alfresco-core-rest-api/src/index.js":290,"./alfrescoContent":402,"./alfrescoNode":403,"./alfrescoUpload":404,"./alfrescoWebScript":405,"./bpmAuth":406,"./ecmAuth":407,"event-emitter":65,"lodash":72}],401:[function(require,module,exports){
+},{"../test/mockObjects/mockAlfrescoApi.js":422,"./alfresco-activiti-rest-api/src/index":184,"./alfresco-auth-rest-api/src/index":267,"./alfresco-core-rest-api/src/index.js":290,"./alfrescoContent":402,"./alfrescoNode":403,"./alfrescoUpload":404,"./alfrescoWebScript":405,"./bpmAuth":406,"./ecmAuth":407,"event-emitter":65,"lodash":72}],401:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -90671,6 +90679,110 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var nock = require('nock');
 var BaseMock = require('../baseMock');
 
+var ProfileMock = function (_BaseMock) {
+    _inherits(ProfileMock, _BaseMock);
+
+    function ProfileMock(host) {
+        _classCallCheck(this, ProfileMock);
+
+        return _possibleConstructorReturn(this, (ProfileMock.__proto__ || Object.getPrototypeOf(ProfileMock)).call(this, host));
+    }
+
+    _createClass(ProfileMock, [{
+        key: 'get200getProfile',
+        value: function get200getProfile() {
+            nock(this.host, { 'encodedQueryParams': true }).get('/activiti-app/api/enterprise/profile').reply(200, {
+                'id': 1,
+                'firstName': null,
+                'lastName': 'Administrator',
+                'email': 'admin',
+                'externalId': null,
+                'company': null,
+                'pictureId': null,
+                'fullname': ' Administrator',
+                'password': null,
+                'type': 'enterprise',
+                'status': 'active',
+                'created': '2016-10-21T13:32:54.886+0000',
+                'lastUpdate': '2016-10-23T22:16:48.252+0000',
+                'tenantId': 1,
+                'latestSyncTimeStamp': null,
+                'groups': [{
+                    'id': 1,
+                    'name': 'analytics-users',
+                    'externalId': null,
+                    'status': 'active',
+                    'tenantId': 1,
+                    'type': 0,
+                    'parentGroupId': null,
+                    'lastSyncTimeStamp': null,
+                    'userCount': null,
+                    'users': null,
+                    'capabilities': null,
+                    'groups': null,
+                    'manager': null
+                }, {
+                    'id': 2,
+                    'name': 'kickstart-users',
+                    'externalId': null,
+                    'status': 'active',
+                    'tenantId': 1,
+                    'type': 0,
+                    'parentGroupId': null,
+                    'lastSyncTimeStamp': null,
+                    'userCount': null,
+                    'users': null,
+                    'capabilities': null,
+                    'groups': null,
+                    'manager': null
+                }, {
+                    'id': 3,
+                    'name': 'Superusers',
+                    'externalId': null,
+                    'status': 'active',
+                    'tenantId': 1,
+                    'type': 0,
+                    'parentGroupId': null,
+                    'lastSyncTimeStamp': null,
+                    'userCount': null,
+                    'users': null,
+                    'capabilities': null,
+                    'groups': null,
+                    'manager': null
+                }],
+                'capabilities': null,
+                'apps': [],
+                'primaryGroup': null,
+                'tenantPictureId': null,
+                'tenantName': 'test'
+            });
+        }
+    }, {
+        key: 'get200getProfilePicture',
+        value: function get200getProfilePicture() {
+            nock(this.host, { 'encodedQueryParams': true }).get('/activiti-app/api/enterprise/profile-picture').reply(200, 'BUFFERSIZE');
+        }
+    }]);
+
+    return ProfileMock;
+}(BaseMock);
+
+module.exports = ProfileMock;
+
+},{"../baseMock":421,"nock":75}],409:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var nock = require('nock');
+var BaseMock = require('../baseMock');
+
 var AuthResponseMock = function (_BaseMock) {
     _inherits(AuthResponseMock, _BaseMock);
 
@@ -90706,7 +90818,7 @@ var AuthResponseMock = function (_BaseMock) {
 
 module.exports = AuthResponseMock;
 
-},{"../baseMock":420,"nock":75}],409:[function(require,module,exports){
+},{"../baseMock":421,"nock":75}],410:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -90732,7 +90844,7 @@ var ModelJsonBpmMock = function (_BaseMock) {
     _createClass(ModelJsonBpmMock, [{
         key: 'get200EditorDisplayJsonClient',
         value: function get200EditorDisplayJsonClient() {
-            nock('http://127.0.0.1:9999', { 'encodedQueryParams': true }).get('/activiti-app/app/rest/models/1/model-json').reply(200, {
+            nock(this.host, { 'encodedQueryParams': true }).get('/activiti-app/app/rest/models/1/model-json').reply(200, {
                 'elements': [{
                     'id': 'startEvent1',
                     'name': null,
@@ -90842,7 +90954,7 @@ var ModelJsonBpmMock = function (_BaseMock) {
 
 module.exports = ModelJsonBpmMock;
 
-},{"../baseMock":420,"nock":75}],410:[function(require,module,exports){
+},{"../baseMock":421,"nock":75}],411:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -90900,7 +91012,7 @@ var ModelsMock = function (_BaseMock) {
 
 module.exports = ModelsMock;
 
-},{"../baseMock":420,"nock":75}],411:[function(require,module,exports){
+},{"../baseMock":421,"nock":75}],412:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -90988,7 +91100,7 @@ var ProcessMock = function (_BaseMock) {
 
 module.exports = ProcessMock;
 
-},{"../baseMock":420,"nock":75}],412:[function(require,module,exports){
+},{"../baseMock":421,"nock":75}],413:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -91911,7 +92023,7 @@ var TasksMock = function (_BaseMock) {
     }, {
         key: 'get200getRestFieldValuesColumn',
         value: function get200getRestFieldValuesColumn() {
-            nock('http://127.0.0.1:9999', { 'encodedQueryParams': true }).get('/activiti-app/api/enterprise/task-forms/1/form-values/label/user').reply(200, [{ 'id': '1', 'name': 'Leanne Graham' }, { 'id': '2', 'name': 'Ervin Howell' }, {
+            nock(this.host, { 'encodedQueryParams': true }).get('/activiti-app/api/enterprise/task-forms/1/form-values/label/user').reply(200, [{ 'id': '1', 'name': 'Leanne Graham' }, { 'id': '2', 'name': 'Ervin Howell' }, {
                 'id': '3',
                 'name': 'Clementine Bauch'
             }, { 'id': '4', 'name': 'Patricia Lebsack' }, { 'id': '5', 'name': 'Chelsey Dietrich' }, {
@@ -91925,7 +92037,7 @@ var TasksMock = function (_BaseMock) {
     }, {
         key: 'get200getRestFieldValues',
         value: function get200getRestFieldValues() {
-            nock('http://127.0.0.1:9999', { 'encodedQueryParams': true }).get('/activiti-app/api/enterprise/task-forms/2/form-values/label').reply(200, [{ 'id': '1', 'name': 'Leanne Graham' }, { 'id': '2', 'name': 'Ervin Howell' }, {
+            nock(this.host, { 'encodedQueryParams': true }).get('/activiti-app/api/enterprise/task-forms/2/form-values/label').reply(200, [{ 'id': '1', 'name': 'Leanne Graham' }, { 'id': '2', 'name': 'Ervin Howell' }, {
                 'id': '3',
                 'name': 'Clementine Bauch'
             }, { 'id': '4', 'name': 'Patricia Lebsack' }, { 'id': '5', 'name': 'Chelsey Dietrich' }, {
@@ -91943,7 +92055,7 @@ var TasksMock = function (_BaseMock) {
 
 module.exports = TasksMock;
 
-},{"../baseMock":420,"nock":75}],413:[function(require,module,exports){
+},{"../baseMock":421,"nock":75}],414:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -92011,7 +92123,7 @@ var userFiltersMock = function (_BaseMock) {
 
 module.exports = userFiltersMock;
 
-},{"../baseMock":420,"nock":75}],414:[function(require,module,exports){
+},{"../baseMock":421,"nock":75}],415:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -92122,7 +92234,7 @@ var AuthResponseMock = function (_BaseMock) {
 
 module.exports = AuthResponseMock;
 
-},{"../baseMock":420,"nock":75}],415:[function(require,module,exports){
+},{"../baseMock":421,"nock":75}],416:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -92443,7 +92555,7 @@ var NodeMock = function (_BaseMock) {
 
 module.exports = NodeMock;
 
-},{"../baseMock":420,"nock":75}],416:[function(require,module,exports){
+},{"../baseMock":421,"nock":75}],417:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -92541,7 +92653,7 @@ var RenditionMock = function (_BaseMock) {
 
 module.exports = RenditionMock;
 
-},{"../baseMock":420,"nock":75}],417:[function(require,module,exports){
+},{"../baseMock":421,"nock":75}],418:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -92604,7 +92716,7 @@ var TagMock = function (_BaseMock) {
 
 module.exports = TagMock;
 
-},{"../baseMock":420,"nock":75}],418:[function(require,module,exports){
+},{"../baseMock":421,"nock":75}],419:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -92712,7 +92824,7 @@ var UploadMock = function (_BaseMock) {
 
 module.exports = UploadMock;
 
-},{"../baseMock":420,"nock":75}],419:[function(require,module,exports){
+},{"../baseMock":421,"nock":75}],420:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -92791,7 +92903,7 @@ var WebScriptMock = function (_BaseMock) {
 
 module.exports = WebScriptMock;
 
-},{"../baseMock":420,"nock":75}],420:[function(require,module,exports){
+},{"../baseMock":421,"nock":75}],421:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -92839,7 +92951,7 @@ var BaseMock = function () {
 
 module.exports = BaseMock;
 
-},{"nock":75}],421:[function(require,module,exports){
+},{"nock":75}],422:[function(require,module,exports){
 'use strict';
 
 var mockAlfrescoApi = {};
@@ -92856,6 +92968,7 @@ mockAlfrescoApi.Rendition = require('./alfresco/renditionMock.js');
 mockAlfrescoApi.ActivitiMock = {};
 mockAlfrescoApi.ActivitiMock.Auth = require('./activiti/authResponseMock.js');
 mockAlfrescoApi.ActivitiMock.Process = require('./activiti/processMock.js');
+mockAlfrescoApi.ActivitiMock.Profile = require('./activiti/ProfileMock.js');
 mockAlfrescoApi.ActivitiMock.Tasks = require('./activiti/tasksMock.js');
 mockAlfrescoApi.ActivitiMock.Models = require('./activiti/modelsMock.js');
 mockAlfrescoApi.ActivitiMock.ModelJsonBpmMock = require('./activiti/modelJsonBpmMock.js');
@@ -92863,5 +92976,5 @@ mockAlfrescoApi.ActivitiMock.UserFilters = require('./activiti/userFiltersMock.j
 
 module.exports = mockAlfrescoApi;
 
-},{"./activiti/authResponseMock.js":408,"./activiti/modelJsonBpmMock.js":409,"./activiti/modelsMock.js":410,"./activiti/processMock.js":411,"./activiti/tasksMock.js":412,"./activiti/userFiltersMock.js":413,"./alfresco/authResponseMock.js":414,"./alfresco/nodeMock.js":415,"./alfresco/renditionMock.js":416,"./alfresco/tagMock.js":417,"./alfresco/uploadMock.js":418,"./alfresco/webScriptMock.js":419}]},{},[1])(1)
+},{"./activiti/ProfileMock.js":408,"./activiti/authResponseMock.js":409,"./activiti/modelJsonBpmMock.js":410,"./activiti/modelsMock.js":411,"./activiti/processMock.js":412,"./activiti/tasksMock.js":413,"./activiti/userFiltersMock.js":414,"./alfresco/authResponseMock.js":415,"./alfresco/nodeMock.js":416,"./alfresco/renditionMock.js":417,"./alfresco/tagMock.js":418,"./alfresco/uploadMock.js":419,"./alfresco/webScriptMock.js":420}]},{},[1])(1)
 });
