@@ -4,15 +4,15 @@
     define(['ApiClient', 'model/CompleteFormRepresentation', 'model/FormValueRepresentation', 'model/FormDefinitionRepresentation', 'model/SaveFormRepresentation'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/CompleteFormRepresentation'), require('../model/FormValueRepresentation'), require('../model/FormDefinitionRepresentation'), require('../model/SaveFormRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/CompleteFormRepresentation'), require('../model/FormValueRepresentation'), require('../model/FormDefinitionRepresentation'), require('../model/SaveFormRepresentation'), require('../model/ProcessInstanceVariableRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
       root.ActivitiPublicRestApi = {};
     }
-    root.ActivitiPublicRestApi.TaskFormsApi = factory(root.ActivitiPublicRestApi.ApiClient, root.ActivitiPublicRestApi.CompleteFormRepresentation, root.ActivitiPublicRestApi.FormValueRepresentation, root.ActivitiPublicRestApi.FormDefinitionRepresentation, root.ActivitiPublicRestApi.SaveFormRepresentation);
+    root.ActivitiPublicRestApi.TaskFormsApi = factory(root.ActivitiPublicRestApi.ApiClient, root.ActivitiPublicRestApi.CompleteFormRepresentation, root.ActivitiPublicRestApi.FormValueRepresentation, root.ActivitiPublicRestApi.FormDefinitionRepresentation, root.ActivitiPublicRestApi.SaveFormRepresentation, root.ActivitiPublicRestApi.ProcessInstanceVariableRepresentation);
   }
-}(this, function(ApiClient, CompleteFormRepresentation, FormValueRepresentation, FormDefinitionRepresentation, SaveFormRepresentation) {
+}(this, function(ApiClient, CompleteFormRepresentation, FormValueRepresentation, FormDefinitionRepresentation, SaveFormRepresentation, ProcessInstanceVariableRepresentation) {
   'use strict';
 
   /**
@@ -224,6 +224,48 @@
 
       return this.apiClient.callApi(
         '/api/enterprise/task-forms/{taskId}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Function to receive the result of the getTaskFormVariables operation.
+     * @param {String} error Error message, if any.
+     * @param {module:model/FormDefinitionRepresentation} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Retrieve Task Form Variables
+     * @param {String} taskId taskId
+     */
+    this.getTaskFormVariables = function(taskId) {
+      var postBody = null;
+
+      // verify the required parameter 'taskId' is set
+      if (taskId == undefined || taskId == null) {
+        throw "Missing the required parameter 'taskId' when calling getTaskFormVariables";
+      }
+
+
+      var pathParams = {
+        'taskId': taskId
+      };
+      var queryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = [];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = [ProcessInstanceVariableRepresentation];
+
+      return this.apiClient.callApi(
+        '/app/rest/task-forms/{taskId}/variables', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );

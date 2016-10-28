@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**getRestFieldValues**](TaskFormsApi.md#getRestFieldValues) | **GET** /api/enterprise/task-forms/{taskId}/form-values/{field}/{column} | Retrieve Column Field Values
 [**getRestFieldValues**](TaskFormsApi.md#getRestFieldValues) | **GET** /api/enterprise/task-forms/{taskId}/form-values/{field} | Retrieve Populated Field Values
 [**getTaskForm**](TaskFormsApi.md#getTaskForm) | **GET** /api/enterprise/task-forms/{taskId} | Retrieve Task Form
+[**getTaskFormVariable**](TaskFormsApi.md#getTaskFormVariable) | **GET** /app/rest/task-forms/{taskId}/variables | Retrieve Task Form variables
 [**saveTaskForm**](TaskFormsApi.md#saveTaskForm) | **POST** /api/enterprise/task-forms/{taskId}/save-form | Save Task Form
 
 
@@ -149,6 +150,39 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FormDefinitionRepresentation**](FormDefinitionRepresentation.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+ 
+<a name="getTaskFormVariables"></a>
+# **getTaskFormVariables**
+> ProcessInstanceVariableRepresentation getTaskFormVariables(taskId)
+
+Retrieve Task Form Variables
+
+### Example
+```javascript
+
+var taskId = "taskId_example"; // String | taskId
+
+this.alfrescoJsApi.activiti.taskFormsApi.getTaskFormVariables(taskId);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **taskId** | **String**| taskId | 
+
+### Return type
+
+[**ProcessInstanceVariableRepresentation**](ProcessInstanceVariableRepresentation.md)
 
 ### Authorization
 
