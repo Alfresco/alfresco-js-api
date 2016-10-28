@@ -7,7 +7,7 @@ Alfresco JS API
 _This project provides a JavaScript client API into the v1 Alfresco REST API_
 
 <a name="0.3.6"></a>
-# [0.3.6](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.6) (2016-xx-xx)
+# [0.3.6](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.6) (2016-10-28)
 
 ## Fix
 - [separate getRestFieldValues in getRestFieldValues and getRestFieldValuesColumn #71](https://github.com/Alfresco/alfresco-js-api/issues/71)
