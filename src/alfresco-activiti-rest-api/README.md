@@ -313,6 +313,7 @@ Class | Method | HTTP request | Description
  - [ActivitiPublicRestApi.ProcessInstanceFilterRepresentation](docs/ProcessInstanceFilterRepresentation.md)
  - [ActivitiPublicRestApi.ProcessInstanceFilterRequestRepresentation](docs/ProcessInstanceFilterRequestRepresentation.md)
  - [ActivitiPublicRestApi.ProcessInstanceRepresentation](docs/ProcessInstanceRepresentation.md)
+ - [ActivitiPublicRestApi.ProcessInstanceVariableRepresentation](docs/ProcessInstanceVariableRepresentation.md)
  - [ActivitiPublicRestApi.ProcessScopeIdentifierRepresentation](docs/ProcessScopeIdentifierRepresentation.md)
  - [ActivitiPublicRestApi.ProcessScopeRepresentation](docs/ProcessScopeRepresentation.md)
  - [ActivitiPublicRestApi.ProcessScopesRequestRepresentation](docs/ProcessScopesRequestRepresentation.md)

@@ -212,11 +212,11 @@ class TasksMock extends BaseMock {
             });
     }
 
-    get404CompleteTask(taskid) {
+    get404CompleteTask(taskId) {
         nock(this.host, {'encodedQueryParams': true})
-            .put('/activiti-app/api/enterprise/tasks/' + taskid + '/action/complete')
+            .put('/activiti-app/api/enterprise/tasks/' + taskId + '/action/complete')
             .reply(404, {
-                'message': 'Task with id: ' + taskid + ' does not exist',
+                'message': 'Task with id: ' + taskId + ' does not exist',
                 'messageKey': 'GENERAL.ERROR.NOT-FOUND'
             });
 
@@ -259,8 +259,7 @@ class TasksMock extends BaseMock {
             });
     }
 
-
-    get200getTaskForm(name) {
+    get200getTaskForm() {
         nock(this.host, {'encodedQueryParams': true})
             .get('/activiti-app/api/enterprise/task-forms/2518')
             .reply(200, {

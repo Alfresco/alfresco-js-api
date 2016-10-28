@@ -20,9 +20,20 @@ New method to retrieve just the profile picture URL
 this.alfrescoJsApi.activiti.profileApi.getProfilePictureUrl();
 ```
 
-
 ## Features
 - [Activiti process status call](https://github.com/Alfresco/alfresco-js-api/issues/67)
+- [add a method in order to retrieve the /task-forms/{task-id}/variables](https://github.com/Alfresco/alfresco-js-api/issues/65)
+```javascript
+
+var taskId = "taskId_example"; // String | taskId
+
+this.alfrescoJsApi.activiti.taskFormsApi.getTaskFormVariables(taskId);
+```
+
+
+```javascript
+this.alfrescoJsApi.activiti.profileApi.getProfilePictureUrl();
+```
 
 ### Example
 ```javascript
