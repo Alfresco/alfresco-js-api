@@ -4,15 +4,15 @@
     define(['ApiClient', 'model/ChangePasswordRepresentation', 'model/UserRepresentation', 'model/ImageUploadRepresentation'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ChangePasswordRepresentation'), require('../model/UserRepresentation'), require('../model/ImageUploadRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ChangePasswordRepresentation'), require('../model/UserRepresentation'), require('../model/ImageUploadRepresentation'), require('../model/File'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
       root.ActivitiPublicRestApi = {};
     }
-    root.ActivitiPublicRestApi.ProfileApi = factory(root.ActivitiPublicRestApi.ApiClient, root.ActivitiPublicRestApi.ChangePasswordRepresentation, root.ActivitiPublicRestApi.UserRepresentation, root.ActivitiPublicRestApi.ImageUploadRepresentation);
+    root.ActivitiPublicRestApi.ProfileApi = factory(root.ActivitiPublicRestApi.ApiClient, root.ActivitiPublicRestApi.ChangePasswordRepresentation, root.ActivitiPublicRestApi.UserRepresentation, root.ActivitiPublicRestApi.ImageUploadRepresentation, root.ActivitiPublicRestApi.File);
   }
-}(this, function(ApiClient, ChangePasswordRepresentation, UserRepresentation, ImageUploadRepresentation) {
+}(this, function(ApiClient, ChangePasswordRepresentation, UserRepresentation, ImageUploadRepresentation, File) {
   'use strict';
 
   /**
@@ -107,6 +107,14 @@
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );
+    }
+
+    /**
+    * Retrieve user URL profile picture
+    * Generally returns an image file
+    */
+    this.getProfilePictureUrl = function() {
+     return this.apiClient.basePath + '/app/rest/admin/profile-picture';
     }
 
     /**

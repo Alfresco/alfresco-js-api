@@ -6,6 +6,46 @@ Alfresco JS API
 
 _This project provides a JavaScript client API into the v1 Alfresco REST API_
 
+<a name="0.3.6"></a>
+# [0.3.6](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.6) (2016-xx-xx)
+
+## Fix
+- [separate getRestFieldValues in getRestFieldValues and getRestFieldValuesColumn #71](https://github.com/Alfresco/alfresco-js-api/issues/71)
+- [d.ts file doesn't work properly](https://github.com/Alfresco/alfresco-js-api/issues/68)
+- [getProfilePicture from activiti api goes in error](https://github.com/Alfresco/alfresco-js-api/issues/64)
+
+New method to retrieve just the profile picture URL
+
+```javascript
+this.alfrescoJsApi.activiti.profileApi.getProfilePictureUrl();
+```
+
+## Features
+- [Activiti process status call](https://github.com/Alfresco/alfresco-js-api/issues/67)
+- [add a method in order to retrieve the /task-forms/{task-id}/variables](https://github.com/Alfresco/alfresco-js-api/issues/65)
+```javascript
+
+var taskId = "taskId_example"; // String | taskId
+
+this.alfrescoJsApi.activiti.taskFormsApi.getTaskFormVariables(taskId);
+```
+
+
+```javascript
+this.alfrescoJsApi.activiti.profileApi.getProfilePictureUrl();
+```
+
+### Example
+```javascript
+
+var processModelId = 789; // Integer | processModelId
+var processModelHistoryId = 789; // Integer | processModelHistoryId
+
+this.alfrescoJsApi.activiti.modelJsonBpmnApi.getEditorDisplayJsonClient(processModelId);
+this.alfrescoJsApi.activiti.modelJsonBpmnApi.getHistoricEditorDisplayJsonClient(processModelId, processModelHistoryId);
+```
+
+
 <a name="0.3.5"></a>
 # [0.3.5](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.5) (2016-09-26)
 

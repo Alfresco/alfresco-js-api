@@ -212,11 +212,11 @@ class TasksMock extends BaseMock {
             });
     }
 
-    get404CompleteTask(taskid) {
+    get404CompleteTask(taskId) {
         nock(this.host, {'encodedQueryParams': true})
-            .put('/activiti-app/api/enterprise/tasks/' + taskid + '/action/complete')
+            .put('/activiti-app/api/enterprise/tasks/' + taskId + '/action/complete')
             .reply(404, {
-                'message': 'Task with id: ' + taskid + ' does not exist',
+                'message': 'Task with id: ' + taskId + ' does not exist',
                 'messageKey': 'GENERAL.ERROR.NOT-FOUND'
             });
 
@@ -259,8 +259,7 @@ class TasksMock extends BaseMock {
             });
     }
 
-
-    get200getTaskForm(name) {
+    get200getTaskForm() {
         nock(this.host, {'encodedQueryParams': true})
             .get('/activiti-app/api/enterprise/task-forms/2518')
             .reply(200, {
@@ -913,6 +912,38 @@ class TasksMock extends BaseMock {
                 'variables': [],
                 'gridsterForm': false
             });
+    }
+
+    get200getRestFieldValuesColumn() {
+        nock(this.host, {'encodedQueryParams': true})
+            .get('/activiti-app/api/enterprise/task-forms/1/form-values/label/user')
+            .reply(200, [{'id': '1', 'name': 'Leanne Graham'}, {'id': '2', 'name': 'Ervin Howell'}, {
+                'id': '3',
+                'name': 'Clementine Bauch'
+            }, {'id': '4', 'name': 'Patricia Lebsack'}, {'id': '5', 'name': 'Chelsey Dietrich'}, {
+                'id': '6',
+                'name': 'Mrs. Dennis Schulist'
+            }, {'id': '7', 'name': 'Kurtis Weissnat'}, {'id': '8', 'name': 'Nicholas Runolfsdottir V'}, {
+                'id': '9',
+                'name': 'Glenna Reichert'
+            }, {'id': '10', 'name': 'Clementina DuBuque'}]);
+
+    }
+
+    get200getRestFieldValues() {
+        nock(this.host, {'encodedQueryParams': true})
+            .get('/activiti-app/api/enterprise/task-forms/2/form-values/label')
+            .reply(200, [{'id': '1', 'name': 'Leanne Graham'}, {'id': '2', 'name': 'Ervin Howell'}, {
+                'id': '3',
+                'name': 'Clementine Bauch'
+            }, {'id': '4', 'name': 'Patricia Lebsack'}, {'id': '5', 'name': 'Chelsey Dietrich'}, {
+                'id': '6',
+                'name': 'Mrs. Dennis Schulist'
+            }, {'id': '7', 'name': 'Kurtis Weissnat'}, {'id': '8', 'name': 'Nicholas Runolfsdottir V'}, {
+                'id': '9',
+                'name': 'Glenna Reichert'
+            }, {'id': '10', 'name': 'Clementina DuBuque'}]);
+
     }
 
 }

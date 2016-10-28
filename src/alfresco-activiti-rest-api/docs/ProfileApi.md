@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**changePassword**](ProfileApi.md#changePassword) | **POST** /api/enterprise/profile-password | Change user password
 [**getProfilePicture**](ProfileApi.md#getProfilePicture) | **GET** /api/enterprise/profile-picture | Retrieve user profile picture
+[**getProfilePictureUrl**](ProfileApi.md#getProfile) | **GET** /app/rest/admin/profile-picture | Retrieve Url user profile picture
 [**getProfile**](ProfileApi.md#getProfile) | **GET** /api/enterprise/profile | Retrieve user information
 [**updateProfile**](ProfileApi.md#updateProfile) | **POST** /api/enterprise/profile | Update user information
 [**uploadProfilePicture**](ProfileApi.md#uploadProfilePicture) | **POST** /api/enterprise/profile-picture | Change user profile picture
@@ -48,7 +49,7 @@ No authorization required
 # **getProfilePicture**
 > File getProfilePicture()
 
-Retrieve user profile picture
+Retrieve user profile buffered array picture
 
 Generally returns an image file
 
@@ -74,6 +75,36 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+<a name="getProfilePictureUrl"></a>
+# **getProfilePictureUrl**
+> File getProfilePictureUrl()
+
+Retrieve user url profile picture
+
+Generally returns an URL image file
+
+### Example
+```javascript
+
+this.alfrescoJsApi.activiti.profileApi.getProfilePictureUrl();
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**String**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+ 
 <a name="getProfile"></a>
 # **getProfile**
 > UserRepresentation getProfile()

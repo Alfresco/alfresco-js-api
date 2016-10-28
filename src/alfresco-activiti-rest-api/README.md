@@ -139,6 +139,8 @@ Class | Method | HTTP request | Description
 *ActivitiPublicRestApi.IntegrationDriveApi* | [**getFiles**](docs/IntegrationDriveApi.md#getFiles) | **GET** /api/enterprise/integration/google-drive/files | List file &amp; folders
 *ActivitiPublicRestApi.ModelBpmnApi* | [**getHistoricProcessModelBpmn20Xml**](docs/ModelBpmnApi.md#getHistoricProcessModelBpmn20Xml) | **GET** /api/enterprise/models/{processModelId}/history/{processModelHistoryId}/bpmn20 | Export a previous process definition model to a BPMN 2.0 xml file
 *ActivitiPublicRestApi.ModelBpmnApi* | [**getProcessModelBpmn20Xml**](docs/ModelBpmnApi.md#getProcessModelBpmn20Xml) | **GET** /api/enterprise/models/{processModelId}/bpmn20 | Export a process definition model to a BPMN 2.0 xml file
+*ActivitiPublicRestApi.modelJsonBpmnApi* | [**getHistoricEditorDisplayJsonClient**](docs/ModelJsonBpmnApi.md#getHistoricEditorDisplayJsonClient) | **GET** /api/enterprise/models/{processModelId}/history/{processModelHistoryId}/model-json | Export a previous process definition model to JSON
+*ActivitiPublicRestApi.modelJsonBpmnApi* | [**getEditorDisplayJsonClient**](docs/ModelJsonBpmnApi.md#getEditorDisplayJsonClient) | **GET** /api/enterprise/models/{processModelId}/model-json | Export a process definition model to JSON
 *ActivitiPublicRestApi.ModelsApi* | [**createModel**](docs/ModelsApi.md#createModel) | **POST** /api/enterprise/models | To create a new model
 *ActivitiPublicRestApi.ModelsApi* | [**deleteModel**](docs/ModelsApi.md#deleteModel) | **DELETE** /api/enterprise/models/{modelId} | Delete a model
 *ActivitiPublicRestApi.ModelsApi* | [**duplicateModel**](docs/ModelsApi.md#duplicateModel) | **POST** /api/enterprise/models/{modelId}/clone | To duplicate an existing model
@@ -180,7 +182,8 @@ Class | Method | HTTP request | Description
 *ActivitiPublicRestApi.ProcessInstancesListingApi* | [**getProcessInstances**](docs/ProcessInstancesListingApi.md#getProcessInstances) | **POST** /api/enterprise/process-instances/query | Retrieve a list of process instances
 *ActivitiPublicRestApi.ProcessScopeApi* | [**getRuntimeProcessScopes**](docs/ProcessScopeApi.md#getRuntimeProcessScopes) | **POST** /api/enterprise/process-scopes | getRuntimeProcessScopes
 *ActivitiPublicRestApi.ProfileApi* | [**changePassword**](docs/ProfileApi.md#changePassword) | **POST** /api/enterprise/profile-password | Change user password
-*ActivitiPublicRestApi.ProfileApi* | [**getProfilePicture**](docs/ProfileApi.md#getProfilePicture) | **GET** /api/enterprise/profile-picture | Retrieve user profile picture
+*ActivitiPublicRestApi.ProfileApi* | [**getProfilePicture**](docs/ProfileApi.md#getProfilePicture) | **GET** /api/enterprise/profile-picture |Retrieve user profile buffered array picture
+*ActivitiPublicRestApi.ProfileApi* | [**getProfilePictureUrl**](docs/ProfileApi.md#getProfilePictureUrl) | **GET** /app/rest/admin/profile-picture | Retrieve Url user profile picture
 *ActivitiPublicRestApi.ProfileApi* | [**getProfile**](docs/ProfileApi.md#getProfile) | **GET** /api/enterprise/profile | Retrieve user information
 *ActivitiPublicRestApi.ProfileApi* | [**updateProfile**](docs/ProfileApi.md#updateProfile) | **POST** /api/enterprise/profile | Update user information
 *ActivitiPublicRestApi.ProfileApi* | [**uploadProfilePicture**](docs/ProfileApi.md#uploadProfilePicture) | **POST** /api/enterprise/profile-picture | Change user profile picture
@@ -201,7 +204,7 @@ Class | Method | HTTP request | Description
 *ActivitiPublicRestApi.TaskApi* | [**filterTasks**](docs/TaskApi.md#filterTasks) | **POST** /api/enterprise/tasks/filter | Filter list of Task
 *ActivitiPublicRestApi.TaskApi* | [**getChecklist**](docs/TaskApi.md#getChecklist) | **GET** /api/enterprise/tasks/{taskId}/checklist | Retrieve Checklist added to a task
 *ActivitiPublicRestApi.TaskApi* | [**getRelatedContentForTask**](docs/TaskApi.md#getRelatedContentForTask) | **GET** /api/enterprise/tasks/{taskId}/content | Retrieve which content is attached to a task
-*ActivitiPublicRestApi.TaskApi* | [**getRestFieldValues**](docs/TaskApi.md#getRestFieldValues) | **GET** /api/enterprise/task-forms/{taskId}/form-values/{field}/{column} | Retrieve Column Field Values
+*ActivitiPublicRestApi.TaskApi* | [**getRestFieldValuesColumn**](docs/TaskApi.md#getRestFieldValuesColumn) | **GET** /api/enterprise/task-forms/{taskId}/form-values/{field}/{column} | Retrieve Column Field Values
 *ActivitiPublicRestApi.TaskApi* | [**getRestFieldValues**](docs/TaskApi.md#getRestFieldValues) | **GET** /api/enterprise/task-forms/{taskId}/form-values/{field} | Retrieve Populated Field Values
 *ActivitiPublicRestApi.TaskApi* | [**getTaskComments**](docs/TaskApi.md#getTaskComments) | **GET** /api/enterprise/tasks/{taskId}/comments | Comment list added to Task
 *ActivitiPublicRestApi.TaskApi* | [**getTaskForm**](docs/TaskApi.md#getTaskForm) | **GET** /api/enterprise/task-forms/{taskId} | Retrieve Task Form
@@ -310,6 +313,7 @@ Class | Method | HTTP request | Description
  - [ActivitiPublicRestApi.ProcessInstanceFilterRepresentation](docs/ProcessInstanceFilterRepresentation.md)
  - [ActivitiPublicRestApi.ProcessInstanceFilterRequestRepresentation](docs/ProcessInstanceFilterRequestRepresentation.md)
  - [ActivitiPublicRestApi.ProcessInstanceRepresentation](docs/ProcessInstanceRepresentation.md)
+ - [ActivitiPublicRestApi.ProcessInstanceVariableRepresentation](docs/ProcessInstanceVariableRepresentation.md)
  - [ActivitiPublicRestApi.ProcessScopeIdentifierRepresentation](docs/ProcessScopeIdentifierRepresentation.md)
  - [ActivitiPublicRestApi.ProcessScopeRepresentation](docs/ProcessScopeRepresentation.md)
  - [ActivitiPublicRestApi.ProcessScopesRequestRepresentation](docs/ProcessScopesRequestRepresentation.md)

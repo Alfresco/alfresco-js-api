@@ -1,18 +1,18 @@
-# ActivitiPublicRestApi.ModelBpmnApi
+# ActivitiPublicRestApi.ModelJsonBpmnApi
 
 All URIs are relative to *https://localhost:8080/activiti-app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getHistoricProcessModelBpmn20Xml**](ModelBpmnApi.md#getHistoricProcessModelBpmn20Xml) | **GET** /api/enterprise/models/{processModelId}/history/{processModelHistoryId}/bpmn20 | Export a previous process definition model to a BPMN 2.0 xml file
-[**getProcessModelBpmn20Xml**](ModelBpmnApi.md#getProcessModelBpmn20Xml) | **GET** /api/enterprise/models/{processModelId}/bpmn20 | Export a process definition model to a BPMN 2.0 xml file
+[**getHistoricEditorDisplayJsonClient**](ModelJsonBpmnApi.md#getHistoricEditorDisplayJsonClient) | **GET** /app/rest/process-instances/{processModelId}/history/{processModelHistoryId}/model-json | Export a previous process definition model to JSON
+[**getEditorDisplayJsonClient**](ModelJsonBpmnApi.md#getEditorDisplayJsonClient) | **GET** /app/rest/process-instances/{processModelId}/model-json | Export a process definition model to JSON
 
 
-<a name="getHistoricProcessModelBpmn20Xml"></a>
-# **getHistoricProcessModelBpmn20Xml**
-> getHistoricProcessModelBpmn20Xml(processModelId, processModelHistoryId)
+<a name="getEditorDisplayJsonClient"></a>
+# **getEditorDisplayJsonClient**
+> getEditorDisplayJsonClient(processModelId, processModelHistoryId)
 
-Export a previous process definition model to a BPMN 2.0 xml file
+Export a previous process definition model to JSON
 
 ### Example
 ```javascript
@@ -21,7 +21,7 @@ var processModelId = 789; // Integer | processModelId
 
 var processModelHistoryId = 789; // Integer | processModelHistoryId
 
-this.alfrescoJsApi.activiti.modelBpmnApi.getHistoricProcessModelBpmn20Xml(processModelId, processModelHistoryId);
+this.alfrescoJsApi.activiti.modelJsonBpmnApi.getHistoricEditorDisplayJsonClient(processModelId, processModelHistoryId);
 ```
 
 ### Parameters
@@ -33,7 +33,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-JSON
+JSON definition model 
 
 ### Authorization
 
@@ -44,9 +44,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getProcessModelBpmn20Xml"></a>
-# **getProcessModelBpmn20Xml**
-> getProcessModelBpmn20Xml(processModelId)
+<a name="getEditorDisplayJsonClient"></a>
+# **getEditorDisplayJsonClient**
+> getEditorDisplayJsonClient(processModelId)
 
 Export a process definition model to a BPMN 2.0 xml file
 
@@ -55,7 +55,7 @@ Export a process definition model to a BPMN 2.0 xml file
 
 var processModelId = 789; // Integer | processModelId
 
-this.alfrescoJsApi.activiti.modelBpmnApi.getProcessModelBpmn20Xml(processModelId);
+this.alfrescoJsApi.activiti.modelJsonBpmnApi.getEditorDisplayJsonClient(processModelId);
 ```
 
 ### Parameters
@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-JSON
+JSON definition model 
 
 ### Authorization
 

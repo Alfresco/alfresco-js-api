@@ -18,7 +18,7 @@ Method | HTTP request | Description
 [**filterTasks**](TaskApi.md#filterTasks) | **POST** /api/enterprise/tasks/filter | Filter list of Task
 [**getChecklist**](TaskApi.md#getChecklist) | **GET** /api/enterprise/tasks/{taskId}/checklist | Retrieve Checklist added to a task
 [**getRelatedContentForTask**](TaskApi.md#getRelatedContentForTask) | **GET** /api/enterprise/tasks/{taskId}/content | Retrieve which content is attached to a task
-[**getRestFieldValues**](TaskApi.md#getRestFieldValues) | **GET** /api/enterprise/task-forms/{taskId}/form-values/{field}/{column} | Retrieve Column Field Values
+[**getRestFieldValuesColumn**](TaskApi.md#getRestFieldValuesColumn) | **GET** /api/enterprise/task-forms/{taskId}/form-values/{field}/{column} | Retrieve Column Field Values
 [**getRestFieldValues**](TaskApi.md#getRestFieldValues) | **GET** /api/enterprise/task-forms/{taskId}/form-values/{field} | Retrieve Populated Field Values
 [**getTaskComments**](TaskApi.md#getTaskComments) | **GET** /api/enterprise/tasks/{taskId}/comments | Comment list added to Task
 [**getTaskForm**](TaskApi.md#getTaskForm) | **GET** /api/enterprise/task-forms/{taskId} | Retrieve Task Form
@@ -537,9 +537,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getRestFieldValues"></a>
-# **getRestFieldValues**
-> [FormValueRepresentation] getRestFieldValues(taskId, field, column)
+<a name="getRestFieldValuesColumn"></a>
+# **getRestFieldValuesColumn**
+> [FormValueRepresentation] getRestFieldValuesColumn(taskId, field, column)
 
 Retrieve Column Field Values
 
@@ -555,7 +555,7 @@ var field = "field_example"; // String | field
 var column = "column_example"; // String | column
 
 
-this.alfrescoJsApi.activiti.taskApi.getRestFieldValues(taskId, field, column);
+this.alfrescoJsApi.activiti.taskApi.getRestFieldValuesColumn(taskId, field, column);
 ```
 
 ### Parameters
