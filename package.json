@@ -1,9 +1,9 @@
 {
   "name": "alfresco-js-api",
-  "version": "0.3.6",
+  "version": "0.3.8",
   "description": "JavaScript client library for the Alfresco REST API",
   "main": "main.js",
-  "typings": "dist/alfresco-js-api.d.ts",
+  "typings": "index.d.ts",
   "scripts": {
     "clean": "rimraf dist/bundle.js node_modules",
     "build": "grunt && npm run tslint && npm run test && npm run bundle && npm run minify && npm run toc",
@@ -13,7 +13,7 @@
     "bundle": "browserify -s AlfrescoApi main.js -o dist/alfresco-js-api.js -t [ babelify --sourceMapsAbsolute --presets es2015 ] ",
     "minify": "browserify -s AlfrescoApi dist/alfresco-js-api.js -d -p [minifyify --no-map] > dist/alfresco-js-api.min.js",
     "watchify": "watchify -s AlfrescoApi main.js -o dist/alfresco-js-api.js",
-    "tslint": "tslint -c tslint.json typescript/alfresco-js-api.d.ts",
+    "tslint": "tslint -c tslint.json index.d.ts",
     "toc": "markdown-toc -i README.md && markdown-toc -i test/mockObjects/README.md"
   },
   "repository": {

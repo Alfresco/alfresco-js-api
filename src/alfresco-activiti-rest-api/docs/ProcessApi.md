@@ -92,12 +92,16 @@ Retrieve the start form for a process definition
 ### Example
 ```javascript
 
-this.alfrescoJsApi.activiti.processApi.getProcessDefinitionStartForm();
+var processDefinitionId = "pprocessDefinitionId_example"; // String | processDefinitionId
+
+this.alfrescoJsApi.activiti.processApi.getProcessDefinitionStartForm(processDefinitionId);
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
-
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **processDefinitionId** | **String**| processDefinitionId | 
+ 
 ### Return type
 
 [**FormDefinitionRepresentation**](FormDefinitionRepresentation.md)

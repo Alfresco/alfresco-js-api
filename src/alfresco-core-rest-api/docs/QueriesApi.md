@@ -1,21 +1,21 @@
-# AlfrescoCoreRestApi.SearchApi
+# AlfrescoCoreRestApi.QueriesApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/alfresco/versions/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**liveSearchNodes**](SearchApi.md#liveSearchNodes) | **GET** /queries/live-search-nodes | Live search for nodes
+[**findNodes**](SearchApi.md#findNodes) | **GET** /queries/nodes | Live search for nodes
 
 
-<a name="liveSearchNodes"></a>
-# **liveSearchNodes**
-> NodePaging liveSearchNodes(term, opts)
+<a name="findNodes"></a>
+# **findNodes**
+> NodePaging nodes(term, opts)
 
-Live search for nodes
+Find nodes
 
-Returns a list of nodes that match the given search criteria.
+Gets a list of nodes that match the given search criteria.
 
-The search term is used to look for nodes that match against name, title, description, full text content and tags.
+The search term is used to look for nodes that match against name, title, description, full text content or tags.
 
 The search term
 - must contain a minimum of 3 alphanumeric characters
@@ -25,6 +25,11 @@ The search term
 By default, file and folder types will be searched unless a specific type is provided as a query parameter.
 
 By default, the search will be across the repository unless a specific root node id is provided to start the search from.
+
+You can sort the result list using the orderBy parameter. You can specify one or more of the following fields in the orderBy parameter:
+- name
+- modifiedAt
+- createdAt
 
 
 ### Example
@@ -50,7 +55,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 };
 
-this.alfrescoJsApi.core.searchApi.liveSearchNodes(term, opts).then(function(data) {
+this.alfrescoJsApi.core.queriesApi.findNodes(term, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
