@@ -53,4 +53,14 @@ describe('Activiti Process Api', function () {
         });
     });
 
+    it('get process definition startForm', function (done) {
+        this.processMock.get200getProcessDefinitionStartForm();
+        var processDefinitionId = 'testProcess:1:7504';
+
+        this.alfrescoJsApi.activiti.processApi.getProcessDefinitionStartForm(processDefinitionId).then((data)=> {
+            expect(data.processDefinitionId).equal('testProcess:1:7504');
+            done();
+        });
+    });
+
 });

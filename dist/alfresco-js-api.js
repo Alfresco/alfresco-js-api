@@ -5,7 +5,7 @@ var AlfrescoApi = require('./src/alfrescoApi.js');
 
 module.exports = AlfrescoApi;
 
-},{"./src/alfrescoApi.js":401}],2:[function(require,module,exports){
+},{"./src/alfrescoApi.js":389}],2:[function(require,module,exports){
 // http://wiki.commonjs.org/wiki/Unit_Testing/1.0
 //
 // THIS IS NOT TESTED NOR LIKELY TO WORK OUTSIDE V8!
@@ -366,7 +366,7 @@ var objectKeys = Object.keys || function (obj) {
   return keys;
 };
 
-},{"util/":139}],3:[function(require,module,exports){
+},{"util/":127}],3:[function(require,module,exports){
 /*!
  * assertion-error
  * Copyright(c) 2013 Jake Luer <jake@qualiancy.com>
@@ -487,7 +487,6 @@ AssertionError.prototype.toJSON = function (stack) {
 },{}],4:[function(require,module,exports){
 'use strict'
 
-exports.byteLength = byteLength
 exports.toByteArray = toByteArray
 exports.fromByteArray = fromByteArray
 
@@ -495,17 +494,23 @@ var lookup = []
 var revLookup = []
 var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
 
-var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-for (var i = 0, len = code.length; i < len; ++i) {
-  lookup[i] = code[i]
-  revLookup[code.charCodeAt(i)] = i
+function init () {
+  var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+  for (var i = 0, len = code.length; i < len; ++i) {
+    lookup[i] = code[i]
+    revLookup[code.charCodeAt(i)] = i
+  }
+
+  revLookup['-'.charCodeAt(0)] = 62
+  revLookup['_'.charCodeAt(0)] = 63
 }
 
-revLookup['-'.charCodeAt(0)] = 62
-revLookup['_'.charCodeAt(0)] = 63
+init()
 
-function placeHoldersCount (b64) {
+function toByteArray (b64) {
+  var i, j, l, tmp, placeHolders, arr
   var len = b64.length
+
   if (len % 4 > 0) {
     throw new Error('Invalid string. Length must be a multiple of 4')
   }
@@ -515,19 +520,9 @@ function placeHoldersCount (b64) {
   // represent one byte
   // if there is only one, then the three characters before it represent 2 bytes
   // this is just a cheap hack to not do indexOf twice
-  return b64[len - 2] === '=' ? 2 : b64[len - 1] === '=' ? 1 : 0
-}
+  placeHolders = b64[len - 2] === '=' ? 2 : b64[len - 1] === '=' ? 1 : 0
 
-function byteLength (b64) {
   // base64 is 4/3 + up to two characters of the original data
-  return b64.length * 3 / 4 - placeHoldersCount(b64)
-}
-
-function toByteArray (b64) {
-  var i, j, l, tmp, placeHolders, arr
-  var len = b64.length
-  placeHolders = placeHoldersCount(b64)
-
   arr = new Arr(len * 3 / 4 - placeHolders)
 
   // if there are placeholders, only get up to the last complete 4 chars
@@ -772,7 +767,7 @@ exports.kMaxLength = kMaxLength()
 function typedArraySupport () {
   try {
     var arr = new Uint8Array(1)
-    arr.__proto__ = {__proto__: Uint8Array.prototype, foo: function () { return 42 }}
+    arr.foo = function () { return 42 }
     return arr.foo() === 42 && // typed array instances can be augmented
         typeof arr.subarray === 'function' && // chrome 9-10 lack `subarray`
         arr.subarray(1, 1).byteLength === 0 // ie10 has broken `subarray`
@@ -885,8 +880,6 @@ if (Buffer.TYPED_ARRAY_SUPPORT) {
 function assertSize (size) {
   if (typeof size !== 'number') {
     throw new TypeError('"size" argument must be a number')
-  } else if (size < 0) {
-    throw new RangeError('"size" argument must not be negative')
   }
 }
 
@@ -918,7 +911,7 @@ function allocUnsafe (that, size) {
   assertSize(size)
   that = createBuffer(that, size < 0 ? 0 : checked(size) | 0)
   if (!Buffer.TYPED_ARRAY_SUPPORT) {
-    for (var i = 0; i < size; ++i) {
+    for (var i = 0; i < size; i++) {
       that[i] = 0
     }
   }
@@ -950,20 +943,12 @@ function fromString (that, string, encoding) {
   var length = byteLength(string, encoding) | 0
   that = createBuffer(that, length)
 
-  var actual = that.write(string, encoding)
-
-  if (actual !== length) {
-    // Writing a hex string, for example, that contains invalid characters will
-    // cause everything after the first invalid character to be ignored. (e.g.
-    // 'abxxcd' will be treated as 'ab')
-    that = that.slice(0, actual)
-  }
-
+  that.write(string, encoding)
   return that
 }
 
 function fromArrayLike (that, array) {
-  var length = array.length < 0 ? 0 : checked(array.length) | 0
+  var length = checked(array.length) | 0
   that = createBuffer(that, length)
   for (var i = 0; i < length; i += 1) {
     that[i] = array[i] & 255
@@ -982,9 +967,7 @@ function fromArrayBuffer (that, array, byteOffset, length) {
     throw new RangeError('\'length\' is out of bounds')
   }
 
-  if (byteOffset === undefined && length === undefined) {
-    array = new Uint8Array(array)
-  } else if (length === undefined) {
+  if (length === undefined) {
     array = new Uint8Array(array, byteOffset)
   } else {
     array = new Uint8Array(array, byteOffset, length)
@@ -1032,7 +1015,7 @@ function fromObject (that, obj) {
 }
 
 function checked (length) {
-  // Note: cannot use `length < kMaxLength()` here because that fails when
+  // Note: cannot use `length < kMaxLength` here because that fails when
   // length is NaN (which is otherwise coerced to zero.)
   if (length >= kMaxLength()) {
     throw new RangeError('Attempt to allocate Buffer larger than maximum ' +
@@ -1081,9 +1064,9 @@ Buffer.isEncoding = function isEncoding (encoding) {
     case 'utf8':
     case 'utf-8':
     case 'ascii':
-    case 'latin1':
     case 'binary':
     case 'base64':
+    case 'raw':
     case 'ucs2':
     case 'ucs-2':
     case 'utf16le':
@@ -1106,14 +1089,14 @@ Buffer.concat = function concat (list, length) {
   var i
   if (length === undefined) {
     length = 0
-    for (i = 0; i < list.length; ++i) {
+    for (i = 0; i < list.length; i++) {
       length += list[i].length
     }
   }
 
   var buffer = Buffer.allocUnsafe(length)
   var pos = 0
-  for (i = 0; i < list.length; ++i) {
+  for (i = 0; i < list.length; i++) {
     var buf = list[i]
     if (!Buffer.isBuffer(buf)) {
       throw new TypeError('"list" argument must be an Array of Buffers')
@@ -1144,8 +1127,10 @@ function byteLength (string, encoding) {
   for (;;) {
     switch (encoding) {
       case 'ascii':
-      case 'latin1':
       case 'binary':
+      // Deprecated
+      case 'raw':
+      case 'raws':
         return len
       case 'utf8':
       case 'utf-8':
@@ -1218,9 +1203,8 @@ function slowToString (encoding, start, end) {
       case 'ascii':
         return asciiSlice(this, start, end)
 
-      case 'latin1':
       case 'binary':
-        return latin1Slice(this, start, end)
+        return binarySlice(this, start, end)
 
       case 'base64':
         return base64Slice(this, start, end)
@@ -1268,20 +1252,6 @@ Buffer.prototype.swap32 = function swap32 () {
   for (var i = 0; i < len; i += 4) {
     swap(this, i, i + 3)
     swap(this, i + 1, i + 2)
-  }
-  return this
-}
-
-Buffer.prototype.swap64 = function swap64 () {
-  var len = this.length
-  if (len % 8 !== 0) {
-    throw new RangeError('Buffer size must be a multiple of 64-bits')
-  }
-  for (var i = 0; i < len; i += 8) {
-    swap(this, i, i + 7)
-    swap(this, i + 1, i + 6)
-    swap(this, i + 2, i + 5)
-    swap(this, i + 3, i + 4)
   }
   return this
 }
@@ -1368,73 +1338,7 @@ Buffer.prototype.compare = function compare (target, start, end, thisStart, this
   return 0
 }
 
-// Finds either the first index of `val` in `buffer` at offset >= `byteOffset`,
-// OR the last index of `val` in `buffer` at offset <= `byteOffset`.
-//
-// Arguments:
-// - buffer - a Buffer to search
-// - val - a string, Buffer, or number
-// - byteOffset - an index into `buffer`; will be clamped to an int32
-// - encoding - an optional encoding, relevant is val is a string
-// - dir - true for indexOf, false for lastIndexOf
-function bidirectionalIndexOf (buffer, val, byteOffset, encoding, dir) {
-  // Empty buffer means no match
-  if (buffer.length === 0) return -1
-
-  // Normalize byteOffset
-  if (typeof byteOffset === 'string') {
-    encoding = byteOffset
-    byteOffset = 0
-  } else if (byteOffset > 0x7fffffff) {
-    byteOffset = 0x7fffffff
-  } else if (byteOffset < -0x80000000) {
-    byteOffset = -0x80000000
-  }
-  byteOffset = +byteOffset  // Coerce to Number.
-  if (isNaN(byteOffset)) {
-    // byteOffset: it it's undefined, null, NaN, "foo", etc, search whole buffer
-    byteOffset = dir ? 0 : (buffer.length - 1)
-  }
-
-  // Normalize byteOffset: negative offsets start from the end of the buffer
-  if (byteOffset < 0) byteOffset = buffer.length + byteOffset
-  if (byteOffset >= buffer.length) {
-    if (dir) return -1
-    else byteOffset = buffer.length - 1
-  } else if (byteOffset < 0) {
-    if (dir) byteOffset = 0
-    else return -1
-  }
-
-  // Normalize val
-  if (typeof val === 'string') {
-    val = Buffer.from(val, encoding)
-  }
-
-  // Finally, search either indexOf (if dir is true) or lastIndexOf
-  if (Buffer.isBuffer(val)) {
-    // Special case: looking for empty string/buffer always fails
-    if (val.length === 0) {
-      return -1
-    }
-    return arrayIndexOf(buffer, val, byteOffset, encoding, dir)
-  } else if (typeof val === 'number') {
-    val = val & 0xFF // Search for a byte value [0-255]
-    if (Buffer.TYPED_ARRAY_SUPPORT &&
-        typeof Uint8Array.prototype.indexOf === 'function') {
-      if (dir) {
-        return Uint8Array.prototype.indexOf.call(buffer, val, byteOffset)
-      } else {
-        return Uint8Array.prototype.lastIndexOf.call(buffer, val, byteOffset)
-      }
-    }
-    return arrayIndexOf(buffer, [ val ], byteOffset, encoding, dir)
-  }
-
-  throw new TypeError('val must be string, number or Buffer')
-}
-
-function arrayIndexOf (arr, val, byteOffset, encoding, dir) {
+function arrayIndexOf (arr, val, byteOffset, encoding) {
   var indexSize = 1
   var arrLength = arr.length
   var valLength = val.length
@@ -1461,45 +1365,59 @@ function arrayIndexOf (arr, val, byteOffset, encoding, dir) {
     }
   }
 
-  var i
-  if (dir) {
-    var foundIndex = -1
-    for (i = byteOffset; i < arrLength; i++) {
-      if (read(arr, i) === read(val, foundIndex === -1 ? 0 : i - foundIndex)) {
-        if (foundIndex === -1) foundIndex = i
-        if (i - foundIndex + 1 === valLength) return foundIndex * indexSize
-      } else {
-        if (foundIndex !== -1) i -= i - foundIndex
-        foundIndex = -1
-      }
-    }
-  } else {
-    if (byteOffset + valLength > arrLength) byteOffset = arrLength - valLength
-    for (i = byteOffset; i >= 0; i--) {
-      var found = true
-      for (var j = 0; j < valLength; j++) {
-        if (read(arr, i + j) !== read(val, j)) {
-          found = false
-          break
-        }
-      }
-      if (found) return i
+  var foundIndex = -1
+  for (var i = 0; byteOffset + i < arrLength; i++) {
+    if (read(arr, byteOffset + i) === read(val, foundIndex === -1 ? 0 : i - foundIndex)) {
+      if (foundIndex === -1) foundIndex = i
+      if (i - foundIndex + 1 === valLength) return (byteOffset + foundIndex) * indexSize
+    } else {
+      if (foundIndex !== -1) i -= i - foundIndex
+      foundIndex = -1
     }
   }
-
   return -1
+}
+
+Buffer.prototype.indexOf = function indexOf (val, byteOffset, encoding) {
+  if (typeof byteOffset === 'string') {
+    encoding = byteOffset
+    byteOffset = 0
+  } else if (byteOffset > 0x7fffffff) {
+    byteOffset = 0x7fffffff
+  } else if (byteOffset < -0x80000000) {
+    byteOffset = -0x80000000
+  }
+  byteOffset >>= 0
+
+  if (this.length === 0) return -1
+  if (byteOffset >= this.length) return -1
+
+  // Negative offsets start from the end of the buffer
+  if (byteOffset < 0) byteOffset = Math.max(this.length + byteOffset, 0)
+
+  if (typeof val === 'string') {
+    val = Buffer.from(val, encoding)
+  }
+
+  if (Buffer.isBuffer(val)) {
+    // special case: looking for empty string/buffer always fails
+    if (val.length === 0) {
+      return -1
+    }
+    return arrayIndexOf(this, val, byteOffset, encoding)
+  }
+  if (typeof val === 'number') {
+    if (Buffer.TYPED_ARRAY_SUPPORT && Uint8Array.prototype.indexOf === 'function') {
+      return Uint8Array.prototype.indexOf.call(this, val, byteOffset)
+    }
+    return arrayIndexOf(this, [ val ], byteOffset, encoding)
+  }
+
+  throw new TypeError('val must be string, number or Buffer')
 }
 
 Buffer.prototype.includes = function includes (val, byteOffset, encoding) {
   return this.indexOf(val, byteOffset, encoding) !== -1
-}
-
-Buffer.prototype.indexOf = function indexOf (val, byteOffset, encoding) {
-  return bidirectionalIndexOf(this, val, byteOffset, encoding, true)
-}
-
-Buffer.prototype.lastIndexOf = function lastIndexOf (val, byteOffset, encoding) {
-  return bidirectionalIndexOf(this, val, byteOffset, encoding, false)
 }
 
 function hexWrite (buf, string, offset, length) {
@@ -1516,12 +1434,12 @@ function hexWrite (buf, string, offset, length) {
 
   // must be an even number of digits
   var strLen = string.length
-  if (strLen % 2 !== 0) throw new TypeError('Invalid hex string')
+  if (strLen % 2 !== 0) throw new Error('Invalid hex string')
 
   if (length > strLen / 2) {
     length = strLen / 2
   }
-  for (var i = 0; i < length; ++i) {
+  for (var i = 0; i < length; i++) {
     var parsed = parseInt(string.substr(i * 2, 2), 16)
     if (isNaN(parsed)) return i
     buf[offset + i] = parsed
@@ -1537,7 +1455,7 @@ function asciiWrite (buf, string, offset, length) {
   return blitBuffer(asciiToBytes(string), buf, offset, length)
 }
 
-function latin1Write (buf, string, offset, length) {
+function binaryWrite (buf, string, offset, length) {
   return asciiWrite(buf, string, offset, length)
 }
 
@@ -1599,9 +1517,8 @@ Buffer.prototype.write = function write (string, offset, length, encoding) {
       case 'ascii':
         return asciiWrite(this, string, offset, length)
 
-      case 'latin1':
       case 'binary':
-        return latin1Write(this, string, offset, length)
+        return binaryWrite(this, string, offset, length)
 
       case 'base64':
         // Warning: maxLength not taken into account in base64Write
@@ -1736,17 +1653,17 @@ function asciiSlice (buf, start, end) {
   var ret = ''
   end = Math.min(buf.length, end)
 
-  for (var i = start; i < end; ++i) {
+  for (var i = start; i < end; i++) {
     ret += String.fromCharCode(buf[i] & 0x7F)
   }
   return ret
 }
 
-function latin1Slice (buf, start, end) {
+function binarySlice (buf, start, end) {
   var ret = ''
   end = Math.min(buf.length, end)
 
-  for (var i = start; i < end; ++i) {
+  for (var i = start; i < end; i++) {
     ret += String.fromCharCode(buf[i])
   }
   return ret
@@ -1759,7 +1676,7 @@ function hexSlice (buf, start, end) {
   if (!end || end < 0 || end > len) end = len
 
   var out = ''
-  for (var i = start; i < end; ++i) {
+  for (var i = start; i < end; i++) {
     out += toHex(buf[i])
   }
   return out
@@ -1802,7 +1719,7 @@ Buffer.prototype.slice = function slice (start, end) {
   } else {
     var sliceLen = end - start
     newBuf = new Buffer(sliceLen, undefined)
-    for (var i = 0; i < sliceLen; ++i) {
+    for (var i = 0; i < sliceLen; i++) {
       newBuf[i] = this[i + start]
     }
   }
@@ -2029,7 +1946,7 @@ Buffer.prototype.writeUInt8 = function writeUInt8 (value, offset, noAssert) {
 
 function objectWriteUInt16 (buf, value, offset, littleEndian) {
   if (value < 0) value = 0xffff + value + 1
-  for (var i = 0, j = Math.min(buf.length - offset, 2); i < j; ++i) {
+  for (var i = 0, j = Math.min(buf.length - offset, 2); i < j; i++) {
     buf[offset + i] = (value & (0xff << (8 * (littleEndian ? i : 1 - i)))) >>>
       (littleEndian ? i : 1 - i) * 8
   }
@@ -2063,7 +1980,7 @@ Buffer.prototype.writeUInt16BE = function writeUInt16BE (value, offset, noAssert
 
 function objectWriteUInt32 (buf, value, offset, littleEndian) {
   if (value < 0) value = 0xffffffff + value + 1
-  for (var i = 0, j = Math.min(buf.length - offset, 4); i < j; ++i) {
+  for (var i = 0, j = Math.min(buf.length - offset, 4); i < j; i++) {
     buf[offset + i] = (value >>> (littleEndian ? i : 3 - i) * 8) & 0xff
   }
 }
@@ -2278,12 +2195,12 @@ Buffer.prototype.copy = function copy (target, targetStart, start, end) {
 
   if (this === target && start < targetStart && targetStart < end) {
     // descending copy from end
-    for (i = len - 1; i >= 0; --i) {
+    for (i = len - 1; i >= 0; i--) {
       target[i + targetStart] = this[i + start]
     }
   } else if (len < 1000 || !Buffer.TYPED_ARRAY_SUPPORT) {
     // ascending copy from start
-    for (i = 0; i < len; ++i) {
+    for (i = 0; i < len; i++) {
       target[i + targetStart] = this[i + start]
     }
   } else {
@@ -2344,7 +2261,7 @@ Buffer.prototype.fill = function fill (val, start, end, encoding) {
 
   var i
   if (typeof val === 'number') {
-    for (i = start; i < end; ++i) {
+    for (i = start; i < end; i++) {
       this[i] = val
     }
   } else {
@@ -2352,7 +2269,7 @@ Buffer.prototype.fill = function fill (val, start, end, encoding) {
       ? val
       : utf8ToBytes(new Buffer(val, encoding).toString())
     var len = bytes.length
-    for (i = 0; i < end - start; ++i) {
+    for (i = 0; i < end - start; i++) {
       this[i + start] = bytes[i % len]
     }
   }
@@ -2394,7 +2311,7 @@ function utf8ToBytes (string, units) {
   var leadSurrogate = null
   var bytes = []
 
-  for (var i = 0; i < length; ++i) {
+  for (var i = 0; i < length; i++) {
     codePoint = string.charCodeAt(i)
 
     // is surrogate component
@@ -2469,7 +2386,7 @@ function utf8ToBytes (string, units) {
 
 function asciiToBytes (str) {
   var byteArray = []
-  for (var i = 0; i < str.length; ++i) {
+  for (var i = 0; i < str.length; i++) {
     // Node's code seems to be doing this and not & 0x7F..
     byteArray.push(str.charCodeAt(i) & 0xFF)
   }
@@ -2479,7 +2396,7 @@ function asciiToBytes (str) {
 function utf16leToBytes (str, units) {
   var c, hi, lo
   var byteArray = []
-  for (var i = 0; i < str.length; ++i) {
+  for (var i = 0; i < str.length; i++) {
     if ((units -= 2) < 0) break
 
     c = str.charCodeAt(i)
@@ -2497,7 +2414,7 @@ function base64ToBytes (str) {
 }
 
 function blitBuffer (src, dst, offset, length) {
-  for (var i = 0; i < length; ++i) {
+  for (var i = 0; i < length; i++) {
     if ((i + offset >= dst.length) || (i >= src.length)) break
     dst[i + offset] = src[i]
   }
@@ -2509,14 +2426,7 @@ function isnan (val) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"base64-js":4,"ieee754":68,"isarray":9}],9:[function(require,module,exports){
-var toString = {}.toString;
-
-module.exports = Array.isArray || function (arr) {
-  return toString.call(arr) == '[object Array]';
-};
-
-},{}],10:[function(require,module,exports){
+},{"base64-js":4,"ieee754":66,"isarray":69}],9:[function(require,module,exports){
 module.exports = {
   "100": "Continue",
   "101": "Switching Protocols",
@@ -2581,10 +2491,10 @@ module.exports = {
   "511": "Network Authentication Required"
 }
 
-},{}],11:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 module.exports = require('./lib/chai');
 
-},{"./lib/chai":12}],12:[function(require,module,exports){
+},{"./lib/chai":11}],11:[function(require,module,exports){
 /*!
  * chai
  * Copyright(c) 2011-2014 Jake Luer <jake@alogicalparadox.com>
@@ -2679,7 +2589,7 @@ exports.use(should);
 var assert = require('./chai/interface/assert');
 exports.use(assert);
 
-},{"./chai/assertion":13,"./chai/config":14,"./chai/core/assertions":15,"./chai/interface/assert":16,"./chai/interface/expect":17,"./chai/interface/should":18,"./chai/utils":32,"assertion-error":3}],13:[function(require,module,exports){
+},{"./chai/assertion":12,"./chai/config":13,"./chai/core/assertions":14,"./chai/interface/assert":15,"./chai/interface/expect":16,"./chai/interface/should":17,"./chai/utils":31,"assertion-error":3}],12:[function(require,module,exports){
 /*!
  * chai
  * http://chaijs.com
@@ -2812,7 +2722,7 @@ module.exports = function (_chai, util) {
   });
 };
 
-},{"./config":14}],14:[function(require,module,exports){
+},{"./config":13}],13:[function(require,module,exports){
 module.exports = {
 
   /**
@@ -2869,7 +2779,7 @@ module.exports = {
 
 };
 
-},{}],15:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 /*!
  * chai
  * http://chaijs.com
@@ -4731,7 +4641,7 @@ module.exports = function (chai, _) {
   });
 };
 
-},{}],16:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 /*!
  * chai
  * Copyright(c) 2011-2014 Jake Luer <jake@alogicalparadox.com>
@@ -6378,7 +6288,7 @@ module.exports = function (chai, util) {
   ('isNotFrozen', 'notFrozen');
 };
 
-},{}],17:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 /*!
  * chai
  * Copyright(c) 2011-2014 Jake Luer <jake@alogicalparadox.com>
@@ -6414,7 +6324,7 @@ module.exports = function (chai, util) {
   };
 };
 
-},{}],18:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 /*!
  * chai
  * Copyright(c) 2011-2014 Jake Luer <jake@alogicalparadox.com>
@@ -6617,7 +6527,7 @@ module.exports = function (chai, util) {
   chai.Should = loadShould;
 };
 
-},{}],19:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 /*!
  * Chai - addChainingMethod utility
  * Copyright(c) 2012-2014 Jake Luer <jake@alogicalparadox.com>
@@ -6731,7 +6641,7 @@ module.exports = function (ctx, name, method, chainingBehavior) {
   });
 };
 
-},{"../config":14,"./flag":23,"./transferFlags":39}],20:[function(require,module,exports){
+},{"../config":13,"./flag":22,"./transferFlags":38}],19:[function(require,module,exports){
 /*!
  * Chai - addMethod utility
  * Copyright(c) 2012-2014 Jake Luer <jake@alogicalparadox.com>
@@ -6777,7 +6687,7 @@ module.exports = function (ctx, name, method) {
   };
 };
 
-},{"../config":14,"./flag":23}],21:[function(require,module,exports){
+},{"../config":13,"./flag":22}],20:[function(require,module,exports){
 /*!
  * Chai - addProperty utility
  * Copyright(c) 2012-2014 Jake Luer <jake@alogicalparadox.com>
@@ -6827,7 +6737,7 @@ module.exports = function (ctx, name, getter) {
   });
 };
 
-},{"../config":14,"./flag":23}],22:[function(require,module,exports){
+},{"../config":13,"./flag":22}],21:[function(require,module,exports){
 /*!
  * Chai - expectTypes utility
  * Copyright(c) 2012-2014 Jake Luer <jake@alogicalparadox.com>
@@ -6871,7 +6781,7 @@ module.exports = function (obj, types) {
   }
 };
 
-},{"./flag":23,"assertion-error":3,"type-detect":132}],23:[function(require,module,exports){
+},{"./flag":22,"assertion-error":3,"type-detect":121}],22:[function(require,module,exports){
 /*!
  * Chai - flag utility
  * Copyright(c) 2012-2014 Jake Luer <jake@alogicalparadox.com>
@@ -6906,7 +6816,7 @@ module.exports = function (obj, key, value) {
   }
 };
 
-},{}],24:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 /*!
  * Chai - getActual utility
  * Copyright(c) 2012-2014 Jake Luer <jake@alogicalparadox.com>
@@ -6928,7 +6838,7 @@ module.exports = function (obj, args) {
   return args.length > 4 ? args[4] : obj._obj;
 };
 
-},{}],25:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 /*!
  * Chai - getEnumerableProperties utility
  * Copyright(c) 2012-2014 Jake Luer <jake@alogicalparadox.com>
@@ -6956,7 +6866,7 @@ module.exports = function getEnumerableProperties(object) {
   return result;
 };
 
-},{}],26:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 /*!
  * Chai - message composition utility
  * Copyright(c) 2012-2014 Jake Luer <jake@alogicalparadox.com>
@@ -7009,7 +6919,7 @@ module.exports = function (obj, args) {
   return flagMsg ? flagMsg + ': ' + msg : msg;
 };
 
-},{"./flag":23,"./getActual":24,"./inspect":33,"./objDisplay":34}],27:[function(require,module,exports){
+},{"./flag":22,"./getActual":23,"./inspect":32,"./objDisplay":33}],26:[function(require,module,exports){
 /*!
  * Chai - getName utility
  * Copyright(c) 2012-2014 Jake Luer <jake@alogicalparadox.com>
@@ -7033,7 +6943,7 @@ module.exports = function (func) {
   return match && match[1] ? match[1] : "";
 };
 
-},{}],28:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 /*!
  * Chai - getPathInfo utility
  * Copyright(c) 2012-2014 Jake Luer <jake@alogicalparadox.com>
@@ -7146,7 +7056,7 @@ function _getPathValue (parsed, obj, index) {
   return res;
 }
 
-},{"./hasProperty":31}],29:[function(require,module,exports){
+},{"./hasProperty":30}],28:[function(require,module,exports){
 /*!
  * Chai - getPathValue utility
  * Copyright(c) 2012-2014 Jake Luer <jake@alogicalparadox.com>
@@ -7191,7 +7101,7 @@ module.exports = function(path, obj) {
   return info.value;
 };
 
-},{"./getPathInfo":28}],30:[function(require,module,exports){
+},{"./getPathInfo":27}],29:[function(require,module,exports){
 /*!
  * Chai - getProperties utility
  * Copyright(c) 2012-2014 Jake Luer <jake@alogicalparadox.com>
@@ -7229,7 +7139,7 @@ module.exports = function getProperties(object) {
   return result;
 };
 
-},{}],31:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 /*!
  * Chai - hasProperty utility
  * Copyright(c) 2012-2014 Jake Luer <jake@alogicalparadox.com>
@@ -7295,7 +7205,7 @@ module.exports = function hasProperty(name, obj) {
   return name in obj;
 };
 
-},{"type-detect":132}],32:[function(require,module,exports){
+},{"type-detect":121}],31:[function(require,module,exports){
 /*!
  * chai
  * Copyright(c) 2011 Jake Luer <jake@alogicalparadox.com>
@@ -7427,7 +7337,7 @@ exports.addChainableMethod = require('./addChainableMethod');
 
 exports.overwriteChainableMethod = require('./overwriteChainableMethod');
 
-},{"./addChainableMethod":19,"./addMethod":20,"./addProperty":21,"./expectTypes":22,"./flag":23,"./getActual":24,"./getMessage":26,"./getName":27,"./getPathInfo":28,"./getPathValue":29,"./hasProperty":31,"./inspect":33,"./objDisplay":34,"./overwriteChainableMethod":35,"./overwriteMethod":36,"./overwriteProperty":37,"./test":38,"./transferFlags":39,"deep-eql":45,"type-detect":132}],33:[function(require,module,exports){
+},{"./addChainableMethod":18,"./addMethod":19,"./addProperty":20,"./expectTypes":21,"./flag":22,"./getActual":23,"./getMessage":25,"./getName":26,"./getPathInfo":27,"./getPathValue":28,"./hasProperty":30,"./inspect":32,"./objDisplay":33,"./overwriteChainableMethod":34,"./overwriteMethod":35,"./overwriteProperty":36,"./test":37,"./transferFlags":38,"deep-eql":43,"type-detect":121}],32:[function(require,module,exports){
 // This is (almost) directly from Node.js utils
 // https://github.com/joyent/node/blob/f8c335d0caf47f16d31413f89aa28eda3878e3aa/lib/util.js
 
@@ -7764,7 +7674,7 @@ function objectToString(o) {
   return Object.prototype.toString.call(o);
 }
 
-},{"./getEnumerableProperties":25,"./getName":27,"./getProperties":30}],34:[function(require,module,exports){
+},{"./getEnumerableProperties":24,"./getName":26,"./getProperties":29}],33:[function(require,module,exports){
 /*!
  * Chai - flag utility
  * Copyright(c) 2012-2014 Jake Luer <jake@alogicalparadox.com>
@@ -7816,7 +7726,7 @@ module.exports = function (obj) {
   }
 };
 
-},{"../config":14,"./inspect":33}],35:[function(require,module,exports){
+},{"../config":13,"./inspect":32}],34:[function(require,module,exports){
 /*!
  * Chai - overwriteChainableMethod utility
  * Copyright(c) 2012-2014 Jake Luer <jake@alogicalparadox.com>
@@ -7872,7 +7782,7 @@ module.exports = function (ctx, name, method, chainingBehavior) {
   };
 };
 
-},{}],36:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 /*!
  * Chai - overwriteMethod utility
  * Copyright(c) 2012-2014 Jake Luer <jake@alogicalparadox.com>
@@ -7926,7 +7836,7 @@ module.exports = function (ctx, name, method) {
   }
 };
 
-},{}],37:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 /*!
  * Chai - overwriteProperty utility
  * Copyright(c) 2012-2014 Jake Luer <jake@alogicalparadox.com>
@@ -7983,7 +7893,7 @@ module.exports = function (ctx, name, getter) {
   });
 };
 
-},{}],38:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 /*!
  * Chai - test utility
  * Copyright(c) 2012-2014 Jake Luer <jake@alogicalparadox.com>
@@ -8013,7 +7923,7 @@ module.exports = function (obj, args) {
   return negate ? !expr : expr;
 };
 
-},{"./flag":23}],39:[function(require,module,exports){
+},{"./flag":22}],38:[function(require,module,exports){
 /*!
  * Chai - transferFlags utility
  * Copyright(c) 2012-2014 Jake Luer <jake@alogicalparadox.com>
@@ -8060,172 +7970,7 @@ module.exports = function (assertion, object, includeAll) {
   }
 };
 
-},{}],40:[function(require,module,exports){
-
-/**
- * Expose `Emitter`.
- */
-
-if (typeof module !== 'undefined') {
-  module.exports = Emitter;
-}
-
-/**
- * Initialize a new `Emitter`.
- *
- * @api public
- */
-
-function Emitter(obj) {
-  if (obj) return mixin(obj);
-};
-
-/**
- * Mixin the emitter properties.
- *
- * @param {Object} obj
- * @return {Object}
- * @api private
- */
-
-function mixin(obj) {
-  for (var key in Emitter.prototype) {
-    obj[key] = Emitter.prototype[key];
-  }
-  return obj;
-}
-
-/**
- * Listen on the given `event` with `fn`.
- *
- * @param {String} event
- * @param {Function} fn
- * @return {Emitter}
- * @api public
- */
-
-Emitter.prototype.on =
-Emitter.prototype.addEventListener = function(event, fn){
-  this._callbacks = this._callbacks || {};
-  (this._callbacks['$' + event] = this._callbacks['$' + event] || [])
-    .push(fn);
-  return this;
-};
-
-/**
- * Adds an `event` listener that will be invoked a single
- * time then automatically removed.
- *
- * @param {String} event
- * @param {Function} fn
- * @return {Emitter}
- * @api public
- */
-
-Emitter.prototype.once = function(event, fn){
-  function on() {
-    this.off(event, on);
-    fn.apply(this, arguments);
-  }
-
-  on.fn = fn;
-  this.on(event, on);
-  return this;
-};
-
-/**
- * Remove the given callback for `event` or all
- * registered callbacks.
- *
- * @param {String} event
- * @param {Function} fn
- * @return {Emitter}
- * @api public
- */
-
-Emitter.prototype.off =
-Emitter.prototype.removeListener =
-Emitter.prototype.removeAllListeners =
-Emitter.prototype.removeEventListener = function(event, fn){
-  this._callbacks = this._callbacks || {};
-
-  // all
-  if (0 == arguments.length) {
-    this._callbacks = {};
-    return this;
-  }
-
-  // specific event
-  var callbacks = this._callbacks['$' + event];
-  if (!callbacks) return this;
-
-  // remove all handlers
-  if (1 == arguments.length) {
-    delete this._callbacks['$' + event];
-    return this;
-  }
-
-  // remove specific handler
-  var cb;
-  for (var i = 0; i < callbacks.length; i++) {
-    cb = callbacks[i];
-    if (cb === fn || cb.fn === fn) {
-      callbacks.splice(i, 1);
-      break;
-    }
-  }
-  return this;
-};
-
-/**
- * Emit `event` with the given args.
- *
- * @param {String} event
- * @param {Mixed} ...
- * @return {Emitter}
- */
-
-Emitter.prototype.emit = function(event){
-  this._callbacks = this._callbacks || {};
-  var args = [].slice.call(arguments, 1)
-    , callbacks = this._callbacks['$' + event];
-
-  if (callbacks) {
-    callbacks = callbacks.slice(0);
-    for (var i = 0, len = callbacks.length; i < len; ++i) {
-      callbacks[i].apply(this, args);
-    }
-  }
-
-  return this;
-};
-
-/**
- * Return array of callbacks for `event`.
- *
- * @param {String} event
- * @return {Array}
- * @api public
- */
-
-Emitter.prototype.listeners = function(event){
-  this._callbacks = this._callbacks || {};
-  return this._callbacks['$' + event] || [];
-};
-
-/**
- * Check if this emitter has `event` handlers.
- *
- * @param {String} event
- * @return {Boolean}
- * @api public
- */
-
-Emitter.prototype.hasListeners = function(event){
-  return !! this.listeners(event).length;
-};
-
-},{}],41:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 (function (Buffer){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -8336,7 +8081,7 @@ function objectToString(o) {
 }
 
 }).call(this,{"isBuffer":require("../../is-buffer/index.js")})
-},{"../../is-buffer/index.js":70}],42:[function(require,module,exports){
+},{"../../is-buffer/index.js":68}],40:[function(require,module,exports){
 'use strict';
 
 var assign        = require('es5-ext/object/assign')
@@ -8401,7 +8146,7 @@ d.gs = function (dscr, get, set/*, options*/) {
 	return !options ? desc : assign(normalizeOpts(options), desc);
 };
 
-},{"es5-ext/object/assign":52,"es5-ext/object/is-callable":55,"es5-ext/object/normalize-options":59,"es5-ext/string/#/contains":62}],43:[function(require,module,exports){
+},{"es5-ext/object/assign":50,"es5-ext/object/is-callable":53,"es5-ext/object/normalize-options":57,"es5-ext/string/#/contains":60}],41:[function(require,module,exports){
 
 /**
  * This is the web browser implementation of `debug()`.
@@ -8571,7 +8316,7 @@ function localstorage(){
   } catch (e) {}
 }
 
-},{"./debug":44}],44:[function(require,module,exports){
+},{"./debug":42}],42:[function(require,module,exports){
 
 /**
  * This is the common logic for both the Node.js and web browser
@@ -8770,10 +8515,10 @@ function coerce(val) {
   return val;
 }
 
-},{"ms":74}],45:[function(require,module,exports){
+},{"ms":73}],43:[function(require,module,exports){
 module.exports = require('./lib/eql');
 
-},{"./lib/eql":46}],46:[function(require,module,exports){
+},{"./lib/eql":44}],44:[function(require,module,exports){
 /*!
  * deep-eql
  * Copyright(c) 2013 Jake Luer <jake@alogicalparadox.com>
@@ -9032,10 +8777,10 @@ function objectEqual(a, b, m) {
   return true;
 }
 
-},{"buffer":8,"type-detect":47}],47:[function(require,module,exports){
+},{"buffer":8,"type-detect":45}],45:[function(require,module,exports){
 module.exports = require('./lib/type');
 
-},{"./lib/type":48}],48:[function(require,module,exports){
+},{"./lib/type":46}],46:[function(require,module,exports){
 /*!
  * type-detect
  * Copyright(c) 2013 jake luer <jake@alogicalparadox.com>
@@ -9179,7 +8924,7 @@ Library.prototype.test = function (obj, type) {
   }
 };
 
-},{}],49:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 var pSlice = Array.prototype.slice;
 var objectKeys = require('./lib/keys.js');
 var isArguments = require('./lib/is_arguments.js');
@@ -9275,7 +9020,7 @@ function objEquiv(a, b, opts) {
   return typeof a === typeof b;
 }
 
-},{"./lib/is_arguments.js":50,"./lib/keys.js":51}],50:[function(require,module,exports){
+},{"./lib/is_arguments.js":48,"./lib/keys.js":49}],48:[function(require,module,exports){
 var supportsArgumentsClass = (function(){
   return Object.prototype.toString.call(arguments)
 })() == '[object Arguments]';
@@ -9297,7 +9042,7 @@ function unsupported(object){
     false;
 };
 
-},{}],51:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 exports = module.exports = typeof Object.keys === 'function'
   ? Object.keys : shim;
 
@@ -9308,14 +9053,14 @@ function shim (obj) {
   return keys;
 }
 
-},{}],52:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./is-implemented')()
 	? Object.assign
 	: require('./shim');
 
-},{"./is-implemented":53,"./shim":54}],53:[function(require,module,exports){
+},{"./is-implemented":51,"./shim":52}],51:[function(require,module,exports){
 'use strict';
 
 module.exports = function () {
@@ -9326,7 +9071,7 @@ module.exports = function () {
 	return (obj.foo + obj.bar + obj.trzy) === 'razdwatrzy';
 };
 
-},{}],54:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 'use strict';
 
 var keys  = require('../keys')
@@ -9350,21 +9095,21 @@ module.exports = function (dest, src/*, …srcn*/) {
 	return dest;
 };
 
-},{"../keys":56,"../valid-value":61}],55:[function(require,module,exports){
+},{"../keys":54,"../valid-value":59}],53:[function(require,module,exports){
 // Deprecated
 
 'use strict';
 
 module.exports = function (obj) { return typeof obj === 'function'; };
 
-},{}],56:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./is-implemented')()
 	? Object.keys
 	: require('./shim');
 
-},{"./is-implemented":57,"./shim":58}],57:[function(require,module,exports){
+},{"./is-implemented":55,"./shim":56}],55:[function(require,module,exports){
 'use strict';
 
 module.exports = function () {
@@ -9374,7 +9119,7 @@ module.exports = function () {
 	} catch (e) { return false; }
 };
 
-},{}],58:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 'use strict';
 
 var keys = Object.keys;
@@ -9383,7 +9128,7 @@ module.exports = function (object) {
 	return keys(object == null ? object : Object(object));
 };
 
-},{}],59:[function(require,module,exports){
+},{}],57:[function(require,module,exports){
 'use strict';
 
 var forEach = Array.prototype.forEach, create = Object.create;
@@ -9402,7 +9147,7 @@ module.exports = function (options/*, …options*/) {
 	return result;
 };
 
-},{}],60:[function(require,module,exports){
+},{}],58:[function(require,module,exports){
 'use strict';
 
 module.exports = function (fn) {
@@ -9410,7 +9155,7 @@ module.exports = function (fn) {
 	return fn;
 };
 
-},{}],61:[function(require,module,exports){
+},{}],59:[function(require,module,exports){
 'use strict';
 
 module.exports = function (value) {
@@ -9418,14 +9163,14 @@ module.exports = function (value) {
 	return value;
 };
 
-},{}],62:[function(require,module,exports){
+},{}],60:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./is-implemented')()
 	? String.prototype.contains
 	: require('./shim');
 
-},{"./is-implemented":63,"./shim":64}],63:[function(require,module,exports){
+},{"./is-implemented":61,"./shim":62}],61:[function(require,module,exports){
 'use strict';
 
 var str = 'razdwatrzy';
@@ -9435,7 +9180,7 @@ module.exports = function () {
 	return ((str.contains('dwa') === true) && (str.contains('foo') === false));
 };
 
-},{}],64:[function(require,module,exports){
+},{}],62:[function(require,module,exports){
 'use strict';
 
 var indexOf = String.prototype.indexOf;
@@ -9444,7 +9189,7 @@ module.exports = function (searchString/*, position*/) {
 	return indexOf.call(this, searchString, arguments[1]) > -1;
 };
 
-},{}],65:[function(require,module,exports){
+},{}],63:[function(require,module,exports){
 'use strict';
 
 var d        = require('d')
@@ -9578,7 +9323,7 @@ module.exports = exports = function (o) {
 };
 exports.methods = methods;
 
-},{"d":42,"es5-ext/object/valid-callable":60}],66:[function(require,module,exports){
+},{"d":40,"es5-ext/object/valid-callable":58}],64:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -9638,12 +9383,8 @@ EventEmitter.prototype.emit = function(type) {
       er = arguments[1];
       if (er instanceof Error) {
         throw er; // Unhandled 'error' event
-      } else {
-        // At least give some kind of context to the user
-        var err = new Error('Uncaught, unspecified "error" event. (' + er + ')');
-        err.context = er;
-        throw err;
       }
+      throw TypeError('Uncaught, unspecified "error" event.');
     }
   }
 
@@ -9882,7 +9623,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],67:[function(require,module,exports){
+},{}],65:[function(require,module,exports){
 var http = require('http');
 
 var https = module.exports;
@@ -9898,7 +9639,7 @@ https.request = function (params, cb) {
     return http.request.call(this, params, cb);
 }
 
-},{"http":116}],68:[function(require,module,exports){
+},{"http":111}],66:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -9984,7 +9725,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],69:[function(require,module,exports){
+},{}],67:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -10009,30 +9750,33 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],70:[function(require,module,exports){
-/*!
- * Determine if an object is a Buffer
+},{}],68:[function(require,module,exports){
+/**
+ * Determine if an object is Buffer
  *
- * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
- * @license  MIT
+ * Author:   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+ * License:  MIT
+ *
+ * `npm install is-buffer`
  */
 
-// The _isBuffer check is for Safari 5-7 support, because it's missing
-// Object.prototype.constructor. Remove this eventually
 module.exports = function (obj) {
-  return obj != null && (isBuffer(obj) || isSlowBuffer(obj) || !!obj._isBuffer)
+  return !!(obj != null &&
+    (obj._isBuffer || // For Safari 5-7 (missing Object.prototype.constructor)
+      (obj.constructor &&
+      typeof obj.constructor.isBuffer === 'function' &&
+      obj.constructor.isBuffer(obj))
+    ))
 }
 
-function isBuffer (obj) {
-  return !!obj.constructor && typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
-}
+},{}],69:[function(require,module,exports){
+var toString = {}.toString;
 
-// For Node v0.10 support. Remove this eventually.
-function isSlowBuffer (obj) {
-  return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
-}
+module.exports = Array.isArray || function (arr) {
+  return toString.call(arr) == '[object Array]';
+};
 
-},{}],71:[function(require,module,exports){
+},{}],70:[function(require,module,exports){
 exports = module.exports = stringify
 exports.getSerialize = serializer
 
@@ -10061,7 +9805,7 @@ function serializer(replacer, cycleReplacer) {
   }
 }
 
-},{}],72:[function(require,module,exports){
+},{}],71:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -10077,25 +9821,21 @@ function serializer(replacer, cycleReplacer) {
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.16.4';
+  var VERSION = '4.13.1';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
 
-  /** Error message constants. */
-  var CORE_ERROR_TEXT = 'Unsupported core-js use. Try https://github.com/es-shims.',
-      FUNC_ERROR_TEXT = 'Expected a function';
+  /** Used as the `TypeError` message for "Functions" methods. */
+  var FUNC_ERROR_TEXT = 'Expected a function';
 
   /** Used to stand-in for `undefined` hash values. */
   var HASH_UNDEFINED = '__lodash_hash_undefined__';
 
-  /** Used as the maximum memoize cache size. */
-  var MAX_MEMOIZE_SIZE = 500;
-
   /** Used as the internal argument placeholder. */
   var PLACEHOLDER = '__lodash_placeholder__';
 
-  /** Used to compose bitmasks for function metadata. */
+  /** Used to compose bitmasks for wrapper metadata. */
   var BIND_FLAG = 1,
       BIND_KEY_FLAG = 2,
       CURRY_BOUND_FLAG = 4,
@@ -10116,7 +9856,7 @@ function serializer(replacer, cycleReplacer) {
       DEFAULT_TRUNC_OMISSION = '...';
 
   /** Used to detect hot functions by number of calls within a span of milliseconds. */
-  var HOT_COUNT = 500,
+  var HOT_COUNT = 150,
       HOT_SPAN = 16;
 
   /** Used to indicate the type of lazy iteratees. */
@@ -10135,19 +9875,6 @@ function serializer(replacer, cycleReplacer) {
       MAX_ARRAY_INDEX = MAX_ARRAY_LENGTH - 1,
       HALF_MAX_ARRAY_LENGTH = MAX_ARRAY_LENGTH >>> 1;
 
-  /** Used to associate wrap methods with their bit flags. */
-  var wrapFlags = [
-    ['ary', ARY_FLAG],
-    ['bind', BIND_FLAG],
-    ['bindKey', BIND_KEY_FLAG],
-    ['curry', CURRY_FLAG],
-    ['curryRight', CURRY_RIGHT_FLAG],
-    ['flip', FLIP_FLAG],
-    ['partial', PARTIAL_FLAG],
-    ['partialRight', PARTIAL_RIGHT_FLAG],
-    ['rearg', REARG_FLAG]
-  ];
-
   /** `Object#toString` result references. */
   var argsTag = '[object Arguments]',
       arrayTag = '[object Array]',
@@ -10160,7 +9887,6 @@ function serializer(replacer, cycleReplacer) {
       numberTag = '[object Number]',
       objectTag = '[object Object]',
       promiseTag = '[object Promise]',
-      proxyTag = '[object Proxy]',
       regexpTag = '[object RegExp]',
       setTag = '[object Set]',
       stringTag = '[object String]',
@@ -10186,8 +9912,8 @@ function serializer(replacer, cycleReplacer) {
       reEmptyStringTrailing = /(__e\(.*?\)|\b__t\)) \+\n'';/g;
 
   /** Used to match HTML entities and HTML characters. */
-  var reEscapedHtml = /&(?:amp|lt|gt|quot|#39);/g,
-      reUnescapedHtml = /[&<>"']/g,
+  var reEscapedHtml = /&(?:amp|lt|gt|quot|#39|#96);/g,
+      reUnescapedHtml = /[&<>"'`]/g,
       reHasEscapedHtml = RegExp(reEscapedHtml.source),
       reHasUnescapedHtml = RegExp(reUnescapedHtml.source);
 
@@ -10199,12 +9925,11 @@ function serializer(replacer, cycleReplacer) {
   /** Used to match property names within property paths. */
   var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,
       reIsPlainProp = /^\w*$/,
-      reLeadingDot = /^\./,
-      rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
+      rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(\.|\[\])(?:\4|$))/g;
 
   /**
    * Used to match `RegExp`
-   * [syntax characters](http://ecma-international.org/ecma-262/7.0/#sec-patterns).
+   * [syntax characters](http://ecma-international.org/ecma-262/6.0/#sec-patterns).
    */
   var reRegExpChar = /[\\^$.*+?()[\]{}|]/g,
       reHasRegExpChar = RegExp(reRegExpChar.source);
@@ -10214,25 +9939,23 @@ function serializer(replacer, cycleReplacer) {
       reTrimStart = /^\s+/,
       reTrimEnd = /\s+$/;
 
-  /** Used to match wrap detail comments. */
-  var reWrapComment = /\{(?:\n\/\* \[wrapped with .+\] \*\/)?\n?/,
-      reWrapDetails = /\{\n\/\* \[wrapped with (.+)\] \*/,
-      reSplitDetails = /,? & /;
-
-  /** Used to match words composed of alphanumeric characters. */
-  var reAsciiWord = /[^\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f]+/g;
+  /** Used to match non-compound words composed of alphanumeric characters. */
+  var reBasicWord = /[a-zA-Z0-9]+/g;
 
   /** Used to match backslashes in property paths. */
   var reEscapeChar = /\\(\\)?/g;
 
   /**
    * Used to match
-   * [ES template delimiters](http://ecma-international.org/ecma-262/7.0/#sec-template-literal-lexical-components).
+   * [ES template delimiters](http://ecma-international.org/ecma-262/6.0/#sec-template-literal-lexical-components).
    */
   var reEsTemplate = /\$\{([^\\}]*(?:\\.[^\\}]*)*)\}/g;
 
   /** Used to match `RegExp` flags from their coerced string values. */
   var reFlags = /\w*$/;
+
+  /** Used to detect hexadecimal string values. */
+  var reHasHexPrefix = /^0x/i;
 
   /** Used to detect bad signed hexadecimal string values. */
   var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
@@ -10249,8 +9972,8 @@ function serializer(replacer, cycleReplacer) {
   /** Used to detect unsigned integer values. */
   var reIsUint = /^(?:0|[1-9]\d*)$/;
 
-  /** Used to match Latin Unicode letters (excluding mathematical operators). */
-  var reLatin = /[\xc0-\xd6\xd8-\xf6\xf8-\xff\u0100-\u017f]/g;
+  /** Used to match latin-1 supplementary letters (excluding mathematical operators). */
+  var reLatin1 = /[\xc0-\xd6\xd8-\xde\xdf-\xf6\xf8-\xff]/g;
 
   /** Used to ensure capturing order of template delimiters. */
   var reNoMatch = /($^)/;
@@ -10311,10 +10034,10 @@ function serializer(replacer, cycleReplacer) {
   var reComboMark = RegExp(rsCombo, 'g');
 
   /** Used to match [string symbols](https://mathiasbynens.be/notes/javascript-unicode). */
-  var reUnicode = RegExp(rsFitz + '(?=' + rsFitz + ')|' + rsSymbol + rsSeq, 'g');
+  var reComplexSymbol = RegExp(rsFitz + '(?=' + rsFitz + ')|' + rsSymbol + rsSeq, 'g');
 
   /** Used to match complex or compound words. */
-  var reUnicodeWord = RegExp([
+  var reComplexWord = RegExp([
     rsUpper + '?' + rsLower + '+' + rsOptLowerContr + '(?=' + [rsBreak, rsUpper, '$'].join('|') + ')',
     rsUpperMisc + '+' + rsOptUpperContr + '(?=' + [rsBreak, rsUpper + rsLowerMisc, '$'].join('|') + ')',
     rsUpper + '?' + rsLowerMisc + '+' + rsOptLowerContr,
@@ -10324,18 +10047,18 @@ function serializer(replacer, cycleReplacer) {
   ].join('|'), 'g');
 
   /** Used to detect strings with [zero-width joiners or code points from the astral planes](http://eev.ee/blog/2015/09/12/dark-corners-of-unicode/). */
-  var reHasUnicode = RegExp('[' + rsZWJ + rsAstralRange  + rsComboMarksRange + rsComboSymbolsRange + rsVarRange + ']');
+  var reHasComplexSymbol = RegExp('[' + rsZWJ + rsAstralRange  + rsComboMarksRange + rsComboSymbolsRange + rsVarRange + ']');
 
   /** Used to detect strings that need a more robust regexp to match words. */
-  var reHasUnicodeWord = /[a-z][A-Z]|[A-Z]{2,}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/;
+  var reHasComplexWord = /[a-z][A-Z]|[A-Z]{2,}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/;
 
   /** Used to assign default `context` object properties. */
   var contextProps = [
     'Array', 'Buffer', 'DataView', 'Date', 'Error', 'Float32Array', 'Float64Array',
     'Function', 'Int8Array', 'Int16Array', 'Int32Array', 'Map', 'Math', 'Object',
-    'Promise', 'RegExp', 'Set', 'String', 'Symbol', 'TypeError', 'Uint8Array',
-    'Uint8ClampedArray', 'Uint16Array', 'Uint32Array', 'WeakMap',
-    '_', 'clearTimeout', 'isFinite', 'parseInt', 'setTimeout'
+    'Promise', 'Reflect', 'RegExp', 'Set', 'String', 'Symbol', 'TypeError',
+    'Uint8Array', 'Uint8ClampedArray', 'Uint16Array', 'Uint32Array', 'WeakMap',
+    '_', 'isFinite', 'parseInt', 'setTimeout'
   ];
 
   /** Used to make template sourceURLs easier to identify. */
@@ -10373,17 +10096,16 @@ function serializer(replacer, cycleReplacer) {
   cloneableTags[errorTag] = cloneableTags[funcTag] =
   cloneableTags[weakMapTag] = false;
 
-  /** Used to map Latin Unicode letters to basic Latin letters. */
+  /** Used to map latin-1 supplementary letters to basic latin letters. */
   var deburredLetters = {
-    // Latin-1 Supplement block.
     '\xc0': 'A',  '\xc1': 'A', '\xc2': 'A', '\xc3': 'A', '\xc4': 'A', '\xc5': 'A',
     '\xe0': 'a',  '\xe1': 'a', '\xe2': 'a', '\xe3': 'a', '\xe4': 'a', '\xe5': 'a',
     '\xc7': 'C',  '\xe7': 'c',
     '\xd0': 'D',  '\xf0': 'd',
     '\xc8': 'E',  '\xc9': 'E', '\xca': 'E', '\xcb': 'E',
     '\xe8': 'e',  '\xe9': 'e', '\xea': 'e', '\xeb': 'e',
-    '\xcc': 'I',  '\xcd': 'I', '\xce': 'I', '\xcf': 'I',
-    '\xec': 'i',  '\xed': 'i', '\xee': 'i', '\xef': 'i',
+    '\xcC': 'I',  '\xcd': 'I', '\xce': 'I', '\xcf': 'I',
+    '\xeC': 'i',  '\xed': 'i', '\xee': 'i', '\xef': 'i',
     '\xd1': 'N',  '\xf1': 'n',
     '\xd2': 'O',  '\xd3': 'O', '\xd4': 'O', '\xd5': 'O', '\xd6': 'O', '\xd8': 'O',
     '\xf2': 'o',  '\xf3': 'o', '\xf4': 'o', '\xf5': 'o', '\xf6': 'o', '\xf8': 'o',
@@ -10392,43 +10114,7 @@ function serializer(replacer, cycleReplacer) {
     '\xdd': 'Y',  '\xfd': 'y', '\xff': 'y',
     '\xc6': 'Ae', '\xe6': 'ae',
     '\xde': 'Th', '\xfe': 'th',
-    '\xdf': 'ss',
-    // Latin Extended-A block.
-    '\u0100': 'A',  '\u0102': 'A', '\u0104': 'A',
-    '\u0101': 'a',  '\u0103': 'a', '\u0105': 'a',
-    '\u0106': 'C',  '\u0108': 'C', '\u010a': 'C', '\u010c': 'C',
-    '\u0107': 'c',  '\u0109': 'c', '\u010b': 'c', '\u010d': 'c',
-    '\u010e': 'D',  '\u0110': 'D', '\u010f': 'd', '\u0111': 'd',
-    '\u0112': 'E',  '\u0114': 'E', '\u0116': 'E', '\u0118': 'E', '\u011a': 'E',
-    '\u0113': 'e',  '\u0115': 'e', '\u0117': 'e', '\u0119': 'e', '\u011b': 'e',
-    '\u011c': 'G',  '\u011e': 'G', '\u0120': 'G', '\u0122': 'G',
-    '\u011d': 'g',  '\u011f': 'g', '\u0121': 'g', '\u0123': 'g',
-    '\u0124': 'H',  '\u0126': 'H', '\u0125': 'h', '\u0127': 'h',
-    '\u0128': 'I',  '\u012a': 'I', '\u012c': 'I', '\u012e': 'I', '\u0130': 'I',
-    '\u0129': 'i',  '\u012b': 'i', '\u012d': 'i', '\u012f': 'i', '\u0131': 'i',
-    '\u0134': 'J',  '\u0135': 'j',
-    '\u0136': 'K',  '\u0137': 'k', '\u0138': 'k',
-    '\u0139': 'L',  '\u013b': 'L', '\u013d': 'L', '\u013f': 'L', '\u0141': 'L',
-    '\u013a': 'l',  '\u013c': 'l', '\u013e': 'l', '\u0140': 'l', '\u0142': 'l',
-    '\u0143': 'N',  '\u0145': 'N', '\u0147': 'N', '\u014a': 'N',
-    '\u0144': 'n',  '\u0146': 'n', '\u0148': 'n', '\u014b': 'n',
-    '\u014c': 'O',  '\u014e': 'O', '\u0150': 'O',
-    '\u014d': 'o',  '\u014f': 'o', '\u0151': 'o',
-    '\u0154': 'R',  '\u0156': 'R', '\u0158': 'R',
-    '\u0155': 'r',  '\u0157': 'r', '\u0159': 'r',
-    '\u015a': 'S',  '\u015c': 'S', '\u015e': 'S', '\u0160': 'S',
-    '\u015b': 's',  '\u015d': 's', '\u015f': 's', '\u0161': 's',
-    '\u0162': 'T',  '\u0164': 'T', '\u0166': 'T',
-    '\u0163': 't',  '\u0165': 't', '\u0167': 't',
-    '\u0168': 'U',  '\u016a': 'U', '\u016c': 'U', '\u016e': 'U', '\u0170': 'U', '\u0172': 'U',
-    '\u0169': 'u',  '\u016b': 'u', '\u016d': 'u', '\u016f': 'u', '\u0171': 'u', '\u0173': 'u',
-    '\u0174': 'W',  '\u0175': 'w',
-    '\u0176': 'Y',  '\u0177': 'y', '\u0178': 'Y',
-    '\u0179': 'Z',  '\u017b': 'Z', '\u017d': 'Z',
-    '\u017a': 'z',  '\u017c': 'z', '\u017e': 'z',
-    '\u0132': 'IJ', '\u0133': 'ij',
-    '\u0152': 'Oe', '\u0153': 'oe',
-    '\u0149': "'n", '\u017f': 's'
+    '\xdf': 'ss'
   };
 
   /** Used to map characters to HTML entities. */
@@ -10437,7 +10123,8 @@ function serializer(replacer, cycleReplacer) {
     '<': '&lt;',
     '>': '&gt;',
     '"': '&quot;',
-    "'": '&#39;'
+    "'": '&#39;',
+    '`': '&#96;'
   };
 
   /** Used to map HTML entities to characters. */
@@ -10446,7 +10133,8 @@ function serializer(replacer, cycleReplacer) {
     '&lt;': '<',
     '&gt;': '>',
     '&quot;': '"',
-    '&#39;': "'"
+    '&#39;': "'",
+    '&#96;': '`'
   };
 
   /** Used to escape characters for inclusion in compiled string literals. */
@@ -10463,41 +10151,26 @@ function serializer(replacer, cycleReplacer) {
   var freeParseFloat = parseFloat,
       freeParseInt = parseInt;
 
-  /** Detect free variable `global` from Node.js. */
-  var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
-
-  /** Detect free variable `self`. */
-  var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
-
-  /** Used as a reference to the global object. */
-  var root = freeGlobal || freeSelf || Function('return this')();
-
   /** Detect free variable `exports`. */
-  var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
+  var freeExports = typeof exports == 'object' && exports;
 
   /** Detect free variable `module`. */
-  var freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module;
+  var freeModule = freeExports && typeof module == 'object' && module;
 
   /** Detect the popular CommonJS extension `module.exports`. */
   var moduleExports = freeModule && freeModule.exports === freeExports;
 
-  /** Detect free variable `process` from Node.js. */
-  var freeProcess = moduleExports && freeGlobal.process;
+  /** Detect free variable `global` from Node.js. */
+  var freeGlobal = checkGlobal(typeof global == 'object' && global);
 
-  /** Used to access faster Node.js helpers. */
-  var nodeUtil = (function() {
-    try {
-      return freeProcess && freeProcess.binding('util');
-    } catch (e) {}
-  }());
+  /** Detect free variable `self`. */
+  var freeSelf = checkGlobal(typeof self == 'object' && self);
 
-  /* Node.js helper references. */
-  var nodeIsArrayBuffer = nodeUtil && nodeUtil.isArrayBuffer,
-      nodeIsDate = nodeUtil && nodeUtil.isDate,
-      nodeIsMap = nodeUtil && nodeUtil.isMap,
-      nodeIsRegExp = nodeUtil && nodeUtil.isRegExp,
-      nodeIsSet = nodeUtil && nodeUtil.isSet,
-      nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
+  /** Detect `this` as the global object. */
+  var thisGlobal = checkGlobal(typeof this == 'object' && this);
+
+  /** Used as a reference to the global object. */
+  var root = freeGlobal || freeSelf || thisGlobal || Function('return this')();
 
   /*--------------------------------------------------------------------------*/
 
@@ -10510,7 +10183,7 @@ function serializer(replacer, cycleReplacer) {
    * @returns {Object} Returns `map`.
    */
   function addMapEntry(map, pair) {
-    // Don't return `map.set` because it's not chainable in IE 11.
+    // Don't return `Map#set` because it doesn't return the map instance in IE 11.
     map.set(pair[0], pair[1]);
     return map;
   }
@@ -10524,7 +10197,6 @@ function serializer(replacer, cycleReplacer) {
    * @returns {Object} Returns `set`.
    */
   function addSetEntry(set, value) {
-    // Don't return `set.add` because it's not chainable in IE 11.
     set.add(value);
     return set;
   }
@@ -10540,7 +10212,8 @@ function serializer(replacer, cycleReplacer) {
    * @returns {*} Returns the result of `func`.
    */
   function apply(func, thisArg, args) {
-    switch (args.length) {
+    var length = args.length;
+    switch (length) {
       case 0: return func.call(thisArg);
       case 1: return func.call(thisArg, args[0]);
       case 2: return func.call(thisArg, args[0], args[1]);
@@ -10662,7 +10335,7 @@ function serializer(replacer, cycleReplacer) {
    * specifying an index to search from.
    *
    * @private
-   * @param {Array} [array] The array to inspect.
+   * @param {Array} [array] The array to search.
    * @param {*} target The value to search for.
    * @returns {boolean} Returns `true` if `target` is found, else `false`.
    */
@@ -10675,7 +10348,7 @@ function serializer(replacer, cycleReplacer) {
    * This function is like `arrayIncludes` except that it accepts a comparator.
    *
    * @private
-   * @param {Array} [array] The array to inspect.
+   * @param {Array} [array] The array to search.
    * @param {*} target The value to search for.
    * @param {Function} comparator The comparator invoked per element.
    * @returns {boolean} Returns `true` if `target` is found, else `false`.
@@ -10802,43 +10475,12 @@ function serializer(replacer, cycleReplacer) {
   }
 
   /**
-   * Gets the size of an ASCII `string`.
-   *
-   * @private
-   * @param {string} string The string inspect.
-   * @returns {number} Returns the string size.
-   */
-  var asciiSize = baseProperty('length');
-
-  /**
-   * Converts an ASCII `string` to an array.
-   *
-   * @private
-   * @param {string} string The string to convert.
-   * @returns {Array} Returns the converted array.
-   */
-  function asciiToArray(string) {
-    return string.split('');
-  }
-
-  /**
-   * Splits an ASCII `string` into an array of its words.
-   *
-   * @private
-   * @param {string} The string to inspect.
-   * @returns {Array} Returns the words of `string`.
-   */
-  function asciiWords(string) {
-    return string.match(reAsciiWord) || [];
-  }
-
-  /**
    * The base implementation of methods like `_.findKey` and `_.findLastKey`,
    * without support for iteratee shorthands, which iterates over `collection`
    * using `eachFunc`.
    *
    * @private
-   * @param {Array|Object} collection The collection to inspect.
+   * @param {Array|Object} collection The collection to search.
    * @param {Function} predicate The function invoked per iteration.
    * @param {Function} eachFunc The function to iterate over `collection`.
    * @returns {*} Returns the found element or its key, else `undefined`.
@@ -10859,7 +10501,7 @@ function serializer(replacer, cycleReplacer) {
    * support for iteratee shorthands.
    *
    * @private
-   * @param {Array} array The array to inspect.
+   * @param {Array} array The array to search.
    * @param {Function} predicate The function invoked per iteration.
    * @param {number} fromIndex The index to search from.
    * @param {boolean} [fromRight] Specify iterating from right to left.
@@ -10881,22 +10523,31 @@ function serializer(replacer, cycleReplacer) {
    * The base implementation of `_.indexOf` without `fromIndex` bounds checks.
    *
    * @private
-   * @param {Array} array The array to inspect.
+   * @param {Array} array The array to search.
    * @param {*} value The value to search for.
    * @param {number} fromIndex The index to search from.
    * @returns {number} Returns the index of the matched value, else `-1`.
    */
   function baseIndexOf(array, value, fromIndex) {
-    return value === value
-      ? strictIndexOf(array, value, fromIndex)
-      : baseFindIndex(array, baseIsNaN, fromIndex);
+    if (value !== value) {
+      return indexOfNaN(array, fromIndex);
+    }
+    var index = fromIndex - 1,
+        length = array.length;
+
+    while (++index < length) {
+      if (array[index] === value) {
+        return index;
+      }
+    }
+    return -1;
   }
 
   /**
    * This function is like `baseIndexOf` except that it accepts a comparator.
    *
    * @private
-   * @param {Array} array The array to inspect.
+   * @param {Array} array The array to search.
    * @param {*} value The value to search for.
    * @param {number} fromIndex The index to search from.
    * @param {Function} comparator The comparator invoked per element.
@@ -10915,17 +10566,6 @@ function serializer(replacer, cycleReplacer) {
   }
 
   /**
-   * The base implementation of `_.isNaN` without support for number objects.
-   *
-   * @private
-   * @param {*} value The value to check.
-   * @returns {boolean} Returns `true` if `value` is `NaN`, else `false`.
-   */
-  function baseIsNaN(value) {
-    return value !== value;
-  }
-
-  /**
    * The base implementation of `_.mean` and `_.meanBy` without support for
    * iteratee shorthands.
    *
@@ -10937,32 +10577,6 @@ function serializer(replacer, cycleReplacer) {
   function baseMean(array, iteratee) {
     var length = array ? array.length : 0;
     return length ? (baseSum(array, iteratee) / length) : NAN;
-  }
-
-  /**
-   * The base implementation of `_.property` without support for deep paths.
-   *
-   * @private
-   * @param {string} key The key of the property to get.
-   * @returns {Function} Returns the new accessor function.
-   */
-  function baseProperty(key) {
-    return function(object) {
-      return object == null ? undefined : object[key];
-    };
-  }
-
-  /**
-   * The base implementation of `_.propertyOf` without support for deep paths.
-   *
-   * @private
-   * @param {Object} object The object to query.
-   * @returns {Function} Returns the new accessor function.
-   */
-  function basePropertyOf(object) {
-    return function(key) {
-      return object == null ? undefined : object[key];
-    };
   }
 
   /**
@@ -11065,7 +10679,7 @@ function serializer(replacer, cycleReplacer) {
   }
 
   /**
-   * The base implementation of `_.unary` without support for storing metadata.
+   * The base implementation of `_.unary` without support for storing wrapper metadata.
    *
    * @private
    * @param {Function} func The function to cap arguments for.
@@ -11094,7 +10708,7 @@ function serializer(replacer, cycleReplacer) {
   }
 
   /**
-   * Checks if a `cache` value for `key` exists.
+   * Checks if a cache value for `key` exists.
    *
    * @private
    * @param {Object} cache The cache to query.
@@ -11139,6 +10753,17 @@ function serializer(replacer, cycleReplacer) {
   }
 
   /**
+   * Checks if `value` is a global object.
+   *
+   * @private
+   * @param {*} value The value to check.
+   * @returns {null|Object} Returns `value` if it's a global object, else `null`.
+   */
+  function checkGlobal(value) {
+    return (value && value.Object === Object) ? value : null;
+  }
+
+  /**
    * Gets the number of `placeholder` occurrences in `array`.
    *
    * @private
@@ -11152,21 +10777,22 @@ function serializer(replacer, cycleReplacer) {
 
     while (length--) {
       if (array[length] === placeholder) {
-        ++result;
+        result++;
       }
     }
     return result;
   }
 
   /**
-   * Used by `_.deburr` to convert Latin-1 Supplement and Latin Extended-A
-   * letters to basic Latin letters.
+   * Used by `_.deburr` to convert latin-1 supplementary letters to basic latin letters.
    *
    * @private
    * @param {string} letter The matched letter to deburr.
    * @returns {string} Returns the deburred letter.
    */
-  var deburrLetter = basePropertyOf(deburredLetters);
+  function deburrLetter(letter) {
+    return deburredLetters[letter];
+  }
 
   /**
    * Used by `_.escape` to convert characters to HTML entities.
@@ -11175,7 +10801,9 @@ function serializer(replacer, cycleReplacer) {
    * @param {string} chr The matched character to escape.
    * @returns {string} Returns the escaped character.
    */
-  var escapeHtmlChar = basePropertyOf(htmlEscapes);
+  function escapeHtmlChar(chr) {
+    return htmlEscapes[chr];
+  }
 
   /**
    * Used by `_.template` to escape characters for inclusion in compiled string literals.
@@ -11201,25 +10829,44 @@ function serializer(replacer, cycleReplacer) {
   }
 
   /**
-   * Checks if `string` contains Unicode symbols.
+   * Gets the index at which the first occurrence of `NaN` is found in `array`.
    *
    * @private
-   * @param {string} string The string to inspect.
-   * @returns {boolean} Returns `true` if a symbol is found, else `false`.
+   * @param {Array} array The array to search.
+   * @param {number} fromIndex The index to search from.
+   * @param {boolean} [fromRight] Specify iterating from right to left.
+   * @returns {number} Returns the index of the matched `NaN`, else `-1`.
    */
-  function hasUnicode(string) {
-    return reHasUnicode.test(string);
+  function indexOfNaN(array, fromIndex, fromRight) {
+    var length = array.length,
+        index = fromIndex + (fromRight ? 1 : -1);
+
+    while ((fromRight ? index-- : ++index < length)) {
+      var other = array[index];
+      if (other !== other) {
+        return index;
+      }
+    }
+    return -1;
   }
 
   /**
-   * Checks if `string` contains a word composed of Unicode symbols.
+   * Checks if `value` is a host object in IE < 9.
    *
    * @private
-   * @param {string} string The string to inspect.
-   * @returns {boolean} Returns `true` if a word is found, else `false`.
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a host object, else `false`.
    */
-  function hasUnicodeWord(string) {
-    return reHasUnicodeWord.test(string);
+  function isHostObject(value) {
+    // Many host objects are `Object` objects that can coerce to strings
+    // despite having improperly defined `toString` methods.
+    var result = false;
+    if (value != null && typeof value.toString != 'function') {
+      try {
+        result = !!(value + '');
+      } catch (e) {}
+    }
+    return result;
   }
 
   /**
@@ -11254,20 +10901,6 @@ function serializer(replacer, cycleReplacer) {
       result[++index] = [key, value];
     });
     return result;
-  }
-
-  /**
-   * Creates a unary function that invokes `func` with its argument transformed.
-   *
-   * @private
-   * @param {Function} func The function to wrap.
-   * @param {Function} transform The argument transform.
-   * @returns {Function} Returns the new function.
-   */
-  function overArg(func, transform) {
-    return function(arg) {
-      return func(transform(arg));
-    };
   }
 
   /**
@@ -11330,48 +10963,6 @@ function serializer(replacer, cycleReplacer) {
   }
 
   /**
-   * A specialized version of `_.indexOf` which performs strict equality
-   * comparisons of values, i.e. `===`.
-   *
-   * @private
-   * @param {Array} array The array to inspect.
-   * @param {*} value The value to search for.
-   * @param {number} fromIndex The index to search from.
-   * @returns {number} Returns the index of the matched value, else `-1`.
-   */
-  function strictIndexOf(array, value, fromIndex) {
-    var index = fromIndex - 1,
-        length = array.length;
-
-    while (++index < length) {
-      if (array[index] === value) {
-        return index;
-      }
-    }
-    return -1;
-  }
-
-  /**
-   * A specialized version of `_.lastIndexOf` which performs strict equality
-   * comparisons of values, i.e. `===`.
-   *
-   * @private
-   * @param {Array} array The array to inspect.
-   * @param {*} value The value to search for.
-   * @param {number} fromIndex The index to search from.
-   * @returns {number} Returns the index of the matched value, else `-1`.
-   */
-  function strictLastIndexOf(array, value, fromIndex) {
-    var index = fromIndex + 1;
-    while (index--) {
-      if (array[index] === value) {
-        return index;
-      }
-    }
-    return index;
-  }
-
-  /**
    * Gets the number of symbols in `string`.
    *
    * @private
@@ -11379,9 +10970,14 @@ function serializer(replacer, cycleReplacer) {
    * @returns {number} Returns the string size.
    */
   function stringSize(string) {
-    return hasUnicode(string)
-      ? unicodeSize(string)
-      : asciiSize(string);
+    if (!(string && reHasComplexSymbol.test(string))) {
+      return string.length;
+    }
+    var result = reComplexSymbol.lastIndex = 0;
+    while (reComplexSymbol.test(string)) {
+      result++;
+    }
+    return result;
   }
 
   /**
@@ -11392,9 +10988,7 @@ function serializer(replacer, cycleReplacer) {
    * @returns {Array} Returns the converted array.
    */
   function stringToArray(string) {
-    return hasUnicode(string)
-      ? unicodeToArray(string)
-      : asciiToArray(string);
+    return string.match(reComplexSymbol);
   }
 
   /**
@@ -11404,43 +10998,8 @@ function serializer(replacer, cycleReplacer) {
    * @param {string} chr The matched character to unescape.
    * @returns {string} Returns the unescaped character.
    */
-  var unescapeHtmlChar = basePropertyOf(htmlUnescapes);
-
-  /**
-   * Gets the size of a Unicode `string`.
-   *
-   * @private
-   * @param {string} string The string inspect.
-   * @returns {number} Returns the string size.
-   */
-  function unicodeSize(string) {
-    var result = reUnicode.lastIndex = 0;
-    while (reUnicode.test(string)) {
-      ++result;
-    }
-    return result;
-  }
-
-  /**
-   * Converts a Unicode `string` to an array.
-   *
-   * @private
-   * @param {string} string The string to convert.
-   * @returns {Array} Returns the converted array.
-   */
-  function unicodeToArray(string) {
-    return string.match(reUnicode) || [];
-  }
-
-  /**
-   * Splits a Unicode `string` into an array of its words.
-   *
-   * @private
-   * @param {string} The string to inspect.
-   * @returns {Array} Returns the words of `string`.
-   */
-  function unicodeWords(string) {
-    return string.match(reUnicodeWord) || [];
+  function unescapeHtmlChar(chr) {
+    return htmlUnescapes[chr];
   }
 
   /*--------------------------------------------------------------------------*/
@@ -11471,27 +11030,30 @@ function serializer(replacer, cycleReplacer) {
    * lodash.isFunction(lodash.bar);
    * // => true
    *
+   * // Use `context` to stub `Date#getTime` use in `_.now`.
+   * var stubbed = _.runInContext({
+   *   'Date': function() {
+   *     return { 'getTime': stubGetTime };
+   *   }
+   * });
+   *
    * // Create a suped-up `defer` in Node.js.
    * var defer = _.runInContext({ 'setTimeout': setImmediate }).defer;
    */
-  var runInContext = (function runInContext(context) {
-    context = context ? _.defaults(root.Object(), context, _.pick(root, contextProps)) : root;
+  function runInContext(context) {
+    context = context ? _.defaults({}, context, _.pick(root, contextProps)) : root;
 
     /** Built-in constructor references. */
-    var Array = context.Array,
-        Date = context.Date,
+    var Date = context.Date,
         Error = context.Error,
-        Function = context.Function,
         Math = context.Math,
-        Object = context.Object,
         RegExp = context.RegExp,
-        String = context.String,
         TypeError = context.TypeError;
 
     /** Used for built-in method references. */
-    var arrayProto = Array.prototype,
-        funcProto = Function.prototype,
-        objectProto = Object.prototype;
+    var arrayProto = context.Array.prototype,
+        objectProto = context.Object.prototype,
+        stringProto = context.String.prototype;
 
     /** Used to detect overreaching core-js shims. */
     var coreJsData = context['__core-js_shared__'];
@@ -11503,7 +11065,7 @@ function serializer(replacer, cycleReplacer) {
     }());
 
     /** Used to resolve the decompiled source of functions. */
-    var funcToString = funcProto.toString;
+    var funcToString = context.Function.prototype.toString;
 
     /** Used to check objects for own properties. */
     var hasOwnProperty = objectProto.hasOwnProperty;
@@ -11516,7 +11078,7 @@ function serializer(replacer, cycleReplacer) {
 
     /**
      * Used to resolve the
-     * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+     * [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
      * of values.
      */
     var objectToString = objectProto.toString;
@@ -11532,43 +11094,33 @@ function serializer(replacer, cycleReplacer) {
 
     /** Built-in value references. */
     var Buffer = moduleExports ? context.Buffer : undefined,
+        Reflect = context.Reflect,
         Symbol = context.Symbol,
         Uint8Array = context.Uint8Array,
-        allocUnsafe = Buffer ? Buffer.allocUnsafe : undefined,
-        getPrototype = overArg(Object.getPrototypeOf, Object),
-        iteratorSymbol = Symbol ? Symbol.iterator : undefined,
+        enumerate = Reflect ? Reflect.enumerate : undefined,
+        getOwnPropertySymbols = Object.getOwnPropertySymbols,
+        iteratorSymbol = typeof (iteratorSymbol = Symbol && Symbol.iterator) == 'symbol' ? iteratorSymbol : undefined,
         objectCreate = Object.create,
         propertyIsEnumerable = objectProto.propertyIsEnumerable,
-        splice = arrayProto.splice,
-        spreadableSymbol = Symbol ? Symbol.isConcatSpreadable : undefined;
+        splice = arrayProto.splice;
 
-    var defineProperty = (function() {
-      try {
-        var func = getNative(Object, 'defineProperty');
-        func({}, '', {});
-        return func;
-      } catch (e) {}
-    }());
-
-    /** Mocked built-ins. */
-    var ctxClearTimeout = context.clearTimeout !== root.clearTimeout && context.clearTimeout,
-        ctxNow = Date && Date.now !== root.Date.now && Date.now,
-        ctxSetTimeout = context.setTimeout !== root.setTimeout && context.setTimeout;
+    /** Built-in method references that are mockable. */
+    var setTimeout = function(func, wait) { return context.setTimeout.call(root, func, wait); };
 
     /* Built-in method references for those with the same name as other `lodash` methods. */
     var nativeCeil = Math.ceil,
         nativeFloor = Math.floor,
-        nativeGetSymbols = Object.getOwnPropertySymbols,
-        nativeIsBuffer = Buffer ? Buffer.isBuffer : undefined,
+        nativeGetPrototype = Object.getPrototypeOf,
         nativeIsFinite = context.isFinite,
         nativeJoin = arrayProto.join,
-        nativeKeys = overArg(Object.keys, Object),
+        nativeKeys = Object.keys,
         nativeMax = Math.max,
         nativeMin = Math.min,
-        nativeNow = Date.now,
         nativeParseInt = context.parseInt,
         nativeRandom = Math.random,
-        nativeReverse = arrayProto.reverse;
+        nativeReplace = stringProto.replace,
+        nativeReverse = arrayProto.reverse,
+        nativeSplit = stringProto.split;
 
     /* Built-in method references that are verified to be native. */
     var DataView = getNative(context, 'DataView'),
@@ -11580,6 +11132,9 @@ function serializer(replacer, cycleReplacer) {
 
     /** Used to store function metadata. */
     var metaMap = WeakMap && new WeakMap;
+
+    /** Detect if properties shadowing those on `Object.prototype` are non-enumerable. */
+    var nonEnumShadows = !propertyIsEnumerable.call({ 'valueOf': 1 }, 'valueOf');
 
     /** Used to lookup unminified function names. */
     var realNames = {};
@@ -11664,16 +11219,16 @@ function serializer(replacer, cycleReplacer) {
      *
      * The wrapper methods that are **not** chainable by default are:
      * `add`, `attempt`, `camelCase`, `capitalize`, `ceil`, `clamp`, `clone`,
-     * `cloneDeep`, `cloneDeepWith`, `cloneWith`, `conformsTo`, `deburr`,
-     * `defaultTo`, `divide`, `each`, `eachRight`, `endsWith`, `eq`, `escape`,
-     * `escapeRegExp`, `every`, `find`, `findIndex`, `findKey`, `findLast`,
-     * `findLastIndex`, `findLastKey`, `first`, `floor`, `forEach`, `forEachRight`,
-     * `forIn`, `forInRight`, `forOwn`, `forOwnRight`, `get`, `gt`, `gte`, `has`,
-     * `hasIn`, `head`, `identity`, `includes`, `indexOf`, `inRange`, `invoke`,
-     * `isArguments`, `isArray`, `isArrayBuffer`, `isArrayLike`, `isArrayLikeObject`,
-     * `isBoolean`, `isBuffer`, `isDate`, `isElement`, `isEmpty`, `isEqual`,
-     * `isEqualWith`, `isError`, `isFinite`, `isFunction`, `isInteger`, `isLength`,
-     * `isMap`, `isMatch`, `isMatchWith`, `isNaN`, `isNative`, `isNil`, `isNull`,
+     * `cloneDeep`, `cloneDeepWith`, `cloneWith`, `deburr`, `divide`, `each`,
+     * `eachRight`, `endsWith`, `eq`, `escape`, `escapeRegExp`, `every`, `find`,
+     * `findIndex`, `findKey`, `findLast`, `findLastIndex`, `findLastKey`, `first`,
+     * `floor`, `forEach`, `forEachRight`, `forIn`, `forInRight`, `forOwn`,
+     * `forOwnRight`, `get`, `gt`, `gte`, `has`, `hasIn`, `head`, `identity`,
+     * `includes`, `indexOf`, `inRange`, `invoke`, `isArguments`, `isArray`,
+     * `isArrayBuffer`, `isArrayLike`, `isArrayLikeObject`, `isBoolean`,
+     * `isBuffer`, `isDate`, `isElement`, `isEmpty`, `isEqual`, `isEqualWith`,
+     * `isError`, `isFinite`, `isFunction`, `isInteger`, `isLength`, `isMap`,
+     * `isMatch`, `isMatchWith`, `isNaN`, `isNative`, `isNil`, `isNull`,
      * `isNumber`, `isObject`, `isObjectLike`, `isPlainObject`, `isRegExp`,
      * `isSafeInteger`, `isSet`, `isString`, `isUndefined`, `isTypedArray`,
      * `isWeakMap`, `isWeakSet`, `join`, `kebabCase`, `last`, `lastIndexOf`,
@@ -11726,30 +11281,6 @@ function serializer(replacer, cycleReplacer) {
       }
       return new LodashWrapper(value);
     }
-
-    /**
-     * The base implementation of `_.create` without support for assigning
-     * properties to the created object.
-     *
-     * @private
-     * @param {Object} proto The object to inherit from.
-     * @returns {Object} Returns the new object.
-     */
-    var baseCreate = (function() {
-      function object() {}
-      return function(proto) {
-        if (!isObject(proto)) {
-          return {};
-        }
-        if (objectCreate) {
-          return objectCreate(proto);
-        }
-        object.prototype = proto;
-        var result = new object;
-        object.prototype = undefined;
-        return result;
-      };
-    }());
 
     /**
      * The function whose prototype chain sequence wrappers inherit from.
@@ -11992,7 +11523,6 @@ function serializer(replacer, cycleReplacer) {
      */
     function hashClear() {
       this.__data__ = nativeCreate ? nativeCreate(null) : {};
-      this.size = 0;
     }
 
     /**
@@ -12006,9 +11536,7 @@ function serializer(replacer, cycleReplacer) {
      * @returns {boolean} Returns `true` if the entry was removed, else `false`.
      */
     function hashDelete(key) {
-      var result = this.has(key) && delete this.__data__[key];
-      this.size -= result ? 1 : 0;
-      return result;
+      return this.has(key) && delete this.__data__[key];
     }
 
     /**
@@ -12055,7 +11583,6 @@ function serializer(replacer, cycleReplacer) {
      */
     function hashSet(key, value) {
       var data = this.__data__;
-      this.size += this.has(key) ? 0 : 1;
       data[key] = (nativeCreate && value === undefined) ? HASH_UNDEFINED : value;
       return this;
     }
@@ -12096,7 +11623,6 @@ function serializer(replacer, cycleReplacer) {
      */
     function listCacheClear() {
       this.__data__ = [];
-      this.size = 0;
     }
 
     /**
@@ -12121,7 +11647,6 @@ function serializer(replacer, cycleReplacer) {
       } else {
         splice.call(data, index, 1);
       }
-      --this.size;
       return true;
     }
 
@@ -12169,7 +11694,6 @@ function serializer(replacer, cycleReplacer) {
           index = assocIndexOf(data, key);
 
       if (index < 0) {
-        ++this.size;
         data.push([key, value]);
       } else {
         data[index][1] = value;
@@ -12212,7 +11736,6 @@ function serializer(replacer, cycleReplacer) {
      * @memberOf MapCache
      */
     function mapCacheClear() {
-      this.size = 0;
       this.__data__ = {
         'hash': new Hash,
         'map': new (Map || ListCache),
@@ -12230,9 +11753,7 @@ function serializer(replacer, cycleReplacer) {
      * @returns {boolean} Returns `true` if the entry was removed, else `false`.
      */
     function mapCacheDelete(key) {
-      var result = getMapData(this, key)['delete'](key);
-      this.size -= result ? 1 : 0;
-      return result;
+      return getMapData(this, key)['delete'](key);
     }
 
     /**
@@ -12272,11 +11793,7 @@ function serializer(replacer, cycleReplacer) {
      * @returns {Object} Returns the map cache instance.
      */
     function mapCacheSet(key, value) {
-      var data = getMapData(this, key),
-          size = data.size;
-
-      data.set(key, value);
-      this.size += data.size == size ? 0 : 1;
+      getMapData(this, key).set(key, value);
       return this;
     }
 
@@ -12349,8 +11866,7 @@ function serializer(replacer, cycleReplacer) {
      * @param {Array} [entries] The key-value pairs to cache.
      */
     function Stack(entries) {
-      var data = this.__data__ = new ListCache(entries);
-      this.size = data.size;
+      this.__data__ = new ListCache(entries);
     }
 
     /**
@@ -12362,7 +11878,6 @@ function serializer(replacer, cycleReplacer) {
      */
     function stackClear() {
       this.__data__ = new ListCache;
-      this.size = 0;
     }
 
     /**
@@ -12375,11 +11890,7 @@ function serializer(replacer, cycleReplacer) {
      * @returns {boolean} Returns `true` if the entry was removed, else `false`.
      */
     function stackDelete(key) {
-      var data = this.__data__,
-          result = data['delete'](key);
-
-      this.size = data.size;
-      return result;
+      return this.__data__['delete'](key);
     }
 
     /**
@@ -12419,18 +11930,11 @@ function serializer(replacer, cycleReplacer) {
      * @returns {Object} Returns the stack cache instance.
      */
     function stackSet(key, value) {
-      var data = this.__data__;
-      if (data instanceof ListCache) {
-        var pairs = data.__data__;
-        if (!Map || (pairs.length < LARGE_ARRAY_SIZE - 1)) {
-          pairs.push([key, value]);
-          this.size = ++data.size;
-          return this;
-        }
-        data = this.__data__ = new MapCache(pairs);
+      var cache = this.__data__;
+      if (cache instanceof ListCache && cache.__data__.length == LARGE_ARRAY_SIZE) {
+        cache = this.__data__ = new MapCache(cache.__data__);
       }
-      data.set(key, value);
-      this.size = data.size;
+      cache.set(key, value);
       return this;
     }
 
@@ -12442,76 +11946,6 @@ function serializer(replacer, cycleReplacer) {
     Stack.prototype.set = stackSet;
 
     /*------------------------------------------------------------------------*/
-
-    /**
-     * Creates an array of the enumerable property names of the array-like `value`.
-     *
-     * @private
-     * @param {*} value The value to query.
-     * @param {boolean} inherited Specify returning inherited property names.
-     * @returns {Array} Returns the array of property names.
-     */
-    function arrayLikeKeys(value, inherited) {
-      var isArr = isArray(value),
-          isArg = !isArr && isArguments(value),
-          isBuff = !isArr && !isArg && isBuffer(value),
-          isType = !isArr && !isArg && !isBuff && isTypedArray(value),
-          skipIndexes = isArr || isArg || isBuff || isType,
-          result = skipIndexes ? baseTimes(value.length, String) : [],
-          length = result.length;
-
-      for (var key in value) {
-        if ((inherited || hasOwnProperty.call(value, key)) &&
-            !(skipIndexes && (
-               // Safari 9 has enumerable `arguments.length` in strict mode.
-               key == 'length' ||
-               // Node.js 0.10 has enumerable non-index properties on buffers.
-               (isBuff && (key == 'offset' || key == 'parent')) ||
-               // PhantomJS 2 has enumerable non-index properties on typed arrays.
-               (isType && (key == 'buffer' || key == 'byteLength' || key == 'byteOffset')) ||
-               // Skip index properties.
-               isIndex(key, length)
-            ))) {
-          result.push(key);
-        }
-      }
-      return result;
-    }
-
-    /**
-     * A specialized version of `_.sample` for arrays.
-     *
-     * @private
-     * @param {Array} array The array to sample.
-     * @returns {*} Returns the random element.
-     */
-    function arraySample(array) {
-      var length = array.length;
-      return length ? array[baseRandom(0, length - 1)] : undefined;
-    }
-
-    /**
-     * A specialized version of `_.sampleSize` for arrays.
-     *
-     * @private
-     * @param {Array} array The array to sample.
-     * @param {number} n The number of elements to sample.
-     * @returns {Array} Returns the random elements.
-     */
-    function arraySampleSize(array, n) {
-      return shuffleSelf(copyArray(array), baseClamp(n, 0, array.length));
-    }
-
-    /**
-     * A specialized version of `_.shuffle` for arrays.
-     *
-     * @private
-     * @param {Array} array The array to shuffle.
-     * @returns {Array} Returns the new shuffled array.
-     */
-    function arrayShuffle(array) {
-      return shuffleSelf(copyArray(array));
-    }
 
     /**
      * Used by `_.defaults` to customize its `_.assignIn` use.
@@ -12542,14 +11976,14 @@ function serializer(replacer, cycleReplacer) {
      */
     function assignMergeValue(object, key, value) {
       if ((value !== undefined && !eq(object[key], value)) ||
-          (value === undefined && !(key in object))) {
-        baseAssignValue(object, key, value);
+          (typeof key == 'number' && value === undefined && !(key in object))) {
+        object[key] = value;
       }
     }
 
     /**
      * Assigns `value` to `key` of `object` if the existing value is not equivalent
-     * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+     * using [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
      * for equality comparisons.
      *
      * @private
@@ -12561,7 +11995,7 @@ function serializer(replacer, cycleReplacer) {
       var objValue = object[key];
       if (!(hasOwnProperty.call(object, key) && eq(objValue, value)) ||
           (value === undefined && !(key in object))) {
-        baseAssignValue(object, key, value);
+        object[key] = value;
       }
     }
 
@@ -12569,7 +12003,7 @@ function serializer(replacer, cycleReplacer) {
      * Gets the index at which the `key` is found in `array` of key-value pairs.
      *
      * @private
-     * @param {Array} array The array to inspect.
+     * @param {Array} array The array to search.
      * @param {*} key The key to search for.
      * @returns {number} Returns the index of the matched value, else `-1`.
      */
@@ -12615,28 +12049,6 @@ function serializer(replacer, cycleReplacer) {
     }
 
     /**
-     * The base implementation of `assignValue` and `assignMergeValue` without
-     * value checks.
-     *
-     * @private
-     * @param {Object} object The object to modify.
-     * @param {string} key The key of the property to assign.
-     * @param {*} value The value to assign.
-     */
-    function baseAssignValue(object, key, value) {
-      if (key == '__proto__' && defineProperty) {
-        defineProperty(object, key, {
-          'configurable': true,
-          'enumerable': true,
-          'value': value,
-          'writable': true
-        });
-      } else {
-        object[key] = value;
-      }
-    }
-
-    /**
      * The base implementation of `_.at` without support for individual paths.
      *
      * @private
@@ -12657,7 +12069,7 @@ function serializer(replacer, cycleReplacer) {
     }
 
     /**
-     * The base implementation of `_.clamp` which doesn't coerce arguments.
+     * The base implementation of `_.clamp` which doesn't coerce arguments to numbers.
      *
      * @private
      * @param {number} number The number to clamp.
@@ -12716,6 +12128,9 @@ function serializer(replacer, cycleReplacer) {
           return cloneBuffer(value, isDeep);
         }
         if (tag == objectTag || tag == argsTag || (isFunc && !object)) {
+          if (isHostObject(value)) {
+            return object ? value : {};
+          }
           result = initCloneObject(isFunc ? {} : value);
           if (!isDeep) {
             return copySymbols(value, baseAssign(result, value));
@@ -12735,13 +12150,15 @@ function serializer(replacer, cycleReplacer) {
       }
       stack.set(value, result);
 
-      var props = isArr ? undefined : (isFull ? getAllKeys : keys)(value);
+      if (!isArr) {
+        var props = isFull ? getAllKeys(value) : keys(value);
+      }
+      // Recursively populate clone (susceptible to call stack limits).
       arrayEach(props || value, function(subValue, key) {
         if (props) {
           key = subValue;
           subValue = value[key];
         }
-        // Recursively populate clone (susceptible to call stack limits).
         assignValue(result, key, baseClone(subValue, isDeep, isFull, customizer, key, value, stack));
       });
       return result;
@@ -12755,47 +12172,49 @@ function serializer(replacer, cycleReplacer) {
      * @returns {Function} Returns the new spec function.
      */
     function baseConforms(source) {
-      var props = keys(source);
+      var props = keys(source),
+          length = props.length;
+
       return function(object) {
-        return baseConformsTo(object, source, props);
+        if (object == null) {
+          return !length;
+        }
+        var index = length;
+        while (index--) {
+          var key = props[index],
+              predicate = source[key],
+              value = object[key];
+
+          if ((value === undefined &&
+              !(key in Object(object))) || !predicate(value)) {
+            return false;
+          }
+        }
+        return true;
       };
     }
 
     /**
-     * The base implementation of `_.conformsTo` which accepts `props` to check.
+     * The base implementation of `_.create` without support for assigning
+     * properties to the created object.
      *
      * @private
-     * @param {Object} object The object to inspect.
-     * @param {Object} source The object of property predicates to conform to.
-     * @returns {boolean} Returns `true` if `object` conforms, else `false`.
+     * @param {Object} prototype The object to inherit from.
+     * @returns {Object} Returns the new object.
      */
-    function baseConformsTo(object, source, props) {
-      var length = props.length;
-      if (object == null) {
-        return !length;
-      }
-      object = Object(object);
-      while (length--) {
-        var key = props[length],
-            predicate = source[key],
-            value = object[key];
-
-        if ((value === undefined && !(key in object)) || !predicate(value)) {
-          return false;
-        }
-      }
-      return true;
+    function baseCreate(proto) {
+      return isObject(proto) ? objectCreate(proto) : {};
     }
 
     /**
-     * The base implementation of `_.delay` and `_.defer` which accepts `args`
-     * to provide to `func`.
+     * The base implementation of `_.delay` and `_.defer` which accepts an array
+     * of `func` arguments.
      *
      * @private
      * @param {Function} func The function to delay.
      * @param {number} wait The number of milliseconds to delay invocation.
-     * @param {Array} args The arguments to provide to `func`.
-     * @returns {number|Object} Returns the timer id or timeout object.
+     * @param {Object} args The arguments to provide to `func`.
+     * @returns {number} Returns the timer id.
      */
     function baseDelay(func, wait, args) {
       if (typeof func != 'function') {
@@ -13108,18 +12527,7 @@ function serializer(replacer, cycleReplacer) {
     }
 
     /**
-     * The base implementation of `getTag`.
-     *
-     * @private
-     * @param {*} value The value to query.
-     * @returns {string} Returns the `toStringTag`.
-     */
-    function baseGetTag(value) {
-      return objectToString.call(value);
-    }
-
-    /**
-     * The base implementation of `_.gt` which doesn't coerce arguments.
+     * The base implementation of `_.gt` which doesn't coerce arguments to numbers.
      *
      * @private
      * @param {*} value The value to compare.
@@ -13140,7 +12548,12 @@ function serializer(replacer, cycleReplacer) {
      * @returns {boolean} Returns `true` if `key` exists, else `false`.
      */
     function baseHas(object, key) {
-      return object != null && hasOwnProperty.call(object, key);
+      // Avoid a bug in IE 10-11 where objects with a [[Prototype]] of `null`,
+      // that are composed entirely of index properties, return `false` for
+      // `hasOwnProperty` checks of them.
+      return object != null &&
+        (hasOwnProperty.call(object, key) ||
+          (typeof object == 'object' && key in object && getPrototype(object) === null));
     }
 
     /**
@@ -13156,7 +12569,7 @@ function serializer(replacer, cycleReplacer) {
     }
 
     /**
-     * The base implementation of `_.inRange` which doesn't coerce arguments.
+     * The base implementation of `_.inRange` which doesn't coerce arguments to numbers.
      *
      * @private
      * @param {number} number The number to check.
@@ -13270,39 +12683,6 @@ function serializer(replacer, cycleReplacer) {
     }
 
     /**
-     * The base implementation of `_.isArguments`.
-     *
-     * @private
-     * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is an `arguments` object,
-     */
-    function baseIsArguments(value) {
-      return isObjectLike(value) && objectToString.call(value) == argsTag;
-    }
-
-    /**
-     * The base implementation of `_.isArrayBuffer` without Node.js optimizations.
-     *
-     * @private
-     * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is an array buffer, else `false`.
-     */
-    function baseIsArrayBuffer(value) {
-      return isObjectLike(value) && objectToString.call(value) == arrayBufferTag;
-    }
-
-    /**
-     * The base implementation of `_.isDate` without Node.js optimizations.
-     *
-     * @private
-     * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is a date object, else `false`.
-     */
-    function baseIsDate(value) {
-      return isObjectLike(value) && objectToString.call(value) == dateTag;
-    }
-
-    /**
      * The base implementation of `_.isEqual` which supports partial comparisons
      * and tracks traversed objects.
      *
@@ -13356,17 +12736,10 @@ function serializer(replacer, cycleReplacer) {
         othTag = getTag(other);
         othTag = othTag == argsTag ? objectTag : othTag;
       }
-      var objIsObj = objTag == objectTag,
-          othIsObj = othTag == objectTag,
+      var objIsObj = objTag == objectTag && !isHostObject(object),
+          othIsObj = othTag == objectTag && !isHostObject(other),
           isSameTag = objTag == othTag;
 
-      if (isSameTag && isBuffer(object)) {
-        if (!isBuffer(other)) {
-          return false;
-        }
-        objIsArr = true;
-        objIsObj = false;
-      }
       if (isSameTag && !objIsObj) {
         stack || (stack = new Stack);
         return (objIsArr || isTypedArray(object))
@@ -13390,17 +12763,6 @@ function serializer(replacer, cycleReplacer) {
       }
       stack || (stack = new Stack);
       return equalObjects(object, other, equalFunc, customizer, bitmask, stack);
-    }
-
-    /**
-     * The base implementation of `_.isMap` without Node.js optimizations.
-     *
-     * @private
-     * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is a map, else `false`.
-     */
-    function baseIsMap(value) {
-      return isObjectLike(value) && getTag(value) == mapTag;
     }
 
     /**
@@ -13469,42 +12831,8 @@ function serializer(replacer, cycleReplacer) {
       if (!isObject(value) || isMasked(value)) {
         return false;
       }
-      var pattern = isFunction(value) ? reIsNative : reIsHostCtor;
+      var pattern = (isFunction(value) || isHostObject(value)) ? reIsNative : reIsHostCtor;
       return pattern.test(toSource(value));
-    }
-
-    /**
-     * The base implementation of `_.isRegExp` without Node.js optimizations.
-     *
-     * @private
-     * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is a regexp, else `false`.
-     */
-    function baseIsRegExp(value) {
-      return isObject(value) && objectToString.call(value) == regexpTag;
-    }
-
-    /**
-     * The base implementation of `_.isSet` without Node.js optimizations.
-     *
-     * @private
-     * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is a set, else `false`.
-     */
-    function baseIsSet(value) {
-      return isObjectLike(value) && getTag(value) == setTag;
-    }
-
-    /**
-     * The base implementation of `_.isTypedArray` without Node.js optimizations.
-     *
-     * @private
-     * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
-     */
-    function baseIsTypedArray(value) {
-      return isObjectLike(value) &&
-        isLength(value.length) && !!typedArrayTags[objectToString.call(value)];
     }
 
     /**
@@ -13532,49 +12860,44 @@ function serializer(replacer, cycleReplacer) {
     }
 
     /**
-     * The base implementation of `_.keys` which doesn't treat sparse arrays as dense.
+     * The base implementation of `_.keys` which doesn't skip the constructor
+     * property of prototypes or treat sparse arrays as dense.
      *
      * @private
      * @param {Object} object The object to query.
      * @returns {Array} Returns the array of property names.
      */
     function baseKeys(object) {
-      if (!isPrototype(object)) {
-        return nativeKeys(object);
-      }
-      var result = [];
-      for (var key in Object(object)) {
-        if (hasOwnProperty.call(object, key) && key != 'constructor') {
-          result.push(key);
-        }
-      }
-      return result;
+      return nativeKeys(Object(object));
     }
 
     /**
-     * The base implementation of `_.keysIn` which doesn't treat sparse arrays as dense.
+     * The base implementation of `_.keysIn` which doesn't skip the constructor
+     * property of prototypes or treat sparse arrays as dense.
      *
      * @private
      * @param {Object} object The object to query.
      * @returns {Array} Returns the array of property names.
      */
     function baseKeysIn(object) {
-      if (!isObject(object)) {
-        return nativeKeysIn(object);
-      }
-      var isProto = isPrototype(object),
-          result = [];
+      object = object == null ? object : Object(object);
 
+      var result = [];
       for (var key in object) {
-        if (!(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
-          result.push(key);
-        }
+        result.push(key);
       }
       return result;
     }
 
+    // Fallback for IE < 9 with es6-shim.
+    if (enumerate && !propertyIsEnumerable.call({ 'valueOf': 1 }, 'valueOf')) {
+      baseKeysIn = function(object) {
+        return iteratorToArray(enumerate(object));
+      };
+    }
+
     /**
-     * The base implementation of `_.lt` which doesn't coerce arguments.
+     * The base implementation of `_.lt` which doesn't coerce arguments to numbers.
      *
      * @private
      * @param {*} value The value to compare.
@@ -13656,7 +12979,14 @@ function serializer(replacer, cycleReplacer) {
       if (object === source) {
         return;
       }
-      baseFor(source, function(srcValue, key) {
+      if (!(isArray(source) || isTypedArray(source))) {
+        var props = keysIn(source);
+      }
+      arrayEach(props || source, function(srcValue, key) {
+        if (props) {
+          key = srcValue;
+          srcValue = source[key];
+        }
         if (isObject(srcValue)) {
           stack || (stack = new Stack);
           baseMergeDeep(object, source, key, srcIndex, baseMerge, customizer, stack);
@@ -13671,7 +13001,7 @@ function serializer(replacer, cycleReplacer) {
           }
           assignMergeValue(object, key, newValue);
         }
-      }, keysIn);
+      });
     }
 
     /**
@@ -13705,54 +13035,47 @@ function serializer(replacer, cycleReplacer) {
       var isCommon = newValue === undefined;
 
       if (isCommon) {
-        var isArr = isArray(srcValue),
-            isBuff = !isArr && isBuffer(srcValue),
-            isTyped = !isArr && !isBuff && isTypedArray(srcValue);
-
         newValue = srcValue;
-        if (isArr || isBuff || isTyped) {
+        if (isArray(srcValue) || isTypedArray(srcValue)) {
           if (isArray(objValue)) {
             newValue = objValue;
           }
           else if (isArrayLikeObject(objValue)) {
             newValue = copyArray(objValue);
           }
-          else if (isBuff) {
-            isCommon = false;
-            newValue = cloneBuffer(srcValue, true);
-          }
-          else if (isTyped) {
-            isCommon = false;
-            newValue = cloneTypedArray(srcValue, true);
-          }
           else {
-            newValue = [];
+            isCommon = false;
+            newValue = baseClone(srcValue, true);
           }
         }
         else if (isPlainObject(srcValue) || isArguments(srcValue)) {
-          newValue = objValue;
           if (isArguments(objValue)) {
             newValue = toPlainObject(objValue);
           }
           else if (!isObject(objValue) || (srcIndex && isFunction(objValue))) {
-            newValue = initCloneObject(srcValue);
+            isCommon = false;
+            newValue = baseClone(srcValue, true);
+          }
+          else {
+            newValue = objValue;
           }
         }
         else {
           isCommon = false;
         }
       }
+      stack.set(srcValue, newValue);
+
       if (isCommon) {
         // Recursively merge objects and arrays (susceptible to call stack limits).
-        stack.set(srcValue, newValue);
         mergeFunc(newValue, srcValue, srcIndex, customizer, stack);
-        stack['delete'](srcValue);
       }
+      stack['delete'](srcValue);
       assignMergeValue(object, key, newValue);
     }
 
     /**
-     * The base implementation of `_.nth` which doesn't coerce arguments.
+     * The base implementation of `_.nth` which doesn't coerce `n` to an integer.
      *
      * @private
      * @param {Array} array The array to query.
@@ -13804,9 +13127,12 @@ function serializer(replacer, cycleReplacer) {
      */
     function basePick(object, props) {
       object = Object(object);
-      return basePickBy(object, props, function(value, key) {
-        return key in object;
-      });
+      return arrayReduce(props, function(result, key) {
+        if (key in object) {
+          result[key] = object[key];
+        }
+        return result;
+      }, {});
     }
 
     /**
@@ -13814,12 +13140,12 @@ function serializer(replacer, cycleReplacer) {
      *
      * @private
      * @param {Object} object The source object.
-     * @param {string[]} props The property identifiers to pick from.
      * @param {Function} predicate The function invoked per property.
      * @returns {Object} Returns the new object.
      */
-    function basePickBy(object, props, predicate) {
+    function basePickBy(object, predicate) {
       var index = -1,
+          props = getAllKeysIn(object),
           length = props.length,
           result = {};
 
@@ -13828,10 +13154,23 @@ function serializer(replacer, cycleReplacer) {
             value = object[key];
 
         if (predicate(value, key)) {
-          baseAssignValue(result, key, value);
+          result[key] = value;
         }
       }
       return result;
+    }
+
+    /**
+     * The base implementation of `_.property` without support for deep paths.
+     *
+     * @private
+     * @param {string} key The key of the property to get.
+     * @returns {Function} Returns the new accessor function.
+     */
+    function baseProperty(key) {
+      return function(object) {
+        return object == null ? undefined : object[key];
+      };
     }
 
     /**
@@ -13936,7 +13275,7 @@ function serializer(replacer, cycleReplacer) {
 
     /**
      * The base implementation of `_.range` and `_.rangeRight` which doesn't
-     * coerce arguments.
+     * coerce arguments to numbers.
      *
      * @private
      * @param {number} start The start of the range.
@@ -13986,55 +13325,16 @@ function serializer(replacer, cycleReplacer) {
     }
 
     /**
-     * The base implementation of `_.rest` which doesn't validate or coerce arguments.
-     *
-     * @private
-     * @param {Function} func The function to apply a rest parameter to.
-     * @param {number} [start=func.length-1] The start position of the rest parameter.
-     * @returns {Function} Returns the new function.
-     */
-    function baseRest(func, start) {
-      return setToString(overRest(func, start, identity), func + '');
-    }
-
-    /**
-     * The base implementation of `_.sample`.
-     *
-     * @private
-     * @param {Array|Object} collection The collection to sample.
-     * @returns {*} Returns the random element.
-     */
-    function baseSample(collection) {
-      return arraySample(values(collection));
-    }
-
-    /**
-     * The base implementation of `_.sampleSize` without param guards.
-     *
-     * @private
-     * @param {Array|Object} collection The collection to sample.
-     * @param {number} n The number of elements to sample.
-     * @returns {Array} Returns the random elements.
-     */
-    function baseSampleSize(collection, n) {
-      var array = values(collection);
-      return shuffleSelf(array, baseClamp(n, 0, array.length));
-    }
-
-    /**
      * The base implementation of `_.set`.
      *
      * @private
-     * @param {Object} object The object to modify.
+     * @param {Object} object The object to query.
      * @param {Array|string} path The path of the property to set.
      * @param {*} value The value to set.
      * @param {Function} [customizer] The function to customize path creation.
      * @returns {Object} Returns `object`.
      */
     function baseSet(object, path, value, customizer) {
-      if (!isObject(object)) {
-        return object;
-      }
       path = isKey(path, object) ? [path] : castPath(path);
 
       var index = -1,
@@ -14043,26 +13343,27 @@ function serializer(replacer, cycleReplacer) {
           nested = object;
 
       while (nested != null && ++index < length) {
-        var key = toKey(path[index]),
-            newValue = value;
-
-        if (index != lastIndex) {
-          var objValue = nested[key];
-          newValue = customizer ? customizer(objValue, key, nested) : undefined;
-          if (newValue === undefined) {
-            newValue = isObject(objValue)
-              ? objValue
-              : (isIndex(path[index + 1]) ? [] : {});
+        var key = toKey(path[index]);
+        if (isObject(nested)) {
+          var newValue = value;
+          if (index != lastIndex) {
+            var objValue = nested[key];
+            newValue = customizer ? customizer(objValue, key, nested) : undefined;
+            if (newValue === undefined) {
+              newValue = objValue == null
+                ? (isIndex(path[index + 1]) ? [] : {})
+                : objValue;
+            }
           }
+          assignValue(nested, key, newValue);
         }
-        assignValue(nested, key, newValue);
         nested = nested[key];
       }
       return object;
     }
 
     /**
-     * The base implementation of `setData` without support for hot loop shorting.
+     * The base implementation of `setData` without support for hot loop detection.
      *
      * @private
      * @param {Function} func The function to associate metadata with.
@@ -14073,34 +13374,6 @@ function serializer(replacer, cycleReplacer) {
       metaMap.set(func, data);
       return func;
     };
-
-    /**
-     * The base implementation of `setToString` without support for hot loop shorting.
-     *
-     * @private
-     * @param {Function} func The function to modify.
-     * @param {Function} string The `toString` result.
-     * @returns {Function} Returns `func`.
-     */
-    var baseSetToString = !defineProperty ? identity : function(func, string) {
-      return defineProperty(func, 'toString', {
-        'configurable': true,
-        'enumerable': false,
-        'value': constant(string),
-        'writable': true
-      });
-    };
-
-    /**
-     * The base implementation of `_.shuffle`.
-     *
-     * @private
-     * @param {Array|Object} collection The collection to shuffle.
-     * @returns {Array} Returns the new shuffled array.
-     */
-    function baseShuffle(collection) {
-      return shuffleSelf(values(collection));
-    }
 
     /**
      * The base implementation of `_.slice` without an iteratee call guard.
@@ -14295,10 +13568,6 @@ function serializer(replacer, cycleReplacer) {
       if (typeof value == 'string') {
         return value;
       }
-      if (isArray(value)) {
-        // Recursively convert values (susceptible to call stack limits).
-        return arrayMap(value, baseToString) + '';
-      }
       if (isSymbol(value)) {
         return symbolToString ? symbolToString.call(value) : '';
       }
@@ -14380,14 +13649,14 @@ function serializer(replacer, cycleReplacer) {
       object = parent(object, path);
 
       var key = toKey(last(path));
-      return !(object != null && hasOwnProperty.call(object, key)) || delete object[key];
+      return !(object != null && baseHas(object, key)) || delete object[key];
     }
 
     /**
      * The base implementation of `_.update`.
      *
      * @private
-     * @param {Object} object The object to modify.
+     * @param {Object} object The object to query.
      * @param {Array|string} path The path of the property to update.
      * @param {Function} updater The function to produce the updated value.
      * @param {Function} [customizer] The function to customize path creation.
@@ -14521,17 +13790,6 @@ function serializer(replacer, cycleReplacer) {
     }
 
     /**
-     * A `baseRest` alias which can be replaced with `identity` by module
-     * replacement plugins.
-     *
-     * @private
-     * @type {Function}
-     * @param {Function} func The function to apply a rest parameter to.
-     * @returns {Function} Returns the new function.
-     */
-    var castRest = baseRest;
-
-    /**
      * Casts `array` to a slice if it's needed.
      *
      * @private
@@ -14547,16 +13805,6 @@ function serializer(replacer, cycleReplacer) {
     }
 
     /**
-     * A simple wrapper around the global [`clearTimeout`](https://mdn.io/clearTimeout).
-     *
-     * @private
-     * @param {number|Object} id The timer id or timeout object of the timer to clear.
-     */
-    var clearTimeout = ctxClearTimeout || function(id) {
-      return root.clearTimeout(id);
-    };
-
-    /**
      * Creates a clone of  `buffer`.
      *
      * @private
@@ -14568,9 +13816,7 @@ function serializer(replacer, cycleReplacer) {
       if (isDeep) {
         return buffer.slice();
       }
-      var length = buffer.length,
-          result = allocUnsafe ? allocUnsafe(length) : new buffer.constructor(length);
-
+      var result = new buffer.constructor(buffer.length);
       buffer.copy(result);
       return result;
     }
@@ -14847,7 +14093,6 @@ function serializer(replacer, cycleReplacer) {
      * @returns {Object} Returns `object`.
      */
     function copyObject(source, props, object, customizer) {
-      var isNew = !object;
       object || (object = {});
 
       var index = -1,
@@ -14858,16 +14103,9 @@ function serializer(replacer, cycleReplacer) {
 
         var newValue = customizer
           ? customizer(object[key], source[key], key, object, source)
-          : undefined;
+          : source[key];
 
-        if (newValue === undefined) {
-          newValue = source[key];
-        }
-        if (isNew) {
-          baseAssignValue(object, key, newValue);
-        } else {
-          assignValue(object, key, newValue);
-        }
+        assignValue(object, key, newValue);
       }
       return object;
     }
@@ -14897,7 +14135,7 @@ function serializer(replacer, cycleReplacer) {
         var func = isArray(collection) ? arrayAggregator : baseAggregator,
             accumulator = initializer ? initializer() : {};
 
-        return func(collection, setter, getIteratee(iteratee, 2), accumulator);
+        return func(collection, setter, getIteratee(iteratee), accumulator);
       };
     }
 
@@ -14909,7 +14147,7 @@ function serializer(replacer, cycleReplacer) {
      * @returns {Function} Returns the new assigner function.
      */
     function createAssigner(assigner) {
-      return baseRest(function(object, sources) {
+      return rest(function(object, sources) {
         var index = -1,
             length = sources.length,
             customizer = length > 1 ? sources[length - 1] : undefined,
@@ -14993,13 +14231,14 @@ function serializer(replacer, cycleReplacer) {
      *
      * @private
      * @param {Function} func The function to wrap.
-     * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
+     * @param {number} bitmask The bitmask of wrapper flags. See `createWrapper`
+     *  for more details.
      * @param {*} [thisArg] The `this` binding of `func`.
      * @returns {Function} Returns the new wrapped function.
      */
-    function createBind(func, bitmask, thisArg) {
+    function createBaseWrapper(func, bitmask, thisArg) {
       var isBind = bitmask & BIND_FLAG,
-          Ctor = createCtor(func);
+          Ctor = createCtorWrapper(func);
 
       function wrapper() {
         var fn = (this && this !== root && this instanceof wrapper) ? Ctor : func;
@@ -15019,7 +14258,7 @@ function serializer(replacer, cycleReplacer) {
       return function(string) {
         string = toString(string);
 
-        var strSymbols = hasUnicode(string)
+        var strSymbols = reHasComplexSymbol.test(string)
           ? stringToArray(string)
           : undefined;
 
@@ -15056,10 +14295,10 @@ function serializer(replacer, cycleReplacer) {
      * @param {Function} Ctor The constructor to wrap.
      * @returns {Function} Returns the new wrapped function.
      */
-    function createCtor(Ctor) {
+    function createCtorWrapper(Ctor) {
       return function() {
         // Use a `switch` statement to work with class constructors. See
-        // http://ecma-international.org/ecma-262/7.0/#sec-ecmascript-function-objects-call-thisargument-argumentslist
+        // http://ecma-international.org/ecma-262/6.0/#sec-ecmascript-function-objects-call-thisargument-argumentslist
         // for more details.
         var args = arguments;
         switch (args.length) {
@@ -15086,12 +14325,13 @@ function serializer(replacer, cycleReplacer) {
      *
      * @private
      * @param {Function} func The function to wrap.
-     * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
+     * @param {number} bitmask The bitmask of wrapper flags. See `createWrapper`
+     *  for more details.
      * @param {number} arity The arity of `func`.
      * @returns {Function} Returns the new wrapped function.
      */
-    function createCurry(func, bitmask, arity) {
-      var Ctor = createCtor(func);
+    function createCurryWrapper(func, bitmask, arity) {
+      var Ctor = createCtorWrapper(func);
 
       function wrapper() {
         var length = arguments.length,
@@ -15108,8 +14348,8 @@ function serializer(replacer, cycleReplacer) {
 
         length -= holders.length;
         if (length < arity) {
-          return createRecurry(
-            func, bitmask, createHybrid, wrapper.placeholder, undefined,
+          return createRecurryWrapper(
+            func, bitmask, createHybridWrapper, wrapper.placeholder, undefined,
             args, holders, undefined, undefined, arity - length);
         }
         var fn = (this && this !== root && this instanceof wrapper) ? Ctor : func;
@@ -15128,13 +14368,18 @@ function serializer(replacer, cycleReplacer) {
     function createFind(findIndexFunc) {
       return function(collection, predicate, fromIndex) {
         var iterable = Object(collection);
+        predicate = getIteratee(predicate, 3);
         if (!isArrayLike(collection)) {
-          var iteratee = getIteratee(predicate, 3);
-          collection = keys(collection);
-          predicate = function(key) { return iteratee(iterable[key], key, iterable); };
+          var props = keys(collection);
         }
-        var index = findIndexFunc(collection, predicate, fromIndex);
-        return index > -1 ? iterable[iteratee ? collection[index] : index] : undefined;
+        var index = findIndexFunc(props || collection, function(value, key) {
+          if (props) {
+            key = value;
+            value = iterable[key];
+          }
+          return predicate(value, key, iterable);
+        }, fromIndex);
+        return index > -1 ? collection[props ? props[index] : index] : undefined;
       };
     }
 
@@ -15146,7 +14391,9 @@ function serializer(replacer, cycleReplacer) {
      * @returns {Function} Returns the new flow function.
      */
     function createFlow(fromRight) {
-      return flatRest(function(funcs) {
+      return rest(function(funcs) {
+        funcs = baseFlatten(funcs, 1);
+
         var length = funcs.length,
             index = length,
             prereq = LodashWrapper.prototype.thru;
@@ -15206,7 +14453,8 @@ function serializer(replacer, cycleReplacer) {
      *
      * @private
      * @param {Function|string} func The function or method name to wrap.
-     * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
+     * @param {number} bitmask The bitmask of wrapper flags. See `createWrapper`
+     *  for more details.
      * @param {*} [thisArg] The `this` binding of `func`.
      * @param {Array} [partials] The arguments to prepend to those provided to
      *  the new function.
@@ -15219,13 +14467,13 @@ function serializer(replacer, cycleReplacer) {
      * @param {number} [arity] The arity of `func`.
      * @returns {Function} Returns the new wrapped function.
      */
-    function createHybrid(func, bitmask, thisArg, partials, holders, partialsRight, holdersRight, argPos, ary, arity) {
+    function createHybridWrapper(func, bitmask, thisArg, partials, holders, partialsRight, holdersRight, argPos, ary, arity) {
       var isAry = bitmask & ARY_FLAG,
           isBind = bitmask & BIND_FLAG,
           isBindKey = bitmask & BIND_KEY_FLAG,
           isCurried = bitmask & (CURRY_FLAG | CURRY_RIGHT_FLAG),
           isFlip = bitmask & FLIP_FLAG,
-          Ctor = isBindKey ? undefined : createCtor(func);
+          Ctor = isBindKey ? undefined : createCtorWrapper(func);
 
       function wrapper() {
         var length = arguments.length,
@@ -15248,8 +14496,8 @@ function serializer(replacer, cycleReplacer) {
         length -= holdersCount;
         if (isCurried && length < arity) {
           var newHolders = replaceHolders(args, placeholder);
-          return createRecurry(
-            func, bitmask, createHybrid, wrapper.placeholder, thisArg,
+          return createRecurryWrapper(
+            func, bitmask, createHybridWrapper, wrapper.placeholder, thisArg,
             args, newHolders, argPos, ary, arity - length
           );
         }
@@ -15266,7 +14514,7 @@ function serializer(replacer, cycleReplacer) {
           args.length = ary;
         }
         if (this && this !== root && this instanceof wrapper) {
-          fn = Ctor || createCtor(fn);
+          fn = Ctor || createCtorWrapper(fn);
         }
         return fn.apply(thisBinding, args);
       }
@@ -15292,14 +14540,13 @@ function serializer(replacer, cycleReplacer) {
      *
      * @private
      * @param {Function} operator The function to perform the operation.
-     * @param {number} [defaultValue] The value used for `undefined` arguments.
      * @returns {Function} Returns the new mathematical operation function.
      */
-    function createMathOperation(operator, defaultValue) {
+    function createMathOperation(operator) {
       return function(value, other) {
         var result;
         if (value === undefined && other === undefined) {
-          return defaultValue;
+          return 0;
         }
         if (value !== undefined) {
           result = value;
@@ -15329,9 +14576,12 @@ function serializer(replacer, cycleReplacer) {
      * @returns {Function} Returns the new over function.
      */
     function createOver(arrayFunc) {
-      return flatRest(function(iteratees) {
-        iteratees = arrayMap(iteratees, baseUnary(getIteratee()));
-        return baseRest(function(args) {
+      return rest(function(iteratees) {
+        iteratees = (iteratees.length == 1 && isArray(iteratees[0]))
+          ? arrayMap(iteratees[0], baseUnary(getIteratee()))
+          : arrayMap(baseFlatten(iteratees, 1, isFlattenableIteratee), baseUnary(getIteratee()));
+
+        return rest(function(args) {
           var thisArg = this;
           return arrayFunc(iteratees, function(iteratee) {
             return apply(iteratee, thisArg, args);
@@ -15357,7 +14607,7 @@ function serializer(replacer, cycleReplacer) {
         return charsLength ? baseRepeat(chars, length) : chars;
       }
       var result = baseRepeat(chars, nativeCeil(length / stringSize(chars)));
-      return hasUnicode(chars)
+      return reHasComplexSymbol.test(chars)
         ? castSlice(stringToArray(result), 0, length).join('')
         : result.slice(0, length);
     }
@@ -15368,15 +14618,16 @@ function serializer(replacer, cycleReplacer) {
      *
      * @private
      * @param {Function} func The function to wrap.
-     * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
+     * @param {number} bitmask The bitmask of wrapper flags. See `createWrapper`
+     *  for more details.
      * @param {*} thisArg The `this` binding of `func`.
      * @param {Array} partials The arguments to prepend to those provided to
      *  the new function.
      * @returns {Function} Returns the new wrapped function.
      */
-    function createPartial(func, bitmask, thisArg, partials) {
+    function createPartialWrapper(func, bitmask, thisArg, partials) {
       var isBind = bitmask & BIND_FLAG,
-          Ctor = createCtor(func);
+          Ctor = createCtorWrapper(func);
 
       function wrapper() {
         var argsIndex = -1,
@@ -15410,14 +14661,15 @@ function serializer(replacer, cycleReplacer) {
           end = step = undefined;
         }
         // Ensure the sign of `-0` is preserved.
-        start = toFinite(start);
+        start = toNumber(start);
+        start = start === start ? start : 0;
         if (end === undefined) {
           end = start;
           start = 0;
         } else {
-          end = toFinite(end);
+          end = toNumber(end) || 0;
         }
-        step = step === undefined ? (start < end ? 1 : -1) : toFinite(step);
+        step = step === undefined ? (start < end ? 1 : -1) : (toNumber(step) || 0);
         return baseRange(start, end, step, fromRight);
       };
     }
@@ -15444,7 +14696,8 @@ function serializer(replacer, cycleReplacer) {
      *
      * @private
      * @param {Function} func The function to wrap.
-     * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
+     * @param {number} bitmask The bitmask of wrapper flags. See `createWrapper`
+     *  for more details.
      * @param {Function} wrapFunc The function to create the `func` wrapper.
      * @param {*} placeholder The placeholder value.
      * @param {*} [thisArg] The `this` binding of `func`.
@@ -15456,7 +14709,7 @@ function serializer(replacer, cycleReplacer) {
      * @param {number} [arity] The arity of `func`.
      * @returns {Function} Returns the new wrapped function.
      */
-    function createRecurry(func, bitmask, wrapFunc, placeholder, thisArg, partials, holders, argPos, ary, arity) {
+    function createRecurryWrapper(func, bitmask, wrapFunc, placeholder, thisArg, partials, holders, argPos, ary, arity) {
       var isCurry = bitmask & CURRY_FLAG,
           newHolders = isCurry ? holders : undefined,
           newHoldersRight = isCurry ? undefined : holders,
@@ -15479,7 +14732,7 @@ function serializer(replacer, cycleReplacer) {
         setData(result, newData);
       }
       result.placeholder = placeholder;
-      return setWrapToString(result, func, bitmask);
+      return result;
     }
 
     /**
@@ -15508,7 +14761,7 @@ function serializer(replacer, cycleReplacer) {
     }
 
     /**
-     * Creates a set object of `values`.
+     * Creates a set of `values`.
      *
      * @private
      * @param {Array} values The values to add to the set.
@@ -15544,7 +14797,7 @@ function serializer(replacer, cycleReplacer) {
      *
      * @private
      * @param {Function|string} func The function or method name to wrap.
-     * @param {number} bitmask The bitmask flags.
+     * @param {number} bitmask The bitmask of wrapper flags.
      *  The bitmask may be composed of the following flags:
      *     1 - `_.bind`
      *     2 - `_.bindKey`
@@ -15564,7 +14817,7 @@ function serializer(replacer, cycleReplacer) {
      * @param {number} [arity] The arity of `func`.
      * @returns {Function} Returns the new wrapped function.
      */
-    function createWrap(func, bitmask, thisArg, partials, holders, argPos, ary, arity) {
+    function createWrapper(func, bitmask, thisArg, partials, holders, argPos, ary, arity) {
       var isBindKey = bitmask & BIND_KEY_FLAG;
       if (!isBindKey && typeof func != 'function') {
         throw new TypeError(FUNC_ERROR_TEXT);
@@ -15607,16 +14860,16 @@ function serializer(replacer, cycleReplacer) {
         bitmask &= ~(CURRY_FLAG | CURRY_RIGHT_FLAG);
       }
       if (!bitmask || bitmask == BIND_FLAG) {
-        var result = createBind(func, bitmask, thisArg);
+        var result = createBaseWrapper(func, bitmask, thisArg);
       } else if (bitmask == CURRY_FLAG || bitmask == CURRY_RIGHT_FLAG) {
-        result = createCurry(func, bitmask, arity);
+        result = createCurryWrapper(func, bitmask, arity);
       } else if ((bitmask == PARTIAL_FLAG || bitmask == (BIND_FLAG | PARTIAL_FLAG)) && !holders.length) {
-        result = createPartial(func, bitmask, thisArg, partials);
+        result = createPartialWrapper(func, bitmask, thisArg, partials);
       } else {
-        result = createHybrid.apply(undefined, newData);
+        result = createHybridWrapper.apply(undefined, newData);
       }
       var setter = data ? baseSetData : setData;
-      return setWrapToString(setter(result, newData), func, bitmask);
+      return setter(result, newData);
     }
 
     /**
@@ -15643,7 +14896,7 @@ function serializer(replacer, cycleReplacer) {
       }
       // Assume cyclic values are equal.
       var stacked = stack.get(array);
-      if (stacked && stack.get(other)) {
+      if (stacked) {
         return stacked == other;
       }
       var index = -1,
@@ -15651,7 +14904,6 @@ function serializer(replacer, cycleReplacer) {
           seen = (bitmask & UNORDERED_COMPARE_FLAG) ? new SetCache : undefined;
 
       stack.set(array, other);
-      stack.set(other, array);
 
       // Ignore non-index properties.
       while (++index < arrLength) {
@@ -15673,9 +14925,9 @@ function serializer(replacer, cycleReplacer) {
         // Recursively compare arrays (susceptible to call stack limits).
         if (seen) {
           if (!arraySome(other, function(othValue, othIndex) {
-                if (!cacheHas(seen, othIndex) &&
+                if (!seen.has(othIndex) &&
                     (arrValue === othValue || equalFunc(arrValue, othValue, customizer, bitmask, stack))) {
-                  return seen.push(othIndex);
+                  return seen.add(othIndex);
                 }
               })) {
             result = false;
@@ -15690,7 +14942,6 @@ function serializer(replacer, cycleReplacer) {
         }
       }
       stack['delete'](array);
-      stack['delete'](other);
       return result;
     }
 
@@ -15731,18 +14982,22 @@ function serializer(replacer, cycleReplacer) {
 
         case boolTag:
         case dateTag:
-        case numberTag:
-          // Coerce booleans to `1` or `0` and dates to milliseconds.
-          // Invalid dates are coerced to `NaN`.
-          return eq(+object, +other);
+          // Coerce dates and booleans to numbers, dates to milliseconds and
+          // booleans to `1` or `0` treating invalid dates coerced to `NaN` as
+          // not equal.
+          return +object == +other;
 
         case errorTag:
           return object.name == other.name && object.message == other.message;
 
+        case numberTag:
+          // Treat `NaN` vs. `NaN` as equal.
+          return (object != +object) ? other != +other : object == +other;
+
         case regexpTag:
         case stringTag:
           // Coerce regexes to strings and treat strings, primitives and objects,
-          // as equal. See http://www.ecma-international.org/ecma-262/7.0/#sec-regexp.prototype.tostring
+          // as equal. See http://www.ecma-international.org/ecma-262/6.0/#sec-regexp.prototype.tostring
           // for more details.
           return object == (other + '');
 
@@ -15762,12 +15017,10 @@ function serializer(replacer, cycleReplacer) {
             return stacked == other;
           }
           bitmask |= UNORDERED_COMPARE_FLAG;
+          stack.set(object, other);
 
           // Recursively compare objects (susceptible to call stack limits).
-          stack.set(object, other);
-          var result = equalArrays(convert(object), convert(other), equalFunc, customizer, bitmask, stack);
-          stack['delete'](object);
-          return result;
+          return equalArrays(convert(object), convert(other), equalFunc, customizer, bitmask, stack);
 
         case symbolTag:
           if (symbolValueOf) {
@@ -15804,18 +15057,17 @@ function serializer(replacer, cycleReplacer) {
       var index = objLength;
       while (index--) {
         var key = objProps[index];
-        if (!(isPartial ? key in other : hasOwnProperty.call(other, key))) {
+        if (!(isPartial ? key in other : baseHas(other, key))) {
           return false;
         }
       }
       // Assume cyclic values are equal.
       var stacked = stack.get(object);
-      if (stacked && stack.get(other)) {
+      if (stacked) {
         return stacked == other;
       }
       var result = true;
       stack.set(object, other);
-      stack.set(other, object);
 
       var skipCtor = isPartial;
       while (++index < objLength) {
@@ -15851,19 +15103,7 @@ function serializer(replacer, cycleReplacer) {
         }
       }
       stack['delete'](object);
-      stack['delete'](other);
       return result;
-    }
-
-    /**
-     * A specialized version of `baseRest` which flattens the rest array.
-     *
-     * @private
-     * @param {Function} func The function to apply a rest parameter to.
-     * @returns {Function} Returns the new function.
-     */
-    function flatRest(func) {
-      return setToString(overRest(func, undefined, flatten), func + '');
     }
 
     /**
@@ -15952,6 +15192,19 @@ function serializer(replacer, cycleReplacer) {
     }
 
     /**
+     * Gets the "length" property value of `object`.
+     *
+     * **Note:** This function is used to avoid a
+     * [JIT bug](https://bugs.webkit.org/show_bug.cgi?id=142792) that affects
+     * Safari on at least iOS 8.1-8.3 ARM64.
+     *
+     * @private
+     * @param {Object} object The object to query.
+     * @returns {*} Returns the "length" value.
+     */
+    var getLength = baseProperty('length');
+
+    /**
      * Gets the data for `map`.
      *
      * @private
@@ -16000,13 +15253,33 @@ function serializer(replacer, cycleReplacer) {
     }
 
     /**
+     * Gets the `[[Prototype]]` of `value`.
+     *
+     * @private
+     * @param {*} value The value to query.
+     * @returns {null|Object} Returns the `[[Prototype]]`.
+     */
+    function getPrototype(value) {
+      return nativeGetPrototype(Object(value));
+    }
+
+    /**
      * Creates an array of the own enumerable symbol properties of `object`.
      *
      * @private
      * @param {Object} object The object to query.
      * @returns {Array} Returns the array of symbols.
      */
-    var getSymbols = nativeGetSymbols ? overArg(nativeGetSymbols, Object) : stubArray;
+    function getSymbols(object) {
+      // Coerce `object` to an object to avoid non-object errors in V8.
+      // See https://bugs.chromium.org/p/v8/issues/detail?id=3443 for more details.
+      return getOwnPropertySymbols(Object(object));
+    }
+
+    // Fallback for IE < 11.
+    if (!getOwnPropertySymbols) {
+      getSymbols = stubArray;
+    }
 
     /**
      * Creates an array of the own and inherited enumerable symbol properties
@@ -16016,7 +15289,7 @@ function serializer(replacer, cycleReplacer) {
      * @param {Object} object The object to query.
      * @returns {Array} Returns the array of symbols.
      */
-    var getSymbolsIn = !nativeGetSymbols ? stubArray : function(object) {
+    var getSymbolsIn = !getOwnPropertySymbols ? getSymbols : function(object) {
       var result = [];
       while (object) {
         arrayPush(result, getSymbols(object));
@@ -16032,9 +15305,12 @@ function serializer(replacer, cycleReplacer) {
      * @param {*} value The value to query.
      * @returns {string} Returns the `toStringTag`.
      */
-    var getTag = baseGetTag;
+    function getTag(value) {
+      return objectToString.call(value);
+    }
 
-    // Fallback for data views, maps, sets, and weak maps in IE 11 and promises in Node.js < 6.
+    // Fallback for data views, maps, sets, and weak maps in IE 11,
+    // for data views in Edge, and promises in Node.js.
     if ((DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag) ||
         (Map && getTag(new Map) != mapTag) ||
         (Promise && getTag(Promise.resolve()) != promiseTag) ||
@@ -16087,18 +15363,6 @@ function serializer(replacer, cycleReplacer) {
     }
 
     /**
-     * Extracts wrapper details from the `source` body comment.
-     *
-     * @private
-     * @param {string} source The source to inspect.
-     * @returns {Array} Returns the wrapper details.
-     */
-    function getWrapDetails(source) {
-      var match = source.match(reWrapDetails);
-      return match ? match[1].split(reSplitDetails) : [];
-    }
-
-    /**
      * Checks if `path` exists on `object`.
      *
      * @private
@@ -16110,9 +15374,9 @@ function serializer(replacer, cycleReplacer) {
     function hasPath(object, path, hasFunc) {
       path = isKey(path, object) ? [path] : castPath(path);
 
-      var index = -1,
-          length = path.length,
-          result = false;
+      var result,
+          index = -1,
+          length = path.length;
 
       while (++index < length) {
         var key = toKey(path[index]);
@@ -16121,12 +15385,12 @@ function serializer(replacer, cycleReplacer) {
         }
         object = object[key];
       }
-      if (result || ++index != length) {
+      if (result) {
         return result;
       }
-      length = object ? object.length : 0;
+      var length = object ? object.length : 0;
       return !!length && isLength(length) && isIndex(key, length) &&
-        (isArray(object) || isArguments(object));
+        (isArray(object) || isString(object) || isArguments(object));
     }
 
     /**
@@ -16211,22 +15475,20 @@ function serializer(replacer, cycleReplacer) {
     }
 
     /**
-     * Inserts wrapper `details` in a comment at the top of the `source` body.
+     * Creates an array of index keys for `object` values of arrays,
+     * `arguments` objects, and strings, otherwise `null` is returned.
      *
      * @private
-     * @param {string} source The source to modify.
-     * @returns {Array} details The details to insert.
-     * @returns {string} Returns the modified source.
+     * @param {Object} object The object to query.
+     * @returns {Array|null} Returns index keys, else `null`.
      */
-    function insertWrapDetails(source, details) {
-      var length = details.length;
-      if (!length) {
-        return source;
+    function indexKeys(object) {
+      var length = object ? object.length : undefined;
+      if (isLength(length) &&
+          (isArray(object) || isString(object) || isArguments(object))) {
+        return baseTimes(length, String);
       }
-      var lastIndex = length - 1;
-      details[lastIndex] = (length > 1 ? '& ' : '') + details[lastIndex];
-      details = details.join(length > 2 ? ', ' : ' ');
-      return source.replace(reWrapComment, '{\n/* [wrapped with ' + details + '] */\n');
+      return null;
     }
 
     /**
@@ -16237,8 +15499,19 @@ function serializer(replacer, cycleReplacer) {
      * @returns {boolean} Returns `true` if `value` is flattenable, else `false`.
      */
     function isFlattenable(value) {
-      return isArray(value) || isArguments(value) ||
-        !!(spreadableSymbol && value && value[spreadableSymbol]);
+      return isArray(value) || isArguments(value);
+    }
+
+    /**
+     * Checks if `value` is a flattenable array and not a `_.matchesProperty`
+     * iteratee shorthand.
+     *
+     * @private
+     * @param {*} value The value to check.
+     * @returns {boolean} Returns `true` if `value` is flattenable, else `false`.
+     */
+    function isFlattenableIteratee(value) {
+      return isArray(value) && !(value.length == 2 && !isFunction(value[0]));
     }
 
     /**
@@ -16403,26 +15676,6 @@ function serializer(replacer, cycleReplacer) {
     }
 
     /**
-     * A specialized version of `_.memoize` which clears the memoized function's
-     * cache when it exceeds `MAX_MEMOIZE_SIZE`.
-     *
-     * @private
-     * @param {Function} func The function to have its output memoized.
-     * @returns {Function} Returns the new memoized function.
-     */
-    function memoizeCapped(func) {
-      var result = memoize(func, function(key) {
-        if (cache.size === MAX_MEMOIZE_SIZE) {
-          cache.clear();
-        }
-        return key;
-      });
-
-      var cache = result.cache;
-      return result;
-    }
-
-    /**
      * Merges the function metadata of `source` into `data`.
      *
      * Merging metadata reduces the number of wrappers used to invoke a function.
@@ -16508,61 +15761,9 @@ function serializer(replacer, cycleReplacer) {
      */
     function mergeDefaults(objValue, srcValue, key, object, source, stack) {
       if (isObject(objValue) && isObject(srcValue)) {
-        // Recursively merge objects and arrays (susceptible to call stack limits).
-        stack.set(srcValue, objValue);
-        baseMerge(objValue, srcValue, undefined, mergeDefaults, stack);
-        stack['delete'](srcValue);
+        baseMerge(objValue, srcValue, undefined, mergeDefaults, stack.set(srcValue, objValue));
       }
       return objValue;
-    }
-
-    /**
-     * This function is like
-     * [`Object.keys`](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
-     * except that it includes inherited enumerable properties.
-     *
-     * @private
-     * @param {Object} object The object to query.
-     * @returns {Array} Returns the array of property names.
-     */
-    function nativeKeysIn(object) {
-      var result = [];
-      if (object != null) {
-        for (var key in Object(object)) {
-          result.push(key);
-        }
-      }
-      return result;
-    }
-
-    /**
-     * A specialized version of `baseRest` which transforms the rest array.
-     *
-     * @private
-     * @param {Function} func The function to apply a rest parameter to.
-     * @param {number} [start=func.length-1] The start position of the rest parameter.
-     * @param {Function} transform The rest array transform.
-     * @returns {Function} Returns the new function.
-     */
-    function overRest(func, start, transform) {
-      start = nativeMax(start === undefined ? (func.length - 1) : start, 0);
-      return function() {
-        var args = arguments,
-            index = -1,
-            length = nativeMax(args.length - start, 0),
-            array = Array(length);
-
-        while (++index < length) {
-          array[index] = args[start + index];
-        }
-        index = -1;
-        var otherArgs = Array(start + 1);
-        while (++index < start) {
-          otherArgs[index] = args[index];
-        }
-        otherArgs[start] = transform(array);
-        return apply(func, this, otherArgs);
-      };
     }
 
     /**
@@ -16613,98 +15814,25 @@ function serializer(replacer, cycleReplacer) {
      * @param {*} data The metadata.
      * @returns {Function} Returns `func`.
      */
-    var setData = shortOut(baseSetData);
-
-    /**
-     * A simple wrapper around the global [`setTimeout`](https://mdn.io/setTimeout).
-     *
-     * @private
-     * @param {Function} func The function to delay.
-     * @param {number} wait The number of milliseconds to delay invocation.
-     * @returns {number|Object} Returns the timer id or timeout object.
-     */
-    var setTimeout = ctxSetTimeout || function(func, wait) {
-      return root.setTimeout(func, wait);
-    };
-
-    /**
-     * Sets the `toString` method of `func` to return `string`.
-     *
-     * @private
-     * @param {Function} func The function to modify.
-     * @param {Function} string The `toString` result.
-     * @returns {Function} Returns `func`.
-     */
-    var setToString = shortOut(baseSetToString);
-
-    /**
-     * Sets the `toString` method of `wrapper` to mimic the source of `reference`
-     * with wrapper details in a comment at the top of the source body.
-     *
-     * @private
-     * @param {Function} wrapper The function to modify.
-     * @param {Function} reference The reference function.
-     * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
-     * @returns {Function} Returns `wrapper`.
-     */
-    function setWrapToString(wrapper, reference, bitmask) {
-      var source = (reference + '');
-      return setToString(wrapper, insertWrapDetails(source, updateWrapDetails(getWrapDetails(source), bitmask)));
-    }
-
-    /**
-     * Creates a function that'll short out and invoke `identity` instead
-     * of `func` when it's called `HOT_COUNT` or more times in `HOT_SPAN`
-     * milliseconds.
-     *
-     * @private
-     * @param {Function} func The function to restrict.
-     * @returns {Function} Returns the new shortable function.
-     */
-    function shortOut(func) {
+    var setData = (function() {
       var count = 0,
           lastCalled = 0;
 
-      return function() {
-        var stamp = nativeNow(),
+      return function(key, value) {
+        var stamp = now(),
             remaining = HOT_SPAN - (stamp - lastCalled);
 
         lastCalled = stamp;
         if (remaining > 0) {
           if (++count >= HOT_COUNT) {
-            return arguments[0];
+            return key;
           }
         } else {
           count = 0;
         }
-        return func.apply(undefined, arguments);
+        return baseSetData(key, value);
       };
-    }
-
-    /**
-     * A specialized version of `_.shuffle` which mutates and sets the size of `array`.
-     *
-     * @private
-     * @param {Array} array The array to shuffle.
-     * @param {number} [size=array.length] The size of `array`.
-     * @returns {Array} Returns `array`.
-     */
-    function shuffleSelf(array, size) {
-      var index = -1,
-          length = array.length,
-          lastIndex = length - 1;
-
-      size = size === undefined ? length : size;
-      while (++index < size) {
-        var rand = baseRandom(index, lastIndex),
-            value = array[rand];
-
-        array[rand] = array[index];
-        array[index] = value;
-      }
-      array.length = size;
-      return array;
-    }
+    }());
 
     /**
      * Converts `string` to a property path array.
@@ -16713,14 +15841,9 @@ function serializer(replacer, cycleReplacer) {
      * @param {string} string The string to convert.
      * @returns {Array} Returns the property path array.
      */
-    var stringToPath = memoizeCapped(function(string) {
-      string = toString(string);
-
+    var stringToPath = memoize(function(string) {
       var result = [];
-      if (reLeadingDot.test(string)) {
-        result.push('');
-      }
-      string.replace(rePropName, function(match, number, quote, string) {
+      toString(string).replace(rePropName, function(match, number, quote, string) {
         result.push(quote ? string.replace(reEscapeChar, '$1') : (number || match));
       });
       return result;
@@ -16758,24 +15881,6 @@ function serializer(replacer, cycleReplacer) {
         } catch (e) {}
       }
       return '';
-    }
-
-    /**
-     * Updates wrapper `details` based on `bitmask` flags.
-     *
-     * @private
-     * @returns {Array} details The details to modify.
-     * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
-     * @returns {Array} Returns `details`.
-     */
-    function updateWrapDetails(details, bitmask) {
-      arrayEach(wrapFlags, function(pair) {
-        var value = '_.' + pair[0];
-        if ((bitmask & pair[1]) && !arrayIncludes(details, value)) {
-          details.push(value);
-        }
-      });
-      return details.sort();
     }
 
     /**
@@ -16892,27 +15997,24 @@ function serializer(replacer, cycleReplacer) {
      * // => [1]
      */
     function concat() {
-      var length = arguments.length;
-      if (!length) {
-        return [];
-      }
-      var args = Array(length - 1),
+      var length = arguments.length,
+          args = Array(length ? length - 1 : 0),
           array = arguments[0],
           index = length;
 
       while (index--) {
         args[index - 1] = arguments[index];
       }
-      return arrayPush(isArray(array) ? copyArray(array) : [array], baseFlatten(args, 1));
+      return length
+        ? arrayPush(isArray(array) ? copyArray(array) : [array], baseFlatten(args, 1))
+        : [];
     }
 
     /**
-     * Creates an array of `array` values not included in the other given arrays
-     * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
-     * for equality comparisons. The order and references of result values are
-     * determined by the first array.
-     *
-     * **Note:** Unlike `_.pullAll`, this method returns a new array.
+     * Creates an array of unique `array` values not included in the other given
+     * arrays using [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
+     * for equality comparisons. The order of result values is determined by the
+     * order they occur in the first array.
      *
      * @static
      * @memberOf _
@@ -16927,7 +16029,7 @@ function serializer(replacer, cycleReplacer) {
      * _.difference([2, 1], [2, 3]);
      * // => [1]
      */
-    var difference = baseRest(function(array, values) {
+    var difference = rest(function(array, values) {
       return isArrayLikeObject(array)
         ? baseDifference(array, baseFlatten(values, 1, isArrayLikeObject, true))
         : [];
@@ -16936,11 +16038,8 @@ function serializer(replacer, cycleReplacer) {
     /**
      * This method is like `_.difference` except that it accepts `iteratee` which
      * is invoked for each element of `array` and `values` to generate the criterion
-     * by which they're compared. The order and references of result values are
-     * determined by the first array. The iteratee is invoked with one argument:
-     * (value).
-     *
-     * **Note:** Unlike `_.pullAllBy`, this method returns a new array.
+     * by which they're compared. Result values are chosen from the first array.
+     * The iteratee is invoked with one argument: (value).
      *
      * @static
      * @memberOf _
@@ -16948,7 +16047,8 @@ function serializer(replacer, cycleReplacer) {
      * @category Array
      * @param {Array} array The array to inspect.
      * @param {...Array} [values] The values to exclude.
-     * @param {Function} [iteratee=_.identity] The iteratee invoked per element.
+     * @param {Array|Function|Object|string} [iteratee=_.identity]
+     *  The iteratee invoked per element.
      * @returns {Array} Returns the new array of filtered values.
      * @example
      *
@@ -16959,23 +16059,21 @@ function serializer(replacer, cycleReplacer) {
      * _.differenceBy([{ 'x': 2 }, { 'x': 1 }], [{ 'x': 1 }], 'x');
      * // => [{ 'x': 2 }]
      */
-    var differenceBy = baseRest(function(array, values) {
+    var differenceBy = rest(function(array, values) {
       var iteratee = last(values);
       if (isArrayLikeObject(iteratee)) {
         iteratee = undefined;
       }
       return isArrayLikeObject(array)
-        ? baseDifference(array, baseFlatten(values, 1, isArrayLikeObject, true), getIteratee(iteratee, 2))
+        ? baseDifference(array, baseFlatten(values, 1, isArrayLikeObject, true), getIteratee(iteratee))
         : [];
     });
 
     /**
      * This method is like `_.difference` except that it accepts `comparator`
-     * which is invoked to compare elements of `array` to `values`. The order and
-     * references of result values are determined by the first array. The comparator
-     * is invoked with two arguments: (arrVal, othVal).
-     *
-     * **Note:** Unlike `_.pullAllWith`, this method returns a new array.
+     * which is invoked to compare elements of `array` to `values`. Result values
+     * are chosen from the first array. The comparator is invoked with two arguments:
+     * (arrVal, othVal).
      *
      * @static
      * @memberOf _
@@ -16992,7 +16090,7 @@ function serializer(replacer, cycleReplacer) {
      * _.differenceWith(objects, [{ 'x': 1, 'y': 2 }], _.isEqual);
      * // => [{ 'x': 2, 'y': 1 }]
      */
-    var differenceWith = baseRest(function(array, values) {
+    var differenceWith = rest(function(array, values) {
       var comparator = last(values);
       if (isArrayLikeObject(comparator)) {
         comparator = undefined;
@@ -17081,7 +16179,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 3.0.0
      * @category Array
      * @param {Array} array The array to query.
-     * @param {Function} [predicate=_.identity] The function invoked per iteration.
+     * @param {Array|Function|Object|string} [predicate=_.identity]
+     *  The function invoked per iteration.
      * @returns {Array} Returns the slice of `array`.
      * @example
      *
@@ -17122,7 +16221,7 @@ function serializer(replacer, cycleReplacer) {
      * @since 3.0.0
      * @category Array
      * @param {Array} array The array to query.
-     * @param {Function} [predicate=_.identity]
+     * @param {Array|Function|Object|string} [predicate=_.identity]
      *  The function invoked per iteration.
      * @returns {Array} Returns the slice of `array`.
      * @example
@@ -17203,8 +16302,8 @@ function serializer(replacer, cycleReplacer) {
      * @memberOf _
      * @since 1.1.0
      * @category Array
-     * @param {Array} array The array to inspect.
-     * @param {Function} [predicate=_.identity]
+     * @param {Array} array The array to search.
+     * @param {Array|Function|Object|string} [predicate=_.identity]
      *  The function invoked per iteration.
      * @param {number} [fromIndex=0] The index to search from.
      * @returns {number} Returns the index of the found element, else `-1`.
@@ -17251,8 +16350,8 @@ function serializer(replacer, cycleReplacer) {
      * @memberOf _
      * @since 2.0.0
      * @category Array
-     * @param {Array} array The array to inspect.
-     * @param {Function} [predicate=_.identity]
+     * @param {Array} array The array to search.
+     * @param {Array|Function|Object|string} [predicate=_.identity]
      *  The function invoked per iteration.
      * @param {number} [fromIndex=array.length-1] The index to search from.
      * @returns {number} Returns the index of the found element, else `-1`.
@@ -17373,8 +16472,8 @@ function serializer(replacer, cycleReplacer) {
      * @returns {Object} Returns the new object.
      * @example
      *
-     * _.fromPairs([['a', 1], ['b', 2]]);
-     * // => { 'a': 1, 'b': 2 }
+     * _.fromPairs([['fred', 30], ['barney', 40]]);
+     * // => { 'fred': 30, 'barney': 40 }
      */
     function fromPairs(pairs) {
       var index = -1,
@@ -17412,7 +16511,7 @@ function serializer(replacer, cycleReplacer) {
 
     /**
      * Gets the index at which the first occurrence of `value` is found in `array`
-     * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+     * using [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
      * for equality comparisons. If `fromIndex` is negative, it's used as the
      * offset from the end of `array`.
      *
@@ -17420,7 +16519,7 @@ function serializer(replacer, cycleReplacer) {
      * @memberOf _
      * @since 0.1.0
      * @category Array
-     * @param {Array} array The array to inspect.
+     * @param {Array} array The array to search.
      * @param {*} value The value to search for.
      * @param {number} [fromIndex=0] The index to search from.
      * @returns {number} Returns the index of the matched value, else `-1`.
@@ -17460,15 +16559,14 @@ function serializer(replacer, cycleReplacer) {
      * // => [1, 2]
      */
     function initial(array) {
-      var length = array ? array.length : 0;
-      return length ? baseSlice(array, 0, -1) : [];
+      return dropRight(array, 1);
     }
 
     /**
      * Creates an array of unique values that are included in all given arrays
-     * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
-     * for equality comparisons. The order and references of result values are
-     * determined by the first array.
+     * using [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
+     * for equality comparisons. The order of result values is determined by the
+     * order they occur in the first array.
      *
      * @static
      * @memberOf _
@@ -17481,7 +16579,7 @@ function serializer(replacer, cycleReplacer) {
      * _.intersection([2, 1], [2, 3]);
      * // => [2]
      */
-    var intersection = baseRest(function(arrays) {
+    var intersection = rest(function(arrays) {
       var mapped = arrayMap(arrays, castArrayLikeObject);
       return (mapped.length && mapped[0] === arrays[0])
         ? baseIntersection(mapped)
@@ -17491,16 +16589,16 @@ function serializer(replacer, cycleReplacer) {
     /**
      * This method is like `_.intersection` except that it accepts `iteratee`
      * which is invoked for each element of each `arrays` to generate the criterion
-     * by which they're compared. The order and references of result values are
-     * determined by the first array. The iteratee is invoked with one argument:
-     * (value).
+     * by which they're compared. Result values are chosen from the first array.
+     * The iteratee is invoked with one argument: (value).
      *
      * @static
      * @memberOf _
      * @since 4.0.0
      * @category Array
      * @param {...Array} [arrays] The arrays to inspect.
-     * @param {Function} [iteratee=_.identity] The iteratee invoked per element.
+     * @param {Array|Function|Object|string} [iteratee=_.identity]
+     *  The iteratee invoked per element.
      * @returns {Array} Returns the new array of intersecting values.
      * @example
      *
@@ -17511,7 +16609,7 @@ function serializer(replacer, cycleReplacer) {
      * _.intersectionBy([{ 'x': 1 }], [{ 'x': 2 }, { 'x': 1 }], 'x');
      * // => [{ 'x': 1 }]
      */
-    var intersectionBy = baseRest(function(arrays) {
+    var intersectionBy = rest(function(arrays) {
       var iteratee = last(arrays),
           mapped = arrayMap(arrays, castArrayLikeObject);
 
@@ -17521,15 +16619,15 @@ function serializer(replacer, cycleReplacer) {
         mapped.pop();
       }
       return (mapped.length && mapped[0] === arrays[0])
-        ? baseIntersection(mapped, getIteratee(iteratee, 2))
+        ? baseIntersection(mapped, getIteratee(iteratee))
         : [];
     });
 
     /**
      * This method is like `_.intersection` except that it accepts `comparator`
-     * which is invoked to compare elements of `arrays`. The order and references
-     * of result values are determined by the first array. The comparator is
-     * invoked with two arguments: (arrVal, othVal).
+     * which is invoked to compare elements of `arrays`. Result values are chosen
+     * from the first array. The comparator is invoked with two arguments:
+     * (arrVal, othVal).
      *
      * @static
      * @memberOf _
@@ -17546,7 +16644,7 @@ function serializer(replacer, cycleReplacer) {
      * _.intersectionWith(objects, others, _.isEqual);
      * // => [{ 'x': 1, 'y': 2 }]
      */
-    var intersectionWith = baseRest(function(arrays) {
+    var intersectionWith = rest(function(arrays) {
       var comparator = last(arrays),
           mapped = arrayMap(arrays, castArrayLikeObject);
 
@@ -17606,7 +16704,7 @@ function serializer(replacer, cycleReplacer) {
      * @memberOf _
      * @since 0.1.0
      * @category Array
-     * @param {Array} array The array to inspect.
+     * @param {Array} array The array to search.
      * @param {*} value The value to search for.
      * @param {number} [fromIndex=array.length-1] The index to search from.
      * @returns {number} Returns the index of the matched value, else `-1`.
@@ -17627,11 +16725,21 @@ function serializer(replacer, cycleReplacer) {
       var index = length;
       if (fromIndex !== undefined) {
         index = toInteger(fromIndex);
-        index = index < 0 ? nativeMax(length + index, 0) : nativeMin(index, length - 1);
+        index = (
+          index < 0
+            ? nativeMax(length + index, 0)
+            : nativeMin(index, length - 1)
+        ) + 1;
       }
-      return value === value
-        ? strictLastIndexOf(array, value, index)
-        : baseFindIndex(array, baseIsNaN, index, true);
+      if (value !== value) {
+        return indexOfNaN(array, index - 1, true);
+      }
+      while (index--) {
+        if (array[index] === value) {
+          return index;
+        }
+      }
+      return -1;
     }
 
     /**
@@ -17661,7 +16769,7 @@ function serializer(replacer, cycleReplacer) {
 
     /**
      * Removes all given values from `array` using
-     * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+     * [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
      * for equality comparisons.
      *
      * **Note:** Unlike `_.without`, this method mutates `array`. Use `_.remove`
@@ -17682,7 +16790,7 @@ function serializer(replacer, cycleReplacer) {
      * console.log(array);
      * // => ['b', 'b']
      */
-    var pull = baseRest(pullAll);
+    var pull = rest(pullAll);
 
     /**
      * This method is like `_.pull` except that it accepts an array of values to remove.
@@ -17723,7 +16831,7 @@ function serializer(replacer, cycleReplacer) {
      * @category Array
      * @param {Array} array The array to modify.
      * @param {Array} values The values to remove.
-     * @param {Function} [iteratee=_.identity]
+     * @param {Array|Function|Object|string} [iteratee=_.identity]
      *  The iteratee invoked per element.
      * @returns {Array} Returns `array`.
      * @example
@@ -17736,7 +16844,7 @@ function serializer(replacer, cycleReplacer) {
      */
     function pullAllBy(array, values, iteratee) {
       return (array && array.length && values && values.length)
-        ? basePullAll(array, values, getIteratee(iteratee, 2))
+        ? basePullAll(array, values, getIteratee(iteratee))
         : array;
     }
 
@@ -17793,7 +16901,9 @@ function serializer(replacer, cycleReplacer) {
      * console.log(pulled);
      * // => ['b', 'd']
      */
-    var pullAt = flatRest(function(array, indexes) {
+    var pullAt = rest(function(array, indexes) {
+      indexes = baseFlatten(indexes, 1);
+
       var length = array ? array.length : 0,
           result = baseAt(array, indexes);
 
@@ -17817,7 +16927,7 @@ function serializer(replacer, cycleReplacer) {
      * @since 2.0.0
      * @category Array
      * @param {Array} array The array to modify.
-     * @param {Function} [predicate=_.identity]
+     * @param {Array|Function|Object|string} [predicate=_.identity]
      *  The function invoked per iteration.
      * @returns {Array} Returns the new array of removed elements.
      * @example
@@ -17945,7 +17055,7 @@ function serializer(replacer, cycleReplacer) {
      * @category Array
      * @param {Array} array The sorted array to inspect.
      * @param {*} value The value to evaluate.
-     * @param {Function} [iteratee=_.identity]
+     * @param {Array|Function|Object|string} [iteratee=_.identity]
      *  The iteratee invoked per element.
      * @returns {number} Returns the index at which `value` should be inserted
      *  into `array`.
@@ -17961,7 +17071,7 @@ function serializer(replacer, cycleReplacer) {
      * // => 0
      */
     function sortedIndexBy(array, value, iteratee) {
-      return baseSortedIndexBy(array, value, getIteratee(iteratee, 2));
+      return baseSortedIndexBy(array, value, getIteratee(iteratee));
     }
 
     /**
@@ -17972,7 +17082,7 @@ function serializer(replacer, cycleReplacer) {
      * @memberOf _
      * @since 4.0.0
      * @category Array
-     * @param {Array} array The array to inspect.
+     * @param {Array} array The array to search.
      * @param {*} value The value to search for.
      * @returns {number} Returns the index of the matched value, else `-1`.
      * @example
@@ -18024,7 +17134,7 @@ function serializer(replacer, cycleReplacer) {
      * @category Array
      * @param {Array} array The sorted array to inspect.
      * @param {*} value The value to evaluate.
-     * @param {Function} [iteratee=_.identity]
+     * @param {Array|Function|Object|string} [iteratee=_.identity]
      *  The iteratee invoked per element.
      * @returns {number} Returns the index at which `value` should be inserted
      *  into `array`.
@@ -18040,7 +17150,7 @@ function serializer(replacer, cycleReplacer) {
      * // => 1
      */
     function sortedLastIndexBy(array, value, iteratee) {
-      return baseSortedIndexBy(array, value, getIteratee(iteratee, 2), true);
+      return baseSortedIndexBy(array, value, getIteratee(iteratee), true);
     }
 
     /**
@@ -18051,7 +17161,7 @@ function serializer(replacer, cycleReplacer) {
      * @memberOf _
      * @since 4.0.0
      * @category Array
-     * @param {Array} array The array to inspect.
+     * @param {Array} array The array to search.
      * @param {*} value The value to search for.
      * @returns {number} Returns the index of the matched value, else `-1`.
      * @example
@@ -18109,7 +17219,7 @@ function serializer(replacer, cycleReplacer) {
      */
     function sortedUniqBy(array, iteratee) {
       return (array && array.length)
-        ? baseSortedUniq(array, getIteratee(iteratee, 2))
+        ? baseSortedUniq(array, getIteratee(iteratee))
         : [];
     }
 
@@ -18128,8 +17238,7 @@ function serializer(replacer, cycleReplacer) {
      * // => [2, 3]
      */
     function tail(array) {
-      var length = array ? array.length : 0;
-      return length ? baseSlice(array, 1, length) : [];
+      return drop(array, 1);
     }
 
     /**
@@ -18210,7 +17319,7 @@ function serializer(replacer, cycleReplacer) {
      * @since 3.0.0
      * @category Array
      * @param {Array} array The array to query.
-     * @param {Function} [predicate=_.identity]
+     * @param {Array|Function|Object|string} [predicate=_.identity]
      *  The function invoked per iteration.
      * @returns {Array} Returns the slice of `array`.
      * @example
@@ -18252,7 +17361,7 @@ function serializer(replacer, cycleReplacer) {
      * @since 3.0.0
      * @category Array
      * @param {Array} array The array to query.
-     * @param {Function} [predicate=_.identity]
+     * @param {Array|Function|Object|string} [predicate=_.identity]
      *  The function invoked per iteration.
      * @returns {Array} Returns the slice of `array`.
      * @example
@@ -18286,7 +17395,7 @@ function serializer(replacer, cycleReplacer) {
 
     /**
      * Creates an array of unique values, in order, from all given arrays using
-     * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+     * [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
      * for equality comparisons.
      *
      * @static
@@ -18300,15 +17409,14 @@ function serializer(replacer, cycleReplacer) {
      * _.union([2], [1, 2]);
      * // => [2, 1]
      */
-    var union = baseRest(function(arrays) {
+    var union = rest(function(arrays) {
       return baseUniq(baseFlatten(arrays, 1, isArrayLikeObject, true));
     });
 
     /**
      * This method is like `_.union` except that it accepts `iteratee` which is
      * invoked for each element of each `arrays` to generate the criterion by
-     * which uniqueness is computed. Result values are chosen from the first
-     * array in which the value occurs. The iteratee is invoked with one argument:
+     * which uniqueness is computed. The iteratee is invoked with one argument:
      * (value).
      *
      * @static
@@ -18316,7 +17424,7 @@ function serializer(replacer, cycleReplacer) {
      * @since 4.0.0
      * @category Array
      * @param {...Array} [arrays] The arrays to inspect.
-     * @param {Function} [iteratee=_.identity]
+     * @param {Array|Function|Object|string} [iteratee=_.identity]
      *  The iteratee invoked per element.
      * @returns {Array} Returns the new array of combined values.
      * @example
@@ -18328,18 +17436,17 @@ function serializer(replacer, cycleReplacer) {
      * _.unionBy([{ 'x': 1 }], [{ 'x': 2 }, { 'x': 1 }], 'x');
      * // => [{ 'x': 1 }, { 'x': 2 }]
      */
-    var unionBy = baseRest(function(arrays) {
+    var unionBy = rest(function(arrays) {
       var iteratee = last(arrays);
       if (isArrayLikeObject(iteratee)) {
         iteratee = undefined;
       }
-      return baseUniq(baseFlatten(arrays, 1, isArrayLikeObject, true), getIteratee(iteratee, 2));
+      return baseUniq(baseFlatten(arrays, 1, isArrayLikeObject, true), getIteratee(iteratee));
     });
 
     /**
      * This method is like `_.union` except that it accepts `comparator` which
-     * is invoked to compare elements of `arrays`. Result values are chosen from
-     * the first array in which the value occurs. The comparator is invoked
+     * is invoked to compare elements of `arrays`. The comparator is invoked
      * with two arguments: (arrVal, othVal).
      *
      * @static
@@ -18357,7 +17464,7 @@ function serializer(replacer, cycleReplacer) {
      * _.unionWith(objects, others, _.isEqual);
      * // => [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }, { 'x': 1, 'y': 1 }]
      */
-    var unionWith = baseRest(function(arrays) {
+    var unionWith = rest(function(arrays) {
       var comparator = last(arrays);
       if (isArrayLikeObject(comparator)) {
         comparator = undefined;
@@ -18367,10 +17474,9 @@ function serializer(replacer, cycleReplacer) {
 
     /**
      * Creates a duplicate-free version of an array, using
-     * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
-     * for equality comparisons, in which only the first occurrence of each element
-     * is kept. The order of result values is determined by the order they occur
-     * in the array.
+     * [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
+     * for equality comparisons, in which only the first occurrence of each
+     * element is kept.
      *
      * @static
      * @memberOf _
@@ -18392,16 +17498,14 @@ function serializer(replacer, cycleReplacer) {
     /**
      * This method is like `_.uniq` except that it accepts `iteratee` which is
      * invoked for each element in `array` to generate the criterion by which
-     * uniqueness is computed. The order of result values is determined by the
-     * order they occur in the array. The iteratee is invoked with one argument:
-     * (value).
+     * uniqueness is computed. The iteratee is invoked with one argument: (value).
      *
      * @static
      * @memberOf _
      * @since 4.0.0
      * @category Array
      * @param {Array} array The array to inspect.
-     * @param {Function} [iteratee=_.identity]
+     * @param {Array|Function|Object|string} [iteratee=_.identity]
      *  The iteratee invoked per element.
      * @returns {Array} Returns the new duplicate free array.
      * @example
@@ -18415,15 +17519,14 @@ function serializer(replacer, cycleReplacer) {
      */
     function uniqBy(array, iteratee) {
       return (array && array.length)
-        ? baseUniq(array, getIteratee(iteratee, 2))
+        ? baseUniq(array, getIteratee(iteratee))
         : [];
     }
 
     /**
      * This method is like `_.uniq` except that it accepts `comparator` which
-     * is invoked to compare elements of `array`. The order of result values is
-     * determined by the order they occur in the array.The comparator is invoked
-     * with two arguments: (arrVal, othVal).
+     * is invoked to compare elements of `array`. The comparator is invoked with
+     * two arguments: (arrVal, othVal).
      *
      * @static
      * @memberOf _
@@ -18458,11 +17561,11 @@ function serializer(replacer, cycleReplacer) {
      * @returns {Array} Returns the new array of regrouped elements.
      * @example
      *
-     * var zipped = _.zip(['a', 'b'], [1, 2], [true, false]);
-     * // => [['a', 1, true], ['b', 2, false]]
+     * var zipped = _.zip(['fred', 'barney'], [30, 40], [true, false]);
+     * // => [['fred', 30, true], ['barney', 40, false]]
      *
      * _.unzip(zipped);
-     * // => [['a', 'b'], [1, 2], [true, false]]
+     * // => [['fred', 'barney'], [30, 40], [true, false]]
      */
     function unzip(array) {
       if (!(array && array.length)) {
@@ -18516,10 +17619,8 @@ function serializer(replacer, cycleReplacer) {
 
     /**
      * Creates an array excluding all given values using
-     * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+     * [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
      * for equality comparisons.
-     *
-     * **Note:** Unlike `_.pull`, this method returns a new array.
      *
      * @static
      * @memberOf _
@@ -18534,7 +17635,7 @@ function serializer(replacer, cycleReplacer) {
      * _.without([2, 1, 2, 3], 1, 2);
      * // => [3]
      */
-    var without = baseRest(function(array, values) {
+    var without = rest(function(array, values) {
       return isArrayLikeObject(array)
         ? baseDifference(array, values)
         : [];
@@ -18558,23 +17659,22 @@ function serializer(replacer, cycleReplacer) {
      * _.xor([2, 1], [2, 3]);
      * // => [1, 3]
      */
-    var xor = baseRest(function(arrays) {
+    var xor = rest(function(arrays) {
       return baseXor(arrayFilter(arrays, isArrayLikeObject));
     });
 
     /**
      * This method is like `_.xor` except that it accepts `iteratee` which is
      * invoked for each element of each `arrays` to generate the criterion by
-     * which by which they're compared. The order of result values is determined
-     * by the order they occur in the arrays. The iteratee is invoked with one
-     * argument: (value).
+     * which by which they're compared. The iteratee is invoked with one argument:
+     * (value).
      *
      * @static
      * @memberOf _
      * @since 4.0.0
      * @category Array
      * @param {...Array} [arrays] The arrays to inspect.
-     * @param {Function} [iteratee=_.identity]
+     * @param {Array|Function|Object|string} [iteratee=_.identity]
      *  The iteratee invoked per element.
      * @returns {Array} Returns the new array of filtered values.
      * @example
@@ -18586,19 +17686,18 @@ function serializer(replacer, cycleReplacer) {
      * _.xorBy([{ 'x': 1 }], [{ 'x': 2 }, { 'x': 1 }], 'x');
      * // => [{ 'x': 2 }]
      */
-    var xorBy = baseRest(function(arrays) {
+    var xorBy = rest(function(arrays) {
       var iteratee = last(arrays);
       if (isArrayLikeObject(iteratee)) {
         iteratee = undefined;
       }
-      return baseXor(arrayFilter(arrays, isArrayLikeObject), getIteratee(iteratee, 2));
+      return baseXor(arrayFilter(arrays, isArrayLikeObject), getIteratee(iteratee));
     });
 
     /**
      * This method is like `_.xor` except that it accepts `comparator` which is
-     * invoked to compare elements of `arrays`. The order of result values is
-     * determined by the order they occur in the arrays. The comparator is invoked
-     * with two arguments: (arrVal, othVal).
+     * invoked to compare elements of `arrays`. The comparator is invoked with
+     * two arguments: (arrVal, othVal).
      *
      * @static
      * @memberOf _
@@ -18615,7 +17714,7 @@ function serializer(replacer, cycleReplacer) {
      * _.xorWith(objects, others, _.isEqual);
      * // => [{ 'x': 2, 'y': 1 }, { 'x': 1, 'y': 1 }]
      */
-    var xorWith = baseRest(function(arrays) {
+    var xorWith = rest(function(arrays) {
       var comparator = last(arrays);
       if (isArrayLikeObject(comparator)) {
         comparator = undefined;
@@ -18636,10 +17735,10 @@ function serializer(replacer, cycleReplacer) {
      * @returns {Array} Returns the new array of grouped elements.
      * @example
      *
-     * _.zip(['a', 'b'], [1, 2], [true, false]);
-     * // => [['a', 1, true], ['b', 2, false]]
+     * _.zip(['fred', 'barney'], [30, 40], [true, false]);
+     * // => [['fred', 30, true], ['barney', 40, false]]
      */
-    var zip = baseRest(unzip);
+    var zip = rest(unzip);
 
     /**
      * This method is like `_.fromPairs` except that it accepts two arrays,
@@ -18699,7 +17798,7 @@ function serializer(replacer, cycleReplacer) {
      * });
      * // => [111, 222]
      */
-    var zipWith = baseRest(function(arrays) {
+    var zipWith = rest(function(arrays) {
       var length = arrays.length,
           iteratee = length > 1 ? arrays[length - 1] : undefined;
 
@@ -18815,7 +17914,8 @@ function serializer(replacer, cycleReplacer) {
      * _(object).at(['a[0].b.c', 'a[1]']).value();
      * // => [3, 4]
      */
-    var wrapperAt = flatRest(function(paths) {
+    var wrapperAt = rest(function(paths) {
+      paths = baseFlatten(paths, 1);
       var length = paths.length,
           start = length ? paths[0] : 0,
           value = this.__wrapped__,
@@ -19067,7 +18167,7 @@ function serializer(replacer, cycleReplacer) {
      * @since 0.5.0
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
-     * @param {Function} [iteratee=_.identity]
+     * @param {Array|Function|Object|string} [iteratee=_.identity]
      *  The iteratee to transform keys.
      * @returns {Object} Returns the composed aggregate object.
      * @example
@@ -19080,11 +18180,7 @@ function serializer(replacer, cycleReplacer) {
      * // => { '3': 2, '5': 1 }
      */
     var countBy = createAggregator(function(result, value, key) {
-      if (hasOwnProperty.call(result, key)) {
-        ++result[key];
-      } else {
-        baseAssignValue(result, key, 1);
-      }
+      hasOwnProperty.call(result, key) ? ++result[key] : (result[key] = 1);
     });
 
     /**
@@ -19092,17 +18188,12 @@ function serializer(replacer, cycleReplacer) {
      * Iteration is stopped once `predicate` returns falsey. The predicate is
      * invoked with three arguments: (value, index|key, collection).
      *
-     * **Note:** This method returns `true` for
-     * [empty collections](https://en.wikipedia.org/wiki/Empty_set) because
-     * [everything is true](https://en.wikipedia.org/wiki/Vacuous_truth) of
-     * elements of empty collections.
-     *
      * @static
      * @memberOf _
      * @since 0.1.0
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
-     * @param {Function} [predicate=_.identity]
+     * @param {Array|Function|Object|string} [predicate=_.identity]
      *  The function invoked per iteration.
      * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
      * @returns {boolean} Returns `true` if all elements pass the predicate check,
@@ -19142,14 +18233,12 @@ function serializer(replacer, cycleReplacer) {
      * `predicate` returns truthy for. The predicate is invoked with three
      * arguments: (value, index|key, collection).
      *
-     * **Note:** Unlike `_.remove`, this method returns a new array.
-     *
      * @static
      * @memberOf _
      * @since 0.1.0
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
-     * @param {Function} [predicate=_.identity]
+     * @param {Array|Function|Object|string} [predicate=_.identity]
      *  The function invoked per iteration.
      * @returns {Array} Returns the new filtered array.
      * @see _.reject
@@ -19189,8 +18278,8 @@ function serializer(replacer, cycleReplacer) {
      * @memberOf _
      * @since 0.1.0
      * @category Collection
-     * @param {Array|Object} collection The collection to inspect.
-     * @param {Function} [predicate=_.identity]
+     * @param {Array|Object} collection The collection to search.
+     * @param {Array|Function|Object|string} [predicate=_.identity]
      *  The function invoked per iteration.
      * @param {number} [fromIndex=0] The index to search from.
      * @returns {*} Returns the matched element, else `undefined`.
@@ -19227,8 +18316,8 @@ function serializer(replacer, cycleReplacer) {
      * @memberOf _
      * @since 2.0.0
      * @category Collection
-     * @param {Array|Object} collection The collection to inspect.
-     * @param {Function} [predicate=_.identity]
+     * @param {Array|Object} collection The collection to search.
+     * @param {Array|Function|Object|string} [predicate=_.identity]
      *  The function invoked per iteration.
      * @param {number} [fromIndex=collection.length-1] The index to search from.
      * @returns {*} Returns the matched element, else `undefined`.
@@ -19251,7 +18340,7 @@ function serializer(replacer, cycleReplacer) {
      * @since 4.0.0
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
-     * @param {Function} [iteratee=_.identity]
+     * @param {Array|Function|Object|string} [iteratee=_.identity]
      *  The function invoked per iteration.
      * @returns {Array} Returns the new flattened array.
      * @example
@@ -19276,7 +18365,7 @@ function serializer(replacer, cycleReplacer) {
      * @since 4.7.0
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
-     * @param {Function} [iteratee=_.identity]
+     * @param {Array|Function|Object|string} [iteratee=_.identity]
      *  The function invoked per iteration.
      * @returns {Array} Returns the new flattened array.
      * @example
@@ -19301,7 +18390,7 @@ function serializer(replacer, cycleReplacer) {
      * @since 4.7.0
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
-     * @param {Function} [iteratee=_.identity]
+     * @param {Array|Function|Object|string} [iteratee=_.identity]
      *  The function invoked per iteration.
      * @param {number} [depth=1] The maximum recursion depth.
      * @returns {Array} Returns the new flattened array.
@@ -19339,7 +18428,7 @@ function serializer(replacer, cycleReplacer) {
      * @see _.forEachRight
      * @example
      *
-     * _.forEach([1, 2], function(value) {
+     * _([1, 2]).forEach(function(value) {
      *   console.log(value);
      * });
      * // => Logs `1` then `2`.
@@ -19391,7 +18480,7 @@ function serializer(replacer, cycleReplacer) {
      * @since 0.1.0
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
-     * @param {Function} [iteratee=_.identity]
+     * @param {Array|Function|Object|string} [iteratee=_.identity]
      *  The iteratee to transform keys.
      * @returns {Object} Returns the composed aggregate object.
      * @example
@@ -19407,14 +18496,14 @@ function serializer(replacer, cycleReplacer) {
       if (hasOwnProperty.call(result, key)) {
         result[key].push(value);
       } else {
-        baseAssignValue(result, key, [value]);
+        result[key] = [value];
       }
     });
 
     /**
      * Checks if `value` is in `collection`. If `collection` is a string, it's
      * checked for a substring of `value`, otherwise
-     * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+     * [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
      * is used for equality comparisons. If `fromIndex` is negative, it's used as
      * the offset from the end of `collection`.
      *
@@ -19422,7 +18511,7 @@ function serializer(replacer, cycleReplacer) {
      * @memberOf _
      * @since 0.1.0
      * @category Collection
-     * @param {Array|Object|string} collection The collection to inspect.
+     * @param {Array|Object|string} collection The collection to search.
      * @param {*} value The value to search for.
      * @param {number} [fromIndex=0] The index to search from.
      * @param- {Object} [guard] Enables use as an iteratee for methods like `_.reduce`.
@@ -19435,10 +18524,10 @@ function serializer(replacer, cycleReplacer) {
      * _.includes([1, 2, 3], 1, 2);
      * // => false
      *
-     * _.includes({ 'a': 1, 'b': 2 }, 1);
+     * _.includes({ 'user': 'fred', 'age': 40 }, 'fred');
      * // => true
      *
-     * _.includes('abcd', 'bc');
+     * _.includes('pebbles', 'eb');
      * // => true
      */
     function includes(collection, value, fromIndex, guard) {
@@ -19457,8 +18546,8 @@ function serializer(replacer, cycleReplacer) {
     /**
      * Invokes the method at `path` of each element in `collection`, returning
      * an array of the results of each invoked method. Any additional arguments
-     * are provided to each invoked method. If `path` is a function, it's invoked
-     * for, and `this` bound to, each element in `collection`.
+     * are provided to each invoked method. If `methodName` is a function, it's
+     * invoked for and `this` bound to, each element in `collection`.
      *
      * @static
      * @memberOf _
@@ -19477,7 +18566,7 @@ function serializer(replacer, cycleReplacer) {
      * _.invokeMap([123, 456], String.prototype.split, '');
      * // => [['1', '2', '3'], ['4', '5', '6']]
      */
-    var invokeMap = baseRest(function(collection, path, args) {
+    var invokeMap = rest(function(collection, path, args) {
       var index = -1,
           isFunc = typeof path == 'function',
           isProp = isKey(path),
@@ -19501,7 +18590,7 @@ function serializer(replacer, cycleReplacer) {
      * @since 4.0.0
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
-     * @param {Function} [iteratee=_.identity]
+     * @param {Array|Function|Object|string} [iteratee=_.identity]
      *  The iteratee to transform keys.
      * @returns {Object} Returns the composed aggregate object.
      * @example
@@ -19520,7 +18609,7 @@ function serializer(replacer, cycleReplacer) {
      * // => { 'left': { 'dir': 'left', 'code': 97 }, 'right': { 'dir': 'right', 'code': 100 } }
      */
     var keyBy = createAggregator(function(result, value, key) {
-      baseAssignValue(result, key, value);
+      result[key] = value;
     });
 
     /**
@@ -19542,7 +18631,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 0.1.0
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
-     * @param {Function} [iteratee=_.identity] The function invoked per iteration.
+     * @param {Array|Function|Object|string} [iteratee=_.identity]
+     *  The function invoked per iteration.
      * @returns {Array} Returns the new mapped array.
      * @example
      *
@@ -19624,7 +18714,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 3.0.0
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
-     * @param {Function} [predicate=_.identity] The function invoked per iteration.
+     * @param {Array|Function|Object|string} [predicate=_.identity]
+     *  The function invoked per iteration.
      * @returns {Array} Returns the array of grouped elements.
      * @example
      *
@@ -19735,7 +18826,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 0.1.0
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
-     * @param {Function} [predicate=_.identity] The function invoked per iteration.
+     * @param {Array|Function|Object|string} [predicate=_.identity]
+     *  The function invoked per iteration.
      * @returns {Array} Returns the new filtered array.
      * @see _.filter
      * @example
@@ -19762,7 +18854,10 @@ function serializer(replacer, cycleReplacer) {
      */
     function reject(collection, predicate) {
       var func = isArray(collection) ? arrayFilter : baseFilter;
-      return func(collection, negate(getIteratee(predicate, 3)));
+      predicate = getIteratee(predicate, 3);
+      return func(collection, function(value, index, collection) {
+        return !predicate(value, index, collection);
+      });
     }
 
     /**
@@ -19780,8 +18875,10 @@ function serializer(replacer, cycleReplacer) {
      * // => 2
      */
     function sample(collection) {
-      var func = isArray(collection) ? arraySample : baseSample;
-      return func(collection);
+      var array = isArrayLike(collection) ? collection : values(collection),
+          length = array.length;
+
+      return length > 0 ? array[baseRandom(0, length - 1)] : undefined;
     }
 
     /**
@@ -19805,13 +18902,25 @@ function serializer(replacer, cycleReplacer) {
      * // => [2, 3, 1]
      */
     function sampleSize(collection, n, guard) {
+      var index = -1,
+          result = toArray(collection),
+          length = result.length,
+          lastIndex = length - 1;
+
       if ((guard ? isIterateeCall(collection, n, guard) : n === undefined)) {
         n = 1;
       } else {
-        n = toInteger(n);
+        n = baseClamp(toInteger(n), 0, length);
       }
-      var func = isArray(collection) ? arraySampleSize : baseSampleSize;
-      return func(collection, n);
+      while (++index < n) {
+        var rand = baseRandom(index, lastIndex),
+            value = result[rand];
+
+        result[rand] = result[index];
+        result[index] = value;
+      }
+      result.length = n;
+      return result;
     }
 
     /**
@@ -19830,8 +18939,7 @@ function serializer(replacer, cycleReplacer) {
      * // => [4, 1, 3, 2]
      */
     function shuffle(collection) {
-      var func = isArray(collection) ? arrayShuffle : baseShuffle;
-      return func(collection);
+      return sampleSize(collection, MAX_ARRAY_LENGTH);
     }
 
     /**
@@ -19842,7 +18950,7 @@ function serializer(replacer, cycleReplacer) {
      * @memberOf _
      * @since 0.1.0
      * @category Collection
-     * @param {Array|Object|string} collection The collection to inspect.
+     * @param {Array|Object} collection The collection to inspect.
      * @returns {number} Returns the collection size.
      * @example
      *
@@ -19860,13 +18968,16 @@ function serializer(replacer, cycleReplacer) {
         return 0;
       }
       if (isArrayLike(collection)) {
-        return isString(collection) ? stringSize(collection) : collection.length;
+        var result = collection.length;
+        return (result && isString(collection)) ? stringSize(collection) : result;
       }
-      var tag = getTag(collection);
-      if (tag == mapTag || tag == setTag) {
-        return collection.size;
+      if (isObjectLike(collection)) {
+        var tag = getTag(collection);
+        if (tag == mapTag || tag == setTag) {
+          return collection.size;
+        }
       }
-      return baseKeys(collection).length;
+      return keys(collection).length;
     }
 
     /**
@@ -19879,7 +18990,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 0.1.0
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
-     * @param {Function} [predicate=_.identity] The function invoked per iteration.
+     * @param {Array|Function|Object|string} [predicate=_.identity]
+     *  The function invoked per iteration.
      * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
      * @returns {boolean} Returns `true` if any element passes the predicate check,
      *  else `false`.
@@ -19924,8 +19036,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 0.1.0
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
-     * @param {...(Function|Function[])} [iteratees=[_.identity]]
-     *  The iteratees to sort by.
+     * @param {...(Array|Array[]|Function|Function[]|Object|Object[]|string|string[])}
+     *  [iteratees=[_.identity]] The iteratees to sort by.
      * @returns {Array} Returns the new sorted array.
      * @example
      *
@@ -19936,13 +19048,18 @@ function serializer(replacer, cycleReplacer) {
      *   { 'user': 'barney', 'age': 34 }
      * ];
      *
-     * _.sortBy(users, [function(o) { return o.user; }]);
+     * _.sortBy(users, function(o) { return o.user; });
      * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 40]]
      *
      * _.sortBy(users, ['user', 'age']);
      * // => objects for [['barney', 34], ['barney', 36], ['fred', 40], ['fred', 48]]
+     *
+     * _.sortBy(users, 'user', function(o) {
+     *   return Math.floor(o.age / 10);
+     * });
+     * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 40]]
      */
-    var sortBy = baseRest(function(collection, iteratees) {
+    var sortBy = rest(function(collection, iteratees) {
       if (collection == null) {
         return [];
       }
@@ -19952,7 +19069,11 @@ function serializer(replacer, cycleReplacer) {
       } else if (length > 2 && isIterateeCall(iteratees[0], iteratees[1], iteratees[2])) {
         iteratees = [iteratees[0]];
       }
-      return baseOrderBy(collection, baseFlatten(iteratees, 1), []);
+      iteratees = (iteratees.length == 1 && isArray(iteratees[0]))
+        ? iteratees[0]
+        : baseFlatten(iteratees, 1, isFlattenableIteratee);
+
+      return baseOrderBy(collection, iteratees, []);
     });
 
     /*------------------------------------------------------------------------*/
@@ -19973,9 +19094,9 @@ function serializer(replacer, cycleReplacer) {
      * }, _.now());
      * // => Logs the number of milliseconds it took for the deferred invocation.
      */
-    var now = ctxNow || function() {
-      return root.Date.now();
-    };
+    function now() {
+      return Date.now();
+    }
 
     /*------------------------------------------------------------------------*/
 
@@ -20035,7 +19156,7 @@ function serializer(replacer, cycleReplacer) {
     function ary(func, n, guard) {
       n = guard ? undefined : n;
       n = (func && n == null) ? func.length : n;
-      return createWrap(func, ARY_FLAG, undefined, undefined, undefined, undefined, n);
+      return createWrapper(func, ARY_FLAG, undefined, undefined, undefined, undefined, n);
     }
 
     /**
@@ -20053,7 +19174,7 @@ function serializer(replacer, cycleReplacer) {
      * @example
      *
      * jQuery(element).on('click', _.before(5, addContactToList));
-     * // => Allows adding up to 4 contacts to the list.
+     * // => allows adding up to 4 contacts to the list
      */
     function before(n, func) {
       var result;
@@ -20092,9 +19213,9 @@ function serializer(replacer, cycleReplacer) {
      * @returns {Function} Returns the new bound function.
      * @example
      *
-     * function greet(greeting, punctuation) {
+     * var greet = function(greeting, punctuation) {
      *   return greeting + ' ' + this.user + punctuation;
-     * }
+     * };
      *
      * var object = { 'user': 'fred' };
      *
@@ -20107,13 +19228,13 @@ function serializer(replacer, cycleReplacer) {
      * bound('hi');
      * // => 'hi fred!'
      */
-    var bind = baseRest(function(func, thisArg, partials) {
+    var bind = rest(function(func, thisArg, partials) {
       var bitmask = BIND_FLAG;
       if (partials.length) {
         var holders = replaceHolders(partials, getHolder(bind));
         bitmask |= PARTIAL_FLAG;
       }
-      return createWrap(func, bitmask, thisArg, partials, holders);
+      return createWrapper(func, bitmask, thisArg, partials, holders);
     });
 
     /**
@@ -20161,13 +19282,13 @@ function serializer(replacer, cycleReplacer) {
      * bound('hi');
      * // => 'hiya fred!'
      */
-    var bindKey = baseRest(function(object, key, partials) {
+    var bindKey = rest(function(object, key, partials) {
       var bitmask = BIND_FLAG | BIND_KEY_FLAG;
       if (partials.length) {
         var holders = replaceHolders(partials, getHolder(bindKey));
         bitmask |= PARTIAL_FLAG;
       }
-      return createWrap(key, bitmask, object, partials, holders);
+      return createWrapper(key, bitmask, object, partials, holders);
     });
 
     /**
@@ -20213,7 +19334,7 @@ function serializer(replacer, cycleReplacer) {
      */
     function curry(func, arity, guard) {
       arity = guard ? undefined : arity;
-      var result = createWrap(func, CURRY_FLAG, undefined, undefined, undefined, undefined, undefined, arity);
+      var result = createWrapper(func, CURRY_FLAG, undefined, undefined, undefined, undefined, undefined, arity);
       result.placeholder = curry.placeholder;
       return result;
     }
@@ -20258,7 +19379,7 @@ function serializer(replacer, cycleReplacer) {
      */
     function curryRight(func, arity, guard) {
       arity = guard ? undefined : arity;
-      var result = createWrap(func, CURRY_RIGHT_FLAG, undefined, undefined, undefined, undefined, undefined, arity);
+      var result = createWrapper(func, CURRY_RIGHT_FLAG, undefined, undefined, undefined, undefined, undefined, arity);
       result.placeholder = curryRight.placeholder;
       return result;
     }
@@ -20268,18 +19389,14 @@ function serializer(replacer, cycleReplacer) {
      * milliseconds have elapsed since the last time the debounced function was
      * invoked. The debounced function comes with a `cancel` method to cancel
      * delayed `func` invocations and a `flush` method to immediately invoke them.
-     * Provide `options` to indicate whether `func` should be invoked on the
-     * leading and/or trailing edge of the `wait` timeout. The `func` is invoked
-     * with the last arguments provided to the debounced function. Subsequent
-     * calls to the debounced function return the result of the last `func`
-     * invocation.
+     * Provide an options object to indicate whether `func` should be invoked on
+     * the leading and/or trailing edge of the `wait` timeout. The `func` is invoked
+     * with the last arguments provided to the debounced function. Subsequent calls
+     * to the debounced function return the result of the last `func` invocation.
      *
-     * **Note:** If `leading` and `trailing` options are `true`, `func` is
-     * invoked on the trailing edge of the timeout only if the debounced function
-     * is invoked more than once during the `wait` timeout.
-     *
-     * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
-     * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+     * **Note:** If `leading` and `trailing` options are `true`, `func` is invoked
+     * on the trailing edge of the timeout only if the debounced function is
+     * invoked more than once during the `wait` timeout.
      *
      * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
      * for details over the differences between `_.debounce` and `_.throttle`.
@@ -20400,9 +19517,6 @@ function serializer(replacer, cycleReplacer) {
       }
 
       function cancel() {
-        if (timerId !== undefined) {
-          clearTimeout(timerId);
-        }
         lastInvokeTime = 0;
         lastArgs = lastCallTime = lastThis = timerId = undefined;
       }
@@ -20455,9 +19569,9 @@ function serializer(replacer, cycleReplacer) {
      * _.defer(function(text) {
      *   console.log(text);
      * }, 'deferred');
-     * // => Logs 'deferred' after one millisecond.
+     * // => Logs 'deferred' after one or more milliseconds.
      */
-    var defer = baseRest(function(func, args) {
+    var defer = rest(function(func, args) {
       return baseDelay(func, 1, args);
     });
 
@@ -20480,7 +19594,7 @@ function serializer(replacer, cycleReplacer) {
      * }, 1000, 'later');
      * // => Logs 'later' after one second.
      */
-    var delay = baseRest(function(func, wait, args) {
+    var delay = rest(function(func, wait, args) {
       return baseDelay(func, toNumber(wait) || 0, args);
     });
 
@@ -20503,7 +19617,7 @@ function serializer(replacer, cycleReplacer) {
      * // => ['d', 'c', 'b', 'a']
      */
     function flip(func) {
-      return createWrap(func, FLIP_FLAG);
+      return createWrapper(func, FLIP_FLAG);
     }
 
     /**
@@ -20516,7 +19630,7 @@ function serializer(replacer, cycleReplacer) {
      * **Note:** The cache is exposed as the `cache` property on the memoized
      * function. Its creation may be customized by replacing the `_.memoize.Cache`
      * constructor with one whose instances implement the
-     * [`Map`](http://ecma-international.org/ecma-262/7.0/#sec-properties-of-the-map-prototype-object)
+     * [`Map`](http://ecma-international.org/ecma-262/6.0/#sec-properties-of-the-map-prototype-object)
      * method interface of `delete`, `get`, `has`, and `set`.
      *
      * @static
@@ -20563,14 +19677,14 @@ function serializer(replacer, cycleReplacer) {
           return cache.get(key);
         }
         var result = func.apply(this, args);
-        memoized.cache = cache.set(key, result) || cache;
+        memoized.cache = cache.set(key, result);
         return result;
       };
       memoized.cache = new (memoize.Cache || MapCache);
       return memoized;
     }
 
-    // Expose `MapCache`.
+    // Assign cache to `_.memoize`.
     memoize.Cache = MapCache;
 
     /**
@@ -20598,14 +19712,7 @@ function serializer(replacer, cycleReplacer) {
         throw new TypeError(FUNC_ERROR_TEXT);
       }
       return function() {
-        var args = arguments;
-        switch (args.length) {
-          case 0: return !predicate.call(this);
-          case 1: return !predicate.call(this, args[0]);
-          case 2: return !predicate.call(this, args[0], args[1]);
-          case 3: return !predicate.call(this, args[0], args[1], args[2]);
-        }
-        return !predicate.apply(this, args);
+        return !predicate.apply(this, arguments);
       };
     }
 
@@ -20625,22 +19732,23 @@ function serializer(replacer, cycleReplacer) {
      * var initialize = _.once(createApplication);
      * initialize();
      * initialize();
-     * // => `createApplication` is invoked once
+     * // `initialize` invokes `createApplication` once
      */
     function once(func) {
       return before(2, func);
     }
 
     /**
-     * Creates a function that invokes `func` with its arguments transformed.
+     * Creates a function that invokes `func` with arguments transformed by
+     * corresponding `transforms`.
      *
      * @static
      * @since 4.0.0
      * @memberOf _
      * @category Function
      * @param {Function} func The function to wrap.
-     * @param {...(Function|Function[])} [transforms=[_.identity]]
-     *  The argument transforms.
+     * @param {...(Array|Array[]|Function|Function[]|Object|Object[]|string|string[])}
+     *  [transforms[_.identity]] The functions to transform.
      * @returns {Function} Returns the new function.
      * @example
      *
@@ -20662,13 +19770,13 @@ function serializer(replacer, cycleReplacer) {
      * func(10, 5);
      * // => [100, 10]
      */
-    var overArgs = castRest(function(func, transforms) {
+    var overArgs = rest(function(func, transforms) {
       transforms = (transforms.length == 1 && isArray(transforms[0]))
         ? arrayMap(transforms[0], baseUnary(getIteratee()))
-        : arrayMap(baseFlatten(transforms, 1), baseUnary(getIteratee()));
+        : arrayMap(baseFlatten(transforms, 1, isFlattenableIteratee), baseUnary(getIteratee()));
 
       var funcsLength = transforms.length;
-      return baseRest(function(args) {
+      return rest(function(args) {
         var index = -1,
             length = nativeMin(args.length, funcsLength);
 
@@ -20699,9 +19807,9 @@ function serializer(replacer, cycleReplacer) {
      * @returns {Function} Returns the new partially applied function.
      * @example
      *
-     * function greet(greeting, name) {
+     * var greet = function(greeting, name) {
      *   return greeting + ' ' + name;
-     * }
+     * };
      *
      * var sayHelloTo = _.partial(greet, 'hello');
      * sayHelloTo('fred');
@@ -20712,9 +19820,9 @@ function serializer(replacer, cycleReplacer) {
      * greetFred('hi');
      * // => 'hi fred'
      */
-    var partial = baseRest(function(func, partials) {
+    var partial = rest(function(func, partials) {
       var holders = replaceHolders(partials, getHolder(partial));
-      return createWrap(func, PARTIAL_FLAG, undefined, partials, holders);
+      return createWrapper(func, PARTIAL_FLAG, undefined, partials, holders);
     });
 
     /**
@@ -20736,9 +19844,9 @@ function serializer(replacer, cycleReplacer) {
      * @returns {Function} Returns the new partially applied function.
      * @example
      *
-     * function greet(greeting, name) {
+     * var greet = function(greeting, name) {
      *   return greeting + ' ' + name;
-     * }
+     * };
      *
      * var greetFred = _.partialRight(greet, 'fred');
      * greetFred('hi');
@@ -20749,9 +19857,9 @@ function serializer(replacer, cycleReplacer) {
      * sayHelloTo('fred');
      * // => 'hello fred'
      */
-    var partialRight = baseRest(function(func, partials) {
+    var partialRight = rest(function(func, partials) {
       var holders = replaceHolders(partials, getHolder(partialRight));
-      return createWrap(func, PARTIAL_RIGHT_FLAG, undefined, partials, holders);
+      return createWrapper(func, PARTIAL_RIGHT_FLAG, undefined, partials, holders);
     });
 
     /**
@@ -20776,8 +19884,8 @@ function serializer(replacer, cycleReplacer) {
      * rearged('b', 'c', 'a')
      * // => ['a', 'b', 'c']
      */
-    var rearg = flatRest(function(func, indexes) {
-      return createWrap(func, REARG_FLAG, undefined, undefined, undefined, indexes);
+    var rearg = rest(function(func, indexes) {
+      return createWrapper(func, REARG_FLAG, undefined, undefined, undefined, baseFlatten(indexes, 1));
     });
 
     /**
@@ -20809,14 +19917,35 @@ function serializer(replacer, cycleReplacer) {
       if (typeof func != 'function') {
         throw new TypeError(FUNC_ERROR_TEXT);
       }
-      start = start === undefined ? start : toInteger(start);
-      return baseRest(func, start);
+      start = nativeMax(start === undefined ? (func.length - 1) : toInteger(start), 0);
+      return function() {
+        var args = arguments,
+            index = -1,
+            length = nativeMax(args.length - start, 0),
+            array = Array(length);
+
+        while (++index < length) {
+          array[index] = args[start + index];
+        }
+        switch (start) {
+          case 0: return func.call(this, array);
+          case 1: return func.call(this, args[0], array);
+          case 2: return func.call(this, args[0], args[1], array);
+        }
+        var otherArgs = Array(start + 1);
+        index = -1;
+        while (++index < start) {
+          otherArgs[index] = args[index];
+        }
+        otherArgs[start] = array;
+        return apply(func, this, otherArgs);
+      };
     }
 
     /**
      * Creates a function that invokes `func` with the `this` binding of the
      * create function and an array of arguments much like
-     * [`Function#apply`](http://www.ecma-international.org/ecma-262/7.0/#sec-function.prototype.apply).
+     * [`Function#apply`](http://www.ecma-international.org/ecma-262/6.0/#sec-function.prototype.apply).
      *
      * **Note:** This method is based on the
      * [spread operator](https://mdn.io/spread_operator).
@@ -20852,7 +19981,7 @@ function serializer(replacer, cycleReplacer) {
         throw new TypeError(FUNC_ERROR_TEXT);
       }
       start = start === undefined ? 0 : nativeMax(toInteger(start), 0);
-      return baseRest(function(args) {
+      return rest(function(args) {
         var array = args[start],
             otherArgs = castSlice(args, 0, start);
 
@@ -20867,8 +19996,8 @@ function serializer(replacer, cycleReplacer) {
      * Creates a throttled function that only invokes `func` at most once per
      * every `wait` milliseconds. The throttled function comes with a `cancel`
      * method to cancel delayed `func` invocations and a `flush` method to
-     * immediately invoke them. Provide `options` to indicate whether `func`
-     * should be invoked on the leading and/or trailing edge of the `wait`
+     * immediately invoke them. Provide an options object to indicate whether
+     * `func` should be invoked on the leading and/or trailing edge of the `wait`
      * timeout. The `func` is invoked with the last arguments provided to the
      * throttled function. Subsequent calls to the throttled function return the
      * result of the last `func` invocation.
@@ -20876,9 +20005,6 @@ function serializer(replacer, cycleReplacer) {
      * **Note:** If `leading` and `trailing` options are `true`, `func` is
      * invoked on the trailing edge of the timeout only if the throttled function
      * is invoked more than once during the `wait` timeout.
-     *
-     * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
-     * until to the next tick, similar to `setTimeout` with a timeout of `0`.
      *
      * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
      * for details over the differences between `_.throttle` and `_.debounce`.
@@ -20945,10 +20071,10 @@ function serializer(replacer, cycleReplacer) {
     }
 
     /**
-     * Creates a function that provides `value` to `wrapper` as its first
-     * argument. Any additional arguments provided to the function are appended
-     * to those provided to the `wrapper`. The wrapper is invoked with the `this`
-     * binding of the created function.
+     * Creates a function that provides `value` to the wrapper function as its
+     * first argument. Any additional arguments provided to the function are
+     * appended to those provided to the wrapper function. The wrapper is invoked
+     * with the `this` binding of the created function.
      *
      * @static
      * @memberOf _
@@ -21134,36 +20260,8 @@ function serializer(replacer, cycleReplacer) {
     }
 
     /**
-     * Checks if `object` conforms to `source` by invoking the predicate
-     * properties of `source` with the corresponding property values of `object`.
-     *
-     * **Note:** This method is equivalent to `_.conforms` when `source` is
-     * partially applied.
-     *
-     * @static
-     * @memberOf _
-     * @since 4.14.0
-     * @category Lang
-     * @param {Object} object The object to inspect.
-     * @param {Object} source The object of property predicates to conform to.
-     * @returns {boolean} Returns `true` if `object` conforms, else `false`.
-     * @example
-     *
-     * var object = { 'a': 1, 'b': 2 };
-     *
-     * _.conformsTo(object, { 'b': function(n) { return n > 1; } });
-     * // => true
-     *
-     * _.conformsTo(object, { 'b': function(n) { return n > 2; } });
-     * // => false
-     */
-    function conformsTo(object, source) {
-      return source == null || baseConformsTo(object, source, keys(source));
-    }
-
-    /**
      * Performs a
-     * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+     * [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
      * comparison between two values to determine if they are equivalent.
      *
      * @static
@@ -21175,8 +20273,8 @@ function serializer(replacer, cycleReplacer) {
      * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
      * @example
      *
-     * var object = { 'a': 1 };
-     * var other = { 'a': 1 };
+     * var object = { 'user': 'fred' };
+     * var other = { 'user': 'fred' };
      *
      * _.eq(object, object);
      * // => true
@@ -21257,7 +20355,7 @@ function serializer(replacer, cycleReplacer) {
      * @since 0.1.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+     * @returns {boolean} Returns `true` if `value` is correctly classified,
      *  else `false`.
      * @example
      *
@@ -21267,10 +20365,11 @@ function serializer(replacer, cycleReplacer) {
      * _.isArguments([1, 2, 3]);
      * // => false
      */
-    var isArguments = baseIsArguments(function() { return arguments; }()) ? baseIsArguments : function(value) {
-      return isObjectLike(value) && hasOwnProperty.call(value, 'callee') &&
-        !propertyIsEnumerable.call(value, 'callee');
-    };
+    function isArguments(value) {
+      // Safari 8.1 incorrectly makes `arguments.callee` enumerable in strict mode.
+      return isArrayLikeObject(value) && hasOwnProperty.call(value, 'callee') &&
+        (!propertyIsEnumerable.call(value, 'callee') || objectToString.call(value) == argsTag);
+    }
 
     /**
      * Checks if `value` is classified as an `Array` object.
@@ -21278,9 +20377,11 @@ function serializer(replacer, cycleReplacer) {
      * @static
      * @memberOf _
      * @since 0.1.0
+     * @type {Function}
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is an array, else `false`.
+     * @returns {boolean} Returns `true` if `value` is correctly classified,
+     *  else `false`.
      * @example
      *
      * _.isArray([1, 2, 3]);
@@ -21305,7 +20406,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 4.3.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is an array buffer, else `false`.
+     * @returns {boolean} Returns `true` if `value` is correctly classified,
+     *  else `false`.
      * @example
      *
      * _.isArrayBuffer(new ArrayBuffer(2));
@@ -21314,7 +20416,9 @@ function serializer(replacer, cycleReplacer) {
      * _.isArrayBuffer(new Array(2));
      * // => false
      */
-    var isArrayBuffer = nodeIsArrayBuffer ? baseUnary(nodeIsArrayBuffer) : baseIsArrayBuffer;
+    function isArrayBuffer(value) {
+      return isObjectLike(value) && objectToString.call(value) == arrayBufferTag;
+    }
 
     /**
      * Checks if `value` is array-like. A value is considered array-like if it's
@@ -21342,7 +20446,7 @@ function serializer(replacer, cycleReplacer) {
      * // => false
      */
     function isArrayLike(value) {
-      return value != null && isLength(value.length) && !isFunction(value);
+      return value != null && isLength(getLength(value)) && !isFunction(value);
     }
 
     /**
@@ -21382,7 +20486,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 0.1.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is a boolean, else `false`.
+     * @returns {boolean} Returns `true` if `value` is correctly classified,
+     *  else `false`.
      * @example
      *
      * _.isBoolean(false);
@@ -21413,7 +20518,9 @@ function serializer(replacer, cycleReplacer) {
      * _.isBuffer(new Uint8Array(2));
      * // => false
      */
-    var isBuffer = nativeIsBuffer || stubFalse;
+    var isBuffer = !Buffer ? stubFalse : function(value) {
+      return value instanceof Buffer;
+    };
 
     /**
      * Checks if `value` is classified as a `Date` object.
@@ -21423,7 +20530,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 0.1.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is a date object, else `false`.
+     * @returns {boolean} Returns `true` if `value` is correctly classified,
+     *  else `false`.
      * @example
      *
      * _.isDate(new Date);
@@ -21432,7 +20540,9 @@ function serializer(replacer, cycleReplacer) {
      * _.isDate('Mon April 23 2012');
      * // => false
      */
-    var isDate = nodeIsDate ? baseUnary(nodeIsDate) : baseIsDate;
+    function isDate(value) {
+      return isObjectLike(value) && objectToString.call(value) == dateTag;
+    }
 
     /**
      * Checks if `value` is likely a DOM element.
@@ -21442,7 +20552,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 0.1.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is a DOM element, else `false`.
+     * @returns {boolean} Returns `true` if `value` is a DOM element,
+     *  else `false`.
      * @example
      *
      * _.isElement(document.body);
@@ -21452,7 +20563,7 @@ function serializer(replacer, cycleReplacer) {
      * // => false
      */
     function isElement(value) {
-      return value != null && value.nodeType === 1 && isObjectLike(value) && !isPlainObject(value);
+      return !!value && value.nodeType === 1 && isObjectLike(value) && !isPlainObject(value);
     }
 
     /**
@@ -21490,23 +20601,22 @@ function serializer(replacer, cycleReplacer) {
      */
     function isEmpty(value) {
       if (isArrayLike(value) &&
-          (isArray(value) || typeof value == 'string' || typeof value.splice == 'function' ||
-            isBuffer(value) || isTypedArray(value) || isArguments(value))) {
+          (isArray(value) || isString(value) || isFunction(value.splice) ||
+            isArguments(value) || isBuffer(value))) {
         return !value.length;
       }
-      var tag = getTag(value);
-      if (tag == mapTag || tag == setTag) {
-        return !value.size;
-      }
-      if (isPrototype(value)) {
-        return !baseKeys(value).length;
+      if (isObjectLike(value)) {
+        var tag = getTag(value);
+        if (tag == mapTag || tag == setTag) {
+          return !value.size;
+        }
       }
       for (var key in value) {
         if (hasOwnProperty.call(value, key)) {
           return false;
         }
       }
-      return true;
+      return !(nonEnumShadows && keys(value).length);
     }
 
     /**
@@ -21525,11 +20635,12 @@ function serializer(replacer, cycleReplacer) {
      * @category Lang
      * @param {*} value The value to compare.
      * @param {*} other The other value to compare.
-     * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+     * @returns {boolean} Returns `true` if the values are equivalent,
+     *  else `false`.
      * @example
      *
-     * var object = { 'a': 1 };
-     * var other = { 'a': 1 };
+     * var object = { 'user': 'fred' };
+     * var other = { 'user': 'fred' };
      *
      * _.isEqual(object, other);
      * // => true
@@ -21554,7 +20665,8 @@ function serializer(replacer, cycleReplacer) {
      * @param {*} value The value to compare.
      * @param {*} other The other value to compare.
      * @param {Function} [customizer] The function to customize comparisons.
-     * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+     * @returns {boolean} Returns `true` if the values are equivalent,
+     *  else `false`.
      * @example
      *
      * function isGreeting(value) {
@@ -21588,7 +20700,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 3.0.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is an error object, else `false`.
+     * @returns {boolean} Returns `true` if `value` is an error object,
+     *  else `false`.
      * @example
      *
      * _.isError(new Error);
@@ -21616,7 +20729,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 0.1.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is a finite number, else `false`.
+     * @returns {boolean} Returns `true` if `value` is a finite number,
+     *  else `false`.
      * @example
      *
      * _.isFinite(3);
@@ -21643,7 +20757,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 0.1.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is a function, else `false`.
+     * @returns {boolean} Returns `true` if `value` is correctly classified,
+     *  else `false`.
      * @example
      *
      * _.isFunction(_);
@@ -21654,9 +20769,10 @@ function serializer(replacer, cycleReplacer) {
      */
     function isFunction(value) {
       // The use of `Object#toString` avoids issues with the `typeof` operator
-      // in Safari 9 which returns 'object' for typed array and other constructors.
+      // in Safari 8 which returns 'object' for typed array and weak map constructors,
+      // and PhantomJS 1.9 which returns 'function' for `NodeList` instances.
       var tag = isObject(value) ? objectToString.call(value) : '';
-      return tag == funcTag || tag == genTag || tag == proxyTag;
+      return tag == funcTag || tag == genTag;
     }
 
     /**
@@ -21692,15 +20808,16 @@ function serializer(replacer, cycleReplacer) {
     /**
      * Checks if `value` is a valid array-like length.
      *
-     * **Note:** This method is loosely based on
-     * [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
+     * **Note:** This function is loosely based on
+     * [`ToLength`](http://ecma-international.org/ecma-262/6.0/#sec-tolength).
      *
      * @static
      * @memberOf _
      * @since 4.0.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+     * @returns {boolean} Returns `true` if `value` is a valid length,
+     *  else `false`.
      * @example
      *
      * _.isLength(3);
@@ -21722,7 +20839,7 @@ function serializer(replacer, cycleReplacer) {
 
     /**
      * Checks if `value` is the
-     * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+     * [language type](http://www.ecma-international.org/ecma-262/6.0/#sec-ecmascript-language-types)
      * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
      *
      * @static
@@ -21747,7 +20864,7 @@ function serializer(replacer, cycleReplacer) {
      */
     function isObject(value) {
       var type = typeof value;
-      return value != null && (type == 'object' || type == 'function');
+      return !!value && (type == 'object' || type == 'function');
     }
 
     /**
@@ -21775,7 +20892,7 @@ function serializer(replacer, cycleReplacer) {
      * // => false
      */
     function isObjectLike(value) {
-      return value != null && typeof value == 'object';
+      return !!value && typeof value == 'object';
     }
 
     /**
@@ -21786,7 +20903,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 4.3.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is a map, else `false`.
+     * @returns {boolean} Returns `true` if `value` is correctly classified,
+     *  else `false`.
      * @example
      *
      * _.isMap(new Map);
@@ -21795,18 +20913,16 @@ function serializer(replacer, cycleReplacer) {
      * _.isMap(new WeakMap);
      * // => false
      */
-    var isMap = nodeIsMap ? baseUnary(nodeIsMap) : baseIsMap;
+    function isMap(value) {
+      return isObjectLike(value) && getTag(value) == mapTag;
+    }
 
     /**
      * Performs a partial deep comparison between `object` and `source` to
-     * determine if `object` contains equivalent property values.
+     * determine if `object` contains equivalent property values. This method is
+     * equivalent to a `_.matches` function when `source` is partially applied.
      *
-     * **Note:** This method is equivalent to `_.matches` when `source` is
-     * partially applied.
-     *
-     * Partial comparisons will match empty array and empty object `source`
-     * values against any array or object value, respectively. See `_.isEqual`
-     * for a list of supported value comparisons.
+     * **Note:** This method supports comparing the same values as `_.isEqual`.
      *
      * @static
      * @memberOf _
@@ -21817,12 +20933,12 @@ function serializer(replacer, cycleReplacer) {
      * @returns {boolean} Returns `true` if `object` is a match, else `false`.
      * @example
      *
-     * var object = { 'a': 1, 'b': 2 };
+     * var object = { 'user': 'fred', 'age': 40 };
      *
-     * _.isMatch(object, { 'b': 2 });
+     * _.isMatch(object, { 'age': 40 });
      * // => true
      *
-     * _.isMatch(object, { 'b': 1 });
+     * _.isMatch(object, { 'age': 36 });
      * // => false
      */
     function isMatch(object, source) {
@@ -21904,13 +21020,13 @@ function serializer(replacer, cycleReplacer) {
     /**
      * Checks if `value` is a pristine native function.
      *
-     * **Note:** This method can't reliably detect native functions in the presence
-     * of the core-js package because core-js circumvents this kind of detection.
-     * Despite multiple requests, the core-js maintainer has made it clear: any
-     * attempt to fix the detection will be obstructed. As a result, we're left
-     * with little choice but to throw an error. Unfortunately, this also affects
-     * packages, like [babel-polyfill](https://www.npmjs.com/package/babel-polyfill),
-     * which rely on core-js.
+     * **Note:** This method can't reliably detect native functions in the
+     * presence of the `core-js` package because `core-js` circumvents this kind
+     * of detection. Despite multiple requests, the `core-js` maintainer has made
+     * it clear: any attempt to fix the detection will be obstructed. As a result,
+     * we're left with little choice but to throw an error. Unfortunately, this
+     * also affects packages, like [babel-polyfill](https://www.npmjs.com/package/babel-polyfill),
+     * which rely on `core-js`.
      *
      * @static
      * @memberOf _
@@ -21929,7 +21045,7 @@ function serializer(replacer, cycleReplacer) {
      */
     function isNative(value) {
       if (isMaskable(value)) {
-        throw new Error(CORE_ERROR_TEXT);
+        throw new Error('This method is not supported with `core-js`. Try https://github.com/es-shims.');
       }
       return baseIsNative(value);
     }
@@ -21990,7 +21106,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 0.1.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is a number, else `false`.
+     * @returns {boolean} Returns `true` if `value` is correctly classified,
+     *  else `false`.
      * @example
      *
      * _.isNumber(3);
@@ -22019,7 +21136,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 0.8.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
+     * @returns {boolean} Returns `true` if `value` is a plain object,
+     *  else `false`.
      * @example
      *
      * function Foo() {
@@ -22039,7 +21157,8 @@ function serializer(replacer, cycleReplacer) {
      * // => true
      */
     function isPlainObject(value) {
-      if (!isObjectLike(value) || objectToString.call(value) != objectTag) {
+      if (!isObjectLike(value) ||
+          objectToString.call(value) != objectTag || isHostObject(value)) {
         return false;
       }
       var proto = getPrototype(value);
@@ -22059,7 +21178,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 0.1.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is a regexp, else `false`.
+     * @returns {boolean} Returns `true` if `value` is correctly classified,
+     *  else `false`.
      * @example
      *
      * _.isRegExp(/abc/);
@@ -22068,7 +21188,9 @@ function serializer(replacer, cycleReplacer) {
      * _.isRegExp('/abc/');
      * // => false
      */
-    var isRegExp = nodeIsRegExp ? baseUnary(nodeIsRegExp) : baseIsRegExp;
+    function isRegExp(value) {
+      return isObject(value) && objectToString.call(value) == regexpTag;
+    }
 
     /**
      * Checks if `value` is a safe integer. An integer is safe if it's an IEEE-754
@@ -22082,7 +21204,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 4.0.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is a safe integer, else `false`.
+     * @returns {boolean} Returns `true` if `value` is a safe integer,
+     *  else `false`.
      * @example
      *
      * _.isSafeInteger(3);
@@ -22109,7 +21232,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 4.3.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is a set, else `false`.
+     * @returns {boolean} Returns `true` if `value` is correctly classified,
+     *  else `false`.
      * @example
      *
      * _.isSet(new Set);
@@ -22118,7 +21242,9 @@ function serializer(replacer, cycleReplacer) {
      * _.isSet(new WeakSet);
      * // => false
      */
-    var isSet = nodeIsSet ? baseUnary(nodeIsSet) : baseIsSet;
+    function isSet(value) {
+      return isObjectLike(value) && getTag(value) == setTag;
+    }
 
     /**
      * Checks if `value` is classified as a `String` primitive or object.
@@ -22128,7 +21254,8 @@ function serializer(replacer, cycleReplacer) {
      * @memberOf _
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is a string, else `false`.
+     * @returns {boolean} Returns `true` if `value` is correctly classified,
+     *  else `false`.
      * @example
      *
      * _.isString('abc');
@@ -22150,7 +21277,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 4.0.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+     * @returns {boolean} Returns `true` if `value` is correctly classified,
+     *  else `false`.
      * @example
      *
      * _.isSymbol(Symbol.iterator);
@@ -22172,7 +21300,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 3.0.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
+     * @returns {boolean} Returns `true` if `value` is correctly classified,
+     *  else `false`.
      * @example
      *
      * _.isTypedArray(new Uint8Array);
@@ -22181,7 +21310,10 @@ function serializer(replacer, cycleReplacer) {
      * _.isTypedArray([]);
      * // => false
      */
-    var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
+    function isTypedArray(value) {
+      return isObjectLike(value) &&
+        isLength(value.length) && !!typedArrayTags[objectToString.call(value)];
+    }
 
     /**
      * Checks if `value` is `undefined`.
@@ -22212,7 +21344,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 4.3.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is a weak map, else `false`.
+     * @returns {boolean} Returns `true` if `value` is correctly classified,
+     *  else `false`.
      * @example
      *
      * _.isWeakMap(new WeakMap);
@@ -22233,7 +21366,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 4.3.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is a weak set, else `false`.
+     * @returns {boolean} Returns `true` if `value` is correctly classified,
+     *  else `false`.
      * @example
      *
      * _.isWeakSet(new WeakSet);
@@ -22376,7 +21510,7 @@ function serializer(replacer, cycleReplacer) {
      * Converts `value` to an integer.
      *
      * **Note:** This method is loosely based on
-     * [`ToInteger`](http://www.ecma-international.org/ecma-262/7.0/#sec-tointeger).
+     * [`ToInteger`](http://www.ecma-international.org/ecma-262/6.0/#sec-tointeger).
      *
      * @static
      * @memberOf _
@@ -22410,7 +21544,7 @@ function serializer(replacer, cycleReplacer) {
      * array-like object.
      *
      * **Note:** This method is based on
-     * [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
+     * [`ToLength`](http://ecma-international.org/ecma-262/6.0/#sec-tolength).
      *
      * @static
      * @memberOf _
@@ -22467,7 +21601,7 @@ function serializer(replacer, cycleReplacer) {
         return NAN;
       }
       if (isObject(value)) {
-        var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
+        var other = isFunction(value.valueOf) ? value.valueOf() : value;
         value = isObject(other) ? (other + '') : other;
       }
       if (typeof value != 'string') {
@@ -22544,8 +21678,8 @@ function serializer(replacer, cycleReplacer) {
      * @memberOf _
      * @since 4.0.0
      * @category Lang
-     * @param {*} value The value to convert.
-     * @returns {string} Returns the converted string.
+     * @param {*} value The value to process.
+     * @returns {string} Returns the string.
      * @example
      *
      * _.toString(null);
@@ -22582,21 +21716,21 @@ function serializer(replacer, cycleReplacer) {
      * @example
      *
      * function Foo() {
-     *   this.a = 1;
-     * }
-     *
-     * function Bar() {
      *   this.c = 3;
      * }
      *
-     * Foo.prototype.b = 2;
-     * Bar.prototype.d = 4;
+     * function Bar() {
+     *   this.e = 5;
+     * }
      *
-     * _.assign({ 'a': 0 }, new Foo, new Bar);
-     * // => { 'a': 1, 'c': 3 }
+     * Foo.prototype.d = 4;
+     * Bar.prototype.f = 6;
+     *
+     * _.assign({ 'a': 1 }, new Foo, new Bar);
+     * // => { 'a': 1, 'c': 3, 'e': 5 }
      */
     var assign = createAssigner(function(object, source) {
-      if (isPrototype(source) || isArrayLike(source)) {
+      if (nonEnumShadows || isPrototype(source) || isArrayLike(source)) {
         copyObject(source, keys(source), object);
         return;
       }
@@ -22625,21 +21759,27 @@ function serializer(replacer, cycleReplacer) {
      * @example
      *
      * function Foo() {
-     *   this.a = 1;
+     *   this.b = 2;
      * }
      *
      * function Bar() {
-     *   this.c = 3;
+     *   this.d = 4;
      * }
      *
-     * Foo.prototype.b = 2;
-     * Bar.prototype.d = 4;
+     * Foo.prototype.c = 3;
+     * Bar.prototype.e = 5;
      *
-     * _.assignIn({ 'a': 0 }, new Foo, new Bar);
-     * // => { 'a': 1, 'b': 2, 'c': 3, 'd': 4 }
+     * _.assignIn({ 'a': 1 }, new Foo, new Bar);
+     * // => { 'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5 }
      */
     var assignIn = createAssigner(function(object, source) {
-      copyObject(source, keysIn(source), object);
+      if (nonEnumShadows || isPrototype(source) || isArrayLike(source)) {
+        copyObject(source, keysIn(source), object);
+        return;
+      }
+      for (var key in source) {
+        assignValue(object, key, source[key]);
+      }
     });
 
     /**
@@ -22724,7 +21864,9 @@ function serializer(replacer, cycleReplacer) {
      * _.at(object, ['a[0].b.c', 'a[1]']);
      * // => [3, 4]
      */
-    var at = flatRest(baseAt);
+    var at = rest(function(object, paths) {
+      return baseAt(object, baseFlatten(paths, 1));
+    });
 
     /**
      * Creates an object that inherits from the `prototype` object. If a
@@ -22783,10 +21925,10 @@ function serializer(replacer, cycleReplacer) {
      * @see _.defaultsDeep
      * @example
      *
-     * _.defaults({ 'a': 1 }, { 'b': 2 }, { 'a': 3 });
-     * // => { 'a': 1, 'b': 2 }
+     * _.defaults({ 'user': 'barney' }, { 'age': 36 }, { 'user': 'fred' });
+     * // => { 'user': 'barney', 'age': 36 }
      */
-    var defaults = baseRest(function(args) {
+    var defaults = rest(function(args) {
       args.push(undefined, assignInDefaults);
       return apply(assignInWith, undefined, args);
     });
@@ -22807,10 +21949,11 @@ function serializer(replacer, cycleReplacer) {
      * @see _.defaults
      * @example
      *
-     * _.defaultsDeep({ 'a': { 'b': 2 } }, { 'a': { 'b': 1, 'c': 3 } });
-     * // => { 'a': { 'b': 2, 'c': 3 } }
+     * _.defaultsDeep({ 'user': { 'name': 'barney' } }, { 'user': { 'name': 'fred', 'age': 36 } });
+     * // => { 'user': { 'name': 'barney', 'age': 36 } }
+     *
      */
-    var defaultsDeep = baseRest(function(args) {
+    var defaultsDeep = rest(function(args) {
       args.push(undefined, mergeDefaults);
       return apply(mergeWith, undefined, args);
     });
@@ -22823,8 +21966,9 @@ function serializer(replacer, cycleReplacer) {
      * @memberOf _
      * @since 1.1.0
      * @category Object
-     * @param {Object} object The object to inspect.
-     * @param {Function} [predicate=_.identity] The function invoked per iteration.
+     * @param {Object} object The object to search.
+     * @param {Array|Function|Object|string} [predicate=_.identity]
+     *  The function invoked per iteration.
      * @returns {string|undefined} Returns the key of the matched element,
      *  else `undefined`.
      * @example
@@ -22862,8 +22006,9 @@ function serializer(replacer, cycleReplacer) {
      * @memberOf _
      * @since 2.0.0
      * @category Object
-     * @param {Object} object The object to inspect.
-     * @param {Function} [predicate=_.identity] The function invoked per iteration.
+     * @param {Object} object The object to search.
+     * @param {Array|Function|Object|string} [predicate=_.identity]
+     *  The function invoked per iteration.
      * @returns {string|undefined} Returns the key of the matched element,
      *  else `undefined`.
      * @example
@@ -23077,7 +22222,7 @@ function serializer(replacer, cycleReplacer) {
 
     /**
      * Gets the value at `path` of `object`. If the resolved value is
-     * `undefined`, the `defaultValue` is returned in its place.
+     * `undefined`, the `defaultValue` is used in its place.
      *
      * @static
      * @memberOf _
@@ -23200,7 +22345,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 4.1.0
      * @category Object
      * @param {Object} object The object to invert.
-     * @param {Function} [iteratee=_.identity] The iteratee invoked per element.
+     * @param {Array|Function|Object|string} [iteratee=_.identity]
+     *  The iteratee invoked per element.
      * @returns {Object} Returns the new inverted object.
      * @example
      *
@@ -23240,13 +22386,13 @@ function serializer(replacer, cycleReplacer) {
      * _.invoke(object, 'a[0].b.c.slice', 1, 3);
      * // => [2, 3]
      */
-    var invoke = baseRest(baseInvoke);
+    var invoke = rest(baseInvoke);
 
     /**
      * Creates an array of the own enumerable property names of `object`.
      *
      * **Note:** Non-object values are coerced to objects. See the
-     * [ES spec](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
+     * [ES spec](http://ecma-international.org/ecma-262/6.0/#sec-object.keys)
      * for more details.
      *
      * @static
@@ -23271,7 +22417,23 @@ function serializer(replacer, cycleReplacer) {
      * // => ['0', '1']
      */
     function keys(object) {
-      return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
+      var isProto = isPrototype(object);
+      if (!(isProto || isArrayLike(object))) {
+        return baseKeys(object);
+      }
+      var indexes = indexKeys(object),
+          skipIndexes = !!indexes,
+          result = indexes || [],
+          length = result.length;
+
+      for (var key in object) {
+        if (baseHas(object, key) &&
+            !(skipIndexes && (key == 'length' || isIndex(key, length))) &&
+            !(isProto && key == 'constructor')) {
+          result.push(key);
+        }
+      }
+      return result;
     }
 
     /**
@@ -23298,7 +22460,23 @@ function serializer(replacer, cycleReplacer) {
      * // => ['a', 'b', 'c'] (iteration order is not guaranteed)
      */
     function keysIn(object) {
-      return isArrayLike(object) ? arrayLikeKeys(object, true) : baseKeysIn(object);
+      var index = -1,
+          isProto = isPrototype(object),
+          props = baseKeysIn(object),
+          propsLength = props.length,
+          indexes = indexKeys(object),
+          skipIndexes = !!indexes,
+          result = indexes || [],
+          length = result.length;
+
+      while (++index < propsLength) {
+        var key = props[index];
+        if (!(skipIndexes && (key == 'length' || isIndex(key, length))) &&
+            !(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
+          result.push(key);
+        }
+      }
+      return result;
     }
 
     /**
@@ -23312,7 +22490,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 3.8.0
      * @category Object
      * @param {Object} object The object to iterate over.
-     * @param {Function} [iteratee=_.identity] The function invoked per iteration.
+     * @param {Array|Function|Object|string} [iteratee=_.identity]
+     *  The function invoked per iteration.
      * @returns {Object} Returns the new mapped object.
      * @see _.mapValues
      * @example
@@ -23327,7 +22506,7 @@ function serializer(replacer, cycleReplacer) {
       iteratee = getIteratee(iteratee, 3);
 
       baseForOwn(object, function(value, key, object) {
-        baseAssignValue(result, iteratee(value, key, object), value);
+        result[iteratee(value, key, object)] = value;
       });
       return result;
     }
@@ -23343,7 +22522,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 2.4.0
      * @category Object
      * @param {Object} object The object to iterate over.
-     * @param {Function} [iteratee=_.identity] The function invoked per iteration.
+     * @param {Array|Function|Object|string} [iteratee=_.identity]
+     *  The function invoked per iteration.
      * @returns {Object} Returns the new mapped object.
      * @see _.mapKeys
      * @example
@@ -23365,7 +22545,7 @@ function serializer(replacer, cycleReplacer) {
       iteratee = getIteratee(iteratee, 3);
 
       baseForOwn(object, function(value, key, object) {
-        baseAssignValue(result, key, iteratee(value, key, object));
+        result[key] = iteratee(value, key, object);
       });
       return result;
     }
@@ -23390,16 +22570,16 @@ function serializer(replacer, cycleReplacer) {
      * @returns {Object} Returns `object`.
      * @example
      *
-     * var object = {
-     *   'a': [{ 'b': 2 }, { 'd': 4 }]
+     * var users = {
+     *   'data': [{ 'user': 'barney' }, { 'user': 'fred' }]
      * };
      *
-     * var other = {
-     *   'a': [{ 'c': 3 }, { 'e': 5 }]
+     * var ages = {
+     *   'data': [{ 'age': 36 }, { 'age': 40 }]
      * };
      *
-     * _.merge(object, other);
-     * // => { 'a': [{ 'b': 2, 'c': 3 }, { 'd': 4, 'e': 5 }] }
+     * _.merge(users, ages);
+     * // => { 'data': [{ 'user': 'barney', 'age': 36 }, { 'user': 'fred', 'age': 40 }] }
      */
     var merge = createAssigner(function(object, source, srcIndex) {
       baseMerge(object, source, srcIndex);
@@ -23409,7 +22589,7 @@ function serializer(replacer, cycleReplacer) {
      * This method is like `_.merge` except that it accepts `customizer` which
      * is invoked to produce the merged values of the destination and source
      * properties. If `customizer` returns `undefined`, merging is handled by the
-     * method instead. The `customizer` is invoked with six arguments:
+     * method instead. The `customizer` is invoked with seven arguments:
      * (objValue, srcValue, key, object, source, stack).
      *
      * **Note:** This method mutates `object`.
@@ -23430,11 +22610,18 @@ function serializer(replacer, cycleReplacer) {
      *   }
      * }
      *
-     * var object = { 'a': [1], 'b': [2] };
-     * var other = { 'a': [3], 'b': [4] };
+     * var object = {
+     *   'fruits': ['apple'],
+     *   'vegetables': ['beet']
+     * };
+     *
+     * var other = {
+     *   'fruits': ['banana'],
+     *   'vegetables': ['carrot']
+     * };
      *
      * _.mergeWith(object, other, customizer);
-     * // => { 'a': [1, 3], 'b': [2, 4] }
+     * // => { 'fruits': ['apple', 'banana'], 'vegetables': ['beet', 'carrot'] }
      */
     var mergeWith = createAssigner(function(object, source, srcIndex, customizer) {
       baseMerge(object, source, srcIndex, customizer);
@@ -23459,11 +22646,11 @@ function serializer(replacer, cycleReplacer) {
      * _.omit(object, ['a', 'c']);
      * // => { 'b': '2' }
      */
-    var omit = flatRest(function(object, props) {
+    var omit = rest(function(object, props) {
       if (object == null) {
         return {};
       }
-      props = arrayMap(props, toKey);
+      props = arrayMap(baseFlatten(props, 1), toKey);
       return basePick(object, baseDifference(getAllKeysIn(object), props));
     });
 
@@ -23478,7 +22665,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 4.0.0
      * @category Object
      * @param {Object} object The source object.
-     * @param {Function} [predicate=_.identity] The function invoked per property.
+     * @param {Array|Function|Object|string} [predicate=_.identity]
+     *  The function invoked per property.
      * @returns {Object} Returns the new object.
      * @example
      *
@@ -23488,7 +22676,10 @@ function serializer(replacer, cycleReplacer) {
      * // => { 'b': '2' }
      */
     function omitBy(object, predicate) {
-      return pickBy(object, negate(getIteratee(predicate)));
+      predicate = getIteratee(predicate);
+      return basePickBy(object, function(value, key) {
+        return !predicate(value, key);
+      });
     }
 
     /**
@@ -23508,8 +22699,8 @@ function serializer(replacer, cycleReplacer) {
      * _.pick(object, ['a', 'c']);
      * // => { 'a': 1, 'c': 3 }
      */
-    var pick = flatRest(function(object, props) {
-      return object == null ? {} : basePick(object, arrayMap(props, toKey));
+    var pick = rest(function(object, props) {
+      return object == null ? {} : basePick(object, arrayMap(baseFlatten(props, 1), toKey));
     });
 
     /**
@@ -23521,7 +22712,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 4.0.0
      * @category Object
      * @param {Object} object The source object.
-     * @param {Function} [predicate=_.identity] The function invoked per property.
+     * @param {Array|Function|Object|string} [predicate=_.identity]
+     *  The function invoked per property.
      * @returns {Object} Returns the new object.
      * @example
      *
@@ -23531,7 +22723,7 @@ function serializer(replacer, cycleReplacer) {
      * // => { 'a': 1, 'c': 3 }
      */
     function pickBy(object, predicate) {
-      return object == null ? {} : basePickBy(object, getAllKeysIn(object), getIteratee(predicate));
+      return object == null ? {} : basePickBy(object, getIteratee(predicate));
     }
 
     /**
@@ -23729,23 +22921,22 @@ function serializer(replacer, cycleReplacer) {
      * // => { '1': ['a', 'c'], '2': ['b'] }
      */
     function transform(object, iteratee, accumulator) {
-      var isArr = isArray(object),
-          isArrLike = isArr || isBuffer(object) || isTypedArray(object);
-
+      var isArr = isArray(object) || isTypedArray(object);
       iteratee = getIteratee(iteratee, 4);
+
       if (accumulator == null) {
-        var Ctor = object && object.constructor;
-        if (isArrLike) {
-          accumulator = isArr ? new Ctor : [];
-        }
-        else if (isObject(object)) {
-          accumulator = isFunction(Ctor) ? baseCreate(getPrototype(object)) : {};
-        }
-        else {
+        if (isArr || isObject(object)) {
+          var Ctor = object.constructor;
+          if (isArr) {
+            accumulator = isArray(object) ? new Ctor : [];
+          } else {
+            accumulator = isFunction(Ctor) ? baseCreate(getPrototype(object)) : {};
+          }
+        } else {
           accumulator = {};
         }
       }
-      (isArrLike ? arrayEach : baseForOwn)(object, function(value, index, object) {
+      (isArr ? arrayEach : baseForOwn)(object, function(value, index, object) {
         return iteratee(accumulator, value, index, object);
       });
       return accumulator;
@@ -23976,12 +23167,12 @@ function serializer(replacer, cycleReplacer) {
      * // => true
      */
     function inRange(number, start, end) {
-      start = toFinite(start);
+      start = toNumber(start) || 0;
       if (end === undefined) {
         end = start;
         start = 0;
       } else {
-        end = toFinite(end);
+        end = toNumber(end) || 0;
       }
       number = toNumber(number);
       return baseInRange(number, start, end);
@@ -24037,12 +23228,12 @@ function serializer(replacer, cycleReplacer) {
         upper = 1;
       }
       else {
-        lower = toFinite(lower);
+        lower = toNumber(lower) || 0;
         if (upper === undefined) {
           upper = lower;
           lower = 0;
         } else {
-          upper = toFinite(upper);
+          upper = toNumber(upper) || 0;
         }
       }
       if (lower > upper) {
@@ -24105,9 +23296,8 @@ function serializer(replacer, cycleReplacer) {
 
     /**
      * Deburrs `string` by converting
-     * [Latin-1 Supplement](https://en.wikipedia.org/wiki/Latin-1_Supplement_(Unicode_block)#Character_table)
-     * and [Latin Extended-A](https://en.wikipedia.org/wiki/Latin_Extended-A)
-     * letters to basic Latin letters and removing
+     * [latin-1 supplementary letters](https://en.wikipedia.org/wiki/Latin-1_Supplement_(Unicode_block)#Character_table)
+     * to basic latin letters and removing
      * [combining diacritical marks](https://en.wikipedia.org/wiki/Combining_Diacritical_Marks).
      *
      * @static
@@ -24123,7 +23313,7 @@ function serializer(replacer, cycleReplacer) {
      */
     function deburr(string) {
       string = toString(string);
-      return string && string.replace(reLatin, deburrLetter).replace(reComboMark, '');
+      return string && string.replace(reLatin1, deburrLetter).replace(reComboMark, '');
     }
 
     /**
@@ -24133,7 +23323,7 @@ function serializer(replacer, cycleReplacer) {
      * @memberOf _
      * @since 3.0.0
      * @category String
-     * @param {string} [string=''] The string to inspect.
+     * @param {string} [string=''] The string to search.
      * @param {string} [target] The string to search for.
      * @param {number} [position=string.length] The position to search up to.
      * @returns {boolean} Returns `true` if `string` ends with `target`,
@@ -24158,14 +23348,13 @@ function serializer(replacer, cycleReplacer) {
         ? length
         : baseClamp(toInteger(position), 0, length);
 
-      var end = position;
       position -= target.length;
-      return position >= 0 && string.slice(position, end) == target;
+      return position >= 0 && string.indexOf(target, position) == position;
     }
 
     /**
-     * Converts the characters "&", "<", ">", '"', and "'" in `string` to their
-     * corresponding HTML entities.
+     * Converts the characters "&", "<", ">", '"', "'", and "\`" in `string` to
+     * their corresponding HTML entities.
      *
      * **Note:** No other characters are escaped. To escape additional
      * characters use a third-party library like [_he_](https://mths.be/he).
@@ -24175,6 +23364,12 @@ function serializer(replacer, cycleReplacer) {
      * unless they're part of a tag or unquoted attribute value. See
      * [Mathias Bynens's article](https://mathiasbynens.be/notes/ambiguous-ampersands)
      * (under "semi-related fun fact") for more details.
+     *
+     * Backticks are escaped because in IE < 9, they can break out of
+     * attribute values or HTML comments. See [#59](https://html5sec.org/#59),
+     * [#102](https://html5sec.org/#102), [#108](https://html5sec.org/#108), and
+     * [#133](https://html5sec.org/#133) of the
+     * [HTML5 Security Cheatsheet](https://html5sec.org/) for more details.
      *
      * When working with HTML you should always
      * [quote attribute values](http://wonko.com/post/html-escaping) to reduce
@@ -24418,12 +23613,15 @@ function serializer(replacer, cycleReplacer) {
      * // => [6, 8, 10]
      */
     function parseInt(string, radix, guard) {
+      // Chrome fails to trim leading <BOM> whitespace characters.
+      // See https://bugs.chromium.org/p/v8/issues/detail?id=3109 for more details.
       if (guard || radix == null) {
         radix = 0;
       } else if (radix) {
         radix = +radix;
       }
-      return nativeParseInt(toString(string).replace(reTrimStart, ''), radix || 0);
+      string = toString(string).replace(reTrim, '');
+      return nativeParseInt(string, radix || (reHasHexPrefix.test(string) ? 16 : 10));
     }
 
     /**
@@ -24480,7 +23678,7 @@ function serializer(replacer, cycleReplacer) {
       var args = arguments,
           string = toString(args[0]);
 
-      return args.length < 3 ? string : string.replace(args[1], args[2]);
+      return args.length < 3 ? string : nativeReplace.call(string, args[1], args[2]);
     }
 
     /**
@@ -24541,11 +23739,11 @@ function serializer(replacer, cycleReplacer) {
             (separator != null && !isRegExp(separator))
           )) {
         separator = baseToString(separator);
-        if (!separator && hasUnicode(string)) {
+        if (separator == '' && reHasComplexSymbol.test(string)) {
           return castSlice(stringToArray(string), 0, limit);
         }
       }
-      return string.split(separator, limit);
+      return nativeSplit.call(string, separator, limit);
     }
 
     /**
@@ -24580,7 +23778,7 @@ function serializer(replacer, cycleReplacer) {
      * @memberOf _
      * @since 3.0.0
      * @category String
-     * @param {string} [string=''] The string to inspect.
+     * @param {string} [string=''] The string to search.
      * @param {string} [target] The string to search for.
      * @param {number} [position=0] The position to search from.
      * @returns {boolean} Returns `true` if `string` starts with `target`,
@@ -24599,8 +23797,7 @@ function serializer(replacer, cycleReplacer) {
     function startsWith(string, target, position) {
       string = toString(string);
       position = baseClamp(toInteger(position), 0, string.length);
-      target = baseToString(target);
-      return string.slice(position, position + target.length) == target;
+      return string.lastIndexOf(baseToString(target), position) == position;
     }
 
     /**
@@ -24662,8 +23859,7 @@ function serializer(replacer, cycleReplacer) {
      * compiled({ 'user': 'barney' });
      * // => 'hello barney!'
      *
-     * // Use the ES template literal delimiter as an "interpolate" delimiter.
-     * // Disable support by replacing the "interpolate" delimiter.
+     * // Use the ES delimiter as an alternative to the default "interpolate" delimiter.
      * var compiled = _.template('hello ${ user }!');
      * compiled({ 'user': 'pebbles' });
      * // => 'hello pebbles!'
@@ -25018,7 +24214,7 @@ function serializer(replacer, cycleReplacer) {
       string = toString(string);
 
       var strLength = string.length;
-      if (hasUnicode(string)) {
+      if (reHasComplexSymbol.test(string)) {
         var strSymbols = stringToArray(string);
         strLength = strSymbols.length;
       }
@@ -25064,7 +24260,7 @@ function serializer(replacer, cycleReplacer) {
 
     /**
      * The inverse of `_.escape`; this method converts the HTML entities
-     * `&amp;`, `&lt;`, `&gt;`, `&quot;`, and `&#39;` in `string` to
+     * `&amp;`, `&lt;`, `&gt;`, `&quot;`, `&#39;`, and `&#96;` in `string` to
      * their corresponding characters.
      *
      * **Note:** No other HTML entities are unescaped. To unescape additional
@@ -25155,7 +24351,7 @@ function serializer(replacer, cycleReplacer) {
       pattern = guard ? undefined : pattern;
 
       if (pattern === undefined) {
-        return hasUnicodeWord(string) ? unicodeWords(string) : asciiWords(string);
+        pattern = reHasComplexWord.test(string) ? reComplexWord : reBasicWord;
       }
       return string.match(pattern) || [];
     }
@@ -25184,7 +24380,7 @@ function serializer(replacer, cycleReplacer) {
      *   elements = [];
      * }
      */
-    var attempt = baseRest(function(func, args) {
+    var attempt = rest(function(func, args) {
       try {
         return apply(func, undefined, args);
       } catch (e) {
@@ -25209,19 +24405,19 @@ function serializer(replacer, cycleReplacer) {
      *
      * var view = {
      *   'label': 'docs',
-     *   'click': function() {
+     *   'onClick': function() {
      *     console.log('clicked ' + this.label);
      *   }
      * };
      *
-     * _.bindAll(view, ['click']);
-     * jQuery(element).on('click', view.click);
+     * _.bindAll(view, ['onClick']);
+     * jQuery(element).on('click', view.onClick);
      * // => Logs 'clicked docs' when clicked.
      */
-    var bindAll = flatRest(function(object, methodNames) {
-      arrayEach(methodNames, function(key) {
+    var bindAll = rest(function(object, methodNames) {
+      arrayEach(baseFlatten(methodNames, 1), function(key) {
         key = toKey(key);
-        baseAssignValue(object, key, bind(object[key], object));
+        object[key] = bind(object[key], object);
       });
       return object;
     });
@@ -25243,7 +24439,7 @@ function serializer(replacer, cycleReplacer) {
      * var func = _.cond([
      *   [_.matches({ 'a': 1 }),           _.constant('matches A')],
      *   [_.conforms({ 'b': _.isNumber }), _.constant('matches B')],
-     *   [_.stubTrue,                      _.constant('no match')]
+     *   [_.constant(true),                _.constant('no match')]
      * ]);
      *
      * func({ 'a': 1, 'b': 2 });
@@ -25266,7 +24462,7 @@ function serializer(replacer, cycleReplacer) {
         return [toIteratee(pair[0]), pair[1]];
       });
 
-      return baseRest(function(args) {
+      return rest(function(args) {
         var index = -1;
         while (++index < length) {
           var pair = pairs[index];
@@ -25282,9 +24478,6 @@ function serializer(replacer, cycleReplacer) {
      * the corresponding property values of a given object, returning `true` if
      * all predicates return truthy, else `false`.
      *
-     * **Note:** The created function is equivalent to `_.conformsTo` with
-     * `source` partially applied.
-     *
      * @static
      * @memberOf _
      * @since 4.0.0
@@ -25293,13 +24486,13 @@ function serializer(replacer, cycleReplacer) {
      * @returns {Function} Returns the new spec function.
      * @example
      *
-     * var objects = [
-     *   { 'a': 2, 'b': 1 },
-     *   { 'a': 1, 'b': 2 }
+     * var users = [
+     *   { 'user': 'barney', 'age': 36 },
+     *   { 'user': 'fred',   'age': 40 }
      * ];
      *
-     * _.filter(objects, _.conforms({ 'b': function(n) { return n > 1; } }));
-     * // => [{ 'a': 1, 'b': 2 }]
+     * _.filter(users, _.conforms({ 'age': function(n) { return n > 38; } }));
+     * // => [{ 'user': 'fred', 'age': 40 }]
      */
     function conforms(source) {
       return baseConforms(baseClone(source, true));
@@ -25331,30 +24524,6 @@ function serializer(replacer, cycleReplacer) {
     }
 
     /**
-     * Checks `value` to determine whether a default value should be returned in
-     * its place. The `defaultValue` is returned if `value` is `NaN`, `null`,
-     * or `undefined`.
-     *
-     * @static
-     * @memberOf _
-     * @since 4.14.0
-     * @category Util
-     * @param {*} value The value to check.
-     * @param {*} defaultValue The default value.
-     * @returns {*} Returns the resolved value.
-     * @example
-     *
-     * _.defaultTo(1, 10);
-     * // => 1
-     *
-     * _.defaultTo(undefined, 10);
-     * // => 10
-     */
-    function defaultTo(value, defaultValue) {
-      return (value == null || value !== value) ? defaultValue : value;
-    }
-
-    /**
      * Creates a function that returns the result of invoking the given functions
      * with the `this` binding of the created function, where each successive
      * invocation is supplied the return value of the previous.
@@ -25363,7 +24532,7 @@ function serializer(replacer, cycleReplacer) {
      * @memberOf _
      * @since 3.0.0
      * @category Util
-     * @param {...(Function|Function[])} [funcs] The functions to invoke.
+     * @param {...(Function|Function[])} [funcs] Functions to invoke.
      * @returns {Function} Returns the new composite function.
      * @see _.flowRight
      * @example
@@ -25386,7 +24555,7 @@ function serializer(replacer, cycleReplacer) {
      * @since 3.0.0
      * @memberOf _
      * @category Util
-     * @param {...(Function|Function[])} [funcs] The functions to invoke.
+     * @param {...(Function|Function[])} [funcs] Functions to invoke.
      * @returns {Function} Returns the new composite function.
      * @see _.flow
      * @example
@@ -25402,7 +24571,7 @@ function serializer(replacer, cycleReplacer) {
     var flowRight = createFlow(true);
 
     /**
-     * This method returns the first argument it receives.
+     * This method returns the first argument given to it.
      *
      * @static
      * @since 0.1.0
@@ -25412,7 +24581,7 @@ function serializer(replacer, cycleReplacer) {
      * @returns {*} Returns `value`.
      * @example
      *
-     * var object = { 'a': 1 };
+     * var object = { 'user': 'fred' };
      *
      * console.log(_.identity(object) === object);
      * // => true
@@ -25470,14 +24639,10 @@ function serializer(replacer, cycleReplacer) {
     /**
      * Creates a function that performs a partial deep comparison between a given
      * object and `source`, returning `true` if the given object has equivalent
-     * property values, else `false`.
+     * property values, else `false`. The created function is equivalent to
+     * `_.isMatch` with a `source` partially applied.
      *
-     * **Note:** The created function is equivalent to `_.isMatch` with `source`
-     * partially applied.
-     *
-     * Partial comparisons will match empty array and empty object `source`
-     * values against any array or object value, respectively. See `_.isEqual`
-     * for a list of supported value comparisons.
+     * **Note:** This method supports comparing the same values as `_.isEqual`.
      *
      * @static
      * @memberOf _
@@ -25487,13 +24652,13 @@ function serializer(replacer, cycleReplacer) {
      * @returns {Function} Returns the new spec function.
      * @example
      *
-     * var objects = [
-     *   { 'a': 1, 'b': 2, 'c': 3 },
-     *   { 'a': 4, 'b': 5, 'c': 6 }
+     * var users = [
+     *   { 'user': 'barney', 'age': 36, 'active': true },
+     *   { 'user': 'fred',   'age': 40, 'active': false }
      * ];
      *
-     * _.filter(objects, _.matches({ 'a': 4, 'c': 6 }));
-     * // => [{ 'a': 4, 'b': 5, 'c': 6 }]
+     * _.filter(users, _.matches({ 'age': 40, 'active': false }));
+     * // => [{ 'user': 'fred', 'age': 40, 'active': false }]
      */
     function matches(source) {
       return baseMatches(baseClone(source, true));
@@ -25504,9 +24669,7 @@ function serializer(replacer, cycleReplacer) {
      * value at `path` of a given object to `srcValue`, returning `true` if the
      * object value is equivalent, else `false`.
      *
-     * **Note:** Partial comparisons will match empty array and empty object
-     * `srcValue` values against any array or object value, respectively. See
-     * `_.isEqual` for a list of supported value comparisons.
+     * **Note:** This method supports comparing the same values as `_.isEqual`.
      *
      * @static
      * @memberOf _
@@ -25517,13 +24680,13 @@ function serializer(replacer, cycleReplacer) {
      * @returns {Function} Returns the new spec function.
      * @example
      *
-     * var objects = [
-     *   { 'a': 1, 'b': 2, 'c': 3 },
-     *   { 'a': 4, 'b': 5, 'c': 6 }
+     * var users = [
+     *   { 'user': 'barney' },
+     *   { 'user': 'fred' }
      * ];
      *
-     * _.find(objects, _.matchesProperty('a', 4));
-     * // => { 'a': 4, 'b': 5, 'c': 6 }
+     * _.find(users, _.matchesProperty('user', 'fred'));
+     * // => { 'user': 'fred' }
      */
     function matchesProperty(path, srcValue) {
       return baseMatchesProperty(path, baseClone(srcValue, true));
@@ -25553,7 +24716,7 @@ function serializer(replacer, cycleReplacer) {
      * _.map(objects, _.method(['a', 'b']));
      * // => [2, 1]
      */
-    var method = baseRest(function(path, args) {
+    var method = rest(function(path, args) {
       return function(object) {
         return baseInvoke(object, path, args);
       };
@@ -25582,7 +24745,7 @@ function serializer(replacer, cycleReplacer) {
      * _.map([['a', '2'], ['c', '0']], _.methodOf(object));
      * // => [2, 0]
      */
-    var methodOf = baseRest(function(object, args) {
+    var methodOf = rest(function(object, args) {
       return function(path) {
         return baseInvoke(object, path, args);
       };
@@ -25681,7 +24844,7 @@ function serializer(replacer, cycleReplacer) {
     }
 
     /**
-     * This method returns `undefined`.
+     * A method that returns `undefined`.
      *
      * @static
      * @memberOf _
@@ -25718,7 +24881,7 @@ function serializer(replacer, cycleReplacer) {
      */
     function nthArg(n) {
       n = toInteger(n);
-      return baseRest(function(args) {
+      return rest(function(args) {
         return baseNth(args, n);
       });
     }
@@ -25731,8 +24894,8 @@ function serializer(replacer, cycleReplacer) {
      * @memberOf _
      * @since 4.0.0
      * @category Util
-     * @param {...(Function|Function[])} [iteratees=[_.identity]]
-     *  The iteratees to invoke.
+     * @param {...(Array|Array[]|Function|Function[]|Object|Object[]|string|string[])}
+     *  [iteratees=[_.identity]] The iteratees to invoke.
      * @returns {Function} Returns the new function.
      * @example
      *
@@ -25751,8 +24914,8 @@ function serializer(replacer, cycleReplacer) {
      * @memberOf _
      * @since 4.0.0
      * @category Util
-     * @param {...(Function|Function[])} [predicates=[_.identity]]
-     *  The predicates to check.
+     * @param {...(Array|Array[]|Function|Function[]|Object|Object[]|string|string[])}
+     *  [predicates=[_.identity]] The predicates to check.
      * @returns {Function} Returns the new function.
      * @example
      *
@@ -25777,8 +24940,8 @@ function serializer(replacer, cycleReplacer) {
      * @memberOf _
      * @since 4.0.0
      * @category Util
-     * @param {...(Function|Function[])} [predicates=[_.identity]]
-     *  The predicates to check.
+     * @param {...(Array|Array[]|Function|Function[]|Object|Object[]|string|string[])}
+     *  [predicates=[_.identity]] The predicates to check.
      * @returns {Function} Returns the new function.
      * @example
      *
@@ -25930,7 +25093,7 @@ function serializer(replacer, cycleReplacer) {
     var rangeRight = createRange(true);
 
     /**
-     * This method returns a new empty array.
+     * A method that returns a new empty array.
      *
      * @static
      * @memberOf _
@@ -25952,7 +25115,7 @@ function serializer(replacer, cycleReplacer) {
     }
 
     /**
-     * This method returns `false`.
+     * A method that returns `false`.
      *
      * @static
      * @memberOf _
@@ -25969,7 +25132,7 @@ function serializer(replacer, cycleReplacer) {
     }
 
     /**
-     * This method returns a new empty object.
+     * A method that returns a new empty object.
      *
      * @static
      * @memberOf _
@@ -25991,7 +25154,7 @@ function serializer(replacer, cycleReplacer) {
     }
 
     /**
-     * This method returns an empty string.
+     * A method that returns an empty string.
      *
      * @static
      * @memberOf _
@@ -26008,7 +25171,7 @@ function serializer(replacer, cycleReplacer) {
     }
 
     /**
-     * This method returns `true`.
+     * A method that returns `true`.
      *
      * @static
      * @memberOf _
@@ -26126,7 +25289,7 @@ function serializer(replacer, cycleReplacer) {
      */
     var add = createMathOperation(function(augend, addend) {
       return augend + addend;
-    }, 0);
+    });
 
     /**
      * Computes `number` rounded up to `precision`.
@@ -26168,7 +25331,7 @@ function serializer(replacer, cycleReplacer) {
      */
     var divide = createMathOperation(function(dividend, divisor) {
       return dividend / divisor;
-    }, 1);
+    });
 
     /**
      * Computes `number` rounded down to `precision`.
@@ -26227,7 +25390,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 4.0.0
      * @category Math
      * @param {Array} array The array to iterate over.
-     * @param {Function} [iteratee=_.identity] The iteratee invoked per element.
+     * @param {Array|Function|Object|string} [iteratee=_.identity]
+     *  The iteratee invoked per element.
      * @returns {*} Returns the maximum value.
      * @example
      *
@@ -26242,7 +25406,7 @@ function serializer(replacer, cycleReplacer) {
      */
     function maxBy(array, iteratee) {
       return (array && array.length)
-        ? baseExtremum(array, getIteratee(iteratee, 2), baseGt)
+        ? baseExtremum(array, getIteratee(iteratee), baseGt)
         : undefined;
     }
 
@@ -26274,7 +25438,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 4.7.0
      * @category Math
      * @param {Array} array The array to iterate over.
-     * @param {Function} [iteratee=_.identity] The iteratee invoked per element.
+     * @param {Array|Function|Object|string} [iteratee=_.identity]
+     *  The iteratee invoked per element.
      * @returns {number} Returns the mean.
      * @example
      *
@@ -26288,7 +25453,7 @@ function serializer(replacer, cycleReplacer) {
      * // => 5
      */
     function meanBy(array, iteratee) {
-      return baseMean(array, getIteratee(iteratee, 2));
+      return baseMean(array, getIteratee(iteratee));
     }
 
     /**
@@ -26325,7 +25490,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 4.0.0
      * @category Math
      * @param {Array} array The array to iterate over.
-     * @param {Function} [iteratee=_.identity] The iteratee invoked per element.
+     * @param {Array|Function|Object|string} [iteratee=_.identity]
+     *  The iteratee invoked per element.
      * @returns {*} Returns the minimum value.
      * @example
      *
@@ -26340,7 +25506,7 @@ function serializer(replacer, cycleReplacer) {
      */
     function minBy(array, iteratee) {
       return (array && array.length)
-        ? baseExtremum(array, getIteratee(iteratee, 2), baseLt)
+        ? baseExtremum(array, getIteratee(iteratee), baseLt)
         : undefined;
     }
 
@@ -26361,7 +25527,7 @@ function serializer(replacer, cycleReplacer) {
      */
     var multiply = createMathOperation(function(multiplier, multiplicand) {
       return multiplier * multiplicand;
-    }, 1);
+    });
 
     /**
      * Computes `number` rounded to `precision`.
@@ -26403,7 +25569,7 @@ function serializer(replacer, cycleReplacer) {
      */
     var subtract = createMathOperation(function(minuend, subtrahend) {
       return minuend - subtrahend;
-    }, 0);
+    });
 
     /**
      * Computes the sum of the values in `array`.
@@ -26435,7 +25601,8 @@ function serializer(replacer, cycleReplacer) {
      * @since 4.0.0
      * @category Math
      * @param {Array} array The array to iterate over.
-     * @param {Function} [iteratee=_.identity] The iteratee invoked per element.
+     * @param {Array|Function|Object|string} [iteratee=_.identity]
+     *  The iteratee invoked per element.
      * @returns {number} Returns the sum.
      * @example
      *
@@ -26450,7 +25617,7 @@ function serializer(replacer, cycleReplacer) {
      */
     function sumBy(array, iteratee) {
       return (array && array.length)
-        ? baseSum(array, getIteratee(iteratee, 2))
+        ? baseSum(array, getIteratee(iteratee))
         : 0;
     }
 
@@ -26629,9 +25796,7 @@ function serializer(replacer, cycleReplacer) {
     lodash.cloneDeep = cloneDeep;
     lodash.cloneDeepWith = cloneDeepWith;
     lodash.cloneWith = cloneWith;
-    lodash.conformsTo = conformsTo;
     lodash.deburr = deburr;
-    lodash.defaultTo = defaultTo;
     lodash.divide = divide;
     lodash.endsWith = endsWith;
     lodash.eq = eq;
@@ -26872,7 +26037,7 @@ function serializer(replacer, cycleReplacer) {
       return this.reverse().find(predicate);
     };
 
-    LazyWrapper.prototype.invokeMap = baseRest(function(path, args) {
+    LazyWrapper.prototype.invokeMap = rest(function(path, args) {
       if (typeof path == 'function') {
         return new LazyWrapper(this);
       }
@@ -26882,7 +26047,10 @@ function serializer(replacer, cycleReplacer) {
     });
 
     LazyWrapper.prototype.reject = function(predicate) {
-      return this.filter(negate(getIteratee(predicate)));
+      predicate = getIteratee(predicate, 3);
+      return this.filter(function(value) {
+        return !predicate(value);
+      });
     };
 
     LazyWrapper.prototype.slice = function(start, end) {
@@ -26986,7 +26154,7 @@ function serializer(replacer, cycleReplacer) {
       }
     });
 
-    realNames[createHybrid(undefined, BIND_KEY_FLAG).name] = [{
+    realNames[createHybridWrapper(undefined, BIND_KEY_FLAG).name] = [{
       'name': 'wrapper',
       'func': undefined
     }];
@@ -27005,35 +26173,33 @@ function serializer(replacer, cycleReplacer) {
     lodash.prototype.reverse = wrapperReverse;
     lodash.prototype.toJSON = lodash.prototype.valueOf = lodash.prototype.value = wrapperValue;
 
-    // Add lazy aliases.
-    lodash.prototype.first = lodash.prototype.head;
-
     if (iteratorSymbol) {
       lodash.prototype[iteratorSymbol] = wrapperToIterator;
     }
     return lodash;
-  });
+  }
 
   /*--------------------------------------------------------------------------*/
 
   // Export lodash.
   var _ = runInContext();
 
-  // Some AMD build optimizers, like r.js, check for condition patterns like:
-  if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) {
-    // Expose Lodash on the global object to prevent errors when Lodash is
-    // loaded by a script tag in the presence of an AMD loader.
-    // See http://requirejs.org/docs/errors.html#mismatch for more details.
-    // Use `_.noConflict` to remove Lodash from the global object.
-    root._ = _;
+  // Expose Lodash on the free variable `window` or `self` when available so it's
+  // globally accessible, even when bundled with Browserify, Webpack, etc. This
+  // also prevents errors in cases where Lodash is loaded by a script tag in the
+  // presence of an AMD loader. See http://requirejs.org/docs/errors.html#mismatch
+  // for more details. Use `_.noConflict` to remove Lodash from the global object.
+  (freeSelf || {})._ = _;
 
+  // Some AMD build optimizers like r.js check for condition patterns like the following:
+  if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) {
     // Define as an anonymous module so, through path mapping, it can be
     // referenced as the "underscore" module.
     define(function() {
       return _;
     });
   }
-  // Check for `exports` after `define` in case a build optimizer adds it.
+  // Check for `exports` after `define` in case a build optimizer adds an `exports` object.
   else if (freeModule) {
     // Export for Node.js.
     (freeModule.exports = _)._ = _;
@@ -27047,7 +26213,7 @@ function serializer(replacer, cycleReplacer) {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],73:[function(require,module,exports){
+},{}],72:[function(require,module,exports){
 (function (process){
 var path = require('path');
 var fs = require('fs');
@@ -27149,7 +26315,7 @@ mkdirP.sync = function sync (p, opts, made) {
 };
 
 }).call(this,require('_process'))
-},{"_process":91,"fs":6,"path":89}],74:[function(require,module,exports){
+},{"_process":90,"fs":6,"path":88}],73:[function(require,module,exports){
 /**
  * Helpers.
  */
@@ -27276,7 +26442,7 @@ function plural(ms, n, name) {
   return Math.ceil(ms / n) + ' ' + name + 's';
 }
 
-},{}],75:[function(require,module,exports){
+},{}],74:[function(require,module,exports){
 var recorder = require('./lib/recorder');
 module.exports = require('./lib/scope');
 
@@ -27289,7 +26455,7 @@ module.exports.recorder = {
 module.exports.back = require('./lib/back');
 module.exports.restore = recorder.restore;
 
-},{"./lib/back":76,"./lib/recorder":84,"./lib/scope":86}],76:[function(require,module,exports){
+},{"./lib/back":75,"./lib/recorder":83,"./lib/scope":85}],75:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -27612,7 +26778,7 @@ Back.setMode(process.env.NOCK_BACK_MODE || 'dryrun');
 module.exports = exports = Back;
 
 }).call(this,require('_process'))
-},{"./recorder":84,"./scope":86,"_process":91,"chai":11,"debug":43,"fs":6,"lodash":88,"mkdirp":73,"path":89,"util":139}],77:[function(require,module,exports){
+},{"./recorder":83,"./scope":85,"_process":90,"chai":10,"debug":41,"fs":6,"lodash":87,"mkdirp":72,"path":88,"util":127}],76:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -27965,7 +27131,7 @@ exports.formatQueryValue = formatQueryValue;
 exports.isStream = isStream;
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":8,"debug":43,"http":116,"https":67,"lodash":88}],78:[function(require,module,exports){
+},{"buffer":8,"debug":41,"http":111,"https":65,"lodash":87}],77:[function(require,module,exports){
 (function (Buffer,process){
 'use strict';
 
@@ -28049,11 +27215,11 @@ DelayedBody.prototype._transform = function (chunk, encoding, cb) {
   process.nextTick(cb);
 };
 }).call(this,{"isBuffer":require("../../is-buffer/index.js")},require('_process'))
-},{"../../is-buffer/index.js":70,"./common":77,"_process":91,"events":66,"stream":103,"util":139}],79:[function(require,module,exports){
+},{"../../is-buffer/index.js":68,"./common":76,"_process":90,"events":64,"stream":110,"util":127}],78:[function(require,module,exports){
 var EventEmitter = require('events').EventEmitter
 
 module.exports = new EventEmitter();
-},{"events":66}],80:[function(require,module,exports){
+},{"events":64}],79:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -28453,7 +27619,7 @@ module.exports.overrideClientRequest = overrideClientRequest;
 module.exports.restoreOverriddenClientRequest = restoreOverriddenClientRequest;
 
 }).call(this,require('_process'))
-},{"./common":77,"./global_emitter":79,"./interceptor":81,"./request_overrider":85,"_process":91,"debug":43,"events":66,"http":116,"lodash":88,"timers":130,"url":134,"util":139}],81:[function(require,module,exports){
+},{"./common":76,"./global_emitter":78,"./interceptor":80,"./request_overrider":84,"_process":90,"debug":41,"events":64,"http":111,"lodash":87,"timers":119,"url":123,"util":127}],80:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -28984,7 +28150,7 @@ Interceptor.prototype.socketDelay = function socketDelay(ms) {
 };
 
 }).call(this,require("buffer").Buffer)
-},{"./common":77,"./match_body":82,"./mixin":83,"buffer":8,"debug":43,"fs":6,"json-stringify-safe":71,"lodash":88,"qs":95,"util":139}],82:[function(require,module,exports){
+},{"./common":76,"./match_body":81,"./mixin":82,"buffer":8,"debug":41,"fs":6,"json-stringify-safe":70,"lodash":87,"qs":93,"util":127}],81:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -29058,7 +28224,7 @@ function deepEqualExtended(spec, body) {
 }
 
 }).call(this,{"isBuffer":require("../../is-buffer/index.js")})
-},{"../../is-buffer/index.js":70,"deep-equal":49,"querystring":101}],83:[function(require,module,exports){
+},{"../../is-buffer/index.js":68,"deep-equal":47,"querystring":99}],82:[function(require,module,exports){
 'use strict';
 var _ = require("lodash");
 
@@ -29074,7 +28240,7 @@ function mixin(a, b) {
 
 module.exports = mixin;
 
-},{"lodash":88}],84:[function(require,module,exports){
+},{"lodash":87}],83:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -29443,7 +28609,7 @@ exports.restore = restore;
 exports.clear = clear;
 
 }).call(this,require("buffer").Buffer)
-},{"./common":77,"./intercept":80,"buffer":8,"debug":43,"lodash":88,"stream":103,"url":134,"util":139}],85:[function(require,module,exports){
+},{"./common":76,"./intercept":79,"buffer":8,"debug":41,"lodash":87,"stream":110,"url":123,"util":127}],84:[function(require,module,exports){
 (function (process,Buffer){
 'use strict';
 
@@ -29973,7 +29139,7 @@ function RequestOverrider(req, options, interceptors, remove, cb) {
 module.exports = RequestOverrider;
 
 }).call(this,require('_process'),require("buffer").Buffer)
-},{"./common":77,"./delayed_body":78,"./global_emitter":79,"./socket":87,"_process":91,"buffer":8,"debug":43,"events":66,"http":116,"lodash":88,"propagate":92,"stream":103,"timers":130}],86:[function(require,module,exports){
+},{"./common":76,"./delayed_body":77,"./global_emitter":78,"./socket":86,"_process":90,"buffer":8,"debug":41,"events":64,"http":111,"lodash":87,"propagate":91,"stream":110,"timers":119}],85:[function(require,module,exports){
 /* jshint strict:false */
 /**
  * @module nock/scope
@@ -30331,7 +29497,7 @@ module.exports = extend(startScope, {
   emitter: globalEmitter,
 });
 
-},{"./common":77,"./global_emitter":79,"./intercept":80,"./interceptor":81,"assert":2,"debug":43,"events":66,"fs":6,"json-stringify-safe":71,"lodash":88,"url":134,"util":139}],87:[function(require,module,exports){
+},{"./common":76,"./global_emitter":78,"./intercept":79,"./interceptor":80,"assert":2,"debug":41,"events":64,"fs":6,"json-stringify-safe":70,"lodash":87,"url":123,"util":127}],86:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -30404,7 +29570,7 @@ function noop() {}
 
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":8,"debug":43,"events":66,"util":139}],88:[function(require,module,exports){
+},{"buffer":8,"debug":41,"events":64,"util":127}],87:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -46359,7 +45525,7 @@ function noop() {}
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],89:[function(require,module,exports){
+},{}],88:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -46587,7 +45753,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":91}],90:[function(require,module,exports){
+},{"_process":90}],89:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -46634,96 +45800,10 @@ function nextTick(fn, arg1, arg2, arg3) {
 }
 
 }).call(this,require('_process'))
-},{"_process":91}],91:[function(require,module,exports){
+},{"_process":90}],90:[function(require,module,exports){
 // shim for using process in browser
+
 var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
 var queue = [];
 var draining = false;
 var currentQueue;
@@ -46748,7 +45828,7 @@ function drainQueue() {
     if (draining) {
         return;
     }
-    var timeout = runTimeout(cleanUpNextTick);
+    var timeout = setTimeout(cleanUpNextTick);
     draining = true;
 
     var len = queue.length;
@@ -46765,7 +45845,7 @@ function drainQueue() {
     }
     currentQueue = null;
     draining = false;
-    runClearTimeout(timeout);
+    clearTimeout(timeout);
 }
 
 process.nextTick = function (fun) {
@@ -46777,7 +45857,7 @@ process.nextTick = function (fun) {
     }
     queue.push(new Item(fun, args));
     if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
+        setTimeout(drainQueue, 0);
     }
 };
 
@@ -46816,7 +45896,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],92:[function(require,module,exports){
+},{}],91:[function(require,module,exports){
 function propagate(events, source, dest) {
   if (arguments.length < 3) {
     dest = source;
@@ -46892,7 +45972,7 @@ function explicitPropagate(events, source, dest) {
   }
 }
 
-},{}],93:[function(require,module,exports){
+},{}],92:[function(require,module,exports){
 (function (global){
 /*! https://mths.be/punycode v1.4.1 by @mathias */
 ;(function(root) {
@@ -47429,59 +46509,34 @@ function explicitPropagate(events, source, dest) {
 }(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],94:[function(require,module,exports){
+},{}],93:[function(require,module,exports){
 'use strict';
 
-var replace = String.prototype.replace;
-var percentTwenties = /%20/g;
+var Stringify = require('./stringify');
+var Parse = require('./parse');
 
 module.exports = {
-    'default': 'RFC3986',
-    formatters: {
-        RFC1738: function (value) {
-            return replace.call(value, percentTwenties, '+');
-        },
-        RFC3986: function (value) {
-            return value;
-        }
-    },
-    RFC1738: 'RFC1738',
-    RFC3986: 'RFC3986'
+    stringify: Stringify,
+    parse: Parse
 };
 
-},{}],95:[function(require,module,exports){
+},{"./parse":94,"./stringify":95}],94:[function(require,module,exports){
 'use strict';
 
-var stringify = require('./stringify');
-var parse = require('./parse');
-var formats = require('./formats');
+var Utils = require('./utils');
 
-module.exports = {
-    formats: formats,
-    parse: parse,
-    stringify: stringify
-};
-
-},{"./formats":94,"./parse":96,"./stringify":97}],96:[function(require,module,exports){
-'use strict';
-
-var utils = require('./utils');
-
-var has = Object.prototype.hasOwnProperty;
-
-var defaults = {
-    allowDots: false,
-    allowPrototypes: false,
-    arrayLimit: 20,
-    decoder: utils.decode,
+var internals = {
     delimiter: '&',
     depth: 5,
+    arrayLimit: 20,
     parameterLimit: 1000,
+    strictNullHandling: false,
     plainObjects: false,
-    strictNullHandling: false
+    allowPrototypes: false,
+    allowDots: false
 };
 
-var parseValues = function parseValues(str, options) {
+internals.parseValues = function (str, options) {
     var obj = {};
     var parts = str.split(options.delimiter, options.parameterLimit === Infinity ? undefined : options.parameterLimit);
 
@@ -47489,25 +46544,28 @@ var parseValues = function parseValues(str, options) {
         var part = parts[i];
         var pos = part.indexOf(']=') === -1 ? part.indexOf('=') : part.indexOf(']=') + 1;
 
-        var key, val;
         if (pos === -1) {
-            key = options.decoder(part);
-            val = options.strictNullHandling ? null : '';
+            obj[Utils.decode(part)] = '';
+
+            if (options.strictNullHandling) {
+                obj[Utils.decode(part)] = null;
+            }
         } else {
-            key = options.decoder(part.slice(0, pos));
-            val = options.decoder(part.slice(pos + 1));
-        }
-        if (has.call(obj, key)) {
-            obj[key] = [].concat(obj[key]).concat(val);
-        } else {
-            obj[key] = val;
+            var key = Utils.decode(part.slice(0, pos));
+            var val = Utils.decode(part.slice(pos + 1));
+
+            if (Object.prototype.hasOwnProperty.call(obj, key)) {
+                obj[key] = [].concat(obj[key]).concat(val);
+            } else {
+                obj[key] = val;
+            }
         }
     }
 
     return obj;
 };
 
-var parseObject = function parseObject(chain, val, options) {
+internals.parseObject = function (chain, val, options) {
     if (!chain.length) {
         return val;
     }
@@ -47517,7 +46575,7 @@ var parseObject = function parseObject(chain, val, options) {
     var obj;
     if (root === '[]') {
         obj = [];
-        obj = obj.concat(parseObject(chain, val, options));
+        obj = obj.concat(internals.parseObject(chain, val, options));
     } else {
         obj = options.plainObjects ? Object.create(null) : {};
         var cleanRoot = root[0] === '[' && root[root.length - 1] === ']' ? root.slice(1, root.length - 1) : root;
@@ -47530,16 +46588,16 @@ var parseObject = function parseObject(chain, val, options) {
             (options.parseArrays && index <= options.arrayLimit)
         ) {
             obj = [];
-            obj[index] = parseObject(chain, val, options);
+            obj[index] = internals.parseObject(chain, val, options);
         } else {
-            obj[cleanRoot] = parseObject(chain, val, options);
+            obj[cleanRoot] = internals.parseObject(chain, val, options);
         }
     }
 
     return obj;
 };
 
-var parseKeys = function parseKeys(givenKey, val, options) {
+internals.parseKeys = function (givenKey, val, options) {
     if (!givenKey) {
         return;
     }
@@ -47562,7 +46620,7 @@ var parseKeys = function parseKeys(givenKey, val, options) {
     if (segment[1]) {
         // If we aren't using plain objects, optionally prefix keys
         // that would overwrite object prototype properties
-        if (!options.plainObjects && has.call(Object.prototype, segment[1])) {
+        if (!options.plainObjects && Object.prototype.hasOwnProperty(segment[1])) {
             if (!options.allowPrototypes) {
                 return;
             }
@@ -47576,7 +46634,7 @@ var parseKeys = function parseKeys(givenKey, val, options) {
     var i = 0;
     while ((segment = child.exec(key)) !== null && i < options.depth) {
         i += 1;
-        if (!options.plainObjects && has.call(Object.prototype, segment[1].replace(/\[|\]/g, ''))) {
+        if (!options.plainObjects && Object.prototype.hasOwnProperty(segment[1].replace(/\[|\]/g, ''))) {
             if (!options.allowPrototypes) {
                 continue;
             }
@@ -47590,32 +46648,30 @@ var parseKeys = function parseKeys(givenKey, val, options) {
         keys.push('[' + key.slice(segment.index) + ']');
     }
 
-    return parseObject(keys, val, options);
+    return internals.parseObject(keys, val, options);
 };
 
 module.exports = function (str, opts) {
     var options = opts || {};
-
-    if (options.decoder !== null && options.decoder !== undefined && typeof options.decoder !== 'function') {
-        throw new TypeError('Decoder has to be a function.');
-    }
-
-    options.delimiter = typeof options.delimiter === 'string' || utils.isRegExp(options.delimiter) ? options.delimiter : defaults.delimiter;
-    options.depth = typeof options.depth === 'number' ? options.depth : defaults.depth;
-    options.arrayLimit = typeof options.arrayLimit === 'number' ? options.arrayLimit : defaults.arrayLimit;
+    options.delimiter = typeof options.delimiter === 'string' || Utils.isRegExp(options.delimiter) ? options.delimiter : internals.delimiter;
+    options.depth = typeof options.depth === 'number' ? options.depth : internals.depth;
+    options.arrayLimit = typeof options.arrayLimit === 'number' ? options.arrayLimit : internals.arrayLimit;
     options.parseArrays = options.parseArrays !== false;
-    options.decoder = typeof options.decoder === 'function' ? options.decoder : defaults.decoder;
-    options.allowDots = typeof options.allowDots === 'boolean' ? options.allowDots : defaults.allowDots;
-    options.plainObjects = typeof options.plainObjects === 'boolean' ? options.plainObjects : defaults.plainObjects;
-    options.allowPrototypes = typeof options.allowPrototypes === 'boolean' ? options.allowPrototypes : defaults.allowPrototypes;
-    options.parameterLimit = typeof options.parameterLimit === 'number' ? options.parameterLimit : defaults.parameterLimit;
-    options.strictNullHandling = typeof options.strictNullHandling === 'boolean' ? options.strictNullHandling : defaults.strictNullHandling;
+    options.allowDots = typeof options.allowDots === 'boolean' ? options.allowDots : internals.allowDots;
+    options.plainObjects = typeof options.plainObjects === 'boolean' ? options.plainObjects : internals.plainObjects;
+    options.allowPrototypes = typeof options.allowPrototypes === 'boolean' ? options.allowPrototypes : internals.allowPrototypes;
+    options.parameterLimit = typeof options.parameterLimit === 'number' ? options.parameterLimit : internals.parameterLimit;
+    options.strictNullHandling = typeof options.strictNullHandling === 'boolean' ? options.strictNullHandling : internals.strictNullHandling;
 
-    if (str === '' || str === null || typeof str === 'undefined') {
+    if (
+        str === '' ||
+        str === null ||
+        typeof str === 'undefined'
+    ) {
         return options.plainObjects ? Object.create(null) : {};
     }
 
-    var tempObj = typeof str === 'string' ? parseValues(str, options) : str;
+    var tempObj = typeof str === 'string' ? internals.parseValues(str, options) : str;
     var obj = options.plainObjects ? Object.create(null) : {};
 
     // Iterate over the keys and setup the new object
@@ -47623,63 +46679,57 @@ module.exports = function (str, opts) {
     var keys = Object.keys(tempObj);
     for (var i = 0; i < keys.length; ++i) {
         var key = keys[i];
-        var newObj = parseKeys(key, tempObj[key], options);
-        obj = utils.merge(obj, newObj, options);
+        var newObj = internals.parseKeys(key, tempObj[key], options);
+        obj = Utils.merge(obj, newObj, options);
     }
 
-    return utils.compact(obj);
+    return Utils.compact(obj);
 };
 
-},{"./utils":98}],97:[function(require,module,exports){
+},{"./utils":96}],95:[function(require,module,exports){
 'use strict';
 
-var utils = require('./utils');
-var formats = require('./formats');
+var Utils = require('./utils');
 
-var arrayPrefixGenerators = {
-    brackets: function brackets(prefix) {
-        return prefix + '[]';
-    },
-    indices: function indices(prefix, key) {
-        return prefix + '[' + key + ']';
-    },
-    repeat: function repeat(prefix) {
-        return prefix;
-    }
-};
-
-var toISO = Date.prototype.toISOString;
-
-var defaults = {
+var internals = {
     delimiter: '&',
-    encode: true,
-    encoder: utils.encode,
-    serializeDate: function serializeDate(date) {
-        return toISO.call(date);
+    arrayPrefixGenerators: {
+        brackets: function (prefix) {
+            return prefix + '[]';
+        },
+        indices: function (prefix, key) {
+            return prefix + '[' + key + ']';
+        },
+        repeat: function (prefix) {
+            return prefix;
+        }
     },
+    strictNullHandling: false,
     skipNulls: false,
-    strictNullHandling: false
+    encode: true
 };
 
-var stringify = function stringify(object, prefix, generateArrayPrefix, strictNullHandling, skipNulls, encoder, filter, sort, allowDots, serializeDate, formatter) {
+internals.stringify = function (object, prefix, generateArrayPrefix, strictNullHandling, skipNulls, encode, filter, sort) {
     var obj = object;
     if (typeof filter === 'function') {
         obj = filter(prefix, obj);
+    } else if (Utils.isBuffer(obj)) {
+        obj = String(obj);
     } else if (obj instanceof Date) {
-        obj = serializeDate(obj);
+        obj = obj.toISOString();
     } else if (obj === null) {
         if (strictNullHandling) {
-            return encoder ? encoder(prefix) : prefix;
+            return encode ? Utils.encode(prefix) : prefix;
         }
 
         obj = '';
     }
 
-    if (typeof obj === 'string' || typeof obj === 'number' || typeof obj === 'boolean' || utils.isBuffer(obj)) {
-        if (encoder) {
-            return [formatter(encoder(prefix)) + '=' + formatter(encoder(obj))];
+    if (typeof obj === 'string' || typeof obj === 'number' || typeof obj === 'boolean') {
+        if (encode) {
+            return [Utils.encode(prefix) + '=' + Utils.encode(obj)];
         }
-        return [formatter(prefix) + '=' + formatter(String(obj))];
+        return [prefix + '=' + obj];
     }
 
     var values = [];
@@ -47704,33 +46754,9 @@ var stringify = function stringify(object, prefix, generateArrayPrefix, strictNu
         }
 
         if (Array.isArray(obj)) {
-            values = values.concat(stringify(
-                obj[key],
-                generateArrayPrefix(prefix, key),
-                generateArrayPrefix,
-                strictNullHandling,
-                skipNulls,
-                encoder,
-                filter,
-                sort,
-                allowDots,
-                serializeDate,
-                formatter
-            ));
+            values = values.concat(internals.stringify(obj[key], generateArrayPrefix(prefix, key), generateArrayPrefix, strictNullHandling, skipNulls, encode, filter));
         } else {
-            values = values.concat(stringify(
-                obj[key],
-                prefix + (allowDots ? '.' + key : '[' + key + ']'),
-                generateArrayPrefix,
-                strictNullHandling,
-                skipNulls,
-                encoder,
-                filter,
-                sort,
-                allowDots,
-                serializeDate,
-                formatter
-            ));
+            values = values.concat(internals.stringify(obj[key], prefix + '[' + key + ']', generateArrayPrefix, strictNullHandling, skipNulls, encode, filter));
         }
     }
 
@@ -47740,33 +46766,18 @@ var stringify = function stringify(object, prefix, generateArrayPrefix, strictNu
 module.exports = function (object, opts) {
     var obj = object;
     var options = opts || {};
-    var delimiter = typeof options.delimiter === 'undefined' ? defaults.delimiter : options.delimiter;
-    var strictNullHandling = typeof options.strictNullHandling === 'boolean' ? options.strictNullHandling : defaults.strictNullHandling;
-    var skipNulls = typeof options.skipNulls === 'boolean' ? options.skipNulls : defaults.skipNulls;
-    var encode = typeof options.encode === 'boolean' ? options.encode : defaults.encode;
-    var encoder = encode ? (typeof options.encoder === 'function' ? options.encoder : defaults.encoder) : null;
+    var delimiter = typeof options.delimiter === 'undefined' ? internals.delimiter : options.delimiter;
+    var strictNullHandling = typeof options.strictNullHandling === 'boolean' ? options.strictNullHandling : internals.strictNullHandling;
+    var skipNulls = typeof options.skipNulls === 'boolean' ? options.skipNulls : internals.skipNulls;
+    var encode = typeof options.encode === 'boolean' ? options.encode : internals.encode;
     var sort = typeof options.sort === 'function' ? options.sort : null;
-    var allowDots = typeof options.allowDots === 'undefined' ? false : options.allowDots;
-    var serializeDate = typeof options.serializeDate === 'function' ? options.serializeDate : defaults.serializeDate;
-    if (typeof options.format === 'undefined') {
-        options.format = formats.default;
-    } else if (!Object.prototype.hasOwnProperty.call(formats.formatters, options.format)) {
-        throw new TypeError('Unknown format option provided.');
-    }
-    var formatter = formats.formatters[options.format];
     var objKeys;
     var filter;
-
-    if (options.encoder !== null && options.encoder !== undefined && typeof options.encoder !== 'function') {
-        throw new TypeError('Encoder has to be a function.');
-    }
-
     if (typeof options.filter === 'function') {
         filter = options.filter;
         obj = filter('', obj);
     } else if (Array.isArray(options.filter)) {
-        filter = options.filter;
-        objKeys = filter;
+        objKeys = filter = options.filter;
     }
 
     var keys = [];
@@ -47776,7 +46787,7 @@ module.exports = function (object, opts) {
     }
 
     var arrayFormat;
-    if (options.arrayFormat in arrayPrefixGenerators) {
+    if (options.arrayFormat in internals.arrayPrefixGenerators) {
         arrayFormat = options.arrayFormat;
     } else if ('indices' in options) {
         arrayFormat = options.indices ? 'indices' : 'repeat';
@@ -47784,7 +46795,7 @@ module.exports = function (object, opts) {
         arrayFormat = 'indices';
     }
 
-    var generateArrayPrefix = arrayPrefixGenerators[arrayFormat];
+    var generateArrayPrefix = internals.arrayPrefixGenerators[arrayFormat];
 
     if (!objKeys) {
         objKeys = Object.keys(obj);
@@ -47801,40 +46812,26 @@ module.exports = function (object, opts) {
             continue;
         }
 
-        keys = keys.concat(stringify(
-            obj[key],
-            key,
-            generateArrayPrefix,
-            strictNullHandling,
-            skipNulls,
-            encoder,
-            filter,
-            sort,
-            allowDots,
-            serializeDate,
-            formatter
-        ));
+        keys = keys.concat(internals.stringify(obj[key], key, generateArrayPrefix, strictNullHandling, skipNulls, encode, filter, sort));
     }
 
     return keys.join(delimiter);
 };
 
-},{"./formats":94,"./utils":98}],98:[function(require,module,exports){
+},{"./utils":96}],96:[function(require,module,exports){
 'use strict';
 
-var has = Object.prototype.hasOwnProperty;
-
 var hexTable = (function () {
-    var array = [];
+    var array = new Array(256);
     for (var i = 0; i < 256; ++i) {
-        array.push('%' + ((i < 16 ? '0' : '') + i.toString(16)).toUpperCase());
+        array[i] = '%' + ((i < 16 ? '0' : '') + i.toString(16)).toUpperCase();
     }
 
     return array;
 }());
 
 exports.arrayToObject = function (source, options) {
-    var obj = options && options.plainObjects ? Object.create(null) : {};
+    var obj = options.plainObjects ? Object.create(null) : {};
     for (var i = 0; i < source.length; ++i) {
         if (typeof source[i] !== 'undefined') {
             obj[i] = source[i];
@@ -47870,22 +46867,7 @@ exports.merge = function (target, source, options) {
         mergeTarget = exports.arrayToObject(target, options);
     }
 
-    if (Array.isArray(target) && Array.isArray(source)) {
-        source.forEach(function (item, i) {
-            if (has.call(target, i)) {
-                if (target[i] && typeof target[i] === 'object') {
-                    target[i] = exports.merge(target[i], item, options);
-                } else {
-                    target.push(item);
-                }
-            } else {
-                target[i] = item;
-            }
-        });
-        return target;
-    }
-
-    return Object.keys(source).reduce(function (acc, key) {
+	return Object.keys(source).reduce(function (acc, key) {
         var value = source[key];
 
         if (Object.prototype.hasOwnProperty.call(acc, key)) {
@@ -47893,7 +46875,7 @@ exports.merge = function (target, source, options) {
         } else {
             acc[key] = value;
         }
-        return acc;
+		return acc;
     }, mergeTarget);
 };
 
@@ -47948,7 +46930,7 @@ exports.encode = function (str) {
 
         i += 1;
         c = 0x10000 + (((c & 0x3FF) << 10) | (string.charCodeAt(i) & 0x3FF));
-        out += hexTable[0xF0 | (c >> 18)] + hexTable[0x80 | ((c >> 12) & 0x3F)] + hexTable[0x80 | ((c >> 6) & 0x3F)] + hexTable[0x80 | (c & 0x3F)];
+        out += (hexTable[0xF0 | (c >> 18)] + hexTable[0x80 | ((c >> 12) & 0x3F)] + hexTable[0x80 | ((c >> 6) & 0x3F)] + hexTable[0x80 | (c & 0x3F)]);
     }
 
     return out;
@@ -47971,9 +46953,7 @@ exports.compact = function (obj, references) {
         var compacted = [];
 
         for (var i = 0; i < obj.length; ++i) {
-            if (obj[i] && typeof obj[i] === 'object') {
-                compacted.push(exports.compact(obj[i], refs));
-            } else if (typeof obj[i] !== 'undefined') {
+            if (typeof obj[i] !== 'undefined') {
                 compacted.push(obj[i]);
             }
         }
@@ -47982,9 +46962,10 @@ exports.compact = function (obj, references) {
     }
 
     var keys = Object.keys(obj);
-    keys.forEach(function (key) {
+    for (var j = 0; j < keys.length; ++j) {
+        var key = keys[j];
         obj[key] = exports.compact(obj[key], refs);
-    });
+    }
 
     return obj;
 };
@@ -48001,7 +46982,7 @@ exports.isBuffer = function (obj) {
     return !!(obj.constructor && obj.constructor.isBuffer && obj.constructor.isBuffer(obj));
 };
 
-},{}],99:[function(require,module,exports){
+},{}],97:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -48087,7 +47068,7 @@ var isArray = Array.isArray || function (xs) {
   return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{}],100:[function(require,module,exports){
+},{}],98:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -48174,172 +47155,16 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],101:[function(require,module,exports){
+},{}],99:[function(require,module,exports){
 'use strict';
 
 exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
-},{"./decode":99,"./encode":100}],102:[function(require,module,exports){
-
-/**
- * Reduce `arr` with `fn`.
- *
- * @param {Array} arr
- * @param {Function} fn
- * @param {Mixed} initial
- *
- * TODO: combatible error handling?
- */
-
-module.exports = function(arr, fn, initial){  
-  var idx = 0;
-  var len = arr.length;
-  var curr = arguments.length == 3
-    ? initial
-    : arr[idx++];
-
-  while (idx < len) {
-    curr = fn.call(null, curr, arr[idx], ++idx, arr);
-  }
-  
-  return curr;
-};
-},{}],103:[function(require,module,exports){
-// Copyright Joyent, Inc. and other Node contributors.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to permit
-// persons to whom the Software is furnished to do so, subject to the
-// following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-module.exports = Stream;
-
-var EE = require('events').EventEmitter;
-var inherits = require('inherits');
-
-inherits(Stream, EE);
-Stream.Readable = require('readable-stream/readable.js');
-Stream.Writable = require('readable-stream/writable.js');
-Stream.Duplex = require('readable-stream/duplex.js');
-Stream.Transform = require('readable-stream/transform.js');
-Stream.PassThrough = require('readable-stream/passthrough.js');
-
-// Backwards-compat with node 0.4.x
-Stream.Stream = Stream;
-
-
-
-// old-style streams.  Note that the pipe method (the only relevant
-// part of this class) is overridden in the Readable class.
-
-function Stream() {
-  EE.call(this);
-}
-
-Stream.prototype.pipe = function(dest, options) {
-  var source = this;
-
-  function ondata(chunk) {
-    if (dest.writable) {
-      if (false === dest.write(chunk) && source.pause) {
-        source.pause();
-      }
-    }
-  }
-
-  source.on('data', ondata);
-
-  function ondrain() {
-    if (source.readable && source.resume) {
-      source.resume();
-    }
-  }
-
-  dest.on('drain', ondrain);
-
-  // If the 'end' option is not supplied, dest.end() will be called when
-  // source gets the 'end' or 'close' events.  Only dest.end() once.
-  if (!dest._isStdio && (!options || options.end !== false)) {
-    source.on('end', onend);
-    source.on('close', onclose);
-  }
-
-  var didOnEnd = false;
-  function onend() {
-    if (didOnEnd) return;
-    didOnEnd = true;
-
-    dest.end();
-  }
-
-
-  function onclose() {
-    if (didOnEnd) return;
-    didOnEnd = true;
-
-    if (typeof dest.destroy === 'function') dest.destroy();
-  }
-
-  // don't leave dangling pipes when there are errors.
-  function onerror(er) {
-    cleanup();
-    if (EE.listenerCount(this, 'error') === 0) {
-      throw er; // Unhandled stream error in pipe.
-    }
-  }
-
-  source.on('error', onerror);
-  dest.on('error', onerror);
-
-  // remove all the event listeners that were added.
-  function cleanup() {
-    source.removeListener('data', ondata);
-    dest.removeListener('drain', ondrain);
-
-    source.removeListener('end', onend);
-    source.removeListener('close', onclose);
-
-    source.removeListener('error', onerror);
-    dest.removeListener('error', onerror);
-
-    source.removeListener('end', cleanup);
-    source.removeListener('close', cleanup);
-
-    dest.removeListener('close', cleanup);
-  }
-
-  source.on('end', cleanup);
-  source.on('close', cleanup);
-
-  dest.on('close', cleanup);
-
-  dest.emit('pipe', source);
-
-  // Allow for unix-like usage: A.pipe(B).pipe(C)
-  return dest;
-};
-
-},{"events":66,"inherits":69,"readable-stream/duplex.js":105,"readable-stream/passthrough.js":112,"readable-stream/readable.js":113,"readable-stream/transform.js":114,"readable-stream/writable.js":115}],104:[function(require,module,exports){
-arguments[4][9][0].apply(exports,arguments)
-},{"dup":9}],105:[function(require,module,exports){
+},{"./decode":97,"./encode":98}],100:[function(require,module,exports){
 module.exports = require("./lib/_stream_duplex.js")
 
-},{"./lib/_stream_duplex.js":106}],106:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":101}],101:[function(require,module,exports){
 // a duplex stream is just a stream that is both readable and writable.
 // Since JS doesn't have multiple prototypal inheritance, this class
 // prototypally inherits from Readable, and then parasitically from
@@ -48415,7 +47240,7 @@ function forEach(xs, f) {
     f(xs[i], i);
   }
 }
-},{"./_stream_readable":108,"./_stream_writable":110,"core-util-is":41,"inherits":69,"process-nextick-args":90}],107:[function(require,module,exports){
+},{"./_stream_readable":103,"./_stream_writable":105,"core-util-is":39,"inherits":67,"process-nextick-args":89}],102:[function(require,module,exports){
 // a passthrough stream.
 // basically just the most minimal sort of Transform stream.
 // Every written chunk gets output as-is.
@@ -48442,7 +47267,7 @@ function PassThrough(options) {
 PassThrough.prototype._transform = function (chunk, encoding, cb) {
   cb(null, chunk);
 };
-},{"./_stream_transform":109,"core-util-is":41,"inherits":69}],108:[function(require,module,exports){
+},{"./_stream_transform":104,"core-util-is":39,"inherits":67}],103:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -48497,21 +47322,21 @@ if (debugUtil && debugUtil.debuglog) {
 }
 /*</replacement>*/
 
-var BufferList = require('./internal/streams/BufferList');
 var StringDecoder;
 
 util.inherits(Readable, Stream);
 
+var hasPrependListener = typeof EE.prototype.prependListener === 'function';
+
 function prependListener(emitter, event, fn) {
-  if (typeof emitter.prependListener === 'function') {
-    return emitter.prependListener(event, fn);
-  } else {
-    // This is a hack to make sure that our error handler is attached before any
-    // userland ones.  NEVER DO THIS. This is here only because this code needs
-    // to continue to work with older versions of Node.js that do not include
-    // the prependListener() method. The goal is to eventually remove this hack.
-    if (!emitter._events || !emitter._events[event]) emitter.on(event, fn);else if (isArray(emitter._events[event])) emitter._events[event].unshift(fn);else emitter._events[event] = [fn, emitter._events[event]];
-  }
+  if (hasPrependListener) return emitter.prependListener(event, fn);
+
+  // This is a brutally ugly hack to make sure that our error handler
+  // is attached before any userland ones.  NEVER DO THIS. This is here
+  // only because this code needs to continue to work with older versions
+  // of Node.js that do not include the prependListener() method. The goal
+  // is to eventually remove this hack.
+  if (!emitter._events || !emitter._events[event]) emitter.on(event, fn);else if (isArray(emitter._events[event])) emitter._events[event].unshift(fn);else emitter._events[event] = [fn, emitter._events[event]];
 }
 
 var Duplex;
@@ -48535,10 +47360,7 @@ function ReadableState(options, stream) {
   // cast to ints.
   this.highWaterMark = ~ ~this.highWaterMark;
 
-  // A linked list is used to store data chunks instead of an array because the
-  // linked list can remove elements from the beginning faster than
-  // array.shift()
-  this.buffer = new BufferList();
+  this.buffer = [];
   this.length = 0;
   this.pipes = null;
   this.pipesCount = 0;
@@ -48701,8 +47523,7 @@ function computeNewHighWaterMark(n) {
   if (n >= MAX_HWM) {
     n = MAX_HWM;
   } else {
-    // Get the next highest power of 2 to prevent increasing hwm excessively in
-    // tiny amounts
+    // Get the next highest power of 2
     n--;
     n |= n >>> 1;
     n |= n >>> 2;
@@ -48714,34 +47535,44 @@ function computeNewHighWaterMark(n) {
   return n;
 }
 
-// This function is designed to be inlinable, so please take care when making
-// changes to the function body.
 function howMuchToRead(n, state) {
-  if (n <= 0 || state.length === 0 && state.ended) return 0;
-  if (state.objectMode) return 1;
-  if (n !== n) {
-    // Only flow one buffer at a time
-    if (state.flowing && state.length) return state.buffer.head.data.length;else return state.length;
+  if (state.length === 0 && state.ended) return 0;
+
+  if (state.objectMode) return n === 0 ? 0 : 1;
+
+  if (n === null || isNaN(n)) {
+    // only flow one buffer at a time
+    if (state.flowing && state.buffer.length) return state.buffer[0].length;else return state.length;
   }
-  // If we're asking for more than the current hwm, then raise the hwm.
+
+  if (n <= 0) return 0;
+
+  // If we're asking for more than the target buffer level,
+  // then raise the water mark.  Bump up to the next highest
+  // power of 2, to prevent increasing it excessively in tiny
+  // amounts.
   if (n > state.highWaterMark) state.highWaterMark = computeNewHighWaterMark(n);
-  if (n <= state.length) return n;
-  // Don't have enough
-  if (!state.ended) {
-    state.needReadable = true;
-    return 0;
+
+  // don't have that much.  return null, unless we've ended.
+  if (n > state.length) {
+    if (!state.ended) {
+      state.needReadable = true;
+      return 0;
+    } else {
+      return state.length;
+    }
   }
-  return state.length;
+
+  return n;
 }
 
 // you can override either this method, or the async _read(n) below.
 Readable.prototype.read = function (n) {
   debug('read', n);
-  n = parseInt(n, 10);
   var state = this._readableState;
   var nOrig = n;
 
-  if (n !== 0) state.emittedReadable = false;
+  if (typeof n !== 'number' || n > 0) state.emittedReadable = false;
 
   // if we're doing read(0) to trigger a readable event, but we
   // already have a bunch of data in the buffer, then just trigger
@@ -48797,7 +47628,9 @@ Readable.prototype.read = function (n) {
   if (state.ended || state.reading) {
     doRead = false;
     debug('reading or ended', doRead);
-  } else if (doRead) {
+  }
+
+  if (doRead) {
     debug('do read');
     state.reading = true;
     state.sync = true;
@@ -48806,10 +47639,11 @@ Readable.prototype.read = function (n) {
     // call internal read method
     this._read(state.highWaterMark);
     state.sync = false;
-    // If _read pushed data synchronously, then `reading` will be false,
-    // and we need to re-evaluate how much data we can return to the user.
-    if (!state.reading) n = howMuchToRead(nOrig, state);
   }
+
+  // If _read pushed data synchronously, then `reading` will be false,
+  // and we need to re-evaluate how much data we can return to the user.
+  if (doRead && !state.reading) n = howMuchToRead(nOrig, state);
 
   var ret;
   if (n > 0) ret = fromList(n, state);else ret = null;
@@ -48817,18 +47651,16 @@ Readable.prototype.read = function (n) {
   if (ret === null) {
     state.needReadable = true;
     n = 0;
-  } else {
-    state.length -= n;
   }
 
-  if (state.length === 0) {
-    // If we have nothing in the buffer, then we want to know
-    // as soon as we *do* get something into the buffer.
-    if (!state.ended) state.needReadable = true;
+  state.length -= n;
 
-    // If we tried to read() past the EOF, then emit end on the next tick.
-    if (nOrig !== n && state.ended) endReadable(this);
-  }
+  // If we have nothing in the buffer, then we want to know
+  // as soon as we *do* get something into the buffer.
+  if (state.length === 0 && !state.ended) state.needReadable = true;
+
+  // If we tried to read() past the EOF, then emit end on the next tick.
+  if (nOrig !== n && state.ended && state.length === 0) endReadable(this);
 
   if (ret !== null) this.emit('data', ret);
 
@@ -48976,17 +47808,11 @@ Readable.prototype.pipe = function (dest, pipeOpts) {
     if (state.awaitDrain && (!dest._writableState || dest._writableState.needDrain)) ondrain();
   }
 
-  // If the user pushes more data while we're writing to dest then we'll end up
-  // in ondata again. However, we only want to increase awaitDrain once because
-  // dest will only emit one 'drain' event for the multiple writes.
-  // => Introduce a guard on increasing awaitDrain.
-  var increasedAwaitDrain = false;
   src.on('data', ondata);
   function ondata(chunk) {
     debug('ondata');
-    increasedAwaitDrain = false;
     var ret = dest.write(chunk);
-    if (false === ret && !increasedAwaitDrain) {
+    if (false === ret) {
       // If the user unpiped during `dest.write()`, it is possible
       // to get stuck in a permanently paused state if that write
       // also returned false.
@@ -48994,7 +47820,6 @@ Readable.prototype.pipe = function (dest, pipeOpts) {
       if ((state.pipesCount === 1 && state.pipes === dest || state.pipesCount > 1 && indexOf(state.pipes, dest) !== -1) && !cleanedUp) {
         debug('false write response, pause', src._readableState.awaitDrain);
         src._readableState.awaitDrain++;
-        increasedAwaitDrain = true;
       }
       src.pause();
     }
@@ -49108,14 +47933,18 @@ Readable.prototype.unpipe = function (dest) {
 Readable.prototype.on = function (ev, fn) {
   var res = Stream.prototype.on.call(this, ev, fn);
 
-  if (ev === 'data') {
-    // Start flowing on next tick if stream isn't explicitly paused
-    if (this._readableState.flowing !== false) this.resume();
-  } else if (ev === 'readable') {
+  // If listening to data, and it has not explicitly been paused,
+  // then call resume to start the flow of data on the next tick.
+  if (ev === 'data' && false !== this._readableState.flowing) {
+    this.resume();
+  }
+
+  if (ev === 'readable' && !this._readableState.endEmitted) {
     var state = this._readableState;
-    if (!state.endEmitted && !state.readableListening) {
-      state.readableListening = state.needReadable = true;
+    if (!state.readableListening) {
+      state.readableListening = true;
       state.emittedReadable = false;
+      state.needReadable = true;
       if (!state.reading) {
         processNextTick(nReadingNextTick, this);
       } else if (state.length) {
@@ -49159,7 +47988,6 @@ function resume_(stream, state) {
   }
 
   state.resumeScheduled = false;
-  state.awaitDrain = 0;
   stream.emit('resume');
   flow(stream);
   if (state.flowing && !state.reading) stream.read(0);
@@ -49178,7 +48006,11 @@ Readable.prototype.pause = function () {
 function flow(stream) {
   var state = stream._readableState;
   debug('flow', state.flowing);
-  while (state.flowing && stream.read() !== null) {}
+  if (state.flowing) {
+    do {
+      var chunk = stream.read();
+    } while (null !== chunk && state.flowing);
+  }
 }
 
 // wrap an old-style stream as the async data source.
@@ -49249,101 +48081,50 @@ Readable._fromList = fromList;
 
 // Pluck off n bytes from an array of buffers.
 // Length is the combined lengths of all the buffers in the list.
-// This function is designed to be inlinable, so please take care when making
-// changes to the function body.
 function fromList(n, state) {
-  // nothing buffered
-  if (state.length === 0) return null;
-
+  var list = state.buffer;
+  var length = state.length;
+  var stringMode = !!state.decoder;
+  var objectMode = !!state.objectMode;
   var ret;
-  if (state.objectMode) ret = state.buffer.shift();else if (!n || n >= state.length) {
-    // read it all, truncate the list
-    if (state.decoder) ret = state.buffer.join('');else if (state.buffer.length === 1) ret = state.buffer.head.data;else ret = state.buffer.concat(state.length);
-    state.buffer.clear();
+
+  // nothing in the list, definitely empty.
+  if (list.length === 0) return null;
+
+  if (length === 0) ret = null;else if (objectMode) ret = list.shift();else if (!n || n >= length) {
+    // read it all, truncate the array.
+    if (stringMode) ret = list.join('');else if (list.length === 1) ret = list[0];else ret = Buffer.concat(list, length);
+    list.length = 0;
   } else {
-    // read part of list
-    ret = fromListPartial(n, state.buffer, state.decoder);
-  }
+    // read just some of it.
+    if (n < list[0].length) {
+      // just take a part of the first list item.
+      // slice is the same for buffers and strings.
+      var buf = list[0];
+      ret = buf.slice(0, n);
+      list[0] = buf.slice(n);
+    } else if (n === list[0].length) {
+      // first list is a perfect match
+      ret = list.shift();
+    } else {
+      // complex case.
+      // we have enough to cover it, but it spans past the first buffer.
+      if (stringMode) ret = '';else ret = bufferShim.allocUnsafe(n);
 
-  return ret;
-}
+      var c = 0;
+      for (var i = 0, l = list.length; i < l && c < n; i++) {
+        var _buf = list[0];
+        var cpy = Math.min(n - c, _buf.length);
 
-// Extracts only enough buffered data to satisfy the amount requested.
-// This function is designed to be inlinable, so please take care when making
-// changes to the function body.
-function fromListPartial(n, list, hasStrings) {
-  var ret;
-  if (n < list.head.data.length) {
-    // slice is the same for buffers and strings
-    ret = list.head.data.slice(0, n);
-    list.head.data = list.head.data.slice(n);
-  } else if (n === list.head.data.length) {
-    // first chunk is a perfect match
-    ret = list.shift();
-  } else {
-    // result spans more than one buffer
-    ret = hasStrings ? copyFromBufferString(n, list) : copyFromBuffer(n, list);
-  }
-  return ret;
-}
+        if (stringMode) ret += _buf.slice(0, cpy);else _buf.copy(ret, c, 0, cpy);
 
-// Copies a specified amount of characters from the list of buffered data
-// chunks.
-// This function is designed to be inlinable, so please take care when making
-// changes to the function body.
-function copyFromBufferString(n, list) {
-  var p = list.head;
-  var c = 1;
-  var ret = p.data;
-  n -= ret.length;
-  while (p = p.next) {
-    var str = p.data;
-    var nb = n > str.length ? str.length : n;
-    if (nb === str.length) ret += str;else ret += str.slice(0, n);
-    n -= nb;
-    if (n === 0) {
-      if (nb === str.length) {
-        ++c;
-        if (p.next) list.head = p.next;else list.head = list.tail = null;
-      } else {
-        list.head = p;
-        p.data = str.slice(nb);
+        if (cpy < _buf.length) list[0] = _buf.slice(cpy);else list.shift();
+
+        c += cpy;
       }
-      break;
     }
-    ++c;
   }
-  list.length -= c;
-  return ret;
-}
 
-// Copies a specified amount of bytes from the list of buffered data chunks.
-// This function is designed to be inlinable, so please take care when making
-// changes to the function body.
-function copyFromBuffer(n, list) {
-  var ret = bufferShim.allocUnsafe(n);
-  var p = list.head;
-  var c = 1;
-  p.data.copy(ret);
-  n -= p.data.length;
-  while (p = p.next) {
-    var buf = p.data;
-    var nb = n > buf.length ? buf.length : n;
-    buf.copy(ret, ret.length - n, 0, nb);
-    n -= nb;
-    if (n === 0) {
-      if (nb === buf.length) {
-        ++c;
-        if (p.next) list.head = p.next;else list.head = list.tail = null;
-      } else {
-        list.head = p;
-        p.data = buf.slice(nb);
-      }
-      break;
-    }
-    ++c;
-  }
-  list.length -= c;
   return ret;
 }
 
@@ -49382,7 +48163,7 @@ function indexOf(xs, x) {
   return -1;
 }
 }).call(this,require('_process'))
-},{"./_stream_duplex":106,"./internal/streams/BufferList":111,"_process":91,"buffer":8,"buffer-shims":7,"core-util-is":41,"events":66,"inherits":69,"isarray":104,"process-nextick-args":90,"string_decoder/":128,"util":5}],109:[function(require,module,exports){
+},{"./_stream_duplex":101,"_process":90,"buffer":8,"buffer-shims":7,"core-util-is":39,"events":64,"inherits":67,"isarray":69,"process-nextick-args":89,"string_decoder/":115,"util":5}],104:[function(require,module,exports){
 // a transform stream is a readable/writable stream where you do
 // something with the data.  Sometimes it's called a "filter",
 // but that's not a great name for it, since that implies a thing where
@@ -49563,7 +48344,7 @@ function done(stream, er) {
 
   return stream.push(null);
 }
-},{"./_stream_duplex":106,"core-util-is":41,"inherits":69}],110:[function(require,module,exports){
+},{"./_stream_duplex":101,"core-util-is":39,"inherits":67}],105:[function(require,module,exports){
 (function (process){
 // A bit simpler than readable streams.
 // Implement an async ._write(chunk, encoding, cb), and it'll handle all
@@ -50092,75 +48873,10 @@ function CorkedRequest(state) {
   };
 }
 }).call(this,require('_process'))
-},{"./_stream_duplex":106,"_process":91,"buffer":8,"buffer-shims":7,"core-util-is":41,"events":66,"inherits":69,"process-nextick-args":90,"util-deprecate":136}],111:[function(require,module,exports){
-'use strict';
-
-var Buffer = require('buffer').Buffer;
-/*<replacement>*/
-var bufferShim = require('buffer-shims');
-/*</replacement>*/
-
-module.exports = BufferList;
-
-function BufferList() {
-  this.head = null;
-  this.tail = null;
-  this.length = 0;
-}
-
-BufferList.prototype.push = function (v) {
-  var entry = { data: v, next: null };
-  if (this.length > 0) this.tail.next = entry;else this.head = entry;
-  this.tail = entry;
-  ++this.length;
-};
-
-BufferList.prototype.unshift = function (v) {
-  var entry = { data: v, next: this.head };
-  if (this.length === 0) this.tail = entry;
-  this.head = entry;
-  ++this.length;
-};
-
-BufferList.prototype.shift = function () {
-  if (this.length === 0) return;
-  var ret = this.head.data;
-  if (this.length === 1) this.head = this.tail = null;else this.head = this.head.next;
-  --this.length;
-  return ret;
-};
-
-BufferList.prototype.clear = function () {
-  this.head = this.tail = null;
-  this.length = 0;
-};
-
-BufferList.prototype.join = function (s) {
-  if (this.length === 0) return '';
-  var p = this.head;
-  var ret = '' + p.data;
-  while (p = p.next) {
-    ret += s + p.data;
-  }return ret;
-};
-
-BufferList.prototype.concat = function (n) {
-  if (this.length === 0) return bufferShim.alloc(0);
-  if (this.length === 1) return this.head.data;
-  var ret = bufferShim.allocUnsafe(n >>> 0);
-  var p = this.head;
-  var i = 0;
-  while (p) {
-    p.data.copy(ret, i);
-    i += p.data.length;
-    p = p.next;
-  }
-  return ret;
-};
-},{"buffer":8,"buffer-shims":7}],112:[function(require,module,exports){
+},{"./_stream_duplex":101,"_process":90,"buffer":8,"buffer-shims":7,"core-util-is":39,"events":64,"inherits":67,"process-nextick-args":89,"util-deprecate":125}],106:[function(require,module,exports){
 module.exports = require("./lib/_stream_passthrough.js")
 
-},{"./lib/_stream_passthrough.js":107}],113:[function(require,module,exports){
+},{"./lib/_stream_passthrough.js":102}],107:[function(require,module,exports){
 (function (process){
 var Stream = (function (){
   try {
@@ -50180,13 +48896,142 @@ if (!process.browser && process.env.READABLE_STREAM === 'disable' && Stream) {
 }
 
 }).call(this,require('_process'))
-},{"./lib/_stream_duplex.js":106,"./lib/_stream_passthrough.js":107,"./lib/_stream_readable.js":108,"./lib/_stream_transform.js":109,"./lib/_stream_writable.js":110,"_process":91}],114:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":101,"./lib/_stream_passthrough.js":102,"./lib/_stream_readable.js":103,"./lib/_stream_transform.js":104,"./lib/_stream_writable.js":105,"_process":90}],108:[function(require,module,exports){
 module.exports = require("./lib/_stream_transform.js")
 
-},{"./lib/_stream_transform.js":109}],115:[function(require,module,exports){
+},{"./lib/_stream_transform.js":104}],109:[function(require,module,exports){
 module.exports = require("./lib/_stream_writable.js")
 
-},{"./lib/_stream_writable.js":110}],116:[function(require,module,exports){
+},{"./lib/_stream_writable.js":105}],110:[function(require,module,exports){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+module.exports = Stream;
+
+var EE = require('events').EventEmitter;
+var inherits = require('inherits');
+
+inherits(Stream, EE);
+Stream.Readable = require('readable-stream/readable.js');
+Stream.Writable = require('readable-stream/writable.js');
+Stream.Duplex = require('readable-stream/duplex.js');
+Stream.Transform = require('readable-stream/transform.js');
+Stream.PassThrough = require('readable-stream/passthrough.js');
+
+// Backwards-compat with node 0.4.x
+Stream.Stream = Stream;
+
+
+
+// old-style streams.  Note that the pipe method (the only relevant
+// part of this class) is overridden in the Readable class.
+
+function Stream() {
+  EE.call(this);
+}
+
+Stream.prototype.pipe = function(dest, options) {
+  var source = this;
+
+  function ondata(chunk) {
+    if (dest.writable) {
+      if (false === dest.write(chunk) && source.pause) {
+        source.pause();
+      }
+    }
+  }
+
+  source.on('data', ondata);
+
+  function ondrain() {
+    if (source.readable && source.resume) {
+      source.resume();
+    }
+  }
+
+  dest.on('drain', ondrain);
+
+  // If the 'end' option is not supplied, dest.end() will be called when
+  // source gets the 'end' or 'close' events.  Only dest.end() once.
+  if (!dest._isStdio && (!options || options.end !== false)) {
+    source.on('end', onend);
+    source.on('close', onclose);
+  }
+
+  var didOnEnd = false;
+  function onend() {
+    if (didOnEnd) return;
+    didOnEnd = true;
+
+    dest.end();
+  }
+
+
+  function onclose() {
+    if (didOnEnd) return;
+    didOnEnd = true;
+
+    if (typeof dest.destroy === 'function') dest.destroy();
+  }
+
+  // don't leave dangling pipes when there are errors.
+  function onerror(er) {
+    cleanup();
+    if (EE.listenerCount(this, 'error') === 0) {
+      throw er; // Unhandled stream error in pipe.
+    }
+  }
+
+  source.on('error', onerror);
+  dest.on('error', onerror);
+
+  // remove all the event listeners that were added.
+  function cleanup() {
+    source.removeListener('data', ondata);
+    dest.removeListener('drain', ondrain);
+
+    source.removeListener('end', onend);
+    source.removeListener('close', onclose);
+
+    source.removeListener('error', onerror);
+    dest.removeListener('error', onerror);
+
+    source.removeListener('end', cleanup);
+    source.removeListener('close', cleanup);
+
+    dest.removeListener('close', cleanup);
+  }
+
+  source.on('end', cleanup);
+  source.on('close', cleanup);
+
+  dest.on('close', cleanup);
+
+  dest.emit('pipe', source);
+
+  // Allow for unix-like usage: A.pipe(B).pipe(C)
+  return dest;
+};
+
+},{"events":64,"inherits":67,"readable-stream/duplex.js":100,"readable-stream/passthrough.js":106,"readable-stream/readable.js":107,"readable-stream/transform.js":108,"readable-stream/writable.js":109}],111:[function(require,module,exports){
 (function (global){
 var ClientRequest = require('./lib/request')
 var extend = require('xtend')
@@ -50268,9 +49113,9 @@ http.METHODS = [
 	'UNSUBSCRIBE'
 ]
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./lib/request":118,"builtin-status-codes":10,"url":134,"xtend":140}],117:[function(require,module,exports){
+},{"./lib/request":113,"builtin-status-codes":9,"url":123,"xtend":128}],112:[function(require,module,exports){
 (function (global){
-exports.fetch = isFunction(global.fetch) && isFunction(global.ReadableStream)
+exports.fetch = isFunction(global.fetch) && isFunction(global.ReadableByteStream)
 
 exports.blobConstructor = false
 try {
@@ -50312,7 +49157,7 @@ function isFunction (value) {
 xhr = null // Help gc
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],118:[function(require,module,exports){
+},{}],113:[function(require,module,exports){
 (function (process,global,Buffer){
 var capability = require('./capability')
 var inherits = require('inherits')
@@ -50323,8 +49168,8 @@ var toArrayBuffer = require('to-arraybuffer')
 var IncomingMessage = response.IncomingMessage
 var rStates = response.readyStates
 
-function decideMode (preferBinary, useFetch) {
-	if (capability.fetch && useFetch) {
+function decideMode (preferBinary) {
+	if (capability.fetch) {
 		return 'fetch'
 	} else if (capability.mozchunkedarraybuffer) {
 		return 'moz-chunked-arraybuffer'
@@ -50353,12 +49198,7 @@ var ClientRequest = module.exports = function (opts) {
 	})
 
 	var preferBinary
-	var useFetch = true
-	if (opts.mode === 'disable-fetch') {
-		// If the use of XHR should be preferred and includes preserving the 'content-type' header
-		useFetch = false
-		preferBinary = true
-	} else if (opts.mode === 'prefer-streaming') {
+	if (opts.mode === 'prefer-streaming') {
 		// If streaming is a high priority but binary compatibility and
 		// the accuracy of the 'content-type' header aren't
 		preferBinary = false
@@ -50371,7 +49211,7 @@ var ClientRequest = module.exports = function (opts) {
 	} else {
 		throw new Error('Invalid value for opts.mode')
 	}
-	self._mode = decideMode(preferBinary, useFetch)
+	self._mode = decideMode(preferBinary)
 
 	self.on('finish', function () {
 		self._onFinish()
@@ -50598,7 +49438,7 @@ var unsafeHeaders = [
 ]
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
-},{"./capability":117,"./response":119,"_process":91,"buffer":8,"inherits":69,"readable-stream":127,"to-arraybuffer":131}],119:[function(require,module,exports){
+},{"./capability":112,"./response":114,"_process":90,"buffer":8,"inherits":67,"readable-stream":107,"to-arraybuffer":120}],114:[function(require,module,exports){
 (function (process,global,Buffer){
 var capability = require('./capability')
 var inherits = require('inherits')
@@ -50745,7 +49585,7 @@ IncomingMessage.prototype._onXHRProgress = function () {
 			}
 			break
 		case 'arraybuffer':
-			if (xhr.readyState !== rStates.DONE || !xhr.response)
+			if (xhr.readyState !== rStates.DONE)
 				break
 			response = xhr.response
 			self.push(new Buffer(new Uint8Array(response)))
@@ -50782,23 +49622,7 @@ IncomingMessage.prototype._onXHRProgress = function () {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
-},{"./capability":117,"_process":91,"buffer":8,"inherits":69,"readable-stream":127}],120:[function(require,module,exports){
-arguments[4][9][0].apply(exports,arguments)
-},{"dup":9}],121:[function(require,module,exports){
-arguments[4][106][0].apply(exports,arguments)
-},{"./_stream_readable":123,"./_stream_writable":125,"core-util-is":41,"dup":106,"inherits":69,"process-nextick-args":90}],122:[function(require,module,exports){
-arguments[4][107][0].apply(exports,arguments)
-},{"./_stream_transform":124,"core-util-is":41,"dup":107,"inherits":69}],123:[function(require,module,exports){
-arguments[4][108][0].apply(exports,arguments)
-},{"./_stream_duplex":121,"./internal/streams/BufferList":126,"_process":91,"buffer":8,"buffer-shims":7,"core-util-is":41,"dup":108,"events":66,"inherits":69,"isarray":120,"process-nextick-args":90,"string_decoder/":128,"util":5}],124:[function(require,module,exports){
-arguments[4][109][0].apply(exports,arguments)
-},{"./_stream_duplex":121,"core-util-is":41,"dup":109,"inherits":69}],125:[function(require,module,exports){
-arguments[4][110][0].apply(exports,arguments)
-},{"./_stream_duplex":121,"_process":91,"buffer":8,"buffer-shims":7,"core-util-is":41,"dup":110,"events":66,"inherits":69,"process-nextick-args":90,"util-deprecate":136}],126:[function(require,module,exports){
-arguments[4][111][0].apply(exports,arguments)
-},{"buffer":8,"buffer-shims":7,"dup":111}],127:[function(require,module,exports){
-arguments[4][113][0].apply(exports,arguments)
-},{"./lib/_stream_duplex.js":121,"./lib/_stream_passthrough.js":122,"./lib/_stream_readable.js":123,"./lib/_stream_transform.js":124,"./lib/_stream_writable.js":125,"_process":91,"dup":113}],128:[function(require,module,exports){
+},{"./capability":112,"_process":90,"buffer":8,"inherits":67,"readable-stream":107}],115:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -51021,7 +49845,7 @@ function base64DetectIncompleteChar(buffer) {
   this.charLength = this.charReceived ? 3 : 0;
 }
 
-},{"buffer":8}],129:[function(require,module,exports){
+},{"buffer":8}],116:[function(require,module,exports){
 /**
  * Module dependencies.
  */
@@ -52214,7 +51038,195 @@ request.put = function(url, data, fn){
 
 module.exports = request;
 
-},{"emitter":40,"reduce":102}],130:[function(require,module,exports){
+},{"emitter":117,"reduce":118}],117:[function(require,module,exports){
+
+/**
+ * Expose `Emitter`.
+ */
+
+module.exports = Emitter;
+
+/**
+ * Initialize a new `Emitter`.
+ *
+ * @api public
+ */
+
+function Emitter(obj) {
+  if (obj) return mixin(obj);
+};
+
+/**
+ * Mixin the emitter properties.
+ *
+ * @param {Object} obj
+ * @return {Object}
+ * @api private
+ */
+
+function mixin(obj) {
+  for (var key in Emitter.prototype) {
+    obj[key] = Emitter.prototype[key];
+  }
+  return obj;
+}
+
+/**
+ * Listen on the given `event` with `fn`.
+ *
+ * @param {String} event
+ * @param {Function} fn
+ * @return {Emitter}
+ * @api public
+ */
+
+Emitter.prototype.on =
+Emitter.prototype.addEventListener = function(event, fn){
+  this._callbacks = this._callbacks || {};
+  (this._callbacks['$' + event] = this._callbacks['$' + event] || [])
+    .push(fn);
+  return this;
+};
+
+/**
+ * Adds an `event` listener that will be invoked a single
+ * time then automatically removed.
+ *
+ * @param {String} event
+ * @param {Function} fn
+ * @return {Emitter}
+ * @api public
+ */
+
+Emitter.prototype.once = function(event, fn){
+  function on() {
+    this.off(event, on);
+    fn.apply(this, arguments);
+  }
+
+  on.fn = fn;
+  this.on(event, on);
+  return this;
+};
+
+/**
+ * Remove the given callback for `event` or all
+ * registered callbacks.
+ *
+ * @param {String} event
+ * @param {Function} fn
+ * @return {Emitter}
+ * @api public
+ */
+
+Emitter.prototype.off =
+Emitter.prototype.removeListener =
+Emitter.prototype.removeAllListeners =
+Emitter.prototype.removeEventListener = function(event, fn){
+  this._callbacks = this._callbacks || {};
+
+  // all
+  if (0 == arguments.length) {
+    this._callbacks = {};
+    return this;
+  }
+
+  // specific event
+  var callbacks = this._callbacks['$' + event];
+  if (!callbacks) return this;
+
+  // remove all handlers
+  if (1 == arguments.length) {
+    delete this._callbacks['$' + event];
+    return this;
+  }
+
+  // remove specific handler
+  var cb;
+  for (var i = 0; i < callbacks.length; i++) {
+    cb = callbacks[i];
+    if (cb === fn || cb.fn === fn) {
+      callbacks.splice(i, 1);
+      break;
+    }
+  }
+  return this;
+};
+
+/**
+ * Emit `event` with the given args.
+ *
+ * @param {String} event
+ * @param {Mixed} ...
+ * @return {Emitter}
+ */
+
+Emitter.prototype.emit = function(event){
+  this._callbacks = this._callbacks || {};
+  var args = [].slice.call(arguments, 1)
+    , callbacks = this._callbacks['$' + event];
+
+  if (callbacks) {
+    callbacks = callbacks.slice(0);
+    for (var i = 0, len = callbacks.length; i < len; ++i) {
+      callbacks[i].apply(this, args);
+    }
+  }
+
+  return this;
+};
+
+/**
+ * Return array of callbacks for `event`.
+ *
+ * @param {String} event
+ * @return {Array}
+ * @api public
+ */
+
+Emitter.prototype.listeners = function(event){
+  this._callbacks = this._callbacks || {};
+  return this._callbacks['$' + event] || [];
+};
+
+/**
+ * Check if this emitter has `event` handlers.
+ *
+ * @param {String} event
+ * @return {Boolean}
+ * @api public
+ */
+
+Emitter.prototype.hasListeners = function(event){
+  return !! this.listeners(event).length;
+};
+
+},{}],118:[function(require,module,exports){
+
+/**
+ * Reduce `arr` with `fn`.
+ *
+ * @param {Array} arr
+ * @param {Function} fn
+ * @param {Mixed} initial
+ *
+ * TODO: combatible error handling?
+ */
+
+module.exports = function(arr, fn, initial){  
+  var idx = 0;
+  var len = arr.length;
+  var curr = arguments.length == 3
+    ? initial
+    : arr[idx++];
+
+  while (idx < len) {
+    curr = fn.call(null, curr, arr[idx], ++idx, arr);
+  }
+  
+  return curr;
+};
+},{}],119:[function(require,module,exports){
 var nextTick = require('process/browser.js').nextTick;
 var apply = Function.prototype.apply;
 var slice = Array.prototype.slice;
@@ -52291,7 +51303,7 @@ exports.setImmediate = typeof setImmediate === "function" ? setImmediate : funct
 exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate : function(id) {
   delete immediateIds[id];
 };
-},{"process/browser.js":91}],131:[function(require,module,exports){
+},{"process/browser.js":90}],120:[function(require,module,exports){
 var Buffer = require('buffer').Buffer
 
 module.exports = function (buf) {
@@ -52320,9 +51332,9 @@ module.exports = function (buf) {
 	}
 }
 
-},{"buffer":8}],132:[function(require,module,exports){
-arguments[4][47][0].apply(exports,arguments)
-},{"./lib/type":133,"dup":47}],133:[function(require,module,exports){
+},{"buffer":8}],121:[function(require,module,exports){
+arguments[4][45][0].apply(exports,arguments)
+},{"./lib/type":122,"dup":45}],122:[function(require,module,exports){
 /*!
  * type-detect
  * Copyright(c) 2013 jake luer <jake@alogicalparadox.com>
@@ -52458,7 +51470,7 @@ Library.prototype.test = function(obj, type) {
   }
 };
 
-},{}],134:[function(require,module,exports){
+},{}],123:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -53192,7 +52204,7 @@ Url.prototype.parseHost = function() {
   if (host) this.hostname = host;
 };
 
-},{"./util":135,"punycode":93,"querystring":101}],135:[function(require,module,exports){
+},{"./util":124,"punycode":92,"querystring":99}],124:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -53210,7 +52222,7 @@ module.exports = {
   }
 };
 
-},{}],136:[function(require,module,exports){
+},{}],125:[function(require,module,exports){
 (function (global){
 
 /**
@@ -53281,16 +52293,14 @@ function config (name) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],137:[function(require,module,exports){
-arguments[4][69][0].apply(exports,arguments)
-},{"dup":69}],138:[function(require,module,exports){
+},{}],126:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],139:[function(require,module,exports){
+},{}],127:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -53880,7 +52890,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":138,"_process":91,"inherits":137}],140:[function(require,module,exports){
+},{"./support/isBuffer":126,"_process":90,"inherits":67}],128:[function(require,module,exports){
 module.exports = extend
 
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -53901,10 +52911,10 @@ function extend() {
     return target
 }
 
-},{}],141:[function(require,module,exports){
+},{}],129:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -53972,10 +52982,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],142:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],130:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -54395,10 +53405,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/CreateEndpointBasicAuthRepresentation":202,"../model/EndpointBasicAuthRepresentation":205,"../model/EndpointConfigurationRepresentation":206}],143:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/CreateEndpointBasicAuthRepresentation":190,"../model/EndpointBasicAuthRepresentation":193,"../model/EndpointConfigurationRepresentation":194}],131:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -55059,10 +54069,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/AbstractGroupRepresentation":185,"../model/AddGroupCapabilitiesRepresentation":188,"../model/GroupRepresentation":221,"../model/LightGroupRepresentation":225,"../model/ResultListDataRepresentation":247}],144:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/AbstractGroupRepresentation":173,"../model/AddGroupCapabilitiesRepresentation":176,"../model/GroupRepresentation":209,"../model/LightGroupRepresentation":213,"../model/ResultListDataRepresentation":235}],132:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -55386,10 +54396,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/CreateTenantRepresentation":204,"../model/ImageUploadRepresentation":222,"../model/LightTenantRepresentation":226,"../model/TenantEvent":257,"../model/TenantRepresentation":258}],145:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/CreateTenantRepresentation":192,"../model/ImageUploadRepresentation":210,"../model/LightTenantRepresentation":214,"../model/TenantEvent":245,"../model/TenantRepresentation":246}],133:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -55626,10 +54636,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/AbstractUserRepresentation":187,"../model/BulkUserUpdateRepresentation":196,"../model/ResultListDataRepresentation":247,"../model/UserRepresentation":263}],146:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/AbstractUserRepresentation":175,"../model/BulkUserUpdateRepresentation":184,"../model/ResultListDataRepresentation":235,"../model/UserRepresentation":251}],134:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -56006,10 +55016,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/ResultListDataRepresentation":247}],147:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/ResultListDataRepresentation":235}],135:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -56267,10 +55277,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/AppDefinitionPublishRepresentation":190,"../model/AppDefinitionRepresentation":191,"../model/AppDefinitionUpdateResultRepresentation":192,"../model/ResultListDataRepresentation":247,"../model/RuntimeAppDefinitionSaveRepresentation":248}],148:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/AppDefinitionPublishRepresentation":178,"../model/AppDefinitionRepresentation":179,"../model/AppDefinitionUpdateResultRepresentation":180,"../model/ResultListDataRepresentation":235,"../model/RuntimeAppDefinitionSaveRepresentation":236}],136:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -56465,10 +55475,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/AppDefinitionPublishRepresentation":190,"../model/AppDefinitionRepresentation":191,"../model/AppDefinitionUpdateResultRepresentation":192}],149:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/AppDefinitionPublishRepresentation":178,"../model/AppDefinitionRepresentation":179,"../model/AppDefinitionUpdateResultRepresentation":180}],137:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -56569,10 +55579,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/ResultListDataRepresentation":247,"../model/RuntimeAppDefinitionSaveRepresentation":248}],150:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/ResultListDataRepresentation":235,"../model/RuntimeAppDefinitionSaveRepresentation":236}],138:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -56774,10 +55784,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/CommentRepresentation":199,"../model/ResultListDataRepresentation":247}],151:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/CommentRepresentation":187,"../model/ResultListDataRepresentation":235}],139:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -57261,10 +56271,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/RelatedContentRepresentation":244,"../model/ResultListDataRepresentation":247}],152:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/RelatedContentRepresentation":232,"../model/ResultListDataRepresentation":235}],140:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -57345,10 +56355,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],153:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],141:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -57570,10 +56580,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/FormRepresentation":215,"../model/FormSaveRepresentation":216,"../model/ValidationErrorRepresentation":265}],154:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/FormRepresentation":203,"../model/FormSaveRepresentation":204,"../model/ValidationErrorRepresentation":253}],142:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -57686,10 +56696,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/ResultListDataRepresentation":247}],155:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/ResultListDataRepresentation":235}],143:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -57798,10 +56808,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/SyncLogEntryRepresentation":250}],156:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/SyncLogEntryRepresentation":238}],144:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -57869,10 +56879,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/ResultListDataRepresentation":247}],157:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/ResultListDataRepresentation":235}],145:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -58090,10 +57100,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/ResultListDataRepresentation":247}],158:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/ResultListDataRepresentation":235}],146:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -58284,10 +57294,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/ResultListDataRepresentation":247}],159:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/ResultListDataRepresentation":235}],147:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -58967,10 +57977,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/BoxUserAccountCredentialsRepresentation":195,"../model/ResultListDataRepresentation":247,"../model/UserAccountCredentialsRepresentation":259}],160:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/BoxUserAccountCredentialsRepresentation":183,"../model/ResultListDataRepresentation":235,"../model/UserAccountCredentialsRepresentation":247}],148:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -59252,10 +58262,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/BoxUserAccountCredentialsRepresentation":195,"../model/ResultListDataRepresentation":247,"../model/UserAccountCredentialsRepresentation":259}],161:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/BoxUserAccountCredentialsRepresentation":183,"../model/ResultListDataRepresentation":235,"../model/UserAccountCredentialsRepresentation":247}],149:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -59365,10 +58375,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/ResultListDataRepresentation":247}],162:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/ResultListDataRepresentation":235}],150:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -59483,10 +58493,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],163:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],151:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
@@ -59601,10 +58611,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/ObjectNode":233}],164:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/ObjectNode":221}],152:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -60121,10 +59131,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/ModelRepresentation":232,"../model/ObjectNode":233,"../model/ResultListDataRepresentation":247,"../model/ValidationErrorRepresentation":265}],165:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/ModelRepresentation":220,"../model/ObjectNode":221,"../model/ResultListDataRepresentation":235,"../model/ValidationErrorRepresentation":253}],153:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -60244,10 +59254,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/ModelRepresentation":232,"../model/ResultListDataRepresentation":247}],166:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/ModelRepresentation":220,"../model/ResultListDataRepresentation":235}],154:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -60358,11 +59368,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * Retrieve the start form for a process definition
+     * @param {String} processDefinitionId processDefinitionId
      */
-    this.getProcessDefinitionStartForm = function () {
+    this.getProcessDefinitionStartForm = function (processDefinitionId) {
       var postBody = null;
 
-      var pathParams = {};
+      // verify the required parameter 'processInstanceId' is set
+      if (processDefinitionId == undefined || processDefinitionId == null) {
+        throw "Missing the required parameter 'processDefinitionId' when calling getProcessInstanceContent";
+      }
+
+      var pathParams = {
+        'processDefinitionId': processDefinitionId
+      };
+
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
@@ -60632,10 +59651,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/CreateProcessInstanceRepresentation":203,"../model/FormDefinitionRepresentation":211,"../model/FormValueRepresentation":219,"../model/ProcessFilterRequestRepresentation":235,"../model/ProcessInstanceFilterRequestRepresentation":237,"../model/ProcessInstanceRepresentation":238,"../model/ResultListDataRepresentation":247}],167:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/CreateProcessInstanceRepresentation":191,"../model/FormDefinitionRepresentation":199,"../model/FormValueRepresentation":207,"../model/ProcessFilterRequestRepresentation":223,"../model/ProcessInstanceFilterRequestRepresentation":225,"../model/ProcessInstanceRepresentation":226,"../model/ResultListDataRepresentation":235}],155:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -60709,10 +59728,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/ResultListDataRepresentation":247}],168:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/ResultListDataRepresentation":235}],156:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -60830,10 +59849,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/FormDefinitionRepresentation":211,"../model/FormValueRepresentation":219}],169:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/FormDefinitionRepresentation":199,"../model/FormValueRepresentation":207}],157:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -61055,10 +60074,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/CommentRepresentation":199,"../model/FormDefinitionRepresentation":211,"../model/ProcessInstanceRepresentation":238,"../model/ResultListDataRepresentation":247}],170:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/CommentRepresentation":187,"../model/FormDefinitionRepresentation":199,"../model/ProcessInstanceRepresentation":226,"../model/ResultListDataRepresentation":235}],158:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -61164,10 +60183,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/CreateProcessInstanceRepresentation":203,"../model/ProcessInstanceRepresentation":238,"../model/ResultListDataRepresentation":247}],171:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/CreateProcessInstanceRepresentation":191,"../model/ProcessInstanceRepresentation":226,"../model/ResultListDataRepresentation":235}],159:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -61271,10 +60290,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/ObjectNode":233,"../model/ProcessInstanceFilterRequestRepresentation":237,"../model/ResultListDataRepresentation":247}],172:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/ObjectNode":221,"../model/ProcessInstanceFilterRequestRepresentation":225,"../model/ResultListDataRepresentation":235}],160:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -61346,10 +60365,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/ProcessScopeRepresentation":241,"../model/ProcessScopesRequestRepresentation":242}],173:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/ProcessScopeRepresentation":229,"../model/ProcessScopesRequestRepresentation":230}],161:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -61550,10 +60569,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/ChangePasswordRepresentation":197,"../model/File":210,"../model/ImageUploadRepresentation":222,"../model/UserRepresentation":263}],174:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/ChangePasswordRepresentation":185,"../model/File":198,"../model/ImageUploadRepresentation":210,"../model/UserRepresentation":251}],162:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -61645,10 +60664,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],175:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],163:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -61715,10 +60734,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/SystemPropertiesRepresentation":251}],176:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/SystemPropertiesRepresentation":239}],164:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -62057,10 +61076,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/ObjectNode":233,"../model/TaskRepresentation":255}],177:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/ObjectNode":221,"../model/TaskRepresentation":243}],165:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -63127,10 +62146,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/ChecklistOrderRepresentation":198,"../model/CommentRepresentation":199,"../model/CompleteFormRepresentation":200,"../model/FormDefinitionRepresentation":211,"../model/FormValueRepresentation":219,"../model/ObjectNode":233,"../model/RelatedContentRepresentation":244,"../model/ResultListDataRepresentation":247,"../model/SaveFormRepresentation":249,"../model/TaskFilterRequestRepresentation":253,"../model/TaskRepresentation":255,"../model/TaskUpdateRepresentation":256}],178:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/ChecklistOrderRepresentation":186,"../model/CommentRepresentation":187,"../model/CompleteFormRepresentation":188,"../model/FormDefinitionRepresentation":199,"../model/FormValueRepresentation":207,"../model/ObjectNode":221,"../model/RelatedContentRepresentation":232,"../model/ResultListDataRepresentation":235,"../model/SaveFormRepresentation":237,"../model/TaskFilterRequestRepresentation":241,"../model/TaskRepresentation":243,"../model/TaskUpdateRepresentation":244}],166:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -63284,10 +62303,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/ChecklistOrderRepresentation":198,"../model/ResultListDataRepresentation":247,"../model/TaskRepresentation":255}],179:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/ChecklistOrderRepresentation":186,"../model/ResultListDataRepresentation":235,"../model/TaskRepresentation":243}],167:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -63566,10 +62585,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/CompleteFormRepresentation":200,"../model/FormDefinitionRepresentation":211,"../model/FormValueRepresentation":219,"../model/ProcessInstanceVariableRepresentation":239,"../model/SaveFormRepresentation":249}],180:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/CompleteFormRepresentation":188,"../model/FormDefinitionRepresentation":199,"../model/FormValueRepresentation":207,"../model/ProcessInstanceVariableRepresentation":227,"../model/SaveFormRepresentation":237}],168:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -63743,10 +62762,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/ArrayNode":194}],181:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/ArrayNode":182}],169:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -64013,10 +63032,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/ResetPasswordRepresentation":245,"../model/ResultListDataRepresentation":247,"../model/UserActionRepresentation":260,"../model/UserRepresentation":263}],182:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/ResetPasswordRepresentation":233,"../model/ResultListDataRepresentation":235,"../model/UserActionRepresentation":248,"../model/UserRepresentation":251}],170:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -64470,10 +63489,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/ResultListDataRepresentation":247,"../model/UserFilterOrderRepresentation":261,"../model/UserProcessInstanceFilterRepresentation":262,"../model/UserTaskFilterRepresentation":264}],183:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/ResultListDataRepresentation":235,"../model/UserFilterOrderRepresentation":249,"../model/UserProcessInstanceFilterRepresentation":250,"../model/UserTaskFilterRepresentation":252}],171:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -64560,10 +63579,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/ResultListDataRepresentation":247}],184:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/ResultListDataRepresentation":235}],172:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (factory) {
   if (typeof define === 'function' && define.amd) {
@@ -65247,10 +64266,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../alfrescoApiClient":402,"./api/AboutApi":141,"./api/AdminEndpointsApi":142,"./api/AdminGroupsApi":143,"./api/AdminTenantsApi":144,"./api/AdminUsersApi":145,"./api/AlfrescoApi":146,"./api/AppsApi":147,"./api/AppsDefinitionApi":148,"./api/AppsRuntimeApi":149,"./api/CommentsApi":150,"./api/ContentApi":151,"./api/ContentRenditionApi":152,"./api/EditorApi":153,"./api/GroupsApi":154,"./api/IDMSyncApi":155,"./api/IntegrationAccountApi":156,"./api/IntegrationAlfrescoCloudApi":157,"./api/IntegrationAlfrescoOnPremiseApi":158,"./api/IntegrationApi":159,"./api/IntegrationBoxApi":160,"./api/IntegrationDriveApi":161,"./api/ModelBpmnApi":162,"./api/ModelJsonBpmnApi":163,"./api/ModelsApi":164,"./api/ModelsHistoryApi":165,"./api/ProcessApi":166,"./api/ProcessDefinitionsApi":167,"./api/ProcessDefinitionsFormApi":168,"./api/ProcessInstancesApi":169,"./api/ProcessInstancesInformationApi":170,"./api/ProcessInstancesListingApi":171,"./api/ProcessScopeApi":172,"./api/ProfileApi":173,"./api/ScriptFileApi":174,"./api/SystemPropertiesApi":175,"./api/TaskActionsApi":176,"./api/TaskApi":177,"./api/TaskCheckListApi":178,"./api/TaskFormsApi":179,"./api/TemporaryApi":180,"./api/UserApi":181,"./api/UserFiltersApi":182,"./api/UsersWorkflowApi":183,"./model/AbstractGroupRepresentation":185,"./model/AbstractRepresentation":186,"./model/AbstractUserRepresentation":187,"./model/AddGroupCapabilitiesRepresentation":188,"./model/AppDefinition":189,"./model/AppDefinitionPublishRepresentation":190,"./model/AppDefinitionRepresentation":191,"./model/AppDefinitionUpdateResultRepresentation":192,"./model/AppModelDefinition":193,"./model/ArrayNode":194,"./model/BoxUserAccountCredentialsRepresentation":195,"./model/BulkUserUpdateRepresentation":196,"./model/ChangePasswordRepresentation":197,"./model/ChecklistOrderRepresentation":198,"./model/CommentRepresentation":199,"./model/CompleteFormRepresentation":200,"./model/ConditionRepresentation":201,"./model/CreateEndpointBasicAuthRepresentation":202,"./model/CreateProcessInstanceRepresentation":203,"./model/CreateTenantRepresentation":204,"./model/EndpointBasicAuthRepresentation":205,"./model/EndpointConfigurationRepresentation":206,"./model/EndpointRequestHeaderRepresentation":207,"./model/EntityAttributeScopeRepresentation":208,"./model/EntityVariableScopeRepresentation":209,"./model/File":210,"./model/FormDefinitionRepresentation":211,"./model/FormFieldRepresentation":212,"./model/FormJavascriptEventRepresentation":213,"./model/FormOutcomeRepresentation":214,"./model/FormRepresentation":215,"./model/FormSaveRepresentation":216,"./model/FormScopeRepresentation":217,"./model/FormTabRepresentation":218,"./model/FormValueRepresentation":219,"./model/GroupCapabilityRepresentation":220,"./model/GroupRepresentation":221,"./model/ImageUploadRepresentation":222,"./model/LayoutRepresentation":223,"./model/LightAppRepresentation":224,"./model/LightGroupRepresentation":225,"./model/LightTenantRepresentation":226,"./model/LightUserRepresentation":227,"./model/MaplongListstring":228,"./model/MapstringListEntityVariableScopeRepresentation":229,"./model/MapstringListVariableScopeRepresentation":230,"./model/Mapstringstring":231,"./model/ModelRepresentation":232,"./model/ObjectNode":233,"./model/OptionRepresentation":234,"./model/ProcessFilterRequestRepresentation":235,"./model/ProcessInstanceFilterRepresentation":236,"./model/ProcessInstanceFilterRequestRepresentation":237,"./model/ProcessInstanceRepresentation":238,"./model/ProcessInstanceVariableRepresentation":239,"./model/ProcessScopeIdentifierRepresentation":240,"./model/ProcessScopeRepresentation":241,"./model/ProcessScopesRequestRepresentation":242,"./model/PublishIdentityInfoRepresentation":243,"./model/RelatedContentRepresentation":244,"./model/ResetPasswordRepresentation":245,"./model/RestVariable":246,"./model/ResultListDataRepresentation":247,"./model/RuntimeAppDefinitionSaveRepresentation":248,"./model/SaveFormRepresentation":249,"./model/SyncLogEntryRepresentation":250,"./model/SystemPropertiesRepresentation":251,"./model/TaskFilterRepresentation":252,"./model/TaskFilterRequestRepresentation":253,"./model/TaskQueryRequestRepresentation":254,"./model/TaskRepresentation":255,"./model/TaskUpdateRepresentation":256,"./model/TenantEvent":257,"./model/TenantRepresentation":258,"./model/UserAccountCredentialsRepresentation":259,"./model/UserActionRepresentation":260,"./model/UserFilterOrderRepresentation":261,"./model/UserProcessInstanceFilterRepresentation":262,"./model/UserRepresentation":263,"./model/UserTaskFilterRepresentation":264,"./model/ValidationErrorRepresentation":265,"./model/VariableScopeRepresentation":266}],185:[function(require,module,exports){
+},{"../../alfrescoApiClient":390,"./api/AboutApi":129,"./api/AdminEndpointsApi":130,"./api/AdminGroupsApi":131,"./api/AdminTenantsApi":132,"./api/AdminUsersApi":133,"./api/AlfrescoApi":134,"./api/AppsApi":135,"./api/AppsDefinitionApi":136,"./api/AppsRuntimeApi":137,"./api/CommentsApi":138,"./api/ContentApi":139,"./api/ContentRenditionApi":140,"./api/EditorApi":141,"./api/GroupsApi":142,"./api/IDMSyncApi":143,"./api/IntegrationAccountApi":144,"./api/IntegrationAlfrescoCloudApi":145,"./api/IntegrationAlfrescoOnPremiseApi":146,"./api/IntegrationApi":147,"./api/IntegrationBoxApi":148,"./api/IntegrationDriveApi":149,"./api/ModelBpmnApi":150,"./api/ModelJsonBpmnApi":151,"./api/ModelsApi":152,"./api/ModelsHistoryApi":153,"./api/ProcessApi":154,"./api/ProcessDefinitionsApi":155,"./api/ProcessDefinitionsFormApi":156,"./api/ProcessInstancesApi":157,"./api/ProcessInstancesInformationApi":158,"./api/ProcessInstancesListingApi":159,"./api/ProcessScopeApi":160,"./api/ProfileApi":161,"./api/ScriptFileApi":162,"./api/SystemPropertiesApi":163,"./api/TaskActionsApi":164,"./api/TaskApi":165,"./api/TaskCheckListApi":166,"./api/TaskFormsApi":167,"./api/TemporaryApi":168,"./api/UserApi":169,"./api/UserFiltersApi":170,"./api/UsersWorkflowApi":171,"./model/AbstractGroupRepresentation":173,"./model/AbstractRepresentation":174,"./model/AbstractUserRepresentation":175,"./model/AddGroupCapabilitiesRepresentation":176,"./model/AppDefinition":177,"./model/AppDefinitionPublishRepresentation":178,"./model/AppDefinitionRepresentation":179,"./model/AppDefinitionUpdateResultRepresentation":180,"./model/AppModelDefinition":181,"./model/ArrayNode":182,"./model/BoxUserAccountCredentialsRepresentation":183,"./model/BulkUserUpdateRepresentation":184,"./model/ChangePasswordRepresentation":185,"./model/ChecklistOrderRepresentation":186,"./model/CommentRepresentation":187,"./model/CompleteFormRepresentation":188,"./model/ConditionRepresentation":189,"./model/CreateEndpointBasicAuthRepresentation":190,"./model/CreateProcessInstanceRepresentation":191,"./model/CreateTenantRepresentation":192,"./model/EndpointBasicAuthRepresentation":193,"./model/EndpointConfigurationRepresentation":194,"./model/EndpointRequestHeaderRepresentation":195,"./model/EntityAttributeScopeRepresentation":196,"./model/EntityVariableScopeRepresentation":197,"./model/File":198,"./model/FormDefinitionRepresentation":199,"./model/FormFieldRepresentation":200,"./model/FormJavascriptEventRepresentation":201,"./model/FormOutcomeRepresentation":202,"./model/FormRepresentation":203,"./model/FormSaveRepresentation":204,"./model/FormScopeRepresentation":205,"./model/FormTabRepresentation":206,"./model/FormValueRepresentation":207,"./model/GroupCapabilityRepresentation":208,"./model/GroupRepresentation":209,"./model/ImageUploadRepresentation":210,"./model/LayoutRepresentation":211,"./model/LightAppRepresentation":212,"./model/LightGroupRepresentation":213,"./model/LightTenantRepresentation":214,"./model/LightUserRepresentation":215,"./model/MaplongListstring":216,"./model/MapstringListEntityVariableScopeRepresentation":217,"./model/MapstringListVariableScopeRepresentation":218,"./model/Mapstringstring":219,"./model/ModelRepresentation":220,"./model/ObjectNode":221,"./model/OptionRepresentation":222,"./model/ProcessFilterRequestRepresentation":223,"./model/ProcessInstanceFilterRepresentation":224,"./model/ProcessInstanceFilterRequestRepresentation":225,"./model/ProcessInstanceRepresentation":226,"./model/ProcessInstanceVariableRepresentation":227,"./model/ProcessScopeIdentifierRepresentation":228,"./model/ProcessScopeRepresentation":229,"./model/ProcessScopesRequestRepresentation":230,"./model/PublishIdentityInfoRepresentation":231,"./model/RelatedContentRepresentation":232,"./model/ResetPasswordRepresentation":233,"./model/RestVariable":234,"./model/ResultListDataRepresentation":235,"./model/RuntimeAppDefinitionSaveRepresentation":236,"./model/SaveFormRepresentation":237,"./model/SyncLogEntryRepresentation":238,"./model/SystemPropertiesRepresentation":239,"./model/TaskFilterRepresentation":240,"./model/TaskFilterRequestRepresentation":241,"./model/TaskQueryRequestRepresentation":242,"./model/TaskRepresentation":243,"./model/TaskUpdateRepresentation":244,"./model/TenantEvent":245,"./model/TenantRepresentation":246,"./model/UserAccountCredentialsRepresentation":247,"./model/UserActionRepresentation":248,"./model/UserFilterOrderRepresentation":249,"./model/UserProcessInstanceFilterRepresentation":250,"./model/UserRepresentation":251,"./model/UserTaskFilterRepresentation":252,"./model/ValidationErrorRepresentation":253,"./model/VariableScopeRepresentation":254}],173:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -65332,10 +64351,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],186:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],174:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -65387,10 +64406,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],187:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],175:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -65486,10 +64505,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],188:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],176:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -65550,10 +64569,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],189:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],177:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -65635,10 +64654,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./AppModelDefinition":193,"./PublishIdentityInfoRepresentation":243}],190:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./AppModelDefinition":181,"./PublishIdentityInfoRepresentation":231}],178:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -65706,10 +64725,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],191:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],179:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -65826,10 +64845,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],192:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],180:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -65932,10 +64951,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./AppDefinitionRepresentation":191}],193:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./AppDefinitionRepresentation":179}],181:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -66066,10 +65085,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],194:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],182:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -66322,10 +65341,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],195:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],183:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -66400,10 +65419,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],196:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],184:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -66499,10 +65518,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],197:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],185:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -66570,10 +65589,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],198:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],186:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -66634,10 +65653,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],199:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],187:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -66719,10 +65738,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./LightUserRepresentation":227}],200:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./LightUserRepresentation":215}],188:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -66790,10 +65809,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],201:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],189:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -66903,10 +65922,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],202:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],190:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -66988,10 +66007,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],203:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],191:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -67073,10 +66092,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],204:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],192:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -67158,10 +66177,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],205:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],193:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -67257,10 +66276,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],206:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],194:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -67384,10 +66403,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./EndpointRequestHeaderRepresentation":207}],207:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./EndpointRequestHeaderRepresentation":195}],195:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -67455,10 +66474,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],208:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],196:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -67526,10 +66545,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],209:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],197:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -67611,10 +66630,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./EntityAttributeScopeRepresentation":208}],210:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./EntityAttributeScopeRepresentation":196}],198:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -67773,10 +66792,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],211:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],199:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -67963,10 +66982,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./FormFieldRepresentation":212,"./FormJavascriptEventRepresentation":213,"./FormOutcomeRepresentation":214,"./FormTabRepresentation":218}],212:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./FormFieldRepresentation":200,"./FormJavascriptEventRepresentation":201,"./FormOutcomeRepresentation":202,"./FormTabRepresentation":206}],200:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -68230,10 +67249,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./ConditionRepresentation":201,"./LayoutRepresentation":223,"./OptionRepresentation":234}],213:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./ConditionRepresentation":189,"./LayoutRepresentation":211,"./OptionRepresentation":222}],201:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -68301,10 +67320,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],214:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],202:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -68372,10 +67391,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],215:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],203:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -68499,10 +67518,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./FormDefinitionRepresentation":211}],216:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./FormDefinitionRepresentation":199}],204:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -68598,10 +67617,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./FormRepresentation":215,"./ProcessScopeIdentifierRepresentation":240}],217:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./FormRepresentation":203,"./ProcessScopeIdentifierRepresentation":228}],205:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -68697,10 +67716,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./FormFieldRepresentation":212,"./FormOutcomeRepresentation":214}],218:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./FormFieldRepresentation":200,"./FormOutcomeRepresentation":202}],206:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -68775,10 +67794,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./ConditionRepresentation":201}],219:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./ConditionRepresentation":189}],207:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -68846,10 +67865,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],220:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],208:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -68917,10 +67936,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],221:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],209:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -69058,10 +68077,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./GroupCapabilityRepresentation":220,"./GroupRepresentation":221,"./UserRepresentation":263}],222:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./GroupCapabilityRepresentation":208,"./GroupRepresentation":209,"./UserRepresentation":251}],210:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -69143,10 +68162,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],223:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],211:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -69221,10 +68240,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],224:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],212:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -69313,10 +68332,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],225:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],213:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -69405,10 +68424,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./LightGroupRepresentation":225}],226:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./LightGroupRepresentation":213}],214:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -69476,10 +68495,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],227:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],215:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -69575,10 +68594,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],228:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],216:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -69634,10 +68653,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],229:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],217:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -69693,10 +68712,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],230:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],218:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -69752,10 +68771,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],231:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],219:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -69811,10 +68830,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],232:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],220:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -69980,10 +68999,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],233:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],221:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -70035,10 +69054,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],234:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],222:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -70106,10 +69125,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],235:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],223:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -70211,10 +69230,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],236:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],224:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -70310,10 +69329,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],237:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],225:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -70402,10 +69421,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./ProcessInstanceFilterRepresentation":236}],238:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./ProcessInstanceFilterRepresentation":224}],226:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -70578,10 +69597,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./LightUserRepresentation":227,"./RestVariable":246}],239:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./LightUserRepresentation":215,"./RestVariable":234}],227:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
@@ -70656,10 +69675,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],240:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],228:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -70727,10 +69746,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],241:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],229:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -70882,10 +69901,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./FormScopeRepresentation":217}],242:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./FormScopeRepresentation":205}],230:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -70953,10 +69972,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./ProcessScopeIdentifierRepresentation":240}],243:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./ProcessScopeIdentifierRepresentation":228}],231:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -71031,10 +70050,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./LightGroupRepresentation":225,"./LightUserRepresentation":227}],244:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./LightGroupRepresentation":213,"./LightUserRepresentation":215}],232:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -71179,10 +70198,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./LightUserRepresentation":227}],245:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./LightUserRepresentation":215}],233:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -71243,10 +70262,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],246:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],234:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -71335,10 +70354,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],247:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],235:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -71420,10 +70439,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./AbstractRepresentation":186}],248:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./AbstractRepresentation":174}],236:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -71484,10 +70503,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./AppDefinitionRepresentation":191}],249:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./AppDefinitionRepresentation":179}],237:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -71548,10 +70567,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],250:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],238:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -71626,10 +70645,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],251:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],239:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -71690,10 +70709,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],252:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],240:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -71810,10 +70829,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],253:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],241:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -71911,10 +70930,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./TaskFilterRepresentation":252}],254:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./TaskFilterRepresentation":240}],242:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
@@ -72010,10 +71029,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],255:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],243:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -72263,10 +71282,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./LightUserRepresentation":227}],256:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./LightUserRepresentation":215}],244:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -72362,10 +71381,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],257:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],245:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -72468,10 +71487,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],258:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],246:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -72581,10 +71600,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],259:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],247:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -72652,10 +71671,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],260:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],248:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -72730,10 +71749,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],261:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],249:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -72801,10 +71820,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],262:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],250:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -72907,10 +71926,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./ProcessInstanceFilterRepresentation":236}],263:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./ProcessInstanceFilterRepresentation":224}],251:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -73104,10 +72123,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./GroupRepresentation":221,"./LightAppRepresentation":224}],264:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./GroupRepresentation":209,"./LightAppRepresentation":212}],252:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -73210,10 +72229,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./TaskFilterRepresentation":252}],265:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./TaskFilterRepresentation":240}],253:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -73316,10 +72335,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],266:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],254:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -73422,10 +72441,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],267:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],255:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -73533,10 +72552,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"../model/Error":269,"../model/LoginRequest":271,"../model/LoginTicketEntry":272,"../model/ValidateTicketEntry":274}],268:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"../model/Error":257,"../model/LoginRequest":259,"../model/LoginTicketEntry":260,"../model/ValidateTicketEntry":262}],256:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (factory) {
   if (typeof define === 'function' && define.amd) {
@@ -73632,10 +72651,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../alfrescoApiClient":402,"./api/AuthenticationApi":267,"./model/Error":269,"./model/ErrorError":270,"./model/LoginRequest":271,"./model/LoginTicketEntry":272,"./model/LoginTicketEntryEntry":273,"./model/ValidateTicketEntry":274,"./model/ValidateTicketEntryEntry":275}],269:[function(require,module,exports){
+},{"../../alfrescoApiClient":390,"./api/AuthenticationApi":255,"./model/Error":257,"./model/ErrorError":258,"./model/LoginRequest":259,"./model/LoginTicketEntry":260,"./model/LoginTicketEntryEntry":261,"./model/ValidateTicketEntry":262,"./model/ValidateTicketEntryEntry":263}],257:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -73694,10 +72713,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./ErrorError":270}],270:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./ErrorError":258}],258:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -73807,10 +72826,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],271:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],259:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -73877,10 +72896,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],272:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],260:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -73939,10 +72958,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./LoginTicketEntryEntry":273}],273:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./LoginTicketEntryEntry":261}],261:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -74009,10 +73028,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],274:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],262:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -74071,10 +73090,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402,"./ValidateTicketEntryEntry":275}],275:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390,"./ValidateTicketEntryEntry":263}],263:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -74133,11 +73152,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":402}],276:[function(require,module,exports){
+},{"../../../alfrescoApiClient":390}],264:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -74463,7 +73482,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    * constructor for a complex type.   * @returns {Promise} A Promise object.
    */
   exports.prototype.callApi = function callApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, authNames, contentTypes, accepts, returnType) {
-
     var _this = this;
     var url = this.buildUrl(path, pathParams);
     var request = superagent(httpMethod, url);
@@ -74616,10 +73634,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":8,"fs":6,"superagent":129}],277:[function(require,module,exports){
+},{"buffer":8,"fs":6,"superagent":116}],265:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -74809,10 +73827,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"../model/AssocTargetBody":299,"../model/Error":317,"../model/NodeAssocPaging":331}],278:[function(require,module,exports){
+},{"../ApiClient":264,"../model/AssocTargetBody":287,"../model/Error":305,"../model/NodeAssocPaging":319}],266:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -76170,10 +75188,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"../model/AssocChildBody":297,"../model/AssocTargetBody":299,"../model/CopyBody":309,"../model/DeletedNodeEntry":311,"../model/DeletedNodesPaging":314,"../model/EmailSharedLinkBody":316,"../model/Error":317,"../model/MoveBody":327,"../model/NodeAssocPaging":331,"../model/NodeBody":333,"../model/NodeBody1":334,"../model/NodeChildAssocPaging":337,"../model/NodeEntry":339,"../model/NodePaging":343,"../model/NodeSharedLinkEntry":346,"../model/NodeSharedLinkPaging":347,"../model/RenditionBody":370,"../model/RenditionEntry":371,"../model/RenditionPaging":372,"../model/SharedLinkBody":374,"../model/SiteBody":376,"../model/SiteEntry":380}],279:[function(require,module,exports){
+},{"../ApiClient":264,"../model/AssocChildBody":285,"../model/AssocTargetBody":287,"../model/CopyBody":297,"../model/DeletedNodeEntry":299,"../model/DeletedNodesPaging":302,"../model/EmailSharedLinkBody":304,"../model/Error":305,"../model/MoveBody":315,"../model/NodeAssocPaging":319,"../model/NodeBody":321,"../model/NodeBody1":322,"../model/NodeChildAssocPaging":325,"../model/NodeEntry":327,"../model/NodePaging":331,"../model/NodeSharedLinkEntry":334,"../model/NodeSharedLinkPaging":335,"../model/RenditionBody":358,"../model/RenditionEntry":359,"../model/RenditionPaging":360,"../model/SharedLinkBody":362,"../model/SiteBody":364,"../model/SiteEntry":368}],267:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -76532,10 +75550,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"../model/AssocChildBody":297,"../model/Error":317,"../model/MoveBody":327,"../model/NodeAssocPaging":331,"../model/NodeBody1":334,"../model/NodeChildAssocPaging":337,"../model/NodeEntry":339,"../model/NodePaging":343}],280:[function(require,module,exports){
+},{"../ApiClient":264,"../model/AssocChildBody":285,"../model/Error":305,"../model/MoveBody":315,"../model/NodeAssocPaging":319,"../model/NodeBody1":322,"../model/NodeChildAssocPaging":325,"../model/NodeEntry":327,"../model/NodePaging":331}],268:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -76730,10 +75748,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"../model/CommentBody":302,"../model/CommentBody1":303,"../model/CommentEntry":304,"../model/CommentPaging":305,"../model/Error":317}],281:[function(require,module,exports){
+},{"../ApiClient":264,"../model/CommentBody":290,"../model/CommentBody1":291,"../model/CommentEntry":292,"../model/CommentPaging":293,"../model/Error":305}],269:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -76924,10 +75942,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"../model/Error":317,"../model/FavoriteBody":320,"../model/FavoriteEntry":321,"../model/FavoritePaging":322}],282:[function(require,module,exports){
+},{"../ApiClient":264,"../model/Error":305,"../model/FavoriteBody":308,"../model/FavoriteEntry":309,"../model/FavoritePaging":310}],270:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -77001,10 +76019,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"../model/Error":317,"../model/PersonNetworkEntry":356}],283:[function(require,module,exports){
+},{"../ApiClient":264,"../model/Error":305,"../model/PersonNetworkEntry":344}],271:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -77536,10 +76554,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"../model/CopyBody":309,"../model/DeletedNodeEntry":311,"../model/DeletedNodesPaging":314,"../model/Error":317,"../model/MoveBody":327,"../model/NodeBody":333,"../model/NodeBody1":334,"../model/NodeEntry":339,"../model/NodePaging":343}],284:[function(require,module,exports){
+},{"../ApiClient":264,"../model/CopyBody":297,"../model/DeletedNodeEntry":299,"../model/DeletedNodesPaging":302,"../model/Error":305,"../model/MoveBody":315,"../model/NodeBody":321,"../model/NodeBody1":322,"../model/NodeEntry":327,"../model/NodePaging":331}],272:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -78345,10 +77363,98 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"../model/ActivityPaging":295,"../model/Error":317,"../model/FavoriteBody":320,"../model/FavoriteEntry":321,"../model/FavoritePaging":322,"../model/FavoriteSiteBody":324,"../model/InlineResponse201":325,"../model/PersonEntry":354,"../model/PersonNetworkEntry":356,"../model/PersonNetworkPaging":357,"../model/PreferenceEntry":360,"../model/PreferencePaging":361,"../model/SiteEntry":380,"../model/SiteMembershipBody":386,"../model/SiteMembershipBody1":387,"../model/SiteMembershipRequestEntry":389,"../model/SiteMembershipRequestPaging":390,"../model/SitePaging":392}],285:[function(require,module,exports){
+},{"../ApiClient":264,"../model/ActivityPaging":283,"../model/Error":305,"../model/FavoriteBody":308,"../model/FavoriteEntry":309,"../model/FavoritePaging":310,"../model/FavoriteSiteBody":312,"../model/InlineResponse201":313,"../model/PersonEntry":342,"../model/PersonNetworkEntry":344,"../model/PersonNetworkPaging":345,"../model/PreferenceEntry":348,"../model/PreferencePaging":349,"../model/SiteEntry":368,"../model/SiteMembershipBody":374,"../model/SiteMembershipBody1":375,"../model/SiteMembershipRequestEntry":377,"../model/SiteMembershipRequestPaging":378,"../model/SitePaging":380}],273:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../ApiClient', '../model/Error', '../model/NodePaging'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../ApiClient'), require('../model/Error'), require('../model/NodePaging'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoCoreRestApi) {
+      root.AlfrescoCoreRestApi = {};
+    }
+    root.AlfrescoCoreRestApi.SearchApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.NodePaging);
+  }
+})(undefined, function (ApiClient, Error, NodePaging) {
+  'use strict';
+
+  /**
+   * Search service.
+   * @module api/SearchApi
+   * @version 0.1.0
+   */
+
+  /**
+   * Constructs a new SearchApi.
+   * @alias module:api/SearchApi
+   * @class
+   * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
+   * if unspecified.
+   */
+
+  var exports = function exports(apiClient) {
+    this.apiClient = apiClient || ApiClient.instance;
+
+    /**
+     * Find nodes
+     * Gets a list of nodes that match the given search criteria.\n\nThe search term is used to look for nodes that match against name, title, description, full text content or tags.\n\nThe search term\n- must contain a minimum of 3 alphanumeric characters\n- allows \&quot;quoted term\&quot;\n- can optionally use &#39;*&#39; for wildcard matching\n\nBy default, file and folder types will be searched unless a specific type is provided as a query parameter.\n\nBy default, the search will be across the repository unless a specific root node id is provided to start the search from.\n\nYou can sort the result list using the orderBy parameter. You can specify one or more of the following fields in the orderBy parameter:\n-name\n-modifiedAt\n-createdAt\n
+     * @param {String} term The term to search for.
+     * @param {Object} opts Optional parameters
+     * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
+     * @param {Integer} opts.maxItems The maximum number of items to return in the list.
+     * @param {String} opts.rootNodeId The id of the node to start the search from.\n\nSupports the aliases -my-, -root- and -shared-.\n
+     * @param {String} opts.nodeType Restrict the returned results to only those of the given node type and it&#39;s sub-types
+     * @param {String} opts.include Return additional info, eg. aspectNames, properties, path, isLink
+     * @param {String} opts.orderBy The list of results can be ordered by the following:\n* name\n* modifiedAt\n* createdAt\n
+     * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * data is of type: {module:model/NodePaging}
+     */
+    this.findNodes = function (term, opts) {
+      opts = opts || {};
+      var postBody = null;
+
+      // verify the required parameter 'term' is set
+      if (term == undefined || term == null) {
+        throw "Missing the required parameter 'term' when calling findNodes";
+      }
+
+      var pathParams = {};
+      var queryParams = {
+        'skipCount': opts['skipCount'],
+        'maxItems': opts['maxItems'],
+        'term': term,
+        'rootNodeId': opts['rootNodeId'],
+        'nodeType': opts['nodeType'],
+        'include': opts['include'],
+        'orderBy': opts['orderBy'],
+        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+      };
+      var headerParams = {};
+      var formParams = {};
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = NodePaging;
+
+      return this.apiClient.callApi('/queries/nodes', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
+  };
+
+  return exports;
+});
+
+},{"../ApiClient":264,"../model/Error":305,"../model/NodePaging":331}],274:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -78537,10 +77643,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"../model/Error":317,"../model/RatingBody":365,"../model/RatingEntry":366,"../model/RatingPaging":367}],286:[function(require,module,exports){
+},{"../ApiClient":264,"../model/Error":305,"../model/RatingBody":353,"../model/RatingEntry":354,"../model/RatingPaging":355}],275:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -78794,98 +77900,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"../model/Error":317,"../model/RenditionBody":370,"../model/RenditionEntry":371,"../model/RenditionPaging":372}],287:[function(require,module,exports){
+},{"../ApiClient":264,"../model/Error":305,"../model/RenditionBody":358,"../model/RenditionEntry":359,"../model/RenditionPaging":360}],276:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-(function (root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['../ApiClient', '../model/Error', '../model/NodePaging'], factory);
-  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
-    // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/Error'), require('../model/NodePaging'));
-  } else {
-    // Browser globals (root is window)
-    if (!root.AlfrescoCoreRestApi) {
-      root.AlfrescoCoreRestApi = {};
-    }
-    root.AlfrescoCoreRestApi.SearchApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.NodePaging);
-  }
-})(undefined, function (ApiClient, Error, NodePaging) {
-  'use strict';
-
-  /**
-   * Search service.
-   * @module api/SearchApi
-   * @version 0.1.0
-   */
-
-  /**
-   * Constructs a new SearchApi. 
-   * @alias module:api/SearchApi
-   * @class
-   * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
-   * if unspecified.
-   */
-
-  var exports = function exports(apiClient) {
-    this.apiClient = apiClient || ApiClient.instance;
-
-    /**
-     * Live search for nodes
-     * Returns a list of nodes that match the given search criteria.\n\nThe search term is used to look for nodes that match against name, title, description, full text content and tags.\n\nThe search term\n- must contain a minimum of 3 alphanumeric characters\n- allows \&quot;quoted term\&quot;\n- can optionally use &#39;*&#39; for wildcard matching\n\nBy default, file and folder types will be searched unless a specific type is provided as a query parameter.\n\nBy default, the search will be across the repository unless a specific root node id is provided to start the search from.\n
-     * @param {String} term The term to search for.
-     * @param {Object} opts Optional parameters
-     * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
-     * @param {Integer} opts.maxItems The maximum number of items to return in the list.
-     * @param {String} opts.rootNodeId The id of the node to start the search from.\n\nSupports the aliases -my-, -root- and -shared-.\n
-     * @param {String} opts.nodeType Restrict the returned results to only those of the given node type and it&#39;s sub-types
-     * @param {String} opts.include Return additional info, eg. aspectNames, properties, path, isLink
-     * @param {String} opts.orderBy The list of results can be ordered by the following:\n* name\n* modifiedAt\n* createdAt\n
-     * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
-     * data is of type: {module:model/NodePaging}
-     */
-    this.liveSearchNodes = function (term, opts) {
-      opts = opts || {};
-      var postBody = null;
-
-      // verify the required parameter 'term' is set
-      if (term == undefined || term == null) {
-        throw "Missing the required parameter 'term' when calling liveSearchNodes";
-      }
-
-      var pathParams = {};
-      var queryParams = {
-        'skipCount': opts['skipCount'],
-        'maxItems': opts['maxItems'],
-        'term': term,
-        'rootNodeId': opts['rootNodeId'],
-        'nodeType': opts['nodeType'],
-        'include': opts['include'],
-        'orderBy': opts['orderBy'],
-        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-      };
-      var headerParams = {};
-      var formParams = {};
-
-      var authNames = ['basicAuth'];
-      var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
-      var returnType = NodePaging;
-
-      return this.apiClient.callApi('/queries/live-search-nodes', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
-    };
-  };
-
-  return exports;
-});
-
-},{"../ApiClient":276,"../model/Error":317,"../model/NodePaging":343}],288:[function(require,module,exports){
-'use strict';
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -79123,10 +78141,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"../model/EmailSharedLinkBody":316,"../model/Error":317,"../model/NodeSharedLinkEntry":346,"../model/NodeSharedLinkPaging":347,"../model/SharedLinkBody":374}],289:[function(require,module,exports){
+},{"../ApiClient":264,"../model/EmailSharedLinkBody":304,"../model/Error":305,"../model/NodeSharedLinkEntry":334,"../model/NodeSharedLinkPaging":335,"../model/SharedLinkBody":362}],277:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -79573,10 +78591,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"../model/Error":317,"../model/SiteBody":376,"../model/SiteContainerEntry":378,"../model/SiteContainerPaging":379,"../model/SiteEntry":380,"../model/SiteMemberBody":382,"../model/SiteMemberEntry":383,"../model/SiteMemberPaging":384,"../model/SiteMemberRoleBody":385,"../model/SitePaging":392}],290:[function(require,module,exports){
+},{"../ApiClient":264,"../model/Error":305,"../model/SiteBody":364,"../model/SiteContainerEntry":366,"../model/SiteContainerPaging":367,"../model/SiteEntry":368,"../model/SiteMemberBody":370,"../model/SiteMemberEntry":371,"../model/SiteMemberPaging":372,"../model/SiteMemberRoleBody":373,"../model/SitePaging":380}],278:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -79823,20 +78841,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"../model/Error":317,"../model/TagBody":395,"../model/TagBody1":396,"../model/TagEntry":397,"../model/TagPaging":398}],291:[function(require,module,exports){
+},{"../ApiClient":264,"../model/Error":305,"../model/TagBody":383,"../model/TagBody1":384,"../model/TagEntry":385,"../model/TagPaging":386}],279:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['./ApiClient', './model/Activity', './model/ActivityActivitySummary', './model/ActivityEntry', './model/ActivityPaging', './model/ActivityPagingList', './model/AssocChildBody', './model/AssocInfo', './model/AssocTargetBody', './model/ChildAssocInfo', './model/Comment', './model/CommentBody', './model/CommentBody1', './model/CommentEntry', './model/CommentPaging', './model/CommentPagingList', './model/Company', './model/ContentInfo', './model/CopyBody', './model/DeletedNode', './model/DeletedNodeEntry', './model/DeletedNodeMinimal', './model/DeletedNodeMinimalEntry', './model/DeletedNodesPaging', './model/DeletedNodesPagingList', './model/EmailSharedLinkBody', './model/Error', './model/ErrorError', './model/Favorite', './model/FavoriteBody', './model/FavoriteEntry', './model/FavoritePaging', './model/FavoritePagingList', './model/FavoriteSiteBody', './model/InlineResponse201', './model/InlineResponse201Entry', './model/MoveBody', './model/NetworkQuota', './model/NodeAssocMinimal', './model/NodeAssocMinimalEntry', './model/NodeAssocPaging', './model/NodeAssocPagingList', './model/NodeBody', './model/NodeBody1', './model/NodeChildAssocMinimal', './model/NodeChildAssocMinimalEntry', './model/NodeChildAssocPaging', './model/NodeChildAssocPagingList', './model/NodeEntry', './model/NodeFull', './model/NodeMinimal', './model/NodeMinimalEntry', './model/NodePaging', './model/NodePagingList', './model/NodeSharedLink', './model/NodeSharedLinkEntry', './model/NodeSharedLinkPaging', './model/NodeSharedLinkPagingList', './model/NodesnodeIdchildrenContent', './model/Pagination', './model/PathElement', './model/PathInfo', './model/Person', './model/PersonEntry', './model/PersonNetwork', './model/PersonNetworkEntry', './model/PersonNetworkPaging', './model/PersonNetworkPagingList', './model/Preference', './model/PreferenceEntry', './model/PreferencePaging', './model/PreferencePagingList', './model/Rating', './model/RatingAggregate', './model/RatingBody', './model/RatingEntry', './model/RatingPaging', './model/RatingPagingList', './model/Rendition', './model/RenditionBody', './model/RenditionEntry', './model/RenditionPaging', './model/RenditionPagingList', './model/SharedLinkBody', './model/Site', './model/SiteBody', './model/SiteContainer', './model/SiteContainerEntry', './model/SiteContainerPaging', './model/SiteEntry', './model/SiteMember', './model/SiteMemberBody', './model/SiteMemberEntry', './model/SiteMemberPaging', './model/SiteMemberRoleBody', './model/SiteMembershipBody', './model/SiteMembershipBody1', './model/SiteMembershipRequest', './model/SiteMembershipRequestEntry', './model/SiteMembershipRequestPaging', './model/SiteMembershipRequestPagingList', './model/SitePaging', './model/SitePagingList', './model/Tag', './model/TagBody', './model/TagBody1', './model/TagEntry', './model/TagPaging', './model/TagPagingList', './model/UserInfo', './api/AssociationsApi', './api/ChangesApi', './api/ChildAssociationsApi', './api/CommentsApi', './api/FavoritesApi', './api/NetworksApi', './api/NodesApi', './api/PeopleApi', './api/RatingsApi', './api/RenditionsApi', './api/SearchApi', './api/SharedlinksApi', './api/SitesApi', './api/TagsApi'], factory);
+    define(['./ApiClient', './model/Activity', './model/ActivityActivitySummary', './model/ActivityEntry', './model/ActivityPaging', './model/ActivityPagingList', './model/AssocChildBody', './model/AssocInfo', './model/AssocTargetBody', './model/ChildAssocInfo', './model/Comment', './model/CommentBody', './model/CommentBody1', './model/CommentEntry', './model/CommentPaging', './model/CommentPagingList', './model/Company', './model/ContentInfo', './model/CopyBody', './model/DeletedNode', './model/DeletedNodeEntry', './model/DeletedNodeMinimal', './model/DeletedNodeMinimalEntry', './model/DeletedNodesPaging', './model/DeletedNodesPagingList', './model/EmailSharedLinkBody', './model/Error', './model/ErrorError', './model/Favorite', './model/FavoriteBody', './model/FavoriteEntry', './model/FavoritePaging', './model/FavoritePagingList', './model/FavoriteSiteBody', './model/InlineResponse201', './model/InlineResponse201Entry', './model/MoveBody', './model/NetworkQuota', './model/NodeAssocMinimal', './model/NodeAssocMinimalEntry', './model/NodeAssocPaging', './model/NodeAssocPagingList', './model/NodeBody', './model/NodeBody1', './model/NodeChildAssocMinimal', './model/NodeChildAssocMinimalEntry', './model/NodeChildAssocPaging', './model/NodeChildAssocPagingList', './model/NodeEntry', './model/NodeFull', './model/NodeMinimal', './model/NodeMinimalEntry', './model/NodePaging', './model/NodePagingList', './model/NodeSharedLink', './model/NodeSharedLinkEntry', './model/NodeSharedLinkPaging', './model/NodeSharedLinkPagingList', './model/NodesnodeIdchildrenContent', './model/Pagination', './model/PathElement', './model/PathInfo', './model/Person', './model/PersonEntry', './model/PersonNetwork', './model/PersonNetworkEntry', './model/PersonNetworkPaging', './model/PersonNetworkPagingList', './model/Preference', './model/PreferenceEntry', './model/PreferencePaging', './model/PreferencePagingList', './model/Rating', './model/RatingAggregate', './model/RatingBody', './model/RatingEntry', './model/RatingPaging', './model/RatingPagingList', './model/Rendition', './model/RenditionBody', './model/RenditionEntry', './model/RenditionPaging', './model/RenditionPagingList', './model/SharedLinkBody', './model/Site', './model/SiteBody', './model/SiteContainer', './model/SiteContainerEntry', './model/SiteContainerPaging', './model/SiteEntry', './model/SiteMember', './model/SiteMemberBody', './model/SiteMemberEntry', './model/SiteMemberPaging', './model/SiteMemberRoleBody', './model/SiteMembershipBody', './model/SiteMembershipBody1', './model/SiteMembershipRequest', './model/SiteMembershipRequestEntry', './model/SiteMembershipRequestPaging', './model/SiteMembershipRequestPagingList', './model/SitePaging', './model/SitePagingList', './model/Tag', './model/TagBody', './model/TagBody1', './model/TagEntry', './model/TagPaging', './model/TagPagingList', './model/UserInfo', './api/AssociationsApi', './api/ChangesApi', './api/ChildAssociationsApi', './api/CommentsApi', './api/FavoritesApi', './api/NetworksApi', './api/NodesApi', './api/PeopleApi', './api/RatingsApi', './api/RenditionsApi', './api/QueriesApi', './api/SharedlinksApi', './api/SitesApi', './api/TagsApi'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('./ApiClient'), require('./model/Activity'), require('./model/ActivityActivitySummary'), require('./model/ActivityEntry'), require('./model/ActivityPaging'), require('./model/ActivityPagingList'), require('./model/AssocChildBody'), require('./model/AssocInfo'), require('./model/AssocTargetBody'), require('./model/ChildAssocInfo'), require('./model/Comment'), require('./model/CommentBody'), require('./model/CommentBody1'), require('./model/CommentEntry'), require('./model/CommentPaging'), require('./model/CommentPagingList'), require('./model/Company'), require('./model/ContentInfo'), require('./model/CopyBody'), require('./model/DeletedNode'), require('./model/DeletedNodeEntry'), require('./model/DeletedNodeMinimal'), require('./model/DeletedNodeMinimalEntry'), require('./model/DeletedNodesPaging'), require('./model/DeletedNodesPagingList'), require('./model/EmailSharedLinkBody'), require('./model/Error'), require('./model/ErrorError'), require('./model/Favorite'), require('./model/FavoriteBody'), require('./model/FavoriteEntry'), require('./model/FavoritePaging'), require('./model/FavoritePagingList'), require('./model/FavoriteSiteBody'), require('./model/InlineResponse201'), require('./model/InlineResponse201Entry'), require('./model/MoveBody'), require('./model/NetworkQuota'), require('./model/NodeAssocMinimal'), require('./model/NodeAssocMinimalEntry'), require('./model/NodeAssocPaging'), require('./model/NodeAssocPagingList'), require('./model/NodeBody'), require('./model/NodeBody1'), require('./model/NodeChildAssocMinimal'), require('./model/NodeChildAssocMinimalEntry'), require('./model/NodeChildAssocPaging'), require('./model/NodeChildAssocPagingList'), require('./model/NodeEntry'), require('./model/NodeFull'), require('./model/NodeMinimal'), require('./model/NodeMinimalEntry'), require('./model/NodePaging'), require('./model/NodePagingList'), require('./model/NodeSharedLink'), require('./model/NodeSharedLinkEntry'), require('./model/NodeSharedLinkPaging'), require('./model/NodeSharedLinkPagingList'), require('./model/NodesnodeIdchildrenContent'), require('./model/Pagination'), require('./model/PathElement'), require('./model/PathInfo'), require('./model/Person'), require('./model/PersonEntry'), require('./model/PersonNetwork'), require('./model/PersonNetworkEntry'), require('./model/PersonNetworkPaging'), require('./model/PersonNetworkPagingList'), require('./model/Preference'), require('./model/PreferenceEntry'), require('./model/PreferencePaging'), require('./model/PreferencePagingList'), require('./model/Rating'), require('./model/RatingAggregate'), require('./model/RatingBody'), require('./model/RatingEntry'), require('./model/RatingPaging'), require('./model/RatingPagingList'), require('./model/Rendition'), require('./model/RenditionBody'), require('./model/RenditionEntry'), require('./model/RenditionPaging'), require('./model/RenditionPagingList'), require('./model/SharedLinkBody'), require('./model/Site'), require('./model/SiteBody'), require('./model/SiteContainer'), require('./model/SiteContainerEntry'), require('./model/SiteContainerPaging'), require('./model/SiteEntry'), require('./model/SiteMember'), require('./model/SiteMemberBody'), require('./model/SiteMemberEntry'), require('./model/SiteMemberPaging'), require('./model/SiteMemberRoleBody'), require('./model/SiteMembershipBody'), require('./model/SiteMembershipBody1'), require('./model/SiteMembershipRequest'), require('./model/SiteMembershipRequestEntry'), require('./model/SiteMembershipRequestPaging'), require('./model/SiteMembershipRequestPagingList'), require('./model/SitePaging'), require('./model/SitePagingList'), require('./model/Tag'), require('./model/TagBody'), require('./model/TagBody1'), require('./model/TagEntry'), require('./model/TagPaging'), require('./model/TagPagingList'), require('./model/UserInfo'), require('./api/AssociationsApi'), require('./api/ChangesApi'), require('./api/ChildAssociationsApi'), require('./api/CommentsApi'), require('./api/FavoritesApi'), require('./api/NetworksApi'), require('./api/NodesApi'), require('./api/PeopleApi'), require('./api/RatingsApi'), require('./api/RenditionsApi'), require('./api/SearchApi'), require('./api/SharedlinksApi'), require('./api/SitesApi'), require('./api/TagsApi'));
+    module.exports = factory(require('./ApiClient'), require('./model/Activity'), require('./model/ActivityActivitySummary'), require('./model/ActivityEntry'), require('./model/ActivityPaging'), require('./model/ActivityPagingList'), require('./model/AssocChildBody'), require('./model/AssocInfo'), require('./model/AssocTargetBody'), require('./model/ChildAssocInfo'), require('./model/Comment'), require('./model/CommentBody'), require('./model/CommentBody1'), require('./model/CommentEntry'), require('./model/CommentPaging'), require('./model/CommentPagingList'), require('./model/Company'), require('./model/ContentInfo'), require('./model/CopyBody'), require('./model/DeletedNode'), require('./model/DeletedNodeEntry'), require('./model/DeletedNodeMinimal'), require('./model/DeletedNodeMinimalEntry'), require('./model/DeletedNodesPaging'), require('./model/DeletedNodesPagingList'), require('./model/EmailSharedLinkBody'), require('./model/Error'), require('./model/ErrorError'), require('./model/Favorite'), require('./model/FavoriteBody'), require('./model/FavoriteEntry'), require('./model/FavoritePaging'), require('./model/FavoritePagingList'), require('./model/FavoriteSiteBody'), require('./model/InlineResponse201'), require('./model/InlineResponse201Entry'), require('./model/MoveBody'), require('./model/NetworkQuota'), require('./model/NodeAssocMinimal'), require('./model/NodeAssocMinimalEntry'), require('./model/NodeAssocPaging'), require('./model/NodeAssocPagingList'), require('./model/NodeBody'), require('./model/NodeBody1'), require('./model/NodeChildAssocMinimal'), require('./model/NodeChildAssocMinimalEntry'), require('./model/NodeChildAssocPaging'), require('./model/NodeChildAssocPagingList'), require('./model/NodeEntry'), require('./model/NodeFull'), require('./model/NodeMinimal'), require('./model/NodeMinimalEntry'), require('./model/NodePaging'), require('./model/NodePagingList'), require('./model/NodeSharedLink'), require('./model/NodeSharedLinkEntry'), require('./model/NodeSharedLinkPaging'), require('./model/NodeSharedLinkPagingList'), require('./model/NodesnodeIdchildrenContent'), require('./model/Pagination'), require('./model/PathElement'), require('./model/PathInfo'), require('./model/Person'), require('./model/PersonEntry'), require('./model/PersonNetwork'), require('./model/PersonNetworkEntry'), require('./model/PersonNetworkPaging'), require('./model/PersonNetworkPagingList'), require('./model/Preference'), require('./model/PreferenceEntry'), require('./model/PreferencePaging'), require('./model/PreferencePagingList'), require('./model/Rating'), require('./model/RatingAggregate'), require('./model/RatingBody'), require('./model/RatingEntry'), require('./model/RatingPaging'), require('./model/RatingPagingList'), require('./model/Rendition'), require('./model/RenditionBody'), require('./model/RenditionEntry'), require('./model/RenditionPaging'), require('./model/RenditionPagingList'), require('./model/SharedLinkBody'), require('./model/Site'), require('./model/SiteBody'), require('./model/SiteContainer'), require('./model/SiteContainerEntry'), require('./model/SiteContainerPaging'), require('./model/SiteEntry'), require('./model/SiteMember'), require('./model/SiteMemberBody'), require('./model/SiteMemberEntry'), require('./model/SiteMemberPaging'), require('./model/SiteMemberRoleBody'), require('./model/SiteMembershipBody'), require('./model/SiteMembershipBody1'), require('./model/SiteMembershipRequest'), require('./model/SiteMembershipRequestEntry'), require('./model/SiteMembershipRequestPaging'), require('./model/SiteMembershipRequestPagingList'), require('./model/SitePaging'), require('./model/SitePagingList'), require('./model/Tag'), require('./model/TagBody'), require('./model/TagBody1'), require('./model/TagEntry'), require('./model/TagPaging'), require('./model/TagPagingList'), require('./model/UserInfo'), require('./api/AssociationsApi'), require('./api/ChangesApi'), require('./api/ChildAssociationsApi'), require('./api/CommentsApi'), require('./api/FavoritesApi'), require('./api/NetworksApi'), require('./api/NodesApi'), require('./api/PeopleApi'), require('./api/RatingsApi'), require('./api/RenditionsApi'), require('./api/QueriesApi'), require('./api/SharedlinksApi'), require('./api/SitesApi'), require('./api/TagsApi'));
   }
-})(function (ApiClient, Activity, ActivityActivitySummary, ActivityEntry, ActivityPaging, ActivityPagingList, AssocChildBody, AssocInfo, AssocTargetBody, ChildAssocInfo, Comment, CommentBody, CommentBody1, CommentEntry, CommentPaging, CommentPagingList, Company, ContentInfo, CopyBody, DeletedNode, DeletedNodeEntry, DeletedNodeMinimal, DeletedNodeMinimalEntry, DeletedNodesPaging, DeletedNodesPagingList, EmailSharedLinkBody, Error, ErrorError, Favorite, FavoriteBody, FavoriteEntry, FavoritePaging, FavoritePagingList, FavoriteSiteBody, InlineResponse201, InlineResponse201Entry, MoveBody, NetworkQuota, NodeAssocMinimal, NodeAssocMinimalEntry, NodeAssocPaging, NodeAssocPagingList, NodeBody, NodeBody1, NodeChildAssocMinimal, NodeChildAssocMinimalEntry, NodeChildAssocPaging, NodeChildAssocPagingList, NodeEntry, NodeFull, NodeMinimal, NodeMinimalEntry, NodePaging, NodePagingList, NodeSharedLink, NodeSharedLinkEntry, NodeSharedLinkPaging, NodeSharedLinkPagingList, NodesnodeIdchildrenContent, Pagination, PathElement, PathInfo, Person, PersonEntry, PersonNetwork, PersonNetworkEntry, PersonNetworkPaging, PersonNetworkPagingList, Preference, PreferenceEntry, PreferencePaging, PreferencePagingList, Rating, RatingAggregate, RatingBody, RatingEntry, RatingPaging, RatingPagingList, Rendition, RenditionBody, RenditionEntry, RenditionPaging, RenditionPagingList, SharedLinkBody, Site, SiteBody, SiteContainer, SiteContainerEntry, SiteContainerPaging, SiteEntry, SiteMember, SiteMemberBody, SiteMemberEntry, SiteMemberPaging, SiteMemberRoleBody, SiteMembershipBody, SiteMembershipBody1, SiteMembershipRequest, SiteMembershipRequestEntry, SiteMembershipRequestPaging, SiteMembershipRequestPagingList, SitePaging, SitePagingList, Tag, TagBody, TagBody1, TagEntry, TagPaging, TagPagingList, UserInfo, AssociationsApi, ChangesApi, ChildAssociationsApi, CommentsApi, FavoritesApi, NetworksApi, NodesApi, PeopleApi, RatingsApi, RenditionsApi, SearchApi, SharedlinksApi, SitesApi, TagsApi) {
+})(function (ApiClient, Activity, ActivityActivitySummary, ActivityEntry, ActivityPaging, ActivityPagingList, AssocChildBody, AssocInfo, AssocTargetBody, ChildAssocInfo, Comment, CommentBody, CommentBody1, CommentEntry, CommentPaging, CommentPagingList, Company, ContentInfo, CopyBody, DeletedNode, DeletedNodeEntry, DeletedNodeMinimal, DeletedNodeMinimalEntry, DeletedNodesPaging, DeletedNodesPagingList, EmailSharedLinkBody, Error, ErrorError, Favorite, FavoriteBody, FavoriteEntry, FavoritePaging, FavoritePagingList, FavoriteSiteBody, InlineResponse201, InlineResponse201Entry, MoveBody, NetworkQuota, NodeAssocMinimal, NodeAssocMinimalEntry, NodeAssocPaging, NodeAssocPagingList, NodeBody, NodeBody1, NodeChildAssocMinimal, NodeChildAssocMinimalEntry, NodeChildAssocPaging, NodeChildAssocPagingList, NodeEntry, NodeFull, NodeMinimal, NodeMinimalEntry, NodePaging, NodePagingList, NodeSharedLink, NodeSharedLinkEntry, NodeSharedLinkPaging, NodeSharedLinkPagingList, NodesnodeIdchildrenContent, Pagination, PathElement, PathInfo, Person, PersonEntry, PersonNetwork, PersonNetworkEntry, PersonNetworkPaging, PersonNetworkPagingList, Preference, PreferenceEntry, PreferencePaging, PreferencePagingList, Rating, RatingAggregate, RatingBody, RatingEntry, RatingPaging, RatingPagingList, Rendition, RenditionBody, RenditionEntry, RenditionPaging, RenditionPagingList, SharedLinkBody, Site, SiteBody, SiteContainer, SiteContainerEntry, SiteContainerPaging, SiteEntry, SiteMember, SiteMemberBody, SiteMemberEntry, SiteMemberPaging, SiteMemberRoleBody, SiteMembershipBody, SiteMembershipBody1, SiteMembershipRequest, SiteMembershipRequestEntry, SiteMembershipRequestPaging, SiteMembershipRequestPagingList, SitePaging, SitePagingList, Tag, TagBody, TagBody1, TagEntry, TagPaging, TagPagingList, UserInfo, AssociationsApi, ChangesApi, ChildAssociationsApi, CommentsApi, FavoritesApi, NetworksApi, NodesApi, PeopleApi, RatingsApi, RenditionsApi, QueriesApi, SharedlinksApi, SitesApi, TagsApi) {
   'use strict';
 
   /**
@@ -80463,6 +79481,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      */
     PeopleApi: PeopleApi,
     /**
+     * The QueriesApi service constructor.
+     * @property {module:api/QueriesApi}
+     */
+    QueriesApi: QueriesApi,
+    /**
      * The RatingsApi service constructor.
      * @property {module:api/RatingsApi}
      */
@@ -80472,11 +79495,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @property {module:api/RenditionsApi}
      */
     RenditionsApi: RenditionsApi,
-    /**
-     * The SearchApi service constructor.
-     * @property {module:api/SearchApi}
-     */
-    SearchApi: SearchApi,
     /**
      * The SharedlinksApi service constructor.
      * @property {module:api/SharedlinksApi}
@@ -80497,10 +79515,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"./ApiClient":276,"./api/AssociationsApi":277,"./api/ChangesApi":278,"./api/ChildAssociationsApi":279,"./api/CommentsApi":280,"./api/FavoritesApi":281,"./api/NetworksApi":282,"./api/NodesApi":283,"./api/PeopleApi":284,"./api/RatingsApi":285,"./api/RenditionsApi":286,"./api/SearchApi":287,"./api/SharedlinksApi":288,"./api/SitesApi":289,"./api/TagsApi":290,"./model/Activity":292,"./model/ActivityActivitySummary":293,"./model/ActivityEntry":294,"./model/ActivityPaging":295,"./model/ActivityPagingList":296,"./model/AssocChildBody":297,"./model/AssocInfo":298,"./model/AssocTargetBody":299,"./model/ChildAssocInfo":300,"./model/Comment":301,"./model/CommentBody":302,"./model/CommentBody1":303,"./model/CommentEntry":304,"./model/CommentPaging":305,"./model/CommentPagingList":306,"./model/Company":307,"./model/ContentInfo":308,"./model/CopyBody":309,"./model/DeletedNode":310,"./model/DeletedNodeEntry":311,"./model/DeletedNodeMinimal":312,"./model/DeletedNodeMinimalEntry":313,"./model/DeletedNodesPaging":314,"./model/DeletedNodesPagingList":315,"./model/EmailSharedLinkBody":316,"./model/Error":317,"./model/ErrorError":318,"./model/Favorite":319,"./model/FavoriteBody":320,"./model/FavoriteEntry":321,"./model/FavoritePaging":322,"./model/FavoritePagingList":323,"./model/FavoriteSiteBody":324,"./model/InlineResponse201":325,"./model/InlineResponse201Entry":326,"./model/MoveBody":327,"./model/NetworkQuota":328,"./model/NodeAssocMinimal":329,"./model/NodeAssocMinimalEntry":330,"./model/NodeAssocPaging":331,"./model/NodeAssocPagingList":332,"./model/NodeBody":333,"./model/NodeBody1":334,"./model/NodeChildAssocMinimal":335,"./model/NodeChildAssocMinimalEntry":336,"./model/NodeChildAssocPaging":337,"./model/NodeChildAssocPagingList":338,"./model/NodeEntry":339,"./model/NodeFull":340,"./model/NodeMinimal":341,"./model/NodeMinimalEntry":342,"./model/NodePaging":343,"./model/NodePagingList":344,"./model/NodeSharedLink":345,"./model/NodeSharedLinkEntry":346,"./model/NodeSharedLinkPaging":347,"./model/NodeSharedLinkPagingList":348,"./model/NodesnodeIdchildrenContent":349,"./model/Pagination":350,"./model/PathElement":351,"./model/PathInfo":352,"./model/Person":353,"./model/PersonEntry":354,"./model/PersonNetwork":355,"./model/PersonNetworkEntry":356,"./model/PersonNetworkPaging":357,"./model/PersonNetworkPagingList":358,"./model/Preference":359,"./model/PreferenceEntry":360,"./model/PreferencePaging":361,"./model/PreferencePagingList":362,"./model/Rating":363,"./model/RatingAggregate":364,"./model/RatingBody":365,"./model/RatingEntry":366,"./model/RatingPaging":367,"./model/RatingPagingList":368,"./model/Rendition":369,"./model/RenditionBody":370,"./model/RenditionEntry":371,"./model/RenditionPaging":372,"./model/RenditionPagingList":373,"./model/SharedLinkBody":374,"./model/Site":375,"./model/SiteBody":376,"./model/SiteContainer":377,"./model/SiteContainerEntry":378,"./model/SiteContainerPaging":379,"./model/SiteEntry":380,"./model/SiteMember":381,"./model/SiteMemberBody":382,"./model/SiteMemberEntry":383,"./model/SiteMemberPaging":384,"./model/SiteMemberRoleBody":385,"./model/SiteMembershipBody":386,"./model/SiteMembershipBody1":387,"./model/SiteMembershipRequest":388,"./model/SiteMembershipRequestEntry":389,"./model/SiteMembershipRequestPaging":390,"./model/SiteMembershipRequestPagingList":391,"./model/SitePaging":392,"./model/SitePagingList":393,"./model/Tag":394,"./model/TagBody":395,"./model/TagBody1":396,"./model/TagEntry":397,"./model/TagPaging":398,"./model/TagPagingList":399,"./model/UserInfo":400}],292:[function(require,module,exports){
+},{"./ApiClient":264,"./api/AssociationsApi":265,"./api/ChangesApi":266,"./api/ChildAssociationsApi":267,"./api/CommentsApi":268,"./api/FavoritesApi":269,"./api/NetworksApi":270,"./api/NodesApi":271,"./api/PeopleApi":272,"./api/QueriesApi":273,"./api/RatingsApi":274,"./api/RenditionsApi":275,"./api/SharedlinksApi":276,"./api/SitesApi":277,"./api/TagsApi":278,"./model/Activity":280,"./model/ActivityActivitySummary":281,"./model/ActivityEntry":282,"./model/ActivityPaging":283,"./model/ActivityPagingList":284,"./model/AssocChildBody":285,"./model/AssocInfo":286,"./model/AssocTargetBody":287,"./model/ChildAssocInfo":288,"./model/Comment":289,"./model/CommentBody":290,"./model/CommentBody1":291,"./model/CommentEntry":292,"./model/CommentPaging":293,"./model/CommentPagingList":294,"./model/Company":295,"./model/ContentInfo":296,"./model/CopyBody":297,"./model/DeletedNode":298,"./model/DeletedNodeEntry":299,"./model/DeletedNodeMinimal":300,"./model/DeletedNodeMinimalEntry":301,"./model/DeletedNodesPaging":302,"./model/DeletedNodesPagingList":303,"./model/EmailSharedLinkBody":304,"./model/Error":305,"./model/ErrorError":306,"./model/Favorite":307,"./model/FavoriteBody":308,"./model/FavoriteEntry":309,"./model/FavoritePaging":310,"./model/FavoritePagingList":311,"./model/FavoriteSiteBody":312,"./model/InlineResponse201":313,"./model/InlineResponse201Entry":314,"./model/MoveBody":315,"./model/NetworkQuota":316,"./model/NodeAssocMinimal":317,"./model/NodeAssocMinimalEntry":318,"./model/NodeAssocPaging":319,"./model/NodeAssocPagingList":320,"./model/NodeBody":321,"./model/NodeBody1":322,"./model/NodeChildAssocMinimal":323,"./model/NodeChildAssocMinimalEntry":324,"./model/NodeChildAssocPaging":325,"./model/NodeChildAssocPagingList":326,"./model/NodeEntry":327,"./model/NodeFull":328,"./model/NodeMinimal":329,"./model/NodeMinimalEntry":330,"./model/NodePaging":331,"./model/NodePagingList":332,"./model/NodeSharedLink":333,"./model/NodeSharedLinkEntry":334,"./model/NodeSharedLinkPaging":335,"./model/NodeSharedLinkPagingList":336,"./model/NodesnodeIdchildrenContent":337,"./model/Pagination":338,"./model/PathElement":339,"./model/PathInfo":340,"./model/Person":341,"./model/PersonEntry":342,"./model/PersonNetwork":343,"./model/PersonNetworkEntry":344,"./model/PersonNetworkPaging":345,"./model/PersonNetworkPagingList":346,"./model/Preference":347,"./model/PreferenceEntry":348,"./model/PreferencePaging":349,"./model/PreferencePagingList":350,"./model/Rating":351,"./model/RatingAggregate":352,"./model/RatingBody":353,"./model/RatingEntry":354,"./model/RatingPaging":355,"./model/RatingPagingList":356,"./model/Rendition":357,"./model/RenditionBody":358,"./model/RenditionEntry":359,"./model/RenditionPaging":360,"./model/RenditionPagingList":361,"./model/SharedLinkBody":362,"./model/Site":363,"./model/SiteBody":364,"./model/SiteContainer":365,"./model/SiteContainerEntry":366,"./model/SiteContainerPaging":367,"./model/SiteEntry":368,"./model/SiteMember":369,"./model/SiteMemberBody":370,"./model/SiteMemberEntry":371,"./model/SiteMemberPaging":372,"./model/SiteMemberRoleBody":373,"./model/SiteMembershipBody":374,"./model/SiteMembershipBody1":375,"./model/SiteMembershipRequest":376,"./model/SiteMembershipRequestEntry":377,"./model/SiteMembershipRequestPaging":378,"./model/SiteMembershipRequestPagingList":379,"./model/SitePaging":380,"./model/SitePagingList":381,"./model/Tag":382,"./model/TagBody":383,"./model/TagBody1":384,"./model/TagEntry":385,"./model/TagPaging":386,"./model/TagPagingList":387,"./model/UserInfo":388}],280:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -80771,10 +79789,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./ActivityActivitySummary":293}],293:[function(require,module,exports){
+},{"../ApiClient":264,"./ActivityActivitySummary":281}],281:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -80866,10 +79884,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],294:[function(require,module,exports){
+},{"../ApiClient":264}],282:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -80932,10 +79950,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./Activity":292}],295:[function(require,module,exports){
+},{"../ApiClient":264,"./Activity":280}],283:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -80994,10 +80012,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./ActivityPagingList":296}],296:[function(require,module,exports){
+},{"../ApiClient":264,"./ActivityPagingList":284}],284:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -81070,10 +80088,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./ActivityEntry":294,"./Pagination":350}],297:[function(require,module,exports){
+},{"../ApiClient":264,"./ActivityEntry":282,"./Pagination":338}],285:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -81140,10 +80158,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],298:[function(require,module,exports){
+},{"../ApiClient":264}],286:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -81202,10 +80220,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],299:[function(require,module,exports){
+},{"../ApiClient":264}],287:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -81272,10 +80290,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],300:[function(require,module,exports){
+},{"../ApiClient":264}],288:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -81342,10 +80360,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],301:[function(require,module,exports){
+},{"../ApiClient":264}],289:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -81488,10 +80506,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./Person":353}],302:[function(require,module,exports){
+},{"../ApiClient":264,"./Person":341}],290:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -81554,10 +80572,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],303:[function(require,module,exports){
+},{"../ApiClient":264}],291:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -81620,10 +80638,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],304:[function(require,module,exports){
+},{"../ApiClient":264}],292:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -81686,10 +80704,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./Comment":301}],305:[function(require,module,exports){
+},{"../ApiClient":264,"./Comment":289}],293:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -81748,10 +80766,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./CommentPagingList":306}],306:[function(require,module,exports){
+},{"../ApiClient":264,"./CommentPagingList":294}],294:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -81824,10 +80842,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./CommentEntry":304,"./Pagination":350}],307:[function(require,module,exports){
+},{"../ApiClient":264,"./CommentEntry":292,"./Pagination":338}],295:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -81942,10 +80960,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],308:[function(require,module,exports){
+},{"../ApiClient":264}],296:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -82028,10 +81046,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],309:[function(require,module,exports){
+},{"../ApiClient":264}],297:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -82098,10 +81116,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],310:[function(require,module,exports){
+},{"../ApiClient":264}],298:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -82178,10 +81196,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./ContentInfo":308,"./NodeFull":340,"./UserInfo":400}],311:[function(require,module,exports){
+},{"../ApiClient":264,"./ContentInfo":296,"./NodeFull":328,"./UserInfo":388}],299:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -82240,10 +81258,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./DeletedNode":310}],312:[function(require,module,exports){
+},{"../ApiClient":264,"./DeletedNode":298}],300:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -82320,10 +81338,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./ContentInfo":308,"./NodeMinimal":341,"./PathElement":351,"./UserInfo":400}],313:[function(require,module,exports){
+},{"../ApiClient":264,"./ContentInfo":296,"./NodeMinimal":329,"./PathElement":339,"./UserInfo":388}],301:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -82382,10 +81400,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./DeletedNodeMinimal":312}],314:[function(require,module,exports){
+},{"../ApiClient":264,"./DeletedNodeMinimal":300}],302:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -82444,10 +81462,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./DeletedNodesPagingList":315}],315:[function(require,module,exports){
+},{"../ApiClient":264,"./DeletedNodesPagingList":303}],303:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -82514,10 +81532,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./DeletedNodeMinimalEntry":313,"./Pagination":350}],316:[function(require,module,exports){
+},{"../ApiClient":264,"./DeletedNodeMinimalEntry":301,"./Pagination":338}],304:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -82600,10 +81618,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],317:[function(require,module,exports){
+},{"../ApiClient":264}],305:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -82662,10 +81680,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./ErrorError":318}],318:[function(require,module,exports){
+},{"../ApiClient":264,"./ErrorError":306}],306:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -82775,10 +81793,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],319:[function(require,module,exports){
+},{"../ApiClient":264}],307:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -82863,10 +81881,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],320:[function(require,module,exports){
+},{"../ApiClient":264}],308:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -82929,10 +81947,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],321:[function(require,module,exports){
+},{"../ApiClient":264}],309:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -82995,10 +82013,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./Favorite":319}],322:[function(require,module,exports){
+},{"../ApiClient":264,"./Favorite":307}],310:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -83057,10 +82075,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./FavoritePagingList":323}],323:[function(require,module,exports){
+},{"../ApiClient":264,"./FavoritePagingList":311}],311:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -83133,10 +82151,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./FavoriteEntry":321,"./Pagination":350}],324:[function(require,module,exports){
+},{"../ApiClient":264,"./FavoriteEntry":309,"./Pagination":338}],312:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -83195,10 +82213,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],325:[function(require,module,exports){
+},{"../ApiClient":264}],313:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -83257,10 +82275,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./InlineResponse201Entry":326}],326:[function(require,module,exports){
+},{"../ApiClient":264,"./InlineResponse201Entry":314}],314:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -83323,10 +82341,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],327:[function(require,module,exports){
+},{"../ApiClient":264}],315:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -83393,10 +82411,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],328:[function(require,module,exports){
+},{"../ApiClient":264}],316:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -83480,10 +82498,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],329:[function(require,module,exports){
+},{"../ApiClient":264}],317:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -83630,10 +82648,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./AssocInfo":298,"./ContentInfo":308,"./UserInfo":400}],330:[function(require,module,exports){
+},{"../ApiClient":264,"./AssocInfo":286,"./ContentInfo":296,"./UserInfo":388}],318:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -83696,10 +82714,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./NodeAssocMinimal":329}],331:[function(require,module,exports){
+},{"../ApiClient":264,"./NodeAssocMinimal":317}],319:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -83758,10 +82776,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./NodeAssocPagingList":332}],332:[function(require,module,exports){
+},{"../ApiClient":264,"./NodeAssocPagingList":320}],320:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -83828,10 +82846,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./NodeAssocMinimalEntry":330,"./Pagination":350}],333:[function(require,module,exports){
+},{"../ApiClient":264,"./NodeAssocMinimalEntry":318,"./Pagination":338}],321:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -83914,10 +82932,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],334:[function(require,module,exports){
+},{"../ApiClient":264}],322:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -84016,10 +83034,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./NodesnodeIdchildrenContent":349}],335:[function(require,module,exports){
+},{"../ApiClient":264,"./NodesnodeIdchildrenContent":337}],323:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -84166,10 +83184,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./ChildAssocInfo":300,"./ContentInfo":308,"./UserInfo":400}],336:[function(require,module,exports){
+},{"../ApiClient":264,"./ChildAssocInfo":288,"./ContentInfo":296,"./UserInfo":388}],324:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -84232,10 +83250,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./NodeChildAssocMinimal":335}],337:[function(require,module,exports){
+},{"../ApiClient":264,"./NodeChildAssocMinimal":323}],325:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -84294,10 +83312,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./NodeChildAssocPagingList":338}],338:[function(require,module,exports){
+},{"../ApiClient":264,"./NodeChildAssocPagingList":326}],326:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -84364,10 +83382,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./NodeChildAssocMinimalEntry":336,"./Pagination":350}],339:[function(require,module,exports){
+},{"../ApiClient":264,"./NodeChildAssocMinimalEntry":324,"./Pagination":338}],327:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -84430,10 +83448,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./NodeFull":340}],340:[function(require,module,exports){
+},{"../ApiClient":264,"./NodeFull":328}],328:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -84596,10 +83614,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./ContentInfo":308,"./UserInfo":400}],341:[function(require,module,exports){
+},{"../ApiClient":264,"./ContentInfo":296,"./UserInfo":388}],329:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -84749,10 +83767,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./ContentInfo":308,"./PathElement":351,"./UserInfo":400}],342:[function(require,module,exports){
+},{"../ApiClient":264,"./ContentInfo":296,"./PathElement":339,"./UserInfo":388}],330:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -84815,10 +83833,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./NodeMinimal":341}],343:[function(require,module,exports){
+},{"../ApiClient":264,"./NodeMinimal":329}],331:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -84877,10 +83895,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./NodePagingList":344}],344:[function(require,module,exports){
+},{"../ApiClient":264,"./NodePagingList":332}],332:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -84947,10 +83965,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./NodeMinimalEntry":342,"./Pagination":350}],345:[function(require,module,exports){
+},{"../ApiClient":264,"./NodeMinimalEntry":330,"./Pagination":338}],333:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -85065,10 +84083,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./ContentInfo":308,"./UserInfo":400}],346:[function(require,module,exports){
+},{"../ApiClient":264,"./ContentInfo":296,"./UserInfo":388}],334:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -85131,10 +84149,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./NodeSharedLink":345}],347:[function(require,module,exports){
+},{"../ApiClient":264,"./NodeSharedLink":333}],335:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -85193,10 +84211,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./NodeSharedLinkPagingList":348}],348:[function(require,module,exports){
+},{"../ApiClient":264,"./NodeSharedLinkPagingList":336}],336:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -85269,10 +84287,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./NodeSharedLinkEntry":346,"./Pagination":350}],349:[function(require,module,exports){
+},{"../ApiClient":264,"./NodeSharedLinkEntry":334,"./Pagination":338}],337:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -85339,10 +84357,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],350:[function(require,module,exports){
+},{"../ApiClient":264}],338:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -85449,10 +84467,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],351:[function(require,module,exports){
+},{"../ApiClient":264}],339:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -85519,10 +84537,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],352:[function(require,module,exports){
+},{"../ApiClient":264}],340:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -85597,10 +84615,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./PathElement":351}],353:[function(require,module,exports){
+},{"../ApiClient":264,"./PathElement":339}],341:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -85810,10 +84828,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./Company":307}],354:[function(require,module,exports){
+},{"../ApiClient":264,"./Company":295}],342:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -85876,10 +84894,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./Person":353}],355:[function(require,module,exports){
+},{"../ApiClient":264,"./Person":341}],343:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -86021,10 +85039,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./NetworkQuota":328}],356:[function(require,module,exports){
+},{"../ApiClient":264,"./NetworkQuota":316}],344:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -86087,10 +85105,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./PersonNetwork":355}],357:[function(require,module,exports){
+},{"../ApiClient":264,"./PersonNetwork":343}],345:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -86149,10 +85167,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./PersonNetworkPagingList":358}],358:[function(require,module,exports){
+},{"../ApiClient":264,"./PersonNetworkPagingList":346}],346:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -86225,10 +85243,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./Pagination":350,"./PersonNetworkEntry":356}],359:[function(require,module,exports){
+},{"../ApiClient":264,"./Pagination":338,"./PersonNetworkEntry":344}],347:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -86304,10 +85322,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],360:[function(require,module,exports){
+},{"../ApiClient":264}],348:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -86370,10 +85388,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./Preference":359}],361:[function(require,module,exports){
+},{"../ApiClient":264,"./Preference":347}],349:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -86432,10 +85450,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./PreferencePagingList":362}],362:[function(require,module,exports){
+},{"../ApiClient":264,"./PreferencePagingList":350}],350:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -86508,10 +85526,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./Pagination":350,"./PreferenceEntry":360}],363:[function(require,module,exports){
+},{"../ApiClient":264,"./Pagination":338,"./PreferenceEntry":348}],351:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -86600,10 +85618,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./RatingAggregate":364}],364:[function(require,module,exports){
+},{"../ApiClient":264,"./RatingAggregate":352}],352:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -86674,10 +85692,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],365:[function(require,module,exports){
+},{"../ApiClient":264}],353:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -86772,10 +85790,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],366:[function(require,module,exports){
+},{"../ApiClient":264}],354:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -86838,10 +85856,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./Rating":363}],367:[function(require,module,exports){
+},{"../ApiClient":264,"./Rating":351}],355:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -86900,10 +85918,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./RatingPagingList":368}],368:[function(require,module,exports){
+},{"../ApiClient":264,"./RatingPagingList":356}],356:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -86976,10 +85994,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./Pagination":350,"./RatingEntry":366}],369:[function(require,module,exports){
+},{"../ApiClient":264,"./Pagination":338,"./RatingEntry":354}],357:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -87054,10 +86072,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./ContentInfo":308}],370:[function(require,module,exports){
+},{"../ApiClient":264,"./ContentInfo":296}],358:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -87116,10 +86134,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],371:[function(require,module,exports){
+},{"../ApiClient":264}],359:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -87182,10 +86200,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./Rendition":369}],372:[function(require,module,exports){
+},{"../ApiClient":264,"./Rendition":357}],360:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -87244,10 +86262,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./RenditionPagingList":373}],373:[function(require,module,exports){
+},{"../ApiClient":264,"./RenditionPagingList":361}],361:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -87314,10 +86332,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./Pagination":350,"./RenditionEntry":371}],374:[function(require,module,exports){
+},{"../ApiClient":264,"./Pagination":338,"./RenditionEntry":359}],362:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -87376,10 +86394,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],375:[function(require,module,exports){
+},{"../ApiClient":264}],363:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -87514,10 +86532,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],376:[function(require,module,exports){
+},{"../ApiClient":264}],364:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -87633,10 +86651,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],377:[function(require,module,exports){
+},{"../ApiClient":264}],365:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -87709,10 +86727,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],378:[function(require,module,exports){
+},{"../ApiClient":264}],366:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -87775,10 +86793,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./SiteContainer":377}],379:[function(require,module,exports){
+},{"../ApiClient":264,"./SiteContainer":365}],367:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -87837,10 +86855,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./SitePagingList":393}],380:[function(require,module,exports){
+},{"../ApiClient":264,"./SitePagingList":381}],368:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -87903,10 +86921,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./Site":375}],381:[function(require,module,exports){
+},{"../ApiClient":264,"./Site":363}],369:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -88020,10 +87038,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./Person":353}],382:[function(require,module,exports){
+},{"../ApiClient":264,"./Person":341}],370:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -88121,10 +87139,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],383:[function(require,module,exports){
+},{"../ApiClient":264}],371:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -88187,10 +87205,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./SiteMember":381}],384:[function(require,module,exports){
+},{"../ApiClient":264,"./SiteMember":369}],372:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -88249,10 +87267,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./SitePagingList":393}],385:[function(require,module,exports){
+},{"../ApiClient":264,"./SitePagingList":381}],373:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -88342,10 +87360,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],386:[function(require,module,exports){
+},{"../ApiClient":264}],374:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -88420,10 +87438,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],387:[function(require,module,exports){
+},{"../ApiClient":264}],375:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -88482,10 +87500,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],388:[function(require,module,exports){
+},{"../ApiClient":264}],376:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -88568,10 +87586,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./Site":375}],389:[function(require,module,exports){
+},{"../ApiClient":264,"./Site":363}],377:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -88634,10 +87652,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./SiteMembershipRequest":388}],390:[function(require,module,exports){
+},{"../ApiClient":264,"./SiteMembershipRequest":376}],378:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -88696,10 +87714,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./SiteMembershipRequestPagingList":391}],391:[function(require,module,exports){
+},{"../ApiClient":264,"./SiteMembershipRequestPagingList":379}],379:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -88772,10 +87790,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./Pagination":350,"./SiteMembershipRequestEntry":389}],392:[function(require,module,exports){
+},{"../ApiClient":264,"./Pagination":338,"./SiteMembershipRequestEntry":377}],380:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -88834,10 +87852,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./SitePagingList":393}],393:[function(require,module,exports){
+},{"../ApiClient":264,"./SitePagingList":381}],381:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -88900,10 +87918,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./Pagination":350}],394:[function(require,module,exports){
+},{"../ApiClient":264,"./Pagination":338}],382:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -88976,10 +87994,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],395:[function(require,module,exports){
+},{"../ApiClient":264}],383:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -89042,10 +88060,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],396:[function(require,module,exports){
+},{"../ApiClient":264}],384:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -89104,10 +88122,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],397:[function(require,module,exports){
+},{"../ApiClient":264}],385:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -89170,10 +88188,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./Tag":394}],398:[function(require,module,exports){
+},{"../ApiClient":264,"./Tag":382}],386:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -89232,10 +88250,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./TagPagingList":399}],399:[function(require,module,exports){
+},{"../ApiClient":264,"./TagPagingList":387}],387:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -89308,10 +88326,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276,"./Pagination":350,"./TagEntry":397}],400:[function(require,module,exports){
+},{"../ApiClient":264,"./Pagination":338,"./TagEntry":385}],388:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -89378,7 +88396,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":276}],401:[function(require,module,exports){
+},{"../ApiClient":264}],389:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -89412,6 +88430,7 @@ var AlfrescoApi = function () {
      *        disableCsrf:   // To disable CSRF Token to be submitted. Only for Activiti call, by default is false.
      *    };
      */
+
     function AlfrescoApi(config) {
         _classCallCheck(this, AlfrescoApi);
 
@@ -89743,7 +88762,7 @@ module.exports.Core = AlfrescoCoreRestApi;
 module.exports.Auth = AlfrescoAuthRestApi;
 module.exports.Mock = AlfrescoMock;
 
-},{"../test/mockObjects/mockAlfrescoApi.js":424,"./alfresco-activiti-rest-api/src/index":184,"./alfresco-auth-rest-api/src/index":268,"./alfresco-core-rest-api/src/index.js":291,"./alfrescoContent":403,"./alfrescoNode":404,"./alfrescoUpload":405,"./alfrescoWebScript":406,"./bpmAuth":407,"./ecmAuth":408,"event-emitter":65,"lodash":72}],402:[function(require,module,exports){
+},{"../test/mockObjects/mockAlfrescoApi.js":413,"./alfresco-activiti-rest-api/src/index":172,"./alfresco-auth-rest-api/src/index":256,"./alfresco-core-rest-api/src/index.js":279,"./alfrescoContent":391,"./alfrescoNode":392,"./alfrescoUpload":393,"./alfrescoWebScript":394,"./bpmAuth":395,"./ecmAuth":396,"event-emitter":63,"lodash":71}],390:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -89765,10 +88784,11 @@ var AlfrescoApiClient = function (_ApiClient) {
     /**
      * @param {String} host
      * */
+
     function AlfrescoApiClient(host) {
         _classCallCheck(this, AlfrescoApiClient);
 
-        var _this2 = _possibleConstructorReturn(this, (AlfrescoApiClient.__proto__ || Object.getPrototypeOf(AlfrescoApiClient)).call(this));
+        var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(AlfrescoApiClient).call(this));
 
         _this2.host = host;
         Emitter.call(_this2);
@@ -89827,8 +88847,11 @@ var AlfrescoApiClient = function (_ApiClient) {
             }
 
             // add cookie for activiti
-            if (this.isBpmRequest() && this.cookie) {
-                request.set('Cookie', this.cookie);
+            if (this.isBpmRequest()) {
+                request._withCredentials = true;
+                if (this.cookie) {
+                    request.set('Cookie', this.cookie);
+                }
             }
 
             // set request timeout
@@ -90018,7 +89041,7 @@ var AlfrescoApiClient = function (_ApiClient) {
 Emitter(AlfrescoApiClient.prototype); // jshint ignore:line
 module.exports = AlfrescoApiClient;
 
-},{"./alfresco-core-rest-api/src/ApiClient":276,"event-emitter":65,"lodash":72,"superagent":129}],403:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/ApiClient":264,"event-emitter":63,"lodash":71,"superagent":116}],391:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -90029,6 +89052,7 @@ var AlfrescoContent = function () {
     /**
      * @param {EcmAuth} ecmAuth
      */
+
     function AlfrescoContent(ecmAuth) {
         _classCallCheck(this, AlfrescoContent);
 
@@ -90084,7 +89108,7 @@ var AlfrescoContent = function () {
 
 module.exports = AlfrescoContent;
 
-},{}],404:[function(require,module,exports){
+},{}],392:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -90104,7 +89128,7 @@ var AlfrescoNode = function (_AlfrescoCoreRestApi$) {
     function AlfrescoNode() {
         _classCallCheck(this, AlfrescoNode);
 
-        return _possibleConstructorReturn(this, (AlfrescoNode.__proto__ || Object.getPrototypeOf(AlfrescoNode)).apply(this, arguments));
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(AlfrescoNode).apply(this, arguments));
     }
 
     _createClass(AlfrescoNode, [{
@@ -90197,7 +89221,7 @@ var AlfrescoNode = function (_AlfrescoCoreRestApi$) {
 
 module.exports = AlfrescoNode;
 
-},{"./alfresco-core-rest-api/src/index.js":291,"lodash":72}],405:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/index.js":279,"lodash":71}],393:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -90218,7 +89242,7 @@ var AlfrescoUpload = function (_AlfrescoCoreRestApi$) {
     function AlfrescoUpload() {
         _classCallCheck(this, AlfrescoUpload);
 
-        var _this = _possibleConstructorReturn(this, (AlfrescoUpload.__proto__ || Object.getPrototypeOf(AlfrescoUpload)).call(this));
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AlfrescoUpload).call(this));
 
         Emitter.call(_this);
         return _this;
@@ -90295,7 +89319,7 @@ var AlfrescoUpload = function (_AlfrescoCoreRestApi$) {
 Emitter(AlfrescoUpload.prototype); // jshint ignore:line
 module.exports = AlfrescoUpload;
 
-},{"./alfresco-core-rest-api/src/index.js":291,"event-emitter":65,"lodash":72}],406:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/index.js":279,"event-emitter":63,"lodash":71}],394:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -90359,7 +89383,7 @@ var AlfrescoWebScriptApi = function () {
 
 module.exports = AlfrescoWebScriptApi;
 
-},{"./alfresco-core-rest-api/src/ApiClient":276}],407:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/ApiClient":264}],395:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -90380,10 +89404,11 @@ var BpmAuth = function (_AlfrescoApiClient) {
     /**
      * @param {Object} config
      */
+
     function BpmAuth(config) {
         _classCallCheck(this, BpmAuth);
 
-        var _this = _possibleConstructorReturn(this, (BpmAuth.__proto__ || Object.getPrototypeOf(BpmAuth)).call(this));
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BpmAuth).call(this));
 
         _this.config = config;
         _this.ticket = undefined;
@@ -90564,7 +89589,7 @@ Emitter(BpmAuth.prototype); // jshint ignore:line
 module.exports = BpmAuth;
 
 }).call(this,require("buffer").Buffer)
-},{"./alfrescoApiClient":402,"buffer":8,"event-emitter":65}],408:[function(require,module,exports){
+},{"./alfrescoApiClient":390,"buffer":8,"event-emitter":63}],396:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -90585,10 +89610,11 @@ var EcmAuth = function (_AlfrescoApiClient) {
     /**
      * @param {Object} config
      */
+
     function EcmAuth(config) {
         _classCallCheck(this, EcmAuth);
 
-        var _this = _possibleConstructorReturn(this, (EcmAuth.__proto__ || Object.getPrototypeOf(EcmAuth)).call(this));
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(EcmAuth).call(this));
 
         _this.config = config;
 
@@ -90782,7 +89808,7 @@ var EcmAuth = function (_AlfrescoApiClient) {
 Emitter(EcmAuth.prototype); // jshint ignore:line
 module.exports = EcmAuth;
 
-},{"./alfresco-auth-rest-api/src/index":268,"./alfrescoApiClient":402,"event-emitter":65}],409:[function(require,module,exports){
+},{"./alfresco-auth-rest-api/src/index":256,"./alfrescoApiClient":390,"event-emitter":63}],397:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -90802,7 +89828,7 @@ var AuthResponseMock = function (_BaseMock) {
     function AuthResponseMock(host, username, password) {
         _classCallCheck(this, AuthResponseMock);
 
-        var _this = _possibleConstructorReturn(this, (AuthResponseMock.__proto__ || Object.getPrototypeOf(AuthResponseMock)).call(this, host));
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AuthResponseMock).call(this, host));
 
         _this.username = username || 'admin';
         _this.password = password || 'admin';
@@ -90831,7 +89857,7 @@ var AuthResponseMock = function (_BaseMock) {
 
 module.exports = AuthResponseMock;
 
-},{"../baseMock":423,"nock":75}],410:[function(require,module,exports){
+},{"../baseMock":412,"nock":74}],398:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -90851,7 +89877,7 @@ var ModelJsonBpmMock = function (_BaseMock) {
     function ModelJsonBpmMock(host) {
         _classCallCheck(this, ModelJsonBpmMock);
 
-        return _possibleConstructorReturn(this, (ModelJsonBpmMock.__proto__ || Object.getPrototypeOf(ModelJsonBpmMock)).call(this, host));
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(ModelJsonBpmMock).call(this, host));
     }
 
     _createClass(ModelJsonBpmMock, [{
@@ -90967,7 +89993,7 @@ var ModelJsonBpmMock = function (_BaseMock) {
 
 module.exports = ModelJsonBpmMock;
 
-},{"../baseMock":423,"nock":75}],411:[function(require,module,exports){
+},{"../baseMock":412,"nock":74}],399:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -90987,7 +90013,7 @@ var ModelsMock = function (_BaseMock) {
     function ModelsMock(host) {
         _classCallCheck(this, ModelsMock);
 
-        return _possibleConstructorReturn(this, (ModelsMock.__proto__ || Object.getPrototypeOf(ModelsMock)).call(this, host));
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(ModelsMock).call(this, host));
     }
 
     _createClass(ModelsMock, [{
@@ -91025,7 +90051,7 @@ var ModelsMock = function (_BaseMock) {
 
 module.exports = ModelsMock;
 
-},{"../baseMock":423,"nock":75}],412:[function(require,module,exports){
+},{"../baseMock":412,"nock":74}],400:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -91045,7 +90071,7 @@ var ProcessMock = function (_BaseMock) {
     function ProcessMock(host) {
         _classCallCheck(this, ProcessMock);
 
-        return _possibleConstructorReturn(this, (ProcessMock.__proto__ || Object.getPrototypeOf(ProcessMock)).call(this, host));
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(ProcessMock).call(this, host));
     }
 
     _createClass(ProcessMock, [{
@@ -91106,6 +90132,78 @@ var ProcessMock = function (_BaseMock) {
                 }]
             });
         }
+    }, {
+        key: 'get200getProcessDefinitionStartForm',
+        value: function get200getProcessDefinitionStartForm() {
+            nock(this.host, { 'encodedQueryParams': true }).get('/activiti-app/api/enterprise/process-definitions/testProcess%3A1%3A7504/start-form').reply(200, {
+                'id': 2002,
+                'processDefinitionId': 'testProcess:1:7504',
+                'processDefinitionName': 'test process',
+                'processDefinitionKey': 'testProcess',
+                'tabs': [],
+                'fields': [{
+                    'fieldType': 'DynamicTableRepresentation',
+                    'id': 'label',
+                    'name': 'Label',
+                    'type': 'dynamic-table',
+                    'value': null,
+                    'required': false,
+                    'readOnly': false,
+                    'overrideId': false,
+                    'colspan': 1,
+                    'placeholder': null,
+                    'minLength': 0,
+                    'maxLength': 0,
+                    'minValue': null,
+                    'maxValue': null,
+                    'regexPattern': null,
+                    'optionType': null,
+                    'hasEmptyValue': null,
+                    'options': null,
+                    'restUrl': null,
+                    'restResponsePath': null,
+                    'restIdProperty': null,
+                    'restLabelProperty': null,
+                    'tab': null,
+                    'className': null,
+                    'params': { 'existingColspan': 1, 'maxColspan': 1 },
+                    'layout': { 'row': -1, 'column': -1, 'colspan': 2 },
+                    'sizeX': 2,
+                    'sizeY': 2,
+                    'row': -1,
+                    'col': -1,
+                    'visibilityCondition': null,
+                    'columnDefinitions': [{
+                        'id': 'user',
+                        'name': 'User',
+                        'type': 'Dropdown',
+                        'value': null,
+                        'optionType': 'rest',
+                        'options': [{ 'id': null, 'name': 'Option 1' }],
+                        'restResponsePath': null,
+                        'restUrl': 'https://jsonplaceholder.typicode.com/users',
+                        'restIdProperty': 'id',
+                        'restLabelProperty': 'name',
+                        'amountCurrency': null,
+                        'amountEnableFractions': false,
+                        'required': true,
+                        'editable': true,
+                        'sortable': true,
+                        'visible': true,
+                        'endpoint': null,
+                        'requestHeaders': null
+                    }]
+                }],
+                'outcomes': [],
+                'javascriptEvents': [],
+                'className': '',
+                'style': '',
+                'customFieldTemplates': {},
+                'metadata': {},
+                'variables': [],
+                'gridsterForm': false
+            });
+        }
     }]);
 
     return ProcessMock;
@@ -91113,7 +90211,7 @@ var ProcessMock = function (_BaseMock) {
 
 module.exports = ProcessMock;
 
-},{"../baseMock":423,"nock":75}],413:[function(require,module,exports){
+},{"../baseMock":412,"nock":74}],401:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -91133,7 +90231,7 @@ var ProfileMock = function (_BaseMock) {
     function ProfileMock(host) {
         _classCallCheck(this, ProfileMock);
 
-        return _possibleConstructorReturn(this, (ProfileMock.__proto__ || Object.getPrototypeOf(ProfileMock)).call(this, host));
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(ProfileMock).call(this, host));
     }
 
     _createClass(ProfileMock, [{
@@ -91217,7 +90315,7 @@ var ProfileMock = function (_BaseMock) {
 
 module.exports = ProfileMock;
 
-},{"../baseMock":423,"nock":75}],414:[function(require,module,exports){
+},{"../baseMock":412,"nock":74}],402:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -91237,13 +90335,13 @@ var TaskFormMock = function (_BaseMock) {
     function TaskFormMock(host) {
         _classCallCheck(this, TaskFormMock);
 
-        return _possibleConstructorReturn(this, (TaskFormMock.__proto__ || Object.getPrototypeOf(TaskFormMock)).call(this, host));
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(TaskFormMock).call(this, host));
     }
 
     _createClass(TaskFormMock, [{
         key: 'get200getTaskFormVariables',
         value: function get200getTaskFormVariables() {
-            nock(this.host, { 'encodedQueryParams': true }).get('/activiti-app/app/rest/task-forms/5028/variables').reply(200, [{ 'id': 'initiator', 'type': 'string', 'value': '1001' }]);
+            nock(this.host, { 'encodedQueryParams': true }).get('/activiti-app/app/rest/task-forms/5028/variables').reply(200, [{ 'id': 'initiator', 'type': 'string', 'value': '1001' }], ['Server', 'Apache-Coyote/1.1', 'set-cookie', 'ACTIVITI_REMEMBER_ME=NjdOdGwvcUtFTkVEczQyMGh4WFp5QT09OmpUL1UwdFVBTC94QTJMTFFUVFgvdFE9PQ', 'X-Content-Type-Options', 'nosniff', 'X-XSS-Protection', '1; mode=block', 'Cache-Control', 'no-cache, no-store, max-age=0, must-revalidate', 'Pragma', 'no-cache', 'Expires', '0', 'X-Frame-Options', 'SAMEORIGIN', 'Content-Type', 'application/json', 'Transfer-Encoding', 'chunked', 'Date', 'Tue, 01 Nov 2016 19:43:36 GMT', 'Connection', 'close']);
         }
     }]);
 
@@ -91252,7 +90350,7 @@ var TaskFormMock = function (_BaseMock) {
 
 module.exports = TaskFormMock;
 
-},{"../baseMock":423,"nock":75}],415:[function(require,module,exports){
+},{"../baseMock":412,"nock":74}],403:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -91272,7 +90370,7 @@ var TasksMock = function (_BaseMock) {
     function TasksMock(host) {
         _classCallCheck(this, TasksMock);
 
-        return _possibleConstructorReturn(this, (TasksMock.__proto__ || Object.getPrototypeOf(TasksMock)).call(this, host));
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(TasksMock).call(this, host));
     }
 
     _createClass(TasksMock, [{
@@ -92207,7 +91305,7 @@ var TasksMock = function (_BaseMock) {
 
 module.exports = TasksMock;
 
-},{"../baseMock":423,"nock":75}],416:[function(require,module,exports){
+},{"../baseMock":412,"nock":74}],404:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -92227,7 +91325,7 @@ var userFiltersMock = function (_BaseMock) {
     function userFiltersMock(host) {
         _classCallCheck(this, userFiltersMock);
 
-        return _possibleConstructorReturn(this, (userFiltersMock.__proto__ || Object.getPrototypeOf(userFiltersMock)).call(this, host));
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(userFiltersMock).call(this, host));
     }
 
     _createClass(userFiltersMock, [{
@@ -92275,7 +91373,7 @@ var userFiltersMock = function (_BaseMock) {
 
 module.exports = userFiltersMock;
 
-},{"../baseMock":423,"nock":75}],417:[function(require,module,exports){
+},{"../baseMock":412,"nock":74}],405:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -92295,7 +91393,7 @@ var AuthResponseMock = function (_BaseMock) {
     function AuthResponseMock(host, username, password) {
         _classCallCheck(this, AuthResponseMock);
 
-        var _this = _possibleConstructorReturn(this, (AuthResponseMock.__proto__ || Object.getPrototypeOf(AuthResponseMock)).call(this, host));
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AuthResponseMock).call(this, host));
 
         _this.username = username || 'admin';
         _this.password = password || 'admin';
@@ -92386,7 +91484,104 @@ var AuthResponseMock = function (_BaseMock) {
 
 module.exports = AuthResponseMock;
 
-},{"../baseMock":423,"nock":75}],418:[function(require,module,exports){
+},{"../baseMock":412,"nock":74}],406:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var nock = require('nock');
+var BaseMock = require('../baseMock');
+
+var FindNodesMock = function (_BaseMock) {
+    _inherits(FindNodesMock, _BaseMock);
+
+    function FindNodesMock(host) {
+        _classCallCheck(this, FindNodesMock);
+
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(FindNodesMock).call(this, host));
+    }
+
+    _createClass(FindNodesMock, [{
+        key: 'get200Response',
+        value: function get200Response() {
+            nock(this.host, { 'encodedQueryParams': true }).get('/alfresco/api/-default-/public/alfresco/versions/1/queries/nodes?term=test').reply(200, {
+                'list': {
+                    'pagination': {
+                        'count': 2,
+                        'hasMoreItems': false,
+                        'totalItems': 2,
+                        'skipCount': 0,
+                        'maxItems': 100
+                    },
+                    'entries': [{
+                        'entry': {
+                            'createdAt': '2011-03-03T10:34:52.092+0000',
+                            'isFolder': false,
+                            'isFile': true,
+                            'createdByUser': { 'id': 'abeecher', 'displayName': 'Alice Beecher' },
+                            'modifiedAt': '2011-03-03T10:34:52.092+0000',
+                            'modifiedByUser': { 'id': 'abeecher', 'displayName': 'Alice Beecher' },
+                            'name': 'coins1.JPG',
+                            'id': '7bb9c846-fcc5-43b5-a893-39e46ebe94d4',
+                            'nodeType': 'cm:content',
+                            'content': {
+                                'mimeType': 'image/jpeg',
+                                'mimeTypeName': 'JPEG Image',
+                                'sizeInBytes': 501641,
+                                'encoding': 'UTF-8'
+                            },
+                            'parentId': '880a0f47-31b1-4101-b20b-4d325e54e8b1'
+                        }
+                    }, {
+                        'entry': {
+                            'createdAt': '2011-03-03T10:34:52.092+0000',
+                            'isFolder': false,
+                            'isFile': true,
+                            'createdByUser': { 'id': 'abeecher', 'displayName': 'Alice Beecher' },
+                            'modifiedAt': '2011-03-03T10:34:52.092+0000',
+                            'modifiedByUser': { 'id': 'abeecher', 'displayName': 'Alice Beecher' },
+                            'name': 'coins2.JPG',
+                            'id': '7bb9c846-fcc5-43b5-a893-39e46ebe94d4',
+                            'nodeType': 'cm:content',
+                            'content': {
+                                'mimeType': 'image/jpeg',
+                                'mimeTypeName': 'JPEG Image',
+                                'sizeInBytes': 501641,
+                                'encoding': 'UTF-8'
+                            },
+                            'parentId': '880a0f47-31b1-4101-b20b-4d325e54e8b1'
+                        }
+                    }]
+                }
+            });
+        }
+    }, {
+        key: 'get401Response',
+        value: function get401Response() {
+            nock(this.host, { 'encodedQueryParams': true }).get('/alfresco/api/-default-/public/alfresco/versions/1/queries/nodes?term=test').reply(401, {
+                'error': {
+                    'errorKey': 'framework.exception.ApiDefault',
+                    'statusCode': 401,
+                    'briefSummary': '05210059 Authentication failed for Web Script org/alfresco/api/ResourceWebScript.get',
+                    'stackTrace': 'For security reasons the stack trace is no longer displayed, but the property is kept for previous versions.',
+                    'descriptionURL': 'https://api-explorer.alfresco.com'
+                }
+            });
+        }
+    }]);
+
+    return FindNodesMock;
+}(BaseMock);
+
+module.exports = FindNodesMock;
+
+},{"../baseMock":412,"nock":74}],407:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -92406,7 +91601,7 @@ var NodeMock = function (_BaseMock) {
     function NodeMock(host) {
         _classCallCheck(this, NodeMock);
 
-        return _possibleConstructorReturn(this, (NodeMock.__proto__ || Object.getPrototypeOf(NodeMock)).call(this, host));
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(NodeMock).call(this, host));
     }
 
     _createClass(NodeMock, [{
@@ -92707,7 +91902,7 @@ var NodeMock = function (_BaseMock) {
 
 module.exports = NodeMock;
 
-},{"../baseMock":423,"nock":75}],419:[function(require,module,exports){
+},{"../baseMock":412,"nock":74}],408:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -92727,7 +91922,7 @@ var RenditionMock = function (_BaseMock) {
     function RenditionMock(host) {
         _classCallCheck(this, RenditionMock);
 
-        return _possibleConstructorReturn(this, (RenditionMock.__proto__ || Object.getPrototypeOf(RenditionMock)).call(this, host));
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(RenditionMock).call(this, host));
     }
 
     _createClass(RenditionMock, [{
@@ -92805,7 +92000,7 @@ var RenditionMock = function (_BaseMock) {
 
 module.exports = RenditionMock;
 
-},{"../baseMock":423,"nock":75}],420:[function(require,module,exports){
+},{"../baseMock":412,"nock":74}],409:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -92825,7 +92020,7 @@ var TagMock = function (_BaseMock) {
     function TagMock(host) {
         _classCallCheck(this, TagMock);
 
-        return _possibleConstructorReturn(this, (TagMock.__proto__ || Object.getPrototypeOf(TagMock)).call(this, host));
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(TagMock).call(this, host));
     }
 
     _createClass(TagMock, [{
@@ -92868,7 +92063,7 @@ var TagMock = function (_BaseMock) {
 
 module.exports = TagMock;
 
-},{"../baseMock":423,"nock":75}],421:[function(require,module,exports){
+},{"../baseMock":412,"nock":74}],410:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -92888,7 +92083,7 @@ var UploadMock = function (_BaseMock) {
     function UploadMock(host) {
         _classCallCheck(this, UploadMock);
 
-        return _possibleConstructorReturn(this, (UploadMock.__proto__ || Object.getPrototypeOf(UploadMock)).call(this, host));
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(UploadMock).call(this, host));
     }
 
     _createClass(UploadMock, [{
@@ -92976,7 +92171,7 @@ var UploadMock = function (_BaseMock) {
 
 module.exports = UploadMock;
 
-},{"../baseMock":423,"nock":75}],422:[function(require,module,exports){
+},{"../baseMock":412,"nock":74}],411:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -92996,7 +92191,7 @@ var WebScriptMock = function (_BaseMock) {
     function WebScriptMock(host, contextRoot, servicePath, scriptPath) {
         _classCallCheck(this, WebScriptMock);
 
-        var _this = _possibleConstructorReturn(this, (WebScriptMock.__proto__ || Object.getPrototypeOf(WebScriptMock)).call(this, host));
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(WebScriptMock).call(this, host));
 
         _this.contextRoot = contextRoot || 'alfresco';
         _this.servicePath = servicePath || 'service';
@@ -93055,7 +92250,7 @@ var WebScriptMock = function (_BaseMock) {
 
 module.exports = WebScriptMock;
 
-},{"../baseMock":423,"nock":75}],423:[function(require,module,exports){
+},{"../baseMock":412,"nock":74}],412:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -93103,7 +92298,7 @@ var BaseMock = function () {
 
 module.exports = BaseMock;
 
-},{"nock":75}],424:[function(require,module,exports){
+},{"nock":74}],413:[function(require,module,exports){
 'use strict';
 
 var mockAlfrescoApi = {};
@@ -93114,6 +92309,7 @@ mockAlfrescoApi.Node = require('./alfresco/nodeMock.js');
 mockAlfrescoApi.Upload = require('./alfresco/uploadMock.js');
 mockAlfrescoApi.WebScript = require('./alfresco/webScriptMock.js');
 mockAlfrescoApi.Tag = require('./alfresco/tagMock.js');
+mockAlfrescoApi.FindNodes = require('./alfresco/findNodesMock.js');
 mockAlfrescoApi.Rendition = require('./alfresco/renditionMock.js');
 
 //Bpm Mock
@@ -93129,5 +92325,5 @@ mockAlfrescoApi.ActivitiMock.UserFilters = require('./activiti/userFiltersMock.j
 
 module.exports = mockAlfrescoApi;
 
-},{"./activiti/authResponseMock.js":409,"./activiti/modelJsonBpmMock.js":410,"./activiti/modelsMock.js":411,"./activiti/processMock.js":412,"./activiti/profileMock.js":413,"./activiti/taskFormMock.js":414,"./activiti/tasksMock.js":415,"./activiti/userFiltersMock.js":416,"./alfresco/authResponseMock.js":417,"./alfresco/nodeMock.js":418,"./alfresco/renditionMock.js":419,"./alfresco/tagMock.js":420,"./alfresco/uploadMock.js":421,"./alfresco/webScriptMock.js":422}]},{},[1])(1)
+},{"./activiti/authResponseMock.js":397,"./activiti/modelJsonBpmMock.js":398,"./activiti/modelsMock.js":399,"./activiti/processMock.js":400,"./activiti/profileMock.js":401,"./activiti/taskFormMock.js":402,"./activiti/tasksMock.js":403,"./activiti/userFiltersMock.js":404,"./alfresco/authResponseMock.js":405,"./alfresco/findNodesMock.js":406,"./alfresco/nodeMock.js":407,"./alfresco/renditionMock.js":408,"./alfresco/tagMock.js":409,"./alfresco/uploadMock.js":410,"./alfresco/webScriptMock.js":411}]},{},[1])(1)
 });
