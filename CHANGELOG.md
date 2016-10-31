@@ -7,7 +7,7 @@ Alfresco JS API
 _This project provides a JavaScript client API into the v1 Alfresco REST API_
 
 <a name="0.3.8"></a>
-# [0.3.8](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.8) (2016-xx-xx)
+# [0.3.8](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.8) (2016-10-30)
 
 ## Fix
 - [Activiti API processApi.getProcessDefinitionStartForm() does not take a process def ID #76](https://github.com/Alfresco/alfresco-js-api/issues/76)
@@ -18,6 +18,9 @@ var processDefinitionId = "pprocessDefinitionId_example"; // String | processDef
 
 this.alfrescoJsApi.activiti.processApi.getProcessDefinitionStartForm(processDefinitionId);
 ```
+
+- [JS API declaration file is backward compatibility broken #83](https://github.com/Alfresco/alfresco-js-api/issues/83)
+
 
 
 <a name="0.3.7"></a>
