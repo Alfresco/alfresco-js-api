@@ -124,13 +124,21 @@
 
     /**
      * Retrieve the start form for a process definition
+     * @param {String} processDefinitionId processDefinitionId
      */
-    this.getProcessDefinitionStartForm = function() {
+    this.getProcessDefinitionStartForm = function(processDefinitionId) {
       var postBody = null;
+
+      // verify the required parameter 'processInstanceId' is set
+      if (processDefinitionId == undefined || processDefinitionId == null) {
+        throw "Missing the required parameter 'processDefinitionId' when calling getProcessInstanceContent";
+      }
 
 
       var pathParams = {
+        'processDefinitionId': processDefinitionId
       };
+
       var queryParams = {
       };
       var headerParams = {
