@@ -63,8 +63,8 @@ class AlfrescoApiClient extends ApiClient {
         }
 
         // add cookie for activiti
-        if (this.isBpmRequest() && this.cookie) {
-            request.set('Cookie', this.cookie);
+        if (this.isBpmRequest()) {
+            request._withCredentials = true;
         }
 
         // set request timeout
@@ -125,11 +125,6 @@ class AlfrescoApiClient extends ApiClient {
                     }
 
                 } else {
-                    if (this.isBpmRequest()) {
-                        if (response.header && response.header.hasOwnProperty('set-cookie')) {
-                            this.cookie = response.header['set-cookie'];
-                        }
-                    }
                     var data = {};
                     if (response.type === 'text/html') {
                         data = this.deserialize(response, 'String');
