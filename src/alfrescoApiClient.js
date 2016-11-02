@@ -63,8 +63,11 @@ class AlfrescoApiClient extends ApiClient {
         }
 
         // add cookie for activiti
-        if (this.isBpmRequest() && this.cookie) {
-            request.set('Cookie', this.cookie);
+        if (this.isBpmRequest()) {
+            request._withCredentials = true;
+            if (this.cookie) {
+                request.set('Cookie', this.cookie);
+            }
         }
 
         // set request timeout

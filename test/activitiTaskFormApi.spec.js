@@ -34,4 +34,14 @@ describe('Activiti Task Api', function () {
         });
     });
 
+    it('Check cookie settings', function (done) {
+        this.taskFormMock.get200getTaskFormVariables();
+
+        var taskId = 5028;
+        this.alfrescoJsApi.activiti.taskFormsApi.getTaskFormVariables(taskId).then((data)=> {
+            expect(this.alfrescoJsApi.activiti.taskFormsApi.apiClient.cookie).equal('ACTIVITI_REMEMBER_ME=NjdOdGwvcUtFTkVEczQyMGh4WFp5QT09OmpUL1UwdFVBTC94QTJMTFFUVFgvdFE9PQ');
+            done();
+        });
+    });
+
 });
