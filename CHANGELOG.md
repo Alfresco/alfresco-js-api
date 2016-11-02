@@ -18,6 +18,7 @@ var processDefinitionId = "pprocessDefinitionId_example"; // String | processDef
 
 this.alfrescoJsApi.activiti.processApi.getProcessDefinitionStartForm(processDefinitionId);
 ```
+- [cookies are missing #86](https://github.com/Alfresco/alfresco-js-api/issues/86)
 
 
 <a name="0.3.7"></a>
