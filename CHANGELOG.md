@@ -7,7 +7,7 @@ Alfresco JS API
 _This project provides a JavaScript client API into the v1 Alfresco REST API_
 
 <a name="0.3.8"></a>
-# [0.3.8](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.8) (2016-xx-xx)
+# [0.3.8](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.8) (04-11-2016)
 
 ## Fix
 - [Activiti API processApi.getProcessDefinitionStartForm() does not take a process def ID #76](https://github.com/Alfresco/alfresco-js-api/issues/76)
@@ -22,13 +22,13 @@ this.alfrescoJsApi.activiti.processApi.getProcessDefinitionStartForm(processDefi
 
 
 <a name="0.3.7"></a>
-# [0.3.7](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.7) (2016-10-29)
+# [0.3.7](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.7) (29-10-2016)
 
 ## Fix
 - [Latest version no longer works due to .d.ts errors #78](https://github.com/Alfresco/alfresco-js-api/issues/78)
 
 <a name="0.3.6"></a>
-# [0.3.6](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.6) (2016-10-28)
+# [0.3.6](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.6) (28-10-2016)
 
 ## Fix
 - [separate getRestFieldValues in getRestFieldValues and getRestFieldValuesColumn #71](https://github.com/Alfresco/alfresco-js-api/issues/71)
@@ -68,20 +68,20 @@ this.alfrescoJsApi.activiti.modelJsonBpmnApi.getHistoricEditorDisplayJsonClient(
 
 
 <a name="0.3.5"></a>
-# [0.3.5](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.5) (2016-09-26)
+# [0.3.5](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.5) (26-09-2016)
 
 ## Fix
 - [Library no longer works with ECM](https://github.com/Alfresco/alfresco-js-api/issues/63)
 - [Flag to enable/disable CSRF behaviour](https://github.com/Alfresco/alfresco-js-api/issues/62)
 
 <a name="0.3.4"></a>
-# [0.3.4](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.4) (2016-09-26)
+# [0.3.4](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.4) (26-09-2016)
 
 ## Fix
 - [csrf token for activiti doesn't work with Node.js](https://github.com/Alfresco/alfresco-js-api/issues/61)
 
 <a name="0.3.3"></a>
-# [0.3.3](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.3) (2016-09-26)
+# [0.3.3](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.3) (26-09-2016)
 
 ## Fix
 - [Add csrf token for activiti](https://github.com/Alfresco/alfresco-js-api/issues/59)
@@ -91,7 +91,7 @@ this.alfrescoJsApi.activiti.modelJsonBpmnApi.getHistoricEditorDisplayJsonClient(
 - Various improvements for TypeScript declaration files
 
 <a name="0.3.2"></a>
-# [0.3.2](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.2) (2016-09-21)
+# [0.3.2](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.2) (21-09-2016)
 
 ## Fix
 - [Null date fields parsed as invalid dates](https://github.com/Alfresco/alfresco-js-api/issues/50)
@@ -103,7 +103,7 @@ this.alfrescoJsApi.activiti.modelJsonBpmnApi.getHistoricEditorDisplayJsonClient(
 - Various improvements for TypeScript declaration files
 
 <a name="0.3.1"></a>
-# [0.3.1](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.1) (2016-08-29)
+# [0.3.1](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.1) (29-08-2016)
 
 ## Fix
 - [Date parser error with Safari](https://github.com/Alfresco/alfresco-js-api/issues/43)
@@ -113,7 +113,7 @@ this.alfrescoJsApi.activiti.modelJsonBpmnApi.getHistoricEditorDisplayJsonClient(
 - Various improvements for TypeScript declaration files
 
 <a name="0.3.0"></a>
-# [0.3.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.0) (2016-08-22)
+# [0.3.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.3.0) (22-08-2016)
 
 ## Features
 - [Integration Activiti Api #19](https://github.com/Alfresco/alfresco-js-api/issues/19)
@@ -207,12 +207,12 @@ this.alfrescoJsApi = new AlfrescoApi({ ticketEcm:'TICKET_4479f4d3bb155195879bfbb
 ```
 
 <a name="0.2.2"></a>
-# [0.2.2](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.2.2) (2016-07-21)
+# [0.2.2](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.2.2) (21-07-2016)
 - [Cannot find module mockAlfrescoApi #29](https://github.com/Alfresco/alfresco-js-api/issues/29)
 - [ChangesAPI doesn't refer to any real API and duplicates other APIs #26](https://github.com/Alfresco/alfresco-js-api/issues/26)
 
 <a name="0.2.1"></a>
-# [0.2.1](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.2.1) (2016-07-15)
+# [0.2.1](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.2.1) (15-07-2016)
 
 ## Features
 
@@ -244,7 +244,7 @@ After:
 ```
 
 <a name="0.2.0"></a>
-# [0.2.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.2.0) (2016-07-08)
+# [0.2.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.2.0) (08-07-2016)
 
 ## BREAKING CHANGES
 
