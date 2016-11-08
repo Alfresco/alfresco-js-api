@@ -60358,11 +60358,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     /**
      * Retrieve the start form for a process definition
+     * @param {String} processDefinitionId processDefinitionId
      */
-    this.getProcessDefinitionStartForm = function () {
+    this.getProcessDefinitionStartForm = function (processDefinitionId) {
       var postBody = null;
 
-      var pathParams = {};
+      // verify the required parameter 'processInstanceId' is set
+      if (processDefinitionId == undefined || processDefinitionId == null) {
+        throw "Missing the required parameter 'processDefinitionId' when calling getProcessInstanceContent";
+      }
+
+      var pathParams = {
+        'processDefinitionId': processDefinitionId
+      };
+
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
@@ -89827,8 +89836,11 @@ var AlfrescoApiClient = function (_ApiClient) {
             }
 
             // add cookie for activiti
-            if (this.isBpmRequest() && this.cookie) {
-                request.set('Cookie', this.cookie);
+            if (this.isBpmRequest()) {
+                request._withCredentials = true;
+                if (this.cookie) {
+                    request.set('Cookie', this.cookie);
+                }
             }
 
             // set request timeout
@@ -91106,6 +91118,78 @@ var ProcessMock = function (_BaseMock) {
                 }]
             });
         }
+    }, {
+        key: 'get200getProcessDefinitionStartForm',
+        value: function get200getProcessDefinitionStartForm() {
+            nock(this.host, { 'encodedQueryParams': true }).get('/activiti-app/api/enterprise/process-definitions/testProcess%3A1%3A7504/start-form').reply(200, {
+                'id': 2002,
+                'processDefinitionId': 'testProcess:1:7504',
+                'processDefinitionName': 'test process',
+                'processDefinitionKey': 'testProcess',
+                'tabs': [],
+                'fields': [{
+                    'fieldType': 'DynamicTableRepresentation',
+                    'id': 'label',
+                    'name': 'Label',
+                    'type': 'dynamic-table',
+                    'value': null,
+                    'required': false,
+                    'readOnly': false,
+                    'overrideId': false,
+                    'colspan': 1,
+                    'placeholder': null,
+                    'minLength': 0,
+                    'maxLength': 0,
+                    'minValue': null,
+                    'maxValue': null,
+                    'regexPattern': null,
+                    'optionType': null,
+                    'hasEmptyValue': null,
+                    'options': null,
+                    'restUrl': null,
+                    'restResponsePath': null,
+                    'restIdProperty': null,
+                    'restLabelProperty': null,
+                    'tab': null,
+                    'className': null,
+                    'params': { 'existingColspan': 1, 'maxColspan': 1 },
+                    'layout': { 'row': -1, 'column': -1, 'colspan': 2 },
+                    'sizeX': 2,
+                    'sizeY': 2,
+                    'row': -1,
+                    'col': -1,
+                    'visibilityCondition': null,
+                    'columnDefinitions': [{
+                        'id': 'user',
+                        'name': 'User',
+                        'type': 'Dropdown',
+                        'value': null,
+                        'optionType': 'rest',
+                        'options': [{ 'id': null, 'name': 'Option 1' }],
+                        'restResponsePath': null,
+                        'restUrl': 'https://jsonplaceholder.typicode.com/users',
+                        'restIdProperty': 'id',
+                        'restLabelProperty': 'name',
+                        'amountCurrency': null,
+                        'amountEnableFractions': false,
+                        'required': true,
+                        'editable': true,
+                        'sortable': true,
+                        'visible': true,
+                        'endpoint': null,
+                        'requestHeaders': null
+                    }]
+                }],
+                'outcomes': [],
+                'javascriptEvents': [],
+                'className': '',
+                'style': '',
+                'customFieldTemplates': {},
+                'metadata': {},
+                'variables': [],
+                'gridsterForm': false
+            });
+        }
     }]);
 
     return ProcessMock;
@@ -91243,7 +91327,7 @@ var TaskFormMock = function (_BaseMock) {
     _createClass(TaskFormMock, [{
         key: 'get200getTaskFormVariables',
         value: function get200getTaskFormVariables() {
-            nock(this.host, { 'encodedQueryParams': true }).get('/activiti-app/app/rest/task-forms/5028/variables').reply(200, [{ 'id': 'initiator', 'type': 'string', 'value': '1001' }]);
+            nock(this.host, { 'encodedQueryParams': true }).get('/activiti-app/app/rest/task-forms/5028/variables').reply(200, [{ 'id': 'initiator', 'type': 'string', 'value': '1001' }], ['Server', 'Apache-Coyote/1.1', 'set-cookie', 'ACTIVITI_REMEMBER_ME=NjdOdGwvcUtFTkVEczQyMGh4WFp5QT09OmpUL1UwdFVBTC94QTJMTFFUVFgvdFE9PQ', 'X-Content-Type-Options', 'nosniff', 'X-XSS-Protection', '1; mode=block', 'Cache-Control', 'no-cache, no-store, max-age=0, must-revalidate', 'Pragma', 'no-cache', 'Expires', '0', 'X-Frame-Options', 'SAMEORIGIN', 'Content-Type', 'application/json', 'Transfer-Encoding', 'chunked', 'Date', 'Tue, 01 Nov 2016 19:43:36 GMT', 'Connection', 'close']);
         }
     }]);
 

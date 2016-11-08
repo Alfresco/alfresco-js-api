@@ -68,6 +68,79 @@ class ProcessMock extends BaseMock {
             });
     }
 
+    get200getProcessDefinitionStartForm() {
+        nock(this.host, {'encodedQueryParams': true})
+            .get('/activiti-app/api/enterprise/process-definitions/testProcess%3A1%3A7504/start-form')
+            .reply(200, {
+                'id': 2002,
+                'processDefinitionId': 'testProcess:1:7504',
+                'processDefinitionName': 'test process',
+                'processDefinitionKey': 'testProcess',
+                'tabs': [],
+                'fields': [{
+                    'fieldType': 'DynamicTableRepresentation',
+                    'id': 'label',
+                    'name': 'Label',
+                    'type': 'dynamic-table',
+                    'value': null,
+                    'required': false,
+                    'readOnly': false,
+                    'overrideId': false,
+                    'colspan': 1,
+                    'placeholder': null,
+                    'minLength': 0,
+                    'maxLength': 0,
+                    'minValue': null,
+                    'maxValue': null,
+                    'regexPattern': null,
+                    'optionType': null,
+                    'hasEmptyValue': null,
+                    'options': null,
+                    'restUrl': null,
+                    'restResponsePath': null,
+                    'restIdProperty': null,
+                    'restLabelProperty': null,
+                    'tab': null,
+                    'className': null,
+                    'params': {'existingColspan': 1, 'maxColspan': 1},
+                    'layout': {'row': -1, 'column': -1, 'colspan': 2},
+                    'sizeX': 2,
+                    'sizeY': 2,
+                    'row': -1,
+                    'col': -1,
+                    'visibilityCondition': null,
+                    'columnDefinitions': [{
+                        'id': 'user',
+                        'name': 'User',
+                        'type': 'Dropdown',
+                        'value': null,
+                        'optionType': 'rest',
+                        'options': [{'id': null, 'name': 'Option 1'}],
+                        'restResponsePath': null,
+                        'restUrl': 'https://jsonplaceholder.typicode.com/users',
+                        'restIdProperty': 'id',
+                        'restLabelProperty': 'name',
+                        'amountCurrency': null,
+                        'amountEnableFractions': false,
+                        'required': true,
+                        'editable': true,
+                        'sortable': true,
+                        'visible': true,
+                        'endpoint': null,
+                        'requestHeaders': null
+                    }]
+                }],
+                'outcomes': [],
+                'javascriptEvents': [],
+                'className': '',
+                'style': '',
+                'customFieldTemplates': {},
+                'metadata': {},
+                'variables': [],
+                'gridsterForm': false
+            });
+    }
+
 }
 
 module.exports = ProcessMock;
