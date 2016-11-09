@@ -27,6 +27,7 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
 
 <!-- toc -->
 
+- [Prerequisites](#prerequisites)
 - [Node](#node)
 - [Api Modules complete methods list](#api-modules-complete-methods-list)
 - [Install](#install)
@@ -75,6 +76,13 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
 <!-- tocstop -->
 
 <!-- markdown-toc end -->
+
+# Prerequisites 
+
+To correctly use the alafresco js api the minimal supported version are:
+
+- 5.2.a-EA Alfresco Platform Repository (version [5.2.a-EA](https://wiki.alfresco.com/wiki/Community_file_list_201606-EA) or newer)
+- 1.5 Activiti
 
 # Node
 To correctly use this component check that on your machine is running Node version 5.0.0 or higher.
