@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new SearchApi. 
+   * Constructs a new SearchApi.
    * @alias module:api/SearchApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -34,8 +34,8 @@
 
 
     /**
-     * Live search for nodes
-     * Returns a list of nodes that match the given search criteria.\n\nThe search term is used to look for nodes that match against name, title, description, full text content and tags.\n\nThe search term\n- must contain a minimum of 3 alphanumeric characters\n- allows \&quot;quoted term\&quot;\n- can optionally use &#39;*&#39; for wildcard matching\n\nBy default, file and folder types will be searched unless a specific type is provided as a query parameter.\n\nBy default, the search will be across the repository unless a specific root node id is provided to start the search from.\n
+     * Find nodes
+     * Gets a list of nodes that match the given search criteria.\n\nThe search term is used to look for nodes that match against name, title, description, full text content or tags.\n\nThe search term\n- must contain a minimum of 3 alphanumeric characters\n- allows \&quot;quoted term\&quot;\n- can optionally use &#39;*&#39; for wildcard matching\n\nBy default, file and folder types will be searched unless a specific type is provided as a query parameter.\n\nBy default, the search will be across the repository unless a specific root node id is provided to start the search from.\n\nYou can sort the result list using the orderBy parameter. You can specify one or more of the following fields in the orderBy parameter:\n-name\n-modifiedAt\n-createdAt\n
      * @param {String} term The term to search for.
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -47,13 +47,13 @@
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodePaging}
      */
-    this.liveSearchNodes = function(term, opts) {
+    this.findNodes = function(term, opts) {
       opts = opts || {};
       var postBody = null;
 
       // verify the required parameter 'term' is set
       if (term == undefined || term == null) {
-        throw "Missing the required parameter 'term' when calling liveSearchNodes";
+        throw "Missing the required parameter 'term' when calling findNodes";
       }
 
 
@@ -80,7 +80,7 @@
       var returnType = NodePaging;
 
       return this.apiClient.callApi(
-        '/queries/live-search-nodes', 'GET',
+        '/queries/nodes', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );
