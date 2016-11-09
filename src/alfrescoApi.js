@@ -3,7 +3,6 @@
 var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
 var AlfrescoAuthRestApi = require('./alfresco-auth-rest-api/src/index');
 var AlfrescoActivitiApi = require('./alfresco-activiti-rest-api/src/index');
-var AlfrescoMock = require('../test/mockObjects/mockAlfrescoApi.js');
 var AlfrescoContent = require('./alfrescoContent');
 var AlfrescoNode = require('./alfrescoNode');
 var AlfrescoUpload = require('./alfrescoUpload');
@@ -309,4 +308,3 @@ module.exports = AlfrescoApi;
 module.exports.Activiti = AlfrescoActivitiApi;
 module.exports.Core = AlfrescoCoreRestApi;
 module.exports.Auth = AlfrescoAuthRestApi;
-module.exports.Mock = AlfrescoMock;

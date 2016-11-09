@@ -1,7 +1,7 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/AddGroupCapabilitiesRepresentation', 'model/GroupRepresentation', 'model/ResultListDataRepresentation', 'model/AbstractGroupRepresentation', 'model/LightGroupRepresentation'], factory);
+    define(['../../../alfrescoApiClient', '../model/AddGroupCapabilitiesRepresentation', '../model/GroupRepresentation', '../model/ResultListDataRepresentation', '../model/AbstractGroupRepresentation', '../model/LightGroupRepresentation'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../../../alfrescoApiClient'), require('../model/AddGroupCapabilitiesRepresentation'), require('../model/GroupRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/AbstractGroupRepresentation'), require('../model/LightGroupRepresentation'));
