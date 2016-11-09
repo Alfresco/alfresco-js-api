@@ -137,7 +137,7 @@
         typeof require === 'function' &&
         require('fs') &&
         param instanceof require('fs').ReadStream) {
-      return true;
+      return true;r
     }
     // Buffer in Node.js
     if (typeof Buffer === 'function' && param instanceof Buffer) {
