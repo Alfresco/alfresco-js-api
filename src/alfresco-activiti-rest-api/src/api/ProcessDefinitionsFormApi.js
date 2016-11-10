@@ -1,7 +1,7 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/FormDefinitionRepresentation', 'model/FormValueRepresentation'], factory);
+    define(['../../../alfrescoApiClient', '../model/FormDefinitionRepresentation', '../model/FormValueRepresentation'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../../../alfrescoApiClient'), require('../model/FormDefinitionRepresentation'), require('../model/FormValueRepresentation'));
