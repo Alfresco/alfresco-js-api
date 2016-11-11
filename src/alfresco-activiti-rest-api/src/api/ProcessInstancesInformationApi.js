@@ -1,7 +1,7 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/ResultListDataRepresentation', 'model/CreateProcessInstanceRepresentation', 'model/ProcessInstanceRepresentation'], factory);
+    define(['../../../alfrescoApiClient', '../model/ResultListDataRepresentation', '../model/CreateProcessInstanceRepresentation', '../model/ProcessInstanceRepresentation'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ResultListDataRepresentation'), require('../model/CreateProcessInstanceRepresentation'), require('../model/ProcessInstanceRepresentation'));

@@ -71,6 +71,7 @@ Class | Method | HTTP request | Description
 *AlfrescoCoreRestApi.PeopleApi* | [**removeFavoriteSite**](docs/PeopleApi.md#removeFavoriteSite) | **DELETE** /people/{personId}/favorites/{favoriteId} | Delete a favorite
 *AlfrescoCoreRestApi.PeopleApi* | [**removeSiteMembershipRequest**](docs/PeopleApi.md#removeSiteMembershipRequest) | **DELETE** /people/{personId}/site-membership-requests/{siteId} | Cancel a site membership
 *AlfrescoCoreRestApi.PeopleApi* | [**updateSiteMembershipRequest**](docs/PeopleApi.md#updateSiteMembershipRequest) | **PUT** /people/{personId}/site-membership-requests/{siteId} | Update a site membership request
+*AlfrescoCoreRestApi.QueriesApi* | [**findNodes**](docs/QueriesApi.md#findNodes) | **GET** /queries/nodes | Find nodes
 *AlfrescoCoreRestApi.RatingsApi* | [**getRating**](docs/RatingsApi.md#getRating) | **GET** /nodes/{nodeId}/ratings/{ratingId} | Get a rating
 *AlfrescoCoreRestApi.RatingsApi* | [**getRatings**](docs/RatingsApi.md#getRatings) | **GET** /nodes/{nodeId}/ratings | Get ratings
 *AlfrescoCoreRestApi.RatingsApi* | [**rate**](docs/RatingsApi.md#rate) | **POST** /nodes/{nodeId}/ratings | Rate
@@ -81,7 +82,6 @@ Class | Method | HTTP request | Description
 *AlfrescoCoreRestApi.RenditionsApi* | [**getRenditions**](docs/RenditionsApi.md#getRenditions) | **GET** /nodes/{nodeId}/renditions | List information for renditions
 *AlfrescoCoreRestApi.RenditionsApi* | [**getSharedLinkRenditionContent**](docs/RenditionsApi.md#getSharedLinkRenditionContent) | **GET** /shared-links/{sharedId}/renditions/{renditionId}/content | Get shared link rendition content
 *AlfrescoCoreRestApi.RenditionsApi* | [**getSharedLinkRenditions**](docs/RenditionsApi.md#getSharedLinkRenditions) | **GET** /shared-links/{sharedId}/renditions | List information for created renditions
-*AlfrescoCoreRestApi.SearchApi* | [**liveSearchNodes**](docs/SearchApi.md#liveSearchNodes) | **GET** /queries/live-search-nodes | Live search for nodes
 *AlfrescoCoreRestApi.SharedlinksApi* | [**addSharedLink**](docs/SharedlinksApi.md#addSharedLink) | **POST** /shared-links | Create a shared link to a file
 *AlfrescoCoreRestApi.SharedlinksApi* | [**deleteSharedLink**](docs/SharedlinksApi.md#deleteSharedLink) | **DELETE** /shared-links/{sharedId} | Deletes a shared link
 *AlfrescoCoreRestApi.SharedlinksApi* | [**emailSharedLink**](docs/SharedlinksApi.md#emailSharedLink) | **POST** /shared-links/{sharedId}/email | Email shared link

@@ -1,7 +1,7 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/ProcessInstanceFilterRequestRepresentation', 'model/ResultListDataRepresentation', 'model/FormDefinitionRepresentation', 'model/ProcessInstanceRepresentation', 'model/ProcessFilterRequestRepresentation', 'model/FormValueRepresentation', 'model/CreateProcessInstanceRepresentation'], factory);
+    define(['../../../alfrescoApiClient', '../model/ProcessInstanceFilterRequestRepresentation', '../model/ResultListDataRepresentation', '../model/FormDefinitionRepresentation', '../model/ProcessInstanceRepresentation', '../model/ProcessFilterRequestRepresentation', '../model/FormValueRepresentation', '../model/CreateProcessInstanceRepresentation'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ProcessInstanceFilterRequestRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/FormDefinitionRepresentation'), require('../model/ProcessInstanceRepresentation'), require('../model/ProcessFilterRequestRepresentation'), require('../model/FormValueRepresentation'), require('../model/CreateProcessInstanceRepresentation'));
@@ -377,12 +377,16 @@
 
     /**
      * Retrieve field values (eg. the typeahead field)
+     *  @param {String} processDefinitionId
+     *  @param {String} field
      */
-    this.getRestFieldValues = function() {
+    this.getRestFieldValues = function(processDefinitionId, field) {
       var postBody = null;
 
 
       var pathParams = {
+          'processDefinitionId': processDefinitionId,
+          'field': field
       };
       var queryParams = {
       };
@@ -412,12 +416,18 @@
 
     /**
      * Retrieve field values (eg. the table field)
+     *  @param {String} processDefinitionId
+     *  @param {String} field
+     *  @param {String} column
      */
-    this.getRestTableFieldValues = function() {
+    this.getRestTableFieldValues = function(processDefinitionId, field, column) {
       var postBody = null;
 
 
       var pathParams = {
+          'processDefinitionId': processDefinitionId,
+          'field': field,
+          'column' :column
       };
       var queryParams = {
       };
