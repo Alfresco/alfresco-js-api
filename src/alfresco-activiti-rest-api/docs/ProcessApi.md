@@ -296,12 +296,17 @@ Retrieve field values (eg. the typeahead field)
 
 ### Example
 ```javascript
+var processDefinitionId = "processDefinitionId"; // String | processDefinitionId
+var field = "field"; // String | field
 
-this.alfrescoJsApi.activiti.processApi.getRestFieldValues();
+this.alfrescoJsApi.activiti.processApi.getRestFieldValues(processDefinitionId, field);
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **processDefinitionId** | **String**| processDefinitionId | 
+ **field** | **String**| field | 
 
 ### Return type
 
@@ -324,12 +329,19 @@ Retrieve field values (eg. the table field)
 
 ### Example
 ```javascript
+var processDefinitionId = "processDefinitionId"; // String | processDefinitionId
+var field = "field"; // String | field
+var column = "column"; // String | column
 
-this.alfrescoJsApi.activiti.processApi.getRestTableFieldValues();
+this.alfrescoJsApi.activiti.processApi.getRestTableFieldValues(processDefinitionId, field, column);
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **processDefinitionId** | **String**| processDefinitionId | 
+ **field** | **String**| field | 
+ **column** | **String**| column | 
 
 ### Return type
 

@@ -377,12 +377,16 @@
 
     /**
      * Retrieve field values (eg. the typeahead field)
+     *  @param {String} processDefinitionId
+     *  @param {String} field
      */
-    this.getRestFieldValues = function() {
+    this.getRestFieldValues = function(processDefinitionId, field) {
       var postBody = null;
 
 
       var pathParams = {
+          'processDefinitionId': processDefinitionId,
+          'field': field
       };
       var queryParams = {
       };
@@ -412,12 +416,18 @@
 
     /**
      * Retrieve field values (eg. the table field)
+     *  @param {String} processDefinitionId
+     *  @param {String} field
+     *  @param {String} column
      */
-    this.getRestTableFieldValues = function() {
+    this.getRestTableFieldValues = function(processDefinitionId, field, column) {
       var postBody = null;
 
 
       var pathParams = {
+          'processDefinitionId': processDefinitionId,
+          'field': field,
+          'column' :column
       };
       var queryParams = {
       };
