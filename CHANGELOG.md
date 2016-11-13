@@ -6,6 +6,14 @@ Alfresco JS API
 
 _This project provides a JavaScript client API into the v1 Alfresco REST API_
 
+<a name="0.4.1"></a>
+# [0.4.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.4.1) (xx-xx-2016)
+
+## Fix
+- [add webscript post parameters and fix getFileContent #937](https://github.com/Alfresco/alfresco-js-api/issues/937)
+
+
+
 <a name="0.4.0"></a>
 # [0.4.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.4.0) (11-11-2016)
 

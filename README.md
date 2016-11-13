@@ -298,6 +298,28 @@ this.alfrescoJsApi.logout().on('logout', function(){
 A complete list of all the ECM methods is available here : [Core API](/src/alfresco-core-rest-api). 
 Below you can find some common examples.
 
+## Get Node  content 
+
+getFileContent(nodeId, opts)
+                      
+>Returns the file content of the node with identifier **nodeId**.
+                    
+ ###Example
+```javascript
+
+var nodeId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
+
+this.alfrescoJsApi.core.nodesApi.getFileContent(nodeId).then(function(data) {
+    fs.writeFile('./test/grass.jpg', data, function(err) {
+        if (err) {
+            console.log(err);
+        }
+        console.log('The file was saved!');
+    });
+}, function(error) {
+    console.error(error);
+});
+```
 
 ## Get File or Folder Info
 
@@ -619,6 +641,7 @@ Name | Description
 **scriptArgs**  |arguments to pass to Web Script
 **contextRoot** |path where application is deployed default value 'alfresco'
 **servicePath** |path where Web Script service is mapped default value 'service'
+**postBody** | post body
 
 ```javascript
 

@@ -213,7 +213,7 @@ Name | Type | Description  | Notes
 
 <a name="deleteNode"></a>
 # **deleteNode**
-> deleteNode(nodeId, , opts)
+> deleteNode(nodeId, opts)
 
 Delete a node
 
@@ -233,7 +233,7 @@ var opts = {
 You must be the owner or an admin to permanently delete the node.
 
 };
-this.alfrescoJsApi.core.nodesApi.deleteNode(nodeId, , opts).then(function() {
+this.alfrescoJsApi.core.nodesApi.deleteNode(nodeId, opts).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -263,7 +263,7 @@ null (empty response body)
 
 <a name="getDeletedNode"></a>
 # **getDeletedNode**
-> DeletedNodeEntry getDeletedNode(nodeId, , opts)
+> DeletedNodeEntry getDeletedNode(nodeId, opts)
 
 Get a deleted node
 
@@ -277,7 +277,7 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node.
 var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested: path , isLink, allowableOperations
 };
-this.alfrescoJsApi.core.nodesApi.getDeletedNode(nodeId, , opts).then(function(data) {
+this.alfrescoJsApi.core.nodesApi.getDeletedNode(nodeId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -362,7 +362,7 @@ Name | Type | Description  | Notes
 
 <a name="getFileContent"></a>
 # **getFileContent**
-> getFileContent(nodeId, , opts)
+> getFileContent(nodeId, opts)
 
 Get file content
 
@@ -384,8 +384,13 @@ var opts = {
                         Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.*/
 
 };
-this.alfrescoJsApi.core.nodesApi.getFileContent(nodeId, , opts).then(function() {
-  console.log('API called successfully.');
+this.alfrescoJsApi.core.nodesApi.getFileContent(nodeId, opts).then(function(data) {
+  fs.writeFile('./test/namefile.extension', data, function(err) {
+         if (err) {
+             console.log(err);
+         }
+         console.log('The file was saved!');
+     });
 }, function(error) {
   console.error(error);
 });
@@ -415,7 +420,7 @@ null (empty response body)
 
 <a name="getNode"></a>
 # **getNode**
-> NodeEntry getNode(nodeId, , opts)
+> NodeEntry getNode(nodeId, opts)
 
 Get a node
 
@@ -440,7 +445,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter.*/
 
 };
-this.alfrescoJsApi.core.nodesApi.getNode(nodeId, , opts).then(function(data) {
+this.alfrescoJsApi.core.nodesApi.getNode(nodeId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -472,7 +477,7 @@ Name | Type | Description  | Notes
 
 <a name="getNodeChildren"></a>
 # **getNodeChildren**
-> NodePaging getNodeChildren(nodeId, , opts)
+> NodePaging getNodeChildren(nodeId, opts)
 
 Get node children
 
@@ -533,7 +538,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-this.alfrescoJsApi.core.nodesApi.getNodeChildren(nodeId, , opts).then(function(data) {
+this.alfrescoJsApi.core.nodesApi.getNodeChildren(nodeId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

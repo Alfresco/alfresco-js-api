@@ -4,6 +4,7 @@ var AlfrescoApi = require('../main');
 var expect = require('chai').expect;
 var AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
 var NodeMock = require('../test/mockObjects/mockAlfrescoApi').Node;
+var fs = require('fs');
 
 describe('Node', function () {
     beforeEach(function (done) {
@@ -102,7 +103,7 @@ describe('Node', function () {
             });
         });
 
-        it('dynamic augmenting object parameters', function(done) {
+        it('dynamic augmenting object parameters', function (done) {
             this.nodeMock.get200ResponseChildrenFutureNewPossibleValue();
 
             this.alfrescoJsApi.nodes.getNodeChildren('b4cff62a-664d-4d45-9302-98723eac1319').then(function (data) {
@@ -169,6 +170,28 @@ describe('Node', function () {
             }, function () {
                 done();
             });
+        });
+    });
+
+    describe('Content', function () {
+        it.skip('getFileContent', function (done) {
+
+            var nodeId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
+
+            this.alfrescoJsApi.core.nodesApi.getFileContent(nodeId).then(function (data) {
+                fs.writeFile('./test/grass.jpg', data, function (err) {
+                    if (err) {
+                        console.log(err);
+                        done();
+                    }
+                    done();
+                    console.log('The file was saved!');
+                });
+
+            }, function (error) {
+                console.error(error);
+            });
+
         });
     });
 });
