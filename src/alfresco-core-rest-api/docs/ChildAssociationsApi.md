@@ -197,7 +197,7 @@ null (empty response body)
 
 <a name="deleteNode"></a>
 # **deleteNode**
-> deleteNode(nodeId, , opts)
+> deleteNode(nodeId, opts)
 
 Delete a node
 
@@ -215,7 +215,7 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node.
 var opts = {
   'permanent': false // {Boolean} If **true** then the node is deleted permanently, without it moving to the trashcan.You must be the owner or an admin to permanently delete the node.
 };
-this.alfrescoJsApi.core.childAssociationsApi.deleteNode(nodeId, , opts).then(function() {
+this.alfrescoJsApi.core.childAssociationsApi.deleteNode(nodeId, opts).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -245,7 +245,7 @@ null (empty response body)
 
 <a name="getNodeChildren"></a>
 # **getNodeChildren**
-> NodePaging getNodeChildren(nodeId, , opts)
+> NodePaging getNodeChildren(nodeId, opts)
 
 Get node children
 
@@ -307,7 +307,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter.*/
 
 };
-this.alfrescoJsApi.core.childAssociationsApi.getNodeChildren(nodeId, , opts).then(function(data) {
+this.alfrescoJsApi.core.childAssociationsApi.getNodeChildren(nodeId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

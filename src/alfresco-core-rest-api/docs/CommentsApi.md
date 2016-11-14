@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
 
 <a name="getComments"></a>
 # **getComments**
-> CommentPaging getComments(nodeId, , opts)
+> CommentPaging getComments(nodeId, opts)
 
 Get comments
 
@@ -92,7 +92,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-this.alfrescoJsApi.core.childAssociationsApi.getComments(nodeId, , opts).then(function(data) {
+this.alfrescoJsApi.core.childAssociationsApi.getComments(nodeId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

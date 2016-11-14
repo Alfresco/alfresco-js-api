@@ -236,7 +236,7 @@ Name | Type | Description  | Notes
 
 <a name="getSharedLink"></a>
 # **getSharedLink**
-> NodeSharedLinkEntry getSharedLink(sharedId, , opts)
+> NodeSharedLinkEntry getSharedLink(sharedId, opts)
 
 Get a shared link
 
@@ -263,7 +263,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-this.alfrescoJsApi.core.sharedlinksApi.getSharedLink(sharedId, , opts).then(function(data) {
+this.alfrescoJsApi.core.sharedlinksApi.getSharedLink(sharedId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -294,7 +294,7 @@ Name | Type | Description  | Notes
 
 <a name="getSharedLinkContent"></a>
 # **getSharedLinkContent**
-> getSharedLinkContent(sharedId, , opts)
+> getSharedLinkContent(sharedId, opts)
 
 Get file content
 
@@ -320,7 +320,7 @@ var opts = {
 
   'ifModifiedSince': new Date("2013-10-20T19:20:30+01:00") // {Date} Only returns the content if it has been modified since the date provided. Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.
 };
-this.alfrescoJsApi.core.sharedlinksApi.getSharedLinkContent(sharedId, , opts).then(function() {
+this.alfrescoJsApi.core.sharedlinksApi.getSharedLinkContent(sharedId, opts).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);

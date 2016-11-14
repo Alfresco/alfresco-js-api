@@ -68,7 +68,7 @@ Name | Type | Description  | Notes
 
 <a name="getRatings"></a>
 # **getRatings**
-> RatingPaging getRatings(nodeId, , opts)
+> RatingPaging getRatings(nodeId, opts)
 
 Get ratings
 
@@ -93,7 +93,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-this.alfrescoJsApi.core.ratingsApi.getRatings(nodeId, , opts).then(function(data) {
+this.alfrescoJsApi.core.ratingsApi.getRatings(nodeId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

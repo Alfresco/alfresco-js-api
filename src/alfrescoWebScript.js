@@ -17,13 +17,15 @@ class AlfrescoWebScriptApi  {
      * @param {Object} scriptArgs
      * @param {String} contextRoot default value alfresco
      * @param {String} servicePath default value service
+     * @param {String} postBody
      *
      * @returns {Promise} A promise that is resolved return the webScript data and {error} if rejected.
      */
 
-    executeWebScript(httpMethod, scriptPath, scriptArgs, contextRoot, servicePath) {
+    executeWebScript(httpMethod, scriptPath, scriptArgs, contextRoot, servicePath, postBody) {
         contextRoot = contextRoot || 'alfresco';
         servicePath = servicePath || 'service';
+        postBody = postBody || null;
 
         if (!httpMethod  || this.allowedMethod.indexOf(httpMethod) === -1) {
             throw 'method allowed value  GET, POST, PUT and DELETE';
@@ -32,8 +34,6 @@ class AlfrescoWebScriptApi  {
         if (!scriptPath) {
             throw 'Missing the required parameter scriptPath when calling executeWebScript';
         }
-
-        var postBody = null;
 
         var pathParams = {};
         var headerParams = {};
