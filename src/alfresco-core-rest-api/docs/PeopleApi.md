@@ -366,7 +366,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 <a name="getFavoriteSite"></a>
 # **getFavoriteSite**
-> SiteEntry getFavoriteSite(personIdsiteId, , opts)
+> SiteEntry getFavoriteSite(personIdsiteId, opts)
 
 Get a favorite site
 
@@ -395,7 +395,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-this.alfrescoJsApi.core.peopleApi.getFavoriteSite(personIdsiteId, , opts).then(function(data) {
+this.alfrescoJsApi.core.peopleApi.getFavoriteSite(personIdsiteId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -952,7 +952,7 @@ Name | Type | Description  | Notes
 
 <a name="getSiteMembershipRequest"></a>
 # **getSiteMembershipRequest**
-> SiteMembershipRequestEntry getSiteMembershipRequest(personIdsiteId, , opts)
+> SiteMembershipRequestEntry getSiteMembershipRequest(personIdsiteId, opts)
 
 Get a site membership request
 
@@ -977,7 +977,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-this.alfrescoJsApi.core.peopleApi.getSiteMembershipRequest(personIdsiteId, , opts).then(function(data) {
+this.alfrescoJsApi.core.peopleApi.getSiteMembershipRequest(personIdsiteId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

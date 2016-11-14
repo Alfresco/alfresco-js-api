@@ -184,8 +184,8 @@ describe('Node', function () {
                         console.log(err);
                         done();
                     }
-                    done();
                     console.log('The file was saved!');
+                    done();
                 });
 
             }, function (error) {

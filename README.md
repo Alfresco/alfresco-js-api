@@ -310,9 +310,10 @@ getFileContent(nodeId, opts)
 var nodeId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
 
 this.alfrescoJsApi.core.nodesApi.getFileContent(nodeId).then(function(data) {
-    fs.writeFile('./test/grass.jpg', data, function(err) {
-        if (err) {
-            console.log(err);
+    fs.writeFile('./test/grass.jpg', data, function(error) {
+        if (error) {
+            console.error(error);
+            return; 
         }
         console.log('The file was saved!');
     });

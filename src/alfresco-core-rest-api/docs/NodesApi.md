@@ -385,9 +385,10 @@ var opts = {
 
 };
 this.alfrescoJsApi.core.nodesApi.getFileContent(nodeId, opts).then(function(data) {
-  fs.writeFile('./test/namefile.extension', data, function(err) {
-         if (err) {
-             console.log(err);
+  fs.writeFile('./test/namefile.extension', data, function(error) {
+         if (error) {
+             console.error(error);
+             return; 
          }
          console.log('The file was saved!');
      });

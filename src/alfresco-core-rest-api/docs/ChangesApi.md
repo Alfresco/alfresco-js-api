@@ -557,7 +557,7 @@ Name | Type | Description  | Notes
 
 <a name="deleteNode"></a>
 # **deleteNode**
-> deleteNode(nodeId, , opts)
+> deleteNode(nodeId, opts)
 
 Delete a node
 
@@ -585,7 +585,7 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node.
 var opts = {
   'permanent': false // {Boolean} If **true** then the node is deleted permanently, without it moving to the trashcan. You must be the owner or an admin to permanently delete the node.
 };
-apiInstance.deleteNode(nodeId, , opts).then(function() {
+apiInstance.deleteNode(nodeId, opts).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -664,7 +664,7 @@ null (empty response body)
 
 <a name="deleteSite"></a>
 # **deleteSite**
-> deleteSite(siteId, , opts)
+> deleteSite(siteId, opts)
 
 Delete a site
 
@@ -687,7 +687,7 @@ var siteId = "siteId_example"; // {String} The identifier of a site.
 var opts = {
   'permanent': false // {Boolean} Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan.
 };
-apiInstance.deleteSite(siteId, , opts).then(function() {
+apiInstance.deleteSite(siteId, opts).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -854,7 +854,7 @@ Name | Type | Description  | Notes
 
 <a name="getDeletedNode"></a>
 # **getDeletedNode**
-> DeletedNodeEntry getDeletedNode(nodeId, , opts)
+> DeletedNodeEntry getDeletedNode(nodeId, opts)
 
 Get a deleted node
 
@@ -878,7 +878,7 @@ var nodeId = "nodeId_example"; // {String} The identifier of a node.
 var opts = {
   'include': ["include_example"], // {[String]} Returns additional information about the node. The following optional fields can be requested:  path , isLink , allowableOperations
 };
-apiInstance.getDeletedNode(nodeId, , opts).then(function(data) {
+apiInstance.getDeletedNode(nodeId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -966,7 +966,7 @@ Name | Type | Description  | Notes
 
 <a name="getFileContent"></a>
 # **getFileContent**
-> getFileContent(nodeId, , opts)
+> getFileContent(nodeId, opts)
 
 Get file content
 
@@ -996,7 +996,7 @@ var opts = {
                         Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.*/
 
 };
-apiInstance.getFileContent(nodeId, , opts).then(function() {
+apiInstance.getFileContent(nodeId, opts).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -1027,7 +1027,7 @@ null (empty response body)
 
 <a name="getNode"></a>
 # **getNode**
-> NodeEntry getNode(nodeId, , opts)
+> NodeEntry getNode(nodeId, opts)
 
 Get a node
 
@@ -1060,7 +1060,7 @@ var opts = {
                                 parameter, then the fields specified in the **include**
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 };
-apiInstance.getNode(nodeId, , opts).then(function(data) {
+apiInstance.getNode(nodeId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -1092,7 +1092,7 @@ Name | Type | Description  | Notes
 
 <a name="getNodeChildren"></a>
 # **getNodeChildren**
-> NodePaging getNodeChildren(nodeId, , opts)
+> NodePaging getNodeChildren(nodeId, opts)
 
 Get node children
 
@@ -1162,7 +1162,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-apiInstance.getNodeChildren(nodeId, , opts).then(function(data) {
+apiInstance.getNodeChildren(nodeId, opts).then(function(data) {
  console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
  console.error(error);
@@ -1368,7 +1368,7 @@ Name | Type | Description  | Notes
 
 <a name="getSharedLink"></a>
 # **getSharedLink**
-> NodeSharedLinkEntry getSharedLink(sharedId, , opts)
+> NodeSharedLinkEntry getSharedLink(sharedId, opts)
 
 Get a shared link
 
@@ -1405,7 +1405,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-apiInstance.getSharedLink(sharedId, , opts).then(function(data) {
+apiInstance.getSharedLink(sharedId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -1436,7 +1436,7 @@ Name | Type | Description  | Notes
 
 <a name="getSharedLinkContent"></a>
 # **getSharedLinkContent**
-> getSharedLinkContent(sharedId, , opts)
+> getSharedLinkContent(sharedId, opts)
 
 Get file content
 
@@ -1474,7 +1474,7 @@ var opts = {
                         Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.*/
 
 };
-apiInstance.getSharedLinkContent(sharedId, , opts).then(function() {
+apiInstance.getSharedLinkContent(sharedId, opts).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
