@@ -472,6 +472,7 @@ declare namespace AlfrescoApi {
         searchApi: any;
         sharedlinksApi: any;
         sitesApi: any;
+        queriesApi: any;
         tagsApi: any;
 
         /*Models*/
