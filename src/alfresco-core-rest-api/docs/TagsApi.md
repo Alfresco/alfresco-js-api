@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 
 <a name="getNodeTags"></a>
 # **getNodeTags**
-> TagPaging getNodeTags(nodeId, , opts)
+> TagPaging getNodeTags(nodeId, opts)
 
 Get tags
 
@@ -94,7 +94,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-this.alfrescoJsApi.core.tagsApi.getNodeTags(nodeId, , opts).then(function(data) {
+this.alfrescoJsApi.core.tagsApi.getNodeTags(nodeId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -126,7 +126,7 @@ Name | Type | Description  | Notes
 
 <a name="getTag"></a>
 # **getTag**
-> TagEntry getTag(tagId, , opts)
+> TagEntry getTag(tagId, opts)
 
 Get a tag
 
@@ -149,7 +149,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-this.alfrescoJsApi.core.tagsApi.getTag(tagId, , opts).then(function(data) {
+this.alfrescoJsApi.core.tagsApi.getTag(tagId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

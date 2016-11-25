@@ -290,7 +290,7 @@
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
-      var returnType = null;
+      var returnType = 'Binary';
 
       return this.apiClient.callApi(
         '/nodes/{nodeId}/content', 'GET',

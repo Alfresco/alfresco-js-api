@@ -135,7 +135,7 @@ Name | Type | Description  | Notes
 
 <a name="deleteSite"></a>
 # **deleteSite**
-> deleteSite(siteId, , opts)
+> deleteSite(siteId, opts)
 
 Delete a site
 
@@ -151,7 +151,7 @@ var siteId = "siteId_example"; // {String} The identifier of a site.
 var opts = {
   'permanent': false // {Boolean} Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan.
 };
-this.alfrescoJsApi.core.sitesApi.deleteSite(siteId, , opts).then(function() {
+this.alfrescoJsApi.core.sitesApi.deleteSite(siteId, opts).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -181,7 +181,7 @@ null (empty response body)
 
 <a name="getSite"></a>
 # **getSite**
-> SiteEntry getSite(siteId, , opts)
+> SiteEntry getSite(siteId, opts)
 
 Get a site
 
@@ -221,7 +221,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-this.alfrescoJsApi.core.sitesApi.getSite(siteId, , opts).then(function(data) {
+this.alfrescoJsApi.core.sitesApi.getSite(siteId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -322,7 +322,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 <a name="getSiteContainers"></a>
 # **getSiteContainers**
-> SiteContainerPaging getSiteContainers(siteId, , opts)
+> SiteContainerPaging getSiteContainers(siteId, opts)
 
 Get containers
 
@@ -350,7 +350,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-this.alfrescoJsApi.core.sitesApi.getSiteContainers(siteId, , opts).then(function(data) {
+this.alfrescoJsApi.core.sitesApi.getSiteContainers(siteId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -441,7 +441,7 @@ Name | Type | Description  | Notes
 
 <a name="getSiteMembers"></a>
 # **getSiteMembers**
-> SiteMemberPaging getSiteMembers(siteId, , opts)
+> SiteMemberPaging getSiteMembers(siteId, opts)
 
 Get members
 
@@ -469,7 +469,7 @@ var opts = {
                                 parameter are returned in addition to those specified in the **fields** parameter. */
 
 };
-this.alfrescoJsApi.core.sitesApi.getSiteMembers(siteId, , opts).then(function(data) {
+this.alfrescoJsApi.core.sitesApi.getSiteMembers(siteId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

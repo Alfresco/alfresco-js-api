@@ -414,6 +414,8 @@
    */
   exports.convertToType = function(data, type) {
     switch (type) {
+      case 'Binary':
+        return data;
       case 'Boolean':
         return Boolean(data);
       case 'Integer':
