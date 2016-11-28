@@ -10,6 +10,8 @@ var AlfrescoWebScriptApi = require('./alfrescoWebScript');
 var Emitter = require('event-emitter');
 var EcmAuth = require('./ecmAuth');
 var BpmAuth = require('./bpmAuth');
+var EcmClient = require('./ecmClient');
+var BpmClient = require('./bpmClient');
 var _ = require('lodash');
 
 class AlfrescoApi {
@@ -20,7 +22,7 @@ class AlfrescoApi {
      *        hostEcm:       // hostEcm Your share server IP or DNS name
      *        hostBpm: // hostBpm Your activiti server IP or DNS name
      *        contextRoot: // contextRoot default value alfresco
-     *        provider:   // ECM BPM ALL, default ECM
+     *        provider:   // ECM BPM ALL OAUTH, default ECM
      *        ticketEcm:     // Ticket if you already have a ECM ticket you can pass only the ticket and skip the login, in this case you don't need username and password
      *        ticketBpm:     // Ticket if you already have a BPM ticket you can pass only the ticket and skip the login, in this case you don't need username and password
      *        disableCsrf:   // To disable CSRF Token to be submitted. Only for Activiti call, by default is false.
@@ -39,11 +41,16 @@ class AlfrescoApi {
             provider: config.provider || 'ECM',
             ticketEcm: config.ticketEcm,
             ticketBpm: config.ticketBpm,
+            accessToken: config.accessToken,
             disableCsrf: config.disableCsrf || false
         };
 
         this.bpmAuth = new BpmAuth(this.config);
         this.ecmAuth = new EcmAuth(this.config);
+
+        this.ecmClient = new EcmClient(this.config.hostEcm, this.config.contextRoot);
+        this.bpmClient = new BpmClient(this.config.hostBpm);
+        this.setAuthenticationClientECMBPM(this.ecmAuth.getAuthentication(), this.bpmAuth.getAuthentication());
 
         this.initObjects();
 
@@ -58,28 +65,30 @@ class AlfrescoApi {
     changeEcmHost(hostEcm) {
         this.config.hostEcm = hostEcm;
         this.ecmAuth.changeHost(hostEcm);
+        this.ecmClient.changeHost(hostEcm);
     }
 
     changeBpmHost(hostBpm) {
         this.config.hostBpm = hostBpm;
         this.bpmAuth.changeHost(hostBpm);
+        this.bpmClient.changeHost(hostBpm);
     }
 
     initObjects() {
         //BPM
-        AlfrescoActivitiApi.ApiClient.instance = this.bpmAuth.getClient();
+        AlfrescoActivitiApi.ApiClient.instance = this.bpmClient;
         this.activiti = {};
         this.activitiStore = AlfrescoActivitiApi;
         this._instantiateObjects(this.activitiStore, this.activiti);
 
         //ECM
-        AlfrescoCoreRestApi.ApiClient.instance = this.ecmAuth.getClient();
+        AlfrescoCoreRestApi.ApiClient.instance = this.ecmClient;
         this.core = {};
         this.coreStore = AlfrescoCoreRestApi;
         this._instantiateObjects(this.coreStore, this.core);
 
         this.nodes = this.node = new AlfrescoNode();
-        this.content = new AlfrescoContent(this.ecmAuth);
+        this.content = new AlfrescoContent(this.ecmAuth, this.ecmClient);
         this.upload = new AlfrescoUpload();
         this.webScript = new AlfrescoWebScriptApi();
     }
@@ -106,15 +115,6 @@ class AlfrescoApi {
     }
 
     /**
-     * return an Alfresco API Client
-     *
-     * @returns {ApiClient} Alfresco API Client
-     * */
-    getClient() {
-        return this.ecmAuth.getClient();
-    }
-
-    /**
      * login Alfresco API
      * @param  {String} username:   // Username to login
      * @param  {String} password:   // Password to login
@@ -134,6 +134,8 @@ class AlfrescoApi {
             var ecmPromise = this.ecmAuth.login(username, password);
 
             ecmPromise.then((ticketEcm)=> {
+                this.setAuthenticationClientECMBPM(this.ecmAuth.getAuthentication(), null);
+
                 this.config.ticketEcm = ticketEcm;
             });
 
@@ -149,6 +151,11 @@ class AlfrescoApi {
 
             return bpmEcmPromise;
         }
+    }
+
+    setAuthenticationClientECMBPM(authECM, authBPM) {
+        this.ecmClient.setAuthentications(authECM);
+        this.bpmClient.setAuthentications(authBPM);
     }
 
     /**
@@ -294,6 +301,10 @@ class AlfrescoApi {
 
     _isEcmConfiguration() {
         return this.config.provider && this.config.provider.toUpperCase() === 'ECM';
+    }
+
+    _isOauthConfiguration() {
+        return this.config.provider && this.config.provider.toUpperCase() === 'OAUTH';
     }
 
     _isEcmBpmConfiguration() {

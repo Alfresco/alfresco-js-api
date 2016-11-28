@@ -65,8 +65,8 @@ class AlfrescoApiClient extends ApiClient {
         // add cookie for activiti
         if (this.isBpmRequest()) {
             request._withCredentials = true;
-            if (this.cookie) {
-                request.set('Cookie', this.cookie);
+            if (this.authentications.cookie) {
+                request.set('Cookie', this.authentications.cookie);
             }
         }
 
@@ -130,7 +130,7 @@ class AlfrescoApiClient extends ApiClient {
                 } else {
                     if (this.isBpmRequest()) {
                         if (response.header && response.header.hasOwnProperty('set-cookie')) {
-                            this.cookie = response.header['set-cookie'];
+                            this.authentications.cookie = response.header['set-cookie'];
                         }
                     }
                     var data = {};
@@ -177,7 +177,7 @@ class AlfrescoApiClient extends ApiClient {
     }
 
     isBpmRequest() {
-        return this.constructor.name === 'BpmAuth';
+        return this.constructor.name === 'BpmAuth' || this.constructor.name === 'BpmClient';
     }
 
     isCsrfEnabled() {

@@ -3,9 +3,11 @@
 class AlfrescoContent {
     /**
      * @param {EcmAuth} ecmAuth
+     * @param {EcmClient} ecmClient
      */
-    constructor(ecmAuth) {
+    constructor(ecmAuth, ecmClient) {
         this.ecmAuth = ecmAuth;
+        this.ecmClient = ecmClient;
     }
 
     /**
@@ -16,7 +18,7 @@ class AlfrescoContent {
      * @returns {String} thumbnail URL address.
      */
     getDocumentThumbnailUrl(documentId) {
-        return this.ecmAuth.getClient().basePath  + '/nodes/' + documentId +
+        return this.ecmClient.basePath + '/nodes/' + documentId +
             '/renditions/doclib/content' + '?attachment=false&alf_ticket=' + this.ecmAuth.getTicket();
     }
 
@@ -28,7 +30,7 @@ class AlfrescoContent {
      * @returns {String} preview URL address.
      */
     getDocumentPreviewUrl(documentId) {
-        return this.ecmAuth.getClient().basePath  + '/nodes/' + documentId +
+        return this.ecmClient.basePath + '/nodes/' + documentId +
             '/renditions/imgpreview/content' + '?attachment=false&alf_ticket=' + this.ecmAuth.getTicket();
     }
 
@@ -40,7 +42,7 @@ class AlfrescoContent {
      * @returns {String}  content URL  address.
      */
     getContentUrl(documentId) {
-        return this.ecmAuth.getClient().basePath + '/nodes/' + documentId +
+        return this.ecmClient.basePath + '/nodes/' + documentId +
             '/content' + '?attachment=false&alf_ticket=' + this.ecmAuth.getTicket();
     }
 

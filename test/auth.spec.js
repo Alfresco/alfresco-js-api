@@ -147,7 +147,7 @@ describe('Auth', function () {
                         hostEcm: this.host
                     });
 
-                    expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(this.alfrescoJsApi.getClient().authentications.basicAuth.password);
+                    expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(this.alfrescoJsApi.ecmClient.authentications.basicAuth.password);
                 });
 
                 it('Ticket login should be validate agianst the server if is valid', function (done) {
@@ -384,8 +384,8 @@ describe('Auth', function () {
                         provider: 'ALL'
                     });
 
-                    expect('Basic YWRtaW46YWRtaW4=').to.be.equal(this.alfrescoJsApi.bpmAuth.defaultHeaders.Authorization);
-                    expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(this.alfrescoJsApi.getClient().authentications.basicAuth.password);
+                    expect('Basic YWRtaW46YWRtaW4=').to.be.equal(this.alfrescoJsApi.bpmClient.authentications.basicAuth.ticket);
+                    expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(this.alfrescoJsApi.ecmClient.authentications.basicAuth.password);
                 });
 
                 it('login should return the Ticket if all is ok', function (done) {
