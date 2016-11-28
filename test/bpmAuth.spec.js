@@ -131,7 +131,7 @@ describe('Bpm Auth test', function () {
                     hostBpm: this.hostBpm
                 });
 
-                expect('Basic YWRtaW46YWRtaW4=').to.be.equal(this.bpmAuth.defaultHeaders.Authorization);
+                expect('Basic YWRtaW46YWRtaW4=').to.be.equal(this.bpmAuth.authentications.basicAuth.ticket);
             });
         });
 

@@ -11,7 +11,7 @@ describe('Basic configuration test', function () {
 
         this.alfrescoJsApi = new AlfrescoApi(config);
 
-        expect(this.alfrescoJsApi.getClient().basePath)
+        expect(this.alfrescoJsApi.ecmClient.basePath)
             .equal('http://127.0.0.1:8080/alfresco/api/-default-/public/alfresco/versions/1');
     });
 
@@ -23,7 +23,7 @@ describe('Basic configuration test', function () {
 
         this.alfrescoJsApi = new AlfrescoApi(config);
 
-        expect(this.alfrescoJsApi.getClient().basePath)
+        expect(this.alfrescoJsApi.ecmClient.basePath)
             .equal('http://testServer.com:1616/strangeContextRoot/api/-default-/public/alfresco/versions/1');
     });
 

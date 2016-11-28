@@ -41262,6 +41262,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             }
           }
           break;
+        case 'activiti':
+          if (auth.ticket) {
+            request.set({ 'Authorization': auth.ticket });
+          }
+          break;
         case 'oauth2':
           if (auth.accessToken) {
             request.set({ 'Authorization': 'Bearer ' + auth.accessToken });
@@ -56246,6 +56251,8 @@ var AlfrescoWebScriptApi = require('./alfrescoWebScript');
 var Emitter = require('event-emitter');
 var EcmAuth = require('./ecmAuth');
 var BpmAuth = require('./bpmAuth');
+var EcmClient = require('./ecmClient');
+var BpmClient = require('./bpmClient');
 var _ = require('lodash');
 
 var AlfrescoApi = function () {
@@ -56256,7 +56263,7 @@ var AlfrescoApi = function () {
      *        hostEcm:       // hostEcm Your share server IP or DNS name
      *        hostBpm: // hostBpm Your activiti server IP or DNS name
      *        contextRoot: // contextRoot default value alfresco
-     *        provider:   // ECM BPM ALL, default ECM
+     *        provider:   // ECM BPM ALL OAUTH, default ECM
      *        ticketEcm:     // Ticket if you already have a ECM ticket you can pass only the ticket and skip the login, in this case you don't need username and password
      *        ticketBpm:     // Ticket if you already have a BPM ticket you can pass only the ticket and skip the login, in this case you don't need username and password
      *        disableCsrf:   // To disable CSRF Token to be submitted. Only for Activiti call, by default is false.
@@ -56276,11 +56283,16 @@ var AlfrescoApi = function () {
             provider: config.provider || 'ECM',
             ticketEcm: config.ticketEcm,
             ticketBpm: config.ticketBpm,
+            accessToken: config.accessToken,
             disableCsrf: config.disableCsrf || false
         };
 
         this.bpmAuth = new BpmAuth(this.config);
         this.ecmAuth = new EcmAuth(this.config);
+
+        this.ecmClient = new EcmClient(this.config.hostEcm, this.config.contextRoot);
+        this.bpmClient = new BpmClient(this.config.hostBpm);
+        this.setAuthenticationClientECMBPM(this.ecmAuth.getAuthentication(), this.bpmAuth.getAuthentication());
 
         this.initObjects();
 
@@ -56298,30 +56310,32 @@ var AlfrescoApi = function () {
         value: function changeEcmHost(hostEcm) {
             this.config.hostEcm = hostEcm;
             this.ecmAuth.changeHost(hostEcm);
+            this.ecmClient.changeHost(hostEcm);
         }
     }, {
         key: 'changeBpmHost',
         value: function changeBpmHost(hostBpm) {
             this.config.hostBpm = hostBpm;
             this.bpmAuth.changeHost(hostBpm);
+            this.bpmClient.changeHost(hostBpm);
         }
     }, {
         key: 'initObjects',
         value: function initObjects() {
             //BPM
-            AlfrescoActivitiApi.ApiClient.instance = this.bpmAuth.getClient();
+            AlfrescoActivitiApi.ApiClient.instance = this.bpmClient;
             this.activiti = {};
             this.activitiStore = AlfrescoActivitiApi;
             this._instantiateObjects(this.activitiStore, this.activiti);
 
             //ECM
-            AlfrescoCoreRestApi.ApiClient.instance = this.ecmAuth.getClient();
+            AlfrescoCoreRestApi.ApiClient.instance = this.ecmClient;
             this.core = {};
             this.coreStore = AlfrescoCoreRestApi;
             this._instantiateObjects(this.coreStore, this.core);
 
             this.nodes = this.node = new AlfrescoNode();
-            this.content = new AlfrescoContent(this.ecmAuth);
+            this.content = new AlfrescoContent(this.ecmAuth, this.ecmClient);
             this.upload = new AlfrescoUpload();
             this.webScript = new AlfrescoWebScriptApi();
         }
@@ -56352,18 +56366,6 @@ var AlfrescoApi = function () {
         }
 
         /**
-         * return an Alfresco API Client
-         *
-         * @returns {ApiClient} Alfresco API Client
-         * */
-
-    }, {
-        key: 'getClient',
-        value: function getClient() {
-            return this.ecmAuth.getClient();
-        }
-
-        /**
          * login Alfresco API
          * @param  {String} username:   // Username to login
          * @param  {String} password:   // Password to login
@@ -56388,6 +56390,8 @@ var AlfrescoApi = function () {
                 var ecmPromise = this.ecmAuth.login(username, password);
 
                 ecmPromise.then(function (ticketEcm) {
+                    _this2.setAuthenticationClientECMBPM(_this2.ecmAuth.getAuthentication(), null);
+
                     _this2.config.ticketEcm = ticketEcm;
                 });
 
@@ -56402,6 +56406,12 @@ var AlfrescoApi = function () {
 
                 return bpmEcmPromise;
             }
+        }
+    }, {
+        key: 'setAuthenticationClientECMBPM',
+        value: function setAuthenticationClientECMBPM(authECM, authBPM) {
+            this.ecmClient.setAuthentications(authECM);
+            this.bpmClient.setAuthentications(authBPM);
         }
 
         /**
@@ -56576,6 +56586,11 @@ var AlfrescoApi = function () {
             return this.config.provider && this.config.provider.toUpperCase() === 'ECM';
         }
     }, {
+        key: '_isOauthConfiguration',
+        value: function _isOauthConfiguration() {
+            return this.config.provider && this.config.provider.toUpperCase() === 'OAUTH';
+        }
+    }, {
         key: '_isEcmBpmConfiguration',
         value: function _isEcmBpmConfiguration() {
             return this.config.provider && this.config.provider.toUpperCase() === 'ALL';
@@ -56592,7 +56607,7 @@ module.exports.Activiti = AlfrescoActivitiApi;
 module.exports.Core = AlfrescoCoreRestApi;
 module.exports.Auth = AlfrescoAuthRestApi;
 
-},{"./alfresco-activiti-rest-api/src/index":69,"./alfresco-auth-rest-api/src/index":153,"./alfresco-core-rest-api/src/index.js":176,"./alfrescoContent":288,"./alfrescoNode":289,"./alfrescoUpload":290,"./alfrescoWebScript":291,"./bpmAuth":292,"./ecmAuth":293,"event-emitter":21,"lodash":23}],287:[function(require,module,exports){
+},{"./alfresco-activiti-rest-api/src/index":69,"./alfresco-auth-rest-api/src/index":153,"./alfresco-core-rest-api/src/index.js":176,"./alfrescoContent":288,"./alfrescoNode":289,"./alfrescoUpload":290,"./alfrescoWebScript":291,"./bpmAuth":292,"./bpmClient":293,"./ecmAuth":294,"./ecmClient":295,"event-emitter":21,"lodash":23}],287:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -56678,8 +56693,8 @@ var AlfrescoApiClient = function (_ApiClient) {
             // add cookie for activiti
             if (this.isBpmRequest()) {
                 request._withCredentials = true;
-                if (this.cookie) {
-                    request.set('Cookie', this.cookie);
+                if (this.authentications.cookie) {
+                    request.set('Cookie', this.authentications.cookie);
                 }
             }
 
@@ -56744,7 +56759,7 @@ var AlfrescoApiClient = function (_ApiClient) {
                     } else {
                         if (_this3.isBpmRequest()) {
                             if (response.header && response.header.hasOwnProperty('set-cookie')) {
-                                _this3.cookie = response.header['set-cookie'];
+                                _this3.authentications.cookie = response.header['set-cookie'];
                             }
                         }
                         var data = {};
@@ -56792,7 +56807,7 @@ var AlfrescoApiClient = function (_ApiClient) {
     }, {
         key: 'isBpmRequest',
         value: function isBpmRequest() {
-            return this.constructor.name === 'BpmAuth';
+            return this.constructor.name === 'BpmAuth' || this.constructor.name === 'BpmClient';
         }
     }, {
         key: 'isCsrfEnabled',
@@ -56880,11 +56895,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var AlfrescoContent = function () {
     /**
      * @param {EcmAuth} ecmAuth
+     * @param {EcmClient} ecmClient
      */
-    function AlfrescoContent(ecmAuth) {
+    function AlfrescoContent(ecmAuth, ecmClient) {
         _classCallCheck(this, AlfrescoContent);
 
         this.ecmAuth = ecmAuth;
+        this.ecmClient = ecmClient;
     }
 
     /**
@@ -56899,7 +56916,7 @@ var AlfrescoContent = function () {
     _createClass(AlfrescoContent, [{
         key: 'getDocumentThumbnailUrl',
         value: function getDocumentThumbnailUrl(documentId) {
-            return this.ecmAuth.getClient().basePath + '/nodes/' + documentId + '/renditions/doclib/content' + '?attachment=false&alf_ticket=' + this.ecmAuth.getTicket();
+            return this.ecmClient.basePath + '/nodes/' + documentId + '/renditions/doclib/content' + '?attachment=false&alf_ticket=' + this.ecmAuth.getTicket();
         }
 
         /**
@@ -56913,7 +56930,7 @@ var AlfrescoContent = function () {
     }, {
         key: 'getDocumentPreviewUrl',
         value: function getDocumentPreviewUrl(documentId) {
-            return this.ecmAuth.getClient().basePath + '/nodes/' + documentId + '/renditions/imgpreview/content' + '?attachment=false&alf_ticket=' + this.ecmAuth.getTicket();
+            return this.ecmClient.basePath + '/nodes/' + documentId + '/renditions/imgpreview/content' + '?attachment=false&alf_ticket=' + this.ecmAuth.getTicket();
         }
 
         /**
@@ -56927,7 +56944,7 @@ var AlfrescoContent = function () {
     }, {
         key: 'getContentUrl',
         value: function getContentUrl(documentId) {
-            return this.ecmAuth.getClient().basePath + '/nodes/' + documentId + '/content' + '?attachment=false&alf_ticket=' + this.ecmAuth.getTicket();
+            return this.ecmClient.basePath + '/nodes/' + documentId + '/content' + '?attachment=false&alf_ticket=' + this.ecmAuth.getTicket();
         }
     }]);
 
@@ -57241,6 +57258,10 @@ var BpmAuth = function (_AlfrescoApiClient) {
         _this.ticket = undefined;
         _this.basePath = config.hostBpm + '/activiti-app'; //Activiti Call
 
+        _this.authentications = {
+            'basicAuth': { type: 'activiti', ticket: '' }
+        };
+
         if (_this.config.ticketBpm) {
             _this.setTicket(config.ticketBpm);
         }
@@ -57365,10 +57386,7 @@ var BpmAuth = function (_AlfrescoApiClient) {
     }, {
         key: 'setTicket',
         value: function setTicket(ticket) {
-            this.defaultHeaders = {
-                'Authorization': ticket
-            };
-
+            this.authentications.basicAuth.ticket = ticket;
             this.ticket = ticket;
         }
 
@@ -57397,15 +57415,15 @@ var BpmAuth = function (_AlfrescoApiClient) {
         }
 
         /**
-         * return an Alfresco BPM API Client
+         * return the Authentication
          *
-         * @returns {AlfrescoApiClient} Alfresco BPM API Client
+         * @returns {Object} authentications
          * */
 
     }, {
-        key: 'getClient',
-        value: function getClient() {
-            return this;
+        key: 'getAuthentication',
+        value: function getAuthentication() {
+            return this.authentications;
         }
     }]);
 
@@ -57417,6 +57435,68 @@ module.exports = BpmAuth;
 
 }).call(this,require("buffer").Buffer)
 },{"./alfrescoApiClient":287,"buffer":4,"event-emitter":21}],293:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AlfrescoApiClient = require('./alfrescoApiClient');
+
+var BpmClient = function (_AlfrescoApiClient) {
+    _inherits(BpmClient, _AlfrescoApiClient);
+
+    /**
+     * @param {String} host
+     */
+    function BpmClient(host) {
+        _classCallCheck(this, BpmClient);
+
+        var _this = _possibleConstructorReturn(this, (BpmClient.__proto__ || Object.getPrototypeOf(BpmClient)).call(this));
+
+        _this.host = host;
+
+        _this.changeHost(host);
+        return _this;
+    }
+
+    /**
+     * Change the Host
+     *
+     * @param {String} host
+     * */
+
+
+    _createClass(BpmClient, [{
+        key: 'changeHost',
+        value: function changeHost(host) {
+            this.hostBpm = host;
+            this.basePath = host + '/activiti-app';
+        }
+
+        /**
+         * set the authentications
+         *
+         * @param {Object} authentications
+         * */
+
+    }, {
+        key: 'setAuthentications',
+        value: function setAuthentications(authentications) {
+            this.authentications = authentications;
+        }
+    }]);
+
+    return BpmClient;
+}(AlfrescoApiClient);
+
+module.exports = BpmClient;
+
+},{"./alfrescoApiClient":287}],294:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -57458,12 +57538,7 @@ var EcmAuth = function (_AlfrescoApiClient) {
         key: 'changeHost',
         value: function changeHost(host) {
             this.config.hostEcm = host;
-
             this.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
-
-            if (this.alfrescoClient) {
-                this.alfrescoClient.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/alfresco/versions/1'; //Auth Call
-            }
         }
 
         /**
@@ -57503,7 +57578,6 @@ var EcmAuth = function (_AlfrescoApiClient) {
             });
 
             Emitter(this.promise); // jshint ignore:line
-
             return this.promise;
         }
 
@@ -57535,7 +57609,6 @@ var EcmAuth = function (_AlfrescoApiClient) {
             });
 
             Emitter(this.promise); // jshint ignore:line
-
             return this.promise;
         }
 
@@ -57567,7 +57640,6 @@ var EcmAuth = function (_AlfrescoApiClient) {
             });
 
             Emitter(this.promise); // jshint ignore:line
-
             return this.promise;
         }
 
@@ -57610,21 +57682,15 @@ var EcmAuth = function (_AlfrescoApiClient) {
         }
 
         /**
-         * return an Alfresco API Client
+         * return the Authentication
          *
-         * @returns {ApiClient} Alfresco API Client
+         * @returns {Object} authentications
          * */
 
     }, {
-        key: 'getClient',
-        value: function getClient() {
-            if (!this.alfrescoClient) {
-                this.alfrescoClient = new AlfrescoApiClient(this.config.hostEcm);
-            }
-
-            this.alfrescoClient.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/alfresco/versions/1'; //Auth Call
-            this.alfrescoClient.authentications = this.authentications;
-            return this.alfrescoClient;
+        key: 'getAuthentication',
+        value: function getAuthentication() {
+            return this.authentications;
         }
     }]);
 
@@ -57634,5 +57700,69 @@ var EcmAuth = function (_AlfrescoApiClient) {
 Emitter(EcmAuth.prototype); // jshint ignore:line
 module.exports = EcmAuth;
 
-},{"./alfresco-auth-rest-api/src/index":153,"./alfrescoApiClient":287,"event-emitter":21}]},{},[1])(1)
+},{"./alfresco-auth-rest-api/src/index":153,"./alfrescoApiClient":287,"event-emitter":21}],295:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AlfrescoApiClient = require('./alfrescoApiClient');
+
+var EcmClient = function (_AlfrescoApiClient) {
+    _inherits(EcmClient, _AlfrescoApiClient);
+
+    /**
+     * @param {String} host
+     * @param {String} contextRoot
+     */
+    function EcmClient(host, contextRoot) {
+        _classCallCheck(this, EcmClient);
+
+        var _this = _possibleConstructorReturn(this, (EcmClient.__proto__ || Object.getPrototypeOf(EcmClient)).call(this));
+
+        _this.host = host;
+        _this.contextRoot = contextRoot;
+
+        _this.changeHost(host);
+        return _this;
+    }
+
+    /**
+     * set the Authentication
+     *
+     * @param {String} authentications
+     * */
+
+
+    _createClass(EcmClient, [{
+        key: 'changeHost',
+        value: function changeHost(host) {
+            this.hostEcm = host;
+            this.basePath = host + '/' + this.contextRoot + '/api/-default-/public/alfresco/versions/1';
+        }
+
+        /**
+         * set the Authentications
+         *
+         * @param {Object} authentications
+         * */
+
+    }, {
+        key: 'setAuthentications',
+        value: function setAuthentications(authentications) {
+            this.authentications = authentications;
+        }
+    }]);
+
+    return EcmClient;
+}(AlfrescoApiClient);
+
+module.exports = EcmClient;
+
+},{"./alfrescoApiClient":287}]},{},[1])(1)
 });

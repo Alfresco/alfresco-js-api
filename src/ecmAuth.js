@@ -25,12 +25,7 @@ class EcmAuth extends AlfrescoApiClient {
 
     changeHost(host) {
         this.config.hostEcm = host;
-
         this.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
-
-        if (this.alfrescoClient) {
-            this.alfrescoClient.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/alfresco/versions/1'; //Auth Call
-        }
     }
 
     /**
@@ -67,7 +62,6 @@ class EcmAuth extends AlfrescoApiClient {
         });
 
         Emitter(this.promise); // jshint ignore:line
-
         return this.promise;
     }
 
@@ -96,7 +90,6 @@ class EcmAuth extends AlfrescoApiClient {
         });
 
         Emitter(this.promise); // jshint ignore:line
-
         return this.promise;
     }
 
@@ -125,7 +118,6 @@ class EcmAuth extends AlfrescoApiClient {
         });
 
         Emitter(this.promise); // jshint ignore:line
-
         return this.promise;
     }
 
@@ -159,18 +151,12 @@ class EcmAuth extends AlfrescoApiClient {
     }
 
     /**
-     * return an Alfresco API Client
+     * return the Authentication
      *
-     * @returns {ApiClient} Alfresco API Client
+     * @returns {Object} authentications
      * */
-    getClient() {
-        if (!this.alfrescoClient) {
-            this.alfrescoClient = new AlfrescoApiClient(this.config.hostEcm);
-        }
-
-        this.alfrescoClient.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/alfresco/versions/1'; //Auth Call
-        this.alfrescoClient.authentications = this.authentications;
-        return this.alfrescoClient;
+    getAuthentication() {
+        return this.authentications;
     }
 
 }

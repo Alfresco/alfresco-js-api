@@ -23,12 +23,9 @@ declare namespace AlfrescoApi {
         upload: any;
         webScript: any;
 
-        createClient(): any;
-        getClient(): any;
-        getClientAuth(): any;
-
         changeEcmHost(ecmHost: string);
         changeBpmHost(bpmHost: string);
+        changeOauthHost(hostOauth2: string);
         changeCsrfConfig(disableCsrf: boolean);
 
         getNodeInfo(nodeId: string): Promise<MinimalNodeEntryEntity>;
@@ -590,6 +587,7 @@ declare namespace AlfrescoApi {
     export interface AlfrescoApiConfig {
         hostEcm: string;
         hostBpm: string;
+        hostOauth2: string;
         contextRoot: string;
         provider: string;
         ticketEcm: string;

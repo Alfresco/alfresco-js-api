@@ -14,6 +14,10 @@ class BpmAuth extends AlfrescoApiClient {
         this.ticket = undefined;
         this.basePath = config.hostBpm + '/activiti-app';   //Activiti Call
 
+        this.authentications = {
+            'basicAuth': {type: 'activiti', ticket: ''}
+        };
+
         if (this.config.ticketBpm) {
             this.setTicket(config.ticketBpm);
         }
@@ -23,7 +27,7 @@ class BpmAuth extends AlfrescoApiClient {
 
     changeHost(host) {
         this.config.hostBpm = host;
-        this.basePath =  this.config.hostBpm + '/activiti-app';   //Activiti Call
+        this.basePath = this.config.hostBpm + '/activiti-app';   //Activiti Call
     }
 
     changeCsrfConfig(disableCsrf) {
@@ -127,10 +131,7 @@ class BpmAuth extends AlfrescoApiClient {
      * @param {String} Ticket
      * */
     setTicket(ticket) {
-        this.defaultHeaders = {
-            'Authorization': ticket
-        };
-
+        this.authentications.basicAuth.ticket = ticket;
         this.ticket = ticket;
     }
 
@@ -153,14 +154,13 @@ class BpmAuth extends AlfrescoApiClient {
     }
 
     /**
-     * return an Alfresco BPM API Client
+     * return the Authentication
      *
-     * @returns {AlfrescoApiClient} Alfresco BPM API Client
+     * @returns {Object} authentications
      * */
-    getClient() {
-        return this;
+    getAuthentication() {
+        return this.authentications;
     }
-
 }
 
 Emitter(BpmAuth.prototype); // jshint ignore:line
