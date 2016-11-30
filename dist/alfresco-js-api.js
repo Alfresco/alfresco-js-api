@@ -57324,11 +57324,14 @@ var BpmAuth = function (_AlfrescoApiClient) {
                     _this2.promise.emit('success');
                     resolve(ticket);
                 }, function (error) {
-                    if (error.error.status === 401) {
+                    if (error.status === 401) {
                         _this2.promise.emit('unauthorized');
+                    } else if (error.status === 403) {
+                        _this2.promise.emit('forbidden');
+                    } else {
+                        _this2.promise.emit('error');
                     }
-                    _this2.promise.emit('error');
-                    reject(error.error);
+                    reject(error);
                 });
             });
 
@@ -57571,8 +57574,11 @@ var EcmAuth = function (_AlfrescoApiClient) {
                 }, function (error) {
                     if (error.status === 401) {
                         _this2.promise.emit('unauthorized');
+                    } else if (error.status === 403) {
+                        _this2.promise.emit('forbidden');
+                    } else {
+                        _this2.promise.emit('error');
                     }
-                    _this2.promise.emit('error');
                     reject(error);
                 });
             });

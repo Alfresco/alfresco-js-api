@@ -75,11 +75,14 @@ class BpmAuth extends AlfrescoApiClient {
                     resolve(ticket);
                 },
                 (error) => {
-                    if (error.error.status === 401) {
+                    if (error.status === 401) {
                         this.promise.emit('unauthorized');
+                    } else if (error.status === 403) {
+                        this.promise.emit('forbidden');
+                    } else {
+                        this.promise.emit('error');
                     }
-                    this.promise.emit('error');
-                    reject(error.error);
+                    reject(error);
                 });
         });
 
