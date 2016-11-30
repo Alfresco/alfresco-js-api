@@ -112,6 +112,19 @@ describe('Ecm Auth test', function () {
                 });
             });
 
+            it('login should fire an event if is forbidden 403', function (done) {
+                this.authEcmMock.get403Response();
+
+                this.ecmAuth = new EcmAuth({
+                    contextRoot: 'alfresco',
+                    hostEcm: this.hostEcm
+                });
+
+                this.ecmAuth.login('wrong', 'name').on('forbidden', ()=> {
+                    done();
+                });
+            });
+
             it('The Api Should fire success event if is all ok 201', function (done) {
                 this.authEcmMock.get201Response();
 

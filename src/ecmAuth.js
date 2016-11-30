@@ -55,8 +55,11 @@ class EcmAuth extends AlfrescoApiClient {
                 (error) => {
                     if (error.status === 401) {
                         this.promise.emit('unauthorized');
+                    } else if (error.status === 403) {
+                        this.promise.emit('forbidden');
+                    } else {
+                        this.promise.emit('error');
                     }
-                    this.promise.emit('error');
                     reject(error);
                 });
         });
