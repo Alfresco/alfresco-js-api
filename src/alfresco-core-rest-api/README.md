@@ -33,6 +33,27 @@ Class | Method | HTTP request | Description
 *AlfrescoCoreRestApi.CommentsApi* | [**getComments**](docs/CommentsApi.md#getComments) | **GET** /nodes/{nodeId}/comments | Get comments
 *AlfrescoCoreRestApi.CommentsApi* | [**removeComment**](docs/CommentsApi.md#removeComment) | **DELETE** /nodes/{nodeId}/comments/{commentId} | Delete a comment
 *AlfrescoCoreRestApi.CommentsApi* | [**updateComment**](docs/CommentsApi.md#updateComment) | **PUT** /nodes/{nodeId}/comments/{commentId} | Update a comment
+*AlfrescoCoreRestApi.CustomModelApi* | [**createCustomModel**](docs/CustomModelApi.md#createCustomModel)| **POST** /cmm | create Custom Model
+*AlfrescoCoreRestApi.CustomModelApi* | [**createCustomType**](docs/CustomModelApi.md#createCustomType) | **POST** /cmm/{modelName}/types | create custom type
+*AlfrescoCoreRestApi.CustomModelApi* | [**createCustomAspect**](docs/CustomModelApi.md#createCustomAspect) | **POST** /cmm/{modelName}/aspects | create custom aspect
+*AlfrescoCoreRestApi.CustomModelApi* | [**createCustomConstraint**](docs/CustomModelApi.md#createCustomConstraint) | **POST** cmm/{modelName}?select=status | create custom constraint
+*AlfrescoCoreRestApi.CustomModelApi* | [**activateCustomModel**](docs/CustomModelApi.md#activateCustomModel) | **PUT** /nodes/{nodeId}/tags/{tagId} | activate custom model
+*AlfrescoCoreRestApi.CustomModelApi* | [**deactivateCustomModel**](docs/CustomModelApi.md#deactivateCustomModel) | **PUT** /cmm/{modelName}?select=status | deactivate custom model
+*AlfrescoCoreRestApi.CustomModelApi* | [**addPropertyToAspect**](docs/CustomModelApi.md#addPropertyToAspect) | **PUT** /cmm/{modelName}/aspects/{aspectName}?select=props| add property into an existing aspect
+*AlfrescoCoreRestApi.CustomModelApi* | [**addPropertyToType**](docs/CustomModelApi.md#addPropertyToType) | **PUT** /cmm/{modelName}/types/{typeName}?select=props | Add Property into an existing type
+*AlfrescoCoreRestApi.CustomModelApi* | [**updateCustomModel**](docs/CustomModelApi.md#updateCustomModel) | **PUT** /cmm/{modelName} | edit an existing custom model
+*AlfrescoCoreRestApi.CustomModelApi* | [**updateCustomType**](docs/CustomModelApi.md#updateCustomType) | **PUT** /cmm/{modelName}/types/{typeName} | edit an existing custom type
+*AlfrescoCoreRestApi.CustomModelApi* | [**updateCustomAspect**](docs/CustomModelApi.md#updateCustomAspect) | **PUT** /cmm/{modelName}/aspects/{aspectName} | dEdit an existing custom aspect
+*AlfrescoCoreRestApi.CustomModelApi* | [**getAllCustomModel**](docs/CustomModelApi.md#getAllCustomModel) | **GET** /cmm | get all customModel
+*AlfrescoCoreRestApi.CustomModelApi* | [**getCustomModel**](docs/CustomModelApi.md#getCustomModel) | **GET** /cmm/{modelName} | get a single custom model
+*AlfrescoCoreRestApi.CustomModelApi* | [**getAllCustomType**](docs/CustomModelApi.md#getAllCustomType) | **GET** /cmm/{modelName}/types | get all custom Type
+*AlfrescoCoreRestApi.CustomModelApi* | [**getCustomType**](docs/CustomModelApi.md#getCustomType) | **GET** /cmm/{modelName}/types/{typeName} | get custom type
+*AlfrescoCoreRestApi.CustomModelApi* | [**getAllCustomAspect**](docs/CustomModelApi.md#getAllCustomAspect) | **GET** /cmm/{modelName}/aspects | get all custom aspect
+*AlfrescoCoreRestApi.CustomModelApi* | [**getCustomAspect**](docs/CustomModelApi.md#getCustomAspect) | **GET** /cmm/{modelName}/aspects/{aspectName} | get custom aspect
+*AlfrescoCoreRestApi.CustomModelApi* | [**getAllCustomConstraints**](docs/CustomModelApi.md#getAllCustomConstraints) | **GET** /cmm/{modelName}/constraints | get all custom constraints
+*AlfrescoCoreRestApi.CustomModelApi* | [**getCustomConstraints**](docs/CustomModelApi.md#getCustomConstraints) | **GET** /cmm/{modelName}/constraints{constraintName} | get custom constraints
+*AlfrescoCoreRestApi.CustomModelApi* | [**deleteCustomModel**](docs/CustomModelApi.md#deleteCustomModel) | **DELETE** /cmm/{modelName} | delete custom model
+*AlfrescoCoreRestApi.CustomModelApi* | [**deleteCustomType**](docs/CustomModelApi.md#deleteCustomType) | **DELETE** /cmm/{modelName}/types/{typeName} | delete custom type
 *AlfrescoCoreRestApi.FavoritesApi* | [**addFavorite**](docs/FavoritesApi.md#addFavorite) | **POST** /people/{personId}/favorites | Add a favorite
 *AlfrescoCoreRestApi.FavoritesApi* | [**getFavorite**](docs/FavoritesApi.md#getFavorite) | **GET** /people/{personId}/favorites/{favoriteId} | Get a favorite
 *AlfrescoCoreRestApi.FavoritesApi* | [**getFavorites**](docs/FavoritesApi.md#getFavorites) | **GET** /people/{personId}/favorites | Get favorites

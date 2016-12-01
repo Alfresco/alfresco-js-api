@@ -459,6 +459,7 @@ declare namespace AlfrescoApi {
         changesApi: any;
         childAssociationsApi: any;
         commentsApi: any;
+        customModelApi: any;
         favoritesApi: any;
         networksApi: any;
         nodesApi: any;

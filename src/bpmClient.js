@@ -21,7 +21,6 @@ class BpmClient extends AlfrescoApiClient {
      * @param {String} host
      * */
     changeHost(host) {
-        this.hostBpm = host;
         this.basePath = host + '/activiti-app';
     }
 
