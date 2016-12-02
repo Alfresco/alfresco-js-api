@@ -23,7 +23,7 @@ class EcmClient extends AlfrescoApiClient {
      * @param {String} authentications
      * */
     changeHost(host) {
-        this.basePath = host + '/' + this.contextRoot + '/api/-default-/public/alfresco/versions/1';
+        this.basePath = host + '/' + this.contextRoot + '/api/-default-/private/alfresco/versions/1';
     }
 
     /**

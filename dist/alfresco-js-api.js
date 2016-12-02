@@ -5,7 +5,7 @@ var AlfrescoApi = require('./src/alfrescoApi.js');
 
 module.exports = AlfrescoApi;
 
-},{"./src/alfrescoApi.js":286}],2:[function(require,module,exports){
+},{"./src/alfrescoApi.js":288}],2:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -20784,7 +20784,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],27:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],27:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -21207,7 +21207,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/CreateEndpointBasicAuthRepresentation":87,"../model/EndpointBasicAuthRepresentation":90,"../model/EndpointConfigurationRepresentation":91}],28:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/CreateEndpointBasicAuthRepresentation":87,"../model/EndpointBasicAuthRepresentation":90,"../model/EndpointConfigurationRepresentation":91}],28:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -21871,7 +21871,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/AbstractGroupRepresentation":70,"../model/AddGroupCapabilitiesRepresentation":73,"../model/GroupRepresentation":106,"../model/LightGroupRepresentation":110,"../model/ResultListDataRepresentation":132}],29:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/AbstractGroupRepresentation":70,"../model/AddGroupCapabilitiesRepresentation":73,"../model/GroupRepresentation":106,"../model/LightGroupRepresentation":110,"../model/ResultListDataRepresentation":132}],29:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -22198,7 +22198,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/CreateTenantRepresentation":89,"../model/ImageUploadRepresentation":107,"../model/LightTenantRepresentation":111,"../model/TenantEvent":142,"../model/TenantRepresentation":143}],30:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/CreateTenantRepresentation":89,"../model/ImageUploadRepresentation":107,"../model/LightTenantRepresentation":111,"../model/TenantEvent":142,"../model/TenantRepresentation":143}],30:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -22438,7 +22438,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/AbstractUserRepresentation":72,"../model/BulkUserUpdateRepresentation":81,"../model/ResultListDataRepresentation":132,"../model/UserRepresentation":148}],31:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/AbstractUserRepresentation":72,"../model/BulkUserUpdateRepresentation":81,"../model/ResultListDataRepresentation":132,"../model/UserRepresentation":148}],31:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -22818,7 +22818,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/ResultListDataRepresentation":132}],32:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/ResultListDataRepresentation":132}],32:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -23079,7 +23079,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/AppDefinitionPublishRepresentation":75,"../model/AppDefinitionRepresentation":76,"../model/AppDefinitionUpdateResultRepresentation":77,"../model/ResultListDataRepresentation":132,"../model/RuntimeAppDefinitionSaveRepresentation":133}],33:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/AppDefinitionPublishRepresentation":75,"../model/AppDefinitionRepresentation":76,"../model/AppDefinitionUpdateResultRepresentation":77,"../model/ResultListDataRepresentation":132,"../model/RuntimeAppDefinitionSaveRepresentation":133}],33:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -23277,7 +23277,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/AppDefinitionPublishRepresentation":75,"../model/AppDefinitionRepresentation":76,"../model/AppDefinitionUpdateResultRepresentation":77}],34:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/AppDefinitionPublishRepresentation":75,"../model/AppDefinitionRepresentation":76,"../model/AppDefinitionUpdateResultRepresentation":77}],34:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -23381,7 +23381,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/ResultListDataRepresentation":132,"../model/RuntimeAppDefinitionSaveRepresentation":133}],35:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/ResultListDataRepresentation":132,"../model/RuntimeAppDefinitionSaveRepresentation":133}],35:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -23586,7 +23586,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/CommentRepresentation":84,"../model/ResultListDataRepresentation":132}],36:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/CommentRepresentation":84,"../model/ResultListDataRepresentation":132}],36:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -24073,7 +24073,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/RelatedContentRepresentation":129,"../model/ResultListDataRepresentation":132}],37:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/RelatedContentRepresentation":129,"../model/ResultListDataRepresentation":132}],37:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -24157,7 +24157,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],38:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],38:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -24382,7 +24382,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/FormRepresentation":100,"../model/FormSaveRepresentation":101,"../model/ValidationErrorRepresentation":150}],39:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/FormRepresentation":100,"../model/FormSaveRepresentation":101,"../model/ValidationErrorRepresentation":150}],39:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -24498,7 +24498,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/ResultListDataRepresentation":132}],40:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/ResultListDataRepresentation":132}],40:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -24610,7 +24610,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/SyncLogEntryRepresentation":135}],41:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/SyncLogEntryRepresentation":135}],41:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -24681,7 +24681,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/ResultListDataRepresentation":132}],42:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/ResultListDataRepresentation":132}],42:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -24902,7 +24902,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/ResultListDataRepresentation":132}],43:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/ResultListDataRepresentation":132}],43:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -25096,7 +25096,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/ResultListDataRepresentation":132}],44:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/ResultListDataRepresentation":132}],44:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -25779,7 +25779,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/BoxUserAccountCredentialsRepresentation":80,"../model/ResultListDataRepresentation":132,"../model/UserAccountCredentialsRepresentation":144}],45:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/BoxUserAccountCredentialsRepresentation":80,"../model/ResultListDataRepresentation":132,"../model/UserAccountCredentialsRepresentation":144}],45:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -26064,7 +26064,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/BoxUserAccountCredentialsRepresentation":80,"../model/ResultListDataRepresentation":132,"../model/UserAccountCredentialsRepresentation":144}],46:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/BoxUserAccountCredentialsRepresentation":80,"../model/ResultListDataRepresentation":132,"../model/UserAccountCredentialsRepresentation":144}],46:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -26177,7 +26177,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/ResultListDataRepresentation":132}],47:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/ResultListDataRepresentation":132}],47:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -26295,7 +26295,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],48:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],48:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -26413,7 +26413,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/ObjectNode":118}],49:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/ObjectNode":118}],49:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -26933,7 +26933,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/ModelRepresentation":117,"../model/ObjectNode":118,"../model/ResultListDataRepresentation":132,"../model/ValidationErrorRepresentation":150}],50:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/ModelRepresentation":117,"../model/ObjectNode":118,"../model/ResultListDataRepresentation":132,"../model/ValidationErrorRepresentation":150}],50:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -27056,7 +27056,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/ModelRepresentation":117,"../model/ResultListDataRepresentation":132}],51:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/ModelRepresentation":117,"../model/ResultListDataRepresentation":132}],51:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -27465,7 +27465,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/CreateProcessInstanceRepresentation":88,"../model/FormDefinitionRepresentation":96,"../model/FormValueRepresentation":104,"../model/ProcessFilterRequestRepresentation":120,"../model/ProcessInstanceFilterRequestRepresentation":122,"../model/ProcessInstanceRepresentation":123,"../model/ResultListDataRepresentation":132}],52:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/CreateProcessInstanceRepresentation":88,"../model/FormDefinitionRepresentation":96,"../model/FormValueRepresentation":104,"../model/ProcessFilterRequestRepresentation":120,"../model/ProcessInstanceFilterRequestRepresentation":122,"../model/ProcessInstanceRepresentation":123,"../model/ResultListDataRepresentation":132}],52:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -27542,7 +27542,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/ResultListDataRepresentation":132}],53:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/ResultListDataRepresentation":132}],53:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -27679,7 +27679,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/FormDefinitionRepresentation":96,"../model/FormValueRepresentation":104}],54:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/FormDefinitionRepresentation":96,"../model/FormValueRepresentation":104}],54:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -27904,7 +27904,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/CommentRepresentation":84,"../model/FormDefinitionRepresentation":96,"../model/ProcessInstanceRepresentation":123,"../model/ResultListDataRepresentation":132}],55:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/CommentRepresentation":84,"../model/FormDefinitionRepresentation":96,"../model/ProcessInstanceRepresentation":123,"../model/ResultListDataRepresentation":132}],55:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -28013,7 +28013,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/CreateProcessInstanceRepresentation":88,"../model/ProcessInstanceRepresentation":123,"../model/ResultListDataRepresentation":132}],56:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/CreateProcessInstanceRepresentation":88,"../model/ProcessInstanceRepresentation":123,"../model/ResultListDataRepresentation":132}],56:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -28120,7 +28120,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/ObjectNode":118,"../model/ProcessInstanceFilterRequestRepresentation":122,"../model/ResultListDataRepresentation":132}],57:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/ObjectNode":118,"../model/ProcessInstanceFilterRequestRepresentation":122,"../model/ResultListDataRepresentation":132}],57:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -28195,7 +28195,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/ProcessScopeRepresentation":126,"../model/ProcessScopesRequestRepresentation":127}],58:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/ProcessScopeRepresentation":126,"../model/ProcessScopesRequestRepresentation":127}],58:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -28399,7 +28399,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/ChangePasswordRepresentation":82,"../model/File":95,"../model/ImageUploadRepresentation":107,"../model/UserRepresentation":148}],59:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/ChangePasswordRepresentation":82,"../model/File":95,"../model/ImageUploadRepresentation":107,"../model/UserRepresentation":148}],59:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -28494,7 +28494,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],60:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],60:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -28564,7 +28564,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/SystemPropertiesRepresentation":136}],61:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/SystemPropertiesRepresentation":136}],61:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -28906,7 +28906,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/ObjectNode":118,"../model/TaskRepresentation":140}],62:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/ObjectNode":118,"../model/TaskRepresentation":140}],62:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -29976,7 +29976,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/ChecklistOrderRepresentation":83,"../model/CommentRepresentation":84,"../model/CompleteFormRepresentation":85,"../model/FormDefinitionRepresentation":96,"../model/FormValueRepresentation":104,"../model/ObjectNode":118,"../model/RelatedContentRepresentation":129,"../model/ResultListDataRepresentation":132,"../model/SaveFormRepresentation":134,"../model/TaskFilterRequestRepresentation":138,"../model/TaskRepresentation":140,"../model/TaskUpdateRepresentation":141}],63:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/ChecklistOrderRepresentation":83,"../model/CommentRepresentation":84,"../model/CompleteFormRepresentation":85,"../model/FormDefinitionRepresentation":96,"../model/FormValueRepresentation":104,"../model/ObjectNode":118,"../model/RelatedContentRepresentation":129,"../model/ResultListDataRepresentation":132,"../model/SaveFormRepresentation":134,"../model/TaskFilterRequestRepresentation":138,"../model/TaskRepresentation":140,"../model/TaskUpdateRepresentation":141}],63:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -30133,7 +30133,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/ChecklistOrderRepresentation":83,"../model/ResultListDataRepresentation":132,"../model/TaskRepresentation":140}],64:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/ChecklistOrderRepresentation":83,"../model/ResultListDataRepresentation":132,"../model/TaskRepresentation":140}],64:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -30415,7 +30415,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/CompleteFormRepresentation":85,"../model/FormDefinitionRepresentation":96,"../model/FormValueRepresentation":104,"../model/ProcessInstanceVariableRepresentation":124,"../model/SaveFormRepresentation":134}],65:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/CompleteFormRepresentation":85,"../model/FormDefinitionRepresentation":96,"../model/FormValueRepresentation":104,"../model/ProcessInstanceVariableRepresentation":124,"../model/SaveFormRepresentation":134}],65:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -30592,7 +30592,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/ArrayNode":79}],66:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/ArrayNode":79}],66:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -30862,7 +30862,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/ResetPasswordRepresentation":130,"../model/ResultListDataRepresentation":132,"../model/UserActionRepresentation":145,"../model/UserRepresentation":148}],67:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/ResetPasswordRepresentation":130,"../model/ResultListDataRepresentation":132,"../model/UserActionRepresentation":145,"../model/UserRepresentation":148}],67:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -31319,7 +31319,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/ResultListDataRepresentation":132,"../model/UserFilterOrderRepresentation":146,"../model/UserProcessInstanceFilterRepresentation":147,"../model/UserTaskFilterRepresentation":149}],68:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/ResultListDataRepresentation":132,"../model/UserFilterOrderRepresentation":146,"../model/UserProcessInstanceFilterRepresentation":147,"../model/UserTaskFilterRepresentation":149}],68:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -31409,7 +31409,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/ResultListDataRepresentation":132}],69:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/ResultListDataRepresentation":132}],69:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -32096,7 +32096,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../alfrescoApiClient":287,"./api/AboutApi":26,"./api/AdminEndpointsApi":27,"./api/AdminGroupsApi":28,"./api/AdminTenantsApi":29,"./api/AdminUsersApi":30,"./api/AlfrescoApi":31,"./api/AppsApi":32,"./api/AppsDefinitionApi":33,"./api/AppsRuntimeApi":34,"./api/CommentsApi":35,"./api/ContentApi":36,"./api/ContentRenditionApi":37,"./api/EditorApi":38,"./api/GroupsApi":39,"./api/IDMSyncApi":40,"./api/IntegrationAccountApi":41,"./api/IntegrationAlfrescoCloudApi":42,"./api/IntegrationAlfrescoOnPremiseApi":43,"./api/IntegrationApi":44,"./api/IntegrationBoxApi":45,"./api/IntegrationDriveApi":46,"./api/ModelBpmnApi":47,"./api/ModelJsonBpmnApi":48,"./api/ModelsApi":49,"./api/ModelsHistoryApi":50,"./api/ProcessApi":51,"./api/ProcessDefinitionsApi":52,"./api/ProcessDefinitionsFormApi":53,"./api/ProcessInstancesApi":54,"./api/ProcessInstancesInformationApi":55,"./api/ProcessInstancesListingApi":56,"./api/ProcessScopeApi":57,"./api/ProfileApi":58,"./api/ScriptFileApi":59,"./api/SystemPropertiesApi":60,"./api/TaskActionsApi":61,"./api/TaskApi":62,"./api/TaskCheckListApi":63,"./api/TaskFormsApi":64,"./api/TemporaryApi":65,"./api/UserApi":66,"./api/UserFiltersApi":67,"./api/UsersWorkflowApi":68,"./model/AbstractGroupRepresentation":70,"./model/AbstractRepresentation":71,"./model/AbstractUserRepresentation":72,"./model/AddGroupCapabilitiesRepresentation":73,"./model/AppDefinition":74,"./model/AppDefinitionPublishRepresentation":75,"./model/AppDefinitionRepresentation":76,"./model/AppDefinitionUpdateResultRepresentation":77,"./model/AppModelDefinition":78,"./model/ArrayNode":79,"./model/BoxUserAccountCredentialsRepresentation":80,"./model/BulkUserUpdateRepresentation":81,"./model/ChangePasswordRepresentation":82,"./model/ChecklistOrderRepresentation":83,"./model/CommentRepresentation":84,"./model/CompleteFormRepresentation":85,"./model/ConditionRepresentation":86,"./model/CreateEndpointBasicAuthRepresentation":87,"./model/CreateProcessInstanceRepresentation":88,"./model/CreateTenantRepresentation":89,"./model/EndpointBasicAuthRepresentation":90,"./model/EndpointConfigurationRepresentation":91,"./model/EndpointRequestHeaderRepresentation":92,"./model/EntityAttributeScopeRepresentation":93,"./model/EntityVariableScopeRepresentation":94,"./model/File":95,"./model/FormDefinitionRepresentation":96,"./model/FormFieldRepresentation":97,"./model/FormJavascriptEventRepresentation":98,"./model/FormOutcomeRepresentation":99,"./model/FormRepresentation":100,"./model/FormSaveRepresentation":101,"./model/FormScopeRepresentation":102,"./model/FormTabRepresentation":103,"./model/FormValueRepresentation":104,"./model/GroupCapabilityRepresentation":105,"./model/GroupRepresentation":106,"./model/ImageUploadRepresentation":107,"./model/LayoutRepresentation":108,"./model/LightAppRepresentation":109,"./model/LightGroupRepresentation":110,"./model/LightTenantRepresentation":111,"./model/LightUserRepresentation":112,"./model/MaplongListstring":113,"./model/MapstringListEntityVariableScopeRepresentation":114,"./model/MapstringListVariableScopeRepresentation":115,"./model/Mapstringstring":116,"./model/ModelRepresentation":117,"./model/ObjectNode":118,"./model/OptionRepresentation":119,"./model/ProcessFilterRequestRepresentation":120,"./model/ProcessInstanceFilterRepresentation":121,"./model/ProcessInstanceFilterRequestRepresentation":122,"./model/ProcessInstanceRepresentation":123,"./model/ProcessInstanceVariableRepresentation":124,"./model/ProcessScopeIdentifierRepresentation":125,"./model/ProcessScopeRepresentation":126,"./model/ProcessScopesRequestRepresentation":127,"./model/PublishIdentityInfoRepresentation":128,"./model/RelatedContentRepresentation":129,"./model/ResetPasswordRepresentation":130,"./model/RestVariable":131,"./model/ResultListDataRepresentation":132,"./model/RuntimeAppDefinitionSaveRepresentation":133,"./model/SaveFormRepresentation":134,"./model/SyncLogEntryRepresentation":135,"./model/SystemPropertiesRepresentation":136,"./model/TaskFilterRepresentation":137,"./model/TaskFilterRequestRepresentation":138,"./model/TaskQueryRequestRepresentation":139,"./model/TaskRepresentation":140,"./model/TaskUpdateRepresentation":141,"./model/TenantEvent":142,"./model/TenantRepresentation":143,"./model/UserAccountCredentialsRepresentation":144,"./model/UserActionRepresentation":145,"./model/UserFilterOrderRepresentation":146,"./model/UserProcessInstanceFilterRepresentation":147,"./model/UserRepresentation":148,"./model/UserTaskFilterRepresentation":149,"./model/ValidationErrorRepresentation":150,"./model/VariableScopeRepresentation":151}],70:[function(require,module,exports){
+},{"../../alfrescoApiClient":289,"./api/AboutApi":26,"./api/AdminEndpointsApi":27,"./api/AdminGroupsApi":28,"./api/AdminTenantsApi":29,"./api/AdminUsersApi":30,"./api/AlfrescoApi":31,"./api/AppsApi":32,"./api/AppsDefinitionApi":33,"./api/AppsRuntimeApi":34,"./api/CommentsApi":35,"./api/ContentApi":36,"./api/ContentRenditionApi":37,"./api/EditorApi":38,"./api/GroupsApi":39,"./api/IDMSyncApi":40,"./api/IntegrationAccountApi":41,"./api/IntegrationAlfrescoCloudApi":42,"./api/IntegrationAlfrescoOnPremiseApi":43,"./api/IntegrationApi":44,"./api/IntegrationBoxApi":45,"./api/IntegrationDriveApi":46,"./api/ModelBpmnApi":47,"./api/ModelJsonBpmnApi":48,"./api/ModelsApi":49,"./api/ModelsHistoryApi":50,"./api/ProcessApi":51,"./api/ProcessDefinitionsApi":52,"./api/ProcessDefinitionsFormApi":53,"./api/ProcessInstancesApi":54,"./api/ProcessInstancesInformationApi":55,"./api/ProcessInstancesListingApi":56,"./api/ProcessScopeApi":57,"./api/ProfileApi":58,"./api/ScriptFileApi":59,"./api/SystemPropertiesApi":60,"./api/TaskActionsApi":61,"./api/TaskApi":62,"./api/TaskCheckListApi":63,"./api/TaskFormsApi":64,"./api/TemporaryApi":65,"./api/UserApi":66,"./api/UserFiltersApi":67,"./api/UsersWorkflowApi":68,"./model/AbstractGroupRepresentation":70,"./model/AbstractRepresentation":71,"./model/AbstractUserRepresentation":72,"./model/AddGroupCapabilitiesRepresentation":73,"./model/AppDefinition":74,"./model/AppDefinitionPublishRepresentation":75,"./model/AppDefinitionRepresentation":76,"./model/AppDefinitionUpdateResultRepresentation":77,"./model/AppModelDefinition":78,"./model/ArrayNode":79,"./model/BoxUserAccountCredentialsRepresentation":80,"./model/BulkUserUpdateRepresentation":81,"./model/ChangePasswordRepresentation":82,"./model/ChecklistOrderRepresentation":83,"./model/CommentRepresentation":84,"./model/CompleteFormRepresentation":85,"./model/ConditionRepresentation":86,"./model/CreateEndpointBasicAuthRepresentation":87,"./model/CreateProcessInstanceRepresentation":88,"./model/CreateTenantRepresentation":89,"./model/EndpointBasicAuthRepresentation":90,"./model/EndpointConfigurationRepresentation":91,"./model/EndpointRequestHeaderRepresentation":92,"./model/EntityAttributeScopeRepresentation":93,"./model/EntityVariableScopeRepresentation":94,"./model/File":95,"./model/FormDefinitionRepresentation":96,"./model/FormFieldRepresentation":97,"./model/FormJavascriptEventRepresentation":98,"./model/FormOutcomeRepresentation":99,"./model/FormRepresentation":100,"./model/FormSaveRepresentation":101,"./model/FormScopeRepresentation":102,"./model/FormTabRepresentation":103,"./model/FormValueRepresentation":104,"./model/GroupCapabilityRepresentation":105,"./model/GroupRepresentation":106,"./model/ImageUploadRepresentation":107,"./model/LayoutRepresentation":108,"./model/LightAppRepresentation":109,"./model/LightGroupRepresentation":110,"./model/LightTenantRepresentation":111,"./model/LightUserRepresentation":112,"./model/MaplongListstring":113,"./model/MapstringListEntityVariableScopeRepresentation":114,"./model/MapstringListVariableScopeRepresentation":115,"./model/Mapstringstring":116,"./model/ModelRepresentation":117,"./model/ObjectNode":118,"./model/OptionRepresentation":119,"./model/ProcessFilterRequestRepresentation":120,"./model/ProcessInstanceFilterRepresentation":121,"./model/ProcessInstanceFilterRequestRepresentation":122,"./model/ProcessInstanceRepresentation":123,"./model/ProcessInstanceVariableRepresentation":124,"./model/ProcessScopeIdentifierRepresentation":125,"./model/ProcessScopeRepresentation":126,"./model/ProcessScopesRequestRepresentation":127,"./model/PublishIdentityInfoRepresentation":128,"./model/RelatedContentRepresentation":129,"./model/ResetPasswordRepresentation":130,"./model/RestVariable":131,"./model/ResultListDataRepresentation":132,"./model/RuntimeAppDefinitionSaveRepresentation":133,"./model/SaveFormRepresentation":134,"./model/SyncLogEntryRepresentation":135,"./model/SystemPropertiesRepresentation":136,"./model/TaskFilterRepresentation":137,"./model/TaskFilterRequestRepresentation":138,"./model/TaskQueryRequestRepresentation":139,"./model/TaskRepresentation":140,"./model/TaskUpdateRepresentation":141,"./model/TenantEvent":142,"./model/TenantRepresentation":143,"./model/UserAccountCredentialsRepresentation":144,"./model/UserActionRepresentation":145,"./model/UserFilterOrderRepresentation":146,"./model/UserProcessInstanceFilterRepresentation":147,"./model/UserRepresentation":148,"./model/UserTaskFilterRepresentation":149,"./model/ValidationErrorRepresentation":150,"./model/VariableScopeRepresentation":151}],70:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -32181,7 +32181,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],71:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],71:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -32236,7 +32236,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],72:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],72:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -32335,7 +32335,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],73:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],73:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -32399,7 +32399,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],74:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],74:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -32484,7 +32484,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./AppModelDefinition":78,"./PublishIdentityInfoRepresentation":128}],75:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./AppModelDefinition":78,"./PublishIdentityInfoRepresentation":128}],75:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -32555,7 +32555,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],76:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],76:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -32675,7 +32675,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],77:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],77:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -32781,7 +32781,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./AppDefinitionRepresentation":76}],78:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./AppDefinitionRepresentation":76}],78:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -32915,7 +32915,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],79:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],79:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -33171,7 +33171,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],80:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],80:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -33249,7 +33249,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],81:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],81:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -33348,7 +33348,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],82:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],82:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -33419,7 +33419,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],83:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],83:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -33483,7 +33483,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],84:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],84:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -33568,7 +33568,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./LightUserRepresentation":112}],85:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./LightUserRepresentation":112}],85:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -33639,7 +33639,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],86:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],86:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -33752,7 +33752,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],87:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],87:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -33837,7 +33837,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],88:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],88:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -33922,7 +33922,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],89:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],89:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34007,7 +34007,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],90:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],90:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34106,7 +34106,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],91:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],91:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34233,7 +34233,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./EndpointRequestHeaderRepresentation":92}],92:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./EndpointRequestHeaderRepresentation":92}],92:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34304,7 +34304,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],93:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],93:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34375,7 +34375,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],94:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],94:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34460,7 +34460,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./EntityAttributeScopeRepresentation":93}],95:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./EntityAttributeScopeRepresentation":93}],95:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34622,7 +34622,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],96:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],96:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34812,7 +34812,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./FormFieldRepresentation":97,"./FormJavascriptEventRepresentation":98,"./FormOutcomeRepresentation":99,"./FormTabRepresentation":103}],97:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./FormFieldRepresentation":97,"./FormJavascriptEventRepresentation":98,"./FormOutcomeRepresentation":99,"./FormTabRepresentation":103}],97:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35079,7 +35079,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./ConditionRepresentation":86,"./LayoutRepresentation":108,"./OptionRepresentation":119}],98:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./ConditionRepresentation":86,"./LayoutRepresentation":108,"./OptionRepresentation":119}],98:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35150,7 +35150,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],99:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],99:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35221,7 +35221,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],100:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],100:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35348,7 +35348,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./FormDefinitionRepresentation":96}],101:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./FormDefinitionRepresentation":96}],101:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35447,7 +35447,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./FormRepresentation":100,"./ProcessScopeIdentifierRepresentation":125}],102:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./FormRepresentation":100,"./ProcessScopeIdentifierRepresentation":125}],102:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35546,7 +35546,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./FormFieldRepresentation":97,"./FormOutcomeRepresentation":99}],103:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./FormFieldRepresentation":97,"./FormOutcomeRepresentation":99}],103:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35624,7 +35624,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./ConditionRepresentation":86}],104:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./ConditionRepresentation":86}],104:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35695,7 +35695,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],105:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],105:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35766,7 +35766,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],106:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],106:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35907,7 +35907,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./GroupCapabilityRepresentation":105,"./GroupRepresentation":106,"./UserRepresentation":148}],107:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./GroupCapabilityRepresentation":105,"./GroupRepresentation":106,"./UserRepresentation":148}],107:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35992,7 +35992,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],108:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],108:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36070,7 +36070,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],109:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],109:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36162,7 +36162,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],110:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],110:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36254,7 +36254,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./LightGroupRepresentation":110}],111:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./LightGroupRepresentation":110}],111:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36325,7 +36325,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],112:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],112:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36424,7 +36424,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],113:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],113:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36483,7 +36483,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],114:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],114:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36542,7 +36542,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],115:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],115:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36601,7 +36601,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],116:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],116:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36660,7 +36660,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],117:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],117:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36829,7 +36829,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],118:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],118:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36884,7 +36884,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],119:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],119:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36955,7 +36955,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],120:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],120:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37060,7 +37060,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],121:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],121:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37159,7 +37159,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],122:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],122:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37251,7 +37251,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./ProcessInstanceFilterRepresentation":121}],123:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./ProcessInstanceFilterRepresentation":121}],123:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37427,7 +37427,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./LightUserRepresentation":112,"./RestVariable":131}],124:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./LightUserRepresentation":112,"./RestVariable":131}],124:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37505,7 +37505,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],125:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],125:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37576,7 +37576,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],126:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],126:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37731,7 +37731,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./FormScopeRepresentation":102}],127:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./FormScopeRepresentation":102}],127:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37802,7 +37802,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./ProcessScopeIdentifierRepresentation":125}],128:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./ProcessScopeIdentifierRepresentation":125}],128:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37880,7 +37880,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./LightGroupRepresentation":110,"./LightUserRepresentation":112}],129:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./LightGroupRepresentation":110,"./LightUserRepresentation":112}],129:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38028,7 +38028,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./LightUserRepresentation":112}],130:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./LightUserRepresentation":112}],130:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38092,7 +38092,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],131:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],131:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38184,7 +38184,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],132:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],132:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38269,7 +38269,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./AbstractRepresentation":71}],133:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./AbstractRepresentation":71}],133:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38333,7 +38333,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./AppDefinitionRepresentation":76}],134:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./AppDefinitionRepresentation":76}],134:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38397,7 +38397,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],135:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],135:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38475,7 +38475,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],136:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],136:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38539,7 +38539,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],137:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],137:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38659,7 +38659,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],138:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],138:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38760,7 +38760,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./TaskFilterRepresentation":137}],139:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./TaskFilterRepresentation":137}],139:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38859,7 +38859,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],140:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],140:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39112,7 +39112,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./LightUserRepresentation":112}],141:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./LightUserRepresentation":112}],141:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39211,7 +39211,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],142:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],142:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39317,7 +39317,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],143:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],143:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39430,7 +39430,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],144:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],144:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39501,7 +39501,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],145:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],145:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39579,7 +39579,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],146:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],146:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39650,7 +39650,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],147:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],147:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39756,7 +39756,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./ProcessInstanceFilterRepresentation":121}],148:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./ProcessInstanceFilterRepresentation":121}],148:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39953,7 +39953,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./GroupRepresentation":106,"./LightAppRepresentation":109}],149:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./GroupRepresentation":106,"./LightAppRepresentation":109}],149:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40059,7 +40059,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./TaskFilterRepresentation":137}],150:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./TaskFilterRepresentation":137}],150:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40165,7 +40165,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],151:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],151:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40271,7 +40271,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],152:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],152:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40382,7 +40382,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"../model/Error":154,"../model/LoginRequest":156,"../model/LoginTicketEntry":157,"../model/ValidateTicketEntry":159}],153:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"../model/Error":154,"../model/LoginRequest":156,"../model/LoginTicketEntry":157,"../model/ValidateTicketEntry":159}],153:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40481,7 +40481,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../alfrescoApiClient":287,"./api/AuthenticationApi":152,"./model/Error":154,"./model/ErrorError":155,"./model/LoginRequest":156,"./model/LoginTicketEntry":157,"./model/LoginTicketEntryEntry":158,"./model/ValidateTicketEntry":159,"./model/ValidateTicketEntryEntry":160}],154:[function(require,module,exports){
+},{"../../alfrescoApiClient":289,"./api/AuthenticationApi":152,"./model/Error":154,"./model/ErrorError":155,"./model/LoginRequest":156,"./model/LoginTicketEntry":157,"./model/LoginTicketEntryEntry":158,"./model/ValidateTicketEntry":159,"./model/ValidateTicketEntryEntry":160}],154:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40543,7 +40543,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./ErrorError":155}],155:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./ErrorError":155}],155:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40656,7 +40656,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],156:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],156:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40726,7 +40726,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],157:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],157:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40788,7 +40788,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./LoginTicketEntryEntry":158}],158:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./LoginTicketEntryEntry":158}],158:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40858,7 +40858,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],159:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],159:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40920,7 +40920,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287,"./ValidateTicketEntryEntry":160}],160:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289,"./ValidateTicketEntryEntry":160}],160:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40982,7 +40982,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":287}],161:[function(require,module,exports){
+},{"../../../alfrescoApiClient":289}],161:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -56237,11 +56237,797 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":161}],286:[function(require,module,exports){
 'use strict';
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['../../../alfrescoApiClient'], factory);
+    } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+        // CommonJS-like environments that support module.exports, like Node.
+        module.exports = factory(require('../../../alfrescoApiClient'));
+    } else {
+        // Browser globals (root is window)
+        if (!root.AlfrescoCoreRestApi) {
+            root.AlfrescoCoreRestApi = {};
+        }
+        root.AlfrescoCoreRestApi.CustomModelApi = factory(root.AlfrescoCoreRestApi.ApiClient);
+    }
+})(undefined, function (ApiClient) {
+    'use strict';
+
+    /**
+     * Comments service.
+     * @module api/CustomModelApi
+     * @version 0.1.0
+     */
+
+    /**
+     * Constructs a new CustomModelApi.
+     * @alias module:api/CustomModelApi
+     * @class
+     * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
+     * if unspecified.
+     */
+
+    var exports = function exports(apiClient) {
+        this.apiClient = apiClient || ApiClient.instance;
+        this.private = true;
+        /**
+         * create Custom Model
+          */
+        this.createCustomModel = function (status, description, name, namespaceUri, namespacePrefix) {
+
+            if (namespaceUri == undefined || namespaceUri == null) {
+                throw "Missing the required parameter 'namespaceUri' when calling createCustomModel";
+            }
+
+            if (namespacePrefix == undefined || namespacePrefix == null) {
+                throw "Missing the required parameter 'namespacePrefix' when calling createCustomModel";
+            }
+
+            var postBody = {
+                "status": status,
+                "description": description,
+                "name": name,
+                "namespaceUri": namespaceUri,
+                "namespacePrefix": namespacePrefix
+            };
+
+            var pathParams = {};
+            var queryParams = {};
+            var headerParams = {};
+            var formParams = {};
+
+            var authNames = ['basicAuth'];
+            var contentTypes = ['application/json'];
+            var accepts = ['application/json'];
+            var returnType = {};
+
+            return this.apiClient.callApi('cmm', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+        };
+
+        /**
+         * Create a custom type
+         * @param {String} modelName
+         * @param {String} name
+         * @param {String} parentName
+         * @param {String} description
+         */
+        this.createCustomType = function (modelName, name, parentName, title, description) {
+
+            if (modelName == undefined || modelName == null) {
+                throw "Missing the required parameter 'modelName' when calling createCustomType";
+            }
+
+            if (name == undefined || name == null) {
+                throw "Missing the required parameter 'name' when calling createCustomType";
+            }
+
+            var postBody = {
+                "name": name,
+                "parentName": parentName,
+                "title": title,
+                "description": description
+            };
+
+            var pathParams = {
+                "modelName": modelName
+            };
+            var queryParams = {};
+            var headerParams = {};
+            var formParams = {};
+
+            var authNames = ['basicAuth'];
+            var contentTypes = ['application/json'];
+            var accepts = ['application/json'];
+            var returnType = {};
+
+            return this.apiClient.callApi('cmm/{modelName}/types', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+        };
+
+        /**
+         * Create a custom aspect
+         * @param {String} modelName
+         * @param {String} name
+         * @param {String} parentName
+         * @param {String} description
+         */
+        this.createCustomAspect = function (modelName, name, parentName, title, description) {
+
+            if (modelName == undefined || modelName == null) {
+                throw "Missing the required parameter 'modelName' when calling createCustomAspect";
+            }
+
+            if (name == undefined || name == null) {
+                throw "Missing the required parameter 'name' when calling createCustomAspect";
+            }
+
+            var postBody = {
+                "name": name,
+                "parentName": parentName,
+                "title": title,
+                "description": description
+            };
+
+            var pathParams = {
+                "modelName": modelName
+            };
+            var queryParams = {};
+            var headerParams = {};
+            var formParams = {};
+
+            var authNames = ['basicAuth'];
+            var contentTypes = ['application/json'];
+            var accepts = ['application/json'];
+            var returnType = {};
+
+            return this.apiClient.callApi('cmm/{modelName}/aspects', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+        };
+
+        /**
+         * Create a custom constraint
+          * @param {String} modelName
+          * @param {String} name
+          * @param {String} type
+          * @param {Object} parameters
+          */
+        this.createCustomConstraint = function (modelName, name, type, parameters) {
+
+            if (modelName == undefined || modelName == null) {
+                throw "Missing the required parameter 'modelName' when calling createCustomConstraint";
+            }
+            if (type == undefined || type == null) {
+                throw "Missing the required parameter 'type' when calling createCustomConstraint";
+            }
+            if (name == undefined || name == null) {
+                throw "Missing the required parameter 'name' when calling createCustomConstraint";
+            }
+
+            var postBody = {
+                "name": name,
+                "type": type,
+                "parameters": parameters
+            };
+
+            var pathParams = {
+                "modelName": modelName
+            };
+            var queryParams = {};
+            var headerParams = {};
+            var formParams = {};
+
+            var authNames = ['basicAuth'];
+            var contentTypes = ['application/json'];
+            var accepts = ['application/json'];
+            var returnType = {};
+
+            return this.apiClient.callApi('cmm/{modelName}/constraints', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+        };
+
+        /**
+         * Activate the custom model
+         * @param {String} modelName
+         */
+        this.activateCustomModel = function (modelName) {
+
+            if (modelName == undefined || modelName == null) {
+                throw "Missing the required parameter 'modelName' when calling activateCustomModel";
+            }
+
+            var postBody = {
+                "status": "ACTIVE"
+            };
+
+            var pathParams = {
+                "modelName": modelName
+            };
+            var queryParams = {};
+            var headerParams = {};
+            var formParams = {};
+
+            var authNames = ['basicAuth'];
+            var contentTypes = ['application/json'];
+            var accepts = ['application/json'];
+            var returnType = {};
+
+            return this.apiClient.callApi('cmm/{modelName}?select=status', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+        };
+
+        /**
+         * Deactivate the custom model
+         * @param {String} modelName
+         */
+        this.deactivateCustomModel = function (modelName) {
+
+            if (modelName == undefined || modelName == null) {
+                throw "Missing the required parameter 'modelName' when calling deactivateCustomModel";
+            }
+
+            var postBody = {
+                "status": "DRAFT"
+            };
+
+            var pathParams = {
+                "modelName": modelName
+            };
+            var queryParams = {};
+            var headerParams = {};
+            var formParams = {};
+
+            var authNames = ['basicAuth'];
+            var contentTypes = ['application/json'];
+            var accepts = ['application/json'];
+            var returnType = {};
+
+            return this.apiClient.callApi('cmm/{modelName}?select=status', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+        };
+
+        /**
+         * Add property into an existing aspect
+         * @param {String} modelName
+         * @param {String} aspectName
+         * @param {Object} properties
+          */
+        this.addPropertyToAspect = function (modelName, aspectName, properties) {
+
+            if (modelName == undefined || modelName == null) {
+                throw "Missing the required parameter 'modelName' when calling addPropertyToAspect";
+            }
+
+            if (aspectName == undefined || aspectName == null) {
+                throw "Missing the required parameter 'aspectName' when calling addPropertyToAspect";
+            }
+
+            var postBody = {
+                "name": aspectName,
+                "properties": properties
+            };
+
+            var pathParams = {
+                "modelName": modelName,
+                "aspectName": aspectName
+            };
+            var queryParams = {};
+            var headerParams = {};
+            var formParams = {};
+
+            var authNames = ['basicAuth'];
+            var contentTypes = ['application/json'];
+            var accepts = ['application/json'];
+            var returnType = {};
+
+            return this.apiClient.callApi('cmm/{modelName}/aspects/{aspectName}?select=props', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+        };
+
+        /**
+         * Add Property into an existing type
+         * @param {String} modelName
+         * @param {String} typeName
+         * @param {Object} properties
+          */
+        this.addPropertyToType = function (modelName, typeName, properties) {
+
+            if (modelName == undefined || modelName == null) {
+                throw "Missing the required parameter 'modelName' when calling addPropertyToType";
+            }
+
+            if (typeName == undefined || typeName == null) {
+                throw "Missing the required parameter 'typeName' when calling addPropertyToType";
+            }
+
+            var postBody = {
+                "name": typeName,
+                "properties": properties
+            };
+
+            var pathParams = {
+                "modelName": modelName,
+                "typeName": typeName
+            };
+            var queryParams = {};
+            var headerParams = {};
+            var formParams = {};
+
+            var authNames = ['basicAuth'];
+            var contentTypes = ['application/json'];
+            var accepts = ['application/json'];
+            var returnType = {};
+
+            return this.apiClient.callApi('cmm/{modelName}/types/{typeName}?select=props', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+        };
+
+        /**
+         * Edit an existing custom model
+         * @param {String} modelName
+         * @param {String} description
+         * @param {String} namespaceUri
+         * @param {String} namespacePrefix
+          */
+        this.updateCustomModel = function (modelName, description, namespaceUri, namespacePrefix) {
+
+            if (modelName == undefined || modelName == null) {
+                throw "Missing the required parameter 'modelName' when calling updateCustomModel";
+            }
+
+            var postBody = {
+                "name": modelName,
+                "description": description,
+                "namespaceUri": namespaceUri,
+                "namespacePrefix": namespacePrefix
+            };
+
+            var pathParams = {
+                "modelName": modelName
+            };
+            var queryParams = {};
+            var headerParams = {};
+            var formParams = {};
+
+            var authNames = ['basicAuth'];
+            var contentTypes = ['application/json'];
+            var accepts = ['application/json'];
+            var returnType = {};
+
+            return this.apiClient.callApi('cmm/{modelName}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+        };
+
+        /**
+         * Edit an existing custom model type
+         * @param {String} modelName
+         * @param {String} typeName
+         * @param {String} description
+         * @param {String} parentName
+         * @param {String} title
+          */
+        this.updateCustomType = function (modelName, typeName, description, parentName, title) {
+
+            if (modelName == undefined || modelName == null) {
+                throw "Missing the required parameter 'modelName' when calling UpdateCustomType";
+            }
+
+            if (typeName == undefined || typeName == null) {
+                throw "Missing the required parameter 'typeName' when calling UpdateCustomType";
+            }
+
+            var postBody = {
+                "name": modelName,
+                "parentName": parentName,
+                "title": title,
+                "description": description
+            };
+
+            var pathParams = {
+                "modelName": modelName,
+                "typeName": typeName
+            };
+            var queryParams = {};
+            var headerParams = {};
+            var formParams = {};
+
+            var authNames = ['basicAuth'];
+            var contentTypes = ['application/json'];
+            var accepts = ['application/json'];
+            var returnType = {};
+
+            return this.apiClient.callApi('cmm/{modelName}/types/{typeName}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+        };
+
+        /**
+         * Edit an existing custom model aspect
+         * @param {String} modelName
+         * @param {String} aspectName
+         * @param {String} description
+         * @param {String} parentName
+         * @param {String} title
+          */
+        this.updateCustomAspect = function (modelName, aspectName, description, parentName, title) {
+
+            if (modelName == undefined || modelName == null) {
+                throw "Missing the required parameter 'modelName' when calling updateCustomAspect";
+            }
+
+            if (aspectName == undefined || aspectName == null) {
+                throw "Missing the required parameter 'aspectName' when calling updateCustomAspect";
+            }
+
+            var postBody = {
+                "name": modelName,
+                "parentName": parentName,
+                "title": title,
+                "description": description
+            };
+
+            var pathParams = {
+                "modelName": modelName,
+                "aspectName": aspectName
+            };
+            var queryParams = {};
+            var headerParams = {};
+            var formParams = {};
+
+            var authNames = ['basicAuth'];
+            var contentTypes = ['application/json'];
+            var accepts = ['application/json'];
+            var returnType = {};
+
+            return this.apiClient.callApi('cmm/{modelName}/aspects/{aspectName}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+        };
+
+        /**
+         * Get all custom models
+         */
+        this.getAllCustomModel = function () {
+
+            var postBody = {};
+
+            var pathParams = {};
+            var queryParams = {};
+            var headerParams = {};
+            var formParams = {};
+
+            var authNames = ['basicAuth'];
+            var contentTypes = ['application/json'];
+            var accepts = ['application/json'];
+            var returnType = {};
+
+            return this.apiClient.callApi('cmm', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+        };
+
+        /**
+         * Get custom model
+         * @param {String} modelName
+         * @param {Object} queryParams
+         */
+        this.getCustomModel = function (modelName, queryParams) {
+
+            if (modelName == undefined || modelName == null) {
+                throw "Missing the required parameter 'modelName' when calling getCustomModel";
+            }
+
+            var postBody = {};
+
+            var pathParams = {
+                "modelName": modelName
+            };
+
+            var queryParams = queryParams || {};
+
+            var headerParams = {};
+            var formParams = {};
+
+            var authNames = ['basicAuth'];
+            var contentTypes = ['application/json'];
+            var accepts = ['application/json'];
+            var returnType = {};
+
+            return this.apiClient.callApi('cmm/{modelName}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+        };
+
+        /**
+         * Get all custom model types
+         * @param {String} modelName
+         */
+        this.getAllCustomType = function (modelName) {
+
+            if (modelName == undefined || modelName == null) {
+                throw "Missing the required parameter 'modelName' when calling getAllCustomType";
+            }
+
+            var postBody = {};
+
+            var pathParams = {
+                "modelName": modelName
+            };
+
+            var queryParams = {};
+
+            var headerParams = {};
+            var formParams = {};
+
+            var authNames = ['basicAuth'];
+            var contentTypes = ['application/json'];
+            var accepts = ['application/json'];
+            var returnType = {};
+
+            return this.apiClient.callApi('cmm/{modelName}/types', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+        };
+
+        /**
+         * Get custom model type
+         * @param {String} modelName
+         * @param {String} typeName
+         * @param {Object} queryParams
+         */
+        this.getCustomType = function (modelName, typeName, queryParams) {
+
+            if (modelName == undefined || modelName == null) {
+                throw "Missing the required parameter 'modelName' when calling getCustomType";
+            }
+
+            if (typeName == undefined || typeName == null) {
+                throw "Missing the required parameter 'typeName' when calling getCustomType";
+            }
+
+            var postBody = {};
+
+            var pathParams = {
+                "modelName": modelName,
+                "typeName": typeName
+            };
+
+            var queryParams = queryParams || {};
+
+            var headerParams = {};
+            var formParams = {};
+
+            var authNames = ['basicAuth'];
+            var contentTypes = ['application/json'];
+            var accepts = ['application/json'];
+            var returnType = {};
+
+            return this.apiClient.callApi('cmm/{modelName}/types/{typeName}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+        };
+
+        /**
+         * Get all custom model aspect
+         * @param {String} modelName
+         */
+        this.getAllCustomAspect = function (modelName) {
+
+            if (modelName == undefined || modelName == null) {
+                throw "Missing the required parameter 'modelName' when calling getAllCustomAspect";
+            }
+
+            var postBody = {};
+
+            var pathParams = {
+                "modelName": modelName
+            };
+
+            var queryParams = queryParams || {};
+
+            var headerParams = {};
+            var formParams = {};
+
+            var authNames = ['basicAuth'];
+            var contentTypes = ['application/json'];
+            var accepts = ['application/json'];
+            var returnType = {};
+
+            return this.apiClient.callApi('cmm/{modelName}/aspects', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+        };
+
+        /**
+         * Get custom model aspect
+         * @param {String} modelName
+         * @param {String} aspectName
+         * @param {Object} queryParams
+         */
+        this.getCustomAspect = function (modelName, aspectName, queryParams) {
+
+            if (modelName == undefined || modelName == null) {
+                throw "Missing the required parameter 'modelName' when calling getCustomAspect";
+            }
+
+            if (aspectName == undefined || aspectName == null) {
+                throw "Missing the required parameter 'aspectName' when calling getCustomAspect";
+            }
+
+            var postBody = {};
+
+            var pathParams = {
+                "modelName": modelName,
+                "aspectName": aspectName
+            };
+
+            var queryParams = queryParams || {};
+
+            var headerParams = {};
+            var formParams = {};
+
+            var authNames = ['basicAuth'];
+            var contentTypes = ['application/json'];
+            var accepts = ['application/json'];
+            var returnType = {};
+
+            return this.apiClient.callApi('cmm/{modelName}/aspects/{aspectName}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+        };
+
+        /**
+         * Get all custom model defined constraints
+         * @param {String} modelName
+         */
+        this.getAllCustomConstraints = function (modelName) {
+
+            if (modelName == undefined || modelName == null) {
+                throw "Missing the required parameter 'modelName' when calling getAllCustomConstraints";
+            }
+
+            var postBody = {};
+
+            var pathParams = {
+                "modelName": modelName
+            };
+
+            var queryParams = queryParams || {};
+
+            var headerParams = {};
+            var formParams = {};
+
+            var authNames = ['basicAuth'];
+            var contentTypes = ['application/json'];
+            var accepts = ['application/json'];
+            var returnType = {};
+
+            return this.apiClient.callApi('cmm/{modelName}/constraints', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+        };
+
+        /**
+         * Get custom model defined constraints
+         * @param {String} modelName
+         * @param {String} constraintName
+         * @param {Object} queryParams
+         */
+        this.getCustomConstraints = function (modelName, constraintName, queryParams) {
+
+            if (modelName == undefined || modelName == null) {
+                throw "Missing the required parameter 'modelName' when calling getCustomConstraints";
+            }
+
+            if (constraintName == undefined || constraintName == null) {
+                throw "Missing the required parameter 'constraintName' when calling getCustomConstraints";
+            }
+
+            var postBody = {};
+
+            var pathParams = {
+                "modelName": modelName,
+                "constraintName": constraintName
+            };
+
+            var queryParams = queryParams || {};
+
+            var headerParams = {};
+            var formParams = {};
+
+            var authNames = ['basicAuth'];
+            var contentTypes = ['application/json'];
+            var accepts = ['application/json'];
+            var returnType = {};
+
+            return this.apiClient.callApi('cmm/{modelName}/constraints{constraintName}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+        };
+
+        /**
+         * Delete the given custom model
+         * @param {String} modelName
+         */
+        this.deleteCustomModel = function (modelName) {
+
+            if (modelName == undefined || modelName == null) {
+                throw "Missing the required parameter 'modelName' when calling deleteCustomModel";
+            }
+
+            var postBody = {};
+
+            var pathParams = {
+                "modelName": modelName
+            };
+
+            var queryParams = {};
+
+            var headerParams = {};
+            var formParams = {};
+
+            var authNames = ['basicAuth'];
+            var contentTypes = ['application/json'];
+            var accepts = ['application/json'];
+            var returnType = {};
+
+            return this.apiClient.callApi('cmm/{modelName}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+        };
+
+        /**
+         * Delete the given custom type
+         * @param {String} modelName
+         * @param {String} typeName
+         */
+        this.deleteCustomType = function (modelName, typeName) {
+
+            if (modelName == undefined || modelName == null) {
+                throw "Missing the required parameter 'modelName' when calling getCustomConstraints";
+            }
+
+            if (typeName == undefined || typeName == null) {
+                throw "Missing the required parameter 'modelName' when calling deleteCustomType";
+            }
+
+            var postBody = {};
+
+            var pathParams = {
+                "modelName": modelName,
+                "typeName": typeName
+            };
+
+            var queryParams = {};
+
+            var headerParams = {};
+            var formParams = {};
+
+            var authNames = ['basicAuth'];
+            var contentTypes = ['application/json'];
+            var accepts = ['application/json'];
+            var returnType = {};
+
+            return this.apiClient.callApi('cmm/{modelName}/types/{typeName}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+        };
+    };
+
+    return exports;
+});
+
+},{"../../../alfrescoApiClient":289}],287:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+(function (factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../alfrescoApiClient', './api/CustomModelApi'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../alfrescoApiClient'), require('./api/CustomModelApi'));
+  }
+})(function (ApiClient, CustomModelApi) {
+  'use strict';
+
+  var exports = {
+    /**
+     * The ApiClient constructor.
+     * @property {module:ApiClient}
+     */
+    ApiClient: ApiClient,
+    /**
+    * The CustomModelApi service constructor.
+    * @property {module:api/CustomModelApi}
+    */
+    CustomModelApi: CustomModelApi
+  };
+
+  return exports;
+});
+
+},{"../../alfrescoApiClient":289,"./api/CustomModelApi":286}],288:[function(require,module,exports){
+'use strict';
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
+var AlfrescoPrivateRestApi = require('./alfresco-private-rest-api/src/index.js');
 var AlfrescoAuthRestApi = require('./alfresco-auth-rest-api/src/index');
 var AlfrescoActivitiApi = require('./alfresco-activiti-rest-api/src/index');
 var AlfrescoContent = require('./alfrescoContent');
@@ -56253,6 +57039,7 @@ var EcmAuth = require('./ecmAuth');
 var BpmAuth = require('./bpmAuth');
 var EcmClient = require('./ecmClient');
 var BpmClient = require('./bpmClient');
+var EcmPrivateClient = require('./ecmPrivateClient');
 var _ = require('lodash');
 
 var AlfrescoApi = function () {
@@ -56290,6 +57077,7 @@ var AlfrescoApi = function () {
         this.bpmAuth = new BpmAuth(this.config);
         this.ecmAuth = new EcmAuth(this.config);
 
+        this.ecmPrivateClient = new EcmPrivateClient(this.config.hostEcm, this.config.contextRoot);
         this.ecmClient = new EcmClient(this.config.hostEcm, this.config.contextRoot);
         this.bpmClient = new BpmClient(this.config.hostBpm);
         this.setAuthenticationClientECMBPM(this.ecmAuth.getAuthentication(), this.bpmAuth.getAuthentication());
@@ -56333,6 +57121,11 @@ var AlfrescoApi = function () {
             this.core = {};
             this.coreStore = AlfrescoCoreRestApi;
             this._instantiateObjects(this.coreStore, this.core);
+
+            //ECM-Private
+            AlfrescoPrivateRestApi.ApiClient.instance = this.ecmPrivateClient;
+            this.corePrivateStore = AlfrescoPrivateRestApi;
+            this._instantiateObjects(this.corePrivateStore, this.core);
 
             this.nodes = this.node = new AlfrescoNode();
             this.content = new AlfrescoContent(this.ecmAuth, this.ecmClient);
@@ -56411,6 +57204,7 @@ var AlfrescoApi = function () {
         key: 'setAuthenticationClientECMBPM',
         value: function setAuthenticationClientECMBPM(authECM, authBPM) {
             this.ecmClient.setAuthentications(authECM);
+            this.ecmPrivateClient.setAuthentications(authECM);
             this.bpmClient.setAuthentications(authBPM);
         }
 
@@ -56607,7 +57401,7 @@ module.exports.Activiti = AlfrescoActivitiApi;
 module.exports.Core = AlfrescoCoreRestApi;
 module.exports.Auth = AlfrescoAuthRestApi;
 
-},{"./alfresco-activiti-rest-api/src/index":69,"./alfresco-auth-rest-api/src/index":153,"./alfresco-core-rest-api/src/index.js":176,"./alfrescoContent":288,"./alfrescoNode":289,"./alfrescoUpload":290,"./alfrescoWebScript":291,"./bpmAuth":292,"./bpmClient":293,"./ecmAuth":294,"./ecmClient":295,"event-emitter":21,"lodash":23}],287:[function(require,module,exports){
+},{"./alfresco-activiti-rest-api/src/index":69,"./alfresco-auth-rest-api/src/index":153,"./alfresco-core-rest-api/src/index.js":176,"./alfresco-private-rest-api/src/index.js":287,"./alfrescoContent":290,"./alfrescoNode":291,"./alfrescoUpload":292,"./alfrescoWebScript":293,"./bpmAuth":294,"./bpmClient":295,"./ecmAuth":296,"./ecmClient":297,"./ecmPrivateClient":298,"event-emitter":21,"lodash":23}],289:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -56885,7 +57679,7 @@ var AlfrescoApiClient = function (_ApiClient) {
 Emitter(AlfrescoApiClient.prototype); // jshint ignore:line
 module.exports = AlfrescoApiClient;
 
-},{"./alfresco-core-rest-api/src/ApiClient":161,"event-emitter":21,"lodash":23,"superagent":25}],288:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/ApiClient":161,"event-emitter":21,"lodash":23,"superagent":25}],290:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -56953,7 +57747,7 @@ var AlfrescoContent = function () {
 
 module.exports = AlfrescoContent;
 
-},{}],289:[function(require,module,exports){
+},{}],291:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -57066,7 +57860,7 @@ var AlfrescoNode = function (_AlfrescoCoreRestApi$) {
 
 module.exports = AlfrescoNode;
 
-},{"./alfresco-core-rest-api/src/index.js":176,"lodash":23}],290:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/index.js":176,"lodash":23}],292:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -57164,7 +57958,7 @@ var AlfrescoUpload = function (_AlfrescoCoreRestApi$) {
 Emitter(AlfrescoUpload.prototype); // jshint ignore:line
 module.exports = AlfrescoUpload;
 
-},{"./alfresco-core-rest-api/src/index.js":176,"event-emitter":21,"lodash":23}],291:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/index.js":176,"event-emitter":21,"lodash":23}],293:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -57228,7 +58022,7 @@ var AlfrescoWebScriptApi = function () {
 
 module.exports = AlfrescoWebScriptApi;
 
-},{"./alfresco-core-rest-api/src/ApiClient":161}],292:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/ApiClient":161}],294:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -57437,7 +58231,7 @@ Emitter(BpmAuth.prototype); // jshint ignore:line
 module.exports = BpmAuth;
 
 }).call(this,require("buffer").Buffer)
-},{"./alfrescoApiClient":287,"buffer":4,"event-emitter":21}],293:[function(require,module,exports){
+},{"./alfrescoApiClient":289,"buffer":4,"event-emitter":21}],295:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -57477,7 +58271,6 @@ var BpmClient = function (_AlfrescoApiClient) {
     _createClass(BpmClient, [{
         key: 'changeHost',
         value: function changeHost(host) {
-            this.hostBpm = host;
             this.basePath = host + '/activiti-app';
         }
 
@@ -57499,7 +58292,7 @@ var BpmClient = function (_AlfrescoApiClient) {
 
 module.exports = BpmClient;
 
-},{"./alfrescoApiClient":287}],294:[function(require,module,exports){
+},{"./alfrescoApiClient":289}],296:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -57706,7 +58499,7 @@ var EcmAuth = function (_AlfrescoApiClient) {
 Emitter(EcmAuth.prototype); // jshint ignore:line
 module.exports = EcmAuth;
 
-},{"./alfresco-auth-rest-api/src/index":153,"./alfrescoApiClient":287,"event-emitter":21}],295:[function(require,module,exports){
+},{"./alfresco-auth-rest-api/src/index":153,"./alfrescoApiClient":289,"event-emitter":21}],297:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -57748,7 +58541,6 @@ var EcmClient = function (_AlfrescoApiClient) {
     _createClass(EcmClient, [{
         key: 'changeHost',
         value: function changeHost(host) {
-            this.hostEcm = host;
             this.basePath = host + '/' + this.contextRoot + '/api/-default-/public/alfresco/versions/1';
         }
 
@@ -57770,5 +58562,68 @@ var EcmClient = function (_AlfrescoApiClient) {
 
 module.exports = EcmClient;
 
-},{"./alfrescoApiClient":287}]},{},[1])(1)
+},{"./alfrescoApiClient":289}],298:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AlfrescoApiClient = require('./alfrescoApiClient');
+
+var EcmClient = function (_AlfrescoApiClient) {
+    _inherits(EcmClient, _AlfrescoApiClient);
+
+    /**
+     * @param {String} host
+     * @param {String} contextRoot
+     */
+    function EcmClient(host, contextRoot) {
+        _classCallCheck(this, EcmClient);
+
+        var _this = _possibleConstructorReturn(this, (EcmClient.__proto__ || Object.getPrototypeOf(EcmClient)).call(this));
+
+        _this.host = host;
+        _this.contextRoot = contextRoot;
+
+        _this.changeHost(host);
+        return _this;
+    }
+
+    /**
+     * set the Authentication
+     *
+     * @param {String} authentications
+     * */
+
+
+    _createClass(EcmClient, [{
+        key: 'changeHost',
+        value: function changeHost(host) {
+            this.basePath = host + '/' + this.contextRoot + '/api/-default-/private/alfresco/versions/1';
+        }
+
+        /**
+         * set the Authentications
+         *
+         * @param {Object} authentications
+         * */
+
+    }, {
+        key: 'setAuthentications',
+        value: function setAuthentications(authentications) {
+            this.authentications = authentications;
+        }
+    }]);
+
+    return EcmClient;
+}(AlfrescoApiClient);
+
+module.exports = EcmClient;
+
+},{"./alfrescoApiClient":289}]},{},[1])(1)
 });

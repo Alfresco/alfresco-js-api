@@ -1,6 +1,7 @@
 'use strict';
 
 var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
+var AlfrescoPrivateRestApi = require('./alfresco-private-rest-api/src/index.js');
 var AlfrescoAuthRestApi = require('./alfresco-auth-rest-api/src/index');
 var AlfrescoActivitiApi = require('./alfresco-activiti-rest-api/src/index');
 var AlfrescoContent = require('./alfrescoContent');
@@ -12,6 +13,7 @@ var EcmAuth = require('./ecmAuth');
 var BpmAuth = require('./bpmAuth');
 var EcmClient = require('./ecmClient');
 var BpmClient = require('./bpmClient');
+var EcmPrivateClient = require('./ecmPrivateClient');
 var _ = require('lodash');
 
 class AlfrescoApi {
@@ -48,6 +50,7 @@ class AlfrescoApi {
         this.bpmAuth = new BpmAuth(this.config);
         this.ecmAuth = new EcmAuth(this.config);
 
+        this.ecmPrivateClient = new EcmPrivateClient(this.config.hostEcm, this.config.contextRoot);
         this.ecmClient = new EcmClient(this.config.hostEcm, this.config.contextRoot);
         this.bpmClient = new BpmClient(this.config.hostBpm);
         this.setAuthenticationClientECMBPM(this.ecmAuth.getAuthentication(), this.bpmAuth.getAuthentication());
@@ -86,6 +89,11 @@ class AlfrescoApi {
         this.core = {};
         this.coreStore = AlfrescoCoreRestApi;
         this._instantiateObjects(this.coreStore, this.core);
+
+        //ECM-Private
+        AlfrescoPrivateRestApi.ApiClient.instance = this.ecmPrivateClient;
+        this.corePrivateStore = AlfrescoPrivateRestApi;
+        this._instantiateObjects(this.corePrivateStore, this.core);
 
         this.nodes = this.node = new AlfrescoNode();
         this.content = new AlfrescoContent(this.ecmAuth, this.ecmClient);
@@ -155,6 +163,7 @@ class AlfrescoApi {
 
     setAuthenticationClientECMBPM(authECM, authBPM) {
         this.ecmClient.setAuthentications(authECM);
+        this.ecmPrivateClient.setAuthentications(authECM);
         this.bpmClient.setAuthentications(authBPM);
     }
 
