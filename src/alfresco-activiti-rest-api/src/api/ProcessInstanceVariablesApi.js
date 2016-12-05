@@ -192,7 +192,7 @@
       var returnType = RestVariable;
 
       return this.apiClient.callApi(
-        '/enterprise/process-instances/{processInstanceId}/variables/{variableName}', 'GET',
+        '/api/enterprise/process-instances/{processInstanceId}/variables/{variableName}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );
@@ -235,7 +235,7 @@
       var returnType = RestVariable;
 
       return this.apiClient.callApi(
-        '/enterprise/process-instances/{processInstanceId}/variables/{variableName}', 'PUT',
+        '/api/enterprise/process-instances/{processInstanceId}/variables/{variableName}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );
@@ -277,7 +277,7 @@
       var returnType = null;
 
       return this.apiClient.callApi(
-        '/enterprise/process-instances/{processInstanceId}/variables/{variableName}', 'DELETE',
+        '/api/enterprise/process-instances/{processInstanceId}/variables/{variableName}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );
