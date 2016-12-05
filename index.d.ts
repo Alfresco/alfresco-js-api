@@ -360,6 +360,7 @@ declare namespace AlfrescoApi {
         processInstancesInformationApi: any;
         processInstancesListingApi: any;
         processScopeApi: any;
+        processInstanceVariablesApi: any;
         profileApi: any;
         scriptFileApi: any;
         systemPropertiesApi: any;
