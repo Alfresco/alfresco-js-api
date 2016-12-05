@@ -23,10 +23,6 @@ declare namespace AlfrescoApi {
         upload: any;
         webScript: any;
 
-        createClient(): any;
-        getClient(): any;
-        getClientAuth(): any;
-
         changeEcmHost(ecmHost: string);
         changeBpmHost(bpmHost: string);
         changeCsrfConfig(disableCsrf: boolean);
@@ -364,6 +360,7 @@ declare namespace AlfrescoApi {
         processInstancesInformationApi: any;
         processInstancesListingApi: any;
         processScopeApi: any;
+        processInstanceVariablesApi: any;
         profileApi: any;
         scriptFileApi: any;
         systemPropertiesApi: any;
@@ -463,6 +460,7 @@ declare namespace AlfrescoApi {
         changesApi: any;
         childAssociationsApi: any;
         commentsApi: any;
+        customModelApi: any;
         favoritesApi: any;
         networksApi: any;
         nodesApi: any;

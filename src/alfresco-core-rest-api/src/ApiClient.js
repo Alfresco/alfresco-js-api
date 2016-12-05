@@ -274,6 +274,11 @@
             }
           }
           break;
+        case 'activiti':
+          if (auth.ticket) {
+            request.set({'Authorization': auth.ticket});
+          }
+          break;
         case 'oauth2':
           if (auth.accessToken) {
             request.set({'Authorization': 'Bearer ' + auth.accessToken});

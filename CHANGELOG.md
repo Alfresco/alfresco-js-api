@@ -6,6 +6,13 @@ Alfresco JS API
 
 _This project provides a JavaScript client API into the v1 Alfresco REST API_
 
+<a name="0.5.1"></a>
+# [0.5.1](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.5.1) (05-12-2016)
+
+## Features
+- [Add the ecm-model service methods of the form component inside the js api  #102](https://github.com/Alfresco/alfresco-js-api/issues/73)
+- [Add ProcessInstanceVariables service in activiti #109](https://github.com/Alfresco/alfresco-js-api/issues/109)
+
 <a name="0.5.0"></a>
 # [0.5.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.5.0) (25-11-2016)
 

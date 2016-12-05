@@ -65,12 +65,11 @@ describe('Bpm Auth test', function () {
         });
 
         it('login should return an error if wrong credential are used 401 the login fails', function (done) {
+            this.authBpmMock.get401Response();
 
             this.bpmAuth = new BpmAuth({
                 hostBpm: this.hostBpm
             });
-
-            this.authBpmMock.get401Response();
 
             this.bpmAuth.login('wrong', 'name').then(function () {
             }, function (error) {
@@ -89,6 +88,18 @@ describe('Bpm Auth test', function () {
                 });
 
                 this.bpmAuth.login('wrong', 'name').on('unauthorized', ()=> {
+                    done();
+                });
+            });
+
+            it('login should fire an event if is forbidden 403', function (done) {
+                this.authBpmMock.get403Response();
+
+                this.bpmAuth = new BpmAuth({
+                    hostBpm: this.hostBpm
+                });
+
+                this.bpmAuth.login('wrong', 'name').on('forbidden', ()=> {
                     done();
                 });
             });
@@ -131,7 +142,7 @@ describe('Bpm Auth test', function () {
                     hostBpm: this.hostBpm
                 });
 
-                expect('Basic YWRtaW46YWRtaW4=').to.be.equal(this.bpmAuth.defaultHeaders.Authorization);
+                expect('Basic YWRtaW46YWRtaW4=').to.be.equal(this.bpmAuth.authentications.basicAuth.ticket);
             });
         });
 
