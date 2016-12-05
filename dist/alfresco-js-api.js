@@ -8,6 +8,7 @@ module.exports = AlfrescoApi;
 },{"./src/alfrescoApi.js":289}],2:[function(require,module,exports){
 'use strict'
 
+exports.byteLength = byteLength
 exports.toByteArray = toByteArray
 exports.fromByteArray = fromByteArray
 
@@ -15,23 +16,17 @@ var lookup = []
 var revLookup = []
 var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
 
-function init () {
-  var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-  for (var i = 0, len = code.length; i < len; ++i) {
-    lookup[i] = code[i]
-    revLookup[code.charCodeAt(i)] = i
-  }
-
-  revLookup['-'.charCodeAt(0)] = 62
-  revLookup['_'.charCodeAt(0)] = 63
+var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+for (var i = 0, len = code.length; i < len; ++i) {
+  lookup[i] = code[i]
+  revLookup[code.charCodeAt(i)] = i
 }
 
-init()
+revLookup['-'.charCodeAt(0)] = 62
+revLookup['_'.charCodeAt(0)] = 63
 
-function toByteArray (b64) {
-  var i, j, l, tmp, placeHolders, arr
+function placeHoldersCount (b64) {
   var len = b64.length
-
   if (len % 4 > 0) {
     throw new Error('Invalid string. Length must be a multiple of 4')
   }
@@ -41,9 +36,19 @@ function toByteArray (b64) {
   // represent one byte
   // if there is only one, then the three characters before it represent 2 bytes
   // this is just a cheap hack to not do indexOf twice
-  placeHolders = b64[len - 2] === '=' ? 2 : b64[len - 1] === '=' ? 1 : 0
+  return b64[len - 2] === '=' ? 2 : b64[len - 1] === '=' ? 1 : 0
+}
 
+function byteLength (b64) {
   // base64 is 4/3 + up to two characters of the original data
+  return b64.length * 3 / 4 - placeHoldersCount(b64)
+}
+
+function toByteArray (b64) {
+  var i, j, l, tmp, placeHolders, arr
+  var len = b64.length
+  placeHolders = placeHoldersCount(b64)
+
   arr = new Arr(len * 3 / 4 - placeHolders)
 
   // if there are placeholders, only get up to the last complete 4 chars
@@ -174,7 +179,7 @@ exports.kMaxLength = kMaxLength()
 function typedArraySupport () {
   try {
     var arr = new Uint8Array(1)
-    arr.foo = function () { return 42 }
+    arr.__proto__ = {__proto__: Uint8Array.prototype, foo: function () { return 42 }}
     return arr.foo() === 42 && // typed array instances can be augmented
         typeof arr.subarray === 'function' && // chrome 9-10 lack `subarray`
         arr.subarray(1, 1).byteLength === 0 // ie10 has broken `subarray`
@@ -287,6 +292,8 @@ if (Buffer.TYPED_ARRAY_SUPPORT) {
 function assertSize (size) {
   if (typeof size !== 'number') {
     throw new TypeError('"size" argument must be a number')
+  } else if (size < 0) {
+    throw new RangeError('"size" argument must not be negative')
   }
 }
 
@@ -318,7 +325,7 @@ function allocUnsafe (that, size) {
   assertSize(size)
   that = createBuffer(that, size < 0 ? 0 : checked(size) | 0)
   if (!Buffer.TYPED_ARRAY_SUPPORT) {
-    for (var i = 0; i < size; i++) {
+    for (var i = 0; i < size; ++i) {
       that[i] = 0
     }
   }
@@ -350,12 +357,20 @@ function fromString (that, string, encoding) {
   var length = byteLength(string, encoding) | 0
   that = createBuffer(that, length)
 
-  that.write(string, encoding)
+  var actual = that.write(string, encoding)
+
+  if (actual !== length) {
+    // Writing a hex string, for example, that contains invalid characters will
+    // cause everything after the first invalid character to be ignored. (e.g.
+    // 'abxxcd' will be treated as 'ab')
+    that = that.slice(0, actual)
+  }
+
   return that
 }
 
 function fromArrayLike (that, array) {
-  var length = checked(array.length) | 0
+  var length = array.length < 0 ? 0 : checked(array.length) | 0
   that = createBuffer(that, length)
   for (var i = 0; i < length; i += 1) {
     that[i] = array[i] & 255
@@ -374,7 +389,9 @@ function fromArrayBuffer (that, array, byteOffset, length) {
     throw new RangeError('\'length\' is out of bounds')
   }
 
-  if (length === undefined) {
+  if (byteOffset === undefined && length === undefined) {
+    array = new Uint8Array(array)
+  } else if (length === undefined) {
     array = new Uint8Array(array, byteOffset)
   } else {
     array = new Uint8Array(array, byteOffset, length)
@@ -422,7 +439,7 @@ function fromObject (that, obj) {
 }
 
 function checked (length) {
-  // Note: cannot use `length < kMaxLength` here because that fails when
+  // Note: cannot use `length < kMaxLength()` here because that fails when
   // length is NaN (which is otherwise coerced to zero.)
   if (length >= kMaxLength()) {
     throw new RangeError('Attempt to allocate Buffer larger than maximum ' +
@@ -471,9 +488,9 @@ Buffer.isEncoding = function isEncoding (encoding) {
     case 'utf8':
     case 'utf-8':
     case 'ascii':
+    case 'latin1':
     case 'binary':
     case 'base64':
-    case 'raw':
     case 'ucs2':
     case 'ucs-2':
     case 'utf16le':
@@ -496,14 +513,14 @@ Buffer.concat = function concat (list, length) {
   var i
   if (length === undefined) {
     length = 0
-    for (i = 0; i < list.length; i++) {
+    for (i = 0; i < list.length; ++i) {
       length += list[i].length
     }
   }
 
   var buffer = Buffer.allocUnsafe(length)
   var pos = 0
-  for (i = 0; i < list.length; i++) {
+  for (i = 0; i < list.length; ++i) {
     var buf = list[i]
     if (!Buffer.isBuffer(buf)) {
       throw new TypeError('"list" argument must be an Array of Buffers')
@@ -534,10 +551,8 @@ function byteLength (string, encoding) {
   for (;;) {
     switch (encoding) {
       case 'ascii':
+      case 'latin1':
       case 'binary':
-      // Deprecated
-      case 'raw':
-      case 'raws':
         return len
       case 'utf8':
       case 'utf-8':
@@ -610,8 +625,9 @@ function slowToString (encoding, start, end) {
       case 'ascii':
         return asciiSlice(this, start, end)
 
+      case 'latin1':
       case 'binary':
-        return binarySlice(this, start, end)
+        return latin1Slice(this, start, end)
 
       case 'base64':
         return base64Slice(this, start, end)
@@ -659,6 +675,20 @@ Buffer.prototype.swap32 = function swap32 () {
   for (var i = 0; i < len; i += 4) {
     swap(this, i, i + 3)
     swap(this, i + 1, i + 2)
+  }
+  return this
+}
+
+Buffer.prototype.swap64 = function swap64 () {
+  var len = this.length
+  if (len % 8 !== 0) {
+    throw new RangeError('Buffer size must be a multiple of 64-bits')
+  }
+  for (var i = 0; i < len; i += 8) {
+    swap(this, i, i + 7)
+    swap(this, i + 1, i + 6)
+    swap(this, i + 2, i + 5)
+    swap(this, i + 3, i + 4)
   }
   return this
 }
@@ -745,7 +775,73 @@ Buffer.prototype.compare = function compare (target, start, end, thisStart, this
   return 0
 }
 
-function arrayIndexOf (arr, val, byteOffset, encoding) {
+// Finds either the first index of `val` in `buffer` at offset >= `byteOffset`,
+// OR the last index of `val` in `buffer` at offset <= `byteOffset`.
+//
+// Arguments:
+// - buffer - a Buffer to search
+// - val - a string, Buffer, or number
+// - byteOffset - an index into `buffer`; will be clamped to an int32
+// - encoding - an optional encoding, relevant is val is a string
+// - dir - true for indexOf, false for lastIndexOf
+function bidirectionalIndexOf (buffer, val, byteOffset, encoding, dir) {
+  // Empty buffer means no match
+  if (buffer.length === 0) return -1
+
+  // Normalize byteOffset
+  if (typeof byteOffset === 'string') {
+    encoding = byteOffset
+    byteOffset = 0
+  } else if (byteOffset > 0x7fffffff) {
+    byteOffset = 0x7fffffff
+  } else if (byteOffset < -0x80000000) {
+    byteOffset = -0x80000000
+  }
+  byteOffset = +byteOffset  // Coerce to Number.
+  if (isNaN(byteOffset)) {
+    // byteOffset: it it's undefined, null, NaN, "foo", etc, search whole buffer
+    byteOffset = dir ? 0 : (buffer.length - 1)
+  }
+
+  // Normalize byteOffset: negative offsets start from the end of the buffer
+  if (byteOffset < 0) byteOffset = buffer.length + byteOffset
+  if (byteOffset >= buffer.length) {
+    if (dir) return -1
+    else byteOffset = buffer.length - 1
+  } else if (byteOffset < 0) {
+    if (dir) byteOffset = 0
+    else return -1
+  }
+
+  // Normalize val
+  if (typeof val === 'string') {
+    val = Buffer.from(val, encoding)
+  }
+
+  // Finally, search either indexOf (if dir is true) or lastIndexOf
+  if (Buffer.isBuffer(val)) {
+    // Special case: looking for empty string/buffer always fails
+    if (val.length === 0) {
+      return -1
+    }
+    return arrayIndexOf(buffer, val, byteOffset, encoding, dir)
+  } else if (typeof val === 'number') {
+    val = val & 0xFF // Search for a byte value [0-255]
+    if (Buffer.TYPED_ARRAY_SUPPORT &&
+        typeof Uint8Array.prototype.indexOf === 'function') {
+      if (dir) {
+        return Uint8Array.prototype.indexOf.call(buffer, val, byteOffset)
+      } else {
+        return Uint8Array.prototype.lastIndexOf.call(buffer, val, byteOffset)
+      }
+    }
+    return arrayIndexOf(buffer, [ val ], byteOffset, encoding, dir)
+  }
+
+  throw new TypeError('val must be string, number or Buffer')
+}
+
+function arrayIndexOf (arr, val, byteOffset, encoding, dir) {
   var indexSize = 1
   var arrLength = arr.length
   var valLength = val.length
@@ -772,59 +868,45 @@ function arrayIndexOf (arr, val, byteOffset, encoding) {
     }
   }
 
-  var foundIndex = -1
-  for (var i = 0; byteOffset + i < arrLength; i++) {
-    if (read(arr, byteOffset + i) === read(val, foundIndex === -1 ? 0 : i - foundIndex)) {
-      if (foundIndex === -1) foundIndex = i
-      if (i - foundIndex + 1 === valLength) return (byteOffset + foundIndex) * indexSize
-    } else {
-      if (foundIndex !== -1) i -= i - foundIndex
-      foundIndex = -1
+  var i
+  if (dir) {
+    var foundIndex = -1
+    for (i = byteOffset; i < arrLength; i++) {
+      if (read(arr, i) === read(val, foundIndex === -1 ? 0 : i - foundIndex)) {
+        if (foundIndex === -1) foundIndex = i
+        if (i - foundIndex + 1 === valLength) return foundIndex * indexSize
+      } else {
+        if (foundIndex !== -1) i -= i - foundIndex
+        foundIndex = -1
+      }
+    }
+  } else {
+    if (byteOffset + valLength > arrLength) byteOffset = arrLength - valLength
+    for (i = byteOffset; i >= 0; i--) {
+      var found = true
+      for (var j = 0; j < valLength; j++) {
+        if (read(arr, i + j) !== read(val, j)) {
+          found = false
+          break
+        }
+      }
+      if (found) return i
     }
   }
+
   return -1
-}
-
-Buffer.prototype.indexOf = function indexOf (val, byteOffset, encoding) {
-  if (typeof byteOffset === 'string') {
-    encoding = byteOffset
-    byteOffset = 0
-  } else if (byteOffset > 0x7fffffff) {
-    byteOffset = 0x7fffffff
-  } else if (byteOffset < -0x80000000) {
-    byteOffset = -0x80000000
-  }
-  byteOffset >>= 0
-
-  if (this.length === 0) return -1
-  if (byteOffset >= this.length) return -1
-
-  // Negative offsets start from the end of the buffer
-  if (byteOffset < 0) byteOffset = Math.max(this.length + byteOffset, 0)
-
-  if (typeof val === 'string') {
-    val = Buffer.from(val, encoding)
-  }
-
-  if (Buffer.isBuffer(val)) {
-    // special case: looking for empty string/buffer always fails
-    if (val.length === 0) {
-      return -1
-    }
-    return arrayIndexOf(this, val, byteOffset, encoding)
-  }
-  if (typeof val === 'number') {
-    if (Buffer.TYPED_ARRAY_SUPPORT && Uint8Array.prototype.indexOf === 'function') {
-      return Uint8Array.prototype.indexOf.call(this, val, byteOffset)
-    }
-    return arrayIndexOf(this, [ val ], byteOffset, encoding)
-  }
-
-  throw new TypeError('val must be string, number or Buffer')
 }
 
 Buffer.prototype.includes = function includes (val, byteOffset, encoding) {
   return this.indexOf(val, byteOffset, encoding) !== -1
+}
+
+Buffer.prototype.indexOf = function indexOf (val, byteOffset, encoding) {
+  return bidirectionalIndexOf(this, val, byteOffset, encoding, true)
+}
+
+Buffer.prototype.lastIndexOf = function lastIndexOf (val, byteOffset, encoding) {
+  return bidirectionalIndexOf(this, val, byteOffset, encoding, false)
 }
 
 function hexWrite (buf, string, offset, length) {
@@ -841,12 +923,12 @@ function hexWrite (buf, string, offset, length) {
 
   // must be an even number of digits
   var strLen = string.length
-  if (strLen % 2 !== 0) throw new Error('Invalid hex string')
+  if (strLen % 2 !== 0) throw new TypeError('Invalid hex string')
 
   if (length > strLen / 2) {
     length = strLen / 2
   }
-  for (var i = 0; i < length; i++) {
+  for (var i = 0; i < length; ++i) {
     var parsed = parseInt(string.substr(i * 2, 2), 16)
     if (isNaN(parsed)) return i
     buf[offset + i] = parsed
@@ -862,7 +944,7 @@ function asciiWrite (buf, string, offset, length) {
   return blitBuffer(asciiToBytes(string), buf, offset, length)
 }
 
-function binaryWrite (buf, string, offset, length) {
+function latin1Write (buf, string, offset, length) {
   return asciiWrite(buf, string, offset, length)
 }
 
@@ -924,8 +1006,9 @@ Buffer.prototype.write = function write (string, offset, length, encoding) {
       case 'ascii':
         return asciiWrite(this, string, offset, length)
 
+      case 'latin1':
       case 'binary':
-        return binaryWrite(this, string, offset, length)
+        return latin1Write(this, string, offset, length)
 
       case 'base64':
         // Warning: maxLength not taken into account in base64Write
@@ -1060,17 +1143,17 @@ function asciiSlice (buf, start, end) {
   var ret = ''
   end = Math.min(buf.length, end)
 
-  for (var i = start; i < end; i++) {
+  for (var i = start; i < end; ++i) {
     ret += String.fromCharCode(buf[i] & 0x7F)
   }
   return ret
 }
 
-function binarySlice (buf, start, end) {
+function latin1Slice (buf, start, end) {
   var ret = ''
   end = Math.min(buf.length, end)
 
-  for (var i = start; i < end; i++) {
+  for (var i = start; i < end; ++i) {
     ret += String.fromCharCode(buf[i])
   }
   return ret
@@ -1083,7 +1166,7 @@ function hexSlice (buf, start, end) {
   if (!end || end < 0 || end > len) end = len
 
   var out = ''
-  for (var i = start; i < end; i++) {
+  for (var i = start; i < end; ++i) {
     out += toHex(buf[i])
   }
   return out
@@ -1126,7 +1209,7 @@ Buffer.prototype.slice = function slice (start, end) {
   } else {
     var sliceLen = end - start
     newBuf = new Buffer(sliceLen, undefined)
-    for (var i = 0; i < sliceLen; i++) {
+    for (var i = 0; i < sliceLen; ++i) {
       newBuf[i] = this[i + start]
     }
   }
@@ -1353,7 +1436,7 @@ Buffer.prototype.writeUInt8 = function writeUInt8 (value, offset, noAssert) {
 
 function objectWriteUInt16 (buf, value, offset, littleEndian) {
   if (value < 0) value = 0xffff + value + 1
-  for (var i = 0, j = Math.min(buf.length - offset, 2); i < j; i++) {
+  for (var i = 0, j = Math.min(buf.length - offset, 2); i < j; ++i) {
     buf[offset + i] = (value & (0xff << (8 * (littleEndian ? i : 1 - i)))) >>>
       (littleEndian ? i : 1 - i) * 8
   }
@@ -1387,7 +1470,7 @@ Buffer.prototype.writeUInt16BE = function writeUInt16BE (value, offset, noAssert
 
 function objectWriteUInt32 (buf, value, offset, littleEndian) {
   if (value < 0) value = 0xffffffff + value + 1
-  for (var i = 0, j = Math.min(buf.length - offset, 4); i < j; i++) {
+  for (var i = 0, j = Math.min(buf.length - offset, 4); i < j; ++i) {
     buf[offset + i] = (value >>> (littleEndian ? i : 3 - i) * 8) & 0xff
   }
 }
@@ -1602,12 +1685,12 @@ Buffer.prototype.copy = function copy (target, targetStart, start, end) {
 
   if (this === target && start < targetStart && targetStart < end) {
     // descending copy from end
-    for (i = len - 1; i >= 0; i--) {
+    for (i = len - 1; i >= 0; --i) {
       target[i + targetStart] = this[i + start]
     }
   } else if (len < 1000 || !Buffer.TYPED_ARRAY_SUPPORT) {
     // ascending copy from start
-    for (i = 0; i < len; i++) {
+    for (i = 0; i < len; ++i) {
       target[i + targetStart] = this[i + start]
     }
   } else {
@@ -1668,7 +1751,7 @@ Buffer.prototype.fill = function fill (val, start, end, encoding) {
 
   var i
   if (typeof val === 'number') {
-    for (i = start; i < end; i++) {
+    for (i = start; i < end; ++i) {
       this[i] = val
     }
   } else {
@@ -1676,7 +1759,7 @@ Buffer.prototype.fill = function fill (val, start, end, encoding) {
       ? val
       : utf8ToBytes(new Buffer(val, encoding).toString())
     var len = bytes.length
-    for (i = 0; i < end - start; i++) {
+    for (i = 0; i < end - start; ++i) {
       this[i + start] = bytes[i % len]
     }
   }
@@ -1718,7 +1801,7 @@ function utf8ToBytes (string, units) {
   var leadSurrogate = null
   var bytes = []
 
-  for (var i = 0; i < length; i++) {
+  for (var i = 0; i < length; ++i) {
     codePoint = string.charCodeAt(i)
 
     // is surrogate component
@@ -1793,7 +1876,7 @@ function utf8ToBytes (string, units) {
 
 function asciiToBytes (str) {
   var byteArray = []
-  for (var i = 0; i < str.length; i++) {
+  for (var i = 0; i < str.length; ++i) {
     // Node's code seems to be doing this and not & 0x7F..
     byteArray.push(str.charCodeAt(i) & 0xFF)
   }
@@ -1803,7 +1886,7 @@ function asciiToBytes (str) {
 function utf16leToBytes (str, units) {
   var c, hi, lo
   var byteArray = []
-  for (var i = 0; i < str.length; i++) {
+  for (var i = 0; i < str.length; ++i) {
     if ((units -= 2) < 0) break
 
     c = str.charCodeAt(i)
@@ -1821,7 +1904,7 @@ function base64ToBytes (str) {
 }
 
 function blitBuffer (src, dst, offset, length) {
-  for (var i = 0; i < length; i++) {
+  for (var i = 0; i < length; ++i) {
     if ((i + offset >= dst.length) || (i >= src.length)) break
     dst[i + offset] = src[i]
   }
@@ -1833,7 +1916,179 @@ function isnan (val) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"base64-js":2,"ieee754":20,"isarray":21}],5:[function(require,module,exports){
+},{"base64-js":2,"ieee754":22,"isarray":5}],5:[function(require,module,exports){
+var toString = {}.toString;
+
+module.exports = Array.isArray || function (arr) {
+  return toString.call(arr) == '[object Array]';
+};
+
+},{}],6:[function(require,module,exports){
+
+/**
+ * Expose `Emitter`.
+ */
+
+if (typeof module !== 'undefined') {
+  module.exports = Emitter;
+}
+
+/**
+ * Initialize a new `Emitter`.
+ *
+ * @api public
+ */
+
+function Emitter(obj) {
+  if (obj) return mixin(obj);
+};
+
+/**
+ * Mixin the emitter properties.
+ *
+ * @param {Object} obj
+ * @return {Object}
+ * @api private
+ */
+
+function mixin(obj) {
+  for (var key in Emitter.prototype) {
+    obj[key] = Emitter.prototype[key];
+  }
+  return obj;
+}
+
+/**
+ * Listen on the given `event` with `fn`.
+ *
+ * @param {String} event
+ * @param {Function} fn
+ * @return {Emitter}
+ * @api public
+ */
+
+Emitter.prototype.on =
+Emitter.prototype.addEventListener = function(event, fn){
+  this._callbacks = this._callbacks || {};
+  (this._callbacks['$' + event] = this._callbacks['$' + event] || [])
+    .push(fn);
+  return this;
+};
+
+/**
+ * Adds an `event` listener that will be invoked a single
+ * time then automatically removed.
+ *
+ * @param {String} event
+ * @param {Function} fn
+ * @return {Emitter}
+ * @api public
+ */
+
+Emitter.prototype.once = function(event, fn){
+  function on() {
+    this.off(event, on);
+    fn.apply(this, arguments);
+  }
+
+  on.fn = fn;
+  this.on(event, on);
+  return this;
+};
+
+/**
+ * Remove the given callback for `event` or all
+ * registered callbacks.
+ *
+ * @param {String} event
+ * @param {Function} fn
+ * @return {Emitter}
+ * @api public
+ */
+
+Emitter.prototype.off =
+Emitter.prototype.removeListener =
+Emitter.prototype.removeAllListeners =
+Emitter.prototype.removeEventListener = function(event, fn){
+  this._callbacks = this._callbacks || {};
+
+  // all
+  if (0 == arguments.length) {
+    this._callbacks = {};
+    return this;
+  }
+
+  // specific event
+  var callbacks = this._callbacks['$' + event];
+  if (!callbacks) return this;
+
+  // remove all handlers
+  if (1 == arguments.length) {
+    delete this._callbacks['$' + event];
+    return this;
+  }
+
+  // remove specific handler
+  var cb;
+  for (var i = 0; i < callbacks.length; i++) {
+    cb = callbacks[i];
+    if (cb === fn || cb.fn === fn) {
+      callbacks.splice(i, 1);
+      break;
+    }
+  }
+  return this;
+};
+
+/**
+ * Emit `event` with the given args.
+ *
+ * @param {String} event
+ * @param {Mixed} ...
+ * @return {Emitter}
+ */
+
+Emitter.prototype.emit = function(event){
+  this._callbacks = this._callbacks || {};
+  var args = [].slice.call(arguments, 1)
+    , callbacks = this._callbacks['$' + event];
+
+  if (callbacks) {
+    callbacks = callbacks.slice(0);
+    for (var i = 0, len = callbacks.length; i < len; ++i) {
+      callbacks[i].apply(this, args);
+    }
+  }
+
+  return this;
+};
+
+/**
+ * Return array of callbacks for `event`.
+ *
+ * @param {String} event
+ * @return {Array}
+ * @api public
+ */
+
+Emitter.prototype.listeners = function(event){
+  this._callbacks = this._callbacks || {};
+  return this._callbacks['$' + event] || [];
+};
+
+/**
+ * Check if this emitter has `event` handlers.
+ *
+ * @param {String} event
+ * @return {Boolean}
+ * @api public
+ */
+
+Emitter.prototype.hasListeners = function(event){
+  return !! this.listeners(event).length;
+};
+
+},{}],7:[function(require,module,exports){
 'use strict';
 
 var assign        = require('es5-ext/object/assign')
@@ -1898,14 +2153,14 @@ d.gs = function (dscr, get, set/*, options*/) {
 	return !options ? desc : assign(normalizeOpts(options), desc);
 };
 
-},{"es5-ext/object/assign":6,"es5-ext/object/is-callable":9,"es5-ext/object/normalize-options":13,"es5-ext/string/#/contains":16}],6:[function(require,module,exports){
+},{"es5-ext/object/assign":8,"es5-ext/object/is-callable":11,"es5-ext/object/normalize-options":15,"es5-ext/string/#/contains":18}],8:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./is-implemented')()
 	? Object.assign
 	: require('./shim');
 
-},{"./is-implemented":7,"./shim":8}],7:[function(require,module,exports){
+},{"./is-implemented":9,"./shim":10}],9:[function(require,module,exports){
 'use strict';
 
 module.exports = function () {
@@ -1916,7 +2171,7 @@ module.exports = function () {
 	return (obj.foo + obj.bar + obj.trzy) === 'razdwatrzy';
 };
 
-},{}],8:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 'use strict';
 
 var keys  = require('../keys')
@@ -1940,21 +2195,21 @@ module.exports = function (dest, src/*, …srcn*/) {
 	return dest;
 };
 
-},{"../keys":10,"../valid-value":15}],9:[function(require,module,exports){
+},{"../keys":12,"../valid-value":17}],11:[function(require,module,exports){
 // Deprecated
 
 'use strict';
 
 module.exports = function (obj) { return typeof obj === 'function'; };
 
-},{}],10:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./is-implemented')()
 	? Object.keys
 	: require('./shim');
 
-},{"./is-implemented":11,"./shim":12}],11:[function(require,module,exports){
+},{"./is-implemented":13,"./shim":14}],13:[function(require,module,exports){
 'use strict';
 
 module.exports = function () {
@@ -1964,7 +2219,7 @@ module.exports = function () {
 	} catch (e) { return false; }
 };
 
-},{}],12:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 'use strict';
 
 var keys = Object.keys;
@@ -1973,7 +2228,7 @@ module.exports = function (object) {
 	return keys(object == null ? object : Object(object));
 };
 
-},{}],13:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 'use strict';
 
 var forEach = Array.prototype.forEach, create = Object.create;
@@ -1992,7 +2247,7 @@ module.exports = function (options/*, …options*/) {
 	return result;
 };
 
-},{}],14:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 'use strict';
 
 module.exports = function (fn) {
@@ -2000,7 +2255,7 @@ module.exports = function (fn) {
 	return fn;
 };
 
-},{}],15:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 'use strict';
 
 module.exports = function (value) {
@@ -2008,14 +2263,14 @@ module.exports = function (value) {
 	return value;
 };
 
-},{}],16:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./is-implemented')()
 	? String.prototype.contains
 	: require('./shim');
 
-},{"./is-implemented":17,"./shim":18}],17:[function(require,module,exports){
+},{"./is-implemented":19,"./shim":20}],19:[function(require,module,exports){
 'use strict';
 
 var str = 'razdwatrzy';
@@ -2025,7 +2280,7 @@ module.exports = function () {
 	return ((str.contains('dwa') === true) && (str.contains('foo') === false));
 };
 
-},{}],18:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 'use strict';
 
 var indexOf = String.prototype.indexOf;
@@ -2034,7 +2289,7 @@ module.exports = function (searchString/*, position*/) {
 	return indexOf.call(this, searchString, arguments[1]) > -1;
 };
 
-},{}],19:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 'use strict';
 
 var d        = require('d')
@@ -2168,7 +2423,7 @@ module.exports = exports = function (o) {
 };
 exports.methods = methods;
 
-},{"d":5,"es5-ext/object/valid-callable":14}],20:[function(require,module,exports){
+},{"d":7,"es5-ext/object/valid-callable":16}],22:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -2254,14 +2509,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],21:[function(require,module,exports){
-var toString = {}.toString;
-
-module.exports = Array.isArray || function (arr) {
-  return toString.call(arr) == '[object Array]';
-};
-
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -2277,21 +2525,25 @@ module.exports = Array.isArray || function (arr) {
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.13.1';
+  var VERSION = '4.16.4';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
 
-  /** Used as the `TypeError` message for "Functions" methods. */
-  var FUNC_ERROR_TEXT = 'Expected a function';
+  /** Error message constants. */
+  var CORE_ERROR_TEXT = 'Unsupported core-js use. Try https://github.com/es-shims.',
+      FUNC_ERROR_TEXT = 'Expected a function';
 
   /** Used to stand-in for `undefined` hash values. */
   var HASH_UNDEFINED = '__lodash_hash_undefined__';
 
+  /** Used as the maximum memoize cache size. */
+  var MAX_MEMOIZE_SIZE = 500;
+
   /** Used as the internal argument placeholder. */
   var PLACEHOLDER = '__lodash_placeholder__';
 
-  /** Used to compose bitmasks for wrapper metadata. */
+  /** Used to compose bitmasks for function metadata. */
   var BIND_FLAG = 1,
       BIND_KEY_FLAG = 2,
       CURRY_BOUND_FLAG = 4,
@@ -2312,7 +2564,7 @@ module.exports = Array.isArray || function (arr) {
       DEFAULT_TRUNC_OMISSION = '...';
 
   /** Used to detect hot functions by number of calls within a span of milliseconds. */
-  var HOT_COUNT = 150,
+  var HOT_COUNT = 500,
       HOT_SPAN = 16;
 
   /** Used to indicate the type of lazy iteratees. */
@@ -2331,6 +2583,19 @@ module.exports = Array.isArray || function (arr) {
       MAX_ARRAY_INDEX = MAX_ARRAY_LENGTH - 1,
       HALF_MAX_ARRAY_LENGTH = MAX_ARRAY_LENGTH >>> 1;
 
+  /** Used to associate wrap methods with their bit flags. */
+  var wrapFlags = [
+    ['ary', ARY_FLAG],
+    ['bind', BIND_FLAG],
+    ['bindKey', BIND_KEY_FLAG],
+    ['curry', CURRY_FLAG],
+    ['curryRight', CURRY_RIGHT_FLAG],
+    ['flip', FLIP_FLAG],
+    ['partial', PARTIAL_FLAG],
+    ['partialRight', PARTIAL_RIGHT_FLAG],
+    ['rearg', REARG_FLAG]
+  ];
+
   /** `Object#toString` result references. */
   var argsTag = '[object Arguments]',
       arrayTag = '[object Array]',
@@ -2343,6 +2608,7 @@ module.exports = Array.isArray || function (arr) {
       numberTag = '[object Number]',
       objectTag = '[object Object]',
       promiseTag = '[object Promise]',
+      proxyTag = '[object Proxy]',
       regexpTag = '[object RegExp]',
       setTag = '[object Set]',
       stringTag = '[object String]',
@@ -2368,8 +2634,8 @@ module.exports = Array.isArray || function (arr) {
       reEmptyStringTrailing = /(__e\(.*?\)|\b__t\)) \+\n'';/g;
 
   /** Used to match HTML entities and HTML characters. */
-  var reEscapedHtml = /&(?:amp|lt|gt|quot|#39|#96);/g,
-      reUnescapedHtml = /[&<>"'`]/g,
+  var reEscapedHtml = /&(?:amp|lt|gt|quot|#39);/g,
+      reUnescapedHtml = /[&<>"']/g,
       reHasEscapedHtml = RegExp(reEscapedHtml.source),
       reHasUnescapedHtml = RegExp(reUnescapedHtml.source);
 
@@ -2381,11 +2647,12 @@ module.exports = Array.isArray || function (arr) {
   /** Used to match property names within property paths. */
   var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,
       reIsPlainProp = /^\w*$/,
-      rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(\.|\[\])(?:\4|$))/g;
+      reLeadingDot = /^\./,
+      rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
 
   /**
    * Used to match `RegExp`
-   * [syntax characters](http://ecma-international.org/ecma-262/6.0/#sec-patterns).
+   * [syntax characters](http://ecma-international.org/ecma-262/7.0/#sec-patterns).
    */
   var reRegExpChar = /[\\^$.*+?()[\]{}|]/g,
       reHasRegExpChar = RegExp(reRegExpChar.source);
@@ -2395,23 +2662,25 @@ module.exports = Array.isArray || function (arr) {
       reTrimStart = /^\s+/,
       reTrimEnd = /\s+$/;
 
-  /** Used to match non-compound words composed of alphanumeric characters. */
-  var reBasicWord = /[a-zA-Z0-9]+/g;
+  /** Used to match wrap detail comments. */
+  var reWrapComment = /\{(?:\n\/\* \[wrapped with .+\] \*\/)?\n?/,
+      reWrapDetails = /\{\n\/\* \[wrapped with (.+)\] \*/,
+      reSplitDetails = /,? & /;
+
+  /** Used to match words composed of alphanumeric characters. */
+  var reAsciiWord = /[^\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f]+/g;
 
   /** Used to match backslashes in property paths. */
   var reEscapeChar = /\\(\\)?/g;
 
   /**
    * Used to match
-   * [ES template delimiters](http://ecma-international.org/ecma-262/6.0/#sec-template-literal-lexical-components).
+   * [ES template delimiters](http://ecma-international.org/ecma-262/7.0/#sec-template-literal-lexical-components).
    */
   var reEsTemplate = /\$\{([^\\}]*(?:\\.[^\\}]*)*)\}/g;
 
   /** Used to match `RegExp` flags from their coerced string values. */
   var reFlags = /\w*$/;
-
-  /** Used to detect hexadecimal string values. */
-  var reHasHexPrefix = /^0x/i;
 
   /** Used to detect bad signed hexadecimal string values. */
   var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
@@ -2428,8 +2697,8 @@ module.exports = Array.isArray || function (arr) {
   /** Used to detect unsigned integer values. */
   var reIsUint = /^(?:0|[1-9]\d*)$/;
 
-  /** Used to match latin-1 supplementary letters (excluding mathematical operators). */
-  var reLatin1 = /[\xc0-\xd6\xd8-\xde\xdf-\xf6\xf8-\xff]/g;
+  /** Used to match Latin Unicode letters (excluding mathematical operators). */
+  var reLatin = /[\xc0-\xd6\xd8-\xf6\xf8-\xff\u0100-\u017f]/g;
 
   /** Used to ensure capturing order of template delimiters. */
   var reNoMatch = /($^)/;
@@ -2490,10 +2759,10 @@ module.exports = Array.isArray || function (arr) {
   var reComboMark = RegExp(rsCombo, 'g');
 
   /** Used to match [string symbols](https://mathiasbynens.be/notes/javascript-unicode). */
-  var reComplexSymbol = RegExp(rsFitz + '(?=' + rsFitz + ')|' + rsSymbol + rsSeq, 'g');
+  var reUnicode = RegExp(rsFitz + '(?=' + rsFitz + ')|' + rsSymbol + rsSeq, 'g');
 
   /** Used to match complex or compound words. */
-  var reComplexWord = RegExp([
+  var reUnicodeWord = RegExp([
     rsUpper + '?' + rsLower + '+' + rsOptLowerContr + '(?=' + [rsBreak, rsUpper, '$'].join('|') + ')',
     rsUpperMisc + '+' + rsOptUpperContr + '(?=' + [rsBreak, rsUpper + rsLowerMisc, '$'].join('|') + ')',
     rsUpper + '?' + rsLowerMisc + '+' + rsOptLowerContr,
@@ -2503,18 +2772,18 @@ module.exports = Array.isArray || function (arr) {
   ].join('|'), 'g');
 
   /** Used to detect strings with [zero-width joiners or code points from the astral planes](http://eev.ee/blog/2015/09/12/dark-corners-of-unicode/). */
-  var reHasComplexSymbol = RegExp('[' + rsZWJ + rsAstralRange  + rsComboMarksRange + rsComboSymbolsRange + rsVarRange + ']');
+  var reHasUnicode = RegExp('[' + rsZWJ + rsAstralRange  + rsComboMarksRange + rsComboSymbolsRange + rsVarRange + ']');
 
   /** Used to detect strings that need a more robust regexp to match words. */
-  var reHasComplexWord = /[a-z][A-Z]|[A-Z]{2,}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/;
+  var reHasUnicodeWord = /[a-z][A-Z]|[A-Z]{2,}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/;
 
   /** Used to assign default `context` object properties. */
   var contextProps = [
     'Array', 'Buffer', 'DataView', 'Date', 'Error', 'Float32Array', 'Float64Array',
     'Function', 'Int8Array', 'Int16Array', 'Int32Array', 'Map', 'Math', 'Object',
-    'Promise', 'Reflect', 'RegExp', 'Set', 'String', 'Symbol', 'TypeError',
-    'Uint8Array', 'Uint8ClampedArray', 'Uint16Array', 'Uint32Array', 'WeakMap',
-    '_', 'isFinite', 'parseInt', 'setTimeout'
+    'Promise', 'RegExp', 'Set', 'String', 'Symbol', 'TypeError', 'Uint8Array',
+    'Uint8ClampedArray', 'Uint16Array', 'Uint32Array', 'WeakMap',
+    '_', 'clearTimeout', 'isFinite', 'parseInt', 'setTimeout'
   ];
 
   /** Used to make template sourceURLs easier to identify. */
@@ -2552,16 +2821,17 @@ module.exports = Array.isArray || function (arr) {
   cloneableTags[errorTag] = cloneableTags[funcTag] =
   cloneableTags[weakMapTag] = false;
 
-  /** Used to map latin-1 supplementary letters to basic latin letters. */
+  /** Used to map Latin Unicode letters to basic Latin letters. */
   var deburredLetters = {
+    // Latin-1 Supplement block.
     '\xc0': 'A',  '\xc1': 'A', '\xc2': 'A', '\xc3': 'A', '\xc4': 'A', '\xc5': 'A',
     '\xe0': 'a',  '\xe1': 'a', '\xe2': 'a', '\xe3': 'a', '\xe4': 'a', '\xe5': 'a',
     '\xc7': 'C',  '\xe7': 'c',
     '\xd0': 'D',  '\xf0': 'd',
     '\xc8': 'E',  '\xc9': 'E', '\xca': 'E', '\xcb': 'E',
     '\xe8': 'e',  '\xe9': 'e', '\xea': 'e', '\xeb': 'e',
-    '\xcC': 'I',  '\xcd': 'I', '\xce': 'I', '\xcf': 'I',
-    '\xeC': 'i',  '\xed': 'i', '\xee': 'i', '\xef': 'i',
+    '\xcc': 'I',  '\xcd': 'I', '\xce': 'I', '\xcf': 'I',
+    '\xec': 'i',  '\xed': 'i', '\xee': 'i', '\xef': 'i',
     '\xd1': 'N',  '\xf1': 'n',
     '\xd2': 'O',  '\xd3': 'O', '\xd4': 'O', '\xd5': 'O', '\xd6': 'O', '\xd8': 'O',
     '\xf2': 'o',  '\xf3': 'o', '\xf4': 'o', '\xf5': 'o', '\xf6': 'o', '\xf8': 'o',
@@ -2570,7 +2840,43 @@ module.exports = Array.isArray || function (arr) {
     '\xdd': 'Y',  '\xfd': 'y', '\xff': 'y',
     '\xc6': 'Ae', '\xe6': 'ae',
     '\xde': 'Th', '\xfe': 'th',
-    '\xdf': 'ss'
+    '\xdf': 'ss',
+    // Latin Extended-A block.
+    '\u0100': 'A',  '\u0102': 'A', '\u0104': 'A',
+    '\u0101': 'a',  '\u0103': 'a', '\u0105': 'a',
+    '\u0106': 'C',  '\u0108': 'C', '\u010a': 'C', '\u010c': 'C',
+    '\u0107': 'c',  '\u0109': 'c', '\u010b': 'c', '\u010d': 'c',
+    '\u010e': 'D',  '\u0110': 'D', '\u010f': 'd', '\u0111': 'd',
+    '\u0112': 'E',  '\u0114': 'E', '\u0116': 'E', '\u0118': 'E', '\u011a': 'E',
+    '\u0113': 'e',  '\u0115': 'e', '\u0117': 'e', '\u0119': 'e', '\u011b': 'e',
+    '\u011c': 'G',  '\u011e': 'G', '\u0120': 'G', '\u0122': 'G',
+    '\u011d': 'g',  '\u011f': 'g', '\u0121': 'g', '\u0123': 'g',
+    '\u0124': 'H',  '\u0126': 'H', '\u0125': 'h', '\u0127': 'h',
+    '\u0128': 'I',  '\u012a': 'I', '\u012c': 'I', '\u012e': 'I', '\u0130': 'I',
+    '\u0129': 'i',  '\u012b': 'i', '\u012d': 'i', '\u012f': 'i', '\u0131': 'i',
+    '\u0134': 'J',  '\u0135': 'j',
+    '\u0136': 'K',  '\u0137': 'k', '\u0138': 'k',
+    '\u0139': 'L',  '\u013b': 'L', '\u013d': 'L', '\u013f': 'L', '\u0141': 'L',
+    '\u013a': 'l',  '\u013c': 'l', '\u013e': 'l', '\u0140': 'l', '\u0142': 'l',
+    '\u0143': 'N',  '\u0145': 'N', '\u0147': 'N', '\u014a': 'N',
+    '\u0144': 'n',  '\u0146': 'n', '\u0148': 'n', '\u014b': 'n',
+    '\u014c': 'O',  '\u014e': 'O', '\u0150': 'O',
+    '\u014d': 'o',  '\u014f': 'o', '\u0151': 'o',
+    '\u0154': 'R',  '\u0156': 'R', '\u0158': 'R',
+    '\u0155': 'r',  '\u0157': 'r', '\u0159': 'r',
+    '\u015a': 'S',  '\u015c': 'S', '\u015e': 'S', '\u0160': 'S',
+    '\u015b': 's',  '\u015d': 's', '\u015f': 's', '\u0161': 's',
+    '\u0162': 'T',  '\u0164': 'T', '\u0166': 'T',
+    '\u0163': 't',  '\u0165': 't', '\u0167': 't',
+    '\u0168': 'U',  '\u016a': 'U', '\u016c': 'U', '\u016e': 'U', '\u0170': 'U', '\u0172': 'U',
+    '\u0169': 'u',  '\u016b': 'u', '\u016d': 'u', '\u016f': 'u', '\u0171': 'u', '\u0173': 'u',
+    '\u0174': 'W',  '\u0175': 'w',
+    '\u0176': 'Y',  '\u0177': 'y', '\u0178': 'Y',
+    '\u0179': 'Z',  '\u017b': 'Z', '\u017d': 'Z',
+    '\u017a': 'z',  '\u017c': 'z', '\u017e': 'z',
+    '\u0132': 'IJ', '\u0133': 'ij',
+    '\u0152': 'Oe', '\u0153': 'oe',
+    '\u0149': "'n", '\u017f': 's'
   };
 
   /** Used to map characters to HTML entities. */
@@ -2579,8 +2885,7 @@ module.exports = Array.isArray || function (arr) {
     '<': '&lt;',
     '>': '&gt;',
     '"': '&quot;',
-    "'": '&#39;',
-    '`': '&#96;'
+    "'": '&#39;'
   };
 
   /** Used to map HTML entities to characters. */
@@ -2589,8 +2894,7 @@ module.exports = Array.isArray || function (arr) {
     '&lt;': '<',
     '&gt;': '>',
     '&quot;': '"',
-    '&#39;': "'",
-    '&#96;': '`'
+    '&#39;': "'"
   };
 
   /** Used to escape characters for inclusion in compiled string literals. */
@@ -2607,26 +2911,41 @@ module.exports = Array.isArray || function (arr) {
   var freeParseFloat = parseFloat,
       freeParseInt = parseInt;
 
+  /** Detect free variable `global` from Node.js. */
+  var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+
+  /** Detect free variable `self`. */
+  var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+  /** Used as a reference to the global object. */
+  var root = freeGlobal || freeSelf || Function('return this')();
+
   /** Detect free variable `exports`. */
-  var freeExports = typeof exports == 'object' && exports;
+  var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
 
   /** Detect free variable `module`. */
-  var freeModule = freeExports && typeof module == 'object' && module;
+  var freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module;
 
   /** Detect the popular CommonJS extension `module.exports`. */
   var moduleExports = freeModule && freeModule.exports === freeExports;
 
-  /** Detect free variable `global` from Node.js. */
-  var freeGlobal = checkGlobal(typeof global == 'object' && global);
+  /** Detect free variable `process` from Node.js. */
+  var freeProcess = moduleExports && freeGlobal.process;
 
-  /** Detect free variable `self`. */
-  var freeSelf = checkGlobal(typeof self == 'object' && self);
+  /** Used to access faster Node.js helpers. */
+  var nodeUtil = (function() {
+    try {
+      return freeProcess && freeProcess.binding('util');
+    } catch (e) {}
+  }());
 
-  /** Detect `this` as the global object. */
-  var thisGlobal = checkGlobal(typeof this == 'object' && this);
-
-  /** Used as a reference to the global object. */
-  var root = freeGlobal || freeSelf || thisGlobal || Function('return this')();
+  /* Node.js helper references. */
+  var nodeIsArrayBuffer = nodeUtil && nodeUtil.isArrayBuffer,
+      nodeIsDate = nodeUtil && nodeUtil.isDate,
+      nodeIsMap = nodeUtil && nodeUtil.isMap,
+      nodeIsRegExp = nodeUtil && nodeUtil.isRegExp,
+      nodeIsSet = nodeUtil && nodeUtil.isSet,
+      nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
 
   /*--------------------------------------------------------------------------*/
 
@@ -2639,7 +2958,7 @@ module.exports = Array.isArray || function (arr) {
    * @returns {Object} Returns `map`.
    */
   function addMapEntry(map, pair) {
-    // Don't return `Map#set` because it doesn't return the map instance in IE 11.
+    // Don't return `map.set` because it's not chainable in IE 11.
     map.set(pair[0], pair[1]);
     return map;
   }
@@ -2653,6 +2972,7 @@ module.exports = Array.isArray || function (arr) {
    * @returns {Object} Returns `set`.
    */
   function addSetEntry(set, value) {
+    // Don't return `set.add` because it's not chainable in IE 11.
     set.add(value);
     return set;
   }
@@ -2668,8 +2988,7 @@ module.exports = Array.isArray || function (arr) {
    * @returns {*} Returns the result of `func`.
    */
   function apply(func, thisArg, args) {
-    var length = args.length;
-    switch (length) {
+    switch (args.length) {
       case 0: return func.call(thisArg);
       case 1: return func.call(thisArg, args[0]);
       case 2: return func.call(thisArg, args[0], args[1]);
@@ -2791,7 +3110,7 @@ module.exports = Array.isArray || function (arr) {
    * specifying an index to search from.
    *
    * @private
-   * @param {Array} [array] The array to search.
+   * @param {Array} [array] The array to inspect.
    * @param {*} target The value to search for.
    * @returns {boolean} Returns `true` if `target` is found, else `false`.
    */
@@ -2804,7 +3123,7 @@ module.exports = Array.isArray || function (arr) {
    * This function is like `arrayIncludes` except that it accepts a comparator.
    *
    * @private
-   * @param {Array} [array] The array to search.
+   * @param {Array} [array] The array to inspect.
    * @param {*} target The value to search for.
    * @param {Function} comparator The comparator invoked per element.
    * @returns {boolean} Returns `true` if `target` is found, else `false`.
@@ -2931,12 +3250,43 @@ module.exports = Array.isArray || function (arr) {
   }
 
   /**
+   * Gets the size of an ASCII `string`.
+   *
+   * @private
+   * @param {string} string The string inspect.
+   * @returns {number} Returns the string size.
+   */
+  var asciiSize = baseProperty('length');
+
+  /**
+   * Converts an ASCII `string` to an array.
+   *
+   * @private
+   * @param {string} string The string to convert.
+   * @returns {Array} Returns the converted array.
+   */
+  function asciiToArray(string) {
+    return string.split('');
+  }
+
+  /**
+   * Splits an ASCII `string` into an array of its words.
+   *
+   * @private
+   * @param {string} The string to inspect.
+   * @returns {Array} Returns the words of `string`.
+   */
+  function asciiWords(string) {
+    return string.match(reAsciiWord) || [];
+  }
+
+  /**
    * The base implementation of methods like `_.findKey` and `_.findLastKey`,
    * without support for iteratee shorthands, which iterates over `collection`
    * using `eachFunc`.
    *
    * @private
-   * @param {Array|Object} collection The collection to search.
+   * @param {Array|Object} collection The collection to inspect.
    * @param {Function} predicate The function invoked per iteration.
    * @param {Function} eachFunc The function to iterate over `collection`.
    * @returns {*} Returns the found element or its key, else `undefined`.
@@ -2957,7 +3307,7 @@ module.exports = Array.isArray || function (arr) {
    * support for iteratee shorthands.
    *
    * @private
-   * @param {Array} array The array to search.
+   * @param {Array} array The array to inspect.
    * @param {Function} predicate The function invoked per iteration.
    * @param {number} fromIndex The index to search from.
    * @param {boolean} [fromRight] Specify iterating from right to left.
@@ -2979,31 +3329,22 @@ module.exports = Array.isArray || function (arr) {
    * The base implementation of `_.indexOf` without `fromIndex` bounds checks.
    *
    * @private
-   * @param {Array} array The array to search.
+   * @param {Array} array The array to inspect.
    * @param {*} value The value to search for.
    * @param {number} fromIndex The index to search from.
    * @returns {number} Returns the index of the matched value, else `-1`.
    */
   function baseIndexOf(array, value, fromIndex) {
-    if (value !== value) {
-      return indexOfNaN(array, fromIndex);
-    }
-    var index = fromIndex - 1,
-        length = array.length;
-
-    while (++index < length) {
-      if (array[index] === value) {
-        return index;
-      }
-    }
-    return -1;
+    return value === value
+      ? strictIndexOf(array, value, fromIndex)
+      : baseFindIndex(array, baseIsNaN, fromIndex);
   }
 
   /**
    * This function is like `baseIndexOf` except that it accepts a comparator.
    *
    * @private
-   * @param {Array} array The array to search.
+   * @param {Array} array The array to inspect.
    * @param {*} value The value to search for.
    * @param {number} fromIndex The index to search from.
    * @param {Function} comparator The comparator invoked per element.
@@ -3022,6 +3363,17 @@ module.exports = Array.isArray || function (arr) {
   }
 
   /**
+   * The base implementation of `_.isNaN` without support for number objects.
+   *
+   * @private
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is `NaN`, else `false`.
+   */
+  function baseIsNaN(value) {
+    return value !== value;
+  }
+
+  /**
    * The base implementation of `_.mean` and `_.meanBy` without support for
    * iteratee shorthands.
    *
@@ -3033,6 +3385,32 @@ module.exports = Array.isArray || function (arr) {
   function baseMean(array, iteratee) {
     var length = array ? array.length : 0;
     return length ? (baseSum(array, iteratee) / length) : NAN;
+  }
+
+  /**
+   * The base implementation of `_.property` without support for deep paths.
+   *
+   * @private
+   * @param {string} key The key of the property to get.
+   * @returns {Function} Returns the new accessor function.
+   */
+  function baseProperty(key) {
+    return function(object) {
+      return object == null ? undefined : object[key];
+    };
+  }
+
+  /**
+   * The base implementation of `_.propertyOf` without support for deep paths.
+   *
+   * @private
+   * @param {Object} object The object to query.
+   * @returns {Function} Returns the new accessor function.
+   */
+  function basePropertyOf(object) {
+    return function(key) {
+      return object == null ? undefined : object[key];
+    };
   }
 
   /**
@@ -3135,7 +3513,7 @@ module.exports = Array.isArray || function (arr) {
   }
 
   /**
-   * The base implementation of `_.unary` without support for storing wrapper metadata.
+   * The base implementation of `_.unary` without support for storing metadata.
    *
    * @private
    * @param {Function} func The function to cap arguments for.
@@ -3164,7 +3542,7 @@ module.exports = Array.isArray || function (arr) {
   }
 
   /**
-   * Checks if a cache value for `key` exists.
+   * Checks if a `cache` value for `key` exists.
    *
    * @private
    * @param {Object} cache The cache to query.
@@ -3209,17 +3587,6 @@ module.exports = Array.isArray || function (arr) {
   }
 
   /**
-   * Checks if `value` is a global object.
-   *
-   * @private
-   * @param {*} value The value to check.
-   * @returns {null|Object} Returns `value` if it's a global object, else `null`.
-   */
-  function checkGlobal(value) {
-    return (value && value.Object === Object) ? value : null;
-  }
-
-  /**
    * Gets the number of `placeholder` occurrences in `array`.
    *
    * @private
@@ -3233,22 +3600,21 @@ module.exports = Array.isArray || function (arr) {
 
     while (length--) {
       if (array[length] === placeholder) {
-        result++;
+        ++result;
       }
     }
     return result;
   }
 
   /**
-   * Used by `_.deburr` to convert latin-1 supplementary letters to basic latin letters.
+   * Used by `_.deburr` to convert Latin-1 Supplement and Latin Extended-A
+   * letters to basic Latin letters.
    *
    * @private
    * @param {string} letter The matched letter to deburr.
    * @returns {string} Returns the deburred letter.
    */
-  function deburrLetter(letter) {
-    return deburredLetters[letter];
-  }
+  var deburrLetter = basePropertyOf(deburredLetters);
 
   /**
    * Used by `_.escape` to convert characters to HTML entities.
@@ -3257,9 +3623,7 @@ module.exports = Array.isArray || function (arr) {
    * @param {string} chr The matched character to escape.
    * @returns {string} Returns the escaped character.
    */
-  function escapeHtmlChar(chr) {
-    return htmlEscapes[chr];
-  }
+  var escapeHtmlChar = basePropertyOf(htmlEscapes);
 
   /**
    * Used by `_.template` to escape characters for inclusion in compiled string literals.
@@ -3285,44 +3649,25 @@ module.exports = Array.isArray || function (arr) {
   }
 
   /**
-   * Gets the index at which the first occurrence of `NaN` is found in `array`.
+   * Checks if `string` contains Unicode symbols.
    *
    * @private
-   * @param {Array} array The array to search.
-   * @param {number} fromIndex The index to search from.
-   * @param {boolean} [fromRight] Specify iterating from right to left.
-   * @returns {number} Returns the index of the matched `NaN`, else `-1`.
+   * @param {string} string The string to inspect.
+   * @returns {boolean} Returns `true` if a symbol is found, else `false`.
    */
-  function indexOfNaN(array, fromIndex, fromRight) {
-    var length = array.length,
-        index = fromIndex + (fromRight ? 1 : -1);
-
-    while ((fromRight ? index-- : ++index < length)) {
-      var other = array[index];
-      if (other !== other) {
-        return index;
-      }
-    }
-    return -1;
+  function hasUnicode(string) {
+    return reHasUnicode.test(string);
   }
 
   /**
-   * Checks if `value` is a host object in IE < 9.
+   * Checks if `string` contains a word composed of Unicode symbols.
    *
    * @private
-   * @param {*} value The value to check.
-   * @returns {boolean} Returns `true` if `value` is a host object, else `false`.
+   * @param {string} string The string to inspect.
+   * @returns {boolean} Returns `true` if a word is found, else `false`.
    */
-  function isHostObject(value) {
-    // Many host objects are `Object` objects that can coerce to strings
-    // despite having improperly defined `toString` methods.
-    var result = false;
-    if (value != null && typeof value.toString != 'function') {
-      try {
-        result = !!(value + '');
-      } catch (e) {}
-    }
-    return result;
+  function hasUnicodeWord(string) {
+    return reHasUnicodeWord.test(string);
   }
 
   /**
@@ -3357,6 +3702,20 @@ module.exports = Array.isArray || function (arr) {
       result[++index] = [key, value];
     });
     return result;
+  }
+
+  /**
+   * Creates a unary function that invokes `func` with its argument transformed.
+   *
+   * @private
+   * @param {Function} func The function to wrap.
+   * @param {Function} transform The argument transform.
+   * @returns {Function} Returns the new function.
+   */
+  function overArg(func, transform) {
+    return function(arg) {
+      return func(transform(arg));
+    };
   }
 
   /**
@@ -3419,6 +3778,48 @@ module.exports = Array.isArray || function (arr) {
   }
 
   /**
+   * A specialized version of `_.indexOf` which performs strict equality
+   * comparisons of values, i.e. `===`.
+   *
+   * @private
+   * @param {Array} array The array to inspect.
+   * @param {*} value The value to search for.
+   * @param {number} fromIndex The index to search from.
+   * @returns {number} Returns the index of the matched value, else `-1`.
+   */
+  function strictIndexOf(array, value, fromIndex) {
+    var index = fromIndex - 1,
+        length = array.length;
+
+    while (++index < length) {
+      if (array[index] === value) {
+        return index;
+      }
+    }
+    return -1;
+  }
+
+  /**
+   * A specialized version of `_.lastIndexOf` which performs strict equality
+   * comparisons of values, i.e. `===`.
+   *
+   * @private
+   * @param {Array} array The array to inspect.
+   * @param {*} value The value to search for.
+   * @param {number} fromIndex The index to search from.
+   * @returns {number} Returns the index of the matched value, else `-1`.
+   */
+  function strictLastIndexOf(array, value, fromIndex) {
+    var index = fromIndex + 1;
+    while (index--) {
+      if (array[index] === value) {
+        return index;
+      }
+    }
+    return index;
+  }
+
+  /**
    * Gets the number of symbols in `string`.
    *
    * @private
@@ -3426,14 +3827,9 @@ module.exports = Array.isArray || function (arr) {
    * @returns {number} Returns the string size.
    */
   function stringSize(string) {
-    if (!(string && reHasComplexSymbol.test(string))) {
-      return string.length;
-    }
-    var result = reComplexSymbol.lastIndex = 0;
-    while (reComplexSymbol.test(string)) {
-      result++;
-    }
-    return result;
+    return hasUnicode(string)
+      ? unicodeSize(string)
+      : asciiSize(string);
   }
 
   /**
@@ -3444,7 +3840,9 @@ module.exports = Array.isArray || function (arr) {
    * @returns {Array} Returns the converted array.
    */
   function stringToArray(string) {
-    return string.match(reComplexSymbol);
+    return hasUnicode(string)
+      ? unicodeToArray(string)
+      : asciiToArray(string);
   }
 
   /**
@@ -3454,8 +3852,43 @@ module.exports = Array.isArray || function (arr) {
    * @param {string} chr The matched character to unescape.
    * @returns {string} Returns the unescaped character.
    */
-  function unescapeHtmlChar(chr) {
-    return htmlUnescapes[chr];
+  var unescapeHtmlChar = basePropertyOf(htmlUnescapes);
+
+  /**
+   * Gets the size of a Unicode `string`.
+   *
+   * @private
+   * @param {string} string The string inspect.
+   * @returns {number} Returns the string size.
+   */
+  function unicodeSize(string) {
+    var result = reUnicode.lastIndex = 0;
+    while (reUnicode.test(string)) {
+      ++result;
+    }
+    return result;
+  }
+
+  /**
+   * Converts a Unicode `string` to an array.
+   *
+   * @private
+   * @param {string} string The string to convert.
+   * @returns {Array} Returns the converted array.
+   */
+  function unicodeToArray(string) {
+    return string.match(reUnicode) || [];
+  }
+
+  /**
+   * Splits a Unicode `string` into an array of its words.
+   *
+   * @private
+   * @param {string} The string to inspect.
+   * @returns {Array} Returns the words of `string`.
+   */
+  function unicodeWords(string) {
+    return string.match(reUnicodeWord) || [];
   }
 
   /*--------------------------------------------------------------------------*/
@@ -3486,30 +3919,27 @@ module.exports = Array.isArray || function (arr) {
    * lodash.isFunction(lodash.bar);
    * // => true
    *
-   * // Use `context` to stub `Date#getTime` use in `_.now`.
-   * var stubbed = _.runInContext({
-   *   'Date': function() {
-   *     return { 'getTime': stubGetTime };
-   *   }
-   * });
-   *
    * // Create a suped-up `defer` in Node.js.
    * var defer = _.runInContext({ 'setTimeout': setImmediate }).defer;
    */
-  function runInContext(context) {
-    context = context ? _.defaults({}, context, _.pick(root, contextProps)) : root;
+  var runInContext = (function runInContext(context) {
+    context = context ? _.defaults(root.Object(), context, _.pick(root, contextProps)) : root;
 
     /** Built-in constructor references. */
-    var Date = context.Date,
+    var Array = context.Array,
+        Date = context.Date,
         Error = context.Error,
+        Function = context.Function,
         Math = context.Math,
+        Object = context.Object,
         RegExp = context.RegExp,
+        String = context.String,
         TypeError = context.TypeError;
 
     /** Used for built-in method references. */
-    var arrayProto = context.Array.prototype,
-        objectProto = context.Object.prototype,
-        stringProto = context.String.prototype;
+    var arrayProto = Array.prototype,
+        funcProto = Function.prototype,
+        objectProto = Object.prototype;
 
     /** Used to detect overreaching core-js shims. */
     var coreJsData = context['__core-js_shared__'];
@@ -3521,7 +3951,7 @@ module.exports = Array.isArray || function (arr) {
     }());
 
     /** Used to resolve the decompiled source of functions. */
-    var funcToString = context.Function.prototype.toString;
+    var funcToString = funcProto.toString;
 
     /** Used to check objects for own properties. */
     var hasOwnProperty = objectProto.hasOwnProperty;
@@ -3534,7 +3964,7 @@ module.exports = Array.isArray || function (arr) {
 
     /**
      * Used to resolve the
-     * [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
+     * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
      * of values.
      */
     var objectToString = objectProto.toString;
@@ -3550,33 +3980,43 @@ module.exports = Array.isArray || function (arr) {
 
     /** Built-in value references. */
     var Buffer = moduleExports ? context.Buffer : undefined,
-        Reflect = context.Reflect,
         Symbol = context.Symbol,
         Uint8Array = context.Uint8Array,
-        enumerate = Reflect ? Reflect.enumerate : undefined,
-        getOwnPropertySymbols = Object.getOwnPropertySymbols,
-        iteratorSymbol = typeof (iteratorSymbol = Symbol && Symbol.iterator) == 'symbol' ? iteratorSymbol : undefined,
+        allocUnsafe = Buffer ? Buffer.allocUnsafe : undefined,
+        getPrototype = overArg(Object.getPrototypeOf, Object),
+        iteratorSymbol = Symbol ? Symbol.iterator : undefined,
         objectCreate = Object.create,
         propertyIsEnumerable = objectProto.propertyIsEnumerable,
-        splice = arrayProto.splice;
+        splice = arrayProto.splice,
+        spreadableSymbol = Symbol ? Symbol.isConcatSpreadable : undefined;
 
-    /** Built-in method references that are mockable. */
-    var setTimeout = function(func, wait) { return context.setTimeout.call(root, func, wait); };
+    var defineProperty = (function() {
+      try {
+        var func = getNative(Object, 'defineProperty');
+        func({}, '', {});
+        return func;
+      } catch (e) {}
+    }());
+
+    /** Mocked built-ins. */
+    var ctxClearTimeout = context.clearTimeout !== root.clearTimeout && context.clearTimeout,
+        ctxNow = Date && Date.now !== root.Date.now && Date.now,
+        ctxSetTimeout = context.setTimeout !== root.setTimeout && context.setTimeout;
 
     /* Built-in method references for those with the same name as other `lodash` methods. */
     var nativeCeil = Math.ceil,
         nativeFloor = Math.floor,
-        nativeGetPrototype = Object.getPrototypeOf,
+        nativeGetSymbols = Object.getOwnPropertySymbols,
+        nativeIsBuffer = Buffer ? Buffer.isBuffer : undefined,
         nativeIsFinite = context.isFinite,
         nativeJoin = arrayProto.join,
-        nativeKeys = Object.keys,
+        nativeKeys = overArg(Object.keys, Object),
         nativeMax = Math.max,
         nativeMin = Math.min,
+        nativeNow = Date.now,
         nativeParseInt = context.parseInt,
         nativeRandom = Math.random,
-        nativeReplace = stringProto.replace,
-        nativeReverse = arrayProto.reverse,
-        nativeSplit = stringProto.split;
+        nativeReverse = arrayProto.reverse;
 
     /* Built-in method references that are verified to be native. */
     var DataView = getNative(context, 'DataView'),
@@ -3588,9 +4028,6 @@ module.exports = Array.isArray || function (arr) {
 
     /** Used to store function metadata. */
     var metaMap = WeakMap && new WeakMap;
-
-    /** Detect if properties shadowing those on `Object.prototype` are non-enumerable. */
-    var nonEnumShadows = !propertyIsEnumerable.call({ 'valueOf': 1 }, 'valueOf');
 
     /** Used to lookup unminified function names. */
     var realNames = {};
@@ -3675,16 +4112,16 @@ module.exports = Array.isArray || function (arr) {
      *
      * The wrapper methods that are **not** chainable by default are:
      * `add`, `attempt`, `camelCase`, `capitalize`, `ceil`, `clamp`, `clone`,
-     * `cloneDeep`, `cloneDeepWith`, `cloneWith`, `deburr`, `divide`, `each`,
-     * `eachRight`, `endsWith`, `eq`, `escape`, `escapeRegExp`, `every`, `find`,
-     * `findIndex`, `findKey`, `findLast`, `findLastIndex`, `findLastKey`, `first`,
-     * `floor`, `forEach`, `forEachRight`, `forIn`, `forInRight`, `forOwn`,
-     * `forOwnRight`, `get`, `gt`, `gte`, `has`, `hasIn`, `head`, `identity`,
-     * `includes`, `indexOf`, `inRange`, `invoke`, `isArguments`, `isArray`,
-     * `isArrayBuffer`, `isArrayLike`, `isArrayLikeObject`, `isBoolean`,
-     * `isBuffer`, `isDate`, `isElement`, `isEmpty`, `isEqual`, `isEqualWith`,
-     * `isError`, `isFinite`, `isFunction`, `isInteger`, `isLength`, `isMap`,
-     * `isMatch`, `isMatchWith`, `isNaN`, `isNative`, `isNil`, `isNull`,
+     * `cloneDeep`, `cloneDeepWith`, `cloneWith`, `conformsTo`, `deburr`,
+     * `defaultTo`, `divide`, `each`, `eachRight`, `endsWith`, `eq`, `escape`,
+     * `escapeRegExp`, `every`, `find`, `findIndex`, `findKey`, `findLast`,
+     * `findLastIndex`, `findLastKey`, `first`, `floor`, `forEach`, `forEachRight`,
+     * `forIn`, `forInRight`, `forOwn`, `forOwnRight`, `get`, `gt`, `gte`, `has`,
+     * `hasIn`, `head`, `identity`, `includes`, `indexOf`, `inRange`, `invoke`,
+     * `isArguments`, `isArray`, `isArrayBuffer`, `isArrayLike`, `isArrayLikeObject`,
+     * `isBoolean`, `isBuffer`, `isDate`, `isElement`, `isEmpty`, `isEqual`,
+     * `isEqualWith`, `isError`, `isFinite`, `isFunction`, `isInteger`, `isLength`,
+     * `isMap`, `isMatch`, `isMatchWith`, `isNaN`, `isNative`, `isNil`, `isNull`,
      * `isNumber`, `isObject`, `isObjectLike`, `isPlainObject`, `isRegExp`,
      * `isSafeInteger`, `isSet`, `isString`, `isUndefined`, `isTypedArray`,
      * `isWeakMap`, `isWeakSet`, `join`, `kebabCase`, `last`, `lastIndexOf`,
@@ -3737,6 +4174,30 @@ module.exports = Array.isArray || function (arr) {
       }
       return new LodashWrapper(value);
     }
+
+    /**
+     * The base implementation of `_.create` without support for assigning
+     * properties to the created object.
+     *
+     * @private
+     * @param {Object} proto The object to inherit from.
+     * @returns {Object} Returns the new object.
+     */
+    var baseCreate = (function() {
+      function object() {}
+      return function(proto) {
+        if (!isObject(proto)) {
+          return {};
+        }
+        if (objectCreate) {
+          return objectCreate(proto);
+        }
+        object.prototype = proto;
+        var result = new object;
+        object.prototype = undefined;
+        return result;
+      };
+    }());
 
     /**
      * The function whose prototype chain sequence wrappers inherit from.
@@ -3979,6 +4440,7 @@ module.exports = Array.isArray || function (arr) {
      */
     function hashClear() {
       this.__data__ = nativeCreate ? nativeCreate(null) : {};
+      this.size = 0;
     }
 
     /**
@@ -3992,7 +4454,9 @@ module.exports = Array.isArray || function (arr) {
      * @returns {boolean} Returns `true` if the entry was removed, else `false`.
      */
     function hashDelete(key) {
-      return this.has(key) && delete this.__data__[key];
+      var result = this.has(key) && delete this.__data__[key];
+      this.size -= result ? 1 : 0;
+      return result;
     }
 
     /**
@@ -4039,6 +4503,7 @@ module.exports = Array.isArray || function (arr) {
      */
     function hashSet(key, value) {
       var data = this.__data__;
+      this.size += this.has(key) ? 0 : 1;
       data[key] = (nativeCreate && value === undefined) ? HASH_UNDEFINED : value;
       return this;
     }
@@ -4079,6 +4544,7 @@ module.exports = Array.isArray || function (arr) {
      */
     function listCacheClear() {
       this.__data__ = [];
+      this.size = 0;
     }
 
     /**
@@ -4103,6 +4569,7 @@ module.exports = Array.isArray || function (arr) {
       } else {
         splice.call(data, index, 1);
       }
+      --this.size;
       return true;
     }
 
@@ -4150,6 +4617,7 @@ module.exports = Array.isArray || function (arr) {
           index = assocIndexOf(data, key);
 
       if (index < 0) {
+        ++this.size;
         data.push([key, value]);
       } else {
         data[index][1] = value;
@@ -4192,6 +4660,7 @@ module.exports = Array.isArray || function (arr) {
      * @memberOf MapCache
      */
     function mapCacheClear() {
+      this.size = 0;
       this.__data__ = {
         'hash': new Hash,
         'map': new (Map || ListCache),
@@ -4209,7 +4678,9 @@ module.exports = Array.isArray || function (arr) {
      * @returns {boolean} Returns `true` if the entry was removed, else `false`.
      */
     function mapCacheDelete(key) {
-      return getMapData(this, key)['delete'](key);
+      var result = getMapData(this, key)['delete'](key);
+      this.size -= result ? 1 : 0;
+      return result;
     }
 
     /**
@@ -4249,7 +4720,11 @@ module.exports = Array.isArray || function (arr) {
      * @returns {Object} Returns the map cache instance.
      */
     function mapCacheSet(key, value) {
-      getMapData(this, key).set(key, value);
+      var data = getMapData(this, key),
+          size = data.size;
+
+      data.set(key, value);
+      this.size += data.size == size ? 0 : 1;
       return this;
     }
 
@@ -4322,7 +4797,8 @@ module.exports = Array.isArray || function (arr) {
      * @param {Array} [entries] The key-value pairs to cache.
      */
     function Stack(entries) {
-      this.__data__ = new ListCache(entries);
+      var data = this.__data__ = new ListCache(entries);
+      this.size = data.size;
     }
 
     /**
@@ -4334,6 +4810,7 @@ module.exports = Array.isArray || function (arr) {
      */
     function stackClear() {
       this.__data__ = new ListCache;
+      this.size = 0;
     }
 
     /**
@@ -4346,7 +4823,11 @@ module.exports = Array.isArray || function (arr) {
      * @returns {boolean} Returns `true` if the entry was removed, else `false`.
      */
     function stackDelete(key) {
-      return this.__data__['delete'](key);
+      var data = this.__data__,
+          result = data['delete'](key);
+
+      this.size = data.size;
+      return result;
     }
 
     /**
@@ -4386,11 +4867,18 @@ module.exports = Array.isArray || function (arr) {
      * @returns {Object} Returns the stack cache instance.
      */
     function stackSet(key, value) {
-      var cache = this.__data__;
-      if (cache instanceof ListCache && cache.__data__.length == LARGE_ARRAY_SIZE) {
-        cache = this.__data__ = new MapCache(cache.__data__);
+      var data = this.__data__;
+      if (data instanceof ListCache) {
+        var pairs = data.__data__;
+        if (!Map || (pairs.length < LARGE_ARRAY_SIZE - 1)) {
+          pairs.push([key, value]);
+          this.size = ++data.size;
+          return this;
+        }
+        data = this.__data__ = new MapCache(pairs);
       }
-      cache.set(key, value);
+      data.set(key, value);
+      this.size = data.size;
       return this;
     }
 
@@ -4402,6 +4890,76 @@ module.exports = Array.isArray || function (arr) {
     Stack.prototype.set = stackSet;
 
     /*------------------------------------------------------------------------*/
+
+    /**
+     * Creates an array of the enumerable property names of the array-like `value`.
+     *
+     * @private
+     * @param {*} value The value to query.
+     * @param {boolean} inherited Specify returning inherited property names.
+     * @returns {Array} Returns the array of property names.
+     */
+    function arrayLikeKeys(value, inherited) {
+      var isArr = isArray(value),
+          isArg = !isArr && isArguments(value),
+          isBuff = !isArr && !isArg && isBuffer(value),
+          isType = !isArr && !isArg && !isBuff && isTypedArray(value),
+          skipIndexes = isArr || isArg || isBuff || isType,
+          result = skipIndexes ? baseTimes(value.length, String) : [],
+          length = result.length;
+
+      for (var key in value) {
+        if ((inherited || hasOwnProperty.call(value, key)) &&
+            !(skipIndexes && (
+               // Safari 9 has enumerable `arguments.length` in strict mode.
+               key == 'length' ||
+               // Node.js 0.10 has enumerable non-index properties on buffers.
+               (isBuff && (key == 'offset' || key == 'parent')) ||
+               // PhantomJS 2 has enumerable non-index properties on typed arrays.
+               (isType && (key == 'buffer' || key == 'byteLength' || key == 'byteOffset')) ||
+               // Skip index properties.
+               isIndex(key, length)
+            ))) {
+          result.push(key);
+        }
+      }
+      return result;
+    }
+
+    /**
+     * A specialized version of `_.sample` for arrays.
+     *
+     * @private
+     * @param {Array} array The array to sample.
+     * @returns {*} Returns the random element.
+     */
+    function arraySample(array) {
+      var length = array.length;
+      return length ? array[baseRandom(0, length - 1)] : undefined;
+    }
+
+    /**
+     * A specialized version of `_.sampleSize` for arrays.
+     *
+     * @private
+     * @param {Array} array The array to sample.
+     * @param {number} n The number of elements to sample.
+     * @returns {Array} Returns the random elements.
+     */
+    function arraySampleSize(array, n) {
+      return shuffleSelf(copyArray(array), baseClamp(n, 0, array.length));
+    }
+
+    /**
+     * A specialized version of `_.shuffle` for arrays.
+     *
+     * @private
+     * @param {Array} array The array to shuffle.
+     * @returns {Array} Returns the new shuffled array.
+     */
+    function arrayShuffle(array) {
+      return shuffleSelf(copyArray(array));
+    }
 
     /**
      * Used by `_.defaults` to customize its `_.assignIn` use.
@@ -4432,14 +4990,14 @@ module.exports = Array.isArray || function (arr) {
      */
     function assignMergeValue(object, key, value) {
       if ((value !== undefined && !eq(object[key], value)) ||
-          (typeof key == 'number' && value === undefined && !(key in object))) {
-        object[key] = value;
+          (value === undefined && !(key in object))) {
+        baseAssignValue(object, key, value);
       }
     }
 
     /**
      * Assigns `value` to `key` of `object` if the existing value is not equivalent
-     * using [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
+     * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
      * for equality comparisons.
      *
      * @private
@@ -4451,7 +5009,7 @@ module.exports = Array.isArray || function (arr) {
       var objValue = object[key];
       if (!(hasOwnProperty.call(object, key) && eq(objValue, value)) ||
           (value === undefined && !(key in object))) {
-        object[key] = value;
+        baseAssignValue(object, key, value);
       }
     }
 
@@ -4459,7 +5017,7 @@ module.exports = Array.isArray || function (arr) {
      * Gets the index at which the `key` is found in `array` of key-value pairs.
      *
      * @private
-     * @param {Array} array The array to search.
+     * @param {Array} array The array to inspect.
      * @param {*} key The key to search for.
      * @returns {number} Returns the index of the matched value, else `-1`.
      */
@@ -4505,6 +5063,28 @@ module.exports = Array.isArray || function (arr) {
     }
 
     /**
+     * The base implementation of `assignValue` and `assignMergeValue` without
+     * value checks.
+     *
+     * @private
+     * @param {Object} object The object to modify.
+     * @param {string} key The key of the property to assign.
+     * @param {*} value The value to assign.
+     */
+    function baseAssignValue(object, key, value) {
+      if (key == '__proto__' && defineProperty) {
+        defineProperty(object, key, {
+          'configurable': true,
+          'enumerable': true,
+          'value': value,
+          'writable': true
+        });
+      } else {
+        object[key] = value;
+      }
+    }
+
+    /**
      * The base implementation of `_.at` without support for individual paths.
      *
      * @private
@@ -4525,7 +5105,7 @@ module.exports = Array.isArray || function (arr) {
     }
 
     /**
-     * The base implementation of `_.clamp` which doesn't coerce arguments to numbers.
+     * The base implementation of `_.clamp` which doesn't coerce arguments.
      *
      * @private
      * @param {number} number The number to clamp.
@@ -4584,9 +5164,6 @@ module.exports = Array.isArray || function (arr) {
           return cloneBuffer(value, isDeep);
         }
         if (tag == objectTag || tag == argsTag || (isFunc && !object)) {
-          if (isHostObject(value)) {
-            return object ? value : {};
-          }
           result = initCloneObject(isFunc ? {} : value);
           if (!isDeep) {
             return copySymbols(value, baseAssign(result, value));
@@ -4606,15 +5183,13 @@ module.exports = Array.isArray || function (arr) {
       }
       stack.set(value, result);
 
-      if (!isArr) {
-        var props = isFull ? getAllKeys(value) : keys(value);
-      }
-      // Recursively populate clone (susceptible to call stack limits).
+      var props = isArr ? undefined : (isFull ? getAllKeys : keys)(value);
       arrayEach(props || value, function(subValue, key) {
         if (props) {
           key = subValue;
           subValue = value[key];
         }
+        // Recursively populate clone (susceptible to call stack limits).
         assignValue(result, key, baseClone(subValue, isDeep, isFull, customizer, key, value, stack));
       });
       return result;
@@ -4628,49 +5203,47 @@ module.exports = Array.isArray || function (arr) {
      * @returns {Function} Returns the new spec function.
      */
     function baseConforms(source) {
-      var props = keys(source),
-          length = props.length;
-
+      var props = keys(source);
       return function(object) {
-        if (object == null) {
-          return !length;
-        }
-        var index = length;
-        while (index--) {
-          var key = props[index],
-              predicate = source[key],
-              value = object[key];
-
-          if ((value === undefined &&
-              !(key in Object(object))) || !predicate(value)) {
-            return false;
-          }
-        }
-        return true;
+        return baseConformsTo(object, source, props);
       };
     }
 
     /**
-     * The base implementation of `_.create` without support for assigning
-     * properties to the created object.
+     * The base implementation of `_.conformsTo` which accepts `props` to check.
      *
      * @private
-     * @param {Object} prototype The object to inherit from.
-     * @returns {Object} Returns the new object.
+     * @param {Object} object The object to inspect.
+     * @param {Object} source The object of property predicates to conform to.
+     * @returns {boolean} Returns `true` if `object` conforms, else `false`.
      */
-    function baseCreate(proto) {
-      return isObject(proto) ? objectCreate(proto) : {};
+    function baseConformsTo(object, source, props) {
+      var length = props.length;
+      if (object == null) {
+        return !length;
+      }
+      object = Object(object);
+      while (length--) {
+        var key = props[length],
+            predicate = source[key],
+            value = object[key];
+
+        if ((value === undefined && !(key in object)) || !predicate(value)) {
+          return false;
+        }
+      }
+      return true;
     }
 
     /**
-     * The base implementation of `_.delay` and `_.defer` which accepts an array
-     * of `func` arguments.
+     * The base implementation of `_.delay` and `_.defer` which accepts `args`
+     * to provide to `func`.
      *
      * @private
      * @param {Function} func The function to delay.
      * @param {number} wait The number of milliseconds to delay invocation.
-     * @param {Object} args The arguments to provide to `func`.
-     * @returns {number} Returns the timer id.
+     * @param {Array} args The arguments to provide to `func`.
+     * @returns {number|Object} Returns the timer id or timeout object.
      */
     function baseDelay(func, wait, args) {
       if (typeof func != 'function') {
@@ -4983,7 +5556,18 @@ module.exports = Array.isArray || function (arr) {
     }
 
     /**
-     * The base implementation of `_.gt` which doesn't coerce arguments to numbers.
+     * The base implementation of `getTag`.
+     *
+     * @private
+     * @param {*} value The value to query.
+     * @returns {string} Returns the `toStringTag`.
+     */
+    function baseGetTag(value) {
+      return objectToString.call(value);
+    }
+
+    /**
+     * The base implementation of `_.gt` which doesn't coerce arguments.
      *
      * @private
      * @param {*} value The value to compare.
@@ -5004,12 +5588,7 @@ module.exports = Array.isArray || function (arr) {
      * @returns {boolean} Returns `true` if `key` exists, else `false`.
      */
     function baseHas(object, key) {
-      // Avoid a bug in IE 10-11 where objects with a [[Prototype]] of `null`,
-      // that are composed entirely of index properties, return `false` for
-      // `hasOwnProperty` checks of them.
-      return object != null &&
-        (hasOwnProperty.call(object, key) ||
-          (typeof object == 'object' && key in object && getPrototype(object) === null));
+      return object != null && hasOwnProperty.call(object, key);
     }
 
     /**
@@ -5025,7 +5604,7 @@ module.exports = Array.isArray || function (arr) {
     }
 
     /**
-     * The base implementation of `_.inRange` which doesn't coerce arguments to numbers.
+     * The base implementation of `_.inRange` which doesn't coerce arguments.
      *
      * @private
      * @param {number} number The number to check.
@@ -5139,6 +5718,39 @@ module.exports = Array.isArray || function (arr) {
     }
 
     /**
+     * The base implementation of `_.isArguments`.
+     *
+     * @private
+     * @param {*} value The value to check.
+     * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+     */
+    function baseIsArguments(value) {
+      return isObjectLike(value) && objectToString.call(value) == argsTag;
+    }
+
+    /**
+     * The base implementation of `_.isArrayBuffer` without Node.js optimizations.
+     *
+     * @private
+     * @param {*} value The value to check.
+     * @returns {boolean} Returns `true` if `value` is an array buffer, else `false`.
+     */
+    function baseIsArrayBuffer(value) {
+      return isObjectLike(value) && objectToString.call(value) == arrayBufferTag;
+    }
+
+    /**
+     * The base implementation of `_.isDate` without Node.js optimizations.
+     *
+     * @private
+     * @param {*} value The value to check.
+     * @returns {boolean} Returns `true` if `value` is a date object, else `false`.
+     */
+    function baseIsDate(value) {
+      return isObjectLike(value) && objectToString.call(value) == dateTag;
+    }
+
+    /**
      * The base implementation of `_.isEqual` which supports partial comparisons
      * and tracks traversed objects.
      *
@@ -5192,10 +5804,17 @@ module.exports = Array.isArray || function (arr) {
         othTag = getTag(other);
         othTag = othTag == argsTag ? objectTag : othTag;
       }
-      var objIsObj = objTag == objectTag && !isHostObject(object),
-          othIsObj = othTag == objectTag && !isHostObject(other),
+      var objIsObj = objTag == objectTag,
+          othIsObj = othTag == objectTag,
           isSameTag = objTag == othTag;
 
+      if (isSameTag && isBuffer(object)) {
+        if (!isBuffer(other)) {
+          return false;
+        }
+        objIsArr = true;
+        objIsObj = false;
+      }
       if (isSameTag && !objIsObj) {
         stack || (stack = new Stack);
         return (objIsArr || isTypedArray(object))
@@ -5219,6 +5838,17 @@ module.exports = Array.isArray || function (arr) {
       }
       stack || (stack = new Stack);
       return equalObjects(object, other, equalFunc, customizer, bitmask, stack);
+    }
+
+    /**
+     * The base implementation of `_.isMap` without Node.js optimizations.
+     *
+     * @private
+     * @param {*} value The value to check.
+     * @returns {boolean} Returns `true` if `value` is a map, else `false`.
+     */
+    function baseIsMap(value) {
+      return isObjectLike(value) && getTag(value) == mapTag;
     }
 
     /**
@@ -5287,8 +5917,42 @@ module.exports = Array.isArray || function (arr) {
       if (!isObject(value) || isMasked(value)) {
         return false;
       }
-      var pattern = (isFunction(value) || isHostObject(value)) ? reIsNative : reIsHostCtor;
+      var pattern = isFunction(value) ? reIsNative : reIsHostCtor;
       return pattern.test(toSource(value));
+    }
+
+    /**
+     * The base implementation of `_.isRegExp` without Node.js optimizations.
+     *
+     * @private
+     * @param {*} value The value to check.
+     * @returns {boolean} Returns `true` if `value` is a regexp, else `false`.
+     */
+    function baseIsRegExp(value) {
+      return isObject(value) && objectToString.call(value) == regexpTag;
+    }
+
+    /**
+     * The base implementation of `_.isSet` without Node.js optimizations.
+     *
+     * @private
+     * @param {*} value The value to check.
+     * @returns {boolean} Returns `true` if `value` is a set, else `false`.
+     */
+    function baseIsSet(value) {
+      return isObjectLike(value) && getTag(value) == setTag;
+    }
+
+    /**
+     * The base implementation of `_.isTypedArray` without Node.js optimizations.
+     *
+     * @private
+     * @param {*} value The value to check.
+     * @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
+     */
+    function baseIsTypedArray(value) {
+      return isObjectLike(value) &&
+        isLength(value.length) && !!typedArrayTags[objectToString.call(value)];
     }
 
     /**
@@ -5316,44 +5980,49 @@ module.exports = Array.isArray || function (arr) {
     }
 
     /**
-     * The base implementation of `_.keys` which doesn't skip the constructor
-     * property of prototypes or treat sparse arrays as dense.
+     * The base implementation of `_.keys` which doesn't treat sparse arrays as dense.
      *
      * @private
      * @param {Object} object The object to query.
      * @returns {Array} Returns the array of property names.
      */
     function baseKeys(object) {
-      return nativeKeys(Object(object));
+      if (!isPrototype(object)) {
+        return nativeKeys(object);
+      }
+      var result = [];
+      for (var key in Object(object)) {
+        if (hasOwnProperty.call(object, key) && key != 'constructor') {
+          result.push(key);
+        }
+      }
+      return result;
     }
 
     /**
-     * The base implementation of `_.keysIn` which doesn't skip the constructor
-     * property of prototypes or treat sparse arrays as dense.
+     * The base implementation of `_.keysIn` which doesn't treat sparse arrays as dense.
      *
      * @private
      * @param {Object} object The object to query.
      * @returns {Array} Returns the array of property names.
      */
     function baseKeysIn(object) {
-      object = object == null ? object : Object(object);
+      if (!isObject(object)) {
+        return nativeKeysIn(object);
+      }
+      var isProto = isPrototype(object),
+          result = [];
 
-      var result = [];
       for (var key in object) {
-        result.push(key);
+        if (!(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
+          result.push(key);
+        }
       }
       return result;
     }
 
-    // Fallback for IE < 9 with es6-shim.
-    if (enumerate && !propertyIsEnumerable.call({ 'valueOf': 1 }, 'valueOf')) {
-      baseKeysIn = function(object) {
-        return iteratorToArray(enumerate(object));
-      };
-    }
-
     /**
-     * The base implementation of `_.lt` which doesn't coerce arguments to numbers.
+     * The base implementation of `_.lt` which doesn't coerce arguments.
      *
      * @private
      * @param {*} value The value to compare.
@@ -5435,14 +6104,7 @@ module.exports = Array.isArray || function (arr) {
       if (object === source) {
         return;
       }
-      if (!(isArray(source) || isTypedArray(source))) {
-        var props = keysIn(source);
-      }
-      arrayEach(props || source, function(srcValue, key) {
-        if (props) {
-          key = srcValue;
-          srcValue = source[key];
-        }
+      baseFor(source, function(srcValue, key) {
         if (isObject(srcValue)) {
           stack || (stack = new Stack);
           baseMergeDeep(object, source, key, srcIndex, baseMerge, customizer, stack);
@@ -5457,7 +6119,7 @@ module.exports = Array.isArray || function (arr) {
           }
           assignMergeValue(object, key, newValue);
         }
-      });
+      }, keysIn);
     }
 
     /**
@@ -5491,47 +6153,54 @@ module.exports = Array.isArray || function (arr) {
       var isCommon = newValue === undefined;
 
       if (isCommon) {
+        var isArr = isArray(srcValue),
+            isBuff = !isArr && isBuffer(srcValue),
+            isTyped = !isArr && !isBuff && isTypedArray(srcValue);
+
         newValue = srcValue;
-        if (isArray(srcValue) || isTypedArray(srcValue)) {
+        if (isArr || isBuff || isTyped) {
           if (isArray(objValue)) {
             newValue = objValue;
           }
           else if (isArrayLikeObject(objValue)) {
             newValue = copyArray(objValue);
           }
-          else {
+          else if (isBuff) {
             isCommon = false;
-            newValue = baseClone(srcValue, true);
+            newValue = cloneBuffer(srcValue, true);
+          }
+          else if (isTyped) {
+            isCommon = false;
+            newValue = cloneTypedArray(srcValue, true);
+          }
+          else {
+            newValue = [];
           }
         }
         else if (isPlainObject(srcValue) || isArguments(srcValue)) {
+          newValue = objValue;
           if (isArguments(objValue)) {
             newValue = toPlainObject(objValue);
           }
           else if (!isObject(objValue) || (srcIndex && isFunction(objValue))) {
-            isCommon = false;
-            newValue = baseClone(srcValue, true);
-          }
-          else {
-            newValue = objValue;
+            newValue = initCloneObject(srcValue);
           }
         }
         else {
           isCommon = false;
         }
       }
-      stack.set(srcValue, newValue);
-
       if (isCommon) {
         // Recursively merge objects and arrays (susceptible to call stack limits).
+        stack.set(srcValue, newValue);
         mergeFunc(newValue, srcValue, srcIndex, customizer, stack);
+        stack['delete'](srcValue);
       }
-      stack['delete'](srcValue);
       assignMergeValue(object, key, newValue);
     }
 
     /**
-     * The base implementation of `_.nth` which doesn't coerce `n` to an integer.
+     * The base implementation of `_.nth` which doesn't coerce arguments.
      *
      * @private
      * @param {Array} array The array to query.
@@ -5583,12 +6252,9 @@ module.exports = Array.isArray || function (arr) {
      */
     function basePick(object, props) {
       object = Object(object);
-      return arrayReduce(props, function(result, key) {
-        if (key in object) {
-          result[key] = object[key];
-        }
-        return result;
-      }, {});
+      return basePickBy(object, props, function(value, key) {
+        return key in object;
+      });
     }
 
     /**
@@ -5596,12 +6262,12 @@ module.exports = Array.isArray || function (arr) {
      *
      * @private
      * @param {Object} object The source object.
+     * @param {string[]} props The property identifiers to pick from.
      * @param {Function} predicate The function invoked per property.
      * @returns {Object} Returns the new object.
      */
-    function basePickBy(object, predicate) {
+    function basePickBy(object, props, predicate) {
       var index = -1,
-          props = getAllKeysIn(object),
           length = props.length,
           result = {};
 
@@ -5610,23 +6276,10 @@ module.exports = Array.isArray || function (arr) {
             value = object[key];
 
         if (predicate(value, key)) {
-          result[key] = value;
+          baseAssignValue(result, key, value);
         }
       }
       return result;
-    }
-
-    /**
-     * The base implementation of `_.property` without support for deep paths.
-     *
-     * @private
-     * @param {string} key The key of the property to get.
-     * @returns {Function} Returns the new accessor function.
-     */
-    function baseProperty(key) {
-      return function(object) {
-        return object == null ? undefined : object[key];
-      };
     }
 
     /**
@@ -5731,7 +6384,7 @@ module.exports = Array.isArray || function (arr) {
 
     /**
      * The base implementation of `_.range` and `_.rangeRight` which doesn't
-     * coerce arguments to numbers.
+     * coerce arguments.
      *
      * @private
      * @param {number} start The start of the range.
@@ -5781,16 +6434,55 @@ module.exports = Array.isArray || function (arr) {
     }
 
     /**
+     * The base implementation of `_.rest` which doesn't validate or coerce arguments.
+     *
+     * @private
+     * @param {Function} func The function to apply a rest parameter to.
+     * @param {number} [start=func.length-1] The start position of the rest parameter.
+     * @returns {Function} Returns the new function.
+     */
+    function baseRest(func, start) {
+      return setToString(overRest(func, start, identity), func + '');
+    }
+
+    /**
+     * The base implementation of `_.sample`.
+     *
+     * @private
+     * @param {Array|Object} collection The collection to sample.
+     * @returns {*} Returns the random element.
+     */
+    function baseSample(collection) {
+      return arraySample(values(collection));
+    }
+
+    /**
+     * The base implementation of `_.sampleSize` without param guards.
+     *
+     * @private
+     * @param {Array|Object} collection The collection to sample.
+     * @param {number} n The number of elements to sample.
+     * @returns {Array} Returns the random elements.
+     */
+    function baseSampleSize(collection, n) {
+      var array = values(collection);
+      return shuffleSelf(array, baseClamp(n, 0, array.length));
+    }
+
+    /**
      * The base implementation of `_.set`.
      *
      * @private
-     * @param {Object} object The object to query.
+     * @param {Object} object The object to modify.
      * @param {Array|string} path The path of the property to set.
      * @param {*} value The value to set.
      * @param {Function} [customizer] The function to customize path creation.
      * @returns {Object} Returns `object`.
      */
     function baseSet(object, path, value, customizer) {
+      if (!isObject(object)) {
+        return object;
+      }
       path = isKey(path, object) ? [path] : castPath(path);
 
       var index = -1,
@@ -5799,27 +6491,26 @@ module.exports = Array.isArray || function (arr) {
           nested = object;
 
       while (nested != null && ++index < length) {
-        var key = toKey(path[index]);
-        if (isObject(nested)) {
-          var newValue = value;
-          if (index != lastIndex) {
-            var objValue = nested[key];
-            newValue = customizer ? customizer(objValue, key, nested) : undefined;
-            if (newValue === undefined) {
-              newValue = objValue == null
-                ? (isIndex(path[index + 1]) ? [] : {})
-                : objValue;
-            }
+        var key = toKey(path[index]),
+            newValue = value;
+
+        if (index != lastIndex) {
+          var objValue = nested[key];
+          newValue = customizer ? customizer(objValue, key, nested) : undefined;
+          if (newValue === undefined) {
+            newValue = isObject(objValue)
+              ? objValue
+              : (isIndex(path[index + 1]) ? [] : {});
           }
-          assignValue(nested, key, newValue);
         }
+        assignValue(nested, key, newValue);
         nested = nested[key];
       }
       return object;
     }
 
     /**
-     * The base implementation of `setData` without support for hot loop detection.
+     * The base implementation of `setData` without support for hot loop shorting.
      *
      * @private
      * @param {Function} func The function to associate metadata with.
@@ -5830,6 +6521,34 @@ module.exports = Array.isArray || function (arr) {
       metaMap.set(func, data);
       return func;
     };
+
+    /**
+     * The base implementation of `setToString` without support for hot loop shorting.
+     *
+     * @private
+     * @param {Function} func The function to modify.
+     * @param {Function} string The `toString` result.
+     * @returns {Function} Returns `func`.
+     */
+    var baseSetToString = !defineProperty ? identity : function(func, string) {
+      return defineProperty(func, 'toString', {
+        'configurable': true,
+        'enumerable': false,
+        'value': constant(string),
+        'writable': true
+      });
+    };
+
+    /**
+     * The base implementation of `_.shuffle`.
+     *
+     * @private
+     * @param {Array|Object} collection The collection to shuffle.
+     * @returns {Array} Returns the new shuffled array.
+     */
+    function baseShuffle(collection) {
+      return shuffleSelf(values(collection));
+    }
 
     /**
      * The base implementation of `_.slice` without an iteratee call guard.
@@ -6024,6 +6743,10 @@ module.exports = Array.isArray || function (arr) {
       if (typeof value == 'string') {
         return value;
       }
+      if (isArray(value)) {
+        // Recursively convert values (susceptible to call stack limits).
+        return arrayMap(value, baseToString) + '';
+      }
       if (isSymbol(value)) {
         return symbolToString ? symbolToString.call(value) : '';
       }
@@ -6105,14 +6828,14 @@ module.exports = Array.isArray || function (arr) {
       object = parent(object, path);
 
       var key = toKey(last(path));
-      return !(object != null && baseHas(object, key)) || delete object[key];
+      return !(object != null && hasOwnProperty.call(object, key)) || delete object[key];
     }
 
     /**
      * The base implementation of `_.update`.
      *
      * @private
-     * @param {Object} object The object to query.
+     * @param {Object} object The object to modify.
      * @param {Array|string} path The path of the property to update.
      * @param {Function} updater The function to produce the updated value.
      * @param {Function} [customizer] The function to customize path creation.
@@ -6246,6 +6969,17 @@ module.exports = Array.isArray || function (arr) {
     }
 
     /**
+     * A `baseRest` alias which can be replaced with `identity` by module
+     * replacement plugins.
+     *
+     * @private
+     * @type {Function}
+     * @param {Function} func The function to apply a rest parameter to.
+     * @returns {Function} Returns the new function.
+     */
+    var castRest = baseRest;
+
+    /**
      * Casts `array` to a slice if it's needed.
      *
      * @private
@@ -6261,6 +6995,16 @@ module.exports = Array.isArray || function (arr) {
     }
 
     /**
+     * A simple wrapper around the global [`clearTimeout`](https://mdn.io/clearTimeout).
+     *
+     * @private
+     * @param {number|Object} id The timer id or timeout object of the timer to clear.
+     */
+    var clearTimeout = ctxClearTimeout || function(id) {
+      return root.clearTimeout(id);
+    };
+
+    /**
      * Creates a clone of  `buffer`.
      *
      * @private
@@ -6272,7 +7016,9 @@ module.exports = Array.isArray || function (arr) {
       if (isDeep) {
         return buffer.slice();
       }
-      var result = new buffer.constructor(buffer.length);
+      var length = buffer.length,
+          result = allocUnsafe ? allocUnsafe(length) : new buffer.constructor(length);
+
       buffer.copy(result);
       return result;
     }
@@ -6549,6 +7295,7 @@ module.exports = Array.isArray || function (arr) {
      * @returns {Object} Returns `object`.
      */
     function copyObject(source, props, object, customizer) {
+      var isNew = !object;
       object || (object = {});
 
       var index = -1,
@@ -6559,9 +7306,16 @@ module.exports = Array.isArray || function (arr) {
 
         var newValue = customizer
           ? customizer(object[key], source[key], key, object, source)
-          : source[key];
+          : undefined;
 
-        assignValue(object, key, newValue);
+        if (newValue === undefined) {
+          newValue = source[key];
+        }
+        if (isNew) {
+          baseAssignValue(object, key, newValue);
+        } else {
+          assignValue(object, key, newValue);
+        }
       }
       return object;
     }
@@ -6591,7 +7345,7 @@ module.exports = Array.isArray || function (arr) {
         var func = isArray(collection) ? arrayAggregator : baseAggregator,
             accumulator = initializer ? initializer() : {};
 
-        return func(collection, setter, getIteratee(iteratee), accumulator);
+        return func(collection, setter, getIteratee(iteratee, 2), accumulator);
       };
     }
 
@@ -6603,7 +7357,7 @@ module.exports = Array.isArray || function (arr) {
      * @returns {Function} Returns the new assigner function.
      */
     function createAssigner(assigner) {
-      return rest(function(object, sources) {
+      return baseRest(function(object, sources) {
         var index = -1,
             length = sources.length,
             customizer = length > 1 ? sources[length - 1] : undefined,
@@ -6687,14 +7441,13 @@ module.exports = Array.isArray || function (arr) {
      *
      * @private
      * @param {Function} func The function to wrap.
-     * @param {number} bitmask The bitmask of wrapper flags. See `createWrapper`
-     *  for more details.
+     * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
      * @param {*} [thisArg] The `this` binding of `func`.
      * @returns {Function} Returns the new wrapped function.
      */
-    function createBaseWrapper(func, bitmask, thisArg) {
+    function createBind(func, bitmask, thisArg) {
       var isBind = bitmask & BIND_FLAG,
-          Ctor = createCtorWrapper(func);
+          Ctor = createCtor(func);
 
       function wrapper() {
         var fn = (this && this !== root && this instanceof wrapper) ? Ctor : func;
@@ -6714,7 +7467,7 @@ module.exports = Array.isArray || function (arr) {
       return function(string) {
         string = toString(string);
 
-        var strSymbols = reHasComplexSymbol.test(string)
+        var strSymbols = hasUnicode(string)
           ? stringToArray(string)
           : undefined;
 
@@ -6751,10 +7504,10 @@ module.exports = Array.isArray || function (arr) {
      * @param {Function} Ctor The constructor to wrap.
      * @returns {Function} Returns the new wrapped function.
      */
-    function createCtorWrapper(Ctor) {
+    function createCtor(Ctor) {
       return function() {
         // Use a `switch` statement to work with class constructors. See
-        // http://ecma-international.org/ecma-262/6.0/#sec-ecmascript-function-objects-call-thisargument-argumentslist
+        // http://ecma-international.org/ecma-262/7.0/#sec-ecmascript-function-objects-call-thisargument-argumentslist
         // for more details.
         var args = arguments;
         switch (args.length) {
@@ -6781,13 +7534,12 @@ module.exports = Array.isArray || function (arr) {
      *
      * @private
      * @param {Function} func The function to wrap.
-     * @param {number} bitmask The bitmask of wrapper flags. See `createWrapper`
-     *  for more details.
+     * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
      * @param {number} arity The arity of `func`.
      * @returns {Function} Returns the new wrapped function.
      */
-    function createCurryWrapper(func, bitmask, arity) {
-      var Ctor = createCtorWrapper(func);
+    function createCurry(func, bitmask, arity) {
+      var Ctor = createCtor(func);
 
       function wrapper() {
         var length = arguments.length,
@@ -6804,8 +7556,8 @@ module.exports = Array.isArray || function (arr) {
 
         length -= holders.length;
         if (length < arity) {
-          return createRecurryWrapper(
-            func, bitmask, createHybridWrapper, wrapper.placeholder, undefined,
+          return createRecurry(
+            func, bitmask, createHybrid, wrapper.placeholder, undefined,
             args, holders, undefined, undefined, arity - length);
         }
         var fn = (this && this !== root && this instanceof wrapper) ? Ctor : func;
@@ -6824,18 +7576,13 @@ module.exports = Array.isArray || function (arr) {
     function createFind(findIndexFunc) {
       return function(collection, predicate, fromIndex) {
         var iterable = Object(collection);
-        predicate = getIteratee(predicate, 3);
         if (!isArrayLike(collection)) {
-          var props = keys(collection);
+          var iteratee = getIteratee(predicate, 3);
+          collection = keys(collection);
+          predicate = function(key) { return iteratee(iterable[key], key, iterable); };
         }
-        var index = findIndexFunc(props || collection, function(value, key) {
-          if (props) {
-            key = value;
-            value = iterable[key];
-          }
-          return predicate(value, key, iterable);
-        }, fromIndex);
-        return index > -1 ? collection[props ? props[index] : index] : undefined;
+        var index = findIndexFunc(collection, predicate, fromIndex);
+        return index > -1 ? iterable[iteratee ? collection[index] : index] : undefined;
       };
     }
 
@@ -6847,9 +7594,7 @@ module.exports = Array.isArray || function (arr) {
      * @returns {Function} Returns the new flow function.
      */
     function createFlow(fromRight) {
-      return rest(function(funcs) {
-        funcs = baseFlatten(funcs, 1);
-
+      return flatRest(function(funcs) {
         var length = funcs.length,
             index = length,
             prereq = LodashWrapper.prototype.thru;
@@ -6909,8 +7654,7 @@ module.exports = Array.isArray || function (arr) {
      *
      * @private
      * @param {Function|string} func The function or method name to wrap.
-     * @param {number} bitmask The bitmask of wrapper flags. See `createWrapper`
-     *  for more details.
+     * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
      * @param {*} [thisArg] The `this` binding of `func`.
      * @param {Array} [partials] The arguments to prepend to those provided to
      *  the new function.
@@ -6923,13 +7667,13 @@ module.exports = Array.isArray || function (arr) {
      * @param {number} [arity] The arity of `func`.
      * @returns {Function} Returns the new wrapped function.
      */
-    function createHybridWrapper(func, bitmask, thisArg, partials, holders, partialsRight, holdersRight, argPos, ary, arity) {
+    function createHybrid(func, bitmask, thisArg, partials, holders, partialsRight, holdersRight, argPos, ary, arity) {
       var isAry = bitmask & ARY_FLAG,
           isBind = bitmask & BIND_FLAG,
           isBindKey = bitmask & BIND_KEY_FLAG,
           isCurried = bitmask & (CURRY_FLAG | CURRY_RIGHT_FLAG),
           isFlip = bitmask & FLIP_FLAG,
-          Ctor = isBindKey ? undefined : createCtorWrapper(func);
+          Ctor = isBindKey ? undefined : createCtor(func);
 
       function wrapper() {
         var length = arguments.length,
@@ -6952,8 +7696,8 @@ module.exports = Array.isArray || function (arr) {
         length -= holdersCount;
         if (isCurried && length < arity) {
           var newHolders = replaceHolders(args, placeholder);
-          return createRecurryWrapper(
-            func, bitmask, createHybridWrapper, wrapper.placeholder, thisArg,
+          return createRecurry(
+            func, bitmask, createHybrid, wrapper.placeholder, thisArg,
             args, newHolders, argPos, ary, arity - length
           );
         }
@@ -6970,7 +7714,7 @@ module.exports = Array.isArray || function (arr) {
           args.length = ary;
         }
         if (this && this !== root && this instanceof wrapper) {
-          fn = Ctor || createCtorWrapper(fn);
+          fn = Ctor || createCtor(fn);
         }
         return fn.apply(thisBinding, args);
       }
@@ -6996,13 +7740,14 @@ module.exports = Array.isArray || function (arr) {
      *
      * @private
      * @param {Function} operator The function to perform the operation.
+     * @param {number} [defaultValue] The value used for `undefined` arguments.
      * @returns {Function} Returns the new mathematical operation function.
      */
-    function createMathOperation(operator) {
+    function createMathOperation(operator, defaultValue) {
       return function(value, other) {
         var result;
         if (value === undefined && other === undefined) {
-          return 0;
+          return defaultValue;
         }
         if (value !== undefined) {
           result = value;
@@ -7032,12 +7777,9 @@ module.exports = Array.isArray || function (arr) {
      * @returns {Function} Returns the new over function.
      */
     function createOver(arrayFunc) {
-      return rest(function(iteratees) {
-        iteratees = (iteratees.length == 1 && isArray(iteratees[0]))
-          ? arrayMap(iteratees[0], baseUnary(getIteratee()))
-          : arrayMap(baseFlatten(iteratees, 1, isFlattenableIteratee), baseUnary(getIteratee()));
-
-        return rest(function(args) {
+      return flatRest(function(iteratees) {
+        iteratees = arrayMap(iteratees, baseUnary(getIteratee()));
+        return baseRest(function(args) {
           var thisArg = this;
           return arrayFunc(iteratees, function(iteratee) {
             return apply(iteratee, thisArg, args);
@@ -7063,7 +7805,7 @@ module.exports = Array.isArray || function (arr) {
         return charsLength ? baseRepeat(chars, length) : chars;
       }
       var result = baseRepeat(chars, nativeCeil(length / stringSize(chars)));
-      return reHasComplexSymbol.test(chars)
+      return hasUnicode(chars)
         ? castSlice(stringToArray(result), 0, length).join('')
         : result.slice(0, length);
     }
@@ -7074,16 +7816,15 @@ module.exports = Array.isArray || function (arr) {
      *
      * @private
      * @param {Function} func The function to wrap.
-     * @param {number} bitmask The bitmask of wrapper flags. See `createWrapper`
-     *  for more details.
+     * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
      * @param {*} thisArg The `this` binding of `func`.
      * @param {Array} partials The arguments to prepend to those provided to
      *  the new function.
      * @returns {Function} Returns the new wrapped function.
      */
-    function createPartialWrapper(func, bitmask, thisArg, partials) {
+    function createPartial(func, bitmask, thisArg, partials) {
       var isBind = bitmask & BIND_FLAG,
-          Ctor = createCtorWrapper(func);
+          Ctor = createCtor(func);
 
       function wrapper() {
         var argsIndex = -1,
@@ -7117,15 +7858,14 @@ module.exports = Array.isArray || function (arr) {
           end = step = undefined;
         }
         // Ensure the sign of `-0` is preserved.
-        start = toNumber(start);
-        start = start === start ? start : 0;
+        start = toFinite(start);
         if (end === undefined) {
           end = start;
           start = 0;
         } else {
-          end = toNumber(end) || 0;
+          end = toFinite(end);
         }
-        step = step === undefined ? (start < end ? 1 : -1) : (toNumber(step) || 0);
+        step = step === undefined ? (start < end ? 1 : -1) : toFinite(step);
         return baseRange(start, end, step, fromRight);
       };
     }
@@ -7152,8 +7892,7 @@ module.exports = Array.isArray || function (arr) {
      *
      * @private
      * @param {Function} func The function to wrap.
-     * @param {number} bitmask The bitmask of wrapper flags. See `createWrapper`
-     *  for more details.
+     * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
      * @param {Function} wrapFunc The function to create the `func` wrapper.
      * @param {*} placeholder The placeholder value.
      * @param {*} [thisArg] The `this` binding of `func`.
@@ -7165,7 +7904,7 @@ module.exports = Array.isArray || function (arr) {
      * @param {number} [arity] The arity of `func`.
      * @returns {Function} Returns the new wrapped function.
      */
-    function createRecurryWrapper(func, bitmask, wrapFunc, placeholder, thisArg, partials, holders, argPos, ary, arity) {
+    function createRecurry(func, bitmask, wrapFunc, placeholder, thisArg, partials, holders, argPos, ary, arity) {
       var isCurry = bitmask & CURRY_FLAG,
           newHolders = isCurry ? holders : undefined,
           newHoldersRight = isCurry ? undefined : holders,
@@ -7188,7 +7927,7 @@ module.exports = Array.isArray || function (arr) {
         setData(result, newData);
       }
       result.placeholder = placeholder;
-      return result;
+      return setWrapToString(result, func, bitmask);
     }
 
     /**
@@ -7217,7 +7956,7 @@ module.exports = Array.isArray || function (arr) {
     }
 
     /**
-     * Creates a set of `values`.
+     * Creates a set object of `values`.
      *
      * @private
      * @param {Array} values The values to add to the set.
@@ -7253,7 +7992,7 @@ module.exports = Array.isArray || function (arr) {
      *
      * @private
      * @param {Function|string} func The function or method name to wrap.
-     * @param {number} bitmask The bitmask of wrapper flags.
+     * @param {number} bitmask The bitmask flags.
      *  The bitmask may be composed of the following flags:
      *     1 - `_.bind`
      *     2 - `_.bindKey`
@@ -7273,7 +8012,7 @@ module.exports = Array.isArray || function (arr) {
      * @param {number} [arity] The arity of `func`.
      * @returns {Function} Returns the new wrapped function.
      */
-    function createWrapper(func, bitmask, thisArg, partials, holders, argPos, ary, arity) {
+    function createWrap(func, bitmask, thisArg, partials, holders, argPos, ary, arity) {
       var isBindKey = bitmask & BIND_KEY_FLAG;
       if (!isBindKey && typeof func != 'function') {
         throw new TypeError(FUNC_ERROR_TEXT);
@@ -7316,16 +8055,16 @@ module.exports = Array.isArray || function (arr) {
         bitmask &= ~(CURRY_FLAG | CURRY_RIGHT_FLAG);
       }
       if (!bitmask || bitmask == BIND_FLAG) {
-        var result = createBaseWrapper(func, bitmask, thisArg);
+        var result = createBind(func, bitmask, thisArg);
       } else if (bitmask == CURRY_FLAG || bitmask == CURRY_RIGHT_FLAG) {
-        result = createCurryWrapper(func, bitmask, arity);
+        result = createCurry(func, bitmask, arity);
       } else if ((bitmask == PARTIAL_FLAG || bitmask == (BIND_FLAG | PARTIAL_FLAG)) && !holders.length) {
-        result = createPartialWrapper(func, bitmask, thisArg, partials);
+        result = createPartial(func, bitmask, thisArg, partials);
       } else {
-        result = createHybridWrapper.apply(undefined, newData);
+        result = createHybrid.apply(undefined, newData);
       }
       var setter = data ? baseSetData : setData;
-      return setter(result, newData);
+      return setWrapToString(setter(result, newData), func, bitmask);
     }
 
     /**
@@ -7352,7 +8091,7 @@ module.exports = Array.isArray || function (arr) {
       }
       // Assume cyclic values are equal.
       var stacked = stack.get(array);
-      if (stacked) {
+      if (stacked && stack.get(other)) {
         return stacked == other;
       }
       var index = -1,
@@ -7360,6 +8099,7 @@ module.exports = Array.isArray || function (arr) {
           seen = (bitmask & UNORDERED_COMPARE_FLAG) ? new SetCache : undefined;
 
       stack.set(array, other);
+      stack.set(other, array);
 
       // Ignore non-index properties.
       while (++index < arrLength) {
@@ -7381,9 +8121,9 @@ module.exports = Array.isArray || function (arr) {
         // Recursively compare arrays (susceptible to call stack limits).
         if (seen) {
           if (!arraySome(other, function(othValue, othIndex) {
-                if (!seen.has(othIndex) &&
+                if (!cacheHas(seen, othIndex) &&
                     (arrValue === othValue || equalFunc(arrValue, othValue, customizer, bitmask, stack))) {
-                  return seen.add(othIndex);
+                  return seen.push(othIndex);
                 }
               })) {
             result = false;
@@ -7398,6 +8138,7 @@ module.exports = Array.isArray || function (arr) {
         }
       }
       stack['delete'](array);
+      stack['delete'](other);
       return result;
     }
 
@@ -7438,22 +8179,18 @@ module.exports = Array.isArray || function (arr) {
 
         case boolTag:
         case dateTag:
-          // Coerce dates and booleans to numbers, dates to milliseconds and
-          // booleans to `1` or `0` treating invalid dates coerced to `NaN` as
-          // not equal.
-          return +object == +other;
+        case numberTag:
+          // Coerce booleans to `1` or `0` and dates to milliseconds.
+          // Invalid dates are coerced to `NaN`.
+          return eq(+object, +other);
 
         case errorTag:
           return object.name == other.name && object.message == other.message;
 
-        case numberTag:
-          // Treat `NaN` vs. `NaN` as equal.
-          return (object != +object) ? other != +other : object == +other;
-
         case regexpTag:
         case stringTag:
           // Coerce regexes to strings and treat strings, primitives and objects,
-          // as equal. See http://www.ecma-international.org/ecma-262/6.0/#sec-regexp.prototype.tostring
+          // as equal. See http://www.ecma-international.org/ecma-262/7.0/#sec-regexp.prototype.tostring
           // for more details.
           return object == (other + '');
 
@@ -7473,10 +8210,12 @@ module.exports = Array.isArray || function (arr) {
             return stacked == other;
           }
           bitmask |= UNORDERED_COMPARE_FLAG;
-          stack.set(object, other);
 
           // Recursively compare objects (susceptible to call stack limits).
-          return equalArrays(convert(object), convert(other), equalFunc, customizer, bitmask, stack);
+          stack.set(object, other);
+          var result = equalArrays(convert(object), convert(other), equalFunc, customizer, bitmask, stack);
+          stack['delete'](object);
+          return result;
 
         case symbolTag:
           if (symbolValueOf) {
@@ -7513,17 +8252,18 @@ module.exports = Array.isArray || function (arr) {
       var index = objLength;
       while (index--) {
         var key = objProps[index];
-        if (!(isPartial ? key in other : baseHas(other, key))) {
+        if (!(isPartial ? key in other : hasOwnProperty.call(other, key))) {
           return false;
         }
       }
       // Assume cyclic values are equal.
       var stacked = stack.get(object);
-      if (stacked) {
+      if (stacked && stack.get(other)) {
         return stacked == other;
       }
       var result = true;
       stack.set(object, other);
+      stack.set(other, object);
 
       var skipCtor = isPartial;
       while (++index < objLength) {
@@ -7559,7 +8299,19 @@ module.exports = Array.isArray || function (arr) {
         }
       }
       stack['delete'](object);
+      stack['delete'](other);
       return result;
+    }
+
+    /**
+     * A specialized version of `baseRest` which flattens the rest array.
+     *
+     * @private
+     * @param {Function} func The function to apply a rest parameter to.
+     * @returns {Function} Returns the new function.
+     */
+    function flatRest(func) {
+      return setToString(overRest(func, undefined, flatten), func + '');
     }
 
     /**
@@ -7648,19 +8400,6 @@ module.exports = Array.isArray || function (arr) {
     }
 
     /**
-     * Gets the "length" property value of `object`.
-     *
-     * **Note:** This function is used to avoid a
-     * [JIT bug](https://bugs.webkit.org/show_bug.cgi?id=142792) that affects
-     * Safari on at least iOS 8.1-8.3 ARM64.
-     *
-     * @private
-     * @param {Object} object The object to query.
-     * @returns {*} Returns the "length" value.
-     */
-    var getLength = baseProperty('length');
-
-    /**
      * Gets the data for `map`.
      *
      * @private
@@ -7709,33 +8448,13 @@ module.exports = Array.isArray || function (arr) {
     }
 
     /**
-     * Gets the `[[Prototype]]` of `value`.
-     *
-     * @private
-     * @param {*} value The value to query.
-     * @returns {null|Object} Returns the `[[Prototype]]`.
-     */
-    function getPrototype(value) {
-      return nativeGetPrototype(Object(value));
-    }
-
-    /**
      * Creates an array of the own enumerable symbol properties of `object`.
      *
      * @private
      * @param {Object} object The object to query.
      * @returns {Array} Returns the array of symbols.
      */
-    function getSymbols(object) {
-      // Coerce `object` to an object to avoid non-object errors in V8.
-      // See https://bugs.chromium.org/p/v8/issues/detail?id=3443 for more details.
-      return getOwnPropertySymbols(Object(object));
-    }
-
-    // Fallback for IE < 11.
-    if (!getOwnPropertySymbols) {
-      getSymbols = stubArray;
-    }
+    var getSymbols = nativeGetSymbols ? overArg(nativeGetSymbols, Object) : stubArray;
 
     /**
      * Creates an array of the own and inherited enumerable symbol properties
@@ -7745,7 +8464,7 @@ module.exports = Array.isArray || function (arr) {
      * @param {Object} object The object to query.
      * @returns {Array} Returns the array of symbols.
      */
-    var getSymbolsIn = !getOwnPropertySymbols ? getSymbols : function(object) {
+    var getSymbolsIn = !nativeGetSymbols ? stubArray : function(object) {
       var result = [];
       while (object) {
         arrayPush(result, getSymbols(object));
@@ -7761,12 +8480,9 @@ module.exports = Array.isArray || function (arr) {
      * @param {*} value The value to query.
      * @returns {string} Returns the `toStringTag`.
      */
-    function getTag(value) {
-      return objectToString.call(value);
-    }
+    var getTag = baseGetTag;
 
-    // Fallback for data views, maps, sets, and weak maps in IE 11,
-    // for data views in Edge, and promises in Node.js.
+    // Fallback for data views, maps, sets, and weak maps in IE 11 and promises in Node.js < 6.
     if ((DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag) ||
         (Map && getTag(new Map) != mapTag) ||
         (Promise && getTag(Promise.resolve()) != promiseTag) ||
@@ -7819,6 +8535,18 @@ module.exports = Array.isArray || function (arr) {
     }
 
     /**
+     * Extracts wrapper details from the `source` body comment.
+     *
+     * @private
+     * @param {string} source The source to inspect.
+     * @returns {Array} Returns the wrapper details.
+     */
+    function getWrapDetails(source) {
+      var match = source.match(reWrapDetails);
+      return match ? match[1].split(reSplitDetails) : [];
+    }
+
+    /**
      * Checks if `path` exists on `object`.
      *
      * @private
@@ -7830,9 +8558,9 @@ module.exports = Array.isArray || function (arr) {
     function hasPath(object, path, hasFunc) {
       path = isKey(path, object) ? [path] : castPath(path);
 
-      var result,
-          index = -1,
-          length = path.length;
+      var index = -1,
+          length = path.length,
+          result = false;
 
       while (++index < length) {
         var key = toKey(path[index]);
@@ -7841,12 +8569,12 @@ module.exports = Array.isArray || function (arr) {
         }
         object = object[key];
       }
-      if (result) {
+      if (result || ++index != length) {
         return result;
       }
-      var length = object ? object.length : 0;
+      length = object ? object.length : 0;
       return !!length && isLength(length) && isIndex(key, length) &&
-        (isArray(object) || isString(object) || isArguments(object));
+        (isArray(object) || isArguments(object));
     }
 
     /**
@@ -7931,20 +8659,22 @@ module.exports = Array.isArray || function (arr) {
     }
 
     /**
-     * Creates an array of index keys for `object` values of arrays,
-     * `arguments` objects, and strings, otherwise `null` is returned.
+     * Inserts wrapper `details` in a comment at the top of the `source` body.
      *
      * @private
-     * @param {Object} object The object to query.
-     * @returns {Array|null} Returns index keys, else `null`.
+     * @param {string} source The source to modify.
+     * @returns {Array} details The details to insert.
+     * @returns {string} Returns the modified source.
      */
-    function indexKeys(object) {
-      var length = object ? object.length : undefined;
-      if (isLength(length) &&
-          (isArray(object) || isString(object) || isArguments(object))) {
-        return baseTimes(length, String);
+    function insertWrapDetails(source, details) {
+      var length = details.length;
+      if (!length) {
+        return source;
       }
-      return null;
+      var lastIndex = length - 1;
+      details[lastIndex] = (length > 1 ? '& ' : '') + details[lastIndex];
+      details = details.join(length > 2 ? ', ' : ' ');
+      return source.replace(reWrapComment, '{\n/* [wrapped with ' + details + '] */\n');
     }
 
     /**
@@ -7955,19 +8685,8 @@ module.exports = Array.isArray || function (arr) {
      * @returns {boolean} Returns `true` if `value` is flattenable, else `false`.
      */
     function isFlattenable(value) {
-      return isArray(value) || isArguments(value);
-    }
-
-    /**
-     * Checks if `value` is a flattenable array and not a `_.matchesProperty`
-     * iteratee shorthand.
-     *
-     * @private
-     * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is flattenable, else `false`.
-     */
-    function isFlattenableIteratee(value) {
-      return isArray(value) && !(value.length == 2 && !isFunction(value[0]));
+      return isArray(value) || isArguments(value) ||
+        !!(spreadableSymbol && value && value[spreadableSymbol]);
     }
 
     /**
@@ -8132,6 +8851,26 @@ module.exports = Array.isArray || function (arr) {
     }
 
     /**
+     * A specialized version of `_.memoize` which clears the memoized function's
+     * cache when it exceeds `MAX_MEMOIZE_SIZE`.
+     *
+     * @private
+     * @param {Function} func The function to have its output memoized.
+     * @returns {Function} Returns the new memoized function.
+     */
+    function memoizeCapped(func) {
+      var result = memoize(func, function(key) {
+        if (cache.size === MAX_MEMOIZE_SIZE) {
+          cache.clear();
+        }
+        return key;
+      });
+
+      var cache = result.cache;
+      return result;
+    }
+
+    /**
      * Merges the function metadata of `source` into `data`.
      *
      * Merging metadata reduces the number of wrappers used to invoke a function.
@@ -8217,9 +8956,61 @@ module.exports = Array.isArray || function (arr) {
      */
     function mergeDefaults(objValue, srcValue, key, object, source, stack) {
       if (isObject(objValue) && isObject(srcValue)) {
-        baseMerge(objValue, srcValue, undefined, mergeDefaults, stack.set(srcValue, objValue));
+        // Recursively merge objects and arrays (susceptible to call stack limits).
+        stack.set(srcValue, objValue);
+        baseMerge(objValue, srcValue, undefined, mergeDefaults, stack);
+        stack['delete'](srcValue);
       }
       return objValue;
+    }
+
+    /**
+     * This function is like
+     * [`Object.keys`](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
+     * except that it includes inherited enumerable properties.
+     *
+     * @private
+     * @param {Object} object The object to query.
+     * @returns {Array} Returns the array of property names.
+     */
+    function nativeKeysIn(object) {
+      var result = [];
+      if (object != null) {
+        for (var key in Object(object)) {
+          result.push(key);
+        }
+      }
+      return result;
+    }
+
+    /**
+     * A specialized version of `baseRest` which transforms the rest array.
+     *
+     * @private
+     * @param {Function} func The function to apply a rest parameter to.
+     * @param {number} [start=func.length-1] The start position of the rest parameter.
+     * @param {Function} transform The rest array transform.
+     * @returns {Function} Returns the new function.
+     */
+    function overRest(func, start, transform) {
+      start = nativeMax(start === undefined ? (func.length - 1) : start, 0);
+      return function() {
+        var args = arguments,
+            index = -1,
+            length = nativeMax(args.length - start, 0),
+            array = Array(length);
+
+        while (++index < length) {
+          array[index] = args[start + index];
+        }
+        index = -1;
+        var otherArgs = Array(start + 1);
+        while (++index < start) {
+          otherArgs[index] = args[index];
+        }
+        otherArgs[start] = transform(array);
+        return apply(func, this, otherArgs);
+      };
     }
 
     /**
@@ -8270,25 +9061,98 @@ module.exports = Array.isArray || function (arr) {
      * @param {*} data The metadata.
      * @returns {Function} Returns `func`.
      */
-    var setData = (function() {
+    var setData = shortOut(baseSetData);
+
+    /**
+     * A simple wrapper around the global [`setTimeout`](https://mdn.io/setTimeout).
+     *
+     * @private
+     * @param {Function} func The function to delay.
+     * @param {number} wait The number of milliseconds to delay invocation.
+     * @returns {number|Object} Returns the timer id or timeout object.
+     */
+    var setTimeout = ctxSetTimeout || function(func, wait) {
+      return root.setTimeout(func, wait);
+    };
+
+    /**
+     * Sets the `toString` method of `func` to return `string`.
+     *
+     * @private
+     * @param {Function} func The function to modify.
+     * @param {Function} string The `toString` result.
+     * @returns {Function} Returns `func`.
+     */
+    var setToString = shortOut(baseSetToString);
+
+    /**
+     * Sets the `toString` method of `wrapper` to mimic the source of `reference`
+     * with wrapper details in a comment at the top of the source body.
+     *
+     * @private
+     * @param {Function} wrapper The function to modify.
+     * @param {Function} reference The reference function.
+     * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
+     * @returns {Function} Returns `wrapper`.
+     */
+    function setWrapToString(wrapper, reference, bitmask) {
+      var source = (reference + '');
+      return setToString(wrapper, insertWrapDetails(source, updateWrapDetails(getWrapDetails(source), bitmask)));
+    }
+
+    /**
+     * Creates a function that'll short out and invoke `identity` instead
+     * of `func` when it's called `HOT_COUNT` or more times in `HOT_SPAN`
+     * milliseconds.
+     *
+     * @private
+     * @param {Function} func The function to restrict.
+     * @returns {Function} Returns the new shortable function.
+     */
+    function shortOut(func) {
       var count = 0,
           lastCalled = 0;
 
-      return function(key, value) {
-        var stamp = now(),
+      return function() {
+        var stamp = nativeNow(),
             remaining = HOT_SPAN - (stamp - lastCalled);
 
         lastCalled = stamp;
         if (remaining > 0) {
           if (++count >= HOT_COUNT) {
-            return key;
+            return arguments[0];
           }
         } else {
           count = 0;
         }
-        return baseSetData(key, value);
+        return func.apply(undefined, arguments);
       };
-    }());
+    }
+
+    /**
+     * A specialized version of `_.shuffle` which mutates and sets the size of `array`.
+     *
+     * @private
+     * @param {Array} array The array to shuffle.
+     * @param {number} [size=array.length] The size of `array`.
+     * @returns {Array} Returns `array`.
+     */
+    function shuffleSelf(array, size) {
+      var index = -1,
+          length = array.length,
+          lastIndex = length - 1;
+
+      size = size === undefined ? length : size;
+      while (++index < size) {
+        var rand = baseRandom(index, lastIndex),
+            value = array[rand];
+
+        array[rand] = array[index];
+        array[index] = value;
+      }
+      array.length = size;
+      return array;
+    }
 
     /**
      * Converts `string` to a property path array.
@@ -8297,9 +9161,14 @@ module.exports = Array.isArray || function (arr) {
      * @param {string} string The string to convert.
      * @returns {Array} Returns the property path array.
      */
-    var stringToPath = memoize(function(string) {
+    var stringToPath = memoizeCapped(function(string) {
+      string = toString(string);
+
       var result = [];
-      toString(string).replace(rePropName, function(match, number, quote, string) {
+      if (reLeadingDot.test(string)) {
+        result.push('');
+      }
+      string.replace(rePropName, function(match, number, quote, string) {
         result.push(quote ? string.replace(reEscapeChar, '$1') : (number || match));
       });
       return result;
@@ -8337,6 +9206,24 @@ module.exports = Array.isArray || function (arr) {
         } catch (e) {}
       }
       return '';
+    }
+
+    /**
+     * Updates wrapper `details` based on `bitmask` flags.
+     *
+     * @private
+     * @returns {Array} details The details to modify.
+     * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
+     * @returns {Array} Returns `details`.
+     */
+    function updateWrapDetails(details, bitmask) {
+      arrayEach(wrapFlags, function(pair) {
+        var value = '_.' + pair[0];
+        if ((bitmask & pair[1]) && !arrayIncludes(details, value)) {
+          details.push(value);
+        }
+      });
+      return details.sort();
     }
 
     /**
@@ -8453,24 +9340,27 @@ module.exports = Array.isArray || function (arr) {
      * // => [1]
      */
     function concat() {
-      var length = arguments.length,
-          args = Array(length ? length - 1 : 0),
+      var length = arguments.length;
+      if (!length) {
+        return [];
+      }
+      var args = Array(length - 1),
           array = arguments[0],
           index = length;
 
       while (index--) {
         args[index - 1] = arguments[index];
       }
-      return length
-        ? arrayPush(isArray(array) ? copyArray(array) : [array], baseFlatten(args, 1))
-        : [];
+      return arrayPush(isArray(array) ? copyArray(array) : [array], baseFlatten(args, 1));
     }
 
     /**
-     * Creates an array of unique `array` values not included in the other given
-     * arrays using [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
-     * for equality comparisons. The order of result values is determined by the
-     * order they occur in the first array.
+     * Creates an array of `array` values not included in the other given arrays
+     * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+     * for equality comparisons. The order and references of result values are
+     * determined by the first array.
+     *
+     * **Note:** Unlike `_.pullAll`, this method returns a new array.
      *
      * @static
      * @memberOf _
@@ -8485,7 +9375,7 @@ module.exports = Array.isArray || function (arr) {
      * _.difference([2, 1], [2, 3]);
      * // => [1]
      */
-    var difference = rest(function(array, values) {
+    var difference = baseRest(function(array, values) {
       return isArrayLikeObject(array)
         ? baseDifference(array, baseFlatten(values, 1, isArrayLikeObject, true))
         : [];
@@ -8494,8 +9384,11 @@ module.exports = Array.isArray || function (arr) {
     /**
      * This method is like `_.difference` except that it accepts `iteratee` which
      * is invoked for each element of `array` and `values` to generate the criterion
-     * by which they're compared. Result values are chosen from the first array.
-     * The iteratee is invoked with one argument: (value).
+     * by which they're compared. The order and references of result values are
+     * determined by the first array. The iteratee is invoked with one argument:
+     * (value).
+     *
+     * **Note:** Unlike `_.pullAllBy`, this method returns a new array.
      *
      * @static
      * @memberOf _
@@ -8503,8 +9396,7 @@ module.exports = Array.isArray || function (arr) {
      * @category Array
      * @param {Array} array The array to inspect.
      * @param {...Array} [values] The values to exclude.
-     * @param {Array|Function|Object|string} [iteratee=_.identity]
-     *  The iteratee invoked per element.
+     * @param {Function} [iteratee=_.identity] The iteratee invoked per element.
      * @returns {Array} Returns the new array of filtered values.
      * @example
      *
@@ -8515,21 +9407,23 @@ module.exports = Array.isArray || function (arr) {
      * _.differenceBy([{ 'x': 2 }, { 'x': 1 }], [{ 'x': 1 }], 'x');
      * // => [{ 'x': 2 }]
      */
-    var differenceBy = rest(function(array, values) {
+    var differenceBy = baseRest(function(array, values) {
       var iteratee = last(values);
       if (isArrayLikeObject(iteratee)) {
         iteratee = undefined;
       }
       return isArrayLikeObject(array)
-        ? baseDifference(array, baseFlatten(values, 1, isArrayLikeObject, true), getIteratee(iteratee))
+        ? baseDifference(array, baseFlatten(values, 1, isArrayLikeObject, true), getIteratee(iteratee, 2))
         : [];
     });
 
     /**
      * This method is like `_.difference` except that it accepts `comparator`
-     * which is invoked to compare elements of `array` to `values`. Result values
-     * are chosen from the first array. The comparator is invoked with two arguments:
-     * (arrVal, othVal).
+     * which is invoked to compare elements of `array` to `values`. The order and
+     * references of result values are determined by the first array. The comparator
+     * is invoked with two arguments: (arrVal, othVal).
+     *
+     * **Note:** Unlike `_.pullAllWith`, this method returns a new array.
      *
      * @static
      * @memberOf _
@@ -8546,7 +9440,7 @@ module.exports = Array.isArray || function (arr) {
      * _.differenceWith(objects, [{ 'x': 1, 'y': 2 }], _.isEqual);
      * // => [{ 'x': 2, 'y': 1 }]
      */
-    var differenceWith = rest(function(array, values) {
+    var differenceWith = baseRest(function(array, values) {
       var comparator = last(values);
       if (isArrayLikeObject(comparator)) {
         comparator = undefined;
@@ -8635,8 +9529,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 3.0.0
      * @category Array
      * @param {Array} array The array to query.
-     * @param {Array|Function|Object|string} [predicate=_.identity]
-     *  The function invoked per iteration.
+     * @param {Function} [predicate=_.identity] The function invoked per iteration.
      * @returns {Array} Returns the slice of `array`.
      * @example
      *
@@ -8677,7 +9570,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 3.0.0
      * @category Array
      * @param {Array} array The array to query.
-     * @param {Array|Function|Object|string} [predicate=_.identity]
+     * @param {Function} [predicate=_.identity]
      *  The function invoked per iteration.
      * @returns {Array} Returns the slice of `array`.
      * @example
@@ -8758,8 +9651,8 @@ module.exports = Array.isArray || function (arr) {
      * @memberOf _
      * @since 1.1.0
      * @category Array
-     * @param {Array} array The array to search.
-     * @param {Array|Function|Object|string} [predicate=_.identity]
+     * @param {Array} array The array to inspect.
+     * @param {Function} [predicate=_.identity]
      *  The function invoked per iteration.
      * @param {number} [fromIndex=0] The index to search from.
      * @returns {number} Returns the index of the found element, else `-1`.
@@ -8806,8 +9699,8 @@ module.exports = Array.isArray || function (arr) {
      * @memberOf _
      * @since 2.0.0
      * @category Array
-     * @param {Array} array The array to search.
-     * @param {Array|Function|Object|string} [predicate=_.identity]
+     * @param {Array} array The array to inspect.
+     * @param {Function} [predicate=_.identity]
      *  The function invoked per iteration.
      * @param {number} [fromIndex=array.length-1] The index to search from.
      * @returns {number} Returns the index of the found element, else `-1`.
@@ -8928,8 +9821,8 @@ module.exports = Array.isArray || function (arr) {
      * @returns {Object} Returns the new object.
      * @example
      *
-     * _.fromPairs([['fred', 30], ['barney', 40]]);
-     * // => { 'fred': 30, 'barney': 40 }
+     * _.fromPairs([['a', 1], ['b', 2]]);
+     * // => { 'a': 1, 'b': 2 }
      */
     function fromPairs(pairs) {
       var index = -1,
@@ -8967,7 +9860,7 @@ module.exports = Array.isArray || function (arr) {
 
     /**
      * Gets the index at which the first occurrence of `value` is found in `array`
-     * using [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
+     * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
      * for equality comparisons. If `fromIndex` is negative, it's used as the
      * offset from the end of `array`.
      *
@@ -8975,7 +9868,7 @@ module.exports = Array.isArray || function (arr) {
      * @memberOf _
      * @since 0.1.0
      * @category Array
-     * @param {Array} array The array to search.
+     * @param {Array} array The array to inspect.
      * @param {*} value The value to search for.
      * @param {number} [fromIndex=0] The index to search from.
      * @returns {number} Returns the index of the matched value, else `-1`.
@@ -9015,14 +9908,15 @@ module.exports = Array.isArray || function (arr) {
      * // => [1, 2]
      */
     function initial(array) {
-      return dropRight(array, 1);
+      var length = array ? array.length : 0;
+      return length ? baseSlice(array, 0, -1) : [];
     }
 
     /**
      * Creates an array of unique values that are included in all given arrays
-     * using [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
-     * for equality comparisons. The order of result values is determined by the
-     * order they occur in the first array.
+     * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+     * for equality comparisons. The order and references of result values are
+     * determined by the first array.
      *
      * @static
      * @memberOf _
@@ -9035,7 +9929,7 @@ module.exports = Array.isArray || function (arr) {
      * _.intersection([2, 1], [2, 3]);
      * // => [2]
      */
-    var intersection = rest(function(arrays) {
+    var intersection = baseRest(function(arrays) {
       var mapped = arrayMap(arrays, castArrayLikeObject);
       return (mapped.length && mapped[0] === arrays[0])
         ? baseIntersection(mapped)
@@ -9045,16 +9939,16 @@ module.exports = Array.isArray || function (arr) {
     /**
      * This method is like `_.intersection` except that it accepts `iteratee`
      * which is invoked for each element of each `arrays` to generate the criterion
-     * by which they're compared. Result values are chosen from the first array.
-     * The iteratee is invoked with one argument: (value).
+     * by which they're compared. The order and references of result values are
+     * determined by the first array. The iteratee is invoked with one argument:
+     * (value).
      *
      * @static
      * @memberOf _
      * @since 4.0.0
      * @category Array
      * @param {...Array} [arrays] The arrays to inspect.
-     * @param {Array|Function|Object|string} [iteratee=_.identity]
-     *  The iteratee invoked per element.
+     * @param {Function} [iteratee=_.identity] The iteratee invoked per element.
      * @returns {Array} Returns the new array of intersecting values.
      * @example
      *
@@ -9065,7 +9959,7 @@ module.exports = Array.isArray || function (arr) {
      * _.intersectionBy([{ 'x': 1 }], [{ 'x': 2 }, { 'x': 1 }], 'x');
      * // => [{ 'x': 1 }]
      */
-    var intersectionBy = rest(function(arrays) {
+    var intersectionBy = baseRest(function(arrays) {
       var iteratee = last(arrays),
           mapped = arrayMap(arrays, castArrayLikeObject);
 
@@ -9075,15 +9969,15 @@ module.exports = Array.isArray || function (arr) {
         mapped.pop();
       }
       return (mapped.length && mapped[0] === arrays[0])
-        ? baseIntersection(mapped, getIteratee(iteratee))
+        ? baseIntersection(mapped, getIteratee(iteratee, 2))
         : [];
     });
 
     /**
      * This method is like `_.intersection` except that it accepts `comparator`
-     * which is invoked to compare elements of `arrays`. Result values are chosen
-     * from the first array. The comparator is invoked with two arguments:
-     * (arrVal, othVal).
+     * which is invoked to compare elements of `arrays`. The order and references
+     * of result values are determined by the first array. The comparator is
+     * invoked with two arguments: (arrVal, othVal).
      *
      * @static
      * @memberOf _
@@ -9100,7 +9994,7 @@ module.exports = Array.isArray || function (arr) {
      * _.intersectionWith(objects, others, _.isEqual);
      * // => [{ 'x': 1, 'y': 2 }]
      */
-    var intersectionWith = rest(function(arrays) {
+    var intersectionWith = baseRest(function(arrays) {
       var comparator = last(arrays),
           mapped = arrayMap(arrays, castArrayLikeObject);
 
@@ -9160,7 +10054,7 @@ module.exports = Array.isArray || function (arr) {
      * @memberOf _
      * @since 0.1.0
      * @category Array
-     * @param {Array} array The array to search.
+     * @param {Array} array The array to inspect.
      * @param {*} value The value to search for.
      * @param {number} [fromIndex=array.length-1] The index to search from.
      * @returns {number} Returns the index of the matched value, else `-1`.
@@ -9181,21 +10075,11 @@ module.exports = Array.isArray || function (arr) {
       var index = length;
       if (fromIndex !== undefined) {
         index = toInteger(fromIndex);
-        index = (
-          index < 0
-            ? nativeMax(length + index, 0)
-            : nativeMin(index, length - 1)
-        ) + 1;
+        index = index < 0 ? nativeMax(length + index, 0) : nativeMin(index, length - 1);
       }
-      if (value !== value) {
-        return indexOfNaN(array, index - 1, true);
-      }
-      while (index--) {
-        if (array[index] === value) {
-          return index;
-        }
-      }
-      return -1;
+      return value === value
+        ? strictLastIndexOf(array, value, index)
+        : baseFindIndex(array, baseIsNaN, index, true);
     }
 
     /**
@@ -9225,7 +10109,7 @@ module.exports = Array.isArray || function (arr) {
 
     /**
      * Removes all given values from `array` using
-     * [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
+     * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
      * for equality comparisons.
      *
      * **Note:** Unlike `_.without`, this method mutates `array`. Use `_.remove`
@@ -9246,7 +10130,7 @@ module.exports = Array.isArray || function (arr) {
      * console.log(array);
      * // => ['b', 'b']
      */
-    var pull = rest(pullAll);
+    var pull = baseRest(pullAll);
 
     /**
      * This method is like `_.pull` except that it accepts an array of values to remove.
@@ -9287,7 +10171,7 @@ module.exports = Array.isArray || function (arr) {
      * @category Array
      * @param {Array} array The array to modify.
      * @param {Array} values The values to remove.
-     * @param {Array|Function|Object|string} [iteratee=_.identity]
+     * @param {Function} [iteratee=_.identity]
      *  The iteratee invoked per element.
      * @returns {Array} Returns `array`.
      * @example
@@ -9300,7 +10184,7 @@ module.exports = Array.isArray || function (arr) {
      */
     function pullAllBy(array, values, iteratee) {
       return (array && array.length && values && values.length)
-        ? basePullAll(array, values, getIteratee(iteratee))
+        ? basePullAll(array, values, getIteratee(iteratee, 2))
         : array;
     }
 
@@ -9357,9 +10241,7 @@ module.exports = Array.isArray || function (arr) {
      * console.log(pulled);
      * // => ['b', 'd']
      */
-    var pullAt = rest(function(array, indexes) {
-      indexes = baseFlatten(indexes, 1);
-
+    var pullAt = flatRest(function(array, indexes) {
       var length = array ? array.length : 0,
           result = baseAt(array, indexes);
 
@@ -9383,7 +10265,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 2.0.0
      * @category Array
      * @param {Array} array The array to modify.
-     * @param {Array|Function|Object|string} [predicate=_.identity]
+     * @param {Function} [predicate=_.identity]
      *  The function invoked per iteration.
      * @returns {Array} Returns the new array of removed elements.
      * @example
@@ -9511,7 +10393,7 @@ module.exports = Array.isArray || function (arr) {
      * @category Array
      * @param {Array} array The sorted array to inspect.
      * @param {*} value The value to evaluate.
-     * @param {Array|Function|Object|string} [iteratee=_.identity]
+     * @param {Function} [iteratee=_.identity]
      *  The iteratee invoked per element.
      * @returns {number} Returns the index at which `value` should be inserted
      *  into `array`.
@@ -9527,7 +10409,7 @@ module.exports = Array.isArray || function (arr) {
      * // => 0
      */
     function sortedIndexBy(array, value, iteratee) {
-      return baseSortedIndexBy(array, value, getIteratee(iteratee));
+      return baseSortedIndexBy(array, value, getIteratee(iteratee, 2));
     }
 
     /**
@@ -9538,7 +10420,7 @@ module.exports = Array.isArray || function (arr) {
      * @memberOf _
      * @since 4.0.0
      * @category Array
-     * @param {Array} array The array to search.
+     * @param {Array} array The array to inspect.
      * @param {*} value The value to search for.
      * @returns {number} Returns the index of the matched value, else `-1`.
      * @example
@@ -9590,7 +10472,7 @@ module.exports = Array.isArray || function (arr) {
      * @category Array
      * @param {Array} array The sorted array to inspect.
      * @param {*} value The value to evaluate.
-     * @param {Array|Function|Object|string} [iteratee=_.identity]
+     * @param {Function} [iteratee=_.identity]
      *  The iteratee invoked per element.
      * @returns {number} Returns the index at which `value` should be inserted
      *  into `array`.
@@ -9606,7 +10488,7 @@ module.exports = Array.isArray || function (arr) {
      * // => 1
      */
     function sortedLastIndexBy(array, value, iteratee) {
-      return baseSortedIndexBy(array, value, getIteratee(iteratee), true);
+      return baseSortedIndexBy(array, value, getIteratee(iteratee, 2), true);
     }
 
     /**
@@ -9617,7 +10499,7 @@ module.exports = Array.isArray || function (arr) {
      * @memberOf _
      * @since 4.0.0
      * @category Array
-     * @param {Array} array The array to search.
+     * @param {Array} array The array to inspect.
      * @param {*} value The value to search for.
      * @returns {number} Returns the index of the matched value, else `-1`.
      * @example
@@ -9675,7 +10557,7 @@ module.exports = Array.isArray || function (arr) {
      */
     function sortedUniqBy(array, iteratee) {
       return (array && array.length)
-        ? baseSortedUniq(array, getIteratee(iteratee))
+        ? baseSortedUniq(array, getIteratee(iteratee, 2))
         : [];
     }
 
@@ -9694,7 +10576,8 @@ module.exports = Array.isArray || function (arr) {
      * // => [2, 3]
      */
     function tail(array) {
-      return drop(array, 1);
+      var length = array ? array.length : 0;
+      return length ? baseSlice(array, 1, length) : [];
     }
 
     /**
@@ -9775,7 +10658,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 3.0.0
      * @category Array
      * @param {Array} array The array to query.
-     * @param {Array|Function|Object|string} [predicate=_.identity]
+     * @param {Function} [predicate=_.identity]
      *  The function invoked per iteration.
      * @returns {Array} Returns the slice of `array`.
      * @example
@@ -9817,7 +10700,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 3.0.0
      * @category Array
      * @param {Array} array The array to query.
-     * @param {Array|Function|Object|string} [predicate=_.identity]
+     * @param {Function} [predicate=_.identity]
      *  The function invoked per iteration.
      * @returns {Array} Returns the slice of `array`.
      * @example
@@ -9851,7 +10734,7 @@ module.exports = Array.isArray || function (arr) {
 
     /**
      * Creates an array of unique values, in order, from all given arrays using
-     * [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
+     * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
      * for equality comparisons.
      *
      * @static
@@ -9865,14 +10748,15 @@ module.exports = Array.isArray || function (arr) {
      * _.union([2], [1, 2]);
      * // => [2, 1]
      */
-    var union = rest(function(arrays) {
+    var union = baseRest(function(arrays) {
       return baseUniq(baseFlatten(arrays, 1, isArrayLikeObject, true));
     });
 
     /**
      * This method is like `_.union` except that it accepts `iteratee` which is
      * invoked for each element of each `arrays` to generate the criterion by
-     * which uniqueness is computed. The iteratee is invoked with one argument:
+     * which uniqueness is computed. Result values are chosen from the first
+     * array in which the value occurs. The iteratee is invoked with one argument:
      * (value).
      *
      * @static
@@ -9880,7 +10764,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 4.0.0
      * @category Array
      * @param {...Array} [arrays] The arrays to inspect.
-     * @param {Array|Function|Object|string} [iteratee=_.identity]
+     * @param {Function} [iteratee=_.identity]
      *  The iteratee invoked per element.
      * @returns {Array} Returns the new array of combined values.
      * @example
@@ -9892,17 +10776,18 @@ module.exports = Array.isArray || function (arr) {
      * _.unionBy([{ 'x': 1 }], [{ 'x': 2 }, { 'x': 1 }], 'x');
      * // => [{ 'x': 1 }, { 'x': 2 }]
      */
-    var unionBy = rest(function(arrays) {
+    var unionBy = baseRest(function(arrays) {
       var iteratee = last(arrays);
       if (isArrayLikeObject(iteratee)) {
         iteratee = undefined;
       }
-      return baseUniq(baseFlatten(arrays, 1, isArrayLikeObject, true), getIteratee(iteratee));
+      return baseUniq(baseFlatten(arrays, 1, isArrayLikeObject, true), getIteratee(iteratee, 2));
     });
 
     /**
      * This method is like `_.union` except that it accepts `comparator` which
-     * is invoked to compare elements of `arrays`. The comparator is invoked
+     * is invoked to compare elements of `arrays`. Result values are chosen from
+     * the first array in which the value occurs. The comparator is invoked
      * with two arguments: (arrVal, othVal).
      *
      * @static
@@ -9920,7 +10805,7 @@ module.exports = Array.isArray || function (arr) {
      * _.unionWith(objects, others, _.isEqual);
      * // => [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }, { 'x': 1, 'y': 1 }]
      */
-    var unionWith = rest(function(arrays) {
+    var unionWith = baseRest(function(arrays) {
       var comparator = last(arrays);
       if (isArrayLikeObject(comparator)) {
         comparator = undefined;
@@ -9930,9 +10815,10 @@ module.exports = Array.isArray || function (arr) {
 
     /**
      * Creates a duplicate-free version of an array, using
-     * [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
-     * for equality comparisons, in which only the first occurrence of each
-     * element is kept.
+     * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+     * for equality comparisons, in which only the first occurrence of each element
+     * is kept. The order of result values is determined by the order they occur
+     * in the array.
      *
      * @static
      * @memberOf _
@@ -9954,14 +10840,16 @@ module.exports = Array.isArray || function (arr) {
     /**
      * This method is like `_.uniq` except that it accepts `iteratee` which is
      * invoked for each element in `array` to generate the criterion by which
-     * uniqueness is computed. The iteratee is invoked with one argument: (value).
+     * uniqueness is computed. The order of result values is determined by the
+     * order they occur in the array. The iteratee is invoked with one argument:
+     * (value).
      *
      * @static
      * @memberOf _
      * @since 4.0.0
      * @category Array
      * @param {Array} array The array to inspect.
-     * @param {Array|Function|Object|string} [iteratee=_.identity]
+     * @param {Function} [iteratee=_.identity]
      *  The iteratee invoked per element.
      * @returns {Array} Returns the new duplicate free array.
      * @example
@@ -9975,14 +10863,15 @@ module.exports = Array.isArray || function (arr) {
      */
     function uniqBy(array, iteratee) {
       return (array && array.length)
-        ? baseUniq(array, getIteratee(iteratee))
+        ? baseUniq(array, getIteratee(iteratee, 2))
         : [];
     }
 
     /**
      * This method is like `_.uniq` except that it accepts `comparator` which
-     * is invoked to compare elements of `array`. The comparator is invoked with
-     * two arguments: (arrVal, othVal).
+     * is invoked to compare elements of `array`. The order of result values is
+     * determined by the order they occur in the array.The comparator is invoked
+     * with two arguments: (arrVal, othVal).
      *
      * @static
      * @memberOf _
@@ -10017,11 +10906,11 @@ module.exports = Array.isArray || function (arr) {
      * @returns {Array} Returns the new array of regrouped elements.
      * @example
      *
-     * var zipped = _.zip(['fred', 'barney'], [30, 40], [true, false]);
-     * // => [['fred', 30, true], ['barney', 40, false]]
+     * var zipped = _.zip(['a', 'b'], [1, 2], [true, false]);
+     * // => [['a', 1, true], ['b', 2, false]]
      *
      * _.unzip(zipped);
-     * // => [['fred', 'barney'], [30, 40], [true, false]]
+     * // => [['a', 'b'], [1, 2], [true, false]]
      */
     function unzip(array) {
       if (!(array && array.length)) {
@@ -10075,8 +10964,10 @@ module.exports = Array.isArray || function (arr) {
 
     /**
      * Creates an array excluding all given values using
-     * [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
+     * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
      * for equality comparisons.
+     *
+     * **Note:** Unlike `_.pull`, this method returns a new array.
      *
      * @static
      * @memberOf _
@@ -10091,7 +10982,7 @@ module.exports = Array.isArray || function (arr) {
      * _.without([2, 1, 2, 3], 1, 2);
      * // => [3]
      */
-    var without = rest(function(array, values) {
+    var without = baseRest(function(array, values) {
       return isArrayLikeObject(array)
         ? baseDifference(array, values)
         : [];
@@ -10115,22 +11006,23 @@ module.exports = Array.isArray || function (arr) {
      * _.xor([2, 1], [2, 3]);
      * // => [1, 3]
      */
-    var xor = rest(function(arrays) {
+    var xor = baseRest(function(arrays) {
       return baseXor(arrayFilter(arrays, isArrayLikeObject));
     });
 
     /**
      * This method is like `_.xor` except that it accepts `iteratee` which is
      * invoked for each element of each `arrays` to generate the criterion by
-     * which by which they're compared. The iteratee is invoked with one argument:
-     * (value).
+     * which by which they're compared. The order of result values is determined
+     * by the order they occur in the arrays. The iteratee is invoked with one
+     * argument: (value).
      *
      * @static
      * @memberOf _
      * @since 4.0.0
      * @category Array
      * @param {...Array} [arrays] The arrays to inspect.
-     * @param {Array|Function|Object|string} [iteratee=_.identity]
+     * @param {Function} [iteratee=_.identity]
      *  The iteratee invoked per element.
      * @returns {Array} Returns the new array of filtered values.
      * @example
@@ -10142,18 +11034,19 @@ module.exports = Array.isArray || function (arr) {
      * _.xorBy([{ 'x': 1 }], [{ 'x': 2 }, { 'x': 1 }], 'x');
      * // => [{ 'x': 2 }]
      */
-    var xorBy = rest(function(arrays) {
+    var xorBy = baseRest(function(arrays) {
       var iteratee = last(arrays);
       if (isArrayLikeObject(iteratee)) {
         iteratee = undefined;
       }
-      return baseXor(arrayFilter(arrays, isArrayLikeObject), getIteratee(iteratee));
+      return baseXor(arrayFilter(arrays, isArrayLikeObject), getIteratee(iteratee, 2));
     });
 
     /**
      * This method is like `_.xor` except that it accepts `comparator` which is
-     * invoked to compare elements of `arrays`. The comparator is invoked with
-     * two arguments: (arrVal, othVal).
+     * invoked to compare elements of `arrays`. The order of result values is
+     * determined by the order they occur in the arrays. The comparator is invoked
+     * with two arguments: (arrVal, othVal).
      *
      * @static
      * @memberOf _
@@ -10170,7 +11063,7 @@ module.exports = Array.isArray || function (arr) {
      * _.xorWith(objects, others, _.isEqual);
      * // => [{ 'x': 2, 'y': 1 }, { 'x': 1, 'y': 1 }]
      */
-    var xorWith = rest(function(arrays) {
+    var xorWith = baseRest(function(arrays) {
       var comparator = last(arrays);
       if (isArrayLikeObject(comparator)) {
         comparator = undefined;
@@ -10191,10 +11084,10 @@ module.exports = Array.isArray || function (arr) {
      * @returns {Array} Returns the new array of grouped elements.
      * @example
      *
-     * _.zip(['fred', 'barney'], [30, 40], [true, false]);
-     * // => [['fred', 30, true], ['barney', 40, false]]
+     * _.zip(['a', 'b'], [1, 2], [true, false]);
+     * // => [['a', 1, true], ['b', 2, false]]
      */
-    var zip = rest(unzip);
+    var zip = baseRest(unzip);
 
     /**
      * This method is like `_.fromPairs` except that it accepts two arrays,
@@ -10254,7 +11147,7 @@ module.exports = Array.isArray || function (arr) {
      * });
      * // => [111, 222]
      */
-    var zipWith = rest(function(arrays) {
+    var zipWith = baseRest(function(arrays) {
       var length = arrays.length,
           iteratee = length > 1 ? arrays[length - 1] : undefined;
 
@@ -10370,8 +11263,7 @@ module.exports = Array.isArray || function (arr) {
      * _(object).at(['a[0].b.c', 'a[1]']).value();
      * // => [3, 4]
      */
-    var wrapperAt = rest(function(paths) {
-      paths = baseFlatten(paths, 1);
+    var wrapperAt = flatRest(function(paths) {
       var length = paths.length,
           start = length ? paths[0] : 0,
           value = this.__wrapped__,
@@ -10623,7 +11515,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 0.5.0
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
-     * @param {Array|Function|Object|string} [iteratee=_.identity]
+     * @param {Function} [iteratee=_.identity]
      *  The iteratee to transform keys.
      * @returns {Object} Returns the composed aggregate object.
      * @example
@@ -10636,7 +11528,11 @@ module.exports = Array.isArray || function (arr) {
      * // => { '3': 2, '5': 1 }
      */
     var countBy = createAggregator(function(result, value, key) {
-      hasOwnProperty.call(result, key) ? ++result[key] : (result[key] = 1);
+      if (hasOwnProperty.call(result, key)) {
+        ++result[key];
+      } else {
+        baseAssignValue(result, key, 1);
+      }
     });
 
     /**
@@ -10644,12 +11540,17 @@ module.exports = Array.isArray || function (arr) {
      * Iteration is stopped once `predicate` returns falsey. The predicate is
      * invoked with three arguments: (value, index|key, collection).
      *
+     * **Note:** This method returns `true` for
+     * [empty collections](https://en.wikipedia.org/wiki/Empty_set) because
+     * [everything is true](https://en.wikipedia.org/wiki/Vacuous_truth) of
+     * elements of empty collections.
+     *
      * @static
      * @memberOf _
      * @since 0.1.0
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
-     * @param {Array|Function|Object|string} [predicate=_.identity]
+     * @param {Function} [predicate=_.identity]
      *  The function invoked per iteration.
      * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
      * @returns {boolean} Returns `true` if all elements pass the predicate check,
@@ -10689,12 +11590,14 @@ module.exports = Array.isArray || function (arr) {
      * `predicate` returns truthy for. The predicate is invoked with three
      * arguments: (value, index|key, collection).
      *
+     * **Note:** Unlike `_.remove`, this method returns a new array.
+     *
      * @static
      * @memberOf _
      * @since 0.1.0
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
-     * @param {Array|Function|Object|string} [predicate=_.identity]
+     * @param {Function} [predicate=_.identity]
      *  The function invoked per iteration.
      * @returns {Array} Returns the new filtered array.
      * @see _.reject
@@ -10734,8 +11637,8 @@ module.exports = Array.isArray || function (arr) {
      * @memberOf _
      * @since 0.1.0
      * @category Collection
-     * @param {Array|Object} collection The collection to search.
-     * @param {Array|Function|Object|string} [predicate=_.identity]
+     * @param {Array|Object} collection The collection to inspect.
+     * @param {Function} [predicate=_.identity]
      *  The function invoked per iteration.
      * @param {number} [fromIndex=0] The index to search from.
      * @returns {*} Returns the matched element, else `undefined`.
@@ -10772,8 +11675,8 @@ module.exports = Array.isArray || function (arr) {
      * @memberOf _
      * @since 2.0.0
      * @category Collection
-     * @param {Array|Object} collection The collection to search.
-     * @param {Array|Function|Object|string} [predicate=_.identity]
+     * @param {Array|Object} collection The collection to inspect.
+     * @param {Function} [predicate=_.identity]
      *  The function invoked per iteration.
      * @param {number} [fromIndex=collection.length-1] The index to search from.
      * @returns {*} Returns the matched element, else `undefined`.
@@ -10796,7 +11699,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 4.0.0
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
-     * @param {Array|Function|Object|string} [iteratee=_.identity]
+     * @param {Function} [iteratee=_.identity]
      *  The function invoked per iteration.
      * @returns {Array} Returns the new flattened array.
      * @example
@@ -10821,7 +11724,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 4.7.0
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
-     * @param {Array|Function|Object|string} [iteratee=_.identity]
+     * @param {Function} [iteratee=_.identity]
      *  The function invoked per iteration.
      * @returns {Array} Returns the new flattened array.
      * @example
@@ -10846,7 +11749,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 4.7.0
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
-     * @param {Array|Function|Object|string} [iteratee=_.identity]
+     * @param {Function} [iteratee=_.identity]
      *  The function invoked per iteration.
      * @param {number} [depth=1] The maximum recursion depth.
      * @returns {Array} Returns the new flattened array.
@@ -10884,7 +11787,7 @@ module.exports = Array.isArray || function (arr) {
      * @see _.forEachRight
      * @example
      *
-     * _([1, 2]).forEach(function(value) {
+     * _.forEach([1, 2], function(value) {
      *   console.log(value);
      * });
      * // => Logs `1` then `2`.
@@ -10936,7 +11839,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 0.1.0
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
-     * @param {Array|Function|Object|string} [iteratee=_.identity]
+     * @param {Function} [iteratee=_.identity]
      *  The iteratee to transform keys.
      * @returns {Object} Returns the composed aggregate object.
      * @example
@@ -10952,14 +11855,14 @@ module.exports = Array.isArray || function (arr) {
       if (hasOwnProperty.call(result, key)) {
         result[key].push(value);
       } else {
-        result[key] = [value];
+        baseAssignValue(result, key, [value]);
       }
     });
 
     /**
      * Checks if `value` is in `collection`. If `collection` is a string, it's
      * checked for a substring of `value`, otherwise
-     * [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
+     * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
      * is used for equality comparisons. If `fromIndex` is negative, it's used as
      * the offset from the end of `collection`.
      *
@@ -10967,7 +11870,7 @@ module.exports = Array.isArray || function (arr) {
      * @memberOf _
      * @since 0.1.0
      * @category Collection
-     * @param {Array|Object|string} collection The collection to search.
+     * @param {Array|Object|string} collection The collection to inspect.
      * @param {*} value The value to search for.
      * @param {number} [fromIndex=0] The index to search from.
      * @param- {Object} [guard] Enables use as an iteratee for methods like `_.reduce`.
@@ -10980,10 +11883,10 @@ module.exports = Array.isArray || function (arr) {
      * _.includes([1, 2, 3], 1, 2);
      * // => false
      *
-     * _.includes({ 'user': 'fred', 'age': 40 }, 'fred');
+     * _.includes({ 'a': 1, 'b': 2 }, 1);
      * // => true
      *
-     * _.includes('pebbles', 'eb');
+     * _.includes('abcd', 'bc');
      * // => true
      */
     function includes(collection, value, fromIndex, guard) {
@@ -11002,8 +11905,8 @@ module.exports = Array.isArray || function (arr) {
     /**
      * Invokes the method at `path` of each element in `collection`, returning
      * an array of the results of each invoked method. Any additional arguments
-     * are provided to each invoked method. If `methodName` is a function, it's
-     * invoked for and `this` bound to, each element in `collection`.
+     * are provided to each invoked method. If `path` is a function, it's invoked
+     * for, and `this` bound to, each element in `collection`.
      *
      * @static
      * @memberOf _
@@ -11022,7 +11925,7 @@ module.exports = Array.isArray || function (arr) {
      * _.invokeMap([123, 456], String.prototype.split, '');
      * // => [['1', '2', '3'], ['4', '5', '6']]
      */
-    var invokeMap = rest(function(collection, path, args) {
+    var invokeMap = baseRest(function(collection, path, args) {
       var index = -1,
           isFunc = typeof path == 'function',
           isProp = isKey(path),
@@ -11046,7 +11949,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 4.0.0
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
-     * @param {Array|Function|Object|string} [iteratee=_.identity]
+     * @param {Function} [iteratee=_.identity]
      *  The iteratee to transform keys.
      * @returns {Object} Returns the composed aggregate object.
      * @example
@@ -11065,7 +11968,7 @@ module.exports = Array.isArray || function (arr) {
      * // => { 'left': { 'dir': 'left', 'code': 97 }, 'right': { 'dir': 'right', 'code': 100 } }
      */
     var keyBy = createAggregator(function(result, value, key) {
-      result[key] = value;
+      baseAssignValue(result, key, value);
     });
 
     /**
@@ -11087,8 +11990,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 0.1.0
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
-     * @param {Array|Function|Object|string} [iteratee=_.identity]
-     *  The function invoked per iteration.
+     * @param {Function} [iteratee=_.identity] The function invoked per iteration.
      * @returns {Array} Returns the new mapped array.
      * @example
      *
@@ -11170,8 +12072,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 3.0.0
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
-     * @param {Array|Function|Object|string} [predicate=_.identity]
-     *  The function invoked per iteration.
+     * @param {Function} [predicate=_.identity] The function invoked per iteration.
      * @returns {Array} Returns the array of grouped elements.
      * @example
      *
@@ -11282,8 +12183,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 0.1.0
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
-     * @param {Array|Function|Object|string} [predicate=_.identity]
-     *  The function invoked per iteration.
+     * @param {Function} [predicate=_.identity] The function invoked per iteration.
      * @returns {Array} Returns the new filtered array.
      * @see _.filter
      * @example
@@ -11310,10 +12210,7 @@ module.exports = Array.isArray || function (arr) {
      */
     function reject(collection, predicate) {
       var func = isArray(collection) ? arrayFilter : baseFilter;
-      predicate = getIteratee(predicate, 3);
-      return func(collection, function(value, index, collection) {
-        return !predicate(value, index, collection);
-      });
+      return func(collection, negate(getIteratee(predicate, 3)));
     }
 
     /**
@@ -11331,10 +12228,8 @@ module.exports = Array.isArray || function (arr) {
      * // => 2
      */
     function sample(collection) {
-      var array = isArrayLike(collection) ? collection : values(collection),
-          length = array.length;
-
-      return length > 0 ? array[baseRandom(0, length - 1)] : undefined;
+      var func = isArray(collection) ? arraySample : baseSample;
+      return func(collection);
     }
 
     /**
@@ -11358,25 +12253,13 @@ module.exports = Array.isArray || function (arr) {
      * // => [2, 3, 1]
      */
     function sampleSize(collection, n, guard) {
-      var index = -1,
-          result = toArray(collection),
-          length = result.length,
-          lastIndex = length - 1;
-
       if ((guard ? isIterateeCall(collection, n, guard) : n === undefined)) {
         n = 1;
       } else {
-        n = baseClamp(toInteger(n), 0, length);
+        n = toInteger(n);
       }
-      while (++index < n) {
-        var rand = baseRandom(index, lastIndex),
-            value = result[rand];
-
-        result[rand] = result[index];
-        result[index] = value;
-      }
-      result.length = n;
-      return result;
+      var func = isArray(collection) ? arraySampleSize : baseSampleSize;
+      return func(collection, n);
     }
 
     /**
@@ -11395,7 +12278,8 @@ module.exports = Array.isArray || function (arr) {
      * // => [4, 1, 3, 2]
      */
     function shuffle(collection) {
-      return sampleSize(collection, MAX_ARRAY_LENGTH);
+      var func = isArray(collection) ? arrayShuffle : baseShuffle;
+      return func(collection);
     }
 
     /**
@@ -11406,7 +12290,7 @@ module.exports = Array.isArray || function (arr) {
      * @memberOf _
      * @since 0.1.0
      * @category Collection
-     * @param {Array|Object} collection The collection to inspect.
+     * @param {Array|Object|string} collection The collection to inspect.
      * @returns {number} Returns the collection size.
      * @example
      *
@@ -11424,16 +12308,13 @@ module.exports = Array.isArray || function (arr) {
         return 0;
       }
       if (isArrayLike(collection)) {
-        var result = collection.length;
-        return (result && isString(collection)) ? stringSize(collection) : result;
+        return isString(collection) ? stringSize(collection) : collection.length;
       }
-      if (isObjectLike(collection)) {
-        var tag = getTag(collection);
-        if (tag == mapTag || tag == setTag) {
-          return collection.size;
-        }
+      var tag = getTag(collection);
+      if (tag == mapTag || tag == setTag) {
+        return collection.size;
       }
-      return keys(collection).length;
+      return baseKeys(collection).length;
     }
 
     /**
@@ -11446,8 +12327,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 0.1.0
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
-     * @param {Array|Function|Object|string} [predicate=_.identity]
-     *  The function invoked per iteration.
+     * @param {Function} [predicate=_.identity] The function invoked per iteration.
      * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
      * @returns {boolean} Returns `true` if any element passes the predicate check,
      *  else `false`.
@@ -11492,8 +12372,8 @@ module.exports = Array.isArray || function (arr) {
      * @since 0.1.0
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
-     * @param {...(Array|Array[]|Function|Function[]|Object|Object[]|string|string[])}
-     *  [iteratees=[_.identity]] The iteratees to sort by.
+     * @param {...(Function|Function[])} [iteratees=[_.identity]]
+     *  The iteratees to sort by.
      * @returns {Array} Returns the new sorted array.
      * @example
      *
@@ -11504,18 +12384,13 @@ module.exports = Array.isArray || function (arr) {
      *   { 'user': 'barney', 'age': 34 }
      * ];
      *
-     * _.sortBy(users, function(o) { return o.user; });
+     * _.sortBy(users, [function(o) { return o.user; }]);
      * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 40]]
      *
      * _.sortBy(users, ['user', 'age']);
      * // => objects for [['barney', 34], ['barney', 36], ['fred', 40], ['fred', 48]]
-     *
-     * _.sortBy(users, 'user', function(o) {
-     *   return Math.floor(o.age / 10);
-     * });
-     * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 40]]
      */
-    var sortBy = rest(function(collection, iteratees) {
+    var sortBy = baseRest(function(collection, iteratees) {
       if (collection == null) {
         return [];
       }
@@ -11525,11 +12400,7 @@ module.exports = Array.isArray || function (arr) {
       } else if (length > 2 && isIterateeCall(iteratees[0], iteratees[1], iteratees[2])) {
         iteratees = [iteratees[0]];
       }
-      iteratees = (iteratees.length == 1 && isArray(iteratees[0]))
-        ? iteratees[0]
-        : baseFlatten(iteratees, 1, isFlattenableIteratee);
-
-      return baseOrderBy(collection, iteratees, []);
+      return baseOrderBy(collection, baseFlatten(iteratees, 1), []);
     });
 
     /*------------------------------------------------------------------------*/
@@ -11550,9 +12421,9 @@ module.exports = Array.isArray || function (arr) {
      * }, _.now());
      * // => Logs the number of milliseconds it took for the deferred invocation.
      */
-    function now() {
-      return Date.now();
-    }
+    var now = ctxNow || function() {
+      return root.Date.now();
+    };
 
     /*------------------------------------------------------------------------*/
 
@@ -11612,7 +12483,7 @@ module.exports = Array.isArray || function (arr) {
     function ary(func, n, guard) {
       n = guard ? undefined : n;
       n = (func && n == null) ? func.length : n;
-      return createWrapper(func, ARY_FLAG, undefined, undefined, undefined, undefined, n);
+      return createWrap(func, ARY_FLAG, undefined, undefined, undefined, undefined, n);
     }
 
     /**
@@ -11630,7 +12501,7 @@ module.exports = Array.isArray || function (arr) {
      * @example
      *
      * jQuery(element).on('click', _.before(5, addContactToList));
-     * // => allows adding up to 4 contacts to the list
+     * // => Allows adding up to 4 contacts to the list.
      */
     function before(n, func) {
       var result;
@@ -11669,9 +12540,9 @@ module.exports = Array.isArray || function (arr) {
      * @returns {Function} Returns the new bound function.
      * @example
      *
-     * var greet = function(greeting, punctuation) {
+     * function greet(greeting, punctuation) {
      *   return greeting + ' ' + this.user + punctuation;
-     * };
+     * }
      *
      * var object = { 'user': 'fred' };
      *
@@ -11684,13 +12555,13 @@ module.exports = Array.isArray || function (arr) {
      * bound('hi');
      * // => 'hi fred!'
      */
-    var bind = rest(function(func, thisArg, partials) {
+    var bind = baseRest(function(func, thisArg, partials) {
       var bitmask = BIND_FLAG;
       if (partials.length) {
         var holders = replaceHolders(partials, getHolder(bind));
         bitmask |= PARTIAL_FLAG;
       }
-      return createWrapper(func, bitmask, thisArg, partials, holders);
+      return createWrap(func, bitmask, thisArg, partials, holders);
     });
 
     /**
@@ -11738,13 +12609,13 @@ module.exports = Array.isArray || function (arr) {
      * bound('hi');
      * // => 'hiya fred!'
      */
-    var bindKey = rest(function(object, key, partials) {
+    var bindKey = baseRest(function(object, key, partials) {
       var bitmask = BIND_FLAG | BIND_KEY_FLAG;
       if (partials.length) {
         var holders = replaceHolders(partials, getHolder(bindKey));
         bitmask |= PARTIAL_FLAG;
       }
-      return createWrapper(key, bitmask, object, partials, holders);
+      return createWrap(key, bitmask, object, partials, holders);
     });
 
     /**
@@ -11790,7 +12661,7 @@ module.exports = Array.isArray || function (arr) {
      */
     function curry(func, arity, guard) {
       arity = guard ? undefined : arity;
-      var result = createWrapper(func, CURRY_FLAG, undefined, undefined, undefined, undefined, undefined, arity);
+      var result = createWrap(func, CURRY_FLAG, undefined, undefined, undefined, undefined, undefined, arity);
       result.placeholder = curry.placeholder;
       return result;
     }
@@ -11835,7 +12706,7 @@ module.exports = Array.isArray || function (arr) {
      */
     function curryRight(func, arity, guard) {
       arity = guard ? undefined : arity;
-      var result = createWrapper(func, CURRY_RIGHT_FLAG, undefined, undefined, undefined, undefined, undefined, arity);
+      var result = createWrap(func, CURRY_RIGHT_FLAG, undefined, undefined, undefined, undefined, undefined, arity);
       result.placeholder = curryRight.placeholder;
       return result;
     }
@@ -11845,14 +12716,18 @@ module.exports = Array.isArray || function (arr) {
      * milliseconds have elapsed since the last time the debounced function was
      * invoked. The debounced function comes with a `cancel` method to cancel
      * delayed `func` invocations and a `flush` method to immediately invoke them.
-     * Provide an options object to indicate whether `func` should be invoked on
-     * the leading and/or trailing edge of the `wait` timeout. The `func` is invoked
-     * with the last arguments provided to the debounced function. Subsequent calls
-     * to the debounced function return the result of the last `func` invocation.
+     * Provide `options` to indicate whether `func` should be invoked on the
+     * leading and/or trailing edge of the `wait` timeout. The `func` is invoked
+     * with the last arguments provided to the debounced function. Subsequent
+     * calls to the debounced function return the result of the last `func`
+     * invocation.
      *
-     * **Note:** If `leading` and `trailing` options are `true`, `func` is invoked
-     * on the trailing edge of the timeout only if the debounced function is
-     * invoked more than once during the `wait` timeout.
+     * **Note:** If `leading` and `trailing` options are `true`, `func` is
+     * invoked on the trailing edge of the timeout only if the debounced function
+     * is invoked more than once during the `wait` timeout.
+     *
+     * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+     * until to the next tick, similar to `setTimeout` with a timeout of `0`.
      *
      * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
      * for details over the differences between `_.debounce` and `_.throttle`.
@@ -11973,6 +12848,9 @@ module.exports = Array.isArray || function (arr) {
       }
 
       function cancel() {
+        if (timerId !== undefined) {
+          clearTimeout(timerId);
+        }
         lastInvokeTime = 0;
         lastArgs = lastCallTime = lastThis = timerId = undefined;
       }
@@ -12025,9 +12903,9 @@ module.exports = Array.isArray || function (arr) {
      * _.defer(function(text) {
      *   console.log(text);
      * }, 'deferred');
-     * // => Logs 'deferred' after one or more milliseconds.
+     * // => Logs 'deferred' after one millisecond.
      */
-    var defer = rest(function(func, args) {
+    var defer = baseRest(function(func, args) {
       return baseDelay(func, 1, args);
     });
 
@@ -12050,7 +12928,7 @@ module.exports = Array.isArray || function (arr) {
      * }, 1000, 'later');
      * // => Logs 'later' after one second.
      */
-    var delay = rest(function(func, wait, args) {
+    var delay = baseRest(function(func, wait, args) {
       return baseDelay(func, toNumber(wait) || 0, args);
     });
 
@@ -12073,7 +12951,7 @@ module.exports = Array.isArray || function (arr) {
      * // => ['d', 'c', 'b', 'a']
      */
     function flip(func) {
-      return createWrapper(func, FLIP_FLAG);
+      return createWrap(func, FLIP_FLAG);
     }
 
     /**
@@ -12086,7 +12964,7 @@ module.exports = Array.isArray || function (arr) {
      * **Note:** The cache is exposed as the `cache` property on the memoized
      * function. Its creation may be customized by replacing the `_.memoize.Cache`
      * constructor with one whose instances implement the
-     * [`Map`](http://ecma-international.org/ecma-262/6.0/#sec-properties-of-the-map-prototype-object)
+     * [`Map`](http://ecma-international.org/ecma-262/7.0/#sec-properties-of-the-map-prototype-object)
      * method interface of `delete`, `get`, `has`, and `set`.
      *
      * @static
@@ -12133,14 +13011,14 @@ module.exports = Array.isArray || function (arr) {
           return cache.get(key);
         }
         var result = func.apply(this, args);
-        memoized.cache = cache.set(key, result);
+        memoized.cache = cache.set(key, result) || cache;
         return result;
       };
       memoized.cache = new (memoize.Cache || MapCache);
       return memoized;
     }
 
-    // Assign cache to `_.memoize`.
+    // Expose `MapCache`.
     memoize.Cache = MapCache;
 
     /**
@@ -12168,7 +13046,14 @@ module.exports = Array.isArray || function (arr) {
         throw new TypeError(FUNC_ERROR_TEXT);
       }
       return function() {
-        return !predicate.apply(this, arguments);
+        var args = arguments;
+        switch (args.length) {
+          case 0: return !predicate.call(this);
+          case 1: return !predicate.call(this, args[0]);
+          case 2: return !predicate.call(this, args[0], args[1]);
+          case 3: return !predicate.call(this, args[0], args[1], args[2]);
+        }
+        return !predicate.apply(this, args);
       };
     }
 
@@ -12188,23 +13073,22 @@ module.exports = Array.isArray || function (arr) {
      * var initialize = _.once(createApplication);
      * initialize();
      * initialize();
-     * // `initialize` invokes `createApplication` once
+     * // => `createApplication` is invoked once
      */
     function once(func) {
       return before(2, func);
     }
 
     /**
-     * Creates a function that invokes `func` with arguments transformed by
-     * corresponding `transforms`.
+     * Creates a function that invokes `func` with its arguments transformed.
      *
      * @static
      * @since 4.0.0
      * @memberOf _
      * @category Function
      * @param {Function} func The function to wrap.
-     * @param {...(Array|Array[]|Function|Function[]|Object|Object[]|string|string[])}
-     *  [transforms[_.identity]] The functions to transform.
+     * @param {...(Function|Function[])} [transforms=[_.identity]]
+     *  The argument transforms.
      * @returns {Function} Returns the new function.
      * @example
      *
@@ -12226,13 +13110,13 @@ module.exports = Array.isArray || function (arr) {
      * func(10, 5);
      * // => [100, 10]
      */
-    var overArgs = rest(function(func, transforms) {
+    var overArgs = castRest(function(func, transforms) {
       transforms = (transforms.length == 1 && isArray(transforms[0]))
         ? arrayMap(transforms[0], baseUnary(getIteratee()))
-        : arrayMap(baseFlatten(transforms, 1, isFlattenableIteratee), baseUnary(getIteratee()));
+        : arrayMap(baseFlatten(transforms, 1), baseUnary(getIteratee()));
 
       var funcsLength = transforms.length;
-      return rest(function(args) {
+      return baseRest(function(args) {
         var index = -1,
             length = nativeMin(args.length, funcsLength);
 
@@ -12263,9 +13147,9 @@ module.exports = Array.isArray || function (arr) {
      * @returns {Function} Returns the new partially applied function.
      * @example
      *
-     * var greet = function(greeting, name) {
+     * function greet(greeting, name) {
      *   return greeting + ' ' + name;
-     * };
+     * }
      *
      * var sayHelloTo = _.partial(greet, 'hello');
      * sayHelloTo('fred');
@@ -12276,9 +13160,9 @@ module.exports = Array.isArray || function (arr) {
      * greetFred('hi');
      * // => 'hi fred'
      */
-    var partial = rest(function(func, partials) {
+    var partial = baseRest(function(func, partials) {
       var holders = replaceHolders(partials, getHolder(partial));
-      return createWrapper(func, PARTIAL_FLAG, undefined, partials, holders);
+      return createWrap(func, PARTIAL_FLAG, undefined, partials, holders);
     });
 
     /**
@@ -12300,9 +13184,9 @@ module.exports = Array.isArray || function (arr) {
      * @returns {Function} Returns the new partially applied function.
      * @example
      *
-     * var greet = function(greeting, name) {
+     * function greet(greeting, name) {
      *   return greeting + ' ' + name;
-     * };
+     * }
      *
      * var greetFred = _.partialRight(greet, 'fred');
      * greetFred('hi');
@@ -12313,9 +13197,9 @@ module.exports = Array.isArray || function (arr) {
      * sayHelloTo('fred');
      * // => 'hello fred'
      */
-    var partialRight = rest(function(func, partials) {
+    var partialRight = baseRest(function(func, partials) {
       var holders = replaceHolders(partials, getHolder(partialRight));
-      return createWrapper(func, PARTIAL_RIGHT_FLAG, undefined, partials, holders);
+      return createWrap(func, PARTIAL_RIGHT_FLAG, undefined, partials, holders);
     });
 
     /**
@@ -12340,8 +13224,8 @@ module.exports = Array.isArray || function (arr) {
      * rearged('b', 'c', 'a')
      * // => ['a', 'b', 'c']
      */
-    var rearg = rest(function(func, indexes) {
-      return createWrapper(func, REARG_FLAG, undefined, undefined, undefined, baseFlatten(indexes, 1));
+    var rearg = flatRest(function(func, indexes) {
+      return createWrap(func, REARG_FLAG, undefined, undefined, undefined, indexes);
     });
 
     /**
@@ -12373,35 +13257,14 @@ module.exports = Array.isArray || function (arr) {
       if (typeof func != 'function') {
         throw new TypeError(FUNC_ERROR_TEXT);
       }
-      start = nativeMax(start === undefined ? (func.length - 1) : toInteger(start), 0);
-      return function() {
-        var args = arguments,
-            index = -1,
-            length = nativeMax(args.length - start, 0),
-            array = Array(length);
-
-        while (++index < length) {
-          array[index] = args[start + index];
-        }
-        switch (start) {
-          case 0: return func.call(this, array);
-          case 1: return func.call(this, args[0], array);
-          case 2: return func.call(this, args[0], args[1], array);
-        }
-        var otherArgs = Array(start + 1);
-        index = -1;
-        while (++index < start) {
-          otherArgs[index] = args[index];
-        }
-        otherArgs[start] = array;
-        return apply(func, this, otherArgs);
-      };
+      start = start === undefined ? start : toInteger(start);
+      return baseRest(func, start);
     }
 
     /**
      * Creates a function that invokes `func` with the `this` binding of the
      * create function and an array of arguments much like
-     * [`Function#apply`](http://www.ecma-international.org/ecma-262/6.0/#sec-function.prototype.apply).
+     * [`Function#apply`](http://www.ecma-international.org/ecma-262/7.0/#sec-function.prototype.apply).
      *
      * **Note:** This method is based on the
      * [spread operator](https://mdn.io/spread_operator).
@@ -12437,7 +13300,7 @@ module.exports = Array.isArray || function (arr) {
         throw new TypeError(FUNC_ERROR_TEXT);
       }
       start = start === undefined ? 0 : nativeMax(toInteger(start), 0);
-      return rest(function(args) {
+      return baseRest(function(args) {
         var array = args[start],
             otherArgs = castSlice(args, 0, start);
 
@@ -12452,8 +13315,8 @@ module.exports = Array.isArray || function (arr) {
      * Creates a throttled function that only invokes `func` at most once per
      * every `wait` milliseconds. The throttled function comes with a `cancel`
      * method to cancel delayed `func` invocations and a `flush` method to
-     * immediately invoke them. Provide an options object to indicate whether
-     * `func` should be invoked on the leading and/or trailing edge of the `wait`
+     * immediately invoke them. Provide `options` to indicate whether `func`
+     * should be invoked on the leading and/or trailing edge of the `wait`
      * timeout. The `func` is invoked with the last arguments provided to the
      * throttled function. Subsequent calls to the throttled function return the
      * result of the last `func` invocation.
@@ -12461,6 +13324,9 @@ module.exports = Array.isArray || function (arr) {
      * **Note:** If `leading` and `trailing` options are `true`, `func` is
      * invoked on the trailing edge of the timeout only if the throttled function
      * is invoked more than once during the `wait` timeout.
+     *
+     * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+     * until to the next tick, similar to `setTimeout` with a timeout of `0`.
      *
      * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
      * for details over the differences between `_.throttle` and `_.debounce`.
@@ -12527,10 +13393,10 @@ module.exports = Array.isArray || function (arr) {
     }
 
     /**
-     * Creates a function that provides `value` to the wrapper function as its
-     * first argument. Any additional arguments provided to the function are
-     * appended to those provided to the wrapper function. The wrapper is invoked
-     * with the `this` binding of the created function.
+     * Creates a function that provides `value` to `wrapper` as its first
+     * argument. Any additional arguments provided to the function are appended
+     * to those provided to the `wrapper`. The wrapper is invoked with the `this`
+     * binding of the created function.
      *
      * @static
      * @memberOf _
@@ -12716,8 +13582,36 @@ module.exports = Array.isArray || function (arr) {
     }
 
     /**
+     * Checks if `object` conforms to `source` by invoking the predicate
+     * properties of `source` with the corresponding property values of `object`.
+     *
+     * **Note:** This method is equivalent to `_.conforms` when `source` is
+     * partially applied.
+     *
+     * @static
+     * @memberOf _
+     * @since 4.14.0
+     * @category Lang
+     * @param {Object} object The object to inspect.
+     * @param {Object} source The object of property predicates to conform to.
+     * @returns {boolean} Returns `true` if `object` conforms, else `false`.
+     * @example
+     *
+     * var object = { 'a': 1, 'b': 2 };
+     *
+     * _.conformsTo(object, { 'b': function(n) { return n > 1; } });
+     * // => true
+     *
+     * _.conformsTo(object, { 'b': function(n) { return n > 2; } });
+     * // => false
+     */
+    function conformsTo(object, source) {
+      return source == null || baseConformsTo(object, source, keys(source));
+    }
+
+    /**
      * Performs a
-     * [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
+     * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
      * comparison between two values to determine if they are equivalent.
      *
      * @static
@@ -12729,8 +13623,8 @@ module.exports = Array.isArray || function (arr) {
      * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
      * @example
      *
-     * var object = { 'user': 'fred' };
-     * var other = { 'user': 'fred' };
+     * var object = { 'a': 1 };
+     * var other = { 'a': 1 };
      *
      * _.eq(object, object);
      * // => true
@@ -12811,7 +13705,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 0.1.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is correctly classified,
+     * @returns {boolean} Returns `true` if `value` is an `arguments` object,
      *  else `false`.
      * @example
      *
@@ -12821,11 +13715,10 @@ module.exports = Array.isArray || function (arr) {
      * _.isArguments([1, 2, 3]);
      * // => false
      */
-    function isArguments(value) {
-      // Safari 8.1 incorrectly makes `arguments.callee` enumerable in strict mode.
-      return isArrayLikeObject(value) && hasOwnProperty.call(value, 'callee') &&
-        (!propertyIsEnumerable.call(value, 'callee') || objectToString.call(value) == argsTag);
-    }
+    var isArguments = baseIsArguments(function() { return arguments; }()) ? baseIsArguments : function(value) {
+      return isObjectLike(value) && hasOwnProperty.call(value, 'callee') &&
+        !propertyIsEnumerable.call(value, 'callee');
+    };
 
     /**
      * Checks if `value` is classified as an `Array` object.
@@ -12833,11 +13726,9 @@ module.exports = Array.isArray || function (arr) {
      * @static
      * @memberOf _
      * @since 0.1.0
-     * @type {Function}
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is correctly classified,
-     *  else `false`.
+     * @returns {boolean} Returns `true` if `value` is an array, else `false`.
      * @example
      *
      * _.isArray([1, 2, 3]);
@@ -12862,8 +13753,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 4.3.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is correctly classified,
-     *  else `false`.
+     * @returns {boolean} Returns `true` if `value` is an array buffer, else `false`.
      * @example
      *
      * _.isArrayBuffer(new ArrayBuffer(2));
@@ -12872,9 +13762,7 @@ module.exports = Array.isArray || function (arr) {
      * _.isArrayBuffer(new Array(2));
      * // => false
      */
-    function isArrayBuffer(value) {
-      return isObjectLike(value) && objectToString.call(value) == arrayBufferTag;
-    }
+    var isArrayBuffer = nodeIsArrayBuffer ? baseUnary(nodeIsArrayBuffer) : baseIsArrayBuffer;
 
     /**
      * Checks if `value` is array-like. A value is considered array-like if it's
@@ -12902,7 +13790,7 @@ module.exports = Array.isArray || function (arr) {
      * // => false
      */
     function isArrayLike(value) {
-      return value != null && isLength(getLength(value)) && !isFunction(value);
+      return value != null && isLength(value.length) && !isFunction(value);
     }
 
     /**
@@ -12942,8 +13830,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 0.1.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is correctly classified,
-     *  else `false`.
+     * @returns {boolean} Returns `true` if `value` is a boolean, else `false`.
      * @example
      *
      * _.isBoolean(false);
@@ -12974,9 +13861,7 @@ module.exports = Array.isArray || function (arr) {
      * _.isBuffer(new Uint8Array(2));
      * // => false
      */
-    var isBuffer = !Buffer ? stubFalse : function(value) {
-      return value instanceof Buffer;
-    };
+    var isBuffer = nativeIsBuffer || stubFalse;
 
     /**
      * Checks if `value` is classified as a `Date` object.
@@ -12986,8 +13871,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 0.1.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is correctly classified,
-     *  else `false`.
+     * @returns {boolean} Returns `true` if `value` is a date object, else `false`.
      * @example
      *
      * _.isDate(new Date);
@@ -12996,9 +13880,7 @@ module.exports = Array.isArray || function (arr) {
      * _.isDate('Mon April 23 2012');
      * // => false
      */
-    function isDate(value) {
-      return isObjectLike(value) && objectToString.call(value) == dateTag;
-    }
+    var isDate = nodeIsDate ? baseUnary(nodeIsDate) : baseIsDate;
 
     /**
      * Checks if `value` is likely a DOM element.
@@ -13008,8 +13890,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 0.1.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is a DOM element,
-     *  else `false`.
+     * @returns {boolean} Returns `true` if `value` is a DOM element, else `false`.
      * @example
      *
      * _.isElement(document.body);
@@ -13019,7 +13900,7 @@ module.exports = Array.isArray || function (arr) {
      * // => false
      */
     function isElement(value) {
-      return !!value && value.nodeType === 1 && isObjectLike(value) && !isPlainObject(value);
+      return value != null && value.nodeType === 1 && isObjectLike(value) && !isPlainObject(value);
     }
 
     /**
@@ -13057,22 +13938,23 @@ module.exports = Array.isArray || function (arr) {
      */
     function isEmpty(value) {
       if (isArrayLike(value) &&
-          (isArray(value) || isString(value) || isFunction(value.splice) ||
-            isArguments(value) || isBuffer(value))) {
+          (isArray(value) || typeof value == 'string' || typeof value.splice == 'function' ||
+            isBuffer(value) || isTypedArray(value) || isArguments(value))) {
         return !value.length;
       }
-      if (isObjectLike(value)) {
-        var tag = getTag(value);
-        if (tag == mapTag || tag == setTag) {
-          return !value.size;
-        }
+      var tag = getTag(value);
+      if (tag == mapTag || tag == setTag) {
+        return !value.size;
+      }
+      if (isPrototype(value)) {
+        return !baseKeys(value).length;
       }
       for (var key in value) {
         if (hasOwnProperty.call(value, key)) {
           return false;
         }
       }
-      return !(nonEnumShadows && keys(value).length);
+      return true;
     }
 
     /**
@@ -13091,12 +13973,11 @@ module.exports = Array.isArray || function (arr) {
      * @category Lang
      * @param {*} value The value to compare.
      * @param {*} other The other value to compare.
-     * @returns {boolean} Returns `true` if the values are equivalent,
-     *  else `false`.
+     * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
      * @example
      *
-     * var object = { 'user': 'fred' };
-     * var other = { 'user': 'fred' };
+     * var object = { 'a': 1 };
+     * var other = { 'a': 1 };
      *
      * _.isEqual(object, other);
      * // => true
@@ -13121,8 +14002,7 @@ module.exports = Array.isArray || function (arr) {
      * @param {*} value The value to compare.
      * @param {*} other The other value to compare.
      * @param {Function} [customizer] The function to customize comparisons.
-     * @returns {boolean} Returns `true` if the values are equivalent,
-     *  else `false`.
+     * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
      * @example
      *
      * function isGreeting(value) {
@@ -13156,8 +14036,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 3.0.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is an error object,
-     *  else `false`.
+     * @returns {boolean} Returns `true` if `value` is an error object, else `false`.
      * @example
      *
      * _.isError(new Error);
@@ -13185,8 +14064,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 0.1.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is a finite number,
-     *  else `false`.
+     * @returns {boolean} Returns `true` if `value` is a finite number, else `false`.
      * @example
      *
      * _.isFinite(3);
@@ -13213,8 +14091,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 0.1.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is correctly classified,
-     *  else `false`.
+     * @returns {boolean} Returns `true` if `value` is a function, else `false`.
      * @example
      *
      * _.isFunction(_);
@@ -13225,10 +14102,9 @@ module.exports = Array.isArray || function (arr) {
      */
     function isFunction(value) {
       // The use of `Object#toString` avoids issues with the `typeof` operator
-      // in Safari 8 which returns 'object' for typed array and weak map constructors,
-      // and PhantomJS 1.9 which returns 'function' for `NodeList` instances.
+      // in Safari 9 which returns 'object' for typed array and other constructors.
       var tag = isObject(value) ? objectToString.call(value) : '';
-      return tag == funcTag || tag == genTag;
+      return tag == funcTag || tag == genTag || tag == proxyTag;
     }
 
     /**
@@ -13264,16 +14140,15 @@ module.exports = Array.isArray || function (arr) {
     /**
      * Checks if `value` is a valid array-like length.
      *
-     * **Note:** This function is loosely based on
-     * [`ToLength`](http://ecma-international.org/ecma-262/6.0/#sec-tolength).
+     * **Note:** This method is loosely based on
+     * [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
      *
      * @static
      * @memberOf _
      * @since 4.0.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is a valid length,
-     *  else `false`.
+     * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
      * @example
      *
      * _.isLength(3);
@@ -13295,7 +14170,7 @@ module.exports = Array.isArray || function (arr) {
 
     /**
      * Checks if `value` is the
-     * [language type](http://www.ecma-international.org/ecma-262/6.0/#sec-ecmascript-language-types)
+     * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
      * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
      *
      * @static
@@ -13320,7 +14195,7 @@ module.exports = Array.isArray || function (arr) {
      */
     function isObject(value) {
       var type = typeof value;
-      return !!value && (type == 'object' || type == 'function');
+      return value != null && (type == 'object' || type == 'function');
     }
 
     /**
@@ -13348,7 +14223,7 @@ module.exports = Array.isArray || function (arr) {
      * // => false
      */
     function isObjectLike(value) {
-      return !!value && typeof value == 'object';
+      return value != null && typeof value == 'object';
     }
 
     /**
@@ -13359,8 +14234,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 4.3.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is correctly classified,
-     *  else `false`.
+     * @returns {boolean} Returns `true` if `value` is a map, else `false`.
      * @example
      *
      * _.isMap(new Map);
@@ -13369,16 +14243,18 @@ module.exports = Array.isArray || function (arr) {
      * _.isMap(new WeakMap);
      * // => false
      */
-    function isMap(value) {
-      return isObjectLike(value) && getTag(value) == mapTag;
-    }
+    var isMap = nodeIsMap ? baseUnary(nodeIsMap) : baseIsMap;
 
     /**
      * Performs a partial deep comparison between `object` and `source` to
-     * determine if `object` contains equivalent property values. This method is
-     * equivalent to a `_.matches` function when `source` is partially applied.
+     * determine if `object` contains equivalent property values.
      *
-     * **Note:** This method supports comparing the same values as `_.isEqual`.
+     * **Note:** This method is equivalent to `_.matches` when `source` is
+     * partially applied.
+     *
+     * Partial comparisons will match empty array and empty object `source`
+     * values against any array or object value, respectively. See `_.isEqual`
+     * for a list of supported value comparisons.
      *
      * @static
      * @memberOf _
@@ -13389,12 +14265,12 @@ module.exports = Array.isArray || function (arr) {
      * @returns {boolean} Returns `true` if `object` is a match, else `false`.
      * @example
      *
-     * var object = { 'user': 'fred', 'age': 40 };
+     * var object = { 'a': 1, 'b': 2 };
      *
-     * _.isMatch(object, { 'age': 40 });
+     * _.isMatch(object, { 'b': 2 });
      * // => true
      *
-     * _.isMatch(object, { 'age': 36 });
+     * _.isMatch(object, { 'b': 1 });
      * // => false
      */
     function isMatch(object, source) {
@@ -13476,13 +14352,13 @@ module.exports = Array.isArray || function (arr) {
     /**
      * Checks if `value` is a pristine native function.
      *
-     * **Note:** This method can't reliably detect native functions in the
-     * presence of the `core-js` package because `core-js` circumvents this kind
-     * of detection. Despite multiple requests, the `core-js` maintainer has made
-     * it clear: any attempt to fix the detection will be obstructed. As a result,
-     * we're left with little choice but to throw an error. Unfortunately, this
-     * also affects packages, like [babel-polyfill](https://www.npmjs.com/package/babel-polyfill),
-     * which rely on `core-js`.
+     * **Note:** This method can't reliably detect native functions in the presence
+     * of the core-js package because core-js circumvents this kind of detection.
+     * Despite multiple requests, the core-js maintainer has made it clear: any
+     * attempt to fix the detection will be obstructed. As a result, we're left
+     * with little choice but to throw an error. Unfortunately, this also affects
+     * packages, like [babel-polyfill](https://www.npmjs.com/package/babel-polyfill),
+     * which rely on core-js.
      *
      * @static
      * @memberOf _
@@ -13501,7 +14377,7 @@ module.exports = Array.isArray || function (arr) {
      */
     function isNative(value) {
       if (isMaskable(value)) {
-        throw new Error('This method is not supported with `core-js`. Try https://github.com/es-shims.');
+        throw new Error(CORE_ERROR_TEXT);
       }
       return baseIsNative(value);
     }
@@ -13562,8 +14438,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 0.1.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is correctly classified,
-     *  else `false`.
+     * @returns {boolean} Returns `true` if `value` is a number, else `false`.
      * @example
      *
      * _.isNumber(3);
@@ -13592,8 +14467,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 0.8.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is a plain object,
-     *  else `false`.
+     * @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
      * @example
      *
      * function Foo() {
@@ -13613,8 +14487,7 @@ module.exports = Array.isArray || function (arr) {
      * // => true
      */
     function isPlainObject(value) {
-      if (!isObjectLike(value) ||
-          objectToString.call(value) != objectTag || isHostObject(value)) {
+      if (!isObjectLike(value) || objectToString.call(value) != objectTag) {
         return false;
       }
       var proto = getPrototype(value);
@@ -13634,8 +14507,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 0.1.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is correctly classified,
-     *  else `false`.
+     * @returns {boolean} Returns `true` if `value` is a regexp, else `false`.
      * @example
      *
      * _.isRegExp(/abc/);
@@ -13644,9 +14516,7 @@ module.exports = Array.isArray || function (arr) {
      * _.isRegExp('/abc/');
      * // => false
      */
-    function isRegExp(value) {
-      return isObject(value) && objectToString.call(value) == regexpTag;
-    }
+    var isRegExp = nodeIsRegExp ? baseUnary(nodeIsRegExp) : baseIsRegExp;
 
     /**
      * Checks if `value` is a safe integer. An integer is safe if it's an IEEE-754
@@ -13660,8 +14530,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 4.0.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is a safe integer,
-     *  else `false`.
+     * @returns {boolean} Returns `true` if `value` is a safe integer, else `false`.
      * @example
      *
      * _.isSafeInteger(3);
@@ -13688,8 +14557,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 4.3.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is correctly classified,
-     *  else `false`.
+     * @returns {boolean} Returns `true` if `value` is a set, else `false`.
      * @example
      *
      * _.isSet(new Set);
@@ -13698,9 +14566,7 @@ module.exports = Array.isArray || function (arr) {
      * _.isSet(new WeakSet);
      * // => false
      */
-    function isSet(value) {
-      return isObjectLike(value) && getTag(value) == setTag;
-    }
+    var isSet = nodeIsSet ? baseUnary(nodeIsSet) : baseIsSet;
 
     /**
      * Checks if `value` is classified as a `String` primitive or object.
@@ -13710,8 +14576,7 @@ module.exports = Array.isArray || function (arr) {
      * @memberOf _
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is correctly classified,
-     *  else `false`.
+     * @returns {boolean} Returns `true` if `value` is a string, else `false`.
      * @example
      *
      * _.isString('abc');
@@ -13733,8 +14598,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 4.0.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is correctly classified,
-     *  else `false`.
+     * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
      * @example
      *
      * _.isSymbol(Symbol.iterator);
@@ -13756,8 +14620,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 3.0.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is correctly classified,
-     *  else `false`.
+     * @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
      * @example
      *
      * _.isTypedArray(new Uint8Array);
@@ -13766,10 +14629,7 @@ module.exports = Array.isArray || function (arr) {
      * _.isTypedArray([]);
      * // => false
      */
-    function isTypedArray(value) {
-      return isObjectLike(value) &&
-        isLength(value.length) && !!typedArrayTags[objectToString.call(value)];
-    }
+    var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
 
     /**
      * Checks if `value` is `undefined`.
@@ -13800,8 +14660,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 4.3.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is correctly classified,
-     *  else `false`.
+     * @returns {boolean} Returns `true` if `value` is a weak map, else `false`.
      * @example
      *
      * _.isWeakMap(new WeakMap);
@@ -13822,8 +14681,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 4.3.0
      * @category Lang
      * @param {*} value The value to check.
-     * @returns {boolean} Returns `true` if `value` is correctly classified,
-     *  else `false`.
+     * @returns {boolean} Returns `true` if `value` is a weak set, else `false`.
      * @example
      *
      * _.isWeakSet(new WeakSet);
@@ -13966,7 +14824,7 @@ module.exports = Array.isArray || function (arr) {
      * Converts `value` to an integer.
      *
      * **Note:** This method is loosely based on
-     * [`ToInteger`](http://www.ecma-international.org/ecma-262/6.0/#sec-tointeger).
+     * [`ToInteger`](http://www.ecma-international.org/ecma-262/7.0/#sec-tointeger).
      *
      * @static
      * @memberOf _
@@ -14000,7 +14858,7 @@ module.exports = Array.isArray || function (arr) {
      * array-like object.
      *
      * **Note:** This method is based on
-     * [`ToLength`](http://ecma-international.org/ecma-262/6.0/#sec-tolength).
+     * [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
      *
      * @static
      * @memberOf _
@@ -14057,7 +14915,7 @@ module.exports = Array.isArray || function (arr) {
         return NAN;
       }
       if (isObject(value)) {
-        var other = isFunction(value.valueOf) ? value.valueOf() : value;
+        var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
         value = isObject(other) ? (other + '') : other;
       }
       if (typeof value != 'string') {
@@ -14134,8 +14992,8 @@ module.exports = Array.isArray || function (arr) {
      * @memberOf _
      * @since 4.0.0
      * @category Lang
-     * @param {*} value The value to process.
-     * @returns {string} Returns the string.
+     * @param {*} value The value to convert.
+     * @returns {string} Returns the converted string.
      * @example
      *
      * _.toString(null);
@@ -14172,21 +15030,21 @@ module.exports = Array.isArray || function (arr) {
      * @example
      *
      * function Foo() {
-     *   this.c = 3;
+     *   this.a = 1;
      * }
      *
      * function Bar() {
-     *   this.e = 5;
+     *   this.c = 3;
      * }
      *
-     * Foo.prototype.d = 4;
-     * Bar.prototype.f = 6;
+     * Foo.prototype.b = 2;
+     * Bar.prototype.d = 4;
      *
-     * _.assign({ 'a': 1 }, new Foo, new Bar);
-     * // => { 'a': 1, 'c': 3, 'e': 5 }
+     * _.assign({ 'a': 0 }, new Foo, new Bar);
+     * // => { 'a': 1, 'c': 3 }
      */
     var assign = createAssigner(function(object, source) {
-      if (nonEnumShadows || isPrototype(source) || isArrayLike(source)) {
+      if (isPrototype(source) || isArrayLike(source)) {
         copyObject(source, keys(source), object);
         return;
       }
@@ -14215,27 +15073,21 @@ module.exports = Array.isArray || function (arr) {
      * @example
      *
      * function Foo() {
-     *   this.b = 2;
+     *   this.a = 1;
      * }
      *
      * function Bar() {
-     *   this.d = 4;
+     *   this.c = 3;
      * }
      *
-     * Foo.prototype.c = 3;
-     * Bar.prototype.e = 5;
+     * Foo.prototype.b = 2;
+     * Bar.prototype.d = 4;
      *
-     * _.assignIn({ 'a': 1 }, new Foo, new Bar);
-     * // => { 'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5 }
+     * _.assignIn({ 'a': 0 }, new Foo, new Bar);
+     * // => { 'a': 1, 'b': 2, 'c': 3, 'd': 4 }
      */
     var assignIn = createAssigner(function(object, source) {
-      if (nonEnumShadows || isPrototype(source) || isArrayLike(source)) {
-        copyObject(source, keysIn(source), object);
-        return;
-      }
-      for (var key in source) {
-        assignValue(object, key, source[key]);
-      }
+      copyObject(source, keysIn(source), object);
     });
 
     /**
@@ -14320,9 +15172,7 @@ module.exports = Array.isArray || function (arr) {
      * _.at(object, ['a[0].b.c', 'a[1]']);
      * // => [3, 4]
      */
-    var at = rest(function(object, paths) {
-      return baseAt(object, baseFlatten(paths, 1));
-    });
+    var at = flatRest(baseAt);
 
     /**
      * Creates an object that inherits from the `prototype` object. If a
@@ -14381,10 +15231,10 @@ module.exports = Array.isArray || function (arr) {
      * @see _.defaultsDeep
      * @example
      *
-     * _.defaults({ 'user': 'barney' }, { 'age': 36 }, { 'user': 'fred' });
-     * // => { 'user': 'barney', 'age': 36 }
+     * _.defaults({ 'a': 1 }, { 'b': 2 }, { 'a': 3 });
+     * // => { 'a': 1, 'b': 2 }
      */
-    var defaults = rest(function(args) {
+    var defaults = baseRest(function(args) {
       args.push(undefined, assignInDefaults);
       return apply(assignInWith, undefined, args);
     });
@@ -14405,11 +15255,10 @@ module.exports = Array.isArray || function (arr) {
      * @see _.defaults
      * @example
      *
-     * _.defaultsDeep({ 'user': { 'name': 'barney' } }, { 'user': { 'name': 'fred', 'age': 36 } });
-     * // => { 'user': { 'name': 'barney', 'age': 36 } }
-     *
+     * _.defaultsDeep({ 'a': { 'b': 2 } }, { 'a': { 'b': 1, 'c': 3 } });
+     * // => { 'a': { 'b': 2, 'c': 3 } }
      */
-    var defaultsDeep = rest(function(args) {
+    var defaultsDeep = baseRest(function(args) {
       args.push(undefined, mergeDefaults);
       return apply(mergeWith, undefined, args);
     });
@@ -14422,9 +15271,8 @@ module.exports = Array.isArray || function (arr) {
      * @memberOf _
      * @since 1.1.0
      * @category Object
-     * @param {Object} object The object to search.
-     * @param {Array|Function|Object|string} [predicate=_.identity]
-     *  The function invoked per iteration.
+     * @param {Object} object The object to inspect.
+     * @param {Function} [predicate=_.identity] The function invoked per iteration.
      * @returns {string|undefined} Returns the key of the matched element,
      *  else `undefined`.
      * @example
@@ -14462,9 +15310,8 @@ module.exports = Array.isArray || function (arr) {
      * @memberOf _
      * @since 2.0.0
      * @category Object
-     * @param {Object} object The object to search.
-     * @param {Array|Function|Object|string} [predicate=_.identity]
-     *  The function invoked per iteration.
+     * @param {Object} object The object to inspect.
+     * @param {Function} [predicate=_.identity] The function invoked per iteration.
      * @returns {string|undefined} Returns the key of the matched element,
      *  else `undefined`.
      * @example
@@ -14678,7 +15525,7 @@ module.exports = Array.isArray || function (arr) {
 
     /**
      * Gets the value at `path` of `object`. If the resolved value is
-     * `undefined`, the `defaultValue` is used in its place.
+     * `undefined`, the `defaultValue` is returned in its place.
      *
      * @static
      * @memberOf _
@@ -14801,8 +15648,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 4.1.0
      * @category Object
      * @param {Object} object The object to invert.
-     * @param {Array|Function|Object|string} [iteratee=_.identity]
-     *  The iteratee invoked per element.
+     * @param {Function} [iteratee=_.identity] The iteratee invoked per element.
      * @returns {Object} Returns the new inverted object.
      * @example
      *
@@ -14842,13 +15688,13 @@ module.exports = Array.isArray || function (arr) {
      * _.invoke(object, 'a[0].b.c.slice', 1, 3);
      * // => [2, 3]
      */
-    var invoke = rest(baseInvoke);
+    var invoke = baseRest(baseInvoke);
 
     /**
      * Creates an array of the own enumerable property names of `object`.
      *
      * **Note:** Non-object values are coerced to objects. See the
-     * [ES spec](http://ecma-international.org/ecma-262/6.0/#sec-object.keys)
+     * [ES spec](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
      * for more details.
      *
      * @static
@@ -14873,23 +15719,7 @@ module.exports = Array.isArray || function (arr) {
      * // => ['0', '1']
      */
     function keys(object) {
-      var isProto = isPrototype(object);
-      if (!(isProto || isArrayLike(object))) {
-        return baseKeys(object);
-      }
-      var indexes = indexKeys(object),
-          skipIndexes = !!indexes,
-          result = indexes || [],
-          length = result.length;
-
-      for (var key in object) {
-        if (baseHas(object, key) &&
-            !(skipIndexes && (key == 'length' || isIndex(key, length))) &&
-            !(isProto && key == 'constructor')) {
-          result.push(key);
-        }
-      }
-      return result;
+      return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
     }
 
     /**
@@ -14916,23 +15746,7 @@ module.exports = Array.isArray || function (arr) {
      * // => ['a', 'b', 'c'] (iteration order is not guaranteed)
      */
     function keysIn(object) {
-      var index = -1,
-          isProto = isPrototype(object),
-          props = baseKeysIn(object),
-          propsLength = props.length,
-          indexes = indexKeys(object),
-          skipIndexes = !!indexes,
-          result = indexes || [],
-          length = result.length;
-
-      while (++index < propsLength) {
-        var key = props[index];
-        if (!(skipIndexes && (key == 'length' || isIndex(key, length))) &&
-            !(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
-          result.push(key);
-        }
-      }
-      return result;
+      return isArrayLike(object) ? arrayLikeKeys(object, true) : baseKeysIn(object);
     }
 
     /**
@@ -14946,8 +15760,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 3.8.0
      * @category Object
      * @param {Object} object The object to iterate over.
-     * @param {Array|Function|Object|string} [iteratee=_.identity]
-     *  The function invoked per iteration.
+     * @param {Function} [iteratee=_.identity] The function invoked per iteration.
      * @returns {Object} Returns the new mapped object.
      * @see _.mapValues
      * @example
@@ -14962,7 +15775,7 @@ module.exports = Array.isArray || function (arr) {
       iteratee = getIteratee(iteratee, 3);
 
       baseForOwn(object, function(value, key, object) {
-        result[iteratee(value, key, object)] = value;
+        baseAssignValue(result, iteratee(value, key, object), value);
       });
       return result;
     }
@@ -14978,8 +15791,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 2.4.0
      * @category Object
      * @param {Object} object The object to iterate over.
-     * @param {Array|Function|Object|string} [iteratee=_.identity]
-     *  The function invoked per iteration.
+     * @param {Function} [iteratee=_.identity] The function invoked per iteration.
      * @returns {Object} Returns the new mapped object.
      * @see _.mapKeys
      * @example
@@ -15001,7 +15813,7 @@ module.exports = Array.isArray || function (arr) {
       iteratee = getIteratee(iteratee, 3);
 
       baseForOwn(object, function(value, key, object) {
-        result[key] = iteratee(value, key, object);
+        baseAssignValue(result, key, iteratee(value, key, object));
       });
       return result;
     }
@@ -15026,16 +15838,16 @@ module.exports = Array.isArray || function (arr) {
      * @returns {Object} Returns `object`.
      * @example
      *
-     * var users = {
-     *   'data': [{ 'user': 'barney' }, { 'user': 'fred' }]
+     * var object = {
+     *   'a': [{ 'b': 2 }, { 'd': 4 }]
      * };
      *
-     * var ages = {
-     *   'data': [{ 'age': 36 }, { 'age': 40 }]
+     * var other = {
+     *   'a': [{ 'c': 3 }, { 'e': 5 }]
      * };
      *
-     * _.merge(users, ages);
-     * // => { 'data': [{ 'user': 'barney', 'age': 36 }, { 'user': 'fred', 'age': 40 }] }
+     * _.merge(object, other);
+     * // => { 'a': [{ 'b': 2, 'c': 3 }, { 'd': 4, 'e': 5 }] }
      */
     var merge = createAssigner(function(object, source, srcIndex) {
       baseMerge(object, source, srcIndex);
@@ -15045,7 +15857,7 @@ module.exports = Array.isArray || function (arr) {
      * This method is like `_.merge` except that it accepts `customizer` which
      * is invoked to produce the merged values of the destination and source
      * properties. If `customizer` returns `undefined`, merging is handled by the
-     * method instead. The `customizer` is invoked with seven arguments:
+     * method instead. The `customizer` is invoked with six arguments:
      * (objValue, srcValue, key, object, source, stack).
      *
      * **Note:** This method mutates `object`.
@@ -15066,18 +15878,11 @@ module.exports = Array.isArray || function (arr) {
      *   }
      * }
      *
-     * var object = {
-     *   'fruits': ['apple'],
-     *   'vegetables': ['beet']
-     * };
-     *
-     * var other = {
-     *   'fruits': ['banana'],
-     *   'vegetables': ['carrot']
-     * };
+     * var object = { 'a': [1], 'b': [2] };
+     * var other = { 'a': [3], 'b': [4] };
      *
      * _.mergeWith(object, other, customizer);
-     * // => { 'fruits': ['apple', 'banana'], 'vegetables': ['beet', 'carrot'] }
+     * // => { 'a': [1, 3], 'b': [2, 4] }
      */
     var mergeWith = createAssigner(function(object, source, srcIndex, customizer) {
       baseMerge(object, source, srcIndex, customizer);
@@ -15102,11 +15907,11 @@ module.exports = Array.isArray || function (arr) {
      * _.omit(object, ['a', 'c']);
      * // => { 'b': '2' }
      */
-    var omit = rest(function(object, props) {
+    var omit = flatRest(function(object, props) {
       if (object == null) {
         return {};
       }
-      props = arrayMap(baseFlatten(props, 1), toKey);
+      props = arrayMap(props, toKey);
       return basePick(object, baseDifference(getAllKeysIn(object), props));
     });
 
@@ -15121,8 +15926,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 4.0.0
      * @category Object
      * @param {Object} object The source object.
-     * @param {Array|Function|Object|string} [predicate=_.identity]
-     *  The function invoked per property.
+     * @param {Function} [predicate=_.identity] The function invoked per property.
      * @returns {Object} Returns the new object.
      * @example
      *
@@ -15132,10 +15936,7 @@ module.exports = Array.isArray || function (arr) {
      * // => { 'b': '2' }
      */
     function omitBy(object, predicate) {
-      predicate = getIteratee(predicate);
-      return basePickBy(object, function(value, key) {
-        return !predicate(value, key);
-      });
+      return pickBy(object, negate(getIteratee(predicate)));
     }
 
     /**
@@ -15155,8 +15956,8 @@ module.exports = Array.isArray || function (arr) {
      * _.pick(object, ['a', 'c']);
      * // => { 'a': 1, 'c': 3 }
      */
-    var pick = rest(function(object, props) {
-      return object == null ? {} : basePick(object, arrayMap(baseFlatten(props, 1), toKey));
+    var pick = flatRest(function(object, props) {
+      return object == null ? {} : basePick(object, arrayMap(props, toKey));
     });
 
     /**
@@ -15168,8 +15969,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 4.0.0
      * @category Object
      * @param {Object} object The source object.
-     * @param {Array|Function|Object|string} [predicate=_.identity]
-     *  The function invoked per property.
+     * @param {Function} [predicate=_.identity] The function invoked per property.
      * @returns {Object} Returns the new object.
      * @example
      *
@@ -15179,7 +15979,7 @@ module.exports = Array.isArray || function (arr) {
      * // => { 'a': 1, 'c': 3 }
      */
     function pickBy(object, predicate) {
-      return object == null ? {} : basePickBy(object, getIteratee(predicate));
+      return object == null ? {} : basePickBy(object, getAllKeysIn(object), getIteratee(predicate));
     }
 
     /**
@@ -15377,22 +16177,23 @@ module.exports = Array.isArray || function (arr) {
      * // => { '1': ['a', 'c'], '2': ['b'] }
      */
     function transform(object, iteratee, accumulator) {
-      var isArr = isArray(object) || isTypedArray(object);
-      iteratee = getIteratee(iteratee, 4);
+      var isArr = isArray(object),
+          isArrLike = isArr || isBuffer(object) || isTypedArray(object);
 
+      iteratee = getIteratee(iteratee, 4);
       if (accumulator == null) {
-        if (isArr || isObject(object)) {
-          var Ctor = object.constructor;
-          if (isArr) {
-            accumulator = isArray(object) ? new Ctor : [];
-          } else {
-            accumulator = isFunction(Ctor) ? baseCreate(getPrototype(object)) : {};
-          }
-        } else {
+        var Ctor = object && object.constructor;
+        if (isArrLike) {
+          accumulator = isArr ? new Ctor : [];
+        }
+        else if (isObject(object)) {
+          accumulator = isFunction(Ctor) ? baseCreate(getPrototype(object)) : {};
+        }
+        else {
           accumulator = {};
         }
       }
-      (isArr ? arrayEach : baseForOwn)(object, function(value, index, object) {
+      (isArrLike ? arrayEach : baseForOwn)(object, function(value, index, object) {
         return iteratee(accumulator, value, index, object);
       });
       return accumulator;
@@ -15623,12 +16424,12 @@ module.exports = Array.isArray || function (arr) {
      * // => true
      */
     function inRange(number, start, end) {
-      start = toNumber(start) || 0;
+      start = toFinite(start);
       if (end === undefined) {
         end = start;
         start = 0;
       } else {
-        end = toNumber(end) || 0;
+        end = toFinite(end);
       }
       number = toNumber(number);
       return baseInRange(number, start, end);
@@ -15684,12 +16485,12 @@ module.exports = Array.isArray || function (arr) {
         upper = 1;
       }
       else {
-        lower = toNumber(lower) || 0;
+        lower = toFinite(lower);
         if (upper === undefined) {
           upper = lower;
           lower = 0;
         } else {
-          upper = toNumber(upper) || 0;
+          upper = toFinite(upper);
         }
       }
       if (lower > upper) {
@@ -15752,8 +16553,9 @@ module.exports = Array.isArray || function (arr) {
 
     /**
      * Deburrs `string` by converting
-     * [latin-1 supplementary letters](https://en.wikipedia.org/wiki/Latin-1_Supplement_(Unicode_block)#Character_table)
-     * to basic latin letters and removing
+     * [Latin-1 Supplement](https://en.wikipedia.org/wiki/Latin-1_Supplement_(Unicode_block)#Character_table)
+     * and [Latin Extended-A](https://en.wikipedia.org/wiki/Latin_Extended-A)
+     * letters to basic Latin letters and removing
      * [combining diacritical marks](https://en.wikipedia.org/wiki/Combining_Diacritical_Marks).
      *
      * @static
@@ -15769,7 +16571,7 @@ module.exports = Array.isArray || function (arr) {
      */
     function deburr(string) {
       string = toString(string);
-      return string && string.replace(reLatin1, deburrLetter).replace(reComboMark, '');
+      return string && string.replace(reLatin, deburrLetter).replace(reComboMark, '');
     }
 
     /**
@@ -15779,7 +16581,7 @@ module.exports = Array.isArray || function (arr) {
      * @memberOf _
      * @since 3.0.0
      * @category String
-     * @param {string} [string=''] The string to search.
+     * @param {string} [string=''] The string to inspect.
      * @param {string} [target] The string to search for.
      * @param {number} [position=string.length] The position to search up to.
      * @returns {boolean} Returns `true` if `string` ends with `target`,
@@ -15804,13 +16606,14 @@ module.exports = Array.isArray || function (arr) {
         ? length
         : baseClamp(toInteger(position), 0, length);
 
+      var end = position;
       position -= target.length;
-      return position >= 0 && string.indexOf(target, position) == position;
+      return position >= 0 && string.slice(position, end) == target;
     }
 
     /**
-     * Converts the characters "&", "<", ">", '"', "'", and "\`" in `string` to
-     * their corresponding HTML entities.
+     * Converts the characters "&", "<", ">", '"', and "'" in `string` to their
+     * corresponding HTML entities.
      *
      * **Note:** No other characters are escaped. To escape additional
      * characters use a third-party library like [_he_](https://mths.be/he).
@@ -15820,12 +16623,6 @@ module.exports = Array.isArray || function (arr) {
      * unless they're part of a tag or unquoted attribute value. See
      * [Mathias Bynens's article](https://mathiasbynens.be/notes/ambiguous-ampersands)
      * (under "semi-related fun fact") for more details.
-     *
-     * Backticks are escaped because in IE < 9, they can break out of
-     * attribute values or HTML comments. See [#59](https://html5sec.org/#59),
-     * [#102](https://html5sec.org/#102), [#108](https://html5sec.org/#108), and
-     * [#133](https://html5sec.org/#133) of the
-     * [HTML5 Security Cheatsheet](https://html5sec.org/) for more details.
      *
      * When working with HTML you should always
      * [quote attribute values](http://wonko.com/post/html-escaping) to reduce
@@ -16069,15 +16866,12 @@ module.exports = Array.isArray || function (arr) {
      * // => [6, 8, 10]
      */
     function parseInt(string, radix, guard) {
-      // Chrome fails to trim leading <BOM> whitespace characters.
-      // See https://bugs.chromium.org/p/v8/issues/detail?id=3109 for more details.
       if (guard || radix == null) {
         radix = 0;
       } else if (radix) {
         radix = +radix;
       }
-      string = toString(string).replace(reTrim, '');
-      return nativeParseInt(string, radix || (reHasHexPrefix.test(string) ? 16 : 10));
+      return nativeParseInt(toString(string).replace(reTrimStart, ''), radix || 0);
     }
 
     /**
@@ -16134,7 +16928,7 @@ module.exports = Array.isArray || function (arr) {
       var args = arguments,
           string = toString(args[0]);
 
-      return args.length < 3 ? string : nativeReplace.call(string, args[1], args[2]);
+      return args.length < 3 ? string : string.replace(args[1], args[2]);
     }
 
     /**
@@ -16195,11 +16989,11 @@ module.exports = Array.isArray || function (arr) {
             (separator != null && !isRegExp(separator))
           )) {
         separator = baseToString(separator);
-        if (separator == '' && reHasComplexSymbol.test(string)) {
+        if (!separator && hasUnicode(string)) {
           return castSlice(stringToArray(string), 0, limit);
         }
       }
-      return nativeSplit.call(string, separator, limit);
+      return string.split(separator, limit);
     }
 
     /**
@@ -16234,7 +17028,7 @@ module.exports = Array.isArray || function (arr) {
      * @memberOf _
      * @since 3.0.0
      * @category String
-     * @param {string} [string=''] The string to search.
+     * @param {string} [string=''] The string to inspect.
      * @param {string} [target] The string to search for.
      * @param {number} [position=0] The position to search from.
      * @returns {boolean} Returns `true` if `string` starts with `target`,
@@ -16253,7 +17047,8 @@ module.exports = Array.isArray || function (arr) {
     function startsWith(string, target, position) {
       string = toString(string);
       position = baseClamp(toInteger(position), 0, string.length);
-      return string.lastIndexOf(baseToString(target), position) == position;
+      target = baseToString(target);
+      return string.slice(position, position + target.length) == target;
     }
 
     /**
@@ -16315,7 +17110,8 @@ module.exports = Array.isArray || function (arr) {
      * compiled({ 'user': 'barney' });
      * // => 'hello barney!'
      *
-     * // Use the ES delimiter as an alternative to the default "interpolate" delimiter.
+     * // Use the ES template literal delimiter as an "interpolate" delimiter.
+     * // Disable support by replacing the "interpolate" delimiter.
      * var compiled = _.template('hello ${ user }!');
      * compiled({ 'user': 'pebbles' });
      * // => 'hello pebbles!'
@@ -16670,7 +17466,7 @@ module.exports = Array.isArray || function (arr) {
       string = toString(string);
 
       var strLength = string.length;
-      if (reHasComplexSymbol.test(string)) {
+      if (hasUnicode(string)) {
         var strSymbols = stringToArray(string);
         strLength = strSymbols.length;
       }
@@ -16716,7 +17512,7 @@ module.exports = Array.isArray || function (arr) {
 
     /**
      * The inverse of `_.escape`; this method converts the HTML entities
-     * `&amp;`, `&lt;`, `&gt;`, `&quot;`, `&#39;`, and `&#96;` in `string` to
+     * `&amp;`, `&lt;`, `&gt;`, `&quot;`, and `&#39;` in `string` to
      * their corresponding characters.
      *
      * **Note:** No other HTML entities are unescaped. To unescape additional
@@ -16807,7 +17603,7 @@ module.exports = Array.isArray || function (arr) {
       pattern = guard ? undefined : pattern;
 
       if (pattern === undefined) {
-        pattern = reHasComplexWord.test(string) ? reComplexWord : reBasicWord;
+        return hasUnicodeWord(string) ? unicodeWords(string) : asciiWords(string);
       }
       return string.match(pattern) || [];
     }
@@ -16836,7 +17632,7 @@ module.exports = Array.isArray || function (arr) {
      *   elements = [];
      * }
      */
-    var attempt = rest(function(func, args) {
+    var attempt = baseRest(function(func, args) {
       try {
         return apply(func, undefined, args);
       } catch (e) {
@@ -16861,19 +17657,19 @@ module.exports = Array.isArray || function (arr) {
      *
      * var view = {
      *   'label': 'docs',
-     *   'onClick': function() {
+     *   'click': function() {
      *     console.log('clicked ' + this.label);
      *   }
      * };
      *
-     * _.bindAll(view, ['onClick']);
-     * jQuery(element).on('click', view.onClick);
+     * _.bindAll(view, ['click']);
+     * jQuery(element).on('click', view.click);
      * // => Logs 'clicked docs' when clicked.
      */
-    var bindAll = rest(function(object, methodNames) {
-      arrayEach(baseFlatten(methodNames, 1), function(key) {
+    var bindAll = flatRest(function(object, methodNames) {
+      arrayEach(methodNames, function(key) {
         key = toKey(key);
-        object[key] = bind(object[key], object);
+        baseAssignValue(object, key, bind(object[key], object));
       });
       return object;
     });
@@ -16895,7 +17691,7 @@ module.exports = Array.isArray || function (arr) {
      * var func = _.cond([
      *   [_.matches({ 'a': 1 }),           _.constant('matches A')],
      *   [_.conforms({ 'b': _.isNumber }), _.constant('matches B')],
-     *   [_.constant(true),                _.constant('no match')]
+     *   [_.stubTrue,                      _.constant('no match')]
      * ]);
      *
      * func({ 'a': 1, 'b': 2 });
@@ -16918,7 +17714,7 @@ module.exports = Array.isArray || function (arr) {
         return [toIteratee(pair[0]), pair[1]];
       });
 
-      return rest(function(args) {
+      return baseRest(function(args) {
         var index = -1;
         while (++index < length) {
           var pair = pairs[index];
@@ -16934,6 +17730,9 @@ module.exports = Array.isArray || function (arr) {
      * the corresponding property values of a given object, returning `true` if
      * all predicates return truthy, else `false`.
      *
+     * **Note:** The created function is equivalent to `_.conformsTo` with
+     * `source` partially applied.
+     *
      * @static
      * @memberOf _
      * @since 4.0.0
@@ -16942,13 +17741,13 @@ module.exports = Array.isArray || function (arr) {
      * @returns {Function} Returns the new spec function.
      * @example
      *
-     * var users = [
-     *   { 'user': 'barney', 'age': 36 },
-     *   { 'user': 'fred',   'age': 40 }
+     * var objects = [
+     *   { 'a': 2, 'b': 1 },
+     *   { 'a': 1, 'b': 2 }
      * ];
      *
-     * _.filter(users, _.conforms({ 'age': function(n) { return n > 38; } }));
-     * // => [{ 'user': 'fred', 'age': 40 }]
+     * _.filter(objects, _.conforms({ 'b': function(n) { return n > 1; } }));
+     * // => [{ 'a': 1, 'b': 2 }]
      */
     function conforms(source) {
       return baseConforms(baseClone(source, true));
@@ -16980,6 +17779,30 @@ module.exports = Array.isArray || function (arr) {
     }
 
     /**
+     * Checks `value` to determine whether a default value should be returned in
+     * its place. The `defaultValue` is returned if `value` is `NaN`, `null`,
+     * or `undefined`.
+     *
+     * @static
+     * @memberOf _
+     * @since 4.14.0
+     * @category Util
+     * @param {*} value The value to check.
+     * @param {*} defaultValue The default value.
+     * @returns {*} Returns the resolved value.
+     * @example
+     *
+     * _.defaultTo(1, 10);
+     * // => 1
+     *
+     * _.defaultTo(undefined, 10);
+     * // => 10
+     */
+    function defaultTo(value, defaultValue) {
+      return (value == null || value !== value) ? defaultValue : value;
+    }
+
+    /**
      * Creates a function that returns the result of invoking the given functions
      * with the `this` binding of the created function, where each successive
      * invocation is supplied the return value of the previous.
@@ -16988,7 +17811,7 @@ module.exports = Array.isArray || function (arr) {
      * @memberOf _
      * @since 3.0.0
      * @category Util
-     * @param {...(Function|Function[])} [funcs] Functions to invoke.
+     * @param {...(Function|Function[])} [funcs] The functions to invoke.
      * @returns {Function} Returns the new composite function.
      * @see _.flowRight
      * @example
@@ -17011,7 +17834,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 3.0.0
      * @memberOf _
      * @category Util
-     * @param {...(Function|Function[])} [funcs] Functions to invoke.
+     * @param {...(Function|Function[])} [funcs] The functions to invoke.
      * @returns {Function} Returns the new composite function.
      * @see _.flow
      * @example
@@ -17027,7 +17850,7 @@ module.exports = Array.isArray || function (arr) {
     var flowRight = createFlow(true);
 
     /**
-     * This method returns the first argument given to it.
+     * This method returns the first argument it receives.
      *
      * @static
      * @since 0.1.0
@@ -17037,7 +17860,7 @@ module.exports = Array.isArray || function (arr) {
      * @returns {*} Returns `value`.
      * @example
      *
-     * var object = { 'user': 'fred' };
+     * var object = { 'a': 1 };
      *
      * console.log(_.identity(object) === object);
      * // => true
@@ -17095,10 +17918,14 @@ module.exports = Array.isArray || function (arr) {
     /**
      * Creates a function that performs a partial deep comparison between a given
      * object and `source`, returning `true` if the given object has equivalent
-     * property values, else `false`. The created function is equivalent to
-     * `_.isMatch` with a `source` partially applied.
+     * property values, else `false`.
      *
-     * **Note:** This method supports comparing the same values as `_.isEqual`.
+     * **Note:** The created function is equivalent to `_.isMatch` with `source`
+     * partially applied.
+     *
+     * Partial comparisons will match empty array and empty object `source`
+     * values against any array or object value, respectively. See `_.isEqual`
+     * for a list of supported value comparisons.
      *
      * @static
      * @memberOf _
@@ -17108,13 +17935,13 @@ module.exports = Array.isArray || function (arr) {
      * @returns {Function} Returns the new spec function.
      * @example
      *
-     * var users = [
-     *   { 'user': 'barney', 'age': 36, 'active': true },
-     *   { 'user': 'fred',   'age': 40, 'active': false }
+     * var objects = [
+     *   { 'a': 1, 'b': 2, 'c': 3 },
+     *   { 'a': 4, 'b': 5, 'c': 6 }
      * ];
      *
-     * _.filter(users, _.matches({ 'age': 40, 'active': false }));
-     * // => [{ 'user': 'fred', 'age': 40, 'active': false }]
+     * _.filter(objects, _.matches({ 'a': 4, 'c': 6 }));
+     * // => [{ 'a': 4, 'b': 5, 'c': 6 }]
      */
     function matches(source) {
       return baseMatches(baseClone(source, true));
@@ -17125,7 +17952,9 @@ module.exports = Array.isArray || function (arr) {
      * value at `path` of a given object to `srcValue`, returning `true` if the
      * object value is equivalent, else `false`.
      *
-     * **Note:** This method supports comparing the same values as `_.isEqual`.
+     * **Note:** Partial comparisons will match empty array and empty object
+     * `srcValue` values against any array or object value, respectively. See
+     * `_.isEqual` for a list of supported value comparisons.
      *
      * @static
      * @memberOf _
@@ -17136,13 +17965,13 @@ module.exports = Array.isArray || function (arr) {
      * @returns {Function} Returns the new spec function.
      * @example
      *
-     * var users = [
-     *   { 'user': 'barney' },
-     *   { 'user': 'fred' }
+     * var objects = [
+     *   { 'a': 1, 'b': 2, 'c': 3 },
+     *   { 'a': 4, 'b': 5, 'c': 6 }
      * ];
      *
-     * _.find(users, _.matchesProperty('user', 'fred'));
-     * // => { 'user': 'fred' }
+     * _.find(objects, _.matchesProperty('a', 4));
+     * // => { 'a': 4, 'b': 5, 'c': 6 }
      */
     function matchesProperty(path, srcValue) {
       return baseMatchesProperty(path, baseClone(srcValue, true));
@@ -17172,7 +18001,7 @@ module.exports = Array.isArray || function (arr) {
      * _.map(objects, _.method(['a', 'b']));
      * // => [2, 1]
      */
-    var method = rest(function(path, args) {
+    var method = baseRest(function(path, args) {
       return function(object) {
         return baseInvoke(object, path, args);
       };
@@ -17201,7 +18030,7 @@ module.exports = Array.isArray || function (arr) {
      * _.map([['a', '2'], ['c', '0']], _.methodOf(object));
      * // => [2, 0]
      */
-    var methodOf = rest(function(object, args) {
+    var methodOf = baseRest(function(object, args) {
       return function(path) {
         return baseInvoke(object, path, args);
       };
@@ -17300,7 +18129,7 @@ module.exports = Array.isArray || function (arr) {
     }
 
     /**
-     * A method that returns `undefined`.
+     * This method returns `undefined`.
      *
      * @static
      * @memberOf _
@@ -17337,7 +18166,7 @@ module.exports = Array.isArray || function (arr) {
      */
     function nthArg(n) {
       n = toInteger(n);
-      return rest(function(args) {
+      return baseRest(function(args) {
         return baseNth(args, n);
       });
     }
@@ -17350,8 +18179,8 @@ module.exports = Array.isArray || function (arr) {
      * @memberOf _
      * @since 4.0.0
      * @category Util
-     * @param {...(Array|Array[]|Function|Function[]|Object|Object[]|string|string[])}
-     *  [iteratees=[_.identity]] The iteratees to invoke.
+     * @param {...(Function|Function[])} [iteratees=[_.identity]]
+     *  The iteratees to invoke.
      * @returns {Function} Returns the new function.
      * @example
      *
@@ -17370,8 +18199,8 @@ module.exports = Array.isArray || function (arr) {
      * @memberOf _
      * @since 4.0.0
      * @category Util
-     * @param {...(Array|Array[]|Function|Function[]|Object|Object[]|string|string[])}
-     *  [predicates=[_.identity]] The predicates to check.
+     * @param {...(Function|Function[])} [predicates=[_.identity]]
+     *  The predicates to check.
      * @returns {Function} Returns the new function.
      * @example
      *
@@ -17396,8 +18225,8 @@ module.exports = Array.isArray || function (arr) {
      * @memberOf _
      * @since 4.0.0
      * @category Util
-     * @param {...(Array|Array[]|Function|Function[]|Object|Object[]|string|string[])}
-     *  [predicates=[_.identity]] The predicates to check.
+     * @param {...(Function|Function[])} [predicates=[_.identity]]
+     *  The predicates to check.
      * @returns {Function} Returns the new function.
      * @example
      *
@@ -17549,7 +18378,7 @@ module.exports = Array.isArray || function (arr) {
     var rangeRight = createRange(true);
 
     /**
-     * A method that returns a new empty array.
+     * This method returns a new empty array.
      *
      * @static
      * @memberOf _
@@ -17571,7 +18400,7 @@ module.exports = Array.isArray || function (arr) {
     }
 
     /**
-     * A method that returns `false`.
+     * This method returns `false`.
      *
      * @static
      * @memberOf _
@@ -17588,7 +18417,7 @@ module.exports = Array.isArray || function (arr) {
     }
 
     /**
-     * A method that returns a new empty object.
+     * This method returns a new empty object.
      *
      * @static
      * @memberOf _
@@ -17610,7 +18439,7 @@ module.exports = Array.isArray || function (arr) {
     }
 
     /**
-     * A method that returns an empty string.
+     * This method returns an empty string.
      *
      * @static
      * @memberOf _
@@ -17627,7 +18456,7 @@ module.exports = Array.isArray || function (arr) {
     }
 
     /**
-     * A method that returns `true`.
+     * This method returns `true`.
      *
      * @static
      * @memberOf _
@@ -17745,7 +18574,7 @@ module.exports = Array.isArray || function (arr) {
      */
     var add = createMathOperation(function(augend, addend) {
       return augend + addend;
-    });
+    }, 0);
 
     /**
      * Computes `number` rounded up to `precision`.
@@ -17787,7 +18616,7 @@ module.exports = Array.isArray || function (arr) {
      */
     var divide = createMathOperation(function(dividend, divisor) {
       return dividend / divisor;
-    });
+    }, 1);
 
     /**
      * Computes `number` rounded down to `precision`.
@@ -17846,8 +18675,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 4.0.0
      * @category Math
      * @param {Array} array The array to iterate over.
-     * @param {Array|Function|Object|string} [iteratee=_.identity]
-     *  The iteratee invoked per element.
+     * @param {Function} [iteratee=_.identity] The iteratee invoked per element.
      * @returns {*} Returns the maximum value.
      * @example
      *
@@ -17862,7 +18690,7 @@ module.exports = Array.isArray || function (arr) {
      */
     function maxBy(array, iteratee) {
       return (array && array.length)
-        ? baseExtremum(array, getIteratee(iteratee), baseGt)
+        ? baseExtremum(array, getIteratee(iteratee, 2), baseGt)
         : undefined;
     }
 
@@ -17894,8 +18722,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 4.7.0
      * @category Math
      * @param {Array} array The array to iterate over.
-     * @param {Array|Function|Object|string} [iteratee=_.identity]
-     *  The iteratee invoked per element.
+     * @param {Function} [iteratee=_.identity] The iteratee invoked per element.
      * @returns {number} Returns the mean.
      * @example
      *
@@ -17909,7 +18736,7 @@ module.exports = Array.isArray || function (arr) {
      * // => 5
      */
     function meanBy(array, iteratee) {
-      return baseMean(array, getIteratee(iteratee));
+      return baseMean(array, getIteratee(iteratee, 2));
     }
 
     /**
@@ -17946,8 +18773,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 4.0.0
      * @category Math
      * @param {Array} array The array to iterate over.
-     * @param {Array|Function|Object|string} [iteratee=_.identity]
-     *  The iteratee invoked per element.
+     * @param {Function} [iteratee=_.identity] The iteratee invoked per element.
      * @returns {*} Returns the minimum value.
      * @example
      *
@@ -17962,7 +18788,7 @@ module.exports = Array.isArray || function (arr) {
      */
     function minBy(array, iteratee) {
       return (array && array.length)
-        ? baseExtremum(array, getIteratee(iteratee), baseLt)
+        ? baseExtremum(array, getIteratee(iteratee, 2), baseLt)
         : undefined;
     }
 
@@ -17983,7 +18809,7 @@ module.exports = Array.isArray || function (arr) {
      */
     var multiply = createMathOperation(function(multiplier, multiplicand) {
       return multiplier * multiplicand;
-    });
+    }, 1);
 
     /**
      * Computes `number` rounded to `precision`.
@@ -18025,7 +18851,7 @@ module.exports = Array.isArray || function (arr) {
      */
     var subtract = createMathOperation(function(minuend, subtrahend) {
       return minuend - subtrahend;
-    });
+    }, 0);
 
     /**
      * Computes the sum of the values in `array`.
@@ -18057,8 +18883,7 @@ module.exports = Array.isArray || function (arr) {
      * @since 4.0.0
      * @category Math
      * @param {Array} array The array to iterate over.
-     * @param {Array|Function|Object|string} [iteratee=_.identity]
-     *  The iteratee invoked per element.
+     * @param {Function} [iteratee=_.identity] The iteratee invoked per element.
      * @returns {number} Returns the sum.
      * @example
      *
@@ -18073,7 +18898,7 @@ module.exports = Array.isArray || function (arr) {
      */
     function sumBy(array, iteratee) {
       return (array && array.length)
-        ? baseSum(array, getIteratee(iteratee))
+        ? baseSum(array, getIteratee(iteratee, 2))
         : 0;
     }
 
@@ -18252,7 +19077,9 @@ module.exports = Array.isArray || function (arr) {
     lodash.cloneDeep = cloneDeep;
     lodash.cloneDeepWith = cloneDeepWith;
     lodash.cloneWith = cloneWith;
+    lodash.conformsTo = conformsTo;
     lodash.deburr = deburr;
+    lodash.defaultTo = defaultTo;
     lodash.divide = divide;
     lodash.endsWith = endsWith;
     lodash.eq = eq;
@@ -18493,7 +19320,7 @@ module.exports = Array.isArray || function (arr) {
       return this.reverse().find(predicate);
     };
 
-    LazyWrapper.prototype.invokeMap = rest(function(path, args) {
+    LazyWrapper.prototype.invokeMap = baseRest(function(path, args) {
       if (typeof path == 'function') {
         return new LazyWrapper(this);
       }
@@ -18503,10 +19330,7 @@ module.exports = Array.isArray || function (arr) {
     });
 
     LazyWrapper.prototype.reject = function(predicate) {
-      predicate = getIteratee(predicate, 3);
-      return this.filter(function(value) {
-        return !predicate(value);
-      });
+      return this.filter(negate(getIteratee(predicate)));
     };
 
     LazyWrapper.prototype.slice = function(start, end) {
@@ -18610,7 +19434,7 @@ module.exports = Array.isArray || function (arr) {
       }
     });
 
-    realNames[createHybridWrapper(undefined, BIND_KEY_FLAG).name] = [{
+    realNames[createHybrid(undefined, BIND_KEY_FLAG).name] = [{
       'name': 'wrapper',
       'func': undefined
     }];
@@ -18629,33 +19453,35 @@ module.exports = Array.isArray || function (arr) {
     lodash.prototype.reverse = wrapperReverse;
     lodash.prototype.toJSON = lodash.prototype.valueOf = lodash.prototype.value = wrapperValue;
 
+    // Add lazy aliases.
+    lodash.prototype.first = lodash.prototype.head;
+
     if (iteratorSymbol) {
       lodash.prototype[iteratorSymbol] = wrapperToIterator;
     }
     return lodash;
-  }
+  });
 
   /*--------------------------------------------------------------------------*/
 
   // Export lodash.
   var _ = runInContext();
 
-  // Expose Lodash on the free variable `window` or `self` when available so it's
-  // globally accessible, even when bundled with Browserify, Webpack, etc. This
-  // also prevents errors in cases where Lodash is loaded by a script tag in the
-  // presence of an AMD loader. See http://requirejs.org/docs/errors.html#mismatch
-  // for more details. Use `_.noConflict` to remove Lodash from the global object.
-  (freeSelf || {})._ = _;
-
-  // Some AMD build optimizers like r.js check for condition patterns like the following:
+  // Some AMD build optimizers, like r.js, check for condition patterns like:
   if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) {
+    // Expose Lodash on the global object to prevent errors when Lodash is
+    // loaded by a script tag in the presence of an AMD loader.
+    // See http://requirejs.org/docs/errors.html#mismatch for more details.
+    // Use `_.noConflict` to remove Lodash from the global object.
+    root._ = _;
+
     // Define as an anonymous module so, through path mapping, it can be
     // referenced as the "underscore" module.
     define(function() {
       return _;
     });
   }
-  // Check for `exports` after `define` in case a build optimizer adds an `exports` object.
+  // Check for `exports` after `define` in case a build optimizer adds it.
   else if (freeModule) {
     // Export for Node.js.
     (freeModule.exports = _)._ = _;
@@ -18669,7 +19495,32 @@ module.exports = Array.isArray || function (arr) {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],23:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
+
+/**
+ * Reduce `arr` with `fn`.
+ *
+ * @param {Array} arr
+ * @param {Function} fn
+ * @param {Mixed} initial
+ *
+ * TODO: combatible error handling?
+ */
+
+module.exports = function(arr, fn, initial){  
+  var idx = 0;
+  var len = arr.length;
+  var curr = arguments.length == 3
+    ? initial
+    : arr[idx++];
+
+  while (idx < len) {
+    curr = fn.call(null, curr, arr[idx], ++idx, arr);
+  }
+  
+  return curr;
+};
+},{}],25:[function(require,module,exports){
 /**
  * Module dependencies.
  */
@@ -19862,198 +20713,10 @@ request.put = function(url, data, fn){
 
 module.exports = request;
 
-},{"emitter":24,"reduce":25}],24:[function(require,module,exports){
-
-/**
- * Expose `Emitter`.
- */
-
-module.exports = Emitter;
-
-/**
- * Initialize a new `Emitter`.
- *
- * @api public
- */
-
-function Emitter(obj) {
-  if (obj) return mixin(obj);
-};
-
-/**
- * Mixin the emitter properties.
- *
- * @param {Object} obj
- * @return {Object}
- * @api private
- */
-
-function mixin(obj) {
-  for (var key in Emitter.prototype) {
-    obj[key] = Emitter.prototype[key];
-  }
-  return obj;
-}
-
-/**
- * Listen on the given `event` with `fn`.
- *
- * @param {String} event
- * @param {Function} fn
- * @return {Emitter}
- * @api public
- */
-
-Emitter.prototype.on =
-Emitter.prototype.addEventListener = function(event, fn){
-  this._callbacks = this._callbacks || {};
-  (this._callbacks['$' + event] = this._callbacks['$' + event] || [])
-    .push(fn);
-  return this;
-};
-
-/**
- * Adds an `event` listener that will be invoked a single
- * time then automatically removed.
- *
- * @param {String} event
- * @param {Function} fn
- * @return {Emitter}
- * @api public
- */
-
-Emitter.prototype.once = function(event, fn){
-  function on() {
-    this.off(event, on);
-    fn.apply(this, arguments);
-  }
-
-  on.fn = fn;
-  this.on(event, on);
-  return this;
-};
-
-/**
- * Remove the given callback for `event` or all
- * registered callbacks.
- *
- * @param {String} event
- * @param {Function} fn
- * @return {Emitter}
- * @api public
- */
-
-Emitter.prototype.off =
-Emitter.prototype.removeListener =
-Emitter.prototype.removeAllListeners =
-Emitter.prototype.removeEventListener = function(event, fn){
-  this._callbacks = this._callbacks || {};
-
-  // all
-  if (0 == arguments.length) {
-    this._callbacks = {};
-    return this;
-  }
-
-  // specific event
-  var callbacks = this._callbacks['$' + event];
-  if (!callbacks) return this;
-
-  // remove all handlers
-  if (1 == arguments.length) {
-    delete this._callbacks['$' + event];
-    return this;
-  }
-
-  // remove specific handler
-  var cb;
-  for (var i = 0; i < callbacks.length; i++) {
-    cb = callbacks[i];
-    if (cb === fn || cb.fn === fn) {
-      callbacks.splice(i, 1);
-      break;
-    }
-  }
-  return this;
-};
-
-/**
- * Emit `event` with the given args.
- *
- * @param {String} event
- * @param {Mixed} ...
- * @return {Emitter}
- */
-
-Emitter.prototype.emit = function(event){
-  this._callbacks = this._callbacks || {};
-  var args = [].slice.call(arguments, 1)
-    , callbacks = this._callbacks['$' + event];
-
-  if (callbacks) {
-    callbacks = callbacks.slice(0);
-    for (var i = 0, len = callbacks.length; i < len; ++i) {
-      callbacks[i].apply(this, args);
-    }
-  }
-
-  return this;
-};
-
-/**
- * Return array of callbacks for `event`.
- *
- * @param {String} event
- * @return {Array}
- * @api public
- */
-
-Emitter.prototype.listeners = function(event){
-  this._callbacks = this._callbacks || {};
-  return this._callbacks['$' + event] || [];
-};
-
-/**
- * Check if this emitter has `event` handlers.
- *
- * @param {String} event
- * @return {Boolean}
- * @api public
- */
-
-Emitter.prototype.hasListeners = function(event){
-  return !! this.listeners(event).length;
-};
-
-},{}],25:[function(require,module,exports){
-
-/**
- * Reduce `arr` with `fn`.
- *
- * @param {Array} arr
- * @param {Function} fn
- * @param {Mixed} initial
- *
- * TODO: combatible error handling?
- */
-
-module.exports = function(arr, fn, initial){  
-  var idx = 0;
-  var len = arr.length;
-  var curr = arguments.length == 3
-    ? initial
-    : arr[idx++];
-
-  while (idx < len) {
-    curr = fn.call(null, curr, arr[idx], ++idx, arr);
-  }
-  
-  return curr;
-};
-},{}],26:[function(require,module,exports){
+},{"emitter":6,"reduce":24}],26:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -20124,7 +20787,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],27:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -20547,7 +21210,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/CreateEndpointBasicAuthRepresentation":88,"../model/EndpointBasicAuthRepresentation":91,"../model/EndpointConfigurationRepresentation":92}],28:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -21211,7 +21874,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/AbstractGroupRepresentation":71,"../model/AddGroupCapabilitiesRepresentation":74,"../model/GroupRepresentation":107,"../model/LightGroupRepresentation":111,"../model/ResultListDataRepresentation":133}],29:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -21538,7 +22201,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/CreateTenantRepresentation":90,"../model/ImageUploadRepresentation":108,"../model/LightTenantRepresentation":112,"../model/TenantEvent":143,"../model/TenantRepresentation":144}],30:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -21778,7 +22441,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/AbstractUserRepresentation":73,"../model/BulkUserUpdateRepresentation":82,"../model/ResultListDataRepresentation":133,"../model/UserRepresentation":149}],31:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -22158,7 +22821,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/ResultListDataRepresentation":133}],32:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -22419,7 +23082,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/AppDefinitionPublishRepresentation":76,"../model/AppDefinitionRepresentation":77,"../model/AppDefinitionUpdateResultRepresentation":78,"../model/ResultListDataRepresentation":133,"../model/RuntimeAppDefinitionSaveRepresentation":134}],33:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -22617,7 +23280,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/AppDefinitionPublishRepresentation":76,"../model/AppDefinitionRepresentation":77,"../model/AppDefinitionUpdateResultRepresentation":78}],34:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -22721,7 +23384,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/ResultListDataRepresentation":133,"../model/RuntimeAppDefinitionSaveRepresentation":134}],35:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -22926,7 +23589,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/CommentRepresentation":85,"../model/ResultListDataRepresentation":133}],36:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -23413,7 +24076,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/RelatedContentRepresentation":130,"../model/ResultListDataRepresentation":133}],37:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -23497,7 +24160,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],38:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -23722,7 +24385,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/FormRepresentation":101,"../model/FormSaveRepresentation":102,"../model/ValidationErrorRepresentation":151}],39:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -23838,7 +24501,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/ResultListDataRepresentation":133}],40:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -23950,7 +24613,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/SyncLogEntryRepresentation":136}],41:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -24021,7 +24684,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/ResultListDataRepresentation":133}],42:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -24242,7 +24905,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/ResultListDataRepresentation":133}],43:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -24436,7 +25099,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/ResultListDataRepresentation":133}],44:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -25119,7 +25782,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/BoxUserAccountCredentialsRepresentation":81,"../model/ResultListDataRepresentation":133,"../model/UserAccountCredentialsRepresentation":145}],45:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -25404,7 +26067,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/BoxUserAccountCredentialsRepresentation":81,"../model/ResultListDataRepresentation":133,"../model/UserAccountCredentialsRepresentation":145}],46:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -25517,7 +26180,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/ResultListDataRepresentation":133}],47:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -25635,7 +26298,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],48:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
@@ -25753,7 +26416,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/ObjectNode":119}],49:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -26273,7 +26936,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/ModelRepresentation":118,"../model/ObjectNode":119,"../model/ResultListDataRepresentation":133,"../model/ValidationErrorRepresentation":151}],50:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -26396,7 +27059,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/ModelRepresentation":118,"../model/ResultListDataRepresentation":133}],51:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -26805,7 +27468,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/CreateProcessInstanceRepresentation":89,"../model/FormDefinitionRepresentation":97,"../model/FormValueRepresentation":105,"../model/ProcessFilterRequestRepresentation":121,"../model/ProcessInstanceFilterRequestRepresentation":123,"../model/ProcessInstanceRepresentation":124,"../model/ResultListDataRepresentation":133}],52:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -26882,7 +27545,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/ResultListDataRepresentation":133}],53:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -27019,12 +27682,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/FormDefinitionRepresentation":97,"../model/FormValueRepresentation":105}],54:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/RestVariable'], factory);
+    define(['../../../alfrescoApiClient', '../model/RestVariable'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../../../alfrescoApiClient'), require('../model/RestVariable'));
@@ -27265,7 +27928,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/RestVariable":132}],55:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -27490,7 +28153,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/CommentRepresentation":85,"../model/FormDefinitionRepresentation":97,"../model/ProcessInstanceRepresentation":124,"../model/ResultListDataRepresentation":133}],56:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -27599,7 +28262,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/CreateProcessInstanceRepresentation":89,"../model/ProcessInstanceRepresentation":124,"../model/ResultListDataRepresentation":133}],57:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -27706,7 +28369,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/ObjectNode":119,"../model/ProcessInstanceFilterRequestRepresentation":123,"../model/ResultListDataRepresentation":133}],58:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -27781,7 +28444,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/ProcessScopeRepresentation":127,"../model/ProcessScopesRequestRepresentation":128}],59:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -27985,7 +28648,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/ChangePasswordRepresentation":83,"../model/File":96,"../model/ImageUploadRepresentation":108,"../model/UserRepresentation":149}],60:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -28080,7 +28743,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],61:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -28150,7 +28813,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/SystemPropertiesRepresentation":137}],62:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -28492,7 +29155,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/ObjectNode":119,"../model/TaskRepresentation":141}],63:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -29562,7 +30225,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/ChecklistOrderRepresentation":84,"../model/CommentRepresentation":85,"../model/CompleteFormRepresentation":86,"../model/FormDefinitionRepresentation":97,"../model/FormValueRepresentation":105,"../model/ObjectNode":119,"../model/RelatedContentRepresentation":130,"../model/ResultListDataRepresentation":133,"../model/SaveFormRepresentation":135,"../model/TaskFilterRequestRepresentation":139,"../model/TaskRepresentation":141,"../model/TaskUpdateRepresentation":142}],64:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -29719,7 +30382,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/ChecklistOrderRepresentation":84,"../model/ResultListDataRepresentation":133,"../model/TaskRepresentation":141}],65:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -30001,7 +30664,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/CompleteFormRepresentation":86,"../model/FormDefinitionRepresentation":97,"../model/FormValueRepresentation":105,"../model/ProcessInstanceVariableRepresentation":125,"../model/SaveFormRepresentation":135}],66:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -30178,7 +30841,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/ArrayNode":80}],67:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -30448,7 +31111,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/ResetPasswordRepresentation":131,"../model/ResultListDataRepresentation":133,"../model/UserActionRepresentation":146,"../model/UserRepresentation":149}],68:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -30905,7 +31568,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/ResultListDataRepresentation":133,"../model/UserFilterOrderRepresentation":147,"../model/UserProcessInstanceFilterRepresentation":148,"../model/UserTaskFilterRepresentation":150}],69:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -30995,7 +31658,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/ResultListDataRepresentation":133}],70:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (factory) {
   if (typeof define === 'function' && define.amd) {
@@ -31687,7 +32350,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../alfrescoApiClient":290,"./api/AboutApi":26,"./api/AdminEndpointsApi":27,"./api/AdminGroupsApi":28,"./api/AdminTenantsApi":29,"./api/AdminUsersApi":30,"./api/AlfrescoApi":31,"./api/AppsApi":32,"./api/AppsDefinitionApi":33,"./api/AppsRuntimeApi":34,"./api/CommentsApi":35,"./api/ContentApi":36,"./api/ContentRenditionApi":37,"./api/EditorApi":38,"./api/GroupsApi":39,"./api/IDMSyncApi":40,"./api/IntegrationAccountApi":41,"./api/IntegrationAlfrescoCloudApi":42,"./api/IntegrationAlfrescoOnPremiseApi":43,"./api/IntegrationApi":44,"./api/IntegrationBoxApi":45,"./api/IntegrationDriveApi":46,"./api/ModelBpmnApi":47,"./api/ModelJsonBpmnApi":48,"./api/ModelsApi":49,"./api/ModelsHistoryApi":50,"./api/ProcessApi":51,"./api/ProcessDefinitionsApi":52,"./api/ProcessDefinitionsFormApi":53,"./api/ProcessInstanceVariablesApi":54,"./api/ProcessInstancesApi":55,"./api/ProcessInstancesInformationApi":56,"./api/ProcessInstancesListingApi":57,"./api/ProcessScopeApi":58,"./api/ProfileApi":59,"./api/ScriptFileApi":60,"./api/SystemPropertiesApi":61,"./api/TaskActionsApi":62,"./api/TaskApi":63,"./api/TaskCheckListApi":64,"./api/TaskFormsApi":65,"./api/TemporaryApi":66,"./api/UserApi":67,"./api/UserFiltersApi":68,"./api/UsersWorkflowApi":69,"./model/AbstractGroupRepresentation":71,"./model/AbstractRepresentation":72,"./model/AbstractUserRepresentation":73,"./model/AddGroupCapabilitiesRepresentation":74,"./model/AppDefinition":75,"./model/AppDefinitionPublishRepresentation":76,"./model/AppDefinitionRepresentation":77,"./model/AppDefinitionUpdateResultRepresentation":78,"./model/AppModelDefinition":79,"./model/ArrayNode":80,"./model/BoxUserAccountCredentialsRepresentation":81,"./model/BulkUserUpdateRepresentation":82,"./model/ChangePasswordRepresentation":83,"./model/ChecklistOrderRepresentation":84,"./model/CommentRepresentation":85,"./model/CompleteFormRepresentation":86,"./model/ConditionRepresentation":87,"./model/CreateEndpointBasicAuthRepresentation":88,"./model/CreateProcessInstanceRepresentation":89,"./model/CreateTenantRepresentation":90,"./model/EndpointBasicAuthRepresentation":91,"./model/EndpointConfigurationRepresentation":92,"./model/EndpointRequestHeaderRepresentation":93,"./model/EntityAttributeScopeRepresentation":94,"./model/EntityVariableScopeRepresentation":95,"./model/File":96,"./model/FormDefinitionRepresentation":97,"./model/FormFieldRepresentation":98,"./model/FormJavascriptEventRepresentation":99,"./model/FormOutcomeRepresentation":100,"./model/FormRepresentation":101,"./model/FormSaveRepresentation":102,"./model/FormScopeRepresentation":103,"./model/FormTabRepresentation":104,"./model/FormValueRepresentation":105,"./model/GroupCapabilityRepresentation":106,"./model/GroupRepresentation":107,"./model/ImageUploadRepresentation":108,"./model/LayoutRepresentation":109,"./model/LightAppRepresentation":110,"./model/LightGroupRepresentation":111,"./model/LightTenantRepresentation":112,"./model/LightUserRepresentation":113,"./model/MaplongListstring":114,"./model/MapstringListEntityVariableScopeRepresentation":115,"./model/MapstringListVariableScopeRepresentation":116,"./model/Mapstringstring":117,"./model/ModelRepresentation":118,"./model/ObjectNode":119,"./model/OptionRepresentation":120,"./model/ProcessFilterRequestRepresentation":121,"./model/ProcessInstanceFilterRepresentation":122,"./model/ProcessInstanceFilterRequestRepresentation":123,"./model/ProcessInstanceRepresentation":124,"./model/ProcessInstanceVariableRepresentation":125,"./model/ProcessScopeIdentifierRepresentation":126,"./model/ProcessScopeRepresentation":127,"./model/ProcessScopesRequestRepresentation":128,"./model/PublishIdentityInfoRepresentation":129,"./model/RelatedContentRepresentation":130,"./model/ResetPasswordRepresentation":131,"./model/RestVariable":132,"./model/ResultListDataRepresentation":133,"./model/RuntimeAppDefinitionSaveRepresentation":134,"./model/SaveFormRepresentation":135,"./model/SyncLogEntryRepresentation":136,"./model/SystemPropertiesRepresentation":137,"./model/TaskFilterRepresentation":138,"./model/TaskFilterRequestRepresentation":139,"./model/TaskQueryRequestRepresentation":140,"./model/TaskRepresentation":141,"./model/TaskUpdateRepresentation":142,"./model/TenantEvent":143,"./model/TenantRepresentation":144,"./model/UserAccountCredentialsRepresentation":145,"./model/UserActionRepresentation":146,"./model/UserFilterOrderRepresentation":147,"./model/UserProcessInstanceFilterRepresentation":148,"./model/UserRepresentation":149,"./model/UserTaskFilterRepresentation":150,"./model/ValidationErrorRepresentation":151,"./model/VariableScopeRepresentation":152}],71:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -31772,7 +32435,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],72:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -31827,7 +32490,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],73:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -31926,7 +32589,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],74:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -31990,7 +32653,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],75:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -32075,7 +32738,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./AppModelDefinition":79,"./PublishIdentityInfoRepresentation":129}],76:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -32146,7 +32809,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],77:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -32266,7 +32929,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],78:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -32372,7 +33035,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./AppDefinitionRepresentation":77}],79:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -32506,7 +33169,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],80:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -32762,7 +33425,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],81:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -32840,7 +33503,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],82:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -32939,7 +33602,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],83:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -33010,7 +33673,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],84:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -33074,7 +33737,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],85:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -33159,7 +33822,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./LightUserRepresentation":113}],86:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -33230,7 +33893,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],87:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -33343,7 +34006,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],88:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -33428,7 +34091,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],89:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -33513,7 +34176,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],90:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -33598,7 +34261,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],91:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -33697,7 +34360,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],92:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -33824,7 +34487,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./EndpointRequestHeaderRepresentation":93}],93:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -33895,7 +34558,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],94:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -33966,7 +34629,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],95:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -34051,7 +34714,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./EntityAttributeScopeRepresentation":94}],96:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -34213,7 +34876,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],97:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -34403,7 +35066,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./FormFieldRepresentation":98,"./FormJavascriptEventRepresentation":99,"./FormOutcomeRepresentation":100,"./FormTabRepresentation":104}],98:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -34670,7 +35333,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./ConditionRepresentation":87,"./LayoutRepresentation":109,"./OptionRepresentation":120}],99:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -34741,7 +35404,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],100:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -34812,7 +35475,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],101:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -34939,7 +35602,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./FormDefinitionRepresentation":97}],102:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -35038,7 +35701,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./FormRepresentation":101,"./ProcessScopeIdentifierRepresentation":126}],103:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -35137,7 +35800,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./FormFieldRepresentation":98,"./FormOutcomeRepresentation":100}],104:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -35215,7 +35878,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./ConditionRepresentation":87}],105:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -35286,7 +35949,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],106:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -35357,7 +36020,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],107:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -35498,7 +36161,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./GroupCapabilityRepresentation":106,"./GroupRepresentation":107,"./UserRepresentation":149}],108:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -35583,7 +36246,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],109:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -35661,7 +36324,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],110:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -35753,7 +36416,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],111:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -35845,7 +36508,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./LightGroupRepresentation":111}],112:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -35916,7 +36579,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],113:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -36015,7 +36678,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],114:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -36074,7 +36737,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],115:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -36133,7 +36796,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],116:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -36192,7 +36855,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],117:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -36251,7 +36914,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],118:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -36420,7 +37083,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],119:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -36475,7 +37138,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],120:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -36546,7 +37209,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],121:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -36651,7 +37314,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],122:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -36750,7 +37413,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],123:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -36842,7 +37505,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./ProcessInstanceFilterRepresentation":122}],124:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -37018,7 +37681,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./LightUserRepresentation":113,"./RestVariable":132}],125:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
@@ -37096,7 +37759,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],126:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -37167,7 +37830,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],127:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -37322,7 +37985,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./FormScopeRepresentation":103}],128:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -37393,7 +38056,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./ProcessScopeIdentifierRepresentation":126}],129:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -37471,7 +38134,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./LightGroupRepresentation":111,"./LightUserRepresentation":113}],130:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -37619,7 +38282,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./LightUserRepresentation":113}],131:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -37683,7 +38346,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],132:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -37775,7 +38438,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],133:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -37860,7 +38523,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./AbstractRepresentation":72}],134:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -37924,7 +38587,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./AppDefinitionRepresentation":77}],135:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -37988,7 +38651,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],136:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -38066,7 +38729,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],137:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -38130,7 +38793,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],138:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -38250,7 +38913,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],139:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -38351,7 +39014,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./TaskFilterRepresentation":138}],140:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
@@ -38450,7 +39113,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],141:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -38703,7 +39366,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./LightUserRepresentation":113}],142:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -38802,7 +39465,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],143:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -38908,7 +39571,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],144:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -39021,7 +39684,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],145:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -39092,7 +39755,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],146:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -39170,7 +39833,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],147:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -39241,7 +39904,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],148:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -39347,7 +40010,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./ProcessInstanceFilterRepresentation":122}],149:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -39544,7 +40207,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./GroupRepresentation":107,"./LightAppRepresentation":110}],150:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -39650,7 +40313,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./TaskFilterRepresentation":138}],151:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -39756,7 +40419,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],152:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -39862,7 +40525,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],153:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -39973,7 +40636,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"../model/Error":155,"../model/LoginRequest":157,"../model/LoginTicketEntry":158,"../model/ValidateTicketEntry":160}],154:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (factory) {
   if (typeof define === 'function' && define.amd) {
@@ -40072,7 +40735,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../alfrescoApiClient":290,"./api/AuthenticationApi":153,"./model/Error":155,"./model/ErrorError":156,"./model/LoginRequest":157,"./model/LoginTicketEntry":158,"./model/LoginTicketEntryEntry":159,"./model/ValidateTicketEntry":160,"./model/ValidateTicketEntryEntry":161}],155:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -40134,7 +40797,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./ErrorError":156}],156:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -40247,7 +40910,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],157:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -40317,7 +40980,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],158:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -40379,7 +41042,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./LoginTicketEntryEntry":159}],159:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -40449,7 +41112,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],160:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -40511,7 +41174,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290,"./ValidateTicketEntryEntry":161}],161:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -40574,7 +41237,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 (function (Buffer){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -41060,10 +41723,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":4,"fs":3,"superagent":23}],163:[function(require,module,exports){
+},{"buffer":4,"fs":3,"superagent":25}],163:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -41256,7 +41919,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"../model/AssocTargetBody":185,"../model/Error":203,"../model/NodeAssocPaging":217}],164:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -42617,7 +43280,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"../model/AssocChildBody":183,"../model/AssocTargetBody":185,"../model/CopyBody":195,"../model/DeletedNodeEntry":197,"../model/DeletedNodesPaging":200,"../model/EmailSharedLinkBody":202,"../model/Error":203,"../model/MoveBody":213,"../model/NodeAssocPaging":217,"../model/NodeBody":219,"../model/NodeBody1":220,"../model/NodeChildAssocPaging":223,"../model/NodeEntry":225,"../model/NodePaging":229,"../model/NodeSharedLinkEntry":232,"../model/NodeSharedLinkPaging":233,"../model/RenditionBody":256,"../model/RenditionEntry":257,"../model/RenditionPaging":258,"../model/SharedLinkBody":260,"../model/SiteBody":262,"../model/SiteEntry":266}],165:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -42979,7 +43642,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"../model/AssocChildBody":183,"../model/Error":203,"../model/MoveBody":213,"../model/NodeAssocPaging":217,"../model/NodeBody1":220,"../model/NodeChildAssocPaging":223,"../model/NodeEntry":225,"../model/NodePaging":229}],166:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -43177,7 +43840,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"../model/CommentBody":188,"../model/CommentBody1":189,"../model/CommentEntry":190,"../model/CommentPaging":191,"../model/Error":203}],167:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -43371,7 +44034,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"../model/Error":203,"../model/FavoriteBody":206,"../model/FavoriteEntry":207,"../model/FavoritePaging":208}],168:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -43448,7 +44111,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"../model/Error":203,"../model/PersonNetworkEntry":242}],169:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -43983,7 +44646,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"../model/CopyBody":195,"../model/DeletedNodeEntry":197,"../model/DeletedNodesPaging":200,"../model/Error":203,"../model/MoveBody":213,"../model/NodeBody":219,"../model/NodeBody1":220,"../model/NodeEntry":225,"../model/NodePaging":229}],170:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -44792,7 +45455,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"../model/ActivityPaging":181,"../model/Error":203,"../model/FavoriteBody":206,"../model/FavoriteEntry":207,"../model/FavoritePaging":208,"../model/FavoriteSiteBody":210,"../model/InlineResponse201":211,"../model/PersonEntry":240,"../model/PersonNetworkEntry":242,"../model/PersonNetworkPaging":243,"../model/PreferenceEntry":246,"../model/PreferencePaging":247,"../model/SiteEntry":266,"../model/SiteMembershipBody":272,"../model/SiteMembershipBody1":273,"../model/SiteMembershipRequestEntry":275,"../model/SiteMembershipRequestPaging":276,"../model/SitePaging":278}],171:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -44880,7 +45543,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"../model/Error":203,"../model/NodePaging":229}],172:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -45072,7 +45735,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"../model/Error":203,"../model/RatingBody":251,"../model/RatingEntry":252,"../model/RatingPaging":253}],173:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -45329,7 +45992,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"../model/Error":203,"../model/RenditionBody":256,"../model/RenditionEntry":257,"../model/RenditionPaging":258}],174:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -45570,7 +46233,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"../model/EmailSharedLinkBody":202,"../model/Error":203,"../model/NodeSharedLinkEntry":232,"../model/NodeSharedLinkPaging":233,"../model/SharedLinkBody":260}],175:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -46020,7 +46683,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"../model/Error":203,"../model/SiteBody":262,"../model/SiteContainerEntry":264,"../model/SiteContainerPaging":265,"../model/SiteEntry":266,"../model/SiteMemberBody":268,"../model/SiteMemberEntry":269,"../model/SiteMemberPaging":270,"../model/SiteMemberRoleBody":271,"../model/SitePaging":278}],176:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -46270,7 +46933,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"../model/Error":203,"../model/TagBody":281,"../model/TagBody1":282,"../model/TagEntry":283,"../model/TagPaging":284}],177:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (factory) {
   if (typeof define === 'function' && define.amd) {
@@ -46944,7 +47607,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"./ApiClient":162,"./api/AssociationsApi":163,"./api/ChangesApi":164,"./api/ChildAssociationsApi":165,"./api/CommentsApi":166,"./api/FavoritesApi":167,"./api/NetworksApi":168,"./api/NodesApi":169,"./api/PeopleApi":170,"./api/QueriesApi":171,"./api/RatingsApi":172,"./api/RenditionsApi":173,"./api/SharedlinksApi":174,"./api/SitesApi":175,"./api/TagsApi":176,"./model/Activity":178,"./model/ActivityActivitySummary":179,"./model/ActivityEntry":180,"./model/ActivityPaging":181,"./model/ActivityPagingList":182,"./model/AssocChildBody":183,"./model/AssocInfo":184,"./model/AssocTargetBody":185,"./model/ChildAssocInfo":186,"./model/Comment":187,"./model/CommentBody":188,"./model/CommentBody1":189,"./model/CommentEntry":190,"./model/CommentPaging":191,"./model/CommentPagingList":192,"./model/Company":193,"./model/ContentInfo":194,"./model/CopyBody":195,"./model/DeletedNode":196,"./model/DeletedNodeEntry":197,"./model/DeletedNodeMinimal":198,"./model/DeletedNodeMinimalEntry":199,"./model/DeletedNodesPaging":200,"./model/DeletedNodesPagingList":201,"./model/EmailSharedLinkBody":202,"./model/Error":203,"./model/ErrorError":204,"./model/Favorite":205,"./model/FavoriteBody":206,"./model/FavoriteEntry":207,"./model/FavoritePaging":208,"./model/FavoritePagingList":209,"./model/FavoriteSiteBody":210,"./model/InlineResponse201":211,"./model/InlineResponse201Entry":212,"./model/MoveBody":213,"./model/NetworkQuota":214,"./model/NodeAssocMinimal":215,"./model/NodeAssocMinimalEntry":216,"./model/NodeAssocPaging":217,"./model/NodeAssocPagingList":218,"./model/NodeBody":219,"./model/NodeBody1":220,"./model/NodeChildAssocMinimal":221,"./model/NodeChildAssocMinimalEntry":222,"./model/NodeChildAssocPaging":223,"./model/NodeChildAssocPagingList":224,"./model/NodeEntry":225,"./model/NodeFull":226,"./model/NodeMinimal":227,"./model/NodeMinimalEntry":228,"./model/NodePaging":229,"./model/NodePagingList":230,"./model/NodeSharedLink":231,"./model/NodeSharedLinkEntry":232,"./model/NodeSharedLinkPaging":233,"./model/NodeSharedLinkPagingList":234,"./model/NodesnodeIdchildrenContent":235,"./model/Pagination":236,"./model/PathElement":237,"./model/PathInfo":238,"./model/Person":239,"./model/PersonEntry":240,"./model/PersonNetwork":241,"./model/PersonNetworkEntry":242,"./model/PersonNetworkPaging":243,"./model/PersonNetworkPagingList":244,"./model/Preference":245,"./model/PreferenceEntry":246,"./model/PreferencePaging":247,"./model/PreferencePagingList":248,"./model/Rating":249,"./model/RatingAggregate":250,"./model/RatingBody":251,"./model/RatingEntry":252,"./model/RatingPaging":253,"./model/RatingPagingList":254,"./model/Rendition":255,"./model/RenditionBody":256,"./model/RenditionEntry":257,"./model/RenditionPaging":258,"./model/RenditionPagingList":259,"./model/SharedLinkBody":260,"./model/Site":261,"./model/SiteBody":262,"./model/SiteContainer":263,"./model/SiteContainerEntry":264,"./model/SiteContainerPaging":265,"./model/SiteEntry":266,"./model/SiteMember":267,"./model/SiteMemberBody":268,"./model/SiteMemberEntry":269,"./model/SiteMemberPaging":270,"./model/SiteMemberRoleBody":271,"./model/SiteMembershipBody":272,"./model/SiteMembershipBody1":273,"./model/SiteMembershipRequest":274,"./model/SiteMembershipRequestEntry":275,"./model/SiteMembershipRequestPaging":276,"./model/SiteMembershipRequestPagingList":277,"./model/SitePaging":278,"./model/SitePagingList":279,"./model/Tag":280,"./model/TagBody":281,"./model/TagBody1":282,"./model/TagEntry":283,"./model/TagPaging":284,"./model/TagPagingList":285,"./model/UserInfo":286}],178:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -47218,7 +47881,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./ActivityActivitySummary":179}],179:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -47313,7 +47976,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],180:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -47379,7 +48042,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./Activity":178}],181:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -47441,7 +48104,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./ActivityPagingList":182}],182:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -47517,7 +48180,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./ActivityEntry":180,"./Pagination":236}],183:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -47587,7 +48250,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],184:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -47649,7 +48312,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],185:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -47719,7 +48382,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],186:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -47789,7 +48452,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],187:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -47935,7 +48598,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./Person":239}],188:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -48001,7 +48664,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],189:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -48067,7 +48730,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],190:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -48133,7 +48796,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./Comment":187}],191:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -48195,7 +48858,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./CommentPagingList":192}],192:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -48271,7 +48934,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./CommentEntry":190,"./Pagination":236}],193:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -48389,7 +49052,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],194:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -48475,7 +49138,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],195:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -48545,7 +49208,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],196:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -48625,7 +49288,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./ContentInfo":194,"./NodeFull":226,"./UserInfo":286}],197:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -48687,7 +49350,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./DeletedNode":196}],198:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -48767,7 +49430,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./ContentInfo":194,"./NodeMinimal":227,"./PathElement":237,"./UserInfo":286}],199:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -48829,7 +49492,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./DeletedNodeMinimal":198}],200:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -48891,7 +49554,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./DeletedNodesPagingList":201}],201:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -48961,7 +49624,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./DeletedNodeMinimalEntry":199,"./Pagination":236}],202:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -49047,7 +49710,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],203:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -49109,7 +49772,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./ErrorError":204}],204:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -49222,7 +49885,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],205:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -49310,7 +49973,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],206:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -49376,7 +50039,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],207:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -49442,7 +50105,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./Favorite":205}],208:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -49504,7 +50167,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./FavoritePagingList":209}],209:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -49580,7 +50243,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./FavoriteEntry":207,"./Pagination":236}],210:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -49642,7 +50305,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],211:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -49704,7 +50367,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./InlineResponse201Entry":212}],212:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -49770,7 +50433,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],213:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -49840,7 +50503,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],214:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -49927,7 +50590,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],215:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -50077,7 +50740,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./AssocInfo":184,"./ContentInfo":194,"./UserInfo":286}],216:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -50143,7 +50806,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./NodeAssocMinimal":215}],217:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -50205,7 +50868,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./NodeAssocPagingList":218}],218:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -50275,7 +50938,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./NodeAssocMinimalEntry":216,"./Pagination":236}],219:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -50361,7 +51024,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],220:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -50463,7 +51126,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./NodesnodeIdchildrenContent":235}],221:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -50613,7 +51276,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./ChildAssocInfo":186,"./ContentInfo":194,"./UserInfo":286}],222:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -50679,7 +51342,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./NodeChildAssocMinimal":221}],223:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -50741,7 +51404,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./NodeChildAssocPagingList":224}],224:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -50811,7 +51474,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./NodeChildAssocMinimalEntry":222,"./Pagination":236}],225:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -50877,7 +51540,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./NodeFull":226}],226:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -51043,7 +51706,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./ContentInfo":194,"./UserInfo":286}],227:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -51196,7 +51859,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./ContentInfo":194,"./PathElement":237,"./UserInfo":286}],228:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -51262,7 +51925,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./NodeMinimal":227}],229:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -51324,7 +51987,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./NodePagingList":230}],230:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -51394,7 +52057,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./NodeMinimalEntry":228,"./Pagination":236}],231:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -51512,7 +52175,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./ContentInfo":194,"./UserInfo":286}],232:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -51578,7 +52241,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./NodeSharedLink":231}],233:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -51640,7 +52303,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./NodeSharedLinkPagingList":234}],234:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -51716,7 +52379,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./NodeSharedLinkEntry":232,"./Pagination":236}],235:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -51786,7 +52449,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],236:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -51896,7 +52559,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],237:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -51966,7 +52629,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],238:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -52044,7 +52707,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./PathElement":237}],239:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -52257,7 +52920,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./Company":193}],240:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -52323,7 +52986,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./Person":239}],241:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -52468,7 +53131,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./NetworkQuota":214}],242:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -52534,7 +53197,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./PersonNetwork":241}],243:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -52596,7 +53259,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./PersonNetworkPagingList":244}],244:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -52672,7 +53335,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./Pagination":236,"./PersonNetworkEntry":242}],245:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -52751,7 +53414,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],246:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -52817,7 +53480,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./Preference":245}],247:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -52879,7 +53542,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./PreferencePagingList":248}],248:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -52955,7 +53618,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./Pagination":236,"./PreferenceEntry":246}],249:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -53047,7 +53710,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./RatingAggregate":250}],250:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -53121,7 +53784,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],251:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -53219,7 +53882,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],252:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -53285,7 +53948,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./Rating":249}],253:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -53347,7 +54010,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./RatingPagingList":254}],254:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -53423,7 +54086,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./Pagination":236,"./RatingEntry":252}],255:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -53501,7 +54164,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./ContentInfo":194}],256:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -53563,7 +54226,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],257:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -53629,7 +54292,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./Rendition":255}],258:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -53691,7 +54354,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./RenditionPagingList":259}],259:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -53761,7 +54424,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./Pagination":236,"./RenditionEntry":257}],260:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -53823,7 +54486,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],261:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -53961,7 +54624,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],262:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -54080,7 +54743,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],263:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -54156,7 +54819,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],264:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -54222,7 +54885,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./SiteContainer":263}],265:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -54284,7 +54947,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./SitePagingList":279}],266:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -54350,7 +55013,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./Site":261}],267:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -54467,7 +55130,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./Person":239}],268:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -54568,7 +55231,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],269:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -54634,7 +55297,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./SiteMember":267}],270:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -54696,7 +55359,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./SitePagingList":279}],271:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -54789,7 +55452,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],272:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -54867,7 +55530,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],273:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -54929,7 +55592,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],274:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -55015,7 +55678,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./Site":261}],275:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -55081,7 +55744,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./SiteMembershipRequest":274}],276:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -55143,7 +55806,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./SiteMembershipRequestPagingList":277}],277:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -55219,7 +55882,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./Pagination":236,"./SiteMembershipRequestEntry":275}],278:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -55281,7 +55944,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./SitePagingList":279}],279:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -55347,7 +56010,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./Pagination":236}],280:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -55423,7 +56086,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],281:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -55489,7 +56152,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],282:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -55551,7 +56214,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],283:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -55617,7 +56280,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./Tag":280}],284:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -55679,7 +56342,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./TagPagingList":285}],285:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -55755,7 +56418,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162,"./Pagination":236,"./TagEntry":283}],286:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -55825,7 +56488,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../ApiClient":162}],287:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
@@ -56578,7 +57241,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 },{"../../../alfrescoApiClient":290}],288:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (factory) {
   if (typeof define === 'function' && define.amd) {
@@ -56644,7 +57307,6 @@ var AlfrescoApi = function () {
      *        disableCsrf:   // To disable CSRF Token to be submitted. Only for Activiti call, by default is false.
      *    };
      */
-
     function AlfrescoApi(config) {
         _classCallCheck(this, AlfrescoApi);
 
@@ -56990,7 +57652,7 @@ module.exports.Activiti = AlfrescoActivitiApi;
 module.exports.Core = AlfrescoCoreRestApi;
 module.exports.Auth = AlfrescoAuthRestApi;
 
-},{"./alfresco-activiti-rest-api/src/index":70,"./alfresco-auth-rest-api/src/index":154,"./alfresco-core-rest-api/src/index.js":177,"./alfresco-private-rest-api/src/index.js":288,"./alfrescoContent":291,"./alfrescoNode":292,"./alfrescoUpload":293,"./alfrescoWebScript":294,"./bpmAuth":295,"./bpmClient":296,"./ecmAuth":297,"./ecmClient":298,"./ecmPrivateClient":299,"event-emitter":19,"lodash":22}],290:[function(require,module,exports){
+},{"./alfresco-activiti-rest-api/src/index":70,"./alfresco-auth-rest-api/src/index":154,"./alfresco-core-rest-api/src/index.js":177,"./alfresco-private-rest-api/src/index.js":288,"./alfrescoContent":291,"./alfrescoNode":292,"./alfrescoUpload":293,"./alfrescoWebScript":294,"./bpmAuth":295,"./bpmClient":296,"./ecmAuth":297,"./ecmClient":298,"./ecmPrivateClient":299,"event-emitter":21,"lodash":23}],290:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -57012,11 +57674,10 @@ var AlfrescoApiClient = function (_ApiClient) {
     /**
      * @param {String} host
      * */
-
     function AlfrescoApiClient(host) {
         _classCallCheck(this, AlfrescoApiClient);
 
-        var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(AlfrescoApiClient).call(this));
+        var _this2 = _possibleConstructorReturn(this, (AlfrescoApiClient.__proto__ || Object.getPrototypeOf(AlfrescoApiClient)).call(this));
 
         _this2.host = host;
         Emitter.call(_this2);
@@ -57269,7 +57930,7 @@ var AlfrescoApiClient = function (_ApiClient) {
 Emitter(AlfrescoApiClient.prototype); // jshint ignore:line
 module.exports = AlfrescoApiClient;
 
-},{"./alfresco-core-rest-api/src/ApiClient":162,"event-emitter":19,"lodash":22,"superagent":23}],291:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/ApiClient":162,"event-emitter":21,"lodash":23,"superagent":25}],291:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -57281,7 +57942,6 @@ var AlfrescoContent = function () {
      * @param {EcmAuth} ecmAuth
      * @param {EcmClient} ecmClient
      */
-
     function AlfrescoContent(ecmAuth, ecmClient) {
         _classCallCheck(this, AlfrescoContent);
 
@@ -57358,7 +58018,7 @@ var AlfrescoNode = function (_AlfrescoCoreRestApi$) {
     function AlfrescoNode() {
         _classCallCheck(this, AlfrescoNode);
 
-        return _possibleConstructorReturn(this, Object.getPrototypeOf(AlfrescoNode).apply(this, arguments));
+        return _possibleConstructorReturn(this, (AlfrescoNode.__proto__ || Object.getPrototypeOf(AlfrescoNode)).apply(this, arguments));
     }
 
     _createClass(AlfrescoNode, [{
@@ -57451,7 +58111,7 @@ var AlfrescoNode = function (_AlfrescoCoreRestApi$) {
 
 module.exports = AlfrescoNode;
 
-},{"./alfresco-core-rest-api/src/index.js":177,"lodash":22}],293:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/index.js":177,"lodash":23}],293:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -57472,7 +58132,7 @@ var AlfrescoUpload = function (_AlfrescoCoreRestApi$) {
     function AlfrescoUpload() {
         _classCallCheck(this, AlfrescoUpload);
 
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AlfrescoUpload).call(this));
+        var _this = _possibleConstructorReturn(this, (AlfrescoUpload.__proto__ || Object.getPrototypeOf(AlfrescoUpload)).call(this));
 
         Emitter.call(_this);
         return _this;
@@ -57549,7 +58209,7 @@ var AlfrescoUpload = function (_AlfrescoCoreRestApi$) {
 Emitter(AlfrescoUpload.prototype); // jshint ignore:line
 module.exports = AlfrescoUpload;
 
-},{"./alfresco-core-rest-api/src/index.js":177,"event-emitter":19,"lodash":22}],294:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/index.js":177,"event-emitter":21,"lodash":23}],294:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -57634,11 +58294,10 @@ var BpmAuth = function (_AlfrescoApiClient) {
     /**
      * @param {Object} config
      */
-
     function BpmAuth(config) {
         _classCallCheck(this, BpmAuth);
 
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BpmAuth).call(this));
+        var _this = _possibleConstructorReturn(this, (BpmAuth.__proto__ || Object.getPrototypeOf(BpmAuth)).call(this));
 
         _this.config = config;
         _this.ticket = undefined;
@@ -57823,7 +58482,7 @@ Emitter(BpmAuth.prototype); // jshint ignore:line
 module.exports = BpmAuth;
 
 }).call(this,require("buffer").Buffer)
-},{"./alfrescoApiClient":290,"buffer":4,"event-emitter":19}],296:[function(require,module,exports){
+},{"./alfrescoApiClient":290,"buffer":4,"event-emitter":21}],296:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -57842,11 +58501,10 @@ var BpmClient = function (_AlfrescoApiClient) {
     /**
      * @param {String} host
      */
-
     function BpmClient(host) {
         _classCallCheck(this, BpmClient);
 
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BpmClient).call(this));
+        var _this = _possibleConstructorReturn(this, (BpmClient.__proto__ || Object.getPrototypeOf(BpmClient)).call(this));
 
         _this.host = host;
 
@@ -57906,11 +58564,10 @@ var EcmAuth = function (_AlfrescoApiClient) {
     /**
      * @param {Object} config
      */
-
     function EcmAuth(config) {
         _classCallCheck(this, EcmAuth);
 
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(EcmAuth).call(this));
+        var _this = _possibleConstructorReturn(this, (EcmAuth.__proto__ || Object.getPrototypeOf(EcmAuth)).call(this));
 
         _this.config = config;
 
@@ -58093,7 +58750,7 @@ var EcmAuth = function (_AlfrescoApiClient) {
 Emitter(EcmAuth.prototype); // jshint ignore:line
 module.exports = EcmAuth;
 
-},{"./alfresco-auth-rest-api/src/index":154,"./alfrescoApiClient":290,"event-emitter":19}],298:[function(require,module,exports){
+},{"./alfresco-auth-rest-api/src/index":154,"./alfrescoApiClient":290,"event-emitter":21}],298:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -58113,11 +58770,10 @@ var EcmClient = function (_AlfrescoApiClient) {
      * @param {String} host
      * @param {String} contextRoot
      */
-
     function EcmClient(host, contextRoot) {
         _classCallCheck(this, EcmClient);
 
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(EcmClient).call(this));
+        var _this = _possibleConstructorReturn(this, (EcmClient.__proto__ || Object.getPrototypeOf(EcmClient)).call(this));
 
         _this.host = host;
         _this.contextRoot = contextRoot;
@@ -58177,11 +58833,10 @@ var EcmClient = function (_AlfrescoApiClient) {
      * @param {String} host
      * @param {String} contextRoot
      */
-
     function EcmClient(host, contextRoot) {
         _classCallCheck(this, EcmClient);
 
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(EcmClient).call(this));
+        var _this = _possibleConstructorReturn(this, (EcmClient.__proto__ || Object.getPrototypeOf(EcmClient)).call(this));
 
         _this.host = host;
         _this.contextRoot = contextRoot;
