@@ -6,11 +6,20 @@ Alfresco JS API
 
 _This project provides a JavaScript client API into the v1 Alfresco REST API_
 
+<a name="0.5.2"></a>
+# [0.5.2](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.5.2) (05-12-2016)
+
+## fix
+- [ProcessInstanceVariablesApi doesn't work in webpack  #111](https://github.com/Alfresco/alfresco-js-api/issues/111)
+
+## Features
+- [Add a test for webpack build #112](https://github.com/Alfresco/alfresco-js-api/issues/112)
+
 <a name="0.5.1"></a>
 # [0.5.1](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.5.1) (05-12-2016)
 
 ## Features
-- [Add the ecm-model service methods of the form component inside the js api  #102](https://github.com/Alfresco/alfresco-js-api/issues/73)
+- [Add the ecm-model service methods of the form component inside the js api  #73](https://github.com/Alfresco/alfresco-js-api/issues/73)
 - [Add ProcessInstanceVariables service in activiti #109](https://github.com/Alfresco/alfresco-js-api/issues/109)
 
 <a name="0.5.0"></a>
