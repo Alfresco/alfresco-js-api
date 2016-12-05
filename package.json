@@ -6,7 +6,8 @@
   "typings": "index.d.ts",
   "scripts": {
     "clean": "rimraf dist/bundle.js node_modules",
-    "build": "grunt && npm run tslint && npm run test && npm run bundle && npm run minify && npm run toc",
+    "build": "grunt && npm run tslint && npm run test && npm run bundle && npm run minify && npm run toc && npm run webpack-test",
+    "webpack-test" : "webpack main.js webpack-bundle-test.js",
     "test": "grunt test",
     "coverage": "grunt coverage",
     "generate": "mvn clean generate-sources",
@@ -54,7 +55,8 @@
     "sinon-chai": "^2.8.0",
     "tslint": "^3.8.1",
     "typescript": "^1.8.10",
-    "watchify": "^3.7.0"
+    "watchify": "^3.7.0",
+    "webpack": "^1.13.0"
   },
   "license": "Apache-2.0",
   "contributors": [
