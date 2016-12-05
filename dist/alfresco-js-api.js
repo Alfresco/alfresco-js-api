@@ -27186,7 +27186,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = RestVariable;
 
-      return this.apiClient.callApi('/enterprise/process-instances/{processInstanceId}/variables/{variableName}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}/variables/{variableName}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
@@ -27221,7 +27221,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = RestVariable;
 
-      return this.apiClient.callApi('/enterprise/process-instances/{processInstanceId}/variables/{variableName}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}/variables/{variableName}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
 
     /**
@@ -27255,7 +27255,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var accepts = ['application/json'];
       var returnType = null;
 
-      return this.apiClient.callApi('/enterprise/process-instances/{processInstanceId}/variables/{variableName}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+      return this.apiClient.callApi('/api/enterprise/process-instances/{processInstanceId}/variables/{variableName}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
   };
 
