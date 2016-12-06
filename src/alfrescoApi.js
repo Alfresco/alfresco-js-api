@@ -50,9 +50,9 @@ class AlfrescoApi {
         this.bpmAuth = new BpmAuth(this.config);
         this.ecmAuth = new EcmAuth(this.config);
 
-        this.ecmPrivateClient = new EcmPrivateClient(this.config.hostEcm, this.config.contextRoot);
-        this.ecmClient = new EcmClient(this.config.hostEcm, this.config.contextRoot);
-        this.bpmClient = new BpmClient(this.config.hostBpm);
+        this.ecmPrivateClient = new EcmPrivateClient(this.config.hostEcm, this.config.contextRoot, this.config);
+        this.ecmClient = new EcmClient(this.config.hostEcm, this.config.contextRoot, this.config);
+        this.bpmClient = new BpmClient(this.config.hostBpm, this.config);
         this.setAuthenticationClientECMBPM(this.ecmAuth.getAuthentication(), this.bpmAuth.getAuthentication());
 
         this.initObjects();

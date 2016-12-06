@@ -9,7 +9,6 @@ declare namespace AlfrescoApi {
         Activiti: Activiti;
         Auth: Auth;
         Core: Core;
-        Mock: Mock;
 
         bpmAuth: BpmAuthApi;
         ecmAuth: EcmAuthApi;
@@ -23,9 +22,9 @@ declare namespace AlfrescoApi {
         upload: any;
         webScript: any;
 
-        changeEcmHost(ecmHost: string);
-        changeBpmHost(bpmHost: string);
-        changeCsrfConfig(disableCsrf: boolean);
+        changeEcmHost(ecmHost: string): void;
+        changeBpmHost(bpmHost: string): void;
+        changeCsrfConfig(disableCsrf: boolean): void;
 
         getNodeInfo(nodeId: string): Promise<MinimalNodeEntryEntity>;
         deleteNode(nodeId: string): any;
@@ -186,124 +185,6 @@ declare namespace AlfrescoApi {
     export interface Auth {
     }
 
-    export interface AuthMock {
-        new(host: string, username: string, password: string): AuthMock;
-        get201Response(forceTicket: string);
-        get403Response();
-        get400Response();
-        get401Response();
-        get204ResponseLogout();
-        get404ResponseLogout();
-        rec();
-        play();
-        clearAll();
-    }
-
-    export interface NodeMock {
-        new(host: string): NodeMock;
-        get200ResponseChildren();
-        get200ResponseSingleFileFolder();
-        get404ChildrenNotExist();
-        get404FileFolderNotExist();
-        get204SuccessfullyDeleted();
-        get403DeletePermissionDenied();
-        get404DeleteNotFound();
-        get404DeletePermanentlyNotFound() ;
-        get200CreationFolder();
-        get409CreationFolderNewNameClashes();
-        get201CreationFolderNewNameNotClashes();
-        rec();
-        play();
-        clearAll();
-    }
-
-    export interface UploadMock {
-        new(host: string): UploadMock;
-        get201CreationFile();
-        get201CreationFileAutoRename();
-        get409CreationFileNewNameClashes();
-        get401Response();
-        rec();
-        play();
-        clearAll();
-    }
-
-    export interface WebScriptMock {
-        new(host: string): WebScriptMock;
-        get200Response();
-        get400Response();
-        rec();
-        play();
-        clearAll();
-    }
-
-    export interface TagMock {
-        new(host: string): TagMock;
-        get200Response();
-        get401Response();
-        rec();
-        play();
-        clearAll();
-    }
-
-    export interface RenditionMock {
-        new(host: string): RenditionMock;
-        get200RenditionList();
-        createRendition200();
-        get200RenditionResponse();
-        rec();
-        play();
-        clearAll();
-    }
-
-    export interface ModelsMock {
-        new(host: string): ModelsMock;
-        get200Response();
-        rec();
-        play();
-        clearAll();
-    }
-
-    export interface Mock {
-        Auth: AuthMock;
-        Node: NodeMock;
-        Upload: UploadMock;
-        WebScript: WebScriptMock;
-        ActivitiMock: ActivitiMock;
-        Tag: TagMock;
-        Models: ModelsMock;
-        UserFilters: UserFiltersMock;
-        Rendition: RenditionMock;
-    }
-
-    export interface ActivitiMock {
-        Auth: ActivitiAuthMock;
-        Process: ProcessMock;
-        Tasks: TasksMock;
-    }
-
-    export interface UserFiltersMock {
-        new(host: string, username: string, password: string): UserFiltersMock;
-        get200getUserTaskFilters();
-    }
-
-    export interface ActivitiAuthMock {
-        new(host: string, username: string, password: string): ActivitiAuthMock;
-        get200Response();
-        get200ResponseLogout();
-        get401Response();
-    }
-
-    export interface ProcessMock {
-        new(host: string): ProcessMock;
-        get200Response();
-    }
-
-    export interface TasksMock {
-        new(host: string): TasksMock;
-        get200Response();
-    }
-
     export interface NodesApi {
         new(client: ApiClient): NodesApi;
         getNodeInfo(nodeId: string): Promise<MinimalNodeEntryEntity>;
@@ -315,7 +196,7 @@ declare namespace AlfrescoApi {
         purgeDeletedNode(nodeId: string): Promise<any>;
         getDeletedNode(nodeId: string, opts: any): Promise<DeletedNodeEntity>;
         restoreNode(nodeId: string): Promise<MinimalNodeEntity>;
-        addNode(nodeId: string, nodeBody: any, opts: any);
+        addNode(nodeId: string, nodeBody: any, opts: any): any;
     }
 
     export interface ApiClient {
@@ -596,7 +477,7 @@ declare namespace AlfrescoApi {
     }
 
     export interface ContentApi {
-        new(ecmAuth: any);
+        new(ecmAuth: any): ContentApi;
 
         getDocumentThumbnailUrl(documentId: string): string;
         getDocumentPreviewUrl(documentId: string): string;
@@ -606,10 +487,10 @@ declare namespace AlfrescoApi {
     export interface AuthApi {
         new(config: AlfrescoApiConfig): AuthApi;
 
-        changeHost(host: string);
+        changeHost(host: string): void;
         login(username: string, password: string): Promise<string>;
         logout(): Promise<string>;
-        setTicket(ticket: string);
+        setTicket(ticket: string): void;
         getTicket(): string;
         isLoggedIn(): boolean;
 

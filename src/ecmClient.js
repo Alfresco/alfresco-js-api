@@ -7,11 +7,13 @@ class EcmClient extends AlfrescoApiClient {
     /**
      * @param {String} host
      * @param {String} contextRoot
+     * @param {Object} config
      */
-    constructor(host, contextRoot) {
+    constructor(host, contextRoot, config) {
         super();
 
         this.host = host;
+        this.config = config;
         this.contextRoot = contextRoot;
 
         this.changeHost(host);
