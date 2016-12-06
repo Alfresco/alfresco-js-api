@@ -6,6 +6,11 @@ Alfresco JS API
 
 _This project provides a JavaScript client API into the v1 Alfresco REST API_
 
+<a name="0.5.3"></a>
+# [0.5.3](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.5.3) (06-12-2016)
+## fix
+- [CSRF Token fix for activiti  #116](https://github.com/Alfresco/alfresco-js-api/issues/116)
+
 <a name="0.5.2"></a>
 # [0.5.2](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.5.2) (05-12-2016)
 
