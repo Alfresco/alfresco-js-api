@@ -6,11 +6,13 @@ class BpmClient extends AlfrescoApiClient {
 
     /**
      * @param {String} host
+     * @param {Object} config
      */
-    constructor(host) {
+    constructor(host, config) {
         super();
 
         this.host = host;
+        this.config = config;
 
         this.changeHost(host);
     }
