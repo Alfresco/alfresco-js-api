@@ -5,3 +5,10 @@ target
 /coverage
 /node_modules
 /alfresco-core-rest-api.iml
+*.
+*.iml
+/.idea
+*.tgz
+*.DS_Store
+/package/
+/scripts/
