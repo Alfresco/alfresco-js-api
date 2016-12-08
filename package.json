@@ -11,7 +11,7 @@
     "test": "grunt test",
     "coverage": "grunt coverage",
     "generate": "mvn clean generate-sources",
-    "bundle": "browserify -s AlfrescoApi main.js -o dist/alfresco-js-api.js -t [ babelify --sourceMapsAbsolute --presets es2015 ] ",
+    "bundle": "browserify -s AlfrescoApi main.js -o dist/alfresco-js-api.js -t [ babelify --sourceMapsAbsolute --presets es2015-loose] ",
     "minify": "browserify -s AlfrescoApi dist/alfresco-js-api.js -d -p [minifyify --no-map] > dist/alfresco-js-api.min.js",
     "watchify": "watchify -s AlfrescoApi main.js -o dist/alfresco-js-api.js",
     "tslint": "tslint -c tslint.json index.d.ts",
@@ -31,7 +31,8 @@
     "nock": "8.1.0"
   },
   "devDependencies": {
-    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-es2015-loose": "^8.0.0",
     "babelify": "^7.3.0",
     "browserify": "^13.0.1",
     "chai": "^3.5.0",
@@ -46,8 +47,8 @@
     "grunt-mocha-test": "^0.12.7",
     "grunt-open": "^0.2.3",
     "load-grunt-tasks": "^3.4.1",
-    "minifyify": "^7.3.3",
     "markdown-toc": "^0.12.14",
+    "minifyify": "^7.3.3",
     "mocha": "^2.4.5",
     "mocha-lcov-reporter": "^1.2.0",
     "rimraf": "^2.5.2",
