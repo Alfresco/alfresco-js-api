@@ -6,6 +6,11 @@ Alfresco JS API
 
 _This project provides a JavaScript client API into the v1 Alfresco REST API_
 
+<a name="0.5.5"></a>
+# [0.5.5](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.5.5) (09-12-2016)
+## fix
+- [Added bable plugin for IE10  #121](https://github.com/Alfresco/alfresco-js-api/pull/122)
+
 <a name="0.5.3"></a>
 # [0.5.3](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.5.3) (06-12-2016)
 ## fix
