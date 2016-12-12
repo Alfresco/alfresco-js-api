@@ -1,18 +1,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../../../alfrescoApiClient', '../model/ReportQuery'], factory);
+    define(['../../../alfrescoApiClient', '../model/ReportCharts', '../model/ParameterValueRepresentation', '../model/ReportParametersDefinition'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ReportQuery'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ReportCharts'), require('../model/ParameterValueRepresentation'), require('../model/ReportParametersDefinition'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
       root.ActivitiPublicRestApi = {};
     }
-    root.ActivitiPublicRestApi.ReportApi = factory(root.ActivitiPublicRestApi.ApiClient, root.ActivitiPublicRestApi.ReportQuery);
+    root.ActivitiPublicRestApi.ReportApi = factory(root.ActivitiPublicRestApi.ApiClient, root.ActivitiPublicRestApi.ReportCharts, root.ActivitiPublicRestApi.ParameterValueRepresentation, root.ActivitiPublicRestApi.ReportParametersDefinition);
   }
-}(this, function(ApiClient, ReportQuery) {
+}(this, function(ApiClient, ReportCharts, ParameterValueRepresentation, ReportParametersDefinition) {
   'use strict';
 
   /**
@@ -112,39 +112,10 @@
       var authNames = [];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
-      var returnType = Object;
+      var returnType = ReportCharts;
 
       return this.apiClient.callApi(
           '/app/rest/reporting/report-params/{reportId}', 'POST',
-          pathParams, queryParams, headerParams, formParams, postBody,
-          authNames, contentTypes, accepts, returnType
-      );
-    }
-
-    this.getProcessDefinitionsValues = function(appId) {
-      var postBody = null;
-
-      if (appId == undefined || appId == null) {
-        throw "Missing the required parameter 'appId' when calling getProcessDefinitionsValues";
-      }
-
-      var pathParams = {
-      };
-      var queryParams = {
-        'appId': appId
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
-
-      var authNames = [];
-      var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
-      var returnType = Object;
-
-      return this.apiClient.callApi(
-          '/app/rest/process-definitions', 'GET',
           pathParams, queryParams, headerParams, formParams, postBody,
           authNames, contentTypes, accepts, returnType
       );
@@ -165,7 +136,7 @@
       var authNames = [];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
-      var returnType = Object;
+      var returnType = [ParameterValueRepresentation];
 
       return this.apiClient.callApi(
           '/app/rest/reporting/process-definitions', 'GET',
@@ -194,7 +165,7 @@
       var authNames = [];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
-      var returnType = Object;
+      var returnType = ReportParametersDefinition;
 
       return this.apiClient.callApi(
           '/app/rest/reporting/report-params/{reportId}', 'GET',
@@ -218,7 +189,7 @@
       var authNames = [];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
-      var returnType = Object;
+      var returnType = [ReportParametersDefinition];
 
       return this.apiClient.callApi(
           '/app/rest/reporting/reports', 'GET',

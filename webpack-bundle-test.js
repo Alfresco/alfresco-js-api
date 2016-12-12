@@ -60,16 +60,16 @@
 	var AlfrescoPrivateRestApi = __webpack_require__(135);
 	var AlfrescoAuthRestApi = __webpack_require__(155);
 	var AlfrescoActivitiApi = __webpack_require__(164);
-	var AlfrescoContent = __webpack_require__(293);
-	var AlfrescoNode = __webpack_require__(294);
-	var AlfrescoUpload = __webpack_require__(295);
-	var AlfrescoWebScriptApi = __webpack_require__(296);
+	var AlfrescoContent = __webpack_require__(296);
+	var AlfrescoNode = __webpack_require__(297);
+	var AlfrescoUpload = __webpack_require__(298);
+	var AlfrescoWebScriptApi = __webpack_require__(299);
 	var Emitter = __webpack_require__(137);
-	var EcmAuth = __webpack_require__(297);
-	var BpmAuth = __webpack_require__(298);
-	var EcmClient = __webpack_require__(299);
-	var BpmClient = __webpack_require__(300);
-	var EcmPrivateClient = __webpack_require__(301);
+	var EcmAuth = __webpack_require__(300);
+	var BpmAuth = __webpack_require__(301);
+	var EcmClient = __webpack_require__(302);
+	var BpmClient = __webpack_require__(303);
+	var EcmPrivateClient = __webpack_require__(304);
 	var _ = __webpack_require__(152);
 
 	class AlfrescoApi {
@@ -63024,18 +63024,18 @@
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(root, factory) {
 	  if (true) {
 	    // AMD. Register as an anonymous module.
-	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(136), __webpack_require__(292)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(136), __webpack_require__(292), __webpack_require__(294), __webpack_require__(295)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	  } else if (typeof module === 'object' && module.exports) {
 	    // CommonJS-like environments that support module.exports, like Node.
-	    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ReportQuery'));
+	    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ReportCharts'), require('../model/ParameterValueRepresentation'), require('../model/ReportParametersDefinition'));
 	  } else {
 	    // Browser globals (root is window)
 	    if (!root.ActivitiPublicRestApi) {
 	      root.ActivitiPublicRestApi = {};
 	    }
-	    root.ActivitiPublicRestApi.ReportApi = factory(root.ActivitiPublicRestApi.ApiClient, root.ActivitiPublicRestApi.ReportQuery);
+	    root.ActivitiPublicRestApi.ReportApi = factory(root.ActivitiPublicRestApi.ApiClient, root.ActivitiPublicRestApi.ReportCharts, root.ActivitiPublicRestApi.ParameterValueRepresentation, root.ActivitiPublicRestApi.ReportParametersDefinition);
 	  }
-	}(this, function(ApiClient, ReportQuery) {
+	}(this, function(ApiClient, ReportCharts, ParameterValueRepresentation, ReportParametersDefinition) {
 	  'use strict';
 
 	  /**
@@ -63084,16 +63084,13 @@
 	    this.getTasksByProcessDefinitionId = function(reportId, processDefinitionId) {
 	      var postBody = null;
 
-	      // verify the required parameter 'taskId' is set
 	      if (reportId == undefined || reportId == null) {
 	        throw "Missing the required parameter 'reportId' when calling getTasksByProcessDefinitionId";
 	      }
 
-	      // verify the required parameter 'taskId' is set
 	      if (processDefinitionId == undefined || processDefinitionId == null) {
 	        throw "Missing the required parameter 'processDefinitionId' when calling getTasksByProcessDefinitionId";
 	      }
-
 
 	      var pathParams = {
 	        'reportId': reportId
@@ -63109,7 +63106,7 @@
 	      var authNames = [];
 	      var contentTypes = ['application/json'];
 	      var accepts = ['application/json'];
-	      var returnType = [];
+	      var returnType = ['String'];
 
 	      return this.apiClient.callApi(
 	          '/app/rest/reporting/report-params/{reportId}/tasks', 'GET',
@@ -63121,7 +63118,6 @@
 	    this.getReportsByParams = function(reportId, paramsQuery) {
 	      var postBody = paramsQuery;
 
-	      // verify the required parameter 'taskId' is set
 	      if (reportId == undefined || reportId == null) {
 	        throw "Missing the required parameter 'reportId' when calling getReportsByParams";
 	      }
@@ -63139,39 +63135,10 @@
 	      var authNames = [];
 	      var contentTypes = ['application/json'];
 	      var accepts = ['application/json'];
-	      var returnType = Object;
+	      var returnType = ReportCharts;
 
 	      return this.apiClient.callApi(
 	          '/app/rest/reporting/report-params/{reportId}', 'POST',
-	          pathParams, queryParams, headerParams, formParams, postBody,
-	          authNames, contentTypes, accepts, returnType
-	      );
-	    }
-
-	    this.getProcessDefinitionsValues = function(appId) {
-	      var postBody = null;
-
-	      if (appId == undefined || appId == null) {
-	        throw "Missing the required parameter 'appId' when calling getProcessDefinitionsValues";
-	      }
-
-	      var pathParams = {
-	      };
-	      var queryParams = {
-	        'appId': appId
-	      };
-	      var headerParams = {
-	      };
-	      var formParams = {
-	      };
-
-	      var authNames = [];
-	      var contentTypes = ['application/json'];
-	      var accepts = ['application/json'];
-	      var returnType = Object;
-
-	      return this.apiClient.callApi(
-	          '/app/rest/process-definitions', 'GET',
 	          pathParams, queryParams, headerParams, formParams, postBody,
 	          authNames, contentTypes, accepts, returnType
 	      );
@@ -63192,7 +63159,7 @@
 	      var authNames = [];
 	      var contentTypes = ['application/json'];
 	      var accepts = ['application/json'];
-	      var returnType = Object;
+	      var returnType = [ParameterValueRepresentation];
 
 	      return this.apiClient.callApi(
 	          '/app/rest/reporting/process-definitions', 'GET',
@@ -63221,7 +63188,7 @@
 	      var authNames = [];
 	      var contentTypes = ['application/json'];
 	      var accepts = ['application/json'];
-	      var returnType = Object;
+	      var returnType = ReportParametersDefinition;
 
 	      return this.apiClient.callApi(
 	          '/app/rest/reporting/report-params/{reportId}', 'GET',
@@ -63245,7 +63212,7 @@
 	      var authNames = [];
 	      var contentTypes = ['application/json'];
 	      var accepts = ['application/json'];
-	      var returnType = Object;
+	      var returnType = [ReportParametersDefinition];
 
 	      return this.apiClient.callApi(
 	          '/app/rest/reporting/reports', 'GET',
@@ -63267,29 +63234,29 @@
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(root, factory) {
 	  if (true) {
 	    // AMD. Register as an anonymous module.
-	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(136)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(136), __webpack_require__(293)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	  } else if (typeof module === 'object' && module.exports) {
 	    // CommonJS-like environments that support module.exports, like Node.
-	    module.exports = factory(require('../../../alfrescoApiClient'));
+	    module.exports = factory(require('../../../alfrescoApiClient'), require('./Chart'));
 	  } else {
 	    // Browser globals (root is window)
 	    if (!root.ActivitiPublicRestApi) {
 	      root.ActivitiPublicRestApi = {};
 	    }
-	    root.ActivitiPublicRestApi.ReportQuery = factory(root.ActivitiPublicRestApi.ApiClient);
+	    root.ActivitiPublicRestApi.ReportCharts = factory(root.ActivitiPublicRestApi.ApiClient, root.ActivitiPublicRestApi.Chart);
 	  }
-	}(this, function(ApiClient) {
+	}(this, function(ApiClient, Chart) {
 	  'use strict';
 
 	  /**
-	   * The ReportQuery model module.
-	   * @module model/ReportQuery
+	   * The ReportCharts model module.
+	   * @module model/ReportCharts
 	   * @version 1.4.0
 	   */
 
 	  /**
-	   * Constructs a new <code>ReportQuery</code>.
-	   * @alias module:model/ReportQuery
+	   * Constructs a new <code>ReportCharts</code>.
+	   * @alias module:model/ReportCharts
 	   * @class
 	   */
 	  var exports = function() {
@@ -63300,32 +63267,25 @@
 	  };
 
 	  /**
-	   * Constructs a <code>ReportQuery</code> from a plain JavaScript object, optionally creating a new instance.
+	   * Constructs a <code>ReportCharts</code> from a plain JavaScript object, optionally creating a new instance.
 	   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
-	   * @return {module:model/ParametersValueDefinition} The populated <code>ParametersValueDefinition</code> instance.
+	   * @return {module:model/ReportCharts} The populated <code>ReportCharts</code> instance.
 	   */
 	  exports.constructFromObject = function(data, obj) {
 	    if (data) {
 	      obj = data || new exports();
 
-	      if (data.hasOwnProperty('processDefinitionId')) {
-	        obj['processDefinitionId'] = ApiClient.convertToType(data['processDefinitionId'], 'String');
-	      }
-	      if (data.hasOwnProperty('status')) {
-	        obj['status'] = ApiClient.convertToType(data['status'], 'String');
+	      if (data.hasOwnProperty('elements')) {
+	        obj['elements'] = ApiClient.convertToType(data['elements'], [Chart]);
 	      }
 	    }
 	    return obj;
 	  }
 
 	  /**
-	   * @member {String} processDefinitionId
+	   * @member {String} elements
 	   */
-	  exports.prototype['processDefinitionId'] = undefined;
-	  /**
-	   * @member {String} status
-	   */
-	  exports.prototype['status'] = undefined;
+	  exports.prototype['elements'] = undefined;
 
 	  return exports;
 	}));
@@ -63335,6 +63295,259 @@
 
 /***/ },
 /* 293 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(root, factory) {
+	  if (true) {
+	    // AMD. Register as an anonymous module.
+	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(136)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	  } else if (typeof module === 'object' && module.exports) {
+	    // CommonJS-like environments that support module.exports, like Node.
+	    module.exports = factory(require('../../../alfrescoApiClient'));
+	  } else {
+	    // Browser globals (root is window)
+	    if (!root.ActivitiPublicRestApi) {
+	      root.ActivitiPublicRestApi = {};
+	    }
+	    root.ActivitiPublicRestApi.Chart = factory(root.ActivitiPublicRestApi.ApiClient);
+	  }
+	}(this, function(ApiClient) {
+	  'use strict';
+
+	  /**
+	   * The ReportQuery model module.
+	   * @module model/Chart
+	   * @version 1.4.0
+	   */
+
+	  /**
+	   * Constructs a new <code>Chart</code>.
+	   * @alias module:model/Chart
+	   * @class
+	   */
+	  var exports = function() {
+	    var _this = this;
+
+
+
+	  };
+
+	  /**
+	   * Constructs a <code>ReportCharts</code> from a plain JavaScript object, optionally creating a new instance.
+	   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+	   * @return {module:model/ReportCharts} The populated <code>ReportCharts</code> instance.
+	   */
+	  exports.constructFromObject = function(data, obj) {
+	    if (data) {
+	      obj = data || new exports();
+
+	      if (data.hasOwnProperty('id')) {
+	        obj['id'] = ApiClient.convertToType(data['id'], 'String');
+	      }
+	      if (data.hasOwnProperty('type')) {
+	        obj['type'] = ApiClient.convertToType(data['type'], 'String');
+	      }
+	    }
+	    return obj;
+	  }
+
+	  /**
+	   * @member {String} processDefinitionId
+	   */
+	  exports.prototype['id'] = undefined;
+	  /**
+	   * @member {String} status
+	   */
+	  exports.prototype['type'] = undefined;
+
+	  return exports;
+	}));
+
+
+
+
+/***/ },
+/* 294 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(root, factory) {
+	  if (true) {
+	    // AMD. Register as an anonymous module.
+	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(136)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	  } else if (typeof module === 'object' && module.exports) {
+	    // CommonJS-like environments that support module.exports, like Node.
+	    module.exports = factory(require('../../../alfrescoApiClient'));
+	  } else {
+	    // Browser globals (root is window)
+	    if (!root.ActivitiPublicRestApi) {
+	      root.ActivitiPublicRestApi = {};
+	    }
+	    root.ActivitiPublicRestApi.ParameterValueRepresentation = factory(root.ActivitiPublicRestApi.ApiClient);
+	  }
+	}(this, function(ApiClient) {
+	  'use strict';
+
+
+
+
+	  /**
+	   * The ParameterValueRepresentation model module.
+	   * @module model/ParameterValueRepresentation
+	   * @version 1.4.0
+	   */
+
+	  /**
+	   * Constructs a new <code>ParameterValueRepresentation</code>.
+	   * @alias module:model/ParameterValueRepresentation
+	   * @class
+	   */
+	  var exports = function() {
+	    var _this = this;
+
+	  };
+
+	  /**
+	   * Constructs a <code>ParameterValueRepresentation</code> from a plain JavaScript object, optionally creating a new instance.
+	   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+	   * @param {Object} data The plain JavaScript object bearing properties of interest.
+	   * @param {module:model/ParameterValueRepresentation} obj Optional instance to populate.
+	   * @return {module:model/ParameterValueRepresentation} The populated <code>ParameterValueRepresentation</code> instance.
+	   */
+	  exports.constructFromObject = function(data, obj) {
+	    if (data) {
+	      obj = data || new exports();
+
+	      if (data.hasOwnProperty('id')) {
+	        obj['id'] = ApiClient.convertToType(data['id'], 'String');
+	      }
+	      if (data.hasOwnProperty('name')) {
+	        obj['name'] = ApiClient.convertToType(data['name'], 'String');
+	      }
+	      if (data.hasOwnProperty('version')) {
+	        obj['version'] = ApiClient.convertToType(data['version'], 'String');
+	      }
+	      if (data.hasOwnProperty('value')) {
+	        obj['value'] = ApiClient.convertToType(data['value'], 'String');
+	      }
+	    }
+	    return obj;
+	  }
+
+	  /**
+	   * @member {String} id
+	   */
+	  exports.prototype['id'] = undefined;
+	  /**
+	   * @member {String} name
+	   */
+	  exports.prototype['name'] = undefined;
+	  /**
+	   * @member {String} version
+	   */
+	  exports.prototype['version'] = undefined;
+	  /**
+	   * @member {String} value
+	   */
+	  exports.prototype['value'] = undefined;
+
+	  return exports;
+	}));
+
+
+
+
+/***/ },
+/* 295 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(root, factory) {
+	  if (true) {
+	    // AMD. Register as an anonymous module.
+	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(136)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	  } else if (typeof module === 'object' && module.exports) {
+	    // CommonJS-like environments that support module.exports, like Node.
+	    module.exports = factory(require('../../../alfrescoApiClient'));
+	  } else {
+	    // Browser globals (root is window)
+	    if (!root.ActivitiPublicRestApi) {
+	      root.ActivitiPublicRestApi = {};
+	    }
+	    root.ActivitiPublicRestApi.ReportParametersDefinition = factory(root.ActivitiPublicRestApi.ApiClient);
+	  }
+	}(this, function(ApiClient) {
+	  'use strict';
+
+
+
+
+	  /**
+	   * The ReportParametersDefinition model module.
+	   * @module model/ReportParametersDefinition
+	   * @version 1.4.0
+	   */
+
+	  /**
+	   * Constructs a new <code>ReportParametersDefinition</code>.
+	   * @alias module:model/ReportParametersDefinition
+	   * @class
+	   */
+	  var exports = function() {
+	    var _this = this;
+
+	  };
+
+	  /**
+	   * Constructs a <code>ReportParametersDefinition</code> from a plain JavaScript object, optionally creating a new instance.
+	   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+	   * @param {Object} data The plain JavaScript object bearing properties of interest.
+	   * @param {module:model/ReportParametersDefinition} obj Optional instance to populate.
+	   * @return {module:model/ReportParametersDefinition} The populated <code>ReportParametersDefinition</code> instance.
+	   */
+	  exports.constructFromObject = function(data, obj) {
+	    if (data) {
+	      obj = data || new exports();
+
+	      if (data.hasOwnProperty('id')) {
+	        obj['id'] = ApiClient.convertToType(data['id'], 'Integer');
+	      }
+	      if (data.hasOwnProperty('name')) {
+	        obj['name'] = ApiClient.convertToType(data['name'], 'String');
+	      }
+	      if (data.hasOwnProperty('definition')) {
+	        obj['definition'] = ApiClient.convertToType(data['definition'], 'String');
+	      }
+	      if (data.hasOwnProperty('created')) {
+	        obj['created'] = ApiClient.convertToType(data['created'], 'String');
+	      }
+	    }
+	    return obj;
+	  }
+
+	  /**
+	   * @member {Integer} id
+	   */
+	  exports.prototype['id'] = undefined;
+	  /**
+	   * @member {String} name
+	   */
+	  exports.prototype['name'] = undefined;
+	  /**
+	   * @member {String} definition
+	   */
+	  exports.prototype['definition'] = undefined;
+	  /**
+	   * @member {String} value
+	   */
+	  exports.prototype['created'] = undefined;
+
+	  return exports;
+	}));
+
+
+
+
+/***/ },
+/* 296 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -63391,7 +63604,7 @@
 
 
 /***/ },
-/* 294 */
+/* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -63475,7 +63688,7 @@
 
 
 /***/ },
-/* 295 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -63560,7 +63773,7 @@
 
 
 /***/ },
-/* 296 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -63621,7 +63834,7 @@
 
 
 /***/ },
-/* 297 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -63795,7 +64008,7 @@
 
 
 /***/ },
-/* 298 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {'use strict';
@@ -63972,7 +64185,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6).Buffer))
 
 /***/ },
-/* 299 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -64020,7 +64233,7 @@
 
 
 /***/ },
-/* 300 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -64066,7 +64279,7 @@
 
 
 /***/ },
-/* 301 */
+/* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

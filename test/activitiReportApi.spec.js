@@ -67,46 +67,23 @@ describe('Activiti Report Api', function () {
         });
     });
 
-    it.only('should return the process definitions when the appId is not provided', function (done) {
+    it('should return the process definitions when the appId is not provided', function (done) {
 
         this.reportsMock.get200ResponseProcessDefinitionsgetNoApp();
 
         this.alfrescoJsApi.activiti.reportApi.getProcessDefinitionsValuesNoApp().then((res) => {
-            expect(res.total).equal(4);
-            expect(res.data.length).equal(4);
-            expect(res.data[0].id).equal('Process_sid-0FF10DA3-E2BD-4E6A-9013-6D66FC8A4716:1:30004');
-            expect(res.data[0].name).equal('Fake Process Name 1');
+            expect(res.length).equal(4);
+            expect(res[0].id).equal('Process_sid-0FF10DA3-E2BD-4E6A-9013-6D66FC8A4716:1:30004');
+            expect(res[0].name).equal('Fake Process Name 1');
 
-            expect(res.data[1].id).equal('SecondProcess:1:15027');
-            expect(res.data[1].name).equal('Fake Process Name 2');
+            expect(res[1].id).equal('SecondProcess:1:15027');
+            expect(res[1].name).equal('Fake Process Name 2');
 
-            expect(res.data[2].id).equal('Simpleprocess:15:10004');
-            expect(res.data[2].name).equal('Fake Process Name 3');
+            expect(res[2].id).equal('Simpleprocess:15:10004');
+            expect(res[2].name).equal('Fake Process Name 3');
 
-            expect(res.data[3].id).equal('fruitorderprocess:5:42530');
-            expect(res.data[3].name).equal('Fake Process Name 4');
-
-            done();
-        });
-    });
-
-    it('should return the process definitions when the appId is provided', function (done) {
-
-        var appId = '1'; // String | taskId
-
-        this.reportsMock.get200ResponseProcessDefinitions(appId);
-
-        this.alfrescoJsApi.activiti.reportApi.getProcessDefinitionsValues(appId).then((res) => {
-            expect(res.total).equal(3);
-            expect(res.data.length).equal(3);
-            expect(res.data[0].id).equal('Process_sid-0FF10DA3-E2BD-4E6A-9013-6D66FC8A4716:1:30004');
-            expect(res.data[0].name).equal('Fake Process Name 1');
-
-            expect(res.data[1].id).equal('SecondProcess:1:15027');
-            expect(res.data[1].name).equal('Fake Process Name 2');
-
-            expect(res.data[2].id).equal('Simpleprocess:15:10004');
-            expect(res.data[2].name).equal('Fake Process Name 3');
+            expect(res[3].id).equal('fruitorderprocess:5:42530');
+            expect(res[3].name).equal('Fake Process Name 4');
 
             done();
         });
@@ -117,7 +94,6 @@ describe('Activiti Report Api', function () {
         this.reportsMock.get200ResponseReportList();
 
         this.alfrescoJsApi.activiti.reportApi.getReportList().then((res) => {
-            console.log(res);
 
             expect(res.length).equal(5);
 
@@ -140,15 +116,13 @@ describe('Activiti Report Api', function () {
         });
     });
 
-    it('should return the report parameters', function (done) {
+    it.only('should return the report parameters', function (done) {
 
         var reportId = '11013'; // String | reportId
         this.reportsMock.get200ResponseReportParams(reportId);
 
         this.alfrescoJsApi.activiti.reportApi.getReportParams(reportId).then((res) => {
-            // console.log(res.definition);
             var paramsDefinition = JSON.parse(res.definition);
-            console.log(paramsDefinition.parameters);
 
             expect(res.id).equal(11013);
             expect(res.name).equal('Process instances overview');

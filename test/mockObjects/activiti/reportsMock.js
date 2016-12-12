@@ -60,96 +60,51 @@ var fakeChartReports = {
         }]
     };
 
-var fakeProcessDefinitions = {
-    'size': 3,
-    'total': 3,
-    'start': 0,
-    'data': [{
-        'id': 'Process_sid-0FF10DA3-E2BD-4E6A-9013-6D66FC8A4716:1:30004',
-        'name': 'Fake Process Name 1',
-        'description': null,
-        'key': 'Process_sid-0FF10DA3-E2BD-4E6A-9013-6D66FC8A4716',
-        'category': 'http://www.activiti.org/processdef',
-        'version': 1,
-        'deploymentId': '30001',
-        'tenantId': 'tenant_1',
-        'metaDataValues': [],
-        'hasStartForm': false
-    }, {
-        'id': 'SecondProcess:1:15027',
-        'name': 'Fake Process Name 2',
-        'description': 'fdsdf',
-        'key': 'SecondProcess',
-        'category': 'http://www.activiti.org/processdef',
-        'version': 1,
-        'deploymentId': '15024',
-        'tenantId': 'tenant_1',
-        'metaDataValues': [],
-        'hasStartForm': false
-    }, {
-        'id': 'Simpleprocess:15:10004',
-        'name': 'Fake Process Name 3',
-        'description': null,
-        'key': 'Simpleprocess',
-        'category': 'http://www.activiti.org/processdef',
-        'version': 15,
-        'deploymentId': '10001',
-        'tenantId': 'tenant_1',
-        'metaDataValues': [],
-        'hasStartForm': false
-    }]
-};
-
-var fakeProcessDefinitionsNoApp = {
-    'size': 4,
-    'total': 4,
-    'start': 0,
-    'data': [{
-        'id': 'Process_sid-0FF10DA3-E2BD-4E6A-9013-6D66FC8A4716:1:30004',
-        'name': 'Fake Process Name 1',
-        'description': null,
-        'key': 'Process_sid-0FF10DA3-E2BD-4E6A-9013-6D66FC8A4716',
-        'category': 'http://www.activiti.org/processdef',
-        'version': 1,
-        'deploymentId': '30001',
-        'tenantId': 'tenant_1',
-        'metaDataValues': [],
-        'hasStartForm': false
-    }, {
-        'id': 'SecondProcess:1:15027',
-        'name': 'Fake Process Name 2',
-        'description': 'fdsdf',
-        'key': 'SecondProcess',
-        'category': 'http://www.activiti.org/processdef',
-        'version': 1,
-        'deploymentId': '15024',
-        'tenantId': 'tenant_1',
-        'metaDataValues': [],
-        'hasStartForm': false
-    }, {
-        'id': 'Simpleprocess:15:10004',
-        'name': 'Fake Process Name 3',
-        'description': null,
-        'key': 'Simpleprocess',
-        'category': 'http://www.activiti.org/processdef',
-        'version': 15,
-        'deploymentId': '10001',
-        'tenantId': 'tenant_1',
-        'metaDataValues': [],
-        'hasStartForm': false
-    }, {
-        'id': 'fruitorderprocess:5:42530',
-        'name': 'Fake Process Name 4',
-        'description': null,
-        'key': 'fruitorderprocess',
-        'category': 'http://www.activiti.org/processdef',
-        'version': 5,
-        'deploymentId': '42527',
-        'tenantId': 'tenant_1',
-        'metaDataValues': [],
-        'hasStartForm': false
-    }]
-};
+var fakeProcessDefinitionsNoApp = [{
+    'id': 'Process_sid-0FF10DA3-E2BD-4E6A-9013-6D66FC8A4716:1:30004',
+    'name': 'Fake Process Name 1',
+    'description': null,
+    'key': 'Process_sid-0FF10DA3-E2BD-4E6A-9013-6D66FC8A4716',
+    'category': 'http://www.activiti.org/processdef',
+    'version': 1,
+    'deploymentId': '30001',
+    'tenantId': 'tenant_1',
+    'metaDataValues': [],
+    'hasStartForm': false
+}, {
+    'id': 'SecondProcess:1:15027',
+    'name': 'Fake Process Name 2',
+    'description': 'fdsdf',
+    'key': 'SecondProcess',
+    'category': 'http://www.activiti.org/processdef',
+    'version': 1,
+    'deploymentId': '15024',
+    'tenantId': 'tenant_1',
+    'metaDataValues': [],
+    'hasStartForm': false
+}, {
+    'id': 'Simpleprocess:15:10004',
+    'name': 'Fake Process Name 3',
+    'description': null,
+    'key': 'Simpleprocess',
+    'category': 'http://www.activiti.org/processdef',
+    'version': 15,
+    'deploymentId': '10001',
+    'tenantId': 'tenant_1',
+    'metaDataValues': [],
+    'hasStartForm': false
+}, {
+    'id': 'fruitorderprocess:5:42530',
+    'name': 'Fake Process Name 4',
+    'description': null,
+    'key': 'fruitorderprocess',
+    'category': 'http://www.activiti.org/processdef',
+    'version': 5,
+    'deploymentId': '42527',
+    'tenantId': 'tenant_1',
+    'metaDataValues': [],
+    'hasStartForm': false
+}];
 
 class ReportsMock extends BaseMock {
 
@@ -186,13 +141,6 @@ class ReportsMock extends BaseMock {
         nock(this.host, {'encodedQueryParams': true})
             .post('/activiti-app/app/rest/reporting/report-params/' + reportId, paramsQuery)
             .reply(200, fakeChartReports);
-    }
-
-    get200ResponseProcessDefinitions(appId) {
-        nock(this.host, {'encodedQueryParams': true})
-            .get('/activiti-app/app/rest/process-definitions')
-            .query({appId : appId})
-            .reply(200, fakeProcessDefinitions);
     }
 
     get200ResponseProcessDefinitionsgetNoApp() {
