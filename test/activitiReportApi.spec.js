@@ -116,7 +116,7 @@ describe('Activiti Report Api', function () {
         });
     });
 
-    it.only('should return the report parameters', function (done) {
+    it('should return the report parameters', function (done) {
 
         var reportId = '11013'; // String | reportId
         this.reportsMock.get200ResponseReportParams(reportId);
