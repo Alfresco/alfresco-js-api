@@ -148,4 +148,15 @@ describe('Activiti Report Api', function () {
         });
     });
 
+    it('should update the report', function (done) {
+
+        var reportId = '11015'; // String | reportId
+        var name = 'New Fake Name'; // String | reportId
+        this.reportsMock.get200ResponseUpdateReport(reportId);
+
+        this.alfrescoJsApi.activiti.reportApi.updateReport(reportId, name).then(function () {
+            done();
+        });
+    });
+
 });

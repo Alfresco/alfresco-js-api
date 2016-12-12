@@ -149,6 +149,12 @@ class ReportsMock extends BaseMock {
             .reply(200, fakeProcessDefinitionsNoApp);
     }
 
+    get200ResponseUpdateReport(reportId) {
+        nock(this.host, {'encodedQueryParams': true})
+            .put('/activiti-app/app/rest/reporting/reports/' + reportId)
+            .reply(200);
+    }
+
 }
 
 module.exports = ReportsMock;
