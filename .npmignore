@@ -9,7 +9,14 @@
 /build.sh
 /tslint.json
 /pom.xml
-/alfresco-core-rest-api.iml
+*.iml
 /.idea
+/test/
+/assets/
+*.tgz
+*.DS_Store
+/package/
+/webpack-bundle-test.js
+/webpack.config.js
+/.github/
 /.babelrc
-
