@@ -198,6 +198,37 @@
       );
     }
 
+    this.updateReport = function(reportId, name) {
+      var postBody = {
+          "name" : name
+      };
+
+      if (reportId == undefined || reportId == null) {
+        throw "Missing the required parameter 'reportId' when calling updateReport";
+      }
+
+      var pathParams = {
+        'reportId': reportId
+      };
+      var queryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = [];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = null;
+
+      return this.apiClient.callApi(
+          '/app/rest/reporting/reports/{reportId}', 'PUT',
+          pathParams, queryParams, headerParams, formParams, postBody,
+          authNames, contentTypes, accepts, returnType
+      );
+    }
+
   };
 
   return exports;

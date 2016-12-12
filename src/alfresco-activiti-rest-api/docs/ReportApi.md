@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**getProcessDefinitions**](ReportApi.md#getProcessDefinitions) | **GET** /app/rest/reporting/process-definitions |  Retrieve the process definition list for all the apps.
 [**getTasksByProcessDefinitionId**](ReportApi.md#getTasksByProcessDefinitionId) | **GET** /app/rest/reporting/report-params/{reportId}/tasks | Retrieves all tasks that refer to the processDefinitionId
 [**getReportsByParams**](ReportApi.md#getReportsByParams) | **GET** /app/rest/reporting/report-params/{reportId} | Generate the reports
+[**updateReport**](ReportApi.md#updateReport) | **PUT** /app/rest/reporting/reports/{reportId} | Update the report
 
 <a name="createDefaultReports"></a>
 # **createDefaultReports**
@@ -187,6 +188,41 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ReportCharts**](ReportCharts.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="updateReport"></a>
+# **updateReport**
+> updateReport(reportId, name)
+
+Update the report details
+
+### Example
+```javascript
+
+var reportId = "1"; // String | reportId
+var name = "new Fake name"; // String | name
+
+this.alfrescoJsApi.activiti.reportApi.updateReport(reportId, name);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **reportId** | **String**| reportId |
+ **name** | **String**| The report name |
+
+### Return type
+
+null (empty response body)
 
 ### Authorization
 

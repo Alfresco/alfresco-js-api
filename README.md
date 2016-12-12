@@ -78,6 +78,7 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
     + [Report Process Definitions](#report-process-definitions)
     + [Tasks of process definition](#tasks-of-process-definition)
     + [Generate reports](#generate-reports)
+    + [Update report details](#update-report-details)
 - [Development](#development)
 - [Release History](#release-history)
 
@@ -1035,6 +1036,27 @@ var reportId = "1"; // String | reportId
 var paramsQuery = {status: 'ALL'}; // Object | paramsQuery
 
 this.alfrescoJsApi.activiti.reportApi.getReportsByParams(reportId, paramsQuery);
+```
+## Update report details
+
+updateReport(reportId, name)
+
+> Update the report details
+
+####Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **reportId** | **String**| reportId |
+ **name** | **String**| The report name |
+
+####Example
+
+```javascript
+
+var reportId = "1"; // String | reportId
+var name = "new Fake name"; // String | reportId
+
+this.alfrescoJsApi.activiti.reportApi.updateReport(reportId, name);
 ```
 
 # Development
