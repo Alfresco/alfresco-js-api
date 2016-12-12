@@ -256,6 +256,12 @@ Class | Method | HTTP request | Description
 *ActivitiPublicRestApi.UserFiltersApi* | [**updateUserProcessInstanceFilter**](docs/UserFiltersApi.md#updateUserProcessInstanceFilter) | **PUT** /api/enterprise/filters/processes/{userFilterId} | Update a user process instance task filter
 *ActivitiPublicRestApi.UserFiltersApi* | [**updateUserTaskFilter**](docs/UserFiltersApi.md#updateUserTaskFilter) | **PUT** /api/enterprise/filters/tasks/{userFilterId} | Update a specific task filter
 *ActivitiPublicRestApi.UsersWorkflowApi* | [**getUsers**](docs/UsersWorkflowApi.md#getUsers) | **GET** /api/enterprise/users | List users
+*ActivitiPublicRestApi.ReportApi* | [**createDefaultReports**](docs/ReportApi.md#createDefaultReports) |   **POST** /app/rest/reporting/default-reports | Create the default reports
+*ActivitiPublicRestApi.ReportApi* | [**getReportList**](docs/ReportApi.md#getReportList) | **GET** /app/rest/reporting/reports |  Retrieve the available report list
+*ActivitiPublicRestApi.ReportApi* | [**getReportParams**](docs/ReportApi.md#getReportParams) | **GET** /app/rest/reporting/report-params/{reportId} |  Retrieve the parameters referring to the reportId
+*ActivitiPublicRestApi.ReportApi* | [**getProcessDefinitions**](docs/ReportApi.md#getProcessDefinitions) | **GET** /app/rest/reporting/process-definitions |  Retrieve the process definition list for all the apps.
+*ActivitiPublicRestApi.ReportApi* | [**getTasksByProcessDefinitionId**](docs/ReportApi.md#getTasksByProcessDefinitionId) | **GET** /app/rest/reporting/report-params/{reportId}/tasks | Retrieves all tasks that refer to the processDefinitionId
+*ActivitiPublicRestApi.ReportApi* | [**getReportsByParams**](docs/ReportApi.md#getReportsByParams) | **GET** /app/rest/reporting/report-params/{reportId} | Generate the reports
 
 
 ## Documentation for Models
