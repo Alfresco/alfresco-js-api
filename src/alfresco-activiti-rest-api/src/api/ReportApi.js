@@ -121,7 +121,7 @@
       );
     }
 
-    this.getProcessDefinitionsValuesNoApp = function() {
+    this.getProcessDefinitions = function() {
       var postBody = null;
 
       var pathParams = {

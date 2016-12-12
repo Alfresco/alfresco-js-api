@@ -69,9 +69,9 @@ describe('Activiti Report Api', function () {
 
     it('should return the process definitions when the appId is not provided', function (done) {
 
-        this.reportsMock.get200ResponseProcessDefinitionsgetNoApp();
+        this.reportsMock.get200ResponseProcessDefinitions();
 
-        this.alfrescoJsApi.activiti.reportApi.getProcessDefinitionsValuesNoApp().then((res) => {
+        this.alfrescoJsApi.activiti.reportApi.getProcessDefinitions().then((res) => {
             expect(res.length).equal(4);
             expect(res[0].id).equal('Process_sid-0FF10DA3-E2BD-4E6A-9013-6D66FC8A4716:1:30004');
             expect(res[0].name).equal('Fake Process Name 1');

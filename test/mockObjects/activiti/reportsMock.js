@@ -143,7 +143,7 @@ class ReportsMock extends BaseMock {
             .reply(200, fakeChartReports);
     }
 
-    get200ResponseProcessDefinitionsgetNoApp() {
+    get200ResponseProcessDefinitions() {
         nock(this.host, {'encodedQueryParams': true})
             .get('/activiti-app/app/rest/reporting/process-definitions')
             .reply(200, fakeProcessDefinitionsNoApp);
