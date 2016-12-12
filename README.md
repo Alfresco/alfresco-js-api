@@ -71,6 +71,13 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
     + [Get Process Instances](#get-process-instances)
   * [Models Api](#models-api)
     + [Get Model](#get-model)
+  * [Report Api](#report-api)
+    + [Create Default reports](#create-default-reports)
+    + [Get Reports](#get-reports)
+    + [Report Params](#report-params)
+    + [Report Process Definitions](#report-process-definitions)
+    + [Tasks of process definition](#tasks-of-process-definition)
+    + [Generate reports](#generate-reports)
 - [Development](#development)
 - [Release History](#release-history)
 
@@ -910,6 +917,125 @@ this.alfrescoJsApi.activiti.modelsApi.getModels(opts).then(function (data) {
  });
 ```
 
+## Report Api
+
+Below you can find some example relative to the Activiti report api for all the possible method go to [Report Api documentation](/src/alfresco-activiti-rest-api/docs/ReportApi.md)
+
+### Create default Reports
+
+createDefaultReports()
+
+>Create the default reports
+
+####Parameters
+
+No parameters required.
+
+####Example
+
+```javascript
+
+this.alfrescoJsApi.activiti.reportApi.createDefaultReports();
+```
+
+### Get Reports
+
+getReportList()
+
+> Retrieve the available report list
+
+####Parameters
+
+No parameters required.
+
+####Example
+
+```javascript
+
+this.alfrescoJsApi.activiti.reportApi.getReportList();
+```
+
+### Report Params
+
+getReportParams(reportId)
+
+> Retrieve the parameters referring to the reportId.
+
+####Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **reportId** | **String**| reportId |
+
+####Example
+
+```javascript
+
+var reportId = "1"; // String | reportId
+
+this.alfrescoJsApi.activiti.reportApi.getReportParams(reportId);
+```
+
+## Report Process Definitions
+
+getProcessDefinitions()
+
+> Retrieve the process definition list for all the apps.
+
+####Parameters
+
+No parameters required.
+
+####Example
+
+```javascript
+
+this.alfrescoJsApi.activiti.reportApi.getProcessDefinitions();
+```
+
+## Tasks of process definition
+
+getTasksByProcessDefinitionId(reportId, processDefinitionId)
+
+> Retrieves all tasks that refer to the processDefinitionId
+
+####Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **reportId** | **String**| reportId |
+ **processDefinitionId** | **String**| process definition id |
+
+####Example
+
+```javascript
+
+var reportId = "1"; // String | reportId
+var processDefinitionId = "1"; // String | processDefinitionId
+
+this.alfrescoJsApi.activiti.reportApi.getTasksByProcessDefinitionId(reportId, processDefinitionId);
+```
+
+## Generate reports
+
+getReportsByParams(reportId, paramsQuery)
+
+> Generate the reports based on the input parameters
+
+####Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **reportId** | **String**| reportId |
+ **paramsQuery** | **Object**| Query parameters |
+
+####Example
+
+```javascript
+
+var reportId = "1"; // String | reportId
+var paramsQuery = {status: 'ALL'}; // Object | paramsQuery
+
+this.alfrescoJsApi.activiti.reportApi.getReportsByParams(reportId, paramsQuery);
+```
 
 # Development
 
