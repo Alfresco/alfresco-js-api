@@ -40,32 +40,32 @@ No authorization required
  - **Accept**: application/json
 
 <a name="getReportList"></a>
- # **getReportList**
- > [ReportParametersDefinition] getReportList()
+# **getReportList**
+> [ReportParametersDefinition] getReportList()
 
- Retrieve the available report list.
+Retrieve the available report list.
 
- ### Example
- ```javascript
+### Example
+```javascript
 
- this.alfrescoJsApi.activiti.reportApi.getReportList();
- ```
+this.alfrescoJsApi.activiti.reportApi.getReportList();
+```
 
- ### Parameters
+### Parameters
 No parameters required.
 
- ### Return type
+### Return type
 
- [**[ReportParametersDefinition]**](ReportParametersDefinition.md)
+[**[ReportParametersDefinition]**](ReportParametersDefinition.md)
 
- ### Authorization
+### Authorization
 
- No authorization required
+No authorization required
 
- ### HTTP request headers
+### HTTP request headers
 
-  - **Content-Type**: application/json
-  - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 <a name="getReportParams"></a>
 # **getReportParams**
