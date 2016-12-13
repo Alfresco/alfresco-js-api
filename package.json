@@ -1,6 +1,6 @@
 {
   "name": "alfresco-js-api",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "JavaScript client library for the Alfresco REST API",
   "main": "dist/alfresco-js-api.js",
   "module": "main.js",
@@ -35,7 +35,7 @@
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-es2015-loose": "^8.0.0",
     "babelify": "^7.3.0",
-    "babel-plugin-transform-proto-to-assign":"^6.9.0",
+    "babel-plugin-transform-proto-to-assign": "^6.9.0",
     "browserify": "^13.0.1",
     "chai": "^3.5.0",
     "expect.js": "~0.3.1",
