@@ -253,6 +253,7 @@ declare namespace AlfrescoApi {
         userApi: any;
         userFiltersApi: any;
         usersWorkflowApi: any;
+        reportApi: any;
 
         /*Models*/
         AbstractGroupRepresentation: any;
