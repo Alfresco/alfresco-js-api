@@ -6,6 +6,11 @@ Alfresco JS API
 
 _This project provides a JavaScript client API into the v1 Alfresco REST API_
 
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.0.0) (xx-xx-2016)
+## fix
+- [/api/enterprise/script-files/controllers sending wrong accept header  #130](https://github.com/Alfresco/alfresco-js-api/pull/130)
+
 <a name="0.5.5"></a>
 # [0.5.5](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.5.5) (09-12-2016)
 ## fix
