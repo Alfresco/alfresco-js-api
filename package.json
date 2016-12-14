@@ -38,6 +38,7 @@
     "babel-plugin-transform-proto-to-assign": "^6.9.0",
     "browserify": "^13.0.1",
     "chai": "^3.5.0",
+    "chai-datetime": "^1.4.1",
     "expect.js": "~0.3.1",
     "grunt": "~0.4.0",
     "grunt-cli": "^1.1.0",
