@@ -66,7 +66,9 @@ class AlfrescoApiClient extends ApiClient {
         if (this.isBpmRequest()) {
             request._withCredentials = true;
             if (this.authentications.cookie) {
-                request.set('Cookie', this.authentications.cookie);
+                if (this.isNodeEnv()) {
+                    request.set('Cookie', this.authentications.cookie);
+                }
             }
         }
 
@@ -183,7 +185,7 @@ class AlfrescoApiClient extends ApiClient {
     isCsrfEnabled() {
         if (this.config) {
             return !this.config.disableCsrf;
-        }else {
+        } else {
             return true;
         }
     }
@@ -191,12 +193,19 @@ class AlfrescoApiClient extends ApiClient {
     setCsrfToken(request) {
         var token = this.token();
         request.set('X-CSRF-TOKEN', token);
-        request.set('Cookie', 'CSRF-TOKEN=' + token + ';path=/');
+
+        if (this.isNodeEnv()) {
+            request.set('Cookie', 'CSRF-TOKEN=' + token + ';path=/');
+        }
 
         try {
             document.cookie = 'CSRF-TOKEN=' + token + ';path=/';
         } catch (err) {
         }
+    }
+
+    isNodeEnv() {
+        return (typeof process !== 'undefined') && (process.release && process.release.name === 'node');
     }
 
     token(a) {

@@ -8,7 +8,7 @@
   "scripts": {
     "clean": "rimraf dist/bundle.js node_modules",
     "build": "grunt && npm run tslint && npm run test && npm run bundle && npm run minify && npm run toc && npm run webpack-test",
-    "webpack-test": "webpack main.js webpack-bundle-test.js",
+    "webpack-test": "webpack main.js package/webpack-bundle-test.js",
     "test": "grunt test",
     "coverage": "grunt coverage",
     "generate": "mvn clean generate-sources",
