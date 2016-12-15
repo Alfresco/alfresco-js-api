@@ -137,6 +137,36 @@ class NodeMock extends BaseMock {
             });
     }
 
+    get200ResponseChildrenNonUTCTimes() {
+        nock(this.host, {'encodedQueryParams': true})
+            .get('/alfresco/api/-default-/public/alfresco/versions/1/nodes/b4cff62a-664d-4d45-9302-98723eac1320/children')
+            .reply(200, {
+                'list': {
+                    'pagination': {
+                        'count': 5,
+                        'hasMoreItems': false,
+                        'totalItems': 5,
+                        'skipCount': 0,
+                        'maxItems': 100
+                    },
+                    'entries': [{
+                        'entry': {
+                            'createdAt': '2011-03-15T12:04:54.290-0500',
+                            'isFolder': true,
+                            'isFile': false,
+                            'createdByUser': {'id': 'mjackson', 'displayName': 'Mike Jackson'},
+                            'modifiedAt': '2011-03-15T12:04:54.290-0500',
+                            'modifiedByUser': {'id': 'mjackson', 'displayName': 'Mike Jackson'},
+                            'name': 'discussions',
+                            'id': '059c5bc7-2d38-4dc5-96b8-d09cd3c69b4c',
+                            'nodeType': 'cm:folder',
+                            'parentId': 'b4cff62a-664d-4d45-9302-98723eac1320'
+                        }
+                    }]
+                }
+            });
+    }
+
     get404ChildrenNotExist() {
         nock(this.host, {'encodedQueryParams': true})
             .get('/alfresco/api/-default-/public/alfresco/versions/1/nodes/b4cff62a-664d-4d45-9302-98723eac1319/children')

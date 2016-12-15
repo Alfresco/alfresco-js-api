@@ -11,6 +11,7 @@ _This project provides a JavaScript client API into the v1 Alfresco REST API_
 ## fix
 - [/api/enterprise/script-files/controllers sending wrong accept header  #130](https://github.com/Alfresco/alfresco-js-api/pull/130)
 - [CSRF Token is not working #128](https://github.com/Alfresco/alfresco-js-api/pull/128)
+- [Timestamp timezones are ignored #134](https://github.com/Alfresco/alfresco-js-api/issues/134)
 
 <a name="0.5.5"></a>
 # [0.5.5](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.5.5) (09-12-2016)
