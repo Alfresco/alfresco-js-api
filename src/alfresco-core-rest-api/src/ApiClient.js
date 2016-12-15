@@ -431,8 +431,9 @@
    * @returns {number} The number of minutes offset from UTC.
    */
   exports.parseDateTimeZone = function(str) {
-    if (/[\+\-]\d{4}/.test(str)) {
-      return (parseInt(str[0] + '1') * -1 * (parseInt(str.substr(1, 2)) * 60) + parseInt(str.substr(3, 2)))
+    var match = /([\+\-])(\d{2}):?(\d{2})?/.exec(str);
+    if (match !== null) {
+      return (parseInt(match[1] + '1') * -1 * (parseInt(match[2]) * 60) + parseInt(match[3] || 0))
     } else {
       return 0;
     }
