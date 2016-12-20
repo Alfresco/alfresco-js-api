@@ -7,7 +7,7 @@ Alfresco JS API
 _This project provides a JavaScript client API into the v1 Alfresco REST API_
 
 <a name="1.0.0"></a>
-# [1.0.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.0.0) (xx-xx-2016)
+# [1.0.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.0.0) (20-12-2016)
 ## fix
 - [/api/enterprise/script-files/controllers sending wrong accept header  #130](https://github.com/Alfresco/alfresco-js-api/pull/130)
 - [CSRF Token is not working #128](https://github.com/Alfresco/alfresco-js-api/pull/128)
