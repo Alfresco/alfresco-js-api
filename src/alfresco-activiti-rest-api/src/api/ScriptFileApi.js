@@ -56,8 +56,8 @@
       };
 
       var authNames = [];
-      var contentTypes = ['application/json'];
-      var accepts = ['application/json', 'application/javascript'];
+      var contentTypes = ['text/javascript'];
+      var accepts = [];
       var returnType = 'String';
 
       return this.apiClient.callApi(

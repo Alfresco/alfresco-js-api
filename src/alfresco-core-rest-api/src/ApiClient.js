@@ -400,12 +400,43 @@
    * @returns {Date} The parsed date object.
    */
   exports.parseDate = function(str) {
+    var dateLength = 10;
+    var separatorPos = str.substring(dateLength).search(/[\+\-]/) + dateLength;
+    var dateStr = separatorPos > dateLength ? str.substring(0, separatorPos) : str;
+    var tzStr = separatorPos > dateLength ? str.substring(separatorPos) : '';
+    var parsedDate = exports.parseDateTime(dateStr);
+    var tzOffsetMins = exports.parseDateTimeZone(tzStr);
+    parsedDate.setTime(parsedDate.getTime() + tzOffsetMins * 60000);
+    return parsedDate;
+  };
+
+  /**
+   * Parses the date component of a ISO-8601 string representation of a date value.
+   * @param {String} str The date value as a string.
+   * @returns {Date} The parsed date object.
+   */
+  exports.parseDateTime = function(str) {
     // TODO: review when Safari 10 is released
     // return new Date(str.replace(/T/i, ' '));
 
     // Compatible with Safari 9.1.2
-    var a = str.split(/[^0-9]/).map(function(s) { return parseInt(s, 10) });
-    return new Date(a[0], a[1]-1 || 0, a[2] || 1, a[3] || 0, a[4] || 0, a[5] || 0, a[6] || 0);
+    var parts = str.split('+');
+    var dateParts = str.split(/[^0-9]/).map(function(s) { return parseInt(s, 10) });
+    return new Date(Date.UTC(dateParts[0], dateParts[1]-1 || 0, dateParts[2] || 1, dateParts[3] || 0, dateParts[4] || 0, dateParts[5] || 0, dateParts[6] || 0));
+  };
+
+  /**
+   * Parses the timezone component of a ISO-8601 string representation of a date value.
+   * @param {String} str The timezone offset as a string, e.g. '+0000', '+2000' or '-0500'.
+   * @returns {number} The number of minutes offset from UTC.
+   */
+  exports.parseDateTimeZone = function(str) {
+    var match = /([\+\-])(\d{2}):?(\d{2})?/.exec(str);
+    if (match !== null) {
+      return (parseInt(match[1] + '1') * -1 * (parseInt(match[2]) * 60) + parseInt(match[3] || 0))
+    } else {
+      return 0;
+    }
   };
 
   /**

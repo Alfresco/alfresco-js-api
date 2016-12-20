@@ -1,10 +1,13 @@
 /*global describe, it, beforeEach */
 
 var AlfrescoApi = require('../main');
-var expect = require('chai').expect;
+var chai = require('chai');
+var expect = chai.expect;
 var AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
 var NodeMock = require('../test/mockObjects/mockAlfrescoApi').Node;
 var fs = require('fs');
+
+chai.use(require('chai-datetime'));
 
 describe('Node', function () {
     beforeEach(function (done) {
@@ -110,6 +113,17 @@ describe('Node', function () {
                 expect(data.list.entries[0].entry.impossibleProperties).to.be.equal('impossibleRightValue');
                 done();
             });
+        });
+
+        it('should return dates as timezone-aware', function (done) {
+            this.nodeMock.get200ResponseChildrenNonUTCTimes();
+
+            this.alfrescoJsApi.nodes.getNodeChildren('b4cff62a-664d-4d45-9302-98723eac1320').then(function (data) {
+                expect(data.list.entries.length).to.be.equal(1);
+                expect(data.list.entries[0].entry.createdAt).to.equalTime(new Date(Date.UTC(2011, 2, 15, 17, 4, 54, 290)));
+                done();
+            });
+
         });
     });
 
