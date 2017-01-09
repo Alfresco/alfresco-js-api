@@ -64,6 +64,24 @@ describe('Bpm Auth test', function () {
 
         });
 
+        it('isLoggedIn should return false if the host change', function (done) {
+
+            this.authBpmMock.get200Response();
+
+            this.bpmAuth = new BpmAuth({
+                hostBpm: this.hostBpm
+            });
+
+            this.bpmAuth.login('admin', 'admin').then(() => {
+                expect(this.bpmAuth.isLoggedIn()).to.be.equal(true);
+                this.bpmAuth.changeHost('anyhost');
+                expect(this.bpmAuth.isLoggedIn()).to.be.equal(false);
+                done();
+            }, function () {
+            });
+
+        });
+
         it('login should return an error if wrong credential are used 401 the login fails', function (done) {
             this.authBpmMock.get401Response();
 

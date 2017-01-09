@@ -46,6 +46,25 @@ describe('Ecm Auth test', function () {
             });
         });
 
+        it('isLoggedIn should return false if the host change', function (done) {
+
+            this.authEcmMock.get201Response();
+
+            this.ecmAuth = new EcmAuth({
+                contextRoot: 'alfresco',
+                hostEcm: this.hostEcm
+            });
+
+            this.ecmAuth.login('admin', 'admin').then(() => {
+                expect(this.ecmAuth.isLoggedIn()).to.be.equal(true);
+                this.ecmAuth.changeHost('anyhost');
+                expect(this.ecmAuth.isLoggedIn()).to.be.equal(false);
+                done();
+            }, function () {
+            });
+
+        });
+
         it('isLoggedIn should return false if the api is logged out', function (done) {
 
             this.authEcmMock.get201Response();
