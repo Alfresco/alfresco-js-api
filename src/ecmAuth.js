@@ -26,6 +26,7 @@ class EcmAuth extends AlfrescoApiClient {
     changeHost(host) {
         this.config.hostEcm = host;
         this.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
+        this.ticket = undefined;
     }
 
     /**
