@@ -19,7 +19,8 @@ describe('Bpm Auth test', function () {
             this.authBpmMock.get200Response();
 
             this.bpmAuth = new BpmAuth({
-                hostBpm: this.hostBpm
+                hostBpm: this.hostBpm,
+                contextRootBpm: 'activiti-app'
             });
 
             this.bpmAuth.login('admin', 'admin').then((data) => {
@@ -35,7 +36,8 @@ describe('Bpm Auth test', function () {
             this.authBpmMock.get200Response();
 
             this.bpmAuth = new BpmAuth({
-                hostBpm: this.hostBpm
+                hostBpm: this.hostBpm,
+                contextRootBpm: 'activiti-app'
             });
 
             this.bpmAuth.login('admin', 'admin').then(() => {
@@ -50,7 +52,8 @@ describe('Bpm Auth test', function () {
             this.authBpmMock.get200Response();
 
             this.bpmAuth = new BpmAuth({
-                hostBpm: this.hostBpm
+                hostBpm: this.hostBpm,
+                contextRootBpm: 'activiti-app'
             });
             this.bpmAuth.login('admin', 'admin');
 
@@ -68,7 +71,8 @@ describe('Bpm Auth test', function () {
             this.authBpmMock.get401Response();
 
             this.bpmAuth = new BpmAuth({
-                hostBpm: this.hostBpm
+                hostBpm: this.hostBpm,
+                contextRootBpm: 'activiti-app'
             });
 
             this.bpmAuth.login('wrong', 'name').then(function () {
@@ -84,7 +88,8 @@ describe('Bpm Auth test', function () {
                 this.authBpmMock.get401Response();
 
                 this.bpmAuth = new BpmAuth({
-                    hostBpm: this.hostBpm
+                    hostBpm: this.hostBpm,
+                    contextRootBpm: 'activiti-app'
                 });
 
                 this.bpmAuth.login('wrong', 'name').on('unauthorized', ()=> {
@@ -96,7 +101,8 @@ describe('Bpm Auth test', function () {
                 this.authBpmMock.get403Response();
 
                 this.bpmAuth = new BpmAuth({
-                    hostBpm: this.hostBpm
+                    hostBpm: this.hostBpm,
+                    contextRootBpm: 'activiti-app'
                 });
 
                 this.bpmAuth.login('wrong', 'name').on('forbidden', ()=> {
@@ -108,7 +114,8 @@ describe('Bpm Auth test', function () {
                 this.authBpmMock.get200Response();
 
                 this.bpmAuth = new BpmAuth({
-                    hostBpm: this.hostBpm
+                    hostBpm: this.hostBpm,
+                    contextRootBpm: 'activiti-app'
                 });
 
                 this.bpmAuth.login('admin', 'admin').on('success', ()=> {
@@ -120,7 +127,8 @@ describe('Bpm Auth test', function () {
                 this.authBpmMock.get200Response();
 
                 this.bpmAuth = new BpmAuth({
-                    hostBpm: this.hostBpm
+                    hostBpm: this.hostBpm,
+                    contextRootBpm: 'activiti-app'
                 });
 
                 this.bpmAuth.login('admin', 'admin');
@@ -139,7 +147,8 @@ describe('Bpm Auth test', function () {
 
                 this.bpmAuth = new BpmAuth({
                     ticketBpm: 'Basic YWRtaW46YWRtaW4=',
-                    hostBpm: this.hostBpm
+                    hostBpm: this.hostBpm,
+                    contextRootBpm: 'activiti-app'
                 });
 
                 expect('Basic YWRtaW46YWRtaW4=').to.be.equal(this.bpmAuth.authentications.basicAuth.ticket);
@@ -151,7 +160,8 @@ describe('Bpm Auth test', function () {
             beforeEach(function (done) {
                 this.authBpmMock.get200Response();
                 this.bpmAuth = new BpmAuth({
-                    hostBpm: this.hostBpm
+                    hostBpm: this.hostBpm,
+                    contextRootBpm: 'activiti-app'
                 });
 
                 this.bpmAuth.login('admin', 'admin').then(() => {
@@ -186,7 +196,8 @@ describe('Bpm Auth test', function () {
                 this.authBpmMock.get200Response();
 
                 this.bpmAuth = new BpmAuth({
-                    hostBpm: this.hostBpm
+                    hostBpm: this.hostBpm,
+                    contextRootBpm: 'activiti-app'
                 });
 
                 this.bpmAuth.login('admin', 'admin').then(() => {
@@ -200,6 +211,7 @@ describe('Bpm Auth test', function () {
 
                 this.bpmAuth = new BpmAuth({
                     hostBpm: this.hostBpm,
+                    contextRootBpm: 'activiti-app',
                     disableCsrf: true
                 });
 

@@ -354,6 +354,7 @@ declare namespace AlfrescoApi {
         sitesApi: any;
         queriesApi: any;
         tagsApi: any;
+        webscriptApi: any;
 
         /*Models*/
         Activity: any;

@@ -7,7 +7,6 @@ var AlfrescoActivitiApi = require('./alfresco-activiti-rest-api/src/index');
 var AlfrescoContent = require('./alfrescoContent');
 var AlfrescoNode = require('./alfrescoNode');
 var AlfrescoUpload = require('./alfrescoUpload');
-var AlfrescoWebScriptApi = require('./alfrescoWebScript');
 var Emitter = require('event-emitter');
 var EcmAuth = require('./ecmAuth');
 var BpmAuth = require('./bpmAuth');
@@ -24,6 +23,7 @@ class AlfrescoApi {
      *        hostEcm:       // hostEcm Your share server IP or DNS name
      *        hostBpm: // hostBpm Your activiti server IP or DNS name
      *        contextRoot: // contextRoot default value alfresco
+     *        contextRootBpm: // contextRoot activiti default value activiti-app
      *        provider:   // ECM BPM ALL OAUTH, default ECM
      *        ticketEcm:     // Ticket if you already have a ECM ticket you can pass only the ticket and skip the login, in this case you don't need username and password
      *        ticketBpm:     // Ticket if you already have a BPM ticket you can pass only the ticket and skip the login, in this case you don't need username and password
@@ -40,6 +40,7 @@ class AlfrescoApi {
             hostEcm: config.hostEcm || 'http://127.0.0.1:8080',
             hostBpm: config.hostBpm || 'http://127.0.0.1:9999',
             contextRoot: config.contextRoot || 'alfresco',
+            contextRootBpm: config.contextRootBpm || 'activiti-app',
             provider: config.provider || 'ECM',
             ticketEcm: config.ticketEcm,
             ticketBpm: config.ticketBpm,
@@ -50,9 +51,9 @@ class AlfrescoApi {
         this.bpmAuth = new BpmAuth(this.config);
         this.ecmAuth = new EcmAuth(this.config);
 
-        this.ecmPrivateClient = new EcmPrivateClient(this.config.hostEcm, this.config.contextRoot, this.config);
-        this.ecmClient = new EcmClient(this.config.hostEcm, this.config.contextRoot, this.config);
-        this.bpmClient = new BpmClient(this.config.hostBpm, this.config);
+        this.ecmPrivateClient = new EcmPrivateClient(this.config);
+        this.ecmClient = new EcmClient(this.config);
+        this.bpmClient = new BpmClient(this.config);
         this.setAuthenticationClientECMBPM(this.ecmAuth.getAuthentication(), this.bpmAuth.getAuthentication());
 
         this.initObjects();
@@ -67,14 +68,14 @@ class AlfrescoApi {
 
     changeEcmHost(hostEcm) {
         this.config.hostEcm = hostEcm;
-        this.ecmAuth.changeHost(hostEcm);
-        this.ecmClient.changeHost(hostEcm);
+        this.ecmAuth.changeHost();
+        this.ecmClient.changeHost();
     }
 
     changeBpmHost(hostBpm) {
         this.config.hostBpm = hostBpm;
-        this.bpmAuth.changeHost(hostBpm);
-        this.bpmClient.changeHost(hostBpm);
+        this.bpmAuth.changeHost();
+        this.bpmClient.changeHost();
     }
 
     initObjects() {
@@ -98,7 +99,7 @@ class AlfrescoApi {
         this.nodes = this.node = new AlfrescoNode();
         this.content = new AlfrescoContent(this.ecmAuth, this.ecmClient);
         this.upload = new AlfrescoUpload();
-        this.webScript = new AlfrescoWebScriptApi();
+        this.webScript = this.core.webscriptApi;
     }
 
     _instantiateObjects(module, moduleCopy) {
