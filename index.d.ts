@@ -172,7 +172,7 @@ declare namespace AlfrescoApi {
     }
 
     export interface PathInfoEntity {
-        elements: PathElementEntity;
+        elements: PathElementEntity[];
         isComplete: boolean;
         name: string;
     }
