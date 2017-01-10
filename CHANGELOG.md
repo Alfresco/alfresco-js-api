@@ -6,6 +6,20 @@ Alfresco JS API
 
 _This project provides a JavaScript client API into the v1 Alfresco REST API_
 
+<a name="1.0.1"></a>
+# [1.0.1](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.0.0) (xx-xx-2017)
+## Features
+- [Change Activiti contextroot #137](https://github.com/Alfresco/alfresco-js-api/pull/137)
+
+```javascript
+    this.bpmAuth = new BpmAuth({
+        hostBpm: 'http://127.0.0.1:9999',
+        contextRootBpm: 'activiti-custom-root'
+    });
+    
+    this.bpmAuth.login('admin', 'admin');
+```
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.0.0) (20-12-2016)
 ## fix
