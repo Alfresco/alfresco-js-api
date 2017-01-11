@@ -22,20 +22,13 @@ declare namespace AlfrescoApi {
         upload: any;
         webScript: any;
 
-        ecmClient : EcmClient;
-        bpmClient : BpmClient;
-        ecmPrivateClient : EcmPrivateClient;
+        ecmClient: EcmClient;
+        bpmClient: BpmClient;
+        ecmPrivateClient: EcmPrivateClient;
 
         changeEcmHost(ecmHost: string): void;
         changeBpmHost(bpmHost: string): void;
         changeCsrfConfig(disableCsrf: boolean): void;
-
-        getNodeInfo(nodeId: string): Promise<MinimalNodeEntryEntity>;
-        deleteNode(nodeId: string): any;
-        deleteNodePermanent(nodeId: string): any;
-
-        uploadFile(fileDefinition: File, relativePath: string, nodeId: string, nodeBody: any, opts: any): any;
-        createFolder(name: string, relativePath: string, nodeId: string): any;
 
         isLoggedIn(): boolean;
         login(username: string, password: string): Promise<string>;
@@ -209,7 +202,8 @@ declare namespace AlfrescoApi {
 
     export interface NodesApi {
         new(client: ApiClient): NodesApi;
-        getNodeInfo(nodeId: string): Promise<MinimalNodeEntryEntity>;
+
+        getNodeInfo(nodeId: string, opts: any): Promise<MinimalNodeEntryEntity>;
         getNodeChildren(nodeId: string, opts: any): Promise<NodePaging>;
         deleteNode(nodeId: string): Promise<any>;
         createFolder(name: string, relativePath: string, nodeId?: string, opts?: any): Promise<MinimalNodeEntryEntity>;
