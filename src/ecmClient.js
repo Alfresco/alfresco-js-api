@@ -5,19 +5,27 @@ var AlfrescoApiClient = require('./alfrescoApiClient');
 class EcmClient extends AlfrescoApiClient {
 
     /**
+     * @param {String} host
+     * @param {String} contextRoot
      * @param {Object} config
      */
-    constructor(config) {
+    constructor(host, contextRoot, config) {
         super();
 
+        this.host = host;
         this.config = config;
+        this.contextRoot = contextRoot;
 
-        this.changeHost();
+        this.changeHost(host);
     }
 
-    changeHost() {
-        this.host = this.config.hostEcm;
-        this.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/alfresco/versions/1';
+    /**
+     * set the Authentication
+     *
+     * @param {String} authentications
+     * */
+    changeHost(host) {
+        this.basePath = host + '/' + this.contextRoot + '/api/-default-/public/alfresco/versions/1';
     }
 
     /**

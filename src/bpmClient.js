@@ -5,19 +5,25 @@ var AlfrescoApiClient = require('./alfrescoApiClient');
 class BpmClient extends AlfrescoApiClient {
 
     /**
+     * @param {String} host
      * @param {Object} config
      */
-    constructor(config) {
+    constructor(host, config) {
         super();
 
+        this.host = host;
         this.config = config;
 
-        this.changeHost();
+        this.changeHost(host);
     }
 
-    changeHost() {
-        this.host = this.config.hostBpm;
-        this.basePath = this.config.hostBpm + '/' + this.config.contextRootBpm;
+    /**
+     * Change the Host
+     *
+     * @param {String} host
+     * */
+    changeHost(host) {
+        this.basePath = host + '/activiti-app';
     }
 
     /**

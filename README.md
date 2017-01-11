@@ -135,8 +135,7 @@ Property | Description  | default value|
 ------------- | ------------- | -------------|
 hostEcm| (Optional value The Ip or Name of the host where your Alfresco instance is running )|http://127.0.0.1:8080 |
 hostBpm| (Optional value The Ip or Name of the host where your Activiti instance is running )|http://127.0.0.1:9999 |
-contextRoot| (Optional value that define the context Root of the Alfresco ECM API default value is alfresco )|alfresco |
-contextRootBpm| (Optional value that define the context Root of the Activiti API default value is activiti-app )|alfresco |
+contextRoot| (Optional value that define the context Root of the API default value is alfresco )|alfresco |
 provider| (Optional value default value is ECM. This parameter can accept as value ECM BPM or ALL to use the API and Login in the ECM, Activiti BPM or Both )|alfresco |
 ticket| (Optional only if you want login with the ticket see example below)| |
 disableCsrf| To disable CSRF Token to be submitted. Only for Activiti call.| false |
@@ -658,7 +657,7 @@ Name | Description
 
 //Call a GET on a Web Scripts available at the following URIs: http://127.0.01:8080/alfresco/service/mytasks
 
-this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', 'mytasks').then(function (data) {
+this.alfrescoJsApi.webScript.executeWebScript('GET', 'mytasks').then(function (data) {
    console.log('Data received form http://127.0.01:8080/alfresco/service/mytasks' + data);    
 }, function (error) {
    console.log('Error' + error);
@@ -666,7 +665,7 @@ this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', 'mytasks').then(fun
         
 //Call a GET on a Web Scripts available at the following URIs: http://127.0.01:8080/share/service/mytasks
 
-this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', 'mytasks', null, 'share').then(function (data) {
+this.alfrescoJsApi.webScript.executeWebScript('GET', 'mytasks', null, 'share').then(function (data) {
    console.log('Data received form http://127.0.01:8080/share/service/mytasks' + data);    
 }, function (error) {
    console.log('Error' + error);
@@ -674,7 +673,7 @@ this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', 'mytasks', null, 's
 
 //Call a GET on a Web Scripts available at the following URIs: http://127.0.01:8080/share/differentServiceSlug/mytasks
 
-this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', 'mytasks', null, 'share', 'differentServiceSlug').then(function (data) {
+this.alfrescoJsApi.webScript.executeWebScript('GET', 'mytasks', null, 'share', 'differentServiceSlug').then(function (data) {
    console.log('Data received form http://127.0.01:8080/share/differentServiceSlug/mytasks' + data);    
 }, function (error) {
    console.log('Error' + error);

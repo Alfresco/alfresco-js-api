@@ -126,7 +126,6 @@ Class | Method | HTTP request | Description
 *AlfrescoCoreRestApi.TagsApi* | [**getTags**](docs/TagsApi.md#getTags) | **GET** /tags | Get tags
 *AlfrescoCoreRestApi.TagsApi* | [**removeTag**](docs/TagsApi.md#removeTag) | **DELETE** /nodes/{nodeId}/tags/{tagId} | Delete a tag
 *AlfrescoCoreRestApi.TagsApi* | [**updateTag**](docs/TagsApi.md#updateTag) | **PUT** /tags/{tagId} | Update a tag
-*AlfrescoCoreRestApi.WebscriptApi* | [**executeWebScript**](docs/WebscriptApi.md#executeWebScript) | |  execute WebScript
 
 
 ## Documentation for Models
