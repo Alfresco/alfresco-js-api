@@ -11,6 +11,19 @@ _This project provides a JavaScript client API into the v1 Alfresco REST API_
 ## fix
 - [Ticket not cleaned when host is changed #143](https://github.com/Alfresco/alfresco-js-api/pull/143)
 - [Wrong PathInfoEntity declaration #139](https://github.com/Alfresco/alfresco-js-api/pull/139)
+- [Missing reference to ecmClient and bpmClient in the .d.ts in the AlfrescoApi #138](https://github.com/Alfresco/alfresco-js-api/pull/1398)
+
+## Features
+- [Change Activiti contextroot #137](https://github.com/Alfresco/alfresco-js-api/pull/137)
+
+```javascript
+    this.bpmAuth = new BpmAuth({
+        hostBpm: 'http://127.0.0.1:9999',
+        contextRootBpm: 'activiti-custom-root'
+    });
+    
+    this.bpmAuth.login('admin', 'admin');
+```
 
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.0.0) (20-12-2016)
