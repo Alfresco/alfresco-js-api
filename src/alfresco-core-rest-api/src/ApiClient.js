@@ -256,7 +256,10 @@
       switch (auth.type) {
         case 'basic':
           if (auth.username || auth.password) {
-            request.auth(auth.username || '', auth.password || '');
+            request.auth(
+              auth.username ? encodeURIComponent(auth.username) : '',
+              auth.password ? encodeURIComponent(auth.password) : ''
+            );
           }
           break;
         case 'apiKey':
