@@ -25,7 +25,7 @@ describe('Ecm Auth test', function () {
             this.ecmAuth.login('admin', 'admin').then((data) => {
                 expect(data).to.be.equal('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
                 done();
-            }, function () {
+            }, ()=> {
             });
 
         });
@@ -60,7 +60,7 @@ describe('Ecm Auth test', function () {
                 this.ecmAuth.changeHost('anyhost');
                 expect(this.ecmAuth.isLoggedIn()).to.be.equal(false);
                 done();
-            }, function () {
+            }, () => {
             });
 
         });
@@ -81,7 +81,7 @@ describe('Ecm Auth test', function () {
             this.ecmAuth.logout().then(() => {
                 expect(this.ecmAuth.isLoggedIn()).to.be.equal(false);
                 done();
-            }, function () {
+            }, ()=> {
             });
         });
 
@@ -95,7 +95,7 @@ describe('Ecm Auth test', function () {
 
             this.ecmAuth.login('wrong', 'name').then(function () {
 
-            }, function (error) {
+            }, (error)=> {
                 expect(error.status).to.be.equal(403);
                 done();
             });
@@ -111,7 +111,7 @@ describe('Ecm Auth test', function () {
 
             this.ecmAuth.login(null, null).then(function () {
 
-            }, function (error) {
+            }, (error)=> {
                 expect(error.status).to.be.equal(400);
                 done();
             });
@@ -126,7 +126,12 @@ describe('Ecm Auth test', function () {
                     hostEcm: this.hostEcm
                 });
 
-                this.ecmAuth.login('wrong', 'name').on('unauthorized', ()=> {
+                var loginPromise = this.ecmAuth.login('wrong', 'name');
+
+                loginPromise.catch(()=> {
+                });
+
+                loginPromise.on('unauthorized', ()=> {
                     done();
                 });
             });
@@ -139,7 +144,12 @@ describe('Ecm Auth test', function () {
                     hostEcm: this.hostEcm
                 });
 
-                this.ecmAuth.login('wrong', 'name').on('forbidden', ()=> {
+                var loginPromise = this.ecmAuth.login('wrong', 'name');
+
+                loginPromise.catch(()=> {
+                });
+
+                loginPromise.on('forbidden', ()=> {
                     done();
                 });
             });
@@ -152,7 +162,12 @@ describe('Ecm Auth test', function () {
                     hostEcm: this.hostEcm
                 });
 
-                this.ecmAuth.login('admin', 'admin').on('success', ()=> {
+                var loginPromise = this.ecmAuth.login('admin', 'admin');
+
+                loginPromise.catch(()=> {
+                });
+
+                loginPromise.on('success', ()=> {
                     done();
                 });
             });

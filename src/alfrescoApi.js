@@ -136,7 +136,7 @@ class AlfrescoApi {
 
             bpmPromise.then((ticketBpm)=> {
                 this.config.ticketBpm = ticketBpm;
-            });
+            },()=> {});
 
             return bpmPromise;
         } else if (this._isEcmConfiguration()) {
@@ -146,7 +146,7 @@ class AlfrescoApi {
                 this.setAuthenticationClientECMBPM(this.ecmAuth.getAuthentication(), null);
 
                 this.config.ticketEcm = ticketEcm;
-            });
+            },()=> {});
 
             return ecmPromise;
 
@@ -156,7 +156,7 @@ class AlfrescoApi {
             bpmEcmPromise.then((data)=> {
                 this.config.ticketEcm = data[0];
                 this.config.ticketBpm = data[1];
-            });
+            },()=> {});
 
             return bpmEcmPromise;
         }
@@ -217,9 +217,9 @@ class AlfrescoApi {
             return this.bpmAuth.logout();
         } else if (this.config.provider && this.config.provider.toUpperCase() === 'ECM') {
             var ecmPromise = this.ecmAuth.logout();
-            ecmPromise.then((data)=> {
+            ecmPromise.then(()=> {
                 this.config.ticket = undefined;
-            });
+            },()=> {});
 
             return ecmPromise;
         } else if (this.config.provider && this.config.provider.toUpperCase() === 'ALL') {

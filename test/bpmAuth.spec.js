@@ -111,7 +111,12 @@ describe('Bpm Auth test', function () {
                     contextRootBpm: 'activiti-app'
                 });
 
-                this.bpmAuth.login('wrong', 'name').on('unauthorized', ()=> {
+                var loginPromise = this.bpmAuth.login('wrong', 'name');
+
+                loginPromise.catch(()=> {
+                });
+
+                loginPromise.on('unauthorized', ()=> {
                     done();
                 });
             });
@@ -124,7 +129,12 @@ describe('Bpm Auth test', function () {
                     contextRootBpm: 'activiti-app'
                 });
 
-                this.bpmAuth.login('wrong', 'name').on('forbidden', ()=> {
+                var loginPromise = this.bpmAuth.login('wrong', 'name');
+
+                loginPromise.catch(()=> {
+                });
+
+                loginPromise.on('forbidden', ()=> {
                     done();
                 });
             });
@@ -137,7 +147,12 @@ describe('Bpm Auth test', function () {
                     contextRootBpm: 'activiti-app'
                 });
 
-                this.bpmAuth.login('admin', 'admin').on('success', ()=> {
+                var loginPromise = this.bpmAuth.login('admin', 'admin');
+
+                loginPromise.catch(()=> {
+                });
+
+                loginPromise.on('success', ()=> {
                     done();
                 });
             });
@@ -203,11 +218,11 @@ describe('Bpm Auth test', function () {
 
         describe('CSRF Token', function () {
 
-            beforeEach(function() {
+            beforeEach(function () {
                 this.setCsrfTokenStub = sinon.stub(BpmAuth.prototype, 'setCsrfToken');
             });
 
-            afterEach(function() {
+            afterEach(function () {
                 this.setCsrfTokenStub.restore();
             });
 
