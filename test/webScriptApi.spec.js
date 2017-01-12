@@ -23,16 +23,17 @@ describe('WebScript', function () {
 
         this.alfrescoJsApi.login('admin', 'admin').then(() => {
             done();
+        }, ()=> {
+
         });
     });
 
     it('execute webScript return 400 error if is not present on the server should be handled by reject promise', function (done) {
         this.webScriptMock.get404Response();
 
-        this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', this.scriptPath, null, this.contextRoot, this.servicePath).then(
-            ()=> {
-                console.log('success');
-            },
+        this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', this.scriptPath, null, this.contextRoot, this.servicePath).then(()=> {
+            console.log('success');
+        },
             (error) => {
                 expect(error.status).to.be.equal(404);
                 done();
@@ -72,28 +73,40 @@ describe('WebScript', function () {
         it('WebScript should fire success event at the end', function (done) {
             this.webScriptMock.get200Response();
 
-            this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', this.scriptPath, null, this.contextRoot, this.servicePath)
-                .on('success', ()=> {
-                    done();
-                });
+            var webscriptPormise = this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', this.scriptPath, null, this.contextRoot, this.servicePath);
+
+            webscriptPormise.catch(()=> {
+            });
+
+            webscriptPormise.on('success', ()=> {
+                done();
+            });
         });
 
         it('WebScript should fire error event if something go wrong', function (done) {
             this.webScriptMock.get404Response();
 
-            this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', this.scriptPath, null, this.contextRoot, this.servicePath)
-                .on('error', ()=> {
-                    done();
-                });
+            var webscriptPormise = this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', this.scriptPath, null, this.contextRoot, this.servicePath);
+
+            webscriptPormise.catch(()=> {
+            });
+
+            webscriptPormise.on('error', ()=> {
+                done();
+            });
         });
 
         it('WebScript should fire unauthorized event if get 401', function (done) {
             this.webScriptMock.get401Response();
 
-            this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', this.scriptPath, null, this.contextRoot, this.servicePath)
-                .on('unauthorized', ()=> {
-                    done();
-                });
+            var webscriptPormise = this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', this.scriptPath, null, this.contextRoot, this.servicePath);
+
+            webscriptPormise.catch(()=> {
+            });
+
+            webscriptPormise.on('unauthorized', ()=> {
+                done();
+            });
         });
     });
 });
