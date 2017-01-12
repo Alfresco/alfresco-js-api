@@ -72,7 +72,8 @@ describe('Bpm Auth test', function () {
             this.authBpmMock.get200Response();
 
             this.bpmAuth = new BpmAuth({
-                hostBpm: this.hostBpm
+                hostBpm: this.hostBpm,
+                contextRootBpm: 'activiti-app'
             });
 
             this.bpmAuth.login('admin', 'admin').then(() => {
