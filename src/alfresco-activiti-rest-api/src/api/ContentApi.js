@@ -444,7 +444,7 @@
     }
 
     /**
-     * Function to receive the result of the getRawContent3 operation.
+     * Function to receive the result of the getRawContent operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -454,12 +454,12 @@
      * getRawContent
      * @param {Integer} contentId contentId
      */
-    this.getRawContent3 = function(contentId) {
+    this.getRawContent = function(contentId) {
       var postBody = null;
 
       // verify the required parameter 'contentId' is set
       if (contentId == undefined || contentId == null) {
-        throw "Missing the required parameter 'contentId' when calling getRawContent3";
+        throw "Missing the required parameter 'contentId' when calling getRawContent";
       }
 
 
