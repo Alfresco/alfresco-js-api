@@ -5,14 +5,10 @@
 Alfresco JS API
 
 _This project provides a JavaScript client API into the v1 Alfresco REST API_
-<a name="1.0.0"></a>
-# [1.0.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.0.0) (20-01-2017)
-## fix
-- [Wrong API name - getRawContent3 #156](https://github.com/Alfresco/alfresco-js-api/issues/156)
-
 <a name="1.0.1"></a>
 # [1.0.1](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.0.0) (xx-xx-2017)
 ## fix
+- [Wrong API name - getRawContent3 #156](https://github.com/Alfresco/alfresco-js-api/issues/156)
 - [Error on login when user has non-latin character in username or password #146](https://github.com/Alfresco/alfresco-js-api/pull/146)
 - [Ticket not cleaned when host is changed #143](https://github.com/Alfresco/alfresco-js-api/pull/143)
 - [Wrong NodesApi.getNodeInfo declaration #140](https://github.com/Alfresco/alfresco-js-api/pull/140)
