@@ -203,8 +203,8 @@ declare namespace AlfrescoApi {
     export interface NodesApi {
         new(client: ApiClient): NodesApi;
 
-        getNodeInfo(nodeId: string, opts: any): Promise<MinimalNodeEntryEntity>;
-        getNodeChildren(nodeId: string, opts: any): Promise<NodePaging>;
+        getNodeInfo(nodeId: string, opts?: any): Promise<MinimalNodeEntryEntity>;
+        getNodeChildren(nodeId: string, opts?: any): Promise<NodePaging>;
         deleteNode(nodeId: string): Promise<any>;
         createFolder(name: string, relativePath: string, nodeId?: string, opts?: any): Promise<MinimalNodeEntryEntity>;
         getNode(nodeId: string, opts: any): Promise<MinimalNodeEntity>;
