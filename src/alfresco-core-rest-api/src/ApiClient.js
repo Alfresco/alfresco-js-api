@@ -462,7 +462,7 @@
       case 'Number':
         return parseFloat(data);
       case 'String':
-        return String(data);
+        return data !== null && data !== undefined ? String(data) : data;
       case 'Date':
         return data ? this.parseDate(String(data)) : null;
       default:
