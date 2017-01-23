@@ -8,6 +8,7 @@ _This project provides a JavaScript client API into the v1 Alfresco REST API_
 <a name="1.0.1"></a>
 # [1.0.1](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.0.0) (xx-xx-2017)
 ## fix
+- [Add getRawContentUrl API #161](https://github.com/Alfresco/alfresco-js-api/issues/161)
 - [Add getContentThumbnailUrl API #160](https://github.com/Alfresco/alfresco-js-api/issues/160)
 - [Fix null string field values parsed as text 'null' #158](https://github.com/Alfresco/alfresco-js-api/issues/158)
 - [Wrong API name - getRawContent3 #156](https://github.com/Alfresco/alfresco-js-api/issues/156)
