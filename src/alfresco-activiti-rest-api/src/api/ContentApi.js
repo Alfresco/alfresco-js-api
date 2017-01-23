@@ -486,11 +486,19 @@
     }
 
     /**
+     * Get content Raw URL for the given contentId
+     * @param {Integer} contentId contentId
+     */
+    this.getRawContentUrl = function(contentId) {
+      return this.apiClient.basePath + '/api/enterprise/content/' + contentId + '/raw';
+    }
+
+    /**
      * Get thumbnail URL for the given contentId
      * @param {Integer} contentId contentId
      */
     this.getContentThumbnailUrl = function(contentId) {
-      return this.apiClient.basePath + '/app/rest/content/' + contentId + '/rendition/thumbnail?' + '?noCache=';
+      return this.apiClient.basePath + '/app/rest/content/' + contentId + '/rendition/thumbnail';
     }
 
     /**
