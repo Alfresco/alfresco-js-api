@@ -24261,9 +24261,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var authNames = [];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
-      var returnType = null;
+      var returnType = Object;
 
       return this.apiClient.callApi('/api/enterprise/content/{contentId}/raw', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
+
+    /**
+     * Get thumbnail URL for the given contentId
+     * @param {Integer} contentId contentId
+     */
+    this.getContentThumbnailUrl = function (contentId) {
+      return this.apiClient.basePath + '/app/rest/content/' + contentId + '/rendition/thumbnail?' + '?noCache=';
     };
 
     /**
