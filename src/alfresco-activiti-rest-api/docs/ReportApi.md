@@ -11,6 +11,9 @@ Method | HTTP request | Description
 [**getTasksByProcessDefinitionId**](ReportApi.md#getTasksByProcessDefinitionId) | **GET** /app/rest/reporting/report-params/{reportId}/tasks | Retrieves all tasks that refer to the processDefinitionId
 [**getReportsByParams**](ReportApi.md#getReportsByParams) | **GET** /app/rest/reporting/report-params/{reportId} | Generate the reports
 [**updateReport**](ReportApi.md#updateReport) | **PUT** /app/rest/reporting/reports/{reportId} | Update the report
+[**exportToCsv**](ReportApi.md#exportToCsv) | **POST** /app/rest/reporting/reports/{reportId}/export-to-csv | Export a report as csv
+[**saveReport**](ReportApi.md#saveReport) | **POST** /app/rest/reporting/reports/{reportId} | Save the report
+[**deleteReport**](ReportApi.md#deleteReport) | **DELETE** /app/rest/reporting/reports/{reportId} | Delete a report
 
 <a name="createDefaultReports"></a>
 # **createDefaultReports**
@@ -233,4 +236,125 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+<a name="exportToCsv"></a>
+# **exportToCsv**
+> exportToCsv(reportId, queryParms)
 
+Export a report as csv
+
+### Example
+```javascript
+
+var reportId = "1"; // String | reportId
+var queryParms = {
+            'processDefinitionId': 'TEST:99:999',
+            'dateRange': {
+                'startDate': '2017-01-01T00:00:00.000Z',
+                'endDate': '2017-01-24T23:59:59.999Z',
+                'rangeId': 'currentYear'
+            },
+            'slowProcessInstanceInteger': 10,
+            'status': 'All',
+            '__reportName': 'FAKE_REPORT_NAME'
+        };
+
+this.alfrescoJsApi.activiti.reportApi.exportToCsv(reportId, queryParms);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **reportId** | **String**| reportId |
+ **queryParms** | **Object**| Query parameters |
+
+### Return type
+
+**[&#39;String&#39;]**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="saveReport"></a>
+# **saveReport**
+> saveReport(reportId, queryParams)
+
+Save a report
+
+### Example
+```javascript
+
+var reportId = "1"; // String | reportId
+var queryParms = {
+            'processDefinitionId': 'TEST:99:999',
+            'dateRange': {
+                'startDate': '2017-01-01T00:00:00.000Z',
+                'endDate': '2017-01-24T23:59:59.999Z',
+                'rangeId': 'currentYear'
+            },
+            'slowProcessInstanceInteger': 10,
+            'status': 'All',
+            '__reportName': 'FAKE_REPORT_NAME'
+        };
+
+this.alfrescoJsApi.activiti.reportApi.saveReport(reportId, queryParms);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **reportId** | **String**| reportId |
+ **queryParms** | **Object**| Query parameters |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="deleteReport"></a>
+# **deleteReport**
+> deleteReport(reportId)
+
+Delete a report
+
+### Example
+```javascript
+
+var reportId = "1"; // String | reportId
+
+this.alfrescoJsApi.activiti.reportApi.deleteReport(reportId);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **reportId** | **String**| reportId |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json

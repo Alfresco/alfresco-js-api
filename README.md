@@ -1060,6 +1060,87 @@ var name = "new Fake name"; // String | reportId
 this.alfrescoJsApi.activiti.reportApi.updateReport(reportId, name);
 ```
 
+# **export to csv**
+> exportToCsv(reportId, queryParms)
+
+Export a report as csv
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **reportId** | **String**| reportId |
+ **queryParms** | **Object**| Query parameters |
+
+### Example
+```javascript
+
+var reportId = "1"; // String | reportId
+var queryParms = {
+            'processDefinitionId': 'TEST:99:999',
+            'dateRange': {
+                'startDate': '2017-01-01T00:00:00.000Z',
+                'endDate': '2017-01-24T23:59:59.999Z',
+                'rangeId': 'currentYear'
+            },
+            'slowProcessInstanceInteger': 10,
+            'status': 'All',
+            '__reportName': 'FAKE_REPORT_NAME'
+        };
+
+this.alfrescoJsApi.activiti.reportApi.exportToCsv(reportId, queryParms);
+```
+
+# **save report**
+> saveReport(reportId, queryParams)
+
+Save a report
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **reportId** | **String**| reportId |
+ **queryParms** | **Object**| Query parameters |
+
+### Example
+```javascript
+
+var reportId = "1"; // String | reportId
+var queryParms = {
+            'processDefinitionId': 'TEST:99:999',
+            'dateRange': {
+                'startDate': '2017-01-01T00:00:00.000Z',
+                'endDate': '2017-01-24T23:59:59.999Z',
+                'rangeId': 'currentYear'
+            },
+            'slowProcessInstanceInteger': 10,
+            'status': 'All',
+            '__reportName': 'FAKE_REPORT_NAME'
+        };
+
+this.alfrescoJsApi.activiti.reportApi.saveReport(reportId, queryParms);
+```
+
+# **delete report**
+> deleteReport(reportId)
+
+Delete a report
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **reportId** | **String**| reportId |
+
+### Example
+```javascript
+
+var reportId = "1"; // String | reportId
+
+this.alfrescoJsApi.activiti.reportApi.deleteReport(reportId);
+```
+
 # Development
 
 * To run the build 
