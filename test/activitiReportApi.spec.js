@@ -159,4 +159,56 @@ describe('Activiti Report Api', function () {
         });
     });
 
+    it('should export the report', function (done) {
+
+        var reportId = '11015'; // String | reportId
+        var queryParms = {
+            'processDefinitionId': 'TEST:99:999',
+            'dateRange': {
+                'startDate': '2017-01-01T00:00:00.000Z',
+                'endDate': '2017-01-24T23:59:59.999Z',
+                'rangeId': 'currentYear'
+            },
+            'slowProcessInstanceInteger': 10,
+            'status': 'All',
+            '__reportName': 'FAKE_REPORT_NAME'
+        };
+        this.reportsMock.get200ResponseExportReport(reportId);
+
+        this.alfrescoJsApi.activiti.reportApi.exportToCsv(reportId, queryParms).then(function () {
+                done();
+            });
+    });
+
+    it('should save the report', function (done) {
+
+        var reportId = '11015'; // String | reportId
+        var queryParms = {
+            'processDefinitionId': 'TEST:99:999',
+            'dateRange': {
+                'startDate': '2017-01-01T00:00:00.000Z',
+                'endDate': '2017-01-24T23:59:59.999Z',
+                'rangeId': 'currentYear'
+            },
+            'slowProcessInstanceInteger': 10,
+            'status': 'All',
+            '__reportName': 'FAKE_REPORT_NAME'
+        };
+        this.reportsMock.get200ResponseSaveReport(reportId);
+
+        this.alfrescoJsApi.activiti.reportApi.saveReport(reportId, queryParms).then(function () {
+            done();
+        });
+    });
+
+    it('should delete a report', function (done) {
+
+        var reportId = '11015'; // String | reportId
+        this.reportsMock.get200ResponseDeleteReport(reportId);
+
+        this.alfrescoJsApi.activiti.reportApi.deleteReport(reportId).then(function () {
+            done();
+        });
+    });
+
 });
