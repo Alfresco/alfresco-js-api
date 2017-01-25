@@ -11,6 +11,7 @@ var AlfrescoUpload = require('./alfrescoUpload');
 var Emitter = require('event-emitter');
 var EcmAuth = require('./ecmAuth');
 var BpmAuth = require('./bpmAuth');
+var Oauth2Auth = require('./oauth2Auth');
 var EcmClient = require('./ecmClient');
 var BpmClient = require('./bpmClient');
 var SearchClient = require('./searchClient');
@@ -41,6 +42,7 @@ class AlfrescoApi {
         this.config = {
             hostEcm: config.hostEcm || 'http://127.0.0.1:8080',
             hostBpm: config.hostBpm || 'http://127.0.0.1:9999',
+            hostOauth2: config.hostOauth2 || 'http://127.0.0.1:9191',
             contextRoot: config.contextRoot || 'alfresco',
             contextRootBpm: config.contextRootBpm || 'activiti-app',
             provider: config.provider || 'ECM',
@@ -52,11 +54,19 @@ class AlfrescoApi {
 
         this.bpmAuth = new BpmAuth(this.config);
         this.ecmAuth = new EcmAuth(this.config);
+        this.oauth2Auth = new Oauth2Auth(this.config);
 
         this.ecmPrivateClient = new EcmPrivateClient(this.config);
         this.ecmClient = new EcmClient(this.config);
         this.bpmClient = new BpmClient(this.config);
         this.searchClient = new SearchClient(this.config);
+
+        if (this.config.provider === 'OAUTH') {
+            this.setAuthenticationOauth2(this.oauth2Auth.getAuthentication());
+        } else {
+            this.setAuthenticationClientECMBPM(this.ecmAuth.getAuthentication(), this.bpmAuth.getAuthentication());
+        }
+
         this.setAuthenticationClientECMBPM(this.ecmAuth.getAuthentication(), this.bpmAuth.getAuthentication());
 
         this.initObjects();
@@ -150,7 +160,8 @@ class AlfrescoApi {
 
             bpmPromise.then((ticketBpm)=> {
                 this.config.ticketBpm = ticketBpm;
-            },()=> {});
+            }, ()=> {
+            });
 
             return bpmPromise;
         } else if (this._isEcmConfiguration()) {
@@ -160,7 +171,8 @@ class AlfrescoApi {
                 this.setAuthenticationClientECMBPM(this.ecmAuth.getAuthentication(), null);
 
                 this.config.ticketEcm = ticketEcm;
-            },()=> {});
+            }, ()=> {
+            });
 
             return ecmPromise;
 
@@ -170,9 +182,19 @@ class AlfrescoApi {
             bpmEcmPromise.then((data)=> {
                 this.config.ticketEcm = data[0];
                 this.config.ticketBpm = data[1];
-            },()=> {});
+            }, ()=> {
+            });
 
             return bpmEcmPromise;
+        } else if (this._isOauthConfiguration()) {
+            var oauth2AuthPromise = this.oauth2Auth.login(username, password);
+
+            oauth2AuthPromise.then((accessToken)=> {
+                this.config.accessToken = accessToken;
+            }, ()=> {
+            });
+
+            return oauth2AuthPromise;
         }
     }
 
@@ -181,6 +203,12 @@ class AlfrescoApi {
         this.searchClient.setAuthentications(authECM);
         this.ecmPrivateClient.setAuthentications(authECM);
         this.bpmClient.setAuthentications(authBPM);
+    }
+
+    setAuthenticationOauth2(oauth2Auth) {
+        this.ecmClient.setAuthentications(oauth2Auth);
+        this.ecmPrivateClient.setAuthentications(oauth2Auth);
+        this.bpmClient.setAuthentications(oauth2Auth);
     }
 
     /**
@@ -234,7 +262,8 @@ class AlfrescoApi {
             var ecmPromise = this.ecmAuth.logout();
             ecmPromise.then(()=> {
                 this.config.ticket = undefined;
-            },()=> {});
+            }, ()=> {
+            });
 
             return ecmPromise;
         } else if (this.config.provider && this.config.provider.toUpperCase() === 'ALL') {
@@ -279,6 +308,8 @@ class AlfrescoApi {
             return this.ecmAuth.isLoggedIn();
         } else if (this.config.provider && this.config.provider.toUpperCase() === 'ALL') {
             return this.ecmAuth.isLoggedIn() && this.bpmAuth.isLoggedIn();
+        } else if (this.config.provider && this.config.provider.toUpperCase() === 'OAUTH') {
+            return this.oauth2Auth.isLoggedIn();
         }
     }
 
