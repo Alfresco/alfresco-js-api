@@ -19,7 +19,7 @@ describe('Activiti Report Api', function () {
             provider: 'BPM'
         });
 
-        this.alfrescoJsApi.login('admin', 'admin').then(() => {
+        this.alfrescoJsApi.login('admin', 'admin').then(()=> {
             done();
         });
     });
@@ -175,9 +175,11 @@ describe('Activiti Report Api', function () {
         };
         this.reportsMock.get200ResponseExportReport(reportId);
 
-        this.alfrescoJsApi.activiti.reportApi.exportToCsv(reportId, queryParms).then(function () {
-                done();
-            });
+        this.alfrescoJsApi.activiti.reportApi.exportToCsv(reportId, queryParms).then(function (respo) {
+            expect(respo).not.equal(null);
+            expect(respo).not.equal(undefined);
+            done();
+        });
     });
 
     it('should save the report', function (done) {

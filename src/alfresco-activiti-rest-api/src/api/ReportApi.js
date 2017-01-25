@@ -231,7 +231,6 @@
 
     /**
      * Function to export a report
-     * @param {String} error Error message, if any.
      */
 
     /**
@@ -263,7 +262,7 @@
       var authNames = [];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
-      var returnType = null;
+      var returnType = 'String';
 
       return this.apiClient.callApi(
         '/app/rest/reporting/reports/{reportId}/export-to-csv', 'POST',
@@ -274,7 +273,6 @@
 
     /**
      * Function to save a report
-     * @param {String} error Error message, if any.
      */
 
     /**
@@ -314,12 +312,19 @@
         authNames, contentTypes, accepts, returnType
       );
     }
+    /**
+     * Function to delete a report
+     */
 
+    /**
+     * Save a report
+     * @param {string} reportId
+     */
     this.deleteReport = function(reportId) {
       var postBody = null;
 
       if (reportId == undefined || reportId == null) {
-        throw "Missing the required parameter 'reportId' when calling updateReport";
+        throw "Missing the required parameter 'reportId' when calling delete";
       }
 
       var pathParams = {

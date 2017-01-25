@@ -159,7 +159,7 @@ class ReportsMock extends BaseMock {
     get200ResponseExportReport(reportId) {
         nock(this.host, {'encodedQueryParams': true})
             .post('/activiti-app/app/rest/reporting/reports/' + reportId + '/export-to-csv')
-            .reply(200);
+            .reply(200, 'CSV');
     }
 
     get200ResponseSaveReport(reportId) {

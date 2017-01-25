@@ -60,6 +60,18 @@
       if (data.hasOwnProperty('created')) {
         obj['created'] = ApiClient.convertToType(data['created'], 'String');
       }
+      if (data.hasOwnProperty('typeFiltering')) {
+        obj['typeFiltering'] = ApiClient.convertToType(data['typeFiltering'], 'String');
+      }
+      if (data.hasOwnProperty('duration')) {
+        obj['duration'] = ApiClient.convertToType(data['duration'], 'Integer');
+      }
+      if (data.hasOwnProperty('taskName')) {
+        obj['taskName'] = ApiClient.convertToType(data['taskName'], 'String');
+      }
+      if (data.hasOwnProperty('dateRangeInterval')) {
+        obj['dateRangeInterval'] = ApiClient.convertToType(data['dateRangeInterval'], 'String');
+      }
       if (data.hasOwnProperty('dateRange')) {
         obj['dateRange'] = ReportDateRangeRepresentation.constructFromObject(data['dateRange']);
       }
@@ -88,6 +100,22 @@
    * @member {String} created
    */
   exports.prototype['created'] = undefined;
+  /**
+   * @member {String} typeFiltering
+   */
+  exports.prototype['typeFiltering'] = undefined;
+  /**
+   * @member {String} duration
+   */
+  exports.prototype['duration'] = undefined;
+  /**
+   * @member {String} taskName
+   */
+  exports.prototype['taskName'] = undefined;
+  /**
+   * @member {String} dateRangeInterval
+   */
+  exports.prototype['dateRangeInterval'] = undefined;
   /**
    * @member {module:model/ReportDateRangeRepresentation} dateRange
    */

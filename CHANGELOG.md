@@ -18,6 +18,7 @@ _This project provides a JavaScript client API into the v1 Alfresco REST API_
 - [Wrong PathInfoEntity declaration #139](https://github.com/Alfresco/alfresco-js-api/pull/139)
 - [Missing reference to ecmClient and bpmClient in the .d.ts in the AlfrescoApi #138](https://github.com/Alfresco/alfresco-js-api/pull/138)
 - [remove UnhandledPromiseRejectionWarning in the test log #153](https://github.com/Alfresco/alfresco-js-api/pull/153)
+- [Provide Activiti Api with Export / Save and Delete report #164](https://github.com/Alfresco/alfresco-js-api/issues/164)
 
 ## Features
 - [Change Activiti contextroot #137](https://github.com/Alfresco/alfresco-js-api/pull/137)
