@@ -79,6 +79,9 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
   * [Tasks of process definition](#tasks-of-process-definition)
   * [Generate reports](#generate-reports)
   * [Update report details](#update-report-details)
+  * [Export to csv](#export-to-csv)
+  * [Save Report](#save-report)
+  * [Delete report](#delete-report)
 - [Development](#development)
 - [Release History](#release-history)
 
@@ -88,7 +91,7 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
 
 # Prerequisites 
 
-To correctly use the alafresco js api the minimal supported version are:
+To correctly use the alfresco js api the minimal supported version are:
 
 - 5.2.a-EA Alfresco Platform Repository (version [5.2.a-EA](https://wiki.alfresco.com/wiki/Community_file_list_201606-EA) or newer)
 - 1.5 Activiti
@@ -1060,19 +1063,18 @@ var name = "new Fake name"; // String | reportId
 this.alfrescoJsApi.activiti.reportApi.updateReport(reportId, name);
 ```
 
-# **export to csv**
-> exportToCsv(reportId, queryParms)
+## Export to csv
+exportToCsv(reportId, queryParms)
 
-Export a report as csv
+> Export a report as csv
 
-### Parameters
-
+####Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **reportId** | **String**| reportId |
  **queryParms** | **Object**| Query parameters |
 
-### Example
+####Example
 ```javascript
 
 var reportId = "1"; // String | reportId
@@ -1091,19 +1093,19 @@ var queryParms = {
 this.alfrescoJsApi.activiti.reportApi.exportToCsv(reportId, queryParms);
 ```
 
-# **save report**
-> saveReport(reportId, queryParams)
+## Save Report
 
-Save a report
+saveReport(reportId, queryParams)
 
-### Parameters
+> Save a report
 
+####Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **reportId** | **String**| reportId |
  **queryParms** | **Object**| Query parameters |
 
-### Example
+####Example
 ```javascript
 
 var reportId = "1"; // String | reportId
@@ -1122,18 +1124,17 @@ var queryParms = {
 this.alfrescoJsApi.activiti.reportApi.saveReport(reportId, queryParms);
 ```
 
-# **delete report**
-> deleteReport(reportId)
+## Delete report
+deleteReport(reportId)
 
-Delete a report
+> Delete a report
 
-### Parameters
-
+####Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **reportId** | **String**| reportId |
 
-### Example
+####Example
 ```javascript
 
 var reportId = "1"; // String | reportId
