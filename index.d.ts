@@ -22,16 +22,13 @@ declare namespace AlfrescoApi {
         upload: any;
         webScript: any;
 
+        ecmClient: EcmClient;
+        bpmClient: BpmClient;
+        ecmPrivateClient: EcmPrivateClient;
+
         changeEcmHost(ecmHost: string): void;
         changeBpmHost(bpmHost: string): void;
         changeCsrfConfig(disableCsrf: boolean): void;
-
-        getNodeInfo(nodeId: string): Promise<MinimalNodeEntryEntity>;
-        deleteNode(nodeId: string): any;
-        deleteNodePermanent(nodeId: string): any;
-
-        uploadFile(fileDefinition: File, relativePath: string, nodeId: string, nodeBody: any, opts: any): any;
-        createFolder(name: string, relativePath: string, nodeId: string): any;
 
         isLoggedIn(): boolean;
         login(username: string, password: string): Promise<string>;
@@ -147,6 +144,24 @@ declare namespace AlfrescoApi {
         properties: NodeProperties;
     }
 
+    export interface EcmClient {
+        new(config: AlfrescoApiConfig): EcmClient;
+        changeHost(host: String): void;
+        setAuthentications(authentications: any): void;
+    }
+
+    export interface BpmClient {
+        new(config: AlfrescoApiConfig): BpmClient;
+        changeHost(host: String): void;
+        setAuthentications(authentications: any): void;
+    }
+
+    export interface EcmPrivateClient {
+        new(config: AlfrescoApiConfig): EcmPrivateClient;
+        changeHost(host: String): void;
+        setAuthentications(authentications: any): void;
+    }
+
     export interface MinimalNodeEntryEntity extends MinimalNode {
     }
 
@@ -172,7 +187,7 @@ declare namespace AlfrescoApi {
     }
 
     export interface PathInfoEntity {
-        elements: PathElementEntity;
+        elements: PathElementEntity[];
         isComplete: boolean;
         name: string;
     }
@@ -187,8 +202,9 @@ declare namespace AlfrescoApi {
 
     export interface NodesApi {
         new(client: ApiClient): NodesApi;
-        getNodeInfo(nodeId: string): Promise<MinimalNodeEntryEntity>;
-        getNodeChildren(nodeId: string, opts: any): Promise<NodePaging>;
+
+        getNodeInfo(nodeId: string, opts?: any): Promise<MinimalNodeEntryEntity>;
+        getNodeChildren(nodeId: string, opts?: any): Promise<NodePaging>;
         deleteNode(nodeId: string): Promise<any>;
         createFolder(name: string, relativePath: string, nodeId?: string, opts?: any): Promise<MinimalNodeEntryEntity>;
         getNode(nodeId: string, opts: any): Promise<MinimalNodeEntity>;
@@ -354,6 +370,7 @@ declare namespace AlfrescoApi {
         sitesApi: any;
         queriesApi: any;
         tagsApi: any;
+        webscriptApi: any;
 
         /*Models*/
         Activity: any;
@@ -471,6 +488,7 @@ declare namespace AlfrescoApi {
         hostEcm: string;
         hostBpm: string;
         contextRoot: string;
+        contextRootBpm: string;
         provider: string;
         ticketEcm: string;
         ticketBpm: string;

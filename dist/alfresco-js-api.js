@@ -5,7 +5,7 @@ var AlfrescoApi = require('./src/alfrescoApi.js');
 
 module.exports = AlfrescoApi;
 
-},{"./src/alfrescoApi.js":295}],2:[function(require,module,exports){
+},{"./src/alfrescoApi.js":300}],2:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -2525,7 +2525,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.2';
+  var VERSION = '4.17.4';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -4080,9 +4080,9 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
      * Shortcut fusion is an optimization to merge iteratee calls; this avoids
      * the creation of intermediate arrays and can greatly reduce the number of
      * iteratee executions. Sections of a chain sequence qualify for shortcut
-     * fusion if the section is applied to an array of at least `200` elements
-     * and any iteratees accept only one argument. The heuristic for whether a
-     * section qualifies for shortcut fusion is subject to change.
+     * fusion if the section is applied to an array and iteratees accept only
+     * one argument. The heuristic for whether a section qualifies for shortcut
+     * fusion is subject to change.
      *
      * Chaining is supported in custom builds as long as the `_#value` method is
      * directly or indirectly included in the build.
@@ -4241,8 +4241,8 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
     /**
      * By default, the template delimiters used by lodash are like those in
-     * embedded Ruby (ERB). Change the following template settings to use
-     * alternative delimiters.
+     * embedded Ruby (ERB) as well as ES2015 template strings. Change the
+     * following template settings to use alternative delimiters.
      *
      * @static
      * @memberOf _
@@ -4389,8 +4389,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
           resIndex = 0,
           takeCount = nativeMin(length, this.__takeCount__);
 
-      if (!isArr || arrLength < LARGE_ARRAY_SIZE ||
-          (arrLength == length && takeCount == length)) {
+      if (!isArr || (!isRight && arrLength == length && takeCount == length)) {
         return baseWrapperValue(array, this.__actions__);
       }
       var result = [];
@@ -4504,7 +4503,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
      */
     function hashHas(key) {
       var data = this.__data__;
-      return nativeCreate ? data[key] !== undefined : hasOwnProperty.call(data, key);
+      return nativeCreate ? (data[key] !== undefined) : hasOwnProperty.call(data, key);
     }
 
     /**
@@ -4975,24 +4974,6 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
      */
     function arrayShuffle(array) {
       return shuffleSelf(copyArray(array));
-    }
-
-    /**
-     * Used by `_.defaults` to customize its `_.assignIn` use.
-     *
-     * @private
-     * @param {*} objValue The destination value.
-     * @param {*} srcValue The source value.
-     * @param {string} key The key of the property to assign.
-     * @param {Object} object The parent object of `objValue`.
-     * @returns {*} Returns the value to assign.
-     */
-    function assignInDefaults(objValue, srcValue, key, object) {
-      if (objValue === undefined ||
-          (eq(objValue, objectProto[key]) && !hasOwnProperty.call(object, key))) {
-        return srcValue;
-      }
-      return objValue;
     }
 
     /**
@@ -5607,8 +5588,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
       if (value == null) {
         return value === undefined ? undefinedTag : nullTag;
       }
-      value = Object(value);
-      return (symToStringTag && symToStringTag in value)
+      return (symToStringTag && symToStringTag in Object(value))
         ? getRawTag(value)
         : objectToString(value);
     }
@@ -5812,7 +5792,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
       if (value === other) {
         return true;
       }
-      if (value == null || other == null || (!isObject(value) && !isObjectLike(other))) {
+      if (value == null || other == null || (!isObjectLike(value) && !isObjectLike(other))) {
         return value !== value && other !== other;
       }
       return baseIsEqualDeep(value, other, bitmask, customizer, baseIsEqual, stack);
@@ -5835,17 +5815,12 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
     function baseIsEqualDeep(object, other, bitmask, customizer, equalFunc, stack) {
       var objIsArr = isArray(object),
           othIsArr = isArray(other),
-          objTag = arrayTag,
-          othTag = arrayTag;
+          objTag = objIsArr ? arrayTag : getTag(object),
+          othTag = othIsArr ? arrayTag : getTag(other);
 
-      if (!objIsArr) {
-        objTag = getTag(object);
-        objTag = objTag == argsTag ? objectTag : objTag;
-      }
-      if (!othIsArr) {
-        othTag = getTag(other);
-        othTag = othTag == argsTag ? objectTag : othTag;
-      }
+      objTag = objTag == argsTag ? objectTag : objTag;
+      othTag = othTag == argsTag ? objectTag : othTag;
+
       var objIsObj = objTag == objectTag,
           othIsObj = othTag == objectTag,
           isSameTag = objTag == othTag;
@@ -6293,7 +6268,6 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
      * @returns {Object} Returns the new object.
      */
     function basePick(object, paths) {
-      object = Object(object);
       return basePickBy(object, paths, function(value, path) {
         return hasIn(object, path);
       });
@@ -7686,8 +7660,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
           var args = arguments,
               value = args[0];
 
-          if (wrapper && args.length == 1 &&
-              isArray(value) && value.length >= LARGE_ARRAY_SIZE) {
+          if (wrapper && args.length == 1 && isArray(value)) {
             return wrapper.plant(value).value();
           }
           var index = 0,
@@ -7994,7 +7967,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
       var func = Math[methodName];
       return function(number, precision) {
         number = toNumber(number);
-        precision = nativeMin(toInteger(precision), 292);
+        precision = precision == null ? 0 : nativeMin(toInteger(precision), 292);
         if (precision) {
           // Shift with exponential notation to avoid floating-point issues.
           // See [MDN](https://mdn.io/round#Examples) for more details.
@@ -8099,7 +8072,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
       thisArg = newData[2];
       partials = newData[3];
       holders = newData[4];
-      arity = newData[9] = newData[9] == null
+      arity = newData[9] = newData[9] === undefined
         ? (isBindKey ? 0 : func.length)
         : nativeMax(newData[9] - length, 0);
 
@@ -8117,6 +8090,63 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
       }
       var setter = data ? baseSetData : setData;
       return setWrapToString(setter(result, newData), func, bitmask);
+    }
+
+    /**
+     * Used by `_.defaults` to customize its `_.assignIn` use to assign properties
+     * of source objects to the destination object for all destination properties
+     * that resolve to `undefined`.
+     *
+     * @private
+     * @param {*} objValue The destination value.
+     * @param {*} srcValue The source value.
+     * @param {string} key The key of the property to assign.
+     * @param {Object} object The parent object of `objValue`.
+     * @returns {*} Returns the value to assign.
+     */
+    function customDefaultsAssignIn(objValue, srcValue, key, object) {
+      if (objValue === undefined ||
+          (eq(objValue, objectProto[key]) && !hasOwnProperty.call(object, key))) {
+        return srcValue;
+      }
+      return objValue;
+    }
+
+    /**
+     * Used by `_.defaultsDeep` to customize its `_.merge` use to merge source
+     * objects into destination objects that are passed thru.
+     *
+     * @private
+     * @param {*} objValue The destination value.
+     * @param {*} srcValue The source value.
+     * @param {string} key The key of the property to merge.
+     * @param {Object} object The parent object of `objValue`.
+     * @param {Object} source The parent object of `srcValue`.
+     * @param {Object} [stack] Tracks traversed source values and their merged
+     *  counterparts.
+     * @returns {*} Returns the value to assign.
+     */
+    function customDefaultsMerge(objValue, srcValue, key, object, source, stack) {
+      if (isObject(objValue) && isObject(srcValue)) {
+        // Recursively merge objects and arrays (susceptible to call stack limits).
+        stack.set(srcValue, objValue);
+        baseMerge(objValue, srcValue, undefined, customDefaultsMerge, stack);
+        stack['delete'](srcValue);
+      }
+      return objValue;
+    }
+
+    /**
+     * Used by `_.omit` to customize its `_.cloneDeep` use to only clone plain
+     * objects.
+     *
+     * @private
+     * @param {*} value The value to inspect.
+     * @param {string} key The key of the property to inspect.
+     * @returns {*} Returns the uncloned value or `undefined` to defer cloning to `_.cloneDeep`.
+     */
+    function customOmitClone(value) {
+      return isPlainObject(value) ? undefined : value;
     }
 
     /**
@@ -8290,9 +8320,9 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
      */
     function equalObjects(object, other, bitmask, customizer, equalFunc, stack) {
       var isPartial = bitmask & COMPARE_PARTIAL_FLAG,
-          objProps = keys(object),
+          objProps = getAllKeys(object),
           objLength = objProps.length,
-          othProps = keys(other),
+          othProps = getAllKeys(other),
           othLength = othProps.length;
 
       if (objLength != othLength && !isPartial) {
@@ -8530,7 +8560,15 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
      * @param {Object} object The object to query.
      * @returns {Array} Returns the array of symbols.
      */
-    var getSymbols = nativeGetSymbols ? overArg(nativeGetSymbols, Object) : stubArray;
+    var getSymbols = !nativeGetSymbols ? stubArray : function(object) {
+      if (object == null) {
+        return [];
+      }
+      object = Object(object);
+      return arrayFilter(nativeGetSymbols(object), function(symbol) {
+        return propertyIsEnumerable.call(object, symbol);
+      });
+    };
 
     /**
      * Creates an array of the own and inherited enumerable symbols of `object`.
@@ -9014,29 +9052,6 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
       data[1] = newBitmask;
 
       return data;
-    }
-
-    /**
-     * Used by `_.defaultsDeep` to customize its `_.merge` use.
-     *
-     * @private
-     * @param {*} objValue The destination value.
-     * @param {*} srcValue The source value.
-     * @param {string} key The key of the property to merge.
-     * @param {Object} object The parent object of `objValue`.
-     * @param {Object} source The parent object of `srcValue`.
-     * @param {Object} [stack] Tracks traversed source values and their merged
-     *  counterparts.
-     * @returns {*} Returns the value to assign.
-     */
-    function mergeDefaults(objValue, srcValue, key, object, source, stack) {
-      if (isObject(objValue) && isObject(srcValue)) {
-        // Recursively merge objects and arrays (susceptible to call stack limits).
-        stack.set(srcValue, objValue);
-        baseMerge(objValue, srcValue, undefined, mergeDefaults, stack);
-        stack['delete'](srcValue);
-      }
-      return objValue;
     }
 
     /**
@@ -10781,7 +10796,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
      *
      * var users = [
      *   { 'user': 'barney',  'active': false },
-     *   { 'user': 'fred',    'active': false},
+     *   { 'user': 'fred',    'active': false },
      *   { 'user': 'pebbles', 'active': true }
      * ];
      *
@@ -13350,7 +13365,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
       if (typeof func != 'function') {
         throw new TypeError(FUNC_ERROR_TEXT);
       }
-      start = start === undefined ? 0 : nativeMax(toInteger(start), 0);
+      start = start == null ? 0 : nativeMax(toInteger(start), 0);
       return baseRest(function(args) {
         var array = args[start],
             otherArgs = castSlice(args, 0, start);
@@ -14020,7 +14035,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
      * date objects, error objects, maps, numbers, `Object` objects, regexes,
      * sets, strings, symbols, and typed arrays. `Object` objects are compared
      * by their own, not inherited, enumerable properties. Functions and DOM
-     * nodes are **not** supported.
+     * nodes are compared by strict equality, i.e. `===`.
      *
      * @static
      * @memberOf _
@@ -15040,7 +15055,9 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
      * // => 3
      */
     function toSafeInteger(value) {
-      return baseClamp(toInteger(value), -MAX_SAFE_INTEGER, MAX_SAFE_INTEGER);
+      return value
+        ? baseClamp(toInteger(value), -MAX_SAFE_INTEGER, MAX_SAFE_INTEGER)
+        : (value === 0 ? value : 0);
     }
 
     /**
@@ -15294,7 +15311,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
      * // => { 'a': 1, 'b': 2 }
      */
     var defaults = baseRest(function(args) {
-      args.push(undefined, assignInDefaults);
+      args.push(undefined, customDefaultsAssignIn);
       return apply(assignInWith, undefined, args);
     });
 
@@ -15318,7 +15335,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
      * // => { 'a': { 'b': 2, 'c': 3 } }
      */
     var defaultsDeep = baseRest(function(args) {
-      args.push(undefined, mergeDefaults);
+      args.push(undefined, customDefaultsMerge);
       return apply(mergeWith, undefined, args);
     });
 
@@ -15980,7 +15997,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
       });
       copyObject(object, getAllKeysIn(object), result);
       if (isDeep) {
-        result = baseClone(result, CLONE_DEEP_FLAG | CLONE_FLAT_FLAG | CLONE_SYMBOLS_FLAG);
+        result = baseClone(result, CLONE_DEEP_FLAG | CLONE_FLAT_FLAG | CLONE_SYMBOLS_FLAG, customOmitClone);
       }
       var length = paths.length;
       while (length--) {
@@ -17129,7 +17146,10 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
      */
     function startsWith(string, target, position) {
       string = toString(string);
-      position = baseClamp(toInteger(position), 0, string.length);
+      position = position == null
+        ? 0
+        : baseClamp(toInteger(position), 0, string.length);
+
       target = baseToString(target);
       return string.slice(position, position + target.length) == target;
     }
@@ -17248,9 +17268,9 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
         options = undefined;
       }
       string = toString(string);
-      options = assignInWith({}, options, settings, assignInDefaults);
+      options = assignInWith({}, options, settings, customDefaultsAssignIn);
 
-      var imports = assignInWith({}, options.imports, settings.imports, assignInDefaults),
+      var imports = assignInWith({}, options.imports, settings.imports, customDefaultsAssignIn),
           importsKeys = keys(imports),
           importsValues = baseValues(imports, importsKeys);
 
@@ -19334,14 +19354,13 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
     // Add `LazyWrapper` methods for `_.drop` and `_.take` variants.
     arrayEach(['drop', 'take'], function(methodName, index) {
       LazyWrapper.prototype[methodName] = function(n) {
-        var filtered = this.__filtered__;
-        if (filtered && !index) {
-          return new LazyWrapper(this);
-        }
         n = n === undefined ? 1 : nativeMax(toInteger(n), 0);
 
-        var result = this.clone();
-        if (filtered) {
+        var result = (this.__filtered__ && !index)
+          ? new LazyWrapper(this)
+          : this.clone();
+
+        if (result.__filtered__) {
           result.__takeCount__ = nativeMin(n, result.__takeCount__);
         } else {
           result.__views__.push({
@@ -19761,38 +19780,6 @@ process.chdir = function (dir) {
 process.umask = function() { return 0; };
 
 },{}],25:[function(require,module,exports){
-
-/**
- * Reduce `arr` with `fn`.
- *
- * @param {Array} arr
- * @param {Function} fn
- * @param {Mixed} initial
- *
- * TODO: combatible error handling?
- */
-
-module.exports = function(arr, fn, initial){  
-  var idx = 0;
-  var len = arr.length;
-  var curr = arguments.length == 3
-    ? initial
-    : arr[idx++];
-
-  while (idx < len) {
-    curr = fn.call(null, curr, arr[idx], ++idx, arr);
-  }
-  
-  return curr;
-};
-},{}],26:[function(require,module,exports){
-/**
- * Module dependencies.
- */
-
-var Emitter = require('emitter');
-var reduce = require('reduce');
-
 /**
  * Root reference for iframes.
  */
@@ -19803,8 +19790,15 @@ if (typeof window !== 'undefined') { // Browser window
 } else if (typeof self !== 'undefined') { // Web Worker
   root = self;
 } else { // Other environments
+  console.warn("Using browser-only version of superagent in non-browser environment");
   root = this;
 }
+
+var Emitter = require('emitter');
+var RequestBase = require('./request-base');
+var isObject = require('./is-object');
+var isFunction = require('./is-function');
+var ResponseBase = require('./response-base');
 
 /**
  * Noop.
@@ -19813,28 +19807,24 @@ if (typeof window !== 'undefined') { // Browser window
 function noop(){};
 
 /**
- * Check if `obj` is a host object,
- * we don't want to serialize these :)
- *
- * TODO: future proof, move to compoent land
- *
- * @param {Object} obj
- * @return {Boolean}
- * @api private
+ * Expose `request`.
  */
 
-function isHost(obj) {
-  var str = {}.toString.call(obj);
-
-  switch (str) {
-    case '[object File]':
-    case '[object Blob]':
-    case '[object FormData]':
-      return true;
-    default:
-      return false;
+var request = exports = module.exports = function(method, url) {
+  // callback
+  if ('function' == typeof url) {
+    return new exports.Request('GET', method).end(url);
   }
+
+  // url first
+  if (1 == arguments.length) {
+    return new exports.Request('GET', method);
+  }
+
+  return new exports.Request(method, url);
 }
+
+exports.Request = Request;
 
 /**
  * Determine XHR.
@@ -19851,7 +19841,7 @@ request.getXHR = function () {
     try { return new ActiveXObject('Msxml2.XMLHTTP.3.0'); } catch(e) {}
     try { return new ActiveXObject('Msxml2.XMLHTTP'); } catch(e) {}
   }
-  return false;
+  throw Error("Browser-only verison of superagent could not find XHR");
 };
 
 /**
@@ -19867,18 +19857,6 @@ var trim = ''.trim
   : function(s) { return s.replace(/(^\s*|\s*$)/g, ''); };
 
 /**
- * Check if `obj` is an object.
- *
- * @param {Object} obj
- * @return {Boolean}
- * @api private
- */
-
-function isObject(obj) {
-  return obj === Object(obj);
-}
-
-/**
  * Serialize the given `obj`.
  *
  * @param {Object} obj
@@ -19890,10 +19868,8 @@ function serialize(obj) {
   if (!isObject(obj)) return obj;
   var pairs = [];
   for (var key in obj) {
-    if (null != obj[key]) {
-      pushEncodedKeyValuePair(pairs, key, obj[key]);
-        }
-      }
+    pushEncodedKeyValuePair(pairs, key, obj[key]);
+  }
   return pairs.join('&');
 }
 
@@ -19907,13 +19883,22 @@ function serialize(obj) {
  */
 
 function pushEncodedKeyValuePair(pairs, key, val) {
-  if (Array.isArray(val)) {
-    return val.forEach(function(v) {
-      pushEncodedKeyValuePair(pairs, key, v);
-    });
+  if (val != null) {
+    if (Array.isArray(val)) {
+      val.forEach(function(v) {
+        pushEncodedKeyValuePair(pairs, key, v);
+      });
+    } else if (isObject(val)) {
+      for(var subkey in val) {
+        pushEncodedKeyValuePair(pairs, key + '[' + subkey + ']', val[subkey]);
+      }
+    } else {
+      pairs.push(encodeURIComponent(key)
+        + '=' + encodeURIComponent(val));
+    }
+  } else if (val === null) {
+    pairs.push(encodeURIComponent(key));
   }
-  pairs.push(encodeURIComponent(key)
-    + '=' + encodeURIComponent(val));
 }
 
 /**
@@ -19933,13 +19918,18 @@ function pushEncodedKeyValuePair(pairs, key, val) {
 function parseString(str) {
   var obj = {};
   var pairs = str.split('&');
-  var parts;
   var pair;
+  var pos;
 
   for (var i = 0, len = pairs.length; i < len; ++i) {
     pair = pairs[i];
-    parts = pair.split('=');
-    obj[decodeURIComponent(parts[0])] = decodeURIComponent(parts[1]);
+    pos = pair.indexOf('=');
+    if (pos == -1) {
+      obj[decodeURIComponent(pair)] = '';
+    } else {
+      obj[decodeURIComponent(pair.slice(0, pos))] =
+        decodeURIComponent(pair.slice(pos + 1));
+    }
   }
 
   return obj;
@@ -20038,37 +20028,6 @@ function isJSON(mime) {
 }
 
 /**
- * Return the mime type for the given `str`.
- *
- * @param {String} str
- * @return {String}
- * @api private
- */
-
-function type(str){
-  return str.split(/ *; */).shift();
-};
-
-/**
- * Return header field parameters.
- *
- * @param {String} str
- * @return {Object}
- * @api private
- */
-
-function params(str){
-  return reduce(str.split(/ *; */), function(obj, str){
-    var parts = str.split(/ *= */)
-      , key = parts.shift()
-      , val = parts.shift();
-
-    if (key && val) obj[key] = val;
-    return obj;
-  }, {});
-};
-
-/**
  * Initialize a new `Response` with the given `xhr`.
  *
  *  - set flags (.ok, .error, etc)
@@ -20123,51 +20082,29 @@ function Response(req, options) {
      ? this.xhr.responseText
      : null;
   this.statusText = this.req.xhr.statusText;
-  this.setStatusProperties(this.xhr.status);
+  var status = this.xhr.status;
+  // handle IE9 bug: http://stackoverflow.com/questions/10046972/msie-returns-status-code-of-1223-for-ajax-request
+  if (status === 1223) {
+      status = 204;
+  }
+  this._setStatusProperties(status);
   this.header = this.headers = parseHeader(this.xhr.getAllResponseHeaders());
   // getAllResponseHeaders sometimes falsely returns "" for CORS requests, but
   // getResponseHeader still works. so we get content-type even if getting
   // other headers fails.
   this.header['content-type'] = this.xhr.getResponseHeader('content-type');
-  this.setHeaderProperties(this.header);
-  this.body = this.req.method != 'HEAD'
-    ? this.parseBody(this.text ? this.text : this.xhr.response)
-    : null;
+  this._setHeaderProperties(this.header);
+
+  if (null === this.text && req._responseType) {
+    this.body = this.xhr.response;
+  } else {
+    this.body = this.req.method != 'HEAD'
+      ? this._parseBody(this.text ? this.text : this.xhr.response)
+      : null;
+  }
 }
 
-/**
- * Get case-insensitive `field` value.
- *
- * @param {String} field
- * @return {String}
- * @api public
- */
-
-Response.prototype.get = function(field){
-  return this.header[field.toLowerCase()];
-};
-
-/**
- * Set header related properties:
- *
- *   - `.type` the content type without params
- *
- * A response of "Content-Type: text/plain; charset=utf-8"
- * will provide you with a `.type` of "text/plain".
- *
- * @param {Object} header
- * @api private
- */
-
-Response.prototype.setHeaderProperties = function(header){
-  // content-type
-  var ct = this.header['content-type'] || '';
-  this.type = type(ct);
-
-  // params
-  var obj = params(ct);
-  for (var key in obj) this[key] = obj[key];
-};
+ResponseBase(Response.prototype);
 
 /**
  * Parse the given body `str`.
@@ -20180,63 +20117,17 @@ Response.prototype.setHeaderProperties = function(header){
  * @api private
  */
 
-Response.prototype.parseBody = function(str){
+Response.prototype._parseBody = function(str){
   var parse = request.parse[this.type];
+  if(this.req._parser) {
+    return this.req._parser(this, str);
+  }
+  if (!parse && isJSON(this.type)) {
+    parse = request.parse['application/json'];
+  }
   return parse && str && (str.length || str instanceof Object)
     ? parse(str)
     : null;
-};
-
-/**
- * Set flags such as `.ok` based on `status`.
- *
- * For example a 2xx response will give you a `.ok` of __true__
- * whereas 5xx will be __false__ and `.error` will be __true__. The
- * `.clientError` and `.serverError` are also available to be more
- * specific, and `.statusType` is the class of error ranging from 1..5
- * sometimes useful for mapping respond colors etc.
- *
- * "sugar" properties are also defined for common cases. Currently providing:
- *
- *   - .noContent
- *   - .badRequest
- *   - .unauthorized
- *   - .notAcceptable
- *   - .notFound
- *
- * @param {Number} status
- * @api private
- */
-
-Response.prototype.setStatusProperties = function(status){
-  // handle IE9 bug: http://stackoverflow.com/questions/10046972/msie-returns-status-code-of-1223-for-ajax-request
-  if (status === 1223) {
-    status = 204;
-  }
-
-  var type = status / 100 | 0;
-
-  // status / class
-  this.status = this.statusCode = status;
-  this.statusType = type;
-
-  // basics
-  this.info = 1 == type;
-  this.ok = 2 == type;
-  this.clientError = 4 == type;
-  this.serverError = 5 == type;
-  this.error = (4 == type || 5 == type)
-    ? this.toError()
-    : false;
-
-  // sugar
-  this.accepted = 202 == status;
-  this.noContent = 204 == status;
-  this.badRequest = 400 == status;
-  this.unauthorized = 401 == status;
-  this.notAcceptable = 406 == status;
-  this.notFound = 404 == status;
-  this.forbidden = 403 == status;
 };
 
 /**
@@ -20276,12 +20167,11 @@ request.Response = Response;
 
 function Request(method, url) {
   var self = this;
-  Emitter.call(this);
   this._query = this._query || [];
   this.method = method;
   this.url = url;
-  this.header = {};
-  this._header = {};
+  this.header = {}; // preserves header name case
+  this._header = {}; // coerces header names to lowercase
   this.on('end', function(){
     var err = null;
     var res = null;
@@ -20293,149 +20183,49 @@ function Request(method, url) {
       err.parse = true;
       err.original = e;
       // issue #675: return the raw response if the response parsing fails
-      err.rawResponse = self.xhr && self.xhr.responseText ? self.xhr.responseText : null;
+      if (self.xhr) {
+        // ie9 doesn't have 'response' property
+        err.rawResponse = typeof self.xhr.responseType == 'undefined' ? self.xhr.responseText : self.xhr.response;
+        // issue #876: return the http status code if the response parsing fails
+        err.status = self.xhr.status ? self.xhr.status : null;
+        err.statusCode = err.status; // backwards-compat only
+      } else {
+        err.rawResponse = null;
+        err.status = null;
+      }
+
       return self.callback(err);
     }
 
     self.emit('response', res);
 
-    if (err) {
-      return self.callback(err, res);
+    var new_err;
+    try {
+      if (!self._isResponseOK(res)) {
+        new_err = new Error(res.statusText || 'Unsuccessful HTTP response');
+        new_err.original = err;
+        new_err.response = res;
+        new_err.status = res.status;
+      }
+    } catch(e) {
+      new_err = e; // #985 touching res may cause INVALID_STATE_ERR on old Android
     }
 
-    if (res.status >= 200 && res.status < 300) {
-      return self.callback(err, res);
+    // #1000 don't catch errors from the callback to avoid double calling it
+    if (new_err) {
+      self.callback(new_err, res);
+    } else {
+      self.callback(null, res);
     }
-
-    var new_err = new Error(res.statusText || 'Unsuccessful HTTP response');
-    new_err.original = err;
-    new_err.response = res;
-    new_err.status = res.status;
-
-    self.callback(new_err, res);
   });
 }
 
 /**
- * Mixin `Emitter`.
+ * Mixin `Emitter` and `RequestBase`.
  */
 
 Emitter(Request.prototype);
-
-/**
- * Allow for extension
- */
-
-Request.prototype.use = function(fn) {
-  fn(this);
-  return this;
-}
-
-/**
- * Set timeout to `ms`.
- *
- * @param {Number} ms
- * @return {Request} for chaining
- * @api public
- */
-
-Request.prototype.timeout = function(ms){
-  this._timeout = ms;
-  return this;
-};
-
-/**
- * Clear previous timeout.
- *
- * @return {Request} for chaining
- * @api public
- */
-
-Request.prototype.clearTimeout = function(){
-  this._timeout = 0;
-  clearTimeout(this._timer);
-  return this;
-};
-
-/**
- * Abort the request, and clear potential timeout.
- *
- * @return {Request}
- * @api public
- */
-
-Request.prototype.abort = function(){
-  if (this.aborted) return;
-  this.aborted = true;
-  this.xhr.abort();
-  this.clearTimeout();
-  this.emit('abort');
-  return this;
-};
-
-/**
- * Set header `field` to `val`, or multiple fields with one object.
- *
- * Examples:
- *
- *      req.get('/')
- *        .set('Accept', 'application/json')
- *        .set('X-API-Key', 'foobar')
- *        .end(callback);
- *
- *      req.get('/')
- *        .set({ Accept: 'application/json', 'X-API-Key': 'foobar' })
- *        .end(callback);
- *
- * @param {String|Object} field
- * @param {String} val
- * @return {Request} for chaining
- * @api public
- */
-
-Request.prototype.set = function(field, val){
-  if (isObject(field)) {
-    for (var key in field) {
-      this.set(key, field[key]);
-    }
-    return this;
-  }
-  this._header[field.toLowerCase()] = val;
-  this.header[field] = val;
-  return this;
-};
-
-/**
- * Remove header `field`.
- *
- * Example:
- *
- *      req.get('/')
- *        .unset('User-Agent')
- *        .end(callback);
- *
- * @param {String} field
- * @return {Request} for chaining
- * @api public
- */
-
-Request.prototype.unset = function(field){
-  delete this._header[field.toLowerCase()];
-  delete this.header[field];
-  return this;
-};
-
-/**
- * Get case-insensitive header `field` value.
- *
- * @param {String} field
- * @return {String}
- * @api private
- */
-
-Request.prototype.getHeader = function(field){
-  return this._header[field.toLowerCase()];
-};
+RequestBase(Request.prototype);
 
 /**
  * Set Content-Type to `type`, mapping values from `request.types`.
@@ -20461,20 +20251,6 @@ Request.prototype.getHeader = function(field){
 
 Request.prototype.type = function(type){
   this.set('Content-Type', request.types[type] || type);
-  return this;
-};
-
-/**
- * Force given parser
- *
- * Sets the body parser no matter type.
- *
- * @param {Function}
- * @api public
- */
-
-Request.prototype.parse = function(fn){
-  this._parser = fn;
   return this;
 };
 
@@ -20508,13 +20284,28 @@ Request.prototype.accept = function(type){
  *
  * @param {String} user
  * @param {String} pass
+ * @param {Object} options with 'type' property 'auto' or 'basic' (default 'basic')
  * @return {Request} for chaining
  * @api public
  */
 
-Request.prototype.auth = function(user, pass){
-  var str = btoa(user + ':' + pass);
-  this.set('Authorization', 'Basic ' + str);
+Request.prototype.auth = function(user, pass, options){
+  if (!options) {
+    options = {
+      type: 'function' === typeof btoa ? 'basic' : 'auto',
+    }
+  }
+
+  switch (options.type) {
+    case 'basic':
+      this.set('Authorization', 'Basic ' + btoa(user + ':' + pass));
+    break;
+
+    case 'auto':
+      this.username = user;
+      this.password = pass;
+    break;
+  }
   return this;
 };
 
@@ -20539,49 +20330,784 @@ Request.prototype.query = function(val){
 };
 
 /**
- * Write the field `name` and `val` for "multipart/form-data"
- * request bodies.
- *
- * ``` js
- * request.post('/upload')
- *   .field('foo', 'bar')
- *   .end(callback);
- * ```
- *
- * @param {String} name
- * @param {String|Blob|File} val
- * @return {Request} for chaining
- * @api public
- */
-
-Request.prototype.field = function(name, val){
-  if (!this._formData) this._formData = new root.FormData();
-  this._formData.append(name, val);
-  return this;
-};
-
-/**
  * Queue the given `file` as an attachment to the specified `field`,
- * with optional `filename`.
+ * with optional `options` (or filename).
  *
  * ``` js
  * request.post('/upload')
- *   .attach(new Blob(['<a id="a"><b id="b">hey!</b></a>'], { type: "text/html"}))
+ *   .attach('content', new Blob(['<a id="a"><b id="b">hey!</b></a>'], { type: "text/html"}))
  *   .end(callback);
  * ```
  *
  * @param {String} field
  * @param {Blob|File} file
- * @param {String} filename
+ * @param {String|Object} options
  * @return {Request} for chaining
  * @api public
  */
 
-Request.prototype.attach = function(field, file, filename){
-  if (!this._formData) this._formData = new root.FormData();
-  this._formData.append(field, file, filename || file.name);
+Request.prototype.attach = function(field, file, options){
+  if (this._data) {
+    throw Error("superagent can't mix .send() and .attach()");
+  }
+
+  this._getFormData().append(field, file, options || file.name);
   return this;
 };
+
+Request.prototype._getFormData = function(){
+  if (!this._formData) {
+    this._formData = new root.FormData();
+  }
+  return this._formData;
+};
+
+/**
+ * Invoke the callback with `err` and `res`
+ * and handle arity check.
+ *
+ * @param {Error} err
+ * @param {Response} res
+ * @api private
+ */
+
+Request.prototype.callback = function(err, res){
+  var fn = this._callback;
+  this.clearTimeout();
+
+  if (err) {
+    this.emit('error', err);
+  }
+
+  fn(err, res);
+};
+
+/**
+ * Invoke callback with x-domain error.
+ *
+ * @api private
+ */
+
+Request.prototype.crossDomainError = function(){
+  var err = new Error('Request has been terminated\nPossible causes: the network is offline, Origin is not allowed by Access-Control-Allow-Origin, the page is being unloaded, etc.');
+  err.crossDomain = true;
+
+  err.status = this.status;
+  err.method = this.method;
+  err.url = this.url;
+
+  this.callback(err);
+};
+
+// This only warns, because the request is still likely to work
+Request.prototype.buffer = Request.prototype.ca = Request.prototype.agent = function(){
+  console.warn("This is not supported in browser version of superagent");
+  return this;
+};
+
+// This throws, because it can't send/receive data as expected
+Request.prototype.pipe = Request.prototype.write = function(){
+  throw Error("Streaming is not supported in browser version of superagent");
+};
+
+/**
+ * Compose querystring to append to req.url
+ *
+ * @api private
+ */
+
+Request.prototype._appendQueryString = function(){
+  var query = this._query.join('&');
+  if (query) {
+    this.url += (this.url.indexOf('?') >= 0 ? '&' : '?') + query;
+  }
+
+  if (this._sort) {
+    var index = this.url.indexOf('?');
+    if (index >= 0) {
+      var queryArr = this.url.substring(index + 1).split('&');
+      if (isFunction(this._sort)) {
+        queryArr.sort(this._sort);
+      } else {
+        queryArr.sort();
+      }
+      this.url = this.url.substring(0, index) + '?' + queryArr.join('&');
+    }
+  }
+};
+
+/**
+ * Check if `obj` is a host object,
+ * we don't want to serialize these :)
+ *
+ * @param {Object} obj
+ * @return {Boolean}
+ * @api private
+ */
+Request.prototype._isHost = function _isHost(obj) {
+  // Native objects stringify to [object File], [object Blob], [object FormData], etc.
+  return obj && 'object' === typeof obj && !Array.isArray(obj) && Object.prototype.toString.call(obj) !== '[object Object]';
+}
+
+/**
+ * Initiate request, invoking callback `fn(res)`
+ * with an instanceof `Response`.
+ *
+ * @param {Function} fn
+ * @return {Request} for chaining
+ * @api public
+ */
+
+Request.prototype.end = function(fn){
+  var self = this;
+  var xhr = this.xhr = request.getXHR();
+  var data = this._formData || this._data;
+
+  if (this._endCalled) {
+    console.warn("Warning: .end() was called twice. This is not supported in superagent");
+  }
+  this._endCalled = true;
+
+  // store callback
+  this._callback = fn || noop;
+
+  // state change
+  xhr.onreadystatechange = function(){
+    var readyState = xhr.readyState;
+    if (readyState >= 2 && self._responseTimeoutTimer) {
+      clearTimeout(self._responseTimeoutTimer);
+    }
+    if (4 != readyState) {
+      return;
+    }
+
+    // In IE9, reads to any property (e.g. status) off of an aborted XHR will
+    // result in the error "Could not complete the operation due to error c00c023f"
+    var status;
+    try { status = xhr.status } catch(e) { status = 0; }
+
+    if (!status) {
+      if (self.timedout || self._aborted) return;
+      return self.crossDomainError();
+    }
+    self.emit('end');
+  };
+
+  // progress
+  var handleProgress = function(direction, e) {
+    if (e.total > 0) {
+      e.percent = e.loaded / e.total * 100;
+    }
+    e.direction = direction;
+    self.emit('progress', e);
+  }
+  if (this.hasListeners('progress')) {
+    try {
+      xhr.onprogress = handleProgress.bind(null, 'download');
+      if (xhr.upload) {
+        xhr.upload.onprogress = handleProgress.bind(null, 'upload');
+      }
+    } catch(e) {
+      // Accessing xhr.upload fails in IE from a web worker, so just pretend it doesn't exist.
+      // Reported here:
+      // https://connect.microsoft.com/IE/feedback/details/837245/xmlhttprequest-upload-throws-invalid-argument-when-used-from-web-worker-context
+    }
+  }
+
+  // querystring
+  this._appendQueryString();
+
+  this._setTimeouts();
+
+  // initiate request
+  try {
+    if (this.username && this.password) {
+      xhr.open(this.method, this.url, true, this.username, this.password);
+    } else {
+      xhr.open(this.method, this.url, true);
+    }
+  } catch (err) {
+    // see #1149
+    return this.callback(err);
+  }
+
+  // CORS
+  if (this._withCredentials) xhr.withCredentials = true;
+
+  // body
+  if (!this._formData && 'GET' != this.method && 'HEAD' != this.method && 'string' != typeof data && !this._isHost(data)) {
+    // serialize stuff
+    var contentType = this._header['content-type'];
+    var serialize = this._serializer || request.serialize[contentType ? contentType.split(';')[0] : ''];
+    if (!serialize && isJSON(contentType)) {
+      serialize = request.serialize['application/json'];
+    }
+    if (serialize) data = serialize(data);
+  }
+
+  // set header fields
+  for (var field in this.header) {
+    if (null == this.header[field]) continue;
+    xhr.setRequestHeader(field, this.header[field]);
+  }
+
+  if (this._responseType) {
+    xhr.responseType = this._responseType;
+  }
+
+  // send stuff
+  this.emit('request', this);
+
+  // IE11 xhr.send(undefined) sends 'undefined' string as POST payload (instead of nothing)
+  // We need null here if data is undefined
+  xhr.send(typeof data !== 'undefined' ? data : null);
+  return this;
+};
+
+/**
+ * GET `url` with optional callback `fn(res)`.
+ *
+ * @param {String} url
+ * @param {Mixed|Function} [data] or fn
+ * @param {Function} [fn]
+ * @return {Request}
+ * @api public
+ */
+
+request.get = function(url, data, fn){
+  var req = request('GET', url);
+  if ('function' == typeof data) fn = data, data = null;
+  if (data) req.query(data);
+  if (fn) req.end(fn);
+  return req;
+};
+
+/**
+ * HEAD `url` with optional callback `fn(res)`.
+ *
+ * @param {String} url
+ * @param {Mixed|Function} [data] or fn
+ * @param {Function} [fn]
+ * @return {Request}
+ * @api public
+ */
+
+request.head = function(url, data, fn){
+  var req = request('HEAD', url);
+  if ('function' == typeof data) fn = data, data = null;
+  if (data) req.send(data);
+  if (fn) req.end(fn);
+  return req;
+};
+
+/**
+ * OPTIONS query to `url` with optional callback `fn(res)`.
+ *
+ * @param {String} url
+ * @param {Mixed|Function} [data] or fn
+ * @param {Function} [fn]
+ * @return {Request}
+ * @api public
+ */
+
+request.options = function(url, data, fn){
+  var req = request('OPTIONS', url);
+  if ('function' == typeof data) fn = data, data = null;
+  if (data) req.send(data);
+  if (fn) req.end(fn);
+  return req;
+};
+
+/**
+ * DELETE `url` with optional callback `fn(res)`.
+ *
+ * @param {String} url
+ * @param {Function} [fn]
+ * @return {Request}
+ * @api public
+ */
+
+function del(url, fn){
+  var req = request('DELETE', url);
+  if (fn) req.end(fn);
+  return req;
+};
+
+request['del'] = del;
+request['delete'] = del;
+
+/**
+ * PATCH `url` with optional `data` and callback `fn(res)`.
+ *
+ * @param {String} url
+ * @param {Mixed} [data]
+ * @param {Function} [fn]
+ * @return {Request}
+ * @api public
+ */
+
+request.patch = function(url, data, fn){
+  var req = request('PATCH', url);
+  if ('function' == typeof data) fn = data, data = null;
+  if (data) req.send(data);
+  if (fn) req.end(fn);
+  return req;
+};
+
+/**
+ * POST `url` with optional `data` and callback `fn(res)`.
+ *
+ * @param {String} url
+ * @param {Mixed} [data]
+ * @param {Function} [fn]
+ * @return {Request}
+ * @api public
+ */
+
+request.post = function(url, data, fn){
+  var req = request('POST', url);
+  if ('function' == typeof data) fn = data, data = null;
+  if (data) req.send(data);
+  if (fn) req.end(fn);
+  return req;
+};
+
+/**
+ * PUT `url` with optional `data` and callback `fn(res)`.
+ *
+ * @param {String} url
+ * @param {Mixed|Function} [data] or fn
+ * @param {Function} [fn]
+ * @return {Request}
+ * @api public
+ */
+
+request.put = function(url, data, fn){
+  var req = request('PUT', url);
+  if ('function' == typeof data) fn = data, data = null;
+  if (data) req.send(data);
+  if (fn) req.end(fn);
+  return req;
+};
+
+},{"./is-function":26,"./is-object":27,"./request-base":28,"./response-base":29,"emitter":6}],26:[function(require,module,exports){
+/**
+ * Check if `fn` is a function.
+ *
+ * @param {Function} fn
+ * @return {Boolean}
+ * @api private
+ */
+var isObject = require('./is-object');
+
+function isFunction(fn) {
+  var tag = isObject(fn) ? Object.prototype.toString.call(fn) : '';
+  return tag === '[object Function]';
+}
+
+module.exports = isFunction;
+
+},{"./is-object":27}],27:[function(require,module,exports){
+/**
+ * Check if `obj` is an object.
+ *
+ * @param {Object} obj
+ * @return {Boolean}
+ * @api private
+ */
+
+function isObject(obj) {
+  return null !== obj && 'object' === typeof obj;
+}
+
+module.exports = isObject;
+
+},{}],28:[function(require,module,exports){
+/**
+ * Module of mixed-in functions shared between node and client code
+ */
+var isObject = require('./is-object');
+
+/**
+ * Expose `RequestBase`.
+ */
+
+module.exports = RequestBase;
+
+/**
+ * Initialize a new `RequestBase`.
+ *
+ * @api public
+ */
+
+function RequestBase(obj) {
+  if (obj) return mixin(obj);
+}
+
+/**
+ * Mixin the prototype properties.
+ *
+ * @param {Object} obj
+ * @return {Object}
+ * @api private
+ */
+
+function mixin(obj) {
+  for (var key in RequestBase.prototype) {
+    obj[key] = RequestBase.prototype[key];
+  }
+  return obj;
+}
+
+/**
+ * Clear previous timeout.
+ *
+ * @return {Request} for chaining
+ * @api public
+ */
+
+RequestBase.prototype.clearTimeout = function _clearTimeout(){
+  this._timeout = 0;
+  this._responseTimeout = 0;
+  clearTimeout(this._timer);
+  clearTimeout(this._responseTimeoutTimer);
+  return this;
+};
+
+/**
+ * Override default response body parser
+ *
+ * This function will be called to convert incoming data into request.body
+ *
+ * @param {Function}
+ * @api public
+ */
+
+RequestBase.prototype.parse = function parse(fn){
+  this._parser = fn;
+  return this;
+};
+
+/**
+ * Set format of binary response body.
+ * In browser valid formats are 'blob' and 'arraybuffer',
+ * which return Blob and ArrayBuffer, respectively.
+ *
+ * In Node all values result in Buffer.
+ *
+ * Examples:
+ *
+ *      req.get('/')
+ *        .responseType('blob')
+ *        .end(callback);
+ *
+ * @param {String} val
+ * @return {Request} for chaining
+ * @api public
+ */
+
+RequestBase.prototype.responseType = function(val){
+  this._responseType = val;
+  return this;
+};
+
+/**
+ * Override default request body serializer
+ *
+ * This function will be called to convert data set via .send or .attach into payload to send
+ *
+ * @param {Function}
+ * @api public
+ */
+
+RequestBase.prototype.serialize = function serialize(fn){
+  this._serializer = fn;
+  return this;
+};
+
+/**
+ * Set timeouts.
+ *
+ * - response timeout is time between sending request and receiving the first byte of the response. Includes DNS and connection time.
+ * - deadline is the time from start of the request to receiving response body in full. If the deadline is too short large files may not load at all on slow connections.
+ *
+ * Value of 0 or false means no timeout.
+ *
+ * @param {Number|Object} ms or {response, read, deadline}
+ * @return {Request} for chaining
+ * @api public
+ */
+
+RequestBase.prototype.timeout = function timeout(options){
+  if (!options || 'object' !== typeof options) {
+    this._timeout = options;
+    this._responseTimeout = 0;
+    return this;
+  }
+
+  if ('undefined' !== typeof options.deadline) {
+    this._timeout = options.deadline;
+  }
+  if ('undefined' !== typeof options.response) {
+    this._responseTimeout = options.response;
+  }
+  return this;
+};
+
+/**
+ * Promise support
+ *
+ * @param {Function} resolve
+ * @param {Function} [reject]
+ * @return {Request}
+ */
+
+RequestBase.prototype.then = function then(resolve, reject) {
+  if (!this._fullfilledPromise) {
+    var self = this;
+    if (this._endCalled) {
+      console.warn("Warning: superagent request was sent twice, because both .end() and .then() were called. Never call .end() if you use promises");
+    }
+    this._fullfilledPromise = new Promise(function(innerResolve, innerReject){
+      self.end(function(err, res){
+        if (err) innerReject(err); else innerResolve(res);
+      });
+    });
+  }
+  return this._fullfilledPromise.then(resolve, reject);
+}
+
+RequestBase.prototype.catch = function(cb) {
+  return this.then(undefined, cb);
+};
+
+/**
+ * Allow for extension
+ */
+
+RequestBase.prototype.use = function use(fn) {
+  fn(this);
+  return this;
+}
+
+RequestBase.prototype.ok = function(cb) {
+  if ('function' !== typeof cb) throw Error("Callback required");
+  this._okCallback = cb;
+  return this;
+};
+
+RequestBase.prototype._isResponseOK = function(res) {
+  if (!res) {
+    return false;
+  }
+
+  if (this._okCallback) {
+    return this._okCallback(res);
+  }
+
+  return res.status >= 200 && res.status < 300;
+};
+
+
+/**
+ * Get request header `field`.
+ * Case-insensitive.
+ *
+ * @param {String} field
+ * @return {String}
+ * @api public
+ */
+
+RequestBase.prototype.get = function(field){
+  return this._header[field.toLowerCase()];
+};
+
+/**
+ * Get case-insensitive header `field` value.
+ * This is a deprecated internal API. Use `.get(field)` instead.
+ *
+ * (getHeader is no longer used internally by the superagent code base)
+ *
+ * @param {String} field
+ * @return {String}
+ * @api private
+ * @deprecated
+ */
+
+RequestBase.prototype.getHeader = RequestBase.prototype.get;
+
+/**
+ * Set header `field` to `val`, or multiple fields with one object.
+ * Case-insensitive.
+ *
+ * Examples:
+ *
+ *      req.get('/')
+ *        .set('Accept', 'application/json')
+ *        .set('X-API-Key', 'foobar')
+ *        .end(callback);
+ *
+ *      req.get('/')
+ *        .set({ Accept: 'application/json', 'X-API-Key': 'foobar' })
+ *        .end(callback);
+ *
+ * @param {String|Object} field
+ * @param {String} val
+ * @return {Request} for chaining
+ * @api public
+ */
+
+RequestBase.prototype.set = function(field, val){
+  if (isObject(field)) {
+    for (var key in field) {
+      this.set(key, field[key]);
+    }
+    return this;
+  }
+  this._header[field.toLowerCase()] = val;
+  this.header[field] = val;
+  return this;
+};
+
+/**
+ * Remove header `field`.
+ * Case-insensitive.
+ *
+ * Example:
+ *
+ *      req.get('/')
+ *        .unset('User-Agent')
+ *        .end(callback);
+ *
+ * @param {String} field
+ */
+RequestBase.prototype.unset = function(field){
+  delete this._header[field.toLowerCase()];
+  delete this.header[field];
+  return this;
+};
+
+/**
+ * Write the field `name` and `val`, or multiple fields with one object
+ * for "multipart/form-data" request bodies.
+ *
+ * ``` js
+ * request.post('/upload')
+ *   .field('foo', 'bar')
+ *   .end(callback);
+ *
+ * request.post('/upload')
+ *   .field({ foo: 'bar', baz: 'qux' })
+ *   .end(callback);
+ * ```
+ *
+ * @param {String|Object} name
+ * @param {String|Blob|File|Buffer|fs.ReadStream} val
+ * @return {Request} for chaining
+ * @api public
+ */
+RequestBase.prototype.field = function(name, val) {
+
+  // name should be either a string or an object.
+  if (null === name ||  undefined === name) {
+    throw new Error('.field(name, val) name can not be empty');
+  }
+
+  if (this._data) {
+    console.error(".field() can't be used if .send() is used. Please use only .send() or only .field() & .attach()");
+  }
+
+  if (isObject(name)) {
+    for (var key in name) {
+      this.field(key, name[key]);
+    }
+    return this;
+  }
+
+  if (Array.isArray(val)) {
+    for (var i in val) {
+      this.field(name, val[i]);
+    }
+    return this;
+  }
+
+  // val should be defined now
+  if (null === val || undefined === val) {
+    throw new Error('.field(name, val) val can not be empty');
+  }
+  if ('boolean' === typeof val) {
+    val = '' + val;
+  }
+  this._getFormData().append(name, val);
+  return this;
+};
+
+/**
+ * Abort the request, and clear potential timeout.
+ *
+ * @return {Request}
+ * @api public
+ */
+RequestBase.prototype.abort = function(){
+  if (this._aborted) {
+    return this;
+  }
+  this._aborted = true;
+  this.xhr && this.xhr.abort(); // browser
+  this.req && this.req.abort(); // node
+  this.clearTimeout();
+  this.emit('abort');
+  return this;
+};
+
+/**
+ * Enable transmission of cookies with x-domain requests.
+ *
+ * Note that for this to work the origin must not be
+ * using "Access-Control-Allow-Origin" with a wildcard,
+ * and also must set "Access-Control-Allow-Credentials"
+ * to "true".
+ *
+ * @api public
+ */
+
+RequestBase.prototype.withCredentials = function(){
+  // This is browser-only functionality. Node side is no-op.
+  this._withCredentials = true;
+  return this;
+};
+
+/**
+ * Set the max redirects to `n`. Does noting in browser XHR implementation.
+ *
+ * @param {Number} n
+ * @return {Request} for chaining
+ * @api public
+ */
+
+RequestBase.prototype.redirects = function(n){
+  this._maxRedirects = n;
+  return this;
+};
+
+/**
+ * Convert to a plain javascript object (not JSON string) of scalar properties.
+ * Note as this method is designed to return a useful non-this value,
+ * it cannot be chained.
+ *
+ * @return {Object} describing method, url, and data of this request
+ * @api public
+ */
+
+RequestBase.prototype.toJSON = function(){
+  return {
+    method: this.method,
+    url: this.url,
+    data: this._data,
+    headers: this._header
+  };
+};
+
 
 /**
  * Send `data` as the request body, defaulting the `.type()` to "json" when
@@ -20613,28 +21139,43 @@ Request.prototype.attach = function(field, file, filename){
  *         .end(callback)
  *
  *       // defaults to x-www-form-urlencoded
-  *      request.post('/user')
-  *        .send('name=tobi')
-  *        .send('species=ferret')
-  *        .end(callback)
+ *      request.post('/user')
+ *        .send('name=tobi')
+ *        .send('species=ferret')
+ *        .end(callback)
  *
  * @param {String|Object} data
  * @return {Request} for chaining
  * @api public
  */
 
-Request.prototype.send = function(data){
-  var obj = isObject(data);
-  var type = this.getHeader('Content-Type');
+RequestBase.prototype.send = function(data){
+  var isObj = isObject(data);
+  var type = this._header['content-type'];
+
+  if (this._formData) {
+    console.error(".send() can't be used if .attach() or .field() is used. Please use only .send() or only .field() & .attach()");
+  }
+
+  if (isObj && !this._data) {
+    if (Array.isArray(data)) {
+      this._data = [];
+    } else if (!this._isHost(data)) {
+      this._data = {};
+    }
+  } else if (data && this._data && this._isHost(this._data)) {
+    throw Error("Can't merge these send calls");
+  }
 
   // merge
-  if (obj && isObject(this._data)) {
+  if (isObj && isObject(this._data)) {
     for (var key in data) {
       this._data[key] = data[key];
     }
   } else if ('string' == typeof data) {
+    // default to x-www-form-urlencoded
     if (!type) this.type('form');
-    type = this.getHeader('Content-Type');
+    type = this._header['content-type'];
     if ('application/x-www-form-urlencoded' == type) {
       this._data = this._data
         ? this._data + '&' + data
@@ -20646,41 +21187,48 @@ Request.prototype.send = function(data){
     this._data = data;
   }
 
-  if (!obj || isHost(data)) return this;
+  if (!isObj || this._isHost(data)) {
+    return this;
+  }
+
+  // default to json
   if (!type) this.type('json');
   return this;
 };
 
-/**
- * Invoke the callback with `err` and `res`
- * and handle arity check.
- *
- * @param {Error} err
- * @param {Response} res
- * @api private
- */
-
-Request.prototype.callback = function(err, res){
-  var fn = this._callback;
-  this.clearTimeout();
-  fn(err, res);
-};
 
 /**
- * Invoke callback with x-domain error.
+ * Sort `querystring` by the sort function
  *
- * @api private
+ *
+ * Examples:
+ *
+ *       // default order
+ *       request.get('/user')
+ *         .query('name=Nick')
+ *         .query('search=Manny')
+ *         .sortQuery()
+ *         .end(callback)
+ *
+ *       // customized sort function
+ *       request.get('/user')
+ *         .query('name=Nick')
+ *         .query('search=Manny')
+ *         .sortQuery(function(a, b){
+ *           return a.length - b.length;
+ *         })
+ *         .end(callback)
+ *
+ *
+ * @param {Function} sort
+ * @return {Request} for chaining
+ * @api public
  */
 
-Request.prototype.crossDomainError = function(){
-  var err = new Error('Request has been terminated\nPossible causes: the network is offline, Origin is not allowed by Access-Control-Allow-Origin, the page is being unloaded, etc.');
-  err.crossDomain = true;
-
-  err.status = this.status;
-  err.method = this.method;
-  err.url = this.url;
-
-  this.callback(err);
+RequestBase.prototype.sortQuery = function(sort) {
+  // _sort default to true but otherwise can be a function or boolean
+  this._sort = typeof sort === 'undefined' ? true : sort;
+  return this;
 };
 
 /**
@@ -20689,296 +21237,241 @@ Request.prototype.crossDomainError = function(){
  * @api private
  */
 
-Request.prototype.timeoutError = function(){
-  var timeout = this._timeout;
-  var err = new Error('timeout of ' + timeout + 'ms exceeded');
+RequestBase.prototype._timeoutError = function(reason, timeout){
+  if (this._aborted) {
+    return;
+  }
+  var err = new Error(reason + timeout + 'ms exceeded');
   err.timeout = timeout;
+  err.code = 'ECONNABORTED';
+  this.timedout = true;
+  this.abort();
   this.callback(err);
 };
 
-/**
- * Enable transmission of cookies with x-domain requests.
- *
- * Note that for this to work the origin must not be
- * using "Access-Control-Allow-Origin" with a wildcard,
- * and also must set "Access-Control-Allow-Credentials"
- * to "true".
- *
- * @api public
- */
-
-Request.prototype.withCredentials = function(){
-  this._withCredentials = true;
-  return this;
-};
-
-/**
- * Initiate request, invoking callback `fn(res)`
- * with an instanceof `Response`.
- *
- * @param {Function} fn
- * @return {Request} for chaining
- * @api public
- */
-
-Request.prototype.end = function(fn){
+RequestBase.prototype._setTimeouts = function() {
   var self = this;
-  var xhr = this.xhr = request.getXHR();
-  var query = this._query.join('&');
-  var timeout = this._timeout;
-  var data = this._formData || this._data;
 
-  // store callback
-  this._callback = fn || noop;
-
-  // state change
-  xhr.onreadystatechange = function(){
-    if (4 != xhr.readyState) return;
-
-    // In IE9, reads to any property (e.g. status) off of an aborted XHR will
-    // result in the error "Could not complete the operation due to error c00c023f"
-    var status;
-    try { status = xhr.status } catch(e) { status = 0; }
-
-    if (0 == status) {
-      if (self.timedout) return self.timeoutError();
-      if (self.aborted) return;
-      return self.crossDomainError();
-    }
-    self.emit('end');
-  };
-
-  // progress
-  var handleProgress = function(e){
-    if (e.total > 0) {
-      e.percent = e.loaded / e.total * 100;
-    }
-    e.direction = 'download';
-    self.emit('progress', e);
-  };
-  if (this.hasListeners('progress')) {
-    xhr.onprogress = handleProgress;
-  }
-  try {
-    if (xhr.upload && this.hasListeners('progress')) {
-      xhr.upload.onprogress = handleProgress;
-    }
-  } catch(e) {
-    // Accessing xhr.upload fails in IE from a web worker, so just pretend it doesn't exist.
-    // Reported here:
-    // https://connect.microsoft.com/IE/feedback/details/837245/xmlhttprequest-upload-throws-invalid-argument-when-used-from-web-worker-context
-  }
-
-  // timeout
-  if (timeout && !this._timer) {
+  // deadline
+  if (this._timeout && !this._timer) {
     this._timer = setTimeout(function(){
-      self.timedout = true;
-      self.abort();
-    }, timeout);
+      self._timeoutError('Timeout of ', self._timeout);
+    }, this._timeout);
   }
-
-  // querystring
-  if (query) {
-    query = request.serializeObject(query);
-    this.url += ~this.url.indexOf('?')
-      ? '&' + query
-      : '?' + query;
+  // response timeout
+  if (this._responseTimeout && !this._responseTimeoutTimer) {
+    this._responseTimeoutTimer = setTimeout(function(){
+      self._timeoutError('Response timeout of ', self._responseTimeout);
+    }, this._responseTimeout);
   }
+}
 
-  // initiate request
-  xhr.open(this.method, this.url, true);
-
-  // CORS
-  if (this._withCredentials) xhr.withCredentials = true;
-
-  // body
-  if ('GET' != this.method && 'HEAD' != this.method && 'string' != typeof data && !isHost(data)) {
-    // serialize stuff
-    var contentType = this.getHeader('Content-Type');
-    var serialize = this._parser || request.serialize[contentType ? contentType.split(';')[0] : ''];
-    if (!serialize && isJSON(contentType)) serialize = request.serialize['application/json'];
-    if (serialize) data = serialize(data);
-  }
-
-  // set header fields
-  for (var field in this.header) {
-    if (null == this.header[field]) continue;
-    xhr.setRequestHeader(field, this.header[field]);
-  }
-
-  // send stuff
-  this.emit('request', this);
-
-  // IE11 xhr.send(undefined) sends 'undefined' string as POST payload (instead of nothing)
-  // We need null here if data is undefined
-  xhr.send(typeof data !== 'undefined' ? data : null);
-  return this;
-};
+},{"./is-object":27}],29:[function(require,module,exports){
 
 /**
- * Faux promise support
- *
- * @param {Function} fulfill
- * @param {Function} reject
- * @return {Request}
+ * Module dependencies.
  */
 
-Request.prototype.then = function (fulfill, reject) {
-  return this.end(function(err, res) {
-    err ? reject(err) : fulfill(res);
-  });
+var utils = require('./utils');
+
+/**
+ * Expose `ResponseBase`.
+ */
+
+module.exports = ResponseBase;
+
+/**
+ * Initialize a new `ResponseBase`.
+ *
+ * @api public
+ */
+
+function ResponseBase(obj) {
+  if (obj) return mixin(obj);
 }
 
 /**
- * Expose `Request`.
+ * Mixin the prototype properties.
+ *
+ * @param {Object} obj
+ * @return {Object}
+ * @api private
  */
 
-request.Request = Request;
-
-/**
- * Issue a request:
- *
- * Examples:
- *
- *    request('GET', '/users').end(callback)
- *    request('/users').end(callback)
- *    request('/users', callback)
- *
- * @param {String} method
- * @param {String|Function} url or callback
- * @return {Request}
- * @api public
- */
-
-function request(method, url) {
-  // callback
-  if ('function' == typeof url) {
-    return new Request('GET', method).end(url);
+function mixin(obj) {
+  for (var key in ResponseBase.prototype) {
+    obj[key] = ResponseBase.prototype[key];
   }
-
-  // url first
-  if (1 == arguments.length) {
-    return new Request('GET', method);
-  }
-
-  return new Request(method, url);
+  return obj;
 }
 
 /**
- * GET `url` with optional callback `fn(res)`.
+ * Get case-insensitive `field` value.
  *
- * @param {String} url
- * @param {Mixed|Function} data or fn
- * @param {Function} fn
- * @return {Request}
+ * @param {String} field
+ * @return {String}
  * @api public
  */
 
-request.get = function(url, data, fn){
-  var req = request('GET', url);
-  if ('function' == typeof data) fn = data, data = null;
-  if (data) req.query(data);
-  if (fn) req.end(fn);
-  return req;
+ResponseBase.prototype.get = function(field){
+    return this.header[field.toLowerCase()];
 };
 
 /**
- * HEAD `url` with optional callback `fn(res)`.
+ * Set header related properties:
  *
- * @param {String} url
- * @param {Mixed|Function} data or fn
- * @param {Function} fn
- * @return {Request}
- * @api public
- */
-
-request.head = function(url, data, fn){
-  var req = request('HEAD', url);
-  if ('function' == typeof data) fn = data, data = null;
-  if (data) req.send(data);
-  if (fn) req.end(fn);
-  return req;
-};
-
-/**
- * DELETE `url` with optional callback `fn(res)`.
+ *   - `.type` the content type without params
  *
- * @param {String} url
- * @param {Function} fn
- * @return {Request}
- * @api public
- */
-
-function del(url, fn){
-  var req = request('DELETE', url);
-  if (fn) req.end(fn);
-  return req;
-};
-
-request['del'] = del;
-request['delete'] = del;
-
-/**
- * PATCH `url` with optional `data` and callback `fn(res)`.
+ * A response of "Content-Type: text/plain; charset=utf-8"
+ * will provide you with a `.type` of "text/plain".
  *
- * @param {String} url
- * @param {Mixed} data
- * @param {Function} fn
- * @return {Request}
- * @api public
+ * @param {Object} header
+ * @api private
  */
 
-request.patch = function(url, data, fn){
-  var req = request('PATCH', url);
-  if ('function' == typeof data) fn = data, data = null;
-  if (data) req.send(data);
-  if (fn) req.end(fn);
-  return req;
+ResponseBase.prototype._setHeaderProperties = function(header){
+    // TODO: moar!
+    // TODO: make this a util
+
+    // content-type
+    var ct = header['content-type'] || '';
+    this.type = utils.type(ct);
+
+    // params
+    var params = utils.params(ct);
+    for (var key in params) this[key] = params[key];
+
+    this.links = {};
+
+    // links
+    try {
+        if (header.link) {
+            this.links = utils.parseLinks(header.link);
+        }
+    } catch (err) {
+        // ignore
+    }
 };
 
 /**
- * POST `url` with optional `data` and callback `fn(res)`.
+ * Set flags such as `.ok` based on `status`.
  *
- * @param {String} url
- * @param {Mixed} data
- * @param {Function} fn
- * @return {Request}
- * @api public
- */
-
-request.post = function(url, data, fn){
-  var req = request('POST', url);
-  if ('function' == typeof data) fn = data, data = null;
-  if (data) req.send(data);
-  if (fn) req.end(fn);
-  return req;
-};
-
-/**
- * PUT `url` with optional `data` and callback `fn(res)`.
+ * For example a 2xx response will give you a `.ok` of __true__
+ * whereas 5xx will be __false__ and `.error` will be __true__. The
+ * `.clientError` and `.serverError` are also available to be more
+ * specific, and `.statusType` is the class of error ranging from 1..5
+ * sometimes useful for mapping respond colors etc.
  *
- * @param {String} url
- * @param {Mixed|Function} data or fn
- * @param {Function} fn
- * @return {Request}
- * @api public
+ * "sugar" properties are also defined for common cases. Currently providing:
+ *
+ *   - .noContent
+ *   - .badRequest
+ *   - .unauthorized
+ *   - .notAcceptable
+ *   - .notFound
+ *
+ * @param {Number} status
+ * @api private
  */
 
-request.put = function(url, data, fn){
-  var req = request('PUT', url);
-  if ('function' == typeof data) fn = data, data = null;
-  if (data) req.send(data);
-  if (fn) req.end(fn);
-  return req;
+ResponseBase.prototype._setStatusProperties = function(status){
+    var type = status / 100 | 0;
+
+    // status / class
+    this.status = this.statusCode = status;
+    this.statusType = type;
+
+    // basics
+    this.info = 1 == type;
+    this.ok = 2 == type;
+    this.redirect = 3 == type;
+    this.clientError = 4 == type;
+    this.serverError = 5 == type;
+    this.error = (4 == type || 5 == type)
+        ? this.toError()
+        : false;
+
+    // sugar
+    this.accepted = 202 == status;
+    this.noContent = 204 == status;
+    this.badRequest = 400 == status;
+    this.unauthorized = 401 == status;
+    this.notAcceptable = 406 == status;
+    this.forbidden = 403 == status;
+    this.notFound = 404 == status;
+};
+
+},{"./utils":30}],30:[function(require,module,exports){
+
+/**
+ * Return the mime type for the given `str`.
+ *
+ * @param {String} str
+ * @return {String}
+ * @api private
+ */
+
+exports.type = function(str){
+  return str.split(/ *; */).shift();
 };
 
 /**
- * Expose `request`.
+ * Return header field parameters.
+ *
+ * @param {String} str
+ * @return {Object}
+ * @api private
  */
 
-module.exports = request;
+exports.params = function(str){
+  return str.split(/ *; */).reduce(function(obj, str){
+    var parts = str.split(/ *= */);
+    var key = parts.shift();
+    var val = parts.shift();
 
-},{"emitter":6,"reduce":25}],27:[function(require,module,exports){
+    if (key && val) obj[key] = val;
+    return obj;
+  }, {});
+};
+
+/**
+ * Parse Link header fields.
+ *
+ * @param {String} str
+ * @return {Object}
+ * @api private
+ */
+
+exports.parseLinks = function(str){
+  return str.split(/ *, */).reduce(function(obj, str){
+    var parts = str.split(/ *; */);
+    var url = parts[0].slice(1, -1);
+    var rel = parts[1].split(/ *= */)[1].slice(1, -1);
+    obj[rel] = url;
+    return obj;
+  }, {});
+};
+
+/**
+ * Strip content related fields from `header`.
+ *
+ * @param {Object} header
+ * @return {Object} header
+ * @api private
+ */
+
+exports.cleanHeader = function(header, shouldStripCookie){
+  delete header['content-type'];
+  delete header['content-length'];
+  delete header['transfer-encoding'];
+  delete header['host'];
+  if (shouldStripCookie) {
+    delete header['cookie'];
+  }
+  return header;
+};
+
+},{}],31:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -21049,7 +21542,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],28:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],32:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -21472,7 +21965,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/CreateEndpointBasicAuthRepresentation":91,"../model/EndpointBasicAuthRepresentation":94,"../model/EndpointConfigurationRepresentation":95}],29:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/CreateEndpointBasicAuthRepresentation":95,"../model/EndpointBasicAuthRepresentation":98,"../model/EndpointConfigurationRepresentation":99}],33:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -22136,7 +22629,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/AbstractGroupRepresentation":73,"../model/AddGroupCapabilitiesRepresentation":76,"../model/GroupRepresentation":110,"../model/LightGroupRepresentation":114,"../model/ResultListDataRepresentation":139}],30:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/AbstractGroupRepresentation":77,"../model/AddGroupCapabilitiesRepresentation":80,"../model/GroupRepresentation":114,"../model/LightGroupRepresentation":118,"../model/ResultListDataRepresentation":143}],34:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -22463,7 +22956,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/CreateTenantRepresentation":93,"../model/ImageUploadRepresentation":111,"../model/LightTenantRepresentation":115,"../model/TenantEvent":149,"../model/TenantRepresentation":150}],31:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/CreateTenantRepresentation":97,"../model/ImageUploadRepresentation":115,"../model/LightTenantRepresentation":119,"../model/TenantEvent":153,"../model/TenantRepresentation":154}],35:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -22703,7 +23196,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/AbstractUserRepresentation":75,"../model/BulkUserUpdateRepresentation":84,"../model/ResultListDataRepresentation":139,"../model/UserRepresentation":155}],32:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/AbstractUserRepresentation":79,"../model/BulkUserUpdateRepresentation":88,"../model/ResultListDataRepresentation":143,"../model/UserRepresentation":159}],36:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -23083,7 +23576,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/ResultListDataRepresentation":139}],33:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/ResultListDataRepresentation":143}],37:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -23344,7 +23837,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/AppDefinitionPublishRepresentation":78,"../model/AppDefinitionRepresentation":79,"../model/AppDefinitionUpdateResultRepresentation":80,"../model/ResultListDataRepresentation":139,"../model/RuntimeAppDefinitionSaveRepresentation":140}],34:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/AppDefinitionPublishRepresentation":82,"../model/AppDefinitionRepresentation":83,"../model/AppDefinitionUpdateResultRepresentation":84,"../model/ResultListDataRepresentation":143,"../model/RuntimeAppDefinitionSaveRepresentation":144}],38:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -23542,7 +24035,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/AppDefinitionPublishRepresentation":78,"../model/AppDefinitionRepresentation":79,"../model/AppDefinitionUpdateResultRepresentation":80}],35:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/AppDefinitionPublishRepresentation":82,"../model/AppDefinitionRepresentation":83,"../model/AppDefinitionUpdateResultRepresentation":84}],39:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -23646,7 +24139,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/ResultListDataRepresentation":139,"../model/RuntimeAppDefinitionSaveRepresentation":140}],36:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/ResultListDataRepresentation":143,"../model/RuntimeAppDefinitionSaveRepresentation":144}],40:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -23851,7 +24344,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/CommentRepresentation":88,"../model/ResultListDataRepresentation":139}],37:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/CommentRepresentation":92,"../model/ResultListDataRepresentation":143}],41:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -24233,7 +24726,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
-     * Function to receive the result of the getRawContent3 operation.
+     * Function to receive the result of the getRawContent operation.
      * @param {String} error Error message, if any.
      * @param data This operation does not return a value.
      * @param {String} response The complete HTTP response.
@@ -24243,12 +24736,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * getRawContent
      * @param {Integer} contentId contentId
      */
-    this.getRawContent3 = function (contentId) {
+    this.getRawContent = function (contentId) {
       var postBody = null;
 
       // verify the required parameter 'contentId' is set
       if (contentId == undefined || contentId == null) {
-        throw "Missing the required parameter 'contentId' when calling getRawContent3";
+        throw "Missing the required parameter 'contentId' when calling getRawContent";
       }
 
       var pathParams = {
@@ -24261,9 +24754,25 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var authNames = [];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
-      var returnType = null;
+      var returnType = Object;
 
       return this.apiClient.callApi('/api/enterprise/content/{contentId}/raw', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
+
+    /**
+     * Get content Raw URL for the given contentId
+     * @param {Integer} contentId contentId
+     */
+    this.getRawContentUrl = function (contentId) {
+      return this.apiClient.basePath + '/api/enterprise/content/' + contentId + '/raw';
+    };
+
+    /**
+     * Get thumbnail URL for the given contentId
+     * @param {Integer} contentId contentId
+     */
+    this.getContentThumbnailUrl = function (contentId) {
+      return this.apiClient.basePath + '/app/rest/content/' + contentId + '/rendition/thumbnail';
     };
 
     /**
@@ -24338,7 +24847,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/RelatedContentRepresentation":134,"../model/ResultListDataRepresentation":139}],38:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/RelatedContentRepresentation":138,"../model/ResultListDataRepresentation":143}],42:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -24422,7 +24931,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],39:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],43:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -24647,7 +25156,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/FormRepresentation":104,"../model/FormSaveRepresentation":105,"../model/ValidationErrorRepresentation":157}],40:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/FormRepresentation":108,"../model/FormSaveRepresentation":109,"../model/ValidationErrorRepresentation":161}],44:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -24763,7 +25272,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/ResultListDataRepresentation":139}],41:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/ResultListDataRepresentation":143}],45:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -24875,7 +25384,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/SyncLogEntryRepresentation":142}],42:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/SyncLogEntryRepresentation":146}],46:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -24946,7 +25455,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/ResultListDataRepresentation":139}],43:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/ResultListDataRepresentation":143}],47:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -25167,7 +25676,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/ResultListDataRepresentation":139}],44:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/ResultListDataRepresentation":143}],48:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -25361,7 +25870,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/ResultListDataRepresentation":139}],45:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/ResultListDataRepresentation":143}],49:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -26044,7 +26553,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/BoxUserAccountCredentialsRepresentation":83,"../model/ResultListDataRepresentation":139,"../model/UserAccountCredentialsRepresentation":151}],46:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/BoxUserAccountCredentialsRepresentation":87,"../model/ResultListDataRepresentation":143,"../model/UserAccountCredentialsRepresentation":155}],50:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -26329,7 +26838,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/BoxUserAccountCredentialsRepresentation":83,"../model/ResultListDataRepresentation":139,"../model/UserAccountCredentialsRepresentation":151}],47:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/BoxUserAccountCredentialsRepresentation":87,"../model/ResultListDataRepresentation":143,"../model/UserAccountCredentialsRepresentation":155}],51:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -26442,7 +26951,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/ResultListDataRepresentation":139}],48:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/ResultListDataRepresentation":143}],52:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -26560,7 +27069,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],49:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],53:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -26678,7 +27187,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/ObjectNode":122}],50:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/ObjectNode":126}],54:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -27198,7 +27707,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/ModelRepresentation":121,"../model/ObjectNode":122,"../model/ResultListDataRepresentation":139,"../model/ValidationErrorRepresentation":157}],51:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/ModelRepresentation":125,"../model/ObjectNode":126,"../model/ResultListDataRepresentation":143,"../model/ValidationErrorRepresentation":161}],55:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -27321,7 +27830,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/ModelRepresentation":121,"../model/ResultListDataRepresentation":139}],52:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/ModelRepresentation":125,"../model/ResultListDataRepresentation":143}],56:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -27730,7 +28239,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/CreateProcessInstanceRepresentation":92,"../model/FormDefinitionRepresentation":100,"../model/FormValueRepresentation":108,"../model/ProcessFilterRequestRepresentation":125,"../model/ProcessInstanceFilterRequestRepresentation":127,"../model/ProcessInstanceRepresentation":128,"../model/ResultListDataRepresentation":139}],53:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/CreateProcessInstanceRepresentation":96,"../model/FormDefinitionRepresentation":104,"../model/FormValueRepresentation":112,"../model/ProcessFilterRequestRepresentation":129,"../model/ProcessInstanceFilterRequestRepresentation":131,"../model/ProcessInstanceRepresentation":132,"../model/ResultListDataRepresentation":143}],57:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -27807,7 +28316,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/ResultListDataRepresentation":139}],54:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/ResultListDataRepresentation":143}],58:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -27944,7 +28453,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/FormDefinitionRepresentation":100,"../model/FormValueRepresentation":108}],55:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/FormDefinitionRepresentation":104,"../model/FormValueRepresentation":112}],59:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -28190,7 +28699,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/RestVariable":138}],56:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/RestVariable":142}],60:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -28415,7 +28924,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/CommentRepresentation":88,"../model/FormDefinitionRepresentation":100,"../model/ProcessInstanceRepresentation":128,"../model/ResultListDataRepresentation":139}],57:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/CommentRepresentation":92,"../model/FormDefinitionRepresentation":104,"../model/ProcessInstanceRepresentation":132,"../model/ResultListDataRepresentation":143}],61:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -28524,7 +29033,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/CreateProcessInstanceRepresentation":92,"../model/ProcessInstanceRepresentation":128,"../model/ResultListDataRepresentation":139}],58:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/CreateProcessInstanceRepresentation":96,"../model/ProcessInstanceRepresentation":132,"../model/ResultListDataRepresentation":143}],62:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -28631,7 +29140,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/ObjectNode":122,"../model/ProcessInstanceFilterRequestRepresentation":127,"../model/ResultListDataRepresentation":139}],59:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/ObjectNode":126,"../model/ProcessInstanceFilterRequestRepresentation":131,"../model/ResultListDataRepresentation":143}],63:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -28706,7 +29215,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/ProcessScopeRepresentation":131,"../model/ProcessScopesRequestRepresentation":132}],60:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/ProcessScopeRepresentation":135,"../model/ProcessScopesRequestRepresentation":136}],64:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -28910,7 +29419,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/ChangePasswordRepresentation":85,"../model/File":99,"../model/ImageUploadRepresentation":111,"../model/UserRepresentation":155}],61:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/ChangePasswordRepresentation":89,"../model/File":103,"../model/ImageUploadRepresentation":115,"../model/UserRepresentation":159}],65:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -29095,12 +29604,111 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       return this.apiClient.callApi('/app/rest/reporting/reports/{reportId}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
     };
+
+    /**
+     * Function to export a report
+     */
+
+    /**
+     * Export a report
+     * @param {string} reportId
+     * @param {module:model/ReportExportQueryRepresentation} queryParams
+     */
+    this.exportToCsv = function (reportId, queryParams) {
+      var postBody = queryParams;
+
+      if (reportId == undefined || reportId == null) {
+        throw "Missing the required parameter 'reportId' when calling exportToCsv";
+      }
+
+      if (queryParams == undefined || queryParams == null) {
+        throw "Missing the required parameter 'queryParams' when calling exportToCsv";
+      }
+
+      var pathParams = {
+        'reportId': reportId
+      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
+
+      var authNames = [];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = 'String';
+
+      return this.apiClient.callApi('/app/rest/reporting/reports/{reportId}/export-to-csv', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
+
+    /**
+     * Function to save a report
+     */
+
+    /**
+     * Save a report
+     * @param {string} reportId
+     * @param {module:model/ReportSaveQueryRepresentation} queryParams
+     */
+    this.saveReport = function (reportId, queryParams) {
+      var postBody = queryParams;
+
+      if (reportId == undefined || reportId == null) {
+        throw "Missing the required parameter 'reportId' when calling saveReport";
+      }
+
+      if (queryParams == undefined || queryParams == null) {
+        throw "Missing the required parameter 'queryParams' when calling queryParams";
+      }
+
+      var pathParams = {
+        'reportId': reportId
+      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
+
+      var authNames = [];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = null;
+
+      return this.apiClient.callApi('/app/rest/reporting/reports/{reportId}', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
+    /**
+     * Function to delete a report
+     */
+
+    /**
+     * Save a report
+     * @param {string} reportId
+     */
+    this.deleteReport = function (reportId) {
+      var postBody = null;
+
+      if (reportId == undefined || reportId == null) {
+        throw "Missing the required parameter 'reportId' when calling delete";
+      }
+
+      var pathParams = {
+        'reportId': reportId
+      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
+
+      var authNames = [];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = null;
+
+      return this.apiClient.callApi('/app/rest/reporting/reports/{reportId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
   };
 
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/ParameterValueRepresentation":124,"../model/ReportCharts":135,"../model/ReportParametersDefinition":136}],62:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/ParameterValueRepresentation":128,"../model/ReportCharts":139,"../model/ReportParametersDefinition":140}],66:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -29195,7 +29803,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],63:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],67:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -29265,7 +29873,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/SystemPropertiesRepresentation":143}],64:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/SystemPropertiesRepresentation":147}],68:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -29607,7 +30215,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/ObjectNode":122,"../model/TaskRepresentation":147}],65:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/ObjectNode":126,"../model/TaskRepresentation":151}],69:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -30677,7 +31285,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/ChecklistOrderRepresentation":87,"../model/CommentRepresentation":88,"../model/CompleteFormRepresentation":89,"../model/FormDefinitionRepresentation":100,"../model/FormValueRepresentation":108,"../model/ObjectNode":122,"../model/RelatedContentRepresentation":134,"../model/ResultListDataRepresentation":139,"../model/SaveFormRepresentation":141,"../model/TaskFilterRequestRepresentation":145,"../model/TaskRepresentation":147,"../model/TaskUpdateRepresentation":148}],66:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/ChecklistOrderRepresentation":91,"../model/CommentRepresentation":92,"../model/CompleteFormRepresentation":93,"../model/FormDefinitionRepresentation":104,"../model/FormValueRepresentation":112,"../model/ObjectNode":126,"../model/RelatedContentRepresentation":138,"../model/ResultListDataRepresentation":143,"../model/SaveFormRepresentation":145,"../model/TaskFilterRequestRepresentation":149,"../model/TaskRepresentation":151,"../model/TaskUpdateRepresentation":152}],70:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -30834,7 +31442,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/ChecklistOrderRepresentation":87,"../model/ResultListDataRepresentation":139,"../model/TaskRepresentation":147}],67:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/ChecklistOrderRepresentation":91,"../model/ResultListDataRepresentation":143,"../model/TaskRepresentation":151}],71:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -31116,7 +31724,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/CompleteFormRepresentation":89,"../model/FormDefinitionRepresentation":100,"../model/FormValueRepresentation":108,"../model/ProcessInstanceVariableRepresentation":129,"../model/SaveFormRepresentation":141}],68:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/CompleteFormRepresentation":93,"../model/FormDefinitionRepresentation":104,"../model/FormValueRepresentation":112,"../model/ProcessInstanceVariableRepresentation":133,"../model/SaveFormRepresentation":145}],72:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -31293,7 +31901,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/ArrayNode":82}],69:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/ArrayNode":86}],73:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -31563,7 +32171,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/ResetPasswordRepresentation":137,"../model/ResultListDataRepresentation":139,"../model/UserActionRepresentation":152,"../model/UserRepresentation":155}],70:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/ResetPasswordRepresentation":141,"../model/ResultListDataRepresentation":143,"../model/UserActionRepresentation":156,"../model/UserRepresentation":159}],74:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -32020,7 +32628,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/ResultListDataRepresentation":139,"../model/UserFilterOrderRepresentation":153,"../model/UserProcessInstanceFilterRepresentation":154,"../model/UserTaskFilterRepresentation":156}],71:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/ResultListDataRepresentation":143,"../model/UserFilterOrderRepresentation":157,"../model/UserProcessInstanceFilterRepresentation":158,"../model/UserTaskFilterRepresentation":160}],75:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -32110,7 +32718,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/ResultListDataRepresentation":139}],72:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/ResultListDataRepresentation":143}],76:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -32807,7 +33415,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../alfrescoApiClient":296,"./api/AboutApi":27,"./api/AdminEndpointsApi":28,"./api/AdminGroupsApi":29,"./api/AdminTenantsApi":30,"./api/AdminUsersApi":31,"./api/AlfrescoApi":32,"./api/AppsApi":33,"./api/AppsDefinitionApi":34,"./api/AppsRuntimeApi":35,"./api/CommentsApi":36,"./api/ContentApi":37,"./api/ContentRenditionApi":38,"./api/EditorApi":39,"./api/GroupsApi":40,"./api/IDMSyncApi":41,"./api/IntegrationAccountApi":42,"./api/IntegrationAlfrescoCloudApi":43,"./api/IntegrationAlfrescoOnPremiseApi":44,"./api/IntegrationApi":45,"./api/IntegrationBoxApi":46,"./api/IntegrationDriveApi":47,"./api/ModelBpmnApi":48,"./api/ModelJsonBpmnApi":49,"./api/ModelsApi":50,"./api/ModelsHistoryApi":51,"./api/ProcessApi":52,"./api/ProcessDefinitionsApi":53,"./api/ProcessDefinitionsFormApi":54,"./api/ProcessInstanceVariablesApi":55,"./api/ProcessInstancesApi":56,"./api/ProcessInstancesInformationApi":57,"./api/ProcessInstancesListingApi":58,"./api/ProcessScopeApi":59,"./api/ProfileApi":60,"./api/ReportApi":61,"./api/ScriptFileApi":62,"./api/SystemPropertiesApi":63,"./api/TaskActionsApi":64,"./api/TaskApi":65,"./api/TaskCheckListApi":66,"./api/TaskFormsApi":67,"./api/TemporaryApi":68,"./api/UserApi":69,"./api/UserFiltersApi":70,"./api/UsersWorkflowApi":71,"./model/AbstractGroupRepresentation":73,"./model/AbstractRepresentation":74,"./model/AbstractUserRepresentation":75,"./model/AddGroupCapabilitiesRepresentation":76,"./model/AppDefinition":77,"./model/AppDefinitionPublishRepresentation":78,"./model/AppDefinitionRepresentation":79,"./model/AppDefinitionUpdateResultRepresentation":80,"./model/AppModelDefinition":81,"./model/ArrayNode":82,"./model/BoxUserAccountCredentialsRepresentation":83,"./model/BulkUserUpdateRepresentation":84,"./model/ChangePasswordRepresentation":85,"./model/ChecklistOrderRepresentation":87,"./model/CommentRepresentation":88,"./model/CompleteFormRepresentation":89,"./model/ConditionRepresentation":90,"./model/CreateEndpointBasicAuthRepresentation":91,"./model/CreateProcessInstanceRepresentation":92,"./model/CreateTenantRepresentation":93,"./model/EndpointBasicAuthRepresentation":94,"./model/EndpointConfigurationRepresentation":95,"./model/EndpointRequestHeaderRepresentation":96,"./model/EntityAttributeScopeRepresentation":97,"./model/EntityVariableScopeRepresentation":98,"./model/File":99,"./model/FormDefinitionRepresentation":100,"./model/FormFieldRepresentation":101,"./model/FormJavascriptEventRepresentation":102,"./model/FormOutcomeRepresentation":103,"./model/FormRepresentation":104,"./model/FormSaveRepresentation":105,"./model/FormScopeRepresentation":106,"./model/FormTabRepresentation":107,"./model/FormValueRepresentation":108,"./model/GroupCapabilityRepresentation":109,"./model/GroupRepresentation":110,"./model/ImageUploadRepresentation":111,"./model/LayoutRepresentation":112,"./model/LightAppRepresentation":113,"./model/LightGroupRepresentation":114,"./model/LightTenantRepresentation":115,"./model/LightUserRepresentation":116,"./model/MaplongListstring":117,"./model/MapstringListEntityVariableScopeRepresentation":118,"./model/MapstringListVariableScopeRepresentation":119,"./model/Mapstringstring":120,"./model/ModelRepresentation":121,"./model/ObjectNode":122,"./model/OptionRepresentation":123,"./model/ProcessFilterRequestRepresentation":125,"./model/ProcessInstanceFilterRepresentation":126,"./model/ProcessInstanceFilterRequestRepresentation":127,"./model/ProcessInstanceRepresentation":128,"./model/ProcessInstanceVariableRepresentation":129,"./model/ProcessScopeIdentifierRepresentation":130,"./model/ProcessScopeRepresentation":131,"./model/ProcessScopesRequestRepresentation":132,"./model/PublishIdentityInfoRepresentation":133,"./model/RelatedContentRepresentation":134,"./model/ResetPasswordRepresentation":137,"./model/RestVariable":138,"./model/ResultListDataRepresentation":139,"./model/RuntimeAppDefinitionSaveRepresentation":140,"./model/SaveFormRepresentation":141,"./model/SyncLogEntryRepresentation":142,"./model/SystemPropertiesRepresentation":143,"./model/TaskFilterRepresentation":144,"./model/TaskFilterRequestRepresentation":145,"./model/TaskQueryRequestRepresentation":146,"./model/TaskRepresentation":147,"./model/TaskUpdateRepresentation":148,"./model/TenantEvent":149,"./model/TenantRepresentation":150,"./model/UserAccountCredentialsRepresentation":151,"./model/UserActionRepresentation":152,"./model/UserFilterOrderRepresentation":153,"./model/UserProcessInstanceFilterRepresentation":154,"./model/UserRepresentation":155,"./model/UserTaskFilterRepresentation":156,"./model/ValidationErrorRepresentation":157,"./model/VariableScopeRepresentation":158}],73:[function(require,module,exports){
+},{"../../alfrescoApiClient":301,"./api/AboutApi":31,"./api/AdminEndpointsApi":32,"./api/AdminGroupsApi":33,"./api/AdminTenantsApi":34,"./api/AdminUsersApi":35,"./api/AlfrescoApi":36,"./api/AppsApi":37,"./api/AppsDefinitionApi":38,"./api/AppsRuntimeApi":39,"./api/CommentsApi":40,"./api/ContentApi":41,"./api/ContentRenditionApi":42,"./api/EditorApi":43,"./api/GroupsApi":44,"./api/IDMSyncApi":45,"./api/IntegrationAccountApi":46,"./api/IntegrationAlfrescoCloudApi":47,"./api/IntegrationAlfrescoOnPremiseApi":48,"./api/IntegrationApi":49,"./api/IntegrationBoxApi":50,"./api/IntegrationDriveApi":51,"./api/ModelBpmnApi":52,"./api/ModelJsonBpmnApi":53,"./api/ModelsApi":54,"./api/ModelsHistoryApi":55,"./api/ProcessApi":56,"./api/ProcessDefinitionsApi":57,"./api/ProcessDefinitionsFormApi":58,"./api/ProcessInstanceVariablesApi":59,"./api/ProcessInstancesApi":60,"./api/ProcessInstancesInformationApi":61,"./api/ProcessInstancesListingApi":62,"./api/ProcessScopeApi":63,"./api/ProfileApi":64,"./api/ReportApi":65,"./api/ScriptFileApi":66,"./api/SystemPropertiesApi":67,"./api/TaskActionsApi":68,"./api/TaskApi":69,"./api/TaskCheckListApi":70,"./api/TaskFormsApi":71,"./api/TemporaryApi":72,"./api/UserApi":73,"./api/UserFiltersApi":74,"./api/UsersWorkflowApi":75,"./model/AbstractGroupRepresentation":77,"./model/AbstractRepresentation":78,"./model/AbstractUserRepresentation":79,"./model/AddGroupCapabilitiesRepresentation":80,"./model/AppDefinition":81,"./model/AppDefinitionPublishRepresentation":82,"./model/AppDefinitionRepresentation":83,"./model/AppDefinitionUpdateResultRepresentation":84,"./model/AppModelDefinition":85,"./model/ArrayNode":86,"./model/BoxUserAccountCredentialsRepresentation":87,"./model/BulkUserUpdateRepresentation":88,"./model/ChangePasswordRepresentation":89,"./model/ChecklistOrderRepresentation":91,"./model/CommentRepresentation":92,"./model/CompleteFormRepresentation":93,"./model/ConditionRepresentation":94,"./model/CreateEndpointBasicAuthRepresentation":95,"./model/CreateProcessInstanceRepresentation":96,"./model/CreateTenantRepresentation":97,"./model/EndpointBasicAuthRepresentation":98,"./model/EndpointConfigurationRepresentation":99,"./model/EndpointRequestHeaderRepresentation":100,"./model/EntityAttributeScopeRepresentation":101,"./model/EntityVariableScopeRepresentation":102,"./model/File":103,"./model/FormDefinitionRepresentation":104,"./model/FormFieldRepresentation":105,"./model/FormJavascriptEventRepresentation":106,"./model/FormOutcomeRepresentation":107,"./model/FormRepresentation":108,"./model/FormSaveRepresentation":109,"./model/FormScopeRepresentation":110,"./model/FormTabRepresentation":111,"./model/FormValueRepresentation":112,"./model/GroupCapabilityRepresentation":113,"./model/GroupRepresentation":114,"./model/ImageUploadRepresentation":115,"./model/LayoutRepresentation":116,"./model/LightAppRepresentation":117,"./model/LightGroupRepresentation":118,"./model/LightTenantRepresentation":119,"./model/LightUserRepresentation":120,"./model/MaplongListstring":121,"./model/MapstringListEntityVariableScopeRepresentation":122,"./model/MapstringListVariableScopeRepresentation":123,"./model/Mapstringstring":124,"./model/ModelRepresentation":125,"./model/ObjectNode":126,"./model/OptionRepresentation":127,"./model/ProcessFilterRequestRepresentation":129,"./model/ProcessInstanceFilterRepresentation":130,"./model/ProcessInstanceFilterRequestRepresentation":131,"./model/ProcessInstanceRepresentation":132,"./model/ProcessInstanceVariableRepresentation":133,"./model/ProcessScopeIdentifierRepresentation":134,"./model/ProcessScopeRepresentation":135,"./model/ProcessScopesRequestRepresentation":136,"./model/PublishIdentityInfoRepresentation":137,"./model/RelatedContentRepresentation":138,"./model/ResetPasswordRepresentation":141,"./model/RestVariable":142,"./model/ResultListDataRepresentation":143,"./model/RuntimeAppDefinitionSaveRepresentation":144,"./model/SaveFormRepresentation":145,"./model/SyncLogEntryRepresentation":146,"./model/SystemPropertiesRepresentation":147,"./model/TaskFilterRepresentation":148,"./model/TaskFilterRequestRepresentation":149,"./model/TaskQueryRequestRepresentation":150,"./model/TaskRepresentation":151,"./model/TaskUpdateRepresentation":152,"./model/TenantEvent":153,"./model/TenantRepresentation":154,"./model/UserAccountCredentialsRepresentation":155,"./model/UserActionRepresentation":156,"./model/UserFilterOrderRepresentation":157,"./model/UserProcessInstanceFilterRepresentation":158,"./model/UserRepresentation":159,"./model/UserTaskFilterRepresentation":160,"./model/ValidationErrorRepresentation":161,"./model/VariableScopeRepresentation":162}],77:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -32892,7 +33500,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],74:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],78:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -32947,7 +33555,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],75:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],79:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -33046,7 +33654,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],76:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],80:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -33110,7 +33718,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],77:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],81:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -33195,7 +33803,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./AppModelDefinition":81,"./PublishIdentityInfoRepresentation":133}],78:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./AppModelDefinition":85,"./PublishIdentityInfoRepresentation":137}],82:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -33266,7 +33874,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],79:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],83:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -33386,7 +33994,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],80:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],84:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -33492,7 +34100,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./AppDefinitionRepresentation":79}],81:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./AppDefinitionRepresentation":83}],85:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -33626,7 +34234,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],82:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],86:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -33882,7 +34490,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],83:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],87:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -33960,7 +34568,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],84:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],88:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34059,7 +34667,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],85:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],89:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34130,7 +34738,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],86:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],90:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34199,7 +34807,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],87:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],91:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34263,7 +34871,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],88:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],92:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34348,7 +34956,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./LightUserRepresentation":116}],89:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./LightUserRepresentation":120}],93:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34419,7 +35027,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],90:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],94:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34532,7 +35140,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],91:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],95:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34617,7 +35225,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],92:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],96:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34702,7 +35310,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],93:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],97:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34787,7 +35395,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],94:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],98:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34886,7 +35494,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],95:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],99:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35013,7 +35621,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./EndpointRequestHeaderRepresentation":96}],96:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./EndpointRequestHeaderRepresentation":100}],100:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35084,7 +35692,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],97:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],101:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35155,7 +35763,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],98:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],102:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35240,7 +35848,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./EntityAttributeScopeRepresentation":97}],99:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./EntityAttributeScopeRepresentation":101}],103:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35402,7 +36010,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],100:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],104:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35592,7 +36200,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./FormFieldRepresentation":101,"./FormJavascriptEventRepresentation":102,"./FormOutcomeRepresentation":103,"./FormTabRepresentation":107}],101:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./FormFieldRepresentation":105,"./FormJavascriptEventRepresentation":106,"./FormOutcomeRepresentation":107,"./FormTabRepresentation":111}],105:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35859,7 +36467,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./ConditionRepresentation":90,"./LayoutRepresentation":112,"./OptionRepresentation":123}],102:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./ConditionRepresentation":94,"./LayoutRepresentation":116,"./OptionRepresentation":127}],106:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35930,7 +36538,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],103:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],107:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36001,7 +36609,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],104:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],108:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36128,7 +36736,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./FormDefinitionRepresentation":100}],105:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./FormDefinitionRepresentation":104}],109:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36227,7 +36835,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./FormRepresentation":104,"./ProcessScopeIdentifierRepresentation":130}],106:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./FormRepresentation":108,"./ProcessScopeIdentifierRepresentation":134}],110:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36326,7 +36934,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./FormFieldRepresentation":101,"./FormOutcomeRepresentation":103}],107:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./FormFieldRepresentation":105,"./FormOutcomeRepresentation":107}],111:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36404,7 +37012,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./ConditionRepresentation":90}],108:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./ConditionRepresentation":94}],112:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36475,7 +37083,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],109:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],113:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36546,7 +37154,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],110:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],114:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36687,7 +37295,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./GroupCapabilityRepresentation":109,"./GroupRepresentation":110,"./UserRepresentation":155}],111:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./GroupCapabilityRepresentation":113,"./GroupRepresentation":114,"./UserRepresentation":159}],115:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36772,7 +37380,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],112:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],116:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36850,7 +37458,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],113:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],117:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36942,7 +37550,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],114:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],118:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37034,7 +37642,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./LightGroupRepresentation":114}],115:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./LightGroupRepresentation":118}],119:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37105,7 +37713,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],116:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],120:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37204,7 +37812,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],117:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],121:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37263,7 +37871,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],118:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],122:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37322,7 +37930,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],119:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],123:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37381,7 +37989,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],120:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],124:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37440,7 +38048,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],121:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],125:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37609,7 +38217,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],122:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],126:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37664,7 +38272,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],123:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],127:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37735,7 +38343,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],124:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],128:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37820,7 +38428,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],125:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],129:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37925,7 +38533,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],126:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],130:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38024,7 +38632,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],127:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],131:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38116,7 +38724,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./ProcessInstanceFilterRepresentation":126}],128:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./ProcessInstanceFilterRepresentation":130}],132:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38292,7 +38900,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./LightUserRepresentation":116,"./RestVariable":138}],129:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./LightUserRepresentation":120,"./RestVariable":142}],133:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38370,7 +38978,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],130:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],134:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38441,7 +39049,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],131:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],135:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38596,7 +39204,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./FormScopeRepresentation":106}],132:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./FormScopeRepresentation":110}],136:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38667,7 +39275,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./ProcessScopeIdentifierRepresentation":130}],133:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./ProcessScopeIdentifierRepresentation":134}],137:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38745,7 +39353,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./LightGroupRepresentation":114,"./LightUserRepresentation":116}],134:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./LightGroupRepresentation":118,"./LightUserRepresentation":120}],138:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38893,7 +39501,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./LightUserRepresentation":116}],135:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./LightUserRepresentation":120}],139:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38955,7 +39563,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./Chart":86}],136:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./Chart":90}],140:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39040,7 +39648,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],137:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],141:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39104,7 +39712,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],138:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],142:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39196,7 +39804,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],139:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],143:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39281,7 +39889,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./AbstractRepresentation":74}],140:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./AbstractRepresentation":78}],144:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39345,7 +39953,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./AppDefinitionRepresentation":79}],141:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./AppDefinitionRepresentation":83}],145:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39409,7 +40017,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],142:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],146:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39487,7 +40095,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],143:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],147:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39551,7 +40159,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],144:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],148:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39671,7 +40279,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],145:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],149:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39772,7 +40380,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./TaskFilterRepresentation":144}],146:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./TaskFilterRepresentation":148}],150:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39871,7 +40479,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],147:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],151:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40124,7 +40732,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./LightUserRepresentation":116}],148:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./LightUserRepresentation":120}],152:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40223,7 +40831,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],149:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],153:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40329,7 +40937,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],150:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],154:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40442,7 +41050,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],151:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],155:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40513,7 +41121,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],152:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],156:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40591,7 +41199,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],153:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],157:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40662,7 +41270,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],154:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],158:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40768,7 +41376,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./ProcessInstanceFilterRepresentation":126}],155:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./ProcessInstanceFilterRepresentation":130}],159:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40965,7 +41573,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./GroupRepresentation":110,"./LightAppRepresentation":113}],156:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./GroupRepresentation":114,"./LightAppRepresentation":117}],160:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -41071,7 +41679,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./TaskFilterRepresentation":144}],157:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./TaskFilterRepresentation":148}],161:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -41177,7 +41785,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],158:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],162:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -41283,7 +41891,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],159:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],163:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -41394,7 +42002,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"../model/Error":161,"../model/LoginRequest":163,"../model/LoginTicketEntry":164,"../model/ValidateTicketEntry":166}],160:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"../model/Error":165,"../model/LoginRequest":167,"../model/LoginTicketEntry":168,"../model/ValidateTicketEntry":170}],164:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -41493,7 +42101,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../alfrescoApiClient":296,"./api/AuthenticationApi":159,"./model/Error":161,"./model/ErrorError":162,"./model/LoginRequest":163,"./model/LoginTicketEntry":164,"./model/LoginTicketEntryEntry":165,"./model/ValidateTicketEntry":166,"./model/ValidateTicketEntryEntry":167}],161:[function(require,module,exports){
+},{"../../alfrescoApiClient":301,"./api/AuthenticationApi":163,"./model/Error":165,"./model/ErrorError":166,"./model/LoginRequest":167,"./model/LoginTicketEntry":168,"./model/LoginTicketEntryEntry":169,"./model/ValidateTicketEntry":170,"./model/ValidateTicketEntryEntry":171}],165:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -41555,7 +42163,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./ErrorError":162}],162:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./ErrorError":166}],166:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -41668,7 +42276,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],163:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],167:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -41738,7 +42346,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],164:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],168:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -41800,7 +42408,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./LoginTicketEntryEntry":165}],165:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./LoginTicketEntryEntry":169}],169:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -41870,7 +42478,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],166:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],170:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -41932,7 +42540,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296,"./ValidateTicketEntryEntry":167}],167:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301,"./ValidateTicketEntryEntry":171}],171:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -41994,7 +42602,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],168:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],172:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -42137,7 +42745,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   exports.prototype.isFileParam = function (param) {
     // fs.ReadStream in Node.js (but not in runtime like browserify)
     if (typeof window === 'undefined' && typeof require === 'function' && require('fs') && param instanceof require('fs').ReadStream) {
-      return true;r;
+      return true;
     }
     // Buffer in Node.js
     if (typeof Buffer === 'function' && param instanceof Buffer) {
@@ -42256,7 +42864,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       switch (auth.type) {
         case 'basic':
           if (auth.username || auth.password) {
-            request.auth(auth.username || '', auth.password || '');
+            request.auth(auth.username ? encodeURIComponent(auth.username) : '', auth.password ? encodeURIComponent(auth.password) : '');
           }
           break;
         case 'apiKey':
@@ -42459,7 +43067,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       case 'Number':
         return parseFloat(data);
       case 'String':
-        return String(data);
+        return data !== null && data !== undefined ? String(data) : data;
       case 'Date':
         return data ? this.parseDate(String(data)) : null;
       default:
@@ -42515,7 +43123,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":4,"fs":3,"superagent":26}],169:[function(require,module,exports){
+},{"buffer":4,"fs":3,"superagent":25}],173:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -42708,7 +43316,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"../model/AssocTargetBody":191,"../model/Error":209,"../model/NodeAssocPaging":223}],170:[function(require,module,exports){
+},{"../ApiClient":172,"../model/AssocTargetBody":196,"../model/Error":214,"../model/NodeAssocPaging":228}],174:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -44069,7 +44677,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"../model/AssocChildBody":189,"../model/AssocTargetBody":191,"../model/CopyBody":201,"../model/DeletedNodeEntry":203,"../model/DeletedNodesPaging":206,"../model/EmailSharedLinkBody":208,"../model/Error":209,"../model/MoveBody":219,"../model/NodeAssocPaging":223,"../model/NodeBody":225,"../model/NodeBody1":226,"../model/NodeChildAssocPaging":229,"../model/NodeEntry":231,"../model/NodePaging":235,"../model/NodeSharedLinkEntry":238,"../model/NodeSharedLinkPaging":239,"../model/RenditionBody":262,"../model/RenditionEntry":263,"../model/RenditionPaging":264,"../model/SharedLinkBody":266,"../model/SiteBody":268,"../model/SiteEntry":272}],171:[function(require,module,exports){
+},{"../ApiClient":172,"../model/AssocChildBody":194,"../model/AssocTargetBody":196,"../model/CopyBody":206,"../model/DeletedNodeEntry":208,"../model/DeletedNodesPaging":211,"../model/EmailSharedLinkBody":213,"../model/Error":214,"../model/MoveBody":224,"../model/NodeAssocPaging":228,"../model/NodeBody":230,"../model/NodeBody1":231,"../model/NodeChildAssocPaging":234,"../model/NodeEntry":236,"../model/NodePaging":240,"../model/NodeSharedLinkEntry":243,"../model/NodeSharedLinkPaging":244,"../model/RenditionBody":267,"../model/RenditionEntry":268,"../model/RenditionPaging":269,"../model/SharedLinkBody":271,"../model/SiteBody":273,"../model/SiteEntry":277}],175:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -44431,7 +45039,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"../model/AssocChildBody":189,"../model/Error":209,"../model/MoveBody":219,"../model/NodeAssocPaging":223,"../model/NodeBody1":226,"../model/NodeChildAssocPaging":229,"../model/NodeEntry":231,"../model/NodePaging":235}],172:[function(require,module,exports){
+},{"../ApiClient":172,"../model/AssocChildBody":194,"../model/Error":214,"../model/MoveBody":224,"../model/NodeAssocPaging":228,"../model/NodeBody1":231,"../model/NodeChildAssocPaging":234,"../model/NodeEntry":236,"../model/NodePaging":240}],176:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -44629,7 +45237,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"../model/CommentBody":194,"../model/CommentBody1":195,"../model/CommentEntry":196,"../model/CommentPaging":197,"../model/Error":209}],173:[function(require,module,exports){
+},{"../ApiClient":172,"../model/CommentBody":199,"../model/CommentBody1":200,"../model/CommentEntry":201,"../model/CommentPaging":202,"../model/Error":214}],177:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -44823,7 +45431,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"../model/Error":209,"../model/FavoriteBody":212,"../model/FavoriteEntry":213,"../model/FavoritePaging":214}],174:[function(require,module,exports){
+},{"../ApiClient":172,"../model/Error":214,"../model/FavoriteBody":217,"../model/FavoriteEntry":218,"../model/FavoritePaging":219}],178:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -44900,7 +45508,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"../model/Error":209,"../model/PersonNetworkEntry":248}],175:[function(require,module,exports){
+},{"../ApiClient":172,"../model/Error":214,"../model/PersonNetworkEntry":253}],179:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -45435,7 +46043,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"../model/CopyBody":201,"../model/DeletedNodeEntry":203,"../model/DeletedNodesPaging":206,"../model/Error":209,"../model/MoveBody":219,"../model/NodeBody":225,"../model/NodeBody1":226,"../model/NodeEntry":231,"../model/NodePaging":235}],176:[function(require,module,exports){
+},{"../ApiClient":172,"../model/CopyBody":206,"../model/DeletedNodeEntry":208,"../model/DeletedNodesPaging":211,"../model/Error":214,"../model/MoveBody":224,"../model/NodeBody":230,"../model/NodeBody1":231,"../model/NodeEntry":236,"../model/NodePaging":240}],180:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -46244,7 +46852,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"../model/ActivityPaging":187,"../model/Error":209,"../model/FavoriteBody":212,"../model/FavoriteEntry":213,"../model/FavoritePaging":214,"../model/FavoriteSiteBody":216,"../model/InlineResponse201":217,"../model/PersonEntry":246,"../model/PersonNetworkEntry":248,"../model/PersonNetworkPaging":249,"../model/PreferenceEntry":252,"../model/PreferencePaging":253,"../model/SiteEntry":272,"../model/SiteMembershipBody":278,"../model/SiteMembershipBody1":279,"../model/SiteMembershipRequestEntry":281,"../model/SiteMembershipRequestPaging":282,"../model/SitePaging":284}],177:[function(require,module,exports){
+},{"../ApiClient":172,"../model/ActivityPaging":192,"../model/Error":214,"../model/FavoriteBody":217,"../model/FavoriteEntry":218,"../model/FavoritePaging":219,"../model/FavoriteSiteBody":221,"../model/InlineResponse201":222,"../model/PersonEntry":251,"../model/PersonNetworkEntry":253,"../model/PersonNetworkPaging":254,"../model/PreferenceEntry":257,"../model/PreferencePaging":258,"../model/SiteEntry":277,"../model/SiteMembershipBody":283,"../model/SiteMembershipBody1":284,"../model/SiteMembershipRequestEntry":286,"../model/SiteMembershipRequestPaging":287,"../model/SitePaging":289}],181:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -46332,7 +46940,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"../model/Error":209,"../model/NodePaging":235}],178:[function(require,module,exports){
+},{"../ApiClient":172,"../model/Error":214,"../model/NodePaging":240}],182:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -46524,7 +47132,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"../model/Error":209,"../model/RatingBody":257,"../model/RatingEntry":258,"../model/RatingPaging":259}],179:[function(require,module,exports){
+},{"../ApiClient":172,"../model/Error":214,"../model/RatingBody":262,"../model/RatingEntry":263,"../model/RatingPaging":264}],183:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -46781,7 +47389,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"../model/Error":209,"../model/RenditionBody":262,"../model/RenditionEntry":263,"../model/RenditionPaging":264}],180:[function(require,module,exports){
+},{"../ApiClient":172,"../model/Error":214,"../model/RenditionBody":267,"../model/RenditionEntry":268,"../model/RenditionPaging":269}],184:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -47022,7 +47630,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"../model/EmailSharedLinkBody":208,"../model/Error":209,"../model/NodeSharedLinkEntry":238,"../model/NodeSharedLinkPaging":239,"../model/SharedLinkBody":266}],181:[function(require,module,exports){
+},{"../ApiClient":172,"../model/EmailSharedLinkBody":213,"../model/Error":214,"../model/NodeSharedLinkEntry":243,"../model/NodeSharedLinkPaging":244,"../model/SharedLinkBody":271}],185:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -47472,7 +48080,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"../model/Error":209,"../model/SiteBody":268,"../model/SiteContainerEntry":270,"../model/SiteContainerPaging":271,"../model/SiteEntry":272,"../model/SiteMemberBody":274,"../model/SiteMemberEntry":275,"../model/SiteMemberPaging":276,"../model/SiteMemberRoleBody":277,"../model/SitePaging":284}],182:[function(require,module,exports){
+},{"../ApiClient":172,"../model/Error":214,"../model/SiteBody":273,"../model/SiteContainerEntry":275,"../model/SiteContainerPaging":276,"../model/SiteEntry":277,"../model/SiteMemberBody":279,"../model/SiteMemberEntry":280,"../model/SiteMemberPaging":281,"../model/SiteMemberRoleBody":282,"../model/SitePaging":289}],186:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -47722,7 +48330,91 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"../model/Error":209,"../model/TagBody":287,"../model/TagBody1":288,"../model/TagEntry":289,"../model/TagPaging":290}],183:[function(require,module,exports){
+},{"../ApiClient":172,"../model/Error":214,"../model/TagBody":292,"../model/TagBody1":293,"../model/TagEntry":294,"../model/TagPaging":295}],187:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../ApiClient'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../ApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoCoreRestApi) {
+      root.AlfrescoCoreRestApi = {};
+    }
+    root.AlfrescoCoreRestApi.WebscriptApi = factory(root.AlfrescoCoreRestApi.ApiClient);
+  }
+})(undefined, function (ApiClient) {
+  'use strict';
+
+  /**
+   * Tags service.
+   * @module api/WebscriptApi
+   * @version 0.1.0
+   */
+
+  /**
+   * Constructs a new WebscriptApi.
+   * @alias module:api/WebscriptApi
+   * @class
+   * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
+   * if unspecified.
+   */
+
+  var exports = function exports(apiClient) {
+    this.apiClient = apiClient || ApiClient.instance;
+    this.allowedMethod = ['GET', 'POST', 'PUT', 'DELETE'];
+
+    /**
+     * Call a get on a  Web Scripts see https://wiki.alfresco.com/wiki/Web_Scripts for more details about Web Scripts
+     * Url syntax definition : http[s]://<host>:<port>/[<contextPath>/]/<servicePath>[/<scriptPath>][?<scriptArgs>]
+     * example: http://localhost:8081/share/service/mytasks?priority=1
+     *
+     * @param {String} httpMethod  GET, POST, PUT and DELETE
+     * @param {String} scriptPath
+     * @param {Object} scriptArgs
+     * @param {String} contextRoot default value alfresco
+     * @param {String} servicePath default value service
+     * @param {String} postBody
+     *
+     * @returns {Promise} A promise that is resolved return the webScript data and {error} if rejected.
+     */
+
+    this.executeWebScript = function (httpMethod, scriptPath, scriptArgs, contextRoot, servicePath, postBody) {
+      contextRoot = contextRoot || 'alfresco';
+      servicePath = servicePath || 'service';
+      postBody = postBody || null;
+
+      if (!httpMethod || this.allowedMethod.indexOf(httpMethod) === -1) {
+        throw 'method allowed value  GET, POST, PUT and DELETE';
+      }
+
+      if (!scriptPath) {
+        throw 'Missing the required parameter scriptPath when calling executeWebScript';
+      }
+
+      var pathParams = {};
+      var headerParams = {};
+      var formParams = {};
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json', 'text/html'];
+      var returnType = {};
+
+      return this.apiClient.callApi('/' + servicePath + '/' + scriptPath, httpMethod, pathParams, scriptArgs, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, contextRoot);
+    };
+  };
+
+  return exports;
+});
+
+},{"../ApiClient":172}],188:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -47730,12 +48422,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 (function (factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['./ApiClient', './model/Activity', './model/ActivityActivitySummary', './model/ActivityEntry', './model/ActivityPaging', './model/ActivityPagingList', './model/AssocChildBody', './model/AssocInfo', './model/AssocTargetBody', './model/ChildAssocInfo', './model/Comment', './model/CommentBody', './model/CommentBody1', './model/CommentEntry', './model/CommentPaging', './model/CommentPagingList', './model/Company', './model/ContentInfo', './model/CopyBody', './model/DeletedNode', './model/DeletedNodeEntry', './model/DeletedNodeMinimal', './model/DeletedNodeMinimalEntry', './model/DeletedNodesPaging', './model/DeletedNodesPagingList', './model/EmailSharedLinkBody', './model/Error', './model/ErrorError', './model/Favorite', './model/FavoriteBody', './model/FavoriteEntry', './model/FavoritePaging', './model/FavoritePagingList', './model/FavoriteSiteBody', './model/InlineResponse201', './model/InlineResponse201Entry', './model/MoveBody', './model/NetworkQuota', './model/NodeAssocMinimal', './model/NodeAssocMinimalEntry', './model/NodeAssocPaging', './model/NodeAssocPagingList', './model/NodeBody', './model/NodeBody1', './model/NodeChildAssocMinimal', './model/NodeChildAssocMinimalEntry', './model/NodeChildAssocPaging', './model/NodeChildAssocPagingList', './model/NodeEntry', './model/NodeFull', './model/NodeMinimal', './model/NodeMinimalEntry', './model/NodePaging', './model/NodePagingList', './model/NodeSharedLink', './model/NodeSharedLinkEntry', './model/NodeSharedLinkPaging', './model/NodeSharedLinkPagingList', './model/NodesnodeIdchildrenContent', './model/Pagination', './model/PathElement', './model/PathInfo', './model/Person', './model/PersonEntry', './model/PersonNetwork', './model/PersonNetworkEntry', './model/PersonNetworkPaging', './model/PersonNetworkPagingList', './model/Preference', './model/PreferenceEntry', './model/PreferencePaging', './model/PreferencePagingList', './model/Rating', './model/RatingAggregate', './model/RatingBody', './model/RatingEntry', './model/RatingPaging', './model/RatingPagingList', './model/Rendition', './model/RenditionBody', './model/RenditionEntry', './model/RenditionPaging', './model/RenditionPagingList', './model/SharedLinkBody', './model/Site', './model/SiteBody', './model/SiteContainer', './model/SiteContainerEntry', './model/SiteContainerPaging', './model/SiteEntry', './model/SiteMember', './model/SiteMemberBody', './model/SiteMemberEntry', './model/SiteMemberPaging', './model/SiteMemberRoleBody', './model/SiteMembershipBody', './model/SiteMembershipBody1', './model/SiteMembershipRequest', './model/SiteMembershipRequestEntry', './model/SiteMembershipRequestPaging', './model/SiteMembershipRequestPagingList', './model/SitePaging', './model/SitePagingList', './model/Tag', './model/TagBody', './model/TagBody1', './model/TagEntry', './model/TagPaging', './model/TagPagingList', './model/UserInfo', './api/AssociationsApi', './api/ChangesApi', './api/ChildAssociationsApi', './api/CommentsApi', './api/FavoritesApi', './api/NetworksApi', './api/NodesApi', './api/PeopleApi', './api/RatingsApi', './api/RenditionsApi', './api/QueriesApi', './api/SharedlinksApi', './api/SitesApi', './api/TagsApi'], factory);
+    define(['./ApiClient', './model/Activity', './model/ActivityActivitySummary', './model/ActivityEntry', './model/ActivityPaging', './model/ActivityPagingList', './model/AssocChildBody', './model/AssocInfo', './model/AssocTargetBody', './model/ChildAssocInfo', './model/Comment', './model/CommentBody', './model/CommentBody1', './model/CommentEntry', './model/CommentPaging', './model/CommentPagingList', './model/Company', './model/ContentInfo', './model/CopyBody', './model/DeletedNode', './model/DeletedNodeEntry', './model/DeletedNodeMinimal', './model/DeletedNodeMinimalEntry', './model/DeletedNodesPaging', './model/DeletedNodesPagingList', './model/EmailSharedLinkBody', './model/Error', './model/ErrorError', './model/Favorite', './model/FavoriteBody', './model/FavoriteEntry', './model/FavoritePaging', './model/FavoritePagingList', './model/FavoriteSiteBody', './model/InlineResponse201', './model/InlineResponse201Entry', './model/MoveBody', './model/NetworkQuota', './model/NodeAssocMinimal', './model/NodeAssocMinimalEntry', './model/NodeAssocPaging', './model/NodeAssocPagingList', './model/NodeBody', './model/NodeBody1', './model/NodeChildAssocMinimal', './model/NodeChildAssocMinimalEntry', './model/NodeChildAssocPaging', './model/NodeChildAssocPagingList', './model/NodeEntry', './model/NodeFull', './model/NodeMinimal', './model/NodeMinimalEntry', './model/NodePaging', './model/NodePagingList', './model/NodeSharedLink', './model/NodeSharedLinkEntry', './model/NodeSharedLinkPaging', './model/NodeSharedLinkPagingList', './model/NodesnodeIdchildrenContent', './model/Pagination', './model/PathElement', './model/PathInfo', './model/Person', './model/PersonEntry', './model/PersonNetwork', './model/PersonNetworkEntry', './model/PersonNetworkPaging', './model/PersonNetworkPagingList', './model/Preference', './model/PreferenceEntry', './model/PreferencePaging', './model/PreferencePagingList', './model/Rating', './model/RatingAggregate', './model/RatingBody', './model/RatingEntry', './model/RatingPaging', './model/RatingPagingList', './model/Rendition', './model/RenditionBody', './model/RenditionEntry', './model/RenditionPaging', './model/RenditionPagingList', './model/SharedLinkBody', './model/Site', './model/SiteBody', './model/SiteContainer', './model/SiteContainerEntry', './model/SiteContainerPaging', './model/SiteEntry', './model/SiteMember', './model/SiteMemberBody', './model/SiteMemberEntry', './model/SiteMemberPaging', './model/SiteMemberRoleBody', './model/SiteMembershipBody', './model/SiteMembershipBody1', './model/SiteMembershipRequest', './model/SiteMembershipRequestEntry', './model/SiteMembershipRequestPaging', './model/SiteMembershipRequestPagingList', './model/SitePaging', './model/SitePagingList', './model/Tag', './model/TagBody', './model/TagBody1', './model/TagEntry', './model/TagPaging', './model/TagPagingList', './model/UserInfo', './api/AssociationsApi', './api/ChangesApi', './api/ChildAssociationsApi', './api/CommentsApi', './api/FavoritesApi', './api/NetworksApi', './api/NodesApi', './api/PeopleApi', './api/RatingsApi', './api/RenditionsApi', './api/QueriesApi', './api/SharedlinksApi', './api/SitesApi', './api/TagsApi', './api/WebscriptApi'], factory);
   } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('./ApiClient'), require('./model/Activity'), require('./model/ActivityActivitySummary'), require('./model/ActivityEntry'), require('./model/ActivityPaging'), require('./model/ActivityPagingList'), require('./model/AssocChildBody'), require('./model/AssocInfo'), require('./model/AssocTargetBody'), require('./model/ChildAssocInfo'), require('./model/Comment'), require('./model/CommentBody'), require('./model/CommentBody1'), require('./model/CommentEntry'), require('./model/CommentPaging'), require('./model/CommentPagingList'), require('./model/Company'), require('./model/ContentInfo'), require('./model/CopyBody'), require('./model/DeletedNode'), require('./model/DeletedNodeEntry'), require('./model/DeletedNodeMinimal'), require('./model/DeletedNodeMinimalEntry'), require('./model/DeletedNodesPaging'), require('./model/DeletedNodesPagingList'), require('./model/EmailSharedLinkBody'), require('./model/Error'), require('./model/ErrorError'), require('./model/Favorite'), require('./model/FavoriteBody'), require('./model/FavoriteEntry'), require('./model/FavoritePaging'), require('./model/FavoritePagingList'), require('./model/FavoriteSiteBody'), require('./model/InlineResponse201'), require('./model/InlineResponse201Entry'), require('./model/MoveBody'), require('./model/NetworkQuota'), require('./model/NodeAssocMinimal'), require('./model/NodeAssocMinimalEntry'), require('./model/NodeAssocPaging'), require('./model/NodeAssocPagingList'), require('./model/NodeBody'), require('./model/NodeBody1'), require('./model/NodeChildAssocMinimal'), require('./model/NodeChildAssocMinimalEntry'), require('./model/NodeChildAssocPaging'), require('./model/NodeChildAssocPagingList'), require('./model/NodeEntry'), require('./model/NodeFull'), require('./model/NodeMinimal'), require('./model/NodeMinimalEntry'), require('./model/NodePaging'), require('./model/NodePagingList'), require('./model/NodeSharedLink'), require('./model/NodeSharedLinkEntry'), require('./model/NodeSharedLinkPaging'), require('./model/NodeSharedLinkPagingList'), require('./model/NodesnodeIdchildrenContent'), require('./model/Pagination'), require('./model/PathElement'), require('./model/PathInfo'), require('./model/Person'), require('./model/PersonEntry'), require('./model/PersonNetwork'), require('./model/PersonNetworkEntry'), require('./model/PersonNetworkPaging'), require('./model/PersonNetworkPagingList'), require('./model/Preference'), require('./model/PreferenceEntry'), require('./model/PreferencePaging'), require('./model/PreferencePagingList'), require('./model/Rating'), require('./model/RatingAggregate'), require('./model/RatingBody'), require('./model/RatingEntry'), require('./model/RatingPaging'), require('./model/RatingPagingList'), require('./model/Rendition'), require('./model/RenditionBody'), require('./model/RenditionEntry'), require('./model/RenditionPaging'), require('./model/RenditionPagingList'), require('./model/SharedLinkBody'), require('./model/Site'), require('./model/SiteBody'), require('./model/SiteContainer'), require('./model/SiteContainerEntry'), require('./model/SiteContainerPaging'), require('./model/SiteEntry'), require('./model/SiteMember'), require('./model/SiteMemberBody'), require('./model/SiteMemberEntry'), require('./model/SiteMemberPaging'), require('./model/SiteMemberRoleBody'), require('./model/SiteMembershipBody'), require('./model/SiteMembershipBody1'), require('./model/SiteMembershipRequest'), require('./model/SiteMembershipRequestEntry'), require('./model/SiteMembershipRequestPaging'), require('./model/SiteMembershipRequestPagingList'), require('./model/SitePaging'), require('./model/SitePagingList'), require('./model/Tag'), require('./model/TagBody'), require('./model/TagBody1'), require('./model/TagEntry'), require('./model/TagPaging'), require('./model/TagPagingList'), require('./model/UserInfo'), require('./api/AssociationsApi'), require('./api/ChangesApi'), require('./api/ChildAssociationsApi'), require('./api/CommentsApi'), require('./api/FavoritesApi'), require('./api/NetworksApi'), require('./api/NodesApi'), require('./api/PeopleApi'), require('./api/RatingsApi'), require('./api/RenditionsApi'), require('./api/QueriesApi'), require('./api/SharedlinksApi'), require('./api/SitesApi'), require('./api/TagsApi'));
+    module.exports = factory(require('./ApiClient'), require('./model/Activity'), require('./model/ActivityActivitySummary'), require('./model/ActivityEntry'), require('./model/ActivityPaging'), require('./model/ActivityPagingList'), require('./model/AssocChildBody'), require('./model/AssocInfo'), require('./model/AssocTargetBody'), require('./model/ChildAssocInfo'), require('./model/Comment'), require('./model/CommentBody'), require('./model/CommentBody1'), require('./model/CommentEntry'), require('./model/CommentPaging'), require('./model/CommentPagingList'), require('./model/Company'), require('./model/ContentInfo'), require('./model/CopyBody'), require('./model/DeletedNode'), require('./model/DeletedNodeEntry'), require('./model/DeletedNodeMinimal'), require('./model/DeletedNodeMinimalEntry'), require('./model/DeletedNodesPaging'), require('./model/DeletedNodesPagingList'), require('./model/EmailSharedLinkBody'), require('./model/Error'), require('./model/ErrorError'), require('./model/Favorite'), require('./model/FavoriteBody'), require('./model/FavoriteEntry'), require('./model/FavoritePaging'), require('./model/FavoritePagingList'), require('./model/FavoriteSiteBody'), require('./model/InlineResponse201'), require('./model/InlineResponse201Entry'), require('./model/MoveBody'), require('./model/NetworkQuota'), require('./model/NodeAssocMinimal'), require('./model/NodeAssocMinimalEntry'), require('./model/NodeAssocPaging'), require('./model/NodeAssocPagingList'), require('./model/NodeBody'), require('./model/NodeBody1'), require('./model/NodeChildAssocMinimal'), require('./model/NodeChildAssocMinimalEntry'), require('./model/NodeChildAssocPaging'), require('./model/NodeChildAssocPagingList'), require('./model/NodeEntry'), require('./model/NodeFull'), require('./model/NodeMinimal'), require('./model/NodeMinimalEntry'), require('./model/NodePaging'), require('./model/NodePagingList'), require('./model/NodeSharedLink'), require('./model/NodeSharedLinkEntry'), require('./model/NodeSharedLinkPaging'), require('./model/NodeSharedLinkPagingList'), require('./model/NodesnodeIdchildrenContent'), require('./model/Pagination'), require('./model/PathElement'), require('./model/PathInfo'), require('./model/Person'), require('./model/PersonEntry'), require('./model/PersonNetwork'), require('./model/PersonNetworkEntry'), require('./model/PersonNetworkPaging'), require('./model/PersonNetworkPagingList'), require('./model/Preference'), require('./model/PreferenceEntry'), require('./model/PreferencePaging'), require('./model/PreferencePagingList'), require('./model/Rating'), require('./model/RatingAggregate'), require('./model/RatingBody'), require('./model/RatingEntry'), require('./model/RatingPaging'), require('./model/RatingPagingList'), require('./model/Rendition'), require('./model/RenditionBody'), require('./model/RenditionEntry'), require('./model/RenditionPaging'), require('./model/RenditionPagingList'), require('./model/SharedLinkBody'), require('./model/Site'), require('./model/SiteBody'), require('./model/SiteContainer'), require('./model/SiteContainerEntry'), require('./model/SiteContainerPaging'), require('./model/SiteEntry'), require('./model/SiteMember'), require('./model/SiteMemberBody'), require('./model/SiteMemberEntry'), require('./model/SiteMemberPaging'), require('./model/SiteMemberRoleBody'), require('./model/SiteMembershipBody'), require('./model/SiteMembershipBody1'), require('./model/SiteMembershipRequest'), require('./model/SiteMembershipRequestEntry'), require('./model/SiteMembershipRequestPaging'), require('./model/SiteMembershipRequestPagingList'), require('./model/SitePaging'), require('./model/SitePagingList'), require('./model/Tag'), require('./model/TagBody'), require('./model/TagBody1'), require('./model/TagEntry'), require('./model/TagPaging'), require('./model/TagPagingList'), require('./model/UserInfo'), require('./api/AssociationsApi'), require('./api/ChangesApi'), require('./api/ChildAssociationsApi'), require('./api/CommentsApi'), require('./api/FavoritesApi'), require('./api/NetworksApi'), require('./api/NodesApi'), require('./api/PeopleApi'), require('./api/RatingsApi'), require('./api/RenditionsApi'), require('./api/QueriesApi'), require('./api/SharedlinksApi'), require('./api/SitesApi'), require('./api/TagsApi'), require('./api/WebscriptApi'));
   }
-})(function (ApiClient, Activity, ActivityActivitySummary, ActivityEntry, ActivityPaging, ActivityPagingList, AssocChildBody, AssocInfo, AssocTargetBody, ChildAssocInfo, Comment, CommentBody, CommentBody1, CommentEntry, CommentPaging, CommentPagingList, Company, ContentInfo, CopyBody, DeletedNode, DeletedNodeEntry, DeletedNodeMinimal, DeletedNodeMinimalEntry, DeletedNodesPaging, DeletedNodesPagingList, EmailSharedLinkBody, Error, ErrorError, Favorite, FavoriteBody, FavoriteEntry, FavoritePaging, FavoritePagingList, FavoriteSiteBody, InlineResponse201, InlineResponse201Entry, MoveBody, NetworkQuota, NodeAssocMinimal, NodeAssocMinimalEntry, NodeAssocPaging, NodeAssocPagingList, NodeBody, NodeBody1, NodeChildAssocMinimal, NodeChildAssocMinimalEntry, NodeChildAssocPaging, NodeChildAssocPagingList, NodeEntry, NodeFull, NodeMinimal, NodeMinimalEntry, NodePaging, NodePagingList, NodeSharedLink, NodeSharedLinkEntry, NodeSharedLinkPaging, NodeSharedLinkPagingList, NodesnodeIdchildrenContent, Pagination, PathElement, PathInfo, Person, PersonEntry, PersonNetwork, PersonNetworkEntry, PersonNetworkPaging, PersonNetworkPagingList, Preference, PreferenceEntry, PreferencePaging, PreferencePagingList, Rating, RatingAggregate, RatingBody, RatingEntry, RatingPaging, RatingPagingList, Rendition, RenditionBody, RenditionEntry, RenditionPaging, RenditionPagingList, SharedLinkBody, Site, SiteBody, SiteContainer, SiteContainerEntry, SiteContainerPaging, SiteEntry, SiteMember, SiteMemberBody, SiteMemberEntry, SiteMemberPaging, SiteMemberRoleBody, SiteMembershipBody, SiteMembershipBody1, SiteMembershipRequest, SiteMembershipRequestEntry, SiteMembershipRequestPaging, SiteMembershipRequestPagingList, SitePaging, SitePagingList, Tag, TagBody, TagBody1, TagEntry, TagPaging, TagPagingList, UserInfo, AssociationsApi, ChangesApi, ChildAssociationsApi, CommentsApi, FavoritesApi, NetworksApi, NodesApi, PeopleApi, RatingsApi, RenditionsApi, QueriesApi, SharedlinksApi, SitesApi, TagsApi) {
+})(function (ApiClient, Activity, ActivityActivitySummary, ActivityEntry, ActivityPaging, ActivityPagingList, AssocChildBody, AssocInfo, AssocTargetBody, ChildAssocInfo, Comment, CommentBody, CommentBody1, CommentEntry, CommentPaging, CommentPagingList, Company, ContentInfo, CopyBody, DeletedNode, DeletedNodeEntry, DeletedNodeMinimal, DeletedNodeMinimalEntry, DeletedNodesPaging, DeletedNodesPagingList, EmailSharedLinkBody, Error, ErrorError, Favorite, FavoriteBody, FavoriteEntry, FavoritePaging, FavoritePagingList, FavoriteSiteBody, InlineResponse201, InlineResponse201Entry, MoveBody, NetworkQuota, NodeAssocMinimal, NodeAssocMinimalEntry, NodeAssocPaging, NodeAssocPagingList, NodeBody, NodeBody1, NodeChildAssocMinimal, NodeChildAssocMinimalEntry, NodeChildAssocPaging, NodeChildAssocPagingList, NodeEntry, NodeFull, NodeMinimal, NodeMinimalEntry, NodePaging, NodePagingList, NodeSharedLink, NodeSharedLinkEntry, NodeSharedLinkPaging, NodeSharedLinkPagingList, NodesnodeIdchildrenContent, Pagination, PathElement, PathInfo, Person, PersonEntry, PersonNetwork, PersonNetworkEntry, PersonNetworkPaging, PersonNetworkPagingList, Preference, PreferenceEntry, PreferencePaging, PreferencePagingList, Rating, RatingAggregate, RatingBody, RatingEntry, RatingPaging, RatingPagingList, Rendition, RenditionBody, RenditionEntry, RenditionPaging, RenditionPagingList, SharedLinkBody, Site, SiteBody, SiteContainer, SiteContainerEntry, SiteContainerPaging, SiteEntry, SiteMember, SiteMemberBody, SiteMemberEntry, SiteMemberPaging, SiteMemberRoleBody, SiteMembershipBody, SiteMembershipBody1, SiteMembershipRequest, SiteMembershipRequestEntry, SiteMembershipRequestPaging, SiteMembershipRequestPagingList, SitePaging, SitePagingList, Tag, TagBody, TagBody1, TagEntry, TagPaging, TagPagingList, UserInfo, AssociationsApi, ChangesApi, ChildAssociationsApi, CommentsApi, FavoritesApi, NetworksApi, NodesApi, PeopleApi, RatingsApi, RenditionsApi, QueriesApi, SharedlinksApi, SitesApi, TagsApi, WebscriptApi) {
   'use strict';
 
   /**
@@ -48390,13 +49082,18 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * The TagsApi service constructor.
      * @property {module:api/TagsApi}
      */
-    TagsApi: TagsApi
+    TagsApi: TagsApi,
+    /**
+     * The WebscriptApi service constructor.
+     * @property {module:api/WebscriptApi}
+     */
+    WebscriptApi: WebscriptApi
   };
 
   return exports;
 });
 
-},{"./ApiClient":168,"./api/AssociationsApi":169,"./api/ChangesApi":170,"./api/ChildAssociationsApi":171,"./api/CommentsApi":172,"./api/FavoritesApi":173,"./api/NetworksApi":174,"./api/NodesApi":175,"./api/PeopleApi":176,"./api/QueriesApi":177,"./api/RatingsApi":178,"./api/RenditionsApi":179,"./api/SharedlinksApi":180,"./api/SitesApi":181,"./api/TagsApi":182,"./model/Activity":184,"./model/ActivityActivitySummary":185,"./model/ActivityEntry":186,"./model/ActivityPaging":187,"./model/ActivityPagingList":188,"./model/AssocChildBody":189,"./model/AssocInfo":190,"./model/AssocTargetBody":191,"./model/ChildAssocInfo":192,"./model/Comment":193,"./model/CommentBody":194,"./model/CommentBody1":195,"./model/CommentEntry":196,"./model/CommentPaging":197,"./model/CommentPagingList":198,"./model/Company":199,"./model/ContentInfo":200,"./model/CopyBody":201,"./model/DeletedNode":202,"./model/DeletedNodeEntry":203,"./model/DeletedNodeMinimal":204,"./model/DeletedNodeMinimalEntry":205,"./model/DeletedNodesPaging":206,"./model/DeletedNodesPagingList":207,"./model/EmailSharedLinkBody":208,"./model/Error":209,"./model/ErrorError":210,"./model/Favorite":211,"./model/FavoriteBody":212,"./model/FavoriteEntry":213,"./model/FavoritePaging":214,"./model/FavoritePagingList":215,"./model/FavoriteSiteBody":216,"./model/InlineResponse201":217,"./model/InlineResponse201Entry":218,"./model/MoveBody":219,"./model/NetworkQuota":220,"./model/NodeAssocMinimal":221,"./model/NodeAssocMinimalEntry":222,"./model/NodeAssocPaging":223,"./model/NodeAssocPagingList":224,"./model/NodeBody":225,"./model/NodeBody1":226,"./model/NodeChildAssocMinimal":227,"./model/NodeChildAssocMinimalEntry":228,"./model/NodeChildAssocPaging":229,"./model/NodeChildAssocPagingList":230,"./model/NodeEntry":231,"./model/NodeFull":232,"./model/NodeMinimal":233,"./model/NodeMinimalEntry":234,"./model/NodePaging":235,"./model/NodePagingList":236,"./model/NodeSharedLink":237,"./model/NodeSharedLinkEntry":238,"./model/NodeSharedLinkPaging":239,"./model/NodeSharedLinkPagingList":240,"./model/NodesnodeIdchildrenContent":241,"./model/Pagination":242,"./model/PathElement":243,"./model/PathInfo":244,"./model/Person":245,"./model/PersonEntry":246,"./model/PersonNetwork":247,"./model/PersonNetworkEntry":248,"./model/PersonNetworkPaging":249,"./model/PersonNetworkPagingList":250,"./model/Preference":251,"./model/PreferenceEntry":252,"./model/PreferencePaging":253,"./model/PreferencePagingList":254,"./model/Rating":255,"./model/RatingAggregate":256,"./model/RatingBody":257,"./model/RatingEntry":258,"./model/RatingPaging":259,"./model/RatingPagingList":260,"./model/Rendition":261,"./model/RenditionBody":262,"./model/RenditionEntry":263,"./model/RenditionPaging":264,"./model/RenditionPagingList":265,"./model/SharedLinkBody":266,"./model/Site":267,"./model/SiteBody":268,"./model/SiteContainer":269,"./model/SiteContainerEntry":270,"./model/SiteContainerPaging":271,"./model/SiteEntry":272,"./model/SiteMember":273,"./model/SiteMemberBody":274,"./model/SiteMemberEntry":275,"./model/SiteMemberPaging":276,"./model/SiteMemberRoleBody":277,"./model/SiteMembershipBody":278,"./model/SiteMembershipBody1":279,"./model/SiteMembershipRequest":280,"./model/SiteMembershipRequestEntry":281,"./model/SiteMembershipRequestPaging":282,"./model/SiteMembershipRequestPagingList":283,"./model/SitePaging":284,"./model/SitePagingList":285,"./model/Tag":286,"./model/TagBody":287,"./model/TagBody1":288,"./model/TagEntry":289,"./model/TagPaging":290,"./model/TagPagingList":291,"./model/UserInfo":292}],184:[function(require,module,exports){
+},{"./ApiClient":172,"./api/AssociationsApi":173,"./api/ChangesApi":174,"./api/ChildAssociationsApi":175,"./api/CommentsApi":176,"./api/FavoritesApi":177,"./api/NetworksApi":178,"./api/NodesApi":179,"./api/PeopleApi":180,"./api/QueriesApi":181,"./api/RatingsApi":182,"./api/RenditionsApi":183,"./api/SharedlinksApi":184,"./api/SitesApi":185,"./api/TagsApi":186,"./api/WebscriptApi":187,"./model/Activity":189,"./model/ActivityActivitySummary":190,"./model/ActivityEntry":191,"./model/ActivityPaging":192,"./model/ActivityPagingList":193,"./model/AssocChildBody":194,"./model/AssocInfo":195,"./model/AssocTargetBody":196,"./model/ChildAssocInfo":197,"./model/Comment":198,"./model/CommentBody":199,"./model/CommentBody1":200,"./model/CommentEntry":201,"./model/CommentPaging":202,"./model/CommentPagingList":203,"./model/Company":204,"./model/ContentInfo":205,"./model/CopyBody":206,"./model/DeletedNode":207,"./model/DeletedNodeEntry":208,"./model/DeletedNodeMinimal":209,"./model/DeletedNodeMinimalEntry":210,"./model/DeletedNodesPaging":211,"./model/DeletedNodesPagingList":212,"./model/EmailSharedLinkBody":213,"./model/Error":214,"./model/ErrorError":215,"./model/Favorite":216,"./model/FavoriteBody":217,"./model/FavoriteEntry":218,"./model/FavoritePaging":219,"./model/FavoritePagingList":220,"./model/FavoriteSiteBody":221,"./model/InlineResponse201":222,"./model/InlineResponse201Entry":223,"./model/MoveBody":224,"./model/NetworkQuota":225,"./model/NodeAssocMinimal":226,"./model/NodeAssocMinimalEntry":227,"./model/NodeAssocPaging":228,"./model/NodeAssocPagingList":229,"./model/NodeBody":230,"./model/NodeBody1":231,"./model/NodeChildAssocMinimal":232,"./model/NodeChildAssocMinimalEntry":233,"./model/NodeChildAssocPaging":234,"./model/NodeChildAssocPagingList":235,"./model/NodeEntry":236,"./model/NodeFull":237,"./model/NodeMinimal":238,"./model/NodeMinimalEntry":239,"./model/NodePaging":240,"./model/NodePagingList":241,"./model/NodeSharedLink":242,"./model/NodeSharedLinkEntry":243,"./model/NodeSharedLinkPaging":244,"./model/NodeSharedLinkPagingList":245,"./model/NodesnodeIdchildrenContent":246,"./model/Pagination":247,"./model/PathElement":248,"./model/PathInfo":249,"./model/Person":250,"./model/PersonEntry":251,"./model/PersonNetwork":252,"./model/PersonNetworkEntry":253,"./model/PersonNetworkPaging":254,"./model/PersonNetworkPagingList":255,"./model/Preference":256,"./model/PreferenceEntry":257,"./model/PreferencePaging":258,"./model/PreferencePagingList":259,"./model/Rating":260,"./model/RatingAggregate":261,"./model/RatingBody":262,"./model/RatingEntry":263,"./model/RatingPaging":264,"./model/RatingPagingList":265,"./model/Rendition":266,"./model/RenditionBody":267,"./model/RenditionEntry":268,"./model/RenditionPaging":269,"./model/RenditionPagingList":270,"./model/SharedLinkBody":271,"./model/Site":272,"./model/SiteBody":273,"./model/SiteContainer":274,"./model/SiteContainerEntry":275,"./model/SiteContainerPaging":276,"./model/SiteEntry":277,"./model/SiteMember":278,"./model/SiteMemberBody":279,"./model/SiteMemberEntry":280,"./model/SiteMemberPaging":281,"./model/SiteMemberRoleBody":282,"./model/SiteMembershipBody":283,"./model/SiteMembershipBody1":284,"./model/SiteMembershipRequest":285,"./model/SiteMembershipRequestEntry":286,"./model/SiteMembershipRequestPaging":287,"./model/SiteMembershipRequestPagingList":288,"./model/SitePaging":289,"./model/SitePagingList":290,"./model/Tag":291,"./model/TagBody":292,"./model/TagBody1":293,"./model/TagEntry":294,"./model/TagPaging":295,"./model/TagPagingList":296,"./model/UserInfo":297}],189:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -48670,7 +49367,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./ActivityActivitySummary":185}],185:[function(require,module,exports){
+},{"../ApiClient":172,"./ActivityActivitySummary":190}],190:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -48765,7 +49462,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],186:[function(require,module,exports){
+},{"../ApiClient":172}],191:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -48831,7 +49528,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./Activity":184}],187:[function(require,module,exports){
+},{"../ApiClient":172,"./Activity":189}],192:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -48893,7 +49590,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./ActivityPagingList":188}],188:[function(require,module,exports){
+},{"../ApiClient":172,"./ActivityPagingList":193}],193:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -48969,7 +49666,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./ActivityEntry":186,"./Pagination":242}],189:[function(require,module,exports){
+},{"../ApiClient":172,"./ActivityEntry":191,"./Pagination":247}],194:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -49039,7 +49736,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],190:[function(require,module,exports){
+},{"../ApiClient":172}],195:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -49101,7 +49798,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],191:[function(require,module,exports){
+},{"../ApiClient":172}],196:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -49171,7 +49868,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],192:[function(require,module,exports){
+},{"../ApiClient":172}],197:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -49241,7 +49938,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],193:[function(require,module,exports){
+},{"../ApiClient":172}],198:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -49387,7 +50084,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./Person":245}],194:[function(require,module,exports){
+},{"../ApiClient":172,"./Person":250}],199:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -49453,7 +50150,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],195:[function(require,module,exports){
+},{"../ApiClient":172}],200:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -49519,7 +50216,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],196:[function(require,module,exports){
+},{"../ApiClient":172}],201:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -49585,7 +50282,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./Comment":193}],197:[function(require,module,exports){
+},{"../ApiClient":172,"./Comment":198}],202:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -49647,7 +50344,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./CommentPagingList":198}],198:[function(require,module,exports){
+},{"../ApiClient":172,"./CommentPagingList":203}],203:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -49723,7 +50420,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./CommentEntry":196,"./Pagination":242}],199:[function(require,module,exports){
+},{"../ApiClient":172,"./CommentEntry":201,"./Pagination":247}],204:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -49841,7 +50538,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],200:[function(require,module,exports){
+},{"../ApiClient":172}],205:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -49927,7 +50624,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],201:[function(require,module,exports){
+},{"../ApiClient":172}],206:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -49997,7 +50694,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],202:[function(require,module,exports){
+},{"../ApiClient":172}],207:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -50077,7 +50774,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./ContentInfo":200,"./NodeFull":232,"./UserInfo":292}],203:[function(require,module,exports){
+},{"../ApiClient":172,"./ContentInfo":205,"./NodeFull":237,"./UserInfo":297}],208:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -50139,7 +50836,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./DeletedNode":202}],204:[function(require,module,exports){
+},{"../ApiClient":172,"./DeletedNode":207}],209:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -50219,7 +50916,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./ContentInfo":200,"./NodeMinimal":233,"./PathElement":243,"./UserInfo":292}],205:[function(require,module,exports){
+},{"../ApiClient":172,"./ContentInfo":205,"./NodeMinimal":238,"./PathElement":248,"./UserInfo":297}],210:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -50281,7 +50978,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./DeletedNodeMinimal":204}],206:[function(require,module,exports){
+},{"../ApiClient":172,"./DeletedNodeMinimal":209}],211:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -50343,7 +51040,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./DeletedNodesPagingList":207}],207:[function(require,module,exports){
+},{"../ApiClient":172,"./DeletedNodesPagingList":212}],212:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -50413,7 +51110,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./DeletedNodeMinimalEntry":205,"./Pagination":242}],208:[function(require,module,exports){
+},{"../ApiClient":172,"./DeletedNodeMinimalEntry":210,"./Pagination":247}],213:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -50499,7 +51196,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],209:[function(require,module,exports){
+},{"../ApiClient":172}],214:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -50561,7 +51258,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./ErrorError":210}],210:[function(require,module,exports){
+},{"../ApiClient":172,"./ErrorError":215}],215:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -50674,7 +51371,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],211:[function(require,module,exports){
+},{"../ApiClient":172}],216:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -50762,7 +51459,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],212:[function(require,module,exports){
+},{"../ApiClient":172}],217:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -50828,7 +51525,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],213:[function(require,module,exports){
+},{"../ApiClient":172}],218:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -50894,7 +51591,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./Favorite":211}],214:[function(require,module,exports){
+},{"../ApiClient":172,"./Favorite":216}],219:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -50956,7 +51653,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./FavoritePagingList":215}],215:[function(require,module,exports){
+},{"../ApiClient":172,"./FavoritePagingList":220}],220:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -51032,7 +51729,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./FavoriteEntry":213,"./Pagination":242}],216:[function(require,module,exports){
+},{"../ApiClient":172,"./FavoriteEntry":218,"./Pagination":247}],221:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -51094,7 +51791,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],217:[function(require,module,exports){
+},{"../ApiClient":172}],222:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -51156,7 +51853,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./InlineResponse201Entry":218}],218:[function(require,module,exports){
+},{"../ApiClient":172,"./InlineResponse201Entry":223}],223:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -51222,7 +51919,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],219:[function(require,module,exports){
+},{"../ApiClient":172}],224:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -51292,7 +51989,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],220:[function(require,module,exports){
+},{"../ApiClient":172}],225:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -51379,7 +52076,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],221:[function(require,module,exports){
+},{"../ApiClient":172}],226:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -51529,7 +52226,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./AssocInfo":190,"./ContentInfo":200,"./UserInfo":292}],222:[function(require,module,exports){
+},{"../ApiClient":172,"./AssocInfo":195,"./ContentInfo":205,"./UserInfo":297}],227:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -51595,7 +52292,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./NodeAssocMinimal":221}],223:[function(require,module,exports){
+},{"../ApiClient":172,"./NodeAssocMinimal":226}],228:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -51657,7 +52354,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./NodeAssocPagingList":224}],224:[function(require,module,exports){
+},{"../ApiClient":172,"./NodeAssocPagingList":229}],229:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -51727,7 +52424,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./NodeAssocMinimalEntry":222,"./Pagination":242}],225:[function(require,module,exports){
+},{"../ApiClient":172,"./NodeAssocMinimalEntry":227,"./Pagination":247}],230:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -51813,7 +52510,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],226:[function(require,module,exports){
+},{"../ApiClient":172}],231:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -51915,7 +52612,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./NodesnodeIdchildrenContent":241}],227:[function(require,module,exports){
+},{"../ApiClient":172,"./NodesnodeIdchildrenContent":246}],232:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -52065,7 +52762,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./ChildAssocInfo":192,"./ContentInfo":200,"./UserInfo":292}],228:[function(require,module,exports){
+},{"../ApiClient":172,"./ChildAssocInfo":197,"./ContentInfo":205,"./UserInfo":297}],233:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -52131,7 +52828,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./NodeChildAssocMinimal":227}],229:[function(require,module,exports){
+},{"../ApiClient":172,"./NodeChildAssocMinimal":232}],234:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -52193,7 +52890,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./NodeChildAssocPagingList":230}],230:[function(require,module,exports){
+},{"../ApiClient":172,"./NodeChildAssocPagingList":235}],235:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -52263,7 +52960,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./NodeChildAssocMinimalEntry":228,"./Pagination":242}],231:[function(require,module,exports){
+},{"../ApiClient":172,"./NodeChildAssocMinimalEntry":233,"./Pagination":247}],236:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -52329,7 +53026,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./NodeFull":232}],232:[function(require,module,exports){
+},{"../ApiClient":172,"./NodeFull":237}],237:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -52495,7 +53192,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./ContentInfo":200,"./UserInfo":292}],233:[function(require,module,exports){
+},{"../ApiClient":172,"./ContentInfo":205,"./UserInfo":297}],238:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -52648,7 +53345,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./ContentInfo":200,"./PathElement":243,"./UserInfo":292}],234:[function(require,module,exports){
+},{"../ApiClient":172,"./ContentInfo":205,"./PathElement":248,"./UserInfo":297}],239:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -52714,7 +53411,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./NodeMinimal":233}],235:[function(require,module,exports){
+},{"../ApiClient":172,"./NodeMinimal":238}],240:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -52776,7 +53473,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./NodePagingList":236}],236:[function(require,module,exports){
+},{"../ApiClient":172,"./NodePagingList":241}],241:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -52846,7 +53543,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./NodeMinimalEntry":234,"./Pagination":242}],237:[function(require,module,exports){
+},{"../ApiClient":172,"./NodeMinimalEntry":239,"./Pagination":247}],242:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -52964,7 +53661,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./ContentInfo":200,"./UserInfo":292}],238:[function(require,module,exports){
+},{"../ApiClient":172,"./ContentInfo":205,"./UserInfo":297}],243:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -53030,7 +53727,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./NodeSharedLink":237}],239:[function(require,module,exports){
+},{"../ApiClient":172,"./NodeSharedLink":242}],244:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -53092,7 +53789,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./NodeSharedLinkPagingList":240}],240:[function(require,module,exports){
+},{"../ApiClient":172,"./NodeSharedLinkPagingList":245}],245:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -53168,7 +53865,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./NodeSharedLinkEntry":238,"./Pagination":242}],241:[function(require,module,exports){
+},{"../ApiClient":172,"./NodeSharedLinkEntry":243,"./Pagination":247}],246:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -53238,7 +53935,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],242:[function(require,module,exports){
+},{"../ApiClient":172}],247:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -53348,7 +54045,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],243:[function(require,module,exports){
+},{"../ApiClient":172}],248:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -53418,7 +54115,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],244:[function(require,module,exports){
+},{"../ApiClient":172}],249:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -53496,7 +54193,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./PathElement":243}],245:[function(require,module,exports){
+},{"../ApiClient":172,"./PathElement":248}],250:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -53709,7 +54406,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./Company":199}],246:[function(require,module,exports){
+},{"../ApiClient":172,"./Company":204}],251:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -53775,7 +54472,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./Person":245}],247:[function(require,module,exports){
+},{"../ApiClient":172,"./Person":250}],252:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -53920,7 +54617,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./NetworkQuota":220}],248:[function(require,module,exports){
+},{"../ApiClient":172,"./NetworkQuota":225}],253:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -53986,7 +54683,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./PersonNetwork":247}],249:[function(require,module,exports){
+},{"../ApiClient":172,"./PersonNetwork":252}],254:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -54048,7 +54745,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./PersonNetworkPagingList":250}],250:[function(require,module,exports){
+},{"../ApiClient":172,"./PersonNetworkPagingList":255}],255:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -54124,7 +54821,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./Pagination":242,"./PersonNetworkEntry":248}],251:[function(require,module,exports){
+},{"../ApiClient":172,"./Pagination":247,"./PersonNetworkEntry":253}],256:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -54203,7 +54900,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],252:[function(require,module,exports){
+},{"../ApiClient":172}],257:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -54269,7 +54966,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./Preference":251}],253:[function(require,module,exports){
+},{"../ApiClient":172,"./Preference":256}],258:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -54331,7 +55028,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./PreferencePagingList":254}],254:[function(require,module,exports){
+},{"../ApiClient":172,"./PreferencePagingList":259}],259:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -54407,7 +55104,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./Pagination":242,"./PreferenceEntry":252}],255:[function(require,module,exports){
+},{"../ApiClient":172,"./Pagination":247,"./PreferenceEntry":257}],260:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -54499,7 +55196,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./RatingAggregate":256}],256:[function(require,module,exports){
+},{"../ApiClient":172,"./RatingAggregate":261}],261:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -54573,7 +55270,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],257:[function(require,module,exports){
+},{"../ApiClient":172}],262:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -54671,7 +55368,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],258:[function(require,module,exports){
+},{"../ApiClient":172}],263:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -54737,7 +55434,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./Rating":255}],259:[function(require,module,exports){
+},{"../ApiClient":172,"./Rating":260}],264:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -54799,7 +55496,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./RatingPagingList":260}],260:[function(require,module,exports){
+},{"../ApiClient":172,"./RatingPagingList":265}],265:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -54875,7 +55572,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./Pagination":242,"./RatingEntry":258}],261:[function(require,module,exports){
+},{"../ApiClient":172,"./Pagination":247,"./RatingEntry":263}],266:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -54953,7 +55650,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./ContentInfo":200}],262:[function(require,module,exports){
+},{"../ApiClient":172,"./ContentInfo":205}],267:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -55015,7 +55712,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],263:[function(require,module,exports){
+},{"../ApiClient":172}],268:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -55081,7 +55778,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./Rendition":261}],264:[function(require,module,exports){
+},{"../ApiClient":172,"./Rendition":266}],269:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -55143,7 +55840,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./RenditionPagingList":265}],265:[function(require,module,exports){
+},{"../ApiClient":172,"./RenditionPagingList":270}],270:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -55213,7 +55910,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./Pagination":242,"./RenditionEntry":263}],266:[function(require,module,exports){
+},{"../ApiClient":172,"./Pagination":247,"./RenditionEntry":268}],271:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -55275,7 +55972,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],267:[function(require,module,exports){
+},{"../ApiClient":172}],272:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -55413,7 +56110,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],268:[function(require,module,exports){
+},{"../ApiClient":172}],273:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -55532,7 +56229,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],269:[function(require,module,exports){
+},{"../ApiClient":172}],274:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -55608,7 +56305,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],270:[function(require,module,exports){
+},{"../ApiClient":172}],275:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -55674,7 +56371,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./SiteContainer":269}],271:[function(require,module,exports){
+},{"../ApiClient":172,"./SiteContainer":274}],276:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -55736,7 +56433,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./SitePagingList":285}],272:[function(require,module,exports){
+},{"../ApiClient":172,"./SitePagingList":290}],277:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -55802,7 +56499,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./Site":267}],273:[function(require,module,exports){
+},{"../ApiClient":172,"./Site":272}],278:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -55919,7 +56616,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./Person":245}],274:[function(require,module,exports){
+},{"../ApiClient":172,"./Person":250}],279:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -56020,7 +56717,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],275:[function(require,module,exports){
+},{"../ApiClient":172}],280:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -56086,7 +56783,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./SiteMember":273}],276:[function(require,module,exports){
+},{"../ApiClient":172,"./SiteMember":278}],281:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -56148,7 +56845,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./SitePagingList":285}],277:[function(require,module,exports){
+},{"../ApiClient":172,"./SitePagingList":290}],282:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -56241,7 +56938,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],278:[function(require,module,exports){
+},{"../ApiClient":172}],283:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -56319,7 +57016,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],279:[function(require,module,exports){
+},{"../ApiClient":172}],284:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -56381,7 +57078,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],280:[function(require,module,exports){
+},{"../ApiClient":172}],285:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -56467,7 +57164,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./Site":267}],281:[function(require,module,exports){
+},{"../ApiClient":172,"./Site":272}],286:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -56533,7 +57230,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./SiteMembershipRequest":280}],282:[function(require,module,exports){
+},{"../ApiClient":172,"./SiteMembershipRequest":285}],287:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -56595,7 +57292,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./SiteMembershipRequestPagingList":283}],283:[function(require,module,exports){
+},{"../ApiClient":172,"./SiteMembershipRequestPagingList":288}],288:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -56671,7 +57368,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./Pagination":242,"./SiteMembershipRequestEntry":281}],284:[function(require,module,exports){
+},{"../ApiClient":172,"./Pagination":247,"./SiteMembershipRequestEntry":286}],289:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -56733,7 +57430,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./SitePagingList":285}],285:[function(require,module,exports){
+},{"../ApiClient":172,"./SitePagingList":290}],290:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -56799,7 +57496,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./Pagination":242}],286:[function(require,module,exports){
+},{"../ApiClient":172,"./Pagination":247}],291:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -56875,7 +57572,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],287:[function(require,module,exports){
+},{"../ApiClient":172}],292:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -56941,7 +57638,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],288:[function(require,module,exports){
+},{"../ApiClient":172}],293:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -57003,7 +57700,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],289:[function(require,module,exports){
+},{"../ApiClient":172}],294:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -57069,7 +57766,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./Tag":286}],290:[function(require,module,exports){
+},{"../ApiClient":172,"./Tag":291}],295:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -57131,7 +57828,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./TagPagingList":291}],291:[function(require,module,exports){
+},{"../ApiClient":172,"./TagPagingList":296}],296:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -57207,7 +57904,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168,"./Pagination":242,"./TagEntry":289}],292:[function(require,module,exports){
+},{"../ApiClient":172,"./Pagination":247,"./TagEntry":294}],297:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -57277,7 +57974,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../ApiClient":168}],293:[function(require,module,exports){
+},{"../ApiClient":172}],298:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -58030,7 +58727,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return exports;
 });
 
-},{"../../../alfrescoApiClient":296}],294:[function(require,module,exports){
+},{"../../../alfrescoApiClient":301}],299:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -58062,7 +58759,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../alfrescoApiClient":296,"./api/CustomModelApi":293}],295:[function(require,module,exports){
+},{"../../alfrescoApiClient":301,"./api/CustomModelApi":298}],300:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -58074,7 +58771,6 @@ var AlfrescoActivitiApi = require('./alfresco-activiti-rest-api/src/index');
 var AlfrescoContent = require('./alfrescoContent');
 var AlfrescoNode = require('./alfrescoNode');
 var AlfrescoUpload = require('./alfrescoUpload');
-var AlfrescoWebScriptApi = require('./alfrescoWebScript');
 var Emitter = require('event-emitter');
 var EcmAuth = require('./ecmAuth');
 var BpmAuth = require('./bpmAuth');
@@ -58091,6 +58787,7 @@ var AlfrescoApi = function () {
      *        hostEcm:       // hostEcm Your share server IP or DNS name
      *        hostBpm: // hostBpm Your activiti server IP or DNS name
      *        contextRoot: // contextRoot default value alfresco
+     *        contextRootBpm: // contextRoot activiti default value activiti-app
      *        provider:   // ECM BPM ALL OAUTH, default ECM
      *        ticketEcm:     // Ticket if you already have a ECM ticket you can pass only the ticket and skip the login, in this case you don't need username and password
      *        ticketBpm:     // Ticket if you already have a BPM ticket you can pass only the ticket and skip the login, in this case you don't need username and password
@@ -58108,6 +58805,7 @@ var AlfrescoApi = function () {
             hostEcm: config.hostEcm || 'http://127.0.0.1:8080',
             hostBpm: config.hostBpm || 'http://127.0.0.1:9999',
             contextRoot: config.contextRoot || 'alfresco',
+            contextRootBpm: config.contextRootBpm || 'activiti-app',
             provider: config.provider || 'ECM',
             ticketEcm: config.ticketEcm,
             ticketBpm: config.ticketBpm,
@@ -58118,9 +58816,9 @@ var AlfrescoApi = function () {
         this.bpmAuth = new BpmAuth(this.config);
         this.ecmAuth = new EcmAuth(this.config);
 
-        this.ecmPrivateClient = new EcmPrivateClient(this.config.hostEcm, this.config.contextRoot, this.config);
-        this.ecmClient = new EcmClient(this.config.hostEcm, this.config.contextRoot, this.config);
-        this.bpmClient = new BpmClient(this.config.hostBpm, this.config);
+        this.ecmPrivateClient = new EcmPrivateClient(this.config);
+        this.ecmClient = new EcmClient(this.config);
+        this.bpmClient = new BpmClient(this.config);
         this.setAuthenticationClientECMBPM(this.ecmAuth.getAuthentication(), this.bpmAuth.getAuthentication());
 
         this.initObjects();
@@ -58135,14 +58833,14 @@ var AlfrescoApi = function () {
 
     AlfrescoApi.prototype.changeEcmHost = function changeEcmHost(hostEcm) {
         this.config.hostEcm = hostEcm;
-        this.ecmAuth.changeHost(hostEcm);
-        this.ecmClient.changeHost(hostEcm);
+        this.ecmAuth.changeHost();
+        this.ecmClient.changeHost();
     };
 
     AlfrescoApi.prototype.changeBpmHost = function changeBpmHost(hostBpm) {
         this.config.hostBpm = hostBpm;
-        this.bpmAuth.changeHost(hostBpm);
-        this.bpmClient.changeHost(hostBpm);
+        this.bpmAuth.changeHost();
+        this.bpmClient.changeHost();
     };
 
     AlfrescoApi.prototype.initObjects = function initObjects() {
@@ -58166,7 +58864,7 @@ var AlfrescoApi = function () {
         this.nodes = this.node = new AlfrescoNode();
         this.content = new AlfrescoContent(this.ecmAuth, this.ecmClient);
         this.upload = new AlfrescoUpload();
-        this.webScript = new AlfrescoWebScriptApi();
+        this.webScript = this.core.webscriptApi;
     };
 
     AlfrescoApi.prototype._instantiateObjects = function _instantiateObjects(module, moduleCopy) {
@@ -58209,7 +58907,7 @@ var AlfrescoApi = function () {
 
             bpmPromise.then(function (ticketBpm) {
                 _this2.config.ticketBpm = ticketBpm;
-            });
+            }, function () {});
 
             return bpmPromise;
         } else if (this._isEcmConfiguration()) {
@@ -58219,7 +58917,7 @@ var AlfrescoApi = function () {
                 _this2.setAuthenticationClientECMBPM(_this2.ecmAuth.getAuthentication(), null);
 
                 _this2.config.ticketEcm = ticketEcm;
-            });
+            }, function () {});
 
             return ecmPromise;
         } else if (this._isEcmBpmConfiguration()) {
@@ -58228,7 +58926,7 @@ var AlfrescoApi = function () {
             bpmEcmPromise.then(function (data) {
                 _this2.config.ticketEcm = data[0];
                 _this2.config.ticketBpm = data[1];
-            });
+            }, function () {});
 
             return bpmEcmPromise;
         }
@@ -58295,9 +58993,9 @@ var AlfrescoApi = function () {
             return this.bpmAuth.logout();
         } else if (this.config.provider && this.config.provider.toUpperCase() === 'ECM') {
             var ecmPromise = this.ecmAuth.logout();
-            ecmPromise.then(function (data) {
+            ecmPromise.then(function () {
                 _this4.config.ticket = undefined;
-            });
+            }, function () {});
 
             return ecmPromise;
         } else if (this.config.provider && this.config.provider.toUpperCase() === 'ALL') {
@@ -58419,7 +59117,7 @@ module.exports.Activiti = AlfrescoActivitiApi;
 module.exports.Core = AlfrescoCoreRestApi;
 module.exports.Auth = AlfrescoAuthRestApi;
 
-},{"./alfresco-activiti-rest-api/src/index":72,"./alfresco-auth-rest-api/src/index":160,"./alfresco-core-rest-api/src/index.js":183,"./alfresco-private-rest-api/src/index.js":294,"./alfrescoContent":297,"./alfrescoNode":298,"./alfrescoUpload":299,"./alfrescoWebScript":300,"./bpmAuth":301,"./bpmClient":302,"./ecmAuth":303,"./ecmClient":304,"./ecmPrivateClient":305,"event-emitter":21,"lodash":23}],296:[function(require,module,exports){
+},{"./alfresco-activiti-rest-api/src/index":76,"./alfresco-auth-rest-api/src/index":164,"./alfresco-core-rest-api/src/index.js":188,"./alfresco-private-rest-api/src/index.js":299,"./alfrescoContent":302,"./alfrescoNode":303,"./alfrescoUpload":304,"./bpmAuth":305,"./bpmClient":306,"./ecmAuth":307,"./ecmClient":308,"./ecmPrivateClient":309,"event-emitter":21,"lodash":23}],301:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -58699,7 +59397,7 @@ Emitter(AlfrescoApiClient.prototype); // jshint ignore:line
 module.exports = AlfrescoApiClient;
 
 }).call(this,require('_process'))
-},{"./alfresco-core-rest-api/src/ApiClient":168,"_process":24,"event-emitter":21,"lodash":23,"superagent":26}],297:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/ApiClient":172,"_process":24,"event-emitter":21,"lodash":23,"superagent":25}],302:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -58760,7 +59458,7 @@ var AlfrescoContent = function () {
 
 module.exports = AlfrescoContent;
 
-},{}],298:[function(require,module,exports){
+},{}],303:[function(require,module,exports){
 'use strict';
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -58865,7 +59563,7 @@ var AlfrescoNode = function (_AlfrescoCoreRestApi$) {
 
 module.exports = AlfrescoNode;
 
-},{"./alfresco-core-rest-api/src/index.js":183,"lodash":23}],299:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/index.js":188,"lodash":23}],304:[function(require,module,exports){
 'use strict';
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -58959,66 +59657,7 @@ var AlfrescoUpload = function (_AlfrescoCoreRestApi$) {
 Emitter(AlfrescoUpload.prototype); // jshint ignore:line
 module.exports = AlfrescoUpload;
 
-},{"./alfresco-core-rest-api/src/index.js":183,"event-emitter":21,"lodash":23}],300:[function(require,module,exports){
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var ApiClient = require('./alfresco-core-rest-api/src/ApiClient');
-
-var AlfrescoWebScriptApi = function () {
-    function AlfrescoWebScriptApi(apiClient) {
-        _classCallCheck(this, AlfrescoWebScriptApi);
-
-        this.apiClient = apiClient || ApiClient.instance;
-        this.allowedMethod = ['GET', 'POST', 'PUT', 'DELETE'];
-    }
-    /**
-     * Call a get on a  Web Scripts see https://wiki.alfresco.com/wiki/Web_Scripts for more details about Web Scripts
-     * Url syntax definition : http[s]://<host>:<port>/[<contextPath>/]/<servicePath>[/<scriptPath>][?<scriptArgs>]
-     * example: http://localhost:8081/share/service/mytasks?priority=1
-     *
-     * @param {String} httpMethod  GET, POST, PUT and DELETE
-     * @param {String} scriptPath
-     * @param {Object} scriptArgs
-     * @param {String} contextRoot default value alfresco
-     * @param {String} servicePath default value service
-     * @param {String} postBody
-     *
-     * @returns {Promise} A promise that is resolved return the webScript data and {error} if rejected.
-     */
-
-    AlfrescoWebScriptApi.prototype.executeWebScript = function executeWebScript(httpMethod, scriptPath, scriptArgs, contextRoot, servicePath, postBody) {
-        contextRoot = contextRoot || 'alfresco';
-        servicePath = servicePath || 'service';
-        postBody = postBody || null;
-
-        if (!httpMethod || this.allowedMethod.indexOf(httpMethod) === -1) {
-            throw 'method allowed value  GET, POST, PUT and DELETE';
-        }
-
-        if (!scriptPath) {
-            throw 'Missing the required parameter scriptPath when calling executeWebScript';
-        }
-
-        var pathParams = {};
-        var headerParams = {};
-        var formParams = {};
-
-        var authNames = ['basicAuth'];
-        var contentTypes = ['application/json'];
-        var accepts = ['application/json', 'text/html'];
-        var returnType = {};
-
-        return this.apiClient.callApi('/' + servicePath + '/' + scriptPath, httpMethod, pathParams, scriptArgs, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, contextRoot);
-    };
-
-    return AlfrescoWebScriptApi;
-}();
-
-module.exports = AlfrescoWebScriptApi;
-
-},{"./alfresco-core-rest-api/src/ApiClient":168}],301:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/index.js":188,"event-emitter":21,"lodash":23}],305:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -59046,7 +59685,8 @@ var BpmAuth = function (_AlfrescoApiClient) {
 
         _this.config = config;
         _this.ticket = undefined;
-        _this.basePath = config.hostBpm + '/activiti-app'; //Activiti Call
+
+        _this.basePath = config.hostBpm + '/' + _this.config.contextRootBpm; //Activiti Call
 
         _this.authentications = {
             'basicAuth': { type: 'activiti', ticket: '' }
@@ -59060,9 +59700,9 @@ var BpmAuth = function (_AlfrescoApiClient) {
         return _this;
     }
 
-    BpmAuth.prototype.changeHost = function changeHost(host) {
-        this.config.hostBpm = host;
-        this.basePath = this.config.hostBpm + '/activiti-app'; //Activiti Call
+    BpmAuth.prototype.changeHost = function changeHost() {
+        this.basePath = this.config.hostBpm + '/' + this.config.contextRootBpm; //Activiti Call
+        this.ticket = undefined;
     };
 
     BpmAuth.prototype.changeCsrfConfig = function changeCsrfConfig(disableCsrf) {
@@ -59217,7 +59857,7 @@ Emitter(BpmAuth.prototype); // jshint ignore:line
 module.exports = BpmAuth;
 
 }).call(this,require("buffer").Buffer)
-},{"./alfrescoApiClient":296,"buffer":4,"event-emitter":21}],302:[function(require,module,exports){
+},{"./alfrescoApiClient":301,"buffer":4,"event-emitter":21}],306:[function(require,module,exports){
 'use strict';
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -59234,30 +59874,22 @@ var BpmClient = function (_AlfrescoApiClient) {
     _inherits(BpmClient, _AlfrescoApiClient);
 
     /**
-     * @param {String} host
      * @param {Object} config
      */
-    function BpmClient(host, config) {
+    function BpmClient(config) {
         _classCallCheck(this, BpmClient);
 
         var _this = _possibleConstructorReturn(this, _AlfrescoApiClient.call(this));
 
-        _this.host = host;
         _this.config = config;
 
-        _this.changeHost(host);
+        _this.changeHost();
         return _this;
     }
 
-    /**
-     * Change the Host
-     *
-     * @param {String} host
-     * */
-
-
-    BpmClient.prototype.changeHost = function changeHost(host) {
-        this.basePath = host + '/activiti-app';
+    BpmClient.prototype.changeHost = function changeHost() {
+        this.host = this.config.hostBpm;
+        this.basePath = this.config.hostBpm + '/' + this.config.contextRootBpm;
     };
 
     /**
@@ -59276,7 +59908,7 @@ var BpmClient = function (_AlfrescoApiClient) {
 
 module.exports = BpmClient;
 
-},{"./alfrescoApiClient":296}],303:[function(require,module,exports){
+},{"./alfrescoApiClient":301}],307:[function(require,module,exports){
 'use strict';
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -59314,9 +59946,9 @@ var EcmAuth = function (_AlfrescoApiClient) {
         return _this;
     }
 
-    EcmAuth.prototype.changeHost = function changeHost(host) {
-        this.config.hostEcm = host;
+    EcmAuth.prototype.changeHost = function changeHost() {
         this.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
+        this.ticket = undefined;
     };
 
     /**
@@ -59473,7 +60105,7 @@ var EcmAuth = function (_AlfrescoApiClient) {
 Emitter(EcmAuth.prototype); // jshint ignore:line
 module.exports = EcmAuth;
 
-},{"./alfresco-auth-rest-api/src/index":160,"./alfrescoApiClient":296,"event-emitter":21}],304:[function(require,module,exports){
+},{"./alfresco-auth-rest-api/src/index":164,"./alfrescoApiClient":301,"event-emitter":21}],308:[function(require,module,exports){
 'use strict';
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -59490,32 +60122,22 @@ var EcmClient = function (_AlfrescoApiClient) {
     _inherits(EcmClient, _AlfrescoApiClient);
 
     /**
-     * @param {String} host
-     * @param {String} contextRoot
      * @param {Object} config
      */
-    function EcmClient(host, contextRoot, config) {
+    function EcmClient(config) {
         _classCallCheck(this, EcmClient);
 
         var _this = _possibleConstructorReturn(this, _AlfrescoApiClient.call(this));
 
-        _this.host = host;
         _this.config = config;
-        _this.contextRoot = contextRoot;
 
-        _this.changeHost(host);
+        _this.changeHost();
         return _this;
     }
 
-    /**
-     * set the Authentication
-     *
-     * @param {String} authentications
-     * */
-
-
-    EcmClient.prototype.changeHost = function changeHost(host) {
-        this.basePath = host + '/' + this.contextRoot + '/api/-default-/public/alfresco/versions/1';
+    EcmClient.prototype.changeHost = function changeHost() {
+        this.host = this.config.hostEcm;
+        this.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/alfresco/versions/1';
     };
 
     /**
@@ -59534,7 +60156,7 @@ var EcmClient = function (_AlfrescoApiClient) {
 
 module.exports = EcmClient;
 
-},{"./alfrescoApiClient":296}],305:[function(require,module,exports){
+},{"./alfrescoApiClient":301}],309:[function(require,module,exports){
 'use strict';
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -59551,32 +60173,22 @@ var EcmClient = function (_AlfrescoApiClient) {
     _inherits(EcmClient, _AlfrescoApiClient);
 
     /**
-     * @param {String} host
-     * @param {String} contextRoot
      * @param {Object} config
      */
-    function EcmClient(host, contextRoot, config) {
+    function EcmClient(config) {
         _classCallCheck(this, EcmClient);
 
         var _this = _possibleConstructorReturn(this, _AlfrescoApiClient.call(this));
 
-        _this.host = host;
-        _this.contextRoot = contextRoot;
         _this.config = config;
 
-        _this.changeHost(host);
+        _this.changeHost();
         return _this;
     }
 
-    /**
-     * set the Authentication
-     *
-     * @param {String} authentications
-     * */
-
-
-    EcmClient.prototype.changeHost = function changeHost(host) {
-        this.basePath = host + '/' + this.contextRoot + '/api/-default-/private/alfresco/versions/1';
+    EcmClient.prototype.changeHost = function changeHost() {
+        this.host = this.config.hostEcm;
+        this.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/private/alfresco/versions/1';
     };
 
     /**
@@ -59595,5 +60207,5 @@ var EcmClient = function (_AlfrescoApiClient) {
 
 module.exports = EcmClient;
 
-},{"./alfrescoApiClient":296}]},{},[1])(1)
+},{"./alfrescoApiClient":301}]},{},[1])(1)
 });

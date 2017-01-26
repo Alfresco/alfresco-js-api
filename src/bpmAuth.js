@@ -12,7 +12,8 @@ class BpmAuth extends AlfrescoApiClient {
         super();
         this.config = config;
         this.ticket = undefined;
-        this.basePath = config.hostBpm + '/activiti-app';   //Activiti Call
+
+        this.basePath = config.hostBpm + '/' + this.config.contextRootBpm;   //Activiti Call
 
         this.authentications = {
             'basicAuth': {type: 'activiti', ticket: ''}
@@ -25,9 +26,9 @@ class BpmAuth extends AlfrescoApiClient {
         Emitter.call(this);
     }
 
-    changeHost(host) {
-        this.config.hostBpm = host;
-        this.basePath = this.config.hostBpm + '/activiti-app';   //Activiti Call
+    changeHost() {
+        this.basePath = this.config.hostBpm + '/' + this.config.contextRootBpm;    //Activiti Call
+        this.ticket = undefined;
     }
 
     changeCsrfConfig(disableCsrf) {

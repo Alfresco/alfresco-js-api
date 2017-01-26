@@ -79,6 +79,9 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
   * [Tasks of process definition](#tasks-of-process-definition)
   * [Generate reports](#generate-reports)
   * [Update report details](#update-report-details)
+  * [Export to csv](#export-to-csv)
+  * [Save Report](#save-report)
+  * [Delete report](#delete-report)
 - [Development](#development)
 - [Release History](#release-history)
 
@@ -88,7 +91,7 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
 
 # Prerequisites 
 
-To correctly use the alafresco js api the minimal supported version are:
+To correctly use the alfresco js api the minimal supported version are:
 
 - 5.2.a-EA Alfresco Platform Repository (version [5.2.a-EA](https://wiki.alfresco.com/wiki/Community_file_list_201606-EA) or newer)
 - 1.5 Activiti
@@ -135,7 +138,8 @@ Property | Description  | default value|
 ------------- | ------------- | -------------|
 hostEcm| (Optional value The Ip or Name of the host where your Alfresco instance is running )|http://127.0.0.1:8080 |
 hostBpm| (Optional value The Ip or Name of the host where your Activiti instance is running )|http://127.0.0.1:9999 |
-contextRoot| (Optional value that define the context Root of the API default value is alfresco )|alfresco |
+contextRoot| (Optional value that define the context Root of the Alfresco ECM API default value is alfresco )|alfresco |
+contextRootBpm| (Optional value that define the context Root of the Activiti API default value is activiti-app )|alfresco |
 provider| (Optional value default value is ECM. This parameter can accept as value ECM BPM or ALL to use the API and Login in the ECM, Activiti BPM or Both )|alfresco |
 ticket| (Optional only if you want login with the ticket see example below)| |
 disableCsrf| To disable CSRF Token to be submitted. Only for Activiti call.| false |
@@ -657,7 +661,7 @@ Name | Description
 
 //Call a GET on a Web Scripts available at the following URIs: http://127.0.01:8080/alfresco/service/mytasks
 
-this.alfrescoJsApi.webScript.executeWebScript('GET', 'mytasks').then(function (data) {
+this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', 'mytasks').then(function (data) {
    console.log('Data received form http://127.0.01:8080/alfresco/service/mytasks' + data);    
 }, function (error) {
    console.log('Error' + error);
@@ -665,7 +669,7 @@ this.alfrescoJsApi.webScript.executeWebScript('GET', 'mytasks').then(function (d
         
 //Call a GET on a Web Scripts available at the following URIs: http://127.0.01:8080/share/service/mytasks
 
-this.alfrescoJsApi.webScript.executeWebScript('GET', 'mytasks', null, 'share').then(function (data) {
+this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', 'mytasks', null, 'share').then(function (data) {
    console.log('Data received form http://127.0.01:8080/share/service/mytasks' + data);    
 }, function (error) {
    console.log('Error' + error);
@@ -673,7 +677,7 @@ this.alfrescoJsApi.webScript.executeWebScript('GET', 'mytasks', null, 'share').t
 
 //Call a GET on a Web Scripts available at the following URIs: http://127.0.01:8080/share/differentServiceSlug/mytasks
 
-this.alfrescoJsApi.webScript.executeWebScript('GET', 'mytasks', null, 'share', 'differentServiceSlug').then(function (data) {
+this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', 'mytasks', null, 'share', 'differentServiceSlug').then(function (data) {
    console.log('Data received form http://127.0.01:8080/share/differentServiceSlug/mytasks' + data);    
 }, function (error) {
    console.log('Error' + error);
@@ -1057,6 +1061,85 @@ var reportId = "1"; // String | reportId
 var name = "new Fake name"; // String | reportId
 
 this.alfrescoJsApi.activiti.reportApi.updateReport(reportId, name);
+```
+
+## Export to csv
+exportToCsv(reportId, queryParms)
+
+> Export a report as csv
+
+####Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **reportId** | **String**| reportId |
+ **queryParms** | **Object**| Query parameters |
+
+####Example
+```javascript
+
+var reportId = "1"; // String | reportId
+var queryParms = {
+            'processDefinitionId': 'TEST:99:999',
+            'dateRange': {
+                'startDate': '2017-01-01T00:00:00.000Z',
+                'endDate': '2017-01-24T23:59:59.999Z',
+                'rangeId': 'currentYear'
+            },
+            'slowProcessInstanceInteger': 10,
+            'status': 'All',
+            '__reportName': 'FAKE_REPORT_NAME'
+        };
+
+this.alfrescoJsApi.activiti.reportApi.exportToCsv(reportId, queryParms);
+```
+
+## Save Report
+
+saveReport(reportId, queryParams)
+
+> Save a report
+
+####Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **reportId** | **String**| reportId |
+ **queryParms** | **Object**| Query parameters |
+
+####Example
+```javascript
+
+var reportId = "1"; // String | reportId
+var queryParms = {
+            'processDefinitionId': 'TEST:99:999',
+            'dateRange': {
+                'startDate': '2017-01-01T00:00:00.000Z',
+                'endDate': '2017-01-24T23:59:59.999Z',
+                'rangeId': 'currentYear'
+            },
+            'slowProcessInstanceInteger': 10,
+            'status': 'All',
+            '__reportName': 'FAKE_REPORT_NAME'
+        };
+
+this.alfrescoJsApi.activiti.reportApi.saveReport(reportId, queryParms);
+```
+
+## Delete report
+deleteReport(reportId)
+
+> Delete a report
+
+####Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **reportId** | **String**| reportId |
+
+####Example
+```javascript
+
+var reportId = "1"; // String | reportId
+
+this.alfrescoJsApi.activiti.reportApi.deleteReport(reportId);
 ```
 
 # Development

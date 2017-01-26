@@ -137,7 +137,7 @@
         typeof require === 'function' &&
         require('fs') &&
         param instanceof require('fs').ReadStream) {
-      return true;r
+      return true;
     }
     // Buffer in Node.js
     if (typeof Buffer === 'function' && param instanceof Buffer) {
@@ -256,7 +256,10 @@
       switch (auth.type) {
         case 'basic':
           if (auth.username || auth.password) {
-            request.auth(auth.username || '', auth.password || '');
+            request.auth(
+              auth.username ? encodeURIComponent(auth.username) : '',
+              auth.password ? encodeURIComponent(auth.password) : ''
+            );
           }
           break;
         case 'apiKey':
@@ -459,7 +462,7 @@
       case 'Number':
         return parseFloat(data);
       case 'String':
-        return String(data);
+        return data !== null && data !== undefined ? String(data) : data;
       case 'Date':
         return data ? this.parseDate(String(data)) : null;
       default:

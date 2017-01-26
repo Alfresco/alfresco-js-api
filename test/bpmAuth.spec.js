@@ -19,7 +19,8 @@ describe('Bpm Auth test', function () {
             this.authBpmMock.get200Response();
 
             this.bpmAuth = new BpmAuth({
-                hostBpm: this.hostBpm
+                hostBpm: this.hostBpm,
+                contextRootBpm: 'activiti-app'
             });
 
             this.bpmAuth.login('admin', 'admin').then((data) => {
@@ -35,7 +36,8 @@ describe('Bpm Auth test', function () {
             this.authBpmMock.get200Response();
 
             this.bpmAuth = new BpmAuth({
-                hostBpm: this.hostBpm
+                hostBpm: this.hostBpm,
+                contextRootBpm: 'activiti-app'
             });
 
             this.bpmAuth.login('admin', 'admin').then(() => {
@@ -50,7 +52,8 @@ describe('Bpm Auth test', function () {
             this.authBpmMock.get200Response();
 
             this.bpmAuth = new BpmAuth({
-                hostBpm: this.hostBpm
+                hostBpm: this.hostBpm,
+                contextRootBpm: 'activiti-app'
             });
             this.bpmAuth.login('admin', 'admin');
 
@@ -64,11 +67,31 @@ describe('Bpm Auth test', function () {
 
         });
 
+        it('isLoggedIn should return false if the host change', function (done) {
+
+            this.authBpmMock.get200Response();
+
+            this.bpmAuth = new BpmAuth({
+                hostBpm: this.hostBpm,
+                contextRootBpm: 'activiti-app'
+            });
+
+            this.bpmAuth.login('admin', 'admin').then(() => {
+                expect(this.bpmAuth.isLoggedIn()).to.be.equal(true);
+                this.bpmAuth.changeHost('anyhost');
+                expect(this.bpmAuth.isLoggedIn()).to.be.equal(false);
+                done();
+            }, function () {
+            });
+
+        });
+
         it('login should return an error if wrong credential are used 401 the login fails', function (done) {
             this.authBpmMock.get401Response();
 
             this.bpmAuth = new BpmAuth({
-                hostBpm: this.hostBpm
+                hostBpm: this.hostBpm,
+                contextRootBpm: 'activiti-app'
             });
 
             this.bpmAuth.login('wrong', 'name').then(function () {
@@ -84,10 +107,16 @@ describe('Bpm Auth test', function () {
                 this.authBpmMock.get401Response();
 
                 this.bpmAuth = new BpmAuth({
-                    hostBpm: this.hostBpm
+                    hostBpm: this.hostBpm,
+                    contextRootBpm: 'activiti-app'
                 });
 
-                this.bpmAuth.login('wrong', 'name').on('unauthorized', ()=> {
+                var loginPromise = this.bpmAuth.login('wrong', 'name');
+
+                loginPromise.catch(()=> {
+                });
+
+                loginPromise.on('unauthorized', ()=> {
                     done();
                 });
             });
@@ -96,10 +125,16 @@ describe('Bpm Auth test', function () {
                 this.authBpmMock.get403Response();
 
                 this.bpmAuth = new BpmAuth({
-                    hostBpm: this.hostBpm
+                    hostBpm: this.hostBpm,
+                    contextRootBpm: 'activiti-app'
                 });
 
-                this.bpmAuth.login('wrong', 'name').on('forbidden', ()=> {
+                var loginPromise = this.bpmAuth.login('wrong', 'name');
+
+                loginPromise.catch(()=> {
+                });
+
+                loginPromise.on('forbidden', ()=> {
                     done();
                 });
             });
@@ -108,10 +143,16 @@ describe('Bpm Auth test', function () {
                 this.authBpmMock.get200Response();
 
                 this.bpmAuth = new BpmAuth({
-                    hostBpm: this.hostBpm
+                    hostBpm: this.hostBpm,
+                    contextRootBpm: 'activiti-app'
                 });
 
-                this.bpmAuth.login('admin', 'admin').on('success', ()=> {
+                var loginPromise = this.bpmAuth.login('admin', 'admin');
+
+                loginPromise.catch(()=> {
+                });
+
+                loginPromise.on('success', ()=> {
                     done();
                 });
             });
@@ -120,7 +161,8 @@ describe('Bpm Auth test', function () {
                 this.authBpmMock.get200Response();
 
                 this.bpmAuth = new BpmAuth({
-                    hostBpm: this.hostBpm
+                    hostBpm: this.hostBpm,
+                    contextRootBpm: 'activiti-app'
                 });
 
                 this.bpmAuth.login('admin', 'admin');
@@ -139,7 +181,8 @@ describe('Bpm Auth test', function () {
 
                 this.bpmAuth = new BpmAuth({
                     ticketBpm: 'Basic YWRtaW46YWRtaW4=',
-                    hostBpm: this.hostBpm
+                    hostBpm: this.hostBpm,
+                    contextRootBpm: 'activiti-app'
                 });
 
                 expect('Basic YWRtaW46YWRtaW4=').to.be.equal(this.bpmAuth.authentications.basicAuth.ticket);
@@ -151,7 +194,8 @@ describe('Bpm Auth test', function () {
             beforeEach(function (done) {
                 this.authBpmMock.get200Response();
                 this.bpmAuth = new BpmAuth({
-                    hostBpm: this.hostBpm
+                    hostBpm: this.hostBpm,
+                    contextRootBpm: 'activiti-app'
                 });
 
                 this.bpmAuth.login('admin', 'admin').then(() => {
@@ -174,11 +218,11 @@ describe('Bpm Auth test', function () {
 
         describe('CSRF Token', function () {
 
-            beforeEach(function() {
+            beforeEach(function () {
                 this.setCsrfTokenStub = sinon.stub(BpmAuth.prototype, 'setCsrfToken');
             });
 
-            afterEach(function() {
+            afterEach(function () {
                 this.setCsrfTokenStub.restore();
             });
 
@@ -186,7 +230,8 @@ describe('Bpm Auth test', function () {
                 this.authBpmMock.get200Response();
 
                 this.bpmAuth = new BpmAuth({
-                    hostBpm: this.hostBpm
+                    hostBpm: this.hostBpm,
+                    contextRootBpm: 'activiti-app'
                 });
 
                 this.bpmAuth.login('admin', 'admin').then(() => {
@@ -200,6 +245,7 @@ describe('Bpm Auth test', function () {
 
                 this.bpmAuth = new BpmAuth({
                     hostBpm: this.hostBpm,
+                    contextRootBpm: 'activiti-app',
                     disableCsrf: true
                 });
 
