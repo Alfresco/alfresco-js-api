@@ -5,9 +5,9 @@
 Alfresco JS API
 
 _This project provides a JavaScript client API into the v1 Alfresco REST API_
-<a name="1.0.1"></a>
-# [1.0.1](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.0.0) (xx-xx-2017)
-## fix
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.1.0) (26-01-2017)
+## Fix
 - [Add getRawContentUrl API #161](https://github.com/Alfresco/alfresco-js-api/issues/161)
 - [Add getContentThumbnailUrl API #160](https://github.com/Alfresco/alfresco-js-api/issues/160)
 - [Fix null string field values parsed as text 'null' #158](https://github.com/Alfresco/alfresco-js-api/issues/158)
@@ -34,14 +34,14 @@ _This project provides a JavaScript client API into the v1 Alfresco REST API_
 
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.0.0) (20-12-2016)
-## fix
+## Fix
 - [/api/enterprise/script-files/controllers sending wrong accept header  #130](https://github.com/Alfresco/alfresco-js-api/pull/130)
 - [CSRF Token is not working #128](https://github.com/Alfresco/alfresco-js-api/pull/128)
 - [Timestamp timezones are ignored #134](https://github.com/Alfresco/alfresco-js-api/issues/134)
 
 <a name="0.5.5"></a>
 # [0.5.5](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.5.5) (09-12-2016)
-## fix
+## Fix
 - [Added bable plugin for IE10  #121](https://github.com/Alfresco/alfresco-js-api/pull/122)
 
 ## Features
@@ -49,13 +49,13 @@ _This project provides a JavaScript client API into the v1 Alfresco REST API_
 
 <a name="0.5.3"></a>
 # [0.5.3](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.5.3) (06-12-2016)
-## fix
+## Fix
 - [CSRF Token fix for activiti  #116](https://github.com/Alfresco/alfresco-js-api/issues/116)
 
 <a name="0.5.2"></a>
 # [0.5.2](https://github.com/Alfresco/alfresco-js-api/releases/tag/0.5.2) (05-12-2016)
 
-## fix
+## Fix
 - [ProcessInstanceVariablesApi doesn't work in webpack  #111](https://github.com/Alfresco/alfresco-js-api/issues/111)
 
 ## Features
