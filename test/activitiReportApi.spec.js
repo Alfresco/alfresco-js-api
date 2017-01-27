@@ -171,7 +171,7 @@ describe('Activiti Report Api', function () {
             },
             'slowProcessInstanceInteger': 10,
             'status': 'All',
-            '__reportName': 'FAKE_REPORT_NAME'
+            'reportName': 'FAKE_REPORT_NAME'
         };
         this.reportsMock.get200ResponseExportReport(reportId);
 
@@ -194,7 +194,7 @@ describe('Activiti Report Api', function () {
             },
             'slowProcessInstanceInteger': 10,
             'status': 'All',
-            '__reportName': 'FAKE_REPORT_NAME'
+            'reportName': 'FAKE_REPORT_NAME'
         };
         this.reportsMock.get200ResponseSaveReport(reportId);
 
