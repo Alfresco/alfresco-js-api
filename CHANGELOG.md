@@ -4,6 +4,11 @@
 
 Alfresco JS API
 
+<a name="1.1.1"></a>
+# [1.1.1](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.1.1) (27-01-2017)
+## Fix
+- [AlfrescoApiConfig make optional parameters in the declaration file #174](https://github.com/Alfresco/alfresco-js-api/pull/174)
+
 _This project provides a JavaScript client API into the v1 Alfresco REST API_
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.1.0) (26-01-2017)

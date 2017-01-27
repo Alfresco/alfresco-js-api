@@ -485,14 +485,14 @@ declare namespace AlfrescoApi {
     }
 
     export interface AlfrescoApiConfig {
-        hostEcm: string;
-        hostBpm: string;
-        contextRoot: string;
-        contextRootBpm: string;
-        provider: string;
-        ticketEcm: string;
-        ticketBpm: string;
-        disableCsrf: boolean;
+        hostEcm?: string;
+        hostBpm?: string;
+        contextRoot?: string;
+        contextRootBpm?: string;
+        provider?: string;
+        ticketEcm?: string;
+        ticketBpm?: string;
+        disableCsrf?: boolean;
     }
 
     export interface ContentApi {
