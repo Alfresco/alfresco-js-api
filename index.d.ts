@@ -203,16 +203,23 @@ declare namespace AlfrescoApi {
     export interface NodesApi {
         new(client: ApiClient): NodesApi;
 
-        getNodeInfo(nodeId: string, opts?: any): Promise<MinimalNodeEntryEntity>;
+        addNode(nodeId: string, nodeBody: any, opts?: any): Promise<MinimalNodeEntity>;
+        copyNode(nodeId: string, copyBody: any, opts?: any): Promise<MinimalNodeEntity>;
+        deleteNode(nodeId: string): Promise<void>;
+        getDeletedNode(nodeId: string, opts?: any): Promise<DeletedNodeEntity>;
+        getDeletedNodes(opts?: any): Promise<DeletedNodesPaging>;
+        getFileContent(nodeId: string, opts?: any): Promise<any>;
+        getNode(nodeId: string, opts?: any): Promise<MinimalNodeEntity>;
         getNodeChildren(nodeId: string, opts?: any): Promise<NodePaging>;
-        deleteNode(nodeId: string): Promise<any>;
-        createFolder(name: string, relativePath: string, nodeId?: string, opts?: any): Promise<MinimalNodeEntryEntity>;
-        getNode(nodeId: string, opts: any): Promise<MinimalNodeEntity>;
-        getDeletedNodes(opts: any): Promise<DeletedNodesPaging>;
-        purgeDeletedNode(nodeId: string): Promise<any>;
-        getDeletedNode(nodeId: string, opts: any): Promise<DeletedNodeEntity>;
+        moveNode(nodeId: string, moveBody: any, opts?: any): Promise<MinimalNodeEntity>;
+        purgeDeletedNode(nodeId: string): Promise<void>;
         restoreNode(nodeId: string): Promise<MinimalNodeEntity>;
-        addNode(nodeId: string, nodeBody: any, opts: any): any;
+        updateFileContent(nodeId: string, contentBody: string, opts?: any): Promise<MinimalNodeEntity>;
+        updateNode(nodeId: string, nodeBody: any, opts?: any): Promise<MinimalNodeEntity>;
+        getNodeInfo(nodeId: string, opts?: any): Promise<MinimalNodeEntryEntity>;
+        deleteNodePermanent(nodeId: string): Promise<void>;
+        createFolder(name: string, relativePath: string, nodeId?: string, opts?: any): Promise<MinimalNodeEntity>;
+        createFolderAutoRename(name: string, relativePath: string, nodeId: string, opts): Promise<MinimalNodeEntity>;
     }
 
     export interface ApiClient {
