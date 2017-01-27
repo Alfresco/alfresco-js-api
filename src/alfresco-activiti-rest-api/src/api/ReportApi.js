@@ -249,6 +249,12 @@
         throw "Missing the required parameter 'queryParams' when calling exportToCsv";
       }
 
+      if (queryParams.reportName == undefined || queryParams.reportName == null) {
+        throw "Missing the required parameter 'reportName' when calling exportToCsv";
+      }
+
+      queryParams.__reportName = queryParams.reportName;
+
       var pathParams = {
         'reportId': reportId
       };
@@ -290,6 +296,12 @@
       if (queryParams == undefined || queryParams == null) {
         throw "Missing the required parameter 'queryParams' when calling queryParams";
       }
+
+      if (queryParams.reportName == undefined || queryParams.reportName == null) {
+        throw "Missing the required parameter 'reportName' when calling exportToCsv";
+      }
+
+      queryParams.__reportName = queryParams.reportName;
 
       var pathParams = {
         'reportId': reportId
