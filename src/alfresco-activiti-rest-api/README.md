@@ -87,7 +87,7 @@ Class | Method | HTTP request | Description
 *ActivitiPublicRestApi.ContentApi* | [**deleteContent**](docs/ContentApi.md#deleteContent) | **DELETE** /api/enterprise/content/{contentId} | deleteContent
 *ActivitiPublicRestApi.ContentApi* | [**getContent**](docs/ContentApi.md#getContent) | **GET** /api/enterprise/content/{contentId} | getContent
 *ActivitiPublicRestApi.ContentApi* | [**getProcessInstanceContent**](docs/ContentApi.md#getProcessInstanceContent) | **GET** /api/enterprise/process-instances/{processInstanceId}/field-content | Retrieve content attached to process instance fields
-*ActivitiPublicRestApi.ContentApi* | [**getRawContent3**](docs/ContentApi.md#getRawContent3) | **GET** /api/enterprise/content/{contentId}/raw | getRawContent
+*ActivitiPublicRestApi.ContentApi* | [**getRawContent**](docs/ContentApi.md#getRawContent) | **GET** /api/enterprise/content/{contentId}/raw | getRawContent
 *ActivitiPublicRestApi.ContentApi* | [**getRelatedContentForProcessInstance**](docs/ContentApi.md#getRelatedContentForProcessInstance) | **GET** /api/enterprise/process-instances/{processInstanceId}/content | getRelatedContentForProcessInstance
 *ActivitiPublicRestApi.ContentApi* | [**getRelatedContentForTask**](docs/ContentApi.md#getRelatedContentForTask) | **GET** /api/enterprise/tasks/{taskId}/content | Retrieve which content is attached to a task
 *ActivitiPublicRestApi.ContentRenditionApi* | [**getRawContent**](docs/ContentRenditionApi.md#getRawContent) | **GET** /api/enterprise/content/{contentId}/rendition/{renditionType} | Retrieve Raw Content

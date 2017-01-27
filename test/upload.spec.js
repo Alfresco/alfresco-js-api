@@ -78,7 +78,10 @@ describe('Upload', function () {
 
             var file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
-            this.alfrescoJsApi.upload.uploadFile(file).on('success', ()=> {
+            var uploadPromise = this.alfrescoJsApi.upload.uploadFile(file);
+
+            uploadPromise.catch(()=> {});
+            uploadPromise.on('success', ()=> {
                 done();
             });
         });
@@ -88,7 +91,10 @@ describe('Upload', function () {
 
             var file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
-            this.alfrescoJsApi.upload.uploadFile(file).on('error', ()=> {
+            var uploadPromise = this.alfrescoJsApi.upload.uploadFile(file);
+
+            uploadPromise.catch(()=> {});
+            uploadPromise.on('error', ()=> {
                 done();
             });
         });
@@ -98,7 +104,10 @@ describe('Upload', function () {
 
             var file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
-            this.alfrescoJsApi.upload.uploadFile(file).on('unauthorized', ()=> {
+            var uploadPromise = this.alfrescoJsApi.upload.uploadFile(file);
+
+            uploadPromise.catch(()=> {});
+            uploadPromise.on('unauthorized', ()=> {
                 done();
             });
         });
@@ -108,7 +117,10 @@ describe('Upload', function () {
 
             var file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
-            this.alfrescoJsApi.upload.uploadFile(file).once('progress', ()=> {
+            var uploadPromise = this.alfrescoJsApi.upload.uploadFile(file);
+
+            uploadPromise.catch(()=> {});
+            uploadPromise.once('progress', ()=> {
                 done();
             });
         });
@@ -157,7 +169,10 @@ describe('Upload', function () {
             var promiseErrorOne = new Promise((resolve) => {
                 this.uploadMock.get201CreationFile();
 
-                this.alfrescoJsApi.upload.uploadFile(file).once('success', ()=> {
+                var uploadPromise = this.alfrescoJsApi.upload.uploadFile(file);
+
+                uploadPromise.catch(()=> {});
+                uploadPromise.once('success', ()=> {
                     errorOneOk = true;
                     resolve();
                 });
@@ -166,7 +181,10 @@ describe('Upload', function () {
             var promiseErrorTwo = new Promise((resolve) => {
                 this.uploadMock.get201CreationFile();
 
-                this.alfrescoJsApi.upload.uploadFile(fileTwo).once('success', ()=> {
+                var uploadPromise = this.alfrescoJsApi.upload.uploadFile(fileTwo);
+
+                uploadPromise.catch(()=> {});
+                uploadPromise.once('success', ()=> {
                     errorTwoOk = true;
                     resolve();
                 });
@@ -190,7 +208,10 @@ describe('Upload', function () {
             var promiseSuccessOne = new Promise((resolve) => {
                 this.uploadMock.get201CreationFile();
 
-                this.alfrescoJsApi.upload.uploadFile(file).once('success', ()=> {
+                var uploadPromiseOne = this.alfrescoJsApi.upload.uploadFile(file);
+
+                uploadPromiseOne.catch(()=> {});
+                uploadPromiseOne.once('success', ()=> {
                     successOneOk = true;
                     resolve();
                 });
@@ -199,7 +220,10 @@ describe('Upload', function () {
             var promiseSuccessTwo = new Promise((resolve) => {
                 this.uploadMock.get201CreationFile();
 
-                this.alfrescoJsApi.upload.uploadFile(fileTwo).once('success', ()=> {
+                var uploadPromiseTwo = this.alfrescoJsApi.upload.uploadFile(fileTwo);
+
+                uploadPromiseTwo.catch(()=> {});
+                uploadPromiseTwo.once('success', ()=> {
                     successTwoOk = true;
                     resolve();
                 });
@@ -275,7 +299,11 @@ describe('Upload', function () {
             var promiseProgressOne = {};
             var promiseProgressTwo = {};
 
-            this.alfrescoJsApi.upload.uploadFile(file).once('error', ()=> {
+            var uploadPromise = this.alfrescoJsApi.upload.uploadFile(file);
+
+            uploadPromise.catch(()=> {});
+
+            uploadPromise.once('error', ()=> {
                 promiseProgressOne = new Promise((resolve) => {
                     resolve();
                 });

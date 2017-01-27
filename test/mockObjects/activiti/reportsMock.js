@@ -106,6 +106,7 @@ var fakeProcessDefinitionsNoApp = [{
     'hasStartForm': false
 }];
 
+
 class ReportsMock extends BaseMock {
 
     constructor(host) {
@@ -152,6 +153,24 @@ class ReportsMock extends BaseMock {
     get200ResponseUpdateReport(reportId) {
         nock(this.host, {'encodedQueryParams': true})
             .put('/activiti-app/app/rest/reporting/reports/' + reportId)
+            .reply(200);
+    }
+
+    get200ResponseExportReport(reportId) {
+        nock(this.host, {'encodedQueryParams': true})
+            .post('/activiti-app/app/rest/reporting/reports/' + reportId + '/export-to-csv')
+            .reply(200, 'CSV');
+    }
+
+    get200ResponseSaveReport(reportId) {
+        nock(this.host, {'encodedQueryParams': true})
+            .post('/activiti-app/app/rest/reporting/reports/' + reportId)
+            .reply(200);
+    }
+
+    get200ResponseDeleteReport(reportId) {
+        nock(this.host, {'encodedQueryParams': true})
+            .delete('/activiti-app/app/rest/reporting/reports/' + reportId)
             .reply(200);
     }
 

@@ -19,7 +19,7 @@ describe('Activiti Report Api', function () {
             provider: 'BPM'
         });
 
-        this.alfrescoJsApi.login('admin', 'admin').then(() => {
+        this.alfrescoJsApi.login('admin', 'admin').then(()=> {
             done();
         });
     });
@@ -155,6 +155,60 @@ describe('Activiti Report Api', function () {
         this.reportsMock.get200ResponseUpdateReport(reportId);
 
         this.alfrescoJsApi.activiti.reportApi.updateReport(reportId, name).then(function () {
+            done();
+        });
+    });
+
+    it('should export the report', function (done) {
+
+        var reportId = '11015'; // String | reportId
+        var queryParms = {
+            'processDefinitionId': 'TEST:99:999',
+            'dateRange': {
+                'startDate': '2017-01-01T00:00:00.000Z',
+                'endDate': '2017-01-24T23:59:59.999Z',
+                'rangeId': 'currentYear'
+            },
+            'slowProcessInstanceInteger': 10,
+            'status': 'All',
+            'reportName': 'FAKE_REPORT_NAME'
+        };
+        this.reportsMock.get200ResponseExportReport(reportId);
+
+        this.alfrescoJsApi.activiti.reportApi.exportToCsv(reportId, queryParms).then(function (respo) {
+            expect(respo).not.equal(null);
+            expect(respo).not.equal(undefined);
+            done();
+        });
+    });
+
+    it('should save the report', function (done) {
+
+        var reportId = '11015'; // String | reportId
+        var queryParms = {
+            'processDefinitionId': 'TEST:99:999',
+            'dateRange': {
+                'startDate': '2017-01-01T00:00:00.000Z',
+                'endDate': '2017-01-24T23:59:59.999Z',
+                'rangeId': 'currentYear'
+            },
+            'slowProcessInstanceInteger': 10,
+            'status': 'All',
+            'reportName': 'FAKE_REPORT_NAME'
+        };
+        this.reportsMock.get200ResponseSaveReport(reportId);
+
+        this.alfrescoJsApi.activiti.reportApi.saveReport(reportId, queryParms).then(function () {
+            done();
+        });
+    });
+
+    it('should delete a report', function (done) {
+
+        var reportId = '11015'; // String | reportId
+        this.reportsMock.get200ResponseDeleteReport(reportId);
+
+        this.alfrescoJsApi.activiti.reportApi.deleteReport(reportId).then(function () {
             done();
         });
     });

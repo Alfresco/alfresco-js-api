@@ -229,6 +229,138 @@
       );
     }
 
+    /**
+     * Function to export a report
+     */
+
+    /**
+     * Export a report
+     * @param {string} reportId
+     * @param {module:model/ReportExportQueryRepresentation} queryParams
+     */
+    this.exportToCsv = function(reportId, queryParams) {
+      var postBody = queryParams;
+
+      if (reportId == undefined || reportId == null) {
+        throw "Missing the required parameter 'reportId' when calling exportToCsv";
+      }
+
+      if (queryParams == undefined || queryParams == null) {
+        throw "Missing the required parameter 'queryParams' when calling exportToCsv";
+      }
+
+      if (queryParams.reportName == undefined || queryParams.reportName == null) {
+        throw "Missing the required parameter 'reportName' when calling exportToCsv";
+      }
+
+      queryParams.__reportName = queryParams.reportName;
+
+      var pathParams = {
+        'reportId': reportId
+      };
+      var queryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = [];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = 'String';
+
+      return this.apiClient.callApi(
+        '/app/rest/reporting/reports/{reportId}/export-to-csv', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Function to save a report
+     */
+
+    /**
+     * Save a report
+     * @param {string} reportId
+     * @param {module:model/ReportSaveQueryRepresentation} queryParams
+     */
+    this.saveReport = function(reportId, queryParams) {
+      var postBody = queryParams;
+
+      if (reportId == undefined || reportId == null) {
+        throw "Missing the required parameter 'reportId' when calling saveReport";
+      }
+
+      if (queryParams == undefined || queryParams == null) {
+        throw "Missing the required parameter 'queryParams' when calling queryParams";
+      }
+
+      if (queryParams.reportName == undefined || queryParams.reportName == null) {
+        throw "Missing the required parameter 'reportName' when calling exportToCsv";
+      }
+
+      queryParams.__reportName = queryParams.reportName;
+
+      var pathParams = {
+        'reportId': reportId
+      };
+      var queryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = [];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = null;
+
+      return this.apiClient.callApi(
+        '/app/rest/reporting/reports/{reportId}', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+    /**
+     * Function to delete a report
+     */
+
+    /**
+     * Save a report
+     * @param {string} reportId
+     */
+    this.deleteReport = function(reportId) {
+      var postBody = null;
+
+      if (reportId == undefined || reportId == null) {
+        throw "Missing the required parameter 'reportId' when calling delete";
+      }
+
+      var pathParams = {
+        'reportId': reportId
+      };
+      var queryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = [];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = null;
+
+      return this.apiClient.callApi(
+        '/app/rest/reporting/reports/{reportId}', 'DELETE',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
   };
 
   return exports;

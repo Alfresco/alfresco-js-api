@@ -13,7 +13,7 @@ Method | HTTP request | Description
 [**deleteContent**](ContentApi.md#deleteContent) | **DELETE** /api/enterprise/content/{contentId} | deleteContent
 [**getContent**](ContentApi.md#getContent) | **GET** /api/enterprise/content/{contentId} | getContent
 [**getProcessInstanceContent**](ContentApi.md#getProcessInstanceContent) | **GET** /api/enterprise/process-instances/{processInstanceId}/field-content | Retrieve content attached to process instance fields
-[**getRawContent3**](ContentApi.md#getRawContent3) | **GET** /api/enterprise/content/{contentId}/raw | getRawContent
+[**getRawContent**](ContentApi.md#getRawContent) | **GET** /api/enterprise/content/{contentId}/raw | getRawContent
 [**getRelatedContentForProcessInstance**](ContentApi.md#getRelatedContentForProcessInstance) | **GET** /api/enterprise/process-instances/{processInstanceId}/content | getRelatedContentForProcessInstance
 [**getRelatedContentForTask**](ContentApi.md#getRelatedContentForTask) | **GET** /api/enterprise/tasks/{taskId}/content | Retrieve which content is attached to a task
 
@@ -337,9 +337,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getRawContent3"></a>
-# **getRawContent3**
-> getRawContent3(contentId)
+<a name="getRawContent"></a>
+# **getRawContent**
+> getRawContent(contentId)
 
 getRawContent
 
@@ -348,7 +348,7 @@ getRawContent
 
 var contentId = 789; // Integer | contentId
 
-this.alfrescoJsApi.activiti.contentApi.getRawContent3(contentId);
+this.alfrescoJsApi.activiti.contentApi.getRawContent(contentId);
 ```
 
 ### Parameters
