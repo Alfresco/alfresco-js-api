@@ -30,10 +30,14 @@ class AlfrescoApiClient extends ApiClient {
      * @param {Array.<String>} accepts An array of acceptable response MIME types.
      * @param {(String|Array|ObjectFunction)} returnType The required type to return; can be a string for simple types or the
      * @param {(String)} contextRoot alternative contextRoot
+     * @param {(String)} responseType  is an enumerated value that returns the type of the response.
+     *                                  It also lets the author change the response type to one "arraybuffer", "blob", "document",
+     *                                  "json", or "text".
+     *                                   If an empty string is set as the value of responseType, it is assumed as type "text".
      * constructor for a complex type.   * @returns {Promise} A Promise object.
      */
     callApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, authNames,
-            contentTypes, accepts, returnType, contextRoot) {
+            contentTypes, accepts, returnType, contextRoot, responseType) {
 
         var eventEmitter = {};
         Emitter(eventEmitter); // jshint ignore:line
@@ -74,6 +78,10 @@ class AlfrescoApiClient extends ApiClient {
 
         // set request timeout
         request.timeout(this.timeout);
+
+        if (responseType) {
+            request._responseType = responseType;
+        }
 
         var contentType = this.jsonPreferredMime(contentTypes);
 
