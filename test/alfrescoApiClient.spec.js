@@ -1,6 +1,6 @@
 /*global describe, it */
 
-var ApiClient = require('../src/alfresco-core-rest-api/src/ApiClient');
+var ApiClient = require('../src/alfrescoApiClient');
 var chai = require('chai');
 var expect = chai.expect;
 
@@ -9,6 +9,34 @@ chai.use(require('chai-datetime'));
 describe('Alfresco Core API Client', function () {
 
     describe('type conversion', function() {
+
+        var client = new ApiClient();
+
+        it('should create a request with response type blob', function() {
+
+            var bodyParam = null;
+
+            var queryParams = {
+            };
+            var headerParams = {
+            };
+            var formParams = {
+            };
+
+            var contentTypes = ['application/json'];
+            var accepts = ['application/json'];
+            var responseType = 'blob';
+            var url = '/fake-api/enterprise/process-instances/';
+            var httpMethod = 'GET';
+
+            var response = client.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
+                contentTypes, accepts, responseType, null);
+
+            expect(response.url).equal('/fake-api/enterprise/process-instances/');
+            expect(response.header.Accept).equal('application/json');
+            expect(response.header['Content-Type']).equal('application/json');
+            expect(response._responseType).equal('blob');
+        });
 
         it('should return strings as a string', function() {
             var testData = 'Example String';

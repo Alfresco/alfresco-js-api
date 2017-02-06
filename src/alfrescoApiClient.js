@@ -51,76 +51,8 @@ class AlfrescoApiClient extends ApiClient {
             url = this.buildUrl(path, pathParams);
         }
 
-        var request = superagent(httpMethod, url);
-
-        // apply authentications
-        this.applyAuthToRequest(request, ['basicAuth']);
-
-        // set query parameters
-        request.query(this.normalizeParams(queryParams));
-
-        // set header parameters
-        request.set(this.defaultHeaders).set(this.normalizeParams(headerParams));
-
-        if (this.isBpmRequest() && this.isCsrfEnabled()) {
-            this.setCsrfToken(request);
-        }
-
-        // add cookie for activiti
-        if (this.isBpmRequest()) {
-            request._withCredentials = true;
-            if (this.authentications.cookie) {
-                if (this.isNodeEnv()) {
-                    request.set('Cookie', this.authentications.cookie);
-                }
-            }
-        }
-
-        // set request timeout
-        request.timeout(this.timeout);
-
-        if (responseType) {
-            request._responseType = responseType;
-        }
-
-        var contentType = this.jsonPreferredMime(contentTypes);
-
-        if (contentType && contentType !== 'multipart/form-data') {
-            request.type(contentType);
-        } else if (!request.header['Content-Type'] && contentType !== 'multipart/form-data') {
-            request.type('application/json');
-        }
-
-        if (contentType === 'application/x-www-form-urlencoded') {
-            request.send(this.normalizeParams(formParams)).on('progress', (event)=> {
-                this.progress(event, eventEmitter);
-            });
-        } else if (contentType === 'multipart/form-data') {
-            var _formParams = this.normalizeParams(formParams);
-            for (var key in _formParams) {
-                if (_formParams.hasOwnProperty(key)) {
-                    if (this.isFileParam(_formParams[key])) {
-                        // file field
-                        request.attach(key, _formParams[key]).on('progress', (event)=> {// jshint ignore:line
-                            this.progress(event, eventEmitter);
-                        });
-                    } else {
-                        request.field(key, _formParams[key]).on('progress', (event)=> {// jshint ignore:line
-                            this.progress(event, eventEmitter);
-                        });
-                    }
-                }
-            }
-        } else if (bodyParam) {
-            request.send(bodyParam).on('progress', (event)=> {
-                this.progress(event, eventEmitter);
-            });
-        }
-
-        var accept = this.jsonPreferredMime(accepts);
-        if (accept) {
-            request.accept(accept);
-        }
+        var request = this.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
+            contentTypes, accepts, responseType, eventEmitter);
 
         this.promise = new Promise((resolve, reject) => {
             request.end((error, response) => {
@@ -257,6 +189,82 @@ class AlfrescoApiClient extends ApiClient {
             return encodeURIComponent(value);
         });
         return url;
+    }
+
+    buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
+                  contentTypes, accepts, responseType, eventEmitter) {
+        var request = superagent(httpMethod, url);
+
+        // apply authentications
+        this.applyAuthToRequest(request, ['basicAuth']);
+
+        // set query parameters
+        request.query(this.normalizeParams(queryParams));
+
+        // set header parameters
+        request.set(this.defaultHeaders).set(this.normalizeParams(headerParams));
+
+        if (this.isBpmRequest() && this.isCsrfEnabled()) {
+            this.setCsrfToken(request);
+        }
+
+        // add cookie for activiti
+        if (this.isBpmRequest()) {
+            request._withCredentials = true;
+            if (this.authentications.cookie) {
+                if (this.isNodeEnv()) {
+                    request.set('Cookie', this.authentications.cookie);
+                }
+            }
+        }
+
+        // set request timeout
+        request.timeout(this.timeout);
+
+        if (responseType) {
+            request._responseType = responseType;
+        }
+
+        var contentType = this.jsonPreferredMime(contentTypes);
+
+        if (contentType && contentType !== 'multipart/form-data') {
+            request.type(contentType);
+        } else if (!request.header['Content-Type'] && contentType !== 'multipart/form-data') {
+            request.type('application/json');
+        }
+
+        if (contentType === 'application/x-www-form-urlencoded') {
+            request.send(this.normalizeParams(formParams)).on('progress', (event)=> {
+                this.progress(event, eventEmitter);
+            });
+        } else if (contentType === 'multipart/form-data') {
+            var _formParams = this.normalizeParams(formParams);
+            for (var key in _formParams) {
+                if (_formParams.hasOwnProperty(key)) {
+                    if (this.isFileParam(_formParams[key])) {
+                        // file field
+                        request.attach(key, _formParams[key]).on('progress', (event)=> {// jshint ignore:line
+                            this.progress(event, eventEmitter);
+                        });
+                    } else {
+                        request.field(key, _formParams[key]).on('progress', (event)=> {// jshint ignore:line
+                            this.progress(event, eventEmitter);
+                        });
+                    }
+                }
+            }
+        } else if (bodyParam) {
+            request.send(bodyParam).on('progress', (event)=> {
+                this.progress(event, eventEmitter);
+            });
+        }
+
+        var accept = this.jsonPreferredMime(accepts);
+        if (accept) {
+            request.accept(accept);
+        }
+
+        return request;
     }
 }
 
