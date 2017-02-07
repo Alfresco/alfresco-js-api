@@ -3,6 +3,10 @@
 </p>
 
 Alfresco JS API
+<a name="1.1.2"></a>
+# [1.1.2](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.1.2) (01-02-2017)
+## Fix
+- [Upgrade superagent library to 3.4.1 and provide responseType override #180](https://github.com/Alfresco/alfresco-js-api/pull/180)
 
 <a name="1.1.1"></a>
 # [1.1.1](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.1.1) (27-01-2017)
