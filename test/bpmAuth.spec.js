@@ -31,6 +31,24 @@ describe('Bpm Auth test', function () {
 
         });
 
+        it('login password should be removed after login', function (done) {
+
+            this.authBpmMock.get200Response();
+
+            this.bpmAuth = new BpmAuth({
+                hostBpm: this.hostBpm,
+                contextRootBpm: 'activiti-app'
+            });
+
+            this.bpmAuth.login('admin', 'admin').then((data) => {
+                expect(data).to.be.equal('Basic YWRtaW46YWRtaW4=');
+                expect(this.bpmAuth.authentications.basicAuth.password).to.be.not.equal('admin');
+                done();
+            }, function () {
+            });
+
+        });
+
         it('isLoggedIn should return true if the api is logged in', function (done) {
 
             this.authBpmMock.get200Response();

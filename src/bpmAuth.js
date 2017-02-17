@@ -136,6 +136,7 @@ class BpmAuth extends AlfrescoApiClient {
      * */
     setTicket(ticket) {
         this.authentications.basicAuth.ticket = ticket;
+        this.authentications.basicAuth.password = null;
         this.ticket = ticket;
     }
 
