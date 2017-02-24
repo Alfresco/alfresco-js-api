@@ -3,10 +3,11 @@
 </p>
 
 Alfresco JS API
-<a name="1.1.2"></a>
-# [1.1.2](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.1.2) (01-02-2017)
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.2.0) (xx-xx-2017)
 ## Fix
 - [Upgrade superagent library to 3.4.1 and provide responseType override #180](https://github.com/Alfresco/alfresco-js-api/pull/180)
+- [Username should be trimmed in the login #184](https://github.com/Alfresco/alfresco-js-api/pull/184)
 
 <a name="1.1.1"></a>
 # [1.1.1](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.1.1) (27-01-2017)
@@ -37,7 +38,7 @@ _This project provides a JavaScript client API into the v1 Alfresco REST API_
         hostBpm: 'http://127.0.0.1:9999',
         contextRootBpm: 'activiti-custom-root'
     });
-    
+
     this.bpmAuth.login('admin', 'admin');
 ```
 
@@ -279,7 +280,7 @@ Before:
 ```javascript
 this.alfrescoJsApi = new AlfrescoApi({ host :''http://127.0.0.1:8080', ticket :'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1'});
 ```
-    
+
 After:
 
 ```javascript
@@ -290,7 +291,7 @@ this.alfrescoJsApi = new AlfrescoApi({ ticketEcm:'TICKET_4479f4d3bb155195879bfbb
 //Login ticket BPM
 this.alfrescoJsApi = new AlfrescoApi({ ticketBpm: 'Basic YWRtaW46YWRtaW4=',  hostBpm:'http://127.0.0.1:9999'});
 
-//Login ticket ECM and BPM 
+//Login ticket ECM and BPM
 this.alfrescoJsApi = new AlfrescoApi({ ticketEcm:'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1', ticketBpm: 'Basic YWRtaW46YWRtaW4=',  hostEcm:'http://127.0.0.1:8080',  hostBpm:'http://127.0.0.1:9999'});
 ```
 

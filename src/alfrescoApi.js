@@ -131,6 +131,11 @@ class AlfrescoApi {
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
     login(username, password) {
+
+        if (username) {
+            username = username.trim();
+        }
+
         if (this._isBpmConfiguration()) {
             var bpmPromise = this.bpmAuth.login(username, password);
 
