@@ -477,11 +477,13 @@
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = Object;
+      var contextRoot = null;
+      var responseType = 'blob';
 
       return this.apiClient.callApi(
         '/api/enterprise/content/{contentId}/raw', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authNames, contentTypes, accepts, returnType, contextRoot, responseType
       );
     }
 

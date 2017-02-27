@@ -30,6 +30,23 @@ describe('Ecm Auth test', function () {
 
         });
 
+        it('login password should be removed after login', function (done) {
+
+            this.authEcmMock.get201Response();
+
+            this.ecmAuth = new EcmAuth({
+                contextRoot: 'alfresco',
+                hostEcm: this.hostEcm
+            });
+
+            this.ecmAuth.login('admin', 'admin').then((data) => {
+                expect(this.ecmAuth.authentications.basicAuth.password).to.be.not.equal('admin');
+                done();
+            }, ()=> {
+            });
+
+        });
+
         it('isLoggedIn should return true if the api is logged in', function (done) {
 
             this.authEcmMock.get201Response();

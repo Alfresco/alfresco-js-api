@@ -1,6 +1,6 @@
 {
   "name": "alfresco-js-api",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "JavaScript client library for the Alfresco REST API",
   "author": "Alfresco Software, Ltd.",
   "main": "main.js",
@@ -27,7 +27,7 @@
     "url": "https://github.com/Alfresco/alfresco-js-api/issues"
   },
   "dependencies": {
-    "superagent": "1.7.1",
+    "superagent": "3.4.1",
     "event-emitter": "^0.3.4",
     "lodash": "^4.13.1",
     "nock": "8.1.0"
