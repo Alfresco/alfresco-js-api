@@ -500,7 +500,36 @@
      * @param {Integer} contentId contentId
      */
     this.getContentThumbnailUrl = function(contentId) {
-      return this.apiClient.basePath + '/app/rest/content/' + contentId + '/rendition/thumbnail';
+      var postBody = null;
+
+      // verify the required parameter 'contentId' is set
+      if (contentId == undefined || contentId == null) {
+        throw "Missing the required parameter 'contentId' when calling getRawContent";
+      }
+
+
+      var pathParams = {
+        'contentId': contentId
+      };
+      var queryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = [];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = Object;
+      var contextRoot = null;
+      var responseType = 'blob';
+
+      return this.apiClient.callApi(
+        '/api/enterprise/content/{contentId}/rendition/thumbnail', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, contextRoot, responseType
+      );
     }
 
     /**

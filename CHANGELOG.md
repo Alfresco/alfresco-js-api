@@ -3,6 +3,11 @@
 </p>
 
 Alfresco JS API
+<a name="1.2.1"></a>
+# [1.2.1](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.2.1) (xx-xx-2017)
+## Fix
+- [Fix getContentThumbnailUrl API using the enterprice version #187](https://github.com/Alfresco/alfresco-js-api/pull/187)
+
 <a name="1.2.0"></a>
 # [1.2.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.2.0) (xx-xx-2017)
 ## Fix
