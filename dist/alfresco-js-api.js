@@ -43244,7 +43244,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new AssociationsApi. 
+   * Constructs a new AssociationsApi.
    * @alias module:api/AssociationsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -43437,7 +43437,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new ChangesApi. 
+   * Constructs a new ChangesApi.
    * @alias module:api/ChangesApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -44798,7 +44798,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new ChildAssociationsApi. 
+   * Constructs a new ChildAssociationsApi.
    * @alias module:api/ChildAssociationsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -45160,7 +45160,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new CommentsApi. 
+   * Constructs a new CommentsApi.
    * @alias module:api/CommentsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -45358,7 +45358,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new FavoritesApi. 
+   * Constructs a new FavoritesApi.
    * @alias module:api/FavoritesApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -45552,7 +45552,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new NetworksApi. 
+   * Constructs a new NetworksApi.
    * @alias module:api/NetworksApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -46164,7 +46164,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new PeopleApi. 
+   * Constructs a new PeopleApi.
    * @alias module:api/PeopleApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -47061,7 +47061,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new RatingsApi. 
+   * Constructs a new RatingsApi.
    * @alias module:api/RatingsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -47253,7 +47253,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new RenditionsApi. 
+   * Constructs a new RenditionsApi.
    * @alias module:api/RenditionsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -47510,7 +47510,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new SharedlinksApi. 
+   * Constructs a new SharedlinksApi.
    * @alias module:api/SharedlinksApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -47751,7 +47751,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new SitesApi. 
+   * Constructs a new SitesApi.
    * @alias module:api/SitesApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -48201,7 +48201,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new TagsApi. 
+   * Constructs a new TagsApi.
    * @alias module:api/TagsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
