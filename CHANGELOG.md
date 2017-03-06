@@ -4,7 +4,7 @@
 
 Alfresco JS API
 <a name="1.2.0"></a>
-# [1.2.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.2.0) (xx-xx-2017)
+# [1.2.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.2.0) (27-02-2017)
 ## Fix
 - [Upgrade superagent library to 3.4.1 and provide responseType override #180](https://github.com/Alfresco/alfresco-js-api/pull/180)
 - [Username should be trimmed in the login #184](https://github.com/Alfresco/alfresco-js-api/pull/184)
