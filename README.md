@@ -59,7 +59,7 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
   * [Get preview Url](#get-preview-url)
   * [Get content Url](#get-content-url)
   * [Custom web scripts call](#custom-web-scripts-call)
-- [BPM](#bpm)
+- [Process Services](#bpm)
   * [Task Api](#task-api)
     + [List Task](#list-task)
     + [Get Task](#get-task)
@@ -82,12 +82,22 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
   * [Export to csv](#export-to-csv)
   * [Save Report](#save-report)
   * [Delete report](#delete-report)
+- [CMN]
+- [Search]
 - [Development](#development)
 - [Release History](#release-history)
 
 <!-- tocstop -->
 
 <!-- markdown-toc end -->
+
+# Full documentation of all the methods of each API 
+
+- [Authentication Services](/alfresco-auth-rest-api)
+- [Content Services](/alfresco-core-rest-api)
+- [Process Services](/alfresco-activiti-rest-api)
+- [ContentCMN](/alfresco-private-rest-api)
+- [Content Search](/alfresco-search-rest-api)
 
 # Prerequisites 
 
