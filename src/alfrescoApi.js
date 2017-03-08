@@ -100,9 +100,10 @@ class AlfrescoApi {
         this._instantiateObjects(this.corePrivateStore, this.core);
 
         //SEARCH
+        this.search = {};
         AlfrescoSearchRestApi.ApiClient.instance = this.searchClient;
         this.searchStore = AlfrescoSearchRestApi;
-        this._instantiateObjects(this.searchStore, this.core);
+        this._instantiateObjects(this.searchStore, this.search);
 
         this.nodes = this.node = new AlfrescoNode();
         this.content = new AlfrescoContent(this.ecmAuth, this.ecmClient);
