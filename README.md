@@ -92,11 +92,11 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
 
 # Full documentation of all the methods of each API 
 
-- [Authentication Services](/alfresco-auth-rest-api)
-- [Content Services](/alfresco-core-rest-api)
-- [Process Services](/alfresco-activiti-rest-api)
-- [ContentCMN](/alfresco-private-rest-api)
-- [Content Search](/alfresco-search-rest-api)
+- [Authentication Services](/src/alfresco-auth-rest-api)
+- [Content Services](/src/alfresco-core-rest-api)
+- [Process Services](/src/alfresco-activiti-rest-api)
+- [ContentCMN](/src/alfresco-private-rest-api)
+- [Content Search](/src/alfresco-search-rest-api)
 
 # Prerequisites 
 
