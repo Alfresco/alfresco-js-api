@@ -2,6 +2,7 @@
 
 var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
 var AlfrescoPrivateRestApi = require('./alfresco-private-rest-api/src/index.js');
+var AlfrescoSearchRestApi = require('./alfresco-search-rest-api/src/index.js');
 var AlfrescoAuthRestApi = require('./alfresco-auth-rest-api/src/index');
 var AlfrescoActivitiApi = require('./alfresco-activiti-rest-api/src/index');
 var AlfrescoContent = require('./alfrescoContent');
@@ -12,6 +13,7 @@ var EcmAuth = require('./ecmAuth');
 var BpmAuth = require('./bpmAuth');
 var EcmClient = require('./ecmClient');
 var BpmClient = require('./bpmClient');
+var SearchClient = require('./searchClient');
 var EcmPrivateClient = require('./ecmPrivateClient');
 var _ = require('lodash');
 
@@ -54,6 +56,7 @@ class AlfrescoApi {
         this.ecmPrivateClient = new EcmPrivateClient(this.config);
         this.ecmClient = new EcmClient(this.config);
         this.bpmClient = new BpmClient(this.config);
+        this.searchClient = new SearchClient(this.config);
         this.setAuthenticationClientECMBPM(this.ecmAuth.getAuthentication(), this.bpmAuth.getAuthentication());
 
         this.initObjects();
@@ -95,6 +98,12 @@ class AlfrescoApi {
         AlfrescoPrivateRestApi.ApiClient.instance = this.ecmPrivateClient;
         this.corePrivateStore = AlfrescoPrivateRestApi;
         this._instantiateObjects(this.corePrivateStore, this.core);
+
+        //SEARCH
+        this.search = {};
+        AlfrescoSearchRestApi.ApiClient.instance = this.searchClient;
+        this.searchStore = AlfrescoSearchRestApi;
+        this._instantiateObjects(this.searchStore, this.search);
 
         this.nodes = this.node = new AlfrescoNode();
         this.content = new AlfrescoContent(this.ecmAuth, this.ecmClient);
@@ -169,6 +178,7 @@ class AlfrescoApi {
 
     setAuthenticationClientECMBPM(authECM, authBPM) {
         this.ecmClient.setAuthentications(authECM);
+        this.searchClient.setAuthentications(authECM);
         this.ecmPrivateClient.setAuthentications(authECM);
         this.bpmClient.setAuthentications(authBPM);
     }
@@ -334,3 +344,5 @@ module.exports = AlfrescoApi;
 module.exports.Activiti = AlfrescoActivitiApi;
 module.exports.Core = AlfrescoCoreRestApi;
 module.exports.Auth = AlfrescoAuthRestApi;
+module.exports.PrivateRestApi = AlfrescoPrivateRestApi;
+module.exports.Search = AlfrescoSearchRestApi;

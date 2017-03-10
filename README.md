@@ -27,6 +27,7 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
 
 <!-- toc -->
 
+- [Full documentation of all the methods of each API](#full-documentation-of-all-the-methods-of-each-api)
 - [Prerequisites](#prerequisites)
 - [Node](#node)
 - [Api Modules complete methods list](#api-modules-complete-methods-list)
@@ -88,6 +89,14 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
 <!-- tocstop -->
 
 <!-- markdown-toc end -->
+
+# Full documentation of all the methods of each API 
+
+- [Authentication Services](/src/alfresco-auth-rest-api)
+- [Content Services](/src/alfresco-core-rest-api)
+- [Process Services](/src/alfresco-activiti-rest-api)
+- [ContentCMN](/src/alfresco-private-rest-api)
+- [Content Search](/src/alfresco-search-rest-api)
 
 # Prerequisites 
 

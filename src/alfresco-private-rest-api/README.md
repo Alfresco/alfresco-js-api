@@ -1,7 +1,7 @@
-# Alfresco Core Rest Api
+# Alfresco CMN  Api
 
-AlfrescoCoreRestApi - JavaScript client for alfresco-private-rest-api
-Provides access to the private core features of Alfresco.
+AlfrescoPrivateRestApi - JavaScript client for alfresco-private-rest-api
+Provides access to the cmn features of Alfresco.
 
 This API uses the term **entity** to refer to an object in an Alfresco repository.
 An **entity** is of a specific **type**, and has a unique **id**.
