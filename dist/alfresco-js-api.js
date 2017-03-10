@@ -5,7 +5,7 @@ var AlfrescoApi = require('./src/alfrescoApi.js');
 
 module.exports = AlfrescoApi;
 
-},{"./src/alfrescoApi.js":301}],2:[function(require,module,exports){
+},{"./src/alfrescoApi.js":344}],2:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -21599,7 +21599,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],33:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],33:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -22022,7 +22022,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/CreateEndpointBasicAuthRepresentation":96,"../model/EndpointBasicAuthRepresentation":99,"../model/EndpointConfigurationRepresentation":100}],34:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/CreateEndpointBasicAuthRepresentation":96,"../model/EndpointBasicAuthRepresentation":99,"../model/EndpointConfigurationRepresentation":100}],34:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -22686,7 +22686,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/AbstractGroupRepresentation":78,"../model/AddGroupCapabilitiesRepresentation":81,"../model/GroupRepresentation":115,"../model/LightGroupRepresentation":119,"../model/ResultListDataRepresentation":144}],35:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/AbstractGroupRepresentation":78,"../model/AddGroupCapabilitiesRepresentation":81,"../model/GroupRepresentation":115,"../model/LightGroupRepresentation":119,"../model/ResultListDataRepresentation":144}],35:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -23013,7 +23013,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/CreateTenantRepresentation":98,"../model/ImageUploadRepresentation":116,"../model/LightTenantRepresentation":120,"../model/TenantEvent":154,"../model/TenantRepresentation":155}],36:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/CreateTenantRepresentation":98,"../model/ImageUploadRepresentation":116,"../model/LightTenantRepresentation":120,"../model/TenantEvent":154,"../model/TenantRepresentation":155}],36:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -23253,7 +23253,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/AbstractUserRepresentation":80,"../model/BulkUserUpdateRepresentation":89,"../model/ResultListDataRepresentation":144,"../model/UserRepresentation":160}],37:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/AbstractUserRepresentation":80,"../model/BulkUserUpdateRepresentation":89,"../model/ResultListDataRepresentation":144,"../model/UserRepresentation":160}],37:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -23633,7 +23633,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/ResultListDataRepresentation":144}],38:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/ResultListDataRepresentation":144}],38:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -23894,7 +23894,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/AppDefinitionPublishRepresentation":83,"../model/AppDefinitionRepresentation":84,"../model/AppDefinitionUpdateResultRepresentation":85,"../model/ResultListDataRepresentation":144,"../model/RuntimeAppDefinitionSaveRepresentation":145}],39:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/AppDefinitionPublishRepresentation":83,"../model/AppDefinitionRepresentation":84,"../model/AppDefinitionUpdateResultRepresentation":85,"../model/ResultListDataRepresentation":144,"../model/RuntimeAppDefinitionSaveRepresentation":145}],39:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -24092,7 +24092,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/AppDefinitionPublishRepresentation":83,"../model/AppDefinitionRepresentation":84,"../model/AppDefinitionUpdateResultRepresentation":85}],40:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/AppDefinitionPublishRepresentation":83,"../model/AppDefinitionRepresentation":84,"../model/AppDefinitionUpdateResultRepresentation":85}],40:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -24196,7 +24196,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/ResultListDataRepresentation":144,"../model/RuntimeAppDefinitionSaveRepresentation":145}],41:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/ResultListDataRepresentation":144,"../model/RuntimeAppDefinitionSaveRepresentation":145}],41:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -24401,7 +24401,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/CommentRepresentation":93,"../model/ResultListDataRepresentation":144}],42:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/CommentRepresentation":93,"../model/ResultListDataRepresentation":144}],42:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -24927,7 +24927,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/RelatedContentRepresentation":139,"../model/ResultListDataRepresentation":144}],43:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/RelatedContentRepresentation":139,"../model/ResultListDataRepresentation":144}],43:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -25011,7 +25011,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],44:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],44:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -25236,7 +25236,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/FormRepresentation":109,"../model/FormSaveRepresentation":110,"../model/ValidationErrorRepresentation":162}],45:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/FormRepresentation":109,"../model/FormSaveRepresentation":110,"../model/ValidationErrorRepresentation":162}],45:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -25352,7 +25352,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/ResultListDataRepresentation":144}],46:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/ResultListDataRepresentation":144}],46:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -25464,7 +25464,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/SyncLogEntryRepresentation":147}],47:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/SyncLogEntryRepresentation":147}],47:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -25535,7 +25535,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/ResultListDataRepresentation":144}],48:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/ResultListDataRepresentation":144}],48:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -25756,7 +25756,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/ResultListDataRepresentation":144}],49:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/ResultListDataRepresentation":144}],49:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -25950,7 +25950,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/ResultListDataRepresentation":144}],50:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/ResultListDataRepresentation":144}],50:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -26633,7 +26633,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/BoxUserAccountCredentialsRepresentation":88,"../model/ResultListDataRepresentation":144,"../model/UserAccountCredentialsRepresentation":156}],51:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/BoxUserAccountCredentialsRepresentation":88,"../model/ResultListDataRepresentation":144,"../model/UserAccountCredentialsRepresentation":156}],51:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -26918,7 +26918,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/BoxUserAccountCredentialsRepresentation":88,"../model/ResultListDataRepresentation":144,"../model/UserAccountCredentialsRepresentation":156}],52:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/BoxUserAccountCredentialsRepresentation":88,"../model/ResultListDataRepresentation":144,"../model/UserAccountCredentialsRepresentation":156}],52:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -27031,7 +27031,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/ResultListDataRepresentation":144}],53:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/ResultListDataRepresentation":144}],53:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -27149,7 +27149,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],54:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],54:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -27267,7 +27267,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/ObjectNode":127}],55:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/ObjectNode":127}],55:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -27787,7 +27787,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/ModelRepresentation":126,"../model/ObjectNode":127,"../model/ResultListDataRepresentation":144,"../model/ValidationErrorRepresentation":162}],56:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/ModelRepresentation":126,"../model/ObjectNode":127,"../model/ResultListDataRepresentation":144,"../model/ValidationErrorRepresentation":162}],56:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -27910,7 +27910,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/ModelRepresentation":126,"../model/ResultListDataRepresentation":144}],57:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/ModelRepresentation":126,"../model/ResultListDataRepresentation":144}],57:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -28319,7 +28319,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/CreateProcessInstanceRepresentation":97,"../model/FormDefinitionRepresentation":105,"../model/FormValueRepresentation":113,"../model/ProcessFilterRequestRepresentation":130,"../model/ProcessInstanceFilterRequestRepresentation":132,"../model/ProcessInstanceRepresentation":133,"../model/ResultListDataRepresentation":144}],58:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/CreateProcessInstanceRepresentation":97,"../model/FormDefinitionRepresentation":105,"../model/FormValueRepresentation":113,"../model/ProcessFilterRequestRepresentation":130,"../model/ProcessInstanceFilterRequestRepresentation":132,"../model/ProcessInstanceRepresentation":133,"../model/ResultListDataRepresentation":144}],58:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -28396,7 +28396,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/ResultListDataRepresentation":144}],59:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/ResultListDataRepresentation":144}],59:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -28533,7 +28533,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/FormDefinitionRepresentation":105,"../model/FormValueRepresentation":113}],60:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/FormDefinitionRepresentation":105,"../model/FormValueRepresentation":113}],60:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -28779,7 +28779,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/RestVariable":143}],61:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/RestVariable":143}],61:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -29004,7 +29004,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/CommentRepresentation":93,"../model/FormDefinitionRepresentation":105,"../model/ProcessInstanceRepresentation":133,"../model/ResultListDataRepresentation":144}],62:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/CommentRepresentation":93,"../model/FormDefinitionRepresentation":105,"../model/ProcessInstanceRepresentation":133,"../model/ResultListDataRepresentation":144}],62:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -29113,7 +29113,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/CreateProcessInstanceRepresentation":97,"../model/ProcessInstanceRepresentation":133,"../model/ResultListDataRepresentation":144}],63:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/CreateProcessInstanceRepresentation":97,"../model/ProcessInstanceRepresentation":133,"../model/ResultListDataRepresentation":144}],63:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -29220,7 +29220,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/ObjectNode":127,"../model/ProcessInstanceFilterRequestRepresentation":132,"../model/ResultListDataRepresentation":144}],64:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/ObjectNode":127,"../model/ProcessInstanceFilterRequestRepresentation":132,"../model/ResultListDataRepresentation":144}],64:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -29295,7 +29295,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/ProcessScopeRepresentation":136,"../model/ProcessScopesRequestRepresentation":137}],65:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/ProcessScopeRepresentation":136,"../model/ProcessScopesRequestRepresentation":137}],65:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -29499,7 +29499,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/ChangePasswordRepresentation":90,"../model/File":104,"../model/ImageUploadRepresentation":116,"../model/UserRepresentation":160}],66:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/ChangePasswordRepresentation":90,"../model/File":104,"../model/ImageUploadRepresentation":116,"../model/UserRepresentation":160}],66:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -29800,7 +29800,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/ParameterValueRepresentation":129,"../model/ReportCharts":140,"../model/ReportParametersDefinition":141}],67:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/ParameterValueRepresentation":129,"../model/ReportCharts":140,"../model/ReportParametersDefinition":141}],67:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -29895,7 +29895,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],68:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],68:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -29965,7 +29965,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/SystemPropertiesRepresentation":148}],69:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/SystemPropertiesRepresentation":148}],69:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -30307,7 +30307,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/ObjectNode":127,"../model/TaskRepresentation":152}],70:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/ObjectNode":127,"../model/TaskRepresentation":152}],70:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -31377,7 +31377,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/ChecklistOrderRepresentation":92,"../model/CommentRepresentation":93,"../model/CompleteFormRepresentation":94,"../model/FormDefinitionRepresentation":105,"../model/FormValueRepresentation":113,"../model/ObjectNode":127,"../model/RelatedContentRepresentation":139,"../model/ResultListDataRepresentation":144,"../model/SaveFormRepresentation":146,"../model/TaskFilterRequestRepresentation":150,"../model/TaskRepresentation":152,"../model/TaskUpdateRepresentation":153}],71:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/ChecklistOrderRepresentation":92,"../model/CommentRepresentation":93,"../model/CompleteFormRepresentation":94,"../model/FormDefinitionRepresentation":105,"../model/FormValueRepresentation":113,"../model/ObjectNode":127,"../model/RelatedContentRepresentation":139,"../model/ResultListDataRepresentation":144,"../model/SaveFormRepresentation":146,"../model/TaskFilterRequestRepresentation":150,"../model/TaskRepresentation":152,"../model/TaskUpdateRepresentation":153}],71:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -31534,7 +31534,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/ChecklistOrderRepresentation":92,"../model/ResultListDataRepresentation":144,"../model/TaskRepresentation":152}],72:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/ChecklistOrderRepresentation":92,"../model/ResultListDataRepresentation":144,"../model/TaskRepresentation":152}],72:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -31816,7 +31816,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/CompleteFormRepresentation":94,"../model/FormDefinitionRepresentation":105,"../model/FormValueRepresentation":113,"../model/ProcessInstanceVariableRepresentation":134,"../model/SaveFormRepresentation":146}],73:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/CompleteFormRepresentation":94,"../model/FormDefinitionRepresentation":105,"../model/FormValueRepresentation":113,"../model/ProcessInstanceVariableRepresentation":134,"../model/SaveFormRepresentation":146}],73:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -31993,7 +31993,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/ArrayNode":87}],74:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/ArrayNode":87}],74:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -32263,7 +32263,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/ResetPasswordRepresentation":142,"../model/ResultListDataRepresentation":144,"../model/UserActionRepresentation":157,"../model/UserRepresentation":160}],75:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/ResetPasswordRepresentation":142,"../model/ResultListDataRepresentation":144,"../model/UserActionRepresentation":157,"../model/UserRepresentation":160}],75:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -32720,7 +32720,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/ResultListDataRepresentation":144,"../model/UserFilterOrderRepresentation":158,"../model/UserProcessInstanceFilterRepresentation":159,"../model/UserTaskFilterRepresentation":161}],76:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/ResultListDataRepresentation":144,"../model/UserFilterOrderRepresentation":158,"../model/UserProcessInstanceFilterRepresentation":159,"../model/UserTaskFilterRepresentation":161}],76:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -32810,7 +32810,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/ResultListDataRepresentation":144}],77:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/ResultListDataRepresentation":144}],77:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -33507,7 +33507,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../alfrescoApiClient":302,"./api/AboutApi":32,"./api/AdminEndpointsApi":33,"./api/AdminGroupsApi":34,"./api/AdminTenantsApi":35,"./api/AdminUsersApi":36,"./api/AlfrescoApi":37,"./api/AppsApi":38,"./api/AppsDefinitionApi":39,"./api/AppsRuntimeApi":40,"./api/CommentsApi":41,"./api/ContentApi":42,"./api/ContentRenditionApi":43,"./api/EditorApi":44,"./api/GroupsApi":45,"./api/IDMSyncApi":46,"./api/IntegrationAccountApi":47,"./api/IntegrationAlfrescoCloudApi":48,"./api/IntegrationAlfrescoOnPremiseApi":49,"./api/IntegrationApi":50,"./api/IntegrationBoxApi":51,"./api/IntegrationDriveApi":52,"./api/ModelBpmnApi":53,"./api/ModelJsonBpmnApi":54,"./api/ModelsApi":55,"./api/ModelsHistoryApi":56,"./api/ProcessApi":57,"./api/ProcessDefinitionsApi":58,"./api/ProcessDefinitionsFormApi":59,"./api/ProcessInstanceVariablesApi":60,"./api/ProcessInstancesApi":61,"./api/ProcessInstancesInformationApi":62,"./api/ProcessInstancesListingApi":63,"./api/ProcessScopeApi":64,"./api/ProfileApi":65,"./api/ReportApi":66,"./api/ScriptFileApi":67,"./api/SystemPropertiesApi":68,"./api/TaskActionsApi":69,"./api/TaskApi":70,"./api/TaskCheckListApi":71,"./api/TaskFormsApi":72,"./api/TemporaryApi":73,"./api/UserApi":74,"./api/UserFiltersApi":75,"./api/UsersWorkflowApi":76,"./model/AbstractGroupRepresentation":78,"./model/AbstractRepresentation":79,"./model/AbstractUserRepresentation":80,"./model/AddGroupCapabilitiesRepresentation":81,"./model/AppDefinition":82,"./model/AppDefinitionPublishRepresentation":83,"./model/AppDefinitionRepresentation":84,"./model/AppDefinitionUpdateResultRepresentation":85,"./model/AppModelDefinition":86,"./model/ArrayNode":87,"./model/BoxUserAccountCredentialsRepresentation":88,"./model/BulkUserUpdateRepresentation":89,"./model/ChangePasswordRepresentation":90,"./model/ChecklistOrderRepresentation":92,"./model/CommentRepresentation":93,"./model/CompleteFormRepresentation":94,"./model/ConditionRepresentation":95,"./model/CreateEndpointBasicAuthRepresentation":96,"./model/CreateProcessInstanceRepresentation":97,"./model/CreateTenantRepresentation":98,"./model/EndpointBasicAuthRepresentation":99,"./model/EndpointConfigurationRepresentation":100,"./model/EndpointRequestHeaderRepresentation":101,"./model/EntityAttributeScopeRepresentation":102,"./model/EntityVariableScopeRepresentation":103,"./model/File":104,"./model/FormDefinitionRepresentation":105,"./model/FormFieldRepresentation":106,"./model/FormJavascriptEventRepresentation":107,"./model/FormOutcomeRepresentation":108,"./model/FormRepresentation":109,"./model/FormSaveRepresentation":110,"./model/FormScopeRepresentation":111,"./model/FormTabRepresentation":112,"./model/FormValueRepresentation":113,"./model/GroupCapabilityRepresentation":114,"./model/GroupRepresentation":115,"./model/ImageUploadRepresentation":116,"./model/LayoutRepresentation":117,"./model/LightAppRepresentation":118,"./model/LightGroupRepresentation":119,"./model/LightTenantRepresentation":120,"./model/LightUserRepresentation":121,"./model/MaplongListstring":122,"./model/MapstringListEntityVariableScopeRepresentation":123,"./model/MapstringListVariableScopeRepresentation":124,"./model/Mapstringstring":125,"./model/ModelRepresentation":126,"./model/ObjectNode":127,"./model/OptionRepresentation":128,"./model/ProcessFilterRequestRepresentation":130,"./model/ProcessInstanceFilterRepresentation":131,"./model/ProcessInstanceFilterRequestRepresentation":132,"./model/ProcessInstanceRepresentation":133,"./model/ProcessInstanceVariableRepresentation":134,"./model/ProcessScopeIdentifierRepresentation":135,"./model/ProcessScopeRepresentation":136,"./model/ProcessScopesRequestRepresentation":137,"./model/PublishIdentityInfoRepresentation":138,"./model/RelatedContentRepresentation":139,"./model/ResetPasswordRepresentation":142,"./model/RestVariable":143,"./model/ResultListDataRepresentation":144,"./model/RuntimeAppDefinitionSaveRepresentation":145,"./model/SaveFormRepresentation":146,"./model/SyncLogEntryRepresentation":147,"./model/SystemPropertiesRepresentation":148,"./model/TaskFilterRepresentation":149,"./model/TaskFilterRequestRepresentation":150,"./model/TaskQueryRequestRepresentation":151,"./model/TaskRepresentation":152,"./model/TaskUpdateRepresentation":153,"./model/TenantEvent":154,"./model/TenantRepresentation":155,"./model/UserAccountCredentialsRepresentation":156,"./model/UserActionRepresentation":157,"./model/UserFilterOrderRepresentation":158,"./model/UserProcessInstanceFilterRepresentation":159,"./model/UserRepresentation":160,"./model/UserTaskFilterRepresentation":161,"./model/ValidationErrorRepresentation":162,"./model/VariableScopeRepresentation":163}],78:[function(require,module,exports){
+},{"../../alfrescoApiClient":345,"./api/AboutApi":32,"./api/AdminEndpointsApi":33,"./api/AdminGroupsApi":34,"./api/AdminTenantsApi":35,"./api/AdminUsersApi":36,"./api/AlfrescoApi":37,"./api/AppsApi":38,"./api/AppsDefinitionApi":39,"./api/AppsRuntimeApi":40,"./api/CommentsApi":41,"./api/ContentApi":42,"./api/ContentRenditionApi":43,"./api/EditorApi":44,"./api/GroupsApi":45,"./api/IDMSyncApi":46,"./api/IntegrationAccountApi":47,"./api/IntegrationAlfrescoCloudApi":48,"./api/IntegrationAlfrescoOnPremiseApi":49,"./api/IntegrationApi":50,"./api/IntegrationBoxApi":51,"./api/IntegrationDriveApi":52,"./api/ModelBpmnApi":53,"./api/ModelJsonBpmnApi":54,"./api/ModelsApi":55,"./api/ModelsHistoryApi":56,"./api/ProcessApi":57,"./api/ProcessDefinitionsApi":58,"./api/ProcessDefinitionsFormApi":59,"./api/ProcessInstanceVariablesApi":60,"./api/ProcessInstancesApi":61,"./api/ProcessInstancesInformationApi":62,"./api/ProcessInstancesListingApi":63,"./api/ProcessScopeApi":64,"./api/ProfileApi":65,"./api/ReportApi":66,"./api/ScriptFileApi":67,"./api/SystemPropertiesApi":68,"./api/TaskActionsApi":69,"./api/TaskApi":70,"./api/TaskCheckListApi":71,"./api/TaskFormsApi":72,"./api/TemporaryApi":73,"./api/UserApi":74,"./api/UserFiltersApi":75,"./api/UsersWorkflowApi":76,"./model/AbstractGroupRepresentation":78,"./model/AbstractRepresentation":79,"./model/AbstractUserRepresentation":80,"./model/AddGroupCapabilitiesRepresentation":81,"./model/AppDefinition":82,"./model/AppDefinitionPublishRepresentation":83,"./model/AppDefinitionRepresentation":84,"./model/AppDefinitionUpdateResultRepresentation":85,"./model/AppModelDefinition":86,"./model/ArrayNode":87,"./model/BoxUserAccountCredentialsRepresentation":88,"./model/BulkUserUpdateRepresentation":89,"./model/ChangePasswordRepresentation":90,"./model/ChecklistOrderRepresentation":92,"./model/CommentRepresentation":93,"./model/CompleteFormRepresentation":94,"./model/ConditionRepresentation":95,"./model/CreateEndpointBasicAuthRepresentation":96,"./model/CreateProcessInstanceRepresentation":97,"./model/CreateTenantRepresentation":98,"./model/EndpointBasicAuthRepresentation":99,"./model/EndpointConfigurationRepresentation":100,"./model/EndpointRequestHeaderRepresentation":101,"./model/EntityAttributeScopeRepresentation":102,"./model/EntityVariableScopeRepresentation":103,"./model/File":104,"./model/FormDefinitionRepresentation":105,"./model/FormFieldRepresentation":106,"./model/FormJavascriptEventRepresentation":107,"./model/FormOutcomeRepresentation":108,"./model/FormRepresentation":109,"./model/FormSaveRepresentation":110,"./model/FormScopeRepresentation":111,"./model/FormTabRepresentation":112,"./model/FormValueRepresentation":113,"./model/GroupCapabilityRepresentation":114,"./model/GroupRepresentation":115,"./model/ImageUploadRepresentation":116,"./model/LayoutRepresentation":117,"./model/LightAppRepresentation":118,"./model/LightGroupRepresentation":119,"./model/LightTenantRepresentation":120,"./model/LightUserRepresentation":121,"./model/MaplongListstring":122,"./model/MapstringListEntityVariableScopeRepresentation":123,"./model/MapstringListVariableScopeRepresentation":124,"./model/Mapstringstring":125,"./model/ModelRepresentation":126,"./model/ObjectNode":127,"./model/OptionRepresentation":128,"./model/ProcessFilterRequestRepresentation":130,"./model/ProcessInstanceFilterRepresentation":131,"./model/ProcessInstanceFilterRequestRepresentation":132,"./model/ProcessInstanceRepresentation":133,"./model/ProcessInstanceVariableRepresentation":134,"./model/ProcessScopeIdentifierRepresentation":135,"./model/ProcessScopeRepresentation":136,"./model/ProcessScopesRequestRepresentation":137,"./model/PublishIdentityInfoRepresentation":138,"./model/RelatedContentRepresentation":139,"./model/ResetPasswordRepresentation":142,"./model/RestVariable":143,"./model/ResultListDataRepresentation":144,"./model/RuntimeAppDefinitionSaveRepresentation":145,"./model/SaveFormRepresentation":146,"./model/SyncLogEntryRepresentation":147,"./model/SystemPropertiesRepresentation":148,"./model/TaskFilterRepresentation":149,"./model/TaskFilterRequestRepresentation":150,"./model/TaskQueryRequestRepresentation":151,"./model/TaskRepresentation":152,"./model/TaskUpdateRepresentation":153,"./model/TenantEvent":154,"./model/TenantRepresentation":155,"./model/UserAccountCredentialsRepresentation":156,"./model/UserActionRepresentation":157,"./model/UserFilterOrderRepresentation":158,"./model/UserProcessInstanceFilterRepresentation":159,"./model/UserRepresentation":160,"./model/UserTaskFilterRepresentation":161,"./model/ValidationErrorRepresentation":162,"./model/VariableScopeRepresentation":163}],78:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -33592,7 +33592,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],79:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],79:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -33647,7 +33647,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],80:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],80:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -33746,7 +33746,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],81:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],81:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -33810,7 +33810,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],82:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],82:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -33895,7 +33895,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./AppModelDefinition":86,"./PublishIdentityInfoRepresentation":138}],83:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./AppModelDefinition":86,"./PublishIdentityInfoRepresentation":138}],83:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -33966,7 +33966,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],84:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],84:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34086,7 +34086,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],85:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],85:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34192,7 +34192,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./AppDefinitionRepresentation":84}],86:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./AppDefinitionRepresentation":84}],86:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34326,7 +34326,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],87:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],87:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34582,7 +34582,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],88:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],88:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34660,7 +34660,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],89:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],89:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34759,7 +34759,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],90:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],90:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34830,7 +34830,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],91:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],91:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34899,7 +34899,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],92:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],92:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -34963,7 +34963,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],93:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],93:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35048,7 +35048,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./LightUserRepresentation":121}],94:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./LightUserRepresentation":121}],94:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35119,7 +35119,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],95:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],95:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35232,7 +35232,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],96:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],96:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35317,7 +35317,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],97:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],97:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35402,7 +35402,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],98:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],98:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35487,7 +35487,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],99:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],99:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35586,7 +35586,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],100:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],100:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35713,7 +35713,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./EndpointRequestHeaderRepresentation":101}],101:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./EndpointRequestHeaderRepresentation":101}],101:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35784,7 +35784,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],102:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],102:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35855,7 +35855,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],103:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],103:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -35940,7 +35940,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./EntityAttributeScopeRepresentation":102}],104:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./EntityAttributeScopeRepresentation":102}],104:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36102,7 +36102,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],105:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],105:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36292,7 +36292,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./FormFieldRepresentation":106,"./FormJavascriptEventRepresentation":107,"./FormOutcomeRepresentation":108,"./FormTabRepresentation":112}],106:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./FormFieldRepresentation":106,"./FormJavascriptEventRepresentation":107,"./FormOutcomeRepresentation":108,"./FormTabRepresentation":112}],106:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36559,7 +36559,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./ConditionRepresentation":95,"./LayoutRepresentation":117,"./OptionRepresentation":128}],107:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./ConditionRepresentation":95,"./LayoutRepresentation":117,"./OptionRepresentation":128}],107:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36630,7 +36630,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],108:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],108:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36701,7 +36701,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],109:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],109:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36828,7 +36828,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./FormDefinitionRepresentation":105}],110:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./FormDefinitionRepresentation":105}],110:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -36927,7 +36927,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./FormRepresentation":109,"./ProcessScopeIdentifierRepresentation":135}],111:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./FormRepresentation":109,"./ProcessScopeIdentifierRepresentation":135}],111:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37026,7 +37026,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./FormFieldRepresentation":106,"./FormOutcomeRepresentation":108}],112:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./FormFieldRepresentation":106,"./FormOutcomeRepresentation":108}],112:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37104,7 +37104,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./ConditionRepresentation":95}],113:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./ConditionRepresentation":95}],113:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37175,7 +37175,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],114:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],114:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37246,7 +37246,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],115:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],115:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37387,7 +37387,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./GroupCapabilityRepresentation":114,"./GroupRepresentation":115,"./UserRepresentation":160}],116:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./GroupCapabilityRepresentation":114,"./GroupRepresentation":115,"./UserRepresentation":160}],116:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37472,7 +37472,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],117:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],117:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37550,7 +37550,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],118:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],118:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37642,7 +37642,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],119:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],119:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37734,7 +37734,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./LightGroupRepresentation":119}],120:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./LightGroupRepresentation":119}],120:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37805,7 +37805,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],121:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],121:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37904,7 +37904,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],122:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],122:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -37963,7 +37963,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],123:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],123:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38022,7 +38022,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],124:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],124:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38081,7 +38081,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],125:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],125:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38140,7 +38140,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],126:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],126:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38309,7 +38309,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],127:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],127:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38364,7 +38364,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],128:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],128:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38435,7 +38435,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],129:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],129:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38520,7 +38520,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],130:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],130:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38625,7 +38625,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],131:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],131:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38724,7 +38724,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],132:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],132:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38816,7 +38816,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./ProcessInstanceFilterRepresentation":131}],133:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./ProcessInstanceFilterRepresentation":131}],133:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38992,7 +38992,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./LightUserRepresentation":121,"./RestVariable":143}],134:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./LightUserRepresentation":121,"./RestVariable":143}],134:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39070,7 +39070,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],135:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],135:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39141,7 +39141,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],136:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],136:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39296,7 +39296,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./FormScopeRepresentation":111}],137:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./FormScopeRepresentation":111}],137:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39367,7 +39367,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./ProcessScopeIdentifierRepresentation":135}],138:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./ProcessScopeIdentifierRepresentation":135}],138:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39445,7 +39445,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./LightGroupRepresentation":119,"./LightUserRepresentation":121}],139:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./LightGroupRepresentation":119,"./LightUserRepresentation":121}],139:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39593,7 +39593,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./LightUserRepresentation":121}],140:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./LightUserRepresentation":121}],140:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39655,7 +39655,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./Chart":91}],141:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./Chart":91}],141:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39740,7 +39740,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],142:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],142:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39804,7 +39804,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],143:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],143:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39896,7 +39896,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],144:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],144:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -39981,7 +39981,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./AbstractRepresentation":79}],145:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./AbstractRepresentation":79}],145:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40045,7 +40045,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./AppDefinitionRepresentation":84}],146:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./AppDefinitionRepresentation":84}],146:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40109,7 +40109,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],147:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],147:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40187,7 +40187,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],148:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],148:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40251,7 +40251,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],149:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],149:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40371,7 +40371,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],150:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],150:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40472,7 +40472,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./TaskFilterRepresentation":149}],151:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./TaskFilterRepresentation":149}],151:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40571,7 +40571,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],152:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],152:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40824,7 +40824,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./LightUserRepresentation":121}],153:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./LightUserRepresentation":121}],153:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -40923,7 +40923,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],154:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],154:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -41029,7 +41029,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],155:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],155:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -41142,7 +41142,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],156:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],156:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -41213,7 +41213,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],157:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],157:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -41291,7 +41291,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],158:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],158:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -41362,7 +41362,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],159:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],159:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -41468,7 +41468,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./ProcessInstanceFilterRepresentation":131}],160:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./ProcessInstanceFilterRepresentation":131}],160:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -41665,7 +41665,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./GroupRepresentation":115,"./LightAppRepresentation":118}],161:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./GroupRepresentation":115,"./LightAppRepresentation":118}],161:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -41771,7 +41771,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./TaskFilterRepresentation":149}],162:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./TaskFilterRepresentation":149}],162:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -41877,7 +41877,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],163:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],163:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -41983,7 +41983,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],164:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],164:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -42094,7 +42094,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"../model/Error":166,"../model/LoginRequest":168,"../model/LoginTicketEntry":169,"../model/ValidateTicketEntry":171}],165:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"../model/Error":166,"../model/LoginRequest":168,"../model/LoginTicketEntry":169,"../model/ValidateTicketEntry":171}],165:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -42193,7 +42193,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../alfrescoApiClient":302,"./api/AuthenticationApi":164,"./model/Error":166,"./model/ErrorError":167,"./model/LoginRequest":168,"./model/LoginTicketEntry":169,"./model/LoginTicketEntryEntry":170,"./model/ValidateTicketEntry":171,"./model/ValidateTicketEntryEntry":172}],166:[function(require,module,exports){
+},{"../../alfrescoApiClient":345,"./api/AuthenticationApi":164,"./model/Error":166,"./model/ErrorError":167,"./model/LoginRequest":168,"./model/LoginTicketEntry":169,"./model/LoginTicketEntryEntry":170,"./model/ValidateTicketEntry":171,"./model/ValidateTicketEntryEntry":172}],166:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -42255,7 +42255,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./ErrorError":167}],167:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./ErrorError":167}],167:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -42368,7 +42368,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],168:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],168:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -42438,7 +42438,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],169:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],169:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -42500,7 +42500,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./LoginTicketEntryEntry":170}],170:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./LoginTicketEntryEntry":170}],170:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -42570,7 +42570,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],171:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],171:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -42632,7 +42632,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302,"./ValidateTicketEntryEntry":172}],172:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345,"./ValidateTicketEntryEntry":172}],172:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -42694,7 +42694,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],173:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],173:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -58819,7 +58819,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return exports;
 });
 
-},{"../../../alfrescoApiClient":302}],300:[function(require,module,exports){
+},{"../../../alfrescoApiClient":345}],300:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -58851,13 +58851,4492 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return exports;
 });
 
-},{"../../alfrescoApiClient":302,"./api/CustomModelApi":299}],301:[function(require,module,exports){
+},{"../../alfrescoApiClient":345,"./api/CustomModelApi":299}],301:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services.
+ *
+ * OpenAPI spec version: 1
+ *
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient', '../model/Error', '../model/QueryBody', '../model/ResultSetPaging'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/Error'), require('../model/QueryBody'), require('../model/ResultSetPaging'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.SearchApi = factory(root.AlfrescoContentServicesRestApi.ApiClient, root.AlfrescoContentServicesRestApi.Error, root.AlfrescoContentServicesRestApi.QueryBody, root.AlfrescoContentServicesRestApi.ResultSetPaging);
+  }
+})(undefined, function (ApiClient, Error, QueryBody, ResultSetPaging) {
+  'use strict';
+
+  /**
+   * Search service.
+   * @module api/SearchApi
+   * @version 1
+   */
+
+  /**
+   * Constructs a new SearchApi.
+   * @alias module:api/SearchApi
+   * @class
+   * @param {module:ApiClient} apiClient Optional API client implementation to use,
+   * default to {@link module:ApiClient#instance} if unspecified.
+   */
+
+  var exports = function exports(apiClient) {
+    this.apiClient = apiClient || ApiClient.instance;
+
+    /**
+     * Callback function to receive the result of the search operation.
+     * @callback module:api/SearchApi~searchCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/ResultSetPaging} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Searches Alfresco
+     * @param {module:model/QueryBody} queryBody Generic query API
+     * @param {module:api/SearchApi~searchCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/ResultSetPaging}
+     */
+    this.search = function (queryBody) {
+      var postBody = queryBody;
+
+      // verify the required parameter 'queryBody' is set
+      if (queryBody == undefined || queryBody == null) {
+        throw new Error("Missing the required parameter 'queryBody' when calling search");
+      }
+
+      var pathParams = {};
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = ResultSetPaging;
+
+      return this.apiClient.callApi('/search', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType);
+    };
+  };
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345,"../model/Error":304,"../model/QueryBody":310,"../model/ResultSetPaging":338}],302:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+(function (factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../alfrescoApiClient', './api/SearchApi', './model/ContentInfo', './model/Error', './model/ErrorError', './model/Node', './model/Pagination', './model/PathElement', './model/PathInfo', './model/QueryBody', './model/RequestDefaults', './model/RequestFacetFields', './model/RequestFacetFieldsFacets', './model/RequestFacetQueries', './model/RequestFacetQueriesInner', './model/RequestFields', './model/RequestFilterQueries', './model/RequestFilterQueriesInner', './model/RequestHighlight', './model/RequestHighlightFields', './model/RequestInclude', './model/RequestLimits', './model/RequestPagination', './model/RequestQuery', './model/RequestScope', './model/RequestSortDefinition', './model/RequestSortDefinitionInner', './model/RequestSpellcheck', './model/RequestTemplates', './model/RequestTemplatesInner', './model/ResponseConsistency', './model/ResultNode', './model/ResultSetContext', './model/ResultSetContextBuckets', './model/ResultSetContextFacetFields', './model/ResultSetContextFacetQueries', './model/ResultSetContextSpellcheck', './model/ResultSetPaging', './model/ResultSetPagingList', './model/ResultSetRowEntry', './model/SearchEntry', './model/SearchEntryHighlight', './model/UserInfo'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../alfrescoApiClient'), require('./api/SearchApi'), require('./model/ContentInfo'), require('./model/Error'), require('./model/ErrorError'), require('./model/Node'), require('./model/Pagination'), require('./model/PathElement'), require('./model/PathInfo'), require('./model/QueryBody'), require('./model/RequestDefaults'), require('./model/RequestFacetFields'), require('./model/RequestFacetFieldsFacets'), require('./model/RequestFacetQueries'), require('./model/RequestFacetQueriesInner'), require('./model/RequestFields'), require('./model/RequestFilterQueries'), require('./model/RequestFilterQueriesInner'), require('./model/RequestHighlight'), require('./model/RequestHighlightFields'), require('./model/RequestInclude'), require('./model/RequestLimits'), require('./model/RequestPagination'), require('./model/RequestQuery'), require('./model/RequestScope'), require('./model/RequestSortDefinition'), require('./model/RequestSortDefinitionInner'), require('./model/RequestSpellcheck'), require('./model/RequestTemplates'), require('./model/RequestTemplatesInner'), require('./model/ResponseConsistency'), require('./model/ResultNode'), require('./model/ResultSetContext'), require('./model/ResultSetContextBuckets'), require('./model/ResultSetContextFacetFields'), require('./model/ResultSetContextFacetQueries'), require('./model/ResultSetContextSpellcheck'), require('./model/ResultSetPaging'), require('./model/ResultSetPagingList'), require('./model/ResultSetRowEntry'), require('./model/SearchEntry'), require('./model/SearchEntryHighlight'), require('./model/UserInfo'));
+  }
+})(function (ApiClient, SearchApi, ContentInfo, Error, ErrorError, Node, Pagination, PathElement, PathInfo, QueryBody, RequestDefaults, RequestFacetFields, RequestFacetFieldsFacets, RequestFacetQueries, RequestFacetQueriesInner, RequestFields, RequestFilterQueries, RequestFilterQueriesInner, RequestHighlight, RequestHighlightFields, RequestInclude, RequestLimits, RequestPagination, RequestQuery, RequestScope, RequestSortDefinition, RequestSortDefinitionInner, RequestSpellcheck, RequestTemplates, RequestTemplatesInner, ResponseConsistency, ResultNode, ResultSetContext, ResultSetContextBuckets, ResultSetContextFacetFields, ResultSetContextFacetQueries, ResultSetContextSpellcheck, ResultSetPaging, ResultSetPagingList, ResultSetRowEntry, SearchEntry, SearchEntryHighlight, UserInfo) {
+  'use strict';
+
+  /**
+   * Search_APIProvides_access_to_the_search_features_of_Alfresco_Content_Services_.<br>
+   * The <code>index</code> module provides access to constructors for all the classes which comprise the public API.
+   * <p>
+   * An AMD (recommended!) or CommonJS application will generally do something equivalent to the following:
+   * <pre>
+   * var AlfrescoContentServicesRestApi = require('index'); // See note below*.
+   * var xxxSvc = new AlfrescoContentServicesRestApi.XxxApi(); // Allocate the API class we're going to use.
+   * var yyyModel = new AlfrescoContentServicesRestApi.Yyy(); // Construct a model instance.
+   * yyyModel.someProperty = 'someValue';
+   * ...
+   * var zzz = xxxSvc.doSomething(yyyModel); // Invoke the service.
+   * ...
+   * </pre>
+   * <em>*NOTE: For a top-level AMD script, use require(['index'], function(){...})
+   * and put the application logic within the callback function.</em>
+   * </p>
+   * <p>
+   * A non-AMD browser application (discouraged) might do something like this:
+   * <pre>
+   * var xxxSvc = new AlfrescoContentServicesRestApi.XxxApi(); // Allocate the API class we're going to use.
+   * var yyy = new AlfrescoContentServicesRestApi.Yyy(); // Construct a model instance.
+   * yyyModel.someProperty = 'someValue';
+   * ...
+   * var zzz = xxxSvc.doSomething(yyyModel); // Invoke the service.
+   * ...
+   * </pre>
+   * </p>
+   * @module index
+   * @version 1
+   */
+
+  var exports = {
+    /**
+     * The ApiClient constructor.
+     * @property {module:ApiClient}
+     */
+    ApiClient: ApiClient,
+    /**
+     * The ContentInfo model constructor.
+     * @property {module:model/ContentInfo}
+     */
+    ContentInfo: ContentInfo,
+    /**
+     * The Error model constructor.
+     * @property {module:model/Error}
+     */
+    Error: Error,
+    /**
+     * The ErrorError model constructor.
+     * @property {module:model/ErrorError}
+     */
+    ErrorError: ErrorError,
+    /**
+     * The Node model constructor.
+     * @property {module:model/Node}
+     */
+    Node: Node,
+    /**
+     * The Pagination model constructor.
+     * @property {module:model/Pagination}
+     */
+    Pagination: Pagination,
+    /**
+     * The PathElement model constructor.
+     * @property {module:model/PathElement}
+     */
+    PathElement: PathElement,
+    /**
+     * The PathInfo model constructor.
+     * @property {module:model/PathInfo}
+     */
+    PathInfo: PathInfo,
+    /**
+     * The QueryBody model constructor.
+     * @property {module:model/QueryBody}
+     */
+    QueryBody: QueryBody,
+    /**
+     * The RequestDefaults model constructor.
+     * @property {module:model/RequestDefaults}
+     */
+    RequestDefaults: RequestDefaults,
+    /**
+     * The RequestFacetFields model constructor.
+     * @property {module:model/RequestFacetFields}
+     */
+    RequestFacetFields: RequestFacetFields,
+    /**
+     * The RequestFacetFieldsFacets model constructor.
+     * @property {module:model/RequestFacetFieldsFacets}
+     */
+    RequestFacetFieldsFacets: RequestFacetFieldsFacets,
+    /**
+     * The RequestFacetQueries model constructor.
+     * @property {module:model/RequestFacetQueries}
+     */
+    RequestFacetQueries: RequestFacetQueries,
+    /**
+     * The RequestFacetQueriesInner model constructor.
+     * @property {module:model/RequestFacetQueriesInner}
+     */
+    RequestFacetQueriesInner: RequestFacetQueriesInner,
+    /**
+     * The RequestFields model constructor.
+     * @property {module:model/RequestFields}
+     */
+    RequestFields: RequestFields,
+    /**
+     * The RequestFilterQueries model constructor.
+     * @property {module:model/RequestFilterQueries}
+     */
+    RequestFilterQueries: RequestFilterQueries,
+    /**
+     * The RequestFilterQueriesInner model constructor.
+     * @property {module:model/RequestFilterQueriesInner}
+     */
+    RequestFilterQueriesInner: RequestFilterQueriesInner,
+    /**
+     * The RequestHighlight model constructor.
+     * @property {module:model/RequestHighlight}
+     */
+    RequestHighlight: RequestHighlight,
+    /**
+     * The RequestHighlightFields model constructor.
+     * @property {module:model/RequestHighlightFields}
+     */
+    RequestHighlightFields: RequestHighlightFields,
+    /**
+     * The RequestInclude model constructor.
+     * @property {module:model/RequestInclude}
+     */
+    RequestInclude: RequestInclude,
+    /**
+     * The RequestLimits model constructor.
+     * @property {module:model/RequestLimits}
+     */
+    RequestLimits: RequestLimits,
+    /**
+     * The RequestPagination model constructor.
+     * @property {module:model/RequestPagination}
+     */
+    RequestPagination: RequestPagination,
+    /**
+     * The RequestQuery model constructor.
+     * @property {module:model/RequestQuery}
+     */
+    RequestQuery: RequestQuery,
+    /**
+     * The RequestScope model constructor.
+     * @property {module:model/RequestScope}
+     */
+    RequestScope: RequestScope,
+    /**
+     * The RequestSortDefinition model constructor.
+     * @property {module:model/RequestSortDefinition}
+     */
+    RequestSortDefinition: RequestSortDefinition,
+    /**
+     * The RequestSortDefinitionInner model constructor.
+     * @property {module:model/RequestSortDefinitionInner}
+     */
+    RequestSortDefinitionInner: RequestSortDefinitionInner,
+    /**
+     * The RequestSpellcheck model constructor.
+     * @property {module:model/RequestSpellcheck}
+     */
+    RequestSpellcheck: RequestSpellcheck,
+    /**
+     * The RequestTemplates model constructor.
+     * @property {module:model/RequestTemplates}
+     */
+    RequestTemplates: RequestTemplates,
+    /**
+     * The RequestTemplatesInner model constructor.
+     * @property {module:model/RequestTemplatesInner}
+     */
+    RequestTemplatesInner: RequestTemplatesInner,
+    /**
+     * The ResponseConsistency model constructor.
+     * @property {module:model/ResponseConsistency}
+     */
+    ResponseConsistency: ResponseConsistency,
+    /**
+     * The ResultNode model constructor.
+     * @property {module:model/ResultNode}
+     */
+    ResultNode: ResultNode,
+    /**
+     * The ResultSetContext model constructor.
+     * @property {module:model/ResultSetContext}
+     */
+    ResultSetContext: ResultSetContext,
+    /**
+     * The ResultSetContextBuckets model constructor.
+     * @property {module:model/ResultSetContextBuckets}
+     */
+    ResultSetContextBuckets: ResultSetContextBuckets,
+    /**
+     * The ResultSetContextFacetFields model constructor.
+     * @property {module:model/ResultSetContextFacetFields}
+     */
+    ResultSetContextFacetFields: ResultSetContextFacetFields,
+    /**
+     * The ResultSetContextFacetQueries model constructor.
+     * @property {module:model/ResultSetContextFacetQueries}
+     */
+    ResultSetContextFacetQueries: ResultSetContextFacetQueries,
+    /**
+     * The ResultSetContextSpellcheck model constructor.
+     * @property {module:model/ResultSetContextSpellcheck}
+     */
+    ResultSetContextSpellcheck: ResultSetContextSpellcheck,
+    /**
+     * The ResultSetPaging model constructor.
+     * @property {module:model/ResultSetPaging}
+     */
+    ResultSetPaging: ResultSetPaging,
+    /**
+     * The ResultSetPagingList model constructor.
+     * @property {module:model/ResultSetPagingList}
+     */
+    ResultSetPagingList: ResultSetPagingList,
+    /**
+     * The ResultSetRowEntry model constructor.
+     * @property {module:model/ResultSetRowEntry}
+     */
+    ResultSetRowEntry: ResultSetRowEntry,
+    /**
+     * The SearchEntry model constructor.
+     * @property {module:model/SearchEntry}
+     */
+    SearchEntry: SearchEntry,
+    /**
+     * The SearchEntryHighlight model constructor.
+     * @property {module:model/SearchEntryHighlight}
+     */
+    SearchEntryHighlight: SearchEntryHighlight,
+    /**
+     * The UserInfo model constructor.
+     * @property {module:model/UserInfo}
+     */
+    UserInfo: UserInfo,
+    /**
+     * The SearchApi service constructor.
+     * @property {module:api/SearchApi}
+     */
+    SearchApi: SearchApi
+  };
+
+  return exports;
+});
+
+},{"../../alfrescoApiClient":345,"./api/SearchApi":301,"./model/ContentInfo":303,"./model/Error":304,"./model/ErrorError":305,"./model/Node":306,"./model/Pagination":307,"./model/PathElement":308,"./model/PathInfo":309,"./model/QueryBody":310,"./model/RequestDefaults":311,"./model/RequestFacetFields":312,"./model/RequestFacetFieldsFacets":313,"./model/RequestFacetQueries":314,"./model/RequestFacetQueriesInner":315,"./model/RequestFields":316,"./model/RequestFilterQueries":317,"./model/RequestFilterQueriesInner":318,"./model/RequestHighlight":319,"./model/RequestHighlightFields":320,"./model/RequestInclude":321,"./model/RequestLimits":322,"./model/RequestPagination":323,"./model/RequestQuery":324,"./model/RequestScope":325,"./model/RequestSortDefinition":326,"./model/RequestSortDefinitionInner":327,"./model/RequestSpellcheck":328,"./model/RequestTemplates":329,"./model/RequestTemplatesInner":330,"./model/ResponseConsistency":331,"./model/ResultNode":332,"./model/ResultSetContext":333,"./model/ResultSetContextBuckets":334,"./model/ResultSetContextFacetFields":335,"./model/ResultSetContextFacetQueries":336,"./model/ResultSetContextSpellcheck":337,"./model/ResultSetPaging":338,"./model/ResultSetPagingList":339,"./model/ResultSetRowEntry":340,"./model/SearchEntry":341,"./model/SearchEntryHighlight":342,"./model/UserInfo":343}],303:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.ContentInfo = factory(root.AlfrescoContentServicesRestApi.ApiClient);
+  }
+})(undefined, function (ApiClient) {
+  'use strict';
+
+  /**
+   * The ContentInfo model module.
+   * @module model/ContentInfo
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>ContentInfo</code>.
+   * @alias module:model/ContentInfo
+   * @class
+   * @param mimeType {String} 
+   * @param mimeTypeName {String} 
+   * @param sizeInBytes {Number} 
+   */
+
+  var exports = function exports(mimeType, mimeTypeName, sizeInBytes) {
+    var _this = this;
+
+    _this['mimeType'] = mimeType;
+    _this['mimeTypeName'] = mimeTypeName;
+    _this['sizeInBytes'] = sizeInBytes;
+  };
+
+  /**
+   * Constructs a <code>ContentInfo</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/ContentInfo} obj Optional instance to populate.
+   * @return {module:model/ContentInfo} The populated <code>ContentInfo</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('mimeType')) {
+        obj['mimeType'] = ApiClient.convertToType(data['mimeType'], 'String');
+      }
+      if (data.hasOwnProperty('mimeTypeName')) {
+        obj['mimeTypeName'] = ApiClient.convertToType(data['mimeTypeName'], 'String');
+      }
+      if (data.hasOwnProperty('sizeInBytes')) {
+        obj['sizeInBytes'] = ApiClient.convertToType(data['sizeInBytes'], 'Number');
+      }
+      if (data.hasOwnProperty('encoding')) {
+        obj['encoding'] = ApiClient.convertToType(data['encoding'], 'String');
+      }
+      if (data.hasOwnProperty('mimeTypeGroup')) {
+        obj['mimeTypeGroup'] = ApiClient.convertToType(data['mimeTypeGroup'], 'String');
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * @member {String} mimeType
+   */
+  exports.prototype['mimeType'] = undefined;
+  /**
+   * @member {String} mimeTypeName
+   */
+  exports.prototype['mimeTypeName'] = undefined;
+  /**
+   * @member {Number} sizeInBytes
+   */
+  exports.prototype['sizeInBytes'] = undefined;
+  /**
+   * @member {String} encoding
+   */
+  exports.prototype['encoding'] = undefined;
+  /**
+   * @member {String} mimeTypeGroup
+   */
+  exports.prototype['mimeTypeGroup'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345}],304:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient', '../model/ErrorError'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./ErrorError'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.Error = factory(root.AlfrescoContentServicesRestApi.ApiClient, root.AlfrescoContentServicesRestApi.ErrorError);
+  }
+})(undefined, function (ApiClient, ErrorError) {
+  'use strict';
+
+  /**
+   * The Error model module.
+   * @module model/Error
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>Error</code>.
+   * @alias module:model/Error
+   * @class
+   */
+
+  var exports = function exports() {
+    var _this = this;
+  };
+
+  /**
+   * Constructs a <code>Error</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/Error} obj Optional instance to populate.
+   * @return {module:model/Error} The populated <code>Error</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('error')) {
+        obj['error'] = ErrorError.constructFromObject(data['error']);
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * @member {module:model/ErrorError} error
+   */
+  exports.prototype['error'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345,"./ErrorError":305}],305:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.ErrorError = factory(root.AlfrescoContentServicesRestApi.ApiClient);
+  }
+})(undefined, function (ApiClient) {
+  'use strict';
+
+  /**
+   * The ErrorError model module.
+   * @module model/ErrorError
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>ErrorError</code>.
+   * @alias module:model/ErrorError
+   * @class
+   * @param statusCode {Number} 
+   * @param briefSummary {String} 
+   * @param stackTrace {String} 
+   * @param descriptionURL {String} 
+   */
+
+  var exports = function exports(statusCode, briefSummary, stackTrace, descriptionURL) {
+    var _this = this;
+
+    _this['statusCode'] = statusCode;
+    _this['briefSummary'] = briefSummary;
+    _this['stackTrace'] = stackTrace;
+    _this['descriptionURL'] = descriptionURL;
+  };
+
+  /**
+   * Constructs a <code>ErrorError</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/ErrorError} obj Optional instance to populate.
+   * @return {module:model/ErrorError} The populated <code>ErrorError</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('errorKey')) {
+        obj['errorKey'] = ApiClient.convertToType(data['errorKey'], 'String');
+      }
+      if (data.hasOwnProperty('statusCode')) {
+        obj['statusCode'] = ApiClient.convertToType(data['statusCode'], 'Number');
+      }
+      if (data.hasOwnProperty('briefSummary')) {
+        obj['briefSummary'] = ApiClient.convertToType(data['briefSummary'], 'String');
+      }
+      if (data.hasOwnProperty('stackTrace')) {
+        obj['stackTrace'] = ApiClient.convertToType(data['stackTrace'], 'String');
+      }
+      if (data.hasOwnProperty('descriptionURL')) {
+        obj['descriptionURL'] = ApiClient.convertToType(data['descriptionURL'], 'String');
+      }
+      if (data.hasOwnProperty('logId')) {
+        obj['logId'] = ApiClient.convertToType(data['logId'], 'String');
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * @member {String} errorKey
+   */
+  exports.prototype['errorKey'] = undefined;
+  /**
+   * @member {Number} statusCode
+   */
+  exports.prototype['statusCode'] = undefined;
+  /**
+   * @member {String} briefSummary
+   */
+  exports.prototype['briefSummary'] = undefined;
+  /**
+   * @member {String} stackTrace
+   */
+  exports.prototype['stackTrace'] = undefined;
+  /**
+   * @member {String} descriptionURL
+   */
+  exports.prototype['descriptionURL'] = undefined;
+  /**
+   * @member {String} logId
+   */
+  exports.prototype['logId'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345}],306:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient', '../model/ContentInfo', '../model/PathInfo', '../model/UserInfo'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./ContentInfo'), require('./PathInfo'), require('./UserInfo'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.Node = factory(root.AlfrescoContentServicesRestApi.ApiClient, root.AlfrescoContentServicesRestApi.ContentInfo, root.AlfrescoContentServicesRestApi.PathInfo, root.AlfrescoContentServicesRestApi.UserInfo);
+  }
+})(undefined, function (ApiClient, ContentInfo, PathInfo, UserInfo) {
+  'use strict';
+
+  /**
+   * The Node model module.
+   * @module model/Node
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>Node</code>.
+   * @alias module:model/Node
+   * @class
+   * @param id {String} 
+   * @param name {String} The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |. The character . must not be used at the end of the name. 
+   * @param nodeType {String} 
+   * @param isFolder {Boolean} 
+   * @param isFile {Boolean} 
+   * @param modifiedAt {Date} 
+   * @param modifiedByUser {module:model/UserInfo} 
+   * @param createdAt {Date} 
+   * @param createdByUser {module:model/UserInfo} 
+   */
+
+  var exports = function exports(id, name, nodeType, isFolder, isFile, modifiedAt, modifiedByUser, createdAt, createdByUser) {
+    var _this = this;
+
+    _this['id'] = id;
+    _this['name'] = name;
+    _this['nodeType'] = nodeType;
+    _this['isFolder'] = isFolder;
+    _this['isFile'] = isFile;
+
+    _this['modifiedAt'] = modifiedAt;
+    _this['modifiedByUser'] = modifiedByUser;
+    _this['createdAt'] = createdAt;
+    _this['createdByUser'] = createdByUser;
+  };
+
+  /**
+   * Constructs a <code>Node</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/Node} obj Optional instance to populate.
+   * @return {module:model/Node} The populated <code>Node</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('id')) {
+        obj['id'] = ApiClient.convertToType(data['id'], 'String');
+      }
+      if (data.hasOwnProperty('name')) {
+        obj['name'] = ApiClient.convertToType(data['name'], 'String');
+      }
+      if (data.hasOwnProperty('nodeType')) {
+        obj['nodeType'] = ApiClient.convertToType(data['nodeType'], 'String');
+      }
+      if (data.hasOwnProperty('isFolder')) {
+        obj['isFolder'] = ApiClient.convertToType(data['isFolder'], 'Boolean');
+      }
+      if (data.hasOwnProperty('isFile')) {
+        obj['isFile'] = ApiClient.convertToType(data['isFile'], 'Boolean');
+      }
+      if (data.hasOwnProperty('isLocked')) {
+        obj['isLocked'] = ApiClient.convertToType(data['isLocked'], 'Boolean');
+      }
+      if (data.hasOwnProperty('modifiedAt')) {
+        obj['modifiedAt'] = ApiClient.convertToType(data['modifiedAt'], 'Date');
+      }
+      if (data.hasOwnProperty('modifiedByUser')) {
+        obj['modifiedByUser'] = UserInfo.constructFromObject(data['modifiedByUser']);
+      }
+      if (data.hasOwnProperty('createdAt')) {
+        obj['createdAt'] = ApiClient.convertToType(data['createdAt'], 'Date');
+      }
+      if (data.hasOwnProperty('createdByUser')) {
+        obj['createdByUser'] = UserInfo.constructFromObject(data['createdByUser']);
+      }
+      if (data.hasOwnProperty('parentId')) {
+        obj['parentId'] = ApiClient.convertToType(data['parentId'], 'String');
+      }
+      if (data.hasOwnProperty('isLink')) {
+        obj['isLink'] = ApiClient.convertToType(data['isLink'], 'Boolean');
+      }
+      if (data.hasOwnProperty('content')) {
+        obj['content'] = ContentInfo.constructFromObject(data['content']);
+      }
+      if (data.hasOwnProperty('aspectNames')) {
+        obj['aspectNames'] = ApiClient.convertToType(data['aspectNames'], ['String']);
+      }
+      if (data.hasOwnProperty('properties')) {
+        obj['properties'] = ApiClient.convertToType(data['properties'], Object);
+      }
+      if (data.hasOwnProperty('allowableOperations')) {
+        obj['allowableOperations'] = ApiClient.convertToType(data['allowableOperations'], ['String']);
+      }
+      if (data.hasOwnProperty('path')) {
+        obj['path'] = PathInfo.constructFromObject(data['path']);
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * @member {String} id
+   */
+  exports.prototype['id'] = undefined;
+  /**
+   * The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |. The character . must not be used at the end of the name. 
+   * @member {String} name
+   */
+  exports.prototype['name'] = undefined;
+  /**
+   * @member {String} nodeType
+   */
+  exports.prototype['nodeType'] = undefined;
+  /**
+   * @member {Boolean} isFolder
+   */
+  exports.prototype['isFolder'] = undefined;
+  /**
+   * @member {Boolean} isFile
+   */
+  exports.prototype['isFile'] = undefined;
+  /**
+   * @member {Boolean} isLocked
+   * @default false
+   */
+  exports.prototype['isLocked'] = false;
+  /**
+   * @member {Date} modifiedAt
+   */
+  exports.prototype['modifiedAt'] = undefined;
+  /**
+   * @member {module:model/UserInfo} modifiedByUser
+   */
+  exports.prototype['modifiedByUser'] = undefined;
+  /**
+   * @member {Date} createdAt
+   */
+  exports.prototype['createdAt'] = undefined;
+  /**
+   * @member {module:model/UserInfo} createdByUser
+   */
+  exports.prototype['createdByUser'] = undefined;
+  /**
+   * @member {String} parentId
+   */
+  exports.prototype['parentId'] = undefined;
+  /**
+   * @member {Boolean} isLink
+   */
+  exports.prototype['isLink'] = undefined;
+  /**
+   * @member {module:model/ContentInfo} content
+   */
+  exports.prototype['content'] = undefined;
+  /**
+   * @member {Array.<String>} aspectNames
+   */
+  exports.prototype['aspectNames'] = undefined;
+  /**
+   * @member {Object} properties
+   */
+  exports.prototype['properties'] = undefined;
+  /**
+   * @member {Array.<String>} allowableOperations
+   */
+  exports.prototype['allowableOperations'] = undefined;
+  /**
+   * @member {module:model/PathInfo} path
+   */
+  exports.prototype['path'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345,"./ContentInfo":303,"./PathInfo":309,"./UserInfo":343}],307:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.Pagination = factory(root.AlfrescoContentServicesRestApi.ApiClient);
+  }
+})(undefined, function (ApiClient) {
+  'use strict';
+
+  /**
+   * The Pagination model module.
+   * @module model/Pagination
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>Pagination</code>.
+   * @alias module:model/Pagination
+   * @class
+   * @param count {Number} The number of objects in the entries array. 
+   * @param hasMoreItems {Boolean} A boolean value which is **true** if there are more entities in the collection beyond those in this response. A true value means a request with a larger value for the **skipCount** or the **maxItems** parameter will return more entities. 
+   * @param skipCount {Number} An integer describing how many entities exist in the collection before those included in this list. 
+   * @param maxItems {Number} The value of the **maxItems** parameter used to generate this list, or if there was no **maxItems** parameter the default value is 100 
+   */
+
+  var exports = function exports(count, hasMoreItems, skipCount, maxItems) {
+    var _this = this;
+
+    _this['count'] = count;
+    _this['hasMoreItems'] = hasMoreItems;
+
+    _this['skipCount'] = skipCount;
+    _this['maxItems'] = maxItems;
+  };
+
+  /**
+   * Constructs a <code>Pagination</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/Pagination} obj Optional instance to populate.
+   * @return {module:model/Pagination} The populated <code>Pagination</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('count')) {
+        obj['count'] = ApiClient.convertToType(data['count'], 'Number');
+      }
+      if (data.hasOwnProperty('hasMoreItems')) {
+        obj['hasMoreItems'] = ApiClient.convertToType(data['hasMoreItems'], 'Boolean');
+      }
+      if (data.hasOwnProperty('totalItems')) {
+        obj['totalItems'] = ApiClient.convertToType(data['totalItems'], 'Number');
+      }
+      if (data.hasOwnProperty('skipCount')) {
+        obj['skipCount'] = ApiClient.convertToType(data['skipCount'], 'Number');
+      }
+      if (data.hasOwnProperty('maxItems')) {
+        obj['maxItems'] = ApiClient.convertToType(data['maxItems'], 'Number');
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * The number of objects in the entries array. 
+   * @member {Number} count
+   */
+  exports.prototype['count'] = undefined;
+  /**
+   * A boolean value which is **true** if there are more entities in the collection beyond those in this response. A true value means a request with a larger value for the **skipCount** or the **maxItems** parameter will return more entities. 
+   * @member {Boolean} hasMoreItems
+   */
+  exports.prototype['hasMoreItems'] = undefined;
+  /**
+   * An integer describing the total number of entities in the collection. The API might not be able to determine this value, in which case this property will not be present. 
+   * @member {Number} totalItems
+   */
+  exports.prototype['totalItems'] = undefined;
+  /**
+   * An integer describing how many entities exist in the collection before those included in this list. 
+   * @member {Number} skipCount
+   */
+  exports.prototype['skipCount'] = undefined;
+  /**
+   * The value of the **maxItems** parameter used to generate this list, or if there was no **maxItems** parameter the default value is 100 
+   * @member {Number} maxItems
+   */
+  exports.prototype['maxItems'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345}],308:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.PathElement = factory(root.AlfrescoContentServicesRestApi.ApiClient);
+  }
+})(undefined, function (ApiClient) {
+  'use strict';
+
+  /**
+   * The PathElement model module.
+   * @module model/PathElement
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>PathElement</code>.
+   * @alias module:model/PathElement
+   * @class
+   */
+
+  var exports = function exports() {
+    var _this = this;
+  };
+
+  /**
+   * Constructs a <code>PathElement</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/PathElement} obj Optional instance to populate.
+   * @return {module:model/PathElement} The populated <code>PathElement</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('id')) {
+        obj['id'] = ApiClient.convertToType(data['id'], 'String');
+      }
+      if (data.hasOwnProperty('name')) {
+        obj['name'] = ApiClient.convertToType(data['name'], 'String');
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * @member {String} id
+   */
+  exports.prototype['id'] = undefined;
+  /**
+   * @member {String} name
+   */
+  exports.prototype['name'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345}],309:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient', '../model/PathElement'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./PathElement'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.PathInfo = factory(root.AlfrescoContentServicesRestApi.ApiClient, root.AlfrescoContentServicesRestApi.PathElement);
+  }
+})(undefined, function (ApiClient, PathElement) {
+  'use strict';
+
+  /**
+   * The PathInfo model module.
+   * @module model/PathInfo
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>PathInfo</code>.
+   * @alias module:model/PathInfo
+   * @class
+   */
+
+  var exports = function exports() {
+    var _this = this;
+  };
+
+  /**
+   * Constructs a <code>PathInfo</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/PathInfo} obj Optional instance to populate.
+   * @return {module:model/PathInfo} The populated <code>PathInfo</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('elements')) {
+        obj['elements'] = ApiClient.convertToType(data['elements'], [PathElement]);
+      }
+      if (data.hasOwnProperty('name')) {
+        obj['name'] = ApiClient.convertToType(data['name'], 'String');
+      }
+      if (data.hasOwnProperty('isComplete')) {
+        obj['isComplete'] = ApiClient.convertToType(data['isComplete'], 'Boolean');
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * @member {Array.<module:model/PathElement>} elements
+   */
+  exports.prototype['elements'] = undefined;
+  /**
+   * @member {String} name
+   */
+  exports.prototype['name'] = undefined;
+  /**
+   * @member {Boolean} isComplete
+   */
+  exports.prototype['isComplete'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345,"./PathElement":308}],310:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient', '../model/RequestDefaults', '../model/RequestFacetFields', '../model/RequestFacetQueries', '../model/RequestFields', '../model/RequestFilterQueries', '../model/RequestHighlight', '../model/RequestInclude', '../model/RequestLimits', '../model/RequestPagination', '../model/RequestQuery', '../model/RequestScope', '../model/RequestSortDefinition', '../model/RequestSpellcheck', '../model/RequestTemplates'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./RequestDefaults'), require('./RequestFacetFields'), require('./RequestFacetQueries'), require('./RequestFields'), require('./RequestFilterQueries'), require('./RequestHighlight'), require('./RequestInclude'), require('./RequestLimits'), require('./RequestPagination'), require('./RequestQuery'), require('./RequestScope'), require('./RequestSortDefinition'), require('./RequestSpellcheck'), require('./RequestTemplates'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.QueryBody = factory(root.AlfrescoContentServicesRestApi.ApiClient, root.AlfrescoContentServicesRestApi.RequestDefaults, root.AlfrescoContentServicesRestApi.RequestFacetFields, root.AlfrescoContentServicesRestApi.RequestFacetQueries, root.AlfrescoContentServicesRestApi.RequestFields, root.AlfrescoContentServicesRestApi.RequestFilterQueries, root.AlfrescoContentServicesRestApi.RequestHighlight, root.AlfrescoContentServicesRestApi.RequestInclude, root.AlfrescoContentServicesRestApi.RequestLimits, root.AlfrescoContentServicesRestApi.RequestPagination, root.AlfrescoContentServicesRestApi.RequestQuery, root.AlfrescoContentServicesRestApi.RequestScope, root.AlfrescoContentServicesRestApi.RequestSortDefinition, root.AlfrescoContentServicesRestApi.RequestSpellcheck, root.AlfrescoContentServicesRestApi.RequestTemplates);
+  }
+})(undefined, function (ApiClient, RequestDefaults, RequestFacetFields, RequestFacetQueries, RequestFields, RequestFilterQueries, RequestHighlight, RequestInclude, RequestLimits, RequestPagination, RequestQuery, RequestScope, RequestSortDefinition, RequestSpellcheck, RequestTemplates) {
+  'use strict';
+
+  /**
+   * The QueryBody model module.
+   * @module model/QueryBody
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>QueryBody</code>.
+   * @alias module:model/QueryBody
+   * @class
+   * @param query {module:model/RequestQuery} 
+   */
+
+  var exports = function exports(query) {
+    var _this = this;
+
+    _this['query'] = query;
+  };
+
+  /**
+   * Constructs a <code>QueryBody</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/QueryBody} obj Optional instance to populate.
+   * @return {module:model/QueryBody} The populated <code>QueryBody</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('query')) {
+        obj['query'] = RequestQuery.constructFromObject(data['query']);
+      }
+      if (data.hasOwnProperty('paging')) {
+        obj['paging'] = RequestPagination.constructFromObject(data['paging']);
+      }
+      if (data.hasOwnProperty('include')) {
+        obj['include'] = RequestInclude.constructFromObject(data['include']);
+      }
+      if (data.hasOwnProperty('fields')) {
+        obj['fields'] = RequestFields.constructFromObject(data['fields']);
+      }
+      if (data.hasOwnProperty('sort')) {
+        obj['sort'] = RequestSortDefinition.constructFromObject(data['sort']);
+      }
+      if (data.hasOwnProperty('templates')) {
+        obj['templates'] = RequestTemplates.constructFromObject(data['templates']);
+      }
+      if (data.hasOwnProperty('defaults')) {
+        obj['defaults'] = RequestDefaults.constructFromObject(data['defaults']);
+      }
+      if (data.hasOwnProperty('filterQueries')) {
+        obj['filterQueries'] = RequestFilterQueries.constructFromObject(data['filterQueries']);
+      }
+      if (data.hasOwnProperty('facetQueries')) {
+        obj['facetQueries'] = RequestFacetQueries.constructFromObject(data['facetQueries']);
+      }
+      if (data.hasOwnProperty('facetFields')) {
+        obj['facetFields'] = RequestFacetFields.constructFromObject(data['facetFields']);
+      }
+      if (data.hasOwnProperty('spellcheck')) {
+        obj['spellcheck'] = RequestSpellcheck.constructFromObject(data['spellcheck']);
+      }
+      if (data.hasOwnProperty('scope')) {
+        obj['scope'] = RequestScope.constructFromObject(data['scope']);
+      }
+      if (data.hasOwnProperty('limits')) {
+        obj['limits'] = RequestLimits.constructFromObject(data['limits']);
+      }
+      if (data.hasOwnProperty('highlight')) {
+        obj['highlight'] = RequestHighlight.constructFromObject(data['highlight']);
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * @member {module:model/RequestQuery} query
+   */
+  exports.prototype['query'] = undefined;
+  /**
+   * @member {module:model/RequestPagination} paging
+   */
+  exports.prototype['paging'] = undefined;
+  /**
+   * @member {module:model/RequestInclude} include
+   */
+  exports.prototype['include'] = undefined;
+  /**
+   * @member {module:model/RequestFields} fields
+   */
+  exports.prototype['fields'] = undefined;
+  /**
+   * @member {module:model/RequestSortDefinition} sort
+   */
+  exports.prototype['sort'] = undefined;
+  /**
+   * @member {module:model/RequestTemplates} templates
+   */
+  exports.prototype['templates'] = undefined;
+  /**
+   * @member {module:model/RequestDefaults} defaults
+   */
+  exports.prototype['defaults'] = undefined;
+  /**
+   * @member {module:model/RequestFilterQueries} filterQueries
+   */
+  exports.prototype['filterQueries'] = undefined;
+  /**
+   * @member {module:model/RequestFacetQueries} facetQueries
+   */
+  exports.prototype['facetQueries'] = undefined;
+  /**
+   * @member {module:model/RequestFacetFields} facetFields
+   */
+  exports.prototype['facetFields'] = undefined;
+  /**
+   * @member {module:model/RequestSpellcheck} spellcheck
+   */
+  exports.prototype['spellcheck'] = undefined;
+  /**
+   * @member {module:model/RequestScope} scope
+   */
+  exports.prototype['scope'] = undefined;
+  /**
+   * @member {module:model/RequestLimits} limits
+   */
+  exports.prototype['limits'] = undefined;
+  /**
+   * @member {module:model/RequestHighlight} highlight
+   */
+  exports.prototype['highlight'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345,"./RequestDefaults":311,"./RequestFacetFields":312,"./RequestFacetQueries":314,"./RequestFields":316,"./RequestFilterQueries":317,"./RequestHighlight":319,"./RequestInclude":321,"./RequestLimits":322,"./RequestPagination":323,"./RequestQuery":324,"./RequestScope":325,"./RequestSortDefinition":326,"./RequestSpellcheck":328,"./RequestTemplates":329}],311:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.RequestDefaults = factory(root.AlfrescoContentServicesRestApi.ApiClient);
+  }
+})(undefined, function (ApiClient) {
+  'use strict';
+
+  /**
+   * The RequestDefaults model module.
+   * @module model/RequestDefaults
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>RequestDefaults</code>.
+   * Common query defaults
+   * @alias module:model/RequestDefaults
+   * @class
+   */
+
+  var exports = function exports() {
+    var _this = this;
+  };
+
+  /**
+   * Constructs a <code>RequestDefaults</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/RequestDefaults} obj Optional instance to populate.
+   * @return {module:model/RequestDefaults} The populated <code>RequestDefaults</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('textAttributes')) {
+        obj['textAttributes'] = ApiClient.convertToType(data['textAttributes'], ['String']);
+      }
+      if (data.hasOwnProperty('defaultFTSOperator')) {
+        obj['defaultFTSOperator'] = ApiClient.convertToType(data['defaultFTSOperator'], 'String');
+      }
+      if (data.hasOwnProperty('defaultFTSFieldOperator')) {
+        obj['defaultFTSFieldOperator'] = ApiClient.convertToType(data['defaultFTSFieldOperator'], 'String');
+      }
+      if (data.hasOwnProperty('namespace')) {
+        obj['namespace'] = ApiClient.convertToType(data['namespace'], 'String');
+      }
+      if (data.hasOwnProperty('defaultFieldName')) {
+        obj['defaultFieldName'] = ApiClient.convertToType(data['defaultFieldName'], 'String');
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * A list of query fields/properties used to expand TEXT: queries. The default is cm:content. You could include all content properties using d:content or list all individual content properties or types. As more terms are included the query size, complexity, memory impact and query time will increase. 
+   * @member {Array.<String>} textAttributes
+   */
+  exports.prototype['textAttributes'] = undefined;
+  /**
+   * The default way to combine query parts when AND or OR is not explicitly stated - includes ! - + one two three (one two three) 
+   * @member {module:model/RequestDefaults.DefaultFTSOperatorEnum} defaultFTSOperator
+   * @default 'AND'
+   */
+  exports.prototype['defaultFTSOperator'] = 'AND';
+  /**
+   * The default way to combine query parts in field query groups when AND or OR is not explicitly stated - includes ! - + FIELD:(one two three) 
+   * @member {module:model/RequestDefaults.DefaultFTSFieldOperatorEnum} defaultFTSFieldOperator
+   * @default 'AND'
+   */
+  exports.prototype['defaultFTSFieldOperator'] = 'AND';
+  /**
+   * The default name space to use if one is not provided
+   * @member {String} namespace
+   * @default 'cm'
+   */
+  exports.prototype['namespace'] = 'cm';
+  /**
+   * @member {String} defaultFieldName
+   * @default 'TEXT'
+   */
+  exports.prototype['defaultFieldName'] = 'TEXT';
+
+  /**
+   * Allowed values for the <code>defaultFTSOperator</code> property.
+   * @enum {String}
+   * @readonly
+   */
+  exports.DefaultFTSOperatorEnum = {
+    /**
+     * value: "AND"
+     * @const
+     */
+    "AND": "AND",
+    /**
+     * value: "OR"
+     * @const
+     */
+    "OR": "OR" };
+
+  /**
+   * Allowed values for the <code>defaultFTSFieldOperator</code> property.
+   * @enum {String}
+   * @readonly
+   */
+  exports.DefaultFTSFieldOperatorEnum = {
+    /**
+     * value: "AND"
+     * @const
+     */
+    "AND": "AND",
+    /**
+     * value: "OR"
+     * @const
+     */
+    "OR": "OR" };
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345}],312:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient', '../model/RequestFacetFieldsFacets'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./RequestFacetFieldsFacets'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.RequestFacetFields = factory(root.AlfrescoContentServicesRestApi.ApiClient, root.AlfrescoContentServicesRestApi.RequestFacetFieldsFacets);
+  }
+})(undefined, function (ApiClient, RequestFacetFieldsFacets) {
+  'use strict';
+
+  /**
+   * The RequestFacetFields model module.
+   * @module model/RequestFacetFields
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>RequestFacetFields</code>.
+   * Simple facet fields to include The Properties reflect the global properties related to field facts in SOLR. They are descripbed in detail by the SOLR documentation 
+   * @alias module:model/RequestFacetFields
+   * @class
+   */
+
+  var exports = function exports() {
+    var _this = this;
+  };
+
+  /**
+   * Constructs a <code>RequestFacetFields</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/RequestFacetFields} obj Optional instance to populate.
+   * @return {module:model/RequestFacetFields} The populated <code>RequestFacetFields</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('facets')) {
+        obj['facets'] = ApiClient.convertToType(data['facets'], [RequestFacetFieldsFacets]);
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * Define specifc fields on which to facet (adds SOLR facet.field and f.<field>.facet.* options) 
+   * @member {Array.<module:model/RequestFacetFieldsFacets>} facets
+   */
+  exports.prototype['facets'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345,"./RequestFacetFieldsFacets":313}],313:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.RequestFacetFieldsFacets = factory(root.AlfrescoContentServicesRestApi.ApiClient);
+  }
+})(undefined, function (ApiClient) {
+  'use strict';
+
+  /**
+   * The RequestFacetFieldsFacets model module.
+   * @module model/RequestFacetFieldsFacets
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>RequestFacetFieldsFacets</code>.
+   * @alias module:model/RequestFacetFieldsFacets
+   * @class
+   */
+
+  var exports = function exports() {
+    var _this = this;
+  };
+
+  /**
+   * Constructs a <code>RequestFacetFieldsFacets</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/RequestFacetFieldsFacets} obj Optional instance to populate.
+   * @return {module:model/RequestFacetFieldsFacets} The populated <code>RequestFacetFieldsFacets</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('field')) {
+        obj['field'] = ApiClient.convertToType(data['field'], 'String');
+      }
+      if (data.hasOwnProperty('prefix')) {
+        obj['prefix'] = ApiClient.convertToType(data['prefix'], 'String');
+      }
+      if (data.hasOwnProperty('sort')) {
+        obj['sort'] = ApiClient.convertToType(data['sort'], 'String');
+      }
+      if (data.hasOwnProperty('method')) {
+        obj['method'] = ApiClient.convertToType(data['method'], 'String');
+      }
+      if (data.hasOwnProperty('missing')) {
+        obj['missing'] = ApiClient.convertToType(data['missing'], 'Boolean');
+      }
+      if (data.hasOwnProperty('limit')) {
+        obj['limit'] = ApiClient.convertToType(data['limit'], 'Number');
+      }
+      if (data.hasOwnProperty('offset')) {
+        obj['offset'] = ApiClient.convertToType(data['offset'], 'Number');
+      }
+      if (data.hasOwnProperty('mincount')) {
+        obj['mincount'] = ApiClient.convertToType(data['mincount'], 'Number');
+      }
+      if (data.hasOwnProperty('facetEnumCacheMinDf')) {
+        obj['facetEnumCacheMinDf'] = ApiClient.convertToType(data['facetEnumCacheMinDf'], 'Number');
+      }
+      if (data.hasOwnProperty('excludeFilters')) {
+        obj['excludeFilters'] = ApiClient.convertToType(data['excludeFilters'], ['String']);
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * The facet field
+   * @member {String} field
+   */
+  exports.prototype['field'] = undefined;
+  /**
+   * Restricts the possible constraints to only indexed values with a specified prefix.
+   * @member {String} prefix
+   */
+  exports.prototype['prefix'] = undefined;
+  /**
+   * @member {module:model/RequestFacetFieldsFacets.SortEnum} sort
+   */
+  exports.prototype['sort'] = undefined;
+  /**
+   * @member {module:model/RequestFacetFieldsFacets.MethodEnum} method
+   */
+  exports.prototype['method'] = undefined;
+  /**
+   * When true, count results that match the query but which have no facet value for the field (in addition to the Term-based constraints).
+   * @member {Boolean} missing
+   * @default false
+   */
+  exports.prototype['missing'] = false;
+  /**
+   * @member {Number} limit
+   */
+  exports.prototype['limit'] = undefined;
+  /**
+   * @member {Number} offset
+   */
+  exports.prototype['offset'] = undefined;
+  /**
+   * The minimum count required for a facet field to be included in the response.
+   * @member {Number} mincount
+   */
+  exports.prototype['mincount'] = undefined;
+  /**
+   * @member {Number} facetEnumCacheMinDf
+   */
+  exports.prototype['facetEnumCacheMinDf'] = undefined;
+  /**
+   * Filter Queries with tags listed here will not be included in facet counts. This is used for multi-select facetting. 
+   * @member {Array.<String>} excludeFilters
+   */
+  exports.prototype['excludeFilters'] = undefined;
+
+  /**
+   * Allowed values for the <code>sort</code> property.
+   * @enum {String}
+   * @readonly
+   */
+  exports.SortEnum = {
+    /**
+     * value: "COUNT"
+     * @const
+     */
+    "COUNT": "COUNT",
+    /**
+     * value: "INDEX"
+     * @const
+     */
+    "INDEX": "INDEX" };
+
+  /**
+   * Allowed values for the <code>method</code> property.
+   * @enum {String}
+   * @readonly
+   */
+  exports.MethodEnum = {
+    /**
+     * value: "ENUM"
+     * @const
+     */
+    "ENUM": "ENUM",
+    /**
+     * value: "FC"
+     * @const
+     */
+    "FC": "FC" };
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345}],314:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient', '../model/RequestFacetQueriesInner'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./RequestFacetQueriesInner'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.RequestFacetQueries = factory(root.AlfrescoContentServicesRestApi.ApiClient, root.AlfrescoContentServicesRestApi.RequestFacetQueriesInner);
+  }
+})(undefined, function (ApiClient, RequestFacetQueriesInner) {
+  'use strict';
+
+  /**
+   * The RequestFacetQueries model module.
+   * @module model/RequestFacetQueries
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>RequestFacetQueries</code>.
+   * Facet queries to include
+   * @alias module:model/RequestFacetQueries
+   * @class
+   * @extends Array
+   */
+
+  var exports = function exports() {
+    var _this = this;
+    _this = new Array();
+    Object.setPrototypeOf(_this, exports);
+
+    return _this;
+  };
+
+  /**
+   * Constructs a <code>RequestFacetQueries</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/RequestFacetQueries} obj Optional instance to populate.
+   * @return {module:model/RequestFacetQueries} The populated <code>RequestFacetQueries</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+      ApiClient.constructFromObject(data, obj, 'RequestFacetQueriesInner');
+    }
+    return obj;
+  };
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345,"./RequestFacetQueriesInner":315}],315:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.RequestFacetQueriesInner = factory(root.AlfrescoContentServicesRestApi.ApiClient);
+  }
+})(undefined, function (ApiClient) {
+  'use strict';
+
+  /**
+   * The RequestFacetQueriesInner model module.
+   * @module model/RequestFacetQueriesInner
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>RequestFacetQueriesInner</code>.
+   * @alias module:model/RequestFacetQueriesInner
+   * @class
+   */
+
+  var exports = function exports() {
+    var _this = this;
+  };
+
+  /**
+   * Constructs a <code>RequestFacetQueriesInner</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/RequestFacetQueriesInner} obj Optional instance to populate.
+   * @return {module:model/RequestFacetQueriesInner} The populated <code>RequestFacetQueriesInner</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('query')) {
+        obj['query'] = ApiClient.convertToType(data['query'], 'String');
+      }
+      if (data.hasOwnProperty('label')) {
+        obj['label'] = ApiClient.convertToType(data['label'], 'String');
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * A facet query
+   * @member {String} query
+   */
+  exports.prototype['query'] = undefined;
+  /**
+   * A label to include in place of the facet query
+   * @member {String} label
+   */
+  exports.prototype['label'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345}],316:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.RequestFields = factory(root.AlfrescoContentServicesRestApi.ApiClient);
+  }
+})(undefined, function (ApiClient) {
+  'use strict';
+
+  /**
+   * The RequestFields model module.
+   * @module model/RequestFields
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>RequestFields</code>.
+   * A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the **include** parameter is used aswell then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
+   * @alias module:model/RequestFields
+   * @class
+   * @extends Array
+   */
+
+  var exports = function exports() {
+    var _this = this;
+    _this = new Array();
+    Object.setPrototypeOf(_this, exports);
+
+    return _this;
+  };
+
+  /**
+   * Constructs a <code>RequestFields</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/RequestFields} obj Optional instance to populate.
+   * @return {module:model/RequestFields} The populated <code>RequestFields</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+      ApiClient.constructFromObject(data, obj, 'String');
+    }
+    return obj;
+  };
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345}],317:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient', '../model/RequestFilterQueriesInner'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./RequestFilterQueriesInner'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.RequestFilterQueries = factory(root.AlfrescoContentServicesRestApi.ApiClient, root.AlfrescoContentServicesRestApi.RequestFilterQueriesInner);
+  }
+})(undefined, function (ApiClient, RequestFilterQueriesInner) {
+  'use strict';
+
+  /**
+   * The RequestFilterQueries model module.
+   * @module model/RequestFilterQueries
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>RequestFilterQueries</code>.
+   * Filter Queries. Constraints that apply to the results set but do not affect the score of each entry.
+   * @alias module:model/RequestFilterQueries
+   * @class
+   * @extends Array
+   */
+
+  var exports = function exports() {
+    var _this = this;
+    _this = new Array();
+    Object.setPrototypeOf(_this, exports);
+
+    return _this;
+  };
+
+  /**
+   * Constructs a <code>RequestFilterQueries</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/RequestFilterQueries} obj Optional instance to populate.
+   * @return {module:model/RequestFilterQueries} The populated <code>RequestFilterQueries</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+      ApiClient.constructFromObject(data, obj, 'RequestFilterQueriesInner');
+    }
+    return obj;
+  };
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345,"./RequestFilterQueriesInner":318}],318:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.RequestFilterQueriesInner = factory(root.AlfrescoContentServicesRestApi.ApiClient);
+  }
+})(undefined, function (ApiClient) {
+  'use strict';
+
+  /**
+   * The RequestFilterQueriesInner model module.
+   * @module model/RequestFilterQueriesInner
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>RequestFilterQueriesInner</code>.
+   * @alias module:model/RequestFilterQueriesInner
+   * @class
+   */
+
+  var exports = function exports() {
+    var _this = this;
+  };
+
+  /**
+   * Constructs a <code>RequestFilterQueriesInner</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/RequestFilterQueriesInner} obj Optional instance to populate.
+   * @return {module:model/RequestFilterQueriesInner} The populated <code>RequestFilterQueriesInner</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('query')) {
+        obj['query'] = ApiClient.convertToType(data['query'], 'String');
+      }
+      if (data.hasOwnProperty('tags')) {
+        obj['tags'] = ApiClient.convertToType(data['tags'], ['String']);
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * The filter query expression. For multi-select facets selected facets must be order together 
+   * @member {String} query
+   */
+  exports.prototype['query'] = undefined;
+  /**
+   * Tags used exclude the filters from facet evaluation for multi-select facet support
+   * @member {Array.<String>} tags
+   */
+  exports.prototype['tags'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345}],319:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient', '../model/RequestHighlightFields'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./RequestHighlightFields'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.RequestHighlight = factory(root.AlfrescoContentServicesRestApi.ApiClient, root.AlfrescoContentServicesRestApi.RequestHighlightFields);
+  }
+})(undefined, function (ApiClient, RequestHighlightFields) {
+  'use strict';
+
+  /**
+   * The RequestHighlight model module.
+   * @module model/RequestHighlight
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>RequestHighlight</code>.
+   * Request that highlight fragments to be added to result set rows The properties reflect SOLR highlighting parameters. 
+   * @alias module:model/RequestHighlight
+   * @class
+   */
+
+  var exports = function exports() {
+    var _this = this;
+  };
+
+  /**
+   * Constructs a <code>RequestHighlight</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/RequestHighlight} obj Optional instance to populate.
+   * @return {module:model/RequestHighlight} The populated <code>RequestHighlight</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('prefix')) {
+        obj['prefix'] = ApiClient.convertToType(data['prefix'], 'String');
+      }
+      if (data.hasOwnProperty('postfix')) {
+        obj['postfix'] = ApiClient.convertToType(data['postfix'], 'String');
+      }
+      if (data.hasOwnProperty('snippetCount')) {
+        obj['snippetCount'] = ApiClient.convertToType(data['snippetCount'], 'Number');
+      }
+      if (data.hasOwnProperty('fragmentSize')) {
+        obj['fragmentSize'] = ApiClient.convertToType(data['fragmentSize'], 'Number');
+      }
+      if (data.hasOwnProperty('maxAnalyzedChars')) {
+        obj['maxAnalyzedChars'] = ApiClient.convertToType(data['maxAnalyzedChars'], 'Number');
+      }
+      if (data.hasOwnProperty('mergeContiguous')) {
+        obj['mergeContiguous'] = ApiClient.convertToType(data['mergeContiguous'], 'Boolean');
+      }
+      if (data.hasOwnProperty('usePhraseHighlighter')) {
+        obj['usePhraseHighlighter'] = ApiClient.convertToType(data['usePhraseHighlighter'], 'Boolean');
+      }
+      if (data.hasOwnProperty('fields')) {
+        obj['fields'] = ApiClient.convertToType(data['fields'], [RequestHighlightFields]);
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * The string used to mark the start of a highlight in a fragment.
+   * @member {String} prefix
+   */
+  exports.prototype['prefix'] = undefined;
+  /**
+   * The string used to mark the end of a highlight in a fragment.
+   * @member {String} postfix
+   */
+  exports.prototype['postfix'] = undefined;
+  /**
+   * The maximum number of distinct highlight snippets to return for each highlight field.
+   * @member {Number} snippetCount
+   */
+  exports.prototype['snippetCount'] = undefined;
+  /**
+   * The character length of each snippet.
+   * @member {Number} fragmentSize
+   */
+  exports.prototype['fragmentSize'] = undefined;
+  /**
+   * The number of characters to be considered for highlighting. Matches after this count will not be shown.
+   * @member {Number} maxAnalyzedChars
+   */
+  exports.prototype['maxAnalyzedChars'] = undefined;
+  /**
+   * If fragments over lap they can be  merged into one larger fragment
+   * @member {Boolean} mergeContiguous
+   */
+  exports.prototype['mergeContiguous'] = undefined;
+  /**
+   * Should phrases be identified.
+   * @member {Boolean} usePhraseHighlighter
+   */
+  exports.prototype['usePhraseHighlighter'] = undefined;
+  /**
+   * The fields to highlight and field specific configuration properties for each field
+   * @member {Array.<module:model/RequestHighlightFields>} fields
+   */
+  exports.prototype['fields'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345,"./RequestHighlightFields":320}],320:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.RequestHighlightFields = factory(root.AlfrescoContentServicesRestApi.ApiClient);
+  }
+})(undefined, function (ApiClient) {
+  'use strict';
+
+  /**
+   * The RequestHighlightFields model module.
+   * @module model/RequestHighlightFields
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>RequestHighlightFields</code>.
+   * @alias module:model/RequestHighlightFields
+   * @class
+   */
+
+  var exports = function exports() {
+    var _this = this;
+  };
+
+  /**
+   * Constructs a <code>RequestHighlightFields</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/RequestHighlightFields} obj Optional instance to populate.
+   * @return {module:model/RequestHighlightFields} The populated <code>RequestHighlightFields</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('field')) {
+        obj['field'] = ApiClient.convertToType(data['field'], 'String');
+      }
+      if (data.hasOwnProperty('snippetCount')) {
+        obj['snippetCount'] = ApiClient.convertToType(data['snippetCount'], 'Number');
+      }
+      if (data.hasOwnProperty('fragmentSize')) {
+        obj['fragmentSize'] = ApiClient.convertToType(data['fragmentSize'], 'Number');
+      }
+      if (data.hasOwnProperty('mergeContiguous')) {
+        obj['mergeContiguous'] = ApiClient.convertToType(data['mergeContiguous'], 'Boolean');
+      }
+      if (data.hasOwnProperty('prefix')) {
+        obj['prefix'] = ApiClient.convertToType(data['prefix'], 'String');
+      }
+      if (data.hasOwnProperty('postfix')) {
+        obj['postfix'] = ApiClient.convertToType(data['postfix'], 'String');
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * The name of the field to highlight.
+   * @member {String} field
+   */
+  exports.prototype['field'] = undefined;
+  /**
+   * @member {Number} snippetCount
+   */
+  exports.prototype['snippetCount'] = undefined;
+  /**
+   * @member {Number} fragmentSize
+   */
+  exports.prototype['fragmentSize'] = undefined;
+  /**
+   * @member {Boolean} mergeContiguous
+   */
+  exports.prototype['mergeContiguous'] = undefined;
+  /**
+   * @member {String} prefix
+   */
+  exports.prototype['prefix'] = undefined;
+  /**
+   * @member {String} postfix
+   */
+  exports.prototype['postfix'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345}],321:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.RequestInclude = factory(root.AlfrescoContentServicesRestApi.ApiClient);
+  }
+})(undefined, function (ApiClient) {
+  'use strict';
+
+  /**
+   * The RequestInclude model module.
+   * @module model/RequestInclude
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>RequestInclude</code>.
+   * Returns additional information about the node. The following optional fields can be requested:  * properties  * aspectNames  * path  * isLink  * allowableOperations  * association 
+   * @alias module:model/RequestInclude
+   * @class
+   * @extends Array
+   */
+
+  var exports = function exports() {
+    var _this = this;
+    _this = new Array();
+    Object.setPrototypeOf(_this, exports);
+
+    return _this;
+  };
+
+  /**
+   * Constructs a <code>RequestInclude</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/RequestInclude} obj Optional instance to populate.
+   * @return {module:model/RequestInclude} The populated <code>RequestInclude</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+      ApiClient.constructFromObject(data, obj, 'String');
+    }
+    return obj;
+  };
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345}],322:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.RequestLimits = factory(root.AlfrescoContentServicesRestApi.ApiClient);
+  }
+})(undefined, function (ApiClient) {
+  'use strict';
+
+  /**
+   * The RequestLimits model module.
+   * @module model/RequestLimits
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>RequestLimits</code>.
+   * Limit the time and resources used for query execution
+   * @alias module:model/RequestLimits
+   * @class
+   */
+
+  var exports = function exports() {
+    var _this = this;
+  };
+
+  /**
+   * Constructs a <code>RequestLimits</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/RequestLimits} obj Optional instance to populate.
+   * @return {module:model/RequestLimits} The populated <code>RequestLimits</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('permissionEvaluationTime')) {
+        obj['permissionEvaluationTime'] = ApiClient.convertToType(data['permissionEvaluationTime'], 'Number');
+      }
+      if (data.hasOwnProperty('permissionEvaluationCount')) {
+        obj['permissionEvaluationCount'] = ApiClient.convertToType(data['permissionEvaluationCount'], 'Number');
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * Maximum time for post query permission evaluation
+   * @member {Number} permissionEvaluationTime
+   */
+  exports.prototype['permissionEvaluationTime'] = undefined;
+  /**
+   * Maximum count of post query permission evaluations
+   * @member {Number} permissionEvaluationCount
+   */
+  exports.prototype['permissionEvaluationCount'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345}],323:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.RequestPagination = factory(root.AlfrescoContentServicesRestApi.ApiClient);
+  }
+})(undefined, function (ApiClient) {
+  'use strict';
+
+  /**
+   * The RequestPagination model module.
+   * @module model/RequestPagination
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>RequestPagination</code>.
+   * @alias module:model/RequestPagination
+   * @class
+   */
+
+  var exports = function exports() {
+    var _this = this;
+  };
+
+  /**
+   * Constructs a <code>RequestPagination</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/RequestPagination} obj Optional instance to populate.
+   * @return {module:model/RequestPagination} The populated <code>RequestPagination</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('maxItems')) {
+        obj['maxItems'] = ApiClient.convertToType(data['maxItems'], 'Number');
+      }
+      if (data.hasOwnProperty('skipCount')) {
+        obj['skipCount'] = ApiClient.convertToType(data['skipCount'], 'Number');
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * The maximum number of items to return in the query results
+   * @member {Number} maxItems
+   */
+  exports.prototype['maxItems'] = undefined;
+  /**
+   * The number of items to skip from the start of the query set
+   * @member {Number} skipCount
+   */
+  exports.prototype['skipCount'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345}],324:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.RequestQuery = factory(root.AlfrescoContentServicesRestApi.ApiClient);
+  }
+})(undefined, function (ApiClient) {
+  'use strict';
+
+  /**
+   * The RequestQuery model module.
+   * @module model/RequestQuery
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>RequestQuery</code>.
+   * Query.
+   * @alias module:model/RequestQuery
+   * @class
+   * @param query {String} The query which may have been generated in some way from the userQuery
+   */
+
+  var exports = function exports(query) {
+    var _this = this;
+
+    _this['query'] = query;
+  };
+
+  /**
+   * Constructs a <code>RequestQuery</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/RequestQuery} obj Optional instance to populate.
+   * @return {module:model/RequestQuery} The populated <code>RequestQuery</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('language')) {
+        obj['language'] = ApiClient.convertToType(data['language'], 'String');
+      }
+      if (data.hasOwnProperty('userQuery')) {
+        obj['userQuery'] = ApiClient.convertToType(data['userQuery'], 'String');
+      }
+      if (data.hasOwnProperty('query')) {
+        obj['query'] = ApiClient.convertToType(data['query'], 'String');
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * The query language in which the query is written.
+   * @member {module:model/RequestQuery.LanguageEnum} language
+   * @default 'afts'
+   */
+  exports.prototype['language'] = 'afts';
+  /**
+   * The exact search request typed in by the user
+   * @member {String} userQuery
+   */
+  exports.prototype['userQuery'] = undefined;
+  /**
+   * The query which may have been generated in some way from the userQuery
+   * @member {String} query
+   */
+  exports.prototype['query'] = undefined;
+
+  /**
+   * Allowed values for the <code>language</code> property.
+   * @enum {String}
+   * @readonly
+   */
+  exports.LanguageEnum = {
+    /**
+     * value: "afts"
+     * @const
+     */
+    "afts": "afts",
+    /**
+     * value: "lucene"
+     * @const
+     */
+    "lucene": "lucene",
+    /**
+     * value: "cmis"
+     * @const
+     */
+    "cmis": "cmis" };
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345}],325:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.RequestScope = factory(root.AlfrescoContentServicesRestApi.ApiClient);
+  }
+})(undefined, function (ApiClient) {
+  'use strict';
+
+  /**
+   * The RequestScope model module.
+   * @module model/RequestScope
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>RequestScope</code>.
+   * Scope
+   * @alias module:model/RequestScope
+   * @class
+   */
+
+  var exports = function exports() {
+    var _this = this;
+  };
+
+  /**
+   * Constructs a <code>RequestScope</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/RequestScope} obj Optional instance to populate.
+   * @return {module:model/RequestScope} The populated <code>RequestScope</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('locations')) {
+        obj['locations'] = ApiClient.convertToType(data['locations'], 'String');
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * The locations to include in the query 
+   * @member {module:model/RequestScope.LocationsEnum} locations
+   */
+  exports.prototype['locations'] = undefined;
+
+  /**
+   * Allowed values for the <code>locations</code> property.
+   * @enum {String}
+   * @readonly
+   */
+  exports.LocationsEnum = {
+    /**
+     * value: "nodes"
+     * @const
+     */
+    "nodes": "nodes",
+    /**
+     * value: "versions"
+     * @const
+     */
+    "versions": "versions",
+    /**
+     * value: "deleted-nodes"
+     * @const
+     */
+    "deleted-nodes": "deleted-nodes" };
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345}],326:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient', '../model/RequestSortDefinitionInner'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./RequestSortDefinitionInner'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.RequestSortDefinition = factory(root.AlfrescoContentServicesRestApi.ApiClient, root.AlfrescoContentServicesRestApi.RequestSortDefinitionInner);
+  }
+})(undefined, function (ApiClient, RequestSortDefinitionInner) {
+  'use strict';
+
+  /**
+   * The RequestSortDefinition model module.
+   * @module model/RequestSortDefinition
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>RequestSortDefinition</code>.
+   * How to sort the rows? An array of sort specifications. The array order defines the ordering precedence.
+   * @alias module:model/RequestSortDefinition
+   * @class
+   * @extends Array
+   */
+
+  var exports = function exports() {
+    var _this = this;
+    _this = new Array();
+    Object.setPrototypeOf(_this, exports);
+
+    return _this;
+  };
+
+  /**
+   * Constructs a <code>RequestSortDefinition</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/RequestSortDefinition} obj Optional instance to populate.
+   * @return {module:model/RequestSortDefinition} The populated <code>RequestSortDefinition</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+      ApiClient.constructFromObject(data, obj, 'RequestSortDefinitionInner');
+    }
+    return obj;
+  };
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345,"./RequestSortDefinitionInner":327}],327:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.RequestSortDefinitionInner = factory(root.AlfrescoContentServicesRestApi.ApiClient);
+  }
+})(undefined, function (ApiClient) {
+  'use strict';
+
+  /**
+   * The RequestSortDefinitionInner model module.
+   * @module model/RequestSortDefinitionInner
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>RequestSortDefinitionInner</code>.
+   * @alias module:model/RequestSortDefinitionInner
+   * @class
+   */
+
+  var exports = function exports() {
+    var _this = this;
+  };
+
+  /**
+   * Constructs a <code>RequestSortDefinitionInner</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/RequestSortDefinitionInner} obj Optional instance to populate.
+   * @return {module:model/RequestSortDefinitionInner} The populated <code>RequestSortDefinitionInner</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('type')) {
+        obj['type'] = ApiClient.convertToType(data['type'], 'String');
+      }
+      if (data.hasOwnProperty('field')) {
+        obj['field'] = ApiClient.convertToType(data['field'], 'String');
+      }
+      if (data.hasOwnProperty('ascending')) {
+        obj['ascending'] = ApiClient.convertToType(data['ascending'], 'Boolean');
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * How to order - using a field, when position of the document in the index, score/relevence.
+   * @member {module:model/RequestSortDefinitionInner.TypeEnum} type
+   * @default 'FIELD'
+   */
+  exports.prototype['type'] = 'FIELD';
+  /**
+   * The name of the field
+   * @member {String} field
+   */
+  exports.prototype['field'] = undefined;
+  /**
+   * The sort order. (The ordering of nulls is determined by the SOLR configuration)
+   * @member {Boolean} ascending
+   * @default false
+   */
+  exports.prototype['ascending'] = false;
+
+  /**
+   * Allowed values for the <code>type</code> property.
+   * @enum {String}
+   * @readonly
+   */
+  exports.TypeEnum = {
+    /**
+     * value: "FIELD"
+     * @const
+     */
+    "FIELD": "FIELD",
+    /**
+     * value: "DOCUMENT"
+     * @const
+     */
+    "DOCUMENT": "DOCUMENT",
+    /**
+     * value: "SCORE"
+     * @const
+     */
+    "SCORE": "SCORE" };
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345}],328:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.RequestSpellcheck = factory(root.AlfrescoContentServicesRestApi.ApiClient);
+  }
+})(undefined, function (ApiClient) {
+  'use strict';
+
+  /**
+   * The RequestSpellcheck model module.
+   * @module model/RequestSpellcheck
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>RequestSpellcheck</code>.
+   * Request that spellcheck fragments to be added to result set rows The properties reflect SOLR spellcheck parameters. 
+   * @alias module:model/RequestSpellcheck
+   * @class
+   */
+
+  var exports = function exports() {
+    var _this = this;
+  };
+
+  /**
+   * Constructs a <code>RequestSpellcheck</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/RequestSpellcheck} obj Optional instance to populate.
+   * @return {module:model/RequestSpellcheck} The populated <code>RequestSpellcheck</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('query')) {
+        obj['query'] = ApiClient.convertToType(data['query'], 'String');
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * @member {String} query
+   */
+  exports.prototype['query'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345}],329:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient', '../model/RequestTemplatesInner'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./RequestTemplatesInner'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.RequestTemplates = factory(root.AlfrescoContentServicesRestApi.ApiClient, root.AlfrescoContentServicesRestApi.RequestTemplatesInner);
+  }
+})(undefined, function (ApiClient, RequestTemplatesInner) {
+  'use strict';
+
+  /**
+   * The RequestTemplates model module.
+   * @module model/RequestTemplates
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>RequestTemplates</code>.
+   * Templates usewd for query expansion. A template called \&quot;WOOF\&quot; defined as \&quot;%(cm:name cm:title)\&quot; allows WOOF:example to generate cm:name:example cm:name:example 
+   * @alias module:model/RequestTemplates
+   * @class
+   * @extends Array
+   */
+
+  var exports = function exports() {
+    var _this = this;
+    _this = new Array();
+    Object.setPrototypeOf(_this, exports);
+
+    return _this;
+  };
+
+  /**
+   * Constructs a <code>RequestTemplates</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/RequestTemplates} obj Optional instance to populate.
+   * @return {module:model/RequestTemplates} The populated <code>RequestTemplates</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+      ApiClient.constructFromObject(data, obj, 'RequestTemplatesInner');
+    }
+    return obj;
+  };
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345,"./RequestTemplatesInner":330}],330:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.RequestTemplatesInner = factory(root.AlfrescoContentServicesRestApi.ApiClient);
+  }
+})(undefined, function (ApiClient) {
+  'use strict';
+
+  /**
+   * The RequestTemplatesInner model module.
+   * @module model/RequestTemplatesInner
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>RequestTemplatesInner</code>.
+   * @alias module:model/RequestTemplatesInner
+   * @class
+   */
+
+  var exports = function exports() {
+    var _this = this;
+  };
+
+  /**
+   * Constructs a <code>RequestTemplatesInner</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/RequestTemplatesInner} obj Optional instance to populate.
+   * @return {module:model/RequestTemplatesInner} The populated <code>RequestTemplatesInner</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('name')) {
+        obj['name'] = ApiClient.convertToType(data['name'], 'String');
+      }
+      if (data.hasOwnProperty('template')) {
+        obj['template'] = ApiClient.convertToType(data['template'], 'String');
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * The template name
+   * @member {String} name
+   */
+  exports.prototype['name'] = undefined;
+  /**
+   * The template
+   * @member {String} template
+   */
+  exports.prototype['template'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345}],331:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.ResponseConsistency = factory(root.AlfrescoContentServicesRestApi.ApiClient);
+  }
+})(undefined, function (ApiClient) {
+  'use strict';
+
+  /**
+   * The ResponseConsistency model module.
+   * @module model/ResponseConsistency
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>ResponseConsistency</code>.
+   * The consistency state of the index used to execute the query
+   * @alias module:model/ResponseConsistency
+   * @class
+   */
+
+  var exports = function exports() {
+    var _this = this;
+  };
+
+  /**
+   * Constructs a <code>ResponseConsistency</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/ResponseConsistency} obj Optional instance to populate.
+   * @return {module:model/ResponseConsistency} The populated <code>ResponseConsistency</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('lastTxId')) {
+        obj['lastTxId'] = ApiClient.convertToType(data['lastTxId'], 'Number');
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * The id of the last indexed transaction
+   * @member {Number} lastTxId
+   */
+  exports.prototype['lastTxId'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345}],332:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient', '../model/ContentInfo', '../model/Node', '../model/PathInfo', '../model/SearchEntry', '../model/UserInfo'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./ContentInfo'), require('./Node'), require('./PathInfo'), require('./SearchEntry'), require('./UserInfo'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.ResultNode = factory(root.AlfrescoContentServicesRestApi.ApiClient, root.AlfrescoContentServicesRestApi.ContentInfo, root.AlfrescoContentServicesRestApi.Node, root.AlfrescoContentServicesRestApi.PathInfo, root.AlfrescoContentServicesRestApi.SearchEntry, root.AlfrescoContentServicesRestApi.UserInfo);
+  }
+})(undefined, function (ApiClient, ContentInfo, Node, PathInfo, SearchEntry, UserInfo) {
+  'use strict';
+
+  /**
+   * The ResultNode model module.
+   * @module model/ResultNode
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>ResultNode</code>.
+   * @alias module:model/ResultNode
+   * @class
+   * @extends module:model/Node
+   * @param id {String} 
+   * @param name {String} The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |. The character . must not be used at the end of the name. 
+   * @param nodeType {String} 
+   * @param isFolder {Boolean} 
+   * @param isFile {Boolean} 
+   * @param modifiedAt {Date} 
+   * @param modifiedByUser {module:model/UserInfo} 
+   * @param createdAt {Date} 
+   * @param createdByUser {module:model/UserInfo} 
+   */
+
+  var exports = function exports(id, name, nodeType, isFolder, isFile, modifiedAt, modifiedByUser, createdAt, createdByUser) {
+    var _this = this;
+    Node.call(_this, id, name, nodeType, isFolder, isFile, modifiedAt, modifiedByUser, createdAt, createdByUser);
+  };
+
+  /**
+   * Constructs a <code>ResultNode</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/ResultNode} obj Optional instance to populate.
+   * @return {module:model/ResultNode} The populated <code>ResultNode</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+      Node.constructFromObject(data, obj);
+      if (data.hasOwnProperty('search')) {
+        obj['search'] = SearchEntry.constructFromObject(data['search']);
+      }
+      if (data.hasOwnProperty('archivedByUser')) {
+        obj['archivedByUser'] = UserInfo.constructFromObject(data['archivedByUser']);
+      }
+      if (data.hasOwnProperty('archivedAt')) {
+        obj['archivedAt'] = ApiClient.convertToType(data['archivedAt'], 'Date');
+      }
+      if (data.hasOwnProperty('versionLabel')) {
+        obj['versionLabel'] = ApiClient.convertToType(data['versionLabel'], 'String');
+      }
+      if (data.hasOwnProperty('versionComment')) {
+        obj['versionComment'] = ApiClient.convertToType(data['versionComment'], 'String');
+      }
+    }
+    return obj;
+  };
+
+  exports.prototype = Object.create(Node.prototype);
+  exports.prototype.constructor = exports;
+
+  /**
+   * @member {module:model/SearchEntry} search
+   */
+  exports.prototype['search'] = undefined;
+  /**
+   * @member {module:model/UserInfo} archivedByUser
+   */
+  exports.prototype['archivedByUser'] = undefined;
+  /**
+   * @member {Date} archivedAt
+   */
+  exports.prototype['archivedAt'] = undefined;
+  /**
+   * @member {String} versionLabel
+   */
+  exports.prototype['versionLabel'] = undefined;
+  /**
+   * @member {String} versionComment
+   */
+  exports.prototype['versionComment'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345,"./ContentInfo":303,"./Node":306,"./PathInfo":309,"./SearchEntry":341,"./UserInfo":343}],333:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services.
+ *
+ * OpenAPI spec version: 1
+ *
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient', '../model/ResponseConsistency', '../model/ResultSetContextFacetFields', '../model/ResultSetContextFacetQueries', '../model/ResultSetContextSpellcheck'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./ResponseConsistency'), require('./ResultSetContextFacetFields'), require('./ResultSetContextFacetQueries'), require('./ResultSetContextSpellcheck'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.ResultSetContext = factory(root.AlfrescoContentServicesRestApi.ApiClient, root.AlfrescoContentServicesRestApi.ResponseConsistency, root.AlfrescoContentServicesRestApi.ResultSetContextFacetFields, root.AlfrescoContentServicesRestApi.ResultSetContextFacetQueries, root.AlfrescoContentServicesRestApi.ResultSetContextSpellcheck);
+  }
+})(undefined, function (ApiClient, ResponseConsistency, ResultSetContextFacetFields, ResultSetContextFacetQueries, ResultSetContextSpellcheck) {
+  'use strict';
+
+  /**
+   * The ResultSetContext model module.
+   * @module model/ResultSetContext
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>ResultSetContext</code>.
+   * Context that applies to the whole result set
+   * @alias module:model/ResultSetContext
+   * @class
+   */
+
+  var exports = function exports() {
+    var _this = this;
+  };
+
+  /**
+   * Constructs a <code>ResultSetContext</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/ResultSetContext} obj Optional instance to populate.
+   * @return {module:model/ResultSetContext} The populated <code>ResultSetContext</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('consistency')) {
+        obj['consistency'] = ResponseConsistency.constructFromObject(data['consistency']);
+      }
+      if (data.hasOwnProperty('facetQueries')) {
+        obj['facetQueries'] = ApiClient.convertToType(data['facetQueries'], [ResultSetContextFacetQueries]);
+      }
+      if (data.hasOwnProperty('facetFields')) {
+        obj['facetFields'] = ApiClient.convertToType(data['facetFields'], [ResultSetContextFacetFields]);
+      }
+      if (data.hasOwnProperty('spellcheck')) {
+        obj['spellcheck'] = ApiClient.convertToType(data['spellcheck'], [ResultSetContextSpellcheck]);
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * @member {module:model/ResponseConsistency} consistency
+   */
+  exports.prototype['consistency'] = undefined;
+  /**
+   * The counts from facet queries
+   * @member {Array.<module:model/ResultSetContextFacetQueries>} facetQueries
+   */
+  exports.prototype['facetQueries'] = undefined;
+  /**
+   * The counts from field facets
+   * @member {Array.<module:model/ResultSetContextFacetFields>} facetFields
+   */
+  exports.prototype['facetFields'] = undefined;
+  /**
+   * Suggested corrections  If zero results were found for the original query then a single entry of type \"searchInsteadFor\" will be returned. If alternatives were found that return more results than the original query they are returned as \"didYouMean\" options. The highest quality suggestion is first.
+   * @member {Array.<module:model/ResultSetContextSpellcheck>} spellcheck
+   */
+  exports.prototype['spellcheck'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345,"./ResponseConsistency":331,"./ResultSetContextFacetFields":335,"./ResultSetContextFacetQueries":336,"./ResultSetContextSpellcheck":337}],334:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.ResultSetContextBuckets = factory(root.AlfrescoContentServicesRestApi.ApiClient);
+  }
+})(undefined, function (ApiClient) {
+  'use strict';
+
+  /**
+   * The ResultSetContextBuckets model module.
+   * @module model/ResultSetContextBuckets
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>ResultSetContextBuckets</code>.
+   * @alias module:model/ResultSetContextBuckets
+   * @class
+   */
+
+  var exports = function exports() {
+    var _this = this;
+  };
+
+  /**
+   * Constructs a <code>ResultSetContextBuckets</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/ResultSetContextBuckets} obj Optional instance to populate.
+   * @return {module:model/ResultSetContextBuckets} The populated <code>ResultSetContextBuckets</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('label')) {
+        obj['label'] = ApiClient.convertToType(data['label'], 'String');
+      }
+      if (data.hasOwnProperty('count')) {
+        obj['count'] = ApiClient.convertToType(data['count'], 'Number');
+      }
+      if (data.hasOwnProperty('display')) {
+        obj['display'] = ApiClient.convertToType(data['display'], Object);
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * The bucket label
+   * @member {String} label
+   */
+  exports.prototype['label'] = undefined;
+  /**
+   * The count for the bucket
+   * @member {Number} count
+   */
+  exports.prototype['count'] = undefined;
+  /**
+   * An optional field for additional display information
+   * @member {Object} display
+   */
+  exports.prototype['display'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345}],335:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient', '../model/ResultSetContextBuckets'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./ResultSetContextBuckets'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.ResultSetContextFacetFields = factory(root.AlfrescoContentServicesRestApi.ApiClient, root.AlfrescoContentServicesRestApi.ResultSetContextBuckets);
+  }
+})(undefined, function (ApiClient, ResultSetContextBuckets) {
+  'use strict';
+
+  /**
+   * The ResultSetContextFacetFields model module.
+   * @module model/ResultSetContextFacetFields
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>ResultSetContextFacetFields</code>.
+   * @alias module:model/ResultSetContextFacetFields
+   * @class
+   */
+
+  var exports = function exports() {
+    var _this = this;
+  };
+
+  /**
+   * Constructs a <code>ResultSetContextFacetFields</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/ResultSetContextFacetFields} obj Optional instance to populate.
+   * @return {module:model/ResultSetContextFacetFields} The populated <code>ResultSetContextFacetFields</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('label')) {
+        obj['label'] = ApiClient.convertToType(data['label'], 'String');
+      }
+      if (data.hasOwnProperty('buckets')) {
+        obj['buckets'] = ApiClient.convertToType(data['buckets'], [ResultSetContextBuckets]);
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * The field name or its explicit label, if provided on the request
+   * @member {String} label
+   */
+  exports.prototype['label'] = undefined;
+  /**
+   * An array of buckets and values
+   * @member {Array.<module:model/ResultSetContextBuckets>} buckets
+   */
+  exports.prototype['buckets'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345,"./ResultSetContextBuckets":334}],336:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.ResultSetContextFacetQueries = factory(root.AlfrescoContentServicesRestApi.ApiClient);
+  }
+})(undefined, function (ApiClient) {
+  'use strict';
+
+  /**
+   * The ResultSetContextFacetQueries model module.
+   * @module model/ResultSetContextFacetQueries
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>ResultSetContextFacetQueries</code>.
+   * @alias module:model/ResultSetContextFacetQueries
+   * @class
+   */
+
+  var exports = function exports() {
+    var _this = this;
+  };
+
+  /**
+   * Constructs a <code>ResultSetContextFacetQueries</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/ResultSetContextFacetQueries} obj Optional instance to populate.
+   * @return {module:model/ResultSetContextFacetQueries} The populated <code>ResultSetContextFacetQueries</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('label')) {
+        obj['label'] = ApiClient.convertToType(data['label'], 'String');
+      }
+      if (data.hasOwnProperty('count')) {
+        obj['count'] = ApiClient.convertToType(data['count'], 'Number');
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * @member {String} label
+   */
+  exports.prototype['label'] = undefined;
+  /**
+   * @member {Number} count
+   */
+  exports.prototype['count'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345}],337:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.ResultSetContextSpellcheck = factory(root.AlfrescoContentServicesRestApi.ApiClient);
+  }
+})(undefined, function (ApiClient) {
+  'use strict';
+
+  /**
+   * The ResultSetContextSpellcheck model module.
+   * @module model/ResultSetContextSpellcheck
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>ResultSetContextSpellcheck</code>.
+   * @alias module:model/ResultSetContextSpellcheck
+   * @class
+   */
+
+  var exports = function exports() {
+    var _this = this;
+  };
+
+  /**
+   * Constructs a <code>ResultSetContextSpellcheck</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/ResultSetContextSpellcheck} obj Optional instance to populate.
+   * @return {module:model/ResultSetContextSpellcheck} The populated <code>ResultSetContextSpellcheck</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('type')) {
+        obj['type'] = ApiClient.convertToType(data['type'], 'String');
+      }
+      if (data.hasOwnProperty('suggestion')) {
+        obj['suggestion'] = ApiClient.convertToType(data['suggestion'], ['String']);
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * @member {module:model/ResultSetContextSpellcheck.TypeEnum} type
+   */
+  exports.prototype['type'] = undefined;
+  /**
+   * A suggested alternative query
+   * @member {Array.<String>} suggestion
+   */
+  exports.prototype['suggestion'] = undefined;
+
+  /**
+   * Allowed values for the <code>type</code> property.
+   * @enum {String}
+   * @readonly
+   */
+  exports.TypeEnum = {
+    /**
+     * value: "searchInsteadFor"
+     * @const
+     */
+    "searchInsteadFor": "searchInsteadFor",
+    /**
+     * value: "didYouMean"
+     * @const
+     */
+    "didYouMean": "didYouMean" };
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345}],338:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient', '../model/ResultSetPagingList'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./ResultSetPagingList'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.ResultSetPaging = factory(root.AlfrescoContentServicesRestApi.ApiClient, root.AlfrescoContentServicesRestApi.ResultSetPagingList);
+  }
+})(undefined, function (ApiClient, ResultSetPagingList) {
+  'use strict';
+
+  /**
+   * The ResultSetPaging model module.
+   * @module model/ResultSetPaging
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>ResultSetPaging</code>.
+   * Query results
+   * @alias module:model/ResultSetPaging
+   * @class
+   */
+
+  var exports = function exports() {
+    var _this = this;
+  };
+
+  /**
+   * Constructs a <code>ResultSetPaging</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/ResultSetPaging} obj Optional instance to populate.
+   * @return {module:model/ResultSetPaging} The populated <code>ResultSetPaging</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('list')) {
+        obj['list'] = ResultSetPagingList.constructFromObject(data['list']);
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * @member {module:model/ResultSetPagingList} list
+   */
+  exports.prototype['list'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345,"./ResultSetPagingList":339}],339:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient', '../model/Pagination', '../model/ResultSetContext', '../model/ResultSetRowEntry'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./Pagination'), require('./ResultSetContext'), require('./ResultSetRowEntry'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.ResultSetPagingList = factory(root.AlfrescoContentServicesRestApi.ApiClient, root.AlfrescoContentServicesRestApi.Pagination, root.AlfrescoContentServicesRestApi.ResultSetContext, root.AlfrescoContentServicesRestApi.ResultSetRowEntry);
+  }
+})(undefined, function (ApiClient, Pagination, ResultSetContext, ResultSetRowEntry) {
+  'use strict';
+
+  /**
+   * The ResultSetPagingList model module.
+   * @module model/ResultSetPagingList
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>ResultSetPagingList</code>.
+   * @alias module:model/ResultSetPagingList
+   * @class
+   */
+
+  var exports = function exports() {
+    var _this = this;
+  };
+
+  /**
+   * Constructs a <code>ResultSetPagingList</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/ResultSetPagingList} obj Optional instance to populate.
+   * @return {module:model/ResultSetPagingList} The populated <code>ResultSetPagingList</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('pagination')) {
+        obj['pagination'] = Pagination.constructFromObject(data['pagination']);
+      }
+      if (data.hasOwnProperty('context')) {
+        obj['context'] = ResultSetContext.constructFromObject(data['context']);
+      }
+      if (data.hasOwnProperty('entries')) {
+        obj['entries'] = ApiClient.convertToType(data['entries'], [ResultSetRowEntry]);
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * @member {module:model/Pagination} pagination
+   */
+  exports.prototype['pagination'] = undefined;
+  /**
+   * @member {module:model/ResultSetContext} context
+   */
+  exports.prototype['context'] = undefined;
+  /**
+   * @member {Array.<module:model/ResultSetRowEntry>} entries
+   */
+  exports.prototype['entries'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345,"./Pagination":307,"./ResultSetContext":333,"./ResultSetRowEntry":340}],340:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient', '../model/ResultNode'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./ResultNode'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.ResultSetRowEntry = factory(root.AlfrescoContentServicesRestApi.ApiClient, root.AlfrescoContentServicesRestApi.ResultNode);
+  }
+})(undefined, function (ApiClient, ResultNode) {
+  'use strict';
+
+  /**
+   * The ResultSetRowEntry model module.
+   * @module model/ResultSetRowEntry
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>ResultSetRowEntry</code>.
+   * A row in the result set
+   * @alias module:model/ResultSetRowEntry
+   * @class
+   * @param entry {module:model/ResultNode} 
+   */
+
+  var exports = function exports(entry) {
+    var _this = this;
+
+    _this['entry'] = entry;
+  };
+
+  /**
+   * Constructs a <code>ResultSetRowEntry</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/ResultSetRowEntry} obj Optional instance to populate.
+   * @return {module:model/ResultSetRowEntry} The populated <code>ResultSetRowEntry</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('entry')) {
+        obj['entry'] = ResultNode.constructFromObject(data['entry']);
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * @member {module:model/ResultNode} entry
+   */
+  exports.prototype['entry'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345,"./ResultNode":332}],341:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient', '../model/SearchEntryHighlight'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./SearchEntryHighlight'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.SearchEntry = factory(root.AlfrescoContentServicesRestApi.ApiClient, root.AlfrescoContentServicesRestApi.SearchEntryHighlight);
+  }
+})(undefined, function (ApiClient, SearchEntryHighlight) {
+  'use strict';
+
+  /**
+   * The SearchEntry model module.
+   * @module model/SearchEntry
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>SearchEntry</code>.
+   * @alias module:model/SearchEntry
+   * @class
+   */
+
+  var exports = function exports() {
+    var _this = this;
+  };
+
+  /**
+   * Constructs a <code>SearchEntry</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/SearchEntry} obj Optional instance to populate.
+   * @return {module:model/SearchEntry} The populated <code>SearchEntry</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('score')) {
+        obj['score'] = ApiClient.convertToType(data['score'], 'Number');
+      }
+      if (data.hasOwnProperty('highlight')) {
+        obj['highlight'] = ApiClient.convertToType(data['highlight'], [SearchEntryHighlight]);
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * The score for this row
+   * @member {Number} score
+   */
+  exports.prototype['score'] = undefined;
+  /**
+   * Highlight fragments if requested and available. A match can happen in any of the requested field. 
+   * @member {Array.<module:model/SearchEntryHighlight>} highlight
+   */
+  exports.prototype['highlight'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345,"./SearchEntryHighlight":342}],342:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.SearchEntryHighlight = factory(root.AlfrescoContentServicesRestApi.ApiClient);
+  }
+})(undefined, function (ApiClient) {
+  'use strict';
+
+  /**
+   * The SearchEntryHighlight model module.
+   * @module model/SearchEntryHighlight
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>SearchEntryHighlight</code>.
+   * @alias module:model/SearchEntryHighlight
+   * @class
+   */
+
+  var exports = function exports() {
+    var _this = this;
+  };
+
+  /**
+   * Constructs a <code>SearchEntryHighlight</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/SearchEntryHighlight} obj Optional instance to populate.
+   * @return {module:model/SearchEntryHighlight} The populated <code>SearchEntryHighlight</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('field')) {
+        obj['field'] = ApiClient.convertToType(data['field'], 'String');
+      }
+      if (data.hasOwnProperty('snippets')) {
+        obj['snippets'] = ApiClient.convertToType(data['snippets'], ['String']);
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * The field where a match occured (one of the fields defined on the request)
+   * @member {String} field
+   */
+  exports.prototype['field'] = undefined;
+  /**
+   * Any number of snippets for the specified field highlighting the matching text
+   * @member {Array.<String>} snippets
+   */
+  exports.prototype['snippets'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345}],343:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Alfresco Content Services REST API
+ * **Search API**  Provides access to the search features of Alfresco Content Services. 
+ *
+ * OpenAPI spec version: 1
+ * 
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ *
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../../../alfrescoApiClient'], factory);
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../../../alfrescoApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.AlfrescoContentServicesRestApi) {
+      root.AlfrescoContentServicesRestApi = {};
+    }
+    root.AlfrescoContentServicesRestApi.UserInfo = factory(root.AlfrescoContentServicesRestApi.ApiClient);
+  }
+})(undefined, function (ApiClient) {
+  'use strict';
+
+  /**
+   * The UserInfo model module.
+   * @module model/UserInfo
+   * @version 1
+   */
+
+  /**
+   * Constructs a new <code>UserInfo</code>.
+   * @alias module:model/UserInfo
+   * @class
+   * @param displayName {String} 
+   * @param id {String} 
+   */
+
+  var exports = function exports(displayName, id) {
+    var _this = this;
+
+    _this['displayName'] = displayName;
+    _this['id'] = id;
+  };
+
+  /**
+   * Constructs a <code>UserInfo</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/UserInfo} obj Optional instance to populate.
+   * @return {module:model/UserInfo} The populated <code>UserInfo</code> instance.
+   */
+  exports.constructFromObject = function (data, obj) {
+    if (data) {
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('displayName')) {
+        obj['displayName'] = ApiClient.convertToType(data['displayName'], 'String');
+      }
+      if (data.hasOwnProperty('id')) {
+        obj['id'] = ApiClient.convertToType(data['id'], 'String');
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * @member {String} displayName
+   */
+  exports.prototype['displayName'] = undefined;
+  /**
+   * @member {String} id
+   */
+  exports.prototype['id'] = undefined;
+
+  return exports;
+});
+
+},{"../../../alfrescoApiClient":345}],344:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
 var AlfrescoPrivateRestApi = require('./alfresco-private-rest-api/src/index.js');
+var AlfrescoSearchRestApi = require('./alfresco-search-rest-api/src/index.js');
 var AlfrescoAuthRestApi = require('./alfresco-auth-rest-api/src/index');
 var AlfrescoActivitiApi = require('./alfresco-activiti-rest-api/src/index');
 var AlfrescoContent = require('./alfrescoContent');
@@ -58868,6 +63347,7 @@ var EcmAuth = require('./ecmAuth');
 var BpmAuth = require('./bpmAuth');
 var EcmClient = require('./ecmClient');
 var BpmClient = require('./bpmClient');
+var SearchClient = require('./searchClient');
 var EcmPrivateClient = require('./ecmPrivateClient');
 var _ = require('lodash');
 
@@ -58911,6 +63391,7 @@ var AlfrescoApi = function () {
         this.ecmPrivateClient = new EcmPrivateClient(this.config);
         this.ecmClient = new EcmClient(this.config);
         this.bpmClient = new BpmClient(this.config);
+        this.searchClient = new SearchClient(this.config);
         this.setAuthenticationClientECMBPM(this.ecmAuth.getAuthentication(), this.bpmAuth.getAuthentication());
 
         this.initObjects();
@@ -58952,6 +63433,12 @@ var AlfrescoApi = function () {
         AlfrescoPrivateRestApi.ApiClient.instance = this.ecmPrivateClient;
         this.corePrivateStore = AlfrescoPrivateRestApi;
         this._instantiateObjects(this.corePrivateStore, this.core);
+
+        //SEARCH
+        this.search = {};
+        AlfrescoSearchRestApi.ApiClient.instance = this.searchClient;
+        this.searchStore = AlfrescoSearchRestApi;
+        this._instantiateObjects(this.searchStore, this.search);
 
         this.nodes = this.node = new AlfrescoNode();
         this.content = new AlfrescoContent(this.ecmAuth, this.ecmClient);
@@ -59030,6 +63517,7 @@ var AlfrescoApi = function () {
 
     AlfrescoApi.prototype.setAuthenticationClientECMBPM = function setAuthenticationClientECMBPM(authECM, authBPM) {
         this.ecmClient.setAuthentications(authECM);
+        this.searchClient.setAuthentications(authECM);
         this.ecmPrivateClient.setAuthentications(authECM);
         this.bpmClient.setAuthentications(authBPM);
     };
@@ -59212,8 +63700,10 @@ module.exports = AlfrescoApi;
 module.exports.Activiti = AlfrescoActivitiApi;
 module.exports.Core = AlfrescoCoreRestApi;
 module.exports.Auth = AlfrescoAuthRestApi;
+module.exports.PrivateRestApi = AlfrescoPrivateRestApi;
+module.exports.Search = AlfrescoSearchRestApi;
 
-},{"./alfresco-activiti-rest-api/src/index":77,"./alfresco-auth-rest-api/src/index":165,"./alfresco-core-rest-api/src/index.js":189,"./alfresco-private-rest-api/src/index.js":300,"./alfrescoContent":303,"./alfrescoNode":304,"./alfrescoUpload":305,"./bpmAuth":306,"./bpmClient":307,"./ecmAuth":308,"./ecmClient":309,"./ecmPrivateClient":310,"event-emitter":21,"lodash":23}],302:[function(require,module,exports){
+},{"./alfresco-activiti-rest-api/src/index":77,"./alfresco-auth-rest-api/src/index":165,"./alfresco-core-rest-api/src/index.js":189,"./alfresco-private-rest-api/src/index.js":300,"./alfresco-search-rest-api/src/index.js":302,"./alfrescoContent":346,"./alfrescoNode":347,"./alfrescoUpload":348,"./bpmAuth":349,"./bpmClient":350,"./ecmAuth":351,"./ecmClient":352,"./ecmPrivateClient":353,"./searchClient":354,"event-emitter":21,"lodash":23}],345:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -59509,7 +63999,7 @@ Emitter(AlfrescoApiClient.prototype); // jshint ignore:line
 module.exports = AlfrescoApiClient;
 
 }).call(this,require('_process'))
-},{"./alfresco-core-rest-api/src/ApiClient":173,"_process":24,"event-emitter":21,"lodash":23,"superagent":25}],303:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/ApiClient":173,"_process":24,"event-emitter":21,"lodash":23,"superagent":25}],346:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -59570,7 +64060,7 @@ var AlfrescoContent = function () {
 
 module.exports = AlfrescoContent;
 
-},{}],304:[function(require,module,exports){
+},{}],347:[function(require,module,exports){
 'use strict';
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -59675,7 +64165,7 @@ var AlfrescoNode = function (_AlfrescoCoreRestApi$) {
 
 module.exports = AlfrescoNode;
 
-},{"./alfresco-core-rest-api/src/index.js":189,"lodash":23}],305:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/index.js":189,"lodash":23}],348:[function(require,module,exports){
 'use strict';
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -59769,7 +64259,7 @@ var AlfrescoUpload = function (_AlfrescoCoreRestApi$) {
 Emitter(AlfrescoUpload.prototype); // jshint ignore:line
 module.exports = AlfrescoUpload;
 
-},{"./alfresco-core-rest-api/src/index.js":189,"event-emitter":21,"lodash":23}],306:[function(require,module,exports){
+},{"./alfresco-core-rest-api/src/index.js":189,"event-emitter":21,"lodash":23}],349:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -59970,7 +64460,7 @@ Emitter(BpmAuth.prototype); // jshint ignore:line
 module.exports = BpmAuth;
 
 }).call(this,require("buffer").Buffer)
-},{"./alfrescoApiClient":302,"buffer":4,"event-emitter":21}],307:[function(require,module,exports){
+},{"./alfrescoApiClient":345,"buffer":4,"event-emitter":21}],350:[function(require,module,exports){
 'use strict';
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -60021,7 +64511,7 @@ var BpmClient = function (_AlfrescoApiClient) {
 
 module.exports = BpmClient;
 
-},{"./alfrescoApiClient":302}],308:[function(require,module,exports){
+},{"./alfrescoApiClient":345}],351:[function(require,module,exports){
 'use strict';
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -60218,7 +64708,7 @@ var EcmAuth = function (_AlfrescoApiClient) {
 Emitter(EcmAuth.prototype); // jshint ignore:line
 module.exports = EcmAuth;
 
-},{"./alfresco-auth-rest-api/src/index":165,"./alfrescoApiClient":302,"event-emitter":21}],309:[function(require,module,exports){
+},{"./alfresco-auth-rest-api/src/index":165,"./alfrescoApiClient":345,"event-emitter":21}],352:[function(require,module,exports){
 'use strict';
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -60269,7 +64759,7 @@ var EcmClient = function (_AlfrescoApiClient) {
 
 module.exports = EcmClient;
 
-},{"./alfrescoApiClient":302}],310:[function(require,module,exports){
+},{"./alfrescoApiClient":345}],353:[function(require,module,exports){
 'use strict';
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -60320,5 +64810,56 @@ var EcmClient = function (_AlfrescoApiClient) {
 
 module.exports = EcmClient;
 
-},{"./alfrescoApiClient":302}]},{},[1])(1)
+},{"./alfrescoApiClient":345}],354:[function(require,module,exports){
+'use strict';
+
+function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+
+var AlfrescoApiClient = require('./alfrescoApiClient');
+
+var SearchClient = function (_AlfrescoApiClient) {
+    _inherits(SearchClient, _AlfrescoApiClient);
+
+    /**
+     * @param {Object} config
+     */
+    function SearchClient(config) {
+        _classCallCheck(this, SearchClient);
+
+        var _this = _possibleConstructorReturn(this, _AlfrescoApiClient.call(this));
+
+        _this.config = config;
+
+        _this.changeHost();
+        return _this;
+    }
+
+    SearchClient.prototype.changeHost = function changeHost() {
+        this.host = this.config.hostEcm;
+        this.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/search/versions/1';
+    };
+
+    /**
+     * set the Authentications
+     *
+     * @param {Object} authentications
+     * */
+
+
+    SearchClient.prototype.setAuthentications = function setAuthentications(authentications) {
+        this.authentications = authentications;
+    };
+
+    return SearchClient;
+}(AlfrescoApiClient);
+
+module.exports = SearchClient;
+
+},{"./alfrescoApiClient":345}]},{},[1])(1)
 });
