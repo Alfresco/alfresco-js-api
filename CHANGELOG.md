@@ -22,16 +22,12 @@
 - [Add the Alfresco Discovery API to the JS-API](https://github.com/Alfresco/alfresco-js-api/issues/197)
 
 <a name="1.3.0"></a>
-# [1.3.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.3.0) (05-04-2017)
+# [1.3.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.3.0) (xx-xx-2017)
 ## Features
 - [Include new Search end points in the js-api](https://github.com/Alfresco/alfresco-js-api/issues/194)
-- [Add support Alfresco Authorization server js-api](https://github.com/Alfresco/alfresco-js-api/issues/201)
-- [maxItems and skipCount options not supported by findSharedLinks](https://github.com/Alfresco/alfresco-js-api/issues/200)
-- [Move the build process from browserify to webpack](https://github.com/Alfresco/alfresco-js-api/issues/206)
 
 ## Fix
 - [Move /task-forms/{task-id}/variables from rest to enterprise #199](https://github.com/Alfresco/alfresco-js-api/pull/195)
-- [loginTicket 400 response #209](https://github.com/Alfresco/alfresco-js-api/issues/209)
 
 <a name="1.2.2"></a>
 # [1.2.2](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.2.1) (06-03-2017)
