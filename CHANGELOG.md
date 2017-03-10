@@ -8,6 +8,7 @@ Alfresco JS API
 # [1.3.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.3.0) (xx-xx-2017)
 ## Fix
 - [Include new Search end points in the js-api](https://github.com/Alfresco/alfresco-js-api/issues/194)
+- [Move /task-forms/{task-id}/variables from rest to enterprise #199](https://github.com/Alfresco/alfresco-js-api/pull/195)
 
 <a name="1.2.2"></a>
 # [1.2.2](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.2.1) (06-03-2017)
