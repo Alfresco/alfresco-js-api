@@ -25,6 +25,7 @@ class AlfrescoApi {
      *      config = {
      *        hostEcm:       // hostEcm Your share server IP or DNS name
      *        hostBpm: // hostBpm Your activiti server IP or DNS name
+     *        oauth2: {host:'http://127.0.0.1:9191', clientId:'alfrescoexample', secret:'secret'}
      *        contextRoot: // contextRoot default value alfresco
      *        contextRootBpm: // contextRoot activiti default value activiti-app
      *        provider:   // ECM BPM ALL OAUTH, default ECM
@@ -42,7 +43,7 @@ class AlfrescoApi {
         this.config = {
             hostEcm: config.hostEcm || 'http://127.0.0.1:8080',
             hostBpm: config.hostBpm || 'http://127.0.0.1:9999',
-            hostOauth2: config.hostOauth2 || 'http://127.0.0.1:9191',
+            oauth2: config.oauth2,
             contextRoot: config.contextRoot || 'alfresco',
             contextRootBpm: config.contextRootBpm || 'activiti-app',
             provider: config.provider || 'ECM',
@@ -52,22 +53,19 @@ class AlfrescoApi {
             disableCsrf: config.disableCsrf || false
         };
 
-        this.bpmAuth = new BpmAuth(this.config);
-        this.ecmAuth = new EcmAuth(this.config);
-        this.oauth2Auth = new Oauth2Auth(this.config);
-
         this.ecmPrivateClient = new EcmPrivateClient(this.config);
         this.ecmClient = new EcmClient(this.config);
         this.bpmClient = new BpmClient(this.config);
         this.searchClient = new SearchClient(this.config);
 
         if (this.config.provider === 'OAUTH') {
-            this.setAuthenticationOauth2(this.oauth2Auth.getAuthentication());
+            this.oauth2Auth = new Oauth2Auth(this.config);
+            this.setAuthenticationClientECMBPM(this.oauth2Auth.getAuthentication(), this.oauth2Auth.getAuthentication());
         } else {
+            this.bpmAuth = new BpmAuth(this.config);
+            this.ecmAuth = new EcmAuth(this.config);
             this.setAuthenticationClientECMBPM(this.ecmAuth.getAuthentication(), this.bpmAuth.getAuthentication());
         }
-
-        this.setAuthenticationClientECMBPM(this.ecmAuth.getAuthentication(), this.bpmAuth.getAuthentication());
 
         this.initObjects();
 
@@ -205,12 +203,6 @@ class AlfrescoApi {
         this.bpmClient.setAuthentications(authBPM);
     }
 
-    setAuthenticationOauth2(oauth2Auth) {
-        this.ecmClient.setAuthentications(oauth2Auth);
-        this.ecmPrivateClient.setAuthentications(oauth2Auth);
-        this.bpmClient.setAuthentications(oauth2Auth);
-    }
-
     /**
      * login Tickets
      *
@@ -311,6 +303,17 @@ class AlfrescoApi {
         } else if (this.config.provider && this.config.provider.toUpperCase() === 'OAUTH') {
             return this.oauth2Auth.isLoggedIn();
         }
+    }
+
+    /**
+     * refresh token
+     * */
+    refreshToken() {
+        if (this.config.provider !== 'OAUTH') {
+            throw 'Missing the required oauth2 configuration';
+        }
+
+        return this.oauth2Auth.refreshToken();
     }
 
     /**

@@ -5,7 +5,7 @@ var Oauth2Mock = require('../test/mockObjects/mockAlfrescoApi').Oauth2Mock.Auth;
 var Oauth2Auth = require('../src/oauth2Auth');
 var AlfrescoApi = require('../main');
 
-describe('Ecm Auth test', function () {
+describe('Oauth2  test', function () {
 
     beforeEach(function () {
         this.hostOauth2 = 'http://127.0.0.1:9191';
@@ -18,7 +18,11 @@ describe('Ecm Auth test', function () {
 
             this.oauth2Mock.get200Response();
             this.oauth2Auth = new Oauth2Auth({
-                hostOauth2: this.hostOauth2
+                oauth2: {
+                    host: this.hostOauth2,
+                    clientId: 'alfrescoapp',
+                    secret: 'secret'
+                }
             });
 
             this.oauth2Auth.login('admin', 'admin').then((data) => {
@@ -34,7 +38,11 @@ describe('Ecm Auth test', function () {
 
             this.oauth2Mock.get200Response();
             this.oauth2Auth = new Oauth2Auth({
-                hostOauth2: this.hostOauth2
+                oauth2: {
+                    host: this.hostOauth2,
+                    clientId: 'alfrescoapp',
+                    secret: 'secret'
+                }
             });
 
             this.oauth2Auth.login('admin', 'admin').then(() => {
@@ -49,15 +57,69 @@ describe('Ecm Auth test', function () {
             this.oauth2Mock.get200Response();
 
             this.alfrescoJsApi = new AlfrescoApi({
-                hostOauth2: this.hostOauth2,
+                oauth2: {
+                    host: this.hostOauth2,
+                    clientId: 'alfrescoapp',
+                    secret: 'secret'
+                },
                 provider: 'OAUTH'
             });
 
             this.alfrescoJsApi.login('admin', 'admin').then(() => {
                 expect(this.alfrescoJsApi.ecmClient.authentications.basicAuth.accessToken).to.be.equal('5c37e781-40a7-4957-adcc-2b171c770a5c');
+                expect(this.alfrescoJsApi.ecmClient.authentications.basicAuth.refreshToken).to.be.equal('15d66b26-3cf7-446a-8db8-1345f2f4485a');
                 done();
+            }, ()=> {
             });
         });
 
+        it('login password should be removed after login', function (done) {
+
+            this.oauth2Mock.get200Response();
+
+            this.alfrescoJsApi = new AlfrescoApi({
+                oauth2: {
+                    host: this.hostOauth2,
+                    clientId: 'alfrescoapp',
+                    secret: 'secret'
+                },
+                provider: 'OAUTH'
+            });
+
+            this.alfrescoJsApi.login('admin', 'admin').then(() => {
+                expect(this.oauth2Auth.authentications.basicAuth.password).to.be.not.equal('admin');
+                done();
+            }, ()=> {
+            });
+
+        });
+
+        it('refresh token should change the token', function (done) {
+
+            this.oauth2Mock.get200Response();
+
+            this.alfrescoJsApi = new AlfrescoApi({
+                oauth2: {
+                    host: this.hostOauth2,
+                    clientId: 'alfrescoapp',
+                    secret: 'secret'
+                },
+                provider: 'OAUTH'
+            });
+
+            this.alfrescoJsApi.login('admin', 'admin').then(() => {
+
+                expect(this.alfrescoJsApi.ecmClient.authentications.basicAuth.accessToken).to.be.equal('5c37e781-40a7-4957-adcc-2b171c770a5c');
+                expect(this.alfrescoJsApi.ecmClient.authentications.basicAuth.refreshToken).to.be.equal('15d66b26-3cf7-446a-8db8-1345f2f4485a');
+
+                this.oauth2Mock.get200RefreshTokenResponse(this.alfrescoJsApi.ecmClient.authentications.basicAuth.refreshToken);
+
+                this.alfrescoJsApi.refreshToken().then(() => {
+                    expect(this.alfrescoJsApi.ecmClient.authentications.basicAuth.accessToken).to.be.equal('f8bccca0-76cf-4bd9-bb16-a867ffdd5a35');
+                    done();
+                }, ()=> {
+                });
+            });
+        });
     });
 });
