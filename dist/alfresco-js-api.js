@@ -63667,6 +63667,19 @@ var AlfrescoApi = function () {
     };
 
     /**
+     * refresh token
+     * */
+
+
+    AlfrescoApi.prototype.refreshToken = function refreshToken() {
+        if (this.config.provider !== 'OAUTH') {
+            throw 'Missing the required oauth2 configuration';
+        }
+
+        return this.oauth2Auth.refreshToken();
+    };
+
+    /**
      * Set the current Ticket
      *
      * @param {String} ticketEcm
@@ -64874,26 +64887,29 @@ var oauth2Auth = function (_AlfrescoApiClient) {
         var _this = _possibleConstructorReturn(this, _AlfrescoApiClient.call(this));
 
         _this.config = config;
-        _this.basePath = _this.config.oauth2.host; //Auth Call
 
-        if (_this.config.oauth2.host === undefined || _this.config.oauth2.host === null) {
-            throw 'Missing the required oauth2 host parameter';
-        }
+        if (_this.config.oauth2) {
+            if (_this.config.oauth2.host === undefined || _this.config.oauth2.host === null) {
+                throw 'Missing the required oauth2 host parameter';
+            }
 
-        if (_this.config.oauth2.clientId === undefined || _this.config.oauth2.clientId === null) {
-            throw 'Missing the required oauth2 clientId parameter';
-        }
+            if (_this.config.oauth2.clientId === undefined || _this.config.oauth2.clientId === null) {
+                throw 'Missing the required oauth2 clientId parameter';
+            }
 
-        if (_this.config.oauth2.secret === undefined || _this.config.oauth2.secret === null) {
-            throw 'Missing the required oauth2 secret parameter';
-        }
+            if (_this.config.oauth2.secret === undefined || _this.config.oauth2.secret === null) {
+                throw 'Missing the required oauth2 secret parameter';
+            }
 
-        _this.authentications = {
-            'basicAuth': { type: 'oauth2', accessToken: '' }
-        };
+            _this.basePath = _this.config.oauth2.host; //Auth Call
 
-        if (_this.config.accessToken) {
-            _this.setTicket(_this.config.accessToken);
+            _this.authentications = {
+                'basicAuth': { type: 'oauth2', accessToken: '' }
+            };
+
+            if (_this.config.accessToken) {
+                _this.setTicket(_this.config.accessToken);
+            }
         }
 
         Emitter.call(_this);
@@ -64937,7 +64953,7 @@ var oauth2Auth = function (_AlfrescoApiClient) {
 
         this.promise = new Promise(function (resolve, reject) {
             _this2.callApi('/oauth/token', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, {}).then(function (data) {
-                _this2.setToken(data.access_token);
+                _this2.setToken(data.access_token, data.refresh_token);
                 resolve(data);
             }, function (error) {
                 if (error.error.status === 401) {
@@ -64954,14 +64970,65 @@ var oauth2Auth = function (_AlfrescoApiClient) {
     };
 
     /**
-     * Set the current Token
+     * Refresh the  Token
      *
-     * @param {String} Token
      * */
 
 
-    oauth2Auth.prototype.setToken = function setToken(token) {
+    oauth2Auth.prototype.refreshToken = function refreshToken() {
+        var _this3 = this;
+
+        var postBody = {},
+            pathParams = {},
+            queryParams = {},
+            formParams = {};
+
+        var auth = 'Basic ' + new Buffer(this.config.oauth2.clientId + ':' + this.config.oauth2.secret).toString('base64');
+
+        var headerParams = {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Cache-Control': 'no-cache',
+            'Authorization': auth
+        };
+
+        queryParams = {
+            refresh_token: this.authentications.basicAuth.refreshToken,
+            grant_type: 'refresh_token'
+        };
+
+        var authNames = [];
+        var contentTypes = ['application/x-www-form-urlencoded'];
+        var accepts = ['application/json'];
+
+        this.promise = new Promise(function (resolve, reject) {
+            _this3.callApi('/oauth/token', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, {}).then(function (data) {
+                _this3.setToken(data.access_token, data.refresh_token);
+                resolve(data);
+            }, function (error) {
+                if (error.error.status === 401) {
+                    _this3.promise.emit('unauthorized');
+                }
+                _this3.promise.emit('error');
+                reject(error.error);
+            });
+        });
+
+        Emitter(this.promise); // jshint ignore:line
+
+        return this.promise;
+    };
+
+    /**
+     * Set the current Token
+     *
+     * @param {String} Token
+     * @param {String} refreshToken
+     * */
+
+
+    oauth2Auth.prototype.setToken = function setToken(token, refreshToken) {
         this.authentications.basicAuth.accessToken = token;
+        this.authentications.basicAuth.refreshToken = refreshToken;
         this.authentications.basicAuth.password = null;
         this.token = token;
     };
