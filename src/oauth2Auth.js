@@ -11,22 +11,29 @@ class oauth2Auth extends AlfrescoApiClient {
     constructor(config) {
         super();
         this.config = config;
-        this.basePath = this.config.oauth2.host; //Auth Call
 
-        if (this.config.oauth2.clientId === undefined || this.config.oauth2.clientId === null) {
-            throw 'Missing the required oauth2 clientId parameter';
-        }
+        if (this.config.oauth2) {
+            if (this.config.oauth2.host === undefined || this.config.oauth2.host === null) {
+                throw 'Missing the required oauth2 host parameter';
+            }
 
-        if (this.config.oauth2.secret === undefined || this.config.oauth2.secret === null) {
-            throw 'Missing the required oauth2 secret parameter';
-        }
+            if (this.config.oauth2.clientId === undefined || this.config.oauth2.clientId === null) {
+                throw 'Missing the required oauth2 clientId parameter';
+            }
 
-        this.authentications = {
-            'basicAuth': {type: 'oauth2', accessToken: ''}
-        };
+            if (this.config.oauth2.secret === undefined || this.config.oauth2.secret === null) {
+                throw 'Missing the required oauth2 secret parameter';
+            }
 
-        if (this.config.accessToken) {
-            this.setTicket(this.config.accessToken);
+            this.basePath = this.config.oauth2.host; //Auth Call
+
+            this.authentications = {
+                'basicAuth': {type: 'oauth2', accessToken: ''}
+            };
+
+            if (this.config.accessToken) {
+                this.setTicket(this.config.accessToken);
+            }
         }
 
         Emitter.call(this);
