@@ -47529,7 +47529,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
 
   /**
-   * Constructs a new SharedlinksApi. 
+   * Constructs a new SharedlinksApi.
    * @alias module:api/SharedlinksApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -47640,6 +47640,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Find (search for) links that current user has read permission on source node.
      * @param {Object} opts Optional parameters
      * @param {String} opts.where Optionally filter the list by \&quot;sharedByUser\&quot; userid of person who shared the link (can also use -me-)\n*   where&#x3D;(sharedByUser&#x3D;&#39;jbloggs&#39;)\n*   where&#x3D;(sharedByUser&#x3D;&#39;-me-&#39;)
+     * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
+     * @param {Integer} opts.maxItems The maximum number of items to return in the list.
      * @param {Array.<String>} opts.include Returns additional information about the shared link, the following optional fields can be requested:\n* allowableOperations\n
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeSharedLinkPaging}
@@ -47650,6 +47652,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       var pathParams = {};
       var queryParams = {
+        'skipCount': opts['skipCount'],
+        'maxItems': opts['maxItems'],
         'where': opts['where'],
         'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
