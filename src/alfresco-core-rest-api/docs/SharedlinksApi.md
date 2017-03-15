@@ -192,8 +192,10 @@ Find (search for) links that current user has read permission on source node.
 ```javascript
 var opts = {
   'where': "where_example", // {String} Optionally filter the list by "sharedByUser" userid of person who shared the link (can also use -me-) where=(sharedByUser='jbloggs')    where=(sharedByUser='-me-')
-  'include': ["include_example"], // {[String]} Returns additional information about the shared link, the following optional fields can be requested: * allowableOperations
-  'fields': ["fields_example"]  /* {[String]} A list of field names.
+   'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
+   'maxItems': 56, // {Integer} The maximum number of items to return in the list.
+   'include': ["include_example"], // {[String]} Returns additional information about the shared link, the following optional fields can be requested: * allowableOperations
+   'fields': ["fields_example"]  /* {[String]} A list of field names.
                                 You can use this parameter to restrict the fields
                                 returned within a response if, for example, you want to save on overall bandwidth.
 
