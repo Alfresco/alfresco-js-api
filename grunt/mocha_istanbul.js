@@ -12,7 +12,7 @@ module.exports = function () {
                     lines: 75,
                     statements: 75
                 },
-                excludes: ['**/alfresco-auth-rest-api/**', '**/alfresco-core-rest-api/**', '**/alfresco-private-rest-api/**', '**/alfresco-activiti-rest-api/**'],
+                excludes: ['**/alfresco-search-rest-api/**','**/alfresco-auth-rest-api/**', '**/alfresco-core-rest-api/**', '**/alfresco-private-rest-api/**', '**/alfresco-activiti-rest-api/**'],
                 root: './src', // define where the cover task should consider the root of libraries that are covered by tests
                 reportFormats: ['cobertura', 'lcovonly']
             }

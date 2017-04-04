@@ -12,6 +12,7 @@ declare namespace AlfrescoApi {
 
         bpmAuth: BpmAuthApi;
         ecmAuth: EcmAuthApi;
+        oauth2Auth: OauthApi;
 
         activiti: Activiti;
         core: Core;
@@ -24,6 +25,7 @@ declare namespace AlfrescoApi {
 
         ecmClient: EcmClient;
         bpmClient: BpmClient;
+        searchClient: SearchClient;
         ecmPrivateClient: EcmPrivateClient;
 
         changeEcmHost(ecmHost: string): void;
@@ -34,6 +36,7 @@ declare namespace AlfrescoApi {
         login(username: string, password: string): Promise<string>;
         logout(): Promise<any>;
         loginTicket(ticket: string): any;
+        refresh(): Promise<string>;
 
         getDocumentThumbnailUrl(documentId: string): any;
         getContentUrl(documentId: string): any;
@@ -153,6 +156,12 @@ declare namespace AlfrescoApi {
     export interface BpmClient {
         new(config: AlfrescoApiConfig): BpmClient;
         changeHost(host: String): void;
+        setAuthentications(authentications: any): void;
+    }
+
+    export interface SearchClient {
+        new(config: AlfrescoApiConfig): SearchClient;
+        changeHost(): void;
         setAuthentications(authentications: any): void;
     }
 
@@ -494,6 +503,7 @@ declare namespace AlfrescoApi {
     export interface AlfrescoApiConfig {
         hostEcm?: string;
         hostBpm?: string;
+        oauth2?: Oauth2Config;
         contextRoot?: string;
         contextRootBpm?: string;
         provider?: string;
@@ -527,8 +537,18 @@ declare namespace AlfrescoApi {
 
     }
 
+    export interface OauthApi extends AuthApi {
+        refresh(): Promise<string>;
+    }
+
     export interface EcmAuthApi extends AuthApi {
         validateTicket(): Promise<string>;
+    }
+
+    export interface Oauth2Config {
+        clientId?: string;
+        secret?: string;
+        host?: string;
     }
 }
 

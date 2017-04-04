@@ -172,6 +172,7 @@ describe('Auth', function () {
                     });
 
                     this.alfrescoJsApi.loginTicket(ticket).then((data) => {
+                        expect(this.alfrescoJsApi.ecmAuth.authentications.basicAuth.password).to.be.equal(ticket);
                         expect(data).to.be.equal(ticket);
                         done();
                     });

@@ -27,6 +27,7 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
 
 <!-- toc -->
 
+- [Full documentation of all the methods of each API](#full-documentation-of-all-the-methods-of-each-api)
 - [Prerequisites](#prerequisites)
 - [Node](#node)
 - [Api Modules complete methods list](#api-modules-complete-methods-list)
@@ -42,6 +43,7 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
       - [Login with ticket ECM](#login-with-ticket-ecm)
       - [Login with ticket ECM/BPM as parameter in the constructor](#login-with-ticket-ecmbpm-as-parameter-in-the-constructor)
     + [Login with Username and Password BPM](#login-with-username-and-password-bpm)
+    + [Login with OAUTH2 Alfresco authorization server](#login-with-oauth2-alfresco-authorization-server)
   * [Logout](#logout)
   * [isLoggedIn](#isloggedin)
   * [Get tickets](#get-tickets)
@@ -89,7 +91,15 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
 
 <!-- markdown-toc end -->
 
-# Prerequisites 
+# Full documentation of all the methods of each API
+
+- [Authentication Services](/src/alfresco-auth-rest-api)
+- [Content Services](/src/alfresco-core-rest-api)
+- [Process Services](/src/alfresco-activiti-rest-api)
+- [ContentCMN](/src/alfresco-private-rest-api)
+- [Content Search](/src/alfresco-search-rest-api)
+
+# Prerequisites
 
 To correctly use the alfresco js api the minimal supported version are:
 
@@ -121,9 +131,9 @@ var AlfrescoApi = require('alfresco-js-api');
 
 ```html
     <script src="node_modules/alfresco-js-api/dist/alfresco-js-api.min.js"></script>
-    
+
     or for not minify version
-    
+
     <script src="node_modules/alfresco-js-api/dist/alfresco-js-api.js"></script>
 ```
 
@@ -134,10 +144,11 @@ var AlfrescoApi = require('alfresco-js-api');
 
 AlfrescoApi({alfrescoHost, activitiHost, contextRoot, ticket});
 
-Property | Description  | default value| 
+Property | Description  | default value|
 ------------- | ------------- | -------------|
 hostEcm| (Optional value The Ip or Name of the host where your Alfresco instance is running )|http://127.0.0.1:8080 |
 hostBpm| (Optional value The Ip or Name of the host where your Activiti instance is running )|http://127.0.0.1:9999 |
+oauth2|  (Optional configuration object for alfresco authorization server {host:'HOST_OAUTH2_SERVER', clientId:'YOUR_CLIENT_ID', secret:'SECRET'} ||
 contextRoot| (Optional value that define the context Root of the Alfresco ECM API default value is alfresco )|alfresco |
 contextRootBpm| (Optional value that define the context Root of the Activiti API default value is activiti-app )|alfresco |
 provider| (Optional value default value is ECM. This parameter can accept as value ECM BPM or ALL to use the API and Login in the ECM, Activiti BPM or Both )|alfresco |
@@ -182,7 +193,7 @@ If you already know thw ticket when you invoke the constructor you can pass it a
 #### Login with ticket ECM
 
 This authentication validate also the ticket against the server
- 
+
 ####Example
 ```javascript
 var ticket = 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
@@ -196,7 +207,7 @@ this.alfrescoJsApi.loginTicket(ticket).then(function (data) {
 
 #### Login with ticket ECM/BPM as parameter in the constructor
 
-With this authentication the ticket is not validated against the server 
+With this authentication the ticket is not validated against the server
 
 #####Example
 ```javascript
@@ -207,7 +218,7 @@ this.alfrescoJsApi = new AlfrescoApi({ ticketEcm:'TICKET_4479f4d3bb155195879bfbb
 //Login ticket BPM
 this.alfrescoJsApi = new AlfrescoApi({ ticketBpm: 'Basic YWRtaW46YWRtaW4=',  hostBpm:'http://127.0.0.1:9999'});
 
-//Login ticket ECM and BPM 
+//Login ticket ECM and BPM
 this.alfrescoJsApi = new AlfrescoApi({ ticketEcm:'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1', ticketBpm: 'Basic YWRtaW46YWRtaW4=',  hostEcm:'http://127.0.0.1:8080',  hostBpm:'http://127.0.0.1:9999'});
 ```
 
@@ -223,6 +234,40 @@ this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
     console.error(error);
 });
 
+```
+### Login with OAUTH2 Alfresco authorization server
+
+If you have installed the Alfresco authorization server you can login with this option.
+
+###Example
+```javascript
+this.alfrescoJsApi = new AlfrescoApi({
+        oauth2: {
+            host: 'HOST_OAUTH2_SERVER',
+            clientId: 'YOUR_CLIENT_ID',
+            secret: 'SECRET'
+        },
+        provider: 'OAUTH'
+    });
+
+this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
+   console.log('API called successfully Login in with authorization server performed ');
+}, function (error) {
+   console.error(error);
+});
+
+```
+
+After the login if you want refresh your token you can use this call
+
+###Example
+
+```javascript
+this.alfrescoJsApi.refreshToken()then(function (data) {
+    console.log('Your token has been refreshed');
+ }, function (error) {
+    console.error(error);
+ });
 ```
 
 ## Logout
@@ -269,7 +314,7 @@ getTicketEcm()
 ```javascript
  var ecmTicket = this.alfrescoJsApi.getTicketEcm() ;
  console.log('This is your  ECM ticket  ' + ecmTicket);
- 
+
 ```
 
 getTicketBpm()
@@ -308,15 +353,15 @@ this.alfrescoJsApi.logout().on('logout', function(){
 
 # ECM
 
-A complete list of all the ECM methods is available here : [Core API](/src/alfresco-core-rest-api). 
+A complete list of all the ECM methods is available here : [Core API](/src/alfresco-core-rest-api).
 Below you can find some common examples.
 
-## Get Node  content 
+## Get Node  content
 
 getFileContent(nodeId, opts)
-                      
+
 >Returns the file content of the node with identifier **nodeId**.
-                    
+
  ###Example
 ```javascript
 
@@ -326,7 +371,7 @@ this.alfrescoJsApi.core.nodesApi.getFileContent(nodeId).then(function(data) {
     fs.writeFile('./test/grass.jpg', data, function(error) {
         if (error) {
             console.error(error);
-            return; 
+            return;
         }
         console.log('The file was saved!');
     });
@@ -348,7 +393,7 @@ getNodeInfo(fileOrFolderId, opts)
 var fileOrFolderId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
 
 this.alfrescoJsApi.nodes.getNodeInfo(fileOrFolderId).then(function (data) {
-    console.log('This is the name' + data.name );    
+    console.log('This is the name' + data.name );
 }, function (error) {
     console.log('This node does not exist');
 });
@@ -362,7 +407,7 @@ getNodeChildren(fileOrFolderId, opts)
 You can use the include parameter to return additional information.
 returns a promise with the Info about the children of the node if resolved and {error} if rejected.
 You can also use one of these well-known aliases: -my-   ,  -shared-   or   -root-  as NodeId
- 
+
 ###Example
 
 ```javascript
@@ -370,7 +415,7 @@ You can also use one of these well-known aliases: -my-   ,  -shared-   or   -roo
 var folderNodeId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
 
 this.alfrescoJsApi.nodes.getNodeChildren(folderNodeId).then(function (data) {
-    console.log('The number of children in this folder are ' + data.list.pagination.count );    
+    console.log('The number of children in this folder are ' + data.list.pagination.count );
 }, function (error) {
     console.log('This node does not exist');
 });
@@ -378,7 +423,7 @@ this.alfrescoJsApi.nodes.getNodeChildren(folderNodeId).then(function (data) {
 ```
 ## Create Folder
 
-createFolder(name, relativePath, nodeIdParentFolder, opts) 
+createFolder(name, relativePath, nodeIdParentFolder, opts)
 
 >createFolder return a promise that is resolved if the folder is created and {error} if rejected.
 You can also use one of these well-known aliases: -my-   ,  -shared-   or   -root-  as nodeIdParentFolder
@@ -388,14 +433,14 @@ You can also use one of these well-known aliases: -my-   ,  -shared-   or   -roo
 ```javascript
 
 this.alfrescoJsApi.nodes.createFolder('newFolderName').then(function (data) {
-    console.log('The folder is created in root');    
+    console.log('The folder is created in root');
 }, function (error) {
     console.log('Error in creation of this folder or folder already exist' + error);
 });
 
 
 this.alfrescoJsApi.nodes.createFolder('newFolderName', 'folderA/folderB').then(function (data) {
-    console.log('The folder is created in  folderA/folderB from root');    
+    console.log('The folder is created in  folderA/folderB from root');
 }, function (error) {
     console.log('Error in creation of this folder or folder already exist' + error);
 });
@@ -404,7 +449,7 @@ this.alfrescoJsApi.nodes.createFolder('newFolderName', 'folderA/folderB').then(f
 var parentFolder = '80a94ac8-3ece-47ad-864e-5d939424c47c'
 
 this.alfrescoJsApi.nodes.createFolder('newFolderName', 'folderA/folderB', parentFolder).then(function (data) {
-    console.log('The folder is created in  folderA/folderB from parentFolder:' + parentFolder);    
+    console.log('The folder is created in  folderA/folderB from parentFolder:' + parentFolder);
 }, function (error) {
     console.log('Error in creation of this folder or folder already exist' + error);
 });
@@ -422,7 +467,7 @@ createFolderAutoRename(name, relativePath, nodeIdParentFolder, opts)
 ```javascript
 
 this.alfrescoJsApi.nodes.createFolderAutoRename('newFolderName').then(function (data) {
-    console.log('The folder is created in root');    
+    console.log('The folder is created in root');
 }, function (error) {
     console.log('Error in creation of this folder' + error);
 });
@@ -435,7 +480,7 @@ uploadFile(fileDefinition, relativePath, nodeId, nodeBody, opts)
 
 The fileDefinition provides information about files and allows JavaScript to access their content.
 
-*Web File Definition 
+*Web File Definition
 File Definition are generally retrieved from a FileList object returned as a result of a user selecting files using the <input> element
 
 *Node File Definition
@@ -444,7 +489,7 @@ File Definition are generally retrieved from a read Stram
 ###Example
 
 ```javascript
- 
+
 var fs = require('fs');
 
 var fileToUpload = fs.createReadStream('./folderA/folderB/newFile.txt');
@@ -454,7 +499,7 @@ this.alfrescoJsApi.upload.uploadFile(fileToUpload)
         console.log('File Uploaded in the root');
     }, function (error) {
         console.log('Error during the upload' + error);
-    });        
+    });
 
 
 this.alfrescoJsApi.upload.uploadFile(fileToUpload, null, null, null, {autoRename: true})
@@ -463,14 +508,14 @@ this.alfrescoJsApi.upload.uploadFile(fileToUpload, null, null, null, {autoRename
     }, function (error) {
         console.log('Error during the upload' + error);
     });
-    
+
 
 this.alfrescoJsApi.upload.uploadFile(fileToUpload, 'folderX/folderY/folderZ')
     .then(function () {
         console.log('File Uploaded in the from root folderX/folderY/folderZ');
     }, function (error) {
         console.log('Error during the upload' + error);
-    });    
+    });
 
 
 var parentFolder = '80a94ac8-3ece-47ad-864e-5d939424c47c';
@@ -480,19 +525,19 @@ this.alfrescoJsApi.upload.uploadFile(fileToUpload, 'folderX/folderY/folderZ', pa
         console.log('File Uploaded in the from parentFolder ' + parentFolder + ' n folderX/folderY/folderZ');
     }, function (error) {
         console.log('Error during the upload' + error);
-    }); 
-    
+    });
+
 ```
 
 The default behaviour of the Upload API will not create any thumbnail.
 In order to create a thumbnail you have to perform to pass the parameter ```javascript{renditions: 'doclib'}```  as in the  example below.
 This parameter will basically perform also a call to the Rendition API.
 For more information about the Rendition API :
-* [Rendition API](/src/alfresco-core-rest-api/docs/Rendition.md) 
+* [Rendition API](/src/alfresco-core-rest-api/docs/Rendition.md)
 * [Rendition service Wiki](https://wiki.alfresco.com/wiki/Rendition_Service)
 
 ```javascript
- 
+
 var fs = require('fs');
 
 var fileToUpload = fs.createReadStream('./folderA/folderB/newFile.txt');
@@ -502,7 +547,7 @@ this.alfrescoJsApi.upload.uploadFile(fileToUpload, null, null, null, {renditions
         console.log('File Uploaded in the root');
     }, function (error) {
         console.log('Error during the upload' + error);
-    });        
+    });
 
 ```
 
@@ -510,7 +555,7 @@ this.alfrescoJsApi.upload.uploadFile(fileToUpload, null, null, null, {renditions
 
 
 ```javascript
- 
+
 var fs = require('fs');
 
 var fileToUpload = fs.createReadStream('./folderA/folderB/newFile.txt');
@@ -518,7 +563,7 @@ var fileToUpload = fs.createReadStream('./folderA/folderB/newFile.txt');
 var promiseUpload = this.alfrescoJsApi.upload.uploadFile(fileToUpload)
     .once('abort', function () {
         console.log('File Uploaded aborted');
-    });        
+    });
 
 promiseUpload.abort();
 ```
@@ -527,11 +572,11 @@ promiseUpload.abort();
 ## Events Upload File
 
 >  The uploadFile is also an EventEmitter which you can register to listen to any of the following event types:
-* progress 
-* success 
-* abort 
-* error 
-* unauthorized 
+* progress
+* success
+* abort
+* error
+* unauthorized
 
 ###Example
 
@@ -545,7 +590,7 @@ this.alfrescoJsApi.upload.uploadFile(fileToUpload)
         console.log( 'Total :' + progress.total );
         console.log( 'Loaded :' + progress.loaded );
         console.log( 'Percent :' + progress.percent );
-    })  
+    })
     .on('success', () => {
        console.log( 'Your File is uploaded');
     });
@@ -574,7 +619,7 @@ Deleted nodes move to the trash bin is still possible to recover it
 var fileOrFolderId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
 
 this.alfrescoJsApi.nodes.deleteNode(fileOrFolderId).then(function (data) {
-    console.log('The file/folder is deleted');    
+    console.log('The file/folder is deleted');
 }, function (error) {
     console.log('This node does not exist');
 });
@@ -595,7 +640,7 @@ If Deleted Permanent is used will not be possible recover the files
 var fileOrFolderId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
 
 this.alfrescoJsApi.nodes.deleteNodePermanent(fileOrFolderId).then(function (data) {
-    console.log('The file/folder is deleted');    
+    console.log('The file/folder is deleted');
 }, function (error) {
     console.log('This node does not exist');
 });
@@ -603,7 +648,7 @@ this.alfrescoJsApi.nodes.deleteNodePermanent(fileOrFolderId).then(function (data
 ```
 
 ## Get thumbnail Url
-  
+
 getDocumentThumbnailUrl(documentId)
 
 ###Example
@@ -615,7 +660,7 @@ var thumbnailUrl = this.alfrescoJsApi.content.getDocumentThumbnailUrl('1a0b110f-
 ```
 
 ## Get preview Url
-  
+
 getDocumentPreviewUrl(documentId)
 
 ###Example
@@ -627,7 +672,7 @@ var previewUrl = this.alfrescoJsApi.content.getDocumentPreviewUrl('1a0b110f-1e09
 ```
 
 ## Get content Url
-  
+
 getContentUrl(documentId)
 
 ###Example
@@ -662,15 +707,15 @@ Name | Description
 //Call a GET on a Web Scripts available at the following URIs: http://127.0.01:8080/alfresco/service/mytasks
 
 this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', 'mytasks').then(function (data) {
-   console.log('Data received form http://127.0.01:8080/alfresco/service/mytasks' + data);    
+   console.log('Data received form http://127.0.01:8080/alfresco/service/mytasks' + data);
 }, function (error) {
    console.log('Error' + error);
 });
-        
+
 //Call a GET on a Web Scripts available at the following URIs: http://127.0.01:8080/share/service/mytasks
 
 this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', 'mytasks', null, 'share').then(function (data) {
-   console.log('Data received form http://127.0.01:8080/share/service/mytasks' + data);    
+   console.log('Data received form http://127.0.01:8080/share/service/mytasks' + data);
 }, function (error) {
    console.log('Error' + error);
 });
@@ -678,17 +723,17 @@ this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', 'mytasks', null, 's
 //Call a GET on a Web Scripts available at the following URIs: http://127.0.01:8080/share/differentServiceSlug/mytasks
 
 this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', 'mytasks', null, 'share', 'differentServiceSlug').then(function (data) {
-   console.log('Data received form http://127.0.01:8080/share/differentServiceSlug/mytasks' + data);    
+   console.log('Data received form http://127.0.01:8080/share/differentServiceSlug/mytasks' + data);
 }, function (error) {
    console.log('Error' + error);
 });
-        
+
 ```
 
 # BPM
 
-A complete list of all the BPM methods is available her[Activiti API](/src/alfresco-activiti-rest-api). 
-Below you can find some common examples.    
+A complete list of all the BPM methods is available her[Activiti API](/src/alfresco-activiti-rest-api).
+Below you can find some common examples.
 
 ## Task Api
 
@@ -702,17 +747,17 @@ listTasks(requestNode)
 
 ####Parameters
 
-Name | Type | Description  
-------------- | ------------- | ------------- 
- **requestNode** | [**Representation**](/src/alfresco-activiti-rest-api/docs/TaskQueryRequestRepresentation.md)| requestNode 
+Name | Type | Description
+------------- | ------------- | -------------
+ **requestNode** | [**Representation**](/src/alfresco-activiti-rest-api/docs/TaskQueryRequestRepresentation.md)| requestNode
 
 ####Example
 
 ```javascript
 var requestTasks = new this.alfrescoJsApi.activiti.TaskQueryRequestRepresentation();
- 
+
 this.alfrescoJsApi.activiti.taskApi.listTasks(requestTasks).then(function (data) {
- console.log('listTasks ' + data);    
+ console.log('listTasks ' + data);
 }, function (error) {
  console.log('Error' + error);
 });
@@ -726,10 +771,10 @@ getTask(taskId)
 
 ####Parameters
 
-Name | Type | Description  
-------------- | ------------- | ------------- 
- **taskId** | **String**| taskId 
- 
+Name | Type | Description
+------------- | ------------- | -------------
+ **taskId** | **String**| taskId
+
 ####Example
 
 ```javascript
@@ -737,7 +782,7 @@ Name | Type | Description
 var taskId = '10'; // String | taskId
 
 this.alfrescoJsApi.activiti.taskApi.getTask(taskId).then(function (data) {
-    console.log('Task representation ' + data);    
+    console.log('Task representation ' + data);
 }, function (error) {
     console.log('Error' + error);
 });
@@ -751,9 +796,9 @@ filterTasks(requestTasks)
 
 ####Parameters
 
-Name | Type | Description  
-------------- | ------------- | ------------- 
- **requestTasks** | [**TaskFilterRequestRepresentation**](/src/alfresco-activiti-rest-api/docs/TaskFilterRequestRepresentation.md)| requestTasks 
+Name | Type | Description
+------------- | ------------- | -------------
+ **requestTasks** | [**TaskFilterRequestRepresentation**](/src/alfresco-activiti-rest-api/docs/TaskFilterRequestRepresentation.md)| requestTasks
 
 
 ####Example
@@ -764,7 +809,7 @@ var requestTasks = new this.alfrescoJsApi.activiti.TaskFilterRequestRepresentati
 requestTasks.appDefinitionId = 1;
 
 this.alfrescoJsApi.activiti.taskApi.filterTasks(requestTasks).then(function (data) {
-    console.log('Task filter list ' + data);    
+    console.log('Task filter list ' + data);
 }, function (error) {
     console.log('Error' + error);
 });
@@ -778,9 +823,9 @@ completeTask(taskId)
 
 ####Parameters
 
-Name | Type | Description  
-------------- | ------------- | ------------- 
- **taskId** | **String**| taskId 
+Name | Type | Description
+------------- | ------------- | -------------
+ **taskId** | **String**| taskId
 
 ####Example
 
@@ -789,7 +834,7 @@ Name | Type | Description
 var taskId = '10'; // String | taskId
 
 this.alfrescoJsApi.activiti.taskApi.completeTask(taskId).then(function () {
-    console.log('Task completed');    
+    console.log('Task completed');
 }, function (error) {
     console.log('Error' + error);
 });
@@ -802,9 +847,9 @@ getTaskForm(taskId)
 
 ####Parameters
 
-Name | Type | Description  
+Name | Type | Description
 ------------- | ------------- | -------------
- **taskId** | **String**| taskId 
+ **taskId** | **String**| taskId
 
 ####Example
 
@@ -813,7 +858,7 @@ Name | Type | Description
 var taskId = '10'; // String | taskId
 
 this.alfrescoJsApi.activiti.taskApi.getTaskForm(taskId).then(function (data) {
-   console.log('Task form representation' + data);    
+   console.log('Task form representation' + data);
 }, function (error) {
    console.log('Error' + error);
 });
@@ -827,10 +872,10 @@ completeTaskForm(taskId, completeTaskFormRepresentation)
 
 ####Parameters
 
-Name | Type | Description  
+Name | Type | Description
 ------------- | ------------- | -------------
- **taskId** | **String**| taskId 
- **completeTaskFormRepresentation** | [**CompleteFormRepresentation**](/src/alfresco-activiti-rest-api/docs/CompleteFormRepresentation.md)| completeTaskFormRepresentation 
+ **taskId** | **String**| taskId
+ **completeTaskFormRepresentation** | [**CompleteFormRepresentation**](/src/alfresco-activiti-rest-api/docs/CompleteFormRepresentation.md)| completeTaskFormRepresentation
 
 ####Example
 
@@ -839,7 +884,7 @@ Name | Type | Description
 var taskId = '10'; // String | taskId
 
 this.alfrescoJsApi.activiti.taskApi.completeTaskForm(taskId, completeTaskFormRepresentation).then(function () {
-    console.log('Task completed');    
+    console.log('Task completed');
 }, function (error) {
     console.log('Error' + error);
 });
@@ -858,9 +903,9 @@ getProcessInstances(requestNode)
 
 ####Parameters
 
-Name | Type | Description  
-------------- | ------------- | ------------- 
- **requestNode** | [**ProcessFilterRequestRepresentation**](/src/alfresco-activiti-rest-api/docs/ProcessFilterRequestRepresentation.md)| requestNode 
+Name | Type | Description
+------------- | ------------- | -------------
+ **requestNode** | [**ProcessFilterRequestRepresentation**](/src/alfresco-activiti-rest-api/docs/ProcessFilterRequestRepresentation.md)| requestNode
 
 ####Example
 
@@ -868,7 +913,7 @@ Name | Type | Description
 var requestNode = new this.alfrescoJsApi.activiti.ProcessFilterRequestRepresentation();
 
 this.alfrescoJsApi.activiti.processApi.getProcessInstances(requestNode).then(function (data) {
-    console.log('All processes' + data);    
+    console.log('All processes' + data);
 }, function (error) {
     console.log('Error' + error);
 });
@@ -884,7 +929,7 @@ requestNode.sort = 'created-desc';
 requestNode.state = 'completed';
 
 this.alfrescoJsApi.activiti.processApi.getProcessInstances(requestNode).then(function (data) {
-   console.log('All processes completed' + data);    
+   console.log('All processes completed' + data);
 }, function (error) {
    console.log('Error' + error);
 });
@@ -904,8 +949,8 @@ getModel(modelId, opts)
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **modelId** | **Integer**| modelId | 
- **includePermissions** | **Boolean**| includePermissions | [optional] 
+ **modelId** | **Integer**| modelId |
+ **includePermissions** | **Boolean**| includePermissions | [optional]
 
 ####Example
 ```javascript
@@ -916,7 +961,7 @@ var opts = {
 };
 
 this.alfrescoJsApi.activiti.modelsApi.getModels(opts).then(function (data) {
-    console.log('All your reusable forms' + data);    
+    console.log('All your reusable forms' + data);
  }, function (error) {
     console.log('Error' + error);
  });
@@ -1144,15 +1189,15 @@ this.alfrescoJsApi.activiti.reportApi.deleteReport(reportId);
 
 # Development
 
-* To run the build 
+* To run the build
 
     ```$ npm run build```
 
 * To run the build in watch mode
 
     ```$ npm run watchify```
-    
-* To run the test 
+
+* To run the test
 
     ```$ npm run test```
 
