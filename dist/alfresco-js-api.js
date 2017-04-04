@@ -65558,6 +65558,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        var authApi = new AlfrescoAuthRestApi.AuthenticationApi(this);
 
+	        this.setTicket(this.config.ticketEcm);
+
 	        this.promise = new Promise(function (resolve, reject) {
 	            authApi.validateTicket().then(function (data) {
 	                _this3.setTicket(data.entry.id);
