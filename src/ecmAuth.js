@@ -76,6 +76,8 @@ class EcmAuth extends AlfrescoApiClient {
     validateTicket() {
         var authApi = new AlfrescoAuthRestApi.AuthenticationApi(this);
 
+        this.setTicket(this.config.ticketEcm);
+
         this.promise = new Promise((resolve, reject) => {
             authApi.validateTicket().then(
                 (data) => {
