@@ -108,6 +108,7 @@ declare namespace AlfrescoApi {
     export interface NodePagingList {
         pagination: Pagination;
         entries: MinimalNodeEntity[];
+        source?: Source;
     }
 
     export interface DeletedNodesPagingList {
@@ -121,6 +122,20 @@ declare namespace AlfrescoApi {
         totalItems: number;
         skipCount: number;
         maxItems: number;
+    }
+
+    export interface Source {
+        id: string;
+        name?: string;
+        createdAt?: Date;
+        modifiedAt?: Date;
+        createdByUser?: UserInfo;
+        modifiedByUser?: UserInfo;
+        isFolder?: boolean;
+        isFile?: boolean;
+        aspectNames?: Array<string>;
+        properties?: any;
+        nodeType?: string;
     }
 
     export interface MinimalNodeEntity {
