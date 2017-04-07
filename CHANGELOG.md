@@ -4,6 +4,12 @@
 
 Alfresco JS API
 
+<a name="1.3.1"></a>
+# [1.3.1](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.3.1) (xx-04-2017)
+## Fix
+- [NodePagingList type should include optional "source" property](https://github.com/Alfresco/alfresco-js-api/issues/211)
+
+
 <a name="1.3.0"></a>
 # [1.3.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.3.0) (05-04-2017)
 ## Features
