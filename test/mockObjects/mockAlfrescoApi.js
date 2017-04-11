@@ -2,6 +2,7 @@ var mockAlfrescoApi = {};
 
 //Ecm Mock
 mockAlfrescoApi.Auth = require('./alfresco/authResponseMock.js');
+mockAlfrescoApi.Comment = require('./alfresco/CommentMock.js');
 mockAlfrescoApi.Node = require('./alfresco/nodeMock.js');
 mockAlfrescoApi.Upload = require('./alfresco/uploadMock.js');
 mockAlfrescoApi.WebScript = require('./alfresco/webScriptMock.js');
