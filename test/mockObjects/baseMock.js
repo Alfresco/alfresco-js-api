@@ -19,6 +19,7 @@ class BaseMock {
             .put(scriptSlug)
             .reply(200);
     }
+
     rec() {
         nock.recorder.rec();
     }

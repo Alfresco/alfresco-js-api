@@ -5,56 +5,60 @@ var expect = require('chai').expect;
 
 describe('Basic configuration test', function () {
 
-    it('default value', function () {
-        var config = {
-        };
+    describe('config parameter ', function () {
 
-        this.alfrescoJsApi = new AlfrescoApi(config);
+        it('Should basePath have a default value', function () {
+            var config = {};
 
-        expect(this.alfrescoJsApi.ecmClient.basePath)
-            .equal('http://127.0.0.1:8080/alfresco/api/-default-/public/alfresco/versions/1');
+            this.alfrescoJsApi = new AlfrescoApi(config);
+
+            expect(this.alfrescoJsApi.ecmClient.basePath)
+                .equal('http://127.0.0.1:8080/alfresco/api/-default-/public/alfresco/versions/1');
+        });
+
+        it('should be reflected in the client', function () {
+            var config = {
+                hostEcm: 'http://testServer.com:1616',
+                contextRoot: 'strangeContextRoot'
+            };
+
+            this.alfrescoJsApi = new AlfrescoApi(config);
+
+            expect(this.alfrescoJsApi.ecmClient.basePath)
+                .equal('http://testServer.com:1616/strangeContextRoot/api/-default-/public/alfresco/versions/1');
+        });
     });
 
-    it('config parameter should be reflected in the client', function () {
-        var config = {
-            hostEcm: 'http://testServer.com:1616',
-            contextRoot: 'strangeContextRoot'
-        };
+    describe('CSRF', function () {
 
-        this.alfrescoJsApi = new AlfrescoApi(config);
+        it('should disableCsrf true parameter should be reflected in the clients', function () {
+            var config = {
+                hostEcm: 'http://testServer.com:1616',
+                contextRoot: 'strangeContextRoot',
+                disableCsrf: true
+            };
 
-        expect(this.alfrescoJsApi.ecmClient.basePath)
-            .equal('http://testServer.com:1616/strangeContextRoot/api/-default-/public/alfresco/versions/1');
+            this.alfrescoJsApi = new AlfrescoApi(config);
+
+            expect(this.alfrescoJsApi.ecmClient.isCsrfEnabled())
+                .equal(false);
+            expect(this.alfrescoJsApi.bpmClient.isCsrfEnabled())
+                .equal(false);
+        });
+
+        it('should disableCsrf false parameter should be reflected in the clients', function () {
+            var config = {
+                hostEcm: 'http://testServer.com:1616',
+                contextRoot: 'strangeContextRoot',
+                disableCsrf: false
+            };
+
+            this.alfrescoJsApi = new AlfrescoApi(config);
+
+            expect(this.alfrescoJsApi.ecmClient.isCsrfEnabled())
+                .equal(true);
+            expect(this.alfrescoJsApi.bpmClient.isCsrfEnabled())
+                .equal(true);
+        });
     });
-
-    it('disableCsrf true parameter should be reflected in the clients', function () {
-        var config = {
-            hostEcm: 'http://testServer.com:1616',
-            contextRoot: 'strangeContextRoot',
-            disableCsrf: true
-        };
-
-        this.alfrescoJsApi = new AlfrescoApi(config);
-
-        expect(this.alfrescoJsApi.ecmClient.isCsrfEnabled())
-            .equal(false);
-        expect(this.alfrescoJsApi.bpmClient.isCsrfEnabled())
-            .equal(false);
-    });
-
-    it('disableCsrf false parameter should be reflected in the clients', function () {
-        var config = {
-            hostEcm: 'http://testServer.com:1616',
-            contextRoot: 'strangeContextRoot',
-            disableCsrf: false
-        };
-
-        this.alfrescoJsApi = new AlfrescoApi(config);
-
-        expect(this.alfrescoJsApi.ecmClient.isCsrfEnabled())
-            .equal(true);
-        expect(this.alfrescoJsApi.bpmClient.isCsrfEnabled())
-            .equal(true);
-    });
-
 });

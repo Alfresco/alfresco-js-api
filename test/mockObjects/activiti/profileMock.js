@@ -78,6 +78,12 @@ class ProfileMock extends BaseMock {
             });
     }
 
+    get401getProfile() {
+        nock(this.host, {'encodedQueryParams': true})
+            .get('/activiti-app/api/enterprise/profile')
+            .reply(401);
+    }
+
     get200getProfilePicture() {
         nock(this.host, {'encodedQueryParams': true})
             .get('/activiti-app/api/enterprise/profile-picture')
