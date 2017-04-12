@@ -10,7 +10,7 @@ Alfresco JS API
 - [NodePagingList type should include optional "source" property](https://github.com/Alfresco/alfresco-js-api/issues/211)
 - [alfresco-js-api Login issues with Multi-Tenant User](https://github.com/Alfresco/alfresco-js-api/issues/219)
 - [fix documentation comments Api](https://github.com/Alfresco/alfresco-js-api/issues/214)
-
+- [Revert changes added to task-forms rest api](https://github.com/Alfresco/alfresco-js-api/issues/217)
 
 <a name="1.3.0"></a>
 # [1.3.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.3.0) (05-04-2017)
