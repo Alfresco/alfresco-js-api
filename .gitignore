@@ -12,3 +12,4 @@ target
 *.DS_Store
 /package/
 /scripts/
+/dist/

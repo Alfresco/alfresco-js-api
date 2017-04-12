@@ -260,8 +260,8 @@
         case 'basic':
           if (auth.username || auth.password) {
             request.auth(
-              auth.username ? encodeURIComponent(auth.username) : '',
-              auth.password ? encodeURIComponent(auth.password) : ''
+              auth.username ? encodeURI(auth.username) : '',
+              auth.password ? encodeURI(auth.password) : ''
             );
           }
           break;
