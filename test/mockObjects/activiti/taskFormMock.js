@@ -11,7 +11,7 @@ class TaskFormMock extends BaseMock {
 
     get200getTaskFormVariables() {
         nock(this.host, {'encodedQueryParams': true})
-            .get('/activiti-app/api/enterprise/tasks/5028/variables')
+            .get('/activiti-app/app/rest/task-forms/5028/variables')
             .reply(200, [{'id':'initiator','type':'string','value':'1001'}], [ 'Server',
                 'Apache-Coyote/1.1',
                 'set-cookie',
