@@ -58,6 +58,18 @@ class AlfrescoApi {
         this.bpmClient = new BpmClient(this.config);
         this.searchClient = new SearchClient(this.config);
 
+        this.ecmClient.on('unauthorized', ()=> {
+            this.invalidateSession();
+        });
+
+        this.ecmPrivateClient.on('unauthorized', ()=> {
+            this.invalidateSession();
+        });
+
+        this.bpmClient.on('unauthorized', ()=> {
+            this.invalidateSession();
+        });
+
         if (this.config.provider === 'OAUTH') {
             this.oauth2Auth = new Oauth2Auth(this.config);
             this.setAuthenticationClientECMBPM(this.oauth2Auth.getAuthentication(), this.oauth2Auth.getAuthentication());
@@ -325,6 +337,19 @@ class AlfrescoApi {
     setTicket(ticketEcm, TicketBpm) {
         this.ecmAuth.setTicket(ticketEcm);
         this.bpmAuth.setTicket(TicketBpm);
+    }
+
+    /**
+     * invalidate the current session
+     * */
+    invalidateSession() {
+        if (this.oauth2Auth) {
+            this.oauth2Auth.setToken(null, null);
+        } else {
+            this.ecmAuth.setTicket(null);
+            this.bpmAuth.setTicket(null);
+        }
+
     }
 
     /**
