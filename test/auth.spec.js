@@ -4,6 +4,8 @@ var AlfrescoApi = require('../main');
 var expect = require('chai').expect;
 var AuthEcmMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
 var AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
+var NodeMock = require('../test/mockObjects/mockAlfrescoApi').Node;
+var ProfileMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Profile;
 
 describe('Auth', function () {
 
@@ -12,91 +14,99 @@ describe('Auth', function () {
         beforeEach(function () {
             this.hostEcm = 'http://127.0.0.1:8080';
             this.authResponseEcmMock = new AuthEcmMock(this.hostEcm);
+            this.nodeMock = new NodeMock(this.hostEcm);
         });
 
         describe('With Authentication', function () {
 
-            it('login should return the Ticket if all is ok', function (done) {
+            describe('login', function () {
 
-                this.authResponseEcmMock.get201Response();
+                it('should return the Ticket if all is ok', function (done) {
 
-                this.alfrescoJsApi = new AlfrescoApi({
-                    hostEcm: this.hostEcm
+                    this.authResponseEcmMock.get201Response();
+
+                    this.alfrescoJsApi = new AlfrescoApi({
+                        hostEcm: this.hostEcm
+                    });
+
+                    this.alfrescoJsApi.login('admin', 'admin').then((data) => {
+                        expect(data).to.be.equal('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
+                        done();
+                    }, () => {
+                    });
                 });
 
-                this.alfrescoJsApi.login('admin', 'admin').then((data) => {
-                    expect(data).to.be.equal('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
-                    done();
-                }, () => {
+                it('should return an error if wrong credential are used 403 the login fails', function (done) {
+                    this.authResponseEcmMock.get403Response();
+
+                    this.alfrescoJsApi = new AlfrescoApi({
+                        hostEcm: this.host
+                    });
+
+                    this.alfrescoJsApi.login('wrong', 'name').then(()=> {
+                    }, (error)=> {
+                        expect(error.status).to.be.equal(403);
+                        done();
+                    });
                 });
+
+                it('should return an error if wrong credential are used 400 userId and/or password are/is not provided', function (done) {
+                    this.authResponseEcmMock.get400Response();
+
+                    this.alfrescoJsApi = new AlfrescoApi({
+                        hostEcm: this.host
+                    });
+
+                    this.alfrescoJsApi.login(null, null).then(function () {
+
+                    }, (error) => {
+                        expect(error.status).to.be.equal(400);
+                        done();
+                    });
+                });
+
             });
 
-            it('isLoggedIn should return true if the api is logged in', function (done) {
+            describe('isLoggedIn', function () {
+                it('should return true if the api is logged in', function (done) {
 
-                this.authResponseEcmMock.get201Response();
+                    this.authResponseEcmMock.get201Response();
 
-                this.alfrescoJsApi = new AlfrescoApi({
-                    hostEcm: this.host
+                    this.alfrescoJsApi = new AlfrescoApi({
+                        hostEcm: this.host
+                    });
+
+                    this.alfrescoJsApi.login('admin', 'admin').then(() => {
+                        expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(true);
+                        done();
+                    }, ()=> {
+                    });
                 });
 
-                this.alfrescoJsApi.login('admin', 'admin').then(() => {
-                    expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(true);
-                    done();
-                }, ()=> {
-                });
-            });
+                it('should return false if the api is logged out', function (done) {
 
-            it('isLoggedIn should return false if the api is logged out', function (done) {
+                    this.authResponseEcmMock.get201Response();
 
-                this.authResponseEcmMock.get201Response();
+                    this.alfrescoJsApi = new AlfrescoApi({
+                        hostEcm: this.host
+                    });
 
-                this.alfrescoJsApi = new AlfrescoApi({
-                    hostEcm: this.host
-                });
+                    this.alfrescoJsApi.login('admin', 'admin').catch(()=> {
+                    });
 
-                this.alfrescoJsApi.login('admin', 'admin').catch(()=> {
-                });
+                    this.authResponseEcmMock.get204ResponseLogout();
 
-                this.authResponseEcmMock.get204ResponseLogout();
-
-                this.alfrescoJsApi.logout().then(() => {
-                    expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(false);
-                    done();
-                }, ()=> {
-                });
-            });
-
-            it('login should return an error if wrong credential are used 403 the login fails', function (done) {
-                this.authResponseEcmMock.get403Response();
-
-                this.alfrescoJsApi = new AlfrescoApi({
-                    hostEcm: this.host
-                });
-
-                this.alfrescoJsApi.login('wrong', 'name').then(()=> {
-                }, (error)=> {
-                    expect(error.status).to.be.equal(403);
-                    done();
-                });
-            });
-
-            it('login should return an error if wrong credential are used 400 userId and/or password are/is not provided', function (done) {
-                this.authResponseEcmMock.get400Response();
-
-                this.alfrescoJsApi = new AlfrescoApi({
-                    hostEcm: this.host
-                });
-
-                this.alfrescoJsApi.login(null, null).then(function () {
-
-                }, (error) => {
-                    expect(error.status).to.be.equal(400);
-                    done();
+                    this.alfrescoJsApi.logout().then(() => {
+                        expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(false);
+                        done();
+                    }, ()=> {
+                    });
                 });
             });
 
             describe('Events ', function () {
-                it('login should fire an event if is unauthorized  401', function (done) {
+
+                it('should login  fire an event if is unauthorized  401', function (done) {
                     this.authResponseEcmMock.get401Response();
 
                     this.alfrescoJsApi = new AlfrescoApi({
@@ -112,7 +122,7 @@ describe('Auth', function () {
                     });
                 });
 
-                it('The Api Should fire success event if is all ok 201', function (done) {
+                it('should login fire success event if is all ok 201', function (done) {
                     this.authResponseEcmMock.get201Response();
 
                     this.alfrescoJsApi = new AlfrescoApi({
@@ -128,7 +138,7 @@ describe('Auth', function () {
                     });
                 });
 
-                it('The Api Should fire logout event if the logout is successfull', function (done) {
+                it('should login fire logout event if the logout is successfull', function (done) {
                     this.authResponseEcmMock.get201Response();
 
                     this.alfrescoJsApi = new AlfrescoApi({
@@ -151,7 +161,7 @@ describe('Auth', function () {
 
             describe('With Ticket Authentication', function () {
 
-                it('Ticket should be present in the client', function () {
+                it('should Ticket be present in the client', function () {
                     this.authResponseEcmMock.get400Response();
 
                     this.alfrescoJsApi = new AlfrescoApi({
@@ -162,7 +172,7 @@ describe('Auth', function () {
                     expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(this.alfrescoJsApi.ecmClient.authentications.basicAuth.password);
                 });
 
-                it('Ticket login should be validate agianst the server if is valid', function (done) {
+                it('should Ticket login be validate against the server if is valid', function (done) {
                     var ticket = 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
 
                     this.authResponseEcmMock.get200ValidTicket(ticket);
@@ -178,7 +188,7 @@ describe('Auth', function () {
                     });
                 });
 
-                it('Ticket login should be validate agianst the server d is NOT valid', function (done) {
+                it('should Ticket login  be validate against the server d is NOT valid', function (done) {
                     var ticket = 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
 
                     this.authResponseEcmMock.get400Response();
@@ -208,7 +218,7 @@ describe('Auth', function () {
                     });
                 });
 
-                it('Ticket should be absent in the client and the resolve promise should be called', function (done) {
+                it('should Ticket be absent in the client and the resolve promise should be called', function (done) {
                     this.authResponseEcmMock.get204ResponseLogout();
 
                     this.alfrescoJsApi.logout().then((data)=> {
@@ -219,7 +229,7 @@ describe('Auth', function () {
                     });
                 });
 
-                it('Logout should be rejected if the Ticket is already expired', function (done) {
+                it('should Logout be rejected if the Ticket is already expired', function (done) {
                     this.authResponseEcmMock.get404ResponseLogout();
                     this.alfrescoJsApi.logout().then(() => {
                     }, (error) => {
@@ -228,6 +238,43 @@ describe('Auth', function () {
                     });
                 });
             });
+
+            describe('Unauthorized', function () {
+
+                beforeEach(function (done) {
+                    this.authResponseEcmMock.get201Response('TICKET_22d7a5a83d78b9cc9666ec4e412475e5455b33bd');
+                    this.alfrescoJsApi = new AlfrescoApi({
+                        hostEcm: this.host
+                    });
+
+                    this.alfrescoJsApi.login('admin', 'admin').then(() => {
+                        done();
+                    }, ()=> {
+                    });
+                });
+
+                it('should 401 invalidate the ticket', function (done) {
+                    this.nodeMock.get401CreationFolder();
+
+                    this.alfrescoJsApi.nodes.createFolder('newFolder').then(() => {
+                    }, () => {
+                        expect(this.alfrescoJsApi.ecmAuth.authentications.basicAuth.password).to.be.equal(null);
+                        done();
+                    });
+
+                });
+
+                it('should 401 invalidate the session and logout', function (done) {
+                    this.nodeMock.get401CreationFolder();
+
+                    this.alfrescoJsApi.nodes.createFolder('newFolder').then(() => {
+                    }, () => {
+                        expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(false);
+                        done();
+                    });
+                });
+            });
+
         });
     });
 
@@ -235,97 +282,104 @@ describe('Auth', function () {
 
         beforeEach(function () {
             this.hostBpm = 'http://127.0.0.1:9999';
+            this.profileMock = new ProfileMock(this.hostBpm);
             this.authResponseBpmMock = new AuthBpmMock(this.hostBpm);
         });
 
         describe('With Authentication', function () {
 
-            it('login should return the Ticket if all is ok', function (done) {
+            describe('login', function () {
 
-                this.authResponseBpmMock.get200Response();
+                it('should return the Ticket if all is ok', function (done) {
 
-                this.alfrescoJsApi = new AlfrescoApi({
-                    hostBpm: this.hostBpm,
-                    provider: 'BPM'
+                    this.authResponseBpmMock.get200Response();
+
+                    this.alfrescoJsApi = new AlfrescoApi({
+                        hostBpm: this.hostBpm,
+                        provider: 'BPM'
+                    });
+
+                    this.alfrescoJsApi.login('admin', 'admin').then((data) => {
+                        expect(data).to.be.equal('Basic YWRtaW46YWRtaW4=');
+                        done();
+                    }, function () {
+                    });
                 });
 
-                this.alfrescoJsApi.login('admin', 'admin').then((data) => {
-                    expect(data).to.be.equal('Basic YWRtaW46YWRtaW4=');
-                    done();
-                }, function () {
-                });
-            });
+                it('should return an error if wrong credential are used 401 the login fails', function (done) {
+                    this.authResponseBpmMock.get401Response();
 
-            it('isLoggedIn should return true if the api is logged in', function (done) {
+                    this.alfrescoJsApi = new AlfrescoApi({
+                        hostBpm: this.hostBpm,
+                        provider: 'BPM'
+                    });
 
-                this.authResponseBpmMock.get200Response();
+                    this.alfrescoJsApi.login('wrong', 'name').then(()=> {
 
-                this.alfrescoJsApi = new AlfrescoApi({
-                    hostBpm: this.hostBpm,
-                    provider: 'BPM'
-                });
-
-                this.alfrescoJsApi.login('admin', 'admin').then(() => {
-                    expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(true);
-                    done();
-                }, function () {
-                });
-            });
-
-            it('isLoggedIn should return false if the api is logged out', function (done) {
-
-                this.authResponseBpmMock.get200Response();
-
-                this.alfrescoJsApi = new AlfrescoApi({
-                    hostBpm: this.hostBpm,
-                    provider: 'BPM'
+                    }, (error)=> {
+                        expect(error.status).to.be.equal(401);
+                        done();
+                    });
                 });
 
-                this.alfrescoJsApi.login('admin', 'admin');
+                it.skip('should return an error if wrong credential are used 400 userId and/or password are/is not provided', function (done) {
+                    this.authResponseBpmMock.get400Response();
 
-                this.authResponseBpmMock.get200ResponseLogout();
+                    this.alfrescoJsApi = new AlfrescoApi({
+                        hostBpm: this.hostBpm,
+                        provider: 'BPM'
+                    });
 
-                this.alfrescoJsApi.logout().then(() => {
-                    expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(false);
-                    done();
-                }, function () {
-                });
-            });
+                    this.alfrescoJsApi.login(null, null).then(function () {
 
-            it('login should return an error if wrong credential are used 401 the login fails', function (done) {
-                this.authResponseBpmMock.get401Response();
-
-                this.alfrescoJsApi = new AlfrescoApi({
-                    hostBpm: this.hostBpm,
-                    provider: 'BPM'
-                });
-
-                this.alfrescoJsApi.login('wrong', 'name').then(()=> {
-
-                }, (error)=> {
-                    expect(error.status).to.be.equal(401);
-                    done();
+                    }, function (error) {
+                        expect(error.status).to.be.equal(400);
+                        done();
+                    });
                 });
             });
 
-            it.skip('login should return an error if wrong credential are used 400 userId and/or password are/is not provided', function (done) {
-                this.authResponseBpmMock.get400Response();
+            describe('isLoggedIn', function () {
 
-                this.alfrescoJsApi = new AlfrescoApi({
-                    hostBpm: this.hostBpm,
-                    provider: 'BPM'
+                it('should return true if the api is logged in', function (done) {
+
+                    this.authResponseBpmMock.get200Response();
+
+                    this.alfrescoJsApi = new AlfrescoApi({
+                        hostBpm: this.hostBpm,
+                        provider: 'BPM'
+                    });
+
+                    this.alfrescoJsApi.login('admin', 'admin').then(() => {
+                        expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(true);
+                        done();
+                    }, function () {
+                    });
                 });
 
-                this.alfrescoJsApi.login(null, null).then(function () {
+                it('should return false if the api is logged out', function (done) {
 
-                }, function (error) {
-                    expect(error.status).to.be.equal(400);
-                    done();
+                    this.authResponseBpmMock.get200Response();
+
+                    this.alfrescoJsApi = new AlfrescoApi({
+                        hostBpm: this.hostBpm,
+                        provider: 'BPM'
+                    });
+
+                    this.alfrescoJsApi.login('admin', 'admin');
+
+                    this.authResponseBpmMock.get200ResponseLogout();
+
+                    this.alfrescoJsApi.logout().then(() => {
+                        expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(false);
+                        done();
+                    }, function () {
+                    });
                 });
             });
 
             describe('Events ', function () {
-                it('login should fire an event if is unauthorized  401', function (done) {
+                it('should login  fire an event if is unauthorized  401', function (done) {
                     this.authResponseBpmMock.get401Response();
 
                     this.alfrescoJsApi = new AlfrescoApi({
@@ -344,7 +398,7 @@ describe('Auth', function () {
                     });
                 });
 
-                it('The Api Should fire success event if is all ok 201', function (done) {
+                it('should the Api fire success event if is all ok 201', function (done) {
                     this.authResponseBpmMock.get200Response();
 
                     this.alfrescoJsApi = new AlfrescoApi({
@@ -363,7 +417,7 @@ describe('Auth', function () {
                     });
                 });
 
-                it('The Api Should fire logout event if the logout is successfull', function (done) {
+                it('should the Api fire logout event if the logout is successfull', function (done) {
                     this.authResponseBpmMock.get200Response();
 
                     this.alfrescoJsApi = new AlfrescoApi({
@@ -380,6 +434,44 @@ describe('Auth', function () {
                     authPromise.catch(()=> {
                     });
                     authPromise.on('logout', ()=> {
+                        done();
+                    });
+                });
+            });
+
+            describe('Unauthorized', function () {
+
+                beforeEach(function (done) {
+                    this.authResponseBpmMock.get200Response();
+
+                    this.alfrescoJsApi = new AlfrescoApi({
+                        hostBpm: this.hostBpm,
+                        provider: 'BPM'
+                    });
+
+                    this.alfrescoJsApi.login('admin', 'admin').then(() => {
+                        done();
+                    }, ()=> {
+                    });
+                });
+
+                it('should 401 invalidate the ticket', function (done) {
+                    this.profileMock.get401getProfile();
+
+                    this.alfrescoJsApi.activiti.profileApi.getProfile().then((data)=> {
+                    }, () => {
+                        expect(this.alfrescoJsApi.bpmAuth.authentications.basicAuth.ticket).to.be.equal(null);
+                        done();
+                    });
+
+                });
+
+                it('should 401 invalidate the session and logout', function (done) {
+                    this.profileMock.get401getProfile();
+
+                    this.alfrescoJsApi.activiti.profileApi.getProfile().then((data)=> {
+                    }, () => {
+                        expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(false);
                         done();
                     });
                 });
@@ -401,7 +493,7 @@ describe('Auth', function () {
 
         describe('With Authentication', function () {
 
-            it('Ticket should be present in the client', function () {
+            it('should Ticket be present in the client', function () {
                 this.authResponseBpmMock.get200Response();
                 this.authResponseEcmMock.get201Response();
 
@@ -417,64 +509,130 @@ describe('Auth', function () {
                 expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(this.alfrescoJsApi.ecmClient.authentications.basicAuth.password);
             });
 
-            it('login should return the Ticket if all is ok', function (done) {
+            describe('login', function () {
 
-                this.authResponseBpmMock.get200Response();
-                this.authResponseEcmMock.get201Response();
+                it('should return the Ticket if all is ok', function (done) {
 
-                this.alfrescoJsApi = new AlfrescoApi({
-                    hostEcm: this.hostEcm,
-                    hostBpm: this.hostBpm,
-                    provider: 'ALL'
+                    this.authResponseBpmMock.get200Response();
+                    this.authResponseEcmMock.get201Response();
+
+                    this.alfrescoJsApi = new AlfrescoApi({
+                        hostEcm: this.hostEcm,
+                        hostBpm: this.hostBpm,
+                        provider: 'ALL'
+                    });
+
+                    this.alfrescoJsApi.login('admin', 'admin').then((data) => {
+                        expect(data[0]).to.be.equal('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
+                        expect(data[1]).to.be.equal('Basic YWRtaW46YWRtaW4=');
+                        done();
+                    }, function () {
+                    });
                 });
 
-                this.alfrescoJsApi.login('admin', 'admin').then((data) => {
-                    expect(data[0]).to.be.equal('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
-                    expect(data[1]).to.be.equal('Basic YWRtaW46YWRtaW4=');
-                    done();
-                }, function () {
+                it('should fail if only ECM fail', function (done) {
+
+                    this.authResponseBpmMock.get200Response();
+                    this.authResponseEcmMock.get401Response();
+
+                    this.alfrescoJsApi = new AlfrescoApi({
+                        hostEcm: this.host,
+                        hostBpm: this.hostBpm,
+                        provider: 'ALL'
+                    });
+
+                    this.alfrescoJsApi.login('admin', 'admin').then(function () {
+                    }, function () {
+                        done();
+                    });
+
+                    this.authResponseEcmMock.cleanAll();
+                });
+
+                it('should fail if only BPM fail', function (done) {
+
+                    this.authResponseBpmMock.get401Response();
+                    this.authResponseEcmMock.get201Response();
+
+                    this.alfrescoJsApi = new AlfrescoApi({
+                        hostEcm: this.host,
+                        hostBpm: this.hostBpm,
+                        provider: 'ALL'
+                    });
+
+                    this.alfrescoJsApi.login('admin', 'admin').then(function () {
+                    }, function () {
+                        done();
+                    });
+
+                    this.authResponseBpmMock.cleanAll();
                 });
             });
 
-            it('login should fail if only ECM fail', function (done) {
+            describe('isLoggedIn', function () {
+                it('should return false if the api is logged out', function (done) {
 
-                this.authResponseBpmMock.get200Response();
-                this.authResponseEcmMock.get401Response();
+                    this.authResponseBpmMock.get200Response();
+                    this.authResponseEcmMock.get201Response();
 
-                this.alfrescoJsApi = new AlfrescoApi({
-                    hostEcm: this.host,
-                    hostBpm: this.hostBpm,
-                    provider: 'ALL'
+                    this.alfrescoJsApi = new AlfrescoApi({
+                        hostEcm: this.host,
+                        hostBpm: this.hostBpm,
+                        provider: 'ALL'
+
+                    });
+
+                    this.alfrescoJsApi.login('admin', 'admin');
+
+                    this.authResponseBpmMock.get200ResponseLogout();
+                    this.authResponseEcmMock.get204ResponseLogout();
+
+                    this.alfrescoJsApi.logout().then(() => {
+                        expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(false);
+                        done();
+                    }, function () {
+                    });
                 });
 
-                this.alfrescoJsApi.login('admin', 'admin').then(function () {
-                }, function () {
-                    done();
+                it('should return an error if wrong credential are used 401 the login fails', function (done) {
+                    this.authResponseBpmMock.get401Response();
+                    this.authResponseEcmMock.get401Response();
+
+                    this.alfrescoJsApi = new AlfrescoApi({
+                        hostEcm: this.host,
+                        hostBpm: this.hostBpm,
+                        provider: 'ALL'
+
+                    });
+
+                    this.alfrescoJsApi.login('wrong', 'name').then(function () {
+
+                    }, function (error) {
+                        expect(error.status).to.be.equal(401);
+                        done();
+                    });
                 });
 
-                this.authResponseEcmMock.cleanAll();
+                it.skip('should return an error if wrong credential are used 400 userId and/or password are/is not provided', function (done) {
+                    this.authResponseBpmMock.get400Response();
+
+                    this.alfrescoJsApi = new AlfrescoApi({
+                        hostEcm: this.host,
+                        hostBpm: this.hostBpm,
+                        provider: 'ALL'
+
+                    });
+
+                    this.alfrescoJsApi.login(null, null).then(function () {
+
+                    }, function (error) {
+                        expect(error.status).to.be.equal(400);
+                        done();
+                    });
+                });
             });
 
-            it('login should fail if only BPM fail', function (done) {
-
-                this.authResponseBpmMock.get401Response();
-                this.authResponseEcmMock.get201Response();
-
-                this.alfrescoJsApi = new AlfrescoApi({
-                    hostEcm: this.host,
-                    hostBpm: this.hostBpm,
-                    provider: 'ALL'
-                });
-
-                this.alfrescoJsApi.login('admin', 'admin').then(function () {
-                }, function () {
-                    done();
-                });
-
-                this.authResponseBpmMock.cleanAll();
-            });
-
-            it('isLoggedIn should return true if the api is logged in', function (done) {
+            it('should return true if the api is logged in', function (done) {
 
                 this.authResponseBpmMock.get200Response();
                 this.authResponseEcmMock.get201Response();
@@ -493,69 +651,9 @@ describe('Auth', function () {
                 });
             });
 
-            it('isLoggedIn should return false if the api is logged out', function (done) {
-
-                this.authResponseBpmMock.get200Response();
-                this.authResponseEcmMock.get201Response();
-
-                this.alfrescoJsApi = new AlfrescoApi({
-                    hostEcm: this.host,
-                    hostBpm: this.hostBpm,
-                    provider: 'ALL'
-
-                });
-
-                this.alfrescoJsApi.login('admin', 'admin');
-
-                this.authResponseBpmMock.get200ResponseLogout();
-                this.authResponseEcmMock.get204ResponseLogout();
-
-                this.alfrescoJsApi.logout().then(() => {
-                    expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(false);
-                    done();
-                }, function () {
-                });
-            });
-
-            it('login should return an error if wrong credential are used 401 the login fails', function (done) {
-                this.authResponseBpmMock.get401Response();
-                this.authResponseEcmMock.get401Response();
-
-                this.alfrescoJsApi = new AlfrescoApi({
-                    hostEcm: this.host,
-                    hostBpm: this.hostBpm,
-                    provider: 'ALL'
-
-                });
-
-                this.alfrescoJsApi.login('wrong', 'name').then(function () {
-
-                }, function (error) {
-                    expect(error.status).to.be.equal(401);
-                    done();
-                });
-            });
-
-            it.skip('login should return an error if wrong credential are used 400 userId and/or password are/is not provided', function (done) {
-                this.authResponseBpmMock.get400Response();
-
-                this.alfrescoJsApi = new AlfrescoApi({
-                    hostEcm: this.host,
-                    hostBpm: this.hostBpm,
-                    provider: 'ALL'
-
-                });
-
-                this.alfrescoJsApi.login(null, null).then(function () {
-
-                }, function (error) {
-                    expect(error.status).to.be.equal(400);
-                    done();
-                });
-            });
-
             describe('Events ', function () {
-                it('login should fire an event if is unauthorized  401', function (done) {
+
+                it('should login fire an event if is unauthorized  401', function (done) {
                     this.authResponseBpmMock.get401Response();
                     this.authResponseEcmMock.get401Response();
 
@@ -574,7 +672,7 @@ describe('Auth', function () {
                     });
                 });
 
-                it('The Api Should fire success event if is all ok 201', function (done) {
+                it('should The Api fire success event if is all ok 201', function (done) {
                     this.authResponseBpmMock.get200Response();
                     this.authResponseEcmMock.get201Response();
 
@@ -593,7 +691,7 @@ describe('Auth', function () {
                     });
                 });
 
-                it('The Api Should fire logout event if the logout is successfull', function (done) {
+                it('should The Api fire logout event if the logout is successful', function (done) {
                     this.authResponseBpmMock.get200Response();
                     this.authResponseEcmMock.get201Response();
 
