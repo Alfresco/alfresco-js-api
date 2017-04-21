@@ -195,6 +195,15 @@ class NodeMock extends BaseMock {
             });
     }
 
+    get401CreationFolder() {
+        nock(this.host, {'encodedQueryParams': true})
+            .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/-root-/children', {
+                'name': 'newFolder',
+                'nodeType': 'cm:folder'
+            })
+            .reply(401);
+    }
+
     get204SuccessfullyDeleted() {
         nock(this.host, {'encodedQueryParams': true})
             .delete('/alfresco/api/-default-/public/alfresco/versions/1/nodes/80a94ac8-3ece-47ad-864e-5d939424c47c')

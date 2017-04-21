@@ -60,6 +60,7 @@ class AlfrescoApiClient extends ApiClient {
                     eventEmitter.emit('error', error);
 
                     if (error.status === 401) {
+                        this.emit('unauthorized');
                         eventEmitter.emit('unauthorized');
                     }
 
