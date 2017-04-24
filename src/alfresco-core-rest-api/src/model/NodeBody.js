@@ -1,18 +1,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient'], factory);
+    define(['../ApiClient', './NodesnodeIdchildrenContent'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../ApiClient'), require('./NodesnodeIdchildrenContent'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoCoreRestApi) {
       root.AlfrescoCoreRestApi = {};
     }
-    root.AlfrescoCoreRestApi.NodeBody = factory(root.AlfrescoCoreRestApi.ApiClient);
+    root.AlfrescoCoreRestApi.NodeBody = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.NodesnodeIdchildrenContent);
   }
-}(this, function(ApiClient) {
+}(this, function(ApiClient, NodesnodeIdchildrenContent) {
   'use strict';
 
   /**
@@ -27,6 +27,8 @@
    * @class
    */
   var exports = function() {
+
+
 
 
 
@@ -51,6 +53,12 @@
       if (data.hasOwnProperty('nodeType')) {
         obj['nodeType'] = ApiClient.convertToType(data['nodeType'], 'String');
       }
+      if (data.hasOwnProperty('relativePath')) {
+        obj['relativePath'] = ApiClient.convertToType(data['relativePath'], 'String');
+      }
+      if (data.hasOwnProperty('content')) {
+        obj['content'] = NodesnodeIdchildrenContent.constructFromObject(data['content']);
+      }
       if (data.hasOwnProperty('aspectNames')) {
         obj['aspectNames'] = ApiClient.convertToType(data['aspectNames'], ['String']);
       }
@@ -71,6 +79,16 @@
    * @member {String} nodeType
    */
   exports.prototype['nodeType'] = undefined;
+
+  /**
+   * @member {String} relativePath
+   */
+  exports.prototype['relativePath'] = undefined;
+
+  /**
+   * @member {module:model/NodesnodeIdchildrenContent} content
+   */
+  exports.prototype['content'] = undefined;
 
   /**
    * @member {Array.<String>} aspectNames

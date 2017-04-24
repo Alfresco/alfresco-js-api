@@ -38,9 +38,6 @@ declare namespace AlfrescoApi {
         loginTicket(ticket: string): any;
         refresh(): Promise<string>;
 
-        getDocumentThumbnailUrl(documentId: string): any;
-        getContentUrl(documentId: string): any;
-
         getTicket(): Array<string>;
         getTicketBpm(): string;
         getTicketEcm(): string;
@@ -530,9 +527,9 @@ declare namespace AlfrescoApi {
     export interface ContentApi {
         new(ecmAuth: any): ContentApi;
 
-        getDocumentThumbnailUrl(documentId: string): string;
-        getDocumentPreviewUrl(documentId: string): string;
-        getContentUrl(documentId: string): string;
+        getDocumentThumbnailUrl(nodeId: string): string;
+        getDocumentPreviewUrl(nodeId: string): string;
+        getContentUrl(nodeId: string): string;
     }
 
     export interface AuthApi {

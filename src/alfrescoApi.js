@@ -3,6 +3,7 @@
 var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
 var AlfrescoPrivateRestApi = require('./alfresco-private-rest-api/src/index.js');
 var AlfrescoSearchRestApi = require('./alfresco-search-rest-api/src/index.js');
+var AlfrescoDiscoveryRestApi = require('./alfresco-discovery-rest-api/src/index.js');
 var AlfrescoAuthRestApi = require('./alfresco-auth-rest-api/src/index');
 var AlfrescoActivitiApi = require('./alfresco-activiti-rest-api/src/index');
 var AlfrescoContent = require('./alfrescoContent');
@@ -15,6 +16,7 @@ var Oauth2Auth = require('./oauth2Auth');
 var EcmClient = require('./ecmClient');
 var BpmClient = require('./bpmClient');
 var SearchClient = require('./searchClient');
+var DiscoveryClient = require('./discoveryClient');
 var EcmPrivateClient = require('./ecmPrivateClient');
 var _ = require('lodash');
 
@@ -57,6 +59,7 @@ class AlfrescoApi {
         this.ecmClient = new EcmClient(this.config);
         this.bpmClient = new BpmClient(this.config);
         this.searchClient = new SearchClient(this.config);
+        this.discoveryClient = new DiscoveryClient(this.config);
 
         this.ecmClient.on('unauthorized', ()=> {
             this.invalidateSession();
@@ -67,6 +70,14 @@ class AlfrescoApi {
         });
 
         this.bpmClient.on('unauthorized', ()=> {
+            this.invalidateSession();
+        });
+
+        this.searchClient.on('unauthorized', ()=> {
+            this.invalidateSession();
+        });
+
+        this.discoveryClient.on('unauthorized', ()=> {
             this.invalidateSession();
         });
 
@@ -124,6 +135,12 @@ class AlfrescoApi {
         AlfrescoSearchRestApi.ApiClient.instance = this.searchClient;
         this.searchStore = AlfrescoSearchRestApi;
         this._instantiateObjects(this.searchStore, this.search);
+
+        //Discovery
+        this.discovery = {};
+        AlfrescoDiscoveryRestApi.ApiClient.instance = this.discoveryClient;
+        this.discoveryStore = AlfrescoDiscoveryRestApi;
+        this._instantiateObjects(this.discoveryStore, this.discovery);
 
         this.nodes = this.node = new AlfrescoNode();
         this.content = new AlfrescoContent(this.ecmAuth, this.ecmClient);
@@ -213,6 +230,8 @@ class AlfrescoApi {
         this.searchClient.setAuthentications(authECM);
         this.ecmPrivateClient.setAuthentications(authECM);
         this.bpmClient.setAuthentications(authBPM);
+        this.searchClient.setAuthentications(authECM);
+        this.discoveryClient.setAuthentications(authECM);
     }
 
     /**
