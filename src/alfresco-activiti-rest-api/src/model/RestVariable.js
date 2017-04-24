@@ -54,7 +54,7 @@
         obj['name'] = ApiClient.convertToType(data['name'], 'String');
       }
       if (data.hasOwnProperty('scope')) {
-        obj['scope'] = ApiClient.convertToType(data['scope'], 'String');
+        obj['scope'] = ApiClient.convertToType(data['scope'], 'String'); // LOCAL, GLOBAL
       }
       if (data.hasOwnProperty('type')) {
         obj['type'] = ApiClient.convertToType(data['type'], 'String');
