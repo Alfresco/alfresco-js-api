@@ -113,6 +113,8 @@ To correctly use this component check that on your machine is running Node versi
 
 - [Authentication API](/src/alfresco-auth-rest-api)
 - [Core API](/src/alfresco-core-rest-api)
+- [Discovery API](/src/alfresco-discovery-rest-api)
+- [Search API](/src/alfresco-search-rest-api)
 - [Activiti API](/src/alfresco-activiti-rest-api)
 - [Mock API](/test/mockObjects)
 

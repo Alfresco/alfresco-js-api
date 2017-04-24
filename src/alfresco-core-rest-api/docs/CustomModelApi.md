@@ -315,7 +315,7 @@ Add property into an existing aspect
  ```javascript
 var modelName = "testModel";
 var typeName = "myType1";
-var properties" = [{}]
+var properties = [{}]
 
  this.alfrescoJsApi.core.customModelApi.addPropertyToType(modelName, typeName, properties).then(function(data) {
    console.log('API called successfully. Returned data: ' + data);
