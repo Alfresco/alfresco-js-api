@@ -359,7 +359,7 @@ declare namespace AlfrescoApi {
         PublishIdentityInfoRepresentation: any;
         RelatedContentRepresentation: any;
         ResetPasswordRepresentatio: any;
-        RestVariable: any;
+        RestVariable: RestVariable;
         ResultListDataRepresentation: any;
         RuntimeAppDefinitionSaveRepresentation: any;
         SaveFormRepresentation: any;
@@ -522,6 +522,14 @@ declare namespace AlfrescoApi {
         ticketEcm?: string;
         ticketBpm?: string;
         disableCsrf?: boolean;
+    }
+
+    export interface RestVariable {
+        name?: string;
+        scope?: string;
+        type?: string;
+        value?: string;
+        valueUrl?: string;
     }
 
     export interface ContentApi {

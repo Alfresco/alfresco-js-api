@@ -1,10 +1,10 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../../../alfrescoApiClient'], factory);
+    define(['../../../alfrescoApiClient', './RestVariable'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../../../alfrescoApiClient'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./RestVariable'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
@@ -12,7 +12,7 @@
     }
     root.ActivitiPublicRestApi.CreateProcessInstanceRepresentation = factory(root.ActivitiPublicRestApi.ApiClient);
   }
-}(this, function(ApiClient) {
+}(this, function(ApiClient, RestVariable) {
   'use strict';
 
 
@@ -52,11 +52,20 @@
       if (data.hasOwnProperty('name')) {
         obj['name'] = ApiClient.convertToType(data['name'], 'String');
       }
-      if (data.hasOwnProperty('outcome')) {
+       if (data.hasOwnProperty('outcome')) {
         obj['outcome'] = ApiClient.convertToType(data['outcome'], 'String');
+      }
+      if (data.hasOwnProperty('processDefinitionKey')) {
+        obj['processDefinitionKey'] = ApiClient.convertToType(data['processDefinitionKey'], 'String');
+      }
+      if (data.hasOwnProperty('businessKey')) {
+        obj['businessKey'] = ApiClient.convertToType(data['businessKey'], 'String');
       }
       if (data.hasOwnProperty('processDefinitionId')) {
         obj['processDefinitionId'] = ApiClient.convertToType(data['processDefinitionId'], 'String');
+      }
+      if (data.hasOwnProperty('variables')) {
+        obj['variables'] = ApiClient.convertToType(data['variables'], RestVariable);
       }
       if (data.hasOwnProperty('values')) {
         obj['values'] = ApiClient.convertToType(data['values'], Object);
@@ -74,9 +83,21 @@
    */
   exports.prototype['outcome'] = undefined;
   /**
+   * @member {String} processDefinitionKey
+   */
+  exports.prototype['processDefinitionKey'] = undefined;
+  /**
+   * @member {String} businessKey
+   */
+  exports.prototype['businessKey'] = undefined;
+  /**
    * @member {String} processDefinitionId
    */
   exports.prototype['processDefinitionId'] = undefined;
+  /**
+   * @member {Object} variables
+   */
+  exports.prototype['variables'] = undefined;
   /**
    * @member {Object} values
    */
