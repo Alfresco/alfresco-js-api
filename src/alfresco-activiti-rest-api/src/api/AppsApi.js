@@ -167,7 +167,8 @@
      * @param {File} file file
      * data is of type: {module:model/AppDefinitionRepresentation}
      */
-    this.importAppDefinition = function(file) {
+    this.importAppDefinition = function(file, opts) {
+      opts = opts || {};
       var postBody = null;
 
       // verify the required parameter 'file' is set
@@ -179,6 +180,7 @@
       var pathParams = {
       };
       var queryParams = {
+        'renewIdmEntries': opts['renewIdmEntries']
       };
       var headerParams = {
       };
