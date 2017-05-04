@@ -208,23 +208,23 @@
      */
 
     /**
-     * Import App
+     * Import Existing App
      * To import an app to an existing app definition to create a new version instead of importing a new app definition.
      * @param {Integer} modelId modelId
      * @param {File} file file
      * data is of type: {module:model/AppDefinitionRepresentation}
      */
-    this.importAppDefinition = function(modelId, file) {
+    this.importExistingAppDefinition = function(modelId, file) {
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling importAppDefinition";
+        throw "Missing the required parameter 'modelId' when calling importExistingAppDefinition";
       }
 
       // verify the required parameter 'file' is set
       if (file == undefined || file == null) {
-        throw "Missing the required parameter 'file' when calling importAppDefinition";
+        throw "Missing the required parameter 'file' when calling importExistingAppDefinition";
       }
 
 
