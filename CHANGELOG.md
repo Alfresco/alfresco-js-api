@@ -2,7 +2,14 @@
   <img title="alfresco" alt='alfresco' src='assets/alfresco.png'  width="280px" height="150px"></img>
 </p>
 
-Alfresco JS API
+# Alfresco JS API
+
+<a name="1.5.0"></a>
+# [1.5.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.5.0) (xx-xx-2017)
+## Fix
+
+## Features
+- [Ability to remember/forget username upon login/logout](https://github.com/Alfresco/alfresco-js-api/pull/225)
 
 <a name="1.4.0"></a>
 # [1.4.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.4.0) (27-04-2017)

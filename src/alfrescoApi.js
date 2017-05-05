@@ -81,6 +81,18 @@ class AlfrescoApi {
             this.invalidateSession();
         });
 
+        this.ecmClient.on('unauthorized', ()=> {
+            this.invalidateSession();
+        });
+
+        this.ecmPrivateClient.on('unauthorized', ()=> {
+            this.invalidateSession();
+        });
+
+        this.bpmClient.on('unauthorized', ()=> {
+            this.invalidateSession();
+        });
+
         if (this.config.provider === 'OAUTH') {
             this.oauth2Auth = new Oauth2Auth(this.config);
             this.setAuthenticationClientECMBPM(this.oauth2Auth.getAuthentication(), this.oauth2Auth.getAuthentication());
