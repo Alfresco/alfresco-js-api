@@ -543,6 +543,7 @@ declare namespace AlfrescoApi {
     export interface AuthApi {
         new(config: AlfrescoApiConfig): AuthApi;
 
+        username: string;
         changeHost(host: string): void;
         login(username: string, password: string): Promise<string>;
         logout(): Promise<string>;

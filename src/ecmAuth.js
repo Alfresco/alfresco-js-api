@@ -12,6 +12,7 @@ class EcmAuth extends AlfrescoApiClient {
     constructor(config) {
         super();
 
+        this.username = '';
         this.config = config;
 
         this.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
@@ -36,6 +37,7 @@ class EcmAuth extends AlfrescoApiClient {
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
     login(username, password) {
+        this.username = username;
         this.authentications.basicAuth.username = username;
         this.authentications.basicAuth.password = password;
 
@@ -104,6 +106,7 @@ class EcmAuth extends AlfrescoApiClient {
      * @returns {Promise} A promise that returns { authentication ticket} if resolved and {error} if rejected.
      * */
     logout() {
+        this.username = '';
         var authApi = new AlfrescoAuthRestApi.AuthenticationApi(this);
 
         this.promise = new Promise((resolve, reject) => {
