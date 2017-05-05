@@ -17,7 +17,7 @@
     define(['../../alfrescoApiClient', './model/Error', './model/ErrorError', './model/Ticket', './model/TicketBody', './model/TicketEntry', './model/ValidTicket', './model/ValidTicketEntry', './api/AuthenticationApi'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require(../../../alfrescoApiClient'), require('./model/Error'), require('./model/ErrorError'), require('./model/Ticket'), require('./model/TicketBody'), require('./model/TicketEntry'), require('./model/ValidTicket'), require('./model/ValidTicketEntry'), require('./api/AuthenticationApi'));
+    module.exports = factory(require('../../alfrescoApiClient'), require('./model/Error'), require('./model/ErrorError'), require('./model/Ticket'), require('./model/TicketBody'), require('./model/TicketEntry'), require('./model/ValidTicket'), require('./model/ValidTicketEntry'), require('./api/AuthenticationApi'));
   }
 }(function(ApiClient, Error, ErrorError, Ticket, TicketBody, TicketEntry, ValidTicket, ValidTicketEntry, AuthenticationApi) {
   'use strict';
