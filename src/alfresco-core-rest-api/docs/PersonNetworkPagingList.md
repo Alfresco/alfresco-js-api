@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entries** | [**[PersonNetworkEntry]**](PersonNetworkEntry.md) |  | 
 **pagination** | [**Pagination**](Pagination.md) |  | 
+**entries** | [**[PersonNetworkEntry]**](PersonNetworkEntry.md) |  | 
 
 

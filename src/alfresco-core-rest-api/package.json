@@ -1,7 +1,8 @@
 {
-  "name": "alfresco-core-rest-api",
+  "name": "alfresco_content_services_rest_api",
   "version": "0.1.0",
-  "description": "Provides access to the core features of Alfresco.\n\nThis API uses the term **entity** to refer to an object in an Alfresco repository.\nAn **entity** is of a specific **type**, and has a unique **id**.\n\n* The **id** of an entity of type **node** is the **NodeRef** with the `workspace://SpacesStore` prefix removed.\n* The **id** of an entity of type **site** is the site's short name.\n* The **id** for an entity of type **person** is the person's username.\n",
+  "description": "Core_APIProvides_access_to_the_core_features_of_Alfresco_Content_Services_",
+  "license": "Unlicense",
   "main": "src/index.js",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha --recursive"

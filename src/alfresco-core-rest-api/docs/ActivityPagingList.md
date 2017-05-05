@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entries** | [**[ActivityEntry]**](ActivityEntry.md) |  | 
 **pagination** | [**Pagination**](Pagination.md) |  | 
+**entries** | [**[ActivityEntry]**](ActivityEntry.md) |  | 
 
 

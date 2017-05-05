@@ -3,7 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entries** | [**[NodeMinimalEntry]**](NodeMinimalEntry.md) |  | [optional] 
 **pagination** | [**Pagination**](Pagination.md) |  | [optional] 
+**entries** | [**[NodeEntry]**](NodeEntry.md) |  | [optional] 
+**source** | [**Node**](Node.md) |  | [optional] 
 
 

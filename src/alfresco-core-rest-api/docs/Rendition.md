@@ -8,3 +8,14 @@ Name | Type | Description | Notes
 **status** | **String** |  | [optional] 
 
 
+<a name="StatusEnum"></a>
+## Enum: StatusEnum
+
+
+* `CREATED` (value: `"CREATED"`)
+
+* `NOT_CREATED` (value: `"NOT_CREATED"`)
+
+
+
+
