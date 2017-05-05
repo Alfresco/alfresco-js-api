@@ -4,12 +4,11 @@
 
 # Alfresco JS API
 
-# 1.4.1
-
+<a name="1.5.0"></a>
+# [1.5.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.5.0) (xx-xx-2017)
 ## Fix
 
 ## Features
-
 - [Ability to remember/forget username upon login/logout](https://github.com/Alfresco/alfresco-js-api/pull/225)
 
 <a name="1.4.0"></a>
