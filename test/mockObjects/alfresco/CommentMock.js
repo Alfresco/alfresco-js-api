@@ -13,15 +13,6 @@ class CommentMock extends BaseMock {
         nock(this.host, {'encodedQueryParams': true})
             .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/74cd8a96-8a21-47e5-9b3b-a1b3e296787d/comments', [{'content': 'This is a comment'}, {'content': 'This is another comment'}])
             .reply(201, {
-                'list': {
-                    'pagination': {
-                        'count': 2,
-                        'hasMoreItems': false,
-                        'totalItems': 2,
-                        'skipCount': 0,
-                        'maxItems': 100
-                    },
-                    'entries': [{
                         'entry': {
                             'createdAt': '2017-04-11T09:31:21.452+0000',
                             'createdBy': {
@@ -109,9 +100,8 @@ class CommentMock extends BaseMock {
                             'id': '539fc9b2-7d5b-4966-9e44-fcf433647f25',
                             'content': 'This is another comment'
                         }
-                    }]
-                }
-            });
+                    }
+            );
 
     }
 

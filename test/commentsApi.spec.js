@@ -34,7 +34,6 @@ describe('Comments', function () {
                 'content': 'This is another comment'
             }
         ]).then(function (data) {
-            console.log(data);
             expect(data.entry.content).to.be.equal('This is a comment');
             done();
         }, function () {
@@ -52,7 +51,7 @@ describe('Comments', function () {
                 'content': 'This is another comment'
             }
         ]).then(function (data) {
-            expect(data.list.entries[0].entry.content).to.be.equal('This is a comment');
+            expect(data.entry.content).to.be.equal('This is a comment');
             done();
         }, function () {
         });
