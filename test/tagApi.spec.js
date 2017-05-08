@@ -23,7 +23,19 @@ describe('Tags', function () {
         });
     });
 
-    it('tags', function (done) {
+    it('should return list of tags', function (done) {
+        this.tagMock.get200Response();
+
+        this.alfrescoJsApi.core.tagsApi.listTags().then(function (data) {
+            expect(data.list.pagination.count).to.be.equal(2);
+            expect(data.list.entries[0].entry.tag).to.be.equal('tag-test-1');
+            expect(data.list.entries[1].entry.tag).to.be.equal('tag-test-2');
+            done();
+        }, function () {
+        });
+    });
+
+    it('should return list of tags when called via legacy getTags()', function (done) {
         this.tagMock.get200Response();
 
         this.alfrescoJsApi.core.tagsApi.getTags().then(function (data) {
@@ -35,7 +47,16 @@ describe('Tags', function () {
         });
     });
 
-    it('Tags 401', function (done) {
+    it('should return 401', function (done) {
+        this.tagMock.get401Response();
+
+        this.alfrescoJsApi.core.tagsApi.listTags().then(function () {
+        }, function () {
+            done();
+        });
+    });
+
+    it('should return 401 when called via legacy getTags()', function (done) {
         this.tagMock.get401Response();
 
         this.alfrescoJsApi.core.tagsApi.getTags().then(function () {
