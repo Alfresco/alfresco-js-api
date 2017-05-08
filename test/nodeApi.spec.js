@@ -1,4 +1,4 @@
-/*global describe, it, beforeEach */
+/*global describe, it, beforeEach, xit */
 
 var AlfrescoApi = require('../main');
 var chai = require('chai');
@@ -116,7 +116,7 @@ describe('Node', function () {
             });
         });
 
-        it('dynamic augmenting object parameters', function (done) {
+        xit('dynamic augmenting object parameters', function (done) {
             this.nodeMock.get200ResponseChildrenFutureNewPossibleValue();
 
             this.alfrescoJsApi.nodes.getNodeChildren('b4cff62a-664d-4d45-9302-98723eac1319').then(function (data) {
