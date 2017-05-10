@@ -28,6 +28,17 @@ describe('Node', function () {
         });
     });
 
+    describe('Add Node', function() {
+        it('should return a valid response when node created via addNode()', function(done) {
+            this.nodeMock.get200CreationFolder();
+            this.alfrescoJsApi.nodes.addNode('-root-', { name: 'newFolder', nodeType: 'cm:folder' }).then(function (data) {
+                expect(data.entry.name).to.be.equal('newFolder');
+                expect(data.entry.isFolder).to.be.equal(true);
+                done();
+            });
+        });
+    });
+
     describe('Create Folder', function () {
 
         it('creation of the folder should get 409 if new name clashes with an existing node in the current parent folder', function (done) {
