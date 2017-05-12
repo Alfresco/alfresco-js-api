@@ -17,7 +17,8 @@
     "generate": "mvn clean generate-sources",
     "watchify": "watchify -s AlfrescoApi main.js -o dist/alfresco-js-api.js",
     "tslint": "tslint -c tslint.json index.d.ts",
-    "toc": "markdown-toc -i README.md && markdown-toc -i test/mockObjects/README.md"
+    "toc": "markdown-toc -i README.md && markdown-toc -i test/mockObjects/README.md",
+    "prepublish" : "npm run webpack"
   },
   "repository": {
     "type": "git",
