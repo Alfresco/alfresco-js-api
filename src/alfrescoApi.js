@@ -1,6 +1,7 @@
 'use strict';
 
 var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
+var AlfrescoCoreLegacyApi = require('./alfresco-core-legacy-api/src/index.js');
 var AlfrescoPrivateRestApi = require('./alfresco-private-rest-api/src/index.js');
 var AlfrescoSearchRestApi = require('./alfresco-search-rest-api/src/index.js');
 var AlfrescoDiscoveryRestApi = require('./alfresco-discovery-rest-api/src/index.js');
@@ -130,6 +131,12 @@ class AlfrescoApi {
         this.corePrivateStore = AlfrescoPrivateRestApi;
         this._instantiateObjects(this.corePrivateStore, this.core);
 
+        //Legacy core methods
+        this._instantiateMethods(new AlfrescoCoreLegacyApi.CommentsApi(), this.core.commentsApi);
+        this._instantiateMethods(new AlfrescoCoreLegacyApi.NodesApi(), this.core.nodesApi);
+        this._instantiateMethods(new AlfrescoCoreLegacyApi.RenditionsApi(), this.core.renditionsApi);
+        this._instantiateMethods(new AlfrescoCoreLegacyApi.TagsApi(), this.core.tagsApi);
+
         //SEARCH
         this.search = {};
         AlfrescoSearchRestApi.ApiClient.instance = this.searchClient;
@@ -156,6 +163,14 @@ class AlfrescoApi {
             var obj = this._stringToObject(currentClass, module);
             var nameObj = _.lowerFirst(currentClass);
             moduleCopy[nameObj] = obj;
+        });
+    }
+
+    _instantiateMethods(module, moduleCopy) {
+        var classArray = Object.keys(module);
+
+        classArray.forEach((currentClass)=> {
+            moduleCopy[currentClass] = module[currentClass];
         });
     }
 

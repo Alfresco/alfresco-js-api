@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **String** |  | 
 **createdAt** | **Date** |  | 
-**entry** | [**Site**](Site.md) |  | 
+**site** | [**Site**](Site.md) |  | 
+**message** | **String** |  | [optional] 
 
 

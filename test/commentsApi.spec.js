@@ -26,6 +26,23 @@ describe('Comments', function () {
     it('should add a comment', function (done) {
         this.commentMock.post201Response();
 
+        this.alfrescoJsApi.core.commentsApi.createComment('74cd8a96-8a21-47e5-9b3b-a1b3e296787d', [
+            {
+                'content': 'This is a comment'
+            },
+            {
+                'content': 'This is another comment'
+            }
+        ]).then(function (data) {
+            expect(data.entry.content).to.be.equal('This is a comment');
+            done();
+        }, function () {
+        });
+    });
+
+    it('should add a comment when called via legacy addComment()', function (done) {
+        this.commentMock.post201Response();
+
         this.alfrescoJsApi.core.commentsApi.addComment('74cd8a96-8a21-47e5-9b3b-a1b3e296787d', [
             {
                 'content': 'This is a comment'
@@ -34,7 +51,7 @@ describe('Comments', function () {
                 'content': 'This is another comment'
             }
         ]).then(function (data) {
-            expect(data.list.entries[0].entry.content).to.be.equal('This is a comment');
+            expect(data.entry.content).to.be.equal('This is a comment');
             done();
         }, function () {
         });

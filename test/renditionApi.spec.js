@@ -42,7 +42,18 @@ describe('Rendition', function () {
         });
     });
 
-    it('Get Renditions list for node id', function (done) {
+    it('should return list of renditions for a node', function (done) {
+        this.renditionMock.get200RenditionList();
+
+        this.alfrescoJsApi.core.renditionsApi.listRenditions('97a29e9c-1e4f-4d9d-bb02-1ec920dda045').then(function (data) {
+            expect(data.list.pagination.count).to.be.equal(6);
+            expect(data.list.entries[0].entry.id).to.be.equal('avatar');
+            done();
+        }, function () {
+        });
+    });
+
+    it('should return list of renditions for a node when called via legacy getRenditions()', function (done) {
         this.renditionMock.get200RenditionList();
 
         this.alfrescoJsApi.core.renditionsApi.getRenditions('97a29e9c-1e4f-4d9d-bb02-1ec920dda045').then(function (data) {

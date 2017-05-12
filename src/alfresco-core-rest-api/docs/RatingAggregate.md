@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**average** | **Integer** |  | [optional] 
-**numberOfRatings** | **Integer** |  | 
+**numberOfRatings** | **Number** |  | 
+**average** | **Number** |  | [optional] 
 
 

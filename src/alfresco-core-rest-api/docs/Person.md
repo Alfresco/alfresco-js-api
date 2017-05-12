@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **String** |  | 
 **firstName** | **String** |  | 
-**lastName** | **String** |  | 
+**lastName** | **String** |  | [optional] 
 **description** | **String** |  | [optional] 
 **avatarId** | **String** |  | [optional] 
 **email** | **String** |  | 
@@ -20,6 +20,8 @@ Name | Type | Description | Notes
 **statusUpdatedAt** | **Date** |  | [optional] 
 **userStatus** | **String** |  | [optional] 
 **enabled** | **Boolean** |  | [default to true]
-**emailNotificationsEnabled** | **Boolean** |  | [optional] 
+**emailNotificationsEnabled** | **Boolean** |  | [optional] [default to true]
+**aspectNames** | **[String]** |  | [optional] 
+**properties** | **{String: String}** |  | [optional] 
 
 

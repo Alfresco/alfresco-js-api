@@ -225,6 +225,7 @@ declare namespace AlfrescoApi {
         new(client: ApiClient): NodesApi;
 
         addNode(nodeId: string, nodeBody: any, opts?: any): Promise<MinimalNodeEntity>;
+        createNode(nodeId: string, nodeBody: any, opts?: any): Promise<MinimalNodeEntity>;
         copyNode(nodeId: string, copyBody: any, opts?: any): Promise<MinimalNodeEntity>;
         deleteNode(nodeId: string): Promise<void>;
         getDeletedNode(nodeId: string, opts?: any): Promise<DeletedNodeEntity>;
@@ -232,6 +233,7 @@ declare namespace AlfrescoApi {
         getFileContent(nodeId: string, opts?: any): Promise<any>;
         getNode(nodeId: string, opts?: any): Promise<MinimalNodeEntity>;
         getNodeChildren(nodeId: string, opts?: any): Promise<NodePaging>;
+        listNodeChildren(nodeId: string, opts?: any): Promise<NodePaging>;
         moveNode(nodeId: string, moveBody: any, opts?: any): Promise<MinimalNodeEntity>;
         purgeDeletedNode(nodeId: string): Promise<void>;
         restoreNode(nodeId: string): Promise<MinimalNodeEntity>;

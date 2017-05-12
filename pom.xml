@@ -7,9 +7,9 @@
     <version>1.0-SNAPSHOT</version>
     <properties>
         <srcdir>${project.basedir}/src</srcdir>
-        <api-version>1.1-SNAPSHOT</api-version>
+        <api-version>5.2.0.1</api-version>
         <api-defs-dir>${project.build.directory}/api-explorer/definitions</api-defs-dir>
-        <swagger-codegen-version>2.1.6</swagger-codegen-version>
+        <swagger-codegen-version>2.2.2</swagger-codegen-version>
     </properties>
     <build>
         <plugins>
@@ -55,6 +55,7 @@
                             <configOptions>
                                 <projectVersion>0.1.0</projectVersion>
                                 <usePromises>true</usePromises>
+                                <moduleName>AlfrescoAuthRestApi</moduleName>
                             </configOptions>
                         </configuration>
                     </execution>
@@ -70,6 +71,7 @@
                             <configOptions>
                                 <projectVersion>0.1.0</projectVersion>
                                 <usePromises>true</usePromises>
+                                <moduleName>AlfrescoCoreRestApi</moduleName>
                             </configOptions>
                         </configuration>
                     </execution>

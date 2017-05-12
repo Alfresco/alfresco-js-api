@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entries** | [**[FavoriteEntry]**](FavoriteEntry.md) |  | 
 **pagination** | [**Pagination**](Pagination.md) |  | 
+**entries** | [**[FavoriteEntry]**](FavoriteEntry.md) |  | 
 
 

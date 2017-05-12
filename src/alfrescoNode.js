@@ -5,6 +5,14 @@ var _ = require('lodash');
 
 class AlfrescoNode extends AlfrescoCoreRestApi.NodesApi {
 
+    addNode(nodeId, nodeCreateBody, opts) {
+        return this.createNode(nodeId, nodeCreateBody, opts);
+    }
+
+    getNodeChildren(nodeId, opts) {
+        return this.listNodeChildren(nodeId, opts);
+    }
+
     /**
      * Get Info about file or folder by given nodeId
      * Minimal information for each child is returned by default.
@@ -55,7 +63,7 @@ class AlfrescoNode extends AlfrescoCoreRestApi.NodesApi {
             'relativePath': relativePath
         };
 
-        return this.addNode(nodeId, nodeBody, opts);
+        return this.createNode(nodeId, nodeBody, opts);
     }
 
     /**

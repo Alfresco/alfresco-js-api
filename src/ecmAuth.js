@@ -42,7 +42,7 @@ class EcmAuth extends AlfrescoApiClient {
         this.authentications.basicAuth.password = password;
 
         var authApi = new AlfrescoAuthRestApi.AuthenticationApi(this);
-        var loginRequest = new AlfrescoAuthRestApi.LoginRequest();
+        var loginRequest = new AlfrescoAuthRestApi.TicketBody();
 
         loginRequest.userId = this.authentications.basicAuth.username;
         loginRequest.password = this.authentications.basicAuth.password;
