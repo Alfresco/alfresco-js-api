@@ -265,7 +265,7 @@
       var returnType = [ProcessInstanceVariableRepresentation];
 
       return this.apiClient.callApi(
-        '/app/rest/task-forms/{taskId}/variables', 'GET',
+        '/api/enterprise/task-forms/{taskId}/variables', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );
