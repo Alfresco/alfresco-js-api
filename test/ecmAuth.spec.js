@@ -11,6 +11,22 @@ describe('Ecm Auth test', function () {
         this.authEcmMock = new AuthEcmMock(this.hostEcm);
     });
 
+    it('should remember username on login', () => {
+        const auth = new EcmAuth({});
+        auth.login('johndoe', 'password');
+        expect(auth.username).to.be.equal('johndoe');
+    });
+
+    it('should forget username on logout', () => {
+        const auth = new EcmAuth({});
+
+        auth.login('johndoe', 'password');
+        expect(auth.username).to.be.equal('johndoe');
+
+        auth.logout();
+        expect(auth.username).to.be.equal('');
+    });
+
     describe('With Authentication', function () {
 
         it('login should return the Ticket if all is ok', function (done) {

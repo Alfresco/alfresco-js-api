@@ -17,6 +17,5 @@
 *.DS_Store
 /package/
 /webpack-bundle-test.js
-/webpack.config.js
 /.github/
 /.babelrc

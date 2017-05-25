@@ -12,6 +12,22 @@ describe('Bpm Auth test', function () {
         this.authBpmMock = new AuthBpmMock(this.hostBpm);
     });
 
+    it('should remember username on login', () => {
+        const auth = new BpmAuth({});
+        auth.login('johndoe', 'password');
+        expect(auth.username).to.be.equal('johndoe');
+    });
+
+    it('should forget username on logout', () => {
+        const auth = new BpmAuth({});
+
+        auth.login('johndoe', 'password');
+        expect(auth.username).to.be.equal('johndoe');
+
+        auth.logout();
+        expect(auth.username).to.be.equal('');
+    });
+
     describe('With Authentication', function () {
 
         it('login should return the Ticket if all is ok', function (done) {

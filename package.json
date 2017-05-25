@@ -1,6 +1,6 @@
 {
   "name": "alfresco-js-api",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "JavaScript client library for the Alfresco REST API",
   "author": "Alfresco Software, Ltd.",
   "main": "main.js",
@@ -17,7 +17,8 @@
     "generate": "mvn clean generate-sources",
     "watchify": "watchify -s AlfrescoApi main.js -o dist/alfresco-js-api.js",
     "tslint": "tslint -c tslint.json index.d.ts",
-    "toc": "markdown-toc -i README.md && markdown-toc -i test/mockObjects/README.md"
+    "toc": "markdown-toc -i README.md && markdown-toc -i test/mockObjects/README.md",
+    "prepublish" : "npm run webpack"
   },
   "repository": {
     "type": "git",

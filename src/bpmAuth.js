@@ -10,6 +10,8 @@ class BpmAuth extends AlfrescoApiClient {
      */
     constructor(config) {
         super();
+
+        this.username = '';
         this.config = config;
         this.ticket = undefined;
 
@@ -43,6 +45,7 @@ class BpmAuth extends AlfrescoApiClient {
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
     login(username, password) {
+        this.username = username;
         this.authentications.basicAuth.username = username;
         this.authentications.basicAuth.password = password;
 
@@ -98,6 +101,7 @@ class BpmAuth extends AlfrescoApiClient {
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
     logout() {
+        this.username = '';
         var postBody = {}, pathParams = {}, queryParams = {}, headerParams = {}, formParams = {};
 
         var authNames = [];
