@@ -423,7 +423,7 @@ this.alfrescoJsApi.activiti.contentApi.getRelatedContentForTask(taskId);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **taskId** | **String**| taskId | 
- **isRelated** | **Boolean**| isRelatedContent |  optional
+ **isRelated** | **Boolean**| optional |  Default value is true
 
 ### Return type
 
