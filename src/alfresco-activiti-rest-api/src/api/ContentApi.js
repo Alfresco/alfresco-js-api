@@ -544,7 +544,8 @@
      * @param {String} processInstanceId processInstanceId
      * @param {Boolean} isRelated isRelated optional
      */
-    this.getRelatedContentForProcessInstance = function(processInstanceId, isRelated=true) {
+    this.getRelatedContentForProcessInstance = function(processInstanceId, isRelated) {
+      isRelated = isRelated || true;
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
@@ -588,7 +589,8 @@
      * Retrieve which content is attached to a task
      * @param {String} taskId taskId
      */
-    this.getRelatedContentForTask = function(taskId, isRelated=true) {
+    this.getRelatedContentForTask = function(taskId, isRelated) {
+      isRelated = isRelated || true;
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
