@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new PeopleApi. 
+   * Constructs a new PeopleApi.
    * @alias module:api/PeopleApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -787,7 +787,7 @@
      * Returns the current site membership requests for person **personId**.
      * @param {String} personId The identifier of a person.
      * @param {Object} opts Optional parameters
-     * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
+     * @param {Infteger} opts.skipCount The number of entities that exist in the collection before those included in this list.
      * @param {Integer} opts.maxItems The maximum number of items to return in the list.
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteMembershipRequestPaging}

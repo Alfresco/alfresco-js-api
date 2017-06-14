@@ -1,0 +1,184 @@
+swagger: '2.0'
+info:
+  description: |
+    **Authentication API**
+
+    Provides access to the authentication features of Alfresco Content Services.
+  version: '1'
+  title: Alfresco Content Services REST API
+basePath: /alfresco/api/-default-/public/authentication/versions/1
+securityDefinitions:
+  basicAuth:
+    type: basic
+    description: HTTP Basic Authentication
+security:
+  - basicAuth: []
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  '/tickets':
+    post:
+      x-alfresco-since: "5.2"
+      tags:
+        - authentication
+      summary: Create ticket (login)
+      description: |
+        **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+
+        Logs in and returns the new authentication ticket.
+
+        The userId and password properties are mandatory in the request body. For example:
+        ```JSON
+        {
+            "userId": "jbloggs",
+            "password": "password"
+        }
+        ```
+        To use the ticket in future requests you should pass it in the request header.
+        For example using Javascript:
+          ```Javascript
+            request.setRequestHeader ("Authorization", "Basic " + btoa(ticket));
+          ```
+      operationId: createTicket
+      parameters:
+        - in: body
+          name: ticketBodyCreate
+          description: The user credential.
+          required: true
+          schema:
+            $ref: '#/definitions/TicketBody'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '201':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TicketEntry'
+        '400':
+          description: |
+            **userId** or **password** is not provided
+        '403':
+          description: Login failed
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/tickets/-me-':
+    get:
+      x-alfresco-since: "5.2"
+      tags:
+        - authentication
+      summary: Validate ticket
+      description: |
+        **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+
+        Validates the specified ticket (derived from Authorization header) is still valid.
+
+        For example, you can pass the Authorization request header using Javascript:
+          ```Javascript
+            request.setRequestHeader ("Authorization", "Basic " + btoa(ticket));
+          ```
+      operationId: validateTicket
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ValidTicketEntry'
+        '400':
+          description: URL path does not include **-me-** or the ticket is not provided by the Authorization header
+        '401':
+          description: Authentication failed
+        '404':
+          description: The request is authorized correctly but the status of the user (of the supplied ticket) has
+            changed (for example, the user is locked or the account is disabled) or the ticket has expired
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      x-alfresco-since: "5.2"
+      tags:
+        - authentication
+      summary: Delete ticket (logout)
+      description: |
+        **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+
+        Deletes logged in ticket (logout).
+      operationId: deleteTicket
+      responses:
+        '204':
+          description: Successful response
+        '400':
+          description: URL path does not include **-me-** or the ticket is not provided by the Authorization header
+        '404':
+          description: Status of the user has changed (for example, the user is locked or the account is disabled) or the ticket has expired
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Error:
+    type: object
+    required:
+      - error
+    properties:
+      error:
+        type: object
+        required:
+          - statusCode
+          - briefSummary
+          - stackTrace
+          - descriptionURL
+        properties:
+          errorKey:
+            type: string
+          statusCode:
+            type: integer
+            format: int32
+          briefSummary:
+            type: string
+          stackTrace:
+            type: string
+          descriptionURL:
+            type: string
+          logId:
+            type: string
+  TicketBody:
+    type: object
+    properties:
+      userId:
+        type: string
+      password:
+        type: string
+  TicketEntry:
+    type: object
+    required:
+      - entry
+    properties:
+      entry:
+        $ref: '#/definitions/Ticket'
+  Ticket:
+    type: object
+    properties:
+      id:
+        type: string
+      userId:
+        type: string
+  ValidTicketEntry:
+    type: object
+    required:
+      - entry
+    properties:
+      entry:
+        $ref: '#/definitions/ValidTicket'
+  ValidTicket:
+    type: object
+    properties:
+      id:
+        type: string

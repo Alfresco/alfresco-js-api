@@ -18,7 +18,6 @@ var BpmClient = require('./bpmClient');
 var SearchClient = require('./searchClient');
 var DiscoveryClient = require('./discoveryClient');
 var EcmPrivateClient = require('./ecmPrivateClient');
-var _ = require('lodash');
 
 class AlfrescoApi {
     /**
@@ -166,9 +165,13 @@ class AlfrescoApi {
         classArray.forEach((currentClass)=> {
             moduleCopy[currentClass] = module[currentClass];
             var obj = this._stringToObject(currentClass, module);
-            var nameObj = _.lowerFirst(currentClass);
+            var nameObj = this._lowerFirst(currentClass);
             moduleCopy[nameObj] = obj;
         });
+    }
+
+    _lowerFirst(string) {
+        return string.charAt(0).toLowerCase() + string.slice(1);
     }
 
     _stringToObject(nameClass, module) {

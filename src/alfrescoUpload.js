@@ -2,7 +2,6 @@
 
 var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
 var Emitter = require('event-emitter');
-var _ = require('lodash');
 
 class AlfrescoUpload extends AlfrescoCoreRestApi.NodesApi {
 
@@ -13,6 +12,7 @@ class AlfrescoUpload extends AlfrescoCoreRestApi.NodesApi {
 
     uploadFile(fileDefinition, relativePath, nodeId, nodeBody, opts) {
         nodeId = nodeId || '-root-';
+        opts = opts || {};
 
         var nodeBodyRequired = {
             'name': fileDefinition.name,
@@ -20,13 +20,13 @@ class AlfrescoUpload extends AlfrescoCoreRestApi.NodesApi {
             'relativePath': relativePath
         };
 
-        nodeBody = _.merge(nodeBodyRequired, nodeBody);
+        nodeBody = Object.assign(nodeBodyRequired, nodeBody);
 
         var formParam = {};
         formParam.filedata = fileDefinition;
         formParam.relativePath = relativePath;
 
-        formParam = _.merge(formParam, opts);
+        formParam = Object.assign(formParam, opts);
 
         return this.addNodeUpload(nodeId, nodeBody, opts, formParam);
     }
