@@ -542,8 +542,10 @@
     /**
      * getRelatedContentForProcessInstance
      * @param {String} processInstanceId processInstanceId
+     * @param {Boolean} isRelated isRelated optional
      */
-    this.getRelatedContentForProcessInstance = function(processInstanceId) {
+    this.getRelatedContentForProcessInstance = function(processInstanceId, isRelated) {
+      isRelated = isRelated || true;
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
@@ -556,6 +558,7 @@
         'processInstanceId': processInstanceId
       };
       var queryParams = {
+        'isRelatedContent' : isRelated
       };
       var headerParams = {
       };
@@ -579,13 +582,15 @@
      * @param {String} error Error message, if any.
      * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
+     * @param {Boolean} isRelated isRelated optional
      */
 
     /**
      * Retrieve which content is attached to a task
      * @param {String} taskId taskId
      */
-    this.getRelatedContentForTask = function(taskId) {
+    this.getRelatedContentForTask = function(taskId, isRelated) {
+      isRelated = isRelated || true;
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
@@ -598,6 +603,7 @@
         'taskId': taskId
       };
       var queryParams = {
+        'isRelatedContent' : isRelated
       };
       var headerParams = {
       };

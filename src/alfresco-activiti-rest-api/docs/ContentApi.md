@@ -388,7 +388,8 @@ this.alfrescoJsApi.activiti.contentApi.getRelatedContentForProcessInstance(proce
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **processInstanceId** | **String**| processInstanceId | 
+ **processInstanceId** | **String** | processInstanceId | 
+ **isRelated**         | **Boolean**| optional | Default value is true
 
 ### Return type
 
@@ -422,6 +423,7 @@ this.alfrescoJsApi.activiti.contentApi.getRelatedContentForTask(taskId);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **taskId** | **String**| taskId | 
+ **isRelated** | **Boolean**| optional |  Default value is true
 
 ### Return type
 
