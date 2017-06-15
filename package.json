@@ -16,7 +16,7 @@
     "coverage": "grunt coverage",
     "generate": "mvn clean generate-sources",
     "watchify": "watchify -s AlfrescoApi main.js -o dist/alfresco-js-api.js",
-    "tslint": "tslint -c tslint.json index.d.ts",
+    "tslint": "tslint --type-check -c tslint.json index.d.ts --project tsconfig.json ",
     "toc": "markdown-toc -i README.md && markdown-toc -i test/mockObjects/README.md",
     "prepublish" : "npm run webpack"
   },
@@ -58,8 +58,8 @@
     "rimraf": "^2.5.2",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
-    "tslint": "^3.8.1",
-    "typescript": "^1.8.10",
+    "tslint": "5.4.3",
+    "typescript": "^2.4.0",
     "watchify": "^3.7.0",
     "webpack": "^2.2.1"
   },

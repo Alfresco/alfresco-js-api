@@ -1,8 +1,22 @@
-declare var AlfrescoApi: AlfrescoApi.AlfrescoApi;
+declare namespace Alfresco {
+    export class AlfrescoApi {
+        constructor(config: AlfrescoApiConfig): AlfrescoApi;
 
-declare namespace AlfrescoApi {
-    export interface AlfrescoApi {
-        new(config: AlfrescoApiConfig): AlfrescoApi;
+        changeEcmHost(ecmHost: string): void;
+        changeBpmHost(bpmHost: string): void;
+        changeCsrfConfig(disableCsrf: boolean): void;
+
+        isLoggedIn(): boolean;
+        login(username: string, password: string): Promise<string>;
+        logout(): Promise<any>;
+        loginTicket(ticket: string): any;
+        refresh(): Promise<string>;
+
+        getTicket(): Array<string>;
+        getTicketBpm(): string;
+        getTicketEcm(): string;
+
+        setTicket(ticketEcm: any, ticketBpm: any): void;
 
         config: AlfrescoApiConfig;
 
@@ -29,22 +43,6 @@ declare namespace AlfrescoApi {
         bpmClient: BpmClient;
         searchClient: SearchClient;
         ecmPrivateClient: EcmPrivateClient;
-
-        changeEcmHost(ecmHost: string): void;
-        changeBpmHost(bpmHost: string): void;
-        changeCsrfConfig(disableCsrf: boolean): void;
-
-        isLoggedIn(): boolean;
-        login(username: string, password: string): Promise<string>;
-        logout(): Promise<any>;
-        loginTicket(ticket: string): any;
-        refresh(): Promise<string>;
-
-        getTicket(): Array<string>;
-        getTicketBpm(): string;
-        getTicketEcm(): string;
-
-        setTicket(ticketEcm: any, ticketBpm: any): void;
     }
 
     export interface FolderEntity {
@@ -656,6 +654,27 @@ declare namespace AlfrescoApi {
         pagination?: Pagination;
     }
 
+    export interface Node {
+        id?: string;
+        name?: string;
+        nodeType?: string;
+        isFolder?: boolean;
+        isFile?: boolean;
+        isLocked?: boolean;
+        modifiedAt?: Date;
+        modifiedByUser?: UserInfo;
+        adddAt?: Date;
+        adddByUser?: UserInfo;
+        parentId?: string;
+        isLink?: boolean;
+        content?: ContentInfo;
+        aspectNames?: Array<string>;
+        properties?: any;
+        allowableOperations?: Array<string>;
+        path?: PathInfo;
+        permissions?: PermissionsInfo;
+    }
+
     export interface Company {
         organization?: string;
         address1?: string;
@@ -746,26 +765,6 @@ declare namespace AlfrescoApi {
         usage?: number;
     }
 
-    export interface Node {
-        id?: string;
-        name?: string;
-        nodeType?: string;
-        isFolder?: boolean;
-        isFile?: boolean;
-        isLocked?: boolean;
-        modifiedAt?: Date;
-        modifiedByUser?: UserInfo;
-        adddAt?: Date;
-        adddByUser?: UserInfo;
-        parentId?: string;
-        isLink?: boolean;
-        content?: ContentInfo;
-        aspectNames?: Array<string>;
-        properties?: any;
-        allowableOperations?: Array<string>;
-        path?: PathInfo;
-        permissions?: PermissionsInfo;
-    }
 
     export interface NodeAssociation extends Node {
         association?: AssociationInfo;
@@ -817,11 +816,11 @@ declare namespace AlfrescoApi {
     namespace NodeBodyLock {
         enum TypeEnum {
             ALLOW_OWNER_CHANGES,
-            FULL,
+            FULL
         }
         enum LifetimeEnum {
             PERSISTENT,
-            EPHEMERAL,
+            EPHEMERAL
         }
     }
 
@@ -890,7 +889,7 @@ declare namespace AlfrescoApi {
     namespace PermissionElement {
         enum AccessStatusEnum {
             ALLOWED,
-            DENIED,
+            DENIED
         }
     }
 
@@ -997,7 +996,7 @@ declare namespace AlfrescoApi {
         enum SubscriptionLevelEnum {
             Free,
             Standard,
-            Enterprise,
+            Enterprise
         }
     }
 
@@ -1061,7 +1060,7 @@ declare namespace AlfrescoApi {
     namespace RatingBody {
         enum IdEnum {
             likes,
-            fiveStar,
+            fiveStar
         }
     }
 
@@ -1087,7 +1086,7 @@ declare namespace AlfrescoApi {
     namespace Rendition {
         enum StatusEnum {
             addD,
-            NOT_addD,
+            NOT_addD
         }
     }
 
@@ -1164,13 +1163,13 @@ declare namespace AlfrescoApi {
         enum VisibilityEnum {
             PRIVATE,
             MODERATED,
-            PUBLIC,
+            PUBLIC
         }
         enum RoleEnum {
             SiteConsumer,
             SiteCollaborator,
             SiteContributor,
-            SiteManager,
+            SiteManager
         }
     }
 
@@ -1185,7 +1184,7 @@ declare namespace AlfrescoApi {
         enum VisibilityEnum {
             PUBLIC,
             PRIVATE,
-            MODERATED,
+            MODERATED
         }
     }
 
@@ -1199,7 +1198,7 @@ declare namespace AlfrescoApi {
         enum VisibilityEnum {
             PRIVATE,
             MODERATED,
-            PUBLIC,
+            PUBLIC
         }
     }
 
@@ -1236,7 +1235,7 @@ declare namespace AlfrescoApi {
             SiteConsumer,
             SiteCollaborator,
             SiteContributor,
-            SiteManager,
+            SiteManager
         }
     }
 
@@ -1263,7 +1262,7 @@ declare namespace AlfrescoApi {
             SiteConsumer,
             SiteCollaborator,
             SiteContributor,
-            SiteManager,
+            SiteManager
         }
     }
 
@@ -1276,7 +1275,7 @@ declare namespace AlfrescoApi {
             SiteConsumer,
             SiteCollaborator,
             SiteContributor,
-            SiteManager,
+            SiteManager
         }
     }
 
@@ -1331,7 +1330,7 @@ declare namespace AlfrescoApi {
             SiteConsumer,
             SiteCollaborator,
             SiteContributor,
-            SiteManager,
+            SiteManager
         }
     }
 
@@ -1730,15 +1729,16 @@ declare namespace AlfrescoApi {
     export interface AuthApi {
         new(config: AlfrescoApiConfig): AuthApi;
 
-        username: string;
         changeHost(host: string): void;
         login(username: string, password: string): Promise<string>;
         logout(): Promise<string>;
         setTicket(ticket: string): void;
         getTicket(): string;
         isLoggedIn(): boolean;
-
         getClient(): any;
+
+        username: string;
+
     }
 
     export interface BpmAuthApi extends AuthApi {
@@ -1760,4 +1760,6 @@ declare namespace AlfrescoApi {
     }
 }
 
-export = AlfrescoApi;
+export as namespace Alfresco;
+
+export = Alfresco;
