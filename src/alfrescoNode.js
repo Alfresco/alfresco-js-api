@@ -1,7 +1,6 @@
 'use strict';
 
 var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
-var _ = require('lodash');
 
 class AlfrescoNode extends AlfrescoCoreRestApi.NodesApi {
 
@@ -70,7 +69,9 @@ class AlfrescoNode extends AlfrescoCoreRestApi.NodesApi {
      */
     createFolderAutoRename(name, relativePath, nodeId, opts) {
         var optAutoRename = {autoRename: true};
-        opts = _.merge(opts, optAutoRename);
+        opts = opts || {};
+        opts = Object.assign(opts, optAutoRename);
+
         return this.createFolder(name, relativePath, nodeId, opts);
     }
 }

@@ -1,0 +1,202 @@
+swagger: '2.0'
+info:
+  description: |
+    **Discovery API**
+
+    Provides access to information about Alfresco Content Services.
+  version: '1'
+  title: Alfresco Content Services REST API
+basePath: /alfresco/api
+securityDefinitions:
+  basicAuth:
+    type: basic
+    description: HTTP Basic Authentication
+security:
+  - basicAuth: []
+produces:
+  - application/json
+paths:
+  '/discovery':
+    get:
+      x-alfresco-since: "5.2"
+      tags:
+        - discovery
+      summary: Get repository information
+      description: |
+        **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+
+        Retrieves the capabilities and detailed version information from the repository.
+      operationId: getRepositoryInformation
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DiscoveryEntry'
+        '501':
+          description: Discovery is disabled for the system
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Error:
+    type: object
+    required:
+      - error
+    properties:
+      error:
+        type: object
+        required:
+          - statusCode
+          - briefSummary
+          - stackTrace
+          - descriptionURL
+        properties:
+          errorKey:
+            type: string
+          statusCode:
+            type: integer
+            format: int32
+          briefSummary:
+            type: string
+          stackTrace:
+            type: string
+          descriptionURL:
+            type: string
+          logId:
+            type: string
+  VersionInfo:
+    type: object
+    required:
+    - major
+    - minor
+    - patch
+    - hotfix
+    - schema
+    - label
+    - display
+    properties:
+      major:
+        type: string
+      minor:
+        type: string
+      patch:
+        type: string
+      hotfix:
+        type: string
+      schema:
+        type: integer
+      label:
+        type: string
+      display:
+        type: string
+  StatusInfo:
+    type: object
+    required:
+    - isReadOnly
+    - isAuditEnabled
+    - isQuickShareEnabled
+    - isThumbnailGenerationEnabled
+    properties:
+      isReadOnly:
+        type: boolean
+        default: false
+      isAuditEnabled:
+        type: boolean
+      isQuickShareEnabled:
+        type: boolean
+      isThumbnailGenerationEnabled:
+        type: boolean
+  EntitlementsInfo:
+    type: object
+    properties:
+      maxUsers:
+        type: integer
+        format: int64
+      maxDocs:
+        type: integer
+        format: int64
+      isClusterEnabled:
+        type: boolean
+        default: false
+      isCryptodocEnabled:
+        type: boolean
+        default: false
+  LicenseInfo:
+    type: object
+    required:
+    - issuedAt
+    - expiresAt
+    - remainingDays
+    - holder
+    - mode
+    properties:
+      issuedAt:
+        type: string
+        format: date-time
+      expiresAt:
+        type: string
+        format: date-time
+      remainingDays:
+        type: integer
+      holder:
+        type: string
+      mode:
+        type: string
+      entitlements:
+        $ref: '#/definitions/EntitlementsInfo'
+  ModuleInfo:
+    type: object
+    properties:
+      id:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+      version:
+        type: string
+      installDate:
+        type: string
+        format: date-time
+      installState:
+        type: string
+      versionMin:
+        type: string
+      versionMax:
+        type: string
+  RepositoryInfo:
+    type: object
+    required:
+    - edition
+    - version
+    - status
+    properties:
+      edition:
+        type: string
+      version:
+        $ref: '#/definitions/VersionInfo'
+      status:
+        $ref: '#/definitions/StatusInfo'
+      license:
+        $ref: '#/definitions/LicenseInfo'
+      modules:
+        type: array
+        items:
+          $ref: '#/definitions/ModuleInfo'
+  RepositoryEntry:
+    type: object
+    required:
+    - repository
+    properties:
+      repository:
+        $ref: '#/definitions/RepositoryInfo'
+  DiscoveryEntry:
+    type: object
+    required:
+    - entry
+    properties:
+      entry:
+        $ref: '#/definitions/RepositoryEntry'
