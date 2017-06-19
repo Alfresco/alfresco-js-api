@@ -3,18 +3,16 @@ var path = require("path");
 
 module.exports = {
 
-    debug: true,
+    output: {
+        library: 'AlfrescoApi',
+        libraryTarget: 'umd',
+        path: path.resolve(__dirname, "dist"),
+        filename: '[name].js'
+    },
 
     entry: {
         'alfresco-js-api': './main.js',
         'alfresco-js-api.min': './main.js'
-    },
-
-    node: {
-        console: 'empty',
-        fs: 'empty',
-        net: 'empty',
-        tls: 'empty'
     },
 
     // correct
@@ -25,7 +23,7 @@ module.exports = {
                 /(node_modules|grunt|test)/,
                 path.resolve(__dirname, 'Gruntfile.js')
             ],
-            loader: 'babel',
+            loader: 'babel-loader',
             query: {
                 presets: ['es2015-loose'],
                 plugins: ['transform-es2015-block-scoping',
@@ -33,13 +31,6 @@ module.exports = {
                     'transform-proto-to-assign']
             }
         }]
-    },
-
-    output: {
-        library: 'AlfrescoApi',
-        libraryTarget: 'umd',
-        path: './dist',
-        filename: '[name].js'
     },
 
     plugins: [
@@ -50,5 +41,12 @@ module.exports = {
                 warnings: false
             }
         })
-    ]
+    ],
+
+    node: {
+        console: 'mock',
+        fs: 'empty',
+        net: 'empty',
+        tls: 'empty'
+    }
 };

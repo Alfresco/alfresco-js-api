@@ -1,18 +1,19 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient', '../model/NodeEntry', '../model/NodeBody', '../model/Error', '../model/CopyBody', '../model/DeletedNodeEntry', '../model/DeletedNodesPaging', '../model/NodePaging', '../model/MoveBody'], factory);
+    define(['../ApiClient', '../model/NodeEntry', '../model/NodeBody', '../model/Error', '../model/CopyBody', '../model/DeletedNodeEntry', '../model/DeletedNodesPaging', '../model/NodePaging', '../model/MoveBody', '../model/NodeAssociationPaging', '../model/NodeBodyLock', '../model/NodeChildAssociationPaging'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/NodeEntry'), require('../model/NodeBody'), require('../model/Error'), require('../model/CopyBody'), require('../model/DeletedNodeEntry'), require('../model/DeletedNodesPaging'), require('../model/NodePaging'), require('../model/MoveBody'));
+    module.exports = factory(require('../ApiClient'), require('../model/NodeEntry'), require('../model/NodeBody'), require('../model/Error'), require('../model/CopyBody'), require('../model/DeletedNodeEntry'), require('../model/DeletedNodesPaging'), require('../model/NodePaging'), require('../model/MoveBody',  require('../model/NodeAssociationPaging'), require('../model/NodeBodyLock'), require('../model/NodeChildAssociationPaging')));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoCoreRestApi) {
       root.AlfrescoCoreRestApi = {};
     }
-    root.AlfrescoCoreRestApi.NodesApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.NodeEntry, root.AlfrescoCoreRestApi.NodeBody, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.CopyBody, root.AlfrescoCoreRestApi.DeletedNodeEntry, root.AlfrescoCoreRestApi.DeletedNodesPaging, root.AlfrescoCoreRestApi.NodePaging, root.AlfrescoCoreRestApi.MoveBody);
+    root.AlfrescoCoreRestApi.NodesApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.NodeEntry, root.AlfrescoCoreRestApi.NodeBody, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.CopyBody, root.AlfrescoCoreRestApi.DeletedNodeEntry, root.AlfrescoCoreRestApi.DeletedNodesPaging, root.AlfrescoCoreRestApi.NodePaging, root.AlfrescoCoreRestApi.MoveBody, root.NodeAssociationPaging, root.NodeBodyLock, root.NodeChildAssociationPaging);
   }
-}(this, function(ApiClient, NodeEntry, NodeBody, Error, CopyBody, DeletedNodeEntry, DeletedNodesPaging, NodePaging, MoveBody) {
+}(this, function(ApiClient, NodeEntry, NodeBody, Error, CopyBody, DeletedNodeEntry, DeletedNodesPaging, NodePaging, MoveBody, NodeAssociationPaging, NodeBodyLock, NodeChildAssociationPaging) {
+
   'use strict';
 
   /**
@@ -345,6 +346,49 @@
       );
     }
 
+    /**
+     * Get node content
+     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.  Gets the content of the node with identifier **nodeId**.
+     * @param {String} nodeId The identifier of a node.
+     * @param {Object} opts Optional parameters
+     * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment. **false** means a web browser may preview the file in a new tab or window, but not download the file.  You can only set this parameter to **false** if the content type of the file is in the supported list; for example, certain image files and PDF files.  If the content type is not supported for preview, then a value of **false**  is ignored, and the attachment will be returned in the response.  (default to true)
+     * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided. Use the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+     */
+    this.getNodeContent = function(nodeId, opts) {
+      opts = opts || {};
+      var postBody = null;
+
+      // verify the required parameter 'nodeId' is set
+      if (nodeId == undefined || nodeId == null) {
+        throw new Error("Missing the required parameter 'nodeId' when calling getNodeContent");
+      }
+
+
+      var pathParams = {
+        'nodeId': nodeId
+      };
+      var queryParams = {
+        'attachment': opts['attachment']
+      };
+      var headerParams = {
+        'If-Modified-Since': opts['ifModifiedSince']
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = null;
+
+      return this.apiClient.callApi(
+        '/nodes/{nodeId}/content', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
 
     /**
      * Get node children
@@ -401,6 +445,292 @@
       );
     }
 
+    /**
+     * get parents
+     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.  Gets a list of parent nodes that are associated with the current child **nodeId**.  The list includes both the primary parent and any secondary parents.
+     * @param {String} nodeId The identifier of a child node. You can also use one of these well-known aliases: * -my- * -shared- * -root-
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.where Optionally filter the list by **assocType** and/or **isPrimary**. Here are some example filters:  *   &#x60;&#x60;&#x60;where&#x3D;(assocType&#x3D;&#39;my:specialAssocType&#39;)&#x60;&#x60;&#x60;  *   &#x60;&#x60;&#x60;where&#x3D;(isPrimary&#x3D;true)&#x60;&#x60;&#x60;  *   &#x60;&#x60;&#x60;where&#x3D;(isPrimary&#x3D;false and assocType&#x3D;&#39;my:specialAssocType&#39;)&#x60;&#x60;&#x60;
+     * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested: * allowableOperations * aspectNames * isLink * isLocked * path * properties
+     * @param {Number} opts.skipCount The number of entities that exist in the collection before those included in this list.
+     * @param {Number} opts.maxItems The maximum number of items to return in the list.
+     * @param {Boolean} opts.includeSource Also include **source** (in addition to **entries**) with folder information on **nodeId**
+     * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NodeAssociationPaging}
+     */
+    this.getParents = function(nodeId, opts) {
+      opts = opts || {};
+      var postBody = null;
+
+      // verify the required parameter 'nodeId' is set
+      if (nodeId == undefined || nodeId == null) {
+        throw new Error("Missing the required parameter 'nodeId' when calling listParents");
+      }
+
+
+      var pathParams = {
+        'nodeId': nodeId
+      };
+      var queryParams = {
+        'where': opts['where'],
+        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+        'skipCount': opts['skipCount'],
+        'maxItems': opts['maxItems'],
+        'includeSource': opts['includeSource'],
+        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = NodeAssociationPaging;
+
+      return this.apiClient.callApi(
+        '/nodes/{nodeId}/parents', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+
+    /**
+     * Get secondary children
+     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.  Gets a list of secondary child nodes that are associated with the current parent **nodeId**, via a secondary child association.
+     * @param {String} nodeId The identifier of a parent node. You can also use one of these well-known aliases: * -my- * -shared- * -root-
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.where Optionally filter the list by assocType. Here&#39;s an example:  *   where&#x3D;(assocType&#x3D;&#39;my:specialAssocType&#39;)
+     * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested: * allowableOperations * aspectNames * isLink * isLocked * path * properties
+     * @param {Number} opts.skipCount The number of entities that exist in the collection before those included in this list.
+     * @param {Number} opts.maxItems The maximum number of items to return in the list.
+     * @param {Boolean} opts.includeSource Also include **source** (in addition to **entries**) with folder information on **nodeId**
+     * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NodeChildAssociationPaging}
+     */
+    this.getSecondaryChildren = function(nodeId, opts) {
+      opts = opts || {};
+      var postBody = null;
+
+      // verify the required parameter 'nodeId' is set
+      if (nodeId == undefined || nodeId == null) {
+        throw new Error("Missing the required parameter 'nodeId' when calling listSecondaryChildren");
+      }
+
+
+      var pathParams = {
+        'nodeId': nodeId
+      };
+      var queryParams = {
+        'where': opts['where'],
+        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+        'skipCount': opts['skipCount'],
+        'maxItems': opts['maxItems'],
+        'includeSource': opts['includeSource'],
+        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = NodeChildAssociationPaging;
+
+      return this.apiClient.callApi(
+        '/nodes/{nodeId}/secondary-children', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Get source associations
+     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.  Gets a list of source nodes that are associated with the current target **nodeId**.
+     * @param {String} nodeId The identifier of a target node.
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.where Optionally filter the list by **assocType**. Here&#39;s an example:  *   &#x60;&#x60;&#x60;where&#x3D;(assocType&#x3D;&#39;my:specialAssocType&#39;)&#x60;&#x60;&#x60;
+     * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested: * allowableOperations * aspectNames * isLink * isLocked * path * properties
+     * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NodeAssociationPaging}
+     */
+    this.getSourceAssociations = function(nodeId, opts) {
+      opts = opts || {};
+      var postBody = null;
+
+      // verify the required parameter 'nodeId' is set
+      if (nodeId == undefined || nodeId == null) {
+        throw new Error("Missing the required parameter 'nodeId' when calling listSourceAssociations");
+      }
+
+
+      var pathParams = {
+        'nodeId': nodeId
+      };
+      var queryParams = {
+        'where': opts['where'],
+        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = NodeAssociationPaging;
+
+      return this.apiClient.callApi(
+        '/nodes/{nodeId}/sources', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+
+    /**
+     * Get target associations
+     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.  Gets a list of target nodes that are associated with the current source **nodeId**.
+     * @param {String} nodeId The identifier of a source node.
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.where Optionally filter the list by **assocType**. Here&#39;s an example:  *   &#x60;&#x60;&#x60;where&#x3D;(assocType&#x3D;&#39;my:specialAssocType&#39;)&#x60;&#x60;&#x60;
+     * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested: * allowableOperations * aspectNames * isLink * isLocked * path * properties
+     * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NodeAssociationPaging}
+     */
+    this.getTargetAssociations = function(nodeId, opts) {
+      opts = opts || {};
+      var postBody = null;
+
+      // verify the required parameter 'nodeId' is set
+      if (nodeId == undefined || nodeId == null) {
+        throw new Error("Missing the required parameter 'nodeId' when calling listTargetAssociations");
+      }
+
+
+      var pathParams = {
+        'nodeId': nodeId
+      };
+      var queryParams = {
+        'where': opts['where'],
+        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = NodeAssociationPaging;
+
+      return this.apiClient.callApi(
+        '/nodes/{nodeId}/targets', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+
+    /**
+     * Lock a node
+     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.  Places a lock on node **nodeId**.  **Note:** you can only lock files. More specifically, a node can only be locked if it is of type &#x60;cm:content&#x60; or a subtype of &#x60;cm:content&#x60;.  The lock is owned by the current user, and prevents other users or processes from making updates to the node until the lock is released.    If the **timeToExpire** is not set or is zero, then the lock never expires.  Otherwise, the **timeToExpire** is the number of seconds before the lock expires.    When a lock expires, the lock is released.  If the node is already locked, and the user is the lock owner, then the lock is renewed with the new **timeToExpire**.          By default, a lock is applied that allows the owner to update or delete the node. You can use **type** to change the lock type to one of the following:  * **ALLOW_OWNER_CHANGES** (default) changes to the node can be made only by the lock owner. This enum is the same value as the deprecated WRITE_LOCK described in &#x60;org.alfresco.service.cmr.lock.LockType&#x60; in the Alfresco Public Java API. This is the default value. * **FULL** no changes by any user are allowed. This enum is the same value as the deprecated READ_ONLY_LOCK described in &#x60;org.alfresco.service.cmr.lock.LockType&#x60; in the Alfresco Public Java API.  By default, a lock is persisted in the database. You can create a volatile in-memory lock by setting the **lifetime** property to EPHEMERAL. You might choose use EPHEMERAL locks, for example, if you are taking frequent short-term locks that you don&#39;t need  to be kept over a restart of the repository. In this case you don&#39;t need the  overhead of writing the locks to the database.  If a lock on the node cannot be taken, then an error is returned.
+     * @param {String} nodeId The identifier of a node.
+     * @param {module:model/NodeBodyLock} nodeBodyLock Lock details.
+     * @param {Object} opts Optional parameters
+     * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested: * allowableOperations * association * isLink * isLocked * path * permissions
+     * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NodeEntry}
+     */
+    this.lockNode = function(nodeId, nodeBodyLock, opts) {
+      opts = opts || {};
+      var postBody = nodeBodyLock;
+
+      // verify the required parameter 'nodeId' is set
+      if (nodeId == undefined || nodeId == null) {
+        throw new Error("Missing the required parameter 'nodeId' when calling lockNode");
+      }
+
+      // verify the required parameter 'nodeBodyLock' is set
+      if (nodeBodyLock == undefined || nodeBodyLock == null) {
+        throw new Error("Missing the required parameter 'nodeBodyLock' when calling lockNode");
+      }
+
+
+      var pathParams = {
+        'nodeId': nodeId
+      };
+      var queryParams = {
+        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = NodeEntry;
+
+      return this.apiClient.callApi(
+        '/nodes/{nodeId}/lock', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Unlock a node
+     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.  Deletes a lock on node **nodeId**.  The current user must be the owner of the locks or have admin rights, otherwise an error is returned.  If a lock on the node cannot be released, then an error is returned.
+     * @param {String} nodeId The identifier of a node.
+     * @param {Object} opts Optional parameters
+     * @param {Array.<String>} opts.include Returns additional information about the node. The following optional fields can be requested: * allowableOperations * association * isLink * isLocked * path * permissions
+     * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NodeEntry}
+     */
+    this.unlockNode = function(nodeId, opts) {
+      opts = opts || {};
+      var postBody = null;
+
+      // verify the required parameter 'nodeId' is set
+      if (nodeId == undefined || nodeId == null) {
+        throw new Error("Missing the required parameter 'nodeId' when calling unlockNode");
+      }
+
+
+      var pathParams = {
+        'nodeId': nodeId
+      };
+      var queryParams = {
+        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = NodeEntry;
+
+      return this.apiClient.callApi(
+        '/nodes/{nodeId}/unlock', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
 
     /**
      * Move a node
@@ -580,6 +910,46 @@
       );
     }
 
+    this.updateNodeContent = function(nodeId, contentBody, opts) {
+      opts = opts || {};
+      var postBody = contentBody;
+
+      // verify the required parameter 'nodeId' is set
+      if (nodeId == undefined || nodeId == null) {
+        throw "Missing the required parameter 'nodeId' when calling updateNodeContent";
+      }
+
+      // verify the required parameter 'contentBody' is set
+      if (contentBody == undefined || contentBody == null) {
+        throw "Missing the required parameter 'contentBody' when calling updateNodeContent";
+      }
+
+
+      var pathParams = {
+        'nodeId': nodeId
+      };
+      var queryParams = {
+        'majorVersion': opts['majorVersion'],
+        'comment': opts['comment'],
+        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/octet-stream'];
+      var accepts = ['application/json'];
+      var returnType = NodeEntry;
+
+      return this.apiClient.callApi(
+        '/nodes/{nodeId}/content', 'PUT',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
 
     /**
      * Update a node

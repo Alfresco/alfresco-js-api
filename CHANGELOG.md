@@ -10,6 +10,9 @@
 - [Move /task-forms/{task-id}/variables from rest to enterprise](https://github.com/Alfresco/alfresco-js-api/issues/199)
 - [Added query param for get related contents](https://issues.alfresco.com/jira/browse/ADF-684)
 
+## Features
+- [Complete TypeScript definitions for JS-API](https://github.com/Alfresco/alfresco-js-api/issues/228)
+
 <a name="1.5.0"></a>
 # [1.5.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.5.0) (25-05-2017)
 ## Features

@@ -1,0 +1,2131 @@
+swagger: '2.0'
+info:
+  description: |
+    **Workflow API**
+
+    Provides access to the workflow features of Alfresco Content Services.
+  version: '1'
+  title: Alfresco Content Services REST API
+basePath: /alfresco/api/-default-/public/workflow/versions/1
+securityDefinitions:
+  basicAuth:
+    type: basic
+    description: HTTP Basic Authentication
+security:
+  - basicAuth: []
+consumes:
+  - application/json
+produces:
+  - application/json
+tags:
+  - name: deployments
+    description: Retrieve and manage deployments
+  - name: process-definitions
+    description: Retrieve and manage process definitions
+  - name: processes
+    description: Retrieve and manage processes
+  - name: tasks
+    description: Retrieve and manage tasks
+parameters:
+  processIdParam:
+    name: processId
+    in: path
+    description:  The identifier of a process.
+    required: true
+    type: string
+  processDefinitionIdParam:
+    name: processDefinitionId
+    in: path
+    description: The identifier of a process definition.
+    required: true
+    type: string
+  taskIdParam:
+    name: taskId
+    in: path
+    description: The identifier of a task.
+    required: true
+    type: string
+  skipCountParam:
+    name: skipCount
+    in: query
+    description: The number of entities that  exist in the collection before those included in this list.
+    required: false
+    type: integer
+    minimum: 0
+  maxItemsParam:
+    name: maxItems
+    in: query
+    description: The maximum number of items to return in the list.
+    required: false
+    type: integer
+    minimum: 1
+  propertiesParam:
+    name: properties
+    in: query
+    description: A list of property names. You can use the properties parameter to restrict the number of returned properties.
+    required: false
+    type: array
+    items:
+      type: string
+    collectionFormat: csv
+  variableNameParam:
+    name: variableName
+    in: path
+    description:  The name of a variable.
+    required: true
+    type: string
+  itemIdParam:
+    name: itemId
+    in: path
+    description: The identifier of an item.
+    required: true
+    type: string
+  selectParam:
+    name: select
+    in: query
+    description: A string specifying a required subset of properties to be returned for an entity or list of entities. Properties are separated by commas.
+    required: false
+    type: integer
+  orderByParam:
+    name: orderBy
+    in: query
+    description: |
+      A string to control the order of the entities returned in a list. You can use the **orderby** parameter to
+      sort the list by one or more fields.
+
+      Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
+      above to check if any fields used in this method have a descending default search order.
+
+      To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
+    required: false
+    type: array
+    items:
+      type: string
+    collectionFormat: csv
+  whereParam:
+    name: where
+    in: query
+    description: A string to restrict the returned objects by using a predicate.
+    required: false
+    type: string
+paths:
+  /deployments:
+    get:
+      tags:
+        - deployments
+      summary: List deployments
+      description: |
+        Gets a list of deployments.
+
+        The authenticated user must have role admin (non-network deployments) or
+        network admin (networks enabled).
+
+        If networks are enabled, the network admin can only see the deployments
+        in the given network.
+      operationId: listDeployments
+      parameters:
+        - $ref: "#/parameters/skipCountParam"
+        - $ref: "#/parameters/maxItemsParam"
+        - $ref: "#/parameters/propertiesParam"
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DeploymentPaging'
+        '400':
+            description: |
+              Invalid parameter: value of **maxItems** or **skipCount** is invalid
+        '401':
+            description: Authentication failed
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/deployments/{deploymentId}':
+    get:
+      tags:
+        - deployments
+      summary: Get a deployment
+      description: |
+        Gets a specified deployment defined by **deploymentId**.
+
+        The authenticated user must have role admin (non-network deployments) or
+        network admin (networks enabled).
+
+        If networks are enabled, the deployment is only returned if the deployment
+        is in the given network.
+      operationId: getDeployment
+      produces:
+        - application/json
+      parameters:
+        - name: deploymentId
+          in: path
+          description: The unique id must be a String. It is returned as an **id** from the entity.
+          required: true
+          type: string
+        - $ref: "#/parameters/propertiesParam"
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DeploymentEntry'
+        '401':
+          description: Authentication failed
+        '404':
+          description: |
+            **deploymentId** does not exist
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - deployments
+      summary: Delete a deployment
+      description: |
+        This request will delete the deployment including the tasks, process definitions contained in the deployment.
+
+        The request will also delete processes and history information associated with the deployment.
+      operationId: deleteDeployment
+      produces:
+        - application/json
+      parameters:
+        - name: deploymentId
+          in: path
+          description: The unique id must be a String. It is returned as an **id** from the entity
+          required: true
+          type: string
+      responses:
+        '204':
+          description: Successful response
+        '401':
+          description: Authentication failed
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /process-definitions:
+    get:
+      tags:
+        - process-definitions
+      summary: List process definitions
+      description: |
+        Gets a list of process definitions.
+
+        In non-network deployments, any authenticated user will see all the
+        process definitions.
+
+        If networks are enabled, the network admin can only see the deployments
+        in the given network.
+      operationId: listProcessDefinitions
+      parameters:
+        - $ref: "#/parameters/skipCountParam"
+        - $ref: "#/parameters/maxItemsParam"
+        - $ref: "#/parameters/propertiesParam"
+        - $ref: "#/parameters/orderByParam"
+        - $ref: "#/parameters/whereParam"
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ProcessDefinitionPaging'
+        '400':
+            description: |
+              Invalid parameter: value of **maxItems**, **skipCount**, **orderBy**, or **where** is invalid
+        '401':
+            description: Authentication failed
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/process-definitions/{processDefinitionId}':
+    get:
+      tags:
+        - process-definitions
+      summary: Get a process definition
+      description: |
+        Gets a process definition identified by **processDefinitionId**.
+
+        In non-network deployments, any authenticated user will see all the
+        process definitions. If networks are enabled, the network admin can only
+        see the deployments in the given network.
+      operationId: getProcessDefinition
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/processDefinitionIdParam"
+        - $ref: "#/parameters/propertiesParam"
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ProcessDefinitionEntry'
+        '401':
+            description: Authentication failed
+        '404':
+          description: |
+            **processDefinitionId** does not exist
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/process-definitions/{processDefinitionId}/image':
+    get:
+      tags:
+        - process-definitions
+      summary: Get a process definition image
+      description: |
+        Gets an image that represents a single process definition identified by **processDefinitionId**.
+
+        In non-network deployments, any authenticated user will see all the
+        process definitions.
+
+        If networks are enabled, the network admin can only see the deployments
+        in the given network.
+      operationId: getProcessDefinitionImage
+      produces:
+        - application/json
+        - image/png
+      parameters:
+        - $ref: "#/parameters/processDefinitionIdParam"
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            type: file
+        '401':
+            description: Authentication failed
+        '404':
+          description: |
+            **processDefinitionId** does not exist
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/process-definitions/{processDefinitionId}/start-form-model':
+    get:
+      tags:
+        - process-definitions
+      summary: Get a start form model
+      description: |
+        Gets a model of the start form type definition.
+
+        An authenticated user will have access to all start form models.
+        In a network, only start form models that are inside the given network are returned.
+      operationId: getProcessDefinitionStartFormModel
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/processDefinitionIdParam"
+        - $ref: "#/parameters/propertiesParam"
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TaskFormModelPaging'
+        '401':
+            description: Authentication failed
+        '404':
+          description: |
+            **processDefinitionId** does not exist
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /processes:
+    get:
+      tags:
+        - processes
+      summary: List processes
+      description: |
+        Gets a  list of processes.
+
+        An authenticated user will have access to a processes if the user has
+        started the process or if the user is involved in any of the process’s
+        tasks. In a network, only processes that are inside the given network are
+        returned.
+
+        In non-network deployments, any authenticated user will see all the
+        process definitions.
+
+        If networks are enabled, the network admin can only see the deployments
+        in the given network.
+      operationId: listProcesses
+      parameters:
+        - $ref: "#/parameters/skipCountParam"
+        - $ref: "#/parameters/maxItemsParam"
+        - $ref: "#/parameters/propertiesParam"
+        - $ref: "#/parameters/orderByParam"
+        - $ref: "#/parameters/whereParam"
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ProcessPaging'
+        '400':
+            description: |
+              Invalid parameter: value of **maxItems**, **skipCount**, **orderBy**, or **where** is invalid
+        '401':
+            description: Authentication failed
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - processes
+      summary: Create a process
+      description: |
+        Creates a new process.
+
+        In non-network deployments, any authenticated user can start a new process for
+        any process definition.
+
+        If networks are enabled, the authenticated user can start a new process for a
+        process definition in the user's network.
+
+        **Note:** You can start more than one process by
+        specifying a list of process entries in the JSON body like this:
+
+        ```JSON
+        [
+          {
+             "processDefinitionKey": "activitiAdhoc",
+             "variables": {
+                "bpm_assignee": "fred"
+            }
+          },
+          {
+             "processDefinitionKey": "activitiAdhoc",
+             "variables": {
+                "bpm_assignee": "joe"
+            }
+        ]
+        ```
+        If you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:
+
+        ```JSON
+        {
+          "list": {
+            "pagination": {
+              "count": 2,
+              "hasMoreItems": false,
+              "totalItems": 2,
+              "skipCount": 0,
+              "maxItems": 100
+            },
+            "entries": [
+              {
+                "entry": {
+                  ...
+                }
+              },
+              {
+                "entry": {
+                  ...
+                }
+              }
+            ]
+          }
+        }
+        ```
+      operationId: createProcess
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: processBody
+          description: process properties
+          required: true
+          schema:
+            $ref: '#/definitions/ProcessBody'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ProcessEntry'
+        '400':
+            description: |
+              Invalid parameter: **processBody** is invalid
+        '401':
+            description: Authentication failed
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/processes/{processId}':
+    get:
+      tags:
+        - processes
+      summary: Get a process
+      description: |
+        Gets the process identified by **processId**.
+
+        An authenticated user will have access to a process if the user has
+        started the process or if the user is involved in any of the process’s
+        tasks. In a network, only processes that are inside the given network are
+        returned.
+
+        In non-network deployments, administrators can see all processes and
+        perform all operations on tasks. In network deployments, network
+        administrators can see all processes in their network and perform all
+        operations on tasks in their network.
+      operationId: getProcess
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/processIdParam"
+        - $ref: "#/parameters/propertiesParam"
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ProcessEntry'
+        '401':
+            description: Authentication failed
+        '404':
+          description: |
+            **processId** does not exist
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - processes
+      summary: Delete a process
+      description: Deletes the process with the specified **processId**.
+      operationId: deleteProcess
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/processIdParam"
+      responses:
+        '204':
+          description: Successful response
+        '401':
+          description: Authentication failed
+        '404':
+          description: The processId does not exist
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/processes/{processId}/variables':
+    get:
+      tags:
+        - processes
+      summary: List variables
+      description: |
+        Gets a list of variables for the process **processId**.
+
+        An authenticated user will have access to a processes variables if the
+        user has started  the process or if the user is involved in any of the
+        process’s tasks.  In a network, only variables for a process that is
+        inside the given network are returned.
+
+        In non-network deployments, administrators can see all variables and
+        perform all operations  on those variable. In network deployments,
+        network administrators can see all variables in  their network and
+        perform all operations on variables in their network.
+      operationId: listProcessVariables
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/processIdParam"
+        - $ref: "#/parameters/skipCountParam"
+        - $ref: "#/parameters/maxItemsParam"
+        - $ref: "#/parameters/propertiesParam"
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/VariablePaging'
+        '400':
+            description: |
+              Invalid parameter: value of **maxItems** or **skipCount** is invalid
+        '401':
+            description: Authentication failed
+        '404':
+          description: |
+            **processId** does not exist
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - processes
+      summary: Create or update variables
+      description: |
+        Create or update a variable for a given process.
+        If the variable does not exist yet, it will be created.        
+        
+        
+        **Note:** You can create or update more than one variable by 
+        specifying a list of variables in the JSON body like this:
+        
+        ```JSON
+        [
+          {
+            "name": "string",
+            "value": "string",
+            "type": "string"
+          },
+          {
+            "name": "string",
+            "value": "string",
+            "type": "string"
+          }
+        ]
+        ```
+        If you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:
+        
+        ```JSON
+        {
+          "list": {
+            "pagination": {
+              "count": 2,
+              "hasMoreItems": false,
+              "totalItems": 2,
+              "skipCount": 0,
+              "maxItems": 100
+            },
+            "entries": [
+              {
+                "entry": {
+                  ...
+                }
+              },
+              {
+                "entry": {
+                 ...
+                }
+              }
+            ]
+          }
+        }
+        ```
+      operationId: createProcessVariables
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/processIdParam"
+        - in: body
+          name: variableBody
+          description: A variable
+          required: true
+          schema:
+              $ref: '#/definitions/VariableBody'
+      responses:
+        '201':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/VariableEntry'
+        '400':
+            description: |
+              Invalid parameter: **variableBody** is invalid
+        '401':
+            description: Authentication failed
+        '404':
+          description: |
+            **processId** does not exist
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/processes/{processId}/variables/{variableName}':
+    put:
+      tags:
+        - processes
+      summary: Create or update a variable
+      description: |
+        Creates or updates a specific variable **variableName** for process **processId**.
+      operationId: createProcessVariable
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/processIdParam"
+        - $ref: "#/parameters/variableNameParam"
+        - in: body
+          name: variableBody
+          description: A variable
+          required: true
+          schema:
+            $ref: '#/definitions/VariableBody'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/VariableEntry'
+        '400':
+            description: |
+              Invalid parameter: **variableBody** is invalid
+        '401':
+            description: Authentication failed
+        '404':
+          description: |
+            **processId** does not exist
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - processes
+      summary: Delete a variable
+      description: Deletes the variable **variableName** from the process with the specified **processId**.
+      operationId: deleteProcessVariable
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/processIdParam"
+        - $ref: "#/parameters/variableNameParam"
+      responses:
+        '204':
+          description: Successful response
+        '401':
+          description: Authentication failed
+        '404':
+          description: The **processId** does not exist or the **variableName** does not exist
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/processes/{processId}/items':
+    get:
+      tags:
+        - processes
+      summary: List items
+      description: |
+        Gets a list of items for the specified process **processId**.
+
+        An authenticated user will have access to a processes items if the
+        user has started the process or if the user is involved in any of the
+        process’s tasks.  In a network, only items for a process that is
+        inside the given network are returned.
+
+        In non-network deployments, administrators can see all items and
+        perform all operations  on those items. In network deployments,
+        network administrators can see all items in their network and
+        perform all operations on items in their network.
+      operationId: listProcessItems
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/processIdParam"
+        - $ref: "#/parameters/skipCountParam"
+        - $ref: "#/parameters/maxItemsParam"
+        - $ref: "#/parameters/propertiesParam"
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ItemPaging'
+        '400':
+            description: |
+              Invalid parameter: value of **maxItems** or **skipCount** is invalid
+        '401':
+            description: Authentication failed
+        '404':
+          description: |
+            **processId** does not exist
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - processes
+      summary: Create an item
+      description: |
+        Creates an item for process **processId**".
+
+        If the item  already is part of that process the request will have no effect.
+
+        **Note:** You can create more than one item by
+        specifying a list of items in the JSON body like this:
+
+        ```JSON
+        [
+          {
+             "id": "1ff9da1a-ee2f-4b9c-8c34-44665e844444"
+          },
+          {
+             "id": "1ff9da1a-ee2f-4b9c-8c34-44665e855555"
+          }
+        ]
+        ```
+        If you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:
+
+        ```JSON
+        {
+          "list": {
+            "pagination": {
+              "count": 2,
+              "hasMoreItems": false,
+              "totalItems": 2,
+              "skipCount": 0,
+              "maxItems": 100
+            },
+            "entries": [
+              {
+                "entry": {
+                  ...
+                }
+              },
+              {
+                "entry": {
+                  ...
+                }
+              }
+            ]
+          }
+        }
+        ```
+      operationId: createProcessItem
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/processIdParam"
+        - in: body
+          name: itemBody
+          description: The **nodeId** of the item
+          required: true
+          schema:
+            $ref: '#/definitions/ItemBody'
+      responses:
+        '201':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ItemPaging'
+        '400':
+            description: |
+              Invalid parameter: **itemBody** is invalid
+        '401':
+            description: Authentication failed
+        '404':
+          description: |
+            **processId** does not exist
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/processes/{processId}/items/{itemId}':
+    delete:
+      tags:
+        - processes
+      summary: Delete an item
+      description: |
+        Deletes the item with the specified **itemId** from the process with the specified **processId**.
+      operationId: deleteProcessItem
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/processIdParam"
+        - $ref: "#/parameters/itemIdParam"
+      responses:
+        '204':
+          description: Successful response
+        '401':
+          description: Authentication failed
+        '404':
+          description: The **processId** does not exist or the **itemId** does not exist
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/processes/{processId}/tasks':
+    get:
+      tags:
+        - tasks
+      summary: List tasks for a process
+      description: |
+        Gets a list of tasks for the specified process **processId**.
+
+        An authenticated user will have access to a processes tasks if the
+        user has started the process or if the user is involved in any of the
+        process’s tasks.  In a network, only tasks for a process that is
+        inside the given network are returned.
+
+        In non-network deployments, administrators can see all tasks and
+        perform all operations  on those tasks. In network deployments,
+        network administrators can see all tasks in their network and
+        perform all operations on tasks in their network.
+      operationId: listTasksForProcess
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/processIdParam"
+        - $ref: "#/parameters/skipCountParam"
+        - $ref: "#/parameters/maxItemsParam"
+        - $ref: "#/parameters/propertiesParam"
+        - $ref: "#/parameters/orderByParam"
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TaskPaging'
+        '400':
+            description: |
+              Invalid parameter: value of **maxItems**, **skipCount**, or **orderBy** is invalid
+        '401':
+            description: Authentication failed
+        '404':
+          description: |
+            **processId** does not exist
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /tasks:
+    get:
+      tags:
+        - tasks
+      summary: List tasks
+      description: |
+        Gets a list of tasks visible to the authenticated user.
+
+        Tasks are returned for which the authenticated user is the assignee  or
+        a candidate. If networks are enabled, the only tasks that are inside
+        the given network are returned.
+
+        In non-network deployments, administrators can see all processes and
+        perform all operations on tasks. In network deployments, network
+        administrators can see all processes in their network and perform all
+        operations on tasks in their network.
+      operationId: listTasks
+      parameters:
+        - $ref: "#/parameters/skipCountParam"
+        - $ref: "#/parameters/maxItemsParam"
+        - $ref: "#/parameters/propertiesParam"
+        - $ref: "#/parameters/orderByParam"
+        - $ref: "#/parameters/whereParam"
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TaskPaging'
+        '400':
+            description: |
+              Invalid parameter: value of **maxItems**, **skipCount**, **orderBy**, or **where** is invalid
+        '401':
+            description: Authentication failed
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/tasks/{taskId}':
+    get:
+      tags:
+        - tasks
+      summary: Get a task
+      description: |
+        Gets the task identified by **taskId**.
+
+        An authenticated user will have access to a task if the user has
+        started the process or if the user is involved in any of the process’s
+        tasks. In a network, only tasks that are inside the given network are
+        returned.
+
+        In non-network deployments, administrators can see all processes and
+        perform all operations on tasks. In network deployments, network
+        administrators can see all processes in their network and perform all
+        operations on tasks in their network.
+      operationId: getTask
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/taskIdParam"
+        - $ref: "#/parameters/propertiesParam"
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TaskEntry'
+        '401':
+            description: Authentication failed
+        '404':
+          description: |
+            **taskId** does not exist
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - tasks
+      summary: Update a task
+      description: |
+        Updates the state of the task **taskId**.
+
+        To perform a task action the authenticated user must be the assignee  or
+        a candidate. If networks is enabled, the task action is only
+        performed  if the task is inside the given network.
+
+        In non-network deployments, administrators can perform all operations
+        on  tasks. In network deployments, network administrators can see all
+        tasks  in their network and perform all operations on tasks in their
+        network.
+
+        You use the **select** parameter in the URL to specify a comma-separated list of
+        properties in the
+        task that you want to update. Use the JSON body to specify the new values for those
+        properties.
+
+        So for example to change the state of task **123** to **completed**, use
+        this URL
+        http://localhost:8080/alfresco/api/-default-/public/workflow/versions/1/tasks/123?select=state, and
+        provide this request body:
+
+        ```JSON
+        {
+          "state": "completed"
+        }
+        ```
+        State Transitions
+        =================
+
+        Clients can invoke actions by assigning an allowed value to the state property of a task.
+        The select parameter can be used to allow for a partial update of the resource.
+        Alfresco will check for illegal state transitions and return an HTTP Bad Request (Response 400)
+        if an illegal state transition is attempted.
+        There are five state transitions, completing, claiming, unclaiming, delegating, resolving.
+
+        Completing a task
+        -----------------
+
+        If variables are included in the JSON body, they will be set in the task and then the process will continue.
+
+        To complete a task, the authenticated user must be the assignee of the task, the owner of the task, or have started the process.
+
+        In non-network deployments, administrators can perform this task operation on all tasks.
+        In network deployments, network administrators can perform this action on all tasks in their network.
+
+        Here's an example PUT request
+
+        ```
+        /tasks/123?select=state,variables
+        ```
+        Here's is a corresponding PUT request body:
+
+        ```JSON
+        {
+          “state : “completed”,
+          “variables” : [
+          {
+            "name" : "bpm_priority",
+            "type" : "d_int",
+            "value" : 1,
+            "scope" : "global"
+          }
+         ]
+        }
+        ```
+
+        Claiming a task
+        -----------------
+
+        To claim a task, the authenticated user must be the assignee of the task,
+        the owner of the task, or have started the process.
+
+        Here's an example PUT request
+
+        ```
+        /tasks/123?select=state
+        ```
+        Here's a corresponding PUT request body:
+
+        ```JSON
+        {
+          “state : “claimed”
+        }
+        ```
+
+        Unclaiming a task
+        -----------------
+
+        This removes the current assignee of the task.
+
+        To unclaim a task, the authenticated user must be the assignee of the task,
+        the owner of the task, or have started the process.
+
+        Here's an example PUT request
+
+        ```
+        /tasks/123?select=state
+        ```
+        Here's a corresponding PUT request body:
+
+        ```JSON
+        {
+          “state : “unclaimed”
+        }
+        ```
+
+        Delegating a task
+        -----------------
+
+        This delegates the task from the owner to an assignee.
+        The result is the same as if the assignee had claimed the task,
+        but the task can then be resolved and the owner will
+        become the assignee again.
+
+        To delegate a task, the authenticated user must be the
+        assignee of the task and the assignee must be different from the owner.
+
+        Here's an example PUT request
+
+        ```
+        /tasks/123?select=state,assignee
+        ```
+        Here's a corresponding PUT request body:
+
+        ```JSON
+        {
+          “state : “delegated”,
+          “assignee : “Kermit”
+        }
+        ```
+        Resolving a task
+        -----------------
+
+        This returns a delegated task back to the owner.
+        In order to delegate a task, the authenticated user
+        must be the assignee of the task and the assignee must
+        be different from the owner.
+
+        To resolve a task, the authenticated user must be
+        the assignee of the task, the owner of the task,
+        or have started the process.
+
+        Here's an example PUT request
+
+        ```
+        /tasks/123?select=state
+        ```
+        Here's a corresponding PUT request body:
+
+        ```JSON
+        {
+          “state : “resolved”
+        }
+        ```
+      operationId: updateTask
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/taskIdParam"
+        - $ref: "#/parameters/selectParam"
+        - in: body
+          name: taskBody
+          description: An object containing the properties to be updated
+          required: true
+          schema:
+            $ref: '#/definitions/TaskBody'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TaskEntry'
+        '400':
+            description: |
+              Invalid parameter: **taskBody** is invalid
+        '401':
+            description: Authentication failed
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/tasks/{taskId}/task-form-model':
+    get:
+      tags:
+        - tasks
+      summary: Get a task form model
+      description: |
+        Gets the model of the task form type definition.
+
+        An authenticated user will have access to  access to all task form models.
+        In a network, only task form models that are inside the given network
+        are returned.
+      operationId: getTaskFormModel
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/taskIdParam"
+        - $ref: '#/parameters/skipCountParam'
+        - $ref: '#/parameters/maxItemsParam'
+        - $ref: "#/parameters/propertiesParam"
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TaskFormModelPaging'
+        '400':
+            description: |
+              Invalid parameter: value of **maxItems** or **skipCount** is invalid
+        '401':
+            description: Authentication failed
+        '404':
+          description: |
+            **taskId** does not exist
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/tasks/{taskId}/variables':
+    get:
+      tags:
+        - tasks
+      summary: List variables
+      description: |
+        Gets a list of variables for the specified task **taskId**.
+
+        An authenticated user will have access to a tasks variables if the
+        user has started the process or if the user is involved in any of the
+        process’s tasks.  In a network, only variables for a process that is
+        inside the given network are returned.
+
+        In non-network deployments, administrators can see all variables and
+        perform all operations  on those variable. In network deployments,
+        network administrators can see all variables in  their network and
+        perform all operations on variables in their network.
+      operationId: listTaskVariables
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/taskIdParam"
+        - $ref: "#/parameters/skipCountParam"
+        - $ref: "#/parameters/maxItemsParam"
+        - $ref: "#/parameters/propertiesParam"
+        - $ref: "#/parameters/whereParam"
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/VariablePaging'
+        '400':
+            description: |
+              Invalid parameter: value of **maxItems**, **skipCount**, or **where** is invalid
+        '401':
+            description: Authentication failed
+        '404':
+          description: |
+            **taskId** does not exist
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - tasks
+      summary: Create or update variables
+      description: |
+        Create or update a variable for the task **taskId**.
+        If the variable does not exist yet, it will be created.      
+        
+        
+        **Note:** You can create or update more than one variable by 
+        specifying a list of variables in the JSON body like this:
+        
+        ```JSON
+        [
+          {
+            "name": "string",
+            "value": "string",
+            "type": "string"
+          },
+          {
+            "name": "string",
+            "value": "string",
+            "type": "string"
+          }
+        ]
+        ```
+        If you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:
+        
+        ```JSON
+        {
+          "list": {
+            "pagination": {
+              "count": 2,
+              "hasMoreItems": false,
+              "totalItems": 2,
+              "skipCount": 0,
+              "maxItems": 100
+            },
+            "entries": [
+              {
+                "entry": {
+                  ...
+                }
+              },
+              {
+                "entry": {
+                 ...
+                }
+              }
+            ]
+          }
+        }
+        ```
+      operationId: createTaskVariables
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/taskIdParam"
+        - in: body
+          name: variable
+          description: A variable
+          required: true
+          schema:
+            $ref: '#/definitions/Variable'
+      responses:
+        '201':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/VariableEntry'
+        '401':
+            description: Authentication failed
+        '404':
+          description: |
+            **taskId** does not exist
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/tasks/{taskId}/variables/{variableName}':
+    put:
+      tags:
+        - tasks
+      summary: Create or update a variable
+      description: |
+        Creates or updates a specific variable **variableName** for a given task **taskId**.
+      operationId: updateTaskVariable
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/taskIdParam"
+        - $ref: "#/parameters/variableNameParam"
+        - in: body
+          name: variableBody
+          description: A variable
+          required: true
+          schema:
+            $ref: '#/definitions/Variable'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/VariableEntry'
+        '400':
+            description: |
+              Invalid parameter: **variableBody** is invalid
+        '401':
+            description: Authentication failed
+        '404':
+          description: |
+            **taskId** does not exist
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - tasks
+      summary: Delete a variable
+      description: |
+        Deletes the variable with the specified **variableName** from the task with the specified **taskId**.
+      operationId: deleteTaskVariable
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/taskIdParam"
+        - $ref: "#/parameters/variableNameParam"
+      responses:
+        '204':
+          description: Successful response
+        '401':
+          description: Authentication failed
+        '404':
+          description: The **taskId** does not exist or the **variableName** does not exist
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/tasks/{taskId}/items':
+    get:
+      tags:
+        - tasks
+      summary: List items
+      description: |
+        Gets a list of items for the specified task **taskId**.
+
+        An authenticated user will have access to a task's items if the
+        user has started the process or if the user is involved in any of the
+        process’s tasks.  In a network, only items for a process that is
+        inside the given network are returned.
+
+        In non-network deployments, administrators can see all items and
+        perform all operations  on those items. In network deployments,
+        network administrators can see all items in their network and
+        perform all operations on items in their network.
+      operationId: listTaskItems
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/taskIdParam"
+        - $ref: "#/parameters/skipCountParam"
+        - $ref: "#/parameters/maxItemsParam"
+        - $ref: "#/parameters/propertiesParam"
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ItemPaging'
+        '400':
+            description: |
+              Invalid parameter: value of **maxItems** or **skipCount** is invalid
+        '401':
+            description: Authentication failed
+        '404':
+          description: |
+            **taskId** does not exist
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - tasks
+      summary: Create an item
+      description: |
+        Creates an item for a given task **taskId**.
+
+        If the item  already is part of that task the request will have no effect.
+
+        **Note:** You can create more than one item by
+        specifying a list of items in the JSON body like this:
+
+        ```JSON
+        [
+          {
+             "id": "1ff9da1a-ee2f-4b9c-8c34-44665e844444"
+          },
+          {
+             "id": "1ff9da1a-ee2f-4b9c-8c34-44665e855555"
+          }
+        ]
+        ```
+        If you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:
+
+        ```JSON
+        {
+          "list": {
+            "pagination": {
+              "count": 2,
+              "hasMoreItems": false,
+              "totalItems": 2,
+              "skipCount": 0,
+              "maxItems": 100
+            },
+            "entries": [
+              {
+                "entry": {
+                  ...
+                }
+              },
+              {
+                "entry": {
+                  ...
+                }
+              }
+            ]
+          }
+        }
+        ```
+      operationId: createTaskItem
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/taskIdParam"
+        - in: body
+          name: itemBody
+          description: The nodeId of the item
+          required: true
+          schema:
+            $ref: '#/definitions/ItemBody'
+      responses:
+        '201':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ItemPaging'
+        '400':
+            description: |
+              Invalid parameter: **itemBody** is invalid
+        '401':
+            description: Authentication failed
+        '404':
+          description: |
+            **taskId** does not exist
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/tasks/{taskId}/items/{itemId}':
+    delete:
+      tags:
+        - tasks
+      summary: Delete an item
+      description: |
+        Deletes the item with the specified **itemId** from the task with the specified **taskId**.
+      operationId: deleteTaskItem
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/taskIdParam"
+        - $ref: "#/parameters/itemIdParam"
+      responses:
+        '204':
+          description: Successful response
+        '401':
+          description: Authentication failed
+        '404':
+          description: The **taskId** does not exist or the **itemId** does not exist
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/tasks/{taskId}/candidates':
+    get:
+      tags:
+        - tasks
+      summary: List task candidates
+      description: |
+        Gets a list of candidate users and groups for the specified task **taskId**.
+      operationId: listTaskCandidates
+      produces:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/taskIdParam"
+        - $ref: "#/parameters/skipCountParam"
+        - $ref: "#/parameters/maxItemsParam"
+        - $ref: "#/parameters/propertiesParam"
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/CandidatePaging'
+        '400':
+            description: |
+              Invalid parameter: value of **maxItems** or **skipCount** is invalid
+        '401':
+            description: Authentication failed
+        '404':
+          description: |
+            **taskId** does not exist
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Error:
+    type: object
+    required:
+      - error
+    properties:
+      error:
+        type: object
+        required:
+          - statusCode
+          - briefSummary
+          - stackTrace
+          - descriptionURL
+        properties:
+          errorKey:
+            type: string
+          statusCode:
+            type: integer
+            format: int32
+          briefSummary:
+            type: string
+          stackTrace:
+            type: string
+          descriptionURL:
+            type: string
+          logId:
+            type: string
+  Pagination:
+    type: object
+    properties:
+      count:
+        type: integer
+        format: int32
+        description: |
+          The number of objects in the entries array.
+      hasMoreItems:
+        type: boolean
+        description: |
+          A boolean value which is **true** if there are more entities in the collection
+          beyond those in this response. A true value means a request with a larger value
+          for the **skipCount** or the **maxItems** parameter will return more entities.
+      totalItems:
+        type: integer
+        format: int64
+        description: |
+          An integer describing the total number of entities in the collection.
+          The API might not be able to determine this value,
+          in which case this property will not be present.
+      skipCount:
+        type: integer
+        format: int64
+        description: |
+          An integer describing how many entities exist in the collection before
+          those included in this list.
+      maxItems:
+        type: integer
+        format: int64
+        description: |
+          The value of the **maxItems** parameter used to generate this list,
+          or if there was no **maxItems** parameter the default value, 10
+  DeploymentPaging:
+    type: object
+    properties:
+      list:
+        type: object
+        properties:
+          pagination:
+            $ref: '#/definitions/Pagination'
+          entries:
+            type: array
+            items:
+              $ref: '#/definitions/DeploymentEntry'
+  DeploymentEntry:
+    type: object
+    properties:
+      entry:
+        $ref: '#/definitions/Deployment'
+  Deployment:
+    type: object
+    description: |
+      A deployment resource represents one file inside a deployment.
+
+      Process files, forms and perhaps some other files are authored in
+      a separate environment. The act of deployment brings them into the runtime
+      workflow engine.
+
+      A deployment is a collection of files that include all resources to specify
+      one or more process definitions. After deployment, the included process
+      definitions are known to the workflow runtime engine and new processes can
+      be started.
+
+      Users can then continue to edit the process and other files in their
+      authoring environment like e.g. our eclipse based process editor.
+      A redeployment will result in a complete separate deployment containing new
+      versions of the process definition.
+
+      When a process definition inside a new deployment has the same key as an
+      existing process definition, then it is considered a new version of the
+      existing process definition.
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      category:
+        type: string
+      deployedAt:
+        type: string
+        format: date-time
+  ProcessDefinitionPaging:
+    type: object
+    properties:
+      list:
+        type: object
+        properties:
+          pagination:
+            $ref: '#/definitions/Pagination'
+          entries:
+            type: array
+            items:
+              $ref: '#/definitions/ProcessDefinitionEntry'
+  ProcessDefinitionEntry:
+    type: object
+    properties:
+      entry:
+        $ref: '#/definitions/ProcessDefinition'
+  ProcessDefinition:
+    type: object
+    description: |
+      A process definition is a description of an execution flow in terms of
+      activities. New processes are created and started for a process
+      definition.
+    required:
+      - id
+    properties:
+      id:
+        type: string
+        description: The unique id of this process definition
+      key:
+        type: string
+        description: The key of this process definition
+      name:
+        type: string
+        description: The name of this process definition
+      category:
+        type: string
+        description: The category to which this process definition belongs
+      deploymentId:
+        type: string
+        description: The deployment of which this process definition is a part
+      title:
+        type: string
+        description: The title of this process definition
+      description:
+        type: string
+        description: The description of this process definition
+      startFormResourceKey:
+        type: string
+        description: The start form key
+      graphicNotationDefined:
+        type: boolean
+  ProcessPaging:
+    type: object
+    properties:
+      list:
+        type: object
+        properties:
+          pagination:
+            $ref: '#/definitions/Pagination'
+          entries:
+            type: array
+            items:
+              $ref: '#/definitions/ProcessEntry'
+  ProcessEntry:
+    type: object
+    properties:
+      entry:
+        $ref: '#/definitions/Process'
+  Process:
+    type: object
+    description: |
+      A process describes a running instance of a process definition.
+
+      When a new deployment includes a process definition that is already
+      deployed with the same key, the newly deployed process definition will be
+      considered a new version of the same process definition. By default
+      processes will keep running in the process definition they are started in.
+      But new processes can be started in the latest version of a process
+      definition by using the processDefinitionKey parameter.
+
+      In non-network deployments, administrators can see all processes and
+      perform all operations on tasks. In network deployments, network
+      administrators can see processes in their network and perform all
+      operations on tasks in their network.
+    required:
+      - id
+    properties:
+      id:
+        type: string
+        description: The unique id of this process
+      processDefinitionId:
+        type: string
+        description: The unique identity of the owning process definition
+      businessKey:
+        type: string
+        description: The business key
+      startedAt:
+        type: string
+        format: date-time
+        description: The date time this process started
+      endedAt:
+        type: string
+        format: date-time
+        description: The date time this process started
+      durationInMs:
+        type: integer
+        description: The duration of this process
+      startActivityDefinitionId:
+        type: string
+        description: The id of the first activity in the process
+      endActivityDefinitionId:
+        type: string
+        description: The id of the last activity in the process
+      startUserId:
+        type: string
+        description: The id of the user who started the process
+      deleteReason:
+        type: string
+        description: The reason this process was canceled
+  TaskPaging:
+    type: object
+    properties:
+      list:
+        type: object
+        properties:
+          pagination:
+            $ref: '#/definitions/Pagination'
+          entries:
+            type: array
+            items:
+              $ref: '#/definitions/TaskEntry'
+  TaskEntry:
+    type: object
+    properties:
+      entry:
+        $ref: '#/definitions/Task'
+  Task:
+    type: object
+    description: |
+      A task describes one task for a human user.
+    required:
+      - id
+    properties:
+      id:
+        type: string
+        description: The unique id of this task
+      processId:
+        type: string
+        description: The containing process's unique id
+      processDefinitionId:
+        type: string
+        description: The unique identity of the owning process definition
+      activityDefinitionId:
+        type: string
+        description: The activity id of this task
+      name:
+        type: string
+        description: The text name of this task
+      description:
+        type: string
+        description: The description of this task
+      dueAt:
+        type: string
+        format: date-time
+        description: The date time this task is due
+      startedAt:
+        type: string
+        format: date-time
+        description: The date time this task started
+      endedAt:
+        type: string
+        format: date-time
+        description: The date time this task started
+      durationInMs:
+        type: integer
+        description: The duration of this task
+      priority:
+        type: integer
+        description: The numeric priority of this task
+      owner:
+        type: string
+        description: The id of the user who owns this task
+      assignee:
+        type: string
+        description: The id of the user who is currently assigned this task
+      formResourceKey:
+        type: string
+        description: The key of the form for this task
+      state:
+        type: string
+        description: The state of this task
+        enum:
+          - unclaimed
+          - claimed
+          - completed
+          - resolved
+      variables:
+        type: array
+        description: An array of variables for this task
+        items:
+          $ref: '#/definitions/Variable'
+  VariablePaging:
+    type: object
+    properties:
+      list:
+        type: object
+        properties:
+          pagination:
+            $ref: '#/definitions/Pagination'
+          entries:
+            type: array
+            items:
+              $ref: '#/definitions/VariableEntry'
+  VariableEntry:
+    type: object
+    properties:
+      entry:
+        $ref: '#/definitions/Variable'
+  Variable:
+    type: object
+    description: |
+      A task variable.
+    properties:
+      scope:
+        type: string
+      name:
+        type: string
+      value:
+        type: integer
+      type:
+        type: string
+  VariableBody:
+    type: object
+    description: |
+      An input process variable.
+    properties:
+      name:
+        type: string
+      value:
+        type: integer
+      type:
+        type: string
+  ProcessBody:
+    type: object
+    description: |
+      required to start a process.
+    properties:
+      processDefinitionKey:
+        type: string
+      variables:
+        $ref: '#/definitions/ProcessBodyVariable'
+  ProcessBodyVariable:
+    type: object
+    description: |
+      A set of process variables of differing types.
+    properties:
+      bpm_assignee:
+        type: string
+      bpm_sendEMailNotifications:
+        type: boolean
+      bpm_workflowPriority:
+        type: integer
+  ItemBody:
+    type: object
+    description: |
+      The **nodeId** of the item
+    properties:
+      id:
+        type: string
+  ItemPaging:
+    type: object
+    properties:
+      list:
+        type: object
+        properties:
+          pagination:
+            $ref: '#/definitions/Pagination'
+          entries:
+            type: array
+            items:
+              $ref: '#/definitions/ItemEntry'
+  ItemEntry:
+    type: object
+    properties:
+      entry:
+        $ref: '#/definitions/Item'
+  Item:
+    type: object
+    description: |
+      A process item.
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      value:
+        type: integer
+      title:
+        type: string
+      description:
+        type: string
+      mimeType:
+        type: string
+      createdBy:
+        $ref: '#/definitions/Person'
+      createdAt:
+        type: string
+        format: date-time
+      edited:
+        type: boolean
+      modifiedBy:
+        $ref: '#/definitions/Person'
+      modifiedAt:
+        type: string
+        format: date-time
+      size:
+        type: integer
+  TaskFormModelPaging:
+    type: object
+    properties:
+      list:
+        type: object
+        properties:
+          pagination:
+            $ref: '#/definitions/Pagination'
+          entries:
+            type: array
+            items:
+              $ref: '#/definitions/TaskFormModelEntry'
+  TaskFormModelEntry:
+    type: object
+    properties:
+      entry:
+        $ref: '#/definitions/TaskFormModel'
+  TaskFormModel:
+    type: object
+    description: |
+      A task form model item.
+    properties:
+      dataType:
+        type: string
+      title:
+        type: string
+      qualifiedName:
+        type: string
+      name:
+        type: string
+      required:
+        type: boolean
+      defaultValue:
+        type: string
+      allowedValues:
+        type: array
+        description: An array of allowed values for this item
+        items:
+          type: string
+  Person:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      description:
+        type: string
+      avatarId:
+        type: string
+      email:
+        type: string
+      skypeId:
+        type: string
+      googleId:
+        type: string
+      instantMessageId:
+        type: string
+      jobTitle:
+        type: string
+      location:
+        type: string
+      company:
+        $ref: '#/definitions/Company'
+      mobile:
+        type: string
+      telephone:
+        type: string
+      statusUpdatedAt:
+        type: string
+        format: date-time
+      userStatus:
+        type: string
+      enabled:
+        type: boolean
+        default: true
+      emailNotificationsEnabled:
+        type: boolean
+  Company:
+    type: object
+    properties:
+      organization:
+        type: string
+      address1:
+        type: string
+      address2:
+        type: string
+      address3:
+        type: string
+      postcode:
+        type: string
+      telephone:
+        type: string
+      fax:
+        type: string
+      email:
+        type: string
+  TaskBody:
+    type: object
+    description: |
+      Input body to update a specific task.
+    properties:
+      name:
+        type: string
+        description: The text name of this task
+      description:
+        type: string
+        description: The description of this task
+      dueAt:
+        type: string
+        format: date-time
+        description: The date time this task is due
+      priority:
+        type: integer
+        description: The numeric priority of this task
+      owner:
+        type: string
+        description: The id of the user who owns this task
+      state:
+        type: string
+        description: The state of this task
+        enum:
+          - unclaimed
+          - claimed
+          - completed
+          - resolved
+      variables:
+        type: array
+        description: An array of variables for this task
+        items:
+          $ref: '#/definitions/Variable'
+  CandidatePaging:
+    type: object
+    properties:
+      list:
+        type: object
+        properties:
+          pagination:
+            $ref: '#/definitions/Pagination'
+          entries:
+            type: array
+            items:
+              $ref: '#/definitions/CandidateEntry'
+  CandidateEntry:
+    type: object
+    properties:
+      entry:
+        $ref: '#/definitions/Candidate'
+  Candidate:
+    type: object
+    description: |
+      A candidate item.
+    properties:
+      candidateType:
+        type: string
+        enum:
+          - user
+          - group
+      candidateId:
+        type: string
