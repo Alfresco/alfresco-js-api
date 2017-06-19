@@ -1,56 +1,6 @@
-declare class AlfrescoApi {
-
-    constructor(config: AlfrescoApiConfig): AlfrescoApi;
-
-    changeEcmHost(ecmHost: string): void;
-    changeBpmHost(bpmHost: string): void;
-    changeCsrfConfig(disableCsrf: boolean): void;
-
-    isLoggedIn(): boolean;
-    login(username: string, password: string): Promise<string>;
-    logout(): Promise<any>;
-    loginTicket(ticket: string): any;
-    refresh(): Promise<string>;
-
-    getTicket(): Array<string>;
-    getTicketBpm(): string;
-    getTicketEcm(): string;
-
-    setTicket(ticketEcm: any, ticketBpm: any): void;
-
-    config: AlfrescoApiConfig;
-
-    Activiti: Activiti;
-    Auth: Auth;
-    Core: Core;
-    Discovery: Discovery;
-
-    bpmAuth: BpmAuthApi;
-    ecmAuth: EcmAuthApi;
-    oauth2Auth: OauthApi;
-
-    activiti: Activiti;
-    core: Core;
-    discovery: Discovery;
-
-    search: any;
-    nodes: NodesApi;
-    content: ContentApi;
-    upload: any;
-    webScript: any;
-
-    ecmClient: EcmClient;
-    bpmClient: BpmClient;
-    searchClient: SearchClient;
-    ecmPrivateClient: EcmPrivateClient;
-
-}
-
-declare namespace AlfrescoApi {
-
-    export interface AlfrescoApi {
-
-        new(config: AlfrescoApiConfig): AlfrescoApi;
+declare namespace Alfresco {
+    export class AlfrescoApi {
+        constructor(config: AlfrescoApiConfig): AlfrescoApi;
 
         changeEcmHost(ecmHost: string): void;
         changeBpmHost(bpmHost: string): void;
@@ -93,7 +43,6 @@ declare namespace AlfrescoApi {
         bpmClient: BpmClient;
         searchClient: SearchClient;
         ecmPrivateClient: EcmPrivateClient;
-
     }
 
     export interface FolderEntity {
@@ -398,9 +347,8 @@ declare namespace AlfrescoApi {
         addFavorite(personId?: string, favoriteBody?: FavoriteBody): Promise<FavoriteEntry>;
         // addSiteFavorite(personId?: string, favoriteSiteBody?: FavoriteSiteBody, fields?: Array<string>, opts?: any): Promise<FavoriteSiteEntry>;
         // removeFavorite(personId?: string, favoriteId?: string, opts?: any): Promise<{}>;
-        removeFavoriteSite(personId?: string, favoriteId?: string): Promise<{}>;
+        removeFavoriteSite(personId?: string, siteId?: string, opts?: any): Promise<{}>;
         getFavorite(personId?: string, favoriteId?: string, opts?: any): Promise<FavoriteEntry>;
-        getFavorites(personId?: string, opts?: { skipCount?: number, maxItems?: number, where?: string, fields?: Array<string> }): Promise<FavoritePaging>;
         getFavoriteSite(personId?: string, siteId?: string, opts?: any): Promise<SiteEntry>;
         // listFavoriteSitesForPerson(personId?: string, skipCount?: number, maxItems?: number, fields?: Array<string>, opts?: any): Promise<SitePaging>;
         // listFavorites(personId?: string, skipCount?: number, maxItems?: number, where?: string, fields?: Array<string>, opts?: any): Promise<FavoritePaging>;
@@ -480,7 +428,6 @@ declare namespace AlfrescoApi {
         deleteSiteMembership(siteId?: string, personId?: string, opts?: any): Promise<{}>;
         deleteSiteMembershipForPerson(personId?: string, siteId?: string, opts?: any): Promise<{}>;
         deleteSiteMembershipRequestForPerson(personId?: string, siteId?: string, opts?: any): Promise<{}>;
-        getSites(opts?: { skipCount?: number, maxItems?: number, orderBy?: string, relations?: Array<string>, fields?: Array<string> }): Primise<SitePaging>;
         getSite(siteId?: string, relations?: Array<string>, fields?: Array<string>, opts?: any): Promise<SiteEntry>;
         getSiteContainer(siteId?: string, containerId?: string, fields?: Array<string>, opts?: any): Promise<SiteContainerEntry>;
         getSiteMembership(siteId?: string, personId?: string, fields?: Array<string>, opts?: any): Promise<SiteMemberEntry>;
@@ -1777,7 +1724,6 @@ declare namespace AlfrescoApi {
         getDocumentThumbnailUrl(nodeId: string): string;
         getDocumentPreviewUrl(nodeId: string): string;
         getContentUrl(nodeId: string): string;
-        getRenditionUrl(nodeId: string, encoding: string): string;
     }
 
     export interface AuthApi {
@@ -1812,7 +1758,8 @@ declare namespace AlfrescoApi {
         secret?: string;
         host?: string;
     }
-
 }
 
-export = AlfrescoApi;
+export as namespace Alfresco;
+
+export = Alfresco;
