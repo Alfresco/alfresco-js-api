@@ -17,6 +17,7 @@
 
 ## Features
 - [Complete TypeScript definitions for JS-API](https://github.com/Alfresco/alfresco-js-api/issues/228)
+- [Get rendition URL for a given nodeId from content API](https://github.com/Alfresco/alfresco-js-api/issues/237)
 
 <a name="1.5.0"></a>
 # [1.5.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.5.0) (25-05-2017)
