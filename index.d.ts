@@ -1724,7 +1724,7 @@ declare namespace Alfresco {
         getDocumentThumbnailUrl(nodeId: string): string;
         getDocumentPreviewUrl(nodeId: string): string;
         getContentUrl(nodeId: string): string;
-        getRenditionUrl(nodeId: string, encoding:string): string;
+        getRenditionUrl(nodeId: string, encoding: string): string;
     }
 
     export interface AuthApi {
