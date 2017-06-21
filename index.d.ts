@@ -1,6 +1,58 @@
-declare namespace Alfresco {
-    export class AlfrescoApi {
-        constructor(config: AlfrescoApiConfig): AlfrescoApi;
+export = AlfrescoApi;
+
+declare class AlfrescoApi {
+
+    constructor(config: AlfrescoApiConfig): AlfrescoApi;
+
+    changeEcmHost(ecmHost: string): void;
+    changeBpmHost(bpmHost: string): void;
+    changeCsrfConfig(disableCsrf: boolean): void;
+
+    isLoggedIn(): boolean;
+    login(username: string, password: string): Promise<string>;
+    logout(): Promise<any>;
+    loginTicket(ticket: string): any;
+    refresh(): Promise<string>;
+
+    getTicket(): Array<string>;
+    getTicketBpm(): string;
+    getTicketEcm(): string;
+
+    setTicket(ticketEcm: any, ticketBpm: any): void;
+
+    config: AlfrescoApiConfig;
+
+    Activiti: Activiti;
+    Auth: Auth;
+    Core: Core;
+    Discovery: Discovery;
+
+    bpmAuth: BpmAuthApi;
+    ecmAuth: EcmAuthApi;
+    oauth2Auth: OauthApi;
+
+    activiti: Activiti;
+    core: Core;
+    discovery: Discovery;
+
+    search: any;
+    nodes: NodesApi;
+    content: ContentApi;
+    upload: any;
+    webScript: any;
+
+    ecmClient: EcmClient;
+    bpmClient: BpmClient;
+    searchClient: SearchClient;
+    ecmPrivateClient: EcmPrivateClient;
+
+}
+
+declare namespace AlfrescoApi {
+
+    export interface AlfrescoApi {
+
+        new(config: AlfrescoApiConfig): AlfrescoApi;
 
         changeEcmHost(ecmHost: string): void;
         changeBpmHost(bpmHost: string): void;
@@ -43,6 +95,7 @@ declare namespace Alfresco {
         bpmClient: BpmClient;
         searchClient: SearchClient;
         ecmPrivateClient: EcmPrivateClient;
+
     }
 
     export interface FolderEntity {
@@ -1759,8 +1812,5 @@ declare namespace Alfresco {
         secret?: string;
         host?: string;
     }
+
 }
-
-export as namespace Alfresco;
-
-export = Alfresco;
