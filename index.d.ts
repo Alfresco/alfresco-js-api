@@ -1,5 +1,3 @@
-export = AlfrescoApi;
-
 declare class AlfrescoApi {
 
     constructor(config: AlfrescoApiConfig): AlfrescoApi;
@@ -1814,3 +1812,5 @@ declare namespace AlfrescoApi {
     }
 
 }
+
+export = AlfrescoApi;
