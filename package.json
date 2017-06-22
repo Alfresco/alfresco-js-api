@@ -5,20 +5,20 @@
   "author": "Alfresco Software, Ltd.",
   "main": "main.js",
   "module": "main.js",
-  "browser":"dist/alfresco-js-api.js",
+  "browser": "dist/alfresco-js-api.js",
   "typings": "index.d.ts",
   "scripts": {
     "clean": "rimraf node_modules && npm run clean-build",
     "clean-build": "rimraf dist",
     "build": "npm run clean-build && grunt && npm run tslint && npm run test && npm run webpack && npm run toc",
     "webpack": "webpack",
-    "test": "grunt test" ,
+    "test": "grunt test",
     "coverage": "grunt coverage",
     "generate": "mvn clean generate-sources",
     "watchify": "watchify -s AlfrescoApi main.js -o dist/alfresco-js-api.js",
     "tslint": "tslint --type-check -c tslint.json index.d.ts --project tsconfig.json ",
     "toc": "markdown-toc -i README.md && markdown-toc -i test/mockObjects/README.md",
-    "prepublish" : "npm run webpack"
+    "prepublish": "npm run webpack"
   },
   "repository": {
     "type": "git",
