@@ -398,8 +398,9 @@ declare namespace AlfrescoApi {
         addFavorite(personId?: string, favoriteBody?: FavoriteBody): Promise<FavoriteEntry>;
         // addSiteFavorite(personId?: string, favoriteSiteBody?: FavoriteSiteBody, fields?: Array<string>, opts?: any): Promise<FavoriteSiteEntry>;
         // removeFavorite(personId?: string, favoriteId?: string, opts?: any): Promise<{}>;
-        removeFavoriteSite(personId?: string, siteId?: string, opts?: any): Promise<{}>;
+        removeFavoriteSite(personId?: string, favoriteId?: string): Promise<{}>;
         getFavorite(personId?: string, favoriteId?: string, opts?: any): Promise<FavoriteEntry>;
+        getFavorites(personId?: string, opts?: { skipCount?: number, maxItems?: number, where?: string, fields?: Array<string> }): Promise<FavoritePaging>;
         getFavoriteSite(personId?: string, siteId?: string, opts?: any): Promise<SiteEntry>;
         // listFavoriteSitesForPerson(personId?: string, skipCount?: number, maxItems?: number, fields?: Array<string>, opts?: any): Promise<SitePaging>;
         // listFavorites(personId?: string, skipCount?: number, maxItems?: number, where?: string, fields?: Array<string>, opts?: any): Promise<FavoritePaging>;
@@ -479,6 +480,7 @@ declare namespace AlfrescoApi {
         deleteSiteMembership(siteId?: string, personId?: string, opts?: any): Promise<{}>;
         deleteSiteMembershipForPerson(personId?: string, siteId?: string, opts?: any): Promise<{}>;
         deleteSiteMembershipRequestForPerson(personId?: string, siteId?: string, opts?: any): Promise<{}>;
+        getSites(opts?: { skipCount?: number, maxItems?: number, orderBy?: string, relations?: Array<string>, fields?: Array<string> }): Primise<SitePaging>;
         getSite(siteId?: string, relations?: Array<string>, fields?: Array<string>, opts?: any): Promise<SiteEntry>;
         getSiteContainer(siteId?: string, containerId?: string, fields?: Array<string>, opts?: any): Promise<SiteContainerEntry>;
         getSiteMembership(siteId?: string, personId?: string, fields?: Array<string>, opts?: any): Promise<SiteMemberEntry>;
