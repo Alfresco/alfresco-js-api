@@ -44,8 +44,9 @@
      * @param {String} processInstanceId processInstanceId
      * @param {module:model/RelatedContentRepresentation} relatedContent relatedContent
      */
-    this.createRelatedContentOnProcessInstance = function(processInstanceId, relatedContent) {
+    this.createRelatedContentOnProcessInstance = function(processInstanceId, relatedContent, opts) {
       var postBody = relatedContent;
+      opts = opts || {};
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
@@ -93,8 +94,9 @@
      * @param {String} processInstanceId processInstanceId
      * @param {File} file file
      */
-    this.createRelatedContentOnProcessInstance = function(processInstanceId, file) {
+    this.createRelatedContentOnProcessInstance = function(processInstanceId, file, opts) {
       var postBody = null;
+      opts = opts || {};
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
