@@ -62,6 +62,7 @@
         'processInstanceId': processInstanceId
       };
       var queryParams = {
+        'isRelatedContent': opts['isRelatedContent']
       };
       var headerParams = {
       };
@@ -110,6 +111,7 @@
         'processInstanceId': processInstanceId
       };
       var queryParams = {
+        'isRelatedContent': opts['isRelatedContent']
       };
       var headerParams = {
       };
