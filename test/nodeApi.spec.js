@@ -125,6 +125,16 @@ describe('Node', function () {
             });
 
         });
+
+        it('should proxy a user if instructed', function (done) {
+            this.nodeMock.get200ResponseChildrenProxiedUser();
+
+            this.alfrescoJsApi.nodes.getNodeChildren('a4cff62a-664d-4d45-9302-98723eac1319', { 'proxyUserName': 'proxiedUserGoesHere' }).then(function (data) {
+                expect(data.list.pagination.count).to.be.equal(5);
+                expect(data.list.entries[0].entry.name).to.be.equal('dataLists');
+                done();
+            });
+        });
     });
 
     describe('Delete', function () {

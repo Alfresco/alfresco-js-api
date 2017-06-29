@@ -33,6 +33,7 @@ class AlfrescoApi {
      *        ticketEcm:     // Ticket if you already have a ECM ticket you can pass only the ticket and skip the login, in this case you don't need username and password
      *        ticketBpm:     // Ticket if you already have a BPM ticket you can pass only the ticket and skip the login, in this case you don't need username and password
      *        disableCsrf:   // To disable CSRF Token to be submitted. Only for Activiti call, by default is false.
+     *        proxyHeader:   // The name of the HTTP header that contains the name of a proxied user.  "External Authentication" must be configured for this to work.
      *    };
      */
     constructor(config) {
@@ -51,7 +52,8 @@ class AlfrescoApi {
             ticketEcm: config.ticketEcm,
             ticketBpm: config.ticketBpm,
             accessToken: config.accessToken,
-            disableCsrf: config.disableCsrf || false
+            disableCsrf: config.disableCsrf || false,
+            proxyHeader: config.proxyHeader || 'X-Alfresco-Remote-User'
         };
 
         this.ecmPrivateClient = new EcmPrivateClient(this.config);

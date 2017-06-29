@@ -36,7 +36,7 @@ class AlfrescoApiClient extends ApiClient {
      * constructor for a complex type.   * @returns {Promise} A Promise object.
      */
     callApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, authNames,
-            contentTypes, accepts, returnType, contextRoot, responseType) {
+            contentTypes, accepts, returnType, contextRoot, responseType, proxyUserName) {
 
         var eventEmitter = {};
         Emitter(eventEmitter); // jshint ignore:line
@@ -51,7 +51,7 @@ class AlfrescoApiClient extends ApiClient {
         }
 
         var request = this.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
-            contentTypes, accepts, responseType, eventEmitter);
+            contentTypes, accepts, responseType, eventEmitter, proxyUserName);
 
         this.promise = new Promise((resolve, reject) => {
             request.end((error, response) => {
@@ -193,7 +193,7 @@ class AlfrescoApiClient extends ApiClient {
     }
 
     buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
-                  contentTypes, accepts, responseType, eventEmitter) {
+                  contentTypes, accepts, responseType, eventEmitter, proxyUserName) {
         var request = superagent(httpMethod, url);
 
         // apply authentications
@@ -204,6 +204,11 @@ class AlfrescoApiClient extends ApiClient {
 
         // set header parameters
         request.set(this.defaultHeaders).set(this.normalizeParams(headerParams));
+
+        // set the proxy user name if present
+        if (!!proxyUserName) {
+            request.set(this.config.proxyHeader, proxyUserName);
+        }
 
         if (this.isBpmRequest() && this.isCsrfEnabled()) {
             this.setCsrfToken(request);
