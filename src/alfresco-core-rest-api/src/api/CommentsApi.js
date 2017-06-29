@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new CommentsApi. 
+   * Constructs a new CommentsApi.
    * @alias module:api/CommentsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -38,9 +38,14 @@
      * Creates one or more comments on node **nodeId**. You can create more than one comment by \nspecifying a list of comments in the JSON body like this:      \n\n&#x60;&#x60;&#x60;JSON\n[\n  {\n    \&quot;content\&quot;: \&quot;This is a comment\&quot;\n  },\n  {\n    \&quot;content\&quot;: \&quot;This is another comment\&quot;\n  }\n]\n&#x60;&#x60;&#x60;\n
      * @param {String} nodeId The identifier of a node.
      * @param {module:model/CommentBody} commentBody The comment text. Note that you can provide an array of comments.
+     * @param {Object} opts Optional parameters
+     * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/CommentEntry}
      * data is of type: {module:model/CommentEntry}
      */
-    this.addComment = function(nodeId, commentBody) {
+    this.addComment = function(nodeId, commentBody, opts) {
+      opts = opts || {};
+
       var postBody = commentBody;
 
       // verify the required parameter 'nodeId' is set
@@ -58,6 +63,7 @@
         'nodeId': nodeId
       };
       var queryParams = {
+        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
       var headerParams = {
       };

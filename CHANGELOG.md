@@ -4,6 +4,17 @@
 
 # Alfresco JS API
 
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.6.0) (29-06-2017)
+## Fix
+- [Move /task-forms/{task-id}/variables from rest to enterprise](https://github.com/Alfresco/alfresco-js-api/issues/199)
+- [Added query param for get related contents](https://issues.alfresco.com/jira/browse/ADF-684)
+- [Added query param for create related contents on task and process instance](https://github.com/Alfresco/alfresco-js-api/issues/244)
+
+## Features
+- [Complete TypeScript definitions for JS-API](https://github.com/Alfresco/alfresco-js-api/issues/228)
+- [Get rendition URL for a given nodeId from content API](https://github.com/Alfresco/alfresco-js-api/issues/237)
+
 <a name="1.5.0"></a>
 # [1.5.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.5.0) (25-05-2017)
 ## Features

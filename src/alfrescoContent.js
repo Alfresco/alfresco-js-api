@@ -46,6 +46,19 @@ class AlfrescoContent {
             '/content' + '?attachment=false&alf_ticket=' + this.ecmAuth.getTicket();
     }
 
+    /**
+     * Get rendition URL for the given nodeId
+     *
+     * @param {String} nodeId of the document
+     * @param {String} encoding of the document
+     *
+     * @returns {String}  content URL  address.
+     */
+    getRenditionUrl(nodeId, encoding) {
+        return this.ecmClient.basePath + '/nodes/' + nodeId +
+                '/renditions/' + encoding +
+            '/content' + '?attachment=false&alf_ticket=' + this.ecmAuth.getTicket();
+    }
 }
 
 module.exports = AlfrescoContent;

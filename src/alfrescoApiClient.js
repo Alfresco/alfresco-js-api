@@ -2,7 +2,6 @@
 var Emitter = require('event-emitter');
 var ApiClient = require('./alfresco-core-rest-api/src/ApiClient');
 var superagent = require('superagent');
-var _ = require('lodash');
 
 class AlfrescoApiClient extends ApiClient {
 
@@ -65,7 +64,8 @@ class AlfrescoApiClient extends ApiClient {
                     }
 
                     if (response && response.text) {
-                        reject(_.merge(error, {message: response.text}));
+                        error = error || {};
+                        reject(Object.assign(error, {message: response.text}));
                     } else {
                         reject({error: error});
                     }
