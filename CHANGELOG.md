@@ -5,7 +5,7 @@
 # Alfresco JS API
 
 <a name="1.6.0"></a>
-# [1.6.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.6.0) (xx-06-2017)
+# [1.6.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.6.0) (29-06-2017)
 ## Fix
 - [Move /task-forms/{task-id}/variables from rest to enterprise](https://github.com/Alfresco/alfresco-js-api/issues/199)
 - [Added query param for get related contents](https://issues.alfresco.com/jira/browse/ADF-684)
