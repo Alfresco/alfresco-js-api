@@ -1815,8 +1815,8 @@ declare namespace AlfrescoApi {
     export interface UploadApi {
         new(config: AlfrescoApiConfig): UploadApi;
 
-        uploadFile(fileDefinition?: any, relativePath?: any, nodeId?: any, nodeBody?: any, opts?: any) : Promise<{}>;
-        addNodeUpload(nodeId?: any, nodeBody?: any, opts?: any, formParams?: any) : Promise<{}>;
+        uploadFile(fileDefinition?: any, relativePath?: any, nodeId?: any, nodeBody?: any, opts?: any) : any;
+        addNodeUpload(nodeId?: any, nodeBody?: any, opts?: any, formParams?: any) : any;
     }
 
     export interface BpmAuthApi extends AuthApi {
