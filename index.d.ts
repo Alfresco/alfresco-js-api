@@ -3,17 +3,25 @@ declare class AlfrescoApi {
     constructor(config: AlfrescoApiConfig): AlfrescoApi;
 
     changeEcmHost(ecmHost: string): void;
+
     changeBpmHost(bpmHost: string): void;
+
     changeCsrfConfig(disableCsrf: boolean): void;
 
     isLoggedIn(): boolean;
+
     login(username: string, password: string): Promise<string>;
+
     logout(): Promise<any>;
+
     loginTicket(ticket: string): any;
+
     refresh(): Promise<string>;
 
     getTicket(): Array<string>;
+
     getTicketBpm(): string;
+
     getTicketEcm(): string;
 
     setTicket(ticketEcm: any, ticketBpm: any): void;
@@ -32,12 +40,14 @@ declare class AlfrescoApi {
     activiti: Activiti;
     core: Core;
     discovery: Discovery;
+    upload: AlfrescoUpload;
+
 
     search: any;
     nodes: NodesApi;
     content: ContentApi;
-    upload: any;
-    webScript: any;
+    upload: UploadApi;
+    webScript: WebscriptApi;
 
     ecmClient: EcmClient;
     bpmClient: BpmClient;
@@ -86,8 +96,8 @@ declare namespace AlfrescoApi {
         search: any;
         nodes: NodesApi;
         content: ContentApi;
-        upload: any;
-        webScript: any;
+        upload:  UploadApi;
+        webScript: WebscriptApi;
 
         ecmClient: EcmClient;
         bpmClient: BpmClient;
@@ -212,13 +222,13 @@ declare namespace AlfrescoApi {
 
     export interface EcmClient {
         new(config: AlfrescoApiConfig): EcmClient;
-        changeHost(host: String): void;
+        changeHost(host: string): void;
         setAuthentications(authentications: any): void;
     }
 
     export interface BpmClient {
         new(config: AlfrescoApiConfig): BpmClient;
-        changeHost(host: String): void;
+        changeHost(host: string): void;
         setAuthentications(authentications: any): void;
     }
 
@@ -230,7 +240,7 @@ declare namespace AlfrescoApi {
 
     export interface EcmPrivateClient {
         new(config: AlfrescoApiConfig): EcmPrivateClient;
-        changeHost(host: String): void;
+        changeHost(host: string): void;
         setAuthentications(authentications: any): void;
     }
 
@@ -472,28 +482,19 @@ declare namespace AlfrescoApi {
     }
 
     export interface SitesApi {
-        new(client: ApiClient): SitesApi;
+        new(client?: ApiClient):SitesApi;
 
-        addSite(siteBodyadd?: SiteBodyadd, skipConfiguration?: boolean, skipAddToFavorites?: boolean, fields?: Array<string>, opts?: any): Promise<SiteEntry>;
-        addSiteMembership(siteId?: string, siteMembershipBodyadd?: SiteMembershipBodyadd, fields?: Array<string>, opts?: any): Promise<SiteMemberEntry>;
-        deleteSite(siteId?: string, permanent?: boolean, opts?: any): Promise<{}>;
-        deleteSiteMembership(siteId?: string, personId?: string, opts?: any): Promise<{}>;
-        deleteSiteMembershipForPerson(personId?: string, siteId?: string, opts?: any): Promise<{}>;
-        deleteSiteMembershipRequestForPerson(personId?: string, siteId?: string, opts?: any): Promise<{}>;
-        getSites(opts?: { skipCount?: number, maxItems?: number, orderBy?: string, relations?: Array<string>, fields?: Array<string> }): Primise<SitePaging>;
-        getSite(siteId?: string, relations?: Array<string>, fields?: Array<string>, opts?: any): Promise<SiteEntry>;
-        getSiteContainer(siteId?: string, containerId?: string, fields?: Array<string>, opts?: any): Promise<SiteContainerEntry>;
-        getSiteMembership(siteId?: string, personId?: string, fields?: Array<string>, opts?: any): Promise<SiteMemberEntry>;
-        getSiteMembershipForPerson(personId?: string, siteId?: string, opts?: any): Promise<SiteRoleEntry>;
-        getSiteMembershipRequestForPerson(personId?: string, siteId?: string, fields?: Array<string>, opts?: any): Promise<SiteMembershipRequestEntry>;
-        listSiteContainers(siteId?: string, skipCount?: number, maxItems?: number, fields?: Array<string>, opts?: any): Promise<SiteContainerPaging>;
-        listSiteMembershipRequestsForPerson(personId?: string, skipCount?: number, maxItems?: number, fields?: Array<string>, opts?: any): Promise<SiteMembershipRequestPaging>;
-        listSiteMemberships(siteId?: string, skipCount?: number, maxItems?: number, fields?: Array<string>, opts?: any): Promise<SiteMemberPaging>;
-        listSiteMembershipsForPerson(personId?: string, skipCount?: number, maxItems?: number, orderBy?: Array<string>, relations?: Array<string>, fields?: Array<string>, where?: string, opts?: any): Promise<SiteRolePaging>;
-        listSites(skipCount?: number, maxItems?: number, orderBy?: Array<string>, relations?: Array<string>, fields?: Array<string>, where?: string, opts?: any): Promise<SitePaging>;
-        updateSite(siteId?: string, siteBodyUpdate?: SiteBodyUpdate, fields?: Array<string>, opts?: any): Promise<SiteEntry>;
-        updateSiteMembership(siteId?: string, personId?: string, siteMembershipBodyUpdate?: SiteMembershipBodyUpdate, fields?: Array<string>, opts?: any): Promise<SiteMemberEntry>;
-        updateSiteMembershipRequestForPerson(personId?: string, siteId?: string, siteMembershipRequestBodyUpdate?: SiteMembershipRequestBodyUpdate, fields?: Array<string>, opts?: any): Promise<SiteMembershipRequestEntry>;
+        addSiteMember(siteld?: string, siteMemberBody?: SiteMemberBody):Promise<{}>;
+        createSite(siteBody?: SiteBody, opts?: {skipConfiguration?:Boolean, skipAddToFavorites?:Boolean}):Promise<{}>;
+        deleteSite(siteld?: string, opts?: {permanent?:Boolean}):Promise<{}>;
+        getSite(siteld?: string, opts?: {relations?:Array<string>, fields?:Array<string>}):Promise<{}>;
+        getSiteContainer(siteld?: string, containerld?: string, opts?: Array<string>):Promise<{}>;
+        getSiteContainers(siteld?: string, opts?: {skipCount?:number, maxltems?:number, fields?:Array<string>}):Promise<{}>;
+        getSiteMember(siteld?: string, personld?: string, opts?: {fields?:Array<string>}):Promise<{}>;
+        getSiteMembers(siteld?: string, opts?: {skipCount?:number, maxltems?:number, fields?:Array<string>}):Promise<{}>;
+        getSites(opts?: {skipCount?:number, maxltems?:number, orderBy?:string, relations?:Array<string>, fields?:Array<string>}):Promise<{}>;
+        removeSiteMember(siteld?: string, personld?: string):Promise<{}>;
+        updateSiteMember(siteld?: string, personld?: string, siteMemberRoleBody?: SiteMemberRoleBody):Promise<{}>;
     }
 
     export interface PeopleApi {
@@ -1233,6 +1234,13 @@ declare namespace AlfrescoApi {
         visibility?: SiteBodyadd.VisibilityEnum;
     }
 
+    export interface SiteBody {
+        id?: string;
+        title?: string;
+        description?: string;
+        visibility?: SiteBodyadd.VisibilityEnum;
+    }
+
     namespace SiteBodyadd {
         enum VisibilityEnum {
             PUBLIC,
@@ -1280,6 +1288,15 @@ declare namespace AlfrescoApi {
     export interface SiteMember {
         id?: string;
         person?: Person;
+        role?: SiteMember.RoleEnum;
+    }
+
+    export interface SiteMemberBody {
+        id?: string;
+        role?: SiteMember.RoleEnum;
+    }
+
+    export interface SiteMemberRoleBody {
         role?: SiteMember.RoleEnum;
     }
 
@@ -1793,6 +1810,13 @@ declare namespace AlfrescoApi {
 
         username: string;
 
+    }
+
+    export interface UploadApi {
+        new(config: AlfrescoApiConfig): UploadApi;
+
+        uploadFile(fileDefinition?: any, relativePath?: any, nodeId?: any, nodeBody?: any, opts?: any) : Promise<{}>;
+        addNodeUpload(nodeId?: any, nodeBody?: any, opts?: any, formParams?: any) : Promise<{}>;
     }
 
     export interface BpmAuthApi extends AuthApi {

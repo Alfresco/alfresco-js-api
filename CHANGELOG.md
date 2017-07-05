@@ -3,6 +3,10 @@
 </p>
 
 # Alfresco JS API
+<a name="1.7.0"></a>
+# [1.7.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.7.0) (xx-07-2017)
+## Fix
+- [APS ContentApi is not present on index.d.ts and SitesApi is not complete](https://github.com/Alfresco/alfresco-js-api/issues/249)
 
 <a name="1.6.0"></a>
 # [1.6.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.6.0) (29-06-2017)
