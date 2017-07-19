@@ -1791,10 +1791,10 @@ declare namespace AlfrescoApi {
     export interface ContentApi {
         new(ecmAuth: any): ContentApi;
 
-        getDocumentThumbnailUrl(nodeId: string): string;
-        getDocumentPreviewUrl(nodeId: string): string;
-        getContentUrl(nodeId: string): string;
-        getRenditionUrl(nodeId: string, encoding: string): string;
+        getDocumentThumbnailUrl(nodeId: string, attachment?: boolean, ticket?: string): string;
+        getDocumentPreviewUrl(nodeId: string, attachment?: boolean, ticket?: string): string;
+        getContentUrl(nodeId: string, attachment?: boolean, ticket?: string): string;
+        getRenditionUrl(nodeId: string, encoding: string, attachment?: boolean, ticket?: string): string;
     }
 
     export interface AuthApi {
