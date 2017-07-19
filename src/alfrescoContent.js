@@ -1,7 +1,10 @@
 'use strict';
 
 class AlfrescoContent {
+
     /**
+     * Creates an instance of AlfrescoContent.
+     *
      * @param {EcmAuth} ecmAuth
      * @param {EcmClient} ecmClient
      */
@@ -13,51 +16,62 @@ class AlfrescoContent {
     /**
      * Get thumbnail URL for the given nodeId
      *
-     * @param {String} nodeId of the document
-     *
-     * @returns {String} thumbnail URL address.
+     * @param {String} nodeId The ID of the document node
+     * @param {Boolean} [attachment=false] Retrieve content as an attachment for download
+     * @param {String} [ticket] Custom ticket to use for authentication
+     * @returns {String} The URL address pointing to the content.
      */
-    getDocumentThumbnailUrl(nodeId) {
+    getDocumentThumbnailUrl(nodeId, attachment, ticket) {
         return this.ecmClient.basePath + '/nodes/' + nodeId +
-            '/renditions/doclib/content' + '?attachment=false&alf_ticket=' + this.ecmAuth.getTicket();
+            '/renditions/doclib/content' +
+            '?attachment=' + (attachment ? 'true' : 'false') +
+            '&alf_ticket=' + (ticket || this.ecmAuth.getTicket());
     }
 
     /**
      * Get preview URL for the given nodeId
      *
-     * @param {String} nodeId of the document
-     *
-     * @returns {String} preview URL address.
+     * @param {String} nodeId The ID of the document node
+     * @param {Boolean} [attachment=false] Retrieve content as an attachment for download
+     * @param {String} [ticket] Custom ticket to use for authentication
+     * @returns {String} The URL address pointing to the content.
      */
-    getDocumentPreviewUrl(nodeId) {
+    getDocumentPreviewUrl(nodeId, attachment, ticket) {
         return this.ecmClient.basePath + '/nodes/' + nodeId +
-            '/renditions/imgpreview/content' + '?attachment=false&alf_ticket=' + this.ecmAuth.getTicket();
+            '/renditions/imgpreview/content' +
+            '?attachment=' + (attachment ? 'true' : 'false') +
+            '&alf_ticket=' + (ticket || this.ecmAuth.getTicket());
     }
 
     /**
      * Get content URL for the given nodeId
      *
-     * @param {String} nodeId of the document
-     *
-     * @returns {String}  content URL  address.
+     * @param {String} nodeId The ID of the document node
+     * @param {Boolean} [attachment=false] Retrieve content as an attachment for download
+     * @param {String} [ticket] Custom ticket to use for authentication
+     * @returns {String} The URL address pointing to the content.
      */
-    getContentUrl(nodeId) {
+    getContentUrl(nodeId, attachment, ticket) {
         return this.ecmClient.basePath + '/nodes/' + nodeId +
-            '/content' + '?attachment=false&alf_ticket=' + this.ecmAuth.getTicket();
+            '/content' +
+            '?attachment=' + (attachment ? 'true' : 'false') +
+            '&alf_ticket=' + (ticket || this.ecmAuth.getTicket());
     }
 
     /**
      * Get rendition URL for the given nodeId
      *
-     * @param {String} nodeId of the document
+     * @param {String} nodeId The ID of the document node
      * @param {String} encoding of the document
-     *
-     * @returns {String}  content URL  address.
+     * @param {Boolean} [attachment=false] retrieve content as an attachment for download
+     * @param {String} [ticket] Custom ticket to use for authentication
+     * @returns {String} The URL address pointing to the content.
      */
-    getRenditionUrl(nodeId, encoding) {
+    getRenditionUrl(nodeId, encoding, attachment, ticket) {
         return this.ecmClient.basePath + '/nodes/' + nodeId +
-                '/renditions/' + encoding +
-            '/content' + '?attachment=false&alf_ticket=' + this.ecmAuth.getTicket();
+            '/renditions/' + encoding + '/content' +
+            '?attachment=' + (attachment ? 'true' : 'false') +
+            '&alf_ticket=' + (ticket || this.ecmAuth.getTicket());
     }
 }
 
