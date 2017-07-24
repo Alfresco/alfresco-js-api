@@ -9,6 +9,7 @@
 - [APS ContentApi is not present on index.d.ts and SitesApi is not complete](https://github.com/Alfresco/alfresco-js-api/issues/249)
 
 ## Features
+- [Audit Log API - The end points are missing] (https://github.com/Alfresco/alfresco-js-api/issues/256)
 - [Allow providing "attachment" option value when generating content links](https://issues.alfresco.com/jira/browse/ADF-1086)
 
 <a name="1.6.0"></a>

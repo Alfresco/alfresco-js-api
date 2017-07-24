@@ -17,6 +17,8 @@ Method | HTTP request | Description
 [**deleteTask**](TaskApi.md#deleteTask) | **DELETE** /api/enterprise/tasks/{taskId} | Delete a Task
 [**filterTasks**](TaskApi.md#filterTasks) | **POST** /api/enterprise/tasks/filter | Filter list of Task
 [**getChecklist**](TaskApi.md#getChecklist) | **GET** /api/enterprise/tasks/{taskId}/checklist | Retrieve Checklist added to a task
+[**getTaskAuditJson**](TaskApi.md#getTaskAuditJson) | **GET** /api/enterprise/tasks/{taskId}/audit | Retrieve audit infromation in json format
+[**getTaskAuditPdf**](TaskApi.md#getTaskAuditPdf) | **GET** /app/rest/tasks/{taskId}/audit | Retrieve the task audit infromation in pdf format
 [**getRelatedContentForTask**](TaskApi.md#getRelatedContentForTask) | **GET** /api/enterprise/tasks/{taskId}/content | Retrieve which content is attached to a task
 [**getRestFieldValuesColumn**](TaskApi.md#getRestFieldValuesColumn) | **GET** /api/enterprise/task-forms/{taskId}/form-values/{field}/{column} | Retrieve Column Field Values
 [**getRestFieldValues**](TaskApi.md#getRestFieldValues) | **GET** /api/enterprise/task-forms/{taskId}/form-values/{field} | Retrieve Populated Field Values
@@ -493,6 +495,40 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ResultListDataRepresentation**](ResultListDataRepresentation.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="getTaskAuditJson"></a>
+# **getTaskAuditJson**
+> TaskAuditRepresentation getTaskAuditJson(taskId)
+
+Retrieve audit infromation in json format
+
+### Example
+```javascript
+
+var taskId = "taskId_example"; // String | taskId
+
+
+this.alfrescoJsApi.activiti.taskApi.getTaskAuditJson(taskId);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **taskId** | **String**| taskId | 
+
+### Return type
+
+[**TaskAuditRepresentation**](TaskAuditRepresentation.md)
 
 ### Authorization
 

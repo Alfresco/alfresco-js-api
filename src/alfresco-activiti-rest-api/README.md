@@ -203,6 +203,8 @@ Class | Method | HTTP request | Description
 *ActivitiPublicRestApi.TaskApi* | [**deleteTask**](docs/TaskApi.md#deleteTask) | **DELETE** /api/enterprise/tasks/{taskId} | Delete a Task
 *ActivitiPublicRestApi.TaskApi* | [**filterTasks**](docs/TaskApi.md#filterTasks) | **POST** /api/enterprise/tasks/filter | Filter list of Task
 *ActivitiPublicRestApi.TaskApi* | [**getChecklist**](docs/TaskApi.md#getChecklist) | **GET** /api/enterprise/tasks/{taskId}/checklist | Retrieve Checklist added to a task
+*ActivitiPublicRestApi.TaskApi* | [**getTaskAuditJson**](docs/TaskApi.md#getTaskAuditJson) | **GET** /api/enterprise/tasks/{taskId}/audit | Retrieve audit infromation in json format
+*ActivitiPublicRestApi.TaskApi* | [**getTaskAuditPdf**](docs/TaskApi.md#getTaskAuditPdf) | **GET** /app/rest/tasks/{taskId}/audit | Retrieve the task audit infromation in pdf format
 *ActivitiPublicRestApi.TaskApi* | [**getRelatedContentForTask**](docs/TaskApi.md#getRelatedContentForTask) | **GET** /api/enterprise/tasks/{taskId}/content | Retrieve which content is attached to a task
 *ActivitiPublicRestApi.TaskApi* | [**getRestFieldValuesColumn**](docs/TaskApi.md#getRestFieldValuesColumn) | **GET** /api/enterprise/task-forms/{taskId}/form-values/{field}/{column} | Retrieve Column Field Values
 *ActivitiPublicRestApi.TaskApi* | [**getRestFieldValues**](docs/TaskApi.md#getRestFieldValues) | **GET** /api/enterprise/task-forms/{taskId}/form-values/{field} | Retrieve Populated Field Values
