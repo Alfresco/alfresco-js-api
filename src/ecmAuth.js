@@ -48,13 +48,13 @@ class EcmAuth extends AlfrescoApiClient {
         loginRequest.password = this.authentications.basicAuth.password;
 
         this.promise = new Promise((resolve, reject) => {
-            authApi.createTicket(loginRequest).then(
-                (data) => {
+            authApi.createTicket(loginRequest)
+                .then((data) => {
                     this.setTicket(data.entry.id);
                     this.promise.emit('success');
                     resolve(data.entry.id);
-                },
-                (error) => {
+                })
+                .catch((error) => {
                     if (error.status === 401) {
                         this.promise.emit('unauthorized');
                     } else if (error.status === 403) {

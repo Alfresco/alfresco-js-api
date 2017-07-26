@@ -65,7 +65,7 @@
       return this.apiClient.callApi(
         '/tickets', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authNames, contentTypes, accepts, returnType, null, 'application/json'
       );
     }
 
