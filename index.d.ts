@@ -204,7 +204,28 @@ declare namespace AlfrescoApi {
         entry: DeletedNodeMinimalEntry;
     }
 
-    export interface MinimalNode {
+    export interface Node {
+        id?: string;
+        name?: string;
+        nodeType?: string;
+        isFolder?: boolean;
+        isFile?: boolean;
+        isLocked?: boolean;
+        modifiedAt?: Date;
+        modifiedByUser?: UserInfo;
+        adddAt?: Date;
+        adddByUser?: UserInfo;
+        parentId?: string;
+        isLink?: boolean;
+        content?: ContentInfo;
+        aspectNames?: Array<string>;
+        properties?: any;
+        allowableOperations?: Array<string>;
+        path?: PathInfo;
+        permissions?: PermissionsInfo;
+    }
+
+    export interface MinimalNode extends Node {
         id: string;
         parentId: string;
         name: string;
@@ -706,27 +727,6 @@ declare namespace AlfrescoApi {
     export interface CommentPagingList {
         entries?: Array<CommentEntry>;
         pagination?: Pagination;
-    }
-
-    export interface Node {
-        id?: string;
-        name?: string;
-        nodeType?: string;
-        isFolder?: boolean;
-        isFile?: boolean;
-        isLocked?: boolean;
-        modifiedAt?: Date;
-        modifiedByUser?: UserInfo;
-        adddAt?: Date;
-        adddByUser?: UserInfo;
-        parentId?: string;
-        isLink?: boolean;
-        content?: ContentInfo;
-        aspectNames?: Array<string>;
-        properties?: any;
-        allowableOperations?: Array<string>;
-        path?: PathInfo;
-        permissions?: PermissionsInfo;
     }
 
     export interface Company {
