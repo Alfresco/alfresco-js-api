@@ -6,6 +6,7 @@
 <a name="1.7.0"></a>
 # [1.7.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.7.0) (xx-07-2017)
 ## Fix
+- [Error handling for wrong host urls](https://github.com/Alfresco/alfresco-js-api/issues/257)
 - [APS ContentApi is not present on index.d.ts and SitesApi is not complete](https://github.com/Alfresco/alfresco-js-api/issues/249)
 
 ## Features
