@@ -589,6 +589,27 @@ declare namespace AlfrescoApi {
 
     export interface DownloadsApi {
         new(client: ApiClient): DownloadsApi;
+
+        createDownload(payload: DownloadBodyCreate, opts?: any): Promise<DownloadEntry>;
+        getDownload(downloadId: string, opts?: any): Promise<DownloadEntry>;
+        cancelDownload(downloadId: string): Promise<void>;
+    }
+
+    export interface DownloadBodyCreate {
+        nodeIds?: string[]
+    }
+
+    export interface DownloadEntry {
+        entry?: Download;
+    }
+
+    export interface Download {
+        filesAdded?: number;
+        bytesAdded?: number;
+        id: string;
+        totalFiles: number;
+        totalBytes: number;
+        status: string;
     }
 
     export interface TagsApi {
