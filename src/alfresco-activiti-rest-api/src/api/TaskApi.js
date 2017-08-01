@@ -1,18 +1,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../../../alfrescoApiClient', '../model/TaskRepresentation', '../model/CommentRepresentation', '../model/ObjectNode', '../model/CompleteFormRepresentation', '../model/RelatedContentRepresentation', '../model/TaskFilterRequestRepresentation', '../model/ResultListDataRepresentation', '../model/FormValueRepresentation', '../model/FormDefinitionRepresentation', '../model/ChecklistOrderRepresentation', '../model/SaveFormRepresentation', '../model/TaskUpdateRepresentation'], factory);
+    define(['../../../alfrescoApiClient', '../model/TaskRepresentation', '../model/TaskAuditRepresentation', '../model/CommentRepresentation', '../model/ObjectNode', '../model/CompleteFormRepresentation', '../model/RelatedContentRepresentation', '../model/TaskFilterRequestRepresentation', '../model/ResultListDataRepresentation', '../model/FormValueRepresentation', '../model/FormDefinitionRepresentation', '../model/ChecklistOrderRepresentation', '../model/SaveFormRepresentation', '../model/TaskUpdateRepresentation'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/TaskRepresentation'), require('../model/CommentRepresentation'), require('../model/ObjectNode'), require('../model/CompleteFormRepresentation'), require('../model/RelatedContentRepresentation'), require('../model/TaskFilterRequestRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/FormValueRepresentation'), require('../model/FormDefinitionRepresentation'), require('../model/ChecklistOrderRepresentation'), require('../model/SaveFormRepresentation'), require('../model/TaskUpdateRepresentation'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/TaskRepresentation'), require('../model/TaskAuditRepresentation'), require('../model/CommentRepresentation'), require('../model/ObjectNode'), require('../model/CompleteFormRepresentation'), require('../model/RelatedContentRepresentation'), require('../model/TaskFilterRequestRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/FormValueRepresentation'), require('../model/FormDefinitionRepresentation'), require('../model/ChecklistOrderRepresentation'), require('../model/SaveFormRepresentation'), require('../model/TaskUpdateRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
       root.ActivitiPublicRestApi = {};
     }
-    root.ActivitiPublicRestApi.TaskApi = factory(root.ActivitiPublicRestApi.ApiClient, root.ActivitiPublicRestApi.TaskRepresentation, root.ActivitiPublicRestApi.CommentRepresentation, root.ActivitiPublicRestApi.ObjectNode, root.ActivitiPublicRestApi.CompleteFormRepresentation, root.ActivitiPublicRestApi.RelatedContentRepresentation, root.ActivitiPublicRestApi.TaskFilterRequestRepresentation, root.ActivitiPublicRestApi.ResultListDataRepresentation, root.ActivitiPublicRestApi.FormValueRepresentation, root.ActivitiPublicRestApi.FormDefinitionRepresentation, root.ActivitiPublicRestApi.ChecklistOrderRepresentation, root.ActivitiPublicRestApi.SaveFormRepresentation, root.ActivitiPublicRestApi.TaskUpdateRepresentation);
+    root.ActivitiPublicRestApi.TaskApi = factory(root.ActivitiPublicRestApi.ApiClient, root.ActivitiPublicRestApi.TaskRepresentation, root.ActivitiPublicRestApi.TaskAuditRepresentation, root.ActivitiPublicRestApi.CommentRepresentation, root.ActivitiPublicRestApi.ObjectNode, root.ActivitiPublicRestApi.CompleteFormRepresentation, root.ActivitiPublicRestApi.RelatedContentRepresentation, root.ActivitiPublicRestApi.TaskFilterRequestRepresentation, root.ActivitiPublicRestApi.ResultListDataRepresentation, root.ActivitiPublicRestApi.FormValueRepresentation, root.ActivitiPublicRestApi.FormDefinitionRepresentation, root.ActivitiPublicRestApi.ChecklistOrderRepresentation, root.ActivitiPublicRestApi.SaveFormRepresentation, root.ActivitiPublicRestApi.TaskUpdateRepresentation);
   }
-}(this, function(ApiClient, TaskRepresentation, CommentRepresentation, ObjectNode, CompleteFormRepresentation, RelatedContentRepresentation, TaskFilterRequestRepresentation, ResultListDataRepresentation, FormValueRepresentation, FormDefinitionRepresentation, ChecklistOrderRepresentation, SaveFormRepresentation, TaskUpdateRepresentation) {
+}(this, function(ApiClient, TaskRepresentation, TaskAuditRepresentation, CommentRepresentation, ObjectNode, CompleteFormRepresentation, RelatedContentRepresentation, TaskFilterRequestRepresentation, ResultListDataRepresentation, FormValueRepresentation, FormDefinitionRepresentation, ChecklistOrderRepresentation, SaveFormRepresentation, TaskUpdateRepresentation) {
   'use strict';
 
   /**
@@ -628,6 +628,76 @@
         '/api/enterprise/tasks/{taskId}/checklist', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Retrieve the task audit in the JSON format
+     * @param {String} taskId taskId
+     */
+    this.getTaskAuditJson = function(taskId) {
+      var postBody = null;
+
+      // verify the required parameter 'taskId' is set
+      if (taskId == undefined || taskId == null) {
+        throw "Missing the required parameter 'taskId' when calling getTaskAuditPdf";
+      }
+
+      var pathParams = {
+        'taskId': taskId
+      };
+      var queryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = [];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = TaskAuditRepresentation;
+
+      return this.apiClient.callApi(
+        '/api/enterprise/tasks/{taskId}/audit', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Retrieve the task audit in the JSON format
+     * @param {String} taskId taskId
+     */
+    this.getTaskAuditPdf = function(taskId) {
+      var postBody = null;
+
+      // verify the required parameter 'taskId' is set
+      if (taskId == undefined || taskId == null) {
+        throw "Missing the required parameter 'taskId' when calling getTaskAuditPdf";
+      }
+
+      var pathParams = {
+        'taskId': taskId
+      };
+      var queryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = [];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = Object;
+      var contextRoot = null;
+      var responseType = 'blob';
+
+      return this.apiClient.callApi(
+        '/app/rest/tasks/{taskId}/audit', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, contextRoot, responseType
       );
     }
 
