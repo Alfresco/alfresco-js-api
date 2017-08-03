@@ -19,16 +19,6 @@ Cancel a download
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco_content_services_rest_api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoCoreRestApi.DownloadsApi();
-
 var downloadId = "downloadId_example"; // String | The identifier of a download node.
 
 
@@ -39,7 +29,8 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.cancelDownload(downloadId, callback);
+
+this.alfrescoJsApi.core.downloadsApi.cancelDownload(downloadId, callback);
 ```
 
 ### Parameters
@@ -71,16 +62,6 @@ Create a new download
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco_content_services_rest_api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoCoreRestApi.DownloadsApi();
-
 var downloadBodyCreate = new AlfrescoCoreRestApi.DownloadBodyCreate(); // DownloadBodyCreate | The nodeIds the content of which will be zipped, which zip will be set as the content of our download node.
 
 var opts = { 
@@ -94,7 +75,8 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.createDownload(downloadBodyCreate, opts, callback);
+
+this.alfrescoJsApi.core.downloadsApi.createDownload(downloadBodyCreate, opts, callback);
 ```
 
 ### Parameters
@@ -127,16 +109,6 @@ Get a download
 
 ### Example
 ```javascript
-var AlfrescoCoreRestApi = require('alfresco_content_services_rest_api');
-var defaultClient = AlfrescoCoreRestApi.ApiClient.default;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoCoreRestApi.DownloadsApi();
-
 var downloadId = "downloadId_example"; // String | The identifier of a download node.
 
 var opts = { 
@@ -150,7 +122,8 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getDownload(downloadId, opts, callback);
+
+this.alfrescoJsApi.core.downloadsApi.getDownload(downloadId, opts, callback);
 ```
 
 ### Parameters
