@@ -587,6 +587,31 @@ declare namespace AlfrescoApi {
         getSharedLinkContent(sharedId?: string, opts?: any): Promise<{}>;
     }
 
+    export interface DownloadsApi {
+        new(client: ApiClient): DownloadsApi;
+
+        createDownload(payload: DownloadBodyCreate, opts?: any): Promise<DownloadEntry>;
+        getDownload(downloadId: string, opts?: any): Promise<DownloadEntry>;
+        cancelDownload(downloadId: string): Promise<void>;
+    }
+
+    export interface DownloadBodyCreate {
+        nodeIds?: string[];
+    }
+
+    export interface DownloadEntry {
+        entry?: Download;
+    }
+
+    export interface Download {
+        filesAdded?: number;
+        bytesAdded?: number;
+        id: string;
+        totalFiles: number;
+        totalBytes: number;
+        status: string;
+    }
+
     export interface TagsApi {
         new(client: ApiClient): TagsApi;
 
@@ -1623,6 +1648,7 @@ declare namespace AlfrescoApi {
         childAssociationsApi: ChildAssociationsApi;
         commentsApi: CommentsApi;
         customModelApi: CustomModelApi;
+        downloadsApi: DownloadsApi;
         favoritesApi: FavoritesApi;
         networksApi: NetworksApi;
         nodesApi: NodesApi;
