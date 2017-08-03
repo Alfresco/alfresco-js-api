@@ -114,12 +114,14 @@
       var authNames = [];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
-      var returnType = null;
+      var returnType = Object;
+      var contextRoot = null;
+      var responseType = 'blob';
 
       return this.apiClient.callApi(
         '/api/enterprise/users/{userId}/picture', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authNames, contentTypes, accepts, returnType, contextRoot, responseType
       );
     }
 
