@@ -596,7 +596,7 @@ declare namespace AlfrescoApi {
     }
 
     export interface DownloadBodyCreate {
-        nodeIds?: string[]
+        nodeIds?: string[];
     }
 
     export interface DownloadEntry {
@@ -1648,7 +1648,7 @@ declare namespace AlfrescoApi {
         childAssociationsApi: ChildAssociationsApi;
         commentsApi: CommentsApi;
         customModelApi: CustomModelApi;
-        downloadsApi: DownloadsApi,
+        downloadsApi: DownloadsApi;
         favoritesApi: FavoritesApi;
         networksApi: NetworksApi;
         nodesApi: NodesApi;
