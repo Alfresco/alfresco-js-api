@@ -3,6 +3,13 @@
 </p>
 
 # Alfresco JS API
+<a name="1.8.0"></a>
+# [1.8.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.8.0) (work in progress)
+
+## Features
+
+- [Downloads API (requries 5.2.1 platform)](https://issues.alfresco.com/jira/browse/ADF-1225)
+
 <a name="1.7.0"></a>
 # [1.7.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.7.0) (01-08-2017)
 ## Fix

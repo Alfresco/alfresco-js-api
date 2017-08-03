@@ -13,6 +13,8 @@ An **entity** is of a specific **type**, and has a unique **id**.
 
 ## Documentation for API Endpoints
 
+- [Downloads](docs/DownloadsApi.md)
+
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/alfresco/versions/1*
 
 Class | Method | HTTP request | Description
@@ -155,6 +157,9 @@ Class | Method | HTTP request | Description
  - [AlfrescoCoreRestApi.DeletedNodeMinimalEntry](docs/DeletedNodeMinimalEntry.md)
  - [AlfrescoCoreRestApi.DeletedNodesPaging](docs/DeletedNodesPaging.md)
  - [AlfrescoCoreRestApi.DeletedNodesPagingList](docs/DeletedNodesPagingList.md)
+ - [AlfrescoCoreRestApi.Download](docs/Download.md)
+ - [AlfrescoCoreRestApi.DownloadBodyCreate](docs/DownloadBodyCreate.md)
+ - [AlfrescoCoreRestApi.DownloadEntry](docs/DownloadEntry.md)
  - [AlfrescoCoreRestApi.EmailSharedLinkBody](docs/EmailSharedLinkBody.md)
  - [AlfrescoCoreRestApi.Error](docs/Error.md)
  - [AlfrescoCoreRestApi.ErrorError](docs/ErrorError.md)
