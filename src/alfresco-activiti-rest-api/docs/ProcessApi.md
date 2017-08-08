@@ -9,6 +9,8 @@ Method | HTTP request | Description
 [**getProcessDefinitionStartForm**](ProcessApi.md#getProcessDefinitionStartForm) | **GET** /api/enterprise/process-definitions/{processDefinitionId}/start-form | Retrieve the start form for a process definition
 [**getProcessDefinitions**](ProcessApi.md#getProcessDefinitions) | **GET** /api/enterprise/process-definitions | Retrieve a list of process definitions
 [**getProcessInstanceContent**](ProcessApi.md#getProcessInstanceContent) | **GET** /api/enterprise/process-instances/{processInstanceId}/field-content | Retrieve content attached to process instance fields
+[**getProcessAuditJson**](ProcessApi.md#getProcessAuditJson) | **GET** /api/enterprise/process-instances/{processId}/audit-log | Retrieve process audit infromation in json format
+[**getProcessAuditPdf**](ProcessApi.md#getProcessAuditPdf) | **GET** /app/rest/process-instances/{processId}/audit | Retrieve the process audit infromation in pdf format
 [**getProcessInstanceStartForm**](ProcessApi.md#getProcessInstanceStartForm) | **GET** /api/enterprise/process-instances/{processInstanceId}/start-form | Get process start form
 [**getProcessInstance**](ProcessApi.md#getProcessInstance) | **GET** /api/enterprise/process-instances/{processInstanceId} | Retrieve a process instance information
 [**getProcessInstances**](ProcessApi.md#getProcessInstances) | **POST** /api/enterprise/process-instances/query | Retrieve a list of process instances
@@ -177,6 +179,73 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ResultListDataRepresentation**](ResultListDataRepresentation.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="getProcessAuditJson"></a>
+# **getProcessAuditJson**
+> ProcessInstanceAuditRepresentation getProcessAuditJson(processId)
+
+Retrieve process audit infromation in json format
+
+### Example
+```javascript
+
+var processId = "processId_example"; // String | processId
+
+
+this.alfrescoJsApi.activiti.processApi.getProcessAuditJson(processId);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **processId** | **String**| processId | 
+
+### Return type
+
+[**ProcessInstanceAuditRepresentation**](ProcessInstanceAuditRepresentation.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="getProcessAuditPdf"></a>
+# **getProcessAuditPdf**
+> Blob getProcessAuditPdf(processId)
+
+Retrieve process audit infromation in pdf format
+
+### Example
+```javascript
+
+var processId = "processId_example"; // String | processId
+
+this.alfrescoJsApi.activiti.processApi.getProcessAuditPdf(processId);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **processId** | **String**| processId | 
+
+### Return type
+
+[Blob]
 
 ### Authorization
 
