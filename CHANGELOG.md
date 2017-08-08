@@ -9,6 +9,7 @@
 
 ## Features
 
+- [Process Audit Log end points](https://github.com/Alfresco/alfresco-js-api/issues/263)
 - [Downloads API (requries 5.2.1 platform)](https://issues.alfresco.com/jira/browse/ADF-1225)
 - [getProfilePictures returns null](https://github.com/Alfresco/alfresco-js-api/issues/262)
 
