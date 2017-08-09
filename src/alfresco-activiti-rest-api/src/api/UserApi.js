@@ -125,6 +125,10 @@
       );
     }
 
+    this.getUserProfilePictureUrl = function(userId) {
+       return this.apiClient.basePath + '/app/rest/users/'+userId+'/picture';
+    }
+
     /**
      * Function to receive the result of the getUser operation.
      * @param {String} error Error message, if any.

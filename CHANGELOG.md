@@ -12,6 +12,7 @@
 - [Process Audit Log end points](https://github.com/Alfresco/alfresco-js-api/issues/263)
 - [Downloads API (requries 5.2.1 platform)](https://issues.alfresco.com/jira/browse/ADF-1225)
 - [getProfilePictures returns null](https://github.com/Alfresco/alfresco-js-api/issues/262)
+- [Adding a new method to retrieve the Profile Picture Url](https://github.com/Alfresco/alfresco-js-api/265)
 
 <a name="1.7.0"></a>
 # [1.7.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.7.0) (01-08-2017)
