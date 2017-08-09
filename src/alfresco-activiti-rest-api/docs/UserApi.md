@@ -83,6 +83,39 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+<a name="getProfilePictureUrl"></a>
+# **getProfilePictureUrl**
+> getProfilePictureUrl(userId)
+
+Retrieve user profile picture
+
+### Example
+```javascript
+
+var userId = 789; // Integer | userId
+
+this.alfrescoJsApi.activiti.userApi.getProfilePictureUrl(userId);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userId** | **String**| userId | 
+
+### Return type
+
+string 
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json 
+
 <a name="getUser"></a>
 # **getUser**
 > UserRepresentation getUser(userId)

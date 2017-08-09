@@ -8,6 +8,9 @@
 ## Fix
 - [getProfilePictures returns null](https://github.com/Alfresco/alfresco-js-api/issues/262)
 
+## Features
+- [Adding a new method to retrieve the Profile Picture Url](https://github.com/Alfresco/alfresco-js-api/pull/266)
+
 # Alfresco JS API
 <a name="1.7.0"></a>
 # [1.7.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.7.0) (01-08-2017)
