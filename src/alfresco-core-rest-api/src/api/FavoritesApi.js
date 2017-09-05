@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new FavoritesApi. 
+   * Constructs a new FavoritesApi.
    * @alias module:api/FavoritesApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -154,7 +154,8 @@
         'skipCount': opts['skipCount'],
         'maxItems': opts['maxItems'],
         'where': opts['where'],
-        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv'),
+        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv')
       };
       var headerParams = {
       };
