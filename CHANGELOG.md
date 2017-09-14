@@ -5,6 +5,12 @@
 # Alfresco JS API
 <a name="1.8.0"></a>
 
+# [1.9.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.9.0) (xx-xx-2017)
+
+## Fix
+
+- [Wrong StatusEnum implementation for Rendition](https://issues.alfresco.com/jira/browse/ADF-1535)
+
 # [1.8.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.8.0) (05-09-2017)
 
 ## Features
