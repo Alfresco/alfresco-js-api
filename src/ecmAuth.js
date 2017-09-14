@@ -12,7 +12,7 @@ class EcmAuth extends AlfrescoApiClient {
     constructor(config) {
         super();
 
-        this.username = '';
+        this.username = this.loadUsername();
         this.config = config;
 
         this.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
@@ -27,6 +27,27 @@ class EcmAuth extends AlfrescoApiClient {
     changeHost() {
         this.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
         this.ticket = undefined;
+    }
+
+    supportsLocalStorage() {
+        try {
+            return 'localStorage' in window && window.localStorage !== null;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    loadUsername() {
+        if (this.supportsLocalStorage()) {
+            return localStorage.getItem('APS_USERNAME');
+        }
+        return '';
+    }
+
+    saveUsername(value) {
+        if (this.supportsLocalStorage()) {
+            localStorage.setItem('APS_USERNAME', value);
+        }
     }
 
     /**
@@ -50,11 +71,13 @@ class EcmAuth extends AlfrescoApiClient {
         this.promise = new Promise((resolve, reject) => {
             authApi.createTicket(loginRequest)
                 .then((data) => {
+                    this.saveUsername(username);
                     this.setTicket(data.entry.id);
                     this.promise.emit('success');
                     resolve(data.entry.id);
                 })
                 .catch((error) => {
+                    this.saveUsername('');
                     if (error.status === 401) {
                         this.promise.emit('unauthorized');
                     } else if (error.status === 403) {
@@ -107,6 +130,7 @@ class EcmAuth extends AlfrescoApiClient {
      * */
     logout() {
         this.username = '';
+        this.saveUsername('');
         var authApi = new AlfrescoAuthRestApi.AuthenticationApi(this);
 
         this.promise = new Promise((resolve, reject) => {
