@@ -12,6 +12,12 @@
 - [Wrong StatusEnum implementation for Rendition](https://issues.alfresco.com/jira/browse/ADF-1535)
 - [APS task form remains disabled when no custom outcome is provided in ADF 1.8.0](https://issues.alfresco.com/jira/browse/ADF-1523)
 
+# [1.9.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.9.0) (xx-xx-2017)
+
+## Fix
+
+- [Wrong StatusEnum implementation for Rendition](https://issues.alfresco.com/jira/browse/ADF-1535)
+
 # [1.8.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.8.0) (05-09-2017)
 
 ## Features
