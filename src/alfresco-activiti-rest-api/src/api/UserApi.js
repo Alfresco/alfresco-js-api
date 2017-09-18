@@ -126,7 +126,7 @@
     }
 
     this.getUserProfilePictureUrl = function(userId) {
-      return this.apiClient.basePath + '/api/enterprise/users/'+userId+'/picture';
+      return this.apiClient.basePath + '/app/rest/users/'+userId+'/picture';
     }
 
     /**
