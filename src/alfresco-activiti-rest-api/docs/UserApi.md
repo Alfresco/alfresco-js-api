@@ -83,9 +83,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getProfilePictureUrl"></a>
-# **getProfilePictureUrl**
-> getProfilePictureUrl(userId)
+<a name="getUserProfilePictureUrl"></a>
+# **getUserProfilePictureUrl**
+> getUserProfilePictureUrl(userId)
 
 Retrieve user profile picture
 
@@ -94,7 +94,7 @@ Retrieve user profile picture
 
 var userId = 789; // Integer | userId
 
-this.alfrescoJsApi.activiti.userApi.getProfilePictureUrl(userId);
+this.alfrescoJsApi.activiti.userApi.getUserProfilePictureUrl(userId);
 ```
 
 ### Parameters
