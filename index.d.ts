@@ -265,19 +265,19 @@ declare namespace AlfrescoApi {
 
         addNode(nodeId: string, nodeBody: any, opts?: any): Promise<MinimalNodeEntity>;
         copyNode(nodeId: string, copyBody: any, opts?: any): Promise<MinimalNodeEntity>;
-        deleteNode(nodeId: string): Promise<void>;
+        deleteNode(nodeId: string): Promise<any>;
         getDeletedNode(nodeId: string, opts?: any): Promise<DeletedNodeEntity>;
         getDeletedNodes(opts?: any): Promise<DeletedNodesPaging>;
         getFileContent(nodeId: string, opts?: any): Promise<any>;
         getNode(nodeId: string, opts?: any): Promise<MinimalNodeEntity>;
         getNodeChildren(nodeId: string, opts?: any): Promise<NodePaging>;
         moveNode(nodeId: string, moveBody: any, opts?: any): Promise<MinimalNodeEntity>;
-        purgeDeletedNode(nodeId: string): Promise<void>;
+        purgeDeletedNode(nodeId: string): Promise<any>;
         restoreNode(nodeId: string): Promise<MinimalNodeEntity>;
         updateFileContent(nodeId: string, contentBody: string, opts?: any): Promise<MinimalNodeEntity>;
         updateNode(nodeId: string, nodeBody: any, opts?: any): Promise<MinimalNodeEntity>;
         getNodeInfo(nodeId: string, opts?: any): Promise<MinimalNodeEntryEntity>;
-        deleteNodePermanent(nodeId: string): Promise<void>;
+        deleteNodePermanent(nodeId: string): Promise<any>;
         createFolder(name: string, relativePath: string, nodeId?: string, opts?: any): Promise<MinimalNodeEntity>;
         createFolderAutoRename(name: string, relativePath: string, nodeId: string, opts): Promise<MinimalNodeEntity>;
     }
@@ -453,17 +453,17 @@ declare namespace AlfrescoApi {
     export interface SitesApi {
         new(client?: ApiClient): SitesApi;
 
-        addSiteMember(siteld?: string, siteMemberBody?: SiteMemberBody): Promise<{}>;
+        addSiteMember(siteId?: string, siteMemberBody?: SiteMemberBody): Promise<{}>;
         createSite(siteBody?: SiteBody, opts?: { skipConfiguration?: Boolean, skipAddToFavorites?: Boolean }): Promise<{}>;
-        deleteSite(siteld?: string, opts?: { permanent?: Boolean }): Promise<{}>;
-        getSite(siteld?: string, opts?: { relations?: Array<string>, fields?: Array<string> }): Promise<{}>;
-        getSiteContainer(siteld?: string, containerld?: string, opts?: Array<string>): Promise<{}>;
-        getSiteContainers(siteld?: string, opts?: { skipCount?: number, maxltems?: number, fields?: Array<string> }): Promise<{}>;
-        getSiteMember(siteld?: string, personld?: string, opts?: { fields?: Array<string> }): Promise<{}>;
-        getSiteMembers(siteld?: string, opts?: { skipCount?: number, maxltems?: number, fields?: Array<string> }): Promise<{}>;
+        deleteSite(siteId?: string, opts?: { permanent?: Boolean }): Promise<{}>;
+        getSite(siteId?: string, opts?: { relations?: Array<string>, fields?: Array<string> }): Promise<{}>;
+        getSiteContainer(siteId?: string, containerld?: string, opts?: Array<string>): Promise<{}>;
+        getSiteContainers(siteId?: string, opts?: { skipCount?: number, maxltems?: number, fields?: Array<string> }): Promise<{}>;
+        getSiteMember(siteId?: string, personld?: string, opts?: { fields?: Array<string> }): Promise<{}>;
+        getSiteMembers(siteId?: string, opts?: { skipCount?: number, maxltems?: number, fields?: Array<string> }): Promise<{}>;
         getSites(opts?: { skipCount?: number, maxltems?: number, orderBy?: string, relations?: Array<string>, fields?: Array<string> }): Promise<{}>;
-        removeSiteMember(siteld?: string, personld?: string): Promise<{}>;
-        updateSiteMember(siteld?: string, personld?: string, siteMemberRoleBody?: SiteMemberRoleBody): Promise<{}>;
+        removeSiteMember(siteId?: string, personld?: string): Promise<{}>;
+        updateSiteMember(siteId?: string, personld?: string, siteMemberRoleBody?: SiteMemberRoleBody): Promise<{}>;
     }
 
     export interface PeopleApi {
@@ -471,24 +471,24 @@ declare namespace AlfrescoApi {
 
         addFavorite(personld?: string, favoriteBody?: FavoriteBody): Promise<FavoriteEntry>;
         addSiteMembershipRequest(personld?: string, siteMembershipBody?: SiteMembershipRequestBody): Promise<SiteMembershipRequestEntry>;
-        deleteFavoriteSite(personld?: string, siteld?: string): Promise<{}>;
+        deleteFavoriteSite(personld?: string, siteId?: string): Promise<{}>;
         favoriteSite(personld?: string, favoriteSiteBody?: FavoriteSiteBody): Promise<FavoriteEntry>;
-        getActivities(personld?: string, opts?: { skipCount?: number, maxltems?: number, who?: string, siteld?: string, fields?: Array<string> }): Promise<ActivityPaging>;
+        getActivities(personld?: string, opts?: { skipCount?: number, maxltems?: number, who?: string, siteId?: string, fields?: Array<string> }): Promise<ActivityPaging>;
         getFavorite(personld?: string, favoriteld?: string, opts?: { fields?: Array<string> }): Promise<FavoriteEntry>;
-        getFavoriteSite(personld?: string, siteld?: string, opts?: { fields?: Array<string> }): Promise<SiteEntry>;
+        getFavoriteSite(personld?: string, siteId?: string, opts?: { fields?: Array<string> }): Promise<SiteEntry>;
         getFavoriteSites(personld?: string, opts?: { skipCount?: number, maxltems?: number, fields?: Array<string> }): Promise<SitePaging>;
         getFavorites(personld?: string, opts?: { skipCount?: number, maxltems?: number, where?: string, fields?: Array<string> }): Promise<FavoritePaging>;
         getPerson(personld?: string, opts?: { fields?: Array<string> }): Promise<PersonEntry>;
-        getPersonNetwork(personld?: string, networkld?: string, opts?: { fields?: Array<string> }): Promise<PersonNetworkEntry>;
+        getPersonNetwork(personld?: string, networkId?: string, opts?: { fields?: Array<string> }): Promise<PersonNetworkEntry>;
         getPersonNetworks(personld?: string, opts?: { skipCount?: number, maxltems?: number, fields?: Array<string> }): Promise<PersonNetworkPaging>;
         getPreference(personld?: string, preferenceName?: string, opts?: { fields?: Array<string> }): Promise<PreferenceEntry>;
         getPreferences(personld?: string, opts?: { skipCount?: number, maxltems?: number, fields?: Array<string> }): Promise<PreferencePaging>;
         getSiteMembership(personld?: string, opts?: { skipCount?: number, maxltems?: number, orderBy?: string, relations?: Array<string>, fields?: Array<string> }): Promise<SiteMembershipRequestEntry>;
-        getSiteMembershipRequest(personld?: string, siteld?: string, opts?: { fields?: Array<string> }): Promise<SiteMembershipRequestEntry>;
+        getSiteMembershipRequest(personld?: string, siteId?: string, opts?: { fields?: Array<string> }): Promise<SiteMembershipRequestEntry>;
         getSiteMembershipRequests(personld?: string, opts?: { skipCount?: number, maxltems?: number, fields?: Array<string> }): Promise<SiteMembershipRequestPaging>;
         removeFavoriteSite(personld?: string, favoriteld?: string): Promise<{}>;
-        removeSiteMembershipRequest(personld?: string, siteld?: string): Promise<{}>;
-        updateSiteMembershipRequest(personld?: string, siteld?: string, siteMembershipBody?: SiteMembershipRequestBody): Promise<{}>;
+        removeSiteMembershipRequest(personld?: string, siteId?: string): Promise<{}>;
+        updateSiteMembershipRequest(personld?: string, siteId?: string, siteMembershipBody?: SiteMembershipRequestBody): Promise<{}>;
     }
 
     // export interface PreferencesApi {
@@ -540,7 +540,7 @@ declare namespace AlfrescoApi {
 
         createDownload(payload: DownloadBodyCreate, opts?: any): Promise<DownloadEntry>;
         getDownload(downloadId: string, opts?: any): Promise<DownloadEntry>;
-        cancelDownload(downloadId: string): Promise<void>;
+        cancelDownload(downloadId: string): Promise<any>;
     }
 
     export interface DownloadBodyCreate {
@@ -1460,134 +1460,1326 @@ declare namespace AlfrescoApi {
 
     //  ======= Search End ======
 
+
+    // ======= Process service Start ======
+
+    export interface AdminEndpointsApi {
+        new(client?: ApiClient): AdminEndpointsApi;
+
+        createBasicAuthConfiguration(createRepresentation?: CreateEndpointBasicAuthRepresentation): Promise<EndpointBasicAuthRepresentation>;
+        createEndpointConfiguration(representation?: EndpointConfigurationRepresentation): Promise<EndpointConfigurationRepresentation>;
+        getBasicAuthConfiguration(basicAuthId?: number, tenantId?: number): Promise<EndpointBasicAuthRepresentation>;
+        getBasicAuthConfigurations(tenantId?: number): Promise<EndpointBasicAuthRepresentation[]>;
+        getEndpointConfiguration(endpointConfigurationId?: number, tenantId?: number): Promise<EndpointConfigurationRepresentation>;
+        getEndpointConfigurations(tenantId?: number): Promise<EndpointConfigurationRepresentation[]>;
+        removeBasicAuthConfiguration(basicAuthId?: number, tenantId?: number): Promise<any>;
+        removeEndpointConfiguration(endpointConfigurationId?: number, tenantId?: number): Promise<any>;
+        updateBasicAuthConfiguration(basicAuthId?: number, createRepresentation?: CreateEndpointBasicAuthRepresentation): Promise<EndpointBasicAuthRepresentation>;
+        updateEndpointConfiguration(endpointConfigurationId?: number, representation?: EndpointConfigurationRepresentation): Promise<EndpointConfigurationRepresentation>;
+    }
+
+    export interface AdminGroupsApi {
+        new(client?: ApiClient): AdminGroupsApi;
+
+        activate(groupId?: number): Promise<any>;
+        addAllUsersToGroup(groupId?: number): Promise<any>;
+        addGroupCapabilities(groupId?: number, addGroupCapabilitiesRepresentation?: AddGroupCapabilitiesRepresentation): Promise<any>;
+        addGroupMember(groupId?: number, userId?: number): Promise<any>;
+        addRelatedGroup(groupId?: number, relatedgroupId?: number, type?: string): Promise<any>;
+        createNewGroup(groupRepresentation?: GroupRepresentation): Promise<GroupRepresentation>;
+        deleteGroupCapability(groupId?: number, groupCapabilityId?: number): Promise<any>;
+        deleteGroupMember(groupId?: number, userId?: number): Promise<any>;
+        deleteGroup(groupId?: number): Promise<any>;
+        deleteRelatedGroup(groupId?: number, relatedgroupId?: number): Promise<any>;
+        getCapabilities(groupId?: number): Promise<String[]>;
+        getGroupUsers(groupId?: number, opts?: {filter?: string, page?: number, pageSize?: number}): Promise<any>;
+        getGroup(groupId?: number, opts?: {includeAllUsers?: boolean, summary?: boolean}): Promise<AbstractGroupRepresentation>;
+        getGroups(opts?: {tenantId?: number, functional?: boolean, summary?: boolean}): Promise<LightGroupRepresentation[]>;
+        getRelatedGroups(groupId?: number): Promise<LightGroupRepresentation[]>;
+        updateGroup(groupId?: number, groupRepresentation?: GroupRepresentation): Promise<GroupRepresentation>;
+    }
+
+    export interface AdminTenantsApi {
+        new(client?: ApiClient): AdminTenantsApi;
+
+        createTenant(createTenantRepresentation?: CreateTenantRepresentation): Promise<LightTenantRepresentation>;
+        deleteTenant(tenantId?: number): Promise<any>;
+        getTenantEvents(tenantId?: number): Promise<TenantEvent[]>;
+        getTenantLogo(tenantId?: number): Promise<any>;
+        getTenant(tenantId?: number): Promise<TenantRepresentation>;
+        getTenants(): Promise<LightTenantRepresentation[]>;
+        update(tenantId?: number, createTenantRepresentation?: CreateTenantRepresentation): Promise<TenantRepresentation>;
+        uploadTenantLogo(tenantId?: number, file?: File): Promise<ImageUploadRepresentation>;
+    }
+
+    export interface AdminUsersApi {
+        new(client?: ApiClient): AdminUsersApi;
+
+        bulkUpdateUsers(update?: BulkUserUpdateRepresentation): Promise<any>;
+        createNewUser(userRepresentation?: UserRepresentation): Promise<UserRepresentation>;
+        getUser(userId?: number, opts?: {summary?: boolean}): Promise<AbstractUserRepresentation>;
+        getUsers(opts?: {filter?: string, status?: string, accountType?: string, sort?: string, company?: string, start?: number, page?: number, size?: number, groupId?: number, tenantId?: number, summary?: boolean}): Promise<any>;
+        updateUserDetails(userId?: number, UserRepresentation?: UserRepresentation): Promise<any>;
+
+    }
+
+    export interface AppsApi {
+        new(client?: ApiClient): AppsApi;
+
+        deployAppDefinitions(saveObject?: RuntimeAppDefinitionSaveRepresentation): Promise<any>;
+        exportAppDefinition(modelId?: number): Promise<any>;
+        getAppDefinitions(): Promise<any>;
+        importAppDefinition(file?: File): Promise<AppDefinitionRepresentation>;
+        publishAppDefinition(modelId?: number, publishModel?: AppDefinitionPublishRepresentation): Promise<AppDefinitionUpdateResultRepresentation>;
+    }
+
+    export interface AlfrescoApi {
+        new(client?: ApiClient): AlfrescoApi;
+
+        confirmAuthorisation(code: string): Promise<any>;
+        getAllNetworks(): Promise<any>;
+        getAllSites(networkId: string): Promise<any>;
+        getContentInFolder(networkId: string, folderId: string): Promise<any>;
+        getContentInSite(networkId: string, siteId: string): Promise<any>;
+        getRepositories(opts: {tenantId: number, includeAccounts: boolean}): Promise<any>;
+    }
+
+    export interface AppsDefinitionApi {
+        new(client?: ApiClient): AppsDefinitionApi;
+
+        exportAppDefinition(modelId?: number): Promise<any>;
+        importAppDefinition(file?: File): Promise<AppDefinitionRepresentation>;
+        importAppDefinition(modelId?: number, file?: File): Promise<AppDefinitionRepresentation>;
+        publishAppDefinition(modelId?: number, publishModel?: AppDefinitionPublishRepresentation): Promise<AppDefinitionUpdateResultRepresentation>;
+    }
+
+    export interface AppsRuntimeApi {
+        new(client?: ApiClient): AppsRuntimeApi;
+
+        deployAppDefinitions(saveObject?: RuntimeAppDefinitionSaveRepresentation): Promise<any>;
+        getAppDefinitions(): Promise<any>;
+    }
+
+    export interface CommentsApi {
+        new(client?: ApiClient): CommentsApi;
+
+        addProcessInstanceComment(commentRequest?: CommentRepresentation, processInstanceId?: string): Promise<CommentRepresentation>;
+        addTaskComment(commentRequest?: CommentRepresentation, taskId?: string): Promise<CommentRepresentation>;
+        getProcessInstanceComments(processInstanceId?: string, opts?: {latestFirst?: boolean}): Promise<any>;
+        getTaskComments(taskId?: string, opts?: {latestFirst?: boolean}): Promise<any>;
+    }
+
+    export interface ContentApi {
+        new(client?: ApiClient): ContentApi;
+
+        createRelatedContentOnProcessInstance(processInstanceId?: string, relatedContent?: RelatedContentRepresentation, opts): Promise<RelatedContentRepresentation>;
+        createRelatedContentOnTask(taskId?: string, relatedContent?: RelatedContentRepresentation, opts?: {isRelatedContent?: boolean}): Promise<RelatedContentRepresentation>;
+        createTemporaryRawRelatedContent(file?: File): Promise<RelatedContentRepresentation>;
+        createTemporaryRelatedContent(relatedContent?: RelatedContentRepresentation): Promise<RelatedContentRepresentation>;
+        deleteContent(contentId?: number): Promise<any>;
+        getContent(contentId?: number): Promise<RelatedContentRepresentation>;
+        getProcessInstanceContent(processInstanceId?: string): Promise<any>;
+        getRawContent(contentId?: number): Promise<any>;
+        getRawContentUrl(contentId?: number): string;
+        getContentThumbnailUrl(contentId?: number): string;
+        getRelatedContentForProcessInstance(processInstanceId?: string, isRelated?: boolean): Promise<any>;
+        getRelatedContentForTask(taskId?: string, isRelated?: Boolean): Promise<any>;
+    }
+
+    export interface EditorApi {
+        new(client?: ApiClient): EditorApi;
+
+        getFormHistory(formId?: number, formHistoryId?: number): Promise<FormRepresentation>;
+        getForm(formId?: number): Promise<FormRepresentation>;
+        getForms(): Promise<FormRepresentation[]>;
+        saveForm(formId?: number, saveRepresentation?: FormSaveRepresentation): Promise<FormRepresentation>;
+        validateModel(formId?: number, saveRepresentation?: FormSaveRepresentation): Promise<ValidationErrorRepresentation[]>;
+    }
+
+    export interface GroupsApi {
+        new(client?: ApiClient): GroupsApi;
+
+        getGroups(opts?: {filter?: string, groupId?: number, externalId?: string, externalIdCaseInsensitive?: string, tenantId?: number}): Promise<any>;
+        getUsersForGroup(groupId?: number): Promise<any>;
+
+    }
+
+    export interface IDMSyncApi {
+        new(client?: ApiClient): IDMSyncApi;
+
+        getLogFile(syncLogEntryId?: number): Promise<any>;
+        getSyncLogEntries(opts?: {tenantId?: number, page?: number, size?: number}): Promise<SyncLogEntryRepresentation[]>;
+    }
+
+    export interface IntegrationAccountApi {
+        new(client?: ApiClient): IntegrationAccountApi;
+
+        getAccounts(): Promise<any>;
+    }
+
+    export interface IntegrationAlfrescoCloudApi {
+        new(client?: ApiClient): IntegrationAlfrescoCloudApi;
+
+        confirmAuthorisation(code?: string): Promise<any>;
+        getAllNetworks(): Promise<any>;
+        getAllSites(networkId?: string): Promise<any>;
+        getContentInFolder(networkId?: string, folderId?: string): Promise<any>;
+        getContentInSite(networkId?: string, siteId?: string): Promise<any>;
+    }
+
+    export interface IntegrationAlfrescoOnPremiseApi {
+        new(client?: ApiClient): IntegrationAlfrescoOnPremiseApi;
+
+        getAllSites(repositoryId?: string): Promise<any>;
+        getContentInFolder(repositoryId?: string, folderId?: string): Promise<any>;
+        getContentInSite(repositoryId?: string, siteId?: string): Promise<any>;
+        getRepositories(opts?: {tenantId?: number, includeAccounts?: boolean}): Promise<any>;
+    }
+
+    export interface IntegrationApi {
+        new(client?: ApiClient): IntegrationApi;
+
+        confirmAuthorisation(code?: string): Promise<any>;
+        createRepositoryAccount(userId?: number, credentials?: UserAccountCredentialsRepresentation): Promise<any>;
+        deleteRepositoryAccount(userId?: number): Promise<any>;
+        getAllNetworks(): Promise<any>;
+        getAllSites(networkId?: string): Promise<any>;
+        getBoxPluginStatus(): Promise<boolean>;
+        getContentInFolder(networkId?: string, folderId?: string): Promise<any>;
+        getContentInSite(networkId?: string, siteId?: string): Promise<any>;
+        getFiles(opts?: {filter?: string, parent?: string}): Promise<any>;
+        getRepositories(opts?: {tenantId?: number, includeAccounts?: boolean}): Promise<any>;
+        getRepositoryAccount(userId?: number): Promise<any>;
+        updateRepositoryAccount(userId?: number, credentials?: UserAccountCredentialsRepresentation): Promise<any>;
+    }
+
+    export interface ModelBpmnApi {
+        new(client?: ApiClient): ModelBpmnApi;
+
+        getHistoricProcessModelBpmn20Xml(processModelId?: number, processModelHistoryId?: number): Promise<any>;
+        getProcessModelBpmn20Xml(processModelId?: number): Promise<any>;
+    }
+
+    export interface ModelJsonBpmnApi {
+        new(client?: ApiClient): ModelJsonBpmnApi;
+
+        getHistoricEditorDisplayisonClient(processModelId?: number, processModelHistoryId?: number): Promise<any>;
+        getEditorDisplayisonClient(processModelId?: number): Promise<any>;
+    }
+
+    export interface ModelsApi {
+        new(client?: ApiClient): ModelsApi;
+
+        createModel(modelRepresentation?: ModelRepresentation): Promise<ModelRepresentation>;
+        deleteModel(modelId?: number, opts?: {cascade?: boolean, deleteRuntimeApp?: boolean}): Promise<any>;
+        duplicateModel(modelId?: number, modelRepresentation?: ModelRepresentation): Promise<ModelRepresentation>;
+        getModelJSON(modelId?: number): Promise<any>;
+        getModelThumbnail(modelId?: number): Promise<String[]>;
+        getModel(modelId?: number, opts?: {includePermissions?: boolean}): Promise<ModelRepresentation>;
+        getModelsToIncludeInAppDefinition(): Promise<any>;
+        getModels(opts?: {filter?: string, sort?: string, modelType?: number, referenceId?: number}): Promise<any>;
+        importNewVersion(modelId?: number, file?: File): Promise<ModelRepresentation>;
+        importProcessModel(file?: File): Promise<ModelRepresentation>;
+        saveModel(modelId?: number, values?: any): Promise<ModelRepresentation>;
+        updateModel(modelId?: number, updatedModel?: ModelRepresentation): Promise<ModelRepresentation>;
+        validateModel(modelId?: number, opts?: {values?: any}): Promise<ValidationErrorRepresentation[]>;
+    }
+
+    export interface ModelsHistoryApi {
+        new(client?: ApiClient): ModelsHistoryApi;
+
+        getModelHistoryCollection(modelId?: number, opts?: {includeLatestVersion?: boolean}): Promise<any>;
+        getProcessModelHistory(modelId?: number, modelHistoryId?: number): Promise<ModelRepresentation>;
+    }
+
+    export interface ProcessApi {
+        new(client?: ApiClient): ProcessApi;
+
+        deleteProcessInstance(processInstanceId?: string): Promise<any>;
+        filterProcessInstances(filterRequest?: ProcessInstanceFilterRequestRepresentation): Promise<any>;
+        getProcessDefinitionStartForm(processDefinitionId?: string): Promise<FormDefinitionRepresentation>;
+        getProcessDefinitions(opts?: {latest?: boolean, appDefinitionId?: number}): Promise<any>;
+        getProcessInstanceContent(processInstanceId?: string): Promise<any>;
+        getProcessInstanceStartForm(processInstanceId?: string): Promise<FormDefinitionRepresentation>;
+        getProcessInstance(processInstanceId?: string): Promise<ProcessInstanceRepresentation>;
+        getProcessInstances(requestNode?: ProcessFilterRequestRepresentation): Promise<any>;
+        getProcessAuditJson(processId?: string): Promise<any>;
+        getProcessAuditPdf(processId?: string): Promise<any>;
+        getRestFieldValues(processDefinitionId?: string, field?: string): Promise<FormValueRepresentation[]>;
+        getRestTableFieldValues(processDefinitionId?: string, field?: string, column?: string): Promise<FormValueRepresentation[]>;
+        startNewProcessInstance(startRequest?: CreateProcessInstanceRepresentation): Promise<ProcessInstanceRepresentation>;
+    }
+
+    export interface ProcessInstancesApi {
+        new(client?: ApiClient): ProcessInstancesApi;
+
+        addProcessInstanceComment(commentRequestModule?: CommentRepresentation, processInstanceId?: string): Promise<CommentRepresentation>;
+        deleteProcessInstance(processInstanceId?: string): Promise<any>;
+        getProcessInstanceComments(processInstanceId?: string, opts?: {latestFirst?: boolean}): Promise<any>;
+        getProcessInstanceStartForm(processInstanceId?: string): Promise<FormDefinitionRepresentation>;
+        getProcessInstance(processInstanceId?: string): Promise<ProcessInstanceRepresentation>;
+    }
+
+    export interface ProcessDefinitionsApi {
+        new(client?: ApiClient): ProcessDefinitionsApi;
+
+        getProcessDefinitions(opts?: {latest?: boolean, appDefinitionId?: number}): Promise<any>;
+    }
+
+    export interface ProcessDefinitionsFormApi {
+        new(client?: ApiClient): ProcessDefinitionsApi;
+
+        getProcessDefinitionStartForm(processDefinitionId?: string): Promise<FormDefinitionRepresentation>;
+        getRestFieldValues(processDefinitionId?: string, field?: string): Promise<FormValueRepresentation[]>;
+        getRestTableFieldValues(processDefinitionId?: string, field?: string, column?: string): Promise<FormValueRepresentation[]>;
+    }
+
+    export interface ProcessInstancesInformationApi {
+        new(client?: ApiClient): ProcessInstancesInformationApi;
+
+        getProcessInstanceContent(processInstanceId?: string): Promise<any>;
+        startNewProcessInstance(startRequest?: CreateProcessInstanceRepresentation): Promise<ProcessInstanceRepresentation>;
+    }
+
+    export interface ProcessInstancesListingApi {
+        new(client?: ApiClient): ProcessInstancesListingApi;
+
+        filterProcessInstances(filterRequest?: ProcessInstanceFilterRequestRepresentation): Promise<any>;
+        getProcessInstances(requestNode?: any): Promise<any>;
+    }
+
+    export interface ProcessInstanceVariablesApi {
+        new(client?: ApiClient): ProcessInstanceVariablesApi;
+
+        getProcessInstanceVariables(processInstanceId?: string): Promise<any>;
+        createProcessInstanceVariables(processInstanceId?: string, restVariables?: RestVariable): Promise<any>;
+        createorUpdateProcessInstanceVariables(processInstanceId?: string, restVariables?: RestVariable): Promise<any>;
+        getProcessInstanceVariable(processInstanceId?: string, variableName?: string): Promise<any>;
+        updateProcessInstanceVariable(processInstanceId?: string, variableName?: string, restVariable?: RestVariable): Promise<any>;
+        deleteProcessInstanceVariable(processInstanceId?: string, variableName?: string): Promise<any>;
+    }
+
+    export interface ProcessScopeApi {
+        new(client?: ApiClient): ProcessScopeApi;
+
+        getRuntimeProcessScopes(processScopesRequest?: ProcessScopesRequestRepresentation): Promise<ProcessScopeRepresentation>;
+    }
+
+    export interface ProfileApi {
+        new(client?: ApiClient): ProfileApi;
+
+        changePassword(changePasswordRepresentation?: ChangePasswordRepresentation): Promise<any>;
+        getProfilePicture(): Promise<any>;
+        getProfilePictureUrl(): string;
+        getProfile(): Promise<UserRepresentation>;
+        updateProfile(userRepresentation?: UserRepresentation): Promise<UserRepresentation>;
+        uploadProfilePicture(file?: File): Promise<ImageUploadRepresentation>;
+    }
+
+    export interface ReportApi {
+        new(client?: ApiClient): ReportApi;
+
+        createDefaultReports(): Promise<any>;
+        getTasksByprocessDefinitionId(reportId, processDefinitionId): Promise<any>;
+        getReportsByParams(reportId, paramsQuery): Promise<any>;
+        getProcessDefinitions(): Promise<any>;
+        getReportParams(reportId): Promise<any>;
+        getReportList(): Promise<any>;
+        updateReport(reportId, name): Promise<any>;
+        exportToCsv(reportId?: string, queryParams?: ReportExportQueryRepresentation): Promise<any>;
+        saveReport(reportId?: string, queryParams?: ReportSaveQueryRepresentation): Promise<any>;
+        deleteReport(reportId?: string): Promise<any>;
+        getTasksByProcessDefinitionId(reportId: string, processDefinitionId: string): Promise<any>
+    }
+
+    export interface ScriptFileApi {
+        new(client?: ApiClient): ScriptFileApi;
+
+        getControllers(): Promise<string>;
+        getLibraries(): Promise<string>;
+    }
+
+    export interface SystemPropertiesApi {
+        new(client?: ApiClient): SystemPropertiesApi;
+
+        getProperties(): Promise<SystemPropertiesRepresentation>;
+    }
+
+    export interface TaskActionsApi {
+        new(client?: ApiClient): TaskActionsApi;
+
+        assignTask(taskId?: string, requestNode?: any): Promise<TaskRepresentation>;
+        attachForm(taskId?: string, requestNode?: any): Promise<any>;
+        claimTask(taskId?: string): Promise<any>;
+        completeTask(taskId?: string): Promise<any>;
+        involveUser(taskId?: string, requestNode?: any): Promise<any>;
+        removeForm(taskId?: string): Promise<any>;
+        removeInvolvedUser(taskId?: string, requestNode?: any): Promise<any>;
+        unclaimTask(taskId?: string): Promise<any>;
+    }
+
+    export interface TaskApi {
+        new(client?: ApiClient): TaskApi;
+
+        addSubtask(taskId?: string, taskRepresentation?: TaskRepresentation): Promise<any>;
+        addTaskComment(commentRequest?: CommentRepresentation, taskId?: string): Promise<any>;
+        assignTask(taskId?: string, requestNode?: any): Promise<any>;
+        attachForm(taskId?: string, requestNode?: any): Promise<any>;
+        claimTask(taskId?: string): Promise<any>;
+        completeTaskForm(taskId?: string, completeTaskFormRepresentation?: CompleteFormRepresentation): Promise<any>;
+        completeTask(taskid?: string): Promise<any>;
+        createNewTask(taskRepresentation?: TaskRepresentation): Promise<any>;
+        createRelatedContentOnTask(taskId?: string, relatedContent?: RelatedContentRepresentation, opts?: {isRelatedContent?: boolean}): Promise<any>;
+        deleteTask(taskId?: string): Promise<any>;
+        filterTasks(requestNode?: TaskFilterRequestRepresentation): Promise<any>;
+        getChecklist(taskId?: string): Promise<any>;
+        getTaskAuditJson(taskId?: string): Promise<any>;
+        getTaskAuditPdf(taskId?: string): Promise<any>;
+        getRelatedContentForTask(taskId?: string): Promise<any>;
+        getRestFieldValuesColumn(taskId?: string, field?: string, column?: string): Promise<any>;
+        getRestFieldValues(taskId?: string, field?: string): Promise<any>;
+        getTaskComments(taskId?: string, opts?: {latestFirst?: boolean}): Promise<any>;
+        getTaskForm(taskId?: string): Promise<any>;
+        getTask(taskId?: string): Promise<any>;
+        involveUser(taskId?: string, requestNode?: any): Promise<any>;
+        listTasks(requestNode?: TaskQueryRequestRepresentation): Promise<any>;
+        orderChecklist(taskId?: String, orderRepresentation?: ChecklistOrderRepresentation): Promise<any>;
+        removeForm(taskId?: String): Promise<any>;
+        removeInvolvedUser(taskId?: String, requestNode?: any): Promise<any>;
+        saveTaskForm(taskId?: String, saveTaskFormRepresentation?: SaveFormRepresentation): Promise<any>;
+        unclaimTask(taskId?: String): Promise<any>;
+        updateTask(taskId?: String, updated?: TaskUpdateRepresentation): Promise<any>;
+    }
+
+    export interface TaskCheckListApi {
+        new(client?: ApiClient): TaskCheckListApi;
+
+        addSubtask(taskId?: string, taskRepresentation?: TaskRepresentation): Promise<TaskRepresentation>;
+        getChecklist(taskid?: string): Promise<any>;
+        orderChecklist(taskId?: string, orderRepresentation?: ChecklistOrderRepresentation): Promise<any>;
+    }
+
+    export interface TaskFormsApi {
+        new(client?: ApiClient): TaskFormsApi;
+
+        completeTaskForm(taskId?: string, completeTaskFormRepresentation?: CompleteFormRepresentation): Promise<any>;
+        getRestFieldValues(taskId?: string, field?: string, column?: string): Promise<FormValueRepresentation[]>;
+        getTaskForm(taskId?: string): Promise<FormDefinitionRepresentation>;
+        getTaskFormVariables(taskId?: string): Promise<FormDefinitionRepresentation>;
+        saveTaskForm(taskId?: string, saveTaskFormRepresentation?: SaveFormRepresentation): Promise<any>;
+    }
+
+    export interface UserApi {
+        new(client?: ApiClient): UserApi;
+
+        executeAction(userId?: number, actionRequest?: UserActionRepresentation): Promise<any>;
+        getProfilePicture(userId?: number): Promise<any>;
+        getUserProfilePictureUrl(userId?: number): string;
+        getUser(userId?: number): Promise<any>;
+        getUsers(opts?: {filter?: String, email?: String, externalId?: String, externalIdCaseInsensitive?: String, excludeTaskId?: String, excludeProcessId?: String, groupId?: number, tenantId?: number}): Promise<any>;
+        requestPasswordReset(resetPassword?: ResetPasswordRepresentation): Promise<any>;
+        updateUser(userId?: number, userRequest?: UserRepresentation): Promise<any>;
+    }
+
+    export interface UserFiltersApi {
+        new(client?: ApiClient): UserFiltersApi;
+
+        createUserProcessInstanceFilter(userProcessInstanceFilterRepresentation?: UserProcessInstanceFilterRepresentation): Promise<UserProcessInstanceFilterRepresentation>;
+        createUserTaskFilter(userTaskFilterRepresentation?: UserTaskFilterRepresentation): Promise<any>;
+        deleteUserProcessInstanceFilter(userFilterId?: number): Promise<any>;
+        deleteUserTaskFilter(userFilterId?: number): Promise<any>;
+        getUserProcessInstanceFilter(userFilterId?: number): Promise<any>;
+        getUserProcesslnstanceFilters(opts?: {appId?: number}): Promise<any>;
+        getUserTaskFilter(userFilterId?: number): Promise<any>;
+        getUserTaskFilters(opts?: {appId?: number}): Promise<any>;
+        orderUserProcessInstanceFilters(filterOrderRepresentation?: UserFilterOrderRepresentation): Promise<any>;
+        orderUserTaskFilters(filterOrderRepresentation?: UserFilterOrderRepresentation): Promise<any>;
+        updateUserProcessInstanceFilter(userFilterId?: number, userProcessInstanceFilterRepresentation?: UserProcessInstanceFilterRepresentation): Promise<UserProcessInstanceFilterRepresentation>;
+        updateUserTaskFilter(userFilterId?: number, userTaskFilterRepresentation?: UserTaskFilterRepresentation): Promise<UserTaskFilterRepresentation>;
+    }
+
+    export interface UsersWorkflowApi {
+        new(client?: ApiClient): UsersWorkflowApi;
+        getUsers(opts?: {filter?: String, email?: String, externalId?: String, externalIdCaseInsensitive?: String, excludeTaskId?: String, excludeProcessId?: String, groupId?: number, tenantId?: number}): Promise<any>;
+    }
+
+    export interface AboutApi {
+        new(client?: ApiClient): AboutApi;
+
+        getAppVersion(): Promise<any>;
+    }
+
+    export interface AbstractGroupRepresentation {
+        externalId?: string;
+        id: number;
+        name: string;
+        status: string;
+    }
+
+    export interface AbstractUserRepresentation {
+        email?: string;
+        firstName?: string;
+        lastName?: string;
+        externalId?: string;
+        id: number;
+        pictureId: string;
+    }
+
+    export interface AddGroupCapabilitiesRepresentation {
+        capabilities?: string[];
+    }
+
+    export interface AppDefinition {
+        icon?: string;
+        models?: AppModelDefinition;
+        publishIdentityInfo?: PublishIdentityInfoRepresentation;
+        theme?: string;
+    }
+
+    export interface AppDefinitionPublishRepresentation {
+        comment?: string;
+        force?: boolean;
+    }
+
+    export interface AppDefinitionRepresentation {
+        defaultAppId?: string;
+        deploymentId?: string;
+        description?: string;
+        icon?: string;
+        id?: number;
+        modelId?: number;
+        name?: string;
+        tenantId?: number;
+        theme?: string;
+    }
+
+    export interface AppDefinitionUpdateResultRepresentation {
+        appDefinition?: AppDefinitionRepresentation;
+        customData?: any;
+        error?: boolean;
+        errorDescription?: string;
+        errorType?: number;
+        message?: string;
+        messageKey?: string;
+    }
+
+    export interface AppModelDefinition {
+        createdBy?: number;
+        createdByFullName?: string;
+        description?: string;
+        id?: number;
+        lastUpdated?: Date;
+        lastUpdatedBy?: number;
+        lastUpdatedByFullName?: string;
+        modelType?: number;
+        name?: string;
+        stencilSetId?: number;
+        version?: number;
+    }
+
+    export interface BulkUserUpdateRepresentation {
+        accountType?: string;
+        password?: string;
+        sendNotifications?: boolean;
+        status?: string;
+        tenantId?: number;
+        users?: number[];
+    }
+
+    export interface ChangePasswordRepresentation {
+        newPassword?: string;
+        oldPassword?: string;
+    }
+
+    export interface Chart {
+        id?: string;
+        type?: string;
+    }
+
+    export interface ChecklistOrderRepresentation {
+        order?: string[];
+    }
+
+    export interface CommentRepresentation {
+        created?: Date;
+        createdBy?: LightUserRepresentation;
+        id?: number;
+        message?: string;
+    }
+
+    export interface CompleteFormRepresentation {
+        outcome?: string;
+        values?: any;
+    }
+
+    export interface ConditionRepresentation {
+        leftFormFieldId?: string;
+        leftRestResponseId?: string;
+        nextConditionOperator?: string;
+        operator?: string;
+        rightFormFieldId?: string;
+        rightRestResponseId?: string;
+        rightType?: string;
+        rightValue?: any;
+    }
+
+    export interface CreateEndpointBasicAuthRepresentation {
+        name?: string;
+        password?: string;
+        tenantId?: number;
+        username?: string;
+    }
+
+    export interface CreateProcessInstanceRepresentation {
+        name?: string;
+        outcome?: string;
+        processDefinitionKey?: string;
+        businessKey?: string;
+        processDefinitionId?: string;
+        variables?: any;
+        values?: any;
+    }
+
+    export interface CreateTenantRepresentation {
+        active?: boolean;
+        domain?: string;
+        maxUsers?: number;
+        name?: string;
+    }
+
+    export interface EndpointBasicAuthRepresentation {
+        created?: Date;
+        id?: number;
+        lastUpdated?: Date;
+        name?: string;
+        tenantId?: number;
+        username?: string;
+    }
+
+    export interface EndpointConfigurationRepresentation {
+        basicAuthId?: number;
+        basicAuthName?: string;
+        host?: string;
+        id?: number;
+        name?: string;
+        path?: string;
+        port?: string;
+        protocol?: string;
+        requestHeaders?: EndpointRequestHeaderRepresentation[];
+        tenantId?: number;
+    }
+
+    export interface EndpointRequestHeaderRepresentation {
+        name?: string;
+        value?: string;
+    }
+
+    export interface EntityAttributeScopeRepresentation {
+        name?: string;
+        type?: string;
+    }
+
+    export interface EntityVariableScopeRepresentation {
+        attributes?: EntityAttributeScopeRepresentation[];
+        entityName?: string;
+        mappedDataModel?: number;
+        mappedVariableName?: string;
+    }
+
+    export interface FormDefinitionRepresentation {
+        className?: string;
+        customFieldTemplates?: any;
+        fields?: FormFieldRepresentation;
+        gridsterForm?: boolean;
+        id?: number;
+        javascriptEvents?: FormJavascriptEventRepresentation;
+        metadata?: any;
+        name?: string;
+        outcomeTarget?: string;
+        outcomes?: FormOutcomeRepresentation[];
+        processDefinitionId?: string;
+        processDefinitionKey?: string;
+        processDefinitionName?: string;
+        selectedOutcome?: string;
+        style?: string;
+        tabs?: FormTabRepresentation[];
+        taskDefinitionKey?: string;
+        taskId?: string;
+        taskName?: string;
+    }
+
+    export interface FormFieldRepresentation {
+        className?: string;
+        col?: number;
+        colspan?: number;
+        hasEmptyValue?: boolean;
+        id?: string;
+        layout?: LayoutRepresentation;
+        maxLength?: number;
+        maxValue?: string;
+        minLength?: number;
+        minValue?: string;
+        name?: string;
+        optionType?: string;
+        options?: OptionRepresentation;
+        overrideId?: boolean;
+        params?: any;
+        placeholder?: string;
+        readOnly?: boolean;
+        regexPattern?: string;
+        required?: boolean;
+        restIdProperty?: string;
+        restLabelProperty?: string;
+        restResponsePath?: string;
+        restUrl?: string;
+        row?: number;
+        sizeX?: number;
+        sizeY?: number;
+        tab?: string;
+        type?: string;
+        value?: any;
+        visibilityCondition?: ConditionRepresentation;
+    }
+
+    export interface FormJavascriptEventRepresentation {
+        event?: string;
+        javascriptLogic?: string;
+    }
+
+    export interface FormOutcomeRepresentation {
+        id?: string;
+        name?: string;
+    }
+
+    export interface FormRepresentation {
+        description?: string;
+        formDefinition?: FormDefinitionRepresentation;
+        id?: number;
+        lastUpdated?: Date;
+        lastUpdatedBy?: number;
+        lastUpdatedByFullName?: string;
+        name?: string;
+        referenceId?: number;
+        stencilSetId?: number;
+        version?: number;
+    }
+
+    export interface FormSaveRepresentation {
+        comment?: string;
+        formImageBase64?: string;
+        formRepresentation?: FormRepresentation;
+        newVersion?: boolean;
+        processScopeIdentifiers?: ProcessScopeIdentifierRepresentation;
+        reusable?: boolean;
+    }
+
+    export interface FormScopeRepresentation {
+        description?: string;
+        fieldVariables?: FormFieldRepresentation[];
+        fields?: FormFieldRepresentation[];
+        id?: number;
+        name?: string;
+        outcomes?: FormOutcomeRepresentation[];
+    }
+
+    export interface FormTabRepresentation {
+        id?: string;
+        title?: string;
+        visibilityCondition?: ConditionRepresentation;
+    }
+
+    export interface FormValueRepresentation {
+        id?: string;
+        name?: string;
+    }
+
+    export interface GroupCapabilityRepresentation {
+        id?: number;
+        name?: string;
+    }
+
+    export interface GroupRepresentation {
+        capabilities?: GroupCapabilityRepresentation[];
+        externalId?: string;
+        groups?: GroupRepresentation[];
+        id?: number;
+        lastSyncTimeStamp?: Date;
+        name?: string;
+        parentGroupId?: number;
+        status?: string;
+        tenantId?: number;
+        type?: number;
+        userCount?: number;
+        users?: UserRepresentation[];
+    }
+
+    export interface ImageUploadRepresentation {
+        created?: Date;
+        id?: number;
+        name?: string;
+        userId?: number;
+    }
+
+    export interface LayoutRepresentation {
+        colspan?: number;
+        column?: number;
+        row?: number;
+    }
+
+    export interface LightAppRepresentation {
+        description?: string;
+        icon?: string;
+        id?: number;
+        name?: string;
+        theme?: string;
+    }
+
+    export interface LightGroupRepresentation {
+        externalId?: string;
+        groups?: LightGroupRepresentation[];
+        id?: number;
+        name?: string;
+        status?: string;
+    }
+
+    export interface LightTenantRepresentation {
+        id?: number;
+        name?: string;
+    }
+
+    export interface ModelRepresentation {
+        comment?: string;
+        createdBy?: number;
+        createdByFullName?: string;
+        description?: string;
+        favorite?: boolean;
+        id?: number;
+        lastUpdated?: Date;
+        lastUpdatedBy?: number;
+        lastUpdatedByFullName?: string;
+        latestVersion?: boolean;
+        modelType?: number;
+        name?: string;
+        permission?: string;
+        referenceId?: number;
+        stencilSet?: number;
+        version?: number;
+    }
+
+    export interface OptionRepresentation {
+        id?: string;
+        name?: string;
+    }
+
+    export interface ParameterValueRepresentation {
+        id?: string;
+        name?: string;
+        version?: string;
+        value?: string;
+    }
+
+    export interface ProcessFilterRequestRepresentation {
+        processDefinitionId?: number;
+        appDefinitionId?: number;
+        state?: string;
+        sort?: string;
+        page?: number;
+        size?: number;
+    }
+
+    export interface ProcessInstanceAuditRepresentation {
+        processInstanceId?: number;
+        processInstanceName?: string;
+        processDefinitionName?: string;
+        processDefinitionVersion?: string;
+        processInstanceStartTime?: Date;
+        processInstanceEndTime?: Date;
+        processInstanceInitiator?: string;
+        entries?: any;
+        decisionInfo?: any;
+    }
+
+    export interface ProcessInstanceFilterRepresentation {
+        asc?: boolean;
+        name?: string;
+        processDefinitionId?: string;
+        processDefinitionKey?: string;
+        sort?: string;
+        state?: string;
+    }
+
+    export interface ProcessInstanceFilterRequestRepresentation {
+        appDefinitionId?: number;
+        filter?: ProcessInstanceFilterRepresentation;
+        filterId?: number;
+        page?: number;
+        size?: number;
+    }
+
+    export interface ProcessInstanceRepresentation {
+        businessKey?: string;
+        ended?: Date;
+        graphicalNotationDefined?: boolean;
+        id?: string;
+        name?: string;
+        processDefinitionCategory?: string;
+        processDefinitionDeploymentId?: string;
+        processDefinitionDescription?: string;
+        processDefinitionId?: string;
+        processDefinitionKey?: string;
+        processDefinitionName?: string;
+        processDefinitionVersion?: number;
+        startFormDefined?: boolean;
+        started?: Date;
+        startedBy?: LightUserRepresentation;
+        tenantId?: string;
+        variables?: RestVariable[];
+    }
+
+    export interface ProcessInstanceVariableRepresentation {
+        id?: string;
+        type?: string;
+        value?: any;
+    }
+
+    export interface ProcessScopeIdentifierRepresentation {
+        processActivityId?: string;
+        processModelId?: number;
+    }
+
+    export interface ProcessScopeRepresentation {
+        activityIds?: string[];
+        activityIdsByCollapsedSubProcessIdMap?: any;
+        activityIdsByDecisionTableIdMap?: any;
+        activityIdsByFormIdMap?: any;
+        activityIdsWithExcludedSubProcess?: any;
+        customStencilVariables?: any;
+        entityVariables?: any;
+        executionVariables?: any;
+        fieldToVariableMappings?: any;
+        forms?: FormScopeRepresentation[];
+        metadataVariables?: any;
+        modelId?: number;
+        modelId?: number;
+        processModelType?: number;
+        responseVariables?: any;
+    }
+
+    export interface ProcessScopesRequestRepresentation {
+        identifiers?: ProcessScopeIdentifierRepresentation[];
+        overriddenModel?: string;
+    }
+
+    export interface PublishIdentityInfoRepresentation {
+        group?: LightGroupRepresentation;
+        person?: LightUserRepresentation;
+        type?: string;
+    }
+
+    export interface RelatedContentRepresentation {
+        contentAvailable?: boolean;
+        created?: Date;
+        createdBy?: LightUserRepresentation;
+        id?: number;
+        link?: boolean;
+        linkUrl?: string;
+        mimeType?: string;
+        name?: string;
+        previewStatus?: string;
+        simpleType?: string;
+        source?: string;
+        sourceId?: string;
+        thumbnailStatus?: string;
+    }
+
+    export interface ReportCharts {
+        elements?: string;
+    }
+
+    export interface ReportExportQueryRepresentation {
+        processDefinitionId?: string;
+        reportName?: string;
+        slowProcessInstanceInteger?: number;
+        status?: string;
+        created?: string;
+        typeFiltering?: string;
+        duration?: string;
+        taskName?: string;
+        dateRangeInterval?: string;
+        dateRange?: ReportDateRangeRepresentation;
+    }
+
+    export interface ReportParametersDefinition {
+        id?: number;
+        name?: string;
+        definition?: string;
+        created?: string;
+    }
+
+    export interface ReportSaveQueryRepresentation {
+        processDefinitionId?: string;
+        reportName?: string;
+        slowProcessInstanceInteger?: number;
+        status?: string;
+        created?: string;
+        typeFiltering?: string;
+        duration?: string;
+        taskName?: string;
+        dateRangeInterval?: string;
+        dateRange?: ReportDateRangeRepresentation;
+    }
+
+    export interface ResetPasswordRepresentation {
+        email?: string;
+    }
+
+    export interface ResultListDataRepresentation {
+        data?: any[];
+        size?: number;
+        start?: number;
+        total?: number;
+    }
+
+    export interface RuntimeAppDefinitionSaveRepresentation {
+        appDefinitions?: AppDefinitionRepresentation[];
+    }
+
+    export interface SaveFormRepresentation {
+        values?: any;
+    }
+
+    export interface SyncLogEntryRepresentation {
+        id?: number;
+        timeStamp?: Date;
+        type?: string;
+    }
+
+    export interface SystemPropertiesRepresentation {
+        allowInvolveByEmail?: boolean;
+    }
+
+    export interface TaskAuditRepresentation {
+        taskId?: string;
+        taskName?: string;
+        processDefinitionId?: string;
+        processDefinitionName?: string;
+        processDefinitionVersion?: number;
+        assignee?: string;
+        startTime?: string;
+        endTime?: string;
+        formData?: string;
+        selectedOutcome?: string;
+        comments?: string;
+    }
+
+    export interface TaskFilterRepresentation {
+        asc?: boolean;
+        assignment?: string;
+        dueAfter?: Date;
+        dueBefore?: Date;
+        name?: string;
+        processDefinitionId?: string;
+        processDefinitionKey?: string;
+        sort?: string;
+        state?: string;
+    }
+
+    export interface TaskFilterRequestRepresentation {
+        appDefinitionId?: number;
+        filter?: TaskFilterRepresentation;
+        filterId?: number;
+        page?: number;
+        size?: number;
+    }
+
+    export interface TaskQueryRequestRepresentation {
+        processInstanceId?: number;
+        text?: string;
+        assignment?: string;
+        state?: string;
+        sort?: string;
+        page?: number;
+        size?: number;
+    }
+
+    export interface TaskRepresentation {
+        adhocTaskCanBeReassigned?: boolean;
+        assignee?: LightUserRepresentation;
+        category?: string;
+        created?: Date;
+        description?: string;
+        dueDate?: Date;
+        duration?: number;
+        endDate?: Date;
+        formKey?: string;
+        id?: string;
+        initiatorCanCompleteTask?: boolean;
+        involvedPeople?: LightUserRepresentation[];
+        memberOfCandidateGroup?: boolean;
+        memberOfCandidateUsers?: boolean;
+        name?: string;
+        parentTaskId?: string;
+        parentTaskName?: string;
+        priority?: number;
+        processDefinitionCategory?: string;
+        processDefinitionDeploymentId?: string;
+        processDefinitionDescription?: string;
+        processDefinitionId?: string;
+        processDefinitionKey?: string;
+        processDefinitionName?: string;
+        processDefinitionVersion?: number;
+        processInstanceId?: string;
+        processInstanceName?: string;
+        processInstanceStartUserId?: string;
+    }
+
+    export interface TaskUpdateRepresentation {
+        description?: string;
+        descriptionSet?: boolean;
+        dueDate?: Date;
+        dueDateSet?: boolean;
+        name?: string;
+        nameSet?: boolean;
+    }
+
+    export interface TenantEvent {
+        eventTime?: Date;
+        eventType?: string;
+        extraInfo?: string;
+        id?: number;
+        tenantId?: number;
+        userId?: number;
+        userName?: string;
+    }
+
+    export interface TenantRepresentation {
+        active?: boolean;
+        created?: Date;
+        domain?: string;
+        id?: number;
+        lastUpdate?: Date;
+        logoId?: number;
+        maxUsers?: number;
+        name?: string;
+    }
+
+    export interface UserAccountCredentialsRepresentation {
+        password?: string;
+        username?: string;
+    }
+
+    export interface UserActionRepresentation {
+        action?: string;
+        newPassword?: string;
+        oldPassword?: string;
+    }
+
+    export interface UserFilterOrderRepresentation {
+        appId?: number;
+        order?: number[];
+    }
+
+    export interface UserProcessInstanceFilterRepresentation {
+        appId?: number;
+        filter?: ProcessInstanceFilterRepresentation;
+        icon?: number;
+        id?: number;
+        index?: number;
+        name?: string;
+        recent?: boolean;
+    }
+
+    export interface UserRepresentation {
+        apps?: LightAppRepresentation[];
+        capabilities?: string[];
+        company?: string;
+        created?: Date;
+        email?: string;
+        externalId?: string;
+        firstName?: string;
+        fullname?: string;
+        groups?: GroupRepresentation[];
+        lastName?: string;
+        lastUpdate?: Date;
+        latestSyncTimeStamp?: Date;
+        password?: string;
+        pictureId?: number;
+        status?: string;
+        tenantId?: number;
+        tenantPictureId?: number;
+        tenantName?: string;
+        type?: string;
+    }
+
+    export interface UserTaskFilterRepresentation {
+        appId?: number;
+        filter?: TaskFilterRepresentation;
+        icon?: string;
+        id?: number;
+        index?: number;
+        name?: number;
+        recent?: boolean;
+    }
+
+    export interface ValidationErrorRepresentation {
+        defaultDescription?: string;
+        id?: string;
+        name?: string;
+        problem?: string;
+        problemReference?: string;
+        validatorSetName?: string;
+        warning?: boolean;
+    }
+
+    export interface VariableScopeRepresentation {
+        mapVariable?: string;
+        mappedColumn?: string;
+        mappedDataModel?: number;
+        mappedEntity?: string;
+        mappedVariableName?: string;
+        processVariableName?: string;
+        processVariableType?: string;
+    }
+
+    export interface ReportDateRangeRepresentation {
+        endDate?: string;
+        rangeId?: number;
+        startDate?: string;
+    }
+
+    export interface LightUserRepresentation {
+        email?: string;
+        externalId?: string;
+        firstName?: string;
+        id?: number;
+        lastName?: string;
+        pictureId?: number;
+    }
+
+    //  ======= Process service  End ======
+
     export interface Activiti {
         new(config: any): Activiti;
-        aboutApi: any;
-        adminEndpointsApi: any;
-        adminGroupsApi: any;
-        adminTenantsApi: any;
-        adminUsersApi: any;
-        alfrescoApi: any;
-        appsApi: any;
-        appsDefinitionApi: any;
-        appsRuntimeApi: any;
-        commentsApi: any;
-        contentApi: any;
+        aboutApi: AboutApi;
+        AlfrescoApi: AlfrescoApi;
+        adminEndpointsApi: AdminEndpointsApi;
+        adminGroupsApi: AdminGroupsApi;
+        adminTenantsApi: AdminTenantsApi;
+        adminUsersApi: AdminUsersApi;
+        alfrescoApi: AlfrescoApi;
+        appsApi: AppsApi;
+        appsDefinitionApi: AppsDefinitionApi;
+        appsRuntimeApi: AppsRuntimeApi;
+        commentsApi: CommentsApi;
+        contentApi: ContentApi;
         contentRenditionApi: any;
-        editorApi: any;
-        groupsApi: any;
-        iDMSyncApi: any;
-        integrationAccountApi: any;
-        integrationAlfrescoCloudApi: any;
-        integrationAlfrescoOnPremiseApi: any;
-        integrationApi: any;
+        editorApi: EditorApi;
+        groupsApi: GroupsApi;
+        iDMSyncApi: IDMSyncApi;
+        integrationAccountApi: IntegrationAccountApi;
+        integrationAlfrescoCloudApi: IntegrationAlfrescoCloudApi;
+        integrationAlfrescoOnPremiseApi: IntegrationAlfrescoOnPremiseApi;
+        integrationApi: IntegrationApi;
         integrationBoxApi: any;
         integrationDriveApi: any;
-        modelJsonBpmnApi: any;
-        modelBpmnApi: any;
-        modelsApi: any;
-        modelsHistoryApi: any;
-        processApi: any;
-        processDefinitionsApi: any;
-        processDefinitionsFormApi: any;
-        processInstancesApi: any;
-        processInstancesInformationApi: any;
-        processInstancesListingApi: any;
-        processScopeApi: any;
-        processInstanceVariablesApi: any;
-        profileApi: any;
-        scriptFileApi: any;
-        systemPropertiesApi: any;
-        taskActionsApi: any;
-        taskApi: any;
-        taskCheckListApi: any;
-        taskFormsApi: any;
+        modelJsonBpmnApi: ModelJsonBpmnApi;
+        modelBpmnApi: ModelBpmnApi;
+        modelsApi: ModelsApi;
+        modelsHistoryApi: ModelsHistoryApi;
+        processApi: ProcessApi;
+        processDefinitionsApi: ProcessDefinitionsApi;
+        processDefinitionsFormApi: ProcessDefinitionsFormApi;
+        processInstancesApi: ProcessInstancesApi;
+        processInstancesInformationApi: ProcessInstancesInformationApi;
+        processInstancesListingApi: ProcessInstancesListingApi;
+        processScopeApi: ProcessScopeApi;
+        processInstanceVariablesApi: ProcessInstanceVariablesApi;
+        profileApi: ProfileApi;
+        scriptFileApi: ScriptFileApi;
+        systemPropertiesApi: SystemPropertiesApi;
+        taskActionsApi: TaskActionsApi;
+        taskApi: TaskApi;
+        taskCheckListApi: TaskCheckListApi;
+        taskFormsApi: TaskFormsApi;
         temporaryApi: any;
-        userApi: any;
-        userFiltersApi: any;
-        usersWorkflowApi: any;
-        reportApi: any;
+        userApi: UserApi;
+        userFiltersApi: UserFiltersApi;
+        usersWorkflowApi: UsersWorkflowApi;
+        reportApi: ReportApi;
 
         /*Models*/
-        AbstractGroupRepresentation: any;
-        AbstractRepresentation: any;
-        AbstractUserRepresentation: any;
-        AddGroupCapabilitiesRepresentation: any;
-        AppDefinition: any;
-        AppDefinitionPublishRepresentation: any;
-        AppDefinitionRepresentation: any;
-        AppDefinitionUpdateResultRepresentation: any;
-        AppModelDefinition: any;
-        ArrayNode: any;
+        AbstractGroupRepresentation: AbstractGroupRepresentation;
+        AbstractUserRepresentation: AbstractUserRepresentation;
+        AddGroupCapabilitiesRepresentation: AddGroupCapabilitiesRepresentation;
+        AppDefinition: AppDefinition;
+        AppDefinitionPublishRepresentation: AppDefinitionPublishRepresentation;
+        AppDefinitionRepresentation: AppDefinitionRepresentation;
+        AppDefinitionUpdateResultRepresentation: AppDefinitionUpdateResultRepresentation;
+        AppModelDefinition: AppModelDefinition;
         BoxUserAccountCredentialsRepresentation: any;
-        BulkUserUpdateRepresentation: any;
-        ChangePasswordRepresentation: any;
-        ChecklistOrderRepresentation: any;
-        CommentRepresentation: any;
-        CompleteFormRepresentation: any;
-        ConditionRepresentation: any;
-        CreateEndpointBasicAuthRepresentation: any;
-        CreateProcessInstanceRepresentation: any;
-        CreateTenantRepresentation: any;
-        EndpointBasicAuthRepresentation: any;
-        EndpointConfigurationRepresentation: any;
-        EndpointRequestHeaderRepresentation: any;
-        EntityAttributeScopeRepresentation: any;
-        EntityVariableScopeRepresentation: any;
-        File: any;
-        FormDefinitionRepresentation: any;
-        FormFieldRepresentation: any;
-        FormJavascriptEventRepresentation: any;
-        FormOutcomeRepresentation: any;
-        FormRepresentation: any;
-        FormSaveRepresentation: any;
-        FormScopeRepresentation: any;
-        FormTabRepresentation: any;
-        FormValueRepresentation: any;
-        GroupCapabilityRepresentation: any;
-        GroupRepresentation: any;
-        ImageUploadRepresentation: any;
-        LayoutRepresentation: any;
-        LightAppRepresentation: any;
-        LightGroupRepresentation: any;
-        LightTenantRepresentation: any;
-        LightUserRepresentation: any;
-        MaplongListstring: any;
-        MapstringListEntityVariableScopeRepresentation: any;
-        MapstringListVariableScopeRepresentation: any;
-        Mapstringstring: any;
-        ModelRepresentation: any;
-        ObjectNode: any;
-        OptionRepresentation: any;
-        ProcessInstanceFilterRepresentation: any;
-        ProcessInstanceFilterRequestRepresentation: any;
-        ProcessInstanceRepresentation: any;
-        ProcessScopeIdentifierRepresentation: any;
-        ProcessScopeRepresentation: any;
-        ProcessScopesRequestRepresentation: any;
-        PublishIdentityInfoRepresentation: any;
-        RelatedContentRepresentation: any;
-        ResetPasswordRepresentatio: any;
+        BulkUserUpdateRepresentation: BulkUserUpdateRepresentation;
+        ChangePasswordRepresentation: ChangePasswordRepresentation;
+        ChecklistOrderRepresentation: ChecklistOrderRepresentation;
+        CommentRepresentation: CommentRepresentation;
+        CompleteFormRepresentation: CompleteFormRepresentation;
+        ConditionRepresentation: ConditionRepresentation;
+        CreateEndpointBasicAuthRepresentation: CreateEndpointBasicAuthRepresentation;
+        CreateProcessInstanceRepresentation: CreateProcessInstanceRepresentation;
+        CreateTenantRepresentation: CreateTenantRepresentation;
+        EndpointBasicAuthRepresentation: EndpointBasicAuthRepresentation;
+        EndpointConfigurationRepresentation: EndpointConfigurationRepresentation;
+        EndpointRequestHeaderRepresentation: EndpointRequestHeaderRepresentation;
+        EntityAttributeScopeRepresentation: EntityAttributeScopeRepresentation;
+        EntityVariableScopeRepresentation: EntityVariableScopeRepresentation;
+        File: File;
+        FormDefinitionRepresentation: FormDefinitionRepresentation;
+        FormFieldRepresentation: FormFieldRepresentation;
+        FormJavascriptEventRepresentation: FormJavascriptEventRepresentation;
+        FormOutcomeRepresentation: FormOutcomeRepresentation;
+        FormRepresentation: FormRepresentation;
+        FormSaveRepresentation: FormSaveRepresentation;
+        FormScopeRepresentation: FormScopeRepresentation;
+        FormTabRepresentation: FormTabRepresentation;
+        FormValueRepresentation: FormValueRepresentation;
+        GroupCapabilityRepresentation: GroupCapabilityRepresentation;
+        GroupRepresentation: GroupRepresentation;
+        ImageUploadRepresentation: ImageUploadRepresentation;
+        LayoutRepresentation: LayoutRepresentation;
+        LightAppRepresentation: LightAppRepresentation;
+        LightGroupRepresentation: LightGroupRepresentation;
+        LightTenantRepresentation: LightTenantRepresentation;
+        LightUserRepresentation: LightUserRepresentation;
+        ModelRepresentation: ModelRepresentation;
+        OptionRepresentation: OptionRepresentation;
+        ProcessInstanceFilterRepresentation: ProcessInstanceFilterRepresentation;
+        ProcessInstanceFilterRequestRepresentation: ProcessInstanceFilterRequestRepresentation;
+        ProcessInstanceRepresentation: ProcessInstanceRepresentation;
+        ProcessScopeIdentifierRepresentation: ProcessScopeIdentifierRepresentation;
+        ProcessScopeRepresentation: ProcessScopeRepresentation;
+        ProcessScopesRequestRepresentation: ProcessScopesRequestRepresentation;
+        PublishIdentityInfoRepresentation: PublishIdentityInfoRepresentation;
+        RelatedContentRepresentation: RelatedContentRepresentation;
+        ResetPasswordRepresentation: ResetPasswordRepresentation;
         RestVariable: RestVariable;
-        ResultListDataRepresentation: any;
-        RuntimeAppDefinitionSaveRepresentation: any;
-        SaveFormRepresentation: any;
-        SyncLogEntryRepresentation: any;
-        SystemPropertiesRepresentation: any;
-        TaskFilterRepresentation: any;
-        TaskFilterRequestRepresentation: any;
-        TaskRepresentation: any;
-        TaskUpdateRepresentation: any;
-        TenantEvent: any;
-        TenantRepresentation: any;
-        UserAccountCredentialsRepresentation: any;
-        UserActionRepresentation: any;
-        UserFilterOrderRepresentation: any;
-        UserProcessInstanceFilterRepresentation: any;
-        UserRepresentation: any;
-        UserTaskFilterRepresentation: any;
-        ValidationErrorRepresentation: any;
-        VariableScopeRepresentation: any;
+        ResultListDataRepresentation: ResultListDataRepresentation;
+        RuntimeAppDefinitionSaveRepresentation: RuntimeAppDefinitionSaveRepresentation;
+        SaveFormRepresentation: SaveFormRepresentation;
+        SyncLogEntryRepresentation: SyncLogEntryRepresentation;
+        SystemPropertiesRepresentation: SystemPropertiesRepresentation;
+        TaskFilterRepresentation: TaskFilterRepresentation;
+        TaskFilterRequestRepresentation: TaskFilterRequestRepresentation;
+        TaskRepresentation: TaskRepresentation;
+        TaskUpdateRepresentation: TaskUpdateRepresentation;
+        TenantEvent: TenantEvent;
+        TenantRepresentation: TenantRepresentation;
+        UserAccountCredentialsRepresentation: UserAccountCredentialsRepresentation;
+        UserActionRepresentation: UserActionRepresentation;
+        UserFilterOrderRepresentation: UserFilterOrderRepresentation;
+        UserProcessInstanceFilterRepresentation: UserProcessInstanceFilterRepresentation;
+        UserRepresentation: UserRepresentation;
+        UserTaskFilterRepresentation: UserTaskFilterRepresentation;
+        ValidationErrorRepresentation: ValidationErrorRepresentation;
+        VariableScopeRepresentation: VariableScopeRepresentation;
     }
 
     export interface Core {
@@ -1810,7 +3002,6 @@ declare namespace AlfrescoApi {
         secret?: string;
         host?: string;
     }
-
 }
 
 export = AlfrescoApi;
