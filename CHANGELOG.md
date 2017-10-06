@@ -3,9 +3,9 @@
 </p>
 
 # Alfresco JS API
-<a name="1.8.0"></a>
+<a name="1.9.0"></a>
 
-# [1.9.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.9.0) (xx-xx-2017)
+# [1.9.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.9.0) (09-10-2017)
 
 ## Fix
 
