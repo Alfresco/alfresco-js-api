@@ -3,7 +3,25 @@
 </p>
 
 # Alfresco JS API
-<a name="1.9.0"></a>
+
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.0.0) (28-11-2017)
+
+## Features
+- [Missing Create a person API call](https://issues.alfresco.com/jira/browse/ADF-282)
+- [Versions (partial) end points](https://issues.alfresco.com/jira/browse/ADF-1589)
+
+## Fix
+- [Many validation errors for "index.d.ts" of alfresco-js-api](https://issues.alfresco.com/jira/browse/ADF-1678)
+- [APS ContentApi is not present on index.d.ts](https://issues.alfresco.com/jira/browse/ADF-245)
+- [getFileContent response returns empty object when it's a PDF file (JPG files works fine) ](https://issues.alfresco.com/jira/browse/ADF-271)
+- [Fix the Github markdown for README.md](https://issues.alfresco.com/jira/browse/ADF-279)
+- [PeopleApi - getSiteMembership wrong returned type](https://issues.alfresco.com/jira/browse/ADF-1829)
+- [Update superagent to 3.7.0 ](https://issues.alfresco.com/jira/browse/ADF-1833)
+- [NodesApi.getNodeChildren has wrong return type](https://issues.alfresco.com/jira/browse/ADF-1860)
+- [diagrams.service.ts is not using the alfresco-js-api](https://issues.alfresco.com/jira/browse/ADF-1800)
+- [getContentThumbnailUrl returns file data instead or URL](https://issues.alfresco.com/jira/browse/ADF-1962)
+- [ContentApi is missing the preview rendition API](https://issues.alfresco.com/jira/browse/ADF-1963)
 
 # [1.9.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.9.0) (09-10-2017)
 
@@ -12,13 +30,7 @@
 - [Wrong StatusEnum implementation for Rendition](https://issues.alfresco.com/jira/browse/ADF-1535)
 - [APS task form remains disabled when no custom outcome is provided in ADF 1.8.0](https://issues.alfresco.com/jira/browse/ADF-1523)
 
-# [1.9.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.9.0) (xx-xx-2017)
-
-## Fix
-
-- [Wrong StatusEnum implementation for Rendition](https://issues.alfresco.com/jira/browse/ADF-1535)
-- [APS task form remains disabled when no custom outcome is provided in ADF 1.8.0](https://issues.alfresco.com/jira/browse/ADF-1523)
-
+<a name="1.8.0"></a>
 # [1.8.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.8.0) (05-09-2017)
 
 ## Features
