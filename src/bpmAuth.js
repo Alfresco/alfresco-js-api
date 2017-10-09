@@ -11,7 +11,8 @@ class BpmAuth extends AlfrescoApiClient {
     constructor(config) {
         super();
 
-        this.username = '';
+        this.username = this.loadUsername();
+
         this.config = config;
         this.ticket = undefined;
 
@@ -35,6 +36,27 @@ class BpmAuth extends AlfrescoApiClient {
 
     changeCsrfConfig(disableCsrf) {
         this.config.disableCsrf = disableCsrf;
+    }
+
+    supportsLocalStorage() {
+        try {
+            return 'localStorage' in window && window.localStorage !== null;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    loadUsername() {
+        if (this.supportsLocalStorage()) {
+            return localStorage.getItem('ACS_USERNAME');
+        }
+        return '';
+    }
+
+    saveUsername(value) {
+        if (this.supportsLocalStorage()) {
+            localStorage.setItem('ACS_USERNAME', value);
+        }
     }
 
     /**
@@ -73,12 +95,14 @@ class BpmAuth extends AlfrescoApiClient {
                 authNames, contentTypes, accepts
             ).then(
                 (data) => {
+                    this.saveUsername(username);
                     var ticket = 'Basic ' + new Buffer(this.authentications.basicAuth.username + ':' + this.authentications.basicAuth.password).toString('base64');
                     this.setTicket(ticket);
                     this.promise.emit('success');
                     resolve(ticket);
                 },
                 (error) => {
+                    this.saveUsername('');
                     if (error.status === 401) {
                         this.promise.emit('unauthorized');
                     } else if (error.status === 403) {
@@ -102,6 +126,7 @@ class BpmAuth extends AlfrescoApiClient {
      * */
     logout() {
         this.username = '';
+        this.saveUsername('');
         var postBody = {}, pathParams = {}, queryParams = {}, headerParams = {}, formParams = {};
 
         var authNames = [];

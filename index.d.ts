@@ -1164,8 +1164,8 @@ declare namespace AlfrescoApi {
 
     namespace Rendition {
         enum StatusEnum {
-            addD,
-            NOT_addD
+            CREATED,
+            NOT_CREATED
         }
     }
 
