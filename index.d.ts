@@ -1,6 +1,6 @@
 declare class AlfrescoApi {
 
-    constructor(config: AlfrescoApiConfig): AlfrescoApi;
+    constructor(config: AlfrescoApi.AlfrescoApiConfig);
 
     changeEcmHost(ecmHost: string): void;
 
@@ -26,33 +26,31 @@ declare class AlfrescoApi {
 
     setTicket(ticketEcm: any, ticketBpm: any): void;
 
-    config: AlfrescoApiConfig;
+    config: AlfrescoApi.AlfrescoApiConfig;
 
-    Activiti: Activiti;
-    Auth: Auth;
-    Core: Core;
-    Discovery: Discovery;
+    Activiti: AlfrescoApi.Activiti;
+    Auth: AlfrescoApi.Auth;
+    Core: AlfrescoApi.Core;
+    Discovery: AlfrescoApi.Discovery;
 
-    bpmAuth: BpmAuthApi;
-    ecmAuth: EcmAuthApi;
-    oauth2Auth: OauthApi;
+    bpmAuth: AlfrescoApi.BpmAuthApi;
+    ecmAuth: AlfrescoApi.EcmAuthApi;
+    oauth2Auth: AlfrescoApi.OauthApi;
 
-    activiti: Activiti;
-    core: Core;
-    discovery: Discovery;
-    upload: AlfrescoUpload;
-
+    activiti: AlfrescoApi.Activiti;
+    core: AlfrescoApi.Core;
+    discovery: AlfrescoApi.Discovery;
 
     search: any;
-    nodes: NodesApi;
-    content: ContentApi;
-    upload: UploadApi;
-    webScript: WebscriptApi;
+    nodes: AlfrescoApi.NodesApi;
+    content: AlfrescoApi.ContentApi;
+    upload: AlfrescoApi.UploadApi;
+    webScript: AlfrescoApi.WebscriptApi;
 
-    ecmClient: EcmClient;
-    bpmClient: BpmClient;
-    searchClient: SearchClient;
-    ecmPrivateClient: EcmPrivateClient;
+    ecmClient: AlfrescoApi.EcmClient;
+    bpmClient: AlfrescoApi.BpmClient;
+    searchClient: AlfrescoApi.SearchClient;
+    ecmPrivateClient: AlfrescoApi.EcmPrivateClient;
 
 }
 
@@ -155,31 +153,13 @@ declare namespace AlfrescoApi {
         nodeRef: string;
     }
 
-    export interface NodePaging {
-        list: NodePagingList;
-    }
-
     export interface DeletedNodesPaging {
         list: DeletedNodesPagingList;
-    }
-
-    export interface NodePagingList {
-        pagination: Pagination;
-        entries: MinimalNodeEntity[];
-        source?: Source;
     }
 
     export interface DeletedNodesPagingList {
         pagination: Pagination;
         entries: DeletedNodeEntity[];
-    }
-
-    export interface Pagination {
-        count: number;
-        hasMoreItems: boolean;
-        totalItems: number;
-        skipCount: number;
-        maxItems: number;
     }
 
     export interface Source {
@@ -197,11 +177,11 @@ declare namespace AlfrescoApi {
     }
 
     export interface MinimalNodeEntity {
-        entry: MinimalNodeEntryEntity;
+        entry?: MinimalNodeEntryEntity;
     }
 
     export interface DeletedNodeEntity {
-        entry: DeletedNodeMinimalEntry;
+        entry?: DeletedNodeMinimalEntry;
     }
 
     export interface Node {
@@ -223,22 +203,11 @@ declare namespace AlfrescoApi {
         allowableOperations?: Array<string>;
         path?: PathInfo;
         permissions?: PermissionsInfo;
+        createdAt?: Date;
+        createdByUser?: UserInfo;
     }
 
     export interface MinimalNode extends Node {
-        id: string;
-        parentId: string;
-        name: string;
-        nodeType: string;
-        isFolder: boolean;
-        isFile: boolean;
-        modifiedAt: Date;
-        modifiedByUser: UserInfo;
-        createdAt: Date;
-        createdByUser: UserInfo;
-        content: ContentInfo;
-        path: PathInfoEntity;
-        properties: NodeProperties;
     }
 
     export interface EcmClient {
@@ -275,18 +244,6 @@ declare namespace AlfrescoApi {
     export interface DeletedNodeMinimalEntry extends MinimalNode {
         archivedAt: Date;
         archivedByUser: UserInfo;
-    }
-
-    export interface UserInfo {
-        displayName: string;
-        id: string;
-    }
-
-    export interface ContentInfo {
-        mimeType: string;
-        mimeTypeName: string;
-        sizeInBytes: number;
-        encoding: string;
     }
 
     export interface PathInfoEntity {
@@ -358,15 +315,6 @@ declare namespace AlfrescoApi {
 
     export interface Error {
         error?: ErrorError;
-    }
-
-    export interface ErrorError {
-        errorKey?: string;
-        briefSummary: string;
-        descriptionURL: string;
-        logId?: string;
-        stackTrace: string;
-        statusCode: number;
     }
 
     export interface LicenseInfo {
