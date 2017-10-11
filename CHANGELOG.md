@@ -3,7 +3,12 @@
 </p>
 
 # Alfresco JS API
-<a name="1.9.0"></a>
+
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.0.0) (xx-xx-2017)
+
+## Fix
+- [Many validation errors for "index.d.ts" of alfresco-js-api](https://issues.alfresco.com/jira/browse/ADF-1678)
 
 # [1.9.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.9.0) (09-10-2017)
 
@@ -12,6 +17,7 @@
 - [Wrong StatusEnum implementation for Rendition](https://issues.alfresco.com/jira/browse/ADF-1535)
 - [APS task form remains disabled when no custom outcome is provided in ADF 1.8.0](https://issues.alfresco.com/jira/browse/ADF-1523)
 
+<a name="1.8.0"></a>
 # [1.8.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.8.0) (05-09-2017)
 
 ## Features
