@@ -104,11 +104,15 @@ declare namespace AlfrescoApi {
 
     }
 
-    export interface FolderEntity {
+    export declare class FolderEntity {
+        constructor(obj?: any);
+
         items: DocumentEntity[];
     }
 
-    export interface DocumentEntity {
+    export declare class DocumentEntity {
+        constructor(obj?: any);
+
         nodeRef: string;
         nodeType: string;
         type: string;
@@ -139,7 +143,9 @@ declare namespace AlfrescoApi {
         location: LocationEntity;
     }
 
-    export interface LocationEntity {
+    export declare class LocationEntity {
+        constructor(obj?: any);
+
         repositoryId: string;
         site: string;
         siteTitle: string;
@@ -149,20 +155,28 @@ declare namespace AlfrescoApi {
         parent: LocationParentEntity;
     }
 
-    export interface LocationParentEntity {
+    export declare class LocationParentEntity {
+        constructor(obj?: any);
+
         nodeRef: string;
     }
 
-    export interface DeletedNodesPaging {
+    export declare class DeletedNodesPaging {
+        constructor(obj?: any);
+
         list: DeletedNodesPagingList;
     }
 
-    export interface DeletedNodesPagingList {
+    export declare class DeletedNodesPagingList {
+        constructor(obj?: any);
+
         pagination: Pagination;
         entries: DeletedNodeEntity[];
     }
 
-    export interface Source {
+    export declare class Source {
+        constructor(obj?: any);
+
         id: string;
         name?: string;
         createdAt?: Date;
@@ -176,15 +190,21 @@ declare namespace AlfrescoApi {
         nodeType?: string;
     }
 
-    export interface MinimalNodeEntity {
+    export declare class MinimalNodeEntity {
+        constructor(obj?: any);
+
         entry?: MinimalNodeEntryEntity;
     }
 
-    export interface DeletedNodeEntity {
+    export declare class DeletedNodeEntity {
+        constructor(obj?: any);
+
         entry?: DeletedNodeMinimalEntry;
     }
 
-    export interface Node {
+    export declare class Node {
+        constructor(obj?: any);
+
         id?: string;
         name?: string;
         nodeType?: string;
@@ -207,7 +227,9 @@ declare namespace AlfrescoApi {
         createdByUser?: UserInfo;
     }
 
-    export interface MinimalNode extends Node {
+    export declare class MinimalNode extends Node {
+        constructor(obj?: any);
+
     }
 
     export interface EcmClient {
@@ -234,25 +256,35 @@ declare namespace AlfrescoApi {
         setAuthentications(authentications: any): void;
     }
 
-    export interface MinimalNodeEntryEntity extends MinimalNode {
+    export declare class MinimalNodeEntryEntity extends MinimalNode {
+        constructor(obj?: any);
+
     }
 
-    export interface NodeProperties {
+    export declare class NodeProperties {
+        constructor(obj?: any);
+
         [key: string]: any;
     }
 
-    export interface DeletedNodeMinimalEntry extends MinimalNode {
+    export declare class DeletedNodeMinimalEntry extends MinimalNode {
+        constructor(obj?: any);
+
         archivedAt: Date;
         archivedByUser: UserInfo;
     }
 
-    export interface PathInfoEntity {
+    export declare class PathInfoEntity {
+        constructor(obj?: any);
+
         elements: PathElementEntity[];
         isComplete: boolean;
         name: string;
     }
 
-    export interface PathElementEntity {
+    export declare class PathElementEntity {
+        constructor(obj?: any);
+
         id: string;
         name: string;
     }
@@ -265,19 +297,19 @@ declare namespace AlfrescoApi {
 
         addNode(nodeId: string, nodeBody: any, opts?: any): Promise<MinimalNodeEntity>;
         copyNode(nodeId: string, copyBody: any, opts?: any): Promise<MinimalNodeEntity>;
-        deleteNode(nodeId: string): Promise<void>;
+        deleteNode(nodeId: string): Promise<any>;
         getDeletedNode(nodeId: string, opts?: any): Promise<DeletedNodeEntity>;
         getDeletedNodes(opts?: any): Promise<DeletedNodesPaging>;
         getFileContent(nodeId: string, opts?: any): Promise<any>;
         getNode(nodeId: string, opts?: any): Promise<MinimalNodeEntity>;
         getNodeChildren(nodeId: string, opts?: any): Promise<NodePaging>;
         moveNode(nodeId: string, moveBody: any, opts?: any): Promise<MinimalNodeEntity>;
-        purgeDeletedNode(nodeId: string): Promise<void>;
+        purgeDeletedNode(nodeId: string): Promise<any>;
         restoreNode(nodeId: string): Promise<MinimalNodeEntity>;
         updateFileContent(nodeId: string, contentBody: string, opts?: any): Promise<MinimalNodeEntity>;
         updateNode(nodeId: string, nodeBody: any, opts?: any): Promise<MinimalNodeEntity>;
         getNodeInfo(nodeId: string, opts?: any): Promise<MinimalNodeEntryEntity>;
-        deleteNodePermanent(nodeId: string): Promise<void>;
+        deleteNodePermanent(nodeId: string): Promise<any>;
         createFolder(name: string, relativePath: string, nodeId?: string, opts?: any): Promise<MinimalNodeEntity>;
         createFolderAutoRename(name: string, relativePath: string, nodeId: string, opts): Promise<MinimalNodeEntity>;
     }
@@ -306,18 +338,23 @@ declare namespace AlfrescoApi {
         entry: RepositoryEntry;
     }
 
-    export interface EntitlementsInfo {
+    export declare class EntitlementsInfo {
+        constructor(obj?: any);
+
         maxUsers?: number;
         maxDocs?: number;
         isClusterEnabled?: boolean;
         isCryptodocEnabled?: boolean;
     }
 
+
     export interface Error {
         error?: ErrorError;
     }
 
-    export interface LicenseInfo {
+    export declare class LicenseInfo {
+        constructor(obj?: any);
+
         issuedAt: Date;
         expiresAt: Date;
         remainingDays: number;
@@ -326,7 +363,9 @@ declare namespace AlfrescoApi {
         entitlements?: EntitlementsInfo;
     }
 
-    export interface ModuleInfo {
+    export declare class ModuleInfo {
+        constructor(obj?: any);
+
         id?: string;
         title?: string;
         description?: string;
@@ -337,7 +376,9 @@ declare namespace AlfrescoApi {
         versionMax?: string;
     }
 
-    export interface RepositoryInfo {
+    export declare class RepositoryInfo {
+        constructor(obj?: any);
+
         edition: string;
         version: VersionInfo;
         status: StatusInfo;
@@ -345,18 +386,24 @@ declare namespace AlfrescoApi {
         modules?: Array<ModuleInfo>;
     }
 
-    export interface RepositoryEntry {
+    export declare class RepositoryEntry {
+        constructor(obj?: any);
+
         repository: RepositoryInfo;
     }
 
-    export interface StatusInfo {
+    export declare class StatusInfo {
+        constructor(obj?: any);
+
         isReadOnly: boolean;
         isAuditEnabled: boolean;
         isQuickShareEnabled: boolean;
         isThumbnailGenerationEnabled: boolean;
     }
 
-    export interface VersionInfo {
+    export declare class VersionInfo {
+        constructor(obj?: any);
+
         major: string;
         minor: string;
         patch: string;
@@ -453,17 +500,17 @@ declare namespace AlfrescoApi {
     export interface SitesApi {
         new(client?: ApiClient): SitesApi;
 
-        addSiteMember(siteld?: string, siteMemberBody?: SiteMemberBody): Promise<{}>;
+        addSiteMember(siteId?: string, siteMemberBody?: SiteMemberBody): Promise<{}>;
         createSite(siteBody?: SiteBody, opts?: { skipConfiguration?: Boolean, skipAddToFavorites?: Boolean }): Promise<{}>;
-        deleteSite(siteld?: string, opts?: { permanent?: Boolean }): Promise<{}>;
-        getSite(siteld?: string, opts?: { relations?: Array<string>, fields?: Array<string> }): Promise<{}>;
-        getSiteContainer(siteld?: string, containerld?: string, opts?: Array<string>): Promise<{}>;
-        getSiteContainers(siteld?: string, opts?: { skipCount?: number, maxltems?: number, fields?: Array<string> }): Promise<{}>;
-        getSiteMember(siteld?: string, personld?: string, opts?: { fields?: Array<string> }): Promise<{}>;
-        getSiteMembers(siteld?: string, opts?: { skipCount?: number, maxltems?: number, fields?: Array<string> }): Promise<{}>;
+        deleteSite(siteId?: string, opts?: { permanent?: Boolean }): Promise<{}>;
+        getSite(siteId?: string, opts?: { relations?: Array<string>, fields?: Array<string> }): Promise<{}>;
+        getSiteContainer(siteId?: string, containerld?: string, opts?: Array<string>): Promise<{}>;
+        getSiteContainers(siteId?: string, opts?: { skipCount?: number, maxltems?: number, fields?: Array<string> }): Promise<{}>;
+        getSiteMember(siteId?: string, personld?: string, opts?: { fields?: Array<string> }): Promise<{}>;
+        getSiteMembers(siteId?: string, opts?: { skipCount?: number, maxltems?: number, fields?: Array<string> }): Promise<{}>;
         getSites(opts?: { skipCount?: number, maxltems?: number, orderBy?: string, relations?: Array<string>, fields?: Array<string> }): Promise<{}>;
-        removeSiteMember(siteld?: string, personld?: string): Promise<{}>;
-        updateSiteMember(siteld?: string, personld?: string, siteMemberRoleBody?: SiteMemberRoleBody): Promise<{}>;
+        removeSiteMember(siteId?: string, personld?: string): Promise<{}>;
+        updateSiteMember(siteId?: string, personld?: string, siteMemberRoleBody?: SiteMemberRoleBody): Promise<{}>;
     }
 
     export interface PeopleApi {
@@ -471,24 +518,24 @@ declare namespace AlfrescoApi {
 
         addFavorite(personld?: string, favoriteBody?: FavoriteBody): Promise<FavoriteEntry>;
         addSiteMembershipRequest(personld?: string, siteMembershipBody?: SiteMembershipRequestBody): Promise<SiteMembershipRequestEntry>;
-        deleteFavoriteSite(personld?: string, siteld?: string): Promise<{}>;
+        deleteFavoriteSite(personld?: string, siteId?: string): Promise<{}>;
         favoriteSite(personld?: string, favoriteSiteBody?: FavoriteSiteBody): Promise<FavoriteEntry>;
-        getActivities(personld?: string, opts?: { skipCount?: number, maxltems?: number, who?: string, siteld?: string, fields?: Array<string> }): Promise<ActivityPaging>;
+        getActivities(personld?: string, opts?: { skipCount?: number, maxltems?: number, who?: string, siteId?: string, fields?: Array<string> }): Promise<ActivityPaging>;
         getFavorite(personld?: string, favoriteld?: string, opts?: { fields?: Array<string> }): Promise<FavoriteEntry>;
-        getFavoriteSite(personld?: string, siteld?: string, opts?: { fields?: Array<string> }): Promise<SiteEntry>;
+        getFavoriteSite(personld?: string, siteId?: string, opts?: { fields?: Array<string> }): Promise<SiteEntry>;
         getFavoriteSites(personld?: string, opts?: { skipCount?: number, maxltems?: number, fields?: Array<string> }): Promise<SitePaging>;
         getFavorites(personld?: string, opts?: { skipCount?: number, maxltems?: number, where?: string, fields?: Array<string> }): Promise<FavoritePaging>;
         getPerson(personld?: string, opts?: { fields?: Array<string> }): Promise<PersonEntry>;
-        getPersonNetwork(personld?: string, networkld?: string, opts?: { fields?: Array<string> }): Promise<PersonNetworkEntry>;
+        getPersonNetwork(personld?: string, networkId?: string, opts?: { fields?: Array<string> }): Promise<PersonNetworkEntry>;
         getPersonNetworks(personld?: string, opts?: { skipCount?: number, maxltems?: number, fields?: Array<string> }): Promise<PersonNetworkPaging>;
         getPreference(personld?: string, preferenceName?: string, opts?: { fields?: Array<string> }): Promise<PreferenceEntry>;
         getPreferences(personld?: string, opts?: { skipCount?: number, maxltems?: number, fields?: Array<string> }): Promise<PreferencePaging>;
         getSiteMembership(personld?: string, opts?: { skipCount?: number, maxltems?: number, orderBy?: string, relations?: Array<string>, fields?: Array<string> }): Promise<SiteMembershipRequestEntry>;
-        getSiteMembershipRequest(personld?: string, siteld?: string, opts?: { fields?: Array<string> }): Promise<SiteMembershipRequestEntry>;
+        getSiteMembershipRequest(personld?: string, siteId?: string, opts?: { fields?: Array<string> }): Promise<SiteMembershipRequestEntry>;
         getSiteMembershipRequests(personld?: string, opts?: { skipCount?: number, maxltems?: number, fields?: Array<string> }): Promise<SiteMembershipRequestPaging>;
         removeFavoriteSite(personld?: string, favoriteld?: string): Promise<{}>;
-        removeSiteMembershipRequest(personld?: string, siteld?: string): Promise<{}>;
-        updateSiteMembershipRequest(personld?: string, siteld?: string, siteMembershipBody?: SiteMembershipRequestBody): Promise<{}>;
+        removeSiteMembershipRequest(personld?: string, siteId?: string): Promise<{}>;
+        updateSiteMembershipRequest(personld?: string, siteId?: string, siteMembershipBody?: SiteMembershipRequestBody): Promise<{}>;
     }
 
     // export interface PreferencesApi {
@@ -540,7 +587,7 @@ declare namespace AlfrescoApi {
 
         createDownload(payload: DownloadBodyCreate, opts?: any): Promise<DownloadEntry>;
         getDownload(downloadId: string, opts?: any): Promise<DownloadEntry>;
-        cancelDownload(downloadId: string): Promise<void>;
+        cancelDownload(downloadId: string): Promise<any>;
     }
 
     export interface DownloadBodyCreate {
@@ -592,7 +639,9 @@ declare namespace AlfrescoApi {
     //     revertVersion(nodeId?: string, versionId?: string, revertBody?: RevertBody, fields?: Array<string>, opts?: any): Promise<VersionEntry>;
     // }
 
-    export interface Activity {
+    export declare class Activity {
+        constructor(obj?: any);
+
         postPersonId?: string;
         id?: number;
         siteId?: string;
@@ -604,76 +653,108 @@ declare namespace AlfrescoApi {
         activityType?: string;
     }
 
-    export interface ActivityEntry {
+    export declare class ActivityEntry {
+        constructor(obj?: any);
+
         entry?: Activity;
     }
 
-    export interface AssocChildBody {
+    export declare class AssocChildBody {
+        constructor(obj?: any);
+
         childId: string;
         assocType: string;
     }
 
-    export interface DeletedNodeEntry {
+    export declare class DeletedNodeEntry {
+        constructor(obj?: any);
+
         entry?: DeletedNode;
     }
 
-    export interface DeletedNode {
+    export declare class DeletedNode {
+        constructor(obj?: any);
+
         archivedByUser?: UserInfo;
         archivedAt?: Date;
     }
 
-    export interface ActivityPaging {
+    export declare class ActivityPaging {
+        constructor(obj?: any);
+
         list?: ActivityPagingList;
     }
 
-    export interface ActivityPagingList {
+    export declare class ActivityPagingList {
+        constructor(obj?: any);
+
         entries?: Array<ActivityEntry>;
         pagination?: Pagination;
     }
 
-    export interface Association {
+    export declare class Association {
+        constructor(obj?: any);
+
         targetId?: string;
         assocType?: string;
     }
 
-    export interface AssociationBody {
+    export declare class AssociationBody {
+        constructor(obj?: any);
+
         targetId?: string;
         assocType?: string;
     }
 
-    export interface AssociationEntry {
+    export declare class AssociationEntry {
+        constructor(obj?: any);
+
         entry?: Association;
     }
 
-    export interface AssociationInfo {
+    export declare class AssociationInfo {
+        constructor(obj?: any);
+
         assocType?: string;
     }
 
-    export interface ChildAssociation {
+    export declare class ChildAssociation {
+        constructor(obj?: any);
+
         childId?: string;
         assocType?: string;
     }
 
-    export interface ChildAssociationBody {
+    export declare class ChildAssociationBody {
+        constructor(obj?: any);
+
         childId?: string;
         assocType?: string;
     }
 
-    export interface ChildAssociationEntry {
+    export declare class ChildAssociationEntry {
+        constructor(obj?: any);
+
         entry?: ChildAssociation;
     }
 
-    export interface ChildAssociationInfo {
+    export declare class ChildAssociationInfo {
+        constructor(obj?: any);
+
         assocType?: string;
         isPrimary?: boolean;
     }
 
-    export interface AssocTargetBody {
+    export declare class AssocTargetBody {
+        constructor(obj?: any);
+
         targetId?: string;
         assocType?: string;
     }
 
-    export interface Comment {
+    export declare class Comment {
+        constructor(obj?: any);
+
         id?: string;
         content?: string;
         adddBy?: Person;
@@ -685,24 +766,34 @@ declare namespace AlfrescoApi {
         canremove?: boolean;
     }
 
-    export interface CommentBody {
+    export declare class CommentBody {
+        constructor(obj?: any);
+
         content?: string;
     }
 
-    export interface CommentEntry {
+    export declare class CommentEntry {
+        constructor(obj?: any);
+
         entry?: Comment;
     }
 
-    export interface CommentPaging {
+    export declare class CommentPaging {
+        constructor(obj?: any);
+
         list?: CommentPagingList;
     }
 
-    export interface CommentPagingList {
+    export declare class CommentPagingList {
+        constructor(obj?: any);
+
         entries?: Array<CommentEntry>;
         pagination?: Pagination;
     }
 
-    export interface Company {
+    export declare class Company {
+        constructor(obj?: any);
+
         organization?: string;
         address1?: string;
         address2?: string;
@@ -713,36 +804,50 @@ declare namespace AlfrescoApi {
         email?: string;
     }
 
-    export interface ContentInfo {
+    export declare class ContentInfo {
+        constructor(obj?: any);
+
         mimeType?: string;
         mimeTypeName?: string;
         sizeInBytes?: number;
         encoding?: string;
     }
 
-    export interface RemovedNode extends Node {
+    export declare class RemovedNode extends Node {
+        constructor(obj?: any);
+
         archivedByUser?: UserInfo;
         archivedAt?: Date;
     }
 
-    export interface RemovedNodeEntry {
+    export declare class RemovedNodeEntry {
+        constructor(obj?: any);
+
         entry?: RemovedNode;
     }
 
-    export interface RemovedNodesPaging {
+    export declare class RemovedNodesPaging {
+        constructor(obj?: any);
+
         list?: RemovedNodesPagingList;
     }
 
-    export interface RemovedNodesPagingList {
+    export declare class RemovedNodesPagingList {
+        constructor(obj?: any);
+
         entries?: Array<RemovedNodeEntry>;
         pagination?: Pagination;
     }
 
-    export interface Error {
+    export declare class Error {
+        constructor(obj?: any);
+
         error?: ErrorError;
     }
 
-    export interface ErrorError {
+    export declare class ErrorError {
+        constructor(obj?: any);
+
         errorKey?: string;
         briefSummary?: string;
         descriptionURL?: string;
@@ -751,72 +856,102 @@ declare namespace AlfrescoApi {
         statusCode?: number;
     }
 
-    export interface Favorite {
+    export declare class Favorite {
+        constructor(obj?: any);
+
         targetGuid?: string;
         adddAt?: Date;
         target?: any;
     }
 
-    export interface FavoriteBody {
+    export declare class FavoriteBody {
+        constructor(obj?: any);
+
         target?: any;
     }
 
-    export interface FavoriteEntry {
+    export declare class FavoriteEntry {
+        constructor(obj?: any);
+
         entry?: Favorite;
     }
 
-    export interface FavoritePaging {
+    export declare class FavoritePaging {
+        constructor(obj?: any);
+
         list?: FavoritePagingList;
     }
 
-    export interface FavoritePagingList {
+    export declare class FavoritePagingList {
+        constructor(obj?: any);
+
         entries?: Array<FavoriteEntry>;
         pagination?: Pagination;
     }
 
-    export interface FavoriteSite {
+    export declare class FavoriteSite {
+        constructor(obj?: any);
+
         id?: string;
     }
 
-    export interface FavoriteSiteBody {
+    export declare class FavoriteSiteBody {
+        constructor(obj?: any);
+
         id?: string;
     }
 
-    export interface FavoriteSiteEntry {
+    export declare class FavoriteSiteEntry {
+        constructor(obj?: any);
+
         entry?: FavoriteSite;
     }
 
-    export interface NetworkQuota {
+    export declare class NetworkQuota {
+        constructor(obj?: any);
+
         id?: string;
         limit?: number;
         usage?: number;
     }
 
 
-    export interface NodeAssociation extends Node {
+    export declare class NodeAssociation extends Node {
+        constructor(obj?: any);
+
         association?: AssociationInfo;
     }
 
-    export interface NodeAssociationEntry {
+    export declare class NodeAssociationEntry {
+        constructor(obj?: any);
+
         entry?: NodeAssociation;
     }
 
-    export interface NodeAssociationPaging {
+    export declare class NodeAssociationPaging {
+        constructor(obj?: any);
+
         list?: NodeAssociationPagingList;
     }
 
-    export interface NodeAssociationPagingList {
+    export declare class NodeAssociationPagingList {
+        constructor(obj?: any);
+
         entries?: Array<NodeAssociationEntry>;
         pagination?: Pagination;
         source?: Node;
     }
 
-    export interface CopyBody {
+    export declare class CopyBody {
+        constructor(obj?: any);
+
         targetParentId?: string;
         name?: string;
     }
 
-    export interface NodeBody {
+    export declare class NodeBody {
+        constructor(obj?: any);
+
         name?: string;
         nodeType?: string;
         aspectNames?: Array<string>;
@@ -830,11 +965,15 @@ declare namespace AlfrescoApi {
         permissions?: PermissionsBodyUpdate;
     }
 
-    export interface NodeBodyAssociation {
+    export declare class NodeBodyAssociation {
+        constructor(obj?: any);
+
         assocType?: string;
     }
 
-    export interface NodeBodyLock {
+    export declare class NodeBodyLock {
+        constructor(obj?: any);
+
         timeToExpire?: number;
         type?: NodeBodyLock.TypeEnum;
         lifetime?: NodeBodyLock.LifetimeEnum;
@@ -851,44 +990,62 @@ declare namespace AlfrescoApi {
         }
     }
 
-    export interface MoveBody {
+    export declare class MoveBody {
+        constructor(obj?: any);
+
         targetParentId?: string;
         name?: string;
     }
 
-    export interface NodeChildAssociation extends Node {
+    export declare class NodeChildAssociation extends Node {
+        constructor(obj?: any);
+
         association?: ChildAssociationInfo;
     }
 
-    export interface NodeChildAssociationEntry {
+    export declare class NodeChildAssociationEntry {
+        constructor(obj?: any);
+
         entry?: NodeChildAssociation;
     }
 
-    export interface NodeChildAssociationPaging {
+    export declare class NodeChildAssociationPaging {
+        constructor(obj?: any);
+
         list?: NodeChildAssociationPagingList;
     }
 
-    export interface NodeChildAssociationPagingList {
+    export declare class NodeChildAssociationPagingList {
+        constructor(obj?: any);
+
         entries?: Array<NodeChildAssociationEntry>;
         pagination?: Pagination;
         source?: Node;
     }
 
-    export interface NodeEntry {
+    export declare class NodeEntry {
+        constructor(obj?: any);
+
         entry?: Node;
     }
 
-    export interface NodePaging {
+    export declare class NodePaging {
+        constructor(obj?: any);
+
         list?: NodePagingList;
     }
 
-    export interface NodePagingList {
+    export declare class NodePagingList {
+        constructor(obj?: any);
+
         entries?: Array<NodeEntry>;
         pagination?: Pagination;
         source?: Node;
     }
 
-    export interface Pagination {
+    export declare class Pagination {
+        constructor(obj?: any);
+
         count?: number;
         hasMoreItems?: boolean;
         totalItems?: number;
@@ -896,18 +1053,24 @@ declare namespace AlfrescoApi {
         maxItems?: number;
     }
 
-    export interface PathElement {
+    export declare class PathElement {
+        constructor(obj?: any);
+
         id?: string;
         name?: string;
     }
 
-    export interface PathInfo {
+    export declare class PathInfo {
+        constructor(obj?: any);
+
         elements?: Array<PathElement>;
         name?: string;
         isComplete?: boolean;
     }
 
-    export interface PermissionElement {
+    export declare class PermissionElement {
+        constructor(obj?: any);
+
         authorityId?: string;
         name?: string;
         accessStatus?: PermissionElement.AccessStatusEnum;
@@ -920,19 +1083,25 @@ declare namespace AlfrescoApi {
         }
     }
 
-    export interface PermissionsBodyUpdate {
+    export declare class PermissionsBodyUpdate {
+        constructor(obj?: any);
+
         isInheritanceEnabled?: boolean;
         locallySet?: Array<PermissionElement>;
     }
 
-    export interface PermissionsInfo {
+    export declare class PermissionsInfo {
+        constructor(obj?: any);
+
         isInheritanceEnabled?: boolean;
         inherited?: Array<PermissionElement>;
         locallySet?: Array<PermissionElement>;
         settable?: Array<string>;
     }
 
-    export interface Person {
+    export declare class Person {
+        constructor(obj?: any);
+
         id?: string;
         firstName?: string;
         lastName?: string;
@@ -957,7 +1126,9 @@ declare namespace AlfrescoApi {
         };
     }
 
-    export interface PersonBodyadd {
+    export declare class PersonBodyadd {
+        constructor(obj?: any);
+
         id?: string;
         firstName?: string;
         lastName?: string;
@@ -981,7 +1152,9 @@ declare namespace AlfrescoApi {
         };
     }
 
-    export interface PersonBodyUpdate {
+    export declare class PersonBodyUpdate {
+        constructor(obj?: any);
+
         firstName?: string;
         lastName?: string;
         description?: string;
@@ -1005,11 +1178,15 @@ declare namespace AlfrescoApi {
         };
     }
 
-    export interface PersonEntry {
+    export declare class PersonEntry {
+        constructor(obj?: any);
+
         entry?: Person;
     }
 
-    export interface PersonNetwork {
+    export declare class PersonNetwork {
+        constructor(obj?: any);
+
         id?: string;
         homeNetwork?: boolean;
         isEnabled?: boolean;
@@ -1027,119 +1204,165 @@ declare namespace AlfrescoApi {
         }
     }
 
-    export interface PersonNetworkEntry {
+    export declare class PersonNetworkEntry {
+        constructor(obj?: any);
+
         entry?: PersonNetwork;
     }
 
-    export interface PersonNetworkPaging {
+    export declare class PersonNetworkPaging {
+        constructor(obj?: any);
+
         list?: PersonNetworkPagingList;
     }
 
-    export interface PersonNetworkPagingList {
+    export declare class PersonNetworkPagingList {
+        constructor(obj?: any);
+
         entries?: Array<PersonNetworkEntry>;
         pagination?: Pagination;
     }
 
-    export interface PersonPaging {
+    export declare class PersonPaging {
+        constructor(obj?: any);
+
         list?: PersonPagingList;
     }
 
-    export interface PersonPagingList {
+    export declare class PersonPagingList {
+        constructor(obj?: any);
+
         entries?: Array<PersonEntry>;
         pagination?: Pagination;
     }
 
-    export interface Preference {
+    export declare class Preference {
+        constructor(obj?: any);
+
         id?: string;
         value?: string;
     }
 
-    export interface PreferenceEntry {
+    export declare class PreferenceEntry {
+        constructor(obj?: any);
+
         entry?: Preference;
     }
 
-    export interface PreferencePaging {
+    export declare class PreferencePaging {
+        constructor(obj?: any);
+
         list?: PreferencePagingList;
     }
 
-    export interface PreferencePagingList {
+    export declare class PreferencePagingList {
+        constructor(obj?: any);
+
         entries?: Array<PreferenceEntry>;
         pagination?: Pagination;
     }
 
-    export interface Rating {
+    export declare class Rating {
+        constructor(obj?: any);
+
         id?: string;
         aggregate?: RatingAggregate;
         ratedAt?: Date;
         myRating?: string;
     }
 
-    export interface RatingAggregate {
+    export declare class RatingAggregate {
+        constructor(obj?: any);
+
         average?: number;
         numberOfRatings?: number;
     }
 
-    export interface RatingBody {
+    export declare class RatingBody {
+        constructor(obj?: any);
+
         id?: RatingBody.IdEnum;
         myRating?: string;
     }
 
     namespace RatingBody {
+
         enum IdEnum {
             likes,
             fiveStar
         }
     }
 
-    export interface RatingEntry {
+    export declare class RatingEntry {
+        constructor(obj?: any);
+
         entry?: Rating;
     }
 
-    export interface RatingPaging {
+    export declare class RatingPaging {
+        constructor(obj?: any);
+
         list?: RatingPagingList;
     }
 
-    export interface RatingPagingList {
+    export declare class RatingPagingList {
+        constructor(obj?: any);
+
         entries?: Array<RatingEntry>;
         pagination?: Pagination;
     }
 
-    export interface Rendition {
+    export declare class Rendition {
+        constructor(obj?: any);
+
         id?: string;
         content?: ContentInfo;
         status?: Rendition.StatusEnum;
     }
 
     namespace Rendition {
+
         enum StatusEnum {
             CREATED,
             NOT_CREATED
         }
     }
 
-    export interface RenditionBody {
+    export declare class RenditionBody {
+        constructor(obj?: any);
+
         id?: string;
     }
 
-    export interface RenditionEntry {
+    export declare class RenditionEntry {
+        constructor(obj?: any);
+
         entry?: Rendition;
     }
 
-    export interface RenditionPaging {
+    export declare class RenditionPaging {
+        constructor(obj?: any);
+
         list?: RenditionPagingList;
     }
 
-    export interface RenditionPagingList {
+    export declare class RenditionPagingList {
+        constructor(obj?: any);
+
         entries?: Array<RenditionEntry>;
         pagination?: Pagination;
     }
 
-    export interface RevertBody {
+    export declare class RevertBody {
+        constructor(obj?: any);
+
         majorVersion?: boolean;
         comment?: string;
     }
 
-    export interface SharedLink {
+    export declare class SharedLink {
+        constructor(obj?: any);
+
         id?: string;
         expiresAt?: Date;
         nodeId?: string;
@@ -1151,32 +1374,44 @@ declare namespace AlfrescoApi {
         allowableOperations?: Array<string>;
     }
 
-    export interface SharedLinkBody {
+    export declare class SharedLinkBody {
+        constructor(obj?: any);
+
         nodeId?: string;
         expiresAt?: Date;
     }
 
-    export interface EmailSharedLinkBody {
+    export declare class EmailSharedLinkBody {
+        constructor(obj?: any);
+
         client?: string;
         message?: string;
         locale?: string;
         recipientEmails?: Array<string>;
     }
 
-    export interface SharedLinkEntry {
+    export declare class SharedLinkEntry {
+        constructor(obj?: any);
+
         entry?: SharedLink;
     }
 
-    export interface SharedLinkPaging {
+    export declare class SharedLinkPaging {
+        constructor(obj?: any);
+
         list?: SharedLinkPagingList;
     }
 
-    export interface SharedLinkPagingList {
+    export declare class SharedLinkPagingList {
+        constructor(obj?: any);
+
         entries?: Array<SharedLinkEntry>;
         pagination?: Pagination;
     }
 
-    export interface Site {
+    export declare class Site {
+        constructor(obj?: any);
+
         id?: string;
         guid?: string;
         title?: string;
@@ -1200,14 +1435,18 @@ declare namespace AlfrescoApi {
         }
     }
 
-    export interface SiteBodyadd {
+    export declare class SiteBodyadd {
+        constructor(obj?: any);
+
         id?: string;
         title?: string;
         description?: string;
         visibility?: SiteBodyadd.VisibilityEnum;
     }
 
-    export interface SiteBody {
+    export declare class SiteBody {
+        constructor(obj?: any);
+
         id?: string;
         title?: string;
         description?: string;
@@ -1222,7 +1461,9 @@ declare namespace AlfrescoApi {
         }
     }
 
-    export interface SiteBodyUpdate {
+    export declare class SiteBodyUpdate {
+        constructor(obj?: any);
+
         title?: string;
         description?: string;
         visibility?: SiteBodyUpdate.VisibilityEnum;
@@ -1236,40 +1477,56 @@ declare namespace AlfrescoApi {
         }
     }
 
-    export interface SiteContainer {
+    export declare class SiteContainer {
+        constructor(obj?: any);
+
         id?: string;
         folderId?: string;
     }
 
-    export interface SiteContainerEntry {
+    export declare class SiteContainerEntry {
+        constructor(obj?: any);
+
         entry?: SiteContainer;
     }
 
-    export interface SiteContainerPaging {
+    export declare class SiteContainerPaging {
+        constructor(obj?: any);
+
         list?: SiteContainerPagingList;
     }
 
-    export interface SiteContainerPagingList {
+    export declare class SiteContainerPagingList {
+        constructor(obj?: any);
+
         entries?: Array<SiteContainerEntry>;
         pagination?: Pagination;
     }
 
-    export interface SiteEntry {
+    export declare class SiteEntry {
+        constructor(obj?: any);
+
         entry?: Site;
     }
 
-    export interface SiteMember {
+    export declare class SiteMember {
+        constructor(obj?: any);
+
         id?: string;
         person?: Person;
         role?: SiteMember.RoleEnum;
     }
 
-    export interface SiteMemberBody {
+    export declare class SiteMemberBody {
+        constructor(obj?: any);
+
         id?: string;
         role?: SiteMember.RoleEnum;
     }
 
-    export interface SiteMemberRoleBody {
+    export declare class SiteMemberRoleBody {
+        constructor(obj?: any);
+
         role?: SiteMember.RoleEnum;
     }
 
@@ -1282,20 +1539,28 @@ declare namespace AlfrescoApi {
         }
     }
 
-    export interface SiteMemberEntry {
+    export declare class SiteMemberEntry {
+        constructor(obj?: any);
+
         entry?: SiteMember;
     }
 
-    export interface SiteMemberPaging {
+    export declare class SiteMemberPaging {
+        constructor(obj?: any);
+
         list?: SiteMemberPagingList;
     }
 
-    export interface SiteMemberPagingList {
+    export declare class SiteMemberPagingList {
+        constructor(obj?: any);
+
         entries?: Array<SiteMemberEntry>;
         pagination?: Pagination;
     }
 
-    export interface SiteMembershipBodyadd {
+    export declare class SiteMembershipBodyadd {
+        constructor(obj?: any);
+
         role?: SiteMembershipBodyadd.RoleEnum;
         id?: string;
     }
@@ -1309,7 +1574,9 @@ declare namespace AlfrescoApi {
         }
     }
 
-    export interface SiteMembershipBodyUpdate {
+    export declare class SiteMembershipBodyUpdate {
+        constructor(obj?: any);
+
         role?: SiteMembershipBodyUpdate.RoleEnum;
     }
 
@@ -1322,46 +1589,64 @@ declare namespace AlfrescoApi {
         }
     }
 
-    export interface SiteMembershipRequest {
+    export declare class SiteMembershipRequest {
+        constructor(obj?: any);
+
         id?: string;
         adddAt?: Date;
         site?: Site;
         message?: string;
     }
 
-    export interface SiteMembershipRequestBody {
+    export declare class SiteMembershipRequestBody {
+        constructor(obj?: any);
+
         message?: string;
         id?: string;
         title?: string;
     }
 
-    export interface SiteMembershipRequestBodyUpdate {
+    export declare class SiteMembershipRequestBodyUpdate {
+        constructor(obj?: any);
+
         message?: string;
     }
 
-    export interface SiteMembershipRequestEntry {
+    export declare class SiteMembershipRequestEntry {
+        constructor(obj?: any);
+
         entry?: SiteMembershipRequest;
     }
 
-    export interface SiteMembershipRequestPaging {
+    export declare class SiteMembershipRequestPaging {
+        constructor(obj?: any);
+
         list?: SiteMembershipRequestPagingList;
     }
 
-    export interface SiteMembershipRequestPagingList {
+    export declare class SiteMembershipRequestPagingList {
+        constructor(obj?: any);
+
         entries?: Array<SiteMembershipRequestEntry>;
         pagination?: Pagination;
     }
 
-    export interface SitePaging {
+    export declare class SitePaging {
+        constructor(obj?: any);
+
         list?: SitePagingList;
     }
 
-    export interface SitePagingList {
+    export declare class SitePagingList {
+        constructor(obj?: any);
+
         entries?: Array<SiteEntry>;
         pagination?: Pagination;
     }
 
-    export interface SiteRole {
+    export declare class SiteRole {
+        constructor(obj?: any);
+
         site?: Site;
         id?: string;
         guid?: string;
@@ -1377,47 +1662,67 @@ declare namespace AlfrescoApi {
         }
     }
 
-    export interface SiteRoleEntry {
+    export declare class SiteRoleEntry {
+        constructor(obj?: any);
+
         entry?: SiteRole;
     }
 
-    export interface SiteRolePaging {
+    export declare class SiteRolePaging {
+        constructor(obj?: any);
+
         list?: SiteRolePagingList;
     }
 
-    export interface SiteRolePagingList {
+    export declare class SiteRolePagingList {
+        constructor(obj?: any);
+
         entries?: Array<SiteRoleEntry>;
         pagination?: Pagination;
     }
 
-    export interface Tag {
+    export declare class Tag {
+        constructor(obj?: any);
+
         id?: string;
         tag?: string;
     }
 
-    export interface TagBody {
+    export declare class TagBody {
+        constructor(obj?: any);
+
         tag?: string;
     }
 
-    export interface TagEntry {
+    export declare class TagEntry {
+        constructor(obj?: any);
+
         entry?: Tag;
     }
 
-    export interface TagPaging {
+    export declare class TagPaging {
+        constructor(obj?: any);
+
         list?: TagPagingList;
     }
 
-    export interface TagPagingList {
+    export declare class TagPagingList {
+        constructor(obj?: any);
+
         entries?: Array<TagEntry>;
         pagination?: Pagination;
     }
 
-    export interface UserInfo {
+    export declare class UserInfo {
+        constructor(obj?: any);
+
         displayName?: string;
         id?: string;
     }
 
-    export interface Version {
+    export declare class Version {
+        constructor(obj?: any);
+
         id?: string;
         versionComment?: string;
         name?: string;
@@ -1433,15 +1738,21 @@ declare namespace AlfrescoApi {
         };
     }
 
-    export interface VersionEntry {
+    export declare class VersionEntry {
+        constructor(obj?: any);
+
         entry?: Version;
     }
 
-    export interface VersionPaging {
+    export declare class VersionPaging {
+        constructor(obj?: any);
+
         list?: VersionPagingList;
     }
 
-    export interface VersionPagingList {
+    export declare class VersionPagingList {
+        constructor(obj?: any);
+
         entries?: Array<VersionEntry>;
         pagination?: Pagination;
     }
@@ -1460,134 +1771,1488 @@ declare namespace AlfrescoApi {
 
     //  ======= Search End ======
 
-    export interface Activiti {
+
+    // ======= Process service Start ======
+
+    export interface AdminEndpointsApi {
+        new(client?: ApiClient): AdminEndpointsApi;
+
+        createBasicAuthConfiguration(createRepresentation?: CreateEndpointBasicAuthRepresentation): Promise<EndpointBasicAuthRepresentation>;
+        createEndpointConfiguration(representation?: EndpointConfigurationRepresentation): Promise<EndpointConfigurationRepresentation>;
+        getBasicAuthConfiguration(basicAuthId?: number, tenantId?: number): Promise<EndpointBasicAuthRepresentation>;
+        getBasicAuthConfigurations(tenantId?: number): Promise<EndpointBasicAuthRepresentation[]>;
+        getEndpointConfiguration(endpointConfigurationId?: number, tenantId?: number): Promise<EndpointConfigurationRepresentation>;
+        getEndpointConfigurations(tenantId?: number): Promise<EndpointConfigurationRepresentation[]>;
+        removeBasicAuthConfiguration(basicAuthId?: number, tenantId?: number): Promise<any>;
+        removeEndpointConfiguration(endpointConfigurationId?: number, tenantId?: number): Promise<any>;
+        updateBasicAuthConfiguration(basicAuthId?: number, createRepresentation?: CreateEndpointBasicAuthRepresentation): Promise<EndpointBasicAuthRepresentation>;
+        updateEndpointConfiguration(endpointConfigurationId?: number, representation?: EndpointConfigurationRepresentation): Promise<EndpointConfigurationRepresentation>;
+    }
+
+    export interface AdminGroupsApi {
+        new(client?: ApiClient): AdminGroupsApi;
+
+        activate(groupId?: number): Promise<any>;
+        addAllUsersToGroup(groupId?: number): Promise<any>;
+        addGroupCapabilities(groupId?: number, addGroupCapabilitiesRepresentation?: AddGroupCapabilitiesRepresentation): Promise<any>;
+        addGroupMember(groupId?: number, userId?: number): Promise<any>;
+        addRelatedGroup(groupId?: number, relatedgroupId?: number, type?: string): Promise<any>;
+        createNewGroup(groupRepresentation?: GroupRepresentation): Promise<GroupRepresentation>;
+        deleteGroupCapability(groupId?: number, groupCapabilityId?: number): Promise<any>;
+        deleteGroupMember(groupId?: number, userId?: number): Promise<any>;
+        deleteGroup(groupId?: number): Promise<any>;
+        deleteRelatedGroup(groupId?: number, relatedgroupId?: number): Promise<any>;
+        getCapabilities(groupId?: number): Promise<String[]>;
+        getGroupUsers(groupId?: number, opts?: {filter?: string, page?: number, pageSize?: number}): Promise<any>;
+        getGroup(groupId?: number, opts?: {includeAllUsers?: boolean, summary?: boolean}): Promise<AbstractGroupRepresentation>;
+        getGroups(opts?: {tenantId?: number, functional?: boolean, summary?: boolean}): Promise<LightGroupRepresentation[]>;
+        getRelatedGroups(groupId?: number): Promise<LightGroupRepresentation[]>;
+        updateGroup(groupId?: number, groupRepresentation?: GroupRepresentation): Promise<GroupRepresentation>;
+    }
+
+    export interface AdminTenantsApi {
+        new(client?: ApiClient): AdminTenantsApi;
+
+        createTenant(createTenantRepresentation?: CreateTenantRepresentation): Promise<LightTenantRepresentation>;
+        deleteTenant(tenantId?: number): Promise<any>;
+        getTenantEvents(tenantId?: number): Promise<TenantEvent[]>;
+        getTenantLogo(tenantId?: number): Promise<any>;
+        getTenant(tenantId?: number): Promise<TenantRepresentation>;
+        getTenants(): Promise<LightTenantRepresentation[]>;
+        update(tenantId?: number, createTenantRepresentation?: CreateTenantRepresentation): Promise<TenantRepresentation>;
+        uploadTenantLogo(tenantId?: number, file?: File): Promise<ImageUploadRepresentation>;
+    }
+
+    export interface AdminUsersApi {
+        new(client?: ApiClient): AdminUsersApi;
+
+        bulkUpdateUsers(update?: BulkUserUpdateRepresentation): Promise<any>;
+        createNewUser(userRepresentation?: UserRepresentation): Promise<UserRepresentation>;
+        getUser(userId?: number, opts?: {summary?: boolean}): Promise<AbstractUserRepresentation>;
+        getUsers(opts?: {filter?: string, status?: string, accountType?: string, sort?: string, company?: string, start?: number, page?: number, size?: number, groupId?: number, tenantId?: number, summary?: boolean}): Promise<any>;
+        updateUserDetails(userId?: number, UserRepresentation?: UserRepresentation): Promise<any>;
+
+    }
+
+    export interface AppsApi {
+        new(client?: ApiClient): AppsApi;
+
+        deployAppDefinitions(saveObject?: RuntimeAppDefinitionSaveRepresentation): Promise<any>;
+        exportAppDefinition(modelId?: number): Promise<any>;
+        getAppDefinitions(): Promise<ResultListDataRepresentation<AppDefinitionRepresentation>>;
+        importAppDefinition(file?: File): Promise<AppDefinitionRepresentation>;
+        publishAppDefinition(modelId?: number, publishModel?: AppDefinitionPublishRepresentation): Promise<AppDefinitionUpdateResultRepresentation>;
+    }
+
+    export interface AlfrescoApi {
+        new(client?: ApiClient): AlfrescoApi;
+
+        confirmAuthorisation(code: string): Promise<any>;
+        getAllNetworks(): Promise<any>;
+        getAllSites(networkId: string): Promise<any>;
+        getContentInFolder(networkId: string, folderId: string): Promise<any>;
+        getContentInSite(networkId: string, siteId: string): Promise<any>;
+        getRepositories(opts: {tenantId: number, includeAccounts: boolean}): Promise<any>;
+    }
+
+    export interface AppsDefinitionApi {
+        new(client?: ApiClient): AppsDefinitionApi;
+
+        exportAppDefinition(modelId?: number): Promise<any>;
+        importAppDefinition(file?: File): Promise<AppDefinitionRepresentation>;
+        importAppDefinition(modelId?: number, file?: File): Promise<AppDefinitionRepresentation>;
+        publishAppDefinition(modelId?: number, publishModel?: AppDefinitionPublishRepresentation): Promise<AppDefinitionUpdateResultRepresentation>;
+    }
+
+    export interface AppsRuntimeApi {
+        new(client?: ApiClient): AppsRuntimeApi;
+
+        deployAppDefinitions(saveObject?: RuntimeAppDefinitionSaveRepresentation): Promise<any>;
+        getAppDefinitions(): Promise<any>;
+    }
+
+    export interface CommentsApi {
+        new(client?: ApiClient): CommentsApi;
+
+        addProcessInstanceComment(commentRequest?: CommentRepresentation, processInstanceId?: string): Promise<CommentRepresentation>;
+        addTaskComment(commentRequest?: CommentRepresentation, taskId?: string): Promise<CommentRepresentation>;
+        getProcessInstanceComments(processInstanceId?: string, opts?: {latestFirst?: boolean}): Promise<any>;
+        getTaskComments(taskId?: string, opts?: {latestFirst?: boolean}): Promise<any>;
+    }
+
+    export interface ContentApi {
+        new(client?: ApiClient): ContentApi;
+
+        createRelatedContentOnProcessInstance(processInstanceId?: string, relatedContent?: RelatedContentRepresentation, opts): Promise<RelatedContentRepresentation>;
+        createRelatedContentOnTask(taskId?: string, relatedContent?: RelatedContentRepresentation, opts?: {isRelatedContent?: boolean}): Promise<RelatedContentRepresentation>;
+        createTemporaryRawRelatedContent(file?: File): Promise<RelatedContentRepresentation>;
+        createTemporaryRelatedContent(relatedContent?: RelatedContentRepresentation): Promise<RelatedContentRepresentation>;
+        deleteContent(contentId?: number): Promise<any>;
+        getContent(contentId?: number): Promise<RelatedContentRepresentation>;
+        getProcessInstanceContent(processInstanceId?: string): Promise<any>;
+        getRawContent(contentId?: number): Promise<any>;
+        getRawContentUrl(contentId?: number): string;
+        getContentThumbnailUrl(contentId?: number): string;
+        getRelatedContentForProcessInstance(processInstanceId?: string, isRelated?: boolean): Promise<any>;
+        getRelatedContentForTask(taskId?: string, isRelated?: Boolean): Promise<any>;
+    }
+
+    export interface EditorApi {
+        new(client?: ApiClient): EditorApi;
+
+        getFormHistory(formId?: number, formHistoryId?: number): Promise<FormRepresentation>;
+        getForm(formId?: number): Promise<FormRepresentation>;
+        getForms(): Promise<FormRepresentation[]>;
+        saveForm(formId?: number, saveRepresentation?: FormSaveRepresentation): Promise<FormRepresentation>;
+        validateModel(formId?: number, saveRepresentation?: FormSaveRepresentation): Promise<ValidationErrorRepresentation[]>;
+    }
+
+    export interface GroupsApi {
+        new(client?: ApiClient): GroupsApi;
+
+        getGroups(opts?: {filter?: string, groupId?: number, externalId?: string, externalIdCaseInsensitive?: string, tenantId?: number}): Promise<any>;
+        getUsersForGroup(groupId?: number): Promise<any>;
+
+    }
+
+    export interface IDMSyncApi {
+        new(client?: ApiClient): IDMSyncApi;
+
+        getLogFile(syncLogEntryId?: number): Promise<any>;
+        getSyncLogEntries(opts?: {tenantId?: number, page?: number, size?: number}): Promise<SyncLogEntryRepresentation[]>;
+    }
+
+    export interface IntegrationAccountApi {
+        new(client?: ApiClient): IntegrationAccountApi;
+
+        getAccounts(): Promise<any>;
+    }
+
+    export interface IntegrationAlfrescoCloudApi {
+        new(client?: ApiClient): IntegrationAlfrescoCloudApi;
+
+        confirmAuthorisation(code?: string): Promise<any>;
+        getAllNetworks(): Promise<any>;
+        getAllSites(networkId?: string): Promise<any>;
+        getContentInFolder(networkId?: string, folderId?: string): Promise<any>;
+        getContentInSite(networkId?: string, siteId?: string): Promise<any>;
+    }
+
+    export interface IntegrationAlfrescoOnPremiseApi {
+        new(client?: ApiClient): IntegrationAlfrescoOnPremiseApi;
+
+        getAllSites(repositoryId?: string): Promise<any>;
+        getContentInFolder(repositoryId?: string, folderId?: string): Promise<any>;
+        getContentInSite(repositoryId?: string, siteId?: string): Promise<any>;
+        getRepositories(opts?: {tenantId?: number, includeAccounts?: boolean}): Promise<any>;
+    }
+
+    export interface IntegrationApi {
+        new(client?: ApiClient): IntegrationApi;
+
+        confirmAuthorisation(code?: string): Promise<any>;
+        createRepositoryAccount(userId?: number, credentials?: UserAccountCredentialsRepresentation): Promise<any>;
+        deleteRepositoryAccount(userId?: number): Promise<any>;
+        getAllNetworks(): Promise<any>;
+        getAllSites(networkId?: string): Promise<any>;
+        getBoxPluginStatus(): Promise<boolean>;
+        getContentInFolder(networkId?: string, folderId?: string): Promise<any>;
+        getContentInSite(networkId?: string, siteId?: string): Promise<any>;
+        getFiles(opts?: {filter?: string, parent?: string}): Promise<any>;
+        getRepositories(opts?: {tenantId?: number, includeAccounts?: boolean}): Promise<any>;
+        getRepositoryAccount(userId?: number): Promise<any>;
+        updateRepositoryAccount(userId?: number, credentials?: UserAccountCredentialsRepresentation): Promise<any>;
+    }
+
+    export interface ModelBpmnApi {
+        new(client?: ApiClient): ModelBpmnApi;
+
+        getHistoricProcessModelBpmn20Xml(processModelId?: number, processModelHistoryId?: number): Promise<any>;
+        getProcessModelBpmn20Xml(processModelId?: number): Promise<any>;
+    }
+
+    export interface ModelJsonBpmnApi {
+        new(client?: ApiClient): ModelJsonBpmnApi;
+
+        getHistoricEditorDisplayisonClient(processModelId?: number, processModelHistoryId?: number): Promise<any>;
+        getEditorDisplayisonClient(processModelId?: number): Promise<any>;
+    }
+
+    export interface ModelsApi {
+        new(client?: ApiClient): ModelsApi;
+
+        createModel(modelRepresentation?: ModelRepresentation): Promise<ModelRepresentation>;
+        deleteModel(modelId?: number, opts?: {cascade?: boolean, deleteRuntimeApp?: boolean}): Promise<any>;
+        duplicateModel(modelId?: number, modelRepresentation?: ModelRepresentation): Promise<ModelRepresentation>;
+        getModelJSON(modelId?: number): Promise<any>;
+        getModelThumbnail(modelId?: number): Promise<String[]>;
+        getModel(modelId?: number, opts?: {includePermissions?: boolean}): Promise<ModelRepresentation>;
+        getModelsToIncludeInAppDefinition(): Promise<any>;
+        getModels(opts?: {filter?: string, sort?: string, modelType?: number, referenceId?: number}): Promise<any>;
+        importNewVersion(modelId?: number, file?: File): Promise<ModelRepresentation>;
+        importProcessModel(file?: File): Promise<ModelRepresentation>;
+        saveModel(modelId?: number, values?: any): Promise<ModelRepresentation>;
+        updateModel(modelId?: number, updatedModel?: ModelRepresentation): Promise<ModelRepresentation>;
+        validateModel(modelId?: number, opts?: {values?: any}): Promise<ValidationErrorRepresentation[]>;
+    }
+
+    export interface ModelsHistoryApi {
+        new(client?: ApiClient): ModelsHistoryApi;
+
+        getModelHistoryCollection(modelId?: number, opts?: {includeLatestVersion?: boolean}): Promise<any>;
+        getProcessModelHistory(modelId?: number, modelHistoryId?: number): Promise<ModelRepresentation>;
+    }
+
+    export interface ProcessApi {
+        new(client?: ApiClient): ProcessApi;
+
+        deleteProcessInstance(processInstanceId?: string): Promise<any>;
+        filterProcessInstances(filterRequest?: ProcessInstanceFilterRequestRepresentation): Promise<any>;
+        getProcessDefinitionStartForm(processDefinitionId?: string): Promise<FormDefinitionRepresentation>;
+        getProcessDefinitions(opts?: {latest?: boolean, appDefinitionId?: number}): Promise<any>;
+        getProcessInstanceContent(processInstanceId?: string): Promise<any>;
+        getProcessInstanceStartForm(processInstanceId?: string): Promise<FormDefinitionRepresentation>;
+        getProcessInstance(processInstanceId?: string): Promise<ProcessInstanceRepresentation>;
+        getProcessInstances(requestNode?: ProcessFilterRequestRepresentation): Promise<any>;
+        getProcessAuditJson(processId?: string): Promise<any>;
+        getProcessAuditPdf(processId?: string): Promise<any>;
+        getRestFieldValues(processDefinitionId?: string, field?: string): Promise<FormValueRepresentation[]>;
+        getRestTableFieldValues(processDefinitionId?: string, field?: string, column?: string): Promise<FormValueRepresentation[]>;
+        startNewProcessInstance(startRequest?: CreateProcessInstanceRepresentation): Promise<ProcessInstanceRepresentation>;
+    }
+
+    export interface ProcessInstancesApi {
+        new(client?: ApiClient): ProcessInstancesApi;
+
+        addProcessInstanceComment(commentRequestModule?: CommentRepresentation, processInstanceId?: string): Promise<CommentRepresentation>;
+        deleteProcessInstance(processInstanceId?: string): Promise<any>;
+        getProcessInstanceComments(processInstanceId?: string, opts?: {latestFirst?: boolean}): Promise<any>;
+        getProcessInstanceStartForm(processInstanceId?: string): Promise<FormDefinitionRepresentation>;
+        getProcessInstance(processInstanceId?: string): Promise<ProcessInstanceRepresentation>;
+    }
+
+    export interface ProcessDefinitionsApi {
+        new(client?: ApiClient): ProcessDefinitionsApi;
+
+        getProcessDefinitions(opts?: {latest?: boolean, appDefinitionId?: number}): Promise<any>;
+    }
+
+    export interface ProcessDefinitionsFormApi {
+        new(client?: ApiClient): ProcessDefinitionsApi;
+
+        getProcessDefinitionStartForm(processDefinitionId?: string): Promise<FormDefinitionRepresentation>;
+        getRestFieldValues(processDefinitionId?: string, field?: string): Promise<FormValueRepresentation[]>;
+        getRestTableFieldValues(processDefinitionId?: string, field?: string, column?: string): Promise<FormValueRepresentation[]>;
+    }
+
+    export interface ProcessInstancesInformationApi {
+        new(client?: ApiClient): ProcessInstancesInformationApi;
+
+        getProcessInstanceContent(processInstanceId?: string): Promise<any>;
+        startNewProcessInstance(startRequest?: CreateProcessInstanceRepresentation): Promise<ProcessInstanceRepresentation>;
+    }
+
+    export interface ProcessInstancesListingApi {
+        new(client?: ApiClient): ProcessInstancesListingApi;
+
+        filterProcessInstances(filterRequest?: ProcessInstanceFilterRequestRepresentation): Promise<any>;
+        getProcessInstances(requestNode?: any): Promise<any>;
+    }
+
+    export interface ProcessInstanceVariablesApi {
+        new(client?: ApiClient): ProcessInstanceVariablesApi;
+
+        getProcessInstanceVariables(processInstanceId?: string): Promise<any>;
+        createProcessInstanceVariables(processInstanceId?: string, restVariables?: RestVariable[]): Promise<any>;
+        createOrUpdateProcessInstanceVariables(processInstanceId?: string, restVariables?: RestVariable[]): Promise<any>;
+        getProcessInstanceVariable(processInstanceId?: string, variableName?: string): Promise<any>;
+        updateProcessInstanceVariable(processInstanceId?: string, variableName?: string, restVariable?: RestVariable): Promise<any>;
+        deleteProcessInstanceVariable(processInstanceId?: string, variableName?: string): Promise<any>;
+    }
+
+    export interface ProcessScopeApi {
+        new(client?: ApiClient): ProcessScopeApi;
+
+        getRuntimeProcessScopes(processScopesRequest?: ProcessScopesRequestRepresentation): Promise<ProcessScopeRepresentation>;
+    }
+
+    export interface ProfileApi {
+        new(client?: ApiClient): ProfileApi;
+
+        changePassword(changePasswordRepresentation?: ChangePasswordRepresentation): Promise<any>;
+        getProfilePicture(): Promise<any>;
+        getProfilePictureUrl(): string;
+        getProfile(): Promise<UserRepresentation>;
+        updateProfile(userRepresentation?: UserRepresentation): Promise<UserRepresentation>;
+        uploadProfilePicture(file?: File): Promise<ImageUploadRepresentation>;
+    }
+
+    export interface ReportApi {
+        new(client?: ApiClient): ReportApi;
+
+        createDefaultReports(): Promise<any>;
+        getTasksByprocessDefinitionId(reportId, processDefinitionId): Promise<any>;
+        getReportsByParams(reportId, paramsQuery): Promise<any>;
+        getProcessDefinitions(): Promise<any>;
+        getReportParams(reportId): Promise<any>;
+        getReportList(): Promise<any>;
+        updateReport(reportId, name): Promise<any>;
+        exportToCsv(reportId?: string, queryParams?: ReportExportQueryRepresentation): Promise<any>;
+        saveReport(reportId?: string, queryParams?: ReportSaveQueryRepresentation): Promise<any>;
+        deleteReport(reportId?: string): Promise<any>;
+        getTasksByProcessDefinitionId(reportId: string, processDefinitionId: string): Promise<any>;
+    }
+
+    export interface ScriptFileApi {
+        new(client?: ApiClient): ScriptFileApi;
+
+        getControllers(): Promise<string>;
+        getLibraries(): Promise<string>;
+    }
+
+    export interface SystemPropertiesApi {
+        new(client?: ApiClient): SystemPropertiesApi;
+
+        getProperties(): Promise<SystemPropertiesRepresentation>;
+    }
+
+    export interface TaskActionsApi {
+        new(client?: ApiClient): TaskActionsApi;
+
+        assignTask(taskId?: string, requestNode?: any): Promise<TaskRepresentation>;
+        attachForm(taskId?: string, requestNode?: any): Promise<any>;
+        claimTask(taskId?: string): Promise<any>;
+        completeTask(taskId?: string): Promise<any>;
+        involveUser(taskId?: string, requestNode?: any): Promise<any>;
+        removeForm(taskId?: string): Promise<any>;
+        removeInvolvedUser(taskId?: string, requestNode?: any): Promise<any>;
+        unclaimTask(taskId?: string): Promise<any>;
+    }
+
+    export interface TaskApi {
+        new(client?: ApiClient): TaskApi;
+
+        addSubtask(taskId?: string, taskRepresentation?: TaskRepresentation): Promise<any>;
+        addTaskComment(commentRequest?: CommentRepresentation, taskId?: string): Promise<any>;
+        assignTask(taskId?: string, requestNode?: any): Promise<any>;
+        attachForm(taskId?: string, requestNode?: any): Promise<any>;
+        claimTask(taskId?: string): Promise<any>;
+        completeTaskForm(taskId?: string, completeTaskFormRepresentation?: CompleteFormRepresentation): Promise<any>;
+        completeTask(taskid?: string): Promise<any>;
+        createNewTask(taskRepresentation?: TaskRepresentation): Promise<any>;
+        createRelatedContentOnTask(taskId?: string, relatedContent?: RelatedContentRepresentation, opts?: {isRelatedContent?: boolean}): Promise<any>;
+        deleteTask(taskId?: string): Promise<any>;
+        filterTasks(requestNode?: TaskFilterRequestRepresentation): Promise<any>;
+        getChecklist(taskId?: string): Promise<any>;
+        getTaskAuditJson(taskId?: string): Promise<any>;
+        getTaskAuditPdf(taskId?: string): Promise<any>;
+        getRelatedContentForTask(taskId?: string): Promise<any>;
+        getRestFieldValuesColumn(taskId?: string, field?: string, column?: string): Promise<any>;
+        getRestFieldValues(taskId?: string, field?: string): Promise<any>;
+        getTaskComments(taskId?: string, opts?: {latestFirst?: boolean}): Promise<any>;
+        getTaskForm(taskId?: string): Promise<any>;
+        getTask(taskId?: string): Promise<any>;
+        involveUser(taskId?: string, requestNode?: any): Promise<any>;
+        listTasks(requestNode?: TaskQueryRequestRepresentation): Promise<any>;
+        orderChecklist(taskId?: string, orderRepresentation?: ChecklistOrderRepresentation): Promise<any>;
+        removeForm(taskId?: string): Promise<any>;
+        removeInvolvedUser(taskId?: string, requestNode?: any): Promise<any>;
+        saveTaskForm(taskId?: string, saveTaskFormRepresentation?: SaveFormRepresentation): Promise<any>;
+        unclaimTask(taskId?: string): Promise<any>;
+        updateTask(taskId?: string, updated?: TaskUpdateRepresentation): Promise<any>;
+    }
+
+    export interface TaskCheckListApi {
+        new(client?: ApiClient): TaskCheckListApi;
+
+        addSubtask(taskId?: string, taskRepresentation?: TaskRepresentation): Promise<TaskRepresentation>;
+        getChecklist(taskid?: string): Promise<any>;
+        orderChecklist(taskId?: string, orderRepresentation?: ChecklistOrderRepresentation): Promise<any>;
+    }
+
+    export interface TaskFormsApi {
+        new(client?: ApiClient): TaskFormsApi;
+
+        completeTaskForm(taskId?: string, completeTaskFormRepresentation?: CompleteFormRepresentation): Promise<any>;
+        getRestFieldValues(taskId?: string, field?: string, column?: string): Promise<FormValueRepresentation[]>;
+        getTaskForm(taskId?: string): Promise<FormDefinitionRepresentation>;
+        getTaskFormVariables(taskId?: string): Promise<FormDefinitionRepresentation>;
+        saveTaskForm(taskId?: string, saveTaskFormRepresentation?: SaveFormRepresentation): Promise<any>;
+    }
+
+    export interface UserApi {
+        new(client?: ApiClient): UserApi;
+
+        executeAction(userId?: number, actionRequest?: UserActionRepresentation): Promise<any>;
+        getProfilePicture(userId?: number): Promise<any>;
+        getUserProfilePictureUrl(userId?: number): string;
+        getUser(userId?: number): Promise<any>;
+        getUsers(opts?: {filter?: string, email?: string, externalId?: string, externalIdCaseInsensitive?: string, excludeTaskId?: string, excludeProcessId?: string, groupId?: number, tenantId?: number}): Promise<any>;
+        requestPasswordReset(resetPassword?: ResetPasswordRepresentation): Promise<any>;
+        updateUser(userId?: number, userRequest?: UserRepresentation): Promise<any>;
+    }
+
+    export interface UserFiltersApi {
+        new(client?: ApiClient): UserFiltersApi;
+
+        createUserProcessInstanceFilter(userProcessInstanceFilterRepresentation?: UserProcessInstanceFilterRepresentation): Promise<UserProcessInstanceFilterRepresentation>;
+        createUserTaskFilter(userTaskFilterRepresentation?: UserTaskFilterRepresentation): Promise<any>;
+        deleteUserProcessInstanceFilter(userFilterId?: number): Promise<any>;
+        getUserProcessInstanceFilter(userFilterId?: number): Promise<any>;
+        getUserProcessInstanceFilters(opts?: {appId?: number}): Promise<any>;
+        deleteUserTaskFilter(userFilterId?: number): Promise<any>;
+        getUserTaskFilter(userFilterId?: number): Promise<any>;
+        getUserTaskFilters(opts?: {appId?: number}): Promise<any>;
+        orderUserProcessInstanceFilters(filterOrderRepresentation?: UserFilterOrderRepresentation): Promise<any>;
+        orderUserTaskFilters(filterOrderRepresentation?: UserFilterOrderRepresentation): Promise<any>;
+        updateUserProcessInstanceFilter(userFilterId?: number, userProcessInstanceFilterRepresentation?: UserProcessInstanceFilterRepresentation): Promise<UserProcessInstanceFilterRepresentation>;
+        updateUserTaskFilter(userFilterId?: number, userTaskFilterRepresentation?: UserTaskFilterRepresentation): Promise<UserTaskFilterRepresentation>;
+    }
+
+    export interface UsersWorkflowApi {
+        new(client?: ApiClient): UsersWorkflowApi;
+        getUsers(opts?: {filter?: string, email?: string, externalId?: string, externalIdCaseInsensitive?: string, excludeTaskId?: string, excludeProcessId?: string, groupId?: number, tenantId?: number}): Promise<any>;
+    }
+
+    export interface AboutApi {
+        new(client?: ApiClient): AboutApi;
+
+        getAppVersion(): Promise<any>;
+    }
+
+    export declare class AbstractGroupRepresentation {
+        constructor(obj?: any);
+
+        externalId?: string;
+        id: number;
+        name: string;
+        status: string;
+    }
+
+    export declare class AbstractUserRepresentation {
+        constructor(obj?: any);
+
+        email?: string;
+        firstName?: string;
+        lastName?: string;
+        externalId?: string;
+        id: number;
+        pictureId: string;
+    }
+
+    export declare class AddGroupCapabilitiesRepresentation {
+        constructor(obj?: any);
+
+        capabilities?: string[];
+    }
+
+    export declare class AppDefinition {
+        constructor(obj?: any);
+
+        icon?: string;
+        models?: AppModelDefinition;
+        publishIdentityInfo?: PublishIdentityInfoRepresentation;
+        theme?: string;
+    }
+
+    export declare class AppDefinitionPublishRepresentation {
+        constructor(obj?: any);
+
+        comment?: string;
+        force?: boolean;
+    }
+
+    export declare class AppDefinitionRepresentation {
+        constructor(obj?: any);
+
+        defaultAppId?: string;
+        deploymentId?: string;
+        description?: string;
+        icon?: string;
+        id?: number;
+        modelId?: number;
+        name?: string;
+        tenantId?: number;
+        theme?: string;
+    }
+
+    export declare class AppDefinitionUpdateResultRepresentation {
+        constructor(obj?: any);
+
+        appDefinition?: AppDefinitionRepresentation;
+        customData?: any;
+        error?: boolean;
+        errorDescription?: string;
+        errorType?: number;
+        message?: string;
+        messageKey?: string;
+    }
+
+    export declare class AppModelDefinition {
+        constructor(obj?: any);
+
+        createdBy?: number;
+        createdByFullName?: string;
+        description?: string;
+        id?: number;
+        lastUpdated?: Date;
+        lastUpdatedBy?: number;
+        lastUpdatedByFullName?: string;
+        modelType?: number;
+        name?: string;
+        stencilSetId?: number;
+        version?: number;
+    }
+
+    export declare class BulkUserUpdateRepresentation {
+        constructor(obj?: any);
+
+        accountType?: string;
+        password?: string;
+        sendNotifications?: boolean;
+        status?: string;
+        tenantId?: number;
+        users?: number[];
+    }
+
+    export declare class ChangePasswordRepresentation {
+        constructor(obj?: any);
+
+        newPassword?: string;
+        oldPassword?: string;
+    }
+
+    export declare class Chart {
+        constructor(obj?: any): Chart;
+
+        id?: string;
+        type?: string;
+    }
+
+    export declare class ChecklistOrderRepresentation {
+        constructor(obj?: any);
+
+        order?: string[];
+    }
+
+    export declare class CompleteFormRepresentation {
+        constructor(obj?: any);
+
+        outcome?: string;
+        values?: any;
+    }
+
+    export declare class ConditionRepresentation {
+        constructor(obj?: any);
+
+        leftFormFieldId?: string;
+        leftRestResponseId?: string;
+        nextConditionOperator?: string;
+        operator?: string;
+        rightFormFieldId?: string;
+        rightRestResponseId?: string;
+        rightType?: string;
+        rightValue?: any;
+    }
+
+    export declare class CreateEndpointBasicAuthRepresentation {
+        constructor(obj?: any);
+
+        name?: string;
+        password?: string;
+        tenantId?: number;
+        username?: string;
+    }
+
+    export declare class CreateProcessInstanceRepresentation {
+        constructor(obj?: any);
+
+        name?: string;
+        outcome?: string;
+        processDefinitionKey?: string;
+        businessKey?: string;
+        processDefinitionId?: string;
+        variables?: any;
+        values?: any;
+    }
+
+    export declare class CreateTenantRepresentation {
+        constructor(obj?: any);
+
+        active?: boolean;
+        domain?: string;
+        maxUsers?: number;
+        name?: string;
+    }
+
+    export declare class EndpointBasicAuthRepresentation {
+        constructor(obj?: any);
+
+        created?: Date;
+        id?: number;
+        lastUpdated?: Date;
+        name?: string;
+        tenantId?: number;
+        username?: string;
+    }
+
+    export declare class EndpointConfigurationRepresentation {
+        constructor(obj?: any);
+
+        basicAuthId?: number;
+        basicAuthName?: string;
+        host?: string;
+        id?: number;
+        name?: string;
+        path?: string;
+        port?: string;
+        protocol?: string;
+        requestHeaders?: EndpointRequestHeaderRepresentation[];
+        tenantId?: number;
+    }
+
+    export declare class EndpointRequestHeaderRepresentation {
+        constructor(obj?: any);
+
+        name?: string;
+        value?: string;
+    }
+
+    export declare class EntityAttributeScopeRepresentation {
+        constructor(obj?: any);
+
+        name?: string;
+        type?: string;
+    }
+
+    export declare class EntityVariableScopeRepresentation {
+        constructor(obj?: any);
+
+        attributes?: EntityAttributeScopeRepresentation[];
+        entityName?: string;
+        mappedDataModel?: number;
+        mappedVariableName?: string;
+    }
+
+    export declare class FormDefinitionRepresentation {
+        constructor(obj?: any);
+
+        className?: string;
+        customFieldTemplates?: any;
+        fields?: FormFieldRepresentation;
+        gridsterForm?: boolean;
+        id?: number;
+        javascriptEvents?: FormJavascriptEventRepresentation;
+        metadata?: any;
+        name?: string;
+        outcomeTarget?: string;
+        outcomes?: FormOutcomeRepresentation[];
+        processDefinitionId?: string;
+        processDefinitionKey?: string;
+        processDefinitionName?: string;
+        selectedOutcome?: string;
+        style?: string;
+        tabs?: FormTabRepresentation[];
+        taskDefinitionKey?: string;
+        taskId?: string;
+        taskName?: string;
+    }
+
+    export declare class FormFieldRepresentation {
+        constructor(obj?: any);
+
+        className?: string;
+        col?: number;
+        colspan?: number;
+        hasEmptyValue?: boolean;
+        id?: string;
+        layout?: LayoutRepresentation;
+        maxLength?: number;
+        maxValue?: string;
+        minLength?: number;
+        minValue?: string;
+        name?: string;
+        optionType?: string;
+        options?: OptionRepresentation;
+        overrideId?: boolean;
+        params?: any;
+        placeholder?: string;
+        readOnly?: boolean;
+        regexPattern?: string;
+        required?: boolean;
+        restIdProperty?: string;
+        restLabelProperty?: string;
+        restResponsePath?: string;
+        restUrl?: string;
+        row?: number;
+        sizeX?: number;
+        sizeY?: number;
+        tab?: string;
+        type?: string;
+        value?: any;
+        visibilityCondition?: ConditionRepresentation;
+    }
+
+    export declare class FormJavascriptEventRepresentation {
+        constructor(obj?: any);
+
+        event?: string;
+        javascriptLogic?: string;
+    }
+
+    export declare class FormOutcomeRepresentation {
+        constructor(obj?: any);
+
+        id?: string;
+        name?: string;
+    }
+
+    export declare class FormRepresentation {
+        constructor(obj?: any);
+
+        description?: string;
+        formDefinition?: FormDefinitionRepresentation;
+        id?: number;
+        lastUpdated?: Date;
+        lastUpdatedBy?: number;
+        lastUpdatedByFullName?: string;
+        name?: string;
+        referenceId?: number;
+        stencilSetId?: number;
+        version?: number;
+    }
+
+    export declare class FormSaveRepresentation {
+        constructor(obj?: any);
+
+        comment?: string;
+        formImageBase64?: string;
+        formRepresentation?: FormRepresentation;
+        newVersion?: boolean;
+        processScopeIdentifiers?: ProcessScopeIdentifierRepresentation;
+        reusable?: boolean;
+    }
+
+    export declare class FormScopeRepresentation {
+        constructor(obj?: any);
+
+        description?: string;
+        fieldVariables?: FormFieldRepresentation[];
+        fields?: FormFieldRepresentation[];
+        id?: number;
+        name?: string;
+        outcomes?: FormOutcomeRepresentation[];
+    }
+
+    export declare class FormTabRepresentation {
+        constructor(obj?: any);
+
+        id?: string;
+        title?: string;
+        visibilityCondition?: ConditionRepresentation;
+    }
+
+    export declare class FormValueRepresentation {
+        constructor(obj?: any);
+
+        id?: string;
+        name?: string;
+    }
+
+    export declare class GroupCapabilityRepresentation {
+        constructor(obj?: any);
+
+        id?: number;
+        name?: string;
+    }
+
+    export declare class GroupRepresentation {
+        constructor(obj?: any);
+
+        capabilities?: GroupCapabilityRepresentation[];
+        externalId?: string;
+        groups?: GroupRepresentation[];
+        id?: number;
+        lastSyncTimeStamp?: Date;
+        name?: string;
+        parentGroupId?: number;
+        status?: string;
+        tenantId?: number;
+        type?: number;
+        userCount?: number;
+        users?: UserRepresentation[];
+    }
+
+    export declare class ImageUploadRepresentation {
+        constructor(obj?: any);
+
+        created?: Date;
+        id?: number;
+        name?: string;
+        userId?: number;
+    }
+
+    export declare class LayoutRepresentation {
+        constructor(obj?: any);
+
+        colspan?: number;
+        column?: number;
+        row?: number;
+    }
+
+    export declare class LightAppRepresentation {
+        constructor(obj?: any);
+
+        description?: string;
+        icon?: string;
+        id?: number;
+        name?: string;
+        theme?: string;
+    }
+
+    export declare class LightGroupRepresentation {
+        constructor(obj?: any);
+
+        externalId?: string;
+        groups?: LightGroupRepresentation[];
+        id?: number;
+        name?: string;
+        status?: string;
+    }
+
+    export declare class LightTenantRepresentation {
+        constructor(obj?: any);
+
+        id?: number;
+        name?: string;
+    }
+
+    export declare class ModelRepresentation {
+        constructor(obj?: any);
+
+        comment?: string;
+        createdBy?: number;
+        createdByFullName?: string;
+        description?: string;
+        favorite?: boolean;
+        id?: number;
+        lastUpdated?: Date;
+        lastUpdatedBy?: number;
+        lastUpdatedByFullName?: string;
+        latestVersion?: boolean;
+        modelType?: number;
+        name?: string;
+        permission?: string;
+        referenceId?: number;
+        stencilSet?: number;
+        version?: number;
+    }
+
+    export declare class OptionRepresentation {
+        constructor(obj?: any);
+
+        id?: string;
+        name?: string;
+    }
+
+    export declare class ParameterValueRepresentation {
+        constructor(obj?: any);
+
+        id?: string;
+        name?: string;
+        version?: string;
+        value?: string;
+    }
+
+    export declare class ProcessFilterRequestRepresentation {
+        constructor(obj?: any);
+
+        processDefinitionId?: number;
+        appDefinitionId?: number;
+        state?: string;
+        sort?: string;
+        page?: number;
+        size?: number;
+    }
+
+    export declare class ProcessInstanceAuditRepresentation {
+        constructor(obj?: any);
+
+        processInstanceId?: string;
+        processInstanceName?: string;
+        processDefinitionName?: string;
+        processDefinitionVersion?: string;
+        processInstanceStartTime?: Date;
+        processInstanceEndTime?: Date;
+        processInstanceInitiator?: string;
+        entries?: any;
+        decisionInfo?: any;
+    }
+
+    export declare class ProcessInstanceFilterRepresentation {
+        constructor(obj?: any);
+
+        asc?: boolean;
+        name?: string;
+        processDefinitionId?: string;
+        processDefinitionKey?: string;
+        sort?: string;
+        state?: string;
+    }
+
+    export declare class ProcessInstanceFilterRequestRepresentation {
+        constructor(obj?: any);
+
+        appDefinitionId?: number;
+        filter?: ProcessInstanceFilterRepresentation;
+        filterId?: number;
+        page?: number;
+        size?: number;
+    }
+
+    export declare class ProcessInstanceRepresentation {
+        constructor(obj?: any);
+
+        businessKey?: string;
+        ended?: Date;
+        graphicalNotationDefined?: boolean;
+        id?: string;
+        name?: string;
+        processDefinitionCategory?: string;
+        processDefinitionDeploymentId?: string;
+        processDefinitionDescription?: string;
+        processDefinitionId?: string;
+        processDefinitionKey?: string;
+        processDefinitionName?: string;
+        processDefinitionVersion?: number;
+        startFormDefined?: boolean;
+        started?: Date;
+        startedBy?: LightUserRepresentation;
+        tenantId?: string;
+        variables?: RestVariable[];
+    }
+
+    export declare class ProcessInstanceVariableRepresentation {
+        constructor(obj?: any);
+
+        id?: string;
+        type?: string;
+        value?: any;
+    }
+
+    export declare class ProcessScopeIdentifierRepresentation {
+        constructor(obj?: any);
+
+        processActivityId?: string;
+        processModelId?: number;
+    }
+
+    export declare class ProcessScopeRepresentation {
+        constructor(obj?: any);
+
+        activityIds?: string[];
+        activityIdsByCollapsedSubProcessIdMap?: any;
+        activityIdsByDecisionTableIdMap?: any;
+        activityIdsByFormIdMap?: any;
+        activityIdsWithExcludedSubProcess?: any;
+        customStencilVariables?: any;
+        entityVariables?: any;
+        executionVariables?: any;
+        fieldToVariableMappings?: any;
+        forms?: FormScopeRepresentation[];
+        metadataVariables?: any;
+        modelId?: number;
+        modelId?: number;
+        processModelType?: number;
+        responseVariables?: any;
+    }
+
+    export declare class ProcessScopesRequestRepresentation {
+        constructor(obj?: any);
+
+        identifiers?: ProcessScopeIdentifierRepresentation[];
+        overriddenModel?: string;
+    }
+
+    export declare class PublishIdentityInfoRepresentation {
+        constructor(obj?: any);
+
+        group?: LightGroupRepresentation;
+        person?: LightUserRepresentation;
+        type?: string;
+    }
+
+    export declare class RelatedContentRepresentation {
+        constructor(obj?: any);
+
+        contentAvailable?: boolean;
+        created?: Date;
+        createdBy?: LightUserRepresentation;
+        id?: number;
+        link?: boolean;
+        linkUrl?: string;
+        mimeType?: string;
+        name?: string;
+        previewStatus?: string;
+        simpleType?: string;
+        source?: string;
+        sourceId?: string;
+        thumbnailStatus?: string;
+    }
+
+    export declare class ReportCharts {
+        constructor(obj?: any);
+
+        elements?: string;
+    }
+
+    export declare class ReportExportQueryRepresentation {
+        constructor(obj?: any);
+
+        processDefinitionId?: string;
+        reportName?: string;
+        slowProcessInstanceInteger?: number;
+        status?: string;
+        created?: string;
+        typeFiltering?: string;
+        duration?: string;
+        taskName?: string;
+        dateRangeInterval?: string;
+        dateRange?: ReportDateRangeRepresentation;
+    }
+
+    export declare class ReportParametersDefinition {
+        constructor(obj?: any);
+
+        id?: number;
+        name?: string;
+        definition?: string;
+        created?: string;
+    }
+
+    export declare class ReportSaveQueryRepresentation {
+        constructor(obj?: any);
+
+        processDefinitionId?: string;
+        reportName?: string;
+        slowProcessInstanceInteger?: number;
+        status?: string;
+        created?: string;
+        typeFiltering?: string;
+        duration?: string;
+        taskName?: string;
+        dateRangeInterval?: string;
+        dateRange?: ReportDateRangeRepresentation;
+    }
+
+    export declare class ResetPasswordRepresentation {
+        constructor(obj?: any);
+
+        email?: string;
+    }
+
+    export declare class ResultListDataRepresentation<T> {
+        constructor(obj?: any);
+
+        data?: T[];
+        size?: number;
+        start?: number;
+        total?: number;
+    }
+
+    export declare class RuntimeAppDefinitionSaveRepresentation {
+        constructor(obj?: any);
+
+        appDefinitions?: AppDefinitionRepresentation[];
+    }
+
+    export declare class SaveFormRepresentation {
+        constructor(obj?: any);
+
+        values?: any;
+    }
+
+    export declare class SyncLogEntryRepresentation {
+        constructor(obj?: any);
+
+        id?: number;
+        timeStamp?: Date;
+        type?: string;
+    }
+
+    export declare class SystemPropertiesRepresentation {
+        constructor(obj?: any);
+
+        allowInvolveByEmail?: boolean;
+    }
+
+    export declare class TaskAuditRepresentation {
+        constructor(obj?: any);
+
+        taskId?: string;
+        taskName?: string;
+        processDefinitionId?: string;
+        processDefinitionName?: string;
+        processDefinitionVersion?: number;
+        assignee?: string;
+        startTime?: string;
+        endTime?: string;
+        formData?: string;
+        selectedOutcome?: string;
+        comments?: string;
+    }
+
+    export declare class TaskFilterRepresentation {
+        constructor(obj?: any);
+
+        asc?: boolean;
+        assignment?: string;
+        dueAfter?: Date;
+        dueBefore?: Date;
+        name?: string;
+        processDefinitionId?: string;
+        processDefinitionKey?: string;
+        sort?: string;
+        state?: string;
+    }
+
+    export declare class TaskFilterRequestRepresentation {
+        constructor(obj?: any);
+
+        appDefinitionId?: number;
+        filter?: TaskFilterRepresentation;
+        filterId?: number;
+        page?: number;
+        size?: number;
+    }
+
+    export declare class TaskQueryRequestRepresentation {
+        constructor(obj?: any);
+
+        processInstanceId?: string;
+        text?: string;
+        assignment?: string;
+        state?: string;
+        sort?: string;
+        page?: number;
+        size?: number;
+    }
+
+    export declare class TaskRepresentation {
+        constructor(obj?: any);
+
+        adhocTaskCanBeReassigned?: boolean;
+        assignee?: LightUserRepresentation;
+        category?: string;
+        created?: Date;
+        description?: string;
+        dueDate?: Date;
+        duration?: number;
+        endDate?: Date;
+        formKey?: string;
+        id?: string;
+        initiatorCanCompleteTask?: boolean;
+        involvedPeople?: LightUserRepresentation[];
+        memberOfCandidateGroup?: boolean;
+        memberOfCandidateUsers?: boolean;
+        name?: string;
+        parentTaskId?: string;
+        parentTaskName?: string;
+        priority?: number;
+        processDefinitionCategory?: string;
+        processDefinitionDeploymentId?: string;
+        processDefinitionDescription?: string;
+        processDefinitionId?: string;
+        processDefinitionKey?: string;
+        processDefinitionName?: string;
+        processDefinitionVersion?: number;
+        processInstanceId?: string;
+        processInstanceName?: string;
+        processInstanceStartUserId?: string;
+    }
+
+    export declare class TaskUpdateRepresentation {
+        constructor(obj?: any);
+
+        description?: string;
+        descriptionSet?: boolean;
+        dueDate?: Date;
+        dueDateSet?: boolean;
+        name?: string;
+        nameSet?: boolean;
+    }
+
+    export declare class TenantEvent {
+        constructor(obj?: any);
+
+        eventTime?: Date;
+        eventType?: string;
+        extraInfo?: string;
+        id?: number;
+        tenantId?: number;
+        userId?: number;
+        userName?: string;
+    }
+
+    export declare class TenantRepresentation {
+        constructor(obj?: any);
+
+        active?: boolean;
+        created?: Date;
+        domain?: string;
+        id?: number;
+        lastUpdate?: Date;
+        logoId?: number;
+        maxUsers?: number;
+        name?: string;
+    }
+
+    export declare class UserAccountCredentialsRepresentation {
+        constructor(obj?: any);
+
+        password?: string;
+        username?: string;
+    }
+
+    export declare class UserActionRepresentation {
+        constructor(obj?: any);
+
+        action?: string;
+        newPassword?: string;
+        oldPassword?: string;
+    }
+
+    export declare class UserFilterOrderRepresentation {
+        constructor(obj?: any);
+
+        appId?: number;
+        order?: number[];
+    }
+
+    export declare class UserProcessInstanceFilterRepresentation {
+        constructor(obj?: any);
+
+        appId?: number;
+        filter?: ProcessInstanceFilterRepresentation;
+        icon?: number;
+        id?: number;
+        index?: number;
+        name?: string;
+        recent?: boolean;
+    }
+
+    export declare class UserRepresentation {
+        constructor(obj?: any);
+
+        apps?: LightAppRepresentation[];
+        capabilities?: string[];
+        company?: string;
+        created?: Date;
+        email?: string;
+        externalId?: string;
+        firstName?: string;
+        fullname?: string;
+        groups?: GroupRepresentation[];
+        lastName?: string;
+        lastUpdate?: Date;
+        latestSyncTimeStamp?: Date;
+        password?: string;
+        pictureId?: number;
+        status?: string;
+        tenantId?: number;
+        tenantPictureId?: number;
+        tenantName?: string;
+        type?: string;
+    }
+
+    export declare class UserTaskFilterRepresentation {
+        constructor(obj?: any);
+
+        appId?: number;
+        filter?: TaskFilterRepresentation;
+        icon?: string;
+        id?: number;
+        index?: number;
+        name?: string;
+        recent?: boolean;
+    }
+
+    export declare class ValidationErrorRepresentation {
+        constructor(obj?: any);
+
+        defaultDescription?: string;
+        id?: string;
+        name?: string;
+        problem?: string;
+        problemReference?: string;
+        validatorSetName?: string;
+        warning?: boolean;
+    }
+
+    export declare class VariableScopeRepresentation {
+        constructor(obj?: any);
+
+        mapVariable?: string;
+        mappedColumn?: string;
+        mappedDataModel?: number;
+        mappedEntity?: string;
+        mappedVariableName?: string;
+        processVariableName?: string;
+        processVariableType?: string;
+    }
+
+    export declare class ReportDateRangeRepresentation {
+        constructor(obj?: any);
+
+        endDate?: string;
+        rangeId?: number;
+        startDate?: string;
+    }
+
+    export declare class LightUserRepresentation {
+        constructor(obj?: any);
+
+        email?: string;
+        externalId?: string;
+        firstName?: string;
+        id?: number;
+        lastName?: string;
+        pictureId?: number;
+    }
+
+    export declare class CommentRepresentation {
+        constructor(obj?: any);
+
+        created?: Date;
+        createdBy?: LightUserRepresentation;
+        id?: number;
+        message?: string;
+    }
+
+    //  ======= Process service  End ======
+
+    export declare class Activiti {
         new(config: any): Activiti;
-        aboutApi: any;
-        adminEndpointsApi: any;
-        adminGroupsApi: any;
-        adminTenantsApi: any;
-        adminUsersApi: any;
-        alfrescoApi: any;
-        appsApi: any;
-        appsDefinitionApi: any;
-        appsRuntimeApi: any;
-        commentsApi: any;
-        contentApi: any;
+        aboutApi: AboutApi;
+        AlfrescoApi: AlfrescoApi;
+        adminEndpointsApi: AdminEndpointsApi;
+        adminGroupsApi: AdminGroupsApi;
+        adminTenantsApi: AdminTenantsApi;
+        adminUsersApi: AdminUsersApi;
+        alfrescoApi: AlfrescoApi;
+        appsApi: AppsApi;
+        appsDefinitionApi: AppsDefinitionApi;
+        appsRuntimeApi: AppsRuntimeApi;
+        commentsApi: CommentsApi;
+        contentApi: ContentApi;
         contentRenditionApi: any;
-        editorApi: any;
-        groupsApi: any;
-        iDMSyncApi: any;
-        integrationAccountApi: any;
-        integrationAlfrescoCloudApi: any;
-        integrationAlfrescoOnPremiseApi: any;
-        integrationApi: any;
+        editorApi: EditorApi;
+        groupsApi: GroupsApi;
+        iDMSyncApi: IDMSyncApi;
+        integrationAccountApi: IntegrationAccountApi;
+        integrationAlfrescoCloudApi: IntegrationAlfrescoCloudApi;
+        integrationAlfrescoOnPremiseApi: IntegrationAlfrescoOnPremiseApi;
+        integrationApi: IntegrationApi;
         integrationBoxApi: any;
         integrationDriveApi: any;
-        modelJsonBpmnApi: any;
-        modelBpmnApi: any;
-        modelsApi: any;
-        modelsHistoryApi: any;
-        processApi: any;
-        processDefinitionsApi: any;
-        processDefinitionsFormApi: any;
-        processInstancesApi: any;
-        processInstancesInformationApi: any;
-        processInstancesListingApi: any;
-        processScopeApi: any;
-        processInstanceVariablesApi: any;
-        profileApi: any;
-        scriptFileApi: any;
-        systemPropertiesApi: any;
-        taskActionsApi: any;
-        taskApi: any;
-        taskCheckListApi: any;
-        taskFormsApi: any;
+        modelJsonBpmnApi: ModelJsonBpmnApi;
+        modelBpmnApi: ModelBpmnApi;
+        modelsApi: ModelsApi;
+        modelsHistoryApi: ModelsHistoryApi;
+        processApi: ProcessApi;
+        processDefinitionsApi: ProcessDefinitionsApi;
+        processDefinitionsFormApi: ProcessDefinitionsFormApi;
+        processInstancesApi: ProcessInstancesApi;
+        processInstancesInformationApi: ProcessInstancesInformationApi;
+        processInstancesListingApi: ProcessInstancesListingApi;
+        processScopeApi: ProcessScopeApi;
+        processInstanceVariablesApi: ProcessInstanceVariablesApi;
+        profileApi: ProfileApi;
+        scriptFileApi: ScriptFileApi;
+        systemPropertiesApi: SystemPropertiesApi;
+        taskActionsApi: TaskActionsApi;
+        taskApi: TaskApi;
+        taskCheckListApi: TaskCheckListApi;
+        taskFormsApi: TaskFormsApi;
         temporaryApi: any;
-        userApi: any;
-        userFiltersApi: any;
-        usersWorkflowApi: any;
-        reportApi: any;
+        userApi: UserApi;
+        userFiltersApi: UserFiltersApi;
+        usersWorkflowApi: UsersWorkflowApi;
+        reportApi: ReportApi;
 
         /*Models*/
-        AbstractGroupRepresentation: any;
-        AbstractRepresentation: any;
-        AbstractUserRepresentation: any;
-        AddGroupCapabilitiesRepresentation: any;
-        AppDefinition: any;
-        AppDefinitionPublishRepresentation: any;
-        AppDefinitionRepresentation: any;
-        AppDefinitionUpdateResultRepresentation: any;
-        AppModelDefinition: any;
-        ArrayNode: any;
+        AbstractGroupRepresentation: AbstractGroupRepresentation;
+        AbstractUserRepresentation: AbstractUserRepresentation;
+        AddGroupCapabilitiesRepresentation: AddGroupCapabilitiesRepresentation;
+        AppDefinition: AppDefinition;
+        AppDefinitionPublishRepresentation: AppDefinitionPublishRepresentation;
+        AppDefinitionRepresentation: AppDefinitionRepresentation;
+        AppDefinitionUpdateResultRepresentation: AppDefinitionUpdateResultRepresentation;
+        AppModelDefinition: AppModelDefinition;
         BoxUserAccountCredentialsRepresentation: any;
-        BulkUserUpdateRepresentation: any;
-        ChangePasswordRepresentation: any;
-        ChecklistOrderRepresentation: any;
-        CommentRepresentation: any;
-        CompleteFormRepresentation: any;
-        ConditionRepresentation: any;
-        CreateEndpointBasicAuthRepresentation: any;
-        CreateProcessInstanceRepresentation: any;
-        CreateTenantRepresentation: any;
-        EndpointBasicAuthRepresentation: any;
-        EndpointConfigurationRepresentation: any;
-        EndpointRequestHeaderRepresentation: any;
-        EntityAttributeScopeRepresentation: any;
-        EntityVariableScopeRepresentation: any;
-        File: any;
-        FormDefinitionRepresentation: any;
-        FormFieldRepresentation: any;
-        FormJavascriptEventRepresentation: any;
-        FormOutcomeRepresentation: any;
-        FormRepresentation: any;
-        FormSaveRepresentation: any;
-        FormScopeRepresentation: any;
-        FormTabRepresentation: any;
-        FormValueRepresentation: any;
-        GroupCapabilityRepresentation: any;
-        GroupRepresentation: any;
-        ImageUploadRepresentation: any;
-        LayoutRepresentation: any;
-        LightAppRepresentation: any;
-        LightGroupRepresentation: any;
-        LightTenantRepresentation: any;
-        LightUserRepresentation: any;
-        MaplongListstring: any;
-        MapstringListEntityVariableScopeRepresentation: any;
-        MapstringListVariableScopeRepresentation: any;
-        Mapstringstring: any;
-        ModelRepresentation: any;
-        ObjectNode: any;
-        OptionRepresentation: any;
-        ProcessInstanceFilterRepresentation: any;
-        ProcessInstanceFilterRequestRepresentation: any;
-        ProcessInstanceRepresentation: any;
-        ProcessScopeIdentifierRepresentation: any;
-        ProcessScopeRepresentation: any;
-        ProcessScopesRequestRepresentation: any;
-        PublishIdentityInfoRepresentation: any;
-        RelatedContentRepresentation: any;
-        ResetPasswordRepresentatio: any;
+        BulkUserUpdateRepresentation: BulkUserUpdateRepresentation;
+        ChangePasswordRepresentation: ChangePasswordRepresentation;
+        ChecklistOrderRepresentation: ChecklistOrderRepresentation;
+        CommentRepresentation: CommentRepresentation;
+        CompleteFormRepresentation: CompleteFormRepresentation;
+        ConditionRepresentation: ConditionRepresentation;
+        CreateEndpointBasicAuthRepresentation: CreateEndpointBasicAuthRepresentation;
+        CreateProcessInstanceRepresentation: CreateProcessInstanceRepresentation;
+        CreateTenantRepresentation: CreateTenantRepresentation;
+        EndpointBasicAuthRepresentation: EndpointBasicAuthRepresentation;
+        EndpointConfigurationRepresentation: EndpointConfigurationRepresentation;
+        EndpointRequestHeaderRepresentation: EndpointRequestHeaderRepresentation;
+        EntityAttributeScopeRepresentation: EntityAttributeScopeRepresentation;
+        EntityVariableScopeRepresentation: EntityVariableScopeRepresentation;
+        File: File;
+        FormDefinitionRepresentation: FormDefinitionRepresentation;
+        FormFieldRepresentation: FormFieldRepresentation;
+        FormJavascriptEventRepresentation: FormJavascriptEventRepresentation;
+        FormOutcomeRepresentation: FormOutcomeRepresentation;
+        FormRepresentation: FormRepresentation;
+        FormSaveRepresentation: FormSaveRepresentation;
+        FormScopeRepresentation: FormScopeRepresentation;
+        FormTabRepresentation: FormTabRepresentation;
+        FormValueRepresentation: FormValueRepresentation;
+        GroupCapabilityRepresentation: GroupCapabilityRepresentation;
+        GroupRepresentation: GroupRepresentation;
+        ImageUploadRepresentation: ImageUploadRepresentation;
+        LayoutRepresentation: LayoutRepresentation;
+        LightAppRepresentation: LightAppRepresentation;
+        LightGroupRepresentation: LightGroupRepresentation;
+        LightTenantRepresentation: LightTenantRepresentation;
+        LightUserRepresentation: LightUserRepresentation;
+        ModelRepresentation: ModelRepresentation;
+        OptionRepresentation: OptionRepresentation;
+        ProcessInstanceFilterRepresentation: ProcessInstanceFilterRepresentation;
+        ProcessInstanceFilterRequestRepresentation: ProcessInstanceFilterRequestRepresentation;
+        ProcessInstanceRepresentation: ProcessInstanceRepresentation;
+        ProcessScopeIdentifierRepresentation: ProcessScopeIdentifierRepresentation;
+        ProcessScopeRepresentation: ProcessScopeRepresentation;
+        ProcessScopesRequestRepresentation: ProcessScopesRequestRepresentation;
+        PublishIdentityInfoRepresentation: PublishIdentityInfoRepresentation;
+        RelatedContentRepresentation: RelatedContentRepresentation;
+        ResetPasswordRepresentation: ResetPasswordRepresentation;
         RestVariable: RestVariable;
-        ResultListDataRepresentation: any;
-        RuntimeAppDefinitionSaveRepresentation: any;
-        SaveFormRepresentation: any;
-        SyncLogEntryRepresentation: any;
-        SystemPropertiesRepresentation: any;
-        TaskFilterRepresentation: any;
-        TaskFilterRequestRepresentation: any;
-        TaskRepresentation: any;
-        TaskUpdateRepresentation: any;
-        TenantEvent: any;
-        TenantRepresentation: any;
-        UserAccountCredentialsRepresentation: any;
-        UserActionRepresentation: any;
-        UserFilterOrderRepresentation: any;
-        UserProcessInstanceFilterRepresentation: any;
-        UserRepresentation: any;
-        UserTaskFilterRepresentation: any;
-        ValidationErrorRepresentation: any;
-        VariableScopeRepresentation: any;
+        ResultListDataRepresentation: ResultListDataRepresentation;
+        RuntimeAppDefinitionSaveRepresentation: RuntimeAppDefinitionSaveRepresentation;
+        SaveFormRepresentation: SaveFormRepresentation;
+        SyncLogEntryRepresentation: SyncLogEntryRepresentation;
+        SystemPropertiesRepresentation: SystemPropertiesRepresentation;
+        TaskFilterRepresentation: TaskFilterRepresentation;
+        TaskFilterRequestRepresentation: TaskFilterRequestRepresentation;
+        TaskRepresentation: TaskRepresentation;
+        TaskUpdateRepresentation: TaskUpdateRepresentation;
+        TenantEvent: TenantEvent;
+        TenantRepresentation: TenantRepresentation;
+        UserAccountCredentialsRepresentation: UserAccountCredentialsRepresentation;
+        UserActionRepresentation: UserActionRepresentation;
+        UserFilterOrderRepresentation: UserFilterOrderRepresentation;
+        UserProcessInstanceFilterRepresentation: UserProcessInstanceFilterRepresentation;
+        UserRepresentation: UserRepresentation;
+        UserTaskFilterRepresentation: UserTaskFilterRepresentation;
+        ValidationErrorRepresentation: ValidationErrorRepresentation;
+        VariableScopeRepresentation: VariableScopeRepresentation;
     }
 
     export interface Core {
@@ -1742,7 +3407,9 @@ declare namespace AlfrescoApi {
         deleteCustomType(modelName: string, typeName: string): Promise<{}>;
     }
 
-    export interface AlfrescoApiConfig {
+    export declare class AlfrescoApiConfig {
+        constructor(obj?: any);
+
         hostEcm?: string;
         hostBpm?: string;
         oauth2?: Oauth2Config;
@@ -1754,7 +3421,9 @@ declare namespace AlfrescoApi {
         disableCsrf?: boolean;
     }
 
-    export interface RestVariable {
+    export declare class RestVariable {
+        constructor(obj?: any);
+
         name?: string;
         scope?: string;
         type?: string;
@@ -1810,7 +3479,6 @@ declare namespace AlfrescoApi {
         secret?: string;
         host?: string;
     }
-
 }
 
 export = AlfrescoApi;
