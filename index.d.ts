@@ -632,11 +632,11 @@ declare namespace AlfrescoApi {
     // }
 
     export interface VersionsApi {
-        // removeVersion(nodeId?: string, versionId?: string, opts?: any): Promise<{}>;
-        // getVersion(nodeId?: string, versionId?: string, opts?: any): Promise<VersionEntry>;
-        // getVersionContent(nodeId?: string, versionId?: string, attachment?: boolean, ifModifiedSince?: Date, opts?: any): Promise<{}>;
-        listVersionHistory(nodeId?: string, opts?: { include?: Array<string>, fields?: Array<string>, skipCount?: number, maxItems?: number }): Promise<VersionPaging>;
-        revertVersion(nodeId?: string, versionId?: string, opts?: { revertBody?: RevertBody, fields?: Array<string> }): Promise<VersionEntry>;
+        // removeVersion(nodeId: string, versionId: string, opts?: any): Promise<{}>;
+        // getVersion(nodeId: string, versionId: string, opts?: any): Promise<VersionEntry>;
+        // getVersionContent(nodeId: string, versionId: string, attachment?: boolean, ifModifiedSince?: Date, opts?: any): Promise<{}>;
+        listVersionHistory(nodeId: string, opts?: { include?: Array<string>, fields?: Array<string>, skipCount?: number, maxItems?: number }): Promise<VersionPaging>;
+        revertVersion(nodeId: string, versionId: string, revertBody?: RevertBody, opts?: { fields?: Array<string> }): Promise<VersionEntry>;
     }
 
     export declare class Activity {
