@@ -631,13 +631,13 @@ declare namespace AlfrescoApi {
     //     restoreremovedNode(nodeId?: string, fields?: Array<string>, opts?: any): Promise<NodeEntry>;
     // }
 
-    // export interface VersionsApi {
-    //     removeVersion(nodeId?: string, versionId?: string, opts?: any): Promise<{}>;
-    //     getVersion(nodeId?: string, versionId?: string, opts?: any): Promise<VersionEntry>;
-    //     getVersionContent(nodeId?: string, versionId?: string, attachment?: boolean, ifModifiedSince?: Date, opts?: any): Promise<{}>;
-    //     listVersionHistory(nodeId?: string, include?: Array<string>, fields?: Array<string>, skipCount?: number, maxItems?: number, opts?: any): Promise<VersionPaging>;
-    //     revertVersion(nodeId?: string, versionId?: string, revertBody?: RevertBody, fields?: Array<string>, opts?: any): Promise<VersionEntry>;
-    // }
+    export interface VersionsApi {
+        // removeVersion(nodeId: string, versionId: string, opts?: any): Promise<{}>;
+        // getVersion(nodeId: string, versionId: string, opts?: any): Promise<VersionEntry>;
+        // getVersionContent(nodeId: string, versionId: string, attachment?: boolean, ifModifiedSince?: Date, opts?: any): Promise<{}>;
+        listVersionHistory(nodeId: string, opts?: { include?: Array<string>, fields?: Array<string>, skipCount?: number, maxItems?: number }): Promise<VersionPaging>;
+        revertVersion(nodeId: string, versionId: string, revertBody: RevertBody, opts?: { fields?: Array<string> }): Promise<VersionEntry>;
+    }
 
     export declare class Activity {
         constructor(obj?: any);
@@ -1724,7 +1724,7 @@ declare namespace AlfrescoApi {
         constructor(obj?: any);
 
         id?: string;
-        versionComment?: string;
+        // versionComment?: string;
         name?: string;
         nodeType?: string;
         isFolder?: boolean;
@@ -1732,10 +1732,10 @@ declare namespace AlfrescoApi {
         modifiedAt?: Date;
         modifiedByUser?: UserInfo;
         content?: ContentInfo;
-        aspectNames?: Array<string>;
-        properties?: {
-            [key: string]: string;
-        };
+        // aspectNames?: Array<string>;
+        // properties?: {
+        //     [key: string]: string;
+        // };
     }
 
     export declare class VersionEntry {
@@ -3268,6 +3268,7 @@ declare namespace AlfrescoApi {
         peopleApi: PeopleApi;
         ratingsApi: RatingsApi;
         renditionsApi: RenditionsApi;
+        versionsApi: VersionsApi;
         searchApi: any;
         sharedlinksApi: SharedlinksApi;
         sitesApi: SitesApi;
