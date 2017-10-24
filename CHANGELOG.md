@@ -7,6 +7,9 @@
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.0.0) (xx-xx-2017)
 
+## Features
+
+- [Versions (partial) end points](https://issues.alfresco.com/jira/browse/ADF-1589)
 ## Fix
 - [Many validation errors for "index.d.ts" of alfresco-js-api](https://issues.alfresco.com/jira/browse/ADF-1678)
 
