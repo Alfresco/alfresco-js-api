@@ -292,28 +292,6 @@ declare namespace AlfrescoApi {
     export interface Auth {
     }
 
-    export interface NodesApi {
-        new(client: ApiClient): NodesApi;
-
-        addNode(nodeId: string, nodeBody: any, opts?: any): Promise<MinimalNodeEntity>;
-        copyNode(nodeId: string, copyBody: any, opts?: any): Promise<MinimalNodeEntity>;
-        deleteNode(nodeId: string): Promise<any>;
-        getDeletedNode(nodeId: string, opts?: any): Promise<DeletedNodeEntity>;
-        getDeletedNodes(opts?: any): Promise<DeletedNodesPaging>;
-        getFileContent(nodeId: string, opts?: any): Promise<any>;
-        getNode(nodeId: string, opts?: any): Promise<MinimalNodeEntity>;
-        getNodeChildren(nodeId: string, opts?: any): Promise<NodePaging>;
-        moveNode(nodeId: string, moveBody: any, opts?: any): Promise<MinimalNodeEntity>;
-        purgeDeletedNode(nodeId: string): Promise<any>;
-        restoreNode(nodeId: string): Promise<MinimalNodeEntity>;
-        updateFileContent(nodeId: string, contentBody: string, opts?: any): Promise<MinimalNodeEntity>;
-        updateNode(nodeId: string, nodeBody: any, opts?: any): Promise<MinimalNodeEntity>;
-        getNodeInfo(nodeId: string, opts?: any): Promise<MinimalNodeEntryEntity>;
-        deleteNodePermanent(nodeId: string): Promise<any>;
-        createFolder(name: string, relativePath: string, nodeId?: string, opts?: any): Promise<MinimalNodeEntity>;
-        createFolderAutoRename(name: string, relativePath: string, nodeId: string, opts): Promise<MinimalNodeEntity>;
-    }
-
     export interface ApiClient {
         new(client: any): ApiClient;
     }
@@ -485,12 +463,17 @@ declare namespace AlfrescoApi {
     export interface NodesApi {
         new(client: ApiClient): NodesApi;
 
-        addNode(nodeId?: string, nodeBody?: NodeBody, opts?: { autoRename?: boolean, include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
-        copyNode(nodeId?: string, copyBody?: CopyBody, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
-        deleteNode(nodeId?: string, opts?: { permanent?: boolean }): Promise<{}>;
+        addNode(nodeId: string, nodeBody: any, opts?: { autoRename?: boolean, include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
+        copyNode(nodeId: string, copyBody: any, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
+        deleteNode(nodeId?: string, opts?: { permanent?: boolean }): Promise<any>;
+        purgeDeletedNode(nodeId: string): Promise<any>;
+        getNodeInfo(nodeId: string, opts?: any): Promise<MinimalNodeEntryEntity>;
+        deleteNodePermanent(nodeId: string): Promise<any>;
+        createFolder(name: string, relativePath: string, nodeId?: string, opts?: any): Promise<MinimalNodeEntity>;
+        createFolderAutoRename(name: string, relativePath: string, nodeId: string, opts): Promise<MinimalNodeEntity>;
         getDeletedNode(nodeId?: string, opts?: { include?: Array<string> }): Promise<DeletedNodeEntry>;
-        getDeletedNodes(opts?: { skipCount?: number, maxItems?: number, include?: Array<string> }): Promise<DeletedNodeEntry>;
-        getFileContent(nodeId?: string, opts?: { attachment?: boolean, ifModifiedSince?: Date }): Promise<{}>;
+        getDeletedNodes(opts?: { skipCount?: number, maxItems?: number, include?: Array<string> }): Promise<DeletedNodesPaging>;
+        getFileContent(nodeId?: string, opts?: { attachment?: boolean, ifModifiedSince?: Date }): Promise<{any}>;
         getNode(nodeId?: string, opts?: { include?: Array<string>, relativePath?: string, fields?: Array<string> }): Promise<{}>;
         getNodeContent(nodeId?: string, opts?: any): Promise<{}>;
         getNodeChildren(nodeId?: string, opts?: { skipCount?: number, maxItems?: number, orderBy?: string, where?: string, include?: Array<string>, relativePath?: string, includeSource?: boolean, fields?: Array<string> }): Promise<{}>;
@@ -501,7 +484,6 @@ declare namespace AlfrescoApi {
         lockNode(nodeId?: string, nodeBodyLock?: NodeBodyLock, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<{}>;
         unlockNode(nodeId?: string, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<{}>;
         moveNode(nodeId?: string, moveBody?: MoveBody, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<{}>;
-        purgeDeletedNode(nodeId?: string): Promise<{}>;
         restoreNode(nodeId?: string): Promise<NodeEntry>;
         updateFileContent(nodeId?: string, contentBody?: string, opts?: { majorVersion?: boolean, comment?: string, include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
         updateNodeContent(nodeId?: string, contentBody?: string, opts?: any): Promise<NodeEntry>;
