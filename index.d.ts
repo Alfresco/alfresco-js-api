@@ -413,6 +413,17 @@ declare namespace AlfrescoApi {
         display: string;
     }
 
+    export declare class PersonBodyCreate {
+        constructor(obj?: any);
+
+        id: string;
+        firstName: string;
+        lastName: string;
+        email: string;
+        password: number;
+        properties: any;
+    }
+
     //  ======= Discovery end ======
 
 
@@ -435,13 +446,13 @@ declare namespace AlfrescoApi {
     export interface ChildAssociationsApi {
         new(client: ApiClient): ChildAssociationsApi;
 
-        addNode(nodeld?: string, nodeBody?: NodeBody, opts?: { autoRename?: boolean, include?: Array<string>, fields?: Array<string> }): Promise<{}>;
+        addNode(nodeId?: string, nodeBody?: NodeBody, opts?: { autoRename?: boolean, include?: Array<string>, fields?: Array<string> }): Promise<{}>;
         addSecondaryChildAssoc(parentld?: string, assocChildBody?: AssocChildBody): Promise<{}>;
-        deleteNode(nodeld?: string, opts?: { permanent?: boolean }): Promise<{}>;
-        getNodeChildren(nodeld?: string, opts?: { skipCount?: number, maxltems?: number, orderBy?: string, where?: string, include?: Array<string>, relativePath?: string, includeSource?: boolean, fields?: Array<string> }): Promise<{}>;
+        deleteNode(nodeId?: string, opts?: { permanent?: boolean }): Promise<{}>;
+        getNodeChildren(nodeId?: string, opts?: { skipCount?: number, maxItems?: number, orderBy?: string, where?: string, include?: Array<string>, relativePath?: string, includeSource?: boolean, fields?: Array<string> }): Promise<{}>;
         listParents(childld?: string, opts?: { where?: string, include?: string, fields?: Array<string> }): Promise<{}>;
         listSecondaryChildAssociations(parentld?: string, opts?: { assocType?: string, where?: string, include?: string, fields?: Array<string> }): Promise<{}>;
-        moveNode(nodeld?: string, moveBody?: MoveBody, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<{}>;
+        moveNode(nodeId?: string, moveBody?: MoveBody, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<{}>;
     }
 
     export interface AssociationsApi {
@@ -474,27 +485,27 @@ declare namespace AlfrescoApi {
     export interface NodesApi {
         new(client: ApiClient): NodesApi;
 
-        addNode(nodeld?: string, nodeBody?: NodeBody, opts?: { autoRename?: boolean, include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
-        copyNode(nodeld?: string, copyBody?: CopyBody, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
-        deleteNode(nodeld?: string, opts?: { permanent?: boolean }): Promise<{}>;
-        getDeletedNode(nodeld?: string, opts?: { include?: Array<string> }): Promise<DeletedNodeEntry>;
-        getDeletedNodes(opts?: { skipCount?: number, maxltems?: number, include?: Array<string> }): Promise<DeletedNodeEntry>;
-        getFileContent(nodeld?: string, opts?: { attachment?: boolean, ifModifiedSince?: Date }): Promise<{}>;
-        getNode(nodeld?: string, opts?: { include?: Array<string>, relativePath?: string, fields?: Array<string> }): Promise<{}>;
+        addNode(nodeId?: string, nodeBody?: NodeBody, opts?: { autoRename?: boolean, include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
+        copyNode(nodeId?: string, copyBody?: CopyBody, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
+        deleteNode(nodeId?: string, opts?: { permanent?: boolean }): Promise<{}>;
+        getDeletedNode(nodeId?: string, opts?: { include?: Array<string> }): Promise<DeletedNodeEntry>;
+        getDeletedNodes(opts?: { skipCount?: number, maxItems?: number, include?: Array<string> }): Promise<DeletedNodeEntry>;
+        getFileContent(nodeId?: string, opts?: { attachment?: boolean, ifModifiedSince?: Date }): Promise<{}>;
+        getNode(nodeId?: string, opts?: { include?: Array<string>, relativePath?: string, fields?: Array<string> }): Promise<{}>;
         getNodeContent(nodeId?: string, opts?: any): Promise<{}>;
-        getNodeChildren(nodeld?: string, opts?: { skipCount?: number, maxltems?: number, orderBy?: string, where?: string, include?: Array<string>, relativePath?: string, includeSource?: boolean, fields?: Array<string> }): Promise<{}>;
-        getParents(nodeld?: string, opts?: { where?: string, include?: Array<string>, skipCount?: number, maxltems?: number, includeSource?: boolean, fields?: Array<string> }): Promise<{}>;
-        getSecondaryChildren(nodeld?: string, opts?: { where?: string, include?: Array<string>, skipCount?: number, maxltems?: number, includeSource?: boolean, fields?: Array<string> }): Promise<{}>;
-        getSourceAssociations(nodeld?: string, opts?: { where?: string, include?: Array<string>, fields?: Array<string> }): Promise<{}>;
-        getTargetAssociations(nodeld?: string, opts?: { where?: string, include?: Array<string>, fields?: Array<string> }): Promise<{}>;
-        lockNode(nodeld?: string, nodeBodyLock?: NodeBodyLock, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<{}>;
-        unlockNode(nodeld?: string, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<{}>;
-        moveNode(nodeld?: string, moveBody?: MoveBody, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<{}>;
-        purgeDeletedNode(nodeld?: string): Promise<{}>;
-        restoreNode(nodeld?: string): Promise<NodeEntry>;
-        updateFileContent(nodeld?: string, contentBody?: string, opts?: { majorVersion?: boolean, comment?: string, include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
+        getNodeChildren(nodeId?: string, opts?: { skipCount?: number, maxItems?: number, orderBy?: string, where?: string, include?: Array<string>, relativePath?: string, includeSource?: boolean, fields?: Array<string> }): Promise<{}>;
+        getParents(nodeId?: string, opts?: { where?: string, include?: Array<string>, skipCount?: number, maxItems?: number, includeSource?: boolean, fields?: Array<string> }): Promise<{}>;
+        getSecondaryChildren(nodeId?: string, opts?: { where?: string, include?: Array<string>, skipCount?: number, maxItems?: number, includeSource?: boolean, fields?: Array<string> }): Promise<{}>;
+        getSourceAssociations(nodeId?: string, opts?: { where?: string, include?: Array<string>, fields?: Array<string> }): Promise<{}>;
+        getTargetAssociations(nodeId?: string, opts?: { where?: string, include?: Array<string>, fields?: Array<string> }): Promise<{}>;
+        lockNode(nodeId?: string, nodeBodyLock?: NodeBodyLock, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<{}>;
+        unlockNode(nodeId?: string, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<{}>;
+        moveNode(nodeId?: string, moveBody?: MoveBody, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<{}>;
+        purgeDeletedNode(nodeId?: string): Promise<{}>;
+        restoreNode(nodeId?: string): Promise<NodeEntry>;
+        updateFileContent(nodeId?: string, contentBody?: string, opts?: { majorVersion?: boolean, comment?: string, include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
         updateNodeContent(nodeId?: string, contentBody?: string, opts?: any): Promise<NodeEntry>;
-        updateNode(nodeld?: string, nodeBody?: NodeBody, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
+        updateNode(nodeId?: string, nodeBody?: NodeBody, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
     }
 
     export interface SitesApi {
@@ -504,38 +515,39 @@ declare namespace AlfrescoApi {
         createSite(siteBody?: SiteBody, opts?: { skipConfiguration?: Boolean, skipAddToFavorites?: Boolean }): Promise<{}>;
         deleteSite(siteId?: string, opts?: { permanent?: Boolean }): Promise<{}>;
         getSite(siteId?: string, opts?: { relations?: Array<string>, fields?: Array<string> }): Promise<{}>;
-        getSiteContainer(siteId?: string, containerld?: string, opts?: Array<string>): Promise<{}>;
-        getSiteContainers(siteId?: string, opts?: { skipCount?: number, maxltems?: number, fields?: Array<string> }): Promise<{}>;
-        getSiteMember(siteId?: string, personld?: string, opts?: { fields?: Array<string> }): Promise<{}>;
-        getSiteMembers(siteId?: string, opts?: { skipCount?: number, maxltems?: number, fields?: Array<string> }): Promise<{}>;
-        getSites(opts?: { skipCount?: number, maxltems?: number, orderBy?: string, relations?: Array<string>, fields?: Array<string> }): Promise<{}>;
-        removeSiteMember(siteId?: string, personld?: string): Promise<{}>;
-        updateSiteMember(siteId?: string, personld?: string, siteMemberRoleBody?: SiteMemberRoleBody): Promise<{}>;
+        getSiteContainer(siteId?: string, containerId?: string, opts?: Array<string>): Promise<{}>;
+        getSiteContainers(siteId?: string, opts?: { skipCount?: number, maxItems?: number, fields?: Array<string> }): Promise<{}>;
+        getSiteMember(siteId?: string, personId?: string, opts?: { fields?: Array<string> }): Promise<{}>;
+        getSiteMembers(siteId?: string, opts?: { skipCount?: number, maxItems?: number, fields?: Array<string> }): Promise<{}>;
+        getSites(opts?: { skipCount?: number, maxItems?: number, orderBy?: string, relations?: Array<string>, fields?: Array<string> }): Promise<{}>;
+        removeSiteMember(siteId?: string, personId?: string): Promise<{}>;
+        updateSiteMember(siteId?: string, personId?: string, siteMemberRoleBody?: SiteMemberRoleBody): Promise<{}>;
     }
 
     export interface PeopleApi {
         new(client: ApiClient): PeopleApi;
 
-        addFavorite(personld?: string, favoriteBody?: FavoriteBody): Promise<FavoriteEntry>;
-        addSiteMembershipRequest(personld?: string, siteMembershipBody?: SiteMembershipRequestBody): Promise<SiteMembershipRequestEntry>;
-        deleteFavoriteSite(personld?: string, siteId?: string): Promise<{}>;
-        favoriteSite(personld?: string, favoriteSiteBody?: FavoriteSiteBody): Promise<FavoriteEntry>;
-        getActivities(personld?: string, opts?: { skipCount?: number, maxltems?: number, who?: string, siteId?: string, fields?: Array<string> }): Promise<ActivityPaging>;
-        getFavorite(personld?: string, favoriteld?: string, opts?: { fields?: Array<string> }): Promise<FavoriteEntry>;
-        getFavoriteSite(personld?: string, siteId?: string, opts?: { fields?: Array<string> }): Promise<SiteEntry>;
-        getFavoriteSites(personld?: string, opts?: { skipCount?: number, maxltems?: number, fields?: Array<string> }): Promise<SitePaging>;
-        getFavorites(personld?: string, opts?: { skipCount?: number, maxltems?: number, where?: string, fields?: Array<string> }): Promise<FavoritePaging>;
-        getPerson(personld?: string, opts?: { fields?: Array<string> }): Promise<PersonEntry>;
-        getPersonNetwork(personld?: string, networkId?: string, opts?: { fields?: Array<string> }): Promise<PersonNetworkEntry>;
-        getPersonNetworks(personld?: string, opts?: { skipCount?: number, maxltems?: number, fields?: Array<string> }): Promise<PersonNetworkPaging>;
-        getPreference(personld?: string, preferenceName?: string, opts?: { fields?: Array<string> }): Promise<PreferenceEntry>;
-        getPreferences(personld?: string, opts?: { skipCount?: number, maxltems?: number, fields?: Array<string> }): Promise<PreferencePaging>;
-        getSiteMembership(personld?: string, opts?: { skipCount?: number, maxltems?: number, orderBy?: string, relations?: Array<string>, fields?: Array<string> }): Promise<SiteMembershipRequestEntry>;
-        getSiteMembershipRequest(personld?: string, siteId?: string, opts?: { fields?: Array<string> }): Promise<SiteMembershipRequestEntry>;
-        getSiteMembershipRequests(personld?: string, opts?: { skipCount?: number, maxltems?: number, fields?: Array<string> }): Promise<SiteMembershipRequestPaging>;
-        removeFavoriteSite(personld?: string, favoriteld?: string): Promise<{}>;
-        removeSiteMembershipRequest(personld?: string, siteId?: string): Promise<{}>;
-        updateSiteMembershipRequest(personld?: string, siteId?: string, siteMembershipBody?: SiteMembershipRequestBody): Promise<{}>;
+        addPerson(person: PersonBodyCreate): Promise<{PersonEntry}>;
+        addFavorite(personId?: string, favoriteBody?: FavoriteBody): Promise<FavoriteEntry>;
+        addSiteMembershipRequest(personId?: string, siteMembershipBody?: SiteMembershipRequestBody): Promise<SiteMembershipRequestEntry>;
+        deleteFavoriteSite(personId?: string, siteId?: string): Promise<{}>;
+        favoriteSite(personId?: string, favoriteSiteBody?: FavoriteSiteBody): Promise<FavoriteEntry>;
+        getActivities(personId?: string, opts?: { skipCount?: number, maxItems?: number, who?: string, siteId?: string, fields?: Array<string> }): Promise<ActivityPaging>;
+        getFavorite(personId?: string, favoriteId?: string, opts?: { fields?: Array<string> }): Promise<FavoriteEntry>;
+        getFavoriteSite(personId?: string, siteId?: string, opts?: { fields?: Array<string> }): Promise<SiteEntry>;
+        getFavoriteSites(personId?: string, opts?: { skipCount?: number, maxItems?: number, fields?: Array<string> }): Promise<SitePaging>;
+        getFavorites(personId?: string, opts?: { skipCount?: number, maxItems?: number, where?: string, fields?: Array<string> }): Promise<FavoritePaging>;
+        getPerson(personId?: string, opts?: { fields?: Array<string> }): Promise<PersonEntry>;
+        getPersonNetwork(personId?: string, networkId?: string, opts?: { fields?: Array<string> }): Promise<PersonNetworkEntry>;
+        getPersonNetworks(personId?: string, opts?: { skipCount?: number, maxItems?: number, fields?: Array<string> }): Promise<PersonNetworkPaging>;
+        getPreference(personId?: string, preferenceName?: string, opts?: { fields?: Array<string> }): Promise<PreferenceEntry>;
+        getPreferences(personId?: string, opts?: { skipCount?: number, maxItems?: number, fields?: Array<string> }): Promise<PreferencePaging>;
+        getSiteMembership(personId?: string, opts?: { skipCount?: number, maxItems?: number, orderBy?: string, relations?: Array<string>, fields?: Array<string> }): Promise<SiteMembershipRequestEntry>;
+        getSiteMembershipRequest(personId?: string, siteId?: string, opts?: { fields?: Array<string> }): Promise<SiteMembershipRequestEntry>;
+        getSiteMembershipRequests(personId?: string, opts?: { skipCount?: number, maxItems?: number, fields?: Array<string> }): Promise<SiteMembershipRequestPaging>;
+        removeFavoriteSite(personId?: string, favoriteId?: string): Promise<{}>;
+        removeSiteMembershipRequest(personId?: string, siteId?: string): Promise<{}>;
+        updateSiteMembershipRequest(personId?: string, siteId?: string, siteMembershipBody?: SiteMembershipRequestBody): Promise<{}>;
     }
 
     // export interface PreferencesApi {

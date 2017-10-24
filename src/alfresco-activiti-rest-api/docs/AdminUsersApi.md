@@ -22,7 +22,7 @@ Bulk Update a list of users
 
 var update = new this.alfrescoJsApi.activiti.BulkUserUpdateRepresentation(); // BulkUserUpdateRepresentation | update
 
-this.alfrescoJsApi.activiti.adminUsersApibulkUpdateUsers(update);
+this.alfrescoJsApi.activiti.adminUsersApi.bulkUpdateUsers(update);
 ```
 
 ### Parameters
@@ -55,7 +55,7 @@ Create a new user
 
 var userRepresentation = new this.alfrescoJsApi.activiti.UserRepresentation(); // UserRepresentation | userRepresentation
 
-this.alfrescoJsApi.activiti.adminUsersApicreateNewUser(userRepresentation);
+this.alfrescoJsApi.activiti.adminUsersApi.createNewUser(userRepresentation);
 ```
 
 ### Parameters
@@ -92,7 +92,7 @@ var opts = {
   'summary': true // Boolean | summary
 };
 
-this.alfrescoJsApi.activiti.adminUsersApigetUser(userId, opts);
+this.alfrescoJsApi.activiti.adminUsersApi.getUser(userId, opts);
 ```
 
 ### Parameters
@@ -138,7 +138,7 @@ var opts = {
   'summary': true // Boolean | summary
 };
 
-this.alfrescoJsApi.activiti.adminUsersApigetUsers(opts);
+this.alfrescoJsApi.activiti.adminUsersApi.getUsers(opts);
 ```
 
 ### Parameters
@@ -183,7 +183,7 @@ var userId = 789; // Integer | userId
 
 var userRepresentation = new this.alfrescoJsApi.activiti.UserRepresentation(); // UserRepresentation | userRepresentation
 
-this.alfrescoJsApi.activiti.adminUsersApiupdateUserDetails(userId, userRepresentation);
+this.alfrescoJsApi.activiti.adminUsersApi.updateUserDetails(userId, userRepresentation);
 ```
 
 ### Parameters
