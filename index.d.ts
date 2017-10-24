@@ -635,8 +635,8 @@ declare namespace AlfrescoApi {
         // removeVersion(nodeId?: string, versionId?: string, opts?: any): Promise<{}>;
         // getVersion(nodeId?: string, versionId?: string, opts?: any): Promise<VersionEntry>;
         // getVersionContent(nodeId?: string, versionId?: string, attachment?: boolean, ifModifiedSince?: Date, opts?: any): Promise<{}>;
-        listVersionHistory(nodeId?: string, include?: Array<string>, fields?: Array<string>, skipCount?: number, maxItems?: number, opts?: any): Promise<VersionPaging>;
-        revertVersion(nodeId?: string, versionId?: string, revertBody?: RevertBody, fields?: Array<string>, opts?: any): Promise<VersionEntry>;
+        listVersionHistory(nodeId?: string, opts?: { include?: Array<string>, fields?: Array<string>, skipCount?: number, maxItems?: number }): Promise<VersionPaging>;
+        revertVersion(nodeId?: string, versionId?: string, opts?: { revertBody?: RevertBody, fields?: Array<string> }): Promise<VersionEntry>;
     }
 
     export declare class Activity {
@@ -1724,7 +1724,7 @@ declare namespace AlfrescoApi {
         constructor(obj?: any);
 
         id?: string;
-        versionComment?: string;
+        // versionComment?: string;
         name?: string;
         nodeType?: string;
         isFolder?: boolean;
@@ -1732,10 +1732,10 @@ declare namespace AlfrescoApi {
         modifiedAt?: Date;
         modifiedByUser?: UserInfo;
         content?: ContentInfo;
-        aspectNames?: Array<string>;
-        properties?: {
-            [key: string]: string;
-        };
+        // aspectNames?: Array<string>;
+        // properties?: {
+        //     [key: string]: string;
+        // };
     }
 
     export declare class VersionEntry {
