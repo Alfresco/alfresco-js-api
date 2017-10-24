@@ -94,7 +94,7 @@
      * Attempts to revert the version identified by versionId and nodeId to the live node.
      * @param {String} nodeId The identifier of a child node. You can also use one of these well-known aliases: * -my- * -shared- * -root-
      * @param {String} versionId The identifier of a version, ie. version label, within the version history of a node.
-     * @param {RevertBody} revertBody Optionally, specify a version comment and whether this should be a major version, or not.
+     * @param {RevertBody} revertBody Specify a version comment and whether this should be a major version, or not.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NodeAssociationPaging}
