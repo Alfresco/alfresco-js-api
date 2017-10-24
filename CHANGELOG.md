@@ -8,17 +8,14 @@
 # [2.0.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.0.0) (xx-xx-2017)
 
 ## Features
-
+- [Missing Create a person API call](https://issues.alfresco.com/jira/browse/ADF-282)
 - [Versions (partial) end points](https://issues.alfresco.com/jira/browse/ADF-1589)
+
 ## Fix
 - [Many validation errors for "index.d.ts" of alfresco-js-api](https://issues.alfresco.com/jira/browse/ADF-1678)
 - [APS ContentApi is not present on index.d.ts](https://issues.alfresco.com/jira/browse/ADF-245)
 - [getFileContent response returns empty object when it's a PDF file (JPG files works fine) ](https://issues.alfresco.com/jira/browse/ADF-271)
 - [https://github.com/Alfresco/alfresco-js-api/issues/279 ](https://issues.alfresco.com/jira/browse/ADF-279)
-
-## Features
-- [Missing Create a person API call](https://issues.alfresco.com/jira/browse/ADF-282)
-
 
 # [1.9.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.9.0) (09-10-2017)
 
