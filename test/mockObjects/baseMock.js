@@ -2,7 +2,8 @@
 
 var nock = require('nock');
 
-class BaseMock {
+class
+BaseMock {
 
     constructor(host) {
         this.host = host ? host : 'http://127.0.0.1:8080';

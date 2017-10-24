@@ -11,9 +11,6 @@
 - [Missing Create a person API call](https://issues.alfresco.com/jira/browse/ADF-282)
 - [Versions (partial) end points](https://issues.alfresco.com/jira/browse/ADF-1589)
 
-## Features
-
-- [Versions (partial) end points](https://issues.alfresco.com/jira/browse/ADF-1589)
 ## Fix
 - [Many validation errors for "index.d.ts" of alfresco-js-api](https://issues.alfresco.com/jira/browse/ADF-1678)
 - [APS ContentApi is not present on index.d.ts](https://issues.alfresco.com/jira/browse/ADF-245)

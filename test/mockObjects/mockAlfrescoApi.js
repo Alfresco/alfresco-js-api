@@ -13,6 +13,7 @@ mockAlfrescoApi.Rendition = require('./alfresco/renditionMock.js');
 mockAlfrescoApi.CustomModel = require('./alfresco/customModelMock.js');
 mockAlfrescoApi.Discovery = require('./alfresco/discoveryMock.js');
 mockAlfrescoApi.Search = require('./alfresco/searchMock.js');
+mockAlfrescoApi.PeopleApi = require('./alfresco/peopleMock.js');
 
 
 //Bpm Mock
