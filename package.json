@@ -28,7 +28,7 @@
     "url": "https://github.com/Alfresco/alfresco-js-api/issues"
   },
   "dependencies": {
-    "superagent": "3.4.1",
+    "superagent": "3.7.0",
     "event-emitter": "0.3.4"
   },
   "devDependencies": {
