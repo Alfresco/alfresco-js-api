@@ -524,7 +524,7 @@ declare namespace AlfrescoApi {
         getPersonNetworks(personId?: string, opts?: { skipCount?: number, maxItems?: number, fields?: Array<string> }): Promise<PersonNetworkPaging>;
         getPreference(personId?: string, preferenceName?: string, opts?: { fields?: Array<string> }): Promise<PreferenceEntry>;
         getPreferences(personId?: string, opts?: { skipCount?: number, maxItems?: number, fields?: Array<string> }): Promise<PreferencePaging>;
-        getSiteMembership(personId?: string, opts?: { skipCount?: number, maxItems?: number, orderBy?: string, relations?: Array<string>, fields?: Array<string> }): Promise<SiteMembershipRequestEntry>;
+        getSiteMembership(personId?: string, opts?: { skipCount?: number, maxItems?: number, orderBy?: string, relations?: Array<string>, fields?: Array<string> }): Promise<SitePaging>;
         getSiteMembershipRequest(personId?: string, siteId?: string, opts?: { fields?: Array<string> }): Promise<SiteMembershipRequestEntry>;
         getSiteMembershipRequests(personId?: string, opts?: { skipCount?: number, maxItems?: number, fields?: Array<string> }): Promise<SiteMembershipRequestPaging>;
         removeFavoriteSite(personId?: string, favoriteId?: string): Promise<{}>;
