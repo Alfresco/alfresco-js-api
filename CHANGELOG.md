@@ -15,7 +15,9 @@
 - [Many validation errors for "index.d.ts" of alfresco-js-api](https://issues.alfresco.com/jira/browse/ADF-1678)
 - [APS ContentApi is not present on index.d.ts](https://issues.alfresco.com/jira/browse/ADF-245)
 - [getFileContent response returns empty object when it's a PDF file (JPG files works fine) ](https://issues.alfresco.com/jira/browse/ADF-271)
-- [https://github.com/Alfresco/alfresco-js-api/issues/279 ](https://issues.alfresco.com/jira/browse/ADF-279)
+- [Fix the Github markdown for README.md](https://issues.alfresco.com/jira/browse/ADF-279)
+- [PeopleApi - getSiteMembership wrong returned type](https://issues.alfresco.com/jira/browse/ADF-1829)
+- [Update superagent to 3.7.0 ](https://issues.alfresco.com/jira/browse/ADF-1833)
 
 # [1.9.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.9.0) (09-10-2017)
 
