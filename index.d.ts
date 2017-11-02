@@ -412,8 +412,8 @@ declare namespace AlfrescoApi {
 
         addFavorite(personId?: string, favoriteBody?: FavoriteBody): Promise<FavoriteEntry>;
         // addSiteFavorite(personId?: string, favoriteSiteBody?: FavoriteSiteBody, fields?: Array<string>, opts?: any): Promise<FavoriteSiteEntry>;
-        // removeFavorite(personId?: string, favoriteId?: string, opts?: any): Promise<{}>;
-        removeFavoriteSite(personId?: string, favoriteId?: string): Promise<{}>;
+        // removeFavorite(personId?: string, favoriteId?: string, opts?: any): Promise<any>;
+        removeFavoriteSite(personId?: string, favoriteId?: string): Promise<void>;
         getFavorite(personId?: string, favoriteId?: string, opts?: any): Promise<FavoriteEntry>;
         getFavorites(personId?: string, opts?: { skipCount?: number, maxItems?: number, where?: string, fields?: Array<string> }): Promise<FavoritePaging>;
         getFavoriteSite(personId?: string, siteId?: string, opts?: any): Promise<SiteEntry>;
@@ -424,22 +424,22 @@ declare namespace AlfrescoApi {
     export interface ChildAssociationsApi {
         new(client: ApiClient): ChildAssociationsApi;
 
-        addNode(nodeId?: string, nodeBody?: NodeBody, opts?: { autoRename?: boolean, include?: Array<string>, fields?: Array<string> }): Promise<{}>;
-        addSecondaryChildAssoc(parentld?: string, assocChildBody?: AssocChildBody): Promise<{}>;
-        deleteNode(nodeId?: string, opts?: { permanent?: boolean }): Promise<{}>;
-        getNodeChildren(nodeId?: string, opts?: { skipCount?: number, maxItems?: number, orderBy?: string, where?: string, include?: Array<string>, relativePath?: string, includeSource?: boolean, fields?: Array<string> }): Promise<{}>;
-        listParents(childld?: string, opts?: { where?: string, include?: string, fields?: Array<string> }): Promise<{}>;
-        listSecondaryChildAssociations(parentld?: string, opts?: { assocType?: string, where?: string, include?: string, fields?: Array<string> }): Promise<{}>;
-        moveNode(nodeId?: string, moveBody?: MoveBody, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<{}>;
+        addNode(nodeId?: string, nodeBody?: NodeBody, opts?: { autoRename?: boolean, include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
+        addSecondaryChildAssoc(parentId?: string, assocChildBody?: AssocChildBody): Promise<void>;
+        deleteNode(nodeId?: string, opts?: { permanent?: boolean }): Promise<void>;
+        getNodeChildren(nodeId?: string, opts?: { skipCount?: number, maxItems?: number, orderBy?: string, where?: string, include?: Array<string>, relativePath?: string, includeSource?: boolean, fields?: Array<string> }): Promise<NodePaging>;
+        listParents(childId?: string, opts?: { where?: string, include?: string, fields?: Array<string> }): Promise<NodeAssocPaging>;
+        listSecondaryChildAssociations(parentId?: string, opts?: { assocType?: string, where?: string, include?: string, fields?: Array<string> }): Promise<NodeChildAssocPaging>;
+        moveNode(nodeId?: string, moveBody?: MoveBody, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
     }
 
     export interface AssociationsApi {
         new(client: ApiClient): AssociationsApi;
 
-        addAssoc(sourceld?: string, assocTargetBody?: AssocTargetBody): Promise<{}>;
-        listSourceNodeAssociations(targetld?: string, opts?: { where?: string, include?: string, fields?: Array<string> }): Promise<{}>;
-        listTargetAssociations(sourceld?: string, opts?: { where?: string, include?: string, fields?: Array<string> }): Promise<{}>;
-        removeAssoc(sourceld?: string, targetld?: string, opts?: { assocType?: string }): Promise<{}>;
+        addAssoc(sourceId?: string, assocTargetBody?: AssocTargetBody): Promise<void>;
+        listSourceNodeAssociations(targetId?: string, opts?: { where?: string, include?: string, fields?: Array<string> }): Promise<NodeAssocPaging>;
+        listTargetAssociations(sourceId?: string, opts?: { where?: string, include?: string, fields?: Array<string> }): Promise<NodeAssocPaging>;
+        removeAssoc(sourceId?: string, targetId?: string, opts?: { assocType?: string }): Promise<void>;
 
     }
 
@@ -447,8 +447,8 @@ declare namespace AlfrescoApi {
         new(client: ApiClient): CommentsApi;
 
         addComment(nodeId?: string, commentBody?: CommentBody, opts?: any): Promise<CommentEntry>;
-        removeComment(nodeId?: string, commentId?: string): Promise<{}>;
-        getomments(nodeId?: string, opts?: any): Promise<CommentPaging>;
+        getComments(nodeId?: string, opts?: any): Promise<CommentPaging>;
+        removeComment(nodeId?: string, commentId?: string): Promise<void>;
         updateComment(nodeId?: string, commentId?: string, commentBody?: CommentBody, opts?: any): Promise<CommentEntry>;
     }
 
@@ -465,25 +465,29 @@ declare namespace AlfrescoApi {
 
         addNode(nodeId: string, nodeBody: any, opts?: { autoRename?: boolean, include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
         copyNode(nodeId: string, copyBody: any, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
-        deleteNode(nodeId?: string, opts?: { permanent?: boolean }): Promise<any>;
-        purgeDeletedNode(nodeId: string): Promise<any>;
-        getNodeInfo(nodeId: string, opts?: any): Promise<MinimalNodeEntryEntity>;
+        deleteNode(nodeId?: string, opts?: { permanent?: boolean }): Promise<void>;
+        purgeDeletedNode(nodeId: string): Promise<void>;
+        // custom API not exposed by the platform
+        getNodeInfo(nodeId: string, opts?: any): Promise<NodeEntry>;
+        // custom API not exposed by the platform
         deleteNodePermanent(nodeId: string): Promise<any>;
-        createFolder(name: string, relativePath: string, nodeId?: string, opts?: any): Promise<MinimalNodeEntity>;
-        createFolderAutoRename(name: string, relativePath: string, nodeId: string, opts): Promise<MinimalNodeEntity>;
+        // custom API not exposed by the platform
+        createFolder(name: string, relativePath: string, nodeId?: string, opts?: any): Promise<NodeEntry>;
+        // custom API not exposed by the platform
+        createFolderAutoRename(name: string, relativePath: string, nodeId: string, opts): Promise<NodeEntry>;
         getDeletedNode(nodeId?: string, opts?: { include?: Array<string> }): Promise<DeletedNodeEntry>;
         getDeletedNodes(opts?: { skipCount?: number, maxItems?: number, include?: Array<string> }): Promise<DeletedNodesPaging>;
-        getFileContent(nodeId?: string, opts?: { attachment?: boolean, ifModifiedSince?: Date }): Promise<{any}>;
-        getNode(nodeId?: string, opts?: { include?: Array<string>, relativePath?: string, fields?: Array<string> }): Promise<{}>;
-        getNodeContent(nodeId?: string, opts?: any): Promise<{}>;
-        getNodeChildren(nodeId?: string, opts?: { skipCount?: number, maxItems?: number, orderBy?: string, where?: string, include?: Array<string>, relativePath?: string, includeSource?: boolean, fields?: Array<string> }): Promise<{}>;
-        getParents(nodeId?: string, opts?: { where?: string, include?: Array<string>, skipCount?: number, maxItems?: number, includeSource?: boolean, fields?: Array<string> }): Promise<{}>;
-        getSecondaryChildren(nodeId?: string, opts?: { where?: string, include?: Array<string>, skipCount?: number, maxItems?: number, includeSource?: boolean, fields?: Array<string> }): Promise<{}>;
-        getSourceAssociations(nodeId?: string, opts?: { where?: string, include?: Array<string>, fields?: Array<string> }): Promise<{}>;
-        getTargetAssociations(nodeId?: string, opts?: { where?: string, include?: Array<string>, fields?: Array<string> }): Promise<{}>;
-        lockNode(nodeId?: string, nodeBodyLock?: NodeBodyLock, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<{}>;
-        unlockNode(nodeId?: string, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<{}>;
-        moveNode(nodeId?: string, moveBody?: MoveBody, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<{}>;
+        getFileContent(nodeId?: string, opts?: { attachment?: boolean, ifModifiedSince?: Date }): Promise<any>;
+        getNode(nodeId?: string, opts?: { include?: Array<string>, relativePath?: string, fields?: Array<string> }): Promise<NodeEntry>;
+        getNodeContent(nodeId?: string, opts?: any): Promise<any>;
+        getNodeChildren(nodeId?: string, opts?: { skipCount?: number, maxItems?: number, orderBy?: string, where?: string, include?: Array<string>, relativePath?: string, includeSource?: boolean, fields?: Array<string> }): Promise<NodePaging>;
+        getParents(nodeId?: string, opts?: { where?: string, include?: Array<string>, skipCount?: number, maxItems?: number, includeSource?: boolean, fields?: Array<string> }): Promise<NodeAssociationPaging>;
+        getSecondaryChildren(nodeId?: string, opts?: { where?: string, include?: Array<string>, skipCount?: number, maxItems?: number, includeSource?: boolean, fields?: Array<string> }): Promise<NodeChildAssociationPaging>;
+        getSourceAssociations(nodeId?: string, opts?: { where?: string, include?: Array<string>, fields?: Array<string> }): Promise<NodeAssociationPaging>;
+        getTargetAssociations(nodeId?: string, opts?: { where?: string, include?: Array<string>, fields?: Array<string> }): Promise<NodeAssociationPaging>;
+        lockNode(nodeId?: string, nodeBodyLock?: NodeBodyLock, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
+        unlockNode(nodeId?: string, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
+        moveNode(nodeId?: string, moveBody?: MoveBody, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
         restoreNode(nodeId?: string): Promise<NodeEntry>;
         updateFileContent(nodeId?: string, contentBody?: string, opts?: { majorVersion?: boolean, comment?: string, include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
         updateNodeContent(nodeId?: string, contentBody?: string, opts?: any): Promise<NodeEntry>;
@@ -493,26 +497,26 @@ declare namespace AlfrescoApi {
     export interface SitesApi {
         new(client?: ApiClient): SitesApi;
 
-        addSiteMember(siteId?: string, siteMemberBody?: SiteMemberBody): Promise<{}>;
-        createSite(siteBody?: SiteBody, opts?: { skipConfiguration?: Boolean, skipAddToFavorites?: Boolean }): Promise<{}>;
-        deleteSite(siteId?: string, opts?: { permanent?: Boolean }): Promise<{}>;
-        getSite(siteId?: string, opts?: { relations?: Array<string>, fields?: Array<string> }): Promise<{}>;
-        getSiteContainer(siteId?: string, containerId?: string, opts?: Array<string>): Promise<{}>;
-        getSiteContainers(siteId?: string, opts?: { skipCount?: number, maxItems?: number, fields?: Array<string> }): Promise<{}>;
-        getSiteMember(siteId?: string, personId?: string, opts?: { fields?: Array<string> }): Promise<{}>;
-        getSiteMembers(siteId?: string, opts?: { skipCount?: number, maxItems?: number, fields?: Array<string> }): Promise<{}>;
-        getSites(opts?: { skipCount?: number, maxItems?: number, orderBy?: string, relations?: Array<string>, fields?: Array<string> }): Promise<{}>;
-        removeSiteMember(siteId?: string, personId?: string): Promise<{}>;
-        updateSiteMember(siteId?: string, personId?: string, siteMemberRoleBody?: SiteMemberRoleBody): Promise<{}>;
+        addSiteMember(siteId?: string, siteMemberBody?: SiteMemberBody): Promise<SiteMemberEntry>;
+        createSite(siteBody?: SiteBody, opts?: { skipConfiguration?: Boolean, skipAddToFavorites?: Boolean }): Promise<SiteEntry>;
+        deleteSite(siteId?: string, opts?: { permanent?: Boolean }): Promise<void>;
+        getSite(siteId?: string, opts?: { relations?: Array<string>, fields?: Array<string> }): Promise<SiteEntry>;
+        getSiteContainer(siteId?: string, containerId?: string, opts?: Array<string>): Promise<SiteContainerEntry>;
+        getSiteContainers(siteId?: string, opts?: { skipCount?: number, maxItems?: number, fields?: Array<string> }): Promise<SiteContainerPaging>;
+        getSiteMember(siteId?: string, personId?: string, opts?: { fields?: Array<string> }): Promise<SiteMemberEntry>;
+        getSiteMembers(siteId?: string, opts?: { skipCount?: number, maxItems?: number, fields?: Array<string> }): Promise<SiteMemberPaging>;
+        getSites(opts?: { skipCount?: number, maxItems?: number, orderBy?: string, relations?: Array<string>, fields?: Array<string> }): Promise<SitePaging>;
+        removeSiteMember(siteId?: string, personId?: string): Promise<void>;
+        updateSiteMember(siteId?: string, personId?: string, siteMemberRoleBody?: SiteMemberRoleBody): Promise<SiteMemberEntry>;
     }
 
     export interface PeopleApi {
         new(client: ApiClient): PeopleApi;
 
-        addPerson(person: PersonBodyCreate): Promise<{PersonEntry}>;
+        addPerson(person: PersonBodyCreate): Promise<PersonEntry>;
         addFavorite(personId?: string, favoriteBody?: FavoriteBody): Promise<FavoriteEntry>;
         addSiteMembershipRequest(personId?: string, siteMembershipBody?: SiteMembershipRequestBody): Promise<SiteMembershipRequestEntry>;
-        deleteFavoriteSite(personId?: string, siteId?: string): Promise<{}>;
+        deleteFavoriteSite(personId?: string, siteId?: string): Promise<void>;
         favoriteSite(personId?: string, favoriteSiteBody?: FavoriteSiteBody): Promise<FavoriteEntry>;
         getActivities(personId?: string, opts?: { skipCount?: number, maxItems?: number, who?: string, siteId?: string, fields?: Array<string> }): Promise<ActivityPaging>;
         getFavorite(personId?: string, favoriteId?: string, opts?: { fields?: Array<string> }): Promise<FavoriteEntry>;
@@ -527,9 +531,9 @@ declare namespace AlfrescoApi {
         getSiteMembership(personId?: string, opts?: { skipCount?: number, maxItems?: number, orderBy?: string, relations?: Array<string>, fields?: Array<string> }): Promise<SitePaging>;
         getSiteMembershipRequest(personId?: string, siteId?: string, opts?: { fields?: Array<string> }): Promise<SiteMembershipRequestEntry>;
         getSiteMembershipRequests(personId?: string, opts?: { skipCount?: number, maxItems?: number, fields?: Array<string> }): Promise<SiteMembershipRequestPaging>;
-        removeFavoriteSite(personId?: string, favoriteId?: string): Promise<{}>;
-        removeSiteMembershipRequest(personId?: string, siteId?: string): Promise<{}>;
-        updateSiteMembershipRequest(personId?: string, siteId?: string, siteMembershipBody?: SiteMembershipRequestBody): Promise<{}>;
+        removeFavoriteSite(personId?: string, favoriteId?: string): Promise<void>;
+        removeSiteMembershipRequest(personId?: string, siteId?: string): Promise<void>;
+        updateSiteMembershipRequest(personId?: string, siteId?: string, siteMembershipBody?: SiteMembershipRequestBody): Promise<void>;
     }
 
     // export interface PreferencesApi {
@@ -548,19 +552,19 @@ declare namespace AlfrescoApi {
     export interface RenditionsApi {
         new(client: ApiClient): RenditionsApi;
 
-        createRendition(nodeId?: string, renditionBody?: RenditionBody): Promise<{}>;
+        createRendition(nodeId?: string, renditionBody?: RenditionBody): Promise<void>;
         getRendition(nodeId?: string, renditionId?: string): Promise<RenditionEntry>;
-        getRenditionContent(nodeId?: string, renditionId?: string, opts?: any): Promise<{}>;
+        getRenditionContent(nodeId?: string, renditionId?: string, opts?: any): Promise<void>;
         getRenditions(nodeId?: string): Promise<RenditionPaging>;
         getSharedLinkRendition(sharedId?: string): Promise<RenditionEntry>;
-        getSharedLinkRenditionContent(sharedId?: string, renditionId?: string, opts?: any): Promise<{}>;
+        getSharedLinkRenditionContent(sharedId?: string, renditionId?: string, opts?: any): Promise<void>;
     }
 
     export interface RatingsApi {
         new(client: ApiClient): RatingsApi;
 
         rate(nodeId?: string, ratingBody?: RatingBody, opts?: any): Promise<RatingEntry>;
-        removeRating(nodeId?: string, ratingId?: string): Promise<{}>;
+        removeRating(nodeId?: string, ratingId?: string): Promise<void>;
         getRating(nodeId?: string, ratingId?: string, opts?: any): Promise<RatingEntry>;
         getRatings(nodeId?: string, opts?: any): Promise<RatingPaging>;
     }
@@ -569,11 +573,11 @@ declare namespace AlfrescoApi {
         new(client: ApiClient): SharedlinksApi;
 
         addSharedLink(sharedLinkBody?: SharedLinkBody, opts?: any): Promise<SharedLinkEntry>;
-        deleteSharedLink(sharedId?: string): Promise<{}>;
-        emailSharedLink(sharedId?: string, emailSharedLinkBody?: EmailSharedLinkBody, opts?: any): Promise<{}>;
+        deleteSharedLink(sharedId?: string): Promise<void>;
+        emailSharedLink(sharedId?: string, emailSharedLinkBody?: EmailSharedLinkBody, opts?: any): Promise<void>;
         findSharedLinks(opts?: any): Promise<SharedLinkPaging>;
         getSharedLink(sharedId?: string, opts?: any): Promise<SharedLinkEntry>;
-        getSharedLinkContent(sharedId?: string, opts?: any): Promise<{}>;
+        getSharedLinkContent(sharedId?: string, opts?: any): Promise<void>;
     }
 
     export interface DownloadsApi {
@@ -581,7 +585,7 @@ declare namespace AlfrescoApi {
 
         createDownload(payload: DownloadBodyCreate, opts?: any): Promise<DownloadEntry>;
         getDownload(downloadId: string, opts?: any): Promise<DownloadEntry>;
-        cancelDownload(downloadId: string): Promise<any>;
+        cancelDownload(downloadId: string): Promise<void>;
     }
 
     export interface DownloadBodyCreate {
@@ -605,7 +609,7 @@ declare namespace AlfrescoApi {
         new(client: ApiClient): TagsApi;
 
         addTag(nodeId?: string, tagBody?: TagBody): Promise<TagEntry>;
-        removeTag(nodeId?: string, tagId?: string): Promise<{}>;
+        removeTag(nodeId?: string, tagId?: string): Promise<void>;
         getTag(tagId?: string, fields?: Array<string>, opts?: any): Promise<TagEntry>;
         getNodeTags(nodeId?: string, opts?: any): Promise<TagPaging>;
         getTags(opts?: any): Promise<TagPaging>;
@@ -619,16 +623,16 @@ declare namespace AlfrescoApi {
     }
 
     // export interface TrashcanApi {
-    //     deleteremovedNode(nodeId?: string, opts?: any): Promise<{}>;
+    //     deleteremovedNode(nodeId?: string, opts?: any): Promise<any>;
     //     getremovedNode(nodeId?: string, include?: Array<string>, opts?: any): Promise<removedNodeEntry>;
     //     listremovedNodes(skipCount?: number, maxItems?: number, include?: Array<string>, opts?: any): Promise<removedNodesPaging>;
     //     restoreremovedNode(nodeId?: string, fields?: Array<string>, opts?: any): Promise<NodeEntry>;
     // }
 
     export interface VersionsApi {
-        // removeVersion(nodeId: string, versionId: string, opts?: any): Promise<{}>;
+        // removeVersion(nodeId: string, versionId: string, opts?: any): Promise<any>;
         // getVersion(nodeId: string, versionId: string, opts?: any): Promise<VersionEntry>;
-        // getVersionContent(nodeId: string, versionId: string, attachment?: boolean, ifModifiedSince?: Date, opts?: any): Promise<{}>;
+        // getVersionContent(nodeId: string, versionId: string, attachment?: boolean, ifModifiedSince?: Date, opts?: any): Promise<any>;
         listVersionHistory(nodeId: string, opts?: { include?: Array<string>, fields?: Array<string>, skipCount?: number, maxItems?: number }): Promise<VersionPaging>;
         revertVersion(nodeId: string, versionId: string, revertBody: RevertBody, opts?: { fields?: Array<string> }): Promise<VersionEntry>;
     }
@@ -1790,12 +1794,12 @@ declare namespace AlfrescoApi {
         addAllUsersToGroup(groupId?: number): Promise<any>;
         addGroupCapabilities(groupId?: number, addGroupCapabilitiesRepresentation?: AddGroupCapabilitiesRepresentation): Promise<any>;
         addGroupMember(groupId?: number, userId?: number): Promise<any>;
-        addRelatedGroup(groupId?: number, relatedgroupId?: number, type?: string): Promise<any>;
+        addRelatedGroup(groupId?: number, relatedGroupId?: number, type?: string): Promise<any>;
         createNewGroup(groupRepresentation?: GroupRepresentation): Promise<GroupRepresentation>;
         deleteGroupCapability(groupId?: number, groupCapabilityId?: number): Promise<any>;
         deleteGroupMember(groupId?: number, userId?: number): Promise<any>;
         deleteGroup(groupId?: number): Promise<any>;
-        deleteRelatedGroup(groupId?: number, relatedgroupId?: number): Promise<any>;
+        deleteRelatedGroup(groupId?: number, relatedGroupId?: number): Promise<any>;
         getCapabilities(groupId?: number): Promise<String[]>;
         getGroupUsers(groupId?: number, opts?: {filter?: string, page?: number, pageSize?: number}): Promise<any>;
         getGroup(groupId?: number, opts?: {includeAllUsers?: boolean, summary?: boolean}): Promise<AbstractGroupRepresentation>;
@@ -1968,8 +1972,8 @@ declare namespace AlfrescoApi {
     export interface ModelJsonBpmnApi {
         new(client?: ApiClient): ModelJsonBpmnApi;
 
-        getHistoricEditorDisplayisonClient(processModelId?: number, processModelHistoryId?: number): Promise<any>;
-        getEditorDisplayisonClient(processModelId?: number): Promise<any>;
+        getHistoricEditorDisplayJsonClient(processModelId?: number, processModelHistoryId?: number): Promise<any>;
+        getEditorDisplayJsonClient(processModelId?: number): Promise<any>;
     }
 
     export interface ModelsApi {
@@ -2132,7 +2136,7 @@ declare namespace AlfrescoApi {
         attachForm(taskId?: string, requestNode?: any): Promise<any>;
         claimTask(taskId?: string): Promise<any>;
         completeTaskForm(taskId?: string, completeTaskFormRepresentation?: CompleteFormRepresentation): Promise<any>;
-        completeTask(taskid?: string): Promise<any>;
+        completeTask(taskId?: string): Promise<any>;
         createNewTask(taskRepresentation?: TaskRepresentation): Promise<any>;
         createRelatedContentOnTask(taskId?: string, relatedContent?: RelatedContentRepresentation, opts?: {isRelatedContent?: boolean}): Promise<any>;
         deleteTask(taskId?: string): Promise<any>;
@@ -2160,7 +2164,7 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): TaskCheckListApi;
 
         addSubtask(taskId?: string, taskRepresentation?: TaskRepresentation): Promise<TaskRepresentation>;
-        getChecklist(taskid?: string): Promise<any>;
+        getChecklist(taskId?: string): Promise<any>;
         orderChecklist(taskId?: string, orderRepresentation?: ChecklistOrderRepresentation): Promise<any>;
     }
 
@@ -3379,27 +3383,27 @@ declare namespace AlfrescoApi {
     }
 
     export interface CustomModelApi {
-        createCustomModel(status: string, description: string, name: string, namespaceUri: string, namespacePrefix: string): Promise<{}>;
-        createCustomType(modelName: string, name: string, parentName: string, title, description: string): Promise<{}>;
-        createCustomAspect(modelName: string, name: string, parentName: string, title, description: string): Promise<{}>;
-        createCustomConstraint(modelName: string, name: string, type: string, parameters: any): Promise<{}>;
-        activateCustomModel(modelName: string): Promise<{}>;
-        deactivateCustomModel(modelName: string): Promise<{}>;
-        addPropertyToAspect(modelName: string, aspectName: string, properties: any): Promise<{}>;
-        addPropertyToType(modelName: string, updateCustomModel, properties: any): Promise<{}>;
-        updateCustomModel(modelName: string, description: string, namespaceUri: string, namespacePrefix: string): Promise<{}>;
-        updateCustomType(modelName: string, typeName: string, description: string, parentName: string, title: string): Promise<{}>;
-        updateCustomAspect(modelName: string, aspectName: string, description: string, parentName: string, title: string): Promise<{}>;
-        getAllCustomModel(): Promise<{}>;
-        getCustomModel(modelName: string, queryParams: any): Promise<{}>;
-        getAllCustomType(modelName: string): Promise<{}>;
-        getCustomType(modelName: string, typeName: string, queryParams: any): Promise<{}>;
-        getAllCustomAspect(modelName: string): Promise<{}>;
-        getCustomAspect(modelName: string, aspectName: string, queryParams: any): Promise<{}>;
-        getAllCustomConstraints(modelName: string): Promise<{}>;
-        getCustomConstraints(modelName: string, constraintName: string, queryParams: any): Promise<{}>;
-        deleteCustomModel(modelName: string): Promise<{}>;
-        deleteCustomType(modelName: string, typeName: string): Promise<{}>;
+        createCustomModel(status: string, description: string, name: string, namespaceUri: string, namespacePrefix: string): Promise<any>;
+        createCustomType(modelName: string, name: string, parentName: string, title, description: string): Promise<any>;
+        createCustomAspect(modelName: string, name: string, parentName: string, title, description: string): Promise<any>;
+        createCustomConstraint(modelName: string, name: string, type: string, parameters: any): Promise<any>;
+        activateCustomModel(modelName: string): Promise<any>;
+        deactivateCustomModel(modelName: string): Promise<any>;
+        addPropertyToAspect(modelName: string, aspectName: string, properties: any): Promise<any>;
+        addPropertyToType(modelName: string, updateCustomModel, properties: any): Promise<any>;
+        updateCustomModel(modelName: string, description: string, namespaceUri: string, namespacePrefix: string): Promise<any>;
+        updateCustomType(modelName: string, typeName: string, description: string, parentName: string, title: string): Promise<any>;
+        updateCustomAspect(modelName: string, aspectName: string, description: string, parentName: string, title: string): Promise<any>;
+        getAllCustomModel(): Promise<any>;
+        getCustomModel(modelName: string, queryParams: any): Promise<any>;
+        getAllCustomType(modelName: string): Promise<any>;
+        getCustomType(modelName: string, typeName: string, queryParams: any): Promise<any>;
+        getAllCustomAspect(modelName: string): Promise<any>;
+        getCustomAspect(modelName: string, aspectName: string, queryParams: any): Promise<any>;
+        getAllCustomConstraints(modelName: string): Promise<any>;
+        getCustomConstraints(modelName: string, constraintName: string, queryParams: any): Promise<any>;
+        deleteCustomModel(modelName: string): Promise<any>;
+        deleteCustomType(modelName: string, typeName: string): Promise<any>;
     }
 
     export declare class AlfrescoApiConfig {
