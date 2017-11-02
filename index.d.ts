@@ -412,7 +412,7 @@ declare namespace AlfrescoApi {
 
         addFavorite(personId?: string, favoriteBody?: FavoriteBody): Promise<FavoriteEntry>;
         // addSiteFavorite(personId?: string, favoriteSiteBody?: FavoriteSiteBody, fields?: Array<string>, opts?: any): Promise<FavoriteSiteEntry>;
-        // removeFavorite(personId?: string, favoriteId?: string, opts?: any): Promise<{}>;
+        // removeFavorite(personId?: string, favoriteId?: string, opts?: any): Promise<any>;
         removeFavoriteSite(personId?: string, favoriteId?: string): Promise<void>;
         getFavorite(personId?: string, favoriteId?: string, opts?: any): Promise<FavoriteEntry>;
         getFavorites(personId?: string, opts?: { skipCount?: number, maxItems?: number, where?: string, fields?: Array<string> }): Promise<FavoritePaging>;
@@ -623,16 +623,16 @@ declare namespace AlfrescoApi {
     }
 
     // export interface TrashcanApi {
-    //     deleteremovedNode(nodeId?: string, opts?: any): Promise<{}>;
+    //     deleteremovedNode(nodeId?: string, opts?: any): Promise<any>;
     //     getremovedNode(nodeId?: string, include?: Array<string>, opts?: any): Promise<removedNodeEntry>;
     //     listremovedNodes(skipCount?: number, maxItems?: number, include?: Array<string>, opts?: any): Promise<removedNodesPaging>;
     //     restoreremovedNode(nodeId?: string, fields?: Array<string>, opts?: any): Promise<NodeEntry>;
     // }
 
     export interface VersionsApi {
-        // removeVersion(nodeId: string, versionId: string, opts?: any): Promise<{}>;
+        // removeVersion(nodeId: string, versionId: string, opts?: any): Promise<any>;
         // getVersion(nodeId: string, versionId: string, opts?: any): Promise<VersionEntry>;
-        // getVersionContent(nodeId: string, versionId: string, attachment?: boolean, ifModifiedSince?: Date, opts?: any): Promise<{}>;
+        // getVersionContent(nodeId: string, versionId: string, attachment?: boolean, ifModifiedSince?: Date, opts?: any): Promise<any>;
         listVersionHistory(nodeId: string, opts?: { include?: Array<string>, fields?: Array<string>, skipCount?: number, maxItems?: number }): Promise<VersionPaging>;
         revertVersion(nodeId: string, versionId: string, revertBody: RevertBody, opts?: { fields?: Array<string> }): Promise<VersionEntry>;
     }
@@ -3383,27 +3383,27 @@ declare namespace AlfrescoApi {
     }
 
     export interface CustomModelApi {
-        createCustomModel(status: string, description: string, name: string, namespaceUri: string, namespacePrefix: string): Promise<{}>;
-        createCustomType(modelName: string, name: string, parentName: string, title, description: string): Promise<{}>;
-        createCustomAspect(modelName: string, name: string, parentName: string, title, description: string): Promise<{}>;
-        createCustomConstraint(modelName: string, name: string, type: string, parameters: any): Promise<{}>;
-        activateCustomModel(modelName: string): Promise<{}>;
-        deactivateCustomModel(modelName: string): Promise<{}>;
-        addPropertyToAspect(modelName: string, aspectName: string, properties: any): Promise<{}>;
-        addPropertyToType(modelName: string, updateCustomModel, properties: any): Promise<{}>;
-        updateCustomModel(modelName: string, description: string, namespaceUri: string, namespacePrefix: string): Promise<{}>;
-        updateCustomType(modelName: string, typeName: string, description: string, parentName: string, title: string): Promise<{}>;
-        updateCustomAspect(modelName: string, aspectName: string, description: string, parentName: string, title: string): Promise<{}>;
-        getAllCustomModel(): Promise<{}>;
-        getCustomModel(modelName: string, queryParams: any): Promise<{}>;
-        getAllCustomType(modelName: string): Promise<{}>;
-        getCustomType(modelName: string, typeName: string, queryParams: any): Promise<{}>;
-        getAllCustomAspect(modelName: string): Promise<{}>;
-        getCustomAspect(modelName: string, aspectName: string, queryParams: any): Promise<{}>;
-        getAllCustomConstraints(modelName: string): Promise<{}>;
-        getCustomConstraints(modelName: string, constraintName: string, queryParams: any): Promise<{}>;
-        deleteCustomModel(modelName: string): Promise<{}>;
-        deleteCustomType(modelName: string, typeName: string): Promise<{}>;
+        createCustomModel(status: string, description: string, name: string, namespaceUri: string, namespacePrefix: string): Promise<any>;
+        createCustomType(modelName: string, name: string, parentName: string, title, description: string): Promise<any>;
+        createCustomAspect(modelName: string, name: string, parentName: string, title, description: string): Promise<any>;
+        createCustomConstraint(modelName: string, name: string, type: string, parameters: any): Promise<any>;
+        activateCustomModel(modelName: string): Promise<any>;
+        deactivateCustomModel(modelName: string): Promise<any>;
+        addPropertyToAspect(modelName: string, aspectName: string, properties: any): Promise<any>;
+        addPropertyToType(modelName: string, updateCustomModel, properties: any): Promise<any>;
+        updateCustomModel(modelName: string, description: string, namespaceUri: string, namespacePrefix: string): Promise<any>;
+        updateCustomType(modelName: string, typeName: string, description: string, parentName: string, title: string): Promise<any>;
+        updateCustomAspect(modelName: string, aspectName: string, description: string, parentName: string, title: string): Promise<any>;
+        getAllCustomModel(): Promise<any>;
+        getCustomModel(modelName: string, queryParams: any): Promise<any>;
+        getAllCustomType(modelName: string): Promise<any>;
+        getCustomType(modelName: string, typeName: string, queryParams: any): Promise<any>;
+        getAllCustomAspect(modelName: string): Promise<any>;
+        getCustomAspect(modelName: string, aspectName: string, queryParams: any): Promise<any>;
+        getAllCustomConstraints(modelName: string): Promise<any>;
+        getCustomConstraints(modelName: string, constraintName: string, queryParams: any): Promise<any>;
+        deleteCustomModel(modelName: string): Promise<any>;
+        deleteCustomType(modelName: string, typeName: string): Promise<any>;
     }
 
     export declare class AlfrescoApiConfig {
