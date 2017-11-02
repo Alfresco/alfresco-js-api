@@ -18,6 +18,7 @@
 - [Fix the Github markdown for README.md](https://issues.alfresco.com/jira/browse/ADF-279)
 - [PeopleApi - getSiteMembership wrong returned type](https://issues.alfresco.com/jira/browse/ADF-1829)
 - [Update superagent to 3.7.0 ](https://issues.alfresco.com/jira/browse/ADF-1833)
+- [NodesApi.getNodeChildren has wrong return type](https://issues.alfresco.com/jira/browse/ADF-1860)
 
 # [1.9.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.9.0) (09-10-2017)
 
