@@ -61,17 +61,25 @@ declare namespace AlfrescoApi {
         new(config: AlfrescoApiConfig): AlfrescoApi;
 
         changeEcmHost(ecmHost: string): void;
+
         changeBpmHost(bpmHost: string): void;
+
         changeCsrfConfig(disableCsrf: boolean): void;
 
         isLoggedIn(): boolean;
+
         login(username: string, password: string): Promise<string>;
+
         logout(): Promise<any>;
+
         loginTicket(ticket: string): any;
+
         refresh(): Promise<string>;
 
         getTicket(): Array<string>;
+
         getTicketBpm(): string;
+
         getTicketEcm(): string;
 
         setTicket(ticketEcm: any, ticketBpm: any): void;
@@ -104,13 +112,13 @@ declare namespace AlfrescoApi {
 
     }
 
-    export declare class FolderEntity {
+    export class FolderEntity {
         constructor(obj?: any);
 
         items: DocumentEntity[];
     }
 
-    export declare class DocumentEntity {
+    export class DocumentEntity {
         constructor(obj?: any);
 
         nodeRef: string;
@@ -143,7 +151,7 @@ declare namespace AlfrescoApi {
         location: LocationEntity;
     }
 
-    export declare class LocationEntity {
+    export class LocationEntity {
         constructor(obj?: any);
 
         repositoryId: string;
@@ -155,26 +163,26 @@ declare namespace AlfrescoApi {
         parent: LocationParentEntity;
     }
 
-    export declare class LocationParentEntity {
+    export class LocationParentEntity {
         constructor(obj?: any);
 
         nodeRef: string;
     }
 
-    export declare class DeletedNodesPaging {
+    export class DeletedNodesPaging {
         constructor(obj?: any);
 
         list: DeletedNodesPagingList;
     }
 
-    export declare class DeletedNodesPagingList {
+    export class DeletedNodesPagingList {
         constructor(obj?: any);
 
         pagination: Pagination;
         entries: DeletedNodeEntity[];
     }
 
-    export declare class Source {
+    export class Source {
         constructor(obj?: any);
 
         id: string;
@@ -190,19 +198,19 @@ declare namespace AlfrescoApi {
         nodeType?: string;
     }
 
-    export declare class MinimalNodeEntity {
+    export class MinimalNodeEntity {
         constructor(obj?: any);
 
         entry?: MinimalNodeEntryEntity;
     }
 
-    export declare class DeletedNodeEntity {
+    export class DeletedNodeEntity {
         constructor(obj?: any);
 
         entry?: DeletedNodeMinimalEntry;
     }
 
-    export declare class Node {
+    export class Node {
         constructor(obj?: any);
 
         id?: string;
@@ -227,54 +235,62 @@ declare namespace AlfrescoApi {
         createdByUser?: UserInfo;
     }
 
-    export declare class MinimalNode extends Node {
+    export class MinimalNode extends Node {
         constructor(obj?: any);
 
     }
 
     export interface EcmClient {
         new(config: AlfrescoApiConfig): EcmClient;
+
         changeHost(host: string): void;
+
         setAuthentications(authentications: any): void;
     }
 
     export interface BpmClient {
         new(config: AlfrescoApiConfig): BpmClient;
+
         changeHost(host: string): void;
+
         setAuthentications(authentications: any): void;
     }
 
     export interface SearchClient {
         new(config: AlfrescoApiConfig): SearchClient;
+
         changeHost(): void;
+
         setAuthentications(authentications: any): void;
     }
 
     export interface EcmPrivateClient {
         new(config: AlfrescoApiConfig): EcmPrivateClient;
+
         changeHost(host: string): void;
+
         setAuthentications(authentications: any): void;
     }
 
-    export declare class MinimalNodeEntryEntity extends MinimalNode {
+    export class MinimalNodeEntryEntity extends MinimalNode {
         constructor(obj?: any);
 
     }
 
-    export declare class NodeProperties {
+    export class NodeProperties {
         constructor(obj?: any);
 
         [key: string]: any;
     }
 
-    export declare class DeletedNodeMinimalEntry extends MinimalNode {
+    export class DeletedNodeMinimalEntry extends MinimalNode {
         constructor(obj?: any);
 
         archivedAt: Date;
         archivedByUser: UserInfo;
     }
 
-    export declare class PathInfoEntity {
+    export class PathInfoEntity {
         constructor(obj?: any);
 
         elements: PathElementEntity[];
@@ -282,7 +298,7 @@ declare namespace AlfrescoApi {
         name: string;
     }
 
-    export declare class PathElementEntity {
+    export class PathElementEntity {
         constructor(obj?: any);
 
         id: string;
@@ -316,7 +332,7 @@ declare namespace AlfrescoApi {
         entry: RepositoryEntry;
     }
 
-    export declare class EntitlementsInfo {
+    export class EntitlementsInfo {
         constructor(obj?: any);
 
         maxUsers?: number;
@@ -330,7 +346,7 @@ declare namespace AlfrescoApi {
         error?: ErrorError;
     }
 
-    export declare class LicenseInfo {
+    export class LicenseInfo {
         constructor(obj?: any);
 
         issuedAt: Date;
@@ -341,7 +357,7 @@ declare namespace AlfrescoApi {
         entitlements?: EntitlementsInfo;
     }
 
-    export declare class ModuleInfo {
+    export class ModuleInfo {
         constructor(obj?: any);
 
         id?: string;
@@ -354,7 +370,7 @@ declare namespace AlfrescoApi {
         versionMax?: string;
     }
 
-    export declare class RepositoryInfo {
+    export class RepositoryInfo {
         constructor(obj?: any);
 
         edition: string;
@@ -364,13 +380,13 @@ declare namespace AlfrescoApi {
         modules?: Array<ModuleInfo>;
     }
 
-    export declare class RepositoryEntry {
+    export class RepositoryEntry {
         constructor(obj?: any);
 
         repository: RepositoryInfo;
     }
 
-    export declare class StatusInfo {
+    export class StatusInfo {
         constructor(obj?: any);
 
         isReadOnly: boolean;
@@ -379,7 +395,7 @@ declare namespace AlfrescoApi {
         isThumbnailGenerationEnabled: boolean;
     }
 
-    export declare class VersionInfo {
+    export class VersionInfo {
         constructor(obj?: any);
 
         major: string;
@@ -391,7 +407,7 @@ declare namespace AlfrescoApi {
         display: string;
     }
 
-    export declare class PersonBodyCreate {
+    export class PersonBodyCreate {
         constructor(obj?: any);
 
         id: string;
@@ -411,12 +427,17 @@ declare namespace AlfrescoApi {
         new(client: ApiClient): FavoritesApi;
 
         addFavorite(personId?: string, favoriteBody?: FavoriteBody): Promise<FavoriteEntry>;
+
         // addSiteFavorite(personId?: string, favoriteSiteBody?: FavoriteSiteBody, fields?: Array<string>, opts?: any): Promise<FavoriteSiteEntry>;
         // removeFavorite(personId?: string, favoriteId?: string, opts?: any): Promise<any>;
-        removeFavoriteSite(personId?: string, favoriteId?: string): Promise<void>;
+        removeFavoriteSite(personId?: string, favoriteId?: string): Promise<any>;
+
         getFavorite(personId?: string, favoriteId?: string, opts?: any): Promise<FavoriteEntry>;
+
         getFavorites(personId?: string, opts?: { skipCount?: number, maxItems?: number, where?: string, fields?: Array<string> }): Promise<FavoritePaging>;
+
         getFavoriteSite(personId?: string, siteId?: string, opts?: any): Promise<SiteEntry>;
+
         // listFavoriteSitesForPerson(personId?: string, skipCount?: number, maxItems?: number, fields?: Array<string>, opts?: any): Promise<SitePaging>;
         // listFavorites(personId?: string, skipCount?: number, maxItems?: number, where?: string, fields?: Array<string>, opts?: any): Promise<FavoritePaging>;
     }
@@ -425,21 +446,30 @@ declare namespace AlfrescoApi {
         new(client: ApiClient): ChildAssociationsApi;
 
         addNode(nodeId?: string, nodeBody?: NodeBody, opts?: { autoRename?: boolean, include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
-        addSecondaryChildAssoc(parentId?: string, assocChildBody?: AssocChildBody): Promise<void>;
-        deleteNode(nodeId?: string, opts?: { permanent?: boolean }): Promise<void>;
+
+        addSecondaryChildAssoc(parentId?: string, assocChildBody?: AssocChildBody): Promise<any>;
+
+        deleteNode(nodeId?: string, opts?: { permanent?: boolean }): Promise<any>;
+
         getNodeChildren(nodeId?: string, opts?: { skipCount?: number, maxItems?: number, orderBy?: string, where?: string, include?: Array<string>, relativePath?: string, includeSource?: boolean, fields?: Array<string> }): Promise<NodePaging>;
+
         listParents(childId?: string, opts?: { where?: string, include?: string, fields?: Array<string> }): Promise<NodeAssocPaging>;
-        listSecondaryChildAssociations(parentId?: string, opts?: { assocType?: string, where?: string, include?: string, fields?: Array<string> }): Promise<NodeChildAssocPaging>;
+
+        listSecondaryChildAssociations(parentId?: string, opts?: { assocType?: string, where?: string, include?: string, fields?: Array<string> }): Promise<NodeAssocPaging>;
+
         moveNode(nodeId?: string, moveBody?: MoveBody, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
     }
 
     export interface AssociationsApi {
         new(client: ApiClient): AssociationsApi;
 
-        addAssoc(sourceId?: string, assocTargetBody?: AssocTargetBody): Promise<void>;
+        addAssoc(sourceId?: string, assocTargetBody?: AssocTargetBody): Promise<any>;
+
         listSourceNodeAssociations(targetId?: string, opts?: { where?: string, include?: string, fields?: Array<string> }): Promise<NodeAssocPaging>;
+
         listTargetAssociations(sourceId?: string, opts?: { where?: string, include?: string, fields?: Array<string> }): Promise<NodeAssocPaging>;
-        removeAssoc(sourceId?: string, targetId?: string, opts?: { assocType?: string }): Promise<void>;
+
+        removeAssoc(sourceId?: string, targetId?: string, opts?: { assocType?: string }): Promise<any>;
 
     }
 
@@ -447,8 +477,11 @@ declare namespace AlfrescoApi {
         new(client: ApiClient): CommentsApi;
 
         addComment(nodeId?: string, commentBody?: CommentBody, opts?: any): Promise<CommentEntry>;
+
         getComments(nodeId?: string, opts?: any): Promise<CommentPaging>;
-        removeComment(nodeId?: string, commentId?: string): Promise<void>;
+
+        removeComment(nodeId?: string, commentId?: string): Promise<any>;
+
         updateComment(nodeId?: string, commentId?: string, commentBody?: CommentBody, opts?: any): Promise<CommentEntry>;
     }
 
@@ -456,7 +489,9 @@ declare namespace AlfrescoApi {
         new(client: ApiClient): NetworksApi;
 
         getNetwork(networkId?: string, opts?: any): Promise<PersonNetworkEntry>;
+
         getNetworkForPerson(personId?: string, networkId?: string, opts?: any): Promise<PersonNetworkEntry>;
+
         listNetworksForPerson(personId?: string, opts?: any): Promise<PersonNetworkPaging>;
     }
 
@@ -464,33 +499,57 @@ declare namespace AlfrescoApi {
         new(client: ApiClient): NodesApi;
 
         addNode(nodeId: string, nodeBody: any, opts?: { autoRename?: boolean, include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
+
         copyNode(nodeId: string, copyBody: any, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
-        deleteNode(nodeId?: string, opts?: { permanent?: boolean }): Promise<void>;
-        purgeDeletedNode(nodeId: string): Promise<void>;
+
+        deleteNode(nodeId?: string, opts?: { permanent?: boolean }): Promise<any>;
+
+        purgeDeletedNode(nodeId: string): Promise<any>;
+
         // custom API not exposed by the platform
-        getNodeInfo(nodeId: string, opts?: any): Promise<NodeEntry>;
+        getNodeInfo(nodeId: string, opts?: any): Promise<Node>;
+
         // custom API not exposed by the platform
         deleteNodePermanent(nodeId: string): Promise<any>;
+
         // custom API not exposed by the platform
         createFolder(name: string, relativePath: string, nodeId?: string, opts?: any): Promise<NodeEntry>;
+
         // custom API not exposed by the platform
         createFolderAutoRename(name: string, relativePath: string, nodeId: string, opts): Promise<NodeEntry>;
+
         getDeletedNode(nodeId?: string, opts?: { include?: Array<string> }): Promise<DeletedNodeEntry>;
+
         getDeletedNodes(opts?: { skipCount?: number, maxItems?: number, include?: Array<string> }): Promise<DeletedNodesPaging>;
+
         getFileContent(nodeId?: string, opts?: { attachment?: boolean, ifModifiedSince?: Date }): Promise<any>;
+
         getNode(nodeId?: string, opts?: { include?: Array<string>, relativePath?: string, fields?: Array<string> }): Promise<NodeEntry>;
+
         getNodeContent(nodeId?: string, opts?: any): Promise<any>;
+
         getNodeChildren(nodeId?: string, opts?: { skipCount?: number, maxItems?: number, orderBy?: string, where?: string, include?: Array<string>, relativePath?: string, includeSource?: boolean, fields?: Array<string> }): Promise<NodePaging>;
+
         getParents(nodeId?: string, opts?: { where?: string, include?: Array<string>, skipCount?: number, maxItems?: number, includeSource?: boolean, fields?: Array<string> }): Promise<NodeAssociationPaging>;
+
         getSecondaryChildren(nodeId?: string, opts?: { where?: string, include?: Array<string>, skipCount?: number, maxItems?: number, includeSource?: boolean, fields?: Array<string> }): Promise<NodeChildAssociationPaging>;
+
         getSourceAssociations(nodeId?: string, opts?: { where?: string, include?: Array<string>, fields?: Array<string> }): Promise<NodeAssociationPaging>;
+
         getTargetAssociations(nodeId?: string, opts?: { where?: string, include?: Array<string>, fields?: Array<string> }): Promise<NodeAssociationPaging>;
+
         lockNode(nodeId?: string, nodeBodyLock?: NodeBodyLock, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
+
         unlockNode(nodeId?: string, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
+
         moveNode(nodeId?: string, moveBody?: MoveBody, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
-        restoreNode(nodeId?: string): Promise<NodeEntry>;
+
+        restoreNode(nodeId?: string): Promise<any>;
+
         updateFileContent(nodeId?: string, contentBody?: string, opts?: { majorVersion?: boolean, comment?: string, include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
+
         updateNodeContent(nodeId?: string, contentBody?: string, opts?: any): Promise<NodeEntry>;
+
         updateNode(nodeId?: string, nodeBody?: NodeBody, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
     }
 
@@ -498,15 +557,25 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): SitesApi;
 
         addSiteMember(siteId?: string, siteMemberBody?: SiteMemberBody): Promise<SiteMemberEntry>;
+
         createSite(siteBody?: SiteBody, opts?: { skipConfiguration?: Boolean, skipAddToFavorites?: Boolean }): Promise<SiteEntry>;
-        deleteSite(siteId?: string, opts?: { permanent?: Boolean }): Promise<void>;
+
+        deleteSite(siteId?: string, opts?: { permanent?: Boolean }): Promise<any>;
+
         getSite(siteId?: string, opts?: { relations?: Array<string>, fields?: Array<string> }): Promise<SiteEntry>;
+
         getSiteContainer(siteId?: string, containerId?: string, opts?: Array<string>): Promise<SiteContainerEntry>;
+
         getSiteContainers(siteId?: string, opts?: { skipCount?: number, maxItems?: number, fields?: Array<string> }): Promise<SiteContainerPaging>;
+
         getSiteMember(siteId?: string, personId?: string, opts?: { fields?: Array<string> }): Promise<SiteMemberEntry>;
+
         getSiteMembers(siteId?: string, opts?: { skipCount?: number, maxItems?: number, fields?: Array<string> }): Promise<SiteMemberPaging>;
+
         getSites(opts?: { skipCount?: number, maxItems?: number, orderBy?: string, relations?: Array<string>, fields?: Array<string> }): Promise<SitePaging>;
-        removeSiteMember(siteId?: string, personId?: string): Promise<void>;
+
+        removeSiteMember(siteId?: string, personId?: string): Promise<any>;
+
         updateSiteMember(siteId?: string, personId?: string, siteMemberRoleBody?: SiteMemberRoleBody): Promise<SiteMemberEntry>;
     }
 
@@ -514,26 +583,46 @@ declare namespace AlfrescoApi {
         new(client: ApiClient): PeopleApi;
 
         addPerson(person: PersonBodyCreate): Promise<PersonEntry>;
+
         addFavorite(personId?: string, favoriteBody?: FavoriteBody): Promise<FavoriteEntry>;
+
         addSiteMembershipRequest(personId?: string, siteMembershipBody?: SiteMembershipRequestBody): Promise<SiteMembershipRequestEntry>;
-        deleteFavoriteSite(personId?: string, siteId?: string): Promise<void>;
+
+        deleteFavoriteSite(personId?: string, siteId?: string): Promise<any>;
+
         favoriteSite(personId?: string, favoriteSiteBody?: FavoriteSiteBody): Promise<FavoriteEntry>;
+
         getActivities(personId?: string, opts?: { skipCount?: number, maxItems?: number, who?: string, siteId?: string, fields?: Array<string> }): Promise<ActivityPaging>;
+
         getFavorite(personId?: string, favoriteId?: string, opts?: { fields?: Array<string> }): Promise<FavoriteEntry>;
+
         getFavoriteSite(personId?: string, siteId?: string, opts?: { fields?: Array<string> }): Promise<SiteEntry>;
+
         getFavoriteSites(personId?: string, opts?: { skipCount?: number, maxItems?: number, fields?: Array<string> }): Promise<SitePaging>;
+
         getFavorites(personId?: string, opts?: { skipCount?: number, maxItems?: number, where?: string, fields?: Array<string> }): Promise<FavoritePaging>;
+
         getPerson(personId?: string, opts?: { fields?: Array<string> }): Promise<PersonEntry>;
+
         getPersonNetwork(personId?: string, networkId?: string, opts?: { fields?: Array<string> }): Promise<PersonNetworkEntry>;
+
         getPersonNetworks(personId?: string, opts?: { skipCount?: number, maxItems?: number, fields?: Array<string> }): Promise<PersonNetworkPaging>;
+
         getPreference(personId?: string, preferenceName?: string, opts?: { fields?: Array<string> }): Promise<PreferenceEntry>;
+
         getPreferences(personId?: string, opts?: { skipCount?: number, maxItems?: number, fields?: Array<string> }): Promise<PreferencePaging>;
+
         getSiteMembership(personId?: string, opts?: { skipCount?: number, maxItems?: number, orderBy?: string, relations?: Array<string>, fields?: Array<string> }): Promise<SitePaging>;
+
         getSiteMembershipRequest(personId?: string, siteId?: string, opts?: { fields?: Array<string> }): Promise<SiteMembershipRequestEntry>;
+
         getSiteMembershipRequests(personId?: string, opts?: { skipCount?: number, maxItems?: number, fields?: Array<string> }): Promise<SiteMembershipRequestPaging>;
-        removeFavoriteSite(personId?: string, favoriteId?: string): Promise<void>;
-        removeSiteMembershipRequest(personId?: string, siteId?: string): Promise<void>;
-        updateSiteMembershipRequest(personId?: string, siteId?: string, siteMembershipBody?: SiteMembershipRequestBody): Promise<void>;
+
+        removeFavoriteSite(personId?: string, favoriteId?: string): Promise<any>;
+
+        removeSiteMembershipRequest(personId?: string, siteId?: string): Promise<any>;
+
+        updateSiteMembershipRequest(personId?: string, siteId?: string, siteMembershipBody?: SiteMembershipRequestBody): Promise<any>;
     }
 
     // export interface PreferencesApi {
@@ -545,27 +634,37 @@ declare namespace AlfrescoApi {
         new(client: ApiClient): QueriesApi;
 
         findNodes(term?: string, opts?: any): Promise<NodePaging>;
+
         findPeople(term?: string, opts?: any): Promise<PersonPaging>;
+
         findSites(term?: string, opts?: any): Promise<SitePaging>;
     }
 
     export interface RenditionsApi {
         new(client: ApiClient): RenditionsApi;
 
-        createRendition(nodeId?: string, renditionBody?: RenditionBody): Promise<void>;
+        createRendition(nodeId?: string, renditionBody?: RenditionBody): Promise<any>;
+
         getRendition(nodeId?: string, renditionId?: string): Promise<RenditionEntry>;
-        getRenditionContent(nodeId?: string, renditionId?: string, opts?: any): Promise<void>;
+
+        getRenditionContent(nodeId?: string, renditionId?: string, opts?: any): Promise<any>;
+
         getRenditions(nodeId?: string): Promise<RenditionPaging>;
+
         getSharedLinkRendition(sharedId?: string): Promise<RenditionEntry>;
-        getSharedLinkRenditionContent(sharedId?: string, renditionId?: string, opts?: any): Promise<void>;
+
+        getSharedLinkRenditionContent(sharedId?: string, renditionId?: string, opts?: any): Promise<any>;
     }
 
     export interface RatingsApi {
         new(client: ApiClient): RatingsApi;
 
         rate(nodeId?: string, ratingBody?: RatingBody, opts?: any): Promise<RatingEntry>;
-        removeRating(nodeId?: string, ratingId?: string): Promise<void>;
+
+        removeRating(nodeId?: string, ratingId?: string): Promise<any>;
+
         getRating(nodeId?: string, ratingId?: string, opts?: any): Promise<RatingEntry>;
+
         getRatings(nodeId?: string, opts?: any): Promise<RatingPaging>;
     }
 
@@ -573,19 +672,26 @@ declare namespace AlfrescoApi {
         new(client: ApiClient): SharedlinksApi;
 
         addSharedLink(sharedLinkBody?: SharedLinkBody, opts?: any): Promise<SharedLinkEntry>;
-        deleteSharedLink(sharedId?: string): Promise<void>;
-        emailSharedLink(sharedId?: string, emailSharedLinkBody?: EmailSharedLinkBody, opts?: any): Promise<void>;
+
+        deleteSharedLink(sharedId?: string): Promise<any>;
+
+        emailSharedLink(sharedId?: string, emailSharedLinkBody?: EmailSharedLinkBody, opts?: any): Promise<any>;
+
         findSharedLinks(opts?: any): Promise<SharedLinkPaging>;
+
         getSharedLink(sharedId?: string, opts?: any): Promise<SharedLinkEntry>;
-        getSharedLinkContent(sharedId?: string, opts?: any): Promise<void>;
+
+        getSharedLinkContent(sharedId?: string, opts?: any): Promise<any>;
     }
 
     export interface DownloadsApi {
         new(client: ApiClient): DownloadsApi;
 
         createDownload(payload: DownloadBodyCreate, opts?: any): Promise<DownloadEntry>;
+
         getDownload(downloadId: string, opts?: any): Promise<DownloadEntry>;
-        cancelDownload(downloadId: string): Promise<void>;
+
+        cancelDownload(downloadId: string): Promise<any>;
     }
 
     export interface DownloadBodyCreate {
@@ -605,14 +711,51 @@ declare namespace AlfrescoApi {
         status: string;
     }
 
+    export interface NodeAssocPaging {
+        list?: NodeAssocPagingList;
+    }
+
+    export interface NodeAssocPagingList {
+        entries?: NodeAssocMinimalEntry;
+        pagination?: Pagination;
+    }
+
+    export interface NodeAssocMinimalEntry {
+        entry?:NodeAssocMinimal;
+    }
+
+    export interface NodeAssocMinimal {
+        id?: string;
+        parentId?: String;
+        name?: String;
+        nodeType?: String;
+        isFolder?: Boolean;
+        isFile?: Boolean;
+        modifiedAt?: Date;
+        modifiedByUser?:UserInfo;
+        createdAt?: Date;
+        createdByUser?: UserInfo;
+        content?: ContentInfo;
+        association?: AssocInfo;
+    }
+
+    export interface AssocInfo {
+        assocType?:String;
+    }
+
     export interface TagsApi {
         new(client: ApiClient): TagsApi;
 
         addTag(nodeId?: string, tagBody?: TagBody): Promise<TagEntry>;
-        removeTag(nodeId?: string, tagId?: string): Promise<void>;
+
+        removeTag(nodeId?: string, tagId?: string): Promise<any>;
+
         getTag(tagId?: string, fields?: Array<string>, opts?: any): Promise<TagEntry>;
+
         getNodeTags(nodeId?: string, opts?: any): Promise<TagPaging>;
+
         getTags(opts?: any): Promise<TagPaging>;
+
         updateTag(tagId?: string, tagBody?: TagBody): Promise<TagEntry>;
     }
 
@@ -634,10 +777,11 @@ declare namespace AlfrescoApi {
         // getVersion(nodeId: string, versionId: string, opts?: any): Promise<VersionEntry>;
         // getVersionContent(nodeId: string, versionId: string, attachment?: boolean, ifModifiedSince?: Date, opts?: any): Promise<any>;
         listVersionHistory(nodeId: string, opts?: { include?: Array<string>, fields?: Array<string>, skipCount?: number, maxItems?: number }): Promise<VersionPaging>;
+
         revertVersion(nodeId: string, versionId: string, revertBody: RevertBody, opts?: { fields?: Array<string> }): Promise<VersionEntry>;
     }
 
-    export declare class Activity {
+    export class Activity {
         constructor(obj?: any);
 
         postPersonId?: string;
@@ -651,106 +795,106 @@ declare namespace AlfrescoApi {
         activityType?: string;
     }
 
-    export declare class ActivityEntry {
+    export class ActivityEntry {
         constructor(obj?: any);
 
         entry?: Activity;
     }
 
-    export declare class AssocChildBody {
+    export class AssocChildBody {
         constructor(obj?: any);
 
         childId: string;
         assocType: string;
     }
 
-    export declare class DeletedNodeEntry {
+    export class DeletedNodeEntry {
         constructor(obj?: any);
 
         entry?: DeletedNode;
     }
 
-    export declare class DeletedNode {
+    export class DeletedNode {
         constructor(obj?: any);
 
         archivedByUser?: UserInfo;
         archivedAt?: Date;
     }
 
-    export declare class ActivityPaging {
+    export class ActivityPaging {
         constructor(obj?: any);
 
         list?: ActivityPagingList;
     }
 
-    export declare class ActivityPagingList {
+    export class ActivityPagingList {
         constructor(obj?: any);
 
         entries?: Array<ActivityEntry>;
         pagination?: Pagination;
     }
 
-    export declare class Association {
+    export class Association {
         constructor(obj?: any);
 
         targetId?: string;
         assocType?: string;
     }
 
-    export declare class AssociationBody {
+    export class AssociationBody {
         constructor(obj?: any);
 
         targetId?: string;
         assocType?: string;
     }
 
-    export declare class AssociationEntry {
+    export class AssociationEntry {
         constructor(obj?: any);
 
         entry?: Association;
     }
 
-    export declare class AssociationInfo {
+    export class AssociationInfo {
         constructor(obj?: any);
 
         assocType?: string;
     }
 
-    export declare class ChildAssociation {
-        constructor(obj?: any);
-
-        childId?: string;
-        assocType?: string;
-    }
-
-    export declare class ChildAssociationBody {
+    export class ChildAssociation {
         constructor(obj?: any);
 
         childId?: string;
         assocType?: string;
     }
 
-    export declare class ChildAssociationEntry {
+    export class ChildAssociationBody {
+        constructor(obj?: any);
+
+        childId?: string;
+        assocType?: string;
+    }
+
+    export class ChildAssociationEntry {
         constructor(obj?: any);
 
         entry?: ChildAssociation;
     }
 
-    export declare class ChildAssociationInfo {
+    export class ChildAssociationInfo {
         constructor(obj?: any);
 
         assocType?: string;
         isPrimary?: boolean;
     }
 
-    export declare class AssocTargetBody {
+    export class AssocTargetBody {
         constructor(obj?: any);
 
         targetId?: string;
         assocType?: string;
     }
 
-    export declare class Comment {
+    export class Comment {
         constructor(obj?: any);
 
         id?: string;
@@ -764,32 +908,32 @@ declare namespace AlfrescoApi {
         canremove?: boolean;
     }
 
-    export declare class CommentBody {
+    export class CommentBody {
         constructor(obj?: any);
 
         content?: string;
     }
 
-    export declare class CommentEntry {
+    export class CommentEntry {
         constructor(obj?: any);
 
         entry?: Comment;
     }
 
-    export declare class CommentPaging {
+    export class CommentPaging {
         constructor(obj?: any);
 
         list?: CommentPagingList;
     }
 
-    export declare class CommentPagingList {
+    export class CommentPagingList {
         constructor(obj?: any);
 
         entries?: Array<CommentEntry>;
         pagination?: Pagination;
     }
 
-    export declare class Company {
+    export class Company {
         constructor(obj?: any);
 
         organization?: string;
@@ -802,7 +946,7 @@ declare namespace AlfrescoApi {
         email?: string;
     }
 
-    export declare class ContentInfo {
+    export class ContentInfo {
         constructor(obj?: any);
 
         mimeType?: string;
@@ -811,39 +955,39 @@ declare namespace AlfrescoApi {
         encoding?: string;
     }
 
-    export declare class RemovedNode extends Node {
+    export class RemovedNode extends Node {
         constructor(obj?: any);
 
         archivedByUser?: UserInfo;
         archivedAt?: Date;
     }
 
-    export declare class RemovedNodeEntry {
+    export class RemovedNodeEntry {
         constructor(obj?: any);
 
         entry?: RemovedNode;
     }
 
-    export declare class RemovedNodesPaging {
+    export class RemovedNodesPaging {
         constructor(obj?: any);
 
         list?: RemovedNodesPagingList;
     }
 
-    export declare class RemovedNodesPagingList {
+    export class RemovedNodesPagingList {
         constructor(obj?: any);
 
         entries?: Array<RemovedNodeEntry>;
         pagination?: Pagination;
     }
 
-    export declare class Error {
+    export class Error {
         constructor(obj?: any);
 
         error?: ErrorError;
     }
 
-    export declare class ErrorError {
+    export class ErrorError {
         constructor(obj?: any);
 
         errorKey?: string;
@@ -854,7 +998,7 @@ declare namespace AlfrescoApi {
         statusCode?: number;
     }
 
-    export declare class Favorite {
+    export class Favorite {
         constructor(obj?: any);
 
         targetGuid?: string;
@@ -862,50 +1006,50 @@ declare namespace AlfrescoApi {
         target?: any;
     }
 
-    export declare class FavoriteBody {
+    export class FavoriteBody {
         constructor(obj?: any);
 
         target?: any;
     }
 
-    export declare class FavoriteEntry {
+    export class FavoriteEntry {
         constructor(obj?: any);
 
         entry?: Favorite;
     }
 
-    export declare class FavoritePaging {
+    export class FavoritePaging {
         constructor(obj?: any);
 
         list?: FavoritePagingList;
     }
 
-    export declare class FavoritePagingList {
+    export class FavoritePagingList {
         constructor(obj?: any);
 
         entries?: Array<FavoriteEntry>;
         pagination?: Pagination;
     }
 
-    export declare class FavoriteSite {
+    export class FavoriteSite {
         constructor(obj?: any);
 
         id?: string;
     }
 
-    export declare class FavoriteSiteBody {
+    export class FavoriteSiteBody {
         constructor(obj?: any);
 
         id?: string;
     }
 
-    export declare class FavoriteSiteEntry {
+    export class FavoriteSiteEntry {
         constructor(obj?: any);
 
         entry?: FavoriteSite;
     }
 
-    export declare class NetworkQuota {
+    export class NetworkQuota {
         constructor(obj?: any);
 
         id?: string;
@@ -914,25 +1058,25 @@ declare namespace AlfrescoApi {
     }
 
 
-    export declare class NodeAssociation extends Node {
+    export class NodeAssociation extends Node {
         constructor(obj?: any);
 
         association?: AssociationInfo;
     }
 
-    export declare class NodeAssociationEntry {
+    export class NodeAssociationEntry {
         constructor(obj?: any);
 
         entry?: NodeAssociation;
     }
 
-    export declare class NodeAssociationPaging {
+    export class NodeAssociationPaging {
         constructor(obj?: any);
 
         list?: NodeAssociationPagingList;
     }
 
-    export declare class NodeAssociationPagingList {
+    export class NodeAssociationPagingList {
         constructor(obj?: any);
 
         entries?: Array<NodeAssociationEntry>;
@@ -940,14 +1084,14 @@ declare namespace AlfrescoApi {
         source?: Node;
     }
 
-    export declare class CopyBody {
+    export class CopyBody {
         constructor(obj?: any);
 
         targetParentId?: string;
         name?: string;
     }
 
-    export declare class NodeBody {
+    export class NodeBody {
         constructor(obj?: any);
 
         name?: string;
@@ -963,13 +1107,13 @@ declare namespace AlfrescoApi {
         permissions?: PermissionsBodyUpdate;
     }
 
-    export declare class NodeBodyAssociation {
+    export class NodeBodyAssociation {
         constructor(obj?: any);
 
         assocType?: string;
     }
 
-    export declare class NodeBodyLock {
+    export class NodeBodyLock {
         constructor(obj?: any);
 
         timeToExpire?: number;
@@ -982,38 +1126,39 @@ declare namespace AlfrescoApi {
             ALLOW_OWNER_CHANGES,
             FULL
         }
+
         enum LifetimeEnum {
             PERSISTENT,
             EPHEMERAL
         }
     }
 
-    export declare class MoveBody {
+    export class MoveBody {
         constructor(obj?: any);
 
         targetParentId?: string;
         name?: string;
     }
 
-    export declare class NodeChildAssociation extends Node {
+    export class NodeChildAssociation extends Node {
         constructor(obj?: any);
 
         association?: ChildAssociationInfo;
     }
 
-    export declare class NodeChildAssociationEntry {
+    export class NodeChildAssociationEntry {
         constructor(obj?: any);
 
         entry?: NodeChildAssociation;
     }
 
-    export declare class NodeChildAssociationPaging {
+    export class NodeChildAssociationPaging {
         constructor(obj?: any);
 
         list?: NodeChildAssociationPagingList;
     }
 
-    export declare class NodeChildAssociationPagingList {
+    export class NodeChildAssociationPagingList {
         constructor(obj?: any);
 
         entries?: Array<NodeChildAssociationEntry>;
@@ -1021,19 +1166,19 @@ declare namespace AlfrescoApi {
         source?: Node;
     }
 
-    export declare class NodeEntry {
+    export class NodeEntry {
         constructor(obj?: any);
 
         entry?: Node;
     }
 
-    export declare class NodePaging {
+    export class NodePaging {
         constructor(obj?: any);
 
         list?: NodePagingList;
     }
 
-    export declare class NodePagingList {
+    export class NodePagingList {
         constructor(obj?: any);
 
         entries?: Array<NodeEntry>;
@@ -1041,7 +1186,7 @@ declare namespace AlfrescoApi {
         source?: Node;
     }
 
-    export declare class Pagination {
+    export class Pagination {
         constructor(obj?: any);
 
         count?: number;
@@ -1051,14 +1196,14 @@ declare namespace AlfrescoApi {
         maxItems?: number;
     }
 
-    export declare class PathElement {
+    export class PathElement {
         constructor(obj?: any);
 
         id?: string;
         name?: string;
     }
 
-    export declare class PathInfo {
+    export class PathInfo {
         constructor(obj?: any);
 
         elements?: Array<PathElement>;
@@ -1066,7 +1211,7 @@ declare namespace AlfrescoApi {
         isComplete?: boolean;
     }
 
-    export declare class PermissionElement {
+    export class PermissionElement {
         constructor(obj?: any);
 
         authorityId?: string;
@@ -1081,14 +1226,14 @@ declare namespace AlfrescoApi {
         }
     }
 
-    export declare class PermissionsBodyUpdate {
+    export class PermissionsBodyUpdate {
         constructor(obj?: any);
 
         isInheritanceEnabled?: boolean;
         locallySet?: Array<PermissionElement>;
     }
 
-    export declare class PermissionsInfo {
+    export class PermissionsInfo {
         constructor(obj?: any);
 
         isInheritanceEnabled?: boolean;
@@ -1097,7 +1242,7 @@ declare namespace AlfrescoApi {
         settable?: Array<string>;
     }
 
-    export declare class Person {
+    export class Person {
         constructor(obj?: any);
 
         id?: string;
@@ -1124,7 +1269,7 @@ declare namespace AlfrescoApi {
         };
     }
 
-    export declare class PersonBodyadd {
+    export class PersonBodyadd {
         constructor(obj?: any);
 
         id?: string;
@@ -1150,7 +1295,7 @@ declare namespace AlfrescoApi {
         };
     }
 
-    export declare class PersonBodyUpdate {
+    export class PersonBodyUpdate {
         constructor(obj?: any);
 
         firstName?: string;
@@ -1176,13 +1321,13 @@ declare namespace AlfrescoApi {
         };
     }
 
-    export declare class PersonEntry {
+    export class PersonEntry {
         constructor(obj?: any);
 
         entry?: Person;
     }
 
-    export declare class PersonNetwork {
+    export class PersonNetwork {
         constructor(obj?: any);
 
         id?: string;
@@ -1202,65 +1347,65 @@ declare namespace AlfrescoApi {
         }
     }
 
-    export declare class PersonNetworkEntry {
+    export class PersonNetworkEntry {
         constructor(obj?: any);
 
         entry?: PersonNetwork;
     }
 
-    export declare class PersonNetworkPaging {
+    export class PersonNetworkPaging {
         constructor(obj?: any);
 
         list?: PersonNetworkPagingList;
     }
 
-    export declare class PersonNetworkPagingList {
+    export class PersonNetworkPagingList {
         constructor(obj?: any);
 
         entries?: Array<PersonNetworkEntry>;
         pagination?: Pagination;
     }
 
-    export declare class PersonPaging {
+    export class PersonPaging {
         constructor(obj?: any);
 
         list?: PersonPagingList;
     }
 
-    export declare class PersonPagingList {
+    export class PersonPagingList {
         constructor(obj?: any);
 
         entries?: Array<PersonEntry>;
         pagination?: Pagination;
     }
 
-    export declare class Preference {
+    export class Preference {
         constructor(obj?: any);
 
         id?: string;
         value?: string;
     }
 
-    export declare class PreferenceEntry {
+    export class PreferenceEntry {
         constructor(obj?: any);
 
         entry?: Preference;
     }
 
-    export declare class PreferencePaging {
+    export class PreferencePaging {
         constructor(obj?: any);
 
         list?: PreferencePagingList;
     }
 
-    export declare class PreferencePagingList {
+    export class PreferencePagingList {
         constructor(obj?: any);
 
         entries?: Array<PreferenceEntry>;
         pagination?: Pagination;
     }
 
-    export declare class Rating {
+    export class Rating {
         constructor(obj?: any);
 
         id?: string;
@@ -1269,14 +1414,14 @@ declare namespace AlfrescoApi {
         myRating?: string;
     }
 
-    export declare class RatingAggregate {
+    export class RatingAggregate {
         constructor(obj?: any);
 
         average?: number;
         numberOfRatings?: number;
     }
 
-    export declare class RatingBody {
+    export class RatingBody {
         constructor(obj?: any);
 
         id?: RatingBody.IdEnum;
@@ -1291,26 +1436,26 @@ declare namespace AlfrescoApi {
         }
     }
 
-    export declare class RatingEntry {
+    export class RatingEntry {
         constructor(obj?: any);
 
         entry?: Rating;
     }
 
-    export declare class RatingPaging {
+    export class RatingPaging {
         constructor(obj?: any);
 
         list?: RatingPagingList;
     }
 
-    export declare class RatingPagingList {
+    export class RatingPagingList {
         constructor(obj?: any);
 
         entries?: Array<RatingEntry>;
         pagination?: Pagination;
     }
 
-    export declare class Rendition {
+    export class Rendition {
         constructor(obj?: any);
 
         id?: string;
@@ -1326,39 +1471,39 @@ declare namespace AlfrescoApi {
         }
     }
 
-    export declare class RenditionBody {
+    export class RenditionBody {
         constructor(obj?: any);
 
         id?: string;
     }
 
-    export declare class RenditionEntry {
+    export class RenditionEntry {
         constructor(obj?: any);
 
         entry?: Rendition;
     }
 
-    export declare class RenditionPaging {
+    export class RenditionPaging {
         constructor(obj?: any);
 
         list?: RenditionPagingList;
     }
 
-    export declare class RenditionPagingList {
+    export class RenditionPagingList {
         constructor(obj?: any);
 
         entries?: Array<RenditionEntry>;
         pagination?: Pagination;
     }
 
-    export declare class RevertBody {
+    export class RevertBody {
         constructor(obj?: any);
 
         majorVersion?: boolean;
         comment?: string;
     }
 
-    export declare class SharedLink {
+    export class SharedLink {
         constructor(obj?: any);
 
         id?: string;
@@ -1372,14 +1517,14 @@ declare namespace AlfrescoApi {
         allowableOperations?: Array<string>;
     }
 
-    export declare class SharedLinkBody {
+    export class SharedLinkBody {
         constructor(obj?: any);
 
         nodeId?: string;
         expiresAt?: Date;
     }
 
-    export declare class EmailSharedLinkBody {
+    export class EmailSharedLinkBody {
         constructor(obj?: any);
 
         client?: string;
@@ -1388,26 +1533,26 @@ declare namespace AlfrescoApi {
         recipientEmails?: Array<string>;
     }
 
-    export declare class SharedLinkEntry {
+    export class SharedLinkEntry {
         constructor(obj?: any);
 
         entry?: SharedLink;
     }
 
-    export declare class SharedLinkPaging {
+    export class SharedLinkPaging {
         constructor(obj?: any);
 
         list?: SharedLinkPagingList;
     }
 
-    export declare class SharedLinkPagingList {
+    export class SharedLinkPagingList {
         constructor(obj?: any);
 
         entries?: Array<SharedLinkEntry>;
         pagination?: Pagination;
     }
 
-    export declare class Site {
+    export class Site {
         constructor(obj?: any);
 
         id?: string;
@@ -1425,6 +1570,7 @@ declare namespace AlfrescoApi {
             MODERATED,
             PUBLIC
         }
+
         enum RoleEnum {
             SiteConsumer,
             SiteCollaborator,
@@ -1433,7 +1579,7 @@ declare namespace AlfrescoApi {
         }
     }
 
-    export declare class SiteBodyadd {
+    export class SiteBodyadd {
         constructor(obj?: any);
 
         id?: string;
@@ -1442,7 +1588,7 @@ declare namespace AlfrescoApi {
         visibility?: SiteBodyadd.VisibilityEnum;
     }
 
-    export declare class SiteBody {
+    export class SiteBody {
         constructor(obj?: any);
 
         id?: string;
@@ -1459,7 +1605,7 @@ declare namespace AlfrescoApi {
         }
     }
 
-    export declare class SiteBodyUpdate {
+    export class SiteBodyUpdate {
         constructor(obj?: any);
 
         title?: string;
@@ -1475,39 +1621,39 @@ declare namespace AlfrescoApi {
         }
     }
 
-    export declare class SiteContainer {
+    export class SiteContainer {
         constructor(obj?: any);
 
         id?: string;
         folderId?: string;
     }
 
-    export declare class SiteContainerEntry {
+    export class SiteContainerEntry {
         constructor(obj?: any);
 
         entry?: SiteContainer;
     }
 
-    export declare class SiteContainerPaging {
+    export class SiteContainerPaging {
         constructor(obj?: any);
 
         list?: SiteContainerPagingList;
     }
 
-    export declare class SiteContainerPagingList {
+    export class SiteContainerPagingList {
         constructor(obj?: any);
 
         entries?: Array<SiteContainerEntry>;
         pagination?: Pagination;
     }
 
-    export declare class SiteEntry {
+    export class SiteEntry {
         constructor(obj?: any);
 
         entry?: Site;
     }
 
-    export declare class SiteMember {
+    export class SiteMember {
         constructor(obj?: any);
 
         id?: string;
@@ -1515,14 +1661,14 @@ declare namespace AlfrescoApi {
         role?: SiteMember.RoleEnum;
     }
 
-    export declare class SiteMemberBody {
+    export class SiteMemberBody {
         constructor(obj?: any);
 
         id?: string;
         role?: SiteMember.RoleEnum;
     }
 
-    export declare class SiteMemberRoleBody {
+    export class SiteMemberRoleBody {
         constructor(obj?: any);
 
         role?: SiteMember.RoleEnum;
@@ -1537,26 +1683,26 @@ declare namespace AlfrescoApi {
         }
     }
 
-    export declare class SiteMemberEntry {
+    export class SiteMemberEntry {
         constructor(obj?: any);
 
         entry?: SiteMember;
     }
 
-    export declare class SiteMemberPaging {
+    export class SiteMemberPaging {
         constructor(obj?: any);
 
         list?: SiteMemberPagingList;
     }
 
-    export declare class SiteMemberPagingList {
+    export class SiteMemberPagingList {
         constructor(obj?: any);
 
         entries?: Array<SiteMemberEntry>;
         pagination?: Pagination;
     }
 
-    export declare class SiteMembershipBodyadd {
+    export class SiteMembershipBodyadd {
         constructor(obj?: any);
 
         role?: SiteMembershipBodyadd.RoleEnum;
@@ -1572,7 +1718,7 @@ declare namespace AlfrescoApi {
         }
     }
 
-    export declare class SiteMembershipBodyUpdate {
+    export class SiteMembershipBodyUpdate {
         constructor(obj?: any);
 
         role?: SiteMembershipBodyUpdate.RoleEnum;
@@ -1587,7 +1733,7 @@ declare namespace AlfrescoApi {
         }
     }
 
-    export declare class SiteMembershipRequest {
+    export class SiteMembershipRequest {
         constructor(obj?: any);
 
         id?: string;
@@ -1596,7 +1742,7 @@ declare namespace AlfrescoApi {
         message?: string;
     }
 
-    export declare class SiteMembershipRequestBody {
+    export class SiteMembershipRequestBody {
         constructor(obj?: any);
 
         message?: string;
@@ -1604,45 +1750,45 @@ declare namespace AlfrescoApi {
         title?: string;
     }
 
-    export declare class SiteMembershipRequestBodyUpdate {
+    export class SiteMembershipRequestBodyUpdate {
         constructor(obj?: any);
 
         message?: string;
     }
 
-    export declare class SiteMembershipRequestEntry {
+    export class SiteMembershipRequestEntry {
         constructor(obj?: any);
 
         entry?: SiteMembershipRequest;
     }
 
-    export declare class SiteMembershipRequestPaging {
+    export class SiteMembershipRequestPaging {
         constructor(obj?: any);
 
         list?: SiteMembershipRequestPagingList;
     }
 
-    export declare class SiteMembershipRequestPagingList {
+    export class SiteMembershipRequestPagingList {
         constructor(obj?: any);
 
         entries?: Array<SiteMembershipRequestEntry>;
         pagination?: Pagination;
     }
 
-    export declare class SitePaging {
+    export class SitePaging {
         constructor(obj?: any);
 
         list?: SitePagingList;
     }
 
-    export declare class SitePagingList {
+    export class SitePagingList {
         constructor(obj?: any);
 
         entries?: Array<SiteEntry>;
         pagination?: Pagination;
     }
 
-    export declare class SiteRole {
+    export class SiteRole {
         constructor(obj?: any);
 
         site?: Site;
@@ -1660,65 +1806,65 @@ declare namespace AlfrescoApi {
         }
     }
 
-    export declare class SiteRoleEntry {
+    export class SiteRoleEntry {
         constructor(obj?: any);
 
         entry?: SiteRole;
     }
 
-    export declare class SiteRolePaging {
+    export class SiteRolePaging {
         constructor(obj?: any);
 
         list?: SiteRolePagingList;
     }
 
-    export declare class SiteRolePagingList {
+    export class SiteRolePagingList {
         constructor(obj?: any);
 
         entries?: Array<SiteRoleEntry>;
         pagination?: Pagination;
     }
 
-    export declare class Tag {
+    export class Tag {
         constructor(obj?: any);
 
         id?: string;
         tag?: string;
     }
 
-    export declare class TagBody {
+    export class TagBody {
         constructor(obj?: any);
 
         tag?: string;
     }
 
-    export declare class TagEntry {
+    export class TagEntry {
         constructor(obj?: any);
 
         entry?: Tag;
     }
 
-    export declare class TagPaging {
+    export class TagPaging {
         constructor(obj?: any);
 
         list?: TagPagingList;
     }
 
-    export declare class TagPagingList {
+    export class TagPagingList {
         constructor(obj?: any);
 
         entries?: Array<TagEntry>;
         pagination?: Pagination;
     }
 
-    export declare class UserInfo {
+    export class UserInfo {
         constructor(obj?: any);
 
         displayName?: string;
         id?: string;
     }
 
-    export declare class Version {
+    export class Version {
         constructor(obj?: any);
 
         id?: string;
@@ -1736,19 +1882,19 @@ declare namespace AlfrescoApi {
         // };
     }
 
-    export declare class VersionEntry {
+    export class VersionEntry {
         constructor(obj?: any);
 
         entry?: Version;
     }
 
-    export declare class VersionPaging {
+    export class VersionPaging {
         constructor(obj?: any);
 
         list?: VersionPagingList;
     }
 
-    export declare class VersionPagingList {
+    export class VersionPagingList {
         constructor(obj?: any);
 
         entries?: Array<VersionEntry>;
@@ -1776,14 +1922,23 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): AdminEndpointsApi;
 
         createBasicAuthConfiguration(createRepresentation?: CreateEndpointBasicAuthRepresentation): Promise<EndpointBasicAuthRepresentation>;
+
         createEndpointConfiguration(representation?: EndpointConfigurationRepresentation): Promise<EndpointConfigurationRepresentation>;
+
         getBasicAuthConfiguration(basicAuthId?: number, tenantId?: number): Promise<EndpointBasicAuthRepresentation>;
+
         getBasicAuthConfigurations(tenantId?: number): Promise<EndpointBasicAuthRepresentation[]>;
+
         getEndpointConfiguration(endpointConfigurationId?: number, tenantId?: number): Promise<EndpointConfigurationRepresentation>;
+
         getEndpointConfigurations(tenantId?: number): Promise<EndpointConfigurationRepresentation[]>;
+
         removeBasicAuthConfiguration(basicAuthId?: number, tenantId?: number): Promise<any>;
+
         removeEndpointConfiguration(endpointConfigurationId?: number, tenantId?: number): Promise<any>;
+
         updateBasicAuthConfiguration(basicAuthId?: number, createRepresentation?: CreateEndpointBasicAuthRepresentation): Promise<EndpointBasicAuthRepresentation>;
+
         updateEndpointConfiguration(endpointConfigurationId?: number, representation?: EndpointConfigurationRepresentation): Promise<EndpointConfigurationRepresentation>;
     }
 
@@ -1791,20 +1946,35 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): AdminGroupsApi;
 
         activate(groupId?: number): Promise<any>;
+
         addAllUsersToGroup(groupId?: number): Promise<any>;
+
         addGroupCapabilities(groupId?: number, addGroupCapabilitiesRepresentation?: AddGroupCapabilitiesRepresentation): Promise<any>;
+
         addGroupMember(groupId?: number, userId?: number): Promise<any>;
+
         addRelatedGroup(groupId?: number, relatedGroupId?: number, type?: string): Promise<any>;
+
         createNewGroup(groupRepresentation?: GroupRepresentation): Promise<GroupRepresentation>;
+
         deleteGroupCapability(groupId?: number, groupCapabilityId?: number): Promise<any>;
+
         deleteGroupMember(groupId?: number, userId?: number): Promise<any>;
+
         deleteGroup(groupId?: number): Promise<any>;
+
         deleteRelatedGroup(groupId?: number, relatedGroupId?: number): Promise<any>;
+
         getCapabilities(groupId?: number): Promise<String[]>;
-        getGroupUsers(groupId?: number, opts?: {filter?: string, page?: number, pageSize?: number}): Promise<any>;
-        getGroup(groupId?: number, opts?: {includeAllUsers?: boolean, summary?: boolean}): Promise<AbstractGroupRepresentation>;
-        getGroups(opts?: {tenantId?: number, functional?: boolean, summary?: boolean}): Promise<LightGroupRepresentation[]>;
+
+        getGroupUsers(groupId?: number, opts?: { filter?: string, page?: number, pageSize?: number }): Promise<any>;
+
+        getGroup(groupId?: number, opts?: { includeAllUsers?: boolean, summary?: boolean }): Promise<AbstractGroupRepresentation>;
+
+        getGroups(opts?: { tenantId?: number, functional?: boolean, summary?: boolean }): Promise<LightGroupRepresentation[]>;
+
         getRelatedGroups(groupId?: number): Promise<LightGroupRepresentation[]>;
+
         updateGroup(groupId?: number, groupRepresentation?: GroupRepresentation): Promise<GroupRepresentation>;
     }
 
@@ -1812,12 +1982,19 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): AdminTenantsApi;
 
         createTenant(createTenantRepresentation?: CreateTenantRepresentation): Promise<LightTenantRepresentation>;
+
         deleteTenant(tenantId?: number): Promise<any>;
+
         getTenantEvents(tenantId?: number): Promise<TenantEvent[]>;
+
         getTenantLogo(tenantId?: number): Promise<any>;
+
         getTenant(tenantId?: number): Promise<TenantRepresentation>;
+
         getTenants(): Promise<LightTenantRepresentation[]>;
+
         update(tenantId?: number, createTenantRepresentation?: CreateTenantRepresentation): Promise<TenantRepresentation>;
+
         uploadTenantLogo(tenantId?: number, file?: File): Promise<ImageUploadRepresentation>;
     }
 
@@ -1825,9 +2002,13 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): AdminUsersApi;
 
         bulkUpdateUsers(update?: BulkUserUpdateRepresentation): Promise<any>;
+
         createNewUser(userRepresentation?: UserRepresentation): Promise<UserRepresentation>;
-        getUser(userId?: number, opts?: {summary?: boolean}): Promise<AbstractUserRepresentation>;
-        getUsers(opts?: {filter?: string, status?: string, accountType?: string, sort?: string, company?: string, start?: number, page?: number, size?: number, groupId?: number, tenantId?: number, summary?: boolean}): Promise<any>;
+
+        getUser(userId?: number, opts?: { summary?: boolean }): Promise<AbstractUserRepresentation>;
+
+        getUsers(opts?: { filter?: string, status?: string, accountType?: string, sort?: string, company?: string, start?: number, page?: number, size?: number, groupId?: number, tenantId?: number, summary?: boolean }): Promise<any>;
+
         updateUserDetails(userId?: number, UserRepresentation?: UserRepresentation): Promise<any>;
 
     }
@@ -1836,9 +2017,13 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): AppsApi;
 
         deployAppDefinitions(saveObject?: RuntimeAppDefinitionSaveRepresentation): Promise<any>;
+
         exportAppDefinition(modelId?: number): Promise<any>;
-        getAppDefinitions(): Promise<ResultListDataRepresentation<AppDefinitionRepresentation>>;
+
+        getAppDefinitions(): Promise<ResultListDataRepresentation>;
+
         importAppDefinition(file?: File): Promise<AppDefinitionRepresentation>;
+
         publishAppDefinition(modelId?: number, publishModel?: AppDefinitionPublishRepresentation): Promise<AppDefinitionUpdateResultRepresentation>;
     }
 
@@ -1846,19 +2031,27 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): AlfrescoApi;
 
         confirmAuthorisation(code: string): Promise<any>;
+
         getAllNetworks(): Promise<any>;
+
         getAllSites(networkId: string): Promise<any>;
+
         getContentInFolder(networkId: string, folderId: string): Promise<any>;
+
         getContentInSite(networkId: string, siteId: string): Promise<any>;
-        getRepositories(opts: {tenantId: number, includeAccounts: boolean}): Promise<any>;
+
+        getRepositories(opts: { tenantId: number, includeAccounts: boolean }): Promise<any>;
     }
 
     export interface AppsDefinitionApi {
         new(client?: ApiClient): AppsDefinitionApi;
 
         exportAppDefinition(modelId?: number): Promise<any>;
+
         importAppDefinition(file?: File): Promise<AppDefinitionRepresentation>;
+
         importAppDefinition(modelId?: number, file?: File): Promise<AppDefinitionRepresentation>;
+
         publishAppDefinition(modelId?: number, publishModel?: AppDefinitionPublishRepresentation): Promise<AppDefinitionUpdateResultRepresentation>;
     }
 
@@ -1866,6 +2059,7 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): AppsRuntimeApi;
 
         deployAppDefinitions(saveObject?: RuntimeAppDefinitionSaveRepresentation): Promise<any>;
+
         getAppDefinitions(): Promise<any>;
     }
 
@@ -1873,25 +2067,39 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): CommentsApi;
 
         addProcessInstanceComment(commentRequest?: CommentRepresentation, processInstanceId?: string): Promise<CommentRepresentation>;
+
         addTaskComment(commentRequest?: CommentRepresentation, taskId?: string): Promise<CommentRepresentation>;
-        getProcessInstanceComments(processInstanceId?: string, opts?: {latestFirst?: boolean}): Promise<any>;
-        getTaskComments(taskId?: string, opts?: {latestFirst?: boolean}): Promise<any>;
+
+        getProcessInstanceComments(processInstanceId?: string, opts?: { latestFirst?: boolean }): Promise<any>;
+
+        getTaskComments(taskId?: string, opts?: { latestFirst?: boolean }): Promise<any>;
     }
 
     export interface ContentApi {
         new(client?: ApiClient): ContentApi;
 
-        createRelatedContentOnProcessInstance(processInstanceId?: string, relatedContent?: RelatedContentRepresentation, opts): Promise<RelatedContentRepresentation>;
-        createRelatedContentOnTask(taskId?: string, relatedContent?: RelatedContentRepresentation, opts?: {isRelatedContent?: boolean}): Promise<RelatedContentRepresentation>;
+        createRelatedContentOnProcessInstance(processInstanceId?: string, relatedContent?: RelatedContentRepresentation, opts?:any): Promise<RelatedContentRepresentation>;
+
+        createRelatedContentOnTask(taskId?: string, relatedContent?: RelatedContentRepresentation, opts?: { isRelatedContent?: boolean }): Promise<RelatedContentRepresentation>;
+
         createTemporaryRawRelatedContent(file?: File): Promise<RelatedContentRepresentation>;
+
         createTemporaryRelatedContent(relatedContent?: RelatedContentRepresentation): Promise<RelatedContentRepresentation>;
+
         deleteContent(contentId?: number): Promise<any>;
+
         getContent(contentId?: number): Promise<RelatedContentRepresentation>;
+
         getProcessInstanceContent(processInstanceId?: string): Promise<any>;
+
         getRawContent(contentId?: number): Promise<any>;
+
         getRawContentUrl(contentId?: number): string;
+
         getContentThumbnailUrl(contentId?: number): string;
+
         getRelatedContentForProcessInstance(processInstanceId?: string, isRelated?: boolean): Promise<any>;
+
         getRelatedContentForTask(taskId?: string, isRelated?: Boolean): Promise<any>;
     }
 
@@ -1899,16 +2107,21 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): EditorApi;
 
         getFormHistory(formId?: number, formHistoryId?: number): Promise<FormRepresentation>;
+
         getForm(formId?: number): Promise<FormRepresentation>;
+
         getForms(): Promise<FormRepresentation[]>;
+
         saveForm(formId?: number, saveRepresentation?: FormSaveRepresentation): Promise<FormRepresentation>;
+
         validateModel(formId?: number, saveRepresentation?: FormSaveRepresentation): Promise<ValidationErrorRepresentation[]>;
     }
 
     export interface GroupsApi {
         new(client?: ApiClient): GroupsApi;
 
-        getGroups(opts?: {filter?: string, groupId?: number, externalId?: string, externalIdCaseInsensitive?: string, tenantId?: number}): Promise<any>;
+        getGroups(opts?: { filter?: string, groupId?: number, externalId?: string, externalIdCaseInsensitive?: string, tenantId?: number }): Promise<any>;
+
         getUsersForGroup(groupId?: number): Promise<any>;
 
     }
@@ -1917,7 +2130,8 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): IDMSyncApi;
 
         getLogFile(syncLogEntryId?: number): Promise<any>;
-        getSyncLogEntries(opts?: {tenantId?: number, page?: number, size?: number}): Promise<SyncLogEntryRepresentation[]>;
+
+        getSyncLogEntries(opts?: { tenantId?: number, page?: number, size?: number }): Promise<SyncLogEntryRepresentation[]>;
     }
 
     export interface IntegrationAccountApi {
@@ -1930,9 +2144,13 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): IntegrationAlfrescoCloudApi;
 
         confirmAuthorisation(code?: string): Promise<any>;
+
         getAllNetworks(): Promise<any>;
+
         getAllSites(networkId?: string): Promise<any>;
+
         getContentInFolder(networkId?: string, folderId?: string): Promise<any>;
+
         getContentInSite(networkId?: string, siteId?: string): Promise<any>;
     }
 
@@ -1940,25 +2158,39 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): IntegrationAlfrescoOnPremiseApi;
 
         getAllSites(repositoryId?: string): Promise<any>;
+
         getContentInFolder(repositoryId?: string, folderId?: string): Promise<any>;
+
         getContentInSite(repositoryId?: string, siteId?: string): Promise<any>;
-        getRepositories(opts?: {tenantId?: number, includeAccounts?: boolean}): Promise<any>;
+
+        getRepositories(opts?: { tenantId?: number, includeAccounts?: boolean }): Promise<any>;
     }
 
     export interface IntegrationApi {
         new(client?: ApiClient): IntegrationApi;
 
         confirmAuthorisation(code?: string): Promise<any>;
+
         createRepositoryAccount(userId?: number, credentials?: UserAccountCredentialsRepresentation): Promise<any>;
+
         deleteRepositoryAccount(userId?: number): Promise<any>;
+
         getAllNetworks(): Promise<any>;
+
         getAllSites(networkId?: string): Promise<any>;
+
         getBoxPluginStatus(): Promise<boolean>;
+
         getContentInFolder(networkId?: string, folderId?: string): Promise<any>;
+
         getContentInSite(networkId?: string, siteId?: string): Promise<any>;
-        getFiles(opts?: {filter?: string, parent?: string}): Promise<any>;
-        getRepositories(opts?: {tenantId?: number, includeAccounts?: boolean}): Promise<any>;
+
+        getFiles(opts?: { filter?: string, parent?: string }): Promise<any>;
+
+        getRepositories(opts?: { tenantId?: number, includeAccounts?: boolean }): Promise<any>;
+
         getRepositoryAccount(userId?: number): Promise<any>;
+
         updateRepositoryAccount(userId?: number, credentials?: UserAccountCredentialsRepresentation): Promise<any>;
     }
 
@@ -1966,6 +2198,7 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): ModelBpmnApi;
 
         getHistoricProcessModelBpmn20Xml(processModelId?: number, processModelHistoryId?: number): Promise<any>;
+
         getProcessModelBpmn20Xml(processModelId?: number): Promise<any>;
     }
 
@@ -1973,6 +2206,7 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): ModelJsonBpmnApi;
 
         getHistoricEditorDisplayJsonClient(processModelId?: number, processModelHistoryId?: number): Promise<any>;
+
         getEditorDisplayJsonClient(processModelId?: number): Promise<any>;
     }
 
@@ -1980,24 +2214,37 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): ModelsApi;
 
         createModel(modelRepresentation?: ModelRepresentation): Promise<ModelRepresentation>;
-        deleteModel(modelId?: number, opts?: {cascade?: boolean, deleteRuntimeApp?: boolean}): Promise<any>;
+
+        deleteModel(modelId?: number, opts?: { cascade?: boolean, deleteRuntimeApp?: boolean }): Promise<any>;
+
         duplicateModel(modelId?: number, modelRepresentation?: ModelRepresentation): Promise<ModelRepresentation>;
+
         getModelJSON(modelId?: number): Promise<any>;
+
         getModelThumbnail(modelId?: number): Promise<String[]>;
-        getModel(modelId?: number, opts?: {includePermissions?: boolean}): Promise<ModelRepresentation>;
+
+        getModel(modelId?: number, opts?: { includePermissions?: boolean }): Promise<ModelRepresentation>;
+
         getModelsToIncludeInAppDefinition(): Promise<any>;
-        getModels(opts?: {filter?: string, sort?: string, modelType?: number, referenceId?: number}): Promise<any>;
+
+        getModels(opts?: { filter?: string, sort?: string, modelType?: number, referenceId?: number }): Promise<any>;
+
         importNewVersion(modelId?: number, file?: File): Promise<ModelRepresentation>;
+
         importProcessModel(file?: File): Promise<ModelRepresentation>;
+
         saveModel(modelId?: number, values?: any): Promise<ModelRepresentation>;
+
         updateModel(modelId?: number, updatedModel?: ModelRepresentation): Promise<ModelRepresentation>;
-        validateModel(modelId?: number, opts?: {values?: any}): Promise<ValidationErrorRepresentation[]>;
+
+        validateModel(modelId?: number, opts?: { values?: any }): Promise<ValidationErrorRepresentation[]>;
     }
 
     export interface ModelsHistoryApi {
         new(client?: ApiClient): ModelsHistoryApi;
 
-        getModelHistoryCollection(modelId?: number, opts?: {includeLatestVersion?: boolean}): Promise<any>;
+        getModelHistoryCollection(modelId?: number, opts?: { includeLatestVersion?: boolean }): Promise<any>;
+
         getProcessModelHistory(modelId?: number, modelHistoryId?: number): Promise<ModelRepresentation>;
     }
 
@@ -2005,17 +2252,29 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): ProcessApi;
 
         deleteProcessInstance(processInstanceId?: string): Promise<any>;
+
         filterProcessInstances(filterRequest?: ProcessInstanceFilterRequestRepresentation): Promise<any>;
+
         getProcessDefinitionStartForm(processDefinitionId?: string): Promise<FormDefinitionRepresentation>;
-        getProcessDefinitions(opts?: {latest?: boolean, appDefinitionId?: number}): Promise<any>;
+
+        getProcessDefinitions(opts?: { latest?: boolean, appDefinitionId?: number }): Promise<any>;
+
         getProcessInstanceContent(processInstanceId?: string): Promise<any>;
+
         getProcessInstanceStartForm(processInstanceId?: string): Promise<FormDefinitionRepresentation>;
+
         getProcessInstance(processInstanceId?: string): Promise<ProcessInstanceRepresentation>;
+
         getProcessInstances(requestNode?: ProcessFilterRequestRepresentation): Promise<any>;
+
         getProcessAuditJson(processId?: string): Promise<any>;
+
         getProcessAuditPdf(processId?: string): Promise<any>;
+
         getRestFieldValues(processDefinitionId?: string, field?: string): Promise<FormValueRepresentation[]>;
+
         getRestTableFieldValues(processDefinitionId?: string, field?: string, column?: string): Promise<FormValueRepresentation[]>;
+
         startNewProcessInstance(startRequest?: CreateProcessInstanceRepresentation): Promise<ProcessInstanceRepresentation>;
     }
 
@@ -2023,23 +2282,29 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): ProcessInstancesApi;
 
         addProcessInstanceComment(commentRequestModule?: CommentRepresentation, processInstanceId?: string): Promise<CommentRepresentation>;
+
         deleteProcessInstance(processInstanceId?: string): Promise<any>;
-        getProcessInstanceComments(processInstanceId?: string, opts?: {latestFirst?: boolean}): Promise<any>;
+
+        getProcessInstanceComments(processInstanceId?: string, opts?: { latestFirst?: boolean }): Promise<any>;
+
         getProcessInstanceStartForm(processInstanceId?: string): Promise<FormDefinitionRepresentation>;
+
         getProcessInstance(processInstanceId?: string): Promise<ProcessInstanceRepresentation>;
     }
 
     export interface ProcessDefinitionsApi {
         new(client?: ApiClient): ProcessDefinitionsApi;
 
-        getProcessDefinitions(opts?: {latest?: boolean, appDefinitionId?: number}): Promise<any>;
+        getProcessDefinitions(opts?: { latest?: boolean, appDefinitionId?: number }): Promise<any>;
     }
 
     export interface ProcessDefinitionsFormApi {
         new(client?: ApiClient): ProcessDefinitionsApi;
 
         getProcessDefinitionStartForm(processDefinitionId?: string): Promise<FormDefinitionRepresentation>;
+
         getRestFieldValues(processDefinitionId?: string, field?: string): Promise<FormValueRepresentation[]>;
+
         getRestTableFieldValues(processDefinitionId?: string, field?: string, column?: string): Promise<FormValueRepresentation[]>;
     }
 
@@ -2047,6 +2312,7 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): ProcessInstancesInformationApi;
 
         getProcessInstanceContent(processInstanceId?: string): Promise<any>;
+
         startNewProcessInstance(startRequest?: CreateProcessInstanceRepresentation): Promise<ProcessInstanceRepresentation>;
     }
 
@@ -2054,6 +2320,7 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): ProcessInstancesListingApi;
 
         filterProcessInstances(filterRequest?: ProcessInstanceFilterRequestRepresentation): Promise<any>;
+
         getProcessInstances(requestNode?: any): Promise<any>;
     }
 
@@ -2061,10 +2328,15 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): ProcessInstanceVariablesApi;
 
         getProcessInstanceVariables(processInstanceId?: string): Promise<any>;
+
         createProcessInstanceVariables(processInstanceId?: string, restVariables?: RestVariable[]): Promise<any>;
+
         createOrUpdateProcessInstanceVariables(processInstanceId?: string, restVariables?: RestVariable[]): Promise<any>;
+
         getProcessInstanceVariable(processInstanceId?: string, variableName?: string): Promise<any>;
+
         updateProcessInstanceVariable(processInstanceId?: string, variableName?: string, restVariable?: RestVariable): Promise<any>;
+
         deleteProcessInstanceVariable(processInstanceId?: string, variableName?: string): Promise<any>;
     }
 
@@ -2078,10 +2350,15 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): ProfileApi;
 
         changePassword(changePasswordRepresentation?: ChangePasswordRepresentation): Promise<any>;
+
         getProfilePicture(): Promise<any>;
+
         getProfilePictureUrl(): string;
+
         getProfile(): Promise<UserRepresentation>;
+
         updateProfile(userRepresentation?: UserRepresentation): Promise<UserRepresentation>;
+
         uploadProfilePicture(file?: File): Promise<ImageUploadRepresentation>;
     }
 
@@ -2089,15 +2366,25 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): ReportApi;
 
         createDefaultReports(): Promise<any>;
+
         getTasksByprocessDefinitionId(reportId, processDefinitionId): Promise<any>;
+
         getReportsByParams(reportId, paramsQuery): Promise<any>;
+
         getProcessDefinitions(): Promise<any>;
+
         getReportParams(reportId): Promise<any>;
+
         getReportList(): Promise<any>;
+
         updateReport(reportId, name): Promise<any>;
+
         exportToCsv(reportId?: string, queryParams?: ReportExportQueryRepresentation): Promise<any>;
+
         saveReport(reportId?: string, queryParams?: ReportSaveQueryRepresentation): Promise<any>;
+
         deleteReport(reportId?: string): Promise<any>;
+
         getTasksByProcessDefinitionId(reportId: string, processDefinitionId: string): Promise<any>;
     }
 
@@ -2105,6 +2392,7 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): ScriptFileApi;
 
         getControllers(): Promise<string>;
+
         getLibraries(): Promise<string>;
     }
 
@@ -2118,12 +2406,19 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): TaskActionsApi;
 
         assignTask(taskId?: string, requestNode?: any): Promise<TaskRepresentation>;
+
         attachForm(taskId?: string, requestNode?: any): Promise<any>;
+
         claimTask(taskId?: string): Promise<any>;
+
         completeTask(taskId?: string): Promise<any>;
+
         involveUser(taskId?: string, requestNode?: any): Promise<any>;
+
         removeForm(taskId?: string): Promise<any>;
+
         removeInvolvedUser(taskId?: string, requestNode?: any): Promise<any>;
+
         unclaimTask(taskId?: string): Promise<any>;
     }
 
@@ -2131,32 +2426,59 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): TaskApi;
 
         addSubtask(taskId?: string, taskRepresentation?: TaskRepresentation): Promise<any>;
+
         addTaskComment(commentRequest?: CommentRepresentation, taskId?: string): Promise<any>;
+
         assignTask(taskId?: string, requestNode?: any): Promise<any>;
+
         attachForm(taskId?: string, requestNode?: any): Promise<any>;
+
         claimTask(taskId?: string): Promise<any>;
+
         completeTaskForm(taskId?: string, completeTaskFormRepresentation?: CompleteFormRepresentation): Promise<any>;
+
         completeTask(taskId?: string): Promise<any>;
+
         createNewTask(taskRepresentation?: TaskRepresentation): Promise<any>;
-        createRelatedContentOnTask(taskId?: string, relatedContent?: RelatedContentRepresentation, opts?: {isRelatedContent?: boolean}): Promise<any>;
+
+        createRelatedContentOnTask(taskId?: string, relatedContent?: RelatedContentRepresentation, opts?: { isRelatedContent?: boolean }): Promise<any>;
+
         deleteTask(taskId?: string): Promise<any>;
+
         filterTasks(requestNode?: TaskFilterRequestRepresentation): Promise<any>;
+
         getChecklist(taskId?: string): Promise<any>;
+
         getTaskAuditJson(taskId?: string): Promise<any>;
+
         getTaskAuditPdf(taskId?: string): Promise<any>;
+
         getRelatedContentForTask(taskId?: string): Promise<any>;
+
         getRestFieldValuesColumn(taskId?: string, field?: string, column?: string): Promise<any>;
+
         getRestFieldValues(taskId?: string, field?: string): Promise<any>;
-        getTaskComments(taskId?: string, opts?: {latestFirst?: boolean}): Promise<any>;
+
+        getTaskComments(taskId?: string, opts?: { latestFirst?: boolean }): Promise<any>;
+
         getTaskForm(taskId?: string): Promise<any>;
+
         getTask(taskId?: string): Promise<any>;
+
         involveUser(taskId?: string, requestNode?: any): Promise<any>;
+
         listTasks(requestNode?: TaskQueryRequestRepresentation): Promise<any>;
+
         orderChecklist(taskId?: string, orderRepresentation?: ChecklistOrderRepresentation): Promise<any>;
+
         removeForm(taskId?: string): Promise<any>;
+
         removeInvolvedUser(taskId?: string, requestNode?: any): Promise<any>;
+
         saveTaskForm(taskId?: string, saveTaskFormRepresentation?: SaveFormRepresentation): Promise<any>;
+
         unclaimTask(taskId?: string): Promise<any>;
+
         updateTask(taskId?: string, updated?: TaskUpdateRepresentation): Promise<any>;
     }
 
@@ -2164,7 +2486,9 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): TaskCheckListApi;
 
         addSubtask(taskId?: string, taskRepresentation?: TaskRepresentation): Promise<TaskRepresentation>;
+
         getChecklist(taskId?: string): Promise<any>;
+
         orderChecklist(taskId?: string, orderRepresentation?: ChecklistOrderRepresentation): Promise<any>;
     }
 
@@ -2172,9 +2496,13 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): TaskFormsApi;
 
         completeTaskForm(taskId?: string, completeTaskFormRepresentation?: CompleteFormRepresentation): Promise<any>;
+
         getRestFieldValues(taskId?: string, field?: string, column?: string): Promise<FormValueRepresentation[]>;
+
         getTaskForm(taskId?: string): Promise<FormDefinitionRepresentation>;
+
         getTaskFormVariables(taskId?: string): Promise<FormDefinitionRepresentation>;
+
         saveTaskForm(taskId?: string, saveTaskFormRepresentation?: SaveFormRepresentation): Promise<any>;
     }
 
@@ -2182,11 +2510,17 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): UserApi;
 
         executeAction(userId?: number, actionRequest?: UserActionRepresentation): Promise<any>;
+
         getProfilePicture(userId?: number): Promise<any>;
+
         getUserProfilePictureUrl(userId?: number): string;
+
         getUser(userId?: number): Promise<any>;
-        getUsers(opts?: {filter?: string, email?: string, externalId?: string, externalIdCaseInsensitive?: string, excludeTaskId?: string, excludeProcessId?: string, groupId?: number, tenantId?: number}): Promise<any>;
+
+        getUsers(opts?: { filter?: string, email?: string, externalId?: string, externalIdCaseInsensitive?: string, excludeTaskId?: string, excludeProcessId?: string, groupId?: number, tenantId?: number }): Promise<any>;
+
         requestPasswordReset(resetPassword?: ResetPasswordRepresentation): Promise<any>;
+
         updateUser(userId?: number, userRequest?: UserRepresentation): Promise<any>;
     }
 
@@ -2194,22 +2528,34 @@ declare namespace AlfrescoApi {
         new(client?: ApiClient): UserFiltersApi;
 
         createUserProcessInstanceFilter(userProcessInstanceFilterRepresentation?: UserProcessInstanceFilterRepresentation): Promise<UserProcessInstanceFilterRepresentation>;
+
         createUserTaskFilter(userTaskFilterRepresentation?: UserTaskFilterRepresentation): Promise<any>;
+
         deleteUserProcessInstanceFilter(userFilterId?: number): Promise<any>;
+
         getUserProcessInstanceFilter(userFilterId?: number): Promise<any>;
-        getUserProcessInstanceFilters(opts?: {appId?: number}): Promise<any>;
+
+        getUserProcessInstanceFilters(opts?: { appId?: number }): Promise<any>;
+
         deleteUserTaskFilter(userFilterId?: number): Promise<any>;
+
         getUserTaskFilter(userFilterId?: number): Promise<any>;
-        getUserTaskFilters(opts?: {appId?: number}): Promise<any>;
+
+        getUserTaskFilters(opts?: { appId?: number }): Promise<any>;
+
         orderUserProcessInstanceFilters(filterOrderRepresentation?: UserFilterOrderRepresentation): Promise<any>;
+
         orderUserTaskFilters(filterOrderRepresentation?: UserFilterOrderRepresentation): Promise<any>;
+
         updateUserProcessInstanceFilter(userFilterId?: number, userProcessInstanceFilterRepresentation?: UserProcessInstanceFilterRepresentation): Promise<UserProcessInstanceFilterRepresentation>;
+
         updateUserTaskFilter(userFilterId?: number, userTaskFilterRepresentation?: UserTaskFilterRepresentation): Promise<UserTaskFilterRepresentation>;
     }
 
     export interface UsersWorkflowApi {
         new(client?: ApiClient): UsersWorkflowApi;
-        getUsers(opts?: {filter?: string, email?: string, externalId?: string, externalIdCaseInsensitive?: string, excludeTaskId?: string, excludeProcessId?: string, groupId?: number, tenantId?: number}): Promise<any>;
+
+        getUsers(opts?: { filter?: string, email?: string, externalId?: string, externalIdCaseInsensitive?: string, excludeTaskId?: string, excludeProcessId?: string, groupId?: number, tenantId?: number }): Promise<any>;
     }
 
     export interface AboutApi {
@@ -2218,7 +2564,7 @@ declare namespace AlfrescoApi {
         getAppVersion(): Promise<any>;
     }
 
-    export declare class AbstractGroupRepresentation {
+    export class AbstractGroupRepresentation {
         constructor(obj?: any);
 
         externalId?: string;
@@ -2227,7 +2573,7 @@ declare namespace AlfrescoApi {
         status: string;
     }
 
-    export declare class AbstractUserRepresentation {
+    export class AbstractUserRepresentation {
         constructor(obj?: any);
 
         email?: string;
@@ -2238,13 +2584,13 @@ declare namespace AlfrescoApi {
         pictureId: string;
     }
 
-    export declare class AddGroupCapabilitiesRepresentation {
+    export class AddGroupCapabilitiesRepresentation {
         constructor(obj?: any);
 
         capabilities?: string[];
     }
 
-    export declare class AppDefinition {
+    export class AppDefinition {
         constructor(obj?: any);
 
         icon?: string;
@@ -2253,14 +2599,14 @@ declare namespace AlfrescoApi {
         theme?: string;
     }
 
-    export declare class AppDefinitionPublishRepresentation {
+    export class AppDefinitionPublishRepresentation {
         constructor(obj?: any);
 
         comment?: string;
         force?: boolean;
     }
 
-    export declare class AppDefinitionRepresentation {
+    export class AppDefinitionRepresentation {
         constructor(obj?: any);
 
         defaultAppId?: string;
@@ -2274,7 +2620,7 @@ declare namespace AlfrescoApi {
         theme?: string;
     }
 
-    export declare class AppDefinitionUpdateResultRepresentation {
+    export class AppDefinitionUpdateResultRepresentation {
         constructor(obj?: any);
 
         appDefinition?: AppDefinitionRepresentation;
@@ -2286,7 +2632,7 @@ declare namespace AlfrescoApi {
         messageKey?: string;
     }
 
-    export declare class AppModelDefinition {
+    export class AppModelDefinition {
         constructor(obj?: any);
 
         createdBy?: number;
@@ -2302,7 +2648,7 @@ declare namespace AlfrescoApi {
         version?: number;
     }
 
-    export declare class BulkUserUpdateRepresentation {
+    export class BulkUserUpdateRepresentation {
         constructor(obj?: any);
 
         accountType?: string;
@@ -2313,34 +2659,34 @@ declare namespace AlfrescoApi {
         users?: number[];
     }
 
-    export declare class ChangePasswordRepresentation {
+    export class ChangePasswordRepresentation {
         constructor(obj?: any);
 
         newPassword?: string;
         oldPassword?: string;
     }
 
-    export declare class Chart {
-        constructor(obj?: any): Chart;
+    export class Chart {
+        constructor(obj?: any);
 
         id?: string;
         type?: string;
     }
 
-    export declare class ChecklistOrderRepresentation {
+    export class ChecklistOrderRepresentation {
         constructor(obj?: any);
 
         order?: string[];
     }
 
-    export declare class CompleteFormRepresentation {
+    export class CompleteFormRepresentation {
         constructor(obj?: any);
 
         outcome?: string;
         values?: any;
     }
 
-    export declare class ConditionRepresentation {
+    export class ConditionRepresentation {
         constructor(obj?: any);
 
         leftFormFieldId?: string;
@@ -2353,7 +2699,7 @@ declare namespace AlfrescoApi {
         rightValue?: any;
     }
 
-    export declare class CreateEndpointBasicAuthRepresentation {
+    export class CreateEndpointBasicAuthRepresentation {
         constructor(obj?: any);
 
         name?: string;
@@ -2362,7 +2708,7 @@ declare namespace AlfrescoApi {
         username?: string;
     }
 
-    export declare class CreateProcessInstanceRepresentation {
+    export class CreateProcessInstanceRepresentation {
         constructor(obj?: any);
 
         name?: string;
@@ -2374,7 +2720,7 @@ declare namespace AlfrescoApi {
         values?: any;
     }
 
-    export declare class CreateTenantRepresentation {
+    export class CreateTenantRepresentation {
         constructor(obj?: any);
 
         active?: boolean;
@@ -2383,7 +2729,7 @@ declare namespace AlfrescoApi {
         name?: string;
     }
 
-    export declare class EndpointBasicAuthRepresentation {
+    export class EndpointBasicAuthRepresentation {
         constructor(obj?: any);
 
         created?: Date;
@@ -2394,7 +2740,7 @@ declare namespace AlfrescoApi {
         username?: string;
     }
 
-    export declare class EndpointConfigurationRepresentation {
+    export class EndpointConfigurationRepresentation {
         constructor(obj?: any);
 
         basicAuthId?: number;
@@ -2409,21 +2755,21 @@ declare namespace AlfrescoApi {
         tenantId?: number;
     }
 
-    export declare class EndpointRequestHeaderRepresentation {
+    export class EndpointRequestHeaderRepresentation {
         constructor(obj?: any);
 
         name?: string;
         value?: string;
     }
 
-    export declare class EntityAttributeScopeRepresentation {
+    export class EntityAttributeScopeRepresentation {
         constructor(obj?: any);
 
         name?: string;
         type?: string;
     }
 
-    export declare class EntityVariableScopeRepresentation {
+    export class EntityVariableScopeRepresentation {
         constructor(obj?: any);
 
         attributes?: EntityAttributeScopeRepresentation[];
@@ -2432,7 +2778,7 @@ declare namespace AlfrescoApi {
         mappedVariableName?: string;
     }
 
-    export declare class FormDefinitionRepresentation {
+    export class FormDefinitionRepresentation {
         constructor(obj?: any);
 
         className?: string;
@@ -2456,7 +2802,7 @@ declare namespace AlfrescoApi {
         taskName?: string;
     }
 
-    export declare class FormFieldRepresentation {
+    export class FormFieldRepresentation {
         constructor(obj?: any);
 
         className?: string;
@@ -2491,21 +2837,21 @@ declare namespace AlfrescoApi {
         visibilityCondition?: ConditionRepresentation;
     }
 
-    export declare class FormJavascriptEventRepresentation {
+    export class FormJavascriptEventRepresentation {
         constructor(obj?: any);
 
         event?: string;
         javascriptLogic?: string;
     }
 
-    export declare class FormOutcomeRepresentation {
+    export class FormOutcomeRepresentation {
         constructor(obj?: any);
 
         id?: string;
         name?: string;
     }
 
-    export declare class FormRepresentation {
+    export class FormRepresentation {
         constructor(obj?: any);
 
         description?: string;
@@ -2520,7 +2866,7 @@ declare namespace AlfrescoApi {
         version?: number;
     }
 
-    export declare class FormSaveRepresentation {
+    export class FormSaveRepresentation {
         constructor(obj?: any);
 
         comment?: string;
@@ -2531,7 +2877,7 @@ declare namespace AlfrescoApi {
         reusable?: boolean;
     }
 
-    export declare class FormScopeRepresentation {
+    export class FormScopeRepresentation {
         constructor(obj?: any);
 
         description?: string;
@@ -2542,7 +2888,7 @@ declare namespace AlfrescoApi {
         outcomes?: FormOutcomeRepresentation[];
     }
 
-    export declare class FormTabRepresentation {
+    export class FormTabRepresentation {
         constructor(obj?: any);
 
         id?: string;
@@ -2550,21 +2896,21 @@ declare namespace AlfrescoApi {
         visibilityCondition?: ConditionRepresentation;
     }
 
-    export declare class FormValueRepresentation {
+    export class FormValueRepresentation {
         constructor(obj?: any);
 
         id?: string;
         name?: string;
     }
 
-    export declare class GroupCapabilityRepresentation {
+    export class GroupCapabilityRepresentation {
         constructor(obj?: any);
 
         id?: number;
         name?: string;
     }
 
-    export declare class GroupRepresentation {
+    export class GroupRepresentation {
         constructor(obj?: any);
 
         capabilities?: GroupCapabilityRepresentation[];
@@ -2581,7 +2927,7 @@ declare namespace AlfrescoApi {
         users?: UserRepresentation[];
     }
 
-    export declare class ImageUploadRepresentation {
+    export class ImageUploadRepresentation {
         constructor(obj?: any);
 
         created?: Date;
@@ -2590,7 +2936,7 @@ declare namespace AlfrescoApi {
         userId?: number;
     }
 
-    export declare class LayoutRepresentation {
+    export class LayoutRepresentation {
         constructor(obj?: any);
 
         colspan?: number;
@@ -2598,7 +2944,7 @@ declare namespace AlfrescoApi {
         row?: number;
     }
 
-    export declare class LightAppRepresentation {
+    export class LightAppRepresentation {
         constructor(obj?: any);
 
         description?: string;
@@ -2608,7 +2954,7 @@ declare namespace AlfrescoApi {
         theme?: string;
     }
 
-    export declare class LightGroupRepresentation {
+    export class LightGroupRepresentation {
         constructor(obj?: any);
 
         externalId?: string;
@@ -2618,14 +2964,14 @@ declare namespace AlfrescoApi {
         status?: string;
     }
 
-    export declare class LightTenantRepresentation {
+    export class LightTenantRepresentation {
         constructor(obj?: any);
 
         id?: number;
         name?: string;
     }
 
-    export declare class ModelRepresentation {
+    export class ModelRepresentation {
         constructor(obj?: any);
 
         comment?: string;
@@ -2646,14 +2992,14 @@ declare namespace AlfrescoApi {
         version?: number;
     }
 
-    export declare class OptionRepresentation {
+    export class OptionRepresentation {
         constructor(obj?: any);
 
         id?: string;
         name?: string;
     }
 
-    export declare class ParameterValueRepresentation {
+    export class ParameterValueRepresentation {
         constructor(obj?: any);
 
         id?: string;
@@ -2662,7 +3008,7 @@ declare namespace AlfrescoApi {
         value?: string;
     }
 
-    export declare class ProcessFilterRequestRepresentation {
+    export class ProcessFilterRequestRepresentation {
         constructor(obj?: any);
 
         processDefinitionId?: number;
@@ -2673,7 +3019,7 @@ declare namespace AlfrescoApi {
         size?: number;
     }
 
-    export declare class ProcessInstanceAuditRepresentation {
+    export class ProcessInstanceAuditRepresentation {
         constructor(obj?: any);
 
         processInstanceId?: string;
@@ -2687,7 +3033,7 @@ declare namespace AlfrescoApi {
         decisionInfo?: any;
     }
 
-    export declare class ProcessInstanceFilterRepresentation {
+    export class ProcessInstanceFilterRepresentation {
         constructor(obj?: any);
 
         asc?: boolean;
@@ -2698,7 +3044,7 @@ declare namespace AlfrescoApi {
         state?: string;
     }
 
-    export declare class ProcessInstanceFilterRequestRepresentation {
+    export class ProcessInstanceFilterRequestRepresentation {
         constructor(obj?: any);
 
         appDefinitionId?: number;
@@ -2708,7 +3054,7 @@ declare namespace AlfrescoApi {
         size?: number;
     }
 
-    export declare class ProcessInstanceRepresentation {
+    export class ProcessInstanceRepresentation {
         constructor(obj?: any);
 
         businessKey?: string;
@@ -2730,7 +3076,7 @@ declare namespace AlfrescoApi {
         variables?: RestVariable[];
     }
 
-    export declare class ProcessInstanceVariableRepresentation {
+    export class ProcessInstanceVariableRepresentation {
         constructor(obj?: any);
 
         id?: string;
@@ -2738,14 +3084,14 @@ declare namespace AlfrescoApi {
         value?: any;
     }
 
-    export declare class ProcessScopeIdentifierRepresentation {
+    export class ProcessScopeIdentifierRepresentation {
         constructor(obj?: any);
 
         processActivityId?: string;
         processModelId?: number;
     }
 
-    export declare class ProcessScopeRepresentation {
+    export class ProcessScopeRepresentation {
         constructor(obj?: any);
 
         activityIds?: string[];
@@ -2760,19 +3106,18 @@ declare namespace AlfrescoApi {
         forms?: FormScopeRepresentation[];
         metadataVariables?: any;
         modelId?: number;
-        modelId?: number;
         processModelType?: number;
         responseVariables?: any;
     }
 
-    export declare class ProcessScopesRequestRepresentation {
+    export class ProcessScopesRequestRepresentation {
         constructor(obj?: any);
 
         identifiers?: ProcessScopeIdentifierRepresentation[];
         overriddenModel?: string;
     }
 
-    export declare class PublishIdentityInfoRepresentation {
+    export class PublishIdentityInfoRepresentation {
         constructor(obj?: any);
 
         group?: LightGroupRepresentation;
@@ -2780,7 +3125,7 @@ declare namespace AlfrescoApi {
         type?: string;
     }
 
-    export declare class RelatedContentRepresentation {
+    export class RelatedContentRepresentation {
         constructor(obj?: any);
 
         contentAvailable?: boolean;
@@ -2798,13 +3143,13 @@ declare namespace AlfrescoApi {
         thumbnailStatus?: string;
     }
 
-    export declare class ReportCharts {
+    export class ReportCharts {
         constructor(obj?: any);
 
         elements?: string;
     }
 
-    export declare class ReportExportQueryRepresentation {
+    export class ReportExportQueryRepresentation {
         constructor(obj?: any);
 
         processDefinitionId?: string;
@@ -2819,7 +3164,7 @@ declare namespace AlfrescoApi {
         dateRange?: ReportDateRangeRepresentation;
     }
 
-    export declare class ReportParametersDefinition {
+    export class ReportParametersDefinition {
         constructor(obj?: any);
 
         id?: number;
@@ -2828,7 +3173,7 @@ declare namespace AlfrescoApi {
         created?: string;
     }
 
-    export declare class ReportSaveQueryRepresentation {
+    export class ReportSaveQueryRepresentation {
         constructor(obj?: any);
 
         processDefinitionId?: string;
@@ -2843,34 +3188,34 @@ declare namespace AlfrescoApi {
         dateRange?: ReportDateRangeRepresentation;
     }
 
-    export declare class ResetPasswordRepresentation {
+    export class ResetPasswordRepresentation {
         constructor(obj?: any);
 
         email?: string;
     }
 
-    export declare class ResultListDataRepresentation<T> {
+    export class ResultListDataRepresentation {
         constructor(obj?: any);
 
-        data?: T[];
+        data?: any[];
         size?: number;
         start?: number;
         total?: number;
     }
 
-    export declare class RuntimeAppDefinitionSaveRepresentation {
+    export class RuntimeAppDefinitionSaveRepresentation {
         constructor(obj?: any);
 
         appDefinitions?: AppDefinitionRepresentation[];
     }
 
-    export declare class SaveFormRepresentation {
+    export class SaveFormRepresentation {
         constructor(obj?: any);
 
         values?: any;
     }
 
-    export declare class SyncLogEntryRepresentation {
+    export class SyncLogEntryRepresentation {
         constructor(obj?: any);
 
         id?: number;
@@ -2878,13 +3223,13 @@ declare namespace AlfrescoApi {
         type?: string;
     }
 
-    export declare class SystemPropertiesRepresentation {
+    export class SystemPropertiesRepresentation {
         constructor(obj?: any);
 
         allowInvolveByEmail?: boolean;
     }
 
-    export declare class TaskAuditRepresentation {
+    export class TaskAuditRepresentation {
         constructor(obj?: any);
 
         taskId?: string;
@@ -2900,7 +3245,7 @@ declare namespace AlfrescoApi {
         comments?: string;
     }
 
-    export declare class TaskFilterRepresentation {
+    export class TaskFilterRepresentation {
         constructor(obj?: any);
 
         asc?: boolean;
@@ -2914,7 +3259,7 @@ declare namespace AlfrescoApi {
         state?: string;
     }
 
-    export declare class TaskFilterRequestRepresentation {
+    export class TaskFilterRequestRepresentation {
         constructor(obj?: any);
 
         appDefinitionId?: number;
@@ -2924,7 +3269,7 @@ declare namespace AlfrescoApi {
         size?: number;
     }
 
-    export declare class TaskQueryRequestRepresentation {
+    export class TaskQueryRequestRepresentation {
         constructor(obj?: any);
 
         processInstanceId?: string;
@@ -2936,7 +3281,7 @@ declare namespace AlfrescoApi {
         size?: number;
     }
 
-    export declare class TaskRepresentation {
+    export class TaskRepresentation {
         constructor(obj?: any);
 
         adhocTaskCanBeReassigned?: boolean;
@@ -2969,7 +3314,7 @@ declare namespace AlfrescoApi {
         processInstanceStartUserId?: string;
     }
 
-    export declare class TaskUpdateRepresentation {
+    export class TaskUpdateRepresentation {
         constructor(obj?: any);
 
         description?: string;
@@ -2980,7 +3325,7 @@ declare namespace AlfrescoApi {
         nameSet?: boolean;
     }
 
-    export declare class TenantEvent {
+    export class TenantEvent {
         constructor(obj?: any);
 
         eventTime?: Date;
@@ -2992,7 +3337,7 @@ declare namespace AlfrescoApi {
         userName?: string;
     }
 
-    export declare class TenantRepresentation {
+    export class TenantRepresentation {
         constructor(obj?: any);
 
         active?: boolean;
@@ -3005,14 +3350,14 @@ declare namespace AlfrescoApi {
         name?: string;
     }
 
-    export declare class UserAccountCredentialsRepresentation {
+    export class UserAccountCredentialsRepresentation {
         constructor(obj?: any);
 
         password?: string;
         username?: string;
     }
 
-    export declare class UserActionRepresentation {
+    export class UserActionRepresentation {
         constructor(obj?: any);
 
         action?: string;
@@ -3020,14 +3365,14 @@ declare namespace AlfrescoApi {
         oldPassword?: string;
     }
 
-    export declare class UserFilterOrderRepresentation {
+    export class UserFilterOrderRepresentation {
         constructor(obj?: any);
 
         appId?: number;
         order?: number[];
     }
 
-    export declare class UserProcessInstanceFilterRepresentation {
+    export class UserProcessInstanceFilterRepresentation {
         constructor(obj?: any);
 
         appId?: number;
@@ -3039,7 +3384,7 @@ declare namespace AlfrescoApi {
         recent?: boolean;
     }
 
-    export declare class UserRepresentation {
+    export class UserRepresentation {
         constructor(obj?: any);
 
         apps?: LightAppRepresentation[];
@@ -3063,7 +3408,7 @@ declare namespace AlfrescoApi {
         type?: string;
     }
 
-    export declare class UserTaskFilterRepresentation {
+    export class UserTaskFilterRepresentation {
         constructor(obj?: any);
 
         appId?: number;
@@ -3075,7 +3420,7 @@ declare namespace AlfrescoApi {
         recent?: boolean;
     }
 
-    export declare class ValidationErrorRepresentation {
+    export class ValidationErrorRepresentation {
         constructor(obj?: any);
 
         defaultDescription?: string;
@@ -3087,7 +3432,7 @@ declare namespace AlfrescoApi {
         warning?: boolean;
     }
 
-    export declare class VariableScopeRepresentation {
+    export class VariableScopeRepresentation {
         constructor(obj?: any);
 
         mapVariable?: string;
@@ -3099,7 +3444,7 @@ declare namespace AlfrescoApi {
         processVariableType?: string;
     }
 
-    export declare class ReportDateRangeRepresentation {
+    export class ReportDateRangeRepresentation {
         constructor(obj?: any);
 
         endDate?: string;
@@ -3107,7 +3452,7 @@ declare namespace AlfrescoApi {
         startDate?: string;
     }
 
-    export declare class LightUserRepresentation {
+    export class LightUserRepresentation {
         constructor(obj?: any);
 
         email?: string;
@@ -3118,7 +3463,7 @@ declare namespace AlfrescoApi {
         pictureId?: number;
     }
 
-    export declare class CommentRepresentation {
+    export class CommentRepresentation {
         constructor(obj?: any);
 
         created?: Date;
@@ -3129,8 +3474,9 @@ declare namespace AlfrescoApi {
 
     //  ======= Process service  End ======
 
-    export declare class Activiti {
+    export class Activiti {
         new(config: any): Activiti;
+
         aboutApi: AboutApi;
         AlfrescoApi: AlfrescoApi;
         adminEndpointsApi: AdminEndpointsApi;
@@ -3281,7 +3627,7 @@ declare namespace AlfrescoApi {
         ActivityPaging: ActivityPaging;
         ActivityPagingList: ActivityPagingList;
         AssocChildBody: AssocChildBody;
-        AssocInfo: any;
+        AssocInfo: AssocInfo;
         AssocTargetBody: AssocTargetBody;
         ChildAssocInfo: any;
         Comment: Comment;
@@ -3311,15 +3657,11 @@ declare namespace AlfrescoApi {
         InlineResponse201Entry: any;
         MoveBody: MoveBody;
         NetworkQuota: NetworkQuota;
-        NodeAssocMinimal: any;
-        NodeAssocMinimalEntry: any;
-        NodeAssocPaging: any;
-        NodeAssocPagingList: any;
+        NodeAssocMinimal: NodeAssocMinimal;
+        NodeAssocMinimalEntry: NodeAssocMinimalEntry;
+        NodeAssocPaging: NodeAssocPaging;
+        NodeAssocPagingList: NodeAssocPagingList;
         NodeBody: NodeBody;
-        NodeChildAssocMinimal: any;
-        NodeChildAssocMinimalEntry: any;
-        NodeChildAssocPaging: any;
-        NodeChildAssocPagingList: any;
         NodeEntry: NodeEntry;
         NodeFull: any;
         NodeMinimal: any;
@@ -3384,29 +3726,49 @@ declare namespace AlfrescoApi {
 
     export interface CustomModelApi {
         createCustomModel(status: string, description: string, name: string, namespaceUri: string, namespacePrefix: string): Promise<any>;
+
         createCustomType(modelName: string, name: string, parentName: string, title, description: string): Promise<any>;
+
         createCustomAspect(modelName: string, name: string, parentName: string, title, description: string): Promise<any>;
+
         createCustomConstraint(modelName: string, name: string, type: string, parameters: any): Promise<any>;
+
         activateCustomModel(modelName: string): Promise<any>;
+
         deactivateCustomModel(modelName: string): Promise<any>;
+
         addPropertyToAspect(modelName: string, aspectName: string, properties: any): Promise<any>;
+
         addPropertyToType(modelName: string, updateCustomModel, properties: any): Promise<any>;
+
         updateCustomModel(modelName: string, description: string, namespaceUri: string, namespacePrefix: string): Promise<any>;
+
         updateCustomType(modelName: string, typeName: string, description: string, parentName: string, title: string): Promise<any>;
+
         updateCustomAspect(modelName: string, aspectName: string, description: string, parentName: string, title: string): Promise<any>;
+
         getAllCustomModel(): Promise<any>;
+
         getCustomModel(modelName: string, queryParams: any): Promise<any>;
+
         getAllCustomType(modelName: string): Promise<any>;
+
         getCustomType(modelName: string, typeName: string, queryParams: any): Promise<any>;
+
         getAllCustomAspect(modelName: string): Promise<any>;
+
         getCustomAspect(modelName: string, aspectName: string, queryParams: any): Promise<any>;
+
         getAllCustomConstraints(modelName: string): Promise<any>;
+
         getCustomConstraints(modelName: string, constraintName: string, queryParams: any): Promise<any>;
+
         deleteCustomModel(modelName: string): Promise<any>;
+
         deleteCustomType(modelName: string, typeName: string): Promise<any>;
     }
 
-    export declare class AlfrescoApiConfig {
+    export class AlfrescoApiConfig {
         constructor(obj?: any);
 
         hostEcm?: string;
@@ -3420,7 +3782,7 @@ declare namespace AlfrescoApi {
         disableCsrf?: boolean;
     }
 
-    export declare class RestVariable {
+    export class RestVariable {
         constructor(obj?: any);
 
         name?: string;
@@ -3434,8 +3796,11 @@ declare namespace AlfrescoApi {
         new(ecmAuth: any): ContentApi;
 
         getDocumentThumbnailUrl(nodeId: string, attachment?: boolean, ticket?: string): string;
+
         getDocumentPreviewUrl(nodeId: string, attachment?: boolean, ticket?: string): string;
+
         getContentUrl(nodeId: string, attachment?: boolean, ticket?: string): string;
+
         getRenditionUrl(nodeId: string, encoding: string, attachment?: boolean, ticket?: string): string;
     }
 
@@ -3443,11 +3808,17 @@ declare namespace AlfrescoApi {
         new(config: AlfrescoApiConfig): AuthApi;
 
         changeHost(host: string): void;
+
         login(username: string, password: string): Promise<string>;
+
         logout(): Promise<string>;
+
         setTicket(ticket: string): void;
+
         getTicket(): string;
+
         isLoggedIn(): boolean;
+
         getClient(): any;
 
         username: string;
@@ -3458,6 +3829,7 @@ declare namespace AlfrescoApi {
         new(config: AlfrescoApiConfig): UploadApi;
 
         uploadFile(fileDefinition?: any, relativePath?: any, nodeId?: any, nodeBody?: any, opts?: any): any;
+
         addNodeUpload(nodeId?: any, nodeBody?: any, opts?: any, formParams?: any): any;
     }
 
