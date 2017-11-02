@@ -564,7 +564,7 @@ declare namespace AlfrescoApi {
         new(client: ApiClient): RatingsApi;
 
         rate(nodeId?: string, ratingBody?: RatingBody, opts?: any): Promise<RatingEntry>;
-        removeRating(nodeId?: string, ratingId?: string): Promise<{}>;
+        removeRating(nodeId?: string, ratingId?: string): Promise<void>;
         getRating(nodeId?: string, ratingId?: string, opts?: any): Promise<RatingEntry>;
         getRatings(nodeId?: string, opts?: any): Promise<RatingPaging>;
     }
