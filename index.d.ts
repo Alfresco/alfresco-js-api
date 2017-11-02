@@ -465,25 +465,29 @@ declare namespace AlfrescoApi {
 
         addNode(nodeId: string, nodeBody: any, opts?: { autoRename?: boolean, include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
         copyNode(nodeId: string, copyBody: any, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
-        deleteNode(nodeId?: string, opts?: { permanent?: boolean }): Promise<any>;
-        purgeDeletedNode(nodeId: string): Promise<any>;
-        getNodeInfo(nodeId: string, opts?: any): Promise<MinimalNodeEntryEntity>;
+        deleteNode(nodeId?: string, opts?: { permanent?: boolean }): Promise<void>;
+        purgeDeletedNode(nodeId: string): Promise<void>;
+        // custom API not exposed by the platform
+        getNodeInfo(nodeId: string, opts?: any): Promise<NodeEntry>;
+        // custom API not exposed by the platform
         deleteNodePermanent(nodeId: string): Promise<any>;
-        createFolder(name: string, relativePath: string, nodeId?: string, opts?: any): Promise<MinimalNodeEntity>;
-        createFolderAutoRename(name: string, relativePath: string, nodeId: string, opts): Promise<MinimalNodeEntity>;
+        // custom API not exposed by the platform
+        createFolder(name: string, relativePath: string, nodeId?: string, opts?: any): Promise<NodeEntry>;
+        // custom API not exposed by the platform
+        createFolderAutoRename(name: string, relativePath: string, nodeId: string, opts): Promise<NodeEntry>;
         getDeletedNode(nodeId?: string, opts?: { include?: Array<string> }): Promise<DeletedNodeEntry>;
         getDeletedNodes(opts?: { skipCount?: number, maxItems?: number, include?: Array<string> }): Promise<DeletedNodesPaging>;
-        getFileContent(nodeId?: string, opts?: { attachment?: boolean, ifModifiedSince?: Date }): Promise<{any}>;
-        getNode(nodeId?: string, opts?: { include?: Array<string>, relativePath?: string, fields?: Array<string> }): Promise<{}>;
-        getNodeContent(nodeId?: string, opts?: any): Promise<{}>;
-        getNodeChildren(nodeId?: string, opts?: { skipCount?: number, maxItems?: number, orderBy?: string, where?: string, include?: Array<string>, relativePath?: string, includeSource?: boolean, fields?: Array<string> }): Promise<{}>;
-        getParents(nodeId?: string, opts?: { where?: string, include?: Array<string>, skipCount?: number, maxItems?: number, includeSource?: boolean, fields?: Array<string> }): Promise<{}>;
-        getSecondaryChildren(nodeId?: string, opts?: { where?: string, include?: Array<string>, skipCount?: number, maxItems?: number, includeSource?: boolean, fields?: Array<string> }): Promise<{}>;
-        getSourceAssociations(nodeId?: string, opts?: { where?: string, include?: Array<string>, fields?: Array<string> }): Promise<{}>;
-        getTargetAssociations(nodeId?: string, opts?: { where?: string, include?: Array<string>, fields?: Array<string> }): Promise<{}>;
-        lockNode(nodeId?: string, nodeBodyLock?: NodeBodyLock, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<{}>;
-        unlockNode(nodeId?: string, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<{}>;
-        moveNode(nodeId?: string, moveBody?: MoveBody, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<{}>;
+        getFileContent(nodeId?: string, opts?: { attachment?: boolean, ifModifiedSince?: Date }): Promise<any>;
+        getNode(nodeId?: string, opts?: { include?: Array<string>, relativePath?: string, fields?: Array<string> }): Promise<NodeEntry>;
+        getNodeContent(nodeId?: string, opts?: any): Promise<any>;
+        getNodeChildren(nodeId?: string, opts?: { skipCount?: number, maxItems?: number, orderBy?: string, where?: string, include?: Array<string>, relativePath?: string, includeSource?: boolean, fields?: Array<string> }): Promise<NodePaging>;
+        getParents(nodeId?: string, opts?: { where?: string, include?: Array<string>, skipCount?: number, maxItems?: number, includeSource?: boolean, fields?: Array<string> }): Promise<NodeAssociationPaging>;
+        getSecondaryChildren(nodeId?: string, opts?: { where?: string, include?: Array<string>, skipCount?: number, maxItems?: number, includeSource?: boolean, fields?: Array<string> }): Promise<NodeChildAssociationPaging>;
+        getSourceAssociations(nodeId?: string, opts?: { where?: string, include?: Array<string>, fields?: Array<string> }): Promise<NodeAssociationPaging>;
+        getTargetAssociations(nodeId?: string, opts?: { where?: string, include?: Array<string>, fields?: Array<string> }): Promise<NodeAssociationPaging>;
+        lockNode(nodeId?: string, nodeBodyLock?: NodeBodyLock, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
+        unlockNode(nodeId?: string, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
+        moveNode(nodeId?: string, moveBody?: MoveBody, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
         restoreNode(nodeId?: string): Promise<NodeEntry>;
         updateFileContent(nodeId?: string, contentBody?: string, opts?: { majorVersion?: boolean, comment?: string, include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
         updateNodeContent(nodeId?: string, contentBody?: string, opts?: any): Promise<NodeEntry>;
