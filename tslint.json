@@ -25,7 +25,7 @@
         "label-position": true,
         "max-line-length": [
             true,
-            240
+            440
         ],
         "member-ordering": [
             false,
@@ -55,7 +55,7 @@
         "no-inferrable-types": false,
         "no-internal-module": true,
         "no-require-imports": true,
-        "no-shadowed-variable": true,
+        "no-shadowed-variable": false,
         "no-switch-case-fall-through": true,
         "no-trailing-whitespace": true,
         "no-unused-expression": true,

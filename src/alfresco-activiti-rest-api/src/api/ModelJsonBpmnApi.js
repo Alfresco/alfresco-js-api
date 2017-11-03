@@ -122,6 +122,84 @@
                 authNames, contentTypes, accepts, returnType
             );
         }
+
+      /**
+       * Function to receive the result of the getModelJSONForProcessDefinition operation.
+       * @param {String} error Error message, if any.
+       * @param data This operation does not return a value.
+       * @param {String} response The complete HTTP response.
+       */
+
+      /**
+       * @param {String} processDefinitionId processDefinitionId
+       */
+        this.getModelJSON = function(processDefinitionId) {
+            var postBody = null;
+
+            if (processDefinitionId == undefined || processDefinitionId == null) {
+                throw "Missing the required parameter 'processDefinitionId' when calling getProcessDefinitionModel";
+            }
+
+            var pathParams = {
+                'processDefinitionId': processDefinitionId
+            };
+            var queryParams = {
+            };
+            var headerParams = {
+            };
+            var formParams = {
+            };
+
+            var authNames = [];
+            var contentTypes = ['application/json'];
+            var accepts = ['application/json'];
+            var returnType = ObjectNode;
+
+            return this.apiClient.callApi(
+              '/activiti-app/app/rest/process-definitions/{processDefinitionId}/model-json', 'GET',
+                pathParams, queryParams, headerParams, formParams, postBody,
+                authNames, contentTypes, accepts, returnType
+            );
+        }
+
+      /**
+       * Function to receive the result of the getModelHistoryJSON operation.
+       * @param {String} error Error message, if any.
+       * @param data This operation does not return a value.
+       * @param {String} response The complete HTTP response.
+       */
+
+      /**
+       * @param {String} processInstanceId processInstanceId
+       */
+        this.getModelJSONForProcessDefinition = function(processInstanceId) {
+            var postBody = null;
+
+            if (processInstanceId == undefined || processInstanceId == null) {
+                throw "Missing the required parameter 'processInstanceId' when calling getProcessInstancesModel";
+            }
+
+            var pathParams = {
+                'processInstanceId': processInstanceId
+            };
+            var queryParams = {
+            };
+            var headerParams = {
+            };
+            var formParams = {
+            };
+
+            var authNames = [];
+            var contentTypes = ['application/json'];
+            var accepts = ['application/json'];
+            var returnType = ObjectNode;
+
+            return this.apiClient.callApi(
+              '/activiti-app/app/rest/process-instances/{processInstanceId}/model-json', 'GET',
+                pathParams, queryParams, headerParams, formParams, postBody,
+                authNames, contentTypes, accepts, returnType
+            );
+        }
     };
 
     return exports;
