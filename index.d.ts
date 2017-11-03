@@ -721,7 +721,7 @@ declare namespace AlfrescoApi {
     }
 
     export interface NodeAssocMinimalEntry {
-        entry?: NodeAssocMinimal;
+        entry?:NodeAssocMinimal;
     }
 
     export interface NodeAssocMinimal {
@@ -732,7 +732,7 @@ declare namespace AlfrescoApi {
         isFolder?: Boolean;
         isFile?: Boolean;
         modifiedAt?: Date;
-        modifiedByUser?: UserInfo;
+        modifiedByUser?:UserInfo;
         createdAt?: Date;
         createdByUser?: UserInfo;
         content?: ContentInfo;
@@ -740,7 +740,7 @@ declare namespace AlfrescoApi {
     }
 
     export interface AssocInfo {
-        assocType?: String;
+        assocType?:String;
     }
 
     export interface TagsApi {
@@ -2078,7 +2078,7 @@ declare namespace AlfrescoApi {
     export interface ContentApi {
         new(client?: ApiClient): ContentApi;
 
-        createRelatedContentOnProcessInstance(processInstanceId?: string, relatedContent?: RelatedContentRepresentation, opts?: any): Promise<RelatedContentRepresentation>;
+        createRelatedContentOnProcessInstance(processInstanceId?: string, relatedContent?: RelatedContentRepresentation, opts?:any): Promise<RelatedContentRepresentation>;
 
         createRelatedContentOnTask(taskId?: string, relatedContent?: RelatedContentRepresentation, opts?: { isRelatedContent?: boolean }): Promise<RelatedContentRepresentation>;
 
@@ -2209,9 +2209,9 @@ declare namespace AlfrescoApi {
 
         getEditorDisplayJsonClient(processModelId?: number): Promise<any>;
 
-        getModelJSON(processDefinitionId?: number): Promise<any>;
+        getModelJSON(processDefinitionId?: string): Promise<any>;
 
-        getModelJSONForProcessDefinition(processInstanceId?: number): Promise<any>;
+        getModelJSONForProcessDefinition(processInstanceId?: string): Promise<any>;
     }
 
     export interface ModelsApi {

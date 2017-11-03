@@ -141,6 +141,8 @@ Class | Method | HTTP request | Description
 *ActivitiPublicRestApi.ModelBpmnApi* | [**getProcessModelBpmn20Xml**](docs/ModelBpmnApi.md#getProcessModelBpmn20Xml) | **GET** /api/enterprise/models/{processModelId}/bpmn20 | Export a process definition model to a BPMN 2.0 xml file
 *ActivitiPublicRestApi.modelJsonBpmnApi* | [**getHistoricEditorDisplayJsonClient**](docs/ModelJsonBpmnApi.md#getHistoricEditorDisplayJsonClient) | **GET** /api/enterprise/models/{processModelId}/history/{processModelHistoryId}/model-json | Export a previous process definition model to JSON
 *ActivitiPublicRestApi.modelJsonBpmnApi* | [**getEditorDisplayJsonClient**](docs/ModelJsonBpmnApi.md#getEditorDisplayJsonClient) | **GET** /api/enterprise/models/{processModelId}/model-json | Export a process definition model to JSON
+*ActivitiPublicRestApi.modelJsonBpmnApi* | [**getModelJSON**](docs/ModelJsonBpmnApi.md#getModelJSON) | **GET** /app/rest/process-definitions/{processDefinitionId}/model-json| Export a process definition model to JSON
+*ActivitiPublicRestApi.modelJsonBpmnApi* | [**getModelJSONForProcessDefinition**](docs/ModelJsonBpmnApi.md#getModelJSONForProcessDefinition) | **GET** /app/rest/process-instances/{processInstanceId}/model-json | Export a process instances model to JSON
 *ActivitiPublicRestApi.ModelsApi* | [**createModel**](docs/ModelsApi.md#createModel) | **POST** /api/enterprise/models | To create a new model
 *ActivitiPublicRestApi.ModelsApi* | [**deleteModel**](docs/ModelsApi.md#deleteModel) | **DELETE** /api/enterprise/models/{modelId} | Delete a model
 *ActivitiPublicRestApi.ModelsApi* | [**duplicateModel**](docs/ModelsApi.md#duplicateModel) | **POST** /api/enterprise/models/{modelId}/clone | To duplicate an existing model
