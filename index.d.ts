@@ -1405,7 +1405,7 @@ declare namespace AlfrescoApi {
         pagination?: Pagination;
     }
 
-    export class QueryNode {
+    export class QueryBody {
         constructor(obj?: any);
 
         query?: RequestQuery;
