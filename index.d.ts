@@ -1405,6 +1405,114 @@ declare namespace AlfrescoApi {
         pagination?: Pagination;
     }
 
+    export class QueryNode {
+        constructor(obj?: any);
+
+        query?: RequestQuery;
+        paging?: RequestPagination;
+        include?: Array<string>;
+        fields?: Array<string>;
+        sort?: Array<any>;
+        templates?: Array<any>;
+        defaults?: RequestDefaults;
+        filterQueries?: Array<any>;
+        facetQueries?: Array<any>;
+        facetFields?: RequestFacetFields;
+        spellcheck?: RequestSpellcheck;
+        scope?: RequestScope;
+        limits?: RequestLimits;
+        highlight?: RequestHighlight;
+    }
+
+    export class RequestHighlightFields {
+        constructor(obj?: any);
+
+        field?: string;
+        snippetCount?: number;
+        fragmentSize?: number;
+        mergeContiguous?: boolean;
+        prefix?: string;
+        postfix?: string;
+    }
+
+    export class RequestHighlight {
+        constructor(obj?: any);
+
+        prefix?: string;
+        postfix?: string;
+        snippetCount?: number;
+        fragmentSize?: number;
+        maxAnalyzedChars?: number;
+        mergeContiguous?: boolean;
+        usePhraseHighlighter?: boolean;
+        fields: Array<RequestHighlightFields>;
+    }
+
+    export class RequestLimits {
+        constructor(obj?: any);
+
+        permissionEvaluationTime?: number;
+        permissionEvaluationCount?: number;
+    }
+
+    export class RequestScope {
+        constructor(obj?: any);
+
+        locations?: string;
+    }
+
+    export class RequestSpellcheck {
+        constructor(obj?: any);
+
+        query?: string;
+    }
+
+    export class RequestFacetFields {
+        constructor(obj?: any);
+
+        facets?: Array<RequestFacetFieldsFacets>;
+    }
+
+    export class RequestFacetFieldsFacets {
+        constructor(obj?: any);
+
+        field?: string;
+        prefix?: string;
+        sort?: string;
+        method?: string;
+        missing?: boolean;
+        limit?: number;
+        offset?: number;
+        mincount?: number;
+        facetEnumCacheMinDf?: number;
+        excludeFilters?: Array<string>;
+    }
+
+    export class RequestQuery {
+        constructor(obj?: any);
+
+        language?: string;
+        userQuery?: string;
+        query?: string;
+    }
+
+    export class RequestPagination {
+        constructor(obj?: any);
+
+        maxItems?: string;
+        skipCount?: string;
+    }
+
+    export class RequestDefaults {
+        constructor(obj?: any);
+
+        textAttributes?: Array<string>;
+        defaultFTSOperator?: string;
+        defaultFTSFieldOperator?: string;
+        namespace?: string;
+        defaultFieldName?: string;
+    }
+
     export class Rating {
         constructor(obj?: any);
 
