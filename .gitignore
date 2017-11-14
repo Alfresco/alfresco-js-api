@@ -11,6 +11,5 @@ target
 *.tgz
 *.DS_Store
 /package/
-/scripts/
 /dist/
 .history
