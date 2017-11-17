@@ -2201,10 +2201,11 @@ declare namespace AlfrescoApi {
         getProcessInstanceContent(processInstanceId?: string): Promise<any>;
 
         getRawContent(contentId?: number): Promise<any>;
+        getContentPreview(contentId?: number): Promise<any>;
 
         getRawContentUrl(contentId?: number): string;
 
-        getContentThumbnailUrl(contentId?: number): string;
+        getContentThumbnail(contentId?: number): Promise<any>;
 
         getRelatedContentForProcessInstance(processInstanceId?: string, isRelated?: boolean): Promise<any>;
 
