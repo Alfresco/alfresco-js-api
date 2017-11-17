@@ -20,6 +20,8 @@
 - [Update superagent to 3.7.0 ](https://issues.alfresco.com/jira/browse/ADF-1833)
 - [NodesApi.getNodeChildren has wrong return type](https://issues.alfresco.com/jira/browse/ADF-1860)
 - [diagrams.service.ts is not using the alfresco-js-api](https://issues.alfresco.com/jira/browse/ADF-1800)
+- [getContentThumbnailUrl returns file data instead or URL](https://issues.alfresco.com/jira/browse/ADF-1962)
+- [ContentApi is missing the preview rendition API](https://issues.alfresco.com/jira/browse/ADF-1963)
 
 # [1.9.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.9.0) (09-10-2017)
 

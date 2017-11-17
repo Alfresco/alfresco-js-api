@@ -491,6 +491,40 @@
       );
     }
 
+    this.getContentPreview = function(contentId) {
+      var postBody = null;
+
+      // verify the required parameter 'contentId' is set
+      if (contentId == undefined || contentId == null) {
+        throw "Missing the required parameter 'contentId' when calling getRawContent";
+      }
+
+
+      var pathParams = {
+        'contentId': contentId
+      };
+      var queryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = [];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = Object;
+      var contextRoot = null;
+      var responseType = 'blob';
+
+      return this.apiClient.callApi(
+        '/api/enterprise/content/{contentId}/rendition/preview', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, contextRoot, responseType
+      );
+    }
+
+
     /**
      * Get content Raw URL for the given contentId
      * @param {Integer} contentId contentId
@@ -500,10 +534,10 @@
     }
 
     /**
-     * Get thumbnail URL for the given contentId
+     * Get thumbnail for the given contentId
      * @param {Integer} contentId contentId
      */
-    this.getContentThumbnailUrl = function(contentId) {
+    this.getContentThumbnail = function(contentId) {
       var postBody = null;
 
       // verify the required parameter 'contentId' is set
