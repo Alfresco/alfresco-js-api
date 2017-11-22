@@ -156,7 +156,7 @@
             var returnType = ObjectNode;
 
             return this.apiClient.callApi(
-              '/activiti-app/app/rest/process-definitions/{processDefinitionId}/model-json', 'GET',
+              '/app/rest/process-definitions/{processDefinitionId}/model-json', 'GET',
                 pathParams, queryParams, headerParams, formParams, postBody,
                 authNames, contentTypes, accepts, returnType
             );
@@ -195,7 +195,7 @@
             var returnType = ObjectNode;
 
             return this.apiClient.callApi(
-              '/activiti-app/app/rest/process-instances/{processInstanceId}/model-json', 'GET',
+              '/app/rest/process-instances/{processInstanceId}/model-json', 'GET',
                 pathParams, queryParams, headerParams, formParams, postBody,
                 authNames, contentTypes, accepts, returnType
             );
