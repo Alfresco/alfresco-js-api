@@ -11,6 +11,6 @@ target
 *.tgz
 *.DS_Store
 /package/
-/scripts/
 /dist/
 .history
+package-lock.json

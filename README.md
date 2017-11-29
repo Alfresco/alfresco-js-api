@@ -38,52 +38,111 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
 - [Authentication JS-API](#authentication-js-api)
   * [Login](#login)
     + [Login with Username and Password BPM and ECM](#login-with-username-and-password-bpm-and-ecm)
+      - [Example](#example)
     + [Login with Username and Password ECM](#login-with-username-and-password-ecm)
+      - [Example](#example-1)
     + [Login with ticket](#login-with-ticket)
       - [Login with ticket ECM](#login-with-ticket-ecm)
+      - [Example](#example-2)
       - [Login with ticket ECM/BPM as parameter in the constructor](#login-with-ticket-ecmbpm-as-parameter-in-the-constructor)
+        * [Example](#example-3)
     + [Login with Username and Password BPM](#login-with-username-and-password-bpm)
+    + [Example](#example-4)
     + [Login with OAUTH2 Alfresco authorization server](#login-with-oauth2-alfresco-authorization-server)
+    + [Example](#example-5)
+    + [Example](#example-6)
   * [Logout](#logout)
+    + [Example](#example-7)
   * [isLoggedIn](#isloggedin)
+    + [Example](#example-8)
   * [Get tickets](#get-tickets)
   * [Events login/logout](#events-loginlogout)
+    + [Example](#example-9)
 - [ECM](#ecm)
   * [Get Node  content](#get-node--content)
+    + [Example](#example-10)
   * [Get File or Folder Info](#get-file-or-folder-info)
+    + [Example](#example-11)
   * [Get Folder Children Info](#get-folder-children-info)
+    + [Example](#example-12)
   * [Create Folder](#create-folder)
+    + [Example](#example-13)
+    + [Example](#example-14)
   * [Upload File](#upload-file)
+    + [Example](#example-15)
   * [Events Upload File](#events-upload-file)
+    + [Example](#example-16)
   * [Delete File or Folder](#delete-file-or-folder)
+    + [Example](#example-17)
   * [Delete File or Folder Permanent](#delete-file-or-folder-permanent)
+    + [Example](#example-18)
   * [Get thumbnail Url](#get-thumbnail-url)
+    + [Example](#example-19)
   * [Get preview Url](#get-preview-url)
+    + [Example](#example-20)
   * [Get content Url](#get-content-url)
+    + [Example](#example-21)
   * [Custom web scripts call](#custom-web-scripts-call)
+    + [Parameters](#parameters)
 - [BPM](#bpm)
   * [Task Api](#task-api)
     + [List Task](#list-task)
+      - [Parameters](#parameters-1)
+      - [Example](#example-22)
     + [Get Task](#get-task)
+      - [Parameters](#parameters-2)
+      - [Example](#example-23)
     + [Filter Task](#filter-task)
+      - [Parameters](#parameters-3)
+      - [Example](#example-24)
     + [Complete Task](#complete-task)
+      - [Parameters](#parameters-4)
+      - [Example](#example-25)
     + [Get Task Form](#get-task-form)
+      - [Parameters](#parameters-5)
+      - [Example](#example-26)
     + [Complete Task Form](#complete-task-form)
+      - [Parameters](#parameters-6)
+      - [Example](#example-27)
   * [Process Api](#process-api)
     + [Get Process Instances](#get-process-instances)
+      - [Parameters](#parameters-7)
+      - [Example](#example-28)
   * [Models Api](#models-api)
     + [Get Model](#get-model)
+      - [Parameters](#parameters-8)
+      - [Example](#example-29)
   * [Report Api](#report-api)
     + [Create default Reports](#create-default-reports)
+      - [Parameters](#parameters-9)
+      - [Example](#example-30)
     + [Get Reports](#get-reports)
+      - [Parameters](#parameters-10)
+      - [Example](#example-31)
     + [Report Params](#report-params)
+      - [Parameters](#parameters-11)
+      - [Example](#example-32)
   * [Report Process Definitions](#report-process-definitions)
+      - [Parameters](#parameters-12)
+      - [Example](#example-33)
   * [Tasks of process definition](#tasks-of-process-definition)
+      - [Parameters](#parameters-13)
+      - [Example](#example-34)
   * [Generate reports](#generate-reports)
+      - [Parameters](#parameters-14)
+      - [Example](#example-35)
   * [Update report details](#update-report-details)
+      - [Parameters](#parameters-15)
+      - [Example](#example-36)
   * [Export to csv](#export-to-csv)
+      - [Parameters](#parameters-16)
+      - [Example](#example-37)
   * [Save Report](#save-report)
+      - [Parameters](#parameters-17)
+      - [Example](#example-38)
   * [Delete report](#delete-report)
+      - [Parameters](#parameters-18)
+      - [Example](#example-39)
 - [Development](#development)
 - [Release History](#release-history)
 
@@ -159,7 +218,7 @@ disableCsrf| To disable CSRF Token to be submitted. Only for Activiti call.| fal
 
 ### Login with Username and Password BPM and ECM
 
-####Example
+#### Example
 ```javascript
 this.alfrescoJsApi = new AlfrescoApi({ provider:'ALL' });
 
@@ -173,7 +232,7 @@ this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
 
 ### Login with Username and Password ECM
 
-####Example
+#### Example
 ```javascript
 this.alfrescoJsApi = new AlfrescoApi();
 
@@ -196,7 +255,7 @@ If you already know thw ticket when you invoke the constructor you can pass it a
 
 This authentication validate also the ticket against the server
 
-####Example
+#### Example
 ```javascript
 var ticket = 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
 
@@ -211,7 +270,7 @@ this.alfrescoJsApi.loginTicket(ticket).then(function (data) {
 
 With this authentication the ticket is not validated against the server
 
-#####Example
+##### Example
 ```javascript
 
 //Login ticket ECM
@@ -226,7 +285,7 @@ this.alfrescoJsApi = new AlfrescoApi({ ticketEcm:'TICKET_4479f4d3bb155195879bfbb
 
 ### Login with Username and Password BPM
 
-###Example
+### Example
 ```javascript
 this.alfrescoJsApi = new AlfrescoApi({ provider:'BPM' });
 
@@ -241,7 +300,7 @@ this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
 
 If you have installed the Alfresco authorization server you can login with this option.
 
-###Example
+### Example
 ```javascript
 this.alfrescoJsApi = new AlfrescoApi({
         oauth2: {
@@ -262,7 +321,7 @@ this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
 
 After the login if you want refresh your token you can use this call
 
-###Example
+### Example
 
 ```javascript
 this.alfrescoJsApi.refreshToken()then(function (data) {
@@ -276,7 +335,7 @@ this.alfrescoJsApi.refreshToken()then(function (data) {
 
 logout()
 
-###Example
+### Example
 
 ```javascript
 
@@ -294,7 +353,7 @@ isLoggedIn()
 
 > return true if you are logged in false if you are not.
 
-###Example
+### Example
 
 ```javascript
 
@@ -336,7 +395,7 @@ getTicketBpm()
 * success (If this event is triggered the login was success you can use this event instead the login promise)
 * logout (If this event is triggered the client is successfully logout)
 
-###Example
+### Example
 
 ```javascript
 
@@ -364,7 +423,7 @@ getFileContent(nodeId, opts)
 
 >Returns the file content of the node with identifier **nodeId**.
 
- ###Example
+ ### Example
 ```javascript
 
 var nodeId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
@@ -388,7 +447,7 @@ getNodeInfo(fileOrFolderId, opts)
 
 >Get information for the File/Folder with the identifier nodeId. The identifier of a node. You can also use one of these well-known aliases: -my-   ,  -shared-   or   -root-  as NodeId
 
-###Example
+### Example
 
 ```javascript
 
@@ -410,7 +469,7 @@ You can use the include parameter to return additional information.
 returns a promise with the Info about the children of the node if resolved and {error} if rejected.
 You can also use one of these well-known aliases: -my-   ,  -shared-   or   -root-  as NodeId
 
-###Example
+### Example
 
 ```javascript
 
@@ -430,7 +489,7 @@ createFolder(name, relativePath, nodeIdParentFolder, opts)
 >createFolder return a promise that is resolved if the folder is created and {error} if rejected.
 You can also use one of these well-known aliases: -my-   ,  -shared-   or   -root-  as nodeIdParentFolder
 
-###Example
+### Example
 
 ```javascript
 
@@ -464,7 +523,7 @@ createFolderAutoRename(name, relativePath, nodeIdParentFolder, opts)
 >is the same of createFolder(name, relativePath, nodeId, {autoRename: true}) is just syntactic sugar
  You can also use one of these well-known aliases: -my-   ,  -shared-   or   -root-  as nodeIdParentFolder
 
-###Example
+### Example
 
 ```javascript
 
@@ -488,7 +547,7 @@ File Definition are generally retrieved from a FileList object returned as a res
 *Node File Definition
 File Definition are generally retrieved from a read Stram
 
-###Example
+### Example
 
 ```javascript
 
@@ -580,7 +639,7 @@ promiseUpload.abort();
 * error
 * unauthorized
 
-###Example
+### Example
 
 ```javascript
 var fs = require('fs');
@@ -614,7 +673,7 @@ deleteNode(fileOrFolderId)
 >Delete File/Folder with the identifier nodeId, if the nodeId is a folder, then its children are also deleted
 Deleted nodes move to the trash bin is still possible to recover it
 
-###Example
+### Example
 
 ```javascript
 
@@ -635,7 +694,7 @@ deleteNodePermanent(fileOrFolderId)
 >Delete File/Folder with the identifier nodeId, if the nodeId is a folder, then its children are also deleted
 If Deleted Permanent is used will not be possible recover the files
 
-###Example
+### Example
 
 ```javascript
 
@@ -653,7 +712,7 @@ this.alfrescoJsApi.nodes.deleteNodePermanent(fileOrFolderId).then(function (data
 
 getDocumentThumbnailUrl(documentId)
 
-###Example
+### Example
 
 ```javascript
 
@@ -665,7 +724,7 @@ var thumbnailUrl = this.alfrescoJsApi.content.getDocumentThumbnailUrl('1a0b110f-
 
 getDocumentPreviewUrl(documentId)
 
-###Example
+### Example
 
 ```javascript
 
@@ -677,7 +736,7 @@ var previewUrl = this.alfrescoJsApi.content.getDocumentPreviewUrl('1a0b110f-1e09
 
 getContentUrl(documentId)
 
-###Example
+### Example
 
 ```javascript
 
@@ -694,7 +753,7 @@ executeWebScript(httpMethod, scriptPath, scriptArgs, contextRoot, servicePath)
 >  Anatomy of a Web Script URI  **http(s)://(host):(port)/(contextPath)/(servicePath)/(scriptPath)?(scriptArgs)**
 A Web Script is simply a service bound to a URI which responds to HTTP methods such as GET, POST, PUT and DELETE. While using the same underlying code, there are broadly two kinds of Web Scripts.
 
-###Parameters
+### Parameters
 Name | Description
 ------------- | -------------
 **httpMethod**  | possible value GET, POST, PUT and DELETE
@@ -747,13 +806,13 @@ listTasks(requestNode)
 
 >return a list of task based on the requestNode query
 
-####Parameters
+#### Parameters
 
 Name | Type | Description
 ------------- | ------------- | -------------
  **requestNode** | [**Representation**](/src/alfresco-activiti-rest-api/docs/TaskQueryRequestRepresentation.md)| requestNode
 
-####Example
+#### Example
 
 ```javascript
 var requestTasks = new this.alfrescoJsApi.activiti.TaskQueryRequestRepresentation();
@@ -771,13 +830,13 @@ getTask(taskId)
 
 >return the [**TaskRepresentation**](/src/alfresco-activiti-rest-api/docs/TaskRepresentation.md)  of single task by id
 
-####Parameters
+#### Parameters
 
 Name | Type | Description
 ------------- | ------------- | -------------
  **taskId** | **String**| taskId
 
-####Example
+#### Example
 
 ```javascript
 
@@ -796,14 +855,14 @@ filterTasks(requestTasks)
 
 >return the [**ResultListDataRepresentation**](/src/alfresco-activiti-rest-api/docs/ResultListDataRepresentation.md) that is a list of all the task filered
 
-####Parameters
+#### Parameters
 
 Name | Type | Description
 ------------- | ------------- | -------------
  **requestTasks** | [**TaskFilterRequestRepresentation**](/src/alfresco-activiti-rest-api/docs/TaskFilterRequestRepresentation.md)| requestTasks
 
 
-####Example
+#### Example
 
 ```javascript
 
@@ -823,13 +882,13 @@ completeTask(taskId)
 
 >To complete a task (standalone or without a task form) :
 
-####Parameters
+#### Parameters
 
 Name | Type | Description
 ------------- | ------------- | -------------
  **taskId** | **String**| taskId
 
-####Example
+#### Example
 
 ```javascript
 
@@ -847,13 +906,13 @@ getTaskForm(taskId)
 
 >Retrieve the Task Form representation. [**FormDefinitionRepresentation**](/src/alfresco-activiti-rest-api/docs/FormDefinitionRepresentation.md)
 
-####Parameters
+#### Parameters
 
 Name | Type | Description
 ------------- | ------------- | -------------
  **taskId** | **String**| taskId
 
-####Example
+#### Example
 
 ```javascript
 
@@ -872,14 +931,14 @@ completeTaskForm(taskId, completeTaskFormRepresentation)
 
 >Complete a Task Form
 
-####Parameters
+#### Parameters
 
 Name | Type | Description
 ------------- | ------------- | -------------
  **taskId** | **String**| taskId
  **completeTaskFormRepresentation** | [**CompleteFormRepresentation**](/src/alfresco-activiti-rest-api/docs/CompleteFormRepresentation.md)| completeTaskFormRepresentation
 
-####Example
+#### Example
 
 ```javascript
 
@@ -903,13 +962,13 @@ getProcessInstances(requestNode)
 
 >Retrieve a list of process instances [**ResultListDataRepresentation**](/src/alfresco-activiti-rest-api/docs/ResultListDataRepresentation.md)
 
-####Parameters
+#### Parameters
 
 Name | Type | Description
 ------------- | ------------- | -------------
  **requestNode** | [**ProcessFilterRequestRepresentation**](/src/alfresco-activiti-rest-api/docs/ProcessFilterRequestRepresentation.md)| requestNode
 
-####Example
+#### Example
 
 ```javascript
 var requestNode = new this.alfrescoJsApi.activiti.ProcessFilterRequestRepresentation();
@@ -947,14 +1006,14 @@ getModel(modelId, opts)
 
 >To retrieve details about a particular model (process, form, decision rule or app) return a [**ModelRepresentation**](ModelRepresentation.md)
 
-####Parameters
+#### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **modelId** | **Integer**| modelId |
  **includePermissions** | **Boolean**| includePermissions | [optional]
 
-####Example
+#### Example
 ```javascript
 
 var opts = {
@@ -979,11 +1038,11 @@ createDefaultReports()
 
 >Create the default reports
 
-####Parameters
+#### Parameters
 
 No parameters required.
 
-####Example
+#### Example
 
 ```javascript
 
@@ -996,11 +1055,11 @@ getReportList()
 
 > Retrieve the available report list
 
-####Parameters
+#### Parameters
 
 No parameters required.
 
-####Example
+#### Example
 
 ```javascript
 
@@ -1013,13 +1072,13 @@ getReportParams(reportId)
 
 > Retrieve the parameters referring to the reportId.
 
-####Parameters
+#### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **reportId** | **String**| reportId |
+Name | Type | Description  | Notes|
+------------- | ------------- | ------------- | -------------|
+ **reportId** | **String**| reportId ||
 
-####Example
+#### Example
 
 ```javascript
 
@@ -1034,11 +1093,11 @@ getProcessDefinitions()
 
 > Retrieve the process definition list for all the apps.
 
-####Parameters
+#### Parameters
 
 No parameters required.
 
-####Example
+#### Example
 
 ```javascript
 
@@ -1051,13 +1110,13 @@ getTasksByProcessDefinitionId(reportId, processDefinitionId)
 
 > Retrieves all tasks that refer to the processDefinitionId
 
-####Parameters
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **reportId** | **String**| reportId |
- **processDefinitionId** | **String**| process definition id |
+#### Parameters
+Name | Type | Description  | Notes|
+------------- | ------------- | ------------- | -------------|
+ **reportId** | **String**| reportId ||
+ **processDefinitionId** | **String**| process definition id ||
 
-####Example
+#### Example
 
 ```javascript
 
@@ -1073,13 +1132,13 @@ getReportsByParams(reportId, paramsQuery)
 
 > Generate the reports based on the input parameters
 
-####Parameters
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **reportId** | **String**| reportId |
- **paramsQuery** | **Object**| Query parameters |
+#### Parameters
+Name | Type | Description  | Notes|
+------------- | ------------- | ------------- | -------------|
+ **reportId** | **String**| reportId ||
+ **paramsQuery** | **Object**| Query parameters ||
 
-####Example
+#### Example
 
 ```javascript
 
@@ -1094,13 +1153,13 @@ updateReport(reportId, name)
 
 > Update the report details
 
-####Parameters
+#### Parameters
 Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **reportId** | **String**| reportId |
- **name** | **String**| The report name |
+------------- | ------------- | ------------- | -------------|
+ **reportId** | **String**| reportId ||
+ **name** | **String**| The report name ||
 
-####Example
+#### Example
 
 ```javascript
 
@@ -1115,13 +1174,13 @@ exportToCsv(reportId, queryParms)
 
 > Export a report as csv
 
-####Parameters
+#### Parameters
 Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **reportId** | **String**| reportId |
- **queryParms** | **Object**| Query parameters |
+------------- | ------------- | ------------- | -------------|
+ **reportId** | **String**| reportId ||
+ **queryParms** | **Object**| Query parameters ||
 
-####Example
+#### Example
 ```javascript
 
 var reportId = "1"; // String | reportId
@@ -1146,13 +1205,13 @@ saveReport(reportId, queryParams)
 
 > Save a report
 
-####Parameters
+#### Parameters
 Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **reportId** | **String**| reportId |
- **queryParms** | **Object**| Query parameters |
+------------- | ------------- | ------------- | -------------|
+ **reportId** | **String**| reportId ||
+ **queryParms** | **Object**| Query parameters ||
 
-####Example
+#### Example
 ```javascript
 
 var reportId = "1"; // String | reportId
@@ -1176,12 +1235,12 @@ deleteReport(reportId)
 
 > Delete a report
 
-####Parameters
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **reportId** | **String**| reportId |
+#### Parameters
+Name | Type | Description  | Notes |
+------------- | ------------- | ------------- | ------------- |
+ **reportId** | **String**| reportId | |
 
-####Example
+#### Example
 ```javascript
 
 var reportId = "1"; // String | reportId

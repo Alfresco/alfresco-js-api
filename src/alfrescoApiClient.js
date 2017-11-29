@@ -53,6 +53,10 @@ class AlfrescoApiClient extends ApiClient {
         var request = this.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
             contentTypes, accepts, responseType, eventEmitter);
 
+        if (returnType === 'Binary') {
+            request = request.buffer(true).parse(superagent.parse['application/octet-stream']);
+        }
+
         this.promise = new Promise((resolve, reject) => {
             request.end((error, response) => {
                 if (error) {

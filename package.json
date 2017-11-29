@@ -1,6 +1,6 @@
 {
   "name": "alfresco-js-api",
-  "version": "1.9.0",
+  "version": "2.0.0",
   "description": "JavaScript client library for the Alfresco REST API",
   "author": "Alfresco Software, Ltd.",
   "main": "main.js",
@@ -58,7 +58,7 @@
     "rimraf": "^2.5.2",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
-    "tslint": "5.4.3",
+    "tslint": "5.7.0",
     "typescript": "^2.4.0",
     "watchify": "^3.7.0",
     "webpack": "^2.2.1"

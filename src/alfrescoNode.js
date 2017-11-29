@@ -7,7 +7,7 @@ class AlfrescoNode extends AlfrescoCoreRestApi.NodesApi {
     /**
      * Get Info about file or folder by given nodeId
      * Minimal information for each child is returned by default.
-     * You can use the include parameter to return addtional information.
+     * You can use the include parameter to return additional information.
      *
      * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases: -my- | -shared- | -root-
      * @param {Object} opts
@@ -58,7 +58,7 @@ class AlfrescoNode extends AlfrescoCoreRestApi.NodesApi {
     }
 
     /**
-     * Create a folder and autorename it if already exist
+     * Create a folder and auto-rename it if already exist
      *
      * @param {String} name - folder name
      * @param {String} relativePath - The relativePath specifies the folder structure to create relative to the node identified by nodeId.

@@ -3,6 +3,7 @@ var mockAlfrescoApi = {};
 //Ecm Mock
 mockAlfrescoApi.Auth = require('./alfresco/authResponseMock.js');
 mockAlfrescoApi.Comment = require('./alfresco/CommentMock.js');
+mockAlfrescoApi.Version = require('./alfresco/VersionMock.js');
 mockAlfrescoApi.Node = require('./alfresco/nodeMock.js');
 mockAlfrescoApi.Upload = require('./alfresco/uploadMock.js');
 mockAlfrescoApi.WebScript = require('./alfresco/webScriptMock.js');
@@ -12,6 +13,7 @@ mockAlfrescoApi.Rendition = require('./alfresco/renditionMock.js');
 mockAlfrescoApi.CustomModel = require('./alfresco/customModelMock.js');
 mockAlfrescoApi.Discovery = require('./alfresco/discoveryMock.js');
 mockAlfrescoApi.Search = require('./alfresco/searchMock.js');
+mockAlfrescoApi.PeopleApi = require('./alfresco/peopleMock.js');
 
 
 //Bpm Mock

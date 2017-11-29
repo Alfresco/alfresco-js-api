@@ -13,6 +13,7 @@ Method | HTTP request | Description
 [**getFavoriteSite**](PeopleApi.md#getFavoriteSite) | **GET** /people/{personId}/favorite-sites/{siteId} | Get a favorite site
 [**getFavoriteSites**](PeopleApi.md#getFavoriteSites) | **GET** /people/{personId}/favorite-sites | Get favorite sites
 [**getFavorites**](PeopleApi.md#getFavorites) | **GET** /people/{personId}/favorites | Get favorites
+[**addPerson**](PeopleApi.md#addPerson) | **POST** /people | create a person
 [**getPerson**](PeopleApi.md#getPerson) | **GET** /people/{personId} | Get a person
 [**getPersonNetwork**](PeopleApi.md#getPersonNetwork) | **GET** /people/{personId}/networks/{networkId} | Get network information
 [**getPersonNetworks**](PeopleApi.md#getPersonNetworks) | **GET** /people/{personId}/networks | Get network membership for a person
@@ -645,7 +646,58 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json<a name="getPerson"></a>
+
+# **addPerson**
+> PersonEntry addPerson(person, opts)
+
+Add a person
+
+Create a person.
+If applicable, the given person's login access can also be optionally disabled.
+You must have admin rights to create a person.
+You can set custom properties when you create a person:
+
+### Example
+```javascript
+
+var personBodyCreate = new this.alfrescoJsApi.core.PersonBodyCreate();
+
+personBodyCreate.id = 'chewbe';
+personBodyCreate.email = 'chewbe@millenniumfalcon.com';
+personBodyCreate.lastName = 'Chewbe';
+personBodyCreate.firstName = 'chewbacca';
+personBodyCreate.password = 'Rrrrrrrghghghghgh';
+
+this.alfrescoJsApi.core.peopleApi.addPerson(personBodyCreate).then(function () {
+    console.log('Person created');
+}, function (error) {
+    console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **person** | [**[PersonBodyCreate]**](PersonBodyCreate.md)  The person object that you want create |
+
+
+### Return type
+
+[**PersonEntry**](PersonEntry.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
+
+
 
 <a name="getPersonNetwork"></a>
 # **getPersonNetwork**
