@@ -721,7 +721,7 @@ declare namespace AlfrescoApi {
     }
 
     export interface NodeAssocMinimalEntry {
-        entry?:NodeAssocMinimal;
+        entry?: NodeAssocMinimal;
     }
 
     export interface NodeAssocMinimal {
@@ -732,7 +732,7 @@ declare namespace AlfrescoApi {
         isFolder?: Boolean;
         isFile?: Boolean;
         modifiedAt?: Date;
-        modifiedByUser?:UserInfo;
+        modifiedByUser?: UserInfo;
         createdAt?: Date;
         createdByUser?: UserInfo;
         content?: ContentInfo;
@@ -740,7 +740,7 @@ declare namespace AlfrescoApi {
     }
 
     export interface AssocInfo {
-        assocType?:String;
+        assocType?: String;
     }
 
     export interface TagsApi {
@@ -2186,7 +2186,7 @@ declare namespace AlfrescoApi {
     export interface ContentApi {
         new(client?: ApiClient): ContentApi;
 
-        createRelatedContentOnProcessInstance(processInstanceId?: string, relatedContent?: RelatedContentRepresentation, opts?:any): Promise<RelatedContentRepresentation>;
+        createRelatedContentOnProcessInstance(processInstanceId?: string, relatedContent?: RelatedContentRepresentation, opts?: any): Promise<RelatedContentRepresentation>;
 
         createRelatedContentOnTask(taskId?: string, relatedContent?: RelatedContentRepresentation, opts?: { isRelatedContent?: boolean }): Promise<RelatedContentRepresentation>;
 
@@ -2201,6 +2201,7 @@ declare namespace AlfrescoApi {
         getProcessInstanceContent(processInstanceId?: string): Promise<any>;
 
         getRawContent(contentId?: number): Promise<any>;
+
         getContentPreview(contentId?: number): Promise<any>;
 
         getRawContentUrl(contentId?: number): string;
