@@ -32,6 +32,10 @@ declare class AlfrescoApi {
     Auth: AlfrescoApi.Auth;
     Core: AlfrescoApi.Core;
     Discovery: AlfrescoApi.Discovery;
+    Search: AlfrescoApi.Search;
+    GsCore: AlfrescoApi.GsCore;
+    GsClassification: AlfrescoApi.GsClassification;
+
 
     bpmAuth: AlfrescoApi.BpmAuthApi;
     ecmAuth: AlfrescoApi.EcmAuthApi;
@@ -40,8 +44,9 @@ declare class AlfrescoApi {
     activiti: AlfrescoApi.Activiti;
     core: AlfrescoApi.Core;
     discovery: AlfrescoApi.Discovery;
-
-    search: any;
+    search: AlfrescoApi.Search;
+    gsCore: AlfrescoApi.GsCore;
+    gsClassification: AlfrescoApi.GsClassification;
     nodes: AlfrescoApi.NodesApi;
     content: AlfrescoApi.ContentApi;
     upload: AlfrescoApi.UploadApi;
@@ -49,9 +54,6 @@ declare class AlfrescoApi {
 
     ecmClient: AlfrescoApi.EcmClient;
     bpmClient: AlfrescoApi.BpmClient;
-    searchClient: AlfrescoApi.SearchClient;
-    ecmPrivateClient: AlfrescoApi.EcmPrivateClient;
-
 }
 
 declare namespace AlfrescoApi {
@@ -90,6 +92,9 @@ declare namespace AlfrescoApi {
         Auth: Auth;
         Core: Core;
         Discovery: Discovery;
+        Search: Search;
+        GsCore: GsCore;
+        GsClassification: GsClassification;
 
         bpmAuth: BpmAuthApi;
         ecmAuth: EcmAuthApi;
@@ -98,8 +103,10 @@ declare namespace AlfrescoApi {
         activiti: Activiti;
         core: Core;
         discovery: Discovery;
-
         search: any;
+        gsCore: GsCore;
+        gsClassification: GsClassification;
+
         nodes: NodesApi;
         content: ContentApi;
         upload: UploadApi;
@@ -107,9 +114,6 @@ declare namespace AlfrescoApi {
 
         ecmClient: EcmClient;
         bpmClient: BpmClient;
-        searchClient: SearchClient;
-        ecmPrivateClient: EcmPrivateClient;
-
     }
 
     export class FolderEntity {

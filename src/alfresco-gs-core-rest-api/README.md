@@ -1,0 +1,131 @@
+# alfresco-governance-services-rest-api
+
+AlfrescoGovernanceServicesRestApi - JavaScript client for alfresco-governance-services-rest-api
+**GS Core API**
+Provides access to the core features of Alfresco Governance Services
+
+## Documentation for API Endpoints
+
+All URIs are relative to *https://localhost/alfresco/api/-default-/public/gs/versions/1*
+
+Class | Method | HTTP request | Description
+------------ | ------------- | ------------- | -------------
+*AlfrescoGovernanceServicesRestApi.FileplansApi* | [**createFilePlanCategories**](docs/FileplansApi.md#createFilePlanCategories) | **POST** /file-plans/{filePlanId}/categories | Create record categories for a file plan
+*AlfrescoGovernanceServicesRestApi.FileplansApi* | [**getFilePlan**](docs/FileplansApi.md#getFilePlan) | **GET** /file-plans/{filePlanId} | Get a file plan
+*AlfrescoGovernanceServicesRestApi.FileplansApi* | [**getFilePlanCategories**](docs/FileplansApi.md#getFilePlanCategories) | **GET** /file-plans/{filePlanId}/categories | List file plans&#39;s children
+*AlfrescoGovernanceServicesRestApi.FileplansApi* | [**updateFilePlan**](docs/FileplansApi.md#updateFilePlan) | **PUT** /file-plans/{filePlanId} | Update a file plan
+*AlfrescoGovernanceServicesRestApi.FilesApi* | [**declareRecord**](docs/FilesApi.md#declareRecord) | **POST** /files/{fileId}/declare | Declare as record
+*AlfrescoGovernanceServicesRestApi.GssitesApi* | [**createRMSite**](docs/GssitesApi.md#createRMSite) | **POST** /gs-sites | Create the Records Management (RM) site
+*AlfrescoGovernanceServicesRestApi.GssitesApi* | [**deleteRMSite**](docs/GssitesApi.md#deleteRMSite) | **DELETE** /gs-sites/rm | Delete the Records Management (RM) site
+*AlfrescoGovernanceServicesRestApi.GssitesApi* | [**getRMSite**](docs/GssitesApi.md#getRMSite) | **GET** /gs-sites/rm | Get the Records Management (RM) site
+*AlfrescoGovernanceServicesRestApi.GssitesApi* | [**updateRMSite**](docs/GssitesApi.md#updateRMSite) | **PUT** /gs-sites/rm | Update the Records Management (RM) site
+*AlfrescoGovernanceServicesRestApi.RecordcategoriesApi* | [**createRecordCategoryChild**](docs/RecordcategoriesApi.md#createRecordCategoryChild) | **POST** /record-categories/{recordCategoryId}/children | Create a record category or a record folder
+*AlfrescoGovernanceServicesRestApi.RecordcategoriesApi* | [**deleteRecordCategory**](docs/RecordcategoriesApi.md#deleteRecordCategory) | **DELETE** /record-categories/{recordCategoryId} | Delete a record category
+*AlfrescoGovernanceServicesRestApi.RecordcategoriesApi* | [**getRecordCategory**](docs/RecordcategoriesApi.md#getRecordCategory) | **GET** /record-categories/{recordCategoryId} | Get a record category
+*AlfrescoGovernanceServicesRestApi.RecordcategoriesApi* | [**listRecordCategoryChildren**](docs/RecordcategoriesApi.md#listRecordCategoryChildren) | **GET** /record-categories/{recordCategoryId}/children | List record category&#39;s children
+*AlfrescoGovernanceServicesRestApi.RecordcategoriesApi* | [**updateRecordCategory**](docs/RecordcategoriesApi.md#updateRecordCategory) | **PUT** /record-categories/{recordCategoryId} | Update a record category
+*AlfrescoGovernanceServicesRestApi.RecordfoldersApi* | [**createRecordFolderChild**](docs/RecordfoldersApi.md#createRecordFolderChild) | **POST** /record-folders/{recordFolderId}/records | Create a record
+*AlfrescoGovernanceServicesRestApi.RecordfoldersApi* | [**deleteRecordFolder**](docs/RecordfoldersApi.md#deleteRecordFolder) | **DELETE** /record-folders/{recordFolderId} | Delete a record folder
+*AlfrescoGovernanceServicesRestApi.RecordfoldersApi* | [**getRecordFolder**](docs/RecordfoldersApi.md#getRecordFolder) | **GET** /record-folders/{recordFolderId} | Get a record folder
+*AlfrescoGovernanceServicesRestApi.RecordfoldersApi* | [**listRecordFolderChildren**](docs/RecordfoldersApi.md#listRecordFolderChildren) | **GET** /record-folders/{recordFolderId}/records | List records
+*AlfrescoGovernanceServicesRestApi.RecordfoldersApi* | [**updateRecordFolder**](docs/RecordfoldersApi.md#updateRecordFolder) | **PUT** /record-folders/{recordFolderId} | Update a record folder
+*AlfrescoGovernanceServicesRestApi.RecordsApi* | [**completeRecord**](docs/RecordsApi.md#completeRecord) | **POST** /records/{recordId}/complete | Complete a record
+*AlfrescoGovernanceServicesRestApi.RecordsApi* | [**deleteRecord**](docs/RecordsApi.md#deleteRecord) | **DELETE** /records/{recordId} | Delete a record
+*AlfrescoGovernanceServicesRestApi.RecordsApi* | [**fileRecord**](docs/RecordsApi.md#fileRecord) | **POST** /records/{recordId}/file | File a record
+*AlfrescoGovernanceServicesRestApi.RecordsApi* | [**getRecord**](docs/RecordsApi.md#getRecord) | **GET** /records/{recordId} | Get a record
+*AlfrescoGovernanceServicesRestApi.RecordsApi* | [**getRecordContent**](docs/RecordsApi.md#getRecordContent) | **GET** /records/{recordId}/content | Get record content
+*AlfrescoGovernanceServicesRestApi.RecordsApi* | [**updateRecord**](docs/RecordsApi.md#updateRecord) | **PUT** /records/{recordId} | Update record
+*AlfrescoGovernanceServicesRestApi.TransfercontainersApi* | [**getTransferContainer**](docs/TransfercontainersApi.md#getTransferContainer) | **GET** /transfer-containers/{transferContainerId} | Get a transfer container
+*AlfrescoGovernanceServicesRestApi.TransfercontainersApi* | [**listTransfers**](docs/TransfercontainersApi.md#listTransfers) | **GET** /transfer-containers/{transferContainerId}/transfers | List transfer container&#39;s children
+*AlfrescoGovernanceServicesRestApi.TransfercontainersApi* | [**updateTransferContainer**](docs/TransfercontainersApi.md#updateTransferContainer) | **PUT** /transfer-containers/{transferContainerId} | Update transfer container
+*AlfrescoGovernanceServicesRestApi.TransfersApi* | [**getTransfer**](docs/TransfersApi.md#getTransfer) | **GET** /transfers/{transferId} | Get a transfer
+*AlfrescoGovernanceServicesRestApi.TransfersApi* | [**listTransfersChildren**](docs/TransfersApi.md#listTransfersChildren) | **GET** /transfers/{transferId}/children | List transfer&#39;s children
+*AlfrescoGovernanceServicesRestApi.UnfiledcontainersApi* | [**createUnfiledContainerChildren**](docs/UnfiledcontainersApi.md#createUnfiledContainerChildren) | **POST** /unfiled-containers/{unfiledContainerId}/children | Create a record or an unfiled record folder
+*AlfrescoGovernanceServicesRestApi.UnfiledcontainersApi* | [**getUnfiledContainer**](docs/UnfiledcontainersApi.md#getUnfiledContainer) | **GET** /unfiled-containers/{unfiledContainerId} | Get the unfiled records container
+*AlfrescoGovernanceServicesRestApi.UnfiledcontainersApi* | [**listUnfiledContainerChildren**](docs/UnfiledcontainersApi.md#listUnfiledContainerChildren) | **GET** /unfiled-containers/{unfiledContainerId}/children | List unfiled record container&#39;s children
+*AlfrescoGovernanceServicesRestApi.UnfiledcontainersApi* | [**updateUnfiledContainer**](docs/UnfiledcontainersApi.md#updateUnfiledContainer) | **PUT** /unfiled-containers/{unfiledContainerId} | Update an unfiled record container
+*AlfrescoGovernanceServicesRestApi.UnfiledrecordfoldersApi* | [**createUnfiledRecordFolderChildren**](docs/UnfiledrecordfoldersApi.md#createUnfiledRecordFolderChildren) | **POST** /unfiled-record-folders/{unfiledRecordFolderId}/children | Create a record or an unfiled record folder
+*AlfrescoGovernanceServicesRestApi.UnfiledrecordfoldersApi* | [**deleteUnfiledRecordFolder**](docs/UnfiledrecordfoldersApi.md#deleteUnfiledRecordFolder) | **DELETE** /unfiled-record-folders/{unfiledRecordFolderId} | Delete an unfiled record folder. Deleted file plan components cannot be recovered, they are deleted permanently.
+*AlfrescoGovernanceServicesRestApi.UnfiledrecordfoldersApi* | [**getUnfiledRecordFolder**](docs/UnfiledrecordfoldersApi.md#getUnfiledRecordFolder) | **GET** /unfiled-record-folders/{unfiledRecordFolderId} | Get the unfiled record folder
+*AlfrescoGovernanceServicesRestApi.UnfiledrecordfoldersApi* | [**listUnfiledRecordFolderChildren**](docs/UnfiledrecordfoldersApi.md#listUnfiledRecordFolderChildren) | **GET** /unfiled-record-folders/{unfiledRecordFolderId}/children | List unfiled record folder&#39;s children
+*AlfrescoGovernanceServicesRestApi.UnfiledrecordfoldersApi* | [**updateUnfiledRecordFolder**](docs/UnfiledrecordfoldersApi.md#updateUnfiledRecordFolder) | **PUT** /unfiled-record-folders/{unfiledRecordFolderId} | Update an unfiled record folder
+
+
+## Documentation for Models
+
+ - [AlfrescoGovernanceServicesRestApi.ChildAssociationInfo](docs/ChildAssociationInfo.md)
+ - [AlfrescoGovernanceServicesRestApi.ContentInfo](docs/ContentInfo.md)
+ - [AlfrescoGovernanceServicesRestApi.Error](docs/Error.md)
+ - [AlfrescoGovernanceServicesRestApi.ErrorError](docs/ErrorError.md)
+ - [AlfrescoGovernanceServicesRestApi.FilePlan](docs/FilePlan.md)
+ - [AlfrescoGovernanceServicesRestApi.FilePlanBodyUpdate](docs/FilePlanBodyUpdate.md)
+ - [AlfrescoGovernanceServicesRestApi.FilePlanComponentBodyUpdate](docs/FilePlanComponentBodyUpdate.md)
+ - [AlfrescoGovernanceServicesRestApi.FilePlanEntry](docs/FilePlanEntry.md)
+ - [AlfrescoGovernanceServicesRestApi.Pagination](docs/Pagination.md)
+ - [AlfrescoGovernanceServicesRestApi.PathElement](docs/PathElement.md)
+ - [AlfrescoGovernanceServicesRestApi.PathInfo](docs/PathInfo.md)
+ - [AlfrescoGovernanceServicesRestApi.RMNodeBodyCreate](docs/RMNodeBodyCreate.md)
+ - [AlfrescoGovernanceServicesRestApi.RMNodeBodyCreateWithRelativePath](docs/RMNodeBodyCreateWithRelativePath.md)
+ - [AlfrescoGovernanceServicesRestApi.RMSite](docs/RMSite.md)
+ - [AlfrescoGovernanceServicesRestApi.RMSiteBodyCreate](docs/RMSiteBodyCreate.md)
+ - [AlfrescoGovernanceServicesRestApi.RMSiteBodyUpdate](docs/RMSiteBodyUpdate.md)
+ - [AlfrescoGovernanceServicesRestApi.RMSiteEntry](docs/RMSiteEntry.md)
+ - [AlfrescoGovernanceServicesRestApi.Record](docs/Record.md)
+ - [AlfrescoGovernanceServicesRestApi.RecordCategory](docs/RecordCategory.md)
+ - [AlfrescoGovernanceServicesRestApi.RecordCategoryChild](docs/RecordCategoryChild.md)
+ - [AlfrescoGovernanceServicesRestApi.RecordCategoryChildEntry](docs/RecordCategoryChildEntry.md)
+ - [AlfrescoGovernanceServicesRestApi.RecordCategoryChildPaging](docs/RecordCategoryChildPaging.md)
+ - [AlfrescoGovernanceServicesRestApi.RecordCategoryChildPagingList](docs/RecordCategoryChildPagingList.md)
+ - [AlfrescoGovernanceServicesRestApi.RecordCategoryEntry](docs/RecordCategoryEntry.md)
+ - [AlfrescoGovernanceServicesRestApi.RecordCategoryPaging](docs/RecordCategoryPaging.md)
+ - [AlfrescoGovernanceServicesRestApi.RecordCategoryPagingList](docs/RecordCategoryPagingList.md)
+ - [AlfrescoGovernanceServicesRestApi.RecordEntry](docs/RecordEntry.md)
+ - [AlfrescoGovernanceServicesRestApi.RecordFolder](docs/RecordFolder.md)
+ - [AlfrescoGovernanceServicesRestApi.RecordFolderAssociationPaging](docs/RecordFolderAssociationPaging.md)
+ - [AlfrescoGovernanceServicesRestApi.RecordFolderAssociationPagingList](docs/RecordFolderAssociationPagingList.md)
+ - [AlfrescoGovernanceServicesRestApi.RecordFolderChildAssociation](docs/RecordFolderChildAssociation.md)
+ - [AlfrescoGovernanceServicesRestApi.RecordFolderChildAssociationEntry](docs/RecordFolderChildAssociationEntry.md)
+ - [AlfrescoGovernanceServicesRestApi.RecordFolderEntry](docs/RecordFolderEntry.md)
+ - [AlfrescoGovernanceServicesRestApi.RequestBodyFile](docs/RequestBodyFile.md)
+ - [AlfrescoGovernanceServicesRestApi.RootCategoryBodyCreate](docs/RootCategoryBodyCreate.md)
+ - [AlfrescoGovernanceServicesRestApi.Transfer](docs/Transfer.md)
+ - [AlfrescoGovernanceServicesRestApi.TransferAssociationPaging](docs/TransferAssociationPaging.md)
+ - [AlfrescoGovernanceServicesRestApi.TransferAssociationPagingList](docs/TransferAssociationPagingList.md)
+ - [AlfrescoGovernanceServicesRestApi.TransferChild](docs/TransferChild.md)
+ - [AlfrescoGovernanceServicesRestApi.TransferChildAssociation](docs/TransferChildAssociation.md)
+ - [AlfrescoGovernanceServicesRestApi.TransferChildAssociationEntry](docs/TransferChildAssociationEntry.md)
+ - [AlfrescoGovernanceServicesRestApi.TransferContainer](docs/TransferContainer.md)
+ - [AlfrescoGovernanceServicesRestApi.TransferContainerAssociationPaging](docs/TransferContainerAssociationPaging.md)
+ - [AlfrescoGovernanceServicesRestApi.TransferContainerAssociationPagingList](docs/TransferContainerAssociationPagingList.md)
+ - [AlfrescoGovernanceServicesRestApi.TransferContainerBodyUpdate](docs/TransferContainerBodyUpdate.md)
+ - [AlfrescoGovernanceServicesRestApi.TransferContainerChild](docs/TransferContainerChild.md)
+ - [AlfrescoGovernanceServicesRestApi.TransferContainerChildAssociation](docs/TransferContainerChildAssociation.md)
+ - [AlfrescoGovernanceServicesRestApi.TransferContainerChildAssociationEntry](docs/TransferContainerChildAssociationEntry.md)
+ - [AlfrescoGovernanceServicesRestApi.TransferContainerEntry](docs/TransferContainerEntry.md)
+ - [AlfrescoGovernanceServicesRestApi.TransferEntry](docs/TransferEntry.md)
+ - [AlfrescoGovernanceServicesRestApi.UnfiledContainer](docs/UnfiledContainer.md)
+ - [AlfrescoGovernanceServicesRestApi.UnfiledContainerAssociationPaging](docs/UnfiledContainerAssociationPaging.md)
+ - [AlfrescoGovernanceServicesRestApi.UnfiledContainerAssociationPagingList](docs/UnfiledContainerAssociationPagingList.md)
+ - [AlfrescoGovernanceServicesRestApi.UnfiledContainerChild](docs/UnfiledContainerChild.md)
+ - [AlfrescoGovernanceServicesRestApi.UnfiledContainerChildAssociation](docs/UnfiledContainerChildAssociation.md)
+ - [AlfrescoGovernanceServicesRestApi.UnfiledContainerChildAssociationEntry](docs/UnfiledContainerChildAssociationEntry.md)
+ - [AlfrescoGovernanceServicesRestApi.UnfiledContainerEntry](docs/UnfiledContainerEntry.md)
+ - [AlfrescoGovernanceServicesRestApi.UnfiledRecordContainerBodyUpdate](docs/UnfiledRecordContainerBodyUpdate.md)
+ - [AlfrescoGovernanceServicesRestApi.UnfiledRecordFolder](docs/UnfiledRecordFolder.md)
+ - [AlfrescoGovernanceServicesRestApi.UnfiledRecordFolderAssociationPaging](docs/UnfiledRecordFolderAssociationPaging.md)
+ - [AlfrescoGovernanceServicesRestApi.UnfiledRecordFolderAssociationPagingList](docs/UnfiledRecordFolderAssociationPagingList.md)
+ - [AlfrescoGovernanceServicesRestApi.UnfiledRecordFolderBodyUpdate](docs/UnfiledRecordFolderBodyUpdate.md)
+ - [AlfrescoGovernanceServicesRestApi.UnfiledRecordFolderChild](docs/UnfiledRecordFolderChild.md)
+ - [AlfrescoGovernanceServicesRestApi.UnfiledRecordFolderChildAssociation](docs/UnfiledRecordFolderChildAssociation.md)
+ - [AlfrescoGovernanceServicesRestApi.UnfiledRecordFolderChildAssociationEntry](docs/UnfiledRecordFolderChildAssociationEntry.md)
+ - [AlfrescoGovernanceServicesRestApi.UnfiledRecordFolderEntry](docs/UnfiledRecordFolderEntry.md)
+ - [AlfrescoGovernanceServicesRestApi.UserInfo](docs/UserInfo.md)
+
+
+## Documentation for Authorization
+
+
+### basicAuth
+
+- **Type**: HTTP basic authentication
+
