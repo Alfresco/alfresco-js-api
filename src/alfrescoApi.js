@@ -157,19 +157,19 @@ class AlfrescoApi {
 
         //Discovery
         this.discovery = {};
-        AlfrescoDiscoveryRestApi.ApiClient.instance = this.ecmClient;
+        AlfrescoDiscoveryRestApi.ApiClient.instance = this.discoveryClient;
         this.discoveryStore = AlfrescoDiscoveryRestApi;
         this._instantiateObjects(this.discoveryStore, this.discovery);
 
         //Governance CORE
         this.gsCore = {};
-        AlfrescoGsCoreRestApi.ApiClient.instance = this.ecmClient;
+        AlfrescoGsCoreRestApi.ApiClient.instance = this.gsClient;
         this.gGsCoreStore = AlfrescoGsCoreRestApi;
         this._instantiateObjects(this.gGsCoreStore, this.gsCore);
 
         //Governance Classification
         this.gsClassification = {};
-        AlfrescoGsClassificationRestApi.ApiClient.instance = this.ecmClient;
+        AlfrescoGsClassificationRestApi.ApiClient.instance = this.gsClient;
         this.gsClassificationStore = AlfrescoGsClassificationRestApi;
         this._instantiateObjects(this.gsClassificationStore, this.gsClassification);
 

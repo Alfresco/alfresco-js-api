@@ -8,3 +8,14 @@ Name | Type | Description | Notes
 **compliance** | **String** |  | [optional] [default to &#39;STANDARD&#39;]
 
 
+<a name="ComplianceEnum"></a>
+## Enum: ComplianceEnum
+
+
+* `STANDARD` (value: `"STANDARD"`)
+
+* `DOD5015` (value: `"DOD5015"`)
+
+
+
+

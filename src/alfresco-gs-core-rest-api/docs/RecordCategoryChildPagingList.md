@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entries** | [**[RecordCategoryChildEntry]**](RecordCategoryChildEntry.md) |  | [optional] 
 **pagination** | [**Pagination**](Pagination.md) |  | [optional] 
+**entries** | [**[RecordCategoryChildEntry]**](RecordCategoryChildEntry.md) |  | [optional] 
 **source** | [**RecordCategory**](RecordCategory.md) |  | [optional] 
 
 

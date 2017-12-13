@@ -1,8 +1,8 @@
-# alfresco-governance-services-rest-api
+# alfresco_governance_services_rest_api
 
-AlfrescoGovernanceServicesRestApi - JavaScript client for alfresco-governance-services-rest-api
-**GS Core API**
-Provides access to the core features of Alfresco Governance Services
+AlfrescoGovernanceServicesRestApi - JavaScript client for alfresco_governance_services_rest_api
+**GS Core API**  
+Provides access to the core features of Alfresco Governance Services. 
 
 ## Documentation for API Endpoints
 
@@ -83,7 +83,6 @@ Class | Method | HTTP request | Description
  - [AlfrescoGovernanceServicesRestApi.RecordFolder](docs/RecordFolder.md)
  - [AlfrescoGovernanceServicesRestApi.RecordFolderAssociationPaging](docs/RecordFolderAssociationPaging.md)
  - [AlfrescoGovernanceServicesRestApi.RecordFolderAssociationPagingList](docs/RecordFolderAssociationPagingList.md)
- - [AlfrescoGovernanceServicesRestApi.RecordFolderChildAssociation](docs/RecordFolderChildAssociation.md)
  - [AlfrescoGovernanceServicesRestApi.RecordFolderChildAssociationEntry](docs/RecordFolderChildAssociationEntry.md)
  - [AlfrescoGovernanceServicesRestApi.RecordFolderEntry](docs/RecordFolderEntry.md)
  - [AlfrescoGovernanceServicesRestApi.RequestBodyFile](docs/RequestBodyFile.md)
@@ -92,14 +91,12 @@ Class | Method | HTTP request | Description
  - [AlfrescoGovernanceServicesRestApi.TransferAssociationPaging](docs/TransferAssociationPaging.md)
  - [AlfrescoGovernanceServicesRestApi.TransferAssociationPagingList](docs/TransferAssociationPagingList.md)
  - [AlfrescoGovernanceServicesRestApi.TransferChild](docs/TransferChild.md)
- - [AlfrescoGovernanceServicesRestApi.TransferChildAssociation](docs/TransferChildAssociation.md)
  - [AlfrescoGovernanceServicesRestApi.TransferChildAssociationEntry](docs/TransferChildAssociationEntry.md)
  - [AlfrescoGovernanceServicesRestApi.TransferContainer](docs/TransferContainer.md)
  - [AlfrescoGovernanceServicesRestApi.TransferContainerAssociationPaging](docs/TransferContainerAssociationPaging.md)
  - [AlfrescoGovernanceServicesRestApi.TransferContainerAssociationPagingList](docs/TransferContainerAssociationPagingList.md)
  - [AlfrescoGovernanceServicesRestApi.TransferContainerBodyUpdate](docs/TransferContainerBodyUpdate.md)
  - [AlfrescoGovernanceServicesRestApi.TransferContainerChild](docs/TransferContainerChild.md)
- - [AlfrescoGovernanceServicesRestApi.TransferContainerChildAssociation](docs/TransferContainerChildAssociation.md)
  - [AlfrescoGovernanceServicesRestApi.TransferContainerChildAssociationEntry](docs/TransferContainerChildAssociationEntry.md)
  - [AlfrescoGovernanceServicesRestApi.TransferContainerEntry](docs/TransferContainerEntry.md)
  - [AlfrescoGovernanceServicesRestApi.TransferEntry](docs/TransferEntry.md)
@@ -107,7 +104,6 @@ Class | Method | HTTP request | Description
  - [AlfrescoGovernanceServicesRestApi.UnfiledContainerAssociationPaging](docs/UnfiledContainerAssociationPaging.md)
  - [AlfrescoGovernanceServicesRestApi.UnfiledContainerAssociationPagingList](docs/UnfiledContainerAssociationPagingList.md)
  - [AlfrescoGovernanceServicesRestApi.UnfiledContainerChild](docs/UnfiledContainerChild.md)
- - [AlfrescoGovernanceServicesRestApi.UnfiledContainerChildAssociation](docs/UnfiledContainerChildAssociation.md)
  - [AlfrescoGovernanceServicesRestApi.UnfiledContainerChildAssociationEntry](docs/UnfiledContainerChildAssociationEntry.md)
  - [AlfrescoGovernanceServicesRestApi.UnfiledContainerEntry](docs/UnfiledContainerEntry.md)
  - [AlfrescoGovernanceServicesRestApi.UnfiledRecordContainerBodyUpdate](docs/UnfiledRecordContainerBodyUpdate.md)
@@ -116,10 +112,14 @@ Class | Method | HTTP request | Description
  - [AlfrescoGovernanceServicesRestApi.UnfiledRecordFolderAssociationPagingList](docs/UnfiledRecordFolderAssociationPagingList.md)
  - [AlfrescoGovernanceServicesRestApi.UnfiledRecordFolderBodyUpdate](docs/UnfiledRecordFolderBodyUpdate.md)
  - [AlfrescoGovernanceServicesRestApi.UnfiledRecordFolderChild](docs/UnfiledRecordFolderChild.md)
- - [AlfrescoGovernanceServicesRestApi.UnfiledRecordFolderChildAssociation](docs/UnfiledRecordFolderChildAssociation.md)
  - [AlfrescoGovernanceServicesRestApi.UnfiledRecordFolderChildAssociationEntry](docs/UnfiledRecordFolderChildAssociationEntry.md)
  - [AlfrescoGovernanceServicesRestApi.UnfiledRecordFolderEntry](docs/UnfiledRecordFolderEntry.md)
  - [AlfrescoGovernanceServicesRestApi.UserInfo](docs/UserInfo.md)
+ - [AlfrescoGovernanceServicesRestApi.RecordFolderChildAssociation](docs/RecordFolderChildAssociation.md)
+ - [AlfrescoGovernanceServicesRestApi.TransferChildAssociation](docs/TransferChildAssociation.md)
+ - [AlfrescoGovernanceServicesRestApi.TransferContainerChildAssociation](docs/TransferContainerChildAssociation.md)
+ - [AlfrescoGovernanceServicesRestApi.UnfiledContainerChildAssociation](docs/UnfiledContainerChildAssociation.md)
+ - [AlfrescoGovernanceServicesRestApi.UnfiledRecordFolderChildAssociation](docs/UnfiledRecordFolderChildAssociation.md)
 
 
 ## Documentation for Authorization

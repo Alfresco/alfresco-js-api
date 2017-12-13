@@ -17,21 +17,21 @@ Method | HTTP request | Description
 
 Create a declassification exemption
 
-Creates a new declassification exemption.\n\n**Note:** You can create more than one exemption by specifying a list of exemptions in the JSON body.\nFor example, the following JSON body creates two declassification exemptions:\n```JSON\n[\n  {\n    \&quot;code\&quot;:\&quot;My Code1\&quot;,\n    \&quot;description\&quot;:\&quot;My Description1\&quot;\n  },\n  {\n    \&quot;code\&quot;:\&quot;My Code2\&quot;,\n    \&quot;description\&quot;:\&quot;My Description2\&quot;\n  }\n]\n```\nIf you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:\n\n```JSON\n{\n  \&quot;list\&quot;: {\n    \&quot;pagination\&quot;: {\n      \&quot;count\&quot;: 2,\n      \&quot;hasMoreItems\&quot;: false,\n      \&quot;totalItems\&quot;: 2,\n      \&quot;skipCount\&quot;: 0,\n      \&quot;maxItems\&quot;: 100\n    },\n    \&quot;entries\&quot;: [\n      {\n        \&quot;entry\&quot;: {\n          ...\n        }\n      },\n      {\n        \&quot;entry\&quot;: {\n          ...\n        }\n      }\n    ]\n  }\n}\n```\n
+Creates a new declassification exemption.  **Note:** You can create more than one exemption by specifying a list of exemptions in the JSON body. For example, the following JSON body creates two declassification exemptions: &#x60;&#x60;&#x60;JSON [   {     \&quot;code\&quot;:\&quot;My Code1\&quot;,     \&quot;description\&quot;:\&quot;My Description1\&quot;   },   {     \&quot;code\&quot;:\&quot;My Code2\&quot;,     \&quot;description\&quot;:\&quot;My Description2\&quot;   } ] &#x60;&#x60;&#x60; If you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:  &#x60;&#x60;&#x60;JSON {   \&quot;list\&quot;: {     \&quot;pagination\&quot;: {       \&quot;count\&quot;: 2,       \&quot;hasMoreItems\&quot;: false,       \&quot;totalItems\&quot;: 2,       \&quot;skipCount\&quot;: 0,       \&quot;maxItems\&quot;: 100     },     \&quot;entries\&quot;: [       {         \&quot;entry\&quot;: {           ...         }       },       {         \&quot;entry\&quot;: {           ...         }       }     ]   } } &#x60;&#x60;&#x60; 
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco-governance-services-security-controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.default;
+var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
+var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
 
 // Configure HTTP basic authorization: basicAuth
 var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+basicAuth.username = 'YOUR USERNAME';
+basicAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.DeclassificationexemptionsApi()
+var apiInstance = new AlfrescoGovernanceServicesSecurityControls.DeclassificationexemptionsApi();
 
-var declassificationExemption = new AlfrescoGovernanceServicesSecurityControls.DeclassificationExemptionBody(); // {DeclassificationExemptionBody} Declassification exemption
+var declassificationExemption = new AlfrescoGovernanceServicesSecurityControls.DeclassificationExemptionBody(); // DeclassificationExemptionBody | Declassification exemption
 
 apiInstance.createDeclassificationExemption(declassificationExemption).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -55,7 +55,7 @@ Name | Type | Description  | Notes
 
 [basicAuth](../README.md#basicAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
@@ -70,17 +70,17 @@ Deletes the declassification exemption with id **declassificationExemptionId**. 
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco-governance-services-security-controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.default;
+var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
+var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
 
 // Configure HTTP basic authorization: basicAuth
 var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+basicAuth.username = 'YOUR USERNAME';
+basicAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.DeclassificationexemptionsApi()
+var apiInstance = new AlfrescoGovernanceServicesSecurityControls.DeclassificationexemptionsApi();
 
-var declassificationExemptionId = "declassificationExemptionId_example"; // {String} The identifier for the declassification exemption
+var declassificationExemptionId = "declassificationExemptionId_example"; // String | The identifier for the declassification exemption
 
 apiInstance.deleteDeclassificationExemption(declassificationExemptionId).then(function() {
   console.log('API called successfully.');
@@ -104,7 +104,7 @@ null (empty response body)
 
 [basicAuth](../README.md#basicAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
@@ -119,19 +119,19 @@ Gets all declassification exemptions.
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco-governance-services-security-controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.default;
+var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
+var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
 
 // Configure HTTP basic authorization: basicAuth
 var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+basicAuth.username = 'YOUR USERNAME';
+basicAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.DeclassificationexemptionsApi()
+var apiInstance = new AlfrescoGovernanceServicesSecurityControls.DeclassificationexemptionsApi();
 
 var opts = { 
-  'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
-  'maxItems': 56, // {Integer} The maximum number of items to return in the list.
+  'skipCount': 56, // Number | The number of entities that exist in the collection before those included in this list.
+  'maxItems': 56 // Number | The maximum number of items to return in the list.
 };
 apiInstance.listDeclassificationExemptions(opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -145,8 +145,8 @@ apiInstance.listDeclassificationExemptions(opts).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **skipCount** | [**Integer**](.md)| The number of entities that exist in the collection before those included in this list. | [optional] 
- **maxItems** | [**Integer**](.md)| The maximum number of items to return in the list. | [optional] 
+ **skipCount** | **Number**| The number of entities that exist in the collection before those included in this list. | [optional] 
+ **maxItems** | **Number**| The maximum number of items to return in the list. | [optional] 
 
 ### Return type
 
@@ -156,7 +156,7 @@ Name | Type | Description  | Notes
 
 [basicAuth](../README.md#basicAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
@@ -171,17 +171,17 @@ Gets the declassification exemption with id **declassificationExemptionId**.
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco-governance-services-security-controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.default;
+var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
+var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
 
 // Configure HTTP basic authorization: basicAuth
 var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+basicAuth.username = 'YOUR USERNAME';
+basicAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.DeclassificationexemptionsApi()
+var apiInstance = new AlfrescoGovernanceServicesSecurityControls.DeclassificationexemptionsApi();
 
-var declassificationExemptionId = "declassificationExemptionId_example"; // {String} The identifier for the declassification exemption
+var declassificationExemptionId = "declassificationExemptionId_example"; // String | The identifier for the declassification exemption
 
 apiInstance.showDeclassificationExemptionById(declassificationExemptionId).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -205,7 +205,7 @@ Name | Type | Description  | Notes
 
 [basicAuth](../README.md#basicAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
@@ -220,19 +220,19 @@ Updates the declassification exemption with id **declassificationExemptionId**. 
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco-governance-services-security-controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.default;
+var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
+var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
 
 // Configure HTTP basic authorization: basicAuth
 var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+basicAuth.username = 'YOUR USERNAME';
+basicAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.DeclassificationexemptionsApi()
+var apiInstance = new AlfrescoGovernanceServicesSecurityControls.DeclassificationexemptionsApi();
 
-var declassificationExemptionId = "declassificationExemptionId_example"; // {String} The identifier for the declassification exemption
+var declassificationExemptionId = "declassificationExemptionId_example"; // String | The identifier for the declassification exemption
 
-var declassificationExemption = new AlfrescoGovernanceServicesSecurityControls.DeclassificationExemptionBody(); // {DeclassificationExemptionBody} Declassification exemption
+var declassificationExemption = new AlfrescoGovernanceServicesSecurityControls.DeclassificationExemptionBody(); // DeclassificationExemptionBody | Declassification exemption
 
 apiInstance.updateDeclassificationExemption(declassificationExemptionIddeclassificationExemption).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -257,7 +257,7 @@ Name | Type | Description  | Notes
 
 [basicAuth](../README.md#basicAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json

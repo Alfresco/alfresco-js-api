@@ -12,3 +12,42 @@ Name | Type | Description | Notes
 **role** | **String** |  | [optional] 
 
 
+<a name="VisibilityEnum"></a>
+## Enum: VisibilityEnum
+
+
+* `PRIVATE` (value: `"PRIVATE"`)
+
+* `MODERATED` (value: `"MODERATED"`)
+
+* `PUBLIC` (value: `"PUBLIC"`)
+
+
+
+
+<a name="ComplianceEnum"></a>
+## Enum: ComplianceEnum
+
+
+* `STANDARD` (value: `"STANDARD"`)
+
+* `DOD5015` (value: `"DOD5015"`)
+
+
+
+
+<a name="RoleEnum"></a>
+## Enum: RoleEnum
+
+
+* `SiteConsumer` (value: `"SiteConsumer"`)
+
+* `SiteCollaborator` (value: `"SiteCollaborator"`)
+
+* `SiteContributor` (value: `"SiteContributor"`)
+
+* `SiteManager` (value: `"SiteManager"`)
+
+
+
+

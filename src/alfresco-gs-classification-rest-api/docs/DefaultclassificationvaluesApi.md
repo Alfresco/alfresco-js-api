@@ -17,17 +17,17 @@ Calculates the default declassification date for **nodeId** based on the propert
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco-governance-services-security-controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.default;
+var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
+var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
 
 // Configure HTTP basic authorization: basicAuth
 var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+basicAuth.username = 'YOUR USERNAME';
+basicAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.DefaultclassificationvaluesApi()
+var apiInstance = new AlfrescoGovernanceServicesSecurityControls.DefaultclassificationvaluesApi();
 
-var nodeId = "nodeId_example"; // {String} The identifier of a node.
+var nodeId = "nodeId_example"; // String | The identifier of a node.
 
 apiInstance.calculateDefaultDeclassificationDate(nodeId).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -51,7 +51,7 @@ Name | Type | Description  | Notes
 
 [basicAuth](../README.md#basicAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json

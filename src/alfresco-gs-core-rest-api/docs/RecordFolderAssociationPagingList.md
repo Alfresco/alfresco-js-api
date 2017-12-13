@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entries** | [**[RecordFolderChildAssociationEntry]**](RecordFolderChildAssociationEntry.md) |  | [optional] 
 **pagination** | [**Pagination**](Pagination.md) |  | [optional] 
+**entries** | [**[RecordFolderChildAssociationEntry]**](RecordFolderChildAssociationEntry.md) |  | [optional] 
 **source** | [**RecordFolder**](RecordFolder.md) |  | [optional] 
 
 

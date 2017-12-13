@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **mimeType** | **String** |  | 
 **mimeTypeName** | **String** |  | 
-**sizeInBytes** | **Integer** |  | 
+**sizeInBytes** | **Number** |  | 
 **encoding** | **String** |  | 
 
 

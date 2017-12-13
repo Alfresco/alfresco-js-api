@@ -17,22 +17,22 @@ Declares the file **fileId** in the unfiled records container. The original file
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco-governance-services-rest-api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.default;
+var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
+var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
 
 // Configure HTTP basic authorization: basicAuth
 var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+basicAuth.username = 'YOUR USERNAME';
+basicAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new AlfrescoGovernanceServicesRestApi.FilesApi()
+var apiInstance = new AlfrescoGovernanceServicesRestApi.FilesApi();
 
-var fileId = "fileId_example"; // {String} The identifier of a non-record file.
+var fileId = "fileId_example"; // String | The identifier of a non-record file.
 
 var opts = { 
-  'hideRecord': false, // {Boolean} Flag to indicate whether the record should be hidden from the current parent folder.
-  'include': ["include_example"], // {[String]} Returns additional information about the record. Any optional field from the response model can be requested. For example:\n* allowableOperations\n* content\n* isCompleted\n* path\n
-  'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+  'hideRecord': false, // Boolean | Flag to indicate whether the record should be hidden from the current parent folder.
+  'include': ["include_example"], // [String] | Returns additional information about the record. Any optional field from the response model can be requested. For example: * allowableOperations * content * isCompleted * path 
+  'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
 apiInstance.declareRecord(fileId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -48,8 +48,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **fileId** | **String**| The identifier of a non-record file. | 
  **hideRecord** | **Boolean**| Flag to indicate whether the record should be hidden from the current parent folder. | [optional] [default to false]
- **include** | [**[String]**](String.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example:\n* allowableOperations\n* content\n* isCompleted\n* path\n | [optional] 
- **fields** | [**[String]**](String.md)| A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
+ **include** | [**[String]**](String.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example: * allowableOperations * content * isCompleted * path  | [optional] 
+ **fields** | [**[String]**](String.md)| A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional] 
 
 ### Return type
 
@@ -59,7 +59,7 @@ Name | Type | Description  | Notes
 
 [basicAuth](../README.md#basicAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json

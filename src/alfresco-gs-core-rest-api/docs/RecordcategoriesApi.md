@@ -17,28 +17,28 @@ Method | HTTP request | Description
 
 Create a record category or a record folder
 
-Create a record category or a record folder as a primary child of **recordCategoryId**.\n\nYou can set the **autoRename** boolean field to automatically resolve name clashes. If there is a name clash, then\nthe API method tries to create\na unique name using an integer suffix.\n\nThis API method also supports record category or record folder creation using application/json.\n\nYou must specify at least a **name** and **nodeType**.\n\nYou can create a category like this:\n```JSON\n{\n  \&quot;name\&quot;:\&quot;My Record Category\&quot;,\n  \&quot;nodeType\&quot;:\&quot;rma:recordCategory\&quot;\n}\n```\n\nYou can create a record folder like this:\n```JSON\n{\n  \&quot;name\&quot;:\&quot;My Record Folder\&quot;,\n  \&quot;nodeType\&quot;:\&quot;rma:recordFolder\&quot;\n}\n```\n\nYou can create a record folder inside a container hierarchy (applies to record categories as well):\n```JSON\n{\n  \&quot;name\&quot;:\&quot;My Fileplan Component\&quot;,\n  \&quot;nodeType\&quot;:\&quot;rma:recordFolder\&quot;,\n  \&quot;relativePath\&quot;:\&quot;X/Y/Z\&quot;\n}\n```\nThe **relativePath** specifies the container structure to create relative to the node (record category or record folder). Containers in the\n**relativePath** that do not exist are created before the node is created. The container type is decided considering\nthe type of the parent container and the type of the node to be created.\n\nYou can set properties when creating a record category (applies to record folders as well):\n```JSON\n{\n  \&quot;name\&quot;:\&quot;My Record Category\&quot;,\n  \&quot;nodeType\&quot;:\&quot;rma:recordCategory\&quot;,\n  \&quot;properties\&quot;:\n  {\n    \&quot;rma:vitalRecordIndicator\&quot;:\&quot;true\&quot;,\n    \&quot;rma:reviewPeriod\&quot;:\&quot;month|1\&quot;\n  }\n}\n```\n\nAny missing aspects are applied automatically. You can set aspects explicitly, if needed, using an **aspectNames** field.\n\n**Note:** You can create more than one child by\nspecifying a list of nodes in the JSON body. For example, the following JSON\nbody creates a record category and a record folder inside the specified **categoryId**:\n```JSON\n[\n  {\n    \&quot;name\&quot;:\&quot;My Record Category\&quot;,\n    \&quot;nodeType\&quot;:\&quot;rma:recordCategory\&quot;\n  },\n  {\n    \&quot;name\&quot;:\&quot;My Record Folder\&quot;,\n    \&quot;nodeType\&quot;:\&quot;rma:recordFolder\&quot;\n  }\n]\n```\nIf you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:\n\n```JSON\n{\n  \&quot;list\&quot;: {\n    \&quot;pagination\&quot;: {\n      \&quot;count\&quot;: 2,\n      \&quot;hasMoreItems\&quot;: false,\n      \&quot;totalItems\&quot;: 2,\n      \&quot;skipCount\&quot;: 0,\n      \&quot;maxItems\&quot;: 100\n    },\n    \&quot;entries\&quot;: [\n      {\n        \&quot;entry\&quot;: {\n          ...\n        }\n      },\n      {\n        \&quot;entry\&quot;: {\n          ...\n        }\n      }\n    ]\n  }\n}\n```\n
+Create a record category or a record folder as a primary child of **recordCategoryId**.  You can set the **autoRename** boolean field to automatically resolve name clashes. If there is a name clash, then the API method tries to create a unique name using an integer suffix.  This API method also supports record category or record folder creation using application/json.  You must specify at least a **name** and **nodeType**.  You can create a category like this: &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;:\&quot;My Record Category\&quot;,   \&quot;nodeType\&quot;:\&quot;rma:recordCategory\&quot; } &#x60;&#x60;&#x60;  You can create a record folder like this: &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;:\&quot;My Record Folder\&quot;,   \&quot;nodeType\&quot;:\&quot;rma:recordFolder\&quot; } &#x60;&#x60;&#x60;  You can create a record folder inside a container hierarchy (applies to record categories as well): &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;:\&quot;My Fileplan Component\&quot;,   \&quot;nodeType\&quot;:\&quot;rma:recordFolder\&quot;,   \&quot;relativePath\&quot;:\&quot;X/Y/Z\&quot; } &#x60;&#x60;&#x60; The **relativePath** specifies the container structure to create relative to the node (record category or record folder). Containers in the **relativePath** that do not exist are created before the node is created. The container type is decided considering the type of the parent container and the type of the node to be created.  You can set properties when creating a record category (applies to record folders as well): &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;:\&quot;My Record Category\&quot;,   \&quot;nodeType\&quot;:\&quot;rma:recordCategory\&quot;,   \&quot;properties\&quot;:   {     \&quot;rma:vitalRecordIndicator\&quot;:\&quot;true\&quot;,     \&quot;rma:reviewPeriod\&quot;:\&quot;month|1\&quot;   } } &#x60;&#x60;&#x60;  Any missing aspects are applied automatically. You can set aspects explicitly, if needed, using an **aspectNames** field.  **Note:** You can create more than one child by specifying a list of nodes in the JSON body. For example, the following JSON body creates a record category and a record folder inside the specified **categoryId**: &#x60;&#x60;&#x60;JSON [   {     \&quot;name\&quot;:\&quot;My Record Category\&quot;,     \&quot;nodeType\&quot;:\&quot;rma:recordCategory\&quot;   },   {     \&quot;name\&quot;:\&quot;My Record Folder\&quot;,     \&quot;nodeType\&quot;:\&quot;rma:recordFolder\&quot;   } ] &#x60;&#x60;&#x60; If you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:  &#x60;&#x60;&#x60;JSON {   \&quot;list\&quot;: {     \&quot;pagination\&quot;: {       \&quot;count\&quot;: 2,       \&quot;hasMoreItems\&quot;: false,       \&quot;totalItems\&quot;: 2,       \&quot;skipCount\&quot;: 0,       \&quot;maxItems\&quot;: 100     },     \&quot;entries\&quot;: [       {         \&quot;entry\&quot;: {           ...         }       },       {         \&quot;entry\&quot;: {           ...         }       }     ]   } } &#x60;&#x60;&#x60; 
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco-governance-services-rest-api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.default;
+var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
+var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
 
 // Configure HTTP basic authorization: basicAuth
 var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+basicAuth.username = 'YOUR USERNAME';
+basicAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new AlfrescoGovernanceServicesRestApi.RecordcategoriesApi()
+var apiInstance = new AlfrescoGovernanceServicesRestApi.RecordcategoriesApi();
 
-var recordCategoryId = "recordCategoryId_example"; // {String} The identifier of a record category.
+var recordCategoryId = "recordCategoryId_example"; // String | The identifier of a record category.
 
-var nodeBodyCreate = new AlfrescoGovernanceServicesRestApi.RMNodeBodyCreateWithRelativePath(); // {RMNodeBodyCreateWithRelativePath} The node information to create.\n
+var nodeBodyCreate = new AlfrescoGovernanceServicesRestApi.RMNodeBodyCreateWithRelativePath(); // RMNodeBodyCreateWithRelativePath | The node information to create. 
 
 var opts = { 
-  'autoRename': true, // {Boolean} If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.\n
-  'include': ["include_example"], // {[String]} Returns additional information about the record category. Any optional field from the response model can be requested. For example:\n* allowableOperations\n* hasRetentionSchedule\n* path\n
-  'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+  'autoRename': true, // Boolean | If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix. 
+  'include': ["include_example"], // [String] | Returns additional information about the record category. Any optional field from the response model can be requested. For example: * allowableOperations * hasRetentionSchedule * path 
+  'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
 apiInstance.createRecordCategoryChild(recordCategoryId, nodeBodyCreate, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -53,10 +53,10 @@ apiInstance.createRecordCategoryChild(recordCategoryId, nodeBodyCreate, opts).th
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **recordCategoryId** | **String**| The identifier of a record category. | 
- **nodeBodyCreate** | [**RMNodeBodyCreateWithRelativePath**](RMNodeBodyCreateWithRelativePath.md)| The node information to create.\n | 
- **autoRename** | **Boolean**| If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.\n | [optional] 
- **include** | [**[String]**](String.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example:\n* allowableOperations\n* hasRetentionSchedule\n* path\n | [optional] 
- **fields** | [**[String]**](String.md)| A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
+ **nodeBodyCreate** | [**RMNodeBodyCreateWithRelativePath**](RMNodeBodyCreateWithRelativePath.md)| The node information to create.  | 
+ **autoRename** | **Boolean**| If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.  | [optional] 
+ **include** | [**[String]**](String.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example: * allowableOperations * hasRetentionSchedule * path  | [optional] 
+ **fields** | [**[String]**](String.md)| A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional] 
 
 ### Return type
 
@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 
 [basicAuth](../README.md#basicAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: application/json, multipart/form-data
  - **Accept**: application/json
@@ -77,21 +77,21 @@ Name | Type | Description  | Notes
 
 Delete a record category
 
-Deletes record category **recordCategoryId**.\n
+Deletes record category **recordCategoryId**. 
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco-governance-services-rest-api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.default;
+var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
+var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
 
 // Configure HTTP basic authorization: basicAuth
 var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+basicAuth.username = 'YOUR USERNAME';
+basicAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new AlfrescoGovernanceServicesRestApi.RecordcategoriesApi()
+var apiInstance = new AlfrescoGovernanceServicesRestApi.RecordcategoriesApi();
 
-var recordCategoryId = "recordCategoryId_example"; // {String} The identifier of a record category.
+var recordCategoryId = "recordCategoryId_example"; // String | The identifier of a record category.
 
 apiInstance.deleteRecordCategory(recordCategoryId, ).then(function() {
   console.log('API called successfully.');
@@ -115,7 +115,7 @@ null (empty response body)
 
 [basicAuth](../README.md#basicAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
@@ -126,26 +126,26 @@ null (empty response body)
 
 Get a record category
 
-Gets information for record category **recordCategoryId**\n\nMandatory fields and the record category&#39;s aspects and properties are returned by default.\n\nYou can use the **include** parameter (include=allowableOperations) to return additional information.\n
+Gets information for record category **recordCategoryId**  Mandatory fields and the record category&#39;s aspects and properties are returned by default.  You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information. 
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco-governance-services-rest-api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.default;
+var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
+var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
 
 // Configure HTTP basic authorization: basicAuth
 var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+basicAuth.username = 'YOUR USERNAME';
+basicAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new AlfrescoGovernanceServicesRestApi.RecordcategoriesApi()
+var apiInstance = new AlfrescoGovernanceServicesRestApi.RecordcategoriesApi();
 
-var recordCategoryId = "recordCategoryId_example"; // {String} The identifier of a record category.
+var recordCategoryId = "recordCategoryId_example"; // String | The identifier of a record category.
 
 var opts = { 
-  'include': ["include_example"], // {[String]} Returns additional information about the record category. Any optional field from the response model can be requested. For example:\n* allowableOperations\n* hasRetentionSchedule\n* path\n
-  'relativePath': "relativePath_example", // {String} Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.\n
-  'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+  'include': ["include_example"], // [String] | Returns additional information about the record category. Any optional field from the response model can be requested. For example: * allowableOperations * hasRetentionSchedule * path 
+  'relativePath': "relativePath_example", // String | Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**. 
+  'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
 apiInstance.getRecordCategory(recordCategoryId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -160,9 +160,9 @@ apiInstance.getRecordCategory(recordCategoryId, , opts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **recordCategoryId** | **String**| The identifier of a record category. | 
- **include** | [**[String]**](String.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example:\n* allowableOperations\n* hasRetentionSchedule\n* path\n | [optional] 
- **relativePath** | **String**| Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.\n | [optional] 
- **fields** | [**[String]**](String.md)| A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
+ **include** | [**[String]**](String.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example: * allowableOperations * hasRetentionSchedule * path  | [optional] 
+ **relativePath** | **String**| Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.  | [optional] 
+ **fields** | [**[String]**](String.md)| A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional] 
 
 ### Return type
 
@@ -172,7 +172,7 @@ Name | Type | Description  | Notes
 
 [basicAuth](../README.md#basicAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
@@ -183,30 +183,30 @@ Name | Type | Description  | Notes
 
 List record category&#39;s children
 
-Returns a list of record categories and/or record folders.\n\nMinimal information for each child is returned by default.\n\nYou can use the **include** parameter (include=allowableOperations) to return additional information.\n\nThe list of child nodes includes primary children and secondary children, if there are any.\n
+Returns a list of record categories and/or record folders.  Minimal information for each child is returned by default.  You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information.  The list of child nodes includes primary children and secondary children, if there are any. 
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco-governance-services-rest-api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.default;
+var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
+var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
 
 // Configure HTTP basic authorization: basicAuth
 var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+basicAuth.username = 'YOUR USERNAME';
+basicAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new AlfrescoGovernanceServicesRestApi.RecordcategoriesApi()
+var apiInstance = new AlfrescoGovernanceServicesRestApi.RecordcategoriesApi();
 
-var recordCategoryId = "recordCategoryId_example"; // {String} The identifier of a record category.
+var recordCategoryId = "recordCategoryId_example"; // String | The identifier of a record category.
 
 var opts = { 
-  'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
-  'maxItems': 56, // {Integer} The maximum number of items to return in the list.
-  'where': "where_example", // {String} Optionally filter the list. Here are some examples:\n\n*   ```where=(nodeType='rma:recordFolder')```\n\n*   ```where=(nodeType='rma:recordCategory')```\n\n*   ```where=(isRecordFolder=true AND isClosed=false)```\n
-  'include': ["include_example"], // {[String]} Returns additional information about the record category child. Any optional field from the response model can be requested. For example:\n* allowableOperations\n* aspectNames\n* hasRetentionSchedule\n* isClosed\n* isRecordCategory\n* isRecordFolder\n* path\n* properties\n
-  'relativePath': "relativePath_example", // {String} Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.\n
-  'includeSource': true, // {Boolean} Also include **source** (in addition to **entries**) with folder information on the parent node \u2013 either the specified parent **recordCategoryId**, or as resolved by **relativePath**.
-  'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+  'skipCount': 56, // Number | The number of entities that exist in the collection before those included in this list.
+  'maxItems': 56, // Number | The maximum number of items to return in the list.
+  'where': "where_example", // String | Optionally filter the list. Here are some examples:  *   ```where=(nodeType='rma:recordFolder')```  *   ```where=(nodeType='rma:recordCategory')```  *   ```where=(isRecordFolder=true AND isClosed=false)``` 
+  'include': ["include_example"], // [String] | Returns additional information about the record category child. Any optional field from the response model can be requested. For example: * allowableOperations * aspectNames * hasRetentionSchedule * isClosed * isRecordCategory * isRecordFolder * path * properties 
+  'relativePath': "relativePath_example", // String | Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**. 
+  'includeSource': true, // Boolean | Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **recordCategoryId**, or as resolved by **relativePath**.
+  'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
 apiInstance.listRecordCategoryChildren(recordCategoryId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -221,13 +221,13 @@ apiInstance.listRecordCategoryChildren(recordCategoryId, , opts).then(function(d
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **recordCategoryId** | **String**| The identifier of a record category. | 
- **skipCount** | [**Integer**](.md)| The number of entities that exist in the collection before those included in this list. | [optional] 
- **maxItems** | [**Integer**](.md)| The maximum number of items to return in the list. | [optional] 
- **where** | **String**| Optionally filter the list. Here are some examples:\n\n*   ```where=(nodeType=&#39;rma:recordFolder&#39;)```\n\n*   ```where=(nodeType=&#39;rma:recordCategory&#39;)```\n\n*   ```where=(isRecordFolder=true AND isClosed=false)```\n | [optional] 
- **include** | [**[String]**](String.md)| Returns additional information about the record category child. Any optional field from the response model can be requested. For example:\n* allowableOperations\n* aspectNames\n* hasRetentionSchedule\n* isClosed\n* isRecordCategory\n* isRecordFolder\n* path\n* properties\n | [optional] 
- **relativePath** | **String**| Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.\n | [optional] 
- **includeSource** | **Boolean**| Also include **source** (in addition to **entries**) with folder information on the parent node \u2013 either the specified parent **recordCategoryId**, or as resolved by **relativePath**. | [optional] 
- **fields** | [**[String]**](String.md)| A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
+ **skipCount** | **Number**| The number of entities that exist in the collection before those included in this list. | [optional] 
+ **maxItems** | **Number**| The maximum number of items to return in the list. | [optional] 
+ **where** | **String**| Optionally filter the list. Here are some examples:  *   &#x60;&#x60;&#x60;where&#x3D;(nodeType&#x3D;&#39;rma:recordFolder&#39;)&#x60;&#x60;&#x60;  *   &#x60;&#x60;&#x60;where&#x3D;(nodeType&#x3D;&#39;rma:recordCategory&#39;)&#x60;&#x60;&#x60;  *   &#x60;&#x60;&#x60;where&#x3D;(isRecordFolder&#x3D;true AND isClosed&#x3D;false)&#x60;&#x60;&#x60;  | [optional] 
+ **include** | [**[String]**](String.md)| Returns additional information about the record category child. Any optional field from the response model can be requested. For example: * allowableOperations * aspectNames * hasRetentionSchedule * isClosed * isRecordCategory * isRecordFolder * path * properties  | [optional] 
+ **relativePath** | **String**| Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.  | [optional] 
+ **includeSource** | **Boolean**| Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **recordCategoryId**, or as resolved by **relativePath**. | [optional] 
+ **fields** | [**[String]**](String.md)| A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional] 
 
 ### Return type
 
@@ -237,7 +237,7 @@ Name | Type | Description  | Notes
 
 [basicAuth](../README.md#basicAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
@@ -248,27 +248,27 @@ Name | Type | Description  | Notes
 
 Update a record category
 
-Updates record category **recordCategoryId**. For example, you can rename a record category:\n```JSON\n{\n  \&quot;name\&quot;:\&quot;My new name\&quot;\n}\n```\nYou can also set or update one or more properties:\n```JSON\n{\n  \&quot;properties\&quot;:\n    {\n       \&quot;rma:vitalRecordIndicator\&quot;: true,\n       \&quot;rma:reviewPeriod\&quot;:\&quot;month|6\&quot;\n    }\n}\n```\n**Note:** If you want to add or remove aspects, then you must use **GET /record-categories/{recordCategoryId}** first to get the complete set of *aspectNames*.\n\n**Note:** Currently there is no optimistic locking for updates, so they are applied in \&quot;last one wins\&quot; order.\n
+Updates record category **recordCategoryId**. For example, you can rename a record category: &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;:\&quot;My new name\&quot; } &#x60;&#x60;&#x60; You can also set or update one or more properties: &#x60;&#x60;&#x60;JSON {   \&quot;properties\&quot;:     {        \&quot;rma:vitalRecordIndicator\&quot;: true,        \&quot;rma:reviewPeriod\&quot;:\&quot;month|6\&quot;     } } &#x60;&#x60;&#x60; **Note:** If you want to add or remove aspects, then you must use **GET /record-categories/{recordCategoryId}** first to get the complete set of *aspectNames*.  **Note:** Currently there is no optimistic locking for updates, so they are applied in \&quot;last one wins\&quot; order. 
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco-governance-services-rest-api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.default;
+var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
+var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
 
 // Configure HTTP basic authorization: basicAuth
 var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+basicAuth.username = 'YOUR USERNAME';
+basicAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new AlfrescoGovernanceServicesRestApi.RecordcategoriesApi()
+var apiInstance = new AlfrescoGovernanceServicesRestApi.RecordcategoriesApi();
 
-var recordCategoryId = "recordCategoryId_example"; // {String} The identifier of a record category.
+var recordCategoryId = "recordCategoryId_example"; // String | The identifier of a record category.
 
-var recordCategoryBodyUpdate = new AlfrescoGovernanceServicesRestApi.FilePlanComponentBodyUpdate(); // {FilePlanComponentBodyUpdate} The record category information to update.
+var recordCategoryBodyUpdate = new AlfrescoGovernanceServicesRestApi.FilePlanComponentBodyUpdate(); // FilePlanComponentBodyUpdate | The record category information to update.
 
 var opts = { 
-  'include': ["include_example"], // {[String]} Returns additional information about the record category. Any optional field from the response model can be requested. For example:\n* allowableOperations\n* hasRetentionSchedule\n* path\n
-  'fields': ["fields_example"] // {[String]} A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+  'include': ["include_example"], // [String] | Returns additional information about the record category. Any optional field from the response model can be requested. For example: * allowableOperations * hasRetentionSchedule * path 
+  'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
 apiInstance.updateRecordCategory(recordCategoryId, recordCategoryBodyUpdate, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -284,8 +284,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **recordCategoryId** | **String**| The identifier of a record category. | 
  **recordCategoryBodyUpdate** | [**FilePlanComponentBodyUpdate**](FilePlanComponentBodyUpdate.md)| The record category information to update. | 
- **include** | [**[String]**](String.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example:\n* allowableOperations\n* hasRetentionSchedule\n* path\n | [optional] 
- **fields** | [**[String]**](String.md)| A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n | [optional] 
+ **include** | [**[String]**](String.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example: * allowableOperations * hasRetentionSchedule * path  | [optional] 
+ **fields** | [**[String]**](String.md)| A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional] 
 
 ### Return type
 
@@ -295,7 +295,7 @@ Name | Type | Description  | Notes
 
 [basicAuth](../README.md#basicAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json

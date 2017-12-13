@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entries** | [**[TransferChildAssociationEntry]**](TransferChildAssociationEntry.md) |  | [optional] 
 **pagination** | [**Pagination**](Pagination.md) |  | [optional] 
+**entries** | [**[TransferChildAssociationEntry]**](TransferChildAssociationEntry.md) |  | [optional] 
 **source** | [**Transfer**](Transfer.md) |  | [optional] 
 
 

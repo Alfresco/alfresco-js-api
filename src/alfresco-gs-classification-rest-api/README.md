@@ -1,9 +1,7 @@
-# alfresco-governance-services-security-controls
+# alfresco_governance_services_security_controls
 
-AlfrescoGovernanceServicesSecurityControls - JavaScript client for alfresco-governance-services-security-controls
-**Classification API**
+AlfrescoGovernanceServicesSecurityControls - JavaScript client for alfresco_governance_services_security_controls
 Provides access to classification and security mark related features.
-
 
 ## Documentation for API Endpoints
 
@@ -41,23 +39,18 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
- - [AlfrescoGovernanceServicesSecurityControls.ClassificationGuide](docs/ClassificationGuide.md)
  - [AlfrescoGovernanceServicesSecurityControls.ClassificationGuideBody](docs/ClassificationGuideBody.md)
  - [AlfrescoGovernanceServicesSecurityControls.ClassificationGuideEntry](docs/ClassificationGuideEntry.md)
- - [AlfrescoGovernanceServicesSecurityControls.ClassificationGuideInTopic](docs/ClassificationGuideInTopic.md)
  - [AlfrescoGovernanceServicesSecurityControls.ClassificationGuidePaging](docs/ClassificationGuidePaging.md)
  - [AlfrescoGovernanceServicesSecurityControls.ClassificationGuidePagingList](docs/ClassificationGuidePagingList.md)
- - [AlfrescoGovernanceServicesSecurityControls.ClassificationGuides](docs/ClassificationGuides.md)
  - [AlfrescoGovernanceServicesSecurityControls.ClassificationGuidesBody](docs/ClassificationGuidesBody.md)
  - [AlfrescoGovernanceServicesSecurityControls.ClassificationGuidesEntry](docs/ClassificationGuidesEntry.md)
- - [AlfrescoGovernanceServicesSecurityControls.ClassificationGuidesInTopic](docs/ClassificationGuidesInTopic.md)
  - [AlfrescoGovernanceServicesSecurityControls.ClassificationInformation](docs/ClassificationInformation.md)
  - [AlfrescoGovernanceServicesSecurityControls.ClassificationReason](docs/ClassificationReason.md)
  - [AlfrescoGovernanceServicesSecurityControls.ClassificationReasonBody](docs/ClassificationReasonBody.md)
  - [AlfrescoGovernanceServicesSecurityControls.ClassificationReasonEntry](docs/ClassificationReasonEntry.md)
  - [AlfrescoGovernanceServicesSecurityControls.ClassificationReasonsPaging](docs/ClassificationReasonsPaging.md)
  - [AlfrescoGovernanceServicesSecurityControls.ClassificationReasonsPagingList](docs/ClassificationReasonsPagingList.md)
- - [AlfrescoGovernanceServicesSecurityControls.CombinedInstructionBody](docs/CombinedInstructionBody.md)
  - [AlfrescoGovernanceServicesSecurityControls.DeclassificationDate](docs/DeclassificationDate.md)
  - [AlfrescoGovernanceServicesSecurityControls.DeclassificationExemption](docs/DeclassificationExemption.md)
  - [AlfrescoGovernanceServicesSecurityControls.DeclassificationExemptionBody](docs/DeclassificationExemptionBody.md)
@@ -87,6 +80,11 @@ Class | Method | HTTP request | Description
  - [AlfrescoGovernanceServicesSecurityControls.TopicEntry](docs/TopicEntry.md)
  - [AlfrescoGovernanceServicesSecurityControls.TopicPaging](docs/TopicPaging.md)
  - [AlfrescoGovernanceServicesSecurityControls.TopicPagingList](docs/TopicPagingList.md)
+ - [AlfrescoGovernanceServicesSecurityControls.ClassificationGuideInTopic](docs/ClassificationGuideInTopic.md)
+ - [AlfrescoGovernanceServicesSecurityControls.ClassificationGuidesInTopic](docs/ClassificationGuidesInTopic.md)
+ - [AlfrescoGovernanceServicesSecurityControls.CombinedInstructionBody](docs/CombinedInstructionBody.md)
+ - [AlfrescoGovernanceServicesSecurityControls.ClassificationGuide](docs/ClassificationGuide.md)
+ - [AlfrescoGovernanceServicesSecurityControls.ClassificationGuides](docs/ClassificationGuides.md)
 
 
 ## Documentation for Authorization

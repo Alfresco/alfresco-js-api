@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 **level** | **String** |  | 
 **classificationAgency** | **String** |  | [optional] 
 **reasonIds** | **[String]** |  | 
-**downgradeOn** | [**ModelDate**](ModelDate.md) |  | [optional] 
+**downgradeOn** | **Date** |  | [optional] 
 **downgradeEvent** | **String** |  | [optional] 
 **downgradeInstructions** | **String** |  | [optional] 
-**declassifyOn** | [**ModelDate**](ModelDate.md) |  | [optional] 
+**declassifyOn** | **Date** |  | [optional] 
 **declassificationEvent** | **String** |  | [optional] 
 **exemptionIds** | **[String]** |  | [optional] 
 

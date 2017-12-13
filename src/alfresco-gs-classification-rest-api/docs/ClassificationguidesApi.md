@@ -29,18 +29,18 @@ Combines instructions from the given topics and the user defined instruction, if
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco-governance-services-security-controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.default;
+var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
+var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
 
 // Configure HTTP basic authorization: basicAuth
 var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+basicAuth.username = 'YOUR USERNAME';
+basicAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi()
+var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi();
 
 var opts = { 
-  'instructions': new AlfrescoGovernanceServicesSecurityControls.CombinedInstructionBody() // {CombinedInstructionBody} Instructions
+  'instructions': new AlfrescoGovernanceServicesSecurityControls.CombinedInstructionBody() // CombinedInstructionBody | Instructions
 };
 apiInstance.combinedInstructions(opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -64,7 +64,7 @@ Name | Type | Description  | Notes
 
 [basicAuth](../README.md#basicAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
@@ -79,17 +79,17 @@ Creates a new classification guide.
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco-governance-services-security-controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.default;
+var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
+var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
 
 // Configure HTTP basic authorization: basicAuth
 var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+basicAuth.username = 'YOUR USERNAME';
+basicAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi()
+var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi();
 
-var classificationGuide = new AlfrescoGovernanceServicesSecurityControls.ClassificationGuideBody(); // {ClassificationGuideBody} Classification guide
+var classificationGuide = new AlfrescoGovernanceServicesSecurityControls.ClassificationGuideBody(); // ClassificationGuideBody | Classification guide
 
 apiInstance.createClassificationGuide(classificationGuide).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -113,7 +113,7 @@ Name | Type | Description  | Notes
 
 [basicAuth](../README.md#basicAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
@@ -128,22 +128,22 @@ Creates a new subtopic of a topic.
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco-governance-services-security-controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.default;
+var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
+var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
 
 // Configure HTTP basic authorization: basicAuth
 var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+basicAuth.username = 'YOUR USERNAME';
+basicAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi()
+var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi();
 
-var topicId = "topicId_example"; // {String} The identifier for the topic
+var topicId = "topicId_example"; // String | The identifier for the topic
 
-var topic = new AlfrescoGovernanceServicesSecurityControls.TopicBody(); // {TopicBody} Subtopic
+var topic = new AlfrescoGovernanceServicesSecurityControls.TopicBody(); // TopicBody | Subtopic
 
 var opts = { 
-  'include': ["include_example"] // {[String]} Returns additional information about the topic. The following optional fields can be requested:\n* hasSubtopics - A flag indicating whether the topic already contains any subtopics.\n* instruction - Contains details of any instruction in the topic.\n* path - An ordered list of id-name pairs of all ancestor topics and the classification guide.\n* classificationGuide - The classification guide this topic is in.\n
+  'include': ["include_example"] // [String] | Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in. 
 };
 apiInstance.createSubtopic(topicId, topic, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -159,7 +159,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **topicId** | **String**| The identifier for the topic | 
  **topic** | [**TopicBody**](TopicBody.md)| Subtopic | 
- **include** | [**[String]**](String.md)| Returns additional information about the topic. The following optional fields can be requested:\n* hasSubtopics - A flag indicating whether the topic already contains any subtopics.\n* instruction - Contains details of any instruction in the topic.\n* path - An ordered list of id-name pairs of all ancestor topics and the classification guide.\n* classificationGuide - The classification guide this topic is in.\n | [optional] 
+ **include** | [**[String]**](String.md)| Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in.  | [optional] 
 
 ### Return type
 
@@ -169,7 +169,7 @@ Name | Type | Description  | Notes
 
 [basicAuth](../README.md#basicAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
@@ -184,22 +184,22 @@ Creates a new topic.
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco-governance-services-security-controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.default;
+var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
+var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
 
 // Configure HTTP basic authorization: basicAuth
 var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+basicAuth.username = 'YOUR USERNAME';
+basicAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi()
+var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi();
 
-var classificationGuideId = "classificationGuideId_example"; // {String} The identifier for the classification guide
+var classificationGuideId = "classificationGuideId_example"; // String | The identifier for the classification guide
 
-var topic = new AlfrescoGovernanceServicesSecurityControls.TopicBody(); // {TopicBody} Topic
+var topic = new AlfrescoGovernanceServicesSecurityControls.TopicBody(); // TopicBody | Topic
 
 var opts = { 
-  'include': ["include_example"] // {[String]} Returns additional information about the topic. The following optional fields can be requested:\n* hasSubtopics - A flag indicating whether the topic already contains any subtopics.\n* instruction - Contains details of any instruction in the topic.\n* path - An ordered list of id-name pairs of all ancestor topics and the classification guide.\n* classificationGuide - The classification guide this topic is in.\n
+  'include': ["include_example"] // [String] | Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in. 
 };
 apiInstance.createTopic(classificationGuideId, topic, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -215,7 +215,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **classificationGuideId** | **String**| The identifier for the classification guide | 
  **topic** | [**TopicBody**](TopicBody.md)| Topic | 
- **include** | [**[String]**](String.md)| Returns additional information about the topic. The following optional fields can be requested:\n* hasSubtopics - A flag indicating whether the topic already contains any subtopics.\n* instruction - Contains details of any instruction in the topic.\n* path - An ordered list of id-name pairs of all ancestor topics and the classification guide.\n* classificationGuide - The classification guide this topic is in.\n | [optional] 
+ **include** | [**[String]**](String.md)| Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in.  | [optional] 
 
 ### Return type
 
@@ -225,7 +225,7 @@ Name | Type | Description  | Notes
 
 [basicAuth](../README.md#basicAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
@@ -240,17 +240,17 @@ Deletes the classification guide with id **classificationGuideId**, including an
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco-governance-services-security-controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.default;
+var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
+var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
 
 // Configure HTTP basic authorization: basicAuth
 var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+basicAuth.username = 'YOUR USERNAME';
+basicAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi()
+var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi();
 
-var classificationGuideId = "classificationGuideId_example"; // {String} The identifier for the classification guide
+var classificationGuideId = "classificationGuideId_example"; // String | The identifier for the classification guide
 
 apiInstance.deleteClassificationGuide(classificationGuideId, ).then(function() {
   console.log('API called successfully.');
@@ -274,7 +274,7 @@ null (empty response body)
 
 [basicAuth](../README.md#basicAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
@@ -289,17 +289,17 @@ Deletes the topic with id  **topicId**, including any subtopics and instructions
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco-governance-services-security-controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.default;
+var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
+var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
 
 // Configure HTTP basic authorization: basicAuth
 var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+basicAuth.username = 'YOUR USERNAME';
+basicAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi()
+var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi();
 
-var topicId = "topicId_example"; // {String} The identifier for the topic
+var topicId = "topicId_example"; // String | The identifier for the topic
 
 apiInstance.deleteTopic(topicId, ).then(function() {
   console.log('API called successfully.');
@@ -323,7 +323,7 @@ null (empty response body)
 
 [basicAuth](../README.md#basicAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
@@ -338,22 +338,22 @@ Gets all classification guides.
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco-governance-services-security-controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.default;
+var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
+var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
 
 // Configure HTTP basic authorization: basicAuth
 var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+basicAuth.username = 'YOUR USERNAME';
+basicAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi()
+var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi();
 
 var opts = { 
-  'include': ["include_example"], // {[String]} Returns additional information about the guide. The following optional fields can be requested:\n* hasTopics - A flag indicating whether the guide already contains any topics.\n
-  'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
-  'maxItems': 56, // {Integer} The maximum number of items to return in the list.
-  'orderBy': ["orderBy_example"], // {[String]} A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to\nsort the list by one or more fields.\n\nEach field has a default sort order, which is normally acending order. Read the API method implementation notes\nabove to check if any fields used in this method have a descending default search order.\n\nTo sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.\n
-  'where': "where_example" // {String} A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on:\n* enabled - e.g. (enabled = true OR enabled = false)\n
+  'include': ["include_example"], // [String] | Returns additional information about the guide. The following optional fields can be requested: * hasTopics - A flag indicating whether the guide already contains any topics. 
+  'skipCount': 56, // Number | The number of entities that exist in the collection before those included in this list.
+  'maxItems': 56 // Number | The maximum number of items to return in the list.
+  'orderBy': ["orderBy_example"], // [String] | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to sort the list by one or more fields.  Each field has a default sort order, which is normally acending order. Read the API method implementation notes above to check if any fields used in this method have a descending default search order.  To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field. 
+  'where': "where_example" // String | A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on: * enabled - e.g. (enabled = true OR enabled = false) 
 };
 apiInstance.listClassificationGuides(opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -367,11 +367,11 @@ apiInstance.listClassificationGuides(opts).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **include** | [**[String]**](String.md)| Returns additional information about the guide. The following optional fields can be requested:\n* hasTopics - A flag indicating whether the guide already contains any topics.\n | [optional] 
- **skipCount** | [**Integer**](.md)| The number of entities that exist in the collection before those included in this list. | [optional] 
- **maxItems** | [**Integer**](.md)| The maximum number of items to return in the list. | [optional] 
- **orderBy** | [**[String]**](String.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to\nsort the list by one or more fields.\n\nEach field has a default sort order, which is normally acending order. Read the API method implementation notes\nabove to check if any fields used in this method have a descending default search order.\n\nTo sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.\n | [optional] 
- **where** | **String**| A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on:\n* enabled - e.g. (enabled = true OR enabled = false)\n | [optional] 
+ **include** | [**[String]**](String.md)| Returns additional information about the guide. The following optional fields can be requested: * hasTopics - A flag indicating whether the guide already contains any topics.  | [optional] 
+ **skipCount** | **Number**| The number of entities that exist in the collection before those included in this list. | [optional] 
+ **maxItems** | **Number**| The maximum number of items to return in the list. | [optional] 
+ **orderBy** | [**[String]**](String.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to sort the list by one or more fields.  Each field has a default sort order, which is normally acending order. Read the API method implementation notes above to check if any fields used in this method have a descending default search order.  To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.  | [optional] 
+ **where** | **String**| A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on: * enabled - e.g. (enabled &#x3D; true OR enabled &#x3D; false)  | [optional] 
 
 ### Return type
 
@@ -381,7 +381,7 @@ Name | Type | Description  | Notes
 
 [basicAuth](../README.md#basicAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
@@ -396,25 +396,25 @@ Gets all subtopics of a topic.
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco-governance-services-security-controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.default;
+var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
+var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
 
 // Configure HTTP basic authorization: basicAuth
 var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+basicAuth.username = 'YOUR USERNAME';
+basicAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi()
+var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi();
 
-var topicId = "topicId_example"; // {String} The identifier for the topic
+var topicId = "topicId_example"; // String | The identifier for the topic
 
 var opts = { 
-  'include': ["include_example"] // {[String]} Returns additional information about the topic. The following optional fields can be requested:\n* hasSubtopics - A flag indicating whether the topic already contains any subtopics.\n* instruction - Contains details of any instruction in the topic.\n* path - An ordered list of id-name pairs of all ancestor topics and the classification guide.\n* classificationGuide - The classification guide this topic is in.\n
-  'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
-  'maxItems': 56, // {Integer} The maximum number of items to return in the list.
-  'orderBy': ["orderBy_example"], // {[String]} A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to\nsort the list by one or more fields.\n\nEach field has a default sort order, which is normally acending order. Read the API method implementation notes\nabove to check if any fields used in this method have a descending default search order.\n\nTo sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.\n
-  'where': "where_example", // {String} A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on:\n* hasInstruction\n* hasSubtopics\n
-  'includeSource': true // {Boolean} Also include **source** in addition to **entries** with folder information on the parent guide/topic
+  'include': ["include_example"] // [String] | Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in. 
+  'skipCount': 56, // Number | The number of entities that exist in the collection before those included in this list.
+  'maxItems': 56 // Number | The maximum number of items to return in the list.
+  'orderBy': ["orderBy_example"], // [String] | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to sort the list by one or more fields.  Each field has a default sort order, which is normally acending order. Read the API method implementation notes above to check if any fields used in this method have a descending default search order.  To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field. 
+  'where': "where_example", // String | A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on: * hasInstruction * hasSubtopics 
+  'includeSource': true // Boolean | Also include **source** in addition to **entries** with folder information on the parent guide/topic
 };
 apiInstance.listSubtopics(topicId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -429,11 +429,11 @@ apiInstance.listSubtopics(topicId, , opts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **topicId** | **String**| The identifier for the topic | 
- **include** | [**[String]**](String.md)| Returns additional information about the topic. The following optional fields can be requested:\n* hasSubtopics - A flag indicating whether the topic already contains any subtopics.\n* instruction - Contains details of any instruction in the topic.\n* path - An ordered list of id-name pairs of all ancestor topics and the classification guide.\n* classificationGuide - The classification guide this topic is in.\n | [optional] 
- **skipCount** | [**Integer**](.md)| The number of entities that exist in the collection before those included in this list. | [optional] 
- **maxItems** | [**Integer**](.md)| The maximum number of items to return in the list. | [optional] 
- **orderBy** | [**[String]**](String.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to\nsort the list by one or more fields.\n\nEach field has a default sort order, which is normally acending order. Read the API method implementation notes\nabove to check if any fields used in this method have a descending default search order.\n\nTo sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.\n | [optional] 
- **where** | **String**| A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on:\n* hasInstruction\n* hasSubtopics\n | [optional] 
+ **include** | [**[String]**](String.md)| Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in.  | [optional] 
+ **skipCount** | **Number**| The number of entities that exist in the collection before those included in this list. | [optional] 
+ **maxItems** | **Number**| The maximum number of items to return in the list. | [optional] 
+ **orderBy** | [**[String]**](String.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to sort the list by one or more fields.  Each field has a default sort order, which is normally acending order. Read the API method implementation notes above to check if any fields used in this method have a descending default search order.  To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.  | [optional] 
+ **where** | **String**| A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on: * hasInstruction * hasSubtopics  | [optional] 
  **includeSource** | **Boolean**| Also include **source** in addition to **entries** with folder information on the parent guide/topic | [optional] 
 
 ### Return type
@@ -444,7 +444,7 @@ Name | Type | Description  | Notes
 
 [basicAuth](../README.md#basicAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
@@ -459,25 +459,25 @@ Gets all topics.
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco-governance-services-security-controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.default;
+var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
+var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
 
 // Configure HTTP basic authorization: basicAuth
 var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+basicAuth.username = 'YOUR USERNAME';
+basicAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi()
+var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi();
 
-var classificationGuideId = "classificationGuideId_example"; // {String} The identifier for the classification guide
+var classificationGuideId = "classificationGuideId_example"; // String | The identifier for the classification guide
 
 var opts = { 
-  'include': ["include_example"] // {[String]} Returns additional information about the topic. The following optional fields can be requested:\n* hasSubtopics - A flag indicating whether the topic already contains any subtopics.\n* instruction - Contains details of any instruction in the topic.\n* path - An ordered list of id-name pairs of all ancestor topics and the classification guide.\n* classificationGuide - The classification guide this topic is in.\n
-  'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
-  'maxItems': 56, // {Integer} The maximum number of items to return in the list.
-  'orderBy': ["orderBy_example"], // {[String]} A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to\nsort the list by one or more fields.\n\nEach field has a default sort order, which is normally acending order. Read the API method implementation notes\nabove to check if any fields used in this method have a descending default search order.\n\nTo sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.\n
-  'where': "where_example", // {String} A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR e.g. (instruction=true and hasSubtopics=false). Fields to filter on:\n* hasInstruction\n* hasSubtopics\n
-  'includeSource': true // {Boolean} Also include **source** in addition to **entries** with folder information on the parent guide/topic
+  'include': ["include_example"] // [String] | Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in. 
+  'skipCount': 56, // Number | The number of entities that exist in the collection before those included in this list.
+  'maxItems': 56 // Number | The maximum number of items to return in the list.
+  'orderBy': ["orderBy_example"], // [String] | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to sort the list by one or more fields.  Each field has a default sort order, which is normally acending order. Read the API method implementation notes above to check if any fields used in this method have a descending default search order.  To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field. 
+  'where': "where_example", // String | A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR e.g. (instruction=true and hasSubtopics=false). Fields to filter on: * hasInstruction * hasSubtopics 
+  'includeSource': true // Boolean | Also include **source** in addition to **entries** with folder information on the parent guide/topic
 };
 apiInstance.listTopics(classificationGuideId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -492,11 +492,11 @@ apiInstance.listTopics(classificationGuideId, , opts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **classificationGuideId** | **String**| The identifier for the classification guide | 
- **include** | [**[String]**](String.md)| Returns additional information about the topic. The following optional fields can be requested:\n* hasSubtopics - A flag indicating whether the topic already contains any subtopics.\n* instruction - Contains details of any instruction in the topic.\n* path - An ordered list of id-name pairs of all ancestor topics and the classification guide.\n* classificationGuide - The classification guide this topic is in.\n | [optional] 
- **skipCount** | [**Integer**](.md)| The number of entities that exist in the collection before those included in this list. | [optional] 
- **maxItems** | [**Integer**](.md)| The maximum number of items to return in the list. | [optional] 
- **orderBy** | [**[String]**](String.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to\nsort the list by one or more fields.\n\nEach field has a default sort order, which is normally acending order. Read the API method implementation notes\nabove to check if any fields used in this method have a descending default search order.\n\nTo sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.\n | [optional] 
- **where** | **String**| A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR e.g. (instruction=true and hasSubtopics=false). Fields to filter on:\n* hasInstruction\n* hasSubtopics\n | [optional] 
+ **include** | [**[String]**](String.md)| Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in.  | [optional] 
+ **skipCount** | **Number**| The number of entities that exist in the collection before those included in this list. | [optional] 
+ **maxItems** | **Number**| The maximum number of items to return in the list. | [optional] 
+ **orderBy** | [**[String]**](String.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to sort the list by one or more fields.  Each field has a default sort order, which is normally acending order. Read the API method implementation notes above to check if any fields used in this method have a descending default search order.  To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.  | [optional] 
+ **where** | **String**| A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR e.g. (instruction&#x3D;true and hasSubtopics&#x3D;false). Fields to filter on: * hasInstruction * hasSubtopics  | [optional] 
  **includeSource** | **Boolean**| Also include **source** in addition to **entries** with folder information on the parent guide/topic | [optional] 
 
 ### Return type
@@ -507,7 +507,7 @@ Name | Type | Description  | Notes
 
 [basicAuth](../README.md#basicAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
@@ -522,17 +522,17 @@ Gets the classification guide with id **classificationGuideId**.
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco-governance-services-security-controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.default;
+var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
+var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
 
 // Configure HTTP basic authorization: basicAuth
 var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+basicAuth.username = 'YOUR USERNAME';
+basicAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi()
+var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi();
 
-var classificationGuideId = "classificationGuideId_example"; // {String} The identifier for the classification guide
+var classificationGuideId = "classificationGuideId_example"; // String | The identifier for the classification guide
 
 apiInstance.showClassificationGuideById(classificationGuideId, ).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -556,7 +556,7 @@ Name | Type | Description  | Notes
 
 [basicAuth](../README.md#basicAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
@@ -571,20 +571,20 @@ Gets the topic with id **topicId**.
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco-governance-services-security-controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.default;
+var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
+var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
 
 // Configure HTTP basic authorization: basicAuth
 var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+basicAuth.username = 'YOUR USERNAME';
+basicAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi()
+var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi();
 
-var topicId = "topicId_example"; // {String} The identifier for the topic
+var topicId = "topicId_example"; // String | The identifier for the topic
 
 var opts = { 
-  'include': ["include_example"] // {[String]} Returns additional information about the topic. The following optional fields can be requested:\n* hasSubtopics - A flag indicating whether the topic already contains any subtopics.\n* instruction - Contains details of any instruction in the topic.\n* path - An ordered list of id-name pairs of all ancestor topics and the classification guide.\n* classificationGuide - The classification guide this topic is in.\n
+  'include': ["include_example"] // [String] | Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in. 
 };
 apiInstance.showTopicById(topicId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -599,7 +599,7 @@ apiInstance.showTopicById(topicId, , opts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **topicId** | **String**| The identifier for the topic | 
- **include** | [**[String]**](String.md)| Returns additional information about the topic. The following optional fields can be requested:\n* hasSubtopics - A flag indicating whether the topic already contains any subtopics.\n* instruction - Contains details of any instruction in the topic.\n* path - An ordered list of id-name pairs of all ancestor topics and the classification guide.\n* classificationGuide - The classification guide this topic is in.\n | [optional] 
+ **include** | [**[String]**](String.md)| Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in.  | [optional] 
 
 ### Return type
 
@@ -609,7 +609,7 @@ Name | Type | Description  | Notes
 
 [basicAuth](../README.md#basicAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
@@ -624,19 +624,19 @@ Updates the classification guide with id **classificationGuideId**. For example,
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco-governance-services-security-controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.default;
+var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
+var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
 
 // Configure HTTP basic authorization: basicAuth
 var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+basicAuth.username = 'YOUR USERNAME';
+basicAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi()
+var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi();
 
-var classificationGuideId = "classificationGuideId_example"; // {String} The identifier for the classification guide
+var classificationGuideId = "classificationGuideId_example"; // String | The identifier for the classification guide
 
-var classificationGuide = new AlfrescoGovernanceServicesSecurityControls.ClassificationGuideBody(); // {ClassificationGuideBody} Classification guide
+var classificationGuide = new AlfrescoGovernanceServicesSecurityControls.ClassificationGuideBody(); // ClassificationGuideBody | Classification guide
 
 apiInstance.updateClassificationGuide(classificationGuideId, classificationGuide).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -661,7 +661,7 @@ Name | Type | Description  | Notes
 
 [basicAuth](../README.md#basicAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
@@ -672,26 +672,26 @@ Name | Type | Description  | Notes
 
 Update a topic
 
-Updates the topic with id **topicId**.\n\nUse this to rename a topic or to add, edit, or remove the instruction associated with it.\n
+Updates the topic with id **topicId**.  Use this to rename a topic or to add, edit, or remove the instruction associated with it. 
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco-governance-services-security-controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.default;
+var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
+var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
 
 // Configure HTTP basic authorization: basicAuth
 var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME'
-basicAuth.password = 'YOUR PASSWORD'
+basicAuth.username = 'YOUR USERNAME';
+basicAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi()
+var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi();
 
-var topicId = "topicId_example"; // {String} The identifier for the topic
+var topicId = "topicId_example"; // String | The identifier for the topic
 
-var topic = new AlfrescoGovernanceServicesSecurityControls.TopicBody(); // {TopicBody} Topic
+var topic = new AlfrescoGovernanceServicesSecurityControls.TopicBody(); // TopicBody | Topic
 
 var opts = { 
-  'include': ["include_example"] // {[String]} Returns additional information about the topic. The following optional fields can be requested:\n* hasSubtopics - A flag indicating whether the topic already contains any subtopics.\n* instruction - Contains details of any instruction in the topic.\n* path - An ordered list of id-name pairs of all ancestor topics and the classification guide.\n* classificationGuide - The classification guide this topic is in.\n
+  'include': ["include_example"] // [String] | Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in. 
 };
 apiInstance.updateTopic(topicId, topic, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -707,7 +707,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **topicId** | **String**| The identifier for the topic | 
  **topic** | [**TopicBody**](TopicBody.md)| Topic | 
- **include** | [**[String]**](String.md)| Returns additional information about the topic. The following optional fields can be requested:\n* hasSubtopics - A flag indicating whether the topic already contains any subtopics.\n* instruction - Contains details of any instruction in the topic.\n* path - An ordered list of id-name pairs of all ancestor topics and the classification guide.\n* classificationGuide - The classification guide this topic is in.\n | [optional] 
+ **include** | [**[String]**](String.md)| Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in.  | [optional] 
 
 ### Return type
 
@@ -717,7 +717,7 @@ Name | Type | Description  | Notes
 
 [basicAuth](../README.md#basicAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json

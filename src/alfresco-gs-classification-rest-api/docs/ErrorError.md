@@ -4,9 +4,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **errorKey** | **String** |  | [optional] 
+**statusCode** | **Number** |  | 
 **briefSummary** | **String** |  | 
-**descriptionURL** | **String** |  | 
 **stackTrace** | **String** |  | 
-**statusCode** | **Integer** |  | 
+**descriptionURL** | **String** |  | 
 
 
