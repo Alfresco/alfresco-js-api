@@ -19,15 +19,6 @@ Gets information for transfer container **transferContainerId**  Mandatory field
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesRestApi.TransfercontainersApi();
 
 var transferContainerId = "transferContainerId_example"; // String | The identifier of a transfer container. You can also use the -transfers- alias.
 
@@ -74,15 +65,6 @@ Returns a list of transfers.  Minimal information for each child is returned by 
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesRestApi.TransfercontainersApi();
 
 var transferContainerId = "transferContainerId_example"; // String | The identifier of a transfer container. You can also use the -transfers- alias.
 
@@ -135,15 +117,6 @@ Updates the transfer container **transferContainerId**. For example, you can ren
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesRestApi.TransfercontainersApi();
 
 var transferContainerId = "transferContainerId_example"; // String | The identifier of a transfer container. You can also use the -transfers- alias.
 

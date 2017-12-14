@@ -29,20 +29,10 @@ Combines instructions from the given topics and the user defined instruction, if
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi();
-
-var opts = { 
+pts = { 
   'instructions': new AlfrescoGovernanceServicesSecurityControls.CombinedInstructionBody() // CombinedInstructionBody | Instructions
 };
-apiInstance.combinedInstructions(opts).then(function(data) {
+this.alfrescoJsApi.gsClassification.combinedInstructions(opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -79,19 +69,10 @@ Creates a new classification guide.
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi();
 
 var classificationGuide = new AlfrescoGovernanceServicesSecurityControls.ClassificationGuideBody(); // ClassificationGuideBody | Classification guide
 
-apiInstance.createClassificationGuide(classificationGuide).then(function(data) {
+this.alfrescoJsApi.gsClassification.createClassificationGuide(classificationGuide).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -128,16 +109,6 @@ Creates a new subtopic of a topic.
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi();
-
 var topicId = "topicId_example"; // String | The identifier for the topic
 
 var topic = new AlfrescoGovernanceServicesSecurityControls.TopicBody(); // TopicBody | Subtopic
@@ -145,7 +116,7 @@ var topic = new AlfrescoGovernanceServicesSecurityControls.TopicBody(); // Topic
 var opts = { 
   'include': ["include_example"] // [String] | Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in. 
 };
-apiInstance.createSubtopic(topicId, topic, opts).then(function(data) {
+this.alfrescoJsApi.gsClassification.createSubtopic(topicId, topic, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -184,16 +155,6 @@ Creates a new topic.
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi();
-
 var classificationGuideId = "classificationGuideId_example"; // String | The identifier for the classification guide
 
 var topic = new AlfrescoGovernanceServicesSecurityControls.TopicBody(); // TopicBody | Topic
@@ -201,7 +162,7 @@ var topic = new AlfrescoGovernanceServicesSecurityControls.TopicBody(); // Topic
 var opts = { 
   'include': ["include_example"] // [String] | Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in. 
 };
-apiInstance.createTopic(classificationGuideId, topic, opts).then(function(data) {
+this.alfrescoJsApi.gsClassification.createTopic(classificationGuideId, topic, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -240,19 +201,10 @@ Deletes the classification guide with id **classificationGuideId**, including an
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi();
 
 var classificationGuideId = "classificationGuideId_example"; // String | The identifier for the classification guide
 
-apiInstance.deleteClassificationGuide(classificationGuideId, ).then(function() {
+this.alfrescoJsApi.gsClassification.deleteClassificationGuide(classificationGuideId, ).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -289,19 +241,9 @@ Deletes the topic with id  **topicId**, including any subtopics and instructions
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi();
-
 var topicId = "topicId_example"; // String | The identifier for the topic
 
-apiInstance.deleteTopic(topicId, ).then(function() {
+this.alfrescoJsApi.gsClassification.deleteTopic(topicId, ).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -338,16 +280,6 @@ Gets all classification guides.
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi();
-
 var opts = { 
   'include': ["include_example"], // [String] | Returns additional information about the guide. The following optional fields can be requested: * hasTopics - A flag indicating whether the guide already contains any topics. 
   'skipCount': 56, // Number | The number of entities that exist in the collection before those included in this list.
@@ -355,7 +287,7 @@ var opts = {
   'orderBy': ["orderBy_example"], // [String] | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to sort the list by one or more fields.  Each field has a default sort order, which is normally acending order. Read the API method implementation notes above to check if any fields used in this method have a descending default search order.  To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field. 
   'where': "where_example" // String | A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on: * enabled - e.g. (enabled = true OR enabled = false) 
 };
-apiInstance.listClassificationGuides(opts).then(function(data) {
+this.alfrescoJsApi.gsClassification.listClassificationGuides(opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -396,15 +328,6 @@ Gets all subtopics of a topic.
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi();
 
 var topicId = "topicId_example"; // String | The identifier for the topic
 
@@ -416,7 +339,7 @@ var opts = {
   'where': "where_example", // String | A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on: * hasInstruction * hasSubtopics 
   'includeSource': true // Boolean | Also include **source** in addition to **entries** with folder information on the parent guide/topic
 };
-apiInstance.listSubtopics(topicId, , opts).then(function(data) {
+this.alfrescoJsApi.gsClassification.listSubtopics(topicId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -459,15 +382,6 @@ Gets all topics.
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi();
 
 var classificationGuideId = "classificationGuideId_example"; // String | The identifier for the classification guide
 
@@ -479,7 +393,7 @@ var opts = {
   'where': "where_example", // String | A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR e.g. (instruction=true and hasSubtopics=false). Fields to filter on: * hasInstruction * hasSubtopics 
   'includeSource': true // Boolean | Also include **source** in addition to **entries** with folder information on the parent guide/topic
 };
-apiInstance.listTopics(classificationGuideId, , opts).then(function(data) {
+this.alfrescoJsApi.gsClassification.listTopics(classificationGuideId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -522,19 +436,10 @@ Gets the classification guide with id **classificationGuideId**.
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi();
 
 var classificationGuideId = "classificationGuideId_example"; // String | The identifier for the classification guide
 
-apiInstance.showClassificationGuideById(classificationGuideId, ).then(function(data) {
+this.alfrescoJsApi.gsClassification.showClassificationGuideById(classificationGuideId, ).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -571,22 +476,13 @@ Gets the topic with id **topicId**.
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi();
 
 var topicId = "topicId_example"; // String | The identifier for the topic
 
 var opts = { 
   'include': ["include_example"] // [String] | Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in. 
 };
-apiInstance.showTopicById(topicId, , opts).then(function(data) {
+this.alfrescoJsApi.gsClassification.showTopicById(topicId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -624,21 +520,12 @@ Updates the classification guide with id **classificationGuideId**. For example,
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi();
 
 var classificationGuideId = "classificationGuideId_example"; // String | The identifier for the classification guide
 
 var classificationGuide = new AlfrescoGovernanceServicesSecurityControls.ClassificationGuideBody(); // ClassificationGuideBody | Classification guide
 
-apiInstance.updateClassificationGuide(classificationGuideId, classificationGuide).then(function(data) {
+this.alfrescoJsApi.gsClassification.updateClassificationGuide(classificationGuideId, classificationGuide).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -676,15 +563,6 @@ Updates the topic with id **topicId**.  Use this to rename a topic or to add, ed
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi();
 
 var topicId = "topicId_example"; // String | The identifier for the topic
 
@@ -693,7 +571,7 @@ var topic = new AlfrescoGovernanceServicesSecurityControls.TopicBody(); // Topic
 var opts = { 
   'include': ["include_example"] // [String] | Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in. 
 };
-apiInstance.updateTopic(topicId, topic, opts).then(function(data) {
+this.alfrescoJsApi.gsClassification.updateTopic(topicId, topic, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

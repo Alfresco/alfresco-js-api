@@ -22,15 +22,6 @@ Completes the record **recordId**.
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesRestApi.RecordsApi();
 
 var recordId = "recordId_example"; // String | The identifier of a record.
 
@@ -77,15 +68,6 @@ Deletes the record **recordId**. Deleted file plan components cannot be recovere
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesRestApi.RecordsApi();
 
 var recordId = "recordId_example"; // String | The identifier of a record.
 
@@ -126,15 +108,6 @@ Files the record **recordId** in the target record folder.  You need to specify 
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesRestApi.RecordsApi();
 
 var recordId = "recordId_example"; // String | The identifier of a record.
 
@@ -184,15 +157,6 @@ Gets information for record **recordId**  Mandatory fields and the record&#39;s 
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesRestApi.RecordsApi();
 
 var recordId = "recordId_example"; // String | The identifier of a record.
 
@@ -239,15 +203,6 @@ Get record content
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesRestApi.RecordsApi();
 
 var recordId = "recordId_example"; // String | The identifier of a record.
 
@@ -294,15 +249,6 @@ Updates the record **recordId**. For example, you can rename a record: &#x60;&#x
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesRestApi.RecordsApi();
 
 var recordId = "recordId_example"; // String | The identifier of a record.
 

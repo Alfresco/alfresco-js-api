@@ -20,15 +20,6 @@ Create the Records Management (RM) site
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesRestApi.GssitesApi();
 
 var siteBodyCreate = new AlfrescoGovernanceServicesRestApi.RMSiteBodyCreate(); // RMSiteBodyCreate | The site details
 
@@ -73,15 +64,6 @@ Delete the Records Management (RM) site
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesRestApi.GssitesApi();
 apiInstance.deleteRMSite().then(function() {
   console.log('API called successfully.');
 }, function(error) {
@@ -116,15 +98,6 @@ Get the Records Management (RM) site
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesRestApi.GssitesApi();
 
 var opts = { 
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
@@ -166,15 +139,6 @@ Update the Records Management (RM) site
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesRestApi.GssitesApi();
 
 var siteBodyUpdate = new AlfrescoGovernanceServicesRestApi.RMSiteBodyUpdate(); // RMSiteBodyUpdate | The RM site information to update.
 

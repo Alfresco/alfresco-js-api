@@ -21,15 +21,6 @@ Create a record or an unfiled record folder as a primary child of **unfiledRecor
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesRestApi.UnfiledrecordfoldersApi();
 
 var unfiledRecordFolderId = "unfiledRecordFolderId_example"; // String | The identifier of an unfiled record folder.
 
@@ -81,15 +72,6 @@ Deletes the unfiled record folder **unfiledRecordFolderId**.
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesRestApi.UnfiledrecordfoldersApi();
 
 var unfiledRecordFolderId = "unfiledRecordFolderId_example"; // String | The identifier of an unfiled record folder.
 
@@ -130,15 +112,6 @@ Gets information for unfiled record folder id **unfiledRecordFolderId**  Mandato
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesRestApi.UnfiledrecordfoldersApi();
 
 var unfiledRecordFolderId = "unfiledRecordFolderId_example"; // String | The identifier of an unfiled record folder.
 
@@ -187,15 +160,6 @@ Returns a list of records or unfiled record folders.  Minimal information for ea
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesRestApi.UnfiledrecordfoldersApi();
 
 var unfiledRecordFolderId = "unfiledRecordFolderId_example"; // String | The identifier of an unfiled record folder.
 
@@ -252,15 +216,6 @@ Updates unfiled record folder **unfiledRecordFolderId**. For example, you can re
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesRestApi.UnfiledrecordfoldersApi();
 
 var unfiledRecordFolderId = "unfiledRecordFolderId_example"; // String | The identifier of an unfiled record folder.
 

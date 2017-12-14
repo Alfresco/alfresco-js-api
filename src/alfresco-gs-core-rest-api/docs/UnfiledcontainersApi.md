@@ -20,15 +20,6 @@ Creates a record or an unfiled record folder as a primary child of **unfiledCont
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesRestApi.UnfiledcontainersApi();
 
 var unfiledContainerId = "unfiledContainerId_example"; // String | The identifier of an unfiled records container. You can use the **-unfiled-** alias.
 
@@ -80,15 +71,6 @@ Gets information for unfiled records container **unfiledContainerId**  Mandatory
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesRestApi.UnfiledcontainersApi();
 
 var unfiledContainerId = "unfiledContainerId_example"; // String | The identifier of an unfiled records container. You can use the **-unfiled-** alias.
 
@@ -135,15 +117,6 @@ Returns a list of records or unfiled record folders.  Minimal information for ea
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesRestApi.UnfiledcontainersApi();
 
 var unfiledContainerId = "unfiledContainerId_example"; // String | The identifier of an unfiled records container. You can use the **-unfiled-** alias.
 
@@ -198,15 +171,6 @@ Updates unfiled record container **unfiledContainerId**. For example, you can re
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesRestApi.UnfiledcontainersApi();
 
 var unfiledContainerId = "unfiledContainerId_example"; // String | The identifier of an unfiled records container. You can use the **-unfiled-** alias.
 

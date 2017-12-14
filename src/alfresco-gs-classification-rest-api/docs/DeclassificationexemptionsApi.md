@@ -21,19 +21,8 @@ Creates a new declassification exemption.  **Note:** You can create more than on
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.DeclassificationexemptionsApi();
-
-var declassificationExemption = new AlfrescoGovernanceServicesSecurityControls.DeclassificationExemptionBody(); // DeclassificationExemptionBody | Declassification exemption
-
-apiInstance.createDeclassificationExemption(declassificationExemption).then(function(data) {
+this.alfrescoJsApi.gsClassification.createDeclassificationExemption(declassificationExemption).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -70,19 +59,8 @@ Deletes the declassification exemption with id **declassificationExemptionId**. 
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.DeclassificationexemptionsApi();
-
-var declassificationExemptionId = "declassificationExemptionId_example"; // String | The identifier for the declassification exemption
-
-apiInstance.deleteDeclassificationExemption(declassificationExemptionId).then(function() {
+this.alfrescoJsApi.gsClassification.deleteDeclassificationExemption(declassificationExemptionId).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -119,21 +97,12 @@ Gets all declassification exemptions.
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.DeclassificationexemptionsApi();
 
 var opts = { 
   'skipCount': 56, // Number | The number of entities that exist in the collection before those included in this list.
   'maxItems': 56 // Number | The maximum number of items to return in the list.
 };
-apiInstance.listDeclassificationExemptions(opts).then(function(data) {
+this.alfrescoJsApi.gsClassification.listDeclassificationExemptions(opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -171,19 +140,10 @@ Gets the declassification exemption with id **declassificationExemptionId**.
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.DeclassificationexemptionsApi();
 
 var declassificationExemptionId = "declassificationExemptionId_example"; // String | The identifier for the declassification exemption
 
-apiInstance.showDeclassificationExemptionById(declassificationExemptionId).then(function(data) {
+this.alfrescoJsApi.gsClassification.showDeclassificationExemptionById(declassificationExemptionId).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -220,21 +180,8 @@ Updates the declassification exemption with id **declassificationExemptionId**. 
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.DeclassificationexemptionsApi();
-
-var declassificationExemptionId = "declassificationExemptionId_example"; // String | The identifier for the declassification exemption
-
-var declassificationExemption = new AlfrescoGovernanceServicesSecurityControls.DeclassificationExemptionBody(); // DeclassificationExemptionBody | Declassification exemption
-
-apiInstance.updateDeclassificationExemption(declassificationExemptionIddeclassificationExemption).then(function(data) {
+this.alfrescoJsApi.gsClassification.updateDeclassificationExemption(declassificationExemptionIddeclassificationExemption).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

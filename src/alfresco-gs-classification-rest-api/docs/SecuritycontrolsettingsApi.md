@@ -18,19 +18,9 @@ Gets the value for a selected **securityControlSettingKey**.
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.SecuritycontrolsettingsApi();
-
-var securityControlSettingKey = "securityControlSettingKey_example"; // String | The key for the security control setting. You can use one of the following settings: * -declassificationTimeFrame- for the declassification time frame value set in alfresco-global.properties file 
-
-apiInstance.getSecurityControlSetting(securityControlSettingKey, ).then(function(data) {
+this.alfrescoJsApi.gsClassification.getSecurityControlSetting(securityControlSettingKey, ).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -67,21 +57,12 @@ Updates the value of a selected **securityControlSettingKey**.
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.SecuritycontrolsettingsApi();
-
-var securityControlSettingKey = "securityControlSettingKey_example"; // String | The key for the security control setting. You can use one of the following settings: * -declassificationTimeFrame- for the declassification time frame value set in alfresco-global.properties file 
 
 var securityControlSettingValue = new AlfrescoGovernanceServicesSecurityControls.SecurityControlSettingBody(); // SecurityControlSettingBody | The new value for the security control setting. This can be a string or number, depending on the setting key.
 
-apiInstance.updateSecurityControlSetting(securityControlSettingKey, securityControlSettingValue).then(function(data) {
+this.alfrescoJsApi.gsClassification.updateSecurityControlSetting(securityControlSettingKey, securityControlSettingValue).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

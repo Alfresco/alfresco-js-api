@@ -17,19 +17,8 @@ Calculates the default declassification date for **nodeId** based on the propert
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.DefaultclassificationvaluesApi();
-
-var nodeId = "nodeId_example"; // String | The identifier of a node.
-
-apiInstance.calculateDefaultDeclassificationDate(nodeId).then(function(data) {
+this.alfrescoJsApi.gsClassification.calculateDefaultDeclassificationDate(nodeId).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

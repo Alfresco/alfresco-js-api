@@ -164,8 +164,8 @@ class AlfrescoApi {
         //Governance CORE
         this.gsCore = {};
         AlfrescoGsCoreRestApi.ApiClient.instance = this.gsClient;
-        this.gGsCoreStore = AlfrescoGsCoreRestApi;
-        this._instantiateObjects(this.gGsCoreStore, this.gsCore);
+        this.gsCoreStore = AlfrescoGsCoreRestApi;
+        this._instantiateObjects(this.gsCoreStore, this.gsCore);
 
         //Governance Classification
         this.gsClassification = {};

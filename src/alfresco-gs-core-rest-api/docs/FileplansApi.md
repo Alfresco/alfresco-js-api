@@ -20,16 +20,6 @@ Creates a record category as a primary child of **filePlanId**.  You can set the
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesRestApi.FileplansApi();
-
 var filePlanId = "filePlanId_example"; // String | The identifier of a file plan. You can also use the -filePlan- alias.
 
 var nodeBodyCreate = new AlfrescoGovernanceServicesRestApi.RootCategoryBodyCreate(); // RootCategoryBodyCreate | The node information to create.
@@ -80,16 +70,6 @@ Gets information for file plan **filePlanId**  Mandatory fields and the file pla
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesRestApi.FileplansApi();
-
 var filePlanId = "filePlanId_example"; // String | The identifier of a file plan. You can also use the -filePlan- alias.
 
 var opts = { 
@@ -135,16 +115,6 @@ Returns a list of record categories.  Minimal information for each child is retu
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesRestApi.FileplansApi();
-
 var filePlanId = "filePlanId_example"; // String | The identifier of a file plan. You can also use the -filePlan- alias.
 
 var opts = { 
@@ -196,16 +166,6 @@ Updates file plan **filePlanId**. You can only set or update description and tit
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesRestApi = require('alfresco_governance_services_rest_api');
-var defaultClient = AlfrescoGovernanceServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesRestApi.FileplansApi();
-
 var filePlanId = "filePlanId_example"; // String | The identifier of a file plan. You can also use the -filePlan- alias.
 
 var filePlanBodyUpdate = new AlfrescoGovernanceServicesRestApi.FilePlanBodyUpdate(); // FilePlanBodyUpdate | The file plan information to update.

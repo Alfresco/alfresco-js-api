@@ -21,19 +21,7 @@ Creates a new classification reason.  **Note:** You can create more than one rea
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationreasonsApi();
-
-var classificationReason = new AlfrescoGovernanceServicesSecurityControls.ClassificationReasonBody(); // ClassificationReasonBody | Classification reason
-
-apiInstance.createClassificationReason(classificationReason).then(function(data) {
+this.alfrescoJsApi.gsClassification.createClassificationReason(classificationReason).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -70,19 +58,8 @@ Deletes the classification reason  **classificationReasonId**. You can&#39;t del
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationreasonsApi();
-
-var classificationReasonId = "classificationReasonId_example"; // String | The identifier for the classification reason
-
-apiInstance.deleteClassificationReason(classificationReasonId).then(function() {
+this.alfrescoJsApi.gsClassification.deleteClassificationReason(classificationReasonId).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -119,22 +96,13 @@ Gets all classification reasons.
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationreasonsApi();
 
 var opts = { 
   'skipCount': 56, // Number | The number of entities that exist in the collection before those included in this list.
   'maxItems': 56 // Number | The maximum number of items to return in the list.
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.listClassificationReasons(opts).then(function(data) {
+this.alfrescoJsApi.gsClassification.listClassificationReasons(opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -173,19 +141,8 @@ Gets the classification reason  **classificationReasonId**.
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationreasonsApi();
-
-var classificationReasonId = "classificationReasonId_example"; // String | The identifier for the classification reason
-
-apiInstance.showClassificationReasonById(classificationReasonId).then(function(data) {
+this.alfrescoJsApi.gsClassification.showClassificationReasonById(classificationReasonId).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -222,21 +179,10 @@ Updates the classification reason with id **classificationReasonId**. For exampl
 
 ### Example
 ```javascript
-var AlfrescoGovernanceServicesSecurityControls = require('alfresco_governance_services_security_controls');
-var defaultClient = AlfrescoGovernanceServicesSecurityControls.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoGovernanceServicesSecurityControls.ClassificationreasonsApi();
-
-var classificationReasonId = "classificationReasonId_example"; // String | The identifier for the classification reason
 
 var classificationReason = new AlfrescoGovernanceServicesSecurityControls.ClassificationReasonBody(); // ClassificationReasonBody | Classification reason
 
-apiInstance.updateClassificationReason(classificationReasonIdclassificationReason).then(function(data) {
+this.alfrescoJsApi.gsClassification.updateClassificationReason(classificationReasonIdclassificationReason).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
