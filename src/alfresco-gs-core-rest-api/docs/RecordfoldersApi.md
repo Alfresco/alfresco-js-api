@@ -1,14 +1,14 @@
-# AlfrescoGovernanceServicesRestApi.RecordfoldersApi
+# AlfrescoGovernanceServicesRestApi.RecordFoldersApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/gs/versions/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createRecordFolderChild**](RecordfoldersApi.md#createRecordFolderChild) | **POST** /record-folders/{recordFolderId}/records | Create a record
-[**deleteRecordFolder**](RecordfoldersApi.md#deleteRecordFolder) | **DELETE** /record-folders/{recordFolderId} | Delete a record folder
-[**getRecordFolder**](RecordfoldersApi.md#getRecordFolder) | **GET** /record-folders/{recordFolderId} | Get a record folder
-[**listRecordFolderChildren**](RecordfoldersApi.md#listRecordFolderChildren) | **GET** /record-folders/{recordFolderId}/records | List records
-[**updateRecordFolder**](RecordfoldersApi.md#updateRecordFolder) | **PUT** /record-folders/{recordFolderId} | Update a record folder
+[**createRecordFolderChild**](RecordFoldersApi.md#createRecordFolderChild) | **POST** /record-folders/{recordFolderId}/records | Create a record
+[**deleteRecordFolder**](RecordFoldersApi.md#deleteRecordFolder) | **DELETE** /record-folders/{recordFolderId} | Delete a record folder
+[**getRecordFolder**](RecordFoldersApi.md#getRecordFolder) | **GET** /record-folders/{recordFolderId} | Get a record folder
+[**listRecordFolderChildren**](RecordFoldersApi.md#listRecordFolderChildren) | **GET** /record-folders/{recordFolderId}/records | List records
+[**updateRecordFolder**](RecordFoldersApi.md#updateRecordFolder) | **PUT** /record-folders/{recordFolderId} | Update a record folder
 
 
 <a name="createRecordFolderChild"></a>

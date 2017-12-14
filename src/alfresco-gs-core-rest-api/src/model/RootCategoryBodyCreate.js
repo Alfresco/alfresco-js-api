@@ -35,16 +35,16 @@
 
   /**
    * The RootCategoryBodyCreate model module.
-   * @module model/RootCategoryBodyCreate
+   * @module  RootCategoryBodyCreate
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>RootCategoryBodyCreate</code>.
-   * @alias module:model/RootCategoryBodyCreate
+   * @alias RootCategoryBodyCreate
    * @class
-   * @param name {String} The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |. The character . must not be used at the end of the name.
-   * @param nodeType {String}
+   * @param name {string} The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |. The character . must not be used at the end of the name.
+   * @param nodeType {string}
    */
   var exports = function(name, nodeType) {
     var _this = this;
@@ -59,8 +59,8 @@
    * Constructs a <code>RootCategoryBodyCreate</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/RootCategoryBodyCreate} obj Optional instance to populate.
-   * @return {module:model/RootCategoryBodyCreate} The populated <code>RootCategoryBodyCreate</code> instance.
+   * @param {RootCategoryBodyCreate} obj Optional instance to populate.
+   * @return {RootCategoryBodyCreate} The populated <code>RootCategoryBodyCreate</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -84,11 +84,11 @@
 
   /**
    * The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |. The character . must not be used at the end of the name.
-   * @member {String} name
+   * @member {string} name
    */
   exports.prototype['name'] = undefined;
   /**
-   * @member {String} nodeType
+   * @member {string} nodeType
    */
   exports.prototype['nodeType'] = undefined;
   /**

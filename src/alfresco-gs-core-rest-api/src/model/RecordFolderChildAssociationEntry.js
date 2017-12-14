@@ -35,15 +35,15 @@
 
   /**
    * The RecordFolderChildAssociationEntry model module.
-   * @module model/RecordFolderChildAssociationEntry
+   * @module  RecordFolderChildAssociationEntry
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>RecordFolderChildAssociationEntry</code>.
-   * @alias module:model/RecordFolderChildAssociationEntry
+   * @alias RecordFolderChildAssociationEntry
    * @class
-   * @param entry {module:model/RecordFolderChildAssociation}
+   * @param entry {RecordFolderChildAssociation}
    */
   var exports = function(entry) {
     var _this = this;
@@ -55,8 +55,8 @@
    * Constructs a <code>RecordFolderChildAssociationEntry</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/RecordFolderChildAssociationEntry} obj Optional instance to populate.
-   * @return {module:model/RecordFolderChildAssociationEntry} The populated <code>RecordFolderChildAssociationEntry</code> instance.
+   * @param {RecordFolderChildAssociationEntry} obj Optional instance to populate.
+   * @return {RecordFolderChildAssociationEntry} The populated <code>RecordFolderChildAssociationEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -70,7 +70,7 @@
   }
 
   /**
-   * @member {module:model/RecordFolderChildAssociation} entry
+   * @member {RecordFolderChildAssociation} entry
    */
   exports.prototype['entry'] = undefined;
 

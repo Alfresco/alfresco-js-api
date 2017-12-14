@@ -16,12 +16,12 @@
 (function (factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
-        define(['../../alfrescoApiClient', './model/ChildAssociationInfo', './model/ContentInfo', './model/Error', './model/ErrorError', './model/FilePlan', './model/FilePlanBodyUpdate', './model/FilePlanComponentBodyUpdate', './model/FilePlanEntry', './model/Pagination', './model/PathElement', './model/PathInfo', './model/RMNodeBodyCreate', './model/RMNodeBodyCreateWithRelativePath', './model/RMSite', './model/RMSiteBodyCreate', './model/RMSiteBodyUpdate', './model/RMSiteEntry', './model/Record', './model/RecordCategory', './model/RecordCategoryChild', './model/RecordCategoryChildEntry', './model/RecordCategoryChildPaging', './model/RecordCategoryChildPagingList', './model/RecordCategoryEntry', './model/RecordCategoryPaging', './model/RecordCategoryPagingList', './model/RecordEntry', './model/RecordFolder', './model/RecordFolderAssociationPaging', './model/RecordFolderAssociationPagingList', './model/RecordFolderChildAssociationEntry', './model/RecordFolderEntry', './model/RequestBodyFile', './model/RootCategoryBodyCreate', './model/Transfer', './model/TransferAssociationPaging', './model/TransferAssociationPagingList', './model/TransferChild', './model/TransferChildAssociationEntry', './model/TransferContainer', './model/TransferContainerAssociationPaging', './model/TransferContainerAssociationPagingList', './model/TransferContainerBodyUpdate', './model/TransferContainerChild', './model/TransferContainerChildAssociationEntry', './model/TransferContainerEntry', './model/TransferEntry', './model/UnfiledContainer', './model/UnfiledContainerAssociationPaging', './model/UnfiledContainerAssociationPagingList', './model/UnfiledContainerChild', './model/UnfiledContainerChildAssociationEntry', './model/UnfiledContainerEntry', './model/UnfiledRecordContainerBodyUpdate', './model/UnfiledRecordFolder', './model/UnfiledRecordFolderAssociationPaging', './model/UnfiledRecordFolderAssociationPagingList', './model/UnfiledRecordFolderBodyUpdate', './model/UnfiledRecordFolderChild', './model/UnfiledRecordFolderChildAssociationEntry', './model/UnfiledRecordFolderEntry', './model/UserInfo', './model/RecordFolderChildAssociation', './model/TransferChildAssociation', './model/TransferContainerChildAssociation', './model/UnfiledContainerChildAssociation', './model/UnfiledRecordFolderChildAssociation', './api/FileplansApi', './api/FilesApi', './api/GssitesApi', './api/RecordcategoriesApi', './api/RecordfoldersApi', './api/RecordsApi', './api/TransfercontainersApi', './api/TransfersApi', './api/UnfiledcontainersApi', './api/UnfiledrecordfoldersApi'], factory);
+        define(['../../alfrescoApiClient', './model/ChildAssociationInfo', './model/ContentInfo', './model/Error', './model/ErrorError', './model/FilePlan', './model/FilePlanBodyUpdate', './model/FilePlanComponentBodyUpdate', './model/FilePlanEntry', './model/Pagination', './model/PathElement', './model/PathInfo', './model/RMNodeBodyCreate', './model/RMNodeBodyCreateWithRelativePath', './model/RMSite', './model/RMSiteBodyCreate', './model/RMSiteBodyUpdate', './model/RMSiteEntry', './model/Record', './model/RecordCategory', './model/RecordCategoryChild', './model/RecordCategoryChildEntry', './model/RecordCategoryChildPaging', './model/RecordCategoryChildPagingList', './model/RecordCategoryEntry', './model/RecordCategoryPaging', './model/RecordCategoryPagingList', './model/RecordEntry', './model/RecordFolder', './model/RecordFolderAssociationPaging', './model/RecordFolderAssociationPagingList', './model/RecordFolderChildAssociationEntry', './model/RecordFolderEntry', './model/RequestBodyFile', './model/RootCategoryBodyCreate', './model/Transfer', './model/TransferAssociationPaging', './model/TransferAssociationPagingList', './model/TransferChild', './model/TransferChildAssociationEntry', './model/TransferContainer', './model/TransferContainerAssociationPaging', './model/TransferContainerAssociationPagingList', './model/TransferContainerBodyUpdate', './model/TransferContainerChild', './model/TransferContainerChildAssociationEntry', './model/TransferContainerEntry', './model/TransferEntry', './model/UnfiledContainer', './model/UnfiledContainerAssociationPaging', './model/UnfiledContainerAssociationPagingList', './model/UnfiledContainerChild', './model/UnfiledContainerChildAssociationEntry', './model/UnfiledContainerEntry', './model/UnfiledRecordContainerBodyUpdate', './model/UnfiledRecordFolder', './model/UnfiledRecordFolderAssociationPaging', './model/UnfiledRecordFolderAssociationPagingList', './model/UnfiledRecordFolderBodyUpdate', './model/UnfiledRecordFolderChild', './model/UnfiledRecordFolderChildAssociationEntry', './model/UnfiledRecordFolderEntry', './model/UserInfo', './model/RecordFolderChildAssociation', './model/TransferChildAssociation', './model/TransferContainerChildAssociation', './model/UnfiledContainerChildAssociation', './model/UnfiledRecordFolderChildAssociation', './api/FilePlansApi', './api/FilesApi', './api/GsSitesApi', './api/RecordCategoriesApi', './api/RecordFoldersApi', './api/RecordsApi', './api/TransferContainersApi', './api/TransfersApi', './api/UnfiledContainersApi', './api/UnfiledRecordFoldersApi'], factory);
     } else if (typeof module === 'object' && module.exports) {
         // CommonJS-like environments that support module.exports, like Node.
-        module.exports = factory(require('../../alfrescoApiClient'), require('./model/ChildAssociationInfo'), require('./model/ContentInfo'), require('./model/Error'), require('./model/ErrorError'), require('./model/FilePlan'), require('./model/FilePlanBodyUpdate'), require('./model/FilePlanComponentBodyUpdate'), require('./model/FilePlanEntry'), require('./model/Pagination'), require('./model/PathElement'), require('./model/PathInfo'), require('./model/RMNodeBodyCreate'), require('./model/RMNodeBodyCreateWithRelativePath'), require('./model/RMSite'), require('./model/RMSiteBodyCreate'), require('./model/RMSiteBodyUpdate'), require('./model/RMSiteEntry'), require('./model/Record'), require('./model/RecordCategory'), require('./model/RecordCategoryChild'), require('./model/RecordCategoryChildEntry'), require('./model/RecordCategoryChildPaging'), require('./model/RecordCategoryChildPagingList'), require('./model/RecordCategoryEntry'), require('./model/RecordCategoryPaging'), require('./model/RecordCategoryPagingList'), require('./model/RecordEntry'), require('./model/RecordFolder'), require('./model/RecordFolderAssociationPaging'), require('./model/RecordFolderAssociationPagingList'), require('./model/RecordFolderChildAssociationEntry'), require('./model/RecordFolderEntry'), require('./model/RequestBodyFile'), require('./model/RootCategoryBodyCreate'), require('./model/Transfer'), require('./model/TransferAssociationPaging'), require('./model/TransferAssociationPagingList'), require('./model/TransferChild'), require('./model/TransferChildAssociationEntry'), require('./model/TransferContainer'), require('./model/TransferContainerAssociationPaging'), require('./model/TransferContainerAssociationPagingList'), require('./model/TransferContainerBodyUpdate'), require('./model/TransferContainerChild'), require('./model/TransferContainerChildAssociationEntry'), require('./model/TransferContainerEntry'), require('./model/TransferEntry'), require('./model/UnfiledContainer'), require('./model/UnfiledContainerAssociationPaging'), require('./model/UnfiledContainerAssociationPagingList'), require('./model/UnfiledContainerChild'), require('./model/UnfiledContainerChildAssociationEntry'), require('./model/UnfiledContainerEntry'), require('./model/UnfiledRecordContainerBodyUpdate'), require('./model/UnfiledRecordFolder'), require('./model/UnfiledRecordFolderAssociationPaging'), require('./model/UnfiledRecordFolderAssociationPagingList'), require('./model/UnfiledRecordFolderBodyUpdate'), require('./model/UnfiledRecordFolderChild'), require('./model/UnfiledRecordFolderChildAssociationEntry'), require('./model/UnfiledRecordFolderEntry'), require('./model/UserInfo'), require('./model/RecordFolderChildAssociation'), require('./model/TransferChildAssociation'), require('./model/TransferContainerChildAssociation'), require('./model/UnfiledContainerChildAssociation'), require('./model/UnfiledRecordFolderChildAssociation'), require('./api/FileplansApi'), require('./api/FilesApi'), require('./api/GssitesApi'), require('./api/RecordcategoriesApi'), require('./api/RecordfoldersApi'), require('./api/RecordsApi'), require('./api/TransfercontainersApi'), require('./api/TransfersApi'), require('./api/UnfiledcontainersApi'), require('./api/UnfiledrecordfoldersApi'));
+        module.exports = factory(require('../../alfrescoApiClient'), require('./model/ChildAssociationInfo'), require('./model/ContentInfo'), require('./model/Error'), require('./model/ErrorError'), require('./model/FilePlan'), require('./model/FilePlanBodyUpdate'), require('./model/FilePlanComponentBodyUpdate'), require('./model/FilePlanEntry'), require('./model/Pagination'), require('./model/PathElement'), require('./model/PathInfo'), require('./model/RMNodeBodyCreate'), require('./model/RMNodeBodyCreateWithRelativePath'), require('./model/RMSite'), require('./model/RMSiteBodyCreate'), require('./model/RMSiteBodyUpdate'), require('./model/RMSiteEntry'), require('./model/Record'), require('./model/RecordCategory'), require('./model/RecordCategoryChild'), require('./model/RecordCategoryChildEntry'), require('./model/RecordCategoryChildPaging'), require('./model/RecordCategoryChildPagingList'), require('./model/RecordCategoryEntry'), require('./model/RecordCategoryPaging'), require('./model/RecordCategoryPagingList'), require('./model/RecordEntry'), require('./model/RecordFolder'), require('./model/RecordFolderAssociationPaging'), require('./model/RecordFolderAssociationPagingList'), require('./model/RecordFolderChildAssociationEntry'), require('./model/RecordFolderEntry'), require('./model/RequestBodyFile'), require('./model/RootCategoryBodyCreate'), require('./model/Transfer'), require('./model/TransferAssociationPaging'), require('./model/TransferAssociationPagingList'), require('./model/TransferChild'), require('./model/TransferChildAssociationEntry'), require('./model/TransferContainer'), require('./model/TransferContainerAssociationPaging'), require('./model/TransferContainerAssociationPagingList'), require('./model/TransferContainerBodyUpdate'), require('./model/TransferContainerChild'), require('./model/TransferContainerChildAssociationEntry'), require('./model/TransferContainerEntry'), require('./model/TransferEntry'), require('./model/UnfiledContainer'), require('./model/UnfiledContainerAssociationPaging'), require('./model/UnfiledContainerAssociationPagingList'), require('./model/UnfiledContainerChild'), require('./model/UnfiledContainerChildAssociationEntry'), require('./model/UnfiledContainerEntry'), require('./model/UnfiledRecordContainerBodyUpdate'), require('./model/UnfiledRecordFolder'), require('./model/UnfiledRecordFolderAssociationPaging'), require('./model/UnfiledRecordFolderAssociationPagingList'), require('./model/UnfiledRecordFolderBodyUpdate'), require('./model/UnfiledRecordFolderChild'), require('./model/UnfiledRecordFolderChildAssociationEntry'), require('./model/UnfiledRecordFolderEntry'), require('./model/UserInfo'), require('./model/RecordFolderChildAssociation'), require('./model/TransferChildAssociation'), require('./model/TransferContainerChildAssociation'), require('./model/UnfiledContainerChildAssociation'), require('./model/UnfiledRecordFolderChildAssociation'), require('./api/FilePlansApi'), require('./api/FilesApi'), require('./api/GsSitesApi'), require('./api/RecordCategoriesApi'), require('./api/RecordFoldersApi'), require('./api/RecordsApi'), require('./api/TransferContainersApi'), require('./api/TransfersApi'), require('./api/UnfiledContainersApi'), require('./api/UnfiledRecordFoldersApi'));
     }
-}(function (ApiClient, ChildAssociationInfo, ContentInfo, Error, ErrorError, FilePlan, FilePlanBodyUpdate, FilePlanComponentBodyUpdate, FilePlanEntry, Pagination, PathElement, PathInfo, RMNodeBodyCreate, RMNodeBodyCreateWithRelativePath, RMSite, RMSiteBodyCreate, RMSiteBodyUpdate, RMSiteEntry, Record, RecordCategory, RecordCategoryChild, RecordCategoryChildEntry, RecordCategoryChildPaging, RecordCategoryChildPagingList, RecordCategoryEntry, RecordCategoryPaging, RecordCategoryPagingList, RecordEntry, RecordFolder, RecordFolderAssociationPaging, RecordFolderAssociationPagingList, RecordFolderChildAssociationEntry, RecordFolderEntry, RequestBodyFile, RootCategoryBodyCreate, Transfer, TransferAssociationPaging, TransferAssociationPagingList, TransferChild, TransferChildAssociationEntry, TransferContainer, TransferContainerAssociationPaging, TransferContainerAssociationPagingList, TransferContainerBodyUpdate, TransferContainerChild, TransferContainerChildAssociationEntry, TransferContainerEntry, TransferEntry, UnfiledContainer, UnfiledContainerAssociationPaging, UnfiledContainerAssociationPagingList, UnfiledContainerChild, UnfiledContainerChildAssociationEntry, UnfiledContainerEntry, UnfiledRecordContainerBodyUpdate, UnfiledRecordFolder, UnfiledRecordFolderAssociationPaging, UnfiledRecordFolderAssociationPagingList, UnfiledRecordFolderBodyUpdate, UnfiledRecordFolderChild, UnfiledRecordFolderChildAssociationEntry, UnfiledRecordFolderEntry, UserInfo, RecordFolderChildAssociation, TransferChildAssociation, TransferContainerChildAssociation, UnfiledContainerChildAssociation, UnfiledRecordFolderChildAssociation, FileplansApi, FilesApi, GssitesApi, RecordcategoriesApi, RecordfoldersApi, RecordsApi, TransfercontainersApi, TransfersApi, UnfiledcontainersApi, UnfiledrecordfoldersApi) {
+}(function (ApiClient, ChildAssociationInfo, ContentInfo, Error, ErrorError, FilePlan, FilePlanBodyUpdate, FilePlanComponentBodyUpdate, FilePlanEntry, Pagination, PathElement, PathInfo, RMNodeBodyCreate, RMNodeBodyCreateWithRelativePath, RMSite, RMSiteBodyCreate, RMSiteBodyUpdate, RMSiteEntry, Record, RecordCategory, RecordCategoryChild, RecordCategoryChildEntry, RecordCategoryChildPaging, RecordCategoryChildPagingList, RecordCategoryEntry, RecordCategoryPaging, RecordCategoryPagingList, RecordEntry, RecordFolder, RecordFolderAssociationPaging, RecordFolderAssociationPagingList, RecordFolderChildAssociationEntry, RecordFolderEntry, RequestBodyFile, RootCategoryBodyCreate, Transfer, TransferAssociationPaging, TransferAssociationPagingList, TransferChild, TransferChildAssociationEntry, TransferContainer, TransferContainerAssociationPaging, TransferContainerAssociationPagingList, TransferContainerBodyUpdate, TransferContainerChild, TransferContainerChildAssociationEntry, TransferContainerEntry, TransferEntry, UnfiledContainer, UnfiledContainerAssociationPaging, UnfiledContainerAssociationPagingList, UnfiledContainerChild, UnfiledContainerChildAssociationEntry, UnfiledContainerEntry, UnfiledRecordContainerBodyUpdate, UnfiledRecordFolder, UnfiledRecordFolderAssociationPaging, UnfiledRecordFolderAssociationPagingList, UnfiledRecordFolderBodyUpdate, UnfiledRecordFolderChild, UnfiledRecordFolderChildAssociationEntry, UnfiledRecordFolderEntry, UserInfo, RecordFolderChildAssociation, TransferChildAssociation, TransferContainerChildAssociation, UnfiledContainerChildAssociation, UnfiledRecordFolderChildAssociation, FilePlansApi, FilesApi, GsSitesApi, RecordCategoriesApi, RecordFoldersApi, RecordsApi, TransferContainersApi, TransfersApi, UnfiledContainersApi, UnfiledRecordFoldersApi) {
     'use strict';
 
     /**
@@ -58,394 +58,394 @@
     var exports = {
         /**
          * The ApiClient constructor.
-         * @property {module:ApiClient}
+         * @property {:ApiClient}
          */
         ApiClient: ApiClient,
         /**
          * The ChildAssociationInfo model constructor.
-         * @property {module:model/ChildAssociationInfo}
+         * @property {ChildAssociationInfo}
          */
         ChildAssociationInfo: ChildAssociationInfo,
         /**
          * The ContentInfo model constructor.
-         * @property {module:model/ContentInfo}
+         * @property {ContentInfo}
          */
         ContentInfo: ContentInfo,
         /**
          * The Error model constructor.
-         * @property {module:model/Error}
+         * @property {Error}
          */
         Error: Error,
         /**
          * The ErrorError model constructor.
-         * @property {module:model/ErrorError}
+         * @property {ErrorError}
          */
         ErrorError: ErrorError,
         /**
          * The FilePlan model constructor.
-         * @property {module:model/FilePlan}
+         * @property {FilePlan}
          */
         FilePlan: FilePlan,
         /**
          * The FilePlanBodyUpdate model constructor.
-         * @property {module:model/FilePlanBodyUpdate}
+         * @property {FilePlanBodyUpdate}
          */
         FilePlanBodyUpdate: FilePlanBodyUpdate,
         /**
          * The FilePlanComponentBodyUpdate model constructor.
-         * @property {module:model/FilePlanComponentBodyUpdate}
+         * @property {FilePlanComponentBodyUpdate}
          */
         FilePlanComponentBodyUpdate: FilePlanComponentBodyUpdate,
         /**
          * The FilePlanEntry model constructor.
-         * @property {module:model/FilePlanEntry}
+         * @property {FilePlanEntry}
          */
         FilePlanEntry: FilePlanEntry,
         /**
          * The Pagination model constructor.
-         * @property {module:model/Pagination}
+         * @property {Pagination}
          */
         Pagination: Pagination,
         /**
          * The PathElement model constructor.
-         * @property {module:model/PathElement}
+         * @property {PathElement}
          */
         PathElement: PathElement,
         /**
          * The PathInfo model constructor.
-         * @property {module:model/PathInfo}
+         * @property {PathInfo}
          */
         PathInfo: PathInfo,
         /**
          * The RMNodeBodyCreate model constructor.
-         * @property {module:model/RMNodeBodyCreate}
+         * @property {RMNodeBodyCreate}
          */
         RMNodeBodyCreate: RMNodeBodyCreate,
         /**
          * The RMNodeBodyCreateWithRelativePath model constructor.
-         * @property {module:model/RMNodeBodyCreateWithRelativePath}
+         * @property {RMNodeBodyCreateWithRelativePath}
          */
         RMNodeBodyCreateWithRelativePath: RMNodeBodyCreateWithRelativePath,
         /**
          * The RMSite model constructor.
-         * @property {module:model/RMSite}
+         * @property {RMSite}
          */
         RMSite: RMSite,
         /**
          * The RMSiteBodyCreate model constructor.
-         * @property {module:model/RMSiteBodyCreate}
+         * @property {RMSiteBodyCreate}
          */
         RMSiteBodyCreate: RMSiteBodyCreate,
         /**
          * The RMSiteBodyUpdate model constructor.
-         * @property {module:model/RMSiteBodyUpdate}
+         * @property {RMSiteBodyUpdate}
          */
         RMSiteBodyUpdate: RMSiteBodyUpdate,
         /**
          * The RMSiteEntry model constructor.
-         * @property {module:model/RMSiteEntry}
+         * @property {RMSiteEntry}
          */
         RMSiteEntry: RMSiteEntry,
         /**
          * The Record model constructor.
-         * @property {module:model/Record}
+         * @property {Record}
          */
         Record: Record,
         /**
          * The RecordCategory model constructor.
-         * @property {module:model/RecordCategory}
+         * @property {RecordCategory}
          */
         RecordCategory: RecordCategory,
         /**
          * The RecordCategoryChild model constructor.
-         * @property {module:model/RecordCategoryChild}
+         * @property {RecordCategoryChild}
          */
         RecordCategoryChild: RecordCategoryChild,
         /**
          * The RecordCategoryChildEntry model constructor.
-         * @property {module:model/RecordCategoryChildEntry}
+         * @property {RecordCategoryChildEntry}
          */
         RecordCategoryChildEntry: RecordCategoryChildEntry,
         /**
          * The RecordCategoryChildPaging model constructor.
-         * @property {module:model/RecordCategoryChildPaging}
+         * @property {RecordCategoryChildPaging}
          */
         RecordCategoryChildPaging: RecordCategoryChildPaging,
         /**
          * The RecordCategoryChildPagingList model constructor.
-         * @property {module:model/RecordCategoryChildPagingList}
+         * @property {RecordCategoryChildPagingList}
          */
         RecordCategoryChildPagingList: RecordCategoryChildPagingList,
         /**
          * The RecordCategoryEntry model constructor.
-         * @property {module:model/RecordCategoryEntry}
+         * @property {RecordCategoryEntry}
          */
         RecordCategoryEntry: RecordCategoryEntry,
         /**
          * The RecordCategoryPaging model constructor.
-         * @property {module:model/RecordCategoryPaging}
+         * @property {RecordCategoryPaging}
          */
         RecordCategoryPaging: RecordCategoryPaging,
         /**
          * The RecordCategoryPagingList model constructor.
-         * @property {module:model/RecordCategoryPagingList}
+         * @property {RecordCategoryPagingList}
          */
         RecordCategoryPagingList: RecordCategoryPagingList,
         /**
          * The RecordEntry model constructor.
-         * @property {module:model/RecordEntry}
+         * @property {RecordEntry}
          */
         RecordEntry: RecordEntry,
         /**
          * The RecordFolder model constructor.
-         * @property {module:model/RecordFolder}
+         * @property {RecordFolder}
          */
         RecordFolder: RecordFolder,
         /**
          * The RecordFolderAssociationPaging model constructor.
-         * @property {module:model/RecordFolderAssociationPaging}
+         * @property {RecordFolderAssociationPaging}
          */
         RecordFolderAssociationPaging: RecordFolderAssociationPaging,
         /**
          * The RecordFolderAssociationPagingList model constructor.
-         * @property {module:model/RecordFolderAssociationPagingList}
+         * @property {RecordFolderAssociationPagingList}
          */
         RecordFolderAssociationPagingList: RecordFolderAssociationPagingList,
         /**
          * The RecordFolderChildAssociationEntry model constructor.
-         * @property {module:model/RecordFolderChildAssociationEntry}
+         * @property {RecordFolderChildAssociationEntry}
          */
         RecordFolderChildAssociationEntry: RecordFolderChildAssociationEntry,
         /**
          * The RecordFolderEntry model constructor.
-         * @property {module:model/RecordFolderEntry}
+         * @property {RecordFolderEntry}
          */
         RecordFolderEntry: RecordFolderEntry,
         /**
          * The RequestBodyFile model constructor.
-         * @property {module:model/RequestBodyFile}
+         * @property {RequestBodyFile}
          */
         RequestBodyFile: RequestBodyFile,
         /**
          * The RootCategoryBodyCreate model constructor.
-         * @property {module:model/RootCategoryBodyCreate}
+         * @property {RootCategoryBodyCreate}
          */
         RootCategoryBodyCreate: RootCategoryBodyCreate,
         /**
          * The Transfer model constructor.
-         * @property {module:model/Transfer}
+         * @property {Transfer}
          */
         Transfer: Transfer,
         /**
          * The TransferAssociationPaging model constructor.
-         * @property {module:model/TransferAssociationPaging}
+         * @property {TransferAssociationPaging}
          */
         TransferAssociationPaging: TransferAssociationPaging,
         /**
          * The TransferAssociationPagingList model constructor.
-         * @property {module:model/TransferAssociationPagingList}
+         * @property {TransferAssociationPagingList}
          */
         TransferAssociationPagingList: TransferAssociationPagingList,
         /**
          * The TransferChild model constructor.
-         * @property {module:model/TransferChild}
+         * @property {TransferChild}
          */
         TransferChild: TransferChild,
         /**
          * The TransferChildAssociationEntry model constructor.
-         * @property {module:model/TransferChildAssociationEntry}
+         * @property {TransferChildAssociationEntry}
          */
         TransferChildAssociationEntry: TransferChildAssociationEntry,
         /**
          * The TransferContainer model constructor.
-         * @property {module:model/TransferContainer}
+         * @property {TransferContainer}
          */
         TransferContainer: TransferContainer,
         /**
          * The TransferContainerAssociationPaging model constructor.
-         * @property {module:model/TransferContainerAssociationPaging}
+         * @property {TransferContainerAssociationPaging}
          */
         TransferContainerAssociationPaging: TransferContainerAssociationPaging,
         /**
          * The TransferContainerAssociationPagingList model constructor.
-         * @property {module:model/TransferContainerAssociationPagingList}
+         * @property {TransferContainerAssociationPagingList}
          */
         TransferContainerAssociationPagingList: TransferContainerAssociationPagingList,
         /**
          * The TransferContainerBodyUpdate model constructor.
-         * @property {module:model/TransferContainerBodyUpdate}
+         * @property {TransferContainerBodyUpdate}
          */
         TransferContainerBodyUpdate: TransferContainerBodyUpdate,
         /**
          * The TransferContainerChild model constructor.
-         * @property {module:model/TransferContainerChild}
+         * @property {TransferContainerChild}
          */
         TransferContainerChild: TransferContainerChild,
         /**
          * The TransferContainerChildAssociationEntry model constructor.
-         * @property {module:model/TransferContainerChildAssociationEntry}
+         * @property {TransferContainerChildAssociationEntry}
          */
         TransferContainerChildAssociationEntry: TransferContainerChildAssociationEntry,
         /**
          * The TransferContainerEntry model constructor.
-         * @property {module:model/TransferContainerEntry}
+         * @property {TransferContainerEntry}
          */
         TransferContainerEntry: TransferContainerEntry,
         /**
          * The TransferEntry model constructor.
-         * @property {module:model/TransferEntry}
+         * @property {TransferEntry}
          */
         TransferEntry: TransferEntry,
         /**
          * The UnfiledContainer model constructor.
-         * @property {module:model/UnfiledContainer}
+         * @property {UnfiledContainer}
          */
         UnfiledContainer: UnfiledContainer,
         /**
          * The UnfiledContainerAssociationPaging model constructor.
-         * @property {module:model/UnfiledContainerAssociationPaging}
+         * @property {UnfiledContainerAssociationPaging}
          */
         UnfiledContainerAssociationPaging: UnfiledContainerAssociationPaging,
         /**
          * The UnfiledContainerAssociationPagingList model constructor.
-         * @property {module:model/UnfiledContainerAssociationPagingList}
+         * @property {UnfiledContainerAssociationPagingList}
          */
         UnfiledContainerAssociationPagingList: UnfiledContainerAssociationPagingList,
         /**
          * The UnfiledContainerChild model constructor.
-         * @property {module:model/UnfiledContainerChild}
+         * @property {UnfiledContainerChild}
          */
         UnfiledContainerChild: UnfiledContainerChild,
         /**
          * The UnfiledContainerChildAssociationEntry model constructor.
-         * @property {module:model/UnfiledContainerChildAssociationEntry}
+         * @property {UnfiledContainerChildAssociationEntry}
          */
         UnfiledContainerChildAssociationEntry: UnfiledContainerChildAssociationEntry,
         /**
          * The UnfiledContainerEntry model constructor.
-         * @property {module:model/UnfiledContainerEntry}
+         * @property {UnfiledContainerEntry}
          */
         UnfiledContainerEntry: UnfiledContainerEntry,
         /**
          * The UnfiledRecordContainerBodyUpdate model constructor.
-         * @property {module:model/UnfiledRecordContainerBodyUpdate}
+         * @property {UnfiledRecordContainerBodyUpdate}
          */
         UnfiledRecordContainerBodyUpdate: UnfiledRecordContainerBodyUpdate,
         /**
          * The UnfiledRecordFolder model constructor.
-         * @property {module:model/UnfiledRecordFolder}
+         * @property {UnfiledRecordFolder}
          */
         UnfiledRecordFolder: UnfiledRecordFolder,
         /**
          * The UnfiledRecordFolderAssociationPaging model constructor.
-         * @property {module:model/UnfiledRecordFolderAssociationPaging}
+         * @property {UnfiledRecordFolderAssociationPaging}
          */
         UnfiledRecordFolderAssociationPaging: UnfiledRecordFolderAssociationPaging,
         /**
          * The UnfiledRecordFolderAssociationPagingList model constructor.
-         * @property {module:model/UnfiledRecordFolderAssociationPagingList}
+         * @property {UnfiledRecordFolderAssociationPagingList}
          */
         UnfiledRecordFolderAssociationPagingList: UnfiledRecordFolderAssociationPagingList,
         /**
          * The UnfiledRecordFolderBodyUpdate model constructor.
-         * @property {module:model/UnfiledRecordFolderBodyUpdate}
+         * @property {UnfiledRecordFolderBodyUpdate}
          */
         UnfiledRecordFolderBodyUpdate: UnfiledRecordFolderBodyUpdate,
         /**
          * The UnfiledRecordFolderChild model constructor.
-         * @property {module:model/UnfiledRecordFolderChild}
+         * @property {UnfiledRecordFolderChild}
          */
         UnfiledRecordFolderChild: UnfiledRecordFolderChild,
         /**
          * The UnfiledRecordFolderChildAssociationEntry model constructor.
-         * @property {module:model/UnfiledRecordFolderChildAssociationEntry}
+         * @property {UnfiledRecordFolderChildAssociationEntry}
          */
         UnfiledRecordFolderChildAssociationEntry: UnfiledRecordFolderChildAssociationEntry,
         /**
          * The UnfiledRecordFolderEntry model constructor.
-         * @property {module:model/UnfiledRecordFolderEntry}
+         * @property {UnfiledRecordFolderEntry}
          */
         UnfiledRecordFolderEntry: UnfiledRecordFolderEntry,
         /**
          * The UserInfo model constructor.
-         * @property {module:model/UserInfo}
+         * @property {UserInfo}
          */
         UserInfo: UserInfo,
         /**
          * The RecordFolderChildAssociation model constructor.
-         * @property {module:model/RecordFolderChildAssociation}
+         * @property {RecordFolderChildAssociation}
          */
         RecordFolderChildAssociation: RecordFolderChildAssociation,
         /**
          * The TransferChildAssociation model constructor.
-         * @property {module:model/TransferChildAssociation}
+         * @property {TransferChildAssociation}
          */
         TransferChildAssociation: TransferChildAssociation,
         /**
          * The TransferContainerChildAssociation model constructor.
-         * @property {module:model/TransferContainerChildAssociation}
+         * @property {TransferContainerChildAssociation}
          */
         TransferContainerChildAssociation: TransferContainerChildAssociation,
         /**
          * The UnfiledContainerChildAssociation model constructor.
-         * @property {module:model/UnfiledContainerChildAssociation}
+         * @property {UnfiledContainerChildAssociation}
          */
         UnfiledContainerChildAssociation: UnfiledContainerChildAssociation,
         /**
          * The UnfiledRecordFolderChildAssociation model constructor.
-         * @property {module:model/UnfiledRecordFolderChildAssociation}
+         * @property {UnfiledRecordFolderChildAssociation}
          */
         UnfiledRecordFolderChildAssociation: UnfiledRecordFolderChildAssociation,
         /**
-         * The FileplansApi service constructor.
-         * @property {module:api/FileplansApi}
+         * The FilePlansApi service constructor.
+         * @property {FilePlansApi}
          */
-        FileplansApi: FileplansApi,
+        FilePlansApi: FilePlansApi,
         /**
          * The FilesApi service constructor.
-         * @property {module:api/FilesApi}
+         * @property {FilesApi}
          */
         FilesApi: FilesApi,
         /**
-         * The GssitesApi service constructor.
-         * @property {module:api/GssitesApi}
+         * The GsSitesApi service constructor.
+         * @property {GsSitesApi}
          */
-        GssitesApi: GssitesApi,
+        GsSitesApi: GsSitesApi,
         /**
-         * The RecordcategoriesApi service constructor.
-         * @property {module:api/RecordcategoriesApi}
+         * The RecordCategoriesApi service constructor.
+         * @property {RecordCategoriesApi}
          */
-        RecordcategoriesApi: RecordcategoriesApi,
+        RecordCategoriesApi: RecordCategoriesApi,
         /**
-         * The RecordfoldersApi service constructor.
-         * @property {module:api/RecordfoldersApi}
+         * The RecordFoldersApi service constructor.
+         * @property {RecordFoldersApi}
          */
-        RecordfoldersApi: RecordfoldersApi,
+        RecordFoldersApi: RecordFoldersApi,
         /**
          * The RecordsApi service constructor.
-         * @property {module:api/RecordsApi}
+         * @property {RecordsApi}
          */
         RecordsApi: RecordsApi,
         /**
-         * The TransfercontainersApi service constructor.
-         * @property {module:api/TransfercontainersApi}
+         * The TransferContainersApi service constructor.
+         * @property {TransferContainersApi}
          */
-        TransfercontainersApi: TransfercontainersApi,
+        TransferContainersApi: TransferContainersApi,
         /**
          * The TransfersApi service constructor.
-         * @property {module:api/TransfersApi}
+         * @property {TransfersApi}
          */
         TransfersApi: TransfersApi,
         /**
-         * The UnfiledcontainersApi service constructor.
-         * @property {module:api/UnfiledcontainersApi}
+         * The UnfiledContainersApi service constructor.
+         * @property {UnfiledContainersApi}
          */
-        UnfiledcontainersApi: UnfiledcontainersApi,
+        UnfiledContainersApi: UnfiledContainersApi,
         /**
-         * The UnfiledrecordfoldersApi service constructor.
-         * @property {module:api/UnfiledrecordfoldersApi}
+         * The UnfiledRecordFoldersApi service constructor.
+         * @property {UnfiledRecordFoldersApi}
          */
-        UnfiledrecordfoldersApi: UnfiledrecordfoldersApi
+        UnfiledRecordFoldersApi: UnfiledRecordFoldersApi
     };
 
     return exports;

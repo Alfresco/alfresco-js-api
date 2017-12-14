@@ -35,13 +35,13 @@
 
   /**
    * The InstructionBody model module.
-   * @module model/InstructionBody
+   * @module InstructionBody
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>InstructionBody</code>.
-   * @alias module:model/InstructionBody
+   * @alias InstructionBody
    * @class
    */
   var exports = function() {
@@ -55,8 +55,8 @@
    * Constructs a <code>InstructionBody</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/InstructionBody} obj Optional instance to populate.
-   * @return {module:model/InstructionBody} The populated <code>InstructionBody</code> instance.
+   * @param {InstructionBody} obj Optional instance to populate.
+   * @return {InstructionBody} The populated <code>InstructionBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -73,11 +73,11 @@
   }
 
   /**
-   * @member {module:model/ClassificationInformation} classificationInformation
+   * @member {ClassificationInformation} classificationInformation
    */
   exports.prototype['classificationInformation'] = undefined;
   /**
-   * @member {module:model/SecurityMarkInformationBody} securityMarkInformation
+   * @member {SecurityMarkInformationBody} securityMarkInformation
    */
   exports.prototype['securityMarkInformation'] = undefined;
 

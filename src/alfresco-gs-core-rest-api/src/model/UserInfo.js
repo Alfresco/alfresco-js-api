@@ -35,16 +35,16 @@
 
   /**
    * The UserInfo model module.
-   * @module model/UserInfo
+   * @module  UserInfo
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>UserInfo</code>.
-   * @alias module:model/UserInfo
+   * @alias UserInfo
    * @class
-   * @param displayName {String}
-   * @param id {String}
+   * @param displayName {string}
+   * @param id {string}
    */
   var exports = function(displayName, id) {
     var _this = this;
@@ -57,8 +57,8 @@
    * Constructs a <code>UserInfo</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/UserInfo} obj Optional instance to populate.
-   * @return {module:model/UserInfo} The populated <code>UserInfo</code> instance.
+   * @param {UserInfo} obj Optional instance to populate.
+   * @return {UserInfo} The populated <code>UserInfo</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -75,11 +75,11 @@
   }
 
   /**
-   * @member {String} displayName
+   * @member {string} displayName
    */
   exports.prototype['displayName'] = undefined;
   /**
-   * @member {String} id
+   * @member {string} id
    */
   exports.prototype['id'] = undefined;
 

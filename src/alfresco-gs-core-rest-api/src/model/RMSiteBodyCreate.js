@@ -35,15 +35,15 @@
 
   /**
    * The RMSiteBodyCreate model module.
-   * @module model/RMSiteBodyCreate
+   * @module  RMSiteBodyCreate
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>RMSiteBodyCreate</code>.
-   * @alias module:model/RMSiteBodyCreate
+   * @alias RMSiteBodyCreate
    * @class
-   * @param title {String}
+   * @param title {string}
    */
   var exports = function(title) {
     var _this = this;
@@ -57,8 +57,8 @@
    * Constructs a <code>RMSiteBodyCreate</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/RMSiteBodyCreate} obj Optional instance to populate.
-   * @return {module:model/RMSiteBodyCreate} The populated <code>RMSiteBodyCreate</code> instance.
+   * @param {RMSiteBodyCreate} obj Optional instance to populate.
+   * @return {RMSiteBodyCreate} The populated <code>RMSiteBodyCreate</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -78,15 +78,15 @@
   }
 
   /**
-   * @member {String} title
+   * @member {string} title
    */
   exports.prototype['title'] = undefined;
   /**
-   * @member {String} description
+   * @member {string} description
    */
   exports.prototype['description'] = undefined;
   /**
-   * @member {module:model/RMSiteBodyCreate.ComplianceEnum} compliance
+   * @member {RMSiteBodyCreate.ComplianceEnum} compliance
    * @default 'STANDARD'
    */
   exports.prototype['compliance'] = 'STANDARD';
@@ -94,7 +94,7 @@
 
   /**
    * Allowed values for the <code>compliance</code> property.
-   * @enum {String}
+   * @enum {string}
    * @readonly
    */
   exports.ComplianceEnum = {

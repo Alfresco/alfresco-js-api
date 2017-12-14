@@ -35,16 +35,16 @@
 
   /**
    * The ClassificationGuidesBody model module.
-   * @module model/ClassificationGuidesBody
+   * @module ClassificationGuidesBody
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>ClassificationGuidesBody</code>.
-   * @alias module:model/ClassificationGuidesBody
+   * @alias ClassificationGuidesBody
    * @class
-   * @param name {String}
-   * @param originatingOrganization {String}
+   * @param name {string}
+   * @param originatingOrganization {string}
    * @param publishedOn {Date}
    */
   var exports = function(name, originatingOrganization, publishedOn) {
@@ -61,8 +61,8 @@
    * Constructs a <code>ClassificationGuidesBody</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/ClassificationGuidesBody} obj Optional instance to populate.
-   * @return {module:model/ClassificationGuidesBody} The populated <code>ClassificationGuidesBody</code> instance.
+   * @param {ClassificationGuidesBody} obj Optional instance to populate.
+   * @return {ClassificationGuidesBody} The populated <code>ClassificationGuidesBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -88,11 +88,11 @@
   }
 
   /**
-   * @member {String} name
+   * @member {string} name
    */
   exports.prototype['name'] = undefined;
   /**
-   * @member {String} originatingOrganization
+   * @member {string} originatingOrganization
    */
   exports.prototype['originatingOrganization'] = undefined;
   /**
@@ -100,12 +100,12 @@
    */
   exports.prototype['publishedOn'] = undefined;
   /**
-   * @member {Boolean} enabled
+   * @member {boolean} enabled
    * @default false
    */
   exports.prototype['enabled'] = false;
   /**
-   * @member {Boolean} hasTopics
+   * @member {boolean} hasTopics
    */
   exports.prototype['hasTopics'] = undefined;
 

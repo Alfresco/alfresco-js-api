@@ -35,15 +35,15 @@
 
   /**
    * The TransferChildAssociationEntry model module.
-   * @module model/TransferChildAssociationEntry
+   * @module  TransferChildAssociationEntry
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>TransferChildAssociationEntry</code>.
-   * @alias module:model/TransferChildAssociationEntry
+   * @alias TransferChildAssociationEntry
    * @class
-   * @param entry {module:model/TransferChildAssociation}
+   * @param entry {TransferChildAssociation}
    */
   var exports = function(entry) {
     var _this = this;
@@ -55,8 +55,8 @@
    * Constructs a <code>TransferChildAssociationEntry</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/TransferChildAssociationEntry} obj Optional instance to populate.
-   * @return {module:model/TransferChildAssociationEntry} The populated <code>TransferChildAssociationEntry</code> instance.
+   * @param {TransferChildAssociationEntry} obj Optional instance to populate.
+   * @return {TransferChildAssociationEntry} The populated <code>TransferChildAssociationEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -70,7 +70,7 @@
   }
 
   /**
-   * @member {module:model/TransferChildAssociation} entry
+   * @member {TransferChildAssociation} entry
    */
   exports.prototype['entry'] = undefined;
 

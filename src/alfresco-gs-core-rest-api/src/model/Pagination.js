@@ -35,18 +35,18 @@
 
   /**
    * The Pagination model module.
-   * @module model/Pagination
+   * @module  Pagination
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>Pagination</code>.
-   * @alias module:model/Pagination
+   * @alias Pagination
    * @class
-   * @param count {Number} The number of objects in the entries array.
-   * @param hasMoreItems {Boolean} A boolean value which is **true** if there are more entities in the collection beyond those in this response. A true value means a request with a larger value for the **skipCount** or the **maxItems** parameter will return more entities.
-   * @param skipCount {Number} An integer describing how many entities exist in the collection before those included in this list.
-   * @param maxItems {Number} The value of the **maxItems** parameter used to generate this list, or if there was no **maxItems** parameter the default value is 100
+   * @param count {number} The number of objects in the entries array.
+   * @param hasMoreItems {boolean} A boolean value which is **true** if there are more entities in the collection beyond those in this response. A true value means a request with a larger value for the **skipCount** or the **maxItems** parameter will return more entities.
+   * @param skipCount {number} An integer describing how many entities exist in the collection before those included in this list.
+   * @param maxItems {number} The value of the **maxItems** parameter used to generate this list, or if there was no **maxItems** parameter the default value is 100
    */
   var exports = function(count, hasMoreItems, skipCount, maxItems) {
     var _this = this;
@@ -62,8 +62,8 @@
    * Constructs a <code>Pagination</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/Pagination} obj Optional instance to populate.
-   * @return {module:model/Pagination} The populated <code>Pagination</code> instance.
+   * @param {Pagination} obj Optional instance to populate.
+   * @return {Pagination} The populated <code>Pagination</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -90,27 +90,27 @@
 
   /**
    * The number of objects in the entries array.
-   * @member {Number} count
+   * @member {number} count
    */
   exports.prototype['count'] = undefined;
   /**
    * A boolean value which is **true** if there are more entities in the collection beyond those in this response. A true value means a request with a larger value for the **skipCount** or the **maxItems** parameter will return more entities.
-   * @member {Boolean} hasMoreItems
+   * @member {boolean} hasMoreItems
    */
   exports.prototype['hasMoreItems'] = undefined;
   /**
    * An integer describing the total number of entities in the collection. The API might not be able to determine this value, in which case this property will not be present.
-   * @member {Number} totalItems
+   * @member {number} totalItems
    */
   exports.prototype['totalItems'] = undefined;
   /**
    * An integer describing how many entities exist in the collection before those included in this list.
-   * @member {Number} skipCount
+   * @member {number} skipCount
    */
   exports.prototype['skipCount'] = undefined;
   /**
    * The value of the **maxItems** parameter used to generate this list, or if there was no **maxItems** parameter the default value is 100
-   * @member {Number} maxItems
+   * @member {number} maxItems
    */
   exports.prototype['maxItems'] = undefined;
 

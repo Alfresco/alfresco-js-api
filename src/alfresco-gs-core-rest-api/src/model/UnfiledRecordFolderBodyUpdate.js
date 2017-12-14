@@ -35,13 +35,13 @@
 
   /**
    * The UnfiledRecordFolderBodyUpdate model module.
-   * @module model/UnfiledRecordFolderBodyUpdate
+   * @module  UnfiledRecordFolderBodyUpdate
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>UnfiledRecordFolderBodyUpdate</code>.
-   * @alias module:model/UnfiledRecordFolderBodyUpdate
+   * @alias UnfiledRecordFolderBodyUpdate
    * @class
    */
   var exports = function() {
@@ -55,8 +55,8 @@
    * Constructs a <code>UnfiledRecordFolderBodyUpdate</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/UnfiledRecordFolderBodyUpdate} obj Optional instance to populate.
-   * @return {module:model/UnfiledRecordFolderBodyUpdate} The populated <code>UnfiledRecordFolderBodyUpdate</code> instance.
+   * @param {UnfiledRecordFolderBodyUpdate} obj Optional instance to populate.
+   * @return {UnfiledRecordFolderBodyUpdate} The populated <code>UnfiledRecordFolderBodyUpdate</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -74,7 +74,7 @@
 
   /**
    * The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |. The character . must not be used at the end of the name.
-   * @member {String} name
+   * @member {string} name
    */
   exports.prototype['name'] = undefined;
   /**

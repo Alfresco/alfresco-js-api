@@ -79,22 +79,22 @@
 
 
   /**
-   * @member {String} id
+   * @member {string} id
    */
   exports.prototype['id'] = undefined;
 
   /**
-   * @member {String} title
+   * @member {string} title
    */
   exports.prototype['title'] = undefined;
 
   /**
-   * @member {String} description
+   * @member {string} description
    */
   exports.prototype['description'] = undefined;
 
   /**
-   * @member {String} version
+   * @member {string} version
    */
   exports.prototype['version'] = undefined;
 
@@ -104,17 +104,17 @@
   exports.prototype['installDate'] = undefined;
 
   /**
-   * @member {String} installState
+   * @member {string} installState
    */
   exports.prototype['installState'] = undefined;
 
   /**
-   * @member {String} versionMin
+   * @member {string} versionMin
    */
   exports.prototype['versionMin'] = undefined;
 
   /**
-   * @member {String} versionMax
+   * @member {string} versionMax
    */
   exports.prototype['versionMax'] = undefined;
 

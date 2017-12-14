@@ -25,22 +25,22 @@
     if (!root.AlfrescoGovernanceServicesRestApi) {
       root.AlfrescoGovernanceServicesRestApi = {};
     }
-    root.AlfrescoGovernanceServicesRestApi.FileplansApi = factory(root.AlfrescoGovernanceServicesRestApi.ApiClient, root.AlfrescoGovernanceServicesRestApi.Error, root.AlfrescoGovernanceServicesRestApi.FilePlanBodyUpdate, root.AlfrescoGovernanceServicesRestApi.FilePlanEntry, root.AlfrescoGovernanceServicesRestApi.RecordCategoryEntry, root.AlfrescoGovernanceServicesRestApi.RecordCategoryPaging, root.AlfrescoGovernanceServicesRestApi.RootCategoryBodyCreate);
+    root.AlfrescoGovernanceServicesRestApi.FilePlansApi = factory(root.AlfrescoGovernanceServicesRestApi.ApiClient, root.AlfrescoGovernanceServicesRestApi.Error, root.AlfrescoGovernanceServicesRestApi.FilePlanBodyUpdate, root.AlfrescoGovernanceServicesRestApi.FilePlanEntry, root.AlfrescoGovernanceServicesRestApi.RecordCategoryEntry, root.AlfrescoGovernanceServicesRestApi.RecordCategoryPaging, root.AlfrescoGovernanceServicesRestApi.RootCategoryBodyCreate);
   }
 }(this, function(ApiClient, Error, FilePlanBodyUpdate, FilePlanEntry, RecordCategoryEntry, RecordCategoryPaging, RootCategoryBodyCreate) {
   'use strict';
 
   /**
    * Fileplans service.
-   * @module api/FileplansApi
+   * @module api/FilePlansApi
    * @version 0.1.0
    */
 
   /**
-   * Constructs a new FileplansApi.
-   * @alias module:api/FileplansApi
+   * Constructs a new FilePlansApi.
+   * @alias :api/FilePlansApi
    * @class
-   * @param {module:ApiClient} apiClient Optional API client implementation to use,
+   * @param {:ApiClient} apiClient Optional API client implementation to use,
    * default to {@link module:ApiClient#instance} if unspecified.
    */
   var exports = function(apiClient) {
@@ -51,13 +51,13 @@
     /**
      * Create record categories for a file plan
      * Creates a record category as a primary child of **filePlanId**.  You can set the **autoRename** boolean field to automatically resolve name clashes. If there is a name clash, then the API method tries to create a unique name using an integer suffix.  This API method also supports record category creation using application/json.  You must specify at least a **name**.  You can create a category like this: &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;:\&quot;My Record Category\&quot; } &#x60;&#x60;&#x60; You can set properties when creating a record category: &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;:\&quot;My Record Category\&quot;,   \&quot;properties\&quot;:   {     \&quot;rma:vitalRecordIndicator\&quot;:\&quot;true\&quot;,     \&quot;rma:reviewPeriod\&quot;:\&quot;month|1\&quot;   } } &#x60;&#x60;&#x60;  Any missing aspects are applied automatically. You can set aspects explicitly, if needed, using an **aspectNames** field.  If you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:  &#x60;&#x60;&#x60;JSON {   \&quot;list\&quot;: {     \&quot;pagination\&quot;: {       \&quot;count\&quot;: 2,       \&quot;hasMoreItems\&quot;: false,       \&quot;totalItems\&quot;: 2,       \&quot;skipCount\&quot;: 0,       \&quot;maxItems\&quot;: 100     },     \&quot;entries\&quot;: [       {         \&quot;entry\&quot;: {           ...         }       },       {         \&quot;entry\&quot;: {           ...         }       }     ]   } } &#x60;&#x60;&#x60;
-     * @param {String} filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
-     * @param {module:model/RootCategoryBodyCreate} nodeBodyCreate The node information to create.
+     * @param {string} filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
+     * @param {RootCategoryBodyCreate} nodeBodyCreate The node information to create.
      * @param {Object} opts Optional parameters
-     * @param {Boolean} opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
+     * @param {boolean} opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
      * @param {Array.<String>} opts.include Returns additional information about the record category. Any optional field from the response model can be requested. For example: * allowableOperations * hasRetentionSchedule * path
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/RecordCategoryEntry} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleRecordCategoryEntry} and HTTP response
      */
     this.createFilePlanCategoriesWithHttpInfo = function(filePlanId, nodeBodyCreate, opts) {
       opts = opts || {};
@@ -102,13 +102,13 @@
     /**
      * Create record categories for a file plan
      * Creates a record category as a primary child of **filePlanId**.  You can set the **autoRename** boolean field to automatically resolve name clashes. If there is a name clash, then the API method tries to create a unique name using an integer suffix.  This API method also supports record category creation using application/json.  You must specify at least a **name**.  You can create a category like this: &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;:\&quot;My Record Category\&quot; } &#x60;&#x60;&#x60; You can set properties when creating a record category: &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;:\&quot;My Record Category\&quot;,   \&quot;properties\&quot;:   {     \&quot;rma:vitalRecordIndicator\&quot;:\&quot;true\&quot;,     \&quot;rma:reviewPeriod\&quot;:\&quot;month|1\&quot;   } } &#x60;&#x60;&#x60;  Any missing aspects are applied automatically. You can set aspects explicitly, if needed, using an **aspectNames** field.  If you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:  &#x60;&#x60;&#x60;JSON {   \&quot;list\&quot;: {     \&quot;pagination\&quot;: {       \&quot;count\&quot;: 2,       \&quot;hasMoreItems\&quot;: false,       \&quot;totalItems\&quot;: 2,       \&quot;skipCount\&quot;: 0,       \&quot;maxItems\&quot;: 100     },     \&quot;entries\&quot;: [       {         \&quot;entry\&quot;: {           ...         }       },       {         \&quot;entry\&quot;: {           ...         }       }     ]   } } &#x60;&#x60;&#x60;
-     * @param {String} filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
-     * @param {module:model/RootCategoryBodyCreate} nodeBodyCreate The node information to create.
+     * @param {string} filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
+     * @param {RootCategoryBodyCreate} nodeBodyCreate The node information to create.
      * @param {Object} opts Optional parameters
-     * @param {Boolean} opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
+     * @param {boolean} opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
      * @param {Array.<String>} opts.include Returns additional information about the record category. Any optional field from the response model can be requested. For example: * allowableOperations * hasRetentionSchedule * path
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/RecordCategoryEntry}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleRecordCategoryEntry}
      */
     this.createFilePlanCategories = function(filePlanId, nodeBodyCreate, opts) {
       return this.createFilePlanCategoriesWithHttpInfo(filePlanId, nodeBodyCreate, opts)
@@ -121,11 +121,11 @@
     /**
      * Get a file plan
      * Gets information for file plan **filePlanId**  Mandatory fields and the file plan&#39;s aspects and properties are returned by default.  You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information.
-     * @param {String} filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
+     * @param {string} filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the file plan. Any optional field from the response model can be requested. For example: * allowableOperations * path
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/FilePlanEntry} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleFilePlanEntry} and HTTP response
      */
     this.getFilePlanWithHttpInfo = function(filePlanId, opts) {
       opts = opts || {};
@@ -164,11 +164,11 @@
     /**
      * Get a file plan
      * Gets information for file plan **filePlanId**  Mandatory fields and the file plan&#39;s aspects and properties are returned by default.  You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information.
-     * @param {String} filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
+     * @param {string} filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the file plan. Any optional field from the response model can be requested. For example: * allowableOperations * path
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/FilePlanEntry}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleFilePlanEntry}
      */
     this.getFilePlan = function(filePlanId, opts) {
       return this.getFilePlanWithHttpInfo(filePlanId, opts)
@@ -181,14 +181,14 @@
     /**
      * List file plans&#39;s children
      * Returns a list of record categories.  Minimal information for each child is returned by default.  You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information.
-     * @param {String} filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
+     * @param {string} filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
      * @param {Object} opts Optional parameters
-     * @param {Number} opts.skipCount The number of entities that exist in the collection before those included in this list.
-     * @param {Number} opts.maxItems The maximum number of items to return in the list.
+     * @param {number} opts.skipCount The number of entities that exist in the collection before those included in this list.
+     * @param {number} opts.maxItems The maximum number of items to return in the list.
      * @param {Array.<String>} opts.include Returns additional information about the record category. Any optional field from the response model can be requested. For example: * allowableOperations * aspectNames * hasRetentionSchedule * path * properties
-     * @param {Boolean} opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – the specified parent **filePlanId**
+     * @param {boolean} opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – the specified parent **filePlanId**
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/RecordCategoryPaging} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleRecordCategoryPaging} and HTTP response
      */
     this.getFilePlanCategoriesWithHttpInfo = function(filePlanId, opts) {
       opts = opts || {};
@@ -230,14 +230,14 @@
     /**
      * List file plans&#39;s children
      * Returns a list of record categories.  Minimal information for each child is returned by default.  You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information.
-     * @param {String} filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
+     * @param {string} filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
      * @param {Object} opts Optional parameters
-     * @param {Number} opts.skipCount The number of entities that exist in the collection before those included in this list.
-     * @param {Number} opts.maxItems The maximum number of items to return in the list.
+     * @param {number} opts.skipCount The number of entities that exist in the collection before those included in this list.
+     * @param {number} opts.maxItems The maximum number of items to return in the list.
      * @param {Array.<String>} opts.include Returns additional information about the record category. Any optional field from the response model can be requested. For example: * allowableOperations * aspectNames * hasRetentionSchedule * path * properties
-     * @param {Boolean} opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – the specified parent **filePlanId**
+     * @param {boolean} opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – the specified parent **filePlanId**
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/RecordCategoryPaging}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleRecordCategoryPaging}
      */
     this.getFilePlanCategories = function(filePlanId, opts) {
       return this.getFilePlanCategoriesWithHttpInfo(filePlanId, opts)
@@ -250,12 +250,12 @@
     /**
      * Update a file plan
      * Updates file plan **filePlanId**. You can only set or update description and title properties: &#x60;&#x60;&#x60;JSON {   \&quot;properties\&quot;:     {        \&quot;cm:description\&quot;: \&quot;New Description\&quot;,        \&quot;cm:title\&quot;:\&quot;New Title\&quot;     } } &#x60;&#x60;&#x60;  **Note:** Currently there is no optimistic locking for updates, so they are applied in \&quot;last one wins\&quot; order.
-     * @param {String} filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
-     * @param {module:model/FilePlanBodyUpdate} filePlanBodyUpdate The file plan information to update.
+     * @param {string} filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
+     * @param {FilePlanBodyUpdate} filePlanBodyUpdate The file plan information to update.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the file plan. Any optional field from the response model can be requested. For example: * allowableOperations * path
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/FilePlanEntry} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleFilePlanEntry} and HTTP response
      */
     this.updateFilePlanWithHttpInfo = function(filePlanId, filePlanBodyUpdate, opts) {
       opts = opts || {};
@@ -299,12 +299,12 @@
     /**
      * Update a file plan
      * Updates file plan **filePlanId**. You can only set or update description and title properties: &#x60;&#x60;&#x60;JSON {   \&quot;properties\&quot;:     {        \&quot;cm:description\&quot;: \&quot;New Description\&quot;,        \&quot;cm:title\&quot;:\&quot;New Title\&quot;     } } &#x60;&#x60;&#x60;  **Note:** Currently there is no optimistic locking for updates, so they are applied in \&quot;last one wins\&quot; order.
-     * @param {String} filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
-     * @param {module:model/FilePlanBodyUpdate} filePlanBodyUpdate The file plan information to update.
+     * @param {string} filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
+     * @param {FilePlanBodyUpdate} filePlanBodyUpdate The file plan information to update.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the file plan. Any optional field from the response model can be requested. For example: * allowableOperations * path
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/FilePlanEntry}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleFilePlanEntry}
      */
     this.updateFilePlan = function(filePlanId, filePlanBodyUpdate, opts) {
       return this.updateFilePlanWithHttpInfo(filePlanId, filePlanBodyUpdate, opts)

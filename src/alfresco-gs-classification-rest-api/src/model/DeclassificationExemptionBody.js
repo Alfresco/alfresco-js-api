@@ -35,16 +35,16 @@
 
   /**
    * The DeclassificationExemptionBody model module.
-   * @module model/DeclassificationExemptionBody
+   * @module DeclassificationExemptionBody
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>DeclassificationExemptionBody</code>.
-   * @alias module:model/DeclassificationExemptionBody
+   * @alias DeclassificationExemptionBody
    * @class
-   * @param code {String}
-   * @param description {String}
+   * @param code {string}
+   * @param description {string}
    */
   var exports = function(code, description) {
     var _this = this;
@@ -57,8 +57,8 @@
    * Constructs a <code>DeclassificationExemptionBody</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/DeclassificationExemptionBody} obj Optional instance to populate.
-   * @return {module:model/DeclassificationExemptionBody} The populated <code>DeclassificationExemptionBody</code> instance.
+   * @param {DeclassificationExemptionBody} obj Optional instance to populate.
+   * @return {DeclassificationExemptionBody} The populated <code>DeclassificationExemptionBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -75,11 +75,11 @@
   }
 
   /**
-   * @member {String} code
+   * @member {string} code
    */
   exports.prototype['code'] = undefined;
   /**
-   * @member {String} description
+   * @member {string} description
    */
   exports.prototype['description'] = undefined;
 

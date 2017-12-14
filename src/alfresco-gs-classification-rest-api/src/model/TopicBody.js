@@ -35,15 +35,15 @@
 
   /**
    * The TopicBody model module.
-   * @module model/TopicBody
+   * @module TopicBody
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>TopicBody</code>.
-   * @alias module:model/TopicBody
+   * @alias TopicBody
    * @class
-   * @param name {String}
+   * @param name {string}
    */
   var exports = function(name) {
     var _this = this;
@@ -57,8 +57,8 @@
    * Constructs a <code>TopicBody</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/TopicBody} obj Optional instance to populate.
-   * @return {module:model/TopicBody} The populated <code>TopicBody</code> instance.
+   * @param {TopicBody} obj Optional instance to populate.
+   * @return {TopicBody} The populated <code>TopicBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -78,15 +78,15 @@
   }
 
   /**
-   * @member {String} name
+   * @member {string} name
    */
   exports.prototype['name'] = undefined;
   /**
-   * @member {String} description
+   * @member {string} description
    */
   exports.prototype['description'] = undefined;
   /**
-   * @member {module:model/InstructionBody} instruction
+   * @member {InstructionBody} instruction
    */
   exports.prototype['instruction'] = undefined;
 

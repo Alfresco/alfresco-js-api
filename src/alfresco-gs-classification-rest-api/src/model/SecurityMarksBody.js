@@ -35,13 +35,13 @@
 
   /**
    * The SecurityMarksBody model module.
-   * @module model/SecurityMarksBody
+   * @module SecurityMarksBody
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>SecurityMarksBody</code>.
-   * @alias module:model/SecurityMarksBody
+   * @alias SecurityMarksBody
    * @class
    * @extends Array
    */
@@ -57,8 +57,8 @@
    * Constructs a <code>SecurityMarksBody</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/SecurityMarksBody} obj Optional instance to populate.
-   * @return {module:model/SecurityMarksBody} The populated <code>SecurityMarksBody</code> instance.
+   * @param {SecurityMarksBody} obj Optional instance to populate.
+   * @return {SecurityMarksBody} The populated <code>SecurityMarksBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {

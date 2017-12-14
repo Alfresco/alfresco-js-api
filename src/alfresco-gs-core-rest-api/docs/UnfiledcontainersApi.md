@@ -1,13 +1,13 @@
-# AlfrescoGovernanceServicesRestApi.UnfiledcontainersApi
+# AlfrescoGovernanceServicesRestApi.UnfiledContainersApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/gs/versions/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createUnfiledContainerChildren**](UnfiledcontainersApi.md#createUnfiledContainerChildren) | **POST** /unfiled-containers/{unfiledContainerId}/children | Create a record or an unfiled record folder
-[**getUnfiledContainer**](UnfiledcontainersApi.md#getUnfiledContainer) | **GET** /unfiled-containers/{unfiledContainerId} | Get the unfiled records container
-[**listUnfiledContainerChildren**](UnfiledcontainersApi.md#listUnfiledContainerChildren) | **GET** /unfiled-containers/{unfiledContainerId}/children | List unfiled record container&#39;s children
-[**updateUnfiledContainer**](UnfiledcontainersApi.md#updateUnfiledContainer) | **PUT** /unfiled-containers/{unfiledContainerId} | Update an unfiled record container
+[**createUnfiledContainerChildren**](UnfiledContainersApi.md#createUnfiledContainerChildren) | **POST** /unfiled-containers/{unfiledContainerId}/children | Create a record or an unfiled record folder
+[**getUnfiledContainer**](UnfiledContainersApi.md#getUnfiledContainer) | **GET** /unfiled-containers/{unfiledContainerId} | Get the unfiled records container
+[**listUnfiledContainerChildren**](UnfiledContainersApi.md#listUnfiledContainerChildren) | **GET** /unfiled-containers/{unfiledContainerId}/children | List unfiled record container&#39;s children
+[**updateUnfiledContainer**](UnfiledContainersApi.md#updateUnfiledContainer) | **PUT** /unfiled-containers/{unfiledContainerId} | Update an unfiled record container
 
 
 <a name="createUnfiledContainerChildren"></a>

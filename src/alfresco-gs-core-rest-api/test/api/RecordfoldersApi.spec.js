@@ -1,6 +1,6 @@
 /**
  * Alfresco Governance Services REST API
- * **GS Core API**  Provides access to the core features of Alfresco Governance Services. 
+ * **GS Core API**  Provides access to the core features of Alfresco Governance Services.
  *
  * OpenAPI spec version: 1
  *
@@ -30,7 +30,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new AlfrescoGovernanceServicesRestApi.RecordfoldersApi();
+    instance = new AlfrescoGovernanceServicesRestApi.RecordFoldersApi();
   });
 
   var getProperty = function(object, getter, property) {
@@ -49,7 +49,7 @@
       object[property] = value;
   }
 
-  describe('RecordfoldersApi', function() {
+  describe('RecordFoldersApi', function() {
     describe('createRecordFolderChild', function() {
       it('should call createRecordFolderChild successfully', function(done) {
         //uncomment below and update the code to test createRecordFolderChild

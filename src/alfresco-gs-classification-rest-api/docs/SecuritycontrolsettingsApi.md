@@ -1,11 +1,11 @@
-# AlfrescoGovernanceServicesSecurityControls.SecuritycontrolsettingsApi
+# AlfrescoGovernanceServicesSecurityControls.SecurityControlSettingsApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/gs/versions/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getSecurityControlSetting**](SecuritycontrolsettingsApi.md#getSecurityControlSetting) | **GET** /security-control-settings/{securityControlSettingKey} | Get security control setting value
-[**updateSecurityControlSetting**](SecuritycontrolsettingsApi.md#updateSecurityControlSetting) | **PUT** /security-control-settings/{securityControlSettingKey} | Update security control setting value
+[**getSecurityControlSetting**](SecurityControlSettingsApi.md#getSecurityControlSetting) | **GET** /security-control-settings/{securityControlSettingKey} | Get security control setting value
+[**updateSecurityControlSetting**](SecurityControlSettingsApi.md#updateSecurityControlSetting) | **PUT** /security-control-settings/{securityControlSettingKey} | Update security control setting value
 
 
 <a name="getSecurityControlSetting"></a>

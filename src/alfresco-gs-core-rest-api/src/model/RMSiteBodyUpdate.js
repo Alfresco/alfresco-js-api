@@ -35,13 +35,13 @@
 
   /**
    * The RMSiteBodyUpdate model module.
-   * @module model/RMSiteBodyUpdate
+   * @module  RMSiteBodyUpdate
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>RMSiteBodyUpdate</code>.
-   * @alias module:model/RMSiteBodyUpdate
+   * @alias RMSiteBodyUpdate
    * @class
    */
   var exports = function() {
@@ -55,8 +55,8 @@
    * Constructs a <code>RMSiteBodyUpdate</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/RMSiteBodyUpdate} obj Optional instance to populate.
-   * @return {module:model/RMSiteBodyUpdate} The populated <code>RMSiteBodyUpdate</code> instance.
+   * @param {RMSiteBodyUpdate} obj Optional instance to populate.
+   * @return {RMSiteBodyUpdate} The populated <code>RMSiteBodyUpdate</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -73,11 +73,11 @@
   }
 
   /**
-   * @member {String} title
+   * @member {string} title
    */
   exports.prototype['title'] = undefined;
   /**
-   * @member {String} description
+   * @member {string} description
    */
   exports.prototype['description'] = undefined;
 

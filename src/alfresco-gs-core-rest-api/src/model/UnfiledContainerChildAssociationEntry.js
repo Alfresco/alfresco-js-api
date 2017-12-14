@@ -35,15 +35,15 @@
 
   /**
    * The UnfiledContainerChildAssociationEntry model module.
-   * @module model/UnfiledContainerChildAssociationEntry
+   * @module  UnfiledContainerChildAssociationEntry
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>UnfiledContainerChildAssociationEntry</code>.
-   * @alias module:model/UnfiledContainerChildAssociationEntry
+   * @alias UnfiledContainerChildAssociationEntry
    * @class
-   * @param entry {module:model/UnfiledContainerChildAssociation}
+   * @param entry {UnfiledContainerChildAssociation}
    */
   var exports = function(entry) {
     var _this = this;
@@ -55,8 +55,8 @@
    * Constructs a <code>UnfiledContainerChildAssociationEntry</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/UnfiledContainerChildAssociationEntry} obj Optional instance to populate.
-   * @return {module:model/UnfiledContainerChildAssociationEntry} The populated <code>UnfiledContainerChildAssociationEntry</code> instance.
+   * @param {UnfiledContainerChildAssociationEntry} obj Optional instance to populate.
+   * @return {UnfiledContainerChildAssociationEntry} The populated <code>UnfiledContainerChildAssociationEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -70,7 +70,7 @@
   }
 
   /**
-   * @member {module:model/UnfiledContainerChildAssociation} entry
+   * @member {UnfiledContainerChildAssociation} entry
    */
   exports.prototype['entry'] = undefined;
 

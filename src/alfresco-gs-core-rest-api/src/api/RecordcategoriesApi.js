@@ -25,22 +25,22 @@
     if (!root.AlfrescoGovernanceServicesRestApi) {
       root.AlfrescoGovernanceServicesRestApi = {};
     }
-    root.AlfrescoGovernanceServicesRestApi.RecordcategoriesApi = factory(root.AlfrescoGovernanceServicesRestApi.ApiClient, root.AlfrescoGovernanceServicesRestApi.Error, root.AlfrescoGovernanceServicesRestApi.FilePlanComponentBodyUpdate, root.AlfrescoGovernanceServicesRestApi.RMNodeBodyCreateWithRelativePath, root.AlfrescoGovernanceServicesRestApi.RecordCategoryChildEntry, root.AlfrescoGovernanceServicesRestApi.RecordCategoryChildPaging, root.AlfrescoGovernanceServicesRestApi.RecordCategoryEntry);
+    root.AlfrescoGovernanceServicesRestApi.RecordCategoriesApi = factory(root.AlfrescoGovernanceServicesRestApi.ApiClient, root.AlfrescoGovernanceServicesRestApi.Error, root.AlfrescoGovernanceServicesRestApi.FilePlanComponentBodyUpdate, root.AlfrescoGovernanceServicesRestApi.RMNodeBodyCreateWithRelativePath, root.AlfrescoGovernanceServicesRestApi.RecordCategoryChildEntry, root.AlfrescoGovernanceServicesRestApi.RecordCategoryChildPaging, root.AlfrescoGovernanceServicesRestApi.RecordCategoryEntry);
   }
 }(this, function(ApiClient, Error, FilePlanComponentBodyUpdate, RMNodeBodyCreateWithRelativePath, RecordCategoryChildEntry, RecordCategoryChildPaging, RecordCategoryEntry) {
   'use strict';
 
   /**
    * Recordcategories service.
-   * @module api/RecordcategoriesApi
+   * @module api/RecordCategoriesApi
    * @version 0.1.0
    */
 
   /**
-   * Constructs a new RecordcategoriesApi.
-   * @alias module:api/RecordcategoriesApi
+   * Constructs a new RecordCategoriesApi.
+   * @alias :api/RecordCategoriesApi
    * @class
-   * @param {module:ApiClient} apiClient Optional API client implementation to use,
+   * @param {:ApiClient} apiClient Optional API client implementation to use,
    * default to {@link module:ApiClient#instance} if unspecified.
    */
   var exports = function(apiClient) {
@@ -51,13 +51,13 @@
     /**
      * Create a record category or a record folder
      * Create a record category or a record folder as a primary child of **recordCategoryId**.  You can set the **autoRename** boolean field to automatically resolve name clashes. If there is a name clash, then the API method tries to create a unique name using an integer suffix.  This API method also supports record category or record folder creation using application/json.  You must specify at least a **name** and **nodeType**.  You can create a category like this: &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;:\&quot;My Record Category\&quot;,   \&quot;nodeType\&quot;:\&quot;rma:recordCategory\&quot; } &#x60;&#x60;&#x60;  You can create a record folder like this: &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;:\&quot;My Record Folder\&quot;,   \&quot;nodeType\&quot;:\&quot;rma:recordFolder\&quot; } &#x60;&#x60;&#x60;  You can create a record folder inside a container hierarchy (applies to record categories as well): &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;:\&quot;My Fileplan Component\&quot;,   \&quot;nodeType\&quot;:\&quot;rma:recordFolder\&quot;,   \&quot;relativePath\&quot;:\&quot;X/Y/Z\&quot; } &#x60;&#x60;&#x60; The **relativePath** specifies the container structure to create relative to the node (record category or record folder). Containers in the **relativePath** that do not exist are created before the node is created. The container type is decided considering the type of the parent container and the type of the node to be created.  You can set properties when creating a record category (applies to record folders as well): &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;:\&quot;My Record Category\&quot;,   \&quot;nodeType\&quot;:\&quot;rma:recordCategory\&quot;,   \&quot;properties\&quot;:   {     \&quot;rma:vitalRecordIndicator\&quot;:\&quot;true\&quot;,     \&quot;rma:reviewPeriod\&quot;:\&quot;month|1\&quot;   } } &#x60;&#x60;&#x60;  Any missing aspects are applied automatically. You can set aspects explicitly, if needed, using an **aspectNames** field.  **Note:** You can create more than one child by specifying a list of nodes in the JSON body. For example, the following JSON body creates a record category and a record folder inside the specified **categoryId**: &#x60;&#x60;&#x60;JSON [   {     \&quot;name\&quot;:\&quot;My Record Category\&quot;,     \&quot;nodeType\&quot;:\&quot;rma:recordCategory\&quot;   },   {     \&quot;name\&quot;:\&quot;My Record Folder\&quot;,     \&quot;nodeType\&quot;:\&quot;rma:recordFolder\&quot;   } ] &#x60;&#x60;&#x60; If you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:  &#x60;&#x60;&#x60;JSON {   \&quot;list\&quot;: {     \&quot;pagination\&quot;: {       \&quot;count\&quot;: 2,       \&quot;hasMoreItems\&quot;: false,       \&quot;totalItems\&quot;: 2,       \&quot;skipCount\&quot;: 0,       \&quot;maxItems\&quot;: 100     },     \&quot;entries\&quot;: [       {         \&quot;entry\&quot;: {           ...         }       },       {         \&quot;entry\&quot;: {           ...         }       }     ]   } } &#x60;&#x60;&#x60;
-     * @param {String} recordCategoryId The identifier of a record category.
-     * @param {module:model/RMNodeBodyCreateWithRelativePath} nodeBodyCreate The node information to create.
+     * @param {string} recordCategoryId The identifier of a record category.
+     * @param {RMNodeBodyCreateWithRelativePath} nodeBodyCreate The node information to create.
      * @param {Object} opts Optional parameters
-     * @param {Boolean} opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
+     * @param {boolean} opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
      * @param {Array.<String>} opts.include Returns additional information about the record category. Any optional field from the response model can be requested. For example: * allowableOperations * hasRetentionSchedule * path
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/RecordCategoryChildEntry} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleRecordCategoryChildEntry} and HTTP response
      */
     this.createRecordCategoryChildWithHttpInfo = function(recordCategoryId, nodeBodyCreate, opts) {
       opts = opts || {};
@@ -102,13 +102,13 @@
     /**
      * Create a record category or a record folder
      * Create a record category or a record folder as a primary child of **recordCategoryId**.  You can set the **autoRename** boolean field to automatically resolve name clashes. If there is a name clash, then the API method tries to create a unique name using an integer suffix.  This API method also supports record category or record folder creation using application/json.  You must specify at least a **name** and **nodeType**.  You can create a category like this: &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;:\&quot;My Record Category\&quot;,   \&quot;nodeType\&quot;:\&quot;rma:recordCategory\&quot; } &#x60;&#x60;&#x60;  You can create a record folder like this: &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;:\&quot;My Record Folder\&quot;,   \&quot;nodeType\&quot;:\&quot;rma:recordFolder\&quot; } &#x60;&#x60;&#x60;  You can create a record folder inside a container hierarchy (applies to record categories as well): &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;:\&quot;My Fileplan Component\&quot;,   \&quot;nodeType\&quot;:\&quot;rma:recordFolder\&quot;,   \&quot;relativePath\&quot;:\&quot;X/Y/Z\&quot; } &#x60;&#x60;&#x60; The **relativePath** specifies the container structure to create relative to the node (record category or record folder). Containers in the **relativePath** that do not exist are created before the node is created. The container type is decided considering the type of the parent container and the type of the node to be created.  You can set properties when creating a record category (applies to record folders as well): &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;:\&quot;My Record Category\&quot;,   \&quot;nodeType\&quot;:\&quot;rma:recordCategory\&quot;,   \&quot;properties\&quot;:   {     \&quot;rma:vitalRecordIndicator\&quot;:\&quot;true\&quot;,     \&quot;rma:reviewPeriod\&quot;:\&quot;month|1\&quot;   } } &#x60;&#x60;&#x60;  Any missing aspects are applied automatically. You can set aspects explicitly, if needed, using an **aspectNames** field.  **Note:** You can create more than one child by specifying a list of nodes in the JSON body. For example, the following JSON body creates a record category and a record folder inside the specified **categoryId**: &#x60;&#x60;&#x60;JSON [   {     \&quot;name\&quot;:\&quot;My Record Category\&quot;,     \&quot;nodeType\&quot;:\&quot;rma:recordCategory\&quot;   },   {     \&quot;name\&quot;:\&quot;My Record Folder\&quot;,     \&quot;nodeType\&quot;:\&quot;rma:recordFolder\&quot;   } ] &#x60;&#x60;&#x60; If you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:  &#x60;&#x60;&#x60;JSON {   \&quot;list\&quot;: {     \&quot;pagination\&quot;: {       \&quot;count\&quot;: 2,       \&quot;hasMoreItems\&quot;: false,       \&quot;totalItems\&quot;: 2,       \&quot;skipCount\&quot;: 0,       \&quot;maxItems\&quot;: 100     },     \&quot;entries\&quot;: [       {         \&quot;entry\&quot;: {           ...         }       },       {         \&quot;entry\&quot;: {           ...         }       }     ]   } } &#x60;&#x60;&#x60;
-     * @param {String} recordCategoryId The identifier of a record category.
-     * @param {module:model/RMNodeBodyCreateWithRelativePath} nodeBodyCreate The node information to create.
+     * @param {string} recordCategoryId The identifier of a record category.
+     * @param {RMNodeBodyCreateWithRelativePath} nodeBodyCreate The node information to create.
      * @param {Object} opts Optional parameters
-     * @param {Boolean} opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
+     * @param {boolean} opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
      * @param {Array.<String>} opts.include Returns additional information about the record category. Any optional field from the response model can be requested. For example: * allowableOperations * hasRetentionSchedule * path
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/RecordCategoryChildEntry}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleRecordCategoryChildEntry}
      */
     this.createRecordCategoryChild = function(recordCategoryId, nodeBodyCreate, opts) {
       return this.createRecordCategoryChildWithHttpInfo(recordCategoryId, nodeBodyCreate, opts)
@@ -121,7 +121,7 @@
     /**
      * Delete a record category
      * Deletes record category **recordCategoryId**.
-     * @param {String} recordCategoryId The identifier of a record category.
+     * @param {string} recordCategoryId The identifier of a record category.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
     this.deleteRecordCategoryWithHttpInfo = function(recordCategoryId) {
@@ -158,7 +158,7 @@
     /**
      * Delete a record category
      * Deletes record category **recordCategoryId**.
-     * @param {String} recordCategoryId The identifier of a record category.
+     * @param {string} recordCategoryId The identifier of a record category.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
     this.deleteRecordCategory = function(recordCategoryId) {
@@ -172,12 +172,12 @@
     /**
      * Get a record category
      * Gets information for record category **recordCategoryId**  Mandatory fields and the record category&#39;s aspects and properties are returned by default.  You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information.
-     * @param {String} recordCategoryId The identifier of a record category.
+     * @param {string} recordCategoryId The identifier of a record category.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the record category. Any optional field from the response model can be requested. For example: * allowableOperations * hasRetentionSchedule * path
-     * @param {String} opts.relativePath Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
+     * @param {string} opts.relativePath Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/RecordCategoryEntry} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleRecordCategoryEntry} and HTTP response
      */
     this.getRecordCategoryWithHttpInfo = function(recordCategoryId, opts) {
       opts = opts || {};
@@ -217,12 +217,12 @@
     /**
      * Get a record category
      * Gets information for record category **recordCategoryId**  Mandatory fields and the record category&#39;s aspects and properties are returned by default.  You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information.
-     * @param {String} recordCategoryId The identifier of a record category.
+     * @param {string} recordCategoryId The identifier of a record category.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the record category. Any optional field from the response model can be requested. For example: * allowableOperations * hasRetentionSchedule * path
-     * @param {String} opts.relativePath Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
+     * @param {string} opts.relativePath Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/RecordCategoryEntry}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleRecordCategoryEntry}
      */
     this.getRecordCategory = function(recordCategoryId, opts) {
       return this.getRecordCategoryWithHttpInfo(recordCategoryId, opts)
@@ -235,16 +235,16 @@
     /**
      * List record category&#39;s children
      * Returns a list of record categories and/or record folders.  Minimal information for each child is returned by default.  You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information.  The list of child nodes includes primary children and secondary children, if there are any.
-     * @param {String} recordCategoryId The identifier of a record category.
+     * @param {string} recordCategoryId The identifier of a record category.
      * @param {Object} opts Optional parameters
-     * @param {Number} opts.skipCount The number of entities that exist in the collection before those included in this list.
-     * @param {Number} opts.maxItems The maximum number of items to return in the list.
-     * @param {String} opts.where Optionally filter the list. Here are some examples:  *   &#x60;&#x60;&#x60;where&#x3D;(nodeType&#x3D;&#39;rma:recordFolder&#39;)&#x60;&#x60;&#x60;  *   &#x60;&#x60;&#x60;where&#x3D;(nodeType&#x3D;&#39;rma:recordCategory&#39;)&#x60;&#x60;&#x60;  *   &#x60;&#x60;&#x60;where&#x3D;(isRecordFolder&#x3D;true AND isClosed&#x3D;false)&#x60;&#x60;&#x60;
+     * @param {number} opts.skipCount The number of entities that exist in the collection before those included in this list.
+     * @param {number} opts.maxItems The maximum number of items to return in the list.
+     * @param {string} opts.where Optionally filter the list. Here are some examples:  *   &#x60;&#x60;&#x60;where&#x3D;(nodeType&#x3D;&#39;rma:recordFolder&#39;)&#x60;&#x60;&#x60;  *   &#x60;&#x60;&#x60;where&#x3D;(nodeType&#x3D;&#39;rma:recordCategory&#39;)&#x60;&#x60;&#x60;  *   &#x60;&#x60;&#x60;where&#x3D;(isRecordFolder&#x3D;true AND isClosed&#x3D;false)&#x60;&#x60;&#x60;
      * @param {Array.<String>} opts.include Returns additional information about the record category child. Any optional field from the response model can be requested. For example: * allowableOperations * aspectNames * hasRetentionSchedule * isClosed * isRecordCategory * isRecordFolder * path * properties
-     * @param {String} opts.relativePath Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
-     * @param {Boolean} opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **recordCategoryId**, or as resolved by **relativePath**.
+     * @param {string} opts.relativePath Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
+     * @param {boolean} opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **recordCategoryId**, or as resolved by **relativePath**.
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/RecordCategoryChildPaging} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleRecordCategoryChildPaging} and HTTP response
      */
     this.listRecordCategoryChildrenWithHttpInfo = function(recordCategoryId, opts) {
       opts = opts || {};
@@ -288,16 +288,16 @@
     /**
      * List record category&#39;s children
      * Returns a list of record categories and/or record folders.  Minimal information for each child is returned by default.  You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information.  The list of child nodes includes primary children and secondary children, if there are any.
-     * @param {String} recordCategoryId The identifier of a record category.
+     * @param {string} recordCategoryId The identifier of a record category.
      * @param {Object} opts Optional parameters
-     * @param {Number} opts.skipCount The number of entities that exist in the collection before those included in this list.
-     * @param {Number} opts.maxItems The maximum number of items to return in the list.
-     * @param {String} opts.where Optionally filter the list. Here are some examples:  *   &#x60;&#x60;&#x60;where&#x3D;(nodeType&#x3D;&#39;rma:recordFolder&#39;)&#x60;&#x60;&#x60;  *   &#x60;&#x60;&#x60;where&#x3D;(nodeType&#x3D;&#39;rma:recordCategory&#39;)&#x60;&#x60;&#x60;  *   &#x60;&#x60;&#x60;where&#x3D;(isRecordFolder&#x3D;true AND isClosed&#x3D;false)&#x60;&#x60;&#x60;
+     * @param {number} opts.skipCount The number of entities that exist in the collection before those included in this list.
+     * @param {number} opts.maxItems The maximum number of items to return in the list.
+     * @param {string} opts.where Optionally filter the list. Here are some examples:  *   &#x60;&#x60;&#x60;where&#x3D;(nodeType&#x3D;&#39;rma:recordFolder&#39;)&#x60;&#x60;&#x60;  *   &#x60;&#x60;&#x60;where&#x3D;(nodeType&#x3D;&#39;rma:recordCategory&#39;)&#x60;&#x60;&#x60;  *   &#x60;&#x60;&#x60;where&#x3D;(isRecordFolder&#x3D;true AND isClosed&#x3D;false)&#x60;&#x60;&#x60;
      * @param {Array.<String>} opts.include Returns additional information about the record category child. Any optional field from the response model can be requested. For example: * allowableOperations * aspectNames * hasRetentionSchedule * isClosed * isRecordCategory * isRecordFolder * path * properties
-     * @param {String} opts.relativePath Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
-     * @param {Boolean} opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **recordCategoryId**, or as resolved by **relativePath**.
+     * @param {string} opts.relativePath Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
+     * @param {boolean} opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **recordCategoryId**, or as resolved by **relativePath**.
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/RecordCategoryChildPaging}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleRecordCategoryChildPaging}
      */
     this.listRecordCategoryChildren = function(recordCategoryId, opts) {
       return this.listRecordCategoryChildrenWithHttpInfo(recordCategoryId, opts)
@@ -310,12 +310,12 @@
     /**
      * Update a record category
      * Updates record category **recordCategoryId**. For example, you can rename a record category: &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;:\&quot;My new name\&quot; } &#x60;&#x60;&#x60; You can also set or update one or more properties: &#x60;&#x60;&#x60;JSON {   \&quot;properties\&quot;:     {        \&quot;rma:vitalRecordIndicator\&quot;: true,        \&quot;rma:reviewPeriod\&quot;:\&quot;month|6\&quot;     } } &#x60;&#x60;&#x60; **Note:** If you want to add or remove aspects, then you must use **GET /record-categories/{recordCategoryId}** first to get the complete set of *aspectNames*.  **Note:** Currently there is no optimistic locking for updates, so they are applied in \&quot;last one wins\&quot; order.
-     * @param {String} recordCategoryId The identifier of a record category.
-     * @param {module:model/FilePlanComponentBodyUpdate} recordCategoryBodyUpdate The record category information to update.
+     * @param {string} recordCategoryId The identifier of a record category.
+     * @param {FilePlanComponentBodyUpdate} recordCategoryBodyUpdate The record category information to update.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the record category. Any optional field from the response model can be requested. For example: * allowableOperations * hasRetentionSchedule * path
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/RecordCategoryEntry} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleRecordCategoryEntry} and HTTP response
      */
     this.updateRecordCategoryWithHttpInfo = function(recordCategoryId, recordCategoryBodyUpdate, opts) {
       opts = opts || {};
@@ -359,12 +359,12 @@
     /**
      * Update a record category
      * Updates record category **recordCategoryId**. For example, you can rename a record category: &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;:\&quot;My new name\&quot; } &#x60;&#x60;&#x60; You can also set or update one or more properties: &#x60;&#x60;&#x60;JSON {   \&quot;properties\&quot;:     {        \&quot;rma:vitalRecordIndicator\&quot;: true,        \&quot;rma:reviewPeriod\&quot;:\&quot;month|6\&quot;     } } &#x60;&#x60;&#x60; **Note:** If you want to add or remove aspects, then you must use **GET /record-categories/{recordCategoryId}** first to get the complete set of *aspectNames*.  **Note:** Currently there is no optimistic locking for updates, so they are applied in \&quot;last one wins\&quot; order.
-     * @param {String} recordCategoryId The identifier of a record category.
-     * @param {module:model/FilePlanComponentBodyUpdate} recordCategoryBodyUpdate The record category information to update.
+     * @param {string} recordCategoryId The identifier of a record category.
+     * @param {FilePlanComponentBodyUpdate} recordCategoryBodyUpdate The record category information to update.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the record category. Any optional field from the response model can be requested. For example: * allowableOperations * hasRetentionSchedule * path
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/RecordCategoryEntry}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleRecordCategoryEntry}
      */
     this.updateRecordCategory = function(recordCategoryId, recordCategoryBodyUpdate, opts) {
       return this.updateRecordCategoryWithHttpInfo(recordCategoryId, recordCategoryBodyUpdate, opts)

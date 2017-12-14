@@ -35,13 +35,13 @@
 
   /**
    * The FilePlanBodyUpdate model module.
-   * @module model/FilePlanBodyUpdate
+   * @module  FilePlanBodyUpdate
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>FilePlanBodyUpdate</code>.
-   * @alias module:model/FilePlanBodyUpdate
+   * @alias FilePlanBodyUpdate
    * @class
    */
   var exports = function() {
@@ -54,8 +54,8 @@
    * Constructs a <code>FilePlanBodyUpdate</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/FilePlanBodyUpdate} obj Optional instance to populate.
-   * @return {module:model/FilePlanBodyUpdate} The populated <code>FilePlanBodyUpdate</code> instance.
+   * @param {FilePlanBodyUpdate} obj Optional instance to populate.
+   * @return {FilePlanBodyUpdate} The populated <code>FilePlanBodyUpdate</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {

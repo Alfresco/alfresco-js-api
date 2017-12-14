@@ -25,22 +25,22 @@
     if (!root.AlfrescoGovernanceServicesRestApi) {
       root.AlfrescoGovernanceServicesRestApi = {};
     }
-    root.AlfrescoGovernanceServicesRestApi.GssitesApi = factory(root.AlfrescoGovernanceServicesRestApi.ApiClient, root.AlfrescoGovernanceServicesRestApi.Error, root.AlfrescoGovernanceServicesRestApi.RMSiteBodyCreate, root.AlfrescoGovernanceServicesRestApi.RMSiteBodyUpdate, root.AlfrescoGovernanceServicesRestApi.RMSiteEntry);
+    root.AlfrescoGovernanceServicesRestApi.GsSitesApi = factory(root.AlfrescoGovernanceServicesRestApi.ApiClient, root.AlfrescoGovernanceServicesRestApi.Error, root.AlfrescoGovernanceServicesRestApi.RMSiteBodyCreate, root.AlfrescoGovernanceServicesRestApi.RMSiteBodyUpdate, root.AlfrescoGovernanceServicesRestApi.RMSiteEntry);
   }
 }(this, function(ApiClient, Error, RMSiteBodyCreate, RMSiteBodyUpdate, RMSiteEntry) {
   'use strict';
 
   /**
    * Gssites service.
-   * @module api/GssitesApi
+   * @module api/GsSitesApi
    * @version 0.1.0
    */
 
   /**
-   * Constructs a new GssitesApi.
-   * @alias module:api/GssitesApi
+   * Constructs a new GsSitesApi.
+   * @alias :api/GsSitesApi
    * @class
-   * @param {module:ApiClient} apiClient Optional API client implementation to use,
+   * @param {:ApiClient} apiClient Optional API client implementation to use,
    * default to {@link module:ApiClient#instance} if unspecified.
    */
   var exports = function(apiClient) {
@@ -51,10 +51,10 @@
     /**
      * Create the Records Management (RM) site
      *  Creates the RM site with the given details.  **Note:** The default site id is rm and the default site name is Records Management. The id of a site cannot be updated once the site has been created.  For example, to create an RM site named \&quot;Records Management\&quot; with \&quot;Records Management Description\&quot; as description, the following body could be used: &#x60;&#x60;&#x60;JSON {   \&quot;title\&quot;: \&quot;Records Management\&quot;,   \&quot;description\&quot;: \&quot;Records Management Description\&quot; } &#x60;&#x60;&#x60;  The creator will be added as a member with Site Manager role.  When you create the RM site, the **filePlan** structure is also created including special containers, such as containers for transfers, holds and, unfiled records.
-     * @param {module:model/RMSiteBodyCreate} siteBodyCreate The site details
+     * @param {RMSiteBodyCreate} siteBodyCreate The site details
      * @param {Object} opts Optional parameters
-     * @param {Boolean} opts.skipAddToFavorites Flag to indicate whether the RM site should not be added to the user&#39;s site favorites. (default to false)
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/RMSiteEntry} and HTTP response
+     * @param {boolean} opts.skipAddToFavorites Flag to indicate whether the RM site should not be added to the user&#39;s site favorites. (default to false)
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleRMSiteEntry} and HTTP response
      */
     this.createRMSiteWithHttpInfo = function(siteBodyCreate, opts) {
       opts = opts || {};
@@ -91,10 +91,10 @@
     /**
      * Create the Records Management (RM) site
      *  Creates the RM site with the given details.  **Note:** The default site id is rm and the default site name is Records Management. The id of a site cannot be updated once the site has been created.  For example, to create an RM site named \&quot;Records Management\&quot; with \&quot;Records Management Description\&quot; as description, the following body could be used: &#x60;&#x60;&#x60;JSON {   \&quot;title\&quot;: \&quot;Records Management\&quot;,   \&quot;description\&quot;: \&quot;Records Management Description\&quot; } &#x60;&#x60;&#x60;  The creator will be added as a member with Site Manager role.  When you create the RM site, the **filePlan** structure is also created including special containers, such as containers for transfers, holds and, unfiled records.
-     * @param {module:model/RMSiteBodyCreate} siteBodyCreate The site details
+     * @param {RMSiteBodyCreate} siteBodyCreate The site details
      * @param {Object} opts Optional parameters
-     * @param {Boolean} opts.skipAddToFavorites Flag to indicate whether the RM site should not be added to the user&#39;s site favorites. (default to false)
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/RMSiteEntry}
+     * @param {boolean} opts.skipAddToFavorites Flag to indicate whether the RM site should not be added to the user&#39;s site favorites. (default to false)
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleRMSiteEntry}
      */
     this.createRMSite = function(siteBodyCreate, opts) {
       return this.createRMSiteWithHttpInfo(siteBodyCreate, opts)
@@ -152,7 +152,7 @@
      *  Gets information for RM site.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/RMSiteEntry} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleRMSiteEntry} and HTTP response
      */
     this.getRMSiteWithHttpInfo = function(opts) {
       opts = opts || {};
@@ -186,7 +186,7 @@
      *  Gets information for RM site.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/RMSiteEntry}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleRMSiteEntry}
      */
     this.getRMSite = function(opts) {
       return this.getRMSiteWithHttpInfo(opts)
@@ -199,10 +199,10 @@
     /**
      * Update the Records Management (RM) site
      *  Update the details for the RM site. Site Manager or other (site) admin can update title or description.  **Note**: the id, site visibility, or compliance of the RM site cannot be updated once the site has been created.
-     * @param {module:model/RMSiteBodyUpdate} siteBodyUpdate The RM site information to update.
+     * @param {RMSiteBodyUpdate} siteBodyUpdate The RM site information to update.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/RMSiteEntry} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleRMSiteEntry} and HTTP response
      */
     this.updateRMSiteWithHttpInfo = function(siteBodyUpdate, opts) {
       opts = opts || {};
@@ -239,10 +239,10 @@
     /**
      * Update the Records Management (RM) site
      *  Update the details for the RM site. Site Manager or other (site) admin can update title or description.  **Note**: the id, site visibility, or compliance of the RM site cannot be updated once the site has been created.
-     * @param {module:model/RMSiteBodyUpdate} siteBodyUpdate The RM site information to update.
+     * @param {RMSiteBodyUpdate} siteBodyUpdate The RM site information to update.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/RMSiteEntry}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleRMSiteEntry}
      */
     this.updateRMSite = function(siteBodyUpdate, opts) {
       return this.updateRMSiteWithHttpInfo(siteBodyUpdate, opts)

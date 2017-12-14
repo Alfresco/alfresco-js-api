@@ -35,13 +35,13 @@
 
   /**
    * The RecordFolderAssociationPaging model module.
-   * @module model/RecordFolderAssociationPaging
+   * @module  RecordFolderAssociationPaging
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>RecordFolderAssociationPaging</code>.
-   * @alias module:model/RecordFolderAssociationPaging
+   * @alias RecordFolderAssociationPaging
    * @class
    */
   var exports = function() {
@@ -54,8 +54,8 @@
    * Constructs a <code>RecordFolderAssociationPaging</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/RecordFolderAssociationPaging} obj Optional instance to populate.
-   * @return {module:model/RecordFolderAssociationPaging} The populated <code>RecordFolderAssociationPaging</code> instance.
+   * @param {RecordFolderAssociationPaging} obj Optional instance to populate.
+   * @return {RecordFolderAssociationPaging} The populated <code>RecordFolderAssociationPaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -69,7 +69,7 @@
   }
 
   /**
-   * @member {module:model/RecordFolderAssociationPagingList} list
+   * @member {RecordFolderAssociationPagingList} list
    */
   exports.prototype['list'] = undefined;
 

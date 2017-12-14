@@ -35,15 +35,15 @@
 
   /**
    * The UnfiledRecordFolderChildAssociationEntry model module.
-   * @module model/UnfiledRecordFolderChildAssociationEntry
+   * @module  UnfiledRecordFolderChildAssociationEntry
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>UnfiledRecordFolderChildAssociationEntry</code>.
-   * @alias module:model/UnfiledRecordFolderChildAssociationEntry
+   * @alias UnfiledRecordFolderChildAssociationEntry
    * @class
-   * @param entry {module:model/UnfiledRecordFolderChildAssociation}
+   * @param entry {UnfiledRecordFolderChildAssociation}
    */
   var exports = function(entry) {
     var _this = this;
@@ -55,8 +55,8 @@
    * Constructs a <code>UnfiledRecordFolderChildAssociationEntry</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/UnfiledRecordFolderChildAssociationEntry} obj Optional instance to populate.
-   * @return {module:model/UnfiledRecordFolderChildAssociationEntry} The populated <code>UnfiledRecordFolderChildAssociationEntry</code> instance.
+   * @param {UnfiledRecordFolderChildAssociationEntry} obj Optional instance to populate.
+   * @return {UnfiledRecordFolderChildAssociationEntry} The populated <code>UnfiledRecordFolderChildAssociationEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -70,7 +70,7 @@
   }
 
   /**
-   * @member {module:model/UnfiledRecordFolderChildAssociation} entry
+   * @member {UnfiledRecordFolderChildAssociation} entry
    */
   exports.prototype['entry'] = undefined;
 

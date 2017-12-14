@@ -25,22 +25,22 @@
     if (!root.AlfrescoGovernanceServicesSecurityControls) {
       root.AlfrescoGovernanceServicesSecurityControls = {};
     }
-    root.AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi = factory(root.AlfrescoGovernanceServicesSecurityControls.ApiClient, root.AlfrescoGovernanceServicesSecurityControls.ClassificationGuideBody, root.AlfrescoGovernanceServicesSecurityControls.ClassificationGuideEntry, root.AlfrescoGovernanceServicesSecurityControls.ClassificationGuidePaging, root.AlfrescoGovernanceServicesSecurityControls.CombinedInstructionBody, root.AlfrescoGovernanceServicesSecurityControls.Error, root.AlfrescoGovernanceServicesSecurityControls.InstructionEntry, root.AlfrescoGovernanceServicesSecurityControls.SubtopicPaging, root.AlfrescoGovernanceServicesSecurityControls.TopicBody, root.AlfrescoGovernanceServicesSecurityControls.TopicEntry, root.AlfrescoGovernanceServicesSecurityControls.TopicPaging);
+    root.AlfrescoGovernanceServicesSecurityControls.ClassificationGuidesApi = factory(root.AlfrescoGovernanceServicesSecurityControls.ApiClient, root.AlfrescoGovernanceServicesSecurityControls.ClassificationGuideBody, root.AlfrescoGovernanceServicesSecurityControls.ClassificationGuideEntry, root.AlfrescoGovernanceServicesSecurityControls.ClassificationGuidePaging, root.AlfrescoGovernanceServicesSecurityControls.CombinedInstructionBody, root.AlfrescoGovernanceServicesSecurityControls.Error, root.AlfrescoGovernanceServicesSecurityControls.InstructionEntry, root.AlfrescoGovernanceServicesSecurityControls.SubtopicPaging, root.AlfrescoGovernanceServicesSecurityControls.TopicBody, root.AlfrescoGovernanceServicesSecurityControls.TopicEntry, root.AlfrescoGovernanceServicesSecurityControls.TopicPaging);
   }
 }(this, function(ApiClient, ClassificationGuideBody, ClassificationGuideEntry, ClassificationGuidePaging, CombinedInstructionBody, Error, InstructionEntry, SubtopicPaging, TopicBody, TopicEntry, TopicPaging) {
   'use strict';
 
   /**
    * Classificationguides service.
-   * @module api/ClassificationguidesApi
+   * @module api/ClassificationGuidesApi
    * @version 0.1.0
    */
 
   /**
-   * Constructs a new ClassificationguidesApi.
-   * @alias module:api/ClassificationguidesApi
+   * Constructs a new ClassificationGuidesApi.
+   * @alias :api/ClassificationGuidesApi
    * @class
-   * @param {module:ApiClient} apiClient Optional API client implementation to use,
+   * @param {:ApiClient} apiClient Optional API client implementation to use,
    * default to {@link module:ApiClient#instance} if unspecified.
    */
   var exports = function(apiClient) {
@@ -52,8 +52,8 @@
      * Combined instructions
      * Combines instructions from the given topics and the user defined instruction, if any.
      * @param {Object} opts Optional parameters
-     * @param {module:model/CombinedInstructionBody} opts.instructions Instructions
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/InstructionEntry} and HTTP response
+     * @param {CombinedInstructionBody} opts.instructions Instructions
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleInstructionEntry} and HTTP response
      */
     this.combinedInstructionsWithHttpInfo = function(opts) {
       opts = opts || {};
@@ -85,8 +85,8 @@
      * Combined instructions
      * Combines instructions from the given topics and the user defined instruction, if any.
      * @param {Object} opts Optional parameters
-     * @param {module:model/CombinedInstructionBody} opts.instructions Instructions
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/InstructionEntry}
+     * @param {CombinedInstructionBody} opts.instructions Instructions
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleInstructionEntry}
      */
     this.combinedInstructions = function(opts) {
       return this.combinedInstructionsWithHttpInfo(opts)
@@ -99,8 +99,8 @@
     /**
      * Create a classification guide
      * Creates a new classification guide.
-     * @param {module:model/ClassificationGuideBody} classificationGuide Classification guide
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ClassificationGuideEntry} and HTTP response
+     * @param {ClassificationGuideBody} classificationGuide Classification guide
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleClassificationGuideEntry} and HTTP response
      */
     this.createClassificationGuideWithHttpInfo = function(classificationGuide) {
       var postBody = classificationGuide;
@@ -135,8 +135,8 @@
     /**
      * Create a classification guide
      * Creates a new classification guide.
-     * @param {module:model/ClassificationGuideBody} classificationGuide Classification guide
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ClassificationGuideEntry}
+     * @param {ClassificationGuideBody} classificationGuide Classification guide
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleClassificationGuideEntry}
      */
     this.createClassificationGuide = function(classificationGuide) {
       return this.createClassificationGuideWithHttpInfo(classificationGuide)
@@ -149,11 +149,11 @@
     /**
      * Create a subtopic
      * Creates a new subtopic of a topic.
-     * @param {String} topicId The identifier for the topic
-     * @param {module:model/TopicBody} topic Subtopic
+     * @param {string} topicId The identifier for the topic
+     * @param {TopicBody} topic Subtopic
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/TopicEntry} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleTopicEntry} and HTTP response
      */
     this.createSubtopicWithHttpInfo = function(topicId, topic, opts) {
       opts = opts || {};
@@ -196,11 +196,11 @@
     /**
      * Create a subtopic
      * Creates a new subtopic of a topic.
-     * @param {String} topicId The identifier for the topic
-     * @param {module:model/TopicBody} topic Subtopic
+     * @param {string} topicId The identifier for the topic
+     * @param {TopicBody} topic Subtopic
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/TopicEntry}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleTopicEntry}
      */
     this.createSubtopic = function(topicId, topic, opts) {
       return this.createSubtopicWithHttpInfo(topicId, topic, opts)
@@ -213,11 +213,11 @@
     /**
      * Create a topic
      * Creates a new topic.
-     * @param {String} classificationGuideId The identifier for the classification guide
-     * @param {module:model/TopicBody} topic Topic
+     * @param {string} classificationGuideId The identifier for the classification guide
+     * @param {TopicBody} topic Topic
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/TopicEntry} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleTopicEntry} and HTTP response
      */
     this.createTopicWithHttpInfo = function(classificationGuideId, topic, opts) {
       opts = opts || {};
@@ -260,11 +260,11 @@
     /**
      * Create a topic
      * Creates a new topic.
-     * @param {String} classificationGuideId The identifier for the classification guide
-     * @param {module:model/TopicBody} topic Topic
+     * @param {string} classificationGuideId The identifier for the classification guide
+     * @param {TopicBody} topic Topic
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/TopicEntry}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleTopicEntry}
      */
     this.createTopic = function(classificationGuideId, topic, opts) {
       return this.createTopicWithHttpInfo(classificationGuideId, topic, opts)
@@ -277,7 +277,7 @@
     /**
      * Delete a classification guide
      * Deletes the classification guide with id **classificationGuideId**, including any topics and instructions.
-     * @param {String} classificationGuideId The identifier for the classification guide
+     * @param {string} classificationGuideId The identifier for the classification guide
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
     this.deleteClassificationGuideWithHttpInfo = function(classificationGuideId) {
@@ -314,7 +314,7 @@
     /**
      * Delete a classification guide
      * Deletes the classification guide with id **classificationGuideId**, including any topics and instructions.
-     * @param {String} classificationGuideId The identifier for the classification guide
+     * @param {string} classificationGuideId The identifier for the classification guide
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
     this.deleteClassificationGuide = function(classificationGuideId) {
@@ -328,7 +328,7 @@
     /**
      * Delete a topic
      * Deletes the topic with id  **topicId**, including any subtopics and instructions.
-     * @param {String} topicId The identifier for the topic
+     * @param {string} topicId The identifier for the topic
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
     this.deleteTopicWithHttpInfo = function(topicId) {
@@ -365,7 +365,7 @@
     /**
      * Delete a topic
      * Deletes the topic with id  **topicId**, including any subtopics and instructions.
-     * @param {String} topicId The identifier for the topic
+     * @param {string} topicId The identifier for the topic
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
     this.deleteTopic = function(topicId) {
@@ -381,11 +381,11 @@
      * Gets all classification guides.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the guide. The following optional fields can be requested: * hasTopics - A flag indicating whether the guide already contains any topics.
-     * @param {Number} opts.skipCount The number of entities that exist in the collection before those included in this list.
-     * @param {Number} opts.maxItems The maximum number of items to return in the list.
+     * @param {number} opts.skipCount The number of entities that exist in the collection before those included in this list.
+     * @param {number} opts.maxItems The maximum number of items to return in the list.
      * @param {Array.<String>} opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to sort the list by one or more fields.  Each field has a default sort order, which is normally acending order. Read the API method implementation notes above to check if any fields used in this method have a descending default search order.  To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
-     * @param {String} opts.where A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on: * enabled - e.g. (enabled &#x3D; true OR enabled &#x3D; false)
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ClassificationGuidePaging} and HTTP response
+     * @param {string} opts.where A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on: * enabled - e.g. (enabled &#x3D; true OR enabled &#x3D; false)
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleClassificationGuidePaging} and HTTP response
      */
     this.listClassificationGuidesWithHttpInfo = function(opts) {
       opts = opts || {};
@@ -423,11 +423,11 @@
      * Gets all classification guides.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the guide. The following optional fields can be requested: * hasTopics - A flag indicating whether the guide already contains any topics.
-     * @param {Number} opts.skipCount The number of entities that exist in the collection before those included in this list.
-     * @param {Number} opts.maxItems The maximum number of items to return in the list.
+     * @param {number} opts.skipCount The number of entities that exist in the collection before those included in this list.
+     * @param {number} opts.maxItems The maximum number of items to return in the list.
      * @param {Array.<String>} opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to sort the list by one or more fields.  Each field has a default sort order, which is normally acending order. Read the API method implementation notes above to check if any fields used in this method have a descending default search order.  To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
-     * @param {String} opts.where A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on: * enabled - e.g. (enabled &#x3D; true OR enabled &#x3D; false)
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ClassificationGuidePaging}
+     * @param {string} opts.where A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on: * enabled - e.g. (enabled &#x3D; true OR enabled &#x3D; false)
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleClassificationGuidePaging}
      */
     this.listClassificationGuides = function(opts) {
       return this.listClassificationGuidesWithHttpInfo(opts)
@@ -440,15 +440,15 @@
     /**
      * List all subtopics
      * Gets all subtopics of a topic.
-     * @param {String} topicId The identifier for the topic
+     * @param {string} topicId The identifier for the topic
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in.
-     * @param {Number} opts.skipCount The number of entities that exist in the collection before those included in this list.
-     * @param {Number} opts.maxItems The maximum number of items to return in the list.
+     * @param {number} opts.skipCount The number of entities that exist in the collection before those included in this list.
+     * @param {number} opts.maxItems The maximum number of items to return in the list.
      * @param {Array.<String>} opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to sort the list by one or more fields.  Each field has a default sort order, which is normally acending order. Read the API method implementation notes above to check if any fields used in this method have a descending default search order.  To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
-     * @param {String} opts.where A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on: * hasInstruction * hasSubtopics
-     * @param {Boolean} opts.includeSource Also include **source** in addition to **entries** with folder information on the parent guide/topic
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/SubtopicPaging} and HTTP response
+     * @param {string} opts.where A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on: * hasInstruction * hasSubtopics
+     * @param {boolean} opts.includeSource Also include **source** in addition to **entries** with folder information on the parent guide/topic
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleSubtopicPaging} and HTTP response
      */
     this.listSubtopicsWithHttpInfo = function(topicId, opts) {
       opts = opts || {};
@@ -491,15 +491,15 @@
     /**
      * List all subtopics
      * Gets all subtopics of a topic.
-     * @param {String} topicId The identifier for the topic
+     * @param {string} topicId The identifier for the topic
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in.
-     * @param {Number} opts.skipCount The number of entities that exist in the collection before those included in this list.
-     * @param {Number} opts.maxItems The maximum number of items to return in the list.
+     * @param {number} opts.skipCount The number of entities that exist in the collection before those included in this list.
+     * @param {number} opts.maxItems The maximum number of items to return in the list.
      * @param {Array.<String>} opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to sort the list by one or more fields.  Each field has a default sort order, which is normally acending order. Read the API method implementation notes above to check if any fields used in this method have a descending default search order.  To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
-     * @param {String} opts.where A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on: * hasInstruction * hasSubtopics
-     * @param {Boolean} opts.includeSource Also include **source** in addition to **entries** with folder information on the parent guide/topic
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/SubtopicPaging}
+     * @param {string} opts.where A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on: * hasInstruction * hasSubtopics
+     * @param {boolean} opts.includeSource Also include **source** in addition to **entries** with folder information on the parent guide/topic
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleSubtopicPaging}
      */
     this.listSubtopics = function(topicId, opts) {
       return this.listSubtopicsWithHttpInfo(topicId, opts)
@@ -512,15 +512,15 @@
     /**
      * List all topics
      * Gets all topics.
-     * @param {String} classificationGuideId The identifier for the classification guide
+     * @param {string} classificationGuideId The identifier for the classification guide
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in.
-     * @param {Number} opts.skipCount The number of entities that exist in the collection before those included in this list.
-     * @param {Number} opts.maxItems The maximum number of items to return in the list.
+     * @param {number} opts.skipCount The number of entities that exist in the collection before those included in this list.
+     * @param {number} opts.maxItems The maximum number of items to return in the list.
      * @param {Array.<String>} opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to sort the list by one or more fields.  Each field has a default sort order, which is normally acending order. Read the API method implementation notes above to check if any fields used in this method have a descending default search order.  To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
-     * @param {String} opts.where A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR e.g. (instruction&#x3D;true and hasSubtopics&#x3D;false). Fields to filter on: * hasInstruction * hasSubtopics
-     * @param {Boolean} opts.includeSource Also include **source** in addition to **entries** with folder information on the parent guide/topic
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/TopicPaging} and HTTP response
+     * @param {string} opts.where A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR e.g. (instruction&#x3D;true and hasSubtopics&#x3D;false). Fields to filter on: * hasInstruction * hasSubtopics
+     * @param {boolean} opts.includeSource Also include **source** in addition to **entries** with folder information on the parent guide/topic
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleTopicPaging} and HTTP response
      */
     this.listTopicsWithHttpInfo = function(classificationGuideId, opts) {
       opts = opts || {};
@@ -563,15 +563,15 @@
     /**
      * List all topics
      * Gets all topics.
-     * @param {String} classificationGuideId The identifier for the classification guide
+     * @param {string} classificationGuideId The identifier for the classification guide
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in.
-     * @param {Number} opts.skipCount The number of entities that exist in the collection before those included in this list.
-     * @param {Number} opts.maxItems The maximum number of items to return in the list.
+     * @param {number} opts.skipCount The number of entities that exist in the collection before those included in this list.
+     * @param {number} opts.maxItems The maximum number of items to return in the list.
      * @param {Array.<String>} opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to sort the list by one or more fields.  Each field has a default sort order, which is normally acending order. Read the API method implementation notes above to check if any fields used in this method have a descending default search order.  To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
-     * @param {String} opts.where A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR e.g. (instruction&#x3D;true and hasSubtopics&#x3D;false). Fields to filter on: * hasInstruction * hasSubtopics
-     * @param {Boolean} opts.includeSource Also include **source** in addition to **entries** with folder information on the parent guide/topic
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/TopicPaging}
+     * @param {string} opts.where A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR e.g. (instruction&#x3D;true and hasSubtopics&#x3D;false). Fields to filter on: * hasInstruction * hasSubtopics
+     * @param {boolean} opts.includeSource Also include **source** in addition to **entries** with folder information on the parent guide/topic
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleTopicPaging}
      */
     this.listTopics = function(classificationGuideId, opts) {
       return this.listTopicsWithHttpInfo(classificationGuideId, opts)
@@ -584,8 +584,8 @@
     /**
      * Get classification guide information
      * Gets the classification guide with id **classificationGuideId**.
-     * @param {String} classificationGuideId The identifier for the classification guide
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ClassificationGuideEntry} and HTTP response
+     * @param {string} classificationGuideId The identifier for the classification guide
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleClassificationGuideEntry} and HTTP response
      */
     this.showClassificationGuideByIdWithHttpInfo = function(classificationGuideId) {
       var postBody = null;
@@ -621,8 +621,8 @@
     /**
      * Get classification guide information
      * Gets the classification guide with id **classificationGuideId**.
-     * @param {String} classificationGuideId The identifier for the classification guide
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ClassificationGuideEntry}
+     * @param {string} classificationGuideId The identifier for the classification guide
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleClassificationGuideEntry}
      */
     this.showClassificationGuideById = function(classificationGuideId) {
       return this.showClassificationGuideByIdWithHttpInfo(classificationGuideId)
@@ -635,10 +635,10 @@
     /**
      * Get topic information
      * Gets the topic with id **topicId**.
-     * @param {String} topicId The identifier for the topic
+     * @param {string} topicId The identifier for the topic
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/TopicEntry} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleTopicEntry} and HTTP response
      */
     this.showTopicByIdWithHttpInfo = function(topicId, opts) {
       opts = opts || {};
@@ -676,10 +676,10 @@
     /**
      * Get topic information
      * Gets the topic with id **topicId**.
-     * @param {String} topicId The identifier for the topic
+     * @param {string} topicId The identifier for the topic
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/TopicEntry}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleTopicEntry}
      */
     this.showTopicById = function(topicId, opts) {
       return this.showTopicByIdWithHttpInfo(topicId, opts)
@@ -692,9 +692,9 @@
     /**
      * Update a classification guide
      * Updates the classification guide with id **classificationGuideId**. For example, you can rename a classification guide.
-     * @param {String} classificationGuideId The identifier for the classification guide
-     * @param {module:model/ClassificationGuideBody} classificationGuide Classification guide
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ClassificationGuideEntry} and HTTP response
+     * @param {string} classificationGuideId The identifier for the classification guide
+     * @param {ClassificationGuideBody} classificationGuide Classification guide
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleClassificationGuideEntry} and HTTP response
      */
     this.updateClassificationGuideWithHttpInfo = function(classificationGuideId, classificationGuide) {
       var postBody = classificationGuide;
@@ -735,9 +735,9 @@
     /**
      * Update a classification guide
      * Updates the classification guide with id **classificationGuideId**. For example, you can rename a classification guide.
-     * @param {String} classificationGuideId The identifier for the classification guide
-     * @param {module:model/ClassificationGuideBody} classificationGuide Classification guide
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ClassificationGuideEntry}
+     * @param {string} classificationGuideId The identifier for the classification guide
+     * @param {ClassificationGuideBody} classificationGuide Classification guide
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleClassificationGuideEntry}
      */
     this.updateClassificationGuide = function(classificationGuideId, classificationGuide) {
       return this.updateClassificationGuideWithHttpInfo(classificationGuideId, classificationGuide)
@@ -750,11 +750,11 @@
     /**
      * Update a topic
      * Updates the topic with id **topicId**.  Use this to rename a topic or to add, edit, or remove the instruction associated with it.
-     * @param {String} topicId The identifier for the topic
-     * @param {module:model/TopicBody} topic Topic
+     * @param {string} topicId The identifier for the topic
+     * @param {TopicBody} topic Topic
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/TopicEntry} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleTopicEntry} and HTTP response
      */
     this.updateTopicWithHttpInfo = function(topicId, topic, opts) {
       opts = opts || {};
@@ -797,11 +797,11 @@
     /**
      * Update a topic
      * Updates the topic with id **topicId**.  Use this to rename a topic or to add, edit, or remove the instruction associated with it.
-     * @param {String} topicId The identifier for the topic
-     * @param {module:model/TopicBody} topic Topic
+     * @param {string} topicId The identifier for the topic
+     * @param {TopicBody} topic Topic
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/TopicEntry}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleTopicEntry}
      */
     this.updateTopic = function(topicId, topic, opts) {
       return this.updateTopicWithHttpInfo(topicId, topic, opts)

@@ -35,13 +35,13 @@
 
   /**
    * The TransferContainerAssociationPagingList model module.
-   * @module model/TransferContainerAssociationPagingList
+   * @module  TransferContainerAssociationPagingList
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>TransferContainerAssociationPagingList</code>.
-   * @alias module:model/TransferContainerAssociationPagingList
+   * @alias TransferContainerAssociationPagingList
    * @class
    */
   var exports = function() {
@@ -56,8 +56,8 @@
    * Constructs a <code>TransferContainerAssociationPagingList</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/TransferContainerAssociationPagingList} obj Optional instance to populate.
-   * @return {module:model/TransferContainerAssociationPagingList} The populated <code>TransferContainerAssociationPagingList</code> instance.
+   * @param {TransferContainerAssociationPagingList} obj Optional instance to populate.
+   * @return {TransferContainerAssociationPagingList} The populated <code>TransferContainerAssociationPagingList</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -77,15 +77,15 @@
   }
 
   /**
-   * @member {module:model/Pagination} pagination
+   * @member {Pagination} pagination
    */
   exports.prototype['pagination'] = undefined;
   /**
-   * @member {Array.<module:model/TransferContainerChildAssociationEntry>} entries
+   * @member {Array.<moduleTransferContainerChildAssociationEntry>} entries
    */
   exports.prototype['entries'] = undefined;
   /**
-   * @member {module:model/TransferContainer} source
+   * @member {TransferContainer} source
    */
   exports.prototype['source'] = undefined;
 

@@ -35,13 +35,13 @@
 
   /**
    * The SecurityControlSettingBody model module.
-   * @module model/SecurityControlSettingBody
+   * @module SecurityControlSettingBody
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>SecurityControlSettingBody</code>.
-   * @alias module:model/SecurityControlSettingBody
+   * @alias SecurityControlSettingBody
    * @class
    * @param value {Object}
    */
@@ -55,8 +55,8 @@
    * Constructs a <code>SecurityControlSettingBody</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/SecurityControlSettingBody} obj Optional instance to populate.
-   * @return {module:model/SecurityControlSettingBody} The populated <code>SecurityControlSettingBody</code> instance.
+   * @param {SecurityControlSettingBody} obj Optional instance to populate.
+   * @return {SecurityControlSettingBody} The populated <code>SecurityControlSettingBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {

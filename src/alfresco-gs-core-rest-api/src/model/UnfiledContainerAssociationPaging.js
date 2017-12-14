@@ -35,13 +35,13 @@
 
   /**
    * The UnfiledContainerAssociationPaging model module.
-   * @module model/UnfiledContainerAssociationPaging
+   * @module  UnfiledContainerAssociationPaging
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>UnfiledContainerAssociationPaging</code>.
-   * @alias module:model/UnfiledContainerAssociationPaging
+   * @alias UnfiledContainerAssociationPaging
    * @class
    */
   var exports = function() {
@@ -54,8 +54,8 @@
    * Constructs a <code>UnfiledContainerAssociationPaging</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/UnfiledContainerAssociationPaging} obj Optional instance to populate.
-   * @return {module:model/UnfiledContainerAssociationPaging} The populated <code>UnfiledContainerAssociationPaging</code> instance.
+   * @param {UnfiledContainerAssociationPaging} obj Optional instance to populate.
+   * @return {UnfiledContainerAssociationPaging} The populated <code>UnfiledContainerAssociationPaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -69,7 +69,7 @@
   }
 
   /**
-   * @member {module:model/UnfiledContainerAssociationPagingList} list
+   * @member {UnfiledContainerAssociationPagingList} list
    */
   exports.prototype['list'] = undefined;
 

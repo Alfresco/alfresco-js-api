@@ -1,22 +1,22 @@
-# AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi
+# AlfrescoGovernanceServicesSecurityControls.ClassificationGuidesApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/gs/versions/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**combinedInstructions**](ClassificationguidesApi.md#combinedInstructions) | **POST** /combined-instructions | Combined instructions
-[**createClassificationGuide**](ClassificationguidesApi.md#createClassificationGuide) | **POST** /classification-guides | Create a classification guide
-[**createSubtopic**](ClassificationguidesApi.md#createSubtopic) | **POST** /topics/{topicId}/subtopics | Create a subtopic
-[**createTopic**](ClassificationguidesApi.md#createTopic) | **POST** /classification-guides/{classificationGuideId}/topics | Create a topic
-[**deleteClassificationGuide**](ClassificationguidesApi.md#deleteClassificationGuide) | **DELETE** /classification-guides/{classificationGuideId} | Delete a classification guide
-[**deleteTopic**](ClassificationguidesApi.md#deleteTopic) | **DELETE** /topics/{topicId} | Delete a topic
-[**listClassificationGuides**](ClassificationguidesApi.md#listClassificationGuides) | **GET** /classification-guides | List all classification guides
-[**listSubtopics**](ClassificationguidesApi.md#listSubtopics) | **GET** /topics/{topicId}/subtopics | List all subtopics
-[**listTopics**](ClassificationguidesApi.md#listTopics) | **GET** /classification-guides/{classificationGuideId}/topics | List all topics
-[**showClassificationGuideById**](ClassificationguidesApi.md#showClassificationGuideById) | **GET** /classification-guides/{classificationGuideId} | Get classification guide information
-[**showTopicById**](ClassificationguidesApi.md#showTopicById) | **GET** /topics/{topicId} | Get topic information
-[**updateClassificationGuide**](ClassificationguidesApi.md#updateClassificationGuide) | **PUT** /classification-guides/{classificationGuideId} | Update a classification guide
-[**updateTopic**](ClassificationguidesApi.md#updateTopic) | **PUT** /topics/{topicId} | Update a topic
+[**combinedInstructions**](ClassificationGuidesApi.md#combinedInstructions) | **POST** /combined-instructions | Combined instructions
+[**createClassificationGuide**](ClassificationGuidesApi.md#createClassificationGuide) | **POST** /classification-guides | Create a classification guide
+[**createSubtopic**](ClassificationGuidesApi.md#createSubtopic) | **POST** /topics/{topicId}/subtopics | Create a subtopic
+[**createTopic**](ClassificationGuidesApi.md#createTopic) | **POST** /classification-guides/{classificationGuideId}/topics | Create a topic
+[**deleteClassificationGuide**](ClassificationGuidesApi.md#deleteClassificationGuide) | **DELETE** /classification-guides/{classificationGuideId} | Delete a classification guide
+[**deleteTopic**](ClassificationGuidesApi.md#deleteTopic) | **DELETE** /topics/{topicId} | Delete a topic
+[**listClassificationGuides**](ClassificationGuidesApi.md#listClassificationGuides) | **GET** /classification-guides | List all classification guides
+[**listSubtopics**](ClassificationGuidesApi.md#listSubtopics) | **GET** /topics/{topicId}/subtopics | List all subtopics
+[**listTopics**](ClassificationGuidesApi.md#listTopics) | **GET** /classification-guides/{classificationGuideId}/topics | List all topics
+[**showClassificationGuideById**](ClassificationGuidesApi.md#showClassificationGuideById) | **GET** /classification-guides/{classificationGuideId} | Get classification guide information
+[**showTopicById**](ClassificationGuidesApi.md#showTopicById) | **GET** /topics/{topicId} | Get topic information
+[**updateClassificationGuide**](ClassificationGuidesApi.md#updateClassificationGuide) | **PUT** /classification-guides/{classificationGuideId} | Update a classification guide
+[**updateTopic**](ClassificationGuidesApi.md#updateTopic) | **PUT** /topics/{topicId} | Update a topic
 
 
 <a name="combinedInstructions"></a>

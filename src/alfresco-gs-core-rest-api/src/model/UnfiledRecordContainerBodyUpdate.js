@@ -35,13 +35,13 @@
 
   /**
    * The UnfiledRecordContainerBodyUpdate model module.
-   * @module model/UnfiledRecordContainerBodyUpdate
+   * @module  UnfiledRecordContainerBodyUpdate
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>UnfiledRecordContainerBodyUpdate</code>.
-   * @alias module:model/UnfiledRecordContainerBodyUpdate
+   * @alias UnfiledRecordContainerBodyUpdate
    * @class
    */
   var exports = function() {
@@ -55,8 +55,8 @@
    * Constructs a <code>UnfiledRecordContainerBodyUpdate</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/UnfiledRecordContainerBodyUpdate} obj Optional instance to populate.
-   * @return {module:model/UnfiledRecordContainerBodyUpdate} The populated <code>UnfiledRecordContainerBodyUpdate</code> instance.
+   * @param {UnfiledRecordContainerBodyUpdate} obj Optional instance to populate.
+   * @return {UnfiledRecordContainerBodyUpdate} The populated <code>UnfiledRecordContainerBodyUpdate</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -74,7 +74,7 @@
 
   /**
    * The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |. The character . must not be used at the end of the name.
-   * @member {String} name
+   * @member {string} name
    */
   exports.prototype['name'] = undefined;
   /**

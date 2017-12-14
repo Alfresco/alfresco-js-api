@@ -35,15 +35,15 @@
 
   /**
    * The TopicEntry model module.
-   * @module model/TopicEntry
+   * @module TopicEntry
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>TopicEntry</code>.
-   * @alias module:model/TopicEntry
+   * @alias TopicEntry
    * @class
-   * @param entry {module:model/Topic}
+   * @param entry {Topic}
    */
   var exports = function(entry) {
     var _this = this;
@@ -55,8 +55,8 @@
    * Constructs a <code>TopicEntry</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/TopicEntry} obj Optional instance to populate.
-   * @return {module:model/TopicEntry} The populated <code>TopicEntry</code> instance.
+   * @param {TopicEntry} obj Optional instance to populate.
+   * @return {TopicEntry} The populated <code>TopicEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -70,7 +70,7 @@
   }
 
   /**
-   * @member {module:model/Topic} entry
+   * @member {Topic} entry
    */
   exports.prototype['entry'] = undefined;
 

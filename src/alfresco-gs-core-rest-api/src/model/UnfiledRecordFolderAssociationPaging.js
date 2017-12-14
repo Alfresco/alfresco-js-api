@@ -35,13 +35,13 @@
 
   /**
    * The UnfiledRecordFolderAssociationPaging model module.
-   * @module model/UnfiledRecordFolderAssociationPaging
+   * @module  UnfiledRecordFolderAssociationPaging
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>UnfiledRecordFolderAssociationPaging</code>.
-   * @alias module:model/UnfiledRecordFolderAssociationPaging
+   * @alias UnfiledRecordFolderAssociationPaging
    * @class
    */
   var exports = function() {
@@ -54,8 +54,8 @@
    * Constructs a <code>UnfiledRecordFolderAssociationPaging</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/UnfiledRecordFolderAssociationPaging} obj Optional instance to populate.
-   * @return {module:model/UnfiledRecordFolderAssociationPaging} The populated <code>UnfiledRecordFolderAssociationPaging</code> instance.
+   * @param {UnfiledRecordFolderAssociationPaging} obj Optional instance to populate.
+   * @return {UnfiledRecordFolderAssociationPaging} The populated <code>UnfiledRecordFolderAssociationPaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -69,7 +69,7 @@
   }
 
   /**
-   * @member {module:model/UnfiledRecordFolderAssociationPagingList} list
+   * @member {UnfiledRecordFolderAssociationPagingList} list
    */
   exports.prototype['list'] = undefined;
 

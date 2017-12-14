@@ -1,13 +1,13 @@
-# AlfrescoGovernanceServicesRestApi.FileplansApi
+# AlfrescoGovernanceServicesRestApi.FilePlansApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/gs/versions/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createFilePlanCategories**](FileplansApi.md#createFilePlanCategories) | **POST** /file-plans/{filePlanId}/categories | Create record categories for a file plan
-[**getFilePlan**](FileplansApi.md#getFilePlan) | **GET** /file-plans/{filePlanId} | Get a file plan
-[**getFilePlanCategories**](FileplansApi.md#getFilePlanCategories) | **GET** /file-plans/{filePlanId}/categories | List file plans&#39;s children
-[**updateFilePlan**](FileplansApi.md#updateFilePlan) | **PUT** /file-plans/{filePlanId} | Update a file plan
+[**createFilePlanCategories**](FilePlansApi.md#createFilePlanCategories) | **POST** /file-plans/{filePlanId}/categories | Create record categories for a file plan
+[**getFilePlan**](FilePlansApi.md#getFilePlan) | **GET** /file-plans/{filePlanId} | Get a file plan
+[**getFilePlanCategories**](FilePlansApi.md#getFilePlanCategories) | **GET** /file-plans/{filePlanId}/categories | List file plans&#39;s children
+[**updateFilePlan**](FilePlansApi.md#updateFilePlan) | **PUT** /file-plans/{filePlanId} | Update a file plan
 
 
 <a name="createFilePlanCategories"></a>

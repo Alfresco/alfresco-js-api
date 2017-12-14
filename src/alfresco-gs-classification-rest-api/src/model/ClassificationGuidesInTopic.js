@@ -35,18 +35,18 @@
 
   /**
    * The ClassificationGuidesInTopic model module.
-   * @module model/ClassificationGuidesInTopic
+   * @module ClassificationGuidesInTopic
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>ClassificationGuidesInTopic</code>.
    * The classification guide which the topic is contained in. This field is only returned when requested.
-   * @alias module:model/ClassificationGuidesInTopic
+   * @alias ClassificationGuidesInTopic
    * @class
-   * @implements module:model/ClassificationGuidesBody
-   * @param name {String}
-   * @param originatingOrganization {String}
+   * @implements moduleClassificationGuidesBody
+   * @param name {string}
+   * @param originatingOrganization {string}
    * @param publishedOn {Date}
    */
   var exports = function(name, originatingOrganization, publishedOn) {
@@ -59,8 +59,8 @@
    * Constructs a <code>ClassificationGuidesInTopic</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/ClassificationGuidesInTopic} obj Optional instance to populate.
-   * @return {module:model/ClassificationGuidesInTopic} The populated <code>ClassificationGuidesInTopic</code> instance.
+   * @param {ClassificationGuidesInTopic} obj Optional instance to populate.
+   * @return {ClassificationGuidesInTopic} The populated <code>ClassificationGuidesInTopic</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -74,12 +74,12 @@
 
   // Implement ClassificationGuidesBody interface:
   /**
-   * @member {String} name
+   * @member {string} name
    */
 exports.prototype['name'] = undefined;
 
   /**
-   * @member {String} originatingOrganization
+   * @member {string} originatingOrganization
    */
 exports.prototype['originatingOrganization'] = undefined;
 
@@ -89,13 +89,13 @@ exports.prototype['originatingOrganization'] = undefined;
 exports.prototype['publishedOn'] = undefined;
 
   /**
-   * @member {Boolean} enabled
+   * @member {boolean} enabled
    * @default false
    */
 exports.prototype['enabled'] = false;
 
   /**
-   * @member {Boolean} hasTopics
+   * @member {boolean} hasTopics
    */
 exports.prototype['hasTopics'] = undefined;
 

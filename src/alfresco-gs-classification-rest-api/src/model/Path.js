@@ -35,14 +35,14 @@
 
   /**
    * The Path model module.
-   * @module model/Path
+   * @module Path
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>Path</code>.
    * An ordered list of ancestors starting with the classification guide and ending with the parent of this topic. This field is only returned when requested.
-   * @alias module:model/Path
+   * @alias Path
    * @class
    * @extends Array
    */
@@ -58,8 +58,8 @@
    * Constructs a <code>Path</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/Path} obj Optional instance to populate.
-   * @return {module:model/Path} The populated <code>Path</code> instance.
+   * @param {Path} obj Optional instance to populate.
+   * @return {Path} The populated <code>Path</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {

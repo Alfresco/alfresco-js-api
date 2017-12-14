@@ -38,9 +38,9 @@
 
   /**
    * Constructs a new RecordsApi.
-   * @alias module:api/RecordsApi
+   * @alias :api/RecordsApi
    * @class
-   * @param {module:ApiClient} apiClient Optional API client implementation to use,
+   * @param {:ApiClient} apiClient Optional API client implementation to use,
    * default to {@link module:ApiClient#instance} if unspecified.
    */
   var exports = function(apiClient) {
@@ -51,11 +51,11 @@
     /**
      * Complete a record
      * Completes the record **recordId**.
-     * @param {String} recordId The identifier of a record.
+     * @param {string} recordId The identifier of a record.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the record. Any optional field from the response model can be requested. For example: * allowableOperations * content * isCompleted * path
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/RecordEntry} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleRecordEntry} and HTTP response
      */
     this.completeRecordWithHttpInfo = function(recordId, opts) {
       opts = opts || {};
@@ -94,11 +94,11 @@
     /**
      * Complete a record
      * Completes the record **recordId**.
-     * @param {String} recordId The identifier of a record.
+     * @param {string} recordId The identifier of a record.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the record. Any optional field from the response model can be requested. For example: * allowableOperations * content * isCompleted * path
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/RecordEntry}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleRecordEntry}
      */
     this.completeRecord = function(recordId, opts) {
       return this.completeRecordWithHttpInfo(recordId, opts)
@@ -111,7 +111,7 @@
     /**
      * Delete a record
      * Deletes the record **recordId**. Deleted file plan components cannot be recovered, they are deleted permanently.
-     * @param {String} recordId The identifier of a record.
+     * @param {string} recordId The identifier of a record.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
     this.deleteRecordWithHttpInfo = function(recordId) {
@@ -148,7 +148,7 @@
     /**
      * Delete a record
      * Deletes the record **recordId**. Deleted file plan components cannot be recovered, they are deleted permanently.
-     * @param {String} recordId The identifier of a record.
+     * @param {string} recordId The identifier of a record.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
     this.deleteRecord = function(recordId) {
@@ -162,12 +162,12 @@
     /**
      * File a record
      * Files the record **recordId** in the target record folder.  You need to specify the target record folder by providing its id **targetParentId**  If the record is already filed, a link to the target record folder is created.  You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information.
-     * @param {String} recordId The identifier of a record.
-     * @param {module:model/RequestBodyFile} nodeBodyFile The target record folder id
+     * @param {string} recordId The identifier of a record.
+     * @param {RequestBodyFile} nodeBodyFile The target record folder id
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the record. Any optional field from the response model can be requested. For example: * allowableOperations * content * isCompleted * path
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/RecordEntry} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleRecordEntry} and HTTP response
      */
     this.fileRecordWithHttpInfo = function(recordId, nodeBodyFile, opts) {
       opts = opts || {};
@@ -211,12 +211,12 @@
     /**
      * File a record
      * Files the record **recordId** in the target record folder.  You need to specify the target record folder by providing its id **targetParentId**  If the record is already filed, a link to the target record folder is created.  You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information.
-     * @param {String} recordId The identifier of a record.
-     * @param {module:model/RequestBodyFile} nodeBodyFile The target record folder id
+     * @param {string} recordId The identifier of a record.
+     * @param {RequestBodyFile} nodeBodyFile The target record folder id
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the record. Any optional field from the response model can be requested. For example: * allowableOperations * content * isCompleted * path
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/RecordEntry}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleRecordEntry}
      */
     this.fileRecord = function(recordId, nodeBodyFile, opts) {
       return this.fileRecordWithHttpInfo(recordId, nodeBodyFile, opts)
@@ -229,11 +229,11 @@
     /**
      * Get a record
      * Gets information for record **recordId**  Mandatory fields and the record&#39;s aspects and properties are returned by default.  You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information.
-     * @param {String} recordId The identifier of a record.
+     * @param {string} recordId The identifier of a record.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the record. Any optional field from the response model can be requested. For example: * allowableOperations * content * isCompleted * path
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/RecordEntry} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleRecordEntry} and HTTP response
      */
     this.getRecordWithHttpInfo = function(recordId, opts) {
       opts = opts || {};
@@ -272,11 +272,11 @@
     /**
      * Get a record
      * Gets information for record **recordId**  Mandatory fields and the record&#39;s aspects and properties are returned by default.  You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information.
-     * @param {String} recordId The identifier of a record.
+     * @param {string} recordId The identifier of a record.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the record. Any optional field from the response model can be requested. For example: * allowableOperations * content * isCompleted * path
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/RecordEntry}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleRecordEntry}
      */
     this.getRecord = function(recordId, opts) {
       return this.getRecordWithHttpInfo(recordId, opts)
@@ -289,9 +289,9 @@
     /**
      * Get record content
      *  Gets the content of the record with identifier **recordId**.
-     * @param {String} recordId The identifier of a record.
+     * @param {string} recordId The identifier of a record.
      * @param {Object} opts Optional parameters
-     * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment. **false** means a web browser may preview the file in a new tab or window, but not download the file.  You can only set this parameter to **false** if the content type of the file is in the supported list; for example, certain image files and PDF files.  If the content type is not supported for preview, then a value of **false**  is ignored, and the attachment will be returned in the response.  (default to true)
+     * @param {boolean} opts.attachment **true** enables a web browser to download the file as an attachment. **false** means a web browser may preview the file in a new tab or window, but not download the file.  You can only set this parameter to **false** if the content type of the file is in the supported list; for example, certain image files and PDF files.  If the content type is not supported for preview, then a value of **false**  is ignored, and the attachment will be returned in the response.  (default to true)
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided. Use the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
@@ -332,9 +332,9 @@
     /**
      * Get record content
      *  Gets the content of the record with identifier **recordId**.
-     * @param {String} recordId The identifier of a record.
+     * @param {string} recordId The identifier of a record.
      * @param {Object} opts Optional parameters
-     * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment. **false** means a web browser may preview the file in a new tab or window, but not download the file.  You can only set this parameter to **false** if the content type of the file is in the supported list; for example, certain image files and PDF files.  If the content type is not supported for preview, then a value of **false**  is ignored, and the attachment will be returned in the response.  (default to true)
+     * @param {boolean} opts.attachment **true** enables a web browser to download the file as an attachment. **false** means a web browser may preview the file in a new tab or window, but not download the file.  You can only set this parameter to **false** if the content type of the file is in the supported list; for example, certain image files and PDF files.  If the content type is not supported for preview, then a value of **false**  is ignored, and the attachment will be returned in the response.  (default to true)
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided. Use the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
@@ -349,12 +349,12 @@
     /**
      * Update record
      * Updates the record **recordId**. For example, you can rename a record: &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;:\&quot;My new name\&quot; } &#x60;&#x60;&#x60; You can also set or update one or more properties: &#x60;&#x60;&#x60;JSON {   \&quot;properties\&quot;:     {        \&quot;cm:title\&quot;:\&quot;New title\&quot;,        \&quot;cm:description\&quot;:\&quot;New description\&quot;     } } &#x60;&#x60;&#x60; **Note:** if you want to add or remove aspects, then you must use **GET /records/{recordId}** first to get the complete set of *aspectNames*.  **Note:** Currently there is no optimistic locking for updates, so they are applied in \&quot;last one wins\&quot; order.
-     * @param {String} recordId The identifier of a record.
-     * @param {module:model/FilePlanComponentBodyUpdate} recordBodyUpdate The record information to update.
+     * @param {string} recordId The identifier of a record.
+     * @param {FilePlanComponentBodyUpdate} recordBodyUpdate The record information to update.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the record. Any optional field from the response model can be requested. For example: * allowableOperations * content * isCompleted * path
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/RecordEntry} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleRecordEntry} and HTTP response
      */
     this.updateRecordWithHttpInfo = function(recordId, recordBodyUpdate, opts) {
       opts = opts || {};
@@ -398,12 +398,12 @@
     /**
      * Update record
      * Updates the record **recordId**. For example, you can rename a record: &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;:\&quot;My new name\&quot; } &#x60;&#x60;&#x60; You can also set or update one or more properties: &#x60;&#x60;&#x60;JSON {   \&quot;properties\&quot;:     {        \&quot;cm:title\&quot;:\&quot;New title\&quot;,        \&quot;cm:description\&quot;:\&quot;New description\&quot;     } } &#x60;&#x60;&#x60; **Note:** if you want to add or remove aspects, then you must use **GET /records/{recordId}** first to get the complete set of *aspectNames*.  **Note:** Currently there is no optimistic locking for updates, so they are applied in \&quot;last one wins\&quot; order.
-     * @param {String} recordId The identifier of a record.
-     * @param {module:model/FilePlanComponentBodyUpdate} recordBodyUpdate The record information to update.
+     * @param {string} recordId The identifier of a record.
+     * @param {FilePlanComponentBodyUpdate} recordBodyUpdate The record information to update.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the record. Any optional field from the response model can be requested. For example: * allowableOperations * content * isCompleted * path
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/RecordEntry}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleRecordEntry}
      */
     this.updateRecord = function(recordId, recordBodyUpdate, opts) {
       return this.updateRecordWithHttpInfo(recordId, recordBodyUpdate, opts)

@@ -30,7 +30,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new AlfrescoGovernanceServicesRestApi.GssitesApi();
+    instance = new AlfrescoGovernanceServicesRestApi.GsSitesApi();
   });
 
   var getProperty = function(object, getter, property) {
@@ -49,7 +49,7 @@
       object[property] = value;
   }
 
-  describe('GssitesApi', function() {
+  describe('GsSitesApi', function() {
     describe('createRMSite', function() {
       it('should call createRMSite successfully', function(done) {
         //uncomment below and update the code to test createRMSite

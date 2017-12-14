@@ -30,7 +30,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new AlfrescoGovernanceServicesSecurityControls.DefaultclassificationvaluesApi();
+    instance = new AlfrescoGovernanceServicesSecurityControls.DeclassificationExemptionsApi();
   });
 
   var getProperty = function(object, getter, property) {
@@ -49,7 +49,7 @@
       object[property] = value;
   }
 
-  describe('DefaultclassificationvaluesApi', function() {
+  describe('DeclassificationExemptionsApi', function() {
     describe('calculateDefaultDeclassificationDate', function() {
       it('should call calculateDefaultDeclassificationDate successfully', function(done) {
         //uncomment below and update the code to test calculateDefaultDeclassificationDate

@@ -35,13 +35,13 @@
 
   /**
    * The DeclassificationDate model module.
-   * @module model/DeclassificationDate
+   * @module DeclassificationDate
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>DeclassificationDate</code>.
-   * @alias module:model/DeclassificationDate
+   * @alias DeclassificationDate
    * @class
    */
   var exports = function() {
@@ -53,8 +53,8 @@
    * Constructs a <code>DeclassificationDate</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/DeclassificationDate} obj Optional instance to populate.
-   * @return {module:model/DeclassificationDate} The populated <code>DeclassificationDate</code> instance.
+   * @param {DeclassificationDate} obj Optional instance to populate.
+   * @return {DeclassificationDate} The populated <code>DeclassificationDate</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {

@@ -25,22 +25,22 @@
     if (!root.AlfrescoGovernanceServicesSecurityControls) {
       root.AlfrescoGovernanceServicesSecurityControls = {};
     }
-    root.AlfrescoGovernanceServicesSecurityControls.DefaultclassificationvaluesApi = factory(root.AlfrescoGovernanceServicesSecurityControls.ApiClient, root.AlfrescoGovernanceServicesSecurityControls.DeclassificationDate, root.AlfrescoGovernanceServicesSecurityControls.Error);
+    root.AlfrescoGovernanceServicesSecurityControls.DeclassificationExemptionsApi = factory(root.AlfrescoGovernanceServicesSecurityControls.ApiClient, root.AlfrescoGovernanceServicesSecurityControls.DeclassificationDate, root.AlfrescoGovernanceServicesSecurityControls.Error);
   }
 }(this, function(ApiClient, DeclassificationDate, Error) {
   'use strict';
 
   /**
    * Defaultclassificationvalues service.
-   * @module api/DefaultclassificationvaluesApi
+   * @module api/DeclassificationExemptionsApi
    * @version 0.1.0
    */
 
   /**
-   * Constructs a new DefaultclassificationvaluesApi.
-   * @alias module:api/DefaultclassificationvaluesApi
+   * Constructs a new DeclassificationExemptionsApi.
+   * @alias :api/DeclassificationExemptionsApi
    * @class
-   * @param {module:ApiClient} apiClient Optional API client implementation to use,
+   * @param {:ApiClient} apiClient Optional API client implementation to use,
    * default to {@link module:ApiClient#instance} if unspecified.
    */
   var exports = function(apiClient) {
@@ -51,8 +51,8 @@
     /**
      * Calculate the default declassification date
      * Calculates the default declassification date for **nodeId** based on the properties of the node and the current declassification time frame.
-     * @param {String} nodeId The identifier of a node.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/DeclassificationDate} and HTTP response
+     * @param {string} nodeId The identifier of a node.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleDeclassificationDate} and HTTP response
      */
     this.calculateDefaultDeclassificationDateWithHttpInfo = function(nodeId) {
       var postBody = null;
@@ -88,8 +88,8 @@
     /**
      * Calculate the default declassification date
      * Calculates the default declassification date for **nodeId** based on the properties of the node and the current declassification time frame.
-     * @param {String} nodeId The identifier of a node.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/DeclassificationDate}
+     * @param {string} nodeId The identifier of a node.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleDeclassificationDate}
      */
     this.calculateDefaultDeclassificationDate = function(nodeId) {
       return this.calculateDefaultDeclassificationDateWithHttpInfo(nodeId)

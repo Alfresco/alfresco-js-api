@@ -25,22 +25,22 @@
     if (!root.AlfrescoGovernanceServicesSecurityControls) {
       root.AlfrescoGovernanceServicesSecurityControls = {};
     }
-    root.AlfrescoGovernanceServicesSecurityControls.SecuritycontrolsettingsApi = factory(root.AlfrescoGovernanceServicesSecurityControls.ApiClient, root.AlfrescoGovernanceServicesSecurityControls.Error, root.AlfrescoGovernanceServicesSecurityControls.SecurityControlSettingBody, root.AlfrescoGovernanceServicesSecurityControls.SecurityControlSettingEntry);
+    root.AlfrescoGovernanceServicesSecurityControls.SecurityControlSettingsApi = factory(root.AlfrescoGovernanceServicesSecurityControls.ApiClient, root.AlfrescoGovernanceServicesSecurityControls.Error, root.AlfrescoGovernanceServicesSecurityControls.SecurityControlSettingBody, root.AlfrescoGovernanceServicesSecurityControls.SecurityControlSettingEntry);
   }
 }(this, function(ApiClient, Error, SecurityControlSettingBody, SecurityControlSettingEntry) {
   'use strict';
 
   /**
    * Securitycontrolsettings service.
-   * @module api/SecuritycontrolsettingsApi
+   * @module api/SecurityControlSettingsApi
    * @version 0.1.0
    */
 
   /**
-   * Constructs a new SecuritycontrolsettingsApi.
-   * @alias module:api/SecuritycontrolsettingsApi
+   * Constructs a new SecurityControlSettingsApi.
+   * @alias :api/SecurityControlSettingsApi
    * @class
-   * @param {module:ApiClient} apiClient Optional API client implementation to use,
+   * @param {:ApiClient} apiClient Optional API client implementation to use,
    * default to {@link module:ApiClient#instance} if unspecified.
    */
   var exports = function(apiClient) {
@@ -51,8 +51,8 @@
     /**
      * Get security control setting value
      * Gets the value for a selected **securityControlSettingKey**.
-     * @param {String} securityControlSettingKey The key for the security control setting. You can use one of the following settings: * -declassificationTimeFrame- for the declassification time frame value set in alfresco-global.properties file
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/SecurityControlSettingEntry} and HTTP response
+     * @param {string} securityControlSettingKey The key for the security control setting. You can use one of the following settings: * -declassificationTimeFrame- for the declassification time frame value set in alfresco-global.properties file
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleSecurityControlSettingEntry} and HTTP response
      */
     this.getSecurityControlSettingWithHttpInfo = function(securityControlSettingKey) {
       var postBody = null;
@@ -88,8 +88,8 @@
     /**
      * Get security control setting value
      * Gets the value for a selected **securityControlSettingKey**.
-     * @param {String} securityControlSettingKey The key for the security control setting. You can use one of the following settings: * -declassificationTimeFrame- for the declassification time frame value set in alfresco-global.properties file
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/SecurityControlSettingEntry}
+     * @param {string} securityControlSettingKey The key for the security control setting. You can use one of the following settings: * -declassificationTimeFrame- for the declassification time frame value set in alfresco-global.properties file
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleSecurityControlSettingEntry}
      */
     this.getSecurityControlSetting = function(securityControlSettingKey) {
       return this.getSecurityControlSettingWithHttpInfo(securityControlSettingKey)
@@ -102,9 +102,9 @@
     /**
      * Update security control setting value
      * Updates the value of a selected **securityControlSettingKey**.
-     * @param {String} securityControlSettingKey The key for the security control setting. You can use one of the following settings: * -declassificationTimeFrame- for the declassification time frame value set in alfresco-global.properties file
-     * @param {module:model/SecurityControlSettingBody} securityControlSettingValue The new value for the security control setting. This can be a string or number, depending on the setting key.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/SecurityControlSettingEntry} and HTTP response
+     * @param {string} securityControlSettingKey The key for the security control setting. You can use one of the following settings: * -declassificationTimeFrame- for the declassification time frame value set in alfresco-global.properties file
+     * @param {SecurityControlSettingBody} securityControlSettingValue The new value for the security control setting. This can be a string or number, depending on the setting key.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleSecurityControlSettingEntry} and HTTP response
      */
     this.updateSecurityControlSettingWithHttpInfo = function(securityControlSettingKey, securityControlSettingValue) {
       var postBody = securityControlSettingValue;
@@ -145,9 +145,9 @@
     /**
      * Update security control setting value
      * Updates the value of a selected **securityControlSettingKey**.
-     * @param {String} securityControlSettingKey The key for the security control setting. You can use one of the following settings: * -declassificationTimeFrame- for the declassification time frame value set in alfresco-global.properties file
-     * @param {module:model/SecurityControlSettingBody} securityControlSettingValue The new value for the security control setting. This can be a string or number, depending on the setting key.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/SecurityControlSettingEntry}
+     * @param {string} securityControlSettingKey The key for the security control setting. You can use one of the following settings: * -declassificationTimeFrame- for the declassification time frame value set in alfresco-global.properties file
+     * @param {SecurityControlSettingBody} securityControlSettingValue The new value for the security control setting. This can be a string or number, depending on the setting key.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleSecurityControlSettingEntry}
      */
     this.updateSecurityControlSetting = function(securityControlSettingKey, securityControlSettingValue) {
       return this.updateSecurityControlSettingWithHttpInfo(securityControlSettingKey, securityControlSettingValue)

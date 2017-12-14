@@ -35,13 +35,13 @@
 
   /**
    * The RecordFolderAssociationPagingList model module.
-   * @module model/RecordFolderAssociationPagingList
+   * @module  RecordFolderAssociationPagingList
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>RecordFolderAssociationPagingList</code>.
-   * @alias module:model/RecordFolderAssociationPagingList
+   * @alias RecordFolderAssociationPagingList
    * @class
    */
   var exports = function() {
@@ -56,8 +56,8 @@
    * Constructs a <code>RecordFolderAssociationPagingList</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/RecordFolderAssociationPagingList} obj Optional instance to populate.
-   * @return {module:model/RecordFolderAssociationPagingList} The populated <code>RecordFolderAssociationPagingList</code> instance.
+   * @param {RecordFolderAssociationPagingList} obj Optional instance to populate.
+   * @return {RecordFolderAssociationPagingList} The populated <code>RecordFolderAssociationPagingList</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -77,15 +77,15 @@
   }
 
   /**
-   * @member {module:model/Pagination} pagination
+   * @member {Pagination} pagination
    */
   exports.prototype['pagination'] = undefined;
   /**
-   * @member {Array.<module:model/RecordFolderChildAssociationEntry>} entries
+   * @member {Array.<moduleRecordFolderChildAssociationEntry>} entries
    */
   exports.prototype['entries'] = undefined;
   /**
-   * @member {module:model/RecordFolder} source
+   * @member {RecordFolder} source
    */
   exports.prototype['source'] = undefined;
 

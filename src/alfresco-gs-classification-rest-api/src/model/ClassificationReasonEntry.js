@@ -35,15 +35,15 @@
 
   /**
    * The ClassificationReasonEntry model module.
-   * @module model/ClassificationReasonEntry
+   * @module ClassificationReasonEntry
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>ClassificationReasonEntry</code>.
-   * @alias module:model/ClassificationReasonEntry
+   * @alias ClassificationReasonEntry
    * @class
-   * @param entry {module:model/ClassificationReason}
+   * @param entry {ClassificationReason}
    */
   var exports = function(entry) {
     var _this = this;
@@ -55,8 +55,8 @@
    * Constructs a <code>ClassificationReasonEntry</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/ClassificationReasonEntry} obj Optional instance to populate.
-   * @return {module:model/ClassificationReasonEntry} The populated <code>ClassificationReasonEntry</code> instance.
+   * @param {ClassificationReasonEntry} obj Optional instance to populate.
+   * @return {ClassificationReasonEntry} The populated <code>ClassificationReasonEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -70,7 +70,7 @@
   }
 
   /**
-   * @member {module:model/ClassificationReason} entry
+   * @member {ClassificationReason} entry
    */
   exports.prototype['entry'] = undefined;
 

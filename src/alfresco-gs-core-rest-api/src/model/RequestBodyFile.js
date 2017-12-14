@@ -35,15 +35,15 @@
 
   /**
    * The RequestBodyFile model module.
-   * @module model/RequestBodyFile
+   * @module  RequestBodyFile
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>RequestBodyFile</code>.
-   * @alias module:model/RequestBodyFile
+   * @alias RequestBodyFile
    * @class
-   * @param targetParentId {String}
+   * @param targetParentId {string}
    */
   var exports = function(targetParentId) {
     var _this = this;
@@ -55,8 +55,8 @@
    * Constructs a <code>RequestBodyFile</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/RequestBodyFile} obj Optional instance to populate.
-   * @return {module:model/RequestBodyFile} The populated <code>RequestBodyFile</code> instance.
+   * @param {RequestBodyFile} obj Optional instance to populate.
+   * @return {RequestBodyFile} The populated <code>RequestBodyFile</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -70,7 +70,7 @@
   }
 
   /**
-   * @member {String} targetParentId
+   * @member {string} targetParentId
    */
   exports.prototype['targetParentId'] = undefined;
 

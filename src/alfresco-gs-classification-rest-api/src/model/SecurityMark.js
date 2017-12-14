@@ -35,19 +35,19 @@
 
   /**
    * The SecurityMark model module.
-   * @module model/SecurityMark
+   * @module SecurityMark
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>SecurityMark</code>.
-   * @alias module:model/SecurityMark
+   * @alias SecurityMark
    * @class
-   * @param id {String}
-   * @param name {String}
-   * @param groupId {String}
-   * @param groupName {String}
-   * @param groupType {String}
+   * @param id {string}
+   * @param name {string}
+   * @param groupId {string}
+   * @param groupName {string}
+   * @param groupType {string}
    */
   var exports = function(id, name, groupId, groupName, groupType) {
     var _this = this;
@@ -63,8 +63,8 @@
    * Constructs a <code>SecurityMark</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/SecurityMark} obj Optional instance to populate.
-   * @return {module:model/SecurityMark} The populated <code>SecurityMark</code> instance.
+   * @param {SecurityMark} obj Optional instance to populate.
+   * @return {SecurityMark} The populated <code>SecurityMark</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -90,23 +90,23 @@
   }
 
   /**
-   * @member {String} id
+   * @member {string} id
    */
   exports.prototype['id'] = undefined;
   /**
-   * @member {String} name
+   * @member {string} name
    */
   exports.prototype['name'] = undefined;
   /**
-   * @member {String} groupId
+   * @member {string} groupId
    */
   exports.prototype['groupId'] = undefined;
   /**
-   * @member {String} groupName
+   * @member {string} groupName
    */
   exports.prototype['groupName'] = undefined;
   /**
-   * @member {String} groupType
+   * @member {string} groupType
    */
   exports.prototype['groupType'] = undefined;
 

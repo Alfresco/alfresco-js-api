@@ -35,13 +35,13 @@
 
   /**
    * The TransferAssociationPagingList model module.
-   * @module model/TransferAssociationPagingList
+   * @module  TransferAssociationPagingList
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>TransferAssociationPagingList</code>.
-   * @alias module:model/TransferAssociationPagingList
+   * @alias TransferAssociationPagingList
    * @class
    */
   var exports = function() {
@@ -56,8 +56,8 @@
    * Constructs a <code>TransferAssociationPagingList</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/TransferAssociationPagingList} obj Optional instance to populate.
-   * @return {module:model/TransferAssociationPagingList} The populated <code>TransferAssociationPagingList</code> instance.
+   * @param {TransferAssociationPagingList} obj Optional instance to populate.
+   * @return {TransferAssociationPagingList} The populated <code>TransferAssociationPagingList</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -77,15 +77,15 @@
   }
 
   /**
-   * @member {module:model/Pagination} pagination
+   * @member {Pagination} pagination
    */
   exports.prototype['pagination'] = undefined;
   /**
-   * @member {Array.<module:model/TransferChildAssociationEntry>} entries
+   * @member {Array.<moduleTransferChildAssociationEntry>} entries
    */
   exports.prototype['entries'] = undefined;
   /**
-   * @member {module:model/Transfer} source
+   * @member {Transfer} source
    */
   exports.prototype['source'] = undefined;
 

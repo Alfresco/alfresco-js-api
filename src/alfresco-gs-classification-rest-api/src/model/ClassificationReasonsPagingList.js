@@ -35,13 +35,13 @@
 
   /**
    * The ClassificationReasonsPagingList model module.
-   * @module model/ClassificationReasonsPagingList
+   * @module ClassificationReasonsPagingList
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>ClassificationReasonsPagingList</code>.
-   * @alias module:model/ClassificationReasonsPagingList
+   * @alias ClassificationReasonsPagingList
    * @class
    */
   var exports = function() {
@@ -55,8 +55,8 @@
    * Constructs a <code>ClassificationReasonsPagingList</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/ClassificationReasonsPagingList} obj Optional instance to populate.
-   * @return {module:model/ClassificationReasonsPagingList} The populated <code>ClassificationReasonsPagingList</code> instance.
+   * @param {ClassificationReasonsPagingList} obj Optional instance to populate.
+   * @return {ClassificationReasonsPagingList} The populated <code>ClassificationReasonsPagingList</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -73,11 +73,11 @@
   }
 
   /**
-   * @member {module:model/Pagination} pagination
+   * @member {Pagination} pagination
    */
   exports.prototype['pagination'] = undefined;
   /**
-   * @member {Array.<module:model/ClassificationReasonEntry>} entries
+   * @member {Array.<moduleClassificationReasonEntry>} entries
    */
   exports.prototype['entries'] = undefined;
 

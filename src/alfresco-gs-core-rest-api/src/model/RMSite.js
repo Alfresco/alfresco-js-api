@@ -35,19 +35,19 @@
 
   /**
    * The RMSite model module.
-   * @module model/RMSite
+   * @module  RMSite
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>RMSite</code>.
-   * @alias module:model/RMSite
+   * @alias RMSite
    * @class
-   * @param id {String}
-   * @param guid {String}
-   * @param title {String}
-   * @param visibility {module:model/RMSite.VisibilityEnum}
-   * @param compliance {module:model/RMSite.ComplianceEnum}
+   * @param id {string}
+   * @param guid {string}
+   * @param title {string}
+   * @param visibility {RMSite.VisibilityEnum}
+   * @param compliance {RMSite.ComplianceEnum}
    */
   var exports = function(id, guid, title, visibility, compliance) {
     var _this = this;
@@ -65,8 +65,8 @@
    * Constructs a <code>RMSite</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/RMSite} obj Optional instance to populate.
-   * @return {module:model/RMSite} The populated <code>RMSite</code> instance.
+   * @param {RMSite} obj Optional instance to populate.
+   * @return {RMSite} The populated <code>RMSite</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -98,38 +98,38 @@
   }
 
   /**
-   * @member {String} id
+   * @member {string} id
    */
   exports.prototype['id'] = undefined;
   /**
-   * @member {String} guid
+   * @member {string} guid
    */
   exports.prototype['guid'] = undefined;
   /**
-   * @member {String} title
+   * @member {string} title
    */
   exports.prototype['title'] = undefined;
   /**
-   * @member {String} description
+   * @member {string} description
    */
   exports.prototype['description'] = undefined;
   /**
-   * @member {module:model/RMSite.VisibilityEnum} visibility
+   * @member {RMSite.VisibilityEnum} visibility
    */
   exports.prototype['visibility'] = undefined;
   /**
-   * @member {module:model/RMSite.ComplianceEnum} compliance
+   * @member {RMSite.ComplianceEnum} compliance
    */
   exports.prototype['compliance'] = undefined;
   /**
-   * @member {module:model/RMSite.RoleEnum} role
+   * @member {RMSite.RoleEnum} role
    */
   exports.prototype['role'] = undefined;
 
 
   /**
    * Allowed values for the <code>visibility</code> property.
-   * @enum {String}
+   * @enum {string}
    * @readonly
    */
   exports.VisibilityEnum = {
@@ -151,7 +151,7 @@
 
   /**
    * Allowed values for the <code>compliance</code> property.
-   * @enum {String}
+   * @enum {string}
    * @readonly
    */
   exports.ComplianceEnum = {
@@ -168,7 +168,7 @@
 
   /**
    * Allowed values for the <code>role</code> property.
-   * @enum {String}
+   * @enum {string}
    * @readonly
    */
   exports.RoleEnum = {

@@ -35,13 +35,13 @@
 
   /**
    * The SubtopicPaging model module.
-   * @module model/SubtopicPaging
+   * @module SubtopicPaging
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>SubtopicPaging</code>.
-   * @alias module:model/SubtopicPaging
+   * @alias SubtopicPaging
    * @class
    */
   var exports = function() {
@@ -54,8 +54,8 @@
    * Constructs a <code>SubtopicPaging</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/SubtopicPaging} obj Optional instance to populate.
-   * @return {module:model/SubtopicPaging} The populated <code>SubtopicPaging</code> instance.
+   * @param {SubtopicPaging} obj Optional instance to populate.
+   * @return {SubtopicPaging} The populated <code>SubtopicPaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -69,7 +69,7 @@
   }
 
   /**
-   * @member {module:model/TopicPagingList} list
+   * @member {TopicPagingList} list
    */
   exports.prototype['list'] = undefined;
 

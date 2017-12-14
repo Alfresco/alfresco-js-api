@@ -35,13 +35,13 @@
 
   /**
    * The DeclassificationExemptionsPagingList model module.
-   * @module model/DeclassificationExemptionsPagingList
+   * @module DeclassificationExemptionsPagingList
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>DeclassificationExemptionsPagingList</code>.
-   * @alias module:model/DeclassificationExemptionsPagingList
+   * @alias DeclassificationExemptionsPagingList
    * @class
    */
   var exports = function() {
@@ -55,8 +55,8 @@
    * Constructs a <code>DeclassificationExemptionsPagingList</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/DeclassificationExemptionsPagingList} obj Optional instance to populate.
-   * @return {module:model/DeclassificationExemptionsPagingList} The populated <code>DeclassificationExemptionsPagingList</code> instance.
+   * @param {DeclassificationExemptionsPagingList} obj Optional instance to populate.
+   * @return {DeclassificationExemptionsPagingList} The populated <code>DeclassificationExemptionsPagingList</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -73,11 +73,11 @@
   }
 
   /**
-   * @member {module:model/Pagination} pagination
+   * @member {Pagination} pagination
    */
   exports.prototype['pagination'] = undefined;
   /**
-   * @member {Array.<module:model/DeclassificationExemptionEntry>} entries
+   * @member {Array.<moduleDeclassificationExemptionEntry>} entries
    */
   exports.prototype['entries'] = undefined;
 

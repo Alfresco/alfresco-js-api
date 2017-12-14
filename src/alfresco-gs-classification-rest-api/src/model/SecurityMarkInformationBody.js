@@ -35,15 +35,15 @@
 
   /**
    * The SecurityMarkInformationBody model module.
-   * @module model/SecurityMarkInformationBody
+   * @module SecurityMarkInformationBody
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>SecurityMarkInformationBody</code>.
-   * @alias module:model/SecurityMarkInformationBody
+   * @alias SecurityMarkInformationBody
    * @class
-   * @param add {module:model/SecurityMarksBody}
+   * @param add {SecurityMarksBody}
    */
   var exports = function(add) {
     var _this = this;
@@ -55,8 +55,8 @@
    * Constructs a <code>SecurityMarkInformationBody</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/SecurityMarkInformationBody} obj Optional instance to populate.
-   * @return {module:model/SecurityMarkInformationBody} The populated <code>SecurityMarkInformationBody</code> instance.
+   * @param {SecurityMarkInformationBody} obj Optional instance to populate.
+   * @return {SecurityMarkInformationBody} The populated <code>SecurityMarkInformationBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -70,7 +70,7 @@
   }
 
   /**
-   * @member {module:model/SecurityMarksBody} add
+   * @member {SecurityMarksBody} add
    */
   exports.prototype['add'] = undefined;
 

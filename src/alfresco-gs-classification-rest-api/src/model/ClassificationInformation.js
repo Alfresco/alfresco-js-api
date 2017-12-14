@@ -35,15 +35,15 @@
 
   /**
    * The ClassificationInformation model module.
-   * @module model/ClassificationInformation
+   * @module ClassificationInformation
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>ClassificationInformation</code>.
-   * @alias module:model/ClassificationInformation
+   * @alias ClassificationInformation
    * @class
-   * @param level {String}
+   * @param level {string}
    * @param reasonIds {Array.<String>}
    */
   var exports = function(level, reasonIds) {
@@ -64,8 +64,8 @@
    * Constructs a <code>ClassificationInformation</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/ClassificationInformation} obj Optional instance to populate.
-   * @return {module:model/ClassificationInformation} The populated <code>ClassificationInformation</code> instance.
+   * @param {ClassificationInformation} obj Optional instance to populate.
+   * @return {ClassificationInformation} The populated <code>ClassificationInformation</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -103,11 +103,11 @@
   }
 
   /**
-   * @member {String} level
+   * @member {string} level
    */
   exports.prototype['level'] = undefined;
   /**
-   * @member {String} classificationAgency
+   * @member {string} classificationAgency
    */
   exports.prototype['classificationAgency'] = undefined;
   /**
@@ -119,11 +119,11 @@
    */
   exports.prototype['downgradeOn'] = undefined;
   /**
-   * @member {String} downgradeEvent
+   * @member {string} downgradeEvent
    */
   exports.prototype['downgradeEvent'] = undefined;
   /**
-   * @member {String} downgradeInstructions
+   * @member {string} downgradeInstructions
    */
   exports.prototype['downgradeInstructions'] = undefined;
   /**
@@ -131,7 +131,7 @@
    */
   exports.prototype['declassifyOn'] = undefined;
   /**
-   * @member {String} declassificationEvent
+   * @member {string} declassificationEvent
    */
   exports.prototype['declassificationEvent'] = undefined;
   /**

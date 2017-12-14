@@ -1,14 +1,14 @@
-# AlfrescoGovernanceServicesSecurityControls.ClassificationreasonsApi
+# AlfrescoGovernanceServicesSecurityControls.ClassificationReasonsApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/gs/versions/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createClassificationReason**](ClassificationreasonsApi.md#createClassificationReason) | **POST** /classification-reasons | Create a classification reason
-[**deleteClassificationReason**](ClassificationreasonsApi.md#deleteClassificationReason) | **DELETE** /classification-reasons/{classificationReasonId} | Delete a classification reason
-[**listClassificationReasons**](ClassificationreasonsApi.md#listClassificationReasons) | **GET** /classification-reasons | List all classification reasons
-[**showClassificationReasonById**](ClassificationreasonsApi.md#showClassificationReasonById) | **GET** /classification-reasons/{classificationReasonId} | Get classification reason information
-[**updateClassificationReason**](ClassificationreasonsApi.md#updateClassificationReason) | **PUT** /classification-reasons/{classificationReasonId} | Update a classification reason
+[**createClassificationReason**](ClassificationReasonsApi.md#createClassificationReason) | **POST** /classification-reasons | Create a classification reason
+[**deleteClassificationReason**](ClassificationReasonsApi.md#deleteClassificationReason) | **DELETE** /classification-reasons/{classificationReasonId} | Delete a classification reason
+[**listClassificationReasons**](ClassificationReasonsApi.md#listClassificationReasons) | **GET** /classification-reasons | List all classification reasons
+[**showClassificationReasonById**](ClassificationReasonsApi.md#showClassificationReasonById) | **GET** /classification-reasons/{classificationReasonId} | Get classification reason information
+[**updateClassificationReason**](ClassificationReasonsApi.md#updateClassificationReason) | **PUT** /classification-reasons/{classificationReasonId} | Update a classification reason
 
 
 <a name="createClassificationReason"></a>

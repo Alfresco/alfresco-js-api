@@ -35,15 +35,15 @@
 
   /**
    * The RecordFolderEntry model module.
-   * @module model/RecordFolderEntry
+   * @module  RecordFolderEntry
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>RecordFolderEntry</code>.
-   * @alias module:model/RecordFolderEntry
+   * @alias RecordFolderEntry
    * @class
-   * @param entry {module:model/RecordFolder}
+   * @param entry {RecordFolder}
    */
   var exports = function(entry) {
     var _this = this;
@@ -55,8 +55,8 @@
    * Constructs a <code>RecordFolderEntry</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/RecordFolderEntry} obj Optional instance to populate.
-   * @return {module:model/RecordFolderEntry} The populated <code>RecordFolderEntry</code> instance.
+   * @param {RecordFolderEntry} obj Optional instance to populate.
+   * @return {RecordFolderEntry} The populated <code>RecordFolderEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -70,7 +70,7 @@
   }
 
   /**
-   * @member {module:model/RecordFolder} entry
+   * @member {RecordFolder} entry
    */
   exports.prototype['entry'] = undefined;
 

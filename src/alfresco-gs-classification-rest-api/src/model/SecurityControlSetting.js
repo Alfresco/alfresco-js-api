@@ -35,15 +35,15 @@
 
   /**
    * The SecurityControlSetting model module.
-   * @module model/SecurityControlSetting
+   * @module SecurityControlSetting
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>SecurityControlSetting</code>.
-   * @alias module:model/SecurityControlSetting
+   * @alias SecurityControlSetting
    * @class
-   * @param key {String}
+   * @param key {string}
    * @param value {Object}
    */
   var exports = function(key, value) {
@@ -57,8 +57,8 @@
    * Constructs a <code>SecurityControlSetting</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/SecurityControlSetting} obj Optional instance to populate.
-   * @return {module:model/SecurityControlSetting} The populated <code>SecurityControlSetting</code> instance.
+   * @param {SecurityControlSetting} obj Optional instance to populate.
+   * @return {SecurityControlSetting} The populated <code>SecurityControlSetting</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -75,7 +75,7 @@
   }
 
   /**
-   * @member {String} key
+   * @member {string} key
    */
   exports.prototype['key'] = undefined;
   /**

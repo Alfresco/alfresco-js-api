@@ -35,15 +35,15 @@
 
   /**
    * The TransferContainerEntry model module.
-   * @module model/TransferContainerEntry
+   * @module  TransferContainerEntry
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>TransferContainerEntry</code>.
-   * @alias module:model/TransferContainerEntry
+   * @alias TransferContainerEntry
    * @class
-   * @param entry {module:model/TransferContainer}
+   * @param entry {TransferContainer}
    */
   var exports = function(entry) {
     var _this = this;
@@ -55,8 +55,8 @@
    * Constructs a <code>TransferContainerEntry</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/TransferContainerEntry} obj Optional instance to populate.
-   * @return {module:model/TransferContainerEntry} The populated <code>TransferContainerEntry</code> instance.
+   * @param {TransferContainerEntry} obj Optional instance to populate.
+   * @return {TransferContainerEntry} The populated <code>TransferContainerEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -70,7 +70,7 @@
   }
 
   /**
-   * @member {module:model/TransferContainer} entry
+   * @member {TransferContainer} entry
    */
   exports.prototype['entry'] = undefined;
 

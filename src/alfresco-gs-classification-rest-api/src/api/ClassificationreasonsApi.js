@@ -25,22 +25,22 @@
     if (!root.AlfrescoGovernanceServicesSecurityControls) {
       root.AlfrescoGovernanceServicesSecurityControls = {};
     }
-    root.AlfrescoGovernanceServicesSecurityControls.ClassificationreasonsApi = factory(root.AlfrescoGovernanceServicesSecurityControls.ApiClient, root.AlfrescoGovernanceServicesSecurityControls.ClassificationReasonBody, root.AlfrescoGovernanceServicesSecurityControls.ClassificationReasonEntry, root.AlfrescoGovernanceServicesSecurityControls.ClassificationReasonsPaging, root.AlfrescoGovernanceServicesSecurityControls.Error);
+    root.AlfrescoGovernanceServicesSecurityControls.ClassificationReasonsApi = factory(root.AlfrescoGovernanceServicesSecurityControls.ApiClient, root.AlfrescoGovernanceServicesSecurityControls.ClassificationReasonBody, root.AlfrescoGovernanceServicesSecurityControls.ClassificationReasonEntry, root.AlfrescoGovernanceServicesSecurityControls.ClassificationReasonsPaging, root.AlfrescoGovernanceServicesSecurityControls.Error);
   }
 }(this, function(ApiClient, ClassificationReasonBody, ClassificationReasonEntry, ClassificationReasonsPaging, Error) {
   'use strict';
 
   /**
    * Classificationreasons service.
-   * @module api/ClassificationreasonsApi
+   * @module api/ClassificationReasonsApi
    * @version 0.1.0
    */
 
   /**
-   * Constructs a new ClassificationreasonsApi.
-   * @alias module:api/ClassificationreasonsApi
+   * Constructs a new ClassificationReasonsApi.
+   * @alias :api/ClassificationReasonsApi
    * @class
-   * @param {module:ApiClient} apiClient Optional API client implementation to use,
+   * @param {:ApiClient} apiClient Optional API client implementation to use,
    * default to {@link module:ApiClient#instance} if unspecified.
    */
   var exports = function(apiClient) {
@@ -51,8 +51,8 @@
     /**
      * Create a classification reason
      * Creates a new classification reason.  **Note:** You can create more than one reason by specifying a list of reasons in the JSON body. For example, the following JSON body creates two classification reasons: &#x60;&#x60;&#x60;JSON [   {     \&quot;code\&quot;:\&quot;My Code1\&quot;,     \&quot;description\&quot;:\&quot;My Description1\&quot;   },   {     \&quot;code\&quot;:\&quot;My Code2\&quot;,     \&quot;description\&quot;:\&quot;My Description2\&quot;   } ] &#x60;&#x60;&#x60; If you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:  &#x60;&#x60;&#x60;JSON {   \&quot;list\&quot;: {     \&quot;pagination\&quot;: {       \&quot;count\&quot;: 2,       \&quot;hasMoreItems\&quot;: false,       \&quot;totalItems\&quot;: 2,       \&quot;skipCount\&quot;: 0,       \&quot;maxItems\&quot;: 100     },     \&quot;entries\&quot;: [       {         \&quot;entry\&quot;: {           ...         }       },       {         \&quot;entry\&quot;: {           ...         }       }     ]   } } &#x60;&#x60;&#x60;
-     * @param {module:model/ClassificationReasonBody} classificationReason Classification reason
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ClassificationReasonEntry} and HTTP response
+     * @param {ClassificationReasonBody} classificationReason Classification reason
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleClassificationReasonEntry} and HTTP response
      */
     this.createClassificationReasonWithHttpInfo = function(classificationReason) {
       var postBody = classificationReason;
@@ -87,8 +87,8 @@
     /**
      * Create a classification reason
      * Creates a new classification reason.  **Note:** You can create more than one reason by specifying a list of reasons in the JSON body. For example, the following JSON body creates two classification reasons: &#x60;&#x60;&#x60;JSON [   {     \&quot;code\&quot;:\&quot;My Code1\&quot;,     \&quot;description\&quot;:\&quot;My Description1\&quot;   },   {     \&quot;code\&quot;:\&quot;My Code2\&quot;,     \&quot;description\&quot;:\&quot;My Description2\&quot;   } ] &#x60;&#x60;&#x60; If you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:  &#x60;&#x60;&#x60;JSON {   \&quot;list\&quot;: {     \&quot;pagination\&quot;: {       \&quot;count\&quot;: 2,       \&quot;hasMoreItems\&quot;: false,       \&quot;totalItems\&quot;: 2,       \&quot;skipCount\&quot;: 0,       \&quot;maxItems\&quot;: 100     },     \&quot;entries\&quot;: [       {         \&quot;entry\&quot;: {           ...         }       },       {         \&quot;entry\&quot;: {           ...         }       }     ]   } } &#x60;&#x60;&#x60;
-     * @param {module:model/ClassificationReasonBody} classificationReason Classification reason
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ClassificationReasonEntry}
+     * @param {ClassificationReasonBody} classificationReason Classification reason
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleClassificationReasonEntry}
      */
     this.createClassificationReason = function(classificationReason) {
       return this.createClassificationReasonWithHttpInfo(classificationReason)
@@ -101,7 +101,7 @@
     /**
      * Delete a classification reason
      * Deletes the classification reason  **classificationReasonId**. You can&#39;t delete a classification reason that is being used to classify content. There must be at least one classification reason.
-     * @param {String} classificationReasonId The identifier for the classification reason
+     * @param {string} classificationReasonId The identifier for the classification reason
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
     this.deleteClassificationReasonWithHttpInfo = function(classificationReasonId) {
@@ -138,7 +138,7 @@
     /**
      * Delete a classification reason
      * Deletes the classification reason  **classificationReasonId**. You can&#39;t delete a classification reason that is being used to classify content. There must be at least one classification reason.
-     * @param {String} classificationReasonId The identifier for the classification reason
+     * @param {string} classificationReasonId The identifier for the classification reason
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
     this.deleteClassificationReason = function(classificationReasonId) {
@@ -153,10 +153,10 @@
      * List all classification reasons
      * Gets all classification reasons.
      * @param {Object} opts Optional parameters
-     * @param {Number} opts.skipCount The number of entities that exist in the collection before those included in this list.
-     * @param {Number} opts.maxItems The maximum number of items to return in the list.
+     * @param {number} opts.skipCount The number of entities that exist in the collection before those included in this list.
+     * @param {number} opts.maxItems The maximum number of items to return in the list.
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ClassificationReasonsPaging} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleClassificationReasonsPaging} and HTTP response
      */
     this.listClassificationReasonsWithHttpInfo = function(opts) {
       opts = opts || {};
@@ -191,10 +191,10 @@
      * List all classification reasons
      * Gets all classification reasons.
      * @param {Object} opts Optional parameters
-     * @param {Number} opts.skipCount The number of entities that exist in the collection before those included in this list.
-     * @param {Number} opts.maxItems The maximum number of items to return in the list.
+     * @param {number} opts.skipCount The number of entities that exist in the collection before those included in this list.
+     * @param {number} opts.maxItems The maximum number of items to return in the list.
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ClassificationReasonsPaging}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleClassificationReasonsPaging}
      */
     this.listClassificationReasons = function(opts) {
       return this.listClassificationReasonsWithHttpInfo(opts)
@@ -207,8 +207,8 @@
     /**
      * Get classification reason information
      * Gets the classification reason  **classificationReasonId**.
-     * @param {String} classificationReasonId The identifier for the classification reason
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ClassificationReasonEntry} and HTTP response
+     * @param {string} classificationReasonId The identifier for the classification reason
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleClassificationReasonEntry} and HTTP response
      */
     this.showClassificationReasonByIdWithHttpInfo = function(classificationReasonId) {
       var postBody = null;
@@ -244,8 +244,8 @@
     /**
      * Get classification reason information
      * Gets the classification reason  **classificationReasonId**.
-     * @param {String} classificationReasonId The identifier for the classification reason
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ClassificationReasonEntry}
+     * @param {string} classificationReasonId The identifier for the classification reason
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleClassificationReasonEntry}
      */
     this.showClassificationReasonById = function(classificationReasonId) {
       return this.showClassificationReasonByIdWithHttpInfo(classificationReasonId)
@@ -258,9 +258,9 @@
     /**
      * Update a classification reason
      * Updates the classification reason with id **classificationReasonId**. For example, you can change a classification reason code or description.
-     * @param {String} classificationReasonId The identifier for the classification reason
-     * @param {module:model/ClassificationReasonBody} classificationReason Classification reason
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ClassificationReasonEntry} and HTTP response
+     * @param {string} classificationReasonId The identifier for the classification reason
+     * @param {ClassificationReasonBody} classificationReason Classification reason
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleClassificationReasonEntry} and HTTP response
      */
     this.updateClassificationReasonWithHttpInfo = function(classificationReasonId, classificationReason) {
       var postBody = classificationReason;
@@ -301,9 +301,9 @@
     /**
      * Update a classification reason
      * Updates the classification reason with id **classificationReasonId**. For example, you can change a classification reason code or description.
-     * @param {String} classificationReasonId The identifier for the classification reason
-     * @param {module:model/ClassificationReasonBody} classificationReason Classification reason
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ClassificationReasonEntry}
+     * @param {string} classificationReasonId The identifier for the classification reason
+     * @param {ClassificationReasonBody} classificationReason Classification reason
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleClassificationReasonEntry}
      */
     this.updateClassificationReason = function(classificationReasonId, classificationReason) {
       return this.updateClassificationReasonWithHttpInfo(classificationReasonId, classificationReason)

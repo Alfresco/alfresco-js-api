@@ -35,15 +35,15 @@
 
   /**
    * The InstructionEntry model module.
-   * @module model/InstructionEntry
+   * @module InstructionEntry
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>InstructionEntry</code>.
-   * @alias module:model/InstructionEntry
+   * @alias InstructionEntry
    * @class
-   * @param entry {module:model/Instruction}
+   * @param entry {Instruction}
    */
   var exports = function(entry) {
     var _this = this;
@@ -55,8 +55,8 @@
    * Constructs a <code>InstructionEntry</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/InstructionEntry} obj Optional instance to populate.
-   * @return {module:model/InstructionEntry} The populated <code>InstructionEntry</code> instance.
+   * @param {InstructionEntry} obj Optional instance to populate.
+   * @return {InstructionEntry} The populated <code>InstructionEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -70,7 +70,7 @@
   }
 
   /**
-   * @member {module:model/Instruction} entry
+   * @member {Instruction} entry
    */
   exports.prototype['entry'] = undefined;
 

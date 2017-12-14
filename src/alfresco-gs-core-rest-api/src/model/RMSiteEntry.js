@@ -35,15 +35,15 @@
 
   /**
    * The RMSiteEntry model module.
-   * @module model/RMSiteEntry
+   * @module  RMSiteEntry
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>RMSiteEntry</code>.
-   * @alias module:model/RMSiteEntry
+   * @alias RMSiteEntry
    * @class
-   * @param entry {module:model/RMSite}
+   * @param entry {RMSite}
    */
   var exports = function(entry) {
     var _this = this;
@@ -55,8 +55,8 @@
    * Constructs a <code>RMSiteEntry</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/RMSiteEntry} obj Optional instance to populate.
-   * @return {module:model/RMSiteEntry} The populated <code>RMSiteEntry</code> instance.
+   * @param {RMSiteEntry} obj Optional instance to populate.
+   * @return {RMSiteEntry} The populated <code>RMSiteEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -70,7 +70,7 @@
   }
 
   /**
-   * @member {module:model/RMSite} entry
+   * @member {RMSite} entry
    */
   exports.prototype['entry'] = undefined;
 

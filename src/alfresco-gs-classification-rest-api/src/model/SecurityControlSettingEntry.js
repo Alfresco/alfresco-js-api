@@ -35,15 +35,15 @@
 
   /**
    * The SecurityControlSettingEntry model module.
-   * @module model/SecurityControlSettingEntry
+   * @module SecurityControlSettingEntry
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>SecurityControlSettingEntry</code>.
-   * @alias module:model/SecurityControlSettingEntry
+   * @alias SecurityControlSettingEntry
    * @class
-   * @param entry {module:model/SecurityControlSetting}
+   * @param entry {SecurityControlSetting}
    */
   var exports = function(entry) {
     var _this = this;
@@ -55,8 +55,8 @@
    * Constructs a <code>SecurityControlSettingEntry</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/SecurityControlSettingEntry} obj Optional instance to populate.
-   * @return {module:model/SecurityControlSettingEntry} The populated <code>SecurityControlSettingEntry</code> instance.
+   * @param {SecurityControlSettingEntry} obj Optional instance to populate.
+   * @return {SecurityControlSettingEntry} The populated <code>SecurityControlSettingEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -70,7 +70,7 @@
   }
 
   /**
-   * @member {module:model/SecurityControlSetting} entry
+   * @member {SecurityControlSetting} entry
    */
   exports.prototype['entry'] = undefined;
 

@@ -35,22 +35,22 @@
 
   /**
    * The RecordCategory model module.
-   * @module model/RecordCategory
+   * @module  RecordCategory
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>RecordCategory</code>.
-   * @alias module:model/RecordCategory
+   * @alias RecordCategory
    * @class
-   * @param id {String}
-   * @param parentId {String}
-   * @param name {String} The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |. The character . must not be used at the end of the name.
-   * @param nodeType {String}
+   * @param id {string}
+   * @param parentId {string}
+   * @param name {string} The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |. The character . must not be used at the end of the name.
+   * @param nodeType {string}
    * @param modifiedAt {Date}
-   * @param modifiedByUser {module:model/UserInfo}
+   * @param modifiedByUser {UserInfo}
    * @param createdAt {Date}
-   * @param createdByUser {module:model/UserInfo}
+   * @param createdByUser {UserInfo}
    */
   var exports = function(id, parentId, name, nodeType, modifiedAt, modifiedByUser, createdAt, createdByUser) {
     var _this = this;
@@ -74,8 +74,8 @@
    * Constructs a <code>RecordCategory</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/RecordCategory} obj Optional instance to populate.
-   * @return {module:model/RecordCategory} The populated <code>RecordCategory</code> instance.
+   * @param {RecordCategory} obj Optional instance to populate.
+   * @return {RecordCategory} The populated <code>RecordCategory</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -125,25 +125,25 @@
   }
 
   /**
-   * @member {String} id
+   * @member {string} id
    */
   exports.prototype['id'] = undefined;
   /**
-   * @member {String} parentId
+   * @member {string} parentId
    */
   exports.prototype['parentId'] = undefined;
   /**
    * The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |. The character . must not be used at the end of the name.
-   * @member {String} name
+   * @member {string} name
    */
   exports.prototype['name'] = undefined;
   /**
-   * @member {String} nodeType
+   * @member {string} nodeType
    */
   exports.prototype['nodeType'] = undefined;
   /**
    * Indicates if the record category has a retention schedule defined
-   * @member {Boolean} hasRetentionSchedule
+   * @member {boolean} hasRetentionSchedule
    * @default false
    */
   exports.prototype['hasRetentionSchedule'] = false;
@@ -152,7 +152,7 @@
    */
   exports.prototype['modifiedAt'] = undefined;
   /**
-   * @member {module:model/UserInfo} modifiedByUser
+   * @member {UserInfo} modifiedByUser
    */
   exports.prototype['modifiedByUser'] = undefined;
   /**
@@ -160,7 +160,7 @@
    */
   exports.prototype['createdAt'] = undefined;
   /**
-   * @member {module:model/UserInfo} createdByUser
+   * @member {UserInfo} createdByUser
    */
   exports.prototype['createdByUser'] = undefined;
   /**
@@ -176,7 +176,7 @@
    */
   exports.prototype['allowableOperations'] = undefined;
   /**
-   * @member {module:model/PathInfo} path
+   * @member {PathInfo} path
    */
   exports.prototype['path'] = undefined;
 

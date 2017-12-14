@@ -35,15 +35,15 @@
 
   /**
    * The ClassificationGuidesEntry model module.
-   * @module model/ClassificationGuidesEntry
+   * @module ClassificationGuidesEntry
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>ClassificationGuidesEntry</code>.
-   * @alias module:model/ClassificationGuidesEntry
+   * @alias ClassificationGuidesEntry
    * @class
-   * @param entry {module:model/ClassificationGuides}
+   * @param entry {ClassificationGuides}
    */
   var exports = function(entry) {
     var _this = this;
@@ -55,8 +55,8 @@
    * Constructs a <code>ClassificationGuidesEntry</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/ClassificationGuidesEntry} obj Optional instance to populate.
-   * @return {module:model/ClassificationGuidesEntry} The populated <code>ClassificationGuidesEntry</code> instance.
+   * @param {ClassificationGuidesEntry} obj Optional instance to populate.
+   * @return {ClassificationGuidesEntry} The populated <code>ClassificationGuidesEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -70,7 +70,7 @@
   }
 
   /**
-   * @member {module:model/ClassificationGuides} entry
+   * @member {ClassificationGuides} entry
    */
   exports.prototype['entry'] = undefined;
 

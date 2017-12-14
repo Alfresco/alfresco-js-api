@@ -35,16 +35,16 @@
 
   /**
    * The ChildAssociationInfo model module.
-   * @module model/ChildAssociationInfo
+   * @module  ChildAssociationInfo
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>ChildAssociationInfo</code>.
-   * @alias module:model/ChildAssociationInfo
+   * @alias ChildAssociationInfo
    * @class
-   * @param assocType {String}
-   * @param isPrimary {Boolean}
+   * @param assocType {string}
+   * @param isPrimary {boolean}
    */
   var exports = function(assocType, isPrimary) {
     var _this = this;
@@ -57,8 +57,8 @@
    * Constructs a <code>ChildAssociationInfo</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/ChildAssociationInfo} obj Optional instance to populate.
-   * @return {module:model/ChildAssociationInfo} The populated <code>ChildAssociationInfo</code> instance.
+   * @param {ChildAssociationInfo} obj Optional instance to populate.
+   * @return {ChildAssociationInfo} The populated <code>ChildAssociationInfo</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -75,11 +75,11 @@
   }
 
   /**
-   * @member {String} assocType
+   * @member {string} assocType
    */
   exports.prototype['assocType'] = undefined;
   /**
-   * @member {Boolean} isPrimary
+   * @member {boolean} isPrimary
    */
   exports.prototype['isPrimary'] = undefined;
 

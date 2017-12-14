@@ -30,7 +30,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new AlfrescoGovernanceServicesSecurityControls.ClassificationreasonsApi();
+    instance = new AlfrescoGovernanceServicesSecurityControls.ClassificationReasonsApi();
   });
 
   var getProperty = function(object, getter, property) {
@@ -49,7 +49,7 @@
       object[property] = value;
   }
 
-  describe('ClassificationreasonsApi', function() {
+  describe('ClassificationReasonsApi', function() {
     describe('createClassificationReason', function() {
       it('should call createClassificationReason successfully', function(done) {
         //uncomment below and update the code to test createClassificationReason

@@ -30,7 +30,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new AlfrescoGovernanceServicesSecurityControls.ClassificationguidesApi();
+    instance = new AlfrescoGovernanceServicesSecurityControls.ClassificationGuidesApi();
   });
 
   var getProperty = function(object, getter, property) {
@@ -49,7 +49,7 @@
       object[property] = value;
   }
 
-  describe('ClassificationguidesApi', function() {
+  describe('ClassificationGuidesApi', function() {
     describe('combinedInstructions', function() {
       it('should call combinedInstructions successfully', function(done) {
         //uncomment below and update the code to test combinedInstructions

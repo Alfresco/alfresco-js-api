@@ -1,13 +1,13 @@
-# AlfrescoGovernanceServicesRestApi.GssitesApi
+# AlfrescoGovernanceServicesRestApi.GsSitesApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/gs/versions/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createRMSite**](GssitesApi.md#createRMSite) | **POST** /gs-sites | Create the Records Management (RM) site
-[**deleteRMSite**](GssitesApi.md#deleteRMSite) | **DELETE** /gs-sites/rm | Delete the Records Management (RM) site
-[**getRMSite**](GssitesApi.md#getRMSite) | **GET** /gs-sites/rm | Get the Records Management (RM) site
-[**updateRMSite**](GssitesApi.md#updateRMSite) | **PUT** /gs-sites/rm | Update the Records Management (RM) site
+[**createRMSite**](GsSitesApi.md#createRMSite) | **POST** /gs-sites | Create the Records Management (RM) site
+[**deleteRMSite**](GsSitesApi.md#deleteRMSite) | **DELETE** /gs-sites/rm | Delete the Records Management (RM) site
+[**getRMSite**](GsSitesApi.md#getRMSite) | **GET** /gs-sites/rm | Get the Records Management (RM) site
+[**updateRMSite**](GsSitesApi.md#updateRMSite) | **PUT** /gs-sites/rm | Update the Records Management (RM) site
 
 
 <a name="createRMSite"></a>

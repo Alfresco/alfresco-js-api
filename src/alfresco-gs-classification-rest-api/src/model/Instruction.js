@@ -35,14 +35,14 @@
 
   /**
    * The Instruction model module.
-   * @module model/Instruction
+   * @module Instruction
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>Instruction</code>.
    * Information about how a piece of content should be secured. This field is only included when requested.
-   * @alias module:model/Instruction
+   * @alias Instruction
    * @class
    */
   var exports = function() {
@@ -56,8 +56,8 @@
    * Constructs a <code>Instruction</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/Instruction} obj Optional instance to populate.
-   * @return {module:model/Instruction} The populated <code>Instruction</code> instance.
+   * @param {Instruction} obj Optional instance to populate.
+   * @return {Instruction} The populated <code>Instruction</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -74,11 +74,11 @@
   }
 
   /**
-   * @member {module:model/ClassificationInformation} classificationInformation
+   * @member {ClassificationInformation} classificationInformation
    */
   exports.prototype['classificationInformation'] = undefined;
   /**
-   * @member {module:model/SecurityMarkInformation} securityMarkInformation
+   * @member {SecurityMarkInformation} securityMarkInformation
    */
   exports.prototype['securityMarkInformation'] = undefined;
 

@@ -35,16 +35,16 @@
 
   /**
    * The SecurityMarkBody model module.
-   * @module model/SecurityMarkBody
+   * @module SecurityMarkBody
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>SecurityMarkBody</code>.
-   * @alias module:model/SecurityMarkBody
+   * @alias SecurityMarkBody
    * @class
-   * @param id {String}
-   * @param groupId {String}
+   * @param id {string}
+   * @param groupId {string}
    */
   var exports = function(id, groupId) {
     var _this = this;
@@ -57,8 +57,8 @@
    * Constructs a <code>SecurityMarkBody</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/SecurityMarkBody} obj Optional instance to populate.
-   * @return {module:model/SecurityMarkBody} The populated <code>SecurityMarkBody</code> instance.
+   * @param {SecurityMarkBody} obj Optional instance to populate.
+   * @return {SecurityMarkBody} The populated <code>SecurityMarkBody</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -75,11 +75,11 @@
   }
 
   /**
-   * @member {String} id
+   * @member {string} id
    */
   exports.prototype['id'] = undefined;
   /**
-   * @member {String} groupId
+   * @member {string} groupId
    */
   exports.prototype['groupId'] = undefined;
 

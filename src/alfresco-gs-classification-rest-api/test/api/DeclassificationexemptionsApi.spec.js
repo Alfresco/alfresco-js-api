@@ -30,7 +30,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new AlfrescoGovernanceServicesSecurityControls.DeclassificationexemptionsApi();
+    instance = new AlfrescoGovernanceServicesSecurityControls.DeclassificationExemptionsApi();
   });
 
   var getProperty = function(object, getter, property) {
@@ -49,7 +49,7 @@
       object[property] = value;
   }
 
-  describe('DeclassificationexemptionsApi', function() {
+  describe('DeclassificationExemptionsApi', function() {
     describe('createDeclassificationExemption', function() {
       it('should call createDeclassificationExemption successfully', function(done) {
         //uncomment below and update the code to test createDeclassificationExemption

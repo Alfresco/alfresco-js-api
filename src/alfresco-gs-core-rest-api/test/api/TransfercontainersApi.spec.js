@@ -1,6 +1,6 @@
 /**
  * Alfresco Governance Services REST API
- * **GS Core API**  Provides access to the core features of Alfresco Governance Services. 
+ * **GS Core API**  Provides access to the core features of Alfresco Governance Services.
  *
  * OpenAPI spec version: 1
  *
@@ -30,7 +30,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new AlfrescoGovernanceServicesRestApi.TransfercontainersApi();
+    instance = new AlfrescoGovernanceServicesRestApi.TransferContainersApi();
   });
 
   var getProperty = function(object, getter, property) {
@@ -49,7 +49,7 @@
       object[property] = value;
   }
 
-  describe('TransfercontainersApi', function() {
+  describe('TransferContainersApi', function() {
     describe('getTransferContainer', function() {
       it('should call getTransferContainer successfully', function(done) {
         //uncomment below and update the code to test getTransferContainer

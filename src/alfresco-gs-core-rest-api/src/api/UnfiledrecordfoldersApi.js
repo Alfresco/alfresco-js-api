@@ -25,22 +25,22 @@
     if (!root.AlfrescoGovernanceServicesRestApi) {
       root.AlfrescoGovernanceServicesRestApi = {};
     }
-    root.AlfrescoGovernanceServicesRestApi.UnfiledrecordfoldersApi = factory(root.AlfrescoGovernanceServicesRestApi.ApiClient, root.AlfrescoGovernanceServicesRestApi.Error, root.AlfrescoGovernanceServicesRestApi.RMNodeBodyCreateWithRelativePath, root.AlfrescoGovernanceServicesRestApi.UnfiledRecordFolderAssociationPaging, root.AlfrescoGovernanceServicesRestApi.UnfiledRecordFolderBodyUpdate, root.AlfrescoGovernanceServicesRestApi.UnfiledRecordFolderEntry);
+    root.AlfrescoGovernanceServicesRestApi.UnfiledRecordFoldersApi = factory(root.AlfrescoGovernanceServicesRestApi.ApiClient, root.AlfrescoGovernanceServicesRestApi.Error, root.AlfrescoGovernanceServicesRestApi.RMNodeBodyCreateWithRelativePath, root.AlfrescoGovernanceServicesRestApi.UnfiledRecordFolderAssociationPaging, root.AlfrescoGovernanceServicesRestApi.UnfiledRecordFolderBodyUpdate, root.AlfrescoGovernanceServicesRestApi.UnfiledRecordFolderEntry);
   }
 }(this, function(ApiClient, Error, RMNodeBodyCreateWithRelativePath, UnfiledRecordFolderAssociationPaging, UnfiledRecordFolderBodyUpdate, UnfiledRecordFolderEntry) {
   'use strict';
 
   /**
    * Unfiledrecordfolders service.
-   * @module api/UnfiledrecordfoldersApi
+   * @module api/UnfiledRecordFoldersApi
    * @version 0.1.0
    */
 
   /**
-   * Constructs a new UnfiledrecordfoldersApi.
-   * @alias module:api/UnfiledrecordfoldersApi
+   * Constructs a new UnfiledRecordFoldersApi.
+   * @alias :api/UnfiledRecordFoldersApi
    * @class
-   * @param {module:ApiClient} apiClient Optional API client implementation to use,
+   * @param {:ApiClient} apiClient Optional API client implementation to use,
    * default to {@link module:ApiClient#instance} if unspecified.
    */
   var exports = function(apiClient) {
@@ -51,13 +51,13 @@
     /**
      * Create a record or an unfiled record folder
      * Create a record or an unfiled record folder as a primary child of **unfiledRecordFolderId**.  You can set the **autoRename** boolean field to automatically resolve name clashes. If there is a name clash, then the API method tries to create a unique name using an integer suffix.  This endpoint supports both JSON and multipart/form-data (file upload).  **Using multipart/form-data**  Use the **filedata** field to represent the content to upload, for example, the following curl command will create a node with the contents of test.txt in the test user&#39;s home folder.  &#x60;&#x60;&#x60;curl -utest:test -X POST host:port/alfresco/api/-default-/public/gs/versions/1/unfiled-record-folders/{unfiledRecordFolderId}/children -F filedata&#x3D;@test.txt&#x60;&#x60;&#x60;  This API method also supports record and unfiled record folder creation using application/json.  You must specify at least a **name** and **nodeType**.  You can create a non-electronic record like this: &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;:\&quot;My Non-electronic Record\&quot;,   \&quot;nodeType\&quot;:\&quot;rma:nonElectronicDocument\&quot;,   \&quot;properties\&quot;:     {       \&quot;cm:description\&quot;:\&quot;My Non-electronic Record Description\&quot;,       \&quot;cm:title\&quot;:\&quot;My Non-electronic Record Title\&quot;,       \&quot;rma:box\&quot;:\&quot;My Non-electronic Record Box\&quot;,       \&quot;rma:file\&quot;:\&quot;My Non-electronic Record File\&quot;,       \&quot;rma:numberOfCopies\&quot;:1,       \&quot;rma:physicalSize\&quot;:30,       \&quot;rma:shelf\&quot;:\&quot;My Non-electronic Record Shelf\&quot;,       \&quot;rma:storageLocation\&quot;:\&quot;My Non-electronic Record Location\&quot;     } } &#x60;&#x60;&#x60;  You can create an empty electronic record like this: &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;:\&quot;My Electronic Record\&quot;,   \&quot;nodeType\&quot;:\&quot;cm:content\&quot; } &#x60;&#x60;&#x60;  You can create an unfiled record folder like this: &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;: \&quot;My Unfiled Record Folder\&quot;,   \&quot;nodeType\&quot;: \&quot;rma:unfiledRecordFolder\&quot;,   \&quot;properties\&quot;:   {     \&quot;cm:title\&quot;: \&quot;My Unfiled Record Folder Title\&quot;   } } &#x60;&#x60;&#x60;  Any missing aspects are applied automatically. You can set aspects explicitly, if needed, using an **aspectNames** field.  **Note:** You can create more than one child by specifying a list of nodes in the JSON body. For example, the following JSON body creates a record and an unfiled record folder inside the specified **unfiledRecordFolderId**: &#x60;&#x60;&#x60;JSON [   {     \&quot;name\&quot;:\&quot;My Record\&quot;,     \&quot;nodeType\&quot;:\&quot;cm:content\&quot;   },   {     \&quot;name\&quot;:\&quot;My Unfiled Record Folder\&quot;,     \&quot;nodeType\&quot;:\&quot;rma:unfiledRecordFolder\&quot;   } ] &#x60;&#x60;&#x60; If you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:  &#x60;&#x60;&#x60;JSON {   \&quot;list\&quot;: {     \&quot;pagination\&quot;: {       \&quot;count\&quot;: 2,       \&quot;hasMoreItems\&quot;: false,       \&quot;totalItems\&quot;: 2,       \&quot;skipCount\&quot;: 0,       \&quot;maxItems\&quot;: 100     },     \&quot;entries\&quot;: [       {         \&quot;entry\&quot;: {           ...         }       },       {         \&quot;entry\&quot;: {           ...         }       }     ]   } } &#x60;&#x60;&#x60;
-     * @param {String} unfiledRecordFolderId The identifier of an unfiled record folder.
-     * @param {module:model/RMNodeBodyCreateWithRelativePath} nodeBodyCreate The node information to create.
+     * @param {string} unfiledRecordFolderId The identifier of an unfiled record folder.
+     * @param {RMNodeBodyCreateWithRelativePath} nodeBodyCreate The node information to create.
      * @param {Object} opts Optional parameters
-     * @param {Boolean} opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
+     * @param {boolean} opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
      * @param {Array.<String>} opts.include Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example: * allowableOperations * path
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/UnfiledRecordFolderAssociationPaging} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleUnfiledRecordFolderAssociationPaging} and HTTP response
      */
     this.createUnfiledRecordFolderChildrenWithHttpInfo = function(unfiledRecordFolderId, nodeBodyCreate, opts) {
       opts = opts || {};
@@ -102,13 +102,13 @@
     /**
      * Create a record or an unfiled record folder
      * Create a record or an unfiled record folder as a primary child of **unfiledRecordFolderId**.  You can set the **autoRename** boolean field to automatically resolve name clashes. If there is a name clash, then the API method tries to create a unique name using an integer suffix.  This endpoint supports both JSON and multipart/form-data (file upload).  **Using multipart/form-data**  Use the **filedata** field to represent the content to upload, for example, the following curl command will create a node with the contents of test.txt in the test user&#39;s home folder.  &#x60;&#x60;&#x60;curl -utest:test -X POST host:port/alfresco/api/-default-/public/gs/versions/1/unfiled-record-folders/{unfiledRecordFolderId}/children -F filedata&#x3D;@test.txt&#x60;&#x60;&#x60;  This API method also supports record and unfiled record folder creation using application/json.  You must specify at least a **name** and **nodeType**.  You can create a non-electronic record like this: &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;:\&quot;My Non-electronic Record\&quot;,   \&quot;nodeType\&quot;:\&quot;rma:nonElectronicDocument\&quot;,   \&quot;properties\&quot;:     {       \&quot;cm:description\&quot;:\&quot;My Non-electronic Record Description\&quot;,       \&quot;cm:title\&quot;:\&quot;My Non-electronic Record Title\&quot;,       \&quot;rma:box\&quot;:\&quot;My Non-electronic Record Box\&quot;,       \&quot;rma:file\&quot;:\&quot;My Non-electronic Record File\&quot;,       \&quot;rma:numberOfCopies\&quot;:1,       \&quot;rma:physicalSize\&quot;:30,       \&quot;rma:shelf\&quot;:\&quot;My Non-electronic Record Shelf\&quot;,       \&quot;rma:storageLocation\&quot;:\&quot;My Non-electronic Record Location\&quot;     } } &#x60;&#x60;&#x60;  You can create an empty electronic record like this: &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;:\&quot;My Electronic Record\&quot;,   \&quot;nodeType\&quot;:\&quot;cm:content\&quot; } &#x60;&#x60;&#x60;  You can create an unfiled record folder like this: &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;: \&quot;My Unfiled Record Folder\&quot;,   \&quot;nodeType\&quot;: \&quot;rma:unfiledRecordFolder\&quot;,   \&quot;properties\&quot;:   {     \&quot;cm:title\&quot;: \&quot;My Unfiled Record Folder Title\&quot;   } } &#x60;&#x60;&#x60;  Any missing aspects are applied automatically. You can set aspects explicitly, if needed, using an **aspectNames** field.  **Note:** You can create more than one child by specifying a list of nodes in the JSON body. For example, the following JSON body creates a record and an unfiled record folder inside the specified **unfiledRecordFolderId**: &#x60;&#x60;&#x60;JSON [   {     \&quot;name\&quot;:\&quot;My Record\&quot;,     \&quot;nodeType\&quot;:\&quot;cm:content\&quot;   },   {     \&quot;name\&quot;:\&quot;My Unfiled Record Folder\&quot;,     \&quot;nodeType\&quot;:\&quot;rma:unfiledRecordFolder\&quot;   } ] &#x60;&#x60;&#x60; If you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:  &#x60;&#x60;&#x60;JSON {   \&quot;list\&quot;: {     \&quot;pagination\&quot;: {       \&quot;count\&quot;: 2,       \&quot;hasMoreItems\&quot;: false,       \&quot;totalItems\&quot;: 2,       \&quot;skipCount\&quot;: 0,       \&quot;maxItems\&quot;: 100     },     \&quot;entries\&quot;: [       {         \&quot;entry\&quot;: {           ...         }       },       {         \&quot;entry\&quot;: {           ...         }       }     ]   } } &#x60;&#x60;&#x60;
-     * @param {String} unfiledRecordFolderId The identifier of an unfiled record folder.
-     * @param {module:model/RMNodeBodyCreateWithRelativePath} nodeBodyCreate The node information to create.
+     * @param {string} unfiledRecordFolderId The identifier of an unfiled record folder.
+     * @param {RMNodeBodyCreateWithRelativePath} nodeBodyCreate The node information to create.
      * @param {Object} opts Optional parameters
-     * @param {Boolean} opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
+     * @param {boolean} opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
      * @param {Array.<String>} opts.include Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example: * allowableOperations * path
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/UnfiledRecordFolderAssociationPaging}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleUnfiledRecordFolderAssociationPaging}
      */
     this.createUnfiledRecordFolderChildren = function(unfiledRecordFolderId, nodeBodyCreate, opts) {
       return this.createUnfiledRecordFolderChildrenWithHttpInfo(unfiledRecordFolderId, nodeBodyCreate, opts)
@@ -121,7 +121,7 @@
     /**
      * Delete an unfiled record folder. Deleted file plan components cannot be recovered, they are deleted permanently.
      * Deletes the unfiled record folder **unfiledRecordFolderId**.
-     * @param {String} unfiledRecordFolderId The identifier of an unfiled record folder.
+     * @param {string} unfiledRecordFolderId The identifier of an unfiled record folder.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
     this.deleteUnfiledRecordFolderWithHttpInfo = function(unfiledRecordFolderId) {
@@ -158,7 +158,7 @@
     /**
      * Delete an unfiled record folder. Deleted file plan components cannot be recovered, they are deleted permanently.
      * Deletes the unfiled record folder **unfiledRecordFolderId**.
-     * @param {String} unfiledRecordFolderId The identifier of an unfiled record folder.
+     * @param {string} unfiledRecordFolderId The identifier of an unfiled record folder.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
     this.deleteUnfiledRecordFolder = function(unfiledRecordFolderId) {
@@ -172,12 +172,12 @@
     /**
      * Get the unfiled record folder
      * Gets information for unfiled record folder id **unfiledRecordFolderId**  Mandatory fields and the unfiled record folder&#39;s aspects and properties are returned by default.  You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information.
-     * @param {String} unfiledRecordFolderId The identifier of an unfiled record folder.
+     * @param {string} unfiledRecordFolderId The identifier of an unfiled record folder.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example: * allowableOperations * path
-     * @param {String} opts.relativePath Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
+     * @param {string} opts.relativePath Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/UnfiledRecordFolderEntry} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleUnfiledRecordFolderEntry} and HTTP response
      */
     this.getUnfiledRecordFolderWithHttpInfo = function(unfiledRecordFolderId, opts) {
       opts = opts || {};
@@ -217,12 +217,12 @@
     /**
      * Get the unfiled record folder
      * Gets information for unfiled record folder id **unfiledRecordFolderId**  Mandatory fields and the unfiled record folder&#39;s aspects and properties are returned by default.  You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information.
-     * @param {String} unfiledRecordFolderId The identifier of an unfiled record folder.
+     * @param {string} unfiledRecordFolderId The identifier of an unfiled record folder.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example: * allowableOperations * path
-     * @param {String} opts.relativePath Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
+     * @param {string} opts.relativePath Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/UnfiledRecordFolderEntry}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleUnfiledRecordFolderEntry}
      */
     this.getUnfiledRecordFolder = function(unfiledRecordFolderId, opts) {
       return this.getUnfiledRecordFolderWithHttpInfo(unfiledRecordFolderId, opts)
@@ -235,16 +235,16 @@
     /**
      * List unfiled record folder&#39;s children
      * Returns a list of records or unfiled record folders.  Minimal information for each child is returned by default.  You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information.
-     * @param {String} unfiledRecordFolderId The identifier of an unfiled record folder.
+     * @param {string} unfiledRecordFolderId The identifier of an unfiled record folder.
      * @param {Object} opts Optional parameters
-     * @param {Number} opts.skipCount The number of entities that exist in the collection before those included in this list.
-     * @param {Number} opts.maxItems The maximum number of items to return in the list.
-     * @param {String} opts.where Optionally filter the list. Here are some examples:  *   &#x60;&#x60;&#x60;where&#x3D;(isRecord&#x3D;true)&#x60;&#x60;&#x60;  *   &#x60;&#x60;&#x60;where&#x3D;(isUnfiledRecordFolder&#x3D;false)&#x60;&#x60;&#x60;  *   &#x60;&#x60;&#x60;where&#x3D;(nodeType&#x3D;&#39;cm:content INCLUDESUBTYPES&#39;)&#x60;&#x60;&#x60;
+     * @param {number} opts.skipCount The number of entities that exist in the collection before those included in this list.
+     * @param {number} opts.maxItems The maximum number of items to return in the list.
+     * @param {string} opts.where Optionally filter the list. Here are some examples:  *   &#x60;&#x60;&#x60;where&#x3D;(isRecord&#x3D;true)&#x60;&#x60;&#x60;  *   &#x60;&#x60;&#x60;where&#x3D;(isUnfiledRecordFolder&#x3D;false)&#x60;&#x60;&#x60;  *   &#x60;&#x60;&#x60;where&#x3D;(nodeType&#x3D;&#39;cm:content INCLUDESUBTYPES&#39;)&#x60;&#x60;&#x60;
      * @param {Array.<String>} opts.include Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example: * allowableOperations * aspectNames * association * path * properties
-     * @param {String} opts.relativePath Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
-     * @param {Boolean} opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**.
+     * @param {string} opts.relativePath Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
+     * @param {boolean} opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**.
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/UnfiledRecordFolderAssociationPaging} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleUnfiledRecordFolderAssociationPaging} and HTTP response
      */
     this.listUnfiledRecordFolderChildrenWithHttpInfo = function(unfiledRecordFolderId, opts) {
       opts = opts || {};
@@ -288,16 +288,16 @@
     /**
      * List unfiled record folder&#39;s children
      * Returns a list of records or unfiled record folders.  Minimal information for each child is returned by default.  You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information.
-     * @param {String} unfiledRecordFolderId The identifier of an unfiled record folder.
+     * @param {string} unfiledRecordFolderId The identifier of an unfiled record folder.
      * @param {Object} opts Optional parameters
-     * @param {Number} opts.skipCount The number of entities that exist in the collection before those included in this list.
-     * @param {Number} opts.maxItems The maximum number of items to return in the list.
-     * @param {String} opts.where Optionally filter the list. Here are some examples:  *   &#x60;&#x60;&#x60;where&#x3D;(isRecord&#x3D;true)&#x60;&#x60;&#x60;  *   &#x60;&#x60;&#x60;where&#x3D;(isUnfiledRecordFolder&#x3D;false)&#x60;&#x60;&#x60;  *   &#x60;&#x60;&#x60;where&#x3D;(nodeType&#x3D;&#39;cm:content INCLUDESUBTYPES&#39;)&#x60;&#x60;&#x60;
+     * @param {number} opts.skipCount The number of entities that exist in the collection before those included in this list.
+     * @param {number} opts.maxItems The maximum number of items to return in the list.
+     * @param {string} opts.where Optionally filter the list. Here are some examples:  *   &#x60;&#x60;&#x60;where&#x3D;(isRecord&#x3D;true)&#x60;&#x60;&#x60;  *   &#x60;&#x60;&#x60;where&#x3D;(isUnfiledRecordFolder&#x3D;false)&#x60;&#x60;&#x60;  *   &#x60;&#x60;&#x60;where&#x3D;(nodeType&#x3D;&#39;cm:content INCLUDESUBTYPES&#39;)&#x60;&#x60;&#x60;
      * @param {Array.<String>} opts.include Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example: * allowableOperations * aspectNames * association * path * properties
-     * @param {String} opts.relativePath Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
-     * @param {Boolean} opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**.
+     * @param {string} opts.relativePath Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
+     * @param {boolean} opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**.
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/UnfiledRecordFolderAssociationPaging}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleUnfiledRecordFolderAssociationPaging}
      */
     this.listUnfiledRecordFolderChildren = function(unfiledRecordFolderId, opts) {
       return this.listUnfiledRecordFolderChildrenWithHttpInfo(unfiledRecordFolderId, opts)
@@ -310,13 +310,13 @@
     /**
      * Update an unfiled record folder
      * Updates unfiled record folder **unfiledRecordFolderId**. For example, you can rename a record folder: &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;:\&quot;My new name\&quot; } &#x60;&#x60;&#x60; You can also set or update one or more properties: &#x60;&#x60;&#x60;JSON {   \&quot;properties\&quot;:     {        \&quot;cm:title\&quot;:\&quot;New title\&quot;,        \&quot;cm:description\&quot;:\&quot;New description\&quot;     } } &#x60;&#x60;&#x60; **Note:** if you want to add or remove aspects, then you must use **GET /unfiled-record-folders/{unfiledRecordFolderId}** first to get the complete set of *aspectNames*.  **Note:** Currently there is no optimistic locking for updates, so they are applied in \&quot;last one wins\&quot; order.
-     * @param {String} unfiledRecordFolderId The identifier of an unfiled record folder.
-     * @param {module:model/UnfiledRecordFolderBodyUpdate} unfiledRecordFolderBodyUpdate The record folder information to update.
+     * @param {string} unfiledRecordFolderId The identifier of an unfiled record folder.
+     * @param {UnfiledRecordFolderBodyUpdate} unfiledRecordFolderBodyUpdate The record folder information to update.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example: * allowableOperations * path
-     * @param {Boolean} opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**.
+     * @param {boolean} opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**.
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/UnfiledRecordFolderEntry} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleUnfiledRecordFolderEntry} and HTTP response
      */
     this.updateUnfiledRecordFolderWithHttpInfo = function(unfiledRecordFolderId, unfiledRecordFolderBodyUpdate, opts) {
       opts = opts || {};
@@ -361,13 +361,13 @@
     /**
      * Update an unfiled record folder
      * Updates unfiled record folder **unfiledRecordFolderId**. For example, you can rename a record folder: &#x60;&#x60;&#x60;JSON {   \&quot;name\&quot;:\&quot;My new name\&quot; } &#x60;&#x60;&#x60; You can also set or update one or more properties: &#x60;&#x60;&#x60;JSON {   \&quot;properties\&quot;:     {        \&quot;cm:title\&quot;:\&quot;New title\&quot;,        \&quot;cm:description\&quot;:\&quot;New description\&quot;     } } &#x60;&#x60;&#x60; **Note:** if you want to add or remove aspects, then you must use **GET /unfiled-record-folders/{unfiledRecordFolderId}** first to get the complete set of *aspectNames*.  **Note:** Currently there is no optimistic locking for updates, so they are applied in \&quot;last one wins\&quot; order.
-     * @param {String} unfiledRecordFolderId The identifier of an unfiled record folder.
-     * @param {module:model/UnfiledRecordFolderBodyUpdate} unfiledRecordFolderBodyUpdate The record folder information to update.
+     * @param {string} unfiledRecordFolderId The identifier of an unfiled record folder.
+     * @param {UnfiledRecordFolderBodyUpdate} unfiledRecordFolderBodyUpdate The record folder information to update.
      * @param {Object} opts Optional parameters
      * @param {Array.<String>} opts.include Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example: * allowableOperations * path
-     * @param {Boolean} opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**.
+     * @param {boolean} opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**.
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/UnfiledRecordFolderEntry}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link moduleUnfiledRecordFolderEntry}
      */
     this.updateUnfiledRecordFolder = function(unfiledRecordFolderId, unfiledRecordFolderBodyUpdate, opts) {
       return this.updateUnfiledRecordFolderWithHttpInfo(unfiledRecordFolderId, unfiledRecordFolderBodyUpdate, opts)

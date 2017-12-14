@@ -35,18 +35,18 @@
 
   /**
    * The ClassificationGuide model module.
-   * @module model/ClassificationGuide
+   * @module ClassificationGuide
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>ClassificationGuide</code>.
    * A classification guide.
-   * @alias module:model/ClassificationGuide
+   * @alias ClassificationGuide
    * @class
-   * @implements module:model/ClassificationGuideInTopic
-   * @param name {String}
-   * @param originatingOrganization {String}
+   * @implements moduleClassificationGuideInTopic
+   * @param name {string}
+   * @param originatingOrganization {string}
    * @param publishedOn {Date}
    */
   var exports = function(name, originatingOrganization, publishedOn) {
@@ -59,8 +59,8 @@
    * Constructs a <code>ClassificationGuide</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/ClassificationGuide} obj Optional instance to populate.
-   * @return {module:model/ClassificationGuide} The populated <code>ClassificationGuide</code> instance.
+   * @param {ClassificationGuide} obj Optional instance to populate.
+   * @return {ClassificationGuide} The populated <code>ClassificationGuide</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -74,12 +74,12 @@
 
   // Implement ClassificationGuideInTopic interface:
   /**
-   * @member {String} name
+   * @member {string} name
    */
 exports.prototype['name'] = undefined;
 
   /**
-   * @member {String} originatingOrganization
+   * @member {string} originatingOrganization
    */
 exports.prototype['originatingOrganization'] = undefined;
 
@@ -89,7 +89,7 @@ exports.prototype['originatingOrganization'] = undefined;
 exports.prototype['publishedOn'] = undefined;
 
   /**
-   * @member {Boolean} enabled
+   * @member {boolean} enabled
    * @default false
    */
 exports.prototype['enabled'] = false;

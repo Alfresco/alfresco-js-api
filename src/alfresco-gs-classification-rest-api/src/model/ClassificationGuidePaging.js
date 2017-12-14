@@ -35,13 +35,13 @@
 
   /**
    * The ClassificationGuidePaging model module.
-   * @module model/ClassificationGuidePaging
+   * @module ClassificationGuidePaging
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>ClassificationGuidePaging</code>.
-   * @alias module:model/ClassificationGuidePaging
+   * @alias ClassificationGuidePaging
    * @class
    */
   var exports = function() {
@@ -54,8 +54,8 @@
    * Constructs a <code>ClassificationGuidePaging</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/ClassificationGuidePaging} obj Optional instance to populate.
-   * @return {module:model/ClassificationGuidePaging} The populated <code>ClassificationGuidePaging</code> instance.
+   * @param {ClassificationGuidePaging} obj Optional instance to populate.
+   * @return {ClassificationGuidePaging} The populated <code>ClassificationGuidePaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -69,7 +69,7 @@
   }
 
   /**
-   * @member {module:model/ClassificationGuidePagingList} list
+   * @member {ClassificationGuidePagingList} list
    */
   exports.prototype['list'] = undefined;
 

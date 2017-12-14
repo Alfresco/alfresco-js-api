@@ -35,13 +35,13 @@
 
   /**
    * The TopicPagingList model module.
-   * @module model/TopicPagingList
+   * @module TopicPagingList
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>TopicPagingList</code>.
-   * @alias module:model/TopicPagingList
+   * @alias TopicPagingList
    * @class
    */
   var exports = function() {
@@ -55,8 +55,8 @@
    * Constructs a <code>TopicPagingList</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/TopicPagingList} obj Optional instance to populate.
-   * @return {module:model/TopicPagingList} The populated <code>TopicPagingList</code> instance.
+   * @param {TopicPagingList} obj Optional instance to populate.
+   * @return {TopicPagingList} The populated <code>TopicPagingList</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -73,11 +73,11 @@
   }
 
   /**
-   * @member {module:model/Pagination} pagination
+   * @member {Pagination} pagination
    */
   exports.prototype['pagination'] = undefined;
   /**
-   * @member {Array.<module:model/TopicEntry>} entries
+   * @member {Array.<moduleTopicEntry>} entries
    */
   exports.prototype['entries'] = undefined;
 

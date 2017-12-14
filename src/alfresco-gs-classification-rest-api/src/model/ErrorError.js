@@ -35,18 +35,18 @@
 
   /**
    * The ErrorError model module.
-   * @module model/ErrorError
+   * @module ErrorError
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>ErrorError</code>.
-   * @alias module:model/ErrorError
+   * @alias ErrorError
    * @class
-   * @param statusCode {Number}
-   * @param briefSummary {String}
-   * @param stackTrace {String}
-   * @param descriptionURL {String}
+   * @param statusCode {number}
+   * @param briefSummary {string}
+   * @param stackTrace {string}
+   * @param descriptionURL {string}
    */
   var exports = function(statusCode, briefSummary, stackTrace, descriptionURL) {
     var _this = this;
@@ -62,8 +62,8 @@
    * Constructs a <code>ErrorError</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/ErrorError} obj Optional instance to populate.
-   * @return {module:model/ErrorError} The populated <code>ErrorError</code> instance.
+   * @param {ErrorError} obj Optional instance to populate.
+   * @return {ErrorError} The populated <code>ErrorError</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -89,23 +89,23 @@
   }
 
   /**
-   * @member {String} errorKey
+   * @member {string} errorKey
    */
   exports.prototype['errorKey'] = undefined;
   /**
-   * @member {Number} statusCode
+   * @member {number} statusCode
    */
   exports.prototype['statusCode'] = undefined;
   /**
-   * @member {String} briefSummary
+   * @member {string} briefSummary
    */
   exports.prototype['briefSummary'] = undefined;
   /**
-   * @member {String} stackTrace
+   * @member {string} stackTrace
    */
   exports.prototype['stackTrace'] = undefined;
   /**
-   * @member {String} descriptionURL
+   * @member {string} descriptionURL
    */
   exports.prototype['descriptionURL'] = undefined;
 

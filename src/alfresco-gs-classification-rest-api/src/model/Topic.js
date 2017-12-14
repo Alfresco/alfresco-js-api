@@ -35,17 +35,17 @@
 
   /**
    * The Topic model module.
-   * @module model/Topic
+   * @module Topic
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>Topic</code>.
-   * @alias module:model/Topic
+   * @alias Topic
    * @class
-   * @param id {String}
-   * @param name {String}
-   * @param hasInstruction {Boolean} Flag indicating whether the topic has an instruction or not.
+   * @param id {string}
+   * @param name {string}
+   * @param hasInstruction {boolean} Flag indicating whether the topic has an instruction or not.
    * @param createdAt {Date}
    */
   var exports = function(id, name, hasInstruction, createdAt) {
@@ -66,8 +66,8 @@
    * Constructs a <code>Topic</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/Topic} obj Optional instance to populate.
-   * @return {module:model/Topic} The populated <code>Topic</code> instance.
+   * @param {Topic} obj Optional instance to populate.
+   * @return {Topic} The populated <code>Topic</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -105,24 +105,24 @@
   }
 
   /**
-   * @member {String} id
+   * @member {string} id
    */
   exports.prototype['id'] = undefined;
   /**
-   * @member {String} name
+   * @member {string} name
    */
   exports.prototype['name'] = undefined;
   /**
-   * @member {String} description
+   * @member {string} description
    */
   exports.prototype['description'] = undefined;
   /**
    * Flag indicating whether the topic has an instruction or not.
-   * @member {Boolean} hasInstruction
+   * @member {boolean} hasInstruction
    */
   exports.prototype['hasInstruction'] = undefined;
   /**
-   * @member {module:model/Instruction} instruction
+   * @member {Instruction} instruction
    */
   exports.prototype['instruction'] = undefined;
   /**
@@ -131,16 +131,16 @@
   exports.prototype['createdAt'] = undefined;
   /**
    * Flag indicating whether the topic has subtopics. This field is only included when requested.
-   * @member {Boolean} hasSubtopics
+   * @member {boolean} hasSubtopics
    * @default false
    */
   exports.prototype['hasSubtopics'] = false;
   /**
-   * @member {module:model/Path} path
+   * @member {Path} path
    */
   exports.prototype['path'] = undefined;
   /**
-   * @member {module:model/ClassificationGuideInTopic} classificationGuide
+   * @member {ClassificationGuideInTopic} classificationGuide
    */
   exports.prototype['classificationGuide'] = undefined;
 

@@ -35,15 +35,15 @@
 
   /**
    * The RecordCategoryChildEntry model module.
-   * @module model/RecordCategoryChildEntry
+   * @module  RecordCategoryChildEntry
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>RecordCategoryChildEntry</code>.
-   * @alias module:model/RecordCategoryChildEntry
+   * @alias RecordCategoryChildEntry
    * @class
-   * @param entry {module:model/RecordCategoryChild}
+   * @param entry {RecordCategoryChild}
    */
   var exports = function(entry) {
     var _this = this;
@@ -55,8 +55,8 @@
    * Constructs a <code>RecordCategoryChildEntry</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/RecordCategoryChildEntry} obj Optional instance to populate.
-   * @return {module:model/RecordCategoryChildEntry} The populated <code>RecordCategoryChildEntry</code> instance.
+   * @param {RecordCategoryChildEntry} obj Optional instance to populate.
+   * @return {RecordCategoryChildEntry} The populated <code>RecordCategoryChildEntry</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -70,7 +70,7 @@
   }
 
   /**
-   * @member {module:model/RecordCategoryChild} entry
+   * @member {RecordCategoryChild} entry
    */
   exports.prototype['entry'] = undefined;
 

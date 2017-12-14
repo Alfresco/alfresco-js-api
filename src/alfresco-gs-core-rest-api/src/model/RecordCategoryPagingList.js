@@ -35,13 +35,13 @@
 
   /**
    * The RecordCategoryPagingList model module.
-   * @module model/RecordCategoryPagingList
+   * @module  RecordCategoryPagingList
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>RecordCategoryPagingList</code>.
-   * @alias module:model/RecordCategoryPagingList
+   * @alias RecordCategoryPagingList
    * @class
    */
   var exports = function() {
@@ -56,8 +56,8 @@
    * Constructs a <code>RecordCategoryPagingList</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/RecordCategoryPagingList} obj Optional instance to populate.
-   * @return {module:model/RecordCategoryPagingList} The populated <code>RecordCategoryPagingList</code> instance.
+   * @param {RecordCategoryPagingList} obj Optional instance to populate.
+   * @return {RecordCategoryPagingList} The populated <code>RecordCategoryPagingList</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -77,15 +77,15 @@
   }
 
   /**
-   * @member {module:model/Pagination} pagination
+   * @member {Pagination} pagination
    */
   exports.prototype['pagination'] = undefined;
   /**
-   * @member {Array.<module:model/RecordCategoryEntry>} entries
+   * @member {Array.<moduleRecordCategoryEntry>} entries
    */
   exports.prototype['entries'] = undefined;
   /**
-   * @member {module:model/FilePlan} source
+   * @member {FilePlan} source
    */
   exports.prototype['source'] = undefined;
 

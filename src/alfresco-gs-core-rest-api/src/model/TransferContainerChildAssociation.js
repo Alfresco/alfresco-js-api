@@ -35,21 +35,21 @@
 
   /**
    * The TransferContainerChildAssociation model module.
-   * @module model/TransferContainerChildAssociation
+   * @module  TransferContainerChildAssociation
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>TransferContainerChildAssociation</code>.
-   * @alias module:model/TransferContainerChildAssociation
+   * @alias TransferContainerChildAssociation
    * @class
-   * @implements module:model/TransferContainerChild
-   * @param id {String}
-   * @param parentId {String}
-   * @param name {String} The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |. The character . must not be used at the end of the name.
-   * @param nodeType {String}
+   * @implements moduleTransferContainerChild
+   * @param id {string}
+   * @param parentId {string}
+   * @param name {string} The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |. The character . must not be used at the end of the name.
+   * @param nodeType {string}
    * @param createdAt {Date}
-   * @param createdByUser {module:model/UserInfo}
+   * @param createdByUser {UserInfo}
    */
   var exports = function(id, parentId, name, nodeType, createdAt, createdByUser) {
     var _this = this;
@@ -62,8 +62,8 @@
    * Constructs a <code>TransferContainerChildAssociation</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/TransferContainerChildAssociation} obj Optional instance to populate.
-   * @return {module:model/TransferContainerChildAssociation} The populated <code>TransferContainerChildAssociation</code> instance.
+   * @param {TransferContainerChildAssociation} obj Optional instance to populate.
+   * @return {TransferContainerChildAssociation} The populated <code>TransferContainerChildAssociation</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -78,29 +78,29 @@
   }
 
   /**
-   * @member {module:model/ChildAssociationInfo} association
+   * @member {ChildAssociationInfo} association
    */
   exports.prototype['association'] = undefined;
 
   // Implement TransferContainerChild interface:
   /**
-   * @member {String} id
+   * @member {string} id
    */
 exports.prototype['id'] = undefined;
 
   /**
-   * @member {String} parentId
+   * @member {string} parentId
    */
 exports.prototype['parentId'] = undefined;
 
   /**
    * The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |. The character . must not be used at the end of the name.
-   * @member {String} name
+   * @member {string} name
    */
 exports.prototype['name'] = undefined;
 
   /**
-   * @member {String} nodeType
+   * @member {string} nodeType
    */
 exports.prototype['nodeType'] = undefined;
 
@@ -110,26 +110,26 @@ exports.prototype['nodeType'] = undefined;
 exports.prototype['createdAt'] = undefined;
 
   /**
-   * @member {module:model/UserInfo} createdByUser
+   * @member {UserInfo} createdByUser
    */
 exports.prototype['createdByUser'] = undefined;
 
   /**
    * Present only for transfer nodes.
-   * @member {Boolean} transferPDFIndicator
+   * @member {boolean} transferPDFIndicator
    * @default false
    */
 exports.prototype['transferPDFIndicator'] = false;
 
   /**
    * Present only for transfer nodes.
-   * @member {String} transferLocation
+   * @member {string} transferLocation
    */
 exports.prototype['transferLocation'] = undefined;
 
   /**
    * Present only for transfer nodes.
-   * @member {Boolean} transferAccessionIndicator
+   * @member {boolean} transferAccessionIndicator
    * @default false
    */
 exports.prototype['transferAccessionIndicator'] = false;

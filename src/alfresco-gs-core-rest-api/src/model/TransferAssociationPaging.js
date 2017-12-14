@@ -35,13 +35,13 @@
 
   /**
    * The TransferAssociationPaging model module.
-   * @module model/TransferAssociationPaging
+   * @module  TransferAssociationPaging
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>TransferAssociationPaging</code>.
-   * @alias module:model/TransferAssociationPaging
+   * @alias TransferAssociationPaging
    * @class
    */
   var exports = function() {
@@ -54,8 +54,8 @@
    * Constructs a <code>TransferAssociationPaging</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/TransferAssociationPaging} obj Optional instance to populate.
-   * @return {module:model/TransferAssociationPaging} The populated <code>TransferAssociationPaging</code> instance.
+   * @param {TransferAssociationPaging} obj Optional instance to populate.
+   * @return {TransferAssociationPaging} The populated <code>TransferAssociationPaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -69,7 +69,7 @@
   }
 
   /**
-   * @member {module:model/TransferAssociationPagingList} list
+   * @member {TransferAssociationPagingList} list
    */
   exports.prototype['list'] = undefined;
 

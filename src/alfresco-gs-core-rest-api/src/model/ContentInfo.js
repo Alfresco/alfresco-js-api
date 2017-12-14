@@ -35,18 +35,18 @@
 
   /**
    * The ContentInfo model module.
-   * @module model/ContentInfo
+   * @module  ContentInfo
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>ContentInfo</code>.
-   * @alias module:model/ContentInfo
+   * @alias ContentInfo
    * @class
-   * @param mimeType {String}
-   * @param mimeTypeName {String}
-   * @param sizeInBytes {Number}
-   * @param encoding {String}
+   * @param mimeType {string}
+   * @param mimeTypeName {string}
+   * @param sizeInBytes {number}
+   * @param encoding {string}
    */
   var exports = function(mimeType, mimeTypeName, sizeInBytes, encoding) {
     var _this = this;
@@ -61,8 +61,8 @@
    * Constructs a <code>ContentInfo</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/ContentInfo} obj Optional instance to populate.
-   * @return {module:model/ContentInfo} The populated <code>ContentInfo</code> instance.
+   * @param {ContentInfo} obj Optional instance to populate.
+   * @return {ContentInfo} The populated <code>ContentInfo</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -85,19 +85,19 @@
   }
 
   /**
-   * @member {String} mimeType
+   * @member {string} mimeType
    */
   exports.prototype['mimeType'] = undefined;
   /**
-   * @member {String} mimeTypeName
+   * @member {string} mimeTypeName
    */
   exports.prototype['mimeTypeName'] = undefined;
   /**
-   * @member {Number} sizeInBytes
+   * @member {number} sizeInBytes
    */
   exports.prototype['sizeInBytes'] = undefined;
   /**
-   * @member {String} encoding
+   * @member {string} encoding
    */
   exports.prototype['encoding'] = undefined;
 

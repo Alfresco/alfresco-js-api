@@ -35,17 +35,17 @@
 
   /**
    * The DeclassificationExemption model module.
-   * @module model/DeclassificationExemption
+   * @module DeclassificationExemption
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>DeclassificationExemption</code>.
-   * @alias module:model/DeclassificationExemption
+   * @alias DeclassificationExemption
    * @class
-   * @param id {String}
-   * @param code {String}
-   * @param description {String}
+   * @param id {string}
+   * @param code {string}
+   * @param description {string}
    */
   var exports = function(id, code, description) {
     var _this = this;
@@ -59,8 +59,8 @@
    * Constructs a <code>DeclassificationExemption</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/DeclassificationExemption} obj Optional instance to populate.
-   * @return {module:model/DeclassificationExemption} The populated <code>DeclassificationExemption</code> instance.
+   * @param {DeclassificationExemption} obj Optional instance to populate.
+   * @return {DeclassificationExemption} The populated <code>DeclassificationExemption</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -80,15 +80,15 @@
   }
 
   /**
-   * @member {String} id
+   * @member {string} id
    */
   exports.prototype['id'] = undefined;
   /**
-   * @member {String} code
+   * @member {string} code
    */
   exports.prototype['code'] = undefined;
   /**
-   * @member {String} description
+   * @member {string} description
    */
   exports.prototype['description'] = undefined;
 

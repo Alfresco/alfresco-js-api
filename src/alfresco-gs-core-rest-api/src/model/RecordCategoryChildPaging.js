@@ -35,13 +35,13 @@
 
   /**
    * The RecordCategoryChildPaging model module.
-   * @module model/RecordCategoryChildPaging
+   * @module  RecordCategoryChildPaging
    * @version 0.1.0
    */
 
   /**
    * Constructs a new <code>RecordCategoryChildPaging</code>.
-   * @alias module:model/RecordCategoryChildPaging
+   * @alias RecordCategoryChildPaging
    * @class
    */
   var exports = function() {
@@ -54,8 +54,8 @@
    * Constructs a <code>RecordCategoryChildPaging</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/RecordCategoryChildPaging} obj Optional instance to populate.
-   * @return {module:model/RecordCategoryChildPaging} The populated <code>RecordCategoryChildPaging</code> instance.
+   * @param {RecordCategoryChildPaging} obj Optional instance to populate.
+   * @return {RecordCategoryChildPaging} The populated <code>RecordCategoryChildPaging</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -69,7 +69,7 @@
   }
 
   /**
-   * @member {module:model/RecordCategoryChildPagingList} list
+   * @member {RecordCategoryChildPagingList} list
    */
   exports.prototype['list'] = undefined;
 

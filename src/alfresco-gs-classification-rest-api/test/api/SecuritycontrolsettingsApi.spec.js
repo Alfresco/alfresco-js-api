@@ -30,7 +30,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new AlfrescoGovernanceServicesSecurityControls.SecuritycontrolsettingsApi();
+    instance = new AlfrescoGovernanceServicesSecurityControls.SecurityControlSettingsApi();
   });
 
   var getProperty = function(object, getter, property) {
@@ -49,7 +49,7 @@
       object[property] = value;
   }
 
-  describe('SecuritycontrolsettingsApi', function() {
+  describe('SecurityControlSettingsApi', function() {
     describe('getSecurityControlSetting', function() {
       it('should call getSecurityControlSetting successfully', function(done) {
         //uncomment below and update the code to test getSecurityControlSetting
