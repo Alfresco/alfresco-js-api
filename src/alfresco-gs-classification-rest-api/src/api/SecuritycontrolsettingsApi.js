@@ -41,7 +41,7 @@
      * @param {string} securityControlSettingKey The key for the security control setting. You can use one of the following settings: * -declassificationTimeFrame- for the declassification time frame value set in alfresco-global.properties file
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleSecurityControlSettingEntry} and HTTP response
      */
-    this.getSecurityControlSettingWithHttpInfo = function(securityControlSettingKey) {
+    this.getSecurityControlSetting = function(securityControlSettingKey) {
       var postBody = null;
 
       // verify the required parameter 'securityControlSettingKey' is set
@@ -79,7 +79,7 @@
      * @param {SecurityControlSettingBody} securityControlSettingValue The new value for the security control setting. This can be a string or number, depending on the setting key.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleSecurityControlSettingEntry} and HTTP response
      */
-    this.updateSecurityControlSettingWithHttpInfo = function(securityControlSettingKey, securityControlSettingValue) {
+    this.updateSecurityControlSetting = function(securityControlSettingKey, securityControlSettingValue) {
       var postBody = securityControlSettingValue;
 
       // verify the required parameter 'securityControlSettingKey' is set

@@ -41,7 +41,7 @@
      * @param {ClassificationReasonBody} classificationReason Classification reason
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleClassificationReasonEntry} and HTTP response
      */
-    this.createClassificationReasonWithHttpInfo = function(classificationReason) {
+    this.createClassificationReason = function(classificationReason) {
       var postBody = classificationReason;
 
       // verify the required parameter 'classificationReason' is set
@@ -77,7 +77,7 @@
      * @param {string} classificationReasonId The identifier for the classification reason
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    this.deleteClassificationReasonWithHttpInfo = function(classificationReasonId) {
+    this.deleteClassificationReason = function(classificationReasonId) {
       var postBody = null;
 
       // verify the required parameter 'classificationReasonId' is set
@@ -117,7 +117,7 @@
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleClassificationReasonsPaging} and HTTP response
      */
-    this.listClassificationReasonsWithHttpInfo = function(opts) {
+    this.listClassificationReasons = function(opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -153,7 +153,7 @@
      * @param {string} classificationReasonId The identifier for the classification reason
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleClassificationReasonEntry} and HTTP response
      */
-    this.showClassificationReasonByIdWithHttpInfo = function(classificationReasonId) {
+    this.showClassificationReasonById = function(classificationReasonId) {
       var postBody = null;
 
       // verify the required parameter 'classificationReasonId' is set
@@ -191,7 +191,7 @@
      * @param {ClassificationReasonBody} classificationReason Classification reason
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleClassificationReasonEntry} and HTTP response
      */
-    this.updateClassificationReasonWithHttpInfo = function(classificationReasonId, classificationReason) {
+    this.updateClassificationReason = function(classificationReasonId, classificationReason) {
       var postBody = classificationReason;
 
       // verify the required parameter 'classificationReasonId' is set

@@ -41,7 +41,7 @@
      * @param {DeclassificationExemptionBody} declassificationExemption Declassification exemption
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleDeclassificationExemptionEntry} and HTTP response
      */
-    this.createDeclassificationExemptionWithHttpInfo = function(declassificationExemption) {
+    this.createDeclassificationExemption = function(declassificationExemption) {
       var postBody = declassificationExemption;
 
       // verify the required parameter 'declassificationExemption' is set
@@ -78,7 +78,7 @@
      * @param {string} declassificationExemptionId The identifier for the declassification exemption
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    this.deleteDeclassificationExemptionWithHttpInfo = function(declassificationExemptionId) {
+    this.deleteDeclassificationExemption = function(declassificationExemptionId) {
       var postBody = null;
 
       // verify the required parameter 'declassificationExemptionId' is set
@@ -117,7 +117,7 @@
      * @param {number} opts.maxItems The maximum number of items to return in the list.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleDeclassificationExemptionsPaging} and HTTP response
      */
-    this.listDeclassificationExemptionsWithHttpInfo = function(opts) {
+    this.listDeclassificationExemptions = function(opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -152,7 +152,7 @@
      * @param {string} declassificationExemptionId The identifier for the declassification exemption
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleDeclassificationExemptionEntry} and HTTP response
      */
-    this.showDeclassificationExemptionByIdWithHttpInfo = function(declassificationExemptionId) {
+    this.showDeclassificationExemptionById = function(declassificationExemptionId) {
       var postBody = null;
 
       // verify the required parameter 'declassificationExemptionId' is set
@@ -190,7 +190,7 @@
      * @param {DeclassificationExemptionBody} declassificationExemption Declassification exemption
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleDeclassificationExemptionEntry} and HTTP response
      */
-    this.updateDeclassificationExemptionWithHttpInfo = function(declassificationExemptionId, declassificationExemption) {
+    this.updateDeclassificationExemption = function(declassificationExemptionId, declassificationExemption) {
       var postBody = declassificationExemption;
 
       // verify the required parameter 'declassificationExemptionId' is set

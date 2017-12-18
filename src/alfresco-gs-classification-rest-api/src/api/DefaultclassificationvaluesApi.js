@@ -41,7 +41,7 @@
      * @param {string} nodeId The identifier of a node.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleDeclassificationDate} and HTTP response
      */
-    this.calculateDefaultDeclassificationDateWithHttpInfo = function(nodeId) {
+    this.calculateDefaultDeclassificationDate = function(nodeId) {
       var postBody = null;
 
       // verify the required parameter 'nodeId' is set

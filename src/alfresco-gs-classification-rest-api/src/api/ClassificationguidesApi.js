@@ -42,7 +42,7 @@
      * @param {CombinedInstructionBody} opts.instructions Instructions
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleInstructionEntry} and HTTP response
      */
-    this.combinedInstructionsWithHttpInfo = function(opts) {
+    this.combinedInstructions = function(opts) {
       opts = opts || {};
       var postBody = opts['instructions'];
 
@@ -74,7 +74,7 @@
      * @param {ClassificationGuideBody} classificationGuide Classification guide
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleClassificationGuideEntry} and HTTP response
      */
-    this.createClassificationGuideWithHttpInfo = function(classificationGuide) {
+    this.createClassificationGuide = function(classificationGuide) {
       var postBody = classificationGuide;
 
       // verify the required parameter 'classificationGuide' is set
@@ -113,7 +113,7 @@
      * @param {Array.<String>} opts.include Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleTopicEntry} and HTTP response
      */
-    this.createSubtopicWithHttpInfo = function(topicId, topic, opts) {
+    this.createSubtopic = function(topicId, topic, opts) {
       opts = opts || {};
       var postBody = topic;
 
@@ -160,7 +160,7 @@
      * @param {Array.<String>} opts.include Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleTopicEntry} and HTTP response
      */
-    this.createTopicWithHttpInfo = function(classificationGuideId, topic, opts) {
+    this.createTopic = function(classificationGuideId, topic, opts) {
       opts = opts || {};
       var postBody = topic;
 
@@ -205,7 +205,7 @@
      * @param {string} classificationGuideId The identifier for the classification guide
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    this.deleteClassificationGuideWithHttpInfo = function(classificationGuideId) {
+    this.deleteClassificationGuide = function(classificationGuideId) {
       var postBody = null;
 
       // verify the required parameter 'classificationGuideId' is set
@@ -242,7 +242,7 @@
      * @param {string} topicId The identifier for the topic
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    this.deleteTopicWithHttpInfo = function(topicId) {
+    this.deleteTopic = function(topicId) {
       var postBody = null;
 
       // verify the required parameter 'topicId' is set
@@ -285,7 +285,7 @@
      * @param {string} opts.where A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on: * enabled - e.g. (enabled &#x3D; true OR enabled &#x3D; false)
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleClassificationGuidePaging} and HTTP response
      */
-    this.listClassificationGuidesWithHttpInfo = function(opts) {
+    this.listClassificationGuides = function(opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -329,7 +329,7 @@
      * @param {boolean} opts.includeSource Also include **source** in addition to **entries** with folder information on the parent guide/topic
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleSubtopicPaging} and HTTP response
      */
-    this.listSubtopicsWithHttpInfo = function(topicId, opts) {
+    this.listSubtopics = function(topicId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -380,7 +380,7 @@
      * @param {boolean} opts.includeSource Also include **source** in addition to **entries** with folder information on the parent guide/topic
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleTopicPaging} and HTTP response
      */
-    this.listTopicsWithHttpInfo = function(classificationGuideId, opts) {
+    this.listTopics = function(classificationGuideId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -424,7 +424,7 @@
      * @param {string} classificationGuideId The identifier for the classification guide
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleClassificationGuideEntry} and HTTP response
      */
-    this.showClassificationGuideByIdWithHttpInfo = function(classificationGuideId) {
+    this.showClassificationGuideById = function(classificationGuideId) {
       var postBody = null;
 
       // verify the required parameter 'classificationGuideId' is set
@@ -463,7 +463,7 @@
      * @param {Array.<String>} opts.include Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleTopicEntry} and HTTP response
      */
-    this.showTopicByIdWithHttpInfo = function(topicId, opts) {
+    this.showTopicById = function(topicId, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -504,7 +504,7 @@
      * @param {ClassificationGuideBody} classificationGuide Classification guide
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleClassificationGuideEntry} and HTTP response
      */
-    this.updateClassificationGuideWithHttpInfo = function(classificationGuideId, classificationGuide) {
+    this.updateClassificationGuide = function(classificationGuideId, classificationGuide) {
       var postBody = classificationGuide;
 
       // verify the required parameter 'classificationGuideId' is set
@@ -549,7 +549,7 @@
      * @param {Array.<String>} opts.include Returns additional information about the topic. The following optional fields can be requested: * hasSubtopics - A flag indicating whether the topic already contains any subtopics. * instruction - Contains details of any instruction in the topic. * path - An ordered list of id-name pairs of all ancestor topics and the classification guide. * classificationGuide - The classification guide this topic is in.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleTopicEntry} and HTTP response
      */
-    this.updateTopicWithHttpInfo = function(topicId, topic, opts) {
+    this.updateTopic = function(topicId, topic, opts) {
       opts = opts || {};
       var postBody = topic;
 
