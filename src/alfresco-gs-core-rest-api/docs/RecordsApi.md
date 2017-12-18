@@ -29,7 +29,7 @@ var opts = {
   'include': ["include_example"], // [String] | Returns additional information about the record. Any optional field from the response model can be requested. For example: * allowableOperations * content * isCompleted * path 
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.completeRecord(recordId, opts).then(function(data) {
+this.alfrescoJsApi.gsCore.recordsApi.completeRecord(recordId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -71,7 +71,7 @@ Deletes the record **recordId**. Deleted file plan components cannot be recovere
 
 var recordId = "recordId_example"; // String | The identifier of a record.
 
-apiInstance.deleteRecord(recordId).then(function() {
+this.alfrescoJsApi.gsCore.recordsApi.deleteRecord(recordId).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -117,7 +117,7 @@ var opts = {
   'include': ["include_example"], // [String] | Returns additional information about the record. Any optional field from the response model can be requested. For example: * allowableOperations * content * isCompleted * path 
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.fileRecord(recordIdnodeBodyFile, opts).then(function(data) {
+this.alfrescoJsApi.gsCore.recordsApi.fileRecord(recordIdnodeBodyFile, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -164,7 +164,7 @@ var opts = {
   'include': ["include_example"], // [String] | Returns additional information about the record. Any optional field from the response model can be requested. For example: * allowableOperations * content * isCompleted * path 
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.getRecord(recordId, opts).then(function(data) {
+this.alfrescoJsApi.gsCore.recordsApi.getRecord(recordId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -210,7 +210,7 @@ var opts = {
   'attachment': true, // Boolean | **true** enables a web browser to download the file as an attachment. **false** means a web browser may preview the file in a new tab or window, but not download the file.  You can only set this parameter to **false** if the content type of the file is in the supported list; for example, certain image files and PDF files.  If the content type is not supported for preview, then a value of **false**  is ignored, and the attachment will be returned in the response. 
   'ifModifiedSince': new Date("2013-10-20T19:20:30+01:00") // Date | Only returns the content if it has been modified since the date provided. Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`. 
 };
-apiInstance.getRecordContent(recordId, opts).then(function() {
+this.alfrescoJsApi.gsCore.recordsApi.getRecordContent(recordId, opts).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -258,7 +258,7 @@ var opts = {
   'include': ["include_example"], // [String] | Returns additional information about the record. Any optional field from the response model can be requested. For example: * allowableOperations * content * isCompleted * path 
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.updateRecord(recordIdrecordBodyUpdate, opts).then(function(data) {
+this.alfrescoJsApi.gsCore.recordsApi.updateRecord(recordIdrecordBodyUpdate, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

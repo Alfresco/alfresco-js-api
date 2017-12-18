@@ -1,8 +1,8 @@
 /*global describe, it, beforeEach */
 
-var AlfrescoApi = require('../main');
-var AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
-var TagMock = require('../test/mockObjects/mockAlfrescoApi').Tag;
+var AlfrescoApi = require('../../main');
+var AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
+var TagMock = require('../../test/mockObjects/mockAlfrescoApi').Tag;
 var expect = require('chai').expect;
 
 describe('Tags', function () {

@@ -31,7 +31,7 @@ var opts = {
   'include': ["include_example"], // [String] | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example: * allowableOperations * path 
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.createUnfiledRecordFolderChildren(unfiledRecordFolderId, nodeBodyCreate, opts).then(function(data) {
+this.alfrescoJsApi.gsCore.unfiledRecordFoldersApi.createUnfiledRecordFolderChildren(unfiledRecordFolderId, nodeBodyCreate, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -75,7 +75,7 @@ Deletes the unfiled record folder **unfiledRecordFolderId**.
 
 var unfiledRecordFolderId = "unfiledRecordFolderId_example"; // String | The identifier of an unfiled record folder.
 
-apiInstance.deleteUnfiledRecordFolder(unfiledRecordFolderId, ).then(function() {
+this.alfrescoJsApi.gsCore.unfiledRecordFoldersApi.deleteUnfiledRecordFolder(unfiledRecordFolderId, ).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -120,7 +120,7 @@ var opts = {
   'relativePath': "relativePath_example", // String | Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**. 
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.getUnfiledRecordFolder(unfiledRecordFolderId, , opts).then(function(data) {
+this.alfrescoJsApi.gsCore.unfiledRecordFoldersApi.getUnfiledRecordFolder(unfiledRecordFolderId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -172,7 +172,7 @@ var opts = {
   'includeSource': true, // Boolean | Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**.
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.listUnfiledRecordFolderChildren(unfiledRecordFolderId, , opts).then(function(data) {
+this.alfrescoJsApi.gsCore.unfiledRecordFoldersApi.listUnfiledRecordFolderChildren(unfiledRecordFolderId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -226,7 +226,7 @@ var opts = {
   'includeSource': true, // Boolean | Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**.
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.updateUnfiledRecordFolder(unfiledRecordFolderId, unfiledRecordFolderBodyUpdate, opts).then(function(data) {
+this.alfrescoJsApi.gsCore.unfiledRecordFoldersApi.updateUnfiledRecordFolder(unfiledRecordFolderId, unfiledRecordFolderBodyUpdate, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

@@ -3801,19 +3801,11 @@ declare namespace AlfrescoApi {
     export interface FilePlansApi {
         new(client?: ApiClient): FilePlansApi;
 
-        createFilePlanCategoriesWithHttpInfo(filePlanId: string, nodeBodyCreate: RootCategoryBodyCreate, opts?: any): Promise<any> ;
-
         createFilePlanCategories(filePlanId: string, nodeBodyCreate: RootCategoryBodyCreate, opt: any): Promise<any> ;
-
-        getFilePlanWithHttpInfo(filePlanId: string, opts?: any): Promise<any> ;
 
         getFilePlan(filePlanId: string, opts?: any): Promise<any> ;
 
-        getFilePlanCategoriesWithHttpInfo(filePlanId: string, opts?: any): Promise<any> ;
-
         getFilePlanCategories(filePlanId: string, opts?: any): Promise<any> ;
-
-        updateFilePlanWithHttpInfo(filePlanId: string, filePlanBodyUpdate: FilePlanBodyUpdate, opts?: any): Promise<any> ;
 
         updateFilePlan(filePlanId: string, filePlanBodyUpdate: FilePlanBodyUpdate, opts?: any): Promise<any>;
     }
@@ -3821,27 +3813,17 @@ declare namespace AlfrescoApi {
     export interface FilesApi {
         new(client?: ApiClient): FilesApi;
 
-        declareRecordWithHttpInfo(fileId: string, opts?: any): Promise<any> ;
-
         declareRecord(fileId: string, opts?: any): Promise<any>;
     }
 
     export interface GsSitesApi {
         new(client?: ApiClient): GsSitesApi;
 
-        createRMSiteWithHttpInfo(siteBodyCreate: RMSiteBodyCreate, opts?: any): Promise<any> ;
-
         createRMSite(siteBodyCreate: RMSiteBodyCreate, opts?: any): Promise<any> ;
-
-        deleteRMSiteWithHttpInfo(): Promise<any> ;
 
         deleteRMSite(): Promise<any> ;
 
-        getRMSiteWithHttpInfo(opts?: any): Promise<any> ;
-
         getRMSite(opts?: any): Promise<any> ;
-
-        updateRMSiteWithHttpInfo(siteBodyUpdate: RMSiteBodyUpdate, opts?: any): Promise<any> ;
 
         updateRMSite(siteBodyUpdate: RMSiteBodyUpdate, opts?: any): Promise<any>;
     }
@@ -3849,23 +3831,13 @@ declare namespace AlfrescoApi {
     export interface RecordCategoriesApi {
         new(client?: ApiClient): RecordCategoriesApi;
 
-        createRecordCategoryChildWithHttpInfo(recordCategoryId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: any): Promise<any> ;
-
         createRecordCategoryChild(recordCategoryId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: any): Promise<any> ;
-
-        deleteRecordCategoryWithHttpInfo(recordCategoryId: string): Promise<any> ;
 
         deleteRecordCategory(recordCategoryId: string): Promise<any> ;
 
-        getRecordCategoryWithHttpInfo(recordCategoryId: string, opts?: any): Promise<any> ;
-
         getRecordCategory(recordCategoryId: string, opts?: any): Promise<any> ;
 
-        listRecordCategoryChildrenWithHttpInfo(recordCategoryId: string, opts?: Object, opts?: any): Promise<any> ;
-
         listRecordCategoryChildren(recordCategoryId: string, opts?: any): Promise<any> ;
-
-        updateRecordCategoryWithHttpInfo(recordCategoryId: string, recordCategoryBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<any> ;
 
         updateRecordCategory(recordCategoryId: string, recordCategoryBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<any>;
     }
@@ -3873,23 +3845,13 @@ declare namespace AlfrescoApi {
     export interface RecordFoldersApi {
         new(client?: ApiClient): RecordFoldersApi;
 
-        createRecordFolderChildWithHttpInfo(recordFolderId: string, recordBodyCreate: RMNodeBodyCreate, opts?: any): Promise<any> ;
-
         createRecordFolderChild(recordFolderId: string, recordBodyCreate: RMNodeBodyCreate, opts?: any): Promise<any> ;
-
-        deleteRecordFolderWithHttpInfo(recordFolderId: string): Promise<any> ;
 
         deleteRecordFolder(recordFolderId: string): Promise<any> ;
 
-        getRecordFolderWithHttpInfo(recordFolderId: string, opts?: any): Promise<any> ;
-
         getRecordFolder(recordFolderId: string, opts?: any): Promise<any> ;
 
-        listRecordFolderChildrenWithHttpInfo(recordFolderId: string, opts?: any): Promise<any> ;
-
         listRecordFolderChildren(recordFolderId: string, opts?: any): Promise<any> ;
-
-        updateRecordFolderWithHttpInfo(recordFolderId: string, recordFolderBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<any> ;
 
         updateRecordFolder(recordFolderId: string, recordFolderBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<any>;
     }
@@ -3897,27 +3859,15 @@ declare namespace AlfrescoApi {
     export interface RecordsApi {
         new(client?: ApiClient): RecordsApi;
 
-        completeRecordWithHttpInfo(recordId: string, opts?: any): Promise<any> ;
-
         completeRecord(recordId: string, opts?: any): Promise<any> ;
-
-        deleteRecordWithHttpInfo(recordId: string): Promise<any> ;
 
         deleteRecord(recordId: string): Promise<any> ;
 
-        fileRecordWithHttpInfo(recordId: string, nodeBodyFile: RequestBodyFile, opts?: any): Promise<any> ;
-
         fileRecord(recordId: string, nodeBodyFile: RequestBodyFile, opts?: any): Promise<any> ;
-
-        getRecordWithHttpInfo(recordId: string, opts?: any): Promise<any> ;
 
         getRecord(recordId: string, opts?: any): Promise<any> ;
 
-        getRecordContentWithHttpInfo(recordId: string, opts?: any): Promise<any> ;
-
         getRecordContent(recordId: string, opts?: Object, opts?: any): Promise<any> ;
-
-        updateRecordWithHttpInfo(recordId: string, recordBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<any> ;
 
         updateRecord(recordId: string, recordBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<any>;
     }
@@ -3925,15 +3875,9 @@ declare namespace AlfrescoApi {
     export interface TransferContainersApi {
         new(client?: ApiClient): TransferContainersApi;
 
-        getTransferContainerWithHttpInfo(transferContainerId: string, opts?: any): Promise<any> ;
-
         getTransferContainer(transferContainerId: string, opts?: any): Promise<any> ;
 
-        listTransfersWithHttpInfo(transferContainerId: string, opts?: any): Promise<any> ;
-
         listTransfers(transferContainerId: string, opts?: any): Promise<any> ;
-
-        updateTransferContainerWithHttpInfo(transferContainerId: string, nodeBodyUpdate: TransferContainerBodyUpdate, opts?: any): Promise<any> ;
 
         updateTransferContainer(transferContainerId: string, nodeBodyUpdate: TransferContainerBodyUpdate, opts?: any): Promise<any>;
     }
@@ -3941,11 +3885,7 @@ declare namespace AlfrescoApi {
     export interface TransfersApi {
         new(client?: ApiClient): TransfersApi;
 
-        getTransferWithHttpInfo(transferId: string, opts?: any): Promise<any> ;
-
         getTransfer(transferId: string, opts?: any): Promise<any> ;
-
-        listTransfersChildrenWithHttpInfo(transferId: string, opts?: any): Promise<any> ;
 
         listTransfersChildren(transferId: string, opts?: any): Promise<any>;
     }
@@ -3953,19 +3893,11 @@ declare namespace AlfrescoApi {
     export interface UnfiledContainersApi {
         new(client?: UnfiledContainersApi): TransfersApi;
 
-        createUnfiledContainerChildrenWithHttpInfo(unfiledContainerId: string, nodeBodyCreate: RMNodeBodyCreate, opts?: any): Promise<any> ;
-
         createUnfiledContainerChildren(unfiledContainerId: string, nodeBodyCreate: RMNodeBodyCreate, opts?: any): Promise<any> ;
-
-        getUnfiledContainerWithHttpInfo(unfiledContainerId: string, opts?: any): Promise<any> ;
 
         getUnfiledContainer(unfiledContainerId: string, opts?: any): Promise<any> ;
 
-        listUnfiledContainerChildrenWithHttpInfo(unfiledContainerId: string, opts?: any): Promise<any> ;
-
         listUnfiledContainerChildren(unfiledContainerId: string, opts?: any): Promise<any> ;
-
-        updateUnfiledContainerWithHttpInfo(unfiledContainerId: string, unfiledContainerBodyUpdate: UnfiledRecordContainerBodyUpdate, opts?: any): Promise<any> ;
 
         updateUnfiledContainer(unfiledContainerId: string, unfiledContainerBodyUpdate: UnfiledRecordContainerBodyUpdate, opts?: any): Promise<any>;
     }
@@ -3973,23 +3905,13 @@ declare namespace AlfrescoApi {
     export interface UnfiledRecordFoldersApi {
         new(client?: UnfiledContainersApi): UnfiledRecordFoldersApi;
 
-        createUnfiledRecordFolderChildrenWithHttpInfo(unfiledRecordFolderId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: any): Promise<any> ;
-
         createUnfiledRecordFolderChildren(unfiledRecordFolderId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: any): Promise<any> ;
-
-        deleteUnfiledRecordFolderWithHttpInfo(unfiledRecordFolderId: string): Promise<any> ;
 
         deleteUnfiledRecordFolder(unfiledRecordFolderId: string): Promise<any> ;
 
-        getUnfiledRecordFolderWithHttpInfo(unfiledRecordFolderId: string, opts?: any): Promise<any> ;
-
         getUnfiledRecordFolder(unfiledRecordFolderId: string, opts?: any): Promise<any> ;
 
-        listUnfiledRecordFolderChildrenWithHttpInfo(unfiledRecordFolderId: string, opts?: any): Promise<any> ;
-
         listUnfiledRecordFolderChildren(unfiledRecordFolderId: string, opts?: Object, opts?: any): Promise<any> ;
-
-        updateUnfiledRecordFolderWithHttpInfo(unfiledRecordFolderId: string, unfiledRecordFolderBodyUpdate: UnfiledRecordFolderBodyUpdate, opts?: any): Promise<any> ;
 
         updateUnfiledRecordFolder(unfiledRecordFolderId: string, unfiledRecordFolderBodyUpdate: UnfiledRecordFolderBodyUpdate, opts?: any): Promise<any>;
     }
@@ -4475,55 +4397,29 @@ declare namespace AlfrescoApi {
     export interface ClassificationGuidesApi {
         new(client?: ApiClient): ClassificationGuidesApi;
 
-        combinedInstructionsWithHttpInfo(opts?: any, opts?: { instructions: CombinedInstructionBody }): Promise<any>;
-
         combinedInstructions(opts?: any, opts?: { instructions: CombinedInstructionBody }): Promise<any>;
-
-        createClassificationGuideWithHttpInfo(classificationGuide: ClassificationGuideBody): Promise<any>;
 
         createClassificationGuide(classificationGuide: ClassificationGuideBody): Promise<any>;
 
-        createSubtopicWithHttpInfo(topicId: string, topic: TopicBody, opts?: any): Promise<any>;
-
         createSubtopic(topicId: string, topic: TopicBody, opts?: any, opts?: { include: string[] }): Promise<any>;
-
-        createTopicWithHttpInfo(classificationGuideId: string, topic: TopicBody, opts?: any): Promise<any>;
 
         createTopic(classificationGuideId: string, topic: TopicBody, opts?: any, opts?: any): Promise<any>;
 
-        deleteClassificationGuideWithHttpInfo(classificationGuideId: string): Promise<any>;
-
         deleteClassificationGuide(classificationGuideId: string): Promise<any>;
-
-        deleteTopicWithHttpInfo(topicId: string): Promise<any>;
 
         deleteTopic(topicId: string): Promise<any>;
 
-        listClassificationGuidesWithHttpInfo(opts?: any, opts?: { include: string[], skipCount: number, maxItems: number, orderBy: string[], where: string }): Promise<any>;
-
         listClassificationGuides(opts?: any, opts?: { include: string[], skipCount: number, maxItems: number, orderBy: string[], where: string }): Promise<any>;
-
-        listSubtopicsWithHttpInfo(topicId: string, opts?: any, opts?: { include: string[], skipCount: number, maxItems: number, orderBy: string[], where: string, includeSource: boolean }): Promise<any>;
 
         listSubtopics(topicId: string, opts?: any, opts?: { include: string[], skipCount: number, maxItems: number, orderBy: string[], where: string, includeSource: boolean }): Promise<any>;
 
-        listTopicsWithHttpInfo(classificationGuideId: string, opts?: any, opts?: { include: string[], skipCount: number, maxItems: number, orderBy: string[], where: string, includeSource: boolean }): Promise<any>;
-
         listTopics(classificationGuideId: string, opts?: anyg[], opts?: any): Promise<any>;
-
-        showClassificationGuideByIdWithHttpInfo(classificationGuideId: string): Promise<any>;
 
         showClassificationGuideById(classificationGuideId: string): Promise<any>;
 
-        showTopicByIdWithHttpInfo(topicId: string, opts?: any, opts?: any): Promise<any>;
-
         showTopicById(topicId: string, opts?: any, opts?: any): Promise<any>;
 
-        updateClassificationGuideWithHttpInfo(classificationGuideId: string, classificationGuide: ClassificationGuideBody): Promise<any>;
-
         updateClassificationGuide(classificationGuideId: string, classificationGuide: ClassificationGuideBody): Promise<any>;
-
-        updateTopicWithHttpInfo(topicId: string, topic: TopicBody, opts?: any, opts?: any): Promise<any>;
 
         updateTopic(topicId: string, topic: TopicBody, opts?: any, opts?: any): Promise<any>;
     }
@@ -4531,23 +4427,13 @@ declare namespace AlfrescoApi {
     export interface ClassificationReasonsApi {
         new(client?: ApiClient): ClassificationReasonsApi;
 
-        createClassificationReasonWithHttpInfo(classificationReason: ClassificationReasonBody): Promise<any>;
-
         createClassificationReason(classificationReason: ClassificationReasonBody): Promise<any>;
-
-        deleteClassificationReasonWithHttpInfo(classificationReasonId: string): Promise<any>;
 
         deleteClassificationReason(classificationReasonId: string): Promise<any>;
 
-        listClassificationReasonsWithHttpInfo(opts?: any): Promise<any>;
-
         listClassificationReasons(opts?: any): Promise<any>;
 
-        showClassificationReasonByIdWithHttpInfo(classificationReasonId: string): Promise<any>;
-
         showClassificationReasonById(classificationReasonId: string): Promise<any>;
-
-        updateClassificationReasonWithHttpInfo(classificationReasonId: string, classificationReason: ClassificationReasonBody): Promise<any>;
 
         updateClassificationReason(classificationReasonId: string, classificationReason: ClassificationReasonBody): Promise<any>;
     }
@@ -4555,23 +4441,13 @@ declare namespace AlfrescoApi {
     export interface DeclassificationExemptionsApi {
         new(client?: ApiClient): DeclassificationExemptionsApi;
 
-        createDeclassificationExemptionWithHttpInfo(declassificationExemption: DeclassificationExemptionBody): Promise<any>;
-
         createDeclassificationExemption(declassificationExemption: DeclassificationExemptionBody): Promise<any>;
-
-        deleteDeclassificationExemptionWithHttpInfo(declassificationExemptionId: string): Promise<any>;
 
         deleteDeclassificationExemption(declassificationExemptionId: string): Promise<any>;
 
-        listDeclassificationExemptionsWithHttpInfo(opts?: any, opts?: { skipCount: number, maxItems: number }): Promise<any>;
-
         listDeclassificationExemptions(opts?: any, opts?: { skipCount: number, maxItems: number }): Promise<any>;
 
-        showDeclassificationExemptionByIdWithHttpInfo(declassificationExemptionId: string): Promise<any>;
-
         showDeclassificationExemptionById(declassificationExemptionId: string): Promise<any>;
-
-        updateDeclassificationExemptionWithHttpInfo(declassificationExemptionId: string, declassificationExemption: DeclassificationExemptionBody): Promise<any>;
 
         updateDeclassificationExemption(declassificationExemptionId: string, declassificationExemption: DeclassificationExemptionBody): Promise<any>;
     }
@@ -4579,19 +4455,13 @@ declare namespace AlfrescoApi {
     export interface DefaultClassificationValuesApi {
         new(client?: ApiClient): DefaultClassificationValuesApi;
 
-        calculateDefaultDeclassificationDateWithHttpInfo(nodeId: string): Promise<any>;
-
         calculateDefaultDeclassificationDate(nodeId: string): Promise<any>;
     }
 
     export interface SecurityControlSettingsApi {
         new(client?: ApiClient): SecurityControlSettingsApi;
 
-        getSecurityControlSettingWithHttpInfo(securityControlSettingKey: string): Promise<any>;
-
         getSecurityControlSetting(securityControlSettingKey: string): Promise<any>;
-
-        updateSecurityControlSettingWithHttpInfo(securityControlSettingKey: string, securityControlSettingValue: SecurityControlSettingBody): Promise<any>;
 
         updateSecurityControlSetting(securityControlSettingKey: string, securityControlSettingValue: SecurityControlSettingBody): Promise<any>;
     }

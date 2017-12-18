@@ -1,9 +1,9 @@
 /*global describe, it, beforeEach */
 
-var AlfrescoApi = require('../main');
+var AlfrescoApi = require('../../main');
 var expect = require('chai').expect;
-var AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
-var ProcessInstanceVariablesMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.ProcessInstanceVariables;
+var AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
+var ProcessInstanceVariablesMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.ProcessInstanceVariables;
 
 describe('Activiti Process Instance Variables Api', function () {
 

@@ -30,7 +30,7 @@ var opts = {
   'include': ["include_example"], // [String] | Returns additional information about the record. Any optional field from the response model can be requested. For example: * allowableOperations * content * isCompleted * path 
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.createRecordFolderChild(recordFolderId, recordBodyCreate, opts).then(function(data) {
+this.alfrescoJsApi.gsCore.recordFoldersApi.createRecordFolderChild(recordFolderId, recordBodyCreate, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -73,7 +73,7 @@ Deletes record folder **recordFolderId**. Deleted file plan components cannot be
 
 var recordFolderId = "recordFolderId_example"; // String | The identifier of a record folder.
 
-apiInstance.deleteRecordFolder(recordFolderId, ).then(function() {
+this.alfrescoJsApi.gsCore.recordFoldersApi.deleteRecordFolder(recordFolderId, ).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -117,7 +117,7 @@ var opts = {
   'include': ["include_example"], // [String] | Returns additional information about the record folders. Any optional field from the response model can be requested. For example: * allowableOperations * isClosed * path 
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.getRecordFolder(recordFolderId, , opts).then(function(data) {
+this.alfrescoJsApi.gsCore.recordFoldersApi.getRecordFolder(recordFolderId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -167,7 +167,7 @@ var opts = {
   'includeSource': true, // Boolean | Also include **source** (in addition to **entries**) with record information on the parent folder – the specified parent **recordFolderId**
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.listRecordFolderChildren(recordFolderId, , opts).then(function(data) {
+this.alfrescoJsApi.gsCore.recordFoldersApi.listRecordFolderChildren(recordFolderId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -219,7 +219,7 @@ var opts = {
   'include': ["include_example"], // [String] | Returns additional information about the record folders. Any optional field from the response model can be requested. For example: * allowableOperations * isClosed * path 
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.updateRecordFolder(recordFolderId, recordFolderBodyUpdate, opts).then(function(data) {
+this.alfrescoJsApi.gsCore.recordFoldersApi.updateRecordFolder(recordFolderId, recordFolderBodyUpdate, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

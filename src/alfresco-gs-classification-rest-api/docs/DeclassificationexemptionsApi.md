@@ -22,7 +22,7 @@ Creates a new declassification exemption.  **Note:** You can create more than on
 ### Example
 ```javascript
 
-this.alfrescoJsApi.gsClassification.createDeclassificationExemption(declassificationExemption).then(function(data) {
+this.alfrescoJsApi.gsClassification.declassificationExemptionsApi.createDeclassificationExemption(declassificationExemption).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -60,7 +60,7 @@ Deletes the declassification exemption with id **declassificationExemptionId**. 
 ### Example
 ```javascript
 
-this.alfrescoJsApi.gsClassification.deleteDeclassificationExemption(declassificationExemptionId).then(function() {
+this.alfrescoJsApi.gsClassification.declassificationExemptionsApi.deleteDeclassificationExemption(declassificationExemptionId).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -102,7 +102,7 @@ var opts = {
   'skipCount': 56, // Number | The number of entities that exist in the collection before those included in this list.
   'maxItems': 56 // Number | The maximum number of items to return in the list.
 };
-this.alfrescoJsApi.gsClassification.listDeclassificationExemptions(opts).then(function(data) {
+this.alfrescoJsApi.gsClassification.declassificationExemptionsApi.listDeclassificationExemptions(opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -143,7 +143,7 @@ Gets the declassification exemption with id **declassificationExemptionId**.
 
 var declassificationExemptionId = "declassificationExemptionId_example"; // String | The identifier for the declassification exemption
 
-this.alfrescoJsApi.gsClassification.showDeclassificationExemptionById(declassificationExemptionId).then(function(data) {
+this.alfrescoJsApi.gsClassification.declassificationExemptionsApi.showDeclassificationExemptionById(declassificationExemptionId).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -181,7 +181,7 @@ Updates the declassification exemption with id **declassificationExemptionId**. 
 ### Example
 ```javascript
 
-this.alfrescoJsApi.gsClassification.updateDeclassificationExemption(declassificationExemptionIddeclassificationExemption).then(function(data) {
+this.alfrescoJsApi.gsClassification.declassificationExemptionsApi.updateDeclassificationExemption(declassificationExemptionIddeclassificationExemption).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

@@ -1,7 +1,7 @@
 /*global describe, it, beforeEach */
 
-var AlfrescoApi = require('../main');
-var VersionMock = require('../test/mockObjects/mockAlfrescoApi').Version;
+var AlfrescoApi = require('../../main');
+var VersionMock = require('../../test/mockObjects/mockAlfrescoApi').Version;
 var expect = require('chai').expect;
 
 describe('Versions', function () {

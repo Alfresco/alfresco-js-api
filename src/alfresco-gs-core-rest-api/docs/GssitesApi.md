@@ -26,7 +26,7 @@ var siteBodyCreate = new AlfrescoGovernanceServicesRestApi.RMSiteBodyCreate(); /
 var opts = { 
   'skipAddToFavorites': false // Boolean | Flag to indicate whether the RM site should not be added to the user's site favorites.
 };
-apiInstance.createRMSite(siteBodyCreate, opts).then(function(data) {
+this.alfrescoJsApi.gsCore.gsSitesApi.createRMSite(siteBodyCreate, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -64,7 +64,7 @@ Delete the Records Management (RM) site
 
 ### Example
 ```javascript
-apiInstance.deleteRMSite().then(function() {
+this.alfrescoJsApi.gsCore.gsSitesApi.deleteRMSite().then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -102,7 +102,7 @@ Get the Records Management (RM) site
 var opts = { 
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.getRMSite(opts).then(function(data) {
+this.alfrescoJsApi.gsCore.gsSitesApi.getRMSite(opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -145,7 +145,7 @@ var siteBodyUpdate = new AlfrescoGovernanceServicesRestApi.RMSiteBodyUpdate(); /
 var opts = { 
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.updateRMSite(siteBodyUpdate, opts).then(function(data) {
+this.alfrescoJsApi.gsCore.gsSitesApi.updateRMSite(siteBodyUpdate, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

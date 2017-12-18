@@ -29,7 +29,7 @@ var opts = {
   'include': ["include_example"], // [String] | Returns additional information about the record category. Any optional field from the response model can be requested. For example: * allowableOperations * hasRetentionSchedule * path 
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.createFilePlanCategories(filePlanId, nodeBodyCreate, opts).then(function(data) {
+this.alfrescoJsApi.gsCore.filePlansApi.createFilePlanCategories(filePlanId, nodeBodyCreate, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -76,7 +76,7 @@ var opts = {
   'include': ["include_example"], // [String] | Returns additional information about the file plan. Any optional field from the response model can be requested. For example: * allowableOperations * path 
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.getFilePlan(filePlanId, , opts).then(function(data) {
+this.alfrescoJsApi.gsCore.filePlansApi.getFilePlan(filePlanId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -124,7 +124,7 @@ var opts = {
   'includeSource': true, // Boolean | Also include **source** (in addition to **entries**) with folder information on the parent node – the specified parent **filePlanId**
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.getFilePlanCategories(filePlanId, , opts).then(function(data) {
+this.alfrescoJsApi.gsCore.filePlansApi.getFilePlanCategories(filePlanId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -174,7 +174,7 @@ var opts = {
   'include': ["include_example"], // [String] | Returns additional information about the file plan. Any optional field from the response model can be requested. For example: * allowableOperations * path 
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.updateFilePlan(filePlanId, filePlanBodyUpdate, opts).then(function(data) {
+this.alfrescoJsApi.gsCore.filePlansApi.updateFilePlan(filePlanId, filePlanBodyUpdate, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

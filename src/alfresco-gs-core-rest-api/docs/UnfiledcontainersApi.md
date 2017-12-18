@@ -30,7 +30,7 @@ var opts = {
   'include': ["include_example"], // [String] | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example: * allowableOperations * path 
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.createUnfiledContainerChildren(unfiledContainerId, nodeBodyCreate, opts).then(function(data) {
+this.alfrescoJsApi.gsCore.unfiledContainersApi.createUnfiledContainerChildren(unfiledContainerId, nodeBodyCreate, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -78,7 +78,7 @@ var opts = {
   'include': ["include_example"], // [String] | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example: * allowableOperations * path 
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.getUnfiledContainer(unfiledContainerId, , opts).then(function(data) {
+this.alfrescoJsApi.gsCore.unfiledContainersApi.getUnfiledContainer(unfiledContainerId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -128,7 +128,7 @@ var opts = {
   'includeSource': true, // Boolean | Also include **source** (in addition to **entries**) with folder information on the parent node – the specified parent **unfiledContainerId**
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.listUnfiledContainerChildren(unfiledContainerId, , opts).then(function(data) {
+this.alfrescoJsApi.gsCore.unfiledContainersApi.listUnfiledContainerChildren(unfiledContainerId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -180,7 +180,7 @@ var opts = {
   'include': ["include_example"], // [String] | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example: * allowableOperations * path 
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.updateUnfiledContainer(unfiledContainerId, unfiledContainerBodyUpdate, opts).then(function(data) {
+this.alfrescoJsApi.gsCore.unfiledContainersApi.updateUnfiledContainer(unfiledContainerId, unfiledContainerBodyUpdate, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

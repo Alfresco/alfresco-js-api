@@ -1,10 +1,10 @@
 /*global describe, it, beforeEach */
 
-var AlfrescoApi = require('../main');
+var AlfrescoApi = require('../../main');
 var chai = require('chai');
 var expect = chai.expect;
-var AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
-var NodeMock = require('../test/mockObjects/mockAlfrescoApi').Node;
+var AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
+var NodeMock = require('../../test/mockObjects/mockAlfrescoApi').Node;
 var fs = require('fs');
 
 chai.use(require('chai-datetime'));

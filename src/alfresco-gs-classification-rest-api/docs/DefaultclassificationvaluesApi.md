@@ -18,7 +18,7 @@ Calculates the default declassification date for **nodeId** based on the propert
 ### Example
 ```javascript
 
-this.alfrescoJsApi.gsClassification.calculateDefaultDeclassificationDate(nodeId).then(function(data) {
+this.alfrescoJsApi.gsClassification.declassificationExemptionsApi.calculateDefaultDeclassificationDate(nodeId).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

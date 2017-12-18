@@ -20,7 +20,7 @@ Gets the value for a selected **securityControlSettingKey**.
 ```javascript
 
 
-this.alfrescoJsApi.gsClassification.getSecurityControlSetting(securityControlSettingKey, ).then(function(data) {
+this.alfrescoJsApi.gsClassification.securityControlSettingsApi.getSecurityControlSetting(securityControlSettingKey, ).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -62,7 +62,7 @@ Updates the value of a selected **securityControlSettingKey**.
 
 var securityControlSettingValue = new AlfrescoGovernanceServicesSecurityControls.SecurityControlSettingBody(); // SecurityControlSettingBody | The new value for the security control setting. This can be a string or number, depending on the setting key.
 
-this.alfrescoJsApi.gsClassification.updateSecurityControlSetting(securityControlSettingKey, securityControlSettingValue).then(function(data) {
+this.alfrescoJsApi.gsClassification.securityControlSettingsApi.updateSecurityControlSetting(securityControlSettingKey, securityControlSettingValue).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

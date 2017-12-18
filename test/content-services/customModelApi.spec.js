@@ -1,8 +1,8 @@
 /*global describe, it, beforeEach */
 
-var AlfrescoApi = require('../main');
-var AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
-var CustomModelMock = require('../test/mockObjects/mockAlfrescoApi').CustomModel;
+var AlfrescoApi = require('../../main');
+var AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
+var CustomModelMock = require('../../test/mockObjects/mockAlfrescoApi').CustomModel;
 
 describe('Custom Model Api', function () {
     beforeEach(function (done) {

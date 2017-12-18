@@ -1,33 +1,38 @@
 var mockAlfrescoApi = {};
 
-//Ecm Mock
-mockAlfrescoApi.Auth = require('./alfresco/authResponseMock.js');
-mockAlfrescoApi.Comment = require('./alfresco/CommentMock.js');
-mockAlfrescoApi.Version = require('./alfresco/VersionMock.js');
-mockAlfrescoApi.Node = require('./alfresco/nodeMock.js');
-mockAlfrescoApi.Upload = require('./alfresco/uploadMock.js');
-mockAlfrescoApi.WebScript = require('./alfresco/webScriptMock.js');
-mockAlfrescoApi.Tag = require('./alfresco/tagMock.js');
-mockAlfrescoApi.FindNodes = require('./alfresco/findNodesMock.js');
-mockAlfrescoApi.Rendition = require('./alfresco/renditionMock.js');
-mockAlfrescoApi.CustomModel = require('./alfresco/customModelMock.js');
-mockAlfrescoApi.Discovery = require('./alfresco/discoveryMock.js');
-mockAlfrescoApi.Search = require('./alfresco/searchMock.js');
-mockAlfrescoApi.PeopleApi = require('./alfresco/peopleMock.js');
+//Content service Mock
+mockAlfrescoApi.Auth = require('./content-services/authResponseMock.js');
+mockAlfrescoApi.Comment = require('./content-services/commentMock.js');
+mockAlfrescoApi.Version = require('./content-services/versionMock.js');
+mockAlfrescoApi.Node = require('./content-services/nodeMock.js');
+mockAlfrescoApi.Upload = require('./content-services/uploadMock.js');
+mockAlfrescoApi.WebScript = require('./content-services/webScriptMock.js');
+mockAlfrescoApi.Tag = require('./content-services/tagMock.js');
+mockAlfrescoApi.FindNodes = require('./content-services/findNodesMock.js');
+mockAlfrescoApi.Rendition = require('./content-services/renditionMock.js');
+mockAlfrescoApi.CustomModel = require('./content-services/customModelMock.js');
+mockAlfrescoApi.Discovery = require('./content-services/discoveryMock.js');
+mockAlfrescoApi.Search = require('./content-services/searchMock.js');
+mockAlfrescoApi.PeopleApi = require('./content-services/peopleMock.js');
+
+//Governance service
+mockAlfrescoApi.GsCoreMock = {};
+mockAlfrescoApi.GsSitesApi = require('./goverance-services/gsSitesApiMock.js');
 
 
-//Bpm Mock
+//Process service
 mockAlfrescoApi.ActivitiMock = {};
-mockAlfrescoApi.ActivitiMock.Auth = require('./activiti/authResponseMock.js');
-mockAlfrescoApi.ActivitiMock.Process = require('./activiti/processMock.js');
-mockAlfrescoApi.ActivitiMock.ProcessInstanceVariables = require('./activiti/processInstanceVariablesMock.js');
-mockAlfrescoApi.ActivitiMock.Profile = require('./activiti/profileMock.js');
-mockAlfrescoApi.ActivitiMock.Tasks = require('./activiti/tasksMock.js');
-mockAlfrescoApi.ActivitiMock.TaskFormMock = require('./activiti/taskFormMock.js');
-mockAlfrescoApi.ActivitiMock.Models = require('./activiti/modelsMock.js');
-mockAlfrescoApi.ActivitiMock.ModelJsonBpmMock = require('./activiti/modelJsonBpmMock.js');
-mockAlfrescoApi.ActivitiMock.UserFilters = require('./activiti/userFiltersMock.js');
-mockAlfrescoApi.ActivitiMock.Reports = require('./activiti/reportsMock.js');
+mockAlfrescoApi.ActivitiMock.Auth = require('./process-services/authResponseMock.js');
+mockAlfrescoApi.ActivitiMock.Process = require('./process-services/processMock.js');
+mockAlfrescoApi.ActivitiMock.ProcessInstanceVariables = require('./process-services/processInstanceVariablesMock.js');
+mockAlfrescoApi.ActivitiMock.Profile = require('./process-services/profileMock.js');
+mockAlfrescoApi.ActivitiMock.Tasks = require('./process-services/tasksMock.js');
+mockAlfrescoApi.ActivitiMock.TaskFormMock = require('./process-services/taskFormMock.js');
+mockAlfrescoApi.ActivitiMock.Models = require('./process-services/modelsMock.js');
+mockAlfrescoApi.ActivitiMock.ModelJsonBpmMock = require('./process-services/modelJsonBpmMock.js');
+mockAlfrescoApi.ActivitiMock.UserFilters = require('./process-services/userFiltersMock.js');
+mockAlfrescoApi.ActivitiMock.Reports = require('./process-services/reportsMock.js');
+
 
 //Oauth2
 mockAlfrescoApi.Oauth2Mock = {};

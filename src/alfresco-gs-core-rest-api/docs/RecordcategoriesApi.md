@@ -31,7 +31,7 @@ var opts = {
   'include': ["include_example"], // [String] | Returns additional information about the record category. Any optional field from the response model can be requested. For example: * allowableOperations * hasRetentionSchedule * path 
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.createRecordCategoryChild(recordCategoryId, nodeBodyCreate, opts).then(function(data) {
+this.alfrescoJsApi.gsCore.recordCategoriesApi.createRecordCategoryChild(recordCategoryId, nodeBodyCreate, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -75,7 +75,7 @@ Deletes record category **recordCategoryId**.
 
 var recordCategoryId = "recordCategoryId_example"; // String | The identifier of a record category.
 
-apiInstance.deleteRecordCategory(recordCategoryId, ).then(function() {
+this.alfrescoJsApi.gsCore.recordCategoriesApi.deleteRecordCategory(recordCategoryId, ).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -120,7 +120,7 @@ var opts = {
   'relativePath': "relativePath_example", // String | Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**. 
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.getRecordCategory(recordCategoryId, , opts).then(function(data) {
+this.alfrescoJsApi.gsCore.recordCategoriesApi.getRecordCategory(recordCategoryId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -172,7 +172,7 @@ var opts = {
   'includeSource': true, // Boolean | Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **recordCategoryId**, or as resolved by **relativePath**.
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.listRecordCategoryChildren(recordCategoryId, , opts).then(function(data) {
+this.alfrescoJsApi.gsCore.recordCategoriesApi.listRecordCategoryChildren(recordCategoryId, , opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -225,7 +225,7 @@ var opts = {
   'include': ["include_example"], // [String] | Returns additional information about the record category. Any optional field from the response model can be requested. For example: * allowableOperations * hasRetentionSchedule * path 
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.updateRecordCategory(recordCategoryId, recordCategoryBodyUpdate, opts).then(function(data) {
+this.alfrescoJsApi.gsCore.recordCategoriesApi.updateRecordCategory(recordCategoryId, recordCategoryBodyUpdate, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

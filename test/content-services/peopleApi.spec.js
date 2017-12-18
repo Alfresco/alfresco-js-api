@@ -1,7 +1,7 @@
 /*global describe, it, beforeEach */
 
-var AlfrescoApi = require('../main');
-var PeopleMock = require('../test/mockObjects/mockAlfrescoApi').PeopleApi;
+var AlfrescoApi = require('../../main');
+var PeopleMock = require('../../test/mockObjects/mockAlfrescoApi').PeopleApi;
 
 describe('PeopleApi', function () {
 

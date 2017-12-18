@@ -21,7 +21,7 @@ Creates a new classification reason.  **Note:** You can create more than one rea
 
 ### Example
 ```javascript
-this.alfrescoJsApi.gsClassification.createClassificationReason(classificationReason).then(function(data) {
+this.alfrescoJsApi.gsClassification.classificationReasonsApi.createClassificationReason(classificationReason).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -59,7 +59,7 @@ Deletes the classification reason  **classificationReasonId**. You can&#39;t del
 ### Example
 ```javascript
 
-this.alfrescoJsApi.gsClassification.deleteClassificationReason(classificationReasonId).then(function() {
+this.alfrescoJsApi.gsClassification.classificationReasonsApi.deleteClassificationReason(classificationReasonId).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -102,7 +102,7 @@ var opts = {
   'maxItems': 56 // Number | The maximum number of items to return in the list.
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-this.alfrescoJsApi.gsClassification.listClassificationReasons(opts).then(function(data) {
+this.alfrescoJsApi.gsClassification.classificationReasonsApi.listClassificationReasons(opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -142,7 +142,7 @@ Gets the classification reason  **classificationReasonId**.
 ### Example
 ```javascript
 
-this.alfrescoJsApi.gsClassification.showClassificationReasonById(classificationReasonId).then(function(data) {
+this.alfrescoJsApi.gsClassification.classificationReasonsApi.showClassificationReasonById(classificationReasonId).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -182,7 +182,7 @@ Updates the classification reason with id **classificationReasonId**. For exampl
 
 var classificationReason = new AlfrescoGovernanceServicesSecurityControls.ClassificationReasonBody(); // ClassificationReasonBody | Classification reason
 
-this.alfrescoJsApi.gsClassification.updateClassificationReason(classificationReasonIdclassificationReason).then(function(data) {
+this.alfrescoJsApi.gsClassification.classificationReasonsApi.updateClassificationReason(classificationReasonIdclassificationReason).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

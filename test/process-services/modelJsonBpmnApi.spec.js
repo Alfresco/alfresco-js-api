@@ -1,9 +1,9 @@
 /*global describe, it, beforeEach */
 
-var AlfrescoApi = require('../main');
+var AlfrescoApi = require('../../main');
 var expect = require('chai').expect;
-var AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
-var ModelJsonBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.ModelJsonBpmMock;
+var AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
+var ModelJsonBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.ModelJsonBpmMock;
 
 describe('Activiti Model JsonBpmn Api', function () {
     beforeEach(function (done) {
