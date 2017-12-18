@@ -16,7 +16,7 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../../../alfrescoApiClient', './model/Error', './model/RMNodeBodyCreateWithRelativePath', './model/UnfiledRecordFolderAssociationPaging', './model/UnfiledRecordFolderBodyUpdate', './model/UnfiledRecordFolderEntry'], factory);
+    define(['../../../alfrescoApiClient', '../model/Error', '../model/RMNodeBodyCreateWithRelativePath', '../model/UnfiledRecordFolderAssociationPaging', '../model/UnfiledRecordFolderBodyUpdate', '../model/UnfiledRecordFolderEntry'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../../../alfrescoApiClient'), require('../model/Error'), require('../model/RMNodeBodyCreateWithRelativePath'), require('../model/UnfiledRecordFolderAssociationPaging'), require('../model/UnfiledRecordFolderBodyUpdate'), require('../model/UnfiledRecordFolderEntry'));

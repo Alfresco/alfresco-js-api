@@ -16,7 +16,7 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../../../alfrescoApiClient', './model/DeclassificationExemptionBody', './model/DeclassificationExemptionEntry', './model/DeclassificationExemptionsPaging', './model/Error'], factory);
+    define(['../../../alfrescoApiClient', '../model/DeclassificationExemptionBody', '../model/DeclassificationExemptionEntry', '../model/DeclassificationExemptionsPaging', '../model/Error'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../../../alfrescoApiClient'), require('../model/DeclassificationExemptionBody'), require('../model/DeclassificationExemptionEntry'), require('../model/DeclassificationExemptionsPaging'), require('../model/Error'));

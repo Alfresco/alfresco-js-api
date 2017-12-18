@@ -16,7 +16,7 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../../../alfrescoApiClient', './model/ClassificationGuideBody', './model/ClassificationGuideEntry', './model/ClassificationGuidePaging', './model/CombinedInstructionBody', './model/Error', './model/InstructionEntry', './model/SubtopicPaging', './model/TopicBody', './model/TopicEntry', './model/TopicPaging'], factory);
+    define(['../../../alfrescoApiClient', '../model/ClassificationGuideBody', '../model/ClassificationGuideEntry', '../model/ClassificationGuidePaging', '../model/CombinedInstructionBody', '../model/Error', '../model/InstructionEntry', '../model/SubtopicPaging', '../model/TopicBody', '../model/TopicEntry', '../model/TopicPaging'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ClassificationGuideBody'), require('../model/ClassificationGuideEntry'), require('../model/ClassificationGuidePaging'), require('../model/CombinedInstructionBody'), require('../model/Error'), require('../model/InstructionEntry'), require('../model/SubtopicPaging'), require('../model/TopicBody'), require('../model/TopicEntry'), require('../model/TopicPaging'));

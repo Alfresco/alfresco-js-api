@@ -16,7 +16,7 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../../../alfrescoApiClient', './model/Error', './model/SecurityControlSettingBody', './model/SecurityControlSettingEntry'], factory);
+    define(['../../../alfrescoApiClient', '../model/Error', '../model/SecurityControlSettingBody', '../model/SecurityControlSettingEntry'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../../../alfrescoApiClient'), require('../model/Error'), require('../model/SecurityControlSettingBody'), require('../model/SecurityControlSettingEntry'));
