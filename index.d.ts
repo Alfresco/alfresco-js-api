@@ -885,7 +885,7 @@ declare namespace AlfrescoApi {
     }
 
     export class ChildAssociationInfo {
-        constructor(obj?: any);
+        constructor(assocType: string, isPrimary: boolean);
 
         assocType?: string;
         isPrimary?: boolean;
@@ -3717,10 +3717,23 @@ declare namespace AlfrescoApi {
 
     //  ======= Process service  End ======
 
+    //  ======= Search Start ======
+
+    export interface Search {
+        searchApi: SearchApi;
+    }
+
+    export interface SearchApi {
+        new(client?: ApiClient): SearchApi;
+
+        search(queryBody: QueryBody): Promise<any> ;
+    }
+
+    //  ======= Search  End ======
+
 
     //  ======= Governance Core Start ======
     export interface GsCore {
-        filePlansApi: FilePlansApi;
         filePlansApi: FilePlansApi;
         gsSitesApi: GsSitesApi;
         recordCategoriesApi: RecordCategoriesApi;
@@ -3867,7 +3880,7 @@ declare namespace AlfrescoApi {
 
         getRecord(recordId: string, opts?: any): Promise<any> ;
 
-        getRecordContent(recordId: string, opts?: Object, opts?: any): Promise<any> ;
+        getRecordContent(recordId: string, opts?: any): Promise<any> ;
 
         updateRecord(recordId: string, recordBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<any>;
     }
@@ -3911,31 +3924,9 @@ declare namespace AlfrescoApi {
 
         getUnfiledRecordFolder(unfiledRecordFolderId: string, opts?: any): Promise<any> ;
 
-        listUnfiledRecordFolderChildren(unfiledRecordFolderId: string, opts?: Object, opts?: any): Promise<any> ;
+        listUnfiledRecordFolderChildren(unfiledRecordFolderId: string, opts?: any): Promise<any> ;
 
         updateUnfiledRecordFolder(unfiledRecordFolderId: string, unfiledRecordFolderBodyUpdate: UnfiledRecordFolderBodyUpdate, opts?: any): Promise<any>;
-    }
-
-    export class ChildAssociationInfo {
-        constructor(assocType: string, isPrimary: boolean);
-    }
-
-    export class ContentInfo {
-        constructor(mimeType: string, mimeTypeName: string, sizeInBytes: number, encoding: string);
-
-        constructFromObject(data: Object, obj: ContentInfo): ContentInfo;
-    }
-
-    export class Error {
-        constructor();
-
-        constructFromObject(data: Object, obj: Error): Error;
-    }
-
-    export class ErrorError {
-        constructor(statusCode: number, briefSummary: string, stackTrace: string, descriptionURL: string);
-
-        constructFromObject(data: Object, obj: ErrorError): ErrorError;
     }
 
     export class FilePlan {
@@ -3960,24 +3951,6 @@ declare namespace AlfrescoApi {
         constructor(entry: FilePlan);
 
         constructFromObject(data: Object, obj: FilePlanEntry): FilePlanEntry;
-    }
-
-    export class Pagination {
-        constructor(count: number, hasMoreItems: boolean, skipCount: number, maxItems: number);
-
-        constructFromObject(data: Object, obj: Pagination): Pagination;
-    }
-
-    export class PathElement {
-        constructor();
-
-        constructFromObject(data: Object, obj: PathElement): PathElement;
-    }
-
-    export class PathInfo {
-        constructor();
-
-        constructFromObject(data: Object, obj: PathInfo): PathInfo;
     }
 
     export class RMNodeBodyCreate {
@@ -4331,12 +4304,6 @@ declare namespace AlfrescoApi {
 
     }
 
-    export class UserInfo {
-        constructor(displayName: string, id: string);
-
-        constructFromObject(data: Object, obj: UserInfo): UserInfo;
-    }
-
     //  ======= Governance Core End ======
 
     //  ======= Governance Classification Start ======
@@ -4397,31 +4364,31 @@ declare namespace AlfrescoApi {
     export interface ClassificationGuidesApi {
         new(client?: ApiClient): ClassificationGuidesApi;
 
-        combinedInstructions(opts?: any, opts?: { instructions: CombinedInstructionBody }): Promise<any>;
+        combinedInstructions(opts?: any): Promise<any>;
 
         createClassificationGuide(classificationGuide: ClassificationGuideBody): Promise<any>;
 
-        createSubtopic(topicId: string, topic: TopicBody, opts?: any, opts?: { include: string[] }): Promise<any>;
+        createSubtopic(topicId: string, topic: TopicBody, opts?: any): Promise<any>;
 
-        createTopic(classificationGuideId: string, topic: TopicBody, opts?: any, opts?: any): Promise<any>;
+        createTopic(classificationGuideId: string, topic: TopicBody, opts?: any): Promise<any>;
 
         deleteClassificationGuide(classificationGuideId: string): Promise<any>;
 
         deleteTopic(topicId: string): Promise<any>;
 
-        listClassificationGuides(opts?: any, opts?: { include: string[], skipCount: number, maxItems: number, orderBy: string[], where: string }): Promise<any>;
+        listClassificationGuides(opts?: any): Promise<any>;
 
-        listSubtopics(topicId: string, opts?: any, opts?: { include: string[], skipCount: number, maxItems: number, orderBy: string[], where: string, includeSource: boolean }): Promise<any>;
+        listSubtopics(topicId: string, opts?: any): Promise<any>;
 
-        listTopics(classificationGuideId: string, opts?: anyg[], opts?: any): Promise<any>;
+        listTopics(classificationGuideId: string, opts?: any): Promise<any>;
 
         showClassificationGuideById(classificationGuideId: string): Promise<any>;
 
-        showTopicById(topicId: string, opts?: any, opts?: any): Promise<any>;
+        showTopicById(topicId: string, opts?: any): Promise<any>;
 
         updateClassificationGuide(classificationGuideId: string, classificationGuide: ClassificationGuideBody): Promise<any>;
 
-        updateTopic(topicId: string, topic: TopicBody, opts?: any, opts?: any): Promise<any>;
+        updateTopic(topicId: string, topic: TopicBody,opts?: any): Promise<any>;
     }
 
     export interface ClassificationReasonsApi {
@@ -4445,7 +4412,7 @@ declare namespace AlfrescoApi {
 
         deleteDeclassificationExemption(declassificationExemptionId: string): Promise<any>;
 
-        listDeclassificationExemptions(opts?: any, opts?: { skipCount: number, maxItems: number }): Promise<any>;
+        listDeclassificationExemptions(opts?: any): Promise<any>;
 
         showDeclassificationExemptionById(declassificationExemptionId: string): Promise<any>;
 
@@ -4470,10 +4437,6 @@ declare namespace AlfrescoApi {
         constructor(name: string, originatingOrganization: string, publishedOn: Date);
 
         constructFromObject(data: any, obj: ClassificationGuideBody): ClassificationGuideBody;
-
-        name: string;
-        originatingOrganization: string;
-        publishedOn: Date;
     }
 
     export class ClassificationGuideEntry {
@@ -4608,18 +4571,6 @@ declare namespace AlfrescoApi {
         constructFromObject(data: any, obj: DeclassificationExemptionsPagingList): DeclassificationExemptionsPagingList;
     }
 
-    export class Error {
-        constructor();
-
-        constructFromObject(data: any, obj: Error): Error;
-    }
-
-    export class ErrorError {
-        constructor(statusCode: number, briefSummary: string, stackTrace: string, descriptionURL: string);
-
-        constructFromObject(data: any, obj: ErrorError): ErrorError;
-    }
-
     export class Instruction {
         constructor();
 
@@ -4645,22 +4596,10 @@ declare namespace AlfrescoApi {
         constructFromObject(data: any, obj: InstructionEntry): InstructionEntry;
     }
 
-    export class Pagination {
-        constructor(count: number, hasMoreItems: boolean, skipCount: number, maxItems: number);
-
-        constructFromObject(data: any, obj: Pagination): Pagination;
-    }
-
     export class Path {
         constructor();
 
         constructFromObject(data: any, obj: Path): Path;
-    }
-
-    export class PathElement {
-        constructor(id: string, name: string);
-
-        constructFromObject(data: any, obj: PathElement): PathElement;
     }
 
     export class SecurityControlSetting {
