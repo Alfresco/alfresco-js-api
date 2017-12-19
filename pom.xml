@@ -8,50 +8,25 @@
     <properties>
         <srcdir>${project.basedir}/src</srcdir>
         <api-version>1.1-SNAPSHOT</api-version>
-        <api-defs-dir>${project.build.directory}/api-explorer/definitions</api-defs-dir>
-        <swagger-codegen-version>2.1.6</swagger-codegen-version>
+        <api-defs-dir>${project.basedir}/definitions</api-defs-dir>
+        <swagger-codegen-version>2.2.3</swagger-codegen-version>
     </properties>
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.10</version>
-                <executions>
-                    <execution>
-                        <id>unpack</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.alfresco</groupId>
-                                    <artifactId>api-explorer</artifactId>
-                                    <version>${api-version}</version>
-                                    <type>war</type>
-                                </artifactItem>
-                            </artifactItems>
-                            <outputDirectory>${project.build.directory}/api-explorer</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>io.swagger</groupId>
                 <artifactId>swagger-codegen-maven-plugin</artifactId>
                 <version>${swagger-codegen-version}</version>
                 <executions>
                     <execution>
-                        <id>generate-auth-api</id>
+                        <id>generate-gs-classification-api</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${api-defs-dir}/alfresco-auth.yaml</inputSpec>
+                            <inputSpec>${api-defs-dir}/gs-classification-api.yaml</inputSpec>
                             <language>javascript</language>
-                            <output>${srcdir}/alfresco-auth-rest-api</output>
+                            <output>${srcdir}/alfresco-gs-classification-rest-api</output>
                             <configOptions>
                                 <projectVersion>0.1.0</projectVersion>
                                 <usePromises>true</usePromises>
@@ -59,21 +34,52 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>generate-core-api</id>
+                        <id>generate-gs-core-api</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${api-defs-dir}/alfresco-core.yaml</inputSpec>
+                            <inputSpec>${api-defs-dir}/gs-core-api.yaml</inputSpec>
                             <language>javascript</language>
-                            <output>${srcdir}/alfresco-core-rest-api</output>
+                            <output>${srcdir}/alfresco-gs-core-rest-api</output>
                             <configOptions>
                                 <projectVersion>0.1.0</projectVersion>
                                 <usePromises>true</usePromises>
                             </configOptions>
                         </configuration>
                     </execution>
+                    <!--<execution>-->
+                        <!--<id>generate-auth-api</id>-->
+                        <!--<goals>-->
+                            <!--<goal>generate</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<inputSpec>${api-defs-dir}/alfresco-auth.yaml</inputSpec>-->
+                            <!--<language>javascript</language>-->
+                            <!--<output>${srcdir}/alfresco-auth-rest-api</output>-->
+                            <!--<configOptions>-->
+                                <!--<projectVersion>0.1.0</projectVersion>-->
+                                <!--<usePromises>true</usePromises>-->
+                            <!--</configOptions>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
+                    <!--<execution>-->
+                        <!--<id>generate-core-api</id>-->
+                        <!--<goals>-->
+                            <!--<goal>generate</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<inputSpec>${api-defs-dir}/alfresco-core.yaml</inputSpec>-->
+                            <!--<language>javascript</language>-->
+                            <!--<output>${srcdir}/alfresco-core-rest-api</output>-->
+                            <!--<configOptions>-->
+                                <!--<projectVersion>0.1.0</projectVersion>-->
+                                <!--<usePromises>true</usePromises>-->
+                            <!--</configOptions>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
                 </executions>
+
             </plugin>
         </plugins>
     </build>

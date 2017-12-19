@@ -82,22 +82,22 @@
 
 
   /**
-   * @member {String} major
+   * @member {string} major
    */
   exports.prototype['major'] = undefined;
 
   /**
-   * @member {String} minor
+   * @member {string} minor
    */
   exports.prototype['minor'] = undefined;
 
   /**
-   * @member {String} patch
+   * @member {string} patch
    */
   exports.prototype['patch'] = undefined;
 
   /**
-   * @member {String} hotfix
+   * @member {string} hotfix
    */
   exports.prototype['hotfix'] = undefined;
 
@@ -107,12 +107,12 @@
   exports.prototype['schema'] = undefined;
 
   /**
-   * @member {String} label
+   * @member {string} label
    */
   exports.prototype['label'] = undefined;
 
   /**
-   * @member {String} display
+   * @member {string} display
    */
   exports.prototype['display'] = undefined;
 

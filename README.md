@@ -172,6 +172,8 @@ To correctly use this component check that on your machine is running Node versi
 
 - [Authentication API](/src/alfresco-auth-rest-api)
 - [Core API](/src/alfresco-core-rest-api)
+- [Governance core API](/src/alfresco-gs-core-rest-api)
+- [Governance classification API](/src/alfresco-gs-classification-rest-api)
 - [Discovery API](/src/alfresco-discovery-rest-api)
 - [Search API](/src/alfresco-search-rest-api)
 - [Activiti API](/src/alfresco-activiti-rest-api)

@@ -75,27 +75,27 @@
 
 
   /**
-   * @member {String} errorKey
+   * @member {string} errorKey
    */
   exports.prototype['errorKey'] = undefined;
 
   /**
-   * @member {String} briefSummary
+   * @member {string} briefSummary
    */
   exports.prototype['briefSummary'] = undefined;
 
   /**
-   * @member {String} descriptionURL
+   * @member {string} descriptionURL
    */
   exports.prototype['descriptionURL'] = undefined;
 
   /**
-   * @member {String} logId
+   * @member {string} logId
    */
   exports.prototype['logId'] = undefined;
 
   /**
-   * @member {String} stackTrace
+   * @member {string} stackTrace
    */
   exports.prototype['stackTrace'] = undefined;
 

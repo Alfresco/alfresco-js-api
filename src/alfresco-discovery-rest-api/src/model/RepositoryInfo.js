@@ -70,7 +70,7 @@
 
 
   /**
-   * @member {String} edition
+   * @member {string} edition
    */
   exports.prototype['edition'] = undefined;
 
