@@ -785,6 +785,10 @@ declare namespace AlfrescoApi {
         revertVersion(nodeId: string, versionId: string, revertBody: RevertBody, opts?: { fields?: Array<string> }): Promise<VersionEntry>;
     }
 
+    export interface ClassesApi {
+        getClass(className: string, opts?: {}): Promise<ClassDescription>;
+    }
+
     export class Activity {
         constructor(obj?: any);
 
@@ -2011,6 +2015,41 @@ declare namespace AlfrescoApi {
 
         entries?: Array<VersionEntry>;
         pagination?: Pagination;
+    }
+
+
+    export class ClassPropertyDescription {
+        constructor(obj?: any);
+
+        dataType?: string;
+        defaultValue?: string;
+        description?: string;
+        enforced?: boolean;
+        indexed?: boolean;
+        mandatory?: boolean;
+        multiValued?: boolean;
+        name?: string;
+        protected?: boolean;
+        title?: string;
+        url?: string;
+    }
+
+    export class ClassDescription {
+        constructor(obj?: any);
+
+        associations?: any;
+        childassociations?: any;
+        defaultAspects?: any;
+        description?: string;
+        isAspect?: boolean;
+        isContainer?: boolean;
+        name?: string;
+        parent?: any;
+        properties?: {
+            [key: string]: ClassPropertyDescription;
+        };
+        title?: string;
+        url?: string;
     }
 
     //  ======= Core End ======
@@ -4388,7 +4427,7 @@ declare namespace AlfrescoApi {
 
         updateClassificationGuide(classificationGuideId: string, classificationGuide: ClassificationGuideBody): Promise<any>;
 
-        updateTopic(topicId: string, topic: TopicBody,opts?: any): Promise<any>;
+        updateTopic(topicId: string, topic: TopicBody, opts?: any): Promise<any>;
     }
 
     export interface ClassificationReasonsApi {
@@ -4709,6 +4748,7 @@ declare namespace AlfrescoApi {
         ratingsApi: RatingsApi;
         renditionsApi: RenditionsApi;
         versionsApi: VersionsApi;
+        classesApi: ClassesApi;
         searchApi: any;
         sharedlinksApi: SharedlinksApi;
         sitesApi: SitesApi;
