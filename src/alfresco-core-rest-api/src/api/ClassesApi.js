@@ -65,11 +65,12 @@
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = ClassDescription;
+      var contextRoot = 'alfresco/s';
 
       return this.apiClient.callApi(
-        '/alfresco/s/api/classes/{className}', 'GET',
+        '/api/classes/{className}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authNames, contentTypes, accepts, returnType, contextRoot
       );
     }
   };
