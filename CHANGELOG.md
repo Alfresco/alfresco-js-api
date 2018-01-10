@@ -9,6 +9,9 @@
 ## Governance api
 - [Governance api](https://issues.alfresco.com/jira/browse/ADF-282)
 
+## Features
+- [Classes end point](https://issues.alfresco.com/jira/browse/ADF-1986)
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.0.0) (28-11-2017)
 
