@@ -4938,6 +4938,8 @@ declare namespace AlfrescoApi {
         getContentUrl(nodeId: string, attachment?: boolean, ticket?: string): string;
 
         getRenditionUrl(nodeId: string, encoding: string, attachment?: boolean, ticket?: string): string;
+
+        getSharedLinkContentUrl(linkId: string, attachment?: boolean): string;
     }
 
     export interface AuthApi {
