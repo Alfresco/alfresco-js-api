@@ -3,14 +3,18 @@
 </p>
 
 # Alfresco JS API
-<a name="2.0.0"></a>
+
+<a name="2.1.0"></a>
 # [2.1.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.1.0) (xx-xx-2017)
 
 ## Governance api
+
 - [Governance api](https://issues.alfresco.com/jira/browse/ADF-282)
 
 ## Features
+
 - [Classes end point](https://issues.alfresco.com/jira/browse/ADF-1986)
+- [Generating shared link content url](https://issues.alfresco.com/jira/browse/ADF-2136)
 
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.0.0) (28-11-2017)
