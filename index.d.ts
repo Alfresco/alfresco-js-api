@@ -649,15 +649,17 @@ declare namespace AlfrescoApi {
 
         createRendition(nodeId?: string, renditionBody?: RenditionBody): Promise<any>;
 
-        getRendition(nodeId?: string, renditionId?: string): Promise<RenditionEntry>;
+        getRendition(nodeId: string, renditionId: string): Promise<RenditionEntry>;
 
-        getRenditionContent(nodeId?: string, renditionId?: string, opts?: any): Promise<any>;
+        getRenditionContent(nodeId: string, renditionId: string, opts?: { attachment?: boolean, ifModifiedSince?: Date }): Promise<any>;
 
-        getRenditions(nodeId?: string): Promise<RenditionPaging>;
+        getRenditions(nodeId: string): Promise<RenditionPaging>;
 
-        getSharedLinkRendition(sharedId?: string): Promise<RenditionEntry>;
+        getSharedLinkRenditions(sharedId: string): Promise<RenditionPaging>;
 
-        getSharedLinkRenditionContent(sharedId?: string, renditionId?: string, opts?: any): Promise<any>;
+        getSharedLinkRendition(sharedId: string): Promise<RenditionEntry>;
+
+        getSharedLinkRenditionContent(sharedId: string, renditionId: string, opts?: { attachment?: boolean, ifModifiedSince?: Date }): Promise<any>;
     }
 
     export interface RatingsApi {
