@@ -657,7 +657,7 @@ declare namespace AlfrescoApi {
 
         getSharedLinkRenditions(sharedId: string): Promise<RenditionPaging>;
 
-        getSharedLinkRendition(sharedId: string): Promise<RenditionEntry>;
+        getSharedLinkRendition(sharedId: string, renditionId: string): Promise<RenditionEntry>;
 
         getSharedLinkRenditionContent(sharedId: string, renditionId: string, opts?: { attachment?: boolean, ifModifiedSince?: Date }): Promise<any>;
     }
@@ -4942,6 +4942,8 @@ declare namespace AlfrescoApi {
         getRenditionUrl(nodeId: string, encoding: string, attachment?: boolean, ticket?: string): string;
 
         getSharedLinkContentUrl(linkId: string, attachment?: boolean): string;
+
+        getSharedLinkRenditionUrl(sharedId: string, renditionId: string, attachment?: boolean): string;
     }
 
     export interface AuthApi {
