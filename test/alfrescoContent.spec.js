@@ -135,4 +135,14 @@ describe('AlfrescoContent', function () {
         const url = this.content.getSharedLinkContentUrl(this.nodeId, true);
         expect(url).to.be.equal(this.sharedLinksUrl + this.nodeId + '/content?attachment=true');
     });
+
+    it('should generate shared link rendition url', function () {
+        const url = this.content.getSharedLinkRenditionUrl(this.nodeId, 'pdf');
+        expect(url).to.be.equal(this.sharedLinksUrl + this.nodeId + '/renditions/pdf/content?attachment=false');
+    });
+
+    it('should generate shared link rendition url for download', function () {
+        const url = this.content.getSharedLinkRenditionUrl(this.nodeId, 'pdf', true);
+        expect(url).to.be.equal(this.sharedLinksUrl + this.nodeId + '/renditions/pdf/content?attachment=true');
+    });
 });
