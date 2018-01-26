@@ -34,6 +34,7 @@
 - [getContentThumbnailUrl returns file data instead or URL](https://issues.alfresco.com/jira/browse/ADF-1962)
 - [ContentApi is missing the preview rendition API](https://issues.alfresco.com/jira/browse/ADF-1963)
 
+<a name="1.9.0"></a>
 # [1.9.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.9.0) (09-10-2017)
 
 ## Fix
