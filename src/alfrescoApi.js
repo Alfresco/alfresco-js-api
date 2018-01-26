@@ -4,6 +4,8 @@ var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
 var AlfrescoPrivateRestApi = require('./alfresco-private-rest-api/src/index.js');
 var AlfrescoSearchRestApi = require('./alfresco-search-rest-api/src/index.js');
 var AlfrescoDiscoveryRestApi = require('./alfresco-discovery-rest-api/src/index.js');
+var AlfrescoGsClassificationRestApi = require('./alfresco-gs-classification-rest-api/src/index.js');
+var AlfrescoGsCoreRestApi = require('./alfresco-gs-core-rest-api/src/index.js');
 var AlfrescoAuthRestApi = require('./alfresco-auth-rest-api/src/index');
 var AlfrescoActivitiApi = require('./alfresco-activiti-rest-api/src/index');
 var AlfrescoContent = require('./alfrescoContent');
@@ -15,9 +17,6 @@ var BpmAuth = require('./bpmAuth');
 var Oauth2Auth = require('./oauth2Auth');
 var EcmClient = require('./ecmClient');
 var BpmClient = require('./bpmClient');
-var SearchClient = require('./searchClient');
-var DiscoveryClient = require('./discoveryClient');
-var EcmPrivateClient = require('./ecmPrivateClient');
 
 class AlfrescoApi {
     /**
@@ -54,43 +53,14 @@ class AlfrescoApi {
             disableCsrf: config.disableCsrf || false
         };
 
-        this.ecmPrivateClient = new EcmPrivateClient(this.config);
-        this.ecmClient = new EcmClient(this.config);
+        this.ecmPrivateClient = new EcmClient(this.config, '/api/-default-/private/alfresco/versions/1');
+        this.ecmClient = new EcmClient(this.config, '/api/-default-/public/alfresco/versions/1');
+        this.searchClient = new EcmClient(this.config, '/api/-default-/public/search/versions/1');
+        this.discoveryClient = new EcmClient(this.config,'/api');
+        this.gsClient = new EcmClient(this.config, '/api/-default-/public/gs/versions/1');
         this.bpmClient = new BpmClient(this.config);
-        this.searchClient = new SearchClient(this.config);
-        this.discoveryClient = new DiscoveryClient(this.config);
 
-        this.ecmClient.on('unauthorized', ()=> {
-            this.invalidateSession();
-        });
-
-        this.ecmPrivateClient.on('unauthorized', ()=> {
-            this.invalidateSession();
-        });
-
-        this.bpmClient.on('unauthorized', ()=> {
-            this.invalidateSession();
-        });
-
-        this.searchClient.on('unauthorized', ()=> {
-            this.invalidateSession();
-        });
-
-        this.discoveryClient.on('unauthorized', ()=> {
-            this.invalidateSession();
-        });
-
-        this.ecmClient.on('unauthorized', ()=> {
-            this.invalidateSession();
-        });
-
-        this.ecmPrivateClient.on('unauthorized', ()=> {
-            this.invalidateSession();
-        });
-
-        this.bpmClient.on('unauthorized', ()=> {
-            this.invalidateSession();
-        });
+        this.unauthorizedListeners();
 
         if (this.config.provider === 'OAUTH') {
             this.oauth2Auth = new Oauth2Auth(this.config);
@@ -104,6 +74,44 @@ class AlfrescoApi {
         this.initObjects();
 
         Emitter.call(this);
+    }
+
+    unauthorizedListeners() {
+        this.ecmClient.on('unauthorized', () => {
+            this.invalidateSession();
+        });
+
+        this.ecmPrivateClient.on('unauthorized', () => {
+            this.invalidateSession();
+        });
+
+        this.bpmClient.on('unauthorized', () => {
+            this.invalidateSession();
+        });
+
+        this.searchClient.on('unauthorized', () => {
+            this.invalidateSession();
+        });
+
+        this.discoveryClient.on('unauthorized', () => {
+            this.invalidateSession();
+        });
+
+        this.gsClient.on('unauthorized', () => {
+            this.invalidateSession();
+        });
+
+        this.ecmClient.on('unauthorized', () => {
+            this.invalidateSession();
+        });
+
+        this.ecmPrivateClient.on('unauthorized', () => {
+            this.invalidateSession();
+        });
+
+        this.bpmClient.on('unauthorized', ()=> {
+            this.invalidateSession();
+        });
     }
 
     changeCsrfConfig(disableCsrf) {
@@ -152,6 +160,18 @@ class AlfrescoApi {
         AlfrescoDiscoveryRestApi.ApiClient.instance = this.discoveryClient;
         this.discoveryStore = AlfrescoDiscoveryRestApi;
         this._instantiateObjects(this.discoveryStore, this.discovery);
+
+        //Governance CORE
+        this.gsCore = {};
+        AlfrescoGsCoreRestApi.ApiClient.instance = this.gsClient;
+        this.gsCoreStore = AlfrescoGsCoreRestApi;
+        this._instantiateObjects(this.gsCoreStore, this.gsCore);
+
+        //Governance Classification
+        this.gsClassification = {};
+        AlfrescoGsClassificationRestApi.ApiClient.instance = this.gsClient;
+        this.gsClassificationStore = AlfrescoGsClassificationRestApi;
+        this._instantiateObjects(this.gsClassificationStore, this.gsClassification);
 
         this.nodes = this.node = new AlfrescoNode();
         this.content = new AlfrescoContent(this.ecmAuth, this.ecmClient);
@@ -247,6 +267,7 @@ class AlfrescoApi {
         this.bpmClient.setAuthentications(authBPM);
         this.searchClient.setAuthentications(authECM);
         this.discoveryClient.setAuthentications(authECM);
+        this.gsClient.setAuthentications(authECM);
     }
 
     /**
@@ -438,4 +459,7 @@ module.exports.Activiti = AlfrescoActivitiApi;
 module.exports.Core = AlfrescoCoreRestApi;
 module.exports.Auth = AlfrescoAuthRestApi;
 module.exports.PrivateRestApi = AlfrescoPrivateRestApi;
+module.exports.Discovery = AlfrescoDiscoveryRestApi;
 module.exports.Search = AlfrescoSearchRestApi;
+module.exports.GsCore = AlfrescoGsCoreRestApi;
+module.exports.GsClassification = AlfrescoGsClassificationRestApi;

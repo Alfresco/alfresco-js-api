@@ -51,7 +51,11 @@ class AlfrescoApiClient extends ApiClient {
         }
 
         var request = this.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
-            contentTypes, accepts, responseType, eventEmitter);
+            contentTypes, accepts, responseType, eventEmitter, returnType);
+
+        if (returnType === 'Binary') {
+            request = request.buffer(true).parse(superagent.parse['application/octet-stream']);
+        }
 
         if (returnType === 'Binary') {
             request = request.buffer(true).parse(superagent.parse['application/octet-stream']);
@@ -197,7 +201,7 @@ class AlfrescoApiClient extends ApiClient {
     }
 
     buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
-                  contentTypes, accepts, responseType, eventEmitter) {
+                  contentTypes, accepts, responseType, eventEmitter, returnType) {
         var request = superagent(httpMethod, url);
 
         // apply authentications
@@ -225,10 +229,6 @@ class AlfrescoApiClient extends ApiClient {
 
         // set request timeout
         request.timeout(this.timeout);
-
-        if (responseType) {
-            request._responseType = responseType;
-        }
 
         var contentType = this.jsonPreferredMime(contentTypes);
 
@@ -267,6 +267,12 @@ class AlfrescoApiClient extends ApiClient {
         var accept = this.jsonPreferredMime(accepts);
         if (accept) {
             request.accept(accept);
+        }
+
+        if (returnType === 'Blob' || responseType === 'blob' || responseType === 'Blob') {
+            request.responseType('blob');
+        } else if (returnType === 'String') {
+            request.responseType('string');
         }
 
         return request;

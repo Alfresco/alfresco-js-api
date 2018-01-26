@@ -7,17 +7,19 @@ class EcmClient extends AlfrescoApiClient {
     /**
      * @param {Object} config
      */
-    constructor(config) {
+    constructor(config, servicePath) {
         super();
 
         this.config = config;
+        this.servicePath = servicePath;
 
         this.changeHost();
     }
 
     changeHost() {
         this.host = this.config.hostEcm;
-        this.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/alfresco/versions/1';
+
+        this.basePath = this.config.hostEcm + '/' + this.config.contextRoot + this.servicePath;
     }
 
     /**

@@ -22,7 +22,7 @@
    */
 
   /**
-   * Constructs a new RenditionsApi. 
+   * Constructs a new RenditionsApi.
    * @alias module:api/RenditionsApi
    * @class
    * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
@@ -291,6 +291,49 @@
 
       return this.apiClient.callApi(
         '/shared-links/{sharedId}/renditions', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Gets rendition information for the file with shared link identifier sharedId.
+     * @param {String} sharedId The identifier of a shared link to a file.
+     * @param {String} renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
+     * data is of type: {module:model/RenditionEntry}
+     */
+    this.getSharedLinkRendition = function(sharedId, renditionId) {
+      var postBody = null;
+
+      // verify the required parameter 'sharedId' is set
+      if (sharedId == undefined || sharedId == null) {
+        throw "Missing the required parameter 'sharedId' when calling getRendition";
+      }
+
+      // verify the required parameter 'renditionId' is set
+      if (renditionId == undefined || renditionId == null) {
+        throw "Missing the required parameter 'renditionId' when calling getRendition";
+      }
+
+
+      var pathParams = {
+        'sharedId': sharedId,
+        'renditionId': renditionId
+      };
+      var queryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = RenditionEntry;
+
+      return this.apiClient.callApi(
+        '/shared-links/{sharedId}/renditions/{renditionId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );

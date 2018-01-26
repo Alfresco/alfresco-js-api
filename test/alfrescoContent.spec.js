@@ -8,6 +8,7 @@ describe('AlfrescoContent', function () {
     beforeEach(function (done) {
         this.hostEcm = 'http://127.0.0.1:8080';
         this.nodesUrl = this.hostEcm + '/alfresco/api/-default-/public/alfresco/versions/1/nodes/';
+        this.sharedLinksUrl = this.hostEcm + '/alfresco/api/-default-/public/alfresco/versions/1/shared-links/';
         this.nodeId = '1a0b110f-1e09-4ca2-b367-fe25e4964a4';
 
         this.authResponseMock = new AuthResponseMock(this.hostEcm);
@@ -123,5 +124,25 @@ describe('AlfrescoContent', function () {
             '/renditions/' + encoding +
             '/content?attachment=true' +
             '&alf_ticket=custom_ticket');
+    });
+
+    it('should output shared link content url', function () {
+        const url = this.content.getSharedLinkContentUrl(this.nodeId);
+        expect(url).to.be.equal(this.sharedLinksUrl + this.nodeId + '/content?attachment=false');
+    });
+
+    it('should output shared link content as attachment', function () {
+        const url = this.content.getSharedLinkContentUrl(this.nodeId, true);
+        expect(url).to.be.equal(this.sharedLinksUrl + this.nodeId + '/content?attachment=true');
+    });
+
+    it('should generate shared link rendition url', function () {
+        const url = this.content.getSharedLinkRenditionUrl(this.nodeId, 'pdf');
+        expect(url).to.be.equal(this.sharedLinksUrl + this.nodeId + '/renditions/pdf/content?attachment=false');
+    });
+
+    it('should generate shared link rendition url for download', function () {
+        const url = this.content.getSharedLinkRenditionUrl(this.nodeId, 'pdf', true);
+        expect(url).to.be.equal(this.sharedLinksUrl + this.nodeId + '/renditions/pdf/content?attachment=true');
     });
 });

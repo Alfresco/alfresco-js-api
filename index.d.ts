@@ -32,6 +32,10 @@ declare class AlfrescoApi {
     Auth: AlfrescoApi.Auth;
     Core: AlfrescoApi.Core;
     Discovery: AlfrescoApi.Discovery;
+    Search: AlfrescoApi.Search;
+    GsCore: AlfrescoApi.GsCore;
+    GsClassification: AlfrescoApi.GsClassification;
+
 
     bpmAuth: AlfrescoApi.BpmAuthApi;
     ecmAuth: AlfrescoApi.EcmAuthApi;
@@ -40,8 +44,9 @@ declare class AlfrescoApi {
     activiti: AlfrescoApi.Activiti;
     core: AlfrescoApi.Core;
     discovery: AlfrescoApi.Discovery;
-
-    search: any;
+    search: AlfrescoApi.Search;
+    gsCore: AlfrescoApi.GsCore;
+    gsClassification: AlfrescoApi.GsClassification;
     nodes: AlfrescoApi.NodesApi;
     content: AlfrescoApi.ContentApi;
     upload: AlfrescoApi.UploadApi;
@@ -49,9 +54,6 @@ declare class AlfrescoApi {
 
     ecmClient: AlfrescoApi.EcmClient;
     bpmClient: AlfrescoApi.BpmClient;
-    searchClient: AlfrescoApi.SearchClient;
-    ecmPrivateClient: AlfrescoApi.EcmPrivateClient;
-
 }
 
 declare namespace AlfrescoApi {
@@ -90,6 +92,9 @@ declare namespace AlfrescoApi {
         Auth: Auth;
         Core: Core;
         Discovery: Discovery;
+        Search: Search;
+        GsCore: GsCore;
+        GsClassification: GsClassification;
 
         bpmAuth: BpmAuthApi;
         ecmAuth: EcmAuthApi;
@@ -98,8 +103,10 @@ declare namespace AlfrescoApi {
         activiti: Activiti;
         core: Core;
         discovery: Discovery;
-
         search: any;
+        gsCore: GsCore;
+        gsClassification: GsClassification;
+
         nodes: NodesApi;
         content: ContentApi;
         upload: UploadApi;
@@ -107,9 +114,6 @@ declare namespace AlfrescoApi {
 
         ecmClient: EcmClient;
         bpmClient: BpmClient;
-        searchClient: SearchClient;
-        ecmPrivateClient: EcmPrivateClient;
-
     }
 
     export class FolderEntity {
@@ -645,15 +649,17 @@ declare namespace AlfrescoApi {
 
         createRendition(nodeId?: string, renditionBody?: RenditionBody): Promise<any>;
 
-        getRendition(nodeId?: string, renditionId?: string): Promise<RenditionEntry>;
+        getRendition(nodeId: string, renditionId: string): Promise<RenditionEntry>;
 
-        getRenditionContent(nodeId?: string, renditionId?: string, opts?: any): Promise<any>;
+        getRenditionContent(nodeId: string, renditionId: string, opts?: { attachment?: boolean, ifModifiedSince?: Date }): Promise<any>;
 
-        getRenditions(nodeId?: string): Promise<RenditionPaging>;
+        getRenditions(nodeId: string): Promise<RenditionPaging>;
 
-        getSharedLinkRendition(sharedId?: string): Promise<RenditionEntry>;
+        getSharedLinkRenditions(sharedId: string): Promise<RenditionPaging>;
 
-        getSharedLinkRenditionContent(sharedId?: string, renditionId?: string, opts?: any): Promise<any>;
+        getSharedLinkRendition(sharedId: string, renditionId: string): Promise<RenditionEntry>;
+
+        getSharedLinkRenditionContent(sharedId: string, renditionId: string, opts?: { attachment?: boolean, ifModifiedSince?: Date }): Promise<any>;
     }
 
     export interface RatingsApi {
@@ -781,6 +787,10 @@ declare namespace AlfrescoApi {
         revertVersion(nodeId: string, versionId: string, revertBody: RevertBody, opts?: { fields?: Array<string> }): Promise<VersionEntry>;
     }
 
+    export interface ClassesApi {
+        getClass(className: string, opts?: {}): Promise<ClassDescription>;
+    }
+
     export class Activity {
         constructor(obj?: any);
 
@@ -881,7 +891,7 @@ declare namespace AlfrescoApi {
     }
 
     export class ChildAssociationInfo {
-        constructor(obj?: any);
+        constructor(assocType: string, isPrimary: boolean);
 
         assocType?: string;
         isPrimary?: boolean;
@@ -2009,6 +2019,41 @@ declare namespace AlfrescoApi {
         pagination?: Pagination;
     }
 
+
+    export class ClassPropertyDescription {
+        constructor(obj?: any);
+
+        dataType?: string;
+        defaultValue?: string;
+        description?: string;
+        enforced?: boolean;
+        indexed?: boolean;
+        mandatory?: boolean;
+        multiValued?: boolean;
+        name?: string;
+        protected?: boolean;
+        title?: string;
+        url?: string;
+    }
+
+    export class ClassDescription {
+        constructor(obj?: any);
+
+        associations?: any;
+        childassociations?: any;
+        defaultAspects?: any;
+        description?: string;
+        isAspect?: boolean;
+        isContainer?: boolean;
+        name?: string;
+        parent?: any;
+        properties?: {
+            [key: string]: ClassPropertyDescription;
+        };
+        title?: string;
+        url?: string;
+    }
+
     //  ======= Core End ======
 
 
@@ -2148,7 +2193,7 @@ declare namespace AlfrescoApi {
 
         getContentInSite(networkId: string, siteId: string): Promise<any>;
 
-        getRepositories(opts: { tenantId: number, includeAccounts: boolean }): Promise<any>;
+        getRepositories(opts?: { tenantId: number, includeAccounts: boolean }): Promise<any>;
     }
 
     export interface AppsDefinitionApi {
@@ -3586,8 +3631,6 @@ declare namespace AlfrescoApi {
         message?: string;
     }
 
-    //  ======= Process service  End ======
-
     export class Activiti {
         new(config: any): Activiti;
 
@@ -3713,6 +3756,986 @@ declare namespace AlfrescoApi {
         VariableScopeRepresentation: VariableScopeRepresentation;
     }
 
+    //  ======= Process service  End ======
+
+    //  ======= Search Start ======
+
+    export interface Search {
+        searchApi: SearchApi;
+    }
+
+    export interface SearchApi {
+        new(client?: ApiClient): SearchApi;
+
+        search(queryBody: QueryBody): Promise<any> ;
+    }
+
+    //  ======= Search  End ======
+
+
+    //  ======= Governance Core Start ======
+    export interface GsCore {
+        filePlansApi: FilePlansApi;
+        gsSitesApi: GsSitesApi;
+        recordCategoriesApi: RecordCategoriesApi;
+        recordFoldersApi: RecordFoldersApi;
+        recordsApi: RecordsApi;
+        transferContainersApi: TransferContainersApi;
+        transfersApi: TransfersApi;
+        unfiledContainersApi: UnfiledContainersApi;
+        unfiledRecordFoldersApi: UnfiledRecordFoldersApi;
+
+        /*Models*/
+        ChildAssociationInfo: ChildAssociationInfo;
+        ContentInfo: ContentInfo;
+        Error: Error;
+        ErrorError: ErrorError;
+        FilePlan: FilePlan;
+        FilePlanBodyUpdate: FilePlanBodyUpdate;
+        FilePlanComponentBodyUpdate: FilePlanComponentBodyUpdate;
+        FilePlanEntry: FilePlanEntry;
+        Pagination: Pagination;
+        PathElement: PathElement;
+        PathInfo: PathInfo;
+        RMNodeBodyCreate: RMNodeBodyCreate;
+        RMNodeBodyCreateWithRelativePath: RMNodeBodyCreateWithRelativePath;
+        RMSite: RMSite;
+        RMSiteBodyCreate: RMSiteBodyCreate;
+        RMSiteBodyUpdate: RMSiteBodyUpdate;
+        RMSiteEntry: RMSiteEntry;
+        Record: Record;
+        RecordCategory: RecordCategory;
+        RecordCategoryChild: RecordCategoryChild;
+        RecordCategoryChildEntry: RecordCategoryChildEntry;
+        RecordCategoryChildPaging: RecordCategoryChildPaging;
+        RecordCategoryChildPagingList: RecordCategoryChildPagingList;
+        RecordCategoryEntry: RecordCategoryEntry;
+        RecordFolder: RecordFolder;
+        RecordFolderAssociationPaging: RecordFolderAssociationPaging;
+        RecordFolderAssociationPagingList: RecordFolderAssociationPagingList;
+        RecordFolderChildAssociation: RecordFolderChildAssociation;
+        RecordFolderChildAssociationEntry: RecordFolderChildAssociationEntry;
+        RecordFolderEntry: RecordFolderEntry;
+        RequestBodyFile: RequestBodyFile;
+        RootCategoryBodyCreate: RootCategoryBodyCreate;
+        Transfer: Transfer;
+        TransferAssociationPaging: TransferAssociationPaging;
+        TransferAssociationPagingList: TransferAssociationPagingList;
+        TransferChild: TransferChild;
+        TransferChildAssociation: TransferChildAssociation;
+        TransferChildAssociationEntry: TransferChildAssociationEntry;
+        TransferContainer: TransferContainer;
+        TransferContainerAssociationPaging: TransferContainerAssociationPaging;
+        TransferContainerAssociationPagingList: TransferContainerAssociationPagingList;
+        TransferContainerBodyUpdate: TransferContainerBodyUpdate;
+        TransferContainerChild: TransferContainerChild;
+        TransferContainerChildAssociation: TransferContainerChildAssociation;
+        TransferContainerChildAssociationEntry: TransferContainerChildAssociationEntry;
+        TransferContainerEntry: TransferContainerEntry;
+        TransferEntry: TransferEntry;
+        UnfiledContainer: UnfiledContainer;
+        UnfiledContainerAssociationPaging: UnfiledContainerAssociationPaging;
+        UnfiledContainerAssociationPagingList: UnfiledContainerAssociationPagingList;
+        UnfiledContainerChild: UnfiledContainerChild;
+        UnfiledContainerChildAssociation: UnfiledContainerChildAssociation;
+        UnfiledContainerChildAssociationEntry: UnfiledContainerChildAssociationEntry;
+        UnfiledContainerEntry: UnfiledContainerEntry;
+        UnfiledRecordContainerBodyUpdate: UnfiledRecordContainerBodyUpdate;
+        UnfiledRecordFolder: UnfiledRecordFolder;
+        UnfiledRecordFolderAssociationPaging: UnfiledRecordFolderAssociationPaging;
+        UnfiledRecordFolderAssociationPagingList: UnfiledRecordFolderAssociationPagingList;
+        UnfiledRecordFolderBodyUpdate: UnfiledRecordFolderBodyUpdate;
+        UnfiledRecordFolderChild: UnfiledRecordFolderChild;
+        UnfiledRecordFolderChildAssociation: UnfiledRecordFolderChildAssociation;
+        UnfiledRecordFolderChildAssociationEntry: UnfiledRecordFolderChildAssociationEntry;
+        UnfiledRecordFolderEntry: UnfiledRecordFolderEntry;
+        UserInfo: UserInfo;
+    }
+
+    export interface FilePlansApi {
+        new(client?: ApiClient): FilePlansApi;
+
+        createFilePlanCategories(filePlanId: string, nodeBodyCreate: RootCategoryBodyCreate, opt: any): Promise<any> ;
+
+        getFilePlan(filePlanId: string, opts?: any): Promise<any> ;
+
+        getFilePlanCategories(filePlanId: string, opts?: any): Promise<any> ;
+
+        updateFilePlan(filePlanId: string, filePlanBodyUpdate: FilePlanBodyUpdate, opts?: any): Promise<any>;
+    }
+
+    export interface FilesApi {
+        new(client?: ApiClient): FilesApi;
+
+        declareRecord(fileId: string, opts?: any): Promise<any>;
+    }
+
+    export interface GsSitesApi {
+        new(client?: ApiClient): GsSitesApi;
+
+        createRMSite(siteBodyCreate: RMSiteBodyCreate, opts?: any): Promise<any> ;
+
+        deleteRMSite(): Promise<any> ;
+
+        getRMSite(opts?: any): Promise<any> ;
+
+        updateRMSite(siteBodyUpdate: RMSiteBodyUpdate, opts?: any): Promise<any>;
+    }
+
+    export interface RecordCategoriesApi {
+        new(client?: ApiClient): RecordCategoriesApi;
+
+        createRecordCategoryChild(recordCategoryId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: any): Promise<any> ;
+
+        deleteRecordCategory(recordCategoryId: string): Promise<any> ;
+
+        getRecordCategory(recordCategoryId: string, opts?: any): Promise<any> ;
+
+        listRecordCategoryChildren(recordCategoryId: string, opts?: any): Promise<any> ;
+
+        updateRecordCategory(recordCategoryId: string, recordCategoryBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<any>;
+    }
+
+    export interface RecordFoldersApi {
+        new(client?: ApiClient): RecordFoldersApi;
+
+        createRecordFolderChild(recordFolderId: string, recordBodyCreate: RMNodeBodyCreate, opts?: any): Promise<any> ;
+
+        deleteRecordFolder(recordFolderId: string): Promise<any> ;
+
+        getRecordFolder(recordFolderId: string, opts?: any): Promise<any> ;
+
+        listRecordFolderChildren(recordFolderId: string, opts?: any): Promise<any> ;
+
+        updateRecordFolder(recordFolderId: string, recordFolderBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<any>;
+    }
+
+    export interface RecordsApi {
+        new(client?: ApiClient): RecordsApi;
+
+        completeRecord(recordId: string, opts?: any): Promise<any> ;
+
+        deleteRecord(recordId: string): Promise<any> ;
+
+        fileRecord(recordId: string, nodeBodyFile: RequestBodyFile, opts?: any): Promise<any> ;
+
+        getRecord(recordId: string, opts?: any): Promise<any> ;
+
+        getRecordContent(recordId: string, opts?: any): Promise<any> ;
+
+        updateRecord(recordId: string, recordBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<any>;
+    }
+
+    export interface TransferContainersApi {
+        new(client?: ApiClient): TransferContainersApi;
+
+        getTransferContainer(transferContainerId: string, opts?: any): Promise<any> ;
+
+        listTransfers(transferContainerId: string, opts?: any): Promise<any> ;
+
+        updateTransferContainer(transferContainerId: string, nodeBodyUpdate: TransferContainerBodyUpdate, opts?: any): Promise<any>;
+    }
+
+    export interface TransfersApi {
+        new(client?: ApiClient): TransfersApi;
+
+        getTransfer(transferId: string, opts?: any): Promise<any> ;
+
+        listTransfersChildren(transferId: string, opts?: any): Promise<any>;
+    }
+
+    export interface UnfiledContainersApi {
+        new(client?: UnfiledContainersApi): TransfersApi;
+
+        createUnfiledContainerChildren(unfiledContainerId: string, nodeBodyCreate: RMNodeBodyCreate, opts?: any): Promise<any> ;
+
+        getUnfiledContainer(unfiledContainerId: string, opts?: any): Promise<any> ;
+
+        listUnfiledContainerChildren(unfiledContainerId: string, opts?: any): Promise<any> ;
+
+        updateUnfiledContainer(unfiledContainerId: string, unfiledContainerBodyUpdate: UnfiledRecordContainerBodyUpdate, opts?: any): Promise<any>;
+    }
+
+    export interface UnfiledRecordFoldersApi {
+        new(client?: UnfiledContainersApi): UnfiledRecordFoldersApi;
+
+        createUnfiledRecordFolderChildren(unfiledRecordFolderId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: any): Promise<any> ;
+
+        deleteUnfiledRecordFolder(unfiledRecordFolderId: string): Promise<any> ;
+
+        getUnfiledRecordFolder(unfiledRecordFolderId: string, opts?: any): Promise<any> ;
+
+        listUnfiledRecordFolderChildren(unfiledRecordFolderId: string, opts?: any): Promise<any> ;
+
+        updateUnfiledRecordFolder(unfiledRecordFolderId: string, unfiledRecordFolderBodyUpdate: UnfiledRecordFolderBodyUpdate, opts?: any): Promise<any>;
+    }
+
+    export class FilePlan {
+        constructor(id: string, parentId: string, name: string, nodeType: string, modifiedAt: Date, modifiedByUser: UserInfo, createdAt: Date, createdByUser: UserInfo);
+
+        constructFromObject(data: Object, obj: FilePlan): FilePlan;
+    }
+
+    export class FilePlanBodyUpdate {
+        constructor();
+
+        constructFromObject(data: Object, obj: FilePlanBodyUpdate): FilePlanBodyUpdate;
+    }
+
+    export class FilePlanComponentBodyUpdate {
+        constructor();
+
+        constructFromObject(data: Object, obj: FilePlanComponentBodyUpdate): FilePlanComponentBodyUpdate;
+    }
+
+    export class FilePlanEntry {
+        constructor(entry: FilePlan);
+
+        constructFromObject(data: Object, obj: FilePlanEntry): FilePlanEntry;
+    }
+
+    export class RMNodeBodyCreate {
+        constructor(name: string, nodeType: string);
+
+        constructFromObject(data: Object, obj: RMNodeBodyCreate): RMNodeBodyCreate;
+    }
+
+    export class RMNodeBodyCreateWithRelativePath {
+        constructor(name: string, nodeType: string);
+
+        constructFromObject(data: Object, obj: RMNodeBodyCreateWithRelativePath): RMNodeBodyCreateWithRelativePath;
+    }
+
+    namespace RMSite {
+        enum VisibilityEnum {
+            PRIVATE,
+            MODERATED,
+            PUBLIC
+        }
+
+        enum ComplianceEnum {
+            STANDARD,
+            DOD5015
+        }
+
+        enum RoleEnum {
+            SiteConsumer,
+            SiteCollaborator,
+            SiteContributor,
+            SiteManager
+        }
+    }
+
+    export class RMSite {
+        constructor(id: string, guid: string, title: string, visibility: RMSite.VisibilityEnum, compliance: RMSite.ComplianceEnum);
+
+        constructFromObject(data: Object, obj: RMSite): RMSite;
+    }
+
+    export class RMSiteBodyCreate {
+        constructor(title: string);
+
+        constructFromObject(data: Object, obj: RMSiteBodyCreate): RMSiteBodyCreate;
+    }
+
+    export class RMSiteBodyUpdate {
+        constructor();
+
+        constructFromObject(data: Object, obj: RMSiteBodyUpdate): RMSiteBodyUpdate;
+    }
+
+    export class RMSiteEntry {
+        constructor(entry: RMSite);
+
+        constructFromObject(data: Object, obj: RMSiteEntry): RMSiteEntry;
+    }
+
+    export class Record {
+        constructor(id: string, parentId: string, name: string, nodeType: string, modifiedAt: Date, modifiedByUser: UserInfo, createdAt: Date, createdByUser: UserInfo);
+
+        constructFromObject(data: Object, obj: Record): Record;
+    }
+
+    export class RecordCategory {
+        constructor(id: string, parentId: string, name: string, nodeType: string, modifiedAt: Date, modifiedByUser: UserInfo, createdAt: Date, createdByUser: UserInfo);
+
+        constructFromObject(data: Object, obj: RecordCategory): RecordCategory;
+
+    }
+
+    export class RecordCategoryChild {
+        constructor(id: string, parentId: string, name: string, nodeType: string, modifiedAt: Date, modifiedByUser: UserInfo, createdAt: Date, createdByUser: UserInfo);
+
+        constructFromObject(data: Object, obj: RecordCategoryChild): RecordCategoryChild;
+    }
+
+    export class RecordCategoryChildEntry {
+        constructor(entry: RecordCategoryChild);
+
+        constructFromObject(data: Object, obj: RecordCategoryChildEntry): RecordCategoryChildEntry;
+
+    }
+
+    export class RecordCategoryChildPaging {
+        constructor();
+
+        constructFromObject(data: Object, obj: RecordCategoryChildPaging): RecordCategoryChildPaging;
+    }
+
+    export class RecordCategoryChildPagingList {
+        constructor();
+
+        constructFromObject(data: Object, obj: RecordCategoryChildPagingList): RecordCategoryChildPagingList;
+    }
+
+    export class RecordCategoryEntry {
+        constructor(entry: RecordCategory);
+
+        constructFromObject(data: Object, obj: RecordCategoryEntry): RecordCategoryEntry;
+    }
+
+    export class RecordCategoryPaging {
+        constructor();
+
+        constructFromObject(data: Object, obj: RecordCategoryPaging): RecordCategoryPaging;
+    }
+
+    export class RecordCategoryPagingList {
+        constructor();
+
+        constructFromObject(data: Object, obj: RecordCategoryPagingList): RecordCategoryPagingList;
+    }
+
+    export class RecordEntry {
+        constructor(entry: Record);
+
+        constructFromObject(data: Object, obj: RecordEntry): RecordEntry;
+    }
+
+    export class RecordFolder {
+        constructor(id: string, parentId: string, name: string, nodeType: string, modifiedAt: Date, modifiedByUser: UserInfo, createdAt: Date, createdByUser: UserInfo);
+
+        constructFromObject(data: Object, obj: RecordFolder): RecordFolder;
+    }
+
+    export class RecordFolderAssociationPaging {
+        constructor();
+
+        constructFromObject(data: Object, obj: RecordFolderAssociationPaging): RecordFolderAssociationPaging;
+    }
+
+    export class RecordFolderAssociationPagingList {
+        constructor();
+
+        constructFromObject(data: Object, obj: RecordFolderAssociationPagingList): RecordFolderAssociationPagingList;
+    }
+
+    export class RecordFolderChildAssociation implements Record {
+        constructor(id: string, parentId: string, name: string, nodeType: string, modifiedAt: Date, modifiedByUser: UserInfo, createdAt: Date, createdByUser: UserInfo);
+
+        constructFromObject(data: Object, obj: RecordFolderChildAssociation): RecordFolderChildAssociation;
+    }
+
+    export class RecordFolderChildAssociationEntry {
+        constructor(entry: RecordFolderChildAssociation);
+
+        constructFromObject(data: Object, obj: RecordFolderChildAssociationEntry): RecordFolderChildAssociationEntry;
+    }
+
+    export class RecordFolderEntry {
+        constructor(entry: RecordFolder);
+
+        constructFromObject(data: Object, obj: RecordFolderEntry): RecordFolderEntry;
+    }
+
+    export class RequestBodyFile {
+        constructor(targetParentId: string);
+
+        constructFromObject(data: Object, obj: RequestBodyFile): RequestBodyFile;
+    }
+
+    export class RootCategoryBodyCreate {
+        constructor(name: string, nodeType: string);
+
+        constructFromObject(data: Object, obj: RootCategoryBodyCreate): RootCategoryBodyCreate;
+    }
+
+    export class Transfer {
+        constructor(id: string, parentId: string, name: string, nodeType: string, createdAt: Date, createdByUser: UserInfo);
+
+        constructFromObject(data: Object, obj: Transfer): Transfer;
+    }
+
+    export class TransferAssociationPaging {
+        constructor();
+
+        constructFromObject(data: Object, obj: TransferAssociationPaging): TransferAssociationPaging;
+    }
+
+    export class TransferAssociationPagingList {
+        constructor();
+
+        constructFromObject(data: Object, obj: TransferAssociationPagingList): TransferAssociationPagingList;
+    }
+
+    export class TransferChild {
+        constructor(id: string, parentId: string, name: string, nodeType: string, modifiedAt: Date, modifiedByUser: UserInfo, createdAt: Date, createdByUser: UserInfo);
+
+        constructFromObject(data: Object, obj: TransferChild): TransferChild;
+    }
+
+    export class TransferChildAssociation {
+        constructor(id: string, parentId: string, name: string, nodeType: string, modifiedAt: Date, modifiedByUser: UserInfo, createdAt: Date, createdByUser: UserInfo);
+
+        constructFromObject(data: Object, obj: TransferChildAssociation): TransferChildAssociation;
+    }
+
+    export class TransferChildAssociationEntry {
+        constructor(entry: TransferChildAssociation);
+
+        constructFromObject(data: Object, obj: TransferChildAssociationEntry): TransferChildAssociationEntry;
+
+    }
+
+    export class TransferContainer {
+        constructor(id: string, parentId: string, name: string, nodeType: string, modifiedAt: Date, modifiedByUser: UserInfo, createdAt: Date, createdByUser: UserInfo);
+
+        constructFromObject(data: Object, obj: TransferContainer): TransferContainer;
+    }
+
+    export class TransferContainerAssociationPaging {
+
+        constructFromObject(data: Object, obj: TransferContainerAssociationPaging): TransferContainerAssociationPaging;
+    }
+
+    export class TransferContainerAssociationPagingList {
+        constructor();
+
+        constructFromObject(data: Object, obj: TransferContainerAssociationPagingList): TransferContainerAssociationPagingList;
+    }
+
+    export class TransferContainerBodyUpdate {
+        constructor();
+
+        constructFromObject(data: Object, obj: TransferContainerBodyUpdate): TransferContainerBodyUpdate;
+    }
+
+    export class TransferContainerChild {
+        constructor(id: string, parentId: string, name: string, nodeType: string, createdAt: Date, createdByUser: UserInfo);
+
+        constructFromObject(data: Object, obj: TransferContainerChild): TransferContainerChild;
+    }
+
+    export class TransferContainerChildAssociation {
+        constructor(id: string, parentId: string, name: string, nodeType: string, createdAt: Date, createdByUser: UserInfo);
+
+        constructFromObject(data: Object, obj: TransferContainerChildAssociation): TransferContainerChildAssociation;
+    }
+
+    export class TransferContainerChildAssociationEntry {
+        constructor(entry: TransferContainerChildAssociation);
+
+        constructFromObject(data: Object, obj: TransferContainerChildAssociationEntry): TransferContainerChildAssociationEntry;
+    }
+
+    export class TransferContainerEntry {
+        constructor(entry: TransferContainer);
+
+        constructFromObject(data: Object, obj: TransferContainerEntry): TransferContainerEntry;
+    }
+
+    export class TransferEntry {
+        constructor(entry: Transfer);
+
+        constructFromObject(data: Object, obj: TransferEntry): TransferEntry;
+    }
+
+    export class UnfiledContainer {
+        constructor(id: string, parentId: string, name: string, nodeType: string, modifiedAt: Date, modifiedByUser: UserInfo, createdAt: Date, createdByUser: UserInfo);
+    }
+
+    export class UnfiledContainerAssociationPaging {
+        constructor();
+
+        constructFromObject(data: Object, obj: UnfiledContainerAssociationPaging): UnfiledContainerAssociationPaging;
+    }
+
+    export class UnfiledContainerAssociationPagingList {
+        constructor();
+
+        constructFromObject(data: Object, obj: UnfiledContainerAssociationPagingList): UnfiledContainerAssociationPagingList;
+    }
+
+    export class UnfiledContainerChild {
+        constructor(id: string, parentId: string, name: string, nodeType: string, isUnfiledRecordFolder: boolean, isRecord: boolean, modifiedAt: Date, modifiedByUser: UserInfo, createdAt: Date, createdByUser: UserInfo);
+
+        constructFromObject(data: Object, obj: UnfiledContainerChild): UnfiledContainerChild;
+    }
+
+    export class UnfiledContainerChildAssociation {
+        constructor(id: string, parentId: string, name: string, nodeType: string, isUnfiledRecordFolder: boolean, isRecord: boolean, modifiedAt: Date, modifiedByUser: UserInfo, createdAt: Date, createdByUser: UserInfo);
+
+        constructFromObject(data: Object, obj: UnfiledContainerChildAssociation): UnfiledContainerChildAssociation;
+    }
+
+    export class UnfiledContainerChildAssociationEntry {
+        constructor(entry: UnfiledContainerChildAssociation);
+
+        constructFromObject(data: Object, obj: UnfiledContainerChildAssociationEntry): UnfiledContainerChildAssociationEntry;
+    }
+
+    export class UnfiledContainerEntry {
+        constructor(entry: UnfiledContainer);
+
+        constructFromObject(data: Object, obj: UnfiledContainerEntry): UnfiledContainerEntry;
+    }
+
+    export class UnfiledRecordContainerBodyUpdate {
+        constructor();
+
+        constructFromObject(data: Object, obj: UnfiledRecordContainerBodyUpdate): UnfiledRecordContainerBodyUpdate;
+    }
+
+    export class UnfiledRecordFolder {
+        constructor(id: string, parentId: string, name: string, nodeType: string, isUnfiledRecordFolder: boolean, isRecord: boolean, modifiedAt: Date, modifiedByUser: UserInfo, createdAt: Date, createdByUser: UserInfo);
+
+        constructFromObject(data: Object, obj: UnfiledRecordFolder): UnfiledRecordFolder;
+    }
+
+    export class UnfiledRecordFolderAssociationPaging {
+        constructor();
+
+        constructFromObject(data: Object, obj: UnfiledRecordFolderAssociationPaging): UnfiledRecordFolderAssociationPaging;
+    }
+
+    export class UnfiledRecordFolderAssociationPagingList {
+        constructor();
+
+        constructFromObject(data: Object, obj: UnfiledRecordFolderAssociationPagingList): UnfiledRecordFolderAssociationPagingList;
+    }
+
+    export class UnfiledRecordFolderBodyUpdate {
+        constructor();
+
+        constructFromObject(data: Object, obj: UnfiledRecordFolderBodyUpdate): UnfiledRecordFolderBodyUpdate;
+    }
+
+    export class UnfiledRecordFolderChild {
+        constructor(id: string, parentId: string, name: string, nodeType: string, isUnfiledRecordFolder: boolean, isRecord: boolean, modifiedAt: Date, modifiedByUser: UserInfo, createdAt: Date, createdByUser: UserInfo);
+
+        constructFromObject(data: Object, obj: UnfiledRecordFolderChild): UnfiledRecordFolderChild;
+    }
+
+    export class UnfiledRecordFolderChildAssociation {
+        constructor(id: string, parentId: string, name: string, nodeType: string, isUnfiledRecordFolder: boolean, isRecord: boolean, modifiedAt: Date, modifiedByUser: UserInfo, createdAt: Date, createdByUser: UserInfo);
+
+        constructFromObject(data: Object, obj: UnfiledRecordFolderChildAssociation): UnfiledRecordFolderChildAssociation;
+    }
+
+    export class UnfiledRecordFolderChildAssociationEntry {
+        constructor(entry: UnfiledRecordFolderChildAssociation);
+
+        constructFromObject(data: Object, obj: UnfiledRecordFolderChildAssociationEntry): UnfiledRecordFolderChildAssociationEntry;
+    }
+
+    export class UnfiledRecordFolderEntry {
+        constructor(entry: UnfiledRecordFolder);
+
+        constructFromObject(data: Object, obj: UnfiledRecordFolderEntry): UnfiledRecordFolderEntry;
+
+    }
+
+    //  ======= Governance Core End ======
+
+    //  ======= Governance Classification Start ======
+
+    export interface GsClassification {
+        classificationGuidesApi: ClassificationGuidesApi;
+        classificationReasonsApi: ClassificationReasonsApi;
+        declassificationExemptionsApi: DeclassificationExemptionsApi;
+        defaultClassificationValuesApi: DefaultClassificationValuesApi;
+        securityControlSettingsApi: SecurityControlSettingsApi;
+
+        /*Models*/
+        ClassificationGuide: ClassificationGuide;
+        ClassificationGuideBody: ClassificationGuideBody;
+        ClassificationGuideEntry: ClassificationGuideEntry;
+        ClassificationGuideInTopic: ClassificationGuideInTopic;
+        ClassificationGuidePaging: ClassificationGuidePaging;
+        ClassificationGuidePagingList: ClassificationGuidePagingList;
+        ClassificationGuides: ClassificationGuides;
+        ClassificationGuidesBody: ClassificationGuidesBody;
+        ClassificationGuidesEntry: ClassificationGuidesEntry;
+        ClassificationGuidesInTopic: ClassificationGuidesInTopic;
+        ClassificationInformation: ClassificationInformation;
+        ClassificationReason: ClassificationReason;
+        ClassificationReasonBody: ClassificationReasonBody;
+        ClassificationReasonEntry: ClassificationReasonEntry;
+        ClassificationReasonsPaging: ClassificationReasonsPaging;
+        ClassificationReasonsPagingList: ClassificationReasonsPagingList;
+        CombinedInstructionBody: CombinedInstructionBody;
+        DeclassificationDate: DeclassificationDate;
+        DeclassificationExemptionBody: DeclassificationExemptionBody;
+        DeclassificationExemptionEntry: DeclassificationExemptionEntry;
+        DeclassificationExemptionsPaging: DeclassificationExemptionsPaging;
+        DeclassificationExemptionsPagingList: DeclassificationExemptionsPagingList;
+        Error: Error;
+        ErrorError: ErrorError;
+        Instruction: Instruction;
+        InstructionBody: InstructionBody;
+        InstructionEntry: InstructionEntry;
+        Pagination: Pagination;
+        Path: Path;
+        PathElement: PathElement;
+        SecurityControlSetting: SecurityControlSetting;
+        SecurityControlSettingBody: SecurityControlSettingBody;
+        SecurityControlSettingEntry: SecurityControlSettingEntry;
+        SecurityMark: SecurityMark;
+        SecurityMarkBody: SecurityMarkBody;
+        SecurityMarkInformation: SecurityMarkInformation;
+        SecurityMarkInformationBody: SecurityMarkInformationBody;
+        SecurityMarks: SecurityMarks;
+        SecurityMarksBody: SecurityMarksBody;
+        SubtopicPaging: SubtopicPaging;
+        Topic: Topic;
+        TopicBody: TopicBody;
+        TopicEntry: TopicEntry;
+    }
+
+    export interface ClassificationGuidesApi {
+        new(client?: ApiClient): ClassificationGuidesApi;
+
+        combinedInstructions(opts?: any): Promise<any>;
+
+        createClassificationGuide(classificationGuide: ClassificationGuideBody): Promise<any>;
+
+        createSubtopic(topicId: string, topic: TopicBody, opts?: any): Promise<any>;
+
+        createTopic(classificationGuideId: string, topic: TopicBody, opts?: any): Promise<any>;
+
+        deleteClassificationGuide(classificationGuideId: string): Promise<any>;
+
+        deleteTopic(topicId: string): Promise<any>;
+
+        listClassificationGuides(opts?: any): Promise<any>;
+
+        listSubtopics(topicId: string, opts?: any): Promise<any>;
+
+        listTopics(classificationGuideId: string, opts?: any): Promise<any>;
+
+        showClassificationGuideById(classificationGuideId: string): Promise<any>;
+
+        showTopicById(topicId: string, opts?: any): Promise<any>;
+
+        updateClassificationGuide(classificationGuideId: string, classificationGuide: ClassificationGuideBody): Promise<any>;
+
+        updateTopic(topicId: string, topic: TopicBody, opts?: any): Promise<any>;
+    }
+
+    export interface ClassificationReasonsApi {
+        new(client?: ApiClient): ClassificationReasonsApi;
+
+        createClassificationReason(classificationReason: ClassificationReasonBody): Promise<any>;
+
+        deleteClassificationReason(classificationReasonId: string): Promise<any>;
+
+        listClassificationReasons(opts?: any): Promise<any>;
+
+        showClassificationReasonById(classificationReasonId: string): Promise<any>;
+
+        updateClassificationReason(classificationReasonId: string, classificationReason: ClassificationReasonBody): Promise<any>;
+    }
+
+    export interface DeclassificationExemptionsApi {
+        new(client?: ApiClient): DeclassificationExemptionsApi;
+
+        createDeclassificationExemption(declassificationExemption: DeclassificationExemptionBody): Promise<any>;
+
+        deleteDeclassificationExemption(declassificationExemptionId: string): Promise<any>;
+
+        listDeclassificationExemptions(opts?: any): Promise<any>;
+
+        showDeclassificationExemptionById(declassificationExemptionId: string): Promise<any>;
+
+        updateDeclassificationExemption(declassificationExemptionId: string, declassificationExemption: DeclassificationExemptionBody): Promise<any>;
+    }
+
+    export interface DefaultClassificationValuesApi {
+        new(client?: ApiClient): DefaultClassificationValuesApi;
+
+        calculateDefaultDeclassificationDate(nodeId: string): Promise<any>;
+    }
+
+    export interface SecurityControlSettingsApi {
+        new(client?: ApiClient): SecurityControlSettingsApi;
+
+        getSecurityControlSetting(securityControlSettingKey: string): Promise<any>;
+
+        updateSecurityControlSetting(securityControlSettingKey: string, securityControlSettingValue: SecurityControlSettingBody): Promise<any>;
+    }
+
+    export class ClassificationGuideBody {
+        constructor(name: string, originatingOrganization: string, publishedOn: Date);
+
+        constructFromObject(data: any, obj: ClassificationGuideBody): ClassificationGuideBody;
+    }
+
+    export class ClassificationGuideEntry {
+        constructor(entry: ClassificationGuide);
+
+        constructFromObject(data: any, obj: ClassificationGuideEntry): ClassificationGuideEntry;
+    }
+
+    export class ClassificationGuideInTopic implements ClassificationGuideBody {
+        constructor(name: string, originatingOrganization: string, publishedOn: Date);
+
+        constructFromObject(data: any, obj: ClassificationGuideInTopic): ClassificationGuideInTopic;
+    }
+
+    export class ClassificationGuide implements ClassificationGuideInTopic {
+        constructor(name: string, originatingOrganization: string, publishedOn: Date);
+
+        constructFromObject(data: any, obj: ClassificationGuide): ClassificationGuide;
+
+        name: string;
+        originatingOrganization: string;
+        publishedOn: Date;
+        enabled: boolean;
+    }
+
+    export class ClassificationGuidePaging {
+        constructor();
+
+        constructFromObject(data: any, obj: ClassificationGuidePaging): ClassificationGuidePaging;
+    }
+
+    export class ClassificationGuidePagingList {
+        constructor();
+
+        constructFromObject(data: any, obj: ClassificationGuidePagingList): ClassificationGuidePagingList;
+    }
+
+    export class ClassificationGuidesBody {
+        constructor(name: string, originatingOrganization: string, publishedOn: Date);
+
+        constructFromObject(data: any, obj: ClassificationGuidesBody): ClassificationGuidesBody;
+    }
+
+    export class ClassificationGuidesEntry {
+        constructor(entry: ClassificationGuides);
+
+        constructFromObject(data: any, obj: ClassificationGuidesEntry): ClassificationGuidesEntry;
+    }
+
+    export class ClassificationGuidesInTopic implements ClassificationGuidesBody {
+        constructor(name: string, originatingOrganization: string, publishedOn: Date);
+
+        constructFromObject(data: any, obj: ClassificationGuidesInTopic): ClassificationGuidesInTopic;
+    }
+
+    export class ClassificationGuides implements ClassificationGuidesInTopic {
+        constructor(name: string, originatingOrganization: string, publishedOn: Date);
+
+        constructFromObject(data: any, obj: ClassificationGuides): ClassificationGuides;
+    }
+
+    export class ClassificationInformation {
+        constructor(level: string, reasonIds: string[]);
+
+        constructFromObject(data: any, obj: ClassificationInformation): ClassificationInformation;
+    }
+
+    export class ClassificationReason {
+        constructor(id: string, code: string, description: string);
+
+        constructFromObject(data: any, obj: ClassificationReason): ClassificationReason;
+    }
+
+    export class ClassificationReasonBody {
+        constructor(code: string, description: string);
+
+        constructFromObject(data: any, obj: ClassificationReasonBody): ClassificationReasonBody;
+    }
+
+    export class ClassificationReasonEntry {
+        constructor(entry: ClassificationReason);
+
+        constructFromObject(data: any, obj: ClassificationReasonEntry): ClassificationReasonEntry;
+    }
+
+    export class ClassificationReasonsPaging {
+        constructor();
+
+        constructFromObject(data: any, obj: ClassificationReasonsPaging): ClassificationReasonsPaging;
+    }
+
+    export class ClassificationReasonsPagingList {
+        constructor();
+
+        constructFromObject(data: any, obj: ClassificationReasonsPagingList): ClassificationReasonsPagingList;
+    }
+
+    export class DeclassificationDate {
+        constructor();
+
+        constructFromObject(data: any, obj: DeclassificationDate): DeclassificationDate;
+    }
+
+    export class DeclassificationExemption {
+        constructor(id: string, code: string, description: string);
+
+        constructFromObject(data: any, obj: DeclassificationExemption): DeclassificationExemption;
+    }
+
+    export class DeclassificationExemptionBody {
+        constructor(code: string, description: string);
+
+        constructFromObject(data: any, obj: DeclassificationExemptionBody): DeclassificationExemptionBody;
+    }
+
+    export class DeclassificationExemptionEntry {
+        constructor(entry: DeclassificationExemption);
+
+        constructFromObject(data: any, obj: DeclassificationExemptionEntry): DeclassificationExemptionEntry;
+
+    }
+
+    export class DeclassificationExemptionsPaging {
+        constructor();
+
+        constructFromObject(data: any, obj: DeclassificationExemptionsPaging): DeclassificationExemptionsPaging;
+    }
+
+    export class DeclassificationExemptionsPagingList {
+        constructor();
+
+        constructFromObject(data: any, obj: DeclassificationExemptionsPagingList): DeclassificationExemptionsPagingList;
+    }
+
+    export class Instruction {
+        constructor();
+
+        constructFromObject(data: any, obj: Instruction): Instruction;
+    }
+
+    export class InstructionBody {
+        constructor();
+
+        constructFromObject(data: any, obj: InstructionBody): InstructionBody;
+
+    }
+
+    export class CombinedInstructionBody implements InstructionBody {
+        constructor();
+
+        constructFromObject(data: any, obj: CombinedInstructionBody): CombinedInstructionBody;
+    }
+
+    export class InstructionEntry {
+        constructor(entry: Instruction);
+
+        constructFromObject(data: any, obj: InstructionEntry): InstructionEntry;
+    }
+
+    export class Path {
+        constructor();
+
+        constructFromObject(data: any, obj: Path): Path;
+    }
+
+    export class SecurityControlSetting {
+        constructor(key: string, value: any);
+
+        constructFromObject(data: any, obj: SecurityControlSetting): SecurityControlSetting;
+    }
+
+    export class SecurityControlSettingBody {
+        constructor(value: any);
+
+        constructFromObject(data: any, obj: SecurityControlSettingBody): SecurityControlSettingBody;
+    }
+
+    export class SecurityControlSettingEntry {
+        constructor(entry: SecurityControlSetting);
+
+        constructFromObject(data: any, obj: SecurityControlSettingEntry): SecurityControlSettingEntry;
+    }
+
+    export class SecurityMark {
+        constructor(id: string, name: string, groupId: string, groupName: string, groupType: string);
+
+        constructFromObject(data: any, obj: SecurityMark): SecurityMark;
+    }
+
+    export class SecurityMarkBody {
+        constructor(id: string, groupId: string);
+
+        constructFromObject(data: any, obj: SecurityMarkBody): SecurityMarkBody;
+    }
+
+    export class SecurityMarkInformation {
+        constructor(add: SecurityMarks);
+
+        constructFromObject(data: any, obj: SecurityMarkInformation): SecurityMarkInformation;
+    }
+
+    export class SecurityMarkInformationBody {
+        constructor(add: SecurityMarksBody);
+
+        constructFromObject(data: any, obj: SecurityMarkInformationBody): SecurityMarkInformationBody;
+    }
+
+    export class SecurityMarks {
+        constructor();
+
+        constructFromObject(data: any, obj: SecurityMarks): SecurityMarks;
+    }
+
+    export class SecurityMarksBody {
+        constructor();
+
+        constructFromObject(data: any, obj: SecurityMarksBody): SecurityMarksBody;
+    }
+
+    export class SubtopicPaging {
+        constructor();
+
+        constructFromObject(data: any, obj: SubtopicPaging): SubtopicPaging;
+    }
+
+    export class Topic {
+        constructor(id: string, name: string, hasInstruction: boolean, createdAt: Date);
+
+        constructFromObject(data: any, obj: Topic): Topic;
+    }
+
+    export class TopicBody {
+        constructor(name: string);
+
+        constructFromObject(data: any, obj: TopicBody): TopicBody;
+    }
+
+    export class TopicEntry {
+        constructor(entry: Topic);
+
+        constructFromObject(data: any, obj: TopicEntry): TopicEntry;
+    }
+
+    export class TopicPaging {
+        constructor();
+
+        constructFromObject(data: any, obj: TopicPaging): TopicPaging;
+    }
+
+    export class TopicPagingList {
+        constructor();
+
+        constructFromObject(data: any, obj: TopicPagingList): TopicPagingList;
+    }
+
+
+    //  ======= Governance Classification End ======
+
     export interface Core {
         associationsApi: AssociationsApi;
         changesApi: any;
@@ -3727,6 +4750,7 @@ declare namespace AlfrescoApi {
         ratingsApi: RatingsApi;
         renditionsApi: RenditionsApi;
         versionsApi: VersionsApi;
+        classesApi: ClassesApi;
         searchApi: any;
         sharedlinksApi: SharedlinksApi;
         sitesApi: SitesApi;
@@ -3916,6 +4940,10 @@ declare namespace AlfrescoApi {
         getContentUrl(nodeId: string, attachment?: boolean, ticket?: string): string;
 
         getRenditionUrl(nodeId: string, encoding: string, attachment?: boolean, ticket?: string): string;
+
+        getSharedLinkContentUrl(linkId: string, attachment?: boolean): string;
+
+        getSharedLinkRenditionUrl(sharedId: string, renditionId: string, attachment?: boolean): string;
     }
 
     export interface AuthApi {

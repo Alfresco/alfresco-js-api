@@ -73,6 +73,33 @@ class AlfrescoContent {
             '?attachment=' + (attachment ? 'true' : 'false') +
             '&alf_ticket=' + (ticket || this.ecmAuth.getTicket());
     }
+
+    /**
+     * Get content url for the given shared link id
+     *
+     * @param {String} linkId - The ID of the shared link
+     * @param {Boolean} [attachment=false] Retrieve content as an attachment for download
+     * @returns {String} The URL address pointing to the content.
+     */
+    getSharedLinkContentUrl(linkId, attachment) {
+        return this.ecmClient.basePath + '/shared-links/' + linkId +
+            '/content' +
+            '?attachment=' + (attachment ? 'true' : 'false');
+    }
+
+    /**
+     * Gets the rendition content for file with shared link identifier sharedId.
+     *
+     * @param {String} sharedId - The identifier of a shared link to a file.
+     * @param {String} renditionId - The name of a thumbnail rendition, for example doclib, or pdf.
+     * @param {Boolean} [attachment=false] Retrieve content as an attachment for download
+     * @returns {String} The URL address pointing to the content.
+     */
+    getSharedLinkRenditionUrl(sharedId, renditionId, attachment) {
+        return this.ecmClient.basePath + '/shared-links/' + sharedId +
+            '/renditions/' + renditionId + '/content' +
+            '?attachment=' + (attachment ? 'true' : 'false');
+    }
 }
 
 module.exports = AlfrescoContent;

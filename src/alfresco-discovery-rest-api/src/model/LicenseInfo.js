@@ -91,12 +91,12 @@
   exports.prototype['remainingDays'] = undefined;
 
   /**
-   * @member {String} holder
+   * @member {string} holder
    */
   exports.prototype['holder'] = undefined;
 
   /**
-   * @member {String} mode
+   * @member {string} mode
    */
   exports.prototype['mode'] = undefined;
 

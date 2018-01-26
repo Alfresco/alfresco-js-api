@@ -4,6 +4,17 @@
 
 # Alfresco JS API
 
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.1.0) (26-01-2018)
+
+## Governance api
+- [Governance api](https://issues.alfresco.com/jira/browse/ADF-282)
+
+## Features
+- [Classes end point](https://issues.alfresco.com/jira/browse/ADF-1986)
+- [Generating shared link content url](https://issues.alfresco.com/jira/browse/ADF-2136)
+- improved typings schema for `RenditionsApi`
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.0.0) (28-11-2017)
 
@@ -23,6 +34,7 @@
 - [getContentThumbnailUrl returns file data instead or URL](https://issues.alfresco.com/jira/browse/ADF-1962)
 - [ContentApi is missing the preview rendition API](https://issues.alfresco.com/jira/browse/ADF-1963)
 
+<a name="1.9.0"></a>
 # [1.9.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/1.9.0) (09-10-2017)
 
 ## Fix
