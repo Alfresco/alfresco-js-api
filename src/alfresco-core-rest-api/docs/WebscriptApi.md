@@ -17,14 +17,14 @@ For mor information about web scripts read the [Wiki](https://wiki.alfresco.com/
 A Web Script is simply a service bound to a URI which responds to HTTP methods such as GET, POST, PUT and DELETE. While using the same underlying code, there are broadly two kinds of Web Scripts.
 
 ### Parameters
-Name | Type | Description  | Notes
-------------- | -------------
-**httpMethod**  | **String**| possible value GET, POST, PUT and DELETE |
-**scriptPath**  | **String**|path to Web Script (as defined by Web Script)|
-**scriptArgs**  | **String**|arguments to pass to Web Script |
-**contextRoot** | **String**|path where application is deployed default value 'alfresco'|
-**servicePath** | **String**|path where Web Script service is mapped default value 'service'|
-**postBody** |  **Object**|post body|
+Name | Type | Description  | Notes|
+------------- | ------------- | ------------- | -------------
+**httpMethod**  | **String**| possible value GET, POST, PUT and DELETE ||
+**scriptPath**  | **String**|path to Web Script (as defined by Web Script)||
+**scriptArgs**  | **String**|arguments to pass to Web Script ||
+**contextRoot** | **String**|path where application is deployed default value 'alfresco'||
+**servicePath** | **String**|path where Web Script service is mapped default value 'service'||
+**postBody** |  **Object**|post body||
 
 ### Example
 
