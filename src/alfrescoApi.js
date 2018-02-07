@@ -383,6 +383,10 @@ class AlfrescoApi {
         return this.oauth2Auth.refreshToken();
     }
 
+    getTicketAuth() {
+        return this.oauth2Auth && this.oauth2Auth.getToken();
+    }
+
     /**
      * Set the current Ticket
      *
@@ -413,7 +417,7 @@ class AlfrescoApi {
      * @returns {String} Ticket
      * */
     getTicketBpm() {
-        return this.bpmAuth.getTicket();
+        return this.bpmAuth && this.bpmAuth.getTicket();
     }
 
     /**
@@ -422,7 +426,7 @@ class AlfrescoApi {
      * @returns {String} Ticket
      * */
     getTicketEcm() {
-        return this.ecmAuth.getTicket();
+        return this.ecmAuth && this.ecmAuth.getTicket();
     }
 
     /**
