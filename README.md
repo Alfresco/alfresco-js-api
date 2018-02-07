@@ -211,7 +211,7 @@ Property | Description  | default value|
 ------------- | ------------- | -------------|
 hostEcm| (Optional value The Ip or Name of the host where your Alfresco instance is running )|http://127.0.0.1:8080 |
 hostBpm| (Optional value The Ip or Name of the host where your Activiti instance is running )|http://127.0.0.1:9999 |
-oauth2|  (Optional configuration object for alfresco authorization server {host:'HOST_OAUTH2_SERVER', clientId:'YOUR_CLIENT_ID', secret:'SECRET'} ||
+oauth2|  (Optional configuration object for alfresco authorization server {host:'HOST_OAUTH2_SERVER', clientId:'YOUR_CLIENT_ID', secret:'SECRET', authPath:'my-custom-auth-endpoint/token'} ||
 contextRoot| (Optional value that define the context Root of the Alfresco ECM API default value is alfresco )|alfresco |
 contextRootBpm| (Optional value that define the context Root of the Activiti API default value is activiti-app )|alfresco |
 provider| (Optional value default value is ECM. This parameter can accept as value ECM BPM or ALL to use the API and Login in the ECM, Activiti BPM or Both )|alfresco |
@@ -301,6 +301,7 @@ this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
 ### Login with OAUTH2 Alfresco authorization server
 
 If you have installed the Alfresco authorization server you can login with this option.
+If your auth endpoint is different from the standard one "/oauth/token" you can override it through the property authPath
 
 ### Example
 ```javascript
@@ -308,7 +309,8 @@ this.alfrescoJsApi = new AlfrescoApi({
         oauth2: {
             host: 'HOST_OAUTH2_SERVER',
             clientId: 'YOUR_CLIENT_ID',
-            secret: 'SECRET'
+            secret: 'SECRET',
+            authPath:'my-custom-auth-endpoint/token'
         },
         provider: 'OAUTH'
     });
