@@ -73,6 +73,28 @@ describe('Oauth2  test', function () {
             });
         });
 
+        it('Should return the access token with a custom auth endpoint', function (done) {
+
+            this.oauth2Mock.get200CustomResponse('/my-custom-auth/token');
+
+            this.alfrescoJsApi = new AlfrescoApi({
+                oauth2: {
+                    host: this.hostOauth2,
+                    clientId: 'alfrescoapp',
+                    secret: 'secret',
+                    authPath: '/my-custom-auth/token'
+                },
+                provider: 'OAUTH'
+            });
+
+            this.alfrescoJsApi.login('admin', 'admin').then(() => {
+                expect(this.alfrescoJsApi.ecmClient.authentications.basicAuth.accessToken).to.be.equal('5c37e781-40a7-4957-adcc-2b171c770a5c');
+                expect(this.alfrescoJsApi.ecmClient.authentications.basicAuth.refreshToken).to.be.equal('15d66b26-3cf7-446a-8db8-1345f2f4485a');
+                done();
+            }, ()=> {
+            });
+        });
+
         it('login password should be removed after login', function (done) {
 
             this.oauth2Mock.get200Response();
