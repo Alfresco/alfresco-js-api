@@ -394,8 +394,8 @@ class AlfrescoApi {
      * @param {String} TicketBpm
      * */
     setTicket(ticketEcm, TicketBpm) {
-        this.ecmAuth.setTicket(ticketEcm);
-        this.bpmAuth.setTicket(TicketBpm);
+        this.ecmAuth && this.ecmAuth.setTicket(ticketEcm);
+        this.bpmAuth && this.bpmAuth.setTicket(TicketBpm);
     }
 
     /**
