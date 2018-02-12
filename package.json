@@ -3,7 +3,7 @@
   "version": "2.1.0",
   "description": "JavaScript client library for the Alfresco REST API",
   "author": "Alfresco Software, Ltd.",
-  "main": "dist/alfresco-js-api.js",
+  "main": "main.js",
   "module": "main.js",
   "browser": "dist/alfresco-js-api.js",
   "typings": "index.d.ts",
