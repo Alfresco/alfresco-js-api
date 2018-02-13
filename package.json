@@ -5,6 +5,7 @@
   "author": "Alfresco Software, Ltd.",
   "main": "main.js",
   "module": "main.js",
+  "browser": "dist/alfresco-js-api.js",
   "typings": "index.d.ts",
   "scripts": {
     "clean": "rimraf node_modules && npm run clean-build",
