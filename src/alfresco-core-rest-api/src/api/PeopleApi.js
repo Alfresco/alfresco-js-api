@@ -450,7 +450,6 @@
       );
     }
 
-
     /**
      * Get a person
      * Gets information for the person **personId**.
@@ -487,6 +486,42 @@
 
       return this.apiClient.callApi(
         '/people/{personId}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * List people.
+     * Gets information for the persons
+     * @param {Object} opts Optional parameters
+     * @param {Array.<String>} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * data is of type: {module:model/PersonEntry}
+     */
+    this.getPersons = function(opts) {
+      opts = opts || {};
+      var postBody = null;
+
+      var pathParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+      var queryParams = {
+        'skipCount': opts['skipCount'],
+        'maxItems': opts['maxItems'],
+        'where': opts['where'],
+        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = PersonEntry;
+
+      return this.apiClient.callApi(
+        '/people', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );

@@ -15,6 +15,7 @@ Method | HTTP request | Description
 [**getFavorites**](PeopleApi.md#getFavorites) | **GET** /people/{personId}/favorites | Get favorites
 [**addPerson**](PeopleApi.md#addPerson) | **POST** /people | create a person
 [**getPerson**](PeopleApi.md#getPerson) | **GET** /people/{personId} | Get a person
+[**getPersons**](PeopleApi.md#getPersons) | **GET** /people/| List people
 [**getPersonNetwork**](PeopleApi.md#getPersonNetwork) | **GET** /people/{personId}/networks/{networkId} | Get network information
 [**getPersonNetworks**](PeopleApi.md#getPersonNetworks) | **GET** /people/{personId}/networks | Get network membership for a person
 [**getPreference**](PeopleApi.md#getPreference) | **GET** /people/{personId}/preferences/{preferenceName} | Get a preference
@@ -584,6 +585,55 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+<a name="getPersons"></a>
+# **getPersons**
+> PersonEntry getPersons(opts)
+
+List people
+ 
+Gets information for the persons
+
+### Example
+```javascript
+
+var opts = {
+  'fields': ["fields_example"]  /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
+
+                                The list applies to a returned individual
+                                entity or entries within a collection.
+
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter. */
+
+};
+this.alfrescoJsApi.core.peopleApi.getPersons(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **fields** | [**[String]**](String.md)| A list of field names.
+
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
+
+The list applies to a returned individual
+entity or entries within a collection.
+
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
+| [optional]
+
 <a name="getPerson"></a>
 # **getPerson**
 > PersonEntry getPerson(personId, opts)
@@ -633,7 +683,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- | [optional]
+| [optional]
 
 ### Return type
 
