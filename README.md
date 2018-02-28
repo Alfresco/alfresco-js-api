@@ -166,7 +166,7 @@ To correctly use the alfresco js api the minimal supported version are:
 - 1.5 Activiti
 
 # Node
-To correctly use this component check that on your machine is running Node version 5.0.0 or higher.
+To correctly use the alfresco-js-api in node check that on your machine is running Node version 5.0.0 or higher.
 
 # Api Modules complete methods list
 
@@ -180,7 +180,20 @@ To correctly use this component check that on your machine is running Node versi
 - [Mock API](/test/mockObjects)
 
 # Install
+
+
+Installer for browser versions:
+
+```sh
 npm install --save alfresco-js-api
+```
+
+Installer for node versions:
+
+```sh
+npm install -save alfresco-js-api-node
+```
+
 
 # Use
 
