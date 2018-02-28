@@ -60,6 +60,6 @@ restore() {
 
 update_component_version
 
-npm publish ${OPTIONS}
+npm publish ${OPTIONS} --access=public
 
 restore
