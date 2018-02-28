@@ -3,8 +3,7 @@
   "version": "2.1.0",
   "description": "JavaScript client library for the Alfresco REST API",
   "author": "Alfresco Software, Ltd.",
-  "main": "main.js",
-  "module": "main.js",
+  "main": "dist/alfresco-js-api.js",
   "typings": "index.d.ts",
   "scripts": {
     "clean": "rimraf node_modules && npm run clean-build",
