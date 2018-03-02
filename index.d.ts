@@ -3557,6 +3557,7 @@ declare namespace AlfrescoApi {
         firstName?: string;
         fullname?: string;
         groups?: GroupRepresentation[];
+        id?: number;
         lastName?: string;
         lastUpdate?: Date;
         latestSyncTimeStamp?: Date;
