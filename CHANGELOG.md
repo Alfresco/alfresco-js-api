@@ -5,7 +5,7 @@
 # Alfresco JS API
 
 <a name="2.2.0"></a>
-# [2.2.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.2.0) (XX-02-2018)
+# [2.2.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.2.0) (05-03-2018)
 
 ## Features
 
