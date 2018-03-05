@@ -4,6 +4,15 @@
 
 # Alfresco JS API
 
+<a name="2.2.0"></a>
+# [2.2.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.2.0) (05-03-2018)
+
+## Features
+
+## Fix
+- [Auth2 - Use the paramForm instead of queryForm](https://issues.alfresco.com/jira/browse/ADF-2288)
+- [Adding the /people endpoint to the AlfrescoCoreRestApi.PeopleApi](https://github.com/Alfresco/alfresco-js-api/issues/305)
+
 <a name="2.1.0"></a>
 # [2.1.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.1.0) (26-01-2018)
 

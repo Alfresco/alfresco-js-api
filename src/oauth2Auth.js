@@ -53,23 +53,24 @@ class oauth2Auth extends AlfrescoApiClient {
 
         var headerParams = {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Cache-Control': 'no-cache',
             'Authorization': auth
         };
 
-        queryParams = {
+        formParams = {
             username: username,
             password: password,
-            grant_type: 'password'
+            grant_type: 'password',
+            client_id: this.config.oauth2.clientId
         };
 
         var authNames = [];
         var contentTypes = ['application/x-www-form-urlencoded'];
         var accepts = ['application/json'];
 
+        var url = this.config.oauth2.authPath || '/oauth/token';
         this.promise = new Promise((resolve, reject) => {
             this.callApi(
-                '/oauth/token', 'POST',
+                url, 'POST',
                 pathParams, queryParams, headerParams, formParams, postBody,
                 authNames, contentTypes, accepts, {}
             ).then(
@@ -150,6 +151,14 @@ class oauth2Auth extends AlfrescoApiClient {
         this.authentications.basicAuth.refreshToken = refreshToken;
         this.authentications.basicAuth.password = null;
         this.token = token;
+    }
+
+    /**
+     * Get the current Token
+     *
+     * */
+    getToken() {
+        return this.token;
     }
 
     /**

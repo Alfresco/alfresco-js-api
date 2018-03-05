@@ -608,6 +608,8 @@ declare namespace AlfrescoApi {
 
         getPerson(personId?: string, opts?: { fields?: Array<string> }): Promise<PersonEntry>;
 
+        getPersons(opts?: { skipCount?: number, maxItems?: number, fields?: Array<string> }): Promise<PersonPaging>;
+
         getPersonNetwork(personId?: string, networkId?: string, opts?: { fields?: Array<string> }): Promise<PersonNetworkEntry>;
 
         getPersonNetworks(personId?: string, opts?: { skipCount?: number, maxItems?: number, fields?: Array<string> }): Promise<PersonNetworkPaging>;
@@ -3555,6 +3557,7 @@ declare namespace AlfrescoApi {
         firstName?: string;
         fullname?: string;
         groups?: GroupRepresentation[];
+        id?: number;
         lastName?: string;
         lastUpdate?: Date;
         latestSyncTimeStamp?: Date;
