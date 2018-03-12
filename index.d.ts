@@ -103,7 +103,7 @@ declare namespace AlfrescoApi {
         activiti: Activiti;
         core: Core;
         discovery: Discovery;
-        search: any;
+        search: Search;
         gsCore: GsCore;
         gsClassification: GsClassification;
 
@@ -4754,7 +4754,7 @@ declare namespace AlfrescoApi {
         renditionsApi: RenditionsApi;
         versionsApi: VersionsApi;
         classesApi: ClassesApi;
-        searchApi: any;
+        searchApi: SearchApi;
         sharedlinksApi: SharedlinksApi;
         sitesApi: SitesApi;
         queriesApi: QueriesApi;
