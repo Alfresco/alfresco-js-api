@@ -1511,8 +1511,8 @@ declare namespace AlfrescoApi {
     export class RequestPagination {
         constructor(obj?: any);
 
-        maxItems?: string;
-        skipCount?: string;
+        maxItems?: number;
+        skipCount?: number;
     }
 
     export class RequestDefaults {
