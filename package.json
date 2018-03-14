@@ -8,7 +8,7 @@
   "scripts": {
     "clean": "rimraf node_modules && npm run clean-build",
     "clean-build": "rimraf dist",
-    "build": "npm run clean-build && grunt && npm run tslint && npm run test && npm run webpack && npm run toc",
+    "build": "npm run clean-build && grunt && npm run tslint && npm run test && npm run webpack&& npm run toc",
     "webpack": "webpack",
     "test": "grunt test",
     "coverage": "grunt coverage",
@@ -20,6 +20,7 @@
     "generate-ts": "jsdoc -c config.json -d out",
     "generate-api": "mvn install"
   },
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/Alfresco/alfresco-js-api.git"
@@ -60,8 +61,10 @@
     "sinon-chai": "^2.8.0",
     "tslint": "5.7.0",
     "typescript": "^2.4.0",
+    "uglifyjs-webpack-plugin": "^1.2.3",
     "watchify": "^3.7.0",
-    "webpack": "^2.2.1"
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12"
   },
   "license": "Apache-2.0",
   "contributors": [

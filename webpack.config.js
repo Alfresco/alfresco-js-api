@@ -1,7 +1,29 @@
 var webpack = require('webpack');
 var path = require("path");
+var UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
-module.exports = {
+var myRules = [{
+    test: /\.js$/,
+    exclude: [
+        /(node_modules|grunt|test)/,
+        path.resolve(__dirname, 'Gruntfile.js')
+    ],
+    loader: 'babel-loader',
+    query: {
+        presets: ['es2015-loose'],
+        plugins: ['transform-es2015-block-scoping',
+            ['transform-es2015-classes', {loose: true}],
+            'transform-proto-to-assign']
+    }
+}]
+
+module.exports = [{
+
+    mode: 'production',
+
+    entry: {
+        'alfresco-js-api.min': './main.js'
+    },
 
     output: {
         library: 'AlfrescoApi',
@@ -10,38 +32,44 @@ module.exports = {
         filename: '[name].js'
     },
 
-    entry: {
-        'alfresco-js-api': './main.js',
-        'alfresco-js-api.min': './main.js'
+    optimization: {
+        minimizer: [
+            new UglifyJSPlugin({
+                uglifyOptions: {
+                    output: {
+                        comments: false
+                    },
+                    compress: {
+                        unsafe_comps: true,
+                        properties: true,
+                        keep_fargs: false,
+                        pure_getters: true,
+                        collapse_vars: true,
+                        unsafe: true,
+                        warnings: false,
+                        sequences: true,
+                        dead_code: true,
+                        drop_debugger: true,
+                        comparisons: true,
+                        conditionals: true,
+                        evaluate: true,
+                        booleans: true,
+                        loops: true,
+                        unused: true,
+                        hoist_funs: true,
+                        if_return: true,
+                        join_vars: true,
+                        drop_console: true
+                    }
+                }
+            })
+        ]
     },
 
     // correct
     module: {
-        loaders: [{
-            test: /\.js$/,
-            exclude: [
-                /(node_modules|grunt|test)/,
-                path.resolve(__dirname, 'Gruntfile.js')
-            ],
-            loader: 'babel-loader',
-            query: {
-                presets: ['es2015-loose'],
-                plugins: ['transform-es2015-block-scoping',
-                    ['transform-es2015-classes', {loose: true}],
-                    'transform-proto-to-assign']
-            }
-        }]
+        rules: myRules
     },
-
-    plugins: [
-        new webpack.optimize.UglifyJsPlugin({
-            include: /\.min\.js$/,
-            minimize: true,
-            compress: {
-                warnings: false
-            }
-        })
-    ],
 
     node: {
         console: 'mock',
@@ -49,4 +77,32 @@ module.exports = {
         net: 'empty',
         tls: 'empty'
     }
-};
+}, {
+
+    entry: {
+        'alfresco-js-api': './main.js',
+    },
+
+    optimization: {
+        minimize: false,
+    },
+
+    output: {
+        library: 'AlfrescoApi',
+        libraryTarget: 'umd',
+        path: path.resolve(__dirname, "dist"),
+        filename: '[name].js'
+    },
+
+    // correct
+    module: {
+        rules: myRules
+    },
+
+    node: {
+        console: 'mock',
+        fs: 'empty',
+        net: 'empty',
+        tls: 'empty'
+    }
+}];
