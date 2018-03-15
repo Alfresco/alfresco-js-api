@@ -106,7 +106,7 @@
   }
 
   /**
-   * @member {Array.<String>} activityIds
+   * @member {string[]} activityIds
    */
   exports.prototype['activityIds'] = undefined;
   /**
@@ -122,7 +122,7 @@
    */
   exports.prototype['activityIdsByFormIdMap'] = undefined;
   /**
-   * @member {Array.<String>} activityIdsWithExcludedSubProcess
+   * @member {string[]} activityIdsWithExcludedSubProcess
    */
   exports.prototype['activityIdsWithExcludedSubProcess'] = undefined;
   /**

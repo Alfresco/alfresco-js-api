@@ -91,7 +91,7 @@
   exports.prototype['content'] = undefined;
 
   /**
-   * @member {Array.<String>} aspectNames
+   * @member {string[]} aspectNames
    */
   exports.prototype['aspectNames'] = undefined;
 

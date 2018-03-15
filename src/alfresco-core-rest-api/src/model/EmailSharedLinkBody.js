@@ -78,7 +78,7 @@
   exports.prototype['locale'] = undefined;
 
   /**
-   * @member {Array.<String>} recipientEmails
+   * @member {string[]} recipientEmails
    */
   exports.prototype['recipientEmails'] = undefined;
 

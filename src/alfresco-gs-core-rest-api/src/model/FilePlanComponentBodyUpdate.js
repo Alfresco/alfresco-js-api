@@ -68,7 +68,7 @@
    */
   exports.prototype['name'] = undefined;
   /**
-   * @member {Array.<String>} aspectNames
+   * @member {string[]} aspectNames
    */
   exports.prototype['aspectNames'] = undefined;
   /**

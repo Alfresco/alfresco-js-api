@@ -25,7 +25,7 @@
    * Constructs a new <code>DownloadBodyCreate</code>.
    * @alias module:model/DownloadBodyCreate
    * @class
-   * @param nodeIds {Array.<String>}
+   * @param nodeIds {string[]}
    */
   var exports = function(nodeIds) {
     var _this = this;
@@ -52,7 +52,7 @@
   }
 
   /**
-   * @member {Array.<String>} nodeIds
+   * @member {string[]} nodeIds
    */
   exports.prototype['nodeIds'] = undefined;
 

@@ -114,7 +114,7 @@
      * @param {Object} opts Optional parameters
      * @param {number} opts.skipCount The number of entities that exist in the collection before those included in this list.
      * @param {number} opts.maxItems The maximum number of items to return in the list.
-     * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
+     * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleClassificationReasonsPaging} and HTTP response
      */
     this.listClassificationReasons = function(opts) {

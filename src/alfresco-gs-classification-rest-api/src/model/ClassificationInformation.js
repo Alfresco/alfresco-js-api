@@ -31,7 +31,7 @@
    * @alias ClassificationInformation
    * @class
    * @param level {string}
-   * @param reasonIds {Array.<String>}
+   * @param reasonIds {string[]}
    */
   var exports = function(level, reasonIds) {
     var _this = this;
@@ -98,7 +98,7 @@
    */
   exports.prototype['classificationAgency'] = undefined;
   /**
-   * @member {Array.<String>} reasonIds
+   * @member {string[]} reasonIds
    */
   exports.prototype['reasonIds'] = undefined;
   /**
@@ -122,7 +122,7 @@
    */
   exports.prototype['declassificationEvent'] = undefined;
   /**
-   * @member {Array.<String>} exemptionIds
+   * @member {string[]} exemptionIds
    */
   exports.prototype['exemptionIds'] = undefined;
 

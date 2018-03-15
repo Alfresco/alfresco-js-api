@@ -37,14 +37,14 @@
 
     /**
      * The authentication methods to be included for all API calls.
-     * @type {Array.<String>}
+     * @type {string[]}
      */
     this.authentications = {
       'basicAuth': {type: 'basic'}
     };
     /**
      * The default HTTP headers to be included for all API calls.
-     * @type {Array.<String>}
+     * @type {string[]}
      * @default {}
      */
     this.defaultHeaders = {};
@@ -114,7 +114,7 @@
 
   /**
    * Chooses a content type from the given array, with JSON preferred; i.e. return JSON if included, otherwise return the first.
-   * @param {Array.<String>} contentTypes
+   * @param {string[]} contentTypes
    * @returns {String} The chosen content type, preferring JSON.
    */
   exports.prototype.jsonPreferredMime = function(contentTypes) {
@@ -250,7 +250,7 @@
   /**
    * Applies authentication headers to the request.
    * @param {Object} request The request object created by a <code>superagent()</code> call.
-   * @param {Array.<String>} authNames An array of authentication method names.
+   * @param {string[]} authNames An array of authentication method names.
    */
   exports.prototype.applyAuthToRequest = function(request, authNames) {
     var _this = this;
@@ -299,7 +299,7 @@
   /**
    * Deserializes an HTTP response body into a value of the specified type.
    * @param {Object} response A SuperAgent response object.
-   * @param {(String|Array.<String>|Object.<String, Object>|Function)} returnType The type to return. Pass a string for simple types
+   * @param {(String|string[]|Object.<String, Object>|Function)} returnType The type to return. Pass a string for simple types
    * or the constructor function for a complex type. Pass an array containing the type name to return an array of that type. To
    * return an object, pass an object with one property whose name is the key type and whose value is the corresponding value type:
    * all properties on <code>data<code> will be converted to this type.
@@ -328,9 +328,9 @@
    * @param {Object.<String, Object>} headerParams A map of header parameters and their values.
    * @param {Object.<String, Object>} formParams A map of form parameters and their values.
    * @param {Object} bodyParam The value to pass as the request body.
-   * @param {Array.<String>} authNames An array of authentication type names.
-   * @param {Array.<String>} contentTypes An array of request MIME types.
-   * @param {Array.<String>} accepts An array of acceptable response MIME types.
+   * @param {string[]} authNames An array of authentication type names.
+   * @param {string[]} contentTypes An array of request MIME types.
+   * @param {string[]} accepts An array of acceptable response MIME types.
    * @param {(String|Array|ObjectFunction)} returnType The required type to return; can be a string for simple types or the
    * constructor for a complex type.   * @returns {Promise} A Promise object.
    */
@@ -448,7 +448,7 @@
   /**
    * Converts a value to the specified type.
    * @param {(String|Object)} data The data to convert, as a string or object.
-   * @param {(String|Array.<String>|Object.<String, Object>|Function)} type The type to return. Pass a string for simple types
+   * @param {(String|string[]|Object.<String, Object>|Function)} type The type to return. Pass a string for simple types
    * or the constructor function for a complex type. Pass an array containing the type name to return an array of that type. To
    * return an object, pass an object with one property whose name is the key type and whose value is the corresponding value type:
    * all properties on <code>data<code> will be converted to this type.
