@@ -57,7 +57,7 @@ this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **queryBody** | [**QueryBody**](QueryBody.md)| Generic query API  | 
+ **searchRequest** | [**SearchRequest**](SearchRequest.md)| Generic query API  | 
 
 ### Return type
 

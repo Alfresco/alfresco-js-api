@@ -39,8 +39,8 @@
      * Gets information for transfer **transferId**  Mandatory fields and the transfer&#39;s aspects and properties are returned by default.  You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information.
      * @param {string} transferId The identifier of a transfer.
      * @param {Object} opts Optional parameters
-     * @param {Array.<String>} opts.include Returns additional information about the transfer folder. Any optional field from the response model can be requested. For example: * allowableOperations * transferPDFIndicator * transferLocation * transferAccessionIndicator
-     * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
+     * @param {string[]} opts.include Returns additional information about the transfer folder. Any optional field from the response model can be requested. For example: * allowableOperations * transferPDFIndicator * transferLocation * transferAccessionIndicator
+     * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleTransferEntry} and HTTP response
      */
     this.getTransfer = function(transferId, opts) {
@@ -84,9 +84,9 @@
      * @param {Object} opts Optional parameters
      * @param {number} opts.skipCount The number of entities that exist in the collection before those included in this list.
      * @param {number} opts.maxItems The maximum number of items to return in the list.
-     * @param {Array.<String>} opts.include Returns additional information about the transfer&#39;s child. Any optional field from the response model can be requested. For example: * allowableOperations * aspectNames * isClosed * isRecord * isRecordFolder * path * properties
+     * @param {string[]} opts.include Returns additional information about the transfer&#39;s child. Any optional field from the response model can be requested. For example: * allowableOperations * aspectNames * isClosed * isRecord * isRecordFolder * path * properties
      * @param {boolean} opts.includeSource Also include **source** (in addition to **entries**) with folder information on the specified parent **transferId**.
-     * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
+     * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleTransferAssociationPaging} and HTTP response
      */
     this.listTransfersChildren = function(transferId, opts) {

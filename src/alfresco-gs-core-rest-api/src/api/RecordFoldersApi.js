@@ -40,8 +40,8 @@
      * @param {string} recordFolderId The identifier of a record folder.
      * @param {RMNodeBodyCreate} recordBodyCreate The record information to create.  This field is ignored for multipart/form-data content uploads.
      * @param {Object} opts Optional parameters
-     * @param {Array.<String>} opts.include Returns additional information about the record. Any optional field from the response model can be requested. For example: * allowableOperations * content * isCompleted * path
-     * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
+     * @param {string[]} opts.include Returns additional information about the record. Any optional field from the response model can be requested. For example: * allowableOperations * content * isCompleted * path
+     * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleRecordEntry} and HTTP response
      */
     this.createRecordFolderChild = function(recordFolderId, recordBodyCreate, opts) {
@@ -125,8 +125,8 @@
      * Gets information for record folder **recordFolderId**  Mandatory fields and the record folder&#39;s aspects and properties are returned by default.  You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information.
      * @param {string} recordFolderId The identifier of a record folder.
      * @param {Object} opts Optional parameters
-     * @param {Array.<String>} opts.include Returns additional information about the record folders. Any optional field from the response model can be requested. For example: * allowableOperations * isClosed * path
-     * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
+     * @param {string[]} opts.include Returns additional information about the record folders. Any optional field from the response model can be requested. For example: * allowableOperations * isClosed * path
+     * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleRecordFolderEntry} and HTTP response
      */
     this.getRecordFolder = function(recordFolderId, opts) {
@@ -171,9 +171,9 @@
      * @param {number} opts.skipCount The number of entities that exist in the collection before those included in this list.
      * @param {number} opts.maxItems The maximum number of items to return in the list.
      * @param {string} opts.where Optionally filter the list. Here are some examples:  *   &#x60;&#x60;&#x60;where&#x3D;(nodeType&#x3D;&#39;my:specialNodeType&#39;)&#x60;&#x60;&#x60;  *   &#x60;&#x60;&#x60;where&#x3D;(nodeType&#x3D;&#39;my:specialNodeType INCLUDESUBTYPES&#39;)&#x60;&#x60;&#x60;  *   &#x60;&#x60;&#x60;where&#x3D;(isPrimary&#x3D;true)&#x60;&#x60;&#x60;
-     * @param {Array.<String>} opts.include Returns additional information about the records. Any optional field from the response model can be requested. For example: * allowableOperations * aspectNames * association * content * isCompleted * path * properties
+     * @param {string[]} opts.include Returns additional information about the records. Any optional field from the response model can be requested. For example: * allowableOperations * aspectNames * association * content * isCompleted * path * properties
      * @param {boolean} opts.includeSource Also include **source** (in addition to **entries**) with record information on the parent folder – the specified parent **recordFolderId**
-     * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
+     * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleRecordFolderAssociationPaging} and HTTP response
      */
     this.listRecordFolderChildren = function(recordFolderId, opts) {
@@ -220,8 +220,8 @@
      * @param {string} recordFolderId The identifier of a record folder.
      * @param {FilePlanComponentBodyUpdate} recordFolderBodyUpdate The record folder information to update.
      * @param {Object} opts Optional parameters
-     * @param {Array.<String>} opts.include Returns additional information about the record folders. Any optional field from the response model can be requested. For example: * allowableOperations * isClosed * path
-     * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
+     * @param {string[]} opts.include Returns additional information about the record folders. Any optional field from the response model can be requested. For example: * allowableOperations * isClosed * path
+     * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleRecordFolderEntry} and HTTP response
      */
     this.updateRecordFolder = function(recordFolderId, recordFolderBodyUpdate, opts) {

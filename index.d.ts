@@ -1423,22 +1423,41 @@ declare namespace AlfrescoApi {
     }
 
     export class QueryBody {
-        constructor(obj?: any);
+        constructor(obj ?: any);
 
-        query?: RequestQuery;
-        paging?: RequestPagination;
-        include?: Array<string>;
-        fields?: Array<string>;
-        sort?: Array<any>;
-        templates?: Array<any>;
-        defaults?: RequestDefaults;
-        filterQueries?: Array<any>;
-        facetQueries?: Array<any>;
-        facetFields?: RequestFacetFields;
-        spellcheck?: RequestSpellcheck;
-        scope?: RequestScope;
-        limits?: RequestLimits;
-        highlight?: RequestHighlight;
+        query ?: RequestQuery;
+        paging ?: RequestPagination;
+        include ?: Array<string>;
+        fields ?: Array<string>;
+        sort ?: Array<any>;
+        templates ?: Array<any>;
+        defaults ?: RequestDefaults;
+        filterQueries ?: Array<any>;
+        facetQueries ?: Array<any>;
+        facetFields ?: RequestFacetFields;
+        spellcheck ?: RequestSpellcheck;
+        scope ?: RequestScope;
+        limits ?: RequestLimits;
+        highlight ?: RequestHighlight;
+    }
+
+    export class SearchRequest {
+        constructor(obj ?: any);
+
+        query ?: RequestQuery;
+        paging ?: RequestPagination;
+        include ?: Array<string>;
+        fields ?: Array<string>;
+        sort ?: Array<any>;
+        templates ?: Array<any>;
+        defaults ?: RequestDefaults;
+        filterQueries ?: Array<any>;
+        facetQueries ?: Array<any>;
+        facetFields ?: RequestFacetFields;
+        spellcheck ?: RequestSpellcheck;
+        scope ?: RequestScope;
+        limits ?: RequestLimits;
+        highlight ?: RequestHighlight;
     }
 
     export class RequestHighlightFields {
@@ -3775,7 +3794,7 @@ declare namespace AlfrescoApi {
     export interface SearchApi {
         new(client?: ApiClient): SearchApi;
 
-        search(queryBody: QueryBody): Promise<any> ;
+        search(queryBody: QueryBody | SearchRequest): Promise<any> ;
     }
 
     //  ======= Search  End ======

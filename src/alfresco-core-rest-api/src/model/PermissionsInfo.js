@@ -78,7 +78,7 @@
    */
   exports.prototype['locallySet'] = undefined;
   /**
-   * @member {Array.<String>} settable
+   * @member {string[]} settable
    */
   exports.prototype['settable'] = undefined;
 

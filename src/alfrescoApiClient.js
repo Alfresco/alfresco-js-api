@@ -24,9 +24,9 @@ class AlfrescoApiClient extends ApiClient {
      * @param {Object.<String, Object>} headerParams A map of header parameters and their values.
      * @param {Object.<String, Object>} formParams A map of form parameters and their values.
      * @param {Object} bodyParam The value to pass as the request body.
-     * @param {Array.<String>} authNames An array of authentication type names.
-     * @param {Array.<String>} contentTypes An array of request MIME types.
-     * @param {Array.<String>} accepts An array of acceptable response MIME types.
+     * @param {String[]} authNames An array of authentication type names.
+     * @param {String[]} contentTypes An array of request MIME types.
+     * @param {String[]} accepts An array of acceptable response MIME types.
      * @param {(String|Array|ObjectFunction)} returnType The required type to return; can be a string for simple types or the
      * @param {(String)} contextRoot alternative contextRoot
      * @param {(String)} responseType  is an enumerated value that returns the type of the response.

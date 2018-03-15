@@ -17,7 +17,7 @@
     "tslint": "tslint --type-check -c tslint.json index.d.ts --project tsconfig.json ",
     "toc": "markdown-toc -i README.md && markdown-toc -i test/mockObjects/README.md",
     "prepublish": "npm run webpack",
-    "generate-ts": "jsdoc -c config.json -d out",
+    "generate-ts": "jsdoc -c config.json .",
     "generate-api": "mvn install"
   },
   "sideEffects": false,
@@ -59,6 +59,7 @@
     "rimraf": "^2.5.2",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
+    "tsd-jsdoc": "^2.0.0-beta.3",
     "tslint": "5.7.0",
     "typescript": "^2.4.0",
     "uglifyjs-webpack-plugin": "^1.2.3",

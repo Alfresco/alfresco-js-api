@@ -54,7 +54,7 @@
   }
 
   /**
-   * @member {Array.<String>} capabilities
+   * @member {string[]} capabilities
    */
   exports.prototype['capabilities'] = undefined;
 

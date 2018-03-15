@@ -103,12 +103,13 @@ paths:
                       {"name": "mytemplate","template": "%cm:content"}]
         ```
 
+        **Note: Spell checking only works on Search Services (Solr 6) if you have already enabled suggestions.**
+
         For **spell checking** you can use a query like this:
         ```JSON
         {
           "query": {
-            "query": "cm:title:alfrezco",
-            "language": "afts"
+            "query": "cm:title:alfrezco"
           },
           "spellcheck": {"query": "alfrezco"}
         }
@@ -120,8 +121,7 @@ paths:
         {
           "query": {
             "query": "cm:title:alfrezco",
-            "userQuery": "alfrezco",
-            "language": "afts"
+            "userQuery": "alfrezco"
           },
           "spellcheck": {}
         }
@@ -223,6 +223,67 @@ paths:
            ]
         },
         ```
+
+        Grouping facet queries that go together can be done by specifying the group label in the fact queries as follow:
+        ```JSON
+            {
+                "query": {
+                    "query": "presentation"
+                },
+                "facetQueries": [
+                    {"query": "content.size:[0 TO 102400]", "label": "small", "group":"foo"},
+                    {"query": "content.size:[102400 TO 1048576]", "label": "medium","group":"foo"},
+                    {"query": "content.size:[1048576 TO 16777216]", "label": "large","group":"foo"}
+                ]
+            }
+        ```
+        The above query returns the results a faceted field grouped under the label foo:
+        ```JSON
+        {
+            "context": {"facetsFields": [{
+                "label": "foo",
+                "buckets": [
+                    {
+                        "count": 109,
+                        "label": "small",
+                        "filterQuery": "content.size:[0 TO 102400]"
+                    },
+                    {
+                        "count": 0,
+                        "label": "large",
+                        "filterQuery": "content.size:[1048576 TO 16777216]"
+                    },
+                    {
+                        "count": 0,
+                        "label": "medium",
+                        "filterQuery": "content.size:[102400 TO 1048576]"
+                    }
+                ]
+            }]
+        }
+        ```
+        Range Faceting is supported by the **ranges JSON body parameter**, for example:
+        ```JSON
+            {
+                "query": {
+                    "query": "presentation"
+                },
+                "ranges": [
+                {
+                    "field": "content.size",
+                     "start": "0",
+                     "end": "100",
+                     "gap": "20",
+                     "hardend": true
+                },
+                {
+                    "field": "created",
+                    "start": "2015-09-29T10:45:15.729Z",
+                    "end": "2016-09-29T10:45:15.729Z",
+                    "gap": "+100DAY"
+                }]
+            }
+        ```
         An example query for **search highlighting** could look like this:
         ```JSON
         {
@@ -281,37 +342,7 @@ paths:
             Generic query API
           required: true
           schema:
-             required:
-               - query
-             properties:
-                query:
-                  $ref: '#/definitions/RequestQuery'
-                paging:
-                   $ref: '#/definitions/RequestPagination'
-                include:
-                  $ref: '#/definitions/RequestInclude'
-                fields:
-                  $ref: '#/definitions/RequestFields'
-                sort:
-                  $ref: '#/definitions/RequestSortDefinition'
-                templates:
-                  $ref: '#/definitions/RequestTemplates'
-                defaults:
-                  $ref: '#/definitions/RequestDefaults'
-                filterQueries:
-                  $ref: '#/definitions/RequestFilterQueries'
-                facetQueries:
-                  $ref: '#/definitions/RequestFacetQueries'
-                facetFields:
-                  $ref: '#/definitions/RequestFacetFields'
-                spellcheck:
-                  $ref: '#/definitions/RequestSpellcheck'
-                scope:
-                  $ref: '#/definitions/RequestScope'
-                limits:
-                  $ref: '#/definitions/RequestLimits'
-                highlight:
-                  $ref: '#/definitions/RequestHighlight'
+            $ref: '#/definitions/SearchRequest'
       operationId: search
       produces:
         - application/json
@@ -325,7 +356,6 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-
 
 
 definitions:
@@ -357,6 +387,60 @@ definitions:
             type: string
           logId:
             type: string
+  SearchRequest:
+    type: object
+    required:
+      - query
+    properties:
+      query:
+        $ref: '#/definitions/RequestQuery'
+      paging:
+         $ref: '#/definitions/RequestPagination'
+      include:
+        $ref: '#/definitions/RequestInclude'
+      includeRequest:
+        description: "When true, include the original request in the response"
+        type: boolean
+        default: false
+      fields:
+        $ref: '#/definitions/RequestFields'
+      sort:
+        $ref: '#/definitions/RequestSortDefinition'
+      templates:
+        $ref: '#/definitions/RequestTemplates'
+      defaults:
+        $ref: '#/definitions/RequestDefaults'
+      localization:
+        $ref: '#/definitions/RequestLocalization'
+      filterQueries:
+        $ref: '#/definitions/RequestFilterQueries'
+      facetQueries:
+        $ref: '#/definitions/RequestFacetQueries'
+      facetFields:
+        $ref: '#/definitions/RequestFacetFields'
+      facetIntervals:
+        $ref: '#/definitions/RequestFacetIntervals'
+      pivots:
+        type: array
+        items:
+          $ref: '#/definitions/RequestPivot'
+      stats:
+        type: array
+        items:
+          $ref: '#/definitions/RequestStats'
+      spellcheck:
+        $ref: '#/definitions/RequestSpellcheck'
+      scope:
+        $ref: '#/definitions/RequestScope'
+      limits:
+        $ref: '#/definitions/RequestLimits'
+      highlight:
+        $ref: '#/definitions/RequestHighlight'
+      ranges:
+          type: array
+          items:
+            $ref: '#/definitions/RequestRange'
+
   RequestInclude:
     description: |
          Returns additional information about the node. The following optional fields can be requested:
@@ -391,6 +475,104 @@ definitions:
     type: array
     items:
      type: string
+  RequestPivot:
+    description: A list of pivots.
+    type: object
+    properties:
+      key:
+        description: A key corresponding to a matching field facet label or stats.
+        type: string
+      pivots:
+        type: array
+        items:
+          $ref: '#/definitions/RequestPivot'
+  RequestLocalization:
+    description: Localization settings
+    type: object
+    properties:
+      timezone:
+        description: A valid timezone id supported by @see java.time.ZoneId
+        type: string
+      locales:
+        description: A list of Locales definied by IETF BCP 47.  The ordering is
+          significant.  The first locale (leftmost) is used for sort and query
+          localization, whereas the remaining locales are used for query only.
+        type: array
+        items:
+          type: string
+  RequestStats:
+    description: A list of stats request.
+    type: object
+    properties:
+      field:
+        description: The stats field
+        type: string
+      label:
+        description: A label to include for reference the stats field
+        type: string
+      min:
+        description: The minimum value of the field
+        type: boolean
+        default: true
+      max:
+        description: The maximum value of the field
+        type: boolean
+        default: true
+      sum:
+        description: The sum of all values of the field
+        type: boolean
+        default: true
+      countValues:
+        description: The number which have a value for this field
+        type: boolean
+        default: true
+      missing:
+        description: The number which do not have a value for this field
+        type: boolean
+        default: true
+      mean:
+        description: The average
+        type: boolean
+        default: true
+      stddev:
+        description: Standard deviation
+        type: boolean
+        default: true
+      sumOfSquares:
+        description: Sum of all values squared
+        type: boolean
+        default: true
+      distinctValues:
+        description: The set of all distinct values for the field (This can be very
+          expensive to calculate)
+        type: boolean
+        default: false
+      countDistinct:
+        description: The number of distinct values  (This can be very expensive to
+          calculate)
+        type: boolean
+        default: false
+      cardinality:
+        description: A statistical approximation of the number of distinct values
+        type: boolean
+        default: false
+      cardinalityAccuracy:
+        description: Number between 0.0 and 1.0 indicating how aggressively the algorithm
+          should try to be accurate. Used with boolean cardinality flag.
+        type: number
+        format: float
+        default: 0.3
+      excludeFilters:
+        description: A list of filters to exclude
+        type: array
+        items:
+          type: string
+      percentiles:
+        description: A list of percentile values, e.g. "1,99,99.9"
+        type: array
+        items:
+          type: number
+          format: float
   RequestQuery:
     description: Query.
     type: object
@@ -436,6 +618,8 @@ definitions:
     properties:
       consistency:
         $ref: '#/definitions/ResponseConsistency'
+      request:
+        $ref: '#/definitions/SearchRequest'
       facetQueries:
         description: The counts from facet queries
         type: array
@@ -444,32 +628,21 @@ definitions:
           properties:
              label:
                type: string
+             filterQuery:
+              description: The filter query you can use to apply this facet
+              type: string
              count:
-               type: number
-      facetFields:
+               type: integer
+      facetsFields:
         description: The counts from field facets
         type: array
         items:
-          type: object
-          properties:
-            label:
-              description: The field name or its explicit label, if provided on the request
-              type: string
-            buckets:
-              description: An array of buckets and values
-              type: array
-              items:
-                type: object
-                properties:
-                  label:
-                    description: The bucket label
-                    type: string
-                  count:
-                    description: The count for the bucket
-                    type: number
-                  display:
-                    description: An optional field for additional display information
-                    type: object
+          $ref: '#/definitions/ResultBuckets'
+      facets:
+        description: The faceted response
+        type: array
+        items:
+          $ref: '#/definitions/GenericFacetResponse'
       spellcheck:
         description: |
           Suggested corrections
@@ -491,7 +664,94 @@ definitions:
                type: array
                items:
                  type: string
-
+  GenericFacetResponse:
+    type: object
+    properties:
+      type:
+        description: The facet type, eg. interval, range, pivot, stats
+        type: string
+      label:
+        description: The field name or its explicit label, if provided on the request
+        type: string
+      buckets:
+        description: An array of buckets and values
+        type: array
+        items:
+          $ref: '#/definitions/GenericBucket'
+  GenericBucket:
+    description: A bucket of facet results
+    type: object
+    properties:
+        label:
+          description: The bucket label
+          type: string
+        filterQuery:
+          description: The filter query you can use to apply this facet
+          type: string
+        display:
+          description: An optional field for additional display information
+          type: object
+        metrics:
+          description: An array of buckets and values
+          type: array
+          items:
+            $ref: '#/definitions/GenericMetric'
+        facets:
+          description: Additional list of nested facets
+          type: array
+          items:
+            type: object
+        bucketInfo:
+          description: Additional information of nested facet
+          type: object
+          properties:
+              start:
+                description: The start of range
+                type: string
+              startInclusive:
+                description: Includes values greater or equal to "start"
+                type: boolean
+              end:
+                description: The end of range
+                type: string
+              endInclusive:
+                description: Includes values less than or equal to "end"
+                type: boolean
+  GenericMetric:
+    description: A metric used in faceting
+    type: object
+    properties:
+      type:
+          description: The type of metric, e.g. count
+          type: string
+      value:
+          description:  |
+            The metric value, e.g. {"count": 34}
+          type: object
+  ResultBuckets:
+    type: object
+    properties:
+      label:
+        description: The field name or its explicit label, if provided on the request
+        type: string
+      buckets:
+        description: An array of buckets and values
+        type: array
+        items:
+          type: object
+          properties:
+            label:
+              description: The bucket label
+              type: string
+            filterQuery:
+              description: The filter query you can use to apply this facet
+              type: string
+            count:
+              description: The count for the bucket
+              type: integer
+            display:
+              description: An optional field for additional display information
+              type: object
   ResultSetRowEntry:
     description: A row in the result set
     type: object
@@ -806,45 +1066,51 @@ definitions:
           Define specifc fields on which to facet (adds SOLR facet.field and f.<field>.facet.* options)
         type: array
         items:
-          type: object
-          properties:
-            field:
-              description: The facet field
-              type: string
-            prefix:
-              description: Restricts the possible constraints to only indexed values with a specified prefix.
-              type: string
-            sort:
-              type: string
-              enum:
-                - COUNT
-                - INDEX
-            method:
-              type: string
-              enum:
-                - ENUM
-                - FC
-            missing:
-              description: When true, count results that match the query but which have no facet value for the field (in addition to the Term-based constraints).
-              type: boolean
-              default: false
-            limit:
-              type: integer
-            offset:
-              type: integer
-            mincount:
-              type: integer
-              description:  The minimum count required for a facet field to be included in the response.
-              default: 1
-            facetEnumCacheMinDf:
-               type: integer
-            excludeFilters:
-              description: |
-                Filter Queries with tags listed here will not be included in facet counts.
-                This is used for multi-select facetting.
-              type: array
-              items:
-                type: string
+          $ref: '#/definitions/RequestFacetField'
+  RequestFacetField:
+    description: A simple facet field
+    type: object
+    properties:
+      field:
+        description: The facet field
+        type: string
+      label:
+        description: A label to include in place of the facet field
+        type: string
+      prefix:
+        description: Restricts the possible constraints to only indexed values with a specified prefix.
+        type: string
+      sort:
+        type: string
+        enum:
+          - COUNT
+          - INDEX
+      method:
+        type: string
+        enum:
+          - ENUM
+          - FC
+      missing:
+        description: When true, count results that match the query but which have no facet value for the field (in addition to the Term-based constraints).
+        type: boolean
+        default: false
+      limit:
+        type: integer
+      offset:
+        type: integer
+      mincount:
+        type: integer
+        description:  The minimum count required for a facet field to be included in the response.
+        default: 1
+      facetEnumCacheMinDf:
+        type: integer
+      excludeFilters:
+        description: |
+          Filter Queries with tags listed here will not be included in facet counts.
+          This is used for multi-select facetting.
+        type: array
+        items:
+          type: string
   RequestLimits:
     description: Limit the time and resources used for query execution
     type: object
@@ -857,7 +1123,53 @@ definitions:
         description:  Maximum count of post query permission evaluations
         type: integer
         default: 2000
-
+  RequestFacetIntervals:
+    description: Facet Intervals
+    type: object
+    properties:
+      sets:
+        description: Sets the intervals for all fields.
+        type: array
+        items:
+          $ref: '#/definitions/RequestFacetSet'
+      intervals:
+        description:  Specifies the fields to facet by interval.
+        type : array
+        items:
+          type: object
+          properties:
+            field:
+              description: The field to facet on
+              type: string
+            label:
+              description: A label to use to identify the field facet
+              type: string
+            sets:
+              description: Sets the intervals for all fields.
+              type: array
+              items:
+                $ref: '#/definitions/RequestFacetSet'
+  RequestFacetSet:
+    description: The interval to Set
+    type: object
+    properties:
+      label:
+        description: A label to use to identify the set
+        type: string
+      start:
+        description: The start of the range
+        type: string
+      end:
+        description: The end of the range
+        type: string
+      startInclusive:
+        description: When true, the set will include values greater or equal to "start"
+        type: boolean
+        default: true
+      endInclusive:
+        description: When true, the set will include values less than or equal to "end"
+        type: boolean
+        default: true
   RequestFilterQueries:
     description: Filter Queries. Constraints that apply to the results set but do not affect the score of each entry.
     type: array
@@ -919,13 +1231,13 @@ definitions:
         type: string
       snippetCount:
         description:  The maximum number of distinct highlight snippets to return for each highlight field.
-        type: number
+        type: integer
       fragmentSize:
         description: The character length of each snippet.
-        type: number
+        type: integer
       maxAnalyzedChars:
         description: The number of characters to be considered for highlighting. Matches after this count will not be shown.
-        type: number
+        type: integer
       mergeContiguous:
         description: If fragments over lap they can be  merged into one larger fragment
         type: boolean
@@ -942,12 +1254,49 @@ definitions:
               description: The name of the field to highlight.
               type: string
             snippetCount:
-              type: number
+              type: integer
             fragmentSize:
-              type: number
+              type: integer
             mergeContiguous:
              type: boolean
             prefix:
               type: string
             postfix:
               type: string
+  RequestRange:
+    description: Facet range
+    type: object
+    properties:
+      field:
+        description: The name of the field to perform range
+        type: string
+      start:
+        description: The start of the range
+        type: string
+      end:
+        description: The end of the range
+        type: string
+      gap:
+        description: Bucket size
+        type: string
+      hardend:
+        description:  If true means that the last bucket will end at “end” even if it is less than “gap” wide.
+        type: boolean
+      other:
+        description: before, after, between, non, all
+        type: array
+        items:
+          type: string
+      include:
+        description: lower, upper, edge, outer, all
+        type: array
+        items:
+          type: string
+      label:
+        description: A label to include as a pivot reference
+        type: string
+      excludeFilters:
+        description: Filter queries to exclude when calculating statistics
+        type: array
+        items:
+          type: string

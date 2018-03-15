@@ -54,7 +54,7 @@
   }
 
   /**
-   * @member {Array.<String>} order
+   * @member {string[]} order
    */
   exports.prototype['order'] = undefined;
 
