@@ -251,7 +251,7 @@ declare namespace AlfrescoApi {
 
         setAuthentications(authentications: any): void;
 
-        callApi(path: string, httpMethod: string, pathParams?: Object.<String, String>, queryParams?: Object.<String, Object>, headerParams?: Object.<String, Object>, formParams?: Object.<String, Object>, bodyParam: any, authNames?: Array.<String>, contentTypes?: Array.<String>, accepts?: Array.<String>, returnType?: String | Array | ObjectFunction, contextRoot?: string, responseType?: string): Promise<any>;
+        callApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any, authNames?: string[], contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any>;
     }
 
     export interface BpmClient {
@@ -261,7 +261,7 @@ declare namespace AlfrescoApi {
 
         setAuthentications(authentications: any): void;
 
-        callApi(path: string, httpMethod: string, pathParams?: Object.<String, String>, queryParams?: Object.<String, Object>, headerParams?: Object.<String, Object>, formParams?: Object.<String, Object>, bodyParam: any, authNames?: Array.<String>, contentTypes?: Array.<String>, accepts?: Array.<String>, returnType?: String | Array | ObjectFunction, contextRoot?: string, responseType?: string): Promise<any>;
+        callApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any, authNames?: string[], contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any>;
 
     }
 
