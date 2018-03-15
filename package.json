@@ -8,7 +8,7 @@
   "scripts": {
     "clean": "rimraf node_modules && npm run clean-build",
     "clean-build": "rimraf dist",
-    "build": "npm run clean-build && grunt && npm run tslint && npm run test && npm run webpack&& npm run toc",
+    "build": "npm run clean-build && grunt && npm run tslint && npm run test && npm run webpack && npm run toc",
     "webpack": "webpack",
     "test": "grunt test",
     "coverage": "grunt coverage",
