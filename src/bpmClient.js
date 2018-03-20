@@ -10,6 +10,8 @@ class BpmClient extends AlfrescoApiClient {
     constructor(config) {
         super();
 
+        this.className = 'BpmClient';
+
         this.config = config;
 
         this.changeHost();

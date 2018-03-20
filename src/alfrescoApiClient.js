@@ -124,7 +124,7 @@ class AlfrescoApiClient extends ApiClient {
     }
 
     isBpmRequest() {
-        return this.constructor.name === 'BpmAuth' || this.constructor.name === 'BpmClient';
+        return this.className === 'BpmAuth' || this.className === 'BpmClient';
     }
 
     isCsrfEnabled() {

@@ -13,6 +13,8 @@
 ## Fix
 
 [Wrong type definition for RequestPagination](https://issues.alfresco.com/jira/browse/ADF-2448)
+[Not able to log-in into BPM with production mode and CSRF token enable](https://github.com/Alfresco/alfresco-js-api/issues/315)
+
 
 <a name="2.3.0"></a>
 # [2.3.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.3.0) (XX-XX-XXXX)
