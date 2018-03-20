@@ -10,6 +10,7 @@ class BpmAuth extends AlfrescoApiClient {
      */
     constructor(config) {
         super();
+        this.className = 'BpmAuth';
 
         this.username = this.loadUsername();
 
