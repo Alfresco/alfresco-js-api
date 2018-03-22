@@ -1,12 +1,12 @@
 **Please check if the PR fulfills these requirements**
 ```
-[ ] The commit message follows our [guidelines](https://github.com/Alfresco/alfresco-js-ap/wiki/Commit-format)
+[ ] The commit message follows our [guidelines](https://github.com/Alfresco/alfresco-js-api/wiki/Commit-format)
 [ ] Tests for the changes have been added (for bug fixes / features)
 [ ] Docs have been added / updated (for bug fixes / features)
 ```
 <!--
  Before submitting your PR, please check that your code follows our contribution guidelines:
- https://github.com/Alfresco/alfresco-js-ap/wiki/Code-contribution-acceptance-criteria
+ https://github.com/Alfresco/alfresco-js-api/wiki/Code-contribution-acceptance-criteria
  -->
 
 **What kind of change does this PR introduce?** (check one with "x")
