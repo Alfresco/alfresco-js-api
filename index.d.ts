@@ -1696,6 +1696,14 @@ declare namespace AlfrescoApi {
         pagination?: Pagination;
     }
 
+    export class Group {
+        isRoot?: boolean;
+        displayName?: string;
+        parentIds?: Array<string>;
+        id?: string;
+        zones: Array<string>;
+    }
+
     export class Site {
         constructor(obj?: any);
 
@@ -1795,6 +1803,12 @@ declare namespace AlfrescoApi {
         constructor(obj?: any);
 
         entry?: Site;
+    }
+
+    export class GroupsEntry {
+        constructor(obj?: any);
+
+        entry?: Group;
     }
 
     export class SiteMember {
@@ -1929,6 +1943,19 @@ declare namespace AlfrescoApi {
         constructor(obj?: any);
 
         entries?: Array<SiteEntry>;
+        pagination?: Pagination;
+    }
+
+    export class GroupsPaging {
+        constructor(obj?: any);
+
+        list?: GroupsPagingList;
+    }
+
+    export class GroupsPagingList {
+        constructor(obj?: any);
+
+        entries?: Array<GroupsEntry>;
         pagination?: Pagination;
     }
 
