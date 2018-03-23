@@ -1,18 +1,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient', '../model/GroupBody', '../model/Error', '../model/GroupsPaging', '../model/GroupsEntry'], factory);
+    define(['../ApiClient', '../model/GroupBody', '../model/Error', '../model/GroupsPaging', '../model/GroupsEntry', '../model/GroupMemberPaging', '../model/GroupMemberEntry', '../model/GroupMemberPaging', '../model/GroupMemberEntry'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/GroupBody'), require('../model/Error'), require('../model/GroupsPaging'), require('../model/GroupsEntry') );
+    module.exports = factory(require('../ApiClient'), require('../model/GroupBody'), require('../model/Error'), require('../model/GroupsPaging'), require('../model/GroupsEntry'), require('../model/GroupMemberPaging'), require('../model/GroupMemberEntry') );
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoCoreRestApi) {
       root.AlfrescoCoreRestApi = {};
     }
-    root.AlfrescoCoreRestApi.GroupsApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.GroupBody, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.GroupsPaging, root.AlfrescoCoreRestApi.GroupsEntry);
+    root.AlfrescoCoreRestApi.GroupsApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.GroupBody, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.GroupsPaging, root.AlfrescoCoreRestApi.GroupsEntry, root.AlfrescoCoreRestApi.GroupMemberPaging, root.AlfrescoCoreRestApi.GroupMemberEntry);
   }
-}(this, function(ApiClient, GroupBody, Error, GroupsPaging) {
+}(this, function(ApiClient, GroupBody, Error, GroupsPaging, GroupsEntry, GroupMemberPaging, GroupMemberEntry, GroupMemberPaging, GroupMemberEntry) {
   'use strict';
 
   /**
@@ -35,7 +35,10 @@
     /**
      * Create a new group
      * @param {module:model/GroupBody} GroupBody The new group
-     * data is of type: {module:model/TagEntry}
+     * @param {Object} opts Optional parameters
+     * @param {string[]} opts.include Use the relations parameter to include one or more related entities in a single response.
+     * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * data is of type: {module:model/GroupsEntry}
      */
     this.createGroup = function(groupBody, opts) {
       var postBody = groupBody;
@@ -48,6 +51,8 @@
       var pathParams = {
       };
       var queryParams = {
+        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
       var headerParams = {
       };
@@ -199,7 +204,9 @@
      * @param {String} groupId The identifier of a site.
      * @param {module:model/GroupBody} groupBody only the displayName change attribute is allowed.
      * @param {Object} opts Optional parameters
-     * data is of type: {module:model/SiteMemberEntry}
+     * @param {string[]} opts.include Returns additional information about the group. The following optional fields can be requested: parentIds, zones
+     * @param {string[]} opts.fields A list of field names.You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.The list applies to a returned individual entity or entries within a collection.If the API method also supports the include parameter, then the fields specified in the include parameter are returned in addition to those specified in the fields parameter.
+     * data is of type: {module:model/GroupsEntry}
      */
     this.updateGroup = function(groupId, groupBody, opts) {
       opts = opts || {};
@@ -240,6 +247,138 @@
 
       return this.apiClient.callApi(
         '/groups/{groupId}', 'PUT',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Get group members
+     * Returns a list of members for group **groupId**.
+     * @param {String} groupId The identifier of a site.
+     * @param {Object} opts Optional parameters
+     * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
+     * @param {Integer} opts.maxItems The maximum number of items to return in the list.
+     * @param {String} opts.orderBy A string to control the order of the entities returned.
+     * @param {String} opts.where A string to restrict the returned objects by using a predicate.
+     * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * data is of type: {module:model/GroupMemberPaging}
+     */
+    this.getGroupMembers = function(groupId, opts) {
+      opts = opts || {};
+      var postBody = null;
+
+      // verify the required parameter 'groupId' is set
+      if (groupId == undefined || groupId == null) {
+        throw "Missing the required parameter 'groupId' when calling getGroupMembers";
+      }
+
+      var pathParams = {
+        'groupId': groupId
+      };
+      var queryParams = {
+        'skipCount': opts['skipCount'],
+        'maxItems': opts['maxItems'],
+        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv'),
+        'orderBy': opts['orderBy'],
+        'where': opts['where']
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = GroupMemberPaging;
+
+      return this.apiClient.callApi(
+        '/groups/{groupId}/members', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Add a group member
+     * Create a group membership (for an existing person or group) within a group groupId.
+     * @param {String} groupId The identifier of a site.
+     * @param {module:model/GroupMember} GroupMember The persons new role
+     * @param {Object} opts Optional parameters
+     * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * data is of type: {module:model/GroupMemberEntry}
+     */
+    this.addGroupMember = function(groupId, groupMemberBody, opts) {
+      var postBody = siteMemberRoleBody;
+
+      // verify the required parameter 'groupId' is set
+      if (groupId == undefined || groupId == null) {
+        throw "Missing the required parameter 'groupId' when calling addGroupMember";
+      }
+
+      // verify the required parameter 'groupMemberBody' is set
+      if (groupMemberBody == undefined || groupMemberBody == null) {
+        throw "Missing the required parameter 'groupMemberBody' when calling addGroupMember";
+      }
+
+
+      var pathParams = {
+        'siteId': siteId
+      };
+      var queryParams = {
+        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv'),
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = GroupMemberEntry;
+
+      return this.apiClient.callApi(
+        'POST /groups/{groupId}/members', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Delete a group membership
+     * Deletes the membership **groupMemberId** from group **groupId**
+     * @param {String} groupId The identifier of a group.
+     * @param {String} groupMemberId The identifier of a group membership.
+     */
+    this.deleteGroupMember = function(groupId, groupMemberId) {
+      opts = opts || {};
+      var postBody = null;
+
+      // verify the required parameter 'siteId' is set
+      if (groupId == undefined || groupId == null) {
+        throw "Missing the required parameter 'groupId' when calling deleteGroup";
+      }
+
+      var pathParams = {
+        'groupId': groupId,
+        'groupMemberId': groupMemberId
+      };
+      var queryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = null;
+
+      return this.apiClient.callApi(
+        '/groups/{groupId}/members/{groupMemberId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );
