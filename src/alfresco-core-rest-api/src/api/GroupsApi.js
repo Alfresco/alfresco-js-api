@@ -1,7 +1,7 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient', '../model/GroupBody', '../model/Error', '../model/GroupsPaging', '../model/GroupsEntry', '../model/GroupMemberPaging', '../model/GroupMemberEntry', '../model/GroupMemberPaging', '../model/GroupMemberEntry'], factory);
+    define(['../ApiClient', '../model/GroupBody', '../model/Error', '../model/GroupsPaging', '../model/GroupsEntry', '../model/GroupMemberPaging', '../model/GroupMemberEntry'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
     module.exports = factory(require('../ApiClient'), require('../model/GroupBody'), require('../model/Error'), require('../model/GroupsPaging'), require('../model/GroupsEntry'), require('../model/GroupMemberPaging'), require('../model/GroupMemberEntry') );
@@ -12,7 +12,7 @@
     }
     root.AlfrescoCoreRestApi.GroupsApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.GroupBody, root.AlfrescoCoreRestApi.Error, root.AlfrescoCoreRestApi.GroupsPaging, root.AlfrescoCoreRestApi.GroupsEntry, root.AlfrescoCoreRestApi.GroupMemberPaging, root.AlfrescoCoreRestApi.GroupMemberEntry);
   }
-}(this, function(ApiClient, GroupBody, Error, GroupsPaging, GroupsEntry, GroupMemberPaging, GroupMemberEntry, GroupMemberPaging, GroupMemberEntry) {
+}(this, function(ApiClient, GroupBody, Error, GroupsPaging, GroupsEntry, GroupMemberPaging, GroupMemberEntry) {
   'use strict';
 
   /**
@@ -42,6 +42,7 @@
      */
     this.createGroup = function(groupBody, opts) {
       var postBody = groupBody;
+      opts = opts || {};
 
       // verify the required parameter 'tagBody' is set
       if (groupBody == undefined || groupBody == null) {
@@ -50,6 +51,7 @@
 
       var pathParams = {
       };
+
       var queryParams = {
         'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
@@ -223,7 +225,7 @@
       }
 
       // verify the required parameter 'personId' is set
-      if (groupBody['id'] !== undefined || groupBody['id'] !== null) {
+      if (groupBody['id']) {
         throw "Id change not allowed in 'groupBody' when calling updateGroup";
       }
 
@@ -310,7 +312,8 @@
      * data is of type: {module:model/GroupMemberEntry}
      */
     this.addGroupMember = function(groupId, groupMemberBody, opts) {
-      var postBody = siteMemberRoleBody;
+      var postBody = groupMemberBody;
+      opts = opts || {};
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
@@ -324,7 +327,7 @@
 
 
       var pathParams = {
-        'siteId': siteId
+        'groupId': groupId
       };
       var queryParams = {
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv'),
@@ -353,7 +356,6 @@
      * @param {String} groupMemberId The identifier of a group membership.
      */
     this.deleteGroupMember = function(groupId, groupMemberId) {
-      opts = opts || {};
       var postBody = null;
 
       // verify the required parameter 'siteId' is set

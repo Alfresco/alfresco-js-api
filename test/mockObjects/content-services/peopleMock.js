@@ -26,6 +26,38 @@ class PeopleMock extends BaseMock {
 
     }
 
+    get200GetGroupsResponse() {
+        nock(this.host, { 'encodedQueryParams': true })
+            .get('/alfresco/api/-default-/public/alfresco/versions/1/people/user/groups')
+            .reply(200, {
+                'list': {
+                    'pagination': {
+                        'count': 2,
+                        'hasMoreItems': true,
+                        'totalItems': 107,
+                        'skipCount': 0,
+                        'maxItems': 2
+                    },
+                    'entries': [
+                        {
+                            'entry': {
+                                'isRoot': true,
+                                'displayName': 'ALFRESCO_ADMINISTRATORS',
+                                'id': 'GROUP_ALFRESCO_ADMINISTRATORS'
+                            }
+                        },
+                        {
+                            'entry': {
+                                'isRoot': true,
+                                'displayName': 'ALFRESCO_MODEL_ADMINISTRATORS',
+                                'id': 'GROUP_ALFRESCO_MODEL_ADMINISTRATORS'
+                            }
+                        }
+                    ]
+                }
+            });
+    }
+
 
     get200ResponsePersons() {
         nock(this.host, {'encodedQueryParams': true})

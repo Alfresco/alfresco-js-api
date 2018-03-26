@@ -32,18 +32,18 @@
   };
 
   /**
-   * Constructs a <code>GroupMemberPaging</code> from a plain JavaScript object, optionally creating a new instance.
+   * Constructs a <code>GroupsPagingList</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/GroupMemberPaging} obj Optional instance to populate.
-   * @return {module:model/GroupMemberPaging} The populated <code>GroupMemberPaging</code> instance.
+   * @param {module:model/GroupsPagingList} obj Optional instance to populate.
+   * @return {module:model/GroupsPagingList} The populated <code>GroupsPagingList</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
       obj = data || new exports();
 
       if (data.hasOwnProperty('list')) {
-        obj['list'] = GroupMemberPaging.constructFromObject(data['list']);
+        obj['list'] = GroupsPagingList.constructFromObject(data['list']);
       }
     }
     return obj;
