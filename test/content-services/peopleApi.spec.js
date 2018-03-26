@@ -3,6 +3,7 @@
 var AlfrescoApi = require('../../main');
 var PeopleMock = require('../../test/mockObjects/mockAlfrescoApi').PeopleApi;
 var AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
+var expect = require('chai').expect;
 
 describe('PeopleApi', function () {
 
@@ -45,6 +46,21 @@ describe('PeopleApi', function () {
         this.alfrescoJsApi.core.peopleApi.getPersons().then(() => {
             this.peopleMock.play();
 
+            done();
+        }, (error) => {
+            console.error(error);
+        });
+
+    });
+
+    it('should get list of groups for people', function (done) {
+        this.peopleMock.get200GroupMembershipResponse('test');
+
+        this.alfrescoJsApi.core.peopleApi.getGroupsMembership('test').then((data) => {
+            console.log('EDDAI');
+            expect(data.list.pagination.count).to.be.equal(2);
+            expect(data.list.entries[0].entry.id).to.be.equal('GROUP_ALFRESCO_ADMINISTRATORS');
+            expect(data.list.entries[1].entry.id).to.be.equal('GROUP_ALFRESCO_MODEL_ADMINISTRATORS');
             done();
         }, (error) => {
             console.error(error);
