@@ -340,7 +340,7 @@
       var returnType = GroupMemberEntry;
 
       return this.apiClient.callApi(
-        'POST /groups/{groupId}/members', 'POST',
+        '/groups/{groupId}/members', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );
