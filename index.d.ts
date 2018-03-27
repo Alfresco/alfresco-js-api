@@ -588,6 +588,26 @@ declare namespace AlfrescoApi {
         updateSiteMember(siteId?: string, personId?: string, siteMemberRoleBody?: SiteMemberRoleBody): Promise<SiteMemberEntry>;
     }
 
+    export interface GroupsApi {
+        new(client?: ApiClient): GroupsApi;
+
+        createGroup(groupBody?: GroupBody, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<GroupsEntry>;
+
+        getGroups(opts?: { skipCount?: number, maxItems?: number, orderBy?: string, where?: string, include?: Array<string>, fields?: Array<string> }): Promise <GroupsPaging>;
+
+        deleteGroup(groupId?: string, opts?: { cascade?: boolean}): Promise<any>;
+
+        getGroup(groupId?: string, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<GroupsEntry>;
+
+        updateGroup(groupId?: string, groupBody?: GroupBody, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<GroupsEntry>;
+
+        getGroupMembers(groupId?: string, opts?: { skipCount?: number, maxItems?: number, orderBy?: string, where?: string, include?: Array<string>, fields?: Array<string> }): Promise<GroupMemberPaging>;
+
+        addGroupMember(groupId?: string, groupBody?: GroupBody, opts?: { fields?: Array<string> }): Promise<GroupMemberEntry>;
+
+        deleteGroupMember(groupId?: string, groupMemberId?: string): Promise<any>;
+    }
+
     export interface PeopleApi {
         new(client: ApiClient): PeopleApi;
 
@@ -634,6 +654,8 @@ declare namespace AlfrescoApi {
         removeSiteMembershipRequest(personId?: string, siteId?: string): Promise<any>;
 
         updateSiteMembershipRequest(personId?: string, siteId?: string, siteMembershipBody?: SiteMembershipRequestBody): Promise<any>;
+
+        getGroupsMembership(personId?: string, opts?: { skipCount?: number, maxItems?: number, orderBy?: string, where?: string, include?: Array<string>, fields?: Array<string> }): Promise <GroupsPaging>;
     }
 
     // export interface PreferencesApi {
@@ -1696,6 +1718,14 @@ declare namespace AlfrescoApi {
         pagination?: Pagination;
     }
 
+    export class Group {
+        isRoot?: boolean;
+        displayName?: string;
+        parentIds?: Array<string>;
+        id?: string;
+        zones: Array<string>;
+    }
+
     export class Site {
         constructor(obj?: any);
 
@@ -1730,6 +1760,14 @@ declare namespace AlfrescoApi {
         title?: string;
         description?: string;
         visibility?: SiteBodyadd.VisibilityEnum;
+    }
+
+    export class GroupBody {
+        constructor(obj?: any);
+
+        id?: string;
+        displayName?: string;
+        parentIds?: Array<string>;
     }
 
     export class SiteBody {
@@ -1797,6 +1835,12 @@ declare namespace AlfrescoApi {
         entry?: Site;
     }
 
+    export class GroupsEntry {
+        constructor(obj?: any);
+
+        entry?: Group;
+    }
+
     export class SiteMember {
         constructor(obj?: any);
 
@@ -1837,6 +1881,33 @@ declare namespace AlfrescoApi {
         constructor(obj?: any);
 
         list?: SiteMemberPagingList;
+    }
+
+    export class GroupMemberPaging {
+        constructor(obj?: any);
+
+        list?: GroupMemberPagingList;
+    }
+
+    export class GroupMemberPagingList {
+        constructor(obj?: any);
+
+        entries?: Array<GroupMemberEntry>;
+        pagination?: Pagination;
+    }
+
+    export class GroupMemberEntry {
+        constructor(obj?: any);
+
+        entry?: GroupMember;
+    }
+
+    export class GroupMember {
+        constructor(obj?: any);
+
+        id?: string;
+        displayName?: string;
+        memberType?: string;
     }
 
     export class SiteMemberPagingList {
@@ -1929,6 +2000,19 @@ declare namespace AlfrescoApi {
         constructor(obj?: any);
 
         entries?: Array<SiteEntry>;
+        pagination?: Pagination;
+    }
+
+    export class GroupsPaging {
+        constructor(obj?: any);
+
+        list?: GroupsPagingList;
+    }
+
+    export class GroupsPagingList {
+        constructor(obj?: any);
+
+        entries?: Array<GroupsEntry>;
         pagination?: Pagination;
     }
 
@@ -4781,6 +4865,7 @@ declare namespace AlfrescoApi {
         searchApi: SearchApi;
         sharedlinksApi: SharedlinksApi;
         sitesApi: SitesApi;
+        groupsApi: GroupsApi;
         queriesApi: QueriesApi;
         tagsApi: TagsApi;
         webscriptApi: WebscriptApi;
