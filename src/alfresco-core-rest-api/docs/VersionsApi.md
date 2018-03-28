@@ -21,21 +21,11 @@ Delete a version
 
 ### Example
 ```javascript
-var AlfrescoContentServicesRestApi = require('alfresco_content_services_rest_api');
-var defaultClient = AlfrescoContentServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoContentServicesRestApi.VersionsApi();
-
 var nodeId = "nodeId_example"; // String | The identifier of a node.
 
 var versionId = "versionId_example"; // String | The identifier of a version, ie. version label, within the version history of a node.
 
-apiInstance.deleteVersion(nodeIdversionId, ).then(function() {
+this.alfrescoJsApi.core.versionsApi.deleteVersion(nodeIdversionId, ).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -73,21 +63,11 @@ Get version information
 
 ### Example
 ```javascript
-var AlfrescoContentServicesRestApi = require('alfresco_content_services_rest_api');
-var defaultClient = AlfrescoContentServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoContentServicesRestApi.VersionsApi();
-
 var nodeId = "nodeId_example"; // String | The identifier of a node.
 
 var versionId = "versionId_example"; // String | The identifier of a version, ie. version label, within the version history of a node.
 
-apiInstance.getVersion(nodeIdversionId, ).then(function(data) {
+this.alfrescoJsApi.core.versionsApi.getVersion(nodeIdversionId, ).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -125,16 +105,6 @@ Get version content
 
 ### Example
 ```javascript
-var AlfrescoContentServicesRestApi = require('alfresco_content_services_rest_api');
-var defaultClient = AlfrescoContentServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoContentServicesRestApi.VersionsApi();
-
 var nodeId = "nodeId_example"; // String | The identifier of a node.
 
 var versionId = "versionId_example"; // String | The identifier of a version, ie. version label, within the version history of a node.
@@ -144,7 +114,7 @@ var opts = {
   'ifModifiedSince': new Date("2013-10-20T19:20:30+01:00"), // Date | Only returns the content if it has been modified since the date provided. Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`. 
   'range': "range_example" // String | The Range header indicates the part of a document that the server should return. Single part request supported, for example: bytes=1-10. 
 };
-apiInstance.getVersionContent(nodeIdversionId, , opts).then(function() {
+this.alfrescoJsApi.core.versionsApi.getVersionContent(nodeIdversionId, , opts).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -185,16 +155,6 @@ List version history
 
 ### Example
 ```javascript
-var AlfrescoContentServicesRestApi = require('alfresco_content_services_rest_api');
-var defaultClient = AlfrescoContentServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoContentServicesRestApi.VersionsApi();
-
 var nodeId = "nodeId_example"; // String | The identifier of a node.
 
 var opts = { 
@@ -203,7 +163,7 @@ var opts = {
   'skipCount': 0, // Number | The number of entities that exist in the collection before those included in this list. If not supplied then the default value is 0. 
   'maxItems': 100, // Number | The maximum number of items to return in the list. If not supplied then the default value is 100. 
 };
-apiInstance.listVersionHistory(nodeId, opts).then(function(data) {
+this.alfrescoJsApi.core.versionsApi.listVersionHistory(nodeId, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -244,16 +204,6 @@ Revert a version
 
 ### Example
 ```javascript
-var AlfrescoContentServicesRestApi = require('alfresco_content_services_rest_api');
-var defaultClient = AlfrescoContentServicesRestApi.ApiClient.instance;
-
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
-
-var apiInstance = new AlfrescoContentServicesRestApi.VersionsApi();
-
 var nodeId = "nodeId_example"; // String | The identifier of a node.
 
 var versionId = "versionId_example"; // String | The identifier of a version, ie. version label, within the version history of a node.
@@ -263,7 +213,7 @@ var revertBody = new AlfrescoContentServicesRestApi.RevertBody(); // RevertBody 
 var opts = { 
   'fields': ["fields_example"] // [String] | A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. 
 };
-apiInstance.revertVersion(nodeIdversionId, revertBody, opts).then(function(data) {
+this.alfrescoJsApi.core.versionsApi.revertVersion(nodeIdversionId, revertBody, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
