@@ -593,9 +593,9 @@ declare namespace AlfrescoApi {
 
         createGroup(groupBody?: GroupBody, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<GroupsEntry>;
 
-        getGroups(opts?: { skipCount?: number, maxItems?: number, orderBy?: string, where?: string, include?: Array<string>, fields?: Array<string> }): Promise <GroupsPaging>;
+        getGroups(opts?: { skipCount?: number, maxItems?: number, orderBy?: string, where?: string, include?: Array<string>, fields?: Array<string> }): Promise<GroupsPaging>;
 
-        deleteGroup(groupId?: string, opts?: { cascade?: boolean}): Promise<any>;
+        deleteGroup(groupId?: string, opts?: { cascade?: boolean }): Promise<any>;
 
         getGroup(groupId?: string, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<GroupsEntry>;
 
@@ -655,7 +655,7 @@ declare namespace AlfrescoApi {
 
         updateSiteMembershipRequest(personId?: string, siteId?: string, siteMembershipBody?: SiteMembershipRequestBody): Promise<any>;
 
-        getGroupsMembership(personId?: string, opts?: { skipCount?: number, maxItems?: number, orderBy?: string, where?: string, include?: Array<string>, fields?: Array<string> }): Promise <GroupsPaging>;
+        getGroupsMembership(personId?: string, opts?: { skipCount?: number, maxItems?: number, orderBy?: string, where?: string, include?: Array<string>, fields?: Array<string> }): Promise<GroupsPaging>;
     }
 
     // export interface PreferencesApi {
@@ -808,9 +808,12 @@ declare namespace AlfrescoApi {
     // }
 
     export interface VersionsApi {
-        // removeVersion(nodeId: string, versionId: string, opts?: any): Promise<any>;
-        // getVersion(nodeId: string, versionId: string, opts?: any): Promise<VersionEntry>;
-        // getVersionContent(nodeId: string, versionId: string, attachment?: boolean, ifModifiedSince?: Date, opts?: any): Promise<any>;
+        deleteVersion(nodeId: string, versionId: string): Promise<any>;
+
+        getVersion(nodeId: string, versionId: string): Promise<VersionEntry>;
+
+        getVersionContent(nodeId: string, opts?: any): Promise<any>;
+
         listVersionHistory(nodeId: string, opts?: { include?: Array<string>, fields?: Array<string>, skipCount?: number, maxItems?: number }): Promise<VersionPaging>;
 
         revertVersion(nodeId: string, versionId: string, revertBody: RevertBody, opts?: { fields?: Array<string> }): Promise<VersionEntry>;

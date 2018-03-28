@@ -31,7 +31,7 @@ describe('Versions', function () {
     it('should revert a version', function (done) {
         this.versionMock.post201Response(nodeId, versionId);
 
-        this.versionsApi.revertVersion(nodeId, versionId).then(function (data) {
+        this.versionsApi.revertVersion(nodeId, versionId, { majorVersion: true, comment: ''}).then(function (data) {
             expect(data.entry.id).to.be.equal('3.0');
             done();
         }, function () {
