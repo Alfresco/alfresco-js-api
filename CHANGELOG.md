@@ -10,6 +10,7 @@
 
 [Update search api](https://issues.alfresco.com/jira/browse/ADF-2493)
 [Add groups api](https://issues.alfresco.com/jira/browse/ADF-2570)
+[Upate version api with missing endpoint](https://issues.alfresco.com/jira/browse/ADF-2558)
 
 ## Fix
 
