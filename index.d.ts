@@ -1531,22 +1531,33 @@ declare namespace AlfrescoApi {
     export class RequestFacetFields {
         constructor(obj?: any);
 
-        facets?: Array<RequestFacetFieldsFacets>;
+        facets?: RequestFacetField[];
     }
 
-    export class RequestFacetFieldsFacets {
+    export class RequestFacetField {
         constructor(obj?: any);
 
         field?: string;
+        label?: string;
         prefix?: string;
-        sort?: string;
+        sort?: RequestFacetFieldSort;
         method?: string;
         missing?: boolean;
         limit?: number;
         offset?: number;
         mincount?: number;
         facetEnumCacheMinDf?: number;
-        excludeFilters?: Array<string>;
+        excludeFilters?: string[];
+    }
+
+    export enum RequestFacetFieldSort {
+        COUNT = 'COUNT',
+        INDEX = 'INDEX'
+    }
+
+    export enum RequestFacetFieldMethod {
+        ENUM = 'ENUM',
+        FC = 'FC'
     }
 
     export class RequestQuery {
@@ -2178,6 +2189,130 @@ declare namespace AlfrescoApi {
 
     //  ======= Search Start ======
 
+    export class ResultSetPaging {
+        constructor(obj?: any);
+
+        list?: ResultSetPagingList;
+    }
+
+    export class ResultSetPagingList {
+        constructor(obj?: any);
+
+        pagination?: Pagination;
+        context?: ResultSetContext;
+        entries?: ResultSetRowEntry[]
+    }
+
+    export class ResultSetContext {
+        constructor(obj?: any);
+
+        consistency?: ResponseConsistency;
+        request?: SearchRequest;
+        facetQueries?: ResultSetContextFacetQueries[];
+        facetsFields?: ResultBuckets[];
+        facets?: GenericFacetResponse[];
+        spellcheck?: ResultSetContextSpellcheck[];
+    }
+
+    export class ResultSetContextSpellcheck {
+        constructor(obj?: any);
+
+        type?: SpellcheckType;
+        suggestion?: string[];
+    }
+
+    export enum SpellcheckType {
+        searchInsteadFor = 'searchInsteadFor',
+        didYouMean = 'didYouMean'
+    }
+
+    export class ResultSetContextFacetQueries {
+        constructor(obj?: any);
+
+        label?: string;
+        filterQuery?: string;
+        count?: number;
+    }
+
+    export class GenericFacetResponse {
+        constructor(obj?: any);
+
+        type?: string;
+        label?: string;
+        buckets?: GenericBucket[];
+    }
+
+    export class GenericBucket {
+        constructor(obj?: any);
+
+        label?: string;
+        filterQuery?: string;
+        display?: any;
+        metrics?: GenericMetric[];
+        facets?: any[];
+        bucketInfo?: GenericBucketBucketInfo;
+    }
+
+    export class GenericBucketBucketInfo {
+        constructor(obj?: any);
+
+        start?: string;
+        startInclusive?: boolean;
+        end?: string;
+        endInclusive?: boolean;
+    }
+
+    export class ResponseConsistency {
+        constructor(obj?: any);
+
+        lastTxId?: number;
+    }
+
+    export class ResultBuckets {
+        constructor(obj?: any);
+
+        label?: string;
+        buckets?: ResultBucketsBuckets[];
+    }
+
+    export class ResultBucketsBuckets {
+        constructor(obj?: any);
+
+        label?: string;
+        filterQuery?: string;
+        count?: number;
+        display?: any;
+    }
+
+    export class ResultSetRowEntry {
+        constructor(obj?: any);
+
+        entry?: ResultNode
+    }
+
+    export class ResultNode extends Node {
+        constructor(obj?: any);
+
+        search?: SearchEntry;
+        archivedByUser?: UserInfo;
+        archivedAt?: Date;
+        versionLabel?: string;
+        versionComment?: string;
+    }
+
+    export class SearchEntry {
+        constructor(obj?: any);
+
+        score?: number;
+        highlight?: SearchEntryHighlight[];
+    }
+
+    export class SearchEntryHighlight {
+        constructor(obj?: any);
+
+        field?: string;
+        snippets?: string[];
+    }
 
     //  ======= Search End ======
 
@@ -3881,7 +4016,7 @@ declare namespace AlfrescoApi {
     export interface SearchApi {
         new(client?: ApiClient): SearchApi;
 
-        search(queryBody: QueryBody | SearchRequest): Promise<any> ;
+        search(queryBody: QueryBody | SearchRequest): Promise<ResultSetPaging> ;
     }
 
     //  ======= Search  End ======
