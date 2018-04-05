@@ -2199,6 +2199,13 @@ declare namespace AlfrescoApi {
         bucketInfo?: GenericBucketBucketInfo;
     }
 
+    export class GenericMetric {
+        constructor(obj?: any);
+
+        type?: string;
+        value?: any;
+    }
+
     export class GenericBucketBucketInfo {
         constructor(obj?: any);
 
