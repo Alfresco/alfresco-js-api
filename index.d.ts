@@ -2146,7 +2146,7 @@ declare namespace AlfrescoApi {
 
         pagination?: Pagination;
         context?: ResultSetContext;
-        entries?: ResultSetRowEntry[]
+        entries?: ResultSetRowEntry[];
     }
 
     export class ResultSetContext {
@@ -2240,7 +2240,7 @@ declare namespace AlfrescoApi {
     export class ResultSetRowEntry {
         constructor(obj?: any);
 
-        entry?: ResultNode
+        entry?: ResultNode;
     }
 
     export class ResultNode extends Node {
@@ -2613,11 +2613,11 @@ declare namespace AlfrescoApi {
 
         deleteProcessInstance(processInstanceId?: string): Promise<any>;
 
-        filterProcessInstances(filterRequest?: ProcessInstanceFilterRequestRepresentation): Promise<any>;
+        filterProcessInstances(filterRequest?: ProcessInstanceFilterRequestRepresentation): Promise<ResultListDataRepresentation>;
 
         getProcessDefinitionStartForm(processDefinitionId?: string): Promise<FormDefinitionRepresentation>;
 
-        getProcessDefinitions(opts?: { latest?: boolean, appDefinitionId?: number }): Promise<any>;
+        getProcessDefinitions(opts?: { latest?: boolean, appDefinitionId?: number }): Promise<ResultListDataRepresentation>;
 
         getProcessInstanceContent(processInstanceId?: string): Promise<any>;
 
@@ -3143,7 +3143,7 @@ declare namespace AlfrescoApi {
 
         className?: string;
         customFieldTemplates?: any;
-        fields?: FormFieldRepresentation;
+        fields?: FormFieldRepresentation[];
         gridsterForm?: boolean;
         id?: number;
         javascriptEvents?: FormJavascriptEventRepresentation;
@@ -3177,7 +3177,7 @@ declare namespace AlfrescoApi {
         minValue?: string;
         name?: string;
         optionType?: string;
-        options?: OptionRepresentation;
+        options?: OptionRepresentation[];
         overrideId?: boolean;
         params?: any;
         placeholder?: string;
