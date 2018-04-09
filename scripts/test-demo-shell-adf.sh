@@ -25,6 +25,6 @@ npm install
 npm link alfresco-js-api
 
 echo "====== E2E Demo Shell ====="
-npm run e2e
+npm run e2e || exit 1
 
 rm -rf $TEMP_ADF_DIR;
