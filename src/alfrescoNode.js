@@ -2,6 +2,7 @@
 
 var AlfrescoCoreRestApi = require('./alfresco-core-rest-api/src/index.js');
 
+// @deprecated 2.3.0
 class AlfrescoNode extends AlfrescoCoreRestApi.NodesApi {
 
     /**
