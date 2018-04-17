@@ -193,7 +193,7 @@ npm install --save alfresco-js-api
 Installer for node versions:
 
 ```sh
-npm install -save alfresco-js-api-node
+npm install --save alfresco-js-api-node
 ```
 
 
@@ -202,7 +202,7 @@ npm install -save alfresco-js-api-node
 ### Import library for node projects
 
 ```javascript
-var AlfrescoApi = require('alfresco-js-api');
+var AlfrescoApi = require('alfresco-js-api-node');
 ```
 
 ### Import library for browser projects
