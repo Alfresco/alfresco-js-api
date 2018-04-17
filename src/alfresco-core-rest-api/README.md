@@ -131,7 +131,19 @@ Class | Method | HTTP request | Description
 *AlfrescoCoreRestApi.TagsApi* | [**removeTag**](docs/TagsApi.md#removeTag) | **DELETE** /nodes/{nodeId}/tags/{tagId} | Delete a tag
 *AlfrescoCoreRestApi.TagsApi* | [**updateTag**](docs/TagsApi.md#updateTag) | **PUT** /tags/{tagId} | Update a tag
 *AlfrescoCoreRestApi.WebscriptApi* | [**executeWebScript**](docs/WebscriptApi.md#executeWebScript) | |  execute WebScript
-
+*AlfrescoCoreRestApi.GroupsApi* | [**createGroup**](docs/GroupsApi.md#createGroup) | **POST** /groups | Create a group
+*AlfrescoCoreRestApi.GroupsApi* | [**getGroups**](docs/GroupsApi.md#getGroups) | **GET** /groups | Get groups
+*AlfrescoCoreRestApi.GroupsApi* | [**deleteGroup**](docs/GroupsApi.md#deleteGroup) | **DELETE** /groups/{groupId} | Delete a group
+*AlfrescoCoreRestApi.GroupsApi* | [**getGroup**](docs/GroupsApi.md#getGroup) | **GET** /groups/{groupId} | Get a group
+*AlfrescoCoreRestApi.GroupsApi* | [**updateGroup**](docs/GroupsApi.md#updateGroup) | **PUT** /groups/{groupId} | Update a group name
+*AlfrescoCoreRestApi.GroupsApi* | [**getGroupMembers**](docs/GroupsApi.md#getGroupMembers) | **GET** /groups/{groupId}/members | Get members of the group
+*AlfrescoCoreRestApi.GroupsApi* | [**addGroupMember**](docs/GroupsApi.md#addGroupMember) | **POST** /groups/{groupId}/members | Add a group member
+*AlfrescoCoreRestApi.GroupsApi* | [**deleteGroupMember**](docs/GroupsApi.md#deleteGroupMember) | **DELETE** /groups/{groupId}/members/{groupMemberId} | Remove a group member
+*AlfrescoContentServicesRestApi.VersionsApi* | [**deleteVersion**](docs/VersionsApi.md#deleteVersion) | **DELETE** /nodes/{nodeId}/versions/{versionId} | Delete a version
+*AlfrescoContentServicesRestApi.VersionsApi* | [**getVersion**](docs/VersionsApi.md#getVersion) | **GET** /nodes/{nodeId}/versions/{versionId} | Get version information
+*AlfrescoContentServicesRestApi.VersionsApi* | [**getVersionContent**](docs/VersionsApi.md#getVersionContent) | **GET** /nodes/{nodeId}/versions/{versionId}/content | Get version content
+*AlfrescoContentServicesRestApi.VersionsApi* | [**listVersionHistory**](docs/VersionsApi.md#listVersionHistory) | **GET** /nodes/{nodeId}/versions | List version history
+*AlfrescoContentServicesRestApi.VersionsApi* | [**revertVersion**](docs/VersionsApi.md#revertVersion) | **POST** /nodes/{nodeId}/versions/{versionId}/revert | Revert a version
 
 ## Documentation for Models
 
@@ -247,7 +259,11 @@ Class | Method | HTTP request | Description
  - [AlfrescoCoreRestApi.TagPaging](docs/TagPaging.md)
  - [AlfrescoCoreRestApi.TagPagingList](docs/TagPagingList.md)
  - [AlfrescoCoreRestApi.UserInfo](docs/UserInfo.md)
-
+ - [AlfrescoCoreRestApi.GroupsApi](docs/GroupsApi.md)
+ - [AlfrescoContentServicesRestApi.Version](docs/Version.md)
+ - [AlfrescoContentServicesRestApi.VersionEntry](docs/VersionEntry.md)
+ - [AlfrescoContentServicesRestApi.VersionPaging](docs/VersionPaging.md)
+ - [AlfrescoContentServicesRestApi.VersionPagingList](docs/VersionPagingList.md)
 
 ## Documentation for Authorization
 

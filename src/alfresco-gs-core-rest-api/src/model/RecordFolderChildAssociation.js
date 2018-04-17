@@ -120,7 +120,7 @@ exports.prototype['createdAt'] = undefined;
 exports.prototype['createdByUser'] = undefined;
 
   /**
-   * @member {Array.<String>} aspectNames
+   * @member {string[]} aspectNames
    */
 exports.prototype['aspectNames'] = undefined;
 
@@ -130,7 +130,7 @@ exports.prototype['aspectNames'] = undefined;
 exports.prototype['properties'] = undefined;
 
   /**
-   * @member {Array.<String>} allowableOperations
+   * @member {string[]} allowableOperations
    */
 exports.prototype['allowableOperations'] = undefined;
 

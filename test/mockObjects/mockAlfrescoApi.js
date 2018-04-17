@@ -14,6 +14,7 @@ mockAlfrescoApi.CustomModel = require('./content-services/customModelMock.js');
 mockAlfrescoApi.Discovery = require('./content-services/discoveryMock.js');
 mockAlfrescoApi.Search = require('./content-services/searchMock.js');
 mockAlfrescoApi.PeopleApi = require('./content-services/peopleMock.js');
+mockAlfrescoApi.GroupsApi = require('./content-services/groupsMock.js');
 
 //Governance service
 mockAlfrescoApi.GsCoreMock = {};

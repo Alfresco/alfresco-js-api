@@ -1,58 +1,71 @@
-# Alfresco Search Api
+# alfresco_content_services_rest_api
 
-AlfrescoContentServicesRestApi - avaScript client for activiti-search-rest-api
+AlfrescoContentServicesRestApi - JavaScript client for alfresco_content_services_rest_api
+**Search API**  Provides access to the search features of Alfresco Content Services. 
 
 ## Documentation for API Endpoints
 
+All URIs are relative to *https://localhost/alfresco/api/-default-/public/search/versions/1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AlfrescoSearchRestApi.SearchApi* | [**search**](docs/SearchApi.md#search) | **POST** /search | Searches Alfresco
+*AlfrescoContentServicesRestApi.SearchApi* | [**search**](docs/SearchApi.md#search) | **POST** /search | Searches Alfresco
 
 
 ## Documentation for Models
 
- - [AlfrescoSearchRestApi.ContentInfo](docs/ContentInfo.md)
- - [AlfrescoSearchRestApi.Error](docs/Error.md)
- - [AlfrescoSearchRestApi.ErrorError](docs/ErrorError.md)
- - [AlfrescoSearchRestApi.Node](docs/Node.md)
- - [AlfrescoSearchRestApi.Pagination](docs/Pagination.md)
- - [AlfrescoSearchRestApi.PathElement](docs/PathElement.md)
- - [AlfrescoSearchRestApi.PathInfo](docs/PathInfo.md)
- - [AlfrescoSearchRestApi.QueryBody](docs/QueryBody.md)
- - [AlfrescoSearchRestApi.RequestDefaults](docs/RequestDefaults.md)
- - [AlfrescoSearchRestApi.RequestFacetFields](docs/RequestFacetFields.md)
- - [AlfrescoSearchRestApi.RequestFacetFieldsFacets](docs/RequestFacetFieldsFacets.md)
- - [AlfrescoSearchRestApi.RequestFacetQueries](docs/RequestFacetQueries.md)
- - [AlfrescoSearchRestApi.RequestFacetQueriesInner](docs/RequestFacetQueriesInner.md)
- - [AlfrescoSearchRestApi.RequestFields](docs/RequestFields.md)
- - [AlfrescoSearchRestApi.RequestFilterQueries](docs/RequestFilterQueries.md)
- - [AlfrescoSearchRestApi.RequestFilterQueriesInner](docs/RequestFilterQueriesInner.md)
- - [AlfrescoSearchRestApi.RequestHighlight](docs/RequestHighlight.md)
- - [AlfrescoSearchRestApi.RequestHighlightFields](docs/RequestHighlightFields.md)
- - [AlfrescoSearchRestApi.RequestInclude](docs/RequestInclude.md)
- - [AlfrescoSearchRestApi.RequestLimits](docs/RequestLimits.md)
- - [AlfrescoSearchRestApi.RequestPagination](docs/RequestPagination.md)
- - [AlfrescoSearchRestApi.RequestQuery](docs/RequestQuery.md)
- - [AlfrescoSearchRestApi.RequestScope](docs/RequestScope.md)
- - [AlfrescoSearchRestApi.RequestSortDefinition](docs/RequestSortDefinition.md)
- - [AlfrescoSearchRestApi.RequestSortDefinitionInner](docs/RequestSortDefinitionInner.md)
- - [AlfrescoSearchRestApi.RequestSpellcheck](docs/RequestSpellcheck.md)
- - [AlfrescoSearchRestApi.RequestTemplates](docs/RequestTemplates.md)
- - [AlfrescoSearchRestApi.RequestTemplatesInner](docs/RequestTemplatesInner.md)
- - [AlfrescoSearchRestApi.ResponseConsistency](docs/ResponseConsistency.md)
- - [AlfrescoSearchRestApi.ResultNode](docs/ResultNode.md)
- - [AlfrescoSearchRestApi.ResultSetContext](docs/ResultSetContext.md)
- - [AlfrescoSearchRestApi.ResultSetContextBuckets](docs/ResultSetContextBuckets.md)
- - [AlfrescoSearchRestApi.ResultSetContextFacetFields](docs/ResultSetContextFacetFields.md)
- - [AlfrescoSearchRestApi.ResultSetContextFacetQueries](docs/ResultSetContextFacetQueries.md)
- - [AlfrescoSearchRestApi.ResultSetContextSpellcheck](docs/ResultSetContextSpellcheck.md)
- - [AlfrescoSearchRestApi.ResultSetPaging](docs/ResultSetPaging.md)
- - [AlfrescoSearchRestApi.ResultSetPagingList](docs/ResultSetPagingList.md)
- - [AlfrescoSearchRestApi.ResultSetRowEntry](docs/ResultSetRowEntry.md)
- - [AlfrescoSearchRestApi.SearchEntry](docs/SearchEntry.md)
- - [AlfrescoSearchRestApi.SearchEntryHighlight](docs/SearchEntryHighlight.md)
- - [AlfrescoSearchRestApi.UserInfo](docs/UserInfo.md)
+ - [AlfrescoContentServicesRestApi.ContentInfo](docs/ContentInfo.md)
+ - [AlfrescoContentServicesRestApi.Error](docs/Error.md)
+ - [AlfrescoContentServicesRestApi.ErrorError](docs/ErrorError.md)
+ - [AlfrescoContentServicesRestApi.GenericBucket](docs/GenericBucket.md)
+ - [AlfrescoContentServicesRestApi.GenericBucketBucketInfo](docs/GenericBucketBucketInfo.md)
+ - [AlfrescoContentServicesRestApi.GenericFacetResponse](docs/GenericFacetResponse.md)
+ - [AlfrescoContentServicesRestApi.GenericMetric](docs/GenericMetric.md)
+ - [AlfrescoContentServicesRestApi.Node](docs/Node.md)
+ - [AlfrescoContentServicesRestApi.Pagination](docs/Pagination.md)
+ - [AlfrescoContentServicesRestApi.PathElement](docs/PathElement.md)
+ - [AlfrescoContentServicesRestApi.PathInfo](docs/PathInfo.md)
+ - [AlfrescoContentServicesRestApi.RequestDefaults](docs/RequestDefaults.md)
+ - [AlfrescoContentServicesRestApi.RequestFacetField](docs/RequestFacetField.md)
+ - [AlfrescoContentServicesRestApi.RequestFacetFields](docs/RequestFacetFields.md)
+ - [AlfrescoContentServicesRestApi.RequestFacetIntervals](docs/RequestFacetIntervals.md)
+ - [AlfrescoContentServicesRestApi.RequestFacetIntervalsIntervals](docs/RequestFacetIntervalsIntervals.md)
+ - [AlfrescoContentServicesRestApi.RequestFacetQueries](docs/RequestFacetQueries.md)
+ - [AlfrescoContentServicesRestApi.RequestFacetQueriesInner](docs/RequestFacetQueriesInner.md)
+ - [AlfrescoContentServicesRestApi.RequestFacetSet](docs/RequestFacetSet.md)
+ - [AlfrescoContentServicesRestApi.RequestFields](docs/RequestFields.md)
+ - [AlfrescoContentServicesRestApi.RequestFilterQueries](docs/RequestFilterQueries.md)
+ - [AlfrescoContentServicesRestApi.RequestFilterQueriesInner](docs/RequestFilterQueriesInner.md)
+ - [AlfrescoContentServicesRestApi.RequestHighlight](docs/RequestHighlight.md)
+ - [AlfrescoContentServicesRestApi.RequestHighlightFields](docs/RequestHighlightFields.md)
+ - [AlfrescoContentServicesRestApi.RequestInclude](docs/RequestInclude.md)
+ - [AlfrescoContentServicesRestApi.RequestLimits](docs/RequestLimits.md)
+ - [AlfrescoContentServicesRestApi.RequestLocalization](docs/RequestLocalization.md)
+ - [AlfrescoContentServicesRestApi.RequestPagination](docs/RequestPagination.md)
+ - [AlfrescoContentServicesRestApi.RequestPivot](docs/RequestPivot.md)
+ - [AlfrescoContentServicesRestApi.RequestQuery](docs/RequestQuery.md)
+ - [AlfrescoContentServicesRestApi.RequestRange](docs/RequestRange.md)
+ - [AlfrescoContentServicesRestApi.RequestScope](docs/RequestScope.md)
+ - [AlfrescoContentServicesRestApi.RequestSortDefinition](docs/RequestSortDefinition.md)
+ - [AlfrescoContentServicesRestApi.RequestSortDefinitionInner](docs/RequestSortDefinitionInner.md)
+ - [AlfrescoContentServicesRestApi.RequestSpellcheck](docs/RequestSpellcheck.md)
+ - [AlfrescoContentServicesRestApi.RequestStats](docs/RequestStats.md)
+ - [AlfrescoContentServicesRestApi.RequestTemplates](docs/RequestTemplates.md)
+ - [AlfrescoContentServicesRestApi.RequestTemplatesInner](docs/RequestTemplatesInner.md)
+ - [AlfrescoContentServicesRestApi.ResponseConsistency](docs/ResponseConsistency.md)
+ - [AlfrescoContentServicesRestApi.ResultBuckets](docs/ResultBuckets.md)
+ - [AlfrescoContentServicesRestApi.ResultBucketsBuckets](docs/ResultBucketsBuckets.md)
+ - [AlfrescoContentServicesRestApi.ResultSetContext](docs/ResultSetContext.md)
+ - [AlfrescoContentServicesRestApi.ResultSetContextFacetQueries](docs/ResultSetContextFacetQueries.md)
+ - [AlfrescoContentServicesRestApi.ResultSetContextSpellcheck](docs/ResultSetContextSpellcheck.md)
+ - [AlfrescoContentServicesRestApi.ResultSetPaging](docs/ResultSetPaging.md)
+ - [AlfrescoContentServicesRestApi.ResultSetPagingList](docs/ResultSetPagingList.md)
+ - [AlfrescoContentServicesRestApi.ResultSetRowEntry](docs/ResultSetRowEntry.md)
+ - [AlfrescoContentServicesRestApi.SearchEntry](docs/SearchEntry.md)
+ - [AlfrescoContentServicesRestApi.SearchEntryHighlight](docs/SearchEntryHighlight.md)
+ - [AlfrescoContentServicesRestApi.SearchRequest](docs/SearchRequest.md)
+ - [AlfrescoContentServicesRestApi.UserInfo](docs/UserInfo.md)
+ - [AlfrescoContentServicesRestApi.ResultNode](docs/ResultNode.md)
 
 
 ## Documentation for Authorization

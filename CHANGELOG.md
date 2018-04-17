@@ -3,6 +3,31 @@
 </p>
 
 # Alfresco JS API
+<a name="2.3.0"></a>
+# [2.3.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.3.0) (17-04-2018)
+
+## Features
+
+[Update search api](https://issues.alfresco.com/jira/browse/ADF-2493)
+[Add groups api](https://issues.alfresco.com/jira/browse/ADF-2570)
+[Upate version api with missing endpoint](https://issues.alfresco.com/jira/browse/ADF-2558)
+
+## Fixes
+
+[Wrong type definition for RequestPagination](https://issues.alfresco.com/jira/browse/ADF-2448)
+[Not able to log-in into BPM with production mode and CSRF token enable](https://github.com/Alfresco/alfresco-js-api/issues/315)
+[Search api type definition is not defined](https://issues.alfresco.com/jira/browse/ADF-2450)
+[Incorrect definitions for Enums](https://issues.alfresco.com/jira/browse/ADF-2604)
+[Search API implementation is incomplete](https://issues.alfresco.com/jira/browse/ADF-2470)
+
+<a name="2.2.0"></a>
+# [2.2.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.2.0) (05-03-2018)
+
+## Features
+
+## Fix
+- [Auth2 - Use the paramForm instead of queryForm](https://issues.alfresco.com/jira/browse/ADF-2288)
+- [Adding the /people endpoint to the AlfrescoCoreRestApi.PeopleApi](https://github.com/Alfresco/alfresco-js-api/issues/305)
 
 <a name="2.2.0"></a>
 # [2.2.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.2.0) (05-03-2018)

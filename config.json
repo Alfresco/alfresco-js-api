@@ -2,13 +2,11 @@
     "source": {
         "excludePattern": "(^|\\/|\\\\)_",
         "include": [
-            "src/alfresco-gs-core-rest-api/src/api",
-            "src/alfresco-gs-core-rest-api/src/model"
+            "src/alfresco-search-rest-api/src/model"
         ]
     },
     "opts": {
         "encoding"      : "utf8",
-        "destination"   : "./types-core",
         "template"      : "./node_modules/tsd-jsdoc"
     }
 }

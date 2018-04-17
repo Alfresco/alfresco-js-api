@@ -58,91 +58,93 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
   * [Get tickets](#get-tickets)
   * [Events login/logout](#events-loginlogout)
     + [Example](#example-9)
+- [Custom Endpoint](#custom-endpoint)
+  * [Example](#example-10)
 - [ECM](#ecm)
   * [Get Node  content](#get-node--content)
-    + [Example](#example-10)
-  * [Get File or Folder Info](#get-file-or-folder-info)
     + [Example](#example-11)
-  * [Get Folder Children Info](#get-folder-children-info)
+  * [Get File or Folder Info](#get-file-or-folder-info)
     + [Example](#example-12)
-  * [Create Folder](#create-folder)
+  * [Get Folder Children Info](#get-folder-children-info)
     + [Example](#example-13)
+  * [Create Folder](#create-folder)
     + [Example](#example-14)
-  * [Upload File](#upload-file)
     + [Example](#example-15)
-  * [Events Upload File](#events-upload-file)
+  * [Upload File](#upload-file)
     + [Example](#example-16)
-  * [Delete File or Folder](#delete-file-or-folder)
+  * [Events Upload File](#events-upload-file)
     + [Example](#example-17)
-  * [Delete File or Folder Permanent](#delete-file-or-folder-permanent)
+  * [Delete File or Folder](#delete-file-or-folder)
     + [Example](#example-18)
-  * [Get thumbnail Url](#get-thumbnail-url)
+  * [Delete File or Folder Permanent](#delete-file-or-folder-permanent)
     + [Example](#example-19)
-  * [Get preview Url](#get-preview-url)
+  * [Get thumbnail Url](#get-thumbnail-url)
     + [Example](#example-20)
-  * [Get content Url](#get-content-url)
+  * [Get preview Url](#get-preview-url)
     + [Example](#example-21)
+  * [Get content Url](#get-content-url)
+    + [Example](#example-22)
   * [Custom web scripts call](#custom-web-scripts-call)
     + [Parameters](#parameters)
 - [BPM](#bpm)
   * [Task Api](#task-api)
     + [List Task](#list-task)
       - [Parameters](#parameters-1)
-      - [Example](#example-22)
+      - [Example](#example-23)
     + [Get Task](#get-task)
       - [Parameters](#parameters-2)
-      - [Example](#example-23)
+      - [Example](#example-24)
     + [Filter Task](#filter-task)
       - [Parameters](#parameters-3)
-      - [Example](#example-24)
+      - [Example](#example-25)
     + [Complete Task](#complete-task)
       - [Parameters](#parameters-4)
-      - [Example](#example-25)
+      - [Example](#example-26)
     + [Get Task Form](#get-task-form)
       - [Parameters](#parameters-5)
-      - [Example](#example-26)
+      - [Example](#example-27)
     + [Complete Task Form](#complete-task-form)
       - [Parameters](#parameters-6)
-      - [Example](#example-27)
+      - [Example](#example-28)
   * [Process Api](#process-api)
     + [Get Process Instances](#get-process-instances)
       - [Parameters](#parameters-7)
-      - [Example](#example-28)
+      - [Example](#example-29)
   * [Models Api](#models-api)
     + [Get Model](#get-model)
       - [Parameters](#parameters-8)
-      - [Example](#example-29)
+      - [Example](#example-30)
   * [Report Api](#report-api)
     + [Create default Reports](#create-default-reports)
       - [Parameters](#parameters-9)
-      - [Example](#example-30)
+      - [Example](#example-31)
     + [Get Reports](#get-reports)
       - [Parameters](#parameters-10)
-      - [Example](#example-31)
+      - [Example](#example-32)
     + [Report Params](#report-params)
       - [Parameters](#parameters-11)
-      - [Example](#example-32)
+      - [Example](#example-33)
   * [Report Process Definitions](#report-process-definitions)
       - [Parameters](#parameters-12)
-      - [Example](#example-33)
+      - [Example](#example-34)
   * [Tasks of process definition](#tasks-of-process-definition)
       - [Parameters](#parameters-13)
-      - [Example](#example-34)
+      - [Example](#example-35)
   * [Generate reports](#generate-reports)
       - [Parameters](#parameters-14)
-      - [Example](#example-35)
+      - [Example](#example-36)
   * [Update report details](#update-report-details)
       - [Parameters](#parameters-15)
-      - [Example](#example-36)
+      - [Example](#example-37)
   * [Export to csv](#export-to-csv)
       - [Parameters](#parameters-16)
-      - [Example](#example-37)
+      - [Example](#example-38)
   * [Save Report](#save-report)
       - [Parameters](#parameters-17)
-      - [Example](#example-38)
+      - [Example](#example-39)
   * [Delete report](#delete-report)
       - [Parameters](#parameters-18)
-      - [Example](#example-39)
+      - [Example](#example-40)
 - [Development](#development)
 - [Release History](#release-history)
 
@@ -428,6 +430,35 @@ this.alfrescoJsApi.logout().on('logout', function(){
     console.log('Successfully Logout');
 });
 ```
+
+# Custom Endpoint
+
+Content service and process service has two different clients:
+
+-  this.alfrescoJsApi.bpmClient
+-  this.alfrescoJsApi.ecmClient
+
+Both client expose a method ***callApi**
+
+
+```javascript
+    callApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any, authNames?: string[], contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any>;
+```
+
+If you want call your custom rest point in one of those two service use the corrispondin client. 
+
+## Example
+
+```javascript
+
+    this.alfrescoJsApi.bpmClient.callApi(
+        '/api/enterprise/app-version', 'GET',
+        {}, {}, {}, {}, {},
+        [],  ['application/json'], ['application/json'], {'String': 'String'}
+    )
+
+ ```
+        
 
 # ECM
 

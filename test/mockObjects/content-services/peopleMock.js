@@ -26,7 +26,6 @@ class PeopleMock extends BaseMock {
 
     }
 
-
     get200ResponsePersons() {
         nock(this.host, {'encodedQueryParams': true})
             .get('/alfresco/api/-default-/public/alfresco/versions/1/people')

@@ -26,7 +26,7 @@ Method | HTTP request | Description
 [**removeFavoriteSite**](PeopleApi.md#removeFavoriteSite) | **DELETE** /people/{personId}/favorites/{favoriteId} | Delete a favorite
 [**removeSiteMembershipRequest**](PeopleApi.md#removeSiteMembershipRequest) | **DELETE** /people/{personId}/site-membership-requests/{siteId} | Cancel a site membership
 [**updateSiteMembershipRequest**](PeopleApi.md#updateSiteMembershipRequest) | **PUT** /people/{personId}/site-membership-requests/{siteId} | Update a site membership request
-
+[**getGroupsMembership**](PeopleApi.md#getGroupsMembership) | **GET** /people/{personId}/groups | Get all groups for people
 
 <a name="addFavorite"></a>
 # **addFavorite**
@@ -1294,3 +1294,91 @@ null (empty response body)
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+<a name="getGroupsMembership"></a>
+# **getGroupsMembership**
+> getGroupsMembership(personId, opts)
+
+**Note**: this endpoint is available in Alfresco 5.2.1 and newer versions.
+
+Gets a list of group membership information for person **personId**.
+
+You can use the `-me-` string in place of <personid> to specify the currently authenticated user.
+
+You can use the **include** parameter to return additional information.
+
+You can use the **where** parameter to filter the returned groups by **isRoot**. For example, the following **where** clause will return just the root groups:
+```HTML
+    (isRoot=true)
+```
+The **where** parameter can also be used to filter by **zone**. This may be combined with isRoot to narrow a result set even further. For example, the following where clause will only return groups belonging to the `MY.ZONE` zone.
+```HTML
+    where=(zones in ('MY.ZONE'))
+``` 
+This may be combined with the isRoot filter, as shown below:
+```HTML
+    where=(isRoot=false AND zones in ('MY.ZONE'))
+```
+**Note**: restrictions include
+
+* AND is the only supported operator when combining isRoot and zones filters
+* Only one zone is supported by the filter
+* The quoted zone name must be placed in parenthesis — a 400 error will result if these are omitted.
+The default sort order for the returned list is for groups to be sorted by ascending displayName. You can override the default by using the **orderBy** parameter. You can specify one or more of the following fields in the **orderBy** parameter:
+
+        * id
+        * displayName
+
+### Example
+```javascript
+var personId = "personId_example"; // {String} The identifier of a person.
+
+var opts = {
+  'skipCount': 56, // {Integer} The number of entities that exist in the collection before those included in this list.
+  'maxItems': 56, // {Integer} The maximum number of items to return in the list.
+  'orderBy': "orderBy_example", // {String} A string to control the order of the entities returned.
+  'include': [String], // {[String]} Returns additional information about the group. The following optional fields can be requested: parentIds and zones.
+  'fields': ["fields_example"]  /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
+
+                                The list applies to a returned individual
+                                entity or entries within a collection.
+
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter. */,
+   'where': '(isRoot=true)' // A string to restrict the returned objects by using a predicate.
+};
+
+this.alfrescoJsApi.core.peopleApi.getGroupsMembership(personId, opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **personId** | **String**| The identifier of a person. |
+ **skipCount** | **Integer**| The number of entities that exist in the collection before those included in this list. | [optional]
+ **maxItems** | **Integer**| The maximum number of items to return in the list. | [optional]
+ **orderBy** | **String**| A string to control the order of the entities returned. | [optional]
+ **where** | **String** | A string to restrict the returned objects by using a predicate. | [optional]
+ **include** | [**[String]**](String.md)| Returns additional information about the group. The following optional fields can be requested: parentIds and zones. | [optional]
+ **fields** | [**[String]**](String.md)| A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional]
+
+### Return type
+
+[**GroupsPaging**](GroupsPaging.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json

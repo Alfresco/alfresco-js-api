@@ -114,7 +114,7 @@
   exports.prototype['content'] = undefined;
 
   /**
-   * @member {Array.<String>} allowableOperations
+   * @member {string[]} allowableOperations
    */
   exports.prototype['allowableOperations'] = undefined;
 

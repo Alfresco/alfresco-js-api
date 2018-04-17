@@ -1,9 +1,10 @@
-# AlfrescoContentServicesRestApi.RequestFacetFieldsFacets
+# AlfrescoContentServicesRestApi.RequestFacetField
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **field** | **String** | The facet field | [optional] 
+**label** | **String** | A label to include in place of the facet field | [optional] 
 **prefix** | **String** | Restricts the possible constraints to only indexed values with a specified prefix. | [optional] 
 **sort** | **String** |  | [optional] 
 **method** | **String** |  | [optional] 
