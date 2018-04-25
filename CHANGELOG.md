@@ -3,6 +3,10 @@
 </p>
 
 # Alfresco JS API
+<a name="2.3.1"></a>
+# [2.3.1](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.3.1) (25-04-2018)
+
+
 <a name="2.3.0"></a>
 # [2.3.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.3.0) (17-04-2018)
 
