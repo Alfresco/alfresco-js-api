@@ -1447,23 +1447,8 @@ declare namespace AlfrescoApi {
         pagination?: Pagination;
     }
 
-    export class QueryBody {
+    export class QueryBody implements SearchRequest {
         constructor(obj ?: any);
-
-        query ?: RequestQuery;
-        paging ?: RequestPagination;
-        include ?: Array<string>;
-        fields ?: Array<string>;
-        sort ?: Array<any>;
-        templates ?: Array<any>;
-        defaults ?: RequestDefaults;
-        filterQueries ?: Array<any>;
-        facetQueries ?: Array<any>;
-        facetFields ?: RequestFacetFields;
-        spellcheck ?: RequestSpellcheck;
-        scope ?: RequestScope;
-        limits ?: RequestLimits;
-        highlight ?: RequestHighlight;
     }
 
     export class SearchRequest {
@@ -1472,17 +1457,110 @@ declare namespace AlfrescoApi {
         query ?: RequestQuery;
         paging ?: RequestPagination;
         include ?: Array<string>;
+        includeRequest?: boolean;
         fields ?: Array<string>;
-        sort ?: Array<any>;
-        templates ?: Array<any>;
+        sort ?: Array<RequestSortDefinition>;
+        templates ?: Array<RequestTemplate>;
         defaults ?: RequestDefaults;
-        filterQueries ?: Array<any>;
-        facetQueries ?: Array<any>;
+        localization?: RequestLocalization;
+        filterQueries ?: Array<RequestFilterQuery>;
+        facetQueries ?: Array<RequestFacetQuery>;
         facetFields ?: RequestFacetFields;
+        facetIntervals?: RequestFacetIntervals;
+        pivots?: Array<RequestPivot>;
+        stats?: Array<RequestStats>;
         spellcheck ?: RequestSpellcheck;
         scope ?: RequestScope;
         limits ?: RequestLimits;
         highlight ?: RequestHighlight;
+        ranges?: Array<RequestRange>;
+    }
+
+    export class RequestPivot {
+        key?: string;
+        pivots?: Array<RequestPivot>;
+    }
+
+    export class RequestStats {
+        field?: string;
+        label?: string;
+        min?: boolean;
+        max?: boolean;
+        sum?: boolean;
+        countValues?: boolean;
+        missing?: boolean;
+        mean?: boolean;
+        stddev?: boolean;
+        sumOfSquares?: boolean;
+        distinctValues?: boolean;
+        countDistinct?: boolean;
+        cardinality?: boolean;
+        cardinalityAccuracy?: number;
+        excludeFilters?: Array<string>;
+        percentiles?: Array<number>;
+    }
+
+    export class RequestFacetIntervals {
+        sets?: Array<RequestFacetSet>;
+        intervals?: Array<RequestFacetInterval>;
+    }
+
+    export class RequestFacetSet {
+        label?: string;
+        start?: string;
+        end?: string;
+        startInclusive?: boolean;
+        endInclusive?: boolean;
+    }
+
+    export class RequestFacetInterval {
+        field?: string;
+        label?: string;
+        sets?: Array<RequestFacetSet>;
+    }
+
+    export class RequestFilterQuery {
+        query?: string;
+        tags?: Array<string>;
+    }
+
+    export class RequestFacetQuery {
+        query?: string;
+        label?: string;
+    }
+
+    export class RequestLocalization {
+        timezone?: string;
+        locales?: Array<string>;
+    }
+
+    export class RequestSortDefinition {
+        type?: SortDefinitionType;
+        field?: string;
+        ascending?: boolean;
+    }
+
+    export enum SortDefinitionType {
+        FIELD = 'FIELD',
+        DOCUMENT = 'DOCUMENT',
+        SCORE = 'SCORE'
+    }
+
+    export class RequestTemplate {
+        name?: string;
+        template?: string;
+    }
+
+    export class RequestRange {
+        field?: string;
+        start?: string;
+        end?: string;
+        gap?: string;
+        hardend?: boolean;
+        other?: Array<string>;
+        include?: Array<string>;
+        label?: string;
+        excludeFilters?: Array<string>;
     }
 
     export class RequestHighlightFields {
@@ -1579,10 +1657,15 @@ declare namespace AlfrescoApi {
         constructor(obj?: any);
 
         textAttributes?: Array<string>;
-        defaultFTSOperator?: string;
-        defaultFTSFieldOperator?: string;
+        defaultFTSOperator?: OperatorType;
+        defaultFTSFieldOperator?: OperatorType;
         namespace?: string;
         defaultFieldName?: string;
+    }
+
+    export enum OperatorType {
+        AND = 'AND',
+        OR = 'OR'
     }
 
     export class Rating {

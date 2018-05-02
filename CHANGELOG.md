@@ -3,6 +3,16 @@
 </p>
 
 # Alfresco JS API
+
+<a name="2.4.0"></a>
+# [2.4.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.4.0) (??-??-2018)
+
+## Features
+
+## Fixes
+
+[Missing typings for Search API](https://issues.alfresco.com/jira/browse/ADF-2885)
+
 <a name="2.3.1"></a>
 # [2.3.1](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.3.1) (25-04-2018)
 
