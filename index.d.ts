@@ -1542,7 +1542,8 @@ declare namespace AlfrescoApi {
     }
 
     export class RequestSortDefinitionInner {
-        type?: RequestSortDefinitionInner.TypeEnum;
+        // type?: RequestSortDefinitionInner.TypeEnum;
+        type?: string;
         field?: string;
         ascending?: boolean;
     }
