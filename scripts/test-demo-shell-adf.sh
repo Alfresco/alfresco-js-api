@@ -22,6 +22,11 @@ git checkout development
 echo "====== INSTALL Demo Shell ====="
 
 npm install
+npm install \
+    @alfresco/adf-core@alpha \
+    @alfresco/adf-content-services@alpha \
+    @alfresco/adf-process-services@alpha \
+    @alfresco/adf-insights@alpha
 npm link alfresco-js-api
 
 echo "====== E2E Demo Shell ====="
