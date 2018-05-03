@@ -17,16 +17,11 @@ echo "====== CLONE ADF ====="
 
 git clone https://$TOKEN@github.com/Alfresco/alfresco-ng2-components.git $TEMP_ADF_DIR
 cd $TEMP_ADF_DIR/demo-shell/
-git checkout development
+git checkout master
 
 echo "====== INSTALL Demo Shell ====="
 
 npm install
-npm install \
-    @alfresco/adf-core@alpha \
-    @alfresco/adf-content-services@alpha \
-    @alfresco/adf-process-services@alpha \
-    @alfresco/adf-insights@alpha
 npm link alfresco-js-api
 
 echo "====== E2E Demo Shell ====="
