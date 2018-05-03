@@ -28,3 +28,5 @@ echo "====== E2E Demo Shell ====="
 npm run e2e || exit 1
 
 rm -rf $TEMP_ADF_DIR;
+
+# dummy commit
