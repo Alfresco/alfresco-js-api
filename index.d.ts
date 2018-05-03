@@ -1535,7 +1535,7 @@ declare namespace AlfrescoApi {
     }
 
     export class RequestSortDefinition {
-        type?: SortDefinitionType;
+        type?: SortDefinitionType | string;
         field?: string;
         ascending?: boolean;
     }
