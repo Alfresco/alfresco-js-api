@@ -1455,7 +1455,7 @@ declare namespace AlfrescoApi {
         include ?: Array<string>;
         includeRequest?: boolean;
         fields ?: Array<string>;
-        sort ?: Array<RequestSortDefinition>;
+        sort ?: Array<RequestSortDefinitionInner>;
         templates ?: Array<RequestTemplate>;
         defaults ?: RequestDefaults;
         localization?: RequestLocalization;
@@ -1534,16 +1534,18 @@ declare namespace AlfrescoApi {
         locales?: Array<string>;
     }
 
-    export class RequestSortDefinition {
-        type?: SortDefinitionType | string;
+    export class RequestSortDefinitionInner {
+        type?: RequestSortDefinitionInner.TypeEnum;
         field?: string;
         ascending?: boolean;
     }
 
-    export enum SortDefinitionType {
-        FIELD = 'FIELD',
-        DOCUMENT = 'DOCUMENT',
-        SCORE = 'SCORE'
+    namespace RequestSortDefinitionInner {
+        enum TypeEnum {
+            FIELD = 'FIELD',
+            DOCUMENT = 'DOCUMENT',
+            SCORE = 'SCORE'
+        }
     }
 
     export class RequestTemplate {
@@ -1618,8 +1620,8 @@ declare namespace AlfrescoApi {
         field?: string;
         label?: string;
         prefix?: string;
-        sort?: RequestFacetFieldSort;
-        method?: string;
+        sort?: RequestFacetField.SortEnum;
+        method?: RequestFacetField.MethodEnum;
         missing?: boolean;
         limit?: number;
         offset?: number;
@@ -1628,14 +1630,15 @@ declare namespace AlfrescoApi {
         excludeFilters?: string[];
     }
 
-    export enum RequestFacetFieldSort {
-        COUNT = 'COUNT',
-        INDEX = 'INDEX'
-    }
-
-    export enum RequestFacetFieldMethod {
-        ENUM = 'ENUM',
-        FC = 'FC'
+    namespace RequestFacetField {
+        enum SortEnum {
+            COUNT = 'COUNT',
+            INDEX = 'INDEX'
+        }
+        enum MethodEnum {
+            ENUM = 'ENUM',
+            FC = 'FC'
+        }
     }
 
     export class RequestQuery {
@@ -1657,15 +1660,21 @@ declare namespace AlfrescoApi {
         constructor(obj?: any);
 
         textAttributes?: Array<string>;
-        defaultFTSOperator?: OperatorType;
-        defaultFTSFieldOperator?: OperatorType;
+        defaultFTSOperator?: RequestDefaults.DefaultFTSOperatorEnum;
+        defaultFTSFieldOperator?: RequestDefaults.DefaultFTSFieldOperatorEnum;
         namespace?: string;
         defaultFieldName?: string;
     }
 
-    export enum OperatorType {
-        AND = 'AND',
-        OR = 'OR'
+    namespace RequestDefaults {
+        enum DefaultFTSOperatorEnum {
+            AND = 'AND',
+            OR = 'OR'
+        }
+        enum DefaultFTSFieldOperatorEnum {
+            AND = 'AND',
+            OR = 'OR'
+        }
     }
 
     export class Rating {
@@ -1830,25 +1839,17 @@ declare namespace AlfrescoApi {
         guid?: string;
         title?: string;
         description?: string;
-        visibility?: Visibility;
+        visibility?: Site.VisibilityEnum;
         preset?: string;
-        role?: Role;
+        role?: string;
     }
 
-    export enum Role {
-        SITECONSUMER = 'SiteConsumer',
-        SITECOLLABORATOR = 'SiteCollaborator',
-        SITECONTRIBUTOR = 'SiteContributor',
-        SITEMANAGER = 'SiteManager'
-    }
-
-    export class SiteBodyadd {
-        constructor(obj?: any);
-
-        id?: string;
-        title?: string;
-        description?: string;
-        visibility?: Visibility;
+    namespace Site {
+        enum VisibilityEnum {
+            PUBLIC = 'PUBLIC',
+            PRIVATE = 'PRIVATE',
+            MODERATED = 'MODERATED'
+        }
     }
 
     export class GroupBody {
@@ -1865,21 +1866,15 @@ declare namespace AlfrescoApi {
         id?: string;
         title?: string;
         description?: string;
-        visibility?: Visibility;
+        visibility?: SiteBody.VisibilityEnum;
     }
 
-    export enum Visibility {
-        PUBLIC = 'PUBLIC',
-        PRIVATE = 'PRIVATE',
-        MODERATED = 'MODERATED'
-    }
-
-    export class SiteBodyUpdate {
-        constructor(obj?: any);
-
-        title?: string;
-        description?: string;
-        visibility?: Visibility;
+    namespace SiteBody {
+        enum VisibilityEnum {
+            PUBLIC = 'PUBLIC',
+            PRIVATE = 'PRIVATE',
+            MODERATED = 'MODERATED'
+        }
     }
 
     export class SiteContainer {
@@ -1925,20 +1920,47 @@ declare namespace AlfrescoApi {
 
         id?: string;
         person?: Person;
-        role?: Role;
+        role?: SiteMember.RoleEnum;
+    }
+
+    namespace SiteMember {
+        enum RoleEnum {
+            SITECONSUMER = 'SiteConsumer',
+            SITECOLLABORATOR = 'SiteCollaborator',
+            SITECONTRIBUTOR = 'SiteContributor',
+            SITEMANAGER = 'SiteManager'
+        }
     }
 
     export class SiteMemberBody {
         constructor(obj?: any);
 
         id?: string;
-        role?: Role;
+        role?: SiteMemberBody.RoleEnum;
+    }
+
+    namespace SiteMemberBody {
+        enum RoleEnum {
+            SITECONSUMER = 'SiteConsumer',
+            SITECOLLABORATOR = 'SiteCollaborator',
+            SITECONTRIBUTOR = 'SiteContributor',
+            SITEMANAGER = 'SiteManager'
+        }
     }
 
     export class SiteMemberRoleBody {
         constructor(obj?: any);
 
-        role?: Role;
+        role?: SiteMemberRoleBody.RoleEnum;
+    }
+
+    namespace SiteMemberRoleBody {
+        enum RoleEnum {
+            SITECONSUMER = 'SiteConsumer',
+            SITECOLLABORATOR = 'SiteCollaborator',
+            SITECONTRIBUTOR = 'SiteContributor',
+            SITEMANAGER = 'SiteManager'
+        }
     }
 
     export class SiteMemberEntry {
@@ -1985,19 +2007,6 @@ declare namespace AlfrescoApi {
 
         entries?: Array<SiteMemberEntry>;
         pagination?: Pagination;
-    }
-
-    export class SiteMembershipBodyadd {
-        constructor(obj?: any);
-
-        role?: Role;
-        id?: string;
-    }
-
-    export class SiteMembershipBodyUpdate {
-        constructor(obj?: any);
-
-        role?: Role;
     }
 
     export class SiteMembershipRequest {
@@ -2068,27 +2077,31 @@ declare namespace AlfrescoApi {
         pagination?: Pagination;
     }
 
+    /** @deprecated in 2.4.0 not exposed by js-api */
     export class SiteRole {
         constructor(obj?: any);
 
         site?: Site;
         id?: string;
         guid?: string;
-        role?: Role;
+        role?: string;
     }
 
+    /** @deprecated in 2.4.0 not exposed by js-api */
     export class SiteRoleEntry {
         constructor(obj?: any);
 
         entry?: SiteRole;
     }
 
+    /** @deprecated in 2.4.0 not exposed by js-api */
     export class SiteRolePaging {
         constructor(obj?: any);
 
         list?: SiteRolePagingList;
     }
 
+    /** @deprecated in 2.4.0 not exposed by js-api */
     export class SiteRolePagingList {
         constructor(obj?: any);
 
@@ -2246,13 +2259,15 @@ declare namespace AlfrescoApi {
     export class ResultSetContextSpellcheck {
         constructor(obj?: any);
 
-        type?: SpellcheckType;
+        type?: ResultSetContextSpellcheck.TypeEnum;
         suggestion?: string[];
     }
 
-    export enum SpellcheckType {
-        searchInsteadFor = 'searchInsteadFor',
-        didYouMean = 'didYouMean'
+    namespace ResultSetContextSpellcheck {
+        enum TypeEnum {
+            searchInsteadFor = 'searchInsteadFor',
+            didYouMean = 'didYouMean'
+        }
     }
 
     export class ResultSetContextFacetQueries {
@@ -4296,10 +4311,21 @@ declare namespace AlfrescoApi {
             STANDARD = 'STANDARD',
             DOD5015 = 'DOD5015'
         }
+        enum VisibilityEnum {
+            PUBLIC = 'PUBLIC',
+            PRIVATE = 'PRIVATE',
+            MODERATED = 'MODERATED'
+        }
+        enum RoleEnum {
+            SiteConsumer = 'SiteConsumer',
+            SiteCollaborator = 'SiteCollaborator',
+            SiteContributor = 'SiteContributor',
+            SiteManager = 'SiteManager'
+        }
     }
 
     export class RMSite {
-        constructor(id: string, guid: string, title: string, visibility: Visibility, compliance: RMSite.ComplianceEnum);
+        constructor(id: string, guid: string, title: string, visibility: RMSite.VisibilityEnum, compliance: RMSite.ComplianceEnum);
 
         constructFromObject(data: Object, obj: RMSite): RMSite;
     }

@@ -471,12 +471,3 @@ module.exports.Discovery = AlfrescoDiscoveryRestApi;
 module.exports.Search = AlfrescoSearchRestApi;
 module.exports.GsCore = AlfrescoGsCoreRestApi;
 module.exports.GsClassification = AlfrescoGsClassificationRestApi;
-
-// global enums
-module.exports.SortDefinitionType = AlfrescoSearchRestApi.RequestSortDefinitionInner.TypeEnum;
-module.exports.RequestFacetFieldSort = AlfrescoSearchRestApi.RequestFacetField.SortEnum;
-module.exports.RequestFacetFieldMethod = AlfrescoSearchRestApi.RequestFacetField.MethodEnum;
-module.exports.OperatorType = AlfrescoSearchRestApi.RequestDefaults.DefaultFTSOperatorEnum;
-module.exports.Role = AlfrescoCoreRestApi.SiteMember.RoleEnum;
-module.exports.Visibility = AlfrescoCoreRestApi.SiteBody.VisibilityEnum;
-module.exports.SpellcheckType = AlfrescoSearchRestApi.ResultSetContextSpellcheck.TypeEnum;
