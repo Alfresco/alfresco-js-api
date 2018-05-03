@@ -1447,10 +1447,6 @@ declare namespace AlfrescoApi {
         pagination?: Pagination;
     }
 
-    export class QueryBody extends SearchRequest {
-        constructor(obj ?: any);
-    }
-
     export class SearchRequest {
         constructor(obj ?: any);
 
@@ -1474,6 +1470,10 @@ declare namespace AlfrescoApi {
         limits ?: RequestLimits;
         highlight ?: RequestHighlight;
         ranges?: Array<RequestRange>;
+    }
+
+    export class QueryBody extends SearchRequest {
+        constructor(obj ?: any);
     }
 
     export class RequestPivot {
@@ -1836,10 +1836,10 @@ declare namespace AlfrescoApi {
     }
 
     export enum Role {
-        SiteConsumer = 'SiteConsumer',
-        SiteCollaborator = 'SiteCollaborator',
-        SiteContributor = 'SiteContributor',
-        SiteManager = 'SiteManager'
+        SITECONSUMER = 'SiteConsumer',
+        SITECOLLABORATOR = 'SiteCollaborator',
+        SITECONTRIBUTOR = 'SiteContributor',
+        SITEMANAGER = 'SiteManager'
     }
 
     export class SiteBodyadd {
