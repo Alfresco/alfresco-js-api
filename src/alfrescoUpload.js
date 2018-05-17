@@ -10,8 +10,8 @@ class AlfrescoUpload extends AlfrescoCoreRestApi.NodesApi {
         Emitter.call(this);
     }
 
-    uploadFile(fileDefinition, relativePath, nodeId, nodeBody, opts) {
-        nodeId = nodeId || '-root-';
+    uploadFile(fileDefinition, relativePath, rootFolderId, nodeBody, opts) {
+        rootFolderId = rootFolderId || '-root-';
         opts = opts || {};
 
         var nodeBodyRequired = {
@@ -31,17 +31,24 @@ class AlfrescoUpload extends AlfrescoCoreRestApi.NodesApi {
 
         formParam = Object.assign(formParam, opts);
 
-        return this.addNodeUpload(nodeId, nodeBody, opts, formParam);
+        return this.addNodeUpload(rootFolderId, nodeBody, opts, formParam);
+    }
+
+    updateFile(fileDefinition, relativePath, nodeId, nodeBody, opts) {
+        opts = opts || {};
+
+        return this.updateNodeContent(nodeId, nodeBody, opts);
     }
 
     /**
      * Create a node
      *
-     * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases: -my-\ -shared- -root-\n
+     * @param {String} rootFolderId The identifier of a node. You can also use one of these well-known aliases: -my-\ -shared- -root-\n
      * @param {module:model/NodeBody1} nodeBody The node information to create.
      * @param {Object} opts Optional parameters
      * @param {Object.<String, Object>} formParams A map of form parameters and their values.
      */
+    //@deprecated in 2.4.0 use addNode in NodesApi
     addNodeUpload(nodeId, nodeBody, opts, formParams) {
         opts = opts || {};
         var postBody = nodeBody;
