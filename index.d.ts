@@ -507,7 +507,7 @@ declare namespace AlfrescoApi {
     export interface NodesApi {
         new(client: ApiClient): NodesApi;
 
-        addNode(nodeId: string, nodeBody: any, opts?: { autoRename?: boolean, include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
+        addNode(nodeId: string, nodeBody: any, opts?: { autoRename?: boolean, include?: Array<string>, fields?: Array<string> }, formParams?: any): Promise<NodeEntry>;
 
         copyNode(nodeId: string, copyBody: any, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
 
@@ -557,7 +557,7 @@ declare namespace AlfrescoApi {
 
         updateFileContent(nodeId?: string, contentBody?: string, opts?: { majorVersion?: boolean, comment?: string, include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
 
-        updateNodeContent(nodeId?: string, contentBody?: string, opts?: any): Promise<NodeEntry>;
+        updateNodeContent(nodeId?: string, contentBody?: string, opts?: any, formParams: string): Promise<NodeEntry>;
 
         updateNode(nodeId?: string, nodeBody?: NodeBody, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
     }
@@ -5270,7 +5270,8 @@ declare namespace AlfrescoApi {
     export interface UploadApi {
         new(config: AlfrescoApiConfig): UploadApi;
 
-        uploadFile(fileDefinition?: any, relativePath?: any, nodeId?: any, nodeBody?: any, opts?: any): any;
+        uploadFile(fileDefinition?: any, relativePath?: any, rootFolderId?: string, nodeBody?: any, opts?: any): any;
+        updateFile(fileDefinition?: any, relativePath?: any, nodeId?: string, nodeBody?: any, opts?: any): any;
 
         addNodeUpload(nodeId?: any, nodeBody?: any, opts?: any, formParams?: any): any;
     }
