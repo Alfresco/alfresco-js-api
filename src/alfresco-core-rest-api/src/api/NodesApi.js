@@ -43,9 +43,10 @@
      * @param {Boolean} opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
      * @param {string[]} opts.include Returns additional information about the node. The following optional fields can be requested:\n* path\n* isLink\n* allowableOperations\n
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * @param {Object.<String, Object>} formParams A map of form parameters and their values.
      * data is of type: {module:model/NodeEntry}
      */
-    this.addNode = function(nodeId, nodeBody, opts) {
+    this.addNode = function(nodeId, nodeBody, opts, formParams) {
       opts = opts || {};
       var postBody = nodeBody;
 
@@ -70,8 +71,7 @@
       };
       var headerParams = {
       };
-      var formParams = {
-      };
+      formParams = formParams || {};
 
       var authNames = ['basicAuth'];
       var contentTypes = ['application/json', 'multipart/form-data'];
@@ -888,6 +888,7 @@
         'nodeId': nodeId
       };
       var queryParams = {
+        'name': opts['name'],
         'majorVersion': opts['majorVersion'],
         'comment': opts['comment'],
         'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
@@ -931,6 +932,7 @@
       var queryParams = {
         'majorVersion': opts['majorVersion'],
         'comment': opts['comment'],
+        'name': opts['name'],
         'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
         'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
       };
