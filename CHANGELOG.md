@@ -8,7 +8,9 @@
 # [2.4.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.4.0) (??-??-2018)
 
 ## Features
-[Update Content in UplaodAPI](https://issues.alfresco.com/jira/browse/ADF-2563)
+
+* [Update Content in Upload API](https://issues.alfresco.com/jira/browse/ADF-2563)
+* [Add newly introduced isFavorite property to Nodes](https://issues.alfresco.com/jira/browse/ADF-3037)
 
 ## Fixes
 
