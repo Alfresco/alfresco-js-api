@@ -88,6 +88,8 @@ declare namespace AlfrescoApi {
 
         config: AlfrescoApiConfig;
 
+        on(nameEvent: string, callBack: any);
+
         Activiti: Activiti;
         Auth: Auth;
         Core: Core;
