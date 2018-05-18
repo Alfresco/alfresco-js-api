@@ -145,6 +145,8 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
   * [Delete report](#delete-report)
       - [Parameters](#parameters-18)
       - [Example](#example-40)
+- [Error Events](#error-events)
+  * [Example](#example-41)
 - [Development](#development)
 - [Release History](#release-history)
 
