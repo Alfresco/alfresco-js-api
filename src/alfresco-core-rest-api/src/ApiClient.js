@@ -54,7 +54,10 @@
      * @type {Number}
      * @default 60000
      */
-    this.timeout = undefined;
+    this.timeout = {
+      response: 60000,
+      deadline: undefined,
+    };
   };
 
   /**
