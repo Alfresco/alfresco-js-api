@@ -9,6 +9,7 @@
 
 ## Features
 [Update Content in UplaodAPI](https://issues.alfresco.com/jira/browse/ADF-2563)
+[Error rise alfresco-js-api event](https://issues.alfresco.com/jira/browse/ADF-2753)
 
 ## Fixes
 
