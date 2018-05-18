@@ -558,7 +558,7 @@ declare namespace AlfrescoApi {
 
         updateFileContent(nodeId?: string, contentBody?: string, opts?: { majorVersion?: boolean, comment?: string, include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
 
-        updateNodeContent(nodeId?: string, contentBody?: string, opts?: any, formParams?: string): Promise<NodeEntry>;
+        updateNodeContent(nodeId?: string, contentBody?: string, opts?: any): Promise<NodeEntry>;
 
         updateNode(nodeId?: string, nodeBody?: NodeBody, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
     }
