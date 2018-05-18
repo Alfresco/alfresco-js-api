@@ -71,6 +71,9 @@
       if (data.hasOwnProperty('isFile')) {
         obj['isFile'] = ApiClient.convertToType(data['isFile'], 'Boolean');
       }
+      if (data.hasOwnProperty('isFavorite')) {
+        obj['isFavorite'] = ApiClient.convertToType(data['isFavorite'], 'Boolean');
+      }
       if (data.hasOwnProperty('modifiedAt')) {
         obj['modifiedAt'] = ApiClient.convertToType(data['modifiedAt'], 'Date');
       }
