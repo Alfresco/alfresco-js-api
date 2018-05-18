@@ -103,14 +103,11 @@ class AlfrescoApi {
     }
 
     errorHandler(error) {
-        var eventEmitter = {};
-        Emitter(eventEmitter); // jshint ignore:line
-
         if (error.status === 401) {
             this.invalidateSession();
         }
 
-        eventEmitter.emit('error', error);
+        this.emit('error', error);
     }
 
     changeCsrfConfig(disableCsrf) {
