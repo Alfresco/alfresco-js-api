@@ -1296,6 +1296,17 @@ var reportId = "1"; // String | reportId
 this.alfrescoJsApi.activiti.reportApi.deleteReport(reportId);
 ```
 
+# Error Events
+
+The alfresco-js-api has an error handler event where you can subscribe
+
+## Example
+```javascript
+    this.alfrescoJsApi.on('error', (error) => {
+        console.log(error)
+    })
+```
+
 # Development
 
 * To run the build
