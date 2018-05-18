@@ -222,6 +222,7 @@ declare namespace AlfrescoApi {
         nodeType?: string;
         isFolder?: boolean;
         isFile?: boolean;
+        isFavorite?: boolean;
         isLocked?: boolean;
         modifiedAt?: Date;
         modifiedByUser?: UserInfo;
