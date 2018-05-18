@@ -60,6 +60,8 @@ class AlfrescoApiClient extends ApiClient {
         this.promise = new Promise((resolve, reject) => {
             request.end((error, response) => {
                 if (error) {
+
+                    this.emit('error', error);
                     eventEmitter.emit('error', error);
 
                     if (error.status === 401) {

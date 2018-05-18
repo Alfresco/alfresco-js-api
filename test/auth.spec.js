@@ -43,8 +43,8 @@ describe('Auth', function () {
                         hostEcm: this.host
                     });
 
-                    this.alfrescoJsApi.login('wrong', 'name').then(()=> {
-                    }, (error)=> {
+                    this.alfrescoJsApi.login('wrong', 'name').then(() => {
+                    }, (error) => {
                         expect(error.status).to.be.equal(403);
                         done();
                     });
@@ -79,7 +79,7 @@ describe('Auth', function () {
                     this.alfrescoJsApi.login('admin', 'admin').then(() => {
                         expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(true);
                         done();
-                    }, ()=> {
+                    }, () => {
                     });
                 });
 
@@ -91,7 +91,7 @@ describe('Auth', function () {
                         hostEcm: this.host
                     });
 
-                    this.alfrescoJsApi.login('admin', 'admin').catch(()=> {
+                    this.alfrescoJsApi.login('admin', 'admin').catch(() => {
                     });
 
                     this.authResponseEcmMock.get204ResponseLogout();
@@ -99,7 +99,7 @@ describe('Auth', function () {
                     this.alfrescoJsApi.logout().then(() => {
                         expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(false);
                         done();
-                    }, ()=> {
+                    }, () => {
                     });
                 });
             });
@@ -115,9 +115,9 @@ describe('Auth', function () {
 
                     var authPromise = this.alfrescoJsApi.login('wrong', 'name');
 
-                    authPromise.catch(()=> {
+                    authPromise.catch(() => {
                     });
-                    authPromise.on('unauthorized', ()=> {
+                    authPromise.on('unauthorized', () => {
                         done();
                     });
                 });
@@ -131,9 +131,9 @@ describe('Auth', function () {
 
                     var authPromise = this.alfrescoJsApi.login('admin', 'admin');
 
-                    authPromise.catch(()=> {
+                    authPromise.catch(() => {
                     });
-                    authPromise.on('success', ()=> {
+                    authPromise.on('success', () => {
                         done();
                     });
                 });
@@ -151,9 +151,9 @@ describe('Auth', function () {
 
                     var authPromise = this.alfrescoJsApi.logout();
 
-                    authPromise.catch(()=> {
+                    authPromise.catch(() => {
                     });
-                    authPromise.on('logout', ()=> {
+                    authPromise.on('logout', () => {
                         done();
                     });
                 });
@@ -198,7 +198,7 @@ describe('Auth', function () {
                     });
 
                     this.alfrescoJsApi.loginTicket(ticket).then((data) => {
-                    }, ()=> {
+                    }, () => {
                         done();
                     });
                 });
@@ -214,18 +214,18 @@ describe('Auth', function () {
 
                     this.alfrescoJsApi.login('admin', 'admin').then(() => {
                         done();
-                    }, ()=> {
+                    }, () => {
                     });
                 });
 
                 it('should Ticket be absent in the client and the resolve promise should be called', function (done) {
                     this.authResponseEcmMock.get204ResponseLogout();
 
-                    this.alfrescoJsApi.logout().then((data)=> {
+                    this.alfrescoJsApi.logout().then((data) => {
                         expect(this.alfrescoJsApi.config.ticket).to.be.equal(undefined);
                         expect(data).to.be.equal('logout');
                         done();
-                    }, ()=> {
+                    }, () => {
                     });
                 });
 
@@ -249,7 +249,7 @@ describe('Auth', function () {
 
                     this.alfrescoJsApi.login('admin', 'admin').then(() => {
                         done();
-                    }, ()=> {
+                    }, () => {
                     });
                 });
 
@@ -271,6 +271,18 @@ describe('Auth', function () {
                     }, () => {
                         expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(false);
                         done();
+                    });
+                });
+
+                it('should rais an error event if a failin call is executed', function (done) {
+                    this.alfrescoJsApi.on('error', () => {
+                        done();
+                    });
+
+                    this.nodeMock.get401CreationFolder();
+
+                    this.alfrescoJsApi.nodes.createFolder('newFolder').then(() => {
+                    }, () => {
                     });
                 });
             });
@@ -314,9 +326,9 @@ describe('Auth', function () {
                         provider: 'BPM'
                     });
 
-                    this.alfrescoJsApi.login('wrong', 'name').then(()=> {
+                    this.alfrescoJsApi.login('wrong', 'name').then(() => {
 
-                    }, (error)=> {
+                    }, (error) => {
                         expect(error.status).to.be.equal(401);
                         done();
                     });
@@ -390,10 +402,10 @@ describe('Auth', function () {
 
                     var authPromise = this.alfrescoJsApi.login('wrong', 'name');
 
-                    authPromise.catch(()=> {
+                    authPromise.catch(() => {
                     });
 
-                    authPromise.on('unauthorized', ()=> {
+                    authPromise.on('unauthorized', () => {
                         done();
                     });
                 });
@@ -409,10 +421,10 @@ describe('Auth', function () {
 
                     var authPromise = this.alfrescoJsApi.login('admin', 'admin');
 
-                    authPromise.catch(()=> {
+                    authPromise.catch(() => {
                     });
 
-                    authPromise.on('success', ()=> {
+                    authPromise.on('success', () => {
                         done();
                     });
                 });
@@ -431,9 +443,9 @@ describe('Auth', function () {
 
                     var authPromise = this.alfrescoJsApi.logout();
 
-                    authPromise.catch(()=> {
+                    authPromise.catch(() => {
                     });
-                    authPromise.on('logout', ()=> {
+                    authPromise.on('logout', () => {
                         done();
                     });
                 });
@@ -451,14 +463,14 @@ describe('Auth', function () {
 
                     this.alfrescoJsApi.login('admin', 'admin').then(() => {
                         done();
-                    }, ()=> {
+                    }, () => {
                     });
                 });
 
                 it('should 401 invalidate the ticket', function (done) {
                     this.profileMock.get401getProfile();
 
-                    this.alfrescoJsApi.activiti.profileApi.getProfile().then((data)=> {
+                    this.alfrescoJsApi.activiti.profileApi.getProfile().then((data) => {
                     }, () => {
                         expect(this.alfrescoJsApi.bpmAuth.authentications.basicAuth.ticket).to.be.equal(null);
                         done();
@@ -469,7 +481,7 @@ describe('Auth', function () {
                 it('should 401 invalidate the session and logout', function (done) {
                     this.profileMock.get401getProfile();
 
-                    this.alfrescoJsApi.activiti.profileApi.getProfile().then((data)=> {
+                    this.alfrescoJsApi.activiti.profileApi.getProfile().then((data) => {
                     }, () => {
                         expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(false);
                         done();
@@ -665,9 +677,9 @@ describe('Auth', function () {
 
                     var authPromise = this.alfrescoJsApi.login('wrong', 'name');
 
-                    authPromise.catch(()=> {
+                    authPromise.catch(() => {
                     });
-                    authPromise.on('unauthorized', ()=> {
+                    authPromise.on('unauthorized', () => {
                         done();
                     });
                 });
@@ -684,9 +696,9 @@ describe('Auth', function () {
 
                     var authPromise = this.alfrescoJsApi.login('admin', 'admin');
 
-                    authPromise.catch(()=> {
+                    authPromise.catch(() => {
                     });
-                    authPromise.on('success', ()=> {
+                    authPromise.on('success', () => {
                         done();
                     });
                 });
@@ -706,7 +718,7 @@ describe('Auth', function () {
                     this.authResponseBpmMock.get200ResponseLogout();
                     this.authResponseEcmMock.get204ResponseLogout();
 
-                    this.alfrescoJsApi.logout().on('logout', ()=> {
+                    this.alfrescoJsApi.logout().on('logout', () => {
                         done();
                     });
                 });
