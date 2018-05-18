@@ -14,7 +14,7 @@
 
 
 ## Fixes
-
+[Disable timeout](https://issues.alfresco.com/jira/browse/ADF-2481)
 [Missing typings for Search API](https://issues.alfresco.com/jira/browse/ADF-2885)
 
 <a name="2.3.1"></a>
