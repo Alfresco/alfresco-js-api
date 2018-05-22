@@ -220,6 +220,7 @@ declare namespace AlfrescoApi {
         constructor(obj?: any);
 
         id?: string;
+        nodeId?: string;
         name?: string;
         nodeType?: string;
         isFolder?: boolean;
