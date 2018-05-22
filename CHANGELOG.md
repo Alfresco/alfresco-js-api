@@ -11,6 +11,7 @@
 [Update Content in UplaodAPI](https://issues.alfresco.com/jira/browse/ADF-2563)
 [Error rise alfresco-js-api event](https://issues.alfresco.com/jira/browse/ADF-2753)
 [Add newly introduced isFavorite property to Nodes](https://issues.alfresco.com/jira/browse/ADF-3037)
+[Shared nodeId property](https://issues.alfresco.com/jira/browse/ADF-3063)
 
 
 ## Fixes
