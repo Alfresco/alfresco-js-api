@@ -56,6 +56,9 @@
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
       }
+      if (data.hasOwnProperty('nodeId')) {
+        obj['nodeId'] = ApiClient.convertToType(data['nodeId'], 'String');
+      }
       if (data.hasOwnProperty('parentId')) {
         obj['parentId'] = ApiClient.convertToType(data['parentId'], 'String');
       }
