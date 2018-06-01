@@ -816,7 +816,7 @@ declare namespace AlfrescoApi {
 
         getVersion(nodeId: string, versionId: string): Promise<VersionEntry>;
 
-        getVersionContent(nodeId: string, opts?: any): Promise<any>;
+        getVersionContent(nodeId: string, versionId: string, opts?: { attachment?: boolean, ifModifiedSince?: Date, range?: string }): Promise<any>;
 
         listVersionHistory(nodeId: string, opts?: { include?: Array<string>, fields?: Array<string>, skipCount?: number, maxItems?: number }): Promise<VersionPaging>;
 
