@@ -245,7 +245,14 @@ class AlfrescoApi {
 
             return bpmEcmPromise;
         } else if (this._isOauthConfiguration()) {
-            var oauth2AuthPromise = this.oauth2Auth.login(username, password);
+
+            var oauth2AuthPromise;
+
+            if (this.config.oauth2.implicit) {
+                oauth2AuthPromise = this.oauth2Auth.login(username, password);
+            }else {
+                oauth2AuthPromise = this.oauth2Auth.implicitLogin();
+            }
 
             oauth2AuthPromise.then((accessToken) => {
                 this.config.accessToken = accessToken;
