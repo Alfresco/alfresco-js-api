@@ -248,11 +248,7 @@ class AlfrescoApi {
 
             var oauth2AuthPromise;
 
-            if (this.config.oauth2.implicit) {
-                oauth2AuthPromise = this.oauth2Auth.login(username, password);
-            }else {
-                oauth2AuthPromise = this.oauth2Auth.implicitLogin();
-            }
+            oauth2AuthPromise = this.oauth2Auth.login(username, password);
 
             oauth2AuthPromise.then((accessToken) => {
                 this.config.accessToken = accessToken;
@@ -318,9 +314,9 @@ class AlfrescoApi {
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
     logout() {
-        if (this.config.provider && this.config.provider.toUpperCase() === 'BPM') {
+        if (this._isBpmConfiguration()) {
             return this.bpmAuth.logout();
-        } else if (this.config.provider && this.config.provider.toUpperCase() === 'ECM') {
+        } else if (this._isEcmConfiguration()) {
             var ecmPromise = this.ecmAuth.logout();
             ecmPromise.then(() => {
                 this.config.ticket = undefined;
@@ -328,8 +324,10 @@ class AlfrescoApi {
             });
 
             return ecmPromise;
-        } else if (this.config.provider && this.config.provider.toUpperCase() === 'ALL') {
+        } else if (this._isEcmBpmConfiguration()) {
             return this._logoutBPMECM();
+        } else if (this._isOauthConfiguration()) {
+            this.oauth2Auth.logOut();
         }
     }
 
@@ -364,14 +362,46 @@ class AlfrescoApi {
      * @returns {Boolean} is logged in
      */
     isLoggedIn() {
-        if (this.config.provider && this.config.provider.toUpperCase() === 'BPM') {
+        if (this._isBpmConfiguration()) {
             return this.bpmAuth.isLoggedIn();
-        } else if (this.config.provider && this.config.provider.toUpperCase() === 'ECM') {
+        } else if (this._isEcmConfiguration()) {
             return this.ecmAuth.isLoggedIn();
-        } else if (this.config.provider && this.config.provider.toUpperCase() === 'ALL') {
+        } else if (this._isEcmBpmConfiguration()) {
             return this.ecmAuth.isLoggedIn() && this.bpmAuth.isLoggedIn();
-        } else if (this.config.provider && this.config.provider.toUpperCase() === 'OAUTH') {
+        } else if (this._isOauthConfiguration()) {
             return this.oauth2Auth.isLoggedIn();
+        }
+    }
+
+    isBpmLoggedIn() {
+        if (this._isOauthConfiguration()) {
+            return this.oauth2Auth.isLoggedIn();
+        } else {
+            return this.bpmAuth.isLoggedIn();
+        }
+    }
+
+    isEcmLoggedIn() {
+        if (this._isOauthConfiguration()) {
+            return this.oauth2Auth.isLoggedIn();
+        } else {
+            return this.ecmAuth.isLoggedIn();
+        }
+    }
+
+    getBpmUsername() {
+        if (this._isOauthConfiguration()) {
+            return this.oauth2Auth.storage.getItem('USERNAME');
+        } else {
+            return this.bpmAuth.storage.getItem('APS_USERNAME');
+        }
+    }
+
+    getEcmUsername() {
+        if (this._isOauthConfiguration()) {
+            return this.oauth2Auth.storage.getItem('USERNAME');
+        } else {
+            return this.ecmAuth.storage.getItem('ACS_USERNAME');
         }
     }
 
@@ -379,7 +409,7 @@ class AlfrescoApi {
      * refresh token
      * */
     refreshToken() {
-        if (this.config.provider !== 'OAUTH') {
+        if (this._isOauthConfiguration()) {
             throw 'Missing the required oauth2 configuration';
         }
 
@@ -410,7 +440,7 @@ class AlfrescoApi {
      * */
     invalidateSession() {
         if (this.oauth2Auth) {
-            this.oauth2Auth.setToken(null, null);
+            //this.oauth2Auth.setToken(null, null);
         } else {
             this.ecmAuth.setTicket(null);
             this.bpmAuth.setTicket(null);

@@ -12,7 +12,6 @@ class EcmAuth extends AlfrescoApiClient {
     constructor(config) {
         super();
 
-        this.username = this.loadUsername();
         this.config = config;
 
         this.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
@@ -29,24 +28,9 @@ class EcmAuth extends AlfrescoApiClient {
         this.ticket = undefined;
     }
 
-    supportsLocalStorage() {
-        try {
-            return 'localStorage' in window && window.localStorage !== null;
-        } catch (e) {
-            return false;
-        }
-    }
-
-    loadUsername() {
-        if (this.supportsLocalStorage()) {
-            return localStorage.getItem('APS_USERNAME');
-        }
-        return '';
-    }
-
-    saveUsername(value) {
-        if (this.supportsLocalStorage()) {
-            localStorage.setItem('APS_USERNAME', value);
+    saveUsername(username) {
+        if (this.supportsStorage()) {
+            this.storage.setItem('ACS_USERNAME', username);
         }
     }
 
