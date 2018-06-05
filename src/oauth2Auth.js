@@ -27,6 +27,10 @@ class oauth2Auth extends AlfrescoApiClient {
                 throw 'Missing the required oauth2 secret parameter';
             }
 
+            if (this.config.oauth2.silentRefreshTimeout === undefined && this.config.oauth2.implicit) {
+                this.config.oauth2.silentRefreshTimeout = 1000 * 20;
+            }
+
             this.basePath = this.config.oauth2.host; //Auth Call
 
             this.authentications = {
@@ -53,8 +57,8 @@ class oauth2Auth extends AlfrescoApiClient {
         this.checkFragment();
     }
 
-    checkFragment() {
-        this.hashFragmentParams = this.getHashFragmentParams();
+    checkFragment(externalHash) {
+        this.hashFragmentParams = this.getHashFragmentParams(externalHash);
 
         if (this.hashFragmentParams) {
             let accessToken = this.hashFragmentParams.access_token;
@@ -73,6 +77,7 @@ class oauth2Auth extends AlfrescoApiClient {
                     this.storeAccessToken(accessToken, expiresIn);
                     this.authentications.basicAuth.username = jwt.payload.preferred_username;
                     this.saveUsername(jwt.payload.preferred_username);
+                    this.silentRefresh();
                 }
             }, (error) => {
                 console.log(error);
@@ -100,31 +105,49 @@ class oauth2Auth extends AlfrescoApiClient {
                     reject('Failing nonce JWT is not corrisponding' + payload.nonce);
                 }
 
-                this.loadJwks().then((jwks) => {
-                    let keyObj = rs.KEYUTIL.getKey(jwks.keys[0]);
-                    let isValid = rs.jws.JWS.verifyJWT(jwt, keyObj,
-                        {
-                            alg: [header.alg],
-                            iss: [this.config.oauth2.host],
-                            aud: [this.config.oauth2.clientId]
-                        });
-
-                    if (isValid) {
-                        resolve({
-                            idToken: jwt,
-                            payload: payload,
-                            header: header
-                        });
+                if (this.jwks) {
+                    let validObj = this.validateJWKS(this.jwks, jwt, payload, header);
+                    if (validObj) {
+                        resolve(validObj);
                     } else {
                         reject('Invalid JWT');
                     }
+                } else {
 
-                }, (error) => {
-                    reject(error);
-                });
+                    this.loadJwks().then((jwks) => {
+                        this.jwks = jwks;
+                        let validObj = this.validateJWKS(this.jwks, jwt, payload, header);
+                        if (validObj) {
+                            resolve(validObj);
+                        } else {
+                            reject('Invalid JWT');
+                        }
+                    }, (error) => {
+                        reject(error);
+                    });
+
+                }
 
             }
         });
+    }
+
+    validateJWKS(jwks, jwt, payload, header) {
+        let keyObj = rs.KEYUTIL.getKey(jwks.keys[0]);
+        let isValid = rs.jws.JWS.verifyJWT(jwt, keyObj,
+            {
+                alg: [header.alg],
+                iss: [this.config.oauth2.host],
+                aud: [this.config.oauth2.clientId]
+            });
+
+        if (isValid) {
+            return {
+                idToken: jwt,
+                payload: payload,
+                header: header
+            };
+        }
     }
 
     loadJwks() {
@@ -284,12 +307,6 @@ class oauth2Auth extends AlfrescoApiClient {
 
         this.storage.setItem('nonce', nonce);
 
-        if (this.state) {
-            this.state = nonce + ';' + this.state;
-        } else {
-            this.state = nonce;
-        }
-
         var separation = this.discovery.loginUrl.indexOf('?') > -1 ? '&' : '?';
 
         return this.discovery.loginUrl +
@@ -303,17 +320,21 @@ class oauth2Auth extends AlfrescoApiClient {
             '&response_type=' +
             encodeURIComponent('id_token token') +
             '&nonce=' +
-            encodeURIComponent(nonce) +
-            '&state=' +
-            encodeURIComponent(this.state);
+            encodeURIComponent(nonce);
 
     }
 
-    getHashFragmentParams() {
+    getHashFragmentParams(externalHash) {
         var hashFragmentParams = null;
 
         if (typeof window !== 'undefined') {
-            var hash = decodeURIComponent(window.location.hash);
+            let hash;
+
+            if (!externalHash) {
+                hash = decodeURIComponent(window.location.hash);
+            } else {
+                hash = decodeURIComponent(externalHash);
+            }
 
             if (hash.indexOf('#') === 0) {
                 const questionMarkPosition = hash.indexOf('?');
@@ -360,6 +381,40 @@ class oauth2Auth extends AlfrescoApiClient {
         }
 
         return data;
+    }
+
+    silentRefresh() {
+        if (typeof document === 'undefined') {
+            throw new Error('Silent refresh supported only on browsers');
+        }
+
+        setTimeout(() => {
+            this.destroyIframe();
+            this.createIframe();
+        }, this.config.oauth2.silentRefreshTimeout);
+    }
+
+    createIframe() {
+        const iframe = document.createElement('iframe');
+        iframe.id = 'silent_refresh_token_iframe';
+        let loginUrl = this.composeImplicitLoginUrl();
+        iframe.setAttribute('src', loginUrl);
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+
+        iframe.addEventListener('load', (event) => {
+            let hash = document.getElementById('silent_refresh_token_iframe').contentWindow.location.hash;
+            this.checkFragment(hash);
+        });
+    }
+
+    destroyIframe() {
+        const iframe = document.getElementById('silent_refresh_token_iframe');
+
+        if (iframe) {
+            iframe.removeEventListener('load');
+            document.body.removeChild(iframe);
+        }
     }
 
     /**
