@@ -77,6 +77,11 @@ class oauth2Auth extends AlfrescoApiClient {
             }, (error) => {
                 console.log(error);
             });
+        } else {
+            if (this.isValidAccessToken()) {
+                let accessToken = this.storage.getItem('access_token');
+                this.setToken(accessToken, null);
+            }
         }
     }
 
@@ -156,18 +161,14 @@ class oauth2Auth extends AlfrescoApiClient {
 
     storeAccessToken(accessToken, expiresIn) {
         this.storage.setItem('access_token', accessToken);
-        this.storage.setItem('access_token_expires_in', Number(expiresIn * 1000).toString());
+
+        const expiresInMilliSeconds = expiresIn * 1000;
+        const now = new Date();
+        const expiresAt = now.getTime() + expiresInMilliSeconds;
+
+        this.storage.setItem('access_token_expires_in', expiresAt);
         this.storage.setItem('access_token_stored_at', Date.now().toString());
         this.setToken(accessToken, null);
-    }
-
-    isJWTExpired(payload) {
-        const now = Date.now();
-        const issuedAtMSec = payload.iat * 1000;
-        const expiresAtMSec = payload.exp * 1000;
-        const tenMinutesInMsec = 1000 * 60 * 10;
-
-        return issuedAtMSec - tenMinutesInMsec >= now || expiresAtMSec + tenMinutesInMsec <= now;
     }
 
     async discoveryUrls() { // jshint ignore:line
@@ -211,7 +212,7 @@ class oauth2Auth extends AlfrescoApiClient {
     }
 
     implicitLogin() {
-        if (!this.isExpiredIdToken() || !this.isExpiredAccessToken()) {
+        if (!this.isValidToken() || !this.isValidAccessToken()) {
             if (this.discovery.loginUrl) {
                 this.redirectLogin();
             } else {
@@ -219,15 +220,18 @@ class oauth2Auth extends AlfrescoApiClient {
                     this.redirectLogin();
                 });
             }
+        } else {
+            let accessToken = this.storage.getItem('access_token');
+            this.setToken(accessToken, null);
         }
     }
 
-    isExpiredIdToken() {
+    isValidToken() {
         var validToken = false;
         if (this.getIdToken()) {
             var expiresAt = this.storage.getItem('id_token_expires_at'),
                 now = new Date();
-            if (!expiresAt && parseInt(expiresAt, 10) >= now.getTime()) {
+            if (expiresAt && parseInt(expiresAt, 10) >= now.getTime()) {
                 validToken = true;
             }
         }
@@ -235,13 +239,13 @@ class oauth2Auth extends AlfrescoApiClient {
         return validToken;
     }
 
-    isExpiredAccessToken() {
+    isValidAccessToken() {
         var validAccessToken = false;
 
         if (this.getAccessToken()) {
-            const expiresAt = this.storage.getItem('expires_at');
+            const expiresAt = this.storage.getItem('access_token_expires_in');
             const now = new Date();
-            if (!expiresAt && parseInt(expiresAt, 10) >= now.getTime()) {
+            if (expiresAt && parseInt(expiresAt, 10) >= now.getTime()) {
                 validAccessToken = true;
             }
         }
@@ -548,7 +552,6 @@ class oauth2Auth extends AlfrescoApiClient {
         this.storage.removeItem('id_token_stored_at');
 
         this.storage.removeItem('nonce');
-        this.storage.removeItem('expires_at');
     }
 }
 
