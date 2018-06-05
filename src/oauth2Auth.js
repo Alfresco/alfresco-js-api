@@ -402,17 +402,24 @@ class oauth2Auth extends AlfrescoApiClient {
         iframe.style.display = 'none';
         document.body.appendChild(iframe);
 
-        iframe.addEventListener('load', (event) => {
+        this.iFameHashListner = () => {
             let hash = document.getElementById('silent_refresh_token_iframe').contentWindow.location.hash;
             this.checkFragment(hash);
-        });
+        };
+
+        iframe.addEventListener('load', this.iFameHashListner);
+    }
+
+    iframeHashListner() {
+        let hash = document.getElementById('silent_refresh_token_iframe').contentWindow.location.hash;
+        this.checkFragment(hash);
     }
 
     destroyIframe() {
         const iframe = document.getElementById('silent_refresh_token_iframe');
 
         if (iframe) {
-            iframe.removeEventListener('load');
+            iframe.removeEventListener('load', this.iFameHashListner);
             document.body.removeChild(iframe);
         }
     }
