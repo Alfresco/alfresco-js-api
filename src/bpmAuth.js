@@ -38,7 +38,7 @@ class BpmAuth extends AlfrescoApiClient {
     }
 
     saveUsername(username) {
-        if (this.supportsStorage()) {
+        if (this.storage.supportsStorage()) {
             this.storage.setItem('APS_USERNAME', username);
         }
     }

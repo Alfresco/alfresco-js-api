@@ -29,7 +29,7 @@ class EcmAuth extends AlfrescoApiClient {
     }
 
     saveUsername(username) {
-        if (this.supportsStorage()) {
+        if (this.storage.supportsStorage()) {
             this.storage.setItem('ACS_USERNAME', username);
         }
     }

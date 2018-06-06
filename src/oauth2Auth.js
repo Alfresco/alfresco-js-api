@@ -23,8 +23,16 @@ class oauth2Auth extends AlfrescoApiClient {
                 throw 'Missing the required oauth2 clientId parameter';
             }
 
+            if (this.config.oauth2.scope === undefined || this.config.oauth2.scope === null) {
+                throw 'Missing the required oauth2 scope parameter';
+            }
+
             if (this.config.oauth2.secret === undefined || this.config.oauth2.secret === null) {
                 throw 'Missing the required oauth2 secret parameter';
+            }
+
+            if ((this.config.oauth2.redirectUri === undefined || this.config.oauth2.redirectUri === null) && this.config.oauth2.implicit) {
+                throw 'Missing redirectUri required parameter';
             }
 
             if (!this.config.oauth2.refreshTokenTimeout) {
@@ -38,8 +46,6 @@ class oauth2Auth extends AlfrescoApiClient {
             };
 
             this.host = this.config.oauth2.host;
-
-            this.setStorage();
 
             if (this.config.oauth2.implicit) {
                 this.initOauth();
@@ -231,7 +237,7 @@ class oauth2Auth extends AlfrescoApiClient {
     }
 
     saveUsername(username) {
-        if (this.supportsStorage()) {
+        if (this.storage.supportsStorage()) {
             this.storage.setItem('USERNAME', username);
         }
     }
@@ -288,7 +294,9 @@ class oauth2Auth extends AlfrescoApiClient {
 
     redirectLogin() {
         if (this.config.oauth2.implicit && typeof window !== 'undefined') {
-            window.location.href = this.composeImplicitLoginUrl();
+            let href = this.composeImplicitLoginUrl();
+            window.location.href = href;
+            this.emit('implicit_redirect', href);
         }
     }
 
@@ -435,52 +443,45 @@ class oauth2Auth extends AlfrescoApiClient {
      * */
     login(username, password) {
         this.promise = new Promise((resolve, reject) => {
+            var postBody = {}, pathParams = {}, queryParams = {}, formParams = {};
 
-            if (this.config.oauth2.implicit) {
-                resolve();
-                this.implicitLogin();
-            } else {
-                var postBody = {}, pathParams = {}, queryParams = {}, formParams = {};
+            var auth = 'Basic ' + new Buffer(this.config.oauth2.clientId + ':' + this.config.oauth2.secret).toString('base64');
 
-                var auth = 'Basic ' + new Buffer(this.config.oauth2.clientId + ':' + this.config.oauth2.secret).toString('base64');
+            var headerParams = {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': auth
+            };
 
-                var headerParams = {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Authorization': auth
-                };
+            formParams = {
+                username: username,
+                password: password,
+                grant_type: 'password',
+                client_id: this.config.oauth2.clientId
+            };
 
-                formParams = {
-                    username: username,
-                    password: password,
-                    grant_type: 'password',
-                    client_id: this.config.oauth2.clientId
-                };
+            var authNames = [];
+            var contentTypes = ['application/x-www-form-urlencoded'];
+            var accepts = ['application/json'];
 
-                var authNames = [];
-                var contentTypes = ['application/x-www-form-urlencoded'];
-                var accepts = ['application/json'];
-
-                var url = this.config.oauth2.authPath || '/oauth/token';
-                this.callApi(
-                    url, 'POST',
-                    pathParams, queryParams, headerParams, formParams, postBody,
-                    authNames, contentTypes, accepts, {}
-                ).then(
-                    (data) => {
-                        this.saveUsername(username);
-                        this.setToken(data.access_token, data.refresh_token);
-                        resolve(data);
-                    },
-                    (error) => {
-                        if (error.error.status === 401) {
-                            this.promise.emit('unauthorized');
-                        }
-                        this.promise.emit('error');
-                        reject(error.error);
-                    });
-                Emitter(this.promise); // jshint ignore:line
-
-            }
+            var url = this.config.oauth2.authPath || '/oauth/token';
+            this.callApi(
+                url, 'POST',
+                pathParams, queryParams, headerParams, formParams, postBody,
+                authNames, contentTypes, accepts, {}
+            ).then(
+                (data) => {
+                    this.saveUsername(username);
+                    this.setToken(data.access_token, data.refresh_token);
+                    resolve(data);
+                },
+                (error) => {
+                    if (error.error.status === 401) {
+                        this.promise.emit('unauthorized');
+                    }
+                    this.promise.emit('error');
+                    reject(error.error);
+                });
+            Emitter(this.promise); // jshint ignore:line
         });
 
         return this.promise;

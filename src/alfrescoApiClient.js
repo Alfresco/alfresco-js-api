@@ -1,6 +1,7 @@
 'use strict';
 var Emitter = require('event-emitter');
 var ApiClient = require('./alfresco-core-rest-api/src/ApiClient');
+var Storage = require('./storage');
 var superagent = require('superagent');
 
 class AlfrescoApiClient extends ApiClient {
@@ -10,22 +11,9 @@ class AlfrescoApiClient extends ApiClient {
      * */
     constructor(host) {
         super();
+        this.storage = new Storage();
         this.host = host;
         Emitter.call(this);
-    }
-
-    setStorage() {
-        if (typeof window !== 'undefined') {
-            this.storage = window.sessionStorage;
-        }
-    }
-
-    supportsStorage() {
-        try {
-            return 'sessionStorage' in window && window.sessionStorage !== null;
-        } catch (e) {
-            return false;
-        }
     }
 
     /**

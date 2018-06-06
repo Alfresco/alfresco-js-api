@@ -18,6 +18,8 @@ declare class AlfrescoApi {
 
     refreshToken(): Promise<string>;
 
+    implicitLogin(): Promise<any>;
+
     getTicket(): Array<string>;
 
     getTicketBpm(): string;

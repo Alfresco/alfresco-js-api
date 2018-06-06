@@ -259,6 +259,16 @@ class AlfrescoApi {
         }
     }
 
+    implicitLogin() {
+        if (!this._isOauthConfiguration()) {
+            return Promise.reject('Missing the required oauth2 configuration');
+        }
+
+        return new Promise((resolve, reject) => {
+            this.implicitLogin();
+        });
+    }
+
     setAuthenticationClientECMBPM(authECM, authBPM) {
         this.ecmClient.setAuthentications(authECM);
         this.searchClient.setAuthentications(authECM);
