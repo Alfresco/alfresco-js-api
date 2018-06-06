@@ -75,7 +75,7 @@ describe('Oauth2 Implicit flow test', function () {
         this.oauth2Auth.implicitLogin();
     });
 
-    it.only('should not redirect to login if access token is valid', function (done) {
+    it('should not redirect to login if access token is valid', function (done) {
         window = {location: {}};
         this.oauth2Mock.get200Discovery();
 
@@ -90,17 +90,19 @@ describe('Oauth2 Implicit flow test', function () {
             }
         });
 
-        this.oauth2Auth.isValidAccessToken= ()=> {
+        this.oauth2Auth.isValidAccessToken = () => {
             return true;
         };
-        this.oauth2Auth.isValidToken= ()=> {
+        this.oauth2Auth.isValidToken = () => {
             return true;
         };
 
         this.oauth2Auth.implicitLogin();
 
-
+        this.oauth2Auth.on('token_issued', (url) => {
+            expect(window.location.url).to.be.equal(undefined);
+            done();
+        });
     });
-
 });
 

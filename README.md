@@ -366,6 +366,7 @@ Property | Description  | default value|
 ------------- | ------------- | -------------|
 implicit_redirect| triggered when the user is redirect to the auth server return url parameter of the redirect |  |
 discovery| triggered when all the openId discovery url phase is terminated returnl an object with all the discovered url |  |
+token_issued| triggered when a new token is issued|  |
 
 The alfresco-js-api will automatically redirect you to the login page anf refresh the token if necessary
 

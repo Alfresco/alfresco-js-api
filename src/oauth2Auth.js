@@ -545,6 +545,7 @@ class oauth2Auth extends AlfrescoApiClient {
         this.authentications.basicAuth.refreshToken = refreshToken;
         this.authentications.basicAuth.password = null;
         this.token = token;
+        this.emit('token_issued');
     }
 
     /**
