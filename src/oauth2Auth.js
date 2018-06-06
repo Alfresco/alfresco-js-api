@@ -12,7 +12,7 @@ class Oauth2Auth extends AlfrescoApiClient {
     constructor(config) {
         super();
         this.config = config;
-        this.discovery = {};
+        this.init = false;
 
         if (this.config.oauth2) {
             if (this.config.oauth2.host === undefined || this.config.oauth2.host === null) {
@@ -48,7 +48,7 @@ class Oauth2Auth extends AlfrescoApiClient {
             this.host = this.config.oauth2.host;
 
             if (this.config.oauth2.implicitFlow) {
-                this.initOauth();
+                this.initOauth();// jshint ignore:line
             }
 
             if (this.config.accessToken) {
@@ -59,47 +59,137 @@ class Oauth2Auth extends AlfrescoApiClient {
         Emitter.call(this);
     }
 
-    async initOauth() { // jshint ignore:line
-        await this.discoveryUrls(); // jshint ignore:line
-
-        this.checkFragment();
+    initOauth() {
+        return Promise.resolve()
+            .then(() => {
+                return this.discoveryUrls();
+            })
+            .then(() => {
+                return this.loadJwks();
+            })
+            .then(() => {
+                return this.checkFragment();
+            });
     }
 
-    checkFragment(externalHash) {
-        this.hashFragmentParams = this.getHashFragmentParams(externalHash);
-
-        if (this.hashFragmentParams) {
-            let accessToken = this.hashFragmentParams.access_token;
-            let idToken = this.hashFragmentParams.id_token;
-            let sessionState = this.hashFragmentParams.session_state;
-            let expiresIn = this.hashFragmentParams.expires_in;
-
-            if (!sessionState) {
-                console.warn('session state not present');
-                return;
+    discoveryUrls() {
+        return new Promise((resolve, reject) => {
+            let discoveryStore = this.storage.getItem('discovery');
+            if (discoveryStore) {
+                this.discovery = JSON.parse(discoveryStore);
             }
 
-            this.processJWTToken(idToken, accessToken).then((jwt) => {
-                if (jwt) {
-                    this.storeIdToken(idToken, jwt.payload.exp);
-                    this.storeAccessToken(accessToken, expiresIn);
-                    this.authentications.basicAuth.username = jwt.payload.preferred_username;
-                    this.saveUsername(jwt.payload.preferred_username);
-                    this.silentRefresh();
+            if (!this.discovery) {
+                let postBody = {}, pathParams = {}, queryParams = {}, formParams = {}, headerParams = {};
+                let authNames = [];
+                let contentTypes = ['application/json'];
+                let accepts = ['application/json'];
+
+                let url = '.well-known/openid-configuration';
+                this.callApi(
+                    url, 'GET',
+                    pathParams, queryParams, headerParams, formParams, postBody,
+                    authNames, contentTypes, accepts, {}
+                ).then((discovery) => {
+                    this.discovery = {};
+                    this.discovery.loginUrl = discovery.authorization_endpoint;
+                    this.discovery.logoutUrl = discovery.end_session_endpoint;
+                    this.discovery.grantTypesSupported = discovery.grant_types_supported;
+                    this.discovery.issuer = discovery.issuer;
+                    this.discovery.tokenEndpoint = discovery.token_endpoint;
+                    this.discovery.userinfoEndpoint = discovery.userinfo_endpoint;
+                    this.discovery.jwksUri = discovery.jwks_uri;
+                    this.discovery.sessionCheckIFrameUrl = discovery.check_session_iframe;
+
+                    this.emit('discovery', this.discovery);
+                    this.storage.setItem('discovery', JSON.stringify(this.discovery));
+                    resolve(discovery);
+                }, (error) => {
+                    console.log(error);
+                    reject(error.error);
+                });
+            } else {
+                this.emit('discovery', this.discovery);
+                resolve(this.discovery);
+            }
+        });
+
+    }
+
+    loadJwks() {
+        return new Promise((resolve, reject) => {
+            let jwksStore = this.storage.getItem('jwks');
+            if (jwksStore) {
+                this.jwks = JSON.parse(jwksStore);
+            }
+
+            if (this.discovery.jwksUri) {
+                if (!this.jwks) {
+                    let postBody = {}, pathParams = {}, queryParams = {}, formParams = {}, headerParams = {};
+                    let authNames = [];
+                    let contentTypes = ['application/json'];
+                    let accepts = ['application/json'];
+
+                    this.callCustomApi(
+                        this.discovery.jwksUri, 'GET',
+                        pathParams, queryParams, headerParams, formParams, postBody,
+                        authNames, contentTypes, accepts, {}
+                    ).then((jwks) => {
+                        this.jwks = jwks;
+                        this.emit('jwks', jwks);
+                        this.storage.setItem('jwks', JSON.stringify(jwks));
+                        resolve(jwks);
+                    }, (error) => {
+                        reject(error.error);
+                    });
+                } else {
+                    this.emit('jwks', this.jwks);
+                    resolve(this.jwks);
                 }
-            }, (error) => {
-                console.log(error);
-            });
-        } else {
-            if (this.isValidAccessToken()) {
-                let accessToken = this.storage.getItem('access_token');
-                this.setToken(accessToken, null);
+            } else {
+                reject('jwks error');
             }
+        });
+    }
 
-            if (this.config.oauth2.skipLoginForm) {
-                this.implicitLogin();
+    checkFragment(externalHash) {// jshint ignore:line
+        return new Promise((resolve, reject) => {
+
+            this.hashFragmentParams = this.getHashFragmentParams(externalHash);
+
+            if (this.hashFragmentParams) {
+                let accessToken = this.hashFragmentParams.access_token;
+                let idToken = this.hashFragmentParams.id_token;
+                let sessionState = this.hashFragmentParams.session_state;
+                let expiresIn = this.hashFragmentParams.expires_in;
+
+                if (!sessionState) {
+                    reject('session state not present');
+                }
+
+                this.processJWTToken(idToken, accessToken).then((jwt) => {
+                    if (jwt) {
+                        this.storeIdToken(idToken, jwt.payload.exp);
+                        this.storeAccessToken(accessToken, expiresIn);
+                        this.authentications.basicAuth.username = jwt.payload.preferred_username;
+                        this.saveUsername(jwt.payload.preferred_username);
+                        this.silentRefresh();
+                        resolve(accessToken);
+                    }
+                }, (error) => {
+                    reject('Validation JWT error' + error);
+                });
+            } else {
+                if (this.isValidAccessToken()) {
+                    let accessToken = this.storage.getItem('access_token');
+                    this.setToken(accessToken, null);
+                    resolve(accessToken);
+                } else if (this.config.oauth2.skipLoginForm) {
+                    this.implicitLogin();
+                }
             }
-        }
+        });
+
     }
 
     processJWTToken(jwt) {
@@ -124,22 +214,7 @@ class Oauth2Auth extends AlfrescoApiClient {
                     } else {
                         reject('Invalid JWT');
                     }
-                } else {
-
-                    this.loadJwks().then((jwks) => {
-                        this.jwks = jwks;
-                        let validObj = this.validateJWKS(this.jwks, jwt, payload, header);
-                        if (validObj) {
-                            resolve(validObj);
-                        } else {
-                            reject('Invalid JWT');
-                        }
-                    }, (error) => {
-                        reject(error);
-                    });
-
                 }
-
             }
         });
     }
@@ -162,32 +237,6 @@ class Oauth2Auth extends AlfrescoApiClient {
         }
     }
 
-    loadJwks() {
-        var postBody = {}, pathParams = {}, queryParams = {}, formParams = {}, headerParams = {};
-        var authNames = [];
-        var contentTypes = ['application/json'];
-        var accepts = ['application/json'];
-
-        return new Promise((resolve, reject) => {
-            if (this.discovery.jwksUri) {
-                this.callCustomApi(
-                    this.discovery.jwksUri, 'GET',
-                    pathParams, queryParams, headerParams, formParams, postBody,
-                    authNames, contentTypes, accepts, {}
-                ).then((jwks) => {
-                    resolve(jwks);
-                    this.emit('jwks', jwks);
-                    resolve(this.discovery);
-                }, (error) => {
-                    console.log(error);
-                    reject(error.error);
-                });
-            } else {
-                reject('jwks error');
-            }
-        });
-    }
-
     storeIdToken(idToken, exp) {
         this.storage.setItem('id_token', idToken);
         this.storage.setItem('id_token_expires_at', Number(exp * 1000).toString());
@@ -206,40 +255,6 @@ class Oauth2Auth extends AlfrescoApiClient {
         this.setToken(accessToken, null);
     }
 
-    async discoveryUrls() { // jshint ignore:line
-        var postBody = {}, pathParams = {}, queryParams = {}, formParams = {}, headerParams = {};
-        var authNames = [];
-        var contentTypes = ['application/json'];
-        var accepts = ['application/json'];
-
-        this.promise = new Promise((resolve, reject) => {
-
-            var url = '.well-known/openid-configuration';
-            this.callApi(
-                url, 'GET',
-                pathParams, queryParams, headerParams, formParams, postBody,
-                authNames, contentTypes, accepts, {}
-            ).then((discovery) => {
-                this.discovery.loginUrl = discovery.authorization_endpoint;
-                this.discovery.logoutUrl = discovery.end_session_endpoint;
-                this.discovery.grantTypesSupported = discovery.grant_types_supported;
-                this.discovery.issuer = discovery.issuer;
-                this.discovery.tokenEndpoint = discovery.token_endpoint;
-                this.discovery.userinfoEndpoint = discovery.userinfo_endpoint;
-                this.discovery.jwksUri = discovery.jwks_uri;
-                this.discovery.sessionCheckIFrameUrl = discovery.check_session_iframe;
-
-                this.emit('discovery', this.discovery);
-                resolve(this.discovery);
-            }, (error) => {
-                console.log(error);
-                reject(error.error);
-            });
-        });
-
-        return this.promise;
-    }
-
     saveUsername(username) {
         if (this.storage.supportsStorage()) {
             this.storage.setItem('USERNAME', username);
@@ -248,7 +263,7 @@ class Oauth2Auth extends AlfrescoApiClient {
 
     implicitLogin() {
         if (!this.isValidToken() || !this.isValidAccessToken()) {
-            if (this.discovery.loginUrl) {
+            if (this.discovery && this.discovery.loginUrl) {
                 this.redirectLogin();
             } else {
                 this.on('discovery', () => {
@@ -422,11 +437,6 @@ class Oauth2Auth extends AlfrescoApiClient {
         };
 
         iframe.addEventListener('load', this.iFameHashListner);
-    }
-
-    iframeHashListner() {
-        let hash = document.getElementById('silent_refresh_token_iframe').contentWindow.location.hash;
-        this.checkFragment(hash);
     }
 
     destroyIframe() {
@@ -623,6 +633,8 @@ class Oauth2Auth extends AlfrescoApiClient {
         this.storage.removeItem('id_token_stored_at');
 
         this.storage.removeItem('nonce');
+        this.storage.removeItem('jwks');
+        this.storage.removeItem('discovery');
     }
 }
 
