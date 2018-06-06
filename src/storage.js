@@ -8,10 +8,6 @@ class Storage {
         }
     }
 
-    static getStorage() {
-        return this._storage;
-    }
-
     supportsStorage() {
         try {
             return 'sessionStorage' in window && window.sessionStorage !== null;
@@ -20,10 +16,8 @@ class Storage {
         }
     }
 
-    static setStorage() {
-        if (this.supportsStorage()) {
-            this._storage = window.sessionStorage;
-        }
+    setStorage(storage) {
+        this._storage = storage;
     }
 
     setItem(key, value) {
@@ -32,9 +26,15 @@ class Storage {
         }
     }
 
+    removeItem(key) {
+        if (this.supportsStorage()) {
+            this._storage.removeItem(key);
+        }
+    }
+
     getItem(value) {
         if (this.supportsStorage()) {
-            this._storage.getItem(value);
+            return this._storage.getItem(value);
         }
     }
 }

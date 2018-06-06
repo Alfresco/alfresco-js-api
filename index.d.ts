@@ -5311,6 +5311,9 @@ declare namespace AlfrescoApi {
 
     export interface OauthApi extends AuthApi {
         refresh(): Promise<string>;
+
+        isValidToken: boolean;
+        isValidAccessToken: boolean;
     }
 
     export interface EcmAuthApi extends AuthApi {
@@ -5325,7 +5328,7 @@ declare namespace AlfrescoApi {
         implicit: boolean;
         redirectUri: string;
         refreshTokenTimeout: number;
-
+        skipLoginForm: boolean;
     }
 }
 

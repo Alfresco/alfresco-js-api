@@ -36,7 +36,7 @@ class Oauth2Auth extends AlfrescoApiClient {
             }
 
             if (!this.config.oauth2.refreshTokenTimeout) {
-                this.config.oauth2.refreshTokenTimeout = 600000;
+                this.config.oauth2.refreshTokenTimeout = 40000;
             }
 
             this.basePath = this.config.oauth2.host; //Auth Call
