@@ -86,7 +86,9 @@ declare namespace AlfrescoApi {
 
         loginTicket(ticket: string): any;
 
-        refresh(): Promise<string>;
+        refreshToken(): Promise<string>;
+
+        implicitLogin(): Promise<any>;
 
         getTicket(): Array<string>;
 
@@ -97,6 +99,14 @@ declare namespace AlfrescoApi {
         setTicket(ticketEcm: any, ticketBpm: any): void;
 
         config: AlfrescoApiConfig;
+
+        isBpmLoggedIn(): boolean;
+
+        isEcmLoggedIn(): boolean;
+
+        getBpmUsername(): string;
+
+        getEcmUsername(): string;
 
         on(nameEvent: string, callBack: any);
 
@@ -5312,10 +5322,10 @@ declare namespace AlfrescoApi {
         secret: string;
         host: string;
         scope: string;
-        implicitFlow: boolean;
+        implicit: boolean;
         redirectUri: string;
         refreshTokenTimeout: number;
-        skipLoginForm: boolean;
+
     }
 }
 
