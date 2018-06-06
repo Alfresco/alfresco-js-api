@@ -41,7 +41,9 @@ class oauth2Auth extends AlfrescoApiClient {
 
             this.setStorage();
 
-            this.initOauth();
+            if (this.config.oauth2.implicit) {
+                this.initOauth();
+            }
 
             if (this.config.accessToken) {
                 this.setTicket(this.config.accessToken);
@@ -486,7 +488,6 @@ class oauth2Auth extends AlfrescoApiClient {
 
     /**
      * Refresh the  Token
-     *
      * */
     refreshToken() {
         var postBody = {}, pathParams = {}, queryParams = {}, formParams = {};

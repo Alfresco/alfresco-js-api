@@ -139,7 +139,8 @@ describe('Oauth2  test', function () {
                 this.alfrescoJsApi.refreshToken().then(() => {
                     expect(this.alfrescoJsApi.ecmClient.authentications.basicAuth.accessToken).to.be.equal('f8bccca0-76cf-4bd9-bb16-a867ffdd5a35');
                     done();
-                }, ()=> {
+                }, (error)=> {
+                    console.log('error' + error);
                 });
             });
         });

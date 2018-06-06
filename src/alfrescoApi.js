@@ -409,8 +409,12 @@ class AlfrescoApi {
      * refresh token
      * */
     refreshToken() {
-        if (this._isOauthConfiguration()) {
-            throw 'Missing the required oauth2 configuration';
+        if (!this._isOauthConfiguration()) {
+            return Promise.reject('Missing the required oauth2 configuration');
+        }
+
+        if (this.config.oauth2.implicit) {
+            return Promise.reject('Manual refresh token not possible in implicit flow');
         }
 
         return this.oauth2Auth.refreshToken();
