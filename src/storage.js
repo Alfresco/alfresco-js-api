@@ -2,6 +2,12 @@
 
 class Storage {
 
+    constructor() {
+        if (this.supportsStorage()) {
+            this._storage = window.sessionStorage;
+        }
+    }
+
     static getStorage() {
         return this._storage;
     }
