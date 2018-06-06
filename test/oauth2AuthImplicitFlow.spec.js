@@ -104,5 +104,29 @@ describe('Oauth2 Implicit flow test', function () {
             done();
         });
     });
+
+    it('should execute the implicit login directly if skipLoginForm is true ', function (done) {
+        window = {location: {}};
+        this.oauth2Mock.get200Discovery();
+
+        this.oauth2Auth = new Oauth2Auth({
+            oauth2: {
+                host: this.hostOauth2,
+                clientId: 'activiti',
+                secret: '',
+                scope: 'openid',
+                implicit: true,
+                redirectUri: 'redirectUri',
+                skipLoginForm: true
+            }
+        });
+
+        this.oauth2Auth.on('implicit_redirect', (url) => {
+            expect(window.location.href).contain('http://myOauthUrl:30081/auth/realms/springboot/protocol/' +
+                'openid-connect/auth?');
+            done();
+        });
+
+    });
 });
 

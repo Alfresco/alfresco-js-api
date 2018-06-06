@@ -95,6 +95,10 @@ class oauth2Auth extends AlfrescoApiClient {
                 let accessToken = this.storage.getItem('access_token');
                 this.setToken(accessToken, null);
             }
+
+            if (this.config.oauth2.skipLoginForm) {
+                this.implicitLogin();
+            }
         }
     }
 
