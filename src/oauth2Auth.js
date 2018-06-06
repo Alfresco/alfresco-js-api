@@ -27,8 +27,8 @@ class oauth2Auth extends AlfrescoApiClient {
                 throw 'Missing the required oauth2 secret parameter';
             }
 
-            if (this.config.oauth2.silentRefreshTimeout === undefined && this.config.oauth2.implicit) {
-                this.config.oauth2.silentRefreshTimeout = 1000 * 20;
+            if (!this.config.oauth2.refreshTokenTimeout) {
+                this.config.oauth2.refreshTokenTimeout = 600000;
             }
 
             this.basePath = this.config.oauth2.host; //Auth Call
@@ -391,7 +391,7 @@ class oauth2Auth extends AlfrescoApiClient {
         setTimeout(() => {
             this.destroyIframe();
             this.createIframe();
-        }, this.config.oauth2.silentRefreshTimeout);
+        }, this.config.oauth2.refreshTokenTimeout);
     }
 
     createIframe() {

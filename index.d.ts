@@ -28,6 +28,11 @@ declare class AlfrescoApi {
 
     config: AlfrescoApi.AlfrescoApiConfig;
 
+    isBpmLoggedIn(): boolean;
+    isEcmLoggedIn() : boolean;
+    getBpmUsername(): string;
+    getEcmUsername(): string;
+
     Activiti: AlfrescoApi.Activiti;
     Auth: AlfrescoApi.Auth;
     Core: AlfrescoApi.Core;
@@ -5293,9 +5298,13 @@ declare namespace AlfrescoApi {
     }
 
     export interface Oauth2Config {
-        clientId?: string;
-        secret?: string;
-        host?: string;
+        clientId: string;
+        secret: string;
+        host: string;
+        scope: string;
+        implicit: boolean;
+        redirectUri: string;
+        refreshTokenTimeout: number;
     }
 }
 

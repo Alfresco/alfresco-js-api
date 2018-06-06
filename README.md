@@ -317,7 +317,45 @@ this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
 ```
 ### Login with OAUTH2 Alfresco authorization server
 
-If you have installed the Alfresco authorization server you can login with this option.
+## Implicit Flow
+
+If your want to be redirect to the authorization server and login there you can use the implicit flow to login
+
+### Example
+
+```javascript
+this.alfrescoJsApi = new AlfrescoApi({
+        oauth2: {
+            host: 'HOST_OAUTH2_SERVER',
+            clientId: 'YOUR_CLIENT_ID',
+            secret: 'SECRET',
+            scope: 'openid',
+            implicit: true,
+            redirectUri: 'YOUR_HOME_APP_URL',
+            silentRefreshTimeout: '600000' //Optional parameter 10 minutes default value
+        },
+        provider: 'OAUTH'
+});
+
+```
+
+#### oauth2 properties
+
+Property | Description  | default value|
+------------- | ------------- | -------------|
+host| Your oauth2 server URL| null |
+clientId| Your clientId oauth2 | null |
+secret| Your secret oauth2| null |
+scope| Your scope | null |
+implicit| true/false | false |
+redirectUri|  url to be redirect after login| null|
+refreshTokenTimeout|  millisecond value, after how many millisecond youw ant refresh the token| 600000|
+
+
+The alfresco-js-api will automatically redirect you to the login page anf refresh the token if necessary
+
+## Password Flow
+
 If your auth endpoint is different from the standard one "/oauth/token" you can override it through the property authPath
 
 ### Example
