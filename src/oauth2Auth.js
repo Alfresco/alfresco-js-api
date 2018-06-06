@@ -588,6 +588,8 @@ class oauth2Auth extends AlfrescoApiClient {
 
         this.cleanStorage();
 
+        this.setToken(null, null);
+
         var separation = this.discovery.logoutUrl.indexOf('?') > -1 ? '&' : '?';
 
         var logoutUrl = this.discovery.logoutUrl +
