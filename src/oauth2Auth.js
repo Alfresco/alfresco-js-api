@@ -4,7 +4,7 @@ var AlfrescoApiClient = require('./alfrescoApiClient');
 var Emitter = require('event-emitter');
 var rs = require('jsrsasign');
 
-class oauth2Auth extends AlfrescoApiClient {
+class Oauth2Auth extends AlfrescoApiClient {
 
     /**
      * @param {Object} config
@@ -31,7 +31,7 @@ class oauth2Auth extends AlfrescoApiClient {
                 throw 'Missing the required oauth2 secret parameter';
             }
 
-            if ((this.config.oauth2.redirectUri === undefined || this.config.oauth2.redirectUri === null) && this.config.oauth2.implicit) {
+            if ((this.config.oauth2.redirectUri === undefined || this.config.oauth2.redirectUri === null) && this.config.oauth2.implicitFlow) {
                 throw 'Missing redirectUri required parameter';
             }
 
@@ -47,7 +47,7 @@ class oauth2Auth extends AlfrescoApiClient {
 
             this.host = this.config.oauth2.host;
 
-            if (this.config.oauth2.implicit) {
+            if (this.config.oauth2.implicitFlow) {
                 this.initOauth();
             }
 
@@ -297,7 +297,7 @@ class oauth2Auth extends AlfrescoApiClient {
     }
 
     redirectLogin() {
-        if (this.config.oauth2.implicit && typeof window !== 'undefined') {
+        if (this.config.oauth2.implicitFlow && typeof window !== 'undefined') {
             let href = this.composeImplicitLoginUrl();
             window.location.href = href;
             this.emit('implicit_redirect', href);
@@ -606,7 +606,7 @@ class oauth2Auth extends AlfrescoApiClient {
             '&id_token_hint=' +
             encodeURIComponent(id_token);
 
-        if (this.config.oauth2.implicit && typeof window !== 'undefined') {
+        if (this.config.oauth2.implicitFlow && typeof window !== 'undefined') {
             window.location.href = logoutUrl;
         }
     }
@@ -626,5 +626,5 @@ class oauth2Auth extends AlfrescoApiClient {
     }
 }
 
-Emitter(oauth2Auth.prototype); // jshint ignore:line
-module.exports = oauth2Auth;
+Emitter(Oauth2Auth.prototype); // jshint ignore:line
+module.exports = Oauth2Auth;

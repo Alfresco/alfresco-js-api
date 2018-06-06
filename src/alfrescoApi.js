@@ -17,6 +17,7 @@ var BpmAuth = require('./bpmAuth');
 var Oauth2Auth = require('./oauth2Auth');
 var EcmClient = require('./ecmClient');
 var BpmClient = require('./bpmClient');
+var Storage = require('./storage');
 
 class AlfrescoApi {
     /**
@@ -39,6 +40,8 @@ class AlfrescoApi {
         if (!config) {
             config = {};
         }
+
+        this.storage = new Storage();
 
         this.config = {
             hostEcm: config.hostEcm || 'http://127.0.0.1:8080',
@@ -423,7 +426,7 @@ class AlfrescoApi {
             return Promise.reject('Missing the required oauth2 configuration');
         }
 
-        if (this.config.oauth2.implicit) {
+        if (this.config.oauth2.implicitFlow) {
             return Promise.reject('Manual refresh token not possible in implicit flow');
         }
 

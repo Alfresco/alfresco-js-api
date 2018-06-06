@@ -20,7 +20,7 @@ describe('Oauth2 Implicit flow test', function () {
                 clientId: 'activiti',
                 secret: '',
                 scope: 'openid',
-                implicit: true,
+                implicitFlow: true,
                 redirectUri: 'redirectUri'
             }
         });
@@ -42,7 +42,7 @@ describe('Oauth2 Implicit flow test', function () {
                     clientId: 'activiti',
                     secret: '',
                     scope: 'openid',
-                    implicit: true
+                    implicitFlow: true
                 }
             });
         } catch (error) {
@@ -61,7 +61,7 @@ describe('Oauth2 Implicit flow test', function () {
                 clientId: 'activiti',
                 secret: '',
                 scope: 'openid',
-                implicit: true,
+                implicitFlow: true,
                 redirectUri: 'redirectUri'
             }
         });
@@ -85,7 +85,7 @@ describe('Oauth2 Implicit flow test', function () {
                 clientId: 'activiti',
                 secret: '',
                 scope: 'openid',
-                implicit: true,
+                implicitFlow: true,
                 redirectUri: 'redirectUri'
             }
         });
@@ -115,7 +115,7 @@ describe('Oauth2 Implicit flow test', function () {
                 clientId: 'activiti',
                 secret: '',
                 scope: 'openid',
-                implicit: true,
+                implicitFlow: true,
                 redirectUri: 'redirectUri',
                 skipLoginForm: true
             }

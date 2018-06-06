@@ -1,8 +1,8 @@
 'use strict';
 var Emitter = require('event-emitter');
 var ApiClient = require('./alfresco-core-rest-api/src/ApiClient');
-var Storage = require('./storage');
 var superagent = require('superagent');
+var Storage = require('./storage');
 
 class AlfrescoApiClient extends ApiClient {
 

@@ -333,7 +333,7 @@ host| Your oauth2 server URL| null |
 clientId| Your clientId oauth2 | null |
 secret| Your secret oauth2| null |
 scope| Your scope | null |
-implicit| true/false | false |
+implicitFlow| true/false | false |
 redirectUri|  url to be redirect after login| null|
 refreshTokenTimeout|  millisecond value, after how many millisecond youw ant refresh the token| 600000|
 skipLoginForm|  direct execute the implicit login without the need od call this.alfrescoJsApi.implicitLogin() method|   false|
@@ -361,7 +361,7 @@ this.alfrescoJsApi = new AlfrescoApi({
             clientId: 'YOUR_CLIENT_ID',
             secret: 'SECRET',
             scope: 'openid',
-            implicit: true,
+            implicitFlow: true,
             redirectUri: 'YOUR_HOME_APP_URL',
             silentRefreshTimeout: '600000' //Optional parameter 10 minutes default value
         },
@@ -381,7 +381,7 @@ this.alfrescoJsApi = new AlfrescoApi({
             clientId: 'YOUR_CLIENT_ID',
             secret: 'SECRET',
             scope: 'openid',
-            implicit: true,
+            implicitFlow: true,
             redirectUri: 'YOUR_HOME_APP_URL',
             silentRefreshTimeout: '600000' //Optional parameter 10 minutes default value,
             skipLoginForm: true

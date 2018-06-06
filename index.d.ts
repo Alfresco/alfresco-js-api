@@ -5312,7 +5312,7 @@ declare namespace AlfrescoApi {
         secret: string;
         host: string;
         scope: string;
-        implicit: boolean;
+        implicitFlow: boolean;
         redirectUri: string;
         refreshTokenTimeout: number;
         skipLoginForm: boolean;

@@ -1,6 +1,10 @@
 'use strict';
 
-class storage {
+class Storage {
+
+    static getStorage() {
+        return this._storage;
+    }
 
     supportsStorage() {
         try {
@@ -10,7 +14,7 @@ class storage {
         }
     }
 
-    setStorage() {
+    static setStorage() {
         if (this.supportsStorage()) {
             this._storage = window.sessionStorage;
         }
@@ -28,4 +32,5 @@ class storage {
         }
     }
 }
-module.exports = storage;
+
+module.exports = Storage;
