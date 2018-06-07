@@ -28,7 +28,7 @@ class Oauth2Auth extends AlfrescoApiClient {
             }
 
             if (this.config.oauth2.secret === undefined || this.config.oauth2.secret === null) {
-                throw 'Missing the required oauth2 secret parameter';
+                this.config.oauth2.secret = '';
             }
 
             if ((this.config.oauth2.redirectUri === undefined || this.config.oauth2.redirectUri === null) && this.config.oauth2.implicitFlow) {
