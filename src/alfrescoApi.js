@@ -216,7 +216,7 @@ class AlfrescoApi {
             username = username.trim();
         }
 
-        if (this._isBpmConfiguration()) {
+        if (this.isBpmConfiguration()) {
             var bpmPromise = this.bpmAuth.login(username, password);
 
             bpmPromise.then((ticketBpm) => {
@@ -225,7 +225,7 @@ class AlfrescoApi {
             });
 
             return bpmPromise;
-        } else if (this._isEcmConfiguration()) {
+        } else if (this.isEcmConfiguration()) {
             var ecmPromise = this.ecmAuth.login(username, password);
 
             ecmPromise.then((ticketEcm) => {
@@ -237,7 +237,7 @@ class AlfrescoApi {
 
             return ecmPromise;
 
-        } else if (this._isEcmBpmConfiguration()) {
+        } else if (this.isEcmBpmConfiguration()) {
             var bpmEcmPromise = this._loginBPMECM(username, password);
 
             bpmEcmPromise.then((data) => {
@@ -247,7 +247,7 @@ class AlfrescoApi {
             });
 
             return bpmEcmPromise;
-        } else if (this._isOauthConfiguration()) {
+        } else if (this.isOauthConfiguration()) {
 
             var oauth2AuthPromise;
 
@@ -263,7 +263,7 @@ class AlfrescoApi {
     }
 
     implicitLogin() {
-        if (!this._isOauthConfiguration()) {
+        if (!this.isOauthConfiguration()) {
             return Promise.reject('Missing the required oauth2 configuration');
         }
 
@@ -327,9 +327,9 @@ class AlfrescoApi {
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
     logout() {
-        if (this._isBpmConfiguration()) {
+        if (this.isBpmConfiguration()) {
             return this.bpmAuth.logout();
-        } else if (this._isEcmConfiguration()) {
+        } else if (this.isEcmConfiguration()) {
             var ecmPromise = this.ecmAuth.logout();
             ecmPromise.then(() => {
                 this.config.ticket = undefined;
@@ -337,9 +337,9 @@ class AlfrescoApi {
             });
 
             return ecmPromise;
-        } else if (this._isEcmBpmConfiguration()) {
+        } else if (this.isEcmBpmConfiguration()) {
             return this._logoutBPMECM();
-        } else if (this._isOauthConfiguration()) {
+        } else if (this.isOauthConfiguration()) {
             this.oauth2Auth.logOut();
         }
     }
@@ -375,19 +375,19 @@ class AlfrescoApi {
      * @returns {Boolean} is logged in
      */
     isLoggedIn() {
-        if (this._isBpmConfiguration()) {
+        if (this.isBpmConfiguration()) {
             return this.bpmAuth.isLoggedIn();
-        } else if (this._isEcmConfiguration()) {
+        } else if (this.isEcmConfiguration()) {
             return this.ecmAuth.isLoggedIn();
-        } else if (this._isEcmBpmConfiguration()) {
+        } else if (this.isEcmBpmConfiguration()) {
             return this.ecmAuth.isLoggedIn() && this.bpmAuth.isLoggedIn();
-        } else if (this._isOauthConfiguration()) {
+        } else if (this.isOauthConfiguration()) {
             return this.oauth2Auth.isLoggedIn();
         }
     }
 
     isBpmLoggedIn() {
-        if (this._isOauthConfiguration()) {
+        if (this.isOauthConfiguration()) {
             return this.oauth2Auth.isLoggedIn();
         } else {
             return this.bpmAuth.isLoggedIn();
@@ -395,7 +395,7 @@ class AlfrescoApi {
     }
 
     isEcmLoggedIn() {
-        if (this._isOauthConfiguration()) {
+        if (this.isOauthConfiguration()) {
             return this.oauth2Auth.isLoggedIn();
         } else {
             return this.ecmAuth.isLoggedIn();
@@ -403,7 +403,7 @@ class AlfrescoApi {
     }
 
     getBpmUsername() {
-        if (this._isOauthConfiguration()) {
+        if (this.isOauthConfiguration()) {
             return this.oauth2Auth.storage.getItem('USERNAME');
         } else {
             return this.bpmAuth.storage.getItem('APS_USERNAME');
@@ -411,7 +411,7 @@ class AlfrescoApi {
     }
 
     getEcmUsername() {
-        if (this._isOauthConfiguration()) {
+        if (this.isOauthConfiguration()) {
             return this.oauth2Auth.storage.getItem('USERNAME');
         } else {
             return this.ecmAuth.storage.getItem('ACS_USERNAME');
@@ -422,7 +422,7 @@ class AlfrescoApi {
      * refresh token
      * */
     refreshToken() {
-        if (!this._isOauthConfiguration()) {
+        if (!this.isOauthConfiguration()) {
             return Promise.reject('Missing the required oauth2 configuration');
         }
 
@@ -492,19 +492,19 @@ class AlfrescoApi {
         return [this.ecmAuth.getTicket(), this.bpmAuth.getTicket()];
     }
 
-    _isBpmConfiguration() {
+    isBpmConfiguration() {
         return this.config.provider && this.config.provider.toUpperCase() === 'BPM';
     }
 
-    _isEcmConfiguration() {
+    isEcmConfiguration() {
         return this.config.provider && this.config.provider.toUpperCase() === 'ECM';
     }
 
-    _isOauthConfiguration() {
+    isOauthConfiguration() {
         return this.config.provider && this.config.provider.toUpperCase() === 'OAUTH';
     }
 
-    _isEcmBpmConfiguration() {
+    isEcmBpmConfiguration() {
         return this.config.provider && this.config.provider.toUpperCase() === 'ALL';
     }
 

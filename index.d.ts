@@ -38,6 +38,14 @@ declare class AlfrescoApi {
 
     getEcmUsername(): string;
 
+    isBpmConfiguration(): boolean;
+
+    isEcmConfiguration(): boolean;
+
+    isOauthConfiguration(): boolean;
+
+    isEcmBpmConfiguration(): boolean;
+
     Activiti: AlfrescoApi.Activiti;
     Auth: AlfrescoApi.Auth;
     Core: AlfrescoApi.Core;
@@ -110,6 +118,14 @@ declare namespace AlfrescoApi {
 
         on(nameEvent: string, callBack: any);
 
+        isBpmConfiguration(): boolean;
+
+        isEcmConfiguration(): boolean;
+
+        isOauthConfiguration(): boolean;
+
+        isEcmBpmConfiguration(): boolean;
+        
         Activiti: Activiti;
         Auth: Auth;
         Core: Core;
