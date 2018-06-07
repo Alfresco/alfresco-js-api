@@ -36,7 +36,12 @@ class AlfrescoApi {
      *    };
      */
     constructor(config) {
+        config = this.configureJsApi(config);
 
+        Emitter.call(this);
+    }
+
+    configureJsApi(config) {
         if (!config) {
             config = {};
         }
@@ -75,8 +80,7 @@ class AlfrescoApi {
         }
 
         this.initObjects();
-
-        Emitter.call(this);
+        return config;
     }
 
     errorListeners() {
