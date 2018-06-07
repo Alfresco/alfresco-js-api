@@ -125,7 +125,7 @@ declare namespace AlfrescoApi {
         isOauthConfiguration(): boolean;
 
         isEcmBpmConfiguration(): boolean;
-        
+
         Activiti: Activiti;
         Auth: Auth;
         Core: Core;
