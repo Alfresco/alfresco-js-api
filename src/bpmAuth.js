@@ -12,8 +12,6 @@ class BpmAuth extends AlfrescoApiClient {
         super();
         this.className = 'BpmAuth';
 
-        this.username = this.loadUsername();
-
         this.config = config;
         this.ticket = undefined;
 
@@ -39,27 +37,11 @@ class BpmAuth extends AlfrescoApiClient {
         this.config.disableCsrf = disableCsrf;
     }
 
-    supportsLocalStorage() {
-        try {
-            return 'localStorage' in window && window.localStorage !== null;
-        } catch (e) {
-            return false;
+    saveUsername(username) {
+        if (this.storage.supportsStorage()) {
+            this.storage.setItem('APS_USERNAME', username);
         }
     }
-
-    loadUsername() {
-        if (this.supportsLocalStorage()) {
-            return localStorage.getItem('ACS_USERNAME');
-        }
-        return '';
-    }
-
-    saveUsername(value) {
-        if (this.supportsLocalStorage()) {
-            localStorage.setItem('ACS_USERNAME', value);
-        }
-    }
-
     /**
      * login Activiti API
      * @param  {String} username:   // Username to login

@@ -21,7 +21,8 @@ describe('Oauth2  test', function () {
                 oauth2: {
                     host: this.hostOauth2,
                     clientId: 'alfrescoapp',
-                    secret: 'secret'
+                    secret: 'secret',
+                    scope: 'scope'
                 }
             });
 
@@ -41,7 +42,8 @@ describe('Oauth2  test', function () {
                 oauth2: {
                     host: this.hostOauth2,
                     clientId: 'alfrescoapp',
-                    secret: 'secret'
+                    secret: 'secret',
+                    scope: 'scope'
                 }
             });
 
@@ -60,7 +62,8 @@ describe('Oauth2  test', function () {
                 oauth2: {
                     host: this.hostOauth2,
                     clientId: 'alfrescoapp',
-                    secret: 'secret'
+                    secret: 'secret',
+                    scope: 'scope'
                 },
                 provider: 'OAUTH'
             });
@@ -82,7 +85,8 @@ describe('Oauth2  test', function () {
                     host: this.hostOauth2,
                     clientId: 'alfrescoapp',
                     secret: 'secret',
-                    authPath: '/my-custom-auth/token'
+                    authPath: '/my-custom-auth/token',
+                    scope: 'scope'
                 },
                 provider: 'OAUTH'
             });
@@ -103,7 +107,8 @@ describe('Oauth2  test', function () {
                 oauth2: {
                     host: this.hostOauth2,
                     clientId: 'alfrescoapp',
-                    secret: 'secret'
+                    secret: 'secret',
+                    scope: 'scope'
                 },
                 provider: 'OAUTH'
             });
@@ -124,7 +129,8 @@ describe('Oauth2  test', function () {
                 oauth2: {
                     host: this.hostOauth2,
                     clientId: 'alfrescoapp',
-                    secret: 'secret'
+                    secret: 'secret',
+                    scope: 'scope'
                 },
                 provider: 'OAUTH'
             });
@@ -139,7 +145,8 @@ describe('Oauth2  test', function () {
                 this.alfrescoJsApi.refreshToken().then(() => {
                     expect(this.alfrescoJsApi.ecmClient.authentications.basicAuth.accessToken).to.be.equal('f8bccca0-76cf-4bd9-bb16-a867ffdd5a35');
                     done();
-                }, ()=> {
+                }, (error)=> {
+                    console.log('error' + error);
                 });
             });
         });
