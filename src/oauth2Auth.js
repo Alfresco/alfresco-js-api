@@ -609,10 +609,12 @@ class Oauth2Auth extends AlfrescoApiClient {
 
         var separation = this.discovery.logoutUrl.indexOf('?') > -1 ? '&' : '?';
 
+        let redirectLogout = this.config.oauth2.redirectUriLogout || this.config.oauth2.redirectUri;
+
         var logoutUrl = this.discovery.logoutUrl +
             separation +
             'post_logout_redirect_uri=' +
-            encodeURIComponent(this.config.oauth2.redirectUri) +
+            encodeURIComponent(redirectLogout) +
             '&id_token_hint=' +
             encodeURIComponent(id_token);
 
