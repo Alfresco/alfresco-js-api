@@ -47,7 +47,9 @@ class Oauth2Auth extends AlfrescoApiClient {
 
             this.host = this.config.oauth2.host;
 
-            this.initOauth();// jshint ignore:line
+            if (this.config.oauth2.implicitFlow) {
+                this.initOauth();// jshint ignore:line
+            }
 
             if (this.config.accessToken) {
                 this.setTicket(this.config.accessToken);
@@ -63,14 +65,10 @@ class Oauth2Auth extends AlfrescoApiClient {
                 return this.discoveryUrls();
             })
             .then(() => {
-                if (this.config.oauth2.implicitFlow) {
-                    return this.loadJwks();
-                }
+                return this.loadJwks();
             })
             .then(() => {
-                if (this.config.oauth2.implicitFlow) {
-                    return this.checkFragment();
-                }
+                return this.checkFragment();
             });
     }
 
@@ -107,6 +105,7 @@ class Oauth2Auth extends AlfrescoApiClient {
                     this.storage.setItem('discovery', JSON.stringify(this.discovery));
                     resolve(discovery);
                 }, (error) => {
+                    console.log(error);
                     reject(error.error);
                 });
             } else {
@@ -158,19 +157,12 @@ class Oauth2Auth extends AlfrescoApiClient {
 
             this.hashFragmentParams = this.getHashFragmentParams(externalHash);
 
-            if (this.isValidAccessToken()) {
-                let accessToken = this.storage.getItem('access_token');
-                this.setToken(accessToken, null);
-                resolve(accessToken);
-            }
-
             if (this.hashFragmentParams) {
                 let accessToken = this.hashFragmentParams.access_token;
                 let idToken = this.hashFragmentParams.id_token;
                 let sessionState = this.hashFragmentParams.session_state;
                 let expiresIn = this.hashFragmentParams.expires_in;
 
-                window.location.hash = '';
                 if (!sessionState) {
                     reject('session state not present');
                 }
@@ -188,7 +180,11 @@ class Oauth2Auth extends AlfrescoApiClient {
                     reject('Validation JWT error' + error);
                 });
             } else {
-                if (this.config.oauth2.silentLogin) {
+                if (this.isValidAccessToken()) {
+                    let accessToken = this.storage.getItem('access_token');
+                    this.setToken(accessToken, null);
+                    resolve(accessToken);
+                } else if (this.config.oauth2.silentLogin) {
                     this.implicitLogin();
                 }
             }
@@ -357,14 +353,6 @@ class Oauth2Auth extends AlfrescoApiClient {
 
     }
 
-    hasHashCharacter(hash) {
-        return hash.indexOf('#') === 0;
-    }
-
-    isHashRoute(hash) {
-        return hash.indexOf('#/') === 0;
-    }
-
     getHashFragmentParams(externalHash) {
         var hashFragmentParams = null;
 
@@ -377,7 +365,7 @@ class Oauth2Auth extends AlfrescoApiClient {
                 hash = decodeURIComponent(externalHash);
             }
 
-            if (this.hasHashCharacter(hash) && !this.isHashRoute(hash)) {
+            if (hash.indexOf('#') === 0) {
                 const questionMarkPosition = hash.indexOf('?');
 
                 if (questionMarkPosition > -1) {
@@ -469,58 +457,48 @@ class Oauth2Auth extends AlfrescoApiClient {
      * */
     login(username, password) {
         this.promise = new Promise((resolve, reject) => {
-            if (this.discovery) {
-                this.granPasswordLogin(username, password, resolve, reject);
-            } else {
-                this.on('discovery', () => {
-                    this.granPasswordLogin(username, password, resolve, reject);
+            var postBody = {}, pathParams = {}, queryParams = {}, formParams = {};
+
+            var auth = 'Basic ' + new Buffer(this.config.oauth2.clientId + ':' + this.config.oauth2.secret).toString('base64');
+
+            var headerParams = {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': auth
+            };
+
+            formParams = {
+                username: username,
+                password: password,
+                grant_type: 'password',
+                client_id: this.config.oauth2.clientId
+            };
+
+            var authNames = [];
+            var contentTypes = ['application/x-www-form-urlencoded'];
+            var accepts = ['application/json'];
+
+            var url = this.config.oauth2.authPath || '/oauth/token';
+            this.callApi(
+                url, 'POST',
+                pathParams, queryParams, headerParams, formParams, postBody,
+                authNames, contentTypes, accepts, {}
+            ).then(
+                (data) => {
+                    this.saveUsername(username);
+                    this.setToken(data.access_token, data.refresh_token);
+                    resolve(data);
+                },
+                (error) => {
+                    if (error.error.status === 401) {
+                        this.promise.emit('unauthorized');
+                    }
+                    this.promise.emit('error');
+                    reject(error.error);
                 });
-            }
+            Emitter(this.promise); // jshint ignore:line
         });
 
         return this.promise;
-    }
-
-    granPasswordLogin(username, password, resolve, reject) {
-        var postBody = {}, pathParams = {}, queryParams = {}, formParams = {};
-
-        var auth = 'Basic ' + new Buffer(this.config.oauth2.clientId + ':' + this.config.oauth2.secret).toString('base64');
-
-        var headerParams = {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': auth
-        };
-
-        formParams = {
-            username: username,
-            password: password,
-            grant_type: 'password',
-            client_id: this.config.oauth2.clientId
-        };
-
-        var authNames = [];
-        var contentTypes = ['application/x-www-form-urlencoded'];
-        var accepts = ['application/json'];
-
-        this.callCustomApi(
-            this.discovery.tokenEndpoint, 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, {}
-        ).then(
-            (data) => {
-                this.saveUsername(username);
-                this.setToken(data.access_token, data.refresh_token);
-                resolve(data);
-            },
-            (error) => {
-                if (error.error.status === 401) {
-                    this.emit('unauthorized');
-                }
-                this.emit('error');
-                reject(error.error);
-            });
-
-        Emitter(this.promise); // jshint ignore:line
     }
 
     /**
@@ -547,8 +525,8 @@ class Oauth2Auth extends AlfrescoApiClient {
         var accepts = ['application/json'];
 
         this.promise = new Promise((resolve, reject) => {
-            this.callCustomApi(
-                this.discovery.tokenEndpoint, 'POST',
+            this.callApi(
+                '/oauth/token', 'POST',
                 pathParams, queryParams, headerParams, formParams, postBody,
                 authNames, contentTypes, accepts, {}
             ).then(
@@ -558,9 +536,9 @@ class Oauth2Auth extends AlfrescoApiClient {
                 },
                 (error) => {
                     if (error.error.status === 401) {
-                        this.emit('unauthorized');
+                        this.promise.emit('unauthorized');
                     }
-                    this.emit('error');
+                    this.promise.emit('error');
                     reject(error.error);
                 });
         });
@@ -625,7 +603,7 @@ class Oauth2Auth extends AlfrescoApiClient {
     logOut() {
         const id_token = this.getIdToken();
 
-        this.invalidateSession();
+        this.cleanStorage();
 
         this.setToken(null, null);
 
@@ -645,7 +623,7 @@ class Oauth2Auth extends AlfrescoApiClient {
         }
     }
 
-    invalidateSession() {
+    cleanStorage() {
         this.storage.removeItem('access_token');
         this.storage.removeItem('access_token_expires_in');
         this.storage.removeItem('access_token_stored_at');

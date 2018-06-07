@@ -17,6 +17,7 @@ var BpmAuth = require('./bpmAuth');
 var Oauth2Auth = require('./oauth2Auth');
 var EcmClient = require('./ecmClient');
 var BpmClient = require('./bpmClient');
+var Storage = require('./storage');
 
 class AlfrescoApi {
     /**
@@ -39,6 +40,8 @@ class AlfrescoApi {
         if (!config) {
             config = {};
         }
+
+        this.storage = new Storage();
 
         this.config = {
             hostEcm: config.hostEcm || 'http://127.0.0.1:8080',
@@ -213,7 +216,7 @@ class AlfrescoApi {
             username = username.trim();
         }
 
-        if (this._isBpmConfiguration()) {
+        if (this.isBpmConfiguration()) {
             var bpmPromise = this.bpmAuth.login(username, password);
 
             bpmPromise.then((ticketBpm) => {
@@ -222,7 +225,7 @@ class AlfrescoApi {
             });
 
             return bpmPromise;
-        } else if (this._isEcmConfiguration()) {
+        } else if (this.isEcmConfiguration()) {
             var ecmPromise = this.ecmAuth.login(username, password);
 
             ecmPromise.then((ticketEcm) => {
@@ -234,7 +237,7 @@ class AlfrescoApi {
 
             return ecmPromise;
 
-        } else if (this._isEcmBpmConfiguration()) {
+        } else if (this.isEcmBpmConfiguration()) {
             var bpmEcmPromise = this._loginBPMECM(username, password);
 
             bpmEcmPromise.then((data) => {
@@ -244,8 +247,11 @@ class AlfrescoApi {
             });
 
             return bpmEcmPromise;
-        } else if (this._isOauthConfiguration()) {
-            var oauth2AuthPromise = this.oauth2Auth.login(username, password);
+        } else if (this.isOauthConfiguration()) {
+
+            var oauth2AuthPromise;
+
+            oauth2AuthPromise = this.oauth2Auth.login(username, password);
 
             oauth2AuthPromise.then((accessToken) => {
                 this.config.accessToken = accessToken;
@@ -254,6 +260,16 @@ class AlfrescoApi {
 
             return oauth2AuthPromise;
         }
+    }
+
+    implicitLogin() {
+        if (!this.isOauthConfiguration()) {
+            return Promise.reject('Missing the required oauth2 configuration');
+        }
+
+        return new Promise((resolve, reject) => {
+            this.oauth2Auth.implicitLogin();
+        });
     }
 
     setAuthenticationClientECMBPM(authECM, authBPM) {
@@ -311,9 +327,9 @@ class AlfrescoApi {
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
     logout() {
-        if (this.config.provider && this.config.provider.toUpperCase() === 'BPM') {
+        if (this.isBpmConfiguration()) {
             return this.bpmAuth.logout();
-        } else if (this.config.provider && this.config.provider.toUpperCase() === 'ECM') {
+        } else if (this.isEcmConfiguration()) {
             var ecmPromise = this.ecmAuth.logout();
             ecmPromise.then(() => {
                 this.config.ticket = undefined;
@@ -321,8 +337,10 @@ class AlfrescoApi {
             });
 
             return ecmPromise;
-        } else if (this.config.provider && this.config.provider.toUpperCase() === 'ALL') {
+        } else if (this.isEcmBpmConfiguration()) {
             return this._logoutBPMECM();
+        } else if (this.isOauthConfiguration()) {
+            this.oauth2Auth.logOut();
         }
     }
 
@@ -357,14 +375,46 @@ class AlfrescoApi {
      * @returns {Boolean} is logged in
      */
     isLoggedIn() {
-        if (this.config.provider && this.config.provider.toUpperCase() === 'BPM') {
+        if (this.isBpmConfiguration()) {
             return this.bpmAuth.isLoggedIn();
-        } else if (this.config.provider && this.config.provider.toUpperCase() === 'ECM') {
+        } else if (this.isEcmConfiguration()) {
             return this.ecmAuth.isLoggedIn();
-        } else if (this.config.provider && this.config.provider.toUpperCase() === 'ALL') {
+        } else if (this.isEcmBpmConfiguration()) {
             return this.ecmAuth.isLoggedIn() && this.bpmAuth.isLoggedIn();
-        } else if (this.config.provider && this.config.provider.toUpperCase() === 'OAUTH') {
+        } else if (this.isOauthConfiguration()) {
             return this.oauth2Auth.isLoggedIn();
+        }
+    }
+
+    isBpmLoggedIn() {
+        if (this.isOauthConfiguration()) {
+            return this.oauth2Auth.isLoggedIn();
+        } else {
+            return this.bpmAuth.isLoggedIn();
+        }
+    }
+
+    isEcmLoggedIn() {
+        if (this.isOauthConfiguration()) {
+            return this.oauth2Auth.isLoggedIn();
+        } else {
+            return this.ecmAuth.isLoggedIn();
+        }
+    }
+
+    getBpmUsername() {
+        if (this.isOauthConfiguration()) {
+            return this.oauth2Auth.storage.getItem('USERNAME');
+        } else {
+            return this.bpmAuth.storage.getItem('APS_USERNAME');
+        }
+    }
+
+    getEcmUsername() {
+        if (this.isOauthConfiguration()) {
+            return this.oauth2Auth.storage.getItem('USERNAME');
+        } else {
+            return this.ecmAuth.storage.getItem('ACS_USERNAME');
         }
     }
 
@@ -372,8 +422,12 @@ class AlfrescoApi {
      * refresh token
      * */
     refreshToken() {
-        if (this.config.provider !== 'OAUTH') {
-            throw 'Missing the required oauth2 configuration';
+        if (!this.isOauthConfiguration()) {
+            return Promise.reject('Missing the required oauth2 configuration');
+        }
+
+        if (this.config.oauth2.implicitFlow) {
+            return Promise.reject('Manual refresh token not possible in implicit flow');
         }
 
         return this.oauth2Auth.refreshToken();
@@ -403,7 +457,7 @@ class AlfrescoApi {
      * */
     invalidateSession() {
         if (this.oauth2Auth) {
-            this.oauth2Auth.setToken(null, null);
+            //this.oauth2Auth.setToken(null, null);
         } else {
             this.ecmAuth.setTicket(null);
             this.bpmAuth.setTicket(null);
@@ -438,19 +492,19 @@ class AlfrescoApi {
         return [this.ecmAuth.getTicket(), this.bpmAuth.getTicket()];
     }
 
-    _isBpmConfiguration() {
+    isBpmConfiguration() {
         return this.config.provider && this.config.provider.toUpperCase() === 'BPM';
     }
 
-    _isEcmConfiguration() {
+    isEcmConfiguration() {
         return this.config.provider && this.config.provider.toUpperCase() === 'ECM';
     }
 
-    _isOauthConfiguration() {
+    isOauthConfiguration() {
         return this.config.provider && this.config.provider.toUpperCase() === 'OAUTH';
     }
 
-    _isEcmBpmConfiguration() {
+    isEcmBpmConfiguration() {
         return this.config.provider && this.config.provider.toUpperCase() === 'ALL';
     }
 
