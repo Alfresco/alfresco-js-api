@@ -5338,14 +5338,14 @@ declare namespace AlfrescoApi {
 
     export interface Oauth2Config {
         clientId: string;
-        secret: string;
+        secret?: string;
         host: string;
         scope: string;
-        implicit: boolean;
+        implicitFlow: boolean;
         redirectUri: string;
-        refreshTokenTimeout: number;
-        silentLogin: boolean;
-        redirectLogout: string;
+        refreshTokenTimeout?: number;
+        silentLogin?: boolean;
+        redirectUriLogout?: string;
     }
 }
 

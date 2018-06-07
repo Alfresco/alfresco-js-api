@@ -268,7 +268,7 @@ class AlfrescoApi {
         }
 
         return new Promise((resolve, reject) => {
-            this.implicitLogin();
+            this.oauth2Auth.implicitLogin();
         });
     }
 
