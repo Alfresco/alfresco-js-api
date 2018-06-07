@@ -16,7 +16,9 @@ declare class AlfrescoApi {
 
     loginTicket(ticket: string): any;
 
-    refresh(): Promise<string>;
+    refreshToken(): Promise<string>;
+
+    implicitLogin(): Promise<any>;
 
     getTicket(): Array<string>;
 
@@ -27,6 +29,22 @@ declare class AlfrescoApi {
     setTicket(ticketEcm: any, ticketBpm: any): void;
 
     config: AlfrescoApi.AlfrescoApiConfig;
+
+    isBpmLoggedIn(): boolean;
+
+    isEcmLoggedIn(): boolean;
+
+    getBpmUsername(): string;
+
+    getEcmUsername(): string;
+
+    isBpmConfiguration(): boolean;
+
+    isEcmConfiguration(): boolean;
+
+    isOauthConfiguration(): boolean;
+
+    isEcmBpmConfiguration(): boolean;
 
     Activiti: AlfrescoApi.Activiti;
     Auth: AlfrescoApi.Auth;
@@ -76,7 +94,9 @@ declare namespace AlfrescoApi {
 
         loginTicket(ticket: string): any;
 
-        refresh(): Promise<string>;
+        refreshToken(): Promise<string>;
+
+        implicitLogin(): Promise<any>;
 
         getTicket(): Array<string>;
 
@@ -88,7 +108,23 @@ declare namespace AlfrescoApi {
 
         config: AlfrescoApiConfig;
 
+        isBpmLoggedIn(): boolean;
+
+        isEcmLoggedIn(): boolean;
+
+        getBpmUsername(): string;
+
+        getEcmUsername(): string;
+
         on(nameEvent: string, callBack: any);
+
+        isBpmConfiguration(): boolean;
+
+        isEcmConfiguration(): boolean;
+
+        isOauthConfiguration(): boolean;
+
+        isEcmBpmConfiguration(): boolean;
 
         Activiti: Activiti;
         Auth: Auth;
@@ -1640,6 +1676,7 @@ declare namespace AlfrescoApi {
             COUNT = 'COUNT',
             INDEX = 'INDEX'
         }
+
         enum MethodEnum {
             ENUM = 'ENUM',
             FC = 'FC'
@@ -1676,6 +1713,7 @@ declare namespace AlfrescoApi {
             AND = 'AND',
             OR = 'OR'
         }
+
         enum DefaultFTSFieldOperatorEnum {
             AND = 'AND',
             OR = 'OR'
@@ -4316,11 +4354,13 @@ declare namespace AlfrescoApi {
             STANDARD = 'STANDARD',
             DOD5015 = 'DOD5015'
         }
+
         enum VisibilityEnum {
             PUBLIC = 'PUBLIC',
             PRIVATE = 'PRIVATE',
             MODERATED = 'MODERATED'
         }
+
         enum RoleEnum {
             SiteConsumer = 'SiteConsumer',
             SiteCollaborator = 'SiteCollaborator',
@@ -5275,6 +5315,7 @@ declare namespace AlfrescoApi {
         new(config: AlfrescoApiConfig): UploadApi;
 
         uploadFile(fileDefinition?: any, relativePath?: any, rootFolderId?: string, nodeBody?: any, opts?: any): any;
+
         updateFile(fileDefinition?: any, relativePath?: any, nodeId?: string, nodeBody?: any, opts?: any): any;
 
         addNodeUpload(nodeId?: any, nodeBody?: any, opts?: any, formParams?: any): any;
@@ -5286,6 +5327,9 @@ declare namespace AlfrescoApi {
 
     export interface OauthApi extends AuthApi {
         refresh(): Promise<string>;
+
+        isValidToken: boolean;
+        isValidAccessToken: boolean;
     }
 
     export interface EcmAuthApi extends AuthApi {
@@ -5293,9 +5337,15 @@ declare namespace AlfrescoApi {
     }
 
     export interface Oauth2Config {
-        clientId?: string;
+        clientId: string;
         secret?: string;
-        host?: string;
+        host: string;
+        scope: string;
+        implicitFlow: boolean;
+        redirectUri: string;
+        refreshTokenTimeout?: number;
+        silentLogin?: boolean;
+        redirectUriLogout?: string;
     }
 }
 

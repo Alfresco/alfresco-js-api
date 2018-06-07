@@ -37,6 +37,7 @@
         "Modernizr": false,
         "Handlebars": false,
         "spa": true,
-        "ActiveXObject": false
+        "ActiveXObject": false,
+        "window": true
     }
 }

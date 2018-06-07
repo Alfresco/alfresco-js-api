@@ -2,6 +2,7 @@
 var Emitter = require('event-emitter');
 var ApiClient = require('./alfresco-core-rest-api/src/ApiClient');
 var superagent = require('superagent');
+var Storage = require('./storage');
 
 class AlfrescoApiClient extends ApiClient {
 
@@ -10,6 +11,7 @@ class AlfrescoApiClient extends ApiClient {
      * */
     constructor(host) {
         super();
+        this.storage = new Storage();
         this.host = host;
         Emitter.call(this);
     }
@@ -38,9 +40,6 @@ class AlfrescoApiClient extends ApiClient {
     callApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, authNames,
             contentTypes, accepts, returnType, contextRoot, responseType) {
 
-        var eventEmitter = {};
-        Emitter(eventEmitter); // jshint ignore:line
-
         var url;
 
         if (contextRoot) {
@@ -49,6 +48,66 @@ class AlfrescoApiClient extends ApiClient {
         } else {
             url = this.buildUrl(path, pathParams);
         }
+
+        return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, authNames,
+            contentTypes, accepts, returnType, contextRoot, responseType, url);
+    }
+
+    /**
+     * Invokes the REST service using the supplied settings and parameters but not the basepath.
+     *
+     * @param {String} path The base URL to invoke.
+     * @param {String} httpMethod The HTTP method to use.
+     * @param {Object.<String, String>} pathParams A map of path parameters and their values.
+     * @param {Object.<String, Object>} queryParams A map of query parameters and their values.
+     * @param {Object.<String, Object>} headerParams A map of header parameters and their values.
+     * @param {Object.<String, Object>} formParams A map of form parameters and their values.
+     * @param {Object} bodyParam The value to pass as the request body.
+     * @param {String[]} authNames An array of authentication type names.
+     * @param {String[]} contentTypes An array of request MIME types.
+     * @param {String[]} accepts An array of acceptable response MIME types.
+     * @param {(String|Array|ObjectFunction)} returnType The required type to return; can be a string for simple types or the
+     * @param {(String)} contextRoot alternative contextRoot
+     * @param {(String)} responseType  is an enumerated value that returns the type of the response.
+     *                                  It also lets the author change the response type to one "arraybuffer", "blob", "document",
+     *                                  "json", or "text".
+     *                                   If an empty string is set as the value of responseType, it is assumed as type "text".
+     * constructor for a complex type.   * @returns {Promise} A Promise object.
+     */
+    callCustomApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, authNames,
+                  contentTypes, accepts, returnType, contextRoot, responseType) {
+        var url = this.buildUrlCustomBasePath(path, '', pathParams);
+
+        return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, authNames,
+            contentTypes, accepts, returnType, contextRoot, responseType, url);
+    }
+
+    /**
+     * Invokes the REST service using the supplied settings and parameters.
+     *
+     * @param {String} path The base URL to invoke.
+     * @param {String} httpMethod The HTTP method to use.
+     * @param {Object.<String, String>} pathParams A map of path parameters and their values.
+     * @param {Object.<String, Object>} queryParams A map of query parameters and their values.
+     * @param {Object.<String, Object>} headerParams A map of header parameters and their values.
+     * @param {Object.<String, Object>} formParams A map of form parameters and their values.
+     * @param {Object} bodyParam The value to pass as the request body.
+     * @param {String[]} authNames An array of authentication type names.
+     * @param {String[]} contentTypes An array of request MIME types.
+     * @param {String[]} accepts An array of acceptable response MIME types.
+     * @param {(String|Array|ObjectFunction)} returnType The required type to return; can be a string for simple types or the
+     * @param {(String)} contextRoot alternative contextRoot
+     * @param {(String)} responseType  is an enumerated value that returns the type of the response.
+     *                                  It also lets the author change the response type to one "arraybuffer", "blob", "document",
+     *                                  "json", or "text".
+     *                                   If an empty string is set as the value of responseType, it is assumed as type "text".
+     * constructor for a complex type.   * @returns {Promise} A Promise object.
+     */
+    callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, authNames,
+                contentTypes, accepts, returnType, contextRoot, responseType, url) {
+
+        var eventEmitter = {};
+        Emitter(eventEmitter); // jshint ignore:line
 
         var request = this.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
             contentTypes, accepts, responseType, eventEmitter, returnType);
@@ -199,7 +258,7 @@ class AlfrescoApiClient extends ApiClient {
     }
 
     buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
-                  contentTypes, accepts, responseType, eventEmitter, returnType) {
+                 contentTypes, accepts, responseType, eventEmitter, returnType) {
         var request = superagent(httpMethod, url);
 
         // apply authentications
@@ -237,7 +296,7 @@ class AlfrescoApiClient extends ApiClient {
         }
 
         if (contentType === 'application/x-www-form-urlencoded') {
-            request.send(this.normalizeParams(formParams)).on('progress', (event)=> {
+            request.send(this.normalizeParams(formParams)).on('progress', (event) => {
                 this.progress(event, eventEmitter);
             });
         } else if (contentType === 'multipart/form-data') {
@@ -246,18 +305,18 @@ class AlfrescoApiClient extends ApiClient {
                 if (_formParams.hasOwnProperty(key)) {
                     if (this.isFileParam(_formParams[key])) {
                         // file field
-                        request.attach(key, _formParams[key]).on('progress', (event)=> {// jshint ignore:line
+                        request.attach(key, _formParams[key]).on('progress', (event) => {// jshint ignore:line
                             this.progress(event, eventEmitter);
                         });
                     } else {
-                        request.field(key, _formParams[key]).on('progress', (event)=> {// jshint ignore:line
+                        request.field(key, _formParams[key]).on('progress', (event) => {// jshint ignore:line
                             this.progress(event, eventEmitter);
                         });
                     }
                 }
             }
         } else if (bodyParam) {
-            request.send(bodyParam).on('progress', (event)=> {
+            request.send(bodyParam).on('progress', (event) => {
                 this.progress(event, eventEmitter);
             });
         }
