@@ -5344,7 +5344,7 @@ declare namespace AlfrescoApi {
         implicit: boolean;
         redirectUri: string;
         refreshTokenTimeout: number;
-        skipLoginForm: boolean;
+        silentLogin: boolean;
         redirectLogout: string;
     }
 }

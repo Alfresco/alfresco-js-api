@@ -339,7 +339,7 @@ implicitFlow| true/false | false |
 redirectUri|  url to be redirect after login| null|
 redirectLogout|  url to be redirect after logout optional, if is nor present the redirectUri will be used| null|
 refreshTokenTimeout|  millisecond value, after how many millisecond youw ant refresh the token| 40000|
-skipLoginForm|  direct execute the implicit login without the need od call this.alfrescoJsApi.implicitLogin() method|   false|
+silentLogin|  direct execute the implicit login without the need od call this.alfrescoJsApi.implicitLogin() method|   false|
 
 
 The alfresco-js-api will automatically redirect you to the login page anf refresh the token if necessary
@@ -387,7 +387,7 @@ this.alfrescoJsApi = new AlfrescoApi({
             implicitFlow: true,
             redirectUri: 'YOUR_HOME_APP_URL',
             silentRefreshTimeout: '600000' //Optional parameter 10 minutes default value,
-            skipLoginForm: true
+            silentLogin: true
         },
         provider: 'OAUTH'
 });
