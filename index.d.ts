@@ -2,6 +2,8 @@ declare class AlfrescoApi {
 
     constructor(config: AlfrescoApi.AlfrescoApiConfig);
 
+    configureJsApi(config: AlfrescoApi.AlfrescoApiConfig): void;
+
     changeEcmHost(ecmHost: string): void;
 
     changeBpmHost(bpmHost: string): void;
@@ -79,6 +81,8 @@ declare namespace AlfrescoApi {
     export interface AlfrescoApi {
 
         new(config: AlfrescoApiConfig): AlfrescoApi;
+
+        configureJsApi(config: AlfrescoApi.AlfrescoApiConfig): void;
 
         changeEcmHost(ecmHost: string): void;
 
