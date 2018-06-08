@@ -1,4 +1,4 @@
-(function(root, factory) {
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../ApiClient', '../model/ClassDescription'], factory);
@@ -12,7 +12,7 @@
     }
     root.AlfrescoCoreRestApi.ClassesApi = factory(root.AlfrescoCoreRestApi.ApiClient, root.AlfrescoCoreRestApi.ClassDescription);
   }
-}(this, function(ApiClient, ClassDescription) {
+}(this, function (ApiClient, ClassDescription) {
   'use strict';
 
   /**
@@ -28,7 +28,7 @@
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
    * default to {@link module:ApiClient#instance} if unspecified.
    */
-  var exports = function(apiClient) {
+  var exports = function (apiClient) {
     this.apiClient = apiClient || ApiClient.instance;
 
     /**
@@ -45,7 +45,7 @@
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ClassDescription}
      * data is of type: {module:model/ClassDescription}
      */
-    this.getClass = function(className, opts) {
+    this.getClass = function (className, opts) {
       opts = opts || {};
 
       // verify the required parameter 'className' is set
@@ -65,7 +65,7 @@
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = ClassDescription;
-      var contextRoot = 'alfresco/s';
+      var contextRoot = this.apiClient.config.contextRoot + '/s';
 
       return this.apiClient.callApi(
         '/api/classes/{className}', 'GET',

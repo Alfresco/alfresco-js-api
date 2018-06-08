@@ -12,12 +12,14 @@
 [Error rise alfresco-js-api event](https://issues.alfresco.com/jira/browse/ADF-2753)
 [Add newly introduced isFavorite property to Nodes](https://issues.alfresco.com/jira/browse/ADF-3037)
 [Shared nodeId property](https://issues.alfresco.com/jira/browse/ADF-3063)
+[SSO implicit flow](https://issues.alfresco.com/jira/browse/ADF-2795)
 
 
 ## Fixes
 [Disable timeout](https://issues.alfresco.com/jira/browse/ADF-2481)
 [Missing typings for Search API](https://issues.alfresco.com/jira/browse/ADF-2885)
 [getVersionContent type definition missing parameters](https://issues.alfresco.com/jira/browse/ADF-2603)
+[gMetadata URL context root is wrong](https://github.com/Alfresco/alfresco-js-api/issues/338)
 
 <a name="2.3.1"></a>
 # [2.3.1](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.3.1) (25-04-2018)
