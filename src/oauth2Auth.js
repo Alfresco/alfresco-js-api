@@ -104,7 +104,6 @@ class Oauth2Auth extends AlfrescoApiClient {
                     this.storage.setItem('discovery', JSON.stringify(this.discovery));
                     resolve(discovery);
                 }, (error) => {
-                    console.log(error);
                     reject(error.error);
                 });
             } else {
@@ -156,12 +155,19 @@ class Oauth2Auth extends AlfrescoApiClient {
 
             this.hashFragmentParams = this.getHashFragmentParams(externalHash);
 
+            if (this.isValidAccessToken()) {
+                let accessToken = this.storage.getItem('access_token');
+                this.setToken(accessToken, null);
+                resolve(accessToken);
+            }
+
             if (this.hashFragmentParams) {
                 let accessToken = this.hashFragmentParams.access_token;
                 let idToken = this.hashFragmentParams.id_token;
                 let sessionState = this.hashFragmentParams.session_state;
                 let expiresIn = this.hashFragmentParams.expires_in;
 
+                window.location.hash = '';
                 if (!sessionState) {
                     reject('session state not present');
                 }
@@ -178,12 +184,8 @@ class Oauth2Auth extends AlfrescoApiClient {
                 }, (error) => {
                     reject('Validation JWT error' + error);
                 });
-            } else {
-                if (this.isValidAccessToken()) {
-                    let accessToken = this.storage.getItem('access_token');
-                    this.setToken(accessToken, null);
-                    resolve(accessToken);
-                } else if (this.config.oauth2.silentLogin) {
+            }else {
+                if (this.config.oauth2.silentLogin) {
                     this.implicitLogin();
                 }
             }
@@ -360,6 +362,14 @@ class Oauth2Auth extends AlfrescoApiClient {
 
     }
 
+    hasHashCharacter(hash) {
+        return hash.indexOf('#') === 0 ;
+    }
+
+    isHashRoute(hash) {
+        return hash.indexOf('#/') === 0 ;
+    }
+
     getHashFragmentParams(externalHash) {
         var hashFragmentParams = null;
 
@@ -372,7 +382,7 @@ class Oauth2Auth extends AlfrescoApiClient {
                 hash = decodeURIComponent(externalHash);
             }
 
-            if (hash.indexOf('#') === 0) {
+            if (this.hasHashCharacter(hash) && !this.isHashRoute(hash)) {
                 const questionMarkPosition = hash.indexOf('?');
 
                 if (questionMarkPosition > -1) {
