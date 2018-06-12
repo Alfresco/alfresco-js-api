@@ -234,7 +234,8 @@ Property | Description  | default value|
 ------------- | ------------- | -------------|
 hostEcm| (Optional value The Ip or Name of the host where your Alfresco instance is running )|http://127.0.0.1:8080 |
 hostBpm| (Optional value The Ip or Name of the host where your Activiti instance is running )|http://127.0.0.1:9999 |
-oauth2|  (Optional configuration object for alfresco authorization server {host:'HOST_OAUTH2_SERVER', clientId:'YOUR_CLIENT_ID', secret:'SECRET', authPath:'my-custom-auth-endpoint/token'} ||
+authType|  (Optional value can be 'BASIC' or 'OAUTH') | 'BASIC'|
+oauth2|  (Optional configuration for SSO) ||
 contextRoot| (Optional value that define the context Root of the Alfresco ECM API default value is alfresco )|alfresco |
 contextRootBpm| (Optional value that define the context Root of the Activiti API default value is activiti-app )|alfresco |
 provider| (Optional value default value is ECM. This parameter can accept as value ECM BPM or ALL to use the API and Login in the ECM, Activiti BPM or Both )|alfresco |
@@ -368,7 +369,8 @@ this.alfrescoJsApi = new AlfrescoApi({
             redirectUri: 'YOUR_HOME_APP_URL',
             silentRefreshTimeout: '600000' //Optional parameter 10 minutes default value
         },
-        provider: 'OAUTH'
+        authType: 'OAUTH',
+        provider: 'ALL'
 });
 
 this.alfrescoJsApi.implicitLogin();
@@ -389,7 +391,8 @@ this.alfrescoJsApi = new AlfrescoApi({
             silentRefreshTimeout: '600000' //Optional parameter 10 minutes default value,
             silentLogin: true
         },
-        provider: 'OAUTH'
+        authType: 'OAUTH',
+        provider: 'ALL'
 });
 
 ```
@@ -408,7 +411,8 @@ this.alfrescoJsApi = new AlfrescoApi({
             secret: 'SECRET',
             authPath:'my-custom-auth-endpoint/token'
         },
-        provider: 'OAUTH'
+        authType: 'OAUTH',
+        provider: 'ALL'
     });
 
 this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
