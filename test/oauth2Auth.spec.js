@@ -23,7 +23,8 @@ describe('Oauth2  test', function () {
                     clientId: 'alfrescoapp',
                     secret: 'secret',
                     scope: 'scope'
-                }
+                },
+                authType: 'OAUTH'
             });
 
             this.oauth2Auth.login('admin', 'admin').then((data) => {
@@ -44,7 +45,8 @@ describe('Oauth2  test', function () {
                     clientId: 'alfrescoapp',
                     secret: 'secret',
                     scope: 'scope'
-                }
+                },
+                authType: 'OAUTH'
             });
 
             this.oauth2Auth.login('admin', 'admin').then(() => {
@@ -65,14 +67,14 @@ describe('Oauth2  test', function () {
                     secret: 'secret',
                     scope: 'scope'
                 },
-                provider: 'OAUTH'
+                authType: 'OAUTH'
             });
 
             this.alfrescoJsApi.login('admin', 'admin').then(() => {
                 expect(this.alfrescoJsApi.ecmClient.authentications.basicAuth.accessToken).to.be.equal('5c37e781-40a7-4957-adcc-2b171c770a5c');
                 expect(this.alfrescoJsApi.ecmClient.authentications.basicAuth.refreshToken).to.be.equal('15d66b26-3cf7-446a-8db8-1345f2f4485a');
                 done();
-            }, ()=> {
+            }, () => {
             });
         });
 
@@ -88,14 +90,14 @@ describe('Oauth2  test', function () {
                     authPath: '/my-custom-auth/token',
                     scope: 'scope'
                 },
-                provider: 'OAUTH'
+                authType: 'OAUTH'
             });
 
             this.alfrescoJsApi.login('admin', 'admin').then(() => {
                 expect(this.alfrescoJsApi.ecmClient.authentications.basicAuth.accessToken).to.be.equal('5c37e781-40a7-4957-adcc-2b171c770a5c');
                 expect(this.alfrescoJsApi.ecmClient.authentications.basicAuth.refreshToken).to.be.equal('15d66b26-3cf7-446a-8db8-1345f2f4485a');
                 done();
-            }, ()=> {
+            }, () => {
             });
         });
 
@@ -110,13 +112,13 @@ describe('Oauth2  test', function () {
                     secret: 'secret',
                     scope: 'scope'
                 },
-                provider: 'OAUTH'
+                authType: 'OAUTH'
             });
 
             this.alfrescoJsApi.login('admin', 'admin').then(() => {
                 expect(this.oauth2Auth.authentications.basicAuth.password).to.be.not.equal('admin');
                 done();
-            }, ()=> {
+            }, () => {
             });
 
         });
@@ -132,7 +134,7 @@ describe('Oauth2  test', function () {
                     secret: 'secret',
                     scope: 'scope'
                 },
-                provider: 'OAUTH'
+                authType: 'OAUTH'
             });
 
             this.alfrescoJsApi.login('admin', 'admin').then(() => {
@@ -145,7 +147,7 @@ describe('Oauth2  test', function () {
                 this.alfrescoJsApi.refreshToken().then(() => {
                     expect(this.alfrescoJsApi.ecmClient.authentications.basicAuth.accessToken).to.be.equal('f8bccca0-76cf-4bd9-bb16-a867ffdd5a35');
                     done();
-                }, (error)=> {
+                }, (error) => {
                     console.log('error' + error);
                 });
             });

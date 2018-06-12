@@ -5268,6 +5268,7 @@ declare namespace AlfrescoApi {
 
         hostEcm?: string;
         hostBpm?: string;
+        authType?: string;
         oauth2?: Oauth2Config;
         contextRoot?: string;
         contextRootBpm?: string;
