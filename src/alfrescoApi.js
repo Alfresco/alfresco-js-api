@@ -385,14 +385,16 @@ class AlfrescoApi {
      * @returns {Boolean} is logged in
      */
     isLoggedIn() {
-        if (this.isBpmConfiguration()) {
-            return this.bpmAuth.isLoggedIn();
-        } else if (this.isEcmConfiguration()) {
-            return this.ecmAuth.isLoggedIn();
-        } else if (this.isEcmBpmConfiguration()) {
-            return this.ecmAuth.isLoggedIn() && this.bpmAuth.isLoggedIn();
-        } else if (this.isOauthConfiguration()) {
+        if (this.isOauthConfiguration()) {
             return this.oauth2Auth.isLoggedIn();
+        } else {
+            if (this.isBpmConfiguration()) {
+                return this.bpmAuth.isLoggedIn();
+            } else if (this.isEcmConfiguration()) {
+                return this.ecmAuth.isLoggedIn();
+            } else if (this.isEcmBpmConfiguration()) {
+                return this.ecmAuth.isLoggedIn() && this.bpmAuth.isLoggedIn();
+            }
         }
     }
 
