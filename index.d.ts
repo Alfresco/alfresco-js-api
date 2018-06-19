@@ -28,6 +28,8 @@ declare class AlfrescoApi {
 
     getTicketEcm(): string;
 
+    invalidateSession(): void;
+
     setTicket(ticketEcm: any, ticketBpm: any): void;
 
     config: AlfrescoApi.AlfrescoApiConfig;
@@ -107,6 +109,8 @@ declare namespace AlfrescoApi {
         getTicketBpm(): string;
 
         getTicketEcm(): string;
+
+        invalidateSession(): void;
 
         setTicket(ticketEcm: any, ticketBpm: any): void;
 
