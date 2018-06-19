@@ -127,7 +127,7 @@ class BpmAuth extends AlfrescoApiClient {
             ).then(
                 () => {
                     this.promise.emit('logout');
-                    this.setTicket(undefined);
+                    this.invalidateSession();
                     resolve('logout');
                 },
                 (error) => {
