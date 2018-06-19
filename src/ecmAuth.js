@@ -18,6 +18,8 @@ class EcmAuth extends AlfrescoApiClient {
 
         if (this.config.ticketEcm) {
             this.setTicket(config.ticketEcm);
+        } else if (this.storage.getItem('ticket-ECM')) {
+            this.setTicket(this.storage.getItem('ticket-ECM'));
         }
 
         Emitter.call(this);
@@ -145,6 +147,7 @@ class EcmAuth extends AlfrescoApiClient {
     setTicket(ticket) {
         this.authentications.basicAuth.username = 'ROLE_TICKET';
         this.authentications.basicAuth.password = ticket;
+        this.storage.setItem('ticket-ECM', ticket);
         this.ticket = ticket;
     }
 
@@ -155,6 +158,13 @@ class EcmAuth extends AlfrescoApiClient {
      * */
     getTicket() {
         return this.ticket;
+    }
+
+    invalidateSession() {
+        this.storage.removeItem('ticket-ECM');
+        this.authentications.basicAuth.username = null;
+        this.authentications.basicAuth.password = null;
+        this.ticket = null;
     }
 
     /**
