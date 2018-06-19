@@ -20,6 +20,7 @@
 [Missing typings for Search API](https://issues.alfresco.com/jira/browse/ADF-2885)
 [getVersionContent type definition missing parameters](https://issues.alfresco.com/jira/browse/ADF-2603)
 [gMetadata URL context root is wrong](https://github.com/Alfresco/alfresco-js-api/issues/338)
+[Authentication Guard (ACS) does not redirect to Login on page reload](https://issues.alfresco.com/jira/browse/ADF-3224)
 
 <a name="2.3.1"></a>
 # [2.3.1](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.3.1) (25-04-2018)

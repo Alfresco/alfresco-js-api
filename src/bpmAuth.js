@@ -23,6 +23,8 @@ class BpmAuth extends AlfrescoApiClient {
 
         if (this.config.ticketBpm) {
             this.setTicket(config.ticketBpm);
+        } else if (this.storage.getItem('ticket-BPM')) {
+            this.setTicket(this.storage.getItem('ticket-BPM'));
         }
 
         Emitter.call(this);
@@ -42,6 +44,7 @@ class BpmAuth extends AlfrescoApiClient {
             this.storage.setItem('APS_USERNAME', username);
         }
     }
+
     /**
      * login Activiti API
      * @param  {String} username:   // Username to login
@@ -149,7 +152,15 @@ class BpmAuth extends AlfrescoApiClient {
     setTicket(ticket) {
         this.authentications.basicAuth.ticket = ticket;
         this.authentications.basicAuth.password = null;
+        this.storage.setItem('ticket-BPM', ticket);
         this.ticket = ticket;
+    }
+
+    invalidateSession() {
+        this.storage.removeItem('ticket-BPM');
+        this.authentications.basicAuth.ticket = null;
+        this.authentications.basicAuth.password = null;
+        this.ticket = null;
     }
 
     /**
