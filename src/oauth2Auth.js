@@ -613,7 +613,7 @@ class Oauth2Auth extends AlfrescoApiClient {
     logOut() {
         const id_token = this.getIdToken();
 
-        this.cleanStorage();
+        this.invalidateSession();
 
         this.setToken(null, null);
 
@@ -633,7 +633,7 @@ class Oauth2Auth extends AlfrescoApiClient {
         }
     }
 
-    cleanStorage() {
+    invalidateSession() {
         this.storage.removeItem('access_token');
         this.storage.removeItem('access_token_expires_in');
         this.storage.removeItem('access_token_stored_at');
