@@ -471,8 +471,8 @@ class AlfrescoApi {
         if (this.oauth2Auth) {
             this.oauth2Auth.invalidateSession();
         }
-        this.ecmAuth.setTicket(null);
-        this.bpmAuth.setTicket(null);
+        this.ecmAuth.invalidateSession();
+        this.bpmAuth.invalidateSession();
     }
 
     /**
