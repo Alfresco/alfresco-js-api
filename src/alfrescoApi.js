@@ -470,7 +470,7 @@ class AlfrescoApi {
     invalidateSession() {
         if (this.oauth2Auth) {
             this.oauth2Auth.invalidateSession();
-        }else{
+        }else {
             this.ecmAuth.invalidateSession();
             this.bpmAuth.invalidateSession();
         }
