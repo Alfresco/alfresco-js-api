@@ -4,7 +4,7 @@ class Storage {
 
     constructor() {
         if (this.supportsStorage()) {
-            this._storage = window.sessionStorage;
+            this._storage = window.localStorage;
         }
     }
 
