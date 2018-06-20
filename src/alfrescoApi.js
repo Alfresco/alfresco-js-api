@@ -337,20 +337,22 @@ class AlfrescoApi {
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
     logout() {
-        if (this.isBpmConfiguration()) {
-            return this.bpmAuth.logout();
-        } else if (this.isEcmConfiguration()) {
-            var ecmPromise = this.ecmAuth.logout();
-            ecmPromise.then(() => {
-                this.config.ticket = undefined;
-            }, () => {
-            });
-
-            return ecmPromise;
-        } else if (this.isEcmBpmConfiguration()) {
-            return this._logoutBPMECM();
-        } else if (this.isOauthConfiguration()) {
+        if (this.isOauthConfiguration()) {
             this.oauth2Auth.logOut();
+        } else {
+            if (this.isBpmConfiguration()) {
+                return this.bpmAuth.logout();
+            } else if (this.isEcmConfiguration()) {
+                var ecmPromise = this.ecmAuth.logout();
+                ecmPromise.then(() => {
+                    this.config.ticket = undefined;
+                }, () => {
+                });
+
+                return ecmPromise;
+            } else if (this.isEcmBpmConfiguration()) {
+                return this._logoutBPMECM();
+            }
         }
     }
 
@@ -470,7 +472,7 @@ class AlfrescoApi {
     invalidateSession() {
         if (this.oauth2Auth) {
             this.oauth2Auth.invalidateSession();
-        }else {
+        } else {
             this.ecmAuth.invalidateSession();
             this.bpmAuth.invalidateSession();
         }
