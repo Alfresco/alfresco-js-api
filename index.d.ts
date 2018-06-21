@@ -3019,7 +3019,7 @@ declare namespace AlfrescoApi {
 
         getTaskForm(taskId?: string): Promise<FormDefinitionRepresentation>;
 
-        getTaskFormVariables(taskId?: string): Promise<FormDefinitionRepresentation>;
+        getTaskFormVariables(taskId?: string): Promise<ProcessInstanceVariableRepresentation[]>;
 
         saveTaskForm(taskId?: string, saveTaskFormRepresentation?: SaveFormRepresentation): Promise<any>;
     }
