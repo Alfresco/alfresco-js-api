@@ -47,9 +47,7 @@ class Oauth2Auth extends AlfrescoApiClient {
 
             this.host = this.config.oauth2.host;
 
-            if (this.config.oauth2.implicitFlow) {
-                this.initOauth();// jshint ignore:line
-            }
+            this.initOauth();// jshint ignore:line
 
             if (this.config.accessToken) {
                 this.setTicket(this.config.accessToken);
@@ -185,7 +183,7 @@ class Oauth2Auth extends AlfrescoApiClient {
                 }, (error) => {
                     reject('Validation JWT error' + error);
                 });
-            }else {
+            } else {
                 if (this.config.oauth2.silentLogin) {
                     this.implicitLogin();
                 }
@@ -356,11 +354,11 @@ class Oauth2Auth extends AlfrescoApiClient {
     }
 
     hasHashCharacter(hash) {
-        return hash.indexOf('#') === 0 ;
+        return hash.indexOf('#') === 0;
     }
 
     isHashRoute(hash) {
-        return hash.indexOf('#/') === 0 ;
+        return hash.indexOf('#/') === 0;
     }
 
     getHashFragmentParams(externalHash) {
@@ -487,9 +485,8 @@ class Oauth2Auth extends AlfrescoApiClient {
             var contentTypes = ['application/x-www-form-urlencoded'];
             var accepts = ['application/json'];
 
-            var url = this.config.oauth2.authPath || '/oauth/token';
-            this.callApi(
-                url, 'POST',
+            this.callCustomApi(
+                this.discovery.tokenEndpoint, 'POST',
                 pathParams, queryParams, headerParams, formParams, postBody,
                 authNames, contentTypes, accepts, {}
             ).then(
@@ -500,9 +497,9 @@ class Oauth2Auth extends AlfrescoApiClient {
                 },
                 (error) => {
                     if (error.error.status === 401) {
-                        this.promise.emit('unauthorized');
+                        this.emit('unauthorized');
                     }
-                    this.promise.emit('error');
+                    this.emit('error');
                     reject(error.error);
                 });
             Emitter(this.promise); // jshint ignore:line
@@ -535,8 +532,8 @@ class Oauth2Auth extends AlfrescoApiClient {
         var accepts = ['application/json'];
 
         this.promise = new Promise((resolve, reject) => {
-            this.callApi(
-                '/oauth/token', 'POST',
+            this.callCustomApi(
+                this.discovery.tokenEndpoint, 'POST',
                 pathParams, queryParams, headerParams, formParams, postBody,
                 authNames, contentTypes, accepts, {}
             ).then(
@@ -546,9 +543,9 @@ class Oauth2Auth extends AlfrescoApiClient {
                 },
                 (error) => {
                     if (error.error.status === 401) {
-                        this.promise.emit('unauthorized');
+                        this.emit('unauthorized');
                     }
-                    this.promise.emit('error');
+                    this.emit('error');
                     reject(error.error);
                 });
         });
