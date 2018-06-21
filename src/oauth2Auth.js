@@ -541,7 +541,7 @@ class Oauth2Auth extends AlfrescoApiClient {
             refresh_token: this.authentications.basicAuth.refreshToken,
             grant_type: 'refresh_token'
         };
-        
+
         var authNames = [];
         var contentTypes = ['application/x-www-form-urlencoded'];
         var accepts = ['application/json'];

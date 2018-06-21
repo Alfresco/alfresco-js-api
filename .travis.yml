@@ -23,21 +23,17 @@ cache:
 
 env:
   matrix:
-    - MODULE=alfresco-js-api
+    - MODULE=jsapi
 
 install:
-  - if ([ "$MODULE" == "alfresco-js-api" ]); then
-        npm install
-    fi
+    - npm install
 
 script:
-  - if ([ "$MODULE" == "alfresco-js-api" ]); then
-        npm run clean-build
-        grunt
-        npm run tslint
-        npm run test || exit 1
-        npm run webpack
-    fi
+    - npm run clean-build
+    - grunt
+    - npm run tslint || exit 1
+    - npm run test || exit 1
+    - npm run webpack
 
 jobs:
     include:
