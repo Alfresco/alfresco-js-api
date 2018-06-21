@@ -6,6 +6,7 @@ node_js:
 
 addons:
     chrome: stable
+
 before_script:
     - "sudo chown root /opt/google/chrome/chrome-sandbox"
     - "sudo chmod 4755 /opt/google/chrome/chrome-sandbox"
@@ -16,9 +17,6 @@ before_install:
     - sh -e /etc/init.d/xvfb start
     - npm install -g grunt-cli
 
-
-install: npm install
-
 cache:
   directories:
     - node_modules
@@ -27,10 +25,15 @@ env:
   matrix:
     - MODULE=alfresco-js-api
 
+install:
+  - if ([ "$MODULE" == "alfresco-js-api" ]); then
+        npm install
+    fi
+
 script:
-    - if ([ "$MODULE" == "alfresco-js-api" ]); then
-            npm run test
-      fi
+  - if ([ "$MODULE" == "alfresco-js-api" ]); then
+        npm run build
+    fi
 
 jobs:
     include:
