@@ -401,19 +401,25 @@ class AlfrescoApi {
     }
 
     isBpmLoggedIn() {
-        if (this.isOauthConfiguration()) {
-            return this.oauth2Auth.isLoggedIn();
-        } else {
-            return this.bpmAuth.isLoggedIn();
+        if (this.isBpmConfiguration() || isEcmBPMConfiguration()) {
+            if (this.isOauthConfiguration()) {
+                return this.oauth2Auth.isLoggedIn();
+            } else {
+                return this.bpmAuth.isLoggedIn();
+            }
         }
+        return false;
     }
 
     isEcmLoggedIn() {
-        if (this.isOauthConfiguration()) {
-            return this.oauth2Auth.isLoggedIn();
-        } else {
-            return this.ecmAuth.isLoggedIn();
+        if (this.isEcmConfiguration() || isEcmBPMConfiguration()) {
+            if (this.isOauthConfiguration()) {
+                return this.oauth2Auth.isLoggedIn();
+            } else {
+                return this.ecmAuth.isLoggedIn();
+            }
         }
+        return false;
     }
 
     getBpmUsername() {
