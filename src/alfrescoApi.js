@@ -408,6 +408,7 @@ class AlfrescoApi {
                 return this.bpmAuth.isLoggedIn();
             }
         }
+        return false;
     }
 
     isEcmLoggedIn() {
