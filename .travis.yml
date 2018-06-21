@@ -32,7 +32,11 @@ install:
 
 script:
   - if ([ "$MODULE" == "alfresco-js-api" ]); then
-        npm run build
+        npm run clean-build
+        grunt
+        npm run tslint
+        npm run test || exit 1
+        npm run webpack
     fi
 
 jobs:
