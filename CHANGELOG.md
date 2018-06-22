@@ -5,7 +5,7 @@
 # Alfresco JS API
 
 <a name="2.4.0"></a>
-# [2.4.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.4.0) (??-??-2018)
+# [2.4.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.4.0) (25-06-2018)
 
 ## Features
 [Update Content in UplaodAPI](https://issues.alfresco.com/jira/browse/ADF-2563)
