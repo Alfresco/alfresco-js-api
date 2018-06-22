@@ -1,6 +1,6 @@
 {
   "name": "alfresco-js-api",
-  "version": "2.3.1",
+  "version": "2.4.0",
   "description": "JavaScript client library for the Alfresco REST API",
   "author": "Alfresco Software, Ltd.",
   "main": "dist/alfresco-js-api.js",
