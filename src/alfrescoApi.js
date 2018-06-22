@@ -401,7 +401,7 @@ class AlfrescoApi {
     }
 
     isBpmLoggedIn() {
-        if (this.isBpmConfiguration() || isEcmBPMConfiguration()) {
+        if (this.isBpmConfiguration() || this.isEcmBpmConfiguration()) {
             if (this.isOauthConfiguration()) {
                 return this.oauth2Auth.isLoggedIn();
             } else {
@@ -412,7 +412,7 @@ class AlfrescoApi {
     }
 
     isEcmLoggedIn() {
-        if (this.isEcmConfiguration() || isEcmBPMConfiguration()) {
+        if (this.isEcmConfiguration() || this.isEcmBpmConfiguration()) {
             if (this.isOauthConfiguration()) {
                 return this.oauth2Auth.isLoggedIn();
             } else {
