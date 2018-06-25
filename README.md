@@ -49,102 +49,110 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
     + [Login with Username and Password BPM](#login-with-username-and-password-bpm)
     + [Example](#example-4)
     + [Login with OAUTH2 Alfresco authorization server](#login-with-oauth2-alfresco-authorization-server)
+  * [Implicit Flow](#implicit-flow)
+      - [oauth2 properties](#oauth2-properties)
+      - [Events](#events)
     + [Example](#example-5)
+    + [Example skip login form](#example-skip-login-form)
+  * [Password Flow](#password-flow)
     + [Example](#example-6)
-  * [Logout](#logout)
     + [Example](#example-7)
-  * [isLoggedIn](#isloggedin)
+  * [Logout](#logout)
     + [Example](#example-8)
+  * [isLoggedIn](#isloggedin)
+    + [Example](#example-9)
   * [Get tickets](#get-tickets)
   * [Events login/logout](#events-loginlogout)
-    + [Example](#example-9)
+    + [Example](#example-10)
 - [Custom Endpoint](#custom-endpoint)
-  * [Example](#example-10)
+  * [Example](#example-11)
 - [ECM](#ecm)
   * [Get Node  content](#get-node--content)
-    + [Example](#example-11)
-  * [Get File or Folder Info](#get-file-or-folder-info)
     + [Example](#example-12)
-  * [Get Folder Children Info](#get-folder-children-info)
+  * [Get File or Folder Info](#get-file-or-folder-info)
     + [Example](#example-13)
-  * [Create Folder](#create-folder)
+  * [Get Folder Children Info](#get-folder-children-info)
     + [Example](#example-14)
+  * [Create Folder](#create-folder)
     + [Example](#example-15)
-  * [Upload File](#upload-file)
     + [Example](#example-16)
-  * [Events Upload File](#events-upload-file)
+  * [Upload File](#upload-file)
     + [Example](#example-17)
-  * [Delete File or Folder](#delete-file-or-folder)
+  * [Events Upload File](#events-upload-file)
     + [Example](#example-18)
-  * [Delete File or Folder Permanent](#delete-file-or-folder-permanent)
+  * [Delete File or Folder](#delete-file-or-folder)
     + [Example](#example-19)
-  * [Get thumbnail Url](#get-thumbnail-url)
+  * [Delete File or Folder Permanent](#delete-file-or-folder-permanent)
     + [Example](#example-20)
-  * [Get preview Url](#get-preview-url)
+  * [Get thumbnail Url](#get-thumbnail-url)
     + [Example](#example-21)
-  * [Get content Url](#get-content-url)
+  * [Get preview Url](#get-preview-url)
     + [Example](#example-22)
+  * [Get content Url](#get-content-url)
+    + [Example](#example-23)
   * [Custom web scripts call](#custom-web-scripts-call)
     + [Parameters](#parameters)
 - [BPM](#bpm)
   * [Task Api](#task-api)
     + [List Task](#list-task)
       - [Parameters](#parameters-1)
-      - [Example](#example-23)
+      - [Example](#example-24)
     + [Get Task](#get-task)
       - [Parameters](#parameters-2)
-      - [Example](#example-24)
+      - [Example](#example-25)
     + [Filter Task](#filter-task)
       - [Parameters](#parameters-3)
-      - [Example](#example-25)
+      - [Example](#example-26)
     + [Complete Task](#complete-task)
       - [Parameters](#parameters-4)
-      - [Example](#example-26)
+      - [Example](#example-27)
     + [Get Task Form](#get-task-form)
       - [Parameters](#parameters-5)
-      - [Example](#example-27)
+      - [Example](#example-28)
     + [Complete Task Form](#complete-task-form)
       - [Parameters](#parameters-6)
-      - [Example](#example-28)
+      - [Example](#example-29)
   * [Process Api](#process-api)
     + [Get Process Instances](#get-process-instances)
       - [Parameters](#parameters-7)
-      - [Example](#example-29)
+      - [Example](#example-30)
   * [Models Api](#models-api)
     + [Get Model](#get-model)
       - [Parameters](#parameters-8)
-      - [Example](#example-30)
+      - [Example](#example-31)
   * [Report Api](#report-api)
     + [Create default Reports](#create-default-reports)
       - [Parameters](#parameters-9)
-      - [Example](#example-31)
+      - [Example](#example-32)
     + [Get Reports](#get-reports)
       - [Parameters](#parameters-10)
-      - [Example](#example-32)
+      - [Example](#example-33)
     + [Report Params](#report-params)
       - [Parameters](#parameters-11)
-      - [Example](#example-33)
+      - [Example](#example-34)
   * [Report Process Definitions](#report-process-definitions)
       - [Parameters](#parameters-12)
-      - [Example](#example-34)
+      - [Example](#example-35)
   * [Tasks of process definition](#tasks-of-process-definition)
       - [Parameters](#parameters-13)
-      - [Example](#example-35)
+      - [Example](#example-36)
   * [Generate reports](#generate-reports)
       - [Parameters](#parameters-14)
-      - [Example](#example-36)
+      - [Example](#example-37)
   * [Update report details](#update-report-details)
       - [Parameters](#parameters-15)
-      - [Example](#example-37)
+      - [Example](#example-38)
   * [Export to csv](#export-to-csv)
       - [Parameters](#parameters-16)
-      - [Example](#example-38)
+      - [Example](#example-39)
   * [Save Report](#save-report)
       - [Parameters](#parameters-17)
-      - [Example](#example-39)
+      - [Example](#example-40)
   * [Delete report](#delete-report)
       - [Parameters](#parameters-18)
-      - [Example](#example-40)
+      - [Example](#example-41)
+- [Error Events](#error-events)
+  * [Example](#example-42)
 - [Development](#development)
 - [Release History](#release-history)
 
@@ -226,7 +234,8 @@ Property | Description  | default value|
 ------------- | ------------- | -------------|
 hostEcm| (Optional value The Ip or Name of the host where your Alfresco instance is running )|http://127.0.0.1:8080 |
 hostBpm| (Optional value The Ip or Name of the host where your Activiti instance is running )|http://127.0.0.1:9999 |
-oauth2|  (Optional configuration object for alfresco authorization server {host:'HOST_OAUTH2_SERVER', clientId:'YOUR_CLIENT_ID', secret:'SECRET', authPath:'my-custom-auth-endpoint/token'} ||
+authType|  (Optional value can be 'BASIC' or 'OAUTH') | 'BASIC'|
+oauth2|  (Optional configuration for SSO) ||
 contextRoot| (Optional value that define the context Root of the Alfresco ECM API default value is alfresco )|alfresco |
 contextRootBpm| (Optional value that define the context Root of the Activiti API default value is activiti-app )|alfresco |
 provider| (Optional value default value is ECM. This parameter can accept as value ECM BPM or ALL to use the API and Login in the ECM, Activiti BPM or Both )|alfresco |
@@ -315,7 +324,82 @@ this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
 ```
 ### Login with OAUTH2 Alfresco authorization server
 
-If you have installed the Alfresco authorization server you can login with this option.
+## Implicit Flow
+
+If your want to be redirect to the authorization server and login there you can use the implicit flow to login
+
+#### oauth2 properties
+
+Property | Description  | default value|
+------------- | ------------- | -------------|
+host| Your oauth2 server URL| null |
+clientId| Your clientId oauth2 | null |
+secret| Your secret oauth2| null |
+scope| Your scope | null |
+implicitFlow| true/false | false |
+redirectUri|  url to be redirect after login| null|
+redirectLogout|  url to be redirect after logout optional, if is nor present the redirectUri will be used| null|
+refreshTokenTimeout|  millisecond value, after how many millisecond youw ant refresh the token| 40000|
+silentLogin|  direct execute the implicit login without the need od call this.alfrescoJsApi.implicitLogin() method|   false|
+
+
+The alfresco-js-api will automatically redirect you to the login page anf refresh the token if necessary
+
+#### Events
+
+Property | Description  | default value|
+------------- | ------------- | -------------|
+implicit_redirect| triggered when the user is redirect to the auth server return url parameter of the redirect |  |
+discovery| triggered when all the openId discovery url phase is terminated returnl an object with all the discovered url |  |
+token_issued| triggered when a new token is issued|  |
+
+The alfresco-js-api will automatically redirect you to the login page anf refresh the token if necessary
+
+
+### Example
+
+```javascript
+this.alfrescoJsApi = new AlfrescoApi({
+        oauth2: {
+            host: 'HOST_OAUTH2_SERVER',
+            clientId: 'YOUR_CLIENT_ID',
+            secret: 'SECRET',
+            scope: 'openid',
+            implicitFlow: true,
+            redirectUri: 'YOUR_HOME_APP_URL',
+            silentRefreshTimeout: '600000' //Optional parameter 10 minutes default value
+        },
+        authType: 'OAUTH',
+        provider: 'ALL'
+});
+
+this.alfrescoJsApi.implicitLogin();
+
+```
+
+### Example skip login form
+
+```javascript
+this.alfrescoJsApi = new AlfrescoApi({
+        oauth2: {
+            host: 'HOST_OAUTH2_SERVER',
+            clientId: 'YOUR_CLIENT_ID',
+            secret: 'SECRET',
+            scope: 'openid',
+            implicitFlow: true,
+            redirectUri: 'YOUR_HOME_APP_URL',
+            silentRefreshTimeout: '600000' //Optional parameter 10 minutes default value,
+            silentLogin: true
+        },
+        authType: 'OAUTH',
+        provider: 'ALL'
+});
+
+```
+
+
+## Password Flow
+
 If your auth endpoint is different from the standard one "/oauth/token" you can override it through the property authPath
 
 ### Example
@@ -327,7 +411,8 @@ this.alfrescoJsApi = new AlfrescoApi({
             secret: 'SECRET',
             authPath:'my-custom-auth-endpoint/token'
         },
-        provider: 'OAUTH'
+        authType: 'OAUTH',
+        provider: 'ALL'
     });
 
 this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
@@ -1294,6 +1379,17 @@ Name | Type | Description  | Notes |
 var reportId = "1"; // String | reportId
 
 this.alfrescoJsApi.activiti.reportApi.deleteReport(reportId);
+```
+
+# Error Events
+
+The alfresco-js-api has an error handler event where you can subscribe
+
+## Example
+```javascript
+    this.alfrescoJsApi.on('error', (error) => {
+        console.log(error)
+    })
 ```
 
 # Development

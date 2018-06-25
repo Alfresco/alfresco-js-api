@@ -139,6 +139,9 @@ Class | Method | HTTP request | Description
 *AlfrescoCoreRestApi.GroupsApi* | [**getGroupMembers**](docs/GroupsApi.md#getGroupMembers) | **GET** /groups/{groupId}/members | Get members of the group
 *AlfrescoCoreRestApi.GroupsApi* | [**addGroupMember**](docs/GroupsApi.md#addGroupMember) | **POST** /groups/{groupId}/members | Add a group member
 *AlfrescoCoreRestApi.GroupsApi* | [**deleteGroupMember**](docs/GroupsApi.md#deleteGroupMember) | **DELETE** /groups/{groupId}/members/{groupMemberId} | Remove a group member
+*AlfrescoCoreRestApi.DownloadsApi* | [**cancelDownload**](docs/DownloadsApi.md#cancelDownload) | **DELETE** /downloads/{downloadId} | Cancel a download
+*AlfrescoCoreRestApi.DownloadsApi* | [**createDownload**](docs/DownloadsApi.md#createDownload) | **POST** /downloads | Create a new download
+*AlfrescoCoreRestApi.DownloadsApi* | [**getDownload**](docs/DownloadsApi.md#getDownload) | **GET** /downloads/{downloadId} | Get a download
 *AlfrescoContentServicesRestApi.VersionsApi* | [**deleteVersion**](docs/VersionsApi.md#deleteVersion) | **DELETE** /nodes/{nodeId}/versions/{versionId} | Delete a version
 *AlfrescoContentServicesRestApi.VersionsApi* | [**getVersion**](docs/VersionsApi.md#getVersion) | **GET** /nodes/{nodeId}/versions/{versionId} | Get version information
 *AlfrescoContentServicesRestApi.VersionsApi* | [**getVersionContent**](docs/VersionsApi.md#getVersionContent) | **GET** /nodes/{nodeId}/versions/{versionId}/content | Get version content

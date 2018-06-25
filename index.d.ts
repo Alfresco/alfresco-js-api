@@ -2,6 +2,8 @@ declare class AlfrescoApi {
 
     constructor(config: AlfrescoApi.AlfrescoApiConfig);
 
+    configureJsApi(config: AlfrescoApi.AlfrescoApiConfig): void;
+
     changeEcmHost(ecmHost: string): void;
 
     changeBpmHost(bpmHost: string): void;
@@ -16,7 +18,9 @@ declare class AlfrescoApi {
 
     loginTicket(ticket: string): any;
 
-    refresh(): Promise<string>;
+    refreshToken(): Promise<string>;
+
+    implicitLogin(): Promise<any>;
 
     getTicket(): Array<string>;
 
@@ -24,9 +28,27 @@ declare class AlfrescoApi {
 
     getTicketEcm(): string;
 
+    invalidateSession(): void;
+
     setTicket(ticketEcm: any, ticketBpm: any): void;
 
     config: AlfrescoApi.AlfrescoApiConfig;
+
+    isBpmLoggedIn(): boolean;
+
+    isEcmLoggedIn(): boolean;
+
+    getBpmUsername(): string;
+
+    getEcmUsername(): string;
+
+    isBpmConfiguration(): boolean;
+
+    isEcmConfiguration(): boolean;
+
+    isOauthConfiguration(): boolean;
+
+    isEcmBpmConfiguration(): boolean;
 
     Activiti: AlfrescoApi.Activiti;
     Auth: AlfrescoApi.Auth;
@@ -62,6 +84,8 @@ declare namespace AlfrescoApi {
 
         new(config: AlfrescoApiConfig): AlfrescoApi;
 
+        configureJsApi(config: AlfrescoApi.AlfrescoApiConfig): void;
+
         changeEcmHost(ecmHost: string): void;
 
         changeBpmHost(bpmHost: string): void;
@@ -76,7 +100,9 @@ declare namespace AlfrescoApi {
 
         loginTicket(ticket: string): any;
 
-        refresh(): Promise<string>;
+        refreshToken(): Promise<string>;
+
+        implicitLogin(): Promise<any>;
 
         getTicket(): Array<string>;
 
@@ -84,9 +110,29 @@ declare namespace AlfrescoApi {
 
         getTicketEcm(): string;
 
+        invalidateSession(): void;
+
         setTicket(ticketEcm: any, ticketBpm: any): void;
 
         config: AlfrescoApiConfig;
+
+        isBpmLoggedIn(): boolean;
+
+        isEcmLoggedIn(): boolean;
+
+        getBpmUsername(): string;
+
+        getEcmUsername(): string;
+
+        on(nameEvent: string, callBack: any);
+
+        isBpmConfiguration(): boolean;
+
+        isEcmConfiguration(): boolean;
+
+        isOauthConfiguration(): boolean;
+
+        isEcmBpmConfiguration(): boolean;
 
         Activiti: Activiti;
         Auth: Auth;
@@ -218,10 +264,12 @@ declare namespace AlfrescoApi {
         constructor(obj?: any);
 
         id?: string;
+        nodeId?: string;
         name?: string;
         nodeType?: string;
         isFolder?: boolean;
         isFile?: boolean;
+        isFavorite?: boolean;
         isLocked?: boolean;
         modifiedAt?: Date;
         modifiedByUser?: UserInfo;
@@ -507,7 +555,7 @@ declare namespace AlfrescoApi {
     export interface NodesApi {
         new(client: ApiClient): NodesApi;
 
-        addNode(nodeId: string, nodeBody: any, opts?: { autoRename?: boolean, include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
+        addNode(nodeId: string, nodeBody: any, opts?: { autoRename?: boolean, include?: Array<string>, fields?: Array<string> }, formParams?: any): Promise<NodeEntry>;
 
         copyNode(nodeId: string, copyBody: any, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<NodeEntry>;
 
@@ -812,7 +860,7 @@ declare namespace AlfrescoApi {
 
         getVersion(nodeId: string, versionId: string): Promise<VersionEntry>;
 
-        getVersionContent(nodeId: string, opts?: any): Promise<any>;
+        getVersionContent(nodeId: string, versionId: string, opts?: { attachment?: boolean, ifModifiedSince?: Date, range?: string }): Promise<any>;
 
         listVersionHistory(nodeId: string, opts?: { include?: Array<string>, fields?: Array<string>, skipCount?: number, maxItems?: number }): Promise<VersionPaging>;
 
@@ -1447,42 +1495,123 @@ declare namespace AlfrescoApi {
         pagination?: Pagination;
     }
 
-    export class QueryBody {
-        constructor(obj ?: any);
-
-        query ?: RequestQuery;
-        paging ?: RequestPagination;
-        include ?: Array<string>;
-        fields ?: Array<string>;
-        sort ?: Array<any>;
-        templates ?: Array<any>;
-        defaults ?: RequestDefaults;
-        filterQueries ?: Array<any>;
-        facetQueries ?: Array<any>;
-        facetFields ?: RequestFacetFields;
-        spellcheck ?: RequestSpellcheck;
-        scope ?: RequestScope;
-        limits ?: RequestLimits;
-        highlight ?: RequestHighlight;
-    }
-
     export class SearchRequest {
         constructor(obj ?: any);
 
         query ?: RequestQuery;
         paging ?: RequestPagination;
         include ?: Array<string>;
+        includeRequest?: boolean;
         fields ?: Array<string>;
-        sort ?: Array<any>;
-        templates ?: Array<any>;
+        sort ?: Array<RequestSortDefinitionInner>;
+        templates ?: Array<RequestTemplate>;
         defaults ?: RequestDefaults;
-        filterQueries ?: Array<any>;
-        facetQueries ?: Array<any>;
+        localization?: RequestLocalization;
+        filterQueries ?: Array<RequestFilterQuery>;
+        facetQueries ?: Array<RequestFacetQuery>;
         facetFields ?: RequestFacetFields;
+        facetIntervals?: RequestFacetIntervals;
+        pivots?: Array<RequestPivot>;
+        stats?: Array<RequestStats>;
         spellcheck ?: RequestSpellcheck;
         scope ?: RequestScope;
         limits ?: RequestLimits;
         highlight ?: RequestHighlight;
+        ranges?: Array<RequestRange>;
+    }
+
+    export class QueryBody extends SearchRequest {
+        constructor(obj ?: any);
+    }
+
+    export class RequestPivot {
+        key?: string;
+        pivots?: Array<RequestPivot>;
+    }
+
+    export class RequestStats {
+        field?: string;
+        label?: string;
+        min?: boolean;
+        max?: boolean;
+        sum?: boolean;
+        countValues?: boolean;
+        missing?: boolean;
+        mean?: boolean;
+        stddev?: boolean;
+        sumOfSquares?: boolean;
+        distinctValues?: boolean;
+        countDistinct?: boolean;
+        cardinality?: boolean;
+        cardinalityAccuracy?: number;
+        excludeFilters?: Array<string>;
+        percentiles?: Array<number>;
+    }
+
+    export class RequestFacetIntervals {
+        sets?: Array<RequestFacetSet>;
+        intervals?: Array<RequestFacetInterval>;
+    }
+
+    export class RequestFacetSet {
+        label?: string;
+        start?: string;
+        end?: string;
+        startInclusive?: boolean;
+        endInclusive?: boolean;
+    }
+
+    export class RequestFacetInterval {
+        field?: string;
+        label?: string;
+        sets?: Array<RequestFacetSet>;
+    }
+
+    export class RequestFilterQuery {
+        query?: string;
+        tags?: Array<string>;
+    }
+
+    export class RequestFacetQuery {
+        query?: string;
+        label?: string;
+    }
+
+    export class RequestLocalization {
+        timezone?: string;
+        locales?: Array<string>;
+    }
+
+    export class RequestSortDefinitionInner {
+        // type?: RequestSortDefinitionInner.TypeEnum;
+        type?: string;
+        field?: string;
+        ascending?: boolean;
+    }
+
+    namespace RequestSortDefinitionInner {
+        enum TypeEnum {
+            FIELD = 'FIELD',
+            DOCUMENT = 'DOCUMENT',
+            SCORE = 'SCORE'
+        }
+    }
+
+    export class RequestTemplate {
+        name?: string;
+        template?: string;
+    }
+
+    export class RequestRange {
+        field?: string;
+        start?: string;
+        end?: string;
+        gap?: string;
+        hardend?: boolean;
+        other?: Array<string>;
+        include?: Array<string>;
+        label?: string;
+        excludeFilters?: Array<string>;
     }
 
     export class RequestHighlightFields {
@@ -1540,8 +1669,8 @@ declare namespace AlfrescoApi {
         field?: string;
         label?: string;
         prefix?: string;
-        sort?: RequestFacetFieldSort;
-        method?: string;
+        sort?: RequestFacetField.SortEnum;
+        method?: RequestFacetField.MethodEnum;
         missing?: boolean;
         limit?: number;
         offset?: number;
@@ -1550,14 +1679,16 @@ declare namespace AlfrescoApi {
         excludeFilters?: string[];
     }
 
-    export enum RequestFacetFieldSort {
-        COUNT = 'COUNT',
-        INDEX = 'INDEX'
-    }
+    namespace RequestFacetField {
+        enum SortEnum {
+            COUNT = 'COUNT',
+            INDEX = 'INDEX'
+        }
 
-    export enum RequestFacetFieldMethod {
-        ENUM = 'ENUM',
-        FC = 'FC'
+        enum MethodEnum {
+            ENUM = 'ENUM',
+            FC = 'FC'
+        }
     }
 
     export class RequestQuery {
@@ -1579,10 +1710,22 @@ declare namespace AlfrescoApi {
         constructor(obj?: any);
 
         textAttributes?: Array<string>;
-        defaultFTSOperator?: string;
-        defaultFTSFieldOperator?: string;
+        defaultFTSOperator?: RequestDefaults.DefaultFTSOperatorEnum;
+        defaultFTSFieldOperator?: RequestDefaults.DefaultFTSFieldOperatorEnum;
         namespace?: string;
         defaultFieldName?: string;
+    }
+
+    namespace RequestDefaults {
+        enum DefaultFTSOperatorEnum {
+            AND = 'AND',
+            OR = 'OR'
+        }
+
+        enum DefaultFTSFieldOperatorEnum {
+            AND = 'AND',
+            OR = 'OR'
+        }
     }
 
     export class Rating {
@@ -1747,25 +1890,17 @@ declare namespace AlfrescoApi {
         guid?: string;
         title?: string;
         description?: string;
-        visibility?: Visibility;
+        visibility?: Site.VisibilityEnum;
         preset?: string;
-        role?: Role;
+        role?: string;
     }
 
-    export enum Role {
-        SiteConsumer = 'SiteConsumer',
-        SiteCollaborator = 'SiteCollaborator',
-        SiteContributor = 'SiteContributor',
-        SiteManager = 'SiteManager'
-    }
-
-    export class SiteBodyadd {
-        constructor(obj?: any);
-
-        id?: string;
-        title?: string;
-        description?: string;
-        visibility?: Visibility;
+    namespace Site {
+        enum VisibilityEnum {
+            PUBLIC = 'PUBLIC',
+            PRIVATE = 'PRIVATE',
+            MODERATED = 'MODERATED'
+        }
     }
 
     export class GroupBody {
@@ -1782,21 +1917,15 @@ declare namespace AlfrescoApi {
         id?: string;
         title?: string;
         description?: string;
-        visibility?: Visibility;
+        visibility?: SiteBody.VisibilityEnum;
     }
 
-    export enum Visibility {
-        PUBLIC = 'PUBLIC',
-        PRIVATE = 'PRIVATE',
-        MODERATED = 'MODERATED'
-    }
-
-    export class SiteBodyUpdate {
-        constructor(obj?: any);
-
-        title?: string;
-        description?: string;
-        visibility?: Visibility;
+    namespace SiteBody {
+        enum VisibilityEnum {
+            PUBLIC = 'PUBLIC',
+            PRIVATE = 'PRIVATE',
+            MODERATED = 'MODERATED'
+        }
     }
 
     export class SiteContainer {
@@ -1842,20 +1971,47 @@ declare namespace AlfrescoApi {
 
         id?: string;
         person?: Person;
-        role?: Role;
+        role?: SiteMember.RoleEnum;
+    }
+
+    namespace SiteMember {
+        enum RoleEnum {
+            SITECONSUMER = 'SiteConsumer',
+            SITECOLLABORATOR = 'SiteCollaborator',
+            SITECONTRIBUTOR = 'SiteContributor',
+            SITEMANAGER = 'SiteManager'
+        }
     }
 
     export class SiteMemberBody {
         constructor(obj?: any);
 
         id?: string;
-        role?: Role;
+        role?: SiteMemberBody.RoleEnum;
+    }
+
+    namespace SiteMemberBody {
+        enum RoleEnum {
+            SITECONSUMER = 'SiteConsumer',
+            SITECOLLABORATOR = 'SiteCollaborator',
+            SITECONTRIBUTOR = 'SiteContributor',
+            SITEMANAGER = 'SiteManager'
+        }
     }
 
     export class SiteMemberRoleBody {
         constructor(obj?: any);
 
-        role?: Role;
+        role?: SiteMemberRoleBody.RoleEnum;
+    }
+
+    namespace SiteMemberRoleBody {
+        enum RoleEnum {
+            SITECONSUMER = 'SiteConsumer',
+            SITECOLLABORATOR = 'SiteCollaborator',
+            SITECONTRIBUTOR = 'SiteContributor',
+            SITEMANAGER = 'SiteManager'
+        }
     }
 
     export class SiteMemberEntry {
@@ -1902,19 +2058,6 @@ declare namespace AlfrescoApi {
 
         entries?: Array<SiteMemberEntry>;
         pagination?: Pagination;
-    }
-
-    export class SiteMembershipBodyadd {
-        constructor(obj?: any);
-
-        role?: Role;
-        id?: string;
-    }
-
-    export class SiteMembershipBodyUpdate {
-        constructor(obj?: any);
-
-        role?: Role;
     }
 
     export class SiteMembershipRequest {
@@ -1985,27 +2128,31 @@ declare namespace AlfrescoApi {
         pagination?: Pagination;
     }
 
+    /** @deprecated in 2.4.0 not exposed by js-api */
     export class SiteRole {
         constructor(obj?: any);
 
         site?: Site;
         id?: string;
         guid?: string;
-        role?: Role;
+        role?: string;
     }
 
+    /** @deprecated in 2.4.0 not exposed by js-api */
     export class SiteRoleEntry {
         constructor(obj?: any);
 
         entry?: SiteRole;
     }
 
+    /** @deprecated in 2.4.0 not exposed by js-api */
     export class SiteRolePaging {
         constructor(obj?: any);
 
         list?: SiteRolePagingList;
     }
 
+    /** @deprecated in 2.4.0 not exposed by js-api */
     export class SiteRolePagingList {
         constructor(obj?: any);
 
@@ -2163,13 +2310,15 @@ declare namespace AlfrescoApi {
     export class ResultSetContextSpellcheck {
         constructor(obj?: any);
 
-        type?: SpellcheckType;
+        type?: ResultSetContextSpellcheck.TypeEnum;
         suggestion?: string[];
     }
 
-    export enum SpellcheckType {
-        searchInsteadFor = 'searchInsteadFor',
-        didYouMean = 'didYouMean'
+    namespace ResultSetContextSpellcheck {
+        enum TypeEnum {
+            searchInsteadFor = 'searchInsteadFor',
+            didYouMean = 'didYouMean'
+        }
     }
 
     export class ResultSetContextFacetQueries {
@@ -2861,7 +3010,7 @@ declare namespace AlfrescoApi {
 
         getTaskForm(taskId?: string): Promise<FormDefinitionRepresentation>;
 
-        getTaskFormVariables(taskId?: string): Promise<FormDefinitionRepresentation>;
+        getTaskFormVariables(taskId?: string): Promise<ProcessInstanceVariableRepresentation[]>;
 
         saveTaskForm(taskId?: string, saveTaskFormRepresentation?: SaveFormRepresentation): Promise<any>;
     }
@@ -4213,10 +4362,23 @@ declare namespace AlfrescoApi {
             STANDARD = 'STANDARD',
             DOD5015 = 'DOD5015'
         }
+
+        enum VisibilityEnum {
+            PUBLIC = 'PUBLIC',
+            PRIVATE = 'PRIVATE',
+            MODERATED = 'MODERATED'
+        }
+
+        enum RoleEnum {
+            SiteConsumer = 'SiteConsumer',
+            SiteCollaborator = 'SiteCollaborator',
+            SiteContributor = 'SiteContributor',
+            SiteManager = 'SiteManager'
+        }
     }
 
     export class RMSite {
-        constructor(id: string, guid: string, title: string, visibility: Visibility, compliance: RMSite.ComplianceEnum);
+        constructor(id: string, guid: string, title: string, visibility: RMSite.VisibilityEnum, compliance: RMSite.ComplianceEnum);
 
         constructFromObject(data: Object, obj: RMSite): RMSite;
     }
@@ -5101,6 +5263,7 @@ declare namespace AlfrescoApi {
 
         hostEcm?: string;
         hostBpm?: string;
+        authType?: string;
         oauth2?: Oauth2Config;
         contextRoot?: string;
         contextRootBpm?: string;
@@ -5160,7 +5323,9 @@ declare namespace AlfrescoApi {
     export interface UploadApi {
         new(config: AlfrescoApiConfig): UploadApi;
 
-        uploadFile(fileDefinition?: any, relativePath?: any, nodeId?: any, nodeBody?: any, opts?: any): any;
+        uploadFile(fileDefinition?: any, relativePath?: any, rootFolderId?: string, nodeBody?: any, opts?: any): any;
+
+        updateFile(fileDefinition?: any, relativePath?: any, nodeId?: string, nodeBody?: any, opts?: any): any;
 
         addNodeUpload(nodeId?: any, nodeBody?: any, opts?: any, formParams?: any): any;
     }
@@ -5171,6 +5336,9 @@ declare namespace AlfrescoApi {
 
     export interface OauthApi extends AuthApi {
         refresh(): Promise<string>;
+
+        isValidToken: boolean;
+        isValidAccessToken: boolean;
     }
 
     export interface EcmAuthApi extends AuthApi {
@@ -5178,9 +5346,15 @@ declare namespace AlfrescoApi {
     }
 
     export interface Oauth2Config {
-        clientId?: string;
+        clientId: string;
         secret?: string;
-        host?: string;
+        host: string;
+        scope: string;
+        implicitFlow: boolean;
+        redirectUri: string;
+        refreshTokenTimeout?: number;
+        silentLogin?: boolean;
+        redirectUriLogout?: string;
     }
 }
 

@@ -12,13 +12,14 @@ class EcmAuth extends AlfrescoApiClient {
     constructor(config) {
         super();
 
-        this.username = this.loadUsername();
         this.config = config;
 
         this.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
 
         if (this.config.ticketEcm) {
             this.setTicket(config.ticketEcm);
+        } else if (this.storage.getItem('ticket-ECM')) {
+            this.setTicket(this.storage.getItem('ticket-ECM'));
         }
 
         Emitter.call(this);
@@ -29,24 +30,9 @@ class EcmAuth extends AlfrescoApiClient {
         this.ticket = undefined;
     }
 
-    supportsLocalStorage() {
-        try {
-            return 'localStorage' in window && window.localStorage !== null;
-        } catch (e) {
-            return false;
-        }
-    }
-
-    loadUsername() {
-        if (this.supportsLocalStorage()) {
-            return localStorage.getItem('APS_USERNAME');
-        }
-        return '';
-    }
-
-    saveUsername(value) {
-        if (this.supportsLocalStorage()) {
-            localStorage.setItem('APS_USERNAME', value);
+    saveUsername(username) {
+        if (this.storage.supportsStorage()) {
+            this.storage.setItem('ACS_USERNAME', username);
         }
     }
 
@@ -137,7 +123,7 @@ class EcmAuth extends AlfrescoApiClient {
             authApi.deleteTicket().then(
                 () => {
                     this.promise.emit('logout');
-                    this.setTicket(undefined);
+                    this.invalidateSession();
                     resolve('logout');
                 },
                 (error) => {
@@ -161,6 +147,7 @@ class EcmAuth extends AlfrescoApiClient {
     setTicket(ticket) {
         this.authentications.basicAuth.username = 'ROLE_TICKET';
         this.authentications.basicAuth.password = ticket;
+        this.storage.setItem('ticket-ECM', ticket);
         this.ticket = ticket;
     }
 
@@ -171,6 +158,13 @@ class EcmAuth extends AlfrescoApiClient {
      * */
     getTicket() {
         return this.ticket;
+    }
+
+    invalidateSession() {
+        this.storage.removeItem('ticket-ECM');
+        this.authentications.basicAuth.username = null;
+        this.authentications.basicAuth.password = null;
+        this.ticket = null;
     }
 
     /**

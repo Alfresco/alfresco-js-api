@@ -1,6 +1,6 @@
 {
   "name": "alfresco-js-api",
-  "version": "2.3.1",
+  "version": "2.4.0",
   "description": "JavaScript client library for the Alfresco REST API",
   "author": "Alfresco Software, Ltd.",
   "main": "dist/alfresco-js-api.js",
@@ -29,8 +29,9 @@
     "url": "https://github.com/Alfresco/alfresco-js-api/issues"
   },
   "dependencies": {
-    "superagent": "3.8.2",
-    "event-emitter": "0.3.4"
+    "event-emitter": "0.3.4",
+    "jsrsasign": "^8.0.12",
+    "superagent": "3.8.2"
   },
   "devDependencies": {
     "babel-loader": "^7.0.0",
@@ -49,11 +50,11 @@
     "grunt-istanbul": "^0.7.0",
     "grunt-jscs": "^2.8.0",
     "grunt-mocha-istanbul": "^3.0.1",
-    "grunt-mocha-test": "^0.12.7",
+    "grunt-mocha-test": "0.13.3",
     "grunt-open": "^0.2.3",
     "load-grunt-tasks": "^3.4.1",
     "markdown-toc": "^0.12.14",
-    "mocha": "^2.4.5",
+    "mocha": "5.2.0",
     "mocha-lcov-reporter": "^1.2.0",
     "nock": "8.1.0",
     "rimraf": "^2.5.2",

@@ -56,6 +56,9 @@
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
       }
+      if (data.hasOwnProperty('nodeId')) {
+        obj['nodeId'] = ApiClient.convertToType(data['nodeId'], 'String');
+      }
       if (data.hasOwnProperty('parentId')) {
         obj['parentId'] = ApiClient.convertToType(data['parentId'], 'String');
       }
@@ -70,6 +73,9 @@
       }
       if (data.hasOwnProperty('isFile')) {
         obj['isFile'] = ApiClient.convertToType(data['isFile'], 'Boolean');
+      }
+      if (data.hasOwnProperty('isFavorite')) {
+        obj['isFavorite'] = ApiClient.convertToType(data['isFavorite'], 'Boolean');
       }
       if (data.hasOwnProperty('modifiedAt')) {
         obj['modifiedAt'] = ApiClient.convertToType(data['modifiedAt'], 'Date');

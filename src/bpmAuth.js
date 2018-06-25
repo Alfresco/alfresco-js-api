@@ -12,8 +12,6 @@ class BpmAuth extends AlfrescoApiClient {
         super();
         this.className = 'BpmAuth';
 
-        this.username = this.loadUsername();
-
         this.config = config;
         this.ticket = undefined;
 
@@ -25,6 +23,8 @@ class BpmAuth extends AlfrescoApiClient {
 
         if (this.config.ticketBpm) {
             this.setTicket(config.ticketBpm);
+        } else if (this.storage.getItem('ticket-BPM')) {
+            this.setTicket(this.storage.getItem('ticket-BPM'));
         }
 
         Emitter.call(this);
@@ -39,24 +39,9 @@ class BpmAuth extends AlfrescoApiClient {
         this.config.disableCsrf = disableCsrf;
     }
 
-    supportsLocalStorage() {
-        try {
-            return 'localStorage' in window && window.localStorage !== null;
-        } catch (e) {
-            return false;
-        }
-    }
-
-    loadUsername() {
-        if (this.supportsLocalStorage()) {
-            return localStorage.getItem('ACS_USERNAME');
-        }
-        return '';
-    }
-
-    saveUsername(value) {
-        if (this.supportsLocalStorage()) {
-            localStorage.setItem('ACS_USERNAME', value);
+    saveUsername(username) {
+        if (this.storage.supportsStorage()) {
+            this.storage.setItem('APS_USERNAME', username);
         }
     }
 
@@ -142,7 +127,7 @@ class BpmAuth extends AlfrescoApiClient {
             ).then(
                 () => {
                     this.promise.emit('logout');
-                    this.setTicket(undefined);
+                    this.invalidateSession();
                     resolve('logout');
                 },
                 (error) => {
@@ -167,7 +152,15 @@ class BpmAuth extends AlfrescoApiClient {
     setTicket(ticket) {
         this.authentications.basicAuth.ticket = ticket;
         this.authentications.basicAuth.password = null;
+        this.storage.setItem('ticket-BPM', ticket);
         this.ticket = ticket;
+    }
+
+    invalidateSession() {
+        this.storage.removeItem('ticket-BPM');
+        this.authentications.basicAuth.ticket = null;
+        this.authentications.basicAuth.password = null;
+        this.ticket = null;
     }
 
     /**

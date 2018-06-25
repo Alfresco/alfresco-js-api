@@ -17,6 +17,7 @@ var BpmAuth = require('./bpmAuth');
 var Oauth2Auth = require('./oauth2Auth');
 var EcmClient = require('./ecmClient');
 var BpmClient = require('./bpmClient');
+var Storage = require('./storage');
 
 class AlfrescoApi {
     /**
@@ -25,6 +26,7 @@ class AlfrescoApi {
      *      config = {
      *        hostEcm:       // hostEcm Your share server IP or DNS name
      *        hostBpm: // hostBpm Your activiti server IP or DNS name
+     *        authType: // kind of authentication BASIC or OAUTH
      *        oauth2: {host:'http://127.0.0.1:9191', clientId:'alfrescoexample', secret:'secret'}
      *        contextRoot: // contextRoot default value alfresco
      *        contextRootBpm: // contextRoot activiti default value activiti-app
@@ -35,15 +37,23 @@ class AlfrescoApi {
      *    };
      */
     constructor(config) {
+        config = this.configureJsApi(config);
 
+        Emitter.call(this);
+    }
+
+    configureJsApi(config) {
         if (!config) {
             config = {};
         }
+
+        this.storage = new Storage();
 
         this.config = {
             hostEcm: config.hostEcm || 'http://127.0.0.1:8080',
             hostBpm: config.hostBpm || 'http://127.0.0.1:9999',
             oauth2: config.oauth2,
+            authType: config.authType || 'BASIC',
             contextRoot: config.contextRoot || 'alfresco',
             contextRootBpm: config.contextRootBpm || 'activiti-app',
             provider: config.provider || 'ECM',
@@ -56,13 +66,13 @@ class AlfrescoApi {
         this.ecmPrivateClient = new EcmClient(this.config, '/api/-default-/private/alfresco/versions/1');
         this.ecmClient = new EcmClient(this.config, '/api/-default-/public/alfresco/versions/1');
         this.searchClient = new EcmClient(this.config, '/api/-default-/public/search/versions/1');
-        this.discoveryClient = new EcmClient(this.config,'/api');
+        this.discoveryClient = new EcmClient(this.config, '/api');
         this.gsClient = new EcmClient(this.config, '/api/-default-/public/gs/versions/1');
         this.bpmClient = new BpmClient(this.config);
 
-        this.unauthorizedListeners();
+        this.errorListeners();
 
-        if (this.config.provider === 'OAUTH') {
+        if (this.isOauthConfiguration()) {
             this.oauth2Auth = new Oauth2Auth(this.config);
             this.setAuthenticationClientECMBPM(this.oauth2Auth.getAuthentication(), this.oauth2Auth.getAuthentication());
         } else {
@@ -72,46 +82,41 @@ class AlfrescoApi {
         }
 
         this.initObjects();
-
-        Emitter.call(this);
+        return config;
     }
 
-    unauthorizedListeners() {
-        this.ecmClient.on('unauthorized', () => {
-            this.invalidateSession();
+    errorListeners() {
+        this.ecmClient.on('error', (error) => {
+            this.errorHandler(error);
         });
 
-        this.ecmPrivateClient.on('unauthorized', () => {
-            this.invalidateSession();
+        this.ecmPrivateClient.on('error', (error) => {
+            this.errorHandler(error);
         });
 
-        this.bpmClient.on('unauthorized', () => {
-            this.invalidateSession();
+        this.bpmClient.on('error', (error) => {
+            this.errorHandler(error);
         });
 
-        this.searchClient.on('unauthorized', () => {
-            this.invalidateSession();
+        this.searchClient.on('error', (error) => {
+            this.errorHandler(error);
         });
 
-        this.discoveryClient.on('unauthorized', () => {
-            this.invalidateSession();
+        this.discoveryClient.on('error', (error) => {
+            this.errorHandler(error);
         });
 
-        this.gsClient.on('unauthorized', () => {
-            this.invalidateSession();
+        this.gsClient.on('error', (error) => {
+            this.errorHandler(error);
         });
+    }
 
-        this.ecmClient.on('unauthorized', () => {
+    errorHandler(error) {
+        if (error.status === 401) {
             this.invalidateSession();
-        });
+        }
 
-        this.ecmPrivateClient.on('unauthorized', () => {
-            this.invalidateSession();
-        });
-
-        this.bpmClient.on('unauthorized', ()=> {
-            this.invalidateSession();
-        });
+        this.emit('error', error);
     }
 
     changeCsrfConfig(disableCsrf) {
@@ -182,7 +187,7 @@ class AlfrescoApi {
     _instantiateObjects(module, moduleCopy) {
         var classArray = Object.keys(module);
 
-        classArray.forEach((currentClass)=> {
+        classArray.forEach((currentClass) => {
             moduleCopy[currentClass] = module[currentClass];
             var obj = this._stringToObject(currentClass, module);
             var nameObj = this._lowerFirst(currentClass);
@@ -217,47 +222,64 @@ class AlfrescoApi {
             username = username.trim();
         }
 
-        if (this._isBpmConfiguration()) {
-            var bpmPromise = this.bpmAuth.login(username, password);
+        if (this.isOauthConfiguration()) {
 
-            bpmPromise.then((ticketBpm)=> {
-                this.config.ticketBpm = ticketBpm;
-            }, ()=> {
-            });
+            var oauth2AuthPromise;
 
-            return bpmPromise;
-        } else if (this._isEcmConfiguration()) {
-            var ecmPromise = this.ecmAuth.login(username, password);
+            oauth2AuthPromise = this.oauth2Auth.login(username, password);
 
-            ecmPromise.then((ticketEcm)=> {
-                this.setAuthenticationClientECMBPM(this.ecmAuth.getAuthentication(), null);
-
-                this.config.ticketEcm = ticketEcm;
-            }, ()=> {
-            });
-
-            return ecmPromise;
-
-        } else if (this._isEcmBpmConfiguration()) {
-            var bpmEcmPromise = this._loginBPMECM(username, password);
-
-            bpmEcmPromise.then((data)=> {
-                this.config.ticketEcm = data[0];
-                this.config.ticketBpm = data[1];
-            }, ()=> {
-            });
-
-            return bpmEcmPromise;
-        } else if (this._isOauthConfiguration()) {
-            var oauth2AuthPromise = this.oauth2Auth.login(username, password);
-
-            oauth2AuthPromise.then((accessToken)=> {
+            oauth2AuthPromise.then((accessToken) => {
                 this.config.accessToken = accessToken;
-            }, ()=> {
+            }, () => {
             });
 
             return oauth2AuthPromise;
+
+        } else {
+
+            if (this.isBpmConfiguration()) {
+                var bpmPromise = this.bpmAuth.login(username, password);
+
+                bpmPromise.then((ticketBpm) => {
+                    this.config.ticketBpm = ticketBpm;
+                }, () => {
+                });
+
+                return bpmPromise;
+            } else if (this.isEcmConfiguration()) {
+                var ecmPromise = this.ecmAuth.login(username, password);
+
+                ecmPromise.then((ticketEcm) => {
+                    this.setAuthenticationClientECMBPM(this.ecmAuth.getAuthentication(), null);
+
+                    this.config.ticketEcm = ticketEcm;
+                }, () => {
+                });
+
+                return ecmPromise;
+
+            } else if (this.isEcmBpmConfiguration()) {
+                var bpmEcmPromise = this._loginBPMECM(username, password);
+
+                bpmEcmPromise.then((data) => {
+                    this.config.ticketEcm = data[0];
+                    this.config.ticketBpm = data[1];
+                }, () => {
+                });
+
+                return bpmEcmPromise;
+            }
         }
+    }
+
+    implicitLogin() {
+        if (!this.isOauthConfiguration()) {
+            return Promise.reject('Missing the required oauth2 configuration');
+        }
+
+        return new Promise((resolve, reject) => {
+            this.oauth2Auth.implicitLogin();
+        });
     }
 
     setAuthenticationClientECMBPM(authECM, authBPM) {
@@ -315,18 +337,22 @@ class AlfrescoApi {
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
     logout() {
-        if (this.config.provider && this.config.provider.toUpperCase() === 'BPM') {
-            return this.bpmAuth.logout();
-        } else if (this.config.provider && this.config.provider.toUpperCase() === 'ECM') {
-            var ecmPromise = this.ecmAuth.logout();
-            ecmPromise.then(()=> {
-                this.config.ticket = undefined;
-            }, ()=> {
-            });
+        if (this.isOauthConfiguration()) {
+            this.oauth2Auth.logOut();
+        } else {
+            if (this.isBpmConfiguration()) {
+                return this.bpmAuth.logout();
+            } else if (this.isEcmConfiguration()) {
+                var ecmPromise = this.ecmAuth.logout();
+                ecmPromise.then(() => {
+                    this.config.ticket = undefined;
+                }, () => {
+                });
 
-            return ecmPromise;
-        } else if (this.config.provider && this.config.provider.toUpperCase() === 'ALL') {
-            return this._logoutBPMECM();
+                return ecmPromise;
+            } else if (this.isEcmBpmConfiguration()) {
+                return this._logoutBPMECM();
+            }
         }
     }
 
@@ -361,14 +387,54 @@ class AlfrescoApi {
      * @returns {Boolean} is logged in
      */
     isLoggedIn() {
-        if (this.config.provider && this.config.provider.toUpperCase() === 'BPM') {
-            return this.bpmAuth.isLoggedIn();
-        } else if (this.config.provider && this.config.provider.toUpperCase() === 'ECM') {
-            return this.ecmAuth.isLoggedIn();
-        } else if (this.config.provider && this.config.provider.toUpperCase() === 'ALL') {
-            return this.ecmAuth.isLoggedIn() && this.bpmAuth.isLoggedIn();
-        } else if (this.config.provider && this.config.provider.toUpperCase() === 'OAUTH') {
+        if (this.isOauthConfiguration()) {
             return this.oauth2Auth.isLoggedIn();
+        } else {
+            if (this.isBpmConfiguration()) {
+                return this.bpmAuth.isLoggedIn();
+            } else if (this.isEcmConfiguration()) {
+                return this.ecmAuth.isLoggedIn();
+            } else if (this.isEcmBpmConfiguration()) {
+                return this.ecmAuth.isLoggedIn() && this.bpmAuth.isLoggedIn();
+            }
+        }
+    }
+
+    isBpmLoggedIn() {
+        if (this.isBpmConfiguration() || this.isEcmBpmConfiguration()) {
+            if (this.isOauthConfiguration()) {
+                return this.oauth2Auth.isLoggedIn();
+            } else {
+                return this.bpmAuth.isLoggedIn();
+            }
+        }
+        return false;
+    }
+
+    isEcmLoggedIn() {
+        if (this.isEcmConfiguration() || this.isEcmBpmConfiguration()) {
+            if (this.isOauthConfiguration()) {
+                return this.oauth2Auth.isLoggedIn();
+            } else {
+                return this.ecmAuth.isLoggedIn();
+            }
+        }
+        return false;
+    }
+
+    getBpmUsername() {
+        if (this.isOauthConfiguration()) {
+            return this.oauth2Auth.storage.getItem('USERNAME');
+        } else {
+            return this.bpmAuth.storage.getItem('APS_USERNAME');
+        }
+    }
+
+    getEcmUsername() {
+        if (this.isOauthConfiguration()) {
+            return this.oauth2Auth.storage.getItem('USERNAME');
+        } else {
+            return this.ecmAuth.storage.getItem('ACS_USERNAME');
         }
     }
 
@@ -376,8 +442,12 @@ class AlfrescoApi {
      * refresh token
      * */
     refreshToken() {
-        if (this.config.provider !== 'OAUTH') {
-            throw 'Missing the required oauth2 configuration';
+        if (!this.isOauthConfiguration()) {
+            return Promise.reject('Missing the required oauth2 configuration');
+        }
+
+        if (this.config.oauth2.implicitFlow) {
+            return Promise.reject('Manual refresh token not possible in implicit flow');
         }
 
         return this.oauth2Auth.refreshToken();
@@ -407,12 +477,11 @@ class AlfrescoApi {
      * */
     invalidateSession() {
         if (this.oauth2Auth) {
-            this.oauth2Auth.setToken(null, null);
+            this.oauth2Auth.invalidateSession();
         } else {
-            this.ecmAuth.setTicket(null);
-            this.bpmAuth.setTicket(null);
+            this.ecmAuth.invalidateSession();
+            this.bpmAuth.invalidateSession();
         }
-
     }
 
     /**
@@ -442,19 +511,19 @@ class AlfrescoApi {
         return [this.ecmAuth.getTicket(), this.bpmAuth.getTicket()];
     }
 
-    _isBpmConfiguration() {
+    isBpmConfiguration() {
         return this.config.provider && this.config.provider.toUpperCase() === 'BPM';
     }
 
-    _isEcmConfiguration() {
+    isEcmConfiguration() {
         return this.config.provider && this.config.provider.toUpperCase() === 'ECM';
     }
 
-    _isOauthConfiguration() {
-        return this.config.provider && this.config.provider.toUpperCase() === 'OAUTH';
+    isOauthConfiguration() {
+        return this.config.authType === 'OAUTH';
     }
 
-    _isEcmBpmConfiguration() {
+    isEcmBpmConfiguration() {
         return this.config.provider && this.config.provider.toUpperCase() === 'ALL';
     }
 
