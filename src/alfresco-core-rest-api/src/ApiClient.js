@@ -133,7 +133,7 @@
    */
   exports.prototype.isFileParam = function(param) {
     // fs.ReadStream in Node.js (but not in runtime like browserify)
-    if(typeof require('fs').ReadStream === 'object') {
+    if(typeof require('fs').ReadStream) {
       if (typeof window === 'undefined' &&
         typeof require === 'function' &&
         require('fs') &&
