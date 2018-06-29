@@ -2527,6 +2527,8 @@ declare namespace AlfrescoApi {
 
         importAppDefinition(file?: File): Promise<AppDefinitionRepresentation>;
 
+        importNewAppDefinition(modelId?: number, file?: File): Promise<AppDefinitionRepresentation>;
+
         publishAppDefinition(modelId?: number, publishModel?: AppDefinitionPublishRepresentation): Promise<AppDefinitionUpdateResultRepresentation>;
     }
 
@@ -2553,7 +2555,7 @@ declare namespace AlfrescoApi {
 
         importAppDefinition(file?: File): Promise<AppDefinitionRepresentation>;
 
-        importAppDefinition(modelId?: number, file?: File): Promise<AppDefinitionRepresentation>;
+        importNewAppDefinition(modelId?: number, file?: File): Promise<AppDefinitionRepresentation>;
 
         publishAppDefinition(modelId?: number, publishModel?: AppDefinitionPublishRepresentation): Promise<AppDefinitionUpdateResultRepresentation>;
     }
