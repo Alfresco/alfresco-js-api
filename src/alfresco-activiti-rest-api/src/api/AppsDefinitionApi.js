@@ -132,7 +132,7 @@
      * @param {File} file file
      * data is of type: {module:model/AppDefinitionRepresentation}
      */
-    this.importAppDefinition = function(modelId, file) {
+    this.importNewAppDefinition = function(modelId, file) {
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
