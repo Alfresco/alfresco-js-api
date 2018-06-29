@@ -4,6 +4,15 @@
 
 # Alfresco JS API
 
+<a name="2.5.0"></a>
+# [2.5.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.4.0) (xx-xx-2018)
+
+## Features
+
+## Fixes
+[AppsDefinitionApi contains two methods with same name and different firms](https://issues.alfresco.com/jira/browse/ADF-3289)
+
+
 <a name="2.4.0"></a>
 # [2.4.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.4.0) (25-06-2018)
 
