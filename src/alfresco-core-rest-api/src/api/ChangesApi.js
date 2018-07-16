@@ -349,6 +349,54 @@
       );
     }
 
+    /**
+     * Update a site
+     * Update existing site
+     * @param {String} siteId The identifier of a site.
+     * @param {module:model/SiteBody} siteBody The site details
+     * @param {Object} opts Optional parameters
+     * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
+     * data is of type: {module:model/SiteEntry}
+     */
+    this.updateSite = function(siteId, siteBody, opts) {
+      opts = opts || {};
+      var postBody = siteBody;
+
+      // verify the required parameter 'siteId' is set
+      if (siteId == undefined || siteId == null) {
+        throw "Missing the required parameter 'siteId' when calling updateSite";
+      }
+
+      // verify the required parameter 'siteId' is set
+      if (siteBody == undefined || siteBody == null) {
+        throw "Missing the required parameter 'siteBody' when calling updateSite";
+      }
+
+      var pathParams = {
+        'siteId': siteId,
+        'siteBodyUpdate': siteBody
+      };
+
+      var queryParams = {
+        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = SiteEntry;
+
+      return this.apiClient.callApi(
+        '/sites/{siteId}', 'PUT',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
 
     /**
      * Delete a node
