@@ -617,6 +617,8 @@ declare namespace AlfrescoApi {
 
         createSite(siteBody?: SiteBody, opts?: { skipConfiguration?: Boolean, skipAddToFavorites?: Boolean }): Promise<SiteEntry>;
 
+        updateSite(siteId?: string, siteBody?: SiteBody, opts?: { fields?: Array<string> }): Promise<SiteEntry>;
+
         deleteSite(siteId?: string, opts?: { permanent?: Boolean }): Promise<any>;
 
         getSite(siteId?: string, opts?: { relations?: Array<string>, fields?: Array<string> }): Promise<SiteEntry>;
