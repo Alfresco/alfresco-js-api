@@ -367,7 +367,7 @@
         throw "Missing the required parameter 'siteId' when calling updateSite";
       }
 
-      // verify the required parameter 'siteId' is set
+      // verify the required parameter 'siteBody' is set
       if (siteBody == undefined || siteBody == null) {
         throw "Missing the required parameter 'siteBody' when calling updateSite";
       }
