@@ -115,6 +115,7 @@ Class | Method | HTTP request | Description
 *AlfrescoCoreRestApi.SharedlinksApi* | [**getSharedLinkContent**](docs/SharedlinksApi.md#getSharedLinkContent) | **GET** /shared-links/{sharedId}/content | Get file content
 *AlfrescoCoreRestApi.SitesApi* | [**addSiteMember**](docs/SitesApi.md#addSiteMember) | **POST** /sites/{siteId}/members | Add a person
 *AlfrescoCoreRestApi.SitesApi* | [**createSite**](docs/SitesApi.md#createSite) | **POST** /sites | Create a site
+*AlfrescoCoreRestApi.SitesApi* | [**updateSite**](docs/SitesApi.md#updateSite) | **PUT** /sites/{siteId} | Update a site
 *AlfrescoCoreRestApi.SitesApi* | [**deleteSite**](docs/SitesApi.md#deleteSite) | **DELETE** /sites/{siteId} | Delete a site
 *AlfrescoCoreRestApi.SitesApi* | [**getSite**](docs/SitesApi.md#getSite) | **GET** /sites/{siteId} | Get a site
 *AlfrescoCoreRestApi.SitesApi* | [**getSiteContainer**](docs/SitesApi.md#getSiteContainer) | **GET** /sites/{siteId}/containers/{containerId} | Get a container

@@ -133,6 +133,63 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+
+<a name="updateSite"></a>
+# **updateSite**
+> SiteEntry updateSite(siteId, siteBody, opts)
+
+Update a site
+
+Update the details for the given site siteId. Site Manager or otherwise a (site) admin can update title, description or visibility.
+Note: the id of a site cannot be updated once the site has been created.
+
+### Example
+```javascript
+
+this.alfrescoJsApi.core.sitesApi()
+
+var siteBody = new this.alfrescoJsApi.core.SiteBody(); // {SiteBody} The site details
+var opts = {
+  'fields': ["fields_example"]  /* {[String]} A list of field names.
+                                You can use this parameter to restrict the fields
+                                returned within a response if, for example, you want to save on overall bandwidth.
+
+                                The list applies to a returned individual
+                                entity or entries within a collection.
+
+                                If the API method also supports the **include**
+                                parameter, then the fields specified in the **include**
+                                parameter are returned in addition to those specified in the **fields** parameter. */
+};
+this.alfrescoJsApi.core.sitesApi.updateSite(siteId, siteBody, opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **siteId** | **String**| The identifier of a site. |
+ **siteBody** | [**SiteBody**](SiteBody.md)| The site details |
+ **fields** | [**[String]**](String.md)| A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional]
+
+### Return type
+
+[**SiteEntry**](SiteEntry.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
 <a name="deleteSite"></a>
 # **deleteSite**
 > deleteSite(siteId, opts)
