@@ -8,6 +8,7 @@
 # [2.5.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.4.0) (xx-xx-2018)
 
 ## Features
+[Sites API - update Site details](https://issues.alfresco.com/jira/browse/ADF-3366)
 
 ## Fixes
 [AppsDefinitionApi contains two methods with same name and different firms](https://issues.alfresco.com/jira/browse/ADF-3289)
