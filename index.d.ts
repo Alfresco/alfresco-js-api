@@ -471,7 +471,7 @@ declare namespace AlfrescoApi {
         firstName: string;
         lastName: string;
         email: string;
-        password: number;
+        password: string;
         properties: any;
     }
 
@@ -1293,6 +1293,9 @@ declare namespace AlfrescoApi {
 
         id?: string;
         name?: string;
+
+        nodeType?: string;
+        aspectNames?: Array<string>;
     }
 
     export class PathInfo {

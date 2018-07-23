@@ -49,6 +49,12 @@
       if (data.hasOwnProperty('name')) {
         obj['name'] = ApiClient.convertToType(data['name'], 'String');
       }
+      if (data.hasOwnProperty('nodeType')) {
+        obj['nodeType'] = ApiClient.convertToType(data['nodeType'], 'String');
+      }
+      if (data.hasOwnProperty('aspectNames')) {
+        obj['aspectNames'] = ApiClient.convertToType(data['aspectNames'], ['String']);
+      }
     }
     return obj;
   }
@@ -64,7 +70,15 @@
    */
   exports.prototype['name'] = undefined;
 
+  /**
+   * @member {String} nodeType
+   */
+  exports.prototype['nodeType'] = undefined;
 
+  /**
+   * @member {string[]} aspectNames
+   */
+  exports.prototype['aspectNames'] = undefined;
 
 
   return exports;

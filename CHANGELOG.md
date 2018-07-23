@@ -11,7 +11,9 @@
 [Sites API - update Site details](https://issues.alfresco.com/jira/browse/ADF-3366)
 
 ## Fixes
-[AppsDefinitionApi contains two methods with same name and different firms](https://issues.alfresco.com/jira/browse/ADF-3289)
+- [AppsDefinitionApi contains two methods with same name and different firms](https://issues.alfresco.com/jira/browse/ADF-3289)
+- [Incorrect datatype for password in PersonBodyCreate in index.d.ts](https://issues.alfresco.com/jira/browse/ADF-3383)
+- [PathElementEntity is missing properties](https://issues.alfresco.com/jira/browse/ADF-3214)
 
 
 <a name="2.4.0"></a>
