@@ -471,7 +471,7 @@ declare namespace AlfrescoApi {
         firstName: string;
         lastName: string;
         email: string;
-        password: number;
+        password: string;
         properties: any;
     }
 
