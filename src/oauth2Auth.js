@@ -2,7 +2,6 @@
 
 var AlfrescoApiClient = require('./alfrescoApiClient');
 var Emitter = require('event-emitter');
-var rs = require('jsrsasign');
 
 class Oauth2Auth extends AlfrescoApiClient {
 
@@ -196,11 +195,26 @@ class Oauth2Auth extends AlfrescoApiClient {
 
     }
 
+    padBase64(base64data) {
+        while (base64data.length % 4 !== 0) {
+            base64data += '=';
+        }
+        return base64data;
+    }
+
     processJWTToken(jwt) {
         return new Promise((resolve, reject) => {
             if (jwt) {
-                const header = rs.jws.JWS.readSafeJSONString(rs.b64utoutf8(jwt.split('.')[0]));
-                const payload = rs.jws.JWS.readSafeJSONString(rs.b64utoutf8(jwt.split('.')[1]));
+
+                const jwtArray = jwt.split('.');
+                const headerBase64 = this.padBase64(jwtArray[0]);
+                const headerJson = this.b64DecodeUnicode(headerBase64);
+                const header = JSON.parse(headerJson);
+
+                const payloadBase64 = this.padBase64(jwtArray[1]);
+                const payloadJson = this.b64DecodeUnicode(payloadBase64);
+                const payload = JSON.parse(payloadJson);
+
                 const savedNonce = this.storage.getItem('nonce');
 
                 if (!payload.sub) {
@@ -212,33 +226,26 @@ class Oauth2Auth extends AlfrescoApiClient {
                 }
 
                 if (this.jwks) {
-                    let validObj = this.validateJWKS(this.jwks, jwt, payload, header);
-                    if (validObj) {
-                        resolve(validObj);
-                    } else {
-                        reject('Invalid JWT');
-                    }
+                    resolve({
+                        idToken: jwt,
+                        payload: payload,
+                        header: header
+                    });
                 }
             }
         });
     }
 
-    validateJWKS(jwks, jwt, payload, header) {
-        let keyObj = rs.KEYUTIL.getKey(jwks.keys[0]);
-        let isValid = rs.jws.JWS.verifyJWT(jwt, keyObj,
-            {
-                alg: [header.alg],
-                iss: [this.config.oauth2.host],
-                aud: [this.config.oauth2.clientId]
-            });
-
-        if (isValid) {
-            return {
-                idToken: jwt,
-                payload: payload,
-                header: header
-            };
-        }
+    b64DecodeUnicode(str) {
+        const base64 = str.replace(/\-/g, '+').replace(/\_/g, '/');
+        return decodeURIComponent(
+            atob(base64)
+                .split('')
+                .map((c) => {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                })
+                .join('')
+        );
     }
 
     storeIdToken(idToken, exp) {
