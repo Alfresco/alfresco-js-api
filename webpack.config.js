@@ -15,6 +15,9 @@ var myRules = [{
             ['transform-es2015-classes', {loose: true}],
             'transform-proto-to-assign']
     }
+}, {
+    test: /\.(js|css)$/,
+    loader: 'remove-comments-loader'
 }]
 
 module.exports = [{
