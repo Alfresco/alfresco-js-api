@@ -663,6 +663,8 @@ declare namespace AlfrescoApi {
 
         addPerson(person: PersonBodyCreate): Promise<PersonEntry>;
 
+        updatePerson(personId: string, personBody: PersonBodyUpdate, opts?: { fields?: Array<string> }): Promise<PersonEntry>;
+
         addFavorite(personId?: string, favoriteBody?: FavoriteBody): Promise<FavoriteEntry>;
 
         addSiteMembershipRequest(personId?: string, siteMembershipBody?: SiteMembershipRequestBody): Promise<SiteMembershipRequestEntry>;
