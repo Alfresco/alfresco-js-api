@@ -568,6 +568,54 @@
 
 
     /**
+     * Update an existing user
+     * @param {String} personId The identifier of a user.
+     * @param {PersonBodyUpdate} personBodyUpdate The user details
+     * @param {Object} opts Optional parameters
+     * @param {string[]} opts.fields A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the include parameter, then the fields specified in the include parameter are returned in addition to those specified in the fields parameter\n
+     * data is of type: {module:model/PersonEntry}
+     */
+    this.updatePerson = function(personId, personBodyUpdate, opts) {
+      opts = opts || {};
+      var postBody = personBodyUpdate;
+
+      // verify the required parameter 'personId' is set
+      if (personId == undefined || personId == null) {
+        throw "Missing the required parameter 'personId' when calling updatePerson";
+      }
+
+      // verify the required parameter 'personBodyUpdate' is set
+      if (personBodyUpdate == undefined || personBodyUpdate == null) {
+        throw "Missing the required parameter 'personBodyUpdate' when calling updatePerson";
+      }
+
+      var pathParams = {
+        'personId': personId,
+        'personBodyUpdate': personBodyUpdate
+      };
+
+      var queryParams = {
+        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['basicAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = PersonEntry;
+
+      return this.apiClient.callApi(
+        '/people/{personId}', 'PUT',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+
+    /**
      * Get network information
      * Returns network information on a single network specified by **networkId** for **personId**.
      * @param {String} personId The identifier of a person.

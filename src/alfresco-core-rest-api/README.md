@@ -84,6 +84,7 @@ Class | Method | HTTP request | Description
 *AlfrescoCoreRestApi.PeopleApi* | [**getFavoriteSites**](docs/PeopleApi.md#getFavoriteSites) | **GET** /people/{personId}/favorite-sites | Get favorite sites
 *AlfrescoCoreRestApi.PeopleApi* | [**getFavorites**](docs/PeopleApi.md#getFavorites) | **GET** /people/{personId}/favorites | Get favorites
 *AlfrescoCoreRestApi.PeopleApi* | [**addPerson**](docs/PeopleApi.md#addPerson) | **POST** /people | Add a person
+*AlfrescoCoreRestApi.PeopleApi* | [**updatePerson**](docs/PeopleApi.md#updatePerson) | **PUT** /people/{personId} | Update a person
 *AlfrescoCoreRestApi.PeopleApi* | [**getPersons**](docs/PeopleApi.md#getPersons) | **GET** /people | List people
 *AlfrescoCoreRestApi.PeopleApi* | [**getPerson**](docs/PeopleApi.md#getPerson) | **GET** /people/{personId} | Get a person
 *AlfrescoCoreRestApi.PeopleApi* | [**getPersonNetwork**](docs/PeopleApi.md#getPersonNetwork) | **GET** /people/{personId}/networks/{networkId} | Get network information
