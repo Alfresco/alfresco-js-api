@@ -22,7 +22,7 @@ class AlfrescoUpload extends AlfrescoCoreRestApi.NodesApi {
 
         nodeBody = Object.assign(nodeBodyRequired, nodeBody);
 
-        var formParam = {};
+        var formParam = Object.assign({}, nodeBody.properties || {});
         formParam.filedata = fileDefinition;
         formParam.relativePath = relativePath;
         if (opts.name) {
