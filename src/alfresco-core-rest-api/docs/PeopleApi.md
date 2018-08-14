@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**getFavoriteSites**](PeopleApi.md#getFavoriteSites) | **GET** /people/{personId}/favorite-sites | Get favorite sites
 [**getFavorites**](PeopleApi.md#getFavorites) | **GET** /people/{personId}/favorites | Get favorites
 [**addPerson**](PeopleApi.md#addPerson) | **POST** /people | create a person
+[**updatePerson**](PeopleApi.md#updatePerson) | **PUT** /people/{personId} | update a person
 [**getPerson**](PeopleApi.md#getPerson) | **GET** /people/{personId} | Get a person
 [**getPersons**](PeopleApi.md#getPersons) | **GET** /people/| List people
 [**getPersonNetwork**](PeopleApi.md#getPersonNetwork) | **GET** /people/{personId}/networks/{networkId} | Get network information
@@ -733,6 +734,61 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **person** | [**[PersonBodyCreate]**](PersonBodyCreate.md)  The person object that you want create |
 
+
+### Return type
+
+[**PersonEntry**](PersonEntry.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+# **updatePerson**
+> PersonEntry updatePerson(personId, personBodyUpdate, opts)
+
+Update a person
+
+Update the given person's details.
+You can use the -me- string in place of <personid> to specify the currently authenticated user.
+If applicable, the given person's login access can also be optionally disabled or re-enabled.
+You must have admin rights to update a person — unless updating your own details.
+If you are changing your password, as a non-admin user, then the existing password must also be supplied (using the oldPassword field in addition to the new password value).
+Admin users cannot be disabled by setting enabled to false.
+Non-admin users may not disable themselves.
+You can set custom properties when you update a person:
+
+### Example
+```javascript
+
+this.alfrescoJsApi.core.peopleApi()
+
+var personBodyUpdate = new this.alfrescoJsApi.core.PersonBodyUpdate(); // {personBody} The person details
+
+personBodyUpdate.email = 'chewbe@millenniumfalcon.com';
+personBodyUpdate.lastName = 'Chewbe';
+personBodyUpdate.firstName = 'chewbacca';
+personBodyUpdate.password = 'new password';
+
+this.alfrescoJsApi.core.peopleApi.updatePerson(personId, personBodyUpdate).then(function (data) {
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **personId** | **String**| The identifier of a person. |
+ **personBodyUpdate** | [**PersonBodyUpdate**](PersonBodyUpdate.md)| The person details |
+ **fields** | [**[String]**](String.md)| A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | [optional]
 
 ### Return type
 

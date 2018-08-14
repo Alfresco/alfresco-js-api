@@ -471,7 +471,7 @@ declare namespace AlfrescoApi {
         firstName: string;
         lastName: string;
         email: string;
-        password: number;
+        password: string;
         properties: any;
     }
 
@@ -617,6 +617,8 @@ declare namespace AlfrescoApi {
 
         createSite(siteBody?: SiteBody, opts?: { skipConfiguration?: Boolean, skipAddToFavorites?: Boolean }): Promise<SiteEntry>;
 
+        updateSite(siteId?: string, siteBody?: SiteBody, opts?: { fields?: Array<string> }): Promise<SiteEntry>;
+
         deleteSite(siteId?: string, opts?: { permanent?: Boolean }): Promise<any>;
 
         getSite(siteId?: string, opts?: { relations?: Array<string>, fields?: Array<string> }): Promise<SiteEntry>;
@@ -660,6 +662,8 @@ declare namespace AlfrescoApi {
         new(client: ApiClient): PeopleApi;
 
         addPerson(person: PersonBodyCreate): Promise<PersonEntry>;
+
+        updatePerson(personId: string, personBody: PersonBodyUpdate, opts?: { fields?: Array<string> }): Promise<PersonEntry>;
 
         addFavorite(personId?: string, favoriteBody?: FavoriteBody): Promise<FavoriteEntry>;
 
@@ -1291,6 +1295,9 @@ declare namespace AlfrescoApi {
 
         id?: string;
         name?: string;
+
+        nodeType?: string;
+        aspectNames?: Array<string>;
     }
 
     export class PathInfo {
@@ -2527,6 +2534,8 @@ declare namespace AlfrescoApi {
 
         importAppDefinition(file?: File): Promise<AppDefinitionRepresentation>;
 
+        importNewAppDefinition(modelId?: number, file?: File): Promise<AppDefinitionRepresentation>;
+
         publishAppDefinition(modelId?: number, publishModel?: AppDefinitionPublishRepresentation): Promise<AppDefinitionUpdateResultRepresentation>;
     }
 
@@ -2553,7 +2562,7 @@ declare namespace AlfrescoApi {
 
         importAppDefinition(file?: File): Promise<AppDefinitionRepresentation>;
 
-        importAppDefinition(modelId?: number, file?: File): Promise<AppDefinitionRepresentation>;
+        importNewAppDefinition(modelId?: number, file?: File): Promise<AppDefinitionRepresentation>;
 
         publishAppDefinition(modelId?: number, publishModel?: AppDefinitionPublishRepresentation): Promise<AppDefinitionUpdateResultRepresentation>;
     }
