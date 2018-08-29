@@ -63,7 +63,7 @@
         obj['password'] = ApiClient.convertToType(data['password'], 'String');
       }
 
-      if (data.hasOwnProperty('password')) {
+      if (data.hasOwnProperty('properties')) {
         obj['properties'] = ApiClient.convertToType(data['properties'], {'String': 'String'});
       }
     }
