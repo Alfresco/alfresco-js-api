@@ -29,19 +29,27 @@ install:
     - npm install
 
 script:
-    - npm run clean-build
-    - grunt
-    - npm run tslint || exit 1
     - npm run test || exit 1
     - npm run webpack
 
+
 jobs:
     include:
+        - stage: Lint
+          script: npm run tslint || exit 1; grunt || exit 1
+        - stage: Build
+          script: npm run webpack || exit 1
+        - stage: Test
+          script: npm run test || exit 1
         - stage: Check demo shell e2e test
           before_install:
                     - "export DISPLAY=:99.0"
                     - "sh -e /etc/init.d/xvfb start"
           script: travis_wait 30 ./scripts/test-demo-shell-adf.sh
+
+
+
+
 
 after_success:
   - npm run coverage --force
