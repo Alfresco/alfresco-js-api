@@ -11,6 +11,7 @@
 
 ## Fixes
 - ['cm:lockOwner' when requesting it via the nodesApi](https://issues.alfresco.com/jira/browse/ADF-3495)
+- ["versionComment" is missing in typings](https://issues.alfresco.com/jira/browse/ADF-31555)
 
 <a name="2.5.0"></a>
 # [2.5.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.5.0) (15-08-2018)
