@@ -157,7 +157,7 @@ class Oauth2Auth extends AlfrescoApiClient {
 
             this.hashFragmentParams = this.getHashFragmentParams(externalHash);
 
-            if (this.isValidAccessToken()) {
+            if (externalHash === undefined && this.isValidAccessToken()) {
                 let accessToken = this.storage.getItem('access_token');
                 this.setToken(accessToken, null);
                 resolve(accessToken);
@@ -169,7 +169,6 @@ class Oauth2Auth extends AlfrescoApiClient {
                 let sessionState = this.hashFragmentParams.session_state;
                 let expiresIn = this.hashFragmentParams.expires_in;
 
-                window.location.hash = '';
                 if (!sessionState) {
                     reject('session state not present');
                 }
@@ -403,6 +402,7 @@ class Oauth2Auth extends AlfrescoApiClient {
 
             if (!externalHash) {
                 hash = decodeURIComponent(window.location.hash);
+                window.location.hash = '';
             } else {
                 hash = decodeURIComponent(externalHash);
             }
