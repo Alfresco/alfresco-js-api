@@ -12,6 +12,7 @@ class Oauth2Auth extends AlfrescoApiClient {
         super();
         this.config = config;
         this.init = false;
+        this.isSilentRefreshIframeAttached = false;
 
         if (this.config.oauth2) {
             if (this.config.oauth2.host === undefined || this.config.oauth2.host === null) {
@@ -160,6 +161,7 @@ class Oauth2Auth extends AlfrescoApiClient {
             if (externalHash === undefined && this.isValidAccessToken()) {
                 let accessToken = this.storage.getItem('access_token');
                 this.setToken(accessToken, null);
+                this.silentRefresh();
                 resolve(accessToken);
             }
 
@@ -455,14 +457,17 @@ class Oauth2Auth extends AlfrescoApiClient {
     }
 
     silentRefresh() {
-        if (typeof document === 'undefined') {
-            throw new Error('Silent refresh supported only on browsers');
-        }
+        if (!this.isSilentRefreshIframeAttached) {
+            this.isSilentRefreshIframeAttached = true;
+            if (typeof document === 'undefined') {
+                throw new Error('Silent refresh supported only on browsers');
+            }
 
-        setTimeout(() => {
-            this.destroyIframe();
-            this.createIframe();
-        }, this.config.oauth2.refreshTokenTimeout);
+            setTimeout(() => {
+                this.destroyIframe();
+                this.createIframe();
+            }, this.config.oauth2.refreshTokenTimeout);
+        }
     }
 
     createIframe() {
