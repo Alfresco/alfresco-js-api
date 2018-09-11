@@ -12,7 +12,6 @@ class Oauth2Auth extends AlfrescoApiClient {
         super();
         this.config = config;
         this.init = false;
-        this.isSilentRefreshIframeAttached = false;
 
         if (this.config.oauth2) {
             if (this.config.oauth2.host === undefined || this.config.oauth2.host === null) {
@@ -37,6 +36,14 @@ class Oauth2Auth extends AlfrescoApiClient {
 
             if (!this.config.oauth2.refreshTokenTimeout) {
                 this.config.oauth2.refreshTokenTimeout = 40000;
+            }
+
+            if (!this.config.oauth2.redirectSilentIframeUri) {
+                var context = '';
+                if (typeof window !== 'undefined') {
+                    context = window.location.origin;
+                }
+                this.config.oauth2.redirectSilentIframeUri = context + '/assets/adf-core/silent-refresh.html';
             }
 
             this.basePath = this.config.oauth2.host; //Auth Call
@@ -407,6 +414,8 @@ class Oauth2Auth extends AlfrescoApiClient {
                 window.location.hash = '';
             } else {
                 hash = decodeURIComponent(externalHash);
+                this.removeHashFromSilentIframe();
+                this.destroyIframe();
             }
 
             if (this.hasHashCharacter(hash) && !this.isHashRoute(hash)) {
@@ -457,16 +466,20 @@ class Oauth2Auth extends AlfrescoApiClient {
     }
 
     silentRefresh() {
-        if (!this.isSilentRefreshIframeAttached) {
-            this.isSilentRefreshIframeAttached = true;
-            if (typeof document === 'undefined') {
-                throw new Error('Silent refresh supported only on browsers');
-            }
+        if (typeof document === 'undefined') {
+            throw new Error('Silent refresh supported only on browsers');
+        }
 
-            setTimeout(() => {
-                this.destroyIframe();
-                this.createIframe();
-            }, this.config.oauth2.refreshTokenTimeout);
+        setTimeout(() => {
+            this.destroyIframe();
+            this.createIframe();
+        }, this.config.oauth2.refreshTokenTimeout);
+    }
+
+    removeHashFromSilentIframe() {
+        var iframe = document.getElementById('silent_refresh_token_iframe');
+        if (iframe && iframe.contentWindow.location.hash) {
+            iframe.contentWindow.location.hash = '';
         }
     }
 
