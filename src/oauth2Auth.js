@@ -364,6 +364,29 @@ class Oauth2Auth extends AlfrescoApiClient {
 
     }
 
+    composeIframeLoginUrl() {
+        var nonce = this.genNonce();
+
+        this.storage.setItem('nonce', nonce);
+
+        var separation = this.discovery.loginUrl.indexOf('?') > -1 ? '&' : '?';
+
+        return this.discovery.loginUrl +
+            separation +
+            'client_id=' +
+            encodeURIComponent(this.config.oauth2.clientId) +
+            '&redirect_uri=' +
+            encodeURIComponent(this.config.oauth2.redirectSilentIframeUri) +
+            '&scope=' +
+            encodeURIComponent(this.config.oauth2.scope) +
+            '&response_type=' +
+            encodeURIComponent('id_token token') +
+            '&nonce=' +
+            encodeURIComponent(nonce) +
+            '&prompt=none';
+
+    }
+
     hasHashCharacter(hash) {
         return hash.indexOf('#') === 0;
     }
@@ -445,7 +468,7 @@ class Oauth2Auth extends AlfrescoApiClient {
     createIframe() {
         const iframe = document.createElement('iframe');
         iframe.id = 'silent_refresh_token_iframe';
-        let loginUrl = this.composeImplicitLoginUrl();
+        let loginUrl = this.composeIframeLoginUrl();
         iframe.setAttribute('src', loginUrl);
         iframe.style.display = 'none';
         document.body.appendChild(iframe);
