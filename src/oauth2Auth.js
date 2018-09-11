@@ -43,7 +43,7 @@ class Oauth2Auth extends AlfrescoApiClient {
                 if (typeof window !== 'undefined') {
                     context = window.location.origin;
                 }
-                this.config.oauth2.redirectSilentIframeUri = context + '/assets/adf-core/silent-refresh.html';
+                this.config.oauth2.redirectSilentIframeUri = context + '/assets/silent-refresh.html';
             }
 
             this.basePath = this.config.oauth2.host; //Auth Call
