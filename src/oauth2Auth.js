@@ -400,7 +400,7 @@ class Oauth2Auth extends AlfrescoApiClient {
     }
 
     startWithHashRoute(hash) {
-        return hash.startsWith('#/') === 0;
+        return hash.startsWith('#/');
     }
 
     getHashFragmentParams(externalHash) {
