@@ -4,8 +4,17 @@
 
 # Alfresco JS API
 
+<a name="2.6.0"></a>
+# [2.6.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.6.0) (xx-xxx-2018)
+
+## Features
+
+## Fixes
+- ['cm:lockOwner' when requesting it via the nodesApi](https://issues.alfresco.com/jira/browse/ADF-3495)
+- [ Fix the silent refresh login](https://issues.alfresco.com/jira/browse/ADF-3531)
+
 <a name="2.5.0"></a>
-# [2.5.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.4.0) (xx-xx-2018)
+# [2.5.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.5.0) (15-08-2018)
 
 ## Features
 - [Sites API - update Site details](https://issues.alfresco.com/jira/browse/ADF-3366)
