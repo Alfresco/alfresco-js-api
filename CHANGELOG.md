@@ -12,6 +12,7 @@
 ## Fixes
 - ['cm:lockOwner' when requesting it via the nodesApi](https://issues.alfresco.com/jira/browse/ADF-3495)
 - [ Fix the silent refresh login](https://issues.alfresco.com/jira/browse/ADF-3531)
+- [ When a page is refresh the js api remove the part after the #](https://issues.alfresco.com/jira/browse/ADF-3552)
 
 <a name="2.5.0"></a>
 # [2.5.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.5.0) (15-08-2018)
