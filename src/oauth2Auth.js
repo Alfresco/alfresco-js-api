@@ -399,8 +399,8 @@ class Oauth2Auth extends AlfrescoApiClient {
         return hash.indexOf('#') === 0;
     }
 
-    isHashRoute(hash) {
-        return hash.indexOf('#/') === 0;
+    startWithHashRoute(hash) {
+        return hash.startsWith('#/') === 0;
     }
 
     getHashFragmentParams(externalHash) {
@@ -411,14 +411,16 @@ class Oauth2Auth extends AlfrescoApiClient {
 
             if (!externalHash) {
                 hash = decodeURIComponent(window.location.hash);
-                window.location.hash = '';
+                if (!this.startWithHashRoute(hash)) {
+                    window.location.hash = '';
+                }
             } else {
                 hash = decodeURIComponent(externalHash);
                 this.removeHashFromSilentIframe();
                 this.destroyIframe();
             }
 
-            if (this.hasHashCharacter(hash) && !this.isHashRoute(hash)) {
+            if (this.hasHashCharacter(hash) && !this.startWithHashRoute(hash)) {
                 const questionMarkPosition = hash.indexOf('?');
 
                 if (questionMarkPosition > -1) {
