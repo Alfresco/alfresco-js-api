@@ -38,6 +38,14 @@ class Oauth2Auth extends AlfrescoApiClient {
                 this.config.oauth2.refreshTokenTimeout = 40000;
             }
 
+            if (!this.config.oauth2.redirectSilentIframeUri) {
+                var context = '';
+                if (typeof window !== 'undefined') {
+                    context = window.location.origin;
+                }
+                this.config.oauth2.redirectSilentIframeUri = context + '/assets/silent-refresh.html';
+            }
+
             this.basePath = this.config.oauth2.host; //Auth Call
 
             this.authentications = {
@@ -157,9 +165,10 @@ class Oauth2Auth extends AlfrescoApiClient {
 
             this.hashFragmentParams = this.getHashFragmentParams(externalHash);
 
-            if (this.isValidAccessToken()) {
+            if (externalHash === undefined && this.isValidAccessToken()) {
                 let accessToken = this.storage.getItem('access_token');
                 this.setToken(accessToken, null);
+                this.silentRefresh();
                 resolve(accessToken);
             }
 
@@ -169,7 +178,6 @@ class Oauth2Auth extends AlfrescoApiClient {
                 let sessionState = this.hashFragmentParams.session_state;
                 let expiresIn = this.hashFragmentParams.expires_in;
 
-                window.location.hash = '';
                 if (!sessionState) {
                     reject('session state not present');
                 }
@@ -364,6 +372,29 @@ class Oauth2Auth extends AlfrescoApiClient {
 
     }
 
+    composeIframeLoginUrl() {
+        var nonce = this.genNonce();
+
+        this.storage.setItem('nonce', nonce);
+
+        var separation = this.discovery.loginUrl.indexOf('?') > -1 ? '&' : '?';
+
+        return this.discovery.loginUrl +
+            separation +
+            'client_id=' +
+            encodeURIComponent(this.config.oauth2.clientId) +
+            '&redirect_uri=' +
+            encodeURIComponent(this.config.oauth2.redirectSilentIframeUri) +
+            '&scope=' +
+            encodeURIComponent(this.config.oauth2.scope) +
+            '&response_type=' +
+            encodeURIComponent('id_token token') +
+            '&nonce=' +
+            encodeURIComponent(nonce) +
+            '&prompt=none';
+
+    }
+
     hasHashCharacter(hash) {
         return hash.indexOf('#') === 0;
     }
@@ -380,8 +411,11 @@ class Oauth2Auth extends AlfrescoApiClient {
 
             if (!externalHash) {
                 hash = decodeURIComponent(window.location.hash);
+                window.location.hash = '';
             } else {
                 hash = decodeURIComponent(externalHash);
+                this.removeHashFromSilentIframe();
+                this.destroyIframe();
             }
 
             if (this.hasHashCharacter(hash) && !this.isHashRoute(hash)) {
@@ -442,10 +476,17 @@ class Oauth2Auth extends AlfrescoApiClient {
         }, this.config.oauth2.refreshTokenTimeout);
     }
 
+    removeHashFromSilentIframe() {
+        var iframe = document.getElementById('silent_refresh_token_iframe');
+        if (iframe && iframe.contentWindow.location.hash) {
+            iframe.contentWindow.location.hash = '';
+        }
+    }
+
     createIframe() {
         const iframe = document.createElement('iframe');
         iframe.id = 'silent_refresh_token_iframe';
-        let loginUrl = this.composeImplicitLoginUrl();
+        let loginUrl = this.composeIframeLoginUrl();
         iframe.setAttribute('src', loginUrl);
         iframe.style.display = 'none';
         document.body.appendChild(iframe);
