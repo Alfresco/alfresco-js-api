@@ -8,6 +8,7 @@
 # [2.6.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.6.0) (xx-xxx-2018)
 
 ## Features
+- ['Added domain prefix for saving multilpe ECM tickets'](https://issues.alfresco.com/jira/browse/ADF-3499)
 
 ## Fixes
 - ['cm:lockOwner' when requesting it via the nodesApi](https://issues.alfresco.com/jira/browse/ADF-3495)
