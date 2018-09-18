@@ -12,6 +12,7 @@
 
 ## Fixes
 - ['cm:lockOwner' when requesting it via the nodesApi](https://issues.alfresco.com/jira/browse/ADF-3495)
+- ["versionComment" is missing in typings](https://issues.alfresco.com/jira/browse/ADF-31555)
 - [ Fix the silent refresh login](https://issues.alfresco.com/jira/browse/ADF-3531)
 - [ When a page is refresh the js api remove the part after the #](https://issues.alfresco.com/jira/browse/ADF-3552)
 

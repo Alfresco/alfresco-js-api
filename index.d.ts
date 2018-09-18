@@ -2210,7 +2210,7 @@ declare namespace AlfrescoApi {
         constructor(obj?: any);
 
         id?: string;
-        // versionComment?: string;
+        versionComment?: string;
         name?: string;
         nodeType?: string;
         isFolder?: boolean;
@@ -2218,10 +2218,10 @@ declare namespace AlfrescoApi {
         modifiedAt?: Date;
         modifiedByUser?: UserInfo;
         content?: ContentInfo;
-        // aspectNames?: Array<string>;
-        // properties?: {
-        //     [key: string]: string;
-        // };
+        aspectNames?: Array<string>;
+        properties?: {
+            [key: string]: string;
+        };
     }
 
     export class VersionEntry {
