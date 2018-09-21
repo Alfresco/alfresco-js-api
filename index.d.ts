@@ -5348,6 +5348,8 @@ declare namespace AlfrescoApi {
 
         isValidToken: boolean;
         isValidAccessToken: boolean;
+
+        callApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any, authNames?: string[], contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any>;
     }
 
     export interface EcmAuthApi extends AuthApi {
