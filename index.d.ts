@@ -300,6 +300,7 @@ declare namespace AlfrescoApi {
         setAuthentications(authentications: any): void;
 
         callApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any, authNames?: string[], contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any>;
+
         callCustomApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any, authNames?: string[], contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any>;
     }
 
@@ -311,6 +312,7 @@ declare namespace AlfrescoApi {
         setAuthentications(authentications: any): void;
 
         callApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any, authNames?: string[], contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any>;
+
         callCustomApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any, authNames?: string[], contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any>;
     }
 
@@ -650,11 +652,11 @@ declare namespace AlfrescoApi {
 
         getGroup(groupId?: string, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<GroupsEntry>;
 
-        updateGroup(groupId?: string, groupBody?: GroupBody, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<GroupsEntry>;
+        updateGroup(groupId?: string, groupBody?: GroupBodyUpdate, opts?: { include?: Array<string>, fields?: Array<string> }): Promise<GroupsEntry>;
 
         getGroupMembers(groupId?: string, opts?: { skipCount?: number, maxItems?: number, orderBy?: string, where?: string, include?: Array<string>, fields?: Array<string> }): Promise<GroupMemberPaging>;
 
-        addGroupMember(groupId?: string, groupBody?: GroupBody, opts?: { fields?: Array<string> }): Promise<GroupMemberEntry>;
+        addGroupMember(groupId?: string, groupBody?: GroupBodyCreate, opts?: { fields?: Array<string> }): Promise<GroupMemberEntry>;
 
         deleteGroupMember(groupId?: string, groupMemberId?: string): Promise<any>;
     }
@@ -1917,6 +1919,19 @@ declare namespace AlfrescoApi {
         id?: string;
         displayName?: string;
         parentIds?: Array<string>;
+    }
+
+    export class GroupBodyUpdate {
+        constructor(obj?: any);
+
+        displayName: string;
+    }
+
+    export class GroupBodyCreate {
+        constructor(obj?: any);
+
+        id: string;
+        memberType: string;
     }
 
     export class SiteBody {
@@ -4128,7 +4143,7 @@ declare namespace AlfrescoApi {
     export interface SearchApi {
         new(client?: ApiClient): SearchApi;
 
-        search(queryBody: QueryBody | SearchRequest): Promise<ResultSetPaging> ;
+        search(queryBody: QueryBody | SearchRequest): Promise<ResultSetPaging>;
     }
 
     //  ======= Search  End ======
@@ -4216,11 +4231,11 @@ declare namespace AlfrescoApi {
     export interface FilePlansApi {
         new(client?: ApiClient): FilePlansApi;
 
-        createFilePlanCategories(filePlanId: string, nodeBodyCreate: RootCategoryBodyCreate, opt: any): Promise<any> ;
+        createFilePlanCategories(filePlanId: string, nodeBodyCreate: RootCategoryBodyCreate, opt: any): Promise<any>;
 
-        getFilePlan(filePlanId: string, opts?: any): Promise<any> ;
+        getFilePlan(filePlanId: string, opts?: any): Promise<any>;
 
-        getFilePlanCategories(filePlanId: string, opts?: any): Promise<any> ;
+        getFilePlanCategories(filePlanId: string, opts?: any): Promise<any>;
 
         updateFilePlan(filePlanId: string, filePlanBodyUpdate: FilePlanBodyUpdate, opts?: any): Promise<any>;
     }
@@ -4234,11 +4249,11 @@ declare namespace AlfrescoApi {
     export interface GsSitesApi {
         new(client?: ApiClient): GsSitesApi;
 
-        createRMSite(siteBodyCreate: RMSiteBodyCreate, opts?: any): Promise<any> ;
+        createRMSite(siteBodyCreate: RMSiteBodyCreate, opts?: any): Promise<any>;
 
-        deleteRMSite(): Promise<any> ;
+        deleteRMSite(): Promise<any>;
 
-        getRMSite(opts?: any): Promise<any> ;
+        getRMSite(opts?: any): Promise<any>;
 
         updateRMSite(siteBodyUpdate: RMSiteBodyUpdate, opts?: any): Promise<any>;
     }
@@ -4246,13 +4261,13 @@ declare namespace AlfrescoApi {
     export interface RecordCategoriesApi {
         new(client?: ApiClient): RecordCategoriesApi;
 
-        createRecordCategoryChild(recordCategoryId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: any): Promise<any> ;
+        createRecordCategoryChild(recordCategoryId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: any): Promise<any>;
 
-        deleteRecordCategory(recordCategoryId: string): Promise<any> ;
+        deleteRecordCategory(recordCategoryId: string): Promise<any>;
 
-        getRecordCategory(recordCategoryId: string, opts?: any): Promise<any> ;
+        getRecordCategory(recordCategoryId: string, opts?: any): Promise<any>;
 
-        listRecordCategoryChildren(recordCategoryId: string, opts?: any): Promise<any> ;
+        listRecordCategoryChildren(recordCategoryId: string, opts?: any): Promise<any>;
 
         updateRecordCategory(recordCategoryId: string, recordCategoryBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<any>;
     }
@@ -4260,13 +4275,13 @@ declare namespace AlfrescoApi {
     export interface RecordFoldersApi {
         new(client?: ApiClient): RecordFoldersApi;
 
-        createRecordFolderChild(recordFolderId: string, recordBodyCreate: RMNodeBodyCreate, opts?: any): Promise<any> ;
+        createRecordFolderChild(recordFolderId: string, recordBodyCreate: RMNodeBodyCreate, opts?: any): Promise<any>;
 
-        deleteRecordFolder(recordFolderId: string): Promise<any> ;
+        deleteRecordFolder(recordFolderId: string): Promise<any>;
 
-        getRecordFolder(recordFolderId: string, opts?: any): Promise<any> ;
+        getRecordFolder(recordFolderId: string, opts?: any): Promise<any>;
 
-        listRecordFolderChildren(recordFolderId: string, opts?: any): Promise<any> ;
+        listRecordFolderChildren(recordFolderId: string, opts?: any): Promise<any>;
 
         updateRecordFolder(recordFolderId: string, recordFolderBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<any>;
     }
@@ -4274,15 +4289,15 @@ declare namespace AlfrescoApi {
     export interface RecordsApi {
         new(client?: ApiClient): RecordsApi;
 
-        completeRecord(recordId: string, opts?: any): Promise<any> ;
+        completeRecord(recordId: string, opts?: any): Promise<any>;
 
-        deleteRecord(recordId: string): Promise<any> ;
+        deleteRecord(recordId: string): Promise<any>;
 
-        fileRecord(recordId: string, nodeBodyFile: RequestBodyFile, opts?: any): Promise<any> ;
+        fileRecord(recordId: string, nodeBodyFile: RequestBodyFile, opts?: any): Promise<any>;
 
-        getRecord(recordId: string, opts?: any): Promise<any> ;
+        getRecord(recordId: string, opts?: any): Promise<any>;
 
-        getRecordContent(recordId: string, opts?: any): Promise<any> ;
+        getRecordContent(recordId: string, opts?: any): Promise<any>;
 
         updateRecord(recordId: string, recordBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<any>;
     }
@@ -4290,9 +4305,9 @@ declare namespace AlfrescoApi {
     export interface TransferContainersApi {
         new(client?: ApiClient): TransferContainersApi;
 
-        getTransferContainer(transferContainerId: string, opts?: any): Promise<any> ;
+        getTransferContainer(transferContainerId: string, opts?: any): Promise<any>;
 
-        listTransfers(transferContainerId: string, opts?: any): Promise<any> ;
+        listTransfers(transferContainerId: string, opts?: any): Promise<any>;
 
         updateTransferContainer(transferContainerId: string, nodeBodyUpdate: TransferContainerBodyUpdate, opts?: any): Promise<any>;
     }
@@ -4300,7 +4315,7 @@ declare namespace AlfrescoApi {
     export interface TransfersApi {
         new(client?: ApiClient): TransfersApi;
 
-        getTransfer(transferId: string, opts?: any): Promise<any> ;
+        getTransfer(transferId: string, opts?: any): Promise<any>;
 
         listTransfersChildren(transferId: string, opts?: any): Promise<any>;
     }
@@ -4308,11 +4323,11 @@ declare namespace AlfrescoApi {
     export interface UnfiledContainersApi {
         new(client?: UnfiledContainersApi): TransfersApi;
 
-        createUnfiledContainerChildren(unfiledContainerId: string, nodeBodyCreate: RMNodeBodyCreate, opts?: any): Promise<any> ;
+        createUnfiledContainerChildren(unfiledContainerId: string, nodeBodyCreate: RMNodeBodyCreate, opts?: any): Promise<any>;
 
-        getUnfiledContainer(unfiledContainerId: string, opts?: any): Promise<any> ;
+        getUnfiledContainer(unfiledContainerId: string, opts?: any): Promise<any>;
 
-        listUnfiledContainerChildren(unfiledContainerId: string, opts?: any): Promise<any> ;
+        listUnfiledContainerChildren(unfiledContainerId: string, opts?: any): Promise<any>;
 
         updateUnfiledContainer(unfiledContainerId: string, unfiledContainerBodyUpdate: UnfiledRecordContainerBodyUpdate, opts?: any): Promise<any>;
     }
@@ -4320,13 +4335,13 @@ declare namespace AlfrescoApi {
     export interface UnfiledRecordFoldersApi {
         new(client?: UnfiledContainersApi): UnfiledRecordFoldersApi;
 
-        createUnfiledRecordFolderChildren(unfiledRecordFolderId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: any): Promise<any> ;
+        createUnfiledRecordFolderChildren(unfiledRecordFolderId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: any): Promise<any>;
 
-        deleteUnfiledRecordFolder(unfiledRecordFolderId: string): Promise<any> ;
+        deleteUnfiledRecordFolder(unfiledRecordFolderId: string): Promise<any>;
 
-        getUnfiledRecordFolder(unfiledRecordFolderId: string, opts?: any): Promise<any> ;
+        getUnfiledRecordFolder(unfiledRecordFolderId: string, opts?: any): Promise<any>;
 
-        listUnfiledRecordFolderChildren(unfiledRecordFolderId: string, opts?: any): Promise<any> ;
+        listUnfiledRecordFolderChildren(unfiledRecordFolderId: string, opts?: any): Promise<any>;
 
         updateUnfiledRecordFolder(unfiledRecordFolderId: string, unfiledRecordFolderBodyUpdate: UnfiledRecordFolderBodyUpdate, opts?: any): Promise<any>;
     }
@@ -5351,6 +5366,7 @@ declare namespace AlfrescoApi {
         isValidAccessToken: boolean;
 
         callApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any, authNames?: string[], contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any>;
+
         callCustomApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any, authNames?: string[], contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any>;
     }
 
