@@ -65,6 +65,10 @@ class Oauth2Auth extends AlfrescoApiClient {
     }
 
     initOauth() {
+        if (!this.config.oauth2.implicitFlow && this.isValidAccessToken()) {
+            const accessToken = this.storage.getItem('access_token');
+            this.setToken(accessToken, null);
+        }
         return Promise.resolve()
             .then(() => {
                 return this.discoveryUrls();
@@ -560,6 +564,7 @@ class Oauth2Auth extends AlfrescoApiClient {
             (data) => {
                 this.saveUsername(username);
                 this.setToken(data.access_token, data.refresh_token);
+                this.storeAccessToken(data.access_token, data.expires_in);
                 resolve(data);
             },
             (error) => {
