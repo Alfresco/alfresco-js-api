@@ -695,9 +695,13 @@ class Oauth2Auth extends AlfrescoApiClient {
             '&id_token_hint=' +
             encodeURIComponent(id_token);
 
-        if (this.config.oauth2.implicitFlow && typeof window !== 'undefined') {
-            window.location.href = logoutUrl;
-        }
+        var returnPromise =  Promise.resolve().then(() => {
+            if (this.config.oauth2.implicitFlow && typeof window !== 'undefined') {
+                window.location.href = logoutUrl;
+            }
+        });
+
+        return returnPromise;
     }
 
     invalidateSession() {

@@ -340,7 +340,7 @@ class AlfrescoApi {
      * */
     logout() {
         if (this.isOauthConfiguration()) {
-            this.oauth2Auth.logOut();
+            return this.oauth2Auth.logOut();
         } else {
             if (this.isBpmConfiguration()) {
                 return this.bpmAuth.logout();
