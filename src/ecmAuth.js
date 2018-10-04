@@ -16,10 +16,16 @@ class EcmAuth extends AlfrescoApiClient {
 
         this.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
 
+        if (this.config.domainPrefix) {
+            this.ticketStorageLabel = this.config.domainPrefix.concat('-ticket-ECM');
+        } else {
+            this.ticketStorageLabel = 'ticket-ECM';
+        }
+
         if (this.config.ticketEcm) {
             this.setTicket(config.ticketEcm);
-        } else if (this.storage.getItem('ticket-ECM')) {
-            this.setTicket(this.storage.getItem('ticket-ECM'));
+        } else if (this.storage.getItem(this.ticketStorageLabel)) {
+            this.setTicket(this.storage.getItem(this.ticketStorageLabel));
         }
 
         Emitter.call(this);
@@ -147,7 +153,7 @@ class EcmAuth extends AlfrescoApiClient {
     setTicket(ticket) {
         this.authentications.basicAuth.username = 'ROLE_TICKET';
         this.authentications.basicAuth.password = ticket;
-        this.storage.setItem('ticket-ECM', ticket);
+        this.storage.setItem(this.ticketStorageLabel, ticket);
         this.ticket = ticket;
     }
 
@@ -161,7 +167,7 @@ class EcmAuth extends AlfrescoApiClient {
     }
 
     invalidateSession() {
-        this.storage.removeItem('ticket-ECM');
+        this.storage.removeItem(this.ticketStorageLabel);
         this.authentications.basicAuth.username = null;
         this.authentications.basicAuth.password = null;
         this.ticket = null;

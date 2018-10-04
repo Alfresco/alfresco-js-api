@@ -17,7 +17,7 @@ echo "====== CLONE ADF ====="
 
 git clone https://$TOKEN@github.com/Alfresco/alfresco-ng2-components.git $TEMP_ADF_DIR
 cd $TEMP_ADF_DIR/
-git checkout master
+git checkout development
 
 echo "====== INSTALL Demo Shell ====="
 

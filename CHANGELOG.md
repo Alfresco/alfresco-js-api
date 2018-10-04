@@ -5,12 +5,16 @@
 # Alfresco JS API
 
 <a name="2.6.0"></a>
-# [2.6.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.6.0) (xx-xxx-2018)
+# [2.6.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.6.0) (04-10-2018)
 
 ## Features
+- ['Added domain prefix for saving multilpe ECM tickets'](https://issues.alfresco.com/jira/browse/ADF-3499)
 
 ## Fixes
 - ['cm:lockOwner' when requesting it via the nodesApi](https://issues.alfresco.com/jira/browse/ADF-3495)
+- ["versionComment" is missing in typings](https://issues.alfresco.com/jira/browse/ADF-31555)
+- [ Fix the silent refresh login](https://issues.alfresco.com/jira/browse/ADF-3531)
+- [ When a page is refresh the js api remove the part after the #](https://issues.alfresco.com/jira/browse/ADF-3552)
 
 <a name="2.5.0"></a>
 # [2.5.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.5.0) (15-08-2018)
