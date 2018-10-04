@@ -5,7 +5,7 @@
 # Alfresco JS API
 
 <a name="2.6.0"></a>
-# [2.6.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.6.0) (xx-xxx-2018)
+# [2.6.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.6.0) (04-10-2018)
 
 ## Features
 - ['Added domain prefix for saving multilpe ECM tickets'](https://issues.alfresco.com/jira/browse/ADF-3499)
