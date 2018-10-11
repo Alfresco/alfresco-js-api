@@ -298,6 +298,51 @@
         authNames, contentTypes, accepts, returnType
       );
     }
+
+    /**
+     * Update an App Definition
+     * Before an app model can be used, it need to be published
+     * @param {Integer} modelId modelId
+     * @param {module:model/AppDefinitionPublishRepresentation} publishModel publishModel
+     * data is of type: {module:model/AppDefinitionUpdateResultRepresentation}
+     */
+    this.updateAppDefinition = function(modelId, updatedModel) {
+
+      // verify the required parameter 'modelId' is set
+      if (modelId == undefined || modelId == null) {
+        throw "Missing the required parameter 'modelId' when calling publishAppDefinition";
+      }
+
+      // verify the required parameter 'publishModel' is set
+      if (updatedModel == undefined || updatedModel == null) {
+        throw "Missing the required parameter 'publishModel' when calling publishAppDefinition";
+      }
+
+      var postBody = updatedModel;
+
+
+      var pathParams = {
+        'modelId': modelId
+      };
+      var queryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = [];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = AppDefinitionUpdateResultRepresentation;
+
+      return this.apiClient.callApi(
+        '/api/enterprise/app-definitions/{modelId}', 'PUT',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+  };
   };
 
   return exports;
