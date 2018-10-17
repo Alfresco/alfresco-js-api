@@ -4,6 +4,13 @@
 
 # Alfresco JS API
 
+<a name="2.7.0"></a>
+# [2.7.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.7.0) (xx-xx-xxxx)
+
+## Features
+- ['Added updateAppDefinition method'](https://issues.alfresco.com/jira/browse/ADF-3017)
+
+
 <a name="2.6.0"></a>
 # [2.6.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.6.0) (04-10-2018)
 
