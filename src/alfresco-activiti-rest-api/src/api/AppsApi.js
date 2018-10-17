@@ -1,4 +1,4 @@
-(function(root, factory) {
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['../../../alfrescoApiClient', '../model/RuntimeAppDefinitionSaveRepresentation', '../model/ResultListDataRepresentation', '../model/AppDefinitionRepresentation', '../model/AppDefinitionPublishRepresentation', '../model/AppDefinitionUpdateResultRepresentation'], factory);
@@ -12,7 +12,7 @@
     }
     root.ActivitiPublicRestApi.AppsApi = factory(root.ActivitiPublicRestApi.ApiClient, root.ActivitiPublicRestApi.RuntimeAppDefinitionSaveRepresentation, root.ActivitiPublicRestApi.ResultListDataRepresentation, root.ActivitiPublicRestApi.AppDefinitionRepresentation, root.ActivitiPublicRestApi.AppDefinitionPublishRepresentation, root.ActivitiPublicRestApi.AppDefinitionUpdateResultRepresentation);
   }
-}(this, function(ApiClient, RuntimeAppDefinitionSaveRepresentation, ResultListDataRepresentation, AppDefinitionRepresentation, AppDefinitionPublishRepresentation, AppDefinitionUpdateResultRepresentation) {
+}(this, function (ApiClient, RuntimeAppDefinitionSaveRepresentation, ResultListDataRepresentation, AppDefinitionRepresentation, AppDefinitionPublishRepresentation, AppDefinitionUpdateResultRepresentation) {
   'use strict';
 
   /**
@@ -28,7 +28,7 @@
    * @param {module:ApiClient} apiClient Optional API client implementation to use,
    * default to {@link module:ApiClient#instance} if unspecified.
    */
-  var exports = function(apiClient) {
+  var exports = function (apiClient) {
     this.apiClient = apiClient || ApiClient.instance;
 
 
@@ -44,7 +44,7 @@
      * After creating and puclished an app the user can add it to his/her landing page.
      * @param {module:model/RuntimeAppDefinitionSaveRepresentation} saveObject saveObject
      */
-    this.deployAppDefinitions = function(saveObject) {
+    this.deployAppDefinitions = function (saveObject) {
       var postBody = saveObject;
 
       // verify the required parameter 'saveObject' is set
@@ -53,14 +53,10 @@
       }
 
 
-      var pathParams = {
-      };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var pathParams = {};
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = [];
       var contentTypes = ['application/json'];
@@ -86,7 +82,7 @@
      * This will return a zip file containing the app definition model and all related models (process definitions and forms).
      * @param {Integer} modelId modelId from a runtime app or the id of an app definition model
      */
-    this.exportAppDefinition = function(modelId) {
+    this.exportAppDefinition = function (modelId) {
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
@@ -98,12 +94,9 @@
       var pathParams = {
         'modelId': modelId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = [];
       var contentTypes = ['application/json'];
@@ -129,18 +122,14 @@
      * When a user logs in into the Alfresco Activiti BPM Suite, the landing page is displayed containing all the apps that the user is allowed to see and use.
      * data is of type: {module:model/ResultListDataRepresentation}
      */
-    this.getAppDefinitions = function() {
+    this.getAppDefinitions = function () {
       var postBody = null;
 
 
-      var pathParams = {
-      };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var pathParams = {};
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = [];
       var contentTypes = ['application/json'];
@@ -167,7 +156,7 @@
      * @param {File} file file
      * data is of type: {module:model/AppDefinitionRepresentation}
      */
-    this.importAppDefinition = function(file) {
+    this.importAppDefinition = function (file) {
       var postBody = null;
 
       // verify the required parameter 'file' is set
@@ -176,12 +165,9 @@
       }
 
 
-      var pathParams = {
-      };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
+      var pathParams = {};
+      var queryParams = {};
+      var headerParams = {};
       var formParams = {
         'file': file
       };
@@ -212,7 +198,7 @@
      * @param {File} file file
      * data is of type: {module:model/AppDefinitionRepresentation}
      */
-    this.importNewAppDefinition = function(modelId, file) {
+    this.importNewAppDefinition = function (modelId, file) {
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
@@ -229,10 +215,8 @@
       var pathParams = {
         'modelId': modelId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
       var formParams = {
         'file': file
       };
@@ -263,7 +247,7 @@
      * @param {module:model/AppDefinitionPublishRepresentation} publishModel publishModel
      * data is of type: {module:model/AppDefinitionUpdateResultRepresentation}
      */
-    this.publishAppDefinition = function(modelId, publishModel) {
+    this.publishAppDefinition = function (modelId, publishModel) {
       var postBody = publishModel;
 
       // verify the required parameter 'modelId' is set
@@ -280,12 +264,9 @@
       var pathParams = {
         'modelId': modelId
       };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
 
       var authNames = [];
       var contentTypes = ['application/json'];
@@ -294,6 +275,47 @@
 
       return this.apiClient.callApi(
         '/api/enterprise/app-definitions/{modelId}/publish', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Update an App Definition
+     * Before an app model can be used, it need to be published
+     * @param {Integer} modelId modelId
+     * @param {module:model/AppDefinitionPublishRepresentation} publishModel publishModel
+     * data is of type: {module:model/AppDefinitionUpdateResultRepresentation}
+     */
+    this.updateAppDefinition = function (modelId, updatedModel) {
+
+      // verify the required parameter 'modelId' is set
+      if (modelId == undefined || modelId == null) {
+        throw "Missing the required parameter 'modelId' when calling publishAppDefinition";
+      }
+
+      // verify the required parameter 'publishModel' is set
+      if (updatedModel == undefined || updatedModel == null) {
+        throw "Missing the required parameter 'publishModel' when calling publishAppDefinition";
+      }
+
+      var postBody = updatedModel;
+
+
+      var pathParams = {
+        'modelId': modelId
+      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
+
+      var authNames = [];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = AppDefinitionUpdateResultRepresentation;
+
+      return this.apiClient.callApi(
+        '/api/enterprise/app-definitions/{modelId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );
