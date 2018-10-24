@@ -17,10 +17,6 @@ before_install:
     - sh -e /etc/init.d/xvfb start
     - npm install -g grunt-cli
 
-cache:
-  directories:
-    - node_modules
-
 env:
   matrix:
     - MODULE=jsapi
