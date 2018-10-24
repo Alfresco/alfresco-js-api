@@ -50,12 +50,12 @@
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling executeAction";
+        throw "Missing param 'userId' in executeAction";
       }
 
       // verify the required parameter 'actionRequest' is set
       if (actionRequest == undefined || actionRequest == null) {
-        throw "Missing the required parameter 'actionRequest' when calling executeAction";
+        throw "Missing param 'actionRequest' in executeAction";
       }
 
 
@@ -97,7 +97,7 @@
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling getProfilePicture";
+        throw "Missing param 'userId' in getProfilePicture";
       }
 
 
@@ -145,7 +145,7 @@
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling getUser";
+        throw "Missing param 'userId' in getUser";
       }
 
 
@@ -241,7 +241,7 @@
 
       // verify the required parameter 'resetPassword' is set
       if (resetPassword == undefined || resetPassword == null) {
-        throw "Missing the required parameter 'resetPassword' when calling requestPasswordReset";
+        throw "Missing param 'resetPassword' in requestPasswordReset";
       }
 
 
@@ -283,12 +283,12 @@
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling updateUser";
+        throw "Missing param 'userId' in updateUser";
       }
 
       // verify the required parameter 'userRequest' is set
       if (userRequest == undefined || userRequest == null) {
-        throw "Missing the required parameter 'userRequest' when calling updateUser";
+        throw "Missing param 'userRequest' in updateUser";
       }
 
 

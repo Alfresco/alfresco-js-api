@@ -49,7 +49,7 @@
 
       // verify the required parameter 'saveObject' is set
       if (saveObject == undefined || saveObject == null) {
-        throw "Missing the required parameter 'saveObject' when calling deployAppDefinitions";
+        throw "Missing param 'saveObject' in deployAppDefinitions";
       }
 
 
@@ -87,7 +87,7 @@
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling exportAppDefinition";
+        throw "Missing param 'modelId' in exportAppDefinition";
       }
 
 
@@ -161,7 +161,7 @@
 
       // verify the required parameter 'file' is set
       if (file == undefined || file == null) {
-        throw "Missing the required parameter 'file' when calling importAppDefinition";
+        throw "Missing param 'file' in importAppDefinition";
       }
 
 
@@ -203,12 +203,12 @@
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling importAppDefinition";
+        throw "Missing param 'modelId' in importAppDefinition";
       }
 
       // verify the required parameter 'file' is set
       if (file == undefined || file == null) {
-        throw "Missing the required parameter 'file' when calling importAppDefinition";
+        throw "Missing param 'file' in importAppDefinition";
       }
 
 
@@ -252,12 +252,12 @@
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling publishAppDefinition";
+        throw "Missing param 'modelId' in publishAppDefinition";
       }
 
       // verify the required parameter 'publishModel' is set
       if (publishModel == undefined || publishModel == null) {
-        throw "Missing the required parameter 'publishModel' when calling publishAppDefinition";
+        throw "Missing param 'publishModel' in publishAppDefinition";
       }
 
 
@@ -291,12 +291,12 @@
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling publishAppDefinition";
+        throw "Missing param 'modelId' in publishAppDefinition";
       }
 
       // verify the required parameter 'publishModel' is set
       if (updatedModel == undefined || updatedModel == null) {
-        throw "Missing the required parameter 'publishModel' when calling publishAppDefinition";
+        throw "Missing param 'publishModel' in publishAppDefinition";
       }
 
       var postBody = updatedModel;

@@ -49,12 +49,12 @@
 
             // verify the required parameter 'processModelId' is set
             if (processModelId == undefined || processModelId == null) {
-                throw "Missing the required parameter 'processModelId' when calling getHistoricEditorDisplayJsonClient";
+                throw "Missing param 'processModelId' in getHistoricEditorDisplayJsonClient";
             }
 
             // verify the required parameter 'processModelHistoryId' is set
             if (processModelHistoryId == undefined || processModelHistoryId == null) {
-                throw "Missing the required parameter 'processModelHistoryId' when calling getHistoricEditorDisplayJsonClient";
+                throw "Missing param 'processModelHistoryId' in getHistoricEditorDisplayJsonClient";
             }
 
 
@@ -97,7 +97,7 @@
 
             // verify the required parameter 'processModelId' is set
             if (processModelId == undefined || processModelId == null) {
-                throw "Missing the required parameter 'processModelId' when calling getEditorDisplayJsonClient";
+                throw "Missing param 'processModelId' in getEditorDisplayJsonClient";
             }
 
 
@@ -137,7 +137,7 @@
             var postBody = null;
 
             if (processDefinitionId == undefined || processDefinitionId == null) {
-                throw "Missing the required parameter 'processDefinitionId' when calling getProcessDefinitionModel";
+                throw "Missing param 'processDefinitionId' in getProcessDefinitionModel";
             }
 
             var pathParams = {
@@ -176,7 +176,7 @@
             var postBody = null;
 
             if (processInstanceId == undefined || processInstanceId == null) {
-                throw "Missing the required parameter 'processInstanceId' when calling getProcessInstancesModel";
+                throw "Missing param 'processInstanceId' in getProcessInstancesModel";
             }
 
             var pathParams = {

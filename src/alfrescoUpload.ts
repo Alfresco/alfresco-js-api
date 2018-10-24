@@ -70,11 +70,11 @@ export class AlfrescoUpload extends NodesApi {
         let postBody = nodeBody;
 
         if (!nodeId) {
-            throw 'Missing the required parameter nodeId when calling uploadFile';
+            throw 'Missing param nodeId in uploadFile';
         }
 
         if (!nodeBody) {
-            throw 'Missing the required parameter nodeBody when calling uploadFile';
+            throw 'Missing param nodeBody in uploadFile';
         }
 
         let pathParams = {

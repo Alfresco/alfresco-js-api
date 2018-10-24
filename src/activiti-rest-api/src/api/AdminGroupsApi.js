@@ -48,7 +48,7 @@
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling activate";
+        throw "Missing param 'groupId' in activate";
       }
 
 
@@ -90,7 +90,7 @@
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling addAllUsersToGroup";
+        throw "Missing param 'groupId' in addAllUsersToGroup";
       }
 
 
@@ -133,12 +133,12 @@
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling addGroupCapabilities";
+        throw "Missing param 'groupId' in addGroupCapabilities";
       }
 
       // verify the required parameter 'addGroupCapabilitiesRepresentation' is set
       if (addGroupCapabilitiesRepresentation == undefined || addGroupCapabilitiesRepresentation == null) {
-        throw "Missing the required parameter 'addGroupCapabilitiesRepresentation' when calling addGroupCapabilities";
+        throw "Missing param 'addGroupCapabilitiesRepresentation' in addGroupCapabilities";
       }
 
 
@@ -181,12 +181,12 @@
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling addGroupMember";
+        throw "Missing param 'groupId' in addGroupMember";
       }
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling addGroupMember";
+        throw "Missing param 'userId' in addGroupMember";
       }
 
 
@@ -231,17 +231,17 @@
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling addRelatedGroup";
+        throw "Missing param 'groupId' in addRelatedGroup";
       }
 
       // verify the required parameter 'relatedGroupId' is set
       if (relatedGroupId == undefined || relatedGroupId == null) {
-        throw "Missing the required parameter 'relatedGroupId' when calling addRelatedGroup";
+        throw "Missing param 'relatedGroupId' in addRelatedGroup";
       }
 
       // verify the required parameter 'type' is set
       if (type == undefined || type == null) {
-        throw "Missing the required parameter 'type' when calling addRelatedGroup";
+        throw "Missing param 'type' in addRelatedGroup";
       }
 
 
@@ -286,7 +286,7 @@
 
       // verify the required parameter 'groupRepresentation' is set
       if (groupRepresentation == undefined || groupRepresentation == null) {
-        throw "Missing the required parameter 'groupRepresentation' when calling createNewGroup";
+        throw "Missing param 'groupRepresentation' in createNewGroup";
       }
 
 
@@ -328,12 +328,12 @@
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling deleteGroupCapability";
+        throw "Missing param 'groupId' in deleteGroupCapability";
       }
 
       // verify the required parameter 'groupCapabilityId' is set
       if (groupCapabilityId == undefined || groupCapabilityId == null) {
-        throw "Missing the required parameter 'groupCapabilityId' when calling deleteGroupCapability";
+        throw "Missing param 'groupCapabilityId' in deleteGroupCapability";
       }
 
 
@@ -377,12 +377,12 @@
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling deleteGroupMember";
+        throw "Missing param 'groupId' in deleteGroupMember";
       }
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling deleteGroupMember";
+        throw "Missing param 'userId' in deleteGroupMember";
       }
 
 
@@ -425,7 +425,7 @@
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling deleteGroup";
+        throw "Missing param 'groupId' in deleteGroup";
       }
 
 
@@ -468,12 +468,12 @@
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling deleteRelatedGroup";
+        throw "Missing param 'groupId' in deleteRelatedGroup";
       }
 
       // verify the required parameter 'relatedGroupId' is set
       if (relatedGroupId == undefined || relatedGroupId == null) {
-        throw "Missing the required parameter 'relatedGroupId' when calling deleteRelatedGroup";
+        throw "Missing param 'relatedGroupId' in deleteRelatedGroup";
       }
 
 
@@ -517,7 +517,7 @@
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling getCapabilities";
+        throw "Missing param 'groupId' in getCapabilities";
       }
 
 
@@ -565,7 +565,7 @@
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling getGroupUsers";
+        throw "Missing param 'groupId' in getGroupUsers";
       }
 
 
@@ -615,7 +615,7 @@
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling getGroup";
+        throw "Missing param 'groupId' in getGroup";
       }
 
 
@@ -704,7 +704,7 @@
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling getRelatedGroups";
+        throw "Missing param 'groupId' in getRelatedGroups";
       }
 
 
@@ -748,12 +748,12 @@
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling updateGroup";
+        throw "Missing param 'groupId' in updateGroup";
       }
 
       // verify the required parameter 'groupRepresentation' is set
       if (groupRepresentation == undefined || groupRepresentation == null) {
-        throw "Missing the required parameter 'groupRepresentation' when calling updateGroup";
+        throw "Missing param 'groupRepresentation' in updateGroup";
       }
 
 

@@ -64,7 +64,7 @@ export class WebscriptApi {
         }
 
         if (!scriptPath) {
-            throw 'Missing the required parameter scriptPath when calling executeWebScript';
+            throw 'Missing param scriptPath in executeWebScript';
         }
 
         let pathParams = {};

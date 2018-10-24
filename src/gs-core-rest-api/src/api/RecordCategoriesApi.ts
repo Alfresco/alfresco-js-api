@@ -1,37 +1,48 @@
+/*!
+* @license
+* Copyright 2018 Alfresco Software, Ltd.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 
-(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['../../../alfrescoApiClient', '../model/Error', '../model/FilePlanComponentBodyUpdate', '../model/RMNodeBodyCreateWithRelativePath', '../model/RecordCategoryChildEntry', '../model/RecordCategoryChildPaging', '../model/RecordCategoryEntry'], factory);
-  } else if (typeof module === 'object' && module.exports) {
-    // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/Error'), require('../model/FilePlanComponentBodyUpdate'), require('../model/RMNodeBodyCreateWithRelativePath'), require('../model/RecordCategoryChildEntry'), require('../model/RecordCategoryChildPaging'), require('../model/RecordCategoryEntry'));
-  } else {
-    // Browser globals (root is window)
-    if (!root.AlfrescoGovernanceServicesRestApi) {
-      root.AlfrescoGovernanceServicesRestApi = {};
+import { AlfrescoApiClient } from '../../../alfrescoApiClient';
+import { Error } from '../model/Error';
+import { FilePlanComponentBodyUpdate } from '../model/FilePlanComponentBodyUpdate';
+import { RMNodeBodyCreateWithRelativePath } from '../model/RMNodeBodyCreateWithRelativePath';
+import { RecordCategoryChildEntry } from '../model/RecordCategoryChildEntry';
+import { RecordCategoryChildPaging } from '../model/RecordCategoryChildPaging';
+import { RecordCategoryEntry } from '../model/RecordCategoryEntry';
+
+/**
+ * Recordcategories service.
+ * @module api/RecordCategoriesApi
+ * @version 0.1.0
+ */
+
+/**
+ * Constructs a new RecordCategoriesApi.
+ * @alias :api/RecordCategoriesApi
+ * @class
+ * @param {:ApiClient} apiClient Optional API client implementation to use,
+ * default to {@link module:ApiClient#instance} if unspecified.
+ */
+export class RecordCategoriesApi {
+
+    apiClient: AlfrescoApiClient;
+
+    constructor(apiClient?: AlfrescoApiClient) {
+        this.apiClient = apiClient || new AlfrescoApiClient();
     }
-    root.AlfrescoGovernanceServicesRestApi.RecordCategoriesApi = factory(root.AlfrescoGovernanceServicesRestApi.ApiClient, root.AlfrescoGovernanceServicesRestApi.Error, root.AlfrescoGovernanceServicesRestApi.FilePlanComponentBodyUpdate, root.AlfrescoGovernanceServicesRestApi.RMNodeBodyCreateWithRelativePath, root.AlfrescoGovernanceServicesRestApi.RecordCategoryChildEntry, root.AlfrescoGovernanceServicesRestApi.RecordCategoryChildPaging, root.AlfrescoGovernanceServicesRestApi.RecordCategoryEntry);
-  }
-}(this, function(ApiClient, Error, FilePlanComponentBodyUpdate, RMNodeBodyCreateWithRelativePath, RecordCategoryChildEntry, RecordCategoryChildPaging, RecordCategoryEntry) {
-  'use strict';
-
-  /**
-   * Recordcategories service.
-   * @module api/RecordCategoriesApi
-   * @version 0.1.0
-   */
-
-  /**
-   * Constructs a new RecordCategoriesApi.
-   * @alias :api/RecordCategoriesApi
-   * @class
-   * @param {:ApiClient} apiClient Optional API client implementation to use,
-   * default to {@link module:ApiClient#instance} if unspecified.
-   */
-  var exports = function(apiClient) {
-    this.apiClient = apiClient || ApiClient.instance;
-
 
 
     /**
@@ -45,44 +56,42 @@
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleRecordCategoryChildEntry} and HTTP response
      */
-    this.createRecordCategoryChild = function(recordCategoryId, nodeBodyCreate, opts) {
-      opts = opts || {};
-      var postBody = nodeBodyCreate;
+    createRecordCategoryChild = function (recordCategoryId, nodeBodyCreate, opts) {
+        opts = opts || {};
+        let postBody = nodeBodyCreate;
 
-      // verify the required parameter 'recordCategoryId' is set
-      if (recordCategoryId === undefined || recordCategoryId === null) {
-        throw new Error("Missing the required parameter 'recordCategoryId' when calling createRecordCategoryChild");
-      }
+        // verify the required parameter 'recordCategoryId' is set
+        if (recordCategoryId === undefined || recordCategoryId === null) {
+            throw new Error("Missing param 'recordCategoryId' in createRecordCategoryChild");
+        }
 
-      // verify the required parameter 'nodeBodyCreate' is set
-      if (nodeBodyCreate === undefined || nodeBodyCreate === null) {
-        throw new Error("Missing the required parameter 'nodeBodyCreate' when calling createRecordCategoryChild");
-      }
+        // verify the required parameter 'nodeBodyCreate' is set
+        if (nodeBodyCreate === undefined || nodeBodyCreate === null) {
+            throw new Error("Missing param 'nodeBodyCreate' in createRecordCategoryChild");
+        }
 
 
-      var pathParams = {
-        'recordCategoryId': recordCategoryId
-      };
-      var queryParams = {
-        'autoRename': opts['autoRename'],
-        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+        let pathParams = {
+            'recordCategoryId': recordCategoryId
+        };
+        let queryParams = {
+            'autoRename': opts['autoRename'],
+            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+        };
+        let headerParams = {};
+        let formParams = {};
 
-      var authNames = ['basicAuth'];
-      var contentTypes = ['application/json', 'multipart/form-data'];
-      var accepts = ['application/json'];
-      var returnType = RecordCategoryChildEntry;
+        let authNames = ['basicAuth'];
+        let contentTypes = ['application/json', 'multipart/form-data'];
+        let accepts = ['application/json'];
+        let returnType = RecordCategoryChildEntry;
 
-      return this.apiClient.callApi(
-        '/record-categories/{recordCategoryId}/children', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
+        return this.apiClient.callApi(
+            '/record-categories/{recordCategoryId}/children', 'POST',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            authNames, contentTypes, accepts, returnType
+        );
     }
 
     /**
@@ -91,35 +100,32 @@
      * @param {string} recordCategoryId The identifier of a record category.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    this.deleteRecordCategory = function(recordCategoryId) {
-      var postBody = null;
+    deleteRecordCategory = function (recordCategoryId) {
+        let postBody = null;
 
-      // verify the required parameter 'recordCategoryId' is set
-      if (recordCategoryId === undefined || recordCategoryId === null) {
-        throw new Error("Missing the required parameter 'recordCategoryId' when calling deleteRecordCategory");
-      }
+        // verify the required parameter 'recordCategoryId' is set
+        if (recordCategoryId === undefined || recordCategoryId === null) {
+            throw new Error("Missing param 'recordCategoryId' in deleteRecordCategory");
+        }
 
 
-      var pathParams = {
-        'recordCategoryId': recordCategoryId
-      };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+        let pathParams = {
+            'recordCategoryId': recordCategoryId
+        };
+        let queryParams = {};
+        let headerParams = {};
+        let formParams = {};
 
-      var authNames = ['basicAuth'];
-      var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
-      var returnType = null;
+        let authNames = ['basicAuth'];
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+        let returnType = null;
 
-      return this.apiClient.callApi(
-        '/record-categories/{recordCategoryId}', 'DELETE',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
+        return this.apiClient.callApi(
+            '/record-categories/{recordCategoryId}', 'DELETE',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            authNames, contentTypes, accepts, returnType
+        );
     }
 
     /**
@@ -132,39 +138,37 @@
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleRecordCategoryEntry} and HTTP response
      */
-    this.getRecordCategory = function(recordCategoryId, opts) {
-      opts = opts || {};
-      var postBody = null;
+    getRecordCategory = function (recordCategoryId, opts) {
+        opts = opts || {};
+        let postBody = null;
 
-      // verify the required parameter 'recordCategoryId' is set
-      if (recordCategoryId === undefined || recordCategoryId === null) {
-        throw new Error("Missing the required parameter 'recordCategoryId' when calling getRecordCategory");
-      }
+        // verify the required parameter 'recordCategoryId' is set
+        if (recordCategoryId === undefined || recordCategoryId === null) {
+            throw new Error("Missing param 'recordCategoryId' in getRecordCategory");
+        }
 
 
-      var pathParams = {
-        'recordCategoryId': recordCategoryId
-      };
-      var queryParams = {
-        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-        'relativePath': opts['relativePath'],
-        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+        let pathParams = {
+            'recordCategoryId': recordCategoryId
+        };
+        let queryParams = {
+            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'relativePath': opts['relativePath'],
+            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+        };
+        let headerParams = {};
+        let formParams = {};
 
-      var authNames = ['basicAuth'];
-      var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
-      var returnType = RecordCategoryEntry;
+        let authNames = ['basicAuth'];
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+        let returnType = RecordCategoryEntry;
 
-      return this.apiClient.callApi(
-        '/record-categories/{recordCategoryId}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
+        return this.apiClient.callApi(
+            '/record-categories/{recordCategoryId}', 'GET',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            authNames, contentTypes, accepts, returnType
+        );
     }
 
     /**
@@ -181,43 +185,41 @@
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleRecordCategoryChildPaging} and HTTP response
      */
-    this.listRecordCategoryChildren = function(recordCategoryId, opts) {
-      opts = opts || {};
-      var postBody = null;
+    listRecordCategoryChildren = function (recordCategoryId, opts) {
+        opts = opts || {};
+        let postBody = null;
 
-      // verify the required parameter 'recordCategoryId' is set
-      if (recordCategoryId === undefined || recordCategoryId === null) {
-        throw new Error("Missing the required parameter 'recordCategoryId' when calling listRecordCategoryChildren");
-      }
+        // verify the required parameter 'recordCategoryId' is set
+        if (recordCategoryId === undefined || recordCategoryId === null) {
+            throw new Error("Missing param 'recordCategoryId' in listRecordCategoryChildren");
+        }
 
 
-      var pathParams = {
-        'recordCategoryId': recordCategoryId
-      };
-      var queryParams = {
-        'skipCount': opts['skipCount'],
-        'maxItems': opts['maxItems'],
-        'where': opts['where'],
-        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-        'relativePath': opts['relativePath'],
-        'includeSource': opts['includeSource'],
-        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+        let pathParams = {
+            'recordCategoryId': recordCategoryId
+        };
+        let queryParams = {
+            'skipCount': opts['skipCount'],
+            'maxItems': opts['maxItems'],
+            'where': opts['where'],
+            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'relativePath': opts['relativePath'],
+            'includeSource': opts['includeSource'],
+            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+        };
+        let headerParams = {};
+        let formParams = {};
 
-      var authNames = ['basicAuth'];
-      var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
-      var returnType = RecordCategoryChildPaging;
+        let authNames = ['basicAuth'];
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+        let returnType = RecordCategoryChildPaging;
 
-      return this.apiClient.callApi(
-        '/record-categories/{recordCategoryId}/children', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
+        return this.apiClient.callApi(
+            '/record-categories/{recordCategoryId}/children', 'GET',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            authNames, contentTypes, accepts, returnType
+        );
     }
 
     /**
@@ -230,45 +232,40 @@
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleRecordCategoryEntry} and HTTP response
      */
-    this.updateRecordCategory = function(recordCategoryId, recordCategoryBodyUpdate, opts) {
-      opts = opts || {};
-      var postBody = recordCategoryBodyUpdate;
+    updateRecordCategory = function (recordCategoryId, recordCategoryBodyUpdate, opts) {
+        opts = opts || {};
+        let postBody = recordCategoryBodyUpdate;
 
-      // verify the required parameter 'recordCategoryId' is set
-      if (recordCategoryId === undefined || recordCategoryId === null) {
-        throw new Error("Missing the required parameter 'recordCategoryId' when calling updateRecordCategory");
-      }
+        // verify the required parameter 'recordCategoryId' is set
+        if (recordCategoryId === undefined || recordCategoryId === null) {
+            throw new Error("Missing param 'recordCategoryId' in updateRecordCategory");
+        }
 
-      // verify the required parameter 'recordCategoryBodyUpdate' is set
-      if (recordCategoryBodyUpdate === undefined || recordCategoryBodyUpdate === null) {
-        throw new Error("Missing the required parameter 'recordCategoryBodyUpdate' when calling updateRecordCategory");
-      }
+        // verify the required parameter 'recordCategoryBodyUpdate' is set
+        if (recordCategoryBodyUpdate === undefined || recordCategoryBodyUpdate === null) {
+            throw new Error("Missing param 'recordCategoryBodyUpdate' in updateRecordCategory");
+        }
 
 
-      var pathParams = {
-        'recordCategoryId': recordCategoryId
-      };
-      var queryParams = {
-        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+        let pathParams = {
+            'recordCategoryId': recordCategoryId
+        };
+        let queryParams = {
+            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+        };
+        let headerParams = {};
+        let formParams = {};
 
-      var authNames = ['basicAuth'];
-      var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
-      var returnType = RecordCategoryEntry;
+        let authNames = ['basicAuth'];
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+        let returnType = RecordCategoryEntry;
 
-      return this.apiClient.callApi(
-        '/record-categories/{recordCategoryId}', 'PUT',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
+        return this.apiClient.callApi(
+            '/record-categories/{recordCategoryId}', 'PUT',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            authNames, contentTypes, accepts, returnType
+        );
     }
-  };
-
-  return exports;
-}));
+}

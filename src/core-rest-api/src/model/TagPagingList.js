@@ -1,10 +1,10 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../ApiClient', './Pagination', './TagEntry'], factory);
+    define(['../../../alfrescoApiClient', './Pagination', './TagEntry'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./Pagination'), require('./TagEntry'));
+    module.exports = factory(require('../../../alfrescoApiClient'), require('./Pagination'), require('./TagEntry'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoCoreRestApi) {
@@ -42,7 +42,7 @@
    * @return {module:model/TagPagingList} The populated <code>TagPagingList</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
-    if (data) { 
+    if (data) {
       obj = data || new exports();
 
       if (data.hasOwnProperty('entries')) {

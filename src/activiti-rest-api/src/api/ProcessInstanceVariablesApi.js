@@ -48,7 +48,7 @@
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceVariables";
+        throw "Missing param 'processInstanceId' in getProcessInstanceVariables";
       }
 
 
@@ -84,12 +84,12 @@
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling createProcessInstanceVariables";
+        throw "Missing param 'processInstanceId' in createProcessInstanceVariables";
       }
 
       // verify the required parameter 'restVariables' is set
       if (restVariables == undefined || restVariables == null) {
-        throw "Missing the required parameter 'restVariables' when calling createProcessInstanceVariables";
+        throw "Missing param 'restVariables' in createProcessInstanceVariables";
       }
 
 
@@ -125,12 +125,12 @@
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling createOrUpdateProcessInstanceVariables";
+        throw "Missing param 'processInstanceId' in createOrUpdateProcessInstanceVariables";
       }
 
       // verify the required parameter 'restVariables' is set
       if (restVariables == undefined || restVariables == null) {
-        throw "Missing the required parameter 'restVariables' when calling createOrUpdateProcessInstanceVariables";
+        throw "Missing param 'restVariables' in createOrUpdateProcessInstanceVariables";
       }
 
 
@@ -166,12 +166,12 @@
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceVariable";
+        throw "Missing param 'processInstanceId' in getProcessInstanceVariable";
       }
 
       // verify the required parameter 'variableName' is set
       if (variableName == undefined || variableName == null) {
-        throw "Missing the required parameter 'variableName' when calling getProcessInstanceVariable";
+        throw "Missing param 'variableName' in getProcessInstanceVariable";
       }
 
 
@@ -209,12 +209,12 @@
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling updateProcessInstanceVariable";
+        throw "Missing param 'processInstanceId' in updateProcessInstanceVariable";
       }
 
       // verify the required parameter 'variableName' is set
       if (variableName == undefined || variableName == null) {
-        throw "Missing the required parameter 'variableName' when calling updateProcessInstanceVariable";
+        throw "Missing param 'variableName' in updateProcessInstanceVariable";
       }
 
 
@@ -251,12 +251,12 @@
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling deleteProcessInstanceVariable";
+        throw "Missing param 'processInstanceId' in deleteProcessInstanceVariable";
       }
 
       // verify the required parameter 'variableName' is set
       if (variableName == undefined || variableName == null) {
-        throw "Missing the required parameter 'variableName' when calling deleteProcessInstanceVariable";
+        throw "Missing param 'variableName' in deleteProcessInstanceVariable";
       }
 
 

@@ -48,7 +48,7 @@
 
       // verify the required parameter 'modelRepresentation' is set
       if (modelRepresentation == undefined || modelRepresentation == null) {
-        throw "Missing the required parameter 'modelRepresentation' when calling createModel";
+        throw "Missing param 'modelRepresentation' in createModel";
       }
 
 
@@ -93,7 +93,7 @@
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling deleteModel";
+        throw "Missing param 'modelId' in deleteModel";
       }
 
 
@@ -138,12 +138,12 @@
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling duplicateModel";
+        throw "Missing param 'modelId' in duplicateModel";
       }
 
       // verify the required parameter 'modelRepresentation' is set
       if (modelRepresentation == undefined || modelRepresentation == null) {
-        throw "Missing the required parameter 'modelRepresentation' when calling duplicateModel";
+        throw "Missing param 'modelRepresentation' in duplicateModel";
       }
 
 
@@ -185,7 +185,7 @@
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling getModelJSON";
+        throw "Missing param 'modelId' in getModelJSON";
       }
 
 
@@ -227,7 +227,7 @@
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling getModelThumbnail";
+        throw "Missing param 'modelId' in getModelThumbnail";
       }
 
 
@@ -272,7 +272,7 @@
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling getModel";
+        throw "Missing param 'modelId' in getModel";
       }
 
 
@@ -397,12 +397,12 @@
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling importNewVersion";
+        throw "Missing param 'modelId' in importNewVersion";
       }
 
       // verify the required parameter 'file' is set
       if (file == undefined || file == null) {
-        throw "Missing the required parameter 'file' when calling importNewVersion";
+        throw "Missing param 'file' in importNewVersion";
       }
 
 
@@ -445,7 +445,7 @@
 
       // verify the required parameter 'file' is set
       if (file == undefined || file == null) {
-        throw "Missing the required parameter 'file' when calling importProcessModel";
+        throw "Missing param 'file' in importProcessModel";
       }
 
 
@@ -488,12 +488,12 @@
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling saveModel";
+        throw "Missing param 'modelId' in saveModel";
       }
 
       // verify the required parameter 'values' is set
       if (values == undefined || values == null) {
-        throw "Missing the required parameter 'values' when calling saveModel";
+        throw "Missing param 'values' in saveModel";
       }
 
 
@@ -536,12 +536,12 @@
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling updateModel";
+        throw "Missing param 'modelId' in updateModel";
       }
 
       // verify the required parameter 'updatedModel' is set
       if (updatedModel == undefined || updatedModel == null) {
-        throw "Missing the required parameter 'updatedModel' when calling updateModel";
+        throw "Missing param 'updatedModel' in updateModel";
       }
 
 
@@ -586,7 +586,7 @@
 
       // verify the required parameter 'modelId' is set
       if (modelId == undefined || modelId == null) {
-        throw "Missing the required parameter 'modelId' when calling validateModel";
+        throw "Missing param 'modelId' in validateModel";
       }
 
 

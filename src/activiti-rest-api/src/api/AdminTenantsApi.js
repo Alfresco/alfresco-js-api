@@ -50,7 +50,7 @@
 
       // verify the required parameter 'createTenantRepresentation' is set
       if (createTenantRepresentation == undefined || createTenantRepresentation == null) {
-        throw "Missing the required parameter 'createTenantRepresentation' when calling createTenant";
+        throw "Missing param 'createTenantRepresentation' in createTenant";
       }
 
 
@@ -91,7 +91,7 @@
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling deleteTenant";
+        throw "Missing param 'tenantId' in deleteTenant";
       }
 
 
@@ -134,7 +134,7 @@
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling getTenantEvents";
+        throw "Missing param 'tenantId' in getTenantEvents";
       }
 
 
@@ -176,7 +176,7 @@
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling getTenantLogo";
+        throw "Missing param 'tenantId' in getTenantLogo";
       }
 
 
@@ -219,7 +219,7 @@
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling getTenant";
+        throw "Missing param 'tenantId' in getTenant";
       }
 
 
@@ -300,12 +300,12 @@
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling update";
+        throw "Missing param 'tenantId' in update";
       }
 
       // verify the required parameter 'createTenantRepresentation' is set
       if (createTenantRepresentation == undefined || createTenantRepresentation == null) {
-        throw "Missing the required parameter 'createTenantRepresentation' when calling update";
+        throw "Missing param 'createTenantRepresentation' in update";
       }
 
 
@@ -349,12 +349,12 @@
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling uploadTenantLogo";
+        throw "Missing param 'tenantId' in uploadTenantLogo";
       }
 
       // verify the required parameter 'file' is set
       if (file == undefined || file == null) {
-        throw "Missing the required parameter 'file' when calling uploadTenantLogo";
+        throw "Missing param 'file' in uploadTenantLogo";
       }
 
 

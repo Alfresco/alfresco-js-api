@@ -1,37 +1,48 @@
+/*!
+* @license
+* Copyright 2018 Alfresco Software, Ltd.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 
-(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['../../../alfrescoApiClient', '../model/Error', '../model/FilePlanComponentBodyUpdate', '../model/RMNodeBodyCreate', '../model/RecordEntry', '../model/RecordFolderAssociationPaging', '../model/RecordFolderEntry'], factory);
-  } else if (typeof module === 'object' && module.exports) {
-    // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/Error'), require('../model/FilePlanComponentBodyUpdate'), require('../model/RMNodeBodyCreate'), require('../model/RecordEntry'), require('../model/RecordFolderAssociationPaging'), require('../model/RecordFolderEntry'));
-  } else {
-    // Browser globals (root is window)
-    if (!root.AlfrescoGovernanceServicesRestApi) {
-      root.AlfrescoGovernanceServicesRestApi = {};
+import { AlfrescoApiClient } from '../../../alfrescoApiClient';
+import { Error } from '../model/Error';
+import { FilePlanComponentBodyUpdate } from '../model/FilePlanComponentBodyUpdate';
+import { RMNodeBodyCreate } from '../model/RMNodeBodyCreate';
+import { RecordEntry } from '../model/RecordEntry';
+import { RecordFolderAssociationPaging } from '../model/RecordFolderAssociationPaging';
+import { RecordFolderEntry } from '../model/RecordFolderEntry';
+
+/**
+ * Recordfolders service.
+ * @module api/RecordFoldersApi
+ * @version 0.1.0
+ */
+
+/**
+ * Constructs a new RecordFoldersApi.
+ * @alias :api/RecordFoldersApi
+ * @class
+ * @param {:ApiClient} apiClient Optional API client implementation to use,
+ * default to {@link module:ApiClient#instance} if unspecified.
+ */
+export class RecordFoldersApi {
+
+    apiClient: AlfrescoApiClient;
+
+    constructor(apiClient?: AlfrescoApiClient) {
+        this.apiClient = apiClient || new AlfrescoApiClient();
     }
-    root.AlfrescoGovernanceServicesRestApi.RecordFoldersApi = factory(root.AlfrescoGovernanceServicesRestApi.ApiClient, root.AlfrescoGovernanceServicesRestApi.Error, root.AlfrescoGovernanceServicesRestApi.FilePlanComponentBodyUpdate, root.AlfrescoGovernanceServicesRestApi.RMNodeBodyCreate, root.AlfrescoGovernanceServicesRestApi.RecordEntry, root.AlfrescoGovernanceServicesRestApi.RecordFolderAssociationPaging, root.AlfrescoGovernanceServicesRestApi.RecordFolderEntry);
-  }
-}(this, function(ApiClient, Error, FilePlanComponentBodyUpdate, RMNodeBodyCreate, RecordEntry, RecordFolderAssociationPaging, RecordFolderEntry) {
-  'use strict';
-
-  /**
-   * Recordfolders service.
-   * @module api/RecordFoldersApi
-   * @version 0.1.0
-   */
-
-  /**
-   * Constructs a new RecordFoldersApi.
-   * @alias :api/RecordFoldersApi
-   * @class
-   * @param {:ApiClient} apiClient Optional API client implementation to use,
-   * default to {@link module:ApiClient#instance} if unspecified.
-   */
-  var exports = function(apiClient) {
-    this.apiClient = apiClient || ApiClient.instance;
-
 
 
     /**
@@ -44,43 +55,41 @@
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleRecordEntry} and HTTP response
      */
-    this.createRecordFolderChild = function(recordFolderId, recordBodyCreate, opts) {
-      opts = opts || {};
-      var postBody = recordBodyCreate;
+    createRecordFolderChild = function (recordFolderId, recordBodyCreate, opts) {
+        opts = opts || {};
+        let postBody = recordBodyCreate;
 
-      // verify the required parameter 'recordFolderId' is set
-      if (recordFolderId === undefined || recordFolderId === null) {
-        throw new Error("Missing the required parameter 'recordFolderId' when calling createRecordFolderChild");
-      }
+        // verify the required parameter 'recordFolderId' is set
+        if (recordFolderId === undefined || recordFolderId === null) {
+            throw new Error("Missing param 'recordFolderId' in createRecordFolderChild");
+        }
 
-      // verify the required parameter 'recordBodyCreate' is set
-      if (recordBodyCreate === undefined || recordBodyCreate === null) {
-        throw new Error("Missing the required parameter 'recordBodyCreate' when calling createRecordFolderChild");
-      }
+        // verify the required parameter 'recordBodyCreate' is set
+        if (recordBodyCreate === undefined || recordBodyCreate === null) {
+            throw new Error("Missing param 'recordBodyCreate' in createRecordFolderChild");
+        }
 
 
-      var pathParams = {
-        'recordFolderId': recordFolderId
-      };
-      var queryParams = {
-        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+        let pathParams = {
+            'recordFolderId': recordFolderId
+        };
+        let queryParams = {
+            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+        };
+        let headerParams = {};
+        let formParams = {};
 
-      var authNames = ['basicAuth'];
-      var contentTypes = ['application/json', 'multipart/form-data'];
-      var accepts = ['application/json'];
-      var returnType = RecordEntry;
+        let authNames = ['basicAuth'];
+        let contentTypes = ['application/json', 'multipart/form-data'];
+        let accepts = ['application/json'];
+        let returnType = RecordEntry;
 
-      return this.apiClient.callApi(
-        '/record-folders/{recordFolderId}/records', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
+        return this.apiClient.callApi(
+            '/record-folders/{recordFolderId}/records', 'POST',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            authNames, contentTypes, accepts, returnType
+        );
     }
 
     /**
@@ -89,35 +98,32 @@
      * @param {string} recordFolderId The identifier of a record folder.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    this.deleteRecordFolder = function(recordFolderId) {
-      var postBody = null;
+    deleteRecordFolder = function (recordFolderId) {
+        let postBody = null;
 
-      // verify the required parameter 'recordFolderId' is set
-      if (recordFolderId === undefined || recordFolderId === null) {
-        throw new Error("Missing the required parameter 'recordFolderId' when calling deleteRecordFolder");
-      }
+        // verify the required parameter 'recordFolderId' is set
+        if (recordFolderId === undefined || recordFolderId === null) {
+            throw new Error("Missing param 'recordFolderId' in deleteRecordFolder");
+        }
 
 
-      var pathParams = {
-        'recordFolderId': recordFolderId
-      };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+        let pathParams = {
+            'recordFolderId': recordFolderId
+        };
+        let queryParams = {};
+        let headerParams = {};
+        let formParams = {};
 
-      var authNames = ['basicAuth'];
-      var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
-      var returnType = null;
+        let authNames = ['basicAuth'];
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+        let returnType = null;
 
-      return this.apiClient.callApi(
-        '/record-folders/{recordFolderId}', 'DELETE',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
+        return this.apiClient.callApi(
+            '/record-folders/{recordFolderId}', 'DELETE',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            authNames, contentTypes, accepts, returnType
+        );
     }
 
     /**
@@ -129,38 +135,36 @@
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleRecordFolderEntry} and HTTP response
      */
-    this.getRecordFolder = function(recordFolderId, opts) {
-      opts = opts || {};
-      var postBody = null;
+    getRecordFolder = function (recordFolderId, opts) {
+        opts = opts || {};
+        let postBody = null;
 
-      // verify the required parameter 'recordFolderId' is set
-      if (recordFolderId === undefined || recordFolderId === null) {
-        throw new Error("Missing the required parameter 'recordFolderId' when calling getRecordFolder");
-      }
+        // verify the required parameter 'recordFolderId' is set
+        if (recordFolderId === undefined || recordFolderId === null) {
+            throw new Error("Missing param 'recordFolderId' in getRecordFolder");
+        }
 
 
-      var pathParams = {
-        'recordFolderId': recordFolderId
-      };
-      var queryParams = {
-        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+        let pathParams = {
+            'recordFolderId': recordFolderId
+        };
+        let queryParams = {
+            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+        };
+        let headerParams = {};
+        let formParams = {};
 
-      var authNames = ['basicAuth'];
-      var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
-      var returnType = RecordFolderEntry;
+        let authNames = ['basicAuth'];
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+        let returnType = RecordFolderEntry;
 
-      return this.apiClient.callApi(
-        '/record-folders/{recordFolderId}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
+        return this.apiClient.callApi(
+            '/record-folders/{recordFolderId}', 'GET',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            authNames, contentTypes, accepts, returnType
+        );
     }
 
     /**
@@ -176,42 +180,40 @@
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleRecordFolderAssociationPaging} and HTTP response
      */
-    this.listRecordFolderChildren = function(recordFolderId, opts) {
-      opts = opts || {};
-      var postBody = null;
+    listRecordFolderChildren = function (recordFolderId, opts) {
+        opts = opts || {};
+        let postBody = null;
 
-      // verify the required parameter 'recordFolderId' is set
-      if (recordFolderId === undefined || recordFolderId === null) {
-        throw new Error("Missing the required parameter 'recordFolderId' when calling listRecordFolderChildren");
-      }
+        // verify the required parameter 'recordFolderId' is set
+        if (recordFolderId === undefined || recordFolderId === null) {
+            throw new Error("Missing param 'recordFolderId' in listRecordFolderChildren");
+        }
 
 
-      var pathParams = {
-        'recordFolderId': recordFolderId
-      };
-      var queryParams = {
-        'skipCount': opts['skipCount'],
-        'maxItems': opts['maxItems'],
-        'where': opts['where'],
-        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-        'includeSource': opts['includeSource'],
-        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+        let pathParams = {
+            'recordFolderId': recordFolderId
+        };
+        let queryParams = {
+            'skipCount': opts['skipCount'],
+            'maxItems': opts['maxItems'],
+            'where': opts['where'],
+            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'includeSource': opts['includeSource'],
+            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+        };
+        let headerParams = {};
+        let formParams = {};
 
-      var authNames = ['basicAuth'];
-      var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
-      var returnType = RecordFolderAssociationPaging;
+        let authNames = ['basicAuth'];
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+        let returnType = RecordFolderAssociationPaging;
 
-      return this.apiClient.callApi(
-        '/record-folders/{recordFolderId}/records', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
+        return this.apiClient.callApi(
+            '/record-folders/{recordFolderId}/records', 'GET',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            authNames, contentTypes, accepts, returnType
+        );
     }
 
     /**
@@ -224,46 +226,41 @@
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleRecordFolderEntry} and HTTP response
      */
-    this.updateRecordFolder = function(recordFolderId, recordFolderBodyUpdate, opts) {
-      opts = opts || {};
-      var postBody = recordFolderBodyUpdate;
+    updateRecordFolder = function (recordFolderId, recordFolderBodyUpdate, opts) {
+        opts = opts || {};
+        let postBody = recordFolderBodyUpdate;
 
-      // verify the required parameter 'recordFolderId' is set
-      if (recordFolderId === undefined || recordFolderId === null) {
-        throw new Error("Missing the required parameter 'recordFolderId' when calling updateRecordFolder");
-      }
+        // verify the required parameter 'recordFolderId' is set
+        if (recordFolderId === undefined || recordFolderId === null) {
+            throw new Error("Missing param 'recordFolderId' in updateRecordFolder");
+        }
 
-      // verify the required parameter 'recordFolderBodyUpdate' is set
-      if (recordFolderBodyUpdate === undefined || recordFolderBodyUpdate === null) {
-        throw new Error("Missing the required parameter 'recordFolderBodyUpdate' when calling updateRecordFolder");
-      }
+        // verify the required parameter 'recordFolderBodyUpdate' is set
+        if (recordFolderBodyUpdate === undefined || recordFolderBodyUpdate === null) {
+            throw new Error("Missing param 'recordFolderBodyUpdate' in updateRecordFolder");
+        }
 
 
-      var pathParams = {
-        'recordFolderId': recordFolderId
-      };
-      var queryParams = {
-        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+        let pathParams = {
+            'recordFolderId': recordFolderId
+        };
+        let queryParams = {
+            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+        };
+        let headerParams = {};
+        let formParams = {};
 
-      var authNames = ['basicAuth'];
-      var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
-      var returnType = RecordFolderEntry;
+        let authNames = ['basicAuth'];
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+        let returnType = RecordFolderEntry;
 
-      return this.apiClient.callApi(
-        '/record-folders/{recordFolderId}', 'PUT',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
+        return this.apiClient.callApi(
+            '/record-folders/{recordFolderId}', 'PUT',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            authNames, contentTypes, accepts, returnType
+        );
     }
 
-  };
-
-  return exports;
-}));
+}

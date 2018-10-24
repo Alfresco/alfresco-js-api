@@ -49,7 +49,7 @@
 
       // verify the required parameter 'userProcessInstanceFilterRepresentation' is set
       if (userProcessInstanceFilterRepresentation == undefined || userProcessInstanceFilterRepresentation == null) {
-        throw "Missing the required parameter 'userProcessInstanceFilterRepresentation' when calling createUserProcessInstanceFilter";
+        throw "Missing param 'userProcessInstanceFilterRepresentation' in createUserProcessInstanceFilter";
       }
 
 
@@ -91,7 +91,7 @@
 
       // verify the required parameter 'userTaskFilterRepresentation' is set
       if (userTaskFilterRepresentation == undefined || userTaskFilterRepresentation == null) {
-        throw "Missing the required parameter 'userTaskFilterRepresentation' when calling createUserTaskFilter";
+        throw "Missing param 'userTaskFilterRepresentation' in createUserTaskFilter";
       }
 
 
@@ -132,7 +132,7 @@
 
       // verify the required parameter 'userFilterId' is set
       if (userFilterId == undefined || userFilterId == null) {
-        throw "Missing the required parameter 'userFilterId' when calling deleteUserProcessInstanceFilter";
+        throw "Missing param 'userFilterId' in deleteUserProcessInstanceFilter";
       }
 
 
@@ -174,7 +174,7 @@
 
       // verify the required parameter 'userFilterId' is set
       if (userFilterId == undefined || userFilterId == null) {
-        throw "Missing the required parameter 'userFilterId' when calling deleteUserTaskFilter";
+        throw "Missing param 'userFilterId' in deleteUserTaskFilter";
       }
 
 
@@ -217,7 +217,7 @@
 
       // verify the required parameter 'userFilterId' is set
       if (userFilterId == undefined || userFilterId == null) {
-        throw "Missing the required parameter 'userFilterId' when calling getUserProcessInstanceFilter";
+        throw "Missing param 'userFilterId' in getUserProcessInstanceFilter";
       }
 
 
@@ -300,7 +300,7 @@
 
       // verify the required parameter 'userFilterId' is set
       if (userFilterId == undefined || userFilterId == null) {
-        throw "Missing the required parameter 'userFilterId' when calling getUserTaskFilter";
+        throw "Missing param 'userFilterId' in getUserTaskFilter";
       }
 
 
@@ -382,7 +382,7 @@
 
       // verify the required parameter 'filterOrderRepresentation' is set
       if (filterOrderRepresentation == undefined || filterOrderRepresentation == null) {
-        throw "Missing the required parameter 'filterOrderRepresentation' when calling orderUserProcessInstanceFilters";
+        throw "Missing param 'filterOrderRepresentation' in orderUserProcessInstanceFilters";
       }
 
 
@@ -423,7 +423,7 @@
 
       // verify the required parameter 'filterOrderRepresentation' is set
       if (filterOrderRepresentation == undefined || filterOrderRepresentation == null) {
-        throw "Missing the required parameter 'filterOrderRepresentation' when calling orderUserTaskFilters";
+        throw "Missing param 'filterOrderRepresentation' in orderUserTaskFilters";
       }
 
 
@@ -466,12 +466,12 @@
 
       // verify the required parameter 'userFilterId' is set
       if (userFilterId == undefined || userFilterId == null) {
-        throw "Missing the required parameter 'userFilterId' when calling updateUserProcessInstanceFilter";
+        throw "Missing param 'userFilterId' in updateUserProcessInstanceFilter";
       }
 
       // verify the required parameter 'userProcessInstanceFilterRepresentation' is set
       if (userProcessInstanceFilterRepresentation == undefined || userProcessInstanceFilterRepresentation == null) {
-        throw "Missing the required parameter 'userProcessInstanceFilterRepresentation' when calling updateUserProcessInstanceFilter";
+        throw "Missing param 'userProcessInstanceFilterRepresentation' in updateUserProcessInstanceFilter";
       }
 
 
@@ -515,12 +515,12 @@
 
       // verify the required parameter 'userFilterId' is set
       if (userFilterId == undefined || userFilterId == null) {
-        throw "Missing the required parameter 'userFilterId' when calling updateUserTaskFilter";
+        throw "Missing param 'userFilterId' in updateUserTaskFilter";
       }
 
       // verify the required parameter 'userTaskFilterRepresentation' is set
       if (userTaskFilterRepresentation == undefined || userTaskFilterRepresentation == null) {
-        throw "Missing the required parameter 'userTaskFilterRepresentation' when calling updateUserTaskFilter";
+        throw "Missing param 'userTaskFilterRepresentation' in updateUserTaskFilter";
       }
 
 

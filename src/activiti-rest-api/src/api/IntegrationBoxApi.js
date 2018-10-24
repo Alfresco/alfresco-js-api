@@ -49,7 +49,7 @@
 
       // verify the required parameter 'code' is set
       if (code == undefined || code == null) {
-        throw "Missing the required parameter 'code' when calling confirmAuthorisation";
+        throw "Missing param 'code' in confirmAuthorisation";
       }
 
 
@@ -92,12 +92,12 @@
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling createRepositoryAccount";
+        throw "Missing param 'userId' in createRepositoryAccount";
       }
 
       // verify the required parameter 'credentials' is set
       if (credentials == undefined || credentials == null) {
-        throw "Missing the required parameter 'credentials' when calling createRepositoryAccount";
+        throw "Missing param 'credentials' in createRepositoryAccount";
       }
 
 
@@ -139,7 +139,7 @@
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling deleteRepositoryAccount";
+        throw "Missing param 'userId' in deleteRepositoryAccount";
       }
 
 
@@ -257,7 +257,7 @@
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling getRepositoryAccount";
+        throw "Missing param 'userId' in getRepositoryAccount";
       }
 
 
@@ -300,12 +300,12 @@
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling updateRepositoryAccount";
+        throw "Missing param 'userId' in updateRepositoryAccount";
       }
 
       // verify the required parameter 'credentials' is set
       if (credentials == undefined || credentials == null) {
-        throw "Missing the required parameter 'credentials' when calling updateRepositoryAccount";
+        throw "Missing param 'credentials' in updateRepositoryAccount";
       }
 
 

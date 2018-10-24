@@ -60,7 +60,7 @@ export class DownloadsApi {
 
         // verify the required parameter 'downloadId' is set
         if (downloadId == undefined || downloadId == null) {
-            throw new Error("Missing the required parameter 'downloadId' when calling cancelDownload");
+            throw new Error("Missing param 'downloadId' in cancelDownload");
         }
 
 
@@ -106,7 +106,7 @@ export class DownloadsApi {
 
         // verify the required parameter 'downloadBodyCreate' is set
         if (downloadBodyCreate == undefined || downloadBodyCreate == null) {
-            throw new Error("Missing the required parameter 'downloadBodyCreate' when calling createDownload");
+            throw new Error("Missing param 'downloadBodyCreate' in createDownload");
         }
 
 
@@ -152,7 +152,7 @@ export class DownloadsApi {
 
         // verify the required parameter 'downloadId' is set
         if (downloadId == undefined || downloadId == null) {
-            throw new Error("Missing the required parameter 'downloadId' when calling getDownload");
+            throw new Error("Missing param 'downloadId' in getDownload");
         }
 
 

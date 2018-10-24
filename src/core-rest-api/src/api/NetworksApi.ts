@@ -56,7 +56,7 @@ export class NetworksApi {
 
         // verify the required parameter 'networkId' is set
         if (networkId == undefined || networkId == null) {
-            throw "Missing the required parameter 'networkId' when calling getNetwork";
+            throw "Missing param 'networkId' in getNetwork";
         }
 
 
@@ -97,12 +97,12 @@ export class NetworksApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw new Error("Missing the required parameter 'personId' when calling getNetworkForPerson");
+            throw new Error("Missing param 'personId' in getNetworkForPerson");
         }
 
         // verify the required parameter 'networkId' is set
         if (networkId == undefined || networkId == null) {
-            throw new Error("Missing the required parameter 'networkId' when calling getNetworkForPerson");
+            throw new Error("Missing param 'networkId' in getNetworkForPerson");
         }
 
 
@@ -145,7 +145,7 @@ export class NetworksApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw new Error("Missing the required parameter 'personId' when calling listNetworksForPerson");
+            throw new Error("Missing param 'personId' in listNetworksForPerson");
         }
 
 

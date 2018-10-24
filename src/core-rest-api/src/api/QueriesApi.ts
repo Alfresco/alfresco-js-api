@@ -63,7 +63,7 @@ export class QueriesApi {
 
         // verify the required parameter 'term' is set
         if (term == undefined || term == null) {
-            throw "Missing the required parameter 'term' when calling findNodes";
+            throw "Missing param 'term' in findNodes";
         }
 
 
@@ -111,7 +111,7 @@ export class QueriesApi {
 
         // verify the required parameter 'term' is set
         if (term == undefined || term == null) {
-            throw new Error("Missing the required parameter 'term' when calling findPeople");
+            throw new Error("Missing param 'term' in findPeople");
         }
 
 
@@ -156,7 +156,7 @@ export class QueriesApi {
 
         // verify the required parameter 'term' is set
         if (term == undefined || term == null) {
-            throw new Error("Missing the required parameter 'term' when calling findSites");
+            throw new Error("Missing param 'term' in findSites");
         }
 
 

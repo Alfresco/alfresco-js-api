@@ -63,12 +63,12 @@ export class ChildAssociationsApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling addNode";
+            throw "Missing param 'nodeId' in addNode";
         }
 
         // verify the required parameter 'nodeBody' is set
         if (nodeBody == undefined || nodeBody == null) {
-            throw "Missing the required parameter 'nodeBody' when calling addNode";
+            throw "Missing param 'nodeBody' in addNode";
         }
 
 
@@ -107,12 +107,12 @@ export class ChildAssociationsApi {
 
         // verify the required parameter 'parentId' is set
         if (parentId == undefined || parentId == null) {
-            throw "Missing the required parameter 'parentId' when calling addSecondaryChildAssoc";
+            throw "Missing param 'parentId' in addSecondaryChildAssoc";
         }
 
         // verify the required parameter 'assocChildBody' is set
         if (assocChildBody == undefined || assocChildBody == null) {
-            throw "Missing the required parameter 'assocChildBody' when calling addSecondaryChildAssoc";
+            throw "Missing param 'assocChildBody' in addSecondaryChildAssoc";
         }
 
 
@@ -149,7 +149,7 @@ export class ChildAssociationsApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling deleteNode";
+            throw "Missing param 'nodeId' in deleteNode";
         }
 
 
@@ -196,7 +196,7 @@ export class ChildAssociationsApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling getNodeChildren";
+            throw "Missing param 'nodeId' in getNodeChildren";
         }
 
 
@@ -245,7 +245,7 @@ export class ChildAssociationsApi {
 
         // verify the required parameter 'childId' is set
         if (childId == undefined || childId == null) {
-            throw "Missing the required parameter 'childId' when calling listParents";
+            throw "Missing param 'childId' in listParents";
         }
 
 
@@ -290,7 +290,7 @@ export class ChildAssociationsApi {
 
         // verify the required parameter 'parentId' is set
         if (parentId == undefined || parentId == null) {
-            throw "Missing the required parameter 'parentId' when calling listSecondaryChildAssociations";
+            throw "Missing param 'parentId' in listSecondaryChildAssociations";
         }
 
 
@@ -335,12 +335,12 @@ export class ChildAssociationsApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling moveNode";
+            throw "Missing param 'nodeId' in moveNode";
         }
 
         // verify the required parameter 'moveBody' is set
         if (moveBody == undefined || moveBody == null) {
-            throw "Missing the required parameter 'moveBody' when calling moveNode";
+            throw "Missing param 'moveBody' in moveNode";
         }
 
 
@@ -381,12 +381,12 @@ export class ChildAssociationsApi {
 
         // verify the required parameter 'parentId' is set
         if (parentId == undefined || parentId == null) {
-            throw "Missing the required parameter 'parentId' when calling removeSecondaryChildAssoc";
+            throw "Missing param 'parentId' in removeSecondaryChildAssoc";
         }
 
         // verify the required parameter 'childId' is set
         if (childId == undefined || childId == null) {
-            throw "Missing the required parameter 'childId' when calling removeSecondaryChildAssoc";
+            throw "Missing param 'childId' in removeSecondaryChildAssoc";
         }
 
 

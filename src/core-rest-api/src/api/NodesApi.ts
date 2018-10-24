@@ -68,12 +68,12 @@ export class NodesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling addNode";
+            throw "Missing param 'nodeId' in addNode";
         }
 
         // verify the required parameter 'nodeBody' is set
         if (nodeBody == undefined || nodeBody == null) {
-            throw "Missing the required parameter 'nodeBody' when calling addNode";
+            throw "Missing param 'nodeBody' in addNode";
         }
 
 
@@ -117,12 +117,12 @@ export class NodesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling copyNode";
+            throw "Missing param 'nodeId' in copyNode";
         }
 
         // verify the required parameter 'copyBody' is set
         if (copyBody == undefined || copyBody == null) {
-            throw "Missing the required parameter 'copyBody' when calling copyNode";
+            throw "Missing param 'copyBody' in copyNode";
         }
 
 
@@ -162,7 +162,7 @@ export class NodesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling deleteNode";
+            throw "Missing param 'nodeId' in deleteNode";
         }
 
 
@@ -202,7 +202,7 @@ export class NodesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling getDeletedNode";
+            throw "Missing param 'nodeId' in getDeletedNode";
         }
 
 
@@ -278,7 +278,7 @@ export class NodesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling getFileContent";
+            throw "Missing param 'nodeId' in getFileContent";
         }
 
 
@@ -322,7 +322,7 @@ export class NodesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling getNode";
+            throw "Missing param 'nodeId' in getNode";
         }
 
 
@@ -364,7 +364,7 @@ export class NodesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw new Error("Missing the required parameter 'nodeId' when calling getNodeContent");
+            throw new Error("Missing param 'nodeId' in getNodeContent");
         }
 
 
@@ -413,7 +413,7 @@ export class NodesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling getNodeChildren";
+            throw "Missing param 'nodeId' in getNodeChildren";
         }
 
 
@@ -464,7 +464,7 @@ export class NodesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw new Error("Missing the required parameter 'nodeId' when calling listParents");
+            throw new Error("Missing param 'nodeId' in listParents");
         }
 
 
@@ -514,7 +514,7 @@ export class NodesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw new Error("Missing the required parameter 'nodeId' when calling listSecondaryChildren");
+            throw new Error("Missing param 'nodeId' in listSecondaryChildren");
         }
 
 
@@ -560,7 +560,7 @@ export class NodesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw new Error("Missing the required parameter 'nodeId' when calling listSourceAssociations");
+            throw new Error("Missing param 'nodeId' in listSourceAssociations");
         }
 
 
@@ -604,7 +604,7 @@ export class NodesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw new Error("Missing the required parameter 'nodeId' when calling listTargetAssociations");
+            throw new Error("Missing param 'nodeId' in listTargetAssociations");
         }
 
 
@@ -648,12 +648,12 @@ export class NodesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw new Error("Missing the required parameter 'nodeId' when calling lockNode");
+            throw new Error("Missing param 'nodeId' in lockNode");
         }
 
         // verify the required parameter 'nodeBodyLock' is set
         if (nodeBodyLock == undefined || nodeBodyLock == null) {
-            throw new Error("Missing the required parameter 'nodeBodyLock' when calling lockNode");
+            throw new Error("Missing param 'nodeBodyLock' in lockNode");
         }
 
 
@@ -694,7 +694,7 @@ export class NodesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw new Error("Missing the required parameter 'nodeId' when calling unlockNode");
+            throw new Error("Missing param 'nodeId' in unlockNode");
         }
 
 
@@ -736,12 +736,12 @@ export class NodesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling moveNode";
+            throw "Missing param 'nodeId' in moveNode";
         }
 
         // verify the required parameter 'moveBody' is set
         if (moveBody == undefined || moveBody == null) {
-            throw "Missing the required parameter 'moveBody' when calling moveNode";
+            throw "Missing param 'moveBody' in moveNode";
         }
 
 
@@ -778,7 +778,7 @@ export class NodesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling purgeDeletedNode";
+            throw "Missing param 'nodeId' in purgeDeletedNode";
         }
 
 
@@ -813,7 +813,7 @@ export class NodesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling restoreNode";
+            throw "Missing param 'nodeId' in restoreNode";
         }
 
 
@@ -855,12 +855,12 @@ export class NodesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling updateFileContent";
+            throw "Missing param 'nodeId' in updateFileContent";
         }
 
         // verify the required parameter 'contentBody' is set
         if (contentBody == undefined || contentBody == null) {
-            throw "Missing the required parameter 'contentBody' when calling updateFileContent";
+            throw "Missing param 'contentBody' in updateFileContent";
         }
 
 
@@ -895,12 +895,12 @@ export class NodesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling updateNodeContent";
+            throw "Missing param 'nodeId' in updateNodeContent";
         }
 
         // verify the required parameter 'contentBody' is set
         if (contentBody == undefined || contentBody == null) {
-            throw "Missing the required parameter 'contentBody' when calling updateNodeContent";
+            throw "Missing param 'contentBody' in updateNodeContent";
         }
 
 
@@ -945,12 +945,12 @@ export class NodesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling updateNode";
+            throw "Missing param 'nodeId' in updateNode";
         }
 
         // verify the required parameter 'nodeBody' is set
         if (nodeBody == undefined || nodeBody == null) {
-            throw "Missing the required parameter 'nodeBody' when calling updateNode";
+            throw "Missing param 'nodeBody' in updateNode";
         }
 
 

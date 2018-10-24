@@ -48,7 +48,7 @@
 
       // verify the required parameter 'createRepresentation' is set
       if (createRepresentation == undefined || createRepresentation == null) {
-        throw "Missing the required parameter 'createRepresentation' when calling createBasicAuthConfiguration";
+        throw "Missing param 'createRepresentation' in createBasicAuthConfiguration";
       }
 
 
@@ -89,7 +89,7 @@
 
       // verify the required parameter 'representation' is set
       if (representation == undefined || representation == null) {
-        throw "Missing the required parameter 'representation' when calling createEndpointConfiguration";
+        throw "Missing param 'representation' in createEndpointConfiguration";
       }
 
 
@@ -131,12 +131,12 @@
 
       // verify the required parameter 'basicAuthId' is set
       if (basicAuthId == undefined || basicAuthId == null) {
-        throw "Missing the required parameter 'basicAuthId' when calling getBasicAuthConfiguration";
+        throw "Missing param 'basicAuthId' in getBasicAuthConfiguration";
       }
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling getBasicAuthConfiguration";
+        throw "Missing param 'tenantId' in getBasicAuthConfiguration";
       }
 
 
@@ -179,7 +179,7 @@
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling getBasicAuthConfigurations";
+        throw "Missing param 'tenantId' in getBasicAuthConfigurations";
       }
 
 
@@ -222,12 +222,12 @@
 
       // verify the required parameter 'endpointConfigurationId' is set
       if (endpointConfigurationId == undefined || endpointConfigurationId == null) {
-        throw "Missing the required parameter 'endpointConfigurationId' when calling getEndpointConfiguration";
+        throw "Missing param 'endpointConfigurationId' in getEndpointConfiguration";
       }
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling getEndpointConfiguration";
+        throw "Missing param 'tenantId' in getEndpointConfiguration";
       }
 
 
@@ -270,7 +270,7 @@
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling getEndpointConfigurations";
+        throw "Missing param 'tenantId' in getEndpointConfigurations";
       }
 
 
@@ -313,12 +313,12 @@
 
       // verify the required parameter 'basicAuthId' is set
       if (basicAuthId == undefined || basicAuthId == null) {
-        throw "Missing the required parameter 'basicAuthId' when calling removeBasicAuthonfiguration";
+        throw "Missing param 'basicAuthId' in removeBasicAuthonfiguration";
       }
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling removeBasicAuthonfiguration";
+        throw "Missing param 'tenantId' in removeBasicAuthonfiguration";
       }
 
 
@@ -362,12 +362,12 @@
 
       // verify the required parameter 'endpointConfigurationId' is set
       if (endpointConfigurationId == undefined || endpointConfigurationId == null) {
-        throw "Missing the required parameter 'endpointConfigurationId' when calling removeEndpointConfiguration";
+        throw "Missing param 'endpointConfigurationId' in removeEndpointConfiguration";
       }
 
       // verify the required parameter 'tenantId' is set
       if (tenantId == undefined || tenantId == null) {
-        throw "Missing the required parameter 'tenantId' when calling removeEndpointConfiguration";
+        throw "Missing param 'tenantId' in removeEndpointConfiguration";
       }
 
 
@@ -411,12 +411,12 @@
 
       // verify the required parameter 'basicAuthId' is set
       if (basicAuthId == undefined || basicAuthId == null) {
-        throw "Missing the required parameter 'basicAuthId' when calling updateBasicAuthConfiguration";
+        throw "Missing param 'basicAuthId' in updateBasicAuthConfiguration";
       }
 
       // verify the required parameter 'createRepresentation' is set
       if (createRepresentation == undefined || createRepresentation == null) {
-        throw "Missing the required parameter 'createRepresentation' when calling updateBasicAuthConfiguration";
+        throw "Missing param 'createRepresentation' in updateBasicAuthConfiguration";
       }
 
 
@@ -459,12 +459,12 @@
 
       // verify the required parameter 'endpointConfigurationId' is set
       if (endpointConfigurationId == undefined || endpointConfigurationId == null) {
-        throw "Missing the required parameter 'endpointConfigurationId' when calling updateEndpointConfiguration";
+        throw "Missing param 'endpointConfigurationId' in updateEndpointConfiguration";
       }
 
       // verify the required parameter 'representation' is set
       if (representation == undefined || representation == null) {
-        throw "Missing the required parameter 'representation' when calling updateEndpointConfiguration";
+        throw "Missing param 'representation' in updateEndpointConfiguration";
       }
 
 

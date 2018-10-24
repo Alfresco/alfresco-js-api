@@ -49,7 +49,7 @@
 
       // verify the required parameter 'repositoryId' is set
       if (repositoryId == undefined || repositoryId == null) {
-        throw "Missing the required parameter 'repositoryId' when calling getAllSites";
+        throw "Missing param 'repositoryId' in getAllSites";
       }
 
 
@@ -92,12 +92,12 @@
 
       // verify the required parameter 'repositoryId' is set
       if (repositoryId == undefined || repositoryId == null) {
-        throw "Missing the required parameter 'repositoryId' when calling getContentInFolder";
+        throw "Missing param 'repositoryId' in getContentInFolder";
       }
 
       // verify the required parameter 'folderId' is set
       if (folderId == undefined || folderId == null) {
-        throw "Missing the required parameter 'folderId' when calling getContentInFolder";
+        throw "Missing param 'folderId' in getContentInFolder";
       }
 
 
@@ -141,12 +141,12 @@
 
       // verify the required parameter 'repositoryId' is set
       if (repositoryId == undefined || repositoryId == null) {
-        throw "Missing the required parameter 'repositoryId' when calling getContentInSite";
+        throw "Missing param 'repositoryId' in getContentInSite";
       }
 
       // verify the required parameter 'siteId' is set
       if (siteId == undefined || siteId == null) {
-        throw "Missing the required parameter 'siteId' when calling getContentInSite";
+        throw "Missing param 'siteId' in getContentInSite";
       }
 
 

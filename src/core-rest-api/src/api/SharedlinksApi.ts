@@ -60,7 +60,7 @@ export class SharedlinksApi {
 
         // verify the required parameter 'sharedLinkBody' is set
         if (sharedLinkBody == undefined || sharedLinkBody == null) {
-            throw "Missing the required parameter 'sharedLinkBody' when calling addSharedLink";
+            throw "Missing param 'sharedLinkBody' in addSharedLink";
         }
 
 
@@ -95,7 +95,7 @@ export class SharedlinksApi {
 
         // verify the required parameter 'sharedId' is set
         if (sharedId == undefined || sharedId == null) {
-            throw "Missing the required parameter 'sharedId' when calling deleteSharedLink";
+            throw "Missing param 'sharedId' in deleteSharedLink";
         }
 
 
@@ -130,12 +130,12 @@ export class SharedlinksApi {
 
         // verify the required parameter 'sharedId' is set
         if (sharedId == undefined || sharedId == null) {
-            throw "Missing the required parameter 'sharedId' when calling emailSharedLink";
+            throw "Missing param 'sharedId' in emailSharedLink";
         }
 
         // verify the required parameter 'emailSharedLinkBody' is set
         if (emailSharedLinkBody == undefined || emailSharedLinkBody == null) {
-            throw "Missing the required parameter 'emailSharedLinkBody' when calling emailSharedLink";
+            throw "Missing param 'emailSharedLinkBody' in emailSharedLink";
         }
 
 
@@ -214,7 +214,7 @@ export class SharedlinksApi {
 
         // verify the required parameter 'sharedId' is set
         if (sharedId == undefined || sharedId == null) {
-            throw "Missing the required parameter 'sharedId' when calling getSharedLink";
+            throw "Missing param 'sharedId' in getSharedLink";
         }
 
 
@@ -255,7 +255,7 @@ export class SharedlinksApi {
 
         // verify the required parameter 'sharedId' is set
         if (sharedId == undefined || sharedId == null) {
-            throw "Missing the required parameter 'sharedId' when calling getSharedLinkContent";
+            throw "Missing param 'sharedId' in getSharedLinkContent";
         }
 
 

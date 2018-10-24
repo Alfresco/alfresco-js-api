@@ -54,12 +54,12 @@ export class FavoritesApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling addFavorite";
+            throw "Missing param 'personId' in addFavorite";
         }
 
         // verify the required parameter 'favoriteBody' is set
         if (favoriteBody == undefined || favoriteBody == null) {
-            throw "Missing the required parameter 'favoriteBody' when calling addFavorite";
+            throw "Missing param 'favoriteBody' in addFavorite";
         }
 
 
@@ -98,12 +98,12 @@ export class FavoritesApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling getFavorite";
+            throw "Missing param 'personId' in getFavorite";
         }
 
         // verify the required parameter 'favoriteId' is set
         if (favoriteId == undefined || favoriteId == null) {
-            throw "Missing the required parameter 'favoriteId' when calling getFavorite";
+            throw "Missing param 'favoriteId' in getFavorite";
         }
 
 
@@ -147,7 +147,7 @@ export class FavoritesApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling getFavorites";
+            throw "Missing param 'personId' in getFavorites";
         }
 
 
@@ -188,12 +188,12 @@ export class FavoritesApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling removeFavoriteSite";
+            throw "Missing param 'personId' in removeFavoriteSite";
         }
 
         // verify the required parameter 'favoriteId' is set
         if (favoriteId == undefined || favoriteId == null) {
-            throw "Missing the required parameter 'favoriteId' when calling removeFavoriteSite";
+            throw "Missing param 'favoriteId' in removeFavoriteSite";
         }
 
 

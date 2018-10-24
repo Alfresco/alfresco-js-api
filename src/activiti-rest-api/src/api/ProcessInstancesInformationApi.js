@@ -48,7 +48,7 @@
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceContent";
+        throw "Missing param 'processInstanceId' in getProcessInstanceContent";
       }
 
 
@@ -90,7 +90,7 @@
 
       // verify the required parameter 'startRequest' is set
       if (startRequest == undefined || startRequest == null) {
-        throw "Missing the required parameter 'startRequest' when calling startNewProcessInstance";
+        throw "Missing param 'startRequest' in startNewProcessInstance";
       }
 
 

@@ -1,37 +1,48 @@
+/*!
+* @license
+* Copyright 2018 Alfresco Software, Ltd.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 
-(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['../../../alfrescoApiClient', '../model/Error', '../model/RMNodeBodyCreate', '../model/UnfiledContainerAssociationPaging', '../model/UnfiledContainerEntry', '../model/UnfiledRecordContainerBodyUpdate'], factory);
-  } else if (typeof module === 'object' && module.exports) {
-    // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/Error'), require('../model/RMNodeBodyCreate'), require('../model/UnfiledContainerAssociationPaging'), require('../model/UnfiledContainerEntry'), require('../model/UnfiledRecordContainerBodyUpdate'));
-  } else {
-    // Browser globals (root is window)
-    if (!root.AlfrescoGovernanceServicesRestApi) {
-      root.AlfrescoGovernanceServicesRestApi = {};
+import { AlfrescoApiClient } from '../../../alfrescoApiClient';
+import { Error } from '../model/Error';
+import { RMNodeBodyCreate } from '../model/RMNodeBodyCreate';
+import { UnfiledContainerAssociationPaging } from '../model/UnfiledContainerAssociationPaging';
+import { UnfiledContainerEntry } from '../model/UnfiledContainerEntry';
+import { UnfiledRecordContainerBodyUpdate } from '../model/UnfiledRecordContainerBodyUpdate';
+
+
+/**
+ * Unfiledcontainers service.
+ * @module api/UnfiledContainersApi
+ * @version 0.1.0
+ */
+
+/**
+ * Constructs a new UnfiledContainersApi.
+ * @alias :api/UnfiledContainersApi
+ * @class
+ * @param {:ApiClient} apiClient Optional API client implementation to use,
+ * default to {@link module:ApiClient#instance} if unspecified.
+ */
+export class UnfiledContainersApi {
+
+    apiClient: AlfrescoApiClient;
+
+    constructor(apiClient?: AlfrescoApiClient) {
+        this.apiClient = apiClient || new AlfrescoApiClient();
     }
-    root.AlfrescoGovernanceServicesRestApi.UnfiledContainersApi = factory(root.AlfrescoGovernanceServicesRestApi.ApiClient, root.AlfrescoGovernanceServicesRestApi.Error, root.AlfrescoGovernanceServicesRestApi.RMNodeBodyCreate, root.AlfrescoGovernanceServicesRestApi.UnfiledContainerAssociationPaging, root.AlfrescoGovernanceServicesRestApi.UnfiledContainerEntry, root.AlfrescoGovernanceServicesRestApi.UnfiledRecordContainerBodyUpdate);
-  }
-}(this, function(ApiClient, Error, RMNodeBodyCreate, UnfiledContainerAssociationPaging, UnfiledContainerEntry, UnfiledRecordContainerBodyUpdate) {
-  'use strict';
-
-  /**
-   * Unfiledcontainers service.
-   * @module api/UnfiledContainersApi
-   * @version 0.1.0
-   */
-
-  /**
-   * Constructs a new UnfiledContainersApi.
-   * @alias :api/UnfiledContainersApi
-   * @class
-   * @param {:ApiClient} apiClient Optional API client implementation to use,
-   * default to {@link module:ApiClient#instance} if unspecified.
-   */
-  var exports = function(apiClient) {
-    this.apiClient = apiClient || ApiClient.instance;
-
 
 
     /**
@@ -45,44 +56,42 @@
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleUnfiledContainerAssociationPaging} and HTTP response
      */
-    this.createUnfiledContainerChildren = function(unfiledContainerId, nodeBodyCreate, opts) {
-      opts = opts || {};
-      var postBody = nodeBodyCreate;
+    createUnfiledContainerChildren = function (unfiledContainerId, nodeBodyCreate, opts) {
+        opts = opts || {};
+        let postBody = nodeBodyCreate;
 
-      // verify the required parameter 'unfiledContainerId' is set
-      if (unfiledContainerId === undefined || unfiledContainerId === null) {
-        throw new Error("Missing the required parameter 'unfiledContainerId' when calling createUnfiledContainerChildren");
-      }
+        // verify the required parameter 'unfiledContainerId' is set
+        if (unfiledContainerId === undefined || unfiledContainerId === null) {
+            throw new Error("Missing param 'unfiledContainerId' in createUnfiledContainerChildren");
+        }
 
-      // verify the required parameter 'nodeBodyCreate' is set
-      if (nodeBodyCreate === undefined || nodeBodyCreate === null) {
-        throw new Error("Missing the required parameter 'nodeBodyCreate' when calling createUnfiledContainerChildren");
-      }
+        // verify the required parameter 'nodeBodyCreate' is set
+        if (nodeBodyCreate === undefined || nodeBodyCreate === null) {
+            throw new Error("Missing param 'nodeBodyCreate' in createUnfiledContainerChildren");
+        }
 
 
-      var pathParams = {
-        'unfiledContainerId': unfiledContainerId
-      };
-      var queryParams = {
-        'autoRename': opts['autoRename'],
-        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+        let pathParams = {
+            'unfiledContainerId': unfiledContainerId
+        };
+        let queryParams = {
+            'autoRename': opts['autoRename'],
+            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+        };
+        let headerParams = {};
+        let formParams = {};
 
-      var authNames = ['basicAuth'];
-      var contentTypes = ['application/json', 'multipart/form-data'];
-      var accepts = ['application/json'];
-      var returnType = UnfiledContainerAssociationPaging;
+        let authNames = ['basicAuth'];
+        let contentTypes = ['application/json', 'multipart/form-data'];
+        let accepts = ['application/json'];
+        let returnType = UnfiledContainerAssociationPaging;
 
-      return this.apiClient.callApi(
-        '/unfiled-containers/{unfiledContainerId}/children', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
+        return this.apiClient.callApi(
+            '/unfiled-containers/{unfiledContainerId}/children', 'POST',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            authNames, contentTypes, accepts, returnType
+        );
     }
 
     /**
@@ -94,38 +103,36 @@
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleUnfiledContainerEntry} and HTTP response
      */
-    this.getUnfiledContainer = function(unfiledContainerId, opts) {
-      opts = opts || {};
-      var postBody = null;
+    getUnfiledContainer = function (unfiledContainerId, opts) {
+        opts = opts || {};
+        let postBody = null;
 
-      // verify the required parameter 'unfiledContainerId' is set
-      if (unfiledContainerId === undefined || unfiledContainerId === null) {
-        throw new Error("Missing the required parameter 'unfiledContainerId' when calling getUnfiledContainer");
-      }
+        // verify the required parameter 'unfiledContainerId' is set
+        if (unfiledContainerId === undefined || unfiledContainerId === null) {
+            throw new Error("Missing param 'unfiledContainerId' in getUnfiledContainer");
+        }
 
 
-      var pathParams = {
-        'unfiledContainerId': unfiledContainerId
-      };
-      var queryParams = {
-        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+        let pathParams = {
+            'unfiledContainerId': unfiledContainerId
+        };
+        let queryParams = {
+            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+        };
+        let headerParams = {};
+        let formParams = {};
 
-      var authNames = ['basicAuth'];
-      var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
-      var returnType = UnfiledContainerEntry;
+        let authNames = ['basicAuth'];
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+        let returnType = UnfiledContainerEntry;
 
-      return this.apiClient.callApi(
-        '/unfiled-containers/{unfiledContainerId}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
+        return this.apiClient.callApi(
+            '/unfiled-containers/{unfiledContainerId}', 'GET',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            authNames, contentTypes, accepts, returnType
+        );
     }
 
     /**
@@ -141,42 +148,40 @@
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleUnfiledContainerAssociationPaging} and HTTP response
      */
-    this.listUnfiledContainerChildren = function(unfiledContainerId, opts) {
-      opts = opts || {};
-      var postBody = null;
+    listUnfiledContainerChildren = function (unfiledContainerId, opts) {
+        opts = opts || {};
+        let postBody = null;
 
-      // verify the required parameter 'unfiledContainerId' is set
-      if (unfiledContainerId === undefined || unfiledContainerId === null) {
-        throw new Error("Missing the required parameter 'unfiledContainerId' when calling listUnfiledContainerChildren");
-      }
+        // verify the required parameter 'unfiledContainerId' is set
+        if (unfiledContainerId === undefined || unfiledContainerId === null) {
+            throw new Error("Missing param 'unfiledContainerId' in listUnfiledContainerChildren");
+        }
 
 
-      var pathParams = {
-        'unfiledContainerId': unfiledContainerId
-      };
-      var queryParams = {
-        'skipCount': opts['skipCount'],
-        'maxItems': opts['maxItems'],
-        'where': opts['where'],
-        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-        'includeSource': opts['includeSource'],
-        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+        let pathParams = {
+            'unfiledContainerId': unfiledContainerId
+        };
+        let queryParams = {
+            'skipCount': opts['skipCount'],
+            'maxItems': opts['maxItems'],
+            'where': opts['where'],
+            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'includeSource': opts['includeSource'],
+            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+        };
+        let headerParams = {};
+        let formParams = {};
 
-      var authNames = ['basicAuth'];
-      var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
-      var returnType = UnfiledContainerAssociationPaging;
+        let authNames = ['basicAuth'];
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+        let returnType = UnfiledContainerAssociationPaging;
 
-      return this.apiClient.callApi(
-        '/unfiled-containers/{unfiledContainerId}/children', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
+        return this.apiClient.callApi(
+            '/unfiled-containers/{unfiledContainerId}/children', 'GET',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            authNames, contentTypes, accepts, returnType
+        );
     }
 
     /**
@@ -189,46 +194,41 @@
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleUnfiledContainerEntry} and HTTP response
      */
-    this.updateUnfiledContainer = function(unfiledContainerId, unfiledContainerBodyUpdate, opts) {
-      opts = opts || {};
-      var postBody = unfiledContainerBodyUpdate;
+    updateUnfiledContainer = function (unfiledContainerId, unfiledContainerBodyUpdate, opts) {
+        opts = opts || {};
+        let postBody = unfiledContainerBodyUpdate;
 
-      // verify the required parameter 'unfiledContainerId' is set
-      if (unfiledContainerId === undefined || unfiledContainerId === null) {
-        throw new Error("Missing the required parameter 'unfiledContainerId' when calling updateUnfiledContainer");
-      }
+        // verify the required parameter 'unfiledContainerId' is set
+        if (unfiledContainerId === undefined || unfiledContainerId === null) {
+            throw new Error("Missing param 'unfiledContainerId' in updateUnfiledContainer");
+        }
 
-      // verify the required parameter 'unfiledContainerBodyUpdate' is set
-      if (unfiledContainerBodyUpdate === undefined || unfiledContainerBodyUpdate === null) {
-        throw new Error("Missing the required parameter 'unfiledContainerBodyUpdate' when calling updateUnfiledContainer");
-      }
+        // verify the required parameter 'unfiledContainerBodyUpdate' is set
+        if (unfiledContainerBodyUpdate === undefined || unfiledContainerBodyUpdate === null) {
+            throw new Error("Missing param 'unfiledContainerBodyUpdate' in updateUnfiledContainer");
+        }
 
 
-      var pathParams = {
-        'unfiledContainerId': unfiledContainerId
-      };
-      var queryParams = {
-        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+        let pathParams = {
+            'unfiledContainerId': unfiledContainerId
+        };
+        let queryParams = {
+            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+        };
+        let headerParams = {};
+        let formParams = {};
 
-      var authNames = ['basicAuth'];
-      var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
-      var returnType = UnfiledContainerEntry;
+        let authNames = ['basicAuth'];
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+        let returnType = UnfiledContainerEntry;
 
-      return this.apiClient.callApi(
-        '/unfiled-containers/{unfiledContainerId}', 'PUT',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
+        return this.apiClient.callApi(
+            '/unfiled-containers/{unfiledContainerId}', 'PUT',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            authNames, contentTypes, accepts, returnType
+        );
     }
 
-  };
-
-  return exports;
-}));
+}

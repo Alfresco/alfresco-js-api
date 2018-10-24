@@ -49,12 +49,12 @@
 
       // verify the required parameter 'commentRequest' is set
       if (commentRequest == undefined || commentRequest == null) {
-        throw "Missing the required parameter 'commentRequest' when calling addProcessInstanceComment";
+        throw "Missing param 'commentRequest' in addProcessInstanceComment";
       }
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling addProcessInstanceComment";
+        throw "Missing param 'processInstanceId' in addProcessInstanceComment";
       }
 
 
@@ -96,7 +96,7 @@
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling deleteProcessInstance";
+        throw "Missing param 'processInstanceId' in deleteProcessInstance";
       }
 
 
@@ -141,7 +141,7 @@
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceComments";
+        throw "Missing param 'processInstanceId' in getProcessInstanceComments";
       }
 
 
@@ -185,7 +185,7 @@
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceStartForm";
+        throw "Missing param 'processInstanceId' in getProcessInstanceStartForm";
       }
 
 
@@ -227,7 +227,7 @@
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstance";
+        throw "Missing param 'processInstanceId' in getProcessInstance";
       }
 
 

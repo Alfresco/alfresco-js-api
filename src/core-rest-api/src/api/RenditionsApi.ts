@@ -55,12 +55,12 @@ export class RenditionsApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling createRendition";
+            throw "Missing param 'nodeId' in createRendition";
         }
 
         // verify the required parameter 'renditionBody' is set
         if (renditionBody == undefined || renditionBody == null) {
-            throw "Missing the required parameter 'renditionBody' when calling createRendition";
+            throw "Missing param 'renditionBody' in createRendition";
         }
 
 
@@ -96,12 +96,12 @@ export class RenditionsApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling getRendition";
+            throw "Missing param 'nodeId' in getRendition";
         }
 
         // verify the required parameter 'renditionId' is set
         if (renditionId == undefined || renditionId == null) {
-            throw "Missing the required parameter 'renditionId' when calling getRendition";
+            throw "Missing param 'renditionId' in getRendition";
         }
 
 
@@ -141,12 +141,12 @@ export class RenditionsApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling getRenditionContent";
+            throw "Missing param 'nodeId' in getRenditionContent";
         }
 
         // verify the required parameter 'renditionId' is set
         if (renditionId == undefined || renditionId == null) {
-            throw "Missing the required parameter 'renditionId' when calling getRenditionContent";
+            throw "Missing param 'renditionId' in getRenditionContent";
         }
 
 
@@ -186,7 +186,7 @@ export class RenditionsApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling getRenditions";
+            throw "Missing param 'nodeId' in getRenditions";
         }
 
 
@@ -225,12 +225,12 @@ export class RenditionsApi {
 
         // verify the required parameter 'sharedId' is set
         if (sharedId == undefined || sharedId == null) {
-            throw "Missing the required parameter 'sharedId' when calling getSharedLinkRenditionContent";
+            throw "Missing param 'sharedId' in getSharedLinkRenditionContent";
         }
 
         // verify the required parameter 'renditionId' is set
         if (renditionId == undefined || renditionId == null) {
-            throw "Missing the required parameter 'renditionId' when calling getSharedLinkRenditionContent";
+            throw "Missing param 'renditionId' in getSharedLinkRenditionContent";
         }
 
 
@@ -270,7 +270,7 @@ export class RenditionsApi {
 
         // verify the required parameter 'sharedId' is set
         if (sharedId == undefined || sharedId == null) {
-            throw "Missing the required parameter 'sharedId' when calling getSharedLinkRenditions";
+            throw "Missing param 'sharedId' in getSharedLinkRenditions";
         }
 
 
@@ -304,12 +304,12 @@ export class RenditionsApi {
 
         // verify the required parameter 'sharedId' is set
         if (sharedId == undefined || sharedId == null) {
-            throw "Missing the required parameter 'sharedId' when calling getRendition";
+            throw "Missing param 'sharedId' in getRendition";
         }
 
         // verify the required parameter 'renditionId' is set
         if (renditionId == undefined || renditionId == null) {
-            throw "Missing the required parameter 'renditionId' when calling getRendition";
+            throw "Missing param 'renditionId' in getRendition";
         }
 
 

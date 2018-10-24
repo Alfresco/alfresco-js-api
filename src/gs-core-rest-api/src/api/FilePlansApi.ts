@@ -1,37 +1,48 @@
+/*!
+* @license
+* Copyright 2018 Alfresco Software, Ltd.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 
-(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['../../../alfrescoApiClient', '../model/Error', '../model/FilePlanBodyUpdate', '../model/FilePlanEntry', '../model/RecordCategoryEntry', '../model/RecordCategoryPaging', '../model/RootCategoryBodyCreate'], factory);
-  } else if (typeof module === 'object' && module.exports) {
-    // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/Error'), require('../model/FilePlanBodyUpdate'), require('../model/FilePlanEntry'), require('../model/RecordCategoryEntry'), require('../model/RecordCategoryPaging'), require('../model/RootCategoryBodyCreate'));
-  } else {
-    // Browser globals (root is window)
-    if (!root.AlfrescoGovernanceServicesRestApi) {
-      root.AlfrescoGovernanceServicesRestApi = {};
+import { AlfrescoApiClient } from '../../../alfrescoApiClient';
+import { Error } from '../model/Error';
+import { FilePlanBodyUpdate } from '../model/FilePlanBodyUpdate';
+import { FilePlanEntry } from '../model/FilePlanEntry';
+import { RecordCategoryEntry } from '../model/RecordCategoryEntry';
+import { RecordCategoryPaging } from '../model/RecordCategoryPaging';
+import { RootCategoryBodyCreate } from '../model/RootCategoryBodyCreate';
+
+/**
+ * Fileplans service.
+ * @module api/FilePlansApi
+ * @version 0.1.0
+ */
+
+/**
+ * Constructs a new FilePlansApi.
+ * @alias :api/FilePlansApi
+ * @class
+ * @param {:ApiClient} apiClient Optional API client implementation to use,
+ * default to {@link module:ApiClient#instance} if unspecified.
+ */
+export class FilePlansApi {
+
+    apiClient: AlfrescoApiClient;
+
+    constructor(apiClient?: AlfrescoApiClient) {
+        this.apiClient = apiClient || new AlfrescoApiClient();
     }
-    root.AlfrescoGovernanceServicesRestApi.FilePlansApi = factory(root.AlfrescoGovernanceServicesRestApi.ApiClient, root.AlfrescoGovernanceServicesRestApi.Error, root.AlfrescoGovernanceServicesRestApi.FilePlanBodyUpdate, root.AlfrescoGovernanceServicesRestApi.FilePlanEntry, root.AlfrescoGovernanceServicesRestApi.RecordCategoryEntry, root.AlfrescoGovernanceServicesRestApi.RecordCategoryPaging, root.AlfrescoGovernanceServicesRestApi.RootCategoryBodyCreate);
-  }
-}(this, function(ApiClient, Error, FilePlanBodyUpdate, FilePlanEntry, RecordCategoryEntry, RecordCategoryPaging, RootCategoryBodyCreate) {
-  'use strict';
-
-  /**
-   * Fileplans service.
-   * @module api/FilePlansApi
-   * @version 0.1.0
-   */
-
-  /**
-   * Constructs a new FilePlansApi.
-   * @alias :api/FilePlansApi
-   * @class
-   * @param {:ApiClient} apiClient Optional API client implementation to use,
-   * default to {@link module:ApiClient#instance} if unspecified.
-   */
-  var exports = function(apiClient) {
-    this.apiClient = apiClient || ApiClient.instance;
-
 
 
     /**
@@ -45,44 +56,42 @@
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleRecordCategoryEntry} and HTTP response
      */
-    this.createFilePlanCategories = function(filePlanId, nodeBodyCreate, opts) {
-      opts = opts || {};
-      var postBody = nodeBodyCreate;
+    createFilePlanCategories = function (filePlanId, nodeBodyCreate, opts) {
+        opts = opts || {};
+        let postBody = nodeBodyCreate;
 
-      // verify the required parameter 'filePlanId' is set
-      if (filePlanId === undefined || filePlanId === null) {
-        throw new Error("Missing the required parameter 'filePlanId' when calling createFilePlanCategories");
-      }
+        // verify the required parameter 'filePlanId' is set
+        if (filePlanId === undefined || filePlanId === null) {
+            throw new Error("Missing param 'filePlanId' in createFilePlanCategories");
+        }
 
-      // verify the required parameter 'nodeBodyCreate' is set
-      if (nodeBodyCreate === undefined || nodeBodyCreate === null) {
-        throw new Error("Missing the required parameter 'nodeBodyCreate' when calling createFilePlanCategories");
-      }
+        // verify the required parameter 'nodeBodyCreate' is set
+        if (nodeBodyCreate === undefined || nodeBodyCreate === null) {
+            throw new Error("Missing param 'nodeBodyCreate' in createFilePlanCategories");
+        }
 
 
-      var pathParams = {
-        'filePlanId': filePlanId
-      };
-      var queryParams = {
-        'autoRename': opts['autoRename'],
-        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+        let pathParams = {
+            'filePlanId': filePlanId
+        };
+        let queryParams = {
+            'autoRename': opts['autoRename'],
+            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+        };
+        let headerParams = {};
+        let formParams = {};
 
-      var authNames = ['basicAuth'];
-      var contentTypes = ['application/json', 'multipart/form-data'];
-      var accepts = ['application/json'];
-      var returnType = RecordCategoryEntry;
+        let authNames = ['basicAuth'];
+        let contentTypes = ['application/json', 'multipart/form-data'];
+        let accepts = ['application/json'];
+        let returnType = RecordCategoryEntry;
 
-      return this.apiClient.callApi(
-        '/file-plans/{filePlanId}/categories', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
+        return this.apiClient.callApi(
+            '/file-plans/{filePlanId}/categories', 'POST',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            authNames, contentTypes, accepts, returnType
+        );
     }
 
     /**
@@ -94,38 +103,36 @@
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleFilePlanEntry} and HTTP response
      */
-    this.getFilePlan = function(filePlanId, opts) {
-      opts = opts || {};
-      var postBody = null;
+    getFilePlan = function (filePlanId, opts) {
+        opts = opts || {};
+        let postBody = null;
 
-      // verify the required parameter 'filePlanId' is set
-      if (filePlanId === undefined || filePlanId === null) {
-        throw new Error("Missing the required parameter 'filePlanId' when calling getFilePlan");
-      }
+        // verify the required parameter 'filePlanId' is set
+        if (filePlanId === undefined || filePlanId === null) {
+            throw new Error("Missing param 'filePlanId' in getFilePlan");
+        }
 
 
-      var pathParams = {
-        'filePlanId': filePlanId
-      };
-      var queryParams = {
-        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+        let pathParams = {
+            'filePlanId': filePlanId
+        };
+        let queryParams = {
+            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+        };
+        let headerParams = {};
+        let formParams = {};
 
-      var authNames = ['basicAuth'];
-      var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
-      var returnType = FilePlanEntry;
+        let authNames = ['basicAuth'];
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+        let returnType = FilePlanEntry;
 
-      return this.apiClient.callApi(
-        '/file-plans/{filePlanId}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
+        return this.apiClient.callApi(
+            '/file-plans/{filePlanId}', 'GET',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            authNames, contentTypes, accepts, returnType
+        );
     }
 
     /**
@@ -140,41 +147,39 @@
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleRecordCategoryPaging} and HTTP response
      */
-    this.getFilePlanCategories = function(filePlanId, opts) {
-      opts = opts || {};
-      var postBody = null;
+    getFilePlanCategories = function (filePlanId, opts) {
+        opts = opts || {};
+        let postBody = null;
 
-      // verify the required parameter 'filePlanId' is set
-      if (filePlanId === undefined || filePlanId === null) {
-        throw new Error("Missing the required parameter 'filePlanId' when calling getFilePlanCategories");
-      }
+        // verify the required parameter 'filePlanId' is set
+        if (filePlanId === undefined || filePlanId === null) {
+            throw new Error("Missing param 'filePlanId' in getFilePlanCategories");
+        }
 
 
-      var pathParams = {
-        'filePlanId': filePlanId
-      };
-      var queryParams = {
-        'skipCount': opts['skipCount'],
-        'maxItems': opts['maxItems'],
-        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-        'includeSource': opts['includeSource'],
-        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+        let pathParams = {
+            'filePlanId': filePlanId
+        };
+        let queryParams = {
+            'skipCount': opts['skipCount'],
+            'maxItems': opts['maxItems'],
+            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'includeSource': opts['includeSource'],
+            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+        };
+        let headerParams = {};
+        let formParams = {};
 
-      var authNames = ['basicAuth'];
-      var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
-      var returnType = RecordCategoryPaging;
+        let authNames = ['basicAuth'];
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+        let returnType = RecordCategoryPaging;
 
-      return this.apiClient.callApi(
-        '/file-plans/{filePlanId}/categories', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
+        return this.apiClient.callApi(
+            '/file-plans/{filePlanId}/categories', 'GET',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            authNames, contentTypes, accepts, returnType
+        );
     }
 
     /**
@@ -187,45 +192,40 @@
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleFilePlanEntry} and HTTP response
      */
-    this.updateFilePlan = function(filePlanId, filePlanBodyUpdate, opts) {
-      opts = opts || {};
-      var postBody = filePlanBodyUpdate;
+    updateFilePlan = function (filePlanId, filePlanBodyUpdate, opts) {
+        opts = opts || {};
+        let postBody = filePlanBodyUpdate;
 
-      // verify the required parameter 'filePlanId' is set
-      if (filePlanId === undefined || filePlanId === null) {
-        throw new Error("Missing the required parameter 'filePlanId' when calling updateFilePlan");
-      }
+        // verify the required parameter 'filePlanId' is set
+        if (filePlanId === undefined || filePlanId === null) {
+            throw new Error("Missing param 'filePlanId' in updateFilePlan");
+        }
 
-      // verify the required parameter 'filePlanBodyUpdate' is set
-      if (filePlanBodyUpdate === undefined || filePlanBodyUpdate === null) {
-        throw new Error("Missing the required parameter 'filePlanBodyUpdate' when calling updateFilePlan");
-      }
+        // verify the required parameter 'filePlanBodyUpdate' is set
+        if (filePlanBodyUpdate === undefined || filePlanBodyUpdate === null) {
+            throw new Error("Missing param 'filePlanBodyUpdate' in updateFilePlan");
+        }
 
 
-      var pathParams = {
-        'filePlanId': filePlanId
-      };
-      var queryParams = {
-        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+        let pathParams = {
+            'filePlanId': filePlanId
+        };
+        let queryParams = {
+            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+        };
+        let headerParams = {};
+        let formParams = {};
 
-      var authNames = ['basicAuth'];
-      var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
-      var returnType = FilePlanEntry;
+        let authNames = ['basicAuth'];
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+        let returnType = FilePlanEntry;
 
-      return this.apiClient.callApi(
-        '/file-plans/{filePlanId}', 'PUT',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
+        return this.apiClient.callApi(
+            '/file-plans/{filePlanId}', 'PUT',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            authNames, contentTypes, accepts, returnType
+        );
     }
-  };
-
-  return exports;
-}));
+}

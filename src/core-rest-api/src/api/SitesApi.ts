@@ -61,12 +61,12 @@ export class SitesApi {
 
         // verify the required parameter 'siteId' is set
         if (siteId == undefined || siteId == null) {
-            throw "Missing the required parameter 'siteId' when calling addSiteMember";
+            throw "Missing param 'siteId' in addSiteMember";
         }
 
         // verify the required parameter 'siteMemberBody' is set
         if (siteMemberBody == undefined || siteMemberBody == null) {
-            throw "Missing the required parameter 'siteMemberBody' when calling addSiteMember";
+            throw "Missing param 'siteMemberBody' in addSiteMember";
         }
 
 
@@ -105,7 +105,7 @@ export class SitesApi {
 
         // verify the required parameter 'siteBody' is set
         if (siteBody == undefined || siteBody == null) {
-            throw "Missing the required parameter 'siteBody' when calling createSite";
+            throw "Missing param 'siteBody' in createSite";
         }
 
 
@@ -144,12 +144,12 @@ export class SitesApi {
 
         // verify the required parameter 'siteId' is set
         if (siteId == undefined || siteId == null) {
-            throw "Missing the required parameter 'siteId' when calling updateSite";
+            throw "Missing param 'siteId' in updateSite";
         }
 
         // verify the required parameter 'siteBody' is set
         if (siteBody == undefined || siteBody == null) {
-            throw "Missing the required parameter 'siteBody' when calling updateSite";
+            throw "Missing param 'siteBody' in updateSite";
         }
 
         let pathParams = {
@@ -189,7 +189,7 @@ export class SitesApi {
 
         // verify the required parameter 'siteId' is set
         if (siteId == undefined || siteId == null) {
-            throw "Missing the required parameter 'siteId' when calling deleteSite";
+            throw "Missing param 'siteId' in deleteSite";
         }
 
 
@@ -230,7 +230,7 @@ export class SitesApi {
 
         // verify the required parameter 'siteId' is set
         if (siteId == undefined || siteId == null) {
-            throw "Missing the required parameter 'siteId' when calling getSite";
+            throw "Missing param 'siteId' in getSite";
         }
 
 
@@ -272,12 +272,12 @@ export class SitesApi {
 
         // verify the required parameter 'siteId' is set
         if (siteId == undefined || siteId == null) {
-            throw "Missing the required parameter 'siteId' when calling getSiteContainer";
+            throw "Missing param 'siteId' in getSiteContainer";
         }
 
         // verify the required parameter 'containerId' is set
         if (containerId == undefined || containerId == null) {
-            throw "Missing the required parameter 'containerId' when calling getSiteContainer";
+            throw "Missing param 'containerId' in getSiteContainer";
         }
 
 
@@ -320,7 +320,7 @@ export class SitesApi {
 
         // verify the required parameter 'siteId' is set
         if (siteId == undefined || siteId == null) {
-            throw "Missing the required parameter 'siteId' when calling getSiteContainers";
+            throw "Missing param 'siteId' in getSiteContainers";
         }
 
 
@@ -363,12 +363,12 @@ export class SitesApi {
 
         // verify the required parameter 'siteId' is set
         if (siteId == undefined || siteId == null) {
-            throw "Missing the required parameter 'siteId' when calling getSiteMember";
+            throw "Missing param 'siteId' in getSiteMember";
         }
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling getSiteMember";
+            throw "Missing param 'personId' in getSiteMember";
         }
 
 
@@ -411,7 +411,7 @@ export class SitesApi {
 
         // verify the required parameter 'siteId' is set
         if (siteId == undefined || siteId == null) {
-            throw "Missing the required parameter 'siteId' when calling getSiteMembers";
+            throw "Missing param 'siteId' in getSiteMembers";
         }
 
 
@@ -490,12 +490,12 @@ export class SitesApi {
 
         // verify the required parameter 'siteId' is set
         if (siteId == undefined || siteId == null) {
-            throw "Missing the required parameter 'siteId' when calling removeSiteMember";
+            throw "Missing param 'siteId' in removeSiteMember";
         }
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling removeSiteMember";
+            throw "Missing param 'personId' in removeSiteMember";
         }
 
 
@@ -533,17 +533,17 @@ export class SitesApi {
 
         // verify the required parameter 'siteId' is set
         if (siteId == undefined || siteId == null) {
-            throw "Missing the required parameter 'siteId' when calling updateSiteMember";
+            throw "Missing param 'siteId' in updateSiteMember";
         }
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling updateSiteMember";
+            throw "Missing param 'personId' in updateSiteMember";
         }
 
         // verify the required parameter 'siteMemberRoleBody' is set
         if (siteMemberRoleBody == undefined || siteMemberRoleBody == null) {
-            throw "Missing the required parameter 'siteMemberRoleBody' when calling updateSiteMember";
+            throw "Missing param 'siteMemberRoleBody' in updateSiteMember";
         }
 
 

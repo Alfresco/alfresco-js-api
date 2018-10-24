@@ -48,12 +48,12 @@ export class VersionsApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId === undefined || nodeId === null) {
-            throw new Error("Missing the required parameter 'nodeId' when calling deleteVersion");
+            throw new Error("Missing param 'nodeId' in deleteVersion");
         }
 
         // verify the required parameter 'versionId' is set
         if (versionId === undefined || versionId === null) {
-            throw new Error("Missing the required parameter 'versionId' when calling deleteVersion");
+            throw new Error("Missing param 'versionId' in deleteVersion");
         }
 
 
@@ -89,12 +89,12 @@ export class VersionsApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId === undefined || nodeId === null) {
-            throw new Error("Missing the required parameter 'nodeId' when calling getVersion");
+            throw new Error("Missing param 'nodeId' in getVersion");
         }
 
         // verify the required parameter 'versionId' is set
         if (versionId === undefined || versionId === null) {
-            throw new Error("Missing the required parameter 'versionId' when calling getVersion");
+            throw new Error("Missing param 'versionId' in getVersion");
         }
 
 
@@ -135,12 +135,12 @@ export class VersionsApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId === undefined || nodeId === null) {
-            throw new Error("Missing the required parameter 'nodeId' when calling getVersionContent");
+            throw new Error("Missing param 'nodeId' in getVersionContent");
         }
 
         // verify the required parameter 'versionId' is set
         if (versionId === undefined || versionId === null) {
-            throw new Error("Missing the required parameter 'versionId' when calling getVersionContent");
+            throw new Error("Missing param 'versionId' in getVersionContent");
         }
 
         let queryParams = {
@@ -187,7 +187,7 @@ export class VersionsApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId === undefined || nodeId === null) {
-            throw new Error("Missing the required parameter 'nodeId' when calling listVersionHistory");
+            throw new Error("Missing param 'nodeId' in listVersionHistory");
         }
 
 
@@ -231,17 +231,17 @@ export class VersionsApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId === undefined || nodeId === null) {
-            throw new Error("Missing the required parameter 'nodeId' when calling revertVersion");
+            throw new Error("Missing param 'nodeId' in revertVersion");
         }
 
         // verify the required parameter 'versionId' is set
         if (versionId === undefined || versionId === null) {
-            throw new Error("Missing the required parameter 'versionId' when calling revertVersion");
+            throw new Error("Missing param 'versionId' in revertVersion");
         }
 
         // verify the required parameter 'revertBody' is set
         if (revertBody === undefined || revertBody === null) {
-            throw new Error("Missing the required parameter 'revertBody' when calling revertVersion");
+            throw new Error("Missing param 'revertBody' in revertVersion");
         }
 
 

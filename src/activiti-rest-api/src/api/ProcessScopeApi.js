@@ -48,7 +48,7 @@
 
       // verify the required parameter 'processScopesRequest' is set
       if (processScopesRequest == undefined || processScopesRequest == null) {
-        throw "Missing the required parameter 'processScopesRequest' when calling getRuntimeProcessScopes";
+        throw "Missing param 'processScopesRequest' in getRuntimeProcessScopes";
       }
 
 

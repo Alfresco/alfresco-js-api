@@ -48,7 +48,7 @@
 
       // verify the required parameter 'changePasswordRepresentation' is set
       if (changePasswordRepresentation == undefined || changePasswordRepresentation == null) {
-        throw "Missing the required parameter 'changePasswordRepresentation' when calling changePassword";
+        throw "Missing param 'changePasswordRepresentation' in changePassword";
       }
 
 
@@ -170,7 +170,7 @@
 
       // verify the required parameter 'userRepresentation' is set
       if (userRepresentation == undefined || userRepresentation == null) {
-        throw "Missing the required parameter 'userRepresentation' when calling updateProfile";
+        throw "Missing param 'userRepresentation' in updateProfile";
       }
 
 
@@ -211,7 +211,7 @@
 
       // verify the required parameter 'file' is set
       if (file == undefined || file == null) {
-        throw "Missing the required parameter 'file' when calling uploadProfilePicture";
+        throw "Missing param 'file' in uploadProfilePicture";
       }
 
 

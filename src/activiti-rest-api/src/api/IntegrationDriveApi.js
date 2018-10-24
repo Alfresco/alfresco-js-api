@@ -49,7 +49,7 @@
 
       // verify the required parameter 'code' is set
       if (code == undefined || code == null) {
-        throw "Missing the required parameter 'code' when calling confirmAuthorisation";
+        throw "Missing param 'code' in confirmAuthorisation";
       }
 
 

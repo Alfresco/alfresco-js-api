@@ -59,7 +59,7 @@ export class ClassesApi {
 
         // verify the required parameter 'className' is set
         if (className == undefined || className == null) {
-            throw "Missing the required parameter 'className' when calling getClass";
+            throw "Missing param 'className' in getClass";
         }
 
         let postBody = null;

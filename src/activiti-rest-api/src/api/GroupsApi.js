@@ -95,7 +95,7 @@
 
       // verify the required parameter 'groupId' is set
       if (groupId == undefined || groupId == null) {
-        throw "Missing the required parameter 'groupId' when calling getUsersForGroup";
+        throw "Missing param 'groupId' in getUsersForGroup";
       }
 
 

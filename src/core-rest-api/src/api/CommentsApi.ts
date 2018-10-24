@@ -60,12 +60,12 @@ export class CommentsApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling addComment";
+            throw "Missing param 'nodeId' in addComment";
         }
 
         // verify the required parameter 'commentBody' is set
         if (commentBody == undefined || commentBody == null) {
-            throw "Missing the required parameter 'commentBody' when calling addComment";
+            throw "Missing param 'commentBody' in addComment";
         }
 
 
@@ -107,7 +107,7 @@ export class CommentsApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling getComments";
+            throw "Missing param 'nodeId' in getComments";
         }
 
 
@@ -146,12 +146,12 @@ export class CommentsApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling removeComment";
+            throw "Missing param 'nodeId' in removeComment";
         }
 
         // verify the required parameter 'commentId' is set
         if (commentId == undefined || commentId == null) {
-            throw "Missing the required parameter 'commentId' when calling removeComment";
+            throw "Missing param 'commentId' in removeComment";
         }
 
 
@@ -192,17 +192,17 @@ export class CommentsApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling updateComment";
+            throw "Missing param 'nodeId' in updateComment";
         }
 
         // verify the required parameter 'commentId' is set
         if (commentId == undefined || commentId == null) {
-            throw "Missing the required parameter 'commentId' when calling updateComment";
+            throw "Missing param 'commentId' in updateComment";
         }
 
         // verify the required parameter 'commentBody' is set
         if (commentBody == undefined || commentBody == null) {
-            throw "Missing the required parameter 'commentBody' when calling updateComment";
+            throw "Missing param 'commentBody' in updateComment";
         }
 
 

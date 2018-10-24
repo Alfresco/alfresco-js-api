@@ -71,12 +71,12 @@ export class PeopleApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling addFavorite";
+            throw "Missing param 'personId' in addFavorite";
         }
 
         // verify the required parameter 'favoriteBody' is set
         if (favoriteBody == undefined || favoriteBody == null) {
-            throw "Missing the required parameter 'favoriteBody' when calling addFavorite";
+            throw "Missing param 'favoriteBody' in addFavorite";
         }
 
 
@@ -112,12 +112,12 @@ export class PeopleApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling addSiteMembershipRequest";
+            throw "Missing param 'personId' in addSiteMembershipRequest";
         }
 
 // verify the required parameter 'siteMembershipBody' is set
         if (siteMembershipBody == undefined || siteMembershipBody == null) {
-            throw "Missing the required parameter 'siteMembershipBody' when calling addSiteMembershipRequest";
+            throw "Missing param 'siteMembershipBody' in addSiteMembershipRequest";
         }
 
 
@@ -152,12 +152,12 @@ export class PeopleApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling deleteFavoriteSite";
+            throw "Missing param 'personId' in deleteFavoriteSite";
         }
 
         // verify the required parameter 'siteId' is set
         if (siteId == undefined || siteId == null) {
-            throw "Missing the required parameter 'siteId' when calling deleteFavoriteSite";
+            throw "Missing param 'siteId' in deleteFavoriteSite";
         }
 
 
@@ -194,12 +194,12 @@ export class PeopleApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling favoriteSite";
+            throw "Missing param 'personId' in favoriteSite";
         }
 
         // verify the required parameter 'favoriteSiteBody' is set
         if (favoriteSiteBody == undefined || favoriteSiteBody == null) {
-            throw "Missing the required parameter 'favoriteSiteBody' when calling favoriteSite";
+            throw "Missing param 'favoriteSiteBody' in favoriteSite";
         }
 
 
@@ -241,7 +241,7 @@ export class PeopleApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling getActivities";
+            throw "Missing param 'personId' in getActivities";
         }
 
 
@@ -286,12 +286,12 @@ export class PeopleApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling getFavorite";
+            throw "Missing param 'personId' in getFavorite";
         }
 
         // verify the required parameter 'favoriteId' is set
         if (favoriteId == undefined || favoriteId == null) {
-            throw "Missing the required parameter 'favoriteId' when calling getFavorite";
+            throw "Missing param 'favoriteId' in getFavorite";
         }
 
 
@@ -333,12 +333,12 @@ export class PeopleApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling getFavoriteSite";
+            throw "Missing param 'personId' in getFavoriteSite";
         }
 
         // verify the required parameter 'siteId' is set
         if (siteId == undefined || siteId == null) {
-            throw "Missing the required parameter 'siteId' when calling getFavoriteSite";
+            throw "Missing param 'siteId' in getFavoriteSite";
         }
 
 
@@ -381,7 +381,7 @@ export class PeopleApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling getFavoriteSites";
+            throw "Missing param 'personId' in getFavoriteSites";
         }
 
 
@@ -425,7 +425,7 @@ export class PeopleApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling getFavorites";
+            throw "Missing param 'personId' in getFavorites";
         }
 
 
@@ -467,7 +467,7 @@ export class PeopleApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling getPerson";
+            throw "Missing param 'personId' in getPerson";
         }
 
         let pathParams = {
@@ -534,7 +534,7 @@ export class PeopleApi {
     addPerson(person) {
         // verify the required parameter 'personId' is set
         if (person == undefined || person == null) {
-            throw "Missing the required parameter 'person' when calling addPerson";
+            throw "Missing param 'person' in addPerson";
         }
 
         let pathParams = {};
@@ -572,12 +572,12 @@ export class PeopleApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling updatePerson";
+            throw "Missing param 'personId' in updatePerson";
         }
 
         // verify the required parameter 'personBodyUpdate' is set
         if (personBodyUpdate == undefined || personBodyUpdate == null) {
-            throw "Missing the required parameter 'personBodyUpdate' when calling updatePerson";
+            throw "Missing param 'personBodyUpdate' in updatePerson";
         }
 
         let pathParams = {
@@ -619,12 +619,12 @@ export class PeopleApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling getPersonNetwork";
+            throw "Missing param 'personId' in getPersonNetwork";
         }
 
         // verify the required parameter 'networkId' is set
         if (networkId == undefined || networkId == null) {
-            throw "Missing the required parameter 'networkId' when calling getPersonNetwork";
+            throw "Missing param 'networkId' in getPersonNetwork";
         }
 
 
@@ -666,7 +666,7 @@ export class PeopleApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling getPersonNetworks";
+            throw "Missing param 'personId' in getPersonNetworks";
         }
 
 
@@ -709,12 +709,12 @@ export class PeopleApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling getPreference";
+            throw "Missing param 'personId' in getPreference";
         }
 
         // verify the required parameter 'preferenceName' is set
         if (preferenceName == undefined || preferenceName == null) {
-            throw "Missing the required parameter 'preferenceName' when calling getPreference";
+            throw "Missing param 'preferenceName' in getPreference";
         }
 
 
@@ -757,7 +757,7 @@ export class PeopleApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling getPreferences";
+            throw "Missing param 'personId' in getPreferences";
         }
 
 
@@ -803,7 +803,7 @@ export class PeopleApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling getSiteMembership";
+            throw "Missing param 'personId' in getSiteMembership";
         }
 
 
@@ -851,7 +851,7 @@ export class PeopleApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling getSiteMembership";
+            throw "Missing param 'personId' in getSiteMembership";
         }
 
 
@@ -897,12 +897,12 @@ export class PeopleApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling getSiteMembershipRequest";
+            throw "Missing param 'personId' in getSiteMembershipRequest";
         }
 
         // verify the required parameter 'siteId' is set
         if (siteId == undefined || siteId == null) {
-            throw "Missing the required parameter 'siteId' when calling getSiteMembershipRequest";
+            throw "Missing param 'siteId' in getSiteMembershipRequest";
         }
 
 
@@ -945,7 +945,7 @@ export class PeopleApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling getSiteMembershipRequests";
+            throw "Missing param 'personId' in getSiteMembershipRequests";
         }
 
 
@@ -984,12 +984,12 @@ export class PeopleApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling removeFavoriteSite";
+            throw "Missing param 'personId' in removeFavoriteSite";
         }
 
         // verify the required parameter 'favoriteId' is set
         if (favoriteId == undefined || favoriteId == null) {
-            throw "Missing the required parameter 'favoriteId' when calling removeFavoriteSite";
+            throw "Missing param 'favoriteId' in removeFavoriteSite";
         }
 
 
@@ -1025,12 +1025,12 @@ export class PeopleApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling removeSiteMembershipRequest";
+            throw "Missing param 'personId' in removeSiteMembershipRequest";
         }
 
         // verify the required parameter 'siteId' is set
         if (siteId == undefined || siteId == null) {
-            throw "Missing the required parameter 'siteId' when calling removeSiteMembershipRequest";
+            throw "Missing param 'siteId' in removeSiteMembershipRequest";
         }
 
 
@@ -1067,17 +1067,17 @@ export class PeopleApi {
 
         // verify the required parameter 'personId' is set
         if (personId == undefined || personId == null) {
-            throw "Missing the required parameter 'personId' when calling updateSiteMembershipRequest";
+            throw "Missing param 'personId' in updateSiteMembershipRequest";
         }
 
         // verify the required parameter 'siteId' is set
         if (siteId == undefined || siteId == null) {
-            throw "Missing the required parameter 'siteId' when calling updateSiteMembershipRequest";
+            throw "Missing param 'siteId' in updateSiteMembershipRequest";
         }
 
         // verify the required parameter 'siteMembershipBody' is set
         if (siteMembershipBody == undefined || siteMembershipBody == null) {
-            throw "Missing the required parameter 'siteMembershipBody' when calling updateSiteMembershipRequest";
+            throw "Missing param 'siteMembershipBody' in updateSiteMembershipRequest";
         }
 
 

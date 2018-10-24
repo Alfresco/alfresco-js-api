@@ -60,7 +60,7 @@ export class GroupsApi {
 
         // verify the required parameter 'tagBody' is set
         if (groupBody == undefined || groupBody == null) {
-            throw "Missing the required parameter 'groupBody' when calling createGroup";
+            throw "Missing param 'groupBody' in createGroup";
         }
 
         let pathParams = {};
@@ -137,7 +137,7 @@ export class GroupsApi {
 
         // verify the required parameter 'siteId' is set
         if (groupId == undefined || groupId == null) {
-            throw "Missing the required parameter 'groupId' when calling deleteGroup";
+            throw "Missing param 'groupId' in deleteGroup";
         }
 
         let cascadeDelete = opts['cascade'] ? opts['cascade'] : false;
@@ -178,7 +178,7 @@ export class GroupsApi {
 
         // verify the required parameter 'siteId' is set
         if (groupId == undefined || groupId == null) {
-            throw "Missing the required parameter 'groupId' when calling getGroup";
+            throw "Missing param 'groupId' in getGroup";
         }
 
 
@@ -220,17 +220,17 @@ export class GroupsApi {
 
         // verify the required parameter 'siteId' is set
         if (groupId == undefined || groupId == null) {
-            throw "Missing the required parameter 'groupId' when calling updateGroup";
+            throw "Missing param 'groupId' in updateGroup";
         }
 
         // verify the required parameter 'personId' is set
         if (groupBody == undefined || groupBody == null) {
-            throw "Missing the required parameter 'groupBody' when calling updateGroup";
+            throw "Missing param 'groupBody' in updateGroup";
         }
 
         // verify the required parameter 'personId' is set
         if (groupBody['id']) {
-            throw "Id change not allowed in 'groupBody' when calling updateGroup";
+            throw "Id change not allowed in 'groupBody' in updateGroup";
         }
 
 
@@ -274,7 +274,7 @@ export class GroupsApi {
 
         // verify the required parameter 'groupId' is set
         if (groupId == undefined || groupId == null) {
-            throw "Missing the required parameter 'groupId' when calling getGroupMembers";
+            throw "Missing param 'groupId' in getGroupMembers";
         }
 
         let pathParams = {
@@ -317,12 +317,12 @@ export class GroupsApi {
 
         // verify the required parameter 'groupId' is set
         if (groupId == undefined || groupId == null) {
-            throw "Missing the required parameter 'groupId' when calling addGroupMember";
+            throw "Missing param 'groupId' in addGroupMember";
         }
 
         // verify the required parameter 'groupMemberBody' is set
         if (groupMemberBody == undefined || groupMemberBody == null) {
-            throw "Missing the required parameter 'groupMemberBody' when calling addGroupMember";
+            throw "Missing param 'groupMemberBody' in addGroupMember";
         }
 
 
@@ -358,7 +358,7 @@ export class GroupsApi {
 
         // verify the required parameter 'siteId' is set
         if (groupId == undefined || groupId == null) {
-            throw "Missing the required parameter 'groupId' when calling deleteGroup";
+            throw "Missing param 'groupId' in deleteGroup";
         }
 
         let pathParams = {

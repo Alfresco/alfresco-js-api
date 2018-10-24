@@ -62,11 +62,11 @@
       var postBody = null;
 
       if (reportId == undefined || reportId == null) {
-        throw "Missing the required parameter 'reportId' when calling getTasksByProcessDefinitionId";
+        throw "Missing param 'reportId' in getTasksByProcessDefinitionId";
       }
 
       if (processDefinitionId == undefined || processDefinitionId == null) {
-        throw "Missing the required parameter 'processDefinitionId' when calling getTasksByProcessDefinitionId";
+        throw "Missing param 'processDefinitionId' in getTasksByProcessDefinitionId";
       }
 
       var pathParams = {
@@ -96,7 +96,7 @@
       var postBody = paramsQuery;
 
       if (reportId == undefined || reportId == null) {
-        throw "Missing the required parameter 'reportId' when calling getReportsByParams";
+        throw "Missing param 'reportId' in getReportsByParams";
       }
 
       var pathParams = {
@@ -149,7 +149,7 @@
       var postBody = null;
 
       if (reportId == undefined || reportId == null) {
-        throw "Missing the required parameter 'reportId' when calling getReportParams";
+        throw "Missing param 'reportId' in getReportParams";
       }
 
       var pathParams = {
@@ -204,7 +204,7 @@
       };
 
       if (reportId == undefined || reportId == null) {
-        throw "Missing the required parameter 'reportId' when calling updateReport";
+        throw "Missing param 'reportId' in updateReport";
       }
 
       var pathParams = {
@@ -242,15 +242,15 @@
       var postBody = queryParams;
 
       if (reportId == undefined || reportId == null) {
-        throw "Missing the required parameter 'reportId' when calling exportToCsv";
+        throw "Missing param 'reportId' in exportToCsv";
       }
 
       if (queryParams == undefined || queryParams == null) {
-        throw "Missing the required parameter 'queryParams' when calling exportToCsv";
+        throw "Missing param 'queryParams' in exportToCsv";
       }
 
       if (queryParams.reportName == undefined || queryParams.reportName == null) {
-        throw "Missing the required parameter 'reportName' when calling exportToCsv";
+        throw "Missing param 'reportName' in exportToCsv";
       }
 
       queryParams.__reportName = queryParams.reportName;
@@ -290,15 +290,15 @@
       var postBody = queryParams;
 
       if (reportId == undefined || reportId == null) {
-        throw "Missing the required parameter 'reportId' when calling saveReport";
+        throw "Missing param 'reportId' in saveReport";
       }
 
       if (queryParams == undefined || queryParams == null) {
-        throw "Missing the required parameter 'queryParams' when calling queryParams";
+        throw "Missing param 'queryParams' in queryParams";
       }
 
       if (queryParams.reportName == undefined || queryParams.reportName == null) {
-        throw "Missing the required parameter 'reportName' when calling exportToCsv";
+        throw "Missing param 'reportName' in exportToCsv";
       }
 
       queryParams.__reportName = queryParams.reportName;
@@ -336,7 +336,7 @@
       var postBody = null;
 
       if (reportId == undefined || reportId == null) {
-        throw "Missing the required parameter 'reportId' when calling delete";
+        throw "Missing param 'reportId' in delete";
       }
 
       var pathParams = {

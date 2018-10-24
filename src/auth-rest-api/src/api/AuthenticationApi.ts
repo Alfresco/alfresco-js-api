@@ -52,7 +52,7 @@ export class AuthenticationApi {
 
         // verify the required parameter 'loginRequest' is set
         if (loginRequest == undefined || loginRequest == null) {
-            throw "Missing the required parameter 'loginRequest' when calling createTicket";
+            throw "Missing param 'loginRequest' in createTicket";
         }
 
 

@@ -58,12 +58,12 @@ export class RatingsApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling getRating";
+            throw "Missing param 'nodeId' in getRating";
         }
 
         // verify the required parameter 'ratingId' is set
         if (ratingId == undefined || ratingId == null) {
-            throw "Missing the required parameter 'ratingId' when calling getRating";
+            throw "Missing param 'ratingId' in getRating";
         }
 
 
@@ -106,7 +106,7 @@ export class RatingsApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling getRatings";
+            throw "Missing param 'nodeId' in getRatings";
         }
 
 
@@ -146,12 +146,12 @@ export class RatingsApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling rate";
+            throw "Missing param 'nodeId' in rate";
         }
 
         // verify the required parameter 'ratingBody' is set
         if (ratingBody == undefined || ratingBody == null) {
-            throw "Missing the required parameter 'ratingBody' when calling rate";
+            throw "Missing param 'ratingBody' in rate";
         }
 
 
@@ -186,12 +186,12 @@ export class RatingsApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling removeRating";
+            throw "Missing param 'nodeId' in removeRating";
         }
 
         // verify the required parameter 'ratingId' is set
         if (ratingId == undefined || ratingId == null) {
-            throw "Missing the required parameter 'ratingId' when calling removeRating";
+            throw "Missing param 'ratingId' in removeRating";
         }
 
 

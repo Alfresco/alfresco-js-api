@@ -49,7 +49,7 @@
 
       // verify the required parameter 'code' is set
       if (code == undefined || code == null) {
-        throw "Missing the required parameter 'code' when calling confirmAuthorisation";
+        throw "Missing param 'code' in confirmAuthorisation";
       }
 
 
@@ -127,7 +127,7 @@
 
       // verify the required parameter 'networkId' is set
       if (networkId == undefined || networkId == null) {
-        throw "Missing the required parameter 'networkId' when calling getAllSites";
+        throw "Missing param 'networkId' in getAllSites";
       }
 
 
@@ -170,12 +170,12 @@
 
       // verify the required parameter 'networkId' is set
       if (networkId == undefined || networkId == null) {
-        throw "Missing the required parameter 'networkId' when calling getContentInFolder";
+        throw "Missing param 'networkId' in getContentInFolder";
       }
 
       // verify the required parameter 'folderId' is set
       if (folderId == undefined || folderId == null) {
-        throw "Missing the required parameter 'folderId' when calling getContentInFolder";
+        throw "Missing param 'folderId' in getContentInFolder";
       }
 
 
@@ -219,12 +219,12 @@
 
       // verify the required parameter 'networkId' is set
       if (networkId == undefined || networkId == null) {
-        throw "Missing the required parameter 'networkId' when calling getContentInSite";
+        throw "Missing param 'networkId' in getContentInSite";
       }
 
       // verify the required parameter 'siteId' is set
       if (siteId == undefined || siteId == null) {
-        throw "Missing the required parameter 'siteId' when calling getContentInSite";
+        throw "Missing param 'siteId' in getContentInSite";
       }
 
 

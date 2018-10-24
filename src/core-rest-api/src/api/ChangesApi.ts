@@ -69,12 +69,12 @@ export class ChangesApi {
 
         // verify the required parameter 'sourceId' is set
         if (sourceId == undefined || sourceId == null) {
-            throw "Missing the required parameter 'sourceId' when calling addAssoc";
+            throw "Missing param 'sourceId' in addAssoc";
         }
 
         // verify the required parameter 'assocTargetBody' is set
         if (assocTargetBody == undefined || assocTargetBody == null) {
-            throw "Missing the required parameter 'assocTargetBody' when calling addAssoc";
+            throw "Missing param 'assocTargetBody' in addAssoc";
         }
 
 
@@ -115,12 +115,12 @@ export class ChangesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling addNode";
+            throw "Missing param 'nodeId' in addNode";
         }
 
         // verify the required parameter 'nodeBody' is set
         if (nodeBody == undefined || nodeBody == null) {
-            throw "Missing the required parameter 'nodeBody' when calling addNode";
+            throw "Missing param 'nodeBody' in addNode";
         }
 
 
@@ -159,12 +159,12 @@ export class ChangesApi {
 
         // verify the required parameter 'parentId' is set
         if (parentId == undefined || parentId == null) {
-            throw "Missing the required parameter 'parentId' when calling addSecondaryChildAssoc";
+            throw "Missing param 'parentId' in addSecondaryChildAssoc";
         }
 
         // verify the required parameter 'assocChildBody' is set
         if (assocChildBody == undefined || assocChildBody == null) {
-            throw "Missing the required parameter 'assocChildBody' when calling addSecondaryChildAssoc";
+            throw "Missing param 'assocChildBody' in addSecondaryChildAssoc";
         }
 
 
@@ -203,7 +203,7 @@ export class ChangesApi {
 
         // verify the required parameter 'sharedLinkBody' is set
         if (sharedLinkBody == undefined || sharedLinkBody == null) {
-            throw "Missing the required parameter 'sharedLinkBody' when calling addSharedLink";
+            throw "Missing param 'sharedLinkBody' in addSharedLink";
         }
 
 
@@ -244,12 +244,12 @@ export class ChangesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling copyNode";
+            throw "Missing param 'nodeId' in copyNode";
         }
 
         // verify the required parameter 'copyBody' is set
         if (copyBody == undefined || copyBody == null) {
-            throw "Missing the required parameter 'copyBody' when calling copyNode";
+            throw "Missing param 'copyBody' in copyNode";
         }
 
 
@@ -287,12 +287,12 @@ export class ChangesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling createRendition";
+            throw "Missing param 'nodeId' in createRendition";
         }
 
         // verify the required parameter 'renditionBody' is set
         if (renditionBody == undefined || renditionBody == null) {
-            throw "Missing the required parameter 'renditionBody' when calling createRendition";
+            throw "Missing param 'renditionBody' in createRendition";
         }
 
 
@@ -331,7 +331,7 @@ export class ChangesApi {
 
         // verify the required parameter 'siteBody' is set
         if (siteBody == undefined || siteBody == null) {
-            throw "Missing the required parameter 'siteBody' when calling createSite";
+            throw "Missing param 'siteBody' in createSite";
         }
 
 
@@ -370,12 +370,12 @@ export class ChangesApi {
 
         // verify the required parameter 'siteId' is set
         if (siteId == undefined || siteId == null) {
-            throw "Missing the required parameter 'siteId' when calling updateSite";
+            throw "Missing param 'siteId' in updateSite";
         }
 
         // verify the required parameter 'siteBody' is set
         if (siteBody == undefined || siteBody == null) {
-            throw "Missing the required parameter 'siteBody' when calling updateSite";
+            throw "Missing param 'siteBody' in updateSite";
         }
 
         let pathParams = {
@@ -415,7 +415,7 @@ export class ChangesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling deleteNode";
+            throw "Missing param 'nodeId' in deleteNode";
         }
 
 
@@ -451,7 +451,7 @@ export class ChangesApi {
 
         // verify the required parameter 'sharedId' is set
         if (sharedId == undefined || sharedId == null) {
-            throw "Missing the required parameter 'sharedId' when calling deleteSharedLink";
+            throw "Missing param 'sharedId' in deleteSharedLink";
         }
 
 
@@ -488,7 +488,7 @@ export class ChangesApi {
 
         // verify the required parameter 'siteId' is set
         if (siteId == undefined || siteId == null) {
-            throw "Missing the required parameter 'siteId' when calling deleteSite";
+            throw "Missing param 'siteId' in deleteSite";
         }
 
 
@@ -525,12 +525,12 @@ export class ChangesApi {
 
         // verify the required parameter 'sharedId' is set
         if (sharedId == undefined || sharedId == null) {
-            throw "Missing the required parameter 'sharedId' when calling emailSharedLink";
+            throw "Missing param 'sharedId' in emailSharedLink";
         }
 
         // verify the required parameter 'emailSharedLinkBody' is set
         if (emailSharedLinkBody == undefined || emailSharedLinkBody == null) {
-            throw "Missing the required parameter 'emailSharedLinkBody' when calling emailSharedLink";
+            throw "Missing param 'emailSharedLinkBody' in emailSharedLink";
         }
 
 
@@ -604,7 +604,7 @@ export class ChangesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling getDeletedNode";
+            throw "Missing param 'nodeId' in getDeletedNode";
         }
 
 
@@ -680,7 +680,7 @@ export class ChangesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling getFileContent";
+            throw "Missing param 'nodeId' in getFileContent";
         }
 
 
@@ -724,7 +724,7 @@ export class ChangesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling getNode";
+            throw "Missing param 'nodeId' in getNode";
         }
 
 
@@ -773,7 +773,7 @@ export class ChangesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling getNodeChildren";
+            throw "Missing param 'nodeId' in getNodeChildren";
         }
 
 
@@ -818,12 +818,12 @@ export class ChangesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling getRendition";
+            throw "Missing param 'nodeId' in getRendition";
         }
 
         // verify the required parameter 'renditionId' is set
         if (renditionId == undefined || renditionId == null) {
-            throw "Missing the required parameter 'renditionId' when calling getRendition";
+            throw "Missing param 'renditionId' in getRendition";
         }
 
 
@@ -863,12 +863,12 @@ export class ChangesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling getRenditionContent";
+            throw "Missing param 'nodeId' in getRenditionContent";
         }
 
         // verify the required parameter 'renditionId' is set
         if (renditionId == undefined || renditionId == null) {
-            throw "Missing the required parameter 'renditionId' when calling getRenditionContent";
+            throw "Missing param 'renditionId' in getRenditionContent";
         }
 
 
@@ -908,7 +908,7 @@ export class ChangesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling getRenditions";
+            throw "Missing param 'nodeId' in getRenditions";
         }
 
 
@@ -947,7 +947,7 @@ export class ChangesApi {
 
         // verify the required parameter 'sharedId' is set
         if (sharedId == undefined || sharedId == null) {
-            throw "Missing the required parameter 'sharedId' when calling getSharedLink";
+            throw "Missing param 'sharedId' in getSharedLink";
         }
 
 
@@ -988,7 +988,7 @@ export class ChangesApi {
 
         // verify the required parameter 'sharedId' is set
         if (sharedId == undefined || sharedId == null) {
-            throw "Missing the required parameter 'sharedId' when calling getSharedLinkContent";
+            throw "Missing param 'sharedId' in getSharedLinkContent";
         }
 
 
@@ -1031,12 +1031,12 @@ export class ChangesApi {
 
         // verify the required parameter 'sharedId' is set
         if (sharedId == undefined || sharedId == null) {
-            throw "Missing the required parameter 'sharedId' when calling getSharedLinkRenditionContent";
+            throw "Missing param 'sharedId' in getSharedLinkRenditionContent";
         }
 
         // verify the required parameter 'renditionId' is set
         if (renditionId == undefined || renditionId == null) {
-            throw "Missing the required parameter 'renditionId' when calling getSharedLinkRenditionContent";
+            throw "Missing param 'renditionId' in getSharedLinkRenditionContent";
         }
 
 
@@ -1076,7 +1076,7 @@ export class ChangesApi {
 
         // verify the required parameter 'sharedId' is set
         if (sharedId == undefined || sharedId == null) {
-            throw "Missing the required parameter 'sharedId' when calling getSharedLinkRenditions";
+            throw "Missing param 'sharedId' in getSharedLinkRenditions";
         }
 
 
@@ -1116,7 +1116,7 @@ export class ChangesApi {
 
         // verify the required parameter 'childId' is set
         if (childId == undefined || childId == null) {
-            throw "Missing the required parameter 'childId' when calling listParents";
+            throw "Missing param 'childId' in listParents";
         }
 
 
@@ -1161,7 +1161,7 @@ export class ChangesApi {
 
         // verify the required parameter 'parentId' is set
         if (parentId == undefined || parentId == null) {
-            throw "Missing the required parameter 'parentId' when calling listSecondaryChildAssociations";
+            throw "Missing param 'parentId' in listSecondaryChildAssociations";
         }
 
 
@@ -1206,7 +1206,7 @@ export class ChangesApi {
 
         // verify the required parameter 'targetId' is set
         if (targetId == undefined || targetId == null) {
-            throw "Missing the required parameter 'targetId' when calling listSourceNodeAssociations";
+            throw "Missing param 'targetId' in listSourceNodeAssociations";
         }
 
 
@@ -1250,7 +1250,7 @@ export class ChangesApi {
 
         // verify the required parameter 'sourceId' is set
         if (sourceId == undefined || sourceId == null) {
-            throw "Missing the required parameter 'sourceId' when calling listTargetAssociations";
+            throw "Missing param 'sourceId' in listTargetAssociations";
         }
 
 
@@ -1298,7 +1298,7 @@ export class ChangesApi {
 
         // verify the required parameter 'term' is set
         if (term == undefined || term == null) {
-            throw "Missing the required parameter 'term' when calling liveSearchNodes";
+            throw "Missing param 'term' in liveSearchNodes";
         }
 
 
@@ -1346,12 +1346,12 @@ export class ChangesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling moveNode";
+            throw "Missing param 'nodeId' in moveNode";
         }
 
         // verify the required parameter 'moveBody' is set
         if (moveBody == undefined || moveBody == null) {
-            throw "Missing the required parameter 'moveBody' when calling moveNode";
+            throw "Missing param 'moveBody' in moveNode";
         }
 
 
@@ -1388,7 +1388,7 @@ export class ChangesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling purgeDeletedNode";
+            throw "Missing param 'nodeId' in purgeDeletedNode";
         }
 
 
@@ -1426,12 +1426,12 @@ export class ChangesApi {
 
         // verify the required parameter 'sourceId' is set
         if (sourceId == undefined || sourceId == null) {
-            throw "Missing the required parameter 'sourceId' when calling removeAssoc";
+            throw "Missing param 'sourceId' in removeAssoc";
         }
 
         // verify the required parameter 'targetId' is set
         if (targetId == undefined || targetId == null) {
-            throw "Missing the required parameter 'targetId' when calling removeAssoc";
+            throw "Missing param 'targetId' in removeAssoc";
         }
 
 
@@ -1472,12 +1472,12 @@ export class ChangesApi {
 
         // verify the required parameter 'parentId' is set
         if (parentId == undefined || parentId == null) {
-            throw "Missing the required parameter 'parentId' when calling removeSecondaryChildAssoc";
+            throw "Missing param 'parentId' in removeSecondaryChildAssoc";
         }
 
         // verify the required parameter 'childId' is set
         if (childId == undefined || childId == null) {
-            throw "Missing the required parameter 'childId' when calling removeSecondaryChildAssoc";
+            throw "Missing param 'childId' in removeSecondaryChildAssoc";
         }
 
 
@@ -1516,7 +1516,7 @@ export class ChangesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling restoreNode";
+            throw "Missing param 'nodeId' in restoreNode";
         }
 
 
@@ -1557,12 +1557,12 @@ export class ChangesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling updateFileContent";
+            throw "Missing param 'nodeId' in updateFileContent";
         }
 
         // verify the required parameter 'contentBody' is set
         if (contentBody == undefined || contentBody == null) {
-            throw "Missing the required parameter 'contentBody' when calling updateFileContent";
+            throw "Missing param 'contentBody' in updateFileContent";
         }
 
 
@@ -1606,12 +1606,12 @@ export class ChangesApi {
 
         // verify the required parameter 'nodeId' is set
         if (nodeId == undefined || nodeId == null) {
-            throw "Missing the required parameter 'nodeId' when calling updateNode";
+            throw "Missing param 'nodeId' in updateNode";
         }
 
         // verify the required parameter 'nodeBody' is set
         if (nodeBody == undefined || nodeBody == null) {
-            throw "Missing the required parameter 'nodeBody' when calling updateNode";
+            throw "Missing param 'nodeBody' in updateNode";
         }
 
 

@@ -49,12 +49,12 @@
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling completeTasks";
+        throw "Missing param 'userId' in completeTasks";
       }
 
       // verify the required parameter 'processDefinitionKey' is set
       if (processDefinitionKey == undefined || processDefinitionKey == null) {
-        throw "Missing the required parameter 'processDefinitionKey' when calling completeTasks";
+        throw "Missing param 'processDefinitionKey' in completeTasks";
       }
 
 
@@ -98,12 +98,12 @@
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling generateData";
+        throw "Missing param 'userId' in generateData";
       }
 
       // verify the required parameter 'processDefinitionKey' is set
       if (processDefinitionKey == undefined || processDefinitionKey == null) {
-        throw "Missing the required parameter 'processDefinitionKey' when calling generateData";
+        throw "Missing param 'processDefinitionKey' in generateData";
       }
 
 

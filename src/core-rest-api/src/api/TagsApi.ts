@@ -56,12 +56,12 @@ export class TagsApi {
 
     // verify the required parameter 'nodeId' is set
     if (nodeId == undefined || nodeId == null) {
-      throw "Missing the required parameter 'nodeId' when calling addTag";
+      throw "Missing param 'nodeId' in addTag";
     }
 
     // verify the required parameter 'tagBody' is set
     if (tagBody == undefined || tagBody == null) {
-      throw "Missing the required parameter 'tagBody' when calling addTag";
+      throw "Missing param 'tagBody' in addTag";
     }
 
 
@@ -101,7 +101,7 @@ export class TagsApi {
 
     // verify the required parameter 'nodeId' is set
     if (nodeId == undefined || nodeId == null) {
-      throw "Missing the required parameter 'nodeId' when calling getNodeTags";
+      throw "Missing param 'nodeId' in getNodeTags";
     }
 
 
@@ -143,7 +143,7 @@ export class TagsApi {
 
     // verify the required parameter 'tagId' is set
     if (tagId == undefined || tagId == null) {
-      throw "Missing the required parameter 'tagId' when calling getTag";
+      throw "Missing param 'tagId' in getTag";
     }
 
 
@@ -216,12 +216,12 @@ export class TagsApi {
 
     // verify the required parameter 'nodeId' is set
     if (nodeId == undefined || nodeId == null) {
-      throw "Missing the required parameter 'nodeId' when calling removeTag";
+      throw "Missing param 'nodeId' in removeTag";
     }
 
     // verify the required parameter 'tagId' is set
     if (tagId == undefined || tagId == null) {
-      throw "Missing the required parameter 'tagId' when calling removeTag";
+      throw "Missing param 'tagId' in removeTag";
     }
 
 
@@ -258,12 +258,12 @@ export class TagsApi {
 
     // verify the required parameter 'tagId' is set
     if (tagId == undefined || tagId == null) {
-      throw "Missing the required parameter 'tagId' when calling updateTag";
+      throw "Missing param 'tagId' in updateTag";
     }
 
     // verify the required parameter 'tagBody' is set
     if (tagBody == undefined || tagBody == null) {
-      throw "Missing the required parameter 'tagBody' when calling updateTag";
+      throw "Missing param 'tagBody' in updateTag";
     }
 
 

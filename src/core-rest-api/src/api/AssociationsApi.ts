@@ -52,12 +52,12 @@ export class AssociationsApi {
 
         // verify the required parameter 'sourceId' is set
         if (sourceId == undefined || sourceId == null) {
-            throw "Missing the required parameter 'sourceId' when calling addAssoc";
+            throw "Missing param 'sourceId' in addAssoc";
         }
 
         // verify the required parameter 'assocTargetBody' is set
         if (assocTargetBody == undefined || assocTargetBody == null) {
-            throw "Missing the required parameter 'assocTargetBody' when calling addAssoc";
+            throw "Missing param 'assocTargetBody' in addAssoc";
         }
 
 
@@ -97,7 +97,7 @@ export class AssociationsApi {
 
         // verify the required parameter 'targetId' is set
         if (targetId == undefined || targetId == null) {
-            throw "Missing the required parameter 'targetId' when calling listSourceNodeAssociations";
+            throw "Missing param 'targetId' in listSourceNodeAssociations";
         }
 
 
@@ -141,7 +141,7 @@ export class AssociationsApi {
 
         // verify the required parameter 'sourceId' is set
         if (sourceId == undefined || sourceId == null) {
-            throw "Missing the required parameter 'sourceId' when calling listTargetAssociations";
+            throw "Missing param 'sourceId' in listTargetAssociations";
         }
 
 
@@ -183,12 +183,12 @@ export class AssociationsApi {
 
         // verify the required parameter 'sourceId' is set
         if (sourceId == undefined || sourceId == null) {
-            throw "Missing the required parameter 'sourceId' when calling removeAssoc";
+            throw "Missing param 'sourceId' in removeAssoc";
         }
 
         // verify the required parameter 'targetId' is set
         if (targetId == undefined || targetId == null) {
-            throw "Missing the required parameter 'targetId' when calling removeAssoc";
+            throw "Missing param 'targetId' in removeAssoc";
         }
 
 

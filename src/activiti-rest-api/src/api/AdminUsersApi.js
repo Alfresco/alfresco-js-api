@@ -48,7 +48,7 @@
 
       // verify the required parameter 'update' is set
       if (update == undefined || update == null) {
-        throw "Missing the required parameter 'update' when calling bulkUpdateUsers";
+        throw "Missing param 'update' in bulkUpdateUsers";
       }
 
 
@@ -90,7 +90,7 @@
 
       // verify the required parameter 'userRepresentation' is set
       if (userRepresentation == undefined || userRepresentation == null) {
-        throw "Missing the required parameter 'userRepresentation' when calling createNewUser";
+        throw "Missing param 'userRepresentation' in createNewUser";
       }
 
 
@@ -135,7 +135,7 @@
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling getUser";
+        throw "Missing param 'userId' in getUser";
       }
 
 
@@ -239,12 +239,12 @@
 
       // verify the required parameter 'userId' is set
       if (userId == undefined || userId == null) {
-        throw "Missing the required parameter 'userId' when calling updateUserDetails";
+        throw "Missing param 'userId' in updateUserDetails";
       }
 
       // verify the required parameter 'userRepresentation' is set
       if (userRepresentation == undefined || userRepresentation == null) {
-        throw "Missing the required parameter 'userRepresentation' when calling updateUserDetails";
+        throw "Missing param 'userRepresentation' in updateUserDetails";
       }
 
 

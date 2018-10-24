@@ -49,12 +49,12 @@
 
       // verify the required parameter 'contentId' is set
       if (contentId == undefined || contentId == null) {
-        throw "Missing the required parameter 'contentId' when calling getRawContent";
+        throw "Missing param 'contentId' in getRawContent";
       }
 
       // verify the required parameter 'renditionType' is set
       if (renditionType == undefined || renditionType == null) {
-        throw "Missing the required parameter 'renditionType' when calling getRawContent";
+        throw "Missing param 'renditionType' in getRawContent";
       }
 
 

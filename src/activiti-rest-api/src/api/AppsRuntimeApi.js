@@ -49,7 +49,7 @@
 
       // verify the required parameter 'saveObject' is set
       if (saveObject == undefined || saveObject == null) {
-        throw "Missing the required parameter 'saveObject' when calling deployAppDefinitions";
+        throw "Missing param 'saveObject' in deployAppDefinitions";
       }
 
 

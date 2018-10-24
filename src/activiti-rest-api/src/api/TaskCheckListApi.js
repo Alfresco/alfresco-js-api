@@ -49,12 +49,12 @@
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling addSubtask";
+        throw "Missing param 'taskId' in addSubtask";
       }
 
       // verify the required parameter 'taskRepresentation' is set
       if (taskRepresentation == undefined || taskRepresentation == null) {
-        throw "Missing the required parameter 'taskRepresentation' when calling addSubtask";
+        throw "Missing param 'taskRepresentation' in addSubtask";
       }
 
 
@@ -96,7 +96,7 @@
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling getChecklist";
+        throw "Missing param 'taskId' in getChecklist";
       }
 
 
@@ -139,12 +139,12 @@
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling orderChecklist";
+        throw "Missing param 'taskId' in orderChecklist";
       }
 
       // verify the required parameter 'orderRepresentation' is set
       if (orderRepresentation == undefined || orderRepresentation == null) {
-        throw "Missing the required parameter 'orderRepresentation' when calling orderChecklist";
+        throw "Missing param 'orderRepresentation' in orderChecklist";
       }
 
 

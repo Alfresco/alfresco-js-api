@@ -50,12 +50,12 @@
 
       // verify the required parameter 'commentRequest' is set
       if (commentRequest == undefined || commentRequest == null) {
-        throw "Missing the required parameter 'commentRequest' when calling addProcessInstanceComment";
+        throw "Missing param 'commentRequest' in addProcessInstanceComment";
       }
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling addProcessInstanceComment";
+        throw "Missing param 'processInstanceId' in addProcessInstanceComment";
       }
 
 
@@ -99,12 +99,12 @@
 
       // verify the required parameter 'commentRequest' is set
       if (commentRequest == undefined || commentRequest == null) {
-        throw "Missing the required parameter 'commentRequest' when calling addTaskComment";
+        throw "Missing param 'commentRequest' in addTaskComment";
       }
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling addTaskComment";
+        throw "Missing param 'taskId' in addTaskComment";
       }
 
 
@@ -150,7 +150,7 @@
 
       // verify the required parameter 'processInstanceId' is set
       if (processInstanceId == undefined || processInstanceId == null) {
-        throw "Missing the required parameter 'processInstanceId' when calling getProcessInstanceComments";
+        throw "Missing param 'processInstanceId' in getProcessInstanceComments";
       }
 
 
@@ -197,7 +197,7 @@
 
       // verify the required parameter 'taskId' is set
       if (taskId == undefined || taskId == null) {
-        throw "Missing the required parameter 'taskId' when calling getTaskComments";
+        throw "Missing param 'taskId' in getTaskComments";
       }
 
 

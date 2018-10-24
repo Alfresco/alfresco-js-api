@@ -48,7 +48,7 @@
 
       // verify the required parameter 'filterRequest' is set
       if (filterRequest == undefined || filterRequest == null) {
-        throw "Missing the required parameter 'filterRequest' when calling filterProcessInstances";
+        throw "Missing param 'filterRequest' in filterProcessInstances";
       }
 
 
@@ -89,7 +89,7 @@
 
       // verify the required parameter 'requestNode' is set
       if (requestNode == undefined || requestNode == null) {
-        throw "Missing the required parameter 'requestNode' when calling getProcessInstances";
+        throw "Missing param 'requestNode' in getProcessInstances";
       }
 
 

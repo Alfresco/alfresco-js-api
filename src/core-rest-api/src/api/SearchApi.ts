@@ -60,7 +60,7 @@ export class SearchApi {
 
         // verify the required parameter 'SearchRequest' is set
         if (SearchRequest == undefined || SearchRequest == null) {
-            throw new Error("Missing the required parameter 'SearchRequest' when calling search");
+            throw new Error("Missing param 'SearchRequest' in search");
         }
 
 

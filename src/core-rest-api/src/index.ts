@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-export * from './ApiClient';
 export * from '../../alfrescoApiClient';
 
 export * from './api/AssociationsApi';

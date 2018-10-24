@@ -1,38 +1,47 @@
+/*!
+* @license
+* Copyright 2018 Alfresco Software, Ltd.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 
-(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['../../../alfrescoApiClient', '../model/Error', '../model/RMNodeBodyCreateWithRelativePath', '../model/UnfiledRecordFolderAssociationPaging', '../model/UnfiledRecordFolderBodyUpdate', '../model/UnfiledRecordFolderEntry'], factory);
-  } else if (typeof module === 'object' && module.exports) {
-    // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/Error'), require('../model/RMNodeBodyCreateWithRelativePath'), require('../model/UnfiledRecordFolderAssociationPaging'), require('../model/UnfiledRecordFolderBodyUpdate'), require('../model/UnfiledRecordFolderEntry'));
-  } else {
-    // Browser globals (root is window)
-    if (!root.AlfrescoGovernanceServicesRestApi) {
-      root.AlfrescoGovernanceServicesRestApi = {};
+import { AlfrescoApiClient } from '../../../alfrescoApiClient';
+import { Error } from '../model/Error';
+import { RMNodeBodyCreateWithRelativePath } from '../model/RMNodeBodyCreateWithRelativePath';
+import { UnfiledRecordFolderAssociationPaging } from '../model/UnfiledRecordFolderAssociationPaging';
+import { UnfiledRecordFolderBodyUpdate } from '../model/UnfiledRecordFolderBodyUpdate';
+import { UnfiledRecordFolderEntry } from '../model/UnfiledRecordFolderEntry';
+
+/**
+ * Unfiledrecordfolders service.
+ * @module api/UnfiledRecordFoldersApi
+ * @version 0.1.0
+ */
+
+/**
+ * Constructs a new UnfiledRecordFoldersApi.
+ * @alias :api/UnfiledRecordFoldersApi
+ * @class
+ * @param {:ApiClient} apiClient Optional API client implementation to use,
+ * default to {@link module:ApiClient#instance} if unspecified.
+ */
+export class UnfiledRecordFoldersApi {
+
+    apiClient: AlfrescoApiClient;
+
+    constructor(apiClient?: AlfrescoApiClient) {
+        this.apiClient = apiClient || new AlfrescoApiClient();
     }
-    root.AlfrescoGovernanceServicesRestApi.UnfiledRecordFoldersApi = factory(root.AlfrescoGovernanceServicesRestApi.ApiClient, root.AlfrescoGovernanceServicesRestApi.Error, root.AlfrescoGovernanceServicesRestApi.RMNodeBodyCreateWithRelativePath, root.AlfrescoGovernanceServicesRestApi.UnfiledRecordFolderAssociationPaging, root.AlfrescoGovernanceServicesRestApi.UnfiledRecordFolderBodyUpdate, root.AlfrescoGovernanceServicesRestApi.UnfiledRecordFolderEntry);
-  }
-}(this, function(ApiClient, Error, RMNodeBodyCreateWithRelativePath, UnfiledRecordFolderAssociationPaging, UnfiledRecordFolderBodyUpdate, UnfiledRecordFolderEntry) {
-  'use strict';
-
-  /**
-   * Unfiledrecordfolders service.
-   * @module api/UnfiledRecordFoldersApi
-   * @version 0.1.0
-   */
-
-  /**
-   * Constructs a new UnfiledRecordFoldersApi.
-   * @alias :api/UnfiledRecordFoldersApi
-   * @class
-   * @param {:ApiClient} apiClient Optional API client implementation to use,
-   * default to {@link module:ApiClient#instance} if unspecified.
-   */
-  var exports = function(apiClient) {
-    this.apiClient = apiClient || ApiClient.instance;
-
-
 
     /**
      * Create a record or an unfiled record folder
@@ -45,44 +54,42 @@
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleUnfiledRecordFolderAssociationPaging} and HTTP response
      */
-    this.createUnfiledRecordFolderChildren = function(unfiledRecordFolderId, nodeBodyCreate, opts) {
-      opts = opts || {};
-      var postBody = nodeBodyCreate;
+    createUnfiledRecordFolderChildren = function (unfiledRecordFolderId, nodeBodyCreate, opts) {
+        opts = opts || {};
+        let postBody = nodeBodyCreate;
 
-      // verify the required parameter 'unfiledRecordFolderId' is set
-      if (unfiledRecordFolderId === undefined || unfiledRecordFolderId === null) {
-        throw new Error("Missing the required parameter 'unfiledRecordFolderId' when calling createUnfiledRecordFolderChildren");
-      }
+        // verify the required parameter 'unfiledRecordFolderId' is set
+        if (unfiledRecordFolderId === undefined || unfiledRecordFolderId === null) {
+            throw new Error("Missing param 'unfiledRecordFolderId' in createUnfiledRecordFolderChildren");
+        }
 
-      // verify the required parameter 'nodeBodyCreate' is set
-      if (nodeBodyCreate === undefined || nodeBodyCreate === null) {
-        throw new Error("Missing the required parameter 'nodeBodyCreate' when calling createUnfiledRecordFolderChildren");
-      }
+        // verify the required parameter 'nodeBodyCreate' is set
+        if (nodeBodyCreate === undefined || nodeBodyCreate === null) {
+            throw new Error("Missing param 'nodeBodyCreate' in createUnfiledRecordFolderChildren");
+        }
 
 
-      var pathParams = {
-        'unfiledRecordFolderId': unfiledRecordFolderId
-      };
-      var queryParams = {
-        'autoRename': opts['autoRename'],
-        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+        let pathParams = {
+            'unfiledRecordFolderId': unfiledRecordFolderId
+        };
+        let queryParams = {
+            'autoRename': opts['autoRename'],
+            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+        };
+        let headerParams = {};
+        let formParams = {};
 
-      var authNames = ['basicAuth'];
-      var contentTypes = ['application/json', 'multipart/form-data'];
-      var accepts = ['application/json'];
-      var returnType = UnfiledRecordFolderAssociationPaging;
+        let authNames = ['basicAuth'];
+        let contentTypes = ['application/json', 'multipart/form-data'];
+        let accepts = ['application/json'];
+        let returnType = UnfiledRecordFolderAssociationPaging;
 
-      return this.apiClient.callApi(
-        '/unfiled-record-folders/{unfiledRecordFolderId}/children', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
+        return this.apiClient.callApi(
+            '/unfiled-record-folders/{unfiledRecordFolderId}/children', 'POST',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            authNames, contentTypes, accepts, returnType
+        );
     }
 
 
@@ -92,35 +99,32 @@
      * @param {string} unfiledRecordFolderId The identifier of an unfiled record folder.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    this.deleteUnfiledRecordFolder = function(unfiledRecordFolderId) {
-      var postBody = null;
+    deleteUnfiledRecordFolder = function (unfiledRecordFolderId) {
+        let postBody = null;
 
-      // verify the required parameter 'unfiledRecordFolderId' is set
-      if (unfiledRecordFolderId === undefined || unfiledRecordFolderId === null) {
-        throw new Error("Missing the required parameter 'unfiledRecordFolderId' when calling deleteUnfiledRecordFolder");
-      }
+        // verify the required parameter 'unfiledRecordFolderId' is set
+        if (unfiledRecordFolderId === undefined || unfiledRecordFolderId === null) {
+            throw new Error("Missing param 'unfiledRecordFolderId' in deleteUnfiledRecordFolder");
+        }
 
 
-      var pathParams = {
-        'unfiledRecordFolderId': unfiledRecordFolderId
-      };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+        let pathParams = {
+            'unfiledRecordFolderId': unfiledRecordFolderId
+        };
+        let queryParams = {};
+        let headerParams = {};
+        let formParams = {};
 
-      var authNames = ['basicAuth'];
-      var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
-      var returnType = null;
+        let authNames = ['basicAuth'];
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+        let returnType = null;
 
-      return this.apiClient.callApi(
-        '/unfiled-record-folders/{unfiledRecordFolderId}', 'DELETE',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
+        return this.apiClient.callApi(
+            '/unfiled-record-folders/{unfiledRecordFolderId}', 'DELETE',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            authNames, contentTypes, accepts, returnType
+        );
     }
 
     /**
@@ -133,39 +137,37 @@
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleUnfiledRecordFolderEntry} and HTTP response
      */
-    this.getUnfiledRecordFolder = function(unfiledRecordFolderId, opts) {
-      opts = opts || {};
-      var postBody = null;
+    getUnfiledRecordFolder = function (unfiledRecordFolderId, opts) {
+        opts = opts || {};
+        let postBody = null;
 
-      // verify the required parameter 'unfiledRecordFolderId' is set
-      if (unfiledRecordFolderId === undefined || unfiledRecordFolderId === null) {
-        throw new Error("Missing the required parameter 'unfiledRecordFolderId' when calling getUnfiledRecordFolder");
-      }
+        // verify the required parameter 'unfiledRecordFolderId' is set
+        if (unfiledRecordFolderId === undefined || unfiledRecordFolderId === null) {
+            throw new Error("Missing param 'unfiledRecordFolderId' in getUnfiledRecordFolder");
+        }
 
 
-      var pathParams = {
-        'unfiledRecordFolderId': unfiledRecordFolderId
-      };
-      var queryParams = {
-        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-        'relativePath': opts['relativePath'],
-        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+        let pathParams = {
+            'unfiledRecordFolderId': unfiledRecordFolderId
+        };
+        let queryParams = {
+            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'relativePath': opts['relativePath'],
+            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+        };
+        let headerParams = {};
+        let formParams = {};
 
-      var authNames = ['basicAuth'];
-      var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
-      var returnType = UnfiledRecordFolderEntry;
+        let authNames = ['basicAuth'];
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+        let returnType = UnfiledRecordFolderEntry;
 
-      return this.apiClient.callApi(
-        '/unfiled-record-folders/{unfiledRecordFolderId}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
+        return this.apiClient.callApi(
+            '/unfiled-record-folders/{unfiledRecordFolderId}', 'GET',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            authNames, contentTypes, accepts, returnType
+        );
     }
 
 
@@ -183,43 +185,41 @@
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleUnfiledRecordFolderAssociationPaging} and HTTP response
      */
-    this.listUnfiledRecordFolderChildren = function(unfiledRecordFolderId, opts) {
-      opts = opts || {};
-      var postBody = null;
+    listUnfiledRecordFolderChildren = function (unfiledRecordFolderId, opts) {
+        opts = opts || {};
+        let postBody = null;
 
-      // verify the required parameter 'unfiledRecordFolderId' is set
-      if (unfiledRecordFolderId === undefined || unfiledRecordFolderId === null) {
-        throw new Error("Missing the required parameter 'unfiledRecordFolderId' when calling listUnfiledRecordFolderChildren");
-      }
+        // verify the required parameter 'unfiledRecordFolderId' is set
+        if (unfiledRecordFolderId === undefined || unfiledRecordFolderId === null) {
+            throw new Error("Missing param 'unfiledRecordFolderId' in listUnfiledRecordFolderChildren");
+        }
 
 
-      var pathParams = {
-        'unfiledRecordFolderId': unfiledRecordFolderId
-      };
-      var queryParams = {
-        'skipCount': opts['skipCount'],
-        'maxItems': opts['maxItems'],
-        'where': opts['where'],
-        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-        'relativePath': opts['relativePath'],
-        'includeSource': opts['includeSource'],
-        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+        let pathParams = {
+            'unfiledRecordFolderId': unfiledRecordFolderId
+        };
+        let queryParams = {
+            'skipCount': opts['skipCount'],
+            'maxItems': opts['maxItems'],
+            'where': opts['where'],
+            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'relativePath': opts['relativePath'],
+            'includeSource': opts['includeSource'],
+            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+        };
+        let headerParams = {};
+        let formParams = {};
 
-      var authNames = ['basicAuth'];
-      var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
-      var returnType = UnfiledRecordFolderAssociationPaging;
+        let authNames = ['basicAuth'];
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+        let returnType = UnfiledRecordFolderAssociationPaging;
 
-      return this.apiClient.callApi(
-        '/unfiled-record-folders/{unfiledRecordFolderId}/children', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
+        return this.apiClient.callApi(
+            '/unfiled-record-folders/{unfiledRecordFolderId}/children', 'GET',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            authNames, contentTypes, accepts, returnType
+        );
     }
 
     /**
@@ -233,47 +233,42 @@
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link moduleUnfiledRecordFolderEntry} and HTTP response
      */
-    this.updateUnfiledRecordFolder = function(unfiledRecordFolderId, unfiledRecordFolderBodyUpdate, opts) {
-      opts = opts || {};
-      var postBody = unfiledRecordFolderBodyUpdate;
+    updateUnfiledRecordFolder = function (unfiledRecordFolderId, unfiledRecordFolderBodyUpdate, opts) {
+        opts = opts || {};
+        let postBody = unfiledRecordFolderBodyUpdate;
 
-      // verify the required parameter 'unfiledRecordFolderId' is set
-      if (unfiledRecordFolderId === undefined || unfiledRecordFolderId === null) {
-        throw new Error("Missing the required parameter 'unfiledRecordFolderId' when calling updateUnfiledRecordFolder");
-      }
+        // verify the required parameter 'unfiledRecordFolderId' is set
+        if (unfiledRecordFolderId === undefined || unfiledRecordFolderId === null) {
+            throw new Error("Missing param 'unfiledRecordFolderId' in updateUnfiledRecordFolder");
+        }
 
-      // verify the required parameter 'unfiledRecordFolderBodyUpdate' is set
-      if (unfiledRecordFolderBodyUpdate === undefined || unfiledRecordFolderBodyUpdate === null) {
-        throw new Error("Missing the required parameter 'unfiledRecordFolderBodyUpdate' when calling updateUnfiledRecordFolder");
-      }
+        // verify the required parameter 'unfiledRecordFolderBodyUpdate' is set
+        if (unfiledRecordFolderBodyUpdate === undefined || unfiledRecordFolderBodyUpdate === null) {
+            throw new Error("Missing param 'unfiledRecordFolderBodyUpdate' in updateUnfiledRecordFolder");
+        }
 
 
-      var pathParams = {
-        'unfiledRecordFolderId': unfiledRecordFolderId
-      };
-      var queryParams = {
-        'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-        'includeSource': opts['includeSource'],
-        'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
+        let pathParams = {
+            'unfiledRecordFolderId': unfiledRecordFolderId
+        };
+        let queryParams = {
+            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'includeSource': opts['includeSource'],
+            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+        };
+        let headerParams = {};
+        let formParams = {};
 
-      var authNames = ['basicAuth'];
-      var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
-      var returnType = UnfiledRecordFolderEntry;
+        let authNames = ['basicAuth'];
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+        let returnType = UnfiledRecordFolderEntry;
 
-      return this.apiClient.callApi(
-        '/unfiled-record-folders/{unfiledRecordFolderId}', 'PUT',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
+        return this.apiClient.callApi(
+            '/unfiled-record-folders/{unfiledRecordFolderId}', 'PUT',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            authNames, contentTypes, accepts, returnType
+        );
     }
 
-  };
-
-  return exports;
-}));
+}

@@ -49,12 +49,12 @@
 
       // verify the required parameter 'formId' is set
       if (formId == undefined || formId == null) {
-        throw "Missing the required parameter 'formId' when calling getFormHistory";
+        throw "Missing param 'formId' in getFormHistory";
       }
 
       // verify the required parameter 'formHistoryId' is set
       if (formHistoryId == undefined || formHistoryId == null) {
-        throw "Missing the required parameter 'formHistoryId' when calling getFormHistory";
+        throw "Missing param 'formHistoryId' in getFormHistory";
       }
 
 
@@ -97,7 +97,7 @@
 
       // verify the required parameter 'formId' is set
       if (formId == undefined || formId == null) {
-        throw "Missing the required parameter 'formId' when calling getForm";
+        throw "Missing param 'formId' in getForm";
       }
 
 
@@ -176,12 +176,12 @@
 
       // verify the required parameter 'formId' is set
       if (formId == undefined || formId == null) {
-        throw "Missing the required parameter 'formId' when calling saveForm";
+        throw "Missing param 'formId' in saveForm";
       }
 
       // verify the required parameter 'saveRepresentation' is set
       if (saveRepresentation == undefined || saveRepresentation == null) {
-        throw "Missing the required parameter 'saveRepresentation' when calling saveForm";
+        throw "Missing param 'saveRepresentation' in saveForm";
       }
 
 
@@ -224,12 +224,12 @@
 
       // verify the required parameter 'formId' is set
       if (formId == undefined || formId == null) {
-        throw "Missing the required parameter 'formId' when calling validateModel";
+        throw "Missing param 'formId' in validateModel";
       }
 
       // verify the required parameter 'saveRepresentation' is set
       if (saveRepresentation == undefined || saveRepresentation == null) {
-        throw "Missing the required parameter 'saveRepresentation' when calling validateModel";
+        throw "Missing param 'saveRepresentation' in validateModel";
       }
 
 

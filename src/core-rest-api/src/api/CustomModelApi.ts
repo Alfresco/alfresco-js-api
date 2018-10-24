@@ -47,11 +47,11 @@ export class FavoritesApi {
     createCustomModel(status, description, name, namespaceUri, namespacePrefix) {
 
         if (namespaceUri == undefined || namespaceUri == null) {
-            throw "Missing the required parameter 'namespaceUri' when calling createCustomModel";
+            throw "Missing param 'namespaceUri' in createCustomModel";
         }
 
         if (namespacePrefix == undefined || namespacePrefix == null) {
-            throw "Missing the required parameter 'namespacePrefix' when calling createCustomModel";
+            throw "Missing param 'namespacePrefix' in createCustomModel";
         }
 
         let postBody = {
@@ -89,11 +89,11 @@ export class FavoritesApi {
     createCustomType(modelName, name, parentName, title, description) {
 
         if (modelName == undefined || modelName == null) {
-            throw "Missing the required parameter 'modelName' when calling createCustomType";
+            throw "Missing param 'modelName' in createCustomType";
         }
 
         if (name == undefined || name == null) {
-            throw "Missing the required parameter 'name' when calling createCustomType";
+            throw "Missing param 'name' in createCustomType";
         }
 
         let postBody = {
@@ -132,11 +132,11 @@ export class FavoritesApi {
     createCustomAspect(modelName, name, parentName, title, description) {
 
         if (modelName == undefined || modelName == null) {
-            throw "Missing the required parameter 'modelName' when calling createCustomAspect";
+            throw "Missing param 'modelName' in createCustomAspect";
         }
 
         if (name == undefined || name == null) {
-            throw "Missing the required parameter 'name' when calling createCustomAspect";
+            throw "Missing param 'name' in createCustomAspect";
         }
 
         let postBody = {
@@ -175,13 +175,13 @@ export class FavoritesApi {
     createCustomConstraint(modelName, name, type, parameters) {
 
         if (modelName == undefined || modelName == null) {
-            throw "Missing the required parameter 'modelName' when calling createCustomConstraint";
+            throw "Missing param 'modelName' in createCustomConstraint";
         }
         if (type == undefined || type == null) {
-            throw "Missing the required parameter 'type' when calling createCustomConstraint";
+            throw "Missing param 'type' in createCustomConstraint";
         }
         if (name == undefined || name == null) {
-            throw "Missing the required parameter 'name' when calling createCustomConstraint";
+            throw "Missing param 'name' in createCustomConstraint";
         }
 
         let postBody = {
@@ -216,7 +216,7 @@ export class FavoritesApi {
     activateCustomModel(modelName) {
 
         if (modelName == undefined || modelName == null) {
-            throw "Missing the required parameter 'modelName' when calling activateCustomModel";
+            throw "Missing param 'modelName' in activateCustomModel";
         }
 
         let postBody = {
@@ -249,7 +249,7 @@ export class FavoritesApi {
     deactivateCustomModel(modelName) {
 
         if (modelName == undefined || modelName == null) {
-            throw "Missing the required parameter 'modelName' when calling deactivateCustomModel";
+            throw "Missing param 'modelName' in deactivateCustomModel";
         }
 
         let postBody = {
@@ -284,11 +284,11 @@ export class FavoritesApi {
     addPropertyToAspect(modelName, aspectName, properties) {
 
         if (modelName == undefined || modelName == null) {
-            throw "Missing the required parameter 'modelName' when calling addPropertyToAspect";
+            throw "Missing param 'modelName' in addPropertyToAspect";
         }
 
         if (aspectName == undefined || aspectName == null) {
-            throw "Missing the required parameter 'aspectName' when calling addPropertyToAspect";
+            throw "Missing param 'aspectName' in addPropertyToAspect";
         }
 
         let postBody = {
@@ -326,11 +326,11 @@ export class FavoritesApi {
     addPropertyToType(modelName, typeName, properties, aspectName) {
 
         if (modelName == undefined || modelName == null) {
-            throw "Missing the required parameter 'modelName' when calling addPropertyToType";
+            throw "Missing param 'modelName' in addPropertyToType";
         }
 
         if (typeName == undefined || typeName == null) {
-            throw "Missing the required parameter 'typeName' when calling addPropertyToType";
+            throw "Missing param 'typeName' in addPropertyToType";
         }
 
         let postBody = {
@@ -368,7 +368,7 @@ export class FavoritesApi {
     updateCustomModel(modelName, description, namespaceUri, namespacePrefix) {
 
         if (modelName == undefined || modelName == null) {
-            throw "Missing the required parameter 'modelName' when calling updateCustomModel";
+            throw "Missing param 'modelName' in updateCustomModel";
         }
 
         let postBody = {
@@ -408,11 +408,11 @@ export class FavoritesApi {
     updateCustomType(modelName, typeName, description, parentName, title) {
 
         if (modelName == undefined || modelName == null) {
-            throw "Missing the required parameter 'modelName' when calling UpdateCustomType";
+            throw "Missing param 'modelName' in UpdateCustomType";
         }
 
         if (typeName == undefined || typeName == null) {
-            throw "Missing the required parameter 'typeName' when calling UpdateCustomType";
+            throw "Missing param 'typeName' in UpdateCustomType";
         }
 
         let postBody = {
@@ -453,11 +453,11 @@ export class FavoritesApi {
     updateCustomAspect(modelName, aspectName, description, parentName, title) {
 
         if (modelName == undefined || modelName == null) {
-            throw "Missing the required parameter 'modelName' when calling updateCustomAspect";
+            throw "Missing param 'modelName' in updateCustomAspect";
         }
 
         if (aspectName == undefined || aspectName == null) {
-            throw "Missing the required parameter 'aspectName' when calling updateCustomAspect";
+            throw "Missing param 'aspectName' in updateCustomAspect";
         }
 
         let postBody = {
@@ -519,7 +519,7 @@ export class FavoritesApi {
     getCustomModel(modelName, queryParamsInput) {
 
         if (modelName == undefined || modelName == null) {
-            throw "Missing the required parameter 'modelName' when calling getCustomModel";
+            throw "Missing param 'modelName' in getCustomModel";
         }
 
         let postBody = {};
@@ -552,7 +552,7 @@ export class FavoritesApi {
     getAllCustomType(modelName) {
 
         if (modelName == undefined || modelName == null) {
-            throw "Missing the required parameter 'modelName' when calling getAllCustomType";
+            throw "Missing param 'modelName' in getAllCustomType";
         }
 
         let postBody = {};
@@ -587,11 +587,11 @@ export class FavoritesApi {
     getCustomType(modelName, typeName, queryParamsInput) {
 
         if (modelName == undefined || modelName == null) {
-            throw "Missing the required parameter 'modelName' when calling getCustomType";
+            throw "Missing param 'modelName' in getCustomType";
         }
 
         if (typeName == undefined || typeName == null) {
-            throw "Missing the required parameter 'typeName' when calling getCustomType";
+            throw "Missing param 'typeName' in getCustomType";
         }
 
         let postBody = {};
@@ -626,7 +626,7 @@ export class FavoritesApi {
     getAllCustomAspect(modelName,queryParamsInput) {
 
         if (modelName == undefined || modelName == null) {
-            throw "Missing the required parameter 'modelName' when calling getAllCustomAspect";
+            throw "Missing param 'modelName' in getAllCustomAspect";
         }
 
         let postBody = {};
@@ -661,11 +661,11 @@ export class FavoritesApi {
     getCustomAspect(modelName, aspectName, queryParamsInput) {
 
         if (modelName == undefined || modelName == null) {
-            throw "Missing the required parameter 'modelName' when calling getCustomAspect";
+            throw "Missing param 'modelName' in getCustomAspect";
         }
 
         if (aspectName == undefined || aspectName == null) {
-            throw "Missing the required parameter 'aspectName' when calling getCustomAspect";
+            throw "Missing param 'aspectName' in getCustomAspect";
         }
 
         let postBody = {};
@@ -700,7 +700,7 @@ export class FavoritesApi {
     getAllCustomConstraints(modelName,queryParamsInput) {
 
         if (modelName == undefined || modelName == null) {
-            throw "Missing the required parameter 'modelName' when calling getAllCustomConstraints";
+            throw "Missing param 'modelName' in getAllCustomConstraints";
         }
 
         let postBody = {};
@@ -735,11 +735,11 @@ export class FavoritesApi {
     getCustomConstraints(modelName, constraintName, queryParamsInput) {
 
         if (modelName == undefined || modelName == null) {
-            throw "Missing the required parameter 'modelName' when calling getCustomConstraints";
+            throw "Missing param 'modelName' in getCustomConstraints";
         }
 
         if (constraintName == undefined || constraintName == null) {
-            throw "Missing the required parameter 'constraintName' when calling getCustomConstraints";
+            throw "Missing param 'constraintName' in getCustomConstraints";
         }
 
         let postBody = {};
@@ -773,7 +773,7 @@ export class FavoritesApi {
     deleteCustomModel(modelName) {
 
         if (modelName == undefined || modelName == null) {
-            throw "Missing the required parameter 'modelName' when calling deleteCustomModel";
+            throw "Missing param 'modelName' in deleteCustomModel";
         }
 
         let postBody = {};
@@ -807,11 +807,11 @@ export class FavoritesApi {
     deleteCustomType(modelName, typeName) {
 
         if (modelName == undefined || modelName == null) {
-            throw "Missing the required parameter 'modelName' when calling getCustomConstraints";
+            throw "Missing param 'modelName' in getCustomConstraints";
         }
 
         if (typeName == undefined || typeName == null) {
-            throw "Missing the required parameter 'modelName' when calling deleteCustomType";
+            throw "Missing param 'modelName' in deleteCustomType";
         }
 
         let postBody = {};

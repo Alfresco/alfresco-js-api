@@ -48,7 +48,7 @@
 
       // verify the required parameter 'syncLogEntryId' is set
       if (syncLogEntryId == undefined || syncLogEntryId == null) {
-        throw "Missing the required parameter 'syncLogEntryId' when calling getLogFile";
+        throw "Missing param 'syncLogEntryId' in getLogFile";
       }
 
 

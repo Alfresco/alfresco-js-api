@@ -49,12 +49,12 @@
 
       // verify the required parameter 'processModelId' is set
       if (processModelId == undefined || processModelId == null) {
-        throw "Missing the required parameter 'processModelId' when calling getHistoricProcessModelBpmn20Xml";
+        throw "Missing param 'processModelId' in getHistoricProcessModelBpmn20Xml";
       }
 
       // verify the required parameter 'processModelHistoryId' is set
       if (processModelHistoryId == undefined || processModelHistoryId == null) {
-        throw "Missing the required parameter 'processModelHistoryId' when calling getHistoricProcessModelBpmn20Xml";
+        throw "Missing param 'processModelHistoryId' in getHistoricProcessModelBpmn20Xml";
       }
 
 
@@ -97,7 +97,7 @@
 
       // verify the required parameter 'processModelId' is set
       if (processModelId == undefined || processModelId == null) {
-        throw "Missing the required parameter 'processModelId' when calling getProcessModelBpmn20Xml";
+        throw "Missing param 'processModelId' in getProcessModelBpmn20Xml";
       }
 
 
