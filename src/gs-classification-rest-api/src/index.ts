@@ -63,7 +63,7 @@ export * from './model/CombinedInstructionBody';
 export * from './model/ClassificationGuide';
 export * from './model/ClassificationGuides';
 
-export * from './api/ClassificationGuidesApi';
-export * from './api/ClassificationReasonsApi';
-export * from './api/DeclassificationExemptionsApi';
-export * from './api/SecurityControlSettingsApi';
+export * from './api/classificationGuidesApi';
+export * from './api/classificationReasonsApi';
+export * from './api/declassificationExemptionsApi';
+export * from './api/securityControlSettingsApi';

@@ -107,7 +107,7 @@
                         </goals>
                         <configuration>
                             <inputSpec>${api-defs-dir}/alfresco-core.yaml</inputSpec>
-                            <language>javascript</language>
+                            <language>typescript-node</language>
                             <output>${srcdir}/alfresco-core-rest-api</output>
                             <configOptions>
                                 <projectVersion>0.1.0</projectVersion>

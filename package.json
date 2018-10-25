@@ -61,11 +61,11 @@
     "rimraf": "^2.5.2",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
+    "ts-loader": "^5.2.2",
     "tsd-jsdoc": "^2.0.0-beta.3",
     "tslint": "5.7.0",
     "typescript": "^2.4.0",
     "uglifyjs-webpack-plugin": "^1.2.3",
-    "ts-loader": "^5.2.2",
     "watchify": "^3.7.0",
     "webpack": "4.1.1",
     "webpack-cli": "2.0.12"

@@ -27,4 +27,4 @@ export * from './model/RepositoryInfo';
 export * from './model/StatusInfo';
 export * from './model/VersionInfo';
 
-export * from './api/DiscoveryApi';
+export * from './api/discoveryApi';
