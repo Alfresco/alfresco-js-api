@@ -18,7 +18,7 @@
 import Emitter = require('event-emitter');
 import { Storage } from './storage';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
-import { superagent } from 'superagent';
+let superagent = require('superagent');
 
 export class AlfrescoApiClient  {
 
@@ -63,7 +63,7 @@ export class AlfrescoApiClient  {
      */
     timeout = undefined;
 
-    contentTypes: {
+    contentTypes= {
         json: 'application/json'
     };
 
@@ -73,6 +73,12 @@ export class AlfrescoApiClient  {
     constructor(host?: string) {
         this.storage = new Storage();
         this.host = host;
+
+        this.on = (new Emitter()).on;
+        this.off = (new Emitter()).off;
+        this.once =(new Emitter()).once;
+        this.emit = (new Emitter()).emit;
+
         Emitter.call(this);
     }
 

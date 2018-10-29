@@ -15,8 +15,8 @@
  * limitations under the License.
  */
 
-import { NodesApi } from './core-rest-api/src/api/NodesApi';
-import NodeEntry = require('./core-rest-api/src/model/NodeEntry');
+import { NodesApi } from './content-rest-api/src/api/NodesApi';
+import NodeEntry = require('./content-rest-api/src/model/NodeEntry');
 import Emitter = require('event-emitter');
 
 export class AlfrescoUpload extends NodesApi {

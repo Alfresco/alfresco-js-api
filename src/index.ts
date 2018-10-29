@@ -15,8 +15,7 @@
  * limitations under the License.
  */
 
-export * from './core-rest-api/src/index';
-export * from './core-private-rest-api/src/index';
+export * from './content-rest-api/src/index';
 export * from './discovery-rest-api/src/index';
 export * from './gs-classification-rest-api/src/index';
 export * from './gs-core-rest-api/src/index';
