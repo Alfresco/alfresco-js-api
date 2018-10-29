@@ -133,7 +133,7 @@
    */
   exports.prototype.isFileParam = function(param) {
     // fs.ReadStream in Node.js (but not in runtime like browserify)
-    if(typeof require('fs').ReadStream === 'object') {
+    if(typeof require('fs').ReadStream) {
       if (typeof window === 'undefined' &&
         typeof require === 'function' &&
         require('fs') &&
@@ -500,7 +500,11 @@
           for (var k in data) {
             if (data.hasOwnProperty(k)) {
               var key = exports.convertToType(k, keyType);
-              var value = exports.convertToType(data[k], valueType);
+              var rawValue = data[k];
+              var value = typeof rawValue === 'object'
+                ? rawValue
+                : exports.convertToType(rawValue, valueType);
+
               result[key] = value;
             }
           }

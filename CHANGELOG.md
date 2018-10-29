@@ -4,23 +4,55 @@
 
 # Alfresco JS API
 
+<a name="2.7.0"></a>
+# [2.7.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.7.0) (xx-xx-xxxx)
+
+## Features
+- ['Added updateAppDefinition method'](https://issues.alfresco.com/jira/browse/ADF-3017)
+
+
+<a name="2.6.0"></a>
+# [2.6.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.6.0) (04-10-2018)
+
+## Features
+- ['Added domain prefix for saving multilpe ECM tickets'](https://issues.alfresco.com/jira/browse/ADF-3499)
+
+## Fixes
+- ['cm:lockOwner' when requesting it via the nodesApi](https://issues.alfresco.com/jira/browse/ADF-3495)
+- ["versionComment" is missing in typings](https://issues.alfresco.com/jira/browse/ADF-31555)
+- [ Fix the silent refresh login](https://issues.alfresco.com/jira/browse/ADF-3531)
+- [ When a page is refresh the js api remove the part after the #](https://issues.alfresco.com/jira/browse/ADF-3552)
+
+<a name="2.5.0"></a>
+# [2.5.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.5.0) (15-08-2018)
+
+## Features
+- [Sites API - update Site details](https://issues.alfresco.com/jira/browse/ADF-3366)
+- [People API - update Person details](https://issues.alfresco.com/jira/browse/ADF-3412)
+
+## Fixes
+- [AppsDefinitionApi contains two methods with same name and different firms](https://issues.alfresco.com/jira/browse/ADF-3289)
+- [Incorrect datatype for password in PersonBodyCreate in index.d.ts](https://issues.alfresco.com/jira/browse/ADF-3383)
+- [PathElementEntity is missing properties](https://issues.alfresco.com/jira/browse/ADF-3214)
+
+
 <a name="2.4.0"></a>
 # [2.4.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.4.0) (25-06-2018)
 
 ## Features
-[Update Content in UplaodAPI](https://issues.alfresco.com/jira/browse/ADF-2563)
-[Error rise alfresco-js-api event](https://issues.alfresco.com/jira/browse/ADF-2753)
-[Add newly introduced isFavorite property to Nodes](https://issues.alfresco.com/jira/browse/ADF-3037)
-[Shared nodeId property](https://issues.alfresco.com/jira/browse/ADF-3063)
-[SSO implicit flow](https://issues.alfresco.com/jira/browse/ADF-2795)
+- [Update Content in UplaodAPI](https://issues.alfresco.com/jira/browse/ADF-2563)
+- [Error rise alfresco-js-api event](https://issues.alfresco.com/jira/browse/ADF-2753)
+- [Add newly introduced isFavorite property to Nodes](https://issues.alfresco.com/jira/browse/ADF-3037)
+- [Shared nodeId property](https://issues.alfresco.com/jira/browse/ADF-3063)
+- [SSO implicit flow](https://issues.alfresco.com/jira/browse/ADF-2795)
 
 
 ## Fixes
-[Disable timeout](https://issues.alfresco.com/jira/browse/ADF-2481)
-[Missing typings for Search API](https://issues.alfresco.com/jira/browse/ADF-2885)
-[getVersionContent type definition missing parameters](https://issues.alfresco.com/jira/browse/ADF-2603)
-[gMetadata URL context root is wrong](https://github.com/Alfresco/alfresco-js-api/issues/338)
-[Authentication Guard (ACS) does not redirect to Login on page reload](https://issues.alfresco.com/jira/browse/ADF-3224)
+- [Disable timeout](https://issues.alfresco.com/jira/browse/ADF-2481)
+- [Missing typings for Search API](https://issues.alfresco.com/jira/browse/ADF-2885)
+- [getVersionContent type definition missing parameters](https://issues.alfresco.com/jira/browse/ADF-2603)
+- [gMetadata URL context root is wrong](https://github.com/Alfresco/alfresco-js-api/issues/338)
+- [Authentication Guard (ACS) does not redirect to Login on page reload](https://issues.alfresco.com/jira/browse/ADF-3224)
 
 <a name="2.3.1"></a>
 # [2.3.1](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.3.1) (25-04-2018)
@@ -31,17 +63,17 @@
 
 ## Features
 
-[Update search api](https://issues.alfresco.com/jira/browse/ADF-2493)
-[Add groups api](https://issues.alfresco.com/jira/browse/ADF-2570)
-[Upate version api with missing endpoint](https://issues.alfresco.com/jira/browse/ADF-2558)
+- [Update search api](https://issues.alfresco.com/jira/browse/ADF-2493)
+- [Add groups api](https://issues.alfresco.com/jira/browse/ADF-2570)
+- [Upate version api with missing endpoint](https://issues.alfresco.com/jira/browse/ADF-2558)
 
 ## Fixes
 
-[Wrong type definition for RequestPagination](https://issues.alfresco.com/jira/browse/ADF-2448)
-[Not able to log-in into BPM with production mode and CSRF token enable](https://github.com/Alfresco/alfresco-js-api/issues/315)
-[Search api type definition is not defined](https://issues.alfresco.com/jira/browse/ADF-2450)
-[Incorrect definitions for Enums](https://issues.alfresco.com/jira/browse/ADF-2604)
-[Search API implementation is incomplete](https://issues.alfresco.com/jira/browse/ADF-2470)
+- [Wrong type definition for RequestPagination](https://issues.alfresco.com/jira/browse/ADF-2448)
+- [Not able to log-in into BPM with production mode and CSRF token enable](https://github.com/Alfresco/alfresco-js-api/issues/315)
+- [Search api type definition is not defined](https://issues.alfresco.com/jira/browse/ADF-2450)
+- [Incorrect definitions for Enums](https://issues.alfresco.com/jira/browse/ADF-2604)
+- [Search API implementation is incomplete](https://issues.alfresco.com/jira/browse/ADF-2470)
 
 <a name="2.2.0"></a>
 # [2.2.0](https://github.com/Alfresco/alfresco-js-api/releases/tag/2.2.0) (05-03-2018)

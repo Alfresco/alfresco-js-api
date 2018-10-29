@@ -341,6 +341,7 @@ implicitFlow| true/false | false |
 redirectUri|  url to be redirect after login| null|
 redirectLogout|  url to be redirect after logout optional, if is nor present the redirectUri will be used| null|
 refreshTokenTimeout|  millisecond value, after how many millisecond youw ant refresh the token| 40000|
+redirectSilentIframeUri|  url to be redirect after silent refresh login| /assets/silent-refresh.html |
 silentLogin|  direct execute the implicit login without the need od call this.alfrescoJsApi.implicitLogin() method|   false|
 
 

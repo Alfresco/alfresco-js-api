@@ -2,7 +2,6 @@
 
 var AlfrescoApiClient = require('./alfrescoApiClient');
 var Emitter = require('event-emitter');
-var rs = require('jsrsasign');
 
 class Oauth2Auth extends AlfrescoApiClient {
 
@@ -39,6 +38,14 @@ class Oauth2Auth extends AlfrescoApiClient {
                 this.config.oauth2.refreshTokenTimeout = 40000;
             }
 
+            if (!this.config.oauth2.redirectSilentIframeUri) {
+                var context = '';
+                if (typeof window !== 'undefined') {
+                    context = window.location.origin;
+                }
+                this.config.oauth2.redirectSilentIframeUri = context + '/assets/silent-refresh.html';
+            }
+
             this.basePath = this.config.oauth2.host; //Auth Call
 
             this.authentications = {
@@ -58,6 +65,10 @@ class Oauth2Auth extends AlfrescoApiClient {
     }
 
     initOauth() {
+        if (!this.config.oauth2.implicitFlow && this.isValidAccessToken()) {
+            const accessToken = this.storage.getItem('access_token');
+            this.setToken(accessToken, null);
+        }
         return Promise.resolve()
             .then(() => {
                 return this.discoveryUrls();
@@ -158,9 +169,10 @@ class Oauth2Auth extends AlfrescoApiClient {
 
             this.hashFragmentParams = this.getHashFragmentParams(externalHash);
 
-            if (this.isValidAccessToken()) {
+            if (externalHash === undefined && this.isValidAccessToken()) {
                 let accessToken = this.storage.getItem('access_token');
                 this.setToken(accessToken, null);
+                this.silentRefresh();
                 resolve(accessToken);
             }
 
@@ -170,7 +182,6 @@ class Oauth2Auth extends AlfrescoApiClient {
                 let sessionState = this.hashFragmentParams.session_state;
                 let expiresIn = this.hashFragmentParams.expires_in;
 
-                window.location.hash = '';
                 if (!sessionState) {
                     reject('session state not present');
                 }
@@ -196,11 +207,26 @@ class Oauth2Auth extends AlfrescoApiClient {
 
     }
 
+    padBase64(base64data) {
+        while (base64data.length % 4 !== 0) {
+            base64data += '=';
+        }
+        return base64data;
+    }
+
     processJWTToken(jwt) {
         return new Promise((resolve, reject) => {
             if (jwt) {
-                const header = rs.jws.JWS.readSafeJSONString(rs.b64utoutf8(jwt.split('.')[0]));
-                const payload = rs.jws.JWS.readSafeJSONString(rs.b64utoutf8(jwt.split('.')[1]));
+
+                const jwtArray = jwt.split('.');
+                const headerBase64 = this.padBase64(jwtArray[0]);
+                const headerJson = this.b64DecodeUnicode(headerBase64);
+                const header = JSON.parse(headerJson);
+
+                const payloadBase64 = this.padBase64(jwtArray[1]);
+                const payloadJson = this.b64DecodeUnicode(payloadBase64);
+                const payload = JSON.parse(payloadJson);
+
                 const savedNonce = this.storage.getItem('nonce');
 
                 if (!payload.sub) {
@@ -212,33 +238,26 @@ class Oauth2Auth extends AlfrescoApiClient {
                 }
 
                 if (this.jwks) {
-                    let validObj = this.validateJWKS(this.jwks, jwt, payload, header);
-                    if (validObj) {
-                        resolve(validObj);
-                    } else {
-                        reject('Invalid JWT');
-                    }
+                    resolve({
+                        idToken: jwt,
+                        payload: payload,
+                        header: header
+                    });
                 }
             }
         });
     }
 
-    validateJWKS(jwks, jwt, payload, header) {
-        let keyObj = rs.KEYUTIL.getKey(jwks.keys[0]);
-        let isValid = rs.jws.JWS.verifyJWT(jwt, keyObj,
-            {
-                alg: [header.alg],
-                iss: [this.config.oauth2.host],
-                aud: [this.config.oauth2.clientId]
-            });
-
-        if (isValid) {
-            return {
-                idToken: jwt,
-                payload: payload,
-                header: header
-            };
-        }
+    b64DecodeUnicode(str) {
+        const base64 = str.replace(/\-/g, '+').replace(/\_/g, '/');
+        return decodeURIComponent(
+            atob(base64)
+                .split('')
+                .map((c) => {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                })
+                .join('')
+        );
     }
 
     storeIdToken(idToken, exp) {
@@ -357,12 +376,35 @@ class Oauth2Auth extends AlfrescoApiClient {
 
     }
 
+    composeIframeLoginUrl() {
+        var nonce = this.genNonce();
+
+        this.storage.setItem('nonce', nonce);
+
+        var separation = this.discovery.loginUrl.indexOf('?') > -1 ? '&' : '?';
+
+        return this.discovery.loginUrl +
+            separation +
+            'client_id=' +
+            encodeURIComponent(this.config.oauth2.clientId) +
+            '&redirect_uri=' +
+            encodeURIComponent(this.config.oauth2.redirectSilentIframeUri) +
+            '&scope=' +
+            encodeURIComponent(this.config.oauth2.scope) +
+            '&response_type=' +
+            encodeURIComponent('id_token token') +
+            '&nonce=' +
+            encodeURIComponent(nonce) +
+            '&prompt=none';
+
+    }
+
     hasHashCharacter(hash) {
         return hash.indexOf('#') === 0;
     }
 
-    isHashRoute(hash) {
-        return hash.indexOf('#/') === 0;
+    startWithHashRoute(hash) {
+        return hash.startsWith('#/');
     }
 
     getHashFragmentParams(externalHash) {
@@ -373,11 +415,16 @@ class Oauth2Auth extends AlfrescoApiClient {
 
             if (!externalHash) {
                 hash = decodeURIComponent(window.location.hash);
+                if (!this.startWithHashRoute(hash)) {
+                    window.location.hash = '';
+                }
             } else {
                 hash = decodeURIComponent(externalHash);
+                this.removeHashFromSilentIframe();
+                this.destroyIframe();
             }
 
-            if (this.hasHashCharacter(hash) && !this.isHashRoute(hash)) {
+            if (this.hasHashCharacter(hash) && !this.startWithHashRoute(hash)) {
                 const questionMarkPosition = hash.indexOf('?');
 
                 if (questionMarkPosition > -1) {
@@ -435,10 +482,17 @@ class Oauth2Auth extends AlfrescoApiClient {
         }, this.config.oauth2.refreshTokenTimeout);
     }
 
+    removeHashFromSilentIframe() {
+        var iframe = document.getElementById('silent_refresh_token_iframe');
+        if (iframe && iframe.contentWindow.location.hash) {
+            iframe.contentWindow.location.hash = '';
+        }
+    }
+
     createIframe() {
         const iframe = document.createElement('iframe');
         iframe.id = 'silent_refresh_token_iframe';
-        let loginUrl = this.composeImplicitLoginUrl();
+        let loginUrl = this.composeIframeLoginUrl();
         iframe.setAttribute('src', loginUrl);
         iframe.style.display = 'none';
         document.body.appendChild(iframe);
@@ -510,6 +564,7 @@ class Oauth2Auth extends AlfrescoApiClient {
             (data) => {
                 this.saveUsername(username);
                 this.setToken(data.access_token, data.refresh_token);
+                this.storeAccessToken(data.access_token, data.expires_in);
                 resolve(data);
             },
             (error) => {
@@ -640,9 +695,13 @@ class Oauth2Auth extends AlfrescoApiClient {
             '&id_token_hint=' +
             encodeURIComponent(id_token);
 
-        if (this.config.oauth2.implicitFlow && typeof window !== 'undefined') {
-            window.location.href = logoutUrl;
-        }
+        var returnPromise =  Promise.resolve().then(() => {
+            if (this.config.oauth2.implicitFlow && typeof window !== 'undefined') {
+                window.location.href = logoutUrl;
+            }
+        });
+
+        return returnPromise;
     }
 
     invalidateSession() {

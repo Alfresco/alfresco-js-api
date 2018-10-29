@@ -182,7 +182,7 @@ var opts = {
   'cascade': false // {Boolean} If true then the delete will be applied in cascade to sub-groups.
 };
 
-this.alfrescoJsApi.core.groupsApi.deleteGroup(siteId, opts).then(function() {
+this.alfrescoJsApi.core.groupsApi.deleteGroup(groupId, opts).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
