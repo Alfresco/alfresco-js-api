@@ -34,6 +34,7 @@ class AlfrescoApi {
      *        ticketEcm:     // Ticket if you already have a ECM ticket you can pass only the ticket and skip the login, in this case you don't need username and password
      *        ticketBpm:     // Ticket if you already have a BPM ticket you can pass only the ticket and skip the login, in this case you don't need username and password
      *        disableCsrf:   // To disable CSRF Token to be submitted. Only for Activiti call, by default is false.
+     *        withCredentials // To allow passing credentials to ECM, for SSO
      *        domainPrefix: // An optional prefix to append to ticket saved by the storage service.
      *    };
      */
@@ -62,6 +63,7 @@ class AlfrescoApi {
             ticketBpm: config.ticketBpm,
             accessToken: config.accessToken,
             disableCsrf: config.disableCsrf || false,
+            withCredentials: config.withCredentials || false,
             domainPrefix: config.domainPrefix || ''
         };
 
@@ -119,6 +121,10 @@ class AlfrescoApi {
         }
 
         this.emit('error', error);
+    }
+
+    changeWithCredentialsConfig(withCredentials) {
+        this.config.withCredentials = withCredentials;
     }
 
     changeCsrfConfig(disableCsrf) {

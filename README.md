@@ -241,6 +241,7 @@ contextRootBpm| (Optional value that define the context Root of the Activiti API
 provider| (Optional value default value is ECM. This parameter can accept as value ECM BPM or ALL to use the API and Login in the ECM, Activiti BPM or Both )|alfresco |
 ticket| (Optional only if you want login with the ticket see example below)| |
 disableCsrf| To disable CSRF Token to be submitted. Only for Activiti call.| false |
+withCredentials| (Optional configuration for SSO, requires CORS on ECM) |false
 
 ### Login with Username and Password BPM and ECM
 

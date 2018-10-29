@@ -210,6 +210,14 @@ class AlfrescoApiClient extends ApiClient {
         }
     }
 
+    isWithCredentials() {
+        if (this.config) {
+            return this.config.withCredentials;
+        } else {
+            return false;
+        }
+    }
+
     isNodeEnv() {
         return (typeof process !== 'undefined') && (process.release && process.release.name === 'node');
     }
@@ -272,6 +280,10 @@ class AlfrescoApiClient extends ApiClient {
 
         if (this.isBpmRequest() && this.isCsrfEnabled()) {
             this.setCsrfToken(request);
+        }
+
+        if (this.isWithCredentials()) {
+            request.withCredentials();
         }
 
         // add cookie for activiti

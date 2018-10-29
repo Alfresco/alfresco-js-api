@@ -61,4 +61,37 @@ describe('Basic configuration test', function () {
                 .equal(true);
         });
     });
+
+    describe('WithCredentials', function () {
+
+        it('should withCredentials true parameter should be reflected in the clients', function () {
+            var config = {
+                hostEcm: 'http://testServer.com:1616',
+                contextRoot: 'strangeContextRoot',
+                withCredentials: true
+            };
+
+            this.alfrescoJsApi = new AlfrescoApi(config);
+
+            expect(this.alfrescoJsApi.ecmClient.isWithCredentials())
+                .equal(true);
+            expect(this.alfrescoJsApi.bpmClient.isWithCredentials())
+                .equal(true);
+        });
+
+        it('should withCredentials false parameter should be reflected in the clients', function () {
+            var config = {
+                hostEcm: 'http://testServer.com:1616',
+                contextRoot: 'strangeContextRoot',
+                withCredentials: false
+            };
+
+            this.alfrescoJsApi = new AlfrescoApi(config);
+
+            expect(this.alfrescoJsApi.ecmClient.isWithCredentials())
+                .equal(false);
+            expect(this.alfrescoJsApi.bpmClient.isWithCredentials())
+                .equal(false);
+        });
+    });
 });
