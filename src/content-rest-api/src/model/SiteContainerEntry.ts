@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import {SiteContainer} from './SiteContainer';
+import { SiteContainer } from './SiteContainer';
 
 export class SiteContainerEntry {
     entry?: SiteContainer;

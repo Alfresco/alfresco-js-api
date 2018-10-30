@@ -18,5 +18,5 @@
 
 export class RequestPivot {
     key?: string;
-    pivots?: Array<RequestPivot>
+    pivots?: Array<RequestPivot>;
 }

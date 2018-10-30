@@ -21,4 +21,4 @@ import { Pagination } from './Pagination';
 export class  PersonNetworkPagingList {
 
     entries?: Array<PersonNetworkEntry>;
-    pagination?: Pagination;}
+    pagination?: Pagination; }

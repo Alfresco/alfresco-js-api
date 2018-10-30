@@ -47,7 +47,7 @@
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
-      if (processInstanceId == undefined || processInstanceId == null) {
+      if (processInstanceId === undefined || processInstanceId === null) {
         throw "Missing param 'processInstanceId' in getProcessInstanceContent";
       }
 
@@ -89,7 +89,7 @@
       var postBody = startRequest;
 
       // verify the required parameter 'startRequest' is set
-      if (startRequest == undefined || startRequest == null) {
+      if (startRequest === undefined || startRequest === null) {
         throw "Missing param 'startRequest' in startNewProcessInstance";
       }
 

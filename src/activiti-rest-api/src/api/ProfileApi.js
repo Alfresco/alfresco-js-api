@@ -47,7 +47,7 @@
       var postBody = changePasswordRepresentation;
 
       // verify the required parameter 'changePasswordRepresentation' is set
-      if (changePasswordRepresentation == undefined || changePasswordRepresentation == null) {
+      if (changePasswordRepresentation === undefined || changePasswordRepresentation === null) {
         throw "Missing param 'changePasswordRepresentation' in changePassword";
       }
 
@@ -169,7 +169,7 @@
       var postBody = userRepresentation;
 
       // verify the required parameter 'userRepresentation' is set
-      if (userRepresentation == undefined || userRepresentation == null) {
+      if (userRepresentation === undefined || userRepresentation === null) {
         throw "Missing param 'userRepresentation' in updateProfile";
       }
 
@@ -210,7 +210,7 @@
       var postBody = null;
 
       // verify the required parameter 'file' is set
-      if (file == undefined || file == null) {
+      if (file === undefined || file === null) {
         throw "Missing param 'file' in uploadProfilePicture";
       }
 

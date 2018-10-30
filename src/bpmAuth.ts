@@ -97,7 +97,7 @@ export class BpmAuth extends AlfrescoApiClient {
             this.callApi(
                 '/app/authentication', 'POST',
                 pathParams, queryParams, headerParams, formParams, postBody,
-                 contentTypes, accepts
+                contentTypes, accepts
             ).then(
                 (data) => {
                     this.saveUsername(username);
@@ -141,7 +141,7 @@ export class BpmAuth extends AlfrescoApiClient {
             this.callApi(
                 '/app/logout', 'GET',
                 pathParams, queryParams, headerParams, formParams, postBody,
-                 contentTypes, accepts
+                contentTypes, accepts
             ).then(
                 () => {
                     promise.emit('logout');

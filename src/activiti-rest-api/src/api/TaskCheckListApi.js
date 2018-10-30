@@ -48,12 +48,12 @@
       var postBody = taskRepresentation;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in addSubtask";
       }
 
       // verify the required parameter 'taskRepresentation' is set
-      if (taskRepresentation == undefined || taskRepresentation == null) {
+      if (taskRepresentation === undefined || taskRepresentation === null) {
         throw "Missing param 'taskRepresentation' in addSubtask";
       }
 
@@ -95,7 +95,7 @@
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in getChecklist";
       }
 
@@ -138,12 +138,12 @@
       var postBody = orderRepresentation;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in orderChecklist";
       }
 
       // verify the required parameter 'orderRepresentation' is set
-      if (orderRepresentation == undefined || orderRepresentation == null) {
+      if (orderRepresentation === undefined || orderRepresentation === null) {
         throw "Missing param 'orderRepresentation' in orderChecklist";
       }
 

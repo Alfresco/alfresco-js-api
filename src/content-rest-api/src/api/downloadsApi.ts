@@ -54,7 +54,7 @@ export class DownloadsApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'downloadId' is set
-        if (downloadId == undefined || downloadId == null) {
+        if (downloadId === undefined || downloadId === null) {
             throw new Error("Missing param 'downloadId' in cancelDownload");
         }
 
@@ -72,9 +72,9 @@ export class DownloadsApi extends BaseApi {
         let returnType = null;
 
         return this.apiClient.callApi(
-            this.path+'/{downloadId}', 'DELETE',
+            this.path + '/{downloadId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType, callback
+            contentTypes, accepts, returnType, callback
         );
     }
 
@@ -100,7 +100,7 @@ export class DownloadsApi extends BaseApi {
         let postBody = downloadBodyCreate;
 
         // verify the required parameter 'downloadBodyCreate' is set
-        if (downloadBodyCreate == undefined || downloadBodyCreate == null) {
+        if (downloadBodyCreate === undefined || downloadBodyCreate === null) {
             throw new Error("Missing param 'downloadBodyCreate' in createDownload");
         }
 
@@ -119,7 +119,7 @@ export class DownloadsApi extends BaseApi {
         return this.apiClient.callApi(
             this.path, 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, null, callback
+            contentTypes, accepts, null, callback
         );
     }
 
@@ -145,7 +145,7 @@ export class DownloadsApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'downloadId' is set
-        if (downloadId == undefined || downloadId == null) {
+        if (downloadId === undefined || downloadId === null) {
             throw new Error("Missing param 'downloadId' in getDownload");
         }
 
@@ -164,9 +164,9 @@ export class DownloadsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{downloadId}', 'GET',
+            this.path + '/{downloadId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, null, callback
+            contentTypes, accepts, null, callback
         );
     }
 }

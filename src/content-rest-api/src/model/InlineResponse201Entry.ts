@@ -16,5 +16,5 @@
 */
 
 export class InlineResponse201Entry {
-    id:string;
+    id: string;
 }

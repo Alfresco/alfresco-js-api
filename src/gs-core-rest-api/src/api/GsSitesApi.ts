@@ -77,9 +77,9 @@ export class GsSitesApi {
         return this.apiClient.callApi(
             '/gs-sites', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Delete the Records Management (RM) site
@@ -103,9 +103,9 @@ export class GsSitesApi {
         return this.apiClient.callApi(
             '/gs-sites/rm', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Get the Records Management (RM) site
@@ -134,9 +134,9 @@ export class GsSitesApi {
         return this.apiClient.callApi(
             '/gs-sites/rm', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Update the Records Management (RM) site
@@ -171,8 +171,8 @@ export class GsSitesApi {
         return this.apiClient.callApi(
             '/gs-sites/rm', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
 }

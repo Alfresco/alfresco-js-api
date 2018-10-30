@@ -84,7 +84,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
             this.host = this.config.oauth2.host;
 
-            this.initOauth();// jshint ignore:line
+            this.initOauth(); // jshint ignore:line
 
         }
 
@@ -121,7 +121,6 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
             if (!this.discovery) {
                 let postBody = {}, pathParams = {}, queryParams = {}, formParams = {}, headerParams = {};
-                let authNames = [];
                 let contentTypes = ['application/json'];
                 let accepts = ['application/json'];
 
@@ -129,7 +128,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
                 this.callApi(
                     url, 'GET',
                     pathParams, queryParams, headerParams, formParams, postBody,
-                     contentTypes, accepts, {}
+                    contentTypes, accepts, {}
                 ).then((discovery) => {
                     this.discovery = {};
                     this.discovery.loginUrl = discovery.authorization_endpoint;
@@ -144,7 +143,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
                     this.emit('discovery', this.discovery);
                     this.storage.setItem('discovery', JSON.stringify(this.discovery));
                     resolve(discovery);
-                }, (error) => {
+                },     (error) => {
                     reject(error.error);
                 });
             } else {
@@ -165,20 +164,19 @@ export class Oauth2Auth extends AlfrescoApiClient {
             if (this.discovery.jwksUri) {
                 if (!this.jwks) {
                     let postBody = {}, pathParams = {}, queryParams = {}, formParams = {}, headerParams = {};
-                    let authNames = [];
                     let contentTypes = ['application/json'];
                     let accepts = ['application/json'];
 
                     this.callCustomApi(
                         this.discovery.jwksUri, 'GET',
                         pathParams, queryParams, headerParams, formParams, postBody,
-                         contentTypes, accepts, {}
+                        contentTypes, accepts, {}
                     ).then((jwks) => {
                         this.jwks = jwks;
                         this.emit('jwks', jwks);
                         this.storage.setItem('jwks', JSON.stringify(jwks));
                         resolve(jwks);
-                    }, (error) => {
+                    },     (error) => {
                         reject(error.error);
                     });
                 } else {
@@ -222,7 +220,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
                         this.silentRefresh();
                         resolve(accessToken);
                     }
-                }, (error) => {
+                },                                 (error) => {
                     reject('Validation JWT error' + error);
                 });
             } else {
@@ -506,7 +504,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         setTimeout(() => {
             this.destroyIframe();
             this.createIframe();
-        }, this.config.oauth2.refreshTokenTimeout);
+        },         this.config.oauth2.refreshTokenTimeout);
     }
 
     removeHashFromSilentIframe() {
@@ -580,14 +578,13 @@ export class Oauth2Auth extends AlfrescoApiClient {
             client_id: this.config.oauth2.clientId
         };
 
-        let authNames = [];
         let contentTypes = ['application/x-www-form-urlencoded'];
         let accepts = ['application/json'];
 
         let promise = this.callCustomApi(
             this.discovery.tokenEndpoint, 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, {}
+            contentTypes, accepts, {}
         ).then(
             (data: any) => {
                 this.saveUsername(username);
@@ -625,7 +622,6 @@ export class Oauth2Auth extends AlfrescoApiClient {
             grant_type: 'refresh_token'
         };
 
-        let authNames = [];
         let contentTypes = ['application/x-www-form-urlencoded'];
         let accepts = ['application/json'];
 
@@ -633,7 +629,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
             this.callCustomApi(
                 this.discovery.tokenEndpoint, 'POST',
                 pathParams, queryParams, headerParams, formParams, postBody,
-                 contentTypes, accepts, {}
+                contentTypes, accepts, {}
             ).then(
                 (data: any) => {
                     this.setToken(data.access_token, data.refresh_token);

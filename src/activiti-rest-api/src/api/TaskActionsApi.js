@@ -48,12 +48,12 @@
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in assignTask";
       }
 
       // verify the required parameter 'requestNode' is set
-      if (requestNode == undefined || requestNode == null) {
+      if (requestNode === undefined || requestNode === null) {
         throw "Missing param 'requestNode' in assignTask";
       }
 
@@ -96,12 +96,12 @@
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in attachForm";
       }
 
       // verify the required parameter 'requestNode' is set
-      if (requestNode == undefined || requestNode == null) {
+      if (requestNode === undefined || requestNode === null) {
         throw "Missing param 'requestNode' in attachForm";
       }
 
@@ -144,7 +144,7 @@
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in claimTask";
       }
 
@@ -187,7 +187,7 @@
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in completeTask";
       }
 
@@ -230,12 +230,12 @@
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in involveUser";
       }
 
       // verify the required parameter 'requestNode' is set
-      if (requestNode == undefined || requestNode == null) {
+      if (requestNode === undefined || requestNode === null) {
         throw "Missing param 'requestNode' in involveUser";
       }
 
@@ -277,7 +277,7 @@
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in removeForm";
       }
 
@@ -320,12 +320,12 @@
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in removeInvolvedUser";
       }
 
       // verify the required parameter 'requestNode' is set
-      if (requestNode == undefined || requestNode == null) {
+      if (requestNode === undefined || requestNode === null) {
         throw "Missing param 'requestNode' in removeInvolvedUser";
       }
 
@@ -368,7 +368,7 @@
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in unclaimTask";
       }
 

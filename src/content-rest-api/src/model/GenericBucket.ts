@@ -25,4 +25,4 @@ export class GenericBucket {
     display?: any;
     metrics?: GenericMetric[];
     facets?: any[];
-    bucketInfo?: GenericBucketBucketInfo;}
+    bucketInfo?: GenericBucketBucketInfo; }

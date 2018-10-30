@@ -75,9 +75,9 @@ export class ClassificationGuidesApi {
         return this.apiClient.callApi(
             '/combined-instructions', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Create a classification guide
@@ -107,9 +107,9 @@ export class ClassificationGuidesApi {
         return this.apiClient.callApi(
             '/classification-guides', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Create a subtopic
@@ -152,9 +152,9 @@ export class ClassificationGuidesApi {
         return this.apiClient.callApi(
             '/topics/{topicId}/subtopics', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Create a topic
@@ -197,9 +197,9 @@ export class ClassificationGuidesApi {
         return this.apiClient.callApi(
             '/classification-guides/{classificationGuideId}/topics', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
 
     /**
@@ -232,9 +232,9 @@ export class ClassificationGuidesApi {
         return this.apiClient.callApi(
             '/classification-guides/{classificationGuideId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Delete a topic
@@ -266,9 +266,9 @@ export class ClassificationGuidesApi {
         return this.apiClient.callApi(
             '/topics/{topicId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
 
     /**
@@ -306,9 +306,9 @@ export class ClassificationGuidesApi {
         return this.apiClient.callApi(
             '/classification-guides', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * List all subtopics
@@ -355,9 +355,9 @@ export class ClassificationGuidesApi {
         return this.apiClient.callApi(
             '/topics/{topicId}/subtopics', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * List all topics
@@ -404,9 +404,9 @@ export class ClassificationGuidesApi {
         return this.apiClient.callApi(
             '/classification-guides/{classificationGuideId}/topics', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Get classification guide information
@@ -438,9 +438,9 @@ export class ClassificationGuidesApi {
         return this.apiClient.callApi(
             '/classification-guides/{classificationGuideId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Get topic information
@@ -477,9 +477,9 @@ export class ClassificationGuidesApi {
         return this.apiClient.callApi(
             '/topics/{topicId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
 
     /**
@@ -518,9 +518,9 @@ export class ClassificationGuidesApi {
         return this.apiClient.callApi(
             '/classification-guides/{classificationGuideId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Update a topic
@@ -563,8 +563,8 @@ export class ClassificationGuidesApi {
         return this.apiClient.callApi(
             '/topics/{topicId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
 }

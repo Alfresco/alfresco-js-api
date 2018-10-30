@@ -48,7 +48,7 @@
       var postBody = null;
 
       // verify the required parameter 'code' is set
-      if (code == undefined || code == null) {
+      if (code === undefined || code === null) {
         throw "Missing param 'code' in confirmAuthorisation";
       }
 
@@ -91,12 +91,12 @@
       var postBody = credentials;
 
       // verify the required parameter 'userId' is set
-      if (userId == undefined || userId == null) {
+      if (userId === undefined || userId === null) {
         throw "Missing param 'userId' in createRepositoryAccount";
       }
 
       // verify the required parameter 'credentials' is set
-      if (credentials == undefined || credentials == null) {
+      if (credentials === undefined || credentials === null) {
         throw "Missing param 'credentials' in createRepositoryAccount";
       }
 
@@ -138,7 +138,7 @@
       var postBody = null;
 
       // verify the required parameter 'userId' is set
-      if (userId == undefined || userId == null) {
+      if (userId === undefined || userId === null) {
         throw "Missing param 'userId' in deleteRepositoryAccount";
       }
 
@@ -256,7 +256,7 @@
       var postBody = null;
 
       // verify the required parameter 'userId' is set
-      if (userId == undefined || userId == null) {
+      if (userId === undefined || userId === null) {
         throw "Missing param 'userId' in getRepositoryAccount";
       }
 
@@ -299,12 +299,12 @@
       var postBody = credentials;
 
       // verify the required parameter 'userId' is set
-      if (userId == undefined || userId == null) {
+      if (userId === undefined || userId === null) {
         throw "Missing param 'userId' in updateRepositoryAccount";
       }
 
       // verify the required parameter 'credentials' is set
-      if (credentials == undefined || credentials == null) {
+      if (credentials === undefined || credentials === null) {
         throw "Missing param 'credentials' in updateRepositoryAccount";
       }
 

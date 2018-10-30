@@ -47,7 +47,7 @@
       var postBody = createRepresentation;
 
       // verify the required parameter 'createRepresentation' is set
-      if (createRepresentation == undefined || createRepresentation == null) {
+      if (createRepresentation === undefined || createRepresentation === null) {
         throw "Missing param 'createRepresentation' in createBasicAuthConfiguration";
       }
 
@@ -88,7 +88,7 @@
       var postBody = representation;
 
       // verify the required parameter 'representation' is set
-      if (representation == undefined || representation == null) {
+      if (representation === undefined || representation === null) {
         throw "Missing param 'representation' in createEndpointConfiguration";
       }
 
@@ -130,12 +130,12 @@
       var postBody = null;
 
       // verify the required parameter 'basicAuthId' is set
-      if (basicAuthId == undefined || basicAuthId == null) {
+      if (basicAuthId === undefined || basicAuthId === null) {
         throw "Missing param 'basicAuthId' in getBasicAuthConfiguration";
       }
 
       // verify the required parameter 'tenantId' is set
-      if (tenantId == undefined || tenantId == null) {
+      if (tenantId === undefined || tenantId === null) {
         throw "Missing param 'tenantId' in getBasicAuthConfiguration";
       }
 
@@ -178,7 +178,7 @@
       var postBody = null;
 
       // verify the required parameter 'tenantId' is set
-      if (tenantId == undefined || tenantId == null) {
+      if (tenantId === undefined || tenantId === null) {
         throw "Missing param 'tenantId' in getBasicAuthConfigurations";
       }
 
@@ -221,12 +221,12 @@
       var postBody = null;
 
       // verify the required parameter 'endpointConfigurationId' is set
-      if (endpointConfigurationId == undefined || endpointConfigurationId == null) {
+      if (endpointConfigurationId === undefined || endpointConfigurationId === null) {
         throw "Missing param 'endpointConfigurationId' in getEndpointConfiguration";
       }
 
       // verify the required parameter 'tenantId' is set
-      if (tenantId == undefined || tenantId == null) {
+      if (tenantId === undefined || tenantId === null) {
         throw "Missing param 'tenantId' in getEndpointConfiguration";
       }
 
@@ -269,7 +269,7 @@
       var postBody = null;
 
       // verify the required parameter 'tenantId' is set
-      if (tenantId == undefined || tenantId == null) {
+      if (tenantId === undefined || tenantId === null) {
         throw "Missing param 'tenantId' in getEndpointConfigurations";
       }
 
@@ -312,12 +312,12 @@
       var postBody = null;
 
       // verify the required parameter 'basicAuthId' is set
-      if (basicAuthId == undefined || basicAuthId == null) {
+      if (basicAuthId === undefined || basicAuthId === null) {
         throw "Missing param 'basicAuthId' in removeBasicAuthonfiguration";
       }
 
       // verify the required parameter 'tenantId' is set
-      if (tenantId == undefined || tenantId == null) {
+      if (tenantId === undefined || tenantId === null) {
         throw "Missing param 'tenantId' in removeBasicAuthonfiguration";
       }
 
@@ -361,12 +361,12 @@
       var postBody = null;
 
       // verify the required parameter 'endpointConfigurationId' is set
-      if (endpointConfigurationId == undefined || endpointConfigurationId == null) {
+      if (endpointConfigurationId === undefined || endpointConfigurationId === null) {
         throw "Missing param 'endpointConfigurationId' in removeEndpointConfiguration";
       }
 
       // verify the required parameter 'tenantId' is set
-      if (tenantId == undefined || tenantId == null) {
+      if (tenantId === undefined || tenantId === null) {
         throw "Missing param 'tenantId' in removeEndpointConfiguration";
       }
 
@@ -410,12 +410,12 @@
       var postBody = createRepresentation;
 
       // verify the required parameter 'basicAuthId' is set
-      if (basicAuthId == undefined || basicAuthId == null) {
+      if (basicAuthId === undefined || basicAuthId === null) {
         throw "Missing param 'basicAuthId' in updateBasicAuthConfiguration";
       }
 
       // verify the required parameter 'createRepresentation' is set
-      if (createRepresentation == undefined || createRepresentation == null) {
+      if (createRepresentation === undefined || createRepresentation === null) {
         throw "Missing param 'createRepresentation' in updateBasicAuthConfiguration";
       }
 
@@ -458,12 +458,12 @@
       var postBody = representation;
 
       // verify the required parameter 'endpointConfigurationId' is set
-      if (endpointConfigurationId == undefined || endpointConfigurationId == null) {
+      if (endpointConfigurationId === undefined || endpointConfigurationId === null) {
         throw "Missing param 'endpointConfigurationId' in updateEndpointConfiguration";
       }
 
       // verify the required parameter 'representation' is set
-      if (representation == undefined || representation == null) {
+      if (representation === undefined || representation === null) {
         throw "Missing param 'representation' in updateEndpointConfiguration";
       }
 

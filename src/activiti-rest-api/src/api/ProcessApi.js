@@ -47,7 +47,7 @@
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
-      if (processInstanceId == undefined || processInstanceId == null) {
+      if (processInstanceId === undefined || processInstanceId === null) {
         throw "Missing param 'processInstanceId' in deleteProcessInstance";
       }
 
@@ -89,7 +89,7 @@
       var postBody = filterRequest;
 
       // verify the required parameter 'filterRequest' is set
-      if (filterRequest == undefined || filterRequest == null) {
+      if (filterRequest === undefined || filterRequest === null) {
         throw "Missing param 'filterRequest' in filterProcessInstances";
       }
 
@@ -130,7 +130,7 @@
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
-      if (processDefinitionId == undefined || processDefinitionId == null) {
+      if (processDefinitionId === undefined || processDefinitionId === null) {
         throw "Missing param 'processDefinitionId' in getProcessInstanceContent";
       }
 
@@ -215,7 +215,7 @@
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
-      if (processInstanceId == undefined || processInstanceId == null) {
+      if (processInstanceId === undefined || processInstanceId === null) {
         throw "Missing param 'processInstanceId' in getProcessInstanceContent";
       }
 
@@ -258,7 +258,7 @@
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
-      if (processInstanceId == undefined || processInstanceId == null) {
+      if (processInstanceId === undefined || processInstanceId === null) {
         throw "Missing param 'processInstanceId' in getProcessInstanceStartForm";
       }
 
@@ -300,7 +300,7 @@
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
-      if (processInstanceId == undefined || processInstanceId == null) {
+      if (processInstanceId === undefined || processInstanceId === null) {
         throw "Missing param 'processInstanceId' in getProcessInstance";
       }
 
@@ -342,7 +342,7 @@
       var postBody = requestNode;
 
       // verify the required parameter 'requestNode' is set
-      if (requestNode == undefined || requestNode == null) {
+      if (requestNode === undefined || requestNode === null) {
         throw "Missing param 'requestNode' in getProcessInstances";
       }
 
@@ -376,7 +376,7 @@
       var postBody = null;
 
       // verify the required parameter 'processId' is set
-      if (processId == undefined || processId == null) {
+      if (processId === undefined || processId === null) {
         throw "Missing param 'processId' in getProcessAuditJson";
       }
 
@@ -410,7 +410,7 @@
       var postBody = null;
 
       // verify the required parameter 'processId' is set
-      if (processId == undefined || processId == null) {
+      if (processId === undefined || processId === null) {
         throw "Missing param 'processId' in getProcessAuditPdf";
       }
 
@@ -533,7 +533,7 @@
       var postBody = startRequest;
 
       // verify the required parameter 'startRequest' is set
-      if (startRequest == undefined || startRequest == null) {
+      if (startRequest === undefined || startRequest === null) {
         throw "Missing param 'startRequest' in startNewProcessInstance";
       }
 

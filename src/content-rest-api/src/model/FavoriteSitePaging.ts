@@ -19,6 +19,6 @@
 import { FavoriteSitePagingList } from './FavoriteSitePagingList';
 
 export class FavoriteSitePaging {
-    list?: FavoriteSitePagingList
+    list?: FavoriteSitePagingList;
 
 }

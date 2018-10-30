@@ -53,12 +53,12 @@ export class CommentsApi extends BaseApi {
         let postBody = commentBody;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in addComment";
         }
 
         // verify the required parameter 'commentBody' is set
-        if (commentBody == undefined || commentBody == null) {
+        if (commentBody === undefined || commentBody === null) {
             throw "Missing param 'commentBody' in addComment";
         }
 
@@ -77,9 +77,9 @@ export class CommentsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{nodeId}/comments', 'POST',
+            this.path + '/{nodeId}/comments', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -99,7 +99,7 @@ export class CommentsApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in getComments";
         }
 
@@ -120,9 +120,9 @@ export class CommentsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{nodeId}/comments', 'GET',
+            this.path + '/{nodeId}/comments', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -137,12 +137,12 @@ export class CommentsApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in removeComment";
         }
 
         // verify the required parameter 'commentId' is set
-        if (commentId == undefined || commentId == null) {
+        if (commentId === undefined || commentId === null) {
             throw "Missing param 'commentId' in removeComment";
         }
 
@@ -161,9 +161,9 @@ export class CommentsApi extends BaseApi {
         let returnType = null;
 
         return this.apiClient.callApi(
-            this.path+'/{nodeId}/comments/{commentId}', 'DELETE',
+            this.path + '/{nodeId}/comments/{commentId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -183,17 +183,17 @@ export class CommentsApi extends BaseApi {
         let postBody = commentBody;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in updateComment";
         }
 
         // verify the required parameter 'commentId' is set
-        if (commentId == undefined || commentId == null) {
+        if (commentId === undefined || commentId === null) {
             throw "Missing param 'commentId' in updateComment";
         }
 
         // verify the required parameter 'commentBody' is set
-        if (commentBody == undefined || commentBody == null) {
+        if (commentBody === undefined || commentBody === null) {
             throw "Missing param 'commentBody' in updateComment";
         }
 
@@ -213,9 +213,9 @@ export class CommentsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{nodeId}/comments/{commentId}', 'PUT',
+            this.path + '/{nodeId}/comments/{commentId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 }

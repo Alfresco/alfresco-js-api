@@ -61,11 +61,11 @@
     this.getTasksByProcessDefinitionId = function(reportId, processDefinitionId) {
       var postBody = null;
 
-      if (reportId == undefined || reportId == null) {
+      if (reportId === undefined || reportId === null) {
         throw "Missing param 'reportId' in getTasksByProcessDefinitionId";
       }
 
-      if (processDefinitionId == undefined || processDefinitionId == null) {
+      if (processDefinitionId === undefined || processDefinitionId === null) {
         throw "Missing param 'processDefinitionId' in getTasksByProcessDefinitionId";
       }
 
@@ -95,7 +95,7 @@
     this.getReportsByParams = function(reportId, paramsQuery) {
       var postBody = paramsQuery;
 
-      if (reportId == undefined || reportId == null) {
+      if (reportId === undefined || reportId === null) {
         throw "Missing param 'reportId' in getReportsByParams";
       }
 
@@ -148,7 +148,7 @@
     this.getReportParams = function(reportId) {
       var postBody = null;
 
-      if (reportId == undefined || reportId == null) {
+      if (reportId === undefined || reportId === null) {
         throw "Missing param 'reportId' in getReportParams";
       }
 
@@ -203,7 +203,7 @@
           "name" : name
       };
 
-      if (reportId == undefined || reportId == null) {
+      if (reportId === undefined || reportId === null) {
         throw "Missing param 'reportId' in updateReport";
       }
 
@@ -241,15 +241,15 @@
     this.exportToCsv = function(reportId, queryParams) {
       var postBody = queryParams;
 
-      if (reportId == undefined || reportId == null) {
+      if (reportId === undefined || reportId === null) {
         throw "Missing param 'reportId' in exportToCsv";
       }
 
-      if (queryParams == undefined || queryParams == null) {
+      if (queryParams === undefined || queryParams === null) {
         throw "Missing param 'queryParams' in exportToCsv";
       }
 
-      if (queryParams.reportName == undefined || queryParams.reportName == null) {
+      if (queryParams.reportName === undefined || queryParams.reportName === null) {
         throw "Missing param 'reportName' in exportToCsv";
       }
 
@@ -289,15 +289,15 @@
     this.saveReport = function(reportId, queryParams) {
       var postBody = queryParams;
 
-      if (reportId == undefined || reportId == null) {
+      if (reportId === undefined || reportId === null) {
         throw "Missing param 'reportId' in saveReport";
       }
 
-      if (queryParams == undefined || queryParams == null) {
+      if (queryParams === undefined || queryParams === null) {
         throw "Missing param 'queryParams' in queryParams";
       }
 
-      if (queryParams.reportName == undefined || queryParams.reportName == null) {
+      if (queryParams.reportName === undefined || queryParams.reportName === null) {
         throw "Missing param 'reportName' in exportToCsv";
       }
 
@@ -335,7 +335,7 @@
     this.deleteReport = function(reportId) {
       var postBody = null;
 
-      if (reportId == undefined || reportId == null) {
+      if (reportId === undefined || reportId === null) {
         throw "Missing param 'reportId' in delete";
       }
 

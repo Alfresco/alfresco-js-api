@@ -50,7 +50,7 @@
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
-      if (modelId == undefined || modelId == null) {
+      if (modelId === undefined || modelId === null) {
         throw "Missing param 'modelId' in getModelHistoryCollection";
       }
 
@@ -94,12 +94,12 @@
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
-      if (modelId == undefined || modelId == null) {
+      if (modelId === undefined || modelId === null) {
         throw "Missing param 'modelId' in getProcessModelHistory";
       }
 
       // verify the required parameter 'modelHistoryId' is set
-      if (modelHistoryId == undefined || modelHistoryId == null) {
+      if (modelHistoryId === undefined || modelHistoryId === null) {
         throw "Missing param 'modelHistoryId' in getProcessModelHistory";
       }
 

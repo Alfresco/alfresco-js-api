@@ -82,9 +82,9 @@ export class RecordsApi {
         return this.apiClient.callApi(
             '/records/{recordId}/complete', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Delete a record
@@ -116,9 +116,9 @@ export class RecordsApi {
         return this.apiClient.callApi(
             '/records/{recordId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * File a record
@@ -163,9 +163,9 @@ export class RecordsApi {
         return this.apiClient.callApi(
             '/records/{recordId}/file', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Get a record
@@ -204,9 +204,9 @@ export class RecordsApi {
         return this.apiClient.callApi(
             '/records/{recordId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Get record content
@@ -246,9 +246,9 @@ export class RecordsApi {
         return this.apiClient.callApi(
             '/records/{recordId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Update record
@@ -293,8 +293,8 @@ export class RecordsApi {
         return this.apiClient.callApi(
             '/records/{recordId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
 }

@@ -48,12 +48,12 @@
       var postBody = null;
 
       // verify the required parameter 'formId' is set
-      if (formId == undefined || formId == null) {
+      if (formId === undefined || formId === null) {
         throw "Missing param 'formId' in getFormHistory";
       }
 
       // verify the required parameter 'formHistoryId' is set
-      if (formHistoryId == undefined || formHistoryId == null) {
+      if (formHistoryId === undefined || formHistoryId === null) {
         throw "Missing param 'formHistoryId' in getFormHistory";
       }
 
@@ -96,7 +96,7 @@
       var postBody = null;
 
       // verify the required parameter 'formId' is set
-      if (formId == undefined || formId == null) {
+      if (formId === undefined || formId === null) {
         throw "Missing param 'formId' in getForm";
       }
 
@@ -175,12 +175,12 @@
       var postBody = saveRepresentation;
 
       // verify the required parameter 'formId' is set
-      if (formId == undefined || formId == null) {
+      if (formId === undefined || formId === null) {
         throw "Missing param 'formId' in saveForm";
       }
 
       // verify the required parameter 'saveRepresentation' is set
-      if (saveRepresentation == undefined || saveRepresentation == null) {
+      if (saveRepresentation === undefined || saveRepresentation === null) {
         throw "Missing param 'saveRepresentation' in saveForm";
       }
 
@@ -223,12 +223,12 @@
       var postBody = saveRepresentation;
 
       // verify the required parameter 'formId' is set
-      if (formId == undefined || formId == null) {
+      if (formId === undefined || formId === null) {
         throw "Missing param 'formId' in validateModel";
       }
 
       // verify the required parameter 'saveRepresentation' is set
-      if (saveRepresentation == undefined || saveRepresentation == null) {
+      if (saveRepresentation === undefined || saveRepresentation === null) {
         throw "Missing param 'saveRepresentation' in validateModel";
       }
 

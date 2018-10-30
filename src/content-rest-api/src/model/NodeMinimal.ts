@@ -31,7 +31,7 @@ export class NodeMinimal {
     modifiedByUse: UserInfo;
     createdAt: Date;
     createdByUser: UserInfo;
-    content: ContentInfo
-    path: PathElement
+    content: ContentInfo;
+    path: PathElement;
 
 }

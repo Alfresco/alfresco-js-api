@@ -78,9 +78,9 @@ export class TransfersApi {
         return this.apiClient.callApi(
             '/transfers/{transferId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * List transfer&#39;s children
@@ -125,8 +125,8 @@ export class TransfersApi {
         return this.apiClient.callApi(
             '/transfers/{transferId}/children', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
 }

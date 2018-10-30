@@ -56,7 +56,7 @@ export class QueriesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'term' is set
-        if (term == undefined || term == null) {
+        if (term === undefined || term === null) {
             throw "Missing param 'term' in findNodes";
         }
 
@@ -82,7 +82,7 @@ export class QueriesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/nodes', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -103,7 +103,7 @@ export class QueriesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'term' is set
-        if (term == undefined || term == null) {
+        if (term === undefined || term === null) {
             throw new Error("Missing param 'term' in findPeople");
         }
 
@@ -126,7 +126,7 @@ export class QueriesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/people', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -147,7 +147,7 @@ export class QueriesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'term' is set
-        if (term == undefined || term == null) {
+        if (term === undefined || term === null) {
             throw new Error("Missing param 'term' in findSites");
         }
 
@@ -170,7 +170,7 @@ export class QueriesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/sites', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 }

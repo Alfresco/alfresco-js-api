@@ -1,0 +1,18 @@
+{{>licenseInfo}}
+
+import { AlfrescoApi } from '../../../alfrescoApi';
+import { AlfrescoApiClient } from '../../../alfrescoApiClient';
+import { BaseApi } from './baseApi';
+
+export class BaseApi {
+
+apiClient: AlfrescoApiClient;
+
+    constructor(alfrescoApi?: AlfrescoApi) {
+        this.apiClient = alfrescoApi.ecmClient;
+    }
+
+    errorMessage(param, methodName) {
+        return `Missing param ${param} in ${methodName}`;
+    }
+}

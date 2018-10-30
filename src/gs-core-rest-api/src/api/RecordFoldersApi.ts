@@ -88,9 +88,9 @@ export class RecordFoldersApi {
         return this.apiClient.callApi(
             '/record-folders/{recordFolderId}/records', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Delete a record folder
@@ -122,9 +122,9 @@ export class RecordFoldersApi {
         return this.apiClient.callApi(
             '/record-folders/{recordFolderId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Get a record folder
@@ -163,9 +163,9 @@ export class RecordFoldersApi {
         return this.apiClient.callApi(
             '/record-folders/{recordFolderId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * List records
@@ -212,9 +212,9 @@ export class RecordFoldersApi {
         return this.apiClient.callApi(
             '/record-folders/{recordFolderId}/records', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Update a record folder
@@ -259,8 +259,8 @@ export class RecordFoldersApi {
         return this.apiClient.callApi(
             '/record-folders/{recordFolderId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
 }

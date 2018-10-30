@@ -48,7 +48,7 @@
       var postBody = null;
 
       // verify the required parameter 'repositoryId' is set
-      if (repositoryId == undefined || repositoryId == null) {
+      if (repositoryId === undefined || repositoryId === null) {
         throw "Missing param 'repositoryId' in getAllSites";
       }
 
@@ -91,12 +91,12 @@
       var postBody = null;
 
       // verify the required parameter 'repositoryId' is set
-      if (repositoryId == undefined || repositoryId == null) {
+      if (repositoryId === undefined || repositoryId === null) {
         throw "Missing param 'repositoryId' in getContentInFolder";
       }
 
       // verify the required parameter 'folderId' is set
-      if (folderId == undefined || folderId == null) {
+      if (folderId === undefined || folderId === null) {
         throw "Missing param 'folderId' in getContentInFolder";
       }
 
@@ -140,12 +140,12 @@
       var postBody = null;
 
       // verify the required parameter 'repositoryId' is set
-      if (repositoryId == undefined || repositoryId == null) {
+      if (repositoryId === undefined || repositoryId === null) {
         throw "Missing param 'repositoryId' in getContentInSite";
       }
 
       // verify the required parameter 'siteId' is set
-      if (siteId == undefined || siteId == null) {
+      if (siteId === undefined || siteId === null) {
         throw "Missing param 'siteId' in getContentInSite";
       }
 

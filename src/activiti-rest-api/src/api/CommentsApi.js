@@ -49,12 +49,12 @@
       var postBody = commentRequest;
 
       // verify the required parameter 'commentRequest' is set
-      if (commentRequest == undefined || commentRequest == null) {
+      if (commentRequest === undefined || commentRequest === null) {
         throw "Missing param 'commentRequest' in addProcessInstanceComment";
       }
 
       // verify the required parameter 'processInstanceId' is set
-      if (processInstanceId == undefined || processInstanceId == null) {
+      if (processInstanceId === undefined || processInstanceId === null) {
         throw "Missing param 'processInstanceId' in addProcessInstanceComment";
       }
 
@@ -98,12 +98,12 @@
       var postBody = commentRequest;
 
       // verify the required parameter 'commentRequest' is set
-      if (commentRequest == undefined || commentRequest == null) {
+      if (commentRequest === undefined || commentRequest === null) {
         throw "Missing param 'commentRequest' in addTaskComment";
       }
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in addTaskComment";
       }
 
@@ -149,7 +149,7 @@
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
-      if (processInstanceId == undefined || processInstanceId == null) {
+      if (processInstanceId === undefined || processInstanceId === null) {
         throw "Missing param 'processInstanceId' in getProcessInstanceComments";
       }
 
@@ -196,7 +196,7 @@
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in getTaskComments";
       }
 

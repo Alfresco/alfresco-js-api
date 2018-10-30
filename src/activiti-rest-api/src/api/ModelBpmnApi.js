@@ -48,12 +48,12 @@
       var postBody = null;
 
       // verify the required parameter 'processModelId' is set
-      if (processModelId == undefined || processModelId == null) {
+      if (processModelId === undefined || processModelId === null) {
         throw "Missing param 'processModelId' in getHistoricProcessModelBpmn20Xml";
       }
 
       // verify the required parameter 'processModelHistoryId' is set
-      if (processModelHistoryId == undefined || processModelHistoryId == null) {
+      if (processModelHistoryId === undefined || processModelHistoryId === null) {
         throw "Missing param 'processModelHistoryId' in getHistoricProcessModelBpmn20Xml";
       }
 
@@ -96,7 +96,7 @@
       var postBody = null;
 
       // verify the required parameter 'processModelId' is set
-      if (processModelId == undefined || processModelId == null) {
+      if (processModelId === undefined || processModelId === null) {
         throw "Missing param 'processModelId' in getProcessModelBpmn20Xml";
       }
 

@@ -54,7 +54,7 @@ export class ClassesApi extends BaseApi {
         opts = opts || {};
 
         // verify the required parameter 'className' is set
-        if (className == undefined || className == null) {
+        if (className === undefined || className === null) {
             throw "Missing param 'className' in getClass";
         }
 
@@ -74,7 +74,7 @@ export class ClassesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{className}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, null, contextRoot
+            contentTypes, accepts, null, contextRoot
         );
     }
 }

@@ -48,7 +48,7 @@
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
-      if (modelId == undefined || modelId == null) {
+      if (modelId === undefined || modelId === null) {
         throw "Missing param 'modelId' in exportAppDefinition";
       }
 
@@ -92,7 +92,7 @@
       var postBody = null;
 
       // verify the required parameter 'file' is set
-      if (file == undefined || file == null) {
+      if (file === undefined || file === null) {
         throw "Missing param 'file' in importAppDefinition";
       }
 
@@ -136,12 +136,12 @@
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
-      if (modelId == undefined || modelId == null) {
+      if (modelId === undefined || modelId === null) {
         throw "Missing param 'modelId' in importAppDefinition";
       }
 
       // verify the required parameter 'file' is set
-      if (file == undefined || file == null) {
+      if (file === undefined || file === null) {
         throw "Missing param 'file' in importAppDefinition";
       }
 
@@ -186,12 +186,12 @@
       var postBody = publishModel;
 
       // verify the required parameter 'modelId' is set
-      if (modelId == undefined || modelId == null) {
+      if (modelId === undefined || modelId === null) {
         throw "Missing param 'modelId' in publishAppDefinition";
       }
 
       // verify the required parameter 'publishModel' is set
-      if (publishModel == undefined || publishModel == null) {
+      if (publishModel === undefined || publishModel === null) {
         throw "Missing param 'publishModel' in publishAppDefinition";
       }
 

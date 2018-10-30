@@ -48,12 +48,12 @@ export class FavoritesApi extends BaseApi {
         let postBody = favoriteBody;
 
         // verify the required parameter 'personId' is set
-        if (personId == undefined || personId == null) {
+        if (personId === undefined || personId === null) {
             throw "Missing param 'personId' in addFavorite";
         }
 
         // verify the required parameter 'favoriteBody' is set
-        if (favoriteBody == undefined || favoriteBody == null) {
+        if (favoriteBody === undefined || favoriteBody === null) {
             throw "Missing param 'favoriteBody' in addFavorite";
         }
 
@@ -72,7 +72,7 @@ export class FavoritesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{personId}/favorites', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -91,12 +91,12 @@ export class FavoritesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'personId' is set
-        if (personId == undefined || personId == null) {
+        if (personId === undefined || personId === null) {
             throw "Missing param 'personId' in getFavorite";
         }
 
         // verify the required parameter 'favoriteId' is set
-        if (favoriteId == undefined || favoriteId == null) {
+        if (favoriteId === undefined || favoriteId === null) {
             throw "Missing param 'favoriteId' in getFavorite";
         }
 
@@ -118,7 +118,7 @@ export class FavoritesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{personId}/favorites/{favoriteId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -139,7 +139,7 @@ export class FavoritesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'personId' is set
-        if (personId == undefined || personId == null) {
+        if (personId === undefined || personId === null) {
             throw "Missing param 'personId' in getFavorites";
         }
 
@@ -164,7 +164,7 @@ export class FavoritesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{personId}/favorites', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -179,12 +179,12 @@ export class FavoritesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'personId' is set
-        if (personId == undefined || personId == null) {
+        if (personId === undefined || personId === null) {
             throw "Missing param 'personId' in removeFavoriteSite";
         }
 
         // verify the required parameter 'favoriteId' is set
-        if (favoriteId == undefined || favoriteId == null) {
+        if (favoriteId === undefined || favoriteId === null) {
             throw "Missing param 'favoriteId' in removeFavoriteSite";
         }
 
@@ -205,7 +205,7 @@ export class FavoritesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{personId}/favorites/{favoriteId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 }

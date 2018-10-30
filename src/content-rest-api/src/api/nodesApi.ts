@@ -63,12 +63,12 @@ export class NodesApi extends BaseApi {
         let postBody = nodeBody;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in addNode";
         }
 
         // verify the required parameter 'nodeBody' is set
-        if (nodeBody == undefined || nodeBody == null) {
+        if (nodeBody === undefined || nodeBody === null) {
             throw "Missing param 'nodeBody' in addNode";
         }
 
@@ -91,7 +91,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}/children', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -111,12 +111,12 @@ export class NodesApi extends BaseApi {
         let postBody = copyBody;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in copyNode";
         }
 
         // verify the required parameter 'copyBody' is set
-        if (copyBody == undefined || copyBody == null) {
+        if (copyBody === undefined || copyBody === null) {
             throw "Missing param 'copyBody' in copyNode";
         }
 
@@ -138,7 +138,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}/copy', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -155,7 +155,7 @@ export class NodesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in deleteNode";
         }
 
@@ -177,7 +177,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -195,7 +195,7 @@ export class NodesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in getDeletedNode";
         }
 
@@ -216,7 +216,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             '/deleted-nodes/{nodeId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -251,7 +251,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             '/deleted-nodes', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -269,7 +269,7 @@ export class NodesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in getFileContent";
         }
 
@@ -293,7 +293,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -313,7 +313,7 @@ export class NodesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in getNode";
         }
 
@@ -336,7 +336,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -354,7 +354,7 @@ export class NodesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw new Error("Missing param 'nodeId' in getNodeContent");
         }
 
@@ -378,7 +378,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -403,7 +403,7 @@ export class NodesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in getNodeChildren";
         }
 
@@ -431,7 +431,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}/children', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -453,7 +453,7 @@ export class NodesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw new Error("Missing param 'nodeId' in listParents");
         }
 
@@ -479,7 +479,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}/parents', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -502,7 +502,7 @@ export class NodesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw new Error("Missing param 'nodeId' in listSecondaryChildren");
         }
 
@@ -528,7 +528,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}/secondary-children', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -547,7 +547,7 @@ export class NodesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw new Error("Missing param 'nodeId' in listSourceAssociations");
         }
 
@@ -570,7 +570,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}/sources', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -590,7 +590,7 @@ export class NodesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw new Error("Missing param 'nodeId' in listTargetAssociations");
         }
 
@@ -613,7 +613,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}/targets', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -633,12 +633,12 @@ export class NodesApi extends BaseApi {
         let postBody = nodeBodyLock;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw new Error("Missing param 'nodeId' in lockNode");
         }
 
         // verify the required parameter 'nodeBodyLock' is set
-        if (nodeBodyLock == undefined || nodeBodyLock == null) {
+        if (nodeBodyLock === undefined || nodeBodyLock === null) {
             throw new Error("Missing param 'nodeBodyLock' in lockNode");
         }
 
@@ -660,7 +660,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}/lock', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -678,7 +678,7 @@ export class NodesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw new Error("Missing param 'nodeId' in unlockNode");
         }
 
@@ -700,7 +700,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}/unlock', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -719,12 +719,12 @@ export class NodesApi extends BaseApi {
         let postBody = moveBody;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in moveNode";
         }
 
         // verify the required parameter 'moveBody' is set
-        if (moveBody == undefined || moveBody == null) {
+        if (moveBody === undefined || moveBody === null) {
             throw "Missing param 'moveBody' in moveNode";
         }
 
@@ -746,7 +746,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}/move', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -760,7 +760,7 @@ export class NodesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in purgeDeletedNode";
         }
 
@@ -780,7 +780,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             '/deleted-nodes/{nodeId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -795,7 +795,7 @@ export class NodesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in restoreNode";
         }
 
@@ -814,7 +814,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             '/deleted-nodes/{nodeId}/restore', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -836,12 +836,12 @@ export class NodesApi extends BaseApi {
         let postBody = contentBody;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in updateFileContent";
         }
 
         // verify the required parameter 'contentBody' is set
-        if (contentBody == undefined || contentBody == null) {
+        if (contentBody === undefined || contentBody === null) {
             throw "Missing param 'contentBody' in updateFileContent";
         }
 
@@ -866,7 +866,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}/content', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -875,12 +875,12 @@ export class NodesApi extends BaseApi {
         let postBody = contentBody;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in updateNodeContent";
         }
 
         // verify the required parameter 'contentBody' is set
-        if (contentBody == undefined || contentBody == null) {
+        if (contentBody === undefined || contentBody === null) {
             throw "Missing param 'contentBody' in updateNodeContent";
         }
 
@@ -905,7 +905,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}/content', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -924,12 +924,12 @@ export class NodesApi extends BaseApi {
         let postBody = nodeBody;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in updateNode";
         }
 
         // verify the required parameter 'nodeBody' is set
-        if (nodeBody == undefined || nodeBody == null) {
+        if (nodeBody === undefined || nodeBody === null) {
             throw "Missing param 'nodeBody' in updateNode";
         }
 
@@ -951,7 +951,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
-};
+}

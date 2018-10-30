@@ -47,7 +47,7 @@
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
-      if (processInstanceId == undefined || processInstanceId == null) {
+      if (processInstanceId === undefined || processInstanceId === null) {
         throw "Missing param 'processInstanceId' in getProcessInstanceVariables";
       }
 
@@ -83,12 +83,12 @@
       var postBody = restVariables;
 
       // verify the required parameter 'processInstanceId' is set
-      if (processInstanceId == undefined || processInstanceId == null) {
+      if (processInstanceId === undefined || processInstanceId === null) {
         throw "Missing param 'processInstanceId' in createProcessInstanceVariables";
       }
 
       // verify the required parameter 'restVariables' is set
-      if (restVariables == undefined || restVariables == null) {
+      if (restVariables === undefined || restVariables === null) {
         throw "Missing param 'restVariables' in createProcessInstanceVariables";
       }
 
@@ -124,12 +124,12 @@
       var postBody = restVariables;
 
       // verify the required parameter 'processInstanceId' is set
-      if (processInstanceId == undefined || processInstanceId == null) {
+      if (processInstanceId === undefined || processInstanceId === null) {
         throw "Missing param 'processInstanceId' in createOrUpdateProcessInstanceVariables";
       }
 
       // verify the required parameter 'restVariables' is set
-      if (restVariables == undefined || restVariables == null) {
+      if (restVariables === undefined || restVariables === null) {
         throw "Missing param 'restVariables' in createOrUpdateProcessInstanceVariables";
       }
 
@@ -165,12 +165,12 @@
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
-      if (processInstanceId == undefined || processInstanceId == null) {
+      if (processInstanceId === undefined || processInstanceId === null) {
         throw "Missing param 'processInstanceId' in getProcessInstanceVariable";
       }
 
       // verify the required parameter 'variableName' is set
-      if (variableName == undefined || variableName == null) {
+      if (variableName === undefined || variableName === null) {
         throw "Missing param 'variableName' in getProcessInstanceVariable";
       }
 
@@ -208,12 +208,12 @@
       var postBody = restVariable;
 
       // verify the required parameter 'processInstanceId' is set
-      if (processInstanceId == undefined || processInstanceId == null) {
+      if (processInstanceId === undefined || processInstanceId === null) {
         throw "Missing param 'processInstanceId' in updateProcessInstanceVariable";
       }
 
       // verify the required parameter 'variableName' is set
-      if (variableName == undefined || variableName == null) {
+      if (variableName === undefined || variableName === null) {
         throw "Missing param 'variableName' in updateProcessInstanceVariable";
       }
 
@@ -250,12 +250,12 @@
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
-      if (processInstanceId == undefined || processInstanceId == null) {
+      if (processInstanceId === undefined || processInstanceId === null) {
         throw "Missing param 'processInstanceId' in deleteProcessInstanceVariable";
       }
 
       // verify the required parameter 'variableName' is set
-      if (variableName == undefined || variableName == null) {
+      if (variableName === undefined || variableName === null) {
         throw "Missing param 'variableName' in deleteProcessInstanceVariable";
       }
 

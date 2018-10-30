@@ -48,7 +48,7 @@
       var postBody = saveObject;
 
       // verify the required parameter 'saveObject' is set
-      if (saveObject == undefined || saveObject == null) {
+      if (saveObject === undefined || saveObject === null) {
         throw "Missing param 'saveObject' in deployAppDefinitions";
       }
 

@@ -21,4 +21,4 @@ import { RequestFacetInterval } from './RequestFacetInterval';
 export class RequestFacetIntervals {
 
     sets?: Array<RequestFacetSet>;
-    intervals?: Array<RequestFacetInterval>;}
+    intervals?: Array<RequestFacetInterval>; }

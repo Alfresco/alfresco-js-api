@@ -15,11 +15,11 @@
  * limitations under the License.
  */
 
-import Emitter = require('event-emitter');
+import * as  Emitter from 'event-emitter';
 import { Storage } from './storage';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 
-let superagent = require('superagent');
+import * as  superagent from 'superagent';
 
 export class AlfrescoApiClient {
 
@@ -67,7 +67,7 @@ export class AlfrescoApiClient {
      * @returns The string representation of <code>param</code>.
      */
     paramToString(param: any): string {
-        if (param == undefined || param == null) {
+        if (param === undefined || param === null) {
             return '';
         }
         if (param instanceof Date) {
@@ -113,7 +113,7 @@ export class AlfrescoApiClient {
      * @returns <code>true</code> if <code>contentType</code> represents JSON, otherwise <code>false</code>.
      */
     isJsonMime(contentType: string): boolean {
-        return Boolean(contentType != null && contentType.match(/^application\/json(;.*)?$/i));
+        return Boolean(contentType !== null && contentType.match(/^application\/json(;.*)?$/i));
     }
 
     /**
@@ -178,7 +178,7 @@ export class AlfrescoApiClient {
     normalizeParams(params) {
         let newParams = {};
         for (let key in params) {
-            if (params.hasOwnProperty(key) && params[key] != undefined && params[key] != null) {
+            if (params.hasOwnProperty(key) && params[key] !== undefined && params[key] !== null) {
                 let value = params[key];
                 if (this.isFileParam(value) || Array.isArray(value)) {
                     newParams[key] = value;
@@ -198,7 +198,7 @@ export class AlfrescoApiClient {
      * <code>param</code> as is if <code>collectionFormat</code> is <code>multi</code>.
      */
     buildCollectionParam(param, collectionFormat) {
-        if (param == null) {
+        if (param === null) {
             return null;
         }
         switch (collectionFormat) {
@@ -224,29 +224,29 @@ export class AlfrescoApiClient {
      */
     applyAuthToRequest(request) {
         let _this = this;
-            let auth = _this.authentications.basicAuth;
-            switch (auth.type) {
-                case 'basic':
-                    if (auth.username || auth.password) {
-                        request.auth(
-                            auth.username ? encodeURI(auth.username) : '',
-                            auth.password ? encodeURI(auth.password) : ''
-                        );
-                    }
-                    break;
-                case 'activiti':
-                    if (auth.ticket) {
-                        request.set({ 'Authorization': auth.ticket });
-                    }
-                    break;
-                case 'oauth2':
-                    if (auth.accessToken) {
-                        request.set({ 'Authorization': 'Bearer ' + auth.accessToken });
-                    }
-                    break;
-                default:
-                    throw new Error('Unknown authentication type: ' + auth.type);
-            }
+        let auth = _this.authentications.basicAuth;
+        switch (auth.type) {
+            case 'basic':
+                if (auth.username || auth.password) {
+                    request.auth(
+                        auth.username ? encodeURI(auth.username) : '',
+                        auth.password ? encodeURI(auth.password) : ''
+                    );
+                }
+                break;
+            case 'activiti':
+                if (auth.ticket) {
+                    request.set({ 'Authorization': auth.ticket });
+                }
+                break;
+            case 'oauth2':
+                if (auth.accessToken) {
+                    request.set({ 'Authorization': 'Bearer ' + auth.accessToken });
+                }
+                break;
+            default:
+                throw new Error('Unknown authentication type: ' + auth.type);
+        }
     }
 
     /**
@@ -259,17 +259,17 @@ export class AlfrescoApiClient {
      * @returns A value of the specified type.
      */
     deserialize(response: any, returnType: any): any {
-        if (response == null || returnType == null) {
+        if (response === null || returnType === null) {
             return null;
         }
         // Rely on SuperAgent for parsing response body.
         // See http://visionmedia.github.io/superagent/#parsing-response-bodies
         let data = response.body;
-        if (data == null) {
+        if (data === null) {
             // SuperAgent does not always produce a body; use the unparsed response as a fallback
             data = response.text;
         }
-        return exports.convertToType(data, returnType);
+        return this.convertToType(data, returnType);
     }
 
 
@@ -283,8 +283,8 @@ export class AlfrescoApiClient {
         let separatorPos = dateToConvert.substring(dateLength).search(/[\+\-]/) + dateLength;
         let dateStr = separatorPos > dateLength ? dateToConvert.substring(0, separatorPos) : dateToConvert;
         let tzStr = separatorPos > dateLength ? dateToConvert.substring(separatorPos) : '';
-        let parsedDate = exports.parseDateTime(dateStr);
-        let tzOffsetMins = exports.parseDateTimeZone(tzStr);
+        let parsedDate = this.parseDateTime(dateStr);
+        let tzOffsetMins = this.parseDateTimeZone(tzStr);
         parsedDate.setTime(parsedDate.getTime() + tzOffsetMins * 60000);
         return parsedDate;
     }
@@ -301,7 +301,7 @@ export class AlfrescoApiClient {
         // Compatible with Safari 9.1.2
         let parts = dateToConvert.split('+');
         let dateParts = dateToConvert.split(/[^0-9]/).map(function (s) {
-            return parseInt(s, 10)
+            return parseInt(s, 10);
         });
         return new Date(Date.UTC(dateParts[0], dateParts[1] - 1 || 0, dateParts[2] || 1, dateParts[3] || 0, dateParts[4] || 0, dateParts[5] || 0, dateParts[6] || 0));
     }
@@ -314,7 +314,7 @@ export class AlfrescoApiClient {
     parseDateTimeZone(dateToConvert: string): number {
         let match = /([\+\-])(\d{2}):?(\d{2})?/.exec(dateToConvert);
         if (match !== null) {
-            return (parseInt(match[1] + '1') * -1 * (parseInt(match[2]) * 60) + parseInt(match[3] || '0'))
+            return (parseInt(match[1] + '1') * -1 * (parseInt(match[2]) * 60) + parseInt(match[3] || '0'));
         } else {
             return 0;
         }
@@ -355,7 +355,7 @@ export class AlfrescoApiClient {
                     let itemType = type[0];
                     if (data) {
                         return data.map(function (item) {
-                            return exports.convertToType(item, itemType);
+                            return this.convertToType(item, itemType);
                         });
                     } else {
                         return null;
@@ -374,11 +374,11 @@ export class AlfrescoApiClient {
                     let result = {};
                     for (let k in data) {
                         if (data.hasOwnProperty(k)) {
-                            let key = exports.convertToType(k, keyType);
+                            let key = this.convertToType(k, keyType);
                             let rawValue = data[k];
                             let value = typeof rawValue === 'object'
                                 ? rawValue
-                                : exports.convertToType(rawValue, valueType);
+                                : this.convertToType(rawValue, valueType);
 
                             result[key] = value;
                         }
@@ -389,7 +389,7 @@ export class AlfrescoApiClient {
                     return data;
                 }
         }
-    };
+    }
 
     /**
      * Invokes the REST service using the supplied settings and parameters.
@@ -424,7 +424,7 @@ export class AlfrescoApiClient {
         }
 
         return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam,
-            contentTypes, accepts, returnType, contextRoot, responseType, url);
+                                contentTypes, accepts, returnType, contextRoot, responseType, url);
     }
 
     /**
@@ -452,7 +452,7 @@ export class AlfrescoApiClient {
         let url = this.buildUrlCustomBasePath(path, '', pathParams);
 
         return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam,
-            contentTypes, accepts, returnType, contextRoot, responseType, url);
+                                contentTypes, accepts, returnType, contextRoot, responseType, url);
     }
 
     /**
@@ -481,7 +481,7 @@ export class AlfrescoApiClient {
         Emitter(eventEmitter); // jshint ignore:line
 
         let request = this.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
-            contentTypes, accepts, responseType, eventEmitter, returnType);
+                                        contentTypes, accepts, responseType, eventEmitter, returnType);
 
         if (returnType === 'Binary') {
             request = request.buffer(true).parse(superagent.parse['application/octet-stream']);

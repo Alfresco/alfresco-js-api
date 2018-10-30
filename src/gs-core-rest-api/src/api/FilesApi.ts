@@ -81,7 +81,7 @@ export class FilesApi {
         return this.apiClient.callApi(
             '/files/{fileId}/declare', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 }

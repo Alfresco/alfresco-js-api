@@ -33,7 +33,7 @@ import { BaseApi } from './baseApi';
  */
 export class WebscriptApi extends BaseApi {
 
-    allowedMethod: string[] =['GET', 'POST', 'PUT', 'DELETE'];
+    allowedMethod: string[] = ['GET', 'POST', 'PUT', 'DELETE'];
 
     /**
      * Call a get on a  Web Scripts see https://wiki.alfresco.com/wiki/Web_Scripts for more details about Web Scripts
@@ -74,7 +74,7 @@ export class WebscriptApi extends BaseApi {
         return this.apiClient.callApi(
             '/' + servicePath + '/' + scriptPath, httpMethod,
             pathParams, scriptArgs, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType, contextRoot
+            contentTypes, accepts, returnType, contextRoot
         );
     }
 }

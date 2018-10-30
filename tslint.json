@@ -8,11 +8,6 @@
         ],
         "ban": false,
         "class-name": true,
-        "comment-format": [
-            true,
-            "check-space",
-            "check-lowercase"
-        ],
         "curly": true,
         "eofline": true,
         "forin": true,
@@ -21,11 +16,10 @@
             "spaces"
         ],
         "interface-name": false,
-        "jsdoc-format": true,
         "label-position": true,
         "max-line-length": [
             true,
-            440
+            1440
         ],
         "member-ordering": [
             false,

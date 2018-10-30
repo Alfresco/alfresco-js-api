@@ -46,12 +46,12 @@ export class AssociationsApi extends BaseApi {
         let postBody = assocTargetBody;
 
         // verify the required parameter 'sourceId' is set
-        if (sourceId == undefined || sourceId == null) {
+        if (sourceId === undefined || sourceId === null) {
             throw this.errorMessage('sourceId', 'addAssoc');
         }
 
         // verify the required parameter 'assocTargetBody' is set
-        if (assocTargetBody == undefined || assocTargetBody == null) {
+        if (assocTargetBody === undefined || assocTargetBody === null) {
             throw  this.errorMessage('assocTargetBody', 'addAssoc');
         }
 
@@ -88,7 +88,7 @@ export class AssociationsApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'targetId' is set
-        if (targetId == undefined || targetId == null) {
+        if (targetId === undefined || targetId === null) {
             throw this.errorMessage('targetId', 'listSourceNodeAssociations');
         }
 
@@ -111,7 +111,7 @@ export class AssociationsApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{targetId}/sources', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -130,7 +130,7 @@ export class AssociationsApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'sourceId' is set
-        if (sourceId == undefined || sourceId == null) {
+        if (sourceId === undefined || sourceId === null) {
             throw this.errorMessage('sourceId', 'listTargetAssociations');
         }
 
@@ -153,7 +153,7 @@ export class AssociationsApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{sourceId}/targets', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -170,12 +170,12 @@ export class AssociationsApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'sourceId' is set
-        if (sourceId == undefined || sourceId == null) {
+        if (sourceId === undefined || sourceId === null) {
             throw this.errorMessage('sourceId', 'removeAssoc');
         }
 
         // verify the required parameter 'targetId' is set
-        if (targetId == undefined || targetId == null) {
+        if (targetId === undefined || targetId === null) {
             throw  this.errorMessage('targetId', 'removeAssoc');
         }
 
@@ -198,7 +198,7 @@ export class AssociationsApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{sourceId}/targets/{targetId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 }

@@ -47,7 +47,7 @@
       var postBody = modelRepresentation;
 
       // verify the required parameter 'modelRepresentation' is set
-      if (modelRepresentation == undefined || modelRepresentation == null) {
+      if (modelRepresentation === undefined || modelRepresentation === null) {
         throw "Missing param 'modelRepresentation' in createModel";
       }
 
@@ -92,7 +92,7 @@
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
-      if (modelId == undefined || modelId == null) {
+      if (modelId === undefined || modelId === null) {
         throw "Missing param 'modelId' in deleteModel";
       }
 
@@ -137,12 +137,12 @@
       var postBody = modelRepresentation;
 
       // verify the required parameter 'modelId' is set
-      if (modelId == undefined || modelId == null) {
+      if (modelId === undefined || modelId === null) {
         throw "Missing param 'modelId' in duplicateModel";
       }
 
       // verify the required parameter 'modelRepresentation' is set
-      if (modelRepresentation == undefined || modelRepresentation == null) {
+      if (modelRepresentation === undefined || modelRepresentation === null) {
         throw "Missing param 'modelRepresentation' in duplicateModel";
       }
 
@@ -184,7 +184,7 @@
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
-      if (modelId == undefined || modelId == null) {
+      if (modelId === undefined || modelId === null) {
         throw "Missing param 'modelId' in getModelJSON";
       }
 
@@ -226,7 +226,7 @@
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
-      if (modelId == undefined || modelId == null) {
+      if (modelId === undefined || modelId === null) {
         throw "Missing param 'modelId' in getModelThumbnail";
       }
 
@@ -271,7 +271,7 @@
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
-      if (modelId == undefined || modelId == null) {
+      if (modelId === undefined || modelId === null) {
         throw "Missing param 'modelId' in getModel";
       }
 
@@ -396,12 +396,12 @@
       var postBody = null;
 
       // verify the required parameter 'modelId' is set
-      if (modelId == undefined || modelId == null) {
+      if (modelId === undefined || modelId === null) {
         throw "Missing param 'modelId' in importNewVersion";
       }
 
       // verify the required parameter 'file' is set
-      if (file == undefined || file == null) {
+      if (file === undefined || file === null) {
         throw "Missing param 'file' in importNewVersion";
       }
 
@@ -444,7 +444,7 @@
       var postBody = null;
 
       // verify the required parameter 'file' is set
-      if (file == undefined || file == null) {
+      if (file === undefined || file === null) {
         throw "Missing param 'file' in importProcessModel";
       }
 
@@ -487,12 +487,12 @@
       var postBody = values;
 
       // verify the required parameter 'modelId' is set
-      if (modelId == undefined || modelId == null) {
+      if (modelId === undefined || modelId === null) {
         throw "Missing param 'modelId' in saveModel";
       }
 
       // verify the required parameter 'values' is set
-      if (values == undefined || values == null) {
+      if (values === undefined || values === null) {
         throw "Missing param 'values' in saveModel";
       }
 
@@ -535,12 +535,12 @@
       var postBody = updatedModel;
 
       // verify the required parameter 'modelId' is set
-      if (modelId == undefined || modelId == null) {
+      if (modelId === undefined || modelId === null) {
         throw "Missing param 'modelId' in updateModel";
       }
 
       // verify the required parameter 'updatedModel' is set
-      if (updatedModel == undefined || updatedModel == null) {
+      if (updatedModel === undefined || updatedModel === null) {
         throw "Missing param 'updatedModel' in updateModel";
       }
 
@@ -585,7 +585,7 @@
       var postBody = opts['values'];
 
       // verify the required parameter 'modelId' is set
-      if (modelId == undefined || modelId == null) {
+      if (modelId === undefined || modelId === null) {
         throw "Missing param 'modelId' in validateModel";
       }
 

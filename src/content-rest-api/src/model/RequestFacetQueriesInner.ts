@@ -16,6 +16,6 @@
 */
 
 export class RequestFacetQueriesInner {
-        query:string;
-        label:string;
+        query: string;
+        label: string;
 }

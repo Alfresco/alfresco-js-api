@@ -16,7 +16,7 @@
 */
 
 
-import {ErrorError} from "./ErrorError";
+import { ErrorError } from './ErrorError';
 
 export class ErrorResponse {
 

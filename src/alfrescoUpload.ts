@@ -96,7 +96,7 @@ export class AlfrescoUpload extends NodesApi {
         return this.apiClient.callApi(
             '/nodes/{nodeId}/children', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 }

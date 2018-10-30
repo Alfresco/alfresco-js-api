@@ -50,7 +50,7 @@ export class NetworksApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'networkId' is set
-        if (networkId == undefined || networkId == null) {
+        if (networkId === undefined || networkId === null) {
             throw "Missing param 'networkId' in getNetwork";
         }
 
@@ -69,9 +69,9 @@ export class NetworksApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{networkId}', 'GET',
+            this.path + '/{networkId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -90,12 +90,12 @@ export class NetworksApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'personId' is set
-        if (personId == undefined || personId == null) {
+        if (personId === undefined || personId === null) {
             throw new Error("Missing param 'personId' in getNetworkForPerson");
         }
 
         // verify the required parameter 'networkId' is set
-        if (networkId == undefined || networkId == null) {
+        if (networkId === undefined || networkId === null) {
             throw new Error("Missing param 'networkId' in getNetworkForPerson");
         }
 
@@ -117,7 +117,7 @@ export class NetworksApi extends BaseApi {
         return this.apiClient.callApi(
             '/people/{personId}/networks/{networkId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -137,7 +137,7 @@ export class NetworksApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'personId' is set
-        if (personId == undefined || personId == null) {
+        if (personId === undefined || personId === null) {
             throw new Error("Missing param 'personId' in listNetworksForPerson");
         }
 
@@ -160,7 +160,7 @@ export class NetworksApi extends BaseApi {
         return this.apiClient.callApi(
             '/people/{personId}/networks', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 }

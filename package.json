@@ -13,7 +13,7 @@
     "test": "mocha -r ts-node/register test/**/*.spec.ts",
     "generate": "mvn clean generate-sources",
     "watchify": "watchify -s AlfrescoApi main.js -o dist/alfresco-js-api.js",
-    "tslint": "tslint --type-check -c tslint.json index.d.ts --project tsconfig.json ",
+    "tslint": "tslint --fix --type-check -c tslint.json --project tsconfig.json ",
     "toc": "markdown-toc -i README.md && markdown-toc -i test/mockObjects/README.md",
     "prepublish": "npm run webpack",
     "generate-ts": "jsdoc -c config.json .",

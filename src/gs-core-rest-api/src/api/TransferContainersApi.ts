@@ -80,9 +80,9 @@ export class TransferContainersApi {
         return this.apiClient.callApi(
             '/transfer-containers/{transferContainerId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
 
     /**
@@ -128,9 +128,9 @@ export class TransferContainersApi {
         return this.apiClient.callApi(
             '/transfer-containers/{transferContainerId}/transfers', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Update transfer container
@@ -175,8 +175,8 @@ export class TransferContainersApi {
         return this.apiClient.callApi(
             '/transfer-containers/{transferContainerId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
 }

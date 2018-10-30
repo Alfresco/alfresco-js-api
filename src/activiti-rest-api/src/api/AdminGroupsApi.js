@@ -47,7 +47,7 @@
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
-      if (groupId == undefined || groupId == null) {
+      if (groupId === undefined || groupId === null) {
         throw "Missing param 'groupId' in activate";
       }
 
@@ -89,7 +89,7 @@
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
-      if (groupId == undefined || groupId == null) {
+      if (groupId === undefined || groupId === null) {
         throw "Missing param 'groupId' in addAllUsersToGroup";
       }
 
@@ -132,12 +132,12 @@
       var postBody = addGroupCapabilitiesRepresentation;
 
       // verify the required parameter 'groupId' is set
-      if (groupId == undefined || groupId == null) {
+      if (groupId === undefined || groupId === null) {
         throw "Missing param 'groupId' in addGroupCapabilities";
       }
 
       // verify the required parameter 'addGroupCapabilitiesRepresentation' is set
-      if (addGroupCapabilitiesRepresentation == undefined || addGroupCapabilitiesRepresentation == null) {
+      if (addGroupCapabilitiesRepresentation === undefined || addGroupCapabilitiesRepresentation === null) {
         throw "Missing param 'addGroupCapabilitiesRepresentation' in addGroupCapabilities";
       }
 
@@ -180,12 +180,12 @@
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
-      if (groupId == undefined || groupId == null) {
+      if (groupId === undefined || groupId === null) {
         throw "Missing param 'groupId' in addGroupMember";
       }
 
       // verify the required parameter 'userId' is set
-      if (userId == undefined || userId == null) {
+      if (userId === undefined || userId === null) {
         throw "Missing param 'userId' in addGroupMember";
       }
 
@@ -230,17 +230,17 @@
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
-      if (groupId == undefined || groupId == null) {
+      if (groupId === undefined || groupId === null) {
         throw "Missing param 'groupId' in addRelatedGroup";
       }
 
       // verify the required parameter 'relatedGroupId' is set
-      if (relatedGroupId == undefined || relatedGroupId == null) {
+      if (relatedGroupId === undefined || relatedGroupId === null) {
         throw "Missing param 'relatedGroupId' in addRelatedGroup";
       }
 
       // verify the required parameter 'type' is set
-      if (type == undefined || type == null) {
+      if (type === undefined || type === null) {
         throw "Missing param 'type' in addRelatedGroup";
       }
 
@@ -285,7 +285,7 @@
       var postBody = groupRepresentation;
 
       // verify the required parameter 'groupRepresentation' is set
-      if (groupRepresentation == undefined || groupRepresentation == null) {
+      if (groupRepresentation === undefined || groupRepresentation === null) {
         throw "Missing param 'groupRepresentation' in createNewGroup";
       }
 
@@ -327,12 +327,12 @@
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
-      if (groupId == undefined || groupId == null) {
+      if (groupId === undefined || groupId === null) {
         throw "Missing param 'groupId' in deleteGroupCapability";
       }
 
       // verify the required parameter 'groupCapabilityId' is set
-      if (groupCapabilityId == undefined || groupCapabilityId == null) {
+      if (groupCapabilityId === undefined || groupCapabilityId === null) {
         throw "Missing param 'groupCapabilityId' in deleteGroupCapability";
       }
 
@@ -376,12 +376,12 @@
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
-      if (groupId == undefined || groupId == null) {
+      if (groupId === undefined || groupId === null) {
         throw "Missing param 'groupId' in deleteGroupMember";
       }
 
       // verify the required parameter 'userId' is set
-      if (userId == undefined || userId == null) {
+      if (userId === undefined || userId === null) {
         throw "Missing param 'userId' in deleteGroupMember";
       }
 
@@ -424,7 +424,7 @@
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
-      if (groupId == undefined || groupId == null) {
+      if (groupId === undefined || groupId === null) {
         throw "Missing param 'groupId' in deleteGroup";
       }
 
@@ -467,12 +467,12 @@
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
-      if (groupId == undefined || groupId == null) {
+      if (groupId === undefined || groupId === null) {
         throw "Missing param 'groupId' in deleteRelatedGroup";
       }
 
       // verify the required parameter 'relatedGroupId' is set
-      if (relatedGroupId == undefined || relatedGroupId == null) {
+      if (relatedGroupId === undefined || relatedGroupId === null) {
         throw "Missing param 'relatedGroupId' in deleteRelatedGroup";
       }
 
@@ -516,7 +516,7 @@
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
-      if (groupId == undefined || groupId == null) {
+      if (groupId === undefined || groupId === null) {
         throw "Missing param 'groupId' in getCapabilities";
       }
 
@@ -564,7 +564,7 @@
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
-      if (groupId == undefined || groupId == null) {
+      if (groupId === undefined || groupId === null) {
         throw "Missing param 'groupId' in getGroupUsers";
       }
 
@@ -614,7 +614,7 @@
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
-      if (groupId == undefined || groupId == null) {
+      if (groupId === undefined || groupId === null) {
         throw "Missing param 'groupId' in getGroup";
       }
 
@@ -703,7 +703,7 @@
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
-      if (groupId == undefined || groupId == null) {
+      if (groupId === undefined || groupId === null) {
         throw "Missing param 'groupId' in getRelatedGroups";
       }
 
@@ -747,12 +747,12 @@
       var postBody = groupRepresentation;
 
       // verify the required parameter 'groupId' is set
-      if (groupId == undefined || groupId == null) {
+      if (groupId === undefined || groupId === null) {
         throw "Missing param 'groupId' in updateGroup";
       }
 
       // verify the required parameter 'groupRepresentation' is set
-      if (groupRepresentation == undefined || groupRepresentation == null) {
+      if (groupRepresentation === undefined || groupRepresentation === null) {
         throw "Missing param 'groupRepresentation' in updateGroup";
       }
 

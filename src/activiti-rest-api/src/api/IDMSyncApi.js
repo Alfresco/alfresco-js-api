@@ -47,7 +47,7 @@
       var postBody = null;
 
       // verify the required parameter 'syncLogEntryId' is set
-      if (syncLogEntryId == undefined || syncLogEntryId == null) {
+      if (syncLogEntryId === undefined || syncLogEntryId === null) {
         throw "Missing param 'syncLogEntryId' in getLogFile";
       }
 

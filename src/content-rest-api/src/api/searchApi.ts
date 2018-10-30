@@ -52,24 +52,24 @@ export class SearchApi extends BaseApi {
         let postBody = searchRequest;
 
         // verify the required parameter 'SearchRequest' is set
-        if (searchRequest == undefined || searchRequest == null) {
+        if (searchRequest === undefined || searchRequest === null) {
             throw new Error("Missing param 'SearchRequest' in search");
         }
 
 
-        var pathParams = {};
-        var queryParams = {};
-        var headerParams = {};
-        var formParams = {};
+        let pathParams = {};
+        let queryParams = {};
+        let headerParams = {};
+        let formParams = {};
 
-        var authNames = ['basicAuth'];
-        var contentTypes = ['application/json'];
-        var accepts = ['application/json'];
+        let authNames = ['basicAuth'];
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/search', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 }

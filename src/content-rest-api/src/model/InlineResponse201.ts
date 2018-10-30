@@ -18,5 +18,5 @@
 import { InlineResponse201Entry } from './InlineResponse201Entry';
 
 export class InlineResponse201 {
-    entry:InlineResponse201Entry;
+    entry: InlineResponse201Entry;
 }

@@ -48,12 +48,12 @@
       var postBody = commentRequest;
 
       // verify the required parameter 'commentRequest' is set
-      if (commentRequest == undefined || commentRequest == null) {
+      if (commentRequest === undefined || commentRequest === null) {
         throw "Missing param 'commentRequest' in addProcessInstanceComment";
       }
 
       // verify the required parameter 'processInstanceId' is set
-      if (processInstanceId == undefined || processInstanceId == null) {
+      if (processInstanceId === undefined || processInstanceId === null) {
         throw "Missing param 'processInstanceId' in addProcessInstanceComment";
       }
 
@@ -95,7 +95,7 @@
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
-      if (processInstanceId == undefined || processInstanceId == null) {
+      if (processInstanceId === undefined || processInstanceId === null) {
         throw "Missing param 'processInstanceId' in deleteProcessInstance";
       }
 
@@ -140,7 +140,7 @@
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
-      if (processInstanceId == undefined || processInstanceId == null) {
+      if (processInstanceId === undefined || processInstanceId === null) {
         throw "Missing param 'processInstanceId' in getProcessInstanceComments";
       }
 
@@ -184,7 +184,7 @@
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
-      if (processInstanceId == undefined || processInstanceId == null) {
+      if (processInstanceId === undefined || processInstanceId === null) {
         throw "Missing param 'processInstanceId' in getProcessInstanceStartForm";
       }
 
@@ -226,7 +226,7 @@
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
-      if (processInstanceId == undefined || processInstanceId == null) {
+      if (processInstanceId === undefined || processInstanceId === null) {
         throw "Missing param 'processInstanceId' in getProcessInstance";
       }
 

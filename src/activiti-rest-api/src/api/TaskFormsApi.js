@@ -48,12 +48,12 @@
       var postBody = completeTaskFormRepresentation;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in completeTaskForm";
       }
 
       // verify the required parameter 'completeTaskFormRepresentation' is set
-      if (completeTaskFormRepresentation == undefined || completeTaskFormRepresentation == null) {
+      if (completeTaskFormRepresentation === undefined || completeTaskFormRepresentation === null) {
         throw "Missing param 'completeTaskFormRepresentation' in completeTaskForm";
       }
 
@@ -98,17 +98,17 @@
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in getRestFieldValues";
       }
 
       // verify the required parameter 'field' is set
-      if (field == undefined || field == null) {
+      if (field === undefined || field === null) {
         throw "Missing param 'field' in getRestFieldValues";
       }
 
       // verify the required parameter 'column' is set
-      if (column == undefined || column == null) {
+      if (column === undefined || column === null) {
         throw "Missing param 'column' in getRestFieldValues";
       }
 
@@ -154,12 +154,12 @@
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in getRestFieldValues";
       }
 
       // verify the required parameter 'field' is set
-      if (field == undefined || field == null) {
+      if (field === undefined || field === null) {
         throw "Missing param 'field' in getRestFieldValues";
       }
 
@@ -202,7 +202,7 @@
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in getTaskForm";
       }
 
@@ -244,7 +244,7 @@
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in getTaskFormVariables";
       }
 
@@ -287,12 +287,12 @@
       var postBody = saveTaskFormRepresentation;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in saveTaskForm";
       }
 
       // verify the required parameter 'saveTaskFormRepresentation' is set
-      if (saveTaskFormRepresentation == undefined || saveTaskFormRepresentation == null) {
+      if (saveTaskFormRepresentation === undefined || saveTaskFormRepresentation === null) {
         throw "Missing param 'saveTaskFormRepresentation' in saveTaskForm";
       }
 

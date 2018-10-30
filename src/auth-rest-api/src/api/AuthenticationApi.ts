@@ -51,7 +51,7 @@ export class AuthenticationApi {
         let postBody = loginRequest;
 
         // verify the required parameter 'loginRequest' is set
-        if (loginRequest == undefined || loginRequest == null) {
+        if (loginRequest === undefined || loginRequest === null) {
             throw "Missing param 'loginRequest' in createTicket";
         }
 
@@ -69,9 +69,9 @@ export class AuthenticationApi {
         return this.apiClient.callApi(
             '/tickets', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType, null, 'application/json'
+            contentTypes, accepts, returnType, null, 'application/json'
         );
-    }
+    };
 
 
     /**
@@ -95,9 +95,9 @@ export class AuthenticationApi {
         return this.apiClient.callApi(
             '/tickets/-me-', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
 
     /**
@@ -122,7 +122,7 @@ export class AuthenticationApi {
         return this.apiClient.callApi(
             '/tickets/-me-', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 }

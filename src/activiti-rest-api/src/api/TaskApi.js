@@ -48,12 +48,12 @@
       var postBody = taskRepresentation;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in addSubtask";
       }
 
       // verify the required parameter 'taskRepresentation' is set
-      if (taskRepresentation == undefined || taskRepresentation == null) {
+      if (taskRepresentation === undefined || taskRepresentation === null) {
         throw "Missing param 'taskRepresentation' in addSubtask";
       }
 
@@ -96,12 +96,12 @@
       var postBody = commentRequest;
 
       // verify the required parameter 'commentRequest' is set
-      if (commentRequest == undefined || commentRequest == null) {
+      if (commentRequest === undefined || commentRequest === null) {
         throw "Missing param 'commentRequest' in addTaskComment";
       }
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in addTaskComment";
       }
 
@@ -144,12 +144,12 @@
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in assignTask";
       }
 
       // verify the required parameter 'requestNode' is set
-      if (requestNode == undefined || requestNode == null) {
+      if (requestNode === undefined || requestNode === null) {
         throw "Missing param 'requestNode' in assignTask";
       }
 
@@ -192,12 +192,12 @@
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in attachForm";
       }
 
       // verify the required parameter 'requestNode' is set
-      if (requestNode == undefined || requestNode == null) {
+      if (requestNode === undefined || requestNode === null) {
         throw "Missing param 'requestNode' in attachForm";
       }
 
@@ -240,7 +240,7 @@
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in claimTask";
       }
 
@@ -283,12 +283,12 @@
       var postBody = completeTaskFormRepresentation;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in completeTaskForm";
       }
 
       // verify the required parameter 'completeTaskFormRepresentation' is set
-      if (completeTaskFormRepresentation == undefined || completeTaskFormRepresentation == null) {
+      if (completeTaskFormRepresentation === undefined || completeTaskFormRepresentation === null) {
         throw "Missing param 'completeTaskFormRepresentation' in completeTaskForm";
       }
 
@@ -331,7 +331,7 @@
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in completeTask";
       }
 
@@ -374,7 +374,7 @@
       var postBody = taskRepresentation;
 
       // verify the required parameter 'taskRepresentation' is set
-      if (taskRepresentation == undefined || taskRepresentation == null) {
+      if (taskRepresentation === undefined || taskRepresentation === null) {
         throw "Missing param 'taskRepresentation' in createNewTask";
       }
 
@@ -419,12 +419,12 @@
       var postBody = relatedContent;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in createRelatedContentOnTask";
       }
 
       // verify the required parameter 'relatedContent' is set
-      if (relatedContent == undefined || relatedContent == null) {
+      if (relatedContent === undefined || relatedContent === null) {
         throw "Missing param 'relatedContent' in createRelatedContentOnTask";
       }
 
@@ -471,12 +471,12 @@
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in createRelatedContentOnTask";
       }
 
       // verify the required parameter 'file' is set
-      if (file == undefined || file == null) {
+      if (file === undefined || file === null) {
         throw "Missing param 'file' in createRelatedContentOnTask";
       }
 
@@ -520,7 +520,7 @@
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in deleteTask";
       }
 
@@ -562,7 +562,7 @@
       var postBody = requestNode;
 
       // verify the required parameter 'requestNode' is set
-      if (requestNode == undefined || requestNode == null) {
+      if (requestNode === undefined || requestNode === null) {
           console.log('a');
           postBody = new TaskFilterRequestRepresentation();
       }
@@ -604,7 +604,7 @@
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in getChecklist";
       }
 
@@ -639,7 +639,7 @@
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in getTaskAuditPdf";
       }
 
@@ -673,7 +673,7 @@
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in getTaskAuditPdf";
       }
 
@@ -716,7 +716,7 @@
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in getRelatedContentForTask";
       }
 
@@ -761,17 +761,17 @@
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in getRestFieldValues";
       }
 
       // verify the required parameter 'field' is set
-      if (field == undefined || field == null) {
+      if (field === undefined || field === null) {
         throw "Missing param 'field' in getRestFieldValues";
       }
 
       // verify the required parameter 'column' is set
-      if (column == undefined || column == null) {
+      if (column === undefined || column === null) {
         throw "Missing param 'column' in getRestFieldValues";
       }
 
@@ -817,12 +817,12 @@
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in getRestFieldValues";
       }
 
       // verify the required parameter 'field' is set
-      if (field == undefined || field == null) {
+      if (field === undefined || field === null) {
         throw "Missing param 'field' in getRestFieldValues";
       }
 
@@ -868,7 +868,7 @@
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in getTaskComments";
       }
 
@@ -911,7 +911,7 @@
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in getTaskForm";
       }
 
@@ -953,7 +953,7 @@
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in getTask";
       }
 
@@ -996,12 +996,12 @@
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in involveUser";
       }
 
       // verify the required parameter 'requestNode' is set
-      if (requestNode == undefined || requestNode == null) {
+      if (requestNode === undefined || requestNode === null) {
         throw "Missing param 'requestNode' in involveUser";
       }
 
@@ -1080,12 +1080,12 @@
       var postBody = orderRepresentation;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in orderChecklist";
       }
 
       // verify the required parameter 'orderRepresentation' is set
-      if (orderRepresentation == undefined || orderRepresentation == null) {
+      if (orderRepresentation === undefined || orderRepresentation === null) {
         throw "Missing param 'orderRepresentation' in orderChecklist";
       }
 
@@ -1127,7 +1127,7 @@
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in removeForm";
       }
 
@@ -1170,12 +1170,12 @@
       var postBody = requestNode;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in removeInvolvedUser";
       }
 
       // verify the required parameter 'requestNode' is set
-      if (requestNode == undefined || requestNode == null) {
+      if (requestNode === undefined || requestNode === null) {
         throw "Missing param 'requestNode' in removeInvolvedUser";
       }
 
@@ -1218,12 +1218,12 @@
       var postBody = saveTaskFormRepresentation;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in saveTaskForm";
       }
 
       // verify the required parameter 'saveTaskFormRepresentation' is set
-      if (saveTaskFormRepresentation == undefined || saveTaskFormRepresentation == null) {
+      if (saveTaskFormRepresentation === undefined || saveTaskFormRepresentation === null) {
         throw "Missing param 'saveTaskFormRepresentation' in saveTaskForm";
       }
 
@@ -1266,7 +1266,7 @@
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in unclaimTask";
       }
 
@@ -1311,12 +1311,12 @@
       var postBody = updated;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in updateTask";
       }
 
       // verify the required parameter 'updated' is set
-      if (updated == undefined || updated == null) {
+      if (updated === undefined || updated === null) {
         throw "Missing param 'updated' in updateTask";
       }
 

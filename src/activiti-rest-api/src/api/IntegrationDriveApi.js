@@ -48,7 +48,7 @@
       var postBody = null;
 
       // verify the required parameter 'code' is set
-      if (code == undefined || code == null) {
+      if (code === undefined || code === null) {
         throw "Missing param 'code' in confirmAuthorisation";
       }
 

@@ -4,7 +4,7 @@ import { AlfrescoApi } from '../src/alfrescoApi';
 import { PersonBodyCreate } from '../src/content-rest-api/src/model/PersonBodyCreate';
 import { PeopleApi } from '../src/content-rest-api/src/api/PeopleApi';
 
-var PeopleMock = require('../test/mockObjects/mockAlfrescoApi').PeopleApi;
+let PeopleMock = require('../test/mockObjects/mockAlfrescoApi').PeopleApi;
 
 describe('PeopleApi', function () {
 
@@ -30,7 +30,7 @@ describe('PeopleApi', function () {
         let peopleApiService = new PeopleApi(this.alfrescoApi);
         peopleApiService.addPerson(personBodyCreate).then(function () {
             done();
-        }, function (error) {
+        },                                                function (error) {
             console.error(error);
         });
 

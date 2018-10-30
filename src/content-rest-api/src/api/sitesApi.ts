@@ -54,12 +54,12 @@ export class SitesApi extends BaseApi {
         let postBody = siteMemberBody;
 
         // verify the required parameter 'siteId' is set
-        if (siteId == undefined || siteId == null) {
+        if (siteId === undefined || siteId === null) {
             throw "Missing param 'siteId' in addSiteMember";
         }
 
         // verify the required parameter 'siteMemberBody' is set
-        if (siteMemberBody == undefined || siteMemberBody == null) {
+        if (siteMemberBody === undefined || siteMemberBody === null) {
             throw "Missing param 'siteMemberBody' in addSiteMember";
         }
 
@@ -78,7 +78,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{siteId}/members', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -97,7 +97,7 @@ export class SitesApi extends BaseApi {
         let postBody = siteBody;
 
         // verify the required parameter 'siteBody' is set
-        if (siteBody == undefined || siteBody == null) {
+        if (siteBody === undefined || siteBody === null) {
             throw "Missing param 'siteBody' in createSite";
         }
 
@@ -117,7 +117,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             '/sites', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -135,12 +135,12 @@ export class SitesApi extends BaseApi {
         let postBody = siteBody;
 
         // verify the required parameter 'siteId' is set
-        if (siteId == undefined || siteId == null) {
+        if (siteId === undefined || siteId === null) {
             throw "Missing param 'siteId' in updateSite";
         }
 
         // verify the required parameter 'siteBody' is set
-        if (siteBody == undefined || siteBody == null) {
+        if (siteBody === undefined || siteBody === null) {
             throw "Missing param 'siteBody' in updateSite";
         }
 
@@ -162,7 +162,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{siteId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -179,7 +179,7 @@ export class SitesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'siteId' is set
-        if (siteId == undefined || siteId == null) {
+        if (siteId === undefined || siteId === null) {
             throw "Missing param 'siteId' in deleteSite";
         }
 
@@ -201,7 +201,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{siteId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -220,7 +220,7 @@ export class SitesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'siteId' is set
-        if (siteId == undefined || siteId == null) {
+        if (siteId === undefined || siteId === null) {
             throw "Missing param 'siteId' in getSite";
         }
 
@@ -242,7 +242,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{siteId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -261,12 +261,12 @@ export class SitesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'siteId' is set
-        if (siteId == undefined || siteId == null) {
+        if (siteId === undefined || siteId === null) {
             throw "Missing param 'siteId' in getSiteContainer";
         }
 
         // verify the required parameter 'containerId' is set
-        if (containerId == undefined || containerId == null) {
+        if (containerId === undefined || containerId === null) {
             throw "Missing param 'containerId' in getSiteContainer";
         }
 
@@ -288,7 +288,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{siteId}/containers/{containerId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -308,7 +308,7 @@ export class SitesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'siteId' is set
-        if (siteId == undefined || siteId == null) {
+        if (siteId === undefined || siteId === null) {
             throw "Missing param 'siteId' in getSiteContainers";
         }
 
@@ -331,7 +331,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{siteId}/containers', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -350,12 +350,12 @@ export class SitesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'siteId' is set
-        if (siteId == undefined || siteId == null) {
+        if (siteId === undefined || siteId === null) {
             throw "Missing param 'siteId' in getSiteMember";
         }
 
         // verify the required parameter 'personId' is set
-        if (personId == undefined || personId == null) {
+        if (personId === undefined || personId === null) {
             throw "Missing param 'personId' in getSiteMember";
         }
 
@@ -377,7 +377,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{siteId}/members/{personId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -397,7 +397,7 @@ export class SitesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'siteId' is set
-        if (siteId == undefined || siteId == null) {
+        if (siteId === undefined || siteId === null) {
             throw "Missing param 'siteId' in getSiteMembers";
         }
 
@@ -420,7 +420,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{siteId}/members', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -459,7 +459,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             '/sites', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -474,12 +474,12 @@ export class SitesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'siteId' is set
-        if (siteId == undefined || siteId == null) {
+        if (siteId === undefined || siteId === null) {
             throw "Missing param 'siteId' in removeSiteMember";
         }
 
         // verify the required parameter 'personId' is set
-        if (personId == undefined || personId == null) {
+        if (personId === undefined || personId === null) {
             throw "Missing param 'personId' in removeSiteMember";
         }
 
@@ -500,7 +500,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{siteId}/members/{personId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -517,17 +517,17 @@ export class SitesApi extends BaseApi {
         let postBody = siteMemberRoleBody;
 
         // verify the required parameter 'siteId' is set
-        if (siteId == undefined || siteId == null) {
+        if (siteId === undefined || siteId === null) {
             throw "Missing param 'siteId' in updateSiteMember";
         }
 
         // verify the required parameter 'personId' is set
-        if (personId == undefined || personId == null) {
+        if (personId === undefined || personId === null) {
             throw "Missing param 'personId' in updateSiteMember";
         }
 
         // verify the required parameter 'siteMemberRoleBody' is set
-        if (siteMemberRoleBody == undefined || siteMemberRoleBody == null) {
+        if (siteMemberRoleBody === undefined || siteMemberRoleBody === null) {
             throw "Missing param 'siteMemberRoleBody' in updateSiteMember";
         }
 
@@ -547,7 +547,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{siteId}/members/{personId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 }

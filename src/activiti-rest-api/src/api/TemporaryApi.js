@@ -48,12 +48,12 @@
       var postBody = null;
 
       // verify the required parameter 'userId' is set
-      if (userId == undefined || userId == null) {
+      if (userId === undefined || userId === null) {
         throw "Missing param 'userId' in completeTasks";
       }
 
       // verify the required parameter 'processDefinitionKey' is set
-      if (processDefinitionKey == undefined || processDefinitionKey == null) {
+      if (processDefinitionKey === undefined || processDefinitionKey === null) {
         throw "Missing param 'processDefinitionKey' in completeTasks";
       }
 
@@ -97,12 +97,12 @@
       var postBody = null;
 
       // verify the required parameter 'userId' is set
-      if (userId == undefined || userId == null) {
+      if (userId === undefined || userId === null) {
         throw "Missing param 'userId' in generateData";
       }
 
       // verify the required parameter 'processDefinitionKey' is set
-      if (processDefinitionKey == undefined || processDefinitionKey == null) {
+      if (processDefinitionKey === undefined || processDefinitionKey === null) {
         throw "Missing param 'processDefinitionKey' in generateData";
       }
 

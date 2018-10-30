@@ -48,7 +48,7 @@
       var postBody = null;
 
       // verify the required parameter 'code' is set
-      if (code == undefined || code == null) {
+      if (code === undefined || code === null) {
         throw "Missing param 'code' in confirmAuthorisation";
       }
 
@@ -128,7 +128,7 @@
       var postBody = null;
 
       // verify the required parameter 'networkId' is set
-      if (networkId == undefined || networkId == null) {
+      if (networkId === undefined || networkId === null) {
         throw "Missing param 'networkId' in getAllSites";
       }
 
@@ -172,7 +172,7 @@
       var postBody = null;
 
       // verify the required parameter 'repositoryId' is set
-      if (repositoryId == undefined || repositoryId == null) {
+      if (repositoryId === undefined || repositoryId === null) {
         throw "Missing param 'repositoryId' in getAllSites";
       }
 
@@ -216,12 +216,12 @@
       var postBody = null;
 
       // verify the required parameter 'networkId' is set
-      if (networkId == undefined || networkId == null) {
+      if (networkId === undefined || networkId === null) {
         throw "Missing param 'networkId' in getContentInFolder";
       }
 
       // verify the required parameter 'folderId' is set
-      if (folderId == undefined || folderId == null) {
+      if (folderId === undefined || folderId === null) {
         throw "Missing param 'folderId' in getContentInFolder";
       }
 
@@ -266,12 +266,12 @@
       var postBody = null;
 
       // verify the required parameter 'repositoryId' is set
-      if (repositoryId == undefined || repositoryId == null) {
+      if (repositoryId === undefined || repositoryId === null) {
         throw "Missing param 'repositoryId' in getContentInFolder";
       }
 
       // verify the required parameter 'folderId' is set
-      if (folderId == undefined || folderId == null) {
+      if (folderId === undefined || folderId === null) {
         throw "Missing param 'folderId' in getContentInFolder";
       }
 
@@ -316,12 +316,12 @@
       var postBody = null;
 
       // verify the required parameter 'networkId' is set
-      if (networkId == undefined || networkId == null) {
+      if (networkId === undefined || networkId === null) {
         throw "Missing param 'networkId' in getContentInSite";
       }
 
       // verify the required parameter 'siteId' is set
-      if (siteId == undefined || siteId == null) {
+      if (siteId === undefined || siteId === null) {
         throw "Missing param 'siteId' in getContentInSite";
       }
 
@@ -366,12 +366,12 @@
       var postBody = null;
 
       // verify the required parameter 'repositoryId' is set
-      if (repositoryId == undefined || repositoryId == null) {
+      if (repositoryId === undefined || repositoryId === null) {
         throw "Missing param 'repositoryId' in getContentInSite";
       }
 
       // verify the required parameter 'siteId' is set
-      if (siteId == undefined || siteId == null) {
+      if (siteId === undefined || siteId === null) {
         throw "Missing param 'siteId' in getContentInSite";
       }
 

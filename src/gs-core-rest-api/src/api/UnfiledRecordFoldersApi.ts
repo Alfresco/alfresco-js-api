@@ -88,9 +88,9 @@ export class UnfiledRecordFoldersApi {
         return this.apiClient.callApi(
             '/unfiled-record-folders/{unfiledRecordFolderId}/children', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
 
     /**
@@ -123,9 +123,9 @@ export class UnfiledRecordFoldersApi {
         return this.apiClient.callApi(
             '/unfiled-record-folders/{unfiledRecordFolderId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Get the unfiled record folder
@@ -166,9 +166,9 @@ export class UnfiledRecordFoldersApi {
         return this.apiClient.callApi(
             '/unfiled-record-folders/{unfiledRecordFolderId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
 
     /**
@@ -218,9 +218,9 @@ export class UnfiledRecordFoldersApi {
         return this.apiClient.callApi(
             '/unfiled-record-folders/{unfiledRecordFolderId}/children', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Update an unfiled record folder
@@ -267,8 +267,8 @@ export class UnfiledRecordFoldersApi {
         return this.apiClient.callApi(
             '/unfiled-record-folders/{unfiledRecordFolderId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
 }

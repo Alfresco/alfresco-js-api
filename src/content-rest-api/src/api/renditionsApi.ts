@@ -47,12 +47,12 @@ export class RenditionsApi extends BaseApi {
         let postBody = renditionBody;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in createRendition";
         }
 
         // verify the required parameter 'renditionBody' is set
-        if (renditionBody == undefined || renditionBody == null) {
+        if (renditionBody === undefined || renditionBody === null) {
             throw "Missing param 'renditionBody' in createRendition";
         }
 
@@ -72,7 +72,7 @@ export class RenditionsApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}/renditions', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -88,12 +88,12 @@ export class RenditionsApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in getRendition";
         }
 
         // verify the required parameter 'renditionId' is set
-        if (renditionId == undefined || renditionId == null) {
+        if (renditionId === undefined || renditionId === null) {
             throw "Missing param 'renditionId' in getRendition";
         }
 
@@ -112,7 +112,7 @@ export class RenditionsApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}/renditions/{renditionId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -131,12 +131,12 @@ export class RenditionsApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in getRenditionContent";
         }
 
         // verify the required parameter 'renditionId' is set
-        if (renditionId == undefined || renditionId == null) {
+        if (renditionId === undefined || renditionId === null) {
             throw "Missing param 'renditionId' in getRenditionContent";
         }
 
@@ -161,7 +161,7 @@ export class RenditionsApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}/renditions/{renditionId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -176,7 +176,7 @@ export class RenditionsApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in getRenditions";
         }
 
@@ -195,7 +195,7 @@ export class RenditionsApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}/renditions', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 

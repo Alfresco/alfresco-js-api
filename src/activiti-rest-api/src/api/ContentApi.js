@@ -49,12 +49,12 @@
       opts = opts || {};
 
       // verify the required parameter 'processInstanceId' is set
-      if (processInstanceId == undefined || processInstanceId == null) {
+      if (processInstanceId === undefined || processInstanceId === null) {
         throw "Missing param 'processInstanceId' in createRelatedContentOnProcessInstance";
       }
 
       // verify the required parameter 'relatedContent' is set
-      if (relatedContent == undefined || relatedContent == null) {
+      if (relatedContent === undefined || relatedContent === null) {
         throw "Missing param 'relatedContent' in createRelatedContentOnProcessInstance";
       }
 
@@ -99,12 +99,12 @@
       opts = opts || {};
 
       // verify the required parameter 'processInstanceId' is set
-      if (processInstanceId == undefined || processInstanceId == null) {
+      if (processInstanceId === undefined || processInstanceId === null) {
         throw "Missing param 'processInstanceId' in createRelatedContentOnProcessInstance";
       }
 
       // verify the required parameter 'file' is set
-      if (file == undefined || file == null) {
+      if (file === undefined || file === null) {
         throw "Missing param 'file' in createRelatedContentOnProcessInstance";
       }
 
@@ -152,12 +152,12 @@
       var postBody = relatedContent;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in createRelatedContentOnTask";
       }
 
       // verify the required parameter 'relatedContent' is set
-      if (relatedContent == undefined || relatedContent == null) {
+      if (relatedContent === undefined || relatedContent === null) {
         throw "Missing param 'relatedContent' in createRelatedContentOnTask";
       }
 
@@ -204,12 +204,12 @@
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in createRelatedContentOnTask";
       }
 
       // verify the required parameter 'file' is set
-      if (file == undefined || file == null) {
+      if (file === undefined || file === null) {
         throw "Missing param 'file' in createRelatedContentOnTask";
       }
 
@@ -253,7 +253,7 @@
       var postBody = null;
 
       // verify the required parameter 'file' is set
-      if (file == undefined || file == null) {
+      if (file === undefined || file === null) {
         throw "Missing param 'file' in createTemporaryRawRelatedContent";
       }
 
@@ -295,7 +295,7 @@
       var postBody = relatedContent;
 
       // verify the required parameter 'relatedContent' is set
-      if (relatedContent == undefined || relatedContent == null) {
+      if (relatedContent === undefined || relatedContent === null) {
         throw "Missing param 'relatedContent' in createTemporaryRelatedContent";
       }
 
@@ -336,7 +336,7 @@
       var postBody = null;
 
       // verify the required parameter 'contentId' is set
-      if (contentId == undefined || contentId == null) {
+      if (contentId === undefined || contentId === null) {
         throw "Missing param 'contentId' in deleteContent";
       }
 
@@ -378,7 +378,7 @@
       var postBody = null;
 
       // verify the required parameter 'contentId' is set
-      if (contentId == undefined || contentId == null) {
+      if (contentId === undefined || contentId === null) {
         throw "Missing param 'contentId' in getContent";
       }
 
@@ -420,7 +420,7 @@
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
-      if (processInstanceId == undefined || processInstanceId == null) {
+      if (processInstanceId === undefined || processInstanceId === null) {
         throw "Missing param 'processInstanceId' in getProcessInstanceContent";
       }
 
@@ -462,7 +462,7 @@
       var postBody = null;
 
       // verify the required parameter 'contentId' is set
-      if (contentId == undefined || contentId == null) {
+      if (contentId === undefined || contentId === null) {
         throw "Missing param 'contentId' in getRawContent";
       }
 
@@ -495,7 +495,7 @@
       var postBody = null;
 
       // verify the required parameter 'contentId' is set
-      if (contentId == undefined || contentId == null) {
+      if (contentId === undefined || contentId === null) {
         throw "Missing param 'contentId' in getRawContent";
       }
 
@@ -541,7 +541,7 @@
       var postBody = null;
 
       // verify the required parameter 'contentId' is set
-      if (contentId == undefined || contentId == null) {
+      if (contentId === undefined || contentId === null) {
         throw "Missing param 'contentId' in getRawContent";
       }
 
@@ -587,7 +587,7 @@
       var postBody = null;
 
       // verify the required parameter 'processInstanceId' is set
-      if (processInstanceId == undefined || processInstanceId == null) {
+      if (processInstanceId === undefined || processInstanceId === null) {
         throw "Missing param 'processInstanceId' in getRelatedContentForProcessInstance";
       }
 
@@ -632,7 +632,7 @@
       var postBody = null;
 
       // verify the required parameter 'taskId' is set
-      if (taskId == undefined || taskId == null) {
+      if (taskId === undefined || taskId === null) {
         throw "Missing param 'taskId' in getRelatedContentForTask";
       }
 

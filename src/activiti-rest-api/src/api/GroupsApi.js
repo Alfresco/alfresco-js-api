@@ -94,7 +94,7 @@
       var postBody = null;
 
       // verify the required parameter 'groupId' is set
-      if (groupId == undefined || groupId == null) {
+      if (groupId === undefined || groupId === null) {
         throw "Missing param 'groupId' in getUsersForGroup";
       }
 

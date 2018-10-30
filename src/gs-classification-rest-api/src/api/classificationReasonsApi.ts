@@ -71,9 +71,9 @@ export class ClassificationReasonsApi {
         return this.apiClient.callApi(
             '/classification-reasons', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Delete a classification reason
@@ -105,9 +105,9 @@ export class ClassificationReasonsApi {
         return this.apiClient.callApi(
             '/classification-reasons/{classificationReasonId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * List all classification reasons
@@ -140,9 +140,9 @@ export class ClassificationReasonsApi {
         return this.apiClient.callApi(
             '/classification-reasons', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
 
     /**
@@ -175,9 +175,9 @@ export class ClassificationReasonsApi {
         return this.apiClient.callApi(
             '/classification-reasons/{classificationReasonId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Update a classification reason
@@ -215,8 +215,8 @@ export class ClassificationReasonsApi {
         return this.apiClient.callApi(
             '/classification-reasons/{classificationReasonId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
 }

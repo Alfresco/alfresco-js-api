@@ -64,12 +64,12 @@ export class ChangesApi extends BaseApi {
         let postBody = assocTargetBody;
 
         // verify the required parameter 'sourceId' is set
-        if (sourceId == undefined || sourceId == null) {
+        if (sourceId === undefined || sourceId === null) {
             throw this.errorMessage('sourceId', 'addAssoc');
         }
 
         // verify the required parameter 'assocTargetBody' is set
-        if (assocTargetBody == undefined || assocTargetBody == null) {
+        if (assocTargetBody === undefined || assocTargetBody === null) {
             throw this.errorMessage('assocTargetBody', 'addAssoc');
         }
 
@@ -87,9 +87,9 @@ export class ChangesApi extends BaseApi {
         let returnType = null;
 
         return this.apiClient.callApi(
-            this.path+'/{sourceId}/targets', 'POST',
+            this.path + '/{sourceId}/targets', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -110,12 +110,12 @@ export class ChangesApi extends BaseApi {
         let postBody = nodeBody;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw this.errorMessage('nodeId', 'addNode');
         }
 
         // verify the required parameter 'nodeBody' is set
-        if (nodeBody == undefined || nodeBody == null) {
+        if (nodeBody === undefined || nodeBody === null) {
             throw this.errorMessage('nodeBody', 'addNode');
         }
 
@@ -136,9 +136,9 @@ export class ChangesApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{nodeId}/children', 'POST',
+            this.path + '/{nodeId}/children', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -153,12 +153,12 @@ export class ChangesApi extends BaseApi {
         let postBody = assocChildBody;
 
         // verify the required parameter 'parentId' is set
-        if (parentId == undefined || parentId == null) {
+        if (parentId === undefined || parentId === null) {
             throw this.errorMessage('parentId', 'addSecondaryChildAssoc');
         }
 
         // verify the required parameter 'assocChildBody' is set
-        if (assocChildBody == undefined || assocChildBody == null) {
+        if (assocChildBody === undefined || assocChildBody === null) {
             throw  this.errorMessage('assocChildBody', 'addSecondaryChildAssoc');
         }
 
@@ -176,9 +176,9 @@ export class ChangesApi extends BaseApi {
         let returnType = null;
 
         return this.apiClient.callApi(
-            this.path+'/{parentId}/secondary-children', 'POST',
+            this.path + '/{parentId}/secondary-children', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -197,7 +197,7 @@ export class ChangesApi extends BaseApi {
         let postBody = sharedLinkBody;
 
         // verify the required parameter 'sharedLinkBody' is set
-        if (sharedLinkBody == undefined || sharedLinkBody == null) {
+        if (sharedLinkBody === undefined || sharedLinkBody === null) {
             throw this.errorMessage('sharedLinkBody', 'addSharedLink');
         }
 
@@ -217,7 +217,7 @@ export class ChangesApi extends BaseApi {
         return this.apiClient.callApi(
             '/shared-links', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -237,12 +237,12 @@ export class ChangesApi extends BaseApi {
         let postBody = copyBody;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw  this.errorMessage('nodeId', 'copyNode');
         }
 
         // verify the required parameter 'copyBody' is set
-        if (copyBody == undefined || copyBody == null) {
+        if (copyBody === undefined || copyBody === null) {
             throw  this.errorMessage('copyBody', 'copyNode');
         }
 
@@ -262,9 +262,9 @@ export class ChangesApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{nodeId}/copy', 'POST',
+            this.path + '/{nodeId}/copy', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -279,12 +279,12 @@ export class ChangesApi extends BaseApi {
         let postBody = renditionBody;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw this.errorMessage('nodeId', 'createRendition');
         }
 
         // verify the required parameter 'renditionBody' is set
-        if (renditionBody == undefined || renditionBody == null) {
+        if (renditionBody === undefined || renditionBody === null) {
             throw  this.errorMessage('renditionBody', 'createRendition');
         }
 
@@ -302,9 +302,9 @@ export class ChangesApi extends BaseApi {
         let returnType = null;
 
         return this.apiClient.callApi(
-            this.path+'/{nodeId}/renditions', 'POST',
+            this.path + '/{nodeId}/renditions', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -323,7 +323,7 @@ export class ChangesApi extends BaseApi {
         let postBody = siteBody;
 
         // verify the required parameter 'siteBody' is set
-        if (siteBody == undefined || siteBody == null) {
+        if (siteBody === undefined || siteBody === null) {
             throw "Missing param 'siteBody' in createSite";
         }
 
@@ -343,7 +343,7 @@ export class ChangesApi extends BaseApi {
         return this.apiClient.callApi(
             '/sites', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -361,12 +361,12 @@ export class ChangesApi extends BaseApi {
         let postBody = siteBody;
 
         // verify the required parameter 'siteId' is set
-        if (siteId == undefined || siteId == null) {
+        if (siteId === undefined || siteId === null) {
             throw "Missing param 'siteId' in updateSite";
         }
 
         // verify the required parameter 'siteBody' is set
-        if (siteBody == undefined || siteBody == null) {
+        if (siteBody === undefined || siteBody === null) {
             throw "Missing param 'siteBody' in updateSite";
         }
 
@@ -388,7 +388,7 @@ export class ChangesApi extends BaseApi {
         return this.apiClient.callApi(
             '/sites/{siteId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -405,7 +405,7 @@ export class ChangesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in deleteNode";
         }
 
@@ -425,9 +425,9 @@ export class ChangesApi extends BaseApi {
         let returnType = null;
 
         return this.apiClient.callApi(
-            this.path+'/{nodeId}', 'DELETE',
+            this.path + '/{nodeId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -441,7 +441,7 @@ export class ChangesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'sharedId' is set
-        if (sharedId == undefined || sharedId == null) {
+        if (sharedId === undefined || sharedId === null) {
             throw "Missing param 'sharedId' in deleteSharedLink";
         }
 
@@ -461,7 +461,7 @@ export class ChangesApi extends BaseApi {
         return this.apiClient.callApi(
             '/shared-links/{sharedId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -478,7 +478,7 @@ export class ChangesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'siteId' is set
-        if (siteId == undefined || siteId == null) {
+        if (siteId === undefined || siteId === null) {
             throw "Missing param 'siteId' in deleteSite";
         }
 
@@ -500,7 +500,7 @@ export class ChangesApi extends BaseApi {
         return this.apiClient.callApi(
             '/sites/{siteId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -515,12 +515,12 @@ export class ChangesApi extends BaseApi {
         let postBody = emailSharedLinkBody;
 
         // verify the required parameter 'sharedId' is set
-        if (sharedId == undefined || sharedId == null) {
+        if (sharedId === undefined || sharedId === null) {
             throw "Missing param 'sharedId' in emailSharedLink";
         }
 
         // verify the required parameter 'emailSharedLinkBody' is set
-        if (emailSharedLinkBody == undefined || emailSharedLinkBody == null) {
+        if (emailSharedLinkBody === undefined || emailSharedLinkBody === null) {
             throw "Missing param 'emailSharedLinkBody' in emailSharedLink";
         }
 
@@ -540,7 +540,7 @@ export class ChangesApi extends BaseApi {
         return this.apiClient.callApi(
             '/shared-links/{sharedId}/email', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -575,7 +575,7 @@ export class ChangesApi extends BaseApi {
         return this.apiClient.callApi(
             '/shared-links', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -593,7 +593,7 @@ export class ChangesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in getDeletedNode";
         }
 
@@ -614,7 +614,7 @@ export class ChangesApi extends BaseApi {
         return this.apiClient.callApi(
             '/deleted-nodes/{nodeId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -649,7 +649,7 @@ export class ChangesApi extends BaseApi {
         return this.apiClient.callApi(
             '/deleted-nodes', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -667,7 +667,7 @@ export class ChangesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in getFileContent";
         }
 
@@ -689,9 +689,9 @@ export class ChangesApi extends BaseApi {
         let returnType = null;
 
         return this.apiClient.callApi(
-            this.path+'/{nodeId}/content', 'GET',
+            this.path + '/{nodeId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -711,7 +711,7 @@ export class ChangesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in getNode";
         }
 
@@ -732,9 +732,9 @@ export class ChangesApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{nodeId}', 'GET',
+            this.path + '/{nodeId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -759,7 +759,7 @@ export class ChangesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in getNodeChildren";
         }
 
@@ -785,9 +785,9 @@ export class ChangesApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{nodeId}/children', 'GET',
+            this.path + '/{nodeId}/children', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -803,12 +803,12 @@ export class ChangesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in getRendition";
         }
 
         // verify the required parameter 'renditionId' is set
-        if (renditionId == undefined || renditionId == null) {
+        if (renditionId === undefined || renditionId === null) {
             throw "Missing param 'renditionId' in getRendition";
         }
 
@@ -826,9 +826,9 @@ export class ChangesApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{nodeId}/renditions/{renditionId}', 'GET',
+            this.path + '/{nodeId}/renditions/{renditionId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -847,12 +847,12 @@ export class ChangesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in getRenditionContent";
         }
 
         // verify the required parameter 'renditionId' is set
-        if (renditionId == undefined || renditionId == null) {
+        if (renditionId === undefined || renditionId === null) {
             throw "Missing param 'renditionId' in getRenditionContent";
         }
 
@@ -875,9 +875,9 @@ export class ChangesApi extends BaseApi {
         let returnType = null;
 
         return this.apiClient.callApi(
-            this.path+'/{nodeId}/renditions/{renditionId}/content', 'GET',
+            this.path + '/{nodeId}/renditions/{renditionId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -892,7 +892,7 @@ export class ChangesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in getRenditions";
         }
 
@@ -909,9 +909,9 @@ export class ChangesApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{nodeId}/renditions', 'GET',
+            this.path + '/{nodeId}/renditions', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -930,7 +930,7 @@ export class ChangesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'sharedId' is set
-        if (sharedId == undefined || sharedId == null) {
+        if (sharedId === undefined || sharedId === null) {
             throw "Missing param 'sharedId' in getSharedLink";
         }
 
@@ -952,7 +952,7 @@ export class ChangesApi extends BaseApi {
         return this.apiClient.callApi(
             '/shared-links/{sharedId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -970,7 +970,7 @@ export class ChangesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'sharedId' is set
-        if (sharedId == undefined || sharedId == null) {
+        if (sharedId === undefined || sharedId === null) {
             throw "Missing param 'sharedId' in getSharedLinkContent";
         }
 
@@ -993,7 +993,7 @@ export class ChangesApi extends BaseApi {
         return this.apiClient.callApi(
             '/shared-links/{sharedId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -1012,12 +1012,12 @@ export class ChangesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'sharedId' is set
-        if (sharedId == undefined || sharedId == null) {
+        if (sharedId === undefined || sharedId === null) {
             throw "Missing param 'sharedId' in getSharedLinkRenditionContent";
         }
 
         // verify the required parameter 'renditionId' is set
-        if (renditionId == undefined || renditionId == null) {
+        if (renditionId === undefined || renditionId === null) {
             throw "Missing param 'renditionId' in getSharedLinkRenditionContent";
         }
 
@@ -1042,7 +1042,7 @@ export class ChangesApi extends BaseApi {
         return this.apiClient.callApi(
             '/shared-links/{sharedId}/renditions/{renditionId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -1057,7 +1057,7 @@ export class ChangesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'sharedId' is set
-        if (sharedId == undefined || sharedId == null) {
+        if (sharedId === undefined || sharedId === null) {
             throw "Missing param 'sharedId' in getSharedLinkRenditions";
         }
 
@@ -1076,7 +1076,7 @@ export class ChangesApi extends BaseApi {
         return this.apiClient.callApi(
             '/shared-links/{sharedId}/renditions', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -1096,7 +1096,7 @@ export class ChangesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'childId' is set
-        if (childId == undefined || childId == null) {
+        if (childId === undefined || childId === null) {
             throw "Missing param 'childId' in listParents";
         }
 
@@ -1117,9 +1117,9 @@ export class ChangesApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{childId}/parents', 'GET',
+            this.path + '/{childId}/parents', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -1140,7 +1140,7 @@ export class ChangesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'parentId' is set
-        if (parentId == undefined || parentId == null) {
+        if (parentId === undefined || parentId === null) {
             throw "Missing param 'parentId' in listSecondaryChildAssociations";
         }
 
@@ -1162,9 +1162,9 @@ export class ChangesApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{parentId}/secondary-children', 'GET',
+            this.path + '/{parentId}/secondary-children', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -1184,7 +1184,7 @@ export class ChangesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'targetId' is set
-        if (targetId == undefined || targetId == null) {
+        if (targetId === undefined || targetId === null) {
             throw "Missing param 'targetId' in listSourceNodeAssociations";
         }
 
@@ -1205,9 +1205,9 @@ export class ChangesApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{targetId}/sources', 'GET',
+            this.path + '/{targetId}/sources', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -1227,7 +1227,7 @@ export class ChangesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'sourceId' is set
-        if (sourceId == undefined || sourceId == null) {
+        if (sourceId === undefined || sourceId === null) {
             throw "Missing param 'sourceId' in listTargetAssociations";
         }
 
@@ -1248,9 +1248,9 @@ export class ChangesApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{sourceId}/targets', 'GET',
+            this.path + '/{sourceId}/targets', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -1274,7 +1274,7 @@ export class ChangesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'term' is set
-        if (term == undefined || term == null) {
+        if (term === undefined || term === null) {
             throw "Missing param 'term' in liveSearchNodes";
         }
 
@@ -1300,7 +1300,7 @@ export class ChangesApi extends BaseApi {
         return this.apiClient.callApi(
             '/queries/live-search-nodes', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -1321,12 +1321,12 @@ export class ChangesApi extends BaseApi {
         let postBody = moveBody;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in moveNode";
         }
 
         // verify the required parameter 'moveBody' is set
-        if (moveBody == undefined || moveBody == null) {
+        if (moveBody === undefined || moveBody === null) {
             throw "Missing param 'moveBody' in moveNode";
         }
 
@@ -1346,9 +1346,9 @@ export class ChangesApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{nodeId}/move', 'POST',
+            this.path + '/{nodeId}/move', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -1362,7 +1362,7 @@ export class ChangesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in purgeDeletedNode";
         }
 
@@ -1382,7 +1382,7 @@ export class ChangesApi extends BaseApi {
         return this.apiClient.callApi(
             '/deleted-nodes/{nodeId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -1400,12 +1400,12 @@ export class ChangesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'sourceId' is set
-        if (sourceId == undefined || sourceId == null) {
+        if (sourceId === undefined || sourceId === null) {
             throw "Missing param 'sourceId' in removeAssoc";
         }
 
         // verify the required parameter 'targetId' is set
-        if (targetId == undefined || targetId == null) {
+        if (targetId === undefined || targetId === null) {
             throw "Missing param 'targetId' in removeAssoc";
         }
 
@@ -1426,9 +1426,9 @@ export class ChangesApi extends BaseApi {
         let returnType = null;
 
         return this.apiClient.callApi(
-            this.path+'/{sourceId}/targets/{targetId}', 'DELETE',
+            this.path + '/{sourceId}/targets/{targetId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -1446,12 +1446,12 @@ export class ChangesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'parentId' is set
-        if (parentId == undefined || parentId == null) {
+        if (parentId === undefined || parentId === null) {
             throw "Missing param 'parentId' in removeSecondaryChildAssoc";
         }
 
         // verify the required parameter 'childId' is set
-        if (childId == undefined || childId == null) {
+        if (childId === undefined || childId === null) {
             throw "Missing param 'childId' in removeSecondaryChildAssoc";
         }
 
@@ -1472,9 +1472,9 @@ export class ChangesApi extends BaseApi {
         let returnType = null;
 
         return this.apiClient.callApi(
-            this.path+'/{parentId}/secondary-children/{childId}', 'DELETE',
+            this.path + '/{parentId}/secondary-children/{childId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -1490,7 +1490,7 @@ export class ChangesApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in restoreNode";
         }
 
@@ -1509,7 +1509,7 @@ export class ChangesApi extends BaseApi {
         return this.apiClient.callApi(
             '/deleted-nodes/{nodeId}/restore', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -1530,12 +1530,12 @@ export class ChangesApi extends BaseApi {
         let postBody = contentBody;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in updateFileContent";
         }
 
         // verify the required parameter 'contentBody' is set
-        if (contentBody == undefined || contentBody == null) {
+        if (contentBody === undefined || contentBody === null) {
             throw "Missing param 'contentBody' in updateFileContent";
         }
 
@@ -1557,9 +1557,9 @@ export class ChangesApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{nodeId}/content', 'PUT',
+            this.path + '/{nodeId}/content', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -1578,12 +1578,12 @@ export class ChangesApi extends BaseApi {
         let postBody = nodeBody;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in updateNode";
         }
 
         // verify the required parameter 'nodeBody' is set
-        if (nodeBody == undefined || nodeBody == null) {
+        if (nodeBody === undefined || nodeBody === null) {
             throw "Missing param 'nodeBody' in updateNode";
         }
 
@@ -1603,9 +1603,9 @@ export class ChangesApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{nodeId}', 'PUT',
+            this.path + '/{nodeId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 }

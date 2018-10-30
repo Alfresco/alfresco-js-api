@@ -38,7 +38,7 @@ export class VersionsApi extends BaseApi {
      * @param {String} versionId The identifier of a version, ie. version label, within the version history of a node.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    deleteVersion(nodeId:string, versionId:string) :Promise<any>{
+    deleteVersion(nodeId: string, versionId: string): Promise<any>{
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
@@ -66,9 +66,9 @@ export class VersionsApi extends BaseApi {
         let returnType = null;
 
         return this.apiClient.callApi(
-            this.path+'/{nodeId}/versions/{versionId}', 'DELETE',
+            this.path + '/{nodeId}/versions/{versionId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -79,7 +79,7 @@ export class VersionsApi extends BaseApi {
      * @param {String} versionId The identifier of a version, ie. version label, within the version history of a node.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/VersionEntry} and HTTP response
      */
-    getVersion(nodeId:string, versionId:string) :Promise<VersionEntry> {
+    getVersion(nodeId: string, versionId: string): Promise<VersionEntry> {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
@@ -106,9 +106,9 @@ export class VersionsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{nodeId}/versions/{versionId}', 'GET',
+            this.path + '/{nodeId}/versions/{versionId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -123,7 +123,7 @@ export class VersionsApi extends BaseApi {
      * @param {String} opts.range The Range header indicates the part of a document that the server should return. Single part request supported, for example: bytes&#x3D;1-10.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    getVersionContent(nodeId:string, versionId:string, opts:any):Promise<any>  {
+    getVersionContent(nodeId: string, versionId: string, opts: any): Promise<any>  {
         opts = opts || {};
         let postBody = null;
 
@@ -158,9 +158,9 @@ export class VersionsApi extends BaseApi {
         let returnType = null;
 
         return this.apiClient.callApi(
-            this.path+'/{nodeId}/versions/{versionId}/content', 'GET',
+            this.path + '/{nodeId}/versions/{versionId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -175,7 +175,7 @@ export class VersionsApi extends BaseApi {
      * @param {Number} opts.maxItems The maximum number of items to return in the list. If not supplied then the default value is 100.  (default to 100)
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/VersionPaging} and HTTP response
      */
-    listVersionHistory(nodeId:string, opts:any) :Promise<VersionPaging> {
+    listVersionHistory(nodeId: string, opts: any): Promise<VersionPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -202,9 +202,9 @@ export class VersionsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{nodeId}/versions', 'GET',
+            this.path + '/{nodeId}/versions', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -218,7 +218,7 @@ export class VersionsApi extends BaseApi {
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/VersionEntry} and HTTP response
      */
-    revertVersion(nodeId:string, versionId:string, revertBody:RevertBody, opts:any) :Promise<VersionEntry>{
+    revertVersion(nodeId: string, versionId: string, revertBody: RevertBody, opts: any): Promise<VersionEntry>{
         opts = opts || {};
         let postBody = revertBody;
 
@@ -253,9 +253,9 @@ export class VersionsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{nodeId}/versions/{versionId}/revert', 'POST',
+            this.path + '/{nodeId}/versions/{versionId}/revert', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 

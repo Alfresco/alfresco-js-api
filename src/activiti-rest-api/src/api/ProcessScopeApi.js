@@ -47,7 +47,7 @@
       var postBody = processScopesRequest;
 
       // verify the required parameter 'processScopesRequest' is set
-      if (processScopesRequest == undefined || processScopesRequest == null) {
+      if (processScopesRequest === undefined || processScopesRequest === null) {
         throw "Missing param 'processScopesRequest' in getRuntimeProcessScopes";
       }
 

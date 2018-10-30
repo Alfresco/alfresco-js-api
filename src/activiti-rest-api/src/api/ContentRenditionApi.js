@@ -48,12 +48,12 @@
       var postBody = null;
 
       // verify the required parameter 'contentId' is set
-      if (contentId == undefined || contentId == null) {
+      if (contentId === undefined || contentId === null) {
         throw "Missing param 'contentId' in getRawContent";
       }
 
       // verify the required parameter 'renditionType' is set
-      if (renditionType == undefined || renditionType == null) {
+      if (renditionType === undefined || renditionType === null) {
         throw "Missing param 'renditionType' in getRawContent";
       }
 

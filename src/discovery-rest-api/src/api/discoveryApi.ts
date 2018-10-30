@@ -63,7 +63,7 @@ export class DiscoveryApi {
         return this.apiClient.callApi(
             '/discovery', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 }

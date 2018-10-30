@@ -48,12 +48,12 @@ export class TagsApi extends BaseApi {
     let postBody = tagBody;
 
     // verify the required parameter 'nodeId' is set
-    if (nodeId == undefined || nodeId == null) {
+    if (nodeId === undefined || nodeId === null) {
       throw "Missing param 'nodeId' in addTag";
     }
 
     // verify the required parameter 'tagBody' is set
-    if (tagBody == undefined || tagBody == null) {
+    if (tagBody === undefined || tagBody === null) {
       throw "Missing param 'tagBody' in addTag";
     }
 
@@ -72,7 +72,7 @@ export class TagsApi extends BaseApi {
     return this.apiClient.callApi(
       this.path + '/{nodeId}/tags', 'POST',
       pathParams, queryParams, headerParams, formParams, postBody,
-       contentTypes, accepts
+      contentTypes, accepts
     );
   }
 
@@ -92,7 +92,7 @@ export class TagsApi extends BaseApi {
     let postBody = null;
 
     // verify the required parameter 'nodeId' is set
-    if (nodeId == undefined || nodeId == null) {
+    if (nodeId === undefined || nodeId === null) {
       throw "Missing param 'nodeId' in getNodeTags";
     }
 
@@ -115,7 +115,7 @@ export class TagsApi extends BaseApi {
     return this.apiClient.callApi(
       this.path + '/{nodeId}/tags', 'GET',
       pathParams, queryParams, headerParams, formParams, postBody,
-       contentTypes, accepts
+      contentTypes, accepts
     );
   }
 
@@ -133,7 +133,7 @@ export class TagsApi extends BaseApi {
     let postBody = null;
 
     // verify the required parameter 'tagId' is set
-    if (tagId == undefined || tagId == null) {
+    if (tagId === undefined || tagId === null) {
       throw "Missing param 'tagId' in getTag";
     }
 
@@ -154,7 +154,7 @@ export class TagsApi extends BaseApi {
     return this.apiClient.callApi(
       '/tags/{tagId}', 'GET',
       pathParams, queryParams, headerParams, formParams, postBody,
-       contentTypes, accepts,
+      contentTypes, accepts
     );
   }
 
@@ -189,7 +189,7 @@ export class TagsApi extends BaseApi {
     return this.apiClient.callApi(
       '/tags', 'GET',
       pathParams, queryParams, headerParams, formParams, postBody,
-       contentTypes, accepts
+      contentTypes, accepts
     );
   }
 
@@ -204,12 +204,12 @@ export class TagsApi extends BaseApi {
     let postBody = null;
 
     // verify the required parameter 'nodeId' is set
-    if (nodeId == undefined || nodeId == null) {
+    if (nodeId === undefined || nodeId === null) {
       throw "Missing param 'nodeId' in removeTag";
     }
 
     // verify the required parameter 'tagId' is set
-    if (tagId == undefined || tagId == null) {
+    if (tagId === undefined || tagId === null) {
       throw "Missing param 'tagId' in removeTag";
     }
 
@@ -230,7 +230,7 @@ export class TagsApi extends BaseApi {
     return this.apiClient.callApi(
       this.path + '/{nodeId}/tags/{tagId}', 'DELETE',
       pathParams, queryParams, headerParams, formParams, postBody,
-       contentTypes, accepts, returnType
+      contentTypes, accepts, returnType
     );
   }
 
@@ -246,12 +246,12 @@ export class TagsApi extends BaseApi {
     let postBody = tagBody;
 
     // verify the required parameter 'tagId' is set
-    if (tagId == undefined || tagId == null) {
+    if (tagId === undefined || tagId === null) {
       throw "Missing param 'tagId' in updateTag";
     }
 
     // verify the required parameter 'tagBody' is set
-    if (tagBody == undefined || tagBody == null) {
+    if (tagBody === undefined || tagBody === null) {
       throw "Missing param 'tagBody' in updateTag";
     }
 
@@ -270,7 +270,7 @@ export class TagsApi extends BaseApi {
     return this.apiClient.callApi(
       '/tags/{tagId}', 'PUT',
       pathParams, queryParams, headerParams, formParams, postBody,
-       contentTypes, accepts
+      contentTypes, accepts
     );
   }
 }

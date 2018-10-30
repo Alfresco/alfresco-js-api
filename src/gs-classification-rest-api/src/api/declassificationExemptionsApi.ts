@@ -71,9 +71,9 @@ export class DeclassificationExemptionsApi {
         return this.apiClient.callApi(
             '/declassification-exemptions', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
 
     /**
@@ -106,9 +106,9 @@ export class DeclassificationExemptionsApi {
         return this.apiClient.callApi(
             '/declassification-exemptions/{declassificationExemptionId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * List all declassification exemptions
@@ -139,9 +139,9 @@ export class DeclassificationExemptionsApi {
         return this.apiClient.callApi(
             '/declassification-exemptions', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
 
     /**
@@ -174,9 +174,9 @@ export class DeclassificationExemptionsApi {
         return this.apiClient.callApi(
             '/declassification-exemptions/{declassificationExemptionId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Update a declassification exemption
@@ -214,9 +214,9 @@ export class DeclassificationExemptionsApi {
         return this.apiClient.callApi(
             '/declassification-exemptions/{declassificationExemptionId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Calculate the default declassification date
@@ -248,8 +248,8 @@ export class DeclassificationExemptionsApi {
         return this.apiClient.callApi(
             '/default-classification-values/{nodeId}/calculate-declassification-date', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
 }

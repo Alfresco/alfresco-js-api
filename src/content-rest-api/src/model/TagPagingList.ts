@@ -16,8 +16,8 @@
 */
 
 
-import {Pagination} from "./Pagination";
-import {TagEntry} from "./TagEntry";
+import { Pagination } from './Pagination';
+import { TagEntry } from './TagEntry';
 
 export class TagPagingList {
     entries?: Array<TagEntry>;

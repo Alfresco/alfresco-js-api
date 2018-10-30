@@ -16,8 +16,8 @@
 */
 
 
-import { FavoriteEntry } from "./FavoriteEntry";
-import { Pagination } from "./Pagination";
+import { FavoriteEntry } from './FavoriteEntry';
+import { Pagination } from './Pagination';
 
 export class FavoritePagingList {
 

@@ -47,7 +47,7 @@
       var postBody = filterRequest;
 
       // verify the required parameter 'filterRequest' is set
-      if (filterRequest == undefined || filterRequest == null) {
+      if (filterRequest === undefined || filterRequest === null) {
         throw "Missing param 'filterRequest' in filterProcessInstances";
       }
 
@@ -88,7 +88,7 @@
       var postBody = requestNode;
 
       // verify the required parameter 'requestNode' is set
-      if (requestNode == undefined || requestNode == null) {
+      if (requestNode === undefined || requestNode === null) {
         throw "Missing param 'requestNode' in getProcessInstances";
       }
 

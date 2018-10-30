@@ -33,7 +33,7 @@ import { AlfrescoApi } from '../../../alfrescoApi';
  */
 export class CustomModelApi extends BaseApi {
 
-    private: boolean =true;
+    private: boolean = true;
 
     constructor(alfrescoApi?: AlfrescoApi) {
         super();
@@ -45,20 +45,20 @@ export class CustomModelApi extends BaseApi {
      */
     createCustomModel(status, description, name, namespaceUri, namespacePrefix): Promise<any> {
 
-        if (namespaceUri == undefined || namespaceUri == null) {
+        if (namespaceUri === undefined || namespaceUri === null) {
             throw "Missing param 'namespaceUri' in createCustomModel";
         }
 
-        if (namespacePrefix == undefined || namespacePrefix == null) {
+        if (namespacePrefix === undefined || namespacePrefix === null) {
             throw "Missing param 'namespacePrefix' in createCustomModel";
         }
 
         let postBody = {
-            "status": status,
-            "description": description,
-            "name": name,
-            "namespaceUri": namespaceUri,
-            "namespacePrefix": namespacePrefix
+            'status': status,
+            'description': description,
+            'name': name,
+            'namespaceUri': namespaceUri,
+            'namespacePrefix': namespacePrefix
         };
 
         let pathParams = {};
@@ -74,7 +74,7 @@ export class CustomModelApi extends BaseApi {
         return this.apiClient.callApi(
             'cmm', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -87,23 +87,23 @@ export class CustomModelApi extends BaseApi {
      */
     createCustomType(modelName, name, parentName, title, description): Promise<any> {
 
-        if (modelName == undefined || modelName == null) {
+        if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in createCustomType";
         }
 
-        if (name == undefined || name == null) {
+        if (name === undefined || name === null) {
             throw "Missing param 'name' in createCustomType";
         }
 
         let postBody = {
-            "name": name,
-            "parentName": parentName,
-            "title": title,
-            "description": description
+            'name': name,
+            'parentName': parentName,
+            'title': title,
+            'description': description
         };
 
         let pathParams = {
-            "modelName": modelName
+            'modelName': modelName
         };
         let queryParams = {};
         let headerParams = {};
@@ -117,7 +117,7 @@ export class CustomModelApi extends BaseApi {
         return this.apiClient.callApi(
             'cmm/{modelName}/types', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -130,23 +130,23 @@ export class CustomModelApi extends BaseApi {
      */
     createCustomAspect(modelName, name, parentName, title, description): Promise<any> {
 
-        if (modelName == undefined || modelName == null) {
+        if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in createCustomAspect";
         }
 
-        if (name == undefined || name == null) {
+        if (name === undefined || name === null) {
             throw "Missing param 'name' in createCustomAspect";
         }
 
         let postBody = {
-            "name": name,
-            "parentName": parentName,
-            "title": title,
-            "description": description
+            'name': name,
+            'parentName': parentName,
+            'title': title,
+            'description': description
         };
 
         let pathParams = {
-            "modelName": modelName
+            'modelName': modelName
         };
         let queryParams = {};
         let headerParams = {};
@@ -160,7 +160,7 @@ export class CustomModelApi extends BaseApi {
         return this.apiClient.callApi(
             'cmm/{modelName}/aspects', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -173,24 +173,24 @@ export class CustomModelApi extends BaseApi {
      */
     createCustomConstraint(modelName, name, type, parameters): Promise<any> {
 
-        if (modelName == undefined || modelName == null) {
+        if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in createCustomConstraint";
         }
-        if (type == undefined || type == null) {
+        if (type === undefined || type === null) {
             throw "Missing param 'type' in createCustomConstraint";
         }
-        if (name == undefined || name == null) {
+        if (name === undefined || name === null) {
             throw "Missing param 'name' in createCustomConstraint";
         }
 
         let postBody = {
-            "name": name,
-            "type": type,
-            "parameters": parameters
+            'name': name,
+            'type': type,
+            'parameters': parameters
         };
 
         let pathParams = {
-            "modelName": modelName
+            'modelName': modelName
         };
         let queryParams = {};
         let headerParams = {};
@@ -204,7 +204,7 @@ export class CustomModelApi extends BaseApi {
         return this.apiClient.callApi(
             'cmm/{modelName}/constraints', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -214,16 +214,16 @@ export class CustomModelApi extends BaseApi {
      */
     activateCustomModel(modelName): Promise<any> {
 
-        if (modelName == undefined || modelName == null) {
+        if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in activateCustomModel";
         }
 
         let postBody = {
-            "status": "ACTIVE"
+            'status': 'ACTIVE'
         };
 
         let pathParams = {
-            "modelName": modelName
+            'modelName': modelName
         };
         let queryParams = {};
         let headerParams = {};
@@ -237,7 +237,7 @@ export class CustomModelApi extends BaseApi {
         return this.apiClient.callApi(
             'cmm/{modelName}?select=status', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -247,16 +247,16 @@ export class CustomModelApi extends BaseApi {
      */
     deactivateCustomModel(modelName): Promise<any> {
 
-        if (modelName == undefined || modelName == null) {
+        if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in deactivateCustomModel";
         }
 
         let postBody = {
-            "status": "DRAFT"
+            'status': 'DRAFT'
         };
 
         let pathParams = {
-            "modelName": modelName
+            'modelName': modelName
         };
         let queryParams = {};
         let headerParams = {};
@@ -270,7 +270,7 @@ export class CustomModelApi extends BaseApi {
         return this.apiClient.callApi(
             'cmm/{modelName}?select=status', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -282,22 +282,22 @@ export class CustomModelApi extends BaseApi {
      */
     addPropertyToAspect(modelName, aspectName, properties): Promise<any> {
 
-        if (modelName == undefined || modelName == null) {
+        if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in addPropertyToAspect";
         }
 
-        if (aspectName == undefined || aspectName == null) {
+        if (aspectName === undefined || aspectName === null) {
             throw "Missing param 'aspectName' in addPropertyToAspect";
         }
 
         let postBody = {
-            "name": aspectName,
-            "properties": properties
+            'name': aspectName,
+            'properties': properties
         };
 
         let pathParams = {
-            "modelName": modelName,
-            "aspectName": aspectName
+            'modelName': modelName,
+            'aspectName': aspectName
         };
         let queryParams = {};
         let headerParams = {};
@@ -311,7 +311,7 @@ export class CustomModelApi extends BaseApi {
         return this.apiClient.callApi(
             'cmm/{modelName}/aspects/{aspectName}?select=props', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -324,22 +324,22 @@ export class CustomModelApi extends BaseApi {
      */
     addPropertyToType(modelName, typeName, properties, aspectName): Promise<any> {
 
-        if (modelName == undefined || modelName == null) {
+        if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in addPropertyToType";
         }
 
-        if (typeName == undefined || typeName == null) {
+        if (typeName === undefined || typeName === null) {
             throw "Missing param 'typeName' in addPropertyToType";
         }
 
         let postBody = {
-            "name": aspectName,
-            "properties": properties
+            'name': aspectName,
+            'properties': properties
         };
 
         let pathParams = {
-            "modelName": modelName,
-            "typeName": typeName
+            'modelName': modelName,
+            'typeName': typeName
         };
         let queryParams = {};
         let headerParams = {};
@@ -353,7 +353,7 @@ export class CustomModelApi extends BaseApi {
         return this.apiClient.callApi(
             'cmm/{modelName}/types/{typeName}?select=props', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -366,19 +366,19 @@ export class CustomModelApi extends BaseApi {
      */
     updateCustomModel(modelName, description, namespaceUri, namespacePrefix): Promise<any> {
 
-        if (modelName == undefined || modelName == null) {
+        if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in updateCustomModel";
         }
 
         let postBody = {
-            "name": modelName,
-            "description": description,
-            "namespaceUri": namespaceUri,
-            "namespacePrefix": namespacePrefix
+            'name': modelName,
+            'description': description,
+            'namespaceUri': namespaceUri,
+            'namespacePrefix': namespacePrefix
         };
 
         let pathParams = {
-            "modelName": modelName
+            'modelName': modelName
         };
         let queryParams = {};
         let headerParams = {};
@@ -392,7 +392,7 @@ export class CustomModelApi extends BaseApi {
         return this.apiClient.callApi(
             'cmm/{modelName}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -406,24 +406,24 @@ export class CustomModelApi extends BaseApi {
      */
     updateCustomType(modelName, typeName, description, parentName, title): Promise<any> {
 
-        if (modelName == undefined || modelName == null) {
+        if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in UpdateCustomType";
         }
 
-        if (typeName == undefined || typeName == null) {
+        if (typeName === undefined || typeName === null) {
             throw "Missing param 'typeName' in UpdateCustomType";
         }
 
         let postBody = {
-            "name": modelName,
-            "parentName": parentName,
-            "title": title,
-            "description": description
+            'name': modelName,
+            'parentName': parentName,
+            'title': title,
+            'description': description
         };
 
         let pathParams = {
-            "modelName": modelName,
-            "typeName": typeName
+            'modelName': modelName,
+            'typeName': typeName
         };
         let queryParams = {};
         let headerParams = {};
@@ -437,7 +437,7 @@ export class CustomModelApi extends BaseApi {
         return this.apiClient.callApi(
             'cmm/{modelName}/types/{typeName}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -451,24 +451,24 @@ export class CustomModelApi extends BaseApi {
      */
     updateCustomAspect(modelName, aspectName, description, parentName, title): Promise<any> {
 
-        if (modelName == undefined || modelName == null) {
+        if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in updateCustomAspect";
         }
 
-        if (aspectName == undefined || aspectName == null) {
+        if (aspectName === undefined || aspectName === null) {
             throw "Missing param 'aspectName' in updateCustomAspect";
         }
 
         let postBody = {
-            "name": modelName,
-            "parentName": parentName,
-            "title": title,
-            "description": description
+            'name': modelName,
+            'parentName': parentName,
+            'title': title,
+            'description': description
         };
 
         let pathParams = {
-            "modelName": modelName,
-            "aspectName": aspectName
+            'modelName': modelName,
+            'aspectName': aspectName
         };
         let queryParams = {};
         let headerParams = {};
@@ -482,7 +482,7 @@ export class CustomModelApi extends BaseApi {
         return this.apiClient.callApi(
             'cmm/{modelName}/aspects/{aspectName}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -506,7 +506,7 @@ export class CustomModelApi extends BaseApi {
         return this.apiClient.callApi(
             'cmm', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -517,14 +517,14 @@ export class CustomModelApi extends BaseApi {
      */
     getCustomModel(modelName, queryParamsInput): Promise<any> {
 
-        if (modelName == undefined || modelName == null) {
+        if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in getCustomModel";
         }
 
         let postBody = {};
 
         let pathParams = {
-            "modelName": modelName
+            'modelName': modelName
         };
 
         let queryParams = queryParamsInput || {};
@@ -540,7 +540,7 @@ export class CustomModelApi extends BaseApi {
         return this.apiClient.callApi(
             'cmm/{modelName}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -550,14 +550,14 @@ export class CustomModelApi extends BaseApi {
      */
     getAllCustomType(modelName): Promise<any> {
 
-        if (modelName == undefined || modelName == null) {
+        if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in getAllCustomType";
         }
 
         let postBody = {};
 
         let pathParams = {
-            "modelName": modelName
+            'modelName': modelName
         };
 
         let queryParams = {};
@@ -573,7 +573,7 @@ export class CustomModelApi extends BaseApi {
         return this.apiClient.callApi(
             'cmm/{modelName}/types', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -585,19 +585,19 @@ export class CustomModelApi extends BaseApi {
      */
     getCustomType(modelName, typeName, queryParamsInput): Promise<any> {
 
-        if (modelName == undefined || modelName == null) {
+        if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in getCustomType";
         }
 
-        if (typeName == undefined || typeName == null) {
+        if (typeName === undefined || typeName === null) {
             throw "Missing param 'typeName' in getCustomType";
         }
 
         let postBody = {};
 
         let pathParams = {
-            "modelName": modelName,
-            "typeName": typeName
+            'modelName': modelName,
+            'typeName': typeName
         };
 
         let queryParams = queryParamsInput || {};
@@ -613,7 +613,7 @@ export class CustomModelApi extends BaseApi {
         return this.apiClient.callApi(
             'cmm/{modelName}/types/{typeName}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -624,14 +624,14 @@ export class CustomModelApi extends BaseApi {
      */
     getAllCustomAspect(modelName, queryParamsInput): Promise<any> {
 
-        if (modelName == undefined || modelName == null) {
+        if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in getAllCustomAspect";
         }
 
         let postBody = {};
 
         let pathParams = {
-            "modelName": modelName
+            'modelName': modelName
         };
 
         let queryParams = queryParamsInput || {};
@@ -647,7 +647,7 @@ export class CustomModelApi extends BaseApi {
         return this.apiClient.callApi(
             'cmm/{modelName}/aspects', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -659,19 +659,19 @@ export class CustomModelApi extends BaseApi {
      */
     getCustomAspect(modelName, aspectName, queryParamsInput): Promise<any> {
 
-        if (modelName == undefined || modelName == null) {
+        if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in getCustomAspect";
         }
 
-        if (aspectName == undefined || aspectName == null) {
+        if (aspectName === undefined || aspectName === null) {
             throw "Missing param 'aspectName' in getCustomAspect";
         }
 
         let postBody = {};
 
         let pathParams = {
-            "modelName": modelName,
-            "aspectName": aspectName
+            'modelName': modelName,
+            'aspectName': aspectName
         };
 
         let queryParams = queryParamsInput || {};
@@ -687,7 +687,7 @@ export class CustomModelApi extends BaseApi {
         return this.apiClient.callApi(
             'cmm/{modelName}/aspects/{aspectName}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -698,14 +698,14 @@ export class CustomModelApi extends BaseApi {
      */
     getAllCustomConstraints(modelName, queryParamsInput): Promise<any> {
 
-        if (modelName == undefined || modelName == null) {
+        if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in getAllCustomConstraints";
         }
 
         let postBody = {};
 
         let pathParams = {
-            "modelName": modelName
+            'modelName': modelName
         };
 
         let queryParams = queryParamsInput || {};
@@ -721,7 +721,7 @@ export class CustomModelApi extends BaseApi {
         return this.apiClient.callApi(
             'cmm/{modelName}/constraints', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -733,19 +733,19 @@ export class CustomModelApi extends BaseApi {
      */
     getCustomConstraints(modelName, constraintName, queryParamsInput): Promise<any> {
 
-        if (modelName == undefined || modelName == null) {
+        if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in getCustomConstraints";
         }
 
-        if (constraintName == undefined || constraintName == null) {
+        if (constraintName === undefined || constraintName === null) {
             throw "Missing param 'constraintName' in getCustomConstraints";
         }
 
         let postBody = {};
 
         let pathParams = {
-            "modelName": modelName,
-            "constraintName": constraintName
+            'modelName': modelName,
+            'constraintName': constraintName
         };
 
         let queryParams = queryParamsInput || {};
@@ -761,7 +761,7 @@ export class CustomModelApi extends BaseApi {
         return this.apiClient.callApi(
             'cmm/{modelName}/constraints{constraintName}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -771,14 +771,14 @@ export class CustomModelApi extends BaseApi {
      */
     deleteCustomModel(modelName): Promise<any> {
 
-        if (modelName == undefined || modelName == null) {
+        if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in deleteCustomModel";
         }
 
         let postBody = {};
 
         let pathParams = {
-            "modelName": modelName
+            'modelName': modelName
         };
 
         let queryParams = {};
@@ -794,7 +794,7 @@ export class CustomModelApi extends BaseApi {
         return this.apiClient.callApi(
             'cmm/{modelName}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -805,19 +805,19 @@ export class CustomModelApi extends BaseApi {
      */
     deleteCustomType(modelName, typeName): Promise<any> {
 
-        if (modelName == undefined || modelName == null) {
+        if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in getCustomConstraints";
         }
 
-        if (typeName == undefined || typeName == null) {
+        if (typeName === undefined || typeName === null) {
             throw "Missing param 'modelName' in deleteCustomType";
         }
 
         let postBody = {};
 
         let pathParams = {
-            "modelName": modelName,
-            "typeName": typeName
+            'modelName': modelName,
+            'typeName': typeName
         };
 
         let queryParams = {};
@@ -833,7 +833,7 @@ export class CustomModelApi extends BaseApi {
         return this.apiClient.callApi(
             'cmm/{modelName}/types/{typeName}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 

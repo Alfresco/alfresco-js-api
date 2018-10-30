@@ -57,12 +57,12 @@ export class ChildAssociationsApi extends BaseApi {
         let postBody = nodeBody;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in addNode";
         }
 
         // verify the required parameter 'nodeBody' is set
-        if (nodeBody == undefined || nodeBody == null) {
+        if (nodeBody === undefined || nodeBody === null) {
             throw "Missing param 'nodeBody' in addNode";
         }
 
@@ -85,7 +85,7 @@ export class ChildAssociationsApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}/children', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -100,12 +100,12 @@ export class ChildAssociationsApi extends BaseApi {
         let postBody = assocChildBody;
 
         // verify the required parameter 'parentId' is set
-        if (parentId == undefined || parentId == null) {
+        if (parentId === undefined || parentId === null) {
             throw "Missing param 'parentId' in addSecondaryChildAssoc";
         }
 
         // verify the required parameter 'assocChildBody' is set
-        if (assocChildBody == undefined || assocChildBody == null) {
+        if (assocChildBody === undefined || assocChildBody === null) {
             throw "Missing param 'assocChildBody' in addSecondaryChildAssoc";
         }
 
@@ -125,7 +125,7 @@ export class ChildAssociationsApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{parentId}/secondary-children', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -142,7 +142,7 @@ export class ChildAssociationsApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in deleteNode";
         }
 
@@ -164,7 +164,7 @@ export class ChildAssociationsApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -189,7 +189,7 @@ export class ChildAssociationsApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in getNodeChildren";
         }
 
@@ -217,7 +217,7 @@ export class ChildAssociationsApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}/children', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -237,7 +237,7 @@ export class ChildAssociationsApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'childId' is set
-        if (childId == undefined || childId == null) {
+        if (childId === undefined || childId === null) {
             throw "Missing param 'childId' in listParents";
         }
 
@@ -260,7 +260,7 @@ export class ChildAssociationsApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{childId}/parents', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -281,7 +281,7 @@ export class ChildAssociationsApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'parentId' is set
-        if (parentId == undefined || parentId == null) {
+        if (parentId === undefined || parentId === null) {
             throw "Missing param 'parentId' in listSecondaryChildAssociations";
         }
 
@@ -305,7 +305,7 @@ export class ChildAssociationsApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{parentId}/secondary-children', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -325,12 +325,12 @@ export class ChildAssociationsApi extends BaseApi {
         let postBody = moveBody;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in moveNode";
         }
 
         // verify the required parameter 'moveBody' is set
-        if (moveBody == undefined || moveBody == null) {
+        if (moveBody === undefined || moveBody === null) {
             throw "Missing param 'moveBody' in moveNode";
         }
 
@@ -352,7 +352,7 @@ export class ChildAssociationsApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}/move', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -370,12 +370,12 @@ export class ChildAssociationsApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'parentId' is set
-        if (parentId == undefined || parentId == null) {
+        if (parentId === undefined || parentId === null) {
             throw "Missing param 'parentId' in removeSecondaryChildAssoc";
         }
 
         // verify the required parameter 'childId' is set
-        if (childId == undefined || childId == null) {
+        if (childId === undefined || childId === null) {
             throw "Missing param 'childId' in removeSecondaryChildAssoc";
         }
 
@@ -398,7 +398,7 @@ export class ChildAssociationsApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{parentId}/secondary-children/{childId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 }

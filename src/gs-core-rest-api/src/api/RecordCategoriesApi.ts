@@ -90,9 +90,9 @@ export class RecordCategoriesApi {
         return this.apiClient.callApi(
             '/record-categories/{recordCategoryId}/children', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Delete a record category
@@ -124,9 +124,9 @@ export class RecordCategoriesApi {
         return this.apiClient.callApi(
             '/record-categories/{recordCategoryId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Get a record category
@@ -167,9 +167,9 @@ export class RecordCategoriesApi {
         return this.apiClient.callApi(
             '/record-categories/{recordCategoryId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * List record category&#39;s children
@@ -218,9 +218,9 @@ export class RecordCategoriesApi {
         return this.apiClient.callApi(
             '/record-categories/{recordCategoryId}/children', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Update a record category
@@ -265,7 +265,7 @@ export class RecordCategoriesApi {
         return this.apiClient.callApi(
             '/record-categories/{recordCategoryId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 }

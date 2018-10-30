@@ -90,9 +90,9 @@ export class FilePlansApi {
         return this.apiClient.callApi(
             '/file-plans/{filePlanId}/categories', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Get a file plan
@@ -131,9 +131,9 @@ export class FilePlansApi {
         return this.apiClient.callApi(
             '/file-plans/{filePlanId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * List file plans&#39;s children
@@ -178,9 +178,9 @@ export class FilePlansApi {
         return this.apiClient.callApi(
             '/file-plans/{filePlanId}/categories', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Update a file plan
@@ -225,7 +225,7 @@ export class FilePlansApi {
         return this.apiClient.callApi(
             '/file-plans/{filePlanId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 }

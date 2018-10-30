@@ -49,7 +49,7 @@
       var postBody = createTenantRepresentation;
 
       // verify the required parameter 'createTenantRepresentation' is set
-      if (createTenantRepresentation == undefined || createTenantRepresentation == null) {
+      if (createTenantRepresentation === undefined || createTenantRepresentation === null) {
         throw "Missing param 'createTenantRepresentation' in createTenant";
       }
 
@@ -90,7 +90,7 @@
       var postBody = null;
 
       // verify the required parameter 'tenantId' is set
-      if (tenantId == undefined || tenantId == null) {
+      if (tenantId === undefined || tenantId === null) {
         throw "Missing param 'tenantId' in deleteTenant";
       }
 
@@ -133,7 +133,7 @@
       var postBody = null;
 
       // verify the required parameter 'tenantId' is set
-      if (tenantId == undefined || tenantId == null) {
+      if (tenantId === undefined || tenantId === null) {
         throw "Missing param 'tenantId' in getTenantEvents";
       }
 
@@ -175,7 +175,7 @@
       var postBody = null;
 
       // verify the required parameter 'tenantId' is set
-      if (tenantId == undefined || tenantId == null) {
+      if (tenantId === undefined || tenantId === null) {
         throw "Missing param 'tenantId' in getTenantLogo";
       }
 
@@ -218,7 +218,7 @@
       var postBody = null;
 
       // verify the required parameter 'tenantId' is set
-      if (tenantId == undefined || tenantId == null) {
+      if (tenantId === undefined || tenantId === null) {
         throw "Missing param 'tenantId' in getTenant";
       }
 
@@ -299,12 +299,12 @@
       var postBody = createTenantRepresentation;
 
       // verify the required parameter 'tenantId' is set
-      if (tenantId == undefined || tenantId == null) {
+      if (tenantId === undefined || tenantId === null) {
         throw "Missing param 'tenantId' in update";
       }
 
       // verify the required parameter 'createTenantRepresentation' is set
-      if (createTenantRepresentation == undefined || createTenantRepresentation == null) {
+      if (createTenantRepresentation === undefined || createTenantRepresentation === null) {
         throw "Missing param 'createTenantRepresentation' in update";
       }
 
@@ -348,12 +348,12 @@
       var postBody = null;
 
       // verify the required parameter 'tenantId' is set
-      if (tenantId == undefined || tenantId == null) {
+      if (tenantId === undefined || tenantId === null) {
         throw "Missing param 'tenantId' in uploadTenantLogo";
       }
 
       // verify the required parameter 'file' is set
-      if (file == undefined || file == null) {
+      if (file === undefined || file === null) {
         throw "Missing param 'file' in uploadTenantLogo";
       }
 

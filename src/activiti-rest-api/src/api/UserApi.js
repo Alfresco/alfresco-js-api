@@ -49,12 +49,12 @@
       var postBody = actionRequest;
 
       // verify the required parameter 'userId' is set
-      if (userId == undefined || userId == null) {
+      if (userId === undefined || userId === null) {
         throw "Missing param 'userId' in executeAction";
       }
 
       // verify the required parameter 'actionRequest' is set
-      if (actionRequest == undefined || actionRequest == null) {
+      if (actionRequest === undefined || actionRequest === null) {
         throw "Missing param 'actionRequest' in executeAction";
       }
 
@@ -96,7 +96,7 @@
       var postBody = null;
 
       // verify the required parameter 'userId' is set
-      if (userId == undefined || userId == null) {
+      if (userId === undefined || userId === null) {
         throw "Missing param 'userId' in getProfilePicture";
       }
 
@@ -144,7 +144,7 @@
       var postBody = null;
 
       // verify the required parameter 'userId' is set
-      if (userId == undefined || userId == null) {
+      if (userId === undefined || userId === null) {
         throw "Missing param 'userId' in getUser";
       }
 
@@ -240,7 +240,7 @@
       var postBody = resetPassword;
 
       // verify the required parameter 'resetPassword' is set
-      if (resetPassword == undefined || resetPassword == null) {
+      if (resetPassword === undefined || resetPassword === null) {
         throw "Missing param 'resetPassword' in requestPasswordReset";
       }
 
@@ -282,12 +282,12 @@
       var postBody = userRequest;
 
       // verify the required parameter 'userId' is set
-      if (userId == undefined || userId == null) {
+      if (userId === undefined || userId === null) {
         throw "Missing param 'userId' in updateUser";
       }
 
       // verify the required parameter 'userRequest' is set
-      if (userRequest == undefined || userRequest == null) {
+      if (userRequest === undefined || userRequest === null) {
         throw "Missing param 'userRequest' in updateUser";
       }
 

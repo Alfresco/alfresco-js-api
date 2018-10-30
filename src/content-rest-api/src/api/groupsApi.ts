@@ -49,12 +49,12 @@ export class GroupsApi extends BaseApi {
      * data is of type: {module:model/GroupsEntry}
      */
 
-    createGroup(groupBody:GroupBody, opts:any):Promise<GroupsEntry> {
+    createGroup(groupBody: GroupBody, opts: any): Promise<GroupsEntry> {
         let postBody = groupBody;
         opts = opts || {};
 
         // verify the required parameter 'tagBody' is set
-        if (groupBody == undefined || groupBody == null) {
+        if (groupBody === undefined || groupBody === null) {
             throw "Missing param 'groupBody' in createGroup";
         }
 
@@ -74,7 +74,7 @@ export class GroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/groups', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -90,7 +90,7 @@ export class GroupsApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/GroupsPaging}
      */
-    getGroups(opts:any) :Promise<GroupsPaging> {
+    getGroups(opts: any): Promise<GroupsPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -114,7 +114,7 @@ export class GroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/groups', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -124,12 +124,12 @@ export class GroupsApi extends BaseApi {
      * @param {String} groupId The identifier of a site.
      * @param {Boolean} opts.cascade If true then the delete will be applied in cascade to sub-groups.
      */
-    deleteGroup(groupId:string, opts:any):Promise<any> {
+    deleteGroup(groupId: string, opts: any): Promise<any> {
         opts = opts || {};
         let postBody = null;
 
         // verify the required parameter 'siteId' is set
-        if (groupId == undefined || groupId == null) {
+        if (groupId === undefined || groupId === null) {
             throw "Missing param 'groupId' in deleteGroup";
         }
 
@@ -150,9 +150,9 @@ export class GroupsApi extends BaseApi {
         let returnType = null;
 
         return this.apiClient.callApi(
-            this.path+'/{groupId}', 'DELETE',
+            this.path + '/{groupId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -165,12 +165,12 @@ export class GroupsApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.The list applies to a returned individual entity or entries within a collection.If the API method also supports the include parameter, then the fields specified in the include parameter are returned in addition to those specified in the fields parameter.
      * data is of type: {module:model/GroupsEntry}
      */
-    getGroup(groupId:string, opts:any) :Promise<GroupsEntry>{
+    getGroup(groupId: string, opts: any): Promise<GroupsEntry>{
         opts = opts || {};
         let postBody = null;
 
         // verify the required parameter 'siteId' is set
-        if (groupId == undefined || groupId == null) {
+        if (groupId === undefined || groupId === null) {
             throw "Missing param 'groupId' in getGroup";
         }
 
@@ -190,9 +190,9 @@ export class GroupsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{groupId}', 'GET',
+            this.path + '/{groupId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -206,17 +206,17 @@ export class GroupsApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.The list applies to a returned individual entity or entries within a collection.If the API method also supports the include parameter, then the fields specified in the include parameter are returned in addition to those specified in the fields parameter.
      * data is of type: {module:model/GroupsEntry}
      */
-    updateGroup(groupId:string, groupBody:GroupBody, opts:any):Promise<GroupsEntry> {
+    updateGroup(groupId: string, groupBody: GroupBody, opts: any): Promise<GroupsEntry> {
         opts = opts || {};
         let postBody = groupBody;
 
         // verify the required parameter 'siteId' is set
-        if (groupId == undefined || groupId == null) {
+        if (groupId === undefined || groupId === null) {
             throw "Missing param 'groupId' in updateGroup";
         }
 
         // verify the required parameter 'personId' is set
-        if (groupBody == undefined || groupBody == null) {
+        if (groupBody === undefined || groupBody === null) {
             throw "Missing param 'groupBody' in updateGroup";
         }
 
@@ -241,9 +241,9 @@ export class GroupsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{groupId}', 'PUT',
+            this.path + '/{groupId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -259,12 +259,12 @@ export class GroupsApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/GroupMemberPaging}
      */
-    getGroupMembers(groupId:string, opts:any):Promise<GroupMemberPaging> {
+    getGroupMembers(groupId: string, opts: any): Promise<GroupMemberPaging> {
         opts = opts || {};
         let postBody = null;
 
         // verify the required parameter 'groupId' is set
-        if (groupId == undefined || groupId == null) {
+        if (groupId === undefined || groupId === null) {
             throw "Missing param 'groupId' in getGroupMembers";
         }
 
@@ -286,9 +286,9 @@ export class GroupsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{groupId}/members', 'GET',
+            this.path + '/{groupId}/members', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -301,17 +301,17 @@ export class GroupsApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/GroupMemberEntry}
      */
-    addGroupMember(groupId:string, groupMemberBody:GroupMember, opts:any):Promise<GroupMemberEntry> {
+    addGroupMember(groupId: string, groupMemberBody: GroupMember, opts: any): Promise<GroupMemberEntry> {
         let postBody = groupMemberBody;
         opts = opts || {};
 
         // verify the required parameter 'groupId' is set
-        if (groupId == undefined || groupId == null) {
+        if (groupId === undefined || groupId === null) {
             throw "Missing param 'groupId' in addGroupMember";
         }
 
         // verify the required parameter 'groupMemberBody' is set
-        if (groupMemberBody == undefined || groupMemberBody == null) {
+        if (groupMemberBody === undefined || groupMemberBody === null) {
             throw "Missing param 'groupMemberBody' in addGroupMember";
         }
 
@@ -320,7 +320,7 @@ export class GroupsApi extends BaseApi {
             'groupId': groupId
         };
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv'),
+            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
         };
         let headerParams = {};
         let formParams = {};
@@ -330,9 +330,9 @@ export class GroupsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{groupId}/members', 'POST',
+            this.path + '/{groupId}/members', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -342,11 +342,11 @@ export class GroupsApi extends BaseApi {
      * @param {String} groupId The identifier of a group.
      * @param {String} groupMemberId The identifier of a group membership.
      */
-    deleteGroupMember(groupId:string, groupMemberId:string) :Promise<any>{
+    deleteGroupMember(groupId: string, groupMemberId: string): Promise<any>{
         let postBody = null;
 
         // verify the required parameter 'siteId' is set
-        if (groupId == undefined || groupId == null) {
+        if (groupId === undefined || groupId === null) {
             throw "Missing param 'groupId' in deleteGroup";
         }
 
@@ -364,9 +364,9 @@ export class GroupsApi extends BaseApi {
         let returnType = null;
 
         return this.apiClient.callApi(
-            this.path+'/{groupId}/members/{groupMemberId}', 'DELETE',
+            this.path + '/{groupId}/members/{groupMemberId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 

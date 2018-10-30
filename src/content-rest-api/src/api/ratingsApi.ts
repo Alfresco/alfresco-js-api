@@ -51,12 +51,12 @@ export class RatingsApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in getRating";
         }
 
         // verify the required parameter 'ratingId' is set
-        if (ratingId == undefined || ratingId == null) {
+        if (ratingId === undefined || ratingId === null) {
             throw "Missing param 'ratingId' in getRating";
         }
 
@@ -78,7 +78,7 @@ export class RatingsApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}/ratings/{ratingId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -98,7 +98,7 @@ export class RatingsApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in getRatings";
         }
 
@@ -121,7 +121,7 @@ export class RatingsApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}/ratings', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -137,12 +137,12 @@ export class RatingsApi extends BaseApi {
         let postBody = ratingBody;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in rate";
         }
 
         // verify the required parameter 'ratingBody' is set
-        if (ratingBody == undefined || ratingBody == null) {
+        if (ratingBody === undefined || ratingBody === null) {
             throw "Missing param 'ratingBody' in rate";
         }
 
@@ -161,7 +161,7 @@ export class RatingsApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}/ratings', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -176,12 +176,12 @@ export class RatingsApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'nodeId' is set
-        if (nodeId == undefined || nodeId == null) {
+        if (nodeId === undefined || nodeId === null) {
             throw "Missing param 'nodeId' in removeRating";
         }
 
         // verify the required parameter 'ratingId' is set
-        if (ratingId == undefined || ratingId == null) {
+        if (ratingId === undefined || ratingId === null) {
             throw "Missing param 'ratingId' in removeRating";
         }
 
@@ -202,7 +202,7 @@ export class RatingsApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{nodeId}/ratings/{ratingId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 }

@@ -90,9 +90,9 @@ export class UnfiledContainersApi {
         return this.apiClient.callApi(
             '/unfiled-containers/{unfiledContainerId}/children', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Get the unfiled records container
@@ -131,9 +131,9 @@ export class UnfiledContainersApi {
         return this.apiClient.callApi(
             '/unfiled-containers/{unfiledContainerId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * List unfiled record container&#39;s children
@@ -180,9 +180,9 @@ export class UnfiledContainersApi {
         return this.apiClient.callApi(
             '/unfiled-containers/{unfiledContainerId}/children', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
     /**
      * Update an unfiled record container
@@ -227,8 +227,8 @@ export class UnfiledContainersApi {
         return this.apiClient.callApi(
             '/unfiled-containers/{unfiledContainerId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
-    }
+    };
 
 }

@@ -54,7 +54,7 @@ export class SharedlinksApi extends BaseApi {
         let postBody = sharedLinkBody;
 
         // verify the required parameter 'sharedLinkBody' is set
-        if (sharedLinkBody == undefined || sharedLinkBody == null) {
+        if (sharedLinkBody === undefined || sharedLinkBody === null) {
             throw "Missing param 'sharedLinkBody' in addSharedLink";
         }
 
@@ -74,7 +74,7 @@ export class SharedlinksApi extends BaseApi {
         return this.apiClient.callApi(
             '/shared-links', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -88,7 +88,7 @@ export class SharedlinksApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'sharedId' is set
-        if (sharedId == undefined || sharedId == null) {
+        if (sharedId === undefined || sharedId === null) {
             throw "Missing param 'sharedId' in deleteSharedLink";
         }
 
@@ -106,9 +106,9 @@ export class SharedlinksApi extends BaseApi {
         let returnType = null;
 
         return this.apiClient.callApi(
-            this.path+'/{sharedId}', 'DELETE',
+            this.path + '/{sharedId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -123,12 +123,12 @@ export class SharedlinksApi extends BaseApi {
         let postBody = emailSharedLinkBody;
 
         // verify the required parameter 'sharedId' is set
-        if (sharedId == undefined || sharedId == null) {
+        if (sharedId === undefined || sharedId === null) {
             throw "Missing param 'sharedId' in emailSharedLink";
         }
 
         // verify the required parameter 'emailSharedLinkBody' is set
-        if (emailSharedLinkBody == undefined || emailSharedLinkBody == null) {
+        if (emailSharedLinkBody === undefined || emailSharedLinkBody === null) {
             throw "Missing param 'emailSharedLinkBody' in emailSharedLink";
         }
 
@@ -146,9 +146,9 @@ export class SharedlinksApi extends BaseApi {
         let returnType = null;
 
         return this.apiClient.callApi(
-            this.path+'/{sharedId}/email', 'POST',
+            this.path + '/{sharedId}/email', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -187,7 +187,7 @@ export class SharedlinksApi extends BaseApi {
         return this.apiClient.callApi(
             '/shared-links', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -201,12 +201,12 @@ export class SharedlinksApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeSharedLinkEntry}
      */
-    getSharedLink(sharedId:string, opts: any): Promise<NodeSharedLinkEntry>  {
+    getSharedLink(sharedId: string, opts: any): Promise<NodeSharedLinkEntry>  {
         opts = opts || {};
         let postBody = null;
 
         // verify the required parameter 'sharedId' is set
-        if (sharedId == undefined || sharedId == null) {
+        if (sharedId === undefined || sharedId === null) {
             throw "Missing param 'sharedId' in getSharedLink";
         }
 
@@ -226,9 +226,9 @@ export class SharedlinksApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{sharedId}', 'GET',
+            this.path + '/{sharedId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -241,12 +241,12 @@ export class SharedlinksApi extends BaseApi {
      * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n (default to true)
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.\n
      */
-    getSharedLinkContent(sharedId:string, opts: any) : Promise<any> {
+    getSharedLinkContent(sharedId: string, opts: any): Promise<any> {
         opts = opts || {};
         let postBody = null;
 
         // verify the required parameter 'sharedId' is set
-        if (sharedId == undefined || sharedId == null) {
+        if (sharedId === undefined || sharedId === null) {
             throw "Missing param 'sharedId' in getSharedLinkContent";
         }
 
@@ -268,9 +268,9 @@ export class SharedlinksApi extends BaseApi {
         let returnType = null;
 
         return this.apiClient.callApi(
-            this.path+'/{sharedId}/content', 'GET',
+            this.path + '/{sharedId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -289,12 +289,12 @@ export class SharedlinksApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'sharedId' is set
-        if (sharedId == undefined || sharedId == null) {
+        if (sharedId === undefined || sharedId === null) {
             throw "Missing param 'sharedId' in getSharedLinkRenditionContent";
         }
 
         // verify the required parameter 'renditionId' is set
-        if (renditionId == undefined || renditionId == null) {
+        if (renditionId === undefined || renditionId === null) {
             throw "Missing param 'renditionId' in getSharedLinkRenditionContent";
         }
 
@@ -317,9 +317,9 @@ export class SharedlinksApi extends BaseApi {
         let returnType = null;
 
         return this.apiClient.callApi(
-            this.path+'/{sharedId}/renditions/{renditionId}/content', 'GET',
+            this.path + '/{sharedId}/renditions/{renditionId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts, returnType
+            contentTypes, accepts, returnType
         );
     }
 
@@ -334,7 +334,7 @@ export class SharedlinksApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'sharedId' is set
-        if (sharedId == undefined || sharedId == null) {
+        if (sharedId === undefined || sharedId === null) {
             throw "Missing param 'sharedId' in getSharedLinkRenditions";
         }
 
@@ -351,9 +351,9 @@ export class SharedlinksApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{sharedId}/renditions', 'GET',
+            this.path + '/{sharedId}/renditions', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 
@@ -367,12 +367,12 @@ export class SharedlinksApi extends BaseApi {
         let postBody = null;
 
         // verify the required parameter 'sharedId' is set
-        if (sharedId == undefined || sharedId == null) {
+        if (sharedId === undefined || sharedId === null) {
             throw "Missing param 'sharedId' in getRendition";
         }
 
         // verify the required parameter 'renditionId' is set
-        if (renditionId == undefined || renditionId == null) {
+        if (renditionId === undefined || renditionId === null) {
             throw "Missing param 'renditionId' in getRendition";
         }
 
@@ -389,9 +389,9 @@ export class SharedlinksApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            this.path+'/{sharedId}/renditions/{renditionId}', 'GET',
+            this.path + '/{sharedId}/renditions/{renditionId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-             contentTypes, accepts
+            contentTypes, accepts
         );
     }
 }

@@ -20,13 +20,13 @@ import { ContentInfo } from './ContentInfo';
 
 export class NodeSharedLink {
 
-    id:string;
-    nodeId:string;
-    name:string;
-    modifiedAt:Date;
-    modifiedByUsere:UserInfo;
-    sharedByUser:UserInfo;
-    content:ContentInfo
-    allowableOperations:string;
+    id: string;
+    nodeId: string;
+    name: string;
+    modifiedAt: Date;
+    modifiedByUsere: UserInfo;
+    sharedByUser: UserInfo;
+    content: ContentInfo;
+    allowableOperations: string;
 
 }

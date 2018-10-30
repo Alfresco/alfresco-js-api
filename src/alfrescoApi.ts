@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import Emitter = require('event-emitter');
+import * as  Emitter from 'event-emitter';
 
 import { AlfrescoContent } from './alfrescoContent';
 import { AlfrescoUpload } from './alfrescoUpload';
@@ -190,7 +190,7 @@ export class AlfrescoApi {
 
             oauth2AuthPromise.then((accessToken) => {
                 this.config.accessToken = accessToken;
-            }, () => {
+            },                     () => {
             });
 
             return oauth2AuthPromise;
@@ -202,7 +202,6 @@ export class AlfrescoApi {
 
                 bpmPromise.then((ticketBpm) => {
                     this.config.ticketBpm = ticketBpm;
-                }, () => {
                 });
 
                 return bpmPromise;
@@ -213,7 +212,6 @@ export class AlfrescoApi {
                     this.setAuthenticationClientECMBPM(this.ecmAuth.getAuthentication(), null);
 
                     this.config.ticketEcm = ticketEcm;
-                }, () => {
                 });
 
                 return ecmPromise;
@@ -224,7 +222,6 @@ export class AlfrescoApi {
                 bpmEcmPromise.then((data) => {
                     this.config.ticketEcm = data[0];
                     this.config.ticketBpm = data[1];
-                }, () => {
                 });
 
                 return bpmEcmPromise;
@@ -302,7 +299,7 @@ export class AlfrescoApi {
                 let ecmPromise = this.ecmAuth.logout();
                 ecmPromise.then(() => {
                     this.config.ticket = undefined;
-                }, () => {
+                },              () => {
                 });
 
                 return ecmPromise;

@@ -47,7 +47,7 @@
       var postBody = update;
 
       // verify the required parameter 'update' is set
-      if (update == undefined || update == null) {
+      if (update === undefined || update === null) {
         throw "Missing param 'update' in bulkUpdateUsers";
       }
 
@@ -89,7 +89,7 @@
       var postBody = userRepresentation;
 
       // verify the required parameter 'userRepresentation' is set
-      if (userRepresentation == undefined || userRepresentation == null) {
+      if (userRepresentation === undefined || userRepresentation === null) {
         throw "Missing param 'userRepresentation' in createNewUser";
       }
 
@@ -134,7 +134,7 @@
       var postBody = null;
 
       // verify the required parameter 'userId' is set
-      if (userId == undefined || userId == null) {
+      if (userId === undefined || userId === null) {
         throw "Missing param 'userId' in getUser";
       }
 
@@ -238,12 +238,12 @@
       var postBody = userRepresentation;
 
       // verify the required parameter 'userId' is set
-      if (userId == undefined || userId == null) {
+      if (userId === undefined || userId === null) {
         throw "Missing param 'userId' in updateUserDetails";
       }
 
       // verify the required parameter 'userRepresentation' is set
-      if (userRepresentation == undefined || userRepresentation == null) {
+      if (userRepresentation === undefined || userRepresentation === null) {
         throw "Missing param 'userRepresentation' in updateUserDetails";
       }
 
